@@ -1,0 +1,66 @@
+.checkbox{
+	position: relative;
+}
+
+	.checkbox-input{
+		opacity: 0;
+		pointer-events: none;
+		position: absolute;
+
+		&:checked ~ .checkbox-label:before{
+			background-color: $primary;
+			box-shadow: inset 0 0 0 2px $primary;
+		}
+	}
+
+	.checkbox-label{
+		cursor: pointer;
+		display: inline-block;
+		padding: 0 0 0 1.7rem;
+		transition: color 150ms ease;
+
+		&:before{
+			border-radius: 3px;
+			box-shadow: inset 0 0 0 2px #777;
+			content: '';
+			display: block;
+			height: .95rem;
+			left: 0;
+			position: absolute;
+			top: .3rem;
+			transition: all 100ms ease;
+			width: .95rem;
+		}
+
+		&:hover{
+			color: black;
+
+			&:before{
+				box-shadow: inset 0 0 0 2px $grey;
+			}
+		}
+	}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.checkbox-input{
+
+	&[disabled]{
+
+		~ .checkbox-label{
+			color: $greyLight;
+			pointer-events: none;
+
+			&:before{
+				box-shadow: inset 0 0 0 2px $greyLight;
+			}
+		}
+
+		&:checked ~ .checkbox-label:before{
+			background-color: $greyLight;
+			box-shadow: inset 0 0 0 2px $greyLight;
+		}
+	}
+}

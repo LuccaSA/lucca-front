@@ -1,0 +1,56 @@
+html{
+	font-size: 16px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body{
+	background: $greyBackground;
+	color: $grey;
+	font-family: 'Source Sans Pro', Tahoma, sans-serif;
+	font-size: $font-standard;
+	line-height: $font-line-standard;
+}
+
+h1{
+	font-size: $font-biggest;
+	font-weight: 600;
+	line-height: $font-line-biggest;
+	margin: 0 0 1.7rem;
+}
+
+h2{
+	font-size: $font-bigger;
+	font-weight: 600;
+	line-height: $font-line-bigger;
+	margin: 0 0 .9rem;
+}
+
+h3{
+	font-size: $font-big;
+	font-weight: 600;
+	line-height: $font-line-big;
+	margin: 0 0 .7rem;
+}
+
+h4{
+	font-size: $font-standard;
+	font-weight: 600;
+	line-height: $font-line-standard;
+	margin: 0 0 .5rem;
+}
+
+p{
+	margin: 0 0 1.3rem;
+}
+
+a[href]:not([class]) {
+  color: #00b2ed;
+  text-decoration: underline;
+
+  &:hover{
+  	color: lighten(#00b2ed, 15%);
+  }
+}

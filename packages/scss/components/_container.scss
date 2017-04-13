@@ -1,0 +1,60 @@
+.container{
+	margin: 0 auto;
+	padding: 0 2rem;
+	width: $xl - 40px;
+
+	@media (max-width: $xl) {
+		width: $lg - 40px;
+	}
+
+	@media (max-width: $lg) {
+		width: $md - 40px;
+	}
+
+	@media (max-width: $md) {
+		width: $sm - 40px;
+	}
+
+	@media (max-width: $sm) {
+		width: 100%;
+	}
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.container{
+
+	&.mod-sm{
+		max-width: $sm;
+	}
+
+	&.mod-md{
+		max-width: $md;
+	}
+
+	&.mod-lg{
+		max-width: $lg;
+	}
+
+	&.mod-xl{
+		max-width: $xl;
+	}
+
+	&.mod-navSide{
+		width: $xl - 170px;
+
+		@media (max-width: $xl) {
+			width: $lg - 170px;
+		}
+
+		@media (max-width: $lg) {
+			width: $md - 170px;
+		}
+
+		@media (max-width: $md) {
+			width: $sm - 170px;
+		}
+	}
+}
