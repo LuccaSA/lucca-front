@@ -1,7 +1,23 @@
 {
   "name": "@lucca-front/ng",
   "version": "0.0.0",
+  "description": "a library of usefull components for angular web app",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "keywords": [
+    "lucca",
+    "angular",
+    "ng"
+  ],
+  "public": true,
+  "author": "lucien bertin <lbertin@lucca.fr>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -1,0 +1,69 @@
+.input{
+	max-width: 300px;
+	padding-top: 1rem;
+	position: relative;
+}
+
+	.input-field{
+		background: transparent;
+		border: 0;
+		box-shadow: 0 1px 0 0 #ccc;
+		color: $grey;
+		font-weight: 400;
+		font-family: 'Source Sans Pro', Tahoma, sans-serif;
+		outline: 0;
+		padding: .5rem 0;
+		transition: box-shadow 150ms ease,
+		            color 150ms ease;
+		width: 100%;
+
+		&:focus{
+			box-shadow: 0 2px 0 0 $primary;
+
+			~ .input-label{
+				color: $primary;
+				font-size: $font-small;
+				top: 0;
+			}
+		}
+	}
+
+	.input-label{
+		color: #a6a6a6;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		top: 1.3rem;
+		transition: all 150ms ease;
+		width: 100%;
+	}
+
+
+// MOD
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.input{
+
+	&.mod-block{
+		max-width: 100%;
+	}
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.input-field{
+
+	&[disabled],
+	&[readonly]{
+		background: transparent;
+		box-shadow: none;
+		background-image: linear-gradient(to right, #ccc 33%, rgba(255,255,255,0) 0%);
+		background-position: bottom;
+		background-repeat: repeat-x;
+		background-size: 3px 1px;
+		color: $greyLight;
+		cursor: not-allowed;
+	}
+}

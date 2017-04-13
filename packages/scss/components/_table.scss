@@ -1,0 +1,69 @@
+.table{
+	border-bottom: 1px solid $greySeparator;
+	border-top: 1px solid $greySeparator;
+	display: table;
+	font-size: .9rem;
+	text-align: left;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+	.table-head{
+		display: table-header-group;
+		font-weight: 600;
+	}
+
+		.table-head-row{
+			display: table-row;
+		}
+
+			.table-head-row-cell{
+				display: table-cell;
+				padding: 0.5em 1em;
+			}
+
+
+	.table-body{
+		display: table-row-group;
+	}
+
+		.table-body-row{
+			display: table-row;
+		}
+
+			.table-body-row-cell{
+				border-top: 1px solid $greySeparator;
+				display: table-cell;
+				padding: 0.5em 1em;
+			}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.table{
+
+	&.mod-zebra{
+
+		.table-body{
+
+			tr:nth-child(odd){
+				background-color: #f2f2f2;
+			}
+		}
+	}
+
+	&.mod-clickable{
+
+		.table-body-row{
+			color: $grey;
+			text-decoration: none;
+			transition: all 150ms ease;
+
+			&:hover{
+				background: #e8e8e8;
+			}
+		}
+	}
+}
