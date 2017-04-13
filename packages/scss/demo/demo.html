@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lucca UI 4</title>
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
+		<link rel="stylesheet" href="lui4.css">
+		<link rel="stylesheet" href="demo.css">
+	</head>
+	<body class="demo-body">
+		<aside class="demo-nav">
+			<ul>
+				<li><a href="#typography" class="demo-nav-link">typography</a></li>
+				<li><a href="#button" class="demo-nav-link">buttons</a></li>
+				<li><a href="#form" class="demo-nav-link">forms</a></li>
+				<li><a href="#table" class="demo-nav-link">tables</a></li>
+				<li><a href="#label" class="demo-nav-link">labels</a></li>
+				<li><a href="#chip" class="demo-nav-link">chips</a></li>
+				<li><a href="#grid" class="demo-nav-link">grid</a></li>
+				<li><a href="#card" class="demo-nav-link">card</a></li>
+				<li><a href="#callout" class="demo-nav-link">callout</a></li>
+				<li><a href="#menu" class="demo-nav-link">menu</a></li>
+				<li><a href="#tooltip" class="demo-nav-link">tooltips</a></li>
+				<li><a href="#utilities" class="demo-nav-link">utilities</a></li>
+				<li><a href="#templates" class="demo-nav-link">templates</a></li>
+				<li><a href="#icons" class="demo-nav-link">icons</a></li>
+			</ul>
+		</aside>
+		<section class="container mod-demo">
+			<h2 class="demo-divider" id="typography">Typography</h2>
+			<section class="demo-typo">
+				<section class="titleSection">
+					<h1>H1, bold 2.75rem</h1>
+					<h3 class="titleSection-sub">Hi, I'm a subtitle</h3>
+				</section>
+				<section class="contentSection">
+					<p>Icing powder gingerbread tiramisu jelly caramels fruitcake dragée. Chocolate cake jujubes cotton candy lemon drops dragée. Topping macaroon lemon drops liquorice cake gummi bears. Bear claw donut icing halvah.</p>
+				</section>
+				<section class="contentSection">
+					<h2>H2, bold 1.94rem</h2>
+					<p>Lollipop marshmallow lemon drops pudding sugar plum liquorice dragée wafer apple pie. Bear claw caramels jelly cookie. Powder danish ice cream marzipan chocolate bar sweet topping jelly beans pudding.</p>
+				</section>
+				<section class="contentSection">
+					<h3>H3, bold 1.38rem</h3>
+					<p>Marzipan cheesecake lemon drops. Lollipop marzipan sweet roll powder macaroon danish. Bonbon chocolate gingerbread pastry. Cake oat cake carrot cake donut wafer. Jelly beans oat cake sugar plum candy.</p>
+				</section>
+				<section class="contentSection">
+					<h4>H4, bold 1rem</h4>
+					<p>Jujubes topping oat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.</p>
+				</section>
+			</section>
+			<h2 class="demo-divider" id="button">Buttons</h2>
+			<section class="contentSection">
+				<h2>Buttons</h2>
+				<button class="button">Default</button>
+				<button class="button mod-flat">.mod-flat</button>
+				<button class="button mod-wired">.mod-wired</button>
+				<button class="button mod-filling">.mod-filling</button>
+<code class="code mod-block">&lt;button class="button"&gt;...&lt;/button&gt;
+&lt;button class="button mod-flat"&gt;...&lt;/button&gt;
+&lt;button class="button mod-wired"&gt;...&lt;/button&gt;
+&lt;button class="button mod-filling"&gt;...&lt;/button&gt;
+</code>
+				<em><b>Tip:</b> Can be used as <code class="code">&lt;a href="#"&gt;</code>, for links.</em>
+			</section>
+			<section class="contentSection">
+				<h3>Colors</h3>
+				<button class="button mod-primary">Primary</button>
+				<button class="button mod-secondary">Secondary</button>
+				<button class="button mod-lucca">Lucca</button>
+				<button class="button mod-grey">Grey</button>
+				<button class="button mod-greyLight">Light</button>
+				<button class="button mod-error">Error</button>
+				<button class="button mod-warning">Warning</button>
+				<button class="button mod-success">Success</button>
+<code class="code mod-block">&lt;button class="button"&gt;...&lt;/button&gt;
+&lt;button class="button mod-primary"&gt;...&lt;/button&gt;
+&lt;button class="button mod-secondary"&gt;...&lt;/button&gt;
+&lt;button class="button mod-lucca"&gt;...&lt;/button&gt;
+&lt;button class="button mod-grey"&gt;...&lt;/button&gt;
+&lt;button class="button mod-greyLight"&gt;...&lt;/button&gt;
+&lt;button class="button mod-red"&gt;...&lt;/button&gt;
+&lt;button class="button mod-orange"&gt;...&lt;/button&gt;
+&lt;button class="button mod-green"&gt;...&lt;/button&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<h3>Group of buttons</h3>
+				<p>You can wrap buttons to have a group of buttons.</p>
+				<div class="buttons">
+					<button class="button">default</button>
+					<button class="button">default</button>
+					<button class="button">default</button>
+					<button class="button">default</button>
+				</div>
+<code class="code mod-block">&lt;div class="buttons"&gt;
+	&lt;button class="button"&gt;...&lt;/button&gt;
+	&lt;button class="button"&gt;...&lt;/button&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<p>It will also work with button's mods.</p>
+				<div class="buttons u-marginBottomSmall">
+					<button class="button mod-filling">filling</button>
+					<button class="button mod-filling">filling</button>
+					<button class="button mod-filling">filling</button>
+					<button class="button mod-filling">filling</button>
+				</div>
+				<div class="buttons">
+					<button class="button mod-wired">wired</button>
+					<button class="button mod-wired">wired</button>
+					<button class="button mod-wired">wired</button>
+					<button class="button mod-wired">wired</button>
+				</div>
+			</section>
+			<h2 class="demo-divider" id="form">Forms</h2>
+			<section class="contentSection">
+				<h2>Form structure</h2>
+				<p>To create a complete form layout, place each form element in a <code class="code">form-group</code> container. <a href="templates/form.html" target="_blank">See template example</a></p>
+<code class="code mod-block">&lt;form class="form"&gt;
+	&lt;div class="form-group"&gt;
+		<b>Form element. e.g. input</b>
+	&lt;/div&gt;
+	&lt;div class="form-group"&gt;
+		<b>Form element. e.g. checkbox</b>
+	&lt;/div&gt;
+	&lt;div class="form-actions"&gt;
+		<b>Action buttons</b>
+	&lt;/div&gt;
+&lt;/form&gt;</code>
+				<em><b>Tip:</b> You can use form elements like input, checkbox or radio outside a form structure: it will reset margins. It can be useful for a custom use, for exemple, in tables.</em>
+			</section>
+			<section class="contentSection">
+				<h2>Input</h2>
+				<div class="form">
+					<div class="grid">
+						<div class="grid-sm6">
+							<div class="form-group">
+								<div class="input mod-block">
+									<input class="input-field" type="text">
+									<label class="input-label">Input label</label>
+								</div>
+							</div>
+						</div>
+						<div class="grid-sm6">
+							<div class="form-group">
+								<div class="input mod-block">
+									<input class="input-field demo-is-open" type="text" value="disabled input" disabled>
+									<label class="input-label">Input label</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<code class="code mod-block">&lt;div class="input"&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;Input label&lt;/label&gt;
+&lt;/div&gt;
+</code>
+			<em><b>Tip:</b> Use <code class="code">&lt;input class="input mod-block"&gt;</code> for a 100% width input.</em>
+			</section>
+			<section class="contentSection">
+				<h2>Textareas</h2>
+				<div class="form">
+					<div class="grid">
+						<div class="grid-sm6">
+							<div class="form-group">
+								<div class="textarea mod-block">
+									<textarea class="textarea-field"></textarea>
+									<label class="textarea-label">Textarea label</label>
+								</div>
+							</div>
+						</div>
+						<div class="grid-sm6">
+							<div class="form-group">
+								<div class="textarea mod-block">
+									<textarea class="textarea-field demo-is-open" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
+									<label class="textarea-label">Textarea label</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<code class="code mod-block">&lt;div class="textarea"&gt;
+	&lt;textarea class="textarea-field"&gt;&lt;/textarea&gt;
+	&lt;label class="textarea-label"&gt;Textarea label&lt;/label&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<h2>Checkboxes</h2>
+				<div class="form">
+					<div class="form-group">
+						<div class="grid">
+							<div class="grid-sm4">
+								<div class="checkbox">
+									<input class="checkbox-input" type="checkbox" id="checkbox0" checked>
+									<label class="checkbox-label" for="checkbox0">Checkbox</label>
+								</div>
+								<div class="checkbox">
+									<input class="checkbox-input" type="checkbox" id="checkbox1">
+									<label class="checkbox-label" for="checkbox1">Checkbox</label>
+								</div>
+							</div>
+							<div class="grid-sm4">
+								<div class="checkbox">
+									<input class="checkbox-input" type="checkbox" id="checkbox2" disabled checked>
+									<label class="checkbox-label" for="checkbox2">Disbled checkbox</label>
+								</div>
+								<div class="checkbox">
+									<input class="checkbox-input" type="checkbox" id="checkbox3" disabled>
+									<label class="checkbox-label" for="checkbox3">Disbled checkbox</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<code class="code mod-block">&lt;div class="checkbox"&gt;
+	&lt;input class="checkbox-input" type="checkbox" id="<b>checkboxID</b>"&gt;
+	&lt;label class="checkbox-label" for="<b>checkboxID</b>"&gt;Checkbox&lt;/label&gt;
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> To disable a checkbox, add a <code class="code">disabled</code> attribute to the checkbox input.</em>
+			</section>
+			<section class="contentSection">
+				<h2>Radio</h2>
+				<div class="form">
+					<div class="form-group">
+						<div class="grid">
+							<div class="grid-sm4">
+								<div class="radio">
+									<input class="radio-input" type="radio" name="radioList1" id="radio0" checked>
+									<label class="radio-label" for="radio0">Radio</label>
+								</div>
+								<div class="radio">
+									<input class="radio-input" type="radio" name="radioList1" id="radio1">
+									<label class="radio-label" for="radio1">Radio</label>
+								</div>
+							</div>
+							<div class="grid-sm4">
+								<div class="radio">
+									<input class="radio-input" type="radio" name="radioList2"  id="radio2" disabled checked>
+									<label class="radio-label" for="radio2">Disbled radio</label>
+								</div>
+								<div class="radio">
+									<input class="radio-input" type="radio" name="radioList2"  id="radio3" disabled>
+									<label class="radio-label" for="radio3">Disbled radio</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<code class="code mod-block">&lt;div class="radio"&gt;
+	&lt;input class="radio-input" type="radio" name="<b>radioListID</b>" id="<b>radioID</b>" checked&gt;
+	&lt;label class="radio-label" for="<b>radioID</b>"&gt;Radio&lt;/label&gt;
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> To disable a radio, add a <code class="code">disabled</code> attribute to the radio input.</em>
+			</section>
+			<section class="contentSection">
+				<h2>Switch</h2>
+				<div class="form">
+					<div class="form-group">
+						<div class="switch">
+							<input class="switch-input" type="checkbox" id="switch0">
+							<label class="switch-label" for="switch0">Switch</label>
+						</div>
+						<div class="switch">
+							<input class="switch-input" type="checkbox" id="switch1" checked>
+							<label class="switch-label" for="switch1">Switch</label>
+						</div>
+					</div>
+				</div>
+<code class="code mod-block">&lt;div class="switch"&gt;
+	&lt;input class="switch-input" type="checkbox" id="<b>switchID</b>"&gt;
+	&lt;label class="switch-label" for="<b>switchID</b>"&gt;Switch&lt;/label&gt;
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> To disable a switch, add a <code class="code">disabled</code> attribute to the checkbox input</em>
+			</section>
+			<h2 class="demo-divider" id="table">Tables</h2>
+			<section class="contentSection">
+				<h2>Tables</h2>
+				<table class="table">
+					<thead class="table-head">
+						<tr class="table-head-row">
+							<th class="table-head-row-cell">Head cell</th>
+							<th class="table-head-row-cell">Head cell</th>
+							<th class="table-head-row-cell">Head cell</th>
+						</tr>
+					</thead>
+					<tbody class="table-body">
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+						</tr>
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+						</tr>
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+						</tr>
+					</tbody>
+				</table>
+<code class="code mod-block">&lt;table class="table"&gt;
+	&lt;thead class="table-head"&gt;
+		&lt;tr class="table-head-row"&gt;
+			&lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+			&lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody class="table-body"&gt;
+		&lt;tr class="table-body-row"&gt;
+			&lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+			&lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<h3>Zebra table</h3>
+				<table class="table mod-zebra">
+					<thead class="table-head">
+						<tr class="table-head-row">
+							<th class="table-head-row-cell">Head cell</th>
+							<th class="table-head-row-cell">Head cell</th>
+							<th class="table-head-row-cell">Head cell</th>
+						</tr>
+					</thead>
+					<tbody class="table-body">
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+						</tr>
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+						</tr>
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+							<td class="table-body-row-cell">Body cell</td>
+						</tr>
+					</tbody>
+				</table>
+<code class="code mod-block">&lt;table class="table mod-zebra"&gt;
+	...
+</code>
+			</section>
+			<section class="contentSection">
+				<h3>Clickable table</h3>
+				<div class="table mod-clickable">
+					<div class="table-head">
+						<div class="table-head-row">
+							<div class="table-head-row-cell">Head cell</div>
+							<div class="table-head-row-cell">Head cell</div>
+							<div class="table-head-row-cell">Head cell</div>
+						</div>
+					</div>
+					<div class="table-body">
+						<a href="#" class="table-body-row">
+							<div class="table-body-row-cell">Body cell</div>
+							<div class="table-body-row-cell">Body cell</div>
+							<div class="table-body-row-cell">Body cell</div>
+						</a>
+						<a href="#" class="table-body-row">
+							<div class="table-body-row-cell">Body cell</div>
+							<div class="table-body-row-cell">Body cell</div>
+							<div class="table-body-row-cell">Body cell</div>
+						</a>
+						<a href="#" class="table-body-row">
+							<div class="table-body-row-cell">Body cell</div>
+							<div class="table-body-row-cell">Body cell</div>
+							<div class="table-body-row-cell">Body cell</div>
+						</a>
+					</div>
+				</div>
+<code class="code mod-block">&lt;table class="table mod-clickable"&gt;
+	...
+</code>
+			<em><b>Tip:</b> You can use a <code class="code">&lt;div&gt;</code> & <code class="code">&lt;a&gt;</code> structure if you want to have links on your rows.</em>
+			</section>
+			<h2 class="demo-divider" id="label">Labels</h2>
+			<section class="contentSection">
+				<h2>Labels</h2>
+				<span class="label">Default</span>
+				<span class="label mod-primary">Primary</span>
+				<span class="label mod-secondary">Secondary</span>
+<code class="code mod-block">&lt;span class="label"&gt;...&lt;/span&gt;
+&lt;span class="label mod-primary"&gt;...&lt;/span&gt;
+&lt;span class="label mod-secondary"&gt;...&lt;/span&gt;
+</code>
+			</section>
+			<h2 class="demo-divider" id="chip">Chips</h2>
+			<section class="contentSection">
+				<h2>Chips</h2>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+<code class="code mod-block">&lt;div class="chip"&gt;
+	...
+	&lt;button class="chip-kill"&gt;&lt;/button&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<h3>Unkillable</h3>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+<code class="code mod-block">&lt;div class="chip mod-unkillable"&gt;
+	...
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> <code class="code">mod-unkillable</code> will hide the deleting button.</em>
+			</section>
+			<h2 class="demo-divider" id="grid">Grids</h2>
+			<section class="contentSection">
+				<h2>Grid</h2>
+				<div class="grid">
+					<div class="grid-xs6"><div class="demo-grid">grid-xs6</div></div>
+					<div class="grid-xs6"><div class="demo-grid">grid-xs6</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-sm4"><div class="demo-grid">grid-sm4</div></div>
+					<div class="grid-sm8"><div class="demo-grid">grid-sm8</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-md7"><div class="demo-grid">grid-md7</div></div>
+					<div class="grid-md5"><div class="demo-grid">grid-md5</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-xs6"&gt;...&lt;/div&gt;
+	&lt;div class="grid-xs6"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<h3>Offsets</h3>
+				<div class="grid">
+					<div class="grid-xs8 grid-xsOffset4"><div class="demo-grid">grid-xs8 grid-xsOffset4</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-xs6 grid-xsOffset2"><div class="demo-grid">grid-xs3 grid-xsOffset6</div></div>
+					<div class="grid-xs3"><div class="demo-grid">grid-xs3</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-xs8 grid-xsOffset4"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<h3>Auto width</h3>
+				<p>You can remove the columns numbers to devide the grid uniformly:</p>
+				<div class="grid">
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-md"&gt;...&lt;/div&gt;
+	&lt;div class="grid-md"&gt;...&lt;/div&gt;
+	...
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+
+			</section>
+			<section class="contentSection">
+				<h3>Horizontal alignment</h3>
+				<p>You can align columns horizontaly inside the grid:</p>
+				<div class="grid mod-start-xs">
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-center-xs">
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-end-xs">
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid mod-start-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-center-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-end-xs"&gt;
+	...
+</code>
+				<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+			<section class="contentSection">
+				<h3>Vertical alignment</h3>
+				<p>You can align columns verticaly inside the grid:</p>
+				<div class="grid mod-top-xs">
+					<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-middle-xs">
+					<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-bottom-xs">
+					<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid mod-top-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-middle-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-bottom-xs"&gt;
+	...
+</code>
+			<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+			<section class="contentSection">
+				<h3>Reorder</h3>
+				<p>You can reorder columns with utilities:</p>
+				<div class="grid">
+					<div class="grid-xs3"><div class="demo-grid">1</div></div>
+					<div class="grid-xs3"><div class="demo-grid">2</div></div>
+					<div class="grid-xs3 u-first-xs"><div class="demo-grid">3 u-first-xs</div></div>
+					<div class="grid-xs3"><div class="demo-grid">4</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-xs3"><div class="demo-grid">1</div></div>
+					<div class="grid-xs3 u-last-xs"><div class="demo-grid">2 u-last-xs</div></div>
+					<div class="grid-xs3"><div class="demo-grid">3</div></div>
+					<div class="grid-xs3"><div class="demo-grid">4</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-xs6 u-last-xs"&gt;...&lt;/div&gt;
+	&lt;div class="grid-xs6 u-first-xs"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+			<h2 class="demo-divider" id="card">card</h2>
+			<section class="contentSection">
+				<h2>Cards</h2>
+				<div class="card">
+					<h3>Card</h3>
+					<p>I'm a card of content</p>
+				</div>
+<code class="code mod-block">&lt;div class="card"&gt;
+	...
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<div class="card mod-grey">
+					<h3>Grey card</h3>
+					<p>I'm a grey card of content</p>
+				</div>
+<code class="code mod-block">&lt;div class="card mod-grey"&gt;
+	...
+&lt;/div&gt;
+</code>
+			</section>
+			<h3>Cards with footer</h3>
+			<section class="contentSection">
+				<div class="card">
+					<h3>Card</h3>
+					<p>Card content</p>
+					<footer class="card-footer">
+						<div class="card-footer-right">
+							<button class="button mod-primary">Confirm</button>
+							<button class="button mod-flat">Cancel</button>
+						</div>
+					</footer>
+				</div>
+
+<code class="code mod-block">&lt;div class="card"&gt;
+	...
+	&lt;footer class="card-footer"&gt;
+		&lt;div class="card-footer-right"&gt;
+			&lt;button class="button mod-primary"&gt;...&lt;/button&gt;
+			&lt;button class="button mod-flat"&gt;...&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/footer&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<div class="grid u-marginBottomSmall">
+					<div class="grid-md4">
+						<div class="card">
+							Cards...
+						</div>
+					</div>
+					<div class="grid-md4">
+						<div class="card">
+							...fits well...
+						</div>
+					</div>
+					<div class="grid-md4">
+						<div class="card">
+							...in the grid!
+						</div>
+					</div>
+				</div>
+			</section>
+			<h2 class="demo-divider" id="callout">Callout</h2>
+			<section class="contentSection">
+				<h2>Callouts</h2>
+				<div class="callout">
+					This is a regular callout. <a href="#">Learn more</a>
+				</div>
+<code class="code mod-block">&lt;div class="callout"&gt;
+	...
+&lt;/div&gt;
+</code>
+				<div class="callout mod-success">
+					I'm a success callout. :)
+				</div>
+<code class="code mod-block">&lt;div class="callout mod-success"&gt;
+	...
+&lt;/div&gt;
+</code>
+				<div class="callout mod-warning">
+					I'm a warning callout. :|
+				</div>
+<code class="code mod-block">&lt;div class="callout mod-warning"&gt;
+	...
+&lt;/div&gt;
+</code>
+				<div class="callout mod-error">
+					I'm an arror callout. :(
+				</div>
+<code class="code mod-block">&lt;div class="callout mod-error"&gt;
+	...
+&lt;/div&gt;
+</code>
+			</section>
+			<h2 class="demo-divider" id="menu">Menu</h2>
+			<section class="contentSection">
+				<h2>Menu</h2>
+				<nav class="menu">
+					<a href="#" class="menu-link is-active">active link</a>
+					<a href="#" class="menu-link">menu link</a>
+					<a href="#" class="menu-link">menu link</a>
+					<a href="#" class="menu-link">menu link</a>
+					<a href="#" class="menu-link">menu link</a>
+				</nav>
+<code class="code mod-block">&lt;nav class="menu"&gt;
+	&lt;a href="#" class="menu-link is-active"&gt;...&lt;/a&gt;
+	&lt;a href="#" class="menu-link"&gt;...&lt;/a&gt;
+&lt;/nav&gt;
+</code>
+			</section>
+			<h2 class="demo-divider" id="tooltip">Tooltips</h2>
+			<section class="contentSection">
+				<h2>Tooltips</h2>
+				<div class="tooltip">Standard tooltip</div>
+				<div class="tooltip mod-primary">Primary tooltip</div>
+				<h3 class="u-marginTopStandard">Basic usage</h3>
+				<code class="code mod-block">...</code>
+			</section>
+			<h2 class="demo-divider" id="utilities">Utilities</h2>
+			<section class="contentSection">
+				<h2>Spacing</h2>
+				<p>You can add or reset margins and paddings by adding utilities classes on any elements:</p>
+				<h3>Margins</h3>
+				<h4>Reset all margin</h4>
+				<p>
+					<code class="code">u-marginReset</code>
+				</p>
+				<h4>Bottom</h4>
+				<p>
+					<code class="code">u-marginBottomReset</code>
+					<code class="code">u-marginBottomTiny</code>
+					<code class="code">u-marginBottomSmall</code>
+					<code class="code">u-marginBottomStandard</code>
+					<code class="code">u-marginBottomBig</code>
+					<code class="code">u-marginBottomBigger</code>
+					<code class="code">u-marginBottomBiggest</code>
+				</p>
+				<h4>Top</h4>
+				<p>
+					<code class="code">u-marginTopReset</code>
+					<code class="code">u-marginTopTiny</code>
+					<code class="code">u-marginTopSmall</code>
+					<code class="code">u-marginTopStandard</code>
+					<code class="code">u-marginTopBig</code>
+					<code class="code">u-marginTopBigger</code>
+					<code class="code">u-marginTopBiggest</code>
+				</p>
+				<h4>Right</h4>
+				<p>
+					<code class="code">u-marginRightReset</code>
+					<code class="code">u-marginRightTiny</code>
+					<code class="code">u-marginRightsmall</code>
+					<code class="code">u-marginRightstandard</code>
+					<code class="code">u-marginRightbig</code>
+					<code class="code">u-marginRightbigger</code>
+					<code class="code">u-marginRightbiggest</code>
+				</p>
+				<h4>Left</h4>
+				<p>
+					<code class="code">u-marginLeftReset</code>
+					<code class="code">u-marginLeftTiny</code>
+					<code class="code">u-marginLeftSmall</code>
+					<code class="code">u-marginLeftStandard</code>
+					<code class="code">u-marginLeftBig</code>
+					<code class="code">u-marginLeftBigger</code>
+					<code class="code">u-marginLeftBiggest</code>
+				</p>
+			</section>
+			<section class="contentSection">
+				<h3>Padding</h3>
+				<h4>Reset all paddings</h4>
+				<p>
+					<code class="code">u-paddingReset</code>
+				</p>
+				<h4>Bottom</h4>
+				<p>
+					<code class="code">u-paddingBottomReset</code>
+					<code class="code">u-paddingBottomTiny</code>
+					<code class="code">u-paddingBottomSmall</code>
+					<code class="code">u-paddingBottomStandard</code>
+					<code class="code">u-paddingBottomBig</code>
+					<code class="code">u-paddingBottomBigger</code>
+					<code class="code">u-paddingBottomBiggest</code>
+				</p>
+				<h4>Top</h4>
+				<p>
+					<code class="code">u-paddingTopReset</code>
+					<code class="code">u-paddingTopTiny</code>
+					<code class="code">u-paddingTopSmall</code>
+					<code class="code">u-paddingTopStandard</code>
+					<code class="code">u-paddingTopBig</code>
+					<code class="code">u-paddingTopBigger</code>
+					<code class="code">u-paddingTopBiggest</code>
+				</p>
+				<h4>Right</h4>
+				<p>
+					<code class="code">u-paddingRightReset</code>
+					<code class="code">u-paddingRightTiny</code>
+					<code class="code">u-paddingRightSmall</code>
+					<code class="code">u-paddingRightStandard</code>
+					<code class="code">u-paddingRightBig</code>
+					<code class="code">u-paddingRightBigger</code>
+					<code class="code">u-paddingRightBiggest</code>
+				</p>
+				<h4>Left</h4>
+				<p>
+					<code class="code">u-paddingLeftReset</code>
+					<code class="code">u-paddingLeftTiny</code>
+					<code class="code">u-paddingLeftSmall</code>
+					<code class="code">u-paddingLeftStandard</code>
+					<code class="code">u-paddingLeftBig</code>
+					<code class="code">u-paddingLeftBigger</code>
+					<code class="code">u-paddingLeftBiggest</code>
+				</p>
+			</section>
+			<section class="contentSection">
+				<h2>Text format</h2>
+				<h3>Align</h3>
+				<p>You can align your text by adding a class on any element:</p>
+				<p class="u-textLeft">Left align</p>
+				<p class="u-textCenter">Center align</p>
+				<p class="u-textRight">Right align</p>
+				<p>
+					<code class="code">u-textLeft</code>
+					<code class="code">u-textCenter</code>
+					<code class="code">u-textRight</code>
+				</p>
+			</section>
+			<section class="contentSection" id="utilities-colors">
+				<h3>Colors</h3>
+				<p>You can also change the color of your text:</p>
+				<p class="demo-textColor">
+					<span class="u-textGrey">Grey</span>
+					<span class="u-textPrimary">Primary</span>
+					<span class="u-textSecondary">Secondary</span>
+					<span class="u-textLight">Light</span>
+					<span class="u-textGreen">Green</span>
+					<span class="u-textOrange">Orange</span>
+					<span class="u-textRed">Red</span>
+				</p>
+				<p>
+					<code class="code">u-textGrey</code>
+					<code class="code">u-textPrimary</code>
+					<code class="code">u-textSecondary</code>
+					<code class="code">u-textLight</code>
+					<code class="code">u-textGreen</code>
+					<code class="code">u-textOrange</code>
+					<code class="code">u-textRed</code>
+				</p>
+			</section>
+			<h2 class="demo-divider" id="templates">Templates</h2>
+			<section class="contentSection">
+				<ul>
+					<li><a href="templates/sidebar.html" target="_blank">With sidebar</a></li>
+				</ul>
+			</section>
+			<h2 class="demo-divider" id="icons">Icons</h2>
+			<section class="contentSection">
+				<h2>Icons</h2>
+				<p><i class="icon">hearth</i> <code class="code">&lt;i class="icon"&gt;hearth&lt;/i&gt;</code></p>
+
+				<p>Just replace the text between <code class="code">&lt;i&gt;&lt;/i&gt;</code> by the keyword in this list to get your icon.</p>
+
+				<div class="u-textCenter">
+					<div class="demo-icon">
+						<i class="icon">north_thin_arrow</i>
+						<code class="code">north_thin_arrow</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">east_thin_arrow</i>
+						<code class="code">east_thin_arrow</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">south_thin_arrow</i>
+						<code class="code">south_thin_arrow</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">west_thin_arrow</i>
+						<code class="code">west_thin_arrow</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">thin_cross</i>
+						<code class="code">thin_cross</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">thin_plus</i>
+						<code class="code">thin_plus</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">birthday</i>
+						<code class="code">birthday</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">broken_heart</i>
+						<code class="code">broken_heart</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">completion_pie</i>
+						<code class="code">completion_pie</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">dirty_import</i>
+						<code class="code">dirty_import</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">eye</i>
+						<code class="code">eye</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">family_tree</i>
+						<code class="code">family_tree</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">flash</i>
+						<code class="code">flash</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">group</i>
+						<code class="code">group</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">headphones</i>
+						<code class="code">headphones</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">heart</i>
+						<code class="code">heart</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">help</i>
+						<code class="code">help</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">history</i>
+						<code class="code">history</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">image</i>
+						<code class="code">image</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">import_cb</i>
+						<code class="code">import_cb</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">key</i>
+						<code class="code">key</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">list</i>
+						<code class="code">list</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">mosaic</i>
+						<code class="code">mosaic</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">palette</i>
+						<code class="code">palette</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">pristine_import</i>
+						<code class="code">pristine_import</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">rejected</i>
+						<code class="code">rejected</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">simple_key</i>
+						<code class="code">simple_key</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">snack</i>
+						<code class="code">snack</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">star</i>
+						<code class="code">star</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">synchronisation</i>
+						<code class="code">synchronisation</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">unwatch</i>
+						<code class="code">unwatch</code>
+					</div>
+					<div class="demo-icon">
+						<i class="icon">watch</i>
+						<code class="code">watch</code>
+					</div>
+					<div class="u-clear"></div>
+				</div>
+			</section>
+			<section class="contentSection">
+				<h3>Icons size</h3>
+				<p>You can add a mod to change your icon size:</p>
+				<i class="icon mod-smaller">hearth</i>
+				<code class="code">&lt;i class="icon mod-smaller"&gt;hearth&lt;/i&gt;</code><br>
+				<i class="icon mod-small">hearth</i>
+				<code class="code">&lt;i class="icon mod-small"&gt;hearth&lt;/i&gt;</code><br>
+				<i class="icon">hearth</i>
+				<code class="code">&lt;i class="icon"&gt;hearth&lt;/i&gt;</code><br>
+				<i class="icon mod-big">hearth</i>
+				<code class="code">&lt;i class="icon mod-big"&gt;hearth&lt;/i&gt;</code><br>
+				<i class="icon mod-bigger">hearth</i>
+				<code class="code">&lt;i class="icon mod-bigger"&gt;hearth&lt;/i&gt;</code><br>
+				<i class="icon mod-biggest">hearth</i>
+				<code class="code">&lt;i class="icon mod-biggest"&gt;hearth&lt;/i&gt;</code><br>
+				<em><b>Tip:</b> You can manually set the icon size by giving it a <code class="code">font-size</code> value.</em>
+			</section>
+			<section class="contentSection">
+				<h3>Icons colors</h3>
+				<p>You can use <a href="#utilities-colors">color utilities</a> to change your icon color:</p>
+				<i class="icon u-textPrimary">hearth</i>
+				<i class="icon u-textLight">hearth</i>
+				<i class="icon u-textRed">hearth</i>
+				<i class="icon u-textOrange">hearth</i>
+				<i class="icon u-textGreen">hearth</i>
+			</section>
+		</section>
+	</body>
+</html>
