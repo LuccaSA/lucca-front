@@ -3,13 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { BogusComponent } from './bogus/bogus.component';
+import { BogusAppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BogusComponent
+    BogusAppComponent,
   ],
   imports: [
     BrowserModule,
@@ -17,6 +15,6 @@ import { BogusComponent } from './bogus/bogus.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [BogusAppComponent]
 })
-export class AppModule { }
+export class BogusAppModule { }

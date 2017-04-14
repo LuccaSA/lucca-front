@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { BogusComponent } from '../../src/app/bogus/bogus.component';
+import { BogusComponent } from '../../src/public_api';
+// import { BogusComponent } from '@lol/lol';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,1 @@
+export { BogusComponent } from './bogus/bogus.component';
