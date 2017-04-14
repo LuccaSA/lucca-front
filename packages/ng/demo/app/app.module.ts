@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { BogusComponent } from './bogus/bogus.component';
+import { BogusComponent } from '../../src/app/bogus/bogus.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BogusComponent
+    BogusComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,8 +20,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve -a=demo",
+    "build": "ng build -a=src",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
