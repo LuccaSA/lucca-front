@@ -108,3 +108,13 @@
 	font-size: .85rem;
 	top: 0;
 }
+
+.demo-icon{
+	width: 125px;
+	float: left;
+	margin-bottom: 2rem;
+}
+
+.demo-icon .icon{
+	display: block;
+}
