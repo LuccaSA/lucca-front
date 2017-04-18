@@ -14,7 +14,7 @@
  * @description
  * Entry point for all public APIs of the ng package.
  */
-export * from './components/index';
+export * from './index';
 
 // This is a hack to prevent people from turning on strictNullChecks. See #15432
 export declare interface ɵStrictNullChecksNotSupported {

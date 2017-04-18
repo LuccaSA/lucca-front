@@ -21,11 +21,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -a=demo",
-    "build": "ng build -a=src",
+    "build": "gulp inline:style-and-template",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build-test": "gulp inline:style-and-template"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
