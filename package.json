@@ -1,0 +1,21 @@
+{
+  "name": "@lucca-front",
+  "version": "0.0.0",
+  "description": "a library of usefull components for web developpement",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "keywords": [
+    "lucca",
+    "angular",
+    "ng",
+    "scss"
+  ],
+  "author": "lucien bertin <lbertin@lucca.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  }
+
+}
