@@ -63,7 +63,7 @@ function updateMasterVersion() {
 
 	console.log(colors.green('Updating lucca-front'));
 
-	npmRun.execSync(`npm version ${versionParam}`, { cwd: `${__dirname}/..`, stdio: [0, 1, 2] });
+	npmRun.execSync(`npm --no-git-tag-version version ${versionParam}`, { cwd: `${__dirname}/..`, stdio: [0, 1, 2] });
 }
 
 updateMasterVersion();
