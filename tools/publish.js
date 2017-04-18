@@ -1,3 +1,4 @@
+const colors = require('colors').safe;
 const argv = require('yargs').argv;
 const npmRun = require('npm-run');
 const glob = require('glob');
@@ -29,7 +30,7 @@ function patchVersionPlaceholder(files) {
 	const currentVersion = getCurrentVersion();
 
 	files.forEach(file => {
-		console.log(`Updating ${file} to version ${currentVersion}`);
+		console.log(`Updating ${colors.green(file)} to version ${colors.green(currentVersion)}`);
 
 		let fileAsString = fs.readFileSync(file, 'utf8').toString();
 		const regex = new RegExp(DEFAULT_PLACEHOLDER, 'ig');
@@ -45,7 +46,7 @@ function publishPackages(packages) {
 		const path = _package.replace(/package.json$/i, '');
 		const config = getPackageConfig(_package);
 
-		console.log(`Publishing ${config.name}`);
+		console.log(`Publishing ${colors.green(config.name)}`);
 
 		npmRun.execSync('npm run publish-test', { cwd: `${__dirname}/${path}`, stdio: [0, 1, 2] });
 	});
@@ -59,6 +60,8 @@ function updateMasterVersion() {
 	if (authorizedVersionParameter.indexOf(versionParam) === -1) {
 		throw new Error(`Invalid value for parameter : "${versionParam}". Please retry with one of the following options : ${authorizedVersionParameter.join(', ')}`);
 	}
+
+	console.log(colors.green('Updateing lucca-front'));
 
 	npmRun.execSync(`npm version ${versionParam}`, { cwd: `${__dirname}/..`, stdio: [0, 1, 2] });
 }
