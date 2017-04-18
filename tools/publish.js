@@ -61,7 +61,7 @@ function updateMasterVersion() {
 		throw new Error(`Invalid value for parameter : "${versionParam}". Please retry with one of the following options : ${authorizedVersionParameter.join(', ')}`);
 	}
 
-	console.log(colors.green('Updating lucca-front'));
+	console.log(`Updating ${colors.green('lucca-front')}`);
 
 	npmRun.execSync(`npm --no-git-tag-version version ${versionParam}`, { cwd: `${__dirname}/..`, stdio: [0, 1, 2] });
 }
