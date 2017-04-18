@@ -12,4 +12,5 @@ export class BogusComponent implements OnInit {
   ngOnInit() {
   }
 
+  public lol = 'mdr'
 }
