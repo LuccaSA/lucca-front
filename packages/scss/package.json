@@ -4,7 +4,8 @@
   "description": "a scss-framework based on trello's css naming",
   "main": "src/main.scss",
   "scripts": {
-    "build": "node-sass src/main.scss > dist/lucca-front.css"
+    "build": "node-sass src/main.scss > dist/lucca-front.css",
+	"publish-test": "echo 'Publishing @lucca-front/scss'"
   },
   "files": [
     "src",

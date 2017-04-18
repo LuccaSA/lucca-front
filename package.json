@@ -18,6 +18,7 @@
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
   "devDependencies": {
-    "glob": "^7.1.1"
+    "glob": "^7.1.1",
+    "npm-run": "^4.1.2"
   }
 }
