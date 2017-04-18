@@ -1,3 +1,4 @@
+const argv = require('yargs').argv;
 const npmRun = require('npm-run');
 const glob = require('glob');
 const fs = require('fs');
@@ -23,22 +24,21 @@ function getCurrentVersion() {
 	const mainPackage = getPackageConfig(__dirname + '/../package.json');
 	return mainPackage.version;
 }
-const currentVersion = getCurrentVersion();
 
-function patchVersionPlaceholder(files, version) {
+function patchVersionPlaceholder(files) {
+	const currentVersion = getCurrentVersion();
+
 	files.forEach(file => {
-		console.log(`Updating ${file} to version ${version}`);
+		console.log(`Updating ${file} to version ${currentVersion}`);
 
 		let fileAsString = fs.readFileSync(file, 'utf8').toString();
 		const regex = new RegExp(DEFAULT_PLACEHOLDER, 'ig');
 
-		fileAsString = fileAsString.replace(regex, version);
+		fileAsString = fileAsString.replace(regex, currentVersion);
 
 		fs.writeFileSync(file, fileAsString, { encoding: 'utf8' });
 	});
 }
-
-patchVersionPlaceholder(filesWithVersionPlaceholder, currentVersion);
 
 function publishPackages(packages) {
 	packages.forEach(_package => {
@@ -51,4 +51,18 @@ function publishPackages(packages) {
 	});
 }
 
+const authorizedVersionParameter = ['major', 'minor', 'patch', 'premajor', 'preminor', 'prepatch', 'prerelease', 'from-git'];
+
+function updateMasterVersion() {
+	const versionParam = argv._[0];
+
+	if (authorizedVersionParameter.indexOf(versionParam) === -1) {
+		throw new Error(`Invalid value for parameter : "${versionParam}". Please retry with one of the following options : ${authorizedVersionParameter.join(', ')}`);
+	}
+
+	npmRun.execSync(`npm version ${versionParam}`, { cwd: `${__dirname}/..`, stdio: [0, 1, 2] });
+}
+
+updateMasterVersion();
+patchVersionPlaceholder(filesWithVersionPlaceholder);
 publishPackages(subPackagesJSON);
