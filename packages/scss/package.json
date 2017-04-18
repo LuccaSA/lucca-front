@@ -1,11 +1,15 @@
 {
   "name": "@lucca-front/scss",
-  "version": "0.0.0",
+  "version": "0.0.0-VERSIONPLACEHOLDER",
   "description": "a scss-framework based on trello's css naming",
-  "main": "main.scss",
+  "main": "src/main.scss",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node-sass src/main.scss > dist/lucca-front.css"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
@@ -20,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
-  "homepage": "https://github.com/LuccaSA/lucca-front#readme"
+  "homepage": "https://github.com/LuccaSA/lucca-front#readme",
+  "devDependencies": {
+    "node-sass": "^4.5.2"
+  }
 }
