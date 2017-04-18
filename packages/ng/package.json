@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a library of usefull components for angular web app",
   "main": "index.js",
   "repository": {
@@ -20,13 +20,18 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -a=demo",
+    "start": "ng serve",
     "build": "gulp inline:style-and-template",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "private": false,
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
