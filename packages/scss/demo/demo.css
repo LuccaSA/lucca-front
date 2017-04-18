@@ -103,12 +103,6 @@
 	padding: .6rem 1rem;
 }
 
-.input-field.demo-is-open	~ .input-label,
-.textarea-field.demo-is-open	~ .textarea-label{
-	font-size: .85rem;
-	top: 0;
-}
-
 .demo-icon{
 	width: 125px;
 	float: left;

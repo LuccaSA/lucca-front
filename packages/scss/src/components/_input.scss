@@ -13,6 +13,7 @@
 		font-family: 'Source Sans Pro', Tahoma, sans-serif;
 		outline: 0;
 		padding: .5rem 0;
+		position: relative;
 		transition: box-shadow 150ms ease,
 		            color 150ms ease;
 		width: 100%;
@@ -38,6 +39,36 @@
 		width: 100%;
 	}
 
+	.input-options{
+		background: white;
+		border-radius: 3px;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
+	              0 0 3px rgba(0, 0, 0, 0.3);
+		left: 0;
+		list-style: none;
+		max-height: 15rem;
+		min-width: 100%;
+		opacity: 0;
+		overflow: auto;
+		padding: 0;
+		position: absolute;
+		top: 2.5rem;
+		transform: scaleY(0);
+		transform-origin: right top;
+		transition: all 150ms ease;
+		z-index: 999;
+	}
+
+		.input-options-entry{
+			cursor: pointer;
+			padding: .5rem 1rem;
+			transition: background 50ms ease;
+
+			&:hover{
+				background: rgba(0,0,0,.1);
+			}
+		}
+
 
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -46,6 +77,52 @@
 
 	&.mod-block{
 		max-width: 100%;
+	}
+
+	&.mod-autocomplete{
+
+		.input-field{
+			padding-right: 1.5rem;
+		}
+
+		&:after{
+			bottom: .15rem;
+			color: $greyLight;
+			content: "\e918";
+			font-family: lucca;
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	&.mod-select{
+
+		.input-field{
+			padding-right: 1.5rem;
+
+			&:focus{
+				box-shadow: 0 1px 0 0 #ccc;
+			}
+		}
+
+		.input-label{
+			color: #a6a6a6;
+			font-size: $font-standard;
+			top: 1.3rem;
+		}
+
+		.input-options{
+			top: 0;
+		}
+
+		&:after{
+			bottom: .15rem;
+			color: $greyLight;
+			content: "\e918";
+			font-family: lucca;
+			position: absolute;
+			right: 0;
+		}
 	}
 }
 
@@ -65,5 +142,35 @@
 		background-size: 3px 1px;
 		color: $greyLight;
 		cursor: not-allowed;
+	}
+}
+
+.input{
+
+	&.is-open{
+
+		.input-options{
+			opacity: 1;
+			transform: scaleY(1);
+		}
+
+		&:after{
+			content: "\e907";
+		}
+	}
+
+	&.is-filled{
+
+		.input-label{
+			font-size: $font-small;
+			top: 0;
+		}
+	}
+}
+
+.input-options-entry{
+
+	&.is-focus{
+		background: rgba(0,0,0,.1);
 	}
 }
