@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "a library of usefull components for web developpement",
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
   "devDependencies": {
+    "colors": "^1.1.2",
     "glob": "^7.1.1",
     "npm-run": "^4.1.2",
     "yargs": "^7.1.0"

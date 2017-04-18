@@ -1,4 +1,4 @@
-const colors = require('colors').safe;
+const colors = require('colors/safe');
 const argv = require('yargs').argv;
 const npmRun = require('npm-run');
 const glob = require('glob');
