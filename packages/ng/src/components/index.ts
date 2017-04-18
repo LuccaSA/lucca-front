@@ -1,1 +1,1 @@
-export { BogusComponent } from './bogus/bogus.component';
+export { BogusComponent } from '../bogus/bogus.component';
