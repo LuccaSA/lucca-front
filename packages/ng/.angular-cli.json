@@ -20,7 +20,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "demo",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/prismjs/themes/prism.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
