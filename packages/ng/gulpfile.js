@@ -1,7 +1,9 @@
 let gulp = require('gulp');
 let merge = require('merge2');
 let sass = require('node-sass');
+let clean = require('gulp-clean');
 let ts = require('gulp-typescript');
+let runSequence = require('run-sequence');
 let sourcemaps = require('gulp-sourcemaps');
 let inlineNg2Template = require('gulp-inline-ng2-template');
 
@@ -15,7 +17,18 @@ const INLINE_OPTIONS = {
 const TSCONFIG_PATH = './src/tsconfig.json';
 const OUT_DIR = './dist';
 
-gulp.task('inline:style-and-template', () => {
+gulp.task('build', callback => runSequence(
+	'dist:clean',
+	'build:inline-and-compile',
+	callback
+));
+
+gulp.task('dist:clean', () => {
+	return gulp.src(OUT_DIR, { read: false })
+		.pipe(clean());
+});
+
+gulp.task('build:inline-and-compile', () => {
 	let tsProject = ts.createProject(TSCONFIG_PATH);
 
 	const tsResult = tsProject.src()
