@@ -1,2 +1,2 @@
 export * from './bogus';
-export { LuModule } from './lu.module';
+export { LuRootModule } from './lu.module';
