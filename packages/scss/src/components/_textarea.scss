@@ -67,3 +67,14 @@
 		cursor: not-allowed;
 	}
 }
+
+.textarea{
+
+	&.is-filled{
+
+		.textarea-label{
+			font-size: $font-small;
+			top: 0;
+		}
+	}
+}

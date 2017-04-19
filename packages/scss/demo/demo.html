@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Lucca UI 4</title>
+		<title>Lucca Front</title>
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
 		<link rel="stylesheet" href="../dist/lucca-front.css">
 		<link rel="stylesheet" href="demo.css">
@@ -146,8 +146,8 @@
 						</div>
 						<div class="grid-sm6">
 							<div class="form-group">
-								<div class="input mod-block">
-									<input class="input-field demo-is-open" type="text" value="disabled input" disabled>
+								<div class="input mod-block is-filled">
+									<input class="input-field" type="text" value="disabled input" disabled>
 									<label class="input-label">Input label</label>
 								</div>
 							</div>
@@ -159,7 +159,41 @@
 	&lt;label class="input-label"&gt;Input label&lt;/label&gt;
 &lt;/div&gt;
 </code>
-			<em><b>Tip:</b> Use <code class="code">&lt;input class="input mod-block"&gt;</code> for a 100% width input.</em>
+			<em><b>Tip:</b> Use <code class="code">&lt;div class="input mod-block"&gt;</code> for a 100% width input.</em><br>
+			<em><b>Tip:</b> Use <code class="code">&lt;div class="input is-filled"&gt;</code> to let the placeholder on the upper state.</em>
+			</section>
+			<section class="contentSection">
+				<h3>Autocomplete / Select</h3>
+				<div class="form">
+					<div class="grid">
+						<div class="grid-sm6">
+							<div class="form-group">
+								<div class="input mod-block mod-autocomplete is-open">
+									<input class="input-field" type="text">
+									<label class="input-label">User</label>
+									<ul class="input-options">
+										<li class="input-options-entry"><u>va</u>lue A</li>
+										<li class="input-options-entry is-focus"><u>va</u>lue B</li>
+										<li class="input-options-entry"><u>va</u>lue C</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="grid-sm6">
+							<div class="form-group">
+								<div class="input mod-select is-open">
+									<input class="input-field" type="text">
+									<label class="input-label">User</label>
+									<ul class="input-options">
+										<li class="input-options-entry">value A</li>
+										<li class="input-options-entry is-focus">value B</li>
+										<li class="input-options-entry">value C</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</section>
 			<section class="contentSection">
 				<h2>Textareas</h2>
@@ -175,8 +209,8 @@
 						</div>
 						<div class="grid-sm6">
 							<div class="form-group">
-								<div class="textarea mod-block">
-									<textarea class="textarea-field demo-is-open" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
+								<div class="textarea mod-block is-filled">
+									<textarea class="textarea-field" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 									<label class="textarea-label">Textarea label</label>
 								</div>
 							</div>
@@ -188,6 +222,8 @@
 	&lt;label class="textarea-label"&gt;Textarea label&lt;/label&gt;
 &lt;/div&gt;
 </code>
+				<em><b>Tip:</b> Use <code class="code">&lt;div class="textarea mod-block"&gt;</code> for a 100% width textarea.</em><br>
+				<em><b>Tip:</b> Use <code class="code">&lt;div class="textarea is-filled"&gt;</code> to let the placeholder on the upper state.</em>
 			</section>
 			<section class="contentSection">
 				<h2>Checkboxes</h2>
