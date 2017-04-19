@@ -17,7 +17,8 @@
 export * from './index';
 
 // This is a hack to prevent people from turning on strictNullChecks. See #15432
+/* tslint:disable */
 export declare interface ɵStrictNullChecksNotSupported {
-  dontUseStrictNullChecksWithAngularYetSeeIssue15432: string|null;
-  [key: string]: string;
+	dontUseStrictNullChecksWithAngularYetSeeIssue15432: string|null;
+	[key: string]: string;
 }
