@@ -5,9 +5,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
  * This is a bogus component with bogus documentation
  */
 @Component({
-	/* tslint:disable */
 	selector: 'lu-bogus',
-	/* tslint:enable */
 	templateUrl: './bogus.component.html',
 	styleUrls: ['./bogus.component.scss']
 })
