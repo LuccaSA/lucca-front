@@ -7,6 +7,8 @@ import {DEMO_SNIPPETS} from './demos';
   //   <lu-bogus></lu-bogus>
   // `,
   template: `
+    <demo-api-docs directive="BogusComponent"></demo-api-docs>
+
     <demo-example-box [snippets]="snippets" component="bogus" demo="basic">
       <demo-bogus-basic></demo-bogus-basic>
     </demo-example-box>

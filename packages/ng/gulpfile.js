@@ -6,6 +6,9 @@ let ts = require('gulp-typescript');
 let runSequence = require('run-sequence');
 let sourcemaps = require('gulp-sourcemaps');
 let inlineNg2Template = require('gulp-inline-ng2-template');
+let gulpFile = require('gulp-file');
+let doc = require('./misc/api-doc');
+let glob = require('glob');
 
 const INLINE_OPTIONS = {
 	useRelativePaths: true,
@@ -55,3 +58,25 @@ function compileScss(stylePath, ext, styleFile, callback) {
 	}
 	return callback(null, styleFile);
 }
+
+
+// DOC
+
+// Generate doc from the code
+// copy-pasted from ng-bootstrap
+// https://github.com/ng-bootstrap/ng-bootstrap/blob/master/gulpfile.js#L235
+function getFileNames() {
+	return glob.sync('src/**/*.ts', {
+		ignore: ['src/**/*.spec.ts', 'src/util/**']
+	});
+}
+
+function getApiDocs() {
+	return doc(getFileNames());
+}
+
+gulp.task('generatedoc', () => {
+	var docs = `const API_DOCS = ${JSON.stringify(getApiDocs(), null, 2)};\n\nexport default API_DOCS;`;
+
+	return gulpFile('api-docs.ts', docs, {src: true}).pipe(gulp.dest("demo"));
+})
