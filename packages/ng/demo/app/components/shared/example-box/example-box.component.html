@@ -1,0 +1,25 @@
+<div class="component-demo">
+  <div class="card">
+    <div class="card-header">
+      <span class="h3">
+        {{ demoTitle }}
+      </span>
+      <div class="float-right">
+        <button class="btn-link" (click)="toggleCode()" title="{{showCode ? 'Hide' : 'Show'}} source code">
+          <img src="img/code-icon.png" height="24" width="24" alt="Source code icon"/>
+        </button>
+<!--         <a target="_blank" href="app/components/{{component}}/demos/{{demo}}/plnkr.html" title="Edit in Plunker" >
+          <img src="img/plunker-icon.png" height="24" width="24" alt="Plunker icon"/>
+        </a> -->
+      </div>
+    </div>
+    {{showCode}}
+    <div class="card-block" *ngIf="showCode">
+      <pre class="language-html"><code class="language-html" [innerHTML]="snippets[demo].markup"></code></pre>
+      <pre class="language-typescript"><code class="language-typescript" [innerHTML]="snippets[demo].code"></code></pre>
+    </div>
+    <div class="card-block">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

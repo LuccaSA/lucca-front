@@ -1,11 +1,13 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "ng"
+    "name": "lu",
+    "prefix": "lu"
   },
   "apps": [
     {
-      "root": "src",
+      "name": "demo",
+      "root": "demo",
       "outDir": "dist",
       "assets": [
         "assets",
@@ -17,9 +19,10 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "lu",
+      "prefix": "demo",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/prismjs/themes/prism.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

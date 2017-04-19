@@ -4,12 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from './components/shared'
+// import { BogusComponent } from '../../src/';
+import { BogusModule } from '../../src/';
+
+import { DemoBogusModule } from './components'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // BogusComponent,
   ],
   imports: [
+    // BogusModule,
+    DemoBogusModule,
     BrowserModule,
     FormsModule,
     HttpModule
