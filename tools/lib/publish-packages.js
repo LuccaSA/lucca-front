@@ -9,7 +9,12 @@ module.exports = function publishPackages(packages) {
 
 		console.log(`Publishing ${colors.green(config.name)}`);
 
-		npmRun.execSync('npm run publish-test', { cwd: `${__dirname}/../${path}`, stdio: [0, 1, 2] });
+		// does a dry run before doing the same but with publication
+		npmRun.execSync('npm pack', { cwd: `${__dirname}/../${path}`, stdio: [0, 1, 2] });
+		// publish
+		npmRun.execSync('npm publish --access=public', { cwd: `${__dirname}/../${path}`, stdio: [0, 1, 2] });
+		
+		// npmRun.execSync('npm run publish-test', { cwd: `${__dirname}/../${path}`, stdio: [0, 1, 2] });
 		console.log();
 	});
 }
