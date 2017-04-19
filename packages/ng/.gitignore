@@ -42,3 +42,6 @@ testem.log
 Thumbs.db
 
 yarn.lock
+
+# demo
+/demo/api-docs.ts
