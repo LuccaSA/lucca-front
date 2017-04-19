@@ -1,7 +1,6 @@
-export {BogusComponent} from './bogus.component';
-
 import {NgModule} from '@angular/core';
-import {BogusComponent} from './bogus.component';
+
+import {BogusComponent} from './bogus';
 
 @NgModule({
 	declarations: [
@@ -11,4 +10,4 @@ import {BogusComponent} from './bogus.component';
 		BogusComponent,
 	],
 })
-export class BogusModule { }
+export class LuRootModule { }
