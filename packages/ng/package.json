@@ -23,7 +23,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prepublish": "npm build",
+    "prepublish": "npm run build",
     "publish-test": "echo 'Publishing @lucca-front/ng'"
   },
   "files": [

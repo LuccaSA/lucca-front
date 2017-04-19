@@ -5,7 +5,7 @@
   "main": "src/main.scss",
   "scripts": {
     "build": "node-sass src/main.scss > dist/lucca-front.css",
-    "prepublish": "npm build",
+    "prepublish": "npm run build",
     "publish-test": "echo 'Publishing @lucca-front/scss'"
   },
   "files": [
