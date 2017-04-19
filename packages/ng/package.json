@@ -24,7 +24,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm build",
-	"publish-test": "echo 'Publishing @lucca-front/ng'"
+    "publish-test": "echo 'Publishing @lucca-front/ng'"
   },
   "files": [
     "dist"
@@ -41,8 +41,6 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.23",
-    "@lucca-front/scss": "PLACEHOLDER",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
@@ -54,6 +52,7 @@
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
     "gulp-inline-ng2-template": "^4.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
@@ -71,6 +70,7 @@
     "prismjs": "^1.6.0",
     "prismjs-loader": "0.0.4",
     "protractor": "~5.1.0",
+    "run-sequence": "^1.2.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
