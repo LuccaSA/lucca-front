@@ -8,7 +8,7 @@
     {
       "name": "demo",
       "root": "demo",
-      "outDir": "dist",
+      "outDir": "demo-dist",
       "assets": [
         "assets",
         "favicon.ico"
