@@ -23,6 +23,7 @@
     "npm-run": "^4.1.2",
     "yargs": "^7.1.0"
   },
+  "private": true,
   "scripts": {
     "publishpackages": "node tools/publish.js"
   }
