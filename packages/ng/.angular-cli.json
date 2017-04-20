@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "lu",
-    "prefix": "lu"
+    "name": "lu"
   },
   "apps": [
     {
@@ -30,6 +29,16 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+        "name": "src",
+        "root": "src",
+        "outDir": "dist",
+        "main": "main.ts",
+        "test": "test.ts",
+        "tsconfig": "tsconfig.json",
+        "testTsconfig": "tsconfig.spec.json",
+        "prefix": "lu"
     }
   ],
   "e2e": {
@@ -40,21 +49,21 @@
   "lint": [
     {
       "project": "src/tsconfig.app.json"
+        },
+        {
+            "project": "src/tsconfig.spec.json"
+        },
+        {
+            "project": "e2e/tsconfig.e2e.json"
+        }
+    ],
+    "test": {
+        "karma": {
+            "config": "./karma.conf.js"
+        }
     },
-    {
-      "project": "src/tsconfig.spec.json"
-    },
-    {
-      "project": "e2e/tsconfig.e2e.json"
+    "defaults": {
+        "styleExt": "scss",
+        "component": {}
     }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "scss",
-    "component": {}
-  }
 }

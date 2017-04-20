@@ -16,6 +16,7 @@ module.exports = function (config) {
 			clearContext: false // leave Jasmine Spec Runner output visible in browser
 		},
 		files: [
+			{ pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: true },
 			{ pattern: './src/test.ts', watched: false }
 		],
 		preprocessors: {
