@@ -1,6 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
+/demo-dist
 /dist
 /tmp
 /out-tsc
@@ -42,7 +43,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# yarn
 yarn.lock
+yarn-*.log
 
 # demo
 /demo/api-docs.ts
