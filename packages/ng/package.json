@@ -20,7 +20,7 @@
     "ng": "ng",
     "start": "gulp generatedoc && ng serve",
     "build": "gulp build",
-    "test": "ng test",
+    "test": "ng test -a=src",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build",

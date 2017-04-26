@@ -1,4 +1,4 @@
-import { LuccaFrontModule } from './app/lucca-front.module';
+import { LuRootModule } from './app/lu-root.module';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-platformBrowserDynamic().bootstrapModule(LuccaFrontModule);
+platformBrowserDynamic().bootstrapModule(LuRootModule);

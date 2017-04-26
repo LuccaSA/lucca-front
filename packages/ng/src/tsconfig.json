@@ -9,7 +9,7 @@
 		"typeRoots": [
 			"../node_modules/@types"
 		],
-		"types": []
+		"types": ["jasmine"]
 	},
 	"exclude": [
 		"test.ts",
