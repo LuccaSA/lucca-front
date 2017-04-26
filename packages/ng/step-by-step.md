@@ -4,7 +4,7 @@
 $ ng g module lol -a=src
 installing module
   create src\app\lol\lol.module.ts
-$ ng g component lol -a=src
+$ ng g component lol -a=src --export=true
 installing component
   create src\app\lol\lol.component.scss
   create src\app\lol\lol.component.html
@@ -13,10 +13,9 @@ installing component
   update src\app\lol\lol.module.ts
 ```
 
-`-a=src` tells ng-cli to use application src, so it will generate everything in `/src/app/...`. by default it will use the demo application so you have to specify if you want to create something in `/src`
-
-always generate the module first, that way you have a module for our new component
-
+> - `-a=src` tells ng-cli to use application src, so it will generate everything in `/src/app/...`. by default it will use the demo application so you have to specify if you want to create something in `/src`
+> - always generate the module first, that way you have a module for our new component
+> - `--export=true` tells ng-cli to make the declaring module (here `LuLolModule`) to also export the component
 don't forget to update the generated classes to add the prefix `Lu`: `LolModule` -> `LuLolModule`. it wll prevent conflicts for applications using the lib
 
 ### Necessary exports
@@ -27,16 +26,6 @@ don't forget to update the generated classes to add the prefix `Lu`: `LolModule`
 @NgModule({...})
 export class LuLolModule { }
 export { LuLolComponent } from './lol.component'; //this line
-```
-
-also your `LuLolModule` needs to export the component `LuLolComponent`
-
-```ts
-@NgModule({
-	...
-	exports: [LuLolComponent]
-})
-export class LuLolModule { }
 ```
 
 you need to add your module to the [LuRootModule](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/src/app/lu-root.module.ts)
@@ -138,7 +127,7 @@ first create the component that will be instanciated on that route.
 ```
 $ ng g module lol -a=demo
   create demo\app\lol\lol.module.ts
-$ ng g component lol -a=demo -is --spec=false
+$ ng g component lol -a=demo -is --spec=false --export=true
   create demo\app\lol\lol.component.html
   create demo\app\lol\lol.component.ts
   update demo\app\lol\lol.module.ts
@@ -232,7 +221,7 @@ after that display the documentation with the component `DemoApiDocs` that i nab
 Each code snippet is a component, so you can use `ng g component`
 
 ```
-$ ng g component lol/basic -is --spec=false
+$ ng g component lol/basic -is --spec=false --export=true
   create demo\app\lol\basic\basic.component.html
   create demo\app\lol\basic\basic.component.ts
   update demo\app\lol\lol.module.ts
