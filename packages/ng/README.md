@@ -57,7 +57,7 @@ the code is split between 2 folders:
 
 both are angular-cli applications.
 
-You can find a step by step procedure to add a component to the lib and its page on the demo, themn start the development of said component in the file [step-by-step.md](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/step-by-step.md)
+You can find a step by step procedure to add a component to the lib and its page on the demo, then start the development of said component in the file [step-by-step.md](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/step-by-step.md)
 
 See golden rules for contributing in the [CONTRIBUTING.md](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/CONTRIBUTING.md)
 
