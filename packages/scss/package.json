@@ -5,6 +5,7 @@
   "main": "src/main.scss",
   "scripts": {
     "build": "node-sass src/main.scss > dist/lucca-front.css",
+    "start": "nodemon -e scss -x \"npm run build\"",
     "prepublish": "npm run build",
     "publish-test": "echo 'Publishing @lucca-front/scss'"
   },
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "devDependencies": {
-    "node-sass": "^4.5.2"
+    "node-sass": "^4.5.2",
+    "nodemon": "^1.11.0"
   }
 }
