@@ -28,7 +28,7 @@ export class LuLolModule { }
 export { LuLolComponent } from './lol.component'; //this line
 ```
 
-you need to add your module to the [LuRootModule](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/src/app/lu-root.module.ts)
+you need to add your module to the [LuRootModule](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/src/app/lu-root.module.ts) and make it export the `LuLolModule`
 
 ```ts
 import { CommonModule } from '@angular/common';
@@ -39,6 +39,9 @@ import { LuLolModule } from './lol/lol.module'; // add here
 	imports: [
 		CommonModule,
 		LuLolModule, // and here
+	],
+	export: [
+		LuLolModule, //and here
 	],
 })
 export class LuRootModule { }
