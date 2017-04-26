@@ -19,8 +19,18 @@
 		            color 150ms ease;
 		width: 100%;
 
+		&::placeholder {
+			color: $greyLighter;
+			opacity: 0;
+			transition: opacity 150ms ease;
+		}
+
 		&:focus{
 			box-shadow: 0 2px 0 0 $primary;
+
+			&::placeholder {
+				opacity: 1;
+			}
 
 			~ .input-label{
 				color: $primary;
