@@ -90,6 +90,16 @@ export class LuLolModule { }
 export { LuLolComponent } from './lol.component';
 ```
 
+also your `LuLolModule` needs to export the component `LuLolComponent`
+
+```ts
+@NgModule({
+	...
+	exports: [LuLolComponent]
+})
+export class LuLolModule { }
+```
+
 you need to add your module to the [LuRootModule](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/src/app/lu-root.module.ts)
 
 ```ts
@@ -214,7 +224,10 @@ import { LuLolModule } from '../../../src';
 	],
 	declarations: [
 		DemoLolComponent,
-	]
+	],
+	exports: [
+		DemoLolComponent, // dont forget to export the component or you wont be able to use it
+	],
 })
 export class DemoLolModule { }
 ```
@@ -242,6 +255,39 @@ export class AppModule { }
 
 then add the route (DIP) cf issue #17
 
+### Add the auto generated documentation
+
+the `SharedModule` contains components to display documentation and code snippets, so in your `DemoLolModule` import it
+
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DemoLolComponent } from './lol.component';
+import { LuLolModule } from '../../../src';
+import { BasicComponent } from './basic/basic.component';
+import { SharedModule } from '../shared'; // here
+
+@NgModule({
+	imports: [
+		CommonModule,
+		LuLolModule,
+		SharedModule, //here
+	],
+	declarations: [
+		DemoLolComponent,
+		BasicComponent,
+	],
+
+})
+export class DemoLolModule { }
+```
+
+after that display the documentation with the component `DemoApiDocs` that i nabbed from ng-bootstrap, in lol.component.html use this
+
+```html
+<demo-api-docs directive="LuLolComponent"></demo-api-docs>
+```
+
 ### Create your first code snippet
 
 Each code snippet is a component, so you can use `ng g component`
@@ -253,6 +299,61 @@ $ ng g component lol/basic -is --spec=false
   update demo\app\lol\lol.module.ts
 ```
 
+> - the component has been added to `DemoLolModule`'s declarations but not exports, don't forget to fix that
+> - you can change the selector in basic.component.ts so that there is no conflict with an other basic example of a component
+
+add the snippets in your `DemoLolComponent` using prismjs
+
+```ts
+import { Component, OnInit } from '@angular/core';
+
+declare var require: any; // don't forget this line
+
+@Component({
+	selector: 'demo-lol',
+	templateUrl: './lol.component.html',
+	styles: []
+})
+export class DemoLolComponent implements OnInit {
+
+	constructor() { }
+
+	snippets = { // here
+		basic: {
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html')
+		},
+	}
+	ngOnInit() {
+	}
+}
+```
+
+this will parse the files with the right synthax so the `ExampleBoxComponent` that i pinched from ng-bootstrap can display them, add the right html and voila
+
+```html
+<demo-api-docs directive="LuLolComponent"></demo-api-docs>
+
+<demo-example-box [snippets]="snippets" demo="basic">
+	<demo-lol-basic></demo-lol-basic>
+</demo-example-box>
+```
+
+You can now start working on your code snippet or add any other code snippet the same way you added _basic_
+
+```html
+<demo-api-docs directive="LuLolComponent"></demo-api-docs>
+
+<demo-example-box [snippets]="snippets" demo="basic">
+	<demo-lol-basic></demo-lol-basic>
+</demo-example-box>
+<demo-example-box [snippets]="snippets" demo="advanced">
+	<demo-lol-advanced></demo-lol-advanced>
+</demo-example-box>
+<demo-example-box [snippets]="snippets" demo="debug">
+	<demo-lol-debug></demo-lol-debug>
+</demo-example-box>
+```
 
 # Versionning
 
