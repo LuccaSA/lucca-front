@@ -138,7 +138,7 @@ export class LuLolComponent implements OnInit {
 	@Input() myInput = 4;
 
 	/**
-	 * a short documentation of the poutput
+	 * a short documentation of the output
 	 */
 	@Output() myOutput = new EventEmitter<string>();
 
@@ -168,7 +168,7 @@ const API_DOCS = {
     "outputs": [
       {
         "name": "myOutput",
-        "description": "a short documentation of the poutput"
+        "description": "a short documentation of the output"
       }
     ],
     "properties": [],
@@ -178,8 +178,80 @@ const API_DOCS = {
 
 ## Create the doc component in the demo
 
-start dev server by launching `npm start` and go to http://localhost:4200.
+If you want a web page to work and develop your component, the demo app is there for you. It's organized around a router with a route per component (DIP), and for each route, the documentation associated with the component and a series of code snippets to serve as examples.
 
+It is recommended you work inside one of the code snippet that will become an example afterwards, that way you start writing documentation while working and debugging your code.
+
+### Add a route for your component
+
+first create the component that will be instanciated on that route.
+
+```
+$ ng g module lol -a=demo
+  create demo\app\lol\lol.module.ts
+$ ng g component lol -a=demo -is --spec=false
+  create demo\app\lol\lol.component.html
+  create demo\app\lol\lol.component.ts
+  update demo\app\lol\lol.module.ts
+```
+
+> - that will create a `LolModule` and `LolComponent`, you can rename them `DemoLolModule` and `DemoLolComponent` but its not mandatory, they will not be published in the npm package
+> - `-is` (for Inline Style) is an option of ng generate to include the style in the ts file, here you wont be needing any style for this component
+> - `-spec=false` is also an option of ng generate to tell it to not generate a .spec file, we dont really need it
+
+then import the `LuLolModule` in your `DemoLolModule`
+
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DemoLolComponent } from './lol.component';
+import { LuLolModule } from '../../../src';
+
+@NgModule({
+	imports: [
+		CommonModule,
+		LuLolModule,
+	],
+	declarations: [
+		DemoLolComponent,
+	]
+})
+export class DemoLolModule { }
+```
+
+then and import the `DemoLolModule` in the app module
+
+```ts
+import { DemoLolModule } from './lol/lol.module';
+
+@NgModule({
+	declarations: [
+		AppComponent,
+	],
+	imports: [
+		DemoLolModule,
+		BrowserModule,
+		FormsModule,
+		HttpModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+then add the route (DIP) cf issue #17
+
+### Create your first code snippet
+
+Each code snippet is a component, so you can use `ng g component`
+
+```
+$ ng g component lol/basic -is --spec=false
+  create demo\app\lol\basic\basic.component.html
+  create demo\app\lol\basic\basic.component.ts
+  update demo\app\lol\lol.module.ts
+```
 
 
 # Versionning
