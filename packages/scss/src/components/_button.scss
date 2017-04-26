@@ -142,6 +142,28 @@
 			background: darken($green, 5%);
 		}
 	}
+
+	/* Size */
+
+	&.mod-smaller{
+		font-size: $font-smaller;
+		padding: .35rem .55rem;
+	}
+
+	&.mod-small{
+		font-size: $font-smaller;
+		padding: .45rem .70rem;
+	}
+
+	&.mod-big{
+		font-size: 1rem;
+		padding: .70rem 1rem;
+	}
+
+	&.mod-bigger{
+		font-size: 1.15rem;
+		padding: 1rem 1.5rem;
+	}
 }
 
 
