@@ -80,7 +80,17 @@ always generate the module first, that way you have a module for our new compone
 
 don't forget to update the generated classes to add the prefix `Lu`: `LolModule` -> `LuLolModule`. it wll prevent conflicts for applications using the lib
 
-then add your module to the [LuRootModule](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/src/app/lu-root.module.ts)
+### Necessary exports
+
+`lol.module.ts` will be the entry point for imports and exports of your new component, so add this line
+
+```ts
+@NgModule({...})
+export class LuLolModule { }
+export { LuLolComponent } from './lol.component';
+```
+
+you need to add your module to the [LuRootModule](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/src/app/lu-root.module.ts)
 
 ```ts
 import { CommonModule } from '@angular/common';
@@ -94,10 +104,79 @@ import { LuLolModule } from './lol/lol.module'; // add here
 	],
 })
 export class LuRootModule { }
-
 ```
 
-## Create 
+also you need to export the `LuLolModule` and `LuLlComponent` in the file `/src/index.ts` because its the entry point for the publish library
+
+```ts
+export * from './app/lol/lol.module';
+// or specifically
+// export { LuLolModule, LuLolComponent } from './app/lol/lol.module';
+export { LuRootModule } from './app/lu-root.module';
+```
+
+### inline documentation
+
+there's a script that i copied from [ng-bootstrap](https://ng-bootstrap.github.io) to generate documentation from the code. It can parse inline documentation so it would be highly appreciated if you document your component's input and putput
+
+```ts
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+/**
+ * a short documentation of the component
+ */
+@Component({
+	selector: 'lu-lol', // the selector will be extracted by the documentation script
+	templateUrl: './lol.component.html',
+	styleUrls: ['./lol.component.scss']
+})
+export class LuLolComponent implements OnInit {
+	/**
+	 * a short documentation of the input
+	 * the type of the input will be inferred with its default value
+	 */
+	@Input() myInput = 4;
+
+	/**
+	 * a short documentation of the poutput
+	 */
+	@Output() myOutput = new EventEmitter<string>();
+
+	constructor() { }
+
+	ngOnInit() {
+	}
+
+}
+```
+
+```ts
+const API_DOCS = {
+  "LuLolComponent": {
+    "fileName": "src/app/lol/lol.component.ts",
+    "className": "LuLolComponent",
+    "description": "a short documentation of the component",
+    "selector": "lu-lol",
+    "inputs": [
+      {
+        "name": "myInput",
+        "defaultValue": "4",
+        "type": "number",
+        "description": "a short documentation of the input\nthe type of the input will be inferred with its default value"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "myOutput",
+        "description": "a short documentation of the poutput"
+      }
+    ],
+    "properties": [],
+    "methods": []
+  },
+```
+
+## Create the doc component in the demo
 
 start dev server by launching `npm start` and go to http://localhost:4200.
 
