@@ -1,5 +1,5 @@
 .input{
-	max-width: 300px;
+	width: 220px;
 	padding-top: 1rem;
 	position: relative;
 }
@@ -35,9 +35,12 @@
 		left: 0;
 		pointer-events: none;
 		position: absolute;
+		text-overflow: ellipsis;
 		top: 1.3rem;
 		transition: all 150ms ease;
 		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
 	.input-options{
@@ -89,7 +92,25 @@
 .input{
 
 	&.mod-block{
-		max-width: 100%;
+		width: 100%;
+	}
+
+	&.mod-inline{
+		display: inline-block;
+		margin-left: .15rem;
+		margin-right: .15rem;
+	}
+
+	&.mod-short{
+		width: 150px;
+	}
+
+	&.mod-shorter{
+		width: 100px;
+	}
+
+	&.mod-shortest{
+		width: 50px;
 	}
 
 	&.mod-autocomplete{
