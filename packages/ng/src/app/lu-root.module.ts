@@ -10,4 +10,4 @@ import { NgModule } from '@angular/core';
 		BogusComponent
 	]
 })
-export class LuccaFrontModule { }
+export class LuRootModule { }
