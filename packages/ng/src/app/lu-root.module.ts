@@ -1,6 +1,5 @@
-import { BogusComponent } from '../bogus';
-import { LuLolModule } from './lol/lol.module';
 import { CommonModule } from '@angular/common';
+import { LuLolModule } from './lol/lol.module';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -8,8 +7,8 @@ import { NgModule } from '@angular/core';
 		CommonModule,
 		LuLolModule,
 	],
-	declarations: [
-		BogusComponent
+	exports: [
+		LuLolModule
 	]
 })
-export class LuRootModule { }
+export class LuRootModule {}
