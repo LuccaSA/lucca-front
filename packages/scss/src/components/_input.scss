@@ -11,6 +11,7 @@
 		color: $grey;
 		font-weight: 400;
 		font-family: 'Source Sans Pro', Tahoma, sans-serif;
+		margin-bottom: .15rem;
 		outline: 0;
 		padding: .5rem 0;
 		position: relative;
@@ -69,6 +70,18 @@
 			}
 		}
 
+	.input-error{
+		color: $red;
+		font-size: $font-small;
+		margin: 0;
+	}
+
+	.input-helper{
+		color: $greyLight;
+		font-size: $font-small;
+		margin: 0;
+	}
+
 
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -87,7 +100,7 @@
 
 		&:after{
 			bottom: .15rem;
-			color: $greyLight;
+			color: $greyLighter;
 			content: "\e918";
 			font-family: lucca;
 			position: absolute;
@@ -117,7 +130,7 @@
 
 		&:after{
 			bottom: .15rem;
-			color: $greyLight;
+			color: $greyLighter;
 			content: "\e918";
 			font-family: lucca;
 			position: absolute;
@@ -140,7 +153,7 @@
 		background-position: bottom;
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
-		color: $greyLight;
+		color: $greyLighter;
 		cursor: not-allowed;
 	}
 }
@@ -164,6 +177,17 @@
 		.input-label{
 			font-size: $font-small;
 			top: 0;
+		}
+	}
+
+	&.is-error{
+
+		.input-field{
+			box-shadow: 0 2px 0 0 $red;
+		}
+
+		.input-label{
+			color: $red;
 		}
 	}
 }

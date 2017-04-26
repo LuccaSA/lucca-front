@@ -109,10 +109,10 @@
 	}
 
 	&.mod-grey-light{
-		background: $greyLight;
+		background: $greyLighter;
 
 		&:active{
-			background: darken($greyLight, 5%);
+			background: darken($greyLighter, 5%);
 		}
 	}
 
