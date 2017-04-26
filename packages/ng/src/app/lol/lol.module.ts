@@ -3,10 +3,15 @@ import { CommonModule } from '@angular/common';
 import { LuLolComponent } from './lol.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [LuLolComponent]
+	imports: [
+		CommonModule,
+	],
+	declarations: [
+		LuLolComponent,
+	],
+	exports: [
+		LuLolComponent,
+	],
 })
 export class LuLolModule { }
 
