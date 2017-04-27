@@ -187,6 +187,14 @@
 		color: $greyLighter;
 		cursor: not-allowed;
 	}
+
+	&.is-error{
+		@include formError();
+	}
+
+	&.is-filled{
+		@include formFilled();
+	}
 }
 
 .input{
@@ -200,25 +208,6 @@
 
 		&:after{
 			content: "\e920";
-		}
-	}
-
-	&.is-filled{
-
-		.input-label{
-			font-size: $font-small;
-			top: 0;
-		}
-	}
-
-	&.is-error{
-
-		.input-field{
-			box-shadow: 0 2px 0 0 $red;
-		}
-
-		.input-label{
-			color: $red;
 		}
 	}
 }
