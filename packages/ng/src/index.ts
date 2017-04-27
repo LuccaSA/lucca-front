@@ -1,2 +1,2 @@
-export * from './bogus';
-export { LuccaFrontModule } from './app/lucca-front.module';
+export * from './app/lol/lol.module';
+export { LuRootModule } from './app/lu-root.module';

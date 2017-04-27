@@ -1,28 +1,70 @@
-# Ng
+# tl;dr
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+This is the part of the framework dedicated to [angular](https://angular.io/). It contains a set of tools and components to help develop an agular web application like
 
-## Development server
+ - some usefull components (DIP)
+ - a scss plugin to map angular standard classes (`ng-valid`, `ng-empty`) to `@lucca-front/sccs` style
+ - a scss plugin for styling classic third party library like [ng-material](https://material.angular.io/components) or [ng-bootstrap](https://ng-bootstrap.github.io) (DIP)
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+see demo (DIP) for more details on what is available
 
-## Code scaffolding
+# Install and use
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+```
+npm install @lucca-front/ng --save
+```
 
-## Build
+## Use components
 
-Run `npm build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Each component will have its own module to facilitate dependency injection. So if you want a specific component just do that
 
-## Running unit tests
+```ts
+import { NgModule } from '@angular/core';
+import { LuLolModule } from '@lucca-front/ng';
+@NgModule({
+  imports: [
+    LuLolModule,
+  ],
+  providers: [],
+})
+export class MyModule { }
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+If you dont want to pick'n'mix and just import everything from lucca-front/ng, do that
 
-## Running end-to-end tests
+```ts
+import { NgModule } from '@angular/core';
+import { LuRootModule } from '@lucca-front/ng';
+@NgModule({
+  imports: [
+    LuRootModule,
+  ],
+  providers: [],
+})
+export class MyModule { }
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Use scss plugins
 
-## Further help
+DIP
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Contribute
+
+the code is split between 2 folders:
+
+ - `/src`: that's the source code, the code that will be published
+ - `/demo`: the code used for the demo web app and also serve as development environment
+
+both are angular-cli applications.
+
+You can find a step by step procedure to add a component to the lib and its page on the demo, then start the development of said component in the file [step-by-step.md](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/step-by-step.md)
+
+See golden rules for contributing in the [CONTRIBUTING.md](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/CONTRIBUTING.md)
+
+# Versionning
+
+the versionning strategy for all packages under `@lucca-front` follows the same rules as the ones under `@angular`. Every package will have the same version to avoid having `/scss` version 2.1 depending on `/icons` 1.3 but `/ng` depends on `/scss` 1.4 in its version `2.2`.
+
+so to avoid unnecessary complexity, all sub-packages will change version at the same time: 
+
+> `/ng#1.3.0` depends on `/scss#1.3.0` which depends on `/icons#1.3.0`

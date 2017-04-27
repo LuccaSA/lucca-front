@@ -8,3 +8,8 @@
 ### Fixed issues
 - [issue #193](https://github.com/LuccaSA/lucca-front/issues/193) - short summary of the issue
 ```
+
+ - see the contributing rules of the subpackage you want to submit to
+   - [contributing](https://github.com/LuccaSA/lucca-front/blob/master/packages/icons/CONTRIBUTING.md) to /icons
+   - [contributing](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/CONTRIBUTING.md) to /scss
+   - [contributing](https://github.com/LuccaSA/lucca-front/blob/master/packages/ng/CONTRIBUTING.md) to /ng
