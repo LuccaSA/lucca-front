@@ -70,7 +70,7 @@
 				<button class="button mod-secondary">Secondary</button>
 				<button class="button mod-lucca">Lucca</button>
 				<button class="button mod-grey">Grey</button>
-				<button class="button mod-greyLight">Light</button>
+				<button class="button mod-greyLighter">Light</button>
 				<button class="button mod-error">Error</button>
 				<button class="button mod-warning">Warning</button>
 				<button class="button mod-success">Success</button>
@@ -79,7 +79,7 @@
 &lt;button class="button mod-secondary"&gt;...&lt;/button&gt;
 &lt;button class="button mod-lucca"&gt;...&lt;/button&gt;
 &lt;button class="button mod-grey"&gt;...&lt;/button&gt;
-&lt;button class="button mod-greyLight"&gt;...&lt;/button&gt;
+&lt;button class="button mod-greyLighter"&gt;...&lt;/button&gt;
 &lt;button class="button mod-red"&gt;...&lt;/button&gt;
 &lt;button class="button mod-orange"&gt;...&lt;/button&gt;
 &lt;button class="button mod-green"&gt;...&lt;/button&gt;
@@ -139,7 +139,7 @@
 						<div class="grid-sm6">
 							<div class="form-group">
 								<div class="input mod-block">
-									<input class="input-field" type="text">
+									<input class="input-field" type="text" placeholder="placeholder">
 									<label class="input-label">Input label</label>
 								</div>
 							</div>
@@ -156,11 +156,87 @@
 				</div>
 <code class="code mod-block">&lt;div class="input"&gt;
 	&lt;input class="input-field" type="text"&gt;
-	&lt;label class="input-label"&gt;Input label&lt;/label&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;
 </code>
 			<em><b>Tip:</b> Use <code class="code">&lt;div class="input mod-block"&gt;</code> for a 100% width input.</em><br>
-			<em><b>Tip:</b> Use <code class="code">&lt;div class="input is-filled"&gt;</code> to let the placeholder on the upper state.</em>
+			<em><b>Tip:</b> Use <code class="code">&lt;div class="input is-filled"&gt;</code> to let the label on the upper state.</em><br>
+			<em><b>Tip:</b> You can use <code class="code">placeholder="..."</code> on <code class="code">input-field</code>.</em>
+			</section>
+			<section class="contentSection">
+				<h3>Helper / Error</h3>
+				<div class="grid">
+					<div class="grid-sm6">
+						<div class="form-group">
+							<div class="input mod-block">
+								<input class="input-field" type="text">
+								<label class="input-label">Input label</label>
+								<div class="input-helper">Few tips about the input</div>
+							</div>
+						</div>
+<code class="code mod-block">&lt;div class="input"&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
+	&lt;div class="input-helper"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+					</div>
+					<div class="grid-sm6">
+						<div class="form-group">
+							<div class="input mod-block is-error">
+								<input class="input-field" type="text">
+								<label class="input-label">Input label</label>
+								<div class="input-error">Oops, there is an error!</div>
+							</div>
+						</div>
+<code class="code mod-block">&lt;div class="input is-error"&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
+	&lt;div class="input-error"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+					</div>
+				</div>
+			</section>
+			<section class="contentSection">
+				<h3>Inline</h3>
+				<div class="input mod-inline">
+					<input class="input-field" type="text">
+					<label class="input-label">Input label</label>
+				</div>
+				<div class="input mod-inline mod-short">
+					<input class="input-field" type="text">
+					<label class="input-label">Input label</label>
+				</div>
+				<div class="input mod-inline mod-shorter">
+					<input class="input-field" type="text">
+					<label class="input-label">Input label</label>
+				</div>
+				<div class="input mod-inline mod-shortest">
+					<input class="input-field" type="text">
+					<label class="input-label">Input label</label>
+				</div>
+<code class="code mod-block">&lt;div class="input mod-inline"&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<em><b>Tip:</b> You can change the input lenght with <code class="code">mod-short</code>,<code class="code">mod-shorter</code> or <code class="code">mod-shortest</code>.</em><br>
+				<em><b>Tip:</b> You can use inline input inside standard text:</em>
+				<div>
+					Hello I'm
+					<div class="input mod-inline mod-shorter">
+						<input class="input-field" type="text" placeholder="ex. Janis">
+						<label class="input-label">name</label>
+					</div>
+					from
+					<div class="input mod-inline mod-shorter">
+						<input class="input-field" type="text" placeholder="ex. Port Arthur">
+						<label class="input-label">city</label>
+					</div>
+				</div>
 			</section>
 			<section class="contentSection">
 				<h3>Autocomplete / Select</h3>
@@ -223,7 +299,7 @@
 &lt;/div&gt;
 </code>
 				<em><b>Tip:</b> Use <code class="code">&lt;div class="textarea mod-block"&gt;</code> for a 100% width textarea.</em><br>
-				<em><b>Tip:</b> Use <code class="code">&lt;div class="textarea is-filled"&gt;</code> to let the placeholder on the upper state.</em>
+				<em><b>Tip:</b> Use <code class="code">&lt;div class="textarea is-filled"&gt;</code> to let the label on the upper state.</em>
 			</section>
 			<section class="contentSection">
 				<h2>Checkboxes</h2>
