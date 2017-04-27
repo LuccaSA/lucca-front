@@ -10,18 +10,19 @@
 	line-height: 1;
 	margin: .2rem;
 	padding: .55rem .85rem;
+	position: relative;
 	text-decoration: none;
 	transition: box-shadow 150ms ease,
-				background 150ms ease,
-				color      150ms ease;
+	            background 150ms ease,
+	            color      150ms ease;
 	vertical-align: middle;
 	white-space: nowrap;
 
 	&:hover,
 	&:focus{
 		box-shadow: 0 0 0 1px rgba(50, 50, 50, 0.2) inset,
-					0 1px 3px rgba(0, 0, 0, 0.12),
-					0 1px 2px rgba(0, 0, 0, 0.24);
+		            0 1px 3px rgba(0, 0, 0, 0.12),
+		            0 1px 2px rgba(0, 0, 0, 0.24);
 	}
 
 	&:active{
@@ -59,8 +60,8 @@
 
 		&:hover,
 		&:focus{
-			    box-shadow: 0 0 0 2px $primary inset;
-    			color: $primary;
+			box-shadow: 0 0 0 2px $primary inset;
+			color: $primary;
 		}
 	}
 
@@ -147,7 +148,7 @@
 
 	&.mod-smaller{
 		font-size: $font-smaller;
-		padding: .35rem .55rem;
+		padding: .30rem .50rem;
 	}
 
 	&.mod-small{
@@ -163,6 +164,138 @@
 	&.mod-bigger{
 		font-size: 1.15rem;
 		padding: 1rem 1.5rem;
+	}
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.button{
+
+	&.is-loading{
+		color: transparent;
+		pointer-events: none;
+		user-select: none;
+		opacity: .66;
+
+		@include loading(1rem);
+
+		&.mod-smaller{
+			@include loading(.7rem);
+		}
+
+		&.mod-small{
+			@include loading(.85rem);
+		}
+
+		&.mod-big{
+			@include loading(1.25rem);
+		}
+
+		&.mod-bigger{
+			@include loading(1.5rem);
+		}
+	}
+
+	&.is-success{
+		background: $green;
+		color: transparent;
+		pointer-events: none;
+		user-select: none;
+
+		&:after{
+			content: '\e923';
+			color: white;
+			font-family: 'lucca';
+			font-size: 1.5rem;
+			left: 0;
+			height: 100%;
+			line-height: 100%;
+			position: absolute;
+			right: 0;
+			padding-top: 4%;
+			top: 0;
+			vertical-align: middle;
+		}
+
+		&.mod-smaller{
+
+			&:after{
+				font-size: 1rem;
+			}
+		}
+
+		&.mod-small{
+
+			&:after{
+				font-size: 1.2rem;
+			}
+		}
+
+		&.mod-big{
+
+			&:after{
+				font-size: 1.9rem;
+			}
+		}
+
+		&.mod-bigger{
+
+			&:after{
+				font-size: 2.6rem;
+			}
+		}
+	}
+
+	&.is-error{
+		background: $red;
+		color: transparent;
+		pointer-events: none;
+		user-select: none;
+
+		&:after{
+			content: '\e924';
+			color: white;
+			font-family: 'lucca';
+			font-size: 1.5rem;
+			left: 0;
+			height: 100%;
+			line-height: 100%;
+			position: absolute;
+			right: 0;
+			padding-top: 4%;
+			top: 0;
+			vertical-align: middle;
+		}
+
+		&.mod-smaller{
+
+			&:after{
+				font-size: 1rem;
+			}
+		}
+
+		&.mod-small{
+
+			&:after{
+				font-size: 1.2rem;
+			}
+		}
+
+		&.mod-big{
+
+			&:after{
+				font-size: 1.9rem;
+			}
+		}
+
+		&.mod-bigger{
+
+			&:after{
+				font-size: 2.6rem;
+			}
+		}
 	}
 }
 
