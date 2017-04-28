@@ -50,6 +50,10 @@
 
 .switch-input{
 
+	/*
+		Checked
+	*/
+
 	&:checked ~ .switch-label{
 		color: $grey;
 
@@ -60,6 +64,26 @@
 		&:after{
 			left: 14px;
 			background: $primary;
+		}
+	}
+
+	/*
+		Disabled
+	*/
+
+	&[disabled],
+	&[readonly]{
+
+		~ .switch-label{
+			color: $greyLighter;
+			cursor: not-allowed;
+
+			&:before{
+				background: lighten($greyLight, 25%);
+			}
+			&:after{
+				background: lighten($greyLight, 15%);
+			}
 		}
 	}
 }
