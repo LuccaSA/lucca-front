@@ -1,50 +1,10 @@
 @import
 
-	/* Normalize */
-	'_normalize.scss',
-
-	/* Variables */
-	'variables/breakpoints',
-	'variables/colors',
-	'variables/spacing',
-	'variables/typo',
-
-	/* Base */
+	'normalize',
+	'variables',
 	'typo',
-
-	/* Mixins */
-	'mixins/forms',
-
-	/* Utilities */
-	'utilities/misc',
-	'utilities/spacing',
-	'utilities/text',
-
-	/* Icons */
+	'mixins',
+	'utilities',
 	'icons',
-
-	/* Components */
-	'components/button',
-	'components/callout',
-	'components/card',
-	'components/checkbox',
-	'components/chips',
-	'components/code',
-	'components/container',
-	'components/content-section',
-	'components/form',
-	'components/global',
-	'components/grid',
-	'components/input',
-	'components/label',
-	'components/menu',
-	'components/nav-side',
-	'components/radio',
-	'components/switch',
-	'components/table',
-	'components/textarea',
-	'components/tooltip',
-	'components/title-section',
-
-	/* Shame - Put here the bad code, weirdo */
-	'shame';
+	'components',
+	'shame'; // Shame - Put here the bad code, weirdo
