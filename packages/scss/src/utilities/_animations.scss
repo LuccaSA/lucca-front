@@ -1,0 +1,62 @@
+%base_animated_element {
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	animation-fill-mode: both;
+	animation-duration: 300ms;
+	animation-timing-function: ease-out;
+}
+
+.u-animatedFadeIn {
+	@extend %base_animated_element;
+	animation-name: fadeIn;
+}
+
+.u-animatedScaleIn {
+	@extend %base_animated_element;
+	animation-name: scaleIn;
+}
+
+.u-animatedScaleInTop {
+	@extend %base_animated_element;
+	animation-name: scaleInTop;
+}
+
+.u-animatedScaleInRight {
+	@extend %base_animated_element;
+	animation-name: scaleInRight;
+}
+
+.u-animatedScaleInBottom {
+	@extend %base_animated_element;
+	animation-name: scaleInBottom;
+}
+
+.u-animatedScaleInLeft {
+	@extend %base_animated_element;
+	animation-name: scaleInLeft;
+}
+
+.u-animatedSlideIn, .u-animatedSlideInTop{
+	@extend %base_animated_element;
+	animation-name: slideIn;
+}
+
+.u-animatedSlideInRight{
+	@extend %base_animated_element;
+	animation-name: slideInRight;
+}
+
+.u-animatedSlideInBottom{
+	@extend %base_animated_element;
+	animation-name: slideInBottom;
+}
+
+.u-animatedSlideInLeft{
+	@extend %base_animated_element;
+	animation-name: slideInLeft;
+}
+
+@import
+	"animations/fading",
+	"animations/sliding",
+	"animations/scaling";
