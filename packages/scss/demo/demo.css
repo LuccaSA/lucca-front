@@ -103,10 +103,17 @@
 	padding: .6rem 1rem;
 }
 
-.demo-icon{
+.demo-icon {
 	width: 125px;
 	float: left;
 	margin-bottom: 2rem;
+}
+
+.demo-animation{
+	overflow: hidden;
+	float: left;
+	width: 190px;
+	padding: .6em;
 }
 
 .demo-icon .icon{
