@@ -6,56 +6,63 @@
 	animation-timing-function: ease-out;
 }
 
-.u-animatedFadeIn {
+.u-animatedFadeIn, .u-animatedFadeOut {
 	@extend %base_animated_element;
 	animation-name: fadeIn;
 }
 
-.u-animatedScaleIn {
+.u-animatedScaleIn, .u-animatedScaleOut {
 	@extend %base_animated_element;
 	animation-name: scaleIn;
 }
 
-.u-animatedScaleInTop {
+.u-animatedScaleInTop, .u-animatedScaleOutTop {
 	@extend %base_animated_element;
 	animation-name: scaleInTop;
 }
 
-.u-animatedScaleInRight {
+.u-animatedScaleInRight, .u-animatedScaleOutRight {
 	@extend %base_animated_element;
 	animation-name: scaleInRight;
 }
 
-.u-animatedScaleInBottom {
+.u-animatedScaleInBottom, .u-animatedScaleOutBottom {
 	@extend %base_animated_element;
 	animation-name: scaleInBottom;
 }
 
-.u-animatedScaleInLeft {
+.u-animatedScaleInLeft, .u-animatedScaleOutLeft {
 	@extend %base_animated_element;
 	animation-name: scaleInLeft;
 }
 
-.u-animatedSlideIn, .u-animatedSlideInTop{
+.u-animatedSlideIn, .u-animatedSlideInTop, .u-animatedSlideOut, .u-animatedSlideOutTop {
 	@extend %base_animated_element;
 	animation-name: slideIn;
 }
 
-.u-animatedSlideInRight{
+.u-animatedSlideInRight, .u-animatedSlideOutRight {
 	@extend %base_animated_element;
 	animation-name: slideInRight;
 }
 
-.u-animatedSlideInBottom{
+.u-animatedSlideInBottom, .u-animatedSlideOutBottom {
 	@extend %base_animated_element;
 	animation-name: slideInBottom;
 }
 
-.u-animatedSlideInLeft{
+.u-animatedSlideInLeft, .u-animatedSlideOutLeft {
 	@extend %base_animated_element;
 	animation-name: slideInLeft;
 }
 
+// EXIT ANIMATIONS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.u-animatedFadeOut,
+.u-animatedSlideOut, .u-animatedSlideOutTop, .u-animatedSlideOutRight, .u-animatedSlideOutBottom, .u-animatedSlideOutLeft,
+.u-animatedScaleOut, .u-animatedScaleOutTop, .u-animatedScaleOutRight, .u-animatedScaleOutBottom, .u-animatedScaleOutLeft {
+	animation-direction: reverse;
+}
 @import
 	"animations/fading",
 	"animations/sliding",
