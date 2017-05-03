@@ -63,7 +63,25 @@
 .u-animatedScaleOut, .u-animatedScaleOutTop, .u-animatedScaleOutRight, .u-animatedScaleOutBottom, .u-animatedScaleOutLeft {
 	animation-direction: reverse;
 }
+
+// ATTENTION SEEKERS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.u-animatedPulse {
+	@extend %base_animated_element;
+	animation-iteration-count: 5;
+	animation-name: pulse;
+	animation-direction: alternate;
+}
+
+.u-animatedShake {
+	@extend %base_animated_element;
+	animation-name: shake;
+}
+
+// KEYFRAMES IMPORT
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 @import
+	"animations/attention-seekers",
 	"animations/fading",
-	"animations/sliding",
-	"animations/scaling";
+	"animations/scaling",
+	"animations/sliding";
