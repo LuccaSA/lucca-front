@@ -1,4 +1,4 @@
-.container{
+.container {
 	margin: 0 auto;
 	padding: 0 2rem;
 	width: $xl - 40px;
@@ -24,25 +24,24 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.container{
-
-	&.mod-sm{
+.container {
+	&.mod-sm {
 		max-width: $sm;
 	}
 
-	&.mod-md{
+	&.mod-md {
 		max-width: $md;
 	}
 
-	&.mod-lg{
+	&.mod-lg {
 		max-width: $lg;
 	}
 
-	&.mod-xl{
+	&.mod-xl {
 		max-width: $xl;
 	}
 
-	&.mod-navSide{
+	&.mod-navSide {
 		width: $xl - 170px;
 
 		@media (max-width: $xl) {

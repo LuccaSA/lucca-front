@@ -1,5 +1,5 @@
-.chip{
-	background: #eee;
+.chip {
+	background: #EEEEEE;
 	border-radius: 1rem;
 	display: inline-block;
 	margin: 0 .2rem .3rem 0;
@@ -8,44 +8,43 @@
 	vertical-align: middle;
 }
 
-	.chip-kill{
-		background-color: #ccc;
-		border: 0;
-		border-radius: 50%;
-		bottom: 0;
-		color: white;
-		cursor: pointer;
-		font-size: .8rem;
-		font-weight: bold;
-		height: 1rem;
-		margin: auto;
-		padding: .05rem 0 0 0;
-		position: absolute;
-		right: .5rem;
-		top: 0;
-		transition: 150ms background ease;
-		width: 1rem;
+.chip-kill {
+	background-color: #CCCCCC;
+	border: 0;
+	border-radius: 50%;
+	bottom: 0;
+	color: white;
+	cursor: pointer;
+	font-size: .8rem;
+	font-weight: 700;
+	height: 1rem;
+	margin: auto;
+	padding: .05rem 0 0;
+	position: absolute;
+	right: .5rem;
+	top: 0;
+	transition: 150ms background ease;
+	width: 1rem;
 
-		&:before{
-			font-family: "lucca";
-			content: "\e91b";
-		}
-
-		&:hover{
-			background-color: $red;
-		}
+	&::before {
+		content: "\e91b";
+		font-family: "lucca";
 	}
+
+	&:hover {
+		background-color: $red;
+	}
+}
 
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.chip{
-
-	&.mod-unkillable{
+.chip {
+	&.mod-unkillable {
 		padding: .15rem .75rem;
 
-		.chip-kill{
+		.chip-kill {
 			display: none;
 		}
 	}

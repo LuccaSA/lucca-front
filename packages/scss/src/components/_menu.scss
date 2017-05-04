@@ -1,51 +1,50 @@
-.menu{
+.menu {
 	align-items: center;
 	border-bottom: 1px solid $greySeparator;
 	display: flex;
 }
 
-	.menu-link{
-		color: $grey;
-		margin: 0 1.2rem;
-		opacity: .75;
-		padding: 1.5rem 0;
-		position: relative;
-		text-decoration: none;
-		transition: opacity 250ms ease;
+.menu-link {
+	color: $grey;
+	margin: 0 1.2rem;
+	opacity: .75;
+	padding: 1.5rem 0;
+	position: relative;
+	text-decoration: none;
+	transition: opacity 250ms ease;
 
-		&:after{
-			background: $primary;
-			bottom: -1px;
-			content: '';
-			display: block;
-			height: 3px;
-			left: 0;
-			position: absolute;
-			right: 0;
-			transform: scale(0, 1);
-			transition: transform 250ms ease;
-		}
+	&::after {
+		background: $primary;
+		bottom: -1px;
+		content: "";
+		display: block;
+		height: 3px;
+		left: 0;
+		position: absolute;
+		right: 0;
+		transform: scale(0, 1);
+		transition: transform 250ms ease;
+	}
 
-		&:hover{
-			opacity: 1;
+	&:hover {
+		opacity: 1;
 
-			&:after{
-				transform: scale(1);
-			}
+		&::after {
+			transform: scale(1);
 		}
 	}
+}
 
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.menu-link{
-
-	&.is-active{
+.menu-link {
+	&.is-active {
 		font-weight: 600;
 		opacity: 1;
 
-		&:after{
+		&::after {
 			transform: scale(1);
 		}
 	}

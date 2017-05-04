@@ -1,5 +1,5 @@
-.navSide{
-	background: #666;
+.navSide {
+	background: #666666;
 	font-size: $font-small;
 	height: 100%;
 	left: 0;
@@ -11,61 +11,60 @@
 	width: 130px;
 }
 
-	.navSide-link{
-		color: white;
-		display: block;
-		opacity: .75;
-		padding: 15px 10px;
-		position: relative;
-		text-decoration: none;
-		transition: opacity 150ms ease;
+.navSide-link {
+	color: white;
+	display: block;
+	opacity: .75;
+	padding: 15px 10px;
+	position: relative;
+	text-decoration: none;
+	transition: opacity 150ms ease;
 
-		&:before{
-			background: $primary;
-			bottom:0;
-			content: '';
-			left:0;
-			position: absolute;
-			top:0;
-			transform: scaleY(0);
-			transform-origin: 50%;
-			transition: all 250ms ease;
-			width: 2px;
-		}
-
-		&:hover{
-			opacity: 1;
-
-			&:before{
-				transform: scaleY(1);
-			}
-		}
+	&::before {
+		background: $primary;
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		top: 0;
+		transform: scaleY(0);
+		transform-origin: 50%;
+		transition: all 250ms ease;
+		width: 2px;
 	}
 
-		.navSide-link-alert{
-			background: $primary;
-			color: $grey;
-			position: absolute;
-			font-size: $font-smaller;
-			top: 5px;
-			right: 5px;
-			height: 1rem;
-			line-height: 1rem;
-			padding: 0 .25rem;
-			border-radius: .5rem;
+	&:hover {
+		opacity: 1;
+
+		&::before {
+			transform: scaleY(1);
 		}
+	}
+}
+
+.navSide-link-alert {
+	background: $primary;
+	border-radius: .5rem;
+	color: $grey;
+	font-size: $font-smaller;
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0 .25rem;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
 
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.navSide-link{
-
-	&.is-active{
+.navSide-link {
+	&.is-active {
 		background: #404040;
 		opacity: 1;
 
-		&:before{
+		&::before {
 			transform: scaleY(1);
 		}
 	}

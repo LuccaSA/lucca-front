@@ -1,34 +1,33 @@
 $cardPadding: 1.5rem;
 
-.card{
+.card {
 	background: white;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15),
-	            0 0 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .15),
+							0 0 2px rgba(0, 0, 0, .3);
 	margin-bottom: 1rem;
 	padding: $cardPadding;
 	position: relative;
 }
 
-	.card-footer{
-		align-items: center;
-		border-top: 1px solid $greySeparator;
-		display: flex;
-		margin: $cardPadding (-$cardPadding) (-$cardPadding);
-		min-height: 3rem;
-		padding: .33rem $cardPadding;
-	}
+.card-footer {
+	align-items: center;
+	border-top: 1px solid $greySeparator;
+	display: flex;
+	margin: $cardPadding (-$cardPadding) (-$cardPadding);
+	min-height: 3rem;
+	padding: .33rem $cardPadding;
+}
 
-		.card-footer-right{
-			margin-left: auto;
-		}
+.card-footer-right {
+	margin-left: auto;
+}
 
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.card{
-
-	&.mod-grey{
+.card {
+	&.mod-grey {
 		background: $greyBackground;
 	}
 }

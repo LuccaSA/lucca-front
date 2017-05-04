@@ -1,16 +1,13 @@
-.form{
+.form-group {
+	margin-bottom: 1.7rem;
 }
 
-	.form-group{
-		margin-bottom: 1.7rem;
-	}
+.form-group-label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: .3rem;
+}
 
-		.form-group-label{
-			display: block;
-			font-weight: 600;
-			margin-bottom: .3rem;
-		}
-
-	.form-actions{
-		text-align: right;
-	}
+.form-actions {
+	text-align: right;
+}

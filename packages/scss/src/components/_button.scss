@@ -1,8 +1,8 @@
-.button{
+.button {
 	background: white;
 	border: 0;
 	border-radius: 3px;
-	box-shadow: 0 0 0 1px rgba(50, 50, 50, 0.2) inset;
+	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
 	color: $grey;
 	cursor: pointer;
 	display: inline-block;
@@ -13,24 +13,23 @@
 	position: relative;
 	text-decoration: none;
 	transition: box-shadow 150ms ease,
-	            background 150ms ease,
-	            color      150ms ease;
+							background 150ms ease,
+							color      150ms ease;
 	vertical-align: middle;
 	white-space: nowrap;
 
-	&:hover,
-	&:focus{
-		box-shadow: 0 0 0 1px rgba(50, 50, 50, 0.2) inset,
-		            0 1px 3px rgba(0, 0, 0, 0.12),
-		            0 1px 2px rgba(0, 0, 0, 0.24);
+	&:hover, &:focus {
+		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset,
+								0 1px 3px rgba(0, 0, 0, .12),
+								0 1px 2px rgba(0, 0, 0, .24);
 	}
 
-	&:active{
-		background: #f2f2f2;
-		box-shadow: 0 0 0 1px rgba(50, 50, 50, 0.2) inset;
+	&:active {
+		background: #F2F2F2;
+		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
 		outline: 0;
 
-		&:focus{
+		&:focus {
 			outline: 0;
 		}
 	}
@@ -40,128 +39,123 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.button{
-
+.button {
 	/* Style */
 
-	&.mod-flat{
+	&.mod-flat {
 		background: transparent;
 		box-shadow: none;
 		text-decoration: underline;
 
-		&:hover,
-		&:focus{
+		&:hover, &:focus {
 			color: black;
 		}
 	}
 
-	&.mod-wired{
+	&.mod-wired {
 		background: transparent;
 
-		&:hover,
-		&:focus{
+		&:hover, &:focus {
 			box-shadow: 0 0 0 2px $primary inset;
 			color: $primary;
 		}
 	}
 
-	&.mod-filling{
-
-		&:hover,
-		&:focus{
+	&.mod-filling {
+		&:hover, &:focus {
 			background: $primary;
 		}
 	}
 
 	/* Colors */
 
-	&.mod-primary{
+	&.mod-primary {
 		background: $primary;
 
-		&:active{
+		&:active {
 			background: darken($primary, 5%);
 		}
 	}
 
-	&.mod-secondary{
+	&.mod-secondary {
 		background: $secondary;
 		color: white;
 
-		&:active{
+		&:active {
 			background: darken($secondary, 5%);
 		}
 	}
 
-	&.mod-lucca{
+	&.mod-lucca {
 		background: $lucca;
 
-		&:active{
+		&:active {
 			background: darken($lucca, 5%);
 		}
 	}
 
-	&.mod-grey{
+	&.mod-grey {
 		background: $grey;
 		color: white;
 
-		&:active{
+		&:active {
 			background: darken($grey, 5%);
 		}
 	}
 
-	&.mod-grey-light{
+	&.mod-grey-light {
 		background: $greyLighter;
 
-		&:active{
+		&:active {
 			background: darken($greyLighter, 5%);
 		}
 	}
 
-	&.mod-error{
+	&.mod-error {
 		background: $red;
 		color: white;
 
-		&:active{
+		&:active {
 			background: darken($red, 5%);
 		}
 	}
 
-	&.mod-warning{
+	&.mod-warning {
 		background: $orange;
 		color: white;
 
-		&:active{
+		&:active {
 			background: darken($orange, 5%);
 		}
 	}
 
-	&.mod-success{
+	&.mod-success {
 		background: $green;
 		color: white;
 
-		&:active{
+		&:active {
 			background: darken($green, 5%);
 		}
 	}
 
 	/* Size */
 
-	&.mod-smaller{
+	&.mod-smaller {
 		font-size: $font-smaller;
-		padding: .30rem .50rem;
+		padding: .3rem .5rem;
 	}
 
-	&.mod-small{
+	&.mod-small {
 		font-size: $font-smaller;
-		padding: .45rem .70rem;
+		padding: .45rem .7rem;
 	}
 
-	&.mod-big{
+	&.mod-big {
 		font-size: 1rem;
-		padding: .70rem 1rem;
+		padding: .7rem 1rem;
 	}
 
-	&.mod-bigger{
+	&.mod-bigger {
 		font-size: 1.15rem;
 		padding: 1rem 1.5rem;
 	}
@@ -171,128 +165,118 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.button{
-
-	&.is-loading{
+.button {
+	&.is-loading {
 		color: transparent;
+		@include loading(1rem);
+		opacity: .66;
 		pointer-events: none;
 		user-select: none;
-		opacity: .66;
 
-		@include loading(1rem);
-
-		&.mod-smaller{
+		&.mod-smaller {
 			@include loading(.7rem);
 		}
 
-		&.mod-small{
+		&.mod-small {
 			@include loading(.85rem);
 		}
 
-		&.mod-big{
+		&.mod-big {
 			@include loading(1.25rem);
 		}
 
-		&.mod-bigger{
+		&.mod-bigger {
 			@include loading(1.5rem);
 		}
 	}
 
-	&.is-success{
+	&.is-success {
 		background: $green;
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
 
-		&:after{
-			content: '\e923';
+		&::after {
 			color: white;
-			font-family: 'lucca';
+			content: "\e923";
+			font-family: "lucca";
 			font-size: 1.5rem;
-			left: 0;
 			height: 100%;
+			left: 0;
 			line-height: 100%;
+			padding-top: 4%;
 			position: absolute;
 			right: 0;
-			padding-top: 4%;
 			top: 0;
 			vertical-align: middle;
 		}
 
-		&.mod-smaller{
-
-			&:after{
+		&.mod-smaller {
+			&::after {
 				font-size: 1rem;
 			}
 		}
 
-		&.mod-small{
-
-			&:after{
+		&.mod-small {
+			&::after {
 				font-size: 1.2rem;
 			}
 		}
 
-		&.mod-big{
-
-			&:after{
+		&.mod-big {
+			&::after {
 				font-size: 1.9rem;
 			}
 		}
 
-		&.mod-bigger{
-
-			&:after{
+		&.mod-bigger {
+			&::after {
 				font-size: 2.6rem;
 			}
 		}
 	}
 
-	&.is-error{
+	&.is-error {
 		background: $red;
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
 
-		&:after{
-			content: '\e924';
+		&::after {
 			color: white;
-			font-family: 'lucca';
+			content: "\e924";
+			font-family: "lucca";
 			font-size: 1.5rem;
-			left: 0;
 			height: 100%;
+			left: 0;
 			line-height: 100%;
+			padding-top: 4%;
 			position: absolute;
 			right: 0;
-			padding-top: 4%;
 			top: 0;
 			vertical-align: middle;
 		}
 
-		&.mod-smaller{
-
-			&:after{
+		&.mod-smaller {
+			&::after {
 				font-size: 1rem;
 			}
 		}
 
-		&.mod-small{
-
-			&:after{
+		&.mod-small {
+			&::after {
 				font-size: 1.2rem;
 			}
 		}
 
-		&.mod-big{
-
-			&:after{
+		&.mod-big {
+			&::after {
 				font-size: 1.9rem;
 			}
 		}
 
-		&.mod-bigger{
-
-			&:after{
+		&.mod-bigger {
+			&::after {
 				font-size: 2.6rem;
 			}
 		}
@@ -303,26 +287,25 @@
 // WRAPPER
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.buttons{
+.buttons {
 	display: flex;
 	margin: .2rem;
 
-	.button{
+	.button {
 		border-radius: 0;
 		display: block;
 		margin: 0 0 0 -1px;
 		position: relative;
 
-		&:first-child{
+		&:first-child {
 			border-radius: 3px 0 0 3px;
 		}
 
-		&:last-child{
+		&:last-child {
 			border-radius: 0 3px 3px 0;
 		}
 
-		&:hover,
-		&:focus{
+		&:hover, &:focus {
 			z-index: 1;
 		}
 	}

@@ -1,15 +1,15 @@
-.callout{
+.callout {
 	background: white;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15),
-				0 0 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .15),
+							0 0 2px rgba(0, 0, 0, .3);
 	margin-bottom: .5rem;
 	padding: 1.5rem;
 	position: relative;
 
-	&:before{
-		background: #ccc;
+	&::before {
+		background: #CCCCCC;
 		bottom: -1px;
-		content: '';
+		content: "";
 		display: block;
 		left: -1px;
 		position: absolute;
@@ -22,25 +22,21 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.callout{
-
-	&.mod-success{
-
-		&:before{
+.callout {
+	&.mod-success {
+		&::before {
 			background: $green;
 		}
 	}
 
-	&.mod-warning{
-
-		&:before{
+	&.mod-warning {
+		&::before {
 			background: $orange;
 		}
 	}
 
-	&.mod-error{
-
-		&:before{
+	&.mod-error {
+		&::before {
 			background: $red;
 		}
 	}

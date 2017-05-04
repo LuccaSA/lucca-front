@@ -1,101 +1,95 @@
-.checkbox{
+.checkbox {
 	position: relative;
 }
 
-	.checkbox-input{
-		opacity: 0;
-		pointer-events: none;
+.checkbox-input {
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+
+	&:checked ~ .checkbox-label {
+		&::before {
+			background-color: $primary;
+			box-shadow: inset 0 0 0 2px $primary;
+		}
+
+		&::after {
+			transform: scale(1);
+		}
+	}
+}
+
+.checkbox-label {
+	cursor: pointer;
+	display: inline-block;
+	padding: 0 0 0 1.7rem;
+	transition: color 150ms ease;
+
+	&::before {
+		border-radius: 3px;
+		box-shadow: inset 0 0 0 2px #999999;
+		content: "";
+		display: block;
+		height: .95rem;
+		left: 0;
 		position: absolute;
-
-		&:checked ~ .checkbox-label{
-
-			&:before{
-				background-color: $primary;
-				box-shadow: inset 0 0 0 2px $primary;
-			}
-
-			&:after{
-				transform: scale(1);
-			}
-		}
+		top: .3rem;
+		transition: all 100ms ease;
+		width: .95rem;
 	}
 
-	.checkbox-label{
-		cursor: pointer;
-		display: inline-block;
-		padding: 0 0 0 1.7rem;
-		transition: color 150ms ease;
+	&::after {
+		color: white;
+		content: "\e921";
+		font-family: "lucca";
+		font-size: .8rem;
+		left: 0;
+		line-height: .95rem;
+		padding-top: .05rem;
+		position: absolute;
+		text-align: center;
+		top: .3rem;
+		transform: scale(0);
+		transition: all 100ms ease;
+		width: .95rem;
+	}
 
-		&:before{
-			border-radius: 3px;
-			box-shadow: inset 0 0 0 2px #999;
-			content: '';
-			display: block;
-			height: .95rem;
-			left: 0;
-			position: absolute;
-			top: .3rem;
-			transition: all 100ms ease;
-			width: .95rem;
-		}
+	&:hover {
+		color: black;
 
-		&:after{
-			color: white;
-			content: '\e921';
-			font-family: 'lucca';
-			font-size: .8rem;
-			line-height: .95rem;
-			left: 0;
-			padding-top: .05rem;
-			position: absolute;
-			text-align: center;
-			top: .3rem;
-			transform: scale(0);
-			transition: all 100ms ease;
-			width: .95rem;
-		}
-
-		&:hover{
-			color: black;
-
-			&:before{
-				box-shadow: inset 0 0 0 2px $grey;
-			}
+		&::before {
+			box-shadow: inset 0 0 0 2px $grey;
 		}
 	}
+}
 
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 
-
-.checkbox-input{
-
-	&[disabled]{
-
-		~ .checkbox-label{
+.checkbox-input {
+	&[disabled] {
+		~ .checkbox-label {
 			color: $greyLighter;
 			cursor: not-allowed;
 
-			&:before{
+			&::before {
 				box-shadow: inset 0 0 0 2px $greyLighter;
 			}
 		}
 
-		&:checked ~ .checkbox-label{
-
-			&:before{
+		&:checked ~ .checkbox-label {
+			&::before {
 				background-color: $greyLighter;
 				box-shadow: inset 0 0 0 2px $greyLighter;
 			}
 		}
 	}
 
-	&.is-incomplete ~ .checkbox-label{
-
-		&:after{
-			content: '\e91e';
+	&.is-incomplete ~ .checkbox-label {
+		&::after {
+			content: "\e91e";
 			font-size: .6rem;
 		}
 	}

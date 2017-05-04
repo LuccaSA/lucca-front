@@ -1,10 +1,9 @@
-@mixin loading($size){
-
-	&:before{
-		border: 2px solid rgba(0,0,0,.2);
+@mixin loading($size) {
+	&::before {
+		border: 2px solid rgba(0, 0, 0, .2);
 		border-radius: 50%;
 		bottom: 0;
-		content: '';
+		content: "";
 		display: block;
 		height: $size;
 		left: 0;
@@ -16,20 +15,20 @@
 		width: $size;
 	}
 
-	&:after{
+	&::after {
 		animation: rotating 250ms linear infinite;
-		border: 2px solid rgba(0,0,0,.2);
-		border-color: rgba(0, 0, 0, 0.5) transparent transparent transparent;
+		border: 2px solid rgba(0, 0, 0, .2);
+		border-color: rgba(0, 0, 0, .5) transparent transparent transparent;
 		border-radius: 50%;
 		bottom: 0;
-		content: '';
+		content: "";
 		display: block;
 		height: $size;
 		left: 0;
 		line-height: .8rem;
 		margin: auto;
-		right: 0;
 		position: absolute;
+		right: 0;
 		top: 0;
 		width: $size;
 	}
