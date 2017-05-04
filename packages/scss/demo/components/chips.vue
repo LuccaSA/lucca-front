@@ -1,0 +1,56 @@
+Vue.component('demo-chips', {
+	template: `
+		<section id="chip">
+			<h2 class="demo-divider">Chips</h2>
+
+			<!-- Basics -->
+			<section class="contentSection">
+				<h2>Chips</h2>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+				<div class="chip">
+					John Doe
+					<button class="chip-kill"></button>
+				</div>
+<code class="code mod-block">&lt;div class="chip"&gt;
+...
+&lt;button class="chip-kill"&gt;&lt;/button&gt;
+&lt;/div&gt;
+</code>
+			</section>
+
+			<!-- Unkillable -->
+			<section class="contentSection">
+				<h3>Unkillable</h3>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+				<div class="chip mod-unkillable">
+					John Doe
+				</div>
+<code class="code mod-block">&lt;div class="chip mod-unkillable"&gt;
+...
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> <code class="code">mod-unkillable</code> will hide the deleting button.</em>
+			</section>
+		</section>
+	`
+})
+
