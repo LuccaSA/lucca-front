@@ -1,0 +1,148 @@
+Vue.component('demo-grids', {
+	template: `
+		<section id="grid">
+			<h2 class="demo-divider">Grids</h2>
+
+			<!-- Basics -->
+			<section class="contentSection">
+				<h2>Grid</h2>
+				<div class="grid">
+					<div class="grid-xs6"><div class="demo-grid">grid-xs6</div></div>
+					<div class="grid-xs6"><div class="demo-grid">grid-xs6</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-sm4"><div class="demo-grid">grid-sm4</div></div>
+					<div class="grid-sm8"><div class="demo-grid">grid-sm8</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-md7"><div class="demo-grid">grid-md7</div></div>
+					<div class="grid-md5"><div class="demo-grid">grid-md5</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+					<div class="grid-lg3 grid-md6"><div class="demo-grid">grid-lg3 grid-md6</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-xs6"&gt;...&lt;/div&gt;
+	&lt;div class="grid-xs6"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+			</section>
+
+			<!-- Offsets -->
+			<section class="contentSection">
+				<h3>Offsets</h3>
+				<div class="grid">
+					<div class="grid-xs8 grid-xsOffset4"><div class="demo-grid">grid-xs8 grid-xsOffset4</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-xs6 grid-xsOffset2"><div class="demo-grid">grid-xs3 grid-xsOffset6</div></div>
+					<div class="grid-xs3"><div class="demo-grid">grid-xs3</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-xs8 grid-xsOffset4"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+			</section>
+
+			<!-- Auto width -->
+			<section class="contentSection">
+				<h3>Auto width</h3>
+				<p>You can remove the columns numbers to devide the grid uniformly:</p>
+				<div class="grid">
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+					<div class="grid-md"><div class="demo-grid">grid-md</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-md"&gt;...&lt;/div&gt;
+	&lt;div class="grid-md"&gt;...&lt;/div&gt;
+	...
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+
+			<!-- Horizontal alignment -->
+			<section class="contentSection">
+				<h3>Horizontal alignment</h3>
+				<p>You can align columns horizontaly inside the grid:</p>
+				<div class="grid mod-start-xs">
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-center-xs">
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-end-xs">
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid mod-start-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-center-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-end-xs"&gt;
+	...
+</code>
+				<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+
+			<!-- Vertical alignment -->
+			<section class="contentSection">
+				<h3>Vertical alignment</h3>
+				<p>You can align columns verticaly inside the grid:</p>
+				<div class="grid mod-top-xs">
+					<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-middle-xs">
+					<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+				<div class="grid mod-bottom-xs">
+					<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
+					<div class="grid-xs6"><div class="demo-grid"></div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid mod-top-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-middle-xs"&gt;
+	...
+</code>
+<code class="code mod-block">&lt;div class="grid mod-bottom-xs"&gt;
+	...
+</code>
+			<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+
+			<!-- Reorder -->
+			<section class="contentSection">
+				<h3>Reorder</h3>
+				<p>You can reorder columns with utilities:</p>
+				<div class="grid">
+					<div class="grid-xs3"><div class="demo-grid">1</div></div>
+					<div class="grid-xs3"><div class="demo-grid">2</div></div>
+					<div class="grid-xs3 u-first-xs"><div class="demo-grid">3 u-first-xs</div></div>
+					<div class="grid-xs3"><div class="demo-grid">4</div></div>
+				</div>
+				<div class="grid">
+					<div class="grid-xs3"><div class="demo-grid">1</div></div>
+					<div class="grid-xs3 u-last-xs"><div class="demo-grid">2 u-last-xs</div></div>
+					<div class="grid-xs3"><div class="demo-grid">3</div></div>
+					<div class="grid-xs3"><div class="demo-grid">4</div></div>
+				</div>
+<code class="code mod-block">&lt;div class="grid"&gt;
+	&lt;div class="grid-xs6 u-last-xs"&gt;...&lt;/div&gt;
+	&lt;div class="grid-xs6 u-first-xs"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+			</section>
+		</section>
+	`
+})

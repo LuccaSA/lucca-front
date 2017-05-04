@@ -1,0 +1,44 @@
+Vue.component('demo-forms-switches', {
+	template: `
+	<section id="form-switch">
+		<section class="contentSection">
+				<h2>Switch</h2>
+
+				<!-- Basics -->
+				<div class="grid">
+					<div class="grid-xs4">
+						<div class="form-group">
+							<div class="switch">
+								<input class="switch-input" type="checkbox" id="switch0">
+								<label class="switch-label" for="switch0">Switch</label>
+							</div>
+							<div class="switch">
+								<input class="switch-input" type="checkbox" id="switch1" checked>
+								<label class="switch-label" for="switch1">Switch</label>
+							</div>
+						</div>
+					</div>
+					<div class="grid-xs4">
+						<div class="form-group">
+							<div class="switch">
+								<input class="switch-input" type="checkbox" id="switch2" disabled>
+								<label class="switch-label" for="switch2">Switch</label>
+							</div>
+							<div class="switch">
+								<input class="switch-input" type="checkbox" id="switch3" disabled checked>
+								<label class="switch-label" for="switch3">Switch</label>
+							</div>
+						</div>
+					</div>
+				</div>
+<code class="code mod-block">&lt;div class="switch"&gt;
+	&lt;input class="switch-input" type="checkbox" id="<b>switchID</b>"&gt;
+	&lt;label class="switch-label" for="<b>switchID</b>"&gt;Switch&lt;/label&gt;
+&lt;/div&gt;
+</code>
+				<em><b>Tip:</b> To disable a switch, add a <code class="code">disabled</code> attribute to the checkbox input</em>
+			</section>
+		</section>
+	`
+})
+

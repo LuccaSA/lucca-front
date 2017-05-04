@@ -1,0 +1,104 @@
+Vue.component('demo-buttons', {
+	template: `
+		<section id="button">
+			<h2 class="demo-divider">Buttons</h2>
+
+			<!-- Basics -->
+			<section class="contentSection">
+				<h2>Buttons</h2>
+				<button class="button">Default</button>
+				<button class="button mod-flat">.mod-flat</button>
+				<button class="button mod-wired">.mod-wired</button>
+				<button class="button mod-filling">.mod-filling</button>
+<code class="code mod-block">&lt;button class="button"&gt;...&lt;/button&gt;
+&lt;button class="button mod-flat"&gt;...&lt;/button&gt;
+&lt;button class="button mod-wired"&gt;...&lt;/button&gt;
+&lt;button class="button mod-filling"&gt;...&lt;/button&gt;
+</code>
+				<em><b>Tip:</b> Can be used as <code class="code">&lt;a href="#"&gt;</code>, for links.</em>
+			</section>
+
+			<!-- Colors -->
+			<section class="contentSection">
+				<h3>Colors</h3>
+				<button class="button mod-primary">Primary</button>
+				<button class="button mod-secondary">Secondary</button>
+				<button class="button mod-lucca">Lucca</button>
+				<button class="button mod-grey">Grey</button>
+				<button class="button mod-greyLighter">Light</button>
+				<button class="button mod-error">Error</button>
+				<button class="button mod-warning">Warning</button>
+				<button class="button mod-success">Success</button>
+<code class="code mod-block">&lt;button class="button"&gt;...&lt;/button&gt;
+&lt;button class="button mod-primary"&gt;...&lt;/button&gt;
+&lt;button class="button mod-secondary"&gt;...&lt;/button&gt;
+&lt;button class="button mod-lucca"&gt;...&lt;/button&gt;
+&lt;button class="button mod-grey"&gt;...&lt;/button&gt;
+&lt;button class="button mod-greyLighter"&gt;...&lt;/button&gt;
+&lt;button class="button mod-red"&gt;...&lt;/button&gt;
+&lt;button class="button mod-orange"&gt;...&lt;/button&gt;
+&lt;button class="button mod-green"&gt;...&lt;/button&gt;
+</code>
+			</section>
+
+			<!-- Size -->
+			<section class="contentSection">
+				<h3>Size</h3>
+				<button class="button mod-smaller">Smaller button</button>
+				<button class="button mod-small">Small button</button>
+				<button class="button">Standard button</button>
+				<button class="button mod-big">Big button</button>
+				<button class="button mod-bigger">Bigger button</button>
+<code class="code mod-block">&lt;button class="button mod-smaller"&gt;...&lt;/button&gt;
+&lt;button class="button mod-small"&gt;...&lt;/button&gt;
+&lt;button class="button mod-big"&gt;...&lt;/button&gt;
+&lt;button class="button mod-bigger"&gt;...&lt;/button&gt;
+</code>
+			</section>
+
+			<!-- States -->
+			<section class="contentSection">
+				<h3>States</h3>
+				<button class="button is-loading">Loading</button>
+				<button class="button is-success">Success</button>
+				<button class="button is-error">Success</button>
+<code class="code mod-block">&lt;button class="button is-loading"&gt;...&lt;/button&gt;
+&lt;button class="button is-success"&gt;...&lt;/button&gt;
+&lt;button class="button is-error"&gt;...&lt;/button&gt;
+</code>
+			</section>
+
+			<!-- Groups -->
+			<section class="contentSection">
+				<h3>Group of buttons</h3>
+				<p>You can wrap buttons to have a group of buttons.</p>
+				<div class="buttons">
+					<button class="button">default</button>
+					<button class="button">default</button>
+					<button class="button">default</button>
+					<button class="button">default</button>
+				</div>
+<code class="code mod-block">&lt;div class="buttons"&gt;
+	&lt;button class="button"&gt;...&lt;/button&gt;
+	&lt;button class="button"&gt;...&lt;/button&gt;
+&lt;/div&gt;
+</code>
+			</section>
+			<section class="contentSection">
+				<p>It will also work with button's mods.</p>
+				<div class="buttons u-marginBottomSmall">
+					<button class="button mod-filling">filling</button>
+					<button class="button mod-filling">filling</button>
+					<button class="button mod-filling">filling</button>
+					<button class="button mod-filling">filling</button>
+				</div>
+				<div class="buttons">
+					<button class="button mod-wired">wired</button>
+					<button class="button mod-wired">wired</button>
+					<button class="button mod-wired">wired</button>
+					<button class="button mod-wired">wired</button>
+				</div>
+			</section>
+		</section>
+	`
+})
