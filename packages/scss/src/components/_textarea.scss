@@ -14,8 +14,7 @@
 	line-height: $font-line-standard;
 	outline: 0;
 	padding: .5rem 0;
-	transition: box-shadow 150ms ease,
-							color 150ms ease;
+	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
 
 	&:focus {

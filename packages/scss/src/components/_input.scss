@@ -15,8 +15,7 @@
 	outline: 0;
 	padding: .5rem 0;
 	position: relative;
-	transition: box-shadow 150ms ease,
-							color 150ms ease;
+	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
 
 	&::placeholder {
@@ -56,8 +55,7 @@
 .input-options {
 	background: white;
 	border-radius: 3px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, .2),
-							0 0 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .2), 0 0 3px rgba(0, 0, 0, .3);
 	left: 0;
 	list-style: none;
 	max-height: 15rem;
