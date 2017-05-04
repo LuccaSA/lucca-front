@@ -65,7 +65,7 @@ gulp.task('scss-lint', () => {
 	return gulp.src(["./src/*.scss", "./src/**/*.scss"])
 	.pipe(styleLint({
 		reporters: [
-			{formatter:'verbose', console: true}
+			{formatter:'string', console: true}
 		]
 	}));
 });
