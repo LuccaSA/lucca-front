@@ -1,13 +1,11 @@
 {
 		"remove-empty-rulesets": true,
 		"always-semicolon": true,
-		"color-case": "upper",
 		"block-indent": "\t",
+		"color-case": "upper",
 		"color-shorthand": false,
 		"element-case": "lower",
-		"eof-newline": true,
 		"leading-zero": false,
-		"lines-between-rulesets": 0,
 		"quotes": "double",
 		"sort-order-fallback": "abc",
 		"sort-order": [
@@ -19,8 +17,9 @@
 		"space-after-combinator": " ",
 		"space-between-declarations": "\n",
 		"space-before-opening-brace": " ",
-		"space-after-opening-brace": "\n",
+		"space-after-selector-delimiter": " ",
 		"space-before-selector-delimiter": "",
+		"space-after-opening-brace": "\n",
 		"space-before-closing-brace": "\n",
 		"strip-spaces": true,
 		"unitless-zero": true
