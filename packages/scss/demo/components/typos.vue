@@ -1,7 +1,7 @@
 Vue.component('demo-typos', {
 	template: `
-		<section class="demo-typo">
-			<h2 class="demo-divider" id="typography">Typography</h2>
+		<section id="typography" class="demo-typo">
+			<h2 class="demo-divider">Typography</h2>
 			<section class="titleSection">
 				<h1>H1, bold 2.75rem</h1>
 				<h3 class="titleSection-sub">Hi, I'm a subtitle</h3>

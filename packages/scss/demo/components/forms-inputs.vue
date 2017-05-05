@@ -3,6 +3,8 @@ Vue.component('demo-forms-inputs', {
 		<section id="form-input">
 			<section class="contentSection">
 				<h2>Input</h2>
+
+				<!-- Basics -->
 				<div class="form">
 					<div class="grid">
 						<div class="grid-sm6">
@@ -32,6 +34,8 @@ Vue.component('demo-forms-inputs', {
 			<em><b>Tip:</b> Use <code class="code">&lt;div class="input-field is-filled"&gt;</code> to let the label on the upper state.</em><br>
 			<em><b>Tip:</b> You can use <code class="code">placeholder="..."</code> on <code class="code">input-field</code>.</em>
 			</section>
+
+			<!-- Helpers & Errors -->
 			<section class="contentSection">
 				<h3>Helper / Error</h3>
 				<div class="grid">
@@ -67,6 +71,8 @@ Vue.component('demo-forms-inputs', {
 					</div>
 				</div>
 			</section>
+
+			<!-- Inline inputs -->
 			<section class="contentSection">
 				<h3>Inline</h3>
 				<div class="input mod-inline">
@@ -107,6 +113,8 @@ Vue.component('demo-forms-inputs', {
 					</div>
 				</div>
 			</section>
+
+			<!-- Autocomplete & Select -->
 			<section class="contentSection">
 				<h3>Autocomplete / Select</h3>
 				<div class="form">

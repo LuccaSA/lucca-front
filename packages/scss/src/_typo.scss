@@ -1,4 +1,4 @@
-html{
+html {
 	font-size: 16px;
 }
 
@@ -6,52 +6,52 @@ html{
 	box-sizing: border-box;
 }
 
-body{
+body {
 	background: $greyBackground;
 	color: $grey;
-	font-family: 'Source Sans Pro', Tahoma, sans-serif;
+	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-size: $font-standard;
 	line-height: $font-line-standard;
 	vertical-align: middle;
 }
 
-h1{
+h1 {
 	font-size: $font-biggest;
 	font-weight: 600;
 	line-height: $font-line-biggest;
 	margin: 0 0 1.7rem;
 }
 
-h2{
+h2 {
 	font-size: $font-bigger;
 	font-weight: 600;
 	line-height: $font-line-bigger;
 	margin: 0 0 .9rem;
 }
 
-h3{
+h3 {
 	font-size: $font-big;
 	font-weight: 600;
 	line-height: $font-line-big;
 	margin: 0 0 .7rem;
 }
 
-h4{
+h4 {
 	font-size: $font-standard;
 	font-weight: 600;
 	line-height: $font-line-standard;
 	margin: 0 0 .5rem;
 }
 
-p{
+p {
 	margin: 0 0 1.3rem;
 }
 
 a[href]:not([class]) {
-  color: #00b2ed;
-  text-decoration: underline;
+	color: #00B2ED;
+	text-decoration: underline;
 
-  &:hover{
-  	color: lighten(#00b2ed, 15%);
-  }
+	&:hover {
+		color: lighten(#00B2ED, 15%);
+	}
 }

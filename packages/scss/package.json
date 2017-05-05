@@ -4,8 +4,8 @@
   "description": "a scss-framework based on trello's css naming",
   "main": "src/main.scss",
   "scripts": {
-    "build": "node-sass src/main.scss > dist/lucca-front.css",
-    "start": "nodemon -e scss -x \"npm run build\"",
+    "build": "gulp dist",
+    "start": "gulp",
     "prepublish": "npm run build",
     "publish-test": "echo 'Publishing @lucca-front/scss'"
   },
@@ -29,7 +29,12 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "devDependencies": {
-    "node-sass": "^4.5.2",
-    "nodemon": "^1.11.0"
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-stylelint": "^3.9.0"
   }
 }
