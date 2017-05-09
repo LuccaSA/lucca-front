@@ -1,0 +1,5 @@
+$colors: (
+	primary: #ffcc00,
+);
+
+$luTheme: _set($luTheme, 'palette.colors', $colors);
