@@ -181,11 +181,11 @@
 		cursor: not-allowed;
 	}
 
-	&.is-error{
+	&.is-error {
 		@include formError();
 	}
 
-	&.is-filled{
+	&.is-filled {
 		@include formFilled();
 	}
 }
@@ -202,8 +202,9 @@
 		}
 	}
 
-.input-options-entry {
-	&.is-focus {
-		background: rgba(0, 0, 0, .1);
+	.input-options-entry {
+		&.is-focus {
+			background: rgba(0, 0, 0, .1);
+		}
 	}
 }
