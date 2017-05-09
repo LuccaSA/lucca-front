@@ -25,6 +25,7 @@
   },
   "private": true,
   "scripts": {
-    "publishpackages": "node tools/publish.js"
+    "publishpackages": "node tools/publish.js",
+    "postinstall": "cd tools && node install-packages.js"
   }
 }

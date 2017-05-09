@@ -12,6 +12,9 @@ packages.forEach(pck => {
 	pck.dependencies.forEach(d => {
 		npmRun.execSync(`npm link @lucca-front/${d}`, { cwd: `${__dirname}/../packages/${pck.name}`, stdio: [0, 1, 2] });
 	});
+	// then call npm install
+	npmRun.execSync('npm install', { cwd: `${__dirname}/../packages/${pck.name}`, stdio: [0, 1, 2] });
+
 	// then register the pck with link
 	npmRun.execSync('npm link', { cwd: `${__dirname}/../packages/${pck.name}`, stdio: [0, 1, 2] });
 });
