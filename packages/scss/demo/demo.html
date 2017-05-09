@@ -6,64 +6,15 @@
 		<title>Lucca Front</title>
 		<link rel="icon" type="image/png" href="lucca.png">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
-		<link rel="stylesheet" href="../dist/lucca-front.css">
+		<link rel="stylesheet" href="/dist/lucca-front.css">
 		<link rel="stylesheet" href="demo.css">
 	</head>
-	<body class="demo-body">
-		<aside class="demo-nav">
-			<ul>
-				<li><a href="#typography" class="demo-nav-link">typography</a></li>
-				<li><a href="#button" class="demo-nav-link">buttons</a></li>
-				<li><a href="#form" class="demo-nav-link">forms</a></li>
-				<li><a href="#table" class="demo-nav-link">tables</a></li>
-				<li><a href="#label" class="demo-nav-link">labels</a></li>
-				<li><a href="#chip" class="demo-nav-link">chips</a></li>
-				<li><a href="#grid" class="demo-nav-link">grid</a></li>
-				<li><a href="#card" class="demo-nav-link">card</a></li>
-				<li><a href="#callout" class="demo-nav-link">callout</a></li>
-				<li><a href="#menu" class="demo-nav-link">menu</a></li>
-				<li><a href="#tooltip" class="demo-nav-link">tooltips</a></li>
-				<li><a href="#utilities" class="demo-nav-link">utilities</a></li>
-				<li><a href="#templates" class="demo-nav-link">templates</a></li>
-				<li><a href="#icons" class="demo-nav-link">icons</a></li>
-			</ul>
-		</aside>
-		<section class="container mod-demo" id="demo">
-			<demo-typos></demo-typos>
-			<demo-buttons></demo-buttons>
-			<demo-forms></demo-forms>
-			<demo-tables></demo-tables>
-			<demo-labels></demo-labels>
-			<demo-chips></demo-chips>
-			<demo-grids></demo-grids>
-			<demo-cards></demo-cards>
-			<demo-callouts></demo-callouts>
-			<demo-menus></demo-menus>
-			<demo-tooltips></demo-tooltips>
-			<demo-utilities></demo-utilities>
-			<demo-templates></demo-templates>
-			<demo-icons></demo-icons>
-		</section>
-		<script src="https://unpkg.com/vue"></script>
-		<script src="components/typos.vue"></script>
-		<script src="components/buttons.vue"></script>
-		<script src="components/forms.vue"></script>
-		<script src="components/forms-inputs.vue"></script>
-		<script src="components/forms-textareas.vue"></script>
-		<script src="components/forms-checkboxes.vue"></script>
-		<script src="components/forms-radios.vue"></script>
-		<script src="components/forms-switches.vue"></script>
-		<script src="components/tables.vue"></script>
-		<script src="components/labels.vue"></script>
-		<script src="components/chips.vue"></script>
-		<script src="components/grids.vue"></script>
-		<script src="components/cards.vue"></script>
-		<script src="components/callouts.vue"></script>
-		<script src="components/menus.vue"></script>
-		<script src="components/tooltips.vue"></script>
-		<script src="components/utilities.vue"></script>
-		<script src="components/templates.vue"></script>
-		<script src="components/icons.vue"></script>
-		<script src="app.js"></script>
+	<body>
+		<aside class="demo-nav" w3-include-html="/includes/demo-menu.html"></aside>
+		<section class="container mod-demo" w3-include-html="/includes/demo-main-content.html"></section>
+
+		<script src="https://www.w3schools.com/lib/w3data.js"></script>
+		<script>w3IncludeHTML();</script>
+
 	</body>
 </html>
