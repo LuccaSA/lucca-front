@@ -1,44 +1,4 @@
-@mixin loading($size) {
-	&::before {
-		border: 2px solid rgba(0, 0, 0, .2);
-		border-radius: 50%;
-		bottom: 0;
-		content: "";
-		display: block;
-		height: $size;
-		left: 0;
-		line-height: .8rem;
-		margin: auto;
-		position: absolute;
-		right: 0;
-		top: 0;
-		width: $size;
-	}
+@import
 
-	&::after {
-		animation: rotating 250ms linear infinite;
-		border: 2px solid rgba(0, 0, 0, .2);
-		border-color: rgba(0, 0, 0, .5) transparent transparent transparent;
-		border-radius: 50%;
-		bottom: 0;
-		content: "";
-		display: block;
-		height: $size;
-		left: 0;
-		line-height: .8rem;
-		margin: auto;
-		position: absolute;
-		right: 0;
-		top: 0;
-		width: $size;
-	}
-}
-
-@keyframes rotating {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
+	'mixins/forms',
+	'mixins/loading';

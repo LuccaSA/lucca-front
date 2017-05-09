@@ -17,8 +17,8 @@ Vue.component('demo-forms-inputs', {
 						</div>
 						<div class="grid-sm6">
 							<div class="form-group">
-								<div class="input mod-block is-filled">
-									<input class="input-field" type="text" value="disabled input" disabled>
+								<div class="input mod-block">
+									<input class="input-field is-filled" type="text" value="disabled input" disabled>
 									<label class="input-label">Input label</label>
 								</div>
 							</div>
@@ -26,13 +26,13 @@ Vue.component('demo-forms-inputs', {
 					</div>
 				</div>
 <code class="code mod-block">&lt;div class="input"&gt;
-&lt;input class="input-field" type="text"&gt;
-&lt;label class="input-label"&gt;...&lt;/label&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;
 </code>
-				<em><b>Tip:</b> Use <code class="code">&lt;div class="input mod-block"&gt;</code> for a 100% width input.</em><br>
-				<em><b>Tip:</b> Use <code class="code">&lt;div class="input is-filled"&gt;</code> to let the label on the upper state.</em><br>
-				<em><b>Tip:</b> You can use <code class="code">placeholder="..."</code> on <code class="code">input-field</code>.</em>
+			<em><b>Tip:</b> Use <code class="code">&lt;div class="input mod-block"&gt;</code> for a 100% width input.</em><br>
+			<em><b>Tip:</b> Use <code class="code">&lt;div class="input-field is-filled"&gt;</code> to let the label on the upper state.</em><br>
+			<em><b>Tip:</b> You can use <code class="code">placeholder="..."</code> on <code class="code">input-field</code>.</em>
 			</section>
 
 			<!-- Helpers & Errors -->
@@ -48,24 +48,24 @@ Vue.component('demo-forms-inputs', {
 							</div>
 						</div>
 <code class="code mod-block">&lt;div class="input"&gt;
-&lt;input class="input-field" type="text"&gt;
-&lt;label class="input-label"&gt;...&lt;/label&gt;
-&lt;div class="input-helper"&gt;...&lt;/div&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
+	&lt;div class="input-helper"&gt;...&lt;/div&gt;
 &lt;/div&gt;
 </code>
 					</div>
 					<div class="grid-sm6">
 						<div class="form-group">
-							<div class="input mod-block is-error">
-								<input class="input-field" type="text">
+							<div class="input mod-block">
+								<input class="input-field is-error" type="text">
 								<label class="input-label">Input label</label>
 								<div class="input-error">Oops, there is an error!</div>
 							</div>
 						</div>
-<code class="code mod-block">&lt;div class="input is-error"&gt;
-&lt;input class="input-field" type="text"&gt;
-&lt;label class="input-label"&gt;...&lt;/label&gt;
-&lt;div class="input-error"&gt;...&lt;/div&gt;
+<code class="code mod-block">&lt;div class="input"&gt;
+	&lt;input class="input-field is-error" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
+	&lt;div class="input-error"&gt;...&lt;/div&gt;
 &lt;/div&gt;
 </code>
 					</div>
@@ -92,8 +92,8 @@ Vue.component('demo-forms-inputs', {
 					<label class="input-label">Input label</label>
 				</div>
 <code class="code mod-block">&lt;div class="input mod-inline"&gt;
-&lt;input class="input-field" type="text"&gt;
-&lt;label class="input-label"&gt;...&lt;/label&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;
 </code>
 			</section>
