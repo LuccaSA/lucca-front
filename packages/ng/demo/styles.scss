@@ -1,4 +1,25 @@
+
 @import
 
-  'node_modules/@lucca-front/scss/src/main',
-  '../src/main';
+	'node_modules/@lucca-front/scss/src/normalize',
+	'node_modules/@lucca-front/scss/src/theming',
+	'node_modules/@lucca-front/scss/src/variables',
+	'node_modules/@lucca-front/scss/src/mixins',
+	// 'node_modules/@lucca-front/scss/src/pre-override',
+
+	'theming/override',
+
+	'node_modules/@lucca-front/scss/src/typo',
+	'node_modules/@lucca-front/scss/src/utilities',
+	'node_modules/@lucca-front/scss/src/icons',
+	'node_modules/@lucca-front/scss/src/components',
+	'node_modules/@lucca-front/scss/src/shame',
+	// 'node_modules/@lucca-front/scss/src/post-override',
+
+	'../src/main';
+
+@warn $luTheme;
+
+p {
+	color: _get($luTheme, 'palette.colors.primary') !important;
+}
