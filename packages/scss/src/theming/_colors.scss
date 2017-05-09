@@ -1,5 +1,8 @@
 $colors: (
 	primary: #ffcc00,
+	secondary: #efefef,
 );
 
 $luTheme: _set($luTheme, 'palette.colors', $colors);
+
+
