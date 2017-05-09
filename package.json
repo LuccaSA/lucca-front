@@ -25,6 +25,8 @@
   },
   "private": true,
   "scripts": {
-    "publishpackages": "node tools/publish.js"
+    "publishpackages": "node tools/publish.js",
+    "postinstall": "cd packages/scss && npm i && npm link && cd ../ng && npm link @lucca-front/scss && npm i"
+
   }
 }
