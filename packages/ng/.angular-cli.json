@@ -23,6 +23,12 @@
                 "styles.scss",
                 "../node_modules/prismjs/themes/prism.css"
             ],
+            "stylePreprocessorOptions": {
+                "includePaths": [
+                    "theming",
+                    "../node_modules/@lucca-front/scss/src/theming/overrides"
+                ]
+            },
             "scripts": [],
             "environmentSource": "environments/environment.ts",
             "environments": {

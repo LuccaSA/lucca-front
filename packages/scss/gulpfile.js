@@ -12,11 +12,17 @@ const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
 const SASS_OPTIONS_DEBUG = {
 	outputStyle: 'compressed',
-	sourceMapEmbed: true
+	sourceMapEmbed: true,
+	includePaths: [
+		'src/theming/overrides',
+	]
 };
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
-	sourceMapEmbed: false
+	sourceMapEmbed: false,
+	includePaths: [
+		'src/theming/overrides',
+	]
 };
 const AUTOPREFIXER_OPTIONS = {
 	browsers: ['last 2 versions'],
