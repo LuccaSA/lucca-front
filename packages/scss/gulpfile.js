@@ -70,5 +70,5 @@ gulp.task('scss-lint', () => {
 	}));
 });
 
-gulp.task('dist', ['scss-lint', 'dist:clean', 'sass:dist']);
+gulp.task('dist', ['dist:clean', 'sass:dist']);
 gulp.task('default', ['serve']);
