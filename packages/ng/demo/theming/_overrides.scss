@@ -4,6 +4,3 @@ $colors: (
 );
 
 $luTheme: _set($luTheme, 'palette.colors', $colors);
-
-// // $luTheme: _setVal($luTheme, 'palette.colors.primary', #c0adfef)
-@warn $luTheme;
