@@ -1,3 +1,0 @@
-new Vue({
-	el: '#demo'
-})
