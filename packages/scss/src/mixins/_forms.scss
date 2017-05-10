@@ -1,13 +1,13 @@
-@mixin formError(){
+@mixin formError() {
 	box-shadow: 0 2px 0 0 $red;
 
-	~ .input-label{
+	~ .input-label {
 		color: $red;
 	}
 }
 
-@mixin formFilled(){
-	~ .input-label{
+@mixin formFilled() {
+	~ .input-label {
 		font-size: $font-small;
 		top: 0;
 	}

@@ -1,12 +1,11 @@
 @import
 
-	'normalize',
-	'theming',
-	'variables',
-	'typo',
-	'mixins',
-	'utilities',
-	'icons',
-	'components',
-	'shame'; // Shame - Put here the bad code, weirdo
-
+	"theming",
+	"variables", // will be absorbed by the theming
+	"mixins",
+	"normalize",
+  "typo",
+	"utilities",
+	"icons",
+	"components",
+	"shame"; // Shame - Put here the bad code, weirdo
