@@ -1,0 +1,6 @@
+$colors: (
+	primary: pink,
+	figgo: black,
+);
+
+$luTheme: _set($luTheme, 'palette.colors', $colors);

@@ -1,9 +1,10 @@
 @import
 
-	"normalize",
-	"variables",
-	"typo",
+	"theming",
+	"variables", // will be absorbed by the theming
 	"mixins",
+	"normalize",
+	"typo",
 	"utilities",
 	"icons",
 	"components",

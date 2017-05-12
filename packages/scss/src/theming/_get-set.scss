@@ -1,0 +1,27 @@
+@function _get($theme, $keys) {
+	$keys: str-explode($keys, '.');
+
+	$result: $theme;
+
+	@for $i from 1 through length($keys) {
+		$key: nth($keys, $i);
+		@if (map-has-key($result, $key)) {
+			$result: map-get($result, $key);
+		} @else {
+			@error "There is no #{$key} key in theme map";
+			@return "";
+		}
+	}
+	@return $result;
+}
+
+@function _set($theme, $keys, $map) {
+	$keys: str-explode($keys, '.');
+	$l: length($keys);
+	@for $i from 1 through $l {
+		$key: nth($keys, $l - $i + 1);
+		$map: ($key: $map);
+	}
+	$theme: map-extend($theme, $map, true);
+	@return $theme;
+}

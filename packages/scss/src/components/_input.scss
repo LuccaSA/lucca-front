@@ -203,9 +203,8 @@
 	}
 }
 
-	.input-options-entry {
-		&.is-focus {
-			background: rgba(0, 0, 0, .1);
-		}
+.input-options-entry {
+	&.is-focus {
+		background: rgba(0, 0, 0, .1);
 	}
 }

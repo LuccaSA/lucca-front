@@ -1,4 +1,9 @@
+
 @import
 
-  'node_modules/@lucca-front/scss/src/main',
-  '../src/main';
+	'node_modules/@lucca-front/scss/src/main',
+	'../src/main';
+
+h1 {
+	color: _get($luTheme, 'palette.colors.primary') !important;
+}

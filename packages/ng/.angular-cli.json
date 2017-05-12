@@ -23,6 +23,11 @@
                 "styles.scss",
                 "../node_modules/prismjs/themes/prism.css"
             ],
+            "stylePreprocessorOptions": {
+                "includePaths": [
+                    "theming"
+                ]
+            },
             "scripts": [],
             "environmentSource": "environments/environment.ts",
             "environments": {

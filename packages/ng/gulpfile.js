@@ -50,7 +50,12 @@ gulp.task('build:inline-and-compile', () => {
 
 function compileScss(stylePath, ext, styleFile, callback) {
 	if (ext[0] === '.scss') {
-		let sassObj = sass.renderSync({ file: stylePath });
+		let sassObj = sass.renderSync({ 
+			file: stylePath,
+			includePaths: [
+				'node_modules/@lucca-front/scss/src/overrides',
+			],
+		});
 
 		if (sassObj && sassObj['css']){
 			styleFile = sassObj.css.toString('utf8');
