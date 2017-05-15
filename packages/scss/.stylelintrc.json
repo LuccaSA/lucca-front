@@ -18,7 +18,6 @@
 		"block-opening-brace-space-before": "always",
 		"color-hex-case": "upper",
 		"color-hex-length": "long",
-		"color-named": "always-where-possible",
 		"color-no-invalid-hex": true,
 		"comment-no-empty": true,
 		"comment-whitespace-inside": "always",
