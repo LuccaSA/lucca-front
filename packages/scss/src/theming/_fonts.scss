@@ -1,0 +1,20 @@
+$size: (
+	smaller: .75rem,
+	small: .85rem,
+	standard: 1rem,
+	big: 1.38rem,
+	bigger: 1.94rem,
+	biggest: 2.75rem,
+);
+
+$line: (
+	smaller: 1.618rem,
+	small: 1.618rem,
+	standard: 1.618rem,
+	big: 1.9rem,
+	bigger: 2.4rem,
+	biggest: 3.2rem,
+);
+
+$luTheme: _set($luTheme, "font.size", $size);
+$luTheme: _set($luTheme, "font.line", $line);

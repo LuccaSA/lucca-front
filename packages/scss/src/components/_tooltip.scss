@@ -3,7 +3,7 @@
 	border-radius: 3px;
 	color: white;
 	display: inline-block;
-	font-size: $font-small;
+	font-size: _get($luTheme, "font.size.small");
 	padding: .5rem 1rem;
 	position: relative;
 

@@ -6,7 +6,7 @@
 	color: _get($luTheme, "palette.colors.greyStandard");
 	cursor: pointer;
 	display: inline-block;
-	font-size: $font-small;
+	font-size: _get($luTheme, "font.size.small");
 	line-height: 1;
 	margin: .2rem;
 	padding: .55rem .85rem;
@@ -129,12 +129,12 @@
 	/* Size */
 
 	&.mod-smaller {
-		font-size: $font-smaller;
+		font-size: _get($luTheme, "font.size.smaller");
 		padding: .3rem .5rem;
 	}
 
 	&.mod-small {
-		font-size: $font-smaller;
+		font-size: _get($luTheme, "font.size.smaller");
 		padding: .45rem .7rem;
 	}
 

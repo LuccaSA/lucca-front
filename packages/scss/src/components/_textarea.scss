@@ -11,7 +11,7 @@
 	color: _get($luTheme, "palette.colors.greyStandard");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
-	line-height: $font-line-standard;
+	line-height: _get($luTheme, "font.line.standard");
 	outline: 0;
 	padding: .5rem 0;
 	transition: box-shadow 150ms ease, color 150ms ease;
@@ -22,7 +22,7 @@
 
 		~ .textarea-label {
 			color: _get($luTheme, "palette.colors.primary");
-			font-size: $font-small;
+			font-size: _get($luTheme, "font.size.small");
 			top: 0;
 		}
 	}
@@ -67,7 +67,7 @@
 .textarea {
 	&.is-filled {
 		.textarea-label {
-			font-size: $font-small;
+			font-size: _get($luTheme, "font.size.small");
 			top: 0;
 		}
 	}

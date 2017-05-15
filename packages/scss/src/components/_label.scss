@@ -3,7 +3,7 @@
 	border-radius: 3px;
 	color: _get($luTheme, "palette.colors.greyStandard");
 	display: inline-block;
-	font-size: $font-small;
+	font-size: _get($luTheme, "font.size.small");
 	font-weight: 400;
 	line-height: 1;
 	margin: 0 .3rem;

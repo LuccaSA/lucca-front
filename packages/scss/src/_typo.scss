@@ -10,36 +10,36 @@ body {
 	background: #F5F5F5;
 	color: _get($luTheme, "palette.colors.greyStandard");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
-	font-size: $font-standard;
-	line-height: $font-line-standard;
+	font-size: _get($luTheme, "font.size.standard");
+	line-height: _get($luTheme, "font.line.standard");
 	vertical-align: middle;
 }
 
 h1 {
-	font-size: $font-biggest;
+	font-size: _get($luTheme, "font.size.biggest");
 	font-weight: 600;
-	line-height: $font-line-biggest;
+	line-height: _get($luTheme, "font.line.biggest");
 	margin: 0 0 1.7rem;
 }
 
 h2 {
-	font-size: $font-bigger;
+	font-size: _get($luTheme, "font.size.bigger");
 	font-weight: 600;
-	line-height: $font-line-bigger;
+	line-height: _get($luTheme, "font.line.bigger");
 	margin: 0 0 .9rem;
 }
 
 h3 {
-	font-size: $font-big;
+	font-size: _get($luTheme, "font.size.big");
 	font-weight: 600;
-	line-height: $font-line-big;
+	line-height: _get($luTheme, "font.line.big");
 	margin: 0 0 .7rem;
 }
 
 h4 {
-	font-size: $font-standard;
+	font-size: _get($luTheme, "font.size.standard");
 	font-weight: 600;
-	line-height: $font-line-standard;
+	line-height: _get($luTheme, "font.line.standard");
 	margin: 0 0 .5rem;
 }
 
