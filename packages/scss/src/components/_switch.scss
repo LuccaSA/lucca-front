@@ -10,7 +10,7 @@
 }
 
 .switch-label {
-	color: lighten($grey, 25%);
+	color: lighten(_get($luTheme, "palette.colors.greyStandard"), 25%);
 	cursor: pointer;
 	display: inline-block;
 	padding: 0 0 0 2.7rem;
@@ -54,14 +54,14 @@
 	*/
 
 	&:checked ~ .switch-label {
-		color: $grey;
+		color: _get($luTheme, "palette.colors.greyStandard");
 
 		&::before {
-			background: lighten($primary, 20%);
+			background: lighten(_get($luTheme, "palette.colors.primary"), 20%);
 		}
 
 		&::after {
-			background: $primary;
+			background: _get($luTheme, "palette.colors.primary");
 			left: 14px;
 		}
 	}
@@ -72,14 +72,14 @@
 
 	&[disabled], &[readonly] {
 		~ .switch-label {
-			color: $greyLighter;
+			color: _get($luTheme, "palette.colors.greyLight");
 			cursor: not-allowed;
 
 			&::before {
-				background: lighten($greyLight, 25%);
+				background: lighten(_get($luTheme, "palette.colors.greyLight"), 25%);
 			}
 			&::after {
-				background: lighten($greyLight, 15%);
+				background: lighten(_get($luTheme, "palette.colors.greyLight"), 15%);
 			}
 		}
 	}

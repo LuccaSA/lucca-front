@@ -9,7 +9,7 @@
 
 	&:checked ~ .radio-label {
 		&::before {
-			box-shadow: inset 0 0 0 2px $primary;
+			box-shadow: inset 0 0 0 2px _get($luTheme, "palette.colors.primary");
 		}
 
 		&::after {
@@ -39,7 +39,7 @@
 	}
 
 	&::after {
-		background: $primary;
+		background: _get($luTheme, "palette.colors.primary");
 		border-radius: 50%;
 		color: transparent;
 		content: "";
@@ -57,7 +57,7 @@
 		color: black;
 
 		&::before {
-			box-shadow: inset 0 0 0 2px $grey;
+			box-shadow: inset 0 0 0 2px _get($luTheme, "palette.colors.greyStandard");
 		}
 	}
 }
@@ -69,21 +69,21 @@
 .radio-input {
 	&[disabled] {
 		~ .radio-label {
-			color: $greyLighter;
+			color: _get($luTheme, "palette.colors.greyLight");
 			cursor: not-allowed;
 
 			&::before {
-				box-shadow: inset 0 0 0 2px $greyLighter;
+				box-shadow: inset 0 0 0 2px _get($luTheme, "palette.colors.greyLight");
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				box-shadow: inset 0 0 0 2px $greyLighter;
+				box-shadow: inset 0 0 0 2px _get($luTheme, "palette.colors.greyLight");
 			}
 
 			&::after {
-				background-color: $greyLighter;
+				background-color: _get($luTheme, "palette.colors.greyLight");
 			}
 		}
 	}

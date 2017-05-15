@@ -8,7 +8,7 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: $grey;
+	color: _get($luTheme, "palette.colors.greyStandard");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
 	line-height: $font-line-standard;
@@ -18,10 +18,10 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 $primary;
+		box-shadow: 0 2px 0 0 _get($luTheme, "palette.colors.primary");
 
 		~ .textarea-label {
-			color: $primary;
+			color: _get($luTheme, "palette.colors.primary");
 			font-size: $font-small;
 			top: 0;
 		}
@@ -59,7 +59,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: $greyLighter;
+		color: _get($luTheme, "palette.colors.greyLight");
 		cursor: not-allowed;
 	}
 }

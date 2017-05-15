@@ -1,11 +1,11 @@
 .menu {
 	align-items: center;
-	border-bottom: 1px solid $greySeparator;
+	border-bottom: 1px solid _get($luTheme, "commons.divider");
 	display: flex;
 }
 
 .menu-link {
-	color: $grey;
+	color: _get($luTheme, "palette.colors.greyStandard");
 	margin: 0 1.2rem;
 	opacity: .75;
 	padding: 1.5rem 0;
@@ -14,7 +14,7 @@
 	transition: opacity 250ms ease;
 
 	&::after {
-		background: $primary;
+		background: _get($luTheme, "palette.colors.primary");
 		bottom: -1px;
 		content: "";
 		display: block;

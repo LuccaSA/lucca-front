@@ -1,7 +1,7 @@
 .label {
 	background: #CCCCCC;
 	border-radius: 3px;
-	color: $grey;
+	color: _get($luTheme, "palette.colors.greyStandard");
 	display: inline-block;
 	font-size: $font-small;
 	font-weight: 400;
@@ -19,11 +19,11 @@
 
 .label {
 	&.mod-primary {
-		background: $primary;
+		background: _get($luTheme, "palette.colors.primary");
 	}
 
 	&.mod-secondary {
-		background: $secondary;
+		background: _get($luTheme, "palette.colors.secondary");
 		color: white;
 	}
 }

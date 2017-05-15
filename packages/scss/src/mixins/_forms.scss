@@ -1,8 +1,8 @@
 @mixin formError() {
-	box-shadow: 0 2px 0 0 $red;
+	box-shadow: 0 2px 0 0 _get($luTheme, "palette.colors.error");
 
 	~ .input-label {
-		color: $red;
+		color: _get($luTheme, "palette.colors.error");
 	}
 }
 

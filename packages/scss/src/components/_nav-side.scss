@@ -21,7 +21,7 @@
 	transition: opacity 150ms ease;
 
 	&::before {
-		background: $primary;
+		background: _get($luTheme, "palette.colors.primary");
 		bottom: 0;
 		content: "";
 		left: 0;
@@ -43,9 +43,9 @@
 }
 
 .navSide-link-alert {
-	background: $primary;
+	background: _get($luTheme, "palette.colors.primary");
 	border-radius: .5rem;
-	color: $grey;
+	color: _get($luTheme, "palette.colors.greyStandard");
 	font-size: $font-smaller;
 	height: 1rem;
 	line-height: 1rem;
