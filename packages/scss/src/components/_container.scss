@@ -1,21 +1,21 @@
 .container {
 	margin: 0 auto;
 	padding: 0 2rem;
-	width: $xl - 40px;
+	width: _get($luTheme, "breakpoints.xl") - 40px;
 
-	@media (max-width: $xl) {
-		width: $lg - 40px;
+	@media (max-width: _get($luTheme, "breakpoints.xl")) {
+		width: _get($luTheme, "breakpoints.lg") - 40px;
 	}
 
-	@media (max-width: $lg) {
-		width: $md - 40px;
+	@media (max-width: _get($luTheme, "breakpoints.lg")) {
+		width: _get($luTheme, "breakpoints.md") - 40px;
 	}
 
-	@media (max-width: $md) {
-		width: $sm - 40px;
+	@media (max-width: _get($luTheme, "breakpoints.md")) {
+		width: _get($luTheme, "breakpoints.sm") - 40px;
 	}
 
-	@media (max-width: $sm) {
+	@media (max-width: _get($luTheme, "breakpoints.sm")) {
 		width: 100%;
 	}
 }
@@ -26,34 +26,34 @@
 
 .container {
 	&.mod-sm {
-		max-width: $sm;
+		max-width: _get($luTheme, "breakpoints.sm");
 	}
 
 	&.mod-md {
-		max-width: $md;
+		max-width: _get($luTheme, "breakpoints.md");
 	}
 
 	&.mod-lg {
-		max-width: $lg;
+		max-width: _get($luTheme, "breakpoints.lg");
 	}
 
 	&.mod-xl {
-		max-width: $xl;
+		max-width: _get($luTheme, "breakpoints.xl");
 	}
 
 	&.mod-navSide {
-		width: $xl - 170px;
+		width: _get($luTheme, "breakpoints.xl") - 170px;
 
-		@media (max-width: $xl) {
-			width: $lg - 170px;
+		@media (max-width: _get($luTheme, "breakpoints.xl")) {
+			width: _get($luTheme, "breakpoints.lg") - 170px;
 		}
 
-		@media (max-width: $lg) {
-			width: $md - 170px;
+		@media (max-width: _get($luTheme, "breakpoints.lg")) {
+			width: _get($luTheme, "breakpoints.md") - 170px;
 		}
 
-		@media (max-width: $md) {
-			width: $sm - 170px;
+		@media (max-width: _get($luTheme, "breakpoints.md")) {
+			width: _get($luTheme, "breakpoints.sm") - 170px;
 		}
 	}
 }

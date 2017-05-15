@@ -131,7 +131,7 @@
 
 /* SM - Columns */
 
-@media only screen and (min-width: $sm) {
+@media only screen and (min-width: _get($luTheme, "breakpoints.sm")) {
 	.grid-sm {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -247,7 +247,7 @@
 
 /* MD - Columns */
 
-@media only screen and (min-width: $md) {
+@media only screen and (min-width: _get($luTheme, "breakpoints.md")) {
 	.grid-md {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -363,7 +363,7 @@
 
 /* LG - Columns */
 
-@media only screen and (min-width: $lg) {
+@media only screen and (min-width: _get($luTheme, "breakpoints.lg")) {
 	.grid-lg {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -525,7 +525,7 @@
 
 	/* SM - Mods */
 
-	@media only screen and (min-width: $sm) {
+	@media only screen and (min-width: _get($luTheme, "breakpoints.sm")) {
 		.mod-start-sm {
 			justify-content: flex-start;
 			text-align: start;
@@ -564,7 +564,7 @@
 
 	/* MD - Mods */
 
-	@media only screen and (min-width: $md) {
+	@media only screen and (min-width: _get($luTheme, "breakpoints.md")) {
 		.mod-start-md {
 			justify-content: flex-start;
 			text-align: start;
@@ -603,7 +603,7 @@
 
 	/* LG - Mods */
 
-	@media only screen and (min-width: $lg) {
+	@media only screen and (min-width: _get($luTheme, "breakpoints.lg")) {
 		.mod-start-lg {
 			justify-content: flex-start;
 			text-align: start;
