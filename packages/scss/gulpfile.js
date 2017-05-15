@@ -14,14 +14,14 @@ const SASS_OPTIONS_DEBUG = {
 	outputStyle: 'compressed',
 	sourceMapEmbed: true,
 	includePaths: [
-		'src/theming/overrides',
+		'src/overrides',
 	]
 };
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
 	sourceMapEmbed: false,
 	includePaths: [
-		'src/theming/overrides',
+		'src/overrides',
 	]
 };
 const AUTOPREFIXER_OPTIONS = {
