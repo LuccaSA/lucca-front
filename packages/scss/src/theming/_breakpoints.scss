@@ -7,4 +7,4 @@ $breakpoints: (
 	xxl: 1500px,
 	xxxl: 1650px,
 );
-$luTheme: _set($luTheme, 'breakpoints', $breakpoints);
+$luTheme: _set($luTheme, "breakpoints", $breakpoints);

@@ -1,0 +1,25 @@
+@function _get($keys) {
+	$keys: str-explode($keys, '.');
+
+	$result: ();
+	$themeVar: nth($keys, 1);
+	@if ($themeVar == 'lui') {
+		$result: $luiTheme;
+	} @else if ($themeVar == 'timmi') {
+		$result: $timmi;
+	} @else {
+		@error "Theme variable #{$themeVar} does not exist !";
+		@return "";
+	}
+
+	@for $i from 2 through length($keys) {
+		$key: nth($keys, $i);
+		@if (map-has-key($result, $key)) {
+			$result: map-get($result, $key);
+		} @else {
+			@error "There is no #{$key} key in theme map";
+			@return "";
+		}
+	}
+	@return $result;
+}
