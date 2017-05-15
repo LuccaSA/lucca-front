@@ -19,7 +19,7 @@
 	width: 100%;
 
 	&::placeholder {
-		color: _get($luTheme, "palette.colors.greyLight");
+		color: #CCCCCC;
 		opacity: 0;
 		transition: opacity 150ms ease;
 	}
