@@ -18,29 +18,29 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textGrey {
-	color: _get($luTheme, "palette.colors.grey") !important;
+	color: _theme("palette.colors.grey") !important;
 }
 
 .u-textPrimary {
-	color: _get($luTheme, "palette.colors.primary") !important;
+	color: _theme("palette.colors.primary") !important;
 }
 
 .u-textSecondary {
-	color: _get($luTheme, "palette.colors.secondary") !important;
+	color: _theme("palette.colors.secondary") !important;
 }
 
 .u-textLight {
-	color: _get($luTheme, "palette.colors.light") !important;
+	color: _theme("palette.colors.light") !important;
 }
 
 .u-textGreen {
-	color: _get($luTheme, "palette.colors.success") !important;
+	color: _theme("palette.colors.success") !important;
 }
 
 .u-textOrange {
-	color: _get($luTheme, "palette.colors.warning") !important;
+	color: _theme("palette.colors.warning") !important;
 }
 
 .u-textRed {
-	color: _get($luTheme, "palette.colors.error") !important;
+	color: _theme("palette.colors.error") !important;
 }

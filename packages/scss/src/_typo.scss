@@ -8,38 +8,38 @@ html {
 
 body {
 	background: #F5F5F5;
-	color: _get($luTheme, "palette.colors.grey");
+	color: _theme("palette.colors.grey");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
-	font-size: _get($luTheme, "font.size.standard");
-	line-height: _get($luTheme, "font.line.standard");
+	font-size: _theme("font.size.standard");
+	line-height: _theme("font.line.standard");
 	vertical-align: middle;
 }
 
 h1 {
-	font-size: _get($luTheme, "font.size.biggest");
+	font-size: _theme("font.size.biggest");
 	font-weight: 600;
-	line-height: _get($luTheme, "font.line.biggest");
+	line-height: _theme("font.line.biggest");
 	margin: 0 0 1.7rem;
 }
 
 h2 {
-	font-size: _get($luTheme, "font.size.bigger");
+	font-size: _theme("font.size.bigger");
 	font-weight: 600;
-	line-height: _get($luTheme, "font.line.bigger");
+	line-height: _theme("font.line.bigger");
 	margin: 0 0 .9rem;
 }
 
 h3 {
-	font-size: _get($luTheme, "font.size.big");
+	font-size: _theme("font.size.big");
 	font-weight: 600;
-	line-height: _get($luTheme, "font.line.big");
+	line-height: _theme("font.line.big");
 	margin: 0 0 .7rem;
 }
 
 h4 {
-	font-size: _get($luTheme, "font.size.standard");
+	font-size: _theme("font.size.standard");
 	font-weight: 600;
-	line-height: _get($luTheme, "font.line.standard");
+	line-height: _theme("font.line.standard");
 	margin: 0 0 .5rem;
 }
 

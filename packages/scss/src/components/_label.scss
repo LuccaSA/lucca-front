@@ -1,9 +1,9 @@
 .label {
 	background: #CCCCCC;
 	border-radius: 3px;
-	color: _get($luTheme, "palette.colors.grey");
+	color: _theme("palette.colors.grey");
 	display: inline-block;
-	font-size: _get($luTheme, "font.size.small");
+	font-size: _theme("font.size.small");
 	font-weight: 400;
 	line-height: 1;
 	margin: 0 .3rem;
@@ -19,11 +19,11 @@
 
 .label {
 	&.mod-primary {
-		background: _get($luTheme, "palette.colors.primary");
+		background: _theme("palette.colors.primary");
 	}
 
 	&.mod-secondary {
-		background: _get($luTheme, "palette.colors.secondary");
+		background: _theme("palette.colors.secondary");
 		color: white;
 	}
 }

@@ -32,7 +32,7 @@
 	}
 
 	&:hover {
-		background-color: _get($luTheme, "palette.colors.error");
+		background-color: _theme("palette.colors.error");
 	}
 }
 

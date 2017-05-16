@@ -10,7 +10,7 @@ $cardPadding: 1.5rem;
 
 .card-footer {
 	align-items: center;
-	border-top: 1px solid _get($luTheme, "commons.divider");
+	border-top: 1px solid _theme("commons.divider");
 	display: flex;
 	margin: $cardPadding (-$cardPadding) (-$cardPadding);
 	min-height: 3rem;

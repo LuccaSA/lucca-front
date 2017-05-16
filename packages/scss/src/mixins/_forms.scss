@@ -1,14 +1,14 @@
 @mixin formError() {
-	box-shadow: 0 2px 0 0 _get($luTheme, "palette.colors.error");
+	box-shadow: 0 2px 0 0 _theme("palette.colors.error");
 
 	~ .input-label {
-		color: _get($luTheme, "palette.colors.error");
+		color: _theme("palette.colors.error");
 	}
 }
 
 @mixin formFilled() {
 	~ .input-label {
-		font-size: _get($luTheme, "font.size.small");
+		font-size: _theme("font.size.small");
 		top: 0;
 	}
 }

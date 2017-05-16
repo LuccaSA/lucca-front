@@ -1,8 +1,8 @@
 .table {
-	border-bottom: 1px solid _get($luTheme, "commons.divider");
+	border-bottom: 1px solid _theme("commons.divider");
 	border-collapse: collapse;
 	border-spacing: 0;
-	border-top: 1px solid _get($luTheme, "commons.divider");
+	border-top: 1px solid _theme("commons.divider");
 	display: table;
 	font-size: .9rem;
 	text-align: left;
@@ -33,7 +33,7 @@
 }
 
 .table-body-row-cell {
-	border-top: 1px solid _get($luTheme, "commons.divider");
+	border-top: 1px solid _theme("commons.divider");
 	display: table-cell;
 	padding: .5em 1em;
 }
@@ -53,7 +53,7 @@
 
 	&.mod-clickable {
 		.table-body-row {
-			color: _get($luTheme, "palette.colors.grey");
+			color: _theme("palette.colors.grey");
 			text-decoration: none;
 			transition: all 150ms ease;
 

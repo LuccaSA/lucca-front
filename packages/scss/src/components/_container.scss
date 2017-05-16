@@ -1,21 +1,21 @@
 .container {
 	margin: 0 auto;
 	padding: 0 2rem;
-	width: _get($luTheme, "breakpoints.xl") - 40px;
+	width: _theme("breakpoints.xl") - 40px;
 
-	@media (max-width: _get($luTheme, "breakpoints.xl")) {
-		width: _get($luTheme, "breakpoints.lg") - 40px;
+	@media (max-width: _theme("breakpoints.xl")) {
+		width: _theme("breakpoints.lg") - 40px;
 	}
 
-	@media (max-width: _get($luTheme, "breakpoints.lg")) {
-		width: _get($luTheme, "breakpoints.md") - 40px;
+	@media (max-width: _theme("breakpoints.lg")) {
+		width: _theme("breakpoints.md") - 40px;
 	}
 
-	@media (max-width: _get($luTheme, "breakpoints.md")) {
-		width: _get($luTheme, "breakpoints.sm") - 40px;
+	@media (max-width: _theme("breakpoints.md")) {
+		width: _theme("breakpoints.sm") - 40px;
 	}
 
-	@media (max-width: _get($luTheme, "breakpoints.sm")) {
+	@media (max-width: _theme("breakpoints.sm")) {
 		width: 100%;
 	}
 }
@@ -26,34 +26,34 @@
 
 .container {
 	&.mod-sm {
-		max-width: _get($luTheme, "breakpoints.sm");
+		max-width: _theme("breakpoints.sm");
 	}
 
 	&.mod-md {
-		max-width: _get($luTheme, "breakpoints.md");
+		max-width: _theme("breakpoints.md");
 	}
 
 	&.mod-lg {
-		max-width: _get($luTheme, "breakpoints.lg");
+		max-width: _theme("breakpoints.lg");
 	}
 
 	&.mod-xl {
-		max-width: _get($luTheme, "breakpoints.xl");
+		max-width: _theme("breakpoints.xl");
 	}
 
 	&.mod-navSide {
-		width: _get($luTheme, "breakpoints.xl") - 170px;
+		width: _theme("breakpoints.xl") - 170px;
 
-		@media (max-width: _get($luTheme, "breakpoints.xl")) {
-			width: _get($luTheme, "breakpoints.lg") - 170px;
+		@media (max-width: _theme("breakpoints.xl")) {
+			width: _theme("breakpoints.lg") - 170px;
 		}
 
-		@media (max-width: _get($luTheme, "breakpoints.lg")) {
-			width: _get($luTheme, "breakpoints.md") - 170px;
+		@media (max-width: _theme("breakpoints.lg")) {
+			width: _theme("breakpoints.md") - 170px;
 		}
 
-		@media (max-width: _get($luTheme, "breakpoints.md")) {
-			width: _get($luTheme, "breakpoints.sm") - 170px;
+		@media (max-width: _theme("breakpoints.md")) {
+			width: _theme("breakpoints.sm") - 170px;
 		}
 	}
 }

@@ -24,19 +24,19 @@
 .callout {
 	&.mod-success {
 		&::before {
-			background: _get($luTheme, "palette.colors.success");
+			background: _theme("palette.colors.success");
 		}
 	}
 
 	&.mod-warning {
 		&::before {
-			background: _get($luTheme, "palette.colors.warning");
+			background: _theme("palette.colors.warning");
 		}
 	}
 
 	&.mod-error {
 		&::before {
-			background: _get($luTheme, "palette.colors.error");
+			background: _theme("palette.colors.error");
 		}
 	}
 }

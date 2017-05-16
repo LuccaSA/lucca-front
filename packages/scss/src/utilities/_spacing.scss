@@ -10,105 +10,105 @@
 /* Margin bottom */
 
 .u-marginBottomTiny {
-	margin-bottom: _get($luTheme, "spacing.tiny") !important;
+	margin-bottom: _theme("spacing.tiny") !important;
 }
 
 .u-marginBottomSmall {
-	margin-bottom: _get($luTheme, "spacing.small") !important;
+	margin-bottom: _theme("spacing.small") !important;
 }
 
 .u-marginBottomStandard {
-	margin-bottom: _get($luTheme, "spacing.standard") !important;
+	margin-bottom: _theme("spacing.standard") !important;
 }
 
 .u-marginBottomBig {
-	margin-bottom: _get($luTheme, "spacing.big") !important;
+	margin-bottom: _theme("spacing.big") !important;
 }
 
 .u-marginBottomBigger {
-	margin-bottom: _get($luTheme, "spacing.bigger") !important;
+	margin-bottom: _theme("spacing.bigger") !important;
 }
 
 .u-marginBottomBiggest {
-	margin-bottom: _get($luTheme, "spacing.biggest") !important;
+	margin-bottom: _theme("spacing.biggest") !important;
 }
 
 /* Margin top */
 
 .u-marginTopTiny {
-	margin-top: _get($luTheme, "spacing.tiny") !important;
+	margin-top: _theme("spacing.tiny") !important;
 }
 
 .u-marginTopSmall {
-	margin-top: _get($luTheme, "spacing.small") !important;
+	margin-top: _theme("spacing.small") !important;
 }
 
 .u-marginTopStandard {
-	margin-top: _get($luTheme, "spacing.standard") !important;
+	margin-top: _theme("spacing.standard") !important;
 }
 
 .u-marginTopBig {
-	margin-top: _get($luTheme, "spacing.big") !important;
+	margin-top: _theme("spacing.big") !important;
 }
 
 .u-marginTopBigger {
-	margin-top: _get($luTheme, "spacing.bigger") !important;
+	margin-top: _theme("spacing.bigger") !important;
 }
 
 .u-marginTopBiggest {
-	margin-top: _get($luTheme, "spacing.biggest") !important;
+	margin-top: _theme("spacing.biggest") !important;
 }
 
 /* Margin left */
 
 .u-marginLeftTiny {
-	margin-left: _get($luTheme, "spacing.tiny") !important;
+	margin-left: _theme("spacing.tiny") !important;
 }
 
 .u-marginLeftSmall {
-	margin-left: _get($luTheme, "spacing.small") !important;
+	margin-left: _theme("spacing.small") !important;
 }
 
 .u-marginLeftStandard {
-	margin-left: _get($luTheme, "spacing.standard") !important;
+	margin-left: _theme("spacing.standard") !important;
 }
 
 .u-marginLeftBig {
-	margin-left: _get($luTheme, "spacing.big") !important;
+	margin-left: _theme("spacing.big") !important;
 }
 
 .u-marginLeftBigger {
-	margin-left: _get($luTheme, "spacing.bigger") !important;
+	margin-left: _theme("spacing.bigger") !important;
 }
 
 .u-marginLeftBiggest {
-	margin-left: _get($luTheme, "spacing.biggest") !important;
+	margin-left: _theme("spacing.biggest") !important;
 }
 
 /* Margin right */
 
 .u-marginRightTiny {
-	margin-right: _get($luTheme, "spacing.tiny") !important;
+	margin-right: _theme("spacing.tiny") !important;
 }
 
 .u-marginRightSmall {
-	margin-right: _get($luTheme, "spacing.small") !important;
+	margin-right: _theme("spacing.small") !important;
 }
 
 .u-marginRightStandard {
-	margin-right: _get($luTheme, "spacing.standard") !important;
+	margin-right: _theme("spacing.standard") !important;
 }
 
 .u-marginRightBig {
-	margin-right: _get($luTheme, "spacing.big") !important;
+	margin-right: _theme("spacing.big") !important;
 }
 
 .u-marginRightBigger {
-	margin-right: _get($luTheme, "spacing.bigger") !important;
+	margin-right: _theme("spacing.bigger") !important;
 }
 
 .u-marginRightBiggest {
-	margin-right: _get($luTheme, "spacing.biggest") !important;
+	margin-right: _theme("spacing.biggest") !important;
 }
 
 
@@ -118,53 +118,53 @@
 /* Padding bottom */
 
 .u-paddingBottomTiny {
-	padding-bottom: _get($luTheme, "spacing.tiny") !important;
+	padding-bottom: _theme("spacing.tiny") !important;
 }
 
 .u-paddingBottomSmall {
-	padding-bottom: _get($luTheme, "spacing.small") !important;
+	padding-bottom: _theme("spacing.small") !important;
 }
 
 .u-paddingBottomStandard {
-	padding-bottom: _get($luTheme, "spacing.standard") !important;
+	padding-bottom: _theme("spacing.standard") !important;
 }
 
 .u-paddingBottomBig {
-	padding-bottom: _get($luTheme, "spacing.big") !important;
+	padding-bottom: _theme("spacing.big") !important;
 }
 
 .u-paddingBottomBigger {
-	padding-bottom: _get($luTheme, "spacing.bigger") !important;
+	padding-bottom: _theme("spacing.bigger") !important;
 }
 
 .u-paddingBottomBiggest {
-	padding-bottom: _get($luTheme, "spacing.biggest") !important;
+	padding-bottom: _theme("spacing.biggest") !important;
 }
 
 /* Padding top */
 
 .u-paddingTopTiny {
-	padding-top: _get($luTheme, "spacing.tiny") !important;
+	padding-top: _theme("spacing.tiny") !important;
 }
 
 .u-paddingTopSmall {
-	padding-top: _get($luTheme, "spacing.small") !important;
+	padding-top: _theme("spacing.small") !important;
 }
 
 .u-paddingTopStandard {
-	padding-top: _get($luTheme, "spacing.standard") !important;
+	padding-top: _theme("spacing.standard") !important;
 }
 
 .u-paddingTopBig {
-	padding-top: _get($luTheme, "spacing.big") !important;
+	padding-top: _theme("spacing.big") !important;
 }
 
 .u-paddingTopBigger {
-	padding-top: _get($luTheme, "spacing.bigger") !important;
+	padding-top: _theme("spacing.bigger") !important;
 }
 
 .u-paddingTopBiggest {
-	padding-top: _get($luTheme, "spacing.biggest") !important;
+	padding-top: _theme("spacing.biggest") !important;
 }
 
 /*
@@ -172,27 +172,27 @@
 */
 
 .u-paddingLeftTiny {
-	padding-left: _get($luTheme, "spacing.tiny") !important;
+	padding-left: _theme("spacing.tiny") !important;
 }
 
 .u-paddingLeftSmall {
-	padding-left: _get($luTheme, "spacing.small") !important;
+	padding-left: _theme("spacing.small") !important;
 }
 
 .u-paddingLeftStandard {
-	padding-left: _get($luTheme, "spacing.standard") !important;
+	padding-left: _theme("spacing.standard") !important;
 }
 
 .u-paddingLeftBig {
-	padding-left: _get($luTheme, "spacing.big") !important;
+	padding-left: _theme("spacing.big") !important;
 }
 
 .u-paddingLeftBigger {
-	padding-left: _get($luTheme, "spacing.bigger") !important;
+	padding-left: _theme("spacing.bigger") !important;
 }
 
 .u-paddingLeftBiggest {
-	padding-left: _get($luTheme, "spacing.biggest") !important;
+	padding-left: _theme("spacing.biggest") !important;
 }
 
 /*
@@ -200,25 +200,25 @@
 */
 
 .u-paddingRightTiny {
-	padding-right: _get($luTheme, "spacing.tiny") !important;
+	padding-right: _theme("spacing.tiny") !important;
 }
 
 .u-paddingRightSmall {
-	padding-right: _get($luTheme, "spacing.small") !important;
+	padding-right: _theme("spacing.small") !important;
 }
 
 .u-paddingRightStandard {
-	padding-right: _get($luTheme, "spacing.standard") !important;
+	padding-right: _theme("spacing.standard") !important;
 }
 
 .u-paddingRightBig {
-	padding-right: _get($luTheme, "spacing.big") !important;
+	padding-right: _theme("spacing.big") !important;
 }
 
 .u-paddingRightBigger {
-	padding-right: _get($luTheme, "spacing.bigger") !important;
+	padding-right: _theme("spacing.bigger") !important;
 }
 
 .u-paddingRightBiggest {
-	padding-right: _get($luTheme, "spacing.biggest") !important;
+	padding-right: _theme("spacing.biggest") !important;
 }
