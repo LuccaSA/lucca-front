@@ -1,10 +1,10 @@
 $spacing: (
-	tiny: 7px,
-	small: 15px,
-	standard: 30px,
-	big: 45px,
-	bigger: 60px,
-	biggest: 90px,
+	"tiny": 7px,
+	"small": 15px,
+	"standard": 30px,
+	"big": 45px,
+	"bigger": 60px,
+	"biggest": 90px,
 );
 
 $luTheme: _set($luTheme, "spacing", $spacing);
