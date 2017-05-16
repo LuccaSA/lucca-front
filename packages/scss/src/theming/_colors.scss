@@ -4,8 +4,8 @@ $colors: (
 	success: #5CB85C,
 	warning: #FF9900,
 	error: #FF3300,
-	greyStandard: #666666,
-	greyLight: #999999,
+	grey: #666666,
+	light: #999999,
 );
 
 $luTheme: _set($luTheme, "palette.colors", $colors);

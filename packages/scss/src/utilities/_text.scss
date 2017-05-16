@@ -18,7 +18,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textGrey {
-	color: _get($luTheme, "palette.colors.greyStandard") !important;
+	color: _get($luTheme, "palette.colors.grey") !important;
 }
 
 .u-textPrimary {
@@ -30,7 +30,7 @@
 }
 
 .u-textLight {
-	color: _get($luTheme, "palette.colors.greyLight") !important;
+	color: _get($luTheme, "palette.colors.light") !important;
 }
 
 .u-textGreen {

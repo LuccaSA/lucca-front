@@ -8,7 +8,7 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: _get($luTheme, "palette.colors.greyStandard");
+	color: _get($luTheme, "palette.colors.grey");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
 	line-height: _get($luTheme, "font.line.standard");
@@ -59,7 +59,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: _get($luTheme, "palette.colors.greyLight");
+		color: _get($luTheme, "palette.colors.light");
 		cursor: not-allowed;
 	}
 }

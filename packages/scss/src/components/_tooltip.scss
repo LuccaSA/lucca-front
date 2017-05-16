@@ -1,5 +1,5 @@
 .tooltip {
-	background: _get($luTheme, "palette.colors.greyStandard");
+	background: _get($luTheme, "palette.colors.grey");
 	border-radius: 3px;
 	color: white;
 	display: inline-block;
@@ -8,7 +8,7 @@
 	position: relative;
 
 	&::before {
-		border-color: _get($luTheme, "palette.colors.greyStandard") transparent transparent transparent;
+		border-color: _get($luTheme, "palette.colors.grey") transparent transparent transparent;
 		border-style: solid;
 		border-width: 7px 7px 0;
 		bottom: -6px;
@@ -25,7 +25,7 @@
 .tooltip {
 	&.mod-primary {
 		background: _get($luTheme, "palette.colors.primary");
-		color: _get($luTheme, "palette.colors.greyStandard");
+		color: _get($luTheme, "palette.colors.grey");
 
 		&::before {
 			border-color: _get($luTheme, "palette.colors.primary") transparent transparent transparent;

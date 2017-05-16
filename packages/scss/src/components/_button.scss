@@ -3,7 +3,7 @@
 	border: 0;
 	border-radius: 3px;
 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: _get($luTheme, "palette.colors.greyStandard");
+	color: _get($luTheme, "palette.colors.grey");
 	cursor: pointer;
 	display: inline-block;
 	font-size: _get($luTheme, "font.size.small");
@@ -83,19 +83,19 @@
 	}
 
 	&.mod-grey {
-		background: _get($luTheme, "palette.colors.greyStandard");
+		background: _get($luTheme, "palette.colors.grey");
 		color: white;
 
 		&:active {
-			background: darken(_get($luTheme, "palette.colors.greyStandard"), 5%);
+			background: darken(_get($luTheme, "palette.colors.grey"), 5%);
 		}
 	}
 
-	&.mod-grey-light {
-		background: _get($luTheme, "palette.colors.greyLight");
+	&.mod-light {
+		background: _get($luTheme, "palette.colors.light");
 
 		&:active {
-			background: darken(_get($luTheme, "palette.colors.greyLight"), 5%);
+			background: darken(_get($luTheme, "palette.colors.light"), 5%);
 		}
 	}
 

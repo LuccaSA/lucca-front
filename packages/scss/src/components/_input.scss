@@ -8,7 +8,7 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: _get($luTheme, "palette.colors.greyStandard");
+	color: _get($luTheme, "palette.colors.grey");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
 	margin-bottom: .15rem;
@@ -88,7 +88,7 @@
 }
 
 .input-helper {
-	color: _get($luTheme, "palette.colors.greyLight");
+	color: _get($luTheme, "palette.colors.light");
 	font-size: _get($luTheme, "font.size.small");
 	margin: 0;
 }
@@ -127,7 +127,7 @@
 
 		&::after {
 			bottom: .15rem;
-			color: _get($luTheme, "palette.colors.greyLight");
+			color: _get($luTheme, "palette.colors.light");
 			content: "\e918";
 			font-family: lucca;
 			position: absolute;
@@ -156,7 +156,7 @@
 
 		&::after {
 			bottom: .15rem;
-			color: _get($luTheme, "palette.colors.greyLight");
+			color: _get($luTheme, "palette.colors.light");
 			content: "\e918";
 			font-family: lucca;
 			position: absolute;
@@ -177,7 +177,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: _get($luTheme, "palette.colors.greyLight");
+		color: _get($luTheme, "palette.colors.light");
 		cursor: not-allowed;
 	}
 
