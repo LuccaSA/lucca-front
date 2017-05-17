@@ -1,8 +1,8 @@
 .table {
-	border-bottom: 1px solid _theme("commons.divider");
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	border-collapse: collapse;
 	border-spacing: 0;
-	border-top: 1px solid _theme("commons.divider");
+	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table;
 	font-size: .9rem;
 	text-align: left;
@@ -33,7 +33,7 @@
 }
 
 .table-body-row-cell {
-	border-top: 1px solid _theme("commons.divider");
+	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table-cell;
 	padding: .5em 1em;
 }

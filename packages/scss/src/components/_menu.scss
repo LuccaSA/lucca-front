@@ -1,6 +1,6 @@
 .menu {
 	align-items: center;
-	border-bottom: 1px solid _theme("commons.divider");
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 }
 
