@@ -131,7 +131,7 @@
 
 /* SM - Columns */
 
-@media only screen and (min-width: _theme("breakpoints.sm")) {
+@media only screen and (min-width: _theme("breakpoints.sm.breakAt")) {
 	.grid-sm {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -247,7 +247,7 @@
 
 /* MD - Columns */
 
-@media only screen and (min-width: _theme("breakpoints.md")) {
+@media only screen and (min-width: _theme("breakpoints.md.breakAt")) {
 	.grid-md {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -363,7 +363,7 @@
 
 /* LG - Columns */
 
-@media only screen and (min-width: _theme("breakpoints.lg")) {
+@media only screen and (min-width: _theme("breakpoints.lg.breakAt")) {
 	.grid-lg {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -525,7 +525,7 @@
 
 	/* SM - Mods */
 
-	@media only screen and (min-width: _theme("breakpoints.sm")) {
+	@media only screen and (min-width: _theme("breakpoints.sm.breakAt")) {
 		.mod-start-sm {
 			justify-content: flex-start;
 			text-align: start;
@@ -564,7 +564,7 @@
 
 	/* MD - Mods */
 
-	@media only screen and (min-width: _theme("breakpoints.md")) {
+	@media only screen and (min-width: _theme("breakpoints.md.breakAt")) {
 		.mod-start-md {
 			justify-content: flex-start;
 			text-align: start;
@@ -603,7 +603,7 @@
 
 	/* LG - Mods */
 
-	@media only screen and (min-width: _theme("breakpoints.lg")) {
+	@media only screen and (min-width: _theme("breakpoints.lg.breakAt")) {
 		.mod-start-lg {
 			justify-content: flex-start;
 			text-align: start;

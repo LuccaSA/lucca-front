@@ -1,21 +1,21 @@
 .container {
 	margin: 0 auto;
 	padding: 0 2rem;
-	width: _theme("breakpoints.xl") - 40px;
+	width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing");
 
-	@media (max-width: _theme("breakpoints.xl")) {
-		width: _theme("breakpoints.lg") - 40px;
+	@media (max-width: _theme("breakpoints.xl.breakAt")) {
+		width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing");
 	}
 
-	@media (max-width: _theme("breakpoints.lg")) {
-		width: _theme("breakpoints.md") - 40px;
+	@media (max-width: _theme("breakpoints.lg.breakAt")) {
+		width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing");
 	}
 
-	@media (max-width: _theme("breakpoints.md")) {
-		width: _theme("breakpoints.sm") - 40px;
+	@media (max-width: _theme("breakpoints.md.breakAt")) {
+		width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing");
 	}
 
-	@media (max-width: _theme("breakpoints.sm")) {
+	@media (max-width: _theme("breakpoints.sm.breakAt")) {
 		width: 100%;
 	}
 }
@@ -26,34 +26,34 @@
 
 .container {
 	&.mod-sm {
-		max-width: _theme("breakpoints.sm");
+		max-width: _theme("breakpoints.sm.breakAt");
 	}
 
 	&.mod-md {
-		max-width: _theme("breakpoints.md");
+		max-width: _theme("breakpoints.md.breakAt");
 	}
 
 	&.mod-lg {
-		max-width: _theme("breakpoints.lg");
+		max-width: _theme("breakpoints.lg.breakAt");
 	}
 
 	&.mod-xl {
-		max-width: _theme("breakpoints.xl");
+		max-width: _theme("breakpoints.xl.breakAt");
 	}
 
 	&.mod-navSide {
-		width: _theme("breakpoints.xl") - 170px;
+		width: _theme("breakpoints.xl.breakAt") - 170px;
 
-		@media (max-width: _theme("breakpoints.xl")) {
-			width: _theme("breakpoints.lg") - 170px;
+		@media (max-width: _theme("breakpoints.xl.breakAt")) {
+			width: _theme("breakpoints.lg.breakAt") - 170px;
 		}
 
-		@media (max-width: _theme("breakpoints.lg")) {
-			width: _theme("breakpoints.md") - 170px;
+		@media (max-width: _theme("breakpoints.lg.breakAt")) {
+			width: _theme("breakpoints.md.breakAt") - 170px;
 		}
 
-		@media (max-width: _theme("breakpoints.md")) {
-			width: _theme("breakpoints.sm") - 170px;
+		@media (max-width: _theme("breakpoints.md.breakAt")) {
+			width: _theme("breakpoints.sm.breakAt") - 170px;
 		}
 	}
 }
