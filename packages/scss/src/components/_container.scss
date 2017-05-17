@@ -26,34 +26,38 @@
 
 .container {
 	&.mod-sm {
-		max-width: _theme("breakpoints.sm.breakAt");
+		max-width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing");
 	}
 
 	&.mod-md {
-		max-width: _theme("breakpoints.md.breakAt");
+		max-width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing");
 	}
 
 	&.mod-lg {
-		max-width: _theme("breakpoints.lg.breakAt");
+		max-width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing");
 	}
 
 	&.mod-xl {
-		max-width: _theme("breakpoints.xl.breakAt");
+		max-width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing");
 	}
 
 	&.mod-navSide {
-		width: _theme("breakpoints.xl.breakAt") - 170px;
+		width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing") - _theme("navSide.width");
 
 		@media (max-width: _theme("breakpoints.xl.breakAt")) {
-			width: _theme("breakpoints.lg.breakAt") - 170px;
+			width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing") - _theme("navSide.width");
 		}
 
 		@media (max-width: _theme("breakpoints.lg.breakAt")) {
-			width: _theme("breakpoints.md.breakAt") - 170px;
+			width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing") - _theme("navSide.width");
 		}
 
 		@media (max-width: _theme("breakpoints.md.breakAt")) {
-			width: _theme("breakpoints.sm.breakAt") - 170px;
+			width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing") - _theme("navSide.width");
+		}
+
+		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+			width: _theme("breakpoints.xs.breakAt") - _theme("breakpoints.xs.spacing") - _theme("navSide.width");
 		}
 	}
 }
