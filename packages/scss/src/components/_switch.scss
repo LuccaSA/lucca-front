@@ -10,7 +10,7 @@
 }
 
 .switch-label {
-	color: lighten(_theme("palette.colors.grey"), 25%);
+	color: _theme("palette.colors.light");
 	cursor: pointer;
 	display: inline-block;
 	padding: 0 0 0 2.7rem;
