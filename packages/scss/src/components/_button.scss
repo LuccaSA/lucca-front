@@ -153,13 +153,13 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.button {
+$buttonDisabled: .5;
 
+.button {
 	/* Disabled */
 
-	&[disabled],
-	&.is-disabled {
-		opacity: .66;
+	&[disabled], &.is-disabled {
+		opacity: $buttonDisabled;
 		pointer-events: none;
 		user-select: none;
 	}
@@ -169,7 +169,7 @@
 	&.is-loading {
 		color: transparent;
 		@include loading(1rem);
-		opacity: .66;
+		opacity: $buttonDisabled;
 		pointer-events: none;
 		user-select: none;
 
