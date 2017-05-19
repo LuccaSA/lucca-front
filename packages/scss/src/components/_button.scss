@@ -154,6 +154,17 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
+
+	/* Disabled */
+
+	&[disabled] {
+		opacity: .66;
+		pointer-events: none;
+		user-select: none;
+	}
+
+	/* Loading */
+
 	&.is-loading {
 		color: transparent;
 		@include loading(1rem);
@@ -177,6 +188,8 @@
 			@include loading(1.5rem);
 		}
 	}
+
+	/* Success */
 
 	&.is-success {
 		background: _theme("palette.colors.success");
@@ -223,6 +236,8 @@
 			}
 		}
 	}
+
+	/* Error */
 
 	&.is-error {
 		background: _theme("palette.colors.error");
