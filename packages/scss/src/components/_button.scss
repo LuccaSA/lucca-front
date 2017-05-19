@@ -157,7 +157,8 @@
 
 	/* Disabled */
 
-	&[disabled] {
+	&[disabled],
+	&.is-disabled {
 		opacity: .66;
 		pointer-events: none;
 		user-select: none;
