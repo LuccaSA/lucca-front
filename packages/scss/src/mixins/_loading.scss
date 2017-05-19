@@ -1,6 +1,6 @@
 @mixin loading($size) {
-	&:before {
-		border: 2px solid rgba(0,0,0,.2);
+	&::before {
+		border: 2px solid rgba(0, 0, 0, .2);
 		border-radius: 50%;
 		bottom: 0;
 		content: "";
@@ -15,9 +15,9 @@
 		width: $size;
 	}
 
-	&:after {
+	&::after {
 		animation: rotating 250ms linear infinite;
-		border: 2px solid rgba(0,0,0,.2);
+		border: 2px solid rgba(0, 0, 0, .2);
 		border-color: rgba(0, 0, 0, .5) transparent transparent transparent;
 		border-radius: 50%;
 		bottom: 0;

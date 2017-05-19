@@ -25,3 +25,7 @@
 	$theme: map-extend($theme, $map, true);
 	@return $theme;
 }
+
+@function _theme($keys) {
+	@return _get($luTheme, $keys);
+}

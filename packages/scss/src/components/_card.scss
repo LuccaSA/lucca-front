@@ -10,7 +10,7 @@ $cardPadding: 1.5rem;
 
 .card-footer {
 	align-items: center;
-	border-top: 1px solid $greySeparator;
+	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 	margin: $cardPadding (-$cardPadding) (-$cardPadding);
 	min-height: 3rem;
@@ -27,6 +27,6 @@ $cardPadding: 1.5rem;
 
 .card {
 	&.mod-grey {
-		background: $greyBackground;
+		background: #F5F5F5;
 	}
 }

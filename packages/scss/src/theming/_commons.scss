@@ -1,0 +1,8 @@
+$commons: (
+  "divider": (
+    "width": 1px,
+    "color": #D6D6D6,
+  )
+);
+
+$luTheme: _set($luTheme, "commons", $commons);

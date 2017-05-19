@@ -18,29 +18,29 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textGrey {
-	color: $grey !important;
+	color: _theme("palette.colors.grey") !important;
 }
 
 .u-textPrimary {
-	color: $primary !important;
+	color: _theme("palette.colors.primary") !important;
 }
 
 .u-textSecondary {
-	color: $secondary !important;
+	color: _theme("palette.colors.secondary") !important;
 }
 
 .u-textLight {
-	color: $greyLighter !important;
+	color: _theme("palette.colors.light") !important;
 }
 
 .u-textGreen {
-	color: $green !important;
+	color: _theme("palette.colors.success") !important;
 }
 
 .u-textOrange {
-	color: $orange !important;
+	color: _theme("palette.colors.warning") !important;
 }
 
 .u-textRed {
-	color: $red !important;
+	color: _theme("palette.colors.error") !important;
 }

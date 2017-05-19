@@ -1,21 +1,21 @@
 .container {
 	margin: 0 auto;
 	padding: 0 2rem;
-	width: $xl - 40px;
+	width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing");
 
-	@media (max-width: $xl) {
-		width: $lg - 40px;
+	@media (max-width: _theme("breakpoints.xl.breakAt")) {
+		width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing");
 	}
 
-	@media (max-width: $lg) {
-		width: $md - 40px;
+	@media (max-width: _theme("breakpoints.lg.breakAt")) {
+		width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing");
 	}
 
-	@media (max-width: $md) {
-		width: $sm - 40px;
+	@media (max-width: _theme("breakpoints.md.breakAt")) {
+		width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing");
 	}
 
-	@media (max-width: $sm) {
+	@media (max-width: _theme("breakpoints.sm.breakAt")) {
 		width: 100%;
 	}
 }
@@ -26,34 +26,38 @@
 
 .container {
 	&.mod-sm {
-		max-width: $sm;
+		max-width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing");
 	}
 
 	&.mod-md {
-		max-width: $md;
+		max-width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing");
 	}
 
 	&.mod-lg {
-		max-width: $lg;
+		max-width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing");
 	}
 
 	&.mod-xl {
-		max-width: $xl;
+		max-width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing");
 	}
 
 	&.mod-navSide {
-		width: $xl - 170px;
+		width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing") - _theme("navSide.width");
 
-		@media (max-width: $xl) {
-			width: $lg - 170px;
+		@media (max-width: _theme("breakpoints.xl.breakAt")) {
+			width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing") - _theme("navSide.width");
 		}
 
-		@media (max-width: $lg) {
-			width: $md - 170px;
+		@media (max-width: _theme("breakpoints.lg.breakAt")) {
+			width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing") - _theme("navSide.width");
 		}
 
-		@media (max-width: $md) {
-			width: $sm - 170px;
+		@media (max-width: _theme("breakpoints.md.breakAt")) {
+			width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing") - _theme("navSide.width");
+		}
+
+		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+			width: _theme("breakpoints.xs.breakAt") - _theme("breakpoints.xs.spacing") - _theme("navSide.width");
 		}
 	}
 }

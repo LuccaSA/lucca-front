@@ -1,10 +1,31 @@
 $breakpoints: (
-	xs:  576px,
-	sm:  768px,
-	md:  992px,
-	lg: 1200px,
-	xl: 1350px,
-	xxl: 1500px,
-	xxxl: 1650px,
+	"xs": (
+		"breakAt": 576px,
+		"spacing": 40px,
+	),
+	"sm": (
+		"breakAt": 768px,
+		"spacing": 40px,
+	),
+	"md": (
+		"breakAt": 992px,
+		"spacing": 40px,
+	),
+	"lg": (
+		"breakAt": 1200px,
+		"spacing": 40px,
+	),
+	"xl": (
+		"breakAt": 1350px,
+		"spacing": 40px,
+	),
+	"xxl": (
+		"breakAt": 1500px,
+		"spacing": 40px,
+	),
+	"xxxl": (
+		"breakAt": 1650px,
+		"spacing": 40px,
+	)
 );
-$luTheme: _set($luTheme, 'breakpoints', $breakpoints);
+$luTheme: _set($luTheme, "breakpoints", $breakpoints);

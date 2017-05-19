@@ -8,21 +8,21 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: $grey;
+	color: _theme("palette.colors.grey");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
-	line-height: $font-line-standard;
+	line-height: _theme("font.line.standard");
 	outline: 0;
 	padding: .5rem 0;
 	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 $primary;
+		box-shadow: 0 2px 0 0 _theme("palette.colors.primary");
 
 		~ .textarea-label {
-			color: $primary;
-			font-size: $font-small;
+			color: _theme("palette.colors.primary");
+			font-size: _theme("font.size.small");
 			top: 0;
 		}
 	}
@@ -59,7 +59,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: $greyLighter;
+		color: _theme("palette.colors.light");
 		cursor: not-allowed;
 	}
 }
@@ -67,7 +67,7 @@
 .textarea {
 	&.is-filled {
 		.textarea-label {
-			font-size: $font-small;
+			font-size: _theme("font.size.small");
 			top: 0;
 		}
 	}

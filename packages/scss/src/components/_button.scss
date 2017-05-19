@@ -3,10 +3,10 @@
 	border: 0;
 	border-radius: 3px;
 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: $grey;
+	color: _theme("palette.colors.grey");
 	cursor: pointer;
 	display: inline-block;
-	font-size: $font-small;
+	font-size: _theme("font.size.small");
 	line-height: 1;
 	margin: .2rem;
 	padding: .55rem .85rem;
@@ -52,97 +52,89 @@
 		background: transparent;
 
 		&:hover, &:focus {
-			box-shadow: 0 0 0 2px $primary inset;
-			color: $primary;
+			box-shadow: 0 0 0 2px _theme("palette.colors.primary") inset;
+			color: _theme("palette.colors.primary");
 		}
 	}
 
 	&.mod-filling {
 		&:hover, &:focus {
-			background: $primary;
+			background: _theme("palette.colors.primary");
 		}
 	}
 
 	/* Colors */
 
 	&.mod-primary {
-		background: $primary;
+		background: _theme("palette.colors.primary");
 
 		&:active {
-			background: darken($primary, 5%);
+			background: darken(_theme("palette.colors.primary"), 5%);
 		}
 	}
 
 	&.mod-secondary {
-		background: $secondary;
+		background: _theme("palette.colors.secondary");
 		color: white;
 
 		&:active {
-			background: darken($secondary, 5%);
-		}
-	}
-
-	&.mod-lucca {
-		background: $lucca;
-
-		&:active {
-			background: darken($lucca, 5%);
+			background: darken(_theme("palette.colors.secondary"), 5%);
 		}
 	}
 
 	&.mod-grey {
-		background: $grey;
+		background: _theme("palette.colors.grey");
 		color: white;
 
 		&:active {
-			background: darken($grey, 5%);
+			background: darken(_theme("palette.colors.grey"), 5%);
 		}
 	}
 
-	&.mod-grey-light {
-		background: $greyLighter;
+	&.mod-light {
+		background: _theme("palette.colors.light");
 
 		&:active {
-			background: darken($greyLighter, 5%);
+			background: darken(_theme("palette.colors.light"), 5%);
 		}
 	}
 
 	&.mod-error {
-		background: $red;
+		background: _theme("palette.colors.error");
 		color: white;
 
 		&:active {
-			background: darken($red, 5%);
+			background: darken(_theme("palette.colors.error"), 5%);
 		}
 	}
 
 	&.mod-warning {
-		background: $orange;
+		background: _theme("palette.colors.warning");
 		color: white;
 
 		&:active {
-			background: darken($orange, 5%);
+			background: darken(_theme("palette.colors.warning"), 5%);
 		}
 	}
 
 	&.mod-success {
-		background: $green;
+		background: _theme("palette.colors.success");
 		color: white;
 
 		&:active {
-			background: darken($green, 5%);
+			background: darken(_theme("palette.colors.success"), 5%);
 		}
 	}
 
 	/* Size */
 
 	&.mod-smaller {
-		font-size: $font-smaller;
+		font-size: _theme("font.size.smaller");
 		padding: .3rem .5rem;
 	}
 
 	&.mod-small {
-		font-size: $font-smaller;
+		font-size: _theme("font.size.smaller");
 		padding: .45rem .7rem;
 	}
 
@@ -187,7 +179,7 @@
 	}
 
 	&.is-success {
-		background: $green;
+		background: _theme("palette.colors.success");
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
@@ -233,7 +225,7 @@
 	}
 
 	&.is-error {
-		background: $red;
+		background: _theme("palette.colors.error");
 		color: transparent;
 		pointer-events: none;
 		user-select: none;

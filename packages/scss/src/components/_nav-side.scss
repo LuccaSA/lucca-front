@@ -1,6 +1,6 @@
 .navSide {
 	background: #666666;
-	font-size: $font-small;
+	font-size: _theme("font.size.small");
 	height: 100%;
 	left: 0;
 	overflow-x: hidden;
@@ -8,7 +8,7 @@
 	position: fixed;
 	text-align: center;
 	top: 0;
-	width: 130px;
+	width: _theme("navSide.width");
 }
 
 .navSide-link {
@@ -21,7 +21,7 @@
 	transition: opacity 150ms ease;
 
 	&::before {
-		background: $primary;
+		background: _theme("palette.colors.primary");
 		bottom: 0;
 		content: "";
 		left: 0;
@@ -43,10 +43,10 @@
 }
 
 .navSide-link-alert {
-	background: $primary;
+	background: _theme("palette.colors.primary");
 	border-radius: .5rem;
-	color: $grey;
-	font-size: $font-smaller;
+	color: _theme("palette.colors.grey");
+	font-size: _theme("font.size.smaller");
 	height: 1rem;
 	line-height: 1rem;
 	padding: 0 .25rem;
