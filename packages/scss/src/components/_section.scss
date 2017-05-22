@@ -1,21 +1,15 @@
-.global {
-	padding: 4rem 0 4rem _theme("navSide.width");
+.section {
+	background: white;
+	border-bottom: 1px solid #E5E5E5;
+	padding: 3rem;
 }
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.global {
-
-	&.mod-noAside {
-		padding-left: 0;
-	}
-
-	&.mod-sections {
-		padding-top: 0;
-	}
-
-	&.mod-filters{
-		padding-top: 0;
+.section {
+	&.mod-grey {
+		background: #F5F5F5;
 	}
 }
