@@ -155,18 +155,16 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-$buttonDisabled: .5;
-
 .button {
 	/* Disabled */
 
 	&[disabled] {
 		cursor: default;
-		opacity: $buttonDisabled;
+		opacity: _theme("commons.disabled.opacity");
 	}
 
 	&.is-disabled {
-		opacity: $buttonDisabled;
+		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 	}
 
@@ -176,7 +174,7 @@ $buttonDisabled: .5;
 	&.is-loading {
 		color: transparent;
 		@include loading(1rem);
-		opacity: $buttonDisabled;
+		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
 
