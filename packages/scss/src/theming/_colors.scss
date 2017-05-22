@@ -1,11 +1,10 @@
 $colors: (
 	"primary": #FFCC00,
 	"secondary": #FF6600,
-	"success": #5CB85C,
+	"success": #9ACD32,
 	"warning": #FF9900,
 	"error": #FF3300,
 	"grey": #666666,
 	"light": #999999,
 );
-
 $luTheme: _set($luTheme, "palette.colors", $colors);
