@@ -17,7 +17,9 @@
 	white-space: nowrap;
 
 	&:hover, &:focus {
-		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+		&:not([disabled]) {
+			box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+		}
 	}
 
 	&:active {
@@ -154,10 +156,25 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
+	/* Disabled */
+
+	&[disabled] {
+		cursor: default;
+		opacity: _theme("commons.disabled.opacity");
+	}
+
+	&.is-disabled {
+		opacity: _theme("commons.disabled.opacity");
+		pointer-events: none;
+	}
+
+
+	/* Loading */
+
 	&.is-loading {
 		color: transparent;
 		@include loading(1rem);
-		opacity: .66;
+		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
 
@@ -177,6 +194,8 @@
 			@include loading(1.5rem);
 		}
 	}
+
+	/* Success */
 
 	&.is-success {
 		background: _theme("palette.colors.success");
@@ -223,6 +242,8 @@
 			}
 		}
 	}
+
+	/* Error */
 
 	&.is-error {
 		background: _theme("palette.colors.error");
