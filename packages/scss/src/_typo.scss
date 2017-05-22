@@ -7,7 +7,7 @@ html {
 }
 
 body {
-	background: #F5F5F5;
+	background: _theme("commons.background.color");
 	color: _theme("palette.colors.grey");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-size: _theme("font.size.standard");

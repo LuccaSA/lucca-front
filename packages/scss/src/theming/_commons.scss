@@ -6,6 +6,9 @@ $commons: (
   "disabled": (
     "opacity": .5,
   )
+  "backgrdound": (
+    "color": #F5F5F5,
+  ),
 );
 
 $luTheme: _set($luTheme, "commons", $commons);
