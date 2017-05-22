@@ -1,6 +1,6 @@
 .container {
 	margin: 0 auto;
-	padding: 0 2rem;
+	padding: 0 .5rem;
 	width: _theme("breakpoints.xxl.breakAt") - _theme("breakpoints.xxl.spacing") - _theme("navSide.width");
 
 	@media (max-width: _theme("breakpoints.xxl.breakAt")) {
