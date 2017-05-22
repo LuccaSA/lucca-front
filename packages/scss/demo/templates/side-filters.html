@@ -10,17 +10,17 @@
 		<link rel="stylesheet" href="../demo.css">
 	</head>
 	<body>
-		<aside class="navSide">
-			<a href="#" class="navSide-link is-active">
-				<span class="navSide-link-alert">9</span>
-				Entry
-			</a>
-			<a href="#" class="navSide-link">Entry</a>
-			<a href="#" class="navSide-link">Entry</a>
-			<a href="#" class="navSide-link">Entry</a>
-			<a href="#" class="navSide-link">Entry</a>
-		</aside>
 		<div class="global mod-filters">
+			<aside class="navSide">
+				<a href="#" class="navSide-link is-active">
+					<span class="navSide-link-alert">9</span>
+					Entry
+				</a>
+				<a href="#" class="navSide-link">Entry</a>
+				<a href="#" class="navSide-link">Entry</a>
+				<a href="#" class="navSide-link">Entry</a>
+				<a href="#" class="navSide-link">Entry</a>
+			</aside>
 			<div class="filters">
 				<div class="filters-left">
 					<div class="input mod-inline">
@@ -35,6 +35,31 @@
 			</div>
 			<div class="container">
 				<h1>Side with filters</h1>
+<code class="code mod-block">&lt;div class="global mod-filters"&gt;
+	&lt;aside class="navSide"&gt;
+		&lt;a href="#" class="navSide-link is-active"&gt;
+			&lt;span class="navSide-link-alert"&gt;9&lt;/span&gt;
+			...
+		&lt;/a&gt;
+		&lt;a href="#" class="navSide-link"&gt;...&lt;/a&gt;
+	&lt;/aside&gt;
+	&lt;div class="filters"&gt;
+		&lt;div class="filters-left"&gt;
+			&lt;div class="input mod-inline"&gt;
+				&lt;input class="input-field" type="text"&gt;
+				&lt;label class="input-label"&gt;Filter name&lt;/label&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class="filters-right"&gt;
+			&lt;button class="button"&gt;...&lt;/button&gt;
+			&lt;button class="button mod-primary"&gt;...&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="container"&gt;
+		...
+	&lt;/div&gt;
+&lt;/div&gt;
+</code>
 			</div>
 		</div>
 	</body>
