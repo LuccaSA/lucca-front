@@ -24,19 +24,19 @@
 .callout {
 	&.mod-success {
 		&::before {
-			background: _theme("palette.colors.success");
+			background: _theme("palette.success.color");
 		}
 	}
 
 	&.mod-warning {
 		&::before {
-			background: _theme("palette.colors.warning");
+			background: _theme("palette.warning.color");
 		}
 	}
 
 	&.mod-error {
 		&::before {
-			background: _theme("palette.colors.error");
+			background: _theme("palette.error.color");
 		}
 	}
 }

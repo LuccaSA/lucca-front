@@ -18,29 +18,29 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textGrey {
-	color: _theme("palette.colors.grey") !important;
+	color: _theme("palette.grey.color") !important;
 }
 
 .u-textPrimary {
-	color: _theme("palette.colors.primary") !important;
+	color: _theme("palette.primary.color") !important;
 }
 
 .u-textSecondary {
-	color: _theme("palette.colors.secondary") !important;
+	color: _theme("palette.secondary.color") !important;
 }
 
 .u-textLight {
-	color: _theme("palette.colors.light") !important;
+	color: _theme("palette.light.color") !important;
 }
 
 .u-textGreen {
-	color: _theme("palette.colors.success") !important;
+	color: _theme("palette.success.color") !important;
 }
 
 .u-textOrange {
-	color: _theme("palette.colors.warning") !important;
+	color: _theme("palette.warning.color") !important;
 }
 
 .u-textRed {
-	color: _theme("palette.colors.error") !important;
+	color: _theme("palette.error.color") !important;
 }
