@@ -1,7 +1,7 @@
 .label {
 	background: #CCCCCC;
 	border-radius: 3px;
-	color: _theme("palette.grey.color");
+	color: _palette("grey.color");
 	display: inline-block;
 	font-size: _theme("font.size.small");
 	font-weight: 400;
@@ -19,12 +19,12 @@
 
 .label {
 	&.mod-primary {
-		background: _theme("palette.primary.color");
-		color: _theme("palette.primary.text");
+		background: _palette("primary.color");
+		color: _palette("primary.text");
 	}
 
 	&.mod-secondary {
-		background: _theme("palette.secondary.color");
-		color: _theme("palette.secondary.text");
+		background: _palette("secondary.color");
+		color: _palette("secondary.text");
 	}
 }

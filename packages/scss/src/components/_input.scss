@@ -8,7 +8,7 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: _theme("palette.grey.color");
+	color: _palette("grey.color");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
 	margin-bottom: .15rem;
@@ -25,14 +25,14 @@
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _theme("palette.primary.color");
+		box-shadow: 0 2px 0 0 _palette("primary.color");
 
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _theme("palette.primary.color");
+			color: _palette("primary.color");
 			font-size: _theme("font.size.small");
 			top: 0;
 		}
@@ -82,13 +82,13 @@
 }
 
 .input-error {
-	color: _theme("palette.error.color");
+	color: _palette("error.color");
 	font-size: _theme("font.size.small");
 	margin: 0;
 }
 
 .input-helper {
-	color: _theme("palette.light.color");
+	color: _palette("light.color");
 	font-size: _theme("font.size.small");
 	margin: 0;
 }
@@ -127,7 +127,7 @@
 
 		&::after {
 			bottom: .15rem;
-			color: _theme("palette.light.color");
+			color: _palette("light.color");
 			content: "\e918";
 			font-family: lucca;
 			position: absolute;
@@ -156,7 +156,7 @@
 
 		&::after {
 			bottom: .15rem;
-			color: _theme("palette.light.color");
+			color: _palette("light.color");
 			content: "\e918";
 			font-family: lucca;
 			position: absolute;
@@ -177,7 +177,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: _theme("palette.light.color");
+		color: _palette("light.color");
 		cursor: not-allowed;
 	}
 
