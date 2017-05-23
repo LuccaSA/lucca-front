@@ -1,6 +1,6 @@
 .demo-body{
 	background: white;
-	padding: 60px 0 100px 250px;
+	padding: 60px 0 100px 180px;
 }
 
 @media screen and (max-width: 992px){
@@ -12,7 +12,7 @@
 
 .demo-nav{
 	background: #f5f5f5;
-	width: 220px;
+	width: 180px;
 	border-right: 1px solid #e5e5e5;
 	position: fixed;
 	bottom: 0;
