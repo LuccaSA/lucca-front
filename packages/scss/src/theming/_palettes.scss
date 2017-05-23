@@ -1,0 +1,31 @@
+$palettes: (
+	"primary": (
+		"color": #FFCC00,
+		"text": #666666,
+	),
+	"secondary": (
+		"color": #FF6600,
+		"text": #FFFFFF,
+	),
+	"success": (
+		"color": #9ACD32,
+		"text": #FFFFFF,
+	),
+	"warning": (
+		"color": #FF9900,
+		"text": #FFFFFF,
+	),
+	"error": (
+		"color": #FF3300,
+		"text": #FFFFFF,
+	),
+	"grey": (
+		"color": #666666,
+		"text": #FFFFFF,
+	),
+	"light": (
+		"color": #999999,
+		"text": #FFFFFF,
+	),
+);
+$luTheme: _set($luTheme, "palette", $palettes);
