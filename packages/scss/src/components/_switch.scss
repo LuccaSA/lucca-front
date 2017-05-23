@@ -10,7 +10,7 @@
 }
 
 .switch-label {
-	color: _palette("light.color");
+	color: _theme("commons.text.light");
 	cursor: pointer;
 	display: inline-block;
 	padding: 0 0 0 2.7rem;
@@ -54,7 +54,7 @@
 	*/
 
 	&:checked ~ .switch-label {
-		color: _palette("grey.color");
+		color: _theme("commons.text.default");
 
 		&::before {
 			background: lighten(_palette("primary.color"), 20%);
@@ -72,14 +72,14 @@
 
 	&[disabled], &[readonly] {
 		~ .switch-label {
-			color: _palette("light.color");
+			color: _theme("commons.text.light");
 			cursor: not-allowed;
 
 			&::before {
-				background: lighten(_palette("light.color"), 25%);
+				background: lighten(_theme("commons.text.light"), 25%);
 			}
 			&::after {
-				background: lighten(_palette("light.color"), 15%);
+				background: lighten(_theme("commons.text.light"), 15%);
 			}
 		}
 	}

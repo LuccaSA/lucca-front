@@ -1,7 +1,7 @@
 .label {
-	background: #CCCCCC;
+	background: _palette("light.color");
 	border-radius: 3px;
-	color: _palette("grey.color");
+	color: _palette("light.text");
 	display: inline-block;
 	font-size: _theme("font.size.small");
 	font-weight: 400;

@@ -3,7 +3,7 @@
 	border: 0;
 	border-radius: 3px;
 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: _palette("grey.color");
+	color: _theme("commons.text.default");
 	cursor: pointer;
 	display: inline-block;
 	font-size: _theme("font.size.small");

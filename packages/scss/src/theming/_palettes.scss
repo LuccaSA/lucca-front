@@ -24,8 +24,8 @@ $palettes: (
 		"text": #FFFFFF,
 	),
 	"light": (
-		"color": #999999,
-		"text": #FFFFFF,
+		"color": #CCCCCC,
+		"text": #666666,
 	),
 );
 $luTheme: _set($luTheme, "palette", $palettes);

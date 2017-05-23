@@ -18,7 +18,11 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textGrey {
-	color: _palette("grey.color") !important;
+	color: _theme("commons.text.default") !important;
+}
+
+.u-textLight {
+	color: _theme("commons.text.light") !important;
 }
 
 .u-textPrimary {
@@ -27,10 +31,6 @@
 
 .u-textSecondary {
 	color: _palette("secondary.color") !important;
-}
-
-.u-textLight {
-	color: _palette("light.color") !important;
 }
 
 .u-textGreen {
