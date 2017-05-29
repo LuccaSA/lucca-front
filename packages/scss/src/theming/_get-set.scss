@@ -1,34 +1,60 @@
-@function _get($theme, $keys) {
+@function _get($map, $keys) {
 	$keys: str-explode($keys, '.');
 
-	$result: $theme;
+	$result: $map;
 
 	@for $i from 1 through length($keys) {
 		$key: nth($keys, $i);
 		@if (map-has-key($result, $key)) {
 			$result: map-get($result, $key);
 		} @else {
-			@error "There is no #{$key} key in theme map";
+			@error "There is no #{$key} key in map";
 			@return "";
 		}
 	}
 	@return $result;
 }
+@function _safeGet($map, $keys) {
+	$keys: str-explode($keys, '.');
 
-@function _set($theme, $keys, $map) {
+	$result: $map;
+
+	@for $i from 1 through length($keys) {
+		$key: nth($keys, $i);
+		@if (map-has-key($result, $key)) {
+			$result: map-get($result, $key);
+		} @else {
+			@return false;
+		}
+	}
+	@return $result;
+}
+
+@function _set($map, $keys, $values) {
 	$keys: str-explode($keys, '.');
 	$l: length($keys);
 	@for $i from 1 through $l {
 		$key: nth($keys, $l - $i + 1);
-		$map: ($key: $map);
+		$values: ($key: $values);
 	}
-	$theme: map-extend($theme, $map, true);
-	@return $theme;
+	$map: map-extend($map, $values, true);
+	@return $map;
 }
 
 @function _theme($keys) {
 	@return _get($luTheme, $keys);
 }
 @function _palette($keys) {
-	@return _get($luTheme, "palette." + $keys);
+	@return _get($luTheme, "palettes." + $keys);
+}
+@function _color($keys) {
+	$result: _safeGet($luTheme, "colors." + $keys);
+	@if $result {
+		@return $result;
+	}
+	$result: _safeGet($luTheme, "palettes." + $keys + ".color");
+	@if $result {
+		@return $result;
+	}
+	$result: _safeGet($luTheme, "commons." + $keys + ".color");
 }
