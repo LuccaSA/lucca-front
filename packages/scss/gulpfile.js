@@ -11,7 +11,7 @@ let browserSync = require('browser-sync').create();
 const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
 const SASS_OPTIONS_DEBUG = {
-	outputStyle: 'compressed',
+	outputStyle: 'extended',
 	sourceMapEmbed: true,
 	includePaths: [
 		'src/overrides/',
