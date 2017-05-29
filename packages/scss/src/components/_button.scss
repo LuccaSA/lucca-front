@@ -3,7 +3,7 @@
 	border: 0;
 	border-radius: 3px;
 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: _theme("commons.text.default");
+	color: _color("text.default");
 	cursor: pointer;
 	display: inline-block;
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
@@ -56,8 +56,8 @@
 		background: transparent;
 
 		&:hover, &:focus {
-			box-shadow: 0 0 0 2px _palette("primary.color") inset;
-			color: _palette("primary.color");
+			box-shadow: 0 0 0 2px _color("primary") inset;
+			color: _color("primary");
 		}
 	}
 

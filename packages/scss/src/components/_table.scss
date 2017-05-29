@@ -53,7 +53,7 @@
 
 	&.mod-clickable {
 		.table-body-row {
-			color: _theme("commons.text.default");
+			color: _color("text.default");
 			text-decoration: none;
 			transition: all 150ms ease;
 

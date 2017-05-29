@@ -18,11 +18,11 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textGrey {
-	color: _theme("commons.text.default") !important;
+	color: _color("text.default") !important;
 }
 
 .u-textLight {
-	color: _theme("commons.text.light") !important;
+	color: _color("text.light") !important;
 }
 
 .u-textPrimary {
