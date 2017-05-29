@@ -1,7 +1,5 @@
 .label {
-	background: _color("light");
 	border-radius: 3px;
-	color: _palette("light.text");
 	display: inline-block;
 	font-size: _theme("font.size.small");
 	font-weight: 400;
@@ -14,18 +12,24 @@
 }
 
 
-// MODS
+// Palettes
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
 .label {
-	// TODO - lulu - decline for each palette
-	&.mod-primary {
-		background: _palette("primary.color");
-		color: _palette("primary.text");
+
+	// todo - move default palette in theming under elements.label
+	$default-palette: ( "color": #CCCCCC, "text": #666666 );
+
+	@mixin labelColoring($palette) {
+		background: _get($palette, "color");
+		color: _get($palette, "text");
 	}
 
-	&.mod-secondary {
-		background: _palette("secondary.color");
-		color: _palette("secondary.text");
+	// default coloring
+	@include labelColoring($default-palette);
+	// palettes coloring
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include labelColoring($palette);
+		}
 	}
 }
