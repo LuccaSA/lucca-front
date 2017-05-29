@@ -28,4 +28,4 @@ $breakpoints: (
 		"spacing": 60px,
 	)
 );
-$luTheme: _set($luTheme, "breakpoints", $breakpoints);
+$theme: _set($theme, "breakpoints", $breakpoints);

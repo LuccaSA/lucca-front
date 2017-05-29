@@ -46,26 +46,26 @@
 }
 
 @function _theme($keys) {
-	@return _get($luTheme, $keys);
+	@return _get($theme, $keys);
 }
 
 @function _palette($keys) {
-	@return _get($luTheme, "palettes." + $keys);
+	@return _get($theme, "palettes." + $keys);
 }
 
 @function _color($keys) {
 	// try to find it in colors
-	$result: _safeGet($luTheme, "colors." + $keys);
+	$result: _safeGet($theme, "colors." + $keys);
 	@if $result {
 		@return $result;
 	}
 	// try to find color associated with same palette
-	$result: _safeGet($luTheme, "palettes." + $keys + ".color");
+	$result: _safeGet($theme, "palettes." + $keys + ".color");
 	@if $result {
 		@return $result;
 	}
 	// try to find it in commons
-	$result: _safeGet($luTheme, "commons." + $keys + ".color");
+	$result: _safeGet($theme, "commons." + $keys + ".color");
 	@if $result {
 		@return $result;
 	}
