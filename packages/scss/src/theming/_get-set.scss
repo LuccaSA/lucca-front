@@ -1,3 +1,4 @@
+// will try to get $map.$keys or throw if no result
 @function _get($map, $keys) {
 	$keys: str-explode($keys, '.');
 
@@ -14,6 +15,8 @@
 	}
 	@return $result;
 }
+
+// will try to get $map.$keys or false if no result - might still throw depending on keys
 @function _safeGet($map, $keys) {
 	$keys: str-explode($keys, '.');
 
@@ -30,6 +33,7 @@
 	@return $result;
 }
 
+// sets stuff
 @function _set($map, $keys, $values) {
 	$keys: str-explode($keys, '.');
 	$l: length($keys);
@@ -44,17 +48,28 @@
 @function _theme($keys) {
 	@return _get($luTheme, $keys);
 }
+
 @function _palette($keys) {
 	@return _get($luTheme, "palettes." + $keys);
 }
+
 @function _color($keys) {
+	// try to find it in colors
 	$result: _safeGet($luTheme, "colors." + $keys);
 	@if $result {
 		@return $result;
 	}
+	// try to find color associated with same palette
 	$result: _safeGet($luTheme, "palettes." + $keys + ".color");
 	@if $result {
 		@return $result;
 	}
+	// try to find it in commons
 	$result: _safeGet($luTheme, "commons." + $keys + ".color");
+	@if $result {
+		@return $result;
+	}
+	// throw
+	@error "couldn't find color #{$keys} in theme";
+	@return "";
 }
