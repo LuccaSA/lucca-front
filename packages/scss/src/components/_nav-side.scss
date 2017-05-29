@@ -22,7 +22,7 @@
 	transition: opacity 150ms ease;
 
 	&::before {
-		background: _theme("palette.colors.primary");
+		background: _palette("primary.color");
 		bottom: 0;
 		content: "";
 		left: 0;
@@ -44,9 +44,9 @@
 }
 
 .navSide-link-alert {
-	background: _theme("palette.colors.primary");
+	background: _palette("primary.color");
 	border-radius: .5rem;
-	color: _theme("palette.colors.grey");
+	color: _palette("primary.text");
 	font-size: _theme("font.size.smaller");
 	height: 1rem;
 	line-height: 1rem;

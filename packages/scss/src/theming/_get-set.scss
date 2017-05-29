@@ -29,3 +29,6 @@
 @function _theme($keys) {
 	@return _get($luTheme, $keys);
 }
+@function _palette($keys) {
+	@return _get($luTheme, "palette." + $keys);
+}
