@@ -18,10 +18,10 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _palette("primary.color");
+		box-shadow: 0 2px 0 0 _color("primary");
 
 		~ .textarea-label {
-			color: _palette("primary.color");
+			color: _color("primary");
 			font-size: _theme("font.size.small");
 			top: 0;
 		}

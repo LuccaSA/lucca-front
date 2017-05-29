@@ -25,14 +25,14 @@
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _palette("primary.color");
+		box-shadow: 0 2px 0 0 _color("primary");
 
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _palette("primary.color");
+			color: _color("primary");
 			font-size: _theme("font.size.small");
 			top: 0;
 		}
@@ -82,7 +82,7 @@
 }
 
 .input-error {
-	color: _palette("error.color");
+	color: _color("error");
 	font-size: _theme("font.size.small");
 	margin: 0;
 }

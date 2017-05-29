@@ -63,12 +63,13 @@
 
 	&.mod-filling {
 		&:hover, &:focus {
-			background: _palette("primary.color");
+			background: _color("primary");
 		}
 	}
 
 	/* Colors */
 
+	// TODO - lulu - decline for each palette
 	&.mod-primary {
 		background: _palette("primary.color");
 		color: _palette("primary.text");
@@ -202,7 +203,7 @@
 	/* Success */
 
 	&.is-success {
-		background: _palette("success.color");
+		background: _color("success");
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
@@ -250,7 +251,7 @@
 	/* Error */
 
 	&.is-error {
-		background: _palette("error.color");
+		background: _color("error");
 		color: transparent;
 		pointer-events: none;
 		user-select: none;

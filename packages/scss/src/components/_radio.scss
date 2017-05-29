@@ -9,7 +9,7 @@
 
 	&:checked ~ .radio-label {
 		&::before {
-			box-shadow: inset 0 0 0 2px _palette("primary.color");
+			box-shadow: inset 0 0 0 2px _color("primary");
 		}
 
 		&::after {
@@ -38,7 +38,7 @@
 	}
 
 	&::after {
-		background: _palette("primary.color");
+		background: _color("primary");
 		border-radius: 50%;
 		color: transparent;
 		content: "";

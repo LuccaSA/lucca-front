@@ -17,30 +17,35 @@
 // COLORS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+// lulu - i dont like it
+// lulu - we culd decline from palettes and it would give us
+// .u-textKey {
+// 	color: _color("key") !important;
+// }
+// and not some from `text.default` and some from palettes and some with a different name than the palette it imports 
+// u-textGreen -> uses palette success
 .u-textGrey {
 	color: _color("text.default") !important;
 }
-
 .u-textLight {
 	color: _color("text.light") !important;
 }
-
 .u-textPrimary {
-	color: _palette("primary.color") !important;
+	color: _color("primary") !important;
 }
 
 .u-textSecondary {
-	color: _palette("secondary.color") !important;
+	color: _color("secondary") !important;
 }
 
 .u-textGreen {
-	color: _palette("success.color") !important;
+	color: _color("success") !important;
 }
 
 .u-textOrange {
-	color: _palette("warning.color") !important;
+	color: _color("warning") !important;
 }
 
 .u-textRed {
-	color: _palette("error.color") !important;
+	color: _color("error") !important;
 }
