@@ -3,9 +3,10 @@
 	border: 0;
 	border-radius: 3px;
 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: _theme("palette.colors.grey");
+	color: _theme("commons.text.default");
 	cursor: pointer;
 	display: inline-block;
+	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-size: _theme("font.size.small");
 	line-height: 1;
 	margin: .2rem;
@@ -46,6 +47,7 @@
 		text-decoration: underline;
 
 		&:hover, &:focus {
+			box-shadow: none;
 			color: black;
 		}
 	}
@@ -54,77 +56,79 @@
 		background: transparent;
 
 		&:hover, &:focus {
-			box-shadow: 0 0 0 2px _theme("palette.colors.primary") inset;
-			color: _theme("palette.colors.primary");
+			box-shadow: 0 0 0 2px _palette("primary.color") inset;
+			color: _palette("primary.color");
 		}
 	}
 
 	&.mod-filling {
 		&:hover, &:focus {
-			background: _theme("palette.colors.primary");
+			background: _palette("primary.color");
 		}
 	}
 
 	/* Colors */
 
 	&.mod-primary {
-		background: _theme("palette.colors.primary");
+		background: _palette("primary.color");
+		color: _palette("primary.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.primary"), 5%);
+			background: darken(_palette("primary.color"), 5%);
 		}
 	}
 
 	&.mod-secondary {
-		background: _theme("palette.colors.secondary");
-		color: white;
+		background: _palette("secondary.color");
+		color: _palette("secondary.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.secondary"), 5%);
+			background: darken(_palette("secondary.color"), 5%);
 		}
 	}
 
 	&.mod-grey {
-		background: _theme("palette.colors.grey");
-		color: white;
+		background: _palette("grey.color");
+		color: _palette("grey.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.grey"), 5%);
+			background: darken(_palette("grey.color"), 5%);
 		}
 	}
 
 	&.mod-light {
-		background: _theme("palette.colors.light");
+		background: _palette("light.color");
+		color: _palette("light.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.light"), 5%);
+			background: darken(_palette("light.color"), 5%);
 		}
 	}
 
 	&.mod-error {
-		background: _theme("palette.colors.error");
-		color: white;
+		background: _palette("error.color");
+		color: _palette("error.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.error"), 5%);
+			background: darken(_palette("error.color"), 5%);
 		}
 	}
 
 	&.mod-warning {
-		background: _theme("palette.colors.warning");
-		color: white;
+		background: _palette("warning.color");
+		color: _palette("warning.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.warning"), 5%);
+			background: darken(_palette("warning.color"), 5%);
 		}
 	}
 
 	&.mod-success {
-		background: _theme("palette.colors.success");
-		color: white;
+		background: _palette("success.color");
+		color: _palette("success.text");
 
 		&:active {
-			background: darken(_theme("palette.colors.success"), 5%);
+			background: darken(_palette("success.color"), 5%);
 		}
 	}
 
@@ -198,7 +202,7 @@
 	/* Success */
 
 	&.is-success {
-		background: _theme("palette.colors.success");
+		background: _palette("success.color");
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
@@ -206,7 +210,7 @@
 		&::after {
 			color: white;
 			content: "\e923";
-			font-family: "lucca icons" ;
+			font-family: "Lucca icons";
 			font-size: 1.5rem;
 			height: 100%;
 			left: 0;
@@ -246,7 +250,7 @@
 	/* Error */
 
 	&.is-error {
-		background: _theme("palette.colors.error");
+		background: _palette("error.color");
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
@@ -254,7 +258,7 @@
 		&::after {
 			color: white;
 			content: "\e924";
-			font-family: "lucca icons" ;
+			font-family: "Lucca icons";
 			font-size: 1.5rem;
 			height: 100%;
 			left: 0;

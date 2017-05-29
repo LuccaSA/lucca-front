@@ -5,7 +5,15 @@ $commons: (
   ),
   "disabled": (
     "opacity": .5,
-  )
+  ),
+  "background": (
+    "color": #F5F5F5,
+  ),
+  "text": (
+    "default": #666666,
+    "light": #999999,
+    "placeholder": #CCCCCC,
+  ),
 );
 
 $luTheme: _set($luTheme, "commons", $commons);

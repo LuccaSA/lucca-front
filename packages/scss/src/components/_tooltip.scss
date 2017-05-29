@@ -1,5 +1,5 @@
 .tooltip {
-	background: _theme("palette.colors.grey");
+	background: _palette("grey.color");
 	border-radius: 3px;
 	color: white;
 	display: inline-block;
@@ -8,7 +8,7 @@
 	position: relative;
 
 	&::before {
-		border-color: _theme("palette.colors.grey") transparent transparent transparent;
+		border-color: _palette("grey.color") transparent transparent transparent;
 		border-style: solid;
 		border-width: 7px 7px 0;
 		bottom: -6px;
@@ -24,11 +24,11 @@
 
 .tooltip {
 	&.mod-primary {
-		background: _theme("palette.colors.primary");
-		color: _theme("palette.colors.grey");
+		background: _palette("primary.color");
+		color: _palette("grey.color");
 
 		&::before {
-			border-color: _theme("palette.colors.primary") transparent transparent transparent;
+			border-color: _palette("primary.color") transparent transparent transparent;
 		}
 	}
 }

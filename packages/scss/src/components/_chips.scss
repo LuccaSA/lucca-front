@@ -28,11 +28,11 @@
 
 	&::before {
 		content: "\e91b";
-		font-family: "lucca icons" ;
+		font-family: "Lucca icons";
 	}
 
 	&:hover {
-		background-color: _theme("palette.colors.error");
+		background-color: _palette("error.color");
 	}
 }
 
