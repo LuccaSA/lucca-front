@@ -66,75 +66,32 @@
 			background: _color("primary");
 		}
 	}
+}
 
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+@mixin buttonStandardPalette($palette) {
+	background: _get($palette, "color");
+	color: _get($palette, "text");
+
+	&:active {
+		background: darken(_get($palette, "color"), 5%);
+	}
+}
+// standard coloring
+.button:not(.mod-flat):not(.mod-wired):not(.mod-filling) {
 	/* Colors */
-
-	// TODO - lulu - decline for each palette
-	&.mod-primary {
-		background: _palette("primary.color");
-		color: _palette("primary.text");
-
-		&:active {
-			background: darken(_palette("primary.color"), 5%);
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include buttonStandardPalette($palette);
 		}
 	}
+}
 
-	&.mod-secondary {
-		background: _palette("secondary.color");
-		color: _palette("secondary.text");
-
-		&:active {
-			background: darken(_palette("secondary.color"), 5%);
-		}
-	}
-
-	&.mod-grey {
-		background: _palette("grey.color");
-		color: _palette("grey.text");
-
-		&:active {
-			background: darken(_palette("grey.color"), 5%);
-		}
-	}
-
-	&.mod-light {
-		background: _palette("light.color");
-		color: _palette("light.text");
-
-		&:active {
-			background: darken(_palette("light.color"), 5%);
-		}
-	}
-
-	&.mod-error {
-		background: _palette("error.color");
-		color: _palette("error.text");
-
-		&:active {
-			background: darken(_palette("error.color"), 5%);
-		}
-	}
-
-	&.mod-warning {
-		background: _palette("warning.color");
-		color: _palette("warning.text");
-
-		&:active {
-			background: darken(_palette("warning.color"), 5%);
-		}
-	}
-
-	&.mod-success {
-		background: _palette("success.color");
-		color: _palette("success.text");
-
-		&:active {
-			background: darken(_palette("success.color"), 5%);
-		}
-	}
-
-	/* Size */
-
+// SIZES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.button {
 	&.mod-smaller {
 		font-size: _theme("font.size.smaller");
 		padding: .3rem .5rem;

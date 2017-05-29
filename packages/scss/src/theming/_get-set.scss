@@ -49,8 +49,11 @@
 	@return _get($theme, $keys);
 }
 
-@function _palette($keys) {
-	@return _get($theme, "palettes." + $keys);
+// @function _palette($keys) {
+// 	@return _get($theme, "palettes." + $keys);
+// }
+@function _palettes() {
+	@return _get($theme, "palettes");
 }
 
 @function _color($keys) {
