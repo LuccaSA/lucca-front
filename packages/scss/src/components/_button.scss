@@ -1,38 +1,42 @@
-// .button {
-// 	background: white;
-// 	border: 0;
-// 	border-radius: 3px;
-// 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-// 	color: _color("text.default");
-// 	cursor: pointer;
-// 	display: inline-block;
-// 	font-family: "Source Sans Pro", Tahoma, sans-serif;
-// 	font-size: _theme("font.size.small");
-// 	line-height: 1;
-// 	margin: .2rem;
-// 	padding: .55rem .85rem;
-// 	position: relative;
-// 	text-decoration: none;
-// 	transition: box-shadow 150ms ease, background 150ms ease, color 150ms ease;
-// 	vertical-align: middle;
-// 	white-space: nowrap;
+.button {
+	// for sizing
+	// font-size: _theme("font.size.small");
+	// line-height: 1;
+	// padding: .55rem .85rem;
 
-// 	&:hover, &:focus {
-// 		&:not([disabled]) {
-// 			box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
-// 		}
-// 	}
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
+	border: 0;
+	vertical-align: middle;
+	white-space: nowrap;
+	margin: _component("button.margin");
+	border-radius: _component("button.border.radius");
+	box-shadow: _component("button.box-shadow");
+	font-family: unquote(_component("button.font.family"));
+	transition: unquote(_component("button.transition"));
 
-// 	&:active {
-// 		background: #F2F2F2;
-// 		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-// 		outline: 0;
+	&:hover {
+		&:not([disabled]) {
+			box-shadow: unquote(_component("button.hover.box-shadow"));
+		}
+	}
+	&:focus {
+		&:not([disabled]) {
+			box-shadow: unquote(_component("button.focus.box-shadow"));
+		}
+	}
 
-// 		&:focus {
-// 			outline: 0;
-// 		}
-// 	}
-// }
+	&:active {
+		outline: 0;
+		box-shadow: _component("button.box-shadow"); // back to normal box shadow
+
+		&:focus {
+			outline: 0;
+		}
+	}
+}
 
 
 // // MODS
@@ -56,6 +60,7 @@
 // 		background: transparent;
 
 // 		&:hover, &:focus {
+// 			// needs special coloring
 // 			box-shadow: 0 0 0 2px _color("primary") inset;
 // 			color: _color("primary");
 // 		}
@@ -68,26 +73,48 @@
 // 	}
 // }
 
-// // PALETTES
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// @mixin buttonStandardPalette($palette) {
-// 	background: _get($palette, "color");
-// 	color: _get($palette, "text");
+// standard coloring
+.button {
+	@mixin buttonColoring($palette) {
+		background: _get($palette, "color");
+		color: _get($palette, "text");
 
-// 	&:active {
-// 		background: darken(_get($palette, "color"), 5%);
-// 	}
-// }
-// // standard coloring
-// .button:not(.mod-flat):not(.mod-wired):not(.mod-filling) {
-// 	/* Colors */
-// 	@each $name, $palette in _palettes() {
-// 		&.palette-#{$name} {
-// 			@include buttonStandardPalette($palette);
-// 		}
-// 	}
-// }
+		&:active {
+			background: darken(_get($palette, "color"), 5%);
+		}
+	}
+
+	@include buttonColoring(_component("button.default-palette"));
+	/* Colors */
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include buttonColoring($palette);
+		}
+	}
+}
+// SIZING
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.button {
+	@mixin buttonSizing($size) {
+		$padding-v: _component("button.size-padding-v-ratio")*_get($size, "padding");
+		$padding-h: _component("button.size-padding-h-ratio")*_get($size, "padding");
+		font-size: _get($size, "font-size");
+		line-height: _get($size, "line-height");
+		padding: $padding-v $padding-h;
+	}
+
+	@include buttonSizing(_component("button.default-size"));
+	/* Colors */
+	@each $name, $size in _theme("sizes") {
+		&.size-#{$name} {
+			@include buttonSizing($size);
+		}
+	}
+}
 
 // // SIZES
 // // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -120,6 +147,7 @@
 // .button {
 // 	/* Disabled */
 
+// // lulu - [disabled] and .is-disabled style not the same ?
 // 	&[disabled] {
 // 		cursor: default;
 // 		opacity: _theme("commons.disabled.opacity");
