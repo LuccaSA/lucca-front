@@ -16,14 +16,14 @@
 
 // COLORS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-@mixin textPalette($palette) {
+@mixin textColoring($palette) {
 	color: _get($palette, "color") !important;
 }
 @each $name, $palette in _palettes() {
-	.u-text-#{$name} {
-		@include textPalette($palette);
+	.u-text#{str-capitalize($name)} {
+		@include textColoring($palette);
 	}
 }
-.u-text-default {
+.u-textDefault {
 	color: _color("text.default") !important;
 }
