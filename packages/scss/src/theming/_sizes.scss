@@ -1,0 +1,37 @@
+$sizes: (
+	smaller: (
+		font-size: .75rem,
+		line-height: 1.618rem,
+	),
+	small: (
+		font-size: .85rem,
+		line-height: 1.618rem,
+	),
+	standard: (
+		font-size: 1rem,
+		line-height: 1.618rem,
+	),
+	big: (
+		font-size: 1.38rem,
+		line-height: 1.9rem,
+	),
+	bigger: (
+		font-size: 1.94rem,
+		line-height: 2.5rem,
+	),
+	biggest: (
+		font-size: 2.75rem,
+		line-height: 3.2rem,
+	),
+);
+$spacings: (
+	"tiny": .5rem,
+	"small": 1rem,
+	"standard": 2rem,
+	"big": 3rem,
+	"bigger": 4rem,
+	"biggest": 6rem,
+);
+
+$theme: _set($theme, "sizes", $sizes);
+$theme: _set($theme, "spacings", $spacings);
