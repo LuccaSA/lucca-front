@@ -1,283 +1,283 @@
-.button {
-	background: white;
-	border: 0;
-	border-radius: 3px;
-	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: _color("text.default");
-	cursor: pointer;
-	display: inline-block;
-	font-family: "Source Sans Pro", Tahoma, sans-serif;
-	font-size: _theme("font.size.small");
-	line-height: 1;
-	margin: .2rem;
-	padding: .55rem .85rem;
-	position: relative;
-	text-decoration: none;
-	transition: box-shadow 150ms ease, background 150ms ease, color 150ms ease;
-	vertical-align: middle;
-	white-space: nowrap;
+// .button {
+// 	background: white;
+// 	border: 0;
+// 	border-radius: 3px;
+// 	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
+// 	color: _color("text.default");
+// 	cursor: pointer;
+// 	display: inline-block;
+// 	font-family: "Source Sans Pro", Tahoma, sans-serif;
+// 	font-size: _theme("font.size.small");
+// 	line-height: 1;
+// 	margin: .2rem;
+// 	padding: .55rem .85rem;
+// 	position: relative;
+// 	text-decoration: none;
+// 	transition: box-shadow 150ms ease, background 150ms ease, color 150ms ease;
+// 	vertical-align: middle;
+// 	white-space: nowrap;
 
-	&:hover, &:focus {
-		&:not([disabled]) {
-			box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
-		}
-	}
+// 	&:hover, &:focus {
+// 		&:not([disabled]) {
+// 			box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+// 		}
+// 	}
 
-	&:active {
-		background: #F2F2F2;
-		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-		outline: 0;
+// 	&:active {
+// 		background: #F2F2F2;
+// 		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
+// 		outline: 0;
 
-		&:focus {
-			outline: 0;
-		}
-	}
-}
-
-
-// MODS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.button {
-	/* Style */
-
-	&.mod-flat {
-		background: transparent;
-		box-shadow: none;
-		text-decoration: underline;
-
-		&:hover, &:focus {
-			box-shadow: none;
-			color: black;
-		}
-	}
-
-	&.mod-wired {
-		background: transparent;
-
-		&:hover, &:focus {
-			box-shadow: 0 0 0 2px _color("primary") inset;
-			color: _color("primary");
-		}
-	}
-
-	&.mod-filling {
-		&:hover, &:focus {
-			background: _color("primary");
-		}
-	}
-}
-
-// PALETTES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-@mixin buttonStandardPalette($palette) {
-	background: _get($palette, "color");
-	color: _get($palette, "text");
-
-	&:active {
-		background: darken(_get($palette, "color"), 5%);
-	}
-}
-// standard coloring
-.button:not(.mod-flat):not(.mod-wired):not(.mod-filling) {
-	/* Colors */
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include buttonStandardPalette($palette);
-		}
-	}
-}
-
-// SIZES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.button {
-	&.mod-smaller {
-		font-size: _theme("font.size.smaller");
-		padding: .3rem .5rem;
-	}
-
-	&.mod-small {
-		font-size: _theme("font.size.smaller");
-		padding: .45rem .7rem;
-	}
-
-	&.mod-big {
-		font-size: 1rem;
-		padding: .7rem 1rem;
-	}
-
-	&.mod-bigger {
-		font-size: 1.15rem;
-		padding: 1rem 1.5rem;
-	}
-}
+// 		&:focus {
+// 			outline: 0;
+// 		}
+// 	}
+// }
 
 
-// STATES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// // MODS
+// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.button {
-	/* Disabled */
+// .button {
+// 	/* Style */
 
-	&[disabled] {
-		cursor: default;
-		opacity: _theme("commons.disabled.opacity");
-	}
+// 	&.mod-flat {
+// 		background: transparent;
+// 		box-shadow: none;
+// 		text-decoration: underline;
 
-	&.is-disabled {
-		opacity: _theme("commons.disabled.opacity");
-		pointer-events: none;
-	}
+// 		&:hover, &:focus {
+// 			box-shadow: none;
+// 			color: black;
+// 		}
+// 	}
 
+// 	&.mod-wired {
+// 		background: transparent;
 
-	/* Loading */
+// 		&:hover, &:focus {
+// 			box-shadow: 0 0 0 2px _color("primary") inset;
+// 			color: _color("primary");
+// 		}
+// 	}
 
-	&.is-loading {
-		color: transparent;
-		@include loading(1rem);
-		opacity: _theme("commons.disabled.opacity");
-		pointer-events: none;
-		user-select: none;
+// 	&.mod-filling {
+// 		&:hover, &:focus {
+// 			background: _color("primary");
+// 		}
+// 	}
+// }
 
-		&.mod-smaller {
-			@include loading(.7rem);
-		}
+// // PALETTES
+// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-		&.mod-small {
-			@include loading(.85rem);
-		}
+// @mixin buttonStandardPalette($palette) {
+// 	background: _get($palette, "color");
+// 	color: _get($palette, "text");
 
-		&.mod-big {
-			@include loading(1.25rem);
-		}
+// 	&:active {
+// 		background: darken(_get($palette, "color"), 5%);
+// 	}
+// }
+// // standard coloring
+// .button:not(.mod-flat):not(.mod-wired):not(.mod-filling) {
+// 	/* Colors */
+// 	@each $name, $palette in _palettes() {
+// 		&.palette-#{$name} {
+// 			@include buttonStandardPalette($palette);
+// 		}
+// 	}
+// }
 
-		&.mod-bigger {
-			@include loading(1.5rem);
-		}
-	}
+// // SIZES
+// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// .button {
+// 	&.mod-smaller {
+// 		font-size: _theme("font.size.smaller");
+// 		padding: .3rem .5rem;
+// 	}
 
-	/* Success */
+// 	&.mod-small {
+// 		font-size: _theme("font.size.smaller");
+// 		padding: .45rem .7rem;
+// 	}
 
-	&.is-success {
-		background: _color("success");
-		color: transparent;
-		pointer-events: none;
-		user-select: none;
+// 	&.mod-big {
+// 		font-size: 1rem;
+// 		padding: .7rem 1rem;
+// 	}
 
-		&::after {
-			color: white;
-			content: "\e923";
-			font-family: "Lucca icons";
-			font-size: 1.5rem;
-			height: 100%;
-			left: 0;
-			line-height: 100%;
-			padding-top: 4%;
-			position: absolute;
-			right: 0;
-			top: 0;
-			vertical-align: middle;
-		}
-
-		&.mod-smaller {
-			&::after {
-				font-size: 1rem;
-			}
-		}
-
-		&.mod-small {
-			&::after {
-				font-size: 1.2rem;
-			}
-		}
-
-		&.mod-big {
-			&::after {
-				font-size: 1.9rem;
-			}
-		}
-
-		&.mod-bigger {
-			&::after {
-				font-size: 2.6rem;
-			}
-		}
-	}
-
-	/* Error */
-
-	&.is-error {
-		background: _color("error");
-		color: transparent;
-		pointer-events: none;
-		user-select: none;
-
-		&::after {
-			color: white;
-			content: "\e924";
-			font-family: "Lucca icons";
-			font-size: 1.5rem;
-			height: 100%;
-			left: 0;
-			line-height: 100%;
-			padding-top: 4%;
-			position: absolute;
-			right: 0;
-			top: 0;
-			vertical-align: middle;
-		}
-
-		&.mod-smaller {
-			&::after {
-				font-size: 1rem;
-			}
-		}
-
-		&.mod-small {
-			&::after {
-				font-size: 1.2rem;
-			}
-		}
-
-		&.mod-big {
-			&::after {
-				font-size: 1.9rem;
-			}
-		}
-
-		&.mod-bigger {
-			&::after {
-				font-size: 2.6rem;
-			}
-		}
-	}
-}
+// 	&.mod-bigger {
+// 		font-size: 1.15rem;
+// 		padding: 1rem 1.5rem;
+// 	}
+// }
 
 
-// WRAPPER
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// // STATES
+// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.buttons {
-	display: flex;
-	margin: .2rem;
+// .button {
+// 	/* Disabled */
 
-	.button {
-		border-radius: 0;
-		display: block;
-		margin: 0 0 0 -1px;
-		position: relative;
+// 	&[disabled] {
+// 		cursor: default;
+// 		opacity: _theme("commons.disabled.opacity");
+// 	}
 
-		&:first-child {
-			border-radius: 3px 0 0 3px;
-		}
+// 	&.is-disabled {
+// 		opacity: _theme("commons.disabled.opacity");
+// 		pointer-events: none;
+// 	}
 
-		&:last-child {
-			border-radius: 0 3px 3px 0;
-		}
 
-		&:hover, &:focus {
-			z-index: 1;
-		}
-	}
-}
+// 	/* Loading */
+
+// 	&.is-loading {
+// 		color: transparent;
+// 		@include loading(1rem);
+// 		opacity: _theme("commons.disabled.opacity");
+// 		pointer-events: none;
+// 		user-select: none;
+
+// 		&.mod-smaller {
+// 			@include loading(.7rem);
+// 		}
+
+// 		&.mod-small {
+// 			@include loading(.85rem);
+// 		}
+
+// 		&.mod-big {
+// 			@include loading(1.25rem);
+// 		}
+
+// 		&.mod-bigger {
+// 			@include loading(1.5rem);
+// 		}
+// 	}
+
+// 	/* Success */
+
+// 	&.is-success {
+// 		background: _color("success");
+// 		color: transparent;
+// 		pointer-events: none;
+// 		user-select: none;
+
+// 		&::after {
+// 			color: white;
+// 			content: "\e923";
+// 			font-family: "Lucca icons";
+// 			font-size: 1.5rem;
+// 			height: 100%;
+// 			left: 0;
+// 			line-height: 100%;
+// 			padding-top: 4%;
+// 			position: absolute;
+// 			right: 0;
+// 			top: 0;
+// 			vertical-align: middle;
+// 		}
+
+// 		&.mod-smaller {
+// 			&::after {
+// 				font-size: 1rem;
+// 			}
+// 		}
+
+// 		&.mod-small {
+// 			&::after {
+// 				font-size: 1.2rem;
+// 			}
+// 		}
+
+// 		&.mod-big {
+// 			&::after {
+// 				font-size: 1.9rem;
+// 			}
+// 		}
+
+// 		&.mod-bigger {
+// 			&::after {
+// 				font-size: 2.6rem;
+// 			}
+// 		}
+// 	}
+
+// 	/* Error */
+
+// 	&.is-error {
+// 		background: _color("error");
+// 		color: transparent;
+// 		pointer-events: none;
+// 		user-select: none;
+
+// 		&::after {
+// 			color: white;
+// 			content: "\e924";
+// 			font-family: "Lucca icons";
+// 			font-size: 1.5rem;
+// 			height: 100%;
+// 			left: 0;
+// 			line-height: 100%;
+// 			padding-top: 4%;
+// 			position: absolute;
+// 			right: 0;
+// 			top: 0;
+// 			vertical-align: middle;
+// 		}
+
+// 		&.mod-smaller {
+// 			&::after {
+// 				font-size: 1rem;
+// 			}
+// 		}
+
+// 		&.mod-small {
+// 			&::after {
+// 				font-size: 1.2rem;
+// 			}
+// 		}
+
+// 		&.mod-big {
+// 			&::after {
+// 				font-size: 1.9rem;
+// 			}
+// 		}
+
+// 		&.mod-bigger {
+// 			&::after {
+// 				font-size: 2.6rem;
+// 			}
+// 		}
+// 	}
+// }
+
+
+// // WRAPPER
+// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// .buttons {
+// 	display: flex;
+// 	margin: .2rem;
+
+// 	.button {
+// 		border-radius: 0;
+// 		display: block;
+// 		margin: 0 0 0 -1px;
+// 		position: relative;
+
+// 		&:first-child {
+// 			border-radius: 3px 0 0 3px;
+// 		}
+
+// 		&:last-child {
+// 			border-radius: 0 3px 3px 0;
+// 		}
+
+// 		&:hover, &:focus {
+// 			z-index: 1;
+// 		}
+// 	}
+// }

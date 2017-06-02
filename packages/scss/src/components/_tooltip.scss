@@ -1,34 +1,34 @@
-.tooltip {
-	background: _color("grey");
-	border-radius: 3px;
-	color: white;
-	display: inline-block;
-	font-size: _theme("font.size.small");
-	padding: .5rem 1rem;
-	position: relative;
+// .tooltip {
+// 	background: _color("grey");
+// 	border-radius: 3px;
+// 	color: white;
+// 	display: inline-block;
+// 	font-size: _theme("font.size.small");
+// 	padding: .5rem 1rem;
+// 	position: relative;
 
-	&::before {
-		border-color: _color("grey") transparent transparent transparent;
-		border-style: solid;
-		border-width: 7px 7px 0;
-		bottom: -6px;
-		content: "";
-		height: 0;
-		left: 0;
-		margin: auto;
-		position: absolute;
-		right: 0;
-		width: 0;
-	}
-}
+// 	&::before {
+// 		border-color: _color("grey") transparent transparent transparent;
+// 		border-style: solid;
+// 		border-width: 7px 7px 0;
+// 		bottom: -6px;
+// 		content: "";
+// 		height: 0;
+// 		left: 0;
+// 		margin: auto;
+// 		position: absolute;
+// 		right: 0;
+// 		width: 0;
+// 	}
+// }
 
-.tooltip {
-	&.mod-primary {
-		background: _color("primary");
-		color: _color("grey");
+// .tooltip {
+// 	&.mod-primary {
+// 		background: _color("primary");
+// 		color: _color("grey");
 
-		&::before {
-			border-color: _color("primary") transparent transparent transparent;
-		}
-	}
-}
+// 		&::before {
+// 			border-color: _color("primary") transparent transparent transparent;
+// 		}
+// 	}
+// }

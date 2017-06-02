@@ -1,35 +1,35 @@
-.label {
-	border-radius: 3px;
-	display: inline-block;
-	font-size: _theme("font.size.small");
-	font-weight: 400;
-	line-height: 1;
-	margin: 0 .3rem;
-	padding: .25rem .5rem;
-	text-align: center;
-	vertical-align: middle;
-	white-space: nowrap;
-}
+// .label {
+// 	border-radius: 3px;
+// 	display: inline-block;
+// 	font-size: _theme("font.size.small");
+// 	font-weight: 400;
+// 	line-height: 1;
+// 	margin: 0 .3rem;
+// 	padding: .25rem .5rem;
+// 	text-align: center;
+// 	vertical-align: middle;
+// 	white-space: nowrap;
+// }
 
 
-// Palettes
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.label {
+// // Palettes
+// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// .label {
 
-	// todo - move default palette in theming under elements.label
-	$default-palette: ( "color": #CCCCCC, "text": #666666 );
+// 	// todo - move default palette in theming under elements.label
+// 	$default-palette: ( "color": #CCCCCC, "text": #666666 );
 
-	@mixin labelColoring($palette) {
-		background: _get($palette, "color");
-		color: _get($palette, "text");
-	}
+// 	@mixin labelColoring($palette) {
+// 		background: _get($palette, "color");
+// 		color: _get($palette, "text");
+// 	}
 
-	// default coloring
-	@include labelColoring($default-palette);
-	// palettes coloring
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include labelColoring($palette);
-		}
-	}
-}
+// 	// default coloring
+// 	@include labelColoring($default-palette);
+// 	// palettes coloring
+// 	@each $name, $palette in _palettes() {
+// 		&.palette-#{$name} {
+// 			@include labelColoring($palette);
+// 		}
+// 	}
+// }
