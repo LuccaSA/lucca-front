@@ -1,0 +1,28 @@
+.loading {
+	@include loading(1rem);
+	display: inline-block;
+	min-height: 1.5rem;
+	min-width: 1.5rem;
+	padding-left: 2rem;
+	position: relative;
+
+	&::after, &::before {
+		height: 1rem;
+		margin: .35rem;
+		width: 1rem;
+	}
+}
+
+.loading {
+	&.mod-block {
+		display: block;
+		margin-bottom: 2rem;
+		padding: 3rem 0 0;
+		text-align: center;
+		width: 100%;
+
+		&::after, &::before {
+			margin: auto;
+		}
+	}
+}
