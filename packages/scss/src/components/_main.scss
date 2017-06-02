@@ -6,6 +6,10 @@
 	padding: 4rem 0;
 }
 
+.main-filters {
+	margin-bottom: 3rem;
+}
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -16,6 +20,10 @@
 	}
 
 	&.mod-sections {
+		.main-filters {
+			margin-bottom: 0;
+		}
+
 		.main-content {
 			padding-bottom: 0;
 			padding-top: 0;
