@@ -22,7 +22,7 @@
 	transition: opacity 150ms ease;
 
 	&::before {
-		background: _palette("primary.color");
+		background: _color("primary");
 		bottom: 0;
 		content: "";
 		left: 0;
@@ -44,8 +44,9 @@
 }
 
 .navSide-link-alert {
-	background: _palette("primary.color");
+	background: _color("primary");
 	border-radius: .5rem;
+	// lulu - i dont like it
 	color: _palette("primary.text");
 	font-size: _theme("font.size.smaller");
 	height: 1rem;
@@ -62,7 +63,7 @@
 
 .navSide-link {
 	&.is-active {
-		background: #404040;
+		background: #404040; // :'(
 		opacity: 1;
 
 		&::before {

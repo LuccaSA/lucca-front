@@ -28,4 +28,4 @@ $palettes: (
 		"text": #666666,
 	),
 );
-$luTheme: _set($luTheme, "palette", $palettes);
+$theme: _set($theme, "palettes", $palettes);

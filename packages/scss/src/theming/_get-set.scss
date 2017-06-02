@@ -1,34 +1,78 @@
-@function _get($theme, $keys) {
+// will try to get $map.$keys or throw if no result
+@function _get($map, $keys) {
 	$keys: str-explode($keys, '.');
 
-	$result: $theme;
+	$result: $map;
 
 	@for $i from 1 through length($keys) {
 		$key: nth($keys, $i);
 		@if (map-has-key($result, $key)) {
 			$result: map-get($result, $key);
 		} @else {
-			@error "There is no #{$key} key in theme map";
+			@error "There is no #{$key} key in map";
 			@return "";
 		}
 	}
 	@return $result;
 }
 
-@function _set($theme, $keys, $map) {
+// will try to get $map.$keys or false if no result - might still throw depending on keys
+@function _safeGet($map, $keys) {
+	$keys: str-explode($keys, '.');
+
+	$result: $map;
+
+	@for $i from 1 through length($keys) {
+		$key: nth($keys, $i);
+		@if (map-has-key($result, $key)) {
+			$result: map-get($result, $key);
+		} @else {
+			@return false;
+		}
+	}
+	@return $result;
+}
+
+// sets stuff
+@function _set($map, $keys, $values) {
 	$keys: str-explode($keys, '.');
 	$l: length($keys);
 	@for $i from 1 through $l {
 		$key: nth($keys, $l - $i + 1);
-		$map: ($key: $map);
+		$values: ($key: $values);
 	}
-	$theme: map-extend($theme, $map, true);
-	@return $theme;
+	$map: map-extend($map, $values, true);
+	@return $map;
 }
 
 @function _theme($keys) {
-	@return _get($luTheme, $keys);
+	@return _get($theme, $keys);
 }
-@function _palette($keys) {
-	@return _get($luTheme, "palette." + $keys);
+
+// @function _palette($keys) {
+// 	@return _get($theme, "palettes." + $keys);
+// }
+@function _palettes() {
+	@return _get($theme, "palettes");
+}
+
+@function _color($keys) {
+	// try to find it in colors
+	$result: _safeGet($theme, "colors." + $keys);
+	@if $result {
+		@return $result;
+	}
+	// try to find color associated with same palette
+	$result: _safeGet($theme, "palettes." + $keys + ".color");
+	@if $result {
+		@return $result;
+	}
+	// try to find it in commons
+	$result: _safeGet($theme, "commons." + $keys + ".color");
+	@if $result {
+		@return $result;
+	}
+	// throw
+	@error "couldn't find color #{$keys} in theme";
+	@return "";
 }

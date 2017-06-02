@@ -16,31 +16,14 @@
 
 // COLORS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.u-textGrey {
-	color: _theme("commons.text.default") !important;
+@mixin textPalette($palette) {
+	color: _get($palette, "color") !important;
 }
-
-.u-textLight {
-	color: _theme("commons.text.light") !important;
+@each $name, $palette in _palettes() {
+	.u-text-#{$name} {
+		@include textPalette($palette);
+	}
 }
-
-.u-textPrimary {
-	color: _palette("primary.color") !important;
-}
-
-.u-textSecondary {
-	color: _palette("secondary.color") !important;
-}
-
-.u-textGreen {
-	color: _palette("success.color") !important;
-}
-
-.u-textOrange {
-	color: _palette("warning.color") !important;
-}
-
-.u-textRed {
-	color: _palette("error.color") !important;
+.u-text-default {
+	color: _color("text.default") !important;
 }

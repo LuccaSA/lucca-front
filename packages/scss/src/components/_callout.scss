@@ -21,22 +21,16 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.callout {
-	&.mod-success {
-		&::before {
-			background: _palette("success.color");
-		}
-	}
 
-	&.mod-warning {
-		&::before {
-			background: _palette("warning.color");
-		}
+@mixin calloutDefaultPalette($palette) {
+	&::before {
+		background: _get($palette, "color");
 	}
-
-	&.mod-error {
-		&::before {
-			background: _palette("error.color");
+}
+.callout:not(.mod-filled) {
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include calloutDefaultPalette($palette);
 		}
 	}
 }

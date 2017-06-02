@@ -8,7 +8,7 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: _theme("commons.text.default");
+	color: _color("text.default");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
 	margin-bottom: .15rem;
@@ -19,20 +19,20 @@
 	width: 100%;
 
 	&::placeholder {
-		color: _theme("commons.text.placeholder");
+		color: _color("text.placeholder");
 		opacity: 0;
 		transition: opacity 150ms ease;
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _palette("primary.color");
+		box-shadow: 0 2px 0 0 _color("primary");
 
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _palette("primary.color");
+			color: _color("primary");
 			font-size: _theme("font.size.small");
 			top: 0;
 		}
@@ -82,13 +82,13 @@
 }
 
 .input-error {
-	color: _palette("error.color");
+	color: _color("error");
 	font-size: _theme("font.size.small");
 	margin: 0;
 }
 
 .input-helper {
-	color: _theme("commons.text.light");
+	color: _color("text.light");
 	font-size: _theme("font.size.small");
 	margin: 0;
 }
@@ -127,7 +127,7 @@
 
 		&::after {
 			bottom: .15rem;
-			color: _theme("commons.text.light");
+			color: _color("text.light");
 			content: "\e918";
 			font-family: "Lucca icons";
 			position: absolute;
@@ -156,7 +156,7 @@
 
 		&::after {
 			bottom: .15rem;
-			color: _theme("commons.text.light");
+			color: _color("text.light");
 			content: "\e918";
 			font-family: "Lucca icons";
 			position: absolute;
@@ -177,7 +177,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: _theme("commons.text.light");
+		color: _color("text.light");
 		cursor: not-allowed;
 	}
 

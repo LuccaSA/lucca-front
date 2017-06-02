@@ -3,4 +3,4 @@ $colors: (
 	figgo: black,
 );
 
-$luTheme: _set($luTheme, 'palette.colors', $colors);
+$theme: _set($theme, 'palette.colors', $colors);

@@ -1,8 +1,8 @@
 @mixin formError() {
-	box-shadow: 0 2px 0 0 _palette("error.color");
+	box-shadow: 0 2px 0 0 _color("error");
 
 	~ .input-label {
-		color: _palette("error.color");
+		color: _color("error");
 	}
 }
 

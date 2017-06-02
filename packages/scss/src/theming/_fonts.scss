@@ -16,5 +16,5 @@ $line: (
 	"biggest": 3.2rem,
 );
 
-$luTheme: _set($luTheme, "font.size", $size);
-$luTheme: _set($luTheme, "font.line", $line);
+$theme: _set($theme, "font.size", $size);
+$theme: _set($theme, "font.line", $line);

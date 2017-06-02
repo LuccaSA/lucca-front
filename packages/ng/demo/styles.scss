@@ -5,5 +5,5 @@
 	'../src/main';
 
 h1 {
-	color: _get($luTheme, 'palette.colors.primary') !important;
+	color: _get($theme, 'palette.colors.primary') !important;
 }

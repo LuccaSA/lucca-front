@@ -8,7 +8,7 @@
 	background: transparent;
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: _theme("commons.text.default");
+	color: _color("text.default");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
 	line-height: _theme("font.line.standard");
@@ -18,10 +18,10 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _palette("primary.color");
+		box-shadow: 0 2px 0 0 _color("primary");
 
 		~ .textarea-label {
-			color: _palette("primary.color");
+			color: _color("primary");
 			font-size: _theme("font.size.small");
 			top: 0;
 		}
@@ -59,7 +59,7 @@
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
 		box-shadow: none;
-		color: _theme("commons.text.light");
+		color: _color("text.light");
 		cursor: not-allowed;
 	}
 }
