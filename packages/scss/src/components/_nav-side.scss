@@ -1,73 +1,72 @@
-// .navSide {
-// 	background: #666666;
-// 	font-size: _theme("sizes.small.font-size");
-// 	height: 100%;
-// 	left: 0;
-// 	overflow-x: hidden;
-// 	overflow-y: auto;
-// 	position: fixed;
-// 	text-align: center;
-// 	top: 0;
-// 	width: _theme("navSide.width");
-// 	z-index: 2;
-// }
+.navSide {
+	background: #666666;
+	//font-size: _theme("sizes.small.font-size");
+	height: 100%;
+	left: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: _theme("component.navSide.width");
+	z-index: 2;
+}
 
-// .navSide-link {
-// 	color: white;
-// 	display: block;
-// 	opacity: .75;
-// 	padding: 15px 10px;
-// 	position: relative;
-// 	text-decoration: none;
-// 	transition: opacity 150ms ease;
+.navSide-link {
+	color: white;
+	display: block;
+	opacity: .75;
+	padding: 15px 10px;
+	position: relative;
+	text-decoration: none;
+	transition: opacity 150ms ease;
 
-// 	&::before {
-// 		background: _color("primary");
-// 		bottom: 0;
-// 		content: "";
-// 		left: 0;
-// 		position: absolute;
-// 		top: 0;
-// 		transform: scaleY(0);
-// 		transform-origin: 50%;
-// 		transition: all 250ms ease;
-// 		width: 2px;
-// 	}
+	&::before {
+		background: _color("primary");
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		top: 0;
+		transform: scaleY(0);
+		transform-origin: 50%;
+		transition: all 250ms ease;
+		width: 2px;
+	}
 
-// 	&:hover {
-// 		opacity: 1;
+	&:hover {
+		opacity: 1;
 
-// 		&::before {
-// 			transform: scaleY(1);
-// 		}
-// 	}
-// }
+		&::before {
+			transform: scaleY(1);
+		}
+	}
+}
 
-// .navSide-link-alert {
-// 	background: _color("primary");
-// 	border-radius: .5rem;
-// 	// lulu - i dont like it
-// 	color: _palette("primary.text");
-// 	font-size: _theme("font.size.smaller");
-// 	height: 1rem;
-// 	line-height: 1rem;
-// 	padding: 0 .25rem;
-// 	position: absolute;
-// 	right: 5px;
-// 	top: 5px;
-// }
+.navSide-link-alert {
+	background: _color("primary");
+	border-radius: .5rem;
+	color: _color("text.default"); // lulu - i dont like it
+	font-size: _theme("sizes.smaller.font-size");
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0 .25rem;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
 
 
-// // STATES
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// .navSide-link {
-// 	&.is-active {
-// 		background: #404040; // :'(
-// 		opacity: 1;
+.navSide-link {
+	&.is-active {
+		background: #404040; // :'(
+		opacity: 1;
 
-// 		&::before {
-// 			transform: scaleY(1);
-// 		}
-// 	}
-// }
+		&::before {
+			transform: scaleY(1);
+		}
+	}
+}
