@@ -1,21 +1,21 @@
-// .global {
-// 	padding: 4rem 0 4rem _theme("navSide.width");
-// }
+.global {
+	padding: 4rem 0 4rem _theme("component.navSide.width");
+}
 
-// // MODS
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// .global {
-// 	&.mod-noAside {
-// 		padding-left: 0;
-// 	}
+.global {
+	&.mod-noAside {
+		padding-left: 0;
+	}
 
-// 	&.mod-sections {
-// 		padding-bottom: 0;
-// 		padding-top: 0;
-// 	}
+	&.mod-sections {
+		padding-bottom: 0;
+		padding-top: 0;
+	}
 
-// 	&.mod-filters {
-// 		padding-top: 0;
-// 	}
-// }
+	&.mod-filters {
+		padding-top: 0;
+	}
+}
