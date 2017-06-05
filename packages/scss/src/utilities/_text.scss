@@ -16,6 +16,20 @@
 
 // COLORS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.u-textDefault {
+	color: _color("text.default") !important;
+}
+
+.u-textLight {
+	color: _color("text.light") !important;
+}
+
+.u-textPlaceholder {
+	color: _color("text.placeholder") !important;
+}
+
+// palette
 @mixin textColoring($palette) {
 	color: _get($palette, "color") !important;
 }
@@ -23,7 +37,4 @@
 	.u-text#{str-capitalize($name)} {
 		@include textColoring($palette);
 	}
-}
-.u-textDefault {
-	color: _color("text.default") !important;
 }
