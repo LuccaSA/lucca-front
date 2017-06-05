@@ -35,8 +35,8 @@
 }
 
 
-// // MODS
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
 	/* Style */
@@ -91,6 +91,7 @@
 		}
 	}
 }
+
 .button.mod-filling {
 	@mixin buttonFillingColoring($palette) {
 		background: transparent;
@@ -107,10 +108,10 @@
 		}
 	}
 }
+
 .button.mod-flat {
 	// doesnt support palettes
 	background: transparent;
-	// color: black; // :(
 	&:hover, &:focus {
 		color: _component("button.flat.color");
 	}
@@ -142,11 +143,12 @@
 }
 
 
-// // STATES
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-// 	/* Disabled */
+
+	/* Disabled */
 
 	&[disabled] {
 		cursor: default;
@@ -158,8 +160,7 @@
 		pointer-events: none;
 	}
 
-
-// 	/* Loading */
+	/* Loading */
 
 	&.is-loading {
 		color: transparent;
@@ -189,10 +190,9 @@
 			top: 0;
 			vertical-align: middle;
 		}
-
 	}
 
-// 	/* Error */
+	/* Error */
 
 	&.is-error {
 		background: _color("error");
@@ -243,8 +243,8 @@
 }
 
 
-// // WRAPPER
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// WRAPPER
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .buttons {
 	$radius: _component("button.border.radius");
