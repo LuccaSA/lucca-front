@@ -1,8 +1,4 @@
 .button {
-	// for sizing
-	// font-size: _theme("font.size.small");
-	// line-height: 1;
-	// padding: .55rem .85rem;
 
 	cursor: pointer;
 	display: inline-block;
@@ -42,36 +38,18 @@
 // // MODS
 // // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// .button {
-// 	/* Style */
+.button {
+	/* Style */
 
-// 	&.mod-flat {
-// 		background: transparent;
-// 		box-shadow: none;
-// 		text-decoration: underline;
+	&.mod-flat {
+		box-shadow: none;
+		text-decoration: underline;
 
-// 		&:hover, &:focus {
-// 			box-shadow: none;
-// 			color: black;
-// 		}
-// 	}
-
-// 	&.mod-wired {
-// 		background: transparent;
-
-// 		&:hover, &:focus {
-// 			// needs special coloring
-// 			box-shadow: 0 0 0 2px _color("primary") inset;
-// 			color: _color("primary");
-// 		}
-// 	}
-
-// 	&.mod-filling {
-// 		&:hover, &:focus {
-// 			background: _color("primary");
-// 		}
-// 	}
-// }
+		&:hover, &:focus {
+			box-shadow: none;
+		}
+	}
+}
 
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -95,15 +73,63 @@
 		}
 	}
 }
+
+// special coloring for mods
+.button.mod-wired {
+	@mixin buttonWiredColoring($palette) {
+		background: transparent;
+		color: _color("text.default");
+		&:hover, &:focus {
+			box-shadow: 0 0 0 2px _get($palette, "color") inset;
+			color: _get($palette, "color");
+		}
+	}
+	@include buttonWiredColoring(_component("button.wired.default-palette"));
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include buttonWiredColoring($palette);
+		}
+	}
+}
+.button.mod-filling {
+	@mixin buttonFillingColoring($palette) {
+		background: transparent;
+		color: _color("text.default");
+		&:hover, &:focus {
+			background: _get($palette, "color");
+			color: _get($palette, "text");
+		}
+	}
+	@include buttonFillingColoring(_component("button.filling.default-palette"));
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include buttonFillingColoring($palette);
+		}
+	}
+}
+.button.mod-flat {
+	// doesnt support palettes
+	background: transparent;
+	// color: black; // :(
+	&:hover, &:focus {
+		color: _component("button.flat.color");
+	}
+}
+
 // SIZING
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
+	// for sizing - that was what was there
+	// font-size: _theme("font.size.small");
+	// line-height: 1;
+	// padding: .55rem .85rem;
 	@mixin buttonSizing($size) {
-		$padding-v: _component("button.size-padding-v-ratio")*_get($size, "padding");
-		$padding-h: _component("button.size-padding-h-ratio")*_get($size, "padding");
+		$padding-v: _component("button.sizing.padding-v-ratio")*_get($size, "padding");
+		$padding-h: _component("button.sizing.padding-h-ratio")*_get($size, "padding");
 		font-size: _get($size, "font-size");
-		line-height: _get($size, "line-height");
+		// line-height: _get($size, "line-height");
+		line-height: 1;
 		padding: $padding-v $padding-h;
 	}
 
@@ -115,30 +141,6 @@
 		}
 	}
 }
-
-// // SIZES
-// // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-// .button {
-// 	&.mod-smaller {
-// 		font-size: _theme("font.size.smaller");
-// 		padding: .3rem .5rem;
-// 	}
-
-// 	&.mod-small {
-// 		font-size: _theme("font.size.smaller");
-// 		padding: .45rem .7rem;
-// 	}
-
-// 	&.mod-big {
-// 		font-size: 1rem;
-// 		padding: .7rem 1rem;
-// 	}
-
-// 	&.mod-bigger {
-// 		font-size: 1.15rem;
-// 		padding: 1rem 1.5rem;
-// 	}
-// }
 
 
 // // STATES
