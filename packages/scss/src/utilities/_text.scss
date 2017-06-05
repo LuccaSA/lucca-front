@@ -24,6 +24,15 @@
 		@include textPalette($palette);
 	}
 }
-.u-text-default {
+
+.u-textDefault {
 	color: _color("text.default") !important;
+}
+
+.u-textLight {
+	color: _color("text.light") !important;
+}
+
+.u-textPlaceholder {
+	color: _color("text.placeholder") !important;
 }
