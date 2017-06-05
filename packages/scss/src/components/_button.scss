@@ -65,8 +65,8 @@
 
 .button {
 	@mixin buttonSizing($size) {
-		$padding-v: _component("button.sizing.padding-v-ratio")*_get($size, "padding");
-		$padding-h: _component("button.sizing.padding-h-ratio")*_get($size, "padding");
+		$padding-v: _component("button.sizing.padding-v-ratio") * _get($size, "padding");
+		$padding-h: _component("button.sizing.padding-h-ratio") * _get($size, "padding");
 		font-size: _get($size, "font-size");
 		line-height: 1;
 		padding: $padding-v $padding-h;
