@@ -1,6 +1,6 @@
 {
 	"defaultSeverity": "warning",
-	"ignoreFiles": ["src/variables/*.scss", "src/_normalize.scss", "src/theming/*.scss", "src/functions/*.scss"],
+	"ignoreFiles": ["src/variables/*.scss", "src/_normalize.scss", "src/theming/**/*.scss", "src/functions/*.scss"],
 	"rules": {
 		"at-rule-name-case": "lower",
 		"at-rule-name-space-after": "always-single-line",
