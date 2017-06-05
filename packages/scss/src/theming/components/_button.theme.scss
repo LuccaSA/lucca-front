@@ -1,6 +1,5 @@
 $button: (
 	default-palette: ( color: white, text: _color("text.default") ),
-	default-size: _theme("sizes.standard"),
 
 	margin: .2rem,
 
@@ -28,6 +27,7 @@ $button: (
 
 	// sizing
 	sizing: (
+		default-size: _theme("sizes.standard"),
 		padding-v-ratio: .55,
 		padding-h-ratio: .85,
 	),

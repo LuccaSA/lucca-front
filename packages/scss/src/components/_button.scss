@@ -120,7 +120,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	// for sizing - that was what was there
+	// for sizing - that was what was there before
 	// font-size: _theme("font.size.small");
 	// line-height: 1;
 	// padding: .55rem .85rem;
@@ -133,8 +133,7 @@
 		padding: $padding-v $padding-h;
 	}
 
-	@include buttonSizing(_component("button.default-size"));
-	/* Colors */
+	@include buttonSizing(_component("button.sizing.default-size"));
 	@each $name, $size in _theme("sizes") {
 		&.size-#{$name} {
 			@include buttonSizing($size);
@@ -146,168 +145,128 @@
 // // STATES
 // // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// .button {
+.button {
 // 	/* Disabled */
 
-// // lulu - [disabled] and .is-disabled style not the same ?
-// 	&[disabled] {
-// 		cursor: default;
-// 		opacity: _theme("commons.disabled.opacity");
-// 	}
+	&[disabled] {
+		cursor: default;
+		opacity: _theme("commons.disabled.opacity");
+	}
 
-// 	&.is-disabled {
-// 		opacity: _theme("commons.disabled.opacity");
-// 		pointer-events: none;
-// 	}
+	&.is-disabled {
+		opacity: _theme("commons.disabled.opacity");
+		pointer-events: none;
+	}
 
 
 // 	/* Loading */
 
-// 	&.is-loading {
-// 		color: transparent;
-// 		@include loading(1rem);
-// 		opacity: _theme("commons.disabled.opacity");
-// 		pointer-events: none;
-// 		user-select: none;
+	&.is-loading {
+		color: transparent;
+		opacity: _theme("commons.disabled.opacity");
+		pointer-events: none;
+		user-select: none;
+	}
 
-// 		&.mod-smaller {
-// 			@include loading(.7rem);
-// 		}
+	/* Success */
 
-// 		&.mod-small {
-// 			@include loading(.85rem);
-// 		}
+	&.is-success {
+		background: _color("success");
+		color: transparent;
+		pointer-events: none;
+		user-select: none;
 
-// 		&.mod-big {
-// 			@include loading(1.25rem);
-// 		}
+		&::after {
+			color: white;
+			content: "\e923";
+			font-family: "Lucca icons";
+			height: 100%;
+			left: 0;
+			line-height: 100%;
+			padding-top: 4%;
+			position: absolute;
+			right: 0;
+			top: 0;
+			vertical-align: middle;
+		}
 
-// 		&.mod-bigger {
-// 			@include loading(1.5rem);
-// 		}
-// 	}
-
-// 	/* Success */
-
-// 	&.is-success {
-// 		background: _color("success");
-// 		color: transparent;
-// 		pointer-events: none;
-// 		user-select: none;
-
-// 		&::after {
-// 			color: white;
-// 			content: "\e923";
-// 			font-family: "Lucca icons";
-// 			font-size: 1.5rem;
-// 			height: 100%;
-// 			left: 0;
-// 			line-height: 100%;
-// 			padding-top: 4%;
-// 			position: absolute;
-// 			right: 0;
-// 			top: 0;
-// 			vertical-align: middle;
-// 		}
-
-// 		&.mod-smaller {
-// 			&::after {
-// 				font-size: 1rem;
-// 			}
-// 		}
-
-// 		&.mod-small {
-// 			&::after {
-// 				font-size: 1.2rem;
-// 			}
-// 		}
-
-// 		&.mod-big {
-// 			&::after {
-// 				font-size: 1.9rem;
-// 			}
-// 		}
-
-// 		&.mod-bigger {
-// 			&::after {
-// 				font-size: 2.6rem;
-// 			}
-// 		}
-// 	}
+	}
 
 // 	/* Error */
 
-// 	&.is-error {
-// 		background: _color("error");
-// 		color: transparent;
-// 		pointer-events: none;
-// 		user-select: none;
+	&.is-error {
+		background: _color("error");
+		color: transparent;
+		pointer-events: none;
+		user-select: none;
 
-// 		&::after {
-// 			color: white;
-// 			content: "\e924";
-// 			font-family: "Lucca icons";
-// 			font-size: 1.5rem;
-// 			height: 100%;
-// 			left: 0;
-// 			line-height: 100%;
-// 			padding-top: 4%;
-// 			position: absolute;
-// 			right: 0;
-// 			top: 0;
-// 			vertical-align: middle;
-// 		}
+		&::after {
+			color: white;
+			content: "\e924";
+			font-family: "Lucca icons";
+			height: 100%;
+			left: 0;
+			line-height: 100%;
+			padding-top: 4%;
+			position: absolute;
+			right: 0;
+			top: 0;
+			vertical-align: middle;
+		}
+	}
+}
 
-// 		&.mod-smaller {
-// 			&::after {
-// 				font-size: 1rem;
-// 			}
-// 		}
-
-// 		&.mod-small {
-// 			&::after {
-// 				font-size: 1.2rem;
-// 			}
-// 		}
-
-// 		&.mod-big {
-// 			&::after {
-// 				font-size: 1.9rem;
-// 			}
-// 		}
-
-// 		&.mod-bigger {
-// 			&::after {
-// 				font-size: 2.6rem;
-// 			}
-// 		}
-// 	}
-// }
+// sizing for states
+.button.is-loading {
+	@mixin buttonLoadingSizing($size) {
+		@include loading(_get($size, "font-size"));
+	}
+	@include buttonLoadingSizing(_component("button.sizing.default-size"));
+	@each $name, $size in _theme("sizes") {
+		&.size-#{$name} {
+			@include buttonLoadingSizing($size);
+		}
+	}
+}
+.button.is-success, .button.is-error {
+	@mixin buttonSuccessErrorSizing($size) {
+		&::after {
+			font-size: 1.5*_get($size, "font-size");
+		}
+	}
+	@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
+	@each $name, $size in _theme("sizes") {
+		&.size-#{$name} {
+			@include buttonSuccessErrorSizing($size);
+		}
+	}
+}
 
 
 // // WRAPPER
 // // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// .buttons {
-// 	display: flex;
-// 	margin: .2rem;
+.buttons {
+	$radius: _component("button.border.radius");
+	display: flex;
+	margin: _component("button.margin");
 
-// 	.button {
-// 		border-radius: 0;
-// 		display: block;
-// 		margin: 0 0 0 -1px;
-// 		position: relative;
+	.button {
+		border-radius: 0;
+		display: block;
+		margin: 0 0 0 -1px;
+		position: relative;
 
-// 		&:first-child {
-// 			border-radius: 3px 0 0 3px;
-// 		}
+		&:first-child {
+			border-radius: $radius 0 0 $radius;
+		}
 
-// 		&:last-child {
-// 			border-radius: 0 3px 3px 0;
-// 		}
+		&:last-child {
+			border-radius: 0 $radius $radius 0;
+		}
 
-// 		&:hover, &:focus {
-// 			z-index: 1;
-// 		}
-// 	}
-// }
+		&:hover, &:focus {
+			z-index: 1;
+		}
+	}
+}
