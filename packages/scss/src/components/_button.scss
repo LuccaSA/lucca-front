@@ -1,5 +1,4 @@
 .button {
-
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
@@ -9,7 +8,7 @@
 	white-space: nowrap;
 	margin: _component("button.margin");
 	border-radius: _component("button.border.radius");
-	box-shadow: _component("button.box-shadow");
+	box-shadow: unquote(_component("button.box-shadow"));
 	font-family: unquote(_component("button.font.family"));
 	transition: unquote(_component("button.transition"));
 
@@ -18,6 +17,7 @@
 			box-shadow: unquote(_component("button.hover.box-shadow"));
 		}
 	}
+
 	&:focus {
 		&:not([disabled]) {
 			box-shadow: unquote(_component("button.focus.box-shadow"));
@@ -26,7 +26,7 @@
 
 	&:active {
 		outline: 0;
-		box-shadow: _component("button.box-shadow"); // back to normal box shadow
+		box-shadow: unquote(_component("button.box-shadow"));
 
 		&:focus {
 			outline: 0;
@@ -35,26 +35,9 @@
 }
 
 
-// MODS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.button {
-	/* Style */
-
-	&.mod-flat {
-		box-shadow: none;
-		text-decoration: underline;
-
-		&:hover, &:focus {
-			box-shadow: none;
-		}
-	}
-}
-
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// standard coloring
 .button {
 	@mixin buttonColoring($palette) {
 		background: _get($palette, "color");
@@ -65,8 +48,10 @@
 		}
 	}
 
+	// default color
 	@include buttonColoring(_component("button.default-palette"));
-	/* Colors */
+
+	// palette colors
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
 			@include buttonColoring($palette);
@@ -74,70 +59,88 @@
 	}
 }
 
-// special coloring for mods
-.button.mod-wired {
-	@mixin buttonWiredColoring($palette) {
-		background: transparent;
-		color: _color("text.default");
-		&:hover, &:focus {
-			box-shadow: 0 0 0 2px _get($palette, "color") inset;
-			color: _get($palette, "color");
-		}
-	}
-	@include buttonWiredColoring(_component("button.wired.default-palette"));
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include buttonWiredColoring($palette);
-		}
-	}
-}
-
-.button.mod-filling {
-	@mixin buttonFillingColoring($palette) {
-		background: transparent;
-		color: _color("text.default");
-		&:hover, &:focus {
-			background: _get($palette, "color");
-			color: _get($palette, "text");
-		}
-	}
-	@include buttonFillingColoring(_component("button.filling.default-palette"));
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include buttonFillingColoring($palette);
-		}
-	}
-}
-
-.button.mod-flat {
-	// doesnt support palettes
-	background: transparent;
-	&:hover, &:focus {
-		color: _component("button.flat.color");
-	}
-}
 
 // SIZING
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	// for sizing - that was what was there before
-	// font-size: _theme("font.size.small");
-	// line-height: 1;
-	// padding: .55rem .85rem;
 	@mixin buttonSizing($size) {
 		$padding-v: _component("button.sizing.padding-v-ratio")*_get($size, "padding");
 		$padding-h: _component("button.sizing.padding-h-ratio")*_get($size, "padding");
 		font-size: _get($size, "font-size");
-		// line-height: _get($size, "line-height");
 		line-height: 1;
 		padding: $padding-v $padding-h;
 	}
 
+	// default size
 	@include buttonSizing(_component("button.sizing.default-size"));
+
+	// all sizes
 	@each $name, $size in _theme("sizes") {
 		&.size-#{$name} {
 			@include buttonSizing($size);
+		}
+	}
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.button {
+
+	&.mod-flat {
+		background: transparent;
+		box-shadow: none;
+		text-decoration: underline;
+
+		&:hover, &:focus {
+			box-shadow: none;
+			color: _component("button.flat.color");
+		}
+	}
+
+	&.mod-wired {
+		@mixin buttonWiredColoring($palette) {
+			background: transparent;
+			color: _color("text.default");
+
+			&:hover, &:focus {
+				box-shadow: 0 0 0 2px _get($palette, "color") inset;
+				color: _get($palette, "color");
+			}
+		}
+
+		// default color
+		@include buttonWiredColoring(_component("button.wired.default-palette"));
+
+		// palette colors
+		@each $name, $palette in _palettes() {
+			&.palette-#{$name} {
+				@include buttonWiredColoring($palette);
+			}
+		}
+	}
+
+	&.mod-filling {
+		@mixin buttonFillingColoring($palette) {
+			background: transparent;
+			color: _color("text.default");
+
+			&:hover, &:focus {
+				background: _get($palette, "color");
+				color: _get($palette, "text");
+			}
+		}
+
+		// default color
+		@include buttonFillingColoring(_component("button.filling.default-palette"));
+
+		// palette colors
+		@each $name, $palette in _palettes() {
+			&.palette-#{$name} {
+				@include buttonFillingColoring($palette);
+			}
 		}
 	}
 }
@@ -167,6 +170,17 @@
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
+
+		// Sizing
+		@mixin buttonLoadingSizing($size) {
+			@include loading(_get($size, "font-size"));
+		}
+		@include buttonLoadingSizing(_component("button.sizing.default-size"));
+		@each $name, $size in _theme("sizes") {
+			&.size-#{$name} {
+				@include buttonLoadingSizing($size);
+			}
+		}
 	}
 
 	/* Success */
@@ -184,11 +198,24 @@
 			height: 100%;
 			left: 0;
 			line-height: 100%;
-			padding-top: 4%;
+			padding-top: 6%;
 			position: absolute;
 			right: 0;
 			top: 0;
 			vertical-align: middle;
+		}
+
+		// Sizing
+		@mixin buttonSuccessErrorSizing($size) {
+			&::after {
+				font-size: 1.5*_get($size, "font-size");
+			}
+		}
+		@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
+		@each $name, $size in _theme("sizes") {
+			&.size-#{$name} {
+				@include buttonSuccessErrorSizing($size);
+			}
 		}
 	}
 
@@ -207,41 +234,27 @@
 			height: 100%;
 			left: 0;
 			line-height: 100%;
-			padding-top: 4%;
+			padding-top: 6%;
 			position: absolute;
 			right: 0;
 			top: 0;
 			vertical-align: middle;
 		}
-	}
-}
 
-// sizing for states
-.button.is-loading {
-	@mixin buttonLoadingSizing($size) {
-		@include loading(_get($size, "font-size"));
-	}
-	@include buttonLoadingSizing(_component("button.sizing.default-size"));
-	@each $name, $size in _theme("sizes") {
-		&.size-#{$name} {
-			@include buttonLoadingSizing($size);
+		// Sizing
+		@mixin buttonSuccessErrorSizing($size) {
+			&::after {
+				font-size: 1.5*_get($size, "font-size");
+			}
+		}
+		@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
+		@each $name, $size in _theme("sizes") {
+			&.size-#{$name} {
+				@include buttonSuccessErrorSizing($size);
+			}
 		}
 	}
 }
-.button.is-success, .button.is-error {
-	@mixin buttonSuccessErrorSizing($size) {
-		&::after {
-			font-size: 1.5*_get($size, "font-size");
-		}
-	}
-	@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
-	@each $name, $size in _theme("sizes") {
-		&.size-#{$name} {
-			@include buttonSuccessErrorSizing($size);
-		}
-	}
-}
-
 
 // WRAPPER
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

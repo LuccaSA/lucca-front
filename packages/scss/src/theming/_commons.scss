@@ -23,7 +23,7 @@ $commons: (
 		"size": 16px,
 	),
 	"box-shadow": 0 0 0 1px rgba(50, 50, 50, .2) inset,
-	"transition": "box-shadow 150ms ease, background 150ms ease, color 150ms ease",
+	"transition": "all 150ms ease",
 );
 
 $theme: _set($theme, "commons", $commons);
