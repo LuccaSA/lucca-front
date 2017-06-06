@@ -1,13 +1,9 @@
-.main {
-	padding-left: _theme("component.navSide.width");
-}
-
 .main-content {
 	padding: 4rem 0;
 }
 
-.main-filters {
-	margin-bottom: 3rem;
+.navSide + .main-content {
+	margin-left: _theme("component.navSide.width");
 }
 
 
@@ -15,18 +11,14 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .main {
-	&.mod-noAside {
-		padding-left: 0;
-	}
-
 	&.mod-sections {
-		.main-filters {
-			margin-bottom: 0;
-		}
-
 		.main-content {
 			padding-bottom: 0;
 			padding-top: 0;
+		}
+
+		.filters {
+			margin-bottom: 0;
 		}
 	}
 
