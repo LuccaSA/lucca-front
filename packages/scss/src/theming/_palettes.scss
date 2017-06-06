@@ -20,4 +20,13 @@ $palettes: (
 		"text": #FFFFFF,
 	),
 );
+
+$colors: (
+	text: (
+		"default": #666666,
+		"light": #999999,
+		"placeholder": #CCCCCC,
+	),
+);
 $theme: _set($theme, "palettes", $palettes);
+$theme: _set($theme, "colors", $colors);

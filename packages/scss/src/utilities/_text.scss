@@ -16,14 +16,6 @@
 
 // COLORS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-@mixin textPalette($palette) {
-	color: _get($palette, "color") !important;
-}
-@each $name, $palette in _palettes() {
-	.u-text-#{$name} {
-		@include textPalette($palette);
-	}
-}
 
 .u-textDefault {
 	color: _color("text.default") !important;
@@ -35,4 +27,14 @@
 
 .u-textPlaceholder {
 	color: _color("text.placeholder") !important;
+}
+
+// palette
+@mixin textColoring($palette) {
+	color: _get($palette, "color") !important;
+}
+@each $name, $palette in _palettes() {
+	.u-text#{str-capitalize($name)} {
+		@include textColoring($palette);
+	}
 }

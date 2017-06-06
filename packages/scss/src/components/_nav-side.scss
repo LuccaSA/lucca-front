@@ -1,6 +1,6 @@
 .navSide {
 	background: #666666;
-	font-size: _theme("font.size.small");
+	//font-size: _theme("sizes.small.font-size");
 	height: 100%;
 	left: 0;
 	overflow-x: hidden;
@@ -8,7 +8,7 @@
 	position: fixed;
 	text-align: center;
 	top: 0;
-	width: _theme("navSide.width");
+	width: _theme("component.navSide.width");
 	z-index: 2;
 }
 
@@ -46,9 +46,8 @@
 .navSide-link-alert {
 	background: _color("primary");
 	border-radius: .5rem;
-	// lulu - i dont like it
-	color: _palette("primary.text");
-	font-size: _theme("font.size.smaller");
+	color: _color("text.default"); // lulu - i dont like it
+	font-size: _theme("sizes.smaller.font-size");
 	height: 1rem;
 	line-height: 1rem;
 	padding: 0 .25rem;

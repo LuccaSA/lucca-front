@@ -1,0 +1,5 @@
+$navSide: (
+	"width": 130px,
+);
+
+$theme: _set($theme, "component.navSide", $navSide);

@@ -1,0 +1,40 @@
+$button: (
+
+	// theming
+	default-palette: (
+		color: white,
+		text: _color("text.default")
+	),
+	margin: .2rem,
+	box-shadow: "0 0 0 1px rgba(50, 50, 50, .2) inset",
+
+	// states
+	hover: (
+		box-shadow: "0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24)",
+	),
+	focus: (
+		box-shadow: "0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24)",
+	),
+	active: (
+		box-shadow: "0 0 0 1px rgba(50, 50, 50, .2) inset",
+	),
+
+	// mod
+	wired: (
+		default-palette: _theme("palettes.primary"),
+	),
+	filling: (
+		default-palette: _theme("palettes.primary"),
+	),
+	flat: (
+		color: black,
+	),
+
+	// sizing
+	sizing: (
+		default-size: _theme("sizes.standard"),
+		padding-v-ratio: .55,
+		padding-h-ratio: .85,
+	),
+);
+$theme: _set($theme, "components.button", $button);

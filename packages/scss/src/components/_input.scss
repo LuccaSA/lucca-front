@@ -9,7 +9,7 @@
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
-	font-family: "Source Sans Pro", Tahoma, sans-serif;
+	font-family: unquote(_component("button.font.family"));
 	font-weight: 400;
 	margin-bottom: .15rem;
 	outline: 0;
@@ -33,7 +33,7 @@
 
 		~ .input-label {
 			color: _color("primary");
-			font-size: _theme("font.size.small");
+			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
 	}
@@ -83,13 +83,13 @@
 
 .input-error {
 	color: _color("error");
-	font-size: _theme("font.size.small");
+	font-size: _theme("sizes.small.font-size");
 	margin: 0;
 }
 
 .input-helper {
 	color: _color("text.light");
-	font-size: _theme("font.size.small");
+	font-size: _theme("sizes.small.font-size");
 	margin: 0;
 }
 
@@ -146,7 +146,7 @@
 
 		.input-label {
 			color: #A6A6A6;
-			font-size: _theme("font.size.standard");
+			font-size: _theme("sizes.standard.font-size");
 			top: 1.3rem;
 		}
 
