@@ -489,30 +489,30 @@
 
 	/* XS - Mods */
 
-	&.mod-start-xs {
+	&.mod-xsStart {
 		justify-content: flex-start;
 		text-align: start;
 	}
 
-	&.mod-center-xs {
+	&.mod-xsCenter {
 		justify-content: center;
 		text-align: center;
 	}
 
-	&.mod-end-xs {
+	&.mod-xsEnd {
 		justify-content: flex-end;
 		text-align: end;
 	}
 
-	&.mod-top-xs {
+	&.mod-xsTop {
 		align-items: flex-start;
 	}
 
-	&.mod-middle-xs {
+	&.mod-xsMiddle {
 		align-items: center;
 	}
 
-	&.mod-bottom-xs {
+	&.mod-xsBottom {
 		align-items: flex-end;
 	}
 
@@ -527,30 +527,30 @@
 	/* SM - Mods */
 
 	@media only screen and (min-width: _theme("breakpoints.sm.breakAt")) {
-		.mod-start-sm {
+		.mod-smStart {
 			justify-content: flex-start;
 			text-align: start;
 		}
 
-		.mod-center-sm {
+		.mod-smCenter {
 			justify-content: center;
 			text-align: center;
 		}
 
-		.mod-end-sm {
+		.mod-smEnd {
 			justify-content: flex-end;
 			text-align: end;
 		}
 
-		.mod-top-sm {
+		.mod-smTop {
 			align-items: flex-start;
 		}
 
-		.mod-middle-sm {
+		.mod-smMiddle {
 			align-items: center;
 		}
 
-		.mod-bottom-sm {
+		.mod-smBottom {
 			align-items: flex-end;
 		}
 
@@ -566,30 +566,30 @@
 	/* MD - Mods */
 
 	@media only screen and (min-width: _theme("breakpoints.md.breakAt")) {
-		.mod-start-md {
+		.mod-mdStart {
 			justify-content: flex-start;
 			text-align: start;
 		}
 
-		.mod-center-md {
+		.mod-mdCenter {
 			justify-content: center;
 			text-align: center;
 		}
 
-		.mod-end-md {
+		.mod-mdEnd {
 			justify-content: flex-end;
 			text-align: end;
 		}
 
-		.mod-top-md {
+		.mod-mdTop {
 			align-items: flex-start;
 		}
 
-		.mod-middle-md {
+		.mod-mdMiddle {
 			align-items: center;
 		}
 
-		.mod-bottom-md {
+		.mod-mdBottom {
 			align-items: flex-end;
 		}
 
@@ -605,30 +605,30 @@
 	/* LG - Mods */
 
 	@media only screen and (min-width: _theme("breakpoints.lg.breakAt")) {
-		.mod-start-lg {
+		.mod-lgStart {
 			justify-content: flex-start;
 			text-align: start;
 		}
 
-		.mod-center-lg {
+		.mod-lgCenter {
 			justify-content: center;
 			text-align: center;
 		}
 
-		.mod-end-lg {
+		.mod-lgEnd {
 			justify-content: flex-end;
 			text-align: end;
 		}
 
-		.mod-top-lg {
+		.mod-lgTop {
 			align-items: flex-start;
 		}
 
-		.mod-middle-lg {
+		.mod-lgMiddle {
 			align-items: center;
 		}
 
-		.mod-bottom-lg {
+		.mod-lgBottom {
 			align-items: flex-end;
 		}
 
@@ -646,34 +646,34 @@
 // GRID UTILITIES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.u-first-xs {
+.u-xsFirst {
 	order: -1;
 }
 
-.u-last-xs {
+.u-xsLast {
 	order: 1;
 }
 
-.u-first-sm {
+.u-smFirst {
 	order: -1;
 }
 
-.u-last-sm {
+.u-smLast {
 	order: 1;
 }
 
-.u-first-md {
+.u-mdFirst {
 	order: -1;
 }
 
-.u-last-md {
+.u-mdLast {
 	order: 1;
 }
 
-.u-first-lg {
+.u-lgFirst {
 	order: -1;
 }
 
-.u-last-lg {
+.u-lgLast {
 	order: 1;
 }
