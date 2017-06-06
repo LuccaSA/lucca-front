@@ -2,7 +2,7 @@
 	padding: 4rem 0;
 }
 
-.navSide + .main-content {
+.navSide ~ .main-content {
 	margin-left: _theme("component.navSide.width");
 }
 
