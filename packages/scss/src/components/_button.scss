@@ -1,35 +1,84 @@
 .button {
-	background: white;
-	border: 0;
-	border-radius: 3px;
-	box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
-	color: _color("text.default");
 	cursor: pointer;
 	display: inline-block;
-	font-family: "Source Sans Pro", Tahoma, sans-serif;
-	font-size: _theme("font.size.small");
-	line-height: 1;
-	margin: .2rem;
-	padding: .55rem .85rem;
 	position: relative;
 	text-decoration: none;
-	transition: box-shadow 150ms ease, background 150ms ease, color 150ms ease;
+	border: 0;
 	vertical-align: middle;
 	white-space: nowrap;
+	margin: _component("button.margin");
+	border-radius: _component("button.border.radius");
+	box-shadow: unquote(_component("button.box-shadow"));
+	font-family: unquote(_component("button.font.family"));
+	transition: unquote(_component("button.transition"));
 
-	&:hover, &:focus {
+	&:hover {
 		&:not([disabled]) {
-			box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+			box-shadow: unquote(_component("button.hover.box-shadow"));
+		}
+	}
+
+	&:focus {
+		&:not([disabled]) {
+			box-shadow: unquote(_component("button.focus.box-shadow"));
 		}
 	}
 
 	&:active {
-		background: #F2F2F2;
-		box-shadow: 0 0 0 1px rgba(50, 50, 50, .2) inset;
 		outline: 0;
+		box-shadow: unquote(_component("button.box-shadow"));
 
 		&:focus {
 			outline: 0;
+		}
+	}
+}
+
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.button {
+	@mixin buttonColoring($palette) {
+		background: _get($palette, "color");
+		color: _get($palette, "text");
+
+		&:active {
+			background: darken(_get($palette, "color"), 5%);
+		}
+	}
+
+	// default color
+	@include buttonColoring(_component("button.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include buttonColoring($palette);
+		}
+	}
+}
+
+
+// SIZING
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.button {
+	@mixin buttonSizing($size) {
+		$padding-v: _component("button.sizing.padding-v-ratio") * _get($size, "padding");
+		$padding-h: _component("button.sizing.padding-h-ratio") * _get($size, "padding");
+		font-size: _get($size, "font-size");
+		line-height: 1;
+		padding: $padding-v $padding-h;
+	}
+
+	// default size
+	@include buttonSizing(_component("button.sizing.default-size"));
+
+	// all sizes
+	@each $name, $size in _theme("sizes") {
+		&.size-#{$name} {
+			@include buttonSizing($size);
 		}
 	}
 }
@@ -39,7 +88,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	/* Style */
 
 	&.mod-flat {
 		background: transparent;
@@ -48,68 +96,52 @@
 
 		&:hover, &:focus {
 			box-shadow: none;
-			color: black;
+			color: _component("button.flat.color");
 		}
 	}
 
 	&.mod-wired {
-		background: transparent;
+		@mixin buttonWiredColoring($palette) {
+			background: transparent;
+			color: _color("text.default");
 
-		&:hover, &:focus {
-			box-shadow: 0 0 0 2px _color("primary") inset;
-			color: _color("primary");
+			&:hover, &:focus {
+				box-shadow: 0 0 0 2px _get($palette, "color") inset;
+				color: _get($palette, "color");
+			}
+		}
+
+		// default color
+		@include buttonWiredColoring(_component("button.wired.default-palette"));
+
+		// palette colors
+		@each $name, $palette in _palettes() {
+			&.palette-#{$name} {
+				@include buttonWiredColoring($palette);
+			}
 		}
 	}
 
 	&.mod-filling {
-		&:hover, &:focus {
-			background: _color("primary");
+		@mixin buttonFillingColoring($palette) {
+			background: transparent;
+			color: _color("text.default");
+
+			&:hover, &:focus {
+				background: _get($palette, "color");
+				color: _get($palette, "text");
+			}
 		}
-	}
-}
 
-// PALETTES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+		// default color
+		@include buttonFillingColoring(_component("button.filling.default-palette"));
 
-@mixin buttonStandardPalette($palette) {
-	background: _get($palette, "color");
-	color: _get($palette, "text");
-
-	&:active {
-		background: darken(_get($palette, "color"), 5%);
-	}
-}
-// standard coloring
-.button:not(.mod-flat):not(.mod-wired):not(.mod-filling) {
-	/* Colors */
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include buttonStandardPalette($palette);
+		// palette colors
+		@each $name, $palette in _palettes() {
+			&.palette-#{$name} {
+				@include buttonFillingColoring($palette);
+			}
 		}
-	}
-}
-
-// SIZES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.button {
-	&.mod-smaller {
-		font-size: _theme("font.size.smaller");
-		padding: .3rem .5rem;
-	}
-
-	&.mod-small {
-		font-size: _theme("font.size.smaller");
-		padding: .45rem .7rem;
-	}
-
-	&.mod-big {
-		font-size: 1rem;
-		padding: .7rem 1rem;
-	}
-
-	&.mod-bigger {
-		font-size: 1.15rem;
-		padding: 1rem 1.5rem;
 	}
 }
 
@@ -118,6 +150,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
+
 	/* Disabled */
 
 	&[disabled] {
@@ -130,30 +163,23 @@
 		pointer-events: none;
 	}
 
-
 	/* Loading */
 
 	&.is-loading {
 		color: transparent;
-		@include loading(1rem);
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
 
-		&.mod-smaller {
-			@include loading(.7rem);
+		// Sizing
+		@mixin buttonLoadingSizing($size) {
+			@include loading(_get($size, "font-size"));
 		}
-
-		&.mod-small {
-			@include loading(.85rem);
-		}
-
-		&.mod-big {
-			@include loading(1.25rem);
-		}
-
-		&.mod-bigger {
-			@include loading(1.5rem);
+		@include buttonLoadingSizing(_component("button.sizing.default-size"));
+		@each $name, $size in _theme("sizes") {
+			&.size-#{$name} {
+				@include buttonLoadingSizing($size);
+			}
 		}
 	}
 
@@ -169,38 +195,26 @@
 			color: white;
 			content: "\e923";
 			font-family: "Lucca icons";
-			font-size: 1.5rem;
 			height: 100%;
 			left: 0;
 			line-height: 100%;
-			padding-top: 4%;
+			padding-top: 6%;
 			position: absolute;
 			right: 0;
 			top: 0;
 			vertical-align: middle;
 		}
 
-		&.mod-smaller {
+		// Sizing
+		@mixin buttonSuccessErrorSizing($size) {
 			&::after {
-				font-size: 1rem;
+				font-size: 1.5*_get($size, "font-size");
 			}
 		}
-
-		&.mod-small {
-			&::after {
-				font-size: 1.2rem;
-			}
-		}
-
-		&.mod-big {
-			&::after {
-				font-size: 1.9rem;
-			}
-		}
-
-		&.mod-bigger {
-			&::after {
-				font-size: 2.6rem;
+		@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
+		@each $name, $size in _theme("sizes") {
+			&.size-#{$name} {
+				@include buttonSuccessErrorSizing($size);
 			}
 		}
 	}
@@ -217,50 +231,38 @@
 			color: white;
 			content: "\e924";
 			font-family: "Lucca icons";
-			font-size: 1.5rem;
 			height: 100%;
 			left: 0;
 			line-height: 100%;
-			padding-top: 4%;
+			padding-top: 6%;
 			position: absolute;
 			right: 0;
 			top: 0;
 			vertical-align: middle;
 		}
 
-		&.mod-smaller {
+		// Sizing
+		@mixin buttonSuccessErrorSizing($size) {
 			&::after {
-				font-size: 1rem;
+				font-size: 1.5*_get($size, "font-size");
 			}
 		}
-
-		&.mod-small {
-			&::after {
-				font-size: 1.2rem;
-			}
-		}
-
-		&.mod-big {
-			&::after {
-				font-size: 1.9rem;
-			}
-		}
-
-		&.mod-bigger {
-			&::after {
-				font-size: 2.6rem;
+		@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
+		@each $name, $size in _theme("sizes") {
+			&.size-#{$name} {
+				@include buttonSuccessErrorSizing($size);
 			}
 		}
 	}
 }
 
-
 // WRAPPER
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .buttons {
+	$radius: _component("button.border.radius");
 	display: flex;
-	margin: .2rem;
+	margin: _component("button.margin");
 
 	.button {
 		border-radius: 0;
@@ -269,11 +271,11 @@
 		position: relative;
 
 		&:first-child {
-			border-radius: 3px 0 0 3px;
+			border-radius: $radius 0 0 $radius;
 		}
 
 		&:last-child {
-			border-radius: 0 3px 3px 0;
+			border-radius: 0 $radius $radius 0;
 		}
 
 		&:hover, &:focus {

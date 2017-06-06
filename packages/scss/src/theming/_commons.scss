@@ -1,19 +1,29 @@
 $commons: (
-  "divider": (
-    "width": 1px,
-    "color": #D6D6D6,
-  ),
-  "disabled": (
-    "opacity": .5,
-  ),
-  "background": (
-    "color": #F5F5F5,
-  ),
-  "text": (
-    "default": ( "color": #666666 ),
-    "light": ( "color": #999999 ),
-    "placeholder": ( "color": #CCCCCC ),
-  ),
+	"divider": (
+		"width": 1px,
+		"color": #D6D6D6,
+	),
+	"disabled": (
+		"opacity": .5,
+	),
+	"background": (
+		"color": #F5F5F5,
+	),
+	"text": (
+		"default": ( "color": #666666 ),
+		"light": ( "color": #999999 ),
+		"placeholder": ( "color": #CCCCCC ),
+		"link": ( "color": #00B2ED ),
+	),
+	"border": (
+		"radius": 3px,
+	),
+	"font": (
+		"family": '"Source Sans Pro", Tahoma, sans-serif',
+		"size": 16px,
+	),
+	"box-shadow": 0 0 0 1px rgba(50, 50, 50, .2) inset,
+	"transition": "all 150ms ease",
 );
 
 $theme: _set($theme, "commons", $commons);

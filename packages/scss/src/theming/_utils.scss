@@ -71,6 +71,11 @@
 	}
 	@return $return;
 }
+
+@function str-capitalize($value) {
+	$result: to-upper-case(str-slice($value, 1, 1)) + str-slice($value, 2, str-length($value));
+	@return $result;
+}
 // map
 // try to not need this one
 @function map-extend($map, $maps.../*, $deep */) {

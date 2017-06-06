@@ -1,5 +1,5 @@
 html {
-	font-size: 16px;
+	font-size: _theme("commons.font.size");
 }
 
 *, ::after, ::before {
@@ -9,37 +9,37 @@ html {
 body {
 	background: _theme("commons.background.color");
 	color: _color("text.default");
-	font-family: "Source Sans Pro", Tahoma, sans-serif;
-	font-size: _theme("font.size.standard");
-	line-height: _theme("font.line.standard");
+	font-family: unquote(_theme("commons.font.family"));
+	font-size: _theme("sizes.standard.font-size");
+	line-height: _theme("sizes.standard.line-height");
 	vertical-align: middle;
 }
 
 h1 {
-	font-size: _theme("font.size.biggest");
+	font-size: _theme("sizes.biggest.font-size");
 	font-weight: 600;
-	line-height: _theme("font.line.biggest");
+	line-height: _theme("sizes.biggest.line-height");
 	margin: 0 0 1.7rem;
 }
 
 h2 {
-	font-size: _theme("font.size.bigger");
+	font-size: _theme("sizes.bigger.font-size");
 	font-weight: 600;
-	line-height: _theme("font.line.bigger");
+	line-height: _theme("sizes.bigger.line-height");
 	margin: 0 0 .9rem;
 }
 
 h3 {
-	font-size: _theme("font.size.big");
+	font-size: _theme("sizes.big.font-size");
 	font-weight: 600;
-	line-height: _theme("font.line.big");
+	line-height: _theme("sizes.big.line-height");
 	margin: 0 0 .7rem;
 }
 
 h4 {
-	font-size: _theme("font.size.standard");
+	font-size: _theme("sizes.standard.font-size");
 	font-weight: 600;
-	line-height: _theme("font.line.standard");
+	line-height: _theme("sizes.standard.line-height");
 	margin: 0 0 .5rem;
 }
 
@@ -48,10 +48,10 @@ p {
 }
 
 a[href]:not([class]) {
-	color: #00B2ED;
+	color: _color("text.link");
 	text-decoration: underline;
 
 	&:hover {
-		color: lighten(#00B2ED, 15%);
+		color: lighten(_color("text.link"), 15%);
 	}
 }

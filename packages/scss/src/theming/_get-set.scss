@@ -44,14 +44,14 @@
 	$map: map-extend($map, $values, true);
 	@return $map;
 }
+@function _replace($map, $keys, $values) {
+	@error "not implemented";
+}
 
 @function _theme($keys) {
 	@return _get($theme, $keys);
 }
 
-// @function _palette($keys) {
-// 	@return _get($theme, "palettes." + $keys);
-// }
 @function _palettes() {
 	@return _get($theme, "palettes");
 }
@@ -74,5 +74,21 @@
 	}
 	// throw
 	@error "couldn't find color #{$keys} in theme";
+	@return "";
+}
+
+@function _component($keys) {
+	$result: _safeGet($theme, "components." + $keys);
+	@if $result {
+		@return $result;
+	}
+
+	// try to find in commons
+	$commonKeys: "commons" + str-slice($keys, str-index($keys, '.'));
+	$result: _safeGet($theme, $commonKeys);
+	@if $result {
+		@return $result;
+	}
+	@error "couldn't find #{$keys} in components or in commons";
 	@return "";
 }

@@ -8,7 +8,7 @@
 
 @mixin formFilled() {
 	~ .input-label {
-		font-size: _theme("font.size.small");
+		font-size: _theme("sizes.small.font-size");
 		top: 0;
 	}
 }

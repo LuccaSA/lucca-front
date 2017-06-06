@@ -6,7 +6,16 @@ $theme: () !default;
 
 @import
 	"theming/palettes",
+	"palettes.override",
+
 	"theming/sizes",
+	"sizes.override",
+
 	"theming/breakpoints",
+	"breakpoints.override",
+
 	"theming/commons",
-	"theming/components";
+	"commons.override",
+
+	"theming/components",
+	"components.override";

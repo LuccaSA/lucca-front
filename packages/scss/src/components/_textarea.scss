@@ -11,7 +11,7 @@
 	color: _color("text.default");
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-weight: 400;
-	line-height: _theme("font.line.standard");
+	line-height: _theme("sizes.standard.line-height");
 	outline: 0;
 	padding: .5rem 0;
 	transition: box-shadow 150ms ease, color 150ms ease;
@@ -22,7 +22,7 @@
 
 		~ .textarea-label {
 			color: _color("primary");
-			font-size: _theme("font.size.small");
+			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
 	}
@@ -67,7 +67,7 @@
 .textarea {
 	&.is-filled {
 		.textarea-label {
-			font-size: _theme("font.size.small");
+			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
 	}
