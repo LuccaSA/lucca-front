@@ -1,0 +1,30 @@
+.main-content {
+	padding: 4rem 0;
+}
+
+.navSide ~ .main-content {
+	margin-left: _theme("component.navSide.width");
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.main {
+	&.mod-sections {
+		.main-content {
+			padding-bottom: 0;
+			padding-top: 0;
+		}
+
+		.filters {
+			margin-bottom: 0;
+		}
+	}
+
+	&.mod-filters {
+		.main-content {
+			padding-top: 0;
+		}
+	}
+}
