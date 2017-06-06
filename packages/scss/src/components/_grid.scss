@@ -654,26 +654,32 @@
 	order: 1;
 }
 
-.u-smFirst {
-	order: -1;
+@media only screen and (min-width: _theme("breakpoints.sm.breakAt")) {
+	.u-smFirst {
+		order: -1;
+	}
+
+	.u-smLast {
+		order: 1;
+	}
 }
 
-.u-smLast {
-	order: 1;
+@media only screen and (min-width: _theme("breakpoints.md.breakAt")) {
+	.u-mdFirst {
+		order: -1;
+	}
+
+	.u-mdLast {
+		order: 1;
+	}
 }
 
-.u-mdFirst {
-	order: -1;
-}
+@media only screen and (min-width: _theme("breakpoints.lg.breakAt")) {
+	.u-lgFirst {
+		order: -1;
+	}
 
-.u-mdLast {
-	order: 1;
-}
-
-.u-lgFirst {
-	order: -1;
-}
-
-.u-lgLast {
-	order: 1;
+	.u-lgLast {
+		order: 1;
+	}
 }
