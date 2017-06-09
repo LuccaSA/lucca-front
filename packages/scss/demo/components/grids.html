@@ -35,7 +35,7 @@
 		<div class="grid-xs8 grid-xsOffset4"><div class="demo-grid">grid-xs8 grid-xsOffset4</div></div>
 	</div>
 	<div class="grid">
-		<div class="grid-xs6 grid-xsOffset2"><div class="demo-grid">grid-xs3 grid-xsOffset6</div></div>
+		<div class="grid-xs6 grid-xsOffset3"><div class="demo-grid">grid-xs6 grid-xsOffset3</div></div>
 		<div class="grid-xs3"><div class="demo-grid">grid-xs3</div></div>
 	</div>
 <code class="code mod-block">&lt;div class="grid"&gt;
@@ -61,60 +61,60 @@
 	...
 &lt;/div&gt;
 </code>
-	<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+	<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code>, <code class="code">-xl</code>, <code class="code">-xxl</code>, or <code class="code">-lg</code></em>
 </section>
 
 <!-- Horizontal alignment -->
 <section class="contentSection">
 	<h3>Horizontal alignment</h3>
 	<p>You can align columns horizontaly inside the grid:</p>
-	<div class="grid mod-start-xs">
+	<div class="grid mod-xsStart">
 		<div class="grid-xs6"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid mod-center-xs">
+	<div class="grid mod-xsCenter">
 		<div class="grid-xs6"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid mod-end-xs">
+	<div class="grid mod-xsEnd">
 		<div class="grid-xs6"><div class="demo-grid"></div></div>
 	</div>
-<code class="code mod-block">&lt;div class="grid mod-start-xs"&gt;
+<code class="code mod-block">&lt;div class="grid mod-xsStart"&gt;
 ...
 </code>
-<code class="code mod-block">&lt;div class="grid mod-center-xs"&gt;
+<code class="code mod-block">&lt;div class="grid mod-xsCenter"&gt;
 ...
 </code>
-<code class="code mod-block">&lt;div class="grid mod-end-xs"&gt;
+<code class="code mod-block">&lt;div class="grid mod-xsEnd"&gt;
 ...
 </code>
-	<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+	<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code>, <code class="code">-xl</code>, <code class="code">-xxl</code>, or <code class="code">-lg</code></em>
 </section>
 
 <!-- Vertical alignment -->
 <section class="contentSection">
 	<h3>Vertical alignment</h3>
 	<p>You can align columns verticaly inside the grid:</p>
-	<div class="grid mod-top-xs">
+	<div class="grid mod-xsTop">
 		<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
 		<div class="grid-xs6"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid mod-middle-xs">
+	<div class="grid mod-xsMiddle">
 		<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
 		<div class="grid-xs6"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid mod-bottom-xs">
+	<div class="grid mod-xsBottom">
 		<div class="grid-xs6"><div class="demo-grid" style="height:100px"></div></div>
 		<div class="grid-xs6"><div class="demo-grid"></div></div>
 	</div>
-<code class="code mod-block">&lt;div class="grid mod-top-xs"&gt;
+<code class="code mod-block">&lt;div class="grid mod-xsTop"&gt;
 ...
 </code>
-<code class="code mod-block">&lt;div class="grid mod-middle-xs"&gt;
+<code class="code mod-block">&lt;div class="grid mod-xsMiddle"&gt;
 ...
 </code>
-<code class="code mod-block">&lt;div class="grid mod-bottom-xs"&gt;
+<code class="code mod-block">&lt;div class="grid mod-xsBottom"&gt;
 ...
 </code>
-<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code>, <code class="code">-xl</code>, <code class="code">-xxl</code>, or <code class="code">-lg</code></em>
 </section>
 
 <!-- Reorder -->
@@ -124,19 +124,19 @@
 	<div class="grid">
 		<div class="grid-xs3"><div class="demo-grid">1</div></div>
 		<div class="grid-xs3"><div class="demo-grid">2</div></div>
-		<div class="grid-xs3 u-first-xs"><div class="demo-grid">3 u-first-xs</div></div>
+		<div class="grid-xs3 u-xsFirst"><div class="demo-grid">3 u-xsFirst</div></div>
 		<div class="grid-xs3"><div class="demo-grid">4</div></div>
 	</div>
 	<div class="grid">
 		<div class="grid-xs3"><div class="demo-grid">1</div></div>
-		<div class="grid-xs3 u-last-xs"><div class="demo-grid">2 u-last-xs</div></div>
+		<div class="grid-xs3 u-xsLast"><div class="demo-grid">2 u-xsLast</div></div>
 		<div class="grid-xs3"><div class="demo-grid">3</div></div>
 		<div class="grid-xs3"><div class="demo-grid">4</div></div>
 	</div>
 <code class="code mod-block">&lt;div class="grid"&gt;
-	&lt;div class="grid-xs6 u-last-xs"&gt;...&lt;/div&gt;
-	&lt;div class="grid-xs6 u-first-xs"&gt;...&lt;/div&gt;
+	&lt;div class="grid-xs6 u-xsLast"&gt;...&lt;/div&gt;
+	&lt;div class="grid-xs6 u-xsFirst"&gt;...&lt;/div&gt;
 &lt;/div&gt;
 </code>
-	<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code></em>
+	<em><b>Tip:</b> It will also work with <code class="code">-xs</code>, <code class="code">-sm</code>, <code class="code">-md</code>, <code class="code">-lg</code>, <code class="code">-xl</code>, <code class="code">-xxl</code>, or <code class="code">-lg</code></em>
 </section>

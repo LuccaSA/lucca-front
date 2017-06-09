@@ -8,7 +8,7 @@
 	width: 100%;
 }
 
-.grid-xs, .grid-xs1, .grid-xs2, .grid-xs3, .grid-xs4, .grid-xs5, .grid-xs6, .grid-xs7, .grid-xs8, .grid-xs9, .grid-xs10, .grid-xs11, .grid-xs12, .grid-sm, .grid-sm1, .grid-sm2, .grid-sm3, .grid-sm4, .grid-sm5, .grid-sm6, .grid-sm7, .grid-sm8, .grid-sm9, .grid-sm10, .grid-sm11, .grid-sm12, .grid-md, .grid-md1, .grid-md2, .grid-md3, .grid-md4, .grid-md5, .grid-md6, .grid-md7, .grid-md8, .grid-md9, .grid-md10, .grid-md11, .grid-md12, .grid-lg, .grid-lg1, .grid-lg2, .grid-lg3, .grid-lg4, .grid-lg5, .grid-lg6, .grid-lg7, .grid-lg8, .grid-lg9, .grid-lg10, .grid-lg11, .grid-lg12 {
+%allColumns {
 	flex: 0 0 auto;
 	flex-basis: 100%;
 	max-width: 100%;
@@ -16,465 +16,35 @@
 	padding-right: .5rem;
 }
 
-/* XS - Columns */
-
-.grid-xs {
-	flex-basis: 0;
-	flex-grow: 1;
-	max-width: 100%;
-}
-
-.grid-xs1 {
-	flex-basis: 8.333%;
-	max-width: 8.333%;
-}
-
-.grid-xs2 {
-	flex-basis: 16.667%;
-	max-width: 16.667%;
-}
-
-.grid-xs3 {
-	flex-basis: 25%;
-	max-width: 25%;
-}
-
-.grid-xs4 {
-	flex-basis: 33.333%;
-	max-width: 33.333%;
-}
-
-.grid-xs5 {
-	flex-basis: 41.667%;
-	max-width: 41.667%;
-}
-
-.grid-xs6 {
-	flex-basis: 50%;
-	max-width: 50%;
-}
-
-.grid-xs7 {
-	flex-basis: 58.333%;
-	max-width: 58.333%;
-}
-
-.grid-xs8 {
-	flex-basis: 66.667%;
-	max-width: 66.667%;
-}
-
-.grid-xs9 {
-	flex-basis: 75%;
-	max-width: 75%;
-}
-
-.grid-xs10 {
-	flex-basis: 83.333%;
-	max-width: 83.333%;
-}
-
-.grid-xs11 {
-	flex-basis: 91.667%;
-	max-width: 91.667%;
-}
-
-.grid-xs12 {
-	flex-basis: 100%;
-	max-width: 100%;
-}
-
-/* XS - Offsets */
-
-.grid-xsOffset1 {
-	margin-left: 8.333%;
-}
-
-.grid-xsOffset2 {
-	margin-left: 16.667%;
-}
-
-.grid-xsOffset3 {
-	margin-left: 25%;
-}
-
-.grid-xsOffset4 {
-	margin-left: 33.333%;
-}
-
-.grid-xsOffset5 {
-	margin-left: 41.667%;
-}
-
-.grid-xsOffset6 {
-	margin-left: 50%;
-}
-
-.grid-xsOffset7 {
-	margin-left: 58.333%;
-}
-
-.grid-xsOffset8 {
-	margin-left: 66.667%;
-}
-
-.grid-xsOffset9 {
-	margin-left: 75%;
-}
-
-.grid-xsOffset10 {
-	margin-left: 83.333%;
-}
-
-.grid-xsOffset11 {
-	margin-left: 91.667%;
-}
-
-/* SM - Columns */
-
-@media only screen and (min-width: _theme("breakpoints.sm.breakAt")) {
-	.grid-sm {
-		flex-basis: 0;
-		flex-grow: 1;
-		max-width: 100%;
+@each $bp-name, $bp-obj in $breakpoints {
+	.grid-#{$bp-name} {
+		@extend %allColumns;
 	}
-
-	.grid-sm1 {
-		flex-basis: 8.333%;
-		max-width: 8.333%;
-	}
-
-	.grid-sm2 {
-		flex-basis: 16.667%;
-		max-width: 16.667%;
-	}
-
-	.grid-sm3 {
-		flex-basis: 25%;
-		max-width: 25%;
-	}
-
-	.grid-sm4 {
-		flex-basis: 33.333%;
-		max-width: 33.333%;
-	}
-
-	.grid-sm5 {
-		flex-basis: 41.667%;
-		max-width: 41.667%;
-	}
-
-	.grid-sm6 {
-		flex-basis: 50%;
-		max-width: 50%;
-	}
-
-	.grid-sm7 {
-		flex-basis: 58.333%;
-		max-width: 58.333%;
-	}
-
-	.grid-sm8 {
-		flex-basis: 66.667%;
-		max-width: 66.667%;
-	}
-
-	.grid-sm9 {
-		flex-basis: 75%;
-		max-width: 75%;
-	}
-
-	.grid-sm10 {
-		flex-basis: 83.333%;
-		max-width: 83.333%;
-	}
-
-	.grid-sm11 {
-		flex-basis: 91.667%;
-		max-width: 91.667%;
-	}
-
-	.grid-sm12 {
-		flex-basis: 100%;
-		max-width: 100%;
-	}
-
-	/* SM - Offsets */
-
-	.grid-smOffset1 {
-		margin-left: 8.333%;
-	}
-
-	.grid-smOffset2 {
-		margin-left: 16.667%;
-	}
-
-	.grid-smOffset3 {
-		margin-left: 25%;
-	}
-
-	.grid-smOffset4 {
-		margin-left: 33.333%;
-	}
-
-	.grid-smOffset5 {
-		margin-left: 41.667%;
-	}
-
-	.grid-smOffset6 {
-		margin-left: 50%;
-	}
-
-	.grid-smOffset7 {
-		margin-left: 58.333%;
-	}
-
-	.grid-smOffset8 {
-		margin-left: 66.667%;
-	}
-
-	.grid-smOffset9 {
-		margin-left: 75%;
-	}
-
-	.grid-smOffset10 {
-		margin-left: 83.333%;
-	}
-
-	.grid-smOffset11 {
-		margin-left: 91.667%;
+	@for $i from 1 through 12 {
+		.grid-#{$bp-name}#{$i} {
+			@extend %allColumns;
+		}
 	}
 }
 
-/* MD - Columns */
+@each $bp-name, $bp-obj in $breakpoints {
+	@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+		.grid-#{$bp-name} {
+			flex-basis: 0;
+			flex-grow: 1;
+			max-width: 100%;
+		}
 
-@media only screen and (min-width: _theme("breakpoints.md.breakAt")) {
-	.grid-md {
-		flex-basis: 0;
-		flex-grow: 1;
-		max-width: 100%;
-	}
+		@for $i from 1 through 12 {
+			.grid-#{$bp-name}#{$i} {
+				flex-basis: percentage($i / 12);
+				max-width: percentage($i / 12);
+			}
 
-	.grid-md1 {
-		flex-basis: 8.333%;
-		max-width: 8.333%;
-	}
-
-	.grid-md2 {
-		flex-basis: 16.667%;
-		max-width: 16.667%;
-	}
-
-	.grid-md3 {
-		flex-basis: 25%;
-		max-width: 25%;
-	}
-
-	.grid-md4 {
-		flex-basis: 33.333%;
-		max-width: 33.333%;
-	}
-
-	.grid-md5 {
-		flex-basis: 41.667%;
-		max-width: 41.667%;
-	}
-
-	.grid-md6 {
-		flex-basis: 50%;
-		max-width: 50%;
-	}
-
-	.grid-md7 {
-		flex-basis: 58.333%;
-		max-width: 58.333%;
-	}
-
-	.grid-md8 {
-		flex-basis: 66.667%;
-		max-width: 66.667%;
-	}
-
-	.grid-md9 {
-		flex-basis: 75%;
-		max-width: 75%;
-	}
-
-	.grid-md10 {
-		flex-basis: 83.333%;
-		max-width: 83.333%;
-	}
-
-	.grid-md11 {
-		flex-basis: 91.667%;
-		max-width: 91.667%;
-	}
-
-	.grid-md12 {
-		flex-basis: 100%;
-		max-width: 100%;
-	}
-
-	/* MD - Offsets */
-
-	.grid-mdOffset1 {
-		margin-left: 8.333%;
-	}
-
-	.grid-mdOffset2 {
-		margin-left: 16.667%;
-	}
-
-	.grid-mdOffset3 {
-		margin-left: 25%;
-	}
-
-	.grid-mdOffset4 {
-		margin-left: 33.333%;
-	}
-
-	.grid-mdOffset5 {
-		margin-left: 41.667%;
-	}
-
-	.grid-mdOffset6 {
-		margin-left: 50%;
-	}
-
-	.grid-mdOffset7 {
-		margin-left: 58.333%;
-	}
-
-	.grid-mdOffset8 {
-		margin-left: 66.667%;
-	}
-
-	.grid-mdOffset9 {
-		margin-left: 75%;
-	}
-
-	.grid-mdOffset10 {
-		margin-left: 83.333%;
-	}
-
-	.grid-mdOffset11 {
-		margin-left: 91.667%;
-	}
-}
-
-/* LG - Columns */
-
-@media only screen and (min-width: _theme("breakpoints.lg.breakAt")) {
-	.grid-lg {
-		flex-basis: 0;
-		flex-grow: 1;
-		max-width: 100%;
-	}
-
-	.grid-lg1 {
-		flex-basis: 8.333%;
-		max-width: 8.333%;
-	}
-
-	.grid-lg2 {
-		flex-basis: 16.667%;
-		max-width: 16.667%;
-	}
-
-	.grid-lg3 {
-		flex-basis: 25%;
-		max-width: 25%;
-	}
-
-	.grid-lg4 {
-		flex-basis: 33.333%;
-		max-width: 33.333%;
-	}
-
-	.grid-lg5 {
-		flex-basis: 41.667%;
-		max-width: 41.667%;
-	}
-
-	.grid-lg6 {
-		flex-basis: 50%;
-		max-width: 50%;
-	}
-
-	.grid-lg7 {
-		flex-basis: 58.333%;
-		max-width: 58.333%;
-	}
-
-	.grid-lg8 {
-		flex-basis: 66.667%;
-		max-width: 66.667%;
-	}
-
-	.grid-lg9 {
-		flex-basis: 75%;
-		max-width: 75%;
-	}
-
-	.grid-lg10 {
-		flex-basis: 83.333%;
-		max-width: 83.333%;
-	}
-
-	.grid-lg11 {
-		flex-basis: 91.667%;
-		max-width: 91.667%;
-	}
-
-	.grid-lg12 {
-		flex-basis: 100%;
-		max-width: 100%;
-	}
-
-	/* LG - Offsets */
-
-	.grid-lgOffset1 {
-		margin-left: 8.333%;
-	}
-
-	.grid-lgOffset2 {
-		margin-left: 16.667%;
-	}
-
-	.grid-lgOffset3 {
-		margin-left: 25%;
-	}
-
-	.grid-lgOffset4 {
-		margin-left: 33.333%;
-	}
-
-	.grid-lgOffset5 {
-		margin-left: 41.667%;
-	}
-
-	.grid-lgOffset6 {
-		margin-left: 50%;
-	}
-
-	.grid-lgOffset7 {
-		margin-left: 58.333%;
-	}
-
-	.grid-lgOffset8 {
-		margin-left: 66.667%;
-	}
-
-	.grid-lgOffset9 {
-		margin-left: 75%;
-	}
-
-	.grid-lgOffset10 {
-		margin-left: 83.333%;
-	}
-
-	.grid-lgOffset11 {
-		margin-left: 91.667%;
+			.grid-#{$bp-name}Offset#{$i} {
+				margin-left: percentage($i / 12);
+			}
+		}
 	}
 }
 
@@ -487,193 +57,57 @@
 		flex-direction: row-reverse;
 	}
 
-	/* XS - Mods */
+	@each $bp-name, $bp-obj in $breakpoints {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			&.mod-#{$bp-name}Start {
+				justify-content: flex-start;
+				text-align: start;
+			}
 
-	&.mod-start-xs {
-		justify-content: flex-start;
-		text-align: start;
-	}
+			&.mod-#{$bp-name}Center {
+				justify-content: center;
+				text-align: center;
+			}
 
-	&.mod-center-xs {
-		justify-content: center;
-		text-align: center;
-	}
+			&.mod-#{$bp-name}End {
+				justify-content: flex-end;
+				text-align: end;
+			}
 
-	&.mod-end-xs {
-		justify-content: flex-end;
-		text-align: end;
-	}
+			&.mod-#{$bp-name}Top {
+				align-items: flex-start;
+			}
 
-	&.mod-top-xs {
-		align-items: flex-start;
-	}
+			&.mod-#{$bp-name}Middle {
+				align-items: center;
+			}
 
-	&.mod-middle-xs {
-		align-items: center;
-	}
+			&.mod-#{$bp-name}Bottom {
+				align-items: flex-end;
+			}
 
-	&.mod-bottom-xs {
-		align-items: flex-end;
-	}
+			&.mod-#{$bp-name}Around {
+				justify-content: space-around;
+			}
 
-	&.mod-around-xs {
-		justify-content: space-around;
-	}
-
-	&.mod-between-xs {
-		justify-content: space-between;
-	}
-
-	/* SM - Mods */
-
-	@media only screen and (min-width: _theme("breakpoints.sm.breakAt")) {
-		.mod-start-sm {
-			justify-content: flex-start;
-			text-align: start;
-		}
-
-		.mod-center-sm {
-			justify-content: center;
-			text-align: center;
-		}
-
-		.mod-end-sm {
-			justify-content: flex-end;
-			text-align: end;
-		}
-
-		.mod-top-sm {
-			align-items: flex-start;
-		}
-
-		.mod-middle-sm {
-			align-items: center;
-		}
-
-		.mod-bottom-sm {
-			align-items: flex-end;
-		}
-
-		.mod-around-sm {
-			justify-content: space-around;
-		}
-
-		.mod-between-sm {
-			justify-content: space-between;
-		}
-	}
-
-	/* MD - Mods */
-
-	@media only screen and (min-width: _theme("breakpoints.md.breakAt")) {
-		.mod-start-md {
-			justify-content: flex-start;
-			text-align: start;
-		}
-
-		.mod-center-md {
-			justify-content: center;
-			text-align: center;
-		}
-
-		.mod-end-md {
-			justify-content: flex-end;
-			text-align: end;
-		}
-
-		.mod-top-md {
-			align-items: flex-start;
-		}
-
-		.mod-middle-md {
-			align-items: center;
-		}
-
-		.mod-bottom-md {
-			align-items: flex-end;
-		}
-
-		.mod-around-md {
-			justify-content: space-around;
-		}
-
-		.mod-between-md {
-			justify-content: space-between;
-		}
-	}
-
-	/* LG - Mods */
-
-	@media only screen and (min-width: _theme("breakpoints.lg.breakAt")) {
-		.mod-start-lg {
-			justify-content: flex-start;
-			text-align: start;
-		}
-
-		.mod-center-lg {
-			justify-content: center;
-			text-align: center;
-		}
-
-		.mod-end-lg {
-			justify-content: flex-end;
-			text-align: end;
-		}
-
-		.mod-top-lg {
-			align-items: flex-start;
-		}
-
-		.mod-middle-lg {
-			align-items: center;
-		}
-
-		.mod-bottom-lg {
-			align-items: flex-end;
-		}
-
-		.mod-around-lg {
-			justify-content: space-around;
-		}
-
-		.mod-between-lg {
-			justify-content: space-between;
+			&.mod-#{$bp-name}Between {
+				justify-content: space-between;
+			}
 		}
 	}
 }
-
 
 // GRID UTILITIES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.u-first-xs {
-	order: -1;
-}
+@each $bp-name, $bp-obj in $breakpoints {
+	@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+		&.u-#{$bp-name}First {
+			order: -1;
+		}
 
-.u-last-xs {
-	order: 1;
-}
-
-.u-first-sm {
-	order: -1;
-}
-
-.u-last-sm {
-	order: 1;
-}
-
-.u-first-md {
-	order: -1;
-}
-
-.u-last-md {
-	order: 1;
-}
-
-.u-first-lg {
-	order: -1;
-}
-
-.u-last-lg {
-	order: 1;
+		&.u-#{$bp-name}Last {
+			order: 1;
+		}
+	}
 }

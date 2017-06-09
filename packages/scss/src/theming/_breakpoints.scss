@@ -1,30 +1,30 @@
 $breakpoints: (
 	"xs": (
-		"breakAt": 576px,
-		"spacing": 10px,
+		"breakAt": 0,
+		"spacing": 0,
 	),
 	"sm": (
-		"breakAt": 768px,
+		"breakAt": 576px,
 		"spacing": 20px,
 	),
 	"md": (
-		"breakAt": 992px,
+		"breakAt": 768px,
 		"spacing": 30px,
 	),
 	"lg": (
-		"breakAt": 1200px,
+		"breakAt": 992px,
 		"spacing": 40px,
 	),
 	"xl": (
-		"breakAt": 1350px,
+		"breakAt": 1200px,
 		"spacing": 60px,
 	),
 	"xxl": (
-		"breakAt": 1500px,
+		"breakAt": 1350px,
 		"spacing": 60px,
 	),
 	"xxxl": (
-		"breakAt": 1650px,
+		"breakAt": 1500px,
 		"spacing": 60px,
 	)
 );
