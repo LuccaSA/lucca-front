@@ -3,24 +3,10 @@
 	padding: 0 .5rem;
 	width: _theme("breakpoints.xxxl.breakAt") - _theme("breakpoints.xxxl.spacing") - _theme("component.navSide.width");
 
-	@media (max-width: _theme("breakpoints.xxl.breakAt")) {
-		width: _theme("breakpoints.xxl.breakAt") - _theme("breakpoints.xxl.spacing") - _theme("component.navSide.width");
-	}
-
-	@media (max-width: _theme("breakpoints.xl.breakAt")) {
-		width: _theme("breakpoints.xs.breakAt") - _theme("breakpoints.xs.spacing") - _theme("component.navSide.width");
-	}
-
-	@media (max-width: _theme("breakpoints.lg.breakAt")) {
-		width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing") - _theme("component.navSide.width");
-	}
-
-	@media (max-width: _theme("breakpoints.lg.breakAt")) {
-		width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing") - _theme("component.navSide.width");
-	}
-
-	@media (max-width: _theme("breakpoints.md.breakAt")) {
-		width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing") - _theme("component.navSide.width");
+	@each $bp-name, $bp-obj in $breakpoints {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing) - _theme("component.navSide.width");
+		}
 	}
 }
 
@@ -29,24 +15,10 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .container {
-	&.mod-sm {
-		max-width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing");
-	}
-
-	&.mod-md {
-		max-width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing");
-	}
-
-	&.mod-lg {
-		max-width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing");
-	}
-
-	&.mod-xl {
-		max-width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing");
-	}
-
-	&.mod-xxl {
-		max-width: _theme("breakpoints.xxl.breakAt") - _theme("breakpoints.xxl.spacing");
+	@each $bp-name, $bp-obj in $breakpoints {
+		&.mod-#{$bp-name} {
+			max-width: map-get($bp-obj, breakAt) - map-get($bp-obj, spacing);
+		}
 	}
 }
 
@@ -84,5 +56,4 @@
 			}
 		}
 	}
-}
-*/
+}*/
