@@ -1,0 +1,35 @@
+@mixin media_smaller_than($breakpoint) {
+	@if map-has-key(_theme("breakpoints"), $breakpoint) {
+		@media (max-width: #{_theme("breakpoints.#{$breakpoint}.breakAt")}) {
+			@content;
+		}
+	}
+	@else {
+		@warn "We couldn't find a value for the breakpoint `#{$breakpoint}`."
+		+ " Check if it is defined in the `breakpoints` map";
+	}
+}
+
+@mixin media_larger_than($breakpoint) {
+	@if map-has-key(_theme("breakpoints"), $breakpoint) {
+		@media (min-width: #{_theme("breakpoints.#{$breakpoint}.breakAt")}) {
+			@content;
+		}
+	}
+	@else {
+		@warn "We couldn't find a value for the breakpoint `#{$breakpoint}`."
+		+ " Check if it is defined in the `breakpoints` map";
+	}
+}
+
+@mixin media_between($breakpoint1, $breakpoint2) {
+	@if map-has-key(_theme("breakpoints"), $breakpoint1) && map-has-key(_theme("breakpoints"), $breakpoint2) {
+		@media (min-width: #{_theme("breakpoints.#{$breakpoint1}.breakAt")}) and (max-width: #{_theme("breakpoints.#{$breakpoint2}.breakAt")}) {
+			@content;
+		}
+	}
+	@else {
+		@warn "We couldn't find a value for the breakpoint `#{$breakpoint1}` or `#{$breakpoint2}`."
+		+ " Check if they are defined in the `breakpoints` map";
+	}
+}
