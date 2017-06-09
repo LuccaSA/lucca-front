@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="../demo.css">
 	</head>
 	<body>
-		<div class="global mod-sections mod-filters">
+		<main class="main mod-sections mod-filters">
 			<aside class="navSide">
 				<a href="#" class="navSide-link is-active">
 					<span class="navSide-link-alert">9</span>
@@ -21,55 +21,58 @@
 				<a href="#" class="navSide-link">Entry</a>
 				<a href="#" class="navSide-link">Entry</a>
 			</aside>
-			<div class="filters">
-				<div class="filters-left">
-					<div class="input mod-inline">
-						<input class="input-field" type="text">
-						<label class="input-label">Filter name</label>
+			<section class="main-content">
+				<div class="filters">
+					<div class="filters-left">
+						<div class="input mod-inline">
+							<input class="input-field" type="text">
+							<label class="input-label">Filter name</label>
+						</div>
+					</div>
+					<div class="filters-right">
+						<button class="button">button</button>
+						<button class="button palette-primary">button</button>
 					</div>
 				</div>
-				<div class="filters-right">
-					<button class="button">button</button>
-					<button class="button palette-primary">button</button>
-				</div>
-			</div>
-			<section class="section">
-				<h1>Side with sections & filters</h1>
-<code class="code mod-block">&lt;div class="global mod-sections mod-filters"&gt;
+				<section class="section">
+					<h1>Side with sections & filters</h1>
+<code class="code mod-block">&lt;main class="main mod-sections mod-filters"&gt;
 	&lt;aside class="navSide"&gt;
 		&lt;a href="#" class="navSide-link is-active"&gt;
-			&lt;span class="navSide-link-alert"&gt;9&lt;/span&gt;
+			&lt;span class="navSide-link-alert"&gt;0&lt;/span&gt;
 			...
 		&lt;/a&gt;
 		&lt;a href="#" class="navSide-link"&gt;...&lt;/a&gt;
 	&lt;/aside&gt;
-	&lt;div class="filters"&gt;
-		&lt;div class="filters-left"&gt;
-			&lt;div class="input mod-inline"&gt;
-				&lt;input class="input-field" type="text"&gt;
-				&lt;label class="input-label"&gt;Filter name&lt;/label&gt;
+	&lt;section class="main-content"&gt;
+		&lt;div class="filters"&gt;
+			&lt;div class="filters-left"&gt;
+				&lt;div class="input mod-inline"&gt;
+					&lt;input class="input-field" type="text"&gt;
+					&lt;label class="input-label"&gt;Filter name&lt;/label&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="filters-right"&gt;
+				&lt;button class="button"&gt;button&lt;/button&gt;
+				&lt;button class="button palette-primary"&gt;button&lt;/button&gt;
 			&lt;/div&gt;
 		&lt;/div&gt;
-		&lt;div class="filters-right"&gt;
-			&lt;button class="button"&gt;...&lt;/button&gt;
-			&lt;button class="button palette-primary"&gt;...&lt;/button&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;section class="section"&gt;
-		...
+		&lt;section class="section"&gt;
+			...
+		&lt;/section&gt;
+		&lt;section class="section mod-grey"&gt;
+			...
+		&lt;/section&gt;
 	&lt;/section&gt;
-	&lt;section class="section mod-grey"&gt;
-		...
-	&lt;/section&gt;
-&lt;/div&gt;
-</code>
+&lt;/main&gt;</code>
+				</section>
+				<section class="section mod-grey">
+					...
+				</section>
+				<section class="section">
+					...
+				</section>
 			</section>
-			<section class="section mod-grey">
-				...
-			</section>
-			<section class="section">
-				...
-			</section>
-		</div>
+		</main>
 	</body>
 </html>
