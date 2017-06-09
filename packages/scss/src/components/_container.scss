@@ -8,7 +8,7 @@
 		}
 	}
 
-	@media (max-width: _theme("breakpoints.sm.breakAt")) {
+	@media (max-width: _component("container.min-width")) {
 		width: 100%;
 	}
 }
