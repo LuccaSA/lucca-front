@@ -1,12 +1,15 @@
 .container {
 	margin: 0 auto;
 	padding: 0 .5rem;
-	width: _theme("breakpoints.xxxl.breakAt") - _theme("breakpoints.xxxl.spacing") - _theme("component.navSide.width");
 
 	@each $bp-name, $bp-obj in $breakpoints {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing) - _theme("component.navSide.width");
+			width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing);
 		}
+	}
+
+	@media (max-width: _theme("breakpoints.sm.breakAt")) {
+		width: 100%;
 	}
 }
 
@@ -23,37 +26,19 @@
 }
 
 
-// LAYOUT
+// LAYOUT WITH ASIDE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-/*
-.global {
-	&.mod-noAside {
-		.container {
-			width: _theme("breakpoints.xxl.breakAt") - _theme("breakpoints.xxl.spacing");
 
-			@media (max-width: _theme("breakpoints.xxl.breakAt")) {
-				width: _theme("breakpoints.xxl.breakAt") - _theme("breakpoints.xxl.spacing");
-			}
-
-			@media (max-width: _theme("breakpoints.xl.breakAt")) {
-				width: _theme("breakpoints.xl.breakAt") - _theme("breakpoints.xl.spacing");
-			}
-
-			@media (max-width: _theme("breakpoints.lg.breakAt")) {
-				width: _theme("breakpoints.lg.breakAt") - _theme("breakpoints.lg.spacing");
-			}
-
-			@media (max-width: _theme("breakpoints.md.breakAt")) {
-				width: _theme("breakpoints.md.breakAt") - _theme("breakpoints.md.spacing");
-			}
-
-			@media (max-width: _theme("breakpoints.sm.breakAt")) {
-				width: _theme("breakpoints.sm.breakAt") - _theme("breakpoints.sm.spacing");
-			}
-
-			@media (max-width: _theme("breakpoints.xs.breakAt")) {
-				width: 100%;
+.navSide ~ .main-content {
+	.container {
+		@each $bp-name, $bp-obj in $breakpoints {
+			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+				width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing) - _theme("component.navSide.width");
 			}
 		}
+
+		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+			width: calc(100% - _theme("component.navSide.width"));
+		}
 	}
-}*/
+}
