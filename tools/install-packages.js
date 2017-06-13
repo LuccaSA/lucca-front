@@ -2,7 +2,8 @@ const npmRun = require('npm-run');
 
 // respect dependency order here
 const packages = [
-	{ name: 'scss', dependencies: [] },
+	{ name: 'icons', dependencies: [] },
+	{ name: 'scss', dependencies: ['icons'] },
 	{ name: 'ng', dependencies: ['scss'] },
 ];
 
