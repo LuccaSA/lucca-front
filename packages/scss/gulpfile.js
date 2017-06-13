@@ -47,7 +47,7 @@ gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 	});
 
 	gulp.watch(["./src/*.scss", "./src/**/*.scss","./demo/*.css"], ['scss-lint','sass:debug']);
-	gulp.watch("./demo/*.html", browserSync.reload);
+	gulp.watch(["./demo/*.html","./demo/**/*.html"], browserSync.reload);
 });
 
 gulp.task('sass:debug', () => {
