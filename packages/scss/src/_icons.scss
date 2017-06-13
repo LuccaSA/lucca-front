@@ -1,28 +1,4 @@
-@font-face {
-	font-family: "Lucca icons";
-	font-style: normal;
-	font-weight: 400;
-	src: url("../../icons/lucca-icons.woff");
-}
-
-.icon {
-	direction: ltr;
-	display: inline-block;
-	font-family: "Lucca icons";
-	font-feature-settings: "liga";
-	font-size: 1.5rem;
-	-webkit-font-smoothing: antialiased;
-	font-style: normal;
-	font-weight: 400;
-	letter-spacing: normal;
-	line-height: 1;
-	text-transform: none;
-	vertical-align: middle;
-	white-space: nowrap;
-	word-wrap: normal;
-}
-
-.icon {
+.lucca-icon {
 	&.mod-smaller {
 		font-size: .9rem;
 	}
