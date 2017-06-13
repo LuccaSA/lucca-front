@@ -1,81 +1,78 @@
 %base_animated_element {
-	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
+	animation-duration: _theme("commons.animations.duration");
 	animation-fill-mode: both;
-	animation-duration: 300ms;
 	animation-timing-function: ease-out;
+	backface-visibility: hidden;
 }
 
 .u-animatedFadeIn, .u-animatedFadeOut {
-	@extend %base_animated_element;
 	animation-name: fadeIn;
+	@extend %base_animated_element;
 }
 
 .u-animatedScaleIn, .u-animatedScaleOut {
-	@extend %base_animated_element;
 	animation-name: scaleIn;
+	@extend %base_animated_element;
 }
 
 .u-animatedScaleInTop, .u-animatedScaleOutTop {
-	@extend %base_animated_element;
 	animation-name: scaleInTop;
+	@extend %base_animated_element;
 }
 
 .u-animatedScaleInRight, .u-animatedScaleOutRight {
-	@extend %base_animated_element;
 	animation-name: scaleInRight;
+	@extend %base_animated_element;
 }
 
 .u-animatedScaleInBottom, .u-animatedScaleOutBottom {
-	@extend %base_animated_element;
 	animation-name: scaleInBottom;
+	@extend %base_animated_element;
 }
 
 .u-animatedScaleInLeft, .u-animatedScaleOutLeft {
-	@extend %base_animated_element;
 	animation-name: scaleInLeft;
+	@extend %base_animated_element;
 }
 
 .u-animatedSlideIn, .u-animatedSlideInTop, .u-animatedSlideOut, .u-animatedSlideOutTop {
-	@extend %base_animated_element;
 	animation-name: slideIn;
+	@extend %base_animated_element;
 }
 
 .u-animatedSlideInRight, .u-animatedSlideOutRight {
-	@extend %base_animated_element;
 	animation-name: slideInRight;
+	@extend %base_animated_element;
 }
 
 .u-animatedSlideInBottom, .u-animatedSlideOutBottom {
-	@extend %base_animated_element;
 	animation-name: slideInBottom;
+	@extend %base_animated_element;
 }
 
 .u-animatedSlideInLeft, .u-animatedSlideOutLeft {
-	@extend %base_animated_element;
 	animation-name: slideInLeft;
+	@extend %base_animated_element;
 }
 
 // EXIT ANIMATIONS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.u-animatedFadeOut,
-.u-animatedSlideOut, .u-animatedSlideOutTop, .u-animatedSlideOutRight, .u-animatedSlideOutBottom, .u-animatedSlideOutLeft,
-.u-animatedScaleOut, .u-animatedScaleOutTop, .u-animatedScaleOutRight, .u-animatedScaleOutBottom, .u-animatedScaleOutLeft {
+.u-animatedFadeOut, .u-animatedSlideOut, .u-animatedSlideOutTop, .u-animatedSlideOutRight, .u-animatedSlideOutBottom, .u-animatedSlideOutLeft, .u-animatedScaleOut, .u-animatedScaleOutTop, .u-animatedScaleOutRight, .u-animatedScaleOutBottom, .u-animatedScaleOutLeft {
 	animation-direction: reverse;
 }
 
 // ATTENTION SEEKERS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .u-animatedPulse {
-	@extend %base_animated_element;
-	animation-iteration-count: 5;
-	animation-name: pulse;
 	animation-direction: alternate;
+	animation-iteration-count: _theme("commons.animations.iteration-count");
+	animation-name: pulse;
+	@extend %base_animated_element;
 }
 
 .u-animatedShake {
-	@extend %base_animated_element;
 	animation-name: shake;
+	@extend %base_animated_element;
 }
 
 // KEYFRAMES IMPORT

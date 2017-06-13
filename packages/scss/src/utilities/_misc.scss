@@ -1,10 +1,10 @@
 // CLEARFIX
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.u-clear{
+.u-clear {
 	&::after {
+		clear: both;
+		content: "";
 		display: table;
-		content: '';
-		clear:both;
 	}
 }
