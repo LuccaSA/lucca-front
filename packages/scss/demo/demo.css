@@ -116,6 +116,10 @@
 	padding: .6em;
 }
 
+.demo-animation .card.reload {
+	animation-name: none;
+}
+
 .demo-icon .icon{
 	display: block;
 }
