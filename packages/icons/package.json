@@ -1,0 +1,40 @@
+{
+  "name": "@lucca-front/icons",
+  "version": "0.0.0-VERSIONPLACEHOLDER",
+  "description": "A library of icons made by the team @Lucca",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "scripts": {
+    "publish": "npm run build",
+    "build": "gulp dist",
+    "start": "gulp"
+  },
+  "keywords": [
+    "lucca",
+    "icons"
+  ],
+  "files": [
+    "font",
+    "dist"
+  ],
+  "authors": [
+    "Clotilde Martin-Lemerle <clot@lucca.fr>",
+    "Lucien Bertin <me@lucienbertin.com>",
+    "Jeremie Biron <jbiron@lucca.fr>",
+    "Sandy Goldscheider <sgoldscheider@lucca.fr>"
+  ],
+  "license": "MIT",
+  "public": true,
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  }
+}
