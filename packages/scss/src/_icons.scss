@@ -1,17 +1,20 @@
-.lucca-icon {
-	&.mod-smaller {
-		font-size: .9rem;
+$font-path: _theme("icons.font-path");
+@import "node_modules/@lucca-front/icons/src/main";
+@import "node_modules/@lucca-front/icons/src/mixins";
+
+.#{_theme("icons.prefix")} {
+	// default lucca-icon style
+	@extend %lucca-icon;
+
+	// Sizing mixin
+	@mixin iconSizing($size) {
+		font-size: _get($size, "font-size");
 	}
-	&.mod-small {
-		font-size: 1.2rem;
-	}
-	&.mod-big {
-		font-size: 1.8rem;
-	}
-	&.mod-bigger {
-		font-size: 2.1rem;
-	}
-	&.mod-biggest {
-		font-size: 2.4rem;
+
+	// all sizes
+	@each $name, $size in _theme("sizes") {
+		&.size-#{$name} {
+			@include iconSizing($size);
+		}
 	}
 }
