@@ -22,11 +22,15 @@ gulp.task('dist:clean', () => {
 });
 
 gulp.task('sass:dist', () => {
-	return gulp.src('./src/lucca-icons.scss')
+	return gulp.src('./src/main.scss')
 	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
 	.pipe(rename('lucca-icons.min.css'))
 	.pipe(gulp.dest(OUT_DIR));
 });
+gulp.task('copy:font', () => {
+	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf'])
+	.pipe(gulp.dest(OUT_DIR));
+});
 
-gulp.task('dist', ['dist:clean', 'sass:dist']);
-gulp.task('default', ['dist:clean', 'sass:dist']);
+gulp.task('dist', ['dist:clean', 'sass:dist', 'copy:font']);
+gulp.task('default', ['dist']);
