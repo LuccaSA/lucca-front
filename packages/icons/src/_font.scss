@@ -8,4 +8,17 @@ $font-path: "lucca-icons" !default;
 				url('#{$font-path}.ttf') format('truetype'),
 				url('#{$font-path}.woff') format('woff'),
 				url('#{$font-path}.svg') format('svg');
+
+	/* Enable Ligatures ================ */
+	letter-spacing: 0;
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	font-feature-settings: "liga";
+	-webkit-font-variant-ligatures: discretionary-ligatures;
+	font-variant-ligatures: discretionary-ligatures;
+
+	/* Better Font Rendering =========== */
+	-moz-osx-font-smoothing: grayscale;
 }

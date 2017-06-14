@@ -27,10 +27,11 @@ gulp.task('sass:dist', () => {
 	.pipe(rename('lucca-icons.min.css'))
 	.pipe(gulp.dest(OUT_DIR));
 });
-gulp.task('copy:font', () => {
+
+gulp.task('prepare-dist-folder', ['dist:clean'], () => {
 	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf'])
 	.pipe(gulp.dest(OUT_DIR));
 });
 
-gulp.task('dist', ['dist:clean', 'sass:dist', 'copy:font']);
+gulp.task('dist', ['prepare-dist-folder', 'sass:dist']);
 gulp.task('default', ['dist']);
