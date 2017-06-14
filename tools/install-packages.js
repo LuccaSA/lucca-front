@@ -4,7 +4,7 @@ const npmRun = require('npm-run');
 const packages = [
 	{ name: 'icons', dependencies: [] },
 	{ name: 'scss', dependencies: ['icons'] },
-	{ name: 'ng', dependencies: ['scss'] },
+	{ name: 'ng', dependencies: ['icons', 'scss'] },
 ];
 
 packages.forEach(pck => {
