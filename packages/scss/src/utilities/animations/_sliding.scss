@@ -1,0 +1,47 @@
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translate(0, -200px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+}
+
+@keyframes slideInLeft {
+	from {
+		transform: translate(-100px, 0);
+		opacity: 0;
+	}
+
+	to {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideInRight {
+	from {
+		transform: translate(100px, 0);
+		opacity: 0;
+	}
+
+	to {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideInBottom {
+	from {
+		transform: translate(0, 100px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}

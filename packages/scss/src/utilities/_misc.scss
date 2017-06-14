@@ -2,5 +2,9 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-clear {
-	clear: both;
+	&::after {
+		clear: both;
+		content: "";
+		display: table;
+	}
 }

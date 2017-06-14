@@ -1,4 +1,12 @@
 $commons: (
+	"animations": (
+		"durations": (
+			"fast": 80ms,
+			"standard": 150ms,
+			"slow": 300ms,
+		),
+		"iteration-count": 5,
+	),
 	"divider": (
 		"width": 1px,
 		"color": #D6D6D6,
