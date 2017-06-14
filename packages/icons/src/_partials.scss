@@ -1,11 +1,4 @@
-@font-face {
-	font-family: "Lucca icons";
-	font-style: normal;
-	font-weight: 400;
-	src: url("../font/lucca-icons.woff");
-}
-
-.lucca-icon {
+%lucca-icon {
 	direction: ltr;
 	display: inline-block;
 	font-family: "Lucca icons";

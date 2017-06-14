@@ -1,0 +1,26 @@
+@import "mappings";
+
+@mixin makeIcon($ligature, $position:"") {
+	@if map-has-key($mappings, $ligature) {
+		@if $position == "right" {
+			&::after {
+				content: map-get($mappings, $ligature);
+				font-family: "Lucca icons";
+				display: inline-block;
+				vertical-align: middle;
+				font-style: normal;
+			}
+		} @else {
+			&::before {
+				content: map-get($mappings, $ligature);
+				font-family: "Lucca icons";
+				display: inline-block;
+				vertical-align: middle;
+				font-style: normal;
+			}
+		}
+
+	} @else {
+		@error "'#{$ligature}' wasn't found in @lucca-front/icons $mappings map";
+	}
+}
