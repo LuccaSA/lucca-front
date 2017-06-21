@@ -1,41 +1,20 @@
-@font-face {
-	font-family: "Lucca icons";
-	font-style: normal;
-	font-weight: 400;
-	src: url("../../icons/lucca-icons.woff");
-}
+$font-path: _theme("icons.font-path");
+@import "node_modules/@lucca-front/icons/src/main";
+@import "node_modules/@lucca-front/icons/src/mixins";
 
-.icon {
-	direction: ltr;
-	display: inline-block;
-	font-family: "Lucca icons";
-	font-feature-settings: "liga";
-	font-size: 1.5rem;
-	-webkit-font-smoothing: antialiased;
-	font-style: normal;
-	font-weight: 400;
-	letter-spacing: normal;
-	line-height: 1;
-	text-transform: none;
-	vertical-align: middle;
-	white-space: nowrap;
-	word-wrap: normal;
-}
+.#{_theme("icons.prefix")} {
+	// default lucca-icon style
+	@extend %lucca-icon;
 
-.icon {
-	&.mod-smaller {
-		font-size: .9rem;
+	// Sizing mixin
+	@mixin iconSizing($size) {
+		font-size: _get($size, "font-size");
 	}
-	&.mod-small {
-		font-size: 1.2rem;
-	}
-	&.mod-big {
-		font-size: 1.8rem;
-	}
-	&.mod-bigger {
-		font-size: 2.1rem;
-	}
-	&.mod-biggest {
-		font-size: 2.4rem;
+
+	// all sizes
+	@each $name, $size in _theme("sizes") {
+		&.size-#{$name} {
+			@include iconSizing($size);
+		}
 	}
 }

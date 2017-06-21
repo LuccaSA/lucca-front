@@ -41,7 +41,8 @@ gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 			index: "demo.html",
 			routes: {
 				"/dist": "./dist",
-				"/icons": "../icons"
+				"/icons": "../icons",
+				"/node_modules": "./node_modules"
 			}
 		}
 	});

@@ -9,16 +9,186 @@ function reloadAnimation(elem) {
 /* ICONS */
 function generateIconDemo() {
 	var icons = {"icons": [
-		"north_thin_arrow", "east_thin_arrow", "south_thin_arrow", "west_thin_arrow",
-		"thin_cross", "thin_plus",
-		"completion_pie", "dirty_import", "pristine_import", "family_tree", "group",
-		"synchronisation", "watch", "unwatch",
-		"list", "mosaic", "palette", "image",
-		"heart", "broken_heart", "rejected", "star",
-		"flash", "simple_key", "key", "headphones",
-		"import_cb",
-		"help", "history",
-		"birthday", "snack",
+		'chevron_east',
+		'chevron_north',
+		'chevron_south',
+		'chevron_west',
+
+		'arrow_east',
+		'arrow_north',
+		'arrow_south',
+		'arrow_west',
+
+		'arrow_east_thin',
+		'arrow_north_thin',
+		'arrow_south_thin',
+		'arrow_west_thin',
+
+		'plus',
+		'minus',
+		'plus_thin',
+		'tick',
+		'tick_thin',
+
+		'cross_thin',
+		'cross',
+		'close',
+
+		'forbidden',
+		'error',
+		'warning',
+		'help',
+		'info',
+		'rejected',
+		'flag',
+
+		'ellipsis',
+		'list',
+		'list_alternative',
+
+		'mosaic',
+		'tiles',
+		'tiles_nine',
+		'blocks',
+		'org_tree',
+
+		'branch',
+		'filter',
+
+		'fullscreen',
+		'fullscreen_exit',
+		'minimize',
+
+		'lock',
+		'unlock',
+
+		'attachment',
+		'files',
+		'mail',
+		'clipboard',
+		'print',
+		'notification',
+
+		'import_dirty',
+		'import_pristine',
+		'download',
+		'upload',
+		'outside',
+		'trash',
+		'send',
+		'synchronisation',
+		'search',
+
+		'watch',
+		'unwatch',
+
+		'user',
+		'user_add',
+		'user_group',
+		'user_remove',
+		'user_roles',
+		'user_send_to',
+
+		'edit',
+		'edit_frame',
+		'edit_mini',
+
+		'palette',
+		'image',
+		'gallery',
+		'camera',
+		'phone',
+		'flash',
+
+		'refresh',
+		'history',
+		'timer',
+		'clock',
+		'completion_pie',
+		'calendar',
+
+		'key',
+		'key_simple',
+
+		'pin',
+		'location',
+		'talk',
+
+		'checkbox',
+		'checkbox_checked',
+		'checkbox_filled_partial',
+		'checkbox_filled',
+		'checkbox_heavy_checked',
+		'checkbox_partial',
+
+		'radio',
+		'radio_checked',
+
+		'bookmark',
+		'bookmark_add',
+		'bookmark_remove',
+
+		'move',
+		'move_vertically',
+		'move_horizontally',
+
+		'menu',
+		'menu_thin',
+
+		'birthday',
+		'breakfast',
+		'meal',
+		'lunch',
+		'diner',
+		'drink',
+		'snack',
+		'coffee',
+
+		'bus',
+		'car_clean',
+		'taxi',
+		'truck',
+		'subway',
+		'train',
+		'plane',
+
+		'euro',
+		'quantity',
+		'piggy_bank',
+
+		'parking',
+		'milestone',
+		'mileage',
+		'gasoline',
+		'toll_euro',
+		'toll_dollar',
+
+		'journey',
+		'luggage',
+		'hotel',
+		'stamp',
+
+		'banking_card',
+		'pricetag',
+		'payment',
+		'import_cb',
+
+		'heart',
+		'heart_broken',
+		'star',
+
+		'computer',
+		'computer_mouse',
+		'headphones',
+
+		'settings',
+		'sliders',
+		'tools',
+		'database',
+		'analytics',
+
+		'iron',
+		'jumping_cc'
 	]};
 
 	w3.displayObject("icons-section", icons);

@@ -2,8 +2,9 @@ const npmRun = require('npm-run');
 
 // respect dependency order here
 const packages = [
-	{ name: 'scss', dependencies: [] },
-	{ name: 'ng', dependencies: ['scss'] },
+	{ name: 'icons', dependencies: [] },
+	{ name: 'scss', dependencies: ['icons'] },
+	{ name: 'ng', dependencies: ['icons', 'scss'] },
 ];
 
 packages.forEach(pck => {
