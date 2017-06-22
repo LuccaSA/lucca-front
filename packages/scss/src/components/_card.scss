@@ -2,10 +2,24 @@ $cardPadding: 1.5rem;
 
 .card {
 	background: white;
+	border-radius: 3px;
 	box-shadow: 0 2px 3px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3);
+	display: block;
 	margin-bottom: 1rem;
 	padding: $cardPadding;
 	position: relative;
+	transition: all 150ms ease;
+}
+
+// Clickable card
+
+a.card {
+	color: _color("text.default");
+	text-decoration: none;
+
+	&:hover {
+		box-shadow: 0 8px 12px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3);
+	}
 }
 
 .card-footer {
