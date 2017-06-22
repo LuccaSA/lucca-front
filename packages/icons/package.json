@@ -18,7 +18,8 @@
   ],
   "files": [
     "font",
-    "dist"
+    "dist",
+    "src"
   ],
   "authors": [
     "Clotilde Martin-Lemerle <clot@lucca.fr>",
