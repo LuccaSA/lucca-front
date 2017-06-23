@@ -11,17 +11,6 @@ $cardPadding: 1.5rem;
 	transition: all 150ms ease;
 }
 
-// Clickable card
-
-a.card {
-	color: _color("text.default");
-	text-decoration: none;
-
-	&:hover {
-		box-shadow: 0 8px 12px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3);
-	}
-}
-
 .card-footer {
 	align-items: center;
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
@@ -42,5 +31,15 @@ a.card {
 .card {
 	&.mod-grey {
 		background: _theme("commons.background.color");
+	}
+
+	&.mod-clickable {
+		color: _color("text.default");
+		cursor: pointer;
+		text-decoration: none;
+
+		&:hover {
+			box-shadow: 0 8px 12px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3);
+		}
 	}
 }
