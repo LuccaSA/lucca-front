@@ -1,0 +1,8 @@
+$list: (
+  margin-bottom: 1rem,
+  padding: 1rem 1.5rem,
+  hover: (
+    background: #f5f5f5,
+  ),
+);
+$theme: _set($theme, "components.list", $list);
