@@ -163,6 +163,21 @@
 			right: 0;
 		}
 	}
+
+	&.mod-search {
+		&::after {
+			bottom: .3rem;
+			color: _color("text.light");
+			content: "\e976";
+			font-family: "Lucca icons";
+			position: absolute;
+			right: 0;
+		}
+
+		.input-field {
+			padding-right: 1.5rem;
+		}
+	}
 }
 
 
