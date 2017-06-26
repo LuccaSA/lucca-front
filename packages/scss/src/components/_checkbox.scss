@@ -40,7 +40,7 @@
 
 	&::after {
 		color: white;
-		content: "\e921";
+		content: "\e91a";
 		font-family: "Lucca icons";
 		font-size: .8rem;
 		left: 0;
@@ -89,7 +89,7 @@
 
 	&.is-incomplete ~ .checkbox-label {
 		&::after {
-			content: "\e91e";
+			content: "\e954";
 			font-size: .6rem;
 		}
 	}
