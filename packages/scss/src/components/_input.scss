@@ -128,8 +128,7 @@
 		&::after {
 			bottom: .15rem;
 			color: _color("text.light");
-			content: "\e976";
-			font-family: "Lucca icons";
+			@include makeIcon("search");
 			position: absolute;
 			right: 0;
 		}
@@ -157,8 +156,7 @@
 		&::after {
 			bottom: .15rem;
 			color: _color("text.light");
-			content: "\e976";
-			font-family: "Lucca icons";
+			@include makeIcon("search");
 			position: absolute;
 			right: 0;
 		}
@@ -168,8 +166,7 @@
 		&::after {
 			bottom: .3rem;
 			color: _color("text.light");
-			content: "\e976";
-			font-family: "Lucca icons";
+			@include makeIcon("search");
 			position: absolute;
 			right: 0;
 		}
@@ -213,7 +210,7 @@
 		}
 
 		&::after {
-			content: "\e976";
+			@include makeIcon("search");
 		}
 	}
 }
