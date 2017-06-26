@@ -39,7 +39,7 @@ $cardPadding: 1.5rem;
 		text-decoration: none;
 
 		&:hover {
-			box-shadow: 0 8px 12px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3);
+			box-shadow: unquote(_theme("commons.hover.box-shadow"));
 		}
 	}
 }
