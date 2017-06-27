@@ -32,7 +32,6 @@ function generateIconDemo() {
 
 		'cross_thin',
 		'cross',
-		'close',
 
 		'forbidden',
 		'error',
@@ -113,16 +112,6 @@ function generateIconDemo() {
 		'pin',
 		'location',
 		'talk',
-
-		'checkbox',
-		'checkbox_checked',
-		'checkbox_filled_partial',
-		'checkbox_filled',
-		'checkbox_heavy_checked',
-		'checkbox_partial',
-
-		'radio',
-		'radio_checked',
 
 		'bookmark',
 		'bookmark_add',
