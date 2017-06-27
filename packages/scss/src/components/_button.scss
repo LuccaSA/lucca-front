@@ -6,11 +6,15 @@
 	border: 0;
 	vertical-align: middle;
 	white-space: nowrap;
-	margin: _component("button.margin");
+	margin: _component("button.margin") 0;
 	border-radius: _component("button.border.radius");
 	box-shadow: unquote(_component("button.box-shadow"));
 	font-family: unquote(_component("button.font.family"));
 	transition: unquote(_component("button.transition"));
+
+	~ .button{
+		margin-left: _component("button.margin");
+	}
 
 	&:hover {
 		&:not([disabled]) {
