@@ -30,8 +30,11 @@ $commons: (
 		"family": '"Source Sans Pro", Tahoma, sans-serif',
 		"size": 16px,
 	),
-	"box-shadow": 0 0 0 1px rgba(50, 50, 50, .2) inset,
+	"box-shadow": '0 2px 3px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3)',
 	"transition": "all 150ms ease",
+	"hover": (
+		"box-shadow": '0 8px 12px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3)',
+	)
 );
 
 $theme: _set($theme, "commons", $commons);

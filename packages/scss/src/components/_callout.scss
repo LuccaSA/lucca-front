@@ -1,6 +1,6 @@
 .callout {
 	background: white;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3);
+	box-shadow: unquote(_theme("commons.box-shadow"));
 	margin-bottom: .5rem;
 	padding: 1.5rem;
 	position: relative;
