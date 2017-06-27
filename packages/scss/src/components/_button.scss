@@ -193,8 +193,7 @@
 
 		&::after {
 			color: white;
-			content: "\e923";
-			font-family: "Lucca icons";
+			@include makeIcon("tick");
 			height: 100%;
 			left: 0;
 			line-height: 100%;
@@ -229,8 +228,7 @@
 
 		&::after {
 			color: white;
-			content: "\e924";
-			font-family: "Lucca icons";
+			@include makeIcon("cross");
 			height: 100%;
 			left: 0;
 			line-height: 100%;

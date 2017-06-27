@@ -40,9 +40,8 @@
 
 	&::after {
 		color: white;
-		content: "\e921";
-		font-family: "Lucca icons";
 		font-size: .8rem;
+		@include makeIcon("tick");
 		left: 0;
 		line-height: .95rem;
 		padding-top: .05rem;
@@ -89,7 +88,7 @@
 
 	&.is-incomplete ~ .checkbox-label {
 		&::after {
-			content: "\e91e";
+			@include makeIcon("minus");
 			font-size: .6rem;
 		}
 	}

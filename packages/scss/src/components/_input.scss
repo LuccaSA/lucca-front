@@ -128,8 +128,7 @@
 		&::after {
 			bottom: .15rem;
 			color: _color("text.light");
-			content: "\e918";
-			font-family: "Lucca icons";
+			@include makeIcon("search");
 			position: absolute;
 			right: 0;
 		}
@@ -157,10 +156,23 @@
 		&::after {
 			bottom: .15rem;
 			color: _color("text.light");
-			content: "\e918";
-			font-family: "Lucca icons";
+			@include makeIcon("search");
 			position: absolute;
 			right: 0;
+		}
+	}
+
+	&.mod-search {
+		&::after {
+			bottom: .3rem;
+			color: _color("text.light");
+			@include makeIcon("search");
+			position: absolute;
+			right: 0;
+		}
+
+		.input-field {
+			padding-right: 1.5rem;
 		}
 	}
 }
@@ -198,7 +210,7 @@
 		}
 
 		&::after {
-			content: "\e920";
+			@include makeIcon("search");
 		}
 	}
 }

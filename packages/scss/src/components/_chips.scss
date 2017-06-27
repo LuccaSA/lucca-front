@@ -27,7 +27,7 @@
 	width: 1rem;
 
 	&::before {
-		content: "\e91b";
+		@include makeIcon("cross");
 		font-family: "Lucca icons";
 	}
 
