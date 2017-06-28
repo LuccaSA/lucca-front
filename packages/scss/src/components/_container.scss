@@ -8,7 +8,7 @@
 		}
 	}
 
-	@media (max-width: _component("container.min-width")) {
+	@media (max-width: _components("container.min-width")) {
 		width: 100%;
 	}
 }
@@ -33,12 +33,12 @@
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
 			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-				width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing) - _theme("component.navSide.width");
+				width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing) - _theme("components.navSide.width");
 			}
 		}
 
 		@media (max-width: _theme("breakpoints.sm.breakAt")) {
-			width: calc(100% - _theme("component.navSide.width"));
+			width: calc(100% - _theme("components.navSide.width"));
 		}
 	}
 }
