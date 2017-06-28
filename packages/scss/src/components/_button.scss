@@ -6,14 +6,18 @@
 	border: 0;
 	vertical-align: middle;
 	white-space: nowrap;
-	margin: _component("button.margin") 0;
+	margin: _component("button.margin");
 	border-radius: _component("button.border.radius");
 	box-shadow: unquote(_component("button.box-shadow"));
 	font-family: unquote(_component("button.font.family"));
 	transition: unquote(_component("button.transition"));
 
-	~ .button{
-		margin-left: _component("button.margin");
+	&:first-of-type {
+		margin-left: 0;
+	}
+
+	&:last-of-type {
+		margin-right: 0;
 	}
 
 	&:hover {
