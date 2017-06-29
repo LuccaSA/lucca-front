@@ -12,6 +12,14 @@
 	font-family: unquote(_component("button.font.family"));
 	transition: unquote(_component("button.transition"));
 
+	&:first-of-type {
+		margin-left: 0;
+	}
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+
 	&:hover {
 		&:not([disabled]) {
 			box-shadow: unquote(_component("button.hover.box-shadow"));
