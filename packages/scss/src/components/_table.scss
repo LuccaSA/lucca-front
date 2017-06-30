@@ -63,3 +63,9 @@
 		}
 	}
 }
+
+.table-body-row {
+	&.mod-filters {
+		vertical-align: bottom;
+	}
+}
