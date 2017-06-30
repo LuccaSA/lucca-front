@@ -10,8 +10,8 @@
 				<p class="list-item-content-description">List item description</p>
 			</div>
 			<div class="list-item-actions">
- 				 <button class="actionIcon"><i class="lucca-icon">edit</i></button>
- 				 <button class="actionIcon"><i class="lucca-icon">trash</i></button>
+ 				<button class="actionIcon"><i class="lucca-icon">edit</i></button>
+ 				<button class="actionIcon"><i class="lucca-icon">trash</i></button>
  		 </div>
 		</li>
 		<li class="list-item">
@@ -49,58 +49,49 @@
 	...
 &lt;/ul&gt;
 </code>
-
-<em><b>Tip:</b> Just remove <code class="code">list-item-actions</code> to have a full width content list.</em>
+	<em><b>Tip:</b> Just remove <code class="code">list-item-actions</code> to have a full width content list.</em>
 </section>
-
-<!-- clickable list -->
 <section class="contentSection">
- <h3>Clickable list</h3>
- <p>You can use list items as clickables elements by using a <code class="code">div</code> & <code class="code">a</code> structure.</p>
- <div class="list">
-	 <a href="#" class="list-item">
-		 <div class="list-item-content">
-			 <h4 class="list-item-content-title">List item title</h4>
-			 <p class="list-item-content-description">List item description</p>
+	<h3>Clickable list element</h3>
+	<ul class="list">
+		<li class="list-item">
+			<a href="#" class="list-item-content mod-clickable">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</a>
+			<div class="list-item-actions">
+				<button class="actionIcon"><i class="lucca-icon">edit</i></button>
+				<button class="actionIcon"><i class="lucca-icon">trash</i></button>
 		 </div>
-		 <div class="list-item-actions">
-			 <button class="actionIcon"><i class="lucca-icon">edit</i></button>
-			 <button class="actionIcon"><i class="lucca-icon">trash</i></button>
+		</li>
+		<li class="list-item">
+			<a href="#" class="list-item-content mod-clickable">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</a>
+			<div class="list-item-actions">
+				<button class="actionIcon"><i class="lucca-icon">edit</i></button>
+				<button class="actionIcon"><i class="lucca-icon">trash</i></button>
 		 </div>
-	 </a>
-	 <a href="#" class="list-item">
-		 <div class="list-item-content">
-			 <h4 class="list-item-content-title">List item title</h4>
-			 <p class="list-item-content-description">List item description</p>
-		 </div>
-		 <div class="list-item-actions">
-			 <button class="actionIcon"><i class="lucca-icon">edit</i></button>
-			 <button class="actionIcon"><i class="lucca-icon">trash</i></button>
-		 </div>
-	 </a>
-	 <a href="#" class="list-item">
-		 <div class="list-item-content">
-			 <h4 class="list-item-content-title">List item title</h4>
-			 <p class="list-item-content-description">List item description</p>
-		 </div>
-		 <div class="list-item-actions">
-			 <button class="actionIcon"><i class="lucca-icon">edit</i></button>
-			 <button class="actionIcon"><i class="lucca-icon">trash</i></button>
-		 </div>
-	 </a>
- </div>
-<code class="code mod-block">&lt;div class="list"&gt;
- &lt;a href="#" class="list-item"&gt;
-	 &lt;div class="list-item-content"&gt;
-		 &lt;h4 class="list-item-content-title"&gt;...&lt;/h4&gt;
-		 &lt;p class="list-item-content-description"&gt;...&lt;/p&gt;
+		</li>
+	</ul>
+
+<code class="code mod-block">&lt;ul class="list"&gt;
+	&lt;li class="list-item"&gt;
+		&lt;a href="#" class="list-item-content mod-clickable"&gt;
+			&lt;h4 class="list-item-content-title"&gt;...&lt;/h4&gt;
+			&lt;p class="list-item-content-description"&gt;...&lt;/p&gt;
+		&lt;/a&gt;
+		&lt;div class="list-item-actions"&gt;
+			&lt;button class="actionIcon"&gt;&lt;i class="lucca-icon"&gt;edit&lt;/i&gt;&lt;/button&gt;
+			&lt;button class="actionIcon"&gt;&lt;i class="lucca-icon"&gt;trash&lt;/i&gt;&lt;/button&gt;
 	 &lt;/div&gt;
-	 &lt;div class="list-item-actions"&gt;
-		 &lt;button class="actionIcon"gt;&lt;i class="lucca-icon"gt;edit&lt;&gt;&lt;/buttongt;
-		 &lt;button class="actionIcon"gt;&lt;i class="lucca-icon"gt;trash&lt;&gt;&lt;/buttongt;
-	 &lt;/div&gt;
- &lt;/a&gt;
- ...
-&lt;/div&gt;
+	&lt;/li&gt;
+	...
+&lt;/ul&gt;
 </code>
+
+
+
+	<em><b>Tip:</b> <code class="code">list-item-content</code> can be used as a <code class="code">div</code> for inner page interactions.</em>
 </section>
