@@ -48,3 +48,9 @@
 	transition: all _theme("commons.animations.durations.fast") ease;
 	white-space: nowrap;
 }
+
+.list-item-content {
+	&.mod-clickable {
+		cursor: pointer;
+	}
+}
