@@ -11,7 +11,6 @@
 	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	color: _color("text.default");
 	display: flex;
-	padding: _component("list.padding");
 	position: relative;
 	text-decoration: none;
 
@@ -26,6 +25,13 @@
 	}
 }
 
+.list-item-content {
+	color: _color("text.default");
+	padding: _component("list.padding");
+	text-decoration: none;
+	width: 100%;
+}
+
 .list-item-content-title {
 	margin: 0;
 }
@@ -37,7 +43,8 @@
 .list-item-actions {
 	margin-left: auto;
 	opacity: 0;
-	padding-left: 1rem;
+	padding: _component("list.padding");
+	padding-left: 0;
 	transition: all _theme("commons.animations.durations.fast") ease;
 	white-space: nowrap;
 }
