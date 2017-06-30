@@ -109,6 +109,11 @@
 	margin-bottom: 2rem;
 }
 
+.demo-icon .lucca-icon{
+	font-size: 1.25rem;
+	display: block;
+}
+
 .demo-animation{
 	overflow: hidden;
 	float: left;
@@ -118,8 +123,4 @@
 
 .demo-animation .card.reload {
 	animation-name: none;
-}
-
-.demo-icon .icon{
-	display: block;
 }

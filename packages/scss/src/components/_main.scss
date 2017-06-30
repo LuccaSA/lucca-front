@@ -1,9 +1,9 @@
 .main-content {
-	padding: 4rem 0;
+	padding: _theme("components.main.padding");
 }
 
 .navSide ~ .main-content {
-	margin-left: _theme("component.navSide.width");
+	margin-left: _theme("components.navSide.width");
 }
 
 

@@ -1,0 +1,6 @@
+$actionIcon: (
+  hover: (
+    background: #f5f5f5,
+  ),
+);
+$theme: _set($theme, "components.actionIcon", $actionIcon);

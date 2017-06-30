@@ -1,5 +1,13 @@
-// CLEARFIX
+// CLEARFIX & FLOATS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.u-left {
+	float: left;
+}
+
+.u-right {
+	float: right;
+}
 
 .u-clear {
 	&::after {
