@@ -1,0 +1,12 @@
+$table: (
+	padding: .65em 1em,
+	font-size: _theme("sizes.small.font-size"),
+	zebra: (
+		background: #F2F2F2,
+	),
+	hover: (
+		background: #E8E8E8,
+	),
+);
+
+$theme: _set($theme, "component.table", $table);
