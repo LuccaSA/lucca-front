@@ -4,7 +4,7 @@
 	border-spacing: 0;
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table;
-	font-size: .9rem;
+	font-size: _theme("component.table.font-size");
 	text-align: left;
 	width: 100%;
 }
@@ -20,7 +20,7 @@
 
 .table-head-row-cell {
 	display: table-cell;
-	padding: .5em 1em;
+	padding: _theme("component.table.padding");
 }
 
 
@@ -35,7 +35,7 @@
 .table-body-row-cell {
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table-cell;
-	padding: .5em 1em;
+	padding: _theme("component.table.padding");
 }
 
 
@@ -46,7 +46,7 @@
 	&.mod-zebra {
 		.table-body {
 			tr:nth-child(odd) {
-				background-color: #F2F2F2;
+				background-color: _theme("component.table.zebra.background");
 			}
 		}
 	}
@@ -58,8 +58,14 @@
 			transition: all 150ms ease;
 
 			&:hover {
-				background: #E8E8E8;
+				background: _theme("component.table.hover.background");
 			}
 		}
+	}
+}
+
+.table-body-row {
+	&.mod-filters {
+		vertical-align: bottom;
 	}
 }
