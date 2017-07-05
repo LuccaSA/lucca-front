@@ -69,18 +69,18 @@
 
 		.table-head-row-cell {
 			&:first-child {
-				padding-left: 1.5rem;
+				padding-left: _theme("component.table.card.padding");
 			}
 			&:last-child {
-				padding-right: 1.5rem;
+				padding-right: _theme("component.table.card.padding");
 			}
 		}
 		.table-body-row-cell {
 			&:first-child {
-				padding-left: 1.5rem;
+				padding-left: _theme("component.table.card.padding");
 			}
 			&:last-child {
-				padding-right: 1.5rem;
+				padding-right: _theme("component.table.card.padding");
 			}
 		}
 	}

@@ -1,5 +1,3 @@
-$cardPadding: 1.5rem;
-
 .card {
 	background: white;
 	border-radius: 3px;
@@ -11,7 +9,7 @@ $cardPadding: 1.5rem;
 }
 
 .card-content {
-	padding: $cardPadding;
+	padding: _theme("component.card.content.padding");
 }
 
 .card-footer {
@@ -19,7 +17,7 @@ $cardPadding: 1.5rem;
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 	min-height: 3rem;
-	padding: .33rem $cardPadding;
+	padding: _theme("component.card.footer.padding");
 }
 
 .card-footer-right {

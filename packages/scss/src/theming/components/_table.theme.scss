@@ -8,6 +8,11 @@ $table: (
 	hover: (
 		background: #E8E8E8,
 	),
+
+	// mod
+	card: (
+		padding: 1.5rem,
+	),
 );
 
 $theme: _set($theme, "component.table", $table);
