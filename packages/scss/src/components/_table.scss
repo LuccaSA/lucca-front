@@ -2,9 +2,9 @@
 	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	border-collapse: collapse;
 	border-spacing: 0;
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table;
 	font-size: _theme("component.table.font-size");
+	line-height: _theme("component.table.line-height");
 	text-align: left;
 	width: 100%;
 }
@@ -12,6 +12,7 @@
 .table-head {
 	display: table-header-group;
 	font-weight: 600;
+	vertical-align: bottom;
 }
 
 .table-head-row {
@@ -59,6 +60,27 @@
 
 			&:hover {
 				background: _theme("component.table.hover.background");
+			}
+		}
+	}
+
+	&.mod-card {
+		border-bottom: 0;
+
+		.table-head-row-cell {
+			&:first-child {
+				padding-left: 1.5rem;
+			}
+			&:last-child {
+				padding-right: 1.5rem;
+			}
+		}
+		.table-body-row-cell {
+			&:first-child {
+				padding-left: 1.5rem;
+			}
+			&:last-child {
+				padding-right: 1.5rem;
 			}
 		}
 	}

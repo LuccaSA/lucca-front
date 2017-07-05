@@ -114,3 +114,50 @@
 </code>
 <em><b>Tip:</b> You can use a <code class="code">&lt;div&gt;</code> & <code class="code">&lt;a&gt;</code> structure if you want to have links on your rows.</em>
 </section>
+
+<section class="contentSection">
+	<h3>Table in card</h3>
+	<p>You can use a table inside a card. To do it, put it outside <code class="code">card-content</code> and add a <code class="code">mod-card</code> to it.</p>
+	<div class="card">
+		<table class="table mod-card">
+			<thead class="table-head">
+				<tr class="table-head-row">
+					<th class="table-head-row-cell">Table head</th>
+					<th class="table-head-row-cell">Table head</th>
+				</tr>
+			</thead>
+			<tbody class="table-body">
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">Table cell</td>
+					<td class="table-body-row-cell">Table cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">Table cell</td>
+					<td class="table-body-row-cell">Table cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">Table cell</td>
+					<td class="table-body-row-cell">Table cell</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<code class="code mod-block">&lt;div class="card"&gt;
+	&lt;table class="table mod-card"&gt;
+		&lt;thead class="table-head"&gt;
+			&lt;tr class="table-head-row"&gt;
+				&lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+				&lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+			&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody class="table-body"&gt;
+			&lt;tr class="table-body-row"&gt;
+				&lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+				&lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+			&lt;/tr&gt;
+			...
+		&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
+</code>
+</section>
