@@ -93,6 +93,28 @@
 	margin: 0;
 }
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.input {
+	@mixin inputColoring($palette) {
+		.input-field:focus {
+			box-shadow: 0 2px 0 0 _get($palette, "color");
+
+			~ .input-label {
+				color: _get($palette, "color");
+			}
+		}
+	}
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+}
+
 
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
