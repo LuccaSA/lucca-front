@@ -25,14 +25,14 @@
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _color("primary");
+		box-shadow: 0 2px 0 0 _color("secondary");
 
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _color("primary");
+			color: _color("secondary");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
