@@ -91,3 +91,25 @@
 		vertical-align: bottom;
 	}
 }
+
+/* Hidden action buttons */
+
+.table-body-row-cell, .table-head-row-cell {
+	&.mod-actions {
+		opacity: 0;
+		padding:  {
+			bottom: .3rem;
+			top: .3rem;
+		}
+		text-align: right;
+		transition: opacity 150ms ease;
+	}
+}
+
+.table-head-row, .table-body-row {
+	&:hover {
+		.table-body-row-cell, .table-head-row-cell {
+			opacity: 1;
+		}
+	}
+}
