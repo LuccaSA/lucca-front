@@ -39,7 +39,6 @@
 	padding: _theme("component.table.padding");
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -109,7 +108,9 @@
 .table-head-row, .table-body-row {
 	&:hover {
 		.table-body-row-cell, .table-head-row-cell {
-			opacity: 1;
+			&.mod-actions {
+				opacity: 1;
+			}
 		}
 	}
 }
