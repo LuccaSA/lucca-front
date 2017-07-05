@@ -45,6 +45,31 @@
 }
 
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.switch {
+	@mixin switchColoring($palette) {
+		.switch-input:checked ~ .switch-label {
+			&::before {
+				background: lighten(_get($palette, "color"), 20%);
+			}
+
+			&::after {
+				background: _get($palette, "color");
+			}
+		}
+	}
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include switchColoring($palette);
+		}
+	}
+}
+
+
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
