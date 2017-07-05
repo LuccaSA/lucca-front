@@ -39,6 +39,29 @@
 }
 
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.textarea {
+	@mixin textareaColoring($palette) {
+		.textarea-field:focus {
+			box-shadow: 0 2px 0 0 _get($palette, "color");
+
+			~ .textarea-label {
+				color: _get($palette, "color");
+			}
+		}
+	}
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include textareaColoring($palette);
+		}
+	}
+}
+
+
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
