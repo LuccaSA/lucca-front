@@ -9,7 +9,7 @@
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
-	font-family: "Source Sans Pro", Tahoma, sans-serif;
+	font-family: unquote(_theme("commons.font.family"));
 	font-weight: 400;
 	line-height: _theme("sizes.standard.line-height");
 	outline: 0;
@@ -18,10 +18,10 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _color("secondary");
+		box-shadow: 0 2px 0 0 _component("textarea.color");
 
 		~ .textarea-label {
-			color: _color("secondary");
+			color: _component("textarea.color");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}

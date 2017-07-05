@@ -9,7 +9,7 @@
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
-	font-family: unquote(_component("button.font.family"));
+	font-family: unquote(_theme("commons.font.family"));
 	font-weight: 400;
 	margin-bottom: .15rem;
 	outline: 0;
@@ -25,14 +25,14 @@
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _color("secondary");
+		box-shadow: 0 2px 0 0 _component("input.color");
 
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _color("secondary");
+			color: _component("input.color");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}

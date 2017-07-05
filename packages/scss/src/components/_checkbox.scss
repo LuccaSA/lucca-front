@@ -9,8 +9,8 @@
 
 	&:checked ~ .checkbox-label {
 		&::before {
-			background-color: _color("secondary");
-			box-shadow: inset 0 0 0 2px _color("secondary");
+			background-color: _component("checkbox.color");
+			box-shadow: inset 0 0 0 2px _component("checkbox.color");
 		}
 
 		&::after {

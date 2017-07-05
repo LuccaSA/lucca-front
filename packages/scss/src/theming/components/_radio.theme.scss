@@ -1,0 +1,4 @@
+$radio: (
+  color: _color("secondary"),
+);
+$theme: _set($theme, "components.radio", $radio);

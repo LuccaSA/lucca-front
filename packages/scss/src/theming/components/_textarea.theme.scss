@@ -1,0 +1,4 @@
+$textarea: (
+  color: _color("secondary"),
+);
+$theme: _set($theme, "components.textarea", $textarea);

@@ -57,11 +57,11 @@
 		color: _color("text.default");
 
 		&::before {
-			background: lighten(_color("secondary"), 20%);
+			background: lighten(_component("switch.color"), 20%);
 		}
 
 		&::after {
-			background: _color("secondary");
+			background: _component("switch.color");
 			left: 14px;
 		}
 	}

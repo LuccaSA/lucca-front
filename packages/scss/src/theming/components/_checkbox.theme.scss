@@ -1,0 +1,4 @@
+$checkbox: (
+  color: _color("secondary"),
+);
+$theme: _set($theme, "components.checkbox", $checkbox);

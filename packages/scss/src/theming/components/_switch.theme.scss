@@ -1,0 +1,4 @@
+$switch: (
+  color: _color("secondary"),
+);
+$theme: _set($theme, "components.switch", $switch);
