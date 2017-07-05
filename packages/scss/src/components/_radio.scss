@@ -61,6 +61,32 @@
 	}
 }
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.radio {
+	@mixin radioColoring($palette) {
+		.radio-input:checked ~ .radio-label {
+			&::before {
+				box-shadow: inset 0 0 0 2px _get($palette, "color");
+			}
+		}
+
+		.radio-label {
+			&::after {
+				background: _get($palette, "color");
+			}
+		}
+	}
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include radioColoring($palette);
+		}
+	}
+}
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
