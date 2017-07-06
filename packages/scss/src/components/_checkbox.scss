@@ -86,7 +86,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 
-.checkbox-input {
+.checkbox .checkbox-input {
 	&[disabled] {
 		~ .checkbox-label {
 			color: _color("text.light");

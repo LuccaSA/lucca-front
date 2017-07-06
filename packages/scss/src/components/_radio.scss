@@ -89,7 +89,7 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.radio-input {
+.radio .radio-input {
 	&[disabled] {
 		~ .radio-label {
 			color: _color("text.light");
