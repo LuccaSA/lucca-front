@@ -28,6 +28,11 @@
 .actionIcon {
 	&[disabled]{
 		cursor: default;
-		opacity: .5;
+		opacity: _theme("commons.disabled.opacity");
+	}
+
+	&.is-disabled {
+		opacity: _theme("commons.disabled.opacity");
+		pointer-events: none;
 	}
 }
