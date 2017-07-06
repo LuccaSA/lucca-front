@@ -18,10 +18,7 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _component("textarea.color");
-
 		~ .textarea-label {
-			color: _component("textarea.color");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
@@ -52,6 +49,10 @@
 			}
 		}
 	}
+
+
+	// default color
+	@include textareaColoring(_component("textarea.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {

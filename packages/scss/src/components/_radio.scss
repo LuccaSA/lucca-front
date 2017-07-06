@@ -8,10 +8,6 @@
 	position: absolute;
 
 	&:checked ~ .radio-label {
-		&::before {
-			box-shadow: inset 0 0 0 2px _component("radio.color");
-		}
-
 		&::after {
 			transform: scale(.55);
 		}
@@ -38,7 +34,6 @@
 	}
 
 	&::after {
-		background: _component("radio.color");
 		border-radius: 50%;
 		color: transparent;
 		content: "";
@@ -78,6 +73,9 @@
 			}
 		}
 	}
+
+	// default color
+	@include radioColoring(_component("radio.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {

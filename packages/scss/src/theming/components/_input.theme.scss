@@ -1,4 +1,7 @@
 $input: (
-  color: _color("secondary"),
+  // theming
+  default-palette: (
+    color:  _color("secondary"),
+  ),
 );
 $theme: _set($theme, "components.input", $input);

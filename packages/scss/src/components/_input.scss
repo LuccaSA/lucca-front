@@ -25,14 +25,11 @@
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _component("input.color");
-
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _component("input.color");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
@@ -106,6 +103,9 @@
 			}
 		}
 	}
+
+	// default color
+	@include inputColoring(_component("input.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {

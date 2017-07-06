@@ -61,6 +61,9 @@
 		}
 	}
 
+	// default color
+	@include switchColoring(_component("switch.default-palette"));
+
 	// palette colors
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
@@ -73,7 +76,8 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.switch-input {
+.switch .switch-input {
+
 	/*
 		Checked
 	*/
@@ -81,12 +85,7 @@
 	&:checked ~ .switch-label {
 		color: _color("text.default");
 
-		&::before {
-			background: lighten(_component("switch.color"), 20%);
-		}
-
 		&::after {
-			background: _component("switch.color");
 			left: 14px;
 		}
 	}
