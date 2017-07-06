@@ -98,6 +98,17 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .input {
+
+	/* Width */
+
+	@each $input-size-name, $input-width in _component("input.sizes") {
+		&.mod-#{$input-size-name} {
+			width: $input-width;
+		}
+	}
+
+	/* Display */
+
 	&.mod-block {
 		width: 100%;
 	}
@@ -108,29 +119,7 @@
 		margin-right: .15rem;
 	}
 
-	&.mod-longest {
-		width: 28rem;
-	}
-
-	&.mod-longer {
-		width: 22rem;
-	}
-
-	&.mod-long {
-		width: 17rem;
-	}
-
-	&.mod-short {
-		width: 9rem;
-	}
-
-	&.mod-shorter {
-		width: 6rem;
-	}
-
-	&.mod-shortest {
-		width: 3rem;
-	}
+	/* Select */
 
 	&.mod-autocomplete {
 		.input-field {
@@ -173,6 +162,8 @@
 			right: 0;
 		}
 	}
+
+	/* Search */
 
 	&.mod-search {
 		&::after {
