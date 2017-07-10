@@ -1,7 +1,7 @@
 $checkbox: (
   // theming
   default-palette: (
-    color:  _color("secondary"),
+    color:  _color("primary"),
   ),
 );
 $theme: _set($theme, "components.checkbox", $checkbox);
