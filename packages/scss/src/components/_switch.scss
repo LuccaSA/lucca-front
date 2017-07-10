@@ -45,10 +45,39 @@
 }
 
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.switch {
+	@mixin switchColoring($palette) {
+		.switch-input:checked ~ .switch-label {
+			&::before {
+				background: lighten(_get($palette, "color"), 20%);
+			}
+
+			&::after {
+				background: _get($palette, "color");
+			}
+		}
+	}
+
+	// default color
+	@include switchColoring(_component("switch.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include switchColoring($palette);
+		}
+	}
+}
+
+
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.switch-input {
+.switch .switch-input {
+
 	/*
 		Checked
 	*/
@@ -56,12 +85,7 @@
 	&:checked ~ .switch-label {
 		color: _color("text.default");
 
-		&::before {
-			background: lighten(_color("primary"), 20%);
-		}
-
 		&::after {
-			background: _color("primary");
 			left: 14px;
 		}
 	}

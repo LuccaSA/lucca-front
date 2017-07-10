@@ -8,10 +8,6 @@
 	position: absolute;
 
 	&:checked ~ .radio-label {
-		&::before {
-			box-shadow: inset 0 0 0 2px _color("primary");
-		}
-
 		&::after {
 			transform: scale(.55);
 		}
@@ -38,7 +34,6 @@
 	}
 
 	&::after {
-		background: _color("primary");
 		border-radius: 50%;
 		color: transparent;
 		content: "";
@@ -61,11 +56,40 @@
 	}
 }
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.radio {
+	@mixin radioColoring($palette) {
+		.radio-input:checked ~ .radio-label {
+			&::before {
+				box-shadow: inset 0 0 0 2px _get($palette, "color");
+			}
+		}
+
+		.radio-label {
+			&::after {
+				background: _get($palette, "color");
+			}
+		}
+	}
+
+	// default color
+	@include radioColoring(_component("radio.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include radioColoring($palette);
+		}
+	}
+}
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.radio-input {
+.radio .radio-input {
 	&[disabled] {
 		~ .radio-label {
 			color: _color("text.light");

@@ -8,11 +8,6 @@
 	position: absolute;
 
 	&:checked ~ .checkbox-label {
-		&::before {
-			background-color: _color("primary");
-			box-shadow: inset 0 0 0 2px _color("primary");
-		}
-
 		&::after {
 			transform: scale(1);
 		}
@@ -62,12 +57,36 @@
 	}
 }
 
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.checkbox {
+	@mixin checkboxColoring($palette) {
+		.checkbox-input:checked ~ .checkbox-label {
+			&::before {
+				background-color: _get($palette, "color");
+				box-shadow: inset 0 0 0 2px _get($palette, "color");
+			}
+		}
+	}
+
+	// default color
+	@include checkboxColoring(_component("checkbox.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include checkboxColoring($palette);
+		}
+	}
+}
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 
-.checkbox-input {
+.checkbox .checkbox-input {
 	&[disabled] {
 		~ .checkbox-label {
 			color: _color("text.light");
@@ -88,8 +107,8 @@
 
 	&.is-incomplete ~ .checkbox-label {
 		&::after {
-			@include makeIcon("minus");
 			font-size: .6rem;
+			@include makeIcon("minus");
 		}
 	}
 }

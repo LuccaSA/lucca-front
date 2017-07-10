@@ -7,6 +7,9 @@ $input: (
     long: 17rem,
     longer: 22rem,
     longest: 28rem
-  )
+  ),
+  default-palette: (
+    color:  _color("primary"),
+  ),
 );
 $theme: _set($theme, "components.input", $input);
