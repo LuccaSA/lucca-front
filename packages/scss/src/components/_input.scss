@@ -1,7 +1,7 @@
 .input {
 	padding-top: 1rem;
 	position: relative;
-	width: 220px;
+	width: _component("input.sizes.default");
 }
 
 .input-field {
@@ -120,6 +120,17 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .input {
+
+	/* Width */
+
+	@each $input-size-name, $input-width in _component("input.sizes") {
+		&.mod-#{$input-size-name} {
+			width: $input-width;
+		}
+	}
+
+	/* Display */
+
 	&.mod-block {
 		width: 100%;
 	}
@@ -130,17 +141,7 @@
 		margin-right: .15rem;
 	}
 
-	&.mod-short {
-		width: 150px;
-	}
-
-	&.mod-shorter {
-		width: 100px;
-	}
-
-	&.mod-shortest {
-		width: 50px;
-	}
+	/* Select */
 
 	&.mod-autocomplete {
 		.input-field {
@@ -183,6 +184,8 @@
 			right: 0;
 		}
 	}
+
+	/* Search */
 
 	&.mod-search {
 		&::after {
