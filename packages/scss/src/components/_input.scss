@@ -9,7 +9,7 @@
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
-	font-family: unquote(_component("button.font.family"));
+	font-family: unquote(_theme("commons.font.family"));
 	font-weight: 400;
 	margin-bottom: .15rem;
 	outline: 0;
@@ -25,14 +25,11 @@
 	}
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _color("primary");
-
 		&::placeholder {
 			opacity: 1;
 		}
 
 		~ .input-label {
-			color: _color("primary");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
@@ -91,6 +88,31 @@
 	color: _color("text.light");
 	font-size: _theme("sizes.small.font-size");
 	margin: 0;
+}
+
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.input {
+	@mixin inputColoring($palette) {
+		.input-field:focus {
+			box-shadow: 0 2px 0 0 _get($palette, "color");
+
+			~ .input-label {
+				color: _get($palette, "color");
+			}
+		}
+	}
+
+	// default color
+	@include inputColoring(_component("input.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
 }
 
 

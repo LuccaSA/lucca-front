@@ -1,35 +1,67 @@
-<h2>Radio</h2>
+<section class="contentSection">
+	<h2>Radio</h2>
 
-<!-- Basics -->
-<div class="form">
-	<div class="form-group">
-		<div class="grid">
-			<div class="grid-md4">
-				<div class="radio">
-					<input class="radio-input" type="radio" name="radioList1" id="radio0" checked>
-					<label class="radio-label" for="radio0">Radio</label>
+	<!-- Basics -->
+	<div class="form">
+		<div class="form-group">
+			<div class="grid">
+				<div class="grid-md4">
+					<div class="radio">
+						<input class="radio-input" type="radio" name="radioList1" id="radio0" checked>
+						<label class="radio-label" for="radio0">Radio</label>
+					</div>
+					<div class="radio">
+						<input class="radio-input" type="radio" name="radioList1" id="radio1">
+						<label class="radio-label" for="radio1">Radio</label>
+					</div>
 				</div>
-				<div class="radio">
-					<input class="radio-input" type="radio" name="radioList1" id="radio1">
-					<label class="radio-label" for="radio1">Radio</label>
-				</div>
-			</div>
-			<div class="grid-md4">
-				<div class="radio">
-					<input class="radio-input" type="radio" name="radioList2"  id="radio2" disabled checked>
-					<label class="radio-label" for="radio2">Disabled radio</label>
-				</div>
-				<div class="radio">
-					<input class="radio-input" type="radio" name="radioList2"  id="radio3" disabled>
-					<label class="radio-label" for="radio3">Disabled radio</label>
+				<div class="grid-md4">
+					<div class="radio">
+						<input class="radio-input" type="radio" name="radioList2"  id="radio2" disabled checked>
+						<label class="radio-label" for="radio2">Disabled radio</label>
+					</div>
+					<div class="radio">
+						<input class="radio-input" type="radio" name="radioList2"  id="radio3" disabled>
+						<label class="radio-label" for="radio3">Disabled radio</label>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 <code class="code mod-block">&lt;div class="radio"&gt;
 	&lt;input class="radio-input" type="radio" name="<b>radioListID</b>" id="<b>radioID</b>" checked&gt;
 	&lt;label class="radio-label" for="<b>radioID</b>"&gt;Radio&lt;/label&gt;
 &lt;/div&gt;
 </code>
-<em><b>Tip:</b> To disable a radio, add a <code class="code">disabled</code> attribute to the radio input.</em>
+	<em><b>Tip:</b> To disable a radio, add a <code class="code">disabled</code> attribute to the radio input.</em>
+</section>
+
+<!-- Palette -->
+<section class="contentSection">
+	<h3>Palette</h3>
+	<div class="radio palette-primary">
+		<input class="radio-input" type="radio" name="palette-primary" id="radio-palette-primary" checked>
+		<label class="radio-label" for="radio-palette-primary">palette-primary</label>
+	</div>
+	<div class="radio palette-secondary">
+		<input class="radio-input" type="radio" name="palette-secondary" id="radio-palette-secondary" checked>
+		<label class="radio-label" for="radio-palette-secondary">palette-secondary</label>
+	</div>
+	<div class="radio palette-success">
+		<input class="radio-input" type="radio" name="palette-success" id="radio-palette-success" checked>
+		<label class="radio-label" for="radio-palette-success">palette-success</label>
+	</div>
+	<div class="radio palette-warning">
+		<input class="radio-input" type="radio" name="palette-warning" id="radio-palette-warning" checked>
+		<label class="radio-label" for="radio-palette-warning">palette-warning</label>
+	</div>
+	<div class="radio palette-error">
+		<input class="radio-input" type="radio" name="palette-error" id="radio-palette-error" checked>
+		<label class="radio-label" for="radio-palette-error">palette-error</label>
+	</div>
+<code class="code mod-block">&lt;div class="radio palette-primary"&gt;
+	&lt;input class="radio-input" type="radio" name="<b>radioName</b>" id="<b>radioID</b>" checked&gt;
+	&lt;label class="radio-label" for="<b>radioName</b>"&gt;...&lt;/label&gt;
+&lt;/div&gt;</code>
+	<em><b>Tip:</b> It will works with all palette's colors</em>
+</section>

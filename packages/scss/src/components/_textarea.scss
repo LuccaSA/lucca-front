@@ -9,7 +9,7 @@
 	border: 0;
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
-	font-family: "Source Sans Pro", Tahoma, sans-serif;
+	font-family: unquote(_theme("commons.font.family"));
 	font-weight: 400;
 	line-height: _theme("sizes.standard.line-height");
 	outline: 0;
@@ -18,10 +18,7 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: 0 2px 0 0 _color("primary");
-
 		~ .textarea-label {
-			color: _color("primary");
 			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
@@ -36,6 +33,33 @@
 	top: 1.3rem;
 	transition: all 150ms ease;
 	width: 100%;
+}
+
+
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.textarea {
+	@mixin textareaColoring($palette) {
+		.textarea-field:focus {
+			box-shadow: 0 2px 0 0 _get($palette, "color");
+
+			~ .textarea-label {
+				color: _get($palette, "color");
+			}
+		}
+	}
+
+
+	// default color
+	@include textareaColoring(_component("textarea.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include textareaColoring($palette);
+		}
+	}
 }
 
 
