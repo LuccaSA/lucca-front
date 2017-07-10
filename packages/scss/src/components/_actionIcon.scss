@@ -10,11 +10,29 @@
 	width: 2rem;
 
 	&:hover {
-		background: _component("actionIcon.hover.background");
-		color: darken(_color("text.default"), 25%);
+		&:not([disabled]) {
+			background: _component("actionIcon.hover.background");
+			color: darken(_color("text.default"), 25%);
+		}
 	}
 
 	.lucca-icon, .#{_theme("icons.prefix")} {
 		font-size: .9rem;
+	}
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.actionIcon {
+	&[disabled]{
+		cursor: default;
+		opacity: _theme("commons.disabled.opacity");
+	}
+
+	&.is-disabled {
+		opacity: _theme("commons.disabled.opacity");
+		pointer-events: none;
 	}
 }
