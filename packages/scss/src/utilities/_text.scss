@@ -30,11 +30,8 @@
 }
 
 // palette
-@mixin textColoring($palette) {
-	color: _get($palette, "color") !important;
-}
 @each $name, $palette in _palettes() {
 	.u-text#{str-capitalize($name)} {
-		@include textColoring($palette);
+		color: _get($palette, "color") !important;
 	}
 }

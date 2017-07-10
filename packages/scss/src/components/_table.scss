@@ -2,9 +2,9 @@
 	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	border-collapse: collapse;
 	border-spacing: 0;
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table;
 	font-size: _theme("component.table.font-size");
+	line-height: _theme("component.table.line-height");
 	text-align: left;
 	width: 100%;
 }
@@ -12,6 +12,7 @@
 .table-head {
 	display: table-header-group;
 	font-weight: 600;
+	vertical-align: bottom;
 }
 
 .table-head-row {
@@ -38,7 +39,6 @@
 	padding: _theme("component.table.padding");
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -62,10 +62,55 @@
 			}
 		}
 	}
+
+	&.mod-card {
+		border-bottom: 0;
+
+		.table-head-row-cell {
+			&:first-child {
+				padding-left: _theme("component.table.card.padding");
+			}
+			&:last-child {
+				padding-right: _theme("component.table.card.padding");
+			}
+		}
+		.table-body-row-cell {
+			&:first-child {
+				padding-left: _theme("component.table.card.padding");
+			}
+			&:last-child {
+				padding-right: _theme("component.table.card.padding");
+			}
+		}
+	}
 }
 
 .table-body-row {
 	&.mod-filters {
 		vertical-align: bottom;
+	}
+}
+
+/* Hidden action buttons */
+
+.table-body-row-cell, .table-head-row-cell {
+	&.mod-actions {
+		opacity: 0;
+		padding: {
+			bottom: .3rem;
+			top: .3rem;
+		}
+		text-align: right;
+		transition: opacity 150ms ease;
+	}
+}
+
+.table-head-row, .table-body-row {
+	&:hover {
+		.table-body-row-cell, .table-head-row-cell {
+			&.mod-actions {
+				opacity: 1;
+			}
+		}
 	}
 }

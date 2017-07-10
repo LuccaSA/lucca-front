@@ -26,7 +26,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .actionIcon {
-	&[disabled]{
+	&[disabled] {
 		cursor: default;
 		opacity: _theme("commons.disabled.opacity");
 	}

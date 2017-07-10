@@ -4,11 +4,15 @@
 <section class="contentSection">
 	<h2>Cards</h2>
 	<div class="card">
-		<h3>Card</h3>
-		<p>I'm a card of content</p>
+		<div class="card-content">
+			<h3>Card</h3>
+			<p>I'm a card of content</p>
+		</div>
 	</div>
 <code class="code mod-block">&lt;div class="card"&gt;
-	...
+	&lt;div class="card-content"&gt;
+		...
+	&lt;/div&gt;
 &lt;/div&gt;
 </code>
 </section>
@@ -16,11 +20,15 @@
 <!-- Colors -->
 <section class="contentSection">
 	<div class="card mod-grey">
-		<h3>Grey card</h3>
-		<p>I'm a grey card of content</p>
+		<div class="card-content">
+			<h3>Grey card</h3>
+			<p>I'm a grey card of content</p>
+		</div>
 	</div>
 <code class="code mod-block">&lt;div class="card mod-grey"&gt;
-	...
+	&lt;div class="card-content"&gt;
+		...
+	&lt;/div&gt;
 &lt;/div&gt;
 </code>
 </section>
@@ -29,8 +37,10 @@
 <h3>Cards with footer</h3>
 <section class="contentSection">
 	<div class="card">
-		<h3>Card</h3>
-		<p>Card content</p>
+		<div class="card-content">
+			<h3>Card</h3>
+			<p>Card content</p>
+		</div>
 		<footer class="card-footer">
 			<div class="card-footer-right">
 				<button class="button palette-primary">Confirm</button>
@@ -39,7 +49,9 @@
 		</footer>
 	</div>
 <code class="code mod-block">&lt;div class="card"&gt;
-	...
+	&lt;div class="card-content"&gt;
+		...
+	&lt;/div&gt;
 	&lt;footer class="card-footer"&gt;
 		&lt;div class="card-footer-right"&gt;
 			&lt;button class="button palette-primary"&gt;...&lt;/button&gt;
@@ -54,10 +66,14 @@
 <h3>Clickable card</h3>
 <section class="contentSection">
 	<a href="#" class="card mod-clickable">
+		<div class="card-content">
 			Hover me!
+		</div>
 	</a>
 <code class="code mod-block">&lt;a href="#" class="card mod-clickable"&gt;
+	&lt;div class="card-content"&gt;
 		...
+	&lt;/div&gt;
 &lt;/a&gt;
 </code>
 </section>

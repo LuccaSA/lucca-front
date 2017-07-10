@@ -1,0 +1,10 @@
+$card: (
+	content: (
+		padding: 1.5rem,
+	),
+	footer: (
+		padding: .33rem 1.5rem,
+	)
+);
+
+$theme: _set($theme, "component.card", $card);

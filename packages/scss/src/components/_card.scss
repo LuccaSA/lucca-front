@@ -1,23 +1,23 @@
-$cardPadding: 1.5rem;
-
 .card {
 	background: white;
 	border-radius: 3px;
 	box-shadow: unquote(_theme("commons.box-shadow"));
 	display: block;
 	margin-bottom: 1rem;
-	padding: $cardPadding;
 	position: relative;
 	transition: all 150ms ease;
+}
+
+.card-content {
+	padding: _theme("component.card.content.padding");
 }
 
 .card-footer {
 	align-items: center;
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
-	margin: $cardPadding (-$cardPadding) (-$cardPadding);
 	min-height: 3rem;
-	padding: .33rem $cardPadding;
+	padding: _theme("component.card.footer.padding");
 }
 
 .card-footer-right {
