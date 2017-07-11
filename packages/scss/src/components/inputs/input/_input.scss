@@ -38,14 +38,14 @@
 
 .input-label {
 	color: #A6A6A6;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	left: 0;
 	overflow: hidden;
 	pointer-events: none;
 	position: absolute;
-	text-overflow: ellipsis;
 	top: 1.3rem;
 	transition: all 150ms ease;
-	white-space: nowrap;
 	width: 100%;
 }
 
@@ -94,6 +94,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .input {
+	// Coloring
 	@mixin inputColoring($palette) {
 		.input-field:focus {
 			box-shadow: 0 2px 0 0 _get($palette, "color");
@@ -105,7 +106,7 @@
 	}
 
 	// default color
-	@include inputColoring(_component("input.default-palette"));
+	@include inputColoring(_component("input.default-palette.material"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -120,7 +121,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .input {
-
 	/* Width */
 
 	@each $input-size-name, $input-width in _component("input.sizes") {
@@ -142,21 +142,6 @@
 	}
 
 	/* Select */
-
-	&.mod-autocomplete {
-		.input-field {
-			padding-right: 1.5rem;
-		}
-
-		&::after {
-			bottom: .15rem;
-			color: _color("text.light");
-			@include makeIcon("search");
-			position: absolute;
-			right: 0;
-		}
-	}
-
 	&.mod-select {
 		.input-field {
 			padding-right: 1.5rem;
@@ -185,15 +170,15 @@
 		}
 	}
 
-	/* Search */
+	/* Autocomplete & Search */
 
-	&.mod-search {
+	&.mod-autocomplete, &.mod-search {
 		&::after {
-			bottom: .3rem;
 			color: _color("text.light");
 			@include makeIcon("search");
 			position: absolute;
 			right: 0;
+			bottom: .3rem;
 		}
 
 		.input-field {
@@ -203,6 +188,10 @@
 		.input-label {
 			padding-right: 1.5rem;
 		}
+	}
+
+	&.mod-compact, &.compact {
+		@extend %input_compact;
 	}
 }
 
@@ -222,12 +211,12 @@
 		cursor: not-allowed;
 	}
 
-	&.is-error {
-		@include formError();
-	}
-
 	&.is-filled {
 		@include formFilled();
+	}
+
+	&.is-error {
+		@include formError();
 	}
 }
 
@@ -249,3 +238,5 @@
 		background: rgba(0, 0, 0, .1);
 	}
 }
+
+@import "input.compact";

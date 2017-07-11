@@ -70,6 +70,10 @@
 	&.mod-block {
 		max-width: 100%;
 	}
+
+	&.mod-compact, &.compact {
+		@extend %textarea_compact;
+	}
 }
 
 // STATES
@@ -96,3 +100,5 @@
 		}
 	}
 }
+
+@import "textarea.compact";
