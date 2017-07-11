@@ -9,7 +9,26 @@ $input: (
     longest: 28rem
   ),
   default-palette: (
-    color:  _color("primary"),
+    material: (
+      color:  _color("primary"),
+    )
+  ),
+  border: (
+    color: _color("text.placeholder")
+  ),
+
+  compact: (
+    default-palette: (
+      color: _color("text.light")
+    ),
+    label-right-margin: .3rem,
+    label-sizes: (
+        x-short: 3rem,
+				short: 5rem,
+				medium: 7rem,
+				large: 9rem,
+				x-large: 11rem
+    ),
   ),
 );
 $theme: _set($theme, "components.input", $input);

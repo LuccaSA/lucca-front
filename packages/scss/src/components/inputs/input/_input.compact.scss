@@ -1,0 +1,136 @@
+%input_compact {
+	display: flex;
+	align-items: center;
+	.input-field {
+		border: 1px solid _component("input.border.color");
+		box-shadow: none;
+		padding: .5rem;
+
+		&::placeholder {
+			opacity: 1;
+			transition: none;
+		}
+
+		&:focus {
+			~ .input-label {
+				font-size: inherit;
+				top: auto;
+			}
+		}
+	}
+	.input-label {
+		flex: 0 0 auto;
+		margin-right: _component("input.compact.label-right-margin");
+		order: -1;
+		width: _component("input.compact.label-sizes.medium");
+		word-break: break-word;
+		left: auto;
+		pointer-events: auto;
+		position: relative;
+		top: auto;
+		transition: none;
+	}
+
+	.input-messages {
+		position: absolute;
+		left: calc(100% + 1rem);
+		width: 100%;
+		line-height: 1.1;
+		max-width: _component("input.compact.label-sizes.medium");
+	}
+
+	.input-options {
+		left: auto;
+		right: 0;
+		min-width: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	// COLORING
+	@mixin inputColoring($palette) {
+		.input-field:focus {
+			border-color: _get($palette, "color");
+			box-shadow: none;
+
+			~ .input-label {
+				color: #A6A6A6;
+			}
+		}
+	}
+
+	@include inputColoring(_component("input.compact.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+
+
+	/* Label Width */
+	@mixin inputWidth($iWidth, $lWidth) {
+		width: calc(#{$iWidth} + #{_component("input.compact.label-right-margin")} + #{$lWidth});
+	}
+
+
+	// STANDARD WIDTH :
+	&:not(.mod-block) {
+		@include inputWidth(_component("input.sizes.default"), _component("input.compact.label-sizes.medium"));
+	}
+	.input-options {
+		width: calc(100% - #{_component("input.compact.label-right-margin")} - #{_component("input.compact.label-sizes.medium")});
+	}
+
+	@each $input-size-name, $input-width in _component("input.sizes") {
+		&.mod-#{$input-size-name} {
+			@include inputWidth($input-width, _component("input.compact.label-sizes.medium"));
+			.input-options {
+				width: $input-width;
+			}
+			@each $label-size-name, $label-width in _component("input.compact.label-sizes") {
+				&.mod-label-#{$label-size-name} {
+					@include inputWidth($input-width, $label-width);
+				}
+			}
+		}
+	}
+
+	@each $label-size-name, $label-width in _component("input.sizes") {
+		&.mod-label-#{$label-size-name} {
+			.input-label {
+				width: $label-width;
+			}
+		}
+	}
+
+	&.mod-autocomplete, &.mod-search {
+		&::after {
+			bottom: auto;
+			right: .5rem;
+			top: 1.4rem;
+		}
+
+		.input-field {
+			padding-right: 2rem;
+		}
+
+		.input-label {
+			padding-right: 0;
+		}
+	}
+
+	// Disabled & readonly
+	.input-field {
+		&[disabled], &[readonly] {
+			background: #EBEBE4;
+			background-image: none;
+			background-position: bottom;
+		}
+
+		&.is-error {
+			border-color: _color("error");
+		}
+	}
+}
