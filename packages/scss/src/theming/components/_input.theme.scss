@@ -8,11 +8,13 @@ $input: (
     longer: 22rem,
     longest: 28rem
   ),
+
   default-palette: (
     material: (
       color:  _color("primary"),
     )
   ),
+
   border: (
     color: _color("text.placeholder")
   ),
@@ -21,13 +23,14 @@ $input: (
     default-palette: (
       color: _color("text.light")
     ),
+
     label-right-margin: .3rem,
     label-sizes: (
         x-short: 3rem,
-				short: 5rem,
-				medium: 7rem,
-				large: 9rem,
-				x-large: 11rem
+        short: 5rem,
+        medium: 7rem,
+        large: 9rem,
+        x-large: 11rem
     ),
   ),
 );
