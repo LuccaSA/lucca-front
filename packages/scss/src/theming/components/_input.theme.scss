@@ -26,11 +26,11 @@ $input: (
 
     label-right-margin: .3rem,
     label-sizes: (
-        x-short: 3rem,
+        shorter: 3rem,
         short: 5rem,
-        medium: 7rem,
-        large: 9rem,
-        x-large: 11rem
+        default: 7rem,
+        long: 9rem,
+        longer: 11rem
     ),
   ),
 );

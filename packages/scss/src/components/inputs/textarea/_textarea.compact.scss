@@ -22,7 +22,7 @@
 		flex: 0 0 auto;
 		margin-right: _component("input.compact.label-right-margin");
 		order: -1;
-		width: _component("input.compact.label-sizes.medium");
+		width: _component("input.compact.label-sizes.default");
 		word-break: break-word;
 		left: auto;
 		pointer-events: auto;
@@ -36,7 +36,7 @@
 		left: calc(100% + 1rem);
 		width: 100%;
 		line-height: 1.1;
-		max-width: _component("input.compact.label-sizes.medium");
+		max-width: _component("input.compact.label-sizes.default");
 	}
 
 	// COLORING
@@ -68,12 +68,12 @@
 
 	// STANDARD WIDTH :
 	&:not(.mod-block) {
-		@include inputWidth(_component("input.sizes.default"), _component("input.compact.label-sizes.medium"));
+		@include inputWidth(_component("input.sizes.default"), _component("input.compact.label-sizes.default"));
 	}
 
 	@each $input-size-name, $input-width in _component("input.sizes") {
 		&.mod-#{$input-size-name} {
-			@include inputWidth($input-width, _component("input.compact.label-sizes.medium"));
+			@include inputWidth($input-width, _component("input.compact.label-sizes.default"));
 
 			@each $label-size-name, $label-width in _component("input.compact.label-sizes") {
 				&.mod-label-#{$label-size-name} {
