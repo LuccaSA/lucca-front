@@ -1,6 +1,7 @@
 %textarea_compact {
-	display: flex;
 	align-items: flex-start;
+	display: flex;
+
 	.textarea-field {
 		border: 1px solid _component("input.border.color");
 		box-shadow: none;
@@ -60,14 +61,13 @@
 		}
 	}
 
-
 	/* Label Width */
 	@mixin inputWidth($iWidth, $lWidth) {
 		width: calc(#{$iWidth} + #{_component("input.compact.label-right-margin")} + #{$lWidth});
 	}
 
-	// STANDARD WIDTH :
-	&:not(.mod-block) {
+	/* Default Sizing */
+	& {
 		@include inputWidth(_component("input.sizes.default"), _component("input.compact.label-sizes.default"));
 	}
 
@@ -105,6 +105,10 @@
 		.textarea-label {
 			padding-right: 0;
 		}
+	}
+
+	&.mod-block {
+		width: 100%;
 	}
 
 	// Disabled & readonly

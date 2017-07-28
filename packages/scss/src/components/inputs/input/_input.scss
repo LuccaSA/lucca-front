@@ -38,12 +38,12 @@
 
 .input-label {
 	color: #A6A6A6;
-	text-overflow: ellipsis;
 	white-space: nowrap;
 	left: 0;
 	overflow: hidden;
 	pointer-events: none;
 	position: absolute;
+	text-overflow: ellipsis;
 	top: 1.3rem;
 	transition: all 150ms ease;
 	width: 100%;

@@ -1,6 +1,7 @@
 %input_compact {
-	display: flex;
 	align-items: center;
+	display: flex;
+
 	.input-field {
 		border: 1px solid _component("input.border.color");
 		box-shadow: none;
@@ -45,6 +46,7 @@
 		min-width: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
+		width: calc(100% - #{_component("input.compact.label-right-margin")} - #{_component("input.compact.label-sizes.default")});
 	}
 
 	// COLORING
@@ -74,14 +76,12 @@
 		width: calc(#{$iWidth} + #{_component("input.compact.label-right-margin")} + #{$lWidth});
 	}
 
-
-	// STANDARD WIDTH :
-	&:not(.mod-block) {
+	/* Default Sizing */
+	& {
 		@include inputWidth(_component("input.sizes.default"), _component("input.compact.label-sizes.default"));
 	}
-	.input-options {
-		width: calc(100% - #{_component("input.compact.label-right-margin")} - #{_component("input.compact.label-sizes.default")});
-	}
+
+	// WIDTH
 
 	@each $input-size-name, $input-width in _component("input.sizes") {
 		&.mod-#{$input-size-name} {
@@ -103,6 +103,10 @@
 				width: $label-width;
 			}
 		}
+	}
+
+	&.mod-block {
+		width: 100%;
 	}
 
 	&.mod-autocomplete, &.mod-search {
