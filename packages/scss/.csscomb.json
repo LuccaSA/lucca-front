@@ -9,7 +9,9 @@
 		"quotes": "double",
 		"sort-order-fallback": "abc",
 		"sort-order": [
-				"..."
+			["$variable", "$mixin"],
+			["$include", "$extend"],
+			["..."]
 		],
 		"space-before-colon": "",
 		"space-after-colon": " ",
