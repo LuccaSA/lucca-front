@@ -9,6 +9,10 @@
 
 /* Margin bottom */
 
+.u-marginBottomReset {
+	margin-bottom: 0 !important;
+}
+
 .u-marginBottomTiny {
 	margin-bottom: _theme("spacings.tiny") !important;
 }
@@ -34,6 +38,10 @@
 }
 
 /* Margin top */
+
+.u-marginTopReset {
+	margin-top: 0 !important;
+}
 
 .u-marginTopTiny {
 	margin-top: _theme("spacings.tiny") !important;
@@ -61,6 +69,10 @@
 
 /* Margin left */
 
+.u-marginLeftReset {
+	margin-left: 0 !important;
+}
+
 .u-marginLeftTiny {
 	margin-left: _theme("spacings.tiny") !important;
 }
@@ -86,6 +98,10 @@
 }
 
 /* Margin right */
+
+.u-marginRightReset {
+	margin-right: 0 !important;
+}
 
 .u-marginRightTiny {
 	margin-right: _theme("spacings.tiny") !important;
@@ -115,7 +131,17 @@
 // PADDINGS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+/* Reset margins */
+
+.u-paddingReset {
+	padding: 0 !important;
+}
+
 /* Padding bottom */
+
+.u-paddingBottomReset {
+	padding-bottom: 0 !important;
+}
 
 .u-paddingBottomTiny {
 	padding-bottom: _theme("spacings.tiny") !important;
@@ -142,6 +168,10 @@
 }
 
 /* Padding top */
+
+.u-paddingTopReset {
+	padding-top: 0 !important;
+}
 
 .u-paddingTopTiny {
 	padding-top: _theme("spacings.tiny") !important;
@@ -171,6 +201,10 @@
 	Padding left
 */
 
+.u-paddingLeftReset {
+	padding-left: 0 !important;
+}
+
 .u-paddingLeftTiny {
 	padding-left: _theme("spacings.tiny") !important;
 }
@@ -198,6 +232,10 @@
 /*
 	Padding right
 */
+
+.u-paddingRightReset {
+	padding-right: 0 !important;
+}
 
 .u-paddingRightTiny {
 	padding-right: _theme("spacings.tiny") !important;
