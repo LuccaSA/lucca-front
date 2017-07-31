@@ -1,7 +1,7 @@
 .callout {
 	background: white;
 	box-shadow: unquote(_theme("commons.box-shadow"));
-	margin-bottom: .5rem;
+	margin: _component("callout.margin");
 	padding: 1.5rem;
 	position: relative;
 
