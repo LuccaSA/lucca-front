@@ -55,7 +55,7 @@
 		.table-body-row {
 			color: _color("text.default");
 			text-decoration: none;
-			transition: all 150ms ease;
+			transition: all _theme("commons.animations.durations.fast") ease;
 
 			&:hover {
 				background: _theme("component.table.hover.background");
@@ -101,7 +101,8 @@
 			top: .3rem;
 		}
 		text-align: right;
-		transition: opacity 150ms ease;
+		transition: opacity _theme("commons.animations.durations.fast") ease;
+		white-space: nowrap;
 	}
 }
 
