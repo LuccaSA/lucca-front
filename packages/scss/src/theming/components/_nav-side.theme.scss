@@ -1,4 +1,12 @@
 $navSide: (
+	"primary-palette": (
+		color: _color("primary"),
+		text: _theme("palettes.primary.text"),
+	),
+	"accent-palette": (
+		color: darken(_color("primary"), 5%),
+		text: _theme("palettes.primary.text"),
+	),
 	"padding-top": 30px,
 	"width": 240px,
 	"scrollbar": (

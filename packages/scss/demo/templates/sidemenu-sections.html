@@ -14,36 +14,48 @@
 			<aside class="navSide">
 				<nav>
 					<div class="navSide-menuItem" id="item1">
-						<a href="#" class="navSide-menuItem-mainItem" onclick="w3.toggleClass('#item1', 'is-open')">
+						<a href="#" class="navSide-menuItem-item" onclick="w3.toggleClass('#item1', 'is-open')">
 							<i class="lucca-icon">tiles_nine</i>
-							<span class="navSide-menuItem-mainItem-title">Section 1</span>
+							<span class="navSide-menuItem-item-title">Section 1</span>
 							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
 						</a>
 						<nav class="navSide-subMenu">
 							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.1</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.2 with large name</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.2 with large name <span class="navSide-item-alert">12</span></a>
 						</nav>
 					</div>
 					<div class="navSide-menuItem" id="item2">
-						<a href="#" class="navSide-menuItem-mainItem" onclick="w3.toggleClass('#item2', 'is-open')">
+						<a href="#" class="navSide-menuItem-item" onclick="w3.toggleClass('#item2', 'is-open')">
 							<i class="lucca-icon">users</i>
-							<span class="navSide-menuItem-mainItem-title">Section#2 with a larger name</span>
+							<span class="navSide-menuItem-item-title">Section#2 with a larger name</span>
 							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
 						</a>
 						<nav class="navSide-subMenu">
 							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.1</a>
 							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.2</a>
 							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.3</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.4</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.4 <span class="navSide-item-alert">12</span></a>
 							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.5</a>
 							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.6</a>
 						</nav>
 					</div>
 					<div class="navSide-menuItem" id="item3">
-						<a href="#" class="navSide-menuItem-mainItem" onclick="setActive(event, true)">
+						<a href="#" class="navSide-menuItem-item" onclick="setActive(event, true)">
 							<i class="lucca-icon">settings</i>
-							<span class="navSide-menuItem-mainItem-title">Section #3</span>
+							<span class="navSide-menuItem-item-title">Section #3</span>
 						</a>
+					</div>
+					<div class="navSide-menuItem" id="item4">
+						<a href="#" class="navSide-menuItem-item" onclick="w3.toggleClass('#item4', 'is-open')">
+							<i class="lucca-icon">sliders</i>
+							<span class="navSide-menuItem-item-title">Section #4</span>
+							<span class="navSide-item-alert">9</span>
+							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
+						</a>
+						<nav class="navSide-subMenu">
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #4.1</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #4.2</a>
+						</nav>
 					</div>
 				</nav>
 			</aside>
@@ -53,7 +65,7 @@
 <code class="code mod-block">&lt;main class="main mod-sections"&gt;
 	&lt;aside class="navSide"&gt;
 		&lt;a href="#" class="navSide-link is-active"&gt;
-			&lt;span class="navSide-link-alert"&gt;0&lt;/span&gt;
+			&lt;span class="navSide-item-alert"&gt;0&lt;/span&gt;
 			...
 		&lt;/a&gt;
 		&lt;a href="#" class="navSide-link"&gt;...&lt;/a&gt;
@@ -82,8 +94,9 @@
 				w3.removeClass('#item1', 'is-active');
 				w3.removeClass('#item2', 'is-active');
 				w3.removeClass('#item3', 'is-active');
+				w3.removeClass('#item4', 'is-active');
 				w3.removeClass('.navSide-subMenu-item', 'is-active');
-				w3.removeClass('.navSide-menuItem-mainItem', 'is-active');
+				w3.removeClass('.navSide-menuItem-item', 'is-active');
 
 				var element = event.target;
 				var parent = element.parentElement.parentElement;

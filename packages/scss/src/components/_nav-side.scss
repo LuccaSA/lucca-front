@@ -11,7 +11,7 @@
 
 	// SCROLLBAR
 	&::-webkit-scrollbar-track {
-		background-color: _color("primary");
+		background-color: _theme("components.navSide.primary-palette.color");
 	}
 
 	&::-webkit-scrollbar {
@@ -19,13 +19,13 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: lighten(_color("primary"), 20%);
+		background-color: lighten(_theme("components.navSide.primary-palette.color"), 20%);
 		border-radius: _theme("components.navSide.scrollbar.border-radius");
 	}
 }
 
 .navSide > nav {
-	background-color: _color("primary");
+	background-color: _theme("components.navSide.primary-palette.color");
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -34,10 +34,10 @@
 	width: 100%;
 }
 
-.navSide-menuItem-mainItem, .navSide-subMenu-item {
+.navSide-menuItem-item, .navSide-subMenu-item {
+	align-items: center;
 	color: _theme("palettes.primary.text");
 	display: flex;
-	align-items: center;
 	text-decoration: none;
 	transition: all _theme("commons.animations.durations.fast") ease;
 	user-select: none;
@@ -46,27 +46,42 @@
 // MAIN-ITEM
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.navSide-menuItem-mainItem {
+.navSide-menuItem-item {
 	font-size: 1rem;
 	opacity: .8;
 	padding: 1em;
 
-	> span {
-		margin-left: 1em;
-		margin-right: 10px;
-		line-height: 1.2;
-		vertical-align: middle;
-	}
-
-	.navSide-menuItem-arrow {
-		margin-left: auto;
-		transform: rotate(0);
-		transition: transform _theme("commons.animations.durations.fast") ease-out;
-	}
-
 	&:hover {
-		background-color: darken(_color("primary"), 5%);
+		background-color: _theme("components.navSide.accent-palette.color");
+		.navSide-item-alert {
+			background: _theme("components.navSide.primary-palette.color");
+		}
 	}
+}
+
+.navSide-menuItem-item-title {
+	line-height: 1.2;
+	margin-left: 1em;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.navSide-item-alert {
+	background: _theme("components.navSide.accent-palette.color");
+	border-radius: .5rem;
+	color: _theme("components.navSide.accent-palette.text"); // lulu - i dont like it
+	font-size: _theme("sizes.smaller.font-size");
+	height: 1rem;
+	line-height: 1rem;
+	margin-left: auto;
+	padding: 0 .5rem;
+	transition: background _theme("commons.animations.durations.standard") ease;
+}
+
+.navSide-menuItem-arrow {
+	margin-left: auto;
+	transform: rotate(0);
+	transition: transform _theme("commons.animations.durations.fast") ease-out;
 }
 
 // SUB MENU
@@ -94,7 +109,7 @@
 // ACTIVE & OPEN STATE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide-menuItem.is-active {
-	.navSide-menuItem-mainItem {
+	.navSide-menuItem-item {
 		opacity: 1;
 	}
 }
@@ -114,20 +129,29 @@
 		transition: all _theme("commons.animations.durations.fast") ease-out 0;
 
 		&:hover {
-			background-color: darken(_color("primary"), 5%);
+			background-color: _theme("components.navSide.accent-palette.color");
 			opacity: .7;
 		}
 
 		&.is-active {
-			background-color: darken(_color("primary"), 8%);
+			background-color: _theme("components.navSide.accent-palette.color");
 			opacity: 1;
+		}
+
+		&:hover, &.is-active {
+			.navSide-item-alert {
+				background: _theme("components.navSide.primary-palette.color");
+			}
 		}
 	}
 }
 
-.navSide-menuItem-mainItem.is-active {
+.navSide-menuItem-item.is-active {
+	background-color: _theme("components.navSide.accent-palette.color");
 	opacity: 1;
-	background-color: darken(_color("primary"), 8%);
+	.navSide-item-alert {
+		background: _theme("components.navSide.primary-palette.color");
+	}
 }
 
 .navSide-link {
@@ -140,7 +164,7 @@
 	transition: opacity 150ms ease;
 
 	&::before {
-		background: _color("primary");
+		background: _theme("components.navSide.primary-palette.color");
 		bottom: 0;
 		content: "";
 		left: 0;
@@ -159,19 +183,6 @@
 			transform: scaleY(1);
 		}
 	}
-}
-
-.navSide-link-alert {
-	background: _color("primary");
-	border-radius: .5rem;
-	color: _color("text.default"); // lulu - i dont like it
-	font-size: _theme("sizes.smaller.font-size");
-	height: 1rem;
-	line-height: 1rem;
-	padding: 0 .25rem;
-	position: absolute;
-	right: 5px;
-	top: 5px;
 }
 
 // MOD
