@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="../demo.css">
 	</head>
 	<body>
-		<main class="main mod-sections">
+		<main class="main">
 			<aside class="navSide">
 				<nav>
 					<div class="navSide-menuItem" id="item1">
@@ -60,32 +60,26 @@
 				</nav>
 			</aside>
 			<section class="main-content">
-				<section class="section">
-						<h1>Side with sections</h1>
-<code class="code mod-block">&lt;main class="main mod-sections"&gt;
-	&lt;aside class="navSide mod-compact"&gt;
-		&lt;a href="#" class="navSide-menuItem-item is-active"&gt;
-			&lt;span class="navSide-item-alert"&gt;0&lt;/span&gt;
-			...
-		&lt;/a&gt;
-		&lt;a href="#" class="navSide-menuItem-item"&gt;...&lt;/a&gt;
-	&lt;/aside&gt;
-	&lt;section class="main-content"&gt;
-		&lt;section class="section"&gt;
-			...
-		&lt;/section&gt;
-		&lt;section class="section mod-grey"&gt;
-				...
-		&lt;/section&gt;
-	&lt;/section&gt;
-&lt;/main&gt;</code>
-				</section>
-				<section class="section mod-grey">
-						...
-				</section>
-				<section class="section">
-						...
-				</section>
+				<div class="container">
+					<h1>Markup</h1>
+<code class="code mod-block">&lt;aside class=&quot;navSide&quot;&gt;
+	&lt;nav&gt;
+		&lt;div class=&quot;navSide-menuItem&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;navSide-menuItem-item&quot;&quot;&gt;
+				&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
+				&lt;span class=&quot;navSide-menuItem-item-title&quot;&gt;Section #1&lt;/span&gt;
+				&lt;i class=&quot;lucca-icon navSide-menuItem-arrow&quot;&gt;arrow_east_thin&lt;/i&gt;
+			&lt;/a&gt;
+			&lt;nav class=&quot;navSide-subMenu&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;navSide-subMenu-item&quot;&gt;Subsection #1.1&lt;/a&gt;
+				[...]
+			&lt;/nav&gt;
+		&lt;/div&gt;
+		[...]
+	&lt;/nav&gt;
+&lt;/main&gt;
+</code>
+				</div>
 			</section>
 		</main>
 		<script src="https://www.w3schools.com/lib/w3.js"></script>
