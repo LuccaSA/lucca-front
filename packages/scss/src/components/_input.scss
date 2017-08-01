@@ -230,12 +230,8 @@
 		cursor: not-allowed;
 	}
 
-	&.is-error {
+	&.is-error, &.is-error:focus {
 		@include formError();
-
-		&:focus {
-			@include formError();
-		}
 	}
 
 	&.is-filled {
