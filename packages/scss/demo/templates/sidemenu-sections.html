@@ -20,8 +20,8 @@
 							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
 						</a>
 						<nav class="navSide-subMenu">
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Subsection #1.1</a>
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Subsection #1.2 with large name</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.1</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.2 with large name</a>
 						</nav>
 					</div>
 					<div class="navSide-menuItem" id="item2">
@@ -31,12 +31,12 @@
 							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
 						</a>
 						<nav class="navSide-subMenu">
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.1</a>
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.2</a>
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.3</a>
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.4</a>
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.5</a>
-							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.6</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.1</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.2</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.3</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.4</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.5</a>
+							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.6</a>
 						</nav>
 					</div>
 					<div class="navSide-menuItem" id="item3">
@@ -82,7 +82,7 @@
 				w3.removeClass('#item1', 'active');
 				w3.removeClass('#item2', 'active');
 				w3.removeClass('#item3', 'active');
-				w3.removeClass('.navSide-subMenu-subMenuItem', 'active');
+				w3.removeClass('.navSide-subMenu-item', 'active');
 				w3.removeClass('.navSide-menuItem-mainItem', 'active');
 
 				var element = event.target;
