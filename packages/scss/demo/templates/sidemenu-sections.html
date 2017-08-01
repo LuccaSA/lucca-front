@@ -79,17 +79,17 @@
 		<script src="https://www.w3schools.com/lib/w3.js"></script>
 		<script>
 			function setActive(event, onlyOne = false) {
-				w3.removeClass('#item1', 'active');
-				w3.removeClass('#item2', 'active');
-				w3.removeClass('#item3', 'active');
-				w3.removeClass('.navSide-subMenu-item', 'active');
-				w3.removeClass('.navSide-menuItem-mainItem', 'active');
+				w3.removeClass('#item1', 'is-active');
+				w3.removeClass('#item2', 'is-active');
+				w3.removeClass('#item3', 'is-active');
+				w3.removeClass('.navSide-subMenu-item', 'is-active');
+				w3.removeClass('.navSide-menuItem-mainItem', 'is-active');
 
 				var element = event.target;
 				var parent = element.parentElement.parentElement;
-				element.classList.add('active');
+				element.classList.add('is-active');
 				if(!onlyOne)
-					parent.classList.add('active');
+					parent.classList.add('is-active');
 			}
 		</script>
 	</body>

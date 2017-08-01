@@ -91,8 +91,9 @@
 	vertical-align: middle;
 }
 
-// ACTIVE & OPEN
-.navSide-menuItem.active {
+// ACTIVE & OPEN STATE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.navSide-menuItem.is-active {
 	.navSide-menuItem-mainItem {
 		opacity: 1;
 	}
@@ -117,14 +118,14 @@
 			opacity: .7;
 		}
 
-		&.active {
+		&.is-active {
 			background-color: darken(_color("primary"), 8%);
 			opacity: 1;
 		}
 	}
 }
 
-.navSide-menuItem-mainItem.active {
+.navSide-menuItem-mainItem.is-active {
 	opacity: 1;
 	background-color: darken(_color("primary"), 8%);
 }
