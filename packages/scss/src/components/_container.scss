@@ -42,3 +42,17 @@
 		}
 	}
 }
+
+.navSide.mod-compact ~ .main-content {
+	.container {
+		@each $bp-name, $bp-obj in $breakpoints {
+			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+				width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing) - _theme("components.navSide.compact.width");
+			}
+		}
+
+		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+			width: calc(100% - _theme("components.navSide.compact.width"));
+		}
+	}
+}
