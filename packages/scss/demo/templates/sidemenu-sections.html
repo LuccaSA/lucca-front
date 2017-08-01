@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lucca Front | Aside + sections template</title>
+		<link rel="icon" type="image/png" href="../lucca.png">
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
+		<link rel="stylesheet" href="../../dist/lucca-front.css">
+		<link rel="stylesheet" href="../demo.css">
+	</head>
+	<body>
+		<main class="main mod-sections">
+			<aside class="navSide">
+				<nav>
+					<div class="navSide-menuItem" id="item1">
+						<a href="#" class="navSide-menuItem-mainItem" onclick="w3.toggleClass('#item1', 'is-open')">
+							<i class="lucca-icon">tiles_nine</i>
+							<span class="navSide-menuItem-mainItem-title">Section 1</span>
+							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
+						</a>
+						<nav class="navSide-subMenu">
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Subsection #1.1</a>
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Subsection #1.2 with large name</a>
+						</nav>
+					</div>
+					<div class="navSide-menuItem" id="item2">
+						<a href="#" class="navSide-menuItem-mainItem" onclick="w3.toggleClass('#item2', 'is-open')">
+							<i class="lucca-icon">users</i>
+							<span class="navSide-menuItem-mainItem-title">Section#2 with a larger name</span>
+							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
+						</a>
+						<nav class="navSide-subMenu">
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.1</a>
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.2</a>
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.3</a>
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.4</a>
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.5</a>
+							<a href="#" class="navSide-subMenu-subMenuItem" onclick="setActive(event)">Section #2.6</a>
+						</nav>
+					</div>
+					<div class="navSide-menuItem" id="item3">
+						<a href="#" class="navSide-menuItem-mainItem" onclick="setActive(event, true)">
+							<i class="lucca-icon">settings</i>
+							<span class="navSide-menuItem-mainItem-title">Section #3</span>
+						</a>
+					</div>
+				</nav>
+			</aside>
+			<section class="main-content">
+				<section class="section">
+						<h1>Side with sections</h1>
+<code class="code mod-block">&lt;main class="main mod-sections"&gt;
+	&lt;aside class="navSide"&gt;
+		&lt;a href="#" class="navSide-link is-active"&gt;
+			&lt;span class="navSide-link-alert"&gt;0&lt;/span&gt;
+			...
+		&lt;/a&gt;
+		&lt;a href="#" class="navSide-link"&gt;...&lt;/a&gt;
+	&lt;/aside&gt;
+	&lt;section class="main-content"&gt;
+		&lt;section class="section"&gt;
+			...
+		&lt;/section&gt;
+		&lt;section class="section mod-grey"&gt;
+				...
+		&lt;/section&gt;
+	&lt;/section&gt;
+&lt;/main&gt;</code>
+				</section>
+				<section class="section mod-grey">
+						...
+				</section>
+				<section class="section">
+						...
+				</section>
+			</section>
+		</main>
+		<script src="https://www.w3schools.com/lib/w3.js"></script>
+		<script>
+			function setActive(event, onlyOne = false) {
+				w3.removeClass('#item1', 'active');
+				w3.removeClass('#item2', 'active');
+				w3.removeClass('#item3', 'active');
+				w3.removeClass('.navSide-subMenu-subMenuItem', 'active');
+				w3.removeClass('.navSide-menuItem-mainItem', 'active');
+
+				var element = event.target;
+				var parent = element.parentElement.parentElement;
+				element.classList.add('active');
+				if(!onlyOne)
+					parent.classList.add('active');
+			}
+		</script>
+	</body>
+</html>

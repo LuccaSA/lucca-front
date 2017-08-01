@@ -1,5 +1,13 @@
 $navSide: (
-	"width": 130px,
+	"padding-top": 30px,
+	"width": 240px,
+	"scrollbar": (
+		"width": 8px,
+		"border-radius": 10px,
+	),
+	"compact": (
+		"width": 130px,
+	),
 );
 
 $theme: _set($theme, "components.navSide", $navSide);
