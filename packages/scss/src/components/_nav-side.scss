@@ -1,37 +1,36 @@
 .navSide {
-	background: #666666;
+	background: _component("navSide.primary-palette.color");
 	bottom: 0;
 	left: 0;
 	overflow-x: hidden;
 	overflow-y: auto;
+	padding-top: _component("navSide.padding-top");
 	position: fixed;
-	top: 0;
-	width: _theme("components.navSide.width");
+	top: _component("navSide.offset-top");
+	width: _component("navSide.width");
 	z-index: 2;
 
 	// SCROLLBAR
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	&::-webkit-scrollbar-track {
-		background-color: _theme("components.navSide.primary-palette.color");
+		background-color: _component("navSide.primary-palette.color");
 	}
 
 	&::-webkit-scrollbar {
-		width: _theme("components.navSide.scrollbar.width");
+		width: _component("navSide.scrollbar.width");
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: lighten(_theme("components.navSide.primary-palette.color"), 20%);
-		border-radius: _theme("components.navSide.scrollbar.border-radius");
+		background-color: lighten(_component("navSide.primary-palette.color"), 20%);
+		border-radius: _component("navSide.scrollbar.border-radius");
 	}
 }
 
+// NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
 .navSide > nav {
-	background-color: _theme("components.navSide.primary-palette.color");
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	padding-top: _theme("components.navSide.padding-top");
+	display: block;
 	position: relative;
-	width: 100%;
+	width: _component("navSide.width");
 }
 
 .navSide-menuItem-item, .navSide-subMenu-item {
@@ -52,9 +51,9 @@
 	padding: 1em;
 
 	&:hover {
-		background-color: _theme("components.navSide.accent-palette.color");
+		background-color: _component("navSide.accent-palette.color");
 		.navSide-item-alert {
-			background: _theme("components.navSide.primary-palette.color");
+			background: _component("navSide.primary-palette.color");
 		}
 	}
 }
@@ -67,9 +66,9 @@
 }
 
 .navSide-item-alert {
-	background: _theme("components.navSide.accent-palette.color");
+	background: _component("navSide.accent-palette.color");
 	border-radius: .5rem;
-	color: _theme("components.navSide.accent-palette.text"); // lulu - i dont like it
+	color: _component("navSide.accent-palette.text"); // lulu - i dont like it
 	font-size: _theme("sizes.smaller.font-size");
 	height: 1rem;
 	line-height: 1rem;
@@ -102,7 +101,7 @@
 	padding: .8em 1em .8em 3.35em;
 	transform: translate3d(-1.5em, 0, 0);
 	transition: opacity _theme("commons.animations.durations.fast") ease-out,
-	transform _theme("commons.animations.durations.standard") ease-out .05s;
+              transform _theme("commons.animations.durations.standard") ease-out .05s;
 	vertical-align: middle;
 }
 
@@ -119,7 +118,7 @@
 	}
 
 	.navSide-subMenu {
-		max-height: 500px; // TODO: SEE IF THIS CAN BE REMOVED
+		max-height: _component("navSide.submenu.max-height"); // TODO: SEE IF THIS CAN BE REMOVED
 		transition-duration: _theme("commons.animations.durations.slow");
 	}
 
@@ -129,28 +128,28 @@
 		transition: all _theme("commons.animations.durations.fast") ease-out 0;
 
 		&:hover {
-			background-color: _theme("components.navSide.accent-palette.color");
+			background-color: _component("navSide.accent-palette.color");
 			opacity: .7;
 		}
 
 		&.is-active {
-			background-color: _theme("components.navSide.accent-palette.color");
+			background-color: _component("navSide.accent-palette.color");
 			opacity: 1;
 		}
 
 		&:hover, &.is-active {
 			.navSide-item-alert {
-				background: _theme("components.navSide.primary-palette.color");
+				background: _component("navSide.primary-palette.color");
 			}
 		}
 	}
 }
 
 .navSide-menuItem-item.is-active {
-	background-color: _theme("components.navSide.accent-palette.color");
+	background-color: _component("navSide.accent-palette.color");
 	opacity: 1;
 	.navSide-item-alert {
-		background: _theme("components.navSide.primary-palette.color");
+		background: _component("navSide.primary-palette.color");
 	}
 }
 
@@ -158,17 +157,19 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .navSide.mod-compact {
+	background: _component("navSide.compact.background");
 	text-align: center;
-	width: _theme("components.navSide.compact.width");
+	width: _component("navSide.compact.width");
 
 	.navSide-menuItem-item {
+		color: _component("navSide.primary-palette.color");
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
-		color: _theme("components.navSide.primary-palette.color");
 		&::before {
-			background: lighten(_theme("components.navSide.primary-palette.color"), 10%);
+			background: lighten(_component("navSide.primary-palette.color"), 10%);
 			bottom: 0;
+			box-shadow: 2px 0 2px 0 rgba(0, 0, 0, .2);
 			content: "";
 			left: 0;
 			position: absolute;
@@ -177,7 +178,6 @@
 			transform-origin: 50%;
 			transition: all 250ms ease;
 			width: 5px;
-			box-shadow: 2px 0 2px 0 rgba(0, 0, 0, .2);
 		}
 		.navSide-menuItem-item-title {
 			margin: .8em 0 0;
@@ -189,13 +189,13 @@
 	}
 
 	.navSide-item-alert {
-		position: absolute;
-		top: 10px;
-		right: 10px;
 		padding: 0 .4rem;
+		position: absolute;
+		right: 10px;
+		top: 10px;
 	}
 
-	// STATES
+	// COMPACT STATES
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	.navSide-menuItem-item {
@@ -203,8 +203,8 @@
 			background-color: rgba(0, 0, 0, .2);
 		}
 		&.is-active {
-			opacity: 1;
 			background-color: rgba(0, 0, 0, .2);
+			opacity: 1;
 
 			&::before {
 				transform: scaleY(1);

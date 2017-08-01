@@ -7,13 +7,19 @@ $navSide: (
 		color: darken(_color("primary"), 5%),
 		text: _theme("palettes.primary.text"),
 	),
+	"offset-top": 0px,
 	"padding-top": 30px,
-	"width": 240px,
 	"scrollbar": (
 		"width": 8px,
 		"border-radius": 10px,
 	),
+	"submenu": (
+		"max-height": 500px,
+	),
+	"width": 240px,
+
 	"compact": (
+		"background": #666666,
 		"width": 130px,
 	),
 );
