@@ -161,6 +161,18 @@ nav.navSide-scrollWrapper {
 	text-align: center;
 	width: _component("navSide.compact.width");
 
+	// SCROLLBAR
+	&::-webkit-scrollbar-track {
+		background-color: _component("navSide.compact.background");
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: lighten(_component("navSide.compact.background"), 20%);
+	}
+
+	nav.navSide-scrollWrapper {
+		width: _component("navSide.compact.width");
+	}
 	.navSide-menuItem-item {
 		color: _component("navSide.primary-palette.color");
 		flex-direction: column;
