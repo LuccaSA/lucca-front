@@ -16,48 +16,48 @@
 		<main class="main mod-sections">
 			<aside class="navSide" id="menuSide">
 				<nav class="navSide-scrollWrapper">
-					<div class="navSide-menuItem" id="item1">
-						<a href="#" class="navSide-menuItem-item" onclick="w3.toggleClass('#item1', 'is-open');">
+					<div class="navSide-item" id="item1">
+						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item1', 'is-open');">
 							<i class="lucca-icon">tiles_nine</i>
-							<span class="navSide-menuItem-item-title">Section 1</span>
-							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
+							<span class="navSide-item-link-title">Section 1</span>
+							<i class="lucca-icon navSide-item-arrow">arrow_east_thin</i>
 						</a>
-						<nav class="navSide-subMenu">
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.1</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #1.2 with large name <span class="navSide-item-alert">12</span></a>
+						<nav class="navSide-item-subMenu">
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #1.1</a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #1.2 with large name <span class="navSide-item-alert">12</span></a>
 						</nav>
 					</div>
-					<div class="navSide-menuItem" id="item2">
-						<a href="#" class="navSide-menuItem-item" onclick="w3.toggleClass('#item2', 'is-open')">
+					<div class="navSide-item" id="item2">
+						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item2', 'is-open')">
 							<i class="lucca-icon">users</i>
-							<span class="navSide-menuItem-item-title">Section#2 with a larger name</span>
-							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
+							<span class="navSide-item-link-title">Section#2 with a larger name</span>
+							<i class="lucca-icon navSide-item-arrow">arrow_east_thin</i>
 						</a>
-						<nav class="navSide-subMenu">
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.1</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.2</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.3</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.4 <span class="navSide-item-alert">12</span></a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.5</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Section #2.6</a>
+						<nav class="navSide-item-subMenu">
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.1</a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.2</a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.3</a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.4 <span class="navSide-item-alert">12</span></a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.5</a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.6</a>
 						</nav>
 					</div>
-					<div class="navSide-menuItem" id="item3">
-						<a href="#" class="navSide-menuItem-item" onclick="setActive(event, true)">
+					<div class="navSide-item" id="item3">
+						<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
 							<i class="lucca-icon">settings</i>
-							<span class="navSide-menuItem-item-title">Section #3</span>
+							<span class="navSide-item-link-title">Section #3</span>
 						</a>
 					</div>
-					<div class="navSide-menuItem" id="item4">
-						<a href="#" class="navSide-menuItem-item" onclick="w3.toggleClass('#item4', 'is-open')">
+					<div class="navSide-item" id="item4">
+						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item4', 'is-open')">
 							<i class="lucca-icon">sliders</i>
-							<span class="navSide-menuItem-item-title">Section #4</span>
+							<span class="navSide-item-link-title">Section #4</span>
 							<span class="navSide-item-alert">9</span>
-							<i class="lucca-icon navSide-menuItem-arrow">arrow_east_thin</i>
+							<i class="lucca-icon navSide-item-arrow">arrow_east_thin</i>
 						</a>
-						<nav class="navSide-subMenu">
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #4.1</a>
-							<a href="#" class="navSide-subMenu-item" onclick="setActive(event)">Subsection #4.2</a>
+						<nav class="navSide-item-subMenu">
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #4.1</a>
+							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #4.2</a>
 						</nav>
 					</div>
 				</nav>
@@ -71,14 +71,14 @@
 					<h1>Markup</h1>
 <code class="code mod-block">&lt;aside class=&quot;navSide<span id="modCompact" class='hidden'> mod-compact</span>&quot;&gt;
 	&lt;nav class=&quot;navSide-scrollWrapper&quot;&gt;
-		&lt;div class=&quot;navSide-menuItem&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;navSide-menuItem-item&quot;&quot;&gt;
+		&lt;div class=&quot;navSide-item&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
 				&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
-				&lt;span class=&quot;navSide-menuItem-item-title&quot;&gt;Section #1&lt;/span&gt;
-				&lt;i class=&quot;lucca-icon navSide-menuItem-arrow&quot;&gt;arrow_east_thin&lt;/i&gt;
+				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section #1&lt;/span&gt;
+				&lt;i class=&quot;lucca-icon navSide-item-arrow&quot;&gt;arrow_east_thin&lt;/i&gt;
 			&lt;/a&gt;
-			&lt;nav class=&quot;navSide-subMenu&quot;&gt;
-				&lt;a href=&quot;#&quot; class=&quot;navSide-subMenu-item&quot;&gt;Subsection #1.1&lt;/a&gt;
+			&lt;nav class=&quot;navSide-item-subMenu&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;navSide-item-subMenu-link&quot;&gt;Subsection #1.1&lt;/a&gt;
 				[...]
 			&lt;/nav&gt;
 		&lt;/div&gt;
@@ -127,7 +127,7 @@
 								<td class="table-body-row-cell"></td>
 							</tr>
 							<tr class="table-body-row">
-								<td class="table-body-row-cell"><code class="code">&lt;div class="navSide-menuItem"&gt;</code></td>
+								<td class="table-body-row-cell"><code class="code">&lt;div class="navSide-item"&gt;</code></td>
 								<td class="table-body-row-cell">
 									<p>The container of a main menu item and its sub-menu. It is responsible of</p>
 									<ul>
@@ -143,15 +143,15 @@
 								</td>
 							</tr>
 							<tr class="table-body-row">
-								<td class="table-body-row-cell"><code class="code">&lt;a class="navSide-menuItem-item"&gt;</code></td>
+								<td class="table-body-row-cell"><code class="code">&lt;a class="navSide-item-link"&gt;</code></td>
 								<td class="table-body-row-cell">
 									<p>
 										The item displayed in the bar. It can contain :
 										<ul>
 											<li>an icon <code class="code">&lt;i&gt;</code></li>
-											<li>a <code class="code">&lt;span class="navSide-menuItem-item-title"&gt;</code></li>
+											<li>a <code class="code">&lt;span class="navSide-item-link-title"&gt;</code></li>
 										</ul>
-										If it has a submenu, it must ends with a <code class="code">&lt;i class="lucca-icon navSide-menuItem-arrow"&gt;arrow_east_thin&lt;/i&gt;</code>
+										If it has a submenu, it must ends with a <code class="code">&lt;i class="lucca-icon navSide-item-arrow"&gt;arrow_east_thin&lt;/i&gt;</code>
 									</p>
 								</td>
 								<td class="table-body-row-cell">
@@ -161,7 +161,7 @@
 								</td>
 							</tr>
 							<tr class="table-body-row">
-								<td class="table-body-row-cell"><code class="code">&lt;nav class="navSide-subMenu"&gt;</code></td>
+								<td class="table-body-row-cell"><code class="code">&lt;nav class="navSide-item-subMenu"&gt;</code></td>
 								<td class="table-body-row-cell">
 									<p>
 										The submenu wrapper. It is responsible for:
@@ -174,11 +174,11 @@
 								</td>
 							</tr>
 							<tr class="table-body-row">
-								<td class="table-body-row-cell"><code class="code">&lt;a class="navSide-subMenu-item"&gt;</code></td>
+								<td class="table-body-row-cell"><code class="code">&lt;a class="navSide-item-subMenu-link"&gt;</code></td>
 								<td class="table-body-row-cell">
 									<p>
 										The submenu item. It is a just simple link.
-										When active, the parent <code class="code">&lt;div class="navSide-menuItem"&gt;</code> should be active to.
+										When active, the parent <code class="code">&lt;div class="navSide-item"&gt;</code> should be active to.
 									</p>
 								</td>
 								<td class="table-body-row-cell">
@@ -199,8 +199,8 @@
 				w3.removeClass('#item2', 'is-active');
 				w3.removeClass('#item3', 'is-active');
 				w3.removeClass('#item4', 'is-active');
-				w3.removeClass('.navSide-subMenu-item', 'is-active');
-				w3.removeClass('.navSide-menuItem-item', 'is-active');
+				w3.removeClass('.navSide-item-subMenu-link', 'is-active');
+				w3.removeClass('.navSide-item-link', 'is-active');
 
 				var element = event.target;
 				var parent = element.parentElement.parentElement;
