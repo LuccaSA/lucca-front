@@ -6,6 +6,10 @@
 	margin-left: _theme("components.navSide.width");
 }
 
+.navSide.mod-compact ~ .main-content {
+	margin-left: _theme("components.navSide.compact.width");
+}
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

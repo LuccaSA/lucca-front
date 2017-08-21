@@ -1,5 +1,27 @@
 $navSide: (
-	"width": 130px,
+	"primary-palette": (
+		color: _color("primary"),
+		text: _theme("palettes.primary.text"),
+	),
+	"accent-palette": (
+		color: darken(_color("primary"), 5%),
+		text: _theme("palettes.primary.text"),
+	),
+	"offset-top": 0px,
+	"padding-top": 1.9rem,
+	"scrollbar": (
+		"width": .5rem,
+		"border-radius": 10px,
+	),
+	"submenu": (
+		"max-height": 33rem,
+	),
+	"width": 15rem,
+
+	"compact": (
+		"background": #666666,
+		"width": 8.1rem,
+	),
 );
 
 $theme: _set($theme, "components.navSide", $navSide);

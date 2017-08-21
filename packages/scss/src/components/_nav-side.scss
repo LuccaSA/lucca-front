@@ -1,72 +1,226 @@
 .navSide {
-	background: #666666;
-	//font-size: _theme("sizes.small.font-size");
-	height: 100%;
+	background: _component("navSide.primary-palette.color");
+	bottom: 0;
 	left: 0;
 	overflow-x: hidden;
 	overflow-y: auto;
+	padding-top: _component("navSide.padding-top");
 	position: fixed;
-	text-align: center;
-	top: 0;
-	width: _theme("components.navSide.width");
+	top: _component("navSide.offset-top");
+	width: _component("navSide.width");
 	z-index: 2;
-}
 
-.navSide-link {
-	color: white;
-	display: block;
-	opacity: .75;
-	padding: 15px 10px;
-	position: relative;
-	text-decoration: none;
-	transition: opacity 150ms ease;
-
-	&::before {
-		background: _color("primary");
-		bottom: 0;
-		content: "";
-		left: 0;
-		position: absolute;
-		top: 0;
-		transform: scaleY(0);
-		transform-origin: 50%;
-		transition: all 250ms ease;
-		width: 2px;
+	// SCROLLBAR
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+	&::-webkit-scrollbar-track {
+		background-color: _component("navSide.primary-palette.color");
 	}
 
-	&:hover {
-		opacity: 1;
+	&::-webkit-scrollbar {
+		width: _component("navSide.scrollbar.width");
+	}
 
-		&::before {
-			transform: scaleY(1);
+	&::-webkit-scrollbar-thumb {
+		background-color: lighten(_component("navSide.primary-palette.color"), 20%);
+		border-radius: _component("navSide.scrollbar.border-radius");
+	}
+}
+
+// NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
+nav.navSide-scrollWrapper {
+	display: block;
+	position: relative;
+	width: _component("navSide.width");
+}
+
+.navSide-item-link, .navSide-item-subMenu-link {
+	align-items: center;
+	color: _theme("palettes.primary.text");
+	display: flex;
+	text-decoration: none;
+	transition: all _theme("commons.animations.durations.fast") ease;
+	user-select: none;
+}
+
+// MAIN-ITEM
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.navSide-item-link {
+	font-size: 1rem;
+	opacity: .7;
+	padding: 1em;
+
+	&:hover {
+		background-color: _component("navSide.accent-palette.color");
+		.navSide-item-alert {
+			background: _component("navSide.primary-palette.color");
 		}
 	}
 }
 
-.navSide-link-alert {
-	background: _color("primary");
+.navSide-item-link-title {
+	line-height: 1.2;
+	margin-left: 1em;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.navSide-item-alert {
+	background: _component("navSide.accent-palette.color");
 	border-radius: .5rem;
-	color: _color("text.default"); // lulu - i dont like it
+	color: _component("navSide.accent-palette.text"); // lulu - i dont like it
 	font-size: _theme("sizes.smaller.font-size");
 	height: 1rem;
 	line-height: 1rem;
-	padding: 0 .25rem;
-	position: absolute;
-	right: 5px;
-	top: 5px;
+	margin-left: auto;
+	padding: 0 .5em;
+	transition: background _theme("commons.animations.durations.standard") ease;
 }
 
+.navSide-item-arrow {
+	margin-left: auto;
+	transform: rotate(0);
+	transition: transform _theme("commons.animations.durations.fast") ease-out;
+}
 
-// STATES
+// SUB MENU
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.navSide-item-subMenu {
+	font-size: .9em;
+	max-height: 0;
+	overflow: hidden;
+	transition-duration: _theme("commons.animations.durations.fast");
+	transition-property: max-height;
+	transition-timing-function: ease-in-out;
+}
+
+.navSide-item-subMenu-link {
+	font-weight: 400;
+	line-height: 1.4;
+	opacity: 0;
+	padding: .8em 1em .8em 3.35em;
+	transform: translate3d(-1.5em, 0, 0);
+	transition: opacity _theme("commons.animations.durations.fast") ease-out,
+              transform _theme("commons.animations.durations.standard") ease-out .05s;
+	vertical-align: middle;
+}
+
+// ACTIVE & OPEN STATE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.navSide-item.is-active {
+	.navSide-item-link {
+		opacity: 1;
+	}
+}
+.navSide-item.is-open {
+	.navSide-item-arrow {
+		transform: rotate(90deg);
+	}
+
+	.navSide-item-subMenu {
+		max-height: _component("navSide.submenu.max-height"); // TODO: SEE IF THIS CAN BE REMOVED
+		transition-duration: _theme("commons.animations.durations.slow");
+	}
+
+	.navSide-item-subMenu-link {
+		opacity: .6;
+		transform: translate3d(0, 0, 0);
+		transition: all _theme("commons.animations.durations.fast") ease-out 0;
+
+		&:hover {
+			background-color: _component("navSide.accent-palette.color");
+			opacity: .7;
+		}
+
+		&.is-active {
+			background-color: _component("navSide.accent-palette.color");
+			opacity: 1;
+		}
+
+		&:hover, &.is-active {
+			.navSide-item-alert {
+				background: _component("navSide.primary-palette.color");
+			}
+		}
+	}
+}
+
+.navSide-item-link.is-active {
+	background-color: _component("navSide.accent-palette.color");
+	opacity: 1;
+	.navSide-item-alert {
+		background: _component("navSide.primary-palette.color");
+	}
+}
+
+// MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.navSide-link {
-	&.is-active {
-		background: #404040; // :'(
-		opacity: 1;
+.navSide.mod-compact {
+	background: _component("navSide.compact.background");
+	text-align: center;
+	width: _component("navSide.compact.width");
 
+	// SCROLLBAR
+	&::-webkit-scrollbar-track {
+		background-color: _component("navSide.compact.background");
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: lighten(_component("navSide.compact.background"), 20%);
+	}
+
+	nav.navSide-scrollWrapper {
+		width: _component("navSide.compact.width");
+	}
+	.navSide-item-link {
+		color: _component("navSide.primary-palette.color");
+		flex-direction: column;
+		justify-content: center;
+		position: relative;
 		&::before {
-			transform: scaleY(1);
+			background: lighten(_component("navSide.primary-palette.color"), 10%);
+			bottom: 0;
+			box-shadow: 2px 0 2px 0 rgba(0, 0, 0, .2);
+			content: "";
+			left: 0;
+			position: absolute;
+			top: 0;
+			transform: scaleY(0);
+			transform-origin: 50%;
+			transition: all 250ms ease;
+			width: 5px;
+		}
+		.navSide-item-link-title {
+			margin: .8em 0 0;
+		}
+	}
+
+	.navSide-item-arrow, .navSide-item-subMenu {
+		display: none;
+	}
+
+	.navSide-item-alert {
+		padding: 0 .4em;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
+
+	// COMPACT STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	.navSide-item-link {
+		&:hover {
+			background-color: rgba(0, 0, 0, .2);
+		}
+		&.is-active {
+			background-color: rgba(0, 0, 0, .2);
+			opacity: 1;
+
+			&::before {
+				transform: scaleY(1);
+			}
 		}
 	}
 }
