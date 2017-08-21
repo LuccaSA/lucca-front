@@ -8,8 +8,30 @@ $input: (
     longer: 22rem,
     longest: 28rem
   ),
+
   default-palette: (
-    color:  _color("primary"),
+    material: (
+      color:  _color("primary"),
+    )
+  ),
+
+  border: (
+    color: _color("text.placeholder")
+  ),
+
+  compact: (
+    default-palette: (
+      color: _color("text.light")
+    ),
+
+    label-right-margin: .3rem,
+    label-sizes: (
+        shorter: 3rem,
+        short: 5rem,
+        default: 7rem,
+        long: 9rem,
+        longer: 11rem
+    ),
   ),
 );
 $theme: _set($theme, "components.input", $input);

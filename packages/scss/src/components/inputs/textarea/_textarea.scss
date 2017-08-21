@@ -50,7 +50,6 @@
 		}
 	}
 
-
 	// default color
 	@include textareaColoring(_component("textarea.default-palette"));
 
@@ -69,6 +68,10 @@
 .textarea {
 	&.mod-block {
 		max-width: 100%;
+	}
+
+	&.mod-compact, &.compact {
+		@extend %textarea_compact;
 	}
 }
 
@@ -96,3 +99,5 @@
 		}
 	}
 }
+
+@import "textarea.compact";

@@ -11,22 +11,40 @@
 						<label class="input-label">Input label</label>
 					</div>
 				</div>
-			</div>
-			<div class="grid-md6">
 				<div class="form-group">
 					<div class="input mod-block">
 						<input class="input-field is-filled" type="text" value="disabled input" disabled>
 						<label class="input-label">Input label</label>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<code class="code mod-block">&lt;div class="input"&gt;
+				<code class="code mod-block">&lt;div class="input"&gt;
 	&lt;input class="input-field" type="text"&gt;
 	&lt;label class="input-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;
 </code>
+			</div>
+			<div class="grid-md6">
+				<div class="form-group">
+					<div class="input compact mod-block">
+						<input class="input-field" type="text" placeholder="placeholder">
+						<label class="input-label">Input label</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input compact mod-block">
+						<input class="input-field" type="text" value="disabled input" disabled>
+						<label class="input-label">Input label</label>
+					</div>
+				</div>
+				<code class="code mod-block">&lt;div class="input mod-compact"&gt;
+	&lt;input class="input-field" type="text"&gt;
+	&lt;label class="input-label"&gt;...&lt;/label&gt;
+&lt;/div&gt;
+</code>
+			</div>
+		</div>
+	</div>
+
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="input mod-block"&gt;</code> for a 100% width input.</em><br>
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="input-field is-filled"&gt;</code> to let the label on the upper state.</em><br>
 	<em><b>Tip:</b> You can use <code class="code">placeholder="..."</code> on <code class="code">input-field</code>.</em>
@@ -41,13 +59,17 @@
 				<div class="input mod-block">
 					<input class="input-field" type="text">
 					<label class="input-label">Input label</label>
-					<div class="input-helper">Few tips about the input</div>
+					<div class="input-messages">
+						<div class="input-helper">Few tips about the input</div>
+					</div>
 				</div>
 			</div>
 	<code class="code mod-block">&lt;div class="input"&gt;
 	&lt;input class="input-field" type="text"&gt;
 	&lt;label class="input-label"&gt;...&lt;/label&gt;
-	&lt;div class="input-helper"&gt;...&lt;/div&gt;
+	&lt;div class="input-messages"&gt;
+		&lt;div class="input-helper"&gt;...&lt;/div&gt;
+	&lt;/div&gt;
 &lt;/div&gt;
 </code>
 		</div>
@@ -56,15 +78,38 @@
 				<div class="input mod-block">
 					<input class="input-field is-error" type="text">
 					<label class="input-label">Input label</label>
-					<div class="input-error">Oops, there is an error!</div>
+					<div class="input-messages">
+						<div class="input-error">Oops, there is an error!</div>
+					</div>
 				</div>
 			</div>
 	<code class="code mod-block">&lt;div class="input"&gt;
 	&lt;input class="input-field is-error" type="text"&gt;
 	&lt;label class="input-label"&gt;...&lt;/label&gt;
-	&lt;div class="input-error"&gt;...&lt;/div&gt;
+	&lt;div class="input-messages"&gt;
+		&lt;div class="input-error"&gt;...&lt;/div&gt;
+	&lt;/div&gt;
 &lt;/div&gt;
 </code>
+		</div>
+		<div class="grid-sm6 grid-mdOffset2">
+			<div class="input compact mod-block">
+				<input class="input-field" type="text">
+				<label class="input-label">Input label</label>
+				<div class="input-messages">
+					<div class="input-helper">Few tips about the input</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="grid-sm6 grid-mdOffset2">
+			<div class="input compact mod-block">
+				<input class="input-field is-error" type="text">
+				<label class="input-label">Input label</label>
+				<div class="input-messages">
+					<div class="input-error">Oops, there is an error!</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -130,15 +175,26 @@
 <!-- Search inputs -->
 <section class="contentSection">
 	<h3>Search</h3>
-	<div class="input mod-search">
-		<input class="input-field" type="text" placeholder="e.g. Clark Kent">
-		<label class="input-label">Search</label>
+	<div class="grid">
+		<div class="grid-sm6">
+			<div class="input mod-block mod-search">
+				<input class="input-field" type="text" placeholder="e.g. Clark Kent">
+				<label class="input-label">Search</label>
+			</div>
+		</div>
+		<div class="grid-sm6">
+			<div class="input mod-block mod-compact mod-search">
+				<input class="input-field" type="text" placeholder="e.g. Clark Kent">
+				<label class="input-label">Search</label>
+			</div>
+		</div>
 	</div>
 <code class="code mod-block">&lt;div class="input mod-search"&gt;
 	&lt;input class="input-field" type="text" placeholder="e.g. Clark Kent"&gt;
 	&lt;label class="input-label"&gt;Search&lt;/label&gt;
 &lt;/div&gt;
 </code>
+<em><b>Tip:</b> You can change the input style using <code class="code">mod-compact</code></em>
 </section>
 
 <!-- Palette -->
@@ -169,7 +225,8 @@
 	&lt;input class="input-field" type="text"&gt;
 	&lt;label class="input-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;</code>
-<em><b>Tip:</b> It will works with all palette's colors</em>
+<em><b>Tip:</b> It will works with all palette's colors</em></br>
+<em><b>Tip:</b> It also works with input using the <code class="code">mod-compact</code></em>
 </section>
 
 <!-- Autocomplete & Select -->
@@ -179,8 +236,8 @@
 		<div class="grid">
 			<div class="grid-sm6">
 				<div class="form-group">
-					<div class="input mod-block mod-autocomplete is-open">
-						<input class="input-field" type="text">
+					<div id="autocomplete-material" class="input mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-material', 'is-open')">
+						<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-material', 'is-open')" onblur="w3.removeClass('#autocomplete-material', 'is-open')">
 						<label class="input-label">User</label>
 						<ul class="input-options">
 							<li class="input-options-entry"><u>va</u>lue A</li>
@@ -192,6 +249,19 @@
 			</div>
 			<div class="grid-sm6">
 				<div class="form-group">
+					<div id="autocomplete-compact" class="input compact mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-compact', 'is-open')">
+						<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-compact', 'is-open')" onblur="w3.removeClass('#autocomplete-compact', 'is-open')">
+						<label class="input-label">User</label>
+						<ul class="input-options">
+							<li class="input-options-entry"><u>va</u>lue A</li>
+							<li class="input-options-entry is-focus"><u>va</u>lue B</li>
+							<li class="input-options-entry"><u>va</u>lue C</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="grid-sm6">
+				<div class="form-group">
 					<div class="input mod-select is-open">
 						<input class="input-field" type="text">
 						<label class="input-label">User</label>
@@ -202,7 +272,7 @@
 						</ul>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </section>
