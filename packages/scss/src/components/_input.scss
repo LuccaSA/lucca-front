@@ -10,6 +10,7 @@
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
 	font-family: unquote(_theme("commons.font.family"));
+	font-size: 1rem;
 	font-weight: 400;
 	margin-bottom: .15rem;
 	outline: 0;
@@ -38,6 +39,7 @@
 
 .input-label {
 	color: #A6A6A6;
+	font-size: 1rem;
 	left: 0;
 	overflow: hidden;
 	pointer-events: none;
@@ -80,6 +82,12 @@
 
 .input-error {
 	color: _color("error");
+	font-size: _theme("sizes.small.font-size");
+	margin: 0;
+}
+
+.input-warning {
+	color: _color("warning");
 	font-size: _theme("sizes.small.font-size");
 	margin: 0;
 }
@@ -222,7 +230,7 @@
 		cursor: not-allowed;
 	}
 
-	&.is-error {
+	&.is-error, &.is-error:focus {
 		@include formError();
 	}
 
