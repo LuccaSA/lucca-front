@@ -1,6 +1,7 @@
 .container {
 	margin: 0 auto;
 	padding: 0 .5rem;
+	max-width: _component("container.max-width");
 
 	@each $bp-name, $bp-obj in $breakpoints {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
