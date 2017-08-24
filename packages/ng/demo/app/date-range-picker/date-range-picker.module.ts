@@ -11,6 +11,7 @@ import {SharedModule} from '../shared/index';
 		LuDateRangePickerModule,
 		SharedModule,
 	],
+	exports: [DemoDateRangePickerComponent],
 	declarations: [DemoDateRangePickerComponent, BasicComponent]
 })
 export class DemoDateRangePickerModule { }
