@@ -18,7 +18,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "gulp generatedoc && ng serve -a=demo",
+    "start": "gulp generatedoc && ng serve -a=demo --port 4242",
     "build": "gulp build",
     "test": "ng test -a=src",
     "lint": "ng lint",
@@ -41,6 +41,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
+    "moment": "^2.18.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
