@@ -5,7 +5,7 @@ import {DateRangeSelectChoice} from '../../../../src/app/date-range-picker/date-
 @Component({
 	selector: 'demo-basic-date-range-picker',
 	templateUrl: './basic.component.html',
-	styleUrls: ['./basic.component.scss']
+	styles: ['']
 })
 export class BasicComponent {
 
