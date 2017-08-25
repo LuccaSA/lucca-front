@@ -75,20 +75,24 @@ export class LuDateRangePickerComponent {
 
 	onChoiceChange(choice: DateRangeSelectChoice) {
 		if(!!choice){
-			this.dateMin = choice.dateMin;
-			this.dateMax = choice.dateMax;
+			this.dateMin = choice.range.dateMin;
+			this.dateMax = choice.range.dateMax;
 		}
 	}
 
 	selectCustomRange() {
 		let dialog = this.dialog.open(CustomRangePickerComponent);
-		dialog.afterClosed().subscribe(range => this.onChoiceChange({label: '', dateMin: range.min, dateMax: range.max}));
+		dialog.afterClosed().subscribe(range => this.onChoiceChange({label: '', range: {dateMin: range.min, dateMax: range.max}}));
 	}
 
 }
 
-export class DateRangeSelectChoice {
+export interface DateRangeSelectChoice {
+	range: DateRange;
+	label: string;
+}
+
+export interface DateRange {
 	dateMin: moment.Moment;
 	dateMax: moment.Moment;
-	label: string;
 }

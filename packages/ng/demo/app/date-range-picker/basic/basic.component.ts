@@ -21,8 +21,8 @@ export class BasicComponent {
 		this.placeholder = 'Select date range';
 
 		this.preConfiguredRanges = [
-			{label: 'This day', dateMin: today.clone(), dateMax:today.clone().add(1, 'day')},
-			{label: 'This month', dateMin: today.clone().startOf('month'), dateMax: today.clone().add(1, 'month').startOf('month')}
+			{label: 'This day', range: {dateMin: today.clone(), dateMax:today.clone().add(1, 'day')}},
+			{label: 'This month', range: {dateMin: today.clone().startOf('month'), dateMax: today.clone().add(1, 'month').startOf('month')}}
 		];
 	}
 
