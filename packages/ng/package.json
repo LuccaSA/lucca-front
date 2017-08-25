@@ -44,7 +44,6 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
-    "moment": "^2.18.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
@@ -80,6 +79,7 @@
     "typescript": "~2.2.0"
   },
   "peerDependencies": {
-    "@lucca-front/scss": "0.0.0-VERSIONPLACEHOLDER"
+    "@lucca-front/scss": "0.0.0-VERSIONPLACEHOLDER",
+    "moment": "^2.18.1"
   }
 }
