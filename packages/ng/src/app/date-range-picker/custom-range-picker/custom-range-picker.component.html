@@ -1,0 +1,11 @@
+<md-input-container>
+	<input mdInput [mdDatepicker]="pickerMin" placeholder="From..."> <!-- TODO trad -->
+	<button mdSuffix [mdDatepickerToggle]="pickerMin"></button>
+</md-input-container>
+<md-datepicker (selectedChanged)="updateMin($event)" #pickerMin></md-datepicker>
+
+<md-input-container>
+	<input mdInput [mdDatepicker]="pickerMax" placeholder="To...">  <!-- TODO trad -->
+	<button mdSuffix [mdDatepickerToggle]="pickerMax"></button>
+</md-input-container>
+<md-datepicker (selectedChanged)="updateMax($event)" #pickerMax></md-datepicker>

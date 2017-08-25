@@ -2,4 +2,7 @@
 	<md-option *ngFor="let choice of preConfiguredRanges" [value]="choice">
 		{{choice.label}}
 	</md-option>
+	<md-option (click)="selectCustomRange()">
+		Other... <!-- TODO trad -->
+	</md-option>
 </md-select>

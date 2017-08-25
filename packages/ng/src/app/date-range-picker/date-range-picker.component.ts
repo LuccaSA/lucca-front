@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import * as moment from 'moment';
+import {MdDialog} from '@angular/material';
+import {CustomRangePickerComponent} from './custom-range-picker/custom-range-picker.component';
 
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
@@ -38,8 +40,10 @@ export class LuDateRangePickerComponent {
 	 */
 	@Input() preConfiguredRanges: DateRangeSelectChoice[];
 
+	customRange: DateRangeSelectChoice;
 
-	constructor() { }
+
+	constructor(public dialog: MdDialog) { }
 
 	/**
 	 * Min date of selected ranged. Allows two-way binding.
@@ -70,8 +74,15 @@ export class LuDateRangePickerComponent {
 	}
 
 	onChoiceChange(choice: DateRangeSelectChoice) {
-		this.dateMin = choice.dateMin;
-		this.dateMax = choice.dateMax;
+		if(!!choice){
+			this.dateMin = choice.dateMin;
+			this.dateMax = choice.dateMax;
+		}
+	}
+
+	selectCustomRange() {
+		let dialog = this.dialog.open(CustomRangePickerComponent);
+		dialog.afterClosed().subscribe(range => this.onChoiceChange({label: '', dateMin: range.min, dateMax: range.max}));
 	}
 
 }
