@@ -6,6 +6,7 @@
 		"declaration": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
+		"target": "es2016",
 		"typeRoots": [
 			"../node_modules/@types"
 		],

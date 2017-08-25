@@ -1,3 +1,5 @@
-<p>
-	date-range-picker works!
-</p>
+<md-select (change)="onChoiceChange($event.value)" placeholder="{{placeholder}}">
+	<md-option *ngFor="let choice of preConfiguredRanges" [value]="choice">
+		{{choice.label}}
+	</md-option>
+</md-select>
