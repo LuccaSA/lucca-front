@@ -1,10 +1,10 @@
 <div class="demo-container">
 	<lu-date-range-picker
+		[(ngModel)]="range"
 		[placeholder]="placeholder"
-		[(dateMin)]="dateMin"
-		[(dateMax)]="dateMax"
-		[preConfiguredRanges]="preConfiguredRanges"></lu-date-range-picker>
+		[preConfiguredRanges]="preConfiguredRanges">
+	</lu-date-range-picker>
 </div>
 
-<p>from : {{dateMin ? dateMin.format('LL'): 'beginning of time'}}</p>
-<p>to : {{dateMax ? dateMax.format('LL'): 'end of time'}}</p>
+<p>from : {{range.dateMin ? range.dateMin.format('LL') : 'beginning of time'}}</p>
+<p>to :  {{range.dateMax ? range.dateMax.format('LL') : 'end of time'}}</p>
