@@ -4,6 +4,9 @@ import {MdDialog} from '@angular/material';
 import {CustomRangePickerComponent} from './custom-range-picker/custom-range-picker.component';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
+import {LuTranslateService} from '../shared/translation.service';
+import {Translations} from './translate/date-range-picker.translate';
+
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
  */
@@ -39,7 +42,9 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	propagateChange = (_: any) => {};
 
 
-	constructor(public dialog: MdDialog) { }
+	constructor(public dialog: MdDialog, public translateService: LuTranslateService) {
+		translateService.setTranslations(Translations);
+	}
 
 	writeValue(obj: DateRange): void {
 		this._dateRange = obj;
