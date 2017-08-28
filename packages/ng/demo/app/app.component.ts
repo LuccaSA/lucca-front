@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'demo-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Lucca front ng demo';
+
+  constructor(public translate: TranslateService) { }
+
+	switchToLang(lang: string) {
+  	this.translate.use(lang);
+	}
 }
