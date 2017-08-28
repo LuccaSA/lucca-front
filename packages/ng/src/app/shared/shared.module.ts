@@ -5,11 +5,11 @@ import {TranslateStore} from '@ngx-translate/core/src/translate.store';
 import {LuTranslateService} from './translation.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
+	imports: [
+		CommonModule,
 		TranslateModule.forRoot({loader: {provide: TranslateLoader, useClass: TranslateFakeLoader}}),
-  ],
-  declarations: [],
+	],
+	declarations: [],
 	providers: [LuTranslateService, TranslateService, TranslateStore],
 	exports: [TranslateModule]
 })
