@@ -36,9 +36,7 @@ export class CustomRangePickerComponent implements OnInit {
 	}
 
 	close(withMin: boolean, withMax: boolean) {
-		if (!withMin) {this.min = null}
-		if (!withMax) {this.max = null}
-		this.dialogRef.close({min: this.min, max: this.max});
+		this.dialogRef.close({min: withMin ? this.min : null, max: withMax ? this.max : null});
 	}
 
 }

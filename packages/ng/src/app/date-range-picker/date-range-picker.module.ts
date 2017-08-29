@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {MdDatepickerModule, MdDialogModule, MdInputModule, MdNativeDateModule, MdSelectModule} from '@angular/material';
@@ -17,11 +17,11 @@ import { CustomRangePickerComponent } from './custom-range-picker/custom-range-p
 		MdInputModule,
 		MdDatepickerModule,
 		MdNativeDateModule,
-		MdDialogModule
+		MdDialogModule,
 	],
 	entryComponents: [CustomRangePickerComponent],
 	declarations: [LuDateRangePickerComponent, CustomRangePickerComponent],
-	exports: [LuDateRangePickerComponent]
+	exports: [LuDateRangePickerComponent],
 })
 export class LuDateRangePickerModule { }
 

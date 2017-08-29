@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Translations } from './translate/lol.translate';
+import { translations } from './translate/lol.translate';
 import {LuTranslateService} from '../shared/translation.service';
 
 /**
@@ -23,7 +23,7 @@ export class LuLolComponent implements OnInit {
 	@Output() myOutput = new EventEmitter<string>();
 
 	constructor(public translateService: LuTranslateService) {
-		translateService.setTranslations(Translations);
+		translateService.setTranslations(translations);
 	}
 
 	ngOnInit() { }

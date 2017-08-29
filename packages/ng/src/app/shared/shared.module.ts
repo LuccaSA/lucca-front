@@ -11,6 +11,6 @@ import {LuTranslateService} from './translation.service';
 	],
 	declarations: [],
 	providers: [LuTranslateService, TranslateService, TranslateStore],
-	exports: [TranslateModule]
+	exports: [TranslateModule],
 })
 export class LuSharedModule { }

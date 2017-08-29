@@ -7,7 +7,7 @@ import { LuLolComponent } from './lol.component';
 @NgModule({
 	imports: [
 		CommonModule,
-		LuSharedModule
+		LuSharedModule,
 	],
 	declarations: [
 		LuLolComponent,
