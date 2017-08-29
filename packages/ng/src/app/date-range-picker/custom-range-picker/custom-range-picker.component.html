@@ -14,10 +14,10 @@
 
 <div>
 	<button class="button" *ngIf="!!min" (click)="close(true, false)">
-		After {{min.format('LL')}}  <!-- TODO trad -->
+		{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM' | translate:{date: displayDate(min)} }}
 	</button>
 	<button class="button" *ngIf="!!max" (click)="close(false, true)">
-		Before {{max.format('LL')}} <!-- TODO trad -->
+		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(max)} }}
 	</button>
 </div>
 

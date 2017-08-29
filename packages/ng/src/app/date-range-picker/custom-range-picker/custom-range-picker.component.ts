@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import * as moment from 'moment';
+import {LuTranslateService} from '../../shared/translation.service';
 
 @Component({
 	selector: 'lu-custom-range-picker',
@@ -11,17 +12,19 @@ export class CustomRangePickerComponent implements OnInit {
 	min: moment.Moment = null;
 	max: moment.Moment = null;
 
-	constructor(public dialogRef: MdDialogRef<any>) { }
+	constructor(public translate: LuTranslateService, public dialogRef: MdDialogRef<any>) { }
 
 	ngOnInit() { }
 
 	updateMin(date) {
 		this.min = moment(date).startOf('day');
+		this.min.locale(this.translate.getCurrentLang());
 		this.tryAndAutoClose();
 	}
 
 	updateMax(date) {
-		this.max = moment(date).add(1, 'day').startOf('day');
+		this.max = moment(date).startOf('day');
+		this.max.locale(this.translate.getCurrentLang());
 		this.tryAndAutoClose();
 	}
 
@@ -35,8 +38,12 @@ export class CustomRangePickerComponent implements OnInit {
 		}
 	}
 
+	displayDate(date: moment.Moment) {
+		return date.format(('LL'));
+	}
+
 	close(withMin: boolean, withMax: boolean) {
-		this.dialogRef.close({min: withMin ? this.min : null, max: withMax ? this.max : null});
+		this.dialogRef.close({min: withMin ? this.min : null, max: withMax ? this.max.add(1, 'day') : null});
 	}
 
 }

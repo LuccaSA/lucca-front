@@ -15,4 +15,8 @@ export class LuTranslateService {
 		});
 	}
 
+	getCurrentLang(): string {
+		return this.translate.currentLang;
+	}
+
 }
