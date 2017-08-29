@@ -2,8 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 import * as moment from 'moment';
 import {LuTranslateService} from '../../shared/translation.service';
-import {DateRange} from '../date-range-picker.component';
-import {debugOutputAstAsTypeScript} from '@angular/compiler';
+import {DateRange} from '../date-range-picker.models';
 
 @Component({
 	selector: 'lu-custom-range-picker',

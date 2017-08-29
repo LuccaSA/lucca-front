@@ -1,11 +1,11 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import * as moment from 'moment';
 import {MdDialog} from '@angular/material';
 import {CustomRangePickerComponent} from './custom-range-picker/custom-range-picker.component';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 import {LuTranslateService} from '../shared/translation.service';
 import {translations} from './translate/date-range-picker.translate';
+import {DateRange, DateRangeSelectChoice} from './date-range-picker.models';
 
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
@@ -80,7 +80,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	pickCustomRange() {
 		const dialog = this.dialog.open(CustomRangePickerComponent, {data: this.selectedChoice.range});
 		dialog.afterClosed().subscribe(range => {
-			if(range) {
+			if (range) {
 				this.selectCustomRange({dateMin: range.min, dateMax: range.max});
 			}
 		});
@@ -95,14 +95,4 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		return !range || (!range.dateMin && !range.dateMax);
 	}
 
-}
-
-export interface DateRangeSelectChoice {
-	range: DateRange;
-	label: string;
-}
-
-export interface DateRange {
-	dateMin: moment.Moment;
-	dateMax: moment.Moment;
 }

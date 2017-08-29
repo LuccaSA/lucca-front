@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
-import {DateRange, DateRangeSelectChoice} from '../../../../src/app/date-range-picker/date-range-picker.component';
+import {DateRange, DateRangeSelectChoice} from '../../../../src/app/date-range-picker/date-range-picker.models';
 
 @Component({
 	selector: 'demo-basic-date-range-picker',
