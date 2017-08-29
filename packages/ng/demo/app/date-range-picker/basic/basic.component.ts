@@ -24,4 +24,8 @@ export class BasicComponent {
 		];
 	}
 
+	resetRange() {
+		this.range = {dateMin: null, dateMax: null};
+	}
+
 }

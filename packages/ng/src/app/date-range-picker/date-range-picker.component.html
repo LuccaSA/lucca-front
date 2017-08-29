@@ -1,8 +1,8 @@
-<md-select (change)="onChoiceChange($event.value)" placeholder="{{placeholder}}">
+<md-select (change)="onChoiceChange($event.value)" [ngModel]="_selectedChoice" placeholder="{{placeholder}}" floatPlaceholder="never">
 	<md-option *ngFor="let choice of preConfiguredRanges" [value]="choice">
 		{{choice.label}}
 	</md-option>
-	<md-option (click)="selectCustomRange()">
+	<md-option (click)="pickCustomRange()" [value]="customChoice">
 		{{ 'LU_DATE_RANGE_PICKER_CUSTOM_RANGE_LABEL' | translate }}
 	</md-option>
 </md-select>

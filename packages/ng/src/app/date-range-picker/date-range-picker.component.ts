@@ -35,19 +35,17 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	 */
 	@Input() preConfiguredRanges: DateRangeSelectChoice[];
 
-	customRange: DateRangeSelectChoice;
+	customChoice: DateRangeSelectChoice;
 
-	_dateRange: DateRange;
+	_selectedChoice: DateRangeSelectChoice;
 
 	propagateChange = (_: any) => {};
 
 
 	constructor(public dialog: MdDialog, public translateService: LuTranslateService) {
+		this.preConfiguredRanges = [];
+		this.customChoice = {label: null, range: { dateMin: null, dateMax: null}};
 		translateService.setTranslations(translations);
-	}
-
-	writeValue(obj: DateRange): void {
-		this._dateRange = obj;
 	}
 
 	registerOnChange(fn: any): void {
@@ -56,16 +54,39 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 
 	registerOnTouched(): void { }
 
-	onChoiceChange(choice: DateRangeSelectChoice) {
-		if (!!choice) {
-			this._dateRange = choice.range;
-			this.propagateChange(this._dateRange);
+	writeValue(range: DateRange): void {
+		if (!this.isEmptyRange(range)) {
+			this.selectCustomRange(range);
+		} else {
+			this.selectedChoice = {label: '', range: { dateMin: null, dateMax: null}};
 		}
 	}
 
-	selectCustomRange() {
+	set selectedChoice(choice: DateRangeSelectChoice) {
+		this._selectedChoice = choice;
+		this.propagateChange(choice.range);
+	}
+
+	onChoiceChange(choice: DateRangeSelectChoice) {
+		if (!this.isEmptyRange(choice.range)) {
+			this.selectedChoice = choice;
+		}
+	}
+
+	pickCustomRange() {
 		const dialog = this.dialog.open(CustomRangePickerComponent);
-		dialog.afterClosed().subscribe(range => this.onChoiceChange({label: '', range: {dateMin: range.min, dateMax: range.max}}));
+		dialog.afterClosed().subscribe(range => {
+			this.selectCustomRange({dateMin: range.min, dateMax: range.max});
+		});
+	}
+
+	selectCustomRange(range: DateRange) {
+		this.customChoice.range = range;
+		this.selectedChoice = this.customChoice;
+	}
+
+	isEmptyRange(range: DateRange) {
+		return !range || (!range.dateMin && !range.dateMax);
 	}
 
 }

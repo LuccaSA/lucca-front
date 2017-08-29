@@ -7,4 +7,8 @@
 </div>
 
 <p>from : {{range.dateMin ? range.dateMin.format('LL') : 'beginning of time'}}</p>
-<p>to :  {{range.dateMax ? range.dateMax.format('LL') : 'end of time'}}</p>
+<p>to :   {{range.dateMax ? range.dateMax.format('LL') : 'end of time'}}</p>
+
+<div>range : {{range | json}} </div>
+
+<button class="button" (click)="resetRange()">Reset</button>
