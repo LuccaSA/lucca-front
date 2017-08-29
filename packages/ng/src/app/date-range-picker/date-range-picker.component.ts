@@ -67,6 +67,10 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		this.propagateChange(choice.range);
 	}
 
+	get selectedChoice() {
+		return this._selectedChoice;
+	}
+
 	onChoiceChange(choice: DateRangeSelectChoice) {
 		if (!this.isEmptyRange(choice.range)) {
 			this.selectedChoice = choice;
@@ -74,9 +78,11 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	}
 
 	pickCustomRange() {
-		const dialog = this.dialog.open(CustomRangePickerComponent);
+		const dialog = this.dialog.open(CustomRangePickerComponent, {data: this.selectedChoice.range});
 		dialog.afterClosed().subscribe(range => {
-			this.selectCustomRange({dateMin: range.min, dateMax: range.max});
+			if(range) {
+				this.selectCustomRange({dateMin: range.min, dateMax: range.max});
+			}
 		});
 	}
 
