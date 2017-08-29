@@ -4,6 +4,9 @@ import {MdDialog} from '@angular/material';
 import {CustomRangePickerComponent} from './custom-range-picker/custom-range-picker.component';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
+import {LuTranslateService} from '../shared/translation.service';
+import {translations} from './translate/date-range-picker.translate';
+
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
  */
@@ -15,7 +18,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuDateRangePickerComponent),
-			multi: true
+			multi: true,
 		}
 	]
 })
@@ -39,7 +42,9 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	propagateChange = (_: any) => {};
 
 
-	constructor(public dialog: MdDialog) { }
+	constructor(public dialog: MdDialog, public translateService: LuTranslateService) {
+		translateService.setTranslations(translations);
+	}
 
 	writeValue(obj: DateRange): void {
 		this._dateRange = obj;
@@ -52,14 +57,14 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	registerOnTouched(): void { }
 
 	onChoiceChange(choice: DateRangeSelectChoice) {
-		if(!!choice){
+		if (!!choice) {
 			this._dateRange = choice.range;
 			this.propagateChange(this._dateRange);
 		}
 	}
 
 	selectCustomRange() {
-		let dialog = this.dialog.open(CustomRangePickerComponent);
+		const dialog = this.dialog.open(CustomRangePickerComponent);
 		dialog.afterClosed().subscribe(range => this.onChoiceChange({label: '', range: {dateMin: range.min, dateMax: range.max}}));
 	}
 

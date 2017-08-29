@@ -5,6 +5,10 @@
   "rules": {
     "callable-types": true,
     "class-name": true,
+    "trailing-comma": [
+      true,
+      {"multiline": {"arrays": "always"}}
+    ],
     "comment-format": [
       true,
       "check-space"

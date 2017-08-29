@@ -7,11 +7,11 @@ import {LuDateRangePickerModule} from './date-range-picker/date-range-picker.mod
 	imports: [
 		CommonModule,
 		LuLolModule,
-		LuDateRangePickerModule
+		LuDateRangePickerModule,
 	],
 	exports: [
 		LuLolModule,
-		LuDateRangePickerModule
-	]
+		LuDateRangePickerModule,
+	],
 })
 export class LuRootModule {}
