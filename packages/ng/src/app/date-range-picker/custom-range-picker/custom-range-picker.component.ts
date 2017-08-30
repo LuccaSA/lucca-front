@@ -12,6 +12,7 @@ export class CustomRangePickerComponent implements OnInit {
 
 	min: moment.Moment = null;
 	max: moment.Moment = null;
+	locale: string;
 
 	constructor(
 		@Inject(MD_DIALOG_DATA) public data: DateRange,
@@ -19,9 +20,10 @@ export class CustomRangePickerComponent implements OnInit {
 		public translate: LuTranslateService,
 		public dialogRef: MdDialogRef<any>
 	) {
-		this.min = data.dateMin;
-		this.max = data.dateMax ? data.dateMax.subtract(1, 'day') : null;
-		dateAdapter.setLocale(translate.getCurrentLang());
+		this.locale = translate.getCurrentLang();
+		dateAdapter.setLocale(this.locale);
+		this.min = this.update(data.dateMin);
+		this.max = this.update(moment(data.dateMax).subtract(1, 'day'));
 	}
 
 	ngOnInit() { }
@@ -36,7 +38,7 @@ export class CustomRangePickerComponent implements OnInit {
 
 	private update(date) {
 		const newDate = moment(date).startOf('day');
-		newDate.locale(this.translate.getCurrentLang());
+		newDate.locale(this.locale);
 		return newDate.isValid() ? newDate: null;
 	}
 
