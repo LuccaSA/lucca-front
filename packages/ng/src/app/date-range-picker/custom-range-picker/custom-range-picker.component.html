@@ -1,12 +1,14 @@
 <div>
 	<md-input-container>
-		<input mdInput [mdDatepicker]="pickerMin" [value]="min" placeholder="{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}">
+		<input (change)="updateMin($event.target.value)" mdInput
+					 [mdDatepicker]="pickerMin" [ngModel]="min" placeholder="{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}">
 		<button mdSuffix [mdDatepickerToggle]="pickerMin"></button>
 		<md-datepicker  (selectedChanged)="updateMin($event)" #pickerMin></md-datepicker>
 	</md-input-container>
 
 	<md-input-container>
-		<input mdInput [mdDatepicker]="pickerMax" [value]="max" placeholder="{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}">
+		<input (change)="updateMax($event.target.value)" mdInput
+					 [mdDatepicker]="pickerMax" [ngModel]="max" placeholder="{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}">
 		<button mdSuffix [mdDatepickerToggle]="pickerMax"></button>
 		<md-datepicker (selectedChanged)="updateMax($event)" #pickerMax></md-datepicker>
 	</md-input-container>
@@ -25,7 +27,7 @@
 		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(max)} }}
 	</button>
 	<div *ngIf="!!max && !!min && !max.isSame(min, 'day')">
-		<button class="button" (click)="close(true, true)">
+		<button class="button" [disabled]="max.isBefore(min)" (click)="close(true, true)">
 			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{dateMin: displayDate(min), dateMax: displayDate(max)} }}
 		</button> <br/>
 	</div>

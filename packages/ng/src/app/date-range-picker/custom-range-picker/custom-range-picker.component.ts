@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import {DateAdapter, MD_DIALOG_DATA, MdDialogRef, NativeDateAdapter} from '@angular/material';
 import * as moment from 'moment';
 import {LuTranslateService} from '../../shared/translation.service';
 import {DateRange} from '../date-range-picker.models';
@@ -15,27 +15,29 @@ export class CustomRangePickerComponent implements OnInit {
 
 	constructor(
 		@Inject(MD_DIALOG_DATA) public data: DateRange,
+		dateAdapter: DateAdapter<NativeDateAdapter>,
 		public translate: LuTranslateService,
 		public dialogRef: MdDialogRef<any>
 	) {
 		this.min = data.dateMin;
 		this.max = data.dateMax ? data.dateMax.subtract(1, 'day') : null;
+		dateAdapter.setLocale(translate.getCurrentLang());
 	}
 
 	ngOnInit() { }
 
 	updateMin(date) {
-		this.min = moment(date).startOf('day');
-		this.min.locale(this.translate.getCurrentLang());
+		this.min = this.update(date);
 	}
 
 	updateMax(date) {
-		this.max = moment(date).startOf('day');
-		this.max.locale(this.translate.getCurrentLang());
+		this.max = this.update(date);
 	}
 
-	hasTwoValidDates() {
-		return !!this.min && !!this.max && this.min.isBefore(this.max);
+	private update(date) {
+		const newDate = moment(date).startOf('day');
+		newDate.locale(this.translate.getCurrentLang());
+		return newDate.isValid() ? newDate: null;
 	}
 
 	displayDate(date: moment.Moment) {
