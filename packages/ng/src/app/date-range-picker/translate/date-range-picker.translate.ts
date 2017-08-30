@@ -18,6 +18,6 @@ export const translations = {
 
 		LU_DATE_RANGE_PICKER_BUTTON_FROM: 'Depuis le {{date}}',
 		LU_DATE_RANGE_PICKER_BUTTON_TO: 'À partir du {{date}}',
-		LU_DATE_RANGE_PICKER_BUTTON_FROM_TO: 'À partir du {{dateMin}} jusqu\'au {{dateMax}}',
+		LU_DATE_RANGE_PICKER_BUTTON_FROM_TO: 'Du {{dateMin}} au {{dateMax}}',
 	},
 };
