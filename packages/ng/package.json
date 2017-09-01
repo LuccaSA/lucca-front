@@ -27,7 +27,8 @@
     "publish-test": "echo 'Publishing @lucca-front/ng'"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
