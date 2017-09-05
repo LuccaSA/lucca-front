@@ -98,17 +98,15 @@
 				}
 			}
 
-			// Palette > Disabled switch 
+			// Palette > Disabled switch
 			&[disabled], &[readonly]{
-				&:checked {
-					~ .switch-label {
-						&::before {
-							background: desaturate( lighten(_get($palette, "color"), 30%), 15%);
-						}
+				~ .switch-label {
+					&::before {
+						background: desaturate( lighten(_get($palette, "color"), 30%), 15%);
+					}
 
-						&::after {
-							background: desaturate( lighten(_get($palette, "color"), 20%), 15%);
-						}
+					&::after {
+						background: desaturate( lighten(_get($palette, "color"), 20%), 15%);
 					}
 				}
 			}
