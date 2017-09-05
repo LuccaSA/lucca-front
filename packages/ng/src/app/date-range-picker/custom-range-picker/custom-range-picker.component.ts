@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DateAdapter, MD_DIALOG_DATA, MdDialogRef, NativeDateAdapter} from '@angular/material';
+import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 import * as moment from 'moment';
 import {LuTranslateService} from '../../shared/translation.service';
 import {DateRange} from '../date-range-picker.models';
+import {MomentDateAdapter} from '../../shared/moment/moment.date-adapter';
 
 @Component({
 	selector: 'lu-custom-range-picker',
@@ -14,35 +15,29 @@ export class CustomRangePickerComponent implements OnInit {
 	max: moment.Moment = null;
 	locale: string;
 
-	constructor(
+	constructor (
 		@Inject(MD_DIALOG_DATA) public data: DateRange,
-		dateAdapter: DateAdapter<NativeDateAdapter>,
+		public dateAdapter: MomentDateAdapter,
 		public translate: LuTranslateService,
 		public dialogRef: MdDialogRef<any>
 	) {
 		this.locale = translate.getCurrentLang();
 		dateAdapter.setLocale(this.locale);
-		this.min = this.update(data.dateMin);
-		this.max = this.update(moment(data.dateMax).subtract(1, 'day'));
+		this.min = this.initDate(data.dateMin);
+		this.max = this.initDate(moment(data.dateMax).subtract(1, 'day'));
 	}
 
 	ngOnInit() { }
 
-	updateMin(date) {
-		this.min = this.update(date);
-	}
-
-	updateMax(date) {
-		this.max = this.update(date);
-	}
-
-	private update(date) {
+	private initDate(date): moment.Moment {
 		const newDate = moment(date).startOf('day');
-		newDate.locale(this.locale);
+		if (newDate) {
+			newDate.locale(this.locale);
+		}
 		return newDate.isValid() ? newDate: null;
 	}
 
-	displayDate(date: moment.Moment) {
+	displayDate(date: moment.Moment): string {
 		return date.format(('LL'));
 	}
 
