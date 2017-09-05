@@ -10,6 +10,7 @@
 	box-shadow: 0 1px 0 0 #CCCCCC;
 	color: _color("text.default");
 	font-family: unquote(_theme("commons.font.family"));
+	font-size: _component("input.font-size");
 	font-weight: 400;
 	margin-bottom: .15rem;
 	outline: 0;
@@ -39,6 +40,7 @@
 .input-label {
 	color: #A6A6A6;
 	white-space: nowrap;
+	font-size: _component("input.font-size");
 	left: 0;
 	overflow: hidden;
 	pointer-events: none;
@@ -80,13 +82,19 @@
 
 .input-error {
 	color: _color("error");
-	font-size: _theme("sizes.small.font-size");
+	font-size: _component("input.message.font-size");
+	margin: 0;
+}
+
+.input-warning {
+	color: _color("warning");
+	font-size: _component("input.message.font-size");
 	margin: 0;
 }
 
 .input-helper {
 	color: _color("text.light");
-	font-size: _theme("sizes.small.font-size");
+	font-size: _component("input.message.font-size");
 	margin: 0;
 }
 
@@ -211,12 +219,16 @@
 		cursor: not-allowed;
 	}
 
-	&.is-filled {
-		@include formFilled();
-	}
-
 	&.is-error {
 		@include formError();
+
+		&:focus {
+			@include formError();
+		}
+	}
+
+	&.is-filled {
+		@include formFilled();
 	}
 }
 
