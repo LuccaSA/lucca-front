@@ -45,34 +45,6 @@
 }
 
 
-// PALETTE
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.switch {
-	@mixin switchColoring($palette) {
-		.switch-input:checked ~ .switch-label {
-			&::before {
-				background: lighten(_get($palette, "color"), 20%);
-			}
-
-			&::after {
-				background: _get($palette, "color");
-			}
-		}
-	}
-
-	// default color
-	@include switchColoring(_component("switch.default-palette"));
-
-	// palette colors
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include switchColoring($palette);
-		}
-	}
-}
-
-
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -105,6 +77,51 @@
 			&::after {
 				background: lighten(_color("text.light"), 15%);
 			}
+		}
+	}
+}
+
+
+// PALETTE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.switch {
+	@mixin switchColoring($palette) {
+		.switch-input:checked {
+			~ .switch-label {
+				&::before {
+					background: lighten(_get($palette, "color"), 20%);
+				}
+
+				&::after {
+					background: _get($palette, "color");
+				}
+			}
+
+			// Palette > Disabled switch 
+			&[disabled], &[readonly]{
+				&:checked {
+					~ .switch-label {
+						&::before {
+							background: desaturate( lighten(_get($palette, "color"), 30%), 15%);
+						}
+
+						&::after {
+							background: desaturate( lighten(_get($palette, "color"), 20%), 15%);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// default color
+	@include switchColoring(_component("switch.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include switchColoring($palette);
 		}
 	}
 }
