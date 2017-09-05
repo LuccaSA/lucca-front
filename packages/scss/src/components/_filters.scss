@@ -9,3 +9,12 @@
 	position: relative;
 	z-index: 1;
 }
+
+	.filters-left {
+		display: flex;
+	}
+
+	.filters-right {
+		display: flex;
+		margin-left: auto;
+	}
