@@ -35,7 +35,7 @@ nav.navSide-scrollWrapper {
 
 .navSide-item-link, .navSide-item-subMenu-link {
 	align-items: center;
-	color: _theme("palettes.primary.text");
+	color: _component("navSide.primary-palette.text");
 	display: flex;
 	text-decoration: none;
 	transition: all _theme("commons.animations.durations.fast") ease;
@@ -174,7 +174,7 @@ nav.navSide-scrollWrapper {
 		width: _component("navSide.compact.width");
 	}
 	.navSide-item-link {
-		color: _component("navSide.primary-palette.color");
+		color: _component("navSide.primary-palette.text");
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
