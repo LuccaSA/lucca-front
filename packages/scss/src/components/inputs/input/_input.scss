@@ -150,6 +150,7 @@
 	}
 
 	/* Select */
+
 	&.mod-select {
 		.input-field {
 			padding-right: 1.5rem;
@@ -172,7 +173,8 @@
 		&::after {
 			bottom: .15rem;
 			color: _color("text.light");
-			@include makeIcon("search");
+			@include makeIcon("chevron_south");
+			font-size: .75rem;
 			position: absolute;
 			right: 0;
 		}
@@ -237,10 +239,6 @@
 		.input-options {
 			opacity: 1;
 			transform: scaleY(1);
-		}
-
-		&::after {
-			@include makeIcon("search");
 		}
 	}
 }
