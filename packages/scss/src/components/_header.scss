@@ -1,4 +1,4 @@
-.filters {
+.header {
 	align-items: flex-end;
 	background: white;
 	box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
@@ -10,11 +10,11 @@
 	z-index: 1;
 }
 
-	.filters-left {
-		display: flex;
-	}
+.header-left {
+	display: flex;
+}
 
-	.filters-right {
-		display: flex;
-		margin-left: auto;
-	}
+.header-right {
+	display: flex;
+	margin-left: auto;
+}
