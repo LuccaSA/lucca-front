@@ -33,6 +33,9 @@ export class LuPopover implements OnDestroy {
 	_popoverInstance: LuPopoverComponent | null;
 
 	private _position: PopoverPosition = 'below';
+	private _disabled: boolean = false;
+	private _popoverClass: string | string[] | Set<string> | {[key: string]: any};
+	private _message: string;
 
 	@Input('luPopoverPosition')
 	get position(): PopoverPosition { return this._position; }
@@ -48,6 +51,16 @@ export class LuPopover implements OnDestroy {
 
 	@Input('luPopoverShowDelay') showDelay = 0;
 	@Input('luPopoverHideDelay') hideDelay = 0;
+	@Input('LuPopoverClass')
+	get popoverClass() { return this._popoverClass; }
+	set popoverClass(v) { this._popoverClass = v; }
+
+	@Input('luPopover')
+	get message() { return this._message; }
+	set message(value: string) {
+		this._message = value;
+		this._setPopoverMessage(this._message);
+	}
 
 	constructor(
 		private _overlay: Overlay,
@@ -158,5 +171,17 @@ export class LuPopover implements OnDestroy {
 
 	private _isPopoverVisible(): boolean {
 		return !!this._popoverInstance && this._popoverInstance.isVisible();
+	}
+
+	private _setPopoverClass(popoverClass: string|string[]|Set<string>|{[key: string]: any}) {
+			if(this._popoverInstance) {
+				this._popoverInstance.popoverClass = popoverClass;
+			}
+	}
+
+	private _setPopoverMessage(message: string) {
+		if(this._popoverInstance) {
+			this._popoverInstance.message = message;
+		}
 	}
 };

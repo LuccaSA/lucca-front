@@ -11,8 +11,10 @@ export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
   styleUrls: ['./popover.component.scss']
 })
 export class LuPopoverComponent implements OnInit {
-  _showTimeoutId: Timer;
-  _hideTimeoutId: Timer;
+  message: string;
+  popoverClass: string|string[]|Set<string>|{[key: string]: any};
+  _showTimeoutId: any;
+  _hideTimeoutId: any;
   _visibility: PopoverVisibility;
   _closeOnInteraction: boolean;
   _transformOrigin: string = 'bottom';
