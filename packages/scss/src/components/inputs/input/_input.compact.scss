@@ -109,7 +109,7 @@
 		width: 100%;
 	}
 
-	&.mod-autocomplete, &.mod-search {
+	&.mod-autocomplete, &.mod-select, &.mod-search {
 		&::after {
 			bottom: auto;
 			right: .5rem;
