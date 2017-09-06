@@ -1,4 +1,4 @@
-// MARGINS
+// RESETS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 /* Reset margins */
@@ -7,218 +7,47 @@
 	margin: 0 !important;
 }
 
-/* Margin bottom */
+/* Reset paddings */
 
-.u-marginBottomTiny {
-	margin-bottom: _theme("spacings.tiny") !important;
-}
-
-.u-marginBottomSmall {
-	margin-bottom: _theme("spacings.small") !important;
-}
-
-.u-marginBottomStandard {
-	margin-bottom: _theme("spacings.standard") !important;
-}
-
-.u-marginBottomBig {
-	margin-bottom: _theme("spacings.big") !important;
-}
-
-.u-marginBottomBigger {
-	margin-bottom: _theme("spacings.bigger") !important;
-}
-
-.u-marginBottomBiggest {
-	margin-bottom: _theme("spacings.biggest") !important;
-}
-
-/* Margin top */
-
-.u-marginTopTiny {
-	margin-top: _theme("spacings.tiny") !important;
-}
-
-.u-marginTopSmall {
-	margin-top: _theme("spacings.small") !important;
-}
-
-.u-marginTopStandard {
-	margin-top: _theme("spacings.standard") !important;
-}
-
-.u-marginTopBig {
-	margin-top: _theme("spacings.big") !important;
-}
-
-.u-marginTopBigger {
-	margin-top: _theme("spacings.bigger") !important;
-}
-
-.u-marginTopBiggest {
-	margin-top: _theme("spacings.biggest") !important;
-}
-
-/* Margin left */
-
-.u-marginLeftTiny {
-	margin-left: _theme("spacings.tiny") !important;
-}
-
-.u-marginLeftSmall {
-	margin-left: _theme("spacings.small") !important;
-}
-
-.u-marginLeftStandard {
-	margin-left: _theme("spacings.standard") !important;
-}
-
-.u-marginLeftBig {
-	margin-left: _theme("spacings.big") !important;
-}
-
-.u-marginLeftBigger {
-	margin-left: _theme("spacings.bigger") !important;
-}
-
-.u-marginLeftBiggest {
-	margin-left: _theme("spacings.biggest") !important;
-}
-
-/* Margin right */
-
-.u-marginRightTiny {
-	margin-right: _theme("spacings.tiny") !important;
-}
-
-.u-marginRightSmall {
-	margin-right: _theme("spacings.small") !important;
-}
-
-.u-marginRightStandard {
-	margin-right: _theme("spacings.standard") !important;
-}
-
-.u-marginRightBig {
-	margin-right: _theme("spacings.big") !important;
-}
-
-.u-marginRightBigger {
-	margin-right: _theme("spacings.bigger") !important;
-}
-
-.u-marginRightBiggest {
-	margin-right: _theme("spacings.biggest") !important;
+.u-paddingReset {
+	padding: 0 !important;
 }
 
 
-// PADDINGS
+// MARGINS & PADDINGS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-/* Padding bottom */
+@each $name, $spacings in _theme("spacings") {
 
-.u-paddingBottomTiny {
-	padding-bottom: _theme("spacings.tiny") !important;
-}
+	.u-marginBottom#{str-capitalize($name)} {
+		margin-bottom: $spacings !important;
+	}
 
-.u-paddingBottomSmall {
-	padding-bottom: _theme("spacings.small") !important;
-}
+	.u-marginTop#{str-capitalize($name)} {
+		margin-top: $spacings !important;
+	}
 
-.u-paddingBottomStandard {
-	padding-bottom: _theme("spacings.standard") !important;
-}
+	.u-marginLeft#{str-capitalize($name)} {
+		margin-left: $spacings !important;
+	}
 
-.u-paddingBottomBig {
-	padding-bottom: _theme("spacings.big") !important;
-}
+	.u-marginRight#{str-capitalize($name)} {
+		margin-right: $spacings !important;
+	}
 
-.u-paddingBottomBigger {
-	padding-bottom: _theme("spacings.bigger") !important;
-}
+	.u-paddingBottom#{str-capitalize($name)} {
+		padding-bottom: $spacings !important;
+	}
 
-.u-paddingBottomBiggest {
-	padding-bottom: _theme("spacings.biggest") !important;
-}
+	.u-paddingTop#{str-capitalize($name)} {
+		padding-top: $spacings !important;
+	}
 
-/* Padding top */
+	.u-paddingLeft#{str-capitalize($name)} {
+		padding-left: $spacings !important;
+	}
 
-.u-paddingTopTiny {
-	padding-top: _theme("spacings.tiny") !important;
-}
-
-.u-paddingTopSmall {
-	padding-top: _theme("spacings.small") !important;
-}
-
-.u-paddingTopStandard {
-	padding-top: _theme("spacings.standard") !important;
-}
-
-.u-paddingTopBig {
-	padding-top: _theme("spacings.big") !important;
-}
-
-.u-paddingTopBigger {
-	padding-top: _theme("spacings.bigger") !important;
-}
-
-.u-paddingTopBiggest {
-	padding-top: _theme("spacings.biggest") !important;
-}
-
-/*
-	Padding left
-*/
-
-.u-paddingLeftTiny {
-	padding-left: _theme("spacings.tiny") !important;
-}
-
-.u-paddingLeftSmall {
-	padding-left: _theme("spacings.small") !important;
-}
-
-.u-paddingLeftStandard {
-	padding-left: _theme("spacings.standard") !important;
-}
-
-.u-paddingLeftBig {
-	padding-left: _theme("spacings.big") !important;
-}
-
-.u-paddingLeftBigger {
-	padding-left: _theme("spacings.bigger") !important;
-}
-
-.u-paddingLeftBiggest {
-	padding-left: _theme("spacings.biggest") !important;
-}
-
-/*
-	Padding right
-*/
-
-.u-paddingRightTiny {
-	padding-right: _theme("spacings.tiny") !important;
-}
-
-.u-paddingRightSmall {
-	padding-right: _theme("spacings.small") !important;
-}
-
-.u-paddingRightStandard {
-	padding-right: _theme("spacings.standard") !important;
-}
-
-.u-paddingRightBig {
-	padding-right: _theme("spacings.big") !important;
-}
-
-.u-paddingRightBigger {
-	padding-right: _theme("spacings.bigger") !important;
-}
-
-.u-paddingRightBiggest {
-	padding-right: _theme("spacings.biggest") !important;
+	.u-paddingRight#{str-capitalize($name)} {
+		padding-right: $spacings !important;
+	}
 }
