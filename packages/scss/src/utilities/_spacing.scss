@@ -19,35 +19,35 @@
 
 @each $name, $spacings in _theme("spacings") {
 
-	&.u-marginBottom#{str-capitalize($name)} {
+	.u-marginBottom#{str-capitalize($name)} {
 		margin-bottom: $spacings !important;
 	}
 
-	&.u-marginTop#{str-capitalize($name)} {
+	.u-marginTop#{str-capitalize($name)} {
 		margin-top: $spacings !important;
 	}
 
-	&.u-marginLeft#{str-capitalize($name)} {
+	.u-marginLeft#{str-capitalize($name)} {
 		margin-left: $spacings !important;
 	}
 
-	&.u-marginRight#{str-capitalize($name)} {
+	.u-marginRight#{str-capitalize($name)} {
 		margin-right: $spacings !important;
 	}
 
-	&.u-paddingBottom#{str-capitalize($name)} {
+	.u-paddingBottom#{str-capitalize($name)} {
 		padding-bottom: $spacings !important;
 	}
 
-	&.u-paddingTop#{str-capitalize($name)} {
+	.u-paddingTop#{str-capitalize($name)} {
 		padding-top: $spacings !important;
 	}
 
-	&.u-paddingLeft#{str-capitalize($name)} {
+	.u-paddingLeft#{str-capitalize($name)} {
 		padding-left: $spacings !important;
 	}
 
-	&.u-paddingRight#{str-capitalize($name)} {
+	.u-paddingRight#{str-capitalize($name)} {
 		padding-right: $spacings !important;
 	}
 }
