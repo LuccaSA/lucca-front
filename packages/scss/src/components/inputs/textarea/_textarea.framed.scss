@@ -1,0 +1,49 @@
+// Simulate border with border-collapse
+// Not my trick, but this guy's trick https://codepen.io/Hawkun/pen/rsIEp
+@mixin fakeBorder($width, $color) {
+	box-shadow: $width 0 0 0  $color,
+	0 $width 0 0  $color,
+	$width $width 0 0  $color,
+	$width 0 0 0  $color inset,
+	0 $width 0 0  $color inset;
+}
+
+%textarea_framed {
+	max-width: none;
+	padding: 1rem;
+	@include fakeBorder(1px, _theme("commons.divider.color"));
+	textarea.input-field {
+		height: 9em;
+		padding: 0;
+		margin-top: 1.5em;
+		box-shadow: none;
+		resize: none;
+	}
+	// COLORING
+	@mixin inputColoring($palette) {
+		&:hover, &:focus {
+			@include fakeBorder(1px, _get($palette, "color"));
+		}
+		textarea.input-field:focus {
+			box-shadow: none;
+			background: transparent;
+			z-index: auto;
+		}
+	}
+
+	@include inputColoring(_component("input.compact.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+
+	// MODS
+	&.has-suffix {
+		textarea.input-field {
+			margin-right: 2em;
+		}
+	}
+}
