@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {User} from './user-tile.models';
 
 /**
@@ -9,7 +9,7 @@ import {User} from './user-tile.models';
 	templateUrl: './user-tile.component.html',
 	styleUrls: ['./user-tile.component.scss']
 })
-export class LuUserTileComponent implements OnInit {
+export class LuUserTileComponent {
 
 	/**
 	 * User to display.
@@ -21,9 +21,11 @@ export class LuUserTileComponent implements OnInit {
 	 */
 	@Input() role: string;
 
-	constructor() { }
+	hasUserPicture = () => !!this.user.picture && !!this.user.picture.url;
 
-	ngOnInit() {
-	}
+	getDefaultColorStyle = () => ({'background-color': 'rgb(215, 92, 112)'});  // TODO replace hardcoded color with algo
 
+	getBackgroundImageStyle = () => ({'background-image': 'url(' + this.user.picture.url + '?width=100)'});
+
+	getPictureTextPlaceholder = () => this.user.displayName.trim().toUpperCase().split(' ').map(str => str[0]).join('')
 }

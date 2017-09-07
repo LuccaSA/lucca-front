@@ -14,6 +14,12 @@ export class BasicComponent implements OnInit {
 		jobTitle: 'Actress'
 	};
 
+	noPicUser: User = {
+		displayName: 'Jean-Michel Pasdephoto',
+		picture: {url: ''},
+		jobTitle: 'Actor'
+	};
+
 	constructor() { }
 
 	ngOnInit() {
