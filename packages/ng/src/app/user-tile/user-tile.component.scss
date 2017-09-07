@@ -1,0 +1,25 @@
+:host {
+	display: flex;
+	align-items: stretch;
+	width: 300px;
+	.picture {
+		width: 55px;
+		height: 55px;
+		border-radius: 100%;
+		background-position: center;
+		background-size: 55px auto;
+		margin: 5px;
+	}
+	.user-info {
+		margin: auto 0;
+		* { display: block; }
+		.user-tile-label {
+			font-size: .9em;
+			line-height: 1.2;
+			color: _color('text.light');
+			&.ng-content {
+				font-size: .8em;
+			}
+		}
+	}
+}
