@@ -1,0 +1,101 @@
+// Simulate border with border-collapse
+// Not my trick, but this guy's trick https://codepen.io/Hawkun/pen/rsIEp
+@mixin fakeBorder($width, $color) {
+	box-shadow: $width 0 0 0  $color,
+	0 $width 0 0  $color,
+	$width $width 0 0  $color,
+	$width 0 0 0  $color inset,
+	0 $width 0 0  $color inset;
+}
+
+%input_framed {
+	padding: 0;
+	width: 100%;
+
+	.input-field {
+		@include fakeBorder(1px, _theme("commons.divider.color"));
+		height: 100%;
+		margin-bottom: 0;
+		padding: 3em 1rem .7rem;
+		width: 100%;
+		&:focus {
+			z-index: 1;
+		}
+	}
+
+	.input-label {
+		font-size: .85em;
+		left: 1rem;
+		right: 1rem;
+		top: .5rem;
+		width: auto;
+	}
+
+	.input-suffix {
+		position: absolute;
+		bottom: .5rem;
+		right: 1rem;
+		text-align: right;
+		color: _color("text.placeholder");
+	}
+
+	// COLORING
+	@mixin inputColoring($palette) {
+		.input-field:focus {
+			@include fakeBorder(1px, _get($palette, "color"));
+			background-color: transparentize(_get($palette, "color"), .95);
+			~ .input-label {
+				color: _get($palette, "color");
+			}
+		}
+	}
+
+	@include inputColoring(_component("input.framed.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+	// MOD
+	&.has-suffix {
+		.input-field {
+			padding-right: 3rem;
+		}
+	}
+	// STATUS
+
+	.input-field {
+		&[disabled], &[readonly] {
+			background-color: transparentize(_color("text.placeholder"), .5);
+			background-image: none;
+
+			& + label {
+				opacity: .5;
+			}
+		}
+
+		&.is-error {
+			background-color: transparentize(_color("error"), .9);
+			&:focus {
+				@include fakeBorder(1px, _color("error"));
+			}
+
+			~ label, ~ .input-suffix{
+				color: _color("error") !important;
+			}
+		}
+	}
+}
+
+.form.mod-framed {
+	.form-group {
+		display: flex;
+		flex-direction: column;
+	}
+	.form-group-line {
+		display: flex;
+		flex: 0 1 auto;
+	}
+}
