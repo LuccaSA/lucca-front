@@ -1,0 +1,12 @@
+<div class="tiles">
+	<lu-user-tile class="user-tile" [user]="user"></lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="user" [role]="'French actress'"></lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="user" [role]="'French actress'">
+		<a href="/">Contact</a>
+	</lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="user" [role]="'Approved by'">
+		<div mdTooltip="This guy, that other guy" [mdTooltipPosition]="'above'">
+			and two others
+		</div>
+	</lu-user-tile>
+</div>
