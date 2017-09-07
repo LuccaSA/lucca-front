@@ -1,4 +1,6 @@
-<div class="picture" [ngStyle]="{'background-image': 'url(' + user.picture.url + '?width=100)'}"></div>
+<div class="picture" [ngStyle]=" this.hasUserPicture() ? this.getBackgroundImageStyle() : this.getDefaultColorStyle()">
+	<span *ngIf="!hasUserPicture()">{{getPictureTextPlaceholder()}}</span>
+</div>
 <div class="user-info">
 	<span class="user-tile-label">{{role ? role : user.jobTitle}}</span>
 	<span class="user-tile-label">{{user.displayName}}</span>
