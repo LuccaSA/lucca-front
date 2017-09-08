@@ -1,31 +1,37 @@
-<div>
-	<md-input-container>
-		<input mdInput [mdDatepicker]="pickerMin" [(ngModel)]="min" placeholder="{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}">
-		<md-datepicker-toggle mdSuffix [for]="pickerMin"></md-datepicker-toggle>
-		<md-datepicker  (selectedChanged)="updateMin($event)" #pickerMin></md-datepicker>
-	</md-input-container>
+<div class="custom-range-picker-inputs">
+	<div class="input mod-inline">
+		<input class="input-field"
+					 [ngClass]="{'is-filled': !!min}"
+					 [mdDatepicker]="pickerMin"  [(ngModel)]="min" placeholder="../../....">
+		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
+		<md-datepicker-toggle [for]="pickerMin"></md-datepicker-toggle>
+		<md-datepicker (selectedChanged)="updateMin($event)" #pickerMin></md-datepicker>
+	</div>
 
-	<md-input-container>
-		<input mdInput [mdDatepicker]="pickerMax" [(ngModel)]="max" placeholder="{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}">
-		<md-datepicker-toggle mdSuffix [for]="pickerMax"></md-datepicker-toggle>
+	<div class="input mod-inline">
+		<input class="input-field"
+					 [ngClass]="{'is-filled': !!max}"
+					 [mdDatepicker]="pickerMax" [(ngModel)]="max" placeholder="../../....">
+		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
+		<md-datepicker-toggle [for]="pickerMax"></md-datepicker-toggle>
 		<md-datepicker (selectedChanged)="updateMax($event)" #pickerMax></md-datepicker>
-	</md-input-container>
+	</div>
 </div>
 
-<div>
+<div class="custom-range-picker-shortcuts" *ngIf="!!max || !!min">
 	<div *ngIf="!!max && !!min && max.isSame(min, 'day')">
-		<button class="button"  (click)="close(true, true)">
+		<button class="button mod-wired"  (click)="close(true, true)">
 			{{ displayDate(min) }}
 		</button>
 	</div>
-	<button class="button" *ngIf="!!min" (click)="close(true, false)">
+	<button class="button mod-wired" *ngIf="!!min" (click)="close(true, false)">
 		{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM' | translate:{date: displayDate(min)} }}
 	</button>
-	<button class="button" *ngIf="!!max" (click)="close(false, true)">
+	<button class="button mod-wired" *ngIf="!!max" (click)="close(false, true)">
 		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(max)} }}
 	</button>
 	<div *ngIf="!!max && !!min && !max.isSame(min, 'day')">
-		<button class="button" [disabled]="max.isBefore(min)" (click)="close(true, true)">
+		<button class="button mod-wired" [disabled]="max.isBefore(min)" (click)="close(true, true)">
 			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{dateMin: displayDate(min), dateMax: displayDate(max)} }}
 		</button> <br/>
 	</div>

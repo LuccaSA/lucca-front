@@ -1,0 +1,8 @@
+@mixin box-shadow-override ($hasHover:false) {
+	box-shadow: unquote(_theme("commons.box-shadow")) !important;
+	@if $hasHover {
+		&:hover {
+			box-shadow: unquote(_theme("commons.hover.box-shadow")) !important;
+		}
+	}
+}
