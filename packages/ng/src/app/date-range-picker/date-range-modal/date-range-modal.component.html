@@ -1,7 +1,6 @@
 <div class="date-range-modal-inputs">
 	<div class="input mod-inline">
 		<input class="input-field"
-					 [ngClass]="{'is-filled': !!start}"
 					 [mdDatepicker]="pickerStart" [(ngModel)]="start" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
 		<md-datepicker-toggle [for]="pickerStart"></md-datepicker-toggle>
@@ -10,7 +9,6 @@
 
 	<div class="input mod-inline">
 		<input class="input-field"
-					 [ngClass]="{'is-filled': !!end}"
 					 [mdDatepicker]="pickerEnd" [(ngModel)]="end" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
 		<md-datepicker-toggle [for]="pickerEnd"></md-datepicker-toggle>
