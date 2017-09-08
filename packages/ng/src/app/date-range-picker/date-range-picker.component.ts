@@ -63,6 +63,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	}
 
 	set selectedChoice(choice: IDateRangeSelectChoice) {
+		this.customChoice.range = choice.range;  // allows dialog to display selected range on open
 		this._selectedChoice = choice;
 		this.propagateChange(choice.range);
 	}

@@ -7,7 +7,6 @@ export const translations = {
 
 		LU_DATE_RANGE_PICKER_BUTTON_FROM: 'Starting {{date}}',
 		LU_DATE_RANGE_PICKER_BUTTON_TO: '{{date}} and before',
-		LU_DATE_RANGE_PICKER_BUTTON_FROM_TO: 'From {{start}} to {{end}}',
 
 	},
 	fr: {
@@ -18,6 +17,5 @@ export const translations = {
 
 		LU_DATE_RANGE_PICKER_BUTTON_FROM: 'Depuis le {{date}}',
 		LU_DATE_RANGE_PICKER_BUTTON_TO: 'À partir du {{date}}',
-		LU_DATE_RANGE_PICKER_BUTTON_FROM_TO: 'Du {{start}} au {{end}}',
 	},
 };

@@ -16,23 +16,18 @@
 		<md-datepicker-toggle [for]="pickerEnd"></md-datepicker-toggle>
 		<md-datepicker #pickerEnd></md-datepicker>
 	</div>
+
+	<button *ngIf="!!end && !!start" [disabled]="end.isBefore(start)" class="button mod-wired"  (click)="close(true, true)">
+		OK
+	</button>
 </div>
 
 <div class="date-range-modal-shortcuts" *ngIf="!!end || !!start">
-	<div *ngIf="!!end && !!start && end.isSame(start, 'day')">
-		<button class="button mod-wired"  (click)="close(true, true)">
-			{{ displayDate(start) }}
-		</button>
-	</div>
+
 	<button class="button mod-wired" *ngIf="!!start" (click)="close(true, false)">
 		{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM' | translate:{date: displayDate(start)} }}
 	</button>
 	<button class="button mod-wired" *ngIf="!!end" (click)="close(false, true)">
 		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(end)} }}
 	</button>
-	<div *ngIf="!!end && !!start && !end.isSame(start, 'day')">
-		<button class="button mod-wired" [disabled]="end.isBefore(start)" (click)="close(true, true)">
-			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{start: displayDate(start), end: displayDate(end)} }}
-		</button> <br/>
-	</div>
 </div>
