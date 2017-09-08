@@ -42,8 +42,8 @@ export class CustomRangePickerComponent implements OnInit {
 		return date.format(('LL'));
 	}
 
-	close(withMin: boolean, withMax: boolean) {
-		this.dialogRef.close({start: withMin ? this.start : null, end: withMax ? this.end.add(1, 'day') : null});
+	close(withStart: boolean, withEnd: boolean) {
+		this.dialogRef.close({start: withStart ? this.start : null, end: withEnd ? this.end.add(1, 'day') : null});
 	}
 
 }

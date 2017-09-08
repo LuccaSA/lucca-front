@@ -2,19 +2,19 @@
 	<div class="input mod-inline">
 		<input class="input-field"
 					 [ngClass]="{'is-filled': !!start}"
-					 [mdDatepicker]="pickerMin" [(ngModel)]="start" placeholder="../../....">
+					 [mdDatepicker]="pickerStart" [(ngModel)]="start" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
-		<md-datepicker-toggle [for]="pickerMin"></md-datepicker-toggle>
-		<md-datepicker #pickerMin></md-datepicker>
+		<md-datepicker-toggle [for]="pickerStart"></md-datepicker-toggle>
+		<md-datepicker #pickerStart></md-datepicker>
 	</div>
 
 	<div class="input mod-inline">
 		<input class="input-field"
 					 [ngClass]="{'is-filled': !!end}"
-					 [mdDatepicker]="pickerMax" [(ngModel)]="end" placeholder="../../....">
+					 [mdDatepicker]="pickerEnd" [(ngModel)]="end" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
-		<md-datepicker-toggle [for]="pickerMax"></md-datepicker-toggle>
-		<md-datepicker #pickerMax></md-datepicker>
+		<md-datepicker-toggle [for]="pickerEnd"></md-datepicker-toggle>
+		<md-datepicker #pickerEnd></md-datepicker>
 	</div>
 </div>
 
