@@ -28,7 +28,7 @@ export class MomentDateAdapter extends DateAdapter<moment.Moment> {
 
 	getDateNames(): string[] {
 		const toReturn = [];
-		for( let i = 0 ; i < 31; i++) {
+		for (let i = 0; i < 31; i++) {
 		toReturn[i] = String(i + 1);
 		}
 		return toReturn;

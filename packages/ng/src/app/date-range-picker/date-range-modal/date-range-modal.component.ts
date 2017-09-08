@@ -35,7 +35,7 @@ export class DateRangeModalComponent implements OnInit {
 		if (newDate) {
 			newDate.locale(this.locale);
 		}
-		return newDate.isValid() ? newDate: null;
+		return newDate.isValid() ? newDate : null;
 	}
 
 	displayDate(date: moment.Moment): string {
