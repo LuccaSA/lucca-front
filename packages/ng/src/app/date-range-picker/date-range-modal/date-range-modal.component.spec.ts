@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomRangePickerComponent } from './date-range-modal.component';
+import { DateRangeModalComponent } from './date-range-modal.component';
 
-describe('CustomRangePickerComponent', () => {
-	let component: CustomRangePickerComponent;
-	let fixture: ComponentFixture<CustomRangePickerComponent>;
+describe('DateRangeModalComponent', () => {
+	let component: DateRangeModalComponent;
+	let fixture: ComponentFixture<DateRangeModalComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ CustomRangePickerComponent ]
+			declarations: [ DateRangeModalComponent ]
 		})
 			.compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(CustomRangePickerComponent);
+		fixture = TestBed.createComponent(DateRangeModalComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

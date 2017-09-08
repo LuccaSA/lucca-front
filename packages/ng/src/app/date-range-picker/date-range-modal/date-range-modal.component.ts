@@ -10,7 +10,7 @@ import {MomentDateAdapter} from '../../shared/moment/moment.date-adapter';
 	styleUrls: ['./date-range-modal.scss'],
 	templateUrl: './date-range-modal.component.html'
 })
-export class CustomRangePickerComponent implements OnInit {
+export class DateRangeModalComponent implements OnInit {
 
 	start: moment.Moment = null;
 	end: moment.Moment = null;

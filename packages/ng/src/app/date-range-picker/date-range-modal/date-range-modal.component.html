@@ -1,4 +1,4 @@
-<div class="custom-range-picker-inputs">
+<div class="date-range-modal-inputs">
 	<div class="input mod-inline">
 		<input class="input-field"
 					 [ngClass]="{'is-filled': !!start}"
@@ -18,7 +18,7 @@
 	</div>
 </div>
 
-<div class="custom-range-picker-shortcuts" *ngIf="!!end || !!start">
+<div class="date-range-modal-shortcuts" *ngIf="!!end || !!start">
 	<div *ngIf="!!end && !!start && end.isSame(start, 'day')">
 		<button class="button mod-wired"  (click)="close(true, true)">
 			{{ displayDate(start) }}

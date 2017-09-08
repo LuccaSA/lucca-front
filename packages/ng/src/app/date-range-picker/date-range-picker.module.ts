@@ -12,7 +12,7 @@ import {
 } from '@angular/material';
 import {LuSharedModule} from '../shared/shared.module';
 import {LuDateRangePickerComponent} from './date-range-picker.component';
-import { CustomRangePickerComponent } from './date-range-modal/date-range-modal.component';
+import { DateRangeModalComponent } from './date-range-modal/date-range-modal.component';
 import {MomentDateAdapter} from '../shared/moment/moment.date-adapter';
 import {MOMENT_DATE_FORMATS} from '../shared/moment/moment.date-formats';
 
@@ -28,8 +28,8 @@ import {MOMENT_DATE_FORMATS} from '../shared/moment/moment.date-formats';
 		MdNativeDateModule,
 		MdDialogModule,
 	],
-	entryComponents: [CustomRangePickerComponent],
-	declarations: [LuDateRangePickerComponent, CustomRangePickerComponent],
+	entryComponents: [DateRangeModalComponent],
+	declarations: [LuDateRangePickerComponent, DateRangeModalComponent],
 	exports: [LuDateRangePickerComponent],
 	providers: [
 		{provide: DateAdapter, useClass: MomentDateAdapter},

@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {MdDialog} from '@angular/material';
-import {CustomRangePickerComponent} from './date-range-modal/date-range-modal.component';
+import {DateRangeModalComponent} from './date-range-modal/date-range-modal.component';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 import {LuTranslateService} from '../shared/translation.service';
@@ -78,7 +78,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	}
 
 	pickCustomRange() {
-		const dialog = this.dialog.open(CustomRangePickerComponent, {data: this.selectedChoice.range});
+		const dialog = this.dialog.open(DateRangeModalComponent, {data: this.selectedChoice.range});
 		dialog.afterClosed().subscribe(range => {
 			if (range) {
 				this.selectCustomRange({start: range.start, end: range.end});
