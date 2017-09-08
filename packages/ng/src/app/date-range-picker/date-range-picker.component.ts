@@ -5,7 +5,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 import {LuTranslateService} from '../shared/translation.service';
 import {translations} from './translate/date-range-picker.translate';
-import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.models';
+import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.model';
 
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
