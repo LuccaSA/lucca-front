@@ -74,11 +74,7 @@ export class MomentDateAdapter extends DateAdapter<moment.Moment> {
 	}
 
 	private add(date: moment.Moment, num: number, type: 'days' | 'months' | 'years') {
-		let afterAdd = moment(date);
-		afterAdd.add(num, type);
-		console.log('before', date.format('LL'))
-		console.log('after', afterAdd.format('LL'))
-		return afterAdd;
+		return this.clone(date).add(num, type);
 	}
 
 	addCalendarYears(date: moment.Moment, years: number): moment.Moment {
@@ -119,8 +115,8 @@ export class MomentDateAdapter extends DateAdapter<moment.Moment> {
 	}
 
 	clampDate(date: moment.Moment, min?: any | moment.Moment, max?: any | moment.Moment): moment.Moment {
-		const minDate = moment(min);
-		const maxDate = moment(max);
+		const minDate = min ? moment(min) : date;
+		const maxDate = max ? moment(max) : date;
 		return date.isSameOrBefore(minDate) ? minDate : date.isSameOrAfter(maxDate) ? maxDate : date;
 	}
 
