@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 import * as moment from 'moment';
 import {LuTranslateService} from '../../shared/translation.service';
-import {DateRange} from '../date-range-picker.models';
+import {IDateRange} from '../date-range-picker.models';
 import {MomentDateAdapter} from '../../shared/moment/moment.date-adapter';
 
 @Component({
@@ -17,7 +17,7 @@ export class CustomRangePickerComponent implements OnInit {
 	locale: string;
 
 	constructor (
-		@Inject(MD_DIALOG_DATA) public data: DateRange,
+		@Inject(MD_DIALOG_DATA) public data: IDateRange,
 		public dateAdapter: MomentDateAdapter,
 		public translate: LuTranslateService,
 		public dialogRef: MdDialogRef<any>

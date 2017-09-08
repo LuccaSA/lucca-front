@@ -1,11 +1,11 @@
 import * as moment from 'moment';
 
-export interface DateRangeSelectChoice {
-	range: DateRange;
+export interface IDateRangeSelectChoice {
+	range: IDateRange;
 	label: string;
 }
 
-export interface DateRange {
+export interface IDateRange {
 	start: moment.Moment;
 	end: moment.Moment;
 }

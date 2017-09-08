@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
-import {DateRange, DateRangeSelectChoice} from '../../../../src/app/date-range-picker/date-range-picker.models';
+import {IDateRange, IDateRangeSelectChoice} from '../../../../src/app/date-range-picker/date-range-picker.models';
 
 @Component({
 	selector: 'demo-basic-date-range-picker',
@@ -9,9 +9,9 @@ import {DateRange, DateRangeSelectChoice} from '../../../../src/app/date-range-p
 })
 export class BasicComponent {
 
-	preConfiguredRanges: DateRangeSelectChoice[];
+	preConfiguredRanges: IDateRangeSelectChoice[];
 	placeholder: string;
-	range: DateRange = {start: null, end: null};
+	range: IDateRange = {start: null, end: null};
 
 	constructor() {
 		const today = moment().startOf('day');

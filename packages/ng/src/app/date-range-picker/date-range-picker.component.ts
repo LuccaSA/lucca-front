@@ -5,7 +5,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 import {LuTranslateService} from '../shared/translation.service';
 import {translations} from './translate/date-range-picker.translate';
-import {DateRange, DateRangeSelectChoice} from './date-range-picker.models';
+import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.models';
 
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
@@ -31,13 +31,13 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 
 	/**
 	 * Array of choices the user will select from.
-	 * Import class DateRangeSelectChoice in order to build choices.
+	 * Import class IDateRangeSelectChoice in order to build choices.
 	 */
-	@Input() preConfiguredRanges: DateRangeSelectChoice[];
+	@Input() preConfiguredRanges: IDateRangeSelectChoice[];
 
-	customChoice: DateRangeSelectChoice;
+	customChoice: IDateRangeSelectChoice;
 
-	_selectedChoice: DateRangeSelectChoice;
+	_selectedChoice: IDateRangeSelectChoice;
 
 	propagateChange = (_: any) => {};
 
@@ -54,7 +54,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 
 	registerOnTouched(): void { }
 
-	writeValue(range: DateRange): void {
+	writeValue(range: IDateRange): void {
 		if (!this.isEmptyRange(range)) {
 			this.selectCustomRange(range);
 		} else {
@@ -62,7 +62,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		}
 	}
 
-	set selectedChoice(choice: DateRangeSelectChoice) {
+	set selectedChoice(choice: IDateRangeSelectChoice) {
 		this._selectedChoice = choice;
 		this.propagateChange(choice.range);
 	}
@@ -71,7 +71,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		return this._selectedChoice;
 	}
 
-	onChoiceChange(choice: DateRangeSelectChoice) {
+	onChoiceChange(choice: IDateRangeSelectChoice) {
 		if (!this.isEmptyRange(choice.range)) {
 			this.selectedChoice = choice;
 		}
@@ -86,12 +86,12 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		});
 	}
 
-	selectCustomRange(range: DateRange) {
+	selectCustomRange(range: IDateRange) {
 		this.customChoice.range = range;
 		this.selectedChoice = this.customChoice;
 	}
 
-	isEmptyRange(range: DateRange) {
+	isEmptyRange(range: IDateRange) {
 		return !range || (!range.start && !range.end);
 	}
 
