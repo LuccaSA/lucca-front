@@ -81,7 +81,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		const dialog = this.dialog.open(CustomRangePickerComponent, {data: this.selectedChoice.range});
 		dialog.afterClosed().subscribe(range => {
 			if (range) {
-				this.selectCustomRange({start: range.min, end: range.max});
+				this.selectCustomRange({start: range.start, end: range.end});
 			}
 		});
 	}

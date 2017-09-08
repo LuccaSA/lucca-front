@@ -12,8 +12,8 @@ import {MomentDateAdapter} from '../../shared/moment/moment.date-adapter';
 })
 export class CustomRangePickerComponent implements OnInit {
 
-	min: moment.Moment = null;
-	max: moment.Moment = null;
+	start: moment.Moment = null;
+	end: moment.Moment = null;
 	locale: string;
 
 	constructor (
@@ -24,8 +24,8 @@ export class CustomRangePickerComponent implements OnInit {
 	) {
 		this.locale = translate.getCurrentLang();
 		dateAdapter.setLocale(this.locale);
-		this.min = this.initDate(data.start);
-		this.max = this.initDate(moment(data.end).subtract(1, 'day'));
+		this.start = this.initDate(data.start);
+		this.end = this.initDate(moment(data.end).subtract(1, 'day'));
 	}
 
 	ngOnInit() { }
@@ -43,7 +43,7 @@ export class CustomRangePickerComponent implements OnInit {
 	}
 
 	close(withMin: boolean, withMax: boolean) {
-		this.dialogRef.close({min: withMin ? this.min : null, max: withMax ? this.max.add(1, 'day') : null});
+		this.dialogRef.close({start: withMin ? this.start : null, end: withMax ? this.end.add(1, 'day') : null});
 	}
 
 }

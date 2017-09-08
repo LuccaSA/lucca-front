@@ -1,8 +1,8 @@
 <div class="custom-range-picker-inputs">
 	<div class="input mod-inline">
 		<input class="input-field"
-					 [ngClass]="{'is-filled': !!min}"
-					 [mdDatepicker]="pickerMin"  [(ngModel)]="min" placeholder="../../....">
+					 [ngClass]="{'is-filled': !!start}"
+					 [mdDatepicker]="pickerMin" [(ngModel)]="start" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
 		<md-datepicker-toggle [for]="pickerMin"></md-datepicker-toggle>
 		<md-datepicker #pickerMin></md-datepicker>
@@ -10,29 +10,29 @@
 
 	<div class="input mod-inline">
 		<input class="input-field"
-					 [ngClass]="{'is-filled': !!max}"
-					 [mdDatepicker]="pickerMax" [(ngModel)]="max" placeholder="../../....">
+					 [ngClass]="{'is-filled': !!end}"
+					 [mdDatepicker]="pickerMax" [(ngModel)]="end" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
 		<md-datepicker-toggle [for]="pickerMax"></md-datepicker-toggle>
 		<md-datepicker #pickerMax></md-datepicker>
 	</div>
 </div>
 
-<div class="custom-range-picker-shortcuts" *ngIf="!!max || !!min">
-	<div *ngIf="!!max && !!min && max.isSame(min, 'day')">
+<div class="custom-range-picker-shortcuts" *ngIf="!!end || !!start">
+	<div *ngIf="!!end && !!start && end.isSame(start, 'day')">
 		<button class="button mod-wired"  (click)="close(true, true)">
-			{{ displayDate(min) }}
+			{{ displayDate(start) }}
 		</button>
 	</div>
-	<button class="button mod-wired" *ngIf="!!min" (click)="close(true, false)">
-		{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM' | translate:{date: displayDate(min)} }}
+	<button class="button mod-wired" *ngIf="!!start" (click)="close(true, false)">
+		{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM' | translate:{date: displayDate(start)} }}
 	</button>
-	<button class="button mod-wired" *ngIf="!!max" (click)="close(false, true)">
-		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(max)} }}
+	<button class="button mod-wired" *ngIf="!!end" (click)="close(false, true)">
+		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(end)} }}
 	</button>
-	<div *ngIf="!!max && !!min && !max.isSame(min, 'day')">
-		<button class="button mod-wired" [disabled]="max.isBefore(min)" (click)="close(true, true)">
-			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{start: displayDate(min), end: displayDate(max)} }}
+	<div *ngIf="!!end && !!start && !end.isSame(start, 'day')">
+		<button class="button mod-wired" [disabled]="end.isBefore(start)" (click)="close(true, true)">
+			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{start: displayDate(start), end: displayDate(end)} }}
 		</button> <br/>
 	</div>
 </div>
