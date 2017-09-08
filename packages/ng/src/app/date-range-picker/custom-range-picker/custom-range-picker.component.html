@@ -5,7 +5,7 @@
 					 [mdDatepicker]="pickerMin"  [(ngModel)]="min" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
 		<md-datepicker-toggle [for]="pickerMin"></md-datepicker-toggle>
-		<md-datepicker (selectedChanged)="updateMin($event)" #pickerMin></md-datepicker>
+		<md-datepicker #pickerMin></md-datepicker>
 	</div>
 
 	<div class="input mod-inline">
@@ -14,7 +14,7 @@
 					 [mdDatepicker]="pickerMax" [(ngModel)]="max" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
 		<md-datepicker-toggle [for]="pickerMax"></md-datepicker-toggle>
-		<md-datepicker (selectedChanged)="updateMax($event)" #pickerMax></md-datepicker>
+		<md-datepicker #pickerMax></md-datepicker>
 	</div>
 </div>
 
