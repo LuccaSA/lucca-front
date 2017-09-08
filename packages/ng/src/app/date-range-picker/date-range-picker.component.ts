@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {MdDialog} from '@angular/material';
-import {CustomRangePickerComponent} from './custom-range-picker/custom-range-picker.component';
+import {CustomRangePickerComponent} from './date-range-modal/date-range-modal.component';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 import {LuTranslateService} from '../shared/translation.service';

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomRangePickerComponent } from './custom-range-picker.component';
+import { CustomRangePickerComponent } from './date-range-modal.component';
 
 describe('CustomRangePickerComponent', () => {
 	let component: CustomRangePickerComponent;

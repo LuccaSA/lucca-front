@@ -7,8 +7,8 @@ import {MomentDateAdapter} from '../../shared/moment/moment.date-adapter';
 
 @Component({
 	selector: 'lu-custom-range-picker',
-	styleUrls: ['./custom-range-picker.scss'],
-	templateUrl: './custom-range-picker.component.html'
+	styleUrls: ['./date-range-modal.scss'],
+	templateUrl: './date-range-modal.component.html'
 })
 export class CustomRangePickerComponent implements OnInit {
 
