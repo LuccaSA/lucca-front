@@ -23,9 +23,13 @@ export class LuUserTileComponent {
 
 	hasUserPicture = () => !!this.user.picture && !!this.user.picture.url;
 
-	getDefaultColorStyle = () => ({'background-color': 'rgb(215, 92, 112)'});  // TODO replace hardcoded color with algo
+	getPictureTextPlaceholder = () => this.getUserNamesListUpperCase().map(str => str[0]).join('');
 
-	getBackgroundImageStyle = () => ({'background-image': 'url(' + this.user.picture.url + '?width=100)'});
+	getBackgroundImageStyle = () => ({'background-image': `url('${this.user.picture.url}?width=100)`});
 
-	getPictureTextPlaceholder = () => this.user.displayName.trim().toUpperCase().split(' ').map(str => str[0]).join('')
+	getDefaultColorStyle = () => ({'background-color': `hsl(${this.getNameHue()}, 60%, 60%)`});
+
+	private getNameHue = () => this.getUserNamesListUpperCase().map(str => str.charCodeAt(0)).reduce((sum, a) => sum + a, 0) * 2 % 360;
+
+	private getUserNamesListUpperCase = () => this.user.displayName.trim().toUpperCase().split(' ');
 }
