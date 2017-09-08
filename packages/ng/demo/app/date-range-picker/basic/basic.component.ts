@@ -11,7 +11,7 @@ export class BasicComponent {
 
 	preConfiguredRanges: DateRangeSelectChoice[];
 	placeholder: string;
-	range: DateRange = {dateMin: null, dateMax: null};
+	range: DateRange = {start: null, end: null};
 
 	constructor() {
 		const today = moment().startOf('day');
@@ -19,13 +19,13 @@ export class BasicComponent {
 		this.placeholder = 'Select date range';
 
 		this.preConfiguredRanges = [
-			{label: 'This day', range: {dateMin: today.clone(), dateMax:today.clone().add(1, 'day')}},
-			{label: 'This month', range: {dateMin: today.clone().startOf('month'), dateMax: today.clone().add(1, 'month').startOf('month')}}
+			{label: 'This day', range: {start: today.clone(), end:today.clone().add(1, 'day')}},
+			{label: 'This month', range: {start: today.clone().startOf('month'), end: today.clone().add(1, 'month').startOf('month')}}
 		];
 	}
 
 	resetRange() {
-		this.range = {dateMin: null, dateMax: null};
+		this.range = {start: null, end: null};
 	}
 
 }

@@ -32,7 +32,7 @@
 	</button>
 	<div *ngIf="!!max && !!min && !max.isSame(min, 'day')">
 		<button class="button mod-wired" [disabled]="max.isBefore(min)" (click)="close(true, true)">
-			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{dateMin: displayDate(min), dateMax: displayDate(max)} }}
+			{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM_TO' | translate:{start: displayDate(min), end: displayDate(max)} }}
 		</button> <br/>
 	</div>
 </div>

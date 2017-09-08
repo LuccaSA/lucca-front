@@ -44,7 +44,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 
 	constructor(public dialog: MdDialog, public translateService: LuTranslateService) {
 		this.preConfiguredRanges = [];
-		this.customChoice = {label: null, range: { dateMin: null, dateMax: null}};
+		this.customChoice = {label: null, range: { start: null, end: null}};
 		translateService.setTranslations(translations);
 	}
 
@@ -58,7 +58,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		if (!this.isEmptyRange(range)) {
 			this.selectCustomRange(range);
 		} else {
-			this.selectedChoice = {label: '', range: { dateMin: null, dateMax: null}};
+			this.selectedChoice = {label: '', range: { start: null, end: null}};
 		}
 	}
 
@@ -81,7 +81,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 		const dialog = this.dialog.open(CustomRangePickerComponent, {data: this.selectedChoice.range});
 		dialog.afterClosed().subscribe(range => {
 			if (range) {
-				this.selectCustomRange({dateMin: range.min, dateMax: range.max});
+				this.selectCustomRange({start: range.min, end: range.max});
 			}
 		});
 	}
@@ -92,7 +92,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	}
 
 	isEmptyRange(range: DateRange) {
-		return !range || (!range.dateMin && !range.dateMax);
+		return !range || (!range.start && !range.end);
 	}
 
 }

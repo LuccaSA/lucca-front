@@ -24,8 +24,8 @@ export class CustomRangePickerComponent implements OnInit {
 	) {
 		this.locale = translate.getCurrentLang();
 		dateAdapter.setLocale(this.locale);
-		this.min = this.initDate(data.dateMin);
-		this.max = this.initDate(moment(data.dateMax).subtract(1, 'day'));
+		this.min = this.initDate(data.start);
+		this.max = this.initDate(moment(data.end).subtract(1, 'day'));
 	}
 
 	ngOnInit() { }

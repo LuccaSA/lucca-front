@@ -6,8 +6,8 @@
 	</lu-date-range-picker>
 </div>
 
-<p>from : {{range.dateMin ? range.dateMin.format('LL') : 'beginning of time'}}</p>
-<p>to :   {{range.dateMax ? range.dateMax.format('LL') : 'end of time'}}</p>
+<p>from : {{range.start ? range.start.format('LL') : 'beginning of time'}}</p>
+<p>to : {{range.end ? range.end.format('LL') : 'end of time'}}</p>
 
 <div>range : {{range | json}} </div>
 

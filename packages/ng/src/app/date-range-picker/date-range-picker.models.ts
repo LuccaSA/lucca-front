@@ -6,6 +6,6 @@ export interface DateRangeSelectChoice {
 }
 
 export interface DateRange {
-	dateMin: moment.Moment;
-	dateMax: moment.Moment;
+	start: moment.Moment;
+	end: moment.Moment;
 }
