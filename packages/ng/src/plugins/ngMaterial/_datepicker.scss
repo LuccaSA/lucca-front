@@ -19,6 +19,8 @@
 // CALENDAR
 .mat-calendar {
 	width: 296px;
+	height: auto !important;
+	min-height: 355px !important;
 	.mat-button {
 		@extend .button.mod-flat;
 	}
