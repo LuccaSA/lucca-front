@@ -14,7 +14,7 @@
 	transition: opacity 250ms ease;
 
 	&::after {
-		background: _color("primary");
+		//background: _color("primary");
 		bottom: -1px;
 		content: "";
 		display: block;
@@ -31,6 +31,29 @@
 
 		&::after {
 			transform: scale(1);
+		}
+	}
+}
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.menu {
+	@mixin menuColoring($palette) {
+		background: _get($palette, "color");
+	}
+
+	// default color
+	.menu-link::after {
+		@include menuColoring(_component("menu.default-palette"));
+	}
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			.menu-link::after {
+				@include menuColoring($palette);
+			}
 		}
 	}
 }
