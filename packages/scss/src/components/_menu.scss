@@ -6,15 +6,14 @@
 
 .menu-link {
 	color: _color("text.default");
-	margin: 0 1.2rem;
+	margin: _component("menu.margin");
 	opacity: .75;
-	padding: 1.5rem 0;
+	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
-	transition: opacity 250ms ease;
+	transition: opacity _theme("commons.animations.durations.standard") ease;
 
 	&::after {
-		//background: _color("primary");
 		bottom: -1px;
 		content: "";
 		display: block;
@@ -23,7 +22,7 @@
 		position: absolute;
 		right: 0;
 		transform: scale(0, 1);
-		transition: transform 250ms ease;
+		transition: transform _theme("commons.animations.durations.standard") ease;
 	}
 
 	&:hover {
