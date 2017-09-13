@@ -35,7 +35,13 @@ export class LuUserTileComponent {
 
 	getDefaultColorStyle = () => ({'background-color': `hsl(${this.getNameHue()}, 60%, 60%)`});
 
-	private getNameHue = () => this.getUserNamesListUpperCase().map(str => str.charCodeAt(0)).reduce((sum, a) => sum + a, 0) * 2 % 360;
+	private getNameHue() {
+		const initialsAsciiCodes = this.getUserNamesListUpperCase().map(str => str.charCodeAt(0));
+		const averageOfAsciiCodes = initialsAsciiCodes
+			.reduce((sum, a) => sum + a, 0) / initialsAsciiCodes.length; // between 65 and 90, see ascii codes for capitals
+		const asciiCodeToHue = (averageOfAsciiCodes - 64) * 360 / 26 % 360; // between 0 and 359, see documentation for css hsl
+	return asciiCodeToHue;
+}
 
 	private getUserNamesListUpperCase = () => [this.user.firstName.toUpperCase(), this.user.lastName.toUpperCase()];
 }
