@@ -1,8 +1,8 @@
 <div class="picture" [ngStyle]=" this.hasUserPicture() ? this.getBackgroundImageStyle() : this.getDefaultColorStyle()">
-	<span *ngIf="!hasUserPicture()">{{getPictureTextPlaceholder()}}</span>
+	<span *ngIf="!hasUserPicture()">{{pictureTextPlaceholder}}</span>
 </div>
 <div class="user-info">
 	<span class="user-tile-label">{{role ? role : user.jobTitle}}</span>
-	<span class="user-tile-label">{{user.displayName}}</span>
+	<span class="user-tile-label">{{displayName}}</span>
 	<span class="user-tile-label ng-content"><ng-content></ng-content></span>
 </div>
