@@ -63,6 +63,9 @@ export class MomentDateAdapter extends DateAdapter<moment.Moment> {
 	}
 
 	parse(value: any, parseFormat: any): any | moment.Moment {
+		if (!value) {
+			return null;
+		}
 		if (!parseFormat) {
 			parseFormat = moment.locale().includes('fr') ? 'DDMMYYYY' : 'MMDDYYYY';
 		}
@@ -98,7 +101,7 @@ export class MomentDateAdapter extends DateAdapter<moment.Moment> {
 	}
 
 	isValid(date: moment.Moment): boolean {
-		return date.isValid();
+		return !date || date.isValid();
 	}
 
 	setLocale(locale: any): void {
