@@ -55,7 +55,7 @@ export class MomentDateAdapter extends DateAdapter<moment.Moment> {
 	}
 
 	createDate(year: number, month: number, date: number): moment.Moment {
-		return moment(`${year} ${month} ${date}`, 'YYYY MM DD').add(1, 'month');
+		return moment(`${year} ${month + 1} ${date}`, 'YYYY MM DD');
 	}
 
 	today(): moment.Moment {
