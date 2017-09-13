@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {User} from './user-tile.models';
+import {IUser} from './user-tile.models';
 
 /**
- * Displays user picture and name. User's role can be specified, and the footer is customizable.
+ * Displays user picture and name. IUser's role can be specified, and the footer is customizable.
  */
 @Component({
 	selector: 'lu-user-tile',
@@ -12,12 +12,12 @@ import {User} from './user-tile.models';
 export class LuUserTileComponent {
 
 	/**
-	 * User to display.
+	 * IUser to display.
 	 */
-	@Input() user: User;
+	@Input() user: IUser;
 
 	/**
-	 * User role to display
+	 * IUser role to display
 	 */
 	@Input() role: string;
 
