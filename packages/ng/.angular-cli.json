@@ -25,7 +25,8 @@
             ],
             "stylePreprocessorOptions": {
                 "includePaths": [
-                    "theming"
+                    "theming",
+                    "../node_modules/@lucca-front/scss/src/overrides"
                 ]
             },
             "scripts": [],
