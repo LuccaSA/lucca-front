@@ -1,0 +1,14 @@
+<div class="demo-container">
+	<lu-date-range-picker
+		[(ngModel)]="range"
+		[placeholder]="placeholder"
+		[preConfiguredRanges]="preConfiguredRanges">
+	</lu-date-range-picker>
+</div>
+
+<p>from : {{range.start ? range.start.format('LL') : 'beginning of time'}}</p>
+<p>to : {{range.end ? range.end.format('LL') : 'end of time'}}</p>
+
+<div>range : {{range | json}} </div>
+
+<button class="button" (click)="resetRange()">Reset</button>

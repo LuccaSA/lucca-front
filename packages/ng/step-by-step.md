@@ -117,6 +117,54 @@ const API_DOCS = {
   },
 ```
 
+### Translations
+Import the `SharedModule` in your module. It provides a `LuTranslateService` using [ngx-translate](https://github.com/ngx-translate/core)
+to handle translations for you.
+
+```
+@NgModule({
+  imports: [
+    CommonModule,
+    LuSharedModule
+  ]
+```
+
+In your module folder, create a file containing a `Translations` object. Each key of this object will represent a language code.
+The value associated to this language code must be an object made of key/value pairs for translation.
+
+In `lol/translate/lol.translate.ts` : 
+```
+export const Translations = {
+  en: {
+    LU_LOL_WORKS: "lol works !"
+  },
+  fr: {
+    LU_LOL_WORKS: "le rire fonctionne !"
+  }
+};
+
+```
+Be careful to cautiously prefix all your translation keys.
+
+Then, add those translations using the `LuTranslateService` in your component : 
+
+```
+export class LuLolComponent implements OnInit {
+  constructor(public translateService: LuTranslateService) {
+    translateService.setTranslations(Translations);
+  }
+}
+```
+
+That's it ! Use your translation keys in your code. `The SharedModule` already provides the ngx-translate pipe.
+
+```
+<p>
+  {{ 'LU_LOL_WORKS' | translate }}
+</p>
+``` 
+
+
 ## Create the doc component in the demo
 
 If you want a web page to work and develop your component, the demo app is there for you. It's organized around a router with a route per component (DIP), and for each route, the documentation associated with the component and a series of code snippets to serve as examples.

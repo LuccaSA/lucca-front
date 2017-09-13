@@ -1,0 +1,37 @@
+<div class="date-range-modal-inputs">
+	<div class="input mod-inline">
+		<input class="input-field"
+					 #startInput
+					 [ngClass]="{'is-filled': !!startInput.value}"
+					 [mdDatepicker]="pickerStart" [(ngModel)]="start" placeholder="../../....">
+		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
+		<md-datepicker-toggle [for]="pickerStart"></md-datepicker-toggle>
+		<md-datepicker #pickerStart></md-datepicker>
+	</div>
+
+	<div class="input mod-inline">
+		<input class="input-field"
+					 #endInput
+					 [ngClass]="{'is-filled': !!endInput.value, 'is-error': start && end && end.isBefore(start)}"
+					 [mdDatepicker]="pickerEnd" [(ngModel)]="end" placeholder="../../....">
+		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
+		<md-datepicker-toggle [for]="pickerEnd"></md-datepicker-toggle>
+		<md-datepicker #pickerEnd></md-datepicker>
+	</div>
+
+	<button [disabled]="(!end || !start) || end.isBefore(start)" class="button mod-wired ok-button"  (click)="close(true, true)">
+		OK
+	</button>
+</div>
+<div class="input-messages" *ngIf="start && end && end.isBefore(start)">
+	<div class="input-error">La date de fin est antérieure à la date de début</div>
+</div>
+
+<div class="date-range-modal-shortcuts" *ngIf="!!end || !!start">
+	<button class="button mod-wired" *ngIf="!!start" (click)="close(true, false)">
+		{{ 'LU_DATE_RANGE_PICKER_BUTTON_FROM' | translate:{date: displayDate(start)} }}
+	</button>
+	<button class="button mod-wired" *ngIf="!!end" (click)="close(false, true)">
+		{{ 'LU_DATE_RANGE_PICKER_BUTTON_TO' | translate:{date: displayDate(end)} }}
+	</button>
+</div>

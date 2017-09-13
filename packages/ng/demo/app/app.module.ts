@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import { DemoLolModule } from './lol/lol.module';
+import {DemoDateRangePickerModule} from './date-range-picker/date-range-picker.module';
 
 @NgModule({
 	declarations: [
@@ -13,6 +14,7 @@ import { DemoLolModule } from './lol/lol.module';
 	],
 	imports: [
 		DemoLolModule,
+		DemoDateRangePickerModule,
 		BrowserModule,
 		FormsModule,
 		HttpModule,

@@ -144,7 +144,8 @@
 	}
 
 	&.mod-inline {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
 		margin-left: .15rem;
 		margin-right: .15rem;
 	}

@@ -1,8 +1,11 @@
-<h1>
-  {{title}}
-</h1>
-<demo-lol></demo-lol>
-<div class="input">
-  <input class="input-field" [(ngModel)]="whatever" required>
-  <label class="input-label">Coucou</label>
+<h1 align="center">{{title}}</h1>
+
+<div class="lang-buttons">
+	<button class="button" (click)="switchToLang('en')">Switch to english</button>
+	<button class="button" (click)="switchToLang('fr')">Passer en français</button>
+</div>
+
+<div class="demos">
+	<demo-lol></demo-lol>
+	<demo-date-range-picker></demo-date-range-picker>
 </div>

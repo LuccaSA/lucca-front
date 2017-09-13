@@ -1,0 +1,73 @@
+.mat-datepicker-content {
+	display: block;
+	@extend .card;
+	@include box-shadow-override();
+}
+
+.mat-datepicker-toggle button {
+	background: none !important;
+	position: relative;
+	margin-left: -2em;
+	&::after {
+		@include makeIcon("datepicker");
+	}
+	md-icon {
+		display: none;
+	}
+}
+
+// CALENDAR
+.mat-calendar {
+	width: 296px;
+	height: auto !important;
+	min-height: 355px !important;
+	.mat-button {
+		@extend .button.mod-flat;
+	}
+	.mat-calendar-arrow {
+		display: none;
+	}
+	.mat-icon-button {
+		border-radius: 3px;
+		@extend .button.mod-flat;
+	}
+}
+
+// CALENDAR HEADER
+.mat-calendar-controls {
+	.mat-calendar-period-button {
+		order: 1;
+		flex: 1;
+	}
+	.mat-calendar-next-button {
+		order: 2;
+	}
+	.mat-calendar-spacer {
+		display: none;
+	}
+}
+
+// TABLE
+.mat-calendar-body-cell {
+	.mat-calendar-body-cell-content {
+		width: 102%;
+		height: 103%;
+		border-radius: 0;
+		border-color: _theme("commons.divider.color");
+		&:hover, &.mat-calendar-body-selected {
+			background-color: _color("primary");
+		}
+	}
+}
+
+// SPECIFIC MONTH-VIEW
+md-month-view {
+	.mat-calendar-body-label {
+		overflow: hidden;
+		text-indent: -999px;
+
+		&[colspan="7"]{
+			display: none; // REMOVE MONTH LABEL ABOVE NUMBERS IF FULL WIDTH
+		}
+	}
+}

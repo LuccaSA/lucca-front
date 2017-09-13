@@ -1,9 +1,6 @@
 
 @import
 
-	'node_modules/@lucca-front/scss/src/main',
+	'node_modules/@lucca-front/scss/src/main.overridable',
+	'../src/plugins/ngMaterial/general',
 	'../src/main';
-
-h1 {
-	color: _get($theme, 'palette.colors.primary') !important;
-}
