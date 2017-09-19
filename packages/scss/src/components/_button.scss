@@ -103,8 +103,10 @@
 		text-decoration: underline;
 
 		&:hover, &:focus {
-			box-shadow: none;
-			color: _component("button.flat.color");
+			&:not([disabled]) {
+				box-shadow: none;
+				color: _component("button.flat.color");
+			}
 		}
 	}
 
@@ -114,8 +116,10 @@
 			color: _color("text.default");
 
 			&:hover, &:focus {
-				box-shadow: 0 0 0 2px _get($palette, "color") inset;
-				color: _get($palette, "color");
+				&:not([disabled]) {
+					box-shadow: 0 0 0 2px _get($palette, "color") inset;
+					color: _get($palette, "color");
+				}
 			}
 		}
 
@@ -136,8 +140,10 @@
 			color: _color("text.default");
 
 			&:hover, &:focus {
-				background: _get($palette, "color");
-				color: _get($palette, "text");
+				&:not([disabled]) {
+					background: _get($palette, "color");
+					color: _get($palette, "text");
+				}
 			}
 		}
 
