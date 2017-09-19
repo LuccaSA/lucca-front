@@ -11,7 +11,7 @@
 	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
-	transition: opacity _theme("commons.animations.durations.standard") ease;
+	transition: opacity _component("menu.animations.durations.standard") ease;
 
 	&::after {
 		bottom: -1px;
@@ -22,7 +22,7 @@
 		position: absolute;
 		right: 0;
 		transform: scale(0, 1);
-		transition: transform _theme("commons.animations.durations.standard") ease;
+		transition: transform _component("menu.animations.durations.standard") ease;
 	}
 
 	&:hover {
