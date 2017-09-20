@@ -177,7 +177,12 @@ function generateIconDemo() {
 		'analytics',
 
 		'iron',
-		'jumping_cc'
+		'jumping_cc',
+		'credit_debit',
+		'home',
+		'planning',
+		'planning_tool',
+		'todolist'
 	]};
 
 	w3.displayObject("icons-section", icons);
