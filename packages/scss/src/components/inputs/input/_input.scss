@@ -150,6 +150,14 @@
 		margin-right: .15rem;
 	}
 
+	&.mod-noLabel {
+		padding-top: 0;
+
+		.input-label {
+			display: none;
+		}
+	}
+
 	/* Select */
 
 	&.mod-select {
