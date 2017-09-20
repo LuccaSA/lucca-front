@@ -157,6 +157,20 @@
 			}
 		}
 	}
+
+	&.mod-link {
+		background: transparent;
+		box-shadow: none;
+		color: _color("text.link");
+		padding: 0;
+		text-decoration: underline;
+
+		&:hover, &:focus, &:active {
+			background: transparent;
+			box-shadow: none;
+			color: lighten(_color("text.link"), 15%);
+		}
+	}
 }
 
 
