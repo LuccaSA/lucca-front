@@ -1,5 +1,5 @@
 .navSide {
-	background: _component("navSide.primary-palette.color");
+	background: _component("navSide.fullwidth-palette.bg-color");
 	bottom: 0;
 	left: 0;
 	overflow-x: hidden;
@@ -13,7 +13,7 @@
 	// SCROLLBAR
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	&::-webkit-scrollbar-track {
-		background-color: _component("navSide.primary-palette.color");
+		background-color: _component("navSide.fullwidth-palette.bg-color");
 	}
 
 	&::-webkit-scrollbar {
@@ -21,7 +21,7 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: lighten(_component("navSide.primary-palette.color"), 20%);
+		background-color: lighten(_component("navSide.fullwidth-palette.bg-color"), 20%);
 		border-radius: _component("navSide.scrollbar.border-radius");
 	}
 }
@@ -35,7 +35,7 @@ nav.navSide-scrollWrapper {
 
 .navSide-item-link, .navSide-item-subMenu-link {
 	align-items: center;
-	color: _component("navSide.primary-palette.text");
+	color: _component("navSide.fullwidth-palette.text");
 	display: flex;
 	text-decoration: none;
 	transition: all _theme("commons.animations.durations.fast") ease;
@@ -51,9 +51,9 @@ nav.navSide-scrollWrapper {
 	padding: 1em;
 
 	&:hover {
-		background-color: _component("navSide.accent-palette.color");
+		background-color: _component("navSide.fullwidth-palette.selected-bg");
 		.navSide-item-alert {
-			background: _component("navSide.primary-palette.color");
+			background: _component("navSide.fullwidth-palette.bg-color");
 		}
 	}
 }
@@ -66,9 +66,9 @@ nav.navSide-scrollWrapper {
 }
 
 .navSide-item-alert {
-	background: _component("navSide.accent-palette.color");
+	background: _component("navSide.fullwidth-palette.alert-color");
 	border-radius: .5rem;
-	color: _component("navSide.accent-palette.text"); // lulu - i dont like it
+	color: _component("navSide.fullwidth-palette.alert-text"); // lulu - i dont like it
 	font-size: _theme("sizes.smaller.font-size");
 	height: 1rem;
 	line-height: 1rem;
@@ -128,28 +128,28 @@ nav.navSide-scrollWrapper {
 		transition: all _theme("commons.animations.durations.fast") ease-out 0;
 
 		&:hover {
-			background-color: _component("navSide.accent-palette.color");
+			background-color: _component("navSide.fullwidth-palette.selected-bg");
 			opacity: .7;
 		}
 
 		&.is-active {
-			background-color: _component("navSide.accent-palette.color");
+			background-color: _component("navSide.fullwidth-palette.selected-bg");
 			opacity: 1;
 		}
 
 		&:hover, &.is-active {
 			.navSide-item-alert {
-				background: _component("navSide.primary-palette.color");
+				background: _component("navSide.fullwidth-palette.bg-color");
 			}
 		}
 	}
 }
 
 .navSide-item-link.is-active {
-	background-color: _component("navSide.accent-palette.color");
+	background-color: _component("navSide.fullwidth-palette.selected-bg");
 	opacity: 1;
 	.navSide-item-alert {
-		background: _component("navSide.primary-palette.color");
+		background: _component("navSide.fullwidth-palette.bg-color");
 	}
 }
 
@@ -157,29 +157,29 @@ nav.navSide-scrollWrapper {
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .navSide.mod-compact {
-	background: _component("navSide.compact.background");
+	background: _component("navSide.compact-palette.bg-color");
 	text-align: center;
 	width: _component("navSide.compact.width");
 
 	// SCROLLBAR
 	&::-webkit-scrollbar-track {
-		background-color: _component("navSide.compact.background");
+		background-color: _component("navSide.compact-palette.bg-color");
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: lighten(_component("navSide.compact.background"), 20%);
+		background-color: lighten(_component("navSide.compact-palette.bg-color"), 20%);
 	}
 
 	nav.navSide-scrollWrapper {
 		width: _component("navSide.compact.width");
 	}
 	.navSide-item-link {
-		color: _component("navSide.primary-palette.text");
+		color: _component("navSide.compact-palette.text");
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
 		&::before {
-			background: lighten(_component("navSide.primary-palette.color"), 10%);
+			background: _component("navSide.compact-palette.selected-indicator");
 			bottom: 0;
 			box-shadow: 2px 0 2px 0 rgba(0, 0, 0, .2);
 			content: "";
@@ -212,10 +212,12 @@ nav.navSide-scrollWrapper {
 
 	.navSide-item-link {
 		&:hover {
-			background-color: rgba(0, 0, 0, .2);
+			background-color: _component("navSide.compact-palette.selected-bg");
+			color: _component("navSide.compact-palette.selected-text");
 		}
 		&.is-active {
-			background-color: rgba(0, 0, 0, .2);
+			background-color: _component("navSide.compact-palette.selected-bg");
+			color: _component("navSide.compact-palette.selected-text");
 			opacity: 1;
 
 			&::before {
