@@ -1,0 +1,25 @@
+.frame {
+	background: _component("frame.background");
+	border-radius: _component("frame.border.radius");
+  margin: _component("frame.margin");
+	padding: _component("frame.padding");
+	position: relative;
+}
+
+.frame {
+	&.mod-toggle {
+		margin-top: _component("frame.toggle.arrow.size");
+
+		&::before {
+			border-color: transparent transparent  _component("frame.background") transparent;
+			border-style: solid;
+			border-width: 0 _component("frame.toggle.arrow.size") _component("frame.toggle.arrow.size") _component("frame.toggle.arrow.size");
+			content: "";
+			height: 0;
+			left: _component("frame.toggle.arrow.left");
+			position: absolute;
+			top: - _component("frame.toggle.arrow.size");
+			width: 0;
+		}
+	}
+}
