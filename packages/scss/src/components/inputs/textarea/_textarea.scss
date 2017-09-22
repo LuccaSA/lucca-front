@@ -70,6 +70,14 @@
 		max-width: 100%;
 	}
 
+	&.mod-noLabel {
+		padding-top: 0;
+
+		.textarea-label {
+			display: none;
+		}
+	}
+
 	&.mod-compact, &.compact {
 		@extend %textarea_compact;
 	}

@@ -1,5 +1,6 @@
 .main-content {
 	padding: _theme("components.main.padding");
+	position: relative;
 }
 
 .navSide ~ .main-content {
@@ -8,6 +9,11 @@
 
 .navSide.mod-compact ~ .main-content {
 	margin-left: _theme("components.navSide.compact.width");
+}
+
+.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
+	height: calc(100vh - #{_theme("commons.banner-height")});
+	overflow-y: auto;
 }
 
 

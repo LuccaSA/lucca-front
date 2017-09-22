@@ -21,6 +21,8 @@ $navSide: (
 
 	"offset-top": 0px,
 	"padding-top": 0px,
+	"main-font-size": _theme("sizes.standard.font-size"),
+	"sub-font-size": _theme("sizes.small.font-size"),
 	"scrollbar": (
 		"width": .5rem,
 		"border-radius": 10px,

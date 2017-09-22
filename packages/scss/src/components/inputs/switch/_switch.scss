@@ -13,6 +13,7 @@
 	color: _color("text.light");
 	cursor: pointer;
 	display: inline-block;
+	line-height: 1.25;
 	padding: 0 0 0 2.7rem;
 	transition: color 150ms ease;
 
@@ -41,6 +42,17 @@
 		top: 2px;
 		transition: all 150ms ease;
 		width: 20px;
+	}
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.switch {
+	&.mod-inline {
+		display: inline-block;
+		margin-right: 1.5rem;
 	}
 }
 
@@ -99,14 +111,14 @@
 			}
 
 			// Palette > Disabled switch
-			&[disabled], &[readonly]{
+			&[disabled], &[readonly] {
 				~ .switch-label {
 					&::before {
-						background: desaturate( lighten(_get($palette, "color"), 30%), 15%);
+						background: desaturate(lighten(_get($palette, "color"), 30%), 15%);
 					}
 
 					&::after {
-						background: desaturate( lighten(_get($palette, "color"), 20%), 15%);
+						background: desaturate(lighten(_get($palette, "color"), 20%), 15%);
 					}
 				}
 			}

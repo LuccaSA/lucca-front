@@ -1,6 +1,6 @@
 .list {
 	background: white;
-	box-shadow: unquote(_theme("commons.box-shadow"));
+	@include elevate(1);
 	list-style: none;
 	margin-bottom: _component("list.margin-bottom");
 	padding: 0;
@@ -49,8 +49,13 @@
 	white-space: nowrap;
 }
 
-.list-item-content {
+.list-item {
 	&.mod-clickable {
 		cursor: pointer;
+		transition: background _theme("commons.animations.durations.fast") ease;
+
+		&:hover {
+			background: _component("list.hover.background");
+		}
 	}
 }
