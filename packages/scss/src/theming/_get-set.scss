@@ -56,19 +56,19 @@
 	@return _get($theme, "palettes");
 }
 
-@function _color($keys) {
+@function _color($keys, $type:"color") {
 	// try to find it in colors
 	$result: _safeGet($theme, "colors." + $keys);
 	@if $result {
 		@return $result;
 	}
 	// try to find color associated with same palette
-	$result: _safeGet($theme, "palettes." + $keys + ".color");
+	$result: _safeGet($theme, "palettes." + $keys + "." + $type);
 	@if $result {
 		@return $result;
 	}
 	// try to find it in commons
-	$result: _safeGet($theme, "commons." + $keys + ".color");
+	$result: _safeGet($theme, "commons." + $keys + "." + $type);
 	@if $result {
 		@return $result;
 	}
