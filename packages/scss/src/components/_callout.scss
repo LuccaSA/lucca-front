@@ -1,6 +1,6 @@
 .callout {
 	background: white;
-	@include elevate();
+	@include elevate(1);
 	margin: _component("callout.margin");
 	padding: 1.5rem;
 	position: relative;
