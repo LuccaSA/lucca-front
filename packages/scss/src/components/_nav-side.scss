@@ -46,9 +46,13 @@ nav.navSide-scrollWrapper {
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .navSide-item-link {
-	font-size: 1rem;
+	font-size: _component("navSide.main-font-size");
 	opacity: .7;
 	padding: 1em;
+
+	i {
+		width: _component("navSide.main-font-size");
+	}
 
 	&:hover {
 		background-color: _component("navSide.accent-palette.color");
@@ -86,7 +90,7 @@ nav.navSide-scrollWrapper {
 // SUB MENU
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide-item-subMenu {
-	font-size: .9em;
+	font-size: _component("navSide.sub-font-size");
 	max-height: 0;
 	overflow: hidden;
 	transition-duration: _theme("commons.animations.durations.fast");
