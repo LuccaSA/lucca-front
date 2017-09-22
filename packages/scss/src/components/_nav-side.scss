@@ -6,7 +6,6 @@
 	overflow-y: auto;
 	padding-top: _component("navSide.padding-top");
 	position: fixed;
-	top: _component("navSide.offset-top");
 	width: _component("navSide.width");
 	z-index: 2;
 
@@ -155,7 +154,7 @@ nav.navSide-scrollWrapper {
 
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.navSide.has-topBanner {
+.navSide.mod-withBanner {
 	top: _theme("commons.banner-height");
 }
 
