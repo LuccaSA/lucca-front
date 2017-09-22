@@ -1,5 +1,6 @@
 .main-content {
 	padding: _theme("components.main.padding");
+	position: relative;
 }
 
 .navSide ~ .main-content {
