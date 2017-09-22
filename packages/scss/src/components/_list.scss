@@ -1,6 +1,6 @@
 .list {
 	background: white;
-	box-shadow: unquote(_theme("commons.box-shadow"));
+	@include elevate(1);
 	list-style: none;
 	margin-bottom: _component("list.margin-bottom");
 	padding: 0;
