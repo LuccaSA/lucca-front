@@ -6,15 +6,14 @@
 
 .menu-link {
 	color: _color("text.default");
-	margin: 0 1.2rem;
+	margin: _component("menu.margin");
 	opacity: .75;
-	padding: 1.5rem 0;
+	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
-	transition: opacity 250ms ease;
+	transition: opacity _component("menu.animations.durations.standard") ease;
 
 	&::after {
-		background: _color("primary");
 		bottom: -1px;
 		content: "";
 		display: block;
@@ -23,7 +22,7 @@
 		position: absolute;
 		right: 0;
 		transform: scale(0, 1);
-		transition: transform 250ms ease;
+		transition: transform _component("menu.animations.durations.standard") ease;
 	}
 
 	&:hover {
@@ -31,6 +30,29 @@
 
 		&::after {
 			transform: scale(1);
+		}
+	}
+}
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.menu {
+	@mixin menuColoring($palette) {
+		background: _get($palette, "color");
+	}
+
+	// default color
+	.menu-link::after {
+		@include menuColoring(_component("menu.default-palette"));
+	}
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			.menu-link::after {
+				@include menuColoring($palette);
+			}
 		}
 	}
 }
