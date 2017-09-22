@@ -49,8 +49,13 @@
 	white-space: nowrap;
 }
 
-.list-item-content {
+.list-item {
 	&.mod-clickable {
 		cursor: pointer;
+		transition: background _theme("commons.animations.durations.fast") ease;
+
+		&:hover {
+			background: _component("list.hover.background");
+		}
 	}
 }
