@@ -45,6 +45,22 @@ $input: (
     default-palette: (
       color: _color("text.light"),
       text: _color("text.default")
+    ),
+    side-padding: 1em,
+    top-padding: 3em,
+    bottom-padding: .7em,
+    label-top-offset: .5rem,
+    select: (
+      options-offset: 4rem,
+      icon-offset: 1.2rem
+    ),
+    textarea: (
+      height: 9em,
+      margin-top: 1.5em,
+    ),
+    title: (
+      font-size: _theme("sizes.big.font-size"),
+      line-height: _theme("sizes.big.line-height"),
     )
   ),
 );

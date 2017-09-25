@@ -13,9 +13,9 @@
 	padding: 1rem;
 	@include fakeBorder(1px, _theme("commons.divider.color"));
 	textarea.input-field {
-		height: 9em;
+		height: _component("input.framed.textarea.height");
 		padding: 0;
-		margin-top: 1.5em;
+		margin-top:_component("input.framed.textarea.margin-top");
 		box-shadow: none;
 		resize: none;
 	}
@@ -23,8 +23,11 @@
 	@mixin inputColoring($palette) {
 		&:hover, &:focus {
 			@include fakeBorder(1px, _get($palette, "color"));
+			background-color: transparentize(_get($palette, "color"), .95);
+			z-index: 2;
 		}
-		textarea.input-field:focus {
+
+		textarea.input-field:focus, textarea.input-field:hover {
 			box-shadow: none;
 			background: transparent;
 			z-index: auto;
@@ -45,5 +48,9 @@
 		textarea.input-field {
 			margin-right: 2em;
 		}
+	}
+
+	&.is-error {
+		background-color: transparentize(_color("error"), .9);
 	}
 }
