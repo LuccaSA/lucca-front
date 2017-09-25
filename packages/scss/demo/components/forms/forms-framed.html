@@ -1,6 +1,33 @@
 <section class="contentSection">
-	<h2>Input mod-framed</h2>
-
+	<h2>Form mod-framed</h2>
+	<p>
+		Form has can have a mod called <code class="code">.mod-framed</code>.
+		In this mod <code class="code">.form-group</code> behave differently and you have access to a new
+		DOM level called <code class="code">.form-group-line</code>.
+	</p>
+	<p>
+		<code class="code">form-group</code> represents a whole section of your form.
+		It can have a <code class="code">.form-group-title</code> to name your section
+		It can contain <code class="code">.form-group-line</code> and <code class="code">.input.mod-framed</code>
+	</p>
+	<p>
+		In a <code class="code">form-group-line</code> you can use <code class="code">.grid-*</code> classes to size
+		your inputs on a single line.
+	</p>
+	<code class="code mod-block">&lt;form class="form mod-framed"&gt;
+	&lt;div class="form-group"&gt;
+		&lt;h2 class="form-group-title"&gt;Title name&lt;/h2&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;div class="input mod-framed grid-xs8&gt;
+				[...]
+			&lt;/div&gt;
+			&lt;div class="input mod-framed grid-xs4&gt;
+				[...]
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/form&gt;</code>
+<h4>Example</h4>
 	<div class="form mod-framed">
 		<div class="form-group">
 			<h2 class="form-group-title">Title Group 1</h2>	
@@ -123,4 +150,37 @@
 			</div>
 		</div>
 	</div>
+	<code class="code mod-block">&lt;div class=&quot;form mod-framed&quot;&gt;
+	&lt;div class=&quot;form-group&quot;&gt;
+		&lt;h2 class=&quot;form-group-title&quot;&gt;Title Group 1&lt;/h2&gt;	
+		&lt;div class=&quot;form-group-line&quot;&gt;
+			&lt;div class=&quot;input mod-framed is-required grid-xs8&quot;&gt;
+				&lt;input class=&quot;input-field is-error&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
+				&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;input mod-framed grid-xs4&quot;&gt;
+				&lt;input class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot; value=&quot;Test disabled&quot; disabled&gt;
+				&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;input mod-framed palette-success&quot;&gt;
+			&lt;input class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
+			&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;input mod-framed has-suffix&quot;&gt;
+			&lt;input class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;...&quot;&gt;
+			&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
+			&lt;div class=&quot;input-suffix&quot;&gt;
+				&euro;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;input textarea mod-framed has-suffix&quot;&gt;
+			&lt;textarea class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;...&quot;&gt;&lt;/textarea&gt;
+			&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
+			&lt;div class=&quot;input-suffix&quot;&gt;
+				[...]
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code>
 </section>
