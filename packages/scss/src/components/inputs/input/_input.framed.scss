@@ -14,6 +14,7 @@
 
 	.input-field {
 		@include fakeBorder(1px, _theme("commons.divider.color"));
+
 		height: 100%;
 		margin-bottom: 0;
 		padding: _component("input.framed.top-padding") _component("input.framed.side-padding") _component("input.framed.bottom-padding");
@@ -35,23 +36,23 @@
 	}
 
 	.input-suffix {
-		position: absolute;
 		bottom: _component("input.framed.bottom-padding");
+		color: _color("text.placeholder");
+		position: absolute;
 		right: _component("input.framed.side-padding");
 		text-align: right;
-		color: _color("text.placeholder");
 	}
 
 	.input-messages {
-		position: absolute;
 		bottom: 0;
 		left: 0;
-		right: 0;
 		pointer-events: none;
+		position: absolute;
+		right: 0;
 		text-align: center;
 		transform: translateY(0);
 		transition: transform _theme("commons.animations.durations.standard");
-		
+
 		.input-error {
 			background-color: _color("error");
 			color: _theme("palettes.error.text");
@@ -78,6 +79,7 @@
 	@mixin inputColoring($palette) {
 		.input-field:focus, .input-field:hover {
 			@include fakeBorder(1px, _get($palette, "color"));
+
 			background-color: transparentize(_get($palette, "color"), .95);
 			~ .input-label {
 				color: _get($palette, "color");
@@ -126,7 +128,7 @@
 				@include fakeBorder(1px, _color("error"));
 			}
 
-			~ label, ~ .input-suffix{
+			~ label, ~ .input-suffix {
 				color: _color("error") !important;
 			}
 		}

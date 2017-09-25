@@ -7,13 +7,13 @@
 }
 
 %checkbox-framed {
-   display: flex;
-   flex-wrap: wrap;
-   padding: _component("input.framed.top-padding") _component("input.framed.side-padding") _component("input.framed.bottom-padding");
-   width: 100%;
-   @include fakeBorder(1px, _theme("commons.divider.color"));
+	@include fakeBorder(1px, _theme("commons.divider.color"));
 
-   .checkbox {
-      margin-right: 2em;
-   }
+	display: flex;
+	flex-wrap: wrap;
+	padding: _component("input.framed.top-padding") _component("input.framed.side-padding") _component("input.framed.bottom-padding");
+	width: 100%;
+	.checkbox {
+		margin-right: 2em;
+	}
 }
