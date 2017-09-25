@@ -3,6 +3,7 @@
 
 	<div class="form mod-framed">
 		<div class="form-group">
+			<h2 class="form-group-title">Title Group 1</h2>	
 			<div class="form-group-line">
 				<div class="input mod-framed is-required grid-xs8">
 					<input class="input-field is-error" type="text" placeholder="placeholder">
@@ -29,16 +30,96 @@
 				<label class="input-label">Input label</label>
 				<div class="input-suffix">
 					<select class="" name="">
+						<option value="">Option 1</option>
 					</select>
 				</div>
 			</div>
-			<div class="input textarea mod-framed has-suffix palette-secondary">
+		</div>
+		<div class="form-group">
+			<h2 class="form-group-title">Title Group 2</h2>
+			<div class="input textarea mod-framed has-suffix palette-secondary is-required">
 				<textarea class="input-field" type="text" placeholder="Money Money"></textarea>
 				<label class="input-label">Input label</label>
 				<div class="input-suffix">
 					<select class="" name="">
+						<option value="">Option 1</option>
 					</select>
 				</div>
+			</div>
+			<div id="autocomplete-framed" class="input mod-framed mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')">
+				<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')">
+				<label class="input-label">User</label>
+				<ul class="input-options">
+					<li class="input-options-entry">
+						<u>va</u>lue A</li>
+					<li class="input-options-entry is-focus">
+						<u>va</u>lue B</li>
+					<li class="input-options-entry">
+						<u>va</u>lue C</li>
+				</ul>
+			</div>
+			<div id="autocomplete-framed-select" class="input mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')">
+				<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')">
+				<label class="input-label">User</label>
+				<ul class="input-options">
+					<li class="input-options-entry">
+						<u>va</u>lue A</li>
+					<li class="input-options-entry is-focus">
+						<u>va</u>lue B</li>
+					<li class="input-options-entry">
+						<u>va</u>lue C</li>
+				</ul>
+			</div>
+			<div class="form-group-line">
+				<div id="autocomplete-framed-select2" class="input mod-framed mod-select grid-xs6" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')">
+					<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')">
+					<label class="input-label">User</label>
+					<ul class="input-options">
+						<li class="input-options-entry">
+							<u>va</u>lue A</li>
+						<li class="input-options-entry is-focus">
+							<u>va</u>lue B</li>
+						<li class="input-options-entry">
+							<u>va</u>lue C</li>
+					</ul>
+				</div>
+				<div class="input mod-framed is-required grid-xs6">
+					<input class="input-field is-error" type="text" placeholder="placeholder">
+					<label class="input-label">Input label</label>
+					<div class="input-messages">
+						<div class="input-error">This field is required</div>
+					</div>
+				</div>
+			</div>
+			<div class="input checkbox-group mod-framed">
+				<div class="checkbox">
+					<input class="checkbox-input" type="checkbox" id="checkboxID">
+					<label class="checkbox-label" for="checkboxID">Checkbox</label>
+				</div>
+				<div class="checkbox">
+					<input class="checkbox-input" type="checkbox" id="checkboxID2">
+					<label class="checkbox-label" for="checkboxID2">Checkbox</label>
+				</div>
+				<div class="checkbox">
+					<input class="checkbox-input" type="checkbox" id="checkboxID3">
+					<label class="checkbox-label" for="checkboxID3">Checkbox</label>
+				</div>
+				<label class="input-label">Input label</label>
+			</div>
+			<div class="input radio-group mod-framed">
+				<div class="radio">
+					<input class="radio-input" type="radio" name="radioframedlist" id="radioID">
+					<label class="radio-label" for="radioID">radio</label>
+				</div>
+				<div class="radio">
+					<input class="radio-input" type="radio" name="radioframedlist" id="radioID2">
+					<label class="radio-label" for="radioID2">radio</label>
+				</div>
+				<div class="radio">
+					<input class="radio-input" type="radio" name="radioframedlist" id="radioID3">
+					<label class="radio-label" for="radioID3">radio</label>
+				</div>
+				<label class="input-label">Input label</label>
 			</div>
 		</div>
 	</div>
