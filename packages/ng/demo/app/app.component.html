@@ -1,12 +1,12 @@
-<h1 align="center">{{title}}</h1>
-
-<div class="lang-buttons">
-	<button class="button" (click)="switchToLang('en')">Switch to english</button>
-	<button class="button" (click)="switchToLang('fr')">Passer en français</button>
-</div>
-
-<div class="demos">
-	<demo-lol></demo-lol>
-	<demo-date-range-picker></demo-date-range-picker>
-	<demo-user-tile></demo-user-tile>
-</div>
+<main class="main">
+	<aside class="navSide">
+		<nav class="navSide-scrollWrapper">
+			<router-outlet name="nav"></router-outlet>
+		</nav>
+	</aside>
+	<section class="main-content">
+		<section class="container">
+			<router-outlet></router-outlet>
+		</section>
+	</section>
+</main>
