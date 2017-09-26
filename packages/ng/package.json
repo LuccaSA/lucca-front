@@ -50,9 +50,9 @@
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
-    "@angular/router": "^4.3.6",
     "@angular/cli": "1.0.0",
     "@angular/compiler-cli": "^4.3.6",
+    "@angular/router": "^4.3.6",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -83,6 +83,7 @@
   },
   "peerDependencies": {
     "@lucca-front/scss": "0.0.0-VERSIONPLACEHOLDER",
+    "ng-formly": "^1.0.0-rc.12",
     "moment": "^2.18.1"
   }
 }
