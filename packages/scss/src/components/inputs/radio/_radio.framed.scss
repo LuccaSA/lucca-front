@@ -8,4 +8,8 @@
 	.radio {
 		margin-right: 2em;
 	}
+
+	&.mod-stacked {
+		flex-direction: column;
+	}
 }
