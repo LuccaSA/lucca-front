@@ -52,6 +52,7 @@
 		text-align: center;
 		transform: translateY(0);
 		transition: transform _theme("commons.animations.durations.standard");
+		z-index: 1;
 
 		.input-error {
 			background-color: _color("error");
