@@ -105,9 +105,9 @@
 
 	.input-field {
 		&[disabled], &[readonly] {
-			background-color: transparentize(_color("text.placeholder"), .5);
+			background-color: transparentize(_color("text.placeholder"), .8);
 			background-image: none;
-
+			opacity: .6;
 			& + label {
 				opacity: .5;
 			}
