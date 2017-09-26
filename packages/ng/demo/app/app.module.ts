@@ -13,6 +13,7 @@ import { appRoutes } from './app.router';
 import { DemoLolModule } from './lol/lol.module';
 import {DemoDateRangePickerModule} from './date-range-picker/date-range-picker.module';
 import {DemoUserTileModule} from './user-tile/user-tile.module';
+import {DemoFormlyModule} from './formly/formly.module';
 
 @NgModule({
 	declarations: [
@@ -25,6 +26,8 @@ import {DemoUserTileModule} from './user-tile/user-tile.module';
 		DemoLolModule,
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
+		DemoFormlyModule,
+
 		BrowserModule,
 		FormsModule,
 		HttpModule,
