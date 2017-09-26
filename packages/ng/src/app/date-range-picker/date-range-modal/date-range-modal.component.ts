@@ -3,7 +3,7 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 import * as moment from 'moment';
 import {LuTranslateService} from '../../shared/translation.service';
 import {IDateRange} from '../date-range-picker.model';
-import {MomentDateAdapter} from '../../shared/moment/moment.date-adapter';
+import {MomentDateAdapter} from '../../shared/moment/moment-date-adapter';
 
 @Component({
 	selector: 'lu-custom-range-picker',
