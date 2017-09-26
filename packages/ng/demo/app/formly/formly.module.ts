@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormlyModule } from 'ng-formly';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { DemoFormlyComponent } from './formly.component';
-// import { LuUserTileModule } from '../../../src/app/user-tile/user-tile.module';
+import { LuFormlyModule } from '../../../src/app/formly';
 import { SharedModule } from '../shared/index';
 // import { BasicComponent } from './basic/basic.component';
+import { DebugComponent } from './debug/debug';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		// LuUserTileModule,
+		FormsModule,
+		ReactiveFormsModule,
 		SharedModule,
-		// MdTooltipModule
+		FormlyModule.forRoot(),
+		LuFormlyModule,
 	],
 	declarations: [
 		DemoFormlyComponent,
+		DebugComponent,
 	],
 	exports: [
 		DemoFormlyComponent,

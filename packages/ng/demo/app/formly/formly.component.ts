@@ -11,10 +11,10 @@ export class DemoFormlyComponent implements OnInit {
 	constructor() { }
 
 	snippets = {
-		// basic: {
-		// 	code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),
-		// 	markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html')
-		// },
+		debug: {
+			code: require('!!prismjs-loader?lang=typescript!./debug/debug'),
+			markup: require('!!prismjs-loader?lang=markup!./debug/debug.html')
+		},
 	};
 
 	ngOnInit() {
