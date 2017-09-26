@@ -138,5 +138,33 @@
 	.form-group-line {
 		display: flex;
 		flex: 0 1 auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	// FORM GROUP GRID SYSTEM
+	@each $bp-name, $bp-obj in $breakpoints {
+		@for $i from 1 through 12 {
+			.form-grid-#{$bp-name}#{$i} {
+				flex: 0 0 auto;
+				flex-basis: 100%;
+				max-width: 100%;
+			}
+		}
+
+		@include media_larger_than($bp-name) {
+			.form-grid-#{$bp-name} {
+				flex-basis: 0;
+				flex-grow: 1;
+				max-width: 100%;
+			}
+
+			@for $i from 1 through 12 {
+				.form-grid-#{$bp-name}#{$i} {
+					flex-basis: percentage($i / 12);
+					max-width: percentage($i / 12);
+				}
+			}
+		}
 	}
 }
