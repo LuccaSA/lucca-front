@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { DemoLolModule } from './lol/lol.module';
 import {DemoDateRangePickerModule} from './date-range-picker/date-range-picker.module';
 import {DemoUserTileModule} from './user-tile/user-tile.module';
+import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,7 @@ import {DemoUserTileModule} from './user-tile/user-tile.module';
 		FormsModule,
 		HttpModule,
 	],
-	providers: [],
+	providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
