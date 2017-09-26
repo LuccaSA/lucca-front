@@ -18,7 +18,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "gulp generatedoc && ng serve -a=demo",
+    "prestart": "gulp generatedoc",
+    "start": "ng serve -a=demo",
     "build": "gulp build",
     "test": "ng test -a=src",
     "lint": "ng lint",
