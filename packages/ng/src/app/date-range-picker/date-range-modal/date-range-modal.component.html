@@ -5,8 +5,8 @@
 					 [ngClass]="{'is-filled': !!startInput.value}"
 					 [mdDatepicker]="pickerStart" [(ngModel)]="start" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
-		<md-datepicker-toggle [for]="pickerStart"></md-datepicker-toggle>
-		<md-datepicker #pickerStart></md-datepicker>
+		<mat-datepicker-toggle [for]="pickerStart"></mat-datepicker-toggle>
+		<mat-datepicker #pickerStart></mat-datepicker>
 	</div>
 
 	<div class="input mod-inline">
@@ -15,8 +15,8 @@
 					 [ngClass]="{'is-filled': !!endInput.value, 'is-error': start && end && end.isBefore(start)}"
 					 [mdDatepicker]="pickerEnd" [(ngModel)]="end" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
-		<md-datepicker-toggle [for]="pickerEnd"></md-datepicker-toggle>
-		<md-datepicker #pickerEnd></md-datepicker>
+		<mat-datepicker-toggle [for]="pickerEnd"></mat-datepicker-toggle>
+		<mat-datepicker #pickerEnd></mat-datepicker>
 	</div>
 
 	<button [disabled]="(!end || !start) || end.isBefore(start)" class="button mod-wired ok-button"  (click)="close(true, true)">
