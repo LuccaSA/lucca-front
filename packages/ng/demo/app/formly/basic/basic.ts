@@ -14,8 +14,7 @@ export class BasicComponent {
 			type: 'input',
 			templateOptions: {
 				type: 'text',
-				label: 'input type - text',
-				placeholder: 'Enter email'
+				label: 'name - text',
 			},
 		},
 		{
@@ -23,8 +22,7 @@ export class BasicComponent {
 			type: 'input',
 			templateOptions: {
 				type: 'email',
-				label: 'input type - email',
-				placeholder: 'Enter email'
+				label: 'email - email',
 			},
 		},
 		{
@@ -32,8 +30,7 @@ export class BasicComponent {
 			type: 'input',
 			templateOptions: {
 				type: 'password',
-				label: 'input type - password',
-				placeholder: 'password'
+				label: 'password - password',
 			},
 		},
 		{
@@ -41,11 +38,9 @@ export class BasicComponent {
 			type: 'input',
 			templateOptions: {
 				type: 'number',
-				label: 'input type - number',
-				placeholder: 'Enter email'
+				label: 'age - number',
 			},
 		},
-		
 	];
 
 	user = {};
