@@ -6,7 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '../../../src/app/formly';
 import { SharedModule } from '../shared/index';
-// import { BasicComponent } from './basic/basic.component';
+
+import { BasicComponent } from './basic/basic';
 import { DebugComponent } from './debug/debug';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DebugComponent } from './debug/debug';
 	declarations: [
 		DemoFormlyComponent,
 		DebugComponent,
+		BasicComponent,
 	],
 	exports: [
 		DemoFormlyComponent,

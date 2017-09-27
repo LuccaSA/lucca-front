@@ -11,6 +11,10 @@ export class DemoFormlyComponent implements OnInit {
 	constructor() { }
 
 	snippets = {
+		basic: {
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
+		},
 		debug: {
 			code: require('!!prismjs-loader?lang=typescript!./debug/debug'),
 			markup: require('!!prismjs-loader?lang=markup!./debug/debug.html')
