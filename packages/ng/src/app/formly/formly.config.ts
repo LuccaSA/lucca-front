@@ -6,15 +6,19 @@ import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
 import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
 import { LuFormlyWrapperLayout } from './wrappers/layout';
 import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
+import { LuFormlyWrapperError, TemplateError, LuFormlyErrorMessage } from './wrappers/error';
 
 
 export const LU_FORMLY_COMPONENTS = [
+	LuFormlyErrorMessage,
+
 	LuFormlyFieldInput,
 
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
 	LuFormlyWrapperLayout,
 	LuFormlyWrapperSuffix,
+	LuFormlyWrapperError,
 ];
 
 export const LU_FORMLY_CONFIG = {
@@ -30,8 +34,10 @@ export const LU_FORMLY_CONFIG = {
 		{ name: 'helper', component: LuFormlyWrapperHelper },
 		{ name: 'layout', component: LuFormlyWrapperLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },
+		{ name: 'error', component: LuFormlyWrapperError },
 	],
 	manipulators: [
+		{ class: TemplateError, method: 'run' }, // fourth
 		{ class: TemplateHelper, method: 'run' }, // third
 		{ class: TemplateSuffix, method: 'run' }, // second
 		{ class: TemplateLabel, method: 'run' }, // first

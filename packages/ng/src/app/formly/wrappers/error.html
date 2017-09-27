@@ -1,0 +1,4 @@
+<ng-container #fieldComponent></ng-container>
+<div class="input-messages" *ngIf="valid" [id]="validationId">
+	<lu-formly-error-message [fieldForm]="formControl" [field]="field"></lu-formly-error-message>
+</div>

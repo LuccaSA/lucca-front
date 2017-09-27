@@ -10,20 +10,35 @@ export class DebugComponent {
 	form: FormGroup = new FormGroup({});
 	userFields = [
 		{
-			key: 'email',
+			key: 'age',
 			type: 'input',
 			templateOptions: {
-				type: 'email',
+				type: 'number',
 				label: 'Email address',
 				placeholder: 'Enter email',
 				helper: 'dis iz da helper',
 				suffix: 'heart',
-				mod: 'mod-compact',
+				// mod: 'mod-compact',
 			},
+			validators: {
+				validation: Validators.compose([
+					Validators.required,
+					Validators.min(1),
+					Validators.max(-1),
+				]),
+			},
+			validation: {
+				messages: {
+					required: 'its required dummy',
+					min: 'below minimum, stupid',
+					max: 'over maximum, stupid',
+				}
+			}
 		},
 	];
 
 	user = {
+		age: 0,
 	};
 
 	submit(user) {

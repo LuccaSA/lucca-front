@@ -10,6 +10,7 @@ import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
 	],
 	imports: [
 		CommonModule,
+
 		FormsModule,
 		ReactiveFormsModule,
 
