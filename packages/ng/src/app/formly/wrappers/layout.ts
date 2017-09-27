@@ -8,4 +8,8 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 })
 export class LuFormlyWrapperLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
+
+	get mod() {
+		return this.to.mod || '';
+	}
 }
