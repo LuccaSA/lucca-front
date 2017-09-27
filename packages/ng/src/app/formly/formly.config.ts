@@ -3,6 +3,7 @@ import { ConfigOption } from 'ng-formly';
 import { LuFormlyFieldInput } from './types/input';
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
+import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
 import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
 import { LuFormlyWrapperLayout } from './wrappers/layout';
 import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
@@ -19,6 +20,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyWrapperLayout,
 	LuFormlyWrapperSuffix,
 	LuFormlyWrapperError,
+	LuFormlyWrapperTitle,
 ];
 
 export const LU_FORMLY_CONFIG = {
@@ -30,6 +32,7 @@ export const LU_FORMLY_CONFIG = {
 		},
 	],
 	wrappers: [
+		{ name: 'title', component: LuFormlyWrapperTitle },
 		{ name: 'label', component: LuFormlyWrapperLabel },
 		{ name: 'helper', component: LuFormlyWrapperHelper },
 		{ name: 'layout', component: LuFormlyWrapperLayout },
@@ -37,6 +40,8 @@ export const LU_FORMLY_CONFIG = {
 		{ name: 'error', component: LuFormlyWrapperError },
 	],
 	manipulators: [
+		{ class: TemplateTitle, method: 'run' }, // for form group only
+
 		{ class: TemplateError, method: 'run' }, // fourth
 		{ class: TemplateHelper, method: 'run' }, // third
 		{ class: TemplateSuffix, method: 'run' }, // second

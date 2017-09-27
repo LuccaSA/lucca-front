@@ -18,7 +18,7 @@ export class DebugComponent {
 				placeholder: 'Enter email',
 				helper: 'dis iz da helper',
 				suffix: 'heart',
-				// mod: 'mod-compact',
+				// mod: 'mod-inline',
 			},
 			validators: {
 				validation: Validators.compose([
@@ -35,6 +35,16 @@ export class DebugComponent {
 				}
 			}
 		},
+		// {
+		// 	key: 'email',
+		// 	type: 'input',
+		// 	templateOptions: {
+		// 		type: 'email',
+		// 		label: 'Email address',
+		// 		placeholder: 'Enter email',
+		// 		// mod: 'mod-inline',
+		// 	},
+		// },
 	];
 
 	user = {

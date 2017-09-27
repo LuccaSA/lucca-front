@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
 import { DebugComponent } from './debug/debug';
+import { FieldgroupComponent } from './fieldgroup/fieldgroup';
 
 @NgModule({
 	imports: [
@@ -23,6 +24,7 @@ import { DebugComponent } from './debug/debug';
 		DemoFormlyComponent,
 		DebugComponent,
 		BasicComponent,
+		FieldgroupComponent,
 	],
 	exports: [
 		DemoFormlyComponent,
