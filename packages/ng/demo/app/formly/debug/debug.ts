@@ -15,51 +15,15 @@ export class DebugComponent {
 			templateOptions: {
 				type: 'email',
 				label: 'Email address',
-				placeholder: 'Enter email'
+				placeholder: 'Enter email',
+				helper: 'dis iz da helper',
+				suffix: 'heart',
+				mod: 'mod-compact',
 			},
 		},
-		{
-			key: 'password',
-			type: 'input',
-			templateOptions: {
-				type: 'password',
-				label: 'password',
-				placeholder: 'password'
-			},
-		},
-		// className: 'row',
-		// fieldGroup: [{
-		// 	className: 'col-xs-6',
-		// 	key: 'email',
-		// 	type: 'input',
-		// 	templateOptions: {
-		// 		type: 'email',
-		// 		label: 'Email address',
-		// 		placeholder: 'Enter email'
-		// 	},
-		// 	validators: {
-		// 		validation: Validators.compose([Validators.required])
-		// 	}
-		// }, {
-		// 	// className: 'col-xs-6',
-		// 	key: 'password',
-		// 	type: 'input',
-		// 	templateOptions: {
-		// 		type: 'password',
-		// 		label: 'Password',
-		// 		placeholder: 'Password',
-		// 		pattern: ''
-		// 	},
-		// 	validators: {
-		// 		validation: Validators.compose([Validators.required])
-		// 	}
-		// }]
-		// },
 	];
 
 	user = {
-		email: 'email@gmail.com',
-		checked: false
 	};
 
 	submit(user) {

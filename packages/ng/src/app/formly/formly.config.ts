@@ -1,9 +1,20 @@
 import { ConfigOption } from 'ng-formly';
-import { LuFormlyFieldInput } from './types/input/input';
+// inputs
+import { LuFormlyFieldInput } from './types/input';
+// wrappers
+import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
+import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
+import { LuFormlyWrapperLayout } from './wrappers/layout';
+import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
+
 
 export const LU_FORMLY_COMPONENTS = [
 	LuFormlyFieldInput,
 
+	LuFormlyWrapperHelper,
+	LuFormlyWrapperLabel,
+	LuFormlyWrapperLayout,
+	LuFormlyWrapperSuffix,
 ];
 
 export const LU_FORMLY_CONFIG = {
@@ -11,95 +22,18 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'input',
 			component: LuFormlyFieldInput,
-			// wrappers: ['fieldset', ],
+			wrappers: ['layout'],
 		},
 	],
 	wrappers: [
-		// { name: 'label', component: LuFormlyWrapperLabel },
-		// { name: 'fieldset', component: LuFormlyWrapperFieldset },
+		{ name: 'label', component: LuFormlyWrapperLabel },
+		{ name: 'helper', component: LuFormlyWrapperHelper },
+		{ name: 'layout', component: LuFormlyWrapperLayout },
+		{ name: 'suffix', component: LuFormlyWrapperSuffix },
 	],
-	manipulators: [],
+	manipulators: [
+		{ class: TemplateHelper, method: 'run' }, // third
+		{ class: TemplateSuffix, method: 'run' }, // second
+		{ class: TemplateLabel, method: 'run' }, // first
+	],
 } as ConfigOption;
-
-// import { FormlyWrapperAddons } from './wrappers/addons';
-// import { TemplateDescription } from './run/description';
-// import { TemplateValidation } from './run/validation';
-// import { TemplateAddons } from './run/addon';
-// import {
-// 	FormlyFieldInput,
-// 	FormlyFieldCheckbox,
-// 	FormlyFieldRadio,
-// 	FormlyFieldSelect,
-// 	FormlyFieldTextArea,
-// 	FormlyFieldMultiCheckbox,
-// } from './types/types';
-// import {
-// 	FormlyWrapperLabel,
-// 	FormlyWrapperDescription,
-// 	FormlyWrapperValidationMessages,
-// 	FormlyWrapperFieldset,
-// } from './wrappers/wrappers';
-
-// export const FIELD_TYPE_COMPONENTS = [
-// // types
-// FormlyFieldInput,
-// FormlyFieldCheckbox,
-// FormlyFieldRadio,
-// FormlyFieldSelect,
-// FormlyFieldTextArea,
-// FormlyFieldMultiCheckbox,
-
-// // wrappers
-// FormlyWrapperLabel,
-// FormlyWrapperDescription,
-// FormlyWrapperValidationMessages,
-// FormlyWrapperFieldset,
-// FormlyWrapperAddons,
-// ];
-
-// export const BOOTSTRAP_FORMLY_CONFIG: ConfigOption = {
-// 	types: [
-// 	{
-// 		name: 'input',
-// 		component: FormlyFieldInput,
-// 		wrappers: ['fieldset', 'label'],
-// 	},
-// 	{
-// 		name: 'checkbox',
-// 		component: FormlyFieldCheckbox,
-// 		wrappers: ['fieldset'],
-// 	},
-// 	{
-// 		name: 'radio',
-// 		component: FormlyFieldRadio,
-// 		wrappers: ['fieldset', 'label'],
-// 	},
-// 	{
-// 		name: 'select',
-// 		component: FormlyFieldSelect,
-// 		wrappers: ['fieldset', 'label'],
-// 	},
-// 	{
-// 		name: 'textarea',
-// 		component: FormlyFieldTextArea,
-// 		wrappers: ['fieldset', 'label'],
-// 	},
-// 	{
-// 		name: 'multicheckbox',
-// 		component: FormlyFieldMultiCheckbox,
-// 		wrappers: ['fieldset', 'label'],
-// 	},
-// 	],
-// 	wrappers: [
-// 	{name: 'label', component: FormlyWrapperLabel},
-// 	{name: 'description', component: FormlyWrapperDescription},
-// 	{name: 'validation-message', component: FormlyWrapperValidationMessages},
-// 	{name: 'fieldset', component: FormlyWrapperFieldset},
-// 	{name: 'addons', component: FormlyWrapperAddons},
-// 	],
-// 	manipulators: [
-// 	{class: TemplateDescription, method: 'run'},
-// 	{class: TemplateValidation, method: 'run'},
-// 	{class: TemplateAddons, method: 'run'},
-// 	],
-// };
