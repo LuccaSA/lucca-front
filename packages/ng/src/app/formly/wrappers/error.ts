@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormlyFieldConfig, FormlyValidationMessages, FieldWrapper, FormlyConfig } from 'ng-formly';
+import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from 'ng-formly';
 import * as _ from 'underscore';
 
 // wrapper
@@ -25,7 +25,7 @@ export class LuFormlyErrorMessage {
 	@Input() fieldForm: FormControl;
 	@Input() field: FormlyFieldConfig;
 
-	constructor(private formlyMessages: FormlyValidationMessages) {}
+	constructor() {}
 
 	get errorMessages(): string[] {
 		if (!!this.fieldForm.errors) {
