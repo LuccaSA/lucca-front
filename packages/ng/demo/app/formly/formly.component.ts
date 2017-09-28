@@ -27,6 +27,10 @@ export class DemoFormlyComponent implements OnInit {
 			code: require('!!prismjs-loader?lang=typescript!./validation/validation'),
 			markup: require('!!prismjs-loader?lang=markup!./validation/validation.html')
 		},
+		change: {
+			code: require('!!prismjs-loader?lang=typescript!./change/change'),
+			markup: require('!!prismjs-loader?lang=markup!./change/change.html')
+		},
 	};
 
 	ngOnInit() {

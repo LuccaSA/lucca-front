@@ -68,7 +68,7 @@ export class DebugComponent implements OnInit {
 		.startWith(null)
 		.map(option => option ? this.filterOptions(option) : this.options.slice());
 	}
-	displayFn(option) { return option.name; }
+	displayFn(option) { return !!option ? option.name : ''; }
 	filterOptions(name: string) {
 		return this.options.filter(option =>
 			option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);

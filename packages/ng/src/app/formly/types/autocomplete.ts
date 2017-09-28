@@ -16,7 +16,7 @@ export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
 		.startWith(null)
 		.map(option => option ? this.filterOptions(option) : this._options.slice());
 	}
-	displayFn(option) { return option.name; }
+	displayFn(option) { return !!option ? option.name : ''; }
 	filterOptions(name: string) {
 		return this._options.filter(option =>
 			option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);

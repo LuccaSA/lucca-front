@@ -12,6 +12,7 @@ import { BasicComponent } from './basic/basic';
 import { DebugComponent } from './debug/debug';
 import { FieldgroupComponent } from './fieldgroup/fieldgroup';
 import { ValidationComponent } from './validation/validation';
+import { ChangeComponent } from './change/change';
 
 @NgModule({
 	imports: [
@@ -33,6 +34,7 @@ import { ValidationComponent } from './validation/validation';
 		BasicComponent,
 		FieldgroupComponent,
 		ValidationComponent,
+		ChangeComponent,
 	],
 	exports: [
 		DemoFormlyComponent,
