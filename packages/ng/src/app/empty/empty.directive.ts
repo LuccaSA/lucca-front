@@ -5,23 +5,27 @@ import { NgModel } from '@angular/forms';
 * adds class ng-empty (or a different class) when the model is empty
 */
 @Directive({
-	selector: '[luNotEmpty]',
+	selector: '[luEmpty]',
 	providers: [NgModel],
 })
-export class NotEmptyDirective implements OnInit {
-	@Input() luNotEmpty: (val: any) => boolean;
-	get notEmptyFn() {
-		return this.luNotEmpty || (val => val !== undefined || val !== null);
+export class LuEmptyDirective implements OnInit {
+	/**
+	 * a custom function to check if the value is empty, defalt is undefined or null or '' -> empty
+	 */
+	@Input() luEmpty: (val: any) => boolean;
+	
+	get isEmptyFn() {
+		return this.luEmpty || (val => val === undefined || val === null || val === '');
 	}
 	constructor(private element: ElementRef, private ngModel: NgModel, private renderer: Renderer2) {}
 	ngOnInit() {
 		this.ngModel.valueChanges.subscribe((newVal: any) => {
-			if (this.notEmptyFn(newVal)) {
+			if (this.isEmptyFn(newVal)) {
+				this.renderer.removeClass(this.element.nativeElement, 'ng-not-empty');
+				this.renderer.addClass(this.element.nativeElement, 'ng-empty');
+			} else {
 				this.renderer.addClass(this.element.nativeElement, 'ng-not-empty');
 				this.renderer.removeClass(this.element.nativeElement, 'ng-empty');
-			} else {
-				this.renderer.addClass(this.element.nativeElement, 'ng-empty');
-				this.renderer.removeClass(this.element.nativeElement, 'ng-not-empty');
 			}
 		});
 	}
