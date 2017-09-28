@@ -20,7 +20,7 @@ export class LuEmptyDirective implements OnInit {
 	 * the ngModel it'll plug into
 	 */
 	@Input() ngModel: NgModel;
-	
+
 	get isEmptyFn() {
 		return this.luEmpty || (val => val === undefined || val === null || val === '');
 	}
@@ -32,9 +32,11 @@ export class LuEmptyDirective implements OnInit {
 		const applyClasses = (newVal: any) => {
 			if (this.isEmptyFn(newVal)) {
 				this.renderer.removeClass(this.element.nativeElement, 'ng-not-empty');
+				this.renderer.removeClass(this.element.nativeElement, 'is-filled');
 				this.renderer.addClass(this.element.nativeElement, 'ng-empty');
 			} else {
 				this.renderer.addClass(this.element.nativeElement, 'ng-not-empty');
+				this.renderer.addClass(this.element.nativeElement, 'is-filled');
 				this.renderer.removeClass(this.element.nativeElement, 'ng-empty');
 			}
 		};
