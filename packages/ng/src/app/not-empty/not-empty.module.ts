@@ -10,4 +10,3 @@ import { NotEmptyDirective } from './not-empty.directive';
 	exports: [NotEmptyDirective]
 })
 export class LuNotEmptyModule { }
-export { NotEmptyDirective as LuNotEmptyDirective } from './not-empty.directive';

@@ -1,37 +1,28 @@
-import { Directive, ElementRef, Input } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 /**
- * adds class ng-empty (or a different class) when the model is empty
- */
+* adds class ng-empty (or a different class) when the model is empty
+*/
 @Directive({
-	selector: '[luNotEmpty]'
+	selector: '[luNotEmpty]',
+	providers: [NgModel],
 })
-export class NotEmptyDirective implements ControlValueAccessor {
-
-	constructor(private el: ElementRef) {
-		debugger;
+export class NotEmptyDirective implements OnInit {
+	@Input() luNotEmpty: (val: any) => boolean;
+	get notEmptyFn() {
+		return this.luNotEmpty || (val => val !== undefined || val !== null);
 	}
-
-	/**
-	 * Write a new value to the element.
-	 */
-	writeValue(obj: any) {};
-	/**
-	 * Set the function to be called when the control receives a change event.
-	 */
-	registerOnChange(fn: any) {
-
-	};
-	/**
-	 * Set the function to be called when the control receives a touch event.
-	 */
-	registerOnTouched(fn: any) {};
-	/**
-	 * This function is called when the control status changes to or from "DISABLED".
-	 * Depending on the value, it will enable or disable the appropriate DOM element.
-	 *
-	 * @param isDisabled
-	 */
-	setDisabledState?(isDisabled: boolean) {};
+	constructor(private element: ElementRef, private ngModel: NgModel, private renderer: Renderer2) {}
+	ngOnInit() {
+		this.ngModel.valueChanges.subscribe((newVal: any) => {
+			if (this.notEmptyFn(newVal)) {
+				this.renderer.addClass(this.element.nativeElement, 'ng-not-empty');
+				this.renderer.removeClass(this.element.nativeElement, 'ng-empty');
+			} else {
+				this.renderer.addClass(this.element.nativeElement, 'ng-empty');
+				this.renderer.removeClass(this.element.nativeElement, 'ng-not-empty');
+			}
+		});
+	}
 }

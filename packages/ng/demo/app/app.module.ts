@@ -14,6 +14,7 @@ import { DemoLolModule } from './lol/lol.module';
 import {DemoDateRangePickerModule} from './date-range-picker/date-range-picker.module';
 import {DemoUserTileModule} from './user-tile/user-tile.module';
 import {DemoFormlyModule} from './formly/formly.module';
+import {DemoNotEmptyModule} from './not-empty/not-empty.module';
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,7 @@ import {DemoFormlyModule} from './formly/formly.module';
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
 		DemoFormlyModule,
+		DemoNotEmptyModule,
 
 		BrowserModule,
 		FormsModule,
