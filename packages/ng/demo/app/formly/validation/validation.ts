@@ -24,7 +24,7 @@ export class ValidationComponent {
 			},
 			validation: {
 				messages: {
-					email: 'this field is required',
+					required: 'this field is required',
 				},
 			}
 		},

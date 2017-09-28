@@ -1,4 +1,4 @@
 
-.ng-invalid {
+.ng-invalid.ng-touched {
   @include formError();
 }
