@@ -81,6 +81,10 @@
 	&.mod-compact, &.compact {
 		@extend %textarea_compact;
 	}
+
+	&.mod-framed {
+		@extend %textarea_framed;
+	}
 }
 
 // STATES
@@ -109,3 +113,4 @@
 }
 
 @import "textarea.compact";
+@import "textarea.framed";

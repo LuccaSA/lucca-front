@@ -27,8 +27,9 @@ function generateIconDemo() {
 		'plus',
 		'minus',
 		'plus_thin',
-		'tick',
 		'tick_thin',
+		'tick',
+		'tick_bold',
 
 		'cross_thin',
 		'cross',
@@ -181,6 +182,7 @@ function generateIconDemo() {
 		'credit_debit',
 		'home',
 		'planning',
+		'planning_edit',
 		'planning_tool',
 		'todolist'
 	]};

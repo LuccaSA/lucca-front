@@ -212,6 +212,10 @@
 	&.mod-compact, &.compact {
 		@extend %input_compact;
 	}
+
+	&.mod-framed {
+		@extend %input_framed;
+	}
 }
 
 
@@ -250,6 +254,17 @@
 			transform: scaleY(1);
 		}
 	}
+
+	&.is-required {
+		label::after {
+			color: _color("error");
+			content: "*";
+			display: inline-block;
+			font-size: 1.2rem;
+			margin-left: .25em;
+			position: absolute;
+		}
+	}
 }
 
 .input-options-entry {
@@ -259,3 +274,4 @@
 }
 
 @import "input.compact";
+@import "input.framed";
