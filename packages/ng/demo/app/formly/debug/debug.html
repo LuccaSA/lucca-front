@@ -6,11 +6,11 @@
 </form>
 
 <div class="input">
-	<input matInput [matAutocomplete]="auto" [formControl]="autoCompleteFC" luEmpty>
+	<input matInput [matAutocomplete]="auto" [formControl]="autoCompleteFC" luEmpty class="input-field">
 	<mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
 		<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 			<span>{{ option.name }}</span>
 		</mat-option>
 	</mat-autocomplete>
-	<label>un autocomplete pour sandy</label>
+	<label class="input-label">un autocomplete pour sandy</label>
 </div>

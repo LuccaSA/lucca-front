@@ -50,10 +50,23 @@ export class BasicComponent {
 			},
 		},
 		{
-			key: 'sex',
+			key: 'gender',
 			type: 'autocomplete',
 			templateOptions: {
-				label: 'sex - autocomplete',
+				label: 'gender - autocomplete',
+				placeholder: 'choose well',
+				options: [
+					{ id: 0, name: 'female' },
+					{ id: 1, name: 'male' },
+					{ id: 2, name: 'other' },
+				]
+			},
+		},
+		{
+			key: 'orientation',
+			type: 'select',
+			templateOptions: {
+				label: 'sexual orientation - select',
 				placeholder: 'choose well',
 				options: [
 					{ id: 0, name: 'female' },
