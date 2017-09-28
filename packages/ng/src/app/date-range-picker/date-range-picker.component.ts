@@ -1,5 +1,5 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {DateRangeModalComponent} from './date-range-modal/date-range-modal.component';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
@@ -8,7 +8,7 @@ import {translations} from './translate/date-range-picker.translate';
 import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.model';
 
 /**
- * Pick date ranges from a customizable list displayed inside an Angular Material MdSelect.
+ * Pick date ranges from a customizable list displayed inside an Angular Material MatSelect.
  */
 @Component({
 	selector: 'lu-date-range-picker',
@@ -25,7 +25,7 @@ import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.model';
 export class LuDateRangePickerComponent implements ControlValueAccessor {
 
 	/**
-	 * Placeholder string of the MDSelect
+	 * Placeholder string of the MATSelect
 	 */
 	@Input() placeholder: string;
 
@@ -42,7 +42,7 @@ export class LuDateRangePickerComponent implements ControlValueAccessor {
 	propagateChange = (_: any) => {};
 
 
-	constructor(public dialog: MdDialog, public translateService: LuTranslateService) {
+	constructor(public dialog: MatDialog, public translateService: LuTranslateService) {
 		this.preConfiguredRanges = [];
 		this.customChoice = {label: null, range: { start: null, end: null}};
 		translateService.setTranslations(translations);
