@@ -41,6 +41,13 @@ export class BasicComponent {
 				label: 'age - number',
 			},
 		},
+		{
+			key: 'description',
+			type: 'textarea',
+			templateOptions: {
+				label: 'description - textarea',
+			},
+		},
 	];
 
 	user = {};
