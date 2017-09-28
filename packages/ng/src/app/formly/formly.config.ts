@@ -47,7 +47,7 @@ export const LU_FORMLY_CONFIG = {
 	],
 	wrappers: [
 		{ name: 'title', component: LuFormlyWrapperTitle },
-		{ name: 'label', component: LuFormlyWrapperLabel },
+		// { name: 'label', component: LuFormlyWrapperLabel }, // label added to templates for technical reasons
 		{ name: 'helper', component: LuFormlyWrapperHelper },
 		{ name: 'layout', component: LuFormlyWrapperLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },
@@ -59,6 +59,6 @@ export const LU_FORMLY_CONFIG = {
 		{ class: TemplateError, method: 'run' }, // fourth
 		{ class: TemplateHelper, method: 'run' }, // third
 		{ class: TemplateSuffix, method: 'run' }, // second
-		{ class: TemplateLabel, method: 'run' }, // first
+		// { class: TemplateLabel, method: 'run' }, // first
 	],
 } as ConfigOption;
