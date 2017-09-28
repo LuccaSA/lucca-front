@@ -15,6 +15,7 @@ import {DemoDateRangePickerModule} from './date-range-picker/date-range-picker.m
 import {DemoUserTileModule} from './user-tile/user-tile.module';
 import {DemoFormlyModule} from './formly/formly.module';
 import {DemoEmptyModule} from './empty/empty.module';
+import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,7 @@ import {DemoEmptyModule} from './empty/empty.module';
 		FormsModule,
 		HttpModule,
 	],
-	providers: [],
+	providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

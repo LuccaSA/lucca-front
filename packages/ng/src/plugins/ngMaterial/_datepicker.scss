@@ -11,7 +11,7 @@
 	&::after {
 		@include makeIcon("datepicker");
 	}
-	md-icon {
+	mat-icon {
 		display: none;
 	}
 }
@@ -61,7 +61,7 @@
 }
 
 // SPECIFIC MONTH-VIEW
-md-month-view {
+mat-month-view {
 	.mat-calendar-body-label {
 		overflow: hidden;
 		text-indent: -999px;
