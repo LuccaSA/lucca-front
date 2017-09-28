@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DemoNotEmptyComponent } from './not-empty.component';
-import { LuNotEmptyModule } from '../../../src/app/not-empty';
+import { DemoEmptyComponent } from './empty.component';
+import { LuEmptyModule } from '../../../src/app/empty';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
@@ -15,10 +15,10 @@ import { CustomFnComponent } from './custom-fn/custom-fn';
 		FormsModule,
 		ReactiveFormsModule,
 		SharedModule,
-		LuNotEmptyModule,
+		LuEmptyModule,
 	],
 	declarations: [
-		DemoNotEmptyComponent,
+		DemoEmptyComponent,
 		BasicComponent,
 		CustomFnComponent,
 	],
@@ -26,4 +26,4 @@ import { CustomFnComponent } from './custom-fn/custom-fn';
 		// DemoNotEmptyComponent,
 	]
 })
-export class DemoNotEmptyModule { }
+export class DemoEmptyModule { }

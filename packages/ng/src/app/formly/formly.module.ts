@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormlyModule } from 'ng-formly';
 import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
-import { LuNotEmptyModule } from '../not-empty/not-empty.module';
+import { LuEmptyModule } from '../empty/empty.module';
 
 @NgModule({
 	declarations: [
@@ -14,7 +14,7 @@ import { LuNotEmptyModule } from '../not-empty/not-empty.module';
 		FormsModule,
 		ReactiveFormsModule,
 
-		LuNotEmptyModule,
+		LuEmptyModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],

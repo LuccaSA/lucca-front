@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 declare var require: any;
 
 @Component({
-	selector: 'demo-not-empty',
-	templateUrl: './not-empty.component.html',
+	selector: 'demo-empty',
+	templateUrl: './empty.component.html',
 	styles: []
 })
-export class DemoNotEmptyComponent implements OnInit {
+export class DemoEmptyComponent implements OnInit {
 
 	constructor() { }
 
