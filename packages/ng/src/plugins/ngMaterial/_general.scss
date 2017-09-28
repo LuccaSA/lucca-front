@@ -4,8 +4,9 @@
 	'overlay',
 	'buttons',
 	'datepicker',
+	'dialog',
 	'select',
-	'dialog';
+	'tooltip';
 
 // CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
 @include angular-material-typography(mat-typography-config(
