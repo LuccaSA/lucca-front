@@ -6,6 +6,7 @@ import * as _ from 'underscore';
 // wrapper
 @Component({
 	selector: 'lu-formly-wrapper-error',
+	styleUrls: ['wrappers.common.scss'],
 	templateUrl: './error.html',
 })
 export class LuFormlyWrapperError extends FieldWrapper {

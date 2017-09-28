@@ -5,6 +5,7 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-helper',
+	styleUrls: ['wrappers.common.scss'],
 	templateUrl: './helper.html',
 })
 export class LuFormlyWrapperHelper extends FieldWrapper {

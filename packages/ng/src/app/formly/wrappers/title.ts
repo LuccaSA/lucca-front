@@ -4,6 +4,7 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-title',
+	styleUrls: ['wrappers.common.scss'],
 	templateUrl: './title.html',
 })
 export class LuFormlyWrapperTitle extends FieldWrapper {
