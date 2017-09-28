@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { NgModel, FormControl } from '@angular/forms';
 
 /**
-* adds class ng-empty (or a different class) when the model is empty
+* adds class ng-empty when the model is empty
 */
 @Directive({
 	selector: '[luEmpty]',

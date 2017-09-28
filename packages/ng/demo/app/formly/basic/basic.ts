@@ -46,6 +46,20 @@ export class BasicComponent {
 			type: 'textarea',
 			templateOptions: {
 				label: 'description - textarea',
+				placeholder: 'enter your life journey',
+			},
+		},
+		{
+			key: 'sex',
+			type: 'autocomplete',
+			templateOptions: {
+				label: 'sex - autocomplete',
+				placeholder: 'choose well',
+				options: [
+					{ id: 0, name: 'female' },
+					{ id: 1, name: 'male' },
+					{ id: 2, name: 'other' },
+				]
 			},
 		},
 	];

@@ -2,6 +2,7 @@ import { ConfigOption } from 'ng-formly';
 // inputs
 import { LuFormlyFieldInput } from './types/input';
 import { LuFormlyFieldTextarea } from './types/textarea';
+import { LuFormlyFieldAutocomplete } from './types/autocomplete';
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
 import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
@@ -16,6 +17,7 @@ export const LU_FORMLY_COMPONENTS = [
 
 	LuFormlyFieldInput,
 	LuFormlyFieldTextarea,
+	LuFormlyFieldAutocomplete,
 
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
@@ -35,6 +37,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'textarea',
 			component: LuFormlyFieldTextarea,
+			wrappers: ['layout'],
+		},
+		{
+			name: 'autocomplete',
+			component: LuFormlyFieldAutocomplete,
 			wrappers: ['layout'],
 		},
 	],
