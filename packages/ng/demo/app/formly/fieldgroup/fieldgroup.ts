@@ -11,9 +11,6 @@ export class FieldgroupComponent {
 	userFields = [
 		{
 			className: 'form-group',
-			templateOptions: {
-				title: 'section 1',
-			},
 			fieldGroup: [{
 				className: 'form-group-line',
 				fieldGroup: [
@@ -32,11 +29,30 @@ export class FieldgroupComponent {
 						templateOptions: {
 							type: 'text',
 							label: 'last name',
+							button: {
+								click: () => {},
+								label: 'button after a field',
+								class: 'palette-primary',
+							}
 						},
 					}
 				],
+				templateOptions: {
+					button: {
+						click: () => {},
+						label: 'button after a line',
+						class: 'mod-flat',
+					}
+				}
 			},
 		],
+		templateOptions: {
+			title: 'section 1',
+			button: {
+				click: () => { console.log('mdr')},
+				label: 'button after a section',
+			}
+		}
 	},
 	{
 		className: 'form-group',
@@ -44,7 +60,6 @@ export class FieldgroupComponent {
 			title: 'section 2',
 		},
 		fieldGroup: [],
-	
 	}
 ];
 
