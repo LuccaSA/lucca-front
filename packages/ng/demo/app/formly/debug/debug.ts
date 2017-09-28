@@ -62,6 +62,7 @@ export class DebugComponent implements OnInit {
 	filteredOptions: Observable<{ id: any, name: string }[]>;
 	options = [{ id: 1, name: 'one' }, { id: 2, name: 'two' }, { id: 3, name: 'three' }, ]
 	autoCompleteFC  = new FormControl();
+	selectFC  = new FormControl();
 	ngOnInit () {
 		this.filteredOptions = this.autoCompleteFC.valueChanges
 		.startWith(null)

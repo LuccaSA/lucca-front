@@ -14,3 +14,12 @@
 	</mat-autocomplete>
 	<label class="input-label">un autocomplete pour sandy</label>
 </div>
+
+<div class="input">
+	<mat-select class="input-field" [formControl]="selectFC" luEmpty>
+		<mat-option *ngFor="let option of options" [value]="option">
+			{{ option.name }}
+		</mat-option>
+	</mat-select>
+	<label [attr.for]="id" class="input-label">un select pour sandy</label>
+</div>
