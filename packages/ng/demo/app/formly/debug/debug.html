@@ -4,3 +4,13 @@
 	<formly-form [model]="user" [fields]="userFields">
 	</formly-form>
 </form>
+
+<div class="input">
+	<input matInput [matAutocomplete]="auto" [formControl]="autoCompleteFC" luEmpty>
+	<mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+		<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+			<span>{{ option.name }}</span>
+		</mat-option>
+	</mat-autocomplete>
+	<label>un autocomplete pour sandy</label>
+</div>

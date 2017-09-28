@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
-import { Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 import {FormlyFieldConfig} from 'ng-formly';
-
+import { FieldType } from 'ng-formly';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 @Component({
 	selector: 'demo-formly-debug',
 	templateUrl: './debug.html',
 })
-export class DebugComponent {
+export class DebugComponent implements OnInit {
 	form: FormGroup = new FormGroup({});
 	userFields = [
 		{
@@ -54,6 +57,19 @@ export class DebugComponent {
 	submit(user) {
 		console.log(user);
 	}
+
+	// autocomplete example fro sandy
+	filteredOptions: Observable<{ id: any, name: string }[]>;
+	options = [{ id: 1, name: 'one' }, { id: 2, name: 'two' }, { id: 3, name: 'three' }, ]
+	autoCompleteFC  = new FormControl();
+	ngOnInit () {
+		this.filteredOptions = this.autoCompleteFC.valueChanges
+		.startWith(null)
+		.map(option => option ? this.filterOptions(option) : this.options.slice());
+	}
+	displayFn(option) { return option.name; }
+	filterOptions(name: string) {
+		return this.options.filter(option =>
+			option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+	}
 }
-
-

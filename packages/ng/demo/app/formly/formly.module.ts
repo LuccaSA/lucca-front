@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormlyModule } from 'ng-formly';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MdAutocompleteModule, MdInputModule, MdOptionModule } from '@angular/material';
 
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '../../../src/app/formly';
@@ -20,6 +21,10 @@ import { ValidationComponent } from './validation/validation';
 		SharedModule,
 		FormlyModule.forRoot(),
 		LuFormlyModule,
+
+		MdAutocompleteModule,
+		MdInputModule,
+		MdOptionModule,
 	],
 	declarations: [
 		DemoFormlyComponent,
