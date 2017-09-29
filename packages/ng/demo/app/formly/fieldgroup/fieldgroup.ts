@@ -29,29 +29,15 @@ export class FieldgroupComponent {
 						templateOptions: {
 							type: 'text',
 							label: 'last name',
-							button: {
-								click: () => { console.log('click on the button after a field'); },
-								label: 'button after a field',
-								class: 'palette-primary',
-							}
 						},
 					}
 				],
 				templateOptions: {
-					button: {
-						click: () => { console.log('click on the button after a line'); },
-						label: 'button after a line',
-						class: 'mod-flat',
-					}
 				}
 			},
 		],
 		templateOptions: {
 			title: 'section 1',
-			button: {
-				click: () => { console.log('click on the button after a section'); },
-				label: 'button after a section',
-			}
 		}
 	},
 	{
