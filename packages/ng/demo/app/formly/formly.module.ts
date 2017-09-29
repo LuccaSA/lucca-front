@@ -6,6 +6,7 @@ import { MdAutocompleteModule, MdInputModule, MdOptionModule, MdSelectModule } f
 
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '../../../src/app/formly';
+import { LuEmptyModule } from '../../../src/app/empty';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
@@ -23,6 +24,7 @@ import { OptionComponent } from './option/option';
 		SharedModule,
 		FormlyModule.forRoot(),
 		LuFormlyModule,
+		LuEmptyModule,
 
 		MdAutocompleteModule,
 		MdInputModule,

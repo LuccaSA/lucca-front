@@ -6,7 +6,7 @@
 </form>
 
 <div class="input">
-	<input matInput [matAutocomplete]="auto" [formControl]="autoCompleteFC" luEmpty class="input-field">
+	<input luEmpty [formControl]="autoCompleteFC" class="input-field" [matAutocomplete]="auto">
 	<mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
 		<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 			<span>{{ option.name }}</span>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="input">
-	<mat-select class="input-field" [formControl]="selectFC" luEmpty>
+	<mat-select class="input-field" luEmpty [(ngModel)]="select">
 		<mat-option *ngFor="let option of options" [value]="option">
 			{{ option.name }}
 		</mat-option>

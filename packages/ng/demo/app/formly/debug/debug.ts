@@ -62,15 +62,16 @@ export class DebugComponent implements OnInit {
 	filteredOptions: Observable<{ id: any, name: string }[]>;
 	options = [{ id: 1, name: 'one' }, { id: 2, name: 'two' }, { id: 3, name: 'three' }, ]
 	autoCompleteFC  = new FormControl();
-	selectFC  = new FormControl();
 	ngOnInit () {
 		this.filteredOptions = this.autoCompleteFC.valueChanges
 		.startWith(null)
-		.map(option => option ? this.filterOptions(option) : this.options.slice());
+		.map(option => option ? this.filterOptions(option.name || option) : this.options.slice());
 	}
 	displayFn(option) { return !!option ? option.name : ''; }
 	filterOptions(name: string) {
 		return this.options.filter(option =>
 			option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
 	}
+	select;
+	autocomplete;
 }
