@@ -30,7 +30,7 @@ export class FieldgroupComponent {
 							type: 'text',
 							label: 'last name',
 							button: {
-								click: () => {},
+								click: () => { console.log('click on the button after a field'); },
 								label: 'button after a field',
 								class: 'palette-primary',
 							}
@@ -39,7 +39,7 @@ export class FieldgroupComponent {
 				],
 				templateOptions: {
 					button: {
-						click: () => {},
+						click: () => { console.log('click on the button after a line'); },
 						label: 'button after a line',
 						class: 'mod-flat',
 					}
@@ -49,7 +49,7 @@ export class FieldgroupComponent {
 		templateOptions: {
 			title: 'section 1',
 			button: {
-				click: () => { console.log('mdr')},
+				click: () => { console.log('click on the button after a section'); },
 				label: 'button after a section',
 			}
 		}

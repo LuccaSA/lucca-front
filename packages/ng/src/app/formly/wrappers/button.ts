@@ -9,8 +9,8 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 })
 export class LuFormlyWrapperButton extends FieldWrapper {
 	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
-	get class(): string {
-		return this.to.button.class || '';
+	get className(): string {
+		return this.to.button.className || '';
 	}
 }
 // run to know when to add said wrapper
