@@ -1,8 +1,8 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import { NgModel, FormControl } from '@angular/forms';
+import { NgModel, FormControl, NgControl } from '@angular/forms';
 
 /**
-* adds class ng-empty when the model is empty
+* adds class ng-empty when the model is empty and classes ng-not-empty and is-filled when not empty
 */
 @Directive({
 	selector: '[luEmpty]',
@@ -12,21 +12,16 @@ export class LuEmptyDirective implements OnInit {
 	 * a custom function to check if the value is empty, defalt is undefined or null or '' -> empty
 	 */
 	@Input() luEmpty: (val: any) => boolean;
-	/**
-	 * the form control it'll plug into
-	 */
-	@Input() formControl: FormControl;
-	/**
-	 * the ngModel it'll plug into
-	 */
-	@Input() ngModel: NgModel;
+
 
 	get isEmptyFn() {
 		return this.luEmpty || (val => val === undefined || val === null || val === '');
 	}
 	constructor(
 		private element: ElementRef,
-		private renderer: Renderer2
+		private renderer: Renderer2,
+		// private ngModel: NgModel,
+		private ngControl: NgControl,
 	) {}
 	ngOnInit() {
 		const applyClasses = (newVal: any) => {
@@ -40,20 +35,9 @@ export class LuEmptyDirective implements OnInit {
 				this.renderer.removeClass(this.element.nativeElement, 'ng-empty');
 			}
 		};
-		// subscribe to valueChanges
-		if (!!this.ngModel && !!this.ngModel.valueChanges) {
-			this.ngModel.valueChanges.subscribe(applyClasses);
-		} else if (!!this.formControl && !!this.formControl.valueChanges) {
-			this.formControl.valueChanges.subscribe(applyClasses);
-		}
 
-		// apply for initial value
-		let val;
-		if (!!this.ngModel) {
-			val = this.ngModel.value;
-		} else if (!!this.formControl) {
-			val = this.formControl.value;
-		}
+		this.ngControl.valueChanges.subscribe(applyClasses);
+		const val = this.ngControl.value;
 		applyClasses(val);
 	}
 }
