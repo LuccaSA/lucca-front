@@ -31,6 +31,7 @@ export class OptionComponent {
 						type: 'input',
 						templateOptions: {
 							type: 'text',
+							label: 'this one has a placeholder',
 							placeholder: 'placeholder',
 						},
 					}
@@ -44,7 +45,8 @@ export class OptionComponent {
 						type: 'input',
 						templateOptions: {
 							type: 'text',
-							helper: 'this input has a helper',
+							label: 'this one has a helper',
+							helper: 'this is the helper message',
 						},
 					}, {
 						className: 'form-grid-md6',
