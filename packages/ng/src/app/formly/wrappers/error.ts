@@ -1,7 +1,6 @@
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from 'ng-formly';
-import * as _ from 'underscore';
 
 // wrapper
 @Component({
@@ -30,15 +29,13 @@ export class LuFormlyErrorMessage {
 
 	get errorMessages(): string[] {
 		if (!!this.fieldForm.errors) {
-			return _.chain(this.fieldForm.errors)
-			.mapObject((val, key) => {
+			const messages = [];
+			Object.keys(this.fieldForm.errors).forEach(key => {
 				if (this.field.validation && this.field.validation.messages && this.field.validation.messages[key]) {
-					return this.field.validation.messages[key];
+					messages.push(this.field.validation.messages[key]);
 				}
-				return undefined;
-			})
-			.without(undefined)
-			.value();
+			});
+			return messages;
 		} else {
 			return [];
 		}
