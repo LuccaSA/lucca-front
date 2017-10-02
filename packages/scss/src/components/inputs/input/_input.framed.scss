@@ -93,7 +93,7 @@
 		}
 	}
 
-	&.mod-select, &.mod-search {
+	&.mod-select, &.mod-search, &.mod-autocomplete {
 		&::after {
 			right: _component("input.framed.select.icon-offset");
 		}
