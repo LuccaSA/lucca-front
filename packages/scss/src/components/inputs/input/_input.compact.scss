@@ -1,6 +1,8 @@
 %input_compact {
 	align-items: center;
 	display: flex;
+	padding-top: 0;
+	margin-top: 1rem;
 
 	.input-field {
 		border: 1px solid _component("input.border.color");
@@ -12,7 +14,7 @@
 			transition: none;
 		}
 
-		&:focus {
+		&:focus, &.is-filled {
 			~ .input-label {
 				font-size: inherit;
 				top: auto;
@@ -33,19 +35,33 @@
 	}
 
 	.input-messages {
-		position: absolute;
+		align-items: center;
+		bottom: 0;
+		display: inline-flex;
 		left: calc(100% + 1rem);
-		width: 100%;
 		line-height: 1.1;
+		position: absolute;
+		top: 0;
+		width: 100%;
 		max-width: _component("input.compact.label-sizes.default");
+		&.mod-helper {
+			bottom: auto;
+			left: 0;
+			max-width: 100%;
+			padding-left: calc(#{_component("input.compact.label-sizes.default")} + #{_component("input.compact.label-right-margin")});
+			right: 0;
+			top: 100%;
+		}
 	}
 
 	.input-options {
 		left: auto;
-		right: 0;
+		margin: 0;
 		min-width: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
+		right: 0;
+		top: 100%;
 		width: calc(100% - #{_component("input.compact.label-right-margin")} - #{_component("input.compact.label-sizes.default")});
 	}
 
@@ -102,6 +118,10 @@
 			.input-label {
 				width: $label-width;
 			}
+
+			.input-messages.mod-helper {
+				padding-left: calc($label-width + #{_component("input.compact.label-right-margin")});
+			}
 		}
 	}
 
@@ -113,7 +133,7 @@
 		&::after {
 			bottom: auto;
 			right: .5rem;
-			top: 1.4rem;
+			top: auto;
 		}
 
 		.input-field {
@@ -124,6 +144,8 @@
 			padding-right: 0;
 		}
 	}
+
+	
 
 	// Disabled & readonly
 	.input-field {

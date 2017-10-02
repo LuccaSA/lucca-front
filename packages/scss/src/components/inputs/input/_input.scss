@@ -80,6 +80,9 @@
 	}
 }
 
+.input-messages {
+	line-height: 1.3;
+}
 .input-error {
 	color: _color("error");
 	font-size: _component("input.message.font-size");
