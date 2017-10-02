@@ -35,6 +35,7 @@ export class ValidationComponent {
 				type: 'email',
 				label: 'Email address',
 				placeholder: 'Enter email',
+				mod: 'mod-compact'
 			},
 			validators: {
 				validation: Validators.compose([
@@ -76,6 +77,7 @@ export class ValidationComponent {
 				label: 'multiple',
 				placeholder: 'over 10 and below 5',
 				helper: 'it will display every validation message',
+				mod: 'mod-compact'
 			},
 			validators: {
 				validation: Validators.compose([

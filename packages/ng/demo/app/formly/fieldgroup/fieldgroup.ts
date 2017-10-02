@@ -99,7 +99,7 @@ export class FieldgroupComponent {
 						{ id: 1, name: 'male' },
 						{ id: 2, name: 'other' },
 					],
-					mod: 'mod-framed mod-select'
+					mod: 'mod-framed'
 				}
 			},
 			{
@@ -107,7 +107,12 @@ export class FieldgroupComponent {
 				type: 'autocomplete',
 				templateOptions: {
 					label: 'Autocompletion',
-					mod: 'mod-framed mod-autocomplete'
+					mod: 'mod-framed mod-autocomplete',
+					options: [
+						{ name: 'female' },
+						{ name: 'male' },
+						{ name: 'other' },
+					],
 				}
 			}
 		],
