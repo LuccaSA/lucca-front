@@ -1,0 +1,21 @@
+.mat-option {
+	display: block;
+	outline: none;
+	@extend .input-options-entry;
+	&.mat-selected, &.mat-active {
+		@extend .input-options-entry.is-focus;
+	}
+
+	.mat-option-ripple {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		pointer-events: none;
+	}
+
+	.mat-ripple {
+		overflow: hidden;
+	}
+}
