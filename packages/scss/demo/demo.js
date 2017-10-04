@@ -98,6 +98,7 @@ function generateIconDemo() {
 		'gallery',
 		'camera',
 		'phone',
+		'smartphone',
 		'flash',
 
 		'refresh',
@@ -184,7 +185,19 @@ function generateIconDemo() {
 		'planning',
 		'planning_edit',
 		'planning_tool',
-		'todolist'
+		'todolist',
+
+		'format_link',
+		'format_list',
+		'format_list_numbers',
+		'format_redo',
+		'format_undo',
+		'format_underlined',
+		'format_bold',
+		'format_italic',
+		'format_clear',
+
+		'hr_folder'
 	]};
 
 	w3.displayObject("icons-section", icons);
