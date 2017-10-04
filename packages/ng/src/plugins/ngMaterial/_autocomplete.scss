@@ -1,0 +1,11 @@
+.mat-autocomplete-panel {
+	@extend .input-options;
+	position: relative;
+	top: auto;
+	background: white;
+
+	&.mat-autocomplete-visible {
+		opacity: 1;
+		transform: scaleY(1);
+	}
+}

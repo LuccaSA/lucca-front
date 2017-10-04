@@ -1,9 +1,9 @@
 <div class="demo-container">
-	<lu-date-range-picker
-		[(ngModel)]="range"
-		[placeholder]="placeholder"
-		[preConfiguredRanges]="preConfiguredRanges">
-	</lu-date-range-picker>
+	<div class="input">
+		<lu-date-range-picker class="input-field" [(ngModel)]="range" [preConfiguredRanges]="preConfiguredRanges">
+		</lu-date-range-picker>
+		<label class="input-label" for="range">Project dates</label>
+	</div>
 </div>
 
 <p>from : {{range.start ? range.start.format('LL') : 'beginning of time'}}</p>
