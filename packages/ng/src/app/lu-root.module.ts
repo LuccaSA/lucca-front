@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {MATERIAL_COMPATIBILITY_MODE, MAT_RIPPLE_GLOBAL_OPTIONS} from '@angular/material';
+import { MATERIAL_COMPATIBILITY_MODE, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material';
 import { LuLolModule } from './lol/lol.module';
-import {LuDateRangePickerModule} from './date-range-picker/date-range-picker.module';
-import {LuUserTileModule} from './user-tile/user-tile.module';
+import { LuDateRangePickerModule } from './date-range-picker/date-range-picker.module';
+import { LuUserTileModule } from './user';
 
 @NgModule({
 	imports: [
