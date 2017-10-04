@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IUser} from './user-tile.models';
+import {IUser} from '../index';
 
 /**
  * Displays user picture and name. IUser's role can be specified, and the footer is customizable.
