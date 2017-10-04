@@ -13,6 +13,10 @@ export class BasicComponent {
 	placeholder: string;
 	range: IDateRange = {start: null, end: null};
 
+	emptyRange = (range: IDateRange) => {
+		return !range || (!range.start && !range.end);
+	}
+
 	constructor() {
 		const today = moment().startOf('day');
 
