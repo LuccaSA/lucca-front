@@ -11,9 +11,10 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.router';
 
 import { DemoLolModule } from './lol/lol.module';
-import {DemoDateRangePickerModule} from './date-range-picker/date-range-picker.module';
-import {DemoUserTileModule} from './user-tile/user-tile.module';
-import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
+import { DemoDateRangePickerModule } from './date-range-picker/date-range-picker.module';
+import { DemoUserTileModule } from './user-tile/user-tile.module';
+import { DemoUserNameModule } from './user-name/user-name.module';
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 		DemoLolModule,
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
+		DemoUserNameModule,
 		BrowserModule,
 		FormsModule,
 		HttpModule,

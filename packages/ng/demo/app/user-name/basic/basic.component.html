@@ -1,0 +1,6 @@
+<mat-select [(ngModel)]="selectedFormat">
+	<mat-option *ngFor="let format of availableFormats" [value]="format">
+		{{format}}
+	</mat-option>
+</mat-select>
+Result: {{ user | userName: selectedFormat }}
