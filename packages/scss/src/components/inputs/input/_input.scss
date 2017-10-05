@@ -54,7 +54,7 @@
 .input-options {
 	background: white;
 	border-radius: 3px;
-	box-shadow: unquote(_theme("commons.elevations.3"));
+	@include elevate(3);
 	left: 0;
 	list-style: none;
 	max-height: 15rem;

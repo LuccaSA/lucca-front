@@ -39,7 +39,7 @@
 		text-decoration: none;
 
 		&:hover {
-			box-shadow: unquote(_theme("commons.elevations.3"));
+			@include elevate(3);
 		}
 	}
 }
