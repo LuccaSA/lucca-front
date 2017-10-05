@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'demo-basic-user-name',
+	selector: 'demo-basic-user-display',
 	templateUrl: './basic.component.html',
 	styles: []
 })

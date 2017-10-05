@@ -4,8 +4,8 @@ import { IUser } from './user.model';
 /**
  * Displays a user name according to specified format. Supported formats: f for first name, F for first initial, l for last name, L for last initial.
  */
-@Pipe({name: 'userName'})
-export class UserNamePipe implements PipeTransform {
+@Pipe({name: 'luUserDisplay'})
+export class LuUserDisplayPipe implements PipeTransform {
 	transform(user: IUser, format: string): string {
 		let result = '';
 

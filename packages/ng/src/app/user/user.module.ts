@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LuUserTileModule } from './user-tile';
-import { UserNamePipe } from './user-name.pipe';
+import { LuUserDisplayPipe } from './user-display.pipe';
 
 @NgModule({
 	imports: [
@@ -9,10 +9,10 @@ import { UserNamePipe } from './user-name.pipe';
 		LuUserTileModule,
 	],
 	declarations: [
-		UserNamePipe,
+		LuUserDisplayPipe,
 	],
 	exports: [
-		UserNamePipe,
+		LuUserDisplayPipe,
 	]
 })
 export class LuUserModule { }

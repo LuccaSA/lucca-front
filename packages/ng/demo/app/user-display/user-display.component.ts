@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 declare var require: any;
 
 @Component({
-	selector: 'demo-user-name',
-	templateUrl: './user-name.component.html',
+	selector: 'demo-user-display',
+	templateUrl: './user-display.component.html',
 	styles: []
 })
-export class DemoUserNameComponent implements OnInit {
+export class DemoUserDisplayComponent implements OnInit {
 	snippets = {
 		basic: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),

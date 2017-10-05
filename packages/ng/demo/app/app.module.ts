@@ -13,7 +13,7 @@ import { appRoutes } from './app.router';
 import { DemoLolModule } from './lol/lol.module';
 import { DemoDateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { DemoUserTileModule } from './user-tile/user-tile.module';
-import { DemoUserNameModule } from './user-name/user-name.module';
+import { DemoUserDisplayModule } from './user-display/user-display.module';
 import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 		DemoLolModule,
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
-		DemoUserNameModule,
+		DemoUserDisplayModule,
 		BrowserModule,
 		FormsModule,
 		HttpModule,
