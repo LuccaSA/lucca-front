@@ -39,7 +39,7 @@
 		text-decoration: none;
 
 		&:hover {
-			box-shadow: unquote(_theme("commons.hover.box-shadow"));
+			@include elevate(3);
 		}
 	}
 }
