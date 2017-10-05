@@ -30,7 +30,7 @@
 
 .card {
 	&.mod-grey {
-		background: _theme("commons.background.color");
+		background: _theme("commons.background.base");
 	}
 
 	&.mod-clickable {
@@ -39,7 +39,7 @@
 		text-decoration: none;
 
 		&:hover {
-			box-shadow: unquote(_theme("commons.hover.box-shadow"));
+			box-shadow: unquote(_theme("commons.elevations.3"));
 		}
 	}
 }
