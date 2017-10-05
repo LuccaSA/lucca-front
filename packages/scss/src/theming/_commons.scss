@@ -15,10 +15,7 @@ $commons: (
 		"opacity": .5,
 	),
 	"background": (
-		"base": #F5F5F5,
-		"dark": #EEEEEE,
-		"darker": #E0E0E0,
-		"darkest": #CCCCCC
+		"color": #F5F5F5,
 	),
 	"text": (
 		"default": ( "color": #666666 ),
@@ -41,7 +38,11 @@ $commons: (
 		"5":	"0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)"
 	),
 	"banner-height": 50px,
-	"transition": "all 150ms ease"
+	"box-shadow": '0 2px 3px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3)',
+	"transition": "all 150ms ease",
+	"hover": (
+		"box-shadow": '0 8px 12px rgba(0, 0, 0, .15), 0 0 2px rgba(0, 0, 0, .3)',
+	)
 );
 
 $theme: _set($theme, "commons", $commons);

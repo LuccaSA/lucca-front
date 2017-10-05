@@ -114,7 +114,7 @@
 	// Disabled & readonly
 	.textarea-field {
 		&[disabled], &[readonly] {
-			background: _theme("commons.background.dark");
+			background: #EBEBE4;
 			background-image: none;
 			background-position: bottom;
 		}

@@ -7,7 +7,7 @@ html {
 }
 
 body {
-	background: _theme("commons.background.base");
+	background: _theme("commons.background.color");
 	color: _color("text.default");
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _theme("sizes.standard.font-size");
