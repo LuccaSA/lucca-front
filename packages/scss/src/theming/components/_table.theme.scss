@@ -3,10 +3,10 @@ $table: (
 	font-size: _theme("sizes.standard.font-size"),
 	line-height: _theme("sizes.standard.line-height"),
 	zebra: (
-		background: #F2F2F2,
+		background: _theme("commons.background.base"),
 	),
 	hover: (
-		background: #E8E8E8,
+		background: _theme("commons.background.dark"),
 	),
 
 	// mod

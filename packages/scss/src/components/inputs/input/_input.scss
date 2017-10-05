@@ -76,7 +76,7 @@
 	transition: background 50ms ease;
 
 	&:hover {
-		background: rgba(0, 0, 0, .1);
+		background: _theme("commons.background.dark");
 	}
 }
 
@@ -228,7 +228,7 @@
 .input-field {
 	&[disabled], &[readonly] {
 		background: transparent;
-		background-image: linear-gradient(to right, #CCCCCC 33%, rgba(255, 255, 255, 0) 0%);
+		background-image: linear-gradient(to right, #CCCCCC 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
 		background-position: bottom;
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
@@ -272,7 +272,7 @@
 
 .input-options-entry {
 	&.is-focus {
-		background: rgba(0, 0, 0, .1);
+		background: _theme("commons.background.dark");
 	}
 }
 
