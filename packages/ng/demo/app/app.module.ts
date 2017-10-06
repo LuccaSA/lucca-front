@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -14,7 +15,8 @@ import { DemoLolModule } from './lol/lol.module';
 import { DemoDateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { DemoUserTileModule } from './user-tile/user-tile.module';
 import { DemoUserDisplayModule } from './user-display/user-display.module';
-import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+import {DemoFormlyModule} from './formly/formly.module';
+import {DemoEmptyModule} from './empty/empty.module';
 
 @NgModule({
 	declarations: [
@@ -28,7 +30,10 @@ import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
 		DemoUserDisplayModule,
-		BrowserModule,
+		DemoFormlyModule,
+		DemoEmptyModule,
+
+    BrowserModule,
 		FormsModule,
 		HttpModule,
 	],

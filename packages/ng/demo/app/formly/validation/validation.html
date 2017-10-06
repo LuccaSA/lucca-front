@@ -1,0 +1,8 @@
+<h3>
+	Validation
+</h3>
+<form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(user)">
+	<formly-form [model]="user" [fields]="userFields" [form]="form">
+		<button type="submit" class="button" [ngClass]="{'is-disabled': form.invalid}">submit</button>
+	</formly-form>
+</form>

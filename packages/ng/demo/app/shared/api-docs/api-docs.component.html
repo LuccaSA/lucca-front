@@ -3,9 +3,16 @@
 		<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/{{apiDocs.fileName}}" target="_blank">{{apiDocs.className}}</a>
 	</h2>
 	<p>{{apiDocs.description}}</p>
+
+	<div *ngIf="apiDocs.pipeName">
+		<h3>How to use</h3>
+		<code>{{apiDocs.input.name}} | {{apiDocs.pipeName}}</code>
+		<code *ngFor="let arg of apiDocs.args">[:{{arg.name}}]</code>
+	</div>
+
 	<table class="table table-sm table-hover">
 		<tbody>
-			<tr>
+			<tr *ngIf="apiDocs.selector">
 				<td class="label-cell">Selector</td>
 				<td class="content-cell"><code>{{apiDocs.selector}}</code></td>
 			</tr>
