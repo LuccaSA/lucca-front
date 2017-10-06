@@ -81,6 +81,7 @@ class APIDocVisitor {
     var description = ts.displayPartsToString(symbol.getDocumentationComment());
     var className = classDeclaration.name.text;
     var directiveInfo;
+    var pipeInfo;
     var members;
 
     if (classDeclaration.decorators) {
@@ -104,6 +105,22 @@ class APIDocVisitor {
           members = this.visitMembers(classDeclaration.members);
 
           return [{fileName, className, description, methods: members.methods, properties: members.properties}];
+        } else if (this.isPipeDecorator(classDeclaration.decorators[i])) {
+          pipeInfo = this.visitPipeDecorator(classDeclaration.decorators[i]);
+          members = this.visitPipeMembers(classDeclaration.members);
+
+          return [{
+            fileName,
+            className,
+            description,
+            pipeName: pipeInfo.name,
+            input: members.input,
+            args: members.args,
+            inputs: [],
+            outputs: [],
+            methods: [],
+            properties: [],
+          }];
         }
       }
     } else if (description) {
@@ -112,7 +129,7 @@ class APIDocVisitor {
       return [{fileName, className, description, methods: members.methods, properties: members.properties}];
     }
 
-    // a class that is not a directive or a service, not documented for now
+    // a class that is not a directive, a service or a pipe, not documented for now
     return [];
   }
 
@@ -133,6 +150,29 @@ class APIDocVisitor {
     }
 
     return {selector, exportAs};
+  }
+
+  visitPipeDecorator(decorator) {
+    var name = '';
+    var nameProperty = decorator.expression.arguments[0].properties.find(p => p.name.text === 'name');
+    if (!!nameProperty) {
+      name = nameProperty.initializer.text;
+    }
+    return {name};
+  }
+
+  visitPipeMembers(members) {
+    var args = [];
+    var input = '';
+
+    var transformMethod = members.find(m => m.kind === ts.SyntaxKind.MethodDeclaration && m.name.text === 'transform');
+    if (!!transformMethod && !!transformMethod.parameters && !!transformMethod.parameters.length) {
+      input = this.visitArgument(transformMethod.parameters[0]);
+      for (var i = 1; i < transformMethod.parameters.length; i++) {
+        args.push(this.visitArgument(transformMethod.parameters[i]));
+      }
+    }
+    return {input, args};
   }
 
   visitMembers(members) {
@@ -228,6 +268,8 @@ class APIDocVisitor {
   }
 
   isServiceDecorator(decorator) { return decorator.expression.expression.text === 'Injectable'; }
+
+  isPipeDecorator(decorator) { return decorator.expression.expression.text === 'Pipe'; }
 
   getDecoratorOfType(node, decoratorType) {
     var decorators = node.decorators || [];
