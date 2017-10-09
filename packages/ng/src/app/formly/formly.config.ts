@@ -1,6 +1,7 @@
 import { ConfigOption } from 'ng-formly';
 // inputs
 import { LuFormlyFieldInput } from './types/input';
+import { LuFormlyFieldDate } from './types/date';
 import { LuFormlyFieldTextarea } from './types/textarea';
 import { LuFormlyFieldAutocomplete } from './types/autocomplete';
 import { LuFormlyFieldSelect } from './types/select';
@@ -18,6 +19,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyErrorMessage,
 
 	LuFormlyFieldInput,
+	LuFormlyFieldDate,
 	LuFormlyFieldTextarea,
 	LuFormlyFieldAutocomplete,
 	LuFormlyFieldSelect,
@@ -36,6 +38,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'input',
 			component: LuFormlyFieldInput,
+			wrappers: ['layout'],
+		},
+		{
+			name: 'date',
+			component: LuFormlyFieldDate,
 			wrappers: ['layout'],
 		},
 		{
