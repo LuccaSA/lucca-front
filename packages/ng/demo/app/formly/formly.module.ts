@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormlyModule } from 'ng-formly';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdAutocompleteModule, MdInputModule, MdOptionModule, MdSelectModule } from '@angular/material';
+import { MatAutocompleteModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
 
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '../../../src/app/formly';
@@ -26,10 +26,10 @@ import { OptionComponent } from './option/option';
 		LuFormlyModule,
 		LuEmptyModule,
 
-		MdAutocompleteModule,
-		MdInputModule,
-		MdOptionModule,
-		MdSelectModule,
+		MatAutocompleteModule,
+		MatInputModule,
+		MatOptionModule,
+		MatSelectModule,
 	],
 	declarations: [
 		DemoFormlyComponent,

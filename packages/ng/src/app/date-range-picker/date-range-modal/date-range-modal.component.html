@@ -3,7 +3,7 @@
 		<input class="input-field"
 					 #startInput
 					 [ngClass]="{'is-filled': !!startInput.value}"
-					 [mdDatepicker]="pickerStart" [(ngModel)]="start" placeholder="../../....">
+					 [matDatepicker]="pickerStart" [(ngModel)]="start" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_FROM' | translate}}</label>
 		<mat-datepicker-toggle [for]="pickerStart"></mat-datepicker-toggle>
 		<mat-datepicker #pickerStart></mat-datepicker>
@@ -13,7 +13,7 @@
 		<input class="input-field"
 					 #endInput
 					 [ngClass]="{'is-filled': !!endInput.value, 'is-error': start && end && end.isBefore(start)}"
-					 [mdDatepicker]="pickerEnd" [(ngModel)]="end" placeholder="../../....">
+					 [matDatepicker]="pickerEnd" [(ngModel)]="end" placeholder="../../....">
 		<label class="input-label">{{'LU_DATE_RANGE_PICKER_PLACEHOLDER_TO' | translate}}</label>
 		<mat-datepicker-toggle [for]="pickerEnd"></mat-datepicker-toggle>
 		<mat-datepicker #pickerEnd></mat-datepicker>
