@@ -1,5 +1,5 @@
 <input matInput [matAutocomplete]="auto" [formControl]="formControl" luEmpty class="input-field" [formlyAttributes]="field" >
-<mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
 	<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 		<span>{{ option.name }}</span>
 	</mat-option>
