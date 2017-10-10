@@ -4,10 +4,17 @@
 	@include box-shadow-override();
 }
 
+.mat-datepicker-toggle {
+	@extend .input-suffix;
+	z-index: 2;
+}
 .mat-datepicker-toggle button {
 	background: none !important;
-	position: relative;
-	margin-left: -2em;
+	width: auto;
+	height: auto;
+	line-height: 1;
+	border-radius: 0;
+
 	&::after {
 		@include makeIcon("datepicker");
 	}
