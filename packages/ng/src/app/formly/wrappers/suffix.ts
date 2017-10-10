@@ -14,6 +14,10 @@ export class LuFormlyWrapperSuffix extends FieldWrapper {
 export class TemplateSuffix {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
+			if (field && field.type === 'date') {
+				field.templateOptions.suffix = 'calendar';
+				return 'suffix';
+			}
 			if (field && field.templateOptions && field.templateOptions.suffix) {
 				return 'suffix';
 			}
