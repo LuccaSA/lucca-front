@@ -1,5 +1,5 @@
 .input {
-	padding-top: 1rem;
+	padding-top: _component("input.padding-top");
 	position: relative;
 	width: _component("input.sizes.default");
 }
@@ -12,9 +12,9 @@
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("input.font-size");
 	font-weight: 400;
-	margin-bottom: .15rem;
+	margin-bottom: _component("input.input-field.margin-bottom");
 	outline: 0;
-	padding: .5rem 0;
+	padding: _component("input.input-field.padding-vertical") 0;
 	position: relative;
 	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
@@ -101,6 +101,13 @@
 	margin: 0;
 }
 
+.input-suffix {
+	position: absolute;
+	right: 0;
+	line-height: 1;
+	top: _component("input.padding-top") + _component("input.input-field.padding-vertical");
+}
+
 // PALETTE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -158,6 +165,16 @@
 
 		.input-label {
 			display: none;
+		}
+
+		.input-suffix {
+			top: _component("input.input-field.padding-vertical");
+		}
+	}
+
+	&.mod-withSuffix {
+		.input-field {
+			padding-right: _component("input.input-suffix.padding-right");
 		}
 	}
 

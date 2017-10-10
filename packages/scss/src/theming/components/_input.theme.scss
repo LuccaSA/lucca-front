@@ -1,6 +1,16 @@
 $input: (
 
   font-size: 1rem,
+  padding-top: 1rem,
+
+  input-field: (
+    margin-bottom: .15rem,
+    padding-vertical: .5rem,
+  ),
+
+  input-suffix: (
+    padding-right: 2.5rem,
+  ),
 
   border: (
     color: _color("text.placeholder")
@@ -30,7 +40,7 @@ $input: (
     default-palette: (
       color: _color("text.light")
     ),
-
+    padding: .5rem,
     label-right-margin: .3rem,
     label-sizes: (
         shorter: 3rem,

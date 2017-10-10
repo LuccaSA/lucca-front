@@ -26,11 +26,8 @@
 	}
 
 	.input-suffix {
-		bottom: _component("input.framed.bottom-padding");
-		color: _color("text.placeholder");
-		position: absolute;
+		top: _component("input.framed.top-padding");
 		right: _component("input.framed.side-padding");
-		text-align: right;
 	}
 
 	.input-messages {
@@ -89,7 +86,7 @@
 	// MOD
 	&.mod-withSuffix {
 		.input-field {
-			padding-right: 3rem;
+			padding-right: _component("input.input-suffix.padding-right");
 		}
 	}
 

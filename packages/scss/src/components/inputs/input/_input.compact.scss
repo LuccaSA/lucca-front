@@ -64,6 +64,11 @@
 		width: calc(100% - #{_component("input.compact.label-right-margin")} - #{_component("input.compact.label-sizes.default")});
 	}
 
+	.input-suffix {
+		top: _component("input.compact.padding");
+		right: _component("input.compact.padding");
+	}
+
 	// COLORING
 	@mixin inputColoring($palette) {
 		.input-field:focus {
@@ -143,7 +148,11 @@
 		}
 	}
 
-	
+	&.mod-withSuffix {
+		.input-field {
+			padding-right: _component("input.input-suffix.padding-right");
+		}
+	}
 
 	// Disabled & readonly
 	.input-field {
