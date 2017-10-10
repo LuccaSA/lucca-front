@@ -13,4 +13,8 @@ export class LuFormlyWrapperLayout extends FieldWrapper {
 	get mod() {
 		return this.to.mod || '';
 	}
+
+	get modWithSuffix() {
+		return !!this.to && !!this.to.suffix ? 'mod-withSuffix' : '';
+	}
 }
