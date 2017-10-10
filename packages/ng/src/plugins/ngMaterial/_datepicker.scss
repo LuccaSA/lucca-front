@@ -78,6 +78,10 @@
 			color: _color("primary", "text");
 		}
 	}
+	&.mat-calendar-body-disabled {
+		opacity: .5;
+		pointer-events: none;
+	}
 }
 
 // SPECIFIC MONTH-VIEW
