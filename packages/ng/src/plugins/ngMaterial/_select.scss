@@ -1,14 +1,36 @@
 mat-select {
 	@extend .input;
-	padding-top: 0 !important;
 }
 
 .input.mod-framed mat-select {
-	padding-top: _component("input.framed.top-padding") !important;
+	padding: 0 !important;
+	.mat-select-trigger {
+		font-size: 1em;
+		margin: 2.2em 1em 0.7em;
+		&::after {
+			content: '';
+			display: block;
+			position: absolute;
+			top: -2.2em;
+			right: -1em;
+			bottom: -0.7em;
+			left: -1em;
+		}
+	}
+}
+
+.input:not(.mod-compact) mat-select {
+	padding-top: 0 !important;
 }
 
 .mat-select-trigger {
-	height: 1em !important;
+	height: 1.1em !important;
+	min-width: 0 !important;
+	text-overflow: ellipsis;
+}
+
+.mat-select-placeholder {
+	width: auto !important;
 }
 .mat-select-panel {
 	@extend .input-options;
