@@ -6,12 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'lu-formly-field-autocomplete',
-	styles: [`
-	:host {
-		width: 100%;
-		display: inherit;
-		align-items: inherit;
-	}`],
+	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './autocomplete.html',
 })
 export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {

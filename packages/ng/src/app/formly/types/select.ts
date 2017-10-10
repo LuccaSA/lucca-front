@@ -6,12 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'lu-formly-field-select',
+	styleUrls: ['formly-field.common.scss'],
 	styles: [`
-	:host {
-		width: 100%;
-		display: inherit;
-		align-items: inherit;
-	}
 	:host-context(.mod-framed) {
 		display: initial;
 	}`],
