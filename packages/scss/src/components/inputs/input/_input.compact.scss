@@ -5,8 +5,7 @@
 	margin-top: 1rem;
 
 	.input-field {
-		border: 1px solid _component("input.border.color");
-		box-shadow: none;
+		box-shadow: 0px 0px 0px 1px _component("input.border.color");
 		padding: .5rem;
 
 		&::placeholder {
@@ -68,8 +67,7 @@
 	// COLORING
 	@mixin inputColoring($palette) {
 		.input-field:focus {
-			border-color: _get($palette, "color");
-			box-shadow: none;
+			box-shadow: 0px 0px 0px 1px _get($palette, "color");
 
 			~ .input-label {
 				color: #A6A6A6;
@@ -156,7 +154,7 @@
 		}
 
 		&.is-error {
-			border-color: _color("error");
+			box-shadow: 0px 0px 0px 1px _color("error");
 		}
 	}
 }
