@@ -42,6 +42,13 @@ export class BasicComponent {
 			},
 		},
 		{
+			key: 'birthDate',
+			type: 'date',
+			templateOptions: {
+				label: 'birthDate - date',
+			},
+		},
+		{
 			key: 'description',
 			type: 'textarea',
 			templateOptions: {

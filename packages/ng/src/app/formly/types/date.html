@@ -1,0 +1,3 @@
+<input class="input-field" [matDatepicker]="picker" #input [formControl]="formControl" [formlyAttributes]="field" luEmpty (click)="togglePicker(picker)" (focus)="openPicker(picker)">
+<label [attr.for]="id" class="input-label">{{ to.label }}</label>
+<mat-datepicker #picker></mat-datepicker>

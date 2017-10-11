@@ -5,7 +5,7 @@ import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from 'ng-formly';
 // wrapper
 @Component({
 	selector: 'lu-formly-wrapper-error',
-	styleUrls: ['wrappers.common.scss'],
+	styleUrls: ['flex-layout.scss'],
 	templateUrl: './error.html',
 })
 export class LuFormlyWrapperError extends FieldWrapper {
