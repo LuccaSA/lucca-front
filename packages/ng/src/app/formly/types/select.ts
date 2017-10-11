@@ -6,11 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'lu-formly-field-select',
-	styleUrls: ['formly-field.common.scss'],
-	styles: [`
-	:host-context(.mod-framed) {
-		display: initial;
-	}`],
+	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './select.html',
 })
 export class LuFormlyFieldSelect extends FieldType implements OnInit {
