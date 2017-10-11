@@ -143,12 +143,12 @@
 		}
 	}
 
-	
+
 
 	// Disabled & readonly
 	.input-field {
 		&[disabled], &[readonly] {
-			background: #EBEBE4;
+			background: _theme("commons.background.dark");
 			background-image: none;
 			background-position: bottom;
 		}
