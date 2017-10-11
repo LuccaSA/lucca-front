@@ -1,5 +1,5 @@
 .input {
-	padding-top: 1rem;
+	padding-top: _component("input.padding-top");
 	position: relative;
 	width: _component("input.sizes.default");
 }
@@ -12,9 +12,9 @@
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("input.font-size");
 	font-weight: 400;
-	margin-bottom: .15rem;
+	margin-bottom: _component("input.input-field.margin-bottom");
 	outline: 0;
-	padding: .5rem 0;
+	padding: _component("input.input-field.padding-vertical") 0;
 	position: relative;
 	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
@@ -54,7 +54,7 @@
 .input-options {
 	background: white;
 	border-radius: 3px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, .2), 0 0 3px rgba(0, 0, 0, .3);
+	@include elevate(3);
 	left: 0;
 	list-style: none;
 	max-height: 15rem;
@@ -76,7 +76,7 @@
 	transition: background 50ms ease;
 
 	&:hover {
-		background: rgba(0, 0, 0, .1);
+		background: _theme("commons.background.dark");
 	}
 }
 
@@ -99,6 +99,13 @@
 	color: _color("text.light");
 	font-size: _component("input.message.font-size");
 	margin: 0;
+}
+
+.input-suffix {
+	position: absolute;
+	right: 0;
+	line-height: 1;
+	top: _component("input.padding-top") + _component("input.input-field.padding-vertical");
 }
 
 // PALETTE
@@ -158,6 +165,16 @@
 
 		.input-label {
 			display: none;
+		}
+
+		.input-suffix {
+			top: _component("input.input-field.padding-vertical");
+		}
+	}
+
+	&.mod-withSuffix {
+		.input-field {
+			padding-right: _component("input.input-suffix.padding-right");
 		}
 	}
 
@@ -228,7 +245,7 @@
 .input-field {
 	&[disabled], &[readonly] {
 		background: transparent;
-		background-image: linear-gradient(to right, #CCCCCC 33%, rgba(255, 255, 255, 0) 0%);
+		background-image: linear-gradient(to right, #CCCCCC 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
 		background-position: bottom;
 		background-repeat: repeat-x;
 		background-size: 3px 1px;
@@ -272,7 +289,7 @@
 
 .input-options-entry {
 	&.is-focus {
-		background: rgba(0, 0, 0, .1);
+		background: _theme("commons.background.dark");
 	}
 }
 

@@ -6,7 +6,7 @@
 	position: relative;
 
 	&::before {
-		background: #CCCCCC;
+		background: _theme("commons.background.darkest");
 		bottom: -1px;
 		content: "";
 		display: block;
