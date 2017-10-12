@@ -1,0 +1,50 @@
+@import "node_modules/@lucca-front/scss/src/theming.overridable";
+@import "node_modules/@lucca-front/scss/src/mixins";
+
+.lu-popover-panel {
+  display: flex;
+  flex-direction: column;
+	max-height: calc(100vh + 48px);
+	position: relative;
+}
+
+.lu-popover-content {
+	background: white;
+	padding: 1em;
+	@include elevate(2);
+}
+
+.lu-popover-direction-arrow {
+	position: absolute;
+}
+
+.lu-popover-below {
+  .lu-popover-direction-arrow {
+		top: 0;
+		bottom: auto;
+		transform: translate(0, -50%) rotate(45deg);
+		box-shadow: -2px -2px 1px rgba(0, 0, 0, 0.06);
+
+  }
+}
+
+.lu-popover-above {
+	.lu-popover-direction-arrow {
+		top: auto;
+		bottom: 0;
+		transform: translate(0, 50%) rotate(45deg);
+		box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.16);
+  }
+}
+
+.lu-popover-after {
+  .lu-popover-direction-arrow {
+
+  }
+}
+
+.lu-popover-before {
+  .lu-popover-direction-arrow {
+
+  }
+}
