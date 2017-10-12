@@ -1,1 +1,5 @@
-<div [lu-popover]="Coucou"></div>
+<h1 [LuPopoverTriggerFor]="popover" LuPopoverTriggerOn="click">With Popover</h1>
+<lu-popover #popover="LuPopover" [LuPopoverOverlapTrigger]="false">
+	<lu-user-tile class="user-tile" [user]="user"></lu-user-tile>
+</lu-popover>
+

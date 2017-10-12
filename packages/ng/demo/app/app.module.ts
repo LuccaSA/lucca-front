@@ -17,7 +17,7 @@ import { DemoUserTileModule } from './user-tile/user-tile.module';
 import { DemoUserDisplayModule } from './user-display/user-display.module';
 import {DemoFormlyModule} from './formly/formly.module';
 import {DemoEmptyModule} from './empty/empty.module';
-import { DemoPopoverModule } from './lu-popover/lu-popover.module'
+import { DemoPopoverModule } from './lu-popover/lu-popover.module';
 
 @NgModule({
 	declarations: [

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoPopoverComponent } from './lu-popover.component';
-import { LuPopoverModule } from '../../../src';
+import { LuUserTileModule } from '../../../src/app/user';
+import { LuPopoverModule } from '../../../src/app/popover/popover.module';
 import { SharedModule } from '../shared';
 import { BasicComponent } from './basic/basic.component';
 
@@ -9,7 +10,8 @@ import { BasicComponent } from './basic/basic.component';
   imports: [
     CommonModule,
     LuPopoverModule,
-    SharedModule,
+		SharedModule,
+		LuUserTileModule,
   ],
   declarations: [DemoPopoverComponent, BasicComponent],
   exports: [DemoPopoverComponent, BasicComponent]

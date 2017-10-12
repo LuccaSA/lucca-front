@@ -5,6 +5,7 @@ import { userTileRoutes } from './user-tile/user-tile.router';
 import { userDisplayRoutes } from './user-display/user-display.router';
 import { formlyRoutes } from './formly/formly.router';
 import { emptyRoutes } from './empty/empty.router';
+import { luPopoverRoutes } from './lu-popover/lu-popover.router';
 
 export const appRoutes: Routes = [
 	{ path: '', component: NavigationComponent, outlet: 'nav' },
@@ -14,5 +15,6 @@ export const appRoutes: Routes = [
 		...userDisplayRoutes,
 		...formlyRoutes,
 		...emptyRoutes,
+		...luPopoverRoutes,
 	] },
 ];
