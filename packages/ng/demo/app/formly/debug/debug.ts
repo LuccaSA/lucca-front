@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 })
 export class DebugComponent implements OnInit {
 	form: FormGroup = new FormGroup({});
+	options = [{ id: 1, name: 'one' }, { id: 2, name: 'two' }, { id: 3, name: 'three' }, ]
 	userFields = [
 		{
 			key: 'age',
@@ -38,6 +39,14 @@ export class DebugComponent implements OnInit {
 				}
 			}
 		},
+		{
+			key: 'lol',
+			type: 'select',
+			templateOptions: {
+				options: this.options,
+				label: 'mdr'
+			}
+		}
 		// {
 		// 	key: 'email',
 		// 	type: 'input',
@@ -52,6 +61,7 @@ export class DebugComponent implements OnInit {
 
 	user = {
 		age: 0,
+		lol: { id: 3 },
 	};
 
 	submit(user) {
@@ -60,7 +70,6 @@ export class DebugComponent implements OnInit {
 
 	// autocomplete example fro sandy
 	filteredOptions: Observable<{ id: any, name: string }[]>;
-	options = [{ id: 1, name: 'one' }, { id: 2, name: 'two' }, { id: 3, name: 'three' }, ]
 	autoCompleteFC  = new FormControl();
 	ngOnInit () {
 		this.filteredOptions = this.autoCompleteFC.valueChanges
@@ -74,4 +83,8 @@ export class DebugComponent implements OnInit {
 	}
 	select;
 	autocomplete;
+
+	click(o) {
+		this.user = { age: 0, lol: o };
+	}
 }
