@@ -13,12 +13,11 @@ export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
 	filteredOptions: Observable<{ id: any, name: string }[]>;
 	get _options() { return this.to.options || []; }
 	ngOnInit () {
+		this.formControl.valueChanges.subscribe(value => {
+			this.setToOption(value);
+		});
 		const value = this.formControl.value;
-		if (!!value && !this._options.includes(value) && this._options.map(o => o.id).includes(value.id)) {
-			// replace formValue with the option value with the same id
-			const option = this._options.find(o => o.id === value.id);
-			this.formControl.setValue(option);
-		}
+		this.setToOption(value);
 		this.filteredOptions = this.formControl.valueChanges
 		.startWith(null)
 		.map(option => option ? this.filterOptions(option) : this._options.slice());
@@ -27,5 +26,12 @@ export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
 	filterOptions(name: string) {
 		return this._options.filter(option =>
 			option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+	}
+	setToOption(value) {
+		if (!!value && !this._options.includes(value) && this._options.map(o => o.id).includes(value.id)) {
+			// replace formValue with the option value with the same id
+			const option = this._options.find(o => o.id === value.id);
+			this.formControl.setValue(option);
+		}
 	}
 }
