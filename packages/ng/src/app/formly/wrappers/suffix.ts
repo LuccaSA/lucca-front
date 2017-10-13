@@ -4,7 +4,7 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-suffix',
-	styleUrls: ['flex-layout.scss'],
+	styleUrls: ['flex-layout.scss', 'suffixes.common.scss'],
 	templateUrl: './suffix.html',
 })
 export class LuFormlyWrapperSuffix extends FieldWrapper {

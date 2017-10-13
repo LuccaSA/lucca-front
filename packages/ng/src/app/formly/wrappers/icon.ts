@@ -4,7 +4,7 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-suffix',
-	styleUrls: ['flex-layout.scss'],
+	styleUrls: ['flex-layout.scss', 'suffixes.common.scss'],
 	templateUrl: './icon.html',
 })
 export class LuFormlyWrapperIcon extends FieldWrapper {
