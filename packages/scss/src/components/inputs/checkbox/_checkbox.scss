@@ -92,12 +92,12 @@
 	}
 }
 
-// MOD
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.checkbox-group.input.mod-framed {
-	@extend %checkbox-framed;
+.form.mod-framed {
+	.checkbox {
+		margin-right: 2em;
+	}
 }
+
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -128,5 +128,3 @@
 		}
 	}
 }
-
-@import "checkbox.framed";

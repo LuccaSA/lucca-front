@@ -34,7 +34,7 @@
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
 			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-				width: calc(#{map-get($bp-obj, breakAt)} -  #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.width")});
+				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.width")});
 			}
 		}
 
@@ -48,7 +48,7 @@
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
 			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-				width: calc(#{map-get($bp-obj, breakAt)} -  #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.compact.width")});
+				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.compact.width")});
 			}
 		}
 

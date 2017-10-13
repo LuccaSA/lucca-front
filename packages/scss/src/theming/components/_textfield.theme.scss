@@ -1,14 +1,14 @@
-$input: (
+$textfield: (
 
   font-size: 1rem,
   padding-top: 1rem,
 
-  input-field: (
+  input: (
     margin-bottom: .15rem,
     padding-vertical: .5rem,
   ),
 
-  input-suffix: (
+  suffix: (
     padding-right: 2.5rem,
   ),
 
@@ -40,6 +40,7 @@ $input: (
     default-palette: (
       color: _color("text.light")
     ),
+    border-radius: .2rem,
     padding: .5rem,
     label-right-margin: .3rem,
     label-sizes: (
@@ -74,4 +75,4 @@ $input: (
     )
   ),
 );
-$theme: _set($theme, "components.input", $input);
+$theme: _set($theme, "components.textfield", $textfield);

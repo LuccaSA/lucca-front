@@ -1,0 +1,186 @@
+%input_compact {
+	align-items: center;
+	display: flex;
+	padding-top: 0;
+	margin-top: 1rem;
+
+	.textfield-input {
+		box-shadow: 0 0 0 1px _component("textfield.border.color");
+		border-radius: _component("textfield.compact.border-radius");
+		padding: .5rem;
+
+		&::placeholder {
+			opacity: 1;
+			transition: none;
+		}
+
+		&:focus, &.is-filled {
+			~ .textfield-label {
+				font-size: inherit;
+				top: auto;
+			}
+		}
+	}
+
+	.textfield-label {
+		flex: 0 0 auto;
+		margin-right: _component("textfield.compact.label-right-margin");
+		order: -1;
+		width: _component("textfield.compact.label-sizes.default");
+		word-break: break-word;
+		left: auto;
+		pointer-events: auto;
+		position: relative;
+		top: auto;
+		transition: none;
+	}
+
+	.textfield-messages {
+		align-items: center;
+		bottom: 0;
+		display: inline-flex;
+		left: calc(100% + 1rem);
+		line-height: 1.1;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		max-width: _component("textfield.compact.label-sizes.default");
+
+		&.mod-helper {
+			bottom: auto;
+			left: 0;
+			max-width: 100%;
+			padding-left: calc(#{_component("textfield.compact.label-sizes.default")} + #{_component("textfield.compact.label-right-margin")});
+			right: 0;
+			top: 100%;
+		}
+	}
+
+	.textfield-options {
+		left: auto;
+		margin: 0;
+		min-width: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		right: 0;
+		top: 100%;
+		width: calc(100% - #{_component("textfield.compact.label-right-margin")} - #{_component("textfield.compact.label-sizes.default")});
+	}
+
+	.textfield-suffix {
+		top: _component("textfield.compact.padding");
+		right: _component("textfield.compact.padding");
+	}
+
+	// PALETTE
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	@mixin inputColoring($palette) {
+		.textfield-input:focus {
+			box-shadow: 0 0 0 1px _get($palette, "color");
+
+			~ .textfield-label {
+				color: #A6A6A6;
+			}
+		}
+	}
+
+	// default color
+	@include inputColoring(_component("textfield.compact.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+
+
+	// MODS
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	/* Width */
+
+	@mixin inputWidth($iWidth, $lWidth) {
+		width: calc(#{$iWidth} + #{_component("textfield.compact.label-right-margin")} + #{$lWidth});
+	}
+
+	& {
+		@include inputWidth(_component("textfield.sizes.default"), _component("textfield.compact.label-sizes.default"));
+	}
+
+	@each $input-size-name, $input-width in _component("textfield.sizes") {
+		&.mod-#{$input-size-name} {
+			@include inputWidth($input-width, _component("textfield.compact.label-sizes.default"));
+			.textfield-options {
+				width: $input-width;
+			}
+			@each $label-size-name, $label-width in _component("textfield.compact.label-sizes") {
+				&.mod-label-#{$label-size-name} {
+					@include inputWidth($input-width, $label-width);
+				}
+			}
+		}
+	}
+
+	@each $label-size-name, $label-width in _component("textfield.sizes") {
+		&.mod-label-#{$label-size-name} {
+			.textfield-label {
+				width: $label-width;
+			}
+
+			.textfield-messages.mod-helper {
+				padding-left: calc($label-width + #{_component("textfield.compact.label-right-margin")});
+			}
+		}
+	}
+
+	/* Display */
+
+	&.mod-block {
+		width: 100%;
+	}
+
+	&.mod-autocomplete, &.mod-select, &.mod-search {
+		&::after {
+			bottom: auto;
+			right: .5rem;
+			top: auto;
+		}
+
+		.textfield-input {
+			padding-right: 2rem;
+		}
+
+		.textfield-label {
+			padding-right: 0;
+		}
+	}
+
+	&.mod-withSuffix {
+		.textfield-input {
+			padding-right: _component("textfield.suffix.padding-right");
+		}
+	}
+
+
+	// STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	// Disabled & readonly
+	.textfield-input {
+		&[disabled], &[readonly] {
+			background: _theme("commons.background.dark");
+			background-image: none;
+			background-position: bottom;
+		}
+
+		&.is-error {
+			box-shadow: 0 0 0 1px _color("error");
+
+			~ .textfield-label {
+				color: _color("error");
+			}
+		}
+	}
+}
