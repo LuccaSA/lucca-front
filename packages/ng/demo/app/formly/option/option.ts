@@ -36,17 +36,27 @@ export class OptionComponent {
 						},
 					}
 				]
-			}, {
+			},
+			{
+				key: 'helper',
+				type: 'input',
+				templateOptions: {
+					type: 'text',
+					label: 'this one has a helper',
+					helper: 'this is the helper message',
+				},
+			},
+				{
 				className: 'form-group-line',
 				fieldGroup: [
 					{
 						className: 'form-grid-md6',
-						key: 'helper',
+						key: 'icon',
 						type: 'input',
 						templateOptions: {
 							type: 'text',
-							label: 'this one has a helper',
-							helper: 'this is the helper message',
+							label: 'this one has an icon',
+							icon: 'heart',
 						},
 					}, {
 						className: 'form-grid-md6',
@@ -54,8 +64,8 @@ export class OptionComponent {
 						type: 'input',
 						templateOptions: {
 							type: 'text',
-							label: 'this one has an icon suffix',
-							suffix: 'heart',
+							label: 'this one has a suffix',
+							suffix: 'LOL',
 						},
 					}
 				]

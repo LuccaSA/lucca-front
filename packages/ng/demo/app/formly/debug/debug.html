@@ -23,3 +23,6 @@
 	</mat-select>
 	<label [attr.for]="id" class="input-label">un select pour sandy</label>
 </div>
+
+<button class="button" (click)="click(options[1])">set to options[1]</button>
+<button class="button" (click)="click({id: 1})">set to {{ '{ id: 1 }' }}</button>

@@ -4,7 +4,7 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-suffix',
-	styleUrls: ['flex-layout.scss'],
+	styleUrls: ['flex-layout.scss', 'suffixes.common.scss'],
 	templateUrl: './suffix.html',
 })
 export class LuFormlyWrapperSuffix extends FieldWrapper {
@@ -14,11 +14,7 @@ export class LuFormlyWrapperSuffix extends FieldWrapper {
 export class TemplateSuffix {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.type === 'date') {
-				field.templateOptions.suffix = 'calendar';
-				return 'suffix';
-			}
-			if (field && field.templateOptions && field.templateOptions.suffix) {
+			if (field && field.templateOptions && field.templateOptions.suffix && !field.templateOptions.icon) {
 				return 'suffix';
 			}
 		});
