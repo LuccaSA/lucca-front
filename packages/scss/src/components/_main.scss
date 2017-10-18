@@ -1,5 +1,4 @@
 .main-content {
-	padding: _theme("components.main.padding");
 	position: relative;
 }
 
@@ -14,27 +13,4 @@
 .navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
 	height: calc(100vh - #{_theme("commons.banner-height")});
 	overflow-y: auto;
-}
-
-
-// MODS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.main {
-	&.mod-sections {
-		.main-content {
-			padding-bottom: 0;
-			padding-top: 0;
-		}
-
-		.header {
-			margin-bottom: 0;
-		}
-	}
-
-	&.mod-header {
-		.main-content {
-			padding-top: 0;
-		}
-	}
 }
