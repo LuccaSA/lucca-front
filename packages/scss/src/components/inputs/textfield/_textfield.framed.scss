@@ -27,8 +27,9 @@
 	}
 
 	.textfield-suffix {
-		top: _component("textfield.framed.top-padding");
+		bottom: _component("textfield.framed.bottom-padding");
 		right: _component("textfield.framed.side-padding");
+		top: auto;
 	}
 
 	.textfield-messages {
