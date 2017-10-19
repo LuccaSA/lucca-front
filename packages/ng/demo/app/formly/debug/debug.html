@@ -5,21 +5,21 @@
 	</formly-form>
 </form>
 
-<div class="input">
-	<input luEmpty [formControl]="autoCompleteFC" class="input-field" [matAutocomplete]="auto">
+<div class="textfield">
+	<input luEmpty [formControl]="autoCompleteFC" class="textfield-input" [matAutocomplete]="auto">
 	<mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
 		<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 			<span>{{ option.name }}</span>
 		</mat-option>
 	</mat-autocomplete>
-	<label class="input-label">un autocomplete pour sandy</label>
+	<label class="textfield-label">un autocomplete pour sandy</label>
 </div>
 
-<div class="input">
-	<mat-select class="input-field" luEmpty [(ngModel)]="select">
+<div class="textfield">
+	<mat-select class="textfield-input" luEmpty [(ngModel)]="select">
 		<mat-option *ngFor="let option of options" [value]="option">
 			{{ option.name }}
 		</mat-option>
 	</mat-select>
-	<label [attr.for]="id" class="input-label">un select pour sandy</label>
+	<label [attr.for]="id" class="textfield-label">un select pour sandy</label>
 </div>
