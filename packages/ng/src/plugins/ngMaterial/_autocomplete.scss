@@ -1,8 +1,9 @@
 .mat-autocomplete-panel {
 	@extend .textfield-options;
+
+	background: white;
 	position: relative;
 	top: auto;
-	background: white;
 
 	&.mat-autocomplete-visible {
 		opacity: 1;
