@@ -35,3 +35,14 @@
 		color: _get($palette, "color") !important;
 	}
 }
+
+
+// SIZE
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+@each $name, $sizes in _theme("sizes") {
+	.u-text#{str-capitalize($name)} {
+		font-size: _get($sizes, "font-size") !important;
+		line-height: _get($sizes, "line-height") !important;
+	}
+}
