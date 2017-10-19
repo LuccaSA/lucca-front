@@ -5,7 +5,7 @@
 }
 
 .mat-datepicker-toggle {
-	@extend .input-suffix;
+	@extend .textfield-suffix;
 	z-index: 2;
 }
 .mat-datepicker-toggle button {

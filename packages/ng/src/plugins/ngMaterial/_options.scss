@@ -1,9 +1,9 @@
 .mat-option {
 	display: block;
 	outline: none;
-	@extend .input-options-entry;
+	@extend .textfield-options-entry;
 	&.mat-selected, &.mat-active {
-		@extend .input-options-entry.is-focus;
+		@extend .textfield-options-entry.is-focus;
 	}
 
 	.mat-option-ripple {

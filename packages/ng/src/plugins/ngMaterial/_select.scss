@@ -2,7 +2,7 @@ mat-select {
 	@extend .input;
 }
 
-.input.mod-framed mat-select {
+.textfield.mod-framed mat-select {
 	padding: 0 !important;
 	.mat-select-trigger {
 		font-size: 1em;
@@ -19,7 +19,7 @@ mat-select {
 	}
 }
 
-.input:not(.mod-compact) mat-select {
+.textfield:not(.mod-compact) mat-select {
 	padding-top: 0 !important;
 }
 
@@ -33,7 +33,7 @@ mat-select {
 	width: auto !important;
 }
 .mat-select-panel {
-	@extend .input-options;
+	@extend .textfield-options;
 	position: relative;
 	top: auto;
 }
