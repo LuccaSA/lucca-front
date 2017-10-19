@@ -1,4 +1,4 @@
-<mat-select (change)="onChoiceChange($event.value)" [ngModel]="_selectedChoice" placeholder="{{placeholder}}" floatPlaceholder="never">
+<mat-select class="textfield-input" (change)="onChoiceChange($event.value)" [ngModel]="_selectedChoice" placeholder="{{placeholder}}" floatPlaceholder="never">
 	<mat-option *ngFor="let choice of preConfiguredRanges" [value]="choice">
 		{{choice.label}}
 	</mat-option>
