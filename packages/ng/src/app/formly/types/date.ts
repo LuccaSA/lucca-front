@@ -45,4 +45,11 @@ export class LuFormlyFieldDate extends FieldType {
 			this.input.nativeElement.focus();
 		});
 	}
+	focus(picker: MatDatepicker<any>) {
+		this.to._isFocused = true;
+		this.openPicker(picker);
+	}
+	blur() {
+		this.to._isFocused = false;
+	}
 }

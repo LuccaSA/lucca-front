@@ -34,4 +34,10 @@ export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
 			this.formControl.setValue(option);
 		}
 	}
+	focus() {
+		this.to._isFocused = true;
+	}
+	blur() {
+		this.to._isFocused = false;
+	}
 }

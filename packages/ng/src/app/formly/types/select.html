@@ -1,4 +1,4 @@
-<mat-select class="input-field" [formControl]="formControl" [formlyAttributes]="field" luEmpty>
+<mat-select class="input-field" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
 	<mat-option *ngFor="let option of _options" [value]="option">
 		{{ option.name }}
 	</mat-option>
