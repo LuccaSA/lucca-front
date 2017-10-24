@@ -1,0 +1,18 @@
+.mat-menu-item {
+	background-color: transparent;
+	@extend .input-options-entry;
+	&.mat-selected, &.mat-active {
+		@extend .input-options-entry.is-focus;
+	}
+}
+
+.mat-menu-panel {
+	@extend .input-options;
+	position: relative;
+	top: auto;
+}
+
+.mat-menu-content {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}

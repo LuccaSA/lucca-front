@@ -1,5 +1,6 @@
 .mat-option {
 	display: block;
+	line-height: unset !important;
 	outline: none;
 	@extend .input-options-entry;
 	&.mat-selected, &.mat-active {
