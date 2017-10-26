@@ -356,9 +356,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			let posY: LuPopoverPosition = change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
 
 
-			if (this.popover.overlapTrigger) {
-				posY = posY === 'below' ? 'above' : 'below';
-			}
+
 
 			this.popover.setPositionClassesChanges(posX, posY);
 		});
@@ -374,13 +372,13 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 		// Position
 		if (this.popover.position === 'above') {
-			position.originY = 'top';
+			position.originY = this.popover.overlapTrigger ? 'bottom' : 'top';
 		} else if (this.popover.position === 'below') {
-			position.originY = 'bottom';
+			position.originY = this.popover.overlapTrigger ? 'top' : 'bottom';
 		} else if (this.popover.position === 'before') {
-			position.originX = 'start';
+			position.originX = this.popover.overlapTrigger ? 'end' : 'start';
 		} else if (this.popover.position === 'after') {
-			position.originX = 'end';
+			position.originX = this.popover.overlapTrigger ? 'start' : 'end';
 		}
 
 		// Alignment
@@ -418,7 +416,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		let offsetX = 0;
 		let offsetY = 0;
 
-		if (!this.isVerticallyPositionned && this.popover.targetOffsetX && !isNaN(Number(this.popover.targetOffsetX))) {
+		if (this.popover.overlapTrigger && !this.isVerticallyPositionned && this.popover.targetOffsetX && !isNaN(Number(this.popover.targetOffsetX))) {
 			if (overlayPosition.overlayX === 'end') {
 				offsetX = -Number(this.popover.targetOffsetX);
 			} else if (overlayPosition.overlayX === 'start') {

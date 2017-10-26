@@ -45,8 +45,8 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	private _enterDelay: number = 200;
 	private _leaveDelay: number = 200;
 	private _overlapTrigger: boolean = true;
-	private _targetOffsetX: number = 10;
-	private _targetOffsetY: number = 10;
+	private _targetOffsetX: number = 0;
+	private _targetOffsetY: number = 0;
 	private _closeOnClick: boolean = true;
 	private _focusTrapEnabled: boolean = true;
 
@@ -75,7 +75,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 			throwLuPopoverInvalidPosition();
 		}
 		this._position = value;
-		this.setPositionClasses();
+		this.setPositionClasses(this.position, this.alignment);
 	}
 
 	/** Alignment of the popover regarding the trigger */
@@ -86,7 +86,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 			throwLuPopoverInvalidAlignement();
 		}
 		this._alignment = value;
-		this.setPositionClasses();
+		this.setPositionClasses(this.position, this.alignment);
 	}
 
 	/** Popover trigger event */
@@ -127,7 +127,6 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	get closeOnClick(): boolean { return this._closeOnClick; }
 	set closeOnClick(v: boolean) { this._closeOnClick = v; }
 
-
 	/**
 	 * Popover focus trap using cdkTrapFocus
 	 * default: true
@@ -135,7 +134,6 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	@Input('focus-trap-enabled')
 	get focusTrapEnabled(): boolean { return this._focusTrapEnabled; }
 	set focusTrapEnabled(v: boolean) { this._focusTrapEnabled = v; }
-
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -152,7 +150,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 				return obj;
 			}, {});
 			this._elementRef.nativeElement.className = '';
-			this.setPositionClasses();
+			this.setPositionClasses(this.position, this.alignment);
 		}
 	}
 
@@ -162,7 +160,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	@ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
 	constructor(private _elementRef: ElementRef) {
-		this.setPositionClasses();
+		this.setPositionClasses(this.position, this.alignment);
 	}
 
 	ngOnDestroy() {
@@ -217,11 +215,19 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	 * It's necessary to set position-based classes to ensure the popover panel animation
 	 * folds out from the correct direction.
 	 */
-	setPositionClasses(): void {
-		this._classList['lu-popover-before'] = this.position === 'before';
-		this._classList['lu-popover-after'] = this.position === 'after';
-		this._classList['lu-popover-above'] = this.position === 'above';
-		this._classList['lu-popover-below'] = this.position === 'below';
+	setPositionClasses(pos: LuPopoverPosition, al: LuPopoverAlignment): void {
+		let posX: LuPopoverPosition;
+		let posY: LuPopoverPosition;
+
+		if (pos === 'above' || pos === 'below') {
+			posY = pos;
+			posX = al === 'left' ? 'after' : 'before';
+		} else {
+			posX = pos;
+			posY = al === 'top' ? 'below' : 'after';
+		}
+
+		this.setPositionClassesChanges(posX, posY);
 	}
 
 	setPositionClassesChanges(posX: LuPopoverPosition, posY: LuPopoverPosition): void {

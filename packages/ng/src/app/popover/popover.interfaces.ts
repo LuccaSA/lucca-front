@@ -15,7 +15,7 @@ export interface LuPopoverPanel {
 	closeDisabled: boolean;
 	templateRef: TemplateRef<any>;
 	close: EventEmitter<void>;
-	setPositionClasses: () => void;
+	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
 	setPositionClassesChanges: (posX: LuPopoverPosition, posY: LuPopoverPosition) => void;
 	_emitCloseEvent: () => void;
 }
