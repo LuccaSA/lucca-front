@@ -9,19 +9,17 @@ export function throwLuPopoverMissingError() {
 }
 
 /**
- * Throws an exception for the case when popover's LuPopoverPositionX value isn't valid.
- * In other words, it doesn't match 'before' or 'after'.
+ * Throws an exception for the case when popover's LuPopoverPosition value isn't valid.
  */
-export function throwLuPopoverInvalidPositionX() {
-	throw Error(`LuPopoverPositionX value must be either 'before' or after'.
-      Example: <lu-popover LuPopoverPositionX="before" #popover="LuPopover"></lu-popover>`);
+export function throwLuPopoverInvalidPosition() {
+	throw Error(`LuPopoverPosition value must be 'above', 'below', 'before' or 'after'.
+      Example: <lu-popover [position]="'before'" #popover="LuPopover"></lu-popover>`);
 }
 
 /**
- * Throws an exception for the case when popover's LuPopoverPositionY value isn't valid.
- * In other words, it doesn't match 'above' or 'below'.
+ * Throws an exception for the case when popover's LuPopoverAlignement value isn't valid.
  */
-export function throwLuPopoverInvalidPositionY() {
-	throw Error(`LuPopoverPositionY value must be either 'above' or below'.
-      Example: <lu-popover LuPopoverPositionY="above" #popover="LuPopover"></lu-popover>`);
+export function throwLuPopoverInvalidAlignement() {
+	throw Error(`LuPopoverAlignment value must be 'top', 'bottom', 'right' or 'left'.
+      Example: <lu-popover [position]="above" [alignment]="left" #popover="LuPopover"></lu-popover>`);
 }

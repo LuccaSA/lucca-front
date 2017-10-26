@@ -15,7 +15,9 @@ import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import {
 	ConnectedPositionStrategy,
+	OriginConnectionPosition,
 	Overlay,
+	OverlayConnectionPosition,
 	OverlayRef,
 	OverlayConfig,
 	HorizontalConnectionPos,
@@ -26,7 +28,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs/Subscription';
 
 import { LuPopoverPanel, LuTarget } from './popover.interfaces';
-import { LuPopoverPositionX, LuPopoverPositionY, LuPopoverTriggerEvent } from './popover.types'
+import { LuPopoverAlignment, LuPopoverPosition, LuPopoverTriggerEvent } from './popover.types'
 import { throwLuPopoverMissingError } from './popover.errors';
 
 
@@ -66,44 +68,32 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	/** References the popover target instance that the trigger is associated with. */
 	@Input('LuPopoverTargetAt') targetElement: LuTarget;
 
-	/** Position of the popover in the X axis */
-	@Input('LuPopoverPositionX') positionX: LuPopoverPositionX;
+	/** Position of the popover around the trigger */
+	@Input('position') position: LuPopoverPosition;
 
-	/** Position of the popover in the Y axis */
-	@Input('LuPopoverPositionY') positionY: LuPopoverPositionY;
+	/** Alignment of the popover regarding the trigger */
+	@Input('alignment') alignment: LuPopoverAlignment;
 
 	/** Popover trigger event */
-	@Input('LuPopoverTriggerOn') triggerEvent: LuPopoverTriggerEvent;
+	@Input('trigger-on') triggerEvent: LuPopoverTriggerEvent;
 
 	/** Popover delay */
-	@Input('LuPopoverEnterDelay') enterDelay: number;
+	@Input('enter-delay') enterDelay: number;
 
 	/** Popover delay */
-	@Input('LuPopoverLeaveDelay') leaveDelay: number;
+	@Input('leave-delay') leaveDelay: number;
 
 	/** Popover overlap trigger */
-	@Input('LuPopoverOverlapTrigger') overlapTrigger: boolean;
+	@Input('overlap-trigger') overlapTrigger: boolean;
 
 	/** Popover target offset x */
-	@Input('LuPopoverOffsetX') targetOffsetX: number;
+	@Input('offset-x') targetOffsetX: number;
 
 	/** Popover target offset y */
-	@Input('LuPopoverOffsetY') targetOffsetY: number;
-
-	/** Popover arrow offset x */
-	@Input('LuPopoverArrowOffsetX') arrowOffsetX: number;
-
-
-	/** Popover arrow width */
-	@Input('LuPopoverArrowWidth') arrowWidth: number;
-
-
-	/** Popover arrow color */
-	@Input('LuPopoverArrowColor') arrowColor: string;
-
+	@Input('offset-y') targetOffsetY: number;
 
 	/** Popover container close on click */
-	@Input('LuPopoverCloseOnClick') closeOnClick: boolean;
+	@Input('close-on-click') closeOnClick: boolean;
 
 
 	/** Event emitted when the associated popover is opened. */
@@ -127,13 +117,14 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 
 	private _setCurrentConfig() {
-
-		if (this.positionX === 'before' || this.positionX === 'after') {
-			this.popover.positionX = this.positionX;
+		if (this.position === 'above' || this.position === 'below' || this.position === 'after' ||
+		this.position === 'before') {
+			this.popover.position = this.position;
 		}
 
-		if (this.positionY === 'above' || this.positionY === 'below') {
-			this.popover.positionY = this.positionY;
+		if (this.alignment === 'top' || this.alignment === 'bottom' || this.alignment === 'left' ||
+			this.alignment === 'right') {
+			this.popover.alignment = this.alignment;
 		}
 
 		if (this.triggerEvent) {
@@ -160,23 +151,9 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			this.popover.targetOffsetY = this.targetOffsetY;
 		}
 
-		if (this.arrowOffsetX) {
-			this.popover.arrowOffsetX = this.arrowOffsetX;
-		}
-
-		if (this.arrowWidth) {
-			this.popover.arrowWidth = this.arrowWidth;
-		}
-
-		if (this.arrowColor) {
-			this.popover.arrowColor = this.arrowColor;
-		}
-
 		if (this.closeOnClick === true || this.closeOnClick === false) {
 			this.popover.closeOnClick = this.closeOnClick;
 		}
-
-		this.popover.setCurrentStyles();
 	}
 
 
@@ -185,8 +162,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 	onClick() {
 		if (this.popover.triggerEvent === 'click') {
-			// this.popover.setCurrentStyles();
-			// this._setCurrentConfig();
+			this._setCurrentConfig();
 			this.togglePopover();
 		}
 	}
@@ -229,7 +205,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			this._createOverlay().attach(this._portal);
 
 			/** Only subscribe to backdrop if trigger event is click */
-			if (this.triggerEvent === 'click') {
+			if (this.popover.triggerEvent === 'click') {
 				this._subscribeToBackdrop();
 			}
 
@@ -243,7 +219,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			this._overlayRef.detach();
 
 			/** Only unsubscribe to backdrop if trigger event is click */
-			if (this.triggerEvent === 'click') {
+			if (this.popover.triggerEvent === 'click') {
 				this._backdropSubscription.unsubscribe();
 			}
 
@@ -265,9 +241,20 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		this._element.nativeElement.focus();
 	}
 
+	_handleMousedown(event: MouseEvent): void {
+		if (!isFakeMousedownFromScreenReader(event)) {
+			this._openedByMouse = true;
+		}
+	}
+
 	/** The text direction of the containing app. */
 	get dir(): Direction {
 		return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
+	}
+
+	/** Return if the popover main positionning is vertical */
+	get isVerticallyPositionned(): boolean {
+		return (this.popover.position === 'below' || this.popover.position === 'above');
 	}
 
 	/**
@@ -348,7 +335,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			.withDirection(this.dir);
 
 		/** Display overlay backdrop if trigger event is click */
-		if (this.triggerEvent === 'click') {
+		if (this.popover.triggerEvent === 'click') {
 			overlayState.hasBackdrop = true;
 			overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
 		}
@@ -365,18 +352,15 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	*/
 	private _subscribeToPositions(position: ConnectedPositionStrategy): void {
 		this._positionSubscription = position.onPositionChange.subscribe(change => {
-			const posisionX: LuPopoverPositionX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
-			let posisionY: LuPopoverPositionY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
+			const posX: LuPopoverPosition = change.connectionPair.overlayX === 'end' ? 'before' : 'after';
+			let posY: LuPopoverPosition = change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
+
 
 			if (this.popover.overlapTrigger) {
-				posisionY = posisionY === 'below' ? 'above' : 'below';
+				posY = posY === 'below' ? 'above' : 'below';
 			}
 
-			this.popover.positionX = posisionX;
-			this.popover.positionY = posisionY;
-			this.popover.setCurrentStyles();
-
-			this.popover.setPositionClasses(posisionX, posisionY);
+			this.popover.setPositionClassesChanges(posX, posY);
 		});
 	}
 
@@ -386,37 +370,68 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	* @returns ConnectedPositionStrategy
 	*/
 	private _getPosition(): ConnectedPositionStrategy {
-		const [posX, fallbackX]: HorizontalConnectionPos[] =
-			this.popover.positionX === 'before' ? ['end', 'start'] : ['start', 'end'];
+		const position: OriginConnectionPosition = {originX: 'start', originY: 'top'};
 
-		const [overlayY, fallbackOverlayY]: VerticalConnectionPos[] =
-			this.popover.positionY === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
+		// Position
+		if (this.popover.position === 'above') {
+			position.originY = 'top';
+		} else if (this.popover.position === 'below') {
+			position.originY = 'bottom';
+		} else if (this.popover.position === 'before') {
+			position.originX = 'start';
+		} else if (this.popover.position === 'after') {
+			position.originX = 'end';
+		}
 
-		let originY = overlayY;
-		let fallbackOriginY = fallbackOverlayY;
+		// Alignment
+		if (this.isVerticallyPositionned) {
+			if (this.popover.alignment === 'left') {
+				position.originX = 'start';
+			} else if (this.popover.alignment === 'right') {
+				position.originX = 'end';
+			} else {
+				position.originX = 'center';
+			}
+		} else {
+			if (this.popover.alignment === 'top') {
+				position.originY = 'top';
+			} else if (this.popover.alignment === 'bottom') {
+				position.originY = 'bottom';
+			} else {
+				position.originY = 'center';
+			}
+		}
 
-		/** Reverse overlayY and fallbackOverlayY when overlapTrigger is false */
-		if (!this.popover.overlapTrigger) {
-			originY = overlayY === 'top' ? 'bottom' : 'top';
-			fallbackOriginY = fallbackOverlayY === 'top' ? 'bottom' : 'top';
+		const overlayPosition: OverlayConnectionPosition = { overlayX: 'start', overlayY: 'top' };
+
+		if (this.popover.overlapTrigger) {
+			overlayPosition.overlayX = position.originX;
+			overlayPosition.overlayY = position.originY;
+		} else if (this.isVerticallyPositionned) {
+			overlayPosition.overlayX = position.originX;
+			overlayPosition.overlayY = this.popover.position === 'above' ? 'bottom' : 'top';
+		} else {
+			overlayPosition.overlayX = this.popover.position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayY = position.originY;
 		}
 
 		let offsetX = 0;
 		let offsetY = 0;
 
-		if (this.popover.targetOffsetX && !isNaN(Number(this.popover.targetOffsetX))) {
-			offsetX = Number(this.popover.targetOffsetX);
-			// offsetX = -16;
+		if (!this.isVerticallyPositionned && this.popover.targetOffsetX && !isNaN(Number(this.popover.targetOffsetX))) {
+			if (overlayPosition.overlayX === 'end') {
+				offsetX = -Number(this.popover.targetOffsetX);
+			} else if (overlayPosition.overlayX === 'start') {
+				offsetX = Number(this.popover.targetOffsetX);
+			}
 		}
 
-		if (this.popover.targetOffsetY && !isNaN(Number(this.popover.targetOffsetY))) {
-			if (this.popover.positionY === 'below') {
+		if (this.isVerticallyPositionned && this.popover.targetOffsetY && !isNaN(Number(this.popover.targetOffsetY))) {
+			if (overlayPosition.overlayY === 'top') {
 				offsetY = Number(this.popover.targetOffsetY);
-			} else {
+			} else if (overlayPosition.overlayY === 'bottom') {
 				offsetY = -Number(this.popover.targetOffsetY);
 			}
-
-			// offsetY = -10;
 		}
 
 		/**
@@ -430,21 +445,45 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			element = this.targetElement._elementRef;
 		}
 
+		/**
+		 * TODO: Updates when withFallbackPosition takes individual offsets
+		 */
+
 		return this._overlay.position()
-			.connectedTo(element,
-			{ originX: posX, originY: originY },
-			{ overlayX: posX, overlayY: overlayY })
+			.connectedTo(element, position, overlayPosition)
 			.withFallbackPosition(
-			{ originX: fallbackX, originY: originY },
-			{ overlayX: fallbackX, overlayY: overlayY })
+				{ originX: position.originX, originY: this._invertVerticalPos( position.originY )},
+				{ overlayX: overlayPosition.overlayX, overlayY: this._invertVerticalPos(overlayPosition.overlayY)},
+			)
 			.withFallbackPosition(
-			{ originX: posX, originY: fallbackOriginY },
-			{ overlayX: posX, overlayY: fallbackOverlayY })
+				{ originX: this._invertHorizontalPos(position.originX), originY: position.originY },
+				{ overlayX: this._invertHorizontalPos(overlayPosition.overlayX), overlayY: overlayPosition.overlayY }
+			)
 			.withFallbackPosition(
-			{ originX: fallbackX, originY: fallbackOriginY },
-			{ overlayX: fallbackX, overlayY: fallbackOverlayY })
+				{ originX: this._invertHorizontalPos(position.originX), originY: this._invertVerticalPos(position.originY) },
+				{ overlayX: this._invertHorizontalPos(overlayPosition.overlayX), overlayY: this._invertVerticalPos(overlayPosition.overlayY) },
+			)
 			.withOffsetX(offsetX)
 			.withOffsetY(offsetY);
+	}
+
+	private _invertVerticalPos(y: VerticalConnectionPos) {
+		if (y === 'top') {
+			y = 'bottom';
+		} else if (y === 'bottom') {
+			y = 'top';
+		}
+		return y;
+	}
+
+	private _invertHorizontalPos(x: HorizontalConnectionPos) {
+		if (x === 'end') {
+			x = 'start';
+		} else if (x === 'start') {
+			x = 'end';
+		}
+
+		return x;
 	}
 
 	private _cleanUpSubscriptions(): void {
@@ -453,12 +492,6 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		}
 		if (this._positionSubscription) {
 			this._positionSubscription.unsubscribe();
-		}
-	}
-
-	_handleMousedown(event: MouseEvent): void {
-		if (!isFakeMousedownFromScreenReader(event)) {
-			this._openedByMouse = true;
 		}
 	}
 }

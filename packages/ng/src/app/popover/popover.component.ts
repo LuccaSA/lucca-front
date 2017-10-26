@@ -13,8 +13,8 @@ import {
 
 import { ESCAPE } from '@angular/cdk/keycodes';
 
-import { LuPopoverPositionX, LuPopoverPositionY, LuPopoverTriggerEvent } from './popover.types';
-import { throwLuPopoverInvalidPositionX, throwLuPopoverInvalidPositionY } from './popover.errors';
+import { LuPopoverAlignment, LuPopoverPosition, LuPopoverTriggerEvent } from './popover.types';
+import { throwLuPopoverInvalidPosition, throwLuPopoverInvalidAlignement } from './popover.errors';
 import { LuPopoverPanel } from './popover.interfaces';
 import { transformPopover } from './popover.animations';
 
@@ -39,17 +39,14 @@ import { AnimationEvent } from '@angular/animations';
 export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 
 	/** Settings for popover, view setters and getters for more detail */
-	private _positionX: LuPopoverPositionX = 'after';
-	private _positionY: LuPopoverPositionY = 'below';
+	private _position: LuPopoverPosition = 'below';
+	private _alignment: LuPopoverAlignment = 'left';
 	private _triggerEvent: LuPopoverTriggerEvent = 'hover';
 	private _enterDelay: number = 200;
 	private _leaveDelay: number = 200;
 	private _overlapTrigger: boolean = true;
-	private _targetOffsetX: number = 0;
+	private _targetOffsetX: number = 10;
 	private _targetOffsetY: number = 10;
-	private _arrowOffsetX: number = 30;
-	private _arrowWidth: number = 20;
-	private _arrowColor: string = 'white';
 	private _closeOnClick: boolean = true;
 	private _focusTrapEnabled: boolean = true;
 
@@ -64,88 +61,69 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	/** Config object to be passed into the popover's panel ngStyle */
 	public popoverPanelStyles: {};
 
-	/** Config object to be passed into the popover's arrow ngStyle */
-	public popoverArrowStyles: {};
-
 	/** Config object to be passed into the popover's content ngStyle */
 	public popoverContentStyles: {};
 
 	/** Emits the current animation state whenever it changes. */
 	_onAnimationStateChange = new EventEmitter<AnimationEvent>();
 
-
-	/** Position of the popover in the X axis. */
-	@Input('LuPopoverPositionX')
-	get positionX() { return this._positionX; }
-	set positionX(value: LuPopoverPositionX) {
-		if (value !== 'before' && value !== 'after') {
-			throwLuPopoverInvalidPositionX();
+	/** Position of the popover around the trigger */
+	@Input('position')
+	get position() { return this._position; }
+	set position(value: LuPopoverPosition) {
+		if (value !== 'above' && value !== 'below' && value !== 'after' && value !== 'before') {
+			throwLuPopoverInvalidPosition();
 		}
-		this._positionX = value;
+		this._position = value;
 		this.setPositionClasses();
 	}
 
-	/** Position of the popover in the Y axis. */
-	@Input('LuPopoverPositionY')
-	get positionY() { return this._positionY; }
-	set positionY(value: LuPopoverPositionY) {
-		if (value !== 'above' && value !== 'below') {
-			throwLuPopoverInvalidPositionY();
+	/** Alignment of the popover regarding the trigger */
+	@Input('alignment')
+	get alignment() { return this._alignment; }
+	set alignment(value: LuPopoverAlignment) {
+		if (value !== 'top' && value !== 'bottom' && value !== 'right' && value !== 'left') {
+			throwLuPopoverInvalidAlignement();
 		}
-		this._positionY = value;
+		this._alignment = value;
 		this.setPositionClasses();
 	}
 
 	/** Popover trigger event */
-	@Input('LuPopoverTriggerOn')
+	@Input('trigger-on')
 	get triggerEvent(): LuPopoverTriggerEvent { return this._triggerEvent; }
 	set triggerEvent(v: LuPopoverTriggerEvent) { this._triggerEvent = v; }
 
 	/** Popover enter delay */
-	@Input('LuPopoverEnterDelay')
+	@Input('enter-delay')
 	get enterDelay(): number { return this._enterDelay; }
 	set enterDelay(v: number) { this._enterDelay = v; }
 
 	/** Popover leave delay */
-	@Input('LuPopoverLeaveDelay')
+	@Input('leave-delay')
 	get leaveDelay(): number { return this._leaveDelay; }
 	set leaveDelay(v: number) { this._leaveDelay = v; }
 
 	/** Popover overlap trigger */
-	@Input('LuPopoverOverlapTrigger')
+	@Input('overlap-trigger')
 	get overlapTrigger(): boolean { return this._overlapTrigger; }
 	set overlapTrigger(v: boolean) { this._overlapTrigger = v; }
 
 	/** Popover target offset x */
-	@Input('LuPopoverOffsetX')
+	@Input('offset-x')
 	get targetOffsetX(): number { return this._targetOffsetX; }
 	set targetOffsetX(v: number) { this._targetOffsetX = v; }
 
 	/** Popover target offset y */
-	@Input('LuPopoverOffsetY')
+	@Input('offset-y')
 	get targetOffsetY(): number { return this._targetOffsetY; }
 	set targetOffsetY(v: number) { this._targetOffsetY = v; }
-
-	/** Popover arrow offset x */
-	@Input('LuPopoverArrowOffsetX')
-	get arrowOffsetX(): number { return this._arrowOffsetX; }
-	set arrowOffsetX(v: number) { this._arrowOffsetX = v; }
-
-	/** Popover arrow width */
-	@Input('LuPopoverArrowWidth')
-	get arrowWidth(): number { return this._arrowWidth; }
-	set arrowWidth(v: number) { this._arrowWidth = v; }
-
-	/** Popover arrow color */
-	@Input('LuPopoverArrowColor')
-	get arrowColor(): string { return this._arrowColor; }
-	set arrowColor(v: string) { this._arrowColor = v; }
 
 	/**
 	 * Popover container close on click
 	 * default: true
 	 */
-	@Input('LuPopoverCloseOnClick')
+	@Input('close-on-click')
 	get closeOnClick(): boolean { return this._closeOnClick; }
 	set closeOnClick(v: boolean) { this._closeOnClick = v; }
 
@@ -154,7 +132,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	 * Popover focus trap using cdkTrapFocus
 	 * default: true
 	 */
-	@Input('LuFocusTrapEnabled')
+	@Input('focus-trap-enabled')
 	get focusTrapEnabled(): boolean { return this._focusTrapEnabled; }
 	set focusTrapEnabled(v: boolean) { this._focusTrapEnabled = v; }
 
@@ -235,38 +213,18 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 		}
 	}
 
-	// TODO: Refactor how styles are set and updated on the component, use best practices.
-	// TODO: If arrow left and right positioning is requested, see if flex direction can be used to work with order.
-	/** Sets the current styles for the popover to allow for dynamically changing settings */
-	setCurrentStyles() {
-
-		// TODO: See if arrow position can be calculated automatically and allow override.
-		// TODO: See if flex order is a better alternative to position arrow top or bottom.
-		this.popoverArrowStyles = {
-			'right': this.positionX === 'before' ? (this.arrowOffsetX - this.arrowWidth) + 'px' : '',
-			'left': this.positionX === 'after' ? (this.arrowOffsetX - this.arrowWidth) + 'px' : '',
-			'width': this.arrowWidth + 'px',
-			'height': this.arrowWidth + 'px',
-			'background-color': this.arrowColor,
-			// 'border-top': this.positionY === 'below' ?
-			// 	this.arrowWidth + 'px solid ' + this.arrowColor : '0px solid transparent',
-			// 'border-right': 'undefined' === undefined ?
-			// 	this.arrowWidth + 'px solid ' + this.arrowColor :
-			// 	this.arrowWidth + 'px solid transparent',
-			// 'border-bottom': this.positionY === 'above' ?
-			// 	this.arrowWidth + 'px solid ' + this.arrowColor :
-			// 	this.arrowWidth + 'px solid transparent',
-			// 'border-left': 'undefined' === undefined ?
-			// 	this.arrowWidth + 'px solid ' + this.arrowColor :
-			// 	this.arrowWidth + 'px solid transparent',
-		};
-	}
-
 	/**
 	 * It's necessary to set position-based classes to ensure the popover panel animation
 	 * folds out from the correct direction.
 	 */
-	setPositionClasses(posX = this.positionX, posY = this.positionY): void {
+	setPositionClasses(): void {
+		this._classList['lu-popover-before'] = this.position === 'before';
+		this._classList['lu-popover-after'] = this.position === 'after';
+		this._classList['lu-popover-above'] = this.position === 'above';
+		this._classList['lu-popover-below'] = this.position === 'below';
+	}
+
+	setPositionClassesChanges(posX: LuPopoverPosition, posY: LuPopoverPosition): void {
 		this._classList['lu-popover-before'] = posX === 'before';
 		this._classList['lu-popover-after'] = posX === 'after';
 		this._classList['lu-popover-above'] = posY === 'above';
