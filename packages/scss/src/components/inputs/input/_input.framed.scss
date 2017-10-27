@@ -21,6 +21,7 @@
 		font-size: _theme("sizes.small.font-size");
 		left: _component("input.framed.side-padding");
 		right: _component("input.framed.side-padding");
+		text-align: left;
 		top: _component("input.framed.label-top-offset");
 		width: auto;
 	}

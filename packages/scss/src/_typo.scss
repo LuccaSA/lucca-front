@@ -47,6 +47,10 @@ p {
 	margin: 0 0 .7rem;
 }
 
+b {
+  font-weight: 600;
+}
+
 a:not([class]), .link {
 	color: _color("text.link");
 	text-decoration: underline;
