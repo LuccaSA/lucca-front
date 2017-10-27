@@ -6,6 +6,14 @@
 	position: relative;
 }
 
+.box-close {
+  font-size: 1rem;
+  position: absolute;
+  right: .25rem;
+  top: .25rem;
+  z-index: 1;
+}
+
 .box {
 	&.mod-toggle {
 		margin-top: _component("box.toggle.arrow.size");
