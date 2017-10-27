@@ -27,7 +27,7 @@
 }
 
 // NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
-nav.navSide-scrollWrapper {
+.navSide-scrollWrapper {
 	display: block;
 	position: relative;
 	width: _component("navSide.width");
@@ -181,7 +181,7 @@ nav.navSide-scrollWrapper {
 		background-color: lighten(_component("navSide.compact-palette.bg-color"), 20%);
 	}
 
-	nav.navSide-scrollWrapper {
+	.navSide-scrollWrapper {
 		width: _component("navSide.compact.width");
 	}
 	.navSide-item-link {
