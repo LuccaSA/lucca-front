@@ -25,6 +25,14 @@
 		transition: opacity 150ms ease;
 	}
 
+	&[type="number"] {
+		text-align: right;
+
+		~ .input-label {
+			text-align: right;
+		}
+	}
+
 	&:focus {
 		&::placeholder {
 			opacity: 1;
