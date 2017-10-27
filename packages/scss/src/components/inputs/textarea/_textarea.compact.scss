@@ -3,6 +3,7 @@
 	display: flex;
 
 	.textarea-field {
+		background: white;
 		border-radius: _theme("commons.border.radius");
 		border: 1px solid _component("input.border.color");
 		box-shadow: none;
