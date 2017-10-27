@@ -1,4 +1,5 @@
 %input_framed {
+	display: flex;
 	padding: 0;
 	width: 100%;
 
@@ -24,12 +25,14 @@
 		right: _component("textfield.framed.side-padding");
 		top: _component("textfield.framed.label-top-offset");
 		width: auto;
+		z-index: 1;
 	}
 
 	.textfield-suffix {
 		bottom: _component("textfield.framed.bottom-padding");
 		right: _component("textfield.framed.side-padding");
 		top: auto;
+		z-index: 1;
 	}
 
 	.textfield-messages {
@@ -41,7 +44,7 @@
 		text-align: center;
 		transform: translateY(0);
 		transition: transform _theme("commons.animations.durations.standard");
-		z-index: 1;
+		z-index: 2;
 	}
 
 	.textfield-messages-error {
