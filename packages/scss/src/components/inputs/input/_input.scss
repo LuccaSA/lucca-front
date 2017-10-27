@@ -25,6 +25,14 @@
 		transition: opacity 150ms ease;
 	}
 
+	&[type="number"] {
+		text-align: right;
+
+		~ .input-label {
+			text-align: right;
+		}
+	}
+
 	&:focus {
 		&::placeholder {
 			opacity: 1;
@@ -83,6 +91,7 @@
 .input-messages {
 	line-height: 1.3;
 }
+
 .input-error {
 	color: _color("error");
 	font-size: _component("input.message.font-size");
