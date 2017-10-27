@@ -1,23 +1,21 @@
 $navSide: (
 
 	"fullwidth-palette": (
-		bg-color: _color("text.default"),
+		bg-color: darken(_theme("palettes.primary.color"), 23%),
 		text: white,
-		selected-bg: lighten(_color("text.default"), 10%),
-		selected-text: white,
-		selected-indicator: _color("primary"),
-		alert-color: _color("primary"),
-		alert-text: _theme("palettes.primary.text")
+		selected-bg:  _theme("palettes.primary.color"),
+		selected-text: _theme("palettes.primary.text"),
+		alert-color: _theme("palettes.secondary.color"),
+		alert-text: _theme("palettes.secondary.text")
 	),
 
 	"compact-palette": (
-		bg-color: _color("text.default"),
+		bg-color: darken(_theme("palettes.primary.color"), 23%),
 		text: white,
-		selected-bg: lighten(_color("text.default"), 10%),
-		selected-text: white,
-		selected-indicator: _color("primary"),
-		alert-color: _color("primary"),
-		alert-text: _theme("palettes.primary.text")
+		selected-bg:  _theme("palettes.primary.color"),
+		selected-text: _theme("palettes.primary.text"),
+		alert-color: _theme("palettes.secondary.color"),
+		alert-text: _theme("palettes.secondary.text")
 	),
 
 	"offset-top": 0,
