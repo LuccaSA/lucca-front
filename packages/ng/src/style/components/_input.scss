@@ -1,5 +1,5 @@
 
-.input.mod-compact input.ng-invalid.ng-touched, .input.mod-compact textarea.ng-invalid.ng-touched {
+.textfield.mod-compact input.ng-invalid.ng-touched, .textfield.mod-compact textarea.ng-invalid.ng-touched {
 	border-color: _color("error");
 }
 input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {

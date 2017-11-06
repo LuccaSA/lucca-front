@@ -11,6 +11,7 @@ import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
 import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
 import { LuFormlyWrapperLayout } from './wrappers/layout';
 import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
+import { LuFormlyWrapperIcon, TemplateIcon } from './wrappers/icon';
 import { LuFormlyWrapperError, TemplateError, LuFormlyErrorMessage } from './wrappers/error';
 import { LuFormlyWrapperButton, TemplateButton } from './wrappers/button';
 
@@ -28,6 +29,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyWrapperLabel,
 	LuFormlyWrapperLayout,
 	LuFormlyWrapperSuffix,
+	LuFormlyWrapperIcon,
 	LuFormlyWrapperError,
 	LuFormlyWrapperTitle,
 	LuFormlyWrapperButton,
@@ -67,16 +69,18 @@ export const LU_FORMLY_CONFIG = {
 		{ name: 'helper', component: LuFormlyWrapperHelper },
 		{ name: 'layout', component: LuFormlyWrapperLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },
+		{ name: 'icon', component: LuFormlyWrapperIcon },
 		{ name: 'error', component: LuFormlyWrapperError },
 		{ name: 'button', component: LuFormlyWrapperButton },
 	],
 	manipulators: [
 		{ class: TemplateTitle, method: 'run' }, // for form group only
-		
-		{ class: TemplateButton, method: 'run' }, // fifth
-		{ class: TemplateError, method: 'run' }, // fourth
-		{ class: TemplateHelper, method: 'run' }, // third
-		{ class: TemplateSuffix, method: 'run' }, // second
+
+		{ class: TemplateButton, method: 'run' }, // sixth
+		{ class: TemplateError, method: 'run' }, // fifth
+		{ class: TemplateHelper, method: 'run' }, // fourth
+		{ class: TemplateSuffix, method: 'run' }, // third
+		{ class: TemplateIcon, method: 'run' }, // second
 		// { class: TemplateLabel, method: 'run' }, // first
 	],
 } as ConfigOption;
