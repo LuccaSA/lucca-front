@@ -14,6 +14,10 @@ export class LuFormlyWrapperLayout extends FieldWrapper {
 		return this.to.mod || '';
 	}
 
+	get modMultiline() {
+		return !!this.field && this.field.type === 'textarea' ? 'mod-multiline' : '';
+	}
+
 	get modWithSuffix() {
 		return !!this.to && !!this.to.suffix ? 'mod-withSuffix' : '';
 	}

@@ -1,19 +1,21 @@
 .mat-datepicker-content {
-	display: block;
-	@extend .card;
 	@include box-shadow-override();
+	@extend .card;
+
+	display: block;
 }
 
 .mat-datepicker-toggle {
-	@extend .input-suffix;
+	@extend .textfield-suffix;
+
 	z-index: 2;
 }
 .mat-datepicker-toggle button {
 	background: none !important;
-	width: auto;
+	border-radius: 0;
 	height: auto;
 	line-height: 1;
-	border-radius: 0;
+	width: auto;
 
 	&::after {
 		@include makeIcon("datepicker");
@@ -25,20 +27,22 @@
 
 // CALENDAR
 .mat-calendar {
-	width: 296px;
 	height: auto !important;
+	width: 296px;
 
 	.mat-button {
 		@extend .button.mod-flat;
-		text-decoration: none;
+
 		font-size: 1em;
+		text-decoration: none;
 	}
 	.mat-calendar-arrow {
 		display: none;
 	}
 	.mat-icon-button {
-		border-radius: 3px;
 		@extend .button.mod-flat;
+
+		border-radius: 3px;
 	}
 
 	.mat-calendar-content {
@@ -51,8 +55,8 @@
 	margin-top: 0 !important;
 
 	.mat-calendar-period-button {
-		order: 1;
 		flex: 1;
+		order: 1;
 	}
 	.mat-calendar-next-button {
 		order: 2;
@@ -66,8 +70,9 @@
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
 		@include fakeBorder(1px, _theme("commons.divider.color"));
-		border-radius: 0;
+
 		border: none;
+		border-radius: 0;
 		color: _theme("commons.text.light.color");
 		height: 100%;
 		left: 0;
@@ -88,15 +93,15 @@
 md-month-view, mat-month-view {
 	.mat-calendar-table-header th {
 		color: _theme("commons.text.light.color");
-		padding-bottom: .4em;
 		font-size: .9em;
+		padding-bottom: .4em;
 	}
 
 	.mat-calendar-body-label {
 		overflow: hidden;
 		text-indent: -999px;
 
-		&[colspan="7"]{
+		&[colspan="7"] {
 			display: none; // REMOVE MONTH LABEL ABOVE NUMBERS IF FULL WIDTH
 		}
 	}
