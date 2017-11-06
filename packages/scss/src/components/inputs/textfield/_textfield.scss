@@ -123,6 +123,13 @@
 				color: _get($palette, "color");
 			}
 		}
+
+		// Needed when textfield label is not next to the textfield-input
+		&.is-focused {
+			.textfield-label {
+				color: _get($palette, "color");
+			}
+		}
 	}
 
 	// default color
@@ -294,6 +301,14 @@
 			font-size: 1.2rem;
 			margin-left: .25em;
 			position: absolute;
+		}
+	}
+
+	// Needed when textfield label is not next to the textfield-input
+	&.is-focused {
+		.textfield-label {
+			font-size: _theme("sizes.small.font-size");
+			top: 0;
 		}
 	}
 }

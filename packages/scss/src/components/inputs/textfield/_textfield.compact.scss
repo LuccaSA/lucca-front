@@ -83,6 +83,13 @@
 				color: #A6A6A6;
 			}
 		}
+		
+		// Needed when not next to input (formly)
+		&.is-focused {
+			.textfield-label {
+				color: #A6A6A6;
+			}
+		}
 	}
 
 	// default color
@@ -181,6 +188,19 @@
 			~ .textfield-label {
 				color: _color("error");
 			}
+		}
+	}
+
+	&.is-error {
+		.textfield-label {
+			color: _color("error");
+		}
+	}
+
+	&.is-focused, &.is-filled {
+		.textfield-label {
+			font-size: inherit;
+			top: auto;
 		}
 	}
 }

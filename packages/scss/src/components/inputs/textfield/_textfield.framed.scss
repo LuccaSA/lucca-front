@@ -79,6 +79,12 @@
 				color: _get($palette, "color");
 			}
 		}
+		// Needed when textfield label is not next to the textfield-input
+		&.is-focused {
+			.textfield-label {
+				color: _get($palette, "color");
+			}
+		}
 	}
 
 	@include inputColoring(_component("textfield.framed.default-palette"));
@@ -185,6 +191,19 @@
 			~ .textfield-label, ~ .textfield-suffix {
 				color: _color("error") !important;
 			}
+		}
+	}
+
+	// Needed when not next to input-field (formly)
+	&.is-error {
+		.textfield-label, .textfield-suffix {
+				color: _color("error") !important;
+			}
+	}
+	// Needed when not next to input-field (formly)
+	&.is-focused, &:hover {
+		.textfield-messages {
+			transform: translateY(100%);
 		}
 	}
 }
