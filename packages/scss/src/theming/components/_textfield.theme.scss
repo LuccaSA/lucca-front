@@ -8,6 +8,10 @@ $textfield: (
     padding-vertical: .5rem,
   ),
 
+  label: (
+    color: #A6A6A6
+  ),
+
   suffix: (
     padding-right: 2.5rem,
   ),
@@ -40,6 +44,7 @@ $textfield: (
     default-palette: (
       color: _color("text.light")
     ),
+    background: #FFFFFF,
     border-radius: .2rem,
     padding: .5rem,
     label-right-margin: .3rem,

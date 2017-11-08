@@ -5,8 +5,9 @@
 	margin-top: 1rem;
 
 	.textfield-input {
-		box-shadow: 0 0 0 1px _component("textfield.border.color");
+		background: _component("textfield.compact.background");
 		border-radius: _component("textfield.compact.border-radius");
+		box-shadow: 0 0 0 1px _component("textfield.border.color");
 		padding: .5rem;
 
 		&::placeholder {
@@ -80,14 +81,14 @@
 			box-shadow: 0 0 0 1px _get($palette, "color");
 
 			~ .textfield-label {
-				color: #A6A6A6;
+				color: _component("textfield.label.color");
 			}
 		}
-		
+
 		// Needed when not next to input (formly)
 		&.is-focused {
 			.textfield-label {
-				color: #A6A6A6;
+				color: _component("textfield.label.color");
 			}
 		}
 	}
