@@ -25,14 +25,6 @@
 		transition: opacity 150ms ease;
 	}
 
-	&[type="number"] {
-		text-align: right;
-
-		~ .input-label {
-			text-align: right;
-		}
-	}
-
 	&:focus {
 		&::placeholder {
 			opacity: 1;
@@ -46,7 +38,7 @@
 }
 
 .textfield-label {
-	color: #A6A6A6;
+	color: _component("textfield.label.color");
 	white-space: nowrap;
 	font-size: _component("textfield.font-size");
 	left: 0;
@@ -61,7 +53,7 @@
 
 .textfield-options {
 	background: white;
-	border-radius: 3px;
+	border-radius: _theme("commons.border.radius");
 	@include elevate(3);
 	left: 0;
 	list-style: none;
@@ -216,7 +208,7 @@
 		}
 
 		.textfield-label {
-			color: #A6A6A6;
+			color: _component("textfield.label.color");
 			font-size: _theme("sizes.standard.font-size");
 			top: 1.3rem;
 		}
