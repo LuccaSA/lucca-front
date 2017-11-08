@@ -1,2 +1,2 @@
-<textarea class="input-field" [formControl]="formControl" [formlyAttributes]="field" luEmpty></textarea>
+<textarea class="input-field" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()"></textarea>
 <label [attr.for]="id" class="input-label">{{ to.label }}</label>
