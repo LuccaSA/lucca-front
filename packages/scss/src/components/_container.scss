@@ -1,5 +1,5 @@
 .container {
-	margin: 0 auto;
+	margin: _component("container.margin-top") auto _component("container.margin-bottom");
 	padding: 0 .5rem;
 	max-width: _component("container.max-width");
 
