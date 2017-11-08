@@ -8,7 +8,7 @@
 
 import {MomentDateAdapter} from './moment-date-adapter';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {MomentDateModule} from './index';
+// import {MomentDateModule} from './index';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material';
 import {LOCALE_ID} from '@angular/core';
 import * as moment from 'moment';
@@ -23,7 +23,7 @@ describe('MomentDateAdapter', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [MomentDateModule]
+			// imports: [MomentDateModule]
 		}).compileComponents();
 	}));
 
@@ -362,7 +362,7 @@ describe('MomentDateAdapter with MAT_DATE_LOCALE override', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [MomentDateModule],
+			// imports: [MomentDateModule],
 			providers: [{provide: MAT_DATE_LOCALE, useValue: 'ja-JP'}]
 		}).compileComponents();
 	}));
@@ -381,7 +381,7 @@ describe('MomentDateAdapter with LOCALE_ID override', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [MomentDateModule],
+			// imports: [MomentDateModule],
 			providers: [{provide: LOCALE_ID, useValue: 'fr'}]
 		}).compileComponents();
 	}));
