@@ -7,7 +7,7 @@
 
 <div class="textfield">
 	<input luEmpty [formControl]="autoCompleteFC" class="textfield-input" [matAutocomplete]="auto">
-	<mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+	<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
 		<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 			<span>{{ option.name }}</span>
 		</mat-option>
