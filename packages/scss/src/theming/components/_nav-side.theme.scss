@@ -34,6 +34,10 @@ $navSide: (
 	"compact": (
 		"width": 8.1rem,
 	),
+
+	"placeholder": (
+		"opacity": .15,
+	),
 );
 
 $theme: _set($theme, "components.navSide", $navSide);
