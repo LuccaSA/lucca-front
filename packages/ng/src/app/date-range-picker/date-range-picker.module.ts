@@ -13,8 +13,9 @@ import {
 import {LuSharedModule} from '../shared/shared.module';
 import {LuDateRangePickerComponent} from './date-range-picker.component';
 import { DateRangeModalComponent } from './date-range-modal/date-range-modal.component';
-import {MomentDateAdapter} from '../shared/moment/moment-date-adapter';
-import {MAT_MOMENT_DATE_FORMATS} from '../shared/moment/moment-date-formats';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+// import {MomentDateAdapter} from '../shared/moment/moment-date-adapter';
+// import {MAT_MOMENT_DATE_FORMATS} from '../shared/moment/moment-date-formats';
 
 @NgModule({
 	imports: [
@@ -27,13 +28,12 @@ import {MAT_MOMENT_DATE_FORMATS} from '../shared/moment/moment-date-formats';
 		MatDatepickerModule,
 		MatNativeDateModule,
 		MatDialogModule,
+		MatMomentDateModule,
 	],
 	entryComponents: [DateRangeModalComponent],
 	declarations: [LuDateRangePickerComponent, DateRangeModalComponent],
 	exports: [LuDateRangePickerComponent],
 	providers: [
-		{provide: DateAdapter, useClass: MomentDateAdapter},
-		{provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
 	]
 })
 export class LuDateRangePickerModule { }
