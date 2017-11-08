@@ -1,124 +1,128 @@
 <section class="contentSection">
-	<h2>Form mod-framed</h2>
+	<h2>Framed form</h2>
+
 	<p>
-		Form has can have a mod called <code class="code">.mod-framed</code>.
-		In this mod <code class="code">.form-group</code> behave differently and you have access to a new
-		DOM level called <code class="code">.form-group-line</code>.
+		Form can have a mod called <code class="code">mod-framed</code>.
+		In this mod <code class="code">form-group</code> behave differently and you have access to a new
+		DOM level called <code class="code">form-group-line</code>.
 	</p>
 	<p>
-		<code class="code">form-group</code> represents a whole section of your form.
-		It can have a <code class="code">.form-group-title</code> to name your section
-		It can contain <code class="code">.form-group-line</code> and <code class="code">.input.mod-framed</code>
+		You can divide <code class="code">form-group-line</code> using <code class="code">form-group-line-*</code> classes (like <code class="code">form-group-line-xs6</code> or <code class="code">form-group-line-lg4</code>) over
+		 your inputs to size them on a single line.
 	</p>
-	<p>
-		In a <code class="code">form-group-line</code> you can use <code class="code">.form-grid-*</code> classes onto your <code class="code">.input</code> to size
-		your inputs on a single line.
-	</p>
-	<code class="code mod-block">&lt;form class="form mod-framed"&gt;
-	&lt;div class="form-group"&gt;
-		&lt;h2 class="form-group-title"&gt;Title name&lt;/h2&gt;
-		&lt;div class="form-group-line"&gt;
-			&lt;div class="input mod-framed form-grid-lg8&gt;
-				[...]
-			&lt;/div&gt;
-			&lt;div class="input mod-framed form-grid-lg4&gt;
-				[...]
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/form&gt;</code>
-<h4>Example</h4>
+
 	<div class="form mod-framed">
 		<div class="form-group">
-			<h2 class="form-group-title">Title Group 1</h2>	
+			<h3>Title Group 1</h3>
 			<div class="form-group-line">
-				<div class="input mod-framed is-required form-grid-lg8">
-					<input class="input-field is-error" type="text" placeholder="placeholder">
-					<label class="input-label">Input label</label>
+				<div class="form-group-line-lg8">
+					<div class="textfield mod-framed is-required">
+						<input class="textfield-input is-error" type="text" placeholder="placeholder">
+						<label class="textfield-label">Textfield label</label>
+					</div>
 				</div>
-				<div class="input mod-framed form-grid-lg4">
-					<input class="input-field" type="text" placeholder="placeholder" value="Test disabled" disabled>
-					<label class="input-label">Input label</label>
-				</div>
-			</div>
-			<div class="input mod-framed palette-success">
-				<input class="input-field" type="text" placeholder="placeholder">
-				<label class="input-label">Input label</label>
-			</div>
-			<div class="input mod-framed mod-withSuffix">
-				<input class="input-field" type="text" placeholder="Money Money">
-				<label class="input-label">Input label</label>
-				<div class="input-suffix">
-					€
+				<div class="form-group-line-lg4">
+					<div class="textfield mod-framed">
+						<input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled>
+						<label class="textfield-label">Textfield label</label>
+					</div>
 				</div>
 			</div>
-			<div class="input textarea mod-framed mod-withSuffix">
-				<textarea class="input-field" type="text" placeholder="Money Money"></textarea>
-				<label class="input-label">Input label</label>
-				<div class="input-suffix">
-					<select class="" name="">
-						<option value="">Option 1</option>
-					</select>
+			<div class="form-group-line">
+				<div class="textfield mod-framed palette-success">
+					<input class="textfield-input" type="text" placeholder="placeholder">
+					<label class="textfield-label">Textfield label</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="textfield mod-framed mod-withSuffix">
+					<input class="textfield-input" type="text" placeholder="Money Money">
+					<label class="textfield-label">Textfield label</label>
+					<div class="textfield-suffix">
+						€
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="textfield mod-multiline mod-framed mod-withSuffix">
+					<textarea class="textfield-input" type="text" placeholder="Money Money"></textarea>
+					<label class="textfield-label">Textfield label</label>
+					<div class="textfield-suffix">
+						<select class="" name="">
+							<option value="">Option 1</option>
+						</select>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<h2 class="form-group-title">Title Group 2</h2>
-			<div class="input textarea mod-framed mod-withSuffix palette-secondary is-required">
-				<textarea class="input-field" type="text" placeholder="Money Money"></textarea>
-				<label class="input-label">Input label</label>
-				<div class="input-suffix">
-					<select class="" name="">
-						<option value="">Option 1</option>
-					</select>
-				</div>
-			</div>
-			<div id="autocomplete-framed" class="input mod-framed mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')">
-				<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')">
-				<label class="input-label">User</label>
-				<ul class="input-options">
-					<li class="input-options-entry">
-						<u>va</u>lue A</li>
-					<li class="input-options-entry is-focus">
-						<u>va</u>lue B</li>
-					<li class="input-options-entry">
-						<u>va</u>lue C</li>
-				</ul>
-			</div>
-			<div id="autocomplete-framed-select" class="input mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')">
-				<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')">
-				<label class="input-label">User</label>
-				<ul class="input-options">
-					<li class="input-options-entry">
-						<u>va</u>lue A</li>
-					<li class="input-options-entry is-focus">
-						<u>va</u>lue B</li>
-					<li class="input-options-entry">
-						<u>va</u>lue C</li>
-				</ul>
-			</div>
+			<h3>Title Group 2</h3>
 			<div class="form-group-line">
-				<div id="autocomplete-framed-select2" class="input mod-framed mod-select form-grid-xs6" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')">
-					<input class="input-field" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')">
-					<label class="input-label">User</label>
-					<ul class="input-options">
-						<li class="input-options-entry">
-							<u>va</u>lue A</li>
-						<li class="input-options-entry is-focus">
-							<u>va</u>lue B</li>
-						<li class="input-options-entry">
-							<u>va</u>lue C</li>
-					</ul>
-				</div>
-				<div class="input mod-framed is-required form-grid-xs6">
-					<input class="input-field is-error" type="text" placeholder="placeholder">
-					<label class="input-label">Input label</label>
-					<div class="input-messages">
-						<div class="input-error">This field is required</div>
+				<div class="textfield mod-multiline mod-framed mod-withSuffix palette-secondary is-required">
+					<textarea class="textfield-input" type="text" placeholder="Money Money"></textarea>
+					<label class="textfield-label">Textfield label</label>
+					<div class="textfield-suffix">
+						<select class="" name="">
+							<option value="">Option 1</option>
+						</select>
 					</div>
 				</div>
 			</div>
-			<div class="input checkbox-group mod-framed">
+			<div class="form-group-line">
+				<div id="autocomplete-framed" class="textfield mod-framed mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')">
+					<label class="textfield-label">User</label>
+					<ul class="textfield-options">
+						<li class="textfield-options-entry">
+							<u>va</u>lue A</li>
+						<li class="textfield-options-entry is-focus">
+							<u>va</u>lue B</li>
+						<li class="textfield-options-entry">
+							<u>va</u>lue C</li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div id="autocomplete-framed-select" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')">
+					<label class="textfield-label">User</label>
+					<ul class="textfield-options">
+						<li class="textfield-options-entry">
+							<u>va</u>lue A</li>
+						<li class="textfield-options-entry is-focus">
+							<u>va</u>lue B</li>
+						<li class="textfield-options-entry">
+							<u>va</u>lue C</li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-xs6">
+					<div id="autocomplete-framed-select2" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')">
+						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')">
+						<label class="textfield-label">User</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<u>va</u>lue A</li>
+							<li class="textfield-options-entry is-focus">
+								<u>va</u>lue B</li>
+							<li class="textfield-options-entry">
+								<u>va</u>lue C</li>
+						</ul>
+					</div>
+				</div>
+				<div class="form-group-line-xs6">
+					<div class="textfield mod-framed is-required">
+						<input class="textfield-input is-error" type="text" placeholder="placeholder">
+						<label class="textfield-label">Textfield label</label>
+						<div class="textfield-messages">
+							<div class="textfield-messages-error">This field is required</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line mod-selection">
+				<label class="form-group-line-label">Textfield label</label>
 				<div class="checkbox">
 					<input class="checkbox-input" type="checkbox" id="checkboxID">
 					<label class="checkbox-label" for="checkboxID">Checkbox</label>
@@ -131,9 +135,9 @@
 					<input class="checkbox-input" type="checkbox" id="checkboxID3">
 					<label class="checkbox-label" for="checkboxID3">Checkbox</label>
 				</div>
-				<label class="input-label">Input label</label>
 			</div>
-			<div class="input radio-group mod-framed">
+			<div class="form-group-line mod-selection">
+				<label class="form-group-line-label">Textfield label</label>
 				<div class="radio">
 					<input class="radio-input" type="radio" name="radioframedlist" id="radioID">
 					<label class="radio-label" for="radioID">radio</label>
@@ -146,42 +150,63 @@
 					<input class="radio-input" type="radio" name="radioframedlist" id="radioID3">
 					<label class="radio-label" for="radioID3">radio</label>
 				</div>
-				<label class="input-label">Input label</label>
 			</div>
 		</div>
 	</div>
-	<code class="code mod-block">&lt;div class=&quot;form mod-framed&quot;&gt;
-	&lt;div class=&quot;form-group&quot;&gt;
-		&lt;h2 class=&quot;form-group-title&quot;&gt;Title Group 1&lt;/h2&gt;	
-		&lt;div class=&quot;form-group-line&quot;&gt;
-			&lt;div class=&quot;input mod-framed is-required form-grid-lg8&quot;&gt;
-				&lt;input class=&quot;input-field is-error&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
-				&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
-			&lt;/div&gt;
-			&lt;div class=&quot;input mod-framed form-grid-lg4&quot;&gt;
-				&lt;input class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot; value=&quot;Test disabled&quot; disabled&gt;
-				&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-		&lt;div class=&quot;input mod-framed palette-success&quot;&gt;
-			&lt;input class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
-			&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
-		&lt;/div&gt;
-		&lt;div class=&quot;input mod-framed mod-withSuffix&quot;&gt;
-			&lt;input class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;...&quot;&gt;
-			&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
-			&lt;div class=&quot;input-suffix&quot;&gt;
-				&euro;
-			&lt;/div&gt;
-		&lt;/div&gt;
-		&lt;div class=&quot;input textarea mod-framed mod-withSuffix&quot;&gt;
-			&lt;textarea class=&quot;input-field&quot; type=&quot;text&quot; placeholder=&quot;...&quot;&gt;&lt;/textarea&gt;
-			&lt;label class=&quot;input-label&quot;&gt;Input label&lt;/label&gt;
-			&lt;div class=&quot;input-suffix&quot;&gt;
-				[...]
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;</code>
-<em><b>Tip:</b> Add <code class="code">.mod-stacked</code> to the <code class="code">checkbox-group</code> or <code class="code">radio-group</code> to have them stacked</em>
+
+<code class="code mod-block">&lt;div class="form mod-framed"&gt;
+  &lt;div class="form-group"&gt;
+    &lt;h3&gt;Title Group&lt;/h3&gt;
+    &lt;div class="form-group-line"&gt;
+      &lt;div class="form-group-line-lg8"&gt;
+        &lt;div class="textfield mod-framed is-required"&gt;
+          &lt;input class="textfield-input" type="text" placeholder="..."&gt;
+          &lt;label class="textfield-label"&gt;...&lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="form-group-line-lg4"&gt;
+        &lt;div class="textfield mod-framed"&gt;
+          &lt;input class="textfield-input" type="text" placeholder="..." disabled&gt;
+          &lt;label class="textfield-label"&gt;...&lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group-line"&gt;
+      &lt;div class="textfield mod-framed"&gt;
+        &lt;input class="textfield-input" type="text" placeholder="..."&gt;
+        &lt;label class="textfield-label"&gt;...&lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group-line"&gt;
+      &lt;div class="textfield mod-framed mod-withSuffix"&gt;
+        &lt;input class="textfield-input" type="text" placeholder="..."&gt;
+        &lt;label class="textfield-label"&gt;...&lt;/label&gt;
+        &lt;div class="textfield-suffix"&gt;€&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group-line"&gt;
+      &lt;div class="textfield mod-multiline mod-framed mod-withSuffix"&gt;
+        &lt;textarea class="textfield-input" type="text" placeholder="..."&gt;&lt;/textarea&gt;
+        &lt;label class="textfield-label"&gt;...&lt;/label&gt;
+        &lt;div class="textfield-suffix"&gt;€&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group-line mod-selection"&gt;
+      &lt;label class="form-group-line-label"&gt;...&lt;/label&gt;
+      &lt;div class="checkbox"&gt;
+        &lt;input class="checkbox-input" type="checkbox" id="checkboxFramed0"&gt;
+        &lt;label class="checkbox-label" for="checkboxFramed0"&gt;Checkbox&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class="checkbox"&gt;
+        &lt;input class="checkbox-input" type="checkbox" id="checkboxFramed1"&gt;
+        &lt;label class="checkbox-label" for="checkboxFramed1"&gt;Checkbox&lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code>
+
+	</code>
+<em><b>Tip:</b> Add <code class="code">.mod-selection</code> to the <code class="code">form-group-line</code> to add a border to your line (e.g. for checkbox or radio group).</em><br>
+<em><b>Tip:</b> Add <code class="code">.mod-stacked</code> to the <code class="code">form-group-line</code> to have your radio or checkbox stacked</em>
 </section>

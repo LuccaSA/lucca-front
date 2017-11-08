@@ -5,13 +5,17 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-for
 @Component({
 	selector: 'lu-formly-wrapper-layout',
 	styleUrls: ['flex-layout.scss'],
-	templateUrl: './layout.html',
+	templateUrl: './textfield-layout.html',
 })
-export class LuFormlyWrapperLayout extends FieldWrapper {
+export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
 
 	get mod() {
 		return this.to.mod || '';
+	}
+
+	get modMultiline() {
+		return !!this.field && this.field.type === 'textarea' ? 'mod-multiline' : '';
 	}
 
 	get modWithSuffix() {

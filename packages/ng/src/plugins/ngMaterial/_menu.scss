@@ -1,13 +1,13 @@
 .mat-menu-item {
 	background-color: transparent;
-	@extend .input-options-entry;
+	@extend .textfield-options-entry;
 	&.mat-selected, &.mat-active {
-		@extend .input-options-entry.is-focus;
+		@extend .textfield-options-entry.is-focus;
 	}
 }
 
 .mat-menu-panel {
-	@extend .input-options;
+	@extend .textfield-options;
 	position: relative;
 	top: auto;
 }

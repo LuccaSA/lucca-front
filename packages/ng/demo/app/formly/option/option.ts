@@ -18,7 +18,7 @@ export class OptionComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'label',
 						type: 'input',
 						templateOptions: {
@@ -26,7 +26,7 @@ export class OptionComponent {
 							label: 'this is the label',
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'placeholder',
 						type: 'input',
 						templateOptions: {
@@ -50,7 +50,7 @@ export class OptionComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'icon',
 						type: 'input',
 						templateOptions: {
@@ -59,7 +59,7 @@ export class OptionComponent {
 							icon: 'heart',
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'suffix',
 						type: 'input',
 						templateOptions: {
@@ -77,7 +77,7 @@ export class OptionComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'firstName',
 						type: 'input',
 						templateOptions: {
@@ -85,7 +85,7 @@ export class OptionComponent {
 							label: 'first name',
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'lastName',
 						type: 'input',
 						templateOptions: {

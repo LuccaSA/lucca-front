@@ -4,10 +4,10 @@
 }
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
+	height: 100%;
+	left: 0;
 	pointer-events: none;
 	top: 0;
-	left: 0;
-	height: 100%;
 	width: 100%;
 }
 
@@ -18,21 +18,21 @@
 }
 
 .cdk-overlay-pane {
-	position: absolute;
 	box-sizing: border-box;
+	position: absolute;
 	z-index: 1000;
 }
 
 .cdk-overlay-backdrop {
-	position: absolute;
-	top: 0;
-	left: 0;
 	bottom: 0;
-	right: 0;
-	z-index: 1000;
-	pointer-events: auto;
-	transition: opacity .2 ease-in-out;
+	left: 0;
 	opacity: 0;
+	pointer-events: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: opacity .2 ease-in-out;
+	z-index: 1000;
 
 	&.cdk-overlay-backdrop-showing {
 		opacity: .4;

@@ -1,25 +1,25 @@
 mat-select {
-	@extend .input;
+	@extend .textfield;
 }
 
-.input.mod-framed mat-select {
+.textfield.mod-framed mat-select {
 	padding: 0 !important;
 	.mat-select-trigger {
 		font-size: 1em;
-		margin: 2.2em 1em 0.7em;
+		margin: 2.2em 1em .7em;
 		&::after {
-			content: '';
+			bottom: -.7em;
+			content: "";
 			display: block;
-			position: absolute;
-			top: -2.2em;
-			right: -1em;
-			bottom: -0.7em;
 			left: -1em;
+			position: absolute;
+			right: -1em;
+			top: -2.2em;
 		}
 	}
 }
 
-.input:not(.mod-compact) mat-select {
+.textfield:not(.mod-compact) mat-select {
 	padding-top: 0 !important;
 }
 
@@ -33,7 +33,8 @@ mat-select {
 	width: auto !important;
 }
 .mat-select-panel {
-	@extend .input-options;
+	@extend .textfield-options;
+
 	position: relative;
 	top: auto;
 }
