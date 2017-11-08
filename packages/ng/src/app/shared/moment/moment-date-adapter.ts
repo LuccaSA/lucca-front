@@ -152,6 +152,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 		return date.format(displayFormat);
 	}
 
+	invalid() {
+		return moment.invalid();
+	}
 	addCalendarYears(date: Moment, years: number): Moment {
 		return this.clone(date).add({years});
 	}
