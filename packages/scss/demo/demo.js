@@ -197,7 +197,8 @@ function generateIconDemo() {
 		'format_italic',
 		'format_clear',
 
-		'hr_folder'
+		'hr_folder',
+		'archive'
 	]};
 
 	w3.displayObject("icons-section", icons);
