@@ -9,7 +9,7 @@ import { LuFormlyFieldSelect } from './types/select';
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
 import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
 import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
-import { LuFormlyWrapperLayout } from './wrappers/layout';
+import { LuFormlyWrapperTextfieldLayout } from './wrappers/textfield-layout';
 import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
 import { LuFormlyWrapperIcon, TemplateIcon } from './wrappers/icon';
 import { LuFormlyWrapperError, TemplateError, LuFormlyErrorMessage } from './wrappers/error';
@@ -27,7 +27,7 @@ export const LU_FORMLY_COMPONENTS = [
 
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
-	LuFormlyWrapperLayout,
+	LuFormlyWrapperTextfieldLayout,
 	LuFormlyWrapperSuffix,
 	LuFormlyWrapperIcon,
 	LuFormlyWrapperError,
@@ -40,34 +40,34 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'input',
 			component: LuFormlyFieldInput,
-			wrappers: ['layout'],
+			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'date',
 			component: LuFormlyFieldDate,
-			wrappers: ['layout'],
+			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'textarea',
 			component: LuFormlyFieldTextarea,
-			wrappers: ['layout'],
+			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'autocomplete',
 			component: LuFormlyFieldAutocomplete,
-			wrappers: ['layout'],
+			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'select',
 			component: LuFormlyFieldSelect,
-			wrappers: ['layout'],
+			wrappers: ['textfield-layout'],
 		},
 	],
 	wrappers: [
 		{ name: 'title', component: LuFormlyWrapperTitle },
 		// { name: 'label', component: LuFormlyWrapperLabel }, // label added to templates for technical reasons
 		{ name: 'helper', component: LuFormlyWrapperHelper },
-		{ name: 'layout', component: LuFormlyWrapperLayout },
+		{ name: 'textfield-layout', component: LuFormlyWrapperTextfieldLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },
 		{ name: 'icon', component: LuFormlyWrapperIcon },
 		{ name: 'error', component: LuFormlyWrapperError },
