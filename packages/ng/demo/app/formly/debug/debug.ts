@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
-import {FormlyFieldConfig} from 'ng-formly';
-import { FieldType } from 'ng-formly';
+import {FormlyFieldConfig} from '@ngx-formly/core';
+import { FieldType } from '@ngx-formly/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';

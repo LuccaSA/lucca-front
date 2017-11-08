@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from 'ng-formly';
+import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-formly/core';
 
 // wrapper component
 @Component({

@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+// import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -35,11 +34,10 @@ import { DemoPopoverModule } from './lu-popover/lu-popover.module';
 		DemoFormlyModule,
 		DemoEmptyModule,
 
-    BrowserModule,
+		BrowserModule,
 		FormsModule,
-		HttpModule,
 	],
-	providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
+	// providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

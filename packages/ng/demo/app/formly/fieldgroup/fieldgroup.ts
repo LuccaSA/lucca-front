@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
-import {FormlyFieldConfig} from 'ng-formly';
+import {FormlyFieldConfig} from '@ngx-formly/core';
 
 @Component({
 	selector: 'demo-formly-fieldgroup',
