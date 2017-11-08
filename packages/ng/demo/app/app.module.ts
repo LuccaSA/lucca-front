@@ -10,7 +10,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.router';
 
-import { DemoLolModule } from './lol/lol.module';
 import { DemoDateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { DemoUserTileModule } from './user-tile/user-tile.module';
 import { DemoUserDisplayModule } from './user-display/user-display.module';
@@ -27,7 +26,6 @@ import { DemoPopoverModule } from './lu-popover/lu-popover.module';
 		RouterModule.forRoot(appRoutes),
 
 		DemoPopoverModule,
-		DemoLolModule,
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
 		DemoUserDisplayModule,
