@@ -27,7 +27,7 @@
 }
 
 // NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
-nav.navSide-scrollWrapper {
+.navSide-scrollWrapper {
 	display: block;
 	position: relative;
 	width: _component("navSide.width");
@@ -181,7 +181,7 @@ nav.navSide-scrollWrapper {
 		background-color: lighten(_component("navSide.compact-palette.bg-color"), 20%);
 	}
 
-	nav.navSide-scrollWrapper {
+	.navSide-scrollWrapper {
 		width: _component("navSide.compact.width");
 	}
 	.navSide-item-link {
@@ -189,19 +189,7 @@ nav.navSide-scrollWrapper {
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
-		&::before {
-			background: _component("navSide.compact-palette.selected-indicator");
-			bottom: 0;
-			box-shadow: 2px 0 2px 0 rgba(0, 0, 0, .2);
-			content: "";
-			left: 0;
-			position: absolute;
-			top: 0;
-			transform: scaleY(0);
-			transform-origin: 50%;
-			transition: all 250ms ease;
-			width: 5px;
-		}
+
 		.navSide-item-link-title {
 			margin: .8em 0 0;
 		}
@@ -230,10 +218,6 @@ nav.navSide-scrollWrapper {
 			background-color: _component("navSide.compact-palette.selected-bg");
 			color: _component("navSide.compact-palette.selected-text");
 			opacity: 1;
-
-			&::before {
-				transform: scaleY(1);
-			}
 		}
 	}
 }

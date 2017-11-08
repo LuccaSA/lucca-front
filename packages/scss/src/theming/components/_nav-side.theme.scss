@@ -1,26 +1,25 @@
 $navSide: (
 
 	"fullwidth-palette": (
-		bg-color: _color("primary"),
-		text: _theme("palettes.primary.text"),
-		selected-bg: darken(_color("primary"), 5%),
+		bg-color: darken(_theme("palettes.primary.color"), 23%),
+		text: white,
+		selected-bg:  _theme("palettes.primary.color"),
 		selected-text: _theme("palettes.primary.text"),
-		alert-color: darken(_color("primary"), 5%),
-		alert-text: _theme("palettes.primary.text")
+		alert-color: _theme("palettes.secondary.color"),
+		alert-text: _theme("palettes.secondary.text")
 	),
 
 	"compact-palette": (
-		bg-color: #666666,
+		bg-color: darken(_theme("palettes.primary.color"), 23%),
 		text: white,
-		selected-bg: darken(#666666, 5%),
-		selected-text: white,
-		selected-indicator: _color("primary"),
-		alert-color: _color("primary"),
-		alert-text: _theme("palettes.primary.text")
+		selected-bg:  _theme("palettes.primary.color"),
+		selected-text: _theme("palettes.primary.text"),
+		alert-color: _theme("palettes.secondary.color"),
+		alert-text: _theme("palettes.secondary.text")
 	),
 
-	"offset-top": 0px,
-	"padding-top": 0px,
+	"offset-top": 0,
+	"padding-top": 0,
 	"main-font-size": _theme("sizes.standard.font-size"),
 	"sub-font-size": _theme("sizes.small.font-size"),
 	"scrollbar": (
