@@ -6,6 +6,7 @@
 
 	&.mat-autocomplete-visible {
 		opacity: 1;
+		overflow-x: hidden;
 		transform: scaleY(1);
 	}
 }
