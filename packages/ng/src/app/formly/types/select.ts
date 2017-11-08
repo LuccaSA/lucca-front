@@ -6,20 +6,29 @@ import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'lu-formly-field-select',
-	styles: [`
-	:host {
-		width: 100%;
-		display: inherit;
-		align-items: inherit;
-	}
-	:host-context(.mod-framed) {
-		display: initial;
-	}`],
+	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './select.html',
 })
 export class LuFormlyFieldSelect extends FieldType implements OnInit {
 	get _options() { return this.to.options || []; }
 	ngOnInit () {
+		this.formControl.valueChanges.subscribe(value => {
+			this.setToOption(value);
+		});
+		const value = this.formControl.value;
+		this.setToOption(value);
 	}
-	displayFn(option) { return option.name; }
+	setToOption(value) {
+		if (!!value && !this._options.includes(value) && this._options.map(o => o.id).includes(value.id)) {
+			// replace formValue with the option value with the same id
+			const option = this._options.find(o => o.id === value.id);
+			this.formControl.setValue(option);
+		}
+	}
+	focus() {
+		this.to._isFocused = true;
+	}
+	blur() {
+		this.to._isFocused = false;
+	}
 }

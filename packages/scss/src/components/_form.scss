@@ -1,5 +1,6 @@
 .form-group {
 	margin-bottom: 1.7rem;
+	position: relative;
 }
 
 .form-group-label {
@@ -10,4 +11,71 @@
 
 .form-actions {
 	text-align: right;
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.form {
+	&.mod-framed {
+		.form-group {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.form-group-line {
+			display: flex;
+			flex: 0 1 auto;
+			flex-direction: row;
+			flex-wrap: wrap;
+			position: relative;
+
+			&.mod-stacked {
+				flex-direction: column;
+			}
+
+			&.mod-selection {
+				@include fakeBorder(1px, _theme("commons.divider.color"));
+				padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+			}
+		}
+
+		.form-group-line-label {
+			color: _color("text.light");
+			font-size: _theme("sizes.small.font-size");
+			left: _component("textfield.framed.side-padding");
+			position: absolute;
+			right: _component("textfield.framed.side-padding");
+			top: _component("textfield.framed.label-top-offset");
+			width: auto;
+		}
+
+		// Form group grid system
+		@each $bp-name, $bp-obj in $breakpoints {
+			@for $i from 1 through 12 {
+				.form-group-line-#{$bp-name}#{$i} {
+					flex: 0 0 auto;
+					flex-basis: 100%;
+					max-width: 100%;
+					position: relative;
+				}
+			}
+
+			@include media_larger_than($bp-name) {
+				.form-group-line-#{$bp-name} {
+					flex-basis: 0;
+					flex-grow: 1;
+					max-width: 100%;
+				}
+
+				@for $i from 1 through 12 {
+					.form-group-line-#{$bp-name}#{$i} {
+						flex-basis: percentage($i / 12);
+						max-width: percentage($i / 12);
+					}
+				}
+			}
+		}
+	}
 }

@@ -96,11 +96,10 @@
 	}
 }
 
-// MOD
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.radio-group.input.mod-framed {
-	@extend %radio-framed;
+.form.mod-framed {
+	.radio {
+		margin-right: 2em;
+	}
 }
 
 // STATES
@@ -128,5 +127,3 @@
 		}
 	}
 }
-
-@import "radio.framed";

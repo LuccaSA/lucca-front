@@ -5,7 +5,7 @@ import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from 'ng-formly';
 // wrapper
 @Component({
 	selector: 'lu-formly-wrapper-error',
-	styleUrls: ['wrappers.common.scss'],
+	styleUrls: ['flex-layout.scss'],
 	templateUrl: './error.html',
 })
 export class LuFormlyWrapperError extends FieldWrapper {
@@ -28,17 +28,15 @@ export class LuFormlyErrorMessage {
 	constructor() {}
 
 	get errorMessages(): string[] {
+		const messages = [];
 		if (!!this.fieldForm.errors) {
-			const messages = [];
 			Object.keys(this.fieldForm.errors).forEach(key => {
 				if (this.field.validation && this.field.validation.messages && this.field.validation.messages[key]) {
 					messages.push(this.field.validation.messages[key]);
 				}
 			});
-			return messages;
-		} else {
-			return [];
 		}
+		return messages;
 	}
 }
 

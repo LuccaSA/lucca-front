@@ -15,7 +15,7 @@ export class FieldgroupComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'firstName',
 						type: 'input',
 						templateOptions: {
@@ -24,7 +24,7 @@ export class FieldgroupComponent {
 							mod: 'mod-framed'
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'lastName',
 						type: 'input',
 						templateOptions: {
@@ -41,7 +41,7 @@ export class FieldgroupComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md2',
+						className: 'form-group-line-md2',
 						key: 'buildingNumber',
 						type: 'input',
 						templateOptions: {
@@ -50,7 +50,7 @@ export class FieldgroupComponent {
 							mod: 'mod-framed',
 						},
 					}, {
-						className: 'form-grid-md10',
+						className: 'form-group-line-md10',
 						key: 'streetName',
 						type: 'input',
 						templateOptions: {

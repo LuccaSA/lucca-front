@@ -18,7 +18,7 @@ export class OptionComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'label',
 						type: 'input',
 						templateOptions: {
@@ -26,7 +26,7 @@ export class OptionComponent {
 							label: 'this is the label',
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'placeholder',
 						type: 'input',
 						templateOptions: {
@@ -36,26 +36,36 @@ export class OptionComponent {
 						},
 					}
 				]
-			}, {
+			},
+			{
+				key: 'helper',
+				type: 'input',
+				templateOptions: {
+					type: 'text',
+					label: 'this one has a helper',
+					helper: 'this is the helper message',
+				},
+			},
+				{
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
-						key: 'helper',
+						className: 'form-group-line-md6',
+						key: 'icon',
 						type: 'input',
 						templateOptions: {
 							type: 'text',
-							label: 'this one has a helper',
-							helper: 'this is the helper message',
+							label: 'this one has an icon',
+							icon: 'heart',
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'suffix',
 						type: 'input',
 						templateOptions: {
 							type: 'text',
-							label: 'this one has an icon suffix',
-							suffix: 'heart',
+							label: 'this one has a suffix',
+							suffix: 'LOL',
 						},
 					}
 				]
@@ -67,7 +77,7 @@ export class OptionComponent {
 				className: 'form-group-line',
 				fieldGroup: [
 					{
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'firstName',
 						type: 'input',
 						templateOptions: {
@@ -75,7 +85,7 @@ export class OptionComponent {
 							label: 'first name',
 						},
 					}, {
-						className: 'form-grid-md6',
+						className: 'form-group-line-md6',
 						key: 'lastName',
 						type: 'input',
 						templateOptions: {
