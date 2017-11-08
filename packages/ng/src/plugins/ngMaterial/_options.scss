@@ -2,6 +2,7 @@
 	@extend .textfield-options-entry;
 
 	display: block;
+	line-height: unset !important;
 	outline: none;
 	&.mat-selected, &.mat-active {
 		@extend .textfield-options-entry.is-focus;

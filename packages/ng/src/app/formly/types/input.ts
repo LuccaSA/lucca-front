@@ -9,4 +9,10 @@ export class LuFormlyFieldInput extends FieldType {
 	get type() {
 		return this.to.type || 'text';
 	}
+	focus() {
+		this.to._isFocused = true;
+	}
+	blur() {
+		this.to._isFocused = false;
+	}
 }

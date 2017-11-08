@@ -5,4 +5,11 @@ import { FieldType } from 'ng-formly';
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './textarea.html',
 })
-export class LuFormlyFieldTextarea extends FieldType {}
+export class LuFormlyFieldTextarea extends FieldType {
+	focus() {
+		this.to._isFocused = true;
+	}
+	blur() {
+		this.to._isFocused = false;
+	}
+}

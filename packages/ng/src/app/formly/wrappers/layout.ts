@@ -21,4 +21,12 @@ export class LuFormlyWrapperLayout extends FieldWrapper {
 	get modWithSuffix() {
 		return !!this.to && !!this.to.suffix ? 'mod-withSuffix' : '';
 	}
+
+	get isFocused() {
+		return (!!this.to && this.to._isFocused) ? 'is-focused' : '';
+	}
+
+	get isError() {
+		return (this.formControl.invalid && this.formControl.touched) ? 'is-error' : '';
+	}
 }
