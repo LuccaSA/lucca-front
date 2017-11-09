@@ -87,7 +87,6 @@
   "peerDependencies": {
     "@angular/cdk": "^5.0.0-rc0",
     "@angular/material": "^5.0.0-rc0",
-    "@angular/material-moment-adapter": "^5.0.0-rc0",
     "@ngx-formly/core": "^2.0.0-beta.3",
     "moment": "^2.19.1",
 
