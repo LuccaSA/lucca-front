@@ -3,3 +3,4 @@ export { IDateRangeSelectChoice, IDateRange } from './app/date-range-picker/date
 export * from './app/user';
 export { LuPopoverModule, LuPopoverComponent } from './app/popover/popover.module';
 export { LuRootModule } from './app/lu-root.module';
+export { LuEmptyModule } from './app/empty';
