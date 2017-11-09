@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
@@ -33,6 +34,7 @@ import { DemoPopoverModule } from './lu-popover/lu-popover.module';
 		DemoEmptyModule,
 
 		BrowserModule,
+		BrowserAnimationsModule,
 		FormsModule,
 	],
 	// providers: [{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}],

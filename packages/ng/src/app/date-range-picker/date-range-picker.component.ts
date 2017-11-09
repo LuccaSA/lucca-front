@@ -1,99 +1,101 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {DateRangeModalComponent} from './date-range-modal/date-range-modal.component';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+// import {MatDialog} from '@angular/material';
+// import {DateRangeModalComponent} from './date-range-modal/date-range-modal.component';
+// import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
-import {LuTranslateService} from '../shared/translation.service';
-import {translations} from './translate/date-range-picker.translate';
-import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.model';
+// import {LuTranslateService} from '../shared/translation.service';
+// import {translations} from './translate/date-range-picker.translate';
+// import {IDateRange, IDateRangeSelectChoice} from './date-range-picker.model';
 
 /**
  * Pick date ranges from a customizable list displayed inside an Angular Material MatSelect.
  */
 @Component({
 	selector: 'lu-date-range-picker',
-	templateUrl: './date-range-picker.component.html',
-	styleUrls: ['./date-range-picker.component.scss'],
+	// templateUrl: './date-range-picker.component.html',
+	template: '<span>lu-date-range-picker - MAJOR REWORK SCHEDULED FOR THIS COMPONENT - DO NOT USE IN THIS RELEASE</span>',
+	// styleUrls: ['./date-range-picker.component.scss'],
 	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuDateRangePickerComponent),
-			multi: true,
-		}
+		// {
+		// 	provide: NG_VALUE_ACCESSOR,
+		// 	useExisting: forwardRef(() => LuDateRangePickerComponent),
+		// 	multi: true,
+		// }
 	]
 })
-export class LuDateRangePickerComponent implements ControlValueAccessor {
-
+// export class LuDateRangePickerComponent implements ControlValueAccessor {
+export class LuDateRangePickerComponent {
+	constructor() {}
 	/**
 	 * Placeholder string of the MATSelect
 	 */
-	@Input() placeholder: string;
+	// @Input() placeholder: string;
 
 	/**
 	 * Array of choices the user will select from.
 	 * Import class IDateRangeSelectChoice in order to build choices.
 	 */
-	@Input() preConfiguredRanges: IDateRangeSelectChoice[];
+	// @Input() preConfiguredRanges: IDateRangeSelectChoice[];
 
-	customChoice: IDateRangeSelectChoice;
+	// customChoice: IDateRangeSelectChoice;
 
-	_selectedChoice: IDateRangeSelectChoice;
+	// _selectedChoice: IDateRangeSelectChoice;
 
-	propagateChange = (_: any) => {};
+	// propagateChange = (_: any) => {};
 
 
-	constructor(public dialog: MatDialog, public translateService: LuTranslateService) {
-		this.preConfiguredRanges = [];
-		this.customChoice = {label: null, range: { start: null, end: null}};
-		translateService.setTranslations(translations);
-	}
+	// constructor(public dialog: MatDialog, public translateService: LuTranslateService) {
+	// 	this.preConfiguredRanges = [];
+	// 	this.customChoice = {label: null, range: { start: null, end: null}};
+	// 	translateService.setTranslations(translations);
+	// }
 
-	registerOnChange(fn: any): void {
-		this.propagateChange = fn;
-	}
+	// registerOnChange(fn: any): void {
+	// 	this.propagateChange = fn;
+	// }
 
-	registerOnTouched(): void { }
+	// registerOnTouched(): void { }
 
-	writeValue(range: IDateRange): void {
-		if (!this.isEmptyRange(range)) {
-			this.selectCustomRange(range);
-		} else {
-			this.selectedChoice = {label: '', range: { start: null, end: null}};
-		}
-	}
+	// writeValue(range: IDateRange): void {
+	// 	if (!this.isEmptyRange(range)) {
+	// 		this.selectCustomRange(range);
+	// 	} else {
+	// 		this.selectedChoice = {label: '', range: { start: null, end: null}};
+	// 	}
+	// }
 
-	set selectedChoice(choice: IDateRangeSelectChoice) {
-		this.customChoice.range = choice.range;  // allows dialog to display selected range on open
-		this._selectedChoice = choice;
-		this.propagateChange(choice.range);
-	}
+	// set selectedChoice(choice: IDateRangeSelectChoice) {
+	// 	this.customChoice.range = choice.range;  // allows dialog to display selected range on open
+	// 	this._selectedChoice = choice;
+	// 	this.propagateChange(choice.range);
+	// }
 
-	get selectedChoice() {
-		return this._selectedChoice;
-	}
+	// get selectedChoice() {
+	// 	return this._selectedChoice;
+	// }
 
-	onChoiceChange(choice: IDateRangeSelectChoice) {
-		if (!this.isEmptyRange(choice.range)) {
-			this.selectedChoice = choice;
-		}
-	}
+	// onChoiceChange(choice: IDateRangeSelectChoice) {
+	// 	if (!this.isEmptyRange(choice.range)) {
+	// 		this.selectedChoice = choice;
+	// 	}
+	// }
 
-	pickCustomRange() {
-		const dialog = this.dialog.open(DateRangeModalComponent, {data: this.selectedChoice.range});
-		dialog.afterClosed().subscribe(range => {
-			if (range) {
-				this.selectCustomRange({start: range.start, end: range.end});
-			}
-		});
-	}
+	// pickCustomRange() {
+	// 	const dialog = this.dialog.open(DateRangeModalComponent, {data: this.selectedChoice.range});
+	// 	dialog.afterClosed().subscribe(range => {
+	// 		if (range) {
+	// 			this.selectCustomRange({start: range.start, end: range.end});
+	// 		}
+	// 	});
+	// }
 
-	selectCustomRange(range: IDateRange) {
-		this.customChoice.range = range;
-		this.selectedChoice = this.customChoice;
-	}
+	// selectCustomRange(range: IDateRange) {
+	// 	this.customChoice.range = range;
+	// 	this.selectedChoice = this.customChoice;
+	// }
 
-	isEmptyRange(range: IDateRange) {
-		return !range || (!range.start && !range.end);
-	}
+	// isEmptyRange(range: IDateRange) {
+	// 	return !range || (!range.start && !range.end);
+	// }
 
 }
