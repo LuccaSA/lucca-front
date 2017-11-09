@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from 'ng-formly';
+import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from '@ngx-formly/core';
 
 // wrapper
 @Component({

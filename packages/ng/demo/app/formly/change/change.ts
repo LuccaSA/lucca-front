@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
-import {FormlyFieldConfig} from 'ng-formly';
+import {FormlyFieldConfig} from '@ngx-formly/core';
 const	choose = {
 	key: 'choose',
 	type: 'select',

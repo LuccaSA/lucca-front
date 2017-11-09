@@ -1,9 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import * as moment from 'moment';
-import {LuTranslateService} from '../../shared/translation.service';
+// import {LuTranslateService} from '../../shared/translation.service';
 import {IDateRange} from '../date-range-picker.model';
-import {MomentDateAdapter} from '../../shared/moment/moment-date-adapter';
 
 @Component({
 	selector: 'lu-custom-range-picker',
@@ -12,38 +11,38 @@ import {MomentDateAdapter} from '../../shared/moment/moment-date-adapter';
 })
 export class DateRangeModalComponent implements OnInit {
 
-	start: moment.Moment = null;
-	end: moment.Moment = null;
-	locale: string;
+	// start: moment.Moment = null;
+	// end: moment.Moment = null;
+	// locale: string;
 
 	constructor (
-		@Inject(MAT_DIALOG_DATA) public data: IDateRange,
-		public dateAdapter: MomentDateAdapter,
-		public translate: LuTranslateService,
-		public dialogRef: MatDialogRef<any>
+		// @Inject(MAT_DIALOG_DATA) public data: IDateRange,
+		// // public dateAdapter: MomentDateAdapter,
+		// public translate: LuTranslateService,
+		// public dialogRef: MatDialogRef<any>
 	) {
-		this.locale = translate.getCurrentLang();
-		dateAdapter.setLocale(this.locale);
-		this.start = this.initDate(data.start);
-		this.end = this.initDate(moment(data.end).subtract(1, 'day'));
+		// this.locale = translate.getCurrentLang();
+		// // dateAdapter.setLocale(this.locale);
+		// this.start = this.initDate(data.start);
+		// this.end = this.initDate(moment(data.end).subtract(1, 'day'));
 	}
 
 	ngOnInit() { }
 
-	private initDate(date): moment.Moment {
-		const newDate = moment(date).startOf('day');
-		if (newDate) {
-			newDate.locale(this.locale);
-		}
-		return newDate.isValid() ? newDate : null;
-	}
+	// private initDate(date): moment.Moment {
+	// 	const newDate = moment(date).startOf('day');
+	// 	if (newDate) {
+	// 		newDate.locale(this.locale);
+	// 	}
+	// 	return newDate.isValid() ? newDate : null;
+	// }
 
-	displayDate(date: moment.Moment): string {
-		return date.format(('LL'));
-	}
+	// displayDate(date: moment.Moment): string {
+	// 	return moment(date).format(('LL'));
+	// }
 
-	close(withStart: boolean, withEnd: boolean) {
-		this.dialogRef.close({start: withStart ? this.start : null, end: withEnd ? this.end.add(1, 'day') : null});
-	}
+	// close(withStart: boolean, withEnd: boolean) {
+	// 	this.dialogRef.close({start: withStart ? this.start : null, end: withEnd ? this.end.add(1, 'day') : null});
+	// }
 
 }

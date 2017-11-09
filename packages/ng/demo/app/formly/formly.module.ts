@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormlyModule } from 'ng-formly';
+import { FormlyModule } from '@ngx-formly/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '../../../src/app/formly';
@@ -30,6 +31,8 @@ import { OptionComponent } from './option/option';
 		MatInputModule,
 		MatOptionModule,
 		MatSelectModule,
+
+		MatMomentDateModule, // we use moment here
 	],
 	declarations: [
 		DemoFormlyComponent,

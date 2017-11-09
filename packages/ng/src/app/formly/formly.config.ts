@@ -1,4 +1,4 @@
-import { ConfigOption } from 'ng-formly';
+import { ConfigOption } from '@ngx-formly/core';
 // inputs
 import { LuFormlyFieldInput } from './types/input';
 import { LuFormlyFieldDate } from './types/date';

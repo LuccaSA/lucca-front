@@ -1,8 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FieldType } from 'ng-formly';
+import { FieldType } from '@ngx-formly/core';
 import { MatDatepicker } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/observable/of';
+
 @Component({
 	selector: 'lu-formly-field-date',
 	styleUrls: ['formly-field.common.scss'],

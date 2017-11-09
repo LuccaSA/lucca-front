@@ -44,6 +44,12 @@
             "test": "test.ts",
             "tsconfig": "tsconfig.json",
             "testTsconfig": "tsconfig.spec.json",
+            "stylePreprocessorOptions": {
+                "includePaths": [
+                    "theming",
+                    "../node_modules/@lucca-front/scss/src/overrides"
+                ]
+            },
             "prefix": "lu"
         }
     ],

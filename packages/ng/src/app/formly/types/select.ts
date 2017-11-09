@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FieldType } from 'ng-formly';
+import { FieldType } from '@ngx-formly/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
