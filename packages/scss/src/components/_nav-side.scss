@@ -274,12 +274,3 @@
 		width: 100%;
 	}
 }
-
-@keyframes loadingGradient {
-	0% {
-		background-position: -100px 0%;
-	}
-	100% {
-		background-position: calc(100% + 100px) 0%;
-	}
-}
