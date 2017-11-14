@@ -4,7 +4,7 @@
 
 ### Breaking changes
 - `input` & `textarea` are now merged in a single component : `textfield`
-- `main` layout structure and modifiers are simplified  
+- `main` layout structure is simplified : `main-content-spacing` has been removed and margins are now placed on `container`. `mod-sections` & `mod-header` doesn't exist anymore. 
 
 ### Enhancements
 - `navSide` now supports placeholders
