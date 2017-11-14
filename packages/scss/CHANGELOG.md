@@ -13,7 +13,7 @@
 - `textfield` now supports framed display modifier
 - `textfield` now supports an `is-loading` state on parent
 - `textfield` now supports suffix on each modifiers
-- Reduce font-weight of <b> HTML element
+- Reduce font-weight of &lg;b&gt; HTML element
 - Utilities now supports text font-size
 - Background / hover colors are now defined on commons variables
 
