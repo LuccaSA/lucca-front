@@ -1,7 +1,7 @@
 # Changelog
 
 ## v0.1.2
-This version is the first minor version of `@lucca-front/scss`. It brings this package up to speed with Angular 5 and Angular Material 5
+This version is the first minor version of `@lucca-front/ng`. It brings this package up to speed with Angular 5 and Angular Material 5
 ### Breaking changes
 - `lu-date-range-picker` component is being deactivited as it is going through a major rework
 - `SharedModule` has been discontinued
