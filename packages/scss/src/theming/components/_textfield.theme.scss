@@ -57,6 +57,14 @@ $textfield: (
     ),
   ),
 
+  classic: (
+    default-palette: (
+      color: _color("text.light")
+    ),
+    background: #FFFFFF,
+    border-radius: .2rem,
+  ),
+
   framed: (
     default-palette: (
       color: _color("text.light"),

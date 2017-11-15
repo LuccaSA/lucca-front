@@ -164,7 +164,6 @@
 
 	&.mod-inline {
 		display: inline-flex;
-		align-items: center;
 		margin-left: .15rem;
 		margin-right: .15rem;
 	}
@@ -247,6 +246,10 @@
 		}
 	}
 
+	&.mod-classic {
+		@extend %input_classic;
+	}
+
 	&.mod-compact, &.compact {
 		@extend %input_compact;
 	}
@@ -319,5 +322,6 @@
 	}
 }
 
+@import "textfield.classic";
 @import "textfield.compact";
 @import "textfield.framed";

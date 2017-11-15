@@ -1,0 +1,110 @@
+%input_classic {
+	display: flex;
+	flex-direction: column;
+	padding-top: 0;
+
+	.textfield-input {
+		background: _component("textfield.classic.background");
+		border-radius: _component("textfield.classic.border-radius");
+		box-shadow: 0 0 0 1px _component("textfield.border.color");
+		padding: .5rem;
+
+		&::placeholder {
+			opacity: 1;
+		}
+
+		&:focus, &.is-filled {
+			~ .textfield-label {
+				font-size: inherit;
+			}
+		}
+	}
+
+	.textfield-label {
+		color: _color("text.default");
+		font-weight: 600;
+		margin-bottom: .1rem;
+		order: -1;
+		pointer-events: auto;
+		position: relative;
+		top: auto;
+		word-break: break-word;
+	}
+
+	.textfield-options {
+		margin: 0;
+		top: 100%;
+		width: 100%;
+	}
+
+
+	// PALETTE
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	@mixin inputColoring($palette) {
+		.textfield-input:focus {
+			box-shadow: 0 0 0 1px _get($palette, "color");
+
+			~ .textfield-label {
+				color: _color("text.default");
+			}
+		}
+
+		// Needed when not next to input (formly)
+		&.is-focused {
+			.textfield-label {
+				color: _color("text.default");
+			}
+		}
+	}
+
+	// default color
+	@include inputColoring(_component("textfield.classic.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+
+
+	// STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	&.mod-inline {
+		display: inline-flex;
+	}
+
+	&.mod-autocomplete, &.mod-select, &.mod-search {
+		&::after {
+			bottom: .3rem;
+			right: .5rem;
+		}
+
+		.textfield-input {
+			padding-right: 2rem;
+		}
+
+		.textfield-label {
+			padding-right: 0;
+		}
+	}
+
+	// STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	.textfield-input {
+		&[disabled], &[readonly] {
+			background: _theme("commons.background.dark");
+		}
+
+		&.is-error {
+			box-shadow: 0 0 0 1px _color("error");
+
+			~ .textfield-label {
+				color: _color("error");
+			}
+		}
+	}
+}

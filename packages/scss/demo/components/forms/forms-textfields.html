@@ -2,7 +2,7 @@
 	<h2>Textfields</h2>
 
 	<!-- Basics -->
-	<div class="form">
+
 		<div class="grid">
 			<div class="grid-md6">
 				<div class="form-group">
@@ -11,39 +11,71 @@
 						<label class="textfield-label">Textfield label</label>
 					</div>
 				</div>
+			</div>
+			<div class="grid-md6">
 				<div class="form-group">
 					<div class="textfield mod-block">
 						<input class="textfield-input is-filled" type="text" value="disabled input" disabled>
 						<label class="textfield-label">Textfield label</label>
 					</div>
 				</div>
-				<code class="code mod-block">&lt;div class="textfield"&gt;
-	&lt;input class="textfield-input" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
-&lt;/div&gt;
-</code>
 			</div>
-			<div class="grid-md6">
-				<div class="form-group">
-					<div class="textfield compact mod-block">
-						<input class="textfield-input" type="text" placeholder="placeholder">
-						<label class="textfield-label">Textfield label</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="textfield compact mod-block">
-						<input class="textfield-input" type="text" value="disabled input" disabled>
-						<label class="textfield-label">Textfield label</label>
-					</div>
-				</div>
-				<code class="code mod-block">&lt;div class="textfield mod-compact"&gt;
+		</div>
+<code class="code mod-block">&lt;div class="textfield"&gt;
 	&lt;input class="textfield-input" type="text"&gt;
 	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;
 </code>
+</section>
+<section class="contentSection">
+	<div class="grid">
+		<div class="grid-md6">
+			<div class="form-group">
+				<div class="textfield mod-classic mod-block">
+					<input class="textfield-input" id="textfield0" type="text" placeholder="placeholder">
+					<label class="textfield-label" for="textfield0">Textfield label</label>
+				</div>
+			</div>
+		</div>
+		<div class="grid-md6">
+			<div class="form-group">
+				<div class="textfield mod-classic mod-block">
+					<input class="textfield-input" id="textfield1" type="text" value="disabled input" disabled>
+					<label class="textfield-label" for="textfield1">Textfield label</label>
+				</div>
 			</div>
 		</div>
 	</div>
+<code class="code mod-block">&lt;div class="textfield mod-classic"&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
+&lt;/div&gt;
+</code>
+</section>
+<section class="contentSection">
+	<div class="grid">
+		<div class="grid-md6">
+			<div class="form-group">
+				<div class="textfield mod-compact mod-block">
+					<input class="textfield-input" id="textfield2" type="text" placeholder="placeholder">
+					<label class="textfield-label" for="textfield2">Textfield label</label>
+				</div>
+			</div>
+		</div>
+		<div class="grid-md6">
+			<div class="form-group">
+				<div class="textfield mod-compact mod-block">
+					<input class="textfield-input" id="textfield3" type="text" value="disabled input" disabled>
+					<label class="textfield-label" for="textfield3">Textfield label</label>
+				</div>
+			</div>
+		</div>
+	</div>
+<code class="code mod-block">&lt;div class="textfield mod-compact"&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
+&lt;/div&gt;
+</code>
 
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield mod-block"&gt;</code> for a 100% width input.</em><br>
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state.</em><br>
@@ -52,9 +84,10 @@
 
 <!-- Helpers & Errors -->
 <section class="contentSection">
-	<h3>Helper / Error</h3>
+	<h3>Helper / Warning / Error</h3>
+
 	<div class="grid">
-		<div class="grid-sm6">
+		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-block">
 					<input class="textfield-input" type="text">
@@ -64,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-	<code class="code mod-block">&lt;div class="textfield"&gt;
+<code class="code mod-block">&lt;div class="textfield"&gt;
 	&lt;input class="textfield-input" type="text"&gt;
 	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
 	&lt;div class="textfield-messages"&gt;
@@ -73,45 +106,7 @@
 &lt;/div&gt;
 </code>
 		</div>
-		<div class="grid-sm6">
-			<div class="form-group">
-				<div class="textfield mod-block">
-					<input class="textfield-input is-error" type="text">
-					<label class="textfield-label">Textfield label</label>
-					<div class="textfield-messages">
-						<div class="textfield-messages-error">Oops, there is an error!</div>
-					</div>
-				</div>
-			</div>
-	<code class="code mod-block">&lt;div class="textfield"&gt;
-	&lt;input class="textfield-input is-error" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
-	&lt;div class="textfield-messages"&gt;
-		&lt;div class="textfield-messages-error"&gt;...&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-</code>
-		</div>
-
-		<div class="grid-sm6 grid-mdOffset2">
-			<div class="textfield compact mod-block">
-				<input class="textfield-input" type="text">
-				<label class="textfield-label">Textfield label</label>
-				<div class="textfield-messages">
-					<div class="textfield-messages-helper">Few tips about the input</div>
-				</div>
-			</div>
-		</div>
-		<div class="grid-sm6 grid-mdOffset2">
-			<div class="textfield compact mod-block">
-				<input class="textfield-input is-error" type="text">
-				<label class="textfield-label">Textfield label</label>
-				<div class="textfield-messages">
-					<div class="textfield-messages-error">Oops, there is an error!</div>
-				</div>
-			</div>
-		</div>
-		<div class="grid-sm6">
+		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-block">
 					<input class="textfield-input" type="text">
@@ -121,7 +116,7 @@
 					</div>
 				</div>
 			</div>
-	<code class="code mod-block">&lt;div class="textfield"&gt;
+<code class="code mod-block">&lt;div class="textfield"&gt;
 	&lt;input class="textfield-input" type="text"&gt;
 	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
 	&lt;div class="textfield-messages"&gt;
@@ -129,6 +124,89 @@
 	&lt;/div&gt;
 &lt;/div&gt;
 </code>
+		</div>
+		<div class="grid-md4">
+			<div class="form-group">
+				<div class="textfield mod-block">
+					<input class="textfield-input is-error" type="text">
+					<label class="textfield-label">Textfield label</label>
+					<div class="textfield-messages">
+						<div class="textfield-messages-error">Oops, there is an error!</div>
+					</div>
+				</div>
+			</div>
+<code class="code mod-block">&lt;div class="textfield"&gt;
+	&lt;input class="textfield-input is-error" type="text"&gt;
+	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
+	&lt;div class="textfield-messages"&gt;
+		&lt;div class="textfield-messages-error"&gt;...&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</code>
+		</div>
+	</div>
+</section>
+<section class="contentSection">
+	<div class="grid">
+		<div class="grid-md4">
+			<div class="form-group">
+				<div class="textfield mod-classic mod-block">
+					<input class="textfield-input" id="textfield4" type="text">
+					<label class="textfield-label" for="textfield4">Textfield label</label>
+					<div class="textfield-messages">
+						<div class="textfield-messages-helper">Few tips about the input</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid-md4">
+			<div class="form-group">
+				<div class="textfield mod-classic mod-block">
+					<input class="textfield-input" id="textfield8" type="text">
+					<label class="textfield-label" for="textfield8">Textfield label</label>
+					<div class="textfield-messages">
+						<div class="textfield-messages-warning">Humm, there is a warning...</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid-md4">
+			<div class="form-group">
+				<div class="textfield mod-classic mod-block">
+					<input class="textfield-input is-error" id="textfield6" type="text">
+					<label class="textfield-label" for="textfield6">Textfield label</label>
+					<div class="textfield-messages">
+						<div class="textfield-messages-error">Oops, there is an error!</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="contentSection">
+	<div class="grid">
+		<div class="grid-sm6 grid-smOffset2">
+			<div class="textfield mod-compact mod-block">
+				<input class="textfield-input" type="text" id="textfield5">
+				<label class="textfield-label" for="textfield5">Textfield label</label>
+				<div class="textfield-messages">
+					<div class="textfield-messages-helper">Few tips about the input</div>
+				</div>
+			</div>
+			<div class="textfield mod-compact mod-block">
+				<input class="textfield-input" id="textfield9" type="text">
+				<label class="textfield-label" for="textfield9">Textfield label</label>
+				<div class="textfield-messages">
+					<div class="textfield-messages-warning">Humm, there is a warning...</div>
+				</div>
+			</div>
+			<div class="textfield mod-compact mod-block">
+				<input class="textfield-input is-error" id="textfield7" type="text">
+				<label class="textfield-label" for="textfield7">Textfield label</label>
+				<div class="textfield-messages">
+					<div class="textfield-messages-error">Oops, there is an error!</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -194,15 +272,21 @@
 <!-- Search inputs -->
 <section class="contentSection">
 	<h3>Search</h3>
-	<div class="grid">
-		<div class="grid-sm6">
-			<div class="textfield mod-block mod-search">
+	<div class="grid mod-xsBottom">
+		<div class="grid-sm4">
+			<div class="textfield mod-search mod-block">
 				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
 				<label class="textfield-label">Search</label>
 			</div>
 		</div>
-		<div class="grid-sm6">
-			<div class="textfield mod-block mod-compact mod-search">
+		<div class="grid-sm4">
+			<div class="textfield mod-classic mod-search mod-block">
+				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
+				<label class="textfield-label">Search</label>
+			</div>
+		</div>
+		<div class="grid-sm4">
+			<div class="textfield mod-compact mod-search mod-block">
 				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
 				<label class="textfield-label">Search</label>
 			</div>
@@ -213,7 +297,7 @@
 	&lt;label class="textfield-label"&gt;Search&lt;/label&gt;
 &lt;/div&gt;
 </code>
-<em><b>Tip:</b> You can change the input style using <code class="code">mod-compact</code></em>
+<em><b>Tip:</b> You can change the input style using <code class="code">mod-classic</code> & <code class="code">mod-compact</code></em>
 </section>
 
 <!-- Palette -->
@@ -245,15 +329,16 @@
 	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
 &lt;/div&gt;</code>
 <em><b>Tip:</b> It will works with all palette's colors</em></br>
-<em><b>Tip:</b> It also works with input using the <code class="code">mod-compact</code></em>
+<em><b>Tip:</b> It also works with input using <code class="code">mod-classic</code> & <code class="code">mod-compact</code></em>
+
 </section>
 
 <!-- Autocomplete & Select -->
 <section class="contentSection">
 	<h3>Autocomplete / Select <span class="label palette-warning">Work in progress</span></h3>
 	<div class="form">
-		<div class="grid">
-			<div class="grid-sm6">
+		<div class="grid mod-xsBottom">
+			<div class="grid-sm4">
 				<div class="form-group">
 					<div id="autocomplete-material" class="textfield mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-material', 'is-open')">
 						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-material', 'is-open')" onblur="w3.removeClass('#autocomplete-material', 'is-open')">
@@ -266,9 +351,22 @@
 					</div>
 				</div>
 			</div>
-			<div class="grid-sm6">
+			<div class="grid-sm4">
 				<div class="form-group">
-					<div id="autocomplete-compact" class="textfield compact mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-compact', 'is-open')">
+					<div id="autocomplete-classic" class="textfield mod-block mod-autocomplete mod-classic" onclick="w3.addClass('#autocomplete-classic', 'is-open')">
+						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-classic', 'is-open')" onblur="w3.removeClass('#autocomplete-classic', 'is-open')">
+						<label class="textfield-label">User</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry"><u>va</u>lue A</li>
+							<li class="textfield-options-entry is-focus"><u>va</u>lue B</li>
+							<li class="textfield-options-entry"><u>va</u>lue C</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="grid-sm4">
+				<div class="form-group">
+					<div id="autocomplete-compact" class="textfield mod-compact mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-compact', 'is-open')">
 						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-compact', 'is-open')" onblur="w3.removeClass('#autocomplete-compact', 'is-open')">
 						<label class="textfield-label">User</label>
 						<ul class="textfield-options">
@@ -304,18 +402,46 @@
 						<textarea class="textfield-input"></textarea>
 						<label class="textfield-label">Textarea label</label>
 					</div>
+				</div>
+			</div>
+			<div class="grid-sm6">
+				<div class="form-group">
 					<div class="textfield mod-multiline mod-block">
 						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 						<label class="textfield-label">Textarea label</label>
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="grid">
+			<div class="grid-sm6">
+				<div class="form-group">
+					<div class="textfield mod-classic mod-multiline mod-block">
+						<textarea class="textfield-input"></textarea>
+						<label class="textfield-label">Textarea label</label>
+					</div>
+				</div>
+			</div>
+			<div class="grid-sm6">
+				<div class="form-group">
+					<div class="textfield mod-classic mod-multiline mod-block">
+						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
+						<label class="textfield-label">Textarea label</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid">
 			<div class="grid-sm6">
 				<div class="form-group">
 					<div class="textfield mod-multiline mod-compact mod-block">
 						<textarea class="textfield-input"></textarea>
 						<label class="textfield-label">Textarea label</label>
 					</div>
+				</div>
+			</div>
+			<div class="grid-sm6">
+				<div class="form-group">
 					<div class="textfield mod-multiline mod-compact mod-block">
 						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 						<label class="textfield-label">Textarea label</label>
