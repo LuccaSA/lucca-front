@@ -219,8 +219,8 @@
 	// Needed when not next to input-field (formly)
 	&.is-error {
 		.textfield-label, .textfield-suffix {
-				color: _color("error") !important;
-			}
+			color: _color("error") !important;
+		}
 	}
 	// Needed when not next to input-field (formly)
 	&.is-focused, &:hover {
