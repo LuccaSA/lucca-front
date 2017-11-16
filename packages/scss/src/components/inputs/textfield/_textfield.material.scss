@@ -102,7 +102,7 @@
 	.textfield-input {
 
 		&.is-filled {
-			@include formMaterialFilled();
+			@include textfieldMaterialFilled();
 		}
 
 		&[disabled], &[readonly] {
@@ -115,7 +115,7 @@
 		}
 
 		&.is-error {
-			@include formMaterialError();
+			@include textfieldMaterialError();
 		}
 	}
 }

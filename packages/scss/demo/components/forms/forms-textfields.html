@@ -7,8 +7,8 @@
 			<div class="grid-md6">
 				<div class="form-group">
 					<div class="textfield mod-block">
-						<input class="textfield-input" type="text" placeholder="placeholder">
-						<label class="textfield-label">Textfield label</label>
+						<input class="textfield-input" id="textfield0" type="text" placeholder="placeholder">
+						<label class="textfield-label" for="textfield0">Textfield label</label>
 					</div>
 				</div>
 			</div>
@@ -22,31 +22,6 @@
 			</div>
 		</div>
 <code class="code mod-block">&lt;div class="textfield"&gt;
-	&lt;input class="textfield-input" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
-&lt;/div&gt;
-</code>
-</section>
-<section class="contentSection">
-	<div class="grid">
-		<div class="grid-md6">
-			<div class="form-group">
-				<div class="textfield mod-material mod-block">
-					<input class="textfield-input" id="textfield0" type="text" placeholder="placeholder">
-					<label class="textfield-label" for="textfield0">Textfield label</label>
-				</div>
-			</div>
-		</div>
-		<div class="grid-md6">
-			<div class="form-group">
-				<div class="textfield mod-material mod-block">
-					<input class="textfield-input is-filled" id="textfield1" type="text" value="disabled input" disabled>
-					<label class="textfield-label" for="textfield1">Textfield label</label>
-				</div>
-			</div>
-		</div>
-	</div>
-<code class="code mod-block">&lt;div class="textfield mod-classic"&gt;
 	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
 	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
 &lt;/div&gt;
@@ -56,17 +31,42 @@
 	<div class="grid">
 		<div class="grid-md6">
 			<div class="form-group">
+				<div class="textfield mod-material mod-block">
+					<input class="textfield-input" type="text" placeholder="placeholder">
+					<label class="textfield-label">Textfield label</label>
+				</div>
+			</div>
+		</div>
+		<div class="grid-md6">
+			<div class="form-group">
+				<div class="textfield mod-material mod-block">
+					<input class="textfield-input is-filled" type="text" value="disabled input" disabled>
+					<label class="textfield-label">Textfield label</label>
+				</div>
+			</div>
+		</div>
+	</div>
+<code class="code mod-block">&lt;div class="textfield mod-material"&gt;
+	&lt;input class="textfield-input" type="text"&gt;
+	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
+&lt;/div&gt;
+</code>
+</section>
+<section class="contentSection">
+	<div class="grid">
+		<div class="grid-md6">
+			<div class="form-group">
 				<div class="textfield mod-compact mod-block">
-					<input class="textfield-input" id="textfield2" type="text" placeholder="placeholder">
-					<label class="textfield-label" for="textfield2">Textfield label</label>
+					<input class="textfield-input" id="textfield1" type="text" placeholder="placeholder">
+					<label class="textfield-label" for="textfield1">Textfield label</label>
 				</div>
 			</div>
 		</div>
 		<div class="grid-md6">
 			<div class="form-group">
 				<div class="textfield mod-compact mod-block">
-					<input class="textfield-input" id="textfield3" type="text" value="disabled input" disabled>
-					<label class="textfield-label" for="textfield3">Textfield label</label>
+					<input class="textfield-input" type="text" value="disabled input" disabled>
+					<label class="textfield-label">Textfield label</label>
 				</div>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 </code>
 
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield mod-block"&gt;</code> for a 100% width input.</em><br>
-	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state.</em><br>
+	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em><br>
 	<em><b>Tip:</b> You can use <code class="code">placeholder="..."</code> on <code class="code">textfield-input</code>.</em>
 </section>
 
@@ -90,16 +90,16 @@
 		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-block">
-					<input class="textfield-input" type="text">
-					<label class="textfield-label">Textfield label</label>
+					<input class="textfield-input" id="textfield2" type="text">
+					<label class="textfield-label" for="textfield2">Textfield label</label>
 					<div class="textfield-messages">
 						<div class="textfield-messages-helper">Few tips about the input</div>
 					</div>
 				</div>
 			</div>
 <code class="code mod-block">&lt;div class="textfield"&gt;
-	&lt;input class="textfield-input" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
 	&lt;div class="textfield-messages"&gt;
 		&lt;div class="textfield-messages-helper"&gt;...&lt;/div&gt;
 	&lt;/div&gt;
@@ -109,16 +109,16 @@
 		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-block">
-					<input class="textfield-input" type="text">
-					<label class="textfield-label">Textfield label</label>
+					<input class="textfield-input" id="textfield3" type="text">
+					<label class="textfield-label" for="textfield3">Textfield label</label>
 					<div class="textfield-messages">
 						<div class="textfield-messages-warning">Humm, there is a warning...</div>
 					</div>
 				</div>
 			</div>
 <code class="code mod-block">&lt;div class="textfield"&gt;
-	&lt;input class="textfield-input" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
 	&lt;div class="textfield-messages"&gt;
 		&lt;div class="textfield-messages-warning"&gt;...&lt;/div&gt;
 	&lt;/div&gt;
@@ -128,16 +128,16 @@
 		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-block">
-					<input class="textfield-input is-error" type="text">
-					<label class="textfield-label">Textfield label</label>
+					<input class="textfield-input is-error" id="textfield4" type="text">
+					<label class="textfield-label" for="textfield4">Textfield label</label>
 					<div class="textfield-messages">
 						<div class="textfield-messages-error">Oops, there is an error!</div>
 					</div>
 				</div>
 			</div>
 <code class="code mod-block">&lt;div class="textfield"&gt;
-	&lt;input class="textfield-input is-error" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
+	&lt;input class="textfield-input is-error" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
 	&lt;div class="textfield-messages"&gt;
 		&lt;div class="textfield-messages-error"&gt;...&lt;/div&gt;
 	&lt;/div&gt;
@@ -151,8 +151,8 @@
 		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-material mod-block">
-					<input class="textfield-input" id="textfield4" type="text">
-					<label class="textfield-label" for="textfield4">Textfield label</label>
+					<input class="textfield-input" type="text">
+					<label class="textfield-label">Textfield label</label>
 					<div class="textfield-messages">
 						<div class="textfield-messages-helper">Few tips about the input</div>
 					</div>
@@ -162,8 +162,8 @@
 		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-material mod-block">
-					<input class="textfield-input" id="textfield8" type="text">
-					<label class="textfield-label" for="textfield8">Textfield label</label>
+					<input class="textfield-input" type="text">
+					<label class="textfield-label">Textfield label</label>
 					<div class="textfield-messages">
 						<div class="textfield-messages-warning">Humm, there is a warning...</div>
 					</div>
@@ -173,8 +173,8 @@
 		<div class="grid-md4">
 			<div class="form-group">
 				<div class="textfield mod-material mod-block">
-					<input class="textfield-input is-error" id="textfield6" type="text">
-					<label class="textfield-label" for="textfield6">Textfield label</label>
+					<input class="textfield-input is-error" type="text">
+					<label class="textfield-label">Textfield label</label>
 					<div class="textfield-messages">
 						<div class="textfield-messages-error">Oops, there is an error!</div>
 					</div>
@@ -194,8 +194,8 @@
 				</div>
 			</div>
 			<div class="textfield mod-compact mod-block">
-				<input class="textfield-input" id="textfield9" type="text">
-				<label class="textfield-label" for="textfield9">Textfield label</label>
+				<input class="textfield-input" id="textfield6" type="text">
+				<label class="textfield-label" for="textfield6">Textfield label</label>
 				<div class="textfield-messages">
 					<div class="textfield-messages-warning">Humm, there is a warning...</div>
 				</div>
@@ -214,31 +214,32 @@
 <!-- Inline inputs -->
 <section class="contentSection">
 	<h3>Inline</h3>
-	<div class="textfield mod-inline mod-shortest">
+	<p>Inline textfields works well with <code class="code">mod-material</code>, but you can also use it with standard style.</p>
+	<div class="textfield mod-inline mod-material mod-shortest">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
-	<div class="textfield mod-inline mod-shorter">
+	<div class="textfield mod-inline mod-material mod-shorter">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
-	<div class="textfield mod-inline mod-short">
+	<div class="textfield mod-inline mod-material mod-short">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
-	<div class="textfield mod-inline">
+	<div class="textfield mod-inline mod-material">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
-	<div class="textfield mod-inline mod-long">
+	<div class="textfield mod-inline mod-material mod-long">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
-	<div class="textfield mod-inline mod-longer">
+	<div class="textfield mod-inline mod-material mod-longer">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
-	<div class="textfield mod-inline mod-longest">
+	<div class="textfield mod-inline mod-material mod-longest">
 		<input class="textfield-input" type="text">
 		<label class="textfield-label">Textfield label</label>
 	</div>
@@ -253,7 +254,7 @@
 
 <section class="contentSection">
 	<em><b>Tip:</b> You can change the input lenght with <code class="code">mod-longest</code>,<code class="code">mod-longer</code>,<code class="code">mod-long</code>, <code class="code">mod-short</code>,<code class="code">mod-shorter</code> or <code class="code">mod-shortest</code>.</em><br>
-	<em><b>Tip:</b> You can use inline input inside standard text (material display works especially well):</em>
+	<em><b>Tip:</b> You can use inline input inside standard text:</em>
 	<div>
 		Hello I'm
 		<div class="textfield mod-material mod-inline mod-shorter">
@@ -275,61 +276,73 @@
 	<div class="grid mod-xsBottom">
 		<div class="grid-sm4">
 			<div class="textfield mod-search mod-block">
-				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
-				<label class="textfield-label">Search</label>
+				<input class="textfield-input" id="textfield8" type="text" placeholder="e.g. Clark Kent">
+				<label class="textfield-label" for="textfield8">Search</label>
 			</div>
 		</div>
 		<div class="grid-sm4">
 			<div class="textfield mod-material mod-search mod-block">
-				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
-				<label class="textfield-label">Search</label>
+				<input class="textfield-input" id="textfield9" type="text" placeholder="e.g. Clark Kent">
+				<label class="textfield-label" for="textfield9">Search</label>
 			</div>
 		</div>
 		<div class="grid-sm4">
-			<div class="textfield mod-compact mod-search mod-block">
-				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
-				<label class="textfield-label">Search</label>
+			<div class="textfield mod-compact mod-search mod-block u-marginReset">
+				<input class="textfield-input" id="textfield10" type="text" placeholder="e.g. Clark Kent">
+				<label class="textfield-label" for="textfield10">Search</label>
 			</div>
 		</div>
 	</div>
 <code class="code mod-block">&lt;div class="textfield mod-search"&gt;
-	&lt;input class="textfield-input" type="text" placeholder="e.g. Clark Kent"&gt;
-	&lt;label class="textfield-label"&gt;Search&lt;/label&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text" placeholder="e.g. Clark Kent"&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;Search&lt;/label&gt;
 &lt;/div&gt;
 </code>
-<em><b>Tip:</b> You can change the input style using <code class="code">mod-classic</code> & <code class="code">mod-compact</code></em>
+<em><b>Tip:</b> You can change the input style using <code class="code">mod-material</code> & <code class="code">mod-compact</code></em>
 </section>
 
 <!-- Palette -->
 <section class="contentSection">
 	<h3>Palette</h3>
 	<p>You can use your palette on inputs.</p>
-	<div class="textfield mod-inline palette-primary">
-		<input class="textfield-input" type="text">
-		<label class="textfield-label">palette-primary</label>
-	</div>
-	<div class="textfield mod-inline palette-secondary">
-		<input class="textfield-input" type="text">
-		<label class="textfield-label">palette-secondary</label>
-	</div>
-	<div class="textfield mod-inline palette-success">
-		<input class="textfield-input" type="text">
-		<label class="textfield-label">palette-success</label>
-	</div>
-	<div class="textfield mod-inline palette-warning">
-		<input class="textfield-input" type="text">
-		<label class="textfield-label">palette-warning</label>
-	</div>
-	<div class="textfield mod-inline palette-error">
-		<input class="textfield-input" type="text">
-		<label class="textfield-label">palette-error</label>
+	<div class="grid">
+		<div class="grid-sm">
+			<div class="textfield mod-block palette-primary">
+				<input class="textfield-input" id="textfield11" type="text">
+				<label class="textfield-label" for="textfield11">palette-primary</label>
+			</div>
+		</div>
+		<div class="grid-sm">
+			<div class="textfield mod-block palette-secondary">
+				<input class="textfield-input" id="textfield12" type="text">
+				<label class="textfield-label" for="textfield12">palette-secondary</label>
+			</div>
+		</div>
+		<div class="grid-sm">
+			<div class="textfield mod-block palette-success">
+				<input class="textfield-input" id="textfield13" type="text">
+				<label class="textfield-label" for="textfield13">palette-success</label>
+			</div>
+		</div>
+		<div class="grid-sm">
+			<div class="textfield mod-block palette-warning">
+				<input class="textfield-input" id="textfield14" type="text">
+				<label class="textfield-label" for="textfield14">palette-warning</label>
+			</div>
+		</div>
+		<div class="grid-sm">
+			<div class="textfield mod-block palette-error">
+				<input class="textfield-input" id="textfield15" type="text">
+				<label class="textfield-label" for="textfield15">palette-error</label>
+			</div>
+		</div>
 	</div>
 	<code class="code mod-block">&lt;div class="textfield palette-primary"&gt;
-	&lt;input class="textfield-input" type="text"&gt;
-	&lt;label class="textfield-label"&gt;...&lt;/label&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label for="<b>textfieldID</b>""&gt;...&lt;/label&gt;
 &lt;/div&gt;</code>
 <em><b>Tip:</b> It will works with all palette's colors</em></br>
-<em><b>Tip:</b> It also works with input using <code class="code">mod-classic</code> & <code class="code">mod-compact</code></em>
+<em><b>Tip:</b> It also works with input using <code class="code">mod-material</code> & <code class="code">mod-compact</code></em>
 
 </section>
 
@@ -399,8 +412,8 @@
 			<div class="grid-sm6">
 				<div class="form-group">
 					<div class="textfield mod-multiline mod-block">
-						<textarea class="textfield-input"></textarea>
-						<label class="textfield-label">Textarea label</label>
+						<textarea class="textfield-input" id="textfield16"></textarea>
+						<label class="textfield-label" for="textfield16">Textarea label</label>
 					</div>
 				</div>
 			</div>
@@ -435,8 +448,8 @@
 			<div class="grid-sm6">
 				<div class="form-group">
 					<div class="textfield mod-multiline mod-compact mod-block">
-						<textarea class="textfield-input"></textarea>
-						<label class="textfield-label">Textarea label</label>
+						<textarea class="textfield-input" id="textfield17"></textarea>
+						<label class="textfield-label" for="textfield17">Textarea label</label>
 					</div>
 				</div>
 			</div>
@@ -451,11 +464,10 @@
 		</div>
 	</div>
 	<code class="code mod-block">&lt;div class="textfield mod-multiline"&gt;
-	&lt;textarea class="textfield-input"&gt;&lt;/textarea&gt;
-	&lt;label class="textfield-label"&gt;Textarea label&lt;/label&gt;
+	&lt;textarea class="textfield-input" id="<b>textfieldID</b>"&gt;&lt;/textarea&gt;
+	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;Textarea label&lt;/label&gt;
 &lt;/div&gt;
 	</code>
-	<em><b>Tip:</b> Textarea also have a<code class="code">mod-compact</code> style</em><br>
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br>
-	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state.</em>
+	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em>
 </section>

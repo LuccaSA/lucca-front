@@ -284,10 +284,10 @@
 	}
 
 	&.is-error {
-		@include formError();
+		@include textfieldError();
 
 		&:focus {
-			@include formError();
+			@include textfieldError();
 		}
 	}
 }

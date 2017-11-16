@@ -1,4 +1,4 @@
-@mixin formError() {
+@mixin textfieldError() {
 	box-shadow: 0 0 0 1px _color("error");
 
 	~ .textfield-label {
@@ -10,7 +10,7 @@
 	}
 }
 
-@mixin formMaterialError() {
+@mixin textfieldMaterialError() {
 	box-shadow: 0 2px 0 0 _color("error");
 
 	~ .textfield-label {
@@ -22,7 +22,7 @@
 	}
 }
 
-@mixin formMaterialFilled() {
+@mixin textfieldMaterialFilled() {
 	~ .textfield-label {
 		font-size: _theme("sizes.small.font-size");
 		top: 0;
