@@ -1,10 +1,13 @@
 $textfield: (
 
   font-size: 1rem,
-  padding-top: 1rem,
+  default-palette: (
+    color: _color("text.light")
+  ),
+  background: #FFFFFF,
+  border-radius: .2rem,
 
   input: (
-    margin-bottom: .15rem,
     padding-vertical: .5rem,
   ),
 
@@ -17,17 +20,11 @@ $textfield: (
   ),
 
   border: (
-    color: _color("text.placeholder")
+    color: #CCCCCC,
   ),
 
   message: (
     font-size: _theme("sizes.small.font-size")
-  ),
-
-  default-palette: (
-    material: (
-      color:  _color("primary"),
-    )
   ),
 
   sizes: (
@@ -40,12 +37,14 @@ $textfield: (
     longest: 28rem
   ),
 
-  compact: (
+  material: (
+    padding-top: 1rem,
     default-palette: (
-      color: _color("text.light")
+      color: _color("primary")
     ),
-    background: #FFFFFF,
-    border-radius: .2rem,
+  ),
+
+  compact: (
     padding: .5rem,
     label-right-margin: .3rem,
     label-sizes: (
@@ -55,14 +54,6 @@ $textfield: (
         long: 9rem,
         longer: 11rem
     ),
-  ),
-
-  classic: (
-    default-palette: (
-      color: _color("text.light")
-    ),
-    background: #FFFFFF,
-    border-radius: .2rem,
   ),
 
   framed: (
@@ -75,7 +66,6 @@ $textfield: (
     bottom-padding: .7em,
     label-top-offset: .5rem,
     select: (
-      options-offset: 3.2rem,
       icon-offset: 1.2rem
     ),
     textarea: (

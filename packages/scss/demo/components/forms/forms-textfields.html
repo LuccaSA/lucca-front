@@ -15,7 +15,7 @@
 			<div class="grid-md6">
 				<div class="form-group">
 					<div class="textfield mod-block">
-						<input class="textfield-input is-filled" type="text" value="disabled input" disabled>
+						<input class="textfield-input" type="text" value="disabled input" disabled>
 						<label class="textfield-label">Textfield label</label>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 	<div class="grid">
 		<div class="grid-md6">
 			<div class="form-group">
-				<div class="textfield mod-classic mod-block">
+				<div class="textfield mod-material mod-block">
 					<input class="textfield-input" id="textfield0" type="text" placeholder="placeholder">
 					<label class="textfield-label" for="textfield0">Textfield label</label>
 				</div>
@@ -39,8 +39,8 @@
 		</div>
 		<div class="grid-md6">
 			<div class="form-group">
-				<div class="textfield mod-classic mod-block">
-					<input class="textfield-input" id="textfield1" type="text" value="disabled input" disabled>
+				<div class="textfield mod-material mod-block">
+					<input class="textfield-input is-filled" id="textfield1" type="text" value="disabled input" disabled>
 					<label class="textfield-label" for="textfield1">Textfield label</label>
 				</div>
 			</div>
@@ -150,7 +150,7 @@
 	<div class="grid">
 		<div class="grid-md4">
 			<div class="form-group">
-				<div class="textfield mod-classic mod-block">
+				<div class="textfield mod-material mod-block">
 					<input class="textfield-input" id="textfield4" type="text">
 					<label class="textfield-label" for="textfield4">Textfield label</label>
 					<div class="textfield-messages">
@@ -161,7 +161,7 @@
 		</div>
 		<div class="grid-md4">
 			<div class="form-group">
-				<div class="textfield mod-classic mod-block">
+				<div class="textfield mod-material mod-block">
 					<input class="textfield-input" id="textfield8" type="text">
 					<label class="textfield-label" for="textfield8">Textfield label</label>
 					<div class="textfield-messages">
@@ -172,7 +172,7 @@
 		</div>
 		<div class="grid-md4">
 			<div class="form-group">
-				<div class="textfield mod-classic mod-block">
+				<div class="textfield mod-material mod-block">
 					<input class="textfield-input is-error" id="textfield6" type="text">
 					<label class="textfield-label" for="textfield6">Textfield label</label>
 					<div class="textfield-messages">
@@ -253,15 +253,15 @@
 
 <section class="contentSection">
 	<em><b>Tip:</b> You can change the input lenght with <code class="code">mod-longest</code>,<code class="code">mod-longer</code>,<code class="code">mod-long</code>, <code class="code">mod-short</code>,<code class="code">mod-shorter</code> or <code class="code">mod-shortest</code>.</em><br>
-	<em><b>Tip:</b> You can use inline input inside standard text:</em>
+	<em><b>Tip:</b> You can use inline input inside standard text (material display works especially well):</em>
 	<div>
 		Hello I'm
-		<div class="textfield mod-inline mod-shorter">
+		<div class="textfield mod-material mod-inline mod-shorter">
 			<input class="textfield-input" type="text" placeholder="ex. Janis">
 			<label class="textfield-label">name</label>
 		</div>
 		from
-		<div class="textfield mod-inline mod-shorter">
+		<div class="textfield mod-material mod-inline mod-shorter">
 			<input class="textfield-input" type="text" placeholder="ex. Port Arthur">
 			<label class="textfield-label">city</label>
 		</div>
@@ -280,7 +280,7 @@
 			</div>
 		</div>
 		<div class="grid-sm4">
-			<div class="textfield mod-classic mod-search mod-block">
+			<div class="textfield mod-material mod-search mod-block">
 				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent">
 				<label class="textfield-label">Search</label>
 			</div>
@@ -340,8 +340,8 @@
 		<div class="grid mod-xsBottom">
 			<div class="grid-sm4">
 				<div class="form-group">
-					<div id="autocomplete-material" class="textfield mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-material', 'is-open')">
-						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-material', 'is-open')" onblur="w3.removeClass('#autocomplete-material', 'is-open')">
+					<div id="autocomplete-classic" class="textfield mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-classic', 'is-open')">
+						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-classic', 'is-open')" onblur="w3.removeClass('#autocomplete-classic', 'is-open')">
 						<label class="textfield-label">User</label>
 						<ul class="textfield-options">
 							<li class="textfield-options-entry"><u>va</u>lue A</li>
@@ -353,8 +353,8 @@
 			</div>
 			<div class="grid-sm4">
 				<div class="form-group">
-					<div id="autocomplete-classic" class="textfield mod-block mod-autocomplete mod-classic" onclick="w3.addClass('#autocomplete-classic', 'is-open')">
-						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-classic', 'is-open')" onblur="w3.removeClass('#autocomplete-classic', 'is-open')">
+					<div id="autocomplete-material" class="textfield mod-material mod-block mod-autocomplete" onclick="w3.addClass('#autocomplete-material', 'is-open')">
+						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-material', 'is-open')" onblur="w3.removeClass('#autocomplete-material', 'is-open')">
 						<label class="textfield-label">User</label>
 						<ul class="textfield-options">
 							<li class="textfield-options-entry"><u>va</u>lue A</li>
@@ -416,7 +416,7 @@
 		<div class="grid">
 			<div class="grid-sm6">
 				<div class="form-group">
-					<div class="textfield mod-classic mod-multiline mod-block">
+					<div class="textfield mod-material mod-multiline mod-block">
 						<textarea class="textfield-input"></textarea>
 						<label class="textfield-label">Textarea label</label>
 					</div>
@@ -424,7 +424,7 @@
 			</div>
 			<div class="grid-sm6">
 				<div class="form-group">
-					<div class="textfield mod-classic mod-multiline mod-block">
+					<div class="textfield mod-material mod-multiline mod-block">
 						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 						<label class="textfield-label">Textarea label</label>
 					</div>
