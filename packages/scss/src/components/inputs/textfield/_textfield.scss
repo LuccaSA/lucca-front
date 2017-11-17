@@ -121,9 +121,6 @@
 		}
 	}
 
-	// default color
-	@include inputColoring(_component("textfield.default-palette"));
-
 	// palette colors
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
