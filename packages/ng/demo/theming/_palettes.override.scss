@@ -1,0 +1,12 @@
+$palettes: (
+	"primary": (
+		"color": #FFB900,
+		"text": white,
+	),
+	"secondary": (
+		"color": #FFB900,
+		"text": white,
+	),
+);
+
+$theme: _set($theme, 'palettes', $palettes);

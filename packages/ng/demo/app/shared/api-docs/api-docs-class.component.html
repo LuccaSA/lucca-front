@@ -7,7 +7,7 @@
 	<ng-template [ngIf]="apiDocs.properties && apiDocs.properties.length">
 		<section>
 			<h3>Properties</h3>
-			<table class="table table-sm table-hover">
+			<table class="table mod-zebra">
 				<tbody>
 					<tr *ngFor="let prop of apiDocs.properties">
 						<td class="label-cell"><code>{{prop.name}}</code></td>
@@ -27,7 +27,7 @@
 	<ng-template [ngIf]="apiDocs.methods && apiDocs.methods.length">
 		<section>
 			<h3>Methods</h3>
-			<table class="table table-sm table-hover">
+			<table class="table mod-zebra">
 				<tbody>
 					<tr *ngFor="let method of apiDocs.methods">
 						<td class="label-cell"><code>{{method.name}}</code></td>

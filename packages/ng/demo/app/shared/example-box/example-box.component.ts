@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
 	styleUrls: ['./example-box.component.scss']
 })
 export class ExampleBoxComponent {
-  @Input() demoTitle: string;
+	@Input() demoTitle: string;
   @Input() component: string;
   @Input() demo: string;
   @Input() snippets: Object;

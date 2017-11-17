@@ -10,7 +10,7 @@
 		<code *ngFor="let arg of apiDocs.args">[:{{arg.name}}]</code>
 	</div>
 
-	<table class="table table-sm table-hover">
+	<table class="table mod-zebra">
 		<tbody>
 			<tr *ngIf="apiDocs.selector">
 				<td class="label-cell">Selector</td>
@@ -26,7 +26,7 @@
 	<ng-template [ngIf]="apiDocs.inputs.length">
 		<section>
 			<h3>Inputs</h3>
-			<table class="table table-sm table-hover">
+			<table class="table mod-zebra">
 				<tbody>
 					<tr *ngFor="let input of apiDocs.inputs">
 						<td class="label-cell"><code>{{input.name}}</code></td>
@@ -49,7 +49,7 @@
 	<ng-template [ngIf]="apiDocs.outputs.length">
 		<section>
 			<h3>Outputs</h3>
-			<table class="table table-sm table-hover">
+			<table class="table mod-zebra">
 				<tbody>
 					<tr *ngFor="let output of apiDocs.outputs">
 						<td class="label-cell"><code>{{output.name}}</code></td>
@@ -63,7 +63,7 @@
 	<ng-template [ngIf]="apiDocs.methods.length && apiDocs.exportAs">
 		<section>
 			<h3>Methods</h3>
-			<table class="table table-sm table-hover">
+			<table class="table mod-zebra">
 				<tbody>
 					<tr *ngFor="let method of apiDocs.methods">
 						<td class="label-cell"><code>{{method.name}}</code></td>

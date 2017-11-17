@@ -1,24 +1,24 @@
-<div class="component-demo">
-  <div class="card">
-    <div class="card-header">
-      <span class="h3">
-        {{ demoTitle }}
-      </span>
-      <div class="float-right">
-        <button class="btn-link" (click)="toggleCode()" title="{{showCode ? 'Hide' : 'Show'}} source code">
-          <img src="assets/source-code-icon.png" height="24" width="24" alt="Source code icon"/>
-        </button>
+<div class="card">
+	<div class="card-header">
+		<span class="h3">
+			{{ demoTitle }}
+		</span>
+		<div class="float-right">
 <!--         <a target="_blank" href="app/components/{{component}}/demos/{{demo}}/plnkr.html" title="Edit in Plunker" >
-          <img src="img/plunker-icon.png" height="24" width="24" alt="Plunker icon"/>
-        </a> -->
-      </div>
-    </div>
-    <div class="card-block" *ngIf="showCode">
-      <pre class="language-html"><code class="language-html" [innerHTML]="snippets[demo].markup"></code></pre>
-      <pre class="language-typescript"><code class="language-typescript" [innerHTML]="snippets[demo].code"></code></pre>
-    </div>
-    <div class="card-block">
-      <ng-content></ng-content>
-    </div>
-  </div>
+				<img src="img/plunker-icon.png" height="24" width="24" alt="Plunker icon"/>
+			</a> -->
+		</div>
+	</div>
+	<div class="card-block">
+		<ng-content></ng-content>
+	</div>
 </div>
+<div class="switch">
+	<input type="checkbox" class="switch-input" id="{{demo}}" (click)="toggleCode()">
+	<label for="{{demo}}" class="switch-label">{{showCode ? 'Show' : 'Hide'}} source code</label>
+</div>
+<div class="box mod-toggle" *ngIf="showCode">
+	<pre class="language-html"><code class="language-html" [innerHTML]="snippets[demo].markup"></code></pre>
+	<pre class="language-typescript"><code class="language-typescript" [innerHTML]="snippets[demo].code"></code></pre>
+</div>
+
