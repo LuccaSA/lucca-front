@@ -14,7 +14,7 @@
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("textfield.font-size");
 	outline: 0;
-	padding: .5rem;
+	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
 	position: relative;
 	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
