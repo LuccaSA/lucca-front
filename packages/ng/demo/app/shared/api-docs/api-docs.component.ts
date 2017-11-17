@@ -13,16 +13,8 @@ import {PropertyDesc, DirectiveDesc, InputDesc, MethodDesc, ClassDesc, signature
 @Component({
   selector: 'demo-api-docs',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './api-docs.component.html',
-  styles: [`
-    .label-cell {
-      width: 25%;
-    }
-    .content-cell {
-      width: 75%;
-    }
-    `
-  ]
+	templateUrl: './api-docs.component.html',
+	styleUrls: ['./api-docs.style.scss']
 })
 export class DemoApiDocs {
 
