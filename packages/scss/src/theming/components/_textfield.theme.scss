@@ -6,7 +6,7 @@ $textfield: (
   input: (
     padding-horizontal: .5rem,
     padding-vertical: .5rem,
-    color: _color("text.default");
+    color: _color("text.default")
   ),
 
   label: (
@@ -14,12 +14,12 @@ $textfield: (
   ),
 
   suffix: (
-    padding-right: 1.5rem,
+    padding-right: 1.5rem
   ),
 
   border: (
     color: #CCCCCC,
-    focus: #999999,
+    focus: #999999
   ),
 
   message: (
@@ -42,7 +42,7 @@ $textfield: (
       color: _color("primary")
     ),
     suffix: (
-      padding-right: 1rem,
+      padding-right: 1rem
     )
   ),
 
@@ -69,14 +69,14 @@ $textfield: (
     label-top-offset: .5rem,
     textarea: (
       height: 7em,
-      margin-top: 1.5em,
+      margin-top: 1.5em
     ),
     title: (
       font-size: _theme("sizes.big.font-size"),
-      line-height: _theme("sizes.big.line-height"),
+      line-height: _theme("sizes.big.line-height")
     ),
     suffix: (
-      padding-right: 2.5rem,
+      padding-right: 2.5rem
     ),
   ),
 );
