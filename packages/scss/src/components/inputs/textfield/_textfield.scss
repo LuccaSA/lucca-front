@@ -47,26 +47,21 @@
 }
 
 .textfield-messages {
+	font-size: _component("textfield.message.font-size");
 	line-height: 1.3;
 	margin-top: .35rem;
 }
 
 .textfield-messages-error {
 	color: _color("error");
-	font-size: _component("textfield.message.font-size");
-	margin: 0;
 }
 
 .textfield-messages-warning {
 	color: _color("warning");
-	font-size: _component("textfield.message.font-size");
-	margin: 0;
 }
 
 .textfield-messages-helper {
 	color: _color("text.light");
-	font-size: _component("textfield.message.font-size");
-	margin: 0;
 }
 
 .textfield-options {
