@@ -10,7 +10,7 @@
 	border: 0;
 	border-radius: _component("textfield.border-radius");
 	box-shadow: 0 0 0 1px _component("textfield.border.color");
-	color: _color("text.default");
+	color: _component("textfield.input.color");
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("textfield.font-size");
 	outline: 0;

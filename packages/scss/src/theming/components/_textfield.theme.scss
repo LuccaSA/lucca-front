@@ -6,6 +6,7 @@ $textfield: (
   input: (
     padding-horizontal: .5rem,
     padding-vertical: .5rem,
+    color: _color("text.default");
   ),
 
   label: (
