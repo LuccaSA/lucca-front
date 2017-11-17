@@ -7,7 +7,6 @@
 		border-radius: 0;
 		height: 100%;
 		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
-		width: 100%;
 
 		&::placeholder {
 			opacity: 0;
