@@ -3,5 +3,5 @@
 	border-color: _color("error");
 }
 input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
-  @include textfield();
+  @include textfieldError();
 }
