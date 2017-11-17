@@ -25,7 +25,7 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 1px darken(_component("textfield.border.color"), 20%);
+		box-shadow: 0 0 0 1px _component("textfield.border.focus");
 	}
 }
 
