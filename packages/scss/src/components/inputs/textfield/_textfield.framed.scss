@@ -33,6 +33,11 @@
 		}
 	}
 
+	.textfield-suffix {
+		bottom: _component("textfield.framed.bottom-padding");
+		right: _component("textfield.framed.side-padding");
+	}
+
 	.textfield-label {
 		color: _color("text.light");
 		font-size: _theme("sizes.small.font-size");
@@ -163,7 +168,7 @@
 
 	&.mod-withSuffix {
 		.textfield-input {
-			padding-right: _component("textfield.suffix.padding-right");
+			padding-right: _component("textfield.framed.suffix.padding-right");
 		}
 	}
 
