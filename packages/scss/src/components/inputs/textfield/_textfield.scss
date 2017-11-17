@@ -158,18 +158,6 @@
 		width: 100%;
 	}
 
-	&.mod-noLabel {
-		padding-top: 0;
-
-		.textfield-label {
-			display: none;
-		}
-
-		.textfield-suffix {
-			top: _component("textfield.input.padding-vertical");
-		}
-	}
-
 	&.mod-withSuffix {
 		.textfield-input {
 			padding-right: _component("textfield.suffix.padding-right");

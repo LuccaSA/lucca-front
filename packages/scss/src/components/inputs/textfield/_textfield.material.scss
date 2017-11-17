@@ -87,6 +87,18 @@
 		}
 	}
 
+	&.mod-noLabel {
+		padding-top: 0;
+
+		.textfield-label {
+			display: none;
+		}
+
+		.textfield-suffix {
+			top: _component("textfield.input.padding-vertical");
+		}
+	}
+
 	&.mod-autocomplete, &.mod-select, &.mod-search {
 		&::after {
 			right: 0;
