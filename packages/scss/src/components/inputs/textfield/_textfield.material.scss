@@ -101,11 +101,11 @@
 	&.mod-autocomplete, &.mod-select, &.mod-search {
 		&::after {
 			right: 0;
-			bottom: .5rem;
+			bottom: .1rem;
 		}
 
 		.textfield-input {
-			padding-right: 2rem;
+			padding-right: 1.5rem;
 		}
 
 		.textfield-label {

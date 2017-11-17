@@ -173,16 +173,6 @@
 	&.mod-select {
 		.textfield-input {
 			padding-right: 1.5rem;
-
-			&:focus {
-				box-shadow: 0 1px 0 0 #CCCCCC;
-			}
-		}
-
-		.textfield-label {
-			color: _component("textfield.label.color");
-			font-size: _theme("sizes.standard.font-size");
-			top: 1.3rem;
 		}
 
 		&::after {
@@ -191,7 +181,7 @@
 			@include makeIcon("chevron_south");
 			font-size: .75rem;
 			position: absolute;
-			right: 0;
+			right: _component("textfield.input.padding-horizontal");
 		}
 	}
 

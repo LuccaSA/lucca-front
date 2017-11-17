@@ -65,9 +65,6 @@ $textfield: (
     top-padding: 2.2em,
     bottom-padding: .7em,
     label-top-offset: .5rem,
-    select: (
-      icon-offset: 1.2rem
-    ),
     textarea: (
       height: 7em,
       margin-top: 1.5em,
@@ -77,7 +74,7 @@ $textfield: (
       line-height: _theme("sizes.big.line-height"),
     ),
     suffix: (
-      padding-right: 2rem,
+      padding-right: 2.5rem,
     ),
   ),
 );
