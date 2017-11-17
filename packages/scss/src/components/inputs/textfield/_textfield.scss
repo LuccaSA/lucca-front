@@ -26,6 +26,14 @@
 	}
 }
 
+.textfield-suffix {
+	bottom: _component("textfield.framed.bottom-padding");
+	position: absolute;
+	right: _component("textfield.framed.side-padding");
+	top: auto;
+	z-index: 1;
+}
+
 .textfield-label {
 	color: _color("text.default");
 	font-weight: 600;
