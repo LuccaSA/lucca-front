@@ -81,6 +81,12 @@
 	// MOD
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+	&.mod-withSuffix {
+		.textfield-input {
+			padding-right: _component("textfield.suffix.padding-right");
+		}
+	}
+
 	&.mod-autocomplete, &.mod-select, &.mod-search {
 		&::after {
 			right: 0;

@@ -27,9 +27,10 @@
 }
 
 .textfield-suffix {
-	bottom: _component("textfield.framed.bottom-padding");
+	bottom: _component("textfield.input.padding-vertical");
+	line-height: 1.15;
 	position: absolute;
-	right: _component("textfield.framed.side-padding");
+	right: _component("textfield.input.padding-horizontal");
 	z-index: 1;
 }
 
