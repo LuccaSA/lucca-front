@@ -30,7 +30,7 @@
 }
 
 .textfield-suffix {
-	bottom: _component("textfield.input.padding-vertical");
+	top: _component("textfield.suffix.top");
 	line-height: 1.15;
 	position: absolute;
 	right: _component("textfield.input.padding-horizontal");
@@ -162,6 +162,12 @@
 	&.mod-withSuffix {
 		.textfield-input {
 			padding-right: _component("textfield.suffix.padding-right");
+		}
+
+		&.mod-noLabel {
+			.textfield-suffix {
+				top: _component("textfield.input.padding-vertical");
+			}
 		}
 	}
 
