@@ -163,11 +163,11 @@
 		.textfield-input {
 			padding-right: _component("textfield.suffix.padding-right");
 		}
+	}
 
-		&.mod-noLabel {
-			.textfield-suffix {
-				top: _component("textfield.input.padding-vertical");
-			}
+	&.mod-noLabel {
+		.textfield-suffix {
+			top: _component("textfield.input.padding-vertical");
 		}
 	}
 
