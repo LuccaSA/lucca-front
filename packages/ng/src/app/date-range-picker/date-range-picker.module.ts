@@ -1,4 +1,4 @@
-// import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // import {FormsModule} from '@angular/forms';
@@ -13,7 +13,7 @@
 import {LuDateRangePickerComponent} from './date-range-picker.component';
 // import { DateRangeModalComponent } from './date-range-modal/date-range-modal.component';
 
-// @NgModule({
+@NgModule({
 // 	imports: [
 // 		CommonModule,
 // 		LuSharedModule,
@@ -25,11 +25,14 @@ import {LuDateRangePickerComponent} from './date-range-picker.component';
 // 		MatDialogModule,
 // 	],
 // 	entryComponents: [DateRangeModalComponent],
-// 	declarations: [LuDateRangePickerComponent, DateRangeModalComponent],
+ 	declarations: [
+		LuDateRangePickerComponent,
+//		DateRangeModalComponent,
+	],
 // 	exports: [LuDateRangePickerComponent],
 // 	providers: [
 // 	]
-// })
+})
 export class LuDateRangePickerModule { }
 
 export {LuDateRangePickerComponent} from './date-range-picker.component'
