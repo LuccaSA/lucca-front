@@ -56,6 +56,7 @@
 
 	&:hover {
 		background-color: _component("navSide.fullwidth-palette.selected-bg");
+		color: _component("navSide.fullwidth-palette.selected-text");
 		.navSide-item-alert {
 			background: _component("navSide.fullwidth-palette.alert-color");
 			color: _component("navSide.fullwidth-palette.alert-text");
@@ -135,11 +136,13 @@
 
 		&:hover {
 			background-color: _component("navSide.fullwidth-palette.selected-bg");
+			color: _component("navSide.fullwidth-palette.selected-text");
 			opacity: .7;
 		}
 
 		&.is-active {
 			background-color: _component("navSide.fullwidth-palette.selected-bg");
+			color: _component("navSide.fullwidth-palette.selected-text");
 			opacity: 1;
 		}
 
@@ -154,6 +157,7 @@
 
 .navSide-item-link.is-active {
 	background-color: _component("navSide.fullwidth-palette.selected-bg");
+	color: _component("navSide.fullwidth-palette.selected-text");
 	opacity: 1;
 	.navSide-item-alert {
 		background: _component("navSide.fullwidth-palette.alert-color");
