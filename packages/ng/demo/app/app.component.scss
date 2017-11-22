@@ -1,4 +1,19 @@
+@import "node_modules/@lucca-front/scss/src/theming.overridable";
+
 :host {
+	.navSide-header {
+		border-bottom: 1px solid _theme("commons.background.dark");
+		padding: 1em 2em;
+		h1, h3, h4 {
+			line-height: 1;
+		}
+		h1 {
+			font-size: 1.5rem;
+		}
+		h3 {
+			font-size: 1.1rem;
+		}
+	}
 	.lang-buttons {
 		position: absolute;
 		right: 10px;

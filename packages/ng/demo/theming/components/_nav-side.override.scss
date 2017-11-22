@@ -1,0 +1,10 @@
+$navSide: (
+	"fullwidth-palette": (
+		bg-color: white,
+		text: grey,
+		selected-bg: _color("primary"),
+		selected-text: _color("primary", "text")
+	),
+);
+
+$theme: _set($theme, "components.navSide", $navSide);

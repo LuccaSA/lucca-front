@@ -1,36 +1,39 @@
 <div class="api-doc-component">
-	<h2>
-		<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/{{apiDocs.fileName}}" target="_blank">{{apiDocs.className}}</a>
-	</h2>
-	<p>{{apiDocs.description}}</p>
-
-	<div *ngIf="apiDocs.pipeName">
-		<h3>How to use</h3>
-		<code>{{apiDocs.input.name}} | {{apiDocs.pipeName}}</code>
-		<code *ngFor="let arg of apiDocs.args">[:{{arg.name}}]</code>
+	<div class="api-doc-card">
+		<h2>
+			<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/{{apiDocs.fileName}}" target="_blank">{{apiDocs.className}}</a>
+		</h2>
+		<p>{{apiDocs.description}}</p>
+		<div *ngIf="apiDocs.pipeName">
+			<h3>How to use</h3>
+			<code>{{apiDocs.input.name}} | {{apiDocs.pipeName}}</code>
+			<code *ngFor="let arg of apiDocs.args">[:{{arg.name}}]</code>
+		</div>
+		<table class="api-doc-info-table">
+				<tr *ngIf="apiDocs.selector">
+					<td class="label-cell">Selector</td>
+					<td class="content-cell">
+						<code>{{apiDocs.selector}}</code>
+					</td>
+				</tr>
+				<tr *ngIf="apiDocs.exportAs">
+					<td class="label-cell">Exported as</td>
+					<td class="content-cell">
+						<code>{{apiDocs.exportAs}}</code>
+					</td>
+				</tr>
+		</table>
 	</div>
 
-	<table class="table table-sm table-hover">
-		<tbody>
-			<tr *ngIf="apiDocs.selector">
-				<td class="label-cell">Selector</td>
-				<td class="content-cell"><code>{{apiDocs.selector}}</code></td>
-			</tr>
-			<tr *ngIf="apiDocs.exportAs">
-				<td class="label-cell">Exported as</td>
-				<td class="content-cell"><code>{{apiDocs.exportAs}}</code></td>
-			</tr>
-		</tbody>
-	</table>
 
 	<ng-template [ngIf]="apiDocs.inputs.length">
 		<section>
 			<h3>Inputs</h3>
-			<table class="table table-sm table-hover">
-				<tbody>
-					<tr *ngFor="let input of apiDocs.inputs">
-						<td class="label-cell"><code>{{input.name}}</code></td>
-						<td class="content-cell">
+			<table class="table mod-zebra">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let input of apiDocs.inputs">
+						<td class="table-body-row-cell label-cell"><code>{{input.name}}</code></td>
+						<td class="table-body-row-cell content-cell">
 							<div><i>Type: </i><code>{{ input.type }}</code></div>
 							<ng-template [ngIf]="defaultInputValue(input) || hasConfigProperty(input)">
 								<div>
@@ -49,11 +52,11 @@
 	<ng-template [ngIf]="apiDocs.outputs.length">
 		<section>
 			<h3>Outputs</h3>
-			<table class="table table-sm table-hover">
-				<tbody>
-					<tr *ngFor="let output of apiDocs.outputs">
-						<td class="label-cell"><code>{{output.name}}</code></td>
-						<td class="content-cell">{{output.description}}</td>
+			<table class="table mod-zebra">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let output of apiDocs.outputs">
+						<td class="table-body-row-cell label-cell"><code>{{output.name}}</code></td>
+						<td class="table-body-row-cell content-cell">{{output.description}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -63,11 +66,11 @@
 	<ng-template [ngIf]="apiDocs.methods.length && apiDocs.exportAs">
 		<section>
 			<h3>Methods</h3>
-			<table class="table table-sm table-hover">
-				<tbody>
-					<tr *ngFor="let method of apiDocs.methods">
-						<td class="label-cell"><code>{{method.name}}</code></td>
-						<td class="content-cell">
+			<table class="table mod-zebra">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let method of apiDocs.methods">
+						<td class="table-body-row-cell label-cell"><code>{{method.name}}</code></td>
+						<td class="table-body-row-cell content-cell">
 							<div><i>Signature: </i><code>{{ methodSignature(method) }}</code></div>
 							<div><i>Return type: </i><code>{{ method.returnType }}</code></div>
 							<div style="margin: 10px 0">{{ method.description }}</div>
@@ -78,4 +81,3 @@
 		</section>
 	</ng-template>
 </div>
-<hr/>
