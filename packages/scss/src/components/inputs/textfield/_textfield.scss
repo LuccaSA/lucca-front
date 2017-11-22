@@ -176,6 +176,12 @@
 			display: none;
 		}
 
+		.textfield-input {
+			&::placeholder {
+				opacity: 1;
+			}
+		}
+
 		.textfield-suffix {
 			top: _component("textfield.input.padding-vertical");
 		}
