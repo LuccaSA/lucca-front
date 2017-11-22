@@ -16,3 +16,17 @@
 	display: flex;
 	margin-left: auto;
 }
+
+.header.is-loading {
+	height: 75px;
+	&::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		@include loadingGradientAnimation(rgba(0,0,0, .1), true);
+	}
+}

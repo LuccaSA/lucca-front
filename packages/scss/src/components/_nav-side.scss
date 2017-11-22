@@ -225,3 +225,56 @@
 		}
 	}
 }
+
+// LOADING PLACEHOLDERS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.navSide-item-placeholder {
+	align-items: center;
+	display: flex;
+	padding: 1em;
+
+
+	&::before, &::after {
+		content: "";
+		display: block;
+	}
+
+	&::before {
+		background: rgba(0, 0, 0, _component("navSide.placeholder.opacity"));
+		border-radius: 1em;
+		height: 1em;
+		width: 1em;
+	}
+
+	&::after {
+		@include loadingGradientAnimation(rgba(0, 0, 0, _component("navSide.placeholder.opacity")), true, rgba(0, 0, 0, _component("navSide.placeholder.opacity")));
+		border-radius: _theme("commons.border.radius");
+		flex: 1 1 auto;
+		height: .9em;
+		margin-left: 1em;
+	}
+
+	&.mod-inverted {
+		&::before {
+			background: rgba(255, 255, 255, _component("navSide.placeholder.opacity"));
+		}
+
+		&::after {
+			@include loadingGradientAnimation(rgba(255, 255, 255, _component("navSide.placeholder.opacity")), true, rgba(255, 255, 255, _component("navSide.placeholder.opacity")));
+		}
+	}
+}
+
+.navSide.mod-compact .navSide-item-placeholder {
+	flex-direction: column;
+	&::before {
+		height: 1.5em;
+		width: 1.5em;
+	}
+	&::after {
+		margin-left: 0;
+		margin-top: .8em;
+		width: 100%;
+	}
+}
