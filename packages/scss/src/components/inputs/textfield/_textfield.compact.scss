@@ -1,47 +1,24 @@
 %input_compact {
 	align-items: center;
-	display: flex;
-	padding-top: 0;
-	margin-top: 1rem;
-
-	.textfield-input {
-		background: _component("textfield.compact.background");
-		border-radius: _component("textfield.compact.border-radius");
-		box-shadow: 0 0 0 1px _component("textfield.border.color");
-		padding: .5rem;
-
-		&::placeholder {
-			opacity: 1;
-			transition: none;
-		}
-
-		&:focus, &.is-filled {
-			~ .textfield-label {
-				font-size: inherit;
-				top: auto;
-			}
-		}
-	}
+	margin-bottom: 1rem;
+	flex-direction: row;
 
 	.textfield-label {
+		color: _color("text.light");
+		font-weight: 400;
 		flex: 0 0 auto;
 		margin-right: _component("textfield.compact.label-right-margin");
 		order: -1;
 		width: _component("textfield.compact.label-sizes.default");
-		word-break: break-word;
-		left: auto;
-		pointer-events: auto;
-		position: relative;
-		top: auto;
-		transition: none;
 	}
 
 	.textfield-messages {
 		align-items: center;
 		bottom: 0;
 		display: inline-flex;
-		left: calc(100% + 1rem);
+		left: 100%;
 		line-height: 1.1;
+		margin: 0 0 0 1rem;
 		position: absolute;
 		top: 0;
 		width: 100%;
@@ -58,13 +35,8 @@
 	}
 
 	.textfield-options {
-		left: auto;
-		margin: 0;
-		min-width: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
 		right: 0;
-		top: 100%;
+		left: auto;
 		width: calc(100% - #{_component("textfield.compact.label-right-margin")} - #{_component("textfield.compact.label-sizes.default")});
 	}
 
@@ -73,41 +45,10 @@
 		right: _component("textfield.compact.padding");
 	}
 
-	// PALETTE
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-	@mixin inputColoring($palette) {
-		.textfield-input:focus {
-			box-shadow: 0 0 0 1px _get($palette, "color");
-
-			~ .textfield-label {
-				color: _component("textfield.label.color");
-			}
-		}
-
-		// Needed when not next to input (formly)
-		&.is-focused {
-			.textfield-label {
-				color: _component("textfield.label.color");
-			}
-		}
-	}
-
-	// default color
-	@include inputColoring(_component("textfield.compact.default-palette"));
-
-	// palette colors
-	@each $name, $palette in _palettes() {
-		&.palette-#{$name} {
-			@include inputColoring($palette);
-		}
-	}
-
-
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-	/* Width */
+	/* Label Width */
 
 	@mixin inputWidth($iWidth, $lWidth) {
 		width: calc(#{$iWidth} + #{_component("textfield.compact.label-right-margin")} + #{$lWidth});
@@ -149,43 +90,12 @@
 		width: 100%;
 	}
 
-	&.mod-autocomplete, &.mod-select, &.mod-search {
-		&::after {
-			bottom: auto;
-			right: .5rem;
-			top: auto;
-		}
-
-		.textfield-input {
-			padding-right: 2rem;
-		}
-
-		.textfield-label {
-			padding-right: 0;
-		}
-	}
-
-	&.mod-withSuffix {
-		.textfield-input {
-			padding-right: _component("textfield.suffix.padding-right");
-		}
-	}
-
-
 	// STATES
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	// Disabled & readonly
 	.textfield-input {
-		&[disabled], &[readonly] {
-			background: _theme("commons.background.dark");
-			background-image: none;
-			background-position: bottom;
-		}
-
 		&.is-error {
-			box-shadow: 0 0 0 1px _color("error");
-
 			~ .textfield-label {
 				color: _color("error");
 			}
@@ -195,13 +105,6 @@
 	&.is-error {
 		.textfield-label {
 			color: _color("error");
-		}
-	}
-
-	&.is-focused, &.is-filled {
-		.textfield-label {
-			font-size: inherit;
-			top: auto;
 		}
 	}
 }

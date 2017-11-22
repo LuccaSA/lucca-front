@@ -1,5 +1,11 @@
 # Changelog
 
+## In Dev
+### Breaking changes
+- `textfield` default look is now classic. Use `mod-material` to get the material default look.
+### Enhancements
+- `textfield-suffix` has better support accross all `textfield` mods.
+
 ## v0.1.2
 
 ### Breaking changes

@@ -1,16 +1,30 @@
 %input_framed {
-	display: flex;
-	padding: 0;
 	width: 100%;
 
 	.textfield-input {
 		@include fakeBorder(1px, _theme("commons.divider.color"));
+		background: transparent;
+		border-radius: 0;
 		height: 100%;
-		margin-bottom: 0;
 		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
-		width: 100%;
 
-		&:focus, &:hover {
+		&::placeholder {
+			opacity: 0;
+		}
+
+		&:focus {
+			z-index: 1;
+
+			~ .textfield-messages {
+				transform: translateY(100%);
+			}
+
+			&::placeholder {
+				opacity: 1;
+			}
+		}
+
+		&:hover {
 			z-index: 1;
 
 			~ .textfield-messages {
@@ -19,19 +33,20 @@
 		}
 	}
 
-	.textfield-label {
-		font-size: _theme("sizes.small.font-size");
-		left: _component("textfield.framed.side-padding");
-		right: _component("textfield.framed.side-padding");
-		top: _component("textfield.framed.label-top-offset");
-		width: auto;
-		z-index: 1;
-	}
-
 	.textfield-suffix {
 		bottom: _component("textfield.framed.bottom-padding");
 		right: _component("textfield.framed.side-padding");
-		top: auto;
+	}
+
+	.textfield-label {
+		color: _color("text.light");
+		font-size: _theme("sizes.small.font-size");
+		font-weight: 400;
+		left: _component("textfield.framed.side-padding");
+		pointer-events: none;
+		position: absolute;
+		right: _component("textfield.framed.side-padding");
+		top: _component("textfield.framed.label-top-offset");
 		z-index: 1;
 	}
 
@@ -40,7 +55,7 @@
 		left: 0;
 		pointer-events: none;
 		position: absolute;
-		right: 0;
+		right: -1px;
 		text-align: center;
 		transform: translateY(0);
 		transition: transform _theme("commons.animations.durations.standard");
@@ -71,7 +86,7 @@
 	// COLORING
 
 	@mixin inputColoring($palette) {
-		.textfield-input:focus, .textfield-input:hover {
+		.textfield-input:focus, .textfield-input:not([disabled]):hover {
 			@include fakeBorder(1px, _get($palette, "color"));
 
 			background-color: transparentize(_get($palette, "color"), .95);
@@ -132,7 +147,7 @@
 			}
 		}
 
-		@include inputColoring(_component("textfield.compact.default-palette"));
+		@include inputColoring(_component("textfield.framed.default-palette"));
 
 		// palette colors
 		@each $name, $palette in _palettes() {
@@ -155,16 +170,21 @@
 
 	&.mod-withSuffix {
 		.textfield-input {
-			padding-right: _component("textfield.suffix.padding-right");
+			padding-right: _component("textfield.framed.suffix.padding-right");
 		}
 	}
 
 	&.mod-select, &.mod-search, &.mod-autocomplete {
 		&::after {
-			right: _component("textfield.framed.select.icon-offset");
+			right: _component("textfield.framed.side-padding");
 		}
+
+		.textfield-input {
+			padding-right: _component("textfield.framed.suffix.padding-right");
+		}
+
 		.textfield-options {
-			top: _component("textfield.framed.select.options-offset");
+			margin-top: 1px;
 		}
 	}
 
@@ -186,6 +206,7 @@
 			background-color: transparentize(_color("error"), .9);
 			&:focus, &:hover {
 				@include fakeBorder(1px, _color("error"));
+				background-color: transparentize(_color("error"), .9);
 			}
 
 			~ .textfield-label, ~ .textfield-suffix {
@@ -197,8 +218,8 @@
 	// Needed when not next to input-field (formly)
 	&.is-error {
 		.textfield-label, .textfield-suffix {
-				color: _color("error") !important;
-			}
+			color: _color("error") !important;
+		}
 	}
 	// Needed when not next to input-field (formly)
 	&.is-focused, &:hover {

@@ -1,0 +1,142 @@
+%input_material {
+	padding-top: _component("textfield.material.padding-top");
+
+	.textfield-input {
+		background: transparent;
+		border-radius: 0;
+		box-shadow: 0 1px 0 0 _component("textfield.border.color");
+		padding: {
+			left: 0;
+			right: 0;
+		}
+
+		&::placeholder {
+			opacity: 0;
+		}
+
+		&:focus {
+			&::placeholder {
+				opacity: 1;
+			}
+
+			~ .textfield-label {
+				font-size: _theme("sizes.small.font-size");
+				top: 0;
+			}
+		}
+	}
+
+	.textfield-label {
+		color: _component("textfield.label.color");
+		font-size: _component("textfield.font-size");
+		font-weight: 400;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		top: 1.3rem;
+		width: 100%;
+	}
+
+	.textfield-suffix {
+		position: absolute;
+		right: 0;
+		top: _component("textfield.material.padding-top") + _component("textfield.input.padding-vertical");
+	}
+
+
+	// PALETTE
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	// Coloring
+
+	@mixin inputColoring($palette) {
+		.textfield-input:focus {
+			box-shadow: 0 2px 0 0 _get($palette, "color");
+
+			~ .textfield-label {
+				color: _get($palette, "color");
+			}
+		}
+
+		// Needed when textfield label is not next to the textfield-input
+		&.is-focused {
+			.textfield-label {
+				color: _get($palette, "color");
+			}
+		}
+	}
+
+	// default color
+	@include inputColoring(_component("textfield.material.default-palette"));
+
+	// palette colors
+	@each $name, $palette in _palettes() {
+		&.palette-#{$name} {
+			@include inputColoring($palette);
+		}
+	}
+
+
+	// MOD
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	&.mod-withSuffix {
+		.textfield-input {
+			padding-right: _component("textfield.material.suffix.padding-right");
+		}
+	}
+
+	&.mod-noLabel {
+		padding-top: 0;
+
+		.textfield-input::placeholder {
+			opacity: 1;
+		}
+
+		.textfield-label {
+			display: none;
+		}
+
+		.textfield-suffix {
+			top: _component("textfield.input.padding-vertical");
+		}
+	}
+
+	&.mod-autocomplete, &.mod-select, &.mod-search {
+		&::after {
+			right: 0;
+			bottom: .1rem;
+		}
+
+		.textfield-input {
+			padding-right: 1.5rem;
+		}
+
+		.textfield-label {
+			padding-right: 0;
+		}
+	}
+
+	// STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	.textfield-input {
+
+		&.is-filled {
+			@include textfieldMaterialFilled();
+		}
+
+		&[disabled], &[readonly] {
+			background: transparent;
+			background-image: linear-gradient(to right, _component("textfield.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
+			background-position: bottom;
+			background-repeat: repeat-x;
+			background-size: 3px 1px;
+			box-shadow: none;
+		}
+
+		&.is-error {
+			@include textfieldMaterialError();
+		}
+	}
+}

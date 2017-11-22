@@ -1,54 +1,71 @@
 .textfield {
-	padding-top: _component("textfield.padding-top");
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	width: _component("textfield.sizes.default");
 }
 
 .textfield-input {
-	background: transparent;
+	background: _component("textfield.background");
 	border: 0;
-	box-shadow: 0 1px 0 0 #CCCCCC;
-	color: _color("text.default");
+	border-radius: _component("textfield.border-radius");
+	box-shadow: 0 0 0 1px _component("textfield.border.color");
+	color: _component("textfield.input.color");
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("textfield.font-size");
-	font-weight: 400;
-	margin-bottom: _component("textfield.input.margin-bottom");
 	outline: 0;
-	padding: _component("textfield.input.padding-vertical") 0;
+	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
 	position: relative;
 	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
 
 	&::placeholder {
 		color: _color("text.placeholder");
-		opacity: 0;
 		transition: opacity 150ms ease;
 	}
 
 	&:focus {
-		&::placeholder {
-			opacity: 1;
-		}
-
-		~ .textfield-label {
-			font-size: _theme("sizes.small.font-size");
-			top: 0;
-		}
+		box-shadow: 0 0 0 1px _component("textfield.border.focus");
 	}
 }
 
-.textfield-label {
-	color: _component("textfield.label.color");
-	white-space: nowrap;
-	font-size: _component("textfield.font-size");
-	left: 0;
-	overflow: hidden;
-	pointer-events: none;
+.textfield-suffix {
+	top: _component("textfield.suffix.top");
+	line-height: 1.15;
 	position: absolute;
+	right: _component("textfield.input.padding-horizontal");
+	z-index: 1;
+}
+
+.textfield-label {
+	color: _color("text.default");
+	font-weight: 600;
+	margin-bottom: .1rem;
+	order: -1;
+	overflow: hidden;
+	position: relative;
 	text-overflow: ellipsis;
-	top: 1.3rem;
 	transition: all 150ms ease;
-	width: 100%;
+	word-break: break-word;
+	white-space: nowrap;
+}
+
+.textfield-messages {
+	font-size: _component("textfield.message.font-size");
+	line-height: 1.3;
+	margin-top: .35rem;
+}
+
+.textfield-messages-error {
+	color: _color("error");
+}
+
+.textfield-messages-warning {
+	color: _color("warning");
+}
+
+.textfield-messages-helper {
+	color: _color("text.light");
 }
 
 .textfield-options {
@@ -57,17 +74,18 @@
 	@include elevate(3);
 	left: 0;
 	list-style: none;
+	margin: 3px 0 0;
 	max-height: 15rem;
-	min-width: 100%;
 	opacity: 0;
 	overflow: auto;
 	padding: 0;
 	position: absolute;
-	top: 2.5rem;
+	top: 100%;
 	transform: scaleY(0);
 	transform-origin: right top;
 	transition: all 150ms ease;
 	z-index: 999;
+	width: 100%;
 }
 
 .textfield-options-entry {
@@ -78,62 +96,34 @@
 	&:hover {
 		background: _theme("commons.background.dark");
 	}
+
+	&.is-focus {
+		background: _theme("commons.background.dark");
+	}
 }
 
-.textfield-messages {
-	line-height: 1.3;
-	margin-top: .3rem;
-}
-
-.textfield-messages-error {
-	color: _color("error");
-	font-size: _component("textfield.message.font-size");
-	margin: 0;
-}
-
-.textfield-messages-warning {
-	color: _color("warning");
-	font-size: _component("textfield.message.font-size");
-	margin: 0;
-}
-
-.textfield-messages-helper {
-	color: _color("text.light");
-	font-size: _component("textfield.message.font-size");
-	margin: 0;
-}
-
-.textfield-suffix {
-	position: absolute;
-	right: 0;
-	line-height: 1;
-	top: _component("textfield.padding-top") + _component("textfield.input.padding-vertical");
-}
 
 // PALETTE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
-	// Coloring
+
 	@mixin inputColoring($palette) {
 		.textfield-input:focus {
-			box-shadow: 0 2px 0 0 _get($palette, "color");
+			box-shadow: 0 0 0 1px _get($palette, "color");
 
 			~ .textfield-label {
-				color: _get($palette, "color");
+				color: _color("text.default");
 			}
 		}
 
-		// Needed when textfield label is not next to the textfield-input
+		// Needed when not next to input (formly)
 		&.is-focused {
 			.textfield-label {
-				color: _get($palette, "color");
+				color: _color("text.default");
 			}
 		}
 	}
-
-	// default color
-	@include inputColoring(_component("textfield.default-palette.material"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -144,10 +134,11 @@
 }
 
 
-// MOD
+// MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
+
 	/* Width */
 
 	@each $textfield-size-name, $textfield-width in _component("textfield.sizes") {
@@ -158,33 +149,14 @@
 
 	/* Display */
 
-	&.mod-block {
-		width: 100%;
-	}
-
 	&.mod-inline {
 		display: inline-flex;
-		align-items: center;
 		margin-left: .15rem;
 		margin-right: .15rem;
 	}
 
-	&.mod-noLabel {
-		padding-top: 0;
-
-		.textfield-label {
-			display: none;
-		}
-
-		.textfield-input {
-			&::placeholder {
-				opacity: 1;
-			}
-		}
-
-		.textfield-suffix {
-			top: _component("textfield.input.padding-vertical");
-		}
+	&.mod-block {
+		width: 100%;
 	}
 
 	&.mod-withSuffix {
@@ -193,7 +165,11 @@
 		}
 	}
 
-	/* Multi Line */
+	&.mod-noLabel {
+		.textfield-suffix {
+			top: _component("textfield.input.padding-vertical");
+		}
+	}
 
 	&.mod-multiline {
 		.textfield-input {
@@ -207,20 +183,6 @@
 	&.mod-select {
 		.textfield-input {
 			padding-right: 1.5rem;
-
-			&:focus {
-				box-shadow: 0 1px 0 0 #CCCCCC;
-			}
-		}
-
-		.textfield-label {
-			color: _component("textfield.label.color");
-			font-size: _theme("sizes.standard.font-size");
-			top: 1.3rem;
-		}
-
-		.textfield-options {
-			top: 0;
 		}
 
 		&::after {
@@ -229,7 +191,7 @@
 			@include makeIcon("chevron_south");
 			font-size: .75rem;
 			position: absolute;
-			right: 0;
+			right: _component("textfield.input.padding-horizontal");
 		}
 	}
 
@@ -240,17 +202,17 @@
 			color: _color("text.light");
 			@include makeIcon("search");
 			position: absolute;
-			right: 0;
-			bottom: .5rem;
+			bottom: .2rem;
+			right: .5rem;
 		}
 
 		.textfield-input {
-			padding-right: 1.5rem;
+			padding-right: 2rem;
 		}
+	}
 
-		.textfield-label {
-			padding-right: 1.5rem;
-		}
+	&.mod-material {
+		@extend %input_material;
 	}
 
 	&.mod-compact, &.compact {
@@ -266,31 +228,6 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.textfield-input {
-	&[disabled], &[readonly] {
-		background: transparent;
-		background-image: linear-gradient(to right, #CCCCCC 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
-		background-position: bottom;
-		background-repeat: repeat-x;
-		background-size: 3px 1px;
-		box-shadow: none;
-		color: _color("text.light");
-		cursor: not-allowed;
-	}
-
-	&.is-error {
-		@include formError();
-
-		&:focus {
-			@include formError();
-		}
-	}
-
-	&.is-filled {
-		@include formFilled();
-	}
-}
-
 .textfield {
 	&.is-open {
 		.textfield-options {
@@ -300,7 +237,7 @@
 	}
 
 	&.is-required {
-		label::after {
+		.textfield-label::after {
 			color: _color("error");
 			content: "*";
 			display: inline-block;
@@ -319,11 +256,24 @@
 	}
 }
 
-.textfield-options-entry {
-	&.is-focus {
+.textfield-input {
+
+	&[disabled], &[readonly] {
 		background: _theme("commons.background.dark");
+		color: _color("text.light");
+		cursor: not-allowed;
+	}
+
+	&.is-error {
+		@include textfieldError();
+
+		&:focus {
+			@include textfieldError();
+		}
 	}
 }
 
-@import "textfield.compact";
-@import "textfield.framed";
+@import
+	"textfield.material",
+	"textfield.compact",
+	"textfield.framed";
