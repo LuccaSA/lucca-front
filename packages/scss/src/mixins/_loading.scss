@@ -42,3 +42,30 @@
 		transform: rotate(360deg);
 	}
 }
+
+@mixin loadingGradientAnimation($color, $withBackground: false, $bgColor: null, $duration: 2s) {
+		animation: loadingGradientKeyframes $duration linear infinite;
+		animation-fill-mode: forwards;
+		@if $withBackground {
+			@if $bgColor != null {
+				background: $bgColor linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
+			}
+			@else {
+				background: $color linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
+			}
+		}
+		@else {
+			background: linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
+		}
+		background-repeat: no-repeat;
+		background-size: 400% 100%;
+}
+
+@keyframes loadingGradientKeyframes {
+	0% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: -100% 0%;
+	}
+}
