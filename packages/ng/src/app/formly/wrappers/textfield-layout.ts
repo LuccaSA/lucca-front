@@ -22,6 +22,10 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 		return !!this.to && !!this.to.suffix ? 'mod-withSuffix' : '';
 	}
 
+	get isRequired() {
+		return !!this.to && !!this.to.required ? 'is-required' : '';
+	}
+
 	get isFocused() {
 		return (!!this.to && this.to._isFocused) ? 'is-focused' : '';
 	}
