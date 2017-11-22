@@ -89,6 +89,10 @@
 	&.mod-noLabel {
 		padding-top: 0;
 
+		.textfield-input::placeholder {
+			opacity: 1;
+		}
+
 		.textfield-label {
 			display: none;
 		}
