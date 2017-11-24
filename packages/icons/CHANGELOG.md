@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.3
+
+### New icon
+
+- `face`
+
 ## v0.1.2
 
 ### New icons
