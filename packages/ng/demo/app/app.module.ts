@@ -17,6 +17,7 @@ import { DemoUserDisplayModule } from './user-display/user-display.module';
 import {DemoFormlyModule} from './formly/formly.module';
 import {DemoEmptyModule} from './empty/empty.module';
 import { DemoPopoverModule } from './lu-popover/lu-popover.module';
+import { DemoAnimationsModule } from './animations/animations.module';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { DemoPopoverModule } from './lu-popover/lu-popover.module';
 	imports: [
 		RouterModule.forRoot(appRoutes),
 
+		DemoAnimationsModule,
 		DemoPopoverModule,
 		DemoDateRangePickerModule,
 		DemoUserTileModule,
