@@ -1,5 +1,9 @@
 # Changelog
 
+## In Dev
+### New features
+- `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
+
 ## v0.1.2
 This version is the first minor version of `@lucca-front/ng`. It brings this package up to speed with Angular 5 and Angular Material 5
 ### Breaking changes
