@@ -88,6 +88,7 @@ function generateIconDemo() {
 		'user_remove',
 		'user_roles',
 		'user_send_to',
+		'face',
 
 		'edit',
 		'edit_frame',
