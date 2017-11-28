@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng",
-  "version": "0.1.4-lerna.0",
+  "version": "0.1.4-lerna.1",
   "description": "a library of usefull components for angular web app",
   "repository": {
     "type": "git",
