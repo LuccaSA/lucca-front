@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng",
-  "version": "0.1.3",
+  "version": "0.1.4-lerna.0",
   "description": "a library of usefull components for angular web app",
   "repository": {
     "type": "git",
@@ -47,9 +47,13 @@
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
+    "@angular/cdk": "^5.0.0-rc0",
     "@angular/cli": "1.5.0",
     "@angular/compiler-cli": "^5.0.0",
+    "@angular/material": "^5.0.0-rc0",
+    "@angular/material-moment-adapter": "^5.0.0-rc0",
     "@angular/router": "^5.0.0",
+    "@ngx-formly/core": "^2.0.0-beta.3",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -69,6 +73,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "merge2": "^1.1.0",
+    "moment": "^2.19.1",
     "node-sass": "^4.5.2",
     "prismjs": "^1.6.0",
     "prismjs-loader": "0.0.4",
@@ -76,21 +81,14 @@
     "run-sequence": "^1.2.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.4.0",
-
-    "@angular/cdk": "^5.0.0-rc0",
-    "@angular/material": "^5.0.0-rc0",
-    "@angular/material-moment-adapter": "^5.0.0-rc0",
-    "@ngx-formly/core": "^2.0.0-beta.3",
-    "moment": "^2.19.1"
+    "typescript": "~2.4.0"
   },
   "peerDependencies": {
     "@angular/cdk": "^5.0.0-rc0",
     "@angular/material": "^5.0.0-rc0",
-    "@ngx-formly/core": "^2.0.0-beta.3",
-    "moment": "^2.19.1",
-
     "@lucca-front/icons": "0.1.3",
-    "@lucca-front/scss": "0.1.3"
+    "@lucca-front/scss": "0.1.3",
+    "@ngx-formly/core": "^2.0.0-beta.3",
+    "moment": "^2.19.1"
   }
 }
