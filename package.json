@@ -25,7 +25,10 @@
   },
   "private": true,
   "scripts": {
-    "publishpackages": "node tools/publish.js",
-    "postinstall": "cd tools && node install-packages.js"
+    "postinstall": "lerna bootstrap",
+    "lerna": "lerna"
+  },
+  "dependencies": {
+    "lerna": "^2.5.1"
   }
 }

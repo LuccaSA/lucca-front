@@ -3,4 +3,6 @@ node_modules
 npm-debug.log
 
 #yarn
-yarn.lock
+
+#lerna
+lerna-debug.log
