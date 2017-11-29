@@ -7,6 +7,7 @@ import { formlyRoutes } from './formly/formly.router';
 import { emptyRoutes } from './empty/empty.router';
 import { luPopoverRoutes } from './lu-popover/lu-popover.router';
 import { animationsRoutes } from './animations/animations.router';
+import { apiRoutes } from './api/api.router';
 
 export const appRoutes: Routes = [
 	{ path: '', component: NavigationComponent, outlet: 'nav' },
@@ -18,5 +19,6 @@ export const appRoutes: Routes = [
 		...emptyRoutes,
 		...luPopoverRoutes,
 		...animationsRoutes,
+		...apiRoutes,
 	] },
 ];
