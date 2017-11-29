@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RedirectService, RedirectEnvironment } from './redirect.service';
 
 @Component({
 	selector: 'demo-redirect',
@@ -6,13 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RedirectComponent implements OnInit {
 
-	url = 'https://lucca.local.dev';
+	url = 'lucca.local.dev';
 	login = 'passepartout';
-	constructor() { }
+
+	connected$ = this.env.connected$;
+	url$ = this.env.url$;
+	login$ = this.env.login$;
+
+	loading = false;
+	constructor(private service: RedirectService, private env: RedirectEnvironment) { }
 
 	ngOnInit() {
 	}
 
-	connect() {	}
+	connect() {
+		this.loading = true;
+		this.service.login(this.url, this.login)
+		.subscribe(() => {
+			this.loading = false;
+		});
+	}
 
 }
