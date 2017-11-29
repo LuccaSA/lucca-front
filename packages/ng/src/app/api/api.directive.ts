@@ -1,4 +1,15 @@
-import { Directive, OnInit, Input, Output, EventEmitter, forwardRef, OnDestroy, Renderer2, ElementRef, HostListener } from '@angular/core';
+import {
+	Directive,
+	OnInit,
+	Input,
+	Output,
+	EventEmitter,
+	forwardRef,
+	OnDestroy,
+	Renderer2,
+	ElementRef,
+	HostListener
+} from '@angular/core';
 import {
 	NgModel,
 	ControlValueAccessor,
@@ -10,11 +21,12 @@ import {
 	ValidationErrors,
 	AbstractControl
 } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/combineLatest';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
+
 import { IApiItem, ICoerce } from './api.model';
 
 @Directive({
@@ -25,11 +37,12 @@ import { IApiItem, ICoerce } from './api.model';
 	],
 })
 export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor, OnDestroy, OnInit, Validator {
+	/**
+	 * the api to query
+	 */
+	@Input() api: string;
 
-	private onInput = new EventEmitter<string>();
-	private onInputSub: Subscription;
-
-	protected _validator: ValidatorFn | null;
+	// value stuff
 	protected get _strValue(): string {
 		return this._elementRef.nativeElement.value as string;
 	}
@@ -40,20 +53,20 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 	set value(value:  T | null) {
 		const lastValue = this._value;
 		this._value = value;
-
-		// display the number of hours/days
+		// render
 		this.render(value);
 		// emit change
 		if (!this.same(lastValue, value)) {
 			this._valueChange.emit(value);
 		}
 	}
-	/**
-	 * the api to query
-	 */
-	@Input() api: string;
-
 	protected _valueChange = new EventEmitter<T|null>();
+
+	protected _validator: ValidatorFn | null;
+
+	// internal observables and subscription
+	private onInput = new EventEmitter<string>();
+	private onInputSub: Subscription;
 
 	constructor(
 		private _elementRef: ElementRef,
@@ -64,14 +77,14 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 	writeValue(value: T) {
 		this.value = value;
 	}
-
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
-
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
+
+	// host listening
 	@HostListener('document:keydown.enter', ['$event'])
 	onEnterKeydown() {
 		if (!!this.value) {
@@ -84,13 +97,14 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 		this.render();
 	}
 	_onTouched = () => {};
-	private _cvaOnChange: (value: any) => void = () => {};
+	private _cvaOnChange: (value: T) => void = () => {};
 
 	@HostListener('input', ['$event.target.value'])
 	_onInput(value: string) {
 		this.onInput.next(value);
 	}
 
+	// init/destroy
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
 		const coercionObs = this.onInput.mergeMap(value => this.asyncCoerceApiItem(value));
@@ -110,6 +124,8 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 		this.onInputSub.unsubscribe();
 		this.onInput.complete();
 	}
+
+	// validators
 	validate(c: AbstractControl): ValidationErrors | null {
 		return this._validator ? this._validator(c) : null;
 	}
@@ -118,10 +134,21 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 		if (!this._strValue) {
 			return null;
 		}
-		return (!!this.value && !!this.value.id) ? null : {'tpApi': {'text': `0 or several items match '${this._elementRef.nativeElement.value}'`}};
+		if (!!this.value && !!this.value.id) {
+			return null;
+		}
+		return {'tpApi': {'text': `0 or several items match '${this._elementRef.nativeElement.value}'`}};
 	}
+
+	// render/display
 	protected render(value = this.value) {
 		this._renderer.setProperty(this._elementRef.nativeElement, 'value', this.display(value));
+	}
+	protected display(value: T | null): string {
+		if (!value) {
+			return '';
+		}
+		return value.name;
 	}
 	protected same(oldItem: T, newItem: T) {
 		if (oldItem === newItem) {
@@ -134,12 +161,6 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 			return false;
 		}
 		return oldItem.id === newItem.id;
-	}
-	protected display(value: T | null): string {
-		if (!value) {
-			return '';
-		}
-		return value.name;
 	}
 	protected asyncCoerceApiItem(value: string | null): Observable<ICoerce<T>> {
 		const stringVal = value as string;
