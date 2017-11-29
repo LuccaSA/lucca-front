@@ -4,6 +4,7 @@ import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material';
 import { LuDateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { LuUserTileModule } from './user';
 import { LuPopoverModule } from './popover/popover.module';
+import { LuApiModule } from './api';
 
 @NgModule({
 	imports: [
