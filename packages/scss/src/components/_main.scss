@@ -15,14 +15,14 @@
 	overflow-y: auto;
 }
 
-@include media_smaller_than("sm") {
+@include media_smaller_than("md") {
 	.main-content {
 		margin-left: 0 !important;
 		overflow-x: hidden;
 	}
 
 	// MOD TO BE ADDED TO .MAIN WHEN THE MENU IS TOGGLED
-	.main.is-noScroll {
+	.main.is-notScrollable {
 		height: 100vh;
 		overflow: hidden;
 	}
