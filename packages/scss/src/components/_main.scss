@@ -14,3 +14,16 @@
 	height: calc(100vh - #{_theme("commons.banner-height")});
 	overflow-y: auto;
 }
+
+@include media_smaller_than("sm") {
+	.main-content {
+		margin-left: 0 !important;
+		overflow-x: hidden;
+	}
+
+	// MOD TO BE ADDED TO .MAIN WHEN THE MENU IS TOGGLED
+	.main.is-noScroll {
+		height: 100vh;
+		overflow: hidden;
+	}
+}
