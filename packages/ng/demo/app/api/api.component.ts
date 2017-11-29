@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 declare var require: any;
 
 @Component({
@@ -7,9 +8,6 @@ declare var require: any;
 	styles: []
 })
 export class DemoApiComponent implements OnInit {
-
-	constructor() { }
-
 	snippets = {
 		// basic: {
 		// 	code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
@@ -28,6 +26,18 @@ export class DemoApiComponent implements OnInit {
 		// 	markup: require('!!prismjs-loader?lang=markup!./validation/validation.html')
 		// },
 	};
+	me;
+	constructor(private http: HttpClient) { }
+
+
+	whoami() {
+		this.http.get<any>('/api/v3/users/me?fields=id,firstname,lastname')
+		.subscribe(r => {
+			this.me = r.data;
+		})
+	}
+
+
 
 	ngOnInit() {
 	}

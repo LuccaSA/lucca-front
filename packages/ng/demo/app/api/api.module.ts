@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
 
 import { DemoApiComponent } from './api.component';
 import { SharedModule } from '../shared/index';
@@ -12,6 +13,7 @@ import { SharedModule } from '../shared/index';
 		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,
+		HttpClientModule,
 		SharedModule,
 		// LuEmptyModule,
 	],
@@ -20,7 +22,7 @@ import { SharedModule } from '../shared/index';
 		// BasicComponent,
 	],
 	exports: [
-		// DemoNotEmptyComponent,
+		DemoApiComponent,
 	]
 })
 export class DemoApiModule { }
