@@ -1,14 +1,5 @@
-<!-- <demo-api-docs directive="LuApiDirective"></demo-api-docs>
-<demo-api-docs directive="LuApiPickerComponent"></demo-api-docs> -->
-
-<!-- <h3>Examples</h3>
-<demo-example-box [snippets]="snippets" demo="basic">
-	<demo-empty-basic ></demo-empty-basic>
-</demo-example-box>
-<demo-example-box [snippets]="snippets" demo="custom">
-	<demo-empty-custom-fn ></demo-empty-custom-fn>
-</demo-example-box> -->
-
+<demo-api-docs directive="LuApiDirective"></demo-api-docs>
 <demo-redirect></demo-redirect>
-
-<button class="button" (click)="whoami()">who am i</button>{{me | json}}
+<demo-example-box [snippets]="snippets" demo="nopicker">
+	<demo-api-nopicker></demo-api-nopicker>
+</demo-example-box>
