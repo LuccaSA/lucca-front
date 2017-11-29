@@ -34,7 +34,6 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 		return this._elementRef.nativeElement.value as string;
 	}
 	protected _value: T | null;
-	@Input()
 	get value(): T | null {
 		return this._value;
 	}
@@ -49,8 +48,11 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 			this._valueChange.emit(value);
 		}
 	}
-	@Input()
-	api: string;
+	/**
+	 * the api to consult
+	 */
+	@Input() api: string;
+
 	protected _valueChange = new EventEmitter<T|null>();
 
 	constructor(
