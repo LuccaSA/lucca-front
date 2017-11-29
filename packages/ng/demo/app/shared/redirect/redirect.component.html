@@ -1,0 +1,14 @@
+<section class="callout">
+	<div>
+		To test this component you might need to redirect all xhr to one of your local website.
+	</div>
+	<div class="textfield mod-material mod-inline">
+		<input class="textfield-input" [(ngModel)]="url" name="url" luEmpty>
+		<label class="textfield-label" for="url">Url</label>
+	</div>
+	<div class="textfield mod-material mod-inline">
+		<input class="textfield-input" [(ngModel)]="login" name="login" luEmpty>
+		<label class="textfield-label" for="login">login</label>
+	</div>
+	<button class="button" (click)="connect()">Connect</button>
+</section>
