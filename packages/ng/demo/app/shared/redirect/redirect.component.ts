@@ -9,6 +9,7 @@ export class RedirectComponent implements OnInit {
 
 	url = 'lucca.local.dev';
 	login = 'passepartout';
+	password = '';
 
 	connected$ = this.env.connected$;
 	url$ = this.env.url$;
@@ -22,10 +23,9 @@ export class RedirectComponent implements OnInit {
 
 	connect() {
 		this.loading = true;
-		this.service.login(this.url, this.login)
+		this.service.login(this.url, this.login, this.password)
 		.subscribe(() => {
 			this.loading = false;
 		});
 	}
-
 }

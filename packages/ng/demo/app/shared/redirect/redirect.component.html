@@ -16,5 +16,9 @@
 		<input class="textfield-input" [(ngModel)]="login" name="login" luEmpty>
 		<label class="textfield-label" for="login">login</label>
 	</div>
+	<div class="textfield mod-material mod-inline">
+		<input class="textfield-input" [(ngModel)]="password" name="password" luEmpty type="password">
+		<label class="textfield-label" for="password">password</label>
+	</div>
 	<button class="button" (click)="connect()" [ngClass]="{'is-loading': loading}">Connect</button>
 </section>
