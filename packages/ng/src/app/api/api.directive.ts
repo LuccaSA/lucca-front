@@ -49,7 +49,7 @@ export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor,
 		}
 	}
 	/**
-	 * the api to consult
+	 * the api to query
 	 */
 	@Input() api: string;
 
