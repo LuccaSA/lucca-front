@@ -43,11 +43,11 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	private _triggerEvent: PopoverTriggerEvent = 'hover';
 	private _enterDelay: number = 200;
 	private _leaveDelay: number = 200;
-	private _overlapTrigger: boolean = true;
+	private _overlapTrigger: boolean = false;
 	private _targetOffsetX: number = 0;
 	private _targetOffsetY: number = 0;
-	private _closeOnClick: boolean = true;
-	private _focusTrapEnabled: boolean = true;
+	private _closeOnClick: boolean = false;
+	private _focusTrapEnabled: boolean = false;
 
 	/** Config object to be passed into the popover's ngClass */
 	private _classList: any = {};
