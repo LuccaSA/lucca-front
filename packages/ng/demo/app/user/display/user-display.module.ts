@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DemoUserDisplayComponent } from './user-display.component';
-import { LuUserDisplayModule } from '../../../src/app/user';
+import { LuUserDisplayModule } from '../../../../src/app/user';
+import { LuEmptyModule } from '../../../../src/app/empty';
 import { MatSelectModule } from '@angular/material';
 
-import { SharedModule } from '../shared';
+import { SharedModule } from '../../shared';
 import { BasicComponent } from './basic/basic.component';
 
 @NgModule({
@@ -15,8 +16,15 @@ import { BasicComponent } from './basic/basic.component';
 		LuUserDisplayModule,
 		SharedModule,
 		MatSelectModule,
+		LuEmptyModule,
 	],
-	declarations: [DemoUserDisplayComponent, BasicComponent],
-	exports: [DemoUserDisplayComponent, BasicComponent]
+	declarations: [
+		DemoUserDisplayComponent,
+		BasicComponent,
+	],
+	exports: [
+		DemoUserDisplayComponent,
+		BasicComponent,
+	]
 })
 export class DemoUserDisplayModule { }
