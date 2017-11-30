@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DemoUserDisplayComponent } from './user-display.component';
-import { LuUserModule } from '../../../src/app/user';
-import { LuUserTileModule } from '../../../src/app/user';
+import { LuUserDisplayModule } from '../../../src/app/user';
 import { MatSelectModule } from '@angular/material';
 
 import { SharedModule } from '../shared';
@@ -13,7 +12,7 @@ import { BasicComponent } from './basic/basic.component';
 	imports: [
 		CommonModule,
 		FormsModule,
-		LuUserModule,
+		LuUserDisplayModule,
 		SharedModule,
 		MatSelectModule,
 	],
