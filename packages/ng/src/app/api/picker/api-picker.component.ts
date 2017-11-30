@@ -10,8 +10,7 @@ import {
 	ElementRef,
 	HostListener
 } from '@angular/core';
-import { LuPopoverComponent } from '../../popover';
-import { transformPopover } from '../../popover';
+import { LuPopoverComponent, transformPopover, PopoverTriggerEvent } from '../../popover';
 
 /**
  * The component that provides available options from the api with the currently inputed text
@@ -25,6 +24,7 @@ import { transformPopover } from '../../popover';
 	],
 })
 export class LuApiPickerComponent extends LuPopoverComponent implements OnInit {
+	triggerEvent = 'focus' as PopoverTriggerEvent;
 
 	constructor(protected _elementRef: ElementRef) {
 		super(_elementRef);

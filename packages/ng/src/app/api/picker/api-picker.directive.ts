@@ -60,7 +60,6 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	@Input() api: string;
 	/** the name of the picker linked to this input */
 	@Input('luApiPicker') popover: IPopoverPanel;
-	triggerEvent = 'focus' as PopoverTriggerEvent;
 	// value stuff
 	protected get _strValue(): string {
 		return this._elementRef.nativeElement.value as string;
@@ -118,12 +117,12 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 			this.render();
 		}
 	}
-	@HostListener('blur')
-	blur() {
-		this._onTouched();
-		this.render();
-		super.onBlur();
-	}
+	// @HostListener('blur')
+	// blur() {
+	// 	this._onTouched();
+	// 	this.render();
+	// 	super.onBlur();
+	// }
 	_onTouched = () => {};
 	private _cvaOnChange: (value: T) => void = () => {};
 
