@@ -40,6 +40,7 @@ import 'rxjs/add/observable/combineLatest';
 
 import { IApiItem, ICoerce } from '../api.model';
 import { LuPopoverTrigger, IPopoverPanel, PopoverTriggerEvent } from '../../popover';
+import { LuApiPickerComponent } from './api-picker.component';
 
 /**
  * Directive to put on a input to allow it to match the text inputed to an item available on an api
@@ -59,7 +60,7 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	 */
 	@Input() api: string;
 	/** the name of the picker linked to this input */
-	@Input('luApiPicker') popover: IPopoverPanel;
+	@Input('luApiPicker') popover: LuApiPickerComponent;
 	// value stuff
 	protected get _strValue(): string {
 		return this._elementRef.nativeElement.value as string;
@@ -76,6 +77,7 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 		// emit change
 		if (!this.same(lastValue, value)) {
 			this._valueChange.emit(value);
+			this._cvaOnChange(value);
 		}
 	}
 	protected _valueChange = new EventEmitter<T|null>();
@@ -123,6 +125,17 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	// 	this.render();
 	// 	super.onBlur();
 	// }
+	@HostListener('focus')
+	onFocus() {
+		this.openPopover();
+	}
+	@HostListener('blur')
+	onBlur() {
+		// if (this.popover.triggerEvent === 'focus') {
+	// 	this._onTouched();
+	// this.closePopover();
+		// }
+	}
 	_onTouched = () => {};
 	private _cvaOnChange: (value: T) => void = () => {};
 
@@ -134,16 +147,21 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	// init/destroy
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
-		const coercionObs = this.onInput.mergeMap(value => this.asyncCoerceApiItem(value));
-		this.onInputSub = Observable.combineLatest(this.onInput, coercionObs)
-		.subscribe(next => {
-			const currentClue = next[0];
-			const coercion = next[1];
-			if (currentClue === coercion.clue) {
-				this._value = coercion.item;
-				this._cvaOnChange(coercion.item);
-				this._valueChange.emit(coercion.item);
-			}
+		// const coercionObs = this.onInput.mergeMap(value => this.asyncCoerceApiItem(value));
+		// this.onInputSub = Observable.combineLatest(this.onInput, coercionObs)
+		// .subscribe(next => {
+		// 	const currentClue = next[0];
+		// 	const coercion = next[1];
+		// 	if (currentClue === coercion.clue) {
+		// 		this._value = coercion.item;
+		// 		this._cvaOnChange(coercion.item);
+		// 		this._valueChange.emit(coercion.item);
+		// 	}
+		// });
+		this.popover.itemSelected
+		.subscribe(item => {
+			this.value = item;
+			this.closePopover();
 		});
 	}
 	ngOnDestroy() {

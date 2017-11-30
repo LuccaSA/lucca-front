@@ -5,7 +5,6 @@
 <div class="textfield mod-material">
 	<input [luApiPicker]="picker" [(ngModel)]="item" class="textfield-input" name="item" luEmpty [api]="api">
 	<label class="textfield-label" for="item">item</label>
-	<lu-api-picker #picker>
-		lol mdr lol
-	</lu-api-picker>
+	<lu-api-picker #picker></lu-api-picker>
 </div>
+<code class="code mod-block">{{ item | json }}</code>

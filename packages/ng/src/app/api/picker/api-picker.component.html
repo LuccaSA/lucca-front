@@ -1,1 +1,9 @@
-lol mdr debug debug
+<ng-template>
+		<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="_classList" [ngStyle]="popoverPanelStyles"
+		 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" [@transformPopover]="'enter'">
+			<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
+				<a (click)="debug()">debug</a>
+			</div>
+		</div>
+	</ng-template>
+	

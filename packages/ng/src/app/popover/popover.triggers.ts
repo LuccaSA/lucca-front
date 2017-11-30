@@ -231,7 +231,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 		// Focus only needs to be reset to the host element if the popover was opened
 		// by the keyboard and manually shifted to the first popover item.
-		if (!this._openedByMouse && this.popover.triggerEvent !== 'focus') {
+		if (!this._openedByMouse && this.popover.triggerEvent === 'click') {
 			this.focus();
 		}
 		this._openedByMouse = false;
