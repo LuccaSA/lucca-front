@@ -2,8 +2,11 @@
 	<div class="u-textRight" *ngIf="connected$ | async">
 		<span class="label palette-success">You are connected to {{ url$ | async }} as {{ login$ | async }}</span>
 	</div>
-	<div class="u-textRight" *ngIf="!(connected$ | async)">
+	<div class="u-textRight" *ngIf="disconnected$ | async">
 		<span class="label">You are not connected</span>
+	</div>
+	<div class="u-textRight" *ngIf="connecting$ | async">
+		<span class="label">Connecting...</span>
 	</div>
 	<div>
 		To test this component you might need to redirect all xhr requests to one of your local website.

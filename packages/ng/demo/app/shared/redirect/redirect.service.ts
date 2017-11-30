@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-// import { Observer } from 'rxjs/Observer';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import 'rxjs/add/operator/map';
-// import 'rxjs/add/observable/create';
+import 'rxjs/add/operator/catch';
+
+export enum RedirectStatus {
+	disconnected,
+	connecting,
+	connected,
+}
 
 @Injectable()
 export class RedirectEnvironment {
@@ -13,26 +18,27 @@ export class RedirectEnvironment {
 	baseUrl = '';
 	authToken = '';
 
-	private _connected$ = new BehaviorSubject<boolean>(false);
-	connected$ = this._connected$.asObservable();
+	private _status$ = new BehaviorSubject<RedirectStatus>(RedirectStatus.disconnected);
+	status$ = this._status$.asObservable();
 	private _url$ = new BehaviorSubject<string>('');
 	url$ = this._url$.asObservable();
 	private _login$ = new BehaviorSubject<string>('');
 	login$ = this._login$.asObservable();
 
-	disableRedirect() {
+	connecting() {
 		this.redirect = false;
-		this._connected$.next(false);
-		// this.connectedObserver.next(false);
+		this._status$.next(RedirectStatus.connecting);
 	}
 	loginSuccess(baseUrl, token, login) {
 		this.baseUrl = baseUrl;
 		this.authToken = token;
 		this.redirect = true;
-		this._connected$.next(true);
+		this._status$.next(RedirectStatus.connected);
 		this._login$.next(login);
 		this._url$.next(baseUrl);
-		// this.connectedObserver.next(true);
+	}
+	loginError() {
+		this._status$.next(RedirectStatus.disconnected);
 	}
 }
 
@@ -47,20 +53,23 @@ export class RedirectService {
 		private env: RedirectEnvironment,
 	) {}
 
-	login(url, login, password = ''): Observable<boolean> {
+	login(url, login, password = ''): Observable<RedirectStatus> {
 		// disable redirection while we log in
-		this.env.disableRedirect();
+		this.env.connecting();
 		const loginUrl = `https://${url}/auth/userlogin?login=${login}&password=${password}`;
 		const options = {
 			responseType: 'text',
-			// responseType: 'text/plain',
 		} as any;
 
 		return this.http.post(loginUrl, {}, options)
 		.map(r => {
 			const token = (<any>r).substring(1, (<any>r).length - 1);
 			this.env.loginSuccess(url, token, login);
-			return true;
+			return RedirectStatus.connected;
+		})
+		.catch(r => {
+			this.env.loginError();
+			return Observable.throw(RedirectStatus.disconnected);
 		});
 	}
 }
