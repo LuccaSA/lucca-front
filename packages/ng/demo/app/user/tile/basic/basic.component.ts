@@ -8,18 +8,25 @@ import { IUser } from '../../../../../src/app/user';
 })
 export class BasicComponent implements OnInit {
 
-	user: IUser = {
+	anais: IUser = {
 		firstName: 'Anaïs',
 		lastName: 'Lemoustier',
 		picture: {href: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Ana%C3%AFs_Demoustier_Cabourg_2015.jpg'},
 		jobTitle: 'Actress'
 	};
 
-	noPicUser: IUser = {
+	jeanMich: IUser = {
 		firstName: 'Jean-Michel',
 		lastName: 'Pasdephoto',
 		picture: {href: ''},
 		jobTitle: 'Actor'
+	};
+
+	jeanPascal = {
+		firstName: 'Jean Pierre',
+		lastName: 'Pernaud',
+		picture: {href: ''},
+		jobTitle: `L'ami des retraites`,
 	};
 
 	constructor() { }
