@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 declare var require: any;
 
 @Component({
-	selector: 'demo-api',
-	templateUrl: './api.component.html',
+	selector: 'demo-api-picker',
+	templateUrl: './api-picker.component.html',
 	styles: []
 })
-export class DemoApiComponent implements OnInit {
+export class DemoApiPickerComponent implements OnInit {
 	snippets = {
 		basic: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
