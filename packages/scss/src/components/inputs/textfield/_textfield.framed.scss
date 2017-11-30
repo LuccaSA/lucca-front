@@ -203,15 +203,7 @@
 		}
 
 		&.is-error {
-			background-color: transparentize(_color("error"), .9);
-			&:focus, &:hover {
-				@include fakeBorder(1px, _color("error"));
-				background-color: transparentize(_color("error"), .9);
-			}
-
-			~ .textfield-label, ~ .textfield-suffix {
-				color: _color("error") !important;
-			}
+			@include textfieldFramedError();
 		}
 	}
 
