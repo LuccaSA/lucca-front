@@ -59,7 +59,7 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	 */
 	@Input() api: string;
 	/** the name of the picker linked to this input */
-	@Input('picker') popover: IPopoverPanel;
+	@Input('luApiPicker') popover: IPopoverPanel;
 	triggerEvent = 'focus' as PopoverTriggerEvent;
 	// value stuff
 	protected get _strValue(): string {
@@ -119,9 +119,10 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 		}
 	}
 	@HostListener('blur')
-	onBlur() {
+	blur() {
 		this._onTouched();
 		this.render();
+		super.onBlur();
 	}
 	_onTouched = () => {};
 	private _cvaOnChange: (value: T) => void = () => {};
