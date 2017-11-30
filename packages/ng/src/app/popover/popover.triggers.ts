@@ -8,6 +8,7 @@ import {
 	Optional,
 	Output,
 	ViewContainerRef,
+	HostListener,
 } from '@angular/core';
 
 
@@ -40,10 +41,7 @@ import { throwLuPopoverMissingError } from './popover.errors';
 	selector: '[LuPopoverTriggerFor]',
 	host: {
 		'aria-haspopup': 'true',
-		'(mouseenter)': 'onMouseEnter()',
 		'(mousedown)': '_handleMousedown($event)',
-		'(mouseleave)': 'onMouseLeave()',
-		'(click)': 'onClick()',
 	},
 	exportAs: 'LuPopoverTrigger'
 })
@@ -161,6 +159,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	/** Whether the popover is open. */
 	get popoverOpen(): boolean { return this._popoverOpen; }
 
+	@HostListener('click')
 	onClick() {
 		if (this.popover.triggerEvent === 'click') {
 			this._setCurrentConfig();
@@ -168,6 +167,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		}
 	}
 
+	@HostListener('mouseenter')
 	onMouseEnter() {
 		this._halt = false;
 		if (this.popover.triggerEvent === 'hover') {
@@ -177,6 +177,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		}
 	}
 
+	@HostListener('mouseleave')
 	onMouseLeave() {
 		if (this.popover.triggerEvent === 'hover') {
 			if (this._mouseoverTimer) {
@@ -192,6 +193,19 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			} else {
 				this._halt = true;
 			}
+		}
+	}
+	@HostListener('focus')
+	onFocus() {
+		if (this.popover.triggerEvent === 'focus') {
+			this._setCurrentConfig();
+			this.openPopover();
+		}
+	}
+	@HostListener('blur')
+	onBlur() {
+		if (this.popover.triggerEvent === 'focus') {
+			this.closePopover();
 		}
 	}
 

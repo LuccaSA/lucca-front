@@ -15,6 +15,10 @@ export class DemoPopoverComponent implements OnInit {
 		basic: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
 			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
+		},
+		trigger: {
+			code: require('!!prismjs-loader?lang=typescript!./trigger/trigger'),
+			markup: require('!!prismjs-loader?lang=markup!./trigger/trigger.html')
 		}
 	}
 

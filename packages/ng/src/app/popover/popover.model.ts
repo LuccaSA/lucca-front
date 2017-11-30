@@ -3,7 +3,7 @@ import { ElementRef, EventEmitter, TemplateRef } from '@angular/core';
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type PopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
 
-export type PopoverTriggerEvent = 'click' | 'hover' | 'none';
+export type PopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
 export interface IPopoverPanel {
 	position: PopoverPosition;

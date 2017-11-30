@@ -39,7 +39,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/combineLatest';
 
 import { IApiItem, ICoerce } from '../api.model';
-import { LuPopoverTrigger } from '../../popover';
+import { LuPopoverTrigger, IPopoverPanel, PopoverTriggerEvent } from '../../popover';
 
 /**
  * Directive to put on a input to allow it to match the text inputed to an item available on an api
@@ -58,7 +58,9 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	 * the api to query
 	 */
 	@Input() api: string;
-
+	/** the name of the picker linked to this input */
+	@Input('picker') popover: IPopoverPanel;
+	triggerEvent = 'focus' as PopoverTriggerEvent;
 	// value stuff
 	protected get _strValue(): string {
 		return this._elementRef.nativeElement.value as string;
