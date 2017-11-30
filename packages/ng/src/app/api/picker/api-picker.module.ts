@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LuApiPickerDirective } from './api-picker.directive';
 import { LuApiPickerComponent } from './api-picker.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LuPopoverModule } from '../../popover';
 
 @NgModule({
 	imports: [

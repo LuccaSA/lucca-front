@@ -27,8 +27,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { LuPopoverPanel, LuTarget } from './popover.interfaces';
-import { LuPopoverAlignment, LuPopoverPosition, LuPopoverTriggerEvent } from './popover.types'
+import { IPopoverPanel, IPopoverTarget, PopoverAlignment, PopoverPosition, PopoverTriggerEvent } from './popover.model';
 import { throwLuPopoverMissingError } from './popover.errors';
 
 
@@ -63,19 +62,19 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	private _openedByMouse: boolean = false;
 
 	/** References the popover instance that the trigger is associated with. */
-	@Input('LuPopoverTriggerFor') popover: LuPopoverPanel;
+	@Input('LuPopoverTriggerFor') popover: IPopoverPanel;
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('LuPopoverTargetAt') targetElement: LuTarget;
+	@Input('LuPopoverTargetAt') targetElement: IPopoverTarget;
 
 	/** Position of the popover around the trigger */
-	@Input('position') position: LuPopoverPosition;
+	@Input('position') position: PopoverPosition;
 
 	/** Alignment of the popover regarding the trigger */
-	@Input('alignment') alignment: LuPopoverAlignment;
+	@Input('alignment') alignment: PopoverAlignment;
 
 	/** Popover trigger event */
-	@Input('trigger-on') triggerEvent: LuPopoverTriggerEvent;
+	@Input('trigger-on') triggerEvent: PopoverTriggerEvent;
 
 	/** Popover delay */
 	@Input('enter-delay') enterDelay: number;
@@ -352,8 +351,8 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	*/
 	private _subscribeToPositions(position: ConnectedPositionStrategy): void {
 		this._positionSubscription = position.onPositionChange.subscribe(change => {
-			const posX: LuPopoverPosition = change.connectionPair.overlayX === 'end' ? 'before' : 'after';
-			let posY: LuPopoverPosition = change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
+			const posX: PopoverPosition = change.connectionPair.overlayX === 'end' ? 'before' : 'after';
+			let posY: PopoverPosition = change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
 
 
 

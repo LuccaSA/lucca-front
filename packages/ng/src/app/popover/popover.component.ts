@@ -13,9 +13,8 @@ import {
 
 import { ESCAPE } from '@angular/cdk/keycodes';
 
-import { LuPopoverAlignment, LuPopoverPosition, LuPopoverTriggerEvent } from './popover.types';
 import { throwLuPopoverInvalidPosition, throwLuPopoverInvalidAlignement } from './popover.errors';
-import { LuPopoverPanel } from './popover.interfaces';
+import { IPopoverPanel, PopoverAlignment, PopoverPosition, PopoverTriggerEvent } from './popover.model';
 import { transformPopover } from './popover.animations';
 
 import { AnimationEvent } from '@angular/animations';
@@ -36,12 +35,12 @@ import { AnimationEvent } from '@angular/animations';
 	],
 	exportAs: 'LuPopover'
 })
-export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
+export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 
 	/** Settings for popover, view setters and getters for more detail */
-	private _position: LuPopoverPosition = 'below';
-	private _alignment: LuPopoverAlignment = 'left';
-	private _triggerEvent: LuPopoverTriggerEvent = 'hover';
+	private _position: PopoverPosition = 'below';
+	private _alignment: PopoverAlignment = 'left';
+	private _triggerEvent: PopoverTriggerEvent = 'hover';
 	private _enterDelay: number = 200;
 	private _leaveDelay: number = 200;
 	private _overlapTrigger: boolean = true;
@@ -70,7 +69,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	/** Position of the popover around the trigger */
 	@Input('position')
 	get position() { return this._position; }
-	set position(value: LuPopoverPosition) {
+	set position(value: PopoverPosition) {
 		if (value !== 'above' && value !== 'below' && value !== 'after' && value !== 'before') {
 			throwLuPopoverInvalidPosition();
 		}
@@ -81,7 +80,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	/** Alignment of the popover regarding the trigger */
 	@Input('alignment')
 	get alignment() { return this._alignment; }
-	set alignment(value: LuPopoverAlignment) {
+	set alignment(value: PopoverAlignment) {
 		if (value !== 'top' && value !== 'bottom' && value !== 'right' && value !== 'left') {
 			throwLuPopoverInvalidAlignement();
 		}
@@ -91,8 +90,8 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 
 	/** Popover trigger event */
 	@Input('trigger-on')
-	get triggerEvent(): LuPopoverTriggerEvent { return this._triggerEvent; }
-	set triggerEvent(v: LuPopoverTriggerEvent) { this._triggerEvent = v; }
+	get triggerEvent(): PopoverTriggerEvent { return this._triggerEvent; }
+	set triggerEvent(v: PopoverTriggerEvent) { this._triggerEvent = v; }
 
 	/** Popover enter delay */
 	@Input('enter-delay')
@@ -215,9 +214,9 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 	 * It's necessary to set position-based classes to ensure the popover panel animation
 	 * folds out from the correct direction.
 	 */
-	setPositionClasses(pos: LuPopoverPosition, al: LuPopoverAlignment): void {
-		let posX: LuPopoverPosition;
-		let posY: LuPopoverPosition;
+	setPositionClasses(pos: PopoverPosition, al: PopoverAlignment): void {
+		let posX: PopoverPosition;
+		let posY: PopoverPosition;
 
 		if (pos === 'above' || pos === 'below') {
 			posY = pos;
@@ -230,7 +229,7 @@ export class LuPopoverComponent implements LuPopoverPanel, OnDestroy {
 		this.setPositionClassesChanges(posX, posY);
 	}
 
-	setPositionClassesChanges(posX: LuPopoverPosition, posY: LuPopoverPosition): void {
+	setPositionClassesChanges(posX: PopoverPosition, posY: PopoverPosition): void {
 		this._classList['lu-popover-before'] = posX === 'before';
 		this._classList['lu-popover-after'] = posX === 'after';
 		this._classList['lu-popover-above'] = posY === 'above';
