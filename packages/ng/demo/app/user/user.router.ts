@@ -8,7 +8,6 @@ export const userRoutes: Routes = [
 		{ path: 'tile', label: 'Tile', component: DemoUserTileComponent } as Route,
 		// { path: 'picker', },
 		// { path: 'picture', },
-		// { path: 'tile', },
 		{ path: '', redirectTo: 'display', pathMatch: 'full' },
 	]} as Route,
 ];

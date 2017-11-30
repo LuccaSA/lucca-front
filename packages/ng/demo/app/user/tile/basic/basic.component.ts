@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../../../src/app/user';
+import { IUser } from '../../../../../src/app/user';
 
 @Component({
 	selector: 'demo-basic',
