@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DemoPopoverComponent } from './lu-popover.component';
+import { DemoPopoverComponent } from './popover.component';
 import { LuUserModule } from '../../../src/app/user';
 import { LuPopoverModule } from '../../../src/app/popover/popover.module';
 import { SharedModule } from '../shared';
-import { BasicComponent } from './basic/basic.component';
+import { DemoPopoverBasicComponent } from './basic/basic';
 
 @NgModule({
 	imports: [
@@ -13,7 +13,7 @@ import { BasicComponent } from './basic/basic.component';
 		SharedModule,
 		LuUserModule,
 	],
-	declarations: [DemoPopoverComponent, BasicComponent],
-	exports: [DemoPopoverComponent, BasicComponent]
+	declarations: [DemoPopoverComponent, DemoPopoverBasicComponent],
+	exports: [DemoPopoverComponent, DemoPopoverBasicComponent]
 })
 export class DemoPopoverModule { }

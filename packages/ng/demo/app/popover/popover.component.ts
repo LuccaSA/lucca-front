@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 declare var require: any;
 
 @Component({
-	selector: 'demo-lu-popover',
-	templateUrl: './lu-popover.component.html',
+	selector: 'demo-popover',
+	templateUrl: './popover.component.html',
 	styles: []
 })
 export class DemoPopoverComponent implements OnInit {
@@ -13,8 +13,8 @@ export class DemoPopoverComponent implements OnInit {
 
 	snippets = {
 		basic: {
-			code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html')
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
 		}
 	}
 

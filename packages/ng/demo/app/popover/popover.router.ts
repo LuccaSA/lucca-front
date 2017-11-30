@@ -1,6 +1,6 @@
 import { Routes, Route } from '@angular/router';
-import { DemoPopoverComponent } from './lu-popover.component';
+import { DemoPopoverComponent } from './popover.component';
 
-export const luPopoverRoutes: Routes = [
+export const popoverRoutes: Routes = [
 	{ path: 'popover', label: 'Popover', component: DemoPopoverComponent } as Route,
 ];
