@@ -160,8 +160,9 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		if (this._overlayRef) {
 			this._overlayRef.detach();
 
-			/** Only unsubscribe to backdrop if trigger event is click */
-			if (this.popover.triggerEvent === 'click') {
+			/** unsubscribe to backdrop click if it was defined */
+			if (!!this._backdropSubscription) {
+				// if (this.popover.triggerEvent === 'click') {
 				this._backdropSubscription.unsubscribe();
 			}
 
@@ -206,7 +207,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	* the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
 	* explicitly when the popover is closed or destroyed.
 	*/
-	private _subscribeToBackdrop(): void {
+	protected _subscribeToBackdrop(): void {
 		if (this._overlayRef) {
 			this._backdropSubscription = this._overlayRef.backdropClick().subscribe(() => {
 				this.popover._emitCloseEvent();
@@ -272,7 +273,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	* This method builds the configuration object needed to create the overlay, the OverlayConfig.
 	* @returns OverlayConfig
 	*/
-	private _getOverlayConfig(): OverlayConfig {
+	protected _getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
 		overlayState.positionStrategy = this._getPosition()
 			.withDirection(this.dir);

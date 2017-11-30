@@ -120,7 +120,7 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 
 	/**
 	 * Popover container close on click
-	 * default: true
+	 * default: false
 	 */
 	@Input('close-on-click')
 	get closeOnClick(): boolean { return this._closeOnClick; }
@@ -128,7 +128,7 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 
 	/**
 	 * Popover focus trap using cdkTrapFocus
-	 * default: true
+	 * default: false
 	 */
 	@Input('focus-trap-enabled')
 	get focusTrapEnabled(): boolean { return this._focusTrapEnabled; }

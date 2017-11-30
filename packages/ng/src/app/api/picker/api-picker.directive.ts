@@ -16,8 +16,8 @@ import {
 	// OriginConnectionPosition,
 	Overlay,
 	// OverlayConnectionPosition,
-	// OverlayRef,
-	// OverlayConfig,
+	OverlayRef,
+	OverlayConfig,
 	// HorizontalConnectionPos,
 	// VerticalConnectionPos
 } from '@angular/cdk/overlay';
@@ -60,7 +60,7 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	 */
 	@Input() api: string;
 	/** the name of the picker linked to this input */
-	@Input('luApiPicker') popover: LuApiPickerComponent;
+	@Input('luApiPicker') popover: LuApiPickerComponent<T>;
 	// value stuff
 	protected get _strValue(): string {
 		return this._elementRef.nativeElement.value as string;
@@ -128,13 +128,14 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	@HostListener('focus')
 	onFocus() {
 		this.openPopover();
+		this.popover.search(this.api, this._strValue);
 	}
-	@HostListener('blur')
-	onBlur() {
-		// if (this.popover.triggerEvent === 'focus') {
-	// 	this._onTouched();
-	// this.closePopover();
-		// }
+	@HostListener('blur', ['$event'])
+	blur(e) {
+		this._onTouched();
+		// setTimeout(() => {
+		this.closePopover();
+		// }, 100);
 	}
 	_onTouched = () => {};
 	private _cvaOnChange: (value: T) => void = () => {};
@@ -163,6 +164,10 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 			this.value = item;
 			this.closePopover();
 		});
+		this.onInputSub = this.onInput
+		.subscribe(clue => {
+			this.popover.search(this.api, clue);
+		})
 	}
 	ngOnDestroy() {
 		this._valueChange.complete();
@@ -174,6 +179,19 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	validate(c: AbstractControl): ValidationErrors | null {
 		return this._validator ? this._validator(c) : null;
 	}
+
+	openPopover() {
+		super.openPopover();
+		this._subscribeToBackdrop();
+	}
+	protected _getOverlayConfig(): OverlayConfig {
+		const config = super._getOverlayConfig();
+		config.hasBackdrop = true;
+		config.backdropClass = 'cdk-overlay-transparent-backdrop';
+		return config;
+	}
+
+
 	private _validatorOnChange = () => {};
 	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
 		if (!this._strValue) {

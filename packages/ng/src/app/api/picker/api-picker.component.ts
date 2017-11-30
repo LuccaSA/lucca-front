@@ -12,6 +12,9 @@ import {
 } from '@angular/core';
 import { LuPopoverComponent, transformPopover, PopoverTriggerEvent } from '../../popover';
 import { IApiItem } from '../api.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 /**
  * The component that provides available options from the api with the currently inputed text
@@ -25,18 +28,33 @@ import { IApiItem } from '../api.model';
 		transformPopover
 	],
 })
-export class LuApiPickerComponent extends LuPopoverComponent implements OnInit {
+export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent implements OnInit {
 	triggerEvent = 'none' as PopoverTriggerEvent;
 
-	/** emits when the user selects an element */
-	@Output() itemSelected  = new EventEmitter<IApiItem>();
+	private _options$ = new BehaviorSubject<IApiItem[]>([]);
+	options$ = this._options$.asObservable();
 
-	constructor(protected _elementRef: ElementRef) {
+	/** emits when the user selects an element */
+	@Output() itemSelected  = new EventEmitter<T>();
+
+	constructor(
+		protected _elementRef: ElementRef,
+		protected _http: HttpClient
+	) {
 		super(_elementRef);
 	}
 	ngOnInit() {
 	}
-	debug() {
-		this.itemSelected.emit({ id: 12, name: 'debug' });
+	// @HostListener('click', ['$event'])
+	// @HostListener('mousedown', ['$event'])
+	onMouseDown($e) {
+		$e.preventDefault();
+	}
+
+	search(api: string, clue: string = '', filter: string = ''): void {
+		this._http.get<{ data: { items: T[] } }>(`${api}?name=like,${clue}&paging=0,10&fields=id,name`)
+		.subscribe(r => {
+			this._options$.next(r.data.items);
+		});
 	}
 }
