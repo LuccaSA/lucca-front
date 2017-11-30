@@ -1,11 +1,11 @@
 <ng-template>
-		<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="_classList" [ngStyle]="popoverPanelStyles"
-		 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" [@transformPopover]="'enter'"
-		 (mousedown)="onMouseDown($event)">
-			<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
-				<!-- <a (click)="debug()">debug</a> -->
-				<div *ngFor="let option of (options$ | async)">{{option.name}}</div>
-			</div>
+	<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="_classList" [ngStyle]="popoverPanelStyles"
+	(keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" [@transformPopover]="'enter'"
+	(mousedown)="onMouseDown($event)">
+		<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
+			<!-- <ng-content></ng-content> -->
+			<!-- <a (click)="debug()">debug</a> -->
+			<div *ngFor="let option of (options$ | async)">{{option.name}}</div>
 		</div>
-	</ng-template>
-	
+	</div>
+</ng-template>

@@ -209,6 +209,8 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 			this._emitCloseEvent();
 		}
 	}
+	/** does nothing but must be overridable */
+	onMouseDown($event) {	}
 
 	/**
 	 * It's necessary to set position-based classes to ensure the popover panel animation
