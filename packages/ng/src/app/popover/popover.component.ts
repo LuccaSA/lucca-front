@@ -158,7 +158,7 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 
 	@ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
-	constructor(private _elementRef: ElementRef) {
+	constructor(protected _elementRef: ElementRef) {
 		this.setPositionClasses(this.position, this.alignment);
 	}
 
