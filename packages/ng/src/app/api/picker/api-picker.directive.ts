@@ -8,8 +8,19 @@ import {
 	OnDestroy,
 	Renderer2,
 	ElementRef,
+	ViewContainerRef,
 	HostListener
 } from '@angular/core';
+import {
+	// ConnectedPositionStrategy,
+	// OriginConnectionPosition,
+	Overlay,
+	// OverlayConnectionPosition,
+	// OverlayRef,
+	// OverlayConfig,
+	// HorizontalConnectionPos,
+	// VerticalConnectionPos
+} from '@angular/cdk/overlay';
 import {
 	NgModel,
 	ControlValueAccessor,
@@ -28,6 +39,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/combineLatest';
 
 import { IApiItem, ICoerce } from '../api.model';
+import { LuPopoverTrigger } from '../../popover';
 
 /**
  * Directive to put on a input to allow it to match the text inputed to an item available on an api
@@ -39,7 +51,9 @@ import { IApiItem, ICoerce } from '../api.model';
 		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuApiPickerDirective), multi: true },
 	],
 })
-export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAccessor, OnDestroy, OnInit, Validator {
+export class LuApiPickerDirective<T extends IApiItem>
+extends LuPopoverTrigger
+implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	/**
 	 * the api to query
 	 */
@@ -72,10 +86,18 @@ export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAcc
 	private onInputSub: Subscription;
 
 	constructor(
-		private _elementRef: ElementRef,
-		private _renderer: Renderer2,
+		protected _overlay: Overlay,
+		protected _elementRef: ElementRef,
+		protected _viewContainerRef: ViewContainerRef,
+		protected _renderer: Renderer2,
 		protected http: HttpClient,
-	) {}
+	) {
+		super(
+			_overlay,
+			_elementRef,
+			_viewContainerRef,
+		);
+	}
 	// From ControlValueAccessor interface
 	writeValue(value: T) {
 		this.value = value;

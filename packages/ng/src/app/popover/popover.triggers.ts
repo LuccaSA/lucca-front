@@ -12,7 +12,7 @@ import {
 
 
 import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
-import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Direction } from '@angular/cdk/bidi';
 import {
 	ConnectedPositionStrategy,
 	OriginConnectionPosition,
@@ -102,9 +102,11 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	@Output() onPopoverClose = new EventEmitter<void>();
 
 
-	constructor(private _overlay: Overlay, private _element: ElementRef,
-		private _viewContainerRef: ViewContainerRef,
-		@Optional() private _dir: Directionality) { }
+	constructor(
+		protected _overlay: Overlay,
+		protected _elementRef: ElementRef,
+		protected _viewContainerRef: ViewContainerRef,
+	) { }
 
 	ngAfterViewInit() {
 		this._checkPopover();
@@ -237,7 +239,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 	/** Focuses the popover trigger. */
 	focus() {
-		this._element.nativeElement.focus();
+		this._elementRef.nativeElement.focus();
 	}
 
 	_handleMousedown(event: MouseEvent): void {
@@ -248,7 +250,8 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 	/** The text direction of the containing app. */
 	get dir(): Direction {
-		return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
+		// return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
+		return 'ltr';
 	}
 
 	/** Return if the popover main positionning is vertical */
@@ -436,7 +439,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		 * Useful for sticking popover to parent element and offsetting arrow to trigger element.
 		 * If undefined defaults to the trigger element reference.
 		 */
-		let element = this._element;
+		let element = this._elementRef;
 		if (typeof this.targetElement !== 'undefined') {
 			this.popover.containerPositioning = true;
 			element = this.targetElement._elementRef;
