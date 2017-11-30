@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LuApiDirective } from './api.directive';
+import { LuApiPickerDirective } from './api.directive';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -11,10 +11,10 @@ import { HttpClientModule } from '@angular/common/http';
 		HttpClientModule
 	],
 	declarations: [
-		LuApiDirective,
+		LuApiPickerDirective,
 	],
 	exports: [
-		LuApiDirective,
+		LuApiPickerDirective,
 	],
 })
 export class LuApiModule { }

@@ -33,13 +33,13 @@ import { IApiItem, ICoerce } from './api.model';
  * Directive to put on a input to allow it to match the text inputed to an item available on an api
  */
 @Directive({
-	selector: 'input[luApi]',
+	selector: 'input[luApiPicker]',
 	providers: [
-		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuApiDirective), multi: true },
-		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuApiDirective), multi: true },
+		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuApiPickerDirective), multi: true },
+		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuApiPickerDirective), multi: true },
 	],
 })
-export class LuApiDirective<T extends IApiItem> implements ControlValueAccessor, OnDestroy, OnInit, Validator {
+export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	/**
 	 * the api to query
 	 */
