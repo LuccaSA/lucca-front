@@ -27,7 +27,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/combineLatest';
 
-import { IApiItem, ICoerce } from './api.model';
+import { IApiItem, ICoerce } from '../api.model';
 
 /**
  * Directive to put on a input to allow it to match the text inputed to an item available on an api

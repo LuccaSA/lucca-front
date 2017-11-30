@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LuApiPickerModule } from './picker';
+import { LuApiPickerDirective } from './api-picker.directive';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
-		HttpClientModule,
-		LuApiPickerModule
+		HttpClientModule
 	],
 	declarations: [
+		LuApiPickerDirective,
 	],
 	exports: [
-		LuApiPickerModule,
+		LuApiPickerDirective,
 	],
 })
-export class LuApiModule { }
+export class LuApiPickerModule { }
