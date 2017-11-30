@@ -8,6 +8,7 @@ import { LuApiModule } from '../../../src/app/api/api.module';
 import { DemoApiComponent } from './api.component';
 import { SharedModule } from '../shared/index';
 
+import { BasicComponent } from './basic/basic';
 import { NopickerComponent } from './nopicker/nopicker';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NopickerComponent } from './nopicker/nopicker';
 	declarations: [
 		DemoApiComponent,
 		NopickerComponent,
+		BasicComponent,
 	],
 	exports: [
 		DemoApiComponent,
