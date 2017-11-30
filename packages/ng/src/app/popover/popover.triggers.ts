@@ -65,34 +65,6 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	/** References the popover target instance that the trigger is associated with. */
 	@Input('LuPopoverTargetAt') targetElement: IPopoverTarget;
 
-	/** Position of the popover around the trigger */
-	@Input('position') position: PopoverPosition;
-
-	/** Alignment of the popover regarding the trigger */
-	@Input('alignment') alignment: PopoverAlignment;
-
-	/** Popover trigger event */
-	@Input('trigger-on') triggerEvent: PopoverTriggerEvent;
-
-	/** Popover delay */
-	@Input('enter-delay') enterDelay: number;
-
-	/** Popover delay */
-	@Input('leave-delay') leaveDelay: number;
-
-	/** Popover overlap trigger */
-	@Input('overlap-trigger') overlapTrigger: boolean;
-
-	/** Popover target offset x */
-	@Input('offset-x') targetOffsetX: number;
-
-	/** Popover target offset y */
-	@Input('offset-y') targetOffsetY: number;
-
-	/** Popover container close on click */
-	@Input('close-on-click') closeOnClick: boolean;
-
-
 	/** Event emitted when the associated popover is opened. */
 	@Output() onPopoverOpen = new EventEmitter<void>();
 
@@ -108,53 +80,10 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 	ngAfterViewInit() {
 		this._checkPopover();
-		this._setCurrentConfig();
 		this.popover.close.subscribe(() => this.closePopover());
 	}
 
 	ngOnDestroy() { this.destroyPopover(); }
-
-
-	private _setCurrentConfig() {
-		if (this.position === 'above' || this.position === 'below' || this.position === 'after' ||
-		this.position === 'before') {
-			this.popover.position = this.position;
-		}
-
-		if (this.alignment === 'top' || this.alignment === 'bottom' || this.alignment === 'left' ||
-			this.alignment === 'right') {
-			this.popover.alignment = this.alignment;
-		}
-
-		if (this.triggerEvent) {
-			this.popover.triggerEvent = this.triggerEvent;
-		}
-
-		if (this.enterDelay) {
-			this.popover.enterDelay = this.enterDelay;
-		}
-
-		if (this.leaveDelay) {
-			this.popover.leaveDelay = this.leaveDelay;
-		}
-
-		if (this.overlapTrigger === true || this.overlapTrigger === false) {
-			this.popover.overlapTrigger = this.overlapTrigger;
-		}
-
-		if (this.targetOffsetX) {
-			this.popover.targetOffsetX = this.targetOffsetX;
-		}
-
-		if (this.targetOffsetY) {
-			this.popover.targetOffsetY = this.targetOffsetY;
-		}
-
-		if (this.closeOnClick === true || this.closeOnClick === false) {
-			this.popover.closeOnClick = this.closeOnClick;
-		}
-	}
-
 
 	/** Whether the popover is open. */
 	get popoverOpen(): boolean { return this._popoverOpen; }
@@ -162,7 +91,6 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	@HostListener('click')
 	onClick() {
 		if (this.popover.triggerEvent === 'click') {
-			this._setCurrentConfig();
 			this.togglePopover();
 		}
 	}
@@ -198,7 +126,6 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	@HostListener('focus')
 	onFocus() {
 		if (this.popover.triggerEvent === 'focus') {
-			this._setCurrentConfig();
 			this.openPopover();
 		}
 	}
