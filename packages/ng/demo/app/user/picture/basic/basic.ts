@@ -11,14 +11,14 @@ export class DemoUserPictureBasicComponent implements OnInit {
 	anais: IUser = {
 		firstName: 'Anaïs',
 		lastName: 'Lemoustier',
-		picture: {url: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Ana%C3%AFs_Demoustier_Cabourg_2015.jpg'},
+		picture: {href: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Ana%C3%AFs_Demoustier_Cabourg_2015.jpg'},
 		jobTitle: 'Actress'
 	};
 
 	jeanMich: IUser = {
 		firstName: 'Jean-Michel',
 		lastName: 'Pasdephoto',
-		picture: {url: ''},
+		picture: {href: ''},
 		jobTitle: 'Actor'
 	};
 

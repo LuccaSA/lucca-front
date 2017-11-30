@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LuUserDisplayModule, } from '../display';
 import { LuUserPictureModule, } from '../picture';
 import { LuUserTileComponent } from './user-tile.component';
 
@@ -7,6 +8,7 @@ import { LuUserTileComponent } from './user-tile.component';
 	imports: [
 		CommonModule,
 		LuUserPictureModule,
+		LuUserDisplayModule,
 	],
 	declarations: [
 		LuUserTileComponent,

@@ -8,15 +8,13 @@ declare var require: any;
 })
 export class DemoUserTileComponent implements OnInit {
 
-	constructor() { }
-
 	snippets = {
 		basic: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),
 			markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html')
 		},
 	};
-
+	constructor() { }
 	ngOnInit() {
 	}
 

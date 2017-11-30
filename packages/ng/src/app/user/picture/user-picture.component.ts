@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 import { IUser } from '../user.model';
 import { LuUserDisplayPipe } from '../display';
 
@@ -12,30 +12,36 @@ import { LuUserDisplayPipe } from '../display';
 })
 export class LuUserPictureComponent {
 
+	private _user: IUser;
 	/**
 	 * IUser whose picture you wanna display.
 	 */
-	@Input() user: IUser;
+	@Input() set user(user: IUser) {
+		this._user = user;
+		this.initials = this.displayPipe.transform(user, 'LF');
+		this.hasPicture = !!user.picture && !!user.picture.href;
+		if (this.hasPicture) {
+			this.style = { 'background-image': `url('${this._user.picture.href}?width=100)` };
+		} else {
+			const hsl = this.getNameHue();
+			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)`};
+		}
+	};
+	get user() { return this._user; }
+	initials = '';
+	hasPicture = false;
 
-	get pictureTextPlaceholder () {
-		return this.displayPipe.transform(this.user, 'LF');
-	}
-
-	hasUserPicture = () => !!this.user.picture && !!this.user.picture.url;
-
-	getBackgroundImageStyle = () => ({'background-image': `url('${this.user.picture.url}?width=100)`});
-
-	getDefaultColorStyle = () => ({'background-color': `hsl(${this.getNameHue()}, 60%, 60%)`});
+	style;
 
 	constructor(private displayPipe: LuUserDisplayPipe) {	}
 
 	private getNameHue() {
-		const initialsAsciiCodes = this.getUserNamesListUpperCase().map(str => str.charCodeAt(0));
-		const averageOfAsciiCodes = initialsAsciiCodes
-			.reduce((sum, a) => sum + a, 0) / initialsAsciiCodes.length; // between 65 and 90, see ascii codes for capitals
-		const asciiCodeToHue = (averageOfAsciiCodes - 64) * 360 / 26 % 360; // between 0 and 359, see documentation for css hsl
-		return asciiCodeToHue;
+		// we sum the chars in user's firstname + lastname
+		const charSum = this.displayPipe.transform(this._user, 'lf')
+		.split('')
+		.reduce((sum, a) => sum + a.charCodeAt(0), 0);
+		// and take a modulo 360 for hue
+		const hue = charSum % 360;
+		return hue;
 	}
-
-	private getUserNamesListUpperCase = () => [this.user.firstName.toUpperCase(), this.user.lastName.toUpperCase()];
 }
