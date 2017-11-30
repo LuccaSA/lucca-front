@@ -10,8 +10,16 @@ import { LuPopoverTarget } from './popover.target';
 		CommonModule,
 		OverlayModule
 	],
-	declarations: [LuPopoverComponent, LuPopoverTrigger, LuPopoverTarget],
-	exports: [LuPopoverComponent, LuPopoverTrigger, LuPopoverTarget]
+	declarations: [
+		LuPopoverComponent,
+		LuPopoverTrigger,
+		LuPopoverTarget,
+	],
+	exports: [
+		LuPopoverComponent,
+		LuPopoverTrigger,
+		LuPopoverTarget,
+	]
 })
 export class LuPopoverModule { }
 
