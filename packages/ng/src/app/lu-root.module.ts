@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material';
 import { LuDateRangePickerModule } from './date-range-picker/date-range-picker.module';
-import { LuUserTileModule } from './user';
+import { LuUserModule } from './user';
 import { LuPopoverModule } from './popover/popover.module';
 import { LuApiModule } from './api';
 
@@ -10,12 +10,12 @@ import { LuApiModule } from './api';
 	imports: [
 		CommonModule,
 		LuDateRangePickerModule,
-		LuUserTileModule,
+		LuUserModule,
 		LuPopoverModule,
 	],
 	exports: [
 		LuDateRangePickerModule,
-		LuUserTileModule,
+		LuUserModule,
 		LuPopoverModule,
 	],
 	providers: [{provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: {disabled: true}}],

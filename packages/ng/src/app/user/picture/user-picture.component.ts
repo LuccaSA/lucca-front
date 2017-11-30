@@ -9,7 +9,6 @@ import { LuUserDisplayPipe } from '../display';
 	selector: 'lu-user-picture',
 	templateUrl: './user-picture.component.html',
 	styleUrls: ['./user-picture.component.scss'],
-	moduleId: module.id,
 })
 export class LuUserPictureComponent {
 

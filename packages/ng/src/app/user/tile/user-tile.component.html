@@ -1,5 +1,5 @@
-<div class="picture" [ngStyle]=" this.hasUserPicture() ? this.getBackgroundImageStyle() : this.getDefaultColorStyle()">
-	<span *ngIf="!hasUserPicture()">{{pictureTextPlaceholder}}</span>
+<div class="picture">
+	<lu-user-picture [user]="user"></lu-user-picture>
 </div>
 <div class="user-info">
 	<span class="user-tile-label">{{role ? role : user.jobTitle}}</span>
