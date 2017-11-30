@@ -1,1 +1,10 @@
-<lu-api-picker></lu-api-picker>
+
+<div class="textfield mod-material">
+	<input [(ngModel)]="api" class="textfield-input" (ngModelChange)="apiChanged()" name="api" luEmpty>
+	<label class="textfield-label" for="api">api</label>
+</div>
+<div class="textfield mod-material">
+	<input luApiPicker [(ngModel)]="item" class="textfield-input" name="item" luEmpty [api]="api" picker="picker">
+	<label class="textfield-label" for="item">item</label>
+	<lu-api-picker #picker></lu-api-picker>
+</div>
