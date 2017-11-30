@@ -5,6 +5,7 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-f
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-button',
+	styleUrls: ['flex-layout.scss'],
 	templateUrl: './button.html',
 })
 export class LuFormlyWrapperButton extends FieldWrapper {
