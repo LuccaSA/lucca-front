@@ -1,43 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
-
+export interface IOption {
+	id: number;
+	name: string;
+}
 @Component({
 	selector: 'lu-formly-field-autocomplete',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './autocomplete.html',
 })
 export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
-	filteredOptions: Observable<{ id: any, name: string }[]>;
-	get _options() { return this.to.options || []; }
+	searchControl = new FormControl({});
+	private get _options(): IOption[] { return this.to.options || []; }
+	private _options$: BehaviorSubject<IOption[]>;
+	options$: Observable<IOption[]>;
+
 	ngOnInit () {
-		this.formControl.valueChanges.subscribe(value => {
-			this.setToOption(value);
+		this._options$ = new BehaviorSubject<IOption[]>(this._options);
+		this.options$ = this._options$.asObservable();
+
+		this.formControl.valueChanges
+		.subscribe(val => {
+			this.searchControl.setValue(val);
 		});
-		const value = this.formControl.value;
-		this.setToOption(value);
-		this.filteredOptions = this.formControl.valueChanges
-		.startWith(null)
-		.map(option => option ? this.filterOptions(option) : this._options.slice());
+		const initialValue = this.formControl.value;
+		this.searchControl.setValue(initialValue);
+		this.searchControl.valueChanges
+		.subscribe(val => this.search(val));
+
 	}
-	displayFn(option) { return !!option ? option.name : ''; }
-	filterOptions(name: string) {
-		return this._options.filter(option =>
-			option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
-	}
-	setToOption(value) {
-		if (!!value && !this._options.includes(value) && this._options.map(o => o.id).includes(value.id)) {
-			// replace formValue with the option value with the same id
-			const option = this._options.find(o => o.id === value.id);
-			this.formControl.setValue(option);
-		}
-	}
+	displayFn(option: IOption) { return !!option ? option.name : ''; }
 	focus() {
 		this.to._isFocused = true;
+		this.search();
 	}
 	blur() {
 		this.to._isFocused = false;
+	}
+	search(clue: string = ''): void {
+		if (typeof clue === 'string') {
+			const options = this._options.filter(o => {
+				return o.name.toLowerCase().startsWith(clue.toLowerCase());
+			});
+			this._options$.next(options);
+		}
 	}
 }

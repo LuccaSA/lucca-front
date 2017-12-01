@@ -1,6 +1,6 @@
-<input matInput [matAutocomplete]="auto" [formControl]="formControl" luEmpty class="textfield-input" [formlyAttributes]="field" (focus)="focus()" (blur)="blur()">
+<input matInput [matAutocomplete]="auto" [formControl]="searchControl" luEmpty class="textfield-input" [formlyAttributes]="field" (focus)="focus()" (blur)="blur()">
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-	<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+	<mat-option *ngFor="let option of (options$ | async)" [value]="option">
 		<span>{{ option.name }}</span>
 	</mat-option>
 </mat-autocomplete>
