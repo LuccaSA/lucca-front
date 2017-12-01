@@ -45,8 +45,6 @@ export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent
 	}
 	ngOnInit() {
 	}
-	// @HostListener('click', ['$event'])
-	// @HostListener('mousedown', ['$event'])
 	onMouseDown($e) {
 		$e.preventDefault();
 	}
@@ -56,5 +54,8 @@ export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent
 		.subscribe(r => {
 			this._options$.next(r.data.items);
 		});
+	}
+	selectOption(option: T) {
+		this.itemSelected.emit(option);
 	}
 }

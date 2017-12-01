@@ -3,9 +3,9 @@
 	(keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" [@transformPopover]="'enter'"
 	(mousedown)="onMouseDown($event)">
 		<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
-			<!-- <ng-content></ng-content> -->
-			<!-- <a (click)="debug()">debug</a> -->
-			<div *ngFor="let option of (options$ | async)">{{option.name}}</div>
+			<ul class="api-picker-options">
+				<li *ngFor="let option of (options$ | async)" (click)="selectOption(option)" class="api-picker-option">{{ option.name }}</li>
+			</ul>
 		</div>
 	</div>
 </ng-template>
