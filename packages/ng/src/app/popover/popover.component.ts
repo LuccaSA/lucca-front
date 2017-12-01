@@ -20,11 +20,11 @@ import { transformPopover } from './popover.animations';
 
 import { AnimationEvent } from '@angular/animations';
 
-
+import { standardPopoverTemplate } from './popover.template';
 
 @Component({
 	selector: 'lu-popover',
-	templateUrl: './popover.component.html',
+	template: standardPopoverTemplate,
 	styleUrls: ['./popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,

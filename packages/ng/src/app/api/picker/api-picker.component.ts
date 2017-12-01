@@ -15,14 +15,14 @@ import { IApiItem } from '../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { standardApiPickerTemplate } from './api-picker.template';
 
 /**
  * The component that provides available options from the api with the currently inputed text
  */
 @Component({
 	selector: 'lu-api-picker',
-	// templateUrl: '../../popover/popover.component.html',
-	templateUrl: './api-picker.component.html',
+	template: standardApiPickerTemplate,
 	styleUrls: ['./api-picker.component.scss'],
 	animations: [
 		transformPopover
