@@ -59,7 +59,8 @@ export const LU_FORMLY_CONFIG = {
 		},
 		{
 			name: 'select',
-			component: LuFormlyFieldSelect,
+			// component: LuFormlyFieldSelect,
+			component: LuFormlyFieldAutocomplete,
 			wrappers: ['textfield-layout'],
 		},
 	],
