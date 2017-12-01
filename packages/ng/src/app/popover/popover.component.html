@@ -4,6 +4,7 @@
 	 [@transformPopover]="'enter'">
 		<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
 			<ng-content></ng-content>
+			<ng-container *ngTemplateOutlet="_template"></ng-container>
 		</div>
 	</div>
 </ng-template>

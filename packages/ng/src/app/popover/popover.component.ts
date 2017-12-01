@@ -9,6 +9,7 @@ import {
 	ViewEncapsulation,
 	ElementRef,
 	ChangeDetectionStrategy,
+	HostBinding,
 } from '@angular/core';
 
 import { ESCAPE } from '@angular/cdk/keycodes';
@@ -27,15 +28,13 @@ import { AnimationEvent } from '@angular/animations';
 	styleUrls: ['./popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	host: {
-		'role': 'dialog'
-	},
 	animations: [
 		transformPopover
 	],
 	exportAs: 'LuPopover'
 })
 export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
+	// @HostBinding() private role = 'dialog';
 
 	/** Settings for popover, view setters and getters for more detail */
 	private _position: PopoverPosition = 'below';
@@ -66,6 +65,11 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	/** Emits the current animation state whenever it changes. */
 	_onAnimationStateChange = new EventEmitter<AnimationEvent>();
 
+	protected _template: TemplateRef<any>;
+	/** Template to Use for the popover */
+	@Input()
+	get template(): TemplateRef<any> { return this._template; }
+	set template(value: TemplateRef<any>) { this._template = value; }
 	/** Position of the popover around the trigger */
 	@Input('position')
 	get position() { return this._position; }
