@@ -18,6 +18,7 @@ import {DemoFormlyModule} from './formly/formly.module';
 import {DemoEmptyModule} from './empty/empty.module';
 import { DemoPopoverModule } from './lu-popover/lu-popover.module';
 import { DemoAnimationsModule } from './animations/animations.module';
+import { DemoApiModule } from './api/api.module';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { DemoAnimationsModule } from './animations/animations.module';
 		DemoUserDisplayModule,
 		DemoFormlyModule,
 		DemoEmptyModule,
+		DemoApiModule,
 
 		BrowserModule,
 		BrowserAnimationsModule,

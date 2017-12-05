@@ -1,0 +1,24 @@
+<section class="callout" [ngClass]="{'palette-success': connected$ | async}">
+	<div class="u-textRight" *ngIf="connected$ | async">
+		<span class="label palette-success">You are connected to {{ url$ | async }} as {{ login$ | async }}</span>
+	</div>
+	<div class="u-textRight" *ngIf="!(connected$ | async)">
+		<span class="label">You are not connected</span>
+	</div>
+	<div>
+		To test this component you might need to redirect all xhr requests to one of your local website.
+	</div>
+	<div class="textfield mod-material mod-inline">
+		<input class="textfield-input" [(ngModel)]="url" name="url" luEmpty>
+		<label class="textfield-label" for="url">Url</label>
+	</div>
+	<div class="textfield mod-material mod-inline">
+		<input class="textfield-input" [(ngModel)]="login" name="login" luEmpty>
+		<label class="textfield-label" for="login">login</label>
+	</div>
+	<div class="textfield mod-material mod-inline">
+		<input class="textfield-input" [(ngModel)]="password" name="password" luEmpty type="password">
+		<label class="textfield-label" for="password">password</label>
+	</div>
+	<button class="button" (click)="connect()" [ngClass]="{'is-loading': loading}">Connect</button>
+</section>
