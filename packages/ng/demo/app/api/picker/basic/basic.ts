@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
 	templateUrl: './basic.html',
 })
 export class BasicComponent {
+	api = '/api/v3/users';
+	item = { id: 1, name: 'and' };
 }

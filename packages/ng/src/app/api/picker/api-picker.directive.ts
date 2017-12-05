@@ -8,8 +8,19 @@ import {
 	OnDestroy,
 	Renderer2,
 	ElementRef,
+	ViewContainerRef,
 	HostListener
 } from '@angular/core';
+import {
+	// ConnectedPositionStrategy,
+	// OriginConnectionPosition,
+	Overlay,
+	// OverlayConnectionPosition,
+	OverlayRef,
+	OverlayConfig,
+	// HorizontalConnectionPos,
+	// VerticalConnectionPos
+} from '@angular/cdk/overlay';
 import {
 	NgModel,
 	ControlValueAccessor,
@@ -28,6 +39,8 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/combineLatest';
 
 import { IApiItem, ICoerce } from '../api.model';
+import { LuPopoverTrigger, IPopoverPanel, PopoverTriggerEvent } from '../../popover';
+import { LuApiPickerComponent } from './api-picker.component';
 
 /**
  * Directive to put on a input to allow it to match the text inputed to an item available on an api
@@ -39,12 +52,15 @@ import { IApiItem, ICoerce } from '../api.model';
 		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuApiPickerDirective), multi: true },
 	],
 })
-export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAccessor, OnDestroy, OnInit, Validator {
+export class LuApiPickerDirective<T extends IApiItem>
+extends LuPopoverTrigger
+implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	/**
 	 * the api to query
 	 */
 	@Input() api: string;
-
+	/** the name of the picker linked to this input */
+	@Input('luApiPicker') popover: LuApiPickerComponent<T>;
 	// value stuff
 	protected get _strValue(): string {
 		return this._elementRef.nativeElement.value as string;
@@ -61,6 +77,7 @@ export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAcc
 		// emit change
 		if (!this.same(lastValue, value)) {
 			this._valueChange.emit(value);
+			this._cvaOnChange(value);
 		}
 	}
 	protected _valueChange = new EventEmitter<T|null>();
@@ -72,10 +89,18 @@ export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAcc
 	private onInputSub: Subscription;
 
 	constructor(
-		private _elementRef: ElementRef,
-		private _renderer: Renderer2,
+		protected _overlay: Overlay,
+		protected _elementRef: ElementRef,
+		protected _viewContainerRef: ViewContainerRef,
+		protected _renderer: Renderer2,
 		protected http: HttpClient,
-	) {}
+	) {
+		super(
+			_overlay,
+			_elementRef,
+			_viewContainerRef,
+		);
+	}
 	// From ControlValueAccessor interface
 	writeValue(value: T) {
 		this.value = value;
@@ -94,10 +119,23 @@ export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAcc
 			this.render();
 		}
 	}
-	@HostListener('blur')
-	onBlur() {
+	// @HostListener('blur')
+	// blur() {
+	// 	this._onTouched();
+	// 	this.render();
+	// 	super.onBlur();
+	// }
+	@HostListener('focus')
+	onFocus() {
+		this.openPopover();
+		this.popover.search(this.api, this._strValue);
+	}
+	@HostListener('blur', ['$event'])
+	blur(e) {
 		this._onTouched();
-		this.render();
+		// setTimeout(() => {
+		this.closePopover();
+		// }, 100);
 	}
 	_onTouched = () => {};
 	private _cvaOnChange: (value: T) => void = () => {};
@@ -110,17 +148,26 @@ export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAcc
 	// init/destroy
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
-		const coercionObs = this.onInput.mergeMap(value => this.asyncCoerceApiItem(value));
-		this.onInputSub = Observable.combineLatest(this.onInput, coercionObs)
-		.subscribe(next => {
-			const currentClue = next[0];
-			const coercion = next[1];
-			if (currentClue === coercion.clue) {
-				this._value = coercion.item;
-				this._cvaOnChange(coercion.item);
-				this._valueChange.emit(coercion.item);
-			}
+		// const coercionObs = this.onInput.mergeMap(value => this.asyncCoerceApiItem(value));
+		// this.onInputSub = Observable.combineLatest(this.onInput, coercionObs)
+		// .subscribe(next => {
+		// 	const currentClue = next[0];
+		// 	const coercion = next[1];
+		// 	if (currentClue === coercion.clue) {
+		// 		this._value = coercion.item;
+		// 		this._cvaOnChange(coercion.item);
+		// 		this._valueChange.emit(coercion.item);
+		// 	}
+		// });
+		this.popover.itemSelected
+		.subscribe(item => {
+			this.value = item;
+			this.closePopover();
 		});
+		this.onInputSub = this.onInput
+		.subscribe(clue => {
+			this.popover.search(this.api, clue);
+		})
 	}
 	ngOnDestroy() {
 		this._valueChange.complete();
@@ -132,6 +179,19 @@ export class LuApiPickerDirective<T extends IApiItem> implements ControlValueAcc
 	validate(c: AbstractControl): ValidationErrors | null {
 		return this._validator ? this._validator(c) : null;
 	}
+
+	openPopover() {
+		super.openPopover();
+		this._subscribeToBackdrop();
+	}
+	protected _getOverlayConfig(): OverlayConfig {
+		const config = super._getOverlayConfig();
+		config.hasBackdrop = true;
+		config.backdropClass = 'cdk-overlay-transparent-backdrop';
+		return config;
+	}
+
+
 	private _validatorOnChange = () => {};
 	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
 		if (!this._strValue) {
