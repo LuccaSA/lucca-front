@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes, Route } from '@angular/router';
 import { DemoEmptyComponent } from './empty.component';
 
 export const emptyRoutes: Routes = [
-	{ path: 'empty', component: DemoEmptyComponent },
+	{ path: 'empty', label: 'Empty', component: DemoEmptyComponent } as Route,
 ];

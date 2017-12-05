@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../../../src/app/user';
 
 @Component({
-	selector: 'demo-lu-popover-basic',
-	templateUrl: './basic.component.html',
+	selector: 'demo-popover-basic',
+	templateUrl: './basic.html',
 	styles: []
 })
-export class BasicComponent implements OnInit {
+export class DemoPopoverBasicComponent implements OnInit {
 	user: IUser = {
 		firstName: 'Anaïs',
 		lastName: 'Lemoustier',

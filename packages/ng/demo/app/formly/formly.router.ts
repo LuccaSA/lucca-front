@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes, Route } from '@angular/router';
 import { DemoFormlyComponent } from './formly.component';
 
 export const formlyRoutes: Routes = [
-	{ path: 'formly', component: DemoFormlyComponent },
+	{ path: 'formly', label: 'Formly', component: DemoFormlyComponent } as Route,
 ];

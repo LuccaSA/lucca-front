@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LuUserTileModule } from './user-tile';
-import { LuUserDisplayPipe } from './user-display.pipe';
+import { LuUserTileModule } from './tile';
+import { LuUserPictureModule } from './picture';
+import { LuUserDisplayModule } from './display';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		LuUserTileModule,
+		LuUserPictureModule,
+		LuUserDisplayModule,
 	],
 	declarations: [
-		LuUserDisplayPipe,
 	],
 	exports: [
-		LuUserDisplayPipe,
+		LuUserPictureModule,
+		LuUserDisplayModule,
+		LuUserTileModule,
 	]
 })
 export class LuUserModule { }

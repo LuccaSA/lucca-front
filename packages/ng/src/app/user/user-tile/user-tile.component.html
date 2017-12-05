@@ -1,8 +1,0 @@
-<div class="picture" [ngStyle]=" this.hasUserPicture() ? this.getBackgroundImageStyle() : this.getDefaultColorStyle()">
-	<span *ngIf="!hasUserPicture()">{{pictureTextPlaceholder}}</span>
-</div>
-<div class="user-info">
-	<span class="user-tile-label">{{role ? role : user.jobTitle}}</span>
-	<h5 class="user-tile-title">{{displayName}}</h5>
-	<span class="user-tile-footnote"><ng-content></ng-content></span>
-</div>
