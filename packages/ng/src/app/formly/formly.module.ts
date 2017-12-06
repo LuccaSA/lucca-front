@@ -5,6 +5,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { MatAutocompleteModule, MatInputModule, MatOptionModule, MatSelectModule, MatDatepickerModule } from '@angular/material';
 import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
 import { LuEmptyModule } from '../empty/empty.module';
+import { LuApiPickerModule } from '../api/picker/api-picker.module';
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,8 @@ import { LuEmptyModule } from '../empty/empty.module';
 		MatOptionModule,
 		MatSelectModule,
 		MatDatepickerModule,
+
+		LuApiPickerModule,
 
 		LuEmptyModule,
 
