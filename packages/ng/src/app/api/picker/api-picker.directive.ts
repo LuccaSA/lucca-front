@@ -42,6 +42,10 @@ import { IApiItem, ICoerce } from '../api.model';
 import { LuPopoverTrigger, IPopoverPanel, PopoverTriggerEvent } from '../../popover';
 import { LuApiPickerComponent } from './api-picker.component';
 
+const ENTER_KEY = 'Enter';
+const UP_KEY = 'ArrowUp';
+const DOWN_KEY = 'ArrowDown';
+
 /**
  * Directive to put on a input to allow it to match the text inputed to an item available on an api
  */
@@ -113,12 +117,18 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	}
 
 	// host listening
-	@HostListener('document:keydown.enter', ['$event'])
-	onEnterKeydown() {
-		if (!!this.value) {
-			this.render();
+	@HostListener('document:keydown', ['$event'])
+	onKeydown($event) {
+		switch ($event.key) {
+			case ENTER_KEY:
+			return this.popover.onEnterKeydown();
+			case DOWN_KEY:
+			return this.popover.onDownKeydown();
+			case UP_KEY:
+			return this.popover.onUpKeydown();
 		}
 	}
+	
 	// @HostListener('blur')
 	// blur() {
 	// 	this._onTouched();
