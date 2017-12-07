@@ -3,8 +3,8 @@
 	<label class="textfield-label" for="api">api</label>
 </div>
 <div class="textfield mod-material">
-	<input [luApiPicker]="picker" [(ngModel)]="item" class="textfield-input" name="item" luEmpty [api]="api">
+	<input [luApiPicker]="picker" [(ngModel)]="item" class="textfield-input" name="item" luEmpty>
 	<label class="textfield-label" for="item">item</label>
-	<lu-api-picker #picker></lu-api-picker>
+	<lu-api-picker #picker [api]="api"></lu-api-picker>
 </div>
 <code class="code mod-block">{{ item | json }}</code>
