@@ -3,6 +3,7 @@
 ## In Dev
 ### Breaking changes
 - `textfield` default look is now classic. Use `mod-material` to get the material default look.
+- `navSide` supports mobile view but needs a `.navSide-item.mod-mobileToggle` that can toggle a `.is-open` state on `.navSide` to work.
 ### Enhancements
 - `textfield-suffix` has better support accross all `textfield` mods.
 

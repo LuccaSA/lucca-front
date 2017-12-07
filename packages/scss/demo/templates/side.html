@@ -11,8 +11,14 @@
 	</head>
 	<body>
 		<main class="main">
-			<aside class="navSide mod-compact">
+			<aside class="navSide mod-compact" id="navSide">
 				<nav class="navSide-scrollWrapper">
+					<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
+						<a href="#" class="navSide-item-link">
+							<span class="navSide-item-link-title">Menu</span>
+							<i class="lucca-icon navSide-item-arrow">arrow_south_thin</i>
+						</a>
+					</div>
 					<div class="navSide-item-placeholder mod-inverted"></div>
 					<div class="navSide-item">
 						<a href="#" class="navSide-item-link is-active">
@@ -40,7 +46,13 @@
 <code class="code mod-block">&lt;main class="main"&gt;
 	&lt;aside class=&quot;navSide mod-compact&quot;&gt;
 		&lt;nav class=&quot;navSide-scrollWrapper&quot;&gt;
-		 &lt;div class=&quot;navSide-item-placeholder mod-inverted&quot;&gt;&lt;/div&gt;
+			&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
+					&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
+					&lt;i class=&quot;lucca-icon navSide-item-arrow&quot;&gt;arrow_south_thin&lt;/i&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;navSide-item-placeholder mod-inverted&quot;&gt;&lt;/div&gt;
 			&lt;div class=&quot;navSide-item&quot;&gt;
 				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
 					&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
@@ -60,5 +72,6 @@
 				</div>
 			</section>
 		</main>
+		<script src="https://www.w3schools.com/lib/w3.js"></script>
 	</body>
 </html>
