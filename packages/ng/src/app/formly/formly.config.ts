@@ -5,6 +5,7 @@ import { LuFormlyFieldDate } from './types/date';
 import { LuFormlyFieldTextarea } from './types/textarea';
 import { LuFormlyFieldAutocomplete } from './types/autocomplete';
 import { LuFormlyFieldSelect } from './types/select';
+import { LuFormlyFieldApi } from './types/api';
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
 import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
@@ -24,6 +25,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyFieldTextarea,
 	LuFormlyFieldAutocomplete,
 	LuFormlyFieldSelect,
+	LuFormlyFieldApi,
 
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
@@ -61,6 +63,11 @@ export const LU_FORMLY_CONFIG = {
 			name: 'select',
 			// component: LuFormlyFieldSelect,
 			component: LuFormlyFieldAutocomplete,
+			wrappers: ['textfield-layout'],
+		},
+		{
+			name: 'api',
+			component: LuFormlyFieldApi,
 			wrappers: ['textfield-layout'],
 		},
 	],

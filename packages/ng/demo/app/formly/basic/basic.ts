@@ -82,6 +82,15 @@ export class BasicComponent {
 				]
 			},
 		},
+		{
+			key: 'department',
+			type: 'api',
+			templateOptions: {
+				label: 'department - api',
+				placeholder: 'pings /api/v3/departments',
+				api: '/api/v3/departments',
+			},
+		},
 	];
 
 	user = {};

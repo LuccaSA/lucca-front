@@ -18,6 +18,10 @@ export class TemplateIcon {
 				field.templateOptions.icon = 'calendar';
 				return 'icon';
 			}
+			if (field && field.type === 'api') {
+				field.templateOptions.icon = 'search';
+				return 'icon';
+			}
 			if (field && field.templateOptions && field.templateOptions.icon) {
 				return 'icon';
 			}
