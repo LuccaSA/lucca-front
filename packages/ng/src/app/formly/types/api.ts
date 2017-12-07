@@ -9,6 +9,9 @@ export class LuFormlyFieldApi extends FieldType {
 	get api() {
 		return this.to.api || '';
 	}
+	get filter() {
+		return this.to.filter || '';
+	}
 	focus() {
 		this.to._isFocused = true;
 	}
