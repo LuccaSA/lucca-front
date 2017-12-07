@@ -32,11 +32,11 @@ import { standardApiPickerTemplate } from './api-picker.template';
 export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent implements OnInit, OnDestroy {
 	triggerEvent = 'none' as PopoverTriggerEvent;
 
-	private _options$ = new BehaviorSubject<T[]>([]);
+	protected _options$ = new BehaviorSubject<T[]>([]);
 	options$ = this._options$.asObservable();
-	private highlightIndex = 0;
-	private optionsLength = 0;
-	private _highlightIndex$ = new BehaviorSubject<number>(this.highlightIndex);
+	protected highlightIndex = 0;
+	protected optionsLength = 0;
+	protected _highlightIndex$ = new BehaviorSubject<number>(this.highlightIndex);
 	highlightIndex$ = this._highlightIndex$.asObservable();
 
 	highlightedOption: T;
@@ -44,6 +44,10 @@ export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent
 
 	/** emits when the user selects an element */
 	@Output() itemSelected  = new EventEmitter<T>();
+	/** the api to query */
+	@Input() api: string;
+	/** filter to apply while querying the api */
+	@Input() filter: string;
 
 	constructor(
 		protected _elementRef: ElementRef,
@@ -70,14 +74,13 @@ export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent
 		$e.preventDefault();
 	}
 
-	search(api: string, clue: string = '', filter: string = ''): void {
-		this._http.get<{ data: { items: T[] } }>(`${api}?name=like,${clue}&paging=0,10&fields=id,name`)
-		.subscribe(r => {
+	search(clue: string = ''): void {
+		this.getOptions(clue)
+		.subscribe(options => {
 			this.highlightIndex = 0;
 			this._highlightIndex$.next(this.highlightIndex);
-			const options = r.data.items;
 			this.optionsLength = options.length;
-			this._options$.next(r.data.items);
+			this._options$.next(options);
 		});
 	}
 	selectOption(option: T) {
@@ -95,5 +98,15 @@ export class LuApiPickerComponent<T extends IApiItem> extends LuPopoverComponent
 		this.highlightIndex--;
 		this.highlightIndex = Math.max(this.highlightIndex, 0);
 		this._highlightIndex$.next(this.highlightIndex);
+	}
+
+	protected getOptions(clue: string = ''): Observable<T[]> {
+		const params = [`name=like,${clue}`, 'paging=0,10', 'fields=id,name'];
+		if (this.filter) {
+			params.push(this.filter);
+		}
+		const url = `${this.api}?${params.join('&')}`;
+		return this._http.get<{ data: { items: T[] } }>(url)
+		.map(r => r.data.items);
 	}
 }
