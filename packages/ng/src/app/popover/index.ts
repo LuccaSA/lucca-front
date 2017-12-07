@@ -9,4 +9,4 @@ export {
 	PopoverPosition,
 	PopoverTriggerEvent,
 } from './popover.model';
-export { transformPopover } from './popover.animations'
+export { transformPopover } from './popover.animations';

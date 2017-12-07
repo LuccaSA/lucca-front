@@ -59,10 +59,7 @@ const DOWN_KEY = 'ArrowDown';
 export class LuApiPickerDirective<T extends IApiItem>
 extends LuPopoverTrigger
 implements ControlValueAccessor, OnDestroy, OnInit, Validator {
-	/**
-	 * the api to query
-	 */
-	@Input() api: string;
+
 	/** the name of the picker linked to this input */
 	@Input('luApiPicker') popover: LuApiPickerComponent<T>;
 	// value stuff
@@ -138,7 +135,7 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 	@HostListener('focus')
 	onFocus() {
 		this.openPopover();
-		this.popover.search(this.api, this._strValue);
+		this.popover.search(this._strValue);
 	}
 	@HostListener('blur', ['$event'])
 	blur(e) {
@@ -176,7 +173,7 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 		});
 		this.onInputSub = this.onInput
 		.subscribe(clue => {
-			this.popover.search(this.api, clue);
+			this.popover.search(clue);
 		})
 	}
 	ngOnDestroy() {
@@ -235,18 +232,18 @@ implements ControlValueAccessor, OnDestroy, OnInit, Validator {
 		}
 		return oldItem.id === newItem.id;
 	}
-	protected asyncCoerceApiItem(value: string | null): Observable<ICoerce<T>> {
-		const stringVal = value as string;
-		if (!stringVal || stringVal.length < 2) {
-			return Observable.of({ clue: value, item: null });
-		}
-		return this.http.get<{ data: { items: T[] } }>(`${this.api}?name=like,${stringVal}&paging=0,2&fields=id,name`)
-		.map(r => {
-			const matchingItems = r.data.items;
-			if (!!matchingItems && matchingItems.length === 1) {
-				return { clue: value, item: matchingItems[0] };
-			}
-			return { clue: value, item: null };
-		});
-	}
+	// protected asyncCoerceApiItem(value: string | null): Observable<ICoerce<T>> {
+	// 	const stringVal = value as string;
+	// 	if (!stringVal || stringVal.length < 2) {
+	// 		return Observable.of({ clue: value, item: null });
+	// 	}
+	// 	return this.http.get<{ data: { items: T[] } }>(`${this.api}?name=like,${stringVal}&paging=0,2&fields=id,name`)
+	// 	.map(r => {
+	// 		const matchingItems = r.data.items;
+	// 		if (!!matchingItems && matchingItems.length === 1) {
+	// 			return { clue: value, item: matchingItems[0] };
+	// 		}
+	// 		return { clue: value, item: null };
+	// 	});
+	// }
 }
