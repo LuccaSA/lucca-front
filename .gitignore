@@ -6,3 +6,9 @@ npm-debug.log
 
 #lerna
 lerna-debug.log
+
+#build stuff
+dist
+
+#Sass
+.sass-cache
