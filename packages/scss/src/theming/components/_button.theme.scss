@@ -30,6 +30,9 @@ $button: (
 		color: black,
 	),
 
+	radio: _theme("palettes.primary"),
+	checkbox: _theme("palettes.primary"),
+
 	// sizing
 	sizing: (
 		default-size: _theme("sizes.standard"),
