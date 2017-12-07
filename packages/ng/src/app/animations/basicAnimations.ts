@@ -10,14 +10,14 @@ export const fadingAnimations = (timing: string): AnimationMetadata[] => [
 	transition('void => *', [
 		style({ opacity: '0' }),
 		animate(
-			'.25s ease-out',
+			timing,
 			style({ opacity: '1' })
 		)
 	]),
 	transition('* => void', [
 		style({ opacity: '1' }),
 		animate(
-			'.25s ease-out',
+			timing,
 			style({ opacity: '0' })
 		)
 	])
