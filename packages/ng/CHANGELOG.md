@@ -4,6 +4,32 @@
 ### New features
 - `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
 
+## v0.1.5
+
+This version offer new components and directives
+
+### New features
+- `luAppiPicker` directive and `lu-api-picker` component add
+
+### Fixs
+- Severals fix to components & css
+
+### Updated dependencies
+- [rxjs](https://github.com/ReactiveX/rxjs) - update to version 5.5.2
+- [zone.js](https://github.com/angular/zone.js/) - retrograde to version 0.8.14
+
+### Updated devDependencies
+- [@types/jasmine](https://github.com/jasmine/jasmine) - update to version 2.5.53
+- [codelyzer](https://github.com/mgechev/codelyzer) - update to version ~3.2.0
+- [jasmine-core](https://github.com/jasmine/jasmine) - update to version ~2.6.2
+- [jasmine-spec-reporter](https://github.com/jasmine/jasmine) - update to version ~4.1.0
+- [karma](https://github.com/karma-runner/karma) - update to version ~1.7.0
+- [karma-chrome-launcher](https://github.com/karma-runner/karma) - update to version ~2.1.1
+- [karma-coverage-istanbul-reporter](https://github.com/karma-runner/karma) - update to version ^1.2.1
+- [ts-node](https://github.com/TypeStrong/ts-node) - update to version ~3.2.0
+- [tslint](https://github.com/palantir/tslint) - update to version ~0.7.0
+- [typescript](https://github.com/Microsoft/TypeScript) - update to version ~2.4.2
+
 ## v0.1.2
 This version is the first minor version of `@lucca-front/ng`. It brings this package up to speed with Angular 5 and Angular Material 5
 ### Breaking changes
