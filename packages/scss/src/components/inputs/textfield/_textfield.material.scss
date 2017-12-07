@@ -139,4 +139,12 @@
 			@include textfieldMaterialError();
 		}
 	}
+
+	// Needed when textfield label is not next to the textfield-input
+	&.is-focused {
+		.textfield-label {
+			font-size: _theme("sizes.small.font-size");
+			top: 0;
+		}
+	}
 }
