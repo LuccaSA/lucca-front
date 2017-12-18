@@ -106,21 +106,33 @@
 	<h3>Radio buttons</h3>
 	<p>You can use button group as radio form:</p>
 	<div class="button-group">
-		<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton1" checked>
-		<label class="button" for="radioButton1">Radio button</label>
-		<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton2">
-		<label class="button" for="radioButton2">Radio button</label>
-		<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton3">
-		<label class="button" for="radioButton3">Radio button</label>
-		<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton4">
-		<label class="button" for="radioButton4">Radio button</label>
+		<div class="button-group-item">
+			<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton1" checked>
+			<label class="button" for="radioButton1">Radio button</label>
+		</div>
+		<div class="button-group-item">
+			<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton2">
+			<label class="button" for="radioButton2">Radio button</label>
+		</div>
+		<div class="button-group-item">
+			<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton3">
+			<label class="button" for="radioButton3">Radio button</label>
+		</div>
+		<div class="button-group-item">
+			<input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton4">
+			<label class="button" for="radioButton4">Radio button</label>
+		</div>
 	</div>
 
 <code class="code mod-block">&lt;div class="button-group"&gt;
-	&lt;input class="button-group-radio" type="radio" name="<b>radioButtonID</b>" id="<b>radioButton1</b>" checked&gt;
-	&lt;label class="button" for="<b>radioButton1</b>"&gt;Radio button&lt;/label&gt;
-	&lt;input class="button-group-radio" type="radio" name="<b>radioButtonID</b>" id="<b>radioButton2</b>"&gt;
-	&lt;label class="button" for="<b>radioButton2</b>"&gt;Radio button&lt;/label&gt;
+	&lt;div class="button-group-item"&gt;
+		&lt;input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton1" checked&gt;
+		&lt;label class="button" for="radioButton1"&gt;Radio button&lt;/label&gt;
+	&lt;/div&gt;
+	&lt;div class="button-group-item"&gt;
+		&lt;input class="button-group-radio" type="radio" name="radioButtonID" id="radioButton2"&gt;
+		&lt;label class="button" for="radioButton2"&gt;Radio button&lt;/label&gt;
+	&lt;/div&gt;
 &lt;/div&gt;</code>
 </section>
 
@@ -128,19 +140,31 @@
 	<h3>Checkbox buttons</h3>
 	<p>You can use button group as checkbox form:</p>
 	<div class="button-group">
-		<input class="button-group-checkbox" type="checkbox" name="checkboxButtonID" id="checkboxButton1" checked>
-		<label class="button" for="checkboxButton1">Checkbox button</label>
-		<input class="button-group-checkbox" type="checkbox" name="checkboxButtonID" id="checkboxButton2">
-		<label class="button" for="checkboxButton2">Checkbox button</label>
-		<input class="button-group-checkbox" type="checkbox" name="checkboxButtonID" id="checkboxButton3">
-		<label class="button" for="checkboxButton3">Checkbox button</label>
-		<input class="button-group-checkbox" type="checkbox" name="checkboxButtonID" id="checkboxButton4">
-		<label class="button" for="checkboxButton4">Checkbox button</label>
+		<div class="button-group-item">
+			<input class="button-group-checkbox" type="checkbox" id="checkboxButton1" checked>
+			<label class="button" for="checkboxButton1">Checkbox button</label>
+		</div>
+		<div class="button-group-item">
+			<input class="button-group-checkbox" type="checkbox" id="checkboxButton2">
+			<label class="button" for="checkboxButton2">Checkbox button</label>
+		</div>
+		<div class="button-group-item">
+			<input class="button-group-checkbox" type="checkbox" id="checkboxButton3">
+			<label class="button" for="checkboxButton3">Checkbox button</label>
+		</div>
+		<div class="button-group-item">
+			<input class="button-group-checkbox" type="checkbox" id="checkboxButton4">
+			<label class="button" for="checkboxButton4">Checkbox button</label>
+		</div>
 	</div>
 	<code class="code mod-block">&lt;div class="button-group"&gt;
-	&lt;input class="button-group-checkbox" type="checkbox" name="<b>checkboxButtonID</b>" id="<b>checkboxButton1</b>" checked&gt;
-	&lt;label class="button" for="<b>checkboxButton1</b>"&gt;Checkbox button&lt;/label&gt;
-	&lt;input class="button-group-checkbox" type="checkbox" name="<b>checkboxButtonID</b>" id="<b>checkboxButton2</b>"&gt;
-	&lt;label class="button" for="<b>checkboxButton2</b>"&gt;Checkbox button&lt;/label&gt;
-&lt;/div&gt;</code>
+		&lt;div class="button-group-item"&gt;
+			&lt;input class="button-group-checkbox" type="checkbox" id="checkboxButton1" checked&gt;
+			&lt;label class="button" for="checkboxButton1"&gt;Checkbox button&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="button-group-item"&gt;
+			&lt;input class="button-group-checkbox" type="checkbox" id="checkboxButton2"&gt;
+			&lt;label class="button" for="checkboxButton2"&gt;Checkbox button&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;</code>
 </section>
