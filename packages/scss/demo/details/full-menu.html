@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<main class="main">
-			<aside class="navSide" id="menuSide">
+			<aside class="navSide" id="navSide">
 				<nav class="navSide-scrollWrapper">
 					<div class="navSide-item" id="item1">
 						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item1', 'is-open');">
@@ -72,7 +72,7 @@
 <code class="code mod-block">&lt;aside class=&quot;navSide<span id="modCompact" class='hidden'> mod-compact</span>&quot;&gt;
 	&lt;nav class=&quot;navSide-scrollWrapper&quot;&gt;
 		&lt;div class=&quot;navSide-item&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
 				&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
 				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section #1&lt;/span&gt;
 				&lt;i class=&quot;lucca-icon navSide-item-arrow&quot;&gt;arrow_east_thin&lt;/i&gt;
@@ -212,10 +212,10 @@
 			function toggleCompact(checkbox) {
 				if(checkbox.checked)
 				{
-					w3.addClass('#menuSide', 'mod-compact');
+					w3.addClass('#navSide', 'mod-compact');
 					w3.removeClass('#modCompact', 'hidden');
 				} else {
-					w3.removeClass('#menuSide', 'mod-compact');
+					w3.removeClass('#navSide', 'mod-compact');
 					w3.addClass('#modCompact', 'hidden');
 				}
 			}

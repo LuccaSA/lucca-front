@@ -11,31 +11,33 @@
 	</head>
 	<body>
 		<main class="main">
-			<aside class="navSide mod-compact" id="navSide">
+			<aside class="navSide mod-compact">
 				<nav class="navSide-scrollWrapper">
-					<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
-						<a href="#" class="navSide-item-link">
-							<span class="navSide-item-link-title">Menu</span>
-							<i class="lucca-icon navSide-item-arrow">arrow_south_thin</i>
+					<div class="navSide-item-placeholder"></div>
+					<div class="navSide-item is-active">
+						<a href="#" class="navSide-item-link is-active" onclick="setActive(event)">
+							<i class="lucca-icon">tiles_nine</i>
+							<span class="navSide-item-link-title">Section 1</span>
 						</a>
 					</div>
 					<div class="navSide-item">
-						<a href="#" class="navSide-item-link is-active">
-							Entry
+						<a href="#" class="navSide-item-link" onclick="setActive(event)">
+							<i class="lucca-icon">users</i>
+							<span class="navSide-item-link-title">Section 2</span>
+						</a>
+					</div>
+					<div class="navSide-item">
+						<a href="#" class="navSide-item-link" onclick="setActive(event)">
+							<i class="lucca-icon">settings</i>
+							<span class="navSide-item-link-title">Section 3</span>
+						</a>
+					</div>
+					<div class="navSide-item">
+						<a href="#" class="navSide-item-link" onclick="setActive(event)">
+							<i class="lucca-icon">sliders</i>
+							<span class="navSide-item-link-title">Section 4</span>
 							<span class="navSide-item-alert">9</span>
 						</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link">Entry</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link">Entry</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link">Entry</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link">Entry</a>
 					</div>
 				</nav>
 			</aside>
@@ -43,31 +45,32 @@
 				<section class="section">
 						<h1>Side with sections</h1>
 <code class="code mod-block">&lt;main class="main"&gt;
-	&lt;aside class=&quot;navSide mod-compact&quot;&gt;
-		&lt;nav class=&quot;navSide-scrollWrapper&quot;&gt;
-			&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
-				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
-					&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
-					&lt;i class=&quot;lucca-icon navSide-item-arrow&quot;&gt;arrow_south_thin&lt;/i&gt;
-				&lt;/a&gt;
-			&lt;/div&gt;
-			&lt;div class=&quot;navSide-item&quot;&gt;
-				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
-					&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
-					&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section #1&lt;/span&gt;
-				&lt;/a&gt;
-			&lt;/div&gt;
-			[...]
-		&lt;/nav&gt;
-	&lt;/aside&gt;
-	&lt;section class="main-content"&gt;
-		&lt;section class="section"&gt;
+  &lt;aside class="navSide mod-compact"&gt;
+    &lt;nav class="navSide-scrollWrapper"&gt;
+      &lt;div class="navSide-item-placeholder"&gt;&lt;/div&gt;
+      &lt;div class="navSide-item is-active"&gt;
+        &lt;a href="#" class="navSide-item-link is-active"&gt;
+          &lt;i class="lucca-icon"&gt;tiles_nine&lt;/i&gt;
+          &lt;span class="navSide-item-link-title"&gt;Section 1&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="navSide-item"&gt;
+        &lt;a href="#" class="navSide-item-link"&gt;
+          &lt;i class="lucca-icon"&gt;users&lt;/i&gt;
+          &lt;span class="navSide-item-link-title"&gt;Section 2&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
 			...
-		&lt;/section&gt;
-		&lt;section class="section mod-grey"&gt;
-				...
-		&lt;/section&gt;
-	&lt;/section&gt;
+    &lt;/nav&gt;
+  &lt;/aside&gt;
+  &lt;section class="main-content"&gt;
+    &lt;section class="section"&gt;
+      ...
+    &lt;/section&gt;
+    &lt;section class="section mod-grey"&gt;
+      ...
+    &lt;/section&gt;
+  &lt;/section&gt;
 &lt;/main&gt;</code>
 				</section>
 				<section class="section mod-grey">
@@ -79,5 +82,13 @@
 			</section>
 		</main>
 		<script src="https://www.w3schools.com/lib/w3.js"></script>
+		<script>
+			function setActive(event) {
+				w3.removeClass('.navSide-item', 'is-active');
+				w3.removeClass('.navSide-item-link', 'is-active');
+				var element = event.currentTarget;
+				element.classList.add('is-active');
+			}
+		</script>
 	</body>
 </html>
