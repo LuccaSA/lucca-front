@@ -294,6 +294,9 @@
 		display: block;
 		margin: 0 0 0 -1px;
 		position: relative;
+	}
+
+	> .button {
 
 		&:first-child {
 			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
@@ -311,12 +314,6 @@
 
 .button-group-item {
 
-	.button {
-		&:first-child, &:last-child {
-			border-radius: 0;
-		}
-	}
-
 	&:first-child {
 		.button {
 			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
@@ -330,22 +327,12 @@
 	}
 }
 
-.button-group-radio {
+.button-group-input {
 	display: none;
 
 	&:checked + .button {
-		background: _component("button.radio.color");
-		color: _component("button.radio.text");
-		z-index: 1;
-	}
-}
-
-.button-group-checkbox {
-	display: none;
-
-	&:checked + .button {
-		background: _component("button.checkbox.color");
-		color: _component("button.checkbox.text");
+		background: _component("button.checked.color");
+		color: _component("button.checked.text");
 		z-index: 1;
 	}
 }
