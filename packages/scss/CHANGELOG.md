@@ -4,6 +4,8 @@
 ### Breaking changes
 - `textfield` default look is now classic. Use `mod-material` to get the material default look.
 - `navSide` supports mobile view but needs a `.navSide-item.mod-mobileToggle` that can toggle a `.is-open` state on `.navSide` to work.
+### Adding
+- `Radio/Checkbox buttons` supports radio & checkbox form with button group layout.
 ### Enhancements
 - `textfield-suffix` has better support accross all `textfield` mods.
 
@@ -11,7 +13,7 @@
 
 ### Breaking changes
 - `input` & `textarea` are now merged in a single component : `textfield`
-- `main` layout structure is simplified : `main-content-spacing` has been removed and margins are now placed on `container`. `mod-sections` & `mod-header` doesn't exist anymore. 
+- `main` layout structure is simplified : `main-content-spacing` has been removed and margins are now placed on `container`. `mod-sections` & `mod-header` doesn't exist anymore.
 
 ### Enhancements
 - `navSide` now supports placeholders

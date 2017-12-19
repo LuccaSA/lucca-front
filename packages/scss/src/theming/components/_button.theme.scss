@@ -30,6 +30,8 @@ $button: (
 		color: black,
 	),
 
+	checked: _theme("palettes.primary"),
+
 	// sizing
 	sizing: (
 		default-size: _theme("sizes.standard"),
