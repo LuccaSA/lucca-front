@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 export interface IOption {
 	id: number;
 	name: string;
@@ -48,5 +49,8 @@ export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
 			});
 			this._options$.next(options);
 		}
+	}
+	select($event: MatAutocompleteSelectedEvent) {
+		this.formControl.setValue($event.option.value);
 	}
 }
