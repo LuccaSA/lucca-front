@@ -1,4 +1,4 @@
-import { customPopoverTemplate } from '../../popover/popover.template';
+import { customPopoverTemplate } from '../../popover';
 const contentPlaceholder = '######## This is where the option goes #######';
 const pickerTemplate = `
 <ul class="api-picker-options">

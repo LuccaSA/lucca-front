@@ -10,3 +10,4 @@ export {
 	PopoverTriggerEvent,
 } from './popover.model';
 export { transformPopover } from './popover.animations';
+export { customPopoverTemplate, standardPopoverTemplate } from './popover.template';
