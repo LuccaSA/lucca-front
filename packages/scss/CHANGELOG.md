@@ -1,6 +1,8 @@
 # Changelog
 
 ## In Dev
+### New features
+- `navSide` can now have a `navSide-bottomSection` to add navSide items fixed to the bottom of the screen.
 ### Breaking changes
 - `textfield` default look is now classic. Use `mod-material` to get the material default look.
 - `navSide` supports mobile view but needs a `.navSide-item.mod-mobileToggle` that can toggle a `.is-open` state on `.navSide` to work.

@@ -18,6 +18,16 @@ $navSide: (
 		alert-text: _theme("palettes.secondary.text")
 	),
 
+	"bottom-section-palette": (
+		bg-color: darken(_theme("palettes.primary.color"), 23%),
+		text: white,
+		selected-bg:  _theme("palettes.primary.color"),
+		selected-text: _theme("palettes.primary.text"),
+		alert-color: _theme("palettes.secondary.color"),
+		alert-text: _theme("palettes.secondary.text")
+	),
+
+	"bottom-section-height": 3.5rem,
 	"offset-top": 0,
 	"padding-top": 0,
 	"main-font-size": _theme("sizes.standard.font-size"),
@@ -33,6 +43,7 @@ $navSide: (
 
 	"compact": (
 		"width": 8.1rem,
+		"bottom-section-height": 5rem,
 	),
 
 	"placeholder": (

@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<main class="main">
-			<aside class="navSide" id="navSide">	
+			<aside class="navSide mod-withBottomSection" id="navSide">	
 				<nav class="navSide-scrollWrapper">
 					<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
 						<a href="#" class="navSide-item-link">
@@ -65,6 +65,14 @@
 						</nav>
 					</div>
 				</nav>
+				<div class="navSide-bottomSection">
+					<div class="navSide-item">
+						<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
+							<i class="lucca-icon">analytics</i>
+							<span class="navSide-item-link-title">BOTTOM LINK</span>
+						</a>
+					</div>
+				</div>
 			</aside>
 			<section class="main-content">
 				<div class="container">
@@ -102,6 +110,14 @@
 		&lt;/div&gt;
 		[...]
 	&lt;/nav&gt;
+	&lt;div class=&quot;navSide-bottomSection&quot;&gt;
+		&lt;div class=&quot;navSide-item&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
+				&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
+				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Bottom Section&lt;/span&gt;
+			&lt;/a&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
 &lt;/main&gt;
 </code>
 				</div>
