@@ -2,6 +2,8 @@
 
 ## In dev
 
+## v0.1.6
+
 ### New icon
 - `face`
 

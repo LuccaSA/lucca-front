@@ -1,8 +1,13 @@
 # Changelog
 
 ## In Dev
+
+## v0.1.6
 ### New features
 - `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
+
+### Fixs
+- `ng-formly` forgot setvalue in formly autocomplete
 
 ## v0.1.5
 

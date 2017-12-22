@@ -1,6 +1,8 @@
 # Changelog
 
 ## In Dev
+
+## v0.1.6
 ### New features
 - `navSide` can now have a `navSide-bottomSection` to add navSide items fixed to the bottom of the screen.
 ### Breaking changes
