@@ -352,6 +352,8 @@
 
 	.navSide-item.mod-mobileToggle {
 		display: block;
+		height: _component("navSide.mobile.toggle-height");
+		cursor: pointer;
 	}
 
 	.navSide-bottomSection {
