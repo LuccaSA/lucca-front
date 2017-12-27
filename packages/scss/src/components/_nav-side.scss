@@ -265,6 +265,7 @@
 		.navSide-item-link {
 			color: _component("navSide.compact-palette.text");
 			flex-direction: column;
+			font-size: _component("navSide.compact.font-size");
 			justify-content: center;
 			position: relative;
 
