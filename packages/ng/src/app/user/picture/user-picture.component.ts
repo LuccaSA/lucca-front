@@ -21,7 +21,7 @@ export class LuUserPictureComponent {
 		this.initials = this.displayPipe.transform(user, 'LF');
 		this.hasPicture = !!user.picture && !!user.picture.href;
 		if (this.hasPicture) {
-			this.style = { 'background-image': `url('${this._user.picture.href}&width=100')` };
+			this.style = { 'background-image': `url('${this._user.picture.href}')` };
 		} else {
 			const hsl = this.getNameHue();
 			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)`};
