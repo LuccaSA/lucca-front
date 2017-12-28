@@ -50,7 +50,9 @@
 	@mixin buttonColoring($palette) {
 		background: _get($palette, "color");
 		color: _get($palette, "text");
-
+		&:hover, &:focus {
+			background: lighten(_get($palette, "color"), 5%);
+		}
 		&:active {
 			background: darken(_get($palette, "color"), 5%);
 		}
