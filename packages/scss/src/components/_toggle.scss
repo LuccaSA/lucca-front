@@ -1,0 +1,42 @@
+.toggle-title {
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 0 .2rem;
+
+	&:hover {
+		color: darken(_color("text.default"), 15%);
+	}
+
+	&::before {
+		@include makeIcon("chevron_east");
+		font-size: _theme("sizes.smaller.font-size");
+		font-weight: 400;
+		margin-right: .25rem;
+		transition: all _theme("commons.animations.durations.fast") ease;
+	}
+}
+
+.toggle-content {
+	@extend %base_animated_element;
+	display: none;
+	animation-name: fadeIn;
+	animation-fill-mode: none;
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.toggle {
+	&.is-open {
+		.toggle-title {
+			&::before {
+				transform: rotate(90deg);
+			}
+		}
+
+		.toggle-content {
+			display: block;
+		}
+	}
+}
