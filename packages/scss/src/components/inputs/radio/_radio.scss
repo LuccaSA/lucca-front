@@ -17,7 +17,8 @@
 .radio-label {
 	cursor: pointer;
 	display: inline-block;
-	padding: 0 0 0 1.7rem;
+	line-height: _component("radio.label.line-height");
+	padding: _component("radio.label.padding");
 	transition: color 150ms ease;
 
 	&::before {
@@ -25,12 +26,12 @@
 		box-shadow: inset 0 0 0 2px #999999;
 		content: "";
 		display: block;
-		height: 1rem;
+		height: _component("radio.input.size");
 		left: 0;
 		position: absolute;
-		top: .3rem;
+		top: _component("radio.input.top");
 		transition: all 100ms ease;
-		width: 1rem;
+		width: _component("radio.input.size");
 	}
 
 	&::after {
@@ -38,13 +39,13 @@
 		color: transparent;
 		content: "";
 		display: block;
-		height: 1rem;
+		height: _component("radio.input.size");
 		left: 0;
 		position: absolute;
-		top: .3rem;
+		top: _component("radio.input.top");
 		transform: scale(0);
 		transition: all 100ms ease;
-		width: 1rem;
+		width: _component("radio.input.size");
 	}
 
 	&:hover {
