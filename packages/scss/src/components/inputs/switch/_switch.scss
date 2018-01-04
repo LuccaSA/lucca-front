@@ -13,8 +13,8 @@
 	color: _color("text.light");
 	cursor: pointer;
 	display: inline-block;
-	line-height: 1.25;
-	padding: 0 0 0 2.7rem;
+	line-height: _component("switch.label.line-height");
+	padding: _component("switch.label.padding");
 	transition: color 150ms ease;
 
 	&::before {
@@ -22,12 +22,12 @@
 		border-radius: 10px;
 		content: "";
 		display: block;
-		height: 16px;
+		height: _component("switch.input.size");
 		left: 0;
 		position: absolute;
-		top: 4px;
+		top: _component("switch.input.handler.size") - _component("switch.input.size");
 		transition: all 150ms ease;
-		width: 32px;
+		width: _component("switch.input.size") * 2;
 	}
 
 	&::after {
@@ -36,12 +36,12 @@
 		box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
 		content: "";
 		display: block;
-		height: 20px;
-		left: -2px;
+		height: _component("switch.input.handler.size");
+		left: - ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
 		position: absolute;
-		top: 2px;
+		top: ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
 		transition: all 150ms ease;
-		width: 20px;
+		width: _component("switch.input.handler.size");
 	}
 }
 
