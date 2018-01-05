@@ -29,7 +29,7 @@
 
 .toggle {
 	&.is-open {
-		.toggle-title {
+		> .toggle-title {
 			&::before {
 				transform: rotate(90deg);
 			}
