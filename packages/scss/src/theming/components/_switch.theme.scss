@@ -3,5 +3,16 @@ $switch: (
   default-palette: (
     color:  _color("primary"),
   ),
+  label: (
+    line-height: 1.3,
+    padding: 0 0 0 2.7rem
+  ),
+  input: (
+    size: 1rem,
+
+    handler: (
+      size: 1.25rem
+    )
+  )
 );
 $theme: _set($theme, "components.switch", $switch);

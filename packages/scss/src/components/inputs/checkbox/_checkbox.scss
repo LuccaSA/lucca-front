@@ -17,20 +17,21 @@
 .checkbox-label {
 	cursor: pointer;
 	display: inline-block;
-	padding: 0 0 0 1.7rem;
+	padding: _component("checkbox.label.padding");
+	line-height: _component("checkbox.label.line-height");
 	transition: color 150ms ease;
 
 	&::before {
-		border-radius: 3px;
+		border-radius: _component("checkbox.input.border-radius");
 		box-shadow: inset 0 0 0 2px #999999;
 		content: "";
 		display: block;
-		height: .95rem;
+		height: _component("checkbox.input.size");
 		left: 0;
 		position: absolute;
-		top: .3rem;
+		top: _component("checkbox.input.top");
 		transition: all 100ms ease;
-		width: .95rem;
+		width: _component("checkbox.input.size");
 	}
 
 	&::after {
@@ -38,14 +39,14 @@
 		font-size: .8rem;
 		@include makeIcon("tick");
 		left: 0;
-		line-height: .95rem;
+		line-height: _component("checkbox.input.size");
 		padding-top: .05rem;
 		position: absolute;
 		text-align: center;
-		top: .3rem;
+		top: _component("checkbox.input.top");
 		transform: scale(0);
 		transition: all 100ms ease;
-		width: .95rem;
+		width: _component("checkbox.input.size");
 	}
 
 	&:hover {
