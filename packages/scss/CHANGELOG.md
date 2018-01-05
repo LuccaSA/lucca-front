@@ -8,7 +8,11 @@
 ### Fixes
 
 ## v0.1.7
+### Adding
+- `toggle` component
+- `emptystate` component
 ### Enhancements
+- `table` row can now be set has a filter row with .mod-filters
 - `navSide` compact mode width & fonts are smaller
 ### Adding
 - `toggle` component
@@ -20,6 +24,10 @@
 - `navSide` is now a block element
 - `menu` has now a line-height
 - `textfield` inline validation
+### Fixes
+- `table` head has now a correct font weight
+- `navSide` is now a block element
+- `menu` has now a line-height
 
 ## v0.1.6
 ### New features
