@@ -8,7 +8,7 @@ import { LuPopoverTarget } from './popover.target';
 @NgModule({
 	imports: [
 		CommonModule,
-		OverlayModule
+		OverlayModule,
 	],
 	declarations: [
 		LuPopoverComponent,
