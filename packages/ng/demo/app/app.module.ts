@@ -17,6 +17,7 @@ import {DemoEmptyModule} from './empty/empty.module';
 import { DemoPopoverModule } from './popover/popover.module';
 import { DemoAnimationsModule } from './animations/animations.module';
 import { DemoApiModule } from './api/api.module';
+import { DemoSelectsModule } from './selects/selects.module';
 
 import { DemoUserModule } from './user/user.module';
 
@@ -36,6 +37,7 @@ import { DemoUserModule } from './user/user.module';
 		DemoFormlyModule,
 		DemoEmptyModule,
 		DemoApiModule,
+		DemoSelectsModule,
 
 		BrowserModule,
 		BrowserAnimationsModule,

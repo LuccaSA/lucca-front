@@ -1,0 +1,19 @@
+<h1>With Options</h1>
+<div class="textfield mod-material mod-select" [class.mod-remove]="_canRemove">
+	<div [luSelect]="selectRefOptions"
+		[(ngModel)]="itemOptions"
+		class="textfield-input"
+		name="itemOptions"
+		luEmpty
+		clearable="true"
+		(canremove)="canRemove($event)"></div>
+	<label class="textfield-label" for="itemOptions">my label</label>
+	<lu-select-popover #selectRefOptions>
+		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+	</lu-select-popover>
+	<button class="actionIcon" (click)="clear()">
+		<i class="lucca-icon">cross_thin</i>
+	</button>
+</div>
+<code class="code mod-block">{{ itemOptions | json }}</code>
+
