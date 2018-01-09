@@ -35,6 +35,11 @@ import { LuPopoverTrigger } from '../popover';
 import { LuSelectPopover } from './select.popover.component';
 import { LuSelectOption, LuSelectOptionRendering } from './select.option.component';
 
+const END = 'End';
+const HOME = 'Home';
+const ESCAPE = 'Escape';
+const BACKSPACE = 'Backspace';
+const DELETE = 'Delete';
 const ENTER_KEY = 'Enter';
 const UP_KEY = 'ArrowUp';
 const DOWN_KEY = 'ArrowDown';
@@ -117,6 +122,23 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 	@HostListener('keydown', ['$event'])
 	onKeydown($event) {
 		switch ($event.key) {
+			case ESCAPE:
+				if (this.popoverOpen) {
+					this.closePopover();
+				}
+				break;
+			case DELETE:
+			case BACKSPACE:
+				if (this.clearable) {
+					this.value = null;
+				}
+				break;
+			case HOME:
+			$event.preventDefault();
+			return this.popoverOpen ? this.popover.onHomeKeydown() : this.popover.onHomeKeydownValidate();
+			case END:
+			$event.preventDefault();
+			return this.popoverOpen ? this.popover.onEndKeydown() : this.popover.onEndKeydownValidate();
 			case ENTER_KEY:
 			return this.popoverOpen ? this.popover.onEnterKeydown() : this.openPopover();
 			case DOWN_KEY:

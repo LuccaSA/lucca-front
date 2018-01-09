@@ -201,26 +201,48 @@ export class LuSelectPopover<T> extends LuPopoverComponent implements AfterConte
 	}
 	onDownKeydown() {
 		this.highlightIndex++;
-		this.highlightIndex = Math.min(this.highlightIndex, this.optionsLength - 1);
-		this._highlightIndex$.next(this.highlightIndex);
+		this._applyHighlightIndex();
 	}
 	onUpKeydown() {
 		this.highlightIndex--;
+		this._applyHighlightIndex();
+	}
+	onHomeKeydown() {
+		this.highlightIndex = 0;
+		this._applyHighlightIndex();
+	}
+	onEndKeydown() {
+		this.highlightIndex = this.optionsLength - 1;
+		this._applyHighlightIndex();
+	}
+	private _applyHighlightIndex() {
+		this.highlightIndex = Math.min(this.highlightIndex, this.optionsLength - 1);
 		this.highlightIndex = Math.max(this.highlightIndex, 0);
 		this._highlightIndex$.next(this.highlightIndex);
 	}
 
 	onDownKeydownValidate() {
 		this.highlightIndex++;
-		this.highlightIndex = Math.min(this.highlightIndex, this.optionsLength - 1);
-		this._highlightIndex$.next(this.highlightIndex);
-		this.selectHighlightOption();
+		this._validateHighlightIndex();
 	}
 
 	onUpKeydownValidate() {
 		this.highlightIndex--;
-		this.highlightIndex = Math.max(this.highlightIndex, 0);
-		this._highlightIndex$.next(this.highlightIndex);
+		this._validateHighlightIndex();
+	}
+
+	onHomeKeydownValidate() {
+		this.highlightIndex = 0;
+		this._validateHighlightIndex();
+	}
+
+	onEndKeydownValidate() {
+		this.highlightIndex = this.optionsLength - 1;
+		this._validateHighlightIndex();
+	}
+
+	private _validateHighlightIndex() {
+		this._applyHighlightIndex();
 		this.selectHighlightOption();
 	}
 

@@ -53,7 +53,7 @@ import {LuSelectOption} from './select.option.component';
 		<lu-select-popover #selectRef (itemSelected)="optionSelected($event)">
 			<ng-content></ng-content>
 		</lu-select-popover>
-		<button class="actionIcon" (click)="clear()">
+		<button class="actionIcon" (click)="clear()" tabIndex="-1">
 			<i class="lucca-icon">cross_thin</i>
 		</button>
 	</div>
@@ -146,7 +146,7 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 		this.value = null;
 	}
 	optionSelected(option: LuSelectOption<T>) {
-		this.value = option ? option.value : undefined;
+		this.value = option ? option.value : null;
 	}
 
 	// Utilities
