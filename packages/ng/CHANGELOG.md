@@ -12,9 +12,13 @@
 ### Updated devDependencies
 - `ng-formly` fix display of error messages
 
+### New featues
+- `Select` Add the new select of lucca-front
+
 ## v0.1.6
 ### New features
 - `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
+- `selectPicker`
 
 ### Fixes
 - `ng-formly` forgot setvalue in formly autocomplete

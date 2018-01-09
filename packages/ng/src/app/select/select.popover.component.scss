@@ -1,0 +1,30 @@
+@import "../popover/popover.component";
+
+.lu-popover-content {
+	padding: 0;
+}
+
+
+lu-select-popover {
+	min-width: 100%;
+}
+
+.select-options {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/*
+.select-option {
+	cursor: pointer;
+	padding: .5rem 1rem;
+	transition: background 50ms ease;
+
+	&:hover {
+		background: _theme("commons.background.dark");
+	}
+
+	&.is-focus {
+		background: _theme("commons.background.dark");
+	}
+}*/
