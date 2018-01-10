@@ -1,6 +1,10 @@
 <h1>Component With Options</h1>
 
-<lu-select [(ngModel)]="itemSelect" name="itemOptions" class="text-field-input" placeholder="my label" clearable="true">
+<lu-select [(ngModel)]="itemSelect"
+	class="text-field-input"
+	mod="mod-material"
+	placeholder="my label"
+	clearable="true">
 	<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
 </lu-select>
 

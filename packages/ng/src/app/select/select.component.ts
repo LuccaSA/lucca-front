@@ -1,10 +1,11 @@
 import {
 	AfterContentInit,
 	Component,
-	OnInit,
 	Input,
 	EventEmitter,
 	forwardRef,
+	ElementRef,
+	OnInit,
 	OnDestroy,
 	QueryList,
 	ContentChildren,
@@ -42,7 +43,7 @@ import {LuSelectOption} from './select.option.component';
 	selector: 'lu-select',
 	encapsulation: ViewEncapsulation.Emulated,
 	template: `
-	<div class="textfield mod-material mod-select" [class.mod-remove]="_canRemove">
+	<div class="textfield mod-select {{mod}}" [class.mod-remove]="_canRemove">
 		<div [luSelect]="selectRef"
 			class="textfield-input"
 			name="linkLabel"
@@ -91,6 +92,7 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 
 	@Input() placeholder: String;
 	@Input() clearable = false;
+	@Input() mod: String;
 	private _cvaOnChange: (value: T) => void = () => {};
 
 
@@ -104,7 +106,7 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 	}
 	_onTouched = () => {};
 
-	constructor(
+	constructor(private element: ElementRef
 	) {
 	}
 	ngOnInit() {
