@@ -19,22 +19,3 @@
 		}
 	}
 }
-
-/*
-
-	&.mod-remove {
-		.textfield-input {
-			padding-right: 2 * 1.5rem;
-		}
-
-		&::after {
-			bottom: .15rem;
-			color: _color("text.light");
-			@include makeIcon("cross_thin");
-			font-size: .75rem;
-			position: absolute;
-			right: _component("textfield.input.padding-horizontal");
-		}
-	}
-}
-*/
