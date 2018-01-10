@@ -1,5 +1,6 @@
 @mixin textfieldError() {
 	box-shadow: 0 0 0 1px _color("error");
+	background-color: rgba( _color("error"), .1 );
 
 	~ .textfield-label {
 		color: _color("error");
@@ -19,6 +20,18 @@
 
 	&:focus ~ .textfield-label {
 		color: _color("error");
+	}
+}
+
+@mixin textfieldMaterialSuccess() {
+	box-shadow: 0 2px 0 0 _color("success");
+
+	~ .textfield-label {
+		color: _color("success");
+	}
+
+	&:focus ~ .textfield-label {
+		color: _color("success");
 	}
 }
 

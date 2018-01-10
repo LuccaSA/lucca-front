@@ -120,8 +120,30 @@
 	// STATES
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-	.textfield-input {
+	// Inline validation
+	&.is-valid {
+		&::before {
+			content: "";
+		}
 
+		.textfield-input {
+			@include textfieldMaterialSuccess();
+			padding-right: inherit;
+		}
+	}
+
+	&.is-invalid {
+		&::before {
+			content: "";
+		}
+
+		.textfield-input {
+			@include textfieldMaterialError();
+			padding-right: inherit;
+		}
+	}
+
+	.textfield-input {
 		&.is-filled {
 			@include textfieldMaterialFilled();
 		}

@@ -247,6 +247,49 @@
 			position: absolute;
 		}
 	}
+
+	// Inline validation
+	&.is-valid {
+		&::before {
+			@extend %base_animated_element;
+			@include makeIcon("tick_bold");
+			animation-name: scaleIn;
+			animation-duration: _theme("commons.animations.durations.fast");
+			border-radius: 50%;
+			bottom: .75rem;
+			color: _color("success");
+			height: 1rem;
+			position: absolute;
+			right: .5rem;
+			z-index: 1;
+		}
+
+		.textfield-input {
+			padding-right: 2rem;
+		}
+	}
+
+	&.is-invalid {
+		&::before {
+			@extend %base_animated_element;
+			@include makeIcon("cross");
+			animation-name: scaleIn;
+			animation-duration: _theme("commons.animations.durations.fast");
+			border-radius: 50%;
+			bottom: .75rem;
+			color: _color("error");
+			height: 1rem;
+			position: absolute;
+			right: .5rem;
+			z-index: 1;
+		}
+
+		.textfield-input {
+			background-color: rgba(_color("error"), .1);
+			box-shadow: 0 0 0 1px _color("error");
+			padding-right: 2rem;
+		}
+	}
 }
 
 .textfield-input {
