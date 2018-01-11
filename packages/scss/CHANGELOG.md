@@ -1,6 +1,14 @@
 # Changelog
 
 ## In Dev
+### New features
+### Breaking changes
+### Adding
+### Enhancements
+### Fixes
+
+## v0.1.7
+### Enhancements
 - `navSide` compact mode width & fonts are smaller
 
 ## v0.1.6

@@ -1,12 +1,17 @@
 # Changelog
 
 ## In Dev
+### New features
+### Fixes
+### Breaking changes
+### Updated dependencies
+### Updated devDependencies
 
 ## v0.1.6
 ### New features
 - `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
 
-### Fixs
+### Fixes
 - `ng-formly` forgot setvalue in formly autocomplete
 
 ## v0.1.5
@@ -16,7 +21,7 @@ This version offer new components and directives
 ### New features
 - `luAppiPicker` directive and `lu-api-picker` component add
 
-### Fixs
+### Fixes
 - Severals fix to components & css
 
 ### Updated dependencies
