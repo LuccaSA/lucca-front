@@ -36,7 +36,8 @@ function isAngularLifecycleHook(methodName) {
 }
 
 function isPrivate(member) {
-  return (member.flags & ts.NodeFlags.Private) !== 0;
+	return (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Private) !== 0
+	|| (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Protected) !== 0;
 }
 
 function isPrivateOrInternal(member) {
