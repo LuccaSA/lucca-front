@@ -24,7 +24,6 @@ import {
 	NG_VALUE_ACCESSOR,
 	NG_VALIDATORS,
 	Validator,
-	Validators,
 	ValidatorFn,
 	ValidationErrors,
 	AbstractControl
@@ -33,15 +32,23 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { LuPopoverTrigger } from '../popover';
 import { LuSelectPopover } from './select.popover.component';
-import { LuSelectOption, LuSelectOptionRendering } from './select.option.component';
+import { LuSelectOption } from './select.option.component';
 
+/** KeyCode for End Key */
 const END = 'End';
+/** KeyCode for Home Key */
 const HOME = 'Home';
+/** KeyCode for Escape Key */
 const ESCAPE = 'Escape';
+/** KeyCode for Backspace Key */
 const BACKSPACE = 'Backspace';
+/** KeyCode for Delete Key */
 const DELETE = 'Delete';
+/** KeyCode for Enter Key */
 const ENTER_KEY = 'Enter';
+/** KeyCode for ArrowUp Key */
 const UP_KEY = 'ArrowUp';
+/** KeyCode for ArrowDown Key */
 const DOWN_KEY = 'ArrowDown';
 
 /**
@@ -58,31 +65,31 @@ export class LuSelectDirective<T>
 extends LuPopoverTrigger
 implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 
-	/** the name of the picker linked to this input */
+	/** the name of the popover linked to this input */
 	@Input('luSelect') popover: LuSelectPopover<T>;
 
-	@Output() canremove = new EventEmitter<boolean>();
+	/** true if the directive allow the remove of the data (false by default).
+	 * If set to false, the first value of options will be select if nothing is select */
 	@Input() clearable = false;
-	@Input() rendering: LuSelectOptionRendering<T>;
 
-	// value stuff
-	protected get _strValue(): string {
-		return this._elementRef.nativeElement.innerHTML as string;
-	}
+	/** the event trigger when the directive allow to clear the the value (true or false) */
+	@Output() canremove = new EventEmitter<boolean>();
 
-	protected _selectOption: LuSelectOption<T> | null;
-	protected _value: T | null;
+	/** The current value selected */
 	get value(): T | null {
 		return this._value;
 	}
+	/** Set the value, an event (canremove) will be sent if the directive is clearable */
 	set value(value:  T | null) {
 		const lastValue = this._value;
 		this._value = value;
 		// emit change
-		if (!this.same(lastValue, value)) {
-			this._valueChange.emit(value);
+		if (!this._same(lastValue, value)) {
 			this._cvaOnChange(value);
-			this.emitClearable();
+			if (this.clearable) {
+				this._emitClearable();
+			}
+			// Transfer the information to popover
 			this.popover.selectOption(value);
 			this.popover.find(value).subscribe(selectOption => {
 				this._selectOption = selectOption;
@@ -91,8 +98,14 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 			});
 		}
 	}
-	protected _valueChange = new EventEmitter<T|null>();
+	// value stuff
+	protected get _strValue(): string {
+		return this._elementRef.nativeElement.innerHTML as string;
+	}
 
+	// inner references
+	protected _selectOption: LuSelectOption<T> | null;
+	protected _value: T | null;
 	protected _validator: ValidatorFn | null;
 
 	constructor(
@@ -111,9 +124,11 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 	writeValue(value: T) {
 		this.value = value;
 	}
+	// From ControlValueAccessor interface
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
+	// From ControlValueAccessor interface
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
@@ -135,18 +150,18 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 				break;
 			case HOME:
 			$event.preventDefault();
-			return this.popoverOpen ? this.popover.onHomeKeydown() : this.popover.onHomeKeydownValidate();
+			return this.popover.onHomeKeydown(this.popoverOpen);
 			case END:
 			$event.preventDefault();
-			return this.popoverOpen ? this.popover.onEndKeydown() : this.popover.onEndKeydownValidate();
+			return this.popover.onEndKeydown(this.popoverOpen);
 			case ENTER_KEY:
 			return this.popoverOpen ? this.popover.onEnterKeydown() : this.openPopover();
 			case DOWN_KEY:
 			$event.preventDefault();
-			return this.popoverOpen ? this.popover.onDownKeydown() : this.popover.onDownKeydownValidate();
+			return this.popover.onDownKeydown(this.popoverOpen);
 			case UP_KEY:
 			$event.preventDefault();
-			return this.popoverOpen ? this.popover.onUpKeydown() : this.popover.onUpKeydownValidate();
+			return this.popover.onUpKeydown(this.popoverOpen);
 		}
 	}
 
@@ -164,13 +179,13 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 		}
 	}
 	_onTouched = () => {};
+
+	// From ControlValueAccessor interface
 	private _cvaOnChange: (value: T) => void = () => {};
 
 
-	// init/destroy
+	// init/destroy/changes
 	ngOnInit() {
-		this._validator = Validators.compose([this._itemValidator]);
-
 		this.popover.itemSelected
 		.subscribe(item => {
 			this.value = item ? item.value : undefined;
@@ -180,17 +195,13 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
 	}
 	ngOnDestroy() {
-		this._valueChange.complete();
+		// this._valueChange.complete();
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['clearable']) {
-			this.emitClearable();
+			this._emitClearable();
 		}
-	}
-
-	emitClearable() {
-		this.canremove.emit(this.clearable && !!this.value);
 	}
 
 	// validators
@@ -198,6 +209,25 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 		return this._validator ? this._validator(c) : null;
 	}
 
+	// For Validators interface
+	private _validatorOnChange = () => {};
+
+	// render/display
+	protected render(value = this._selectOption) {
+		this._elementRef.nativeElement.innerHTML = this.display(value);
+	}
+	protected display(value: LuSelectOption<T> | null): string {
+		if (!value) {
+			return '';
+		}
+		return value.viewValue;
+	}
+
+	// Emit canremove event
+	private _emitClearable() {
+		this.canremove.emit(this.clearable && !!this.value);
+	}
+	/** Open the popover linked to the directive */
 	openPopover() {
 		super.openPopover();
 		this._subscribeToBackdrop();
@@ -211,29 +241,8 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 		return config;
 	}
 
-
-	private _validatorOnChange = () => {};
-	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
-		if (!this._strValue) {
-			return null;
-		}
-		if (!!this.value) {
-			return null;
-		}
-		return {'tpApi': {'text': `0 or several items match '${this._elementRef.nativeElement.value}'`}};
-	}
-
-	// render/display
-	protected render(value = this._selectOption) {
-		this._elementRef.nativeElement.innerHTML = this.display(value);
-	}
-	protected display(value: LuSelectOption<T> | null): string {
-		if (!value) {
-			return '';
-		}
-		return value.viewValue;
-	}
-	protected same(oldItem: T, newItem: T) {
+	/** detect via JSON.stringify if both value are equals */
+	protected _same(oldItem: T, newItem: T) {
 		if (oldItem === newItem) {
 			return true;
 		}
