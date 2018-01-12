@@ -50,7 +50,7 @@ import {LuSelectOption} from './select.option.component';
 			<ng-content></ng-content>
 		</lu-select-popover>
 		<button class="actionIcon" (click)="_clear()" tabIndex="-1">
-			<i class="lucca-icon">cross_thin</i>
+			<i class="lucca-icon">cross</i>
 		</button>
 	</div>
 	`,

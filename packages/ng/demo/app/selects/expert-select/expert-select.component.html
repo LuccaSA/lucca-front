@@ -1,5 +1,5 @@
 <h1>With Options</h1>
-<div class="textfield mod-material mod-select" [class.mod-remove]="_canRemove">
+<div class="textfield mod-select" [class.mod-remove]="_canRemove">
 	<div [luSelect]="selectRefOptions"
 		[(ngModel)]="itemOptions"
 		class="textfield-input"
@@ -12,8 +12,7 @@
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
 	</lu-select-popover>
 	<button class="actionIcon" (click)="clear()">
-		<i class="lucca-icon">cross_thin</i>
+		<i class="lucca-icon">cross</i>
 	</button>
 </div>
 <code class="code mod-block">{{ itemOptions | json }}</code>
-
