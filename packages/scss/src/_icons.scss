@@ -8,7 +8,7 @@ $font-path: _theme("icons.font-path");
 
 	// Sizing mixin
 	@mixin iconSizing($size) {
-		font-size: _get($size, "font-size");
+		font-size: _get($size, "font-size") * 1.25;
 	}
 
 	// all sizes
