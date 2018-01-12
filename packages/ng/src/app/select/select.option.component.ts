@@ -17,7 +17,7 @@ import { transformPopover } from '../popover';
 	selector: 'lu-select-option',
 	template: `<li
 			class="lu-select-option"
-			(click)="selectOption()"
+			(click)="_selectOption()"
 			[ngClass]="{'is-focus': focused}">
 			<ng-content></ng-content>
 	</li>`,
