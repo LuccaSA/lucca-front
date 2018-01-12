@@ -5,12 +5,25 @@
 	.actionIcon {
 		position: absolute;
 		font-size: .75rem;
-		bottom: .45rem;
-		right: 2 * _component("textfield.input.padding-horizontal");
+		bottom: .5rem;
+		right: 3 * _component("textfield.input.padding-horizontal");
 		padding: 0;
 		width: 1rem;
 		height: 1rem;
 		display: none;
+	}
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.textfield {
+	&.mod-material {
+		.actionIcon {
+			bottom: .45rem;
+			right: 2 * _component("textfield.input.padding-horizontal");
+		}
 	}
 
 	&.mod-remove {

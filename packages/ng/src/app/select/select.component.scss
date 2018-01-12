@@ -6,7 +6,7 @@
 		position: absolute;
 		font-size: .75rem;
 		bottom: .45rem;
-		right: 2 * _component("textfield.input.padding-horizontal");
+		right: 2.75 * _component("textfield.input.padding-horizontal");
 		padding: 0;
 		width: 1rem;
 		height: 1rem;
@@ -15,10 +15,16 @@
 }
 
 
-// STATES
+// MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
+	&.mod-material {
+		.actionIcon {
+			right: 2 * _component("textfield.input.padding-horizontal");
+		}
+	}
+
 	&.mod-remove {
 		.actionIcon {
 			display: block;
