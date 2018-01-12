@@ -5,8 +5,8 @@
 	.actionIcon {
 		position: absolute;
 		font-size: .75rem;
-		bottom: .5rem;
-		right: 3 * _component("textfield.input.padding-horizontal");
+		bottom: .45rem;
+		right: 2.75 * _component("textfield.input.padding-horizontal");
 		padding: 0;
 		width: 1rem;
 		height: 1rem;
@@ -14,21 +14,39 @@
 	}
 }
 
+.textfield-input {
+  overflow: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
-	&.mod-material {
+
+
+	&.mod-remove {
+		.textfield-input {
+			padding-right: 4.5 * _component("textfield.input.padding-horizontal");
+		}
+
 		.actionIcon {
-			bottom: .45rem;
-			right: 2 * _component("textfield.input.padding-horizontal");
+			display: block;
 		}
 	}
 
-	&.mod-remove {
+	&.mod-material {
 		.actionIcon {
-			display: block;
+			right: 2 * _component("textfield.input.padding-horizontal");
+		}
+
+		&.mod-remove {
+			.textfield-input {
+				padding-right: 4 * _component("textfield.input.padding-horizontal");
+			}
 		}
 	}
 }

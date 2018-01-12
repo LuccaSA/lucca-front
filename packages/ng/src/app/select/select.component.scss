@@ -14,20 +14,39 @@
 	}
 }
 
+.textfield-input {
+  overflow: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
+
+
+	&.mod-remove {
+		.textfield-input {
+			padding-right: 4.5 * _component("textfield.input.padding-horizontal");
+		}
+
+		.actionIcon {
+			display: block;
+		}
+	}
+
 	&.mod-material {
 		.actionIcon {
 			right: 2 * _component("textfield.input.padding-horizontal");
 		}
-	}
 
-	&.mod-remove {
-		.actionIcon {
-			display: block;
+		&.mod-remove {
+			.textfield-input {
+				padding-right: 4 * _component("textfield.input.padding-horizontal");
+			}
 		}
 	}
 }
