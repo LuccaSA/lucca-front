@@ -1,5 +1,5 @@
 import { LuUserDisplayPipe } from './user-display.pipe';
-import { IUser } from './user.model';
+import { IUser } from '../user.model';
 
 describe('UserNamePipe', () => {
 	let user: IUser;

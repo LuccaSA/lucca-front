@@ -21,7 +21,7 @@
     "prestart": "gulp generatedoc",
     "start": "ng serve -a=demo",
     "build": "gulp build",
-    "test": "ng test -a=src",
+    "test": "ng test -a=src -sr",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build",
