@@ -15,6 +15,9 @@
 ### New featues
 - `Select` Add the new select of lucca-front
 
+### Updated devDependencies
+- [karma-chrome-launcher](https://github.com/karma-runner/karma) - update to version ~2.2.0
+
 ## v0.1.6
 ### New features
 - `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
