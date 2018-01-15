@@ -8,7 +8,6 @@ import {
 	ViewEncapsulation,
 	ElementRef,
 } from '@angular/core';
-import { transformPopover } from '../popover';
 
 /**
  * The component that provides available options for lu-select
@@ -24,7 +23,6 @@ import { transformPopover } from '../popover';
 	styleUrls: ['./select.option.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	animations: [
-		transformPopover,
 	],
 })
 export class LuSelectOption<T> implements OnInit, OnDestroy {
