@@ -1,14 +1,9 @@
 import { async, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {LuSelectOption, LuSelectOptionSelectionChange} from './select.option.component';
-
-
-import {
-	Component,
-} from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
-	selector: 'test-wrapper-lu-select-option',
 	template: `<lu-select-option>
 		<span>Hello Test</span>
 	</lu-select-option>`,
