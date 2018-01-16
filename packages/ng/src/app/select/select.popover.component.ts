@@ -18,6 +18,8 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {map} from 'rxjs/operators/map';
 import 'rxjs/operators/mergeMap';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
 import {filter} from 'rxjs/operators/filter';
 import {find} from 'rxjs/operators/find';
 import {take} from 'rxjs/operators/take';
@@ -43,8 +45,6 @@ import {LuSelectOption, LuSelectOptionSelectionChange} from './select.option.com
 })
 export class LuSelectPopover<T> extends LuPopoverComponent implements AfterContentInit, OnInit, OnDestroy {
 
-	/** Store the options objects */
-	protected _originalOptions: Array<T> = [];
 	/** Observable of options */
 	protected _options$ = new BehaviorSubject<T[]>([]);
 	/** Inner reference of cursor in the list of options */
@@ -63,15 +63,6 @@ export class LuSelectPopover<T> extends LuPopoverComponent implements AfterConte
 	private _highlightedOption: T;
 	/** Observable for highlight mecanism */
 	private _highlightedOptionSub: Subscription;
-
-	/** List of value of the options */
-	get options(): Array<T> {return this._originalOptions; }
-	/** Set the options value */
-	set options(value: Array<T>) {
-		this._originalOptions = value;
-		this._optionsLength = value ? value.length : 0;
-		this._options$.next(this.options);
-	}
 
 	/** emits when the user selects an element */
 	@Output() itemSelected  = new EventEmitter<LuSelectOption<T>>();
@@ -103,7 +94,7 @@ export class LuSelectPopover<T> extends LuPopoverComponent implements AfterConte
 
 	// LifeCycle methods
 	ngOnInit() {
-		this._options$.next(this.options);
+		this._options$.next([]);
 		this._highlightedOptionSub = Observable.combineLatest(
 			this._options$,
 			this._highlightIndex$,
@@ -138,7 +129,11 @@ export class LuSelectPopover<T> extends LuPopoverComponent implements AfterConte
 		});
 		this._luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
 			this.luOptions$.next(this._luOptions.toArray());
-			this._resetOptions();
+			// Defer setting the value in order to avoid the "Expression
+			// has changed after it was checked" errors from Angular.
+			Promise.resolve().then(() => {
+				this._resetOptions();
+			});
 		});
 	}
 
