@@ -6,6 +6,7 @@
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies
+- `ng-formly` fix display of error messages
 
 ## v0.1.6
 ### New features
