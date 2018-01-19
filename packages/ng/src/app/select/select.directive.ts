@@ -7,6 +7,7 @@ import {
 	EventEmitter,
 	forwardRef,
 	OnDestroy,
+	AfterViewInit,
 	Renderer2,
 	ElementRef,
 	SimpleChanges,
@@ -63,7 +64,7 @@ const DOWN_KEY = 'ArrowDown';
 })
 export class LuSelectDirective<T>
 extends LuPopoverTrigger
-implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
+implements ControlValueAccessor, OnDestroy, OnChanges, OnInit, AfterViewInit, Validator {
 
 	/** the name of the popover linked to this input */
 	@Input('luSelect') popover: LuSelectPopover<T>;
@@ -81,11 +82,15 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 	}
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
 	set value(value:  T | null) {
+		let valueTemp = value;
+		if (valueTemp === null && !this.clearable && this.popover && this.popover.luOptions$.value.length > 0) {
+			valueTemp = this.popover.luOptions$.value[0].value;
+		}
 		const lastValue = this._value;
-		this._value = value;
+		this._value = valueTemp;
 		// emit change
-		if (!this._same(lastValue, value)) {
-			this._cvaOnChange(value);
+		if (!this._same(lastValue, valueTemp)) {
+			this._cvaOnChange(valueTemp);
 			if (this.clearable) {
 				this._emitClearable();
 			}
@@ -194,6 +199,21 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 
 		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
 	}
+
+	ngAfterViewInit() {
+		Promise.resolve().then(() => {
+			if (!this.popover) {
+				throw new Error('No overlay was linked to the directive');
+			}
+
+			if (!this.clearable && !this.value) {
+				if (this.popover.luOptions$.value.length === 0) {
+					throw new Error('Empty list for the select ! As it is not clearable, the list cannot be empty !');
+				}
+				this.value = this.popover.luOptions$.value[0].value;
+			}
+		});
+	}
 	ngOnDestroy() {
 		// this._valueChange.complete();
 	}
@@ -228,7 +248,7 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit,  Validator {
 		this.canremove.emit(this.clearable && !!this.value);
 	}
 	/** Open the popover linked to the directive */
-	openPopover() {
+	openPopover(): void {
 		super.openPopover();
 		this._subscribeToBackdrop();
 	}
