@@ -75,12 +75,16 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 		return this._value;
 	}
 	set value(value:  T | null) {
+		let valueTemp = value;
+		if (valueTemp === null && !this.clearable && this.luOptions && this.luOptions.first) {
+			valueTemp = this.luOptions.first.value;
+		}
 		const lastValue = this._value;
-		this._value = value;
+		this._value = valueTemp;
 		// render
-		if (!this._same(lastValue, value)) {
-			this._valueChange.emit(value);
-			this._cvaOnChange(value);
+		if (!this._same(lastValue, valueTemp)) {
+			this._valueChange.emit(valueTemp);
+			this._cvaOnChange(valueTemp);
 			this._field.value = value;
 		}
 
@@ -131,6 +135,14 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 			console.log(option);
 			if (this._popover.luOptions$) {
 				this._popover.luOptions$.next(this.luOptions.toArray());
+			}
+		});
+		Promise.resolve().then(() => {
+			if (!this.clearable && !this.value) {
+				if (this.luOptions.length === 0) {
+					throw new Error('Empty list for the select ! As it is not clearable, the list cannot be empty !');
+				}
+				this.value = this.luOptions.first.value;
 			}
 		});
 	}
