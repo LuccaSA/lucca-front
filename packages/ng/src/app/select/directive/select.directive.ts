@@ -31,9 +31,9 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
-import { LuPopoverTrigger } from '../popover';
-import { LuSelectPopover } from './select.popover.component';
-import { LuSelectOption } from './select.option.component';
+import { LuPopoverTrigger } from '../../popover';
+import { LuSelectPicker } from '../picker/select-picker.component';
+import { LuSelectOption } from '../option/select-option.component';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -66,8 +66,8 @@ export class LuSelectDirective<T>
 extends LuPopoverTrigger
 implements ControlValueAccessor, OnDestroy, OnChanges, OnInit, AfterViewInit, Validator {
 
-	/** the name of the popover linked to this input */
-	@Input('luSelect') popover: LuSelectPopover<T>;
+	/** the name of the picker linked to this input */
+	@Input('luSelect') popover: LuSelectPicker<T>;
 
 	/** true if the directive allow the remove of the data (false by default).
 	 * If set to false, the first value of options will be select if nothing is select */

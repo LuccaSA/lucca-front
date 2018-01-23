@@ -8,9 +8,9 @@
 		clearable="true"
 		(canremove)="canRemove($event)"></div>
 	<label class="textfield-label" for="itemOptions">my label</label>
-	<lu-select-popover #selectRefOptions>
+	<lu-select-picker #selectRefOptions>
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-	</lu-select-popover>
+	</lu-select-picker>
 	<button class="actionIcon" (click)="clear()">
 		<i class="lucca-icon">cross</i>
 	</button>

@@ -1,6 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {LuSelectOption, LuSelectOptionSelectionChange} from './select.option.component';
+import {LuSelectOption} from './select-option.component';
+import {LuSelectOptionSelectionChange} from './select-option.event';
 import { Component} from '@angular/core';
 
 @Component({

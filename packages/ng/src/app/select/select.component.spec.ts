@@ -1,8 +1,8 @@
 import { async, TestBed, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {LuSelectOption} from './select.option.component';
-import {LuSelectDirective} from './select.directive';
-import {LuSelectPopover} from './select.popover.component';
+import {LuSelectOption} from './option/select-option.component';
+import {LuSelectDirective} from './directive/select.directive';
+import {LuSelectPicker} from './picker/select-picker.component';
 import {LuSelect} from './select.component';
 import { Component} from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -52,7 +52,7 @@ describe('LuSelect', () => {
 			declarations: [
 				LuSelectOption,
 				LuSelectDirective,
-				LuSelectPopover,
+				LuSelectPicker,
 				LuSelect,
 				//WrapperSelect,
 			],

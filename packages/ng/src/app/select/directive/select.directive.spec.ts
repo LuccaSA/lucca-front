@@ -1,13 +1,12 @@
 import { async, TestBed, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {LuSelectOption} from './select.option.component';
-import {LuSelectPopover} from './select.popover.component';
+import {LuSelectOption} from '../option/select-option.component';
+import {LuSelectPicker} from '../picker/select-picker.component';
 import {LuSelectDirective} from './select.directive';
 import { Component} from '@angular/core';
-import { WrapperPopoverElementComponent } from './select.popover.component.spec';
 import { escapeHtml } from '@angular/platform-browser/src/browser/transfer_state';
 import { FormsModule } from '@angular/forms';
-import {LuSelectModule} from './select.module';
+import {LuSelectModule} from '../select.module';
 import {OVERLAY_PROVIDERS, ScrollStrategyOptions, ScrollDispatcher} from '@angular/cdk/overlay';
 import {Platform} from '@angular/cdk/platform';
 
@@ -29,12 +28,12 @@ const globalOptions = [{
 }];
 
 @Component({
-	template: `<div [luSelect]="popoverRef"
+	template: `<div [luSelect]="pickerRef"
 			[(ngModel)]="item"
 	></div>
-	<lu-select-popover #popoverRef>
+	<lu-select-picker #pickerRef>
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-	</lu-select-popover>`,
+	</lu-select-picker>`,
 })
 export class WrapperSelectDirective {
 	options = globalOptions;
@@ -53,7 +52,7 @@ describe('LuSelectDirective', () => {
 				Platform,
 			],
 			declarations: [
-				LuSelectPopover,
+				LuSelectPicker,
 				LuSelectOption,
 				LuSelectDirective,
 				WrapperSelectDirective,
@@ -69,10 +68,10 @@ describe('LuSelectDirective', () => {
 				this.luSelect = this.wrapper.injector.get(LuSelectDirective) as LuSelectDirective<any>;
 		});
 
-		it('It should reference the correct popover', () => {
+		it('It should reference the correct picker', () => {
 
 			// Arrange
-			const popover: LuSelectPopover<any>  = this.fixture.debugElement.query(By.directive(LuSelectPopover)).componentInstance;
+			const picker: LuSelectPicker<any>  = this.fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 
 			// Act
 			this.fixture.detectChanges();

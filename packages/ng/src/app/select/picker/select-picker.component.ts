@@ -11,7 +11,7 @@ import {
 	QueryList,
 	ElementRef,
 } from '@angular/core';
-import { LuPopoverComponent, transformPopover, PopoverTriggerEvent } from '../popover';
+import { LuPopoverComponent, transformPopover, PopoverTriggerEvent } from '../../popover';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -29,21 +29,21 @@ import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange} from './select.option.component';
+import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
 
 
 /**
  * The component that provides available options with the luSelect directive
  */
 @Component({
-	selector: 'lu-select-popover',
+	selector: 'lu-select-picker',
 	template: standardSelectTemplate,
-	styleUrls: ['./select.popover.component.scss'],
+	styleUrls: ['./select-picker.component.scss'],
 	animations: [
 		transformPopover,
 	],
 })
-export class LuSelectPopover<T> extends LuPopoverComponent implements AfterContentInit, OnInit, OnDestroy {
+export class LuSelectPicker<T> extends LuPopoverComponent implements AfterContentInit, OnInit, OnDestroy {
 
 	/** Observable of options */
 	protected _options$ = new BehaviorSubject<T[]>([]);

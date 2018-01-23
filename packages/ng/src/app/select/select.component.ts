@@ -23,13 +23,13 @@ import {
 	ValidationErrors,
 	AbstractControl
 } from '@angular/forms';
-import {LuSelectDirective} from './select.directive';
-import {LuSelectPopover} from './select.popover.component';
+import {LuSelectDirective} from './directive/select.directive';
+import {LuSelectPicker} from './picker/select-picker.component';
 import {Subject} from 'rxjs/Subject';
 import {take} from 'rxjs/operators/take';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
-import {LuSelectOption} from './select.option.component';
+import {LuSelectOption} from './option/select-option.component';
 
 /**
  * The component that provides available options from the api with the currently inputed text
@@ -46,9 +46,9 @@ import {LuSelectOption} from './select.option.component';
 			[clearable]="clearable"
 			(canremove)="canRemove($event)"></div>
 		<label *ngIf="placeholder" class="textfield-label" for="linkLabel">{{placeholder}}</label>
-		<lu-select-popover #selectRef (itemSelected)="_optionSelected($event)">
+		<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
 			<ng-content></ng-content>
-		</lu-select-popover>
+		</lu-select-picker>
 		<button class="actionIcon" (click)="_clear()" tabIndex="-1">
 			<i class="lucca-icon">cross</i>
 		</button>
@@ -92,7 +92,7 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 	protected _valueChange = new EventEmitter<T|null>();
 	// Inner Children
 	@ViewChild(LuSelectDirective)_field: LuSelectDirective<T>;
-	@ViewChild(LuSelectPopover) _popover: LuSelectPopover<T>;
+	@ViewChild(LuSelectPicker) _picker: LuSelectPicker<T>;
 	/**
 	 * List of LuSelectOptions
 	 */
@@ -133,8 +133,8 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 	ngAfterContentInit() {
 		this.luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe((option) => {
 			console.log(option);
-			if (this._popover.luOptions$) {
-				this._popover.luOptions$.next(this.luOptions.toArray());
+			if (this._picker.luOptions$) {
+				this._picker.luOptions$.next(this.luOptions.toArray());
 			}
 		});
 		Promise.resolve().then(() => {

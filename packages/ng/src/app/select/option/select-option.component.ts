@@ -8,6 +8,7 @@ import {
 	ViewEncapsulation,
 	ElementRef,
 } from '@angular/core';
+import {LuSelectOptionSelectionChange} from './select-option.event';
 
 /**
  * The component that provides available options for lu-select
@@ -20,7 +21,7 @@ import {
 			[ngClass]="{'is-focus': focused}">
 			<ng-content></ng-content>
 	</li>`,
-	styleUrls: ['./select.option.component.scss'],
+	styleUrls: ['./select-option.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	animations: [
 	],
@@ -110,14 +111,4 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 		this._selected = false;
 	}
 
-}
-/**
- * Class representing an event of a LuSelectOption
- */
-export class LuSelectOptionSelectionChange<T> {
-	constructor(
-		/** Reference to the option that emitted the event. */
-		public source: LuSelectOption<T>,
-		/** Whether the change in the option's value was a result of a user action. */
-		public isUserInput = false) { }
 }
