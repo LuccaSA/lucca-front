@@ -211,6 +211,26 @@
 	</div>
 </section>
 
+<h3>Inline validation</h3>
+<p>You can add a <code class="code">is-loading</code> and a <code class="code">is-valid</code> for your inline validation.</p>
+
+<!-- Inline validation -->
+<section class="contentSection">
+	<div class="grid mod-xsBottom">
+		<div class="grid-xs4">
+			<div class="textfield mod-block">
+				<input class="textfield-input" id="inlinevalidation0" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
+				<label class="textfield-label" for="inlinevalidation0">Textfield label</label>
+			</div>
+		</div>
+		<div class="grid-xs4">
+			<div class="textfield mod-block mod-material">
+				<input class="textfield-input" id="inlinevalidation1" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
+				<label class="textfield-label" for="inlinevalidation1">Textfield label</label>
+			</div>
+		</div>
+	</div>
+</section>
 
 <!-- Suffix -->
 <section class="contentSection">
@@ -512,24 +532,4 @@
 	</code>
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br>
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em>
-</section>
-
-<h3>Inline validation</h3>
-
-<!-- Inline validation -->
-<section class="contentSection">
-	<div class="grid mod-xsBottom">
-		<div class="grid-xs4">
-			<div class="textfield mod-block">
-				<input class="textfield-input" id="inlinevalidation0" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
-				<label class="textfield-label" for="inlinevalidation0">Textfield label</label>
-			</div>
-		</div>
-		<div class="grid-xs4">
-			<div class="textfield mod-block mod-material">
-				<input class="textfield-input" id="inlinevalidation1" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
-				<label class="textfield-label" for="inlinevalidation1">Textfield label</label>
-			</div>
-		</div>
-	</div>
 </section>
