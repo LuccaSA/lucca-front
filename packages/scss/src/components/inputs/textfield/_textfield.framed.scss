@@ -193,32 +193,21 @@
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	// Inline validation
+
+	&.is-loading {
+		&::before, &::after {
+			bottom: inherit;
+			right: .7rem;
+			top: .7rem;
+		}
+	}
+
 	&.is-valid {
 		&::before {
 			bottom: inherit;
 			margin: auto;
 			right: .7rem;
 			top: .5rem;
-		}
-	}
-
-	&.is-invalid {
-		z-index: 2;
-
-		&::before {
-			bottom: inherit;
-			margin: auto;
-			right: .7rem;
-			top: .5rem;
-		}
-
-		.textfield-input {
-			@include textfieldFramedError();
-			@include fakeBorder(1px, _color("error"));
-
-			&:hover, &:active, &:focus {
-				@include textfieldFramedError();
-			}
 		}
 	}
 

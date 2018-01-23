@@ -518,16 +518,16 @@
 
 <!-- Inline validation -->
 <section class="contentSection">
-	<div class="grid">
+	<div class="grid mod-xsBottom">
 		<div class="grid-xs4">
-			<div class="textfield mod-block is-valid">
-				<input class="textfield-input" id="inlinevalidation0" type="text">
+			<div class="textfield mod-block">
+				<input class="textfield-input" id="inlinevalidation0" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
 				<label class="textfield-label" for="inlinevalidation0">Textfield label</label>
 			</div>
 		</div>
 		<div class="grid-xs4">
-			<div class="textfield mod-block is-invalid">
-				<input class="textfield-input" id="inlinevalidation1" type="text">
+			<div class="textfield mod-block mod-material">
+				<input class="textfield-input" id="inlinevalidation1" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
 				<label class="textfield-label" for="inlinevalidation1">Textfield label</label>
 			</div>
 		</div>

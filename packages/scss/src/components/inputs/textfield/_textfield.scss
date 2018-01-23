@@ -249,19 +249,16 @@
 	}
 
 	// Inline validation
-	&.is-valid {
-		&::before {
-			@extend %base_animated_element;
-			@include makeIcon("tick_bold");
-			animation-name: scaleIn;
-			animation-duration: _theme("commons.animations.durations.fast");
-			border-radius: 50%;
-			bottom: .75rem;
-			color: _color("success");
-			height: 1rem;
-			position: absolute;
+	&.is-loading {
+		@include loading(1rem);
+
+		&::before, &::after {
+			bottom: .6rem;
+			left: inherit;
 			right: .5rem;
-			z-index: 1;
+			top: inherit;
+			position: absolute;
+			z-index: 2;
 		}
 
 		.textfield-input {
@@ -269,28 +266,59 @@
 		}
 	}
 
-	&.is-invalid {
+	&.is-valid {
+
 		&::before {
-			@extend %base_animated_element;
-			@include makeIcon("cross");
-			animation-name: scaleIn;
-			animation-duration: _theme("commons.animations.durations.fast");
+			animation: isValid 3s forwards;
+			@include makeIcon("tick_bold");
 			border-radius: 50%;
-			bottom: .75rem;
-			color: _color("error");
+			bottom: .85rem;
+			color: _color("success");
+			font-size: 1.2rem;
 			height: 1rem;
 			position: absolute;
-			right: .5rem;
+			right: .4rem;
 			z-index: 1;
 		}
 
 		.textfield-input {
-			background-color: rgba(_color("error"), .1);
-			box-shadow: 0 0 0 1px _color("error");
 			padding-right: 2rem;
 		}
 	}
 }
+
+@keyframes isValid {
+  from {
+		opacity: 0;
+		transform: scale(0);
+  }
+
+	5% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	7% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	93% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	95% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+  to {
+		opacity: 0;
+		transform: scale(0);
+  }
+}
+
 
 .textfield-input {
 

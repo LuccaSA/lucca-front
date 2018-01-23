@@ -123,23 +123,24 @@
 	// Inline validation
 	&.is-valid {
 		&::before {
-			content: "";
+			bottom: .7rem;
+			right: 0;
+		}
+
+		.textfield-label {
+			padding-right: 1.5rem;
 		}
 
 		.textfield-input {
-			@include textfieldMaterialSuccess();
-			padding-right: inherit;
+			padding-right: 1.5rem;
 		}
 	}
 
-	&.is-invalid {
-		&::before {
-			content: "";
-		}
+	&.is-loading {
 
-		.textfield-input {
-			@include textfieldMaterialError();
-			padding-right: inherit;
+		&::before, &::after {
+			bottom: .4rem;
+			right: 0;
 		}
 	}
 

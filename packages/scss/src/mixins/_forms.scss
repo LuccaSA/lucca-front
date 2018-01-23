@@ -23,18 +23,6 @@
 	}
 }
 
-@mixin textfieldMaterialSuccess() {
-	box-shadow: 0 2px 0 0 _color("success");
-
-	~ .textfield-label {
-		color: _color("success");
-	}
-
-	&:focus ~ .textfield-label {
-		color: _color("success");
-	}
-}
-
 @mixin textfieldFramedError() {
 	background-color: transparentize(_color("error"), .9);
 	&:focus, &:hover {
