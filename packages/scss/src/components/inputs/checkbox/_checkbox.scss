@@ -125,7 +125,7 @@
 	&.is-incomplete ~ .checkbox-label {
 		&::after {
 			font-size: .6rem;
-			@include makeIcon("minus");
+			@include makeIcon("minimize");
 		}
 	}
 }
