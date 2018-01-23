@@ -15,12 +15,7 @@ import {LuSelectOptionSelectionChange} from './select-option.event';
  */
 @Component({
 	selector: 'lu-select-option',
-	template: `<li
-			class="lu-select-option"
-			(click)="_selectOption()"
-			[ngClass]="{'is-focus': focused}">
-			<ng-content></ng-content>
-	</li>`,
+	templateUrl: './select-option.component.html',
 	styleUrls: ['./select-option.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	animations: [

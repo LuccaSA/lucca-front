@@ -37,23 +37,7 @@ import {LuSelectOption} from './option/select-option.component';
 @Component({
 	selector: 'lu-select',
 	encapsulation: ViewEncapsulation.Emulated,
-	template: `
-	<div class="textfield mod-select {{mod}}" [class.mod-remove]="_canRemove">
-		<div [luSelect]="selectRef"
-			class="textfield-input"
-			name="linkLabel"
-			luEmpty
-			[clearable]="clearable"
-			(canremove)="canRemove($event)"></div>
-		<label *ngIf="placeholder" class="textfield-label" for="linkLabel">{{placeholder}}</label>
-		<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
-			<ng-content></ng-content>
-		</lu-select-picker>
-		<button class="actionIcon" (click)="_clear()" tabIndex="-1">
-			<i class="lucca-icon">cross</i>
-		</button>
-	</div>
-	`,
+	templateUrl: './select.component.html',
 	providers: [
 		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuSelect), multi: true },
 		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuSelect), multi: true },
