@@ -56,7 +56,7 @@ const DOWN_KEY = 'ArrowDown';
  * Directive to put on a div to allow it to react with a popover to emulate a select component
  */
 @Directive({
-	selector: 'div[luSelect]',
+	selector: 'input[luSelect]',
 	providers: [
 		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuSelectDirective), multi: true },
 		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuSelectDirective), multi: true },
@@ -105,7 +105,7 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit, AfterViewInit, Va
 	}
 	// value stuff
 	protected get _strValue(): string {
-		return this._elementRef.nativeElement.innerHTML as string;
+		return this._elementRef.nativeElement.value as string;
 	}
 
 	// inner references
@@ -234,7 +234,7 @@ implements ControlValueAccessor, OnDestroy, OnChanges, OnInit, AfterViewInit, Va
 
 	// render/display
 	protected render(value = this._selectOption) {
-		this._elementRef.nativeElement.innerHTML = this.display(value);
+		this._elementRef.nativeElement.value = this.display(value);
 	}
 	protected display(value: LuSelectOption<T> | null): string {
 		if (!value) {

@@ -28,9 +28,9 @@ const globalOptions = [{
 }];
 
 @Component({
-	template: `<div [luSelect]="pickerRef"
+	template: `<input [luSelect]="pickerRef"
 			[(ngModel)]="item"
-	></div>
+	>
 	<lu-select-picker #pickerRef>
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
 	</lu-select-picker>`,

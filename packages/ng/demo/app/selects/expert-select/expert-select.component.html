@@ -1,12 +1,12 @@
 <h1>With Options</h1>
 <div class="textfield mod-select mod-material" [class.mod-remove]="_canRemove">
-	<div [luSelect]="selectRefOptions"
+	<input [luSelect]="selectRefOptions"
 		[(ngModel)]="itemOptions"
 		class="textfield-input"
 		name="itemOptions"
 		luEmpty
 		clearable="true"
-		(canremove)="canRemove($event)"></div>
+		(canremove)="canRemove($event)">
 	<label class="textfield-label" for="itemOptions">my label</label>
 	<lu-select-picker #selectRefOptions>
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
