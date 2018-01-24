@@ -48,32 +48,18 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 
 	/** Emits whenever the component is destroyed. */
 	private _destroy$ = new Subject<void>();
-	/** inner value of component */
-	protected _value: T | null;
 	/** inner validator */
 	protected _validator: ValidatorFn | null;
 	/** True if the the component allow the clear of data  */
 	protected _canRemove = false;
 	/** The value of the select */
 	get value(): T | null {
-		return this._value;
+		return this._field ? this._field.value : null;
 	}
 	set value(value:  T | null) {
-		let valueTemp = value;
-		if (valueTemp === null && !this.clearable && this.luOptions && this.luOptions.first) {
-			valueTemp = this.luOptions.first.value;
-		}
-		const lastValue = this._value;
-		this._value = valueTemp;
-		// render
-		if (!this._same(lastValue, valueTemp)) {
-			this._valueChange.emit(valueTemp);
-			this._cvaOnChange(valueTemp);
-			this._field.value = value;
-		}
-
+		this.writeValue(value);
 	}
-	protected _valueChange = new EventEmitter<T|null>();
+
 	// Inner Children
 	@ViewChild(LuSelectDirective)_field: LuSelectDirective<T>;
 	@ViewChild(LuSelectPicker) _picker: LuSelectPicker<T>;
@@ -88,7 +74,6 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 	@Input() clearable = false;
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: String;
-	private _cvaOnChange: (value: T) => void = () => {};
 
 
 	// validators
@@ -133,11 +118,13 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 
 	// From ControlValueAccessor interface
 	writeValue(value: T) {
-		this.value = value;
+		if (this._field) {
+			this._field.value = value;
+		}
 	}
 	// From ControlValueAccessor interface
 	registerOnChange(fn: any) {
-		this._cvaOnChange = fn;
+		this._field.registerOnChange(fn);
 	}
 	// From ControlValueAccessor interface
 	registerOnTouched(fn: any) {
@@ -163,18 +150,5 @@ export class LuSelect<T> implements ControlValueAccessor, AfterContentInit, OnIn
 	}
 
 	// Utilities
-
-	protected _same(oldItem: T, newItem: T): boolean {
-		if (oldItem === newItem) {
-			return true;
-		}
-		if (!oldItem && !newItem) {
-			return true;
-		}
-		if (!oldItem || !newItem) {
-			return false;
-		}
-		return JSON.stringify(oldItem) === JSON.stringify(newItem);
-	}
 
 }
