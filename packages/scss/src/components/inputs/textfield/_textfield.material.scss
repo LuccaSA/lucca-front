@@ -121,6 +121,14 @@
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	// Inline validation
+	&.is-loading {
+
+		&::before, &::after {
+			bottom: .4rem;
+			right: 0;
+		}
+	}
+
 	&.is-valid {
 		&::before {
 			bottom: .7rem;
@@ -136,11 +144,9 @@
 		}
 	}
 
-	&.is-loading {
-
-		&::before, &::after {
-			bottom: .4rem;
-			right: 0;
+	&.is-invalid {
+		.textfield-input {
+			@include textfieldMaterialError();
 		}
 	}
 

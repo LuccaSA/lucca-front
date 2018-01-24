@@ -18,6 +18,18 @@ function validationFocus(elem) {
 	}, 1500);
 }
 
+function unvalidationFocus(elem) {
+	var textfield = elem.parentElement;
+	textfield.classList.remove('is-invalid');
+	textfield.classList.add('is-loading');
+	setTimeout(function(){
+		textfield.classList.remove('is-loading');
+		textfield.classList.add('is-invalid');
+	}, 1500);
+}
+
+
+
 
 /* ICONS */
 function generateIconDemo() {

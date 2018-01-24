@@ -285,6 +285,14 @@
 			padding-right: 2rem;
 		}
 	}
+
+	&.is-invalid {
+		.textfield-input {
+			background-color: rgba(_color("error"), .1);
+			box-shadow: 0 0 0 1px _color("error");
+			padding-right: 2rem;
+		}
+	}
 }
 
 @keyframes isValid {
