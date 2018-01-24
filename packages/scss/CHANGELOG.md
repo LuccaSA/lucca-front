@@ -10,6 +10,7 @@
 ## v0.1.7
 ### Enhancements
 - `navSide` compact mode width & fonts are smaller
+- `textfield` inline validation
 
 ## v0.1.6
 ### New features

@@ -211,6 +211,26 @@
 	</div>
 </section>
 
+<h3>Inline validation</h3>
+<p>You can add a <code class="code">is-loading</code> and a <code class="code">is-valid</code> or <code class="code">is-invalid</code> class on <code class="code">&lt;div class="textfield"&gt;</code> for your inline validation.</p>
+
+<!-- Inline validation -->
+<section class="contentSection">
+	<div class="grid mod-xsBottom">
+		<div class="grid-xs4">
+			<div class="textfield mod-block">
+				<input class="textfield-input" id="inlinevalidation0" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)">
+				<label class="textfield-label" for="inlinevalidation0">Loading > valid</label>
+			</div>
+		</div>
+		<div class="grid-xs4">
+			<div class="textfield mod-block">
+				<input class="textfield-input" id="inlinevalidation1" type="text" placeholder="Focus / Unfocus me" onblur="unvalidationFocus(this)">
+				<label class="textfield-label" for="inlinevalidation1">Loading > invalid</label>
+			</div>
+		</div>
+	</div>
+</section>
 
 <!-- Suffix -->
 <section class="contentSection">
@@ -447,7 +467,7 @@
 
 <h3>Multiline</h3>
 
-<!-- Basics -->
+<!-- Multilines -->
 <section class="contentSection">
 	<div class="form">
 		<div class="grid">
