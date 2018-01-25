@@ -3,10 +3,12 @@
 :host {
 
 	display: flex;
-	align-items: stretch;
-	width: 18em;
-	min-height: 4em;
+	align-items: center;
+	padding: .5em;
 
+	lu-user-picture {
+		margin-right: .5em;
+	}
 
 	.user-tile-title {
 		font-size: .9em;

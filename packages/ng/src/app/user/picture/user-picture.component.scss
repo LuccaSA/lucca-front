@@ -1,21 +1,25 @@
 @import "node_modules/@lucca-front/scss/src/theming.overridable";
 :host {
 	$vars: (
-		size: 3em
+		size: 2.5em
 	);
 	.picture {
 		width: _get($vars, "size");
 		height: _get($vars, "size");
 		border-radius: 100%;
 		background-position: center;
-		background-size: _get($vars, "size") auto;
-		margin: .2em .3em;
-		
-		text-align: center;
-		vertical-align: middle;
-		line-height: _get($vars, "size");
-		
+		background-size: cover;
+		background-repeat: no-repeat;
+
 		color: white;
-		font-size: 1.2em;
+
+		position: relative;
+
+		> span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
 	}
 }
