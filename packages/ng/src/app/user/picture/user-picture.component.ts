@@ -12,19 +12,28 @@ import { LuUserDisplayPipe } from '../display';
 })
 export class LuUserPictureComponent {
 
-	private _user: IUser;
 	/**
 	 * IUser whose picture you wanna display.
 	 */
+	private _user: IUser;
+
+	/**
+	 * User-picture size in px
+	 */
+	@Input() size: number;
+
 	@Input() set user(user: IUser) {
 		this._user = user;
 		this.initials = this.displayPipe.transform(user, 'LF');
 		this.hasPicture = !!user.picture && !!user.picture.href;
+		if (this.size) {
+			this.style = { 'font-size': this.size / 2.5 + 'px'};
+		}
 		if (this.hasPicture) {
-			this.style = { 'background-image': `url('${this._user.picture.href}')` };
+			this.style = { ...this.style, 'background-image': `url('${this._user.picture.href}')` };
 		} else {
 			const hsl = this.getNameHue();
-			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)`};
+			this.style = { ...this.style, 'background-color': `hsl(${hsl}, 60%, 60%)`};
 		}
 	}
 	get user() { return this._user; }

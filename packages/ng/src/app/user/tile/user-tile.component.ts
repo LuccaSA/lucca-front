@@ -22,5 +22,10 @@ export class LuUserTileComponent {
 	 */
 	@Input() role: string;
 
+	/**
+	 * User-picture size in px
+	 */
+	@Input() imageSize: number;
+
 	constructor(private displayPipe: LuUserDisplayPipe) {	}
 }
