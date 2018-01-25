@@ -2,6 +2,8 @@
 
 ## In Dev
 ### New features
+- `lu-user-picture` has a new attribute `size` to set it size in px
+- `lu-user-tile` has a new attribute `imageSize` to set its user-picture size in px
 ### Fixes
 ### Breaking changes
 ### Updated dependencies
