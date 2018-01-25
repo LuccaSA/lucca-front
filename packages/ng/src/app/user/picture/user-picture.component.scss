@@ -4,16 +4,14 @@
 		size: 2.5em
 	);
 	.picture {
-		width: _get($vars, "size");
-		height: _get($vars, "size");
 		border-radius: 100%;
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
-
 		color: white;
-
+		height: _get($vars, "size");
 		position: relative;
+		width: _get($vars, "size");
 
 		> span {
 			position: absolute;

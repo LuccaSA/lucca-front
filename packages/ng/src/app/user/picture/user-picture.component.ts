@@ -27,7 +27,7 @@ export class LuUserPictureComponent {
 		this.initials = this.displayPipe.transform(user, 'LF');
 		this.hasPicture = !!user.picture && !!user.picture.href;
 		if (this.size) {
-			this.style = { 'font-size': this.size / 2.5 + 'px'};
+			this.style = { 'font-size': Math.round(this.size / 2.5) + 'px'};
 		}
 		if (this.hasPicture) {
 			this.style = { ...this.style, 'background-image': `url('${this._user.picture.href}')` };
