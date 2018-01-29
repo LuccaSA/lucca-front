@@ -1,13 +1,38 @@
 @import "mappings";
 
-@function str-replace($string, $search, $replace: '') {
-	$index: str-index($string, $search);
+@function str-explode($string, $dem) {
+	$list: ();
+	$sum: str-length($string);
 
-	@if $index {
-		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	@for $i from 1 through $sum {
+		$str: str-index($string, $dem);
+		@if str-length($string) >= 1 and $str == null {
+			$list: append($list,$string);
+			$string: '';
+		}
+
+		@if type-of($str) == number {
+			$each: str-slice($string,0,($str - 1));
+			$list: append($list, $each);
+			$string: str-slice($string,($str + 1), $sum);
+		}
 	}
 
-	@return $string;
+	@return $list;
+}
+
+@function str-camelcase($value) {
+	$words: str-explode($value, "_");
+	$list: ();
+	$return: "";
+	@for $i from 1 through length($words) {
+		$word: nth($words, $i);
+		@if $i > 1 {
+			$word: to-upper-case(str-slice($word, 1, 1)) + str-slice($word, 2, str-length($word));
+		}
+		$return: $return + $word;
+	}
+	@return $return;
 }
 
 %classIcon {
@@ -19,8 +44,8 @@
 
 .lucca-icon {
 	@each $ligature, $char in $mappings {
-		$class: str-replace($ligature, '_', '-');
-		&.#{$class}::before {
+		$class: str-camelcase($ligature);
+		&.icon-#{$class}::before {
 			@extend %classIcon;
 			content: "#{$char}";
 		}
