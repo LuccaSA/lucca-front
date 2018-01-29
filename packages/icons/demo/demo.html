@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lucca Front</title>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
+	<link rel="stylesheet" href="demo.css">
+	<link type="text/css" rel="stylesheet" href="/dist/lucca-icons.min.css">
+</head>
+
+<body class="demo-body">
+	<main>
+		<h1>Lucca-icons Demo</h1>
+		<div>
+			Lucca-icons can be used in two ways:
+			<ul>
+				<li>
+					using ligature: add the <code class="code">lucca-icon</code> class to your element and use the corresponding ligature (written here below each icon)
+					<span class="example">eg.: <code class="code">&lt;i class=&quot;lucca-icon&quot;&gt;user_roles&lt;/i&gt;</code></span>
+				</li>
+				<li>using classes: add the
+					<code class="code">lucca-icon</code> class and use the ligature in dash-case as a class. 
+					<span class="example">eg.:<code class="code">&lt;i class=&quot;lucca-icon user-roles&quot;&gt;&lt;/i&gt;</code></span>
+				</li>
+			</ul>
+		</div>
+		<section id="icons">
+			<div class="icon" w3-repeat="icons">
+				<i class="lucca-icon demo-icon">{{iconName}}</i>
+				<code class="code">{{iconName}}</code>
+			</div>
+		</section>
+	</main>
+
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
+	<script src="mapping.js"></script>
+	<script>
+		w3.displayObject("icons", mappings);
+	</script>
+</body>
+
+</html>
