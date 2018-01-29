@@ -1,0 +1,28 @@
+@import "mappings";
+
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+%classIcon {
+	font-family: "Lucca icons";
+	display: inline-block;
+	vertical-align: middle;
+	font-style: normal;
+}
+
+.lucca-icon {
+	@each $ligature, $char in $mappings {
+		$class: str-replace($ligature, '_', '-');
+		&.#{$class}::before {
+			@extend %classIcon;
+			content: "#{$char}";
+		}
+	}
+}
