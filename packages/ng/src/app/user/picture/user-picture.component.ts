@@ -51,7 +51,6 @@ export class LuUserPictureComponent {
 		.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue
 		const hue = charSum % 360;
-		console.log(`sum: ${charSum}, hue: ${hue}`);
 		return hue;
 	}
 }
