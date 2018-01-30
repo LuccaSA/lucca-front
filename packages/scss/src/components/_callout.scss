@@ -1,33 +1,79 @@
 .callout {
-	background: white;
-	@include elevate(1);
+	background: _theme("commons.background.dark");
+	border-radius: _theme("commons.border.radius");
 	margin: _component("callout.margin");
-	padding: 1.5rem;
+	padding: 1rem 1.5rem;
 	position: relative;
+}
 
-	&::before {
-		background: _theme("commons.background.darkest");
-		bottom: -1px;
-		content: "";
-		display: block;
-		left: -1px;
-		position: absolute;
-		top: -1px;
-		width: 4px;
+.callout-title {
+	font-weight: 600;
+
+	&::after {
+		content: " —";
+		font-weight: normal;
 	}
 }
 
+.callout-kill {
+	background: transparent;
+	border: 0;
+	color: _color("text.default");
+	cursor: pointer;
+	height: 1rem;
+	opacity: .5;
+	padding: 0;
+	position: absolute;
+	right: .25rem;
+	top: .25rem;
+	transition: 150ms background ease;
+	width: 1rem;
+
+	&::before {
+		@include makeIcon("cross");
+		font-family: "Lucca icons";
+	}
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.callout-icon {
+	position: absolute;
+	top: 0;
+	bottom: .2rem;
+	left: .75rem;
+	height: 2rem;
+	width: 2rem;
+	margin: auto;
+	border-radius: 50%;
+	line-height: 2rem;
+	text-align: center;
+
+	.lucca-icon {
+		font-size: 1.5rem;
+	}
+}
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-
-@mixin calloutDefaultPalette($palette) {
-	&::before {
-		background: _get($palette, "color");
+.callout {
+	&.mod-icon {
+		padding-left: 3rem;
 	}
 }
-.callout:not(.mod-filled) {
+
+@mixin calloutDefaultPalette($palette) {
+	background: rgba(_get($palette, "color"), .10);
+	color: _get($palette, "color");
+
+	.callout-kill {
+		color: _get($palette, "color");
+	}
+}
+.callout {
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
 			@include calloutDefaultPalette($palette);
