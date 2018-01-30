@@ -294,10 +294,10 @@
 }
 
 @keyframes isValid {
-  from {
+	from {
 		opacity: 0;
 		transform: scale(0);
-  }
+	}
 
 	5% {
 		opacity: 1;
@@ -319,10 +319,10 @@
 		transform: scale(1.2);
 	}
 
-  to {
+	to {
 		opacity: 0;
 		transform: scale(0);
-  }
+	}
 }
 
 
