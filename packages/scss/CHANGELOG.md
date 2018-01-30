@@ -11,6 +11,7 @@
 ### Enhancements
 - `navSide` compact mode width & fonts are smaller
 - `textfield` inline validation
+- `callout` new UI + killable + callout icon
 
 ## v0.1.6
 ### New features
