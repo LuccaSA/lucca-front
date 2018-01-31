@@ -201,6 +201,7 @@
 		&::after {
 			color: _color("text.light");
 			@include makeIcon("search");
+			font-size: 1.4rem;
 			position: absolute;
 			bottom: .2rem;
 			right: .5rem;
@@ -246,7 +247,84 @@
 			position: absolute;
 		}
 	}
+
+	// Inline validation
+	&.is-loading {
+		@include loading(1rem);
+
+		&::before, &::after {
+			bottom: .6rem;
+			left: inherit;
+			right: .5rem;
+			top: inherit;
+			position: absolute;
+			z-index: 2;
+		}
+
+		.textfield-input {
+			padding-right: 2rem;
+		}
+	}
+
+	&.is-valid {
+
+		&::before {
+			animation: isValid 3s forwards;
+			@include makeIcon("tick_bold");
+			border-radius: 50%;
+			bottom: .85rem;
+			color: _color("success");
+			font-size: 1.2rem;
+			height: 1rem;
+			position: absolute;
+			right: .4rem;
+			z-index: 1;
+		}
+
+		.textfield-input {
+			padding-right: 2rem;
+		}
+	}
+
+	&.is-invalid {
+		.textfield-input {
+			@include textfieldError();
+		}
+	}
 }
+
+@keyframes isValid {
+  from {
+		opacity: 0;
+		transform: scale(0);
+  }
+
+	5% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	7% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	93% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	95% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+  to {
+		opacity: 0;
+		transform: scale(0);
+  }
+}
+
 
 .textfield-input {
 

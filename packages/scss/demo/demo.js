@@ -11,6 +11,31 @@ function reloadAnimation(elem) {
 	setTimeout(function(){ card.classList.add(animationClass)},0);
 }
 
+
+/* TEXTFIELD INLINE VALIDATION */
+function validationFocus(elem) {
+	var textfield = elem.parentElement;
+	textfield.classList.remove('is-valid');
+	textfield.classList.add('is-loading');
+	setTimeout(function(){
+		textfield.classList.remove('is-loading');
+		textfield.classList.add('is-valid');
+	}, 1500);
+}
+
+function unvalidationFocus(elem) {
+	var textfield = elem.parentElement;
+	textfield.classList.remove('is-invalid');
+	textfield.classList.add('is-loading');
+	setTimeout(function(){
+		textfield.classList.remove('is-loading');
+		textfield.classList.add('is-invalid');
+	}, 1500);
+}
+
+
+
+
 /* ICONS */
 function generateIconDemo() {
 	var icons = {"icons": [
@@ -29,22 +54,24 @@ function generateIconDemo() {
 		'arrow_south_thin',
 		'arrow_west_thin',
 
-		'plus',
-		'minus',
+		'plus_bold',
 		'plus_thin',
+		'minus',
 		'tick_thin',
 		'tick',
 		'tick_bold',
 
 		'cross_thin',
 		'cross',
+		'cross_bold',
 
 		'forbidden',
 		'error',
 		'warning',
 		'help',
-		'info',
-		'rejected',
+		'help_outline',
+		'thumbs_up',
+		'thumbs_down',
 		'flag',
 
 		'ellipsis',
@@ -81,7 +108,7 @@ function generateIconDemo() {
 		'outside',
 		'trash',
 		'send',
-		'synchronisation',
+		'synchronization',
 		'search',
 
 		'watch',
@@ -115,7 +142,6 @@ function generateIconDemo() {
 		'calendar',
 
 		'key',
-		'key_simple',
 
 		'pin',
 		'location',
@@ -128,6 +154,7 @@ function generateIconDemo() {
 		'move',
 		'move_vertically',
 		'move_horizontally',
+		'drag',
 
 		'menu',
 		'menu_thin',
@@ -140,6 +167,8 @@ function generateIconDemo() {
 		'drink',
 		'snack',
 		'coffee',
+		'restaurant',
+		'pressing',
 
 		'bus',
 		'car_clean',
@@ -148,8 +177,11 @@ function generateIconDemo() {
 		'subway',
 		'train',
 		'plane',
+		'car',
 
 		'euro',
+		'dollar',
+
 		'quantity',
 		'piggy_bank',
 
@@ -204,7 +236,11 @@ function generateIconDemo() {
 		'format_clear',
 
 		'hr_folder',
-		'archive'
+		'archive',
+
+		'certif_ok',
+		'certif_waiting',
+		'certif_ko'
 	]};
 
 	w3.displayObject("icons-section", icons);

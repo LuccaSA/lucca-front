@@ -1,10 +1,11 @@
 # Changelog
 
 ## In dev
+### New icons
 
 ## v0.1.6
 
-### New icon
+### New icons
 - `face`
 
 ## v0.1.2

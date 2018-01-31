@@ -1,6 +1,14 @@
 # Changelog
 
 ## In Dev
+### New features
+### Breaking changes
+### Adding
+### Enhancements
+### Fixes
+
+## v0.1.7
+### Enhancements
 - `navSide` compact mode width & fonts are smaller
 ### Adding
 - `toggle` component
@@ -11,6 +19,7 @@
 - `table` head has now a correct font weight
 - `navSide` is now a block element
 - `menu` has now a line-height
+- `textfield` inline validation
 
 ## v0.1.6
 ### New features
