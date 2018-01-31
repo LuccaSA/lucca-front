@@ -1,0 +1,39 @@
+body {
+	background: #FFF;
+	color: #666666;
+	font-family: "Source Sans Pro", Tahoma, sans-serif;
+	font-size: 1rem;
+	line-height: 1.618rem;
+	vertical-align: middle;
+}
+
+#icons {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.icon {
+	width: 120px;
+	text-align: center;
+	background: #FAFAFA;
+	margin: .3em;
+	padding: .5em .1em;
+}
+
+.lucca-icon.demo-icon{
+	display: block;
+	margin-bottom: .2em;
+	font-size: 2em;
+}
+
+.code {
+	background: #FEF1F5;
+	border-radius: 3px;
+	color: #EC407A;
+	line-height: 1.4rem;
+	margin: .1rem;
+	padding: 0 .3rem;
+	-moz-tab-size: 2;
+	tab-size: 2;
+	white-space: nowrap;
+}
