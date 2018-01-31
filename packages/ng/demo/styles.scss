@@ -5,3 +5,9 @@
 	'../src/plugins/ngMaterial/general',
 	'../src/main';
 
+.demo-box{
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
