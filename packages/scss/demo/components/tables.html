@@ -208,3 +208,65 @@
 &lt;/div&gt;
 </code>
 </section>
+
+<section class="contentSection">
+	<h3>Table filters</h3>
+	<p>You can use a <code class="code">mod-filters</code> on the first row of your table body to use it as a filter row.</p>
+	<table class="table">
+		<thead class="table-head">
+			<tr class="table-head-row">
+				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">Head cell</th>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row mod-filters">
+				<td class="table-body-row-cell">
+					<div class="textfield mod-search mod-block">
+						<input class="textfield-input" type="text" placeholder="Search">
+					</div>
+				</td>
+				<td class="table-body-row-cell">
+					<div class="textfield mod-search mod-block">
+						<input class="textfield-input" type="text" placeholder="Search">
+					</div>
+				</td>
+				<td class="table-body-row-cell">
+					<div class="textfield mod-search mod-block">
+						<input class="textfield-input" type="text" placeholder="Search">
+					</div>
+				</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+		</tbody>
+	</table>
+
+<code class="code mod-block">&lt;table class="table"&gt;
+	&lt;thead class="table-head"&gt;
+		&lt;tr class="table-head-row"&gt;
+			&lt;th class="table-head-row-cell"&gt;Head cell&lt;/th&gt;
+			...
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody class="table-body"&gt;
+		&lt;tr class="table-body-row mod-filters"&gt;
+			&lt;td class="table-body-row-cell"&gt;
+				&lt;div class="textfield mod-search mod-block"&gt;
+					&lt;input class="textfield-input" type="text" placeholder="Search"&gt;
+				&lt;/div&gt;
+			&lt;/td&gt;
+			...
+		&lt;/tr&gt;
+		&lt;tr class="table-body-row"&gt;
+			&lt;td class="table-body-row-cell"&gt;Body cell&lt;/td&gt;
+			...
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</code>
+
+</section>
