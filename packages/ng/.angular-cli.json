@@ -25,8 +25,9 @@
             ],
             "stylePreprocessorOptions": {
                 "includePaths": [
-                    "theming",
-                    "../node_modules/@lucca-front/scss/src/overrides"
+                  "theming",
+                  "../src/style/overrides",
+                  "../node_modules/@lucca-front/scss/src/overrides"
                 ]
             },
             "scripts": [],
@@ -46,7 +47,7 @@
             "testTsconfig": "tsconfig.spec.json",
             "stylePreprocessorOptions": {
                 "includePaths": [
-                    "theming",
+                    "style/overrides",
                     "../node_modules/@lucca-front/scss/src/overrides"
                 ]
             },

@@ -1,0 +1,11 @@
+$user-picture: (
+	sizes:(
+		smallest: .5em,
+		smaller: .65em,
+		small: .8em,
+		large: 1.35em,
+		larger: 1.8em,
+		largest: 3em
+	)
+);
+$theme: _set($theme, "components.user-picture", $user-picture);
