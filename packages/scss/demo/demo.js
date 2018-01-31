@@ -1,3 +1,8 @@
+/* TOGGLE */
+function collapse(elem) {
+	elem.parentElement.classList.toggle('is-open');
+}
+
 /* ANIMATIONS */
 function reloadAnimation(elem) {
 	var card = elem.getElementsByClassName('card')[0];
