@@ -1,11 +1,9 @@
-<div class="textfield mod-select {{mod}}" [class.mod-remove]="_canRemove">
-	<input [luSelect]="selectRef"
+<div class="textfield mod-select {{mod}}"
+	[class.mod-remove]="_canRemove"
+	[luSelect]="selectRef">
+	<div
 		class="textfield-input"
-		name="linkLabel"
-		luEmpty
-		[clearable]="clearable"
-		(canremove)="canRemove($event)">
-	<label *ngIf="placeholder" class="textfield-label" for="linkLabel">{{placeholder}}</label>
+		>{{_strValue}}</div>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
 		<ng-content></ng-content>
 	</lu-select-picker>

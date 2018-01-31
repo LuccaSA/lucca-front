@@ -6,11 +6,13 @@ import { LuSelectOption } from './option';
 import { LuSelectDirective } from './directive';
 import { LuSelect } from './select.component';
 import { LuEmptyModule } from '../empty/empty.module';
+import { LuPopoverModule } from '../popover/popover.module';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		OverlayModule,
+		LuPopoverModule,
 		LuEmptyModule,
 	],
 	declarations: [

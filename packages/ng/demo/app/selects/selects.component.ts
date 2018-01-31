@@ -12,10 +12,6 @@ export class DemoSelectsComponent implements OnInit {
 			code: require('!!prismjs-loader?lang=typescript!./simple-select/simple-select.component'),
 			markup: require('!!prismjs-loader?lang=markup!./simple-select/simple-select.component.html')
 		},
-		expert: {
-			code: require('!!prismjs-loader?lang=typescript!./expert-select/expert-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./expert-select/expert-select.component.html')
-		},
 	};
 	constructor() { }
 	ngOnInit() {

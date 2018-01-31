@@ -118,13 +118,16 @@ describe('LuSelect', () => {
 			const fixture = TestBed.createComponent(WrapperSelect);
 			const wrapper = fixture.componentInstance;
 			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
-
-			// Act
 			fixture.detectChanges();
 
-			// Assert
-			expect(luSelect.luOptions).not.toBeNull();
-			expect(luSelect.luOptions.toArray().length).toBe(globalOptions.length);
+			fixture.whenStable().then(() => {
+				// Act
+				fixture.detectChanges();
+
+				// Assert
+				expect(luSelect.luOptions).not.toBeNull();
+				expect(luSelect.luOptions.length).toBe(globalOptions.length);
+			});
 		});
 
 		it('It should reference has the right value', () => {
@@ -187,7 +190,7 @@ describe('LuSelect', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(luSelect.value).toBeNull();
+				expect(luSelect.value).toBeUndefined();
 			});
 	});
 
