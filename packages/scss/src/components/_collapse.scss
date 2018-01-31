@@ -1,4 +1,4 @@
-.toggle-title {
+.collapse-title {
 	cursor: pointer;
 	display: inline-block;
 	margin: 0 0 .2rem;
@@ -16,7 +16,7 @@
 	}
 }
 
-.toggle-content {
+.collapse-content {
 	@extend %base_animated_element;
 	display: none;
 	animation-name: fadeIn;
@@ -27,15 +27,15 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.toggle {
+.collapse {
 	&.is-open {
-		> .toggle-title {
+		> .collapse-title {
 			&::before {
 				transform: rotate(90deg);
 			}
 		}
 
-		.toggle-content {
+		.collapse-content {
 			display: block;
 		}
 	}

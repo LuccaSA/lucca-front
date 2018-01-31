@@ -9,7 +9,7 @@
 
 ## v0.1.7
 ### Adding
-- `toggle` component
+- `collapse` component
 - `emptystate` component
 ### Enhancements
 - `table` row can now be set has a filter row with .mod-filters

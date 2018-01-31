@@ -1,5 +1,5 @@
 /* TOGGLE */
-function toggle(elem) {
+function collapse(elem) {
 	elem.parentElement.classList.toggle('is-open');
 }
 
