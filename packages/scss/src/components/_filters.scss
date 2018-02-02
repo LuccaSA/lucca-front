@@ -7,25 +7,24 @@
 	z-index: 1;
 }
 
-.filters-contentLeft {
-	display: flex;
-}
-
-.filters-contentLeft-item {
+.filters-item {
 	padding: _component("filters.padding");
 	border-right: _theme("commons.divider.width") solid _theme("commons.divider.color");
+}
+
+.filters-contentLeft {
+	display: flex;
 }
 
 .filters-contentRight {
 	display: flex;
 	margin-left: auto;
-}
 
-.filters-contentRight-item {
-	padding: _component("filters.padding");
-	border-left: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	.filters-item {
+		border-right: 0;
+		border-left: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	}
 }
-
 
 
 // MODS
