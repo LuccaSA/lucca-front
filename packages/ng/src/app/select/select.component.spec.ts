@@ -1,6 +1,7 @@
 import { async, TestBed, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {LuSelectOption} from './option/select-option.component';
+import {LuSelectClearerFirstOrDefaultComponent} from './clearer';
 import {LuSelectDirective} from './directive/select.directive';
 import {LuSelectPicker} from './picker/select-picker.component';
 import {LuSelect} from './select.component';
@@ -28,8 +29,9 @@ const globalOptions = [{
 }];
 
 @Component({
-	template: `<lu-select [(ngModel)]="item">
+	template: `<lu-select [(ngModel)]="item" [clearer]="clearer">
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+		<lu-select-clearer-first #clearer [options]="options"></lu-select-clearer-first>
 	</lu-select>
 	`,
 })
@@ -62,19 +64,26 @@ describe('LuSelect', () => {
 			}).compileComponents();
 		});
 
-		it('It should contain the right clearable value input', () => {
+		it('It should reference the right clearer', () => {
 
 			// Arrange
-			const fixture = TestBed.createComponent(LuSelect);
+			TestBed.configureTestingModule({
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
+			});
+			const fixture = TestBed.createComponent(WrapperSelect);
+			const wrapper = fixture.componentInstance;
+			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
+			const luClearer: LuSelectClearerFirstOrDefaultComponent<any> =
+				fixture.debugElement.query(By.directive(LuSelectClearerFirstOrDefaultComponent)).componentInstance;
 			fixture.detectChanges();
-			const luSelect  = fixture.componentInstance;
 
-			// Act
-			luSelect.clearable = true;
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				// Act
+				fixture.detectChanges();
 
-			// Assert
-			expect(luSelect.clearable).toBe(true);
+				// Assert
+				expect(luSelect.clearer).toBe(luClearer);
+			});
 
 		});
 
@@ -91,6 +100,22 @@ describe('LuSelect', () => {
 
 			// Assert
 			expect(luSelect.mod).toBe('mod-material');
+
+		});
+
+		it('It should set the right value', () => {
+
+			// Arrange
+			const fixture = TestBed.createComponent(LuSelect);
+			fixture.detectChanges();
+			const luSelect  = fixture.componentInstance;
+
+			// Act
+			luSelect.value = globalOptions[0];
+			fixture.detectChanges();
+
+			// Assert
+			expect(luSelect.value).toBe(globalOptions[0]);
 
 		});
 
@@ -113,7 +138,7 @@ describe('LuSelect', () => {
 		it('It should reflect the options number', () => {
 			// Arrange
 			TestBed.configureTestingModule({
-				declarations: [LuSelect, WrapperSelect, LuSelectOption]
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
 			});
 			const fixture = TestBed.createComponent(WrapperSelect);
 			const wrapper = fixture.componentInstance;
@@ -134,7 +159,7 @@ describe('LuSelect', () => {
 
 			// Arrange
 			TestBed.configureTestingModule({
-				declarations: [LuSelect, WrapperSelect, LuSelectOption]
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
 			});
 			const fixture = TestBed.createComponent(WrapperSelect);
 			const wrapper = fixture.componentInstance;
@@ -153,67 +178,79 @@ describe('LuSelect', () => {
 
 
 		it('It should not be clearable by default', () => {
-			// Arrange
-			TestBed.configureTestingModule({
-				declarations: [LuSelect, WrapperSelect, LuSelectOption]
-			});
-			const fixture = TestBed.createComponent(WrapperSelect);
-			const wrapper = fixture.componentInstance;
-			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
-			fixture.detectChanges();
-
-			fixture.whenStable().then(() => {
-				// Act
+				// Arrange
+				const fixture = TestBed.createComponent(LuSelect);
 				fixture.detectChanges();
+				const luSelect  = fixture.componentInstance;
 
-				// Assert
-				expect(luSelect.clearable).toBe(false);
-			});
-		});
-
-		it('It should allow empty value if clearable', () => {
-			// Arrange
-			TestBed.configureTestingModule({
-				declarations: [LuSelect, WrapperSelect, LuSelectOption]
-			});
-			const fixture = TestBed.createComponent(WrapperSelect);
-			const wrapper = fixture.componentInstance;
-			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
-			fixture.detectChanges();
-
-
-			fixture.whenStable().then(() => {
 				// Act
-				fixture.detectChanges();
-				luSelect.clearable = true;
 				luSelect.value = null;
 				fixture.detectChanges();
 
 				// Assert
-				expect(luSelect.value).toBeUndefined();
+				expect(luSelect.clearer).toBeUndefined();
+		});
+
+		it('It should not be clearable by key "del" or "backspace" if no clearer is set', () => {
+			// Arrange
+			const fixture = TestBed.createComponent(LuSelect);
+			fixture.detectChanges();
+			const luSelect  = fixture.componentInstance;
+
+			// Act
+			luSelect.value = globalOptions[0];
+			fixture.detectChanges();
+			const luSelectElement = fixture.nativeElement;
+			const keyDownEvent = new Event('keydown');
+			(<any>keyDownEvent).key = 'Delete';
+			luSelectElement.dispatchEvent(keyDownEvent);
+			// Trigger the event
+			fixture.detectChanges();
+
+			// Assert
+			expect(luSelect.value).toBe(globalOptions[0]);
+	});
+
+		it('It should take the empty value of clearer if clearable', () => {
+			// Arrange
+			TestBed.configureTestingModule({
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
+			});
+			const fixture = TestBed.createComponent(WrapperSelect);
+			const wrapper = fixture.componentInstance;
+			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
+			const luSelectClearer: LuSelectClearerFirstOrDefaultComponent<any> =
+				fixture.debugElement.query(By.directive(LuSelectClearerFirstOrDefaultComponent)).componentInstance;
+			fixture.detectChanges();
+
+
+			fixture.whenStable().then(() => {
+				// Act
+				fixture.detectChanges();
+				luSelect.value = null;
+				fixture.detectChanges();
+
+				// Assert
+				expect(luSelect.value).toBe(luSelectClearer.clearValue());
 			});
 	});
 
 	it('It should not allow empty value if not clearable', () => {
-		// Arrange
-		TestBed.configureTestingModule({
-				declarations: [LuSelect, WrapperSelect, LuSelectOption]
-			});
-			const fixture = TestBed.createComponent(WrapperSelect);
-			const wrapper = fixture.componentInstance;
-			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
+
+			// Arrange
+			const fixture = TestBed.createComponent(LuSelect);
+			fixture.detectChanges();
+			const luSelect  = fixture.componentInstance;
+
+			// Act
+			luSelect.value = globalOptions[0];
+			fixture.detectChanges();
+			luSelect.value = null;
 			fixture.detectChanges();
 
+			// Assert
+			expect(luSelect.value).toBe(globalOptions[0]);
 
-			fixture.whenStable().then(() => {
-				// Act
-				fixture.detectChanges();
-				luSelect.value = null;
-				fixture.detectChanges();
-
-				// Assert
-				expect(luSelect.value).toBe(globalOptions[0]);
-			});
 		});
 
 });

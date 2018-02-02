@@ -2,12 +2,10 @@
 	[class.mod-remove]="_canRemove"
 	[luSelect]="selectRef">
 	<div
-		class="textfield-input"
-		>{{_strValue}}</div>
+	class="textfield-input"
+	>{{_strValue}}</div>
+	<ng-content></ng-content>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
-		<ng-content></ng-content>
+		<ng-content select="[option],lu-select-option"></ng-content>
 	</lu-select-picker>
-	<button class="actionIcon" (click)="_clear()" tabIndex="-1">
-		<i class="lucca-icon">cross</i>
-	</button>
 </div>

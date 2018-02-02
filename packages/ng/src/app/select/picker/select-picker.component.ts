@@ -202,6 +202,10 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 */
 	selectOption(option: T): void {
 		this.luOptions$.subscribe(selectOptions => {
+			if (!selectOptions || selectOptions.length === 0){
+				return;
+			}
+
 			this._highlightIndex = selectOptions.findIndex((selectOption) => {
 				return this.same(selectOption.value, option);
 			});

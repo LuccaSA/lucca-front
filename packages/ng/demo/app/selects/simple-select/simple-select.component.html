@@ -7,8 +7,10 @@
 	mod="mod-material"
 	placeholder="my label"
 	name="itemOptions"
+	[clearer]="clearer"
 	clearable="true">
 	<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+	<lu-select-clearer #clearer></lu-select-clearer>
 </lu-select>
 <!--<label class="textfield-label" for="itemOptions">my label</label>-->
 </div>

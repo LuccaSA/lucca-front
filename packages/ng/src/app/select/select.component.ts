@@ -34,6 +34,7 @@ import {take} from 'rxjs/operators/take';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 import {LuSelectOption} from './option/select-option.component';
+import { ISelectClearer } from './clearer/select-clearer.model';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -83,19 +84,20 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
 	set value(value:  T | null) {
 		let valueTemp = value;
-		if (valueTemp === null
-				&& !this.clearable
-				&& this._picker
-				&& this.luOptions
-				&& this.luOptions.length > 0) {
-			valueTemp = this.luOptions.first.value;
+		if (valueTemp === null) {
+			// We have to deal with the fact that the clearer could not be set => we do nothing
+			if (!this.clearer) {
+				return;
+			}
+			// Else we take the value offer by the clearer
+			valueTemp = this.clearer.clearValue();
 		}
 		const lastValue = this._value;
 		this._value = valueTemp;
 		// emit change
 		if (!this._same(lastValue, valueTemp)) {
 			this._cvaOnChange(valueTemp);
-			if (this.clearable) {
+			if (this.clearer) {
 				this._emitClearable();
 			}
 			// Transfer the information to popover
@@ -123,9 +125,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: String;
 	/** True if the component allow to clear the value.  */
-	@Input() clearable = false;
+	// @Input() clearable = false;
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: String;
+	@Input() clearer: ISelectClearer<T>;
 
 
 	// validators
@@ -169,11 +172,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		});
 
 		Promise.resolve().then(() => {
-			if (!this.clearable && !this.value) {
-				if (this.luOptions.length === 0) {
-					throw new Error('Empty list for the select ! As it is not clearable, the list cannot be empty !');
-				}
-				this.value = this.luOptions.first.value;
+			if (this.clearer) {
+				this.clearer.subscribe((value: T) => {
+					this.value = value;
+				});
 			}
 		});
 	}
@@ -194,6 +196,9 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	/** true if the component allow to remove data */
 	private canRemove(canRemove: boolean = false): void {
+		if (this.clearer) {
+			this.clearer.canRemove(canRemove);
+		}
 		this._canRemove = canRemove;
 	}
 
@@ -231,8 +236,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				break;
 			case DELETE:
 			case BACKSPACE:
-				if (this.clearable) {
-					this.value = null;
+				if (this.clearer) {
+					this.value = this.clearer.clearValue();
 				}
 				break;
 			case HOME:
@@ -249,10 +254,6 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			case UP_KEY:
 			$event.preventDefault();
 			return this._picker.onUpKeydown(this._field.popoverOpen);
-			case TAB:
-			break;
-			default:
-			$event.preventDefault();
 		}
 	}
 
@@ -276,7 +277,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		return this._elementRef.nativeElement.value as string;
 	}
 	private _emitClearable() {
-		this.canRemove(this.clearable && !!this.value);
+		this.canRemove(this.clearer && !!this.value);
 	}
 
 	/** detect via JSON.stringify if both value are equals */
