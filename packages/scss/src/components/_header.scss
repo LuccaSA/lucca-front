@@ -30,3 +30,14 @@
 		@include loadingGradientAnimation(rgba(0,0,0, .1), true);
 	}
 }
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.header {
+	&.mod-sticky {
+		position: sticky;
+		top: 0;
+	}
+}

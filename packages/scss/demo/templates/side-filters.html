@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Lucca Front | Aside + header template</title>
+		<title>Lucca Front | Aside + filters template</title>
 		<link rel="icon" type="image/png" href="../lucca.png">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
 		<link rel="stylesheet" href="../../dist/lucca-front.css">
@@ -42,15 +42,18 @@
 				</nav>
 			</aside>
 			<section class="main-content">
-				<div class="header">
-					<div class="header-contentLeft">
-						<div class="textfield mod-search">
-							<input class="textfield-input" type="text" placeholder="Search...">
+				<div class="filters">
+					<div class="filters-item">
+						<div class="textfield mod-material mod-select">
+							<input class="textfield-input" id="textfieldID" type="text">
+							<label class="textfield-label" for="textfieldID">Collaborator</label>
 						</div>
 					</div>
-					<div class="header-contentRight">
-						<button class="button">button</button>
-						<button class="button palette-primary">button</button>
+					<div class="filters-item">
+						<div class="textfield mod-material mod-select">
+							<input class="textfield-input" id="textfieldID" type="text">
+							<label class="textfield-label" for="textfieldID">Something else</label>
+						</div>
 					</div>
 				</div>
 				<div class="container">
@@ -75,23 +78,27 @@
     &lt;/nav&gt;
   &lt;/aside&gt;
   &lt;section class="main-content"&gt;
-    &lt;div class="header"&gt;
-      &lt;div class="header-contentLeft"&gt;
-			&lt;div class="textfield mod-search"&gt;
-				&lt;input class="textfield-input" type="text" placeholder="Search..."&gt;
+		&lt;div class="filters"&gt;
+			&lt;div class="filters-item"&gt;
+				&lt;div class="textfield mod-material mod-select"&gt;
+					&lt;input class="textfield-input" id="textfieldID" type="text"&gt;
+					&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+				&lt;/div&gt;
 			&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="header-contentRight"&gt;
-        &lt;button class="button"&gt;button&lt;/button&gt;
-        &lt;button class="button palette-primary"&gt;button&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="container"&gt;
-      ...
-    &lt;/div&gt;
+			&lt;div class="filters-item"&gt;
+				&lt;div class="textfield mod-material mod-select"&gt;
+					&lt;input class="textfield-input" id="textfieldID" type="text"&gt;
+					&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class="container"&gt;
+			...
+		&lt;/div&gt;
   &lt;/section&gt;
 &lt;/main&gt;</code>
-					<em><b>Tip:</b> You can use <code class="code">&lt;div class="header mod-sticky"&gt;</code> to dock header on scroll</em>
+					<em><b>Tip:</b> You can use <code class="code">&lt;div class="filters mod-sticky"&gt;</code> to dock filters on scroll</em><br>
+					<em><b>Tip:</b> You'll need to remove <code class="code">filters-item</code> elements to use <a href="/#forms-framed">framed textfields</a></em>
 				</div>
 			</section>
 		</main>

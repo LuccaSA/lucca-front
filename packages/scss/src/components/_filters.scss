@@ -1,0 +1,46 @@
+.filters {
+	align-items: flex-end;
+	background: white;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
+	display: flex;
+	position: relative;
+	z-index: 1;
+}
+
+.filters-item {
+	padding: .5rem 1rem;
+	border-right: _theme("commons.divider.width") solid _theme("commons.divider.color");
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.filters {
+	&.mod-sticky {
+		position: sticky;
+		top: 0;
+	}
+}
+
+
+// CHILDS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.filters {
+	.textfield {
+
+		&.mod-compact {
+			margin: 0;
+		}
+
+		&.mod-framed {
+			border-right: _theme("commons.divider.width") solid _theme("commons.divider.color");
+			max-width: 16rem;
+
+			.textfield-input {
+				box-shadow: none !important;
+			}
+		}
+	}
+}
