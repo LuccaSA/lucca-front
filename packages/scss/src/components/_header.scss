@@ -1,9 +1,9 @@
 .header {
 	@include elevate(1);
 	align-items: flex-end;
-	background: _component("filters.background");
+	background: _component("header.background");
 	display: flex;
-	padding: _component("filters.padding");
+	padding: _component("header.padding");
 	position: relative;
 	z-index: 1;
 }
