@@ -43,21 +43,31 @@
 			</aside>
 			<section class="main-content">
 				<div class="filters">
-					<div class="filters-item">
-						<div class="textfield mod-material mod-select">
-							<input class="textfield-input" id="textfieldID" type="text">
-							<label class="textfield-label" for="textfieldID">Collaborator</label>
+					<div class="filters-contentLeft">
+						<div class="filters-contentLeft-item">
+							<div class="textfield mod-material mod-select">
+								<input class="textfield-input" id="textfieldID" type="text">
+								<label class="textfield-label" for="textfieldID">Collaborator</label>
+							</div>
+						</div>
+						<div class="filters-contentLeft-item">
+							<div class="textfield mod-material mod-select">
+								<input class="textfield-input" id="textfieldID" type="text">
+								<label class="textfield-label" for="textfieldID">Something else</label>
+							</div>
 						</div>
 					</div>
-					<div class="filters-item">
-						<div class="textfield mod-material mod-select">
-							<input class="textfield-input" id="textfieldID" type="text">
-							<label class="textfield-label" for="textfieldID">Something else</label>
+					<div class="filters-contentRight">
+						<div class="filters-contentRight-item">
+							<div class="textfield mod-material mod-select">
+								<input class="textfield-input" id="textfieldID" type="text">
+								<label class="textfield-label" for="textfieldID">Something else</label>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="container">
-					<h1>Side with header</h1>
+					<h1>Side with filters</h1>
 <code class="code mod-block">&lt;main class="main"&gt;
   &lt;aside class="navSide mod-compact"&gt;
     &lt;nav class="navSide-scrollWrapper"&gt;
@@ -78,23 +88,33 @@
     &lt;/nav&gt;
   &lt;/aside&gt;
   &lt;section class="main-content"&gt;
-		&lt;div class="filters"&gt;
-			&lt;div class="filters-item"&gt;
+	&lt;div class="filters"&gt;
+		&lt;div class="filters-contentLeft"&gt;
+			&lt;div class="filters-contentLeft-item"&gt;
 				&lt;div class="textfield mod-material mod-select"&gt;
 					&lt;input class="textfield-input" id="textfieldID" type="text"&gt;
-					&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+					&lt;label class="textfield-label" for="textfieldID"&gt;Collaborator&lt;/label&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
-			&lt;div class="filters-item"&gt;
+			&lt;div class="filters-contentLeft-item"&gt;
 				&lt;div class="textfield mod-material mod-select"&gt;
 					&lt;input class="textfield-input" id="textfieldID" type="text"&gt;
-					&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+					&lt;label class="textfield-label" for="textfieldID"&gt;Something else&lt;/label&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
 		&lt;/div&gt;
-		&lt;div class="container"&gt;
-			...
+		&lt;div class="filters-contentRight"&gt;
+			&lt;div class="filters-contentRight-item"&gt;
+				&lt;div class="textfield mod-material mod-select"&gt;
+					&lt;input class="textfield-input" id="textfieldID" type="text"&gt;
+					&lt;label class="textfield-label" for="textfieldID"&gt;Something else&lt;/label&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
 		&lt;/div&gt;
+	&lt;/div&gt;
+    &lt;div class="container"&gt;
+      ...
+    &lt;/div&gt;
   &lt;/section&gt;
 &lt;/main&gt;</code>
 					<em><b>Tip:</b> You can use <code class="code">&lt;div class="filters mod-sticky"&gt;</code> to dock filters on scroll</em><br>

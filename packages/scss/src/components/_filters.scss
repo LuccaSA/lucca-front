@@ -1,16 +1,31 @@
 .filters {
+	@include elevate(1);
 	align-items: flex-end;
-	background: white;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
+	background: _component("filters.background");
 	display: flex;
 	position: relative;
 	z-index: 1;
 }
 
-.filters-item {
-	padding: .5rem 1rem;
+.filters-contentLeft {
+	display: flex;
+}
+
+.filters-contentLeft-item {
+	padding: _component("filters.padding");
 	border-right: _theme("commons.divider.width") solid _theme("commons.divider.color");
 }
+
+.filters-contentRight {
+	display: flex;
+	margin-left: auto;
+}
+
+.filters-contentRight-item {
+	padding: _component("filters.padding");
+	border-left: _theme("commons.divider.width") solid _theme("commons.divider.color");
+}
+
 
 
 // MODS
@@ -24,7 +39,7 @@
 }
 
 
-// CHILDS
+// CHILDS COMPONENTS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .filters {
