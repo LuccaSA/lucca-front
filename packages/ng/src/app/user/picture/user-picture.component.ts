@@ -22,10 +22,10 @@ export class LuUserPictureComponent {
 		this.initials = this.displayPipe.transform(user, 'LF');
 		this.hasPicture = !!user.picture && !!user.picture.href;
 		if (this.hasPicture) {
-			this.style = { ...this.style, 'background-image': `url('${this._user.picture.href}')` };
+			this.style = { 'background-image': `url('${this._user.picture.href}')` };
 		} else {
 			const hsl = this.getNameHue();
-			this.style = { ...this.style, 'background-color': `hsl(${hsl}, 60%, 60%)`};
+			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
 		}
 	}
 	get user() { return this._user; }
