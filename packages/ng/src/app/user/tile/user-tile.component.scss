@@ -51,7 +51,9 @@
 	}
 	@each $name, $size in _component('user-picture.sizes') {
 		&.mod-#{$name} lu-user-picture::ng-deep .picture {
-			font-size: $size;
+			font-size: _get($size, 'font-size');
+			height: _get($size, 'image-size');
+			width: _get($size, 'image-size');
 		}
 	}
 }

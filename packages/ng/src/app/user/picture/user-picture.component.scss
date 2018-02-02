@@ -1,17 +1,15 @@
 @import "../../../style/theming.overridable";
 :host {
-	$vars: (
-		size: 2.5em
-	);
 	.picture {
 		border-radius: 100%;
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		color: white;
-		height: _get($vars, "size");
+		font-size: _component('user-picture.sizes.standard.font-size');
 		position: relative;
-		width: _get($vars, "size");
+		height: _component('user-picture.sizes.standard.image-size');
+		width: _component('user-picture.sizes.standard.image-size');
 
 		> span {
 			position: absolute;
@@ -23,7 +21,9 @@
 
 	@each $name, $size in _component('user-picture.sizes') {
 		&.mod-#{$name} .picture {
-			font-size: $size;
+			font-size: _get($size, 'font-size');
+			height: _get($size, 'image-size');
+			width: _get($size, 'image-size');
 		}
 	}
 }
