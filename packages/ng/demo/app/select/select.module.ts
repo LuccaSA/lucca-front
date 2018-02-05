@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LuEmptyModule } from '../../../src/app/empty/empty.module';
 import { LuSelectModule } from '../../../src/app/select/select.module';
-import { DemoSelectsComponent } from './selects.component';
+import { DemoSelectComponent } from './select.component';
 import { DemoSimpleSelectComponent } from './simple-select/simple-select.component';
 import { SharedModule } from '../shared';
 
@@ -17,11 +17,11 @@ import { SharedModule } from '../shared';
 		LuSelectModule,
 	],
 	declarations: [
-		DemoSelectsComponent,
+		DemoSelectComponent,
 		DemoSimpleSelectComponent,
 	],
 	exports: [
-		DemoSelectsComponent,
+		DemoSelectComponent,
 	]
 })
-export class DemoSelectsModule { }
+export class DemoSelectModule { }
