@@ -1,0 +1,61 @@
+.toasts {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	font-size: _theme("sizes.small.font-size");
+	line-height: _theme("sizes.small.line-height");
+	position: fixed;
+	right: _component("toasts.right");
+	top: _component("toasts.top");
+	width: _component("toasts.width");
+	z-index: 9999;
+}
+
+.toasts-item {
+	@extend %base_animated_element;
+	animation-duration: _component("toasts.duration");
+	animation-name: toast;
+	background: rgba(0, 0, 0, .85);
+	border-radius: _theme("commons.border.radius");
+	color: white;
+	margin-bottom: _component("toasts.padding");
+	margin-left: auto;
+	overflow: hidden;
+	padding: _component("toasts.padding");
+	position: relative;
+	transform-origin: top;
+}
+
+@keyframes toast { // Animations could be set separatly when toasts will be added in NG package
+	from {
+		height: auto;
+		margin-bottom: _component("toasts.margin-bottom");
+		padding: _component("toasts.padding");
+		top: 1rem;
+		opacity: 0;
+	}
+
+	3% {
+		height: auto;
+		margin-bottom: _component("toasts.margin-bottom");
+		padding: _component("toasts.padding");
+		top: 0;
+		opacity: 1;
+	}
+
+	97% {
+		height: auto;
+		margin-bottom: _component("toasts.margin-bottom");
+		padding: _component("toasts.padding");
+		top: 0;
+		opacity: 1;
+	}
+
+	to {
+		margin-bottom: 0;
+		padding: 0;
+		height: 0;
+		top: -1rem;
+		opacity: 0;
+	}
+}
