@@ -67,7 +67,11 @@
 
 @mixin calloutDefaultPalette($palette) {
 	background: rgba(_get($palette, "color"), .10);
-	color: _get($palette, "color");
+	color: darken(_get($palette, "color"), 20%);
+
+	.callout-icon {
+		color: _get($palette, "color");
+	}
 
 	.callout-kill {
 		color: _get($palette, "color");
