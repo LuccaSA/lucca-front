@@ -6,16 +6,44 @@
 	overflow: hidden;
 	padding: _component("textfield.input.padding-vertical") 1.5rem _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
   text-overflow: ellipsis;
+	transition: all _theme("commons.animations.durations.standard") ease;
 	white-space: nowrap;
+	color: _color("text.placeholder");
 }
 
-:host-context(.textfield.mod-material) {
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// Value
+:host-context(.textfield-input.is-filled) {
 	.select-value {
-		padding-left: 0;
-		padding-right: .8rem;
+		color: _color("text.default");
 	}
 }
 
+// Material
+:host-context(.textfield.mod-material) {
+	.select-value {
+		opacity: 0;
+		padding-left: 0;
+		padding-right: .8rem;
+	}
+
+	&:focus {
+		.select-value {
+			opacity: 1;
+		}
+	}
+
+	&.is-filled {
+		.select-value {
+			opacity: 1;
+		}
+	}
+}
+
+// Framed
 :host-context(.textfield.mod-framed) {
 	.select-value {
 		padding: 0;

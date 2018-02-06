@@ -2,7 +2,7 @@
 <div class="textfield mod-select">
 	<lu-select [(ngModel)]="itemSelect"
 		class="textfield-input"
-		placeholder="my label"
+		placeholder="placeholder"
 		[clearer]="nullClearer"
 		name="itemOptions">
 			<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
@@ -16,7 +16,7 @@
 <div class="textfield mod-select">
 	<lu-select [(ngModel)]="itemSelectDefault"
 		class="textfield-input"
-		placeholder="my label"
+		placeholder="placeholder"
 		[clearer]="firstClearer"
 		name="itemOptions">
 			<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>

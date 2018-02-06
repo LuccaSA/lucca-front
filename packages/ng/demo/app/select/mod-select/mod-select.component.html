@@ -3,7 +3,7 @@
 	<div class="textfield mod-select">
 		<lu-select [(ngModel)]="modSelect"
 			class="textfield-input"
-			placeholder="my label"
+			placeholder="placeholder"
 			name="itemMods">
 			<lu-select-option *ngFor="let option of mods" [value]="option">{{option.name}}</lu-select-option>
 		</lu-select>
@@ -15,7 +15,7 @@
 		<lu-select [(ngModel)]="itemSelect"
 			class="textfield-input"
 			[mod]="modSelect.mod"
-			placeholder="my label"
+			placeholder="placeholder"
 			name="itemOptions">
 			<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
 		</lu-select>
