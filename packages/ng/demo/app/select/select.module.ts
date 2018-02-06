@@ -5,6 +5,8 @@ import { LuEmptyModule } from '../../../src/app/empty/empty.module';
 import { LuSelectModule } from '../../../src/app/select/select.module';
 import { DemoSelectComponent } from './select.component';
 import { DemoSimpleSelectComponent } from './simple-select/simple-select.component';
+import { DemoClearerSelectComponent } from './clearer-select/clearer-select.component';
+import { DemoModSelectComponent } from './mod-select/mod-select.component';
 import { SharedModule } from '../shared';
 
 @NgModule({
@@ -19,6 +21,8 @@ import { SharedModule } from '../shared';
 	declarations: [
 		DemoSelectComponent,
 		DemoSimpleSelectComponent,
+		DemoClearerSelectComponent,
+		DemoModSelectComponent,
 	],
 	exports: [
 		DemoSelectComponent,

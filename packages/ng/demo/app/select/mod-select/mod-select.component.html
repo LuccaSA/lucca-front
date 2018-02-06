@@ -1,15 +1,27 @@
-<h1>Component With Options</h1>
+<h3>Component with mods</h3>
+
+<div class="textfield mod-material">
+
+	<lu-select [(ngModel)]="modSelect"
+		class="text-field-input"
+		mod="mod-material"
+		placeholder="my label"
+		name="itemMods">
+		<lu-select-option *ngFor="let option of mods" [value]="option">{{option.name}}</lu-select-option>
+	</lu-select>
+	<label class="textfield-label" for="itemMods">Mod</label>
+</div>
 
 <div class="textfield mod-material">
 
 	<lu-select [(ngModel)]="itemSelect"
 		class="text-field-input"
-		mod="mod-material"
+		[mod]="modSelect.mod"
 		placeholder="my label"
 		name="itemOptions">
 		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-</lu-select>
-<!--<label class="textfield-label" for="itemOptions">my label</label>-->
+	</lu-select>
+	<label class="textfield-label" for="itemOptions">my label</label>
 </div>
 
 <code class="code mod-block">{{ itemSelect | json }}</code>
