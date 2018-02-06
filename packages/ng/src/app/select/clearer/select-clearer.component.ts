@@ -38,9 +38,10 @@ export class LuSelectClearerComponent<T> implements ISelectClearer<T>  {
 	/**
 	 *
 	 */
-	private _clear(): void {
+	private _clear($event): void {
 		if (this._emitter) {
 			this._emitter(this.clearValue());
 		}
+		$event.stopPropagation();
 	}
 }
