@@ -1,7 +1,7 @@
 @import "node_modules/@lucca-front/scss/src/theming.overridable";
 @import "node_modules/@lucca-front/icons/src/mixins";
 
-.actionIcon {
+.select-clear {
 	position: absolute;
 	font-size: .75rem;
 	bottom: .45rem;
@@ -21,16 +21,10 @@
 			display: block;
 		}
 	}
+}
 
-	&.mod-material {
-		.actionIcon {
-			right: 2 * _component("textfield.input.padding-horizontal");
-		}
-
-		&.mod-remove {
-			.textfield-input {
-				padding-right: 4 * _component("textfield.input.padding-horizontal");
-			}
-		}
+:host-context(.textfield.mod-material) {
+	.select-clear {
+		right: 2 * _component("textfield.input.padding-horizontal");
 	}
 }

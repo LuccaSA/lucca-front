@@ -1,27 +1,26 @@
 <h3>Component with mods</h3>
-
-<div class="textfield mod-material">
-
-	<lu-select [(ngModel)]="modSelect"
-		class="text-field-input"
-		mod="mod-material"
-		placeholder="my label"
-		name="itemMods">
-		<lu-select-option *ngFor="let option of mods" [value]="option">{{option.name}}</lu-select-option>
-	</lu-select>
-	<label class="textfield-label" for="itemMods">Mod</label>
+<div class="form-group">
+	<div class="textfield mod-select">
+		<lu-select [(ngModel)]="modSelect"
+			class="textfield-input"
+			placeholder="my label"
+			name="itemMods">
+			<lu-select-option *ngFor="let option of mods" [value]="option">{{option.name}}</lu-select-option>
+		</lu-select>
+		<label class="textfield-label" for="itemMods">Mod</label>
+	</div>
 </div>
-
-<div class="textfield mod-material">
-
-	<lu-select [(ngModel)]="itemSelect"
-		class="text-field-input"
-		[mod]="modSelect.mod"
-		placeholder="my label"
-		name="itemOptions">
-		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-	</lu-select>
-	<label class="textfield-label" for="itemOptions">my label</label>
+<div class="form-group">
+	<div class="textfield mod-select" [ngClass]="modSelect.mod">
+		<lu-select [(ngModel)]="itemSelect"
+			class="textfield-input"
+			[mod]="modSelect.mod"
+			placeholder="my label"
+			name="itemOptions">
+			<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
 </div>
 
 <code class="code mod-block">{{ itemSelect | json }}</code>
