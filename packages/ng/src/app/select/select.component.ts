@@ -96,6 +96,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._value = valueTemp;
 		// emit change
 		if (!this._same(lastValue, valueTemp)) {
+			this.isFilled = !!this._value;
 			this._cvaOnChange(valueTemp);
 			if (this.clearer) {
 				this._emitClearable();
@@ -123,12 +124,14 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@ContentChildren(LuSelectOption, { descendants: true }) luOptions: QueryList<LuSelectOption<T>>;
 
 	/** The placeholder of the component, it is used as label (material design) */
-	@Input() placeholder: String;
+	@Input() placeholder: string;
 	/** True if the component allow to clear the value.  */
 	// @Input() clearable = false;
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
-	@Input() mod: String;
+	@Input() mod: string;
 	@Input() clearer: ISelectClearer<T>;
+
+	@HostBinding('class.is-filled') isFilled = false;
 
 
 	// validators
@@ -274,7 +277,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	// Utilities
 
 	protected get _strValue(): string {
-		return this._elementRef.nativeElement.value as string;
+		return this.value ? this._elementRef.nativeElement.value as string : (this.placeholder ? this.placeholder : '');
 	}
 	private _emitClearable() {
 		this.canRemove(this.clearer && !!this.value);
