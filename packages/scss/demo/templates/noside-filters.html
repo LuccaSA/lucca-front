@@ -13,26 +13,31 @@
 		<main class="main">
 			<section class="main-content">
 				<div class="filters">
-					<div class="filters-contentLeft">
-						<div class="filters-item">
-							<div class="textfield mod-material mod-select">
-								<input class="textfield-input" id="textfieldID" type="text">
-								<label class="textfield-label" for="textfieldID">Collaborator</label>
-							</div>
+					<div class="filters-sectionLeft">
+						<div class="textfield mod-framed mod-select">
+							<input class="textfield-input" id="textfieldID" type="text">
+							<label class="textfield-label" for="textfieldID">Collaborator</label>
 						</div>
-						<div class="filters-item">
-							<div class="textfield mod-material mod-select">
-								<input class="textfield-input" id="textfieldID" type="text">
-								<label class="textfield-label" for="textfieldID">Something else</label>
-							</div>
+						<div class="textfield mod-framed mod-select">
+							<input class="textfield-input" id="textfieldID" type="text">
+							<label class="textfield-label" for="textfieldID">Something else</label>
 						</div>
 					</div>
-					<div class="filters-contentRight">
-						<div class="filters-item">
-							<div class="textfield mod-material mod-select">
-								<input class="textfield-input" id="textfieldID" type="text">
-								<label class="textfield-label" for="textfieldID">Something else</label>
-							</div>
+					<div class="filters-sectionLeft">
+						<div class="checkbox mod-inline">
+							<input class="checkbox-input" type="checkbox" id="checkbox0">
+							<label class="checkbox-label" for="checkbox0">Checkbox</label>
+						</div>
+						<div class="checkbox mod-inline">
+							<input class="checkbox-input" type="checkbox" id="checkbox1">
+							<label class="checkbox-label" for="checkbox1">Checkbox</label>
+						</div>
+						<button class="button palette-primary">Button</button>
+					</div>
+					<div class="filters-sectionRight">
+						<div class="textfield mod-framed mod-select">
+							<input class="textfield-input" id="textfieldID" type="text">
+							<label class="textfield-label" for="textfieldID">Something else</label>
 						</div>
 					</div>
 				</div>
@@ -41,23 +46,30 @@
 <code class="code mod-block">&lt;main class="main"&gt;
   &lt;section class="main-content"&gt;
     &lt;div class="filters"&gt;
-      &lt;div class="filters-contentLeft"&gt;
+      &lt;div class="filters-sectionLeft"&gt;
         &lt;div class="filters-item"&gt;
-          &lt;div class="textfield mod-material mod-select"&gt;
+          &lt;div class="textfield mod-framed mod-select"&gt;
             &lt;input class="textfield-input" id="textfieldID" type="text"&gt;
             &lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
           &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="filters-item"&gt;
-          &lt;div class="textfield mod-material mod-select"&gt;
+          &lt;div class="textfield mod-framed mod-select"&gt;
             &lt;input class="textfield-input" id="textfieldID" type="text"&gt;
             &lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class="filters-contentRight"&gt;
+			&lt;div class="filters-sectionLeft"&gt;
+				&lt;div class="checkbox mod-inline"&gt;
+					&lt;input class="checkbox-input" type="checkbox" id="checkboxID"&gt;
+					&lt;label class="checkbox-label" for="checkboxID"&gt;Checkbox&lt;/label&gt;
+				&lt;/div&gt;
+				&lt;button class="button palette-primary"&gt;Button&lt;/button&gt;
+			&lt;/div&gt;
+      &lt;div class="filters-sectionRight"&gt;
         &lt;div class="filters-item"&gt;
-          &lt;div class="textfield mod-material mod-select"&gt;
+          &lt;div class="textfield mod-framed mod-select"&gt;
             &lt;input class="textfield-input" id="textfieldID" type="text"&gt;
             &lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
           &lt;/div&gt;
@@ -65,13 +77,12 @@
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="container"&gt;
-      ...
+			...
     &lt;/div&gt;
   &lt;/section&gt;
 &lt;/main&gt;</code>
 					<em><b>Tip:</b> You can use <code class="code">&lt;div class="filters mod-sticky"&gt;</code> to dock filters on scroll</em><br>
-					<em><b>Tip:</b> You can remove <code class="code">&lt;div class="filters-contentRight"&gt;&lt;/div&gt;</code> & <code class="code">&lt;div class="filters-contentLeft"&gt;&lt;/div&gt;</code> if you only use left aligned items</em><br>
-					<em><b>Tip:</b> You'll need to remove <code class="code">filters-item</code> elements to use <a href="/#forms-framed">framed textfields</a></em>
+					<em><b>Tip:</b> You can use multiple <code class="code">filters-sectionLeft</code> & <code class="code">filters-sectionRight</code> to seperate your content.</em>
 				</div>
 			</section>
 		</main>
