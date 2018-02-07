@@ -181,25 +181,6 @@
 		}
 	}
 
-	/* Select */
-
-	&.mod-select {
-		.textfield-input {
-			cursor: pointer;
-			padding: 0;
-		}
-
-		&::after {
-			bottom: .15rem;
-			color: _color("text.light");
-			@include makeIcon("chevron_south");
-			font-size: .75rem;
-			pointer-events: none;
-			position: absolute;
-			right: _component("textfield.input.padding-horizontal");
-		}
-	}
-
 	/* Autocomplete & Search */
 
 	&.mod-autocomplete, &.mod-search {

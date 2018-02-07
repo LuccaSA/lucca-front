@@ -1,4 +1,10 @@
 @import "node_modules/@lucca-front/scss/src/theming.overridable";
+@import "node_modules/@lucca-front/icons/src/mixins";
+
+:host {
+	cursor: pointer;
+	padding: 0;
+}
 
 .select-value {
 	line-height: 1;
@@ -9,6 +15,16 @@
 	transition: all _theme("commons.animations.durations.standard") ease;
 	white-space: nowrap;
 	color: _color("text.placeholder");
+
+	&::after {
+		bottom: .5rem;
+		color: _color("text.light");
+		@include makeIcon("chevron_south");
+		font-size: .75rem;
+		pointer-events: none;
+		position: absolute;
+		right: _component("textfield.input.padding-horizontal");
+	}
 }
 
 
@@ -28,6 +44,11 @@
 		opacity: 0;
 		padding-left: 0;
 		padding-right: .8rem;
+
+		&::after {
+			bottom: .6rem;
+			right: 0;
+		}
 	}
 
 	&:focus {
@@ -46,6 +67,12 @@
 // Framed
 :host-context(.textfield.mod-framed) {
 	.select-value {
+		display: inline;
+		height: 100%;
 		padding: 0;
+
+		&::after {
+			right: _component("textfield.framed.side-padding");
+		}
 	}
 }
