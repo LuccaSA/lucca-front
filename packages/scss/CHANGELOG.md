@@ -7,6 +7,15 @@
 ### Enhancements
 ### Fixes
 
+## V0.2.0
+### New features
+### Breaking changes
+### Adding
+### Enhancements
+- `callout` new UI + killable + callout icon
+### Fixes
+- `mods` Alignment issues on mod-framed
+
 ## v0.1.7
 ### Adding
 - `collapse` component
@@ -24,7 +33,6 @@
 - `navSide` is now a block element
 - `menu` has now a line-height
 - `textfield` inline validation
-- `callout` new UI + killable + callout icon
 
 ## v0.1.6
 ### New features

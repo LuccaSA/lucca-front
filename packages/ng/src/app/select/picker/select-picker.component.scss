@@ -1,0 +1,17 @@
+@import "../../popover/popover.component";
+
+.lu-popover-content {
+	padding: 0;
+	max-height: 240px; // Should be a variable in next iteration
+	overflow-y: auto;
+}
+
+lu-select-picker {
+	min-width: 100%;
+}
+
+.select-options {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}

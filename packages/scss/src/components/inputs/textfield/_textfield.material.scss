@@ -102,14 +102,10 @@
 		}
 	}
 
-	&.mod-autocomplete, &.mod-select, &.mod-search {
+	&.mod-autocomplete, &.mod-search {
 		&::after {
 			right: 0;
 			bottom: .1rem;
-		}
-
-		.textfield-input {
-			padding-right: 1.5rem;
 		}
 
 		.textfield-label {

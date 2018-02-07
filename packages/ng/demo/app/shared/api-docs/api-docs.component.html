@@ -63,12 +63,29 @@
 		</section>
 	</ng-template>
 
-	<ng-template [ngIf]="apiDocs.methods.length && apiDocs.exportAs">
+	<ng-template [ngIf]="filterPublic(apiDocs.properties).length">
+		<section>
+			<h3>Properties</h3>
+			<table class="table mod-zebra">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let property of filterPublic(apiDocs.properties)">
+						<td class="table-body-row-cell label-cell"><code>{{property.name}}</code></td>
+						<td class="table-body-row-cell content-cell">
+							<div><i>Type: </i><code>{{ property.type }}</code></div>
+							<div style="margin: 10px 0">{{ property.description }}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</ng-template>
+
+	<ng-template [ngIf]="filterPublic(apiDocs.methods).length">
 		<section>
 			<h3>Methods</h3>
 			<table class="table mod-zebra">
 				<tbody class="table-body">
-					<tr class="table-body-row" *ngFor="let method of apiDocs.methods">
+					<tr class="table-body-row" *ngFor="let method of filterPublic(apiDocs.methods)">
 						<td class="table-body-row-cell label-cell"><code>{{method.name}}</code></td>
 						<td class="table-body-row-cell content-cell">
 							<div><i>Signature: </i><code>{{ methodSignature(method) }}</code></div>

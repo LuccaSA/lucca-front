@@ -2,9 +2,17 @@
 
 ## In Dev
 ### New features
+### Fixes
+### Breaking changes
+### Updated dependencies
+### Updated devDependencies
+
+## v0.2.0
+### New features
 - `lu-user-picture` has size mod classes
 - `lu-user-tile` has size mod classes, a `mod-nameOnly` and a `mod-vertical`
 - New theming system
+- `lu-select` new html select that will work with lucca styles
 ### Fixes
 ### Breaking changes
 - The new theming system requires a new includePaths in your style preprocessors: `~@lucca-front/ng/src/style/overrides`
@@ -12,9 +20,16 @@
 ### Updated devDependencies
 - `ng-formly` fix display of error messages
 
+### New featues
+- `Select` Add the new select of lucca-front
+
+### Updated devDependencies
+- [karma-chrome-launcher](https://github.com/karma-runner/karma) - update to version ~2.2.0
+
 ## v0.1.6
 ### New features
 - `LFAnimationFactory` generates simple Angular animations. Three major types are available: `fade`, `scale`, `slide`.
+- `selectPicker`
 
 ### Fixes
 - `ng-formly` forgot setvalue in formly autocomplete

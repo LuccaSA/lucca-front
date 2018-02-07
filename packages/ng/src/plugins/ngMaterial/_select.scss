@@ -5,16 +5,16 @@ mat-select {
 .textfield.mod-framed mat-select {
 	padding: 0 !important;
 	.mat-select-trigger {
-		font-size: 1em;
-		margin: 2.2em 1em .7em;
+		font-size: 1rem;
+		margin: 2.2rem 1rem .7rem;
 		&::after {
-			bottom: -.7em;
+			bottom: -.7rem;
 			content: "";
 			display: block;
-			left: -1em;
+			left: -1rem;
 			position: absolute;
-			right: -1em;
-			top: -2.2em;
+			right: -1rem;
+			top: -2.2rem;
 		}
 	}
 }
@@ -24,7 +24,7 @@ mat-select {
 }
 
 .mat-select-trigger {
-	height: 1.1em !important;
+	height: 1.1rem !important;
 	min-width: 0 !important;
 	text-overflow: ellipsis;
 }

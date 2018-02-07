@@ -58,7 +58,11 @@ export class DemoApiDocs {
 
   methodSignature(method: MethodDesc): string { return signature(method); }
 
-
+	filterPublic<T extends PropertyDesc|MethodDesc>(values: T[]): T[] {
+		return values && values.length > 0 ? values.filter((desc) => {
+			return !desc.name.startsWith('_');
+		}) : [];
+	}
   private _findInputConfigProperty(configApiDocs: ClassDesc, input: InputDesc): PropertyDesc {
     return configApiDocs.properties.filter(prop => prop.name === input.name)[0];
   }
