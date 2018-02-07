@@ -1,12 +1,14 @@
-@import "node_modules/@lucca-front/scss/src/theming.overridable";
+@import "../../../style/theming.overridable";
 
 :host {
 
 	display: flex;
-	align-items: stretch;
-	width: 18em;
-	min-height: 4em;
+	align-items: center;
+	padding: .5em;
 
+	lu-user-picture {
+		margin-right: .5em;
+	}
 
 	.user-tile-title {
 		font-size: .9em;
@@ -29,5 +31,29 @@
 	}
 	.user-info {
 		margin: auto 0;
+	}
+
+	&.mod-nameOnly {
+		.user-tile-label, .user-tile-footnote {
+			display: none;
+		}
+	}
+
+	&.mod-vertical {
+		flex-direction: column;
+		lu-user-picture {
+			margin-right: 0;
+			margin-bottom: .8em;
+		}
+		.user-info {
+			text-align: center;
+		}
+	}
+	@each $name, $size in _component('user-picture.sizes') {
+		&.mod-#{$name} lu-user-picture::ng-deep .picture {
+			font-size: _get($size, 'font-size');
+			height: _get($size, 'image-size');
+			width: _get($size, 'image-size');
+		}
 	}
 }

@@ -2,8 +2,12 @@
 
 ## In Dev
 ### New features
+- `lu-user-picture` has size mod classes
+- `lu-user-tile` has size mod classes, a `mod-nameOnly` and a `mod-vertical`
+- New theming system
 ### Fixes
 ### Breaking changes
+- The new theming system requires a new includePaths in your style preprocessors: `~@lucca-front/ng/src/style/overrides`
 ### Updated dependencies
 ### Updated devDependencies
 - `ng-formly` fix display of error messages
