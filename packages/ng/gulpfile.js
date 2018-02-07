@@ -53,6 +53,7 @@ function compileScss(stylePath, ext, styleFile, callback) {
 		let sassObj = sass.renderSync({ 
 			file: stylePath,
 			includePaths: [
+				'src/style/overrides',
 				'node_modules/@lucca-front/scss/src/overrides',
 			],
 		});
