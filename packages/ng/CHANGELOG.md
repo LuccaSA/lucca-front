@@ -7,7 +7,7 @@
 ### Updated dependencies
 ### Updated devDependencies
 
-## v0.2.0
+## v0.2.2
 ### New features
 - `lu-user-picture` has size mod classes
 - `lu-user-tile` has size mod classes, a `mod-nameOnly` and a `mod-vertical`

@@ -7,7 +7,7 @@
 ### Enhancements
 ### Fixes
 
-## V0.2.0
+## V0.2.2
 ### New features
 ### Breaking changes
 ### Adding
