@@ -4,6 +4,16 @@
 :host {
 	cursor: pointer;
 	padding: 0;
+
+	&::after {
+		bottom: .55rem;
+		color: _color("text.light");
+		@include makeIcon("chevron_south");
+		font-size: .75rem;
+		pointer-events: none;
+		position: absolute;
+		right: _component("textfield.input.padding-horizontal");
+	}
 }
 
 .select-value {
@@ -15,16 +25,6 @@
   text-overflow: ellipsis;
 	transition: all _theme("commons.animations.durations.standard") ease;
 	white-space: nowrap;
-
-	&::after {
-		bottom: .55rem;
-		color: _color("text.light");
-		@include makeIcon("chevron_south");
-		font-size: .75rem;
-		pointer-events: none;
-		position: absolute;
-		right: _component("textfield.input.padding-horizontal");
-	}
 }
 
 
@@ -44,11 +44,11 @@
 		opacity: 0;
 		padding-left: 0;
 		padding-right: .8rem;
+	}
 
-		&::after {
-			bottom: .6rem;
-			right: 0;
-		}
+	&::after {
+		bottom: .6rem;
+		right: 0;
 	}
 
 	&:focus {
@@ -71,10 +71,10 @@
 	.select-value {
 		height: 100%;
 		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
+	}
 
-		&::after {
-			bottom: .75rem;
-			right: _component("textfield.framed.side-padding");
-		}
+	&::after {
+		bottom: .75rem;
+		right: _component("textfield.framed.side-padding");
 	}
 }
