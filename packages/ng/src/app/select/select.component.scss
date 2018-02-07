@@ -7,6 +7,7 @@
 }
 
 .select-value {
+	color: _color("text.placeholder");
 	line-height: 1;
 	height: 2rem;
 	overflow: hidden;
@@ -14,7 +15,6 @@
   text-overflow: ellipsis;
 	transition: all _theme("commons.animations.durations.standard") ease;
 	white-space: nowrap;
-	color: _color("text.placeholder");
 
 	&::after {
 		bottom: .5rem;
@@ -66,10 +66,11 @@
 
 // Framed
 :host-context(.textfield.mod-framed) {
+	padding: _component("textfield.framed.top-padding") 0 0;
+
 	.select-value {
-		display: inline;
 		height: 100%;
-		padding: 0;
+		padding: 0 _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
 
 		&::after {
 			right: _component("textfield.framed.side-padding");
