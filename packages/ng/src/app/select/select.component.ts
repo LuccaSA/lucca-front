@@ -178,8 +178,14 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 		Promise.resolve().then(() => {
 			if (this.clearer) {
+				let first = true;
 				this.clearer.subscribe((value: T) => {
-					this.value = value;
+					if (!first && this.value) {
+						this.value = value;
+					}
+						if (first) {
+							first = false;
+						}
 				});
 			}
 		});

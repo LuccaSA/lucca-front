@@ -11,6 +11,6 @@ export class DemoClearerSelectComponent {
 		{ id: 4, name: 'blue' },
 	];
 	itemSelect = {id: 1, name: 'red'};
-	itemSelectDefault = {id: 1, name: 'red'};
+	itemSelectDefault = {id: 4, name: 'blue'};
 
 }
