@@ -11,11 +11,11 @@ export class DemoModSelectComponent {
 		{ id: 4, name: 'blue' },
 	];
 	mods = [
-		{ id: 1, mod: 'mod-material', name: 'Material' },
+		{ id: 1, mod: 'mod-basic', name: 'Basic' },
 		{ id: 2, mod: 'mod-compact', name: 'Compact' },
-		{ id: 3, mod: 'mod-framed', name: 'Framed' },
-		{ id: 4, mod: 'mod-basic', name: 'Basic' },
+		{ id: 3, mod: 'mod-material', name: 'Material' },
+		{ id: 4, mod: 'mod-framed', name: 'Framed' },
 	];
 	itemSelect = {id: 1, name: 'red'};
-	modSelect = { id: 1, mod: 'mod-material', name: 'Material' };
+	modSelect = { id: 1, mod: 'mod-basic', name: 'Basic' };
 }
