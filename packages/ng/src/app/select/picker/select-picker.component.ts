@@ -145,10 +145,10 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 				takeUntil(merge(this._destroy$, this._luOptions.changes)),
 				filter(event => event.isUserInput)
 			).subscribe(event => {
-				this.selectOption(event.source.value);
+				this.selectOption(event.source.luOptionValue);
 			});
 			this._optionsLength = this._luOptions.length;
-			this._options$.next(this._luOptions.map<T>(luOption => luOption.value));
+			this._options$.next(this._luOptions.map<T>(luOption => luOption.luOptionValue));
 
 		// }
 	}
@@ -179,7 +179,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 */
 	find(option: T): Observable<LuSelectOption<T>> {
 		return this.luOptions$.map(selectOptions => {
-			return selectOptions.find(selectOption => this.same(selectOption.value, option));
+			return selectOptions.find(selectOption => this.same(selectOption.luOptionValue, option));
 		});
 	}
 	/**
@@ -202,12 +202,12 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 */
 	selectOption(option: T): void {
 		this.luOptions$.subscribe(selectOptions => {
-			if (!selectOptions || selectOptions.length === 0){
+			if (!selectOptions || selectOptions.length === 0) {
 				return;
 			}
 
 			this._highlightIndex = selectOptions.findIndex((selectOption) => {
-				return this.same(selectOption.value, option);
+				return this.same(selectOption.luOptionValue, option);
 			});
 
 			this._highlightIndex$.next(this._highlightIndex);

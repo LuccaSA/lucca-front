@@ -4,6 +4,6 @@
 	<div class="select-value">{{_strValue}}</div>
 	<ng-content></ng-content>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
-		<ng-content select="[option],lu-select-option"></ng-content>
+		<ng-content select="[luOptionValue]"></ng-content>
 	</lu-select-picker>
 </div>

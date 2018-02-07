@@ -30,7 +30,7 @@ const globalOptions = [{
 
 @Component({
 	template: `<lu-select [(ngModel)]="item">
-		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+		<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
 		<lu-select-clearer-first [options]="options"></lu-select-clearer-first>
 	</lu-select>
 	`,

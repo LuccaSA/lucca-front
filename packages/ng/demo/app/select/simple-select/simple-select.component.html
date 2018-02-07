@@ -5,7 +5,7 @@
 			class="textfield-input"
 			placeholder="placeholder"
 			name="itemOptions">
-				<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
@@ -19,7 +19,7 @@
 			class="textfield-input"
 			placeholder="placeholder"
 			name="itemOptions">
-			<lu-select-option *ngFor="let option of lotOfOptions" [value]="option">{{option.name}}</lu-select-option>
+			<lu-select-option *ngFor="let option of lotOfOptions" [luOptionValue]="option">{{option.name}}</lu-select-option>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>

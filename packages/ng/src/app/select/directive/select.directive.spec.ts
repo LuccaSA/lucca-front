@@ -31,7 +31,7 @@ const globalOptions = [{
 	template: `<div [luSelect]="pickerRef"
 	>
 	<lu-select-picker #pickerRef>
-		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+		<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
 	</lu-select-picker>`,
 })
 export class WrapperSelectDirective {

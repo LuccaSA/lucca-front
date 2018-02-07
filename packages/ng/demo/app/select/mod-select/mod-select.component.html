@@ -6,7 +6,7 @@
 				class="textfield-input"
 				placeholder="placeholder"
 				name="itemMods">
-				<lu-select-option *ngFor="let option of mods" [value]="option">{{option.name}}</lu-select-option>
+				<lu-select-option *ngFor="let option of mods" [luOptionValue]="option">{{option.name}}</lu-select-option>
 			</lu-select>
 			<label class="textfield-label" for="itemMods">Mod</label>
 		</div>
@@ -18,7 +18,7 @@
 				[mod]="modSelect.mod"
 				placeholder="placeholder"
 				name="itemOptions">
-				<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
 			</lu-select>
 			<label class="textfield-label" for="itemOptions">my label</label>
 		</div>

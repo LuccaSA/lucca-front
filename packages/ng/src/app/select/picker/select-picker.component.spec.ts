@@ -23,7 +23,7 @@ const globalOptions = [{
 
 @Component({
 	template: `<lu-select-picker>
-		<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+		<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
 	</lu-select-picker>`,
 })
 export class WrapperPickerElementComponent {
@@ -86,7 +86,7 @@ describe('LuSelectPicker', () => {
 			picker.find(globalOptions[0]).subscribe((luOption) => {
 				// Assert
 				expect(luOption).not.toBeNull();
-				expect(luOption.value).toBe(globalOptions[0]);
+				expect(luOption.luOptionValue).toBe(globalOptions[0]);
 			});
 		});
 
@@ -185,7 +185,7 @@ describe('LuSelectPicker', () => {
 			fixture.detectChanges();
 			picker.itemSelected.subscribe((luOption) => {
 				expect(luOption).not.toBeNull('The event `value` is not null');
-				expect(luOption.value).toBe(globalOptions[1], 'The output value emit is not right');
+				expect(luOption.luOptionValue).toBe(globalOptions[1], 'The output value emit is not right');
 				selectionEmit = true;
 			});
 			picker.selectOption(globalOptions[1]);

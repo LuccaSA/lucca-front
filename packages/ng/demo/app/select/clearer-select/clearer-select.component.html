@@ -4,10 +4,9 @@
 		<lu-select [(ngModel)]="itemSelect"
 			class="textfield-input"
 			placeholder="placeholder"
-			[clearer]="nullClearer"
 			name="itemOptions">
-				<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-				<lu-select-clearer #nullClearer></lu-select-clearer>
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+				<lu-select-clearer></lu-select-clearer>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
@@ -20,10 +19,9 @@
 		<lu-select [(ngModel)]="itemSelectDefault"
 			class="textfield-input"
 			placeholder="placeholder"
-			[clearer]="firstClearer"
 			name="itemOptions">
-				<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-				<lu-select-clearer-first #firstClearer [options]="options"></lu-select-clearer-first>
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+				<lu-select-clearer-first [options]="options"></lu-select-clearer-first>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>

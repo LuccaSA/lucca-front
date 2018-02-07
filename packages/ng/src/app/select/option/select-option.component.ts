@@ -43,7 +43,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	/**
 	 * The value of the option
 	 */
-	@Input() value: T;
+	@Input() luOptionValue: T;
 
 	/**
 	 * Emit an event when the option is selected, the LuSelectOption is passed as parameterr

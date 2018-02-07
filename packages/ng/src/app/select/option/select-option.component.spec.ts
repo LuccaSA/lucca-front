@@ -163,11 +163,11 @@ describe('LuSelectOption', () => {
 
 			// Act
 			const modelTemp = {id: 'id', name: 'hello test'};
-			option.value = modelTemp;
+			option.luOptionValue = modelTemp;
 			fixture.detectChanges();
 
 			// Assert
-			expect(JSON.stringify(option.value)).toBe(JSON.stringify(modelTemp));
+			expect(JSON.stringify(option.luOptionValue)).toBe(JSON.stringify(modelTemp));
 		});
 
 		it('It should emit an event on click', () => {
@@ -181,7 +181,7 @@ describe('LuSelectOption', () => {
 			// Act
 			// Set the model
 			const modelTemp = {id: 'id', name: 'hello test'};
-			option.value = modelTemp;
+			option.luOptionValue = modelTemp;
 			// Wait for the call
 			spyOn(option.onSelectionChange, 'emit');
 			// Click on the item
@@ -207,14 +207,14 @@ describe('LuSelectOption', () => {
 			const modelTemp = {id: 'id', name: 'hello test'};
 
 			// Act
-			option.value = modelTemp;
+			option.luOptionValue = modelTemp;
 			// Wait for the call
 			const observableEvent = option.onSelectionChange;
 			// Click on the item
 			const li = fixture.nativeElement.querySelector('li');
 			observableEvent.subscribe((value: LuSelectOptionSelectionChange<any>) => {
 				expect(value).not.toBeNull('The event `value` is not null');
-				expect(value.source.value).toBe(modelTemp, 'The output should emit the `value` on a click');
+				expect(value.source.luOptionValue).toBe(modelTemp, 'The output should emit the `value` on a click');
 				liClickedCalled = true;
 			});
 			// Trigger the event

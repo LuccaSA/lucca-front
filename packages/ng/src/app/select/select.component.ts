@@ -159,7 +159,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
 		this._picker.itemSelected
 		.subscribe(item => {
-			this.value = item ? item.value : undefined;
+			this.value = item ? item.luOptionValue : undefined;
 			this._field.closePopover();
 		});
 	}
@@ -216,7 +216,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	 * @param option : the LuSelectOption to apply
 	 */
 	_optionSelected(option: LuSelectOption<T>): void {
-		this.value = option ? option.value : null;
+		this.value = option ? option.luOptionValue : null;
 	}
 
 	// render/display
