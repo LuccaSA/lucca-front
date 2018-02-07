@@ -1,6 +1,7 @@
 import {
 	Component,
 	Input,
+	forwardRef,
 	OnInit,
 } from '@angular/core';
 import { LuSelectClearerComponent } from './select-clearer.component';
@@ -8,7 +9,8 @@ import { LuSelectClearerComponent } from './select-clearer.component';
 @Component({
 	selector: 'lu-select-clearer-first',
 	templateUrl: './select-clearer.component.html',
-	styleUrls: ['./select-clearer.component.scss']
+	styleUrls: ['./select-clearer.component.scss'],
+	providers: [{provide: LuSelectClearerComponent, useExisting: forwardRef(() => LuSelectClearerFirstOrDefaultComponent)}]
 })
 /**
  * Component that manage the will preselect the first element when we clear the select

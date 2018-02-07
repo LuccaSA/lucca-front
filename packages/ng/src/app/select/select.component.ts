@@ -12,6 +12,7 @@ import {
 	OnDestroy,
 	QueryList,
 	ContentChildren,
+	ContentChild,
 	ViewContainerRef,
 	ViewEncapsulation,
 	ViewChild,
@@ -35,6 +36,7 @@ import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 import {LuSelectOption} from './option/select-option.component';
 import { ISelectClearer } from './clearer/select-clearer.model';
+import { LuSelectClearerComponent } from './clearer/select-clearer.component';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -129,7 +131,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	// @Input() clearable = false;
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: string;
-	@Input() clearer: ISelectClearer<T>;
+	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
 
 	@HostBinding('class.is-filled') isFilled = false;
 

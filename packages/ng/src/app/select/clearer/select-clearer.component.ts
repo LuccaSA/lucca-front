@@ -24,7 +24,7 @@ export class LuSelectClearerComponent<T> implements ISelectClearer<T>  {
 
 	subscribe(next: (T) => void) {
 		this._emitter = next;
-		this._clear();
+		this._clear(null);
 	}
 
 	clearValue(): T {
@@ -42,6 +42,8 @@ export class LuSelectClearerComponent<T> implements ISelectClearer<T>  {
 		if (this._emitter) {
 			this._emitter(this.clearValue());
 		}
-		$event.stopPropagation();
+		if ($event) {
+			$event.stopPropagation();
+		}
 	}
 }
