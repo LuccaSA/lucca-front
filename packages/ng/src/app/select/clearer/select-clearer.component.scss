@@ -28,3 +28,10 @@
 		right: 2 * _component("textfield.input.padding-horizontal");
 	}
 }
+
+:host-context(.textfield.mod-framed) {
+	.select-clear {
+		bottom: .6rem;
+		right: 3.75 * _component("textfield.input.padding-horizontal");
+	}
+}

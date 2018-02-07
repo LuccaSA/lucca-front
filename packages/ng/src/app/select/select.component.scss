@@ -70,9 +70,10 @@
 
 	.select-value {
 		height: 100%;
-		padding: 0 _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
 
 		&::after {
+			bottom: .75rem;
 			right: _component("textfield.framed.side-padding");
 		}
 	}
