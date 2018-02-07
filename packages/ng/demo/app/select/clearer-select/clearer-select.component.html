@@ -1,27 +1,31 @@
-<h3>Component With clearer with null value</h3>
-<div class="textfield">
-	<lu-select [(ngModel)]="itemSelect"
-		class="textfield-input"
-		placeholder="placeholder"
-		[clearer]="nullClearer"
-		name="itemOptions">
-			<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-			<lu-select-clearer #nullClearer></lu-select-clearer>
-	</lu-select>
-	<label class="textfield-label" for="itemOptions">my label</label>
-</div>
-<code class="code mod-block">{{ itemSelect | json }}</code>
+<section class="contentSection">
+	<h3>Component With clearer with null value</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelect"
+			class="textfield-input"
+			placeholder="placeholder"
+			[clearer]="nullClearer"
+			name="itemOptions">
+				<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+				<lu-select-clearer #nullClearer></lu-select-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
 
-<h3>Component With clearer with first value as default value</h3>
-<div class="textfield">
-	<lu-select [(ngModel)]="itemSelectDefault"
-		class="textfield-input"
-		placeholder="placeholder"
-		[clearer]="firstClearer"
-		name="itemOptions">
-			<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
-			<lu-select-clearer-first #firstClearer [options]="options"></lu-select-clearer-first>
-	</lu-select>
-	<label class="textfield-label" for="itemOptions">my label</label>
-</div>
-<code class="code mod-block">{{ itemSelectDefault | json }}</code>
+<section class="contentSection">
+	<h3>Component With clearer with first value as default value</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelectDefault"
+			class="textfield-input"
+			placeholder="placeholder"
+			[clearer]="firstClearer"
+			name="itemOptions">
+				<lu-select-option *ngFor="let option of options" [value]="option">{{option.name}}</lu-select-option>
+				<lu-select-clearer-first #firstClearer [options]="options"></lu-select-clearer-first>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelectDefault | json }}</code>
+</section>

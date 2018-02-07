@@ -17,7 +17,7 @@
 	white-space: nowrap;
 
 	&::after {
-		bottom: .5rem;
+		bottom: .55rem;
 		color: _color("text.light");
 		@include makeIcon("chevron_south");
 		font-size: .75rem;
