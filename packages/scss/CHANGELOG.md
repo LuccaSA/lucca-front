@@ -24,10 +24,7 @@
 - `navSide` is now a block element
 - `menu` has now a line-height
 - `textfield` inline validation
-### Fixes
-- `table` head has now a correct font weight
-- `navSide` is now a block element
-- `menu` has now a line-height
+- `callout` new UI + killable + callout icon
 
 ## v0.1.6
 ### New features
