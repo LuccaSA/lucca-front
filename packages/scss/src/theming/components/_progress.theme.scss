@@ -2,8 +2,8 @@ $progress: (
   margin: 1rem 0,
   height: 4px,
   bar: (
-    color: _color("primary"),
-    effect: linear-gradient(to right, rgba(255, 255, 255, .8) 0%, rgba(255, 255, 255, .5) 100%)
+    background: _color("primary"),
+    gradient: linear-gradient(to right, rgba(255, 255, 255, .8) 0%, rgba(255, 255, 255, .5) 100%)
   ),
   duration: 1.5s
 );

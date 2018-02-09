@@ -6,7 +6,7 @@
 }
 
 .progress-bar {
-	background: _component("progress.bar.color");
+	background: _component("progress.bar.background");
 	bottom: 0;
 	left: 0;
 	position: absolute;
@@ -14,7 +14,7 @@
 
 	&::after {
 		animation: progress _component("progress.duration") infinite;
-		background: _component("progress.bar.effect");
+		background: _component("progress.bar.gradient");
 		bottom: 0;
 		content: "";
 		display: block;
