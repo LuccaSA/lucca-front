@@ -7,6 +7,10 @@
 ### Updated dependencies
 ### Updated devDependencies
 
+## v0.2.3
+### Updated dependencies
+- [rxjs](https://github.com/ReactiveX/rxjs) - update to version ^5.5.2
+
 ## v0.2.2
 ### New features
 - `lu-user-picture` has size mod classes
