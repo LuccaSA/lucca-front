@@ -46,7 +46,7 @@
     "@lucca-front/scss": "^0.2.2",
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
-    "rxjs": "5.5.2",
+    "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
