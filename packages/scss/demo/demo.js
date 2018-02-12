@@ -21,9 +21,16 @@ function toast() {
 	toast.innerHTML = toastsValues[r];
 	var close = document.createElement('button');
 	close.className = "toasts-item-kill";
+	close.addEventListener('click', toastKill, false);
 	toast.appendChild(close);
 	toastsBox.appendChild(toast);
 }
+
+function toastKill() {
+	this.parentElement.remove();
+}
+
+//document.getElementsByClassName('toasts-item-kill').addEventListener('click', function() { alert() }, false);
 
 
 /* ANIMATIONS */
