@@ -19,6 +19,9 @@ function toast() {
 	var r = Math.floor(Math.random() * Math.floor(toastsValues.length));
 	toast.className = "toasts-item";
 	toast.innerHTML = toastsValues[r];
+	var close = document.createElement('button');
+	close.className = "toasts-item-kill";
+	toast.appendChild(close);
 	toastsBox.appendChild(toast);
 }
 

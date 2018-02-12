@@ -26,6 +26,29 @@
 	transform-origin: top;
 }
 
+.toasts-item-kill {
+	background: transparent;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	height: 1rem;
+	opacity: .66;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: opacity _component("menu.animations.durations.fast") ease;
+	width: 1rem;
+
+	&:hover {
+		opacity: 1;
+	}
+
+	&::after {
+		@include makeIcon("cross");
+	}
+}
+
 @keyframes toast { // Animations could be set separatly when toasts will be added in NG package
 	from {
 		height: auto;
