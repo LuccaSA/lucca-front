@@ -29,14 +29,14 @@
 	border: 0;
 	color: white;
 	cursor: pointer;
-	height: 1rem;
+	height: 1.25rem;
 	opacity: .66;
 	padding: 0;
 	position: absolute;
 	right: 0;
 	top: 0;
 	transition: opacity _theme("commons.animations.durations.fast") ease;
-	width: 1rem;
+	width: 1.25rem;
 
 	&:hover {
 		opacity: 1;
