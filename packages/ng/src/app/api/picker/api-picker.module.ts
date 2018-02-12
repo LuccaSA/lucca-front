@@ -12,8 +12,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 		CommonModule,
 		FormsModule,
 		HttpClientModule,
-		OverlayModule
-
+		OverlayModule,
 	],
 	declarations: [
 		LuApiPickerDirective,
