@@ -3,6 +3,7 @@
 ## In Dev
 ### New features
 ### Fixes
+- `lu-select` options are not selectable if optiosn comes asynchronously
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies
