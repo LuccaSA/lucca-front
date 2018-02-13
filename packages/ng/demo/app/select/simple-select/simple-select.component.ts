@@ -17,14 +17,16 @@ export class DemoSimpleSelectComponent implements OnInit {
 
 	ngOnInit(): void {
 		const optionsTmp = [];
-		for (let i = 1; i <= 100; i++) {
-			optionsTmp.push({
-				id: i,
-				name: `option ${i}`
-			});
-		}
+		setTimeout(() => {
 
-		this.lotOfOptions = optionsTmp;
+			for (let i = 1; i <= 100; i++) {
+				optionsTmp.push({
+					id: i,
+					name: `option ${i}`
+				});
+			}
+			this.lotOfOptions = optionsTmp;
+		}, 1000);
 	}
 
 }
