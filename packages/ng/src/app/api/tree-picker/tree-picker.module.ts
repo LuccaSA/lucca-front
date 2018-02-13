@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LuDepartmentPickerComponent } from './department-picker.component';
+import { LuTreePickerComponent } from './tree-picker.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LuPopoverModule } from '../../popover';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { DepartmentPickerService } from './department-picker.service';
-import { LuDepartmentPickerItemComponent } from './/department-picker-item/department-picker-item.component';
+import { LuTreePickerItemComponent } from './tree-picker-item/tree-picker-item.component';
+import { ITree, ITreeNode } from './tree-picker.class';
 
 @NgModule({
 	imports: [
@@ -16,14 +16,13 @@ import { LuDepartmentPickerItemComponent } from './/department-picker-item/depar
 		OverlayModule,
 	],
 	providers: [
-		DepartmentPickerService,
 	],
 	declarations: [
-		LuDepartmentPickerComponent,
-		LuDepartmentPickerItemComponent,
+		LuTreePickerComponent,
+		LuTreePickerItemComponent,
 	],
 	exports: [
-		LuDepartmentPickerComponent,
-	],
+		LuTreePickerComponent,
+	]
 })
-export class LuDepartmentPickerModule { }
+export class LuTreePickerModule { }

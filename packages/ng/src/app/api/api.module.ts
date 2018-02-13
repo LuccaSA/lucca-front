@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LuApiPickerModule } from './picker';
-import { LuDepartmentPickerModule } from './department-picker';
+import { LuTreePickerModule } from './tree-picker';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 	],
 	exports: [
 		LuApiPickerModule,
-		LuDepartmentPickerModule,
+		LuTreePickerModule,
 	],
 })
 export class LuApiModule { }

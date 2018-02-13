@@ -1,0 +1,19 @@
+<!-- <demo-api-docs directive="LuDepartmentPickerComponent"></demo-api-docs> -->
+
+<demo-redirect></demo-redirect>
+
+<p>use `[sourceTree] | async` to retrieve the source tree asynchronously</p>
+
+<demo-example-box [snippets]="snippets" demo="basic">
+	<h2>Basic</h2>
+
+
+	<lu-tree-picker [sourceTree]="staticTree" [(ngModel)]="staticTreeSelection" ngDefaultControl></lu-tree-picker>
+
+	<span>Selection:</span>
+	<code class="code mod-block">{{ staticTreeSelection | json }}</code>
+
+	<hr>
+
+	<!-- <lu-tree-picker [sourceTree]="asyncTree | async"></lu-tree-picker> -->
+</demo-example-box>

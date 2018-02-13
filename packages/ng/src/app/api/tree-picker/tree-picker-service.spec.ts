@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { DepartmentPickerService } from './department-picker.service';
+import { DepartmentPickerService } from './tree-picker.class';
 
 describe('DepartmentPickerService', () => {
 	beforeEach(() => {

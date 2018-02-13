@@ -6,7 +6,7 @@ import { LuEmptyModule } from '../../../../src/app/empty/empty.module';
 import { LuApiModule } from '../../../../src/app/api/api.module';
 
 import { SharedModule } from '../../shared';
-import { DemoDepartmentPickerComponent } from './demo-department-picker.component';
+import { DemoTreePickerComponent } from './demo-tree-picker.component';
 
 @NgModule({
 	imports: [
@@ -19,10 +19,10 @@ import { DemoDepartmentPickerComponent } from './demo-department-picker.componen
 		LuApiModule,
 	],
 	declarations: [
-		DemoDepartmentPickerComponent,
+		DemoTreePickerComponent,
 	],
 	exports: [
-		DemoDepartmentPickerComponent,
+		DemoTreePickerComponent,
 	]
 })
-export class DemoDepartmentPickerModule { }
+export class DemoTreePickerModule { }

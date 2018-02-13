@@ -2,7 +2,7 @@
 
 // import { Component } from '@angular/core';
 // @Component({
-// 	selector: 'demo-department-picker-basic',
+// 	selector: 'demo-tree-picker-basic',
 // 	templateUrl: './basic.html',
 // })
 // export class BasicComponent {
