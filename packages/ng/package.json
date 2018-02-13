@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng",
-  "version": "0.2.4-alpha.0",
+  "version": "0.2.4-alpha.1",
   "description": "a library of usefull components for angular web app",
   "repository": {
     "type": "git",
@@ -42,8 +42,8 @@
     "@angular/forms": "^5.0.0",
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
-    "@lucca-front/icons": "^0.2.4-alpha.0",
-    "@lucca-front/scss": "^0.2.4-alpha.0",
+    "@lucca-front/icons": "^0.2.4-alpha.1",
+    "@lucca-front/scss": "^0.2.4-alpha.1",
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.2",
@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@angular/cdk": "^5.0.0-rc0",
-    "@angular/cli": "1.5.0",
+    "@angular/cli": "^1.6.8",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/material": "^5.0.0-rc0",
     "@angular/material-moment-adapter": "^5.0.0-rc0",
@@ -89,8 +89,8 @@
   "peerDependencies": {
     "@angular/cdk": "^5.0.0-rc0",
     "@angular/material": "^5.0.0-rc0",
-    "@lucca-front/icons": "^0.2.4-alpha.0",
-    "@lucca-front/scss": "^0.2.4-alpha.0",
+    "@lucca-front/icons": "^0.2.4-alpha.1",
+    "@lucca-front/scss": "^0.2.4-alpha.1",
     "@ngx-formly/core": "^2.0.0-beta.3",
     "moment": "^2.19.1"
   }
