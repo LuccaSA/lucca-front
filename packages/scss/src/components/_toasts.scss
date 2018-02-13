@@ -12,7 +12,7 @@
 }
 
 .toasts-item {
-	animation: toast _theme("commons.animations.durations.fast") 1;
+	animation: toast _theme("commons.animations.durations.standard") 1;
 	background: rgba(0, 0, 0, .85);
 	border-radius: _theme("commons.border.radius");
 	color: white;
@@ -27,24 +27,25 @@
 .toasts-item-kill {
 	background: transparent;
 	border: 0;
+	bottom: 0;
 	color: white;
 	cursor: pointer;
 	height: 1.25rem;
-	opacity: .66;
+	margin: auto;
 	padding: 0;
 	position: absolute;
-	right: 0;
+	right: .5rem;
 	top: 0;
 	transition: opacity _theme("commons.animations.durations.fast") ease;
 	width: 1.25rem;
 
 	&:hover {
-		opacity: 1;
+		opacity: .66;
 	}
 
 	&::after {
 		@include makeIcon("cross");
-		font-size: _theme("sizes.smaller.font-size");
+		font-size: _theme("sizes.standard.font-size");
 	}
 }
 
