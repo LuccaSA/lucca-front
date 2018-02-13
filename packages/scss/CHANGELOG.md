@@ -20,6 +20,7 @@
 ### Adding
 - `collapse` component
 - `emptystate` component
+- `filters` component
 ### Enhancements
 - `table` row can now be set has a filter row with .mod-filters
 - `navSide` compact mode width & fonts are smaller
