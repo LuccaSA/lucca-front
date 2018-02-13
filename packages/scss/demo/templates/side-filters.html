@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Lucca Front | Aside + header template</title>
+		<title>Lucca Front | Aside + filters template</title>
 		<link rel="icon" type="image/png" href="../lucca.png">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
 		<link rel="stylesheet" href="../../dist/lucca-front.css">
@@ -42,19 +42,32 @@
 				</nav>
 			</aside>
 			<section class="main-content">
-				<div class="header">
-					<div class="header-contentLeft">
-						<div class="textfield mod-search">
-							<input class="textfield-input" type="text" placeholder="Search...">
+				<div class="filters">
+					<div class="filters-sectionLeft">
+						<div class="textfield mod-framed">
+							<input class="textfield-input" id="textfieldID" type="text" placeholder="placerholder">
+							<label class="textfield-label" for="textfieldID">Collaborator</label>
+						</div>
+						<div class="textfield mod-framed">
+							<input class="textfield-input" id="textfieldID" type="text" placeholder="placerholder">
+							<label class="textfield-label" for="textfieldID">Something else</label>
 						</div>
 					</div>
-					<div class="header-contentRight">
-						<button class="button">button</button>
-						<button class="button palette-primary">button</button>
+					<div class="filters-sectionLeft">
+						<div class="checkbox mod-inline">
+							<input class="checkbox-input" type="checkbox" id="checkbox0">
+							<label class="checkbox-label" for="checkbox0">Checkbox</label>
+						</div>
+					</div>
+					<div class="filters-sectionRight">
+						<div class="textfield mod-framed">
+							<input class="textfield-input" id="textfieldID" type="text" placeholder="placerholder">
+							<label class="textfield-label" for="textfieldID">Something else</label>
+						</div>
 					</div>
 				</div>
 				<div class="container">
-					<h1>Side with header</h1>
+					<h1>Side with filters</h1>
 <code class="code mod-block">&lt;main class="main"&gt;
   &lt;aside class="navSide mod-compact"&gt;
     &lt;nav class="navSide-scrollWrapper"&gt;
@@ -75,23 +88,43 @@
     &lt;/nav&gt;
   &lt;/aside&gt;
   &lt;section class="main-content"&gt;
-    &lt;div class="header"&gt;
-      &lt;div class="header-contentLeft"&gt;
-			&lt;div class="textfield mod-search"&gt;
-				&lt;input class="textfield-input" type="text" placeholder="Search..."&gt;
+		&lt;div class="filters"&gt;
+			&lt;div class="filters-sectionLeft"&gt;
+				&lt;div class="filters-item"&gt;
+					&lt;div class="textfield mod-framed"&gt;
+						&lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placerholder"&gt;
+						&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div class="filters-item"&gt;
+					&lt;div class="textfield mod-framed"&gt;
+						&lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placerholder"&gt;
+						&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
 			&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="header-contentRight"&gt;
-        &lt;button class="button"&gt;button&lt;/button&gt;
-        &lt;button class="button palette-primary"&gt;button&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+			&lt;div class="filters-sectionLeft"&gt;
+				&lt;div class="checkbox mod-inline"&gt;
+					&lt;input class="checkbox-input" type="checkbox" id="checkboxID"&gt;
+					&lt;label class="checkbox-label" for="checkboxID"&gt;Checkbox&lt;/label&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="filters-sectionRight"&gt;
+				&lt;div class="filters-item"&gt;
+					&lt;div class="textfield mod-framed"&gt;
+						&lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placerholder"&gt;
+						&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
     &lt;div class="container"&gt;
       ...
     &lt;/div&gt;
   &lt;/section&gt;
 &lt;/main&gt;</code>
-					<em><b>Tip:</b> You can use <code class="code">&lt;div class="header mod-sticky"&gt;</code> to dock header on scroll</em>
+					<em><b>Tip:</b> You can use <code class="code">&lt;div class="filters mod-sticky"&gt;</code> to dock filters on scroll</em><br>
+					<em><b>Tip:</b> You can use multiple <code class="code">filters-sectionLeft</code> & <code class="code">filters-sectionRight</code> to seperate your content.</em>
 				</div>
 			</section>
 		</main>
