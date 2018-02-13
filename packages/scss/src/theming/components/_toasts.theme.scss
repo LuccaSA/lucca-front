@@ -1,0 +1,9 @@
+$toasts: (
+	top: 1.5rem,
+	right: 1.5rem,
+	width: 16rem,
+	padding: .75rem 2.25rem .75rem 1rem,
+	margin-bottom: .5rem
+);
+
+$theme: _set($theme, "components.toasts", $toasts);
