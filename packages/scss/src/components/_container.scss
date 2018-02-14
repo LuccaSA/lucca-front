@@ -12,6 +12,11 @@
 	@media (max-width: _component("container.min-width")) {
 		width: 100%;
 	}
+
+	&:last-child {
+		padding-bottom: _component("container.margin-bottom");
+		margin-bottom: 0;
+	}
 }
 
 
