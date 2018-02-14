@@ -4,10 +4,13 @@
 ### New features
 ### Breaking changes
 ### Adding
-- `progress` component
-- `toasts` sass component
 ### Enhancements
 ### Fixes
+
+## V0.3.0
+### Adding
+- `progress` component
+- `toasts` sass component
 
 ## V0.2.2
 ### New features
