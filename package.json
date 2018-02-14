@@ -29,6 +29,7 @@
     "lerna": "lerna"
   },
   "dependencies": {
-    "lerna": "^2.5.1"
+    "lerna": "^2.5.1",
+    "surge": "^0.19.0"
   }
 }
