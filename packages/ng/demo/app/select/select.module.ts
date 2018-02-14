@@ -6,6 +6,7 @@ import { LuSelectModule } from '../../../src/app/select/select.module';
 import { DemoSelectComponent } from './select.component';
 import { DemoSimpleSelectComponent } from './simple-select/simple-select.component';
 import { DemoClearerSelectComponent } from './clearer-select/clearer-select.component';
+import { DemoSearcherSelectComponent } from './searcher-select/searcher-select.component';
 import { DemoModSelectComponent } from './mod-select/mod-select.component';
 import { SharedModule } from '../shared';
 
@@ -22,6 +23,7 @@ import { SharedModule } from '../shared';
 		DemoSelectComponent,
 		DemoSimpleSelectComponent,
 		DemoClearerSelectComponent,
+		DemoSearcherSelectComponent,
 		DemoModSelectComponent,
 	],
 	exports: [
