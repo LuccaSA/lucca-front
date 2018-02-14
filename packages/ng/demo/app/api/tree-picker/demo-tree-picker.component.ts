@@ -69,15 +69,24 @@ export class DemoTreePickerComponent {
 		]
 	};
 
-	public staticTreeSelection: ITreeNode[];
+	public multipleTreeSelection: ITreeNode[];
 
-	constructor(private http: HttpClient) {
-		this.staticTreeSelection = [
-			// <ITreeNode>{ id: 1, name: '1' },
-			// <ITreeNode>{ id: 2, name: '2' },
-			// <ITreeNode>{ id: 3, name: '3' },
-			// <ITreeNode>{ id: 7, name: '7' },
+	public singleTreeSelection: ITreeNode;
+
+	public allowMultiple = true;
+
+	constructor(
+		private http: HttpClient
+	) {
+
+		this.multipleTreeSelection = [
+			<ITreeNode>{ id: 1, name: '1' },
+			<ITreeNode>{ id: 2, name: '2' },
+			<ITreeNode>{ id: 3, name: '3' },
+			<ITreeNode>{ id: 7, name: '7' },
 		];
+
+		this.singleTreeSelection = <ITreeNode>{ id: 3, name: '3' };
 
 		this.asyncTree = http.get('/api/v3/departments/tree').map((result: any) => result.data);
 	}

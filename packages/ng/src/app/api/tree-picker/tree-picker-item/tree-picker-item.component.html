@@ -1,10 +1,10 @@
 <div class="checkbox">
-	<input class="checkbox-input" type="checkbox" [checked]="tree.node.isSelected" (change)="onChecked(tree)" id="{{nodeUniqueId}}">
-	<label class="checkbox-label" for="{{nodeUniqueId}}">{{ tree.node.name }}</label>
+	<input class="checkbox-input" type="checkbox" [checked]="tree.node.isSelected" (change)="onChecked(tree)" id="{{ nodeUniqueId }}">
+	<label class="checkbox-label" for="{{ nodeUniqueId }}">{{ tree.node.name }}</label>
 </div>
-<button class="button mod-flat" *ngIf="allowMultiple === true && tree.children != null && tree.children.length > 0" (click)="onCheckParentOnly()">(parent only)</button>
+<button class="button mod-flat" *ngIf="multiple === true && tree.children != null && tree.children.length > 0" (click)="onCheckParentOnly()">(parent only)</button>
 <ul *ngIf="tree.children != null && tree.children.length > 0">
 	<li *ngFor="let child of tree.children">
-		<lu-tree-picker-item [tree]="child" [allowMultiple]="allowMultiple" (nodeChanged)="onNodeChanged($event)"></lu-tree-picker-item>
+		<lu-tree-picker-item [tree]="child" [multiple]="multiple" [messenger]="messenger"></lu-tree-picker-item>
 	</li>
 </ul>

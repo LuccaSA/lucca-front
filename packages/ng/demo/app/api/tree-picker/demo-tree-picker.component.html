@@ -7,13 +7,20 @@
 <demo-example-box [snippets]="snippets" demo="basic">
 	<h2>Basic</h2>
 
-
-	<lu-tree-picker [sourceTree]="staticTree" [(ngModel)]="staticTreeSelection" ngDefaultControl></lu-tree-picker>
-
-	<span>Selection:</span>
-	<code class="code mod-block">{{ staticTreeSelection | json }}</code>
+	<div class="grid">
+		<div class="grid-xs6">
+			<h3>Multiple</h3>
+			<lu-tree-picker [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection" [multiple]="true"></lu-tree-picker>
+			<span>Selection:</span>
+			<code class="code mod-block">{{ multipleTreeSelection | json }}</code>
+		</div>
+		<div class="grid-xs6">
+			<h3>Mono</h3>
+			<lu-tree-picker [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree-picker>
+			<span>Selection:</span>
+			<code class="code mod-block">{{ singleTreeSelection | json }}</code>
+		</div>
+	</div>
 
 	<hr>
-
-	<!-- <lu-tree-picker [sourceTree]="asyncTree | async"></lu-tree-picker> -->
 </demo-example-box>

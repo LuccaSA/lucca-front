@@ -7,6 +7,7 @@ import { LuPopoverModule } from '../../popover';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuTreePickerItemComponent } from './tree-picker-item/tree-picker-item.component';
 import { ITree, ITreeNode } from './tree-picker.class';
+import { TreePickerMessageService } from './tree-picker.message.service';
 
 @NgModule({
 	imports: [
@@ -16,6 +17,7 @@ import { ITree, ITreeNode } from './tree-picker.class';
 		OverlayModule,
 	],
 	providers: [
+		TreePickerMessageService,
 	],
 	declarations: [
 		LuTreePickerComponent,
