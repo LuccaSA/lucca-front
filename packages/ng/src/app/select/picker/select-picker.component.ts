@@ -99,12 +99,15 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 			this._options$,
 			this._highlightIndex$,
 			(options, index) => {
-				if (!!options) {
+				if (!!options && index <= options.length) {
 					return {option: options[index], index};
 				}
 				return undefined;
 			}
 		).subscribe(o => {
+			if (!o) {
+				return;
+			}
 			this._highlightedOption = o.option;
 			if (this._highlightedLuOption) {
 				this._highlightedLuOption.unfocus();
@@ -188,13 +191,13 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 * @param clue
 	 */
 	search(clue: string = ''): void {
-		this.luOptions$.subscribe(selectOptions => {
+		const selectOptions = this.luOptions$.getValue(); // subscribe(selectOptions => {
 			this._highlightIndex = selectOptions.findIndex((selectOption) => {
 				return selectOption.viewValue === clue;
 			});
 
 			this._highlightIndex$.next(this._highlightIndex);
-		});
+		// });
 	}
 	/**
 	 * Select the option (value) of the popover.
@@ -202,18 +205,22 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 * @param option : the option should be in the list of options of the popover
 	 */
 	selectOption(option: T): void {
-		this.luOptions$.subscribe(selectOptions => {
-			if (!selectOptions || selectOptions.length === 0) {
-				return;
-			}
+		const selectOptions = this.luOptions$.getValue();
+		this._selectWithoutEmit(option);
+		this.itemSelected.emit(selectOptions[this._highlightIndex]);
+	}
 
-			this._highlightIndex = selectOptions.findIndex((selectOption) => {
-				return this.same(selectOption.luOptionValue, option);
-			});
+	private _selectWithoutEmit(option: T): void {
+		const selectOptions = this.luOptions$.getValue(); // (selectOptions => {
+		if (!selectOptions || selectOptions.length === 0) {
+			return;
+		}
 
-			this._highlightIndex$.next(this._highlightIndex);
-			this.itemSelected.emit(selectOptions[this._highlightIndex]);
+		this._highlightIndex = selectOptions.findIndex((selectOption) => {
+			return this.same(selectOption.luOptionValue, option);
 		});
+
+		this._highlightIndex$.next(this._highlightIndex);
 	}
 
 	// Comes from LuPopoverComponent
@@ -281,11 +288,11 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 * Helper method to fire the event of selection
 	 */
 	private _selectHighlightOption(): void {
-		this.luOptions$.subscribe(selectOptions => {
+		const selectOptions = this.luOptions$.getValue(); // selectOptions => {
 			if (!!selectOptions) {
 				this.itemSelected.emit(selectOptions[this._highlightIndex]);
 			}
-		});
+		// });
 	}
 
 	/**
