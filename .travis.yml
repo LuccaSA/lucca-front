@@ -9,4 +9,10 @@ before_script:
 script:
   - cd packages/ng
   - npm test
+  - gulp generatedoc
+  - ng build -a=demo
   - cd ../../
+
+after_success:
+  - chmod ugo+x ./deploy.sh
+  - ./deploy.sh
