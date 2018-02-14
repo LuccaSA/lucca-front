@@ -1,0 +1,13 @@
+
+<li class="search">
+	<input
+		(mousedown)="onMouseDown($event)"
+		(blur)="onBlur()"
+		class="textfield-input"
+		[(ngModel)]="_clue"
+		(input)="_onFieldChange($event.target.value)"
+		>
+</li>
+<div class="options">
+	<ng-content select="[luOptionValue]"></ng-content>
+</div>
