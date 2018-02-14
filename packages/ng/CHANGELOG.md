@@ -2,7 +2,6 @@
 
 ## In Dev
 ### New features
-
 ### Fixes
 ### Breaking changes
 ### Updated dependencies
