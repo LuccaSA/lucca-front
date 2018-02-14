@@ -1,6 +1,7 @@
 import {
 	Component,
 	OnInit,
+	Input,
 	ContentChildren,
 	QueryList,
 	AfterContentInit
@@ -21,6 +22,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
  */
 export class LuSelectSearcherComponent<T> implements OnInit, AfterContentInit, ISelectSearcher<T>  {
 
+	@Input() luOptionFeeder = true;
 	private _clue = '';
 	private _focus = false;
 	private _clue$: Subject<string> = new Subject<string>();
