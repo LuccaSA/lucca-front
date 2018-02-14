@@ -4,3 +4,4 @@ export * from './picker';
 export * from './option';
 export * from './directive';
 export * from './clearer';
+export * from './searcher';
