@@ -4,6 +4,7 @@
 ### New features
 ### Breaking changes
 ### Adding
+- `progress` component
 - `toasts` sass component
 ### Enhancements
 ### Fixes
