@@ -1,10 +1,8 @@
 import {
 	Component,
-	OnInit,
 	Input,
 	ContentChildren,
-	QueryList,
-	AfterContentInit
+	QueryList
 } from '@angular/core';
 import { ISelectSearcher } from './select-searcher.model';
 import { LuSelectOption } from '../option/select-option.component';
@@ -20,7 +18,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 /**
  * Component that manage the possibility to clear a select. null value will be set when we click on it
  */
-export class LuSelectSearcherComponent<T> implements OnInit, AfterContentInit, ISelectSearcher<T>  {
+export class LuSelectSearcherComponent<T> implements ISelectSearcher<T>  {
 
 	@Input() luOptionFeeder = true;
 	private _clue = '';
@@ -35,8 +33,6 @@ export class LuSelectSearcherComponent<T> implements OnInit, AfterContentInit, I
 		.distinctUntilChanged() // only emit if value is different from previous value
 		.subscribe(model => {
 			this._clue = model;
-			console.log(`Clue Changed : ${this._clue} / ${model}`);
-
 			// Call the filter function
 			this.filter(this._clue, this.luOptions.toArray());
 		});
@@ -50,14 +46,8 @@ export class LuSelectSearcherComponent<T> implements OnInit, AfterContentInit, I
 
 	onBlur() {
 		this._focus = false;
-	}
-
-	ngOnInit(): void {
-		console.log('OnInit Clue : ', this._clue);
-	}
-
-	ngAfterContentInit(): void {
-		console.log('AfterContentInit Clue : ', this._clue);
+		// When we quit the field, we reset the search item
+		this._clue = '';
 	}
 
 	filter(clue: string, options: LuSelectOption<T>[]): LuSelectOption<T>[] {
