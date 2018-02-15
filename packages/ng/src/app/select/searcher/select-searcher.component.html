@@ -1,8 +1,8 @@
 
 <li class="search">
 	<input
-		(mousedown)="onMouseDown($event)"
-		(blur)="onBlur()"
+		(mousedown)="_onMouseDown($event)"
+		(blur)="_onBlur()"
 		class="textfield-input"
 		[(ngModel)]="_clue"
 		(input)="_onFieldChange($event.target.value)"
