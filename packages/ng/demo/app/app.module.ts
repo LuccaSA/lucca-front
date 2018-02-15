@@ -18,6 +18,7 @@ import { DemoPopoverModule } from './popover/popover.module';
 import { DemoAnimationsModule } from './animations/animations.module';
 import { DemoApiModule } from './api/api.module';
 import { DemoSelectModule } from './select/select.module';
+import { DemoTreePickerModule } from './tree-picker/tree-picker.module';
 
 import { DemoUserModule } from './user/user.module';
 
@@ -38,6 +39,7 @@ import { DemoUserModule } from './user/user.module';
 		DemoEmptyModule,
 		DemoApiModule,
 		DemoSelectModule,
+		DemoTreePickerModule,
 
 		BrowserModule,
 		BrowserAnimationsModule,

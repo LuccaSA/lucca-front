@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http/';
 import { Observable } from 'rxjs/Observable';
-import { ITree, ITreeNode } from '../../../../src/app/api/tree-picker';
+import { ITree, ITreeNode } from './../../../../../src/app/tree-picker';
 declare var require: any;
 
 @Component({
+	/* tslint:disable */
 	selector: 'demo-tree-picker',
+	/* tslint:enabled */
 	templateUrl: './demo-tree-picker.component.html',
 	styles: []
 })

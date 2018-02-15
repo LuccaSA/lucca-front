@@ -1,0 +1,8 @@
+<!-- Multiple -->
+<lu-tree [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection" [multiple]="true"></lu-tree>
+
+<!-- Single -->
+<lu-tree [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>
+
+<!-- Use `| async` to use a tree retrieved asynchronously -->
+<lu-tree [sourceTree]="asyncTree | async" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>

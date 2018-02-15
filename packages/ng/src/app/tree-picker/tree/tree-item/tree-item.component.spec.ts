@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LuTreePickerComponent } from './tree-picker.component';
+import { LuTreeItemComponent } from './tree-item.component';
 
-describe('LuTreePickerComponent', () => {
-	let component: LuTreePickerComponent;
-	let fixture: ComponentFixture<LuTreePickerComponent>;
+describe('LuTreeItemComponent', () => {
+	let component: LuTreeItemComponent;
+	let fixture: ComponentFixture<LuTreeItemComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [LuTreePickerComponent]
+			declarations: [LuTreeItemComponent]
 		})
 			.compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(LuTreePickerComponent);
+		fixture = TestBed.createComponent(LuTreeItemComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

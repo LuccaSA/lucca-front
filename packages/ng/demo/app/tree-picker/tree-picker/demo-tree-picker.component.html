@@ -7,20 +7,26 @@
 <demo-example-box [snippets]="snippets" demo="basic">
 	<h2>Basic</h2>
 
+	<!-- <div [LuPopoverTriggerFor]="toto">
+		test
+	</div>
+
+	<lu-popover #toto trigger-on="click">
+		<lu-tree [sourceTree]="asyncTree | async" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>
+	</lu-popover> -->
+
 	<div class="grid">
 		<div class="grid-xs6">
 			<h3>Multiple</h3>
-			<lu-tree-picker [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection" [multiple]="true"></lu-tree-picker>
+			<lu-tree [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection" [multiple]="true"></lu-tree>
 			<span>Selection:</span>
 			<code class="code mod-block">{{ multipleTreeSelection | json }}</code>
 		</div>
 		<div class="grid-xs6">
 			<h3>Mono</h3>
-			<lu-tree-picker [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree-picker>
+			<lu-tree [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>
 			<span>Selection:</span>
 			<code class="code mod-block">{{ singleTreeSelection | json }}</code>
 		</div>
 	</div>
-
-	<hr>
 </demo-example-box>

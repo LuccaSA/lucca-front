@@ -3,18 +3,18 @@ import { Observable } from 'rxjs/Observable';
 import { OnInit, OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ITree, ITreeNode } from './tree-picker.class';
-import { TreePickerMessageService, TreePickerMessage } from './tree-picker.message.service';
+import { ITree, ITreeNode } from './tree.class';
+import { TreePickerMessageService, TreePickerMessage } from './tree.message.service';
 
 @Component({
-	selector: 'lu-tree-picker',
-	templateUrl: './tree-picker.component.html',
+	selector: 'lu-tree',
+	templateUrl: './tree.component.html',
 	providers: [
-		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuTreePickerComponent), multi: true },
+		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuTreeComponent), multi: true },
 	],
-	styleUrls: ['./tree-picker.component.scss'],
+	styleUrls: ['./tree.component.scss'],
 })
-export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class LuTreeComponent implements ControlValueAccessor, OnInit, OnChanges {
 
 	/** Default value for 'multiple' attribute */
 	public static readonly DEFAULT_ALLOW_MULTIPLE = true;
@@ -72,7 +72,7 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 
 	public ngOnInit() {
 		if (this.multiple == null) {
-			this.multiple = LuTreePickerComponent.DEFAULT_ALLOW_MULTIPLE;
+			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 		if (this._innerValue == null) {
 			this._innerValue = <ITreeNode | ITreeNode[]>(this.multiple ? {} : []);
@@ -81,7 +81,7 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (this.multiple == null) {
-			this.multiple = LuTreePickerComponent.DEFAULT_ALLOW_MULTIPLE;
+			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 		if (changes.hasOwnProperty('sourceTree')) {
 			this.fillTree(changes.sourceTree.currentValue);

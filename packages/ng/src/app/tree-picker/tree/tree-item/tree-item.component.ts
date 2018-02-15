@@ -2,16 +2,16 @@ import { Component, Input, Output } from '@angular/core';
 import { NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core/src/view/provider';
 import { OnInit, OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
-import { ITree, ITreeNode } from './../tree-picker.class';
-import { TreePickerMessageService, TreePickerMessage } from './../tree-picker.message.service';
-import { LuTreePickerComponent } from './../tree-picker.component';
+import { ITree, ITreeNode } from './../tree.class';
+import { TreePickerMessageService, TreePickerMessage } from './../tree.message.service';
+import { LuTreeComponent } from './../tree.component';
 
 @Component({
-	selector: 'lu-tree-picker-item',
-	templateUrl: './tree-picker-item.component.html',
-	styleUrls: ['./tree-picker-item.component.scss']
+	selector: 'lu-tree-item',
+	templateUrl: './tree-item.component.html',
+	styleUrls: ['./tree-item.component.scss']
 })
-export class LuTreePickerItemComponent implements OnInit, OnChanges {
+export class LuTreeItemComponent implements OnInit, OnChanges {
 
 	@Input()
 	public tree: ITree;
@@ -28,7 +28,7 @@ export class LuTreePickerItemComponent implements OnInit, OnChanges {
 
 	public ngOnInit() {
 		if (this.multiple == null) {
-			this.multiple = LuTreePickerComponent.DEFAULT_ALLOW_MULTIPLE;
+			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 	}
 
@@ -37,7 +37,7 @@ export class LuTreePickerItemComponent implements OnInit, OnChanges {
 			this.messenger.onNodeChanged().subscribe(modifiedNode => this.onNodeChanged(modifiedNode));
 		}
 		if (this.multiple == null) {
-			this.multiple = LuTreePickerComponent.DEFAULT_ALLOW_MULTIPLE;
+			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 	}
 

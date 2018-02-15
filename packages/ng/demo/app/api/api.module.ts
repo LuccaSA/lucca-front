@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { DemoApiPickerModule } from './picker/api-picker.module';
-import { DemoTreePickerModule } from './tree-picker/demo-tree-picker.module';
 
 @NgModule({
 	imports: [
@@ -9,7 +8,6 @@ import { DemoTreePickerModule } from './tree-picker/demo-tree-picker.module';
 	],
 	exports: [
 		DemoApiPickerModule,
-		DemoTreePickerModule,
 	]
 })
 export class DemoApiModule { }

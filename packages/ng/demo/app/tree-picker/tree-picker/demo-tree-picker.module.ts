@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LuEmptyModule } from '../../../../src/app/empty/empty.module';
-import { LuApiModule } from '../../../../src/app/api/api.module';
+import { LuTreeModule } from './../../../../src/app/tree-picker/';
 
 import { SharedModule } from '../../shared';
 import { DemoTreePickerComponent } from './demo-tree-picker.component';
+import { LuPopoverModule } from '../../../../src/app/popover/popover.module';
 
 @NgModule({
 	imports: [
@@ -16,7 +17,8 @@ import { DemoTreePickerComponent } from './demo-tree-picker.component';
 		HttpClientModule,
 		SharedModule,
 		LuEmptyModule,
-		LuApiModule,
+		LuTreeModule,
+		LuPopoverModule,
 	],
 	declarations: [
 		DemoTreePickerComponent,
@@ -25,4 +27,4 @@ import { DemoTreePickerComponent } from './demo-tree-picker.component';
 		DemoTreePickerComponent,
 	]
 })
-export class DemoTreePickerModule { }
+export class DemoTreePickerStandAloneModule { }

@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { ITreeNode } from './tree-picker.class';
+import { ITreeNode } from './tree.class';
 
 export class TreePickerMessage {
 	public readonly node: ITreeNode;
