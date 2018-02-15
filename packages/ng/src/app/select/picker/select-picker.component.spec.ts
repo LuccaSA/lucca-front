@@ -120,12 +120,14 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 
 			// Act
-			fixture.detectChanges();
-			picker.search(globalOptions[1].name);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				fixture.detectChanges();
+				picker.search(globalOptions[1].name);
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.luOptions$.value[1].focused).toBe(true);
+				// Assert
+				expect(picker.luOptions$.value[1].focused).toBe(true);
+			});
 
 		});
 
@@ -140,12 +142,14 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 
 			// Act
-			fixture.detectChanges();
-			picker.selectOption(globalOptions[1]);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				fixture.detectChanges();
+				picker.selectOption(globalOptions[1]);
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.luOptions$.value[1].focused).toBe(true);
+				// Assert
+				expect(picker.luOptions$.value[1].focused).toBe(true);
+			});
 
 		});
 

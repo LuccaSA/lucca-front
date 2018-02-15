@@ -130,6 +130,7 @@ describe('LuSelectOption', () => {
 			});
 			const fixture = TestBed.createComponent(WrapperOptionElementComponent);
 			const wrapper = fixture.componentInstance;
+			fixture.detectChanges();
 			const option: LuSelectOption<any> = fixture.debugElement.query(By.directive(LuSelectOption)).componentInstance;
 
 			// Act
@@ -145,6 +146,7 @@ describe('LuSelectOption', () => {
 			});
 			const fixture = TestBed.createComponent(WrapperOptionElementComponent);
 			const wrapper = fixture.componentInstance;
+			fixture.detectChanges();
 			const option: LuSelectOption<any> = fixture.debugElement.query(By.directive(LuSelectOption)).componentInstance;
 
 			// Act
@@ -177,6 +179,7 @@ describe('LuSelectOption', () => {
 			});
 			const fixture = TestBed.createComponent(LuSelectOption);
 			const option = fixture.componentInstance;
+			fixture.detectChanges();
 
 			// Act
 			// Set the model
@@ -201,6 +204,7 @@ describe('LuSelectOption', () => {
 			});
 			const fixture = TestBed.createComponent(LuSelectOption);
 			const option = fixture.componentInstance;
+			fixture.detectChanges();
 			let liClickedCalled = false;
 			const event = new LuSelectOptionSelectionChange(option, true);
 			// Set the model
