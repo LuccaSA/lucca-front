@@ -229,4 +229,34 @@ describe('LuSelectOption', () => {
 			expect(liClickedCalled).toBeTruthy('You may have forgot the click handler on the `li` element');
 		});
 
+		it('It should be displayable at the initialisation', () => {
+			// Arrange
+			TestBed.configureTestingModule({
+				declarations: [LuSelectOption]
+			});
+			const fixture = TestBed.createComponent(LuSelectOption);
+			const option = fixture.componentInstance;
+
+			// Act
+
+			// Assert
+			expect(option.displayed).toBe(true);
+		});
+
+		it('It should be not display', () => {
+			// Arrange
+			TestBed.configureTestingModule({
+				declarations: [LuSelectOption]
+			});
+			const fixture = TestBed.createComponent(LuSelectOption);
+			const option = fixture.componentInstance;
+
+			// Act
+			option.displayed = false;
+			fixture.detectChanges();
+
+			// Assert
+			expect(option.displayed).toBe(false);
+		});
+
 });
