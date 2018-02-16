@@ -8,6 +8,8 @@ import { DemoSimpleSelectComponent } from './simple-select/simple-select.compone
 import { DemoClearerSelectComponent } from './clearer-select/clearer-select.component';
 import { DemoSearcherSelectComponent } from './searcher-select/searcher-select.component';
 import { DemoModSelectComponent } from './mod-select/mod-select.component';
+import { DemoSelectFeeder } from './feeder-select/feeder-select.component';
+import { FakeSelectFeeder } from './feeder-select/fake-select-feeder.component';
 import { SharedModule } from '../shared';
 
 @NgModule({
@@ -25,6 +27,8 @@ import { SharedModule } from '../shared';
 		DemoClearerSelectComponent,
 		DemoSearcherSelectComponent,
 		DemoModSelectComponent,
+		DemoSelectFeeder,
+		FakeSelectFeeder,
 	],
 	exports: [
 		DemoSelectComponent,
