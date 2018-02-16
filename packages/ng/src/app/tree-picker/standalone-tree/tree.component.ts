@@ -19,8 +19,10 @@ export class LuTreeComponent implements ControlValueAccessor, OnInit, OnChanges 
 	/** Default value for 'multiple' attribute */
 	public static readonly DEFAULT_ALLOW_MULTIPLE = true;
 
+	/** The tree to display */
 	@Input()
 	public sourceTree: ITree;
+	/** Allow selection of multiple node or not */
 	@Input()
 	public multiple: boolean;
 
@@ -72,16 +74,13 @@ export class LuTreeComponent implements ControlValueAccessor, OnInit, OnChanges 
 		if (this.multiple == null) {
 			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
-		if (this._innerValue == null) {
-			this._innerValue = <ITreeNode | ITreeNode[]>(this.multiple ? [] : {});
-		}
 	}
 
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (this.multiple == null) {
 			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
-		if (changes.hasOwnProperty('sourceTree')) {
+		if (changes.hasOwnProperty('sourceTree') && this.sourceTree != null) {
 			this.scopeTree = new Tree(changes.sourceTree.currentValue);
 			this.value = this.getCheckedNodes(this.scopeTree);
 		}

@@ -20,17 +20,31 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 	/** Default value for 'placeholder' attribute when 'multiple' attribute is set to true */
 	private static readonly DEFAULT_PLACEHOLDER_MULTIPLE = 'Items';
 
+	/** The tree to display */
 	@Input()
 	public sourceTree: ITree;
+	/** Allow selection of multiple node or not */
 	@Input()
 	public multiple: boolean;
+	/** The placeholder of the component, displayed when:
+	 * - No value is selected
+	 * - A value is selected and `multiple` is set to true
+	 */
 	@Input()
 	public placeholder: string;
 
-	public value: any;
+	public _innerValue: any;
+	public get value(): any { return this._innerValue; }
+	public set value(value: any) {
+		if (value === this._innerValue) {
+			return;
+		}
+		this._innerValue = value;
+		this.onChangeCallback(this._innerValue);
+	}
 
 	public writeValue(value: ITreeNode[]): void {
-		this.value = this;
+		this.value = value;
 	}
 
 	public onChangeCallback: (_: any) => void = () => { };
@@ -48,14 +62,14 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 		if (this.value == null) {
-			this.value = <ITreeNode | ITreeNode[]>(this.multiple ? [] : {});
+			this.value = this.multiple ? [] : {};
 		}
 		if (this.placeholder == null) {
 			this.placeholder = this.multiple ? LuTreePickerComponent.DEFAULT_PLACEHOLDER_MULTIPLE : LuTreePickerComponent.DEFAULT_PLACEHOLDER;
 		}
 	}
 
-	public ngOnChanges() {
+	public ngOnChanges(changes: SimpleChanges) {
 		if (this.multiple == null) {
 			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}

@@ -1,25 +1,38 @@
-<!-- <demo-api-docs directive="LuDepartmentPickerComponent"></demo-api-docs> -->
-
-<p>use `[sourceTree] | async` to retrieve the source tree asynchronously</p>
-
+<demo-api-docs directive="LuTreePickerComponent"></demo-api-docs>
+<h2>Tree Picker</h2>
 <demo-example-box [snippets]="snippets" demo="basic">
-	<h2>Basic</h2>
+	<h3>Component basic</h3>
+	<div class="textfield grid-xs6">
+		<lu-tree-picker class="textfield-input" [(ngModel)]="picker1Selection" [sourceTree]="staticTree" id="tree-picker-1"></lu-tree-picker>
+		<label for="tree-picker-1" class="textfield-label">My label</label>
+	</div>
+	<code class="code mod-block grid-xs6">{{ picker1Selection | json  }}</code>
 
-	<lu-tree-picker [sourceTree]="staticTree"></lu-tree-picker>
-	<lu-tree-picker [sourceTree]="staticTree" [multiple]="false"></lu-tree-picker>
+	<h3>Component with single selection</h3>
+	<div class="textfield grid-xs6">
+		<lu-tree-picker class="textfield-input" [(ngModel)]="picker2Selection" [sourceTree]="staticTree" [multiple]="false" id="tree-picker-2"></lu-tree-picker>
+		<label for="tree-picker-2" class="textfield-label">My label</label>
+	</div>
+	<code class="code mod-block grid-xs6">{{ picker2Selection | json  }}</code>
+</demo-example-box>
 
+<demo-api-docs directive="LuTreeComponent"></demo-api-docs>
+<h2>Tree</h2>
+<demo-example-box [snippets]="snippets" demo="basic">
+	<h3>Component basic</h3>
 	<div class="grid">
 		<div class="grid-xs6">
-			<h3>Multiple</h3>
-			<lu-tree [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection" [multiple]="true"></lu-tree>
-			<span>Selection:</span>
+			<lu-tree [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection"></lu-tree>
+		</div>
+		<code class="code mod-block grid-xs6">{{ multipleTreeSelection | json }}</code>
+	</div>
+
+	<h3>Component with single selection</h3>
+	<div class="grid">
+		<div class="grid-xs6">
+			<lu-tree [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>
 			<code class="code mod-block">{{ multipleTreeSelection | json }}</code>
 		</div>
-		<div class="grid-xs6">
-			<h3>Mono</h3>
-			<lu-tree [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>
-			<span>Selection:</span>
-			<code class="code mod-block">{{ singleTreeSelection | json }}</code>
-		</div>
+		<code class="code mod-block grid-xs6">{{ singleTreeSelection | json }}</code>
 	</div>
 </demo-example-box>
