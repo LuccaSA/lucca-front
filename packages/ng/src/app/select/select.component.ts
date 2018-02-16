@@ -37,8 +37,8 @@ import {takeUntil} from 'rxjs/operators/takeUntil';
 import {LuSelectOption} from './option/select-option.component';
 import { ISelectClearer } from './clearer/select-clearer.model';
 import { LuSelectClearerComponent } from './clearer/select-clearer.component';
-import { ISelectSearcher } from './searcher/select-searcher.model';
-import { LuSelectSearcherComponent } from './searcher/select-searcher.component';
+import { ISelectOptionFeeder } from './option/select-option-feeder.model';
+import { AbstractSelectOptionFeederComponent } from './option/select-option-feeder.component';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -134,7 +134,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: string;
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
-	@ContentChild(LuSelectSearcherComponent) searcher: ISelectSearcher<T>;
+	@ContentChild(AbstractSelectOptionFeederComponent) optionFeeder: ISelectOptionFeeder<T>;
 
 	@HostBinding('class.is-filled') isFilled = false;
 
@@ -273,7 +273,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@HostListener('blur', ['$event'])
 	blur(e) {
 		this._onTouched();
-		if (this.searcher && this.searcher.hasFocus()) {
+		if (this.optionFeeder && this.optionFeeder.hasFocus()) {
 			return;
 		}
 		this._field.closePopover();

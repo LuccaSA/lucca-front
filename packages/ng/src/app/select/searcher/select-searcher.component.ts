@@ -2,9 +2,11 @@ import {
 	Component,
 	Input,
 	ContentChildren,
+	forwardRef,
 	QueryList
 } from '@angular/core';
 import { ISelectSearcher } from './select-searcher.model';
+import { AbstractSelectOptionFeederComponent } from '../option/select-option-feeder.component';
 import { LuSelectOption } from '../option/select-option.component';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -14,13 +16,14 @@ import 'rxjs/add/operator/distinctUntilChanged';
 	selector: 'lu-select-searcher',
 	templateUrl: './select-searcher.component.html',
 	styleUrls: ['./select-searcher.component.scss'],
+	providers: [{provide: AbstractSelectOptionFeederComponent, useExisting: forwardRef(() => LuSelectSearcherComponent)}]
 })
 /**
  * Component that manage the possibility to search in the options of a select.
  */
-export class LuSelectSearcherComponent<T> implements ISelectSearcher<T>  {
+export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComponent<T> implements ISelectSearcher<T>  {
 
-	@Input() luOptionFeeder = true;
+	// @Input() luOptionFeeder = true;
 	private _clue = '';
 	private _focus = false;
 	private _clue$: Subject<string> = new Subject<string>();
@@ -31,6 +34,7 @@ export class LuSelectSearcherComponent<T> implements ISelectSearcher<T>  {
 	@ContentChildren(LuSelectOption, { descendants: true }) luOptions: QueryList<LuSelectOption<T>>;
 
 	constructor() {
+		super();
 		this._clue$
 		.debounceTime(100) // wait 100ms after the last event before emitting last event
 		.distinctUntilChanged() // only emit if value is different from previous value
@@ -68,7 +72,7 @@ export class LuSelectSearcherComponent<T> implements ISelectSearcher<T>  {
 	}
 
 	/**
-	 * See ISelectSearcher
+	 * See ISelectOptionFeeder
 	 */
 	hasFocus(): boolean {
 		return this._focus;

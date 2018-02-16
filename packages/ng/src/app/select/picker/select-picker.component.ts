@@ -2,6 +2,7 @@ import {
 	AfterContentInit,
 	Component,
 	ContentChildren,
+	ContentChild,
 	OnInit,
 	Input,
 	Output,
@@ -29,7 +30,7 @@ import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 // import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
+import {LuSelectOption, LuSelectOptionSelectionChange, ISelectOptionFeeder, AbstractSelectOptionFeederComponent} from '../option';
 
 
 /**
@@ -70,6 +71,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	/** All of the defined select options. */
 	@ContentChildren(LuSelectOption, { descendants: true })
 	private _luOptions: QueryList<LuSelectOption<T>> = new QueryList<LuSelectOption<T>>();
+	@ContentChild(AbstractSelectOptionFeederComponent) optionFeeder: ISelectOptionFeeder<T>;
 	/** Observable of the LuSelectOption, contained in the popover  */
 	luOptions$ = new BehaviorSubject<LuSelectOption<T>[]>([]);
 
@@ -139,6 +141,15 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 				this._resetOptions();
 			});
 		});
+
+		Promise.resolve().then(()=>{
+			if (this.optionFeeder){
+				this.optionFeeder.subscribe((value: T) => {
+					this._luOptions.setDirty();
+					this._luOptions.notifyOnChanges();
+				});
+			}
+		})
 	}
 
 

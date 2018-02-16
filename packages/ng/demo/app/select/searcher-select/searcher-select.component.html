@@ -6,8 +6,7 @@
 				class="textfield-input"
 				placeholder="placeholder"
 				name="itemMods">
-				<lu-select-searcher luOptionFeeder="true">
-
+				<lu-select-searcher luOptionFeeder>
 					<lu-select-option *ngFor="let color of colorOptions" [luOptionValue]="color">{{color.name}}</lu-select-option>
 				</lu-select-searcher>
 			</lu-select>

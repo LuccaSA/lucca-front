@@ -8,8 +8,5 @@ export interface ISelectSearcher<T> {
 	 * @param options : the options to filtered
 	 */
 	filter(clue: string, options: LuSelectOption<T>[]): LuSelectOption<T>[];
-	/**
-	 * @returns true if the focus is on the field
-	 */
-	hasFocus(): boolean;
+
 }

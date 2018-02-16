@@ -1,0 +1,13 @@
+<section class="contentSection">
+		<h3>Override feeder</h3>
+		<div class="textfield">
+			<lu-select [(ngModel)]="itemSelect"
+				class="textfield-input"
+				placeholder="placeholder"
+				name="itemOptions">
+					<fake-select-feeder luOptionFeeder></fake-select-feeder>
+			</lu-select>
+			<label class="textfield-label" for="itemOptions">my label</label>
+		</div>
+		<code class="code mod-block">{{ itemSelect | json }}</code>
+	</section>
