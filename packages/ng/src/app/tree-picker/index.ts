@@ -1,2 +1,3 @@
-export { LuTreeComponent, ITree, ITreeNode } from './tree/index';
-export { LuTreeModule } from './tree-picker.module';
+export { LuTreeComponent, ITree, ITreeNode } from './standalone-tree';
+export { LuTreePickerComponent } from './picker';
+export { LuTreeModule } from './tree.module';

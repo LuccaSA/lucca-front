@@ -26,7 +26,7 @@ export class DemoTreePickerComponent {
 		node: null,
 		children: [
 			<ITree>{
-				node: <ITreeNode>{ id: 1, name: '1' },
+				node: <ITreeNode>{ id: 1, name: 'toto' },
 				children: [
 					<ITree>{
 						node: <ITreeNode>{ id: 2, name: '2' },
