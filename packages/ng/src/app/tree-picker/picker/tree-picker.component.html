@@ -1,0 +1,23 @@
+<div class="textfield-input" [LuPopoverTriggerFor]="toto">
+	<span class="single-value" *ngIf="multiple === false && value != null">
+		{{ value.name }}
+	</span>
+	<span class="single-value-empty" *ngIf="multiple === false && value?.id == null">
+		{{ placeholder }}
+	</span>
+	<span class="multiple-value" *ngIf="multiple === true && value != null && value.length > 0">
+		<span class="multiple-value-count">
+			{{ value.length }}
+		</span>
+		<span>
+			{{ placeholder }}
+		</span>
+	</span>
+	<span class="multiple-value-empty" *ngIf="multiple == true && (value == null || value.length === 0)">
+		{{ placeholder }}
+	</span>
+</div>
+
+<lu-popover #toto trigger-on="click">
+	<lu-tree [sourceTree]="sourceTree" [(ngModel)]="value" [multiple]="multiple"></lu-tree>
+</lu-popover>

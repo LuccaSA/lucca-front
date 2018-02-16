@@ -14,4 +14,4 @@ import { LuTreeComponent, ITree, ITreeNode } from './index';
 		LuTreeComponent,
 	],
 })
-export class LuApiPickerModule { }
+export class LuStandAloneTreeModule { }

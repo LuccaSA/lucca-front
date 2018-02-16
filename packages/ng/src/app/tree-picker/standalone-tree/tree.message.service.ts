@@ -1,11 +1,11 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { ITreeNode } from './tree.class';
+import { TreeNode } from './tree.class';
 
 export class TreePickerMessage {
-	public readonly node: ITreeNode;
+	public readonly node: TreeNode;
 	public readonly senderId: string;
-	constructor(node: ITreeNode, senderId: string) {
+	constructor(node: TreeNode, senderId: string) {
 		this.node = node;
 		this.senderId = senderId;
 	}

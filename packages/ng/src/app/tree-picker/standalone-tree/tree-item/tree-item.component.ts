@@ -2,7 +2,7 @@ import { Component, Input, Output } from '@angular/core';
 import { NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core/src/view/provider';
 import { OnInit, OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
-import { ITree, ITreeNode } from './../tree.class';
+import { Tree, TreeNode } from './../tree.class';
 import { TreePickerMessageService, TreePickerMessage } from './../tree.message.service';
 import { LuTreeComponent } from './../tree.component';
 
@@ -14,7 +14,7 @@ import { LuTreeComponent } from './../tree.component';
 export class LuTreeItemComponent implements OnInit, OnChanges {
 
 	@Input()
-	public tree: ITree;
+	public tree: Tree;
 	@Input()
 	public multiple: boolean;
 	@Input()
@@ -51,7 +51,7 @@ export class LuTreeItemComponent implements OnInit, OnChanges {
 		}
 	}
 
-	public onChecked(tree: ITree, value: boolean = null) {
+	public onChecked(tree: Tree, value: boolean = null) {
 		// Multi value
 		if (this.multiple) {
 			tree.node.isSelected = value != null ? value : !tree.node.isSelected;
