@@ -7,6 +7,10 @@
 ### Updated dependencies
 ### Updated devDependencies
 
+## v0.3.0
+### Fixes
+- `lu-select` options are not selectable if options comes asynchronously
+
 ## v0.2.3
 ### Updated dependencies
 - [rxjs](https://github.com/ReactiveX/rxjs) - update to version ^5.5.2

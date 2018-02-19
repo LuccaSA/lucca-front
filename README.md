@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/LuccaSA/lucca-front.svg?branch=master)](https://travis-ci.org/LuccaSA/lucca-ui)
 # lucca-front
 
 A modular framework for developping web application by [lucca](http://www.lucca.fr).

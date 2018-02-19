@@ -3,6 +3,36 @@ function collapse(elem) {
 	elem.parentElement.classList.toggle('is-open');
 }
 
+
+/* TOAST */
+
+function toast() {
+	var toastsBox = document.getElementById("toastsBox");
+	var toast = document.createElement("div");
+	var toastsValues = [
+		'Oh yeah! Something good happened :)',
+		'Oops, something looks wrong :(',
+		'Marked as done',
+		'Please check <a href="#">this thing</a>',
+		'Here <u>is</u> <i>some</i> <b>HTML</b>'
+	];
+	var r = Math.floor(Math.random() * Math.floor(toastsValues.length));
+	toast.className = "toasts-item";
+	toast.innerHTML = toastsValues[r];
+	var close = document.createElement('button');
+	close.className = "toasts-item-kill";
+	close.addEventListener('click', toastKill, false);
+	toast.appendChild(close);
+	toastsBox.appendChild(toast);
+}
+
+function toastKill() {
+	this.parentElement.remove();
+}
+
+//document.getElementsByClassName('toasts-item-kill').addEventListener('click', function() { alert() }, false);
+
+
 /* ANIMATIONS */
 function reloadAnimation(elem) {
 	var card = elem.getElementsByClassName('card')[0];

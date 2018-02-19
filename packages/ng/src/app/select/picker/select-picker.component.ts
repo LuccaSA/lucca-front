@@ -125,6 +125,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 		this.luOptions$.subscribe(luOptions => {
 			if (this._luOptions && this._luOptions.length === 0) {
 				this._luOptions.reset(luOptions);
+				this._luOptions.notifyOnChanges();
 			}
 		});
 		this._luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {

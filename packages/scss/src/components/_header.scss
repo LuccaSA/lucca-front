@@ -1,9 +1,9 @@
 .header {
+	@include elevate(1);
 	align-items: flex-end;
-	background: white;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
+	background: _component("header.background");
 	display: flex;
-	padding: .25rem 1rem .5rem;
+	padding: _component("header.padding");
 	position: relative;
 	z-index: 1;
 }
@@ -28,5 +28,16 @@
 		bottom: 0;
 		left: 0;
 		@include loadingGradientAnimation(rgba(0,0,0, .1), true);
+	}
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.header {
+	&.mod-sticky {
+		position: sticky;
+		top: 0;
 	}
 }
