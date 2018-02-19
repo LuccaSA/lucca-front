@@ -1,4 +1,4 @@
-<li class="search">
+<div class="textfield mod-search">
 	<input
 	(mousedown)="_onMouseDown($event)"
 	(blur)="_onBlur()"
@@ -6,7 +6,7 @@
 	[(ngModel)]="_clue"
 	(input)="_onFieldChange($event.target.value)"
 	>
-</li>
+</div>
 <div class="options">
 	<ng-content select="[luOptionValue]"></ng-content>
 </div>

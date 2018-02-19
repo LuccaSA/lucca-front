@@ -1,21 +1,8 @@
-
-:host{
-	position: relative;
-	max-height: 240px;
-	// SHAME
-	display: block;
-	height: 240px;
+.textfield-input {
+	border-radius: 0;
 }
 
-li.search{
-	position: fixed;
-	height: 40px;
-	top: 0;
-	z-index: 1;
-}
-
-.options{
-	width: 100%;
-	position: absolute;
-	top:40px;
+.options {
+	max-height: 200px; // for 240px height of .lu-popover-content. Will need a refactor
+	overflow: auto;
 }
