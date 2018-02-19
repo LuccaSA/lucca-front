@@ -15,7 +15,7 @@ import {
 import { ESCAPE } from '@angular/cdk/keycodes';
 
 import { throwLuPopoverInvalidPosition, throwLuPopoverInvalidAlignement } from './popover.errors';
-import { IPopoverPanel, PopoverAlignment, PopoverPosition, PopoverTriggerEvent } from './popover.model';
+import { IPopoverPanel, PopoverAlignment, PopoverPosition, PopoverTriggerEvent, PopoverScrollStrategy } from './popover.model';
 import { transformPopover } from './popover.animations';
 
 import { AnimationEvent } from '@angular/animations';
@@ -45,6 +45,7 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	private _targetOffsetY: number = 0;
 	private _closeOnClick: boolean = false;
 	private _focusTrapEnabled: boolean = false;
+	private _scrollStrategy: PopoverScrollStrategy = 'reposition';
 
 	/** Config object to be passed into the popover's ngClass */
 	private _classList: any = {};
@@ -135,6 +136,14 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	@Input('focus-trap-enabled')
 	get focusTrapEnabled(): boolean { return this._focusTrapEnabled; }
 	set focusTrapEnabled(v: boolean) { this._focusTrapEnabled = v; }
+
+	/**
+	 * Popover scrollStrategy
+	 * default: reposition
+	 */
+		@Input('scroll-strategy')
+		get scrollStrategy(): PopoverScrollStrategy { return this._scrollStrategy; }
+		set scrollStrategy(v: PopoverScrollStrategy) { this._scrollStrategy = v; }
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
