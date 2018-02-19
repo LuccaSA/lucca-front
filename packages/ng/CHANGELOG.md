@@ -2,6 +2,8 @@
 
 ## In Dev
 ### New features
+- `lu-tree`: component to display and select nodes in tree structures
+- `lu-tree-picker`: `lu-tree` component wrapped inside a dropdown
 ### Fixes
 ### Breaking changes
 ### Updated dependencies
