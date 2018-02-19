@@ -1,0 +1,16 @@
+<h3>Component basic</h3>
+<div class="grid">
+	<div class="grid-xs6">
+		<lu-tree [sourceTree]="staticTree" [(ngModel)]="multipleTreeSelection"></lu-tree>
+	</div>
+	<code class="code mod-block grid-xs6">{{ multipleTreeSelection | json }}</code>
+</div>
+
+<h3>Component with single selection</h3>
+<div class="grid">
+	<div class="grid-xs6">
+		<lu-tree [sourceTree]="staticTree" [(ngModel)]="singleTreeSelection" [multiple]="false"></lu-tree>
+		<code class="code mod-block">{{ multipleTreeSelection | json }}</code>
+	</div>
+	<code class="code mod-block grid-xs6">{{ singleTreeSelection | json }}</code>
+</div>
