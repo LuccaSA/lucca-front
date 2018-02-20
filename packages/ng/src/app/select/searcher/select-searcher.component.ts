@@ -64,9 +64,6 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		return options.filter((option) => {
 			const match = option.viewValue.indexOf(clue) !== -1;
 			option.displayed = match;
-			if (match) {
-				console.log(`Match found : ${option.viewValue}`);
-			}
 			return match;
 		});
 	}

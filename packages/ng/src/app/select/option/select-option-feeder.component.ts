@@ -11,10 +11,6 @@ import {ISelectOptionFeeder} from './select-option-feeder.model';
 })
 export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeeder<T> {
 
-	_emitter: (T) => void;
-	subscribe(next: (T: any) => void) {
-		this._emitter = next;
-	}
 	/**
 	 * See ISelectOptionFeeder
 	 */
@@ -22,8 +18,5 @@ export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeed
 		return false;
 	}
 
-	emit(value: T): void{
-		this._emitter(value);
-	}
 
 }

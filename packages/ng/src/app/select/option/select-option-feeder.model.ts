@@ -5,5 +5,4 @@ export interface ISelectOptionFeeder<T> {
 	 */
 	hasFocus(): boolean;
 
-	subscribe(next: (T) => void);
 }
