@@ -5,6 +5,8 @@ import { LuUserTileModule } from '../../../../src/app/user';
 import { SharedModule } from '../../shared/index';
 import { BasicComponent } from './basic/basic.component';
 import { MatTooltipModule } from '@angular/material';
+import { DisplayFormatComponent } from './displayFormat/display-format.component';
+import { SizesComponent } from './sizes/sizes.component';
 
 @NgModule({
 	imports: [
@@ -16,10 +18,14 @@ import { MatTooltipModule } from '@angular/material';
 	declarations: [
 		DemoUserTileComponent,
 		BasicComponent,
+		DisplayFormatComponent,
+		SizesComponent,
 	],
 	exports: [
 		DemoUserTileComponent,
 		BasicComponent,
+		DisplayFormatComponent,
+		SizesComponent,
 	],
 })
 export class DemoUserTileModule { }
