@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import {LuSelectOption} from '../option/select-option.component';
 import {ISelectSearcher} from './select-searcher.model';
 import {LuSelectSearcherComponent} from './select-searcher.component';
+import {LuSelectSearchIntl} from './select-searcher-intl';
 import { FormsModule } from '@angular/forms';
 import {Platform} from '@angular/cdk/platform';
 import { Component} from '@angular/core';
@@ -40,6 +41,7 @@ describe('LuSelectSearcher', () => {
 		TestBed.configureTestingModule({
 		providers: [
 			Platform,
+			LuSelectSearchIntl
 		],
 		declarations: [
 			LuSelectOption,
