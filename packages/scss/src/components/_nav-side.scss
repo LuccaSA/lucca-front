@@ -122,10 +122,12 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide-bottomSection {
 	background: _component("navSide.bottom-section-palette.bg-color");
-	position: fixed;
-	left: 0;
 	bottom: 0;
+	height: _component("navSide.bottom-section-height");
+	left: 0;
+	position: fixed;
 	width: _component("navSide.width");
+	z-index: 1;
 
 	.navSide-item-link {
 		color: _component("navSide.bottom-section-palette.text");
@@ -141,7 +143,7 @@
 }
 
 .navSide.mod-withBottomSection {
-	padding-bottom: _component("navSide.bottom-section-height");
+	margin-bottom: _component("navSide.bottom-section-height");
 }
 
 // ACTIVE & OPEN STATE
@@ -362,10 +364,16 @@
 		background: transparent;
 		position: relative;
 		width: auto;
+		height: auto;
+		.navSide-item-link {
+			opacity: 1;
+			color: _component("navSide.bottom-section-palette.text");
+			background: _component("navSide.bottom-section-palette.bg-color");
+		}
 	}
 
 	.navSide.mod-withBottomSection {
-		padding-bottom: 0;
+		margin-bottom: 0;
 	}
 
 	.navSide.is-open {
