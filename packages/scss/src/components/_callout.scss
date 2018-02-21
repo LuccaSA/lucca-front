@@ -6,11 +6,12 @@
 	position: relative;
 
 	a:not([class]) {
-	 color: inherit;
-
-	 &:hover {
 		color: inherit;
-		opacity: .8;
+
+		&:hover {
+			color: inherit;
+			opacity: .8;
+		}
 	}
 }
 
@@ -19,7 +20,7 @@
 
 	&::after {
 		content: " —";
-		font-weight: normal;
+		font-weight: 400;
 	}
 }
 
@@ -74,7 +75,7 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background: rgba(_get($palette, "color"), .10);
+	background: rgba(_get($palette, "color"), .1);
 	color: darken(_get($palette, "color"), 20%);
 
 	.callout-icon {
