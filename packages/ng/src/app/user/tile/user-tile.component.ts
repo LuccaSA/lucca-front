@@ -27,7 +27,7 @@ export class LuUserTileComponent {
 	 */
 	@Input() role: string;
 
-	get userName() {
+	private get userName() {
 		return this.displayPipe.transform(this.user, this.displayFormat);
 	}
 
