@@ -190,6 +190,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 						}
 				});
 			}
+
+			if (this.optionFeeder){
+				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
+			}
 		});
 	}
 

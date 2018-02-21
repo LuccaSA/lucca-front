@@ -10,4 +10,6 @@ export interface ISelectOptionFeeder<T> {
 	 */
 	open(): void;
 
+	registerKeyevent(callback: (event: KeyboardEvent) => void): void;
+
 }

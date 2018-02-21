@@ -1,6 +1,7 @@
 <div class="textfield mod-search">
 	<input
 	#inputClue
+	(keydown)="_onKeydown($event)"
 	(mousedown)="_onMouseDown($event)"
 	(blur)="_onBlur()"
 	class="textfield-input"

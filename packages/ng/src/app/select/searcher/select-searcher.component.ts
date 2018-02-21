@@ -74,6 +74,10 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		this._clue = '';
 	}
 
+	private _onKeydown($event: KeyboardEvent){
+		this._callbackKeyEvent($event);
+	}
+
 	/**
 	 * See ISelectSearcher
 	 */

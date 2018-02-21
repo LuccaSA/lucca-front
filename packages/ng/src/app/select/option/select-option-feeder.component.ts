@@ -11,6 +11,8 @@ import {ISelectOptionFeeder} from './select-option-feeder.model';
 })
 export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeeder<T> {
 
+
+	protected _callbackKeyEvent: (event: KeyboardEvent) => void;
 	/**
 	 * See ISelectOptionFeeder
 	*/
@@ -20,6 +22,10 @@ export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeed
 	 */
 	hasFocus(): boolean {
 		return false;
+	}
+
+	registerKeyevent(callback: (event: KeyboardEvent) => void): void {
+		this._callbackKeyEvent = callback;
 	}
 
 
