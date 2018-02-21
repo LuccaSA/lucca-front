@@ -36,6 +36,8 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 
 	private _intlChanges: Subscription;
 
+	private innerMap = {};
+
 	/**
 	 * The options detected
 	 */
@@ -82,8 +84,15 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 	 * See ISelectSearcher
 	 */
 	filter(clue: string, options: LuSelectOption<T>[]): LuSelectOption<T>[] {
+		const normalizeClue = clue.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
 		return options.filter((option) => {
-			const match = option.viewValue.indexOf(clue) !== -1;
+			let valueOption = this.innerMap[option.viewValue];
+			if (!valueOption){
+				this.innerMap[option.viewValue] = option.viewValue.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+				valueOption = this.innerMap[option.viewValue];
+			}
+
+			const match = valueOption.indexOf(normalizeClue) !== -1;
 			option.displayed = match;
 			return match;
 		});
