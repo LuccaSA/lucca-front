@@ -5,4 +5,9 @@ export interface ISelectOptionFeeder<T> {
 	 */
 	hasFocus(): boolean;
 
+	/**
+	 * Called when the popup of option is open
+	 */
+	open(): void;
+
 }

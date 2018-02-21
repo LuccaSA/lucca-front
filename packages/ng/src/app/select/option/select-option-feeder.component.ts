@@ -13,6 +13,10 @@ export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeed
 
 	/**
 	 * See ISelectOptionFeeder
+	*/
+	open(): void {}
+	/**
+	 * See ISelectOptionFeeder
 	 */
 	hasFocus(): boolean {
 		return false;

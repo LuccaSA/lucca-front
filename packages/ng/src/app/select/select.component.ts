@@ -259,8 +259,13 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			case END:
 			$event.preventDefault();
 			return this._picker.onEndKeydown(this._field.popoverOpen);
-			case ENTER_KEY:
-			return this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
+			case ENTER_KEY:{
+				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
+				if(this._field.popoverOpen) {
+					this.optionFeeder.open();
+				}
+				return;
+			}
 			case DOWN_KEY:
 			$event.preventDefault();
 			return this._picker.onDownKeydown(this._field.popoverOpen);
@@ -283,6 +288,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	clicked() {
 		this._field.togglePopover();
 		if (this._field.popoverOpen) {
+			this.optionFeeder.open();
 			this._picker.search(this._strValue);
 		}
 	}

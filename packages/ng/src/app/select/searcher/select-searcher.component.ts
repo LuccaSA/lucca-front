@@ -2,6 +2,8 @@ import {
 	Component,
 	Input,
 	ContentChildren,
+	ViewChild,
+	ElementRef,
 	forwardRef,
 	QueryList
 } from '@angular/core';
@@ -32,6 +34,8 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 	 * The options detected
 	 */
 	@ContentChildren(LuSelectOption, { descendants: true }) luOptions: QueryList<LuSelectOption<T>>;
+	@ViewChild('inputClue') _inputElement : ElementRef;
+
 
 	constructor() {
 		super();
@@ -77,6 +81,14 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 
 	private _onFieldChange(clue: string) {
 		this._clue$.next(clue);
+	}
+
+	/**
+	 * See ISelectOptionFeeder
+	*/
+	open(): void {
+		this._focus = true;
+		this._inputElement.nativeElement.focus();
 	}
 
 }
