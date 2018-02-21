@@ -1,9 +1,17 @@
 .callout {
-	background: _theme("commons.background.dark");
+	background: _theme("commons.background.base");
 	border-radius: _theme("commons.border.radius");
 	margin: _component("callout.margin");
 	padding: 1rem 1.5rem;
 	position: relative;
+
+	a:not([class]) {
+	 color: inherit;
+
+	 &:hover {
+		color: inherit;
+		opacity: .8;
+	}
 }
 
 .callout-title {
