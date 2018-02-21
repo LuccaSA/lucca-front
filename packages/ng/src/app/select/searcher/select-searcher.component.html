@@ -10,4 +10,5 @@
 </div>
 <div class="select-options">
 	<ng-content select="[luOptionValue]"></ng-content>
+	<span *ngIf="_noResults">{{_intl.noResultsLabel}}</span>
 </div>
