@@ -7,6 +7,8 @@ import { animationsRoutes } from '../animations/animations.router';
 import { apiRoutes } from '../api/api.router';
 import { userRoutes } from '../user/user.router';
 import { selectRoutes } from '../select/select.router';
+import { treePickerRoutes } from '../tree-picker/tree-picker.router';
+
 export const featuresRoutes = [
 	...dateRangePickerRoutes,
 	...formlyRoutes,
@@ -16,4 +18,5 @@ export const featuresRoutes = [
 	...apiRoutes,
 	...userRoutes,
 	...selectRoutes,
+	...treePickerRoutes,
 ];

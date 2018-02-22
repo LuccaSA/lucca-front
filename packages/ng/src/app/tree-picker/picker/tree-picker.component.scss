@@ -1,0 +1,32 @@
+@import "node_modules/@lucca-front/scss/src/theming.overridable";
+@import "node_modules/@lucca-front/icons/src/mixins";
+
+:host {
+    div {
+        cursor: pointer;
+
+        &.single-value {}
+
+        &.multiple-value {}
+
+        .multiple-value-count {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: .85em;
+            font-weight: 400;
+            text-shadow: none;
+            padding: .25em .5em;
+            margin: 0 .5em;
+            margin-left: 0;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            border-radius: 3px;
+
+            // TODO: use luiPalette equivalent
+            background: #eee;
+        }
+
+        .value-empty {}
+    }
+}

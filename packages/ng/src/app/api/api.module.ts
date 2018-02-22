@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 		CommonModule,
 		FormsModule,
 		HttpClientModule,
-		LuApiPickerModule
+		LuApiPickerModule,
 	],
 	declarations: [
 	],

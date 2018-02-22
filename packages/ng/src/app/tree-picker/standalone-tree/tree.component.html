@@ -1,0 +1,5 @@
+<ul>
+	<li *ngFor="let child of scopeTree.children">
+		<lu-tree-item [tree]="child" [multiple]="multiple" [messenger]="messenger"></lu-tree-item>
+	</li>
+</ul>
