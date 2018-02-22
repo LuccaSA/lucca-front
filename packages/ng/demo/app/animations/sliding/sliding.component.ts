@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import { LFAnimationFactory } from '../../../../src/app/animations';
+import { LfSlideAnimationFactory } from '../../../../src/app/animations';
+const slide = LfSlideAnimationFactory();
 
 @Component({
 	selector: 'demo-animations-sliding',
 	templateUrl: './sliding.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [LFAnimationFactory('slide')],
+	// animations: [slide],
 })
-export class SlidingComponent {
-}
+export class SlidingComponent {}
