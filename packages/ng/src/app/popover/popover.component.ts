@@ -20,17 +20,15 @@ import { transformPopover } from './popover.animations';
 
 import { AnimationEvent } from '@angular/animations';
 
-import { standardPopoverTemplate } from './popover.template';
+// import { standardPopoverTemplate } from './popover.template';
 
 @Component({
 	selector: 'lu-popover',
-	template: standardPopoverTemplate,
+	templateUrl: './popover.component.html',
 	styleUrls: ['./popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	animations: [
-		transformPopover
-	],
+	animations: [transformPopover],
 	exportAs: 'LuPopover'
 })
 export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
