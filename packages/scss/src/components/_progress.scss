@@ -12,6 +12,7 @@
 	left: 0;
 	position: absolute;
 	top: 0;
+	transition: background _theme("commons.animations.durations.standard") ease;
 
 	&::after {
 		animation: progress _component("progress.duration") infinite;
@@ -41,6 +42,33 @@
 	}
 }
 
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.progress {
+	&.is-success {
+		.progress-bar {
+			background: _color("success");
+			width: 100% !important;
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+
+	&.is-error {
+		.progress-bar {
+			background: _color("error");
+			width: 100% !important;
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+}
 
 // ANIMATIONS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
