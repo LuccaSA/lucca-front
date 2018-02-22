@@ -78,7 +78,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	protected _validator: ValidatorFn | null;
 
 	/** True if the the component allow the clear of data  */
-	protected _canRemove = false;
+	_canRemove = false;
 	/** The value of the select */
 	get value(): T | null {
 		return this._value;
@@ -284,7 +284,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	// Utilities
 
-	protected get _strValue(): string {
+	get _strValue(): string {
 		return this.value ? this._elementRef.nativeElement.value as string : (this.placeholder ? this.placeholder : '');
 	}
 	private _emitClearable() {

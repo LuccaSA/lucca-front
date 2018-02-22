@@ -72,7 +72,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	/**
 	 * Select the current option. This method will emit an event onSelectionChange
 	 */
-	private _selectOption(): void {
+	_selectOption(): void {
 		this.onSelectionChange.emit(new LuSelectOptionSelectionChange<T>(this, true));
 	}
 
