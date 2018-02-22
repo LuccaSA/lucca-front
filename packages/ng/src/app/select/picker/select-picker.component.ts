@@ -28,7 +28,7 @@ import {defer} from 'rxjs/observable/defer';
 import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
-import { standardSelectTemplate } from './select.template';
+// import { standardSelectTemplate } from './select.template';
 import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
 
 
@@ -37,7 +37,7 @@ import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
  */
 @Component({
 	selector: 'lu-select-picker',
-	template: standardSelectTemplate,
+	templateUrl: './select-picker.component.html',
 	styleUrls: ['./select-picker.component.scss'],
 	animations: [
 		transformPopover,
