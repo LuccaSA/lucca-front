@@ -12,7 +12,6 @@ import { LuApiPickerModule } from '../../../src/app/api/picker';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
-import { DebugComponent } from './debug/debug';
 import { FieldgroupComponent } from './fieldgroup/fieldgroup';
 import { ValidationComponent } from './validation/validation';
 import { ChangeComponent } from './change/change';
@@ -39,7 +38,6 @@ import { OptionComponent } from './option/option';
 	],
 	declarations: [
 		DemoFormlyComponent,
-		DebugComponent,
 		BasicComponent,
 		FieldgroupComponent,
 		ValidationComponent,
