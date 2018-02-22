@@ -13,5 +13,5 @@ export class ScalingComponent {
 	scalingRight = false;
 	scalingTop = false;
 	scalingBottom = false;
-	scalingCemter = false;
+	scalingCenter = false;
 }

@@ -119,6 +119,7 @@ export class OptionComponent {
 	];
 
 user = {};
+submit(stuff) {}
 
 }
 
