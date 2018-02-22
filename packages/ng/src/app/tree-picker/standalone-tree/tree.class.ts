@@ -30,12 +30,12 @@ export class Tree implements ITree {
 	 * For each node, this method will call the callback given in parameters.
 	 * The callback must return a boolean to know if the tree traversal should stop.
 	 * Returns the total number of nodes visited. */
-	public traverse(nodeOperation: (ITree) => boolean): number {
+	public traverse(nodeOperation: (tree: Tree) => boolean): number {
 		let numberOfNodesVisited = 0;
-		let currentDepthTrees: ITree[] = this.children || new Array<ITree>();
+		let currentDepthTrees: Tree[] = this.children || new Array<Tree>();
 		let shouldStopTraversing = false;
 		while (currentDepthTrees.length > 0 && !shouldStopTraversing) {
-			const nextDepthTrees = new Array<ITree>();
+			const nextDepthTrees = new Array<Tree>();
 			numberOfNodesVisited += currentDepthTrees.length;
 			for (let i = 0; i < currentDepthTrees.length && !shouldStopTraversing; ++i) {
 				shouldStopTraversing = nodeOperation(currentDepthTrees[i]);

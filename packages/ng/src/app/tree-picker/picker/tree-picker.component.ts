@@ -1,9 +1,10 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { OnInit, OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { LuTreeComponent, ITree, ITreeNode } from './../standalone-tree';
+import { TreeNode } from '../standalone-tree/tree.class';
 
 @Component({
 	selector: 'lu-tree-picker',
@@ -14,12 +15,6 @@ import { LuTreeComponent, ITree, ITreeNode } from './../standalone-tree';
 	styleUrls: ['./tree-picker.component.scss'],
 })
 export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
-
-	/** Default value for 'placeholder' attribute */
-	private static readonly DEFAULT_PLACEHOLDER = 'Item';
-	/** Default value for 'placeholder' attribute when 'multiple' attribute is set to true */
-	private static readonly DEFAULT_PLACEHOLDER_MULTIPLE = 'Items';
-
 	/** The tree to display */
 	@Input()
 	public sourceTree: ITree;
@@ -33,9 +28,9 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 	@Input()
 	public placeholder: string;
 
-	public _innerValue: any;
-	public get value(): any { return this._innerValue; }
-	public set value(value: any) {
+	private _innerValue: ITreeNode | ITreeNode[];
+	public get value(): ITreeNode | ITreeNode[] { return this._innerValue; }
+	public set value(value: ITreeNode | ITreeNode[]) {
 		if (value === this._innerValue) {
 			return;
 		}
@@ -43,7 +38,7 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 		this.onChangeCallback(this._innerValue);
 	}
 
-	public writeValue(value: ITreeNode[]): void {
+	public writeValue(value: ITreeNode | ITreeNode[]): void {
 		this.value = value;
 	}
 
@@ -62,10 +57,10 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 		if (this.value == null) {
-			this.value = this.multiple ? [] : {};
+			this.value = this.multiple ? new Array<ITreeNode>() : new TreeNode(null);
 		}
 		if (this.placeholder == null) {
-			this.placeholder = this.multiple ? LuTreePickerComponent.DEFAULT_PLACEHOLDER_MULTIPLE : LuTreePickerComponent.DEFAULT_PLACEHOLDER;
+			this.placeholder = "";
 		}
 	}
 
@@ -74,7 +69,7 @@ export class LuTreePickerComponent implements ControlValueAccessor, OnInit, OnCh
 			this.multiple = LuTreeComponent.DEFAULT_ALLOW_MULTIPLE;
 		}
 		if (this.placeholder == null) {
-			this.placeholder = this.multiple ? LuTreePickerComponent.DEFAULT_PLACEHOLDER_MULTIPLE : LuTreePickerComponent.DEFAULT_PLACEHOLDER;
+			this.placeholder = "";
 		}
 	}
 }

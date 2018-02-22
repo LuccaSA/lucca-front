@@ -7,8 +7,6 @@
 
         &.single-value {}
 
-        &.single-value-empty {}
-
         &.multiple-value {}
 
         .multiple-value-count {
@@ -29,6 +27,6 @@
             background: #eee;
         }
 
-        &.multiple-value-empty {}
+        .value-empty {}
     }
 }

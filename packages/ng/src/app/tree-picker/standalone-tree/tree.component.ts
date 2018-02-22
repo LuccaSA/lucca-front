@@ -99,7 +99,9 @@ export class LuTreeComponent implements ControlValueAccessor, OnInit, OnChanges 
 				this.multipleValue.push(nodeToAdd);
 			} else {
 				const indexToRemove = this.multipleValue.findIndex(v => v.id === message.node.id);
-				this.multipleValue.splice(indexToRemove, 1);
+				if (indexToRemove > -1) {
+					this.multipleValue.splice(indexToRemove, 1);
+				}
 			}
 			// Value reference did not change: call onChangeCallback() manually
 			this.onChangeCallback(this.value);

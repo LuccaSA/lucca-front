@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
 import { LuTreeItemComponent } from './tree-item.component';
 
 describe('LuTreeItemComponent', () => {
-	let component: LuTreeItemComponent;
-	let fixture: ComponentFixture<LuTreeItemComponent>;
-
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			declarations: [LuTreeItemComponent]
-		})
-			.compileComponents();
-	}));
-
-	beforeEach(() => {
-		fixture = TestBed.createComponent(LuTreeItemComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+	beforeEach(async () => TestBed.configureTestingModule({
+		providers: [],
+		imports: []
+	}).compileComponents());
 
 	it('should create', () => {
-		expect(component).toBeTruthy();
+		// Arrange
+		TestBed.configureTestingModule({
+			declarations: [LuTreeItemComponent]
+		});
+		const fixture = TestBed.createComponent(LuTreeItemComponent);
+		const treeItemComponent = fixture.componentInstance;
+
+		// Act
+		fixture.detectChanges();
+
+		expect(treeItemComponent).toBeTruthy();
 	});
 });

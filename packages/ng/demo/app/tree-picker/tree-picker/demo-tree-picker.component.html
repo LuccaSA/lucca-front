@@ -3,14 +3,14 @@
 <demo-example-box [snippets]="snippets" demo="treePicker">
 	<h3>Component basic</h3>
 	<div class="textfield grid-xs6">
-		<lu-tree-picker class="textfield-input" [(ngModel)]="picker1Selection" [sourceTree]="staticTree" [multiple]="true" id="tree-picker-1"></lu-tree-picker>
+		<lu-tree-picker class="textfield-input" [(ngModel)]="picker1Selection" [sourceTree]="staticTree" placeholder="Items" [multiple]="true" id="tree-picker-1"></lu-tree-picker>
 		<label for="tree-picker-1" class="textfield-label">My label</label>
 	</div>
 	<code class="code mod-block grid-xs6">{{ picker1Selection | json  }}</code>
 
 	<h3>Component with single selection</h3>
 	<div class="textfield grid-xs6">
-		<lu-tree-picker class="textfield-input" [(ngModel)]="picker2Selection" [sourceTree]="staticTree" [multiple]="false" id="tree-picker-2"></lu-tree-picker>
+		<lu-tree-picker class="textfield-input" [(ngModel)]="picker2Selection" [sourceTree]="staticTree" [multiple]="false" placeholder="Placeholder" id="tree-picker-2"></lu-tree-picker>
 		<label for="tree-picker-2" class="textfield-label">My label</label>
 	</div>
 	<code class="code mod-block grid-xs6">{{ picker2Selection | json  }}</code>

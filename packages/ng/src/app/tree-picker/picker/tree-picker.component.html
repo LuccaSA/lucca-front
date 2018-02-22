@@ -1,9 +1,9 @@
 <div [LuPopoverTriggerFor]="treePickerPopover">
+	<span class="value-empty" *ngIf="(multiple === false && value?.id == null) || (multiple == true && (value == null || value.length === 0))">
+		{{ placeholder }}
+	</span>
 	<span class="single-value" *ngIf="multiple === false && value != null">
 		{{ value.name }}
-	</span>
-	<span class="single-value-empty" *ngIf="multiple === false && value?.id == null">
-		{{ placeholder }}
 	</span>
 	<span class="multiple-value" *ngIf="multiple === true && value != null && value.length > 0">
 		<span class="multiple-value-count">
@@ -12,9 +12,6 @@
 		<span>
 			{{ placeholder }}
 		</span>
-	</span>
-	<span class="multiple-value-empty" *ngIf="multiple == true && (value == null || value.length === 0)">
-		{{ placeholder }}
 	</span>
 </div>
 
