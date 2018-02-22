@@ -1,9 +1,18 @@
 .callout {
-	background: _theme("commons.background.dark");
+	background: _theme("commons.background.base");
 	border-radius: _theme("commons.border.radius");
 	margin: _component("callout.margin");
-	padding: 1rem 1.5rem;
+	padding: _component("callout.padding");
 	position: relative;
+
+	a:not([class]) {
+		color: inherit;
+
+		&:hover {
+			color: inherit;
+			opacity: .8;
+		}
+	}
 }
 
 .callout-title {
@@ -11,7 +20,7 @@
 
 	&::after {
 		content: " —";
-		font-weight: normal;
+		font-weight: 400;
 	}
 }
 
@@ -41,14 +50,11 @@
 
 .callout-icon {
 	position: absolute;
-	top: 0;
-	bottom: .2rem;
+	top: calc(1rem - .05rem);
 	left: .75rem;
-	height: 2rem;
 	width: 2rem;
 	margin: auto;
 	border-radius: 50%;
-	line-height: 2rem;
 	text-align: center;
 
 	.lucca-icon {
@@ -66,7 +72,7 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background: rgba(_get($palette, "color"), .10);
+	background: rgba(_get($palette, "color"), .1);
 	color: darken(_get($palette, "color"), 20%);
 
 	.callout-icon {

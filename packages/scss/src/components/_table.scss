@@ -43,6 +43,11 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .table {
+	&.mod-small {
+		font-size: _theme("sizes.small.font-size");
+		line-height: _theme("sizes.small.line-height");
+	}
+
 	&.mod-zebra {
 		.table-body {
 			tr:nth-child(odd) {

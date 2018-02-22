@@ -4,8 +4,13 @@
 ### New features
 ### Breaking changes
 ### Adding
+- `table` small table mode
 ### Enhancements
+- `emptystate` increase margin bottom
 ### Fixes
+- `label` vertical alignment
+- `callout` links colors
+- `callout` icon positioning
 
 ## V0.3.0
 ### Adding
