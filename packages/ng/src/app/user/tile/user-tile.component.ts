@@ -18,9 +18,9 @@ export class LuUserTileComponent {
 
 	/**
 	 * User Display format.
-	 * It is set to 'lf' by default
+	 * It is set to 'fl' by default
 	 */
-	@Input() displayFormat = 'lf';
+	@Input() displayFormat = 'fl';
 
 	/**
 	 * IUser role to display
