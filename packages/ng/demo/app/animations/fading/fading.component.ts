@@ -11,4 +11,5 @@ import { LfFadeAnimationFactory } from '../../../../src/app/animations';
 	}],
 })
 export class FadingComponent {
+	fading = false;
 }

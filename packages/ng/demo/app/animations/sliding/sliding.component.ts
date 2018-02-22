@@ -11,4 +11,10 @@ const slide = LfSlideAnimationFactory();
 		useFactory: LfSlideAnimationFactory,
 	}],
 })
-export class SlidingComponent {}
+export class SlidingComponent {
+	slidingLeft = false;
+	slidingRight = false;
+	slidingTop = false;
+	slidingBottom = false;
+
+}

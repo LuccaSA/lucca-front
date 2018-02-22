@@ -9,4 +9,9 @@ import { LfScaleAnimationFactory } from '../../../../src/app/animations';
 	}],
 })
 export class ScalingComponent {
+	scalingLeft = false;
+	scalingRight = false;
+	scalingTop = false;
+	scalingBottom = false;
+	scalingCemter = false;
 }
