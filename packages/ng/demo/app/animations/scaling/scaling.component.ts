@@ -4,9 +4,7 @@ import { LfScaleAnimationFactory } from '../../../../src/app/animations';
 	selector: 'demo-animations-scaling',
 	templateUrl: './scaling.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [{
-		useFactory: LfScaleAnimationFactory,
-	}],
+	animations: [LfScaleAnimationFactory()],
 })
 export class ScalingComponent {
 	scalingLeft = false;

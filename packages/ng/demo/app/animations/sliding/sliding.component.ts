@@ -7,14 +7,11 @@ const slide = LfSlideAnimationFactory();
 	selector: 'demo-animations-sliding',
 	templateUrl: './sliding.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [{
-		useFactory: LfSlideAnimationFactory,
-	}],
+	animations: [LfSlideAnimationFactory()],
 })
 export class SlidingComponent {
 	slidingLeft = false;
 	slidingRight = false;
 	slidingTop = false;
 	slidingBottom = false;
-
 }

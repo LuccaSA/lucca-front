@@ -6,9 +6,7 @@ import { LfFadeAnimationFactory } from '../../../../src/app/animations';
 	selector: 'demo-animations-fading',
 	templateUrl: './fading.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [{
-		useFactory: LfFadeAnimationFactory,
-	}],
+	animations: [LfFadeAnimationFactory()],
 })
 export class FadingComponent {
 	fading = false;
