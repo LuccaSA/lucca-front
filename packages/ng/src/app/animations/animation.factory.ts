@@ -5,11 +5,9 @@ import { scalingAnimations } from './scale.animation';
 import { slidingAnimations } from './slide.animation';
 
 export type AnimationType = 'scale' | 'slide' | 'fade';
+export const DEFAULT_LF_ANIMATION_TIMING = '250ms 0ms ease-out';
 
-export function LfAnimationFactory(type: AnimationType = 'fade', duration: number = 250, delay: number = 0, easing: string = 'ease-out'): AnimationTriggerMetadata {
-
-	const animationTiming = `${duration}ms ${delay}ms ${easing}`;
-
+export function LfAnimationFactory(type: AnimationType = 'fade', animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
 	switch (type) {
 		case 'fade':
 			return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
@@ -22,13 +20,13 @@ export function LfAnimationFactory(type: AnimationType = 'fade', duration: numbe
 	}
 }
 
-export function LfFadeAnimationFactory(duration: number = 250, delay: number = 0, easing: string = 'ease-out'): AnimationTriggerMetadata {
-	return LfAnimationFactory('fade', duration, delay, easing);
+export function LfFadeAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+	return LfAnimationFactory('fade', animationTiming);
 }
-export function LfSlideAnimationFactory(duration: number = 250, delay: number = 0, easing: string = 'ease-out'): AnimationTriggerMetadata {
-	return LfAnimationFactory('slide', duration, delay, easing);
+export function LfSlideAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+	return LfAnimationFactory('slide', animationTiming);
 }
-export function LfScaleAnimationFactory(duration: number = 250, delay: number = 0, easing: string = 'ease-out'): AnimationTriggerMetadata {
-	return LfAnimationFactory('scale', duration, delay, easing);
+export function LfScaleAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+	return LfAnimationFactory('scale', animationTiming);
 }
 
