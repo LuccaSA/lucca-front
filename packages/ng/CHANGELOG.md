@@ -2,6 +2,8 @@
 
 ## In Dev
 ### New features
+- `lu-user-tile` now support a `displayFormat` attribute
+
 ### Fixes
 ### Breaking changes
 ### Updated dependencies
