@@ -21,5 +21,5 @@ export const transformPopover: AnimationTriggerMetadata = trigger('transformPopo
 	]),
 	transition('* => void', [
 		animate('50ms 100ms linear', style({ opacity: 0 }))
-	])
+	]),
 ]);

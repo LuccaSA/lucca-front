@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoAnimationsComponent } from './animations.component';
-import { BasicComponent } from './basic/basic.component';
+import { FadingComponent } from './fading/fading.component';
 import { SlidingComponent } from './sliding/sliding.component';
 import { ScalingComponent } from './scaling/scaling.component';
 import { SharedModule } from '../shared';
@@ -11,7 +11,7 @@ import { SharedModule } from '../shared';
 		CommonModule,
 		SharedModule,
 	],
-	declarations: [DemoAnimationsComponent, SlidingComponent, ScalingComponent, BasicComponent],
+	declarations: [DemoAnimationsComponent, SlidingComponent, ScalingComponent, FadingComponent],
 	exports: [DemoAnimationsComponent]
 })
 export class DemoAnimationsModule { }

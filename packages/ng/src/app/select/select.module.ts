@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { LuSelectPicker } from './picker';
-import { LuSelectOption } from './option';
-import { LuSelectClearerComponent, LuSelectClearerFirstOrDefaultComponent } from './clearer';
-import { LuSelectDirective } from './directive';
+import { LuSelectPickerModule } from './picker';
+import { LuSelectOptionModule } from './option';
+import { LuSelectClearerModule } from './clearer';
+import { LuSelectDirectiveModule } from './directive';
 import { LuSelect } from './select.component';
 import { LuEmptyModule } from '../empty/empty.module';
 import { LuPopoverModule } from '../popover/popover.module';
@@ -15,21 +15,19 @@ import { LuPopoverModule } from '../popover/popover.module';
 		OverlayModule,
 		LuPopoverModule,
 		LuEmptyModule,
+		LuSelectPickerModule,
+		LuSelectOptionModule,
+		LuSelectClearerModule,
+		LuSelectDirectiveModule,
 	],
 	declarations: [
-		LuSelectPicker,
-		LuSelectOption,
-		LuSelectDirective,
-		LuSelectClearerComponent,
-		LuSelectClearerFirstOrDefaultComponent,
 		LuSelect,
 	],
 	exports: [
-		LuSelectPicker,
-		LuSelectOption,
-		LuSelectDirective,
-		LuSelectClearerComponent,
-		LuSelectClearerFirstOrDefaultComponent,
+		LuSelectPickerModule,
+		LuSelectOptionModule,
+		LuSelectClearerModule,
+		LuSelectDirectiveModule,
 		LuSelect,
 	]
 })

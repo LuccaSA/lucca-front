@@ -16,14 +16,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { standardApiPickerTemplate } from './api-picker.template';
+// import { standardApiPickerTemplate } from './api-picker.template';
 
 /**
  * The component that provides available options from the api with the currently inputed text
  */
 @Component({
 	selector: 'lu-api-picker',
-	template: standardApiPickerTemplate,
+	templateUrl: './api-picker.component.html',
 	styleUrls: ['./api-picker.component.scss'],
 	animations: [
 		transformPopover

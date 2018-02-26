@@ -72,11 +72,11 @@ export class FieldgroupComponent {
 							label: 'comments',
 							mod: 'mod-framed textarea',
 						},
-					}
+					},
 				],
 				templateOptions: {
 				},
-			}
+			},
 		],
 		templateOptions: {
 			title: 'section 1',
@@ -121,6 +121,7 @@ export class FieldgroupComponent {
 
 user = {};
 
+submit(stuff) {}
 }
 
 

@@ -13,6 +13,7 @@ import { LuSelectClearerFirstOrDefaultComponent } from './select-clearer-first.c
 	],
 	exports: [
 		LuSelectClearerFirstOrDefaultComponent,
+		LuSelectClearerComponent,
 	]
 })
 export class LuSelectClearerModule { }

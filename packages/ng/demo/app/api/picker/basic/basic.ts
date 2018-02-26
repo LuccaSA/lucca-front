@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
 export class BasicComponent {
 	api = '/api/v3/users';
 	item = { id: 1, name: 'and' };
+	apiChanged() {}
 }

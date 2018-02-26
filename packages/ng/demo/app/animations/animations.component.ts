@@ -13,9 +13,9 @@ export class DemoAnimationsComponent implements OnInit {
 	constructor() { }
 
 	snippets = {
-		basic: {
-			code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html')
+		fading: {
+			code: require('!!prismjs-loader?lang=typescript!./fading/fading.component'),
+			markup: require('!!prismjs-loader?lang=markup!./fading/fading.component.html')
 		},
 		sliding: {
 			code: require('!!prismjs-loader?lang=typescript!./sliding/sliding.component'),

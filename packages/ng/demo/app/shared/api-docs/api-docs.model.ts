@@ -7,6 +7,7 @@ export interface ClassDesc {
 }
 
 export interface DirectiveDesc extends ClassDesc {
+  pipeName: string;
   selector: string;
   exportAs?: string;
   inputs: InputDesc[];
