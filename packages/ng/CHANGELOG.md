@@ -2,12 +2,28 @@
 
 ## In Dev
 ### New features
-- `lu-user-tile` now support a `displayFormat` attribute
 
 ### Fixes
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies
+
+## v0.3.1
+### New features
+- `lu-user-tile` now support a `displayFormat` attribute
+### Breaking changes
+- Animations :
+ 💥 renamed LFAnimationFactory to LfAnimationFactory for consistency 's sake
+ 💥 changed LfAnimationFactory signature to be aot compatible (see after break)
+- Popover :
+ 💥 couldn't keep using popover.template.ts file cuz -aot, as a result had to create a popover.component.html. As a result people using customPopoverTemplate (api-picker or select-picker) can still use it but it wont work in aot. so you have to create the html file and have the whole template in it - see this commit
+### Fixes
+mini refacto of animations file names
+use factory to provide animation so it supports aot
+fix selects module to avoid declaring components twice
+fixed the demo in aot
+rem demo/formly/debug
+fixed aot issues in select due to protected/private properties being used in html template
 
 ## v0.3.0
 ### Fixes
