@@ -21,12 +21,12 @@ export function LfAnimationFactory(type: AnimationType = 'fade', animationTiming
 }
 
 export function LfFadeAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
-	return LfAnimationFactory('fade', animationTiming);
-}
-export function LfSlideAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
-	return LfAnimationFactory('slide', animationTiming);
+	return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
 }
 export function LfScaleAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
-	return LfAnimationFactory('scale', animationTiming);
+	return trigger('scaleAnimation', [...scalingAnimations(animationTiming)]);
+}
+export function LfSlideAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+	return trigger('slideAnimation', [...slidingAnimations(animationTiming)]);
 }
 
