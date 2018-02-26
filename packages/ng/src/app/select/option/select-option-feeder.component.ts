@@ -24,9 +24,18 @@ export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeed
 		return false;
 	}
 
+	/**
+	 * See ISelectOptionFeeder
+	 */
 	registerKeyevent(callback: (event: KeyboardEvent) => void): void {
 		this._callbackKeyEvent = callback;
 	}
 
+
+	/**
+	 * See ISelectOptionFeeder
+	 */
+	scrollTo(index: number) {
+	}
 
 }

@@ -43,6 +43,7 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 	 */
 	@ContentChildren(LuSelectOption, { descendants: true }) luOptions: QueryList<LuSelectOption<T>>;
 	@ViewChild('inputClue') _inputElement : ElementRef;
+	@ViewChild('scrollElement') _scrollElement : ElementRef;
 
 
 	constructor(public _intl: LuSelectSearchIntl,
@@ -74,6 +75,7 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		this._focus = false;
 		// When we quit the field, we reset the search item
 		this._clue = '';
+		this.luOptions.toArray().forEach(luOption => luOption.displayed = true);
 	}
 
 	private _onKeydown($event: KeyboardEvent){
@@ -115,6 +117,16 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 	open(): void {
 		this._focus = true;
 		this._inputElement.nativeElement.focus();
+	}
+
+	/**
+	 * See ISelectOptionFeeder
+	 */
+	scrollTo(index: number) {
+		const luOption = this.luOptions.toArray()[index];
+
+		this._scrollElement.nativeElement.scrollTop = luOption.offsetTop();
+
 	}
 
 }

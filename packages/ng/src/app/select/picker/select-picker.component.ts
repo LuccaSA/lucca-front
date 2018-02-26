@@ -30,7 +30,7 @@ import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 // import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange } from '../option';
+import {LuSelectOption, LuSelectOptionSelectionChange, ISelectOptionFeeder } from '../option';
 
 
 /**
@@ -73,6 +73,11 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	private _luOptions: QueryList<LuSelectOption<T>> = new QueryList<LuSelectOption<T>>();
 	/** Observable of the LuSelectOption, contained in the popover  */
 	luOptions$ = new BehaviorSubject<LuSelectOption<T>[]>([]);
+
+	/**
+	 * Reference to OptionFeeder when available
+	 */
+	public optionFeeder: ISelectOptionFeeder<T>;
 
 	/** Observable use for the detection of selection */
 	private _optionSelectionChanges: Observable<LuSelectOptionSelectionChange<T>> = defer(() => {
@@ -284,6 +289,21 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 		this._highlightIndex = Math.min(this._highlightIndex, this._optionsLength - 1);
 		this._highlightIndex = Math.max(this._highlightIndex, 0);
 		this._highlightIndex$.next(this._highlightIndex);
+		this._scrollTo();
+	}
+
+
+	private _scrollTo(){
+		if (this.optionFeeder){
+			this.optionFeeder.scrollTo(this._highlightIndex);
+		}else{
+			const luOption = this.luOptions$.getValue()[this._highlightIndex];
+
+			this._elementRef.nativeElement.scrollTop = luOption.offsetTop();// this._highlightIndex * 40;
+			console.log('', this.luOptions$.getValue()[this._highlightIndex]);
+
+		}
+
 	}
 
 	/**

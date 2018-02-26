@@ -9,7 +9,7 @@
 	(input)="_onFieldChange($event.target.value)"
 	>
 </div>
-<div class="select-options">
+<div class="select-options" #scrollElement>
 	<ng-content select="[luOptionValue]"></ng-content>
 	<div class="select-options-noResult" *ngIf="_noResults">{{_intl.noResultsLabel}}</div>
 </div>

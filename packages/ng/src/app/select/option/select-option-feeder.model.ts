@@ -10,6 +10,16 @@ export interface ISelectOptionFeeder<T> {
 	 */
 	open(): void;
 
+	/**
+	 * Register key events
+	 * @param callback
+	 */
 	registerKeyevent(callback: (event: KeyboardEvent) => void): void;
+
+	/**
+	 * Scroll to the element specifyed in index
+	 * @param index
+	 */
+	scrollTo(index: number);
 
 }

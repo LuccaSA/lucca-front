@@ -26,6 +26,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	private _focused = false;
 	private _selected = false;
 	private _displayed = true;
+	private _boudingRect: any;
 
 	/**
 	 * true if the option is focused
@@ -114,6 +115,16 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 */
 	unselect(): void {
 		this._selected = false;
+	}
+
+	/**
+	 * Define the Offset top of the element fir scrolling
+	*/
+	offsetTop(): number{
+		if (!this._boudingRect){
+			this._boudingRect = this._elementRef.nativeElement.getBoundingClientRect();
+		}
+		return this._elementRef.nativeElement.offsetTop - this._boudingRect.height;
 	}
 
 }
