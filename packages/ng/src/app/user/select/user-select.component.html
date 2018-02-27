@@ -1,0 +1,7 @@
+
+<lu-select
+	>
+	<lu-select-searcher luOptionFeeder>
+		<lu-select-option *ngFor="let user of users" [luOptionValue]="user">{{user.name}}</lu-select-option>
+	</lu-select-searcher>
+</lu-select>
