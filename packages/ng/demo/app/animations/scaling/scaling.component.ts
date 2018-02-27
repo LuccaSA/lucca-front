@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { LfScaleAnimationFactory } from '../../../../src/app/animations';
+import { LuScaleAnimationFactory } from '../../../../src/app/animations';
 @Component({
 	selector: 'demo-animations-scaling',
 	templateUrl: './scaling.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [LfScaleAnimationFactory()],
+	animations: [LuScaleAnimationFactory()],
 })
 export class ScalingComponent {
 	scalingLeft = false;

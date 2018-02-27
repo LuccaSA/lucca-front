@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import { LfSlideAnimationFactory } from '../../../../src/app/animations';
+import { LuSlideAnimationFactory } from '../../../../src/app/animations';
 
 @Component({
 	selector: 'demo-animations-sliding',
 	templateUrl: './sliding.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [LfSlideAnimationFactory()],
+	animations: [LuSlideAnimationFactory()],
 })
 export class SlidingComponent {
 	slidingLeft = false;
