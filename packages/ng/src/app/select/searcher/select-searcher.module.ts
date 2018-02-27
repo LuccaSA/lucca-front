@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LuSelectSearcherComponent } from './select-searcher.component';
 import { LU_SELECT_SEARCH_INTL_PROVIDER } from './select-searcher-intl';
@@ -6,6 +8,8 @@ import { LU_SELECT_SEARCH_INTL_PROVIDER } from './select-searcher-intl';
 @NgModule({
 	imports: [
 		CommonModule,
+		FormsModule,
+		BrowserModule,
 	],
 	declarations: [
 		LuSelectSearcherComponent,

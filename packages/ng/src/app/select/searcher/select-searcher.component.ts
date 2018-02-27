@@ -29,9 +29,9 @@ import { LuSelectSearchIntl } from './select-searcher-intl';
  */
 export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComponent<T> implements ISelectSearcher<T>, OnDestroy  {
 
-	private _clue = '';
+	_clue = '';
 	private _focus = false;
-	private _noResults = false;
+	_noResults = false;
 	private _clue$: Subject<string> = new Subject<string>();
 
 	private _intlChanges: Subscription;
@@ -65,20 +65,20 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 	}
 
 
-	private _onMouseDown($e) {
+	_onMouseDown($e) {
 		this._focus = true;
 		// We prevent propagation to avoid lost of focus in input field
 		$e.stopPropagation();
 	}
 
-	private _onBlur() {
+	_onBlur() {
 		this._focus = false;
 		// When we quit the field, we reset the search item
 		this._clue = '';
 		this.luOptions.toArray().forEach(luOption => luOption.displayed = true);
 	}
 
-	private _onKeydown($event: KeyboardEvent){
+	_onKeydown($event: KeyboardEvent){
 		this._callbackKeyEvent($event);
 	}
 
@@ -107,7 +107,7 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		return this._focus;
 	}
 
-	private _onFieldChange(clue: string) {
+	_onFieldChange(clue: string) {
 		this._clue$.next(clue);
 	}
 
