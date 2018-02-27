@@ -26,7 +26,8 @@
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "travis": "lerna run travis --scope=@lucca-front/ng"
   },
   "dependencies": {
     "lerna": "^2.5.1",
