@@ -8,6 +8,19 @@
 ### Updated dependencies
 ### Updated devDependencies
 
+## v0.3.2
+### Tooling
+🔨 travis calls script travis from root package, it is then dispatched to lf packages via lerna (for now only ng package is tested)
+🔨 ng - travis script does this
+ * builds the demo in aot
+ * run tests for /src
+ * builds the demo in JIT, no minification/cachebusting for easier reverse engineering
+### Breaking changes
+- Animations :
+ 💥 renammed LfAnimationFactory to LuAnimationFactory for consistency
+### Fixes
+🐛 user-tile - use the display pipe the right way, is compatible aot
+
 ## v0.3.1
 ### New features
 - `lu-user-tile` now support a `displayFormat` attribute
