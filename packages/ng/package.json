@@ -18,7 +18,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "prestart": "gulp generatedoc",
+    "prestart": "npm run generatedoc",
     "start": "ng serve -a=demo",
     "build": "gulp build",
     "test": "ng test -a=src -sr",
@@ -26,7 +26,14 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build",
-    "publish-test": "echo 'Publishing @lucca-front/ng'"
+    "generatedoc": "gulp generatedoc",
+    "prebuild-demo": "npm run generatedoc",
+    "build-demo": "ng build -a=demo",
+    "prebuild-aot": "npm run generatedoc",
+    "build-aot": "ng build -prod -a=demo",
+    "pretravis": "npm run build-aot",
+    "travis": "npm test",
+    "posttravis": "npm run build-demo"
   },
   "files": [
     "dist",

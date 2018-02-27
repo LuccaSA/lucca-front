@@ -13,11 +13,7 @@ addons:
 before_script:
 
 script:
-  - cd packages/ng
-  - npm test
-  - gulp generatedoc
-  - ng build -a=demo
-  - cd ../../
+ - npm run travis
 
 after_success:
   - chmod ugo+x ./deploy.sh

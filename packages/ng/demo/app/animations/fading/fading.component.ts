@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import { LfFadeAnimationFactory } from '../../../../src/app/animations';
+import { LuFadeAnimationFactory } from '../../../../src/app/animations';
 // const fade = LfAnimationFactory(); // defaults to fade
 @Component({
 	selector: 'demo-animations-fading',
 	templateUrl: './fading.component.html',
 	styleUrls: ['../animations.scss'],
-	animations: [LfFadeAnimationFactory()],
+	animations: [LuFadeAnimationFactory()],
 })
 export class FadingComponent {
 	fading = false;
