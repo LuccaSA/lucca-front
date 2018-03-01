@@ -54,3 +54,12 @@
 		top: 0;
 	}
 }
+
+@mixin isRequired() {
+	color: _color("error");
+	content: "*";
+	display: inline-block;
+	font-size: 1.2rem;
+	margin-left: .25em;
+	position: absolute;
+}

@@ -225,7 +225,7 @@
 	&.is-required {
 		.textfield-label {
 			&::after {
-				@extend %isRequired;
+				@include isRequired();
 			}
 		}
 	}
@@ -271,14 +271,6 @@
 	&.is-invalid {
 		.textfield-input {
 			@include textfieldError();
-		}
-	}
-}
-
-.textfield-label {
-	&.is-required {
-		&::after {
-			@extend %isRequired;
 		}
 	}
 }
@@ -334,15 +326,6 @@
 		opacity: 0;
 		transform: scale(0);
 	}
-}
-
-%isRequired {
-	color: _color("error");
-	content: "*";
-	display: inline-block;
-	font-size: 1.2rem;
-	margin-left: .25em;
-	position: absolute;
 }
 
 
