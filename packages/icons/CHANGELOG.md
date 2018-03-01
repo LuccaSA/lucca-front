@@ -2,6 +2,7 @@
 
 ## In dev
 ### New icons
+- `compass`
 
 ## v0.1.6
 
