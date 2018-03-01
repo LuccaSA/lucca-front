@@ -55,7 +55,7 @@
 	}
 }
 
-@mixin isRequired() {
+%isRequired {
 	color: _color("error");
 	content: "*";
 	display: inline-block;

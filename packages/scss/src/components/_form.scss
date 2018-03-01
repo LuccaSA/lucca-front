@@ -87,7 +87,7 @@
 .form-group-label {
 	&.is-required {
 		&::after {
-			@include isRequired();
+			@extend %isRequired;
 		}
 	}
 }

@@ -225,7 +225,7 @@
 	&.is-required {
 		.textfield-label {
 			&::after {
-				@include isRequired();
+				@extend %isRequired;
 			}
 		}
 	}
