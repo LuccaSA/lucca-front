@@ -223,13 +223,10 @@
 	}
 
 	&.is-required {
-		.textfield-label::after {
-			color: _color("error");
-			content: "*";
-			display: inline-block;
-			font-size: 1.2rem;
-			margin-left: .25em;
-			position: absolute;
+		.textfield-label {
+			&::after {
+				@extend %isRequired;
+			}
 		}
 	}
 
@@ -278,6 +275,35 @@
 	}
 }
 
+.textfield-label {
+	&.is-required {
+		&::after {
+			@extend %isRequired;
+		}
+	}
+}
+
+.textfield-input {
+
+	&[disabled], &[readonly] {
+		background: _theme("commons.background.dark");
+		color: _color("text.light");
+		cursor: not-allowed;
+	}
+
+	&.is-error {
+		@include textfieldError();
+
+		&:focus {
+			@include textfieldError();
+		}
+	}
+}
+
+
+// ANIMATIONS / MIXINS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
 @keyframes isValid {
 	from {
 		opacity: 0;
@@ -310,23 +336,18 @@
 	}
 }
 
-
-.textfield-input {
-
-	&[disabled], &[readonly] {
-		background: _theme("commons.background.dark");
-		color: _color("text.light");
-		cursor: not-allowed;
-	}
-
-	&.is-error {
-		@include textfieldError();
-
-		&:focus {
-			@include textfieldError();
-		}
-	}
+%isRequired {
+	color: _color("error");
+	content: "*";
+	display: inline-block;
+	font-size: 1.2rem;
+	margin-left: .25em;
+	position: absolute;
 }
+
+
+// MATERIAL, COMPACT & FRAMED
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 @import
 	"textfield.material",
