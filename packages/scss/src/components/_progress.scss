@@ -12,7 +12,7 @@
 	left: 0;
 	position: absolute;
 	top: 0;
-	transition: background _theme("commons.animations.durations.standard") ease;
+	transition: width _theme("commons.animations.durations.standard") ease;
 
 	&::after {
 		animation: progress _component("progress.duration") infinite;
