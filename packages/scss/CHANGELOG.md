@@ -7,6 +7,7 @@
 - `table` small table mode
 ### Enhancements
 - `emptystate` increase margin bottom
+- `form-group-label` supports is-required state
 ### Fixes
 - `label` vertical alignment
 - `callout` links colors

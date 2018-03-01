@@ -79,3 +79,15 @@
 		}
 	}
 }
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.form-group-label {
+	&.is-required {
+		&::after {
+			@extend %isRequired;
+		}
+	}
+}
