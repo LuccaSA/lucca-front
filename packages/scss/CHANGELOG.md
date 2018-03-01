@@ -7,6 +7,7 @@
 - `table` small table mode
 ### Enhancements
 - `emptystate` increase margin bottom
+- `textfield` supports is-required state on textfield-label
 ### Fixes
 - `label` vertical alignment
 - `callout` links colors
