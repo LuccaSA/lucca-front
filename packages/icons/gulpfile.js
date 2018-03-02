@@ -24,7 +24,7 @@ gulp.task('dist:clean', () => {
 });
 
 gulp.task('sass:dist', () => {
-	return gulp.src('./src/main-with-classes.scss')
+	return gulp.src('./src/main.scss')
 	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
 	.pipe(rename('lucca-icons.min.css'))
 	.pipe(gulp.dest(OUT_DIR));
