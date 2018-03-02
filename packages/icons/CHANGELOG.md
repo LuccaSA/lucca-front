@@ -4,6 +4,9 @@
 ### Enhancement
 - Class icons are now supported by default
 ### New icons
+
+## v0.3.3
+### New icons
 - `compass`
 
 ## v0.1.6

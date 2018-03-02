@@ -4,6 +4,11 @@
 ### New features
 ### Breaking changes
 ### Adding
+### Enhancements
+### Fixes
+
+## V0.3.3
+### Adding
 - `table` small table mode
 ### Enhancements
 - `emptystate` increase margin bottom
