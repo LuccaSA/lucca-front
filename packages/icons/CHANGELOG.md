@@ -1,6 +1,8 @@
 # Changelog
 
 ## In dev
+### Enhancement
+- Class icons are now supported by default
 ### New icons
 - `compass`
 
