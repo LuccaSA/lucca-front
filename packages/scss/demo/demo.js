@@ -245,6 +245,7 @@ function generateIconDemo() {
 		'tools',
 		'database',
 		'analytics',
+		'compass',
 
 		'iron',
 		'jumping_cc',
