@@ -64,11 +64,18 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 
 			// Act
-			fixture.detectChanges();
+			fixture.whenStable().then(()=> {
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.luOptions$).not.toBeNull();
-			expect(picker.luOptions$.value.length).toBe(globalOptions.length);
+				// Assert
+				expect(picker.luOptions$).not.toBeNull();
+				expect(picker.luOptions$.value.length).toBe(globalOptions.length);
+			})
 		});
 
 		it('It should find the correct option', () => {
@@ -83,11 +90,13 @@ describe('LuSelectPicker', () => {
 
 			// Act
 			fixture.detectChanges();
-			picker.find(globalOptions[0]).subscribe((luOption) => {
+			fixture.whenStable().then(() => {
+				const luOption = picker.find(globalOptions[0]);
 				// Assert
 				expect(luOption).not.toBeNull();
 				expect(luOption.luOptionValue).toBe(globalOptions[0]);
 			});
+
 		});
 
 		it('It should generate an error if there is no option', () => {
@@ -102,11 +111,12 @@ describe('LuSelectPicker', () => {
 
 			// Act
 			fixture.detectChanges();
-			picker.find({})
-			.subscribe((luOption) => {
+			fixture.whenStable().then(() => {
+				const luOption = picker.find({});
 				// Assert
 				expect(luOption).toBeUndefined();
-			});
+				});
+
 		});
 
 		it('It should highlight the right option', () => {
@@ -164,13 +174,20 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			// Act
-			fixture.detectChanges();
-			picker.selectOption(globalOptions[1]);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.selectOption(globalOptions[1]);
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.itemSelected.emit).toHaveBeenCalled();
+				// Assert
+				expect(picker.itemSelected.emit).toHaveBeenCalled();
+			});
 
 		});
 
@@ -185,18 +202,25 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			let selectionEmit = false;
 
-			// Act
-			fixture.detectChanges();
-			picker.itemSelected.subscribe((luOption) => {
-				expect(luOption).not.toBeNull('The event `value` is not null');
-				expect(luOption.luOptionValue).toBe(globalOptions[1], 'The output value emit is not right');
-				selectionEmit = true;
-			});
-			picker.selectOption(globalOptions[1]);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.itemSelected.subscribe((luOption) => {
+					expect(luOption).not.toBeNull('The event `value` is not null');
+					expect(luOption.luOptionValue).toBe(globalOptions[1], 'The output value emit is not right');
+					selectionEmit = true;
+				});
+				picker.selectOption(globalOptions[1]);
+				fixture.detectChanges();
 
-			// Assert
-			expect(selectionEmit).toBeTruthy('The selection event was not fired');
+				// Assert
+				expect(selectionEmit).toBeTruthy('The selection event was not fired');
+			});
 
 		});
 
@@ -211,13 +235,21 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			// Act
-			fixture.detectChanges();
-			picker.onEnterKeydown();
-			fixture.detectChanges();
+			fixture.whenStable().then(()=> {
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.onDownKeydown(true);
+				picker.onEnterKeydown();
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.itemSelected.emit).toHaveBeenCalled();
+				// Assert
+				expect(picker.itemSelected.emit).toHaveBeenCalled();
+			})
 
 		});
 
@@ -232,13 +264,20 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			// Act
-			fixture.detectChanges();
-			picker.onDownKeydown(false);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.onDownKeydown(false);
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.itemSelected.emit).toHaveBeenCalled();
+				// Assert
+				expect(picker.itemSelected.emit).toHaveBeenCalled();
+			})
 
 		});
 
@@ -254,6 +293,11 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
 				fixture.detectChanges();
 				picker.selectOption(globalOptions[2]);
 				fixture.detectChanges();
@@ -278,13 +322,20 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			// Act
-			fixture.detectChanges();
-			picker.onUpKeydown(false);
-			fixture.detectChanges();
+			fixture.whenStable().then(()=> {
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.onUpKeydown(false);
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.itemSelected.emit).toHaveBeenCalled();
+				// Assert
+				expect(picker.itemSelected.emit).toHaveBeenCalled();
+			});
 		});
 
 		it('It should change the highlight item when up key is hit ', async() => {
@@ -299,6 +350,11 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
 				fixture.detectChanges();
 				picker.selectOption(globalOptions[2]);
 				picker.onUpKeydown(true);
@@ -322,13 +378,20 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			// Act
-			fixture.detectChanges();
-			picker.onHomeKeydown(false);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.onHomeKeydown(false);
+				fixture.detectChanges();
 
-			// Assert
-			expect(picker.itemSelected.emit).toHaveBeenCalled();
+				// Assert
+				expect(picker.itemSelected.emit).toHaveBeenCalled();
+			})
 		});
 
 		it('It should change the highlight item when home key is hit ', async() => {
@@ -343,6 +406,11 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
 				fixture.detectChanges();
 				picker.selectOption(globalOptions[2]);
 				picker.onHomeKeydown(true);
@@ -365,13 +433,21 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			// Act
-			fixture.detectChanges();
-			picker.onEndKeydown(false);
-			fixture.detectChanges();
+			fixture.whenStable().then(() => {
 
-			// Assert
-			expect(picker.itemSelected.emit).toHaveBeenCalled();
+				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
+				fixture.detectChanges();
+				picker.onEndKeydown(false);
+				fixture.detectChanges();
+
+				// Assert
+				expect(picker.itemSelected.emit).toHaveBeenCalled();
+			})
 
 		});
 
@@ -387,6 +463,11 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
+				picker.luOptions$.next(globalOptions.map(option => {
+					const luSelectOption = new LuSelectOption(null);
+					luSelectOption.luOptionValue = option;
+					return luSelectOption;
+				}));
 				fixture.detectChanges();
 				picker.selectOption(globalOptions[2]);
 				picker.onEndKeydown(true);

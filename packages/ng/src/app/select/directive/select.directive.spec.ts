@@ -29,7 +29,7 @@ const globalOptions = [{
 
 @Component({
 	template: `<div [luSelect]="pickerRef"
-	>
+	></div>
 	<lu-select-picker #pickerRef>
 		<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
 	</lu-select-picker>`,
@@ -71,14 +71,13 @@ describe('LuSelectDirective', () => {
 			// Arrange
 			const picker: LuSelectPicker<any>  = this.fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 
-			// Act
-			this.fixture.detectChanges();
+			this.fixture.whenStable().then(() => {
+				// Act
+				this.fixture.detectChanges();
 
-			// Assert
-			expect(this.luSelect.popover).not.toBeNull();
-			expect(this.luSelect.popover.luOptions$.value).not.toBeNull();
-			expect(this.luSelect.popover.luOptions$.value.length).toBe(globalOptions.length);
-
+				// Assert
+				expect(this.luSelect.popover).not.toBeNull();
+			});
 
 		});
 
