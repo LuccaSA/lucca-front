@@ -11,7 +11,7 @@ import {
 	QueryList
 } from '@angular/core';
 import { ISelectSearcher } from './select-searcher.model';
-import { AbstractSelectOptionFeederComponent } from '../option/feeder/select-option-feeder.component';
+import { ASelectOptionFeeder } from '../option/feeder/';
 import { LuSelectOption } from '../option/select-option.component';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,13 +23,13 @@ import { LuSelectSearchIntl } from './select-searcher-intl';
 	selector: 'lu-select-searcher',
 	templateUrl: './select-searcher.component.html',
 	styleUrls: ['./select-searcher.component.scss'],
-	providers: [{provide: AbstractSelectOptionFeederComponent, useExisting: forwardRef(() => LuSelectSearcherComponent)}]
+	providers: [{provide: ASelectOptionFeeder, useExisting: forwardRef(() => LuSelectSearcherComponent)}]
 })
 /**
  * Component that manage the possibility to search in the options of a select.
  */
 export class LuSelectSearcherComponent<T>
-	extends AbstractSelectOptionFeederComponent<T>
+	extends ASelectOptionFeeder<T>
 	implements ISelectSearcher<T>,
 		OnDestroy,
 		AfterContentInit {

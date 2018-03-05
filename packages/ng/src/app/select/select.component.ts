@@ -37,8 +37,7 @@ import {takeUntil} from 'rxjs/operators/takeUntil';
 import {LuSelectOption} from './option/select-option.component';
 import { ISelectClearer } from './clearer/select-clearer.model';
 import { LuSelectClearerComponent } from './clearer/select-clearer.component';
-import { ISelectOptionFeeder } from './option/feeder/select-option-feeder.model';
-import { AbstractSelectOptionFeederComponent } from './option/feeder/select-option-feeder.component';
+import { ASelectOptionFeeder, ISelectOptionFeeder } from './option/feeder/';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -133,7 +132,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: string;
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
-	@ContentChild(AbstractSelectOptionFeederComponent) optionFeeder: ISelectOptionFeeder<T>;
+	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
 
 	@HostBinding('class.is-filled') isFilled = false;
 
