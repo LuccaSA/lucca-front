@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LuSelectOption } from './select-option.component';
-import { LuOptionFeederDirective } from './select-option-feeder.directive';
-import { AbstractSelectOptionFeederComponent } from './select-option-feeder.component';
+import { LuSelectOptionFeederModule } from './feeder/select-option-feeder.module';
 
 @NgModule({
 	imports: [
 		CommonModule,
+		LuSelectOptionFeederModule,
 	],
 	declarations: [
 		LuSelectOption,
-		LuOptionFeederDirective,
-		AbstractSelectOptionFeederComponent,
 	],
 	exports: [
 		LuSelectOption,
-		LuOptionFeederDirective,
-		AbstractSelectOptionFeederComponent,
+		LuSelectOptionFeederModule
 	]
 })
 export class LuSelectOptionModule { }

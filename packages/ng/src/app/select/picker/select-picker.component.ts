@@ -29,7 +29,8 @@ import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 // import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange, ISelectOptionFeeder } from '../option';
+import {LuSelectOption, LuSelectOptionSelectionChange } from '../option';
+import {ISelectOptionFeeder } from '../option/feeder';
 
 
 /**

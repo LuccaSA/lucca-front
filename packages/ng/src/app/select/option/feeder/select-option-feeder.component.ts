@@ -2,7 +2,7 @@ import {
 	Component,
 } from '@angular/core';
 import {ISelectOptionFeeder} from './select-option-feeder.model';
-import {LuSelectOption} from './select-option.component';
+import {LuSelectOption} from '../select-option.component';
 
 /**
  * The component that provides available options for lu-select

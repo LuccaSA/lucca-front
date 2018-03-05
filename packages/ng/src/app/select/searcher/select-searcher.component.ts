@@ -11,7 +11,7 @@ import {
 	QueryList
 } from '@angular/core';
 import { ISelectSearcher } from './select-searcher.model';
-import { AbstractSelectOptionFeederComponent } from '../option/select-option-feeder.component';
+import { AbstractSelectOptionFeederComponent } from '../option/feeder/select-option-feeder.component';
 import { LuSelectOption } from '../option/select-option.component';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';

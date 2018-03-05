@@ -1,4 +1,4 @@
-import { LuSelectOption } from ".";
+import { LuSelectOption } from "../";
 
 export interface ISelectOptionFeeder<T> {
 

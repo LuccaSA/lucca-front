@@ -37,8 +37,8 @@ import {takeUntil} from 'rxjs/operators/takeUntil';
 import {LuSelectOption} from './option/select-option.component';
 import { ISelectClearer } from './clearer/select-clearer.model';
 import { LuSelectClearerComponent } from './clearer/select-clearer.component';
-import { ISelectOptionFeeder } from './option/select-option-feeder.model';
-import { AbstractSelectOptionFeederComponent } from './option/select-option-feeder.component';
+import { ISelectOptionFeeder } from './option/feeder/select-option-feeder.model';
+import { AbstractSelectOptionFeederComponent } from './option/feeder/select-option-feeder.component';
 
 /** KeyCode for End Key */
 const END = 'End';
