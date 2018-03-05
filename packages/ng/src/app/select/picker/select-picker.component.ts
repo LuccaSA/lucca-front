@@ -72,7 +72,7 @@ export class LuSelectPicker<T>
 	@Output() itemSelected  = new EventEmitter<LuSelectOption<T>>();
 
 	/** Observable of the LuSelectOption, contained in the popover  */
-	luOptions$ = new BehaviorSubject<LuSelectOption<T>[]>([]);
+	private luOptions$ = new BehaviorSubject<LuSelectOption<T>[]>([]);
 
 	/**
 	 * Reference to OptionFeeder when available
@@ -126,12 +126,6 @@ export class LuSelectPicker<T>
 				}
 			});
 		});
-
-		this.luOptions$.subscribe(luOptions => {
-			Promise.resolve().then(() => {
-				this._resetOptions();
-			});
-		});
 	}
 	ngOnDestroy() {
 		this.luOptions$.unsubscribe();
@@ -141,12 +135,15 @@ export class LuSelectPicker<T>
 	}
 
 	/** Drops current option subscriptions and IDs and resets from scratch. */
-	private _resetOptions(): void {
+	public resetOptions(options: LuSelectOption<T>[], forceChangeValue: boolean = true): void {
+			this.luOptions$.next(options);
 			this.luOptions$.getValue().map(luOption => {
 				luOption.onSelectionChange.subscribe((event: LuSelectOptionSelectionChange<T>) => this.selectOption(event.source.luOptionValue));
 
 			});
-			this.selectOption(this._selectOptionValue);
+			if (forceChangeValue){
+				this.selectOption(this._selectOptionValue);
+			}
 			this._optionsLength = this.luOptions$.getValue().length;
 			this._options$.next(this.luOptions$.getValue().map<T>(luOption => luOption.luOptionValue));
 	}
@@ -205,6 +202,13 @@ export class LuSelectPicker<T>
 		if (luSelectOption){
 			this.itemSelected.emit(luSelectOption);
 		}
+	}
+
+	/**
+	 * @return the list of LuSelectOption of the picker
+	*/
+	public luSelectOptions(): LuSelectOption<T>[] {
+		return this.luOptions$.getValue();
 	}
 
 	private _selectWithoutEmit(option: T): void {

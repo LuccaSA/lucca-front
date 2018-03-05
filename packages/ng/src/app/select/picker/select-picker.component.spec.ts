@@ -50,8 +50,8 @@ describe('LuSelectPicker', () => {
 			fixture.detectChanges();
 
 			// Assert
-			expect(picker.luOptions$).not.toBeNull();
-			expect(picker.luOptions$.value.length).toBe(0);
+			expect(picker.luSelectOptions()).not.toBeNull();
+			expect(picker.luSelectOptions().length).toBe(0);
 		});
 
 		it('It should reflect the options number', () => {
@@ -65,7 +65,7 @@ describe('LuSelectPicker', () => {
 
 			// Act
 			fixture.whenStable().then(()=> {
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -73,8 +73,8 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$).not.toBeNull();
-				expect(picker.luOptions$.value.length).toBe(globalOptions.length);
+				expect(picker.luSelectOptions()).not.toBeNull();
+				expect(picker.luSelectOptions().length).toBe(globalOptions.length);
 			})
 		});
 
@@ -136,7 +136,7 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$.value[1].focused).toBe(true);
+				expect(picker.luSelectOptions()[1].focused).toBe(true);
 			});
 
 		});
@@ -158,7 +158,7 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$.value[1].focused).toBe(true);
+				expect(picker.luSelectOptions()[1].focused).toBe(true);
 			});
 
 		});
@@ -176,7 +176,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -204,7 +204,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -237,7 +237,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(()=> {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -266,7 +266,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -293,7 +293,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -305,8 +305,8 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$.value[2].focused).toBe(false);
-				expect(picker.luOptions$.value[3].focused).toBe(true);
+				expect(picker.luSelectOptions()[2].focused).toBe(false);
+				expect(picker.luSelectOptions()[3].focused).toBe(true);
 			});
 
 		});
@@ -324,7 +324,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(()=> {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -350,7 +350,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -361,8 +361,8 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$.value[1].focused).toBe(true);
-				expect(picker.luOptions$.value[2].focused).toBe(false);
+				expect(picker.luSelectOptions()[1].focused).toBe(true);
+				expect(picker.luSelectOptions()[2].focused).toBe(false);
 			});
 
 		});
@@ -380,7 +380,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -406,7 +406,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -417,8 +417,8 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$.value[0].focused).toBe(true);
-				expect(picker.luOptions$.value[2].focused).toBe(false);
+				expect(picker.luSelectOptions()[0].focused).toBe(true);
+				expect(picker.luSelectOptions()[2].focused).toBe(false);
 			});
 		});
 
@@ -436,7 +436,7 @@ describe('LuSelectPicker', () => {
 			fixture.whenStable().then(() => {
 
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -463,7 +463,7 @@ describe('LuSelectPicker', () => {
 
 			fixture.whenStable().then(() => {
 				// Act
-				picker.luOptions$.next(globalOptions.map(option => {
+				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
@@ -474,8 +474,8 @@ describe('LuSelectPicker', () => {
 				fixture.detectChanges();
 
 				// Assert
-				expect(picker.luOptions$.value[2].focused).toBe(false);
-				expect(picker.luOptions$.value[4].focused).toBe(true);
+				expect(picker.luSelectOptions()[2].focused).toBe(false);
+				expect(picker.luSelectOptions()[4].focused).toBe(true);
 			});
 
 		});

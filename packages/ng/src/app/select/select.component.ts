@@ -118,6 +118,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	// Inner values
 	protected _value: T | null;
 	protected _selectOption: LuSelectOption<T> | null;
+	private _forceChangeValue= true;
 
 	// Inner Children
 	@ViewChild(LuSelectDirective) _field: LuSelectDirective;
@@ -171,9 +172,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	ngAfterContentInit() {
 		this.luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe((option) => {
-			if (this._picker.luOptions$) {
-				this._picker.luOptions$.next(this.luOptions.toArray());
-			}
+			Promise.resolve().then(() => {
+				this._picker.resetOptions(this.luOptions.toArray(), this._forceChangeValue);
+				this._forceChangeValue = true;
+			});
+
 		});
 
 		Promise.resolve().then(() => {
@@ -219,7 +222,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._canRemove = canRemove;
 	}
 
-	private _optionChanges(options: LuSelectOption<T>[], forceChangeValue: boolean): void {
+	private _optionChanges(options: LuSelectOption<T>[]): void {
+		this._forceChangeValue = false;
 		this.luOptions.reset(options);
 		this.luOptions.notifyOnChanges();
 	}
