@@ -2,10 +2,13 @@
 
 ## In dev
 ### Enhancement
-- Class icons are now supported by default
+### Fix
+- Fix planning_manage key
 ### New icons
 
 ## v0.3.3
+### Enhancement
+- Class icons are now supported by default
 ### New icons
 - `compass`
 

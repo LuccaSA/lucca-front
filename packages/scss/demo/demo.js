@@ -253,7 +253,7 @@ function generateIconDemo() {
 		'home',
 		'planning',
 		'planning_edit',
-		'planning_tool',
+		'planning_manage',
 		'todolist',
 
 		'format_link',
