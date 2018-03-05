@@ -17,7 +17,7 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { LuSelectSearchIntl } from './select-searcher-intl';
+import { LuSelectSearchIntl } from './select-searcher.intl';
 
 @Component({
 	selector: 'lu-select-searcher',

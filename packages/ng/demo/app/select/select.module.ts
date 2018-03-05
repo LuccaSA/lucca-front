@@ -8,7 +8,7 @@ import { DemoSelectComponent } from './select.component';
 import { DemoSimpleSelectComponent } from './simple-select/simple-select.component';
 import { DemoClearerSelectComponent } from './clearer-select/clearer-select.component';
 import { DemoSearcherSelectComponent } from './searcher-select/searcher-select.component';
-import { getOverrideLuSelectSearchIntl } from './searcher-select/searcher-select-demo-intl';
+import { getOverrideLuSelectSearchIntl } from './searcher-select/searcher-select-demo.intl';
 import { DemoModSelectComponent } from './mod-select/mod-select.component';
 import { SharedModule } from '../shared';
 
