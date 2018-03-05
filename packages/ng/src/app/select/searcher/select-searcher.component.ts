@@ -104,18 +104,30 @@ export class LuSelectSearcherComponent<T>
 	 * See ISelectSearcher
 	 */
 	filter(clue: string, options: LuSelectOption<T>[]): LuSelectOption<T>[] {
-		const normalizeClue = clue.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
-		return options.filter((option) => {
+		const normalizeClue = this._normalizeString(clue);
+		return options
+			.map(option => {
+				option.displayed = false;
+				return option;
+			})
+			.filter((option) => {
 			let valueOption = this.innerMap[option.viewValue];
 			if (!valueOption){
-				this.innerMap[option.viewValue] = option.viewValue.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+				this.innerMap[option.viewValue] = this._normalizeString(option.viewValue);
 				valueOption = this.innerMap[option.viewValue];
 			}
 
-			const match = valueOption.indexOf(normalizeClue) !== -1;
-			option.displayed = match;
-			return match;
+			return valueOption.indexOf(normalizeClue) !== -1;
+		})
+		.map(option => {
+			option.displayed = true;
+			return option;
 		});
+	}
+
+
+	private _normalizeString(str: string){
+		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
 	}
 
 	/**
