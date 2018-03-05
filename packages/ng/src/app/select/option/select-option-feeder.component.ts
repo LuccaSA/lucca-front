@@ -2,6 +2,7 @@ import {
 	Component,
 } from '@angular/core';
 import {ISelectOptionFeeder} from './select-option-feeder.model';
+import {LuSelectOption} from './select-option.component';
 
 /**
  * The component that provides available options for lu-select
@@ -13,6 +14,7 @@ export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeed
 
 
 	protected _callbackKeyEvent: (event: KeyboardEvent) => void;
+	protected _callbackOptions: (options: LuSelectOption<T>[]) => void;
 	/**
 	 * See ISelectOptionFeeder
 	*/
@@ -31,6 +33,12 @@ export class AbstractSelectOptionFeederComponent<T> implements ISelectOptionFeed
 		this._callbackKeyEvent = callback;
 	}
 
+	/**
+	 * See ISelectOptionFeeder
+	 */
+	registerChangeOptions(callback: (options: LuSelectOption<T>[]) => void): void {
+		this._callbackOptions = callback;
+	}
 
 	/**
 	 * See ISelectOptionFeeder

@@ -1,3 +1,5 @@
+import { LuSelectOption } from ".";
+
 export interface ISelectOptionFeeder<T> {
 
 	/**
@@ -15,6 +17,12 @@ export interface ISelectOptionFeeder<T> {
 	 * @param callback
 	 */
 	registerKeyevent(callback: (event: KeyboardEvent) => void): void;
+
+	/**
+	 * Register for options changes
+	 * @param callback
+	 */
+	registerChangeOptions(callback: (options: LuSelectOption<T>[]) => void): void;
 
 	/**
 	 * Scroll to the element specifyed in index

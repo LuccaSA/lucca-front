@@ -86,7 +86,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		return this._value;
 	}
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
-	set value(value:  T | null) {
+	set value(value:  T | null | undefined) {
 		let valueTemp = value;
 		if (valueTemp === null) {
 			// We have to deal with the fact that the clearer could not be set => we do nothing
@@ -107,12 +107,12 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			}
 			// Transfer the information to popover
 			this._picker.selectOption(value);
-			this._picker.find(value).subscribe(selectOption => {
-				this._selectOption = selectOption;
-				// render
-				this.render(selectOption);
-			});
+
 		}
+		// We render the option
+		this._selectOption = this._picker.find(value);
+		// render
+		this.render(this._selectOption);
 	}
 
 	// Inner values
@@ -129,8 +129,6 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
-	/** True if the component allow to clear the value.  */
-	// @Input() clearable = false;
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: string;
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
@@ -194,6 +192,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			if (this.optionFeeder){
 				this._picker.optionFeeder = this.optionFeeder;
 				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
+				this.optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
 			}
 		});
 	}
@@ -218,6 +217,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			this.clearer.canRemove(canRemove);
 		}
 		this._canRemove = canRemove;
+	}
+
+	private _optionChanges(options: LuSelectOption<T>[], forceChangeValue: boolean): void {
+		this.luOptions.reset(options);
+		this.luOptions.notifyOnChanges();
 	}
 
 	/** set the value to null */
@@ -266,7 +270,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			return this._picker.onEndKeydown(this._field.popoverOpen);
 			case ENTER_KEY:{
 				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
-				if(this._field.popoverOpen) {
+				if(this._field.popoverOpen && this.optionFeeder) {
 					this.optionFeeder.open();
 				}
 				return;
@@ -292,10 +296,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@HostListener('click')
 	clicked() {
 		this._field.togglePopover();
-		if (this._field.popoverOpen) {
+		if (this._field.popoverOpen && this.optionFeeder) {
 			this.optionFeeder.open();
-			this._picker.search(this._strValue);
 		}
+		this._picker.search(this._strValue);
 	}
 
 	// Utilities

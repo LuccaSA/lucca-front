@@ -1,6 +1,7 @@
 import {
 	Component,
 	Input,
+	AfterContentInit,
 	ContentChildren,
 	ViewChild,
 	ElementRef,
@@ -27,7 +28,11 @@ import { LuSelectSearchIntl } from './select-searcher-intl';
 /**
  * Component that manage the possibility to search in the options of a select.
  */
-export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComponent<T> implements ISelectSearcher<T>, OnDestroy  {
+export class LuSelectSearcherComponent<T>
+	extends AbstractSelectOptionFeederComponent<T>
+	implements ISelectSearcher<T>,
+		OnDestroy,
+		AfterContentInit {
 
 	_clue = '';
 	private _focus = false;
@@ -38,6 +43,7 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 
 	private innerMap = {};
 
+	private _originalList:  LuSelectOption<T>[];
 	/**
 	 * The options detected
 	 */
@@ -55,7 +61,13 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		.subscribe(model => {
 			this._clue = model;
 			// Call the filter function
-			this._noResults = this.filter(this._clue, this.luOptions.toArray()).length === 0;
+			const optionsFiltered = this.filter(this._clue, this._originalList);
+			this._noResults = optionsFiltered.length === 0;
+			this.luOptions.reset(optionsFiltered);
+			this.luOptions.notifyOnChanges();
+			if (this._callbackOptions){
+				this._callbackOptions(optionsFiltered);
+			}
 		});
 		this._intlChanges = _intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
 	}
@@ -64,6 +76,9 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		this._intlChanges.unsubscribe();
 	}
 
+	ngAfterContentInit(): void {
+		this._originalList = this.luOptions.toArray();
+	}
 
 	_onMouseDown($e) {
 		this._focus = true;
@@ -75,7 +90,10 @@ export class LuSelectSearcherComponent<T> extends AbstractSelectOptionFeederComp
 		this._focus = false;
 		// When we quit the field, we reset the search item
 		this._clue = '';
-		this.luOptions.toArray().forEach(luOption => luOption.displayed = true);
+		this.luOptions.reset(this._originalList);
+		this.luOptions.notifyOnChanges();
+		this._callbackOptions(this._originalList);
+		this._originalList.forEach(luOption => luOption.displayed = true);
 	}
 
 	_onKeydown($event: KeyboardEvent){
