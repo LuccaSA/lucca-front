@@ -107,6 +107,7 @@ export class LuSelectPicker<T>
 			this._options$,
 			this._highlightIndex$,
 			(options, index) => {
+				// We select the option corresponding to _highlightIndex$ or _options$ moves
 				if (!!options && index <= options.length) {
 					return {option: options[index], index};
 				}

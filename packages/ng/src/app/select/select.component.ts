@@ -266,11 +266,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				}
 				break;
 			case HOME:
-			$event.preventDefault();
-			return this._picker.onHomeKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onHomeKeydown(this._field.popoverOpen);
 			case END:
-			$event.preventDefault();
-			return this._picker.onEndKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onEndKeydown(this._field.popoverOpen);
 			case ENTER_KEY:{
 				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
 				if(this._field.popoverOpen && this.optionFeeder) {
@@ -279,11 +279,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				return;
 			}
 			case DOWN_KEY:
-			$event.preventDefault();
-			return this._picker.onDownKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onDownKeydown(this._field.popoverOpen);
 			case UP_KEY:
-			$event.preventDefault();
-			return this._picker.onUpKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onUpKeydown(this._field.popoverOpen);
 		}
 	}
 
