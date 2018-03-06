@@ -1,0 +1,15 @@
+<div class="textfield mod-search">
+	<input
+	#inputClue
+	(keydown)="_onKeydown($event)"
+	(mousedown)="_onMouseDown($event)"
+	(blur)="_onBlur()"
+	class="textfield-input"
+	[(ngModel)]="_clue"
+	(input)="_onFieldChange($event.target.value)"
+	>
+</div>
+<div class="select-options" #scrollElement>
+	<lu-select-option [luOptionValue]="user" *ngFor="let user of users">{{user.name}}</lu-select-option>
+	<div class="select-options-noResult" *ngIf="_noResults">{{_intl.noResultsLabel}}</div>
+</div>

@@ -2,28 +2,24 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { LuSelectModule } from '../../select';
-import { LuUserSelect } from './user-select.component';
+import { LuUserPicker } from './user-select-picker.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LuUserPickerModule } from './picker/user-select-picker.module';
+import { LuSelectModule } from '../../../select';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		BrowserModule,
-		OverlayModule,
-		LuSelectModule,
 		HttpClientModule,
-		LuUserPickerModule,
+		LuSelectModule,
 	],
 	declarations: [
-		LuUserSelect,
+		LuUserPicker,
 	],
 	exports: [
-		LuUserSelect,
+		LuUserPicker,
 	]
 })
-export class LuUserSelectModule { }
+export class LuUserPickerModule { }
 

@@ -1,1 +1,13 @@
-<user-select></user-select>
+<section class="contentSection">
+	<h3>User Select basic</h3>
+	<div class="textfield">
+		<user-select [(ngModel)]="userSelect"
+			class="textfield-input"
+			placeholder="placeholder"
+			name="itemOptions">
+		</user-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ userSelect | json }}</code>
+</section>
+
