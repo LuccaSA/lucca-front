@@ -7,6 +7,10 @@
 ### New icons
 - `cloud_upload`, `cloud_download`
 
+## v0.3.4
+### Fix
+- Fix planning_manage key
+
 ## v0.3.3
 ### Enhancement
 - Class icons are now supported by default
