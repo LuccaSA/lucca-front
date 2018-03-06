@@ -3,6 +3,10 @@
 ## In dev
 ### Enhancement
 ### Fix
+### New icons
+
+## v0.3.5
+### Fix
 - Fix multiple key icons
 ### New icons
 - `cloud_upload`, `cloud_download`
