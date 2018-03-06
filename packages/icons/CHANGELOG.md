@@ -3,8 +3,9 @@
 ## In dev
 ### Enhancement
 ### Fix
-- Fix planning_manage key
+- Fix multiple key icons
 ### New icons
+- `cloud_upload`, `cloud_download`
 
 ## v0.3.3
 ### Enhancement
