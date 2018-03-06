@@ -135,6 +135,8 @@ function generateIconDemo() {
 		'import_pristine',
 		'download',
 		'upload',
+		'cloud_download',
+		'cloud_upload',
 		'outside',
 		'trash',
 		'send',
@@ -235,6 +237,7 @@ function generateIconDemo() {
 		'heart',
 		'heart_broken',
 		'star',
+		'unstared',
 
 		'computer',
 		'computer_mouse',
