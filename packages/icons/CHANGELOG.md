@@ -3,8 +3,11 @@
 ## In dev
 ### Enhancement
 ### Fix
-- Fix planning_manage key
 ### New icons
+
+## v0.3.4
+### Fix
+- Fix planning_manage key
 
 ## v0.3.3
 ### Enhancement
