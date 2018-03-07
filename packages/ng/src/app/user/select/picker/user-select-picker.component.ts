@@ -205,6 +205,10 @@ export class LuUserPicker<T extends IUser>
 		this._scrollElement.nativeElement.scrollTop = luOption.offsetTop();
 	}
 
+	selectUser(user: T){
+
+	}
+
 	protected getOptions(clue: string = ''): Observable<T[]> {
 		const params = [`name=like,${clue}`, 'paging=0,10', 'fields=id,name'];
 		const url = `${this._api}?${params.join('&')}`;
