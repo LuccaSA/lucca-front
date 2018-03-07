@@ -74,3 +74,81 @@ Don't forget to add your fonts in src/index.html
 ```
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
 ```
+
+## Theming
+### Palettes
+
+You can set up a custom palette in palettes.override.scss You palette will be accessible on some components with `palette-*` classes
+
+```
+$palettes: (
+	"primary": (
+		"color": #FFCC00,
+		"text": #666666,
+	),
+	"secondary": (
+		"color": #FF6600,
+		"text": #FFFFFF,
+	),
+	"success": (
+		"color": #9ACD32,
+		"text": #FFFFFF,
+	),
+	"warning": (
+		"color": #FF9900,
+		"text": #FFFFFF,
+	),
+	"error": (
+		"color": #FF3300,
+		"text": #FFFFFF,
+	),
+);
+
+$colors: (
+	text: (
+		"default": #666666,
+		"light": #999999,
+		"placeholder": #CCCCCC,
+	),
+);
+$theme: _set($theme, "palettes", $palettes);
+$theme: _set($theme, "colors", $colors);
+```
+
+### Breakpoints
+
+You can set up custom breakpoints values in breakpoints.override.scss
+
+```
+$breakpoints: (
+	"xs": (
+		"breakAt": 0,
+		"spacing": 0,
+	),
+	"sm": (
+		"breakAt": 576px,
+		"spacing": 20px,
+	),
+	"md": (
+		"breakAt": 768px,
+		"spacing": 30px,
+	),
+	"lg": (
+		"breakAt": 992px,
+		"spacing": 40px,
+	),
+	"xl": (
+		"breakAt": 1200px,
+		"spacing": 60px,
+	),
+	"xxl": (
+		"breakAt": 1350px,
+		"spacing": 60px,
+	),
+	"xxxl": (
+		"breakAt": 1500px,
+		"spacing": 60px,
+	)
+);
+$theme: _set($theme, "breakpoints", $breakpoints);
+```
