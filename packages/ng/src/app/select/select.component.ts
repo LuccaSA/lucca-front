@@ -195,6 +195,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				this._picker.optionFeeder = this.optionFeeder;
 				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
 				this.optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
+				this.optionFeeder.registerSelectOption(this._optionSelected.bind(this));
 			}
 		});
 	}

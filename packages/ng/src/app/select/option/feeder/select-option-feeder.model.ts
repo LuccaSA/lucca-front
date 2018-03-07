@@ -25,6 +25,12 @@ export interface ISelectOptionFeeder<T> {
 	registerChangeOptions(callback: (options: LuSelectOption<T>[]) => void): void;
 
 	/**
+	 * Register for option selection
+	 * @param callback
+	 */
+	registerSelectOption(callback: (option: LuSelectOption<T>) => void): void;
+
+	/**
 	 * Scroll to the element specifyed in index
 	 * @param index
 	 */
@@ -42,6 +48,7 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 
 	protected _callbackKeyEvent: (event: KeyboardEvent) => void;
 	protected _callbackOptions: (options: LuSelectOption<T>[]) => void;
+	protected _callbackSelectOption: (option: LuSelectOption<T>) => void;
 	/**
 	 * See ISelectOptionFeeder
 	*/
@@ -65,6 +72,13 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	 */
 	registerChangeOptions(callback: (options: LuSelectOption<T>[]) => void): void {
 		this._callbackOptions = callback;
+	}
+
+	/**
+	 * See ISelectOptionFeeder
+	 */
+	registerSelectOption(callback: (option: LuSelectOption<T>) => void): void {
+		this._callbackSelectOption = callback;
 	}
 
 	/**
