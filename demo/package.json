@@ -21,6 +21,6 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "serve": "^6.5.0"
+    "browser-sync": "^2.23.6"
   }
 }
