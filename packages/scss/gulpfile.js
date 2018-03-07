@@ -40,7 +40,8 @@ gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 			baseDir: DEMO_DIR,
 			index: "demo.html",
 			routes: {
-				"/lucca-front.css": "./dist/lucca-front.css",
+				"/scss/lucca-front.css": "./dist/lucca-front.css",
+				"/scss/demo.css": "./demo/demo.css",
 				"/icons": "../icons"
 			}
 		}
