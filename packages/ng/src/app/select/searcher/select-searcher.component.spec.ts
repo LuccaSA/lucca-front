@@ -64,7 +64,7 @@ describe('LuSelectSearcher', () => {
 			// Act
 
 			// Assert
-			expect(searcher.hasFocus()).toBe(false);
+			expect(searcher.focused).toBe(false);
 		});
 
 		it('It should be focused when we click on it', () => {
@@ -85,7 +85,7 @@ describe('LuSelectSearcher', () => {
 			fixture.detectChanges();
 
 			// Assert
-			expect(searcher.hasFocus()).toBe(true);
+			expect(searcher.focused).toBe(true);
 		});
 
 		it('It should be not focused when we leave the field', () => {
@@ -108,7 +108,7 @@ describe('LuSelectSearcher', () => {
 			fixture.detectChanges();
 
 			// Assert
-			expect(searcher.hasFocus()).toBe(false);
+			expect(searcher.focused).toBe(false);
 		});
 
 		it('It should filter the options', () => {

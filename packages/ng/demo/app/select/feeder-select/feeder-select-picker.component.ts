@@ -35,7 +35,6 @@ export class DemoSelectFeederPickerComponent<T>
 		AfterViewInit
 		 {
 
-	private _focus = false;
 
 	private _intlChanges: Subscription;
 
@@ -82,19 +81,7 @@ export class DemoSelectFeederPickerComponent<T>
 		this._intlChanges.unsubscribe();
 	}
 
-	/**
-	 * See ISelectOptionFeeder
-	 */
-	hasFocus(): boolean {
-		return this._focus;
-	}
 
-	/**
-	 * See ISelectOptionFeeder
-	*/
-	open(): void {
-		this._focus = true;
-	}
 
 	/**
 	 * See ISelectOptionFeeder

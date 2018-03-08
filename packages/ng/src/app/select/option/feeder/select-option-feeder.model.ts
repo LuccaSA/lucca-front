@@ -1,11 +1,15 @@
 import { LuSelectOption } from "../";
 
+/**
+ * Interface to implement when you want to create your own feeder of options fot the select
+ * see @ASelectOptionFeeder as a reference implementation
+*/
 export interface ISelectOptionFeeder<T> {
 
 	/**
 	 * @returns true if the focus is on the field
 	 */
-	hasFocus(): boolean;
+	focused: boolean;
 
 	/**
 	 * Called when the popup of option is open
@@ -49,6 +53,7 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	protected _callbackKeyEvent: (event: KeyboardEvent) => void;
 	protected _callbackOptions: (options: LuSelectOption<T>[]) => void;
 	protected _callbackSelectOption: (option: LuSelectOption<T>) => void;
+	protected _focused = false;
 	/**
 	 * See ISelectOptionFeeder
 	*/
@@ -56,8 +61,8 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	/**
 	 * See ISelectOptionFeeder
 	 */
-	hasFocus(): boolean {
-		return false;
+	get focused(): boolean{
+		return this._focused;
 	}
 
 	/**

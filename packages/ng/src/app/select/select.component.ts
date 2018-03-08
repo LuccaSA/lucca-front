@@ -291,7 +291,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@HostListener('blur', ['$event'])
 	blur(e) {
 		this._onTouched();
-		if (this.optionFeeder && this.optionFeeder.hasFocus()) {
+		if (this.optionFeeder && this.optionFeeder.focused) {
 			return;
 		}
 		this._field.closePopover();

@@ -35,7 +35,6 @@ export class LuSelectSearcherComponent<T>
 		AfterContentInit {
 
 	_clue = '';
-	private _focus = false;
 	_noResults = false;
 	private _clue$: Subject<string> = new Subject<string>();
 
@@ -81,13 +80,13 @@ export class LuSelectSearcherComponent<T>
 	}
 
 	_onMouseDown($e) {
-		this._focus = true;
+		this._focused = true;
 		// We prevent propagation to avoid lost of focus in input field
 		$e.stopPropagation();
 	}
 
 	_onBlur() {
-		this._focus = false;
+		this._focused = false;
 		// When we quit the field, we reset the search item
 		this._clue = '';
 		this.luOptions.reset(this._originalList);
@@ -130,12 +129,6 @@ export class LuSelectSearcherComponent<T>
 		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
 	}
 
-	/**
-	 * See ISelectOptionFeeder
-	 */
-	hasFocus(): boolean {
-		return this._focus;
-	}
 
 	_onFieldChange(clue: string) {
 		this._clue$.next(clue);
@@ -145,7 +138,7 @@ export class LuSelectSearcherComponent<T>
 	 * See ISelectOptionFeeder
 	*/
 	open(): void {
-		this._focus = true;
+		this._focused = true;
 		this._inputElement.nativeElement.focus();
 	}
 
