@@ -2,12 +2,14 @@ import { ElementRef, EventEmitter, TemplateRef } from '@angular/core';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type PopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
+export type PopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
 export type PopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
 export interface IPopoverPanel {
 	position: PopoverPosition;
 	alignment: PopoverAlignment;
+	scrollStrategy: PopoverScrollStrategy;
 	containerPositioning: boolean;
 	overlapTrigger: boolean;
 	triggerEvent: PopoverTriggerEvent;

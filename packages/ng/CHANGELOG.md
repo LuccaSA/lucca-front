@@ -5,6 +5,8 @@
 - `lu-select-searcher` : Add a component for searching in a select
 - `IOptionFeeder` : An interface to implement to enable component that will manage options for a select
 - `ASelectOptionFeeder` : An abstract implentation of `IOptionFeeder`
+- `lu-popover` : can now accept a `scroll-strategy` set by default to `reposition`
+
 ### Fixes
 ### Breaking changes
 - `lu-select-picker` : `luOptions$` is not accessible anymore, it was replace by `luSelectOptions()` method which gives you the list of options

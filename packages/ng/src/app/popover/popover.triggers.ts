@@ -28,7 +28,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { IPopoverPanel, IPopoverTarget, PopoverAlignment, PopoverPosition, PopoverTriggerEvent } from './popover.model';
+import { IPopoverPanel, IPopoverTarget, PopoverAlignment, PopoverPosition, PopoverTriggerEvent, PopoverScrollStrategy } from './popover.model';
 import { throwLuPopoverMissingError } from './popover.errors';
 
 
@@ -285,7 +285,19 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		}
 
 		overlayState.direction = this.dir;
-		overlayState.scrollStrategy = this._overlay.scrollStrategies.reposition();
+		switch ( this.popover.scrollStrategy ) {
+			case 'block':
+			overlayState.scrollStrategy = this._overlay.scrollStrategies.block();
+			break;
+
+			case 'close':
+			overlayState.scrollStrategy = this._overlay.scrollStrategies.close();
+			break;
+
+			default:
+			overlayState.scrollStrategy = this._overlay.scrollStrategies.reposition();
+			break;
+		}
 		return overlayState;
 	}
 

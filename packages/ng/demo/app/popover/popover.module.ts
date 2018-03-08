@@ -6,6 +6,7 @@ import { LuPopoverModule } from '../../../src/app/popover/popover.module';
 import { SharedModule } from '../shared';
 import { DemoPopoverBasicComponent } from './basic/basic';
 import { DemoPopoverTriggerComponent } from './trigger/trigger';
+import { DemoPopoverScrollComponent } from './scroll/scroll';
 
 @NgModule({
 	imports: [
@@ -18,11 +19,13 @@ import { DemoPopoverTriggerComponent } from './trigger/trigger';
 		DemoPopoverComponent,
 		DemoPopoverBasicComponent,
 		DemoPopoverTriggerComponent,
+		DemoPopoverScrollComponent,
 	],
 	exports: [
 		DemoPopoverComponent,
 		DemoPopoverBasicComponent,
 		DemoPopoverTriggerComponent,
+		DemoPopoverScrollComponent,
 	]
 })
 export class DemoPopoverModule { }
