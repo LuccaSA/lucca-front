@@ -41,6 +41,7 @@ implements ControlValueAccessor,
 	set value(value:  T | null | undefined) {
 		let valueTemp = value;
 		this._value = valueTemp;
+		this._cvaOnChange(valueTemp);
 	}
 
 	// Inner values
