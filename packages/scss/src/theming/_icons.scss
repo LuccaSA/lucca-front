@@ -1,6 +1,6 @@
 $icons: (
 	"prefix": "lucca-icon",
 	// Should point to CDN
-	"font-path": "/node_modules/@lucca-front/icons/font/lucca-icons",
+	"font-path": "/icons/font/lucca-icons",
 );
 $theme: _set($theme, "icons", $icons);
