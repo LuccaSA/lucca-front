@@ -30,7 +30,7 @@
     "travis": "lerna run travis --scope=@lucca-front/ng"
   },
   "dependencies": {
-    "lerna": "^2.5.1",
+    "lerna": "^2.9.0",
     "surge": "^0.19.0"
   }
 }
