@@ -3,13 +3,17 @@
 	#inputClue
 	(keydown)="_onKeydown($event)"
 	(mousedown)="_onMouseDown($event)"
+
 	(blur)="_onBlur()"
 	class="textfield-input"
 	[(ngModel)]="_clue"
 	(input)="_onFieldChange($event.target.value)"
 	>
 </div>
-<div class="select-options" #scrollElement>
-	<lu-select-option [luOptionValue]="user" *ngFor="let user of users" (onSelectionChange)="selectUser(user)">{{user.name}}</lu-select-option>
+<div class="select-options" #scrollElement
+	(scroll)="_onScroll($event)"
+	>
+	<lu-select-option [luOptionValue]="user" *ngFor="let user of users" (onSelectionChange)="selectUser($event)">{{user.name}}</lu-select-option>
+	<div class="select-options-noResult" *ngIf="_loading">loading</div>
 	<div class="select-options-noResult" *ngIf="_noResults">{{_intl.noResultsLabel}}</div>
 </div>
