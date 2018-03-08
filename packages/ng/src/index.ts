@@ -7,3 +7,4 @@ export { LuEmptyModule } from './app/empty';
 export * from './app/animations';
 export { LuFormlyModule } from './app/formly';
 export * from './app/api';
+export * from './app/select';

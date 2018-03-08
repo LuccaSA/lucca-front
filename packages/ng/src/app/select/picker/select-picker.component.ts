@@ -1,7 +1,7 @@
 import {
-	AfterContentInit,
 	Component,
 	ContentChildren,
+	ContentChild,
 	OnInit,
 	Input,
 	Output,
@@ -29,7 +29,8 @@ import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 // import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
+import {LuSelectOption, LuSelectOptionSelectionChange } from '../option';
+import {ISelectOptionFeeder } from '../option/feeder';
 
 
 /**
@@ -43,7 +44,10 @@ import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
 		transformPopover,
 	],
 })
-export class LuSelectPicker<T> extends LuPopoverComponent implements AfterContentInit, OnInit, OnDestroy {
+export class LuSelectPicker<T>
+	extends LuPopoverComponent
+	implements OnInit,
+		OnDestroy {
 
 	/** Observable of options */
 	protected _options$ = new BehaviorSubject<T[]>([]);
@@ -63,20 +67,23 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	private _highlightedOption: T;
 	/** Observable for highlight mecanism */
 	private _highlightedOptionSub: Subscription;
+	private _selectOptionValue: T;
 
 	/** emits when the user selects an element */
 	@Output() itemSelected  = new EventEmitter<LuSelectOption<T>>();
 
-	/** All of the defined select options. */
-	@ContentChildren(LuSelectOption, { descendants: true })
-	private _luOptions: QueryList<LuSelectOption<T>> = new QueryList<LuSelectOption<T>>();
 	/** Observable of the LuSelectOption, contained in the popover  */
-	luOptions$ = new BehaviorSubject<LuSelectOption<T>[]>([]);
+	private luOptions$ = new BehaviorSubject<LuSelectOption<T>[]>([]);
+
+	/**
+	 * Reference to OptionFeeder when available
+	 */
+	optionFeeder: ISelectOptionFeeder<T>;
 
 	/** Observable use for the detection of selection */
 	private _optionSelectionChanges: Observable<LuSelectOptionSelectionChange<T>> = defer(() => {
-		if (this._luOptions) {
-			return merge(...this._luOptions.map(option => option.onSelectionChange));
+		if (this.luOptions$) {
+			return merge(...this.luOptions$.getValue().map(option => option.onSelectionChange));
 		}
 
 		return this._ngZone.onStable
@@ -95,63 +102,52 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	// LifeCycle methods
 	ngOnInit() {
 		this._options$.next([]);
+
 		this._highlightedOptionSub = Observable.combineLatest(
 			this._options$,
 			this._highlightIndex$,
 			(options, index) => {
-				if (!!options) {
+				// We select the option corresponding to _highlightIndex$ or _options$ moves
+				if (!!options && index <= options.length) {
 					return {option: options[index], index};
 				}
 				return undefined;
 			}
 		).subscribe(o => {
-			this._highlightedOption = o.option;
-			if (this._highlightedLuOption) {
-				this._highlightedLuOption.unfocus();
+			if (!o) {
+				return;
 			}
-			this._highlightedLuOption = this._luOptions.find((option, index) => index === o.index);
-			if (this._highlightedLuOption) {
-				this._highlightedLuOption.focus();
-			}
+			Promise.resolve().then(() => {
+				this._highlightedOption = o.option;
+				if (this._highlightedLuOption) {
+					this._highlightedLuOption.unfocus();
+				}
+				this._highlightedLuOption = this.luOptions$.getValue().find((option, index) => index === o.index);
+				if (this._highlightedLuOption) {
+					this._highlightedLuOption.focus();
+				}
+			});
 		});
 	}
 	ngOnDestroy() {
+		this.luOptions$.unsubscribe();
 		this._highlightedOptionSub.unsubscribe();
 		this._destroy$.next();
 		this._destroy$.complete();
 	}
 
-	ngAfterContentInit() {
-		this.luOptions$.subscribe(luOptions => {
-			if (this._luOptions && this._luOptions.length === 0) {
-				this._luOptions.reset(luOptions);
-				this._luOptions.notifyOnChanges();
-			}
-		});
-		this._luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
-			this.luOptions$.next(this._luOptions.toArray());
-			// Defer setting the value in order to avoid the "Expression
-			// has changed after it was checked" errors from Angular.
-			Promise.resolve().then(() => {
-				this._resetOptions();
-			});
-		});
-	}
-
-
 	/** Drops current option subscriptions and IDs and resets from scratch. */
-	private _resetOptions(): void {
-		// if (!this.options || this.options.length === 0) {
-			this._optionSelectionChanges.pipe(
-				takeUntil(merge(this._destroy$, this._luOptions.changes)),
-				filter(event => event.isUserInput)
-			).subscribe(event => {
-				this.selectOption(event.source.luOptionValue);
-			});
-			this._optionsLength = this._luOptions.length;
-			this._options$.next(this._luOptions.map<T>(luOption => luOption.luOptionValue));
+	public resetOptions(options: LuSelectOption<T>[], forceChangeValue: boolean = true): void {
+			this.luOptions$.next(options);
+			this.luOptions$.getValue().map(luOption => {
+				luOption.onSelectionChange.subscribe((event: LuSelectOptionSelectionChange<T>) => this.selectOption(event.source.luOptionValue));
 
-		// }
+			});
+			if (forceChangeValue){
+				this.selectOption(this._selectOptionValue);
+			}
+			this._optionsLength = this.luOptions$.getValue().length;
+			this._options$.next(this.luOptions$.getValue().map<T>(luOption => luOption.luOptionValue));
 	}
 
 	/**
@@ -178,23 +174,21 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 * @param option the option to find
 	 * @returns an observable of the LuSelectOption find
 	 */
-	find(option: T): Observable<LuSelectOption<T>> {
-		return this.luOptions$.map(selectOptions => {
-			return selectOptions.find(selectOption => this.same(selectOption.luOptionValue, option));
-		});
+	find(option: T): LuSelectOption<T> {
+		return this.luOptions$.getValue().find(selectOption => this.same(selectOption.luOptionValue, option));
 	}
 	/**
 	 * Search for highliting the option corresponding to the clue
 	 * @param clue
 	 */
 	search(clue: string = ''): void {
-		this.luOptions$.subscribe(selectOptions => {
+		const selectOptions = this.luOptions$.getValue(); // subscribe(selectOptions => {
 			this._highlightIndex = selectOptions.findIndex((selectOption) => {
 				return selectOption.viewValue === clue;
 			});
 
 			this._highlightIndex$.next(this._highlightIndex);
-		});
+		// });
 	}
 	/**
 	 * Select the option (value) of the popover.
@@ -202,18 +196,34 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 	 * @param option : the option should be in the list of options of the popover
 	 */
 	selectOption(option: T): void {
-		this.luOptions$.subscribe(selectOptions => {
-			if (!selectOptions || selectOptions.length === 0) {
-				return;
-			}
+		this._selectOptionValue = option;
+		const selectOptions = this.luOptions$.getValue();
+		this._selectWithoutEmit(option);
+		const luSelectOption = selectOptions[this._highlightIndex];
+		// We let the selection be effective even if the list is empty, (we won't fire any event in that case)
+		if (luSelectOption){
+			this.itemSelected.emit(luSelectOption);
+		}
+	}
 
-			this._highlightIndex = selectOptions.findIndex((selectOption) => {
-				return this.same(selectOption.luOptionValue, option);
-			});
+	/**
+	 * @return the list of LuSelectOption of the picker
+	*/
+	public luSelectOptions(): LuSelectOption<T>[] {
+		return this.luOptions$.getValue();
+	}
 
-			this._highlightIndex$.next(this._highlightIndex);
-			this.itemSelected.emit(selectOptions[this._highlightIndex]);
+	private _selectWithoutEmit(option: T): void {
+		const selectOptions = this.luOptions$.getValue();
+		if (!selectOptions || selectOptions.length === 0) {
+			return;
+		}
+
+		this._highlightIndex = selectOptions.findIndex((selectOption) => {
+			return this.same(selectOption.luOptionValue, option);
 		});
+
+		this._highlightIndex$.next(this._highlightIndex);
 	}
 
 	// Comes from LuPopoverComponent
@@ -275,17 +285,32 @@ export class LuSelectPicker<T> extends LuPopoverComponent implements AfterConten
 		this._highlightIndex = Math.min(this._highlightIndex, this._optionsLength - 1);
 		this._highlightIndex = Math.max(this._highlightIndex, 0);
 		this._highlightIndex$.next(this._highlightIndex);
+		this._scrollTo();
+	}
+
+
+	/**
+	 * Inner function to deal with scroll
+	*/
+	private _scrollTo(){
+		if (this.optionFeeder){
+			this.optionFeeder.scrollTo(this._highlightIndex);
+		}else{
+			const luOption = this.luOptions$.getValue()[this._highlightIndex];
+			this._elementRef.nativeElement.scrollTop = luOption.offsetTop();
+		}
+
 	}
 
 	/**
 	 * Helper method to fire the event of selection
 	 */
 	private _selectHighlightOption(): void {
-		this.luOptions$.subscribe(selectOptions => {
+		const selectOptions = this.luOptions$.getValue(); // selectOptions => {
 			if (!!selectOptions) {
 				this.itemSelected.emit(selectOptions[this._highlightIndex]);
 			}
-		});
+		// });
 	}
 
 	/**

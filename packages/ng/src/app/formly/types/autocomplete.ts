@@ -16,7 +16,7 @@ export interface IOption {
 })
 export class LuFormlyFieldAutocomplete extends FieldType implements OnInit {
 	searchControl = new FormControl({});
-	private get _options(): IOption[] { return this.to.options || []; }
+	private get _options(): IOption[] { return <IOption[]>this.to.options || []; }
 	private _options$: BehaviorSubject<IOption[]>;
 	options$: Observable<IOption[]>;
 

@@ -20,6 +20,14 @@ export class DemoSelectComponent implements OnInit {
 			code: require('!!prismjs-loader?lang=typescript!./clearer-select/clearer-select.component'),
 			markup: require('!!prismjs-loader?lang=markup!./clearer-select/clearer-select.component.html')
 		},
+		searcher: {
+			code: require('!!prismjs-loader?lang=typescript!./searcher-select/searcher-select.component'),
+			markup: require('!!prismjs-loader?lang=markup!./searcher-select/searcher-select.component.html')
+		},
+		feeder: {
+			code: require('!!prismjs-loader?lang=typescript!./feeder-select/feeder-select.component'),
+			markup: require('!!prismjs-loader?lang=markup!./feeder-select/feeder-select.component.html')
+		},
 	};
 	constructor() { }
 	ngOnInit() {
