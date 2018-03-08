@@ -78,7 +78,7 @@ Don't forget to add your fonts in src/index.html
 ## Theming
 ### Palettes
 
-You can set up a custom palette in palettes.override.scss You palette will be accessible on some components with `palette-*` classes
+You can set up a custom palette in palettes.override.scss Your palette will be accessible on some components with `palette-*` classes:
 
 ```
 $palettes: (
@@ -113,6 +113,15 @@ $colors: (
 );
 $theme: _set($theme, "palettes", $palettes);
 $theme: _set($theme, "colors", $colors);
+```
+
+You can also call your palette colors in your own components:
+```
+@import "~@lucca-front/scss/src/theming.overridable";
+
+_color("primary")
+_color("primary", "text")
+_color("text.default")
 ```
 
 ### Breakpoints
