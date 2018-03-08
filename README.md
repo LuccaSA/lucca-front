@@ -23,7 +23,7 @@ npm install @lucca-front/ng --save
 ### Create override files
 
 It will allow you to customize scss & ng components.
-Create an override folder (for exemple src/scss/overrides/) and add these empty files in in
+Create an override folder (for example src/scss/overrides/) and add these empty files in in:
 
 ```
 breakpoints.override.scss
@@ -34,7 +34,7 @@ palettes.override.scss
 sizes.override.scss
 ```
 
-Paste this in icons.override.scss (will be improved later)
+Override icons link in icons.override.scss (will be improved soon):
 
 ```
 $icons: (
@@ -46,13 +46,13 @@ $theme: _set($theme, "icons", $icons);
 
 ### Import scss and overrides
 
-Import Lucca Front in src/style.scss
+Import Lucca Front in src/style.scss (or your main scss file):
 
 ```
 @import "~@lucca-front/scss/src/main.overridable.scss";
 ```
 
-In angular-cli.json, edit your style path and add the path of your overrides folder
+In angular-cli.json, edit your style path and add the path of your overrides folder:
 
 ```
 "apps": [
@@ -69,7 +69,7 @@ In angular-cli.json, edit your style path and add the path of your overrides fol
 
 ### Import fonts
 
-Don't forget to add your fonts in src/index.html
+Don't forget to add your fonts in src/index.html:
 
 ```
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
@@ -78,7 +78,7 @@ Don't forget to add your fonts in src/index.html
 ## Theming
 ### Palettes
 
-You can set up a custom palette in palettes.override.scss Your palette will be accessible on some components with `palette-*` classes:
+You can set a custom palette in palettes.override.scss. Your palette will be accessible in some components with `palette-*` classes.
 
 ```
 $palettes: (
@@ -116,9 +116,9 @@ $theme: _set($theme, "colors", $colors);
 ```
 
 You can also call your palette colors in your own components:
+
 ```
 @import "~@lucca-front/scss/src/theming.overridable";
-
 _color("primary")
 _color("primary", "text")
 _color("text.default")
