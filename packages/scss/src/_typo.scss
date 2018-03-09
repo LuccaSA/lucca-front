@@ -16,6 +16,7 @@ body {
 }
 
 h1 {
+	color: _color("text.dark");
 	font-size: _theme("sizes.biggest.font-size");
 	font-weight: 600;
 	line-height: _theme("sizes.biggest.line-height");
@@ -23,6 +24,7 @@ h1 {
 }
 
 h2 {
+	color: _color("text.dark");
 	font-size: _theme("sizes.bigger.font-size");
 	font-weight: 600;
 	line-height: _theme("sizes.bigger.line-height");
@@ -30,6 +32,7 @@ h2 {
 }
 
 h3 {
+	color: _color("text.dark");
 	font-size: _theme("sizes.big.font-size");
 	font-weight: 600;
 	line-height: _theme("sizes.big.line-height");
@@ -37,10 +40,29 @@ h3 {
 }
 
 h4 {
+	color: _color("text.dark");
 	font-size: _theme("sizes.standard.font-size");
 	font-weight: 600;
 	line-height: _theme("sizes.standard.line-height");
+	margin: 0 0 .3rem;
+}
+
+h5 {
+	color: _color("text.light");
+	font-size: _theme("sizes.standard.font-size");
+	font-weight: 400;
+	line-height: _theme("sizes.standard.line-height");
 	margin: 0 0 .5rem;
+	text-transform: uppercase;
+}
+
+h6 {
+	color: _color("text.light");
+	font-size: _theme("sizes.small.font-size");
+	font-weight: 400;
+	line-height: _theme("sizes.small.line-height");
+	margin: 0 0 .3rem;
+	text-transform: uppercase;
 }
 
 p {
