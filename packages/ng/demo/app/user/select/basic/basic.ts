@@ -6,11 +6,11 @@ import { IUser } from '../../../../../src/app/user';
 	templateUrl: './basic.html',
 	styles: []
 })
-export class DemoBasicUserSelectComponent implements OnInit {
+export class DemoBasicUserSelectComponent {
+
+	userSelect: IUser;
 
 	constructor() { }
 
-	ngOnInit() {
-	}
 
 }
