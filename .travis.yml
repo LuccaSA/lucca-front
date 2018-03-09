@@ -4,7 +4,7 @@ os:
   - linux
 
 node_js:
-  - "6.9"
+  - "8.9"
 sudo: required
 
 addons:
@@ -16,5 +16,9 @@ script:
  - npm run travis
 
 after_success:
+  - cd ./demo
+  - yarn
+  - npm run build
+  - cd ../
   - chmod ugo+x ./deploy.sh
   - ./deploy.sh

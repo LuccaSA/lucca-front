@@ -8,6 +8,7 @@ export {
 	PopoverAlignment,
 	PopoverPosition,
 	PopoverTriggerEvent,
+	PopoverScrollStrategy,
 } from './popover.model';
 export { transformPopover } from './popover.animations';
 export { customPopoverTemplate, standardPopoverTemplate } from './popover.template';

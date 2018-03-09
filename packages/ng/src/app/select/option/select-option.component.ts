@@ -25,6 +25,8 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 
 	private _focused = false;
 	private _selected = false;
+	private _displayed = true;
+	private _boudingRect: any;
 
 	/**
 	 * true if the option is focused
@@ -34,6 +36,15 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 * true if the option is selected
 	 */
 	get selected(): boolean {return this._selected; }
+
+	/**
+	 * true if the option should be displayed (you can with this hide / show dynamicly options)
+	 */
+	get displayed(): boolean {return this._displayed; }
+	/**
+	 * Set it to false if you don't want to show the option
+	 */
+	set displayed(display: boolean) {this._displayed = display; }
 
 	/**
 	 * the representation as string of the option
@@ -104,6 +115,16 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 */
 	unselect(): void {
 		this._selected = false;
+	}
+
+	/**
+	 * Define the Offset top of the element fir scrolling
+	*/
+	offsetTop(): number{
+		if (!this._boudingRect){
+			this._boudingRect = this._elementRef.nativeElement.getBoundingClientRect();
+		}
+		return this._elementRef.nativeElement.offsetTop - this._boudingRect.height;
 	}
 
 }

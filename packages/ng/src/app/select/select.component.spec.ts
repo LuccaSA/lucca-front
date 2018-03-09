@@ -106,16 +106,23 @@ describe('LuSelect', () => {
 		it('It should set the right value', () => {
 
 			// Arrange
-			const fixture = TestBed.createComponent(LuSelect);
-			fixture.detectChanges();
-			const luSelect  = fixture.componentInstance;
+			TestBed.configureTestingModule({
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
+			});
+			const fixture = TestBed.createComponent(WrapperSelect);
+			const wrapper = fixture.componentInstance;
+			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
 
 			// Act
-			luSelect.value = globalOptions[0];
 			fixture.detectChanges();
+			fixture.whenStable().then(() => {
 
-			// Assert
-			expect(luSelect.value).toBe(globalOptions[0]);
+				luSelect.value = globalOptions[0];
+				fixture.detectChanges();
+
+				// Assert
+				expect(luSelect.value).toBe(globalOptions[0]);
+			});
 
 		});
 
@@ -193,9 +200,13 @@ describe('LuSelect', () => {
 
 		it('It should not be clearable by key "del" or "backspace" if no clearer is set', () => {
 			// Arrange
-			const fixture = TestBed.createComponent(LuSelect);
+			TestBed.configureTestingModule({
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
+			});
+			const fixture = TestBed.createComponent(WrapperSelect);
 			fixture.detectChanges();
-			const luSelect  = fixture.componentInstance;
+			const wrapper = fixture.componentInstance;
+			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
 
 			// Act
 			luSelect.value = globalOptions[0];
@@ -238,9 +249,13 @@ describe('LuSelect', () => {
 	it('It should not allow empty value if not clearable', () => {
 
 			// Arrange
-			const fixture = TestBed.createComponent(LuSelect);
+			TestBed.configureTestingModule({
+				declarations: [LuSelect, WrapperSelect, LuSelectOption, LuSelectClearerFirstOrDefaultComponent]
+			});
+			const fixture = TestBed.createComponent(WrapperSelect);
 			fixture.detectChanges();
-			const luSelect  = fixture.componentInstance;
+			const wrapper = fixture.componentInstance;
+			const luSelect: LuSelect<any> = fixture.debugElement.query(By.directive(LuSelect)).componentInstance;
 
 			// Act
 			luSelect.value = globalOptions[0];

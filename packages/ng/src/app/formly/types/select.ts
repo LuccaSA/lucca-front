@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 	templateUrl: './select.html',
 })
 export class LuFormlyFieldSelect extends FieldType implements OnInit {
-	get _options() { return this.to.options || []; }
+	get _options() { return <any[]>this.to.options || []; }
 	ngOnInit () {
 		this.formControl.valueChanges.subscribe(value => {
 			this.setToOption(value);

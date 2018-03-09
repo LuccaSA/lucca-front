@@ -37,6 +37,7 @@ import {takeUntil} from 'rxjs/operators/takeUntil';
 import {LuSelectOption} from './option/select-option.component';
 import { ISelectClearer } from './clearer/select-clearer.model';
 import { LuSelectClearerComponent } from './clearer/select-clearer.component';
+import { ASelectOptionFeeder, ISelectOptionFeeder } from './option/feeder/';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -84,7 +85,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		return this._value;
 	}
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
-	set value(value:  T | null) {
+	set value(value:  T | null | undefined) {
 		let valueTemp = value;
 		if (valueTemp === null) {
 			// We have to deal with the fact that the clearer could not be set => we do nothing
@@ -105,17 +106,18 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			}
 			// Transfer the information to popover
 			this._picker.selectOption(value);
-			this._picker.find(value).subscribe(selectOption => {
-				this._selectOption = selectOption;
-				// render
-				this.render(selectOption);
-			});
+
 		}
+		// We render the option
+		this._selectOption = this._picker.find(value);
+		// render
+		this.render(this._selectOption);
 	}
 
 	// Inner values
 	protected _value: T | null;
 	protected _selectOption: LuSelectOption<T> | null;
+	private _forceChangeValue= true;
 
 	// Inner Children
 	@ViewChild(LuSelectDirective) _field: LuSelectDirective;
@@ -127,11 +129,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
-	/** True if the component allow to clear the value.  */
-	// @Input() clearable = false;
 	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
 	@Input() mod: string;
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
+	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
 
 	@HostBinding('class.is-filled') isFilled = false;
 
@@ -170,10 +171,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	ngAfterContentInit() {
 		this.luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe((option) => {
-			console.log(option);
-			if (this._picker.luOptions$) {
-				this._picker.luOptions$.next(this.luOptions.toArray());
-			}
+			Promise.resolve().then(() => {
+				this._picker.resetOptions(this.luOptions.toArray(), this._forceChangeValue);
+				this._forceChangeValue = true;
+			});
+
 		});
 
 		Promise.resolve().then(() => {
@@ -187,6 +189,13 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 							first = false;
 						}
 				});
+			}
+
+			if (this.optionFeeder){
+				this._picker.optionFeeder = this.optionFeeder;
+				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
+				this.optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
+				this.optionFeeder.registerSelectOption(this._optionSelected.bind(this));
 			}
 		});
 	}
@@ -211,6 +220,12 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			this.clearer.canRemove(canRemove);
 		}
 		this._canRemove = canRemove;
+	}
+
+	private _optionChanges(options: LuSelectOption<T>[]): void {
+		this._forceChangeValue = false;
+		this.luOptions.reset(options);
+		this.luOptions.notifyOnChanges();
 	}
 
 	/** set the value to null */
@@ -252,34 +267,43 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				}
 				break;
 			case HOME:
-			$event.preventDefault();
-			return this._picker.onHomeKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onHomeKeydown(this._field.popoverOpen);
 			case END:
-			$event.preventDefault();
-			return this._picker.onEndKeydown(this._field.popoverOpen);
-			case ENTER_KEY:
-			return this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
+				$event.preventDefault();
+				return this._picker.onEndKeydown(this._field.popoverOpen);
+			case ENTER_KEY:{
+				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
+				if(this._field.popoverOpen && this.optionFeeder) {
+					this.optionFeeder.open();
+				}
+				return;
+			}
 			case DOWN_KEY:
-			$event.preventDefault();
-			return this._picker.onDownKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onDownKeydown(this._field.popoverOpen);
 			case UP_KEY:
-			$event.preventDefault();
-			return this._picker.onUpKeydown(this._field.popoverOpen);
+				$event.preventDefault();
+				return this._picker.onUpKeydown(this._field.popoverOpen);
 		}
 	}
 
 	@HostListener('blur', ['$event'])
 	blur(e) {
 		this._onTouched();
+		if (this.optionFeeder && this.optionFeeder.focused) {
+			return;
+		}
 		this._field.closePopover();
 	}
 
 	@HostListener('click')
 	clicked() {
 		this._field.togglePopover();
-		if (this._field.popoverOpen) {
-			this._picker.search(this._strValue);
+		if (this._field.popoverOpen && this.optionFeeder) {
+			this.optionFeeder.open();
 		}
+		this._picker.search(this._strValue);
 	}
 
 	// Utilities
