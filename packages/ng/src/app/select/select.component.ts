@@ -129,8 +129,6 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
-	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
-	@Input() mod: string;
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
 	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
 

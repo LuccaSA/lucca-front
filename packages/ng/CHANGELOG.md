@@ -4,6 +4,7 @@
 ### New features
 ### Fixes
 ### Breaking changes
+- `lu-select`: remove `mod` attribute, you should specify the mod of select only through the parent with class `mod-*`
 ### Updated dependencies
 ### Updated devDependencies
 
