@@ -1,6 +1,8 @@
 
 <lu-select #select [(ngModel)]="value"
-	[placeholder]="placeholder">
+	[placeholder]="placeholder"
+	(selectFocus)="onSelectFocus($event)"
+	>
 	<ng-content></ng-content>
 	<user-select-picker luOptionFeeder>
 	</user-select-picker>

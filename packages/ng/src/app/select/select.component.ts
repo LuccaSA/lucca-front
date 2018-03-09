@@ -2,6 +2,7 @@ import {
 	AfterContentInit,
 	Component,
 	Input,
+	Output,
 	EventEmitter,
 	forwardRef,
 	Renderer2,
@@ -131,8 +132,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@Input() placeholder: string;
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
 	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
+	@Output() selectFocus= new EventEmitter<boolean>();
 
 	@HostBinding('class.is-filled') isFilled = false;
+	@HostBinding('class.is-focused') isFocused = false;
 
 
 	// validators
@@ -160,6 +163,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		.subscribe(item => {
 			this.value = item ? item.luOptionValue : undefined;
 			this._field.closePopover();
+			this.isFocused = false;
+			this.selectFocus.emit(false);
 		});
 	}
 	ngOnDestroy() {
@@ -292,6 +297,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		if (this.optionFeeder && this.optionFeeder.focused) {
 			return;
 		}
+		this.isFocused = false;
+		this.selectFocus.emit(false);
 		this._field.closePopover();
 	}
 
@@ -301,7 +308,20 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		if (this._field.popoverOpen && this.optionFeeder) {
 			this.optionFeeder.open();
 		}
+		this.isFocused = this._field.popoverOpen;
+		this.selectFocus.emit(this._field.popoverOpen);
 		this._picker.search(this._strValue);
+	}
+
+	@HostListener('focus')
+	focused(){
+		this.isFocused = true;
+		this.selectFocus.emit(true);
+	}
+
+	onClose(){
+		this.isFocused = this._field.popoverOpen;
+		this.selectFocus.emit(this._field.popoverOpen);
 	}
 
 	// Utilities

@@ -42,6 +42,7 @@ implements ControlValueAccessor,
 {
 
 	@HostBinding('class.is-filled') isFilled = false;
+	@HostBinding('class.is-focused') isFocused = false;
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
 
@@ -104,10 +105,12 @@ implements ControlValueAccessor,
 
 	@HostListener('focus', ['$event'])
 	onFocus($event) {
-		console.log((<ElementRef>this._luSelectElement));
-		console.log((<ElementRef>this._luSelectElement).nativeElement);
-		//this._selectElement.focus();
 		$event.stopPropagation();
+		this.isFocused = true;
+	}
+
+	onSelectFocus(focus: boolean){
+		this.isFocused = focus;
 	}
 
 	// From ControlValueAccessor interface
