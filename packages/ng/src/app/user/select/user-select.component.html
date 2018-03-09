@@ -1,5 +1,7 @@
 
-<lu-select [(ngModel)]="value">
+<lu-select #select [(ngModel)]="value"
+	[placeholder]="placeholder">
+	<ng-content></ng-content>
 	<user-select-picker luOptionFeeder>
 	</user-select-picker>
 </lu-select>

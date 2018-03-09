@@ -1,7 +1,14 @@
 import {
 	Component,
 	forwardRef,
+	Renderer2,
+	ElementRef,
+	HostListener,
+	HostBinding,
+	ViewChild,
+	Input,
 	OnInit,
+	AfterViewInit,
 } from '@angular/core';
 import {
 	NgModel,
@@ -17,6 +24,7 @@ import {
 import {
 	IUser
 } from '../user.model';
+import { LuSelect } from '../../select';
 @Component({
 	selector: 'user-select',
 	templateUrl: './user-select.component.html',
@@ -28,8 +36,19 @@ import {
 })
 export class LuUserSelect<T extends IUser>
 implements ControlValueAccessor,
-	OnInit
+	OnInit,
+	AfterViewInit
+
 {
+
+	@HostBinding('class.is-filled') isFilled = false;
+	/** The placeholder of the component, it is used as label (material design) */
+	@Input() placeholder: string;
+
+	@ViewChild(LuSelect) _luSelect: LuSelect<T>;
+	@ViewChild('select') _luSelectElement: ElementRef;
+
+	private _selectElement: any;
 	/** inner validator */
 	protected _validator: ValidatorFn | null;
 
@@ -41,6 +60,7 @@ implements ControlValueAccessor,
 	set value(value:  T | null | undefined) {
 		let valueTemp = value;
 		this._value = valueTemp;
+		this.isFilled = !!this._value;
 		this._cvaOnChange(valueTemp);
 	}
 
@@ -60,9 +80,33 @@ implements ControlValueAccessor,
 	}
 	private _cvaOnChange: (value: T) => void = () => {};
 
+	constructor(
+		protected _elementRef: ElementRef,
+		protected _renderer: Renderer2,
+	) {
+	}
+
 	// Life Cycle methods
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
+		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
+	}
+
+	ngAfterViewInit(){
+		this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
+	}
+
+	@HostListener('keydown', ['$event'])
+	onKeydown($event) {
+		this._luSelect.onKeydown($event);
+	}
+
+	@HostListener('focus', ['$event'])
+	onFocus($event) {
+		console.log((<ElementRef>this._luSelectElement));
+		console.log((<ElementRef>this._luSelectElement).nativeElement);
+		//this._selectElement.focus();
+		$event.stopPropagation();
 	}
 
 	// From ControlValueAccessor interface

@@ -47,16 +47,23 @@ export class LuUserPicker<T extends IUser>
 	private _clue$: Subject<string> = new Subject<string>();
 
 	private _noMoreResults = false;
+
+	// TBD
 	private _pagingStart = 0;
+	// TBD
 	private _pagingSize = 10;
+	// TBD
+	private _formerEmployees = false;
+	// TBD
+	private _fields = [];
 
 	private _intlChanges: Subscription;
 
 	private innerMap = {};
 
-	private _api = '/api/v3/users';
+	private _api = '/api/v3/users/find';
 
-	users: T[];
+	_users: T[];
 
 	private _originalList:  T[];
 	/**
@@ -164,13 +171,13 @@ export class LuUserPicker<T extends IUser>
 
 		this._requestSubscription = this.getUsers(this._clue).subscribe( users => {
 			if (completeList){
-				this.users = this.users.concat(users);
+				this._users = this._users.concat(users);
 			}else{
-				this.users = users;
+				this._users = users;
 			}
 			this._userList.setDirty();
 			this._userList.notifyOnChanges();
-			this._noResults = this.users.length === 0;
+			this._noResults = this._users.length === 0;
 			this._noMoreResults = users.length === 0;
 
 			if (resetOptions){
@@ -196,7 +203,7 @@ export class LuUserPicker<T extends IUser>
 	open(): void {
 		this._focused = true;
 		this._inputElement.nativeElement.focus();
-		if (!this.users || this.users.length === 0){
+		if (!this._users || this._users.length === 0){
 			this._resetUsers('', true);
 		}
 	}
@@ -217,7 +224,14 @@ export class LuUserPicker<T extends IUser>
 
 
 	protected getUsers(clue: string = ''): Observable<T[]> {
-		const params = [`name=like,${clue}`, `paging=${this._pagingStart},${this._pagingSize}`, 'fields=id,name'];
+		const fields = ['id','firstName','lastName'].concat(this._fields);
+		const params = [
+				`formerEmployees=${this._formerEmployees}`,
+				`clue=${encodeURIComponent(clue)}`,
+				`paging=${this._pagingStart},${this._pagingSize}`,
+				`fields=${fields.join(',')}`,
+				//'orderBy=lastname,asc'
+			];
 		const url = `${this._api}?${params.join('&')}`;
 		return this._http.get<{ data: { items: T[] } }>(url)
 		.map(r => r.data.items);
