@@ -94,6 +94,7 @@ implements ControlValueAccessor,
 
 	ngAfterViewInit(){
 		this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
+		this._selectElement.setAttribute('tabindex', '-1');
 	}
 
 	@HostListener('keydown', ['$event'])
