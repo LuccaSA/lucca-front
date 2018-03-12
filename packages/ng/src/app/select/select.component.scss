@@ -73,6 +73,12 @@
 	}
 }
 
+:host-context(.textfield.mod-material .textfield-input.is-focused) {
+	.select-value {
+		opacity: 1;
+	}
+}
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
