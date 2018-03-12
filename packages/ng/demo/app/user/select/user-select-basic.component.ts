@@ -7,6 +7,14 @@ declare var require: any;
 	styles: []
 })
 export class DemoUserSelectComponent implements OnInit {
+
+	snippets = {
+		userselect: {
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
+		},
+
+	};
 	constructor() { }
 	ngOnInit() {
 	}
