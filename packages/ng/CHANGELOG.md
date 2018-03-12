@@ -2,6 +2,8 @@
 
 ## In Dev
 ### New features
+- `user-select`: Add component for user select
+- `user-select-picker`: Add a picker that implements IOptionFeeder for the user select
 ### Fixes
 ### Breaking changes
 - `lu-select`: remove `mod` attribute, you should specify the mod of select only through the parent with class `mod-*`
@@ -12,7 +14,7 @@
 ### New features
 - `lu-select-searcher` : Add a component for searching in a select
 - `IOptionFeeder` : An interface to implement to enable component that will manage options for a select
-- `ASelectOptionFeeder` : An abstract implentation of `IOptionFeeder`
+- `ASelectOptionFeeder` : An abstract implementation of `IOptionFeeder`
 - `lu-popover` : can now accept a `scroll-strategy` set by default to `reposition`
 
 ### Breaking changes
