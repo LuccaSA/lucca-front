@@ -121,6 +121,12 @@ implements ControlValueAccessor,
 		this.isFocused = true;
 	}
 
+	@HostListener('blur', ['$event'])
+	onBlur($event) {
+		$event.stopPropagation();
+		this.isFocused = this._luSelect.isFocused;
+	}
+
 	onSelectFocus(focus: boolean){
 		this.isFocused = focus;
 	}
