@@ -1,5 +1,12 @@
 :host {
   padding: 0;
+/*
+  &.is-clearable ::ng-deep {
+    background: lime;
+		.actionIcon {
+			display: block;
+		}
+	}*/
 }
 
 :host-context(.textfield.mod-material)   {

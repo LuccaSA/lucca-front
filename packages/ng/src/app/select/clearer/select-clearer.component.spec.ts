@@ -22,7 +22,7 @@ describe('LuSelectClearer', () => {
 			}).compileComponents();
 		});
 
-		it('It should have class mod-remove when remove mode is true', () => {
+		it('It should have class is-clearable when remove mode is true', () => {
 
 			// Arrange
 			const fixture = TestBed.createComponent(LuSelectClearerComponent);
@@ -36,7 +36,7 @@ describe('LuSelectClearer', () => {
 
 			// Assert
 			expect(luSelectClearer.modRemove).toBe(true);
-			expect(luSelectClearerElement.nativeElement.classList.contains('mod-remove')).toBeTruthy();
+			expect(luSelectClearerElement.nativeElement.classList.contains('is-clearable')).toBeTruthy();
 
 		});
 
