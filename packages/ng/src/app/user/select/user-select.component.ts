@@ -5,10 +5,12 @@ import {
 	ElementRef,
 	HostListener,
 	HostBinding,
+	ContentChild,
 	ViewChild,
 	Input,
 	OnInit,
 	AfterViewInit,
+	AfterContentInit,
 } from '@angular/core';
 import {
 	NgModel,
@@ -24,7 +26,8 @@ import {
 import {
 	IUser
 } from '../user.model';
-import { LuSelect } from '../../select';
+import { LuSelect, LuSelectClearerComponent, ISelectClearer } from '../../select';
+import {  } from '../../select/clearer/select-clearer.model';
 @Component({
 	selector: 'user-select',
 	templateUrl: './user-select.component.html',
@@ -37,7 +40,8 @@ import { LuSelect } from '../../select';
 export class LuUserSelect<T extends IUser>
 implements ControlValueAccessor,
 	OnInit,
-	AfterViewInit
+	AfterViewInit,
+	AfterContentInit
 
 {
 
@@ -46,6 +50,7 @@ implements ControlValueAccessor,
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
 
+	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
 	@ViewChild(LuSelect) _luSelect: LuSelect<T>;
 	@ViewChild('select') _luSelectElement: ElementRef;
 
@@ -96,6 +101,13 @@ implements ControlValueAccessor,
 	ngAfterViewInit(){
 		this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
 		this._selectElement.setAttribute('tabindex', '-1');
+	}
+
+	ngAfterContentInit(){
+		// Hack to force Angular to thave the right information (else, the contentChild in the select stay empty)
+		if (this.clearer){
+			this._luSelect.clearer = this.clearer;
+		}
 	}
 
 	@HostListener('keydown', ['$event'])
