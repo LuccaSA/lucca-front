@@ -3,6 +3,7 @@
 
 :host {
 	cursor: pointer;
+	outline: none;
 	padding: 0;
 
 	&::after {
@@ -28,13 +29,21 @@
 }
 
 
-// STATES
+// MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// Value
-:host-context(.textfield-input.is-filled) {
+// Framed
+:host-context(.textfield.mod-framed) {
+	padding: _component("textfield.framed.top-padding") 0 0;
+
 	.select-value {
-		color: _color("text.default");
+		height: 100%;
+		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
+	}
+
+	&::after {
+		bottom: .75rem;
+		right: _component("textfield.framed.side-padding");
 	}
 }
 
@@ -51,7 +60,7 @@
 		right: 0;
 	}
 
-	&:focus {
+	&.is-select {
 		.select-value {
 			opacity: 1;
 		}
@@ -64,17 +73,13 @@
 	}
 }
 
-// Framed
-:host-context(.textfield.mod-framed) {
-	padding: _component("textfield.framed.top-padding") 0 0;
 
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// Filled
+:host-context(.textfield-input.is-filled) {
 	.select-value {
-		height: 100%;
-		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
-	}
-
-	&::after {
-		bottom: .75rem;
-		right: _component("textfield.framed.side-padding");
+		color: _color("text.default");
 	}
 }

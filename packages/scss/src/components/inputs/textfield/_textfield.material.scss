@@ -14,7 +14,7 @@
 			opacity: 0;
 		}
 
-		&:focus {
+		&:focus, &.is-focused {
 			&::placeholder {
 				opacity: 1;
 			}
@@ -50,11 +50,13 @@
 	// Coloring
 
 	@mixin inputColoring($palette) {
-		.textfield-input:focus {
-			box-shadow: 0 2px 0 0 _get($palette, "color");
+		.textfield-input{
+			&:focus, &.is-focused {
+				box-shadow: 0 2px 0 0 _get($palette, "color");
 
-			~ .textfield-label {
-				color: _get($palette, "color");
+				~ .textfield-label {
+					color: _get($palette, "color");
+				}
 			}
 		}
 

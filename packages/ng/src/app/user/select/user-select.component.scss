@@ -1,18 +1,13 @@
 :host {
   padding: 0;
-/*
-  &.is-clearable ::ng-deep {
-    background: lime;
-		.actionIcon {
-			display: block;
-		}
-	}*/
 }
 
-:host-context(.textfield.mod-material)   {
-	&:focus ::ng-deep {
-    .select .select-value{
-  		opacity: 1;
-		}
+:host-context(.textfield.mod-material) {
+	&.is-focused {
+    ::ng-deep {
+      .select .select-value{
+    		opacity: 1;
+  		}
+    }
 	}
 }
