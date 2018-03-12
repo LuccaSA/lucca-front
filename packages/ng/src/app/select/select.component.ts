@@ -130,11 +130,26 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
+	/**
+	 * Reference of the clearer
+	 */
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
+	/**
+	 * Reference of the optionFeeder
+	 */
 	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
+	/**
+	 * Emits an event when the select recieve or lost the focus
+	 */
 	@Output() selectFocus= new EventEmitter<boolean>();
 
+	/**
+	 * Add a class binding for 'is-filled' when the select is filled
+	 */
 	@HostBinding('class.is-filled') isFilled = false;
+	/**
+	 * Add a class binding for 'is-focused' when the select is focused
+	 */
 	@HostBinding('class.is-focused') isFocused = false;
 
 
@@ -158,6 +173,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	// Life Cycle methods
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
+		// We make lu-select focusable with tab
 		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
 		this._picker.itemSelected
 		.subscribe(item => {
@@ -194,6 +210,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				});
 			}
 
+			// We have to deal in a different way a IOptionFeeder
 			if (this.optionFeeder){
 				this._picker.optionFeeder = this.optionFeeder;
 				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
@@ -319,7 +336,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this.selectFocus.emit(true);
 	}
 
-	onClose(){
+	/**
+	 * Inner method for close management
+	*/
+	_onClose(){
 		this.isFocused = this._field.popoverOpen;
 		this.selectFocus.emit(this._field.popoverOpen);
 	}

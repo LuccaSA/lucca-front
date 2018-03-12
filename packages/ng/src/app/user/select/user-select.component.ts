@@ -28,6 +28,10 @@ import {
 } from '../user.model';
 import { LuSelect, LuSelectClearerComponent, ISelectClearer } from '../../select';
 import {  } from '../../select/clearer/select-clearer.model';
+/**
+ * User select
+ *
+*/
 @Component({
 	selector: 'user-select',
 	templateUrl: './user-select.component.html',
@@ -45,10 +49,23 @@ implements ControlValueAccessor,
 
 {
 
+	/** Add a class binding for 'is-filled' when the select is filled */
 	@HostBinding('class.is-filled') isFilled = false;
+	/** Add a class binding for 'is-focused' when the select is focused */
 	@HostBinding('class.is-focused') isFocused = false;
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
+	/** The pagingStart.  */
+	@Input() pagingStart = 0;
+	/** The paging size. */
+	@Input() pagingSize = 10;
+	/** True if you want to see the former Employees. */
+	@Input() formerEmployees = false;
+
+	/** The additionnals fields to use in the search. */
+	@Input() fields = [];
+
+	/** Inner reference of clearer */
 
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
 	@ViewChild(LuSelect) _luSelect: LuSelect<T>;

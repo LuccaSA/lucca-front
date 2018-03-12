@@ -26,6 +26,7 @@ extends LuPopoverTrigger {
 
 	/** the name of the picker linked to this input */
 	@Input('luSelect') popover: LuSelectPicker<any>;
+	/** Fire an event when the popup is closed */
 	@Output() close = new EventEmitter();
 
 	constructor(
@@ -46,6 +47,7 @@ extends LuPopoverTrigger {
 		this._subscribeToBackdrop();
 	}
 
+	/** Close the popover */
 	closePopover(): void {
 		super.closePopover();
 		this.close.emit();

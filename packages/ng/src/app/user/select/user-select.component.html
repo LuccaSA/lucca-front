@@ -4,6 +4,11 @@
 	(selectFocus)="onSelectFocus($event)"
 	>
 	<ng-content></ng-content>
-	<user-select-picker luOptionFeeder>
+	<user-select-picker luOptionFeeder
+	 [pagingStart]="pagingStart"
+	 [pagingSize]="pagingSize"
+	 [formerEmployees]="formerEmployees"
+	 [fields]="fields"
+	>
 	</user-select-picker>
 </lu-select>

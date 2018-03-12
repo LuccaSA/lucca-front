@@ -1,6 +1,6 @@
 <div class="select"
 	[luSelect]="selectRef"
-	(close)="onClose()">
+	(close)="_onClose()">
 	<div class="select-value">{{_strValue}}</div>
 	<ng-content></ng-content>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">

@@ -2,7 +2,6 @@ import {
 	Component,
 	Input,
 	AfterViewInit,
-	ContentChildren,
 	ViewChild,
 	ViewChildren,
 	ElementRef,
@@ -41,21 +40,23 @@ export class LuUserPicker<T extends IUser>
 		OnDestroy,
 		AfterViewInit {
 
+	// Inner references
 	_clue = '';
 	_noResults = false;
 	_loading = false;
+	_users: T[];
 	private _clue$: Subject<string> = new Subject<string>();
-
 	private _noMoreResults = false;
 
-	// TBD
-	private _pagingStart = 0;
-	// TBD
-	private _pagingSize = 10;
-	// TBD
-	private _formerEmployees = false;
-	// TBD
-	private _fields = [];
+	/** The pagingStart.  */
+	@Input() pagingStart = 0;
+	/** The paging size. */
+	@Input() pagingSize = 10;
+	/** True if you want to see the former Employees. */
+	@Input() formerEmployees = false;
+
+	/** The additionnals fields to use in the search. */
+	@Input() fields = [];
 
 	private _intlChanges: Subscription;
 
@@ -63,14 +64,16 @@ export class LuUserPicker<T extends IUser>
 
 	private _api = '/api/v3/users/find';
 
-	_users: T[];
+
 
 	private _originalList:  T[];
 	/**
-	 * The options detected
+	 * The input element
 	 */
 	@ViewChild('inputClue') _inputElement : ElementRef;
+	/** The scroll element */
 	@ViewChild('scrollElement') _scrollElement : ElementRef;
+	/** The list of users (option) */
 	@ViewChildren(LuSelectOption) _userList : QueryList<LuSelectOption<T>>;
 
 	private _requestSubscription: Subscription;
@@ -88,7 +91,7 @@ export class LuUserPicker<T extends IUser>
 		.distinctUntilChanged() // only emit if value is different from previous value
 		.subscribe(model => {
 			this._clue = model;
-			this._pagingStart = 0;
+			this.pagingStart = 0;
 			this._noMoreResults = false;
 			this._resetUsers(this._clue);
 		});
@@ -108,6 +111,7 @@ export class LuUserPicker<T extends IUser>
 		});
 	}
 
+	// Events
 	_onMouseDown($e) {
 		this._focused = true;
 		// We prevent propagation to avoid lost of focus in input field
@@ -117,11 +121,9 @@ export class LuUserPicker<T extends IUser>
 	_onBlur() {
 		this._focused = false;
 		// When we quit the field, we reset the search item
-		this._pagingStart = 0;
+		this.pagingStart = 0;
 		this._noMoreResults = false;
 		this._clue$.next('');
-		//this._userList.setDirty();
-		//this._userList.notifyOnChanges();
 	}
 
 	_onKeydown($event: KeyboardEvent){
@@ -132,7 +134,7 @@ export class LuUserPicker<T extends IUser>
 		const height = this._scrollElement.nativeElement.offsetHeight;
 		const top = this._scrollElement.nativeElement.scrollTop;
 		if (height - top < 50 && !this._loading && !this._noMoreResults){
-			this._pagingStart += this._pagingSize;
+			this.pagingStart += this.pagingSize;
 			this._resetUsers(this._clue, false, true);
 		}
 	}
@@ -169,7 +171,7 @@ export class LuUserPicker<T extends IUser>
 			this._requestSubscription = null;
 		}
 
-		this._requestSubscription = this.getUsers(this._clue).subscribe( users => {
+		this._requestSubscription = this._getUsers(this._clue).subscribe( users => {
 			if (completeList){
 				this._users = this._users.concat(users);
 			}else{
@@ -217,18 +219,16 @@ export class LuUserPicker<T extends IUser>
 		this._scrollElement.nativeElement.scrollTop = luOption.offsetTop();
 	}
 
-	selectUser(user: LuSelectOption<T>){
+	_selectUser(user: LuSelectOption<T>){
 		this._callbackSelectOption(user);
 	}
 
-
-
-	protected getUsers(clue: string = ''): Observable<T[]> {
-		const fields = ['id','firstName','lastName'].concat(this._fields);
+	private _getUsers(clue: string = ''): Observable<T[]> {
+		const fields = ['id','firstName','lastName'].concat(this.fields);
 		const params = [
-				`formerEmployees=${this._formerEmployees}`,
+				`formerEmployees=${this.formerEmployees}`,
 				`clue=${encodeURIComponent(clue)}`,
-				`paging=${this._pagingStart},${this._pagingSize}`,
+				`paging=${this.pagingStart},${this.pagingSize}`,
 				`fields=${fields.join(',')}`,
 				//'orderBy=lastname,asc'
 			];
