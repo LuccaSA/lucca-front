@@ -120,8 +120,8 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	/**
 	 * Define the Offset top of the element fir scrolling
 	*/
-	offsetTop(): number{
-		if (!this._boudingRect){
+	offsetTop(): number {
+		if (!this._boudingRect) {
 			this._boudingRect = this._elementRef.nativeElement.getBoundingClientRect();
 		}
 		return this._elementRef.nativeElement.offsetTop - this._boudingRect.height;

@@ -71,7 +71,7 @@ export class DemoSelectFeederPickerComponent
 
 	}
 
-	ngAfterViewInit(){
+	ngAfterViewInit() {
 		this.luOptions.changes.subscribe(options => {
 			this._callbackOptions(options);
 		});

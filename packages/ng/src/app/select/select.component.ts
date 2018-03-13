@@ -211,7 +211,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			}
 
 			// We have to deal in a different way a IOptionFeeder
-			if (this.optionFeeder){
+			if (this.optionFeeder) {
 				this._picker.optionFeeder = this.optionFeeder;
 				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
 				this.optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
@@ -297,9 +297,9 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			case END:
 				$event.preventDefault();
 				return this._picker.onEndKeydown(this._field.popoverOpen);
-			case ENTER_KEY:{
+			case ENTER_KEY: {
 				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
-				if(this._field.popoverOpen && this.optionFeeder) {
+				if (this._field.popoverOpen && this.optionFeeder) {
 					this.optionFeeder.open();
 				}
 				return;
@@ -336,7 +336,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	}
 
 	@HostListener('focus')
-	focused(){
+	focused() {
 		this.isFocused = true;
 		this.selectFocus.emit(true);
 	}
@@ -344,7 +344,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	/**
 	 * Inner method for close management
 	*/
-	_onClose(){
+	_onClose() {
 		this.isFocused = this._field.popoverOpen;
 		this.selectFocus.emit(this._field.popoverOpen);
 	}

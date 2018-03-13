@@ -70,11 +70,11 @@ export class LuUserPicker<T extends IUser>
 	/**
 	 * The input element
 	 */
-	@ViewChild('inputClue') _inputElement : ElementRef;
+	@ViewChild('inputClue') _inputElement: ElementRef;
 	/** The scroll element */
-	@ViewChild('scrollElement') _scrollElement : ElementRef;
+	@ViewChild('scrollElement') _scrollElement: ElementRef;
 	/** The list of users (option) */
-	@ViewChildren(LuSelectOption) _userList : QueryList<LuSelectOption<T>>;
+	@ViewChildren(LuSelectOption) _userList: QueryList<LuSelectOption<T>>;
 
 	private _requestSubscription: Subscription;
 
@@ -105,7 +105,7 @@ export class LuUserPicker<T extends IUser>
 
 	ngAfterViewInit(): void {
 		this._userList.changes.subscribe(options => {
-			if (this._callbackOptions){
+			if (this._callbackOptions) {
 				this._callbackOptions(this._userList.toArray());
 			}
 		});
@@ -126,14 +126,14 @@ export class LuUserPicker<T extends IUser>
 		this._clue$.next('');
 	}
 
-	_onKeydown($event: KeyboardEvent){
+	_onKeydown($event: KeyboardEvent) {
 		this._callbackKeyEvent($event);
 	}
 
-	_onScroll($event: Event){
+	_onScroll($event: Event) {
 		const height = this._scrollElement.nativeElement.offsetHeight;
 		const top = this._scrollElement.nativeElement.scrollTop;
-		if (height - top < 50 && !this._loading && !this._noMoreResults){
+		if (height - top < 50 && !this._loading && !this._noMoreResults) {
 			this.pagingStart += this.pagingSize;
 			this._resetUsers(this._clue, false, true);
 		}
@@ -151,7 +151,7 @@ export class LuUserPicker<T extends IUser>
 			})
 			.filter((option) => {
 			let valueOption = this.innerMap[option.viewValue];
-			if (!valueOption){
+			if (!valueOption) {
 				this.innerMap[option.viewValue] = this._normalizeString(option.viewValue);
 				valueOption = this.innerMap[option.viewValue];
 			}
@@ -166,15 +166,15 @@ export class LuUserPicker<T extends IUser>
 
 	private _resetUsers(clue: string = '', resetOptions: boolean = false, completeList: boolean = false): void {
 		this._loading = true;
-		if (this._requestSubscription && !this._requestSubscription.closed){
+		if (this._requestSubscription && !this._requestSubscription.closed) {
 			this._requestSubscription.unsubscribe();
 			this._requestSubscription = null;
 		}
 
 		this._requestSubscription = this._getUsers(this._clue).subscribe( users => {
-			if (completeList){
+			if (completeList) {
 				this._users = this._users.concat(users);
-			}else{
+			}else {
 				this._users = users;
 			}
 			this._userList.setDirty();
@@ -182,7 +182,7 @@ export class LuUserPicker<T extends IUser>
 			this._noResults = this._users.length === 0;
 			this._noMoreResults = users.length === 0;
 
-			if (resetOptions){
+			if (resetOptions) {
 				this._originalList = users;
 			}
 			this._requestSubscription = null;
@@ -190,8 +190,8 @@ export class LuUserPicker<T extends IUser>
 		});
 	}
 
-	private _normalizeString(str: string){
-		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
+	private _normalizeString(str: string) {
+		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 	}
 
 
@@ -205,7 +205,7 @@ export class LuUserPicker<T extends IUser>
 	open(): void {
 		this._focused = true;
 		this._inputElement.nativeElement.focus();
-		if (!this._users || this._users.length === 0){
+		if (!this._users || this._users.length === 0) {
 			this._resetUsers('', true);
 		}
 	}
@@ -231,13 +231,12 @@ export class LuUserPicker<T extends IUser>
 	}
 
 	private _getUsers(clue: string = ''): Observable<T[]> {
-		const fields = ['id','firstName','lastName'].concat(this.fields);
+		const fields = ['id', 'firstName', 'lastName'].concat(this.fields);
 		const params = [
 				`formerEmployees=${this.formerEmployees}`,
 				`clue=${encodeURIComponent(clue)}`,
 				`paging=${this.pagingStart},${this.pagingSize}`,
 				`fields=${fields.join(',')}`,
-				//'orderBy=lastname,asc'
 			];
 		const url = `${this._api}?${params.join('&')}`;
 		return this._http.get<{ data: { items: T[] } }>(url)

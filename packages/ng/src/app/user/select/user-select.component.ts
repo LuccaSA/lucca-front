@@ -81,7 +81,7 @@ implements ControlValueAccessor,
 	}
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
 	set value(value:  T | null | undefined) {
-		let valueTemp = value;
+		const valueTemp = value;
 		this._value = valueTemp;
 		this.isFilled = !!this._value;
 		this._cvaOnChange(valueTemp);
@@ -115,14 +115,14 @@ implements ControlValueAccessor,
 		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
 	}
 
-	ngAfterViewInit(){
+	ngAfterViewInit() {
 		this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
 		this._selectElement.setAttribute('tabindex', '-1');
 	}
 
-	ngAfterContentInit(){
+	ngAfterContentInit() {
 		// Hack to force Angular to thave the right information (else, the contentChild in the select stay empty)
-		if (this.clearer){
+		if (this.clearer) {
 			this._luSelect.clearer = this.clearer;
 		}
 	}
@@ -144,7 +144,7 @@ implements ControlValueAccessor,
 		this.isFocused = this._luSelect.isFocused;
 	}
 
-	onSelectFocus(focus: boolean){
+	onSelectFocus(focus: boolean) {
 		this.isFocused = focus;
 	}
 

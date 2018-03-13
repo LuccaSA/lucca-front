@@ -8,7 +8,11 @@ import { IUser } from '../../../../../src/app/user';
 })
 export class DemoBasicUserSelectComponent {
 
-	userSelect: IUser;
+	userSelect = {
+		id: 464,
+		firstName: "Jean-François",
+		lastName: "Garreau"
+	};
 
 	constructor() { }
 
