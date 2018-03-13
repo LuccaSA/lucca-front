@@ -18,7 +18,7 @@
 	width: auto;
 
 	&::after {
-		@include makeIcon("datepicker");
+		@include makeIcon("calendar");
 	}
 	mat-icon {
 		display: none;
