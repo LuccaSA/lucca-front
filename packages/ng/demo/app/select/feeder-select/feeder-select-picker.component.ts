@@ -27,8 +27,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 /**
  * Component that manage the possibility to search in the options of a select.
  */
-export class DemoSelectFeederPickerComponent<T>
-	extends ASelectOptionFeeder<T>
+export class DemoSelectFeederPickerComponent
+	extends ASelectOptionFeeder<any>
 	implements
 		OnDestroy,
 		OnInit,
@@ -39,12 +39,12 @@ export class DemoSelectFeederPickerComponent<T>
 	private _intlChanges: Subscription;
 
 
-	options:  T[];
+	options:  any[];
 	/**
 	 * The options detected
 	 */
-	@ViewChild('scrollElement') _scrollElement : ElementRef;
-	@ViewChildren(LuSelectOption) luOptions: QueryList<LuSelectOption<T>>;
+	@ViewChild('scrollElement') _scrollElement: ElementRef;
+	@ViewChildren(LuSelectOption) luOptions: QueryList<LuSelectOption<any>>;
 
 
 	constructor(public _intl: LuSelectSearchIntl,
@@ -93,8 +93,12 @@ export class DemoSelectFeederPickerComponent<T>
 
 	}
 
-	selectOption(option: LuSelectOptionSelectionChange<T>): void {
+	selectOption(option: LuSelectOptionSelectionChange<any>): void {
 		this._callbackSelectOption(option.source);
+	}
+
+	textValue(item: any): string {
+		return item.name;
 	}
 
 }

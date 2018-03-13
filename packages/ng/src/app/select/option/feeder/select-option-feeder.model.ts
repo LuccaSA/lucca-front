@@ -40,6 +40,12 @@ export interface ISelectOptionFeeder<T> {
 	 */
 	scrollTo(index: number);
 
+	/**
+	 * gives the string corresponding to the item
+	 * @param item The item to display
+	 */
+	textValue(item: T): string;
+
 }
 
 
@@ -90,6 +96,13 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	 * See ISelectOptionFeeder
 	 */
 	scrollTo(index: number) {
+	}
+
+	/**
+	 * See ISelectOptionFeeder
+	 */
+	textValue(item: T): string {
+		return '';
 	}
 
 }

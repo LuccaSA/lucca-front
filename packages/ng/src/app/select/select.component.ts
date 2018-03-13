@@ -265,6 +265,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._elementRef.nativeElement.value = this.display(value);
 	}
 	protected display(value: LuSelectOption<T> | null): string {
+		// If we haven't a LuSelectOption but there is a value on select, and if we have an optionFeeder, then
+		// we show the display value offer by the optionFeeder
+		if (!value && this.value && this.optionFeeder) {
+			return this.optionFeeder.textValue(this.value);
+		}
 		if (!value) {
 			return '';
 		}

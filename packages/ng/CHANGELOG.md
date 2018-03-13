@@ -4,6 +4,7 @@
 ### New features
 - `user-select`: Add component for user select
 - `user-select-picker`: Add a picker that implements IOptionFeeder for the user select
+- `IOptionFeeder`: Add a method `textValue` to let developer set how to display the value at first (when no options are loads)
 ### Fixes
 ### Breaking changes
 - `lu-select`: remove `mod` attribute, you should specify the mod of select only through the parent with class `mod-*`

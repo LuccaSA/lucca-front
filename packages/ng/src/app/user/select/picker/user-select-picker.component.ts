@@ -219,7 +219,14 @@ export class LuUserPicker<T extends IUser>
 		this._scrollElement.nativeElement.scrollTop = luOption.offsetTop();
 	}
 
-	_selectUser(user: LuSelectOption<T>){
+	/**
+	 * See ISelectOptionFeeder
+	 */
+	textValue(item: T): string {
+		return `${item.firstName} ${item.lastName}`;
+	}
+
+	_selectUser(user: LuSelectOption<T>) {
 		this._callbackSelectOption(user);
 	}
 
