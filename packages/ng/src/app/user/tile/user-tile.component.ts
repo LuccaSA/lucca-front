@@ -34,6 +34,12 @@ export class LuUserTileComponent {
 			case DisplayHybrid.lastIfirstFull:
 			case DisplayHybrid.lastFullfirstI:
 				return DisplayInitials.lastfirst;
+			case DisplayFullname.last:
+			case DisplayInitials.last:
+				return DisplayInitials.last;
+			case DisplayFullname.first:
+			case DisplayInitials.first:
+				return DisplayInitials.first;
 			case DisplayFullname.firstlast:
 			case DisplayInitials.firstlast:
 			case DisplayHybrid.firstIlastFull:

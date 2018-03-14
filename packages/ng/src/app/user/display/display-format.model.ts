@@ -1,11 +1,15 @@
 export enum DisplayFullname {
 	firstlast = 'fl',
-	lastfirst = 'lf'
+	lastfirst = 'lf',
+	first = 'f',
+	last = 'l'
 }
 
 export enum DisplayInitials {
 	firstlast = 'FL',
-	lastfirst = 'LF'
+	lastfirst = 'LF',
+	last = 'L',
+	first = 'F'
 }
 
 export enum DisplayHybrid {
