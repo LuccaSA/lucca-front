@@ -7,6 +7,11 @@
 ### Updated dependencies
 ### Updated devDependencies
 
+## 0.4.1
+### Updated peerDependencies
+- `@lucca-front\icons` - update to version 0.4.1
+- `@lucca-front\scss` - update to version 0.4.1
+
 ## 0.4.0
 ### New features
 - `lu-select-searcher` : Add a component for searching in a select

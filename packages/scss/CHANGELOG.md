@@ -7,6 +7,11 @@
 ### Enhancements
 ### Fixes
 
+## 0.4.1
+### Updated peerDependencies
+- `@lucca-front\icons` - update to version 0.4.1
+- `@lucca-front\scss` - update to version 0.4.1
+
 ## V0.3.3
 ### Adding
 - `table` small table mode
