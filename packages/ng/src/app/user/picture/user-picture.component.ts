@@ -1,6 +1,6 @@
 import { Component, Input, HostBinding } from '@angular/core';
 import { IUser } from '../user.model';
-import { LuUserDisplayPipe } from '../display';
+import { LuUserDisplayPipe, DisplayFormat, DisplayInitials, DisplayFullname } from '../display';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -13,14 +13,10 @@ import { LuUserDisplayPipe } from '../display';
 export class LuUserPictureComponent {
 	/**
 		 * User Display format.
-		 * It is set to 'fl' by default
+		 * It is set to 'FL' by default
 		 */
-	private _displayFormat = 'FL';
-	@Input()
-	set displayFormat(displayFormat: string) {
-		this._displayFormat = displayFormat.toUpperCase();
-	}
-	get displayFormat(): string { return this._displayFormat; }
+	@Input() displayFormat: DisplayInitials = DisplayInitials.firstlast;
+
 	/**
 	 * IUser whose picture you wanna display.
 	 */
@@ -48,7 +44,7 @@ export class LuUserPictureComponent {
 
 	private getNameHue() {
 		// we sum the chars in user's firstname + lastname
-		const charSum = this.displayPipe.transform(this._user, 'fl')
+		const charSum = this.displayPipe.transform(this._user, DisplayFullname.firstlast)
 		.split('')
 		.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue
