@@ -1,5 +1,6 @@
 import {
 	AfterContentInit,
+	AfterViewInit,
 	Component,
 	Input,
 	Output,
@@ -72,7 +73,12 @@ const TAB = 'Tab';
 	styleUrls: ['./select.component.scss'],
 })
 export class LuSelect<T>
-implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
+implements
+	ControlValueAccessor,
+	AfterContentInit,
+	AfterViewInit,
+	OnInit,
+	OnDestroy {
 
 	/** Emits whenever the component is destroyed. */
 	private _destroy$ = new Subject<void>();
@@ -137,7 +143,9 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	/**
 	 * Reference of the optionFeeder
 	 */
-	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
+	@ContentChild(ASelectOptionFeeder) optionFeederContent: ISelectOptionFeeder<T>;
+	@ViewChild(ASelectOptionFeeder) optionFeederView: ISelectOptionFeeder<T>;
+	private _optionFeeder: ISelectOptionFeeder<T>;
 	/**
 	 * Emits an event when the select recieve or lost the focus
 	 */
@@ -211,13 +219,19 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			}
 
 			// We have to deal in a different way a IOptionFeeder
-			if (this.optionFeeder) {
-				this._picker.optionFeeder = this.optionFeeder;
-				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
-				this.optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
-				this.optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+			if (this.optionFeederContent) {
+				this.initOptionFeeder(this.optionFeederContent);
 			}
 		});
+	}
+
+	ngAfterViewInit() {
+		// this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
+		// this._selectElement.setAttribute('tabindex', '-1');
+		// We have to deal in a different way a IOptionFeeder
+		if (this.optionFeederView) {
+			this.initOptionFeeder(this.optionFeederView);
+		}
 	}
 
 	// From ControlValueAccessor interface
@@ -233,6 +247,14 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._onTouched = fn;
 	}
 
+
+	protected initOptionFeeder(optionFeeder: ISelectOptionFeeder<T>): void {
+		this._optionFeeder = optionFeeder;
+		this._picker.optionFeeder = optionFeeder;
+		optionFeeder.registerKeyevent(this.onKeydown.bind(this));
+		optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
+		optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+	}
 
 	/** true if the component allow to remove data */
 	private canRemove(canRemove: boolean = false): void {
@@ -267,8 +289,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	protected display(value: LuSelectOption<T> | null): string {
 		// If we haven't a LuSelectOption but there is a value on select, and if we have an optionFeeder, then
 		// we show the display value offer by the optionFeeder
-		if (!value && this.value && this.optionFeeder) {
-			return this.optionFeeder.textValue(this.value);
+		if (!value && this.value && this._optionFeeder) {
+			return this._optionFeeder.textValue(this.value);
 		}
 		if (!value) {
 			return '';
@@ -299,8 +321,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				return this._picker.onEndKeydown(this._field.popoverOpen);
 			case ENTER_KEY: {
 				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
-				if (this._field.popoverOpen && this.optionFeeder) {
-					this.optionFeeder.open();
+				if (this._field.popoverOpen && this._optionFeeder) {
+					this._optionFeeder.open();
 				}
 				return;
 			}
@@ -316,7 +338,7 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@HostListener('blur', ['$event'])
 	blur(e) {
 		this._onTouched();
-		if (this.optionFeeder && this.optionFeeder.focused) {
+		if (this._optionFeeder && this._optionFeeder.focused) {
 			return;
 		}
 		this.isFocused = false;
@@ -327,8 +349,8 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@HostListener('click')
 	clicked() {
 		this._field.togglePopover();
-		if (this._field.popoverOpen && this.optionFeeder) {
-			this.optionFeeder.open();
+		if (this._field.popoverOpen && this._optionFeeder) {
+			this._optionFeeder.open();
 		}
 		this.isFocused = this._field.popoverOpen;
 		this.selectFocus.emit(this._field.popoverOpen);
