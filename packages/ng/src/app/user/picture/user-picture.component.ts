@@ -11,7 +11,16 @@ import { LuUserDisplayPipe } from '../display';
 	styleUrls: ['./user-picture.component.scss'],
 })
 export class LuUserPictureComponent {
-
+	/**
+		 * User Display format.
+		 * It is set to 'fl' by default
+		 */
+	private _displayFormat = 'FL';
+	@Input()
+	set displayFormat(displayFormat: string) {
+		this._displayFormat = displayFormat.toUpperCase();
+	}
+	get displayFormat(): string { return this._displayFormat; }
 	/**
 	 * IUser whose picture you wanna display.
 	 */
@@ -19,7 +28,7 @@ export class LuUserPictureComponent {
 
 	@Input() set user(user: IUser) {
 		this._user = user;
-		this.initials = this.displayPipe.transform(user, 'LF');
+		this.initials = this.displayPipe.transform(user, this._displayFormat);
 		this.hasPicture = !!user.picture && !!user.picture.href;
 		if (this.hasPicture) {
 			this.style = { 'background-image': `url('${this._user.picture.href}')` };
@@ -29,6 +38,7 @@ export class LuUserPictureComponent {
 		}
 	}
 	get user() { return this._user; }
+
 	initials = '';
 	hasPicture = false;
 
@@ -38,7 +48,7 @@ export class LuUserPictureComponent {
 
 	private getNameHue() {
 		// we sum the chars in user's firstname + lastname
-		const charSum = this.displayPipe.transform(this._user, 'lf')
+		const charSum = this.displayPipe.transform(this._user, 'fl')
 		.split('')
 		.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue

@@ -2,6 +2,7 @@
 
 ## In Dev
 ### New features
+- `lu-user-picture` now has a displayFormat attribute. Default to "FL"
 ### Fixes
 ### Breaking changes
 ### Updated dependencies
