@@ -118,6 +118,10 @@ implements ControlValueAccessor,
 	ngAfterViewInit() {
 		this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
 		this._selectElement.setAttribute('tabindex', '-1');
+		this._luSelect._picker.popoverPanelStyles = {
+			'min-width.px': 200,
+			'width.px': this._elementRef.nativeElement.getBoundingClientRect().width
+		};
 	}
 
 	ngAfterContentInit() {
