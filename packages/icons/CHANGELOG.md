@@ -3,6 +3,7 @@
 ## In dev
 ### Enhancement
 ### Fix
+- `calendar key`
 ### New icons
 
 ## v0.3.5

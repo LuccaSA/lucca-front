@@ -2220,7 +2220,7 @@
       "properties": {
         "order": 323,
         "id": 68,
-        "name": "datepicker",
+        "name": "calendar",
         "prevSize": 32,
         "code": 59680,
         "ligatures": "calendar"
