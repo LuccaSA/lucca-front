@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuSelectModule } from '../../select';
 import { LuUserSelect } from './user-select.component';
-import { LuUserSelect2 } from './user-select2.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LuUserPickerModule } from './picker/user-select-picker.module';
 
@@ -21,11 +20,9 @@ import { LuUserPickerModule } from './picker/user-select-picker.module';
 	],
 	declarations: [
 		LuUserSelect,
-		LuUserSelect2,
 	],
 	exports: [
 		LuUserSelect,
-		LuUserSelect2,
 	]
 })
 export class LuUserSelectModule { }

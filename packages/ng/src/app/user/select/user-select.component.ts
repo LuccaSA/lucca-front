@@ -3,14 +3,7 @@ import {
 	forwardRef,
 	Renderer2,
 	ElementRef,
-	HostListener,
-	HostBinding,
-	ContentChild,
-	ViewChild,
 	Input,
-	OnInit,
-	AfterViewInit,
-	AfterContentInit,
 } from '@angular/core';
 import {
 	NgModel,
@@ -26,7 +19,7 @@ import {
 import {
 	IUser
 } from '../user.model';
-import { LuSelect, LuSelectClearerComponent, ISelectClearer } from '../../select';
+import { LuSelect, LuSelectClearerComponent, ISelectClearer, ASelectOptionFeeder, ISelectOptionFeeder } from '../../select';
 import {  } from '../../select/clearer/select-clearer.model';
 /**
  * User select
@@ -42,20 +35,9 @@ import {  } from '../../select/clearer/select-clearer.model';
 	],
 })
 export class LuUserSelect<T extends IUser>
-implements ControlValueAccessor,
-	OnInit,
-	AfterViewInit,
-	AfterContentInit
+extends LuSelect<T> {
 
-{
-
-	/** Add a class binding for 'is-filled' when the select is filled */
-	@HostBinding('class.is-filled') isFilled = false;
-	/** Add a class binding for 'is-focused' when the select is focused */
-	@HostBinding('class.is-focused') isFocused = false;
-	/** The placeholder of the component, it is used as label (material design) */
-	@Input() placeholder: string;
-	/** The pagingStart.  */
+		/** The pagingStart.  */
 	@Input() pagingStart = 0;
 	/** The paging size. */
 	@Input() pagingSize = 10;
@@ -65,104 +47,12 @@ implements ControlValueAccessor,
 	/** The additionnals fields to use in the search. */
 	@Input() fields = [];
 
-	/** Inner reference of clearer */
-
-	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
-	@ViewChild(LuSelect) _luSelect: LuSelect<T>;
-	@ViewChild('select') _luSelectElement: ElementRef;
-
-	private _selectElement: any;
-	/** inner validator */
-	protected _validator: ValidatorFn | null;
-
-	/** The value of the select */
-	get value(): T | null {
-		return this._value;
-	}
-	/** Set the value, an event (canremove) will be sent if the directive is clearable */
-	set value(value:  T | null | undefined) {
-		const valueTemp = value;
-		this._value = valueTemp;
-		this.isFilled = !!this._value;
-		this._cvaOnChange(valueTemp);
-	}
-
-	// Inner values
-	protected _value: T | null;
-
-	private _onTouched = () => {};
-
-
-	// validators
-	validate(c: AbstractControl): ValidationErrors | null {
-		return this._validator ? this._validator(c) : null;
-	}
-
-	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
-		return null;
-	}
-	private _cvaOnChange: (value: T) => void = () => {};
 
 	constructor(
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
 	) {
-	}
-
-	// Life Cycle methods
-	ngOnInit() {
-		this._validator = Validators.compose([this._itemValidator]);
-		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
-	}
-
-	ngAfterViewInit() {
-		this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
-		this._selectElement.setAttribute('tabindex', '-1');
-		this._luSelect._picker.popoverPanelStyles = {
-			'min-width.px': 200,
-			'width.px': this._elementRef.nativeElement.getBoundingClientRect().width
-		};
-	}
-
-	ngAfterContentInit() {
-		// Hack to force Angular to thave the right information (else, the contentChild in the select stay empty)
-		if (this.clearer) {
-			this._luSelect.clearer = this.clearer;
-		}
-	}
-
-	@HostListener('keydown', ['$event'])
-	onKeydown($event) {
-		this._luSelect.onKeydown($event);
-	}
-
-	@HostListener('focus', ['$event'])
-	onFocus($event) {
-		$event.stopPropagation();
-		this.isFocused = true;
-	}
-
-	@HostListener('blur', ['$event'])
-	onBlur($event) {
-		$event.stopPropagation();
-		this.isFocused = this._luSelect.isFocused;
-	}
-
-	onSelectFocus(focus: boolean) {
-		this.isFocused = focus;
-	}
-
-	// From ControlValueAccessor interface
-	writeValue(value: T) {
-		this.value = value;
-	}
-	// From ControlValueAccessor interface
-	registerOnChange(fn: any) {
-		this._cvaOnChange = fn;
-	}
-	// From ControlValueAccessor interface
-	registerOnTouched(fn: any) {
-		this._onTouched = fn;
+		super(_elementRef, _renderer);
 	}
 
 }

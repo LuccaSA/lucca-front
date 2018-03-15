@@ -1,14 +1,15 @@
-
-<lu-select #select [(ngModel)]="value"
-	[placeholder]="placeholder"
-	(selectFocus)="onSelectFocus($event)"
-	>
+<div class="select"
+	[luSelect]="selectRef"
+	(close)="_onClose()">
+	<div class="select-value">{{_strValue}}</div>
 	<ng-content></ng-content>
-	<user-select-picker luOptionFeeder
-	 [pagingStart]="pagingStart"
-	 [pagingSize]="pagingSize"
-	 [formerEmployees]="formerEmployees"
-	 [fields]="fields"
-	>
-	</user-select-picker>
-</lu-select>
+	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
+		<user-select-picker luOptionFeeder
+			[pagingStart]="pagingStart"
+			[pagingSize]="pagingSize"
+			[formerEmployees]="formerEmployees"
+			[fields]="fields"
+			>
+		</user-select-picker>
+	</lu-select-picker>
+</div>

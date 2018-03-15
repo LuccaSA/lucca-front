@@ -135,22 +135,6 @@ describe('LuUserSelect', () => {
 
 	});
 
-	it('It should contain the right placeholder value input', () => {
-
-		// Arrange
-		const fixture = TestBed.createComponent(LuUserSelect);
-		fixture.detectChanges();
-		const userSelect  = fixture.componentInstance;
-
-		// Act
-		userSelect.placeholder = 'a label';
-		fixture.detectChanges();
-
-		// Assert
-		expect(userSelect.placeholder).toBe('a label');
-
-	});
-
 
 	it('It should reference has the right value', () => {
 
