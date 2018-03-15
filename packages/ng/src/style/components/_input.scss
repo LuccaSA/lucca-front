@@ -1,12 +1,12 @@
-input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+textfield-input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
 	@include textfieldError();
 }
 
-.textfield.mod-material input.ng-invalid.ng-touched, .textfield.mod-material textarea.ng-invalid.ng-touched {
+.textfield.mod-material textfield-input.ng-invalid.ng-touched, .textfield.mod-material textarea.ng-invalid.ng-touched {
 	@include textfieldMaterialError();
 }
 
-.textfield.mod-framed input.ng-invalid.ng-touched, .textfield.mod-framed textarea.ng-invalid.ng-touched {
+.textfield.mod-framed textfield-input.ng-invalid.ng-touched, .textfield.mod-framed textarea.ng-invalid.ng-touched {
 	@include textfieldFramedError();
 }
 

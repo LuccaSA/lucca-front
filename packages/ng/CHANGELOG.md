@@ -3,6 +3,7 @@
 ## In Dev
 ### New features
 ### Fixes
+- `style` - ng-invalid is now apply to `.textfield-input` instead of just `input`
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies
