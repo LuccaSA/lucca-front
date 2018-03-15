@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicComponent implements OnInit {
 	user = { firstName: 'John', lastName: 'Doe' };
-	availableFormats = ['fl', 'Fl', 'FL', 'fL', 'lf', 'Lf', 'LF', 'lF'];
+	availableFormats = ['fl', 'Fl', 'FL', 'fL', 'lf', 'Lf', 'LF', 'lF', 'f', 'F', 'l', 'L'];
 	selectedFormat = 'fl';
 
 	constructor() { }

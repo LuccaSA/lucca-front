@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IUser} from '../index';
-import { LuUserDisplayPipe } from '../display';
+import { LuUserDisplayPipe, DisplayInitials, DisplayFullname, DisplayHybrid } from '../display';
 
 /**
  * Displays user picture and name. IUser's role can be specified, and the footer is customizable.
@@ -26,6 +26,28 @@ export class LuUserTileComponent {
 	 * IUser role to display
 	 */
 	@Input() role: string;
+
+	get displayPictureFormat(): DisplayInitials {
+		switch (this.displayFormat) {
+			case DisplayFullname.lastfirst:
+			case DisplayInitials.lastfirst:
+			case DisplayHybrid.lastIfirstFull:
+			case DisplayHybrid.lastFullfirstI:
+				return DisplayInitials.lastfirst;
+			case DisplayFullname.last:
+			case DisplayInitials.last:
+				return DisplayInitials.last;
+			case DisplayFullname.first:
+			case DisplayInitials.first:
+				return DisplayInitials.first;
+			case DisplayFullname.firstlast:
+			case DisplayInitials.firstlast:
+			case DisplayHybrid.firstIlastFull:
+			case DisplayHybrid.firstFulllastI:
+			default:
+				return DisplayInitials.firstlast;
+		}
+	}
 
 	constructor() {	}
 }
