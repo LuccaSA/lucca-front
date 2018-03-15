@@ -168,3 +168,66 @@
 		&lt;/div&gt;
 	&lt;/div&gt;</code>
 </section>
+<section>
+	<h3>Thème</h3>
+	<code class="code mod-block">$button: (
+	<i>option: attribute,
+	option: (
+		optionChild: attribute
+	)</i>
+);
+$theme: _set($theme, "components.button", $button);
+</code>
+	<table class="table mod-small mod-zebra mod-alignTop">
+		<thead class="table-head">
+			<tr class="table-head-row">
+				<th class="table-head-row-cell">Options</th>
+				<th class="table-head-row-cell">Default value</th>
+				<th class="table-head-row-cell">Notes</th>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">default-palette</td>
+				<td class="table-body-row-cell">
+					<b>color:</b> white<br>
+					<b>text:</b> _color("text.default")
+				</td>
+				<td class="table-body-row-cell u-textLight u-nowrap">
+					Button background color<br>
+					Button text color
+				</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">margin</td>
+				<td class="table-body-row-cell">.2rem</td>
+				<td class="table-body-row-cell u-textLight"></td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">box-shadow</td>
+				<td class="table-body-row-cell">0 0 0 1px rgba(50, 50, 50, .2) inset</td>
+				<td class="table-body-row-cell u-textLight"></td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">hover</td>
+				<td class="table-body-row-cell"><b>box-shadow:</b> 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24)</td>
+				<td class="table-body-row-cell u-textLight"></td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">focus</td>
+				<td class="table-body-row-cell"><b>box-shadow:</b> 0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24)</td>
+				<td class="table-body-row-cell u-textLight"></td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">active</td>
+				<td class="table-body-row-cell"><b>box-shadow:</b> 0 0 0 1px rgba(50, 50, 50, .2) inset</td>
+				<td class="table-body-row-cell u-textLight"></td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell u-nowrap">checked</td>
+				<td class="table-body-row-cell">_theme("palettes.primary")</td>
+				<td class="table-body-row-cell u-textLight">Palette color of radio/checkbox button groups</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

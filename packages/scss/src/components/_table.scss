@@ -68,6 +68,12 @@
 		}
 	}
 
+	&.mod-alignTop {
+		.table-body-row-cell {
+			vertical-align: top;
+		}
+	}
+
 	&.mod-card {
 		border-bottom: 0;
 
