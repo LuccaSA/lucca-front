@@ -4,6 +4,8 @@
 	position: relative;
 	text-decoration: none;
 	border: 0;
+	font-size: _component("button.sizing.default.font-size");
+	padding: _component("button.sizing.default.padding");
 	vertical-align: middle;
 	white-space: nowrap;
 	margin: _component("button.margin");
@@ -74,21 +76,10 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	@mixin buttonSizing($size) {
-		$padding-v: _component("button.sizing.padding-v-ratio") * _get($size, "padding");
-		$padding-h: _component("button.sizing.padding-h-ratio") * _get($size, "padding");
-		font-size: _get($size, "font-size");
-		line-height: 1;
-		padding: $padding-v $padding-h;
-	}
-
-	// default size
-	@include buttonSizing(_component("button.sizing.default-size"));
-
-	// all sizes
-	@each $name, $size in _theme("sizes") {
-		&.size-#{$name} {
-			@include buttonSizing($size);
+	@each $button-size, $size-obj in _component("button.sizing") {
+		&.size-#{$button-size} {
+			font-size: _get($size-obj, "font-size");
+			padding: _get($size-obj, "padding");
 		}
 	}
 }
@@ -196,19 +187,16 @@
 	/* Loading */
 
 	&.is-loading {
+		@include loading(_component("button.sizing.default.font-size"));
 		color: transparent;
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
 
 		// Sizing
-		@mixin buttonLoadingSizing($size) {
-			@include loading(_get($size, "font-size"));
-		}
-		@include buttonLoadingSizing(_component("button.sizing.default-size"));
-		@each $name, $size in _theme("sizes") {
-			&.size-#{$name} {
-				@include buttonLoadingSizing($size);
+		@each $button-size, $size-obj in _component("button.sizing") {
+			&.size-#{$button-size} {
+				@include loading(_get($size-obj, "font-size"));
 			}
 		}
 	}
@@ -222,12 +210,13 @@
 		user-select: none;
 
 		&::after {
-			color: white;
 			@include makeIcon("tick");
-			height: 100%;
+			bottom: 0;
+			color: white;
+			font-size: 1.5 * _component("button.sizing.default.font-size");
+			height: 1.5 * _component("button.sizing.default.font-size");
 			left: 0;
-			line-height: 100%;
-			padding-top: 6%;
+			margin: auto;
 			position: absolute;
 			right: 0;
 			top: 0;
@@ -235,15 +224,12 @@
 		}
 
 		// Sizing
-		@mixin buttonSuccessErrorSizing($size) {
-			&::after {
-				font-size: 1.5*_get($size, "font-size");
-			}
-		}
-		@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
-		@each $name, $size in _theme("sizes") {
-			&.size-#{$name} {
-				@include buttonSuccessErrorSizing($size);
+		@each $button-size, $size-obj in _component("button.sizing") {
+			&.size-#{$button-size} {
+				&::after {
+				 	font-size: 1.5 * _get($size-obj, "font-size");
+					height: 1.5 * _get($size-obj, "font-size");
+				}
 			}
 		}
 	}
@@ -257,12 +243,13 @@
 		user-select: none;
 
 		&::after {
-			color: white;
 			@include makeIcon("cross");
-			height: 100%;
+			bottom: 0;
+			color: white;
+			font-size: 1.5 * _component("button.sizing.default.font-size");
+			height: 1.5 * _component("button.sizing.default.font-size");
 			left: 0;
-			line-height: 100%;
-			padding-top: 6%;
+			margin: auto;
 			position: absolute;
 			right: 0;
 			top: 0;
@@ -270,15 +257,12 @@
 		}
 
 		// Sizing
-		@mixin buttonSuccessErrorSizing($size) {
-			&::after {
-				font-size: 1.5*_get($size, "font-size");
-			}
-		}
-		@include buttonSuccessErrorSizing(_component("button.sizing.default-size"));
-		@each $name, $size in _theme("sizes") {
-			&.size-#{$name} {
-				@include buttonSuccessErrorSizing($size);
+		@each $button-size, $size-obj in _component("button.sizing") {
+			&.size-#{$button-size} {
+				&::after {
+				 	font-size: 1.5 * _get($size-obj, "font-size");
+					height: 1.5 * _get($size-obj, "font-size");
+				}
 			}
 		}
 	}
