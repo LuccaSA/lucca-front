@@ -7,6 +7,7 @@
 - `user-select-picker`: Add a picker that implements IOptionFeeder for the user select
 - `IOptionFeeder`: Add a method `textValue` to let developer set how to display the value at first (when no options are loads)
 ### Fixes
+- `style` - ng-invalid is now apply to `.textfield-input` instead of just `input`
 ### Breaking changes
 - `lu-select`: remove `mod` attribute, you should specify the mod of select only through the parent with class `mod-*`
 ### Updated dependencies
