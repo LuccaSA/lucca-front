@@ -20,7 +20,7 @@
 // MODS
 
 :host {
-	&.mod-remove {
+	&.is-clearable {
 		.actionIcon {
 			display: block;
 		}

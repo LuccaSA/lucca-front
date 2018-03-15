@@ -3,12 +3,13 @@
 
 :host {
 	cursor: pointer;
+	outline: none;
 	padding: 0;
 
 	&::after {
 		bottom: .55rem;
 		color: _color("text.light");
-		@include makeIcon("chevron_south");
+		@include makeIcon("arrow_south");
 		font-size: .75rem;
 		pointer-events: none;
 		position: absolute;
@@ -28,13 +29,21 @@
 }
 
 
-// STATES
+// MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// Value
-:host-context(.textfield-input.is-filled) {
+// Framed
+:host-context(.textfield.mod-framed) {
+	padding: _component("textfield.framed.top-padding") 0 0;
+
 	.select-value {
-		color: _color("text.default");
+		height: 100%;
+		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
+	}
+
+	&::after {
+		bottom: .75rem;
+		right: _component("textfield.framed.side-padding");
 	}
 }
 
@@ -51,7 +60,7 @@
 		right: 0;
 	}
 
-	&:focus {
+	&.is-select {
 		.select-value {
 			opacity: 1;
 		}
@@ -64,17 +73,19 @@
 	}
 }
 
-// Framed
-:host-context(.textfield.mod-framed) {
-	padding: _component("textfield.framed.top-padding") 0 0;
-
+:host-context(.textfield.mod-material .textfield-input.is-focused) {
 	.select-value {
-		height: 100%;
-		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
+		opacity: 1;
 	}
+}
 
-	&::after {
-		bottom: .75rem;
-		right: _component("textfield.framed.side-padding");
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// Filled
+:host-context(.textfield-input.is-filled) {
+	.select-value {
+		color: _color("text.default");
 	}
 }

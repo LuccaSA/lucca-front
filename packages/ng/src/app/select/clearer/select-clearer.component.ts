@@ -15,7 +15,7 @@ import { ISelectClearer } from './select-clearer.model';
  */
 export class LuSelectClearerComponent<T> implements ISelectClearer<T>  {
 
-	@HostBinding('class.mod-remove') modRemove = false;
+	@HostBinding('class.is-clearable') modRemove = false;
 
 	private _emitter: (T) => void;
 

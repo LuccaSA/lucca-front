@@ -3,8 +3,12 @@
 ## In Dev
 ### New features
 - `lu-user-picture` now has a displayFormat attribute. Default to "FL"
+- `user-select`: Add component for user select
+- `user-select-picker`: Add a picker that implements IOptionFeeder for the user select
+- `IOptionFeeder`: Add a method `textValue` to let developer set how to display the value at first (when no options are loads)
 ### Fixes
 ### Breaking changes
+- `lu-select`: remove `mod` attribute, you should specify the mod of select only through the parent with class `mod-*`
 ### Updated dependencies
 ### Updated devDependencies
 
@@ -17,7 +21,7 @@
 ### New features
 - `lu-select-searcher` : Add a component for searching in a select
 - `IOptionFeeder` : An interface to implement to enable component that will manage options for a select
-- `ASelectOptionFeeder` : An abstract implentation of `IOptionFeeder`
+- `ASelectOptionFeeder` : An abstract implementation of `IOptionFeeder`
 - `lu-popover` : can now accept a `scroll-strategy` set by default to `reposition`
 
 ### Breaking changes

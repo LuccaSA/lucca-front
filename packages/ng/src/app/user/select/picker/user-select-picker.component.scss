@@ -4,6 +4,7 @@
 .textfield.mod-search {
 	width: 100%;
 }
+
 .textfield-input {
 	border-radius: 0;
 	box-shadow: none;
@@ -15,8 +16,14 @@
 	overflow: auto;
 }
 
-.select-options-noResult {
+.select-options-noResult, .select-options-loading {
 	padding: .5rem;
 	background: _theme("commons.background.base");
 	color: _color("text.light");
+}
+
+.loading {
+	display: block;
+	margin: auto;
+	width: 1.7rem;
 }

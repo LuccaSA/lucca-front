@@ -1,7 +1,9 @@
 import {
 	AfterContentInit,
+	AfterViewInit,
 	Component,
 	Input,
+	Output,
 	EventEmitter,
 	forwardRef,
 	Renderer2,
@@ -71,7 +73,12 @@ const TAB = 'Tab';
 	styleUrls: ['./select.component.scss'],
 })
 export class LuSelect<T>
-implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
+implements
+	ControlValueAccessor,
+	AfterContentInit,
+	AfterViewInit,
+	OnInit,
+	OnDestroy {
 
 	/** Emits whenever the component is destroyed. */
 	private _destroy$ = new Subject<void>();
@@ -129,12 +136,29 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
-	/** Define the graphical mod apply to the component : 'mod-material' / 'mod-compact' / classic (without mod) */
-	@Input() mod: string;
+	/**
+	 * Reference of the clearer
+	 */
 	@ContentChild(LuSelectClearerComponent) clearer: ISelectClearer<T>;
-	@ContentChild(ASelectOptionFeeder) optionFeeder: ISelectOptionFeeder<T>;
+	/**
+	 * Reference of the optionFeeder
+	 */
+	@ContentChild(ASelectOptionFeeder) optionFeederContent: ISelectOptionFeeder<T>;
+	@ViewChild(ASelectOptionFeeder) optionFeederView: ISelectOptionFeeder<T>;
+	private _optionFeeder: ISelectOptionFeeder<T>;
+	/**
+	 * Emits an event when the select recieve or lost the focus
+	 */
+	@Output() selectFocus= new EventEmitter<boolean>();
 
+	/**
+	 * Add a class binding for 'is-filled' when the select is filled
+	 */
 	@HostBinding('class.is-filled') isFilled = false;
+	/**
+	 * Add a class binding for 'is-focused' when the select is focused
+	 */
+	@HostBinding('class.is-focused') isFocused = false;
 
 
 	// validators
@@ -157,11 +181,14 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	// Life Cycle methods
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
+		// We make lu-select focusable with tab
 		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
 		this._picker.itemSelected
 		.subscribe(item => {
 			this.value = item ? item.luOptionValue : undefined;
 			this._field.closePopover();
+			this.isFocused = false;
+			this.selectFocus.emit(false);
 		});
 	}
 	ngOnDestroy() {
@@ -191,13 +218,20 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 				});
 			}
 
-			if (this.optionFeeder){
-				this._picker.optionFeeder = this.optionFeeder;
-				this.optionFeeder.registerKeyevent(this.onKeydown.bind(this));
-				this.optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
-				this.optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+			// We have to deal in a different way a IOptionFeeder
+			if (this.optionFeederContent) {
+				this.initOptionFeeder(this.optionFeederContent);
 			}
 		});
+	}
+
+	ngAfterViewInit() {
+		// this._selectElement = this._elementRef.nativeElement.querySelector('lu-select');
+		// this._selectElement.setAttribute('tabindex', '-1');
+		// We have to deal in a different way a IOptionFeeder
+		if (this.optionFeederView) {
+			this.initOptionFeeder(this.optionFeederView);
+		}
 	}
 
 	// From ControlValueAccessor interface
@@ -213,6 +247,14 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._onTouched = fn;
 	}
 
+
+	protected initOptionFeeder(optionFeeder: ISelectOptionFeeder<T>): void {
+		this._optionFeeder = optionFeeder;
+		this._picker.optionFeeder = optionFeeder;
+		optionFeeder.registerKeyevent(this.onKeydown.bind(this));
+		optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
+		optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+	}
 
 	/** true if the component allow to remove data */
 	private canRemove(canRemove: boolean = false): void {
@@ -245,6 +287,11 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 		this._elementRef.nativeElement.value = this.display(value);
 	}
 	protected display(value: LuSelectOption<T> | null): string {
+		// If we haven't a LuSelectOption but there is a value on select, and if we have an optionFeeder, then
+		// we show the display value offer by the optionFeeder
+		if (!value && this.value && this._optionFeeder) {
+			return this._optionFeeder.textValue(this.value);
+		}
 		if (!value) {
 			return '';
 		}
@@ -272,10 +319,10 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 			case END:
 				$event.preventDefault();
 				return this._picker.onEndKeydown(this._field.popoverOpen);
-			case ENTER_KEY:{
+			case ENTER_KEY: {
 				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
-				if(this._field.popoverOpen && this.optionFeeder) {
-					this.optionFeeder.open();
+				if (this._field.popoverOpen && this._optionFeeder) {
+					this._optionFeeder.open();
 				}
 				return;
 			}
@@ -291,19 +338,37 @@ implements ControlValueAccessor, AfterContentInit, OnInit, OnDestroy {
 	@HostListener('blur', ['$event'])
 	blur(e) {
 		this._onTouched();
-		if (this.optionFeeder && this.optionFeeder.focused) {
+		if (this._optionFeeder && this._optionFeeder.focused) {
 			return;
 		}
+		this.isFocused = false;
+		this.selectFocus.emit(false);
 		this._field.closePopover();
 	}
 
 	@HostListener('click')
 	clicked() {
 		this._field.togglePopover();
-		if (this._field.popoverOpen && this.optionFeeder) {
-			this.optionFeeder.open();
+		if (this._field.popoverOpen && this._optionFeeder) {
+			this._optionFeeder.open();
 		}
+		this.isFocused = this._field.popoverOpen;
+		this.selectFocus.emit(this._field.popoverOpen);
 		this._picker.search(this._strValue);
+	}
+
+	@HostListener('focus')
+	focused() {
+		this.isFocused = true;
+		this.selectFocus.emit(true);
+	}
+
+	/**
+	 * Inner method for close management
+	*/
+	_onClose() {
+		this.isFocused = this._field.popoverOpen;
+		this.selectFocus.emit(this._field.popoverOpen);
 	}
 
 	// Utilities

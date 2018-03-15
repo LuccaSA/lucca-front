@@ -87,21 +87,6 @@ describe('LuSelect', () => {
 
 		});
 
-		it('It should contain the right mod value input', () => {
-
-			// Arrange
-			const fixture = TestBed.createComponent(LuSelect);
-			fixture.detectChanges();
-			const luSelect  = fixture.componentInstance;
-
-			// Act
-			luSelect.mod = 'mod-material';
-			fixture.detectChanges();
-
-			// Assert
-			expect(luSelect.mod).toBe('mod-material');
-
-		});
 
 		it('It should set the right value', () => {
 
