@@ -164,6 +164,11 @@ var mappings = {
     {'iconName':'certif_ok', 'char': '\e9a6'},
     {'iconName':'certif_waiting', 'char': '\e9a7'},
     {'iconName':'certif_ko', 'char': '\e9a8'},
-    {'iconName':'car', 'char': '\e9a9'}
+    {'iconName':'car', 'char': '\e9a9'},
+    {'iconName':'update', 'char': '\e9ab'},
+    {'iconName':'dashboard', 'char': '\e9ac'},
+    {'iconName':'dialog', 'char': '\e9ad'},
+    {'iconName':'bow', 'char': '\e9ae'},
+    {'iconName':'book', 'char': '\e9af'}
   ]
 }

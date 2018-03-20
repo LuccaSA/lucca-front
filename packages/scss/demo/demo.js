@@ -165,9 +165,11 @@ function generateIconDemo() {
 		'phone',
 		'smartphone',
 		'flash',
+		'book',
 
 		'refresh',
 		'history',
+		'update',
 		'timer',
 		'clock',
 		'completion_pie',
@@ -178,6 +180,7 @@ function generateIconDemo() {
 		'pin',
 		'location',
 		'talk',
+		'dialog',
 
 		'bookmark',
 		'bookmark_add',
@@ -248,7 +251,9 @@ function generateIconDemo() {
 		'tools',
 		'database',
 		'analytics',
+		'dashboard',
 		'compass',
+		'bow',
 
 		'iron',
 		'jumping_cc',

@@ -4,6 +4,7 @@
 ### Enhancement
 ### Fix
 ### New icons
+- `update`, `dashboard`, `dialog`, `bow`, `book`
 
 ## 0.4.1
 ### Fix
