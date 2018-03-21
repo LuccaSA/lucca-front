@@ -27,13 +27,13 @@
 	}
 
 	.textfield-label {
-		color: _component("textfield.label.color");
-		font-size: _component("textfield.font-size");
+		color: _component("textfield.material.label.color");
+		font-size: _component("textfield.material.label.font-size");
 		font-weight: 400;
 		left: 0;
 		pointer-events: none;
 		position: absolute;
-		top: 1.3rem;
+		top: 1.4rem;
 		width: 100%;
 	}
 

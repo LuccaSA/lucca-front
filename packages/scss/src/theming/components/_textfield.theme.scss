@@ -1,5 +1,5 @@
 $textfield: (
-  font-size: 1rem,
+  font-size: _theme("sizes.standard.font-size"),
   background: #FFFFFF,
   border-radius: .2rem,
 
@@ -10,7 +10,8 @@ $textfield: (
   ),
 
   label: (
-    color: #A6A6A6
+    color: _color("text.default"),
+    font-size: _theme("sizes.small.font-size")
   ),
 
   suffix: (
@@ -42,6 +43,10 @@ $textfield: (
     default-palette: (
       color: _color("primary")
     ),
+    label: (
+      color: #A6A6A6,
+      font-size: _theme("sizes.standard.font-size")
+    ),
     suffix: (
       padding-right: 1rem
     )
@@ -49,14 +54,18 @@ $textfield: (
 
   compact: (
     padding: .5rem,
-    label-right-margin: .3rem,
-    label-sizes: (
-        shorter: 3rem,
-        short: 5rem,
-        default: 7rem,
-        long: 9rem,
-        longer: 11rem
-    ),
+    label: (
+      color: _color("text.light"),
+      font-size: _theme("sizes.standard.font-size"),
+      right-margin: .3rem,
+      sizes: (
+          shorter: 3rem,
+          short: 5rem,
+          default: 7rem,
+          long: 9rem,
+          longer: 11rem
+      )
+    )
   ),
 
   framed: (
