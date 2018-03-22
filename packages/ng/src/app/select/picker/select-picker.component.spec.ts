@@ -1,6 +1,6 @@
 import { async, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {LuSelectOption, LuSelectOptionSelectionChange} from '../option';
+import {LuSelectOption, LuSelectOptionSelectionChange, findOption} from '../';
 import {LuSelectPicker} from './select-picker.component';
 import { Component} from '@angular/core';
 
@@ -91,7 +91,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			fixture.detectChanges();
 			fixture.whenStable().then(() => {
-				const luOption = picker.find(globalOptions[0]);
+				const luOption = findOption(picker.luSelectOptions(), globalOptions[0]);
 				// Assert
 				expect(luOption).not.toBeNull();
 				expect(luOption.luOptionValue).toBe(globalOptions[0]);
@@ -112,7 +112,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			fixture.detectChanges();
 			fixture.whenStable().then(() => {
-				const luOption = picker.find({});
+				const luOption = findOption(picker.luSelectOptions(), {});
 				// Assert
 				expect(luOption).toBeUndefined();
 				});
