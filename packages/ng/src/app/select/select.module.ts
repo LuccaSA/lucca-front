@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuSelectPickerModule } from './picker';
 import { LuSelectOptionModule } from './option';
+import { LuSelectApiModule } from './api';
 import { LuSelectClearerModule } from './clearer';
 import { LuSelectSearcherModule } from './searcher';
 import { LuSelectDirectiveModule } from './directive';
@@ -22,6 +23,7 @@ import { LuPopoverModule } from '../popover/popover.module';
 		LuEmptyModule,
 		LuSelectPickerModule,
 		LuSelectOptionModule,
+		LuSelectApiModule,
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
 		LuSelectSearcherModule,
@@ -32,6 +34,7 @@ import { LuPopoverModule } from '../popover/popover.module';
 	exports: [
 		LuSelectPickerModule,
 		LuSelectOptionModule,
+		LuSelectApiModule,
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
 		LuSelectSearcherModule,
