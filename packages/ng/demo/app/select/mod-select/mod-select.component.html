@@ -1,26 +1,4 @@
-<section class="contentSection">
-	<h3>Component with mods</h3>
-	<div class="form-group">
-		<div class="textfield">
-			<lu-select [(ngModel)]="modSelect"
-				class="textfield-input"
-				placeholder="placeholder"
-				name="itemMods">
-				<lu-select-option *ngFor="let option of mods" [luOptionValue]="option">{{option.name}}</lu-select-option>
-			</lu-select>
-			<label class="textfield-label" for="itemMods">Mod</label>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="textfield" [ngClass]="modSelect.mod">
-			<lu-select [(ngModel)]="itemSelect"
-				class="textfield-input"
-				placeholder="placeholder"
-				name="itemOptions">
-				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
-			</lu-select>
-			<label class="textfield-label" for="itemOptions">my label</label>
-		</div>
-	</div>
-	<code class="code mod-block">{{ itemSelect | json }}</code>
-</section>
+<h3>With Mods</h3>
+<demo-example-box [snippets]="snippets" demo="mod">
+	<basic-mod-select></basic-mod-select>
+</demo-example-box>

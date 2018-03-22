@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 declare var require: any;
 
 @Component({
+	// tslint:disable-next-line:component-selector
 	selector: 'demo-select',
 	templateUrl: './select.component.html',
 	styles: []
@@ -11,22 +12,6 @@ export class DemoSelectComponent implements OnInit {
 		simple: {
 			code: require('!!prismjs-loader?lang=typescript!./simple-select/simple-select.component'),
 			markup: require('!!prismjs-loader?lang=markup!./simple-select/simple-select.component.html')
-		},
-		mod: {
-			code: require('!!prismjs-loader?lang=typescript!./mod-select/mod-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./mod-select/mod-select.component.html')
-		},
-		clearer: {
-			code: require('!!prismjs-loader?lang=typescript!./clearer-select/clearer-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./clearer-select/clearer-select.component.html')
-		},
-		searcher: {
-			code: require('!!prismjs-loader?lang=typescript!./searcher-select/searcher-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./searcher-select/searcher-select.component.html')
-		},
-		feeder: {
-			code: require('!!prismjs-loader?lang=typescript!./feeder-select/feeder-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./feeder-select/feeder-select.component.html')
 		},
 	};
 	constructor() { }

@@ -1,0 +1,13 @@
+<section class="contentSection">
+	<h3>Component With Auto load options</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelect"
+			class="textfield-input"
+			placeholder="placeholder"
+			name="itemOptions">
+			<demo-select-feeder-picker luOptionFeeder></demo-select-feeder-picker>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
