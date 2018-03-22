@@ -1,0 +1,12 @@
+<div class="select"
+	[luSelect]="selectRef"
+	(close)="_onClose()">
+	<div class="select-value">{{_strValue}}</div>
+	<ng-content></ng-content>
+	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
+		<select-api-picker luOptionFeeder
+			selectApiFeeder="selectApiFeeder"
+			>
+		</select-api-picker>
+	</lu-select-picker>
+</div>
