@@ -156,4 +156,9 @@ export class LuSelectSearcherComponent<T>
 
 	}
 
+	textValue(item: T): string {
+		const value = findOption(this.luOptions.toArray(), item);
+		return value ? value.viewValue : '';
+	}
+
 }
