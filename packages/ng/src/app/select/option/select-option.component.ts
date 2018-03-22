@@ -21,6 +21,7 @@ import {LuSelectOptionSelectionChange} from './select-option.event';
 	animations: [
 	],
 })
+// tslint:disable-next-line:component-class-suffix
 export class LuSelectOption<T> implements OnInit, OnDestroy {
 
 	private _focused = false;

@@ -64,7 +64,7 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 
 			// Act
-			fixture.whenStable().then(()=> {
+			fixture.whenStable().then(() => {
 				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
 					luSelectOption.luOptionValue = option;
@@ -75,7 +75,7 @@ describe('LuSelectPicker', () => {
 				// Assert
 				expect(picker.luSelectOptions()).not.toBeNull();
 				expect(picker.luSelectOptions().length).toBe(globalOptions.length);
-			})
+			});
 		});
 
 		it('It should find the correct option', () => {
@@ -235,7 +235,7 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			fixture.whenStable().then(()=> {
+			fixture.whenStable().then(() => {
 				// Act
 				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
@@ -249,7 +249,7 @@ describe('LuSelectPicker', () => {
 
 				// Assert
 				expect(picker.itemSelected.emit).toHaveBeenCalled();
-			})
+			});
 
 		});
 
@@ -277,7 +277,7 @@ describe('LuSelectPicker', () => {
 
 				// Assert
 				expect(picker.itemSelected.emit).toHaveBeenCalled();
-			})
+			});
 
 		});
 
@@ -322,7 +322,7 @@ describe('LuSelectPicker', () => {
 			const picker: LuSelectPicker<any> = fixture.debugElement.query(By.directive(LuSelectPicker)).componentInstance;
 			spyOn(picker.itemSelected, 'emit');
 
-			fixture.whenStable().then(()=> {
+			fixture.whenStable().then(() => {
 				// Act
 				picker.resetOptions(globalOptions.map(option => {
 					const luSelectOption = new LuSelectOption(null);
@@ -391,7 +391,7 @@ describe('LuSelectPicker', () => {
 
 				// Assert
 				expect(picker.itemSelected.emit).toHaveBeenCalled();
-			})
+			});
 		});
 
 		it('It should change the highlight item when home key is hit ', async() => {
@@ -447,7 +447,7 @@ describe('LuSelectPicker', () => {
 
 				// Assert
 				expect(picker.itemSelected.emit).toHaveBeenCalled();
-			})
+			});
 
 		});
 
