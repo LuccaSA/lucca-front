@@ -36,10 +36,19 @@ import {Subject} from 'rxjs/Subject';
 import {take} from 'rxjs/operators/take';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
-import {LuSelectOption} from './option/select-option.component';
-import { ISelectClearer } from './clearer/select-clearer.model';
-import { LuSelectClearerComponent } from './clearer/select-clearer.component';
-import { ASelectOptionFeeder, ISelectOptionFeeder } from './option/feeder/';
+import {
+	LuSelectOption,
+	ASelectOptionFeeder,
+	ISelectOptionFeeder,
+} from './option';
+import {
+	ISelectClearer,
+	LuSelectClearerComponent,
+} from './clearer';
+import {
+	sameOption,
+	findOption
+} from './utils';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -72,6 +81,7 @@ const TAB = 'Tab';
 	],
 	styleUrls: ['./select.component.scss'],
 })
+// tslint:disable-next-line:component-class-suffix
 export class LuSelect<T>
 implements
 	ControlValueAccessor,
@@ -105,7 +115,7 @@ implements
 		const lastValue = this._value;
 		this._value = valueTemp;
 		// emit change
-		if (!this._same(lastValue, valueTemp)) {
+		if (!sameOption(lastValue, valueTemp)) {
 			this.isFilled = !!this._value;
 			this._cvaOnChange(valueTemp);
 			if (this.clearer) {
@@ -116,7 +126,7 @@ implements
 
 		}
 		// We render the option
-		this._selectOption = this._picker.find(value);
+		this._selectOption = findOption(this._picker.luSelectOptions(), value);
 		// render
 		this.render(this._selectOption);
 	}
@@ -380,18 +390,5 @@ implements
 		this.canRemove(this.clearer && !!this.value);
 	}
 
-	/** detect via JSON.stringify if both value are equals */
-	protected _same(oldItem: T, newItem: T) {
-		if (oldItem === newItem) {
-			return true;
-		}
-		if (!oldItem && !newItem) {
-			return true;
-		}
-		if (!oldItem || !newItem) {
-			return false;
-		}
-		return JSON.stringify(oldItem) === JSON.stringify(newItem);
-	}
 
 }

@@ -156,33 +156,7 @@ export class LuSelectPicker<T>
 			this._options$.next(this.luOptions$.getValue().map<T>(luOption => luOption.luOptionValue));
 	}
 
-	/**
-	 * Check if two objects are equals (use JSON.Stringify)
-	 * @param oldItem the first item to compare
-	 * @param newItem the second item to compare
-	 * @returns true if the elements are equals.
-	 */
-	protected same(oldItem: T, newItem: T): boolean {
-		if (oldItem === newItem) {
-			return true;
-		}
-		if (!oldItem && !newItem) {
-			return true;
-		}
-		if (!oldItem || !newItem) {
-			return false;
-		}
-		return JSON.stringify(oldItem) === JSON.stringify(newItem);
-	}
 
-	/**
-	 * Search an option in the list of options of the popover
-	 * @param option the option to find
-	 * @returns an observable of the LuSelectOption find
-	 */
-	find(option: T): LuSelectOption<T> {
-		return this.luOptions$.getValue().find(selectOption => this.same(selectOption.luOptionValue, option));
-	}
 	/**
 	 * Search for highliting the option corresponding to the clue
 	 * @param clue
@@ -226,7 +200,7 @@ export class LuSelectPicker<T>
 		}
 
 		this._highlightIndex = selectOptions.findIndex((selectOption) => {
-			return this.same(selectOption.luOptionValue, option);
+			return sameOption(selectOption.luOptionValue, option);
 		});
 
 		this._highlightIndex$.next(this._highlightIndex);
