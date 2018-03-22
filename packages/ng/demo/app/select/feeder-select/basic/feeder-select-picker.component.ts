@@ -12,7 +12,7 @@ import {
 	OnInit,
 	QueryList
 } from '@angular/core';
-import { ASelectOptionFeeder, LuSelectOption, LuSelectOptionSelectionChange, LuSelectSearchIntl } from '../../../../src/app/select/';
+import { ASelectOptionFeeder, LuSelectOption, LuSelectOptionSelectionChange, LuSelectSearchIntl } from '../../../../../src/app/select/';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -33,8 +33,7 @@ export class DemoSelectFeederPickerComponent
 		OnDestroy,
 		OnInit,
 		AfterViewInit
-		 {
-
+{
 
 	private _intlChanges: Subscription;
 
@@ -97,8 +96,17 @@ export class DemoSelectFeederPickerComponent
 		this._callbackSelectOption(option.source);
 	}
 
+	/**
+	 * See ISelectOptionFeeder
+	*/
 	textValue(item: any): string {
 		return item.name;
+	}
+
+	/**
+	 * See ISelectOptionFeeder
+	*/
+	open(): void {
 	}
 
 }
