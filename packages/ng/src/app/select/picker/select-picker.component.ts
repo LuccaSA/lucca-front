@@ -28,9 +28,14 @@ import {defer} from 'rxjs/observable/defer';
 import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
-// import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange } from '../option';
-import {ISelectOptionFeeder } from '../option/feeder';
+import {
+	LuSelectOption,
+	LuSelectOptionSelectionChange,
+	ISelectOptionFeeder,
+} from '../option';
+import {
+	sameOption,
+} from '../utils';
 
 
 /**
@@ -44,6 +49,7 @@ import {ISelectOptionFeeder } from '../option/feeder';
 		transformPopover,
 	],
 })
+// tslint:disable-next-line:component-class-suffix
 export class LuSelectPicker<T>
 	extends LuPopoverComponent
 	implements OnInit,
@@ -143,7 +149,7 @@ export class LuSelectPicker<T>
 				luOption.onSelectionChange.subscribe((event: LuSelectOptionSelectionChange<T>) => this.selectOption(event.source.luOptionValue));
 
 			});
-			if (forceChangeValue){
+			if (forceChangeValue) {
 				this.selectOption(this._selectOptionValue);
 			}
 			this._optionsLength = this.luOptions$.getValue().length;
@@ -201,7 +207,7 @@ export class LuSelectPicker<T>
 		this._selectWithoutEmit(option);
 		const luSelectOption = selectOptions[this._highlightIndex];
 		// We let the selection be effective even if the list is empty, (we won't fire any event in that case)
-		if (luSelectOption){
+		if (luSelectOption) {
 			this.itemSelected.emit(luSelectOption);
 		}
 	}
@@ -292,10 +298,10 @@ export class LuSelectPicker<T>
 	/**
 	 * Inner function to deal with scroll
 	*/
-	private _scrollTo(){
-		if (this.optionFeeder){
+	private _scrollTo() {
+		if (this.optionFeeder) {
 			this.optionFeeder.scrollTo(this._highlightIndex);
-		}else{
+		}else {
 			const luOption = this.luOptions$.getValue()[this._highlightIndex];
 			this._elementRef.nativeElement.scrollTop = luOption.offsetTop();
 		}

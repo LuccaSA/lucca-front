@@ -10,14 +10,18 @@ import {
 	OnDestroy,
 	QueryList
 } from '@angular/core';
-import { ISelectSearcher } from './select-searcher.model';
-import { ASelectOptionFeeder } from '../option/feeder/';
-import { LuSelectOption } from '../option/select-option.component';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import {
+	LuSelectOption,
+	ASelectOptionFeeder
+} from '../option';
+import {findOption} from '../utils';
+import { ISelectSearcher } from './select-searcher.model';
 import { LuSelectSearchIntl } from './select-searcher.intl';
+
 
 @Component({
 	selector: 'lu-select-searcher',
@@ -47,8 +51,8 @@ export class LuSelectSearcherComponent<T>
 	 * The options detected
 	 */
 	@ContentChildren(LuSelectOption, { descendants: true }) luOptions: QueryList<LuSelectOption<T>>;
-	@ViewChild('inputClue') _inputElement : ElementRef;
-	@ViewChild('scrollElement') _scrollElement : ElementRef;
+	@ViewChild('inputClue') _inputElement: ElementRef;
+	@ViewChild('scrollElement') _scrollElement: ElementRef;
 
 
 	constructor(public _intl: LuSelectSearchIntl,
@@ -64,7 +68,7 @@ export class LuSelectSearcherComponent<T>
 			this._noResults = optionsFiltered.length === 0;
 			this.luOptions.reset(optionsFiltered);
 			this.luOptions.notifyOnChanges();
-			if (this._callbackOptions){
+			if (this._callbackOptions) {
 				this._callbackOptions(optionsFiltered);
 			}
 		});
@@ -95,7 +99,7 @@ export class LuSelectSearcherComponent<T>
 		this._originalList.forEach(luOption => luOption.displayed = true);
 	}
 
-	_onKeydown($event: KeyboardEvent){
+	_onKeydown($event: KeyboardEvent) {
 		this._callbackKeyEvent($event);
 	}
 
@@ -111,7 +115,7 @@ export class LuSelectSearcherComponent<T>
 			})
 			.filter((option) => {
 			let valueOption = this.innerMap[option.viewValue];
-			if (!valueOption){
+			if (!valueOption) {
 				this.innerMap[option.viewValue] = this._normalizeString(option.viewValue);
 				valueOption = this.innerMap[option.viewValue];
 			}
@@ -125,8 +129,8 @@ export class LuSelectSearcherComponent<T>
 	}
 
 
-	private _normalizeString(str: string){
-		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
+	private _normalizeString(str: string) {
+		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 	}
 
 

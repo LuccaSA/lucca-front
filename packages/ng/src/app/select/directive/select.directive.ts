@@ -25,6 +25,7 @@ export class LuSelectDirective
 extends LuPopoverTrigger {
 
 	/** the name of the picker linked to this input */
+	// tslint:disable-next-line:no-input-rename
 	@Input('luSelect') popover: LuSelectPicker<any>;
 	/** Fire an event when the popup is closed */
 	@Output() close = new EventEmitter();
