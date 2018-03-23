@@ -1,0 +1,13 @@
+<section class="contentSection">
+		<h3>Component With api select</h3>
+		<div class="textfield">
+			<select-api [(ngModel)]="itemSelect"
+				[selectApiFeeder]="apiSelectFeeder"
+				class="textfield-input"
+				placeholder="placeholder"
+				name="itemOptions">
+			</select-api>
+			<label class="textfield-label" for="itemOptions">my label</label>
+		</div>
+		<code class="code mod-block">{{ itemSelect | json }}</code>
+	</section>
