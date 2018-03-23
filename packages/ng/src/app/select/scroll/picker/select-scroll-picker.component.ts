@@ -1,5 +1,4 @@
 import {
-	Component,
 	Input,
 	AfterViewInit,
 	ViewChild,
@@ -20,13 +19,6 @@ import { Subject } from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ISelectScrollable } from './select-scroll-picker.model';
 
-@Component({
-	// tslint:disable-next-line:component-selector
-	selector: 'select-scroll-picker',
-	templateUrl: './select-scroll-picker.component.html',
-	styleUrls: ['./select-scroll-picker.component.scss'],
-	providers: [{provide: ASelectOptionFeeder, useExisting: forwardRef(() => ASelectScrollPicker)}]
-})
 /**
  * Component that manage the possibility to search in the options of a select.
  */
