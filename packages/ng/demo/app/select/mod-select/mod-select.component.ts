@@ -8,8 +8,8 @@ declare var require: any;
 export class DemoModSelectComponent {
 	snippets = {
 		mod: {
-			code: require('!!prismjs-loader?lang=typescript!./mod-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./mod-select.component.html')
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
 		},
 	};
 }
