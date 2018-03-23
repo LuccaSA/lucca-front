@@ -13,7 +13,7 @@
 		<ng-content></ng-content>
 	</div>
 </div>
-<div class="switch">
+<div class="switch" *ngIf="snippets">
 	<input type="checkbox" class="switch-input" id="{{demo}}" (click)="toggleCode()">
 	<label for="{{demo}}" class="switch-label">{{showCode ? 'Show' : 'Hide'}} source code</label>
 </div>
