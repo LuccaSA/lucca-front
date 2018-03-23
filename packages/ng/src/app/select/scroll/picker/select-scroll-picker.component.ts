@@ -35,8 +35,6 @@ export abstract class ASelectScrollPicker<T>
 	protected _noMoreResults = false;
 	protected _requestSubscription: Subscription;
 
-	@Input() scrollStrategy: ISelectScrollable<T>;
-
 	/** The scroll element */
 	@ViewChild('scrollElement') _scrollElement: ElementRef;
 	/** The list of users (option) */
@@ -57,10 +55,6 @@ export abstract class ASelectScrollPicker<T>
 				this._callbackOptions(this._optionsList.toArray());
 			}
 		});
-		if (!this.scrollStrategy) {
-			// tslint:disable-next-line:no-string-throw
-			throw 'no scrollStrategy is set';
-		}
 	}
 
 	// Events
