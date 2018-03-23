@@ -30,7 +30,7 @@ export abstract class ASelectRDDApiFeeder<T extends IApiItem> implements ISelect
 		}
 
 		const params = [
-				`${this.getClueField()}=${encodeURIComponent(clue)}`,
+				`${this.getClueField()}=like,${encodeURIComponent(clue)}`,
 				`paging=${this._pagingStart},${this.getPagingStep()}`,
 				`fields=${this.getFields().join(',')}`,
 			];
