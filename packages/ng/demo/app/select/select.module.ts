@@ -5,6 +5,7 @@ import { LuEmptyModule } from '../../../src/app/empty/empty.module';
 import { LuSelectModule } from '../../../src/app/select/select.module';
 import { DemoSelectComponent } from './select.component';
 import { DemoSimpleSelectComponent } from './simple-select/simple-select.component';
+import { DemoApiSelectModule } from './api-select/api-select.module';
 import { DemoClearerSelectModule } from './clearer-select/clearer-select.module';
 import { DemoFeederSelectModule } from './feeder-select/feeder-select.module';
 import { DemoModSelectModule } from './mod-select/mod-select.module';
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared';
 		SharedModule,
 		LuEmptyModule,
 		LuSelectModule,
+		DemoApiSelectModule,
 		DemoClearerSelectModule,
 		DemoModSelectModule,
 		DemoFeederSelectModule,
