@@ -13,6 +13,13 @@ export class DemoApiSelectComponent {
 		picker: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/api-select-feeder')
 		},
+		custom: {
+			code: require('!!prismjs-loader?lang=typescript!./custom/custom'),
+			markup: require('!!prismjs-loader?lang=markup!./custom/custom.html')
+		},
+		customfeeder: {
+			code: require('!!prismjs-loader?lang=typescript!./custom/custom-select-feeder')
+		},
 	};
 
 }
