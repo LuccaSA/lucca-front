@@ -59,9 +59,10 @@ export abstract class ASelectScrollPicker<T>
 
 	// Events
 		_onScroll($event: Event) {
+		const scrollHeight = this._scrollElement.nativeElement.scrollHeight;
 		const height = this._scrollElement.nativeElement.offsetHeight;
 		const top = this._scrollElement.nativeElement.scrollTop;
-		if (height - top < 50 && !this._loading && !this._noMoreResults) {
+		if (scrollHeight - height - top < 50 && !this._loading && !this._noMoreResults) {
 			this._populateList();
 		}
 	}
