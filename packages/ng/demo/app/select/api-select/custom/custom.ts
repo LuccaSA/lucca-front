@@ -8,6 +8,7 @@ import {DemoCustomApiSelectFeeder} from './custom-select-feeder';
 })
 export class CustomApiSelectComponent {
 
+	itemSelect: any;
 	constructor(
 		public apiSelectFeeder: DemoCustomApiSelectFeeder) {
 	}
