@@ -6,6 +6,7 @@
 ### Adding
 ### Enhancements
 ### Fixes
+- `navSide` Fix bottom link (safari)
 
 ## 0.4.1
 ### Updated peerDependencies
