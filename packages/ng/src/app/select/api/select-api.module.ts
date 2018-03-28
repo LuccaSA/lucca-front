@@ -6,7 +6,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { LuSelectDirectiveModule } from '../directive';
 import { LuSelectPickerModule } from '../picker';
-import { LuApiPickerModule } from './picker/select-api-picker.module';
+import { LuApiPickerModule } from './picker';
 import { LuSelectApi } from './select-api.component';
 
 @NgModule({
@@ -25,6 +25,7 @@ import { LuSelectApi } from './select-api.component';
 	],
 	exports: [
 		LuSelectApi,
+		LuApiPickerModule,
 	]
 })
 export class LuSelectApiModule { }
