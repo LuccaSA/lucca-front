@@ -7,26 +7,12 @@ import {
 } from '@angular/core';
 import {
 	NgModel,
-	ControlValueAccessor,
 	NG_VALUE_ACCESSOR,
 	NG_VALIDATORS,
-	Validator,
-	Validators,
-	ValidatorFn,
-	ValidationErrors,
-	AbstractControl
 } from '@angular/forms';
 import {
 	LuSelect,
 } from '../select.component';
-import {
-	LuSelectClearerComponent,
-	ISelectClearer,
-} from '../clearer';
-import {
-	ASelectOptionFeeder,
-	ISelectOptionFeeder
-} from '../option';
 import { ISelectApiFeeder } from './picker';
 /**
  * User select

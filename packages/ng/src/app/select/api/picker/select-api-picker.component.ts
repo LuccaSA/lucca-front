@@ -14,6 +14,7 @@ import {
 	ASelectOptionFeeder,
 	ISelectOptionFeeder,
 	LuSelectOption,
+	LuSelectOptionSelectionChange,
 } from '../../option';
 import {
 	LuSelectSearchIntl,
@@ -154,8 +155,8 @@ export class LuSelectApiPicker<T>
 		return this.selectApiFeeder.getItems(this._clue);
 	}
 
-	_selectUser(user: LuSelectOption<T>) {
-		this._callbackSelectOption(user);
+	_selectOption(option: LuSelectOptionSelectionChange<T>) {
+		this._callbackSelectOption(option.source);
 	}
 
 }
