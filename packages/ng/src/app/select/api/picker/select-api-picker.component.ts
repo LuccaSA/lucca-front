@@ -79,13 +79,11 @@ export class LuSelectApiPicker<T>
 				this.selectApiFeeder.resetPagingStart();
 				this._options = [];
 				this._populateList();
-				// this._resetOptions(this._clue);
 			});
 
 			this._intlChanges = _intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
 			this._options = [];
-			this._populateList();
-			// this._resetOptions('', true);
+			// this._populateList();
 	}
 
 	ngOnDestroy() {
@@ -98,6 +96,8 @@ export class LuSelectApiPicker<T>
 			// tslint:disable-next-line:no-string-throw
 			throw 'selectApiFeeder attribute is not set';
 		}
+		this._populateList();
+
 	}
 
 	// Events
