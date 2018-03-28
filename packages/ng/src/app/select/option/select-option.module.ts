@@ -13,7 +13,7 @@ import { LuSelectOptionFeederModule } from './feeder/select-option-feeder.module
 	],
 	exports: [
 		LuSelectOption,
-		LuSelectOptionFeederModule
+		LuSelectOptionFeederModule,
 	]
 })
 export class LuSelectOptionModule { }
