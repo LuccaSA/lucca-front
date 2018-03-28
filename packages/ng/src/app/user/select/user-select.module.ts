@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuSelectModule } from '../../select';
 import { LuUserSelect } from './user-select.component';
+import { UserSelectApiFeeder } from './user-select-api-feeder';
 import { HttpClientModule } from '@angular/common/http';
-import { LuUserPickerModule } from './picker/user-select-picker.module';
 
 @NgModule({
 	imports: [
@@ -14,15 +14,17 @@ import { LuUserPickerModule } from './picker/user-select-picker.module';
 		FormsModule,
 		BrowserModule,
 		OverlayModule,
-		LuSelectModule,
 		HttpClientModule,
-		LuUserPickerModule,
+		LuSelectModule,
 	],
 	declarations: [
 		LuUserSelect,
 	],
 	exports: [
 		LuUserSelect,
+	],
+	providers: [
+		{ provide: UserSelectApiFeeder, useClass: UserSelectApiFeeder },
 	]
 })
 export class LuUserSelectModule { }
