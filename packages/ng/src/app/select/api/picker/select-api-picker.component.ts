@@ -22,7 +22,7 @@ import {
 import {
 	ASelectScrollPicker,
 } from '../../scroll';
-import {ISelectApiFeeder} from './select-api-picker.model';
+import {ISelectApiFeeder} from '../feeder';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -32,6 +32,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {merge} from 'rxjs/observable/merge';
 import {defer} from 'rxjs/observable/defer';
 import {empty} from 'rxjs/observable/empty';
+import {IApiItem} from '../../../api/api.model';
 
 @Component({
 	// tslint:disable-next-line:component-selector
@@ -44,7 +45,7 @@ import {empty} from 'rxjs/observable/empty';
  * Component that manage the possibility to search in the options of a select.
  */
 // tslint:disable-next-line:component-class-suffix
-export class LuSelectApiPicker<T>
+export class LuSelectApiPicker<T extends IApiItem = IApiItem>
 	extends ASelectScrollPicker<T>
 	implements
 		OnDestroy,
