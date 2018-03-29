@@ -5,6 +5,7 @@
 ### Breaking changes
 ### Adding
 ### Enhancements
+- `icons` path target cdn by default
 ### Fixes
 - `navSide` Fix bottom link (safari)
 
