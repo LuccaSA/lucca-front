@@ -34,16 +34,6 @@ palettes.override.scss
 sizes.override.scss
 ```
 
-Override icons link in icons.override.scss (will be improved soon):
-
-```
-$icons: (
-	"prefix": "icon",
-	"font-path": "//cdn.lucca.fr/lucca-front/icons/latest/font/lucca-icons",
-);
-$theme: _set($theme, "icons", $icons);
-```
-
 ### Import scss and overrides
 
 Import Lucca Front in src/style.scss (or your main scss file):
