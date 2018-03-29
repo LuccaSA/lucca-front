@@ -9,6 +9,7 @@ import { IUser } from '../../../../../src/app/user';
 export class DisplayFormatComponent implements OnInit {
 
 	anais: IUser = {
+		id: 12,
 		firstName: 'Anaïs',
 		lastName: 'Lemoustier',
 		jobTitle: 'Actress'

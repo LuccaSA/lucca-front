@@ -8,6 +8,7 @@ import { IUser } from '../../../../../src/app/user';
 })
 export class SizesComponent implements OnInit {
 	jeanMich: IUser = {
+		id: 12,
 		firstName: 'Jean-Michel',
 		lastName: 'Pasdephoto',
 		picture: { href: '' },
