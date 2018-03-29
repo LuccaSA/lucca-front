@@ -7,10 +7,13 @@ import {DemoApiSelectFeeder} from './api-select-feeder';
 	templateUrl: './basic.html',
 })
 export class BasicApiSelectComponent {
+	api = '/api/v3/axissections';
+	params = ['axisId=5'];
 
 	itemSelect: any;
 	constructor(
 		public apiSelectFeeder: DemoApiSelectFeeder) {
 	}
+
 
 }
