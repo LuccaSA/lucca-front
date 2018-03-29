@@ -1,20 +1,22 @@
 import { async, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {LuSelectApi} from './select-api.component';
-import {ISelectApiFeeder} from './picker';
+import {
+	ISelectApiFeeder,
+	LuSelectApiPicker,
+} from './picker';
 import {
 	LuSelectOption,
 	LuSelectSearchIntl,
 	LuSelect,
 	LuSelectPicker,
 	LuSelectDirective,
-	LuSelectApiPicker
 } from '../../select';
 import { Component} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import {Platform} from '@angular/cdk/platform';
 import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {OVERLAY_PROVIDERS, ScrollStrategyOptions, ScrollDispatcher} from '@angular/cdk/overlay';
 
 
@@ -52,7 +54,6 @@ export class WrapperApiSelect {
 
 describe('LuSelectApi', () => {
 
-	let http: HttpTestingController;
 
 	const users = [{
 		id: 1,
@@ -93,7 +94,6 @@ describe('LuSelectApi', () => {
 				LuSelectSearchIntl,
 			],
 			imports: [
-				HttpClientTestingModule,
 				FormsModule,
 			],
 			declarations: [
@@ -106,7 +106,6 @@ describe('LuSelectApi', () => {
 				WrapperApiSelect,
 			]
 		}).compileComponents();
-	http = TestBed.get(HttpTestingController);
 	});
 
 
