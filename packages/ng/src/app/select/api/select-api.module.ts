@@ -8,6 +8,7 @@ import { LuSelectDirectiveModule } from '../directive';
 import { LuSelectPickerModule } from '../picker';
 import { LuApiPickerModule } from './picker';
 import { LuSelectApi } from './select-api.component';
+import { LuApiFeederModule } from './feeder';
 
 @NgModule({
 	imports: [
@@ -19,6 +20,7 @@ import { LuSelectApi } from './select-api.component';
 		LuApiPickerModule,
 		LuSelectDirectiveModule,
 		LuSelectPickerModule,
+		LuApiFeederModule,
 	],
 	declarations: [
 		LuSelectApi,
@@ -26,6 +28,7 @@ import { LuSelectApi } from './select-api.component';
 	exports: [
 		LuSelectApi,
 		LuApiPickerModule,
+		LuApiFeederModule,
 	]
 })
 export class LuSelectApiModule { }

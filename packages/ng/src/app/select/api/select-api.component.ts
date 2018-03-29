@@ -13,7 +13,8 @@ import {
 import {
 	LuSelect,
 } from '../select.component';
-import { ISelectApiFeeder } from './picker';
+import { ISelectApiFeeder } from './feeder';
+import {IApiItem} from '../../api/api.model';
 /**
  * User select
  *
@@ -29,7 +30,7 @@ import { ISelectApiFeeder } from './picker';
 	],
 })
 // tslint:disable-next-line:component-class-suffix
-export class LuSelectApi<T>
+export class LuSelectApi<T extends IApiItem = IApiItem>
 extends LuSelect<T> {
 
 	@Input() selectApiFeeder: ISelectApiFeeder<T>;
