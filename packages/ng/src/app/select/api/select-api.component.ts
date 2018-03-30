@@ -30,7 +30,7 @@ import {IApiItem} from '../../api/api.model';
 	],
 })
 // tslint:disable-next-line:component-class-suffix
-export class LuSelectApi<T extends IApiItem = IApiItem>
+export class LuSelectApi<T = any>
 extends LuSelect<T> {
 
 	@Input() selectApiFeeder: ISelectApiFeeder<T>;
