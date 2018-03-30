@@ -2,6 +2,20 @@
 
 ## In Dev
 ### New features
+- `lu-api-select` Add Component for Api Select
+- `lu-rdd-select` Add Component for Api RDD Select
+- `ISelectScrollable`: Interface to manipulate Infinite scroll select
+- `ISelectApiFeeder`: Interface to manipulate select calling an API
+- `ASelectRDDApiFeeder`: Abstract implementation of ISelectApiFeeder dedicate to RDD Apis call
+### Fixes
+### Breaking changes
+- `user-select` becomes `lu-user-select`
+- `lu-api-picker`: remove the component, you should use the `lu-api-select` or `lu-rdd-select` instead
+### Updated dependencies
+### Updated devDependencies
+
+## 0.5.0
+### New features
 - `lu-user-picture` now has a displayFormat attribute. Default to "FL"
 - `user-select`: Add component for user select
 - `user-select-picker`: Add a picker that implements IOptionFeeder for the user select
@@ -10,8 +24,6 @@
 - `style` - ng-invalid is now apply to `.textfield-input` instead of just `input`
 ### Breaking changes
 - `lu-select`: remove `mod` attribute, you should specify the mod of select only through the parent with class `mod-*`
-### Updated dependencies
-### Updated devDependencies
 
 ## 0.4.1
 ### Updated peerDependencies
