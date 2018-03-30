@@ -18,8 +18,8 @@ import { UserSelectApiFeeder } from './user-select-api-feeder';
 
 
 @Component({
-	template: `<user-select [(ngModel)]="item">
-		</user-select>
+	template: `<lu-user-select [(ngModel)]="item">
+		</lu-user-select>
 	`,
 })
 // tslint:disable-next-line:component-class-suffix

@@ -27,7 +27,7 @@ import { UserSelectApiFeeder } from './user-select-api-feeder';
 */
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'user-select',
+	selector: 'lu-user-select',
 	templateUrl: './user-select.component.html',
 	styleUrls: ['./user-select.component.scss'],
 	providers: [
