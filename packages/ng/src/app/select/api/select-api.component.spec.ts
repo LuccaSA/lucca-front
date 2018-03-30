@@ -2,9 +2,11 @@ import { async, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {LuSelectApi} from './select-api.component';
 import {
-	ISelectApiFeeder,
 	LuSelectApiPicker,
 } from './picker';
+import {
+	ISelectApiFeeder,
+} from './feeder';
 import {
 	LuSelectOption,
 	LuSelectSearchIntl,

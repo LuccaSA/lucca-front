@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ISelectApiFeeder, ASelectRDDApiFeeder } from './api-feeder.model';
+import { IApiItem } from 'public_api';
 
 @Component({
 	moduleId: module.id,
@@ -7,7 +8,7 @@ import { ISelectApiFeeder, ASelectRDDApiFeeder } from './api-feeder.model';
 	template: '',
 	exportAs: 'luApiFeeder',
 })
-export class RDDApiFeederComponent extends ASelectRDDApiFeeder implements ISelectApiFeeder {
+export class RDDApiFeederComponent<T extends IApiItem> extends ASelectRDDApiFeeder<T> implements ISelectApiFeeder<T> {
 	@Input() api: string;
 	@Input() fields: string[];
 	@Input() params: string[];

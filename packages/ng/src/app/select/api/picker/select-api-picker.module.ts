@@ -21,5 +21,5 @@ import { LuSelectOptionModule } from '../../option';
 		LuSelectApiPicker,
 	]
 })
-export class LuApiPickerModule { }
+export class LuSelectApiPickerModule { }
 
