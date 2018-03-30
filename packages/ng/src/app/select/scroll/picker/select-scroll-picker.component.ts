@@ -20,7 +20,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ISelectScrollable } from './select-scroll-picker.model';
 
 /**
- * Component that manage the possibility to search in the options of a select.
+ * Component that manage the possibility to load the options in an infinite scroll way
  */
 // tslint:disable-next-line:component-class-suffix
 export abstract class ASelectScrollPicker<T>
@@ -59,6 +59,7 @@ export abstract class ASelectScrollPicker<T>
 
 	// Events
 		_onScroll($event: Event) {
+			// We ask more items when the scroll gooes to (size global of scroll - position of scroll - height of area)
 		const scrollHeight = this._scrollElement.nativeElement.scrollHeight;
 		const height = this._scrollElement.nativeElement.offsetHeight;
 		const top = this._scrollElement.nativeElement.scrollTop;
@@ -70,12 +71,14 @@ export abstract class ASelectScrollPicker<T>
 
 	protected _populateList(): void {
 		this._loading = true;
+		// We manage a clean way to cancel the previous observable
 		if (this._requestSubscription && !this._requestSubscription.closed) {
 			this._requestSubscription.unsubscribe();
 			this._requestSubscription = null;
 		}
 
 		this._requestSubscription = this.loadMoreOptions().subscribe((additionnalOptions) => {
+			// In all case we concat the list because if it the first time we search, we will concat an empty array to the results
 			this._options = this._options.concat(additionnalOptions);
 			this._optionsList.setDirty();
 			this._optionsList.notifyOnChanges();
@@ -106,7 +109,7 @@ export abstract class ASelectScrollPicker<T>
 	abstract textValue(item: T): string;
 
 	/**
-	 *
+	 * See ISelectScrollable
 	 */
 	abstract loadMoreOptions(): Observable<T[]>;
 }

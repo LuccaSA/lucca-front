@@ -16,7 +16,7 @@ import {
 import { ISelectApiFeeder } from './feeder';
 import {IApiItem} from '../../api/api.model';
 /**
- * User select
+ * Api select : A select that will load items from an external service
  *
 */
 @Component({
@@ -33,6 +33,9 @@ import {IApiItem} from '../../api/api.model';
 export class LuSelectApi<T = any>
 extends LuSelect<T> {
 
+	/**
+	 * Refence the ISelectApiFeeder instance that will be use to fill the select
+	 */
 	@Input() selectApiFeeder: ISelectApiFeeder<T>;
 
 

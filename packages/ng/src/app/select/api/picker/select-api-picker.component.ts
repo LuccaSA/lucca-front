@@ -55,6 +55,7 @@ export class LuSelectApiPicker<T = any>
 	_clue = '';
 	_noResults = false;
 	private _clue$: Subject<string> = new Subject<string>();
+	/** Refence the ISelectApiFeeder instance that will be use to fill the select */
 	@Input() selectApiFeeder: ISelectApiFeeder<T>;
 
 	private _intlChanges: Subscription;
@@ -84,7 +85,6 @@ export class LuSelectApiPicker<T = any>
 
 			this._intlChanges = _intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
 			this._options = [];
-			// this._populateList();
 	}
 
 	ngOnDestroy() {
@@ -97,6 +97,7 @@ export class LuSelectApiPicker<T = any>
 			// tslint:disable-next-line:no-string-throw
 			throw 'selectApiFeeder attribute is not set';
 		}
+		// We initialize at first the list with a first set
 		this._populateList();
 
 	}
@@ -129,13 +130,13 @@ export class LuSelectApiPicker<T = any>
 	 * See ISelectOptionFeeder
 	*/
 	open(): void {
+		// When we open the list we reset the start index because we load all items when opening the popup
 		this.selectApiFeeder.resetPagingStart();
 		this._focused = true;
 		this._inputElement.nativeElement.focus();
 		if (!this._options || this._options.length === 0) {
 			this._options = [];
 			this._populateList();
-			// this._resetOptions('', true);
 		}
 	}
 
@@ -149,6 +150,9 @@ export class LuSelectApiPicker<T = any>
 		return this.selectApiFeeder.textValue(item);
 	}
 
+	/**
+	 * See ISelectScrollable
+	 */
 	loadMoreOptions(): Observable<T[]> {
 		if (!this.selectApiFeeder) {
 			return empty();
