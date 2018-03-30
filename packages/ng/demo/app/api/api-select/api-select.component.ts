@@ -11,7 +11,7 @@ export class DemoApiSelectComponent {
 			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
 		},
 		picker: {
-			code: require('!!prismjs-loader?lang=typescript!./basic/api-select-feeder')
+			code: require('!!prismjs-loader?lang=typescript!./basic/rdd-select-feeder')
 		},
 		custom: {
 			code: require('!!prismjs-loader?lang=typescript!./custom/custom'),

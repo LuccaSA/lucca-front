@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LuSelectApiPicker } from './select-api-picker.component';
-import { LuSelectOptionModule } from '../../../select';
-import { LuApiFeederModule } from '../feeder';
+import { LuSelectOptionModule, LU_SELECT_SEARCH_INTL_PROVIDER } from '../../../select';
 
 @NgModule({
 	imports: [
@@ -13,7 +12,6 @@ import { LuApiFeederModule } from '../feeder';
 		FormsModule,
 		BrowserModule,
 		HttpClientModule,
-		LuApiFeederModule,
 		LuSelectOptionModule,
 	],
 	declarations: [
@@ -21,7 +19,8 @@ import { LuApiFeederModule } from '../feeder';
 	],
 	exports: [
 		LuSelectApiPicker,
-	]
+	],
+	providers: [LU_SELECT_SEARCH_INTL_PROVIDER]
 })
 export class LuSelectApiPickerModule { }
 

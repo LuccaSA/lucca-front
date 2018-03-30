@@ -1,3 +1,1 @@
-export { ASelectRDDApiFeeder, ISelectApiFeeder } from './api-feeder.model';
-export { RDDApiFeederComponent } from './api-feeder.component';
-export { LuApiFeederModule } from './api-feeder.module';
+export { ASelectApiFeederWithPaging, ISelectApiFeeder, ISelectApiFeederWithPaging } from './api-feeder.model';

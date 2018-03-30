@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { ISelectApiFeeder, ASelectRDDApiFeeder } from './api-feeder.model';
-import { IApiItem } from '../../../api';
+import { ASelectRDDFeeder } from './rdd-feeder.model';
+import { IRddItem } from '../../rdd.model';
 
 @Component({
 	moduleId: module.id,
-	selector: 'lu-api-feeder',
+	selector: 'lu-rdd-feeder',
 	template: '',
-	exportAs: 'luApiFeeder',
+	exportAs: 'luRddFeeder',
 })
-export class RDDApiFeederComponent<T extends IApiItem> extends ASelectRDDApiFeeder<T> implements ISelectApiFeeder<T> {
+export class RDDApiFeederComponent<T extends IRddItem> extends ASelectRDDFeeder<T> {
 	@Input() api: string;
 	@Input() fields: string[];
 	@Input() params: string[];

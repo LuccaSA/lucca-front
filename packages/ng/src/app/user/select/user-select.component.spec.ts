@@ -6,9 +6,11 @@ import {
 	LuSelectSearchIntl,
 	LuSelect,
 	LuSelectPicker,
-	LuSelectDirective,
-	LuSelectApiPicker
+	LuSelectDirective
 } from '../../select';
+import {
+	LuSelectApiPicker
+} from '../../api';
 import { Component} from '@angular/core';
 import {Platform} from '@angular/cdk/platform';
 import { FormsModule } from '@angular/forms';

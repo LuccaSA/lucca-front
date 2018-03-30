@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { LuSelectModule } from '../../select';
 import { LuSelectApiPickerModule } from './picker';
 import { LuSelectApi } from './select-api.component';
-import { LuApiFeederModule } from './feeder';
 
 @NgModule({
 	imports: [
@@ -18,7 +17,6 @@ import { LuApiFeederModule } from './feeder';
 		HttpClientModule,
 		LuSelectApiPickerModule,
 		LuSelectModule,
-		LuApiFeederModule,
 	],
 	declarations: [
 		LuSelectApi,
@@ -26,7 +24,6 @@ import { LuApiFeederModule } from './feeder';
 	exports: [
 		LuSelectApi,
 		LuSelectApiPickerModule,
-		LuApiFeederModule,
 	]
 })
 export class LuSelectApiModule { }

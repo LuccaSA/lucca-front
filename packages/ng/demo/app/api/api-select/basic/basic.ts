@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {DemoApiSelectFeeder} from './api-select-feeder';
+import {DemoApiSelectFeeder} from './rdd-select-feeder';
 
 @Component({
 	// tslint:disable-next-line:component-selector

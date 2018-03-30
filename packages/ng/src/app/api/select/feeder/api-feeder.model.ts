@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs/Observable';
-import {IApiItem} from '../../../api/api.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /**
@@ -9,7 +8,6 @@ export interface ISelectApiFeeder<T> {
 
 	/**
 	 * Return a list of Items according to the clue (and external parameters)
-	 * It's recommand to increment after each call of this method the paging
 	 *
 	 * @param clue the search clue
 	 */
@@ -22,16 +20,42 @@ export interface ISelectApiFeeder<T> {
 	textValue(item: T): string;
 
 	/**
+	 * Return true if the api as a paging mecanism => then it will be cast to ISelectApiFeederWithPaging
+	 */
+	isPaged(): boolean;
+
+}
+
+/**
+ * Interface to add paging behaviour to feeder
+ */
+export interface ISelectApiFeederWithPaging<T> extends ISelectApiFeeder<T> {
+	/**
 	 * Reset the paging indicator
 	 */
 	resetPagingStart();
+
+	/**
+	 * Give the paging step of api
+	 */
+	getPagingStep(): number;
+
+	/**
+	 * Return a list of Items according to the clue (and external parameters)
+	 * It's recommand to increment after each call of this method the paging
+	 *
+	 * @param clue the search clue
+	 * @param pagingStart the start paging number
+	 * @param pagingStep the paging size
+	 */
+	getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]>;
 }
 
 /**
  * Abstract class that propose an implementation of Lucca RDD Api for the interface ISelectApiFeeder
  */
 @Injectable()
-export abstract class ASelectRDDApiFeeder<T extends IApiItem> implements ISelectApiFeeder<T> {
+export abstract class ASelectApiFeederWithPaging<T> implements ISelectApiFeederWithPaging<T> {
 	_pagingStart = undefined;
 
 	constructor(
@@ -44,24 +68,13 @@ export abstract class ASelectRDDApiFeeder<T extends IApiItem> implements ISelect
 	 * See ISelectApiFeeder
 	 */
 	getItems(clue: string): Observable<T[]> {
-		if (!this._pagingStart) {
+		if (this._pagingStart === undefined) {
 			this._pagingStart = 0;
 		} else {
 			this._pagingStart += this.getPagingStep();
 		}
 
-		const params = [
-				`${this.getClueField()}=like,${encodeURIComponent(clue)}`,
-				`paging=${this._pagingStart},${this.getPagingStep()}`,
-				`fields=${this.getFields().join(',')}`,
-			];
-		const additionalParams = this.getParams();
-		if (additionalParams && additionalParams.length > 0) {
-			params.push(...additionalParams);
-		}
-		const url = `${this.getApiUrl()}?${params.join('&')}`;
-		return this._http.get<{ data: { items: T[] } }>(url)
-		.map(r => r.data.items);
+		return this.getPagedItems(clue, this._pagingStart, this.getPagingStep());
 	}
 
 	/**
@@ -74,33 +87,24 @@ export abstract class ASelectRDDApiFeeder<T extends IApiItem> implements ISelect
 	/**
 	 * See ISelectApiFeeder
 	 */
-	textValue(item: T): string {
-		return item.name;
+	isPaged(): boolean {
+		return true;
 	}
 
 	/**
+	 * See ISelectApiFeeder
+	 */
+	abstract textValue(item: T): string;
+
+	/**
 	 * Give the paging step of api
+	 * See ISelectApiFeederWithPaging
 	 */
 	abstract getPagingStep(): number;
 
 	/**
-	 * Give the rdd api url
+	 * See ISelectApiFeederWithPaging
 	 */
-	abstract getApiUrl(): string;
-
-	/**
-	 * Give the return fields
-	 */
-	abstract getFields(): string[];
-
-	/**
-	 * Give the list of additionnals parameters
-	 */
-	abstract getParams(): string[];
-
-	/**
-	 * Give the name of the field use for the search
-	 */
-	abstract getClueField(): string;
+	abstract getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]>;
 
 }

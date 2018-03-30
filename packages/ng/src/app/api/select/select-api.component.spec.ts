@@ -25,6 +25,9 @@ import {OVERLAY_PROVIDERS, ScrollStrategyOptions, ScrollDispatcher} from '@angul
 
 // tslint:disable-next-line:component-class-suffix
 export class MockApiFeeder implements ISelectApiFeeder<any> {
+	isPaged(): boolean {
+		return false;
+	}
 	getItems(clue: string): Observable<any[]> {
 		return Observable.of(<any[]>[
 			{id: 1, name: 'test 1'},
@@ -34,7 +37,6 @@ export class MockApiFeeder implements ISelectApiFeeder<any> {
 	textValue(item: any): string {
 		return 'hello mock';
 	}
-	resetPagingStart() {}
 }
 @Component({
 	template: `<lu-api-select [(ngModel)]="item"

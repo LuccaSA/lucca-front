@@ -18,7 +18,10 @@ import {
 	LuSelectSearchIntl,
 	ASelectScrollPicker,
 } from '../../../select';
-import {ISelectApiFeeder} from '../feeder';
+import {
+	ISelectApiFeeder,
+	ISelectApiFeederWithPaging
+} from '../feeder';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -28,7 +31,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {merge} from 'rxjs/observable/merge';
 import {defer} from 'rxjs/observable/defer';
 import {empty} from 'rxjs/observable/empty';
-import {IApiItem} from '../../../api/api.model';
 
 @Component({
 	// tslint:disable-next-line:component-selector
@@ -44,7 +46,6 @@ import {IApiItem} from '../../../api/api.model';
 export class LuSelectApiPicker<T = any>
 	extends ASelectScrollPicker<T>
 	implements
-		OnDestroy,
 		AfterViewInit {
 
 	// Inner references
@@ -54,7 +55,6 @@ export class LuSelectApiPicker<T = any>
 	/** Refence the ISelectApiFeeder instance that will be use to fill the select */
 	@Input() selectApiFeeder: ISelectApiFeeder<T>;
 
-	private _intlChanges: Subscription;
 	/**
 	 * The input element
 	 */
@@ -65,27 +65,25 @@ export class LuSelectApiPicker<T = any>
 
 		protected _elementRef: ElementRef,
 		public _intl: LuSelectSearchIntl,
-		private _changeDetectorRef: ChangeDetectorRef) {
-			super(_elementRef);
+		_changeDetectorRef: ChangeDetectorRef) {
+			super(_elementRef, _intl, _changeDetectorRef);
 
 			this._clue$
 			.debounceTime(100) // wait 100ms after the last event before emitting last event
 			.distinctUntilChanged() // only emit if value is different from previous value
 			.subscribe(model => {
 				this._clue = model;
-				this._noMoreResults = false;
-				this.selectApiFeeder.resetPagingStart();
+				this._noResults = false;
+				if (this.selectApiFeeder.isPaged()) {
+					(<ISelectApiFeederWithPaging<T>>this.selectApiFeeder).resetPagingStart();
+				}
 				this._options = [];
 				this._populateList();
 			});
 
-			this._intlChanges = _intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
 			this._options = [];
 	}
 
-	ngOnDestroy() {
-		this._intlChanges.unsubscribe();
-	}
 
 	ngAfterViewInit(): void {
 		super.ngAfterViewInit();
@@ -108,8 +106,7 @@ export class LuSelectApiPicker<T = any>
 	_onBlur() {
 		this._focused = false;
 		// When we quit the field, we reset the search item
-		this.selectApiFeeder.resetPagingStart();
-		this._noMoreResults = false;
+		this._noResults = false;
 		this._clue$.next('');
 	}
 
@@ -127,7 +124,9 @@ export class LuSelectApiPicker<T = any>
 	*/
 	open(): void {
 		// When we open the list we reset the start index because we load all items when opening the popup
-		this.selectApiFeeder.resetPagingStart();
+		/*if (this.selectApiFeeder.isPaged()) {
+			(<ISelectApiFeederWithPaging<T>>this.selectApiFeeder).resetPagingStart();
+		}*/
 		this._focused = true;
 		this._inputElement.nativeElement.focus();
 		if (!this._options || this._options.length === 0) {

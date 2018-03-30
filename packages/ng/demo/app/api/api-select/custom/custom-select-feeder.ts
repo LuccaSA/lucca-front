@@ -1,34 +1,36 @@
-import { ISelectApiFeeder } from '../../../../../src/app/api';
+import { ASelectApiFeederWithPaging, ISelectApiFeederWithPaging } from '../../../../../src/app/api';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class DemoCustomApiSelectFeeder implements ISelectApiFeeder<any> {
-
-	private currentStep = 0;
+export class DemoCustomApiSelectFeeder
+	extends ASelectApiFeederWithPaging<any>
+	implements ISelectApiFeederWithPaging<any> {
 
 	constructor(
 		protected _http: HttpClient
 	) {
+		super(_http);
 	}
-	getItems(clue: string): Observable<any[]> {
+	getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<any[]> {
 		const values = [];
-		for (let i = this.currentStep; i < this.currentStep + 20; i++) {
+		for (let i = pagingStart; i < pagingStart + pagingStep; i++) {
 			values.push({
 				id: `id${i}`,
 				label: `Item ${clue} ${i}`
 			});
 		}
 
-		this.currentStep += 20;
 		return this._http.get(`http://echo.jsontest.com/values/${encodeURIComponent(JSON.stringify(values))}`)
 			.map(response => JSON.parse(decodeURIComponent((<any>response).values)));
 	}
+
+	getPagingStep(): number {
+		return 20;
+	}
+
 	textValue(item: any): string {
 		return item.label;
-	}
-	resetPagingStart() {
-		this.currentStep = 0;
 	}
 }

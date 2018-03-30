@@ -4,9 +4,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LuSelectModule } from '../../../../src/app/select';
 import { LuSelectApiModule } from '../../../../src/app/api/select';
+import { LuRddFeederModule } from '../../../../src/app/rdd';
 import { SharedModule } from '../../shared/index';
 import { BasicApiSelectComponent } from './basic/basic';
-import { DemoApiSelectFeeder } from './basic/api-select-feeder';
+import { DemoApiSelectFeeder } from './basic/rdd-select-feeder';
 import { CustomApiSelectComponent } from './custom/custom';
 import { DemoCustomApiSelectFeeder } from './custom/custom-select-feeder';
 import { DemoApiSelectComponent } from './api-select.component';
@@ -20,6 +21,7 @@ import { DemoApiSelectComponent } from './api-select.component';
 		ReactiveFormsModule,
 		LuSelectModule,
 		LuSelectApiModule,
+		LuRddFeederModule,
 		SharedModule,
 	],
 	declarations: [

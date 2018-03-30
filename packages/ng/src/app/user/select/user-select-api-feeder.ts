@@ -1,16 +1,20 @@
-import { ISelectApiFeeder } from '../../api';
+import { ASelectApiFeederWithPaging, ISelectApiFeederWithPaging } from '../../api';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from '../';
 
 @Injectable()
-export class UserSelectApiFeeder<T extends IUser> implements ISelectApiFeeder<T> {
+export class UserSelectApiFeeder<T extends IUser> extends ASelectApiFeederWithPaging<T> {
 
-	private currentStep = 0;
 
 	/** The pagingStart.  */
-	pagingStart = 0;
+	set pagingStart( paging: number){
+		this._pagingStart = paging;
+	}
+	get pagingStart(){
+		return this._pagingStart;
+	}
 	/** The paging size. */
 	pagingSize = 10;
 	/** True if you want to see the former Employees. */
@@ -24,8 +28,13 @@ export class UserSelectApiFeeder<T extends IUser> implements ISelectApiFeeder<T>
 	constructor(
 		protected _http: HttpClient
 	) {
+		super(_http);
 	}
-	getItems(clue: string): Observable<T[]> {
+
+	getPagingStep(): number {
+		return this.pagingSize;
+	}
+	getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]> {
 		const fields = ['id', 'firstName', 'lastName'].concat(this.fields);
 		const params = [
 				`formerEmployees=${this.formerEmployees}`,
@@ -37,10 +46,8 @@ export class UserSelectApiFeeder<T extends IUser> implements ISelectApiFeeder<T>
 		return this._http.get<{ data: { items: T[] } }>(url)
 		.map(r => r.data.items);
 	}
+
 	textValue(item: T): string {
 		return `${item.firstName} ${item.lastName}`;
-	}
-	resetPagingStart() {
-		this.currentStep = 0;
 	}
 }

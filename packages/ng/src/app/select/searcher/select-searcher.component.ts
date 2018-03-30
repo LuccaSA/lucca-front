@@ -20,7 +20,7 @@ import {
 } from '../option';
 import {findOption} from '../utils';
 import { ISelectSearcher } from './select-searcher.model';
-import { LuSelectSearchIntl } from './select-searcher.intl';
+import { LuSelectSearchIntl } from '../utils';
 
 
 @Component({

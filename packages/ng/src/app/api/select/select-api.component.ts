@@ -14,7 +14,7 @@ import {
 	LuSelect,
 } from '../../select';
 import { ISelectApiFeeder } from './feeder';
-import {IApiItem} from '../../api/api.model';
+
 /**
  * Api select : A select that will load items from an external service
  *

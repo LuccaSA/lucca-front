@@ -5,6 +5,7 @@ import {
 	ViewChildren,
 	ElementRef,
 	forwardRef,
+	ChangeDetectorRef,
 	OnDestroy,
 	QueryList
 } from '@angular/core';
@@ -18,6 +19,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ISelectScrollable } from './select-scroll-picker.model';
+import { LuSelectSearchIntl } from '../../utils';
 
 /**
  * Component that manage the possibility to load the options in an infinite scroll way
@@ -27,13 +29,16 @@ export abstract class ASelectScrollPicker<T>
 	extends ASelectOptionFeeder<T>
 	implements
 		ISelectScrollable<T>,
-		AfterViewInit {
+		AfterViewInit,
+		OnDestroy {
 
 	// Inner references
 	_loading = false;
 	_options: T[];
-	protected _noMoreResults = false;
+	_noResults = false;
 	protected _requestSubscription: Subscription;
+
+	private _intlChanges: Subscription;
 
 	/** The scroll element */
 	@ViewChild('scrollElement') _scrollElement: ElementRef;
@@ -42,10 +47,17 @@ export abstract class ASelectScrollPicker<T>
 
 	constructor(
 
-		protected _elementRef: ElementRef) {
+		protected _elementRef: ElementRef,
+		public _intl: LuSelectSearchIntl,
+		private _changeDetectorRef: ChangeDetectorRef) {
 		super();
 		this._options = [];
 		this._populateList();
+		this._intlChanges = _intl.changes.subscribe(() => this._changeDetectorRef.markForCheck());
+	}
+
+	ngOnDestroy() {
+		this._intlChanges.unsubscribe();
 	}
 
 
@@ -63,7 +75,7 @@ export abstract class ASelectScrollPicker<T>
 		const scrollHeight = this._scrollElement.nativeElement.scrollHeight;
 		const height = this._scrollElement.nativeElement.offsetHeight;
 		const top = this._scrollElement.nativeElement.scrollTop;
-		if (scrollHeight - height - top < 50 && !this._loading && !this._noMoreResults) {
+		if (scrollHeight - height - top < 50 && !this._loading && !this._noResults) {
 			this._populateList();
 		}
 	}
@@ -82,7 +94,7 @@ export abstract class ASelectScrollPicker<T>
 			this._options = this._options.concat(additionnalOptions);
 			this._optionsList.setDirty();
 			this._optionsList.notifyOnChanges();
-			this._noMoreResults = additionnalOptions.length === 0;
+			this._noResults = additionnalOptions.length === 0;
 
 			this._requestSubscription = null;
 			this._loading = false;
