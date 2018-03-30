@@ -12,7 +12,7 @@ export interface ISelectApiFeeder<T extends IApiItem = IApiItem> {
 }
 
 @Injectable()
-export abstract class ASelectRDDApiFeeder<T extends IApiItem = IApiItem> implements ISelectApiFeeder<T> {
+export abstract class ASelectRDDApiFeeder<T = any> implements ISelectApiFeeder<T> {
 	_pagingStart = undefined;
 
 	constructor(
