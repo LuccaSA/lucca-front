@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ISelectApiFeeder, ASelectRDDApiFeeder } from './api-feeder.model';
-import { IApiItem } from 'public_api';
+import { IApiItem } from '../../../api';
 
 @Component({
 	moduleId: module.id,
