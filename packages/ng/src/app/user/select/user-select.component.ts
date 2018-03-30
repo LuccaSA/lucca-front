@@ -18,8 +18,10 @@ import {
 } from '../user.model';
 import {
 	LuSelect,
-	LuSelectApiPicker,
 } from '../../select';
+import {
+	LuSelectApiPicker,
+} from '../../api';
 import { UserSelectApiFeeder } from './user-select-api-feeder';
 /**
  * User select

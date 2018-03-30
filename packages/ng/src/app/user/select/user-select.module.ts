@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuSelectModule } from '../../select';
+import { LuSelectApiModule } from '../../api/select';
 import { LuUserSelect } from './user-select.component';
 import { UserSelectApiFeeder } from './user-select-api-feeder';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 		OverlayModule,
 		HttpClientModule,
 		LuSelectModule,
+		LuSelectApiModule,
 	],
 	declarations: [
 		LuUserSelect,

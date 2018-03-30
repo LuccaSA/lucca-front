@@ -1,4 +1,4 @@
-import { ASelectRDDApiFeeder } from '../../../../../src/app/select';
+import { ASelectRDDApiFeeder } from '../../../../../src/app/api';
 import { Injectable } from '@angular/core';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { ISelectApiFeeder } from '../../../../../src/app/select';
+import { ISelectApiFeeder } from '../../../../../src/app/api';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

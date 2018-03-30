@@ -12,7 +12,7 @@ import {
 } from '@angular/forms';
 import {
 	LuSelect,
-} from '../select.component';
+} from '../../select';
 import { ISelectApiFeeder } from './feeder';
 import {IApiItem} from '../../api/api.model';
 /**

@@ -15,13 +15,9 @@ import {
 	ISelectOptionFeeder,
 	LuSelectOption,
 	LuSelectOptionSelectionChange,
-} from '../../option';
-import {
 	LuSelectSearchIntl,
-} from '../../searcher';
-import {
 	ASelectScrollPicker,
-} from '../../scroll';
+} from '../../../select';
 import {ISelectApiFeeder} from '../feeder';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';

@@ -1,6 +1,5 @@
 export { LuSelectModule } from './select.module';
 export { LuSelect } from './select.component';
-export * from './api';
 export * from './clearer';
 export * from './directive';
 export * from './option';

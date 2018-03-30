@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { LuSelectApiModule } from './api';
 import { LuSelectClearerModule } from './clearer';
 import { LuSelectDirectiveModule } from './directive';
 import { LuSelectOptionModule } from './option';
@@ -21,7 +20,6 @@ import { LuPopoverModule } from '../popover/popover.module';
 		OverlayModule,
 		LuPopoverModule,
 		LuEmptyModule,
-		LuSelectApiModule,
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
 		LuSelectOptionModule,
@@ -32,7 +30,6 @@ import { LuPopoverModule } from '../popover/popover.module';
 		LuSelect,
 	],
 	exports: [
-		LuSelectApiModule,
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
 		LuSelectOptionModule,
