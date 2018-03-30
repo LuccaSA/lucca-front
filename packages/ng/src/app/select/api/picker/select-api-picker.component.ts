@@ -45,7 +45,7 @@ import {IApiItem} from '../../../api/api.model';
  * Component that manage the possibility to search in the options of a select.
  */
 // tslint:disable-next-line:component-class-suffix
-export class LuSelectApiPicker<T extends IApiItem = IApiItem>
+export class LuSelectApiPicker<T = any>
 	extends ASelectScrollPicker<T>
 	implements
 		OnDestroy,
