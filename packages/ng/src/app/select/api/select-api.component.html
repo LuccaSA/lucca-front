@@ -4,9 +4,9 @@
 	<div class="select-value">{{_strValue}}</div>
 	<ng-content></ng-content>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
-		<select-api-picker luOptionFeeder
+		<lu-api-select-picker luOptionFeeder
 			[selectApiFeeder]="selectApiFeeder"
 			>
-		</select-api-picker>
+		</lu-api-select-picker>
 	</lu-select-picker>
 </div>

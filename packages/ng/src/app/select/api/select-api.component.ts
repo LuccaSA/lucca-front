@@ -21,7 +21,7 @@ import {IApiItem} from '../../api/api.model';
 */
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'select-api',
+	selector: 'lu-api-select',
 	templateUrl: './select-api.component.html',
 	styleUrls: ['./select-api.component.scss'],
 	providers: [

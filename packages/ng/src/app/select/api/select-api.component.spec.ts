@@ -37,10 +37,10 @@ export class MockApiFeeder implements ISelectApiFeeder<any> {
 	resetPagingStart() {}
 }
 @Component({
-	template: `<select-api [(ngModel)]="item"
+	template: `<lu-api-select [(ngModel)]="item"
 		[selectApiFeeder]="mockFeeder"
 		>
-		</select-api>
+		</lu-api-select>
 	`,
 })
 // tslint:disable-next-line:component-class-suffix

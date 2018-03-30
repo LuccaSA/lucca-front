@@ -36,7 +36,7 @@ import {IApiItem} from '../../../api/api.model';
 
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'select-api-picker',
+	selector: 'lu-api-select-picker',
 	templateUrl: './select-api-picker.component.html',
 	styleUrls: ['./select-api-picker.component.scss'],
 	providers: [{provide: ASelectOptionFeeder, useExisting: forwardRef(() => LuSelectApiPicker)}]
