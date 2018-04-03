@@ -1,8 +1,8 @@
-import { ASelectRDDFeeder } from '../../../../../src/app/rdd';
+import { ARDDSelectFeeder } from '../../../../../src/app/rdd';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class DemoApiSelectFeeder extends ASelectRDDFeeder<any> {
+export class DemoApiSelectFeeder extends ARDDSelectFeeder<any> {
 
 	apiUrl: string;
 	fields: string[];

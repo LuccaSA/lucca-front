@@ -1,12 +1,12 @@
-import { ASelectApiFeederWithPaging, ISelectApiFeederWithPaging } from '../../../../../src/app/api';
+import { AApiSelectFeederWithPaging, IApiSelectFeederWithPaging } from '../../../../../src/app/api';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DemoCustomApiSelectFeeder
-	extends ASelectApiFeederWithPaging<any>
-	implements ISelectApiFeederWithPaging<any> {
+	extends AApiSelectFeederWithPaging<any>
+	implements IApiSelectFeederWithPaging<any> {
 
 	constructor(
 		protected _http: HttpClient

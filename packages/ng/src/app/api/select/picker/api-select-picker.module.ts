@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { LuSelectApiPicker } from './select-api-picker.component';
+import { LuApiSelectPicker } from './api-select-picker.component';
 import { LuSelectOptionModule, LU_SELECT_SEARCH_INTL_PROVIDER } from '../../../select';
 
 @NgModule({
@@ -15,12 +15,12 @@ import { LuSelectOptionModule, LU_SELECT_SEARCH_INTL_PROVIDER } from '../../../s
 		LuSelectOptionModule,
 	],
 	declarations: [
-		LuSelectApiPicker,
+		LuApiSelectPicker,
 	],
 	exports: [
-		LuSelectApiPicker,
+		LuApiSelectPicker,
 	],
 	providers: [LU_SELECT_SEARCH_INTL_PROVIDER]
 })
-export class LuSelectApiPickerModule { }
+export class LuApiSelectPickerModule { }
 

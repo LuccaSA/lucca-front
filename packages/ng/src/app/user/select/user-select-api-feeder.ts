@@ -1,11 +1,11 @@
-import { ASelectApiFeederWithPaging, ISelectApiFeederWithPaging } from '../../api';
+import { AApiSelectFeederWithPaging, IApiSelectFeederWithPaging } from '../../api';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from '../';
 
 @Injectable()
-export class UserSelectApiFeeder<T extends IUser> extends ASelectApiFeederWithPaging<T> {
+export class UserSelectApiFeeder<T extends IUser> extends AApiSelectFeederWithPaging<T> {
 
 
 	/** The pagingStart.  */

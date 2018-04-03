@@ -1,15 +1,15 @@
 import { Observable } from 'rxjs/Observable';
 import {IRddItem} from '../../rdd.model';
 import {
-	ISelectApiFeederWithPaging,
-	ASelectApiFeederWithPaging
+	IApiSelectFeederWithPaging,
+	AApiSelectFeederWithPaging
 } from '../../../api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /**
  * Interface that define how to fill a select based on an API
  */
-export interface ISelectRDDApiFeeder<T extends IRddItem> extends ISelectApiFeederWithPaging<T> {
+export interface IRDDSelectApiFeeder<T extends IRddItem> extends IApiSelectFeederWithPaging<T> {
 
 
 	/**
@@ -37,9 +37,9 @@ export interface ISelectRDDApiFeeder<T extends IRddItem> extends ISelectApiFeede
  * Abstract class that propose an implementation of Lucca RDD Api for the interface ISelectApiFeeder
  */
 @Injectable()
-export abstract class ASelectRDDFeeder<T extends IRddItem>
-	extends ASelectApiFeederWithPaging<T>
-	implements ISelectRDDApiFeeder<T> {
+export abstract class ARDDSelectFeeder<T extends IRddItem>
+	extends AApiSelectFeederWithPaging<T>
+	implements IRDDSelectApiFeeder<T> {
 
 	constructor(
 		protected _http: HttpClient

@@ -1,2 +1,2 @@
-export {LuSelectApiPicker} from './select-api-picker.component';
-export {LuSelectApiPickerModule} from './select-api-picker.module';
+export {LuApiSelectPicker} from './api-select-picker.component';
+export {LuApiSelectPickerModule} from './api-select-picker.module';

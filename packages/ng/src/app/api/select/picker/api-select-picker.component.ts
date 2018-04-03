@@ -19,8 +19,8 @@ import {
 	ASelectScrollPicker,
 } from '../../../select';
 import {
-	ISelectApiFeeder,
-	ISelectApiFeederWithPaging
+	IApiSelectFeeder,
+	IApiSelectFeederWithPaging
 } from '../feeder';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -35,15 +35,15 @@ import {empty} from 'rxjs/observable/empty';
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'lu-api-select-picker',
-	templateUrl: './select-api-picker.component.html',
-	styleUrls: ['./select-api-picker.component.scss'],
-	providers: [{provide: ASelectOptionFeeder, useExisting: forwardRef(() => LuSelectApiPicker)}]
+	templateUrl: './api-select-picker.component.html',
+	styleUrls: ['./api-select-picker.component.scss'],
+	providers: [{provide: ASelectOptionFeeder, useExisting: forwardRef(() => LuApiSelectPicker)}]
 })
 /**
  * Component that manage the possibility to search in the options of a select.
  */
 // tslint:disable-next-line:component-class-suffix
-export class LuSelectApiPicker<T = any>
+export class LuApiSelectPicker<T = any>
 	extends ASelectScrollPicker<T>
 	implements
 		AfterViewInit {
@@ -53,7 +53,7 @@ export class LuSelectApiPicker<T = any>
 	_noResults = false;
 	private _clue$: Subject<string> = new Subject<string>();
 	/** Refence the ISelectApiFeeder instance that will be use to fill the select */
-	@Input() selectApiFeeder: ISelectApiFeeder<T>;
+	@Input() selectApiFeeder: IApiSelectFeeder<T>;
 
 	/**
 	 * The input element
@@ -75,7 +75,7 @@ export class LuSelectApiPicker<T = any>
 				this._clue = model;
 				this._noResults = false;
 				if (this.selectApiFeeder.isPaged()) {
-					(<ISelectApiFeederWithPaging<T>>this.selectApiFeeder).resetPagingStart();
+					(<IApiSelectFeederWithPaging<T>>this.selectApiFeeder).resetPagingStart();
 				}
 				this._options = [];
 				this._populateList();

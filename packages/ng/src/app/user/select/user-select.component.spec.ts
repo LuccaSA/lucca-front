@@ -9,7 +9,7 @@ import {
 	LuSelectDirective
 } from '../../select';
 import {
-	LuSelectApiPicker
+	LuApiSelectPicker
 } from '../../api';
 import { Component} from '@angular/core';
 import {Platform} from '@angular/cdk/platform';
@@ -85,7 +85,7 @@ describe('LuUserSelect', () => {
 				LuSelect,
 				LuSelectPicker,
 				LuSelectDirective,
-				LuSelectApiPicker,
+				LuApiSelectPicker,
 				LuUserSelect,
 				WrapperUserSelect,
 			]

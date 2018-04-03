@@ -20,7 +20,7 @@ import {
 	LuSelect,
 } from '../../select';
 import {
-	LuSelectApiPicker,
+	LuApiSelectPicker,
 } from '../../api';
 import { UserSelectApiFeeder } from './user-select-api-feeder';
 /**

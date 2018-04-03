@@ -1,11 +1,11 @@
 import { async, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {LuSelectApi} from './select-api.component';
+import {LuApiSelect} from './api-select.component';
 import {
-	LuSelectApiPicker,
+	LuApiSelectPicker,
 } from './picker';
 import {
-	ISelectApiFeeder,
+	IApiSelectFeeder,
 } from './feeder';
 import {
 	LuSelectOption,
@@ -24,7 +24,7 @@ import {OVERLAY_PROVIDERS, ScrollStrategyOptions, ScrollDispatcher} from '@angul
 
 
 // tslint:disable-next-line:component-class-suffix
-export class MockApiFeeder implements ISelectApiFeeder<any> {
+export class MockApiFeeder implements IApiSelectFeeder<any> {
 	isPaged(): boolean {
 		return false;
 	}
@@ -105,8 +105,8 @@ describe('LuSelectApi', () => {
 				LuSelect,
 				LuSelectPicker,
 				LuSelectDirective,
-				LuSelectApiPicker,
-				LuSelectApi,
+				LuApiSelectPicker,
+				LuApiSelect,
 				WrapperApiSelect,
 			]
 		}).compileComponents();
@@ -119,7 +119,7 @@ describe('LuSelectApi', () => {
 		const fixture = TestBed.createComponent(WrapperApiSelect);
 
 		fixture.whenStable().then(() => {
-			const selectApi: LuSelectApi<any> = fixture.debugElement.query(By.directive(LuSelectApi)).componentInstance;
+			const selectApi: LuApiSelect<any> = fixture.debugElement.query(By.directive(LuApiSelect)).componentInstance;
 			// Act
 			fixture.detectChanges();
 

@@ -1,1 +1,1 @@
-export { ASelectApiFeederWithPaging, ISelectApiFeeder, ISelectApiFeederWithPaging } from './api-feeder.model';
+export { AApiSelectFeederWithPaging, IApiSelectFeeder, IApiSelectFeederWithPaging } from './api-feeder.model';

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 /**
  * Interface that define how to fill a select based on an API
  */
-export interface ISelectApiFeeder<T> {
+export interface IApiSelectFeeder<T> {
 
 	/**
 	 * Return a list of Items according to the clue (and external parameters)
@@ -29,7 +29,7 @@ export interface ISelectApiFeeder<T> {
 /**
  * Interface to add paging behaviour to feeder
  */
-export interface ISelectApiFeederWithPaging<T> extends ISelectApiFeeder<T> {
+export interface IApiSelectFeederWithPaging<T> extends IApiSelectFeeder<T> {
 	/**
 	 * Reset the paging indicator
 	 */
@@ -55,7 +55,7 @@ export interface ISelectApiFeederWithPaging<T> extends ISelectApiFeeder<T> {
  * Abstract class that propose an implementation of Lucca RDD Api for the interface ISelectApiFeeder
  */
 @Injectable()
-export abstract class ASelectApiFeederWithPaging<T> implements ISelectApiFeederWithPaging<T> {
+export abstract class AApiSelectFeederWithPaging<T> implements IApiSelectFeederWithPaging<T> {
 	_pagingStart = undefined;
 
 	constructor(

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ASelectRDDFeeder } from './rdd-feeder.model';
+import { ARDDSelectFeeder } from './rdd-feeder.model';
 import { IRddItem } from '../../rdd.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { IRddItem } from '../../rdd.model';
 	template: '',
 	exportAs: 'luRddFeeder',
 })
-export class RDDApiFeederComponent<T extends IRddItem> extends ASelectRDDFeeder<T> {
+export class RDDApiFeederComponent<T extends IRddItem> extends ARDDSelectFeeder<T> {
 	@Input() api: string;
 	@Input() fields: string[];
 	@Input() params: string[];

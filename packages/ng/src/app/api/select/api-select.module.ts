@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { LuSelectModule } from '../../select';
-import { LuSelectApiPickerModule } from './picker';
-import { LuSelectApi } from './select-api.component';
+import { LuApiSelectPickerModule } from './picker';
+import { LuApiSelect } from './api-select.component';
 
 @NgModule({
 	imports: [
@@ -15,16 +15,16 @@ import { LuSelectApi } from './select-api.component';
 		BrowserModule,
 		OverlayModule,
 		HttpClientModule,
-		LuSelectApiPickerModule,
+		LuApiSelectPickerModule,
 		LuSelectModule,
 	],
 	declarations: [
-		LuSelectApi,
+		LuApiSelect,
 	],
 	exports: [
-		LuSelectApi,
-		LuSelectApiPickerModule,
+		LuApiSelect,
+		LuApiSelectPickerModule,
 	]
 })
-export class LuSelectApiModule { }
+export class LuApiSelectModule { }
 

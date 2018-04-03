@@ -13,7 +13,7 @@ import {
 import {
 	LuSelect,
 } from '../../select';
-import { ISelectApiFeeder } from './feeder';
+import { IApiSelectFeeder } from './feeder';
 
 /**
  * Api select : A select that will load items from an external service
@@ -22,21 +22,21 @@ import { ISelectApiFeeder } from './feeder';
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'lu-api-select',
-	templateUrl: './select-api.component.html',
-	styleUrls: ['./select-api.component.scss'],
+	templateUrl: './api-select.component.html',
+	styleUrls: ['./api-select.component.scss'],
 	providers: [
-		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuSelectApi), multi: true },
-		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuSelectApi), multi: true },
+		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuApiSelect), multi: true },
+		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuApiSelect), multi: true },
 	],
 })
 // tslint:disable-next-line:component-class-suffix
-export class LuSelectApi<T = any>
+export class LuApiSelect<T = any>
 extends LuSelect<T> {
 
 	/**
 	 * Refence the ISelectApiFeeder instance that will be use to fill the select
 	 */
-	@Input() selectApiFeeder: ISelectApiFeeder<T>;
+	@Input() selectApiFeeder: IApiSelectFeeder<T>;
 
 
 	constructor(

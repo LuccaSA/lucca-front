@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LuSelectModule } from '../../../../src/app/select';
-import { LuSelectApiModule } from '../../../../src/app/api/select';
+import { LuApiSelectModule } from '../../../../src/app/api/select';
 import { LuRddFeederModule } from '../../../../src/app/rdd';
 import { SharedModule } from '../../shared/index';
 import { BasicApiSelectComponent } from './basic/basic';
@@ -20,7 +20,7 @@ import { DemoApiSelectComponent } from './api-select.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		LuSelectModule,
-		LuSelectApiModule,
+		LuApiSelectModule,
 		LuRddFeederModule,
 		SharedModule,
 	],
