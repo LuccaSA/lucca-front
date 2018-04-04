@@ -41,7 +41,6 @@
 	padding: .5rem .8rem;
 	text-decoration: none;
 	font-size: .95rem;
-	line-height: 1.4rem;
 }
 
 .demo-nav-link-child{
@@ -71,12 +70,14 @@
 	color: #ccc;
 	display: table;
 	font-size: 1.3rem;
+	line-height: 1.85;
 	font-weight: 300;
 	letter-spacing: 3px;
 	margin: 0;
 	padding: 50px 0;
 	text-align:center;
 	text-transform: lowercase;
+	white-space: nowrap;
 }
 
 .demo-divider:before,
