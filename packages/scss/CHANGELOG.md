@@ -3,6 +3,7 @@
 ## In Dev
 ### New features
 ### Breaking changes
+- `titles` New titles hierarchy
 ### Adding
 ### Enhancements
 ### Fixes

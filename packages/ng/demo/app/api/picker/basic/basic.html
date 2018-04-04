@@ -1,10 +1,14 @@
-<div class="textfield mod-material">
-	<input [(ngModel)]="api" class="textfield-input" (ngModelChange)="apiChanged()" name="api" luEmpty>
-	<label class="textfield-label" for="api">api</label>
+<div class="form-group">
+	<div class="textfield mod-material">
+		<input [(ngModel)]="api" class="textfield-input" (ngModelChange)="apiChanged()" name="api" luEmpty>
+		<label class="textfield-label" for="api">api</label>
+	</div>
 </div>
-<div class="textfield mod-material">
-	<input [luApiPicker]="picker" [(ngModel)]="item" class="textfield-input" name="item" luEmpty>
-	<label class="textfield-label" for="item">item</label>
-	<lu-api-picker #picker [api]="api"></lu-api-picker>
-</div>
+<div class="form-group">
+	<div class="textfield mod-material">
+		<input [luApiPicker]="picker" [(ngModel)]="item" class="textfield-input" name="item" luEmpty>
+		<label class="textfield-label" for="item">item</label>
+		<lu-api-picker #picker [api]="api"></lu-api-picker>
+	</div>
+<div class="form-group">
 <code class="code mod-block">{{ item | json }}</code>
