@@ -50,7 +50,7 @@
 	// Coloring
 
 	@mixin inputColoring($palette) {
-		.textfield-input{
+		.textfield-input {
 			&:focus, &.is-focused {
 				box-shadow: 0 2px 0 0 _get($palette, "color");
 
