@@ -7,6 +7,7 @@
 ### Enhancements
 ### Fixes
 - `navSide` Fix bottom link (safari)
+- `link` Use link style even with classes
 
 ## 0.4.1
 ### Updated peerDependencies
