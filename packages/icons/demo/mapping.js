@@ -169,6 +169,7 @@ var mappings = {
     {'iconName':'dashboard', 'char': '\e9ac'},
     {'iconName':'dialog', 'char': '\e9ad'},
     {'iconName':'bow', 'char': '\e9ae'},
-    {'iconName':'book', 'char': '\e9af'}
+    {'iconName':'book', 'char': '\e9af'},
+    {'iconName':'info', 'char': '\e9b0'}
   ]
 }

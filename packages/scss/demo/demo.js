@@ -100,6 +100,7 @@ function generateIconDemo() {
 		'warning',
 		'help',
 		'help_outline',
+		'info',
 		'thumbs_up',
 		'thumbs_down',
 		'flag',
