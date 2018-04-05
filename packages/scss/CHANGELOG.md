@@ -7,6 +7,7 @@
 ### Adding
 ### Enhancements
 ### Fixes
+- `buttons` Fix height on checkbox / radio buttons
 - `navSide` Fix bottom link (safari)
 
 ## 0.4.1
