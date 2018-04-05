@@ -5,6 +5,7 @@
 ### Breaking changes
 - `titles` New titles hierarchy
 ### Adding
+- `input file`
 ### Enhancements
 ### Fixes
 - `navSide` Fix bottom link (safari)
