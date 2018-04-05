@@ -4,8 +4,9 @@
 	position: relative;
 	text-decoration: none;
 	border: 0;
-	font-size: _component('button.sizing.default.font-size');
-	padding: _component('button.sizing.default.padding');
+	font-size: _component("button.sizing.default.font-size");
+	line-height: _component("button.line-height");
+	padding: _component("button.sizing.default.padding");
 	vertical-align: middle;
 	white-space: nowrap;
 	margin: _component('button.margin');
