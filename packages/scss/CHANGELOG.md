@@ -15,6 +15,7 @@
 ### Enhancements
 - `icons` path target cdn by default
 ### Fixes
+- `buttons` Fix height on checkbox / radio buttons
 - `navSide` Fix bottom link (safari)
 - `link` Use link style even with classes
 
