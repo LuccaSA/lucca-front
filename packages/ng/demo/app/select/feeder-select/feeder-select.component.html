@@ -1,13 +1,11 @@
-<section class="contentSection">
-	<h3>Component With Auto load options</h3>
-	<div class="textfield">
-		<lu-select [(ngModel)]="itemSelect"
-			class="textfield-input"
-			placeholder="placeholder"
-			name="itemOptions">
-			<demo-select-feeder-picker luOptionFeeder></demo-select-feeder-picker>
-		</lu-select>
-		<label class="textfield-label" for="itemOptions">my label</label>
-	</div>
-	<code class="code mod-block">{{ itemSelect | json }}</code>
-</section>
+
+<h3>With Feeder</h3>
+<demo-example-box>
+	<basic-feeder-select></basic-feeder-select>
+</demo-example-box>
+<demo-example-box [snippets]="snippets" demo="feeder">
+		<h4>Usage of feeder-select</h4>
+</demo-example-box>
+<demo-example-box [snippets]="snippets" demo="picker">
+		<h4>Feeder sample</h4>
+</demo-example-box>

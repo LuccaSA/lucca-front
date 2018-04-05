@@ -1,10 +1,10 @@
 import { Routes, Route } from '@angular/router';
-import { DemoApiPickerComponent } from './picker/api-picker.component';
+import { DemoApiSelectComponent } from './api-select/api-select.component';
 
 export const apiRoutes: Routes = [
 	{ path: 'api', label: 'Api', children: [
-		{ path: 'picker', label: 'Picker', component: DemoApiPickerComponent } as Route,
+		{ path: 'select', label: 'Select', component: DemoApiSelectComponent } as Route,
 
-		{ path: '', redirectTo: 'picker', pathMatch: 'full' },
+		{ path: '', redirectTo: 'select', pathMatch: 'full' },
 	] } as Route,
 ];

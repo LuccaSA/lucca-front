@@ -1,17 +1,4 @@
-<section class="contentSection">
-	<h3>Component with search</h3>
-	<div class="form-group">
-		<div class="textfield">
-			<lu-select [(ngModel)]="colorSelect"
-				class="textfield-input"
-				placeholder="placeholder"
-				name="itemMods">
-				<lu-select-searcher luOptionFeeder>
-					<lu-select-option *ngFor="let color of colorOptions" [luOptionValue]="color">{{color.name}}</lu-select-option>
-				</lu-select-searcher>
-			</lu-select>
-			<label class="textfield-label" for="itemMods">Colors</label>
-		</div>
-	</div>
-	<code class="code mod-block">{{ colorSelect | json }}</code>
-</section>
+	<h3>With Searcher</h3>
+	<demo-example-box [snippets]="snippets" demo="searcher">
+		<basic-searcher-select></basic-searcher-select>
+	</demo-example-box>

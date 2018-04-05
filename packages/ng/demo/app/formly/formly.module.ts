@@ -8,7 +8,6 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '../../../src/app/formly';
 import { LuEmptyModule } from '../../../src/app/empty';
-import { LuApiPickerModule } from '../../../src/app/api/picker';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
@@ -27,7 +26,6 @@ import { OptionComponent } from './option/option';
 		LuFormlyModule,
 		LuEmptyModule,
 
-		LuApiPickerModule,
 
 		MatAutocompleteModule,
 		MatInputModule,

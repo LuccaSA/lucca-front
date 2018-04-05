@@ -1,13 +1,24 @@
 import { NgModule } from '@angular/core';
-import { DemoApiPickerModule } from './picker/api-picker.module';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LuEmptyModule } from '../../../src/app/empty/empty.module';
+import { LuSelectModule } from '../../../src/app/select/select.module';
+import { DemoApiSelectModule } from './api-select/api-select.module';
+import { SharedModule } from '../shared';
+
 @NgModule({
 	imports: [
-		DemoApiPickerModule,
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		SharedModule,
+		LuEmptyModule,
+		LuSelectModule,
+		DemoApiSelectModule,
 	],
 	declarations: [
 	],
 	exports: [
-		DemoApiPickerModule,
 	]
 })
 export class DemoApiModule { }

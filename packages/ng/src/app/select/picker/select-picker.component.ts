@@ -28,9 +28,14 @@ import {defer} from 'rxjs/observable/defer';
 import {switchMap} from 'rxjs/operators/switchMap';
 import {startWith} from 'rxjs/operators/startWith';
 import {takeUntil} from 'rxjs/operators/takeUntil';
-// import { standardSelectTemplate } from './select.template';
-import {LuSelectOption, LuSelectOptionSelectionChange } from '../option';
-import {ISelectOptionFeeder } from '../option/feeder';
+import {
+	LuSelectOption,
+	LuSelectOptionSelectionChange,
+	ISelectOptionFeeder,
+} from '../option';
+import {
+	sameOption,
+} from '../utils';
 
 
 /**
@@ -44,6 +49,7 @@ import {ISelectOptionFeeder } from '../option/feeder';
 		transformPopover,
 	],
 })
+// tslint:disable-next-line:component-class-suffix
 export class LuSelectPicker<T>
 	extends LuPopoverComponent
 	implements OnInit,
@@ -143,40 +149,14 @@ export class LuSelectPicker<T>
 				luOption.onSelectionChange.subscribe((event: LuSelectOptionSelectionChange<T>) => this.selectOption(event.source.luOptionValue));
 
 			});
-			if (forceChangeValue){
+			if (forceChangeValue) {
 				this.selectOption(this._selectOptionValue);
 			}
 			this._optionsLength = this.luOptions$.getValue().length;
 			this._options$.next(this.luOptions$.getValue().map<T>(luOption => luOption.luOptionValue));
 	}
 
-	/**
-	 * Check if two objects are equals (use JSON.Stringify)
-	 * @param oldItem the first item to compare
-	 * @param newItem the second item to compare
-	 * @returns true if the elements are equals.
-	 */
-	protected same(oldItem: T, newItem: T): boolean {
-		if (oldItem === newItem) {
-			return true;
-		}
-		if (!oldItem && !newItem) {
-			return true;
-		}
-		if (!oldItem || !newItem) {
-			return false;
-		}
-		return JSON.stringify(oldItem) === JSON.stringify(newItem);
-	}
 
-	/**
-	 * Search an option in the list of options of the popover
-	 * @param option the option to find
-	 * @returns an observable of the LuSelectOption find
-	 */
-	find(option: T): LuSelectOption<T> {
-		return this.luOptions$.getValue().find(selectOption => this.same(selectOption.luOptionValue, option));
-	}
 	/**
 	 * Search for highliting the option corresponding to the clue
 	 * @param clue
@@ -201,7 +181,7 @@ export class LuSelectPicker<T>
 		this._selectWithoutEmit(option);
 		const luSelectOption = selectOptions[this._highlightIndex];
 		// We let the selection be effective even if the list is empty, (we won't fire any event in that case)
-		if (luSelectOption){
+		if (luSelectOption) {
 			this.itemSelected.emit(luSelectOption);
 		}
 	}
@@ -220,7 +200,7 @@ export class LuSelectPicker<T>
 		}
 
 		this._highlightIndex = selectOptions.findIndex((selectOption) => {
-			return this.same(selectOption.luOptionValue, option);
+			return sameOption(selectOption.luOptionValue, option);
 		});
 
 		this._highlightIndex$.next(this._highlightIndex);
@@ -292,10 +272,10 @@ export class LuSelectPicker<T>
 	/**
 	 * Inner function to deal with scroll
 	*/
-	private _scrollTo(){
-		if (this.optionFeeder){
+	private _scrollTo() {
+		if (this.optionFeeder) {
 			this.optionFeeder.scrollTo(this._highlightIndex);
-		}else{
+		}else {
 			const luOption = this.luOptions$.getValue()[this._highlightIndex];
 			this._elementRef.nativeElement.scrollTop = luOption.offsetTop();
 		}

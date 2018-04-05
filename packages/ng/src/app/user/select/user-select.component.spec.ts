@@ -1,27 +1,37 @@
 import { async, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {LuUserSelect} from './user-select.component';
-import {LuUserPicker} from './picker';
-import {LuSelectOption, LuSelectSearchIntl, LuSelect, LuSelectPicker, LuSelectDirective} from '../../select';
+import {
+	LuSelectOption,
+	LuSelectSearchIntl,
+	LuSelect,
+	LuSelectPicker,
+	LuSelectDirective
+} from '../../select';
+import {
+	LuApiSelectPicker
+} from '../../api';
 import { Component} from '@angular/core';
 import {Platform} from '@angular/cdk/platform';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {OVERLAY_PROVIDERS, ScrollStrategyOptions, ScrollDispatcher} from '@angular/cdk/overlay';
+import { UserSelectApiFeeder } from './user-select-api-feeder';
 
 
 @Component({
-	template: `<user-select [(ngModel)]="item">
-		</user-select>
+	template: `<lu-user-select [(ngModel)]="item">
+		</lu-user-select>
 	`,
 })
+// tslint:disable-next-line:component-class-suffix
 export class WrapperUserSelect {
 	item = {
 		id: 1,
 		firstName: 'Lucca',
 		lastName: 'Admin'
 	};
-};
+}
 
 describe('LuUserSelect', () => {
 
@@ -63,13 +73,22 @@ describe('LuUserSelect', () => {
 				OVERLAY_PROVIDERS,
 				ScrollStrategyOptions,
 				ScrollDispatcher,
-				LuSelectSearchIntl
+				LuSelectSearchIntl,
+				{ provide: UserSelectApiFeeder, useClass: UserSelectApiFeeder },
 			],
 			imports: [
 				HttpClientTestingModule,
 				FormsModule,
 			],
-			declarations: [LuSelectOption, LuSelect, LuSelectPicker, LuSelectDirective, LuUserPicker, LuUserSelect, WrapperUserSelect]
+			declarations: [
+				LuSelectOption,
+				LuSelect,
+				LuSelectPicker,
+				LuSelectDirective,
+				LuApiSelectPicker,
+				LuUserSelect,
+				WrapperUserSelect,
+			]
 		}).compileComponents();
 	http = TestBed.get(HttpTestingController);
 	});
@@ -79,12 +98,15 @@ describe('LuUserSelect', () => {
 		const fixture = TestBed.createComponent(LuUserSelect);
 		const userSelect = fixture.componentInstance;
 
-		// Act
-		fixture.detectChanges();
+		fixture.whenStable().then(() => {
 
-				// Assert
-		const testRequest = http.expectOne('/api/v3/users/find?formerEmployees=false&clue=&paging=0,10&fields=id,firstName,lastName');
-		expect(testRequest.request).toBeDefined('The users sould be called with correct parameters');
+			// Act
+			fixture.detectChanges();
+
+					// Assert
+			const testRequest = http.expectOne('/api/v3/users/find?formerEmployees=false&clue=&paging=0,10&fields=id,firstName,lastName');
+			expect(testRequest.request).toBeDefined('The users sould be called with correct parameters');
+		});
 
 	});
 

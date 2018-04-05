@@ -1,4 +1,4 @@
-import { LuSelectOption } from "../";
+import { LuSelectOption } from '../';
 
 /**
  * Interface to implement when you want to create your own feeder of options fot the select
@@ -63,7 +63,7 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	/**
 	 * See ISelectOptionFeeder
 	*/
-	open(): void {}
+	abstract open(): void;
 	/**
 	 * See ISelectOptionFeeder
 	 */
@@ -95,14 +95,11 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	/**
 	 * See ISelectOptionFeeder
 	 */
-	scrollTo(index: number) {
-	}
+	abstract scrollTo(index: number);
 
 	/**
 	 * See ISelectOptionFeeder
 	 */
-	textValue(item: T): string {
-		return '';
-	}
+	abstract textValue(item: T): string;
 
 }

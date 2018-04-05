@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { LuSelectPickerModule } from './picker';
-import { LuSelectOptionModule } from './option';
 import { LuSelectClearerModule } from './clearer';
-import { LuSelectSearcherModule } from './searcher';
 import { LuSelectDirectiveModule } from './directive';
+import { LuSelectOptionModule } from './option';
+import { LuSelectPickerModule } from './picker';
+import { LuSelectSearcherModule } from './searcher';
 import { LuSelect } from './select.component';
 import { LuEmptyModule } from '../empty/empty.module';
 import { LuPopoverModule } from '../popover/popover.module';
@@ -20,20 +20,20 @@ import { LuPopoverModule } from '../popover/popover.module';
 		OverlayModule,
 		LuPopoverModule,
 		LuEmptyModule,
-		LuSelectPickerModule,
-		LuSelectOptionModule,
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
+		LuSelectOptionModule,
+		LuSelectPickerModule,
 		LuSelectSearcherModule,
 	],
 	declarations: [
 		LuSelect,
 	],
 	exports: [
-		LuSelectPickerModule,
-		LuSelectOptionModule,
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
+		LuSelectOptionModule,
+		LuSelectPickerModule,
 		LuSelectSearcherModule,
 		LuSelect,
 	]

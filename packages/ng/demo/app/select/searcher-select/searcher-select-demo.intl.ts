@@ -1,6 +1,4 @@
-import {LuSelectSearchIntl} from '../../../../src/app/select/searcher/';
-
-import {Injectable} from '@angular/core';
+import {LuSelectSearchIntl} from '../../../../src/app/select/';
 
 export function getOverrideLuSelectSearchIntl(): LuSelectSearchIntl {
 	const luSelectSearchIntl = new LuSelectSearchIntl();

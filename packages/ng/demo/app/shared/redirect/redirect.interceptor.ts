@@ -12,7 +12,7 @@ export class RedirectInterceptor implements HttpInterceptor {
 	) { }
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		if (this.env.redirect) {
+		if (this.env.redirect && !req.url.startsWith('http')) {
 			const clonedHeaders = req.headers;
 			clonedHeaders.set('Access-Control-Allow-Origin', '*');
 			const clonedRequest = req.clone({
