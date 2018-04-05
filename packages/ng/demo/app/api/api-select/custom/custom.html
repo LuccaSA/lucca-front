@@ -1,13 +1,12 @@
 <section class="contentSection">
-		<h3>Component With api select</h3>
-		<div class="textfield">
-			<lu-api-select [(ngModel)]="itemSelect"
-				[selectApiFeeder]="apiSelectFeeder"
-				class="textfield-input"
-				placeholder="placeholder"
-				name="itemOptions">
-			</lu-api-select>
-			<label class="textfield-label" for="itemOptions">my label</label>
-		</div>
-		<code class="code mod-block">{{ itemSelect | json }}</code>
-	</section>
+	<div class="textfield">
+		<lu-api-select [(ngModel)]="itemSelect"
+			[selectApiFeeder]="apiSelectFeeder"
+			class="textfield-input"
+			placeholder="placeholder"
+			name="itemOptions">
+		</lu-api-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
