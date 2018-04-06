@@ -11,3 +11,4 @@ export * from './app/animations';
 export { LuFormlyModule } from './app/formly';
 export * from './app/api';
 export * from './app/select';
+export * from './app/rdd';
