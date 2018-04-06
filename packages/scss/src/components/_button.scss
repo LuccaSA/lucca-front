@@ -227,7 +227,7 @@
 		@each $button-size, $size-obj in _component("button.sizing") {
 			&.size-#{$button-size} {
 				&::after {
-				 	font-size: 1.5 * _get($size-obj, "font-size");
+					font-size: 1.5 * _get($size-obj, "font-size");
 					height: 1.5 * _get($size-obj, "font-size");
 				}
 			}
@@ -260,7 +260,7 @@
 		@each $button-size, $size-obj in _component("button.sizing") {
 			&.size-#{$button-size} {
 				&::after {
-				 	font-size: 1.5 * _get($size-obj, "font-size");
+					font-size: 1.5 * _get($size-obj, "font-size");
 					height: 1.5 * _get($size-obj, "font-size");
 				}
 			}

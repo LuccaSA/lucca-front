@@ -27,6 +27,7 @@
 	}
 
 	&:hover {
+		color: _color("text.default");
 		opacity: 1;
 
 		&::after {
