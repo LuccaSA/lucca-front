@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -19,7 +19,9 @@ export class RedirectEnvironment {
 	baseUrl = '';
 	authToken = '';
 
-	private _status$ = new BehaviorSubject<RedirectStatus>(RedirectStatus.disconnected);
+	private _status$ = new BehaviorSubject<RedirectStatus>(
+		RedirectStatus.disconnected,
+	);
 	status$ = this._status$.asObservable();
 	private _url$ = new BehaviorSubject<string>('');
 	url$ = this._url$.asObservable();
@@ -49,10 +51,7 @@ export class RedirectService {
 	// baseUrl = '';
 	// authToken = '';
 
-	constructor(
-		private http: HttpClient,
-		private env: RedirectEnvironment,
-	) {}
+	constructor(private http: HttpClient, private env: RedirectEnvironment) {}
 
 	login(url, login, password = ''): Observable<RedirectStatus> {
 		// disable redirection while we log in
@@ -62,15 +61,16 @@ export class RedirectService {
 			responseType: 'text',
 		} as any;
 
-		return this.http.post(loginUrl, {}, options)
-		.map(r => {
-			const token = (<any>r).substring(1, (<any>r).length - 1);
-			this.env.loginSuccess(url, token, login);
-			return RedirectStatus.connected;
-		})
-		.catch(r => {
-			this.env.loginError();
-			return Observable.throw(RedirectStatus.disconnected);
-		});
+		return this.http
+			.post(loginUrl, {}, options)
+			.map(r => {
+				const token = (<any>r).substring(1, (<any>r).length - 1);
+				this.env.loginSuccess(url, token, login);
+				return RedirectStatus.connected;
+			})
+			.catch(r => {
+				this.env.loginError();
+				return Observable.throw(RedirectStatus.disconnected);
+			});
 	}
 }

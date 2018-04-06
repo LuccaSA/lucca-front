@@ -4,11 +4,7 @@ import { Component, OnInit } from '@angular/core';
 	templateUrl: './basic.html',
 })
 export class BasicFeederSelectComponent implements OnInit {
+	itemSelect = { id: 1, name: 'option 1' };
 
-	itemSelect = {id: 1, name: 'option 1'};
-
-	ngOnInit(): void {
-
-	}
-
+	ngOnInit(): void {}
 }

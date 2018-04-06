@@ -1,24 +1,25 @@
 .progress {
-	background: _theme("commons.background.dark");
-	height: _component("progress.height");
-	margin: _component("progress.margin");
+	background: _theme('commons.background.dark');
+	height: _component('progress.height');
+	margin: _component('progress.margin');
 	position: relative;
 	overflow: hidden;
 }
 
 .progress-bar {
-	background: _component("progress.bar.background");
+	background: _component('progress.bar.background');
 	bottom: 0;
 	left: 0;
 	position: absolute;
 	top: 0;
-	transition: background _theme("commons.animations.durations.standard") ease, width _theme("commons.animations.durations.standard") ease;
+	transition: background _theme('commons.animations.durations.standard') ease,
+		width _theme('commons.animations.durations.standard') ease;
 
 	&::after {
-		animation: progress _component("progress.duration") infinite;
-		background: _component("progress.bar.gradient");
+		animation: progress _component('progress.duration') infinite;
+		background: _component('progress.bar.gradient');
 		bottom: 0;
-		content: "";
+		content: '';
 		display: block;
 		left: 0;
 		position: absolute;
@@ -28,7 +29,6 @@
 	}
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -36,12 +36,11 @@
 	&.mod-indeterminate {
 		.progress-bar {
 			width: 30%;
-			animation: progressIndetereminate _component("progress.duration") infinite;
+			animation: progressIndetereminate _component('progress.duration') infinite;
 			animation-timing-function: linear;
 		}
 	}
 }
-
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -49,7 +48,7 @@
 .progress {
 	&.is-success {
 		.progress-bar {
-			background: _color("success");
+			background: _color('success');
 			width: 100% !important;
 
 			&::after {
@@ -60,7 +59,7 @@
 
 	&.is-error {
 		.progress-bar {
-			background: _color("error");
+			background: _color('error');
 			width: 100% !important;
 
 			&::after {
@@ -81,7 +80,7 @@
 
 	to {
 		transform: scale(1, 1);
-		opacity: .3;
+		opacity: 0.3;
 	}
 }
 

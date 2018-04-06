@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'demo-formly-validation',
@@ -18,15 +18,13 @@ export class ValidationComponent {
 				placeholder: 'required',
 			},
 			validators: {
-				validation: Validators.compose([
-					Validators.required,
-				]),
+				validation: Validators.compose([Validators.required]),
 			},
 			validation: {
 				messages: {
 					required: 'this field is required',
 				},
-			}
+			},
 		},
 		{
 			key: 'email',
@@ -35,18 +33,16 @@ export class ValidationComponent {
 				type: 'email',
 				label: 'Email address',
 				placeholder: 'Enter email',
-				mod: 'mod-compact'
+				mod: 'mod-compact',
 			},
 			validators: {
-				validation: Validators.compose([
-					Validators.email,
-				]),
+				validation: Validators.compose([Validators.email]),
 			},
 			validation: {
 				messages: {
 					email: 'its the message cuz its not a valid email',
 				},
-			}
+			},
 		},
 		{
 			key: 'age',
@@ -67,7 +63,7 @@ export class ValidationComponent {
 					min: 'i declare on my honor i am 18 year old',
 					max: 'nobody is that old',
 				},
-			}
+			},
 		},
 		{
 			key: 'bogus',
@@ -78,20 +74,17 @@ export class ValidationComponent {
 				placeholder: 'over 10 and below 5',
 				helper: 'it will display every validation message',
 				mod: 'mod-compact',
-				required: true
+				required: true,
 			},
 			validators: {
-				validation: Validators.compose([
-					Validators.min(10),
-					Validators.max(5),
-				]),
+				validation: Validators.compose([Validators.min(10), Validators.max(5)]),
 			},
 			validation: {
 				messages: {
 					min: 'you must enter over 10',
 					max: 'you must enter below 5',
 				},
-			}
+			},
 		},
 	];
 
@@ -104,5 +97,3 @@ export class ValidationComponent {
 		console.log(user);
 	}
 }
-
-

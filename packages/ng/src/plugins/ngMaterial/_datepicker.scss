@@ -18,7 +18,7 @@
 	width: auto;
 
 	&::after {
-		@include makeIcon("calendar");
+		@include makeIcon('calendar');
 	}
 	mat-icon {
 		display: none;
@@ -46,7 +46,7 @@
 	}
 
 	.mat-calendar-content {
-		padding: 0 .5em .5em .5em;
+		padding: 0 0.5em 0.5em 0.5em;
 	}
 }
 
@@ -69,39 +69,41 @@
 // TABLE
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
-		@include fakeBorder(1px, _theme("commons.divider.color"));
+		@include fakeBorder(1px, _theme('commons.divider.color'));
 
 		border: none;
 		border-radius: 0;
-		color: _theme("commons.text.light.color");
+		color: _theme('commons.text.light.color');
 		height: 100%;
 		left: 0;
 		top: 0;
 		width: 100%;
-		&:hover, &.mat-calendar-body-selected {
-			background-color: _color("primary");
-			color: _color("primary", "text");
+		&:hover,
+		&.mat-calendar-body-selected {
+			background-color: _color('primary');
+			color: _color('primary', 'text');
 		}
 	}
 	&.mat-calendar-body-disabled {
-		opacity: .5;
+		opacity: 0.5;
 		pointer-events: none;
 	}
 }
 
 // SPECIFIC MONTH-VIEW
-md-month-view, mat-month-view {
+md-month-view,
+mat-month-view {
 	.mat-calendar-table-header th {
-		color: _theme("commons.text.light.color");
-		font-size: .9em;
-		padding-bottom: .4em;
+		color: _theme('commons.text.light.color');
+		font-size: 0.9em;
+		padding-bottom: 0.4em;
 	}
 
 	.mat-calendar-body-label {
 		overflow: hidden;
 		text-indent: -999px;
 
-		&[colspan="7"] {
+		&[colspan='7'] {
 			display: none; // REMOVE MONTH LABEL ABOVE NUMBERS IF FULL WIDTH
 		}
 	}

@@ -1,17 +1,16 @@
 import { Observable } from 'rxjs/Observable';
-import {IRddItem} from '../../rdd.model';
+import { IRddItem } from '../../rdd.model';
 import {
 	IApiSelectFeederWithPaging,
-	AApiSelectFeederWithPaging
+	AApiSelectFeederWithPaging,
 } from '../../../api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /**
  * Interface that define how to fill a select based on an API
  */
-export interface IRDDSelectApiFeeder<T extends IRddItem> extends IApiSelectFeederWithPaging<T> {
-
-
+export interface IRDDSelectApiFeeder<T extends IRddItem>
+	extends IApiSelectFeederWithPaging<T> {
 	/**
 	 * Give the rdd api url
 	 */
@@ -40,31 +39,30 @@ export interface IRDDSelectApiFeeder<T extends IRddItem> extends IApiSelectFeede
 export abstract class ARDDSelectFeeder<T extends IRddItem>
 	extends AApiSelectFeederWithPaging<T>
 	implements IRDDSelectApiFeeder<T> {
-
-	constructor(
-		protected _http: HttpClient
-	) {
+	constructor(protected _http: HttpClient) {
 		super(_http);
 	}
 
 	/**
 	 * See ISelectApiFeeder
 	 */
-	getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]> {
-	const params = [
-				`${this.getClueField()}=like,${encodeURIComponent(clue)}`,
-				`paging=${pagingStart},${pagingStep}`,
-				`fields=${this.getFields().join(',')}`,
-			];
+	getPagedItems(
+		clue: string,
+		pagingStart: number,
+		pagingStep: number,
+	): Observable<T[]> {
+		const params = [
+			`${this.getClueField()}=like,${encodeURIComponent(clue)}`,
+			`paging=${pagingStart},${pagingStep}`,
+			`fields=${this.getFields().join(',')}`,
+		];
 		const additionalParams = this.getParams();
 		if (additionalParams && additionalParams.length > 0) {
 			params.push(...additionalParams);
 		}
 		const url = `${this.getApiUrl()}?${params.join('&')}`;
-		return this._http.get<{ data: { items: T[] } }>(url)
-		.map(r => r.data.items);
+		return this._http.get<{ data: { items: T[] } }>(url).map(r => r.data.items);
 	}
-
 
 	/**
 	 * See ISelectApiFeeder
@@ -97,5 +95,4 @@ export abstract class ARDDSelectFeeder<T extends IRddItem>
 	 * Give the name of the field use for the search
 	 */
 	abstract getClueField(): string;
-
 }

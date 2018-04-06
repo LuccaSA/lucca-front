@@ -6,20 +6,8 @@ import { LuPopoverTrigger } from './popover.triggers';
 import { LuPopoverTarget } from './popover.target';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		OverlayModule,
-	],
-	declarations: [
-		LuPopoverComponent,
-		LuPopoverTrigger,
-		LuPopoverTarget,
-	],
-	exports: [
-		LuPopoverComponent,
-		LuPopoverTrigger,
-		LuPopoverTarget,
-	]
+	imports: [CommonModule, OverlayModule],
+	declarations: [LuPopoverComponent, LuPopoverTrigger, LuPopoverTarget],
+	exports: [LuPopoverComponent, LuPopoverTrigger, LuPopoverTarget],
 })
-export class LuPopoverModule { }
-
+export class LuPopoverModule {}

@@ -4,12 +4,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LuEmptyDirective } from './empty.directive';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-	],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule],
 	declarations: [LuEmptyDirective],
-	exports: [LuEmptyDirective]
+	exports: [LuEmptyDirective],
 })
-export class LuEmptyModule { }
+export class LuEmptyModule {}

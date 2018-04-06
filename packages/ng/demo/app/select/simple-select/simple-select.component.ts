@@ -10,23 +10,21 @@ export class DemoSimpleSelectComponent implements OnInit {
 		{ id: 3, name: 'yellow' },
 		{ id: 4, name: 'blue' },
 	];
-	itemSelect = {id: 1, name: 'red'};
+	itemSelect = { id: 1, name: 'red' };
 
 	lotOfOptions = [];
-	itemLotOfOptionsSelect = {id: 1, name: 'option 1'};
+	itemLotOfOptionsSelect = { id: 1, name: 'option 1' };
 
 	ngOnInit(): void {
 		const optionsTmp = [];
 		setTimeout(() => {
-
 			for (let i = 1; i <= 100; i++) {
 				optionsTmp.push({
 					id: i,
-					name: `option ${i}`
+					name: `option ${i}`,
 				});
 			}
 			this.lotOfOptions = optionsTmp;
 		}, 1000);
 	}
-
 }

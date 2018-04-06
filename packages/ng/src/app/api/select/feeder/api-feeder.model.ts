@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
  * Interface that define how to fill a select based on an API
  */
 export interface IApiSelectFeeder<T> {
-
 	/**
 	 * Return a list of Items according to the clue (and external parameters)
 	 *
@@ -23,7 +22,6 @@ export interface IApiSelectFeeder<T> {
 	 * Return true if the api as a paging mecanism => then it will be cast to ISelectApiFeederWithPaging
 	 */
 	isPaged(): boolean;
-
 }
 
 /**
@@ -48,21 +46,22 @@ export interface IApiSelectFeederWithPaging<T> extends IApiSelectFeeder<T> {
 	 * @param pagingStart the start paging number
 	 * @param pagingStep the paging size
 	 */
-	getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]>;
+	getPagedItems(
+		clue: string,
+		pagingStart: number,
+		pagingStep: number,
+	): Observable<T[]>;
 }
 
 /**
  * Abstract class that propose an implementation of Lucca RDD Api for the interface ISelectApiFeeder
  */
 @Injectable()
-export abstract class AApiSelectFeederWithPaging<T> implements IApiSelectFeederWithPaging<T> {
+export abstract class AApiSelectFeederWithPaging<T>
+	implements IApiSelectFeederWithPaging<T> {
 	_pagingStart = undefined;
 
-	constructor(
-		protected _http: HttpClient
-	) {
-
-	}
+	constructor(protected _http: HttpClient) {}
 
 	/**
 	 * See ISelectApiFeeder
@@ -105,6 +104,9 @@ export abstract class AApiSelectFeederWithPaging<T> implements IApiSelectFeederW
 	/**
 	 * See ISelectApiFeederWithPaging
 	 */
-	abstract getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]>;
-
+	abstract getPagedItems(
+		clue: string,
+		pagingStart: number,
+		pagingStep: number,
+	): Observable<T[]>;
 }

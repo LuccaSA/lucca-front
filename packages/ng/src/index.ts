@@ -1,5 +1,8 @@
 export * from './app/date-range-picker/date-range-picker.module';
-export { IDateRangeSelectChoice, IDateRange } from './app/date-range-picker/date-range-picker.model';
+export {
+	IDateRangeSelectChoice,
+	IDateRange,
+} from './app/date-range-picker/date-range-picker.model';
 export * from './app/user';
 export * from './app/popover';
 export { LuRootModule } from './app/lu-root.module';

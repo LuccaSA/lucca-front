@@ -1,9 +1,6 @@
 // Simulate border with border-collapse
 // Not my trick, but this guy's trick https://codepen.io/Hawkun/pen/rsIEp
 @mixin fakeBorder($width, $color) {
-	box-shadow: $width 0 0 0  $color,
-	0 $width 0 0  $color,
-	$width $width 0 0  $color,
-	$width 0 0 0  $color inset,
-	0 $width 0 0  $color inset;
+	box-shadow: $width 0 0 0 $color, 0 $width 0 0 $color, $width $width 0 0 $color,
+		$width 0 0 0 $color inset, 0 $width 0 0 $color inset;
 }

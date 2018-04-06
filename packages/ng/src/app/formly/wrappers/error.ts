@@ -1,6 +1,10 @@
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from '@ngx-formly/core';
+import {
+	FormlyFieldConfig,
+	FieldWrapper,
+	FormlyConfig,
+} from '@ngx-formly/core';
 
 // wrapper
 @Component({
@@ -9,7 +13,8 @@ import { FormlyFieldConfig, FieldWrapper, FormlyConfig } from '@ngx-formly/core'
 	templateUrl: './error.html',
 })
 export class LuFormlyWrapperError extends FieldWrapper {
-	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
+	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	fieldComponent: ViewContainerRef;
 
 	get validationId() {
 		return this.field.id + '-message';
@@ -31,7 +36,11 @@ export class LuFormlyErrorMessage {
 		const messages = [];
 		if (!!this.fieldForm.errors) {
 			Object.keys(this.fieldForm.errors).forEach(key => {
-				if (this.field.validation && this.field.validation.messages && this.field.validation.messages[key]) {
+				if (
+					this.field.validation &&
+					this.field.validation.messages &&
+					this.field.validation.messages[key]
+				) {
 					messages.push(this.field.validation.messages[key]);
 				}
 			});

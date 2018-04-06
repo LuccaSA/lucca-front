@@ -2,46 +2,47 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	width: _component("textfield.sizes.default");
+	width: _component('textfield.sizes.default');
 }
 
 .textfield-input {
-	background: _component("textfield.background");
+	background: _component('textfield.background');
 	border: 0;
-	border-radius: _component("textfield.border-radius");
-	box-shadow: 0 0 0 1px _component("textfield.border.color");
-	color: _component("textfield.input.color");
-	font-family: unquote(_theme("commons.font.family"));
-	font-size: _component("textfield.font-size");
+	border-radius: _component('textfield.border-radius');
+	box-shadow: 0 0 0 1px _component('textfield.border.color');
+	color: _component('textfield.input.color');
+	font-family: unquote(_theme('commons.font.family'));
+	font-size: _component('textfield.font-size');
 	line-height: 1;
 	outline: 0;
-	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
+	padding: _component('textfield.input.padding-vertical')
+		_component('textfield.input.padding-horizontal');
 	position: relative;
 	transition: box-shadow 150ms ease, color 150ms ease;
 	width: 100%;
 
 	&::placeholder {
-		color: _color("text.placeholder");
+		color: _color('text.placeholder');
 		transition: opacity 150ms ease;
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 1px _component("textfield.border.focus");
+		box-shadow: 0 0 0 1px _component('textfield.border.focus');
 	}
 }
 
 .textfield-suffix {
-	top: _component("textfield.suffix.top");
+	top: _component('textfield.suffix.top');
 	line-height: 1.15;
 	position: absolute;
-	right: _component("textfield.input.padding-horizontal");
+	right: _component('textfield.input.padding-horizontal');
 	z-index: 1;
 }
 
 .textfield-label {
-	color: _color("text.default");
+	color: _color('text.default');
 	font-weight: 600;
-	font-size: _component("textfield.label.font-size");
+	font-size: _component('textfield.label.font-size');
 	order: -1;
 	overflow: hidden;
 	position: relative;
@@ -52,26 +53,26 @@
 }
 
 .textfield-messages {
-	font-size: _component("textfield.message.font-size");
+	font-size: _component('textfield.message.font-size');
 	line-height: 1.3;
-	margin-top: .35rem;
+	margin-top: 0.35rem;
 }
 
 .textfield-messages-error {
-	color: _color("error");
+	color: _color('error');
 }
 
 .textfield-messages-warning {
-	color: _color("warning");
+	color: _color('warning');
 }
 
 .textfield-messages-helper {
-	color: _color("text.light");
+	color: _color('text.light');
 }
 
 .textfield-options {
 	background: white;
-	border-radius: _theme("commons.border.radius");
+	border-radius: _theme('commons.border.radius');
 	@include elevate(3);
 	left: 0;
 	list-style: none;
@@ -91,37 +92,35 @@
 
 .textfield-options-entry {
 	cursor: pointer;
-	padding: .5rem 1rem;
+	padding: 0.5rem 1rem;
 	transition: background 50ms ease;
 
 	&:hover {
-		background: _theme("commons.background.dark");
+		background: _theme('commons.background.dark');
 	}
 
 	&.is-focus {
-		background: _theme("commons.background.dark");
+		background: _theme('commons.background.dark');
 	}
 }
-
 
 // PALETTE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
-
 	@mixin inputColoring($palette) {
 		.textfield-input:focus {
-			box-shadow: 0 0 0 1px _get($palette, "color");
+			box-shadow: 0 0 0 1px _get($palette, 'color');
 
 			~ .textfield-label {
-				color: _color("text.default");
+				color: _color('text.default');
 			}
 		}
 
 		// Needed when not next to input (formly)
 		&.is-focused {
 			.textfield-label {
-				color: _color("text.default");
+				color: _color('text.default');
 			}
 		}
 	}
@@ -134,15 +133,14 @@
 	}
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
-
 	/* Width */
 
-	@each $textfield-size-name, $textfield-width in _component("textfield.sizes") {
+	@each $textfield-size-name, $textfield-width in _component('textfield.sizes')
+	{
 		&.mod-#{$textfield-size-name} {
 			width: $textfield-width;
 		}
@@ -152,8 +150,8 @@
 
 	&.mod-inline {
 		display: inline-flex;
-		margin-left: .15rem;
-		margin-right: .15rem;
+		margin-left: 0.15rem;
+		margin-right: 0.15rem;
 	}
 
 	&.mod-block {
@@ -162,13 +160,13 @@
 
 	&.mod-withSuffix {
 		.textfield-input {
-			padding-right: _component("textfield.suffix.padding-right");
+			padding-right: _component('textfield.suffix.padding-right');
 		}
 	}
 
 	&.mod-noLabel {
 		.textfield-suffix {
-			top: _component("textfield.input.padding-vertical");
+			top: _component('textfield.input.padding-vertical');
 		}
 	}
 
@@ -182,14 +180,15 @@
 
 	/* Autocomplete & Search */
 
-	&.mod-autocomplete, &.mod-search {
+	&.mod-autocomplete,
+	&.mod-search {
 		&::after {
-			color: _color("text.light");
-			@include makeIcon("search");
+			color: _color('text.light');
+			@include makeIcon('search');
 			font-size: 1.4rem;
 			position: absolute;
-			bottom: .2rem;
-			right: .5rem;
+			bottom: 0.2rem;
+			right: 0.5rem;
 		}
 
 		.textfield-input {
@@ -201,7 +200,8 @@
 		@extend %input_material;
 	}
 
-	&.mod-compact, &.compact {
+	&.mod-compact,
+	&.compact {
 		@extend %input_compact;
 	}
 
@@ -209,7 +209,6 @@
 		@extend %input_framed;
 	}
 }
-
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -234,10 +233,11 @@
 	&.is-loading {
 		@include loading(1rem);
 
-		&::before, &::after {
-			bottom: .6rem;
+		&::before,
+		&::after {
+			bottom: 0.6rem;
 			left: inherit;
-			right: .5rem;
+			right: 0.5rem;
 			top: inherit;
 			position: absolute;
 			z-index: 2;
@@ -249,17 +249,16 @@
 	}
 
 	&.is-valid {
-
 		&::before {
 			animation: isValid 3s forwards;
-			@include makeIcon("tick_bold");
+			@include makeIcon('tick_bold');
 			border-radius: 50%;
-			bottom: .85rem;
-			color: _color("success");
+			bottom: 0.85rem;
+			color: _color('success');
 			font-size: 1.2rem;
 			height: 1rem;
 			position: absolute;
-			right: .4rem;
+			right: 0.4rem;
 			z-index: 1;
 		}
 
@@ -276,10 +275,10 @@
 }
 
 .textfield-input {
-
-	&[disabled], &[readonly] {
-		background: _theme("commons.background.dark");
-		color: _color("text.light");
+	&[disabled],
+	&[readonly] {
+		background: _theme('commons.background.dark');
+		color: _color('text.light');
 		cursor: not-allowed;
 	}
 
@@ -291,7 +290,6 @@
 		}
 	}
 }
-
 
 // ANIMATIONS / MIXINS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -328,11 +326,7 @@
 	}
 }
 
-
 // MATERIAL, COMPACT & FRAMED
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-@import
-	"textfield.material",
-	"textfield.compact",
-	"textfield.framed";
+@import 'textfield.material', 'textfield.compact', 'textfield.framed';

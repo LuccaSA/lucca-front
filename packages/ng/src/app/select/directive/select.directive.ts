@@ -6,10 +6,7 @@ import {
 	ElementRef,
 	ViewContainerRef,
 } from '@angular/core';
-import {
-	Overlay,
-	OverlayConfig,
-} from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 
 import { LuPopoverTrigger } from '../../popover';
 import { LuSelectPicker } from '../picker/select-picker.component';
@@ -21,9 +18,7 @@ import { LuSelectOption } from '../option/select-option.component';
 @Directive({
 	selector: 'div[luSelect]',
 })
-export class LuSelectDirective
-extends LuPopoverTrigger {
-
+export class LuSelectDirective extends LuPopoverTrigger {
 	/** the name of the picker linked to this input */
 	// tslint:disable-next-line:no-input-rename
 	@Input('luSelect') popover: LuSelectPicker<any>;
@@ -33,14 +28,9 @@ extends LuPopoverTrigger {
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		// protected _renderer: Renderer2,
+		protected _viewContainerRef: ViewContainerRef, // protected _renderer: Renderer2,
 	) {
-		super(
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-		);
+		super(_overlay, _elementRef, _viewContainerRef);
 	}
 	/** Open the popover linked to the directive */
 	openPopover(): void {

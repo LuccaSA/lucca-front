@@ -10,7 +10,6 @@ export class BasicClearerSelectComponent {
 		{ id: 3, name: 'yellow' },
 		{ id: 4, name: 'blue' },
 	];
-	itemSelect = {id: 1, name: 'red'};
-	itemSelectDefault = {id: 4, name: 'blue'};
-
+	itemSelect = { id: 1, name: 'red' };
+	itemSelectDefault = { id: 4, name: 'blue' };
 }

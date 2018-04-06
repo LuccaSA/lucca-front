@@ -18,13 +18,7 @@ import { BasicComponent } from './basic/basic.component';
 		MatSelectModule,
 		LuEmptyModule,
 	],
-	declarations: [
-		DemoUserDisplayComponent,
-		BasicComponent,
-	],
-	exports: [
-		DemoUserDisplayComponent,
-		BasicComponent,
-	]
+	declarations: [DemoUserDisplayComponent, BasicComponent],
+	exports: [DemoUserDisplayComponent, BasicComponent],
 })
-export class DemoUserDisplayModule { }
+export class DemoUserDisplayModule {}

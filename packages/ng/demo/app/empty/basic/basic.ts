@@ -8,5 +8,3 @@ import { Validators, FormGroup } from '@angular/forms';
 export class BasicComponent {
 	val = 'lol';
 }
-
-

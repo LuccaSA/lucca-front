@@ -3,15 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LuSelectPicker } from './select-picker.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-	],
-	declarations: [
-		LuSelectPicker,
-	],
-	exports: [
-		LuSelectPicker,
-	]
+	imports: [CommonModule],
+	declarations: [LuSelectPicker],
+	exports: [LuSelectPicker],
 })
-export class LuSelectPickerModule { }
-
+export class LuSelectPickerModule {}

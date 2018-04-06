@@ -42,10 +42,11 @@ export class LuFormlyFieldDate extends FieldType {
 		picker.close();
 	}
 	private refocusInput() {
-		Observable.of({}).delay(1) // need timeout here because shenanigans
-		.subscribe(() => {
-			this.input.nativeElement.focus();
-		});
+		Observable.of({})
+			.delay(1) // need timeout here because shenanigans
+			.subscribe(() => {
+				this.input.nativeElement.focus();
+			});
 	}
 	focus(picker: MatDatepicker<any>) {
 		this.to._isFocused = true;

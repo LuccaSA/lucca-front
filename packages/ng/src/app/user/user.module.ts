@@ -13,13 +13,12 @@ import { LuSelectModule } from '../select';
 		LuUserDisplayModule,
 		LuSelectModule,
 	],
-	declarations: [
-	],
+	declarations: [],
 	exports: [
 		LuUserPictureModule,
 		LuUserDisplayModule,
 		LuUserTileModule,
 		LuSelectModule,
-	]
+	],
 })
-export class LuUserModule { }
+export class LuUserModule {}

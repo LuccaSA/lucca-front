@@ -4,11 +4,7 @@ import { RDDApiFeederComponent } from './rdd-feeder.component';
 
 @NgModule({
 	imports: [],
-	declarations: [
-		RDDApiFeederComponent,
-	],
-	exports: [
-		RDDApiFeederComponent,
-	],
+	declarations: [RDDApiFeederComponent],
+	exports: [RDDApiFeederComponent],
 })
 export class LuRddFeederModule {}

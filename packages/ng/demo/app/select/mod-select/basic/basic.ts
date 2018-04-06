@@ -17,6 +17,6 @@ export class BasicModSelectComponent {
 		{ id: 3, mod: 'mod-material', name: 'Material' },
 		{ id: 4, mod: 'mod-framed', name: 'Framed' },
 	];
-	itemSelect = {id: 1, name: 'red'};
+	itemSelect = { id: 1, name: 'red' };
 	modSelect = { id: 1, mod: 'mod-basic', name: 'Basic' };
 }

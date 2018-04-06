@@ -11,4 +11,7 @@ export {
 	PopoverScrollStrategy,
 } from './popover.model';
 export { transformPopover } from './popover.animations';
-export { customPopoverTemplate, standardPopoverTemplate } from './popover.template';
+export {
+	customPopoverTemplate,
+	standardPopoverTemplate,
+} from './popover.template';

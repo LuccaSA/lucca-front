@@ -4,11 +4,10 @@ declare var require: any;
 @Component({
 	selector: 'demo-date-range-picker',
 	templateUrl: './date-range-picker.component.html',
-	styles: []
+	styles: [],
 })
 export class DemoDateRangePickerComponent implements OnInit {
-
-	constructor() { }
+	constructor() {}
 
 	snippets = {
 		// basic: {
@@ -17,7 +16,5 @@ export class DemoDateRangePickerComponent implements OnInit {
 		// },
 	};
 
-	ngOnInit() {
-	}
-
+	ngOnInit() {}
 }

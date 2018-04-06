@@ -1,7 +1,8 @@
 .mat-menu-item {
 	background-color: transparent;
 	@extend .textfield-options-entry;
-	&.mat-selected, &.mat-active {
+	&.mat-selected,
+	&.mat-active {
 		@extend .textfield-options-entry.is-focus;
 	}
 }

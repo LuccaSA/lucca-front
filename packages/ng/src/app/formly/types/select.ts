@@ -10,8 +10,10 @@ import 'rxjs/add/operator/map';
 	templateUrl: './select.html',
 })
 export class LuFormlyFieldSelect extends FieldType implements OnInit {
-	get _options() { return <any[]>this.to.options || []; }
-	ngOnInit () {
+	get _options() {
+		return <any[]>this.to.options || [];
+	}
+	ngOnInit() {
 		this.formControl.valueChanges.subscribe(value => {
 			this.setToOption(value);
 		});
@@ -19,7 +21,11 @@ export class LuFormlyFieldSelect extends FieldType implements OnInit {
 		this.setToOption(value);
 	}
 	setToOption(value) {
-		if (!!value && !this._options.includes(value) && this._options.map(o => o.id).includes(value.id)) {
+		if (
+			!!value &&
+			!this._options.includes(value) &&
+			this._options.map(o => o.id).includes(value.id)
+		) {
 			// replace formValue with the option value with the same id
 			const option = this._options.find(o => o.id === value.id);
 			this.formControl.setValue(option);

@@ -25,13 +25,8 @@ import { SharedModule } from '../shared';
 		DemoFeederSelectModule,
 		DemoSearcherSelectModule,
 	],
-	declarations: [
-		DemoSelectComponent,
-		DemoSimpleSelectComponent,
-	],
-	exports: [
-		DemoSelectComponent,
-	],
-	providers: []
+	declarations: [DemoSelectComponent, DemoSimpleSelectComponent],
+	exports: [DemoSelectComponent],
+	providers: [],
 })
-export class DemoSelectModule { }
+export class DemoSelectModule {}

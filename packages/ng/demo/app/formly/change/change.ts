@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
-const	choose = {
+import { FormlyFieldConfig } from '@ngx-formly/core';
+const choose = {
 	key: 'choose',
 	type: 'select',
 	formControl: new FormControl(),
@@ -11,17 +11,17 @@ const	choose = {
 			{ id: 0, name: 'input' },
 			{ id: 1, name: 'select' },
 			{ id: 2, name: 'autocomplete' },
-		]
+		],
 	},
 };
-const	input = {
+const input = {
 	key: 'input',
 	type: 'input',
 	templateOptions: {
 		label: 'input',
 	},
 };
-const	select = {
+const select = {
 	key: 'select',
 	type: 'select',
 	templateOptions: {
@@ -30,10 +30,10 @@ const	select = {
 			{ id: 1, name: 'one' },
 			{ id: 2, name: 'two' },
 			{ id: 3, name: 'three' },
-		]
+		],
 	},
 };
-const	autocomplete = {
+const autocomplete = {
 	key: 'autocomplete',
 	type: 'autocomplete',
 	templateOptions: {
@@ -42,7 +42,7 @@ const	autocomplete = {
 			{ id: 1, name: 'one' },
 			{ id: 2, name: 'two' },
 			{ id: 3, name: 'three' },
-		]
+		],
 	},
 };
 @Component({
@@ -52,28 +52,23 @@ const	autocomplete = {
 export class ChangeComponent implements OnInit {
 	form: FormGroup = new FormGroup({});
 
-	fields = [
-		choose,
-	] as any[];
+	fields = [choose] as any[];
 
 	user = {};
 
 	ngOnInit() {
-		choose.formControl.valueChanges.subscribe((val) => {
+		choose.formControl.valueChanges.subscribe(val => {
 			switch (val.id) {
 				case 0:
-				this.fields = [choose, input];
-				break;
+					this.fields = [choose, input];
+					break;
 				case 1:
-				this.fields = [choose, select];
-				break;
+					this.fields = [choose, select];
+					break;
 				case 2:
-				this.fields = [choose, autocomplete];
-				break;
-		}
+					this.fields = [choose, autocomplete];
+					break;
+			}
 		});
 	}
-
 }
-
-

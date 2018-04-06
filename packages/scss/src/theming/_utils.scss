@@ -11,22 +11,28 @@
 
 		@if type-of($e) == list {
 			$result: $result#{to-string($e, $glue, true)};
-		}
-
-		@else {
-			$result: if($i != length($list) or $is-nested, $result#{$e}#{$glue}, $result#{$e});
+		} @else {
+			$result: if(
+				$i != length($list) or $is-nested,
+				$result#{$e}#{$glue},
+				$result#{$e}
+			);
 		}
 	}
 
 	@return $result;
 }
 
-
 @function str-replace($string, $search, $replace: '') {
 	$index: str-index($string, $search);
 
 	@if $index {
-		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+		@return str-slice($string, 1, $index - 1) + $replace +
+			str-replace(
+				str-slice($string, $index + str-length($search)),
+				$search,
+				$replace
+			);
 	}
 
 	@return $string;
@@ -39,14 +45,14 @@
 	@for $i from 1 through $sum {
 		$str: str-index($string, $dem);
 		@if str-length($string) >= 1 and $str == null {
-			$list: append($list,$string);
+			$list: append($list, $string);
 			$string: '';
 		}
 
 		@if type-of($str) == number {
-			$each: str-slice($string,0,($str - 1));
+			$each: str-slice($string, 0, ($str - 1));
 			$list: append($list, $each);
-			$string: str-slice($string,($str + 1), $sum);
+			$string: str-slice($string, ($str + 1), $sum);
 		}
 	}
 
@@ -54,18 +60,18 @@
 }
 
 @function to-list($value) {
-	@return if(type-of($value) != list, ($value,), $value);
+	@return if(type-of($value) != list, ($value), $value);
 }
 
-
 @function str-camelcase($value) {
-	$words: str-explode($value, " ");
+	$words: str-explode($value, ' ');
 	$list: ();
-	$return: "";
+	$return: '';
 	@for $i from 1 through length($words) {
 		$word: nth($words, $i);
 		@if $i > 1 {
-			$word: to-upper-case(str-slice($word, 1, 1)) + str-slice($word, 2, str-length($word));
+			$word: to-upper-case(str-slice($word, 1, 1)) +
+				str-slice($word, 2, str-length($word));
 		}
 		$return: $return + $word;
 	}
@@ -73,12 +79,13 @@
 }
 
 @function str-capitalize($value) {
-	$result: to-upper-case(str-slice($value, 1, 1)) + str-slice($value, 2, str-length($value));
+	$result: to-upper-case(str-slice($value, 1, 1)) +
+		str-slice($value, 2, str-length($value));
 	@return $result;
 }
 // map
 // try to not need this one
-@function map-extend($map, $maps.../*, $deep */) {
+@function map-extend($map, $maps... /*, $deep */) {
 	$last: nth($maps, -1);
 	$deep: $last == true;
 	$max: if($deep, length($maps) - 1, length($maps));
@@ -94,9 +101,8 @@
 		} @else {
 			// If in deep mode, loop through all tuples in current map
 			@each $key, $value in $current {
-
 				// If value is a nested map and same key from map is a nested map as well
-				@if type-of($value) == "map" and type-of(map-get($map, $key)) == "map" {
+				@if type-of($value) == 'map' and type-of(map-get($map, $key)) == 'map' {
 					// Recursive extend
 					$value: map-extend(map-get($map, $key), $value, true);
 				}

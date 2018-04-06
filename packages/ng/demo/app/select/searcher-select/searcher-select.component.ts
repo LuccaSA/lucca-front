@@ -9,7 +9,7 @@ export class DemoSearcherSelectComponent {
 	snippets = {
 		searcher: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
 	};
 }

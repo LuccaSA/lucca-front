@@ -13,12 +13,10 @@
 	padding: 0 !important;
 }
 
-
 // MARGINS & PADDINGS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-@each $name, $spacings in _theme("spacings") {
-
+@each $name, $spacings in _theme('spacings') {
 	.u-marginBottom#{str-capitalize($name)} {
 		margin-bottom: $spacings !important;
 	}

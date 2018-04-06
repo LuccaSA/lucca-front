@@ -16,9 +16,7 @@ import { SharedModule } from '../shared';
 		LuSelectModule,
 		DemoApiSelectModule,
 	],
-	declarations: [
-	],
-	exports: [
-	]
+	declarations: [],
+	exports: [],
 })
-export class DemoApiModule { }
+export class DemoApiModule {}

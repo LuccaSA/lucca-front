@@ -1,18 +1,21 @@
-import { AApiSelectFeederWithPaging, IApiSelectFeederWithPaging } from '../../api';
+import {
+	AApiSelectFeederWithPaging,
+	IApiSelectFeederWithPaging,
+} from '../../api';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from '../';
 
 @Injectable()
-export class UserSelectApiFeeder<T extends IUser> extends AApiSelectFeederWithPaging<T> {
-
-
+export class UserSelectApiFeeder<
+	T extends IUser
+> extends AApiSelectFeederWithPaging<T> {
 	/** The pagingStart.  */
-	set pagingStart( paging: number){
+	set pagingStart(paging: number) {
 		this._pagingStart = paging;
 	}
-	get pagingStart(){
+	get pagingStart() {
 		return this._pagingStart;
 	}
 	/** The paging size. */
@@ -25,26 +28,27 @@ export class UserSelectApiFeeder<T extends IUser> extends AApiSelectFeederWithPa
 
 	private _api = '/api/v3/users/find';
 
-	constructor(
-		protected _http: HttpClient
-	) {
+	constructor(protected _http: HttpClient) {
 		super(_http);
 	}
 
 	getPagingStep(): number {
 		return this.pagingSize;
 	}
-	getPagedItems(clue: string, pagingStart: number, pagingStep: number): Observable<T[]> {
+	getPagedItems(
+		clue: string,
+		pagingStart: number,
+		pagingStep: number,
+	): Observable<T[]> {
 		const fields = ['id', 'firstName', 'lastName'].concat(this.fields);
 		const params = [
-				`formerEmployees=${this.formerEmployees}`,
-				`clue=${encodeURIComponent(clue)}`,
-				`paging=${this.pagingStart},${this.pagingSize}`,
-				`fields=${fields.join(',')}`,
-			];
+			`formerEmployees=${this.formerEmployees}`,
+			`clue=${encodeURIComponent(clue)}`,
+			`paging=${this.pagingStart},${this.pagingSize}`,
+			`fields=${fields.join(',')}`,
+		];
 		const url = `${this._api}?${params.join('&')}`;
-		return this._http.get<{ data: { items: T[] } }>(url)
-		.map(r => r.data.items);
+		return this._http.get<{ data: { items: T[] } }>(url).map(r => r.data.items);
 	}
 
 	textValue(item: T): string {

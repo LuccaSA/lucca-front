@@ -1,4 +1,4 @@
-@import "mappings";
+@import 'mappings';
 
 @function str-explode($string, $dem) {
 	$list: ();
@@ -7,14 +7,14 @@
 	@for $i from 1 through $sum {
 		$str: str-index($string, $dem);
 		@if str-length($string) >= 1 and $str == null {
-			$list: append($list,$string);
+			$list: append($list, $string);
 			$string: '';
 		}
 
 		@if type-of($str) == number {
-			$each: str-slice($string,0,($str - 1));
+			$each: str-slice($string, 0, ($str - 1));
 			$list: append($list, $each);
-			$string: str-slice($string,($str + 1), $sum);
+			$string: str-slice($string, ($str + 1), $sum);
 		}
 	}
 
@@ -22,13 +22,14 @@
 }
 
 @function str-camelcase($value) {
-	$words: str-explode($value, "_");
+	$words: str-explode($value, '_');
 	$list: ();
-	$return: "";
+	$return: '';
 	@for $i from 1 through length($words) {
 		$word: nth($words, $i);
 		@if $i > 1 {
-			$word: to-upper-case(str-slice($word, 1, 1)) + str-slice($word, 2, str-length($word));
+			$word: to-upper-case(str-slice($word, 1, 1)) +
+				str-slice($word, 2, str-length($word));
 		}
 		$return: $return + $word;
 	}
@@ -36,7 +37,7 @@
 }
 
 %classIcon {
-	font-family: "Lucca icons";
+	font-family: 'Lucca icons';
 	display: inline-block;
 	vertical-align: middle;
 	font-style: normal;
@@ -47,7 +48,7 @@
 		$class: str-camelcase($ligature);
 		&.icon-#{$class}::before {
 			@extend %classIcon;
-			content: "#{$char}";
+			content: '#{$char}';
 		}
 	}
 }

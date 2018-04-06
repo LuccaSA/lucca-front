@@ -18,13 +18,7 @@ import { LuApiSelect } from './api-select.component';
 		LuApiSelectPickerModule,
 		LuSelectModule,
 	],
-	declarations: [
-		LuApiSelect,
-	],
-	exports: [
-		LuApiSelect,
-		LuApiSelectPickerModule,
-	]
+	declarations: [LuApiSelect],
+	exports: [LuApiSelect, LuApiSelectPickerModule],
 })
-export class LuApiSelectModule { }
-
+export class LuApiSelectModule {}

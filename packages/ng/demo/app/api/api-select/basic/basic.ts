@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {DemoApiSelectFeeder} from './rdd-select-feeder';
+import { DemoApiSelectFeeder } from './rdd-select-feeder';
 
 @Component({
 	// tslint:disable-next-line:component-selector
@@ -11,9 +11,5 @@ export class BasicApiSelectComponent {
 	params = ['axisId=5'];
 
 	itemSelect: any;
-	constructor(
-		public apiSelectFeeder: DemoApiSelectFeeder) {
-	}
-
-
+	constructor(public apiSelectFeeder: DemoApiSelectFeeder) {}
 }

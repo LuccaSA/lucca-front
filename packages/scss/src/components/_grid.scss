@@ -3,16 +3,16 @@
 	flex: 0 1 auto;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: -.5rem;
-	margin-right: -.5rem;
+	margin-left: -0.5rem;
+	margin-right: -0.5rem;
 }
 
 %allColumns {
 	flex: 0 0 auto;
 	flex-basis: 100%;
 	max-width: 100%;
-	padding-left: .5rem;
-	padding-right: .5rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
 }
 
 @each $bp-name, $bp-obj in $breakpoints {
@@ -46,7 +46,6 @@
 		}
 	}
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

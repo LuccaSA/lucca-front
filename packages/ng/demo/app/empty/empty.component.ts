@@ -4,20 +4,19 @@ declare var require: any;
 @Component({
 	selector: 'demo-empty',
 	templateUrl: './empty.component.html',
-	styles: []
+	styles: [],
 })
 export class DemoEmptyComponent implements OnInit {
-
-	constructor() { }
+	constructor() {}
 
 	snippets = {
 		basic: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
 		custom: {
 			code: require('!!prismjs-loader?lang=typescript!./custom-fn/custom-fn'),
-			markup: require('!!prismjs-loader?lang=markup!./custom-fn/custom-fn.html')
+			markup: require('!!prismjs-loader?lang=markup!./custom-fn/custom-fn.html'),
 		},
 		// fieldgroup: {
 		// 	code: require('!!prismjs-loader?lang=typescript!./fieldgroup/fieldgroup'),
@@ -29,7 +28,5 @@ export class DemoEmptyComponent implements OnInit {
 		// },
 	};
 
-	ngOnInit() {
-	}
-
+	ngOnInit() {}
 }

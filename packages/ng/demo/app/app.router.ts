@@ -4,5 +4,5 @@ import { featuresRoutes } from './navigation/navigation.router';
 
 export const appRoutes: Routes = [
 	{ path: '', component: NavigationComponent, outlet: 'nav' },
-	{ path: '', children: [ ...featuresRoutes ] },
+	{ path: '', children: [...featuresRoutes] },
 ];

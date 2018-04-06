@@ -1,6 +1,5 @@
-@import
-	'~@angular/material/theming', // Basic file for custom theme
-	'mixins',
+@import '~@angular/material/theming',
+	// Basic file for custom theme 'mixins',
 	'overlay',
 	'buttons',
 	'datepicker',
@@ -13,6 +12,6 @@
 	'tooltip';
 
 // CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
-@include angular-material-typography(mat-typography-config(
-	$font-family: _theme("commons.font.family")
-));
+@include angular-material-typography(
+	mat-typography-config($font-family: _theme('commons.font.family'))
+);

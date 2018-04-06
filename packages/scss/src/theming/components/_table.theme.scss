@@ -1,18 +1,9 @@
 $table: (
-	padding: .65em 1em,
-	font-size: _theme("sizes.standard.font-size"),
-	line-height: _theme("sizes.standard.line-height"),
-	zebra: (
-		background: _theme("commons.background.base"),
-	),
-	hover: (
-		background: _theme("commons.background.dark"),
-	),
-
-	// mod
-	card: (
-		padding: 1.5rem,
-	),
+	padding: 0.65em 1em,
+	font-size: _theme('sizes.standard.font-size'),
+	line-height: _theme('sizes.standard.line-height'),
+	zebra: (background: _theme('commons.background.base')),
+	hover: (background: _theme('commons.background.dark')),
+	/ / mod card: (padding: 1.5rem)
 );
-
-$theme: _set($theme, "component.table", $table);
+$theme: _set($theme, 'component.table', $table);

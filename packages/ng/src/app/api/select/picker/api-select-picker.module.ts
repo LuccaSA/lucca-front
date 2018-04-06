@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LuApiSelectPicker } from './api-select-picker.component';
-import { LuSelectOptionModule, LU_SELECT_SEARCH_INTL_PROVIDER } from '../../../select';
+import {
+	LuSelectOptionModule,
+	LU_SELECT_SEARCH_INTL_PROVIDER,
+} from '../../../select';
 
 @NgModule({
 	imports: [
@@ -14,13 +17,8 @@ import { LuSelectOptionModule, LU_SELECT_SEARCH_INTL_PROVIDER } from '../../../s
 		HttpClientModule,
 		LuSelectOptionModule,
 	],
-	declarations: [
-		LuApiSelectPicker,
-	],
-	exports: [
-		LuApiSelectPicker,
-	],
-	providers: [LU_SELECT_SEARCH_INTL_PROVIDER]
+	declarations: [LuApiSelectPicker],
+	exports: [LuApiSelectPicker],
+	providers: [LU_SELECT_SEARCH_INTL_PROVIDER],
 })
-export class LuApiSelectPickerModule { }
-
+export class LuApiSelectPickerModule {}

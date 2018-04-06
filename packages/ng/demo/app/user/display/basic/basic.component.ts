@@ -3,16 +3,27 @@ import { Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'demo-basic-user-display',
 	templateUrl: './basic.component.html',
-	styles: []
+	styles: [],
 })
 export class BasicComponent implements OnInit {
 	user = { firstName: 'John', lastName: 'Doe' };
-	availableFormats = ['fl', 'Fl', 'FL', 'fL', 'lf', 'Lf', 'LF', 'lF', 'f', 'F', 'l', 'L'];
+	availableFormats = [
+		'fl',
+		'Fl',
+		'FL',
+		'fL',
+		'lf',
+		'Lf',
+		'LF',
+		'lF',
+		'f',
+		'F',
+		'l',
+		'L',
+	];
 	selectedFormat = 'fl';
 
-	constructor() { }
+	constructor() {}
 
-	ngOnInit() {
-	}
-
+	ngOnInit() {}
 }

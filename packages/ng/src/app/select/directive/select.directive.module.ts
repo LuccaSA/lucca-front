@@ -3,15 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LuSelectDirective } from './select.directive';
 
 @NgModule({
-	imports: [
-		CommonModule,
-	],
-	declarations: [
-		LuSelectDirective,
-	],
-	exports: [
-		LuSelectDirective,
-	]
+	imports: [CommonModule],
+	declarations: [LuSelectDirective],
+	exports: [LuSelectDirective],
 })
-export class LuSelectDirectiveModule { }
-
+export class LuSelectDirectiveModule {}

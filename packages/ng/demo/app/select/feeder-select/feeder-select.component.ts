@@ -6,16 +6,14 @@ declare var require: any;
 	templateUrl: './feeder-select.component.html',
 })
 export class DemoFeederSelectComponent {
-
 	snippets = {
 		feeder: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html')
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
 		picker: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/feeder-select-picker.component'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/feeder-select-picker.component.html')
+			markup: require('!!prismjs-loader?lang=markup!./basic/feeder-select-picker.component.html'),
 		},
 	};
-
 }

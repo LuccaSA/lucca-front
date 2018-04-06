@@ -1,5 +1,3 @@
-$box: (
-	background: _theme("commons.background.darker"),
-);
+$box: (background: _theme('commons.background.darker'));
 
-$theme: _set($theme, "components.box", $box);
+$theme: _set($theme, 'components.box', $box);

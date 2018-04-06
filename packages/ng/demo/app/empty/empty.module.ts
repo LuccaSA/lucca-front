@@ -17,13 +17,9 @@ import { CustomFnComponent } from './custom-fn/custom-fn';
 		SharedModule,
 		LuEmptyModule,
 	],
-	declarations: [
-		DemoEmptyComponent,
-		BasicComponent,
-		CustomFnComponent,
-	],
+	declarations: [DemoEmptyComponent, BasicComponent, CustomFnComponent],
 	exports: [
 		// DemoNotEmptyComponent,
-	]
+	],
 })
-export class DemoEmptyModule { }
+export class DemoEmptyModule {}

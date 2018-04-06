@@ -28,27 +28,21 @@ import {
 	Validators,
 	ValidatorFn,
 	ValidationErrors,
-	AbstractControl
+	AbstractControl,
 } from '@angular/forms';
-import {LuSelectDirective} from './directive/select.directive';
-import {LuSelectPicker} from './picker/select-picker.component';
-import {Subject} from 'rxjs/Subject';
-import {take} from 'rxjs/operators/take';
-import {startWith} from 'rxjs/operators/startWith';
-import {takeUntil} from 'rxjs/operators/takeUntil';
+import { LuSelectDirective } from './directive/select.directive';
+import { LuSelectPicker } from './picker/select-picker.component';
+import { Subject } from 'rxjs/Subject';
+import { take } from 'rxjs/operators/take';
+import { startWith } from 'rxjs/operators/startWith';
+import { takeUntil } from 'rxjs/operators/takeUntil';
 import {
 	LuSelectOption,
 	ASelectOptionFeeder,
 	ISelectOptionFeeder,
 } from './option';
-import {
-	ISelectClearer,
-	LuSelectClearerComponent,
-} from './clearer';
-import {
-	sameOption,
-	findOption
-} from './utils';
+import { ISelectClearer, LuSelectClearerComponent } from './clearer';
+import { sameOption, findOption } from './utils';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -76,20 +70,27 @@ const TAB = 'Tab';
 	encapsulation: ViewEncapsulation.Emulated,
 	templateUrl: './select.component.html',
 	providers: [
-		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => LuSelect), multi: true },
-		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => LuSelect), multi: true },
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => LuSelect),
+			multi: true,
+		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: forwardRef(() => LuSelect),
+			multi: true,
+		},
 	],
 	styleUrls: ['./select.component.scss'],
 })
 // tslint:disable-next-line:component-class-suffix
 export class LuSelect<T>
-implements
-	ControlValueAccessor,
-	AfterContentInit,
-	AfterViewInit,
-	OnInit,
-	OnDestroy {
-
+	implements
+		ControlValueAccessor,
+		AfterContentInit,
+		AfterViewInit,
+		OnInit,
+		OnDestroy {
 	/** Emits whenever the component is destroyed. */
 	private _destroy$ = new Subject<void>();
 	/** inner validator */
@@ -102,7 +103,7 @@ implements
 		return this._value;
 	}
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
-	set value(value:  T | null | undefined) {
+	set value(value: T | null | undefined) {
 		let valueTemp = value;
 		if (valueTemp === null) {
 			// We have to deal with the fact that the clearer could not be set => we do nothing
@@ -123,7 +124,6 @@ implements
 			}
 			// Transfer the information to popover
 			this._picker.selectOption(value);
-
 		}
 		// We render the option
 		this._selectOption = findOption(this._picker.luSelectOptions(), value);
@@ -134,7 +134,7 @@ implements
 	// Inner values
 	protected _value: T | null;
 	protected _selectOption: LuSelectOption<T> | null;
-	private _forceChangeValue= true;
+	private _forceChangeValue = true;
 
 	// Inner Children
 	@ViewChild(LuSelectDirective) _field: LuSelectDirective;
@@ -142,7 +142,8 @@ implements
 	/**
 	 * List of LuSelectOptions
 	 */
-	@ContentChildren(LuSelectOption, { descendants: true }) luOptions: QueryList<LuSelectOption<T>>;
+	@ContentChildren(LuSelectOption, { descendants: true })
+	luOptions: QueryList<LuSelectOption<T>>;
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
@@ -153,13 +154,14 @@ implements
 	/**
 	 * Reference of the optionFeeder
 	 */
-	@ContentChild(ASelectOptionFeeder) optionFeederContent: ISelectOptionFeeder<T>;
+	@ContentChild(ASelectOptionFeeder)
+	optionFeederContent: ISelectOptionFeeder<T>;
 	@ViewChild(ASelectOptionFeeder) optionFeederView: ISelectOptionFeeder<T>;
 	private _optionFeeder: ISelectOptionFeeder<T>;
 	/**
 	 * Emits an event when the select recieve or lost the focus
 	 */
-	@Output() selectFocus= new EventEmitter<boolean>();
+	@Output() selectFocus = new EventEmitter<boolean>();
 
 	/**
 	 * Add a class binding for 'is-filled' when the select is filled
@@ -170,7 +172,6 @@ implements
 	 */
 	@HostBinding('class.is-focused') isFocused = false;
 
-
 	// validators
 	validate(c: AbstractControl): ValidationErrors | null {
 		return this._validator ? this._validator(c) : null;
@@ -178,23 +179,25 @@ implements
 
 	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
 		return null;
-	}
+	};
 	private _cvaOnChange: (value: T) => void = () => {};
 	_onTouched = () => {};
 
 	constructor(
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
-	) {
-	}
+	) {}
 
 	// Life Cycle methods
 	ngOnInit() {
 		this._validator = Validators.compose([this._itemValidator]);
 		// We make lu-select focusable with tab
-		this._renderer.setAttribute(this._elementRef.nativeElement, 'tabindex', '0');
-		this._picker.itemSelected
-		.subscribe(item => {
+		this._renderer.setAttribute(
+			this._elementRef.nativeElement,
+			'tabindex',
+			'0',
+		);
+		this._picker.itemSelected.subscribe(item => {
 			this.value = item ? item.luOptionValue : undefined;
 			this._field.closePopover();
 			this.isFocused = false;
@@ -207,13 +210,17 @@ implements
 	}
 
 	ngAfterContentInit() {
-		this.luOptions.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe((option) => {
-			Promise.resolve().then(() => {
-				this._picker.resetOptions(this.luOptions.toArray(), this._forceChangeValue);
-				this._forceChangeValue = true;
+		this.luOptions.changes
+			.pipe(startWith(null), takeUntil(this._destroy$))
+			.subscribe(option => {
+				Promise.resolve().then(() => {
+					this._picker.resetOptions(
+						this.luOptions.toArray(),
+						this._forceChangeValue,
+					);
+					this._forceChangeValue = true;
+				});
 			});
-
-		});
 
 		Promise.resolve().then(() => {
 			if (this.clearer) {
@@ -222,9 +229,9 @@ implements
 					if (!first && this.value) {
 						this.value = value;
 					}
-						if (first) {
-							first = false;
-						}
+					if (first) {
+						first = false;
+					}
 				});
 			}
 
@@ -256,7 +263,6 @@ implements
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
-
 
 	protected initOptionFeeder(optionFeeder: ISelectOptionFeeder<T>): void {
 		this._optionFeeder = optionFeeder;
@@ -330,7 +336,9 @@ implements
 				$event.preventDefault();
 				return this._picker.onEndKeydown(this._field.popoverOpen);
 			case ENTER_KEY: {
-				this._field.popoverOpen ? this._picker.onEnterKeydown() : this._field.openPopover();
+				this._field.popoverOpen
+					? this._picker.onEnterKeydown()
+					: this._field.openPopover();
 				if (this._field.popoverOpen && this._optionFeeder) {
 					this._optionFeeder.open();
 				}
@@ -375,7 +383,7 @@ implements
 
 	/**
 	 * Inner method for close management
-	*/
+	 */
 	_onClose() {
 		this.isFocused = this._field.popoverOpen;
 		this.selectFocus.emit(this._field.popoverOpen);
@@ -384,11 +392,11 @@ implements
 	// Utilities
 
 	get _strValue(): string {
-		return this.value ? this._elementRef.nativeElement.value as string : (this.placeholder ? this.placeholder : '');
+		return this.value
+			? (this._elementRef.nativeElement.value as string)
+			: this.placeholder ? this.placeholder : '';
 	}
 	private _emitClearable() {
 		this.canRemove(this.clearer && !!this.value);
 	}
-
-
 }

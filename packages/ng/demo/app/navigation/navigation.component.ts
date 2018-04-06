@@ -5,11 +5,9 @@ import { featuresRoutes } from './navigation.router';
 	templateUrl: './navigation.component.html',
 })
 export class NavigationComponent implements OnInit {
+	features = [...featuresRoutes];
 
-	features = [ ...featuresRoutes ];
+	constructor() {}
 
-	constructor() { }
-
-	ngOnInit() {
-	}
+	ngOnInit() {}
 }

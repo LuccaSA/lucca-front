@@ -7,7 +7,10 @@ import { slidingAnimations } from './slide.animation';
 export type AnimationType = 'scale' | 'slide' | 'fade';
 export const DEFAULT_LF_ANIMATION_TIMING = '250ms 0ms ease-out';
 
-export function LuAnimationFactory(type: AnimationType = 'fade', animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+export function LuAnimationFactory(
+	type: AnimationType = 'fade',
+	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+): AnimationTriggerMetadata {
 	switch (type) {
 		case 'fade':
 			return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
@@ -20,13 +23,18 @@ export function LuAnimationFactory(type: AnimationType = 'fade', animationTiming
 	}
 }
 
-export function LuFadeAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+export function LuFadeAnimationFactory(
+	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+): AnimationTriggerMetadata {
 	return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
 }
-export function LuScaleAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+export function LuScaleAnimationFactory(
+	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+): AnimationTriggerMetadata {
 	return trigger('scaleAnimation', [...scalingAnimations(animationTiming)]);
 }
-export function LuSlideAnimationFactory(animationTiming: string = DEFAULT_LF_ANIMATION_TIMING): AnimationTriggerMetadata {
+export function LuSlideAnimationFactory(
+	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+): AnimationTriggerMetadata {
 	return trigger('slideAnimation', [...slidingAnimations(animationTiming)]);
 }
-

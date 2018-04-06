@@ -13,11 +13,9 @@ import { LuApiModule } from './api';
 		LuUserModule,
 		LuPopoverModule,
 	],
-	exports: [
-		LuDateRangePickerModule,
-		LuUserModule,
-		LuPopoverModule,
+	exports: [LuDateRangePickerModule, LuUserModule, LuPopoverModule],
+	providers: [
+		{ provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: { disabled: true } },
 	],
-	providers: [{provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: {disabled: true}}],
 })
 export class LuRootModule {}

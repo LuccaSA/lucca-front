@@ -22,11 +22,13 @@ export interface IPopoverPanel {
 	templateRef: TemplateRef<any>;
 	close: EventEmitter<void>;
 	setPositionClasses: (pos: PopoverPosition, al: PopoverAlignment) => void;
-	setPositionClassesChanges: (posX: PopoverPosition, posY: PopoverPosition) => void;
+	setPositionClassesChanges: (
+		posX: PopoverPosition,
+		posY: PopoverPosition,
+	) => void;
 	_emitCloseEvent: () => void;
 }
 
 export interface IPopoverTarget {
 	_elementRef: ElementRef;
 }
-

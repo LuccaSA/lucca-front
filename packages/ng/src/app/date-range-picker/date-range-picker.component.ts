@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 // import {MatDialog} from '@angular/material';
 // import {DateRangeModalComponent} from './date-range-modal/date-range-modal.component';
 // import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -13,7 +13,8 @@ import {Component, forwardRef, Input} from '@angular/core';
 @Component({
 	selector: 'lu-date-range-picker',
 	// templateUrl: './date-range-picker.component.html',
-	template: '<span>lu-date-range-picker - MAJOR REWORK SCHEDULED FOR THIS COMPONENT - DO NOT USE IN THIS RELEASE</span>',
+	template:
+		'<span>lu-date-range-picker - MAJOR REWORK SCHEDULED FOR THIS COMPONENT - DO NOT USE IN THIS RELEASE</span>',
 	// styleUrls: ['./date-range-picker.component.scss'],
 	providers: [
 		// {
@@ -21,7 +22,7 @@ import {Component, forwardRef, Input} from '@angular/core';
 		// 	useExisting: forwardRef(() => LuDateRangePickerComponent),
 		// 	multi: true,
 		// }
-	]
+	],
 })
 // export class LuDateRangePickerComponent implements ControlValueAccessor {
 export class LuDateRangePickerComponent {
@@ -42,7 +43,6 @@ export class LuDateRangePickerComponent {
 	// _selectedChoice: IDateRangeSelectChoice;
 
 	// propagateChange = (_: any) => {};
-
 
 	// constructor(public dialog: MatDialog, public translateService: LuTranslateService) {
 	// 	this.preConfiguredRanges = [];
@@ -97,5 +97,4 @@ export class LuDateRangePickerComponent {
 	// isEmptyRange(range: IDateRange) {
 	// 	return !range || (!range.start && !range.end);
 	// }
-
 }

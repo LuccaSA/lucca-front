@@ -4,19 +4,17 @@ declare var require: any;
 @Component({
 	selector: 'demo-user-display',
 	templateUrl: './user-display.component.html',
-	styles: []
+	styles: [],
 })
 export class DemoUserDisplayComponent implements OnInit {
 	snippets = {
 		basic: {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic.component'),
-			markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html')
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.component.html'),
 		},
 	};
 
-	constructor() { }
+	constructor() {}
 
-	ngOnInit() {
-	}
-
+	ngOnInit() {}
 }

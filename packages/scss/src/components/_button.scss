@@ -4,15 +4,15 @@
 	position: relative;
 	text-decoration: none;
 	border: 0;
-	font-size: _component("button.sizing.default.font-size");
-	padding: _component("button.sizing.default.padding");
+	font-size: _component('button.sizing.default.font-size');
+	padding: _component('button.sizing.default.padding');
 	vertical-align: middle;
 	white-space: nowrap;
-	margin: _component("button.margin");
-	border-radius: _component("button.border.radius");
-	box-shadow: unquote(_component("button.box-shadow"));
-	font-family: unquote(_component("button.font.family"));
-	transition: unquote(_component("button.transition"));
+	margin: _component('button.margin');
+	border-radius: _component('button.border.radius');
+	box-shadow: unquote(_component('button.box-shadow'));
+	font-family: unquote(_component('button.font.family'));
+	transition: unquote(_component('button.transition'));
 
 	&:first-of-type {
 		margin-left: 0;
@@ -24,19 +24,19 @@
 
 	&:hover {
 		&:not([disabled]) {
-			box-shadow: unquote(_component("button.hover.box-shadow"));
+			box-shadow: unquote(_component('button.hover.box-shadow'));
 		}
 	}
 
 	&:focus {
 		&:not([disabled]) {
-			box-shadow: unquote(_component("button.focus.box-shadow"));
+			box-shadow: unquote(_component('button.focus.box-shadow'));
 		}
 	}
 
 	&:active {
 		outline: 0;
-		box-shadow: unquote(_component("button.box-shadow"));
+		box-shadow: unquote(_component('button.box-shadow'));
 
 		&:focus {
 			outline: 0;
@@ -44,24 +44,24 @@
 	}
 }
 
-
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
 	@mixin buttonColoring($palette) {
-		background: _get($palette, "color");
-		color: _get($palette, "text");
-		&:hover, &:focus {
-			background: lighten(_get($palette, "color"), 5%);
+		background: _get($palette, 'color');
+		color: _get($palette, 'text');
+		&:hover,
+		&:focus {
+			background: lighten(_get($palette, 'color'), 5%);
 		}
 		&:active {
-			background: darken(_get($palette, "color"), 5%);
+			background: darken(_get($palette, 'color'), 5%);
 		}
 	}
 
 	// default color
-	@include buttonColoring(_component("button.default-palette"));
+	@include buttonColoring(_component('button.default-palette'));
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -71,34 +71,32 @@
 	}
 }
 
-
 // SIZING
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	@each $button-size, $size-obj in _component("button.sizing") {
+	@each $button-size, $size-obj in _component('button.sizing') {
 		&.size-#{$button-size} {
-			font-size: _get($size-obj, "font-size");
-			padding: _get($size-obj, "padding");
+			font-size: _get($size-obj, 'font-size');
+			padding: _get($size-obj, 'padding');
 		}
 	}
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-
 	&.mod-flat {
 		background: transparent;
 		box-shadow: none;
 		text-decoration: underline;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			&:not([disabled]) {
 				box-shadow: none;
-				color: _component("button.flat.color");
+				color: _component('button.flat.color');
 			}
 		}
 	}
@@ -106,18 +104,19 @@
 	&.mod-wired {
 		@mixin buttonWiredColoring($palette) {
 			background: transparent;
-			color: _color("text.default");
+			color: _color('text.default');
 
-			&:hover, &:focus {
+			&:hover,
+			&:focus {
 				&:not([disabled]) {
-					box-shadow: 0 0 0 2px _get($palette, "color") inset;
-					color: _get($palette, "color");
+					box-shadow: 0 0 0 2px _get($palette, 'color') inset;
+					color: _get($palette, 'color');
 				}
 			}
 		}
 
 		// default color
-		@include buttonWiredColoring(_component("button.wired.default-palette"));
+		@include buttonWiredColoring(_component('button.wired.default-palette'));
 
 		// palette colors
 		@each $name, $palette in _palettes() {
@@ -130,18 +129,21 @@
 	&.mod-filling {
 		@mixin buttonFillingColoring($palette) {
 			background: transparent;
-			color: _color("text.default");
+			color: _color('text.default');
 
-			&:hover, &:focus {
+			&:hover,
+			&:focus {
 				&:not([disabled]) {
-					background: _get($palette, "color");
-					color: _get($palette, "text");
+					background: _get($palette, 'color');
+					color: _get($palette, 'text');
 				}
 			}
 		}
 
 		// default color
-		@include buttonFillingColoring(_component("button.filling.default-palette"));
+		@include buttonFillingColoring(
+			_component('button.filling.default-palette')
+		);
 
 		// palette colors
 		@each $name, $palette in _palettes() {
@@ -154,49 +156,49 @@
 	&.mod-link {
 		background: transparent;
 		box-shadow: none;
-		color: _color("text.link");
+		color: _color('text.link');
 		padding: 0;
 		text-decoration: underline;
 
-		&:hover, &:focus, &:active {
+		&:hover,
+		&:focus,
+		&:active {
 			background: transparent;
 			box-shadow: none;
-			color: lighten(_color("text.link"), 15%);
+			color: lighten(_color('text.link'), 15%);
 		}
 	}
 }
-
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-
 	/* Disabled */
 
 	&[disabled] {
 		cursor: default;
-		opacity: _theme("commons.disabled.opacity");
+		opacity: _theme('commons.disabled.opacity');
 	}
 
 	&.is-disabled {
-		opacity: _theme("commons.disabled.opacity");
+		opacity: _theme('commons.disabled.opacity');
 		pointer-events: none;
 	}
 
 	/* Loading */
 
 	&.is-loading {
-		@include loading(_component("button.sizing.default.font-size"));
+		@include loading(_component('button.sizing.default.font-size'));
 		color: transparent;
-		opacity: _theme("commons.disabled.opacity");
+		opacity: _theme('commons.disabled.opacity');
 		pointer-events: none;
 		user-select: none;
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _component('button.sizing') {
 			&.size-#{$button-size} {
-				@include loading(_get($size-obj, "font-size"));
+				@include loading(_get($size-obj, 'font-size'));
 			}
 		}
 	}
@@ -204,17 +206,17 @@
 	/* Success */
 
 	&.is-success {
-		background: _color("success");
+		background: _color('success');
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
 
 		&::after {
-			@include makeIcon("tick");
+			@include makeIcon('tick');
 			bottom: 0;
 			color: white;
-			font-size: 1.5 * _component("button.sizing.default.font-size");
-			height: 1.5 * _component("button.sizing.default.font-size");
+			font-size: 1.5 * _component('button.sizing.default.font-size');
+			height: 1.5 * _component('button.sizing.default.font-size');
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -224,11 +226,11 @@
 		}
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _component('button.sizing') {
 			&.size-#{$button-size} {
 				&::after {
-					font-size: 1.5 * _get($size-obj, "font-size");
-					height: 1.5 * _get($size-obj, "font-size");
+					font-size: 1.5 * _get($size-obj, 'font-size');
+					height: 1.5 * _get($size-obj, 'font-size');
 				}
 			}
 		}
@@ -237,17 +239,17 @@
 	/* Error */
 
 	&.is-error {
-		background: _color("error");
+		background: _color('error');
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
 
 		&::after {
-			@include makeIcon("cross");
+			@include makeIcon('cross');
 			bottom: 0;
 			color: white;
-			font-size: 1.5 * _component("button.sizing.default.font-size");
-			height: 1.5 * _component("button.sizing.default.font-size");
+			font-size: 1.5 * _component('button.sizing.default.font-size');
+			height: 1.5 * _component('button.sizing.default.font-size');
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -257,11 +259,11 @@
 		}
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _component('button.sizing') {
 			&.size-#{$button-size} {
 				&::after {
-					font-size: 1.5 * _get($size-obj, "font-size");
-					height: 1.5 * _get($size-obj, "font-size");
+					font-size: 1.5 * _get($size-obj, 'font-size');
+					height: 1.5 * _get($size-obj, 'font-size');
 				}
 			}
 		}
@@ -273,7 +275,7 @@
 
 .button-group {
 	display: flex;
-	margin: _component("button.margin");
+	margin: _component('button.margin');
 
 	.button {
 		border-radius: 0;
@@ -283,32 +285,35 @@
 	}
 
 	> .button {
-
 		&:first-child {
-			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
+			border-radius: _component('button.border.radius') 0 0
+				_component('button.border.radius');
 		}
 
 		&:last-child {
-			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
+			border-radius: 0 _component('button.border.radius')
+				_component('button.border.radius') 0;
 		}
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			z-index: 1;
 		}
 	}
 }
 
 .button-group-item {
-
 	&:first-child {
 		.button {
-			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
+			border-radius: _component('button.border.radius') 0 0
+				_component('button.border.radius');
 		}
 	}
 
 	&:last-child {
 		.button {
-			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
+			border-radius: 0 _component('button.border.radius')
+				_component('button.border.radius') 0;
 		}
 	}
 }
@@ -317,8 +322,8 @@
 	display: none;
 
 	&:checked + .button {
-		background: _component("button.checked.color");
-		color: _component("button.checked.text");
+		background: _component('button.checked.color');
+		color: _component('button.checked.text');
 		z-index: 1;
 	}
 }

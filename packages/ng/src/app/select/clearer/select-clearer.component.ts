@@ -1,8 +1,4 @@
-import {
-	Component,
-	HostBinding,
-	EventEmitter
-} from '@angular/core';
+import { Component, HostBinding, EventEmitter } from '@angular/core';
 import { ISelectClearer } from './select-clearer.model';
 
 @Component({
@@ -13,14 +9,12 @@ import { ISelectClearer } from './select-clearer.model';
 /**
  * Component that manage the possibility to clear a select. null value will be set when we click on it
  */
-export class LuSelectClearerComponent<T> implements ISelectClearer<T>  {
-
+export class LuSelectClearerComponent<T> implements ISelectClearer<T> {
 	@HostBinding('class.is-clearable') modRemove = false;
 
 	private _emitter: (T) => void;
 
-	constructor() {
-	}
+	constructor() {}
 
 	subscribe(next: (T) => void) {
 		this._emitter = next;

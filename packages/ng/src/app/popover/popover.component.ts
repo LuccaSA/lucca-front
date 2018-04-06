@@ -14,8 +14,17 @@ import {
 
 import { ESCAPE } from '@angular/cdk/keycodes';
 
-import { throwLuPopoverInvalidPosition, throwLuPopoverInvalidAlignement } from './popover.errors';
-import { IPopoverPanel, PopoverAlignment, PopoverPosition, PopoverTriggerEvent, PopoverScrollStrategy } from './popover.model';
+import {
+	throwLuPopoverInvalidPosition,
+	throwLuPopoverInvalidAlignement,
+} from './popover.errors';
+import {
+	IPopoverPanel,
+	PopoverAlignment,
+	PopoverPosition,
+	PopoverTriggerEvent,
+	PopoverScrollStrategy,
+} from './popover.model';
 import { transformPopover } from './popover.animations';
 
 import { AnimationEvent } from '@angular/animations';
@@ -29,7 +38,7 @@ import { AnimationEvent } from '@angular/animations';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	animations: [transformPopover],
-	exportAs: 'LuPopover'
+	exportAs: 'LuPopover',
 })
 export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	// @HostBinding() private role = 'dialog';
@@ -67,13 +76,24 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	protected _template: TemplateRef<any>;
 	/** Template to Use for the popover */
 	@Input()
-	get template(): TemplateRef<any> { return this._template; }
-	set template(value: TemplateRef<any>) { this._template = value; }
+	get template(): TemplateRef<any> {
+		return this._template;
+	}
+	set template(value: TemplateRef<any>) {
+		this._template = value;
+	}
 	/** Position of the popover around the trigger */
 	@Input('position')
-	get position() { return this._position; }
+	get position() {
+		return this._position;
+	}
 	set position(value: PopoverPosition) {
-		if (value !== 'above' && value !== 'below' && value !== 'after' && value !== 'before') {
+		if (
+			value !== 'above' &&
+			value !== 'below' &&
+			value !== 'after' &&
+			value !== 'before'
+		) {
 			throwLuPopoverInvalidPosition();
 		}
 		this._position = value;
@@ -82,9 +102,16 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 
 	/** Alignment of the popover regarding the trigger */
 	@Input('alignment')
-	get alignment() { return this._alignment; }
+	get alignment() {
+		return this._alignment;
+	}
 	set alignment(value: PopoverAlignment) {
-		if (value !== 'top' && value !== 'bottom' && value !== 'right' && value !== 'left') {
+		if (
+			value !== 'top' &&
+			value !== 'bottom' &&
+			value !== 'right' &&
+			value !== 'left'
+		) {
 			throwLuPopoverInvalidAlignement();
 		}
 		this._alignment = value;
@@ -93,57 +120,93 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 
 	/** Popover trigger event */
 	@Input('trigger-on')
-	get triggerEvent(): PopoverTriggerEvent { return this._triggerEvent; }
-	set triggerEvent(v: PopoverTriggerEvent) { this._triggerEvent = v; }
+	get triggerEvent(): PopoverTriggerEvent {
+		return this._triggerEvent;
+	}
+	set triggerEvent(v: PopoverTriggerEvent) {
+		this._triggerEvent = v;
+	}
 
 	/** Popover enter delay */
 	@Input('enter-delay')
-	get enterDelay(): number { return this._enterDelay; }
-	set enterDelay(v: number) { this._enterDelay = v; }
+	get enterDelay(): number {
+		return this._enterDelay;
+	}
+	set enterDelay(v: number) {
+		this._enterDelay = v;
+	}
 
 	/** Popover leave delay */
 	@Input('leave-delay')
-	get leaveDelay(): number { return this._leaveDelay; }
-	set leaveDelay(v: number) { this._leaveDelay = v; }
+	get leaveDelay(): number {
+		return this._leaveDelay;
+	}
+	set leaveDelay(v: number) {
+		this._leaveDelay = v;
+	}
 
 	/** Popover overlap trigger */
 	@Input('overlap-trigger')
-	get overlapTrigger(): boolean { return this._overlapTrigger; }
-	set overlapTrigger(v: boolean) { this._overlapTrigger = v; }
+	get overlapTrigger(): boolean {
+		return this._overlapTrigger;
+	}
+	set overlapTrigger(v: boolean) {
+		this._overlapTrigger = v;
+	}
 
 	/** Popover target offset x */
 	@Input('offset-x')
-	get targetOffsetX(): number { return this._targetOffsetX; }
-	set targetOffsetX(v: number) { this._targetOffsetX = v; }
+	get targetOffsetX(): number {
+		return this._targetOffsetX;
+	}
+	set targetOffsetX(v: number) {
+		this._targetOffsetX = v;
+	}
 
 	/** Popover target offset y */
 	@Input('offset-y')
-	get targetOffsetY(): number { return this._targetOffsetY; }
-	set targetOffsetY(v: number) { this._targetOffsetY = v; }
+	get targetOffsetY(): number {
+		return this._targetOffsetY;
+	}
+	set targetOffsetY(v: number) {
+		this._targetOffsetY = v;
+	}
 
 	/**
 	 * Popover container close on click
 	 * default: false
 	 */
 	@Input('close-on-click')
-	get closeOnClick(): boolean { return this._closeOnClick; }
-	set closeOnClick(v: boolean) { this._closeOnClick = v; }
+	get closeOnClick(): boolean {
+		return this._closeOnClick;
+	}
+	set closeOnClick(v: boolean) {
+		this._closeOnClick = v;
+	}
 
 	/**
 	 * Popover focus trap using cdkTrapFocus
 	 * default: false
 	 */
 	@Input('focus-trap-enabled')
-	get focusTrapEnabled(): boolean { return this._focusTrapEnabled; }
-	set focusTrapEnabled(v: boolean) { this._focusTrapEnabled = v; }
+	get focusTrapEnabled(): boolean {
+		return this._focusTrapEnabled;
+	}
+	set focusTrapEnabled(v: boolean) {
+		this._focusTrapEnabled = v;
+	}
 
 	/**
 	 * Popover scrollStrategy
 	 * default: reposition
 	 */
-		@Input('scroll-strategy')
-		get scrollStrategy(): PopoverScrollStrategy { return this._scrollStrategy; }
-		set scrollStrategy(v: PopoverScrollStrategy) { this._scrollStrategy = v; }
+	@Input('scroll-strategy')
+	get scrollStrategy(): PopoverScrollStrategy {
+		return this._scrollStrategy;
+	}
+	set scrollStrategy(v: PopoverScrollStrategy) {
+		this._scrollStrategy = v;
+	}
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -152,13 +215,17 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 	 * @param classes list of class names
 	 */
 	@Input('class')
-	get classList(): string { return this._classList; }
+	get classList(): string {
+		return this._classList;
+	}
 	set classList(classes: string) {
 		if (classes && classes.length) {
-			this._classList = classes.split(' ').reduce((obj: any, className: string) => {
-				obj[className] = true;
-				return obj;
-			}, {});
+			this._classList = classes
+				.split(' ')
+				.reduce((obj: any, className: string) => {
+					obj[className] = true;
+					return obj;
+				}, {});
 			this._elementRef.nativeElement.className = '';
 			this.setPositionClasses(this.position, this.alignment);
 		}
@@ -177,7 +244,6 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 		this._emitCloseEvent();
 		this.close.complete();
 	}
-
 
 	/** Handle a keyboard event from the popover, delegating to the appropriate action. */
 	_handleKeydown(event: KeyboardEvent) {
@@ -221,7 +287,7 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 		}
 	}
 	/** does nothing but must be overridable */
-	onMouseDown($event) {	}
+	onMouseDown($event) {}
 
 	/**
 	 * It's necessary to set position-based classes to ensure the popover panel animation
@@ -242,7 +308,10 @@ export class LuPopoverComponent implements IPopoverPanel, OnDestroy {
 		this.setPositionClassesChanges(posX, posY);
 	}
 
-	setPositionClassesChanges(posX: PopoverPosition, posY: PopoverPosition): void {
+	setPositionClassesChanges(
+		posX: PopoverPosition,
+		posY: PopoverPosition,
+	): void {
 		this._classList['lu-popover-before'] = posX === 'before';
 		this._classList['lu-popover-after'] = posX === 'after';
 		this._classList['lu-popover-above'] = posY === 'above';

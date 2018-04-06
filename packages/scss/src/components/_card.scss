@@ -9,32 +9,32 @@
 }
 
 .card-content {
-	padding: _theme("component.card.content.padding");
+	padding: _theme('component.card.content.padding');
 }
 
 .card-footer {
 	align-items: center;
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	border-top: _theme('commons.divider.width') solid
+		_theme('commons.divider.color');
 	display: flex;
 	min-height: 3rem;
-	padding: _theme("component.card.footer.padding");
+	padding: _theme('component.card.footer.padding');
 }
 
 .card-footer-right {
 	margin-left: auto;
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .card {
 	&.mod-grey {
-		background: _theme("commons.background.base");
+		background: _theme('commons.background.base');
 	}
 
 	&.mod-clickable {
-		color: _color("text.default");
+		color: _color('text.default');
 		cursor: pointer;
 		text-decoration: none;
 

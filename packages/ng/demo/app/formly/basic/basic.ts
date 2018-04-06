@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
-import {FormlyFieldConfig} from '@ngx-formly/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'demo-formly-basic',
@@ -66,7 +66,7 @@ export class BasicComponent {
 					{ id: 0, name: 'female' },
 					{ id: 1, name: 'male' },
 					{ id: 2, name: 'other' },
-				]
+				],
 			},
 		},
 		{
@@ -79,7 +79,7 @@ export class BasicComponent {
 					{ id: 0, name: 'female' },
 					{ id: 1, name: 'male' },
 					{ id: 2, name: 'other' },
-				]
+				],
 			},
 		},
 		{
@@ -99,5 +99,3 @@ export class BasicComponent {
 		console.log(user);
 	}
 }
-
-

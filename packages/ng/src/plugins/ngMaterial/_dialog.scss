@@ -14,10 +14,10 @@
 		bottom: 0;
 		width: 60%;
 		max-width: 800px;
-		@include media_smaller_than("md") {
+		@include media_smaller_than('md') {
 			width: 80%;
 		}
-		@include media_smaller_than("sm") {
+		@include media_smaller_than('sm') {
 			width: 100%;
 		}
 

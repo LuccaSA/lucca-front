@@ -1,4 +1,2 @@
-$main: (
-
-);
-$theme: _set($theme, "components.main", $main);
+$main: ();
+$theme: _set($theme, 'components.main', $main);

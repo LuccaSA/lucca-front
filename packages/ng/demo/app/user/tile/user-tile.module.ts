@@ -9,12 +9,7 @@ import { DisplayFormatComponent } from './displayFormat/display-format.component
 import { SizesComponent } from './sizes/sizes.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuUserTileModule,
-		SharedModule,
-		MatTooltipModule
-	],
+	imports: [CommonModule, LuUserTileModule, SharedModule, MatTooltipModule],
 	declarations: [
 		DemoUserTileComponent,
 		BasicComponent,
@@ -28,4 +23,4 @@ import { SizesComponent } from './sizes/sizes.component';
 		SizesComponent,
 	],
 })
-export class DemoUserTileModule { }
+export class DemoUserTileModule {}

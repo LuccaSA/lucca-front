@@ -4,7 +4,8 @@
 	display: block;
 	line-height: unset !important;
 	outline: none;
-	&.mat-selected, &.mat-active {
+	&.mat-selected,
+	&.mat-active {
 		@extend .textfield-options-entry.is-focus;
 	}
 

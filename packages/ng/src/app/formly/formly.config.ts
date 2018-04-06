@@ -13,9 +13,12 @@ import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
 import { LuFormlyWrapperTextfieldLayout } from './wrappers/textfield-layout';
 import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
 import { LuFormlyWrapperIcon, TemplateIcon } from './wrappers/icon';
-import { LuFormlyWrapperError, TemplateError, LuFormlyErrorMessage } from './wrappers/error';
+import {
+	LuFormlyWrapperError,
+	TemplateError,
+	LuFormlyErrorMessage,
+} from './wrappers/error';
 import { LuFormlyWrapperButton, TemplateButton } from './wrappers/button';
-
 
 export const LU_FORMLY_COMPONENTS = [
 	LuFormlyErrorMessage,

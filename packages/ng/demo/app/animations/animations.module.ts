@@ -7,11 +7,13 @@ import { ScalingComponent } from './scaling/scaling.component';
 import { SharedModule } from '../shared';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		SharedModule,
+	imports: [CommonModule, SharedModule],
+	declarations: [
+		DemoAnimationsComponent,
+		SlidingComponent,
+		ScalingComponent,
+		FadingComponent,
 	],
-	declarations: [DemoAnimationsComponent, SlidingComponent, ScalingComponent, FadingComponent],
-	exports: [DemoAnimationsComponent]
+	exports: [DemoAnimationsComponent],
 })
-export class DemoAnimationsModule { }
+export class DemoAnimationsModule {}

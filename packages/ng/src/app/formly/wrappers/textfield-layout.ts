@@ -1,5 +1,10 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-formly/core';
+import {
+	FieldWrapper,
+	FormlyFieldConfig,
+	FormlyConfig,
+	FieldType,
+} from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -8,14 +13,17 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-f
 	templateUrl: './textfield-layout.html',
 })
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
-	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
+	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	fieldComponent: ViewContainerRef;
 
 	get mod() {
 		return this.to.mod || '';
 	}
 
 	get modMultiline() {
-		return !!this.field && this.field.type === 'textarea' ? 'mod-multiline' : '';
+		return !!this.field && this.field.type === 'textarea'
+			? 'mod-multiline'
+			: '';
 	}
 
 	get modWithSuffix() {
@@ -27,10 +35,12 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	}
 
 	get isFocused() {
-		return (!!this.to && this.to._isFocused) ? 'is-focused' : '';
+		return !!this.to && this.to._isFocused ? 'is-focused' : '';
 	}
 
 	get isError() {
-		return (this.formControl.invalid && this.formControl.touched) ? 'is-error' : '';
+		return this.formControl.invalid && this.formControl.touched
+			? 'is-error'
+			: '';
 	}
 }

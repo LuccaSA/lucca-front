@@ -10,22 +10,13 @@ import { RedirectService, RedirectEnvironment } from './redirect.service';
 import { RedirectInterceptor } from './redirect.interceptor';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		LuEmptyModule,
-		HttpClientModule,
-	],
-	declarations: [
-		RedirectComponent,
-	],
-	exports: [
-		RedirectComponent,
-	],
+	imports: [CommonModule, FormsModule, LuEmptyModule, HttpClientModule],
+	declarations: [RedirectComponent],
+	exports: [RedirectComponent],
 	providers: [
 		RedirectEnvironment,
 		RedirectService,
 		{ provide: HTTP_INTERCEPTORS, useClass: RedirectInterceptor, multi: true },
 	],
 })
-export class RedirectModule { }
+export class RedirectModule {}

@@ -1,18 +1,19 @@
-$font-path: _theme("icons.font-path");
-@import "node_modules/@lucca-front/icons/src/main";
-@import "node_modules/@lucca-front/icons/src/mixins";
+$font-path: _theme('icons.font-path');
+@import 'node_modules/@lucca-front/icons/src/main';
+@import 'node_modules/@lucca-front/icons/src/mixins';
 
-.lucca-icon, .#{_theme("icons.prefix")} {
+.lucca-icon,
+.#{_theme('icons.prefix')} {
 	// default lucca-icon style
 	@extend %lucca-icon;
 
 	// Sizing mixin
 	@mixin iconSizing($size) {
-		font-size: _get($size, "font-size") * 1.25;
+		font-size: _get($size, 'font-size') * 1.25;
 	}
 
 	// all sizes
-	@each $name, $size in _theme("sizes") {
+	@each $name, $size in _theme('sizes') {
 		&.size-#{$name} {
 			@include iconSizing($size);
 		}

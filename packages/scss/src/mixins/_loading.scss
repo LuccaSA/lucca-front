@@ -1,13 +1,13 @@
 @mixin loading($size) {
 	&::before {
-		border: 2px solid rgba(0, 0, 0, .2);
+		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 50%;
 		bottom: 0;
-		content: "";
+		content: '';
 		display: block;
 		height: $size;
 		left: 0;
-		line-height: .8rem;
+		line-height: 0.8rem;
 		margin: auto;
 		position: absolute;
 		right: 0;
@@ -17,15 +17,15 @@
 
 	&::after {
 		animation: rotating 250ms linear infinite;
-		border: 2px solid rgba(0, 0, 0, .2);
-		border-color: rgba(0, 0, 0, .5) transparent transparent transparent;
+		border: 2px solid rgba(0, 0, 0, 0.2);
+		border-color: rgba(0, 0, 0, 0.5) transparent transparent transparent;
 		border-radius: 50%;
 		bottom: 0;
-		content: "";
+		content: '';
 		display: block;
 		height: $size;
 		left: 0;
-		line-height: .8rem;
+		line-height: 0.8rem;
 		margin: auto;
 		position: absolute;
 		right: 0;
@@ -43,24 +43,33 @@
 	}
 }
 
-@mixin loadingGradientAnimation($color, $withBackground: false, $bgColor: null, $duration: 2s) {
-		animation: loadingGradientKeyframes $duration linear infinite;
-		animation-fill-mode: forwards;
-		@if $withBackground {
-			@if $bgColor != null {
-				background: $bgColor linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
-			}
-			@else {
-				background: $color linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
-			}
+@mixin loadingGradientAnimation(
+	$color,
+	$withBackground: false,
+	$bgColor: null,
+	$duration: 2s
+) {
+	animation: loadingGradientKeyframes $duration linear infinite;
+	animation-fill-mode: forwards;
+	@if $withBackground {
+		@if $bgColor != null {
+			background: $bgColor
+				linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
+		} @else {
+			background: $color
+				linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
 		}
-		@else {
-			background: linear-gradient(315deg, transparent 40%, $color 50%, transparent 100%);
-		}
-		background-repeat: no-repeat;
-		background-size: 400% 100%;
+	} @else {
+		background: linear-gradient(
+			315deg,
+			transparent 40%,
+			$color 50%,
+			transparent 100%
+		);
+	}
+	background-repeat: no-repeat;
+	background-size: 400% 100%;
 }
-
 @keyframes loadingGradientKeyframes {
 	0% {
 		background-position: 100% 0%;

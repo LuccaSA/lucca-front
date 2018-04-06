@@ -1,5 +1,5 @@
-@import "node_modules/@lucca-front/scss/src/theming.overridable";
-@import "node_modules/@lucca-front/scss/src/mixins";
+@import 'node_modules/@lucca-front/scss/src/theming.overridable';
+@import 'node_modules/@lucca-front/scss/src/mixins';
 
 .lu-popover-panel {
 	display: flex;
@@ -15,7 +15,6 @@
 }
 
 .lu-popover-panel {
-
 	&.lu-popover-above {
 		transform-origin: bottom center;
 	}

@@ -15,9 +15,7 @@ import { DemoUserSelectModule } from './select/user-select-basic.module';
 		DemoUserPictureModule,
 		DemoUserSelectModule,
 	],
-	declarations: [
-	],
-	exports: [
-	]
+	declarations: [],
+	exports: [],
 })
-export class DemoUserModule { }
+export class DemoUserModule {}

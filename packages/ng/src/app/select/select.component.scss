@@ -1,5 +1,5 @@
-@import "node_modules/@lucca-front/scss/src/theming.overridable";
-@import "node_modules/@lucca-front/icons/src/mixins";
+@import 'node_modules/@lucca-front/scss/src/theming.overridable';
+@import 'node_modules/@lucca-front/icons/src/mixins';
 
 :host {
 	cursor: pointer;
@@ -7,43 +7,46 @@
 	padding: 0;
 
 	&::after {
-		bottom: .55rem;
-		color: _color("text.light");
-		@include makeIcon("arrow_south");
-		font-size: .75rem;
+		bottom: 0.55rem;
+		color: _color('text.light');
+		@include makeIcon('arrow_south');
+		font-size: 0.75rem;
 		pointer-events: none;
 		position: absolute;
-		right: _component("textfield.input.padding-horizontal");
+		right: _component('textfield.input.padding-horizontal');
 	}
 }
 
 .select-value {
-	color: _color("text.placeholder");
+	color: _color('text.placeholder');
 	line-height: 1;
 	height: 2rem;
 	overflow: hidden;
-	padding: _component("textfield.input.padding-vertical") 1.5rem _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
-  text-overflow: ellipsis;
-	transition: all _theme("commons.animations.durations.standard") ease;
+	padding: _component('textfield.input.padding-vertical') 1.5rem
+		_component('textfield.input.padding-vertical')
+		_component('textfield.input.padding-horizontal');
+	text-overflow: ellipsis;
+	transition: all _theme('commons.animations.durations.standard') ease;
 	white-space: nowrap;
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 // Framed
 :host-context(.textfield.mod-framed) {
-	padding: _component("textfield.framed.top-padding") 0 0;
+	padding: _component('textfield.framed.top-padding') 0 0;
 
 	.select-value {
 		height: 100%;
-		padding: 0 _component("textfield.framed.side-padding") * 3 _component("textfield.framed.bottom-padding") _component("textfield.framed.side-padding");
+		padding: 0 _component('textfield.framed.side-padding') * 3
+			_component('textfield.framed.bottom-padding')
+			_component('textfield.framed.side-padding');
 	}
 
 	&::after {
-		bottom: .75rem;
-		right: _component("textfield.framed.side-padding");
+		bottom: 0.75rem;
+		right: _component('textfield.framed.side-padding');
 	}
 }
 
@@ -52,11 +55,11 @@
 	.select-value {
 		opacity: 0;
 		padding-left: 0;
-		padding-right: .8rem;
+		padding-right: 0.8rem;
 	}
 
 	&::after {
-		bottom: .6rem;
+		bottom: 0.6rem;
 		right: 0;
 	}
 
@@ -79,13 +82,12 @@
 	}
 }
 
-
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 // Filled
 :host-context(.textfield-input.is-filled) {
 	.select-value {
-		color: _color("text.default");
+		color: _color('text.default');
 	}
 }

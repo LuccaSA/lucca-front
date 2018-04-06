@@ -1,63 +1,85 @@
 %base_animated_element {
-	animation-duration: _theme("commons.animations.durations.standard");
+	animation-duration: _theme('commons.animations.durations.standard');
 	animation-fill-mode: both;
 	animation-timing-function: ease-out;
 	backface-visibility: hidden;
 }
 
-.u-animatedFadeIn, .u-animatedFadeOut {
+.u-animatedFadeIn,
+.u-animatedFadeOut {
 	animation-name: fadeIn;
 	@extend %base_animated_element;
 }
 
-.u-animatedScaleIn, .u-animatedScaleOut {
+.u-animatedScaleIn,
+.u-animatedScaleOut {
 	animation-name: scaleIn;
 	@extend %base_animated_element;
 }
 
-.u-animatedScaleInTop, .u-animatedScaleOutTop {
+.u-animatedScaleInTop,
+.u-animatedScaleOutTop {
 	animation-name: scaleInTop;
 	@extend %base_animated_element;
 }
 
-.u-animatedScaleInRight, .u-animatedScaleOutRight {
+.u-animatedScaleInRight,
+.u-animatedScaleOutRight {
 	animation-name: scaleInRight;
 	@extend %base_animated_element;
 }
 
-.u-animatedScaleInBottom, .u-animatedScaleOutBottom {
+.u-animatedScaleInBottom,
+.u-animatedScaleOutBottom {
 	animation-name: scaleInBottom;
 	@extend %base_animated_element;
 }
 
-.u-animatedScaleInLeft, .u-animatedScaleOutLeft {
+.u-animatedScaleInLeft,
+.u-animatedScaleOutLeft {
 	animation-name: scaleInLeft;
 	@extend %base_animated_element;
 }
 
-.u-animatedSlideIn, .u-animatedSlideInTop, .u-animatedSlideOut, .u-animatedSlideOutTop {
+.u-animatedSlideIn,
+.u-animatedSlideInTop,
+.u-animatedSlideOut,
+.u-animatedSlideOutTop {
 	animation-name: slideIn;
 	@extend %base_animated_element;
 }
 
-.u-animatedSlideInRight, .u-animatedSlideOutRight {
+.u-animatedSlideInRight,
+.u-animatedSlideOutRight {
 	animation-name: slideInRight;
 	@extend %base_animated_element;
 }
 
-.u-animatedSlideInBottom, .u-animatedSlideOutBottom {
+.u-animatedSlideInBottom,
+.u-animatedSlideOutBottom {
 	animation-name: slideInBottom;
 	@extend %base_animated_element;
 }
 
-.u-animatedSlideInLeft, .u-animatedSlideOutLeft {
+.u-animatedSlideInLeft,
+.u-animatedSlideOutLeft {
 	animation-name: slideInLeft;
 	@extend %base_animated_element;
 }
 
 // EXIT ANIMATIONS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.u-animatedFadeOut, .u-animatedSlideOut, .u-animatedSlideOutTop, .u-animatedSlideOutRight, .u-animatedSlideOutBottom, .u-animatedSlideOutLeft, .u-animatedScaleOut, .u-animatedScaleOutTop, .u-animatedScaleOutRight, .u-animatedScaleOutBottom, .u-animatedScaleOutLeft {
+.u-animatedFadeOut,
+.u-animatedSlideOut,
+.u-animatedSlideOutTop,
+.u-animatedSlideOutRight,
+.u-animatedSlideOutBottom,
+.u-animatedSlideOutLeft,
+.u-animatedScaleOut,
+.u-animatedScaleOutTop,
+.u-animatedScaleOutRight,
+.u-animatedScaleOutBottom,
+.u-animatedScaleOutLeft {
 	animation-direction: reverse;
 }
 
@@ -65,7 +87,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .u-animatedPulse {
 	animation-direction: alternate;
-	animation-iteration-count: _theme("commons.animations.iteration-count");
+	animation-iteration-count: _theme('commons.animations.iteration-count');
 	animation-name: pulse;
 	@extend %base_animated_element;
 }
@@ -77,8 +99,8 @@
 
 // DURATION MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-[class*="u-animated"] {
-	@each $name, $duration in _theme("commons.animations.durations") {
+[class*='u-animated'] {
+	@each $name, $duration in _theme('commons.animations.durations') {
 		&.mod-animation-duration-#{$name} {
 			animation-duration: $duration;
 		}
@@ -87,8 +109,7 @@
 
 // KEYFRAMES IMPORT
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-@import
-	"animations/attention-seekers",
-	"animations/fading",
-	"animations/scaling",
-	"animations/sliding";
+@import 'animations/attention-seekers',
+	'animations/fading',
+	'animations/scaling',
+	'animations/sliding';

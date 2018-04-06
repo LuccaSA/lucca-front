@@ -1,25 +1,24 @@
 .section {
 	background: white;
-	border-bottom: 1px solid #E5E5E5;
+	border-bottom: 1px solid #e5e5e5;
 	padding: 3rem;
 
-	@media (max-width: _theme("breakpoints.md.breakAt")) {
+	@media (max-width: _theme('breakpoints.md.breakAt')) {
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
 
-	@media (max-width: _theme("breakpoints.sm.breakAt")) {
+	@media (max-width: _theme('breakpoints.sm.breakAt')) {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .section {
 	&.mod-grey {
-		background: _theme("commons.background.base");
+		background: _theme('commons.background.base');
 	}
 }

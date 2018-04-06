@@ -4,7 +4,9 @@ import { IUser } from '../../../../../src/app/user';
 @Component({
 	selector: 'demo-sizes',
 	templateUrl: './sizes.component.html',
-	styles: [' .tiles{display: inline-table} .user-tile {background: rgba(0, 0, 0, 0.05); margin: 5px; float: left}']
+	styles: [
+		' .tiles{display: inline-table} .user-tile {background: rgba(0, 0, 0, 0.05); margin: 5px; float: left}',
+	],
 })
 export class SizesComponent implements OnInit {
 	jeanMich: IUser = {
@@ -12,12 +14,10 @@ export class SizesComponent implements OnInit {
 		firstName: 'Jean-Michel',
 		lastName: 'Pasdephoto',
 		picture: { href: '' },
-		jobTitle: 'Actor'
+		jobTitle: 'Actor',
 	};
 
-	constructor() { }
+	constructor() {}
 
-	ngOnInit() {
-	}
-
+	ngOnInit() {}
 }

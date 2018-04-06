@@ -6,6 +6,10 @@ const pickerTemplate = `
 </ul>
 `;
 export function customSelectTemplate(content: string) {
-	return customPopoverTemplate(pickerTemplate.replace(contentPlaceholder, content));
+	return customPopoverTemplate(
+		pickerTemplate.replace(contentPlaceholder, content),
+	);
 }
-export const standardSelectTemplate = customSelectTemplate(`<span>{{ option.name }}</span>`);
+export const standardSelectTemplate = customSelectTemplate(
+	`<span>{{ option.name }}</span>`,
+);

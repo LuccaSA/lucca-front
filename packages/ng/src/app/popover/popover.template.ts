@@ -1,5 +1,5 @@
 /* tslint:disable */
-const contentPlaceholder = '######## This is where the content goes #######'
+const contentPlaceholder = '######## This is where the content goes #######';
 const popoverTemplate = `
 <ng-template>
 	<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="_classList" [ngStyle]="popoverPanelStyles"
@@ -14,4 +14,6 @@ const popoverTemplate = `
 export function customPopoverTemplate(content: string) {
 	return popoverTemplate.replace(contentPlaceholder, content);
 }
-export const standardPopoverTemplate = customPopoverTemplate('<ng-content></ng-content><ng-container *ngTemplateOutlet="_template"></ng-container>');
+export const standardPopoverTemplate = customPopoverTemplate(
+	'<ng-content></ng-content><ng-container *ngTemplateOutlet="_template"></ng-container>',
+);

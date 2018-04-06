@@ -1,5 +1,5 @@
 .switch {
-	margin: .25rem 0;
+	margin: 0.25rem 0;
 	position: relative;
 }
 
@@ -10,41 +10,47 @@
 }
 
 .switch-label {
-	color: _color("text.light");
+	color: _color('text.light');
 	cursor: pointer;
 	display: inline-block;
-	line-height: _component("switch.label.line-height");
-	padding: _component("switch.label.padding");
+	line-height: _component('switch.label.line-height');
+	padding: _component('switch.label.padding');
 	transition: color 150ms ease;
 
 	&::before {
-		background: #BBBBBB;
+		background: #bbbbbb;
 		border-radius: 10px;
-		content: "";
+		content: '';
 		display: block;
-		height: _component("switch.input.size");
+		height: _component('switch.input.size');
 		left: 0;
 		position: absolute;
-		top: _component("switch.input.handler.size") - _component("switch.input.size");
+		top: _component('switch.input.handler.size') -
+			_component('switch.input.size');
 		transition: all 150ms ease;
-		width: _component("switch.input.size") * 2;
+		width: _component('switch.input.size') * 2;
 	}
 
 	&::after {
 		background: white;
 		border-radius: 50%;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
-		content: "";
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+		content: '';
 		display: block;
-		height: _component("switch.input.handler.size");
-		left: - ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
+		height: _component('switch.input.handler.size');
+		left: -(
+				_component('switch.input.handler.size') -
+					_component('switch.input.size')
+			) / 2;
 		position: absolute;
-		top: ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
+		top: (
+				_component('switch.input.handler.size') -
+					_component('switch.input.size')
+			) / 2;
 		transition: all 150ms ease;
-		width: _component("switch.input.handler.size");
+		width: _component('switch.input.handler.size');
 	}
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -56,18 +62,16 @@
 	}
 }
 
-
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .switch .switch-input {
-
 	/*
 		Checked
 	*/
 
 	&:checked ~ .switch-label {
-		color: _color("text.default");
+		color: _color('text.default');
 
 		&::after {
 			left: 14px;
@@ -78,21 +82,21 @@
 		Disabled
 	*/
 
-	&[disabled], &[readonly] {
+	&[disabled],
+	&[readonly] {
 		~ .switch-label {
-			color: _color("text.light");
+			color: _color('text.light');
 			cursor: not-allowed;
 
 			&::before {
-				background: lighten(_color("text.light"), 25%);
+				background: lighten(_color('text.light'), 25%);
 			}
 			&::after {
-				background: lighten(_color("text.light"), 15%);
+				background: lighten(_color('text.light'), 15%);
 			}
 		}
 	}
 }
-
 
 // PALETTE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -102,23 +106,24 @@
 		.switch-input:checked {
 			~ .switch-label {
 				&::before {
-					background: lighten(_get($palette, "color"), 20%);
+					background: lighten(_get($palette, 'color'), 20%);
 				}
 
 				&::after {
-					background: _get($palette, "color");
+					background: _get($palette, 'color');
 				}
 			}
 
 			// Palette > Disabled switch
-			&[disabled], &[readonly] {
+			&[disabled],
+			&[readonly] {
 				~ .switch-label {
 					&::before {
-						background: desaturate(lighten(_get($palette, "color"), 30%), 15%);
+						background: desaturate(lighten(_get($palette, 'color'), 30%), 15%);
 					}
 
 					&::after {
-						background: desaturate(lighten(_get($palette, "color"), 20%), 15%);
+						background: desaturate(lighten(_get($palette, 'color'), 20%), 15%);
 					}
 				}
 			}
@@ -126,7 +131,7 @@
 	}
 
 	// default color
-	@include switchColoring(_component("switch.default-palette"));
+	@include switchColoring(_component('switch.default-palette'));
 
 	// palette colors
 	@each $name, $palette in _palettes() {

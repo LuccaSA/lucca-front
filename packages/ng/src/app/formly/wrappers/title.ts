@@ -1,5 +1,10 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-formly/core';
+import {
+	FieldWrapper,
+	FormlyFieldConfig,
+	FormlyConfig,
+	FieldType,
+} from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -8,7 +13,8 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-f
 	templateUrl: './title.html',
 })
 export class LuFormlyWrapperTitle extends FieldWrapper {
-	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
+	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper
 export class TemplateTitle {

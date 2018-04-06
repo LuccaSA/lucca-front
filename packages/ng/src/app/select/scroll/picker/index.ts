@@ -1,2 +1,2 @@
-export {ISelectScrollable } from './select-scroll-picker.model';
-export {ASelectScrollPicker} from './select-scroll-picker.component';
+export { ISelectScrollable } from './select-scroll-picker.model';
+export { ASelectScrollPicker } from './select-scroll-picker.component';

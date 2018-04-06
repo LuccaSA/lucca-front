@@ -2,8 +2,8 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { NgModel, FormControl, NgControl } from '@angular/forms';
 
 /**
-* adds class ng-empty when the model is empty and classes ng-not-empty and is-filled when not empty
-*/
+ * adds class ng-empty when the model is empty and classes ng-not-empty and is-filled when not empty
+ */
 @Directive({
 	selector: '[luEmpty]',
 })
@@ -13,9 +13,10 @@ export class LuEmptyDirective implements OnInit {
 	 */
 	@Input() luEmpty: (val: any) => boolean;
 
-
 	get isEmptyFn() {
-		return this.luEmpty || (val => val === undefined || val === null || val === '');
+		return (
+			this.luEmpty || (val => val === undefined || val === null || val === '')
+		);
 	}
 	constructor(
 		private element: ElementRef,

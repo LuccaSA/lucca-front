@@ -8,7 +8,7 @@ import {
 	forwardRef,
 	ChangeDetectorRef,
 	OnDestroy,
-	QueryList
+	QueryList,
 } from '@angular/core';
 import {
 	ASelectOptionFeeder,
@@ -18,36 +18,35 @@ import {
 	LuSelectSearchIntl,
 	ASelectScrollPicker,
 } from '../../../select';
-import {
-	IApiSelectFeeder,
-	IApiSelectFeederWithPaging
-} from '../feeder';
+import { IApiSelectFeeder, IApiSelectFeederWithPaging } from '../feeder';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {merge} from 'rxjs/observable/merge';
-import {defer} from 'rxjs/observable/defer';
-import {empty} from 'rxjs/observable/empty';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { merge } from 'rxjs/observable/merge';
+import { defer } from 'rxjs/observable/defer';
+import { empty } from 'rxjs/observable/empty';
 
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'lu-api-select-picker',
 	templateUrl: './api-select-picker.component.html',
 	styleUrls: ['./api-select-picker.component.scss'],
-	providers: [{provide: ASelectOptionFeeder, useExisting: forwardRef(() => LuApiSelectPicker)}]
+	providers: [
+		{
+			provide: ASelectOptionFeeder,
+			useExisting: forwardRef(() => LuApiSelectPicker),
+		},
+	],
 })
 /**
  * Component that manage the possibility to search in the options of a select.
  */
 // tslint:disable-next-line:component-class-suffix
-export class LuApiSelectPicker<T = any>
-	extends ASelectScrollPicker<T>
-	implements
-		AfterViewInit {
-
+export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
+	implements AfterViewInit {
 	// Inner references
 	_clue = '';
 	_noResults = false;
@@ -60,30 +59,29 @@ export class LuApiSelectPicker<T = any>
 	 */
 	@ViewChild('inputClue') _inputElement: ElementRef;
 
-
 	constructor(
-
 		protected _elementRef: ElementRef,
 		public _intl: LuSelectSearchIntl,
-		_changeDetectorRef: ChangeDetectorRef) {
-			super(_elementRef, _intl, _changeDetectorRef);
+		_changeDetectorRef: ChangeDetectorRef,
+	) {
+		super(_elementRef, _intl, _changeDetectorRef);
 
-			this._clue$
+		this._clue$
 			.debounceTime(100) // wait 100ms after the last event before emitting last event
 			.distinctUntilChanged() // only emit if value is different from previous value
 			.subscribe(model => {
 				this._clue = model;
 				this._noResults = false;
 				if (this.selectApiFeeder.isPaged()) {
-					(<IApiSelectFeederWithPaging<T>>this.selectApiFeeder).resetPagingStart();
+					(<IApiSelectFeederWithPaging<T>>this
+						.selectApiFeeder).resetPagingStart();
 				}
 				this._options = [];
 				this._populateList();
 			});
 
-			this._options = [];
+		this._options = [];
 	}
-
 
 	ngAfterViewInit(): void {
 		super.ngAfterViewInit();
@@ -93,7 +91,6 @@ export class LuApiSelectPicker<T = any>
 		}
 		// We initialize at first the list with a first set
 		this._populateList();
-
 	}
 
 	// Events
@@ -114,14 +111,13 @@ export class LuApiSelectPicker<T = any>
 		this._callbackKeyEvent($event);
 	}
 
-
 	_onFieldChange(clue: string) {
 		this._clue$.next(clue);
 	}
 
 	/**
 	 * See ISelectOptionFeeder
-	*/
+	 */
 	open(): void {
 		// When we open the list we reset the start index because we load all items when opening the popup
 		/*if (this.selectApiFeeder.isPaged()) {
@@ -158,5 +154,4 @@ export class LuApiSelectPicker<T = any>
 	_selectOption(option: LuSelectOptionSelectionChange<T>) {
 		this._callbackSelectOption(option.source);
 	}
-
 }

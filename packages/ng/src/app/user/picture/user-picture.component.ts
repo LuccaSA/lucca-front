@@ -1,6 +1,11 @@
 import { Component, Input, HostBinding } from '@angular/core';
 import { IUser } from '../user.model';
-import { LuUserDisplayPipe, DisplayFormat, DisplayInitials, DisplayFullname } from '../display';
+import {
+	LuUserDisplayPipe,
+	DisplayFormat,
+	DisplayInitials,
+	DisplayFullname,
+} from '../display';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -12,9 +17,9 @@ import { LuUserDisplayPipe, DisplayFormat, DisplayInitials, DisplayFullname } fr
 })
 export class LuUserPictureComponent {
 	/**
-		 * User Display format.
-		 * It is set to 'FL' by default
-		 */
+	 * User Display format.
+	 * It is set to 'FL' by default
+	 */
 	@Input() displayFormat: DisplayInitials = DisplayInitials.firstlast;
 
 	/**
@@ -22,7 +27,8 @@ export class LuUserPictureComponent {
 	 */
 	private _user: IUser;
 
-	@Input() set user(user: IUser) {
+	@Input()
+	set user(user: IUser) {
 		this._user = user;
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
 		this.hasPicture = !!user.picture && !!user.picture.href;
@@ -33,20 +39,23 @@ export class LuUserPictureComponent {
 			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
 		}
 	}
-	get user() { return this._user; }
+	get user() {
+		return this._user;
+	}
 
 	initials = '';
 	hasPicture = false;
 
 	style;
 
-	constructor(private displayPipe: LuUserDisplayPipe) {	}
+	constructor(private displayPipe: LuUserDisplayPipe) {}
 
 	private getNameHue() {
 		// we sum the chars in user's firstname + lastname
-		const charSum = this.displayPipe.transform(this._user, DisplayFullname.firstlast)
-		.split('')
-		.reduce((sum, a) => sum + a.charCodeAt(0), 0);
+		const charSum = this.displayPipe
+			.transform(this._user, DisplayFullname.firstlast)
+			.split('')
+			.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue
 		const hue = charSum % 360;
 		return hue;

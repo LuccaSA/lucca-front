@@ -19,15 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 		LuSelectModule,
 		LuApiSelectModule,
 	],
-	declarations: [
-		LuUserSelect,
-	],
-	exports: [
-		LuUserSelect,
-	],
-	providers: [
-		{ provide: UserSelectApiFeeder, useClass: UserSelectApiFeeder },
-	]
+	declarations: [LuUserSelect],
+	exports: [LuUserSelect],
+	providers: [{ provide: UserSelectApiFeeder, useClass: UserSelectApiFeeder }],
 })
-export class LuUserSelectModule { }
-
+export class LuUserSelectModule {}

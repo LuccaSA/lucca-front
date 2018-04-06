@@ -6,18 +6,8 @@ import { SharedModule } from '../../shared/index';
 import { DemoUserPictureBasicComponent } from './basic/basic';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuUserPictureModule,
-		SharedModule,
-	],
-	declarations: [
-		DemoUserPictureComponent,
-		DemoUserPictureBasicComponent,
-	],
-	exports: [
-		DemoUserPictureComponent,
-		DemoUserPictureBasicComponent,
-	],
+	imports: [CommonModule, LuUserPictureModule, SharedModule],
+	declarations: [DemoUserPictureComponent, DemoUserPictureBasicComponent],
+	exports: [DemoUserPictureComponent, DemoUserPictureBasicComponent],
 })
-export class DemoUserPictureModule { }
+export class DemoUserPictureModule {}

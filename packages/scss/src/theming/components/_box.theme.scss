@@ -1,16 +1,8 @@
 $box: (
-	background: _theme("commons.background.base"),
-	border: (
-		radius: .3rem
-	),
+	background: _theme('commons.background.base'),
+	border: (radius: 0.3rem),
 	margin: 0 0 1rem,
 	padding: 1rem 1.5rem,
-	toggle: (
-		arrow: (
-			size: .8rem,
-			left: 2.5rem
-		)
-	)
+	toggle: (arrow: (size: 0.8rem, left: 2.5rem))
 );
-
-$theme: _set($theme, "components.box", $box);
+$theme: _set($theme, 'components.box', $box);

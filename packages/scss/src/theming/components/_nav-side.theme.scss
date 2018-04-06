@@ -1,59 +1,47 @@
 $navSide: (
-
-	"fullwidth-palette": (
-		bg-color: darken(_theme("palettes.primary.color"), 23%),
-		text: white,
-		selected-bg:  _theme("palettes.primary.color"),
-		selected-text: _theme("palettes.primary.text"),
-		alert-color: _theme("palettes.secondary.color"),
-		alert-text: _theme("palettes.secondary.text")
-	),
-
-	"compact-palette": (
-		bg-color: darken(_theme("palettes.primary.color"), 23%),
-		text: white,
-		selected-bg:  _theme("palettes.primary.color"),
-		selected-text: _theme("palettes.primary.text"),
-		alert-color: _theme("palettes.secondary.color"),
-		alert-text: _theme("palettes.secondary.text")
-	),
-
-	"bottom-section-palette": (
-		bg-color: darken(_theme("palettes.primary.color"), 23%),
-		text: white,
-		selected-bg:  _theme("palettes.primary.color"),
-		selected-text: _theme("palettes.primary.text"),
-		alert-color: _theme("palettes.secondary.color"),
-		alert-text: _theme("palettes.secondary.text")
-	),
-
-	"bottom-section-height": 3.1rem,
-	"offset-top": 0,
-	"padding-top": 0,
-	"main-font-size": _theme("sizes.standard.font-size"),
-	"sub-font-size": _theme("sizes.small.font-size"),
-	"scrollbar": (
-		"width": .5rem,
-		"border-radius": 10px,
-	),
-	"submenu": (
-		"max-height": 33rem,
-	),
-	"width": 15rem,
-
-	"compact": (
-		"width": 6.125rem,
-		"bottom-section-height": 5rem,
-		"font-size": _theme("sizes.small.font-size")
-	),
-
-	"placeholder": (
-		"opacity": .15,
-	),
-
-	"mobile": (
-		"toggle-height": 3.2rem,
-	),
+	'fullwidth-palette':
+		(
+			bg-color: darken(_theme('palettes.primary.color'), 23%),
+			text: white,
+			selected-bg: _theme('palettes.primary.color'),
+			selected-text: _theme('palettes.primary.text'),
+			alert-color: _theme('palettes.secondary.color'),
+			alert-text: _theme('palettes.secondary.text')
+		),
+	'compact-palette':
+		(
+			bg-color: darken(_theme('palettes.primary.color'), 23%),
+			text: white,
+			selected-bg: _theme('palettes.primary.color'),
+			selected-text: _theme('palettes.primary.text'),
+			alert-color: _theme('palettes.secondary.color'),
+			alert-text: _theme('palettes.secondary.text')
+		),
+	'bottom-section-palette':
+		(
+			bg-color: darken(_theme('palettes.primary.color'), 23%),
+			text: white,
+			selected-bg: _theme('palettes.primary.color'),
+			selected-text: _theme('palettes.primary.text'),
+			alert-color: _theme('palettes.secondary.color'),
+			alert-text: _theme('palettes.secondary.text')
+		),
+	'bottom-section-height': 3.1rem,
+	'offset-top': 0,
+	'padding-top': 0,
+	'main-font-size': _theme('sizes.standard.font-size'),
+	'sub-font-size': _theme('sizes.small.font-size'),
+	'scrollbar': ('width': 0.5rem, 'border-radius': 10px),
+	'submenu': ('max-height': 33rem),
+	'width': 15rem,
+	'compact':
+		(
+			'width': 6.125rem,
+			'bottom-section-height': 5rem,
+			'font-size': _theme('sizes.small.font-size')
+		),
+	'placeholder': ('opacity': 0.15),
+	'mobile': ('toggle-height': 3.2rem)
 );
 
-$theme: _set($theme, "components.navSide", $navSide);
+$theme: _set($theme, 'components.navSide', $navSide);

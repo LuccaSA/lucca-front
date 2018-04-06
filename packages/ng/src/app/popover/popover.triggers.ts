@@ -11,7 +11,6 @@ import {
 	HostListener,
 } from '@angular/core';
 
-
 import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import {
@@ -22,16 +21,21 @@ import {
 	OverlayRef,
 	OverlayConfig,
 	HorizontalConnectionPos,
-	VerticalConnectionPos
+	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { IPopoverPanel, IPopoverTarget, PopoverAlignment, PopoverPosition, PopoverTriggerEvent, PopoverScrollStrategy } from './popover.model';
+import {
+	IPopoverPanel,
+	IPopoverTarget,
+	PopoverAlignment,
+	PopoverPosition,
+	PopoverTriggerEvent,
+	PopoverScrollStrategy,
+} from './popover.model';
 import { throwLuPopoverMissingError } from './popover.errors';
-
-
 
 /**
  * This directive is intended to be used in conjunction with an lu-popover tag.  It is
@@ -43,7 +47,7 @@ import { throwLuPopoverMissingError } from './popover.errors';
 		'aria-haspopup': 'true',
 		'(mousedown)': '_handleMousedown($event)',
 	},
-	exportAs: 'LuPopoverTrigger'
+	exportAs: 'LuPopoverTrigger',
 })
 export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	private _portal: TemplatePortal<any>;
@@ -71,22 +75,25 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	/** Event emitted when the associated popover is closed. */
 	@Output() onPopoverClose = new EventEmitter<void>();
 
-
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
-	) { }
+	) {}
 
 	ngAfterViewInit() {
 		this._checkPopover();
 		this.popover.close.subscribe(() => this.closePopover());
 	}
 
-	ngOnDestroy() { this.destroyPopover(); }
+	ngOnDestroy() {
+		this.destroyPopover();
+	}
 
 	/** Whether the popover is open. */
-	get popoverOpen(): boolean { return this._popoverOpen; }
+	get popoverOpen(): boolean {
+		return this._popoverOpen;
+	}
 
 	@HostListener('click')
 	onClick() {
@@ -198,35 +205,39 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 	/** Return if the popover main positionning is vertical */
 	get isVerticallyPositionned(): boolean {
-		return (this.popover.position === 'below' || this.popover.position === 'above');
+		return (
+			this.popover.position === 'below' || this.popover.position === 'above'
+		);
 	}
 
 	/**
-	* This method ensures that the popover closes when the overlay backdrop is clicked.
-	* We do not use first() here because doing so would not catch clicks from within
-	* the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
-	* explicitly when the popover is closed or destroyed.
-	*/
+	 * This method ensures that the popover closes when the overlay backdrop is clicked.
+	 * We do not use first() here because doing so would not catch clicks from within
+	 * the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
+	 * explicitly when the popover is closed or destroyed.
+	 */
 	protected _subscribeToBackdrop(): void {
 		if (this._overlayRef) {
-			this._backdropSubscription = this._overlayRef.backdropClick().subscribe(() => {
-				this.popover._emitCloseEvent();
-			});
+			this._backdropSubscription = this._overlayRef
+				.backdropClick()
+				.subscribe(() => {
+					this.popover._emitCloseEvent();
+				});
 		}
 	}
 
 	/**
-	* This method sets the popover state to open and focuses the first item if
-	* the popover was opened via the keyboard.
-	*/
+	 * This method sets the popover state to open and focuses the first item if
+	 * the popover was opened via the keyboard.
+	 */
 	private _initPopover(): void {
 		this._setIsPopoverOpen(true);
 	}
 
 	/**
-	* This method resets the popover when it's closed, most importantly restoring
-	* focus to the popover trigger if the popover was opened via the keyboard.
-	*/
+	 * This method resets the popover when it's closed, most importantly restoring
+	 * focus to the popover trigger if the popover was opened via the keyboard.
+	 */
 	private _resetPopover(): void {
 		this._setIsPopoverOpen(false);
 
@@ -245,9 +256,9 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	}
 
 	/**
-	*  This method checks that a valid instance of MdPopover has been passed into
-	*  mdPopoverTriggerFor. If not, an exception is thrown.
-	*/
+	 *  This method checks that a valid instance of MdPopover has been passed into
+	 *  mdPopoverTriggerFor. If not, an exception is thrown.
+	 */
 	private _checkPopover() {
 		if (!this.popover) {
 			throwLuPopoverMissingError();
@@ -255,14 +266,19 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	}
 
 	/**
-	*  This method creates the overlay from the provided popover's template and saves its
-	*  OverlayRef so that it can be attached to the DOM when openPopover is called.
-	*/
+	 *  This method creates the overlay from the provided popover's template and saves its
+	 *  OverlayRef so that it can be attached to the DOM when openPopover is called.
+	 */
 	private _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
-			this._portal = new TemplatePortal(this.popover.templateRef, this._viewContainerRef);
+			this._portal = new TemplatePortal(
+				this.popover.templateRef,
+				this._viewContainerRef,
+			);
 			const config = this._getOverlayConfig();
-			this._subscribeToPositions(config.positionStrategy as ConnectedPositionStrategy);
+			this._subscribeToPositions(
+				config.positionStrategy as ConnectedPositionStrategy,
+			);
 			this._overlayRef = this._overlay.create(config);
 		}
 
@@ -270,13 +286,12 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	}
 
 	/**
-	* This method builds the configuration object needed to create the overlay, the OverlayConfig.
-	* @returns OverlayConfig
-	*/
+	 * This method builds the configuration object needed to create the overlay, the OverlayConfig.
+	 * @returns OverlayConfig
+	 */
 	protected _getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
-		overlayState.positionStrategy = this._getPosition()
-			.withDirection(this.dir);
+		overlayState.positionStrategy = this._getPosition().withDirection(this.dir);
 
 		/** Display overlay backdrop if trigger event is click */
 		if (this.popover.triggerEvent === 'click') {
@@ -285,46 +300,48 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		}
 
 		overlayState.direction = this.dir;
-		switch ( this.popover.scrollStrategy ) {
+		switch (this.popover.scrollStrategy) {
 			case 'block':
-			overlayState.scrollStrategy = this._overlay.scrollStrategies.block();
-			break;
+				overlayState.scrollStrategy = this._overlay.scrollStrategies.block();
+				break;
 
 			case 'close':
-			overlayState.scrollStrategy = this._overlay.scrollStrategies.close();
-			break;
+				overlayState.scrollStrategy = this._overlay.scrollStrategies.close();
+				break;
 
 			default:
-			overlayState.scrollStrategy = this._overlay.scrollStrategies.reposition();
-			break;
+				overlayState.scrollStrategy = this._overlay.scrollStrategies.reposition();
+				break;
 		}
 		return overlayState;
 	}
 
 	/**
-	* Listens to changes in the position of the overlay and sets the correct classes
-	* on the popover based on the new position. This ensures the animation origin is always
-	* correct, even if a fallback position is used for the overlay.
-	*/
+	 * Listens to changes in the position of the overlay and sets the correct classes
+	 * on the popover based on the new position. This ensures the animation origin is always
+	 * correct, even if a fallback position is used for the overlay.
+	 */
 	private _subscribeToPositions(position: ConnectedPositionStrategy): void {
 		this._positionSubscription = position.onPositionChange.subscribe(change => {
-			const posX: PopoverPosition = change.connectionPair.overlayX === 'end' ? 'before' : 'after';
-			let posY: PopoverPosition = change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
-
-
-
+			const posX: PopoverPosition =
+				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
+			let posY: PopoverPosition =
+				change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
 
 			this.popover.setPositionClassesChanges(posX, posY);
 		});
 	}
 
 	/**
-	* This method builds the position strategy for the overlay, so the popover is properly connected
-	* to the trigger.
-	* @returns ConnectedPositionStrategy
-	*/
+	 * This method builds the position strategy for the overlay, so the popover is properly connected
+	 * to the trigger.
+	 * @returns ConnectedPositionStrategy
+	 */
 	private _getPosition(): ConnectedPositionStrategy {
-		const position: OriginConnectionPosition = {originX: 'start', originY: 'top'};
+		const position: OriginConnectionPosition = {
+			originX: 'start',
+			originY: 'top',
+		};
 
 		// Position
 		if (this.popover.position === 'above') {
@@ -356,23 +373,33 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			}
 		}
 
-		const overlayPosition: OverlayConnectionPosition = { overlayX: 'start', overlayY: 'top' };
+		const overlayPosition: OverlayConnectionPosition = {
+			overlayX: 'start',
+			overlayY: 'top',
+		};
 
 		if (this.popover.overlapTrigger) {
 			overlayPosition.overlayX = position.originX;
 			overlayPosition.overlayY = position.originY;
 		} else if (this.isVerticallyPositionned) {
 			overlayPosition.overlayX = position.originX;
-			overlayPosition.overlayY = this.popover.position === 'above' ? 'bottom' : 'top';
+			overlayPosition.overlayY =
+				this.popover.position === 'above' ? 'bottom' : 'top';
 		} else {
-			overlayPosition.overlayX = this.popover.position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayX =
+				this.popover.position === 'before' ? 'end' : 'start';
 			overlayPosition.overlayY = position.originY;
 		}
 
 		let offsetX = 0;
 		let offsetY = 0;
 
-		if (this.popover.overlapTrigger && !this.isVerticallyPositionned && this.popover.targetOffsetX && !isNaN(Number(this.popover.targetOffsetX))) {
+		if (
+			this.popover.overlapTrigger &&
+			!this.isVerticallyPositionned &&
+			this.popover.targetOffsetX &&
+			!isNaN(Number(this.popover.targetOffsetX))
+		) {
 			if (overlayPosition.overlayX === 'end') {
 				offsetX = -Number(this.popover.targetOffsetX);
 			} else if (overlayPosition.overlayX === 'start') {
@@ -380,7 +407,11 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 			}
 		}
 
-		if (this.isVerticallyPositionned && this.popover.targetOffsetY && !isNaN(Number(this.popover.targetOffsetY))) {
+		if (
+			this.isVerticallyPositionned &&
+			this.popover.targetOffsetY &&
+			!isNaN(Number(this.popover.targetOffsetY))
+		) {
 			if (overlayPosition.overlayY === 'top') {
 				offsetY = Number(this.popover.targetOffsetY);
 			} else if (overlayPosition.overlayY === 'bottom') {
@@ -403,19 +434,38 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		 * TODO: Updates when withFallbackPosition takes individual offsets
 		 */
 
-		return this._overlay.position()
+		return this._overlay
+			.position()
 			.connectedTo(element, position, overlayPosition)
 			.withFallbackPosition(
-				{ originX: position.originX, originY: this._invertVerticalPos( position.originY )},
-				{ overlayX: overlayPosition.overlayX, overlayY: this._invertVerticalPos(overlayPosition.overlayY)},
+				{
+					originX: position.originX,
+					originY: this._invertVerticalPos(position.originY),
+				},
+				{
+					overlayX: overlayPosition.overlayX,
+					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
+				},
 			)
 			.withFallbackPosition(
-				{ originX: this._invertHorizontalPos(position.originX), originY: position.originY },
-				{ overlayX: this._invertHorizontalPos(overlayPosition.overlayX), overlayY: overlayPosition.overlayY }
+				{
+					originX: this._invertHorizontalPos(position.originX),
+					originY: position.originY,
+				},
+				{
+					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
+					overlayY: overlayPosition.overlayY,
+				},
 			)
 			.withFallbackPosition(
-				{ originX: this._invertHorizontalPos(position.originX), originY: this._invertVerticalPos(position.originY) },
-				{ overlayX: this._invertHorizontalPos(overlayPosition.overlayX), overlayY: this._invertVerticalPos(overlayPosition.overlayY) },
+				{
+					originX: this._invertHorizontalPos(position.originX),
+					originY: this._invertVerticalPos(position.originY),
+				},
+				{
+					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
+					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
+				},
 			)
 			.withOffsetX(offsetX)
 			.withOffsetY(offsetY);

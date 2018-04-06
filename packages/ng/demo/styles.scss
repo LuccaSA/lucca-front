@@ -1,11 +1,8 @@
-
-@import
-
-	'../node_modules/@lucca-front/scss/src/main.overridable',
+@import '../node_modules/@lucca-front/scss/src/main.overridable',
 	'../src/plugins/ngMaterial/general',
 	'../src/main';
 
-.demo-box{
+.demo-box {
 	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;

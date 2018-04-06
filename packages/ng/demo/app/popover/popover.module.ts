@@ -9,12 +9,7 @@ import { DemoPopoverTriggerComponent } from './trigger/trigger';
 import { DemoPopoverScrollComponent } from './scroll/scroll';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuPopoverModule,
-		SharedModule,
-		LuUserModule,
-	],
+	imports: [CommonModule, LuPopoverModule, SharedModule, LuUserModule],
 	declarations: [
 		DemoPopoverComponent,
 		DemoPopoverBasicComponent,
@@ -26,6 +21,6 @@ import { DemoPopoverScrollComponent } from './scroll/scroll';
 		DemoPopoverBasicComponent,
 		DemoPopoverTriggerComponent,
 		DemoPopoverScrollComponent,
-	]
+	],
 })
-export class DemoPopoverModule { }
+export class DemoPopoverModule {}

@@ -13,36 +13,34 @@
 	text-align: right !important;
 }
 
-
 // COLORS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textDefault {
-	color: _color("text.default") !important;
+	color: _color('text.default') !important;
 }
 
 .u-textLight {
-	color: _color("text.light") !important;
+	color: _color('text.light') !important;
 }
 
 .u-textPlaceholder {
-	color: _color("text.placeholder") !important;
+	color: _color('text.placeholder') !important;
 }
 
 // palette
 @each $name, $palette in _palettes() {
 	.u-text#{str-capitalize($name)} {
-		color: _get($palette, "color") !important;
+		color: _get($palette, 'color') !important;
 	}
 }
-
 
 // SIZE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-@each $name, $sizes in _theme("sizes") {
+@each $name, $sizes in _theme('sizes') {
 	.u-text#{str-capitalize($name)} {
-		font-size: _get($sizes, "font-size") !important;
-		line-height: _get($sizes, "line-height") !important;
+		font-size: _get($sizes, 'font-size') !important;
+		line-height: _get($sizes, 'line-height') !important;
 	}
 }

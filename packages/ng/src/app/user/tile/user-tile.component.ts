@@ -1,6 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {IUser} from '../index';
-import { LuUserDisplayPipe, DisplayInitials, DisplayFullname, DisplayHybrid } from '../display';
+import { Component, Input } from '@angular/core';
+import { IUser } from '../index';
+import {
+	LuUserDisplayPipe,
+	DisplayInitials,
+	DisplayFullname,
+	DisplayHybrid,
+} from '../display';
 
 /**
  * Displays user picture and name. IUser's role can be specified, and the footer is customizable.
@@ -8,7 +13,7 @@ import { LuUserDisplayPipe, DisplayInitials, DisplayFullname, DisplayHybrid } fr
 @Component({
 	selector: 'lu-user-tile',
 	templateUrl: './user-tile.component.html',
-	styleUrls: ['./user-tile.component.scss']
+	styleUrls: ['./user-tile.component.scss'],
 })
 export class LuUserTileComponent {
 	/**
@@ -49,5 +54,5 @@ export class LuUserTileComponent {
 		}
 	}
 
-	constructor() {	}
+	constructor() {}
 }

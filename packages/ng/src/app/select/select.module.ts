@@ -26,9 +26,7 @@ import { LuPopoverModule } from '../popover/popover.module';
 		LuSelectPickerModule,
 		LuSelectSearcherModule,
 	],
-	declarations: [
-		LuSelect,
-	],
+	declarations: [LuSelect],
 	exports: [
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
@@ -36,7 +34,6 @@ import { LuPopoverModule } from '../popover/popover.module';
 		LuSelectPickerModule,
 		LuSelectSearcherModule,
 		LuSelect,
-	]
+	],
 })
-export class LuSelectModule { }
-
+export class LuSelectModule {}

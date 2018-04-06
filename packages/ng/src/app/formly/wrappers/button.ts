@@ -1,6 +1,10 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-formly/core';
-
+import {
+	FieldWrapper,
+	FormlyFieldConfig,
+	FormlyConfig,
+	FieldType,
+} from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -9,7 +13,8 @@ import { FieldWrapper, FormlyFieldConfig, FormlyConfig, FieldType } from '@ngx-f
 	templateUrl: './button.html',
 })
 export class LuFormlyWrapperButton extends FieldWrapper {
-	@ViewChild('fieldComponent', {read: ViewContainerRef}) fieldComponent: ViewContainerRef;
+	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	fieldComponent: ViewContainerRef;
 	get className(): string {
 		return this.to.button.className || '';
 	}

@@ -9,5 +9,3 @@ export class CustomFnComponent {
 	val = 0;
 	customFn = val => val % 2;
 }
-
-

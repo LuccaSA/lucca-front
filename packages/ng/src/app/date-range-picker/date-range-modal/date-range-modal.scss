@@ -1,4 +1,4 @@
-@import "node_modules/@lucca-front/scss/src/theming.overridable";
+@import 'node_modules/@lucca-front/scss/src/theming.overridable';
 
 :host {
 	display: block;
@@ -23,5 +23,4 @@
 		background: _color('text.placeholder');
 		border-radius: 0px 0px 3px 3px;
 	}
-
 }

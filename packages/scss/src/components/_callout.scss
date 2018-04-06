@@ -1,8 +1,8 @@
 .callout {
-	background: _theme("commons.background.base");
-	border-radius: _theme("commons.border.radius");
-	margin: _component("callout.margin");
-	padding: _component("callout.padding");
+	background: _theme('commons.background.base');
+	border-radius: _theme('commons.border.radius');
+	margin: _component('callout.margin');
+	padding: _component('callout.padding');
 	position: relative;
 
 	a:not([class]) {
@@ -10,7 +10,7 @@
 
 		&:hover {
 			color: inherit;
-			opacity: .8;
+			opacity: 0.8;
 		}
 	}
 }
@@ -19,7 +19,7 @@
 	font-weight: 600;
 
 	&::after {
-		content: " —";
+		content: ' —';
 		font-weight: 400;
 	}
 }
@@ -27,20 +27,20 @@
 .callout-kill {
 	background: transparent;
 	border: 0;
-	color: _color("text.default");
+	color: _color('text.default');
 	cursor: pointer;
 	height: 1rem;
-	opacity: .5;
+	opacity: 0.5;
 	padding: 0;
 	position: absolute;
-	right: .25rem;
-	top: .25rem;
+	right: 0.25rem;
+	top: 0.25rem;
 	transition: 150ms background ease;
 	width: 1rem;
 
 	&::before {
-		@include makeIcon("cross");
-		font-family: "Lucca icons";
+		@include makeIcon('cross');
+		font-family: 'Lucca icons';
 	}
 
 	&:hover {
@@ -50,8 +50,8 @@
 
 .callout-icon {
 	position: absolute;
-	top: calc(1rem - .05rem);
-	left: .75rem;
+	top: calc(1rem - 0.05rem);
+	left: 0.75rem;
 	width: 2rem;
 	margin: auto;
 	border-radius: 50%;
@@ -72,15 +72,15 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background: rgba(_get($palette, "color"), .1);
-	color: darken(_get($palette, "color"), 20%);
+	background: rgba(_get($palette, 'color'), 0.1);
+	color: darken(_get($palette, 'color'), 20%);
 
 	.callout-icon {
-		color: _get($palette, "color");
+		color: _get($palette, 'color');
 	}
 
 	.callout-kill {
-		color: _get($palette, "color");
+		color: _get($palette, 'color');
 	}
 }
 .callout {

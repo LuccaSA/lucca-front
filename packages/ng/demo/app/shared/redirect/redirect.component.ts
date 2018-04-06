@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { RedirectService, RedirectEnvironment, RedirectStatus } from './redirect.service';
+import {
+	RedirectService,
+	RedirectEnvironment,
+	RedirectStatus,
+} from './redirect.service';
 
 @Component({
 	selector: 'demo-redirect',
 	templateUrl: './redirect.component.html',
 })
 export class RedirectComponent implements OnInit {
-
 	url = 'lucca.local.dev';
 	login = 'passepartout';
 	password = '';
@@ -20,7 +23,10 @@ export class RedirectComponent implements OnInit {
 	disconnected$ = this.status$.map(s => s === RedirectStatus.disconnected);
 
 	loading = false;
-	constructor(private service: RedirectService, private env: RedirectEnvironment) { }
+	constructor(
+		private service: RedirectService,
+		private env: RedirectEnvironment,
+	) {}
 
 	ngOnInit() {
 		if (!this.env.redirect) {
@@ -30,8 +36,7 @@ export class RedirectComponent implements OnInit {
 
 	connect() {
 		this.loading = true;
-		this.service.login(this.url, this.login, this.password)
-		.subscribe(() => {
+		this.service.login(this.url, this.login, this.password).subscribe(() => {
 			this.loading = false;
 		});
 	}

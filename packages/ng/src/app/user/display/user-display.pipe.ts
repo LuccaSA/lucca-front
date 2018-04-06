@@ -1,10 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IUser } from '../user.model';
-import { DisplayFullname, DisplayHybrid, DisplayInitials, DisplayFormat } from './display-format.model';
+import {
+	DisplayFullname,
+	DisplayHybrid,
+	DisplayInitials,
+	DisplayFormat,
+} from './display-format.model';
 /**
  * Displays a user name according to specified format. Supported formats: f for first name, F for first initial, l for last name, L for last initial.
  */
-@Pipe({name: 'luUserDisplay'})
+@Pipe({ name: 'luUserDisplay' })
 export class LuUserDisplayPipe implements PipeTransform {
 	transform(user: IUser, format: DisplayFormat): string {
 		let result = '';
@@ -47,7 +52,8 @@ export class LuUserDisplayPipe implements PipeTransform {
 				case DisplayHybrid.firstFulllastI:
 					result = user.firstName + ' ' + user.lastName.charAt(0) + '.';
 					break;
-				default: break;
+				default:
+					break;
 			}
 		}
 		return result;

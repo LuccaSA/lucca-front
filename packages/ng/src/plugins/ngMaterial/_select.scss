@@ -6,10 +6,10 @@ mat-select {
 	padding: 0 !important;
 	.mat-select-trigger {
 		font-size: 1rem;
-		margin: 2.2rem 1rem .7rem;
+		margin: 2.2rem 1rem 0.7rem;
 		&::after {
-			bottom: -.7rem;
-			content: "";
+			bottom: -0.7rem;
+			content: '';
 			display: block;
 			left: -1rem;
 			position: absolute;

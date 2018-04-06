@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LuSelectModule } from '../../../../src/app/select';
 import { LuApiSelectModule } from '../../../../src/app/api/select';
@@ -11,7 +11,6 @@ import { DemoApiSelectFeeder } from './basic/rdd-select-feeder';
 import { CustomApiSelectComponent } from './custom/custom';
 import { DemoCustomApiSelectFeeder } from './custom/custom-select-feeder';
 import { DemoApiSelectComponent } from './api-select.component';
-
 
 @NgModule({
 	imports: [
@@ -37,6 +36,6 @@ import { DemoApiSelectComponent } from './api-select.component';
 	providers: [
 		{ provide: DemoApiSelectFeeder, useClass: DemoApiSelectFeeder },
 		{ provide: DemoCustomApiSelectFeeder, useClass: DemoCustomApiSelectFeeder },
-	]
+	],
 })
-export class DemoApiSelectModule { }
+export class DemoApiSelectModule {}

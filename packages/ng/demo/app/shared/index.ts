@@ -7,10 +7,7 @@ import { DemoApiDocs, DemoApiDocsClass, DemoApiDocsConfig } from './api-docs';
 import { RedirectModule } from './redirect/redirect.module';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		RedirectModule,
-	],
+	imports: [CommonModule, RedirectModule],
 	declarations: [
 		ExampleBoxComponent,
 		DemoApiDocs,
@@ -25,7 +22,7 @@ import { RedirectModule } from './redirect/redirect.module';
 		RedirectModule,
 	],
 })
-export class SharedModule { }
+export class SharedModule {}
 
-export { ExampleBoxComponent } from './example-box/example-box.component'
-export { DemoApiDocs, DemoApiDocsClass, DemoApiDocsConfig } from './api-docs'
+export { ExampleBoxComponent } from './example-box/example-box.component';
+export { DemoApiDocs, DemoApiDocsClass, DemoApiDocsConfig } from './api-docs';

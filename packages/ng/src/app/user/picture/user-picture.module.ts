@@ -4,15 +4,8 @@ import { LuUserDisplayModule } from '../display';
 import { LuUserPictureComponent } from './user-picture.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuUserDisplayModule,
-	],
-	declarations: [
-		LuUserPictureComponent,
-	],
-	exports: [
-		LuUserPictureComponent,
-	]
+	imports: [CommonModule, LuUserDisplayModule],
+	declarations: [LuUserPictureComponent],
+	exports: [LuUserPictureComponent],
 })
-export class LuUserPictureModule { }
+export class LuUserPictureModule {}

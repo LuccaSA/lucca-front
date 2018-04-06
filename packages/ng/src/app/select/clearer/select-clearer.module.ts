@@ -4,17 +4,11 @@ import { LuSelectClearerComponent } from './select-clearer.component';
 import { LuSelectClearerFirstOrDefaultComponent } from './select-clearer-first.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-	],
+	imports: [CommonModule],
 	declarations: [
 		LuSelectClearerComponent,
 		LuSelectClearerFirstOrDefaultComponent,
 	],
-	exports: [
-		LuSelectClearerFirstOrDefaultComponent,
-		LuSelectClearerComponent,
-	]
+	exports: [LuSelectClearerFirstOrDefaultComponent, LuSelectClearerComponent],
 })
-export class LuSelectClearerModule { }
-
+export class LuSelectClearerModule {}

@@ -1,15 +1,6 @@
 $radio: (
-  // theming
-  default-palette: (
-    color:  _color("primary"),
-  ),
-  label: (
-    line-height: 1.3,
-    padding: 0 0 0 1.5rem
-  ),
-  input: (
-    top: .25rem,
-    size: 1rem
-  )
+	/ / theming default-palette: (color: _color('primary')),
+	label: (line-height: 1.3, padding: 0 0 0 1.5rem),
+	input: (top: 0.25rem, size: 1rem)
 );
-$theme: _set($theme, "components.radio", $radio);
+$theme: _set($theme, 'components.radio', $radio);

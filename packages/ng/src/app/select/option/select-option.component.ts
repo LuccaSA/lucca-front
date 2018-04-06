@@ -8,7 +8,7 @@ import {
 	ViewEncapsulation,
 	ElementRef,
 } from '@angular/core';
-import {LuSelectOptionSelectionChange} from './select-option.event';
+import { LuSelectOptionSelectionChange } from './select-option.event';
 
 /**
  * The component that provides available options for lu-select
@@ -18,12 +18,10 @@ import {LuSelectOptionSelectionChange} from './select-option.event';
 	templateUrl: './select-option.component.html',
 	styleUrls: ['./select-option.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	animations: [
-	],
+	animations: [],
 })
 // tslint:disable-next-line:component-class-suffix
 export class LuSelectOption<T> implements OnInit, OnDestroy {
-
 	private _focused = false;
 	private _selected = false;
 	private _displayed = true;
@@ -32,25 +30,35 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	/**
 	 * true if the option is focused
 	 */
-	get focused(): boolean {return this._focused; }
+	get focused(): boolean {
+		return this._focused;
+	}
 	/**
 	 * true if the option is selected
 	 */
-	get selected(): boolean {return this._selected; }
+	get selected(): boolean {
+		return this._selected;
+	}
 
 	/**
 	 * true if the option should be displayed (you can with this hide / show dynamicly options)
 	 */
-	get displayed(): boolean {return this._displayed; }
+	get displayed(): boolean {
+		return this._displayed;
+	}
 	/**
 	 * Set it to false if you don't want to show the option
 	 */
-	set displayed(display: boolean) {this._displayed = display; }
+	set displayed(display: boolean) {
+		this._displayed = display;
+	}
 
 	/**
 	 * the representation as string of the option
 	 */
-	get viewValue(): string {return (this._elementRef.nativeElement.textContent || '').trim(); }
+	get viewValue(): string {
+		return (this._elementRef.nativeElement.textContent || '').trim();
+	}
 
 	/**
 	 * The value of the option
@@ -60,17 +68,14 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	/**
 	 * Emit an event when the option is selected, the LuSelectOption is passed as parameterr
 	 */
-	@Output() onSelectionChange = new EventEmitter<LuSelectOptionSelectionChange<T>>();
+	@Output()
+	onSelectionChange = new EventEmitter<LuSelectOptionSelectionChange<T>>();
 
-	constructor(
-		protected _elementRef: ElementRef,
-	) {}
+	constructor(protected _elementRef: ElementRef) {}
 
 	// LifeCycle methods
-	ngOnInit() {
-	}
-	ngOnDestroy() {
-	}
+	ngOnInit() {}
+	ngOnDestroy() {}
 	// Override method
 	onMouseDown($e) {
 		$e.preventDefault();
@@ -79,15 +84,18 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	/**
 	 * @returns the representation as string of the option
 	 */
-	getLabel(): string { return this.viewValue; }
+	getLabel(): string {
+		return this.viewValue;
+	}
 
 	/**
 	 * Select the current option. This method will emit an event onSelectionChange
 	 */
 	_selectOption(): void {
-		this.onSelectionChange.emit(new LuSelectOptionSelectionChange<T>(this, true));
+		this.onSelectionChange.emit(
+			new LuSelectOptionSelectionChange<T>(this, true),
+		);
 	}
-
 
 	/**
 	 * Make the focus to the element
@@ -120,12 +128,11 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 
 	/**
 	 * Define the Offset top of the element fir scrolling
-	*/
+	 */
 	offsetTop(): number {
 		if (!this._boudingRect) {
 			this._boudingRect = this._elementRef.nativeElement.getBoundingClientRect();
 		}
 		return this._elementRef.nativeElement.offsetTop - this._boudingRect.height;
 	}
-
 }
