@@ -5,6 +5,7 @@
 ### Breaking changes
 - `titles` New titles hierarchy
 ### Adding
+- `input file`
 ### Enhancements
 - `icons` path target cdn by default
 ### Fixes

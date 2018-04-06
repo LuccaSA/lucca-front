@@ -1,0 +1,74 @@
+.file {
+	border: 2px dashed _theme("commons.divider.color");
+	border-radius: 3px;
+	display: block;
+	max-width: 30rem;
+	padding: .5rem _theme("spacings.standard") 1.5rem;
+	position: relative;
+	text-align: center;
+}
+
+.file-icon {
+	font-size: 3rem;
+	color: _color("text.placeholder");
+}
+
+.file-or {
+	font-size: _theme("sizes.small.font-size");
+}
+
+.file-title {
+	margin: 0 0 .5rem;
+	font-size: 1.25rem;
+}
+
+.file-progress {
+	margin: 1rem 0 .5rem;
+}
+
+.file-input {
+	display: none;
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.file {
+	&.mod-small {
+		padding: _theme("spacings.smaller") _theme("spacings.standard")
+		_theme("spacings.smaller") 5rem;
+		text-align: left;
+
+		.file-icon {
+			position: absolute;
+			top: .25rem;
+			left: 1.3rem;
+			font-size: 2.5rem;
+		}
+
+		.file-title {
+			font-size: 1rem;
+			font-weight: 600;
+			margin: 0;
+		}
+
+		.file-or {
+			display: inline-block;
+		}
+
+		.file-progress {
+			margin: .5rem 0;
+		}
+	}
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.file {
+	&.is-droppable {
+		background: _theme("commons.background.base");
+	}
+}
