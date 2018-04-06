@@ -4,6 +4,9 @@
 ### Enhancement
 ### Fix
 ### New icons
+
+## 0.6.0
+### New icons
 - `info`
 
 ## 0.5.0

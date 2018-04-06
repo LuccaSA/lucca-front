@@ -2,17 +2,21 @@
 
 ## In Dev
 ### New features
+### Fixes
+### Breaking changes
+### Updated dependencies
+### Updated devDependencies
+
+## 0.6.0
+### New features
 - `lu-api-select` Add Component for Api Select
 - `lu-rdd-select` Add Component for Api RDD Select
 - `ISelectScrollable`: Interface to manipulate Infinite scroll select
 - `ISelectApiFeeder`: Interface to manipulate select calling an API
 - `ASelectRDDApiFeeder`: Abstract implementation of ISelectApiFeeder dedicate to RDD Apis call
-### Fixes
 ### Breaking changes
 - `user-select` becomes `lu-user-select`
 - `lu-api-picker`: remove the component, you should use the `lu-api-select` or `lu-rdd-select` instead
-### Updated dependencies
-### Updated devDependencies
 
 ## 0.5.0
 ### New features

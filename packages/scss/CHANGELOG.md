@@ -3,6 +3,12 @@
 ## In Dev
 ### New features
 ### Breaking changes
+### Adding
+### Enhancements
+### Fixes
+
+## 0.6.0
+### Breaking changes
 - `titles` New titles hierarchy
 ### Adding
 - `input file`
