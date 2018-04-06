@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
 // } from '@angular/material';
 // import {LuSharedModule} from '../shared/shared.module';
 import { LuDateRangePickerComponent } from './date-range-picker.component';
-// import { DateRangeModalComponent } from './date-range-modal/date-range-modal.component';
+import { LuDateRangeModalComponent } from './date-range-modal/date-range-modal.component';
 
 @NgModule({
 	// 	imports: [
@@ -27,7 +27,7 @@ import { LuDateRangePickerComponent } from './date-range-picker.component';
 	// 	entryComponents: [DateRangeModalComponent],
 	declarations: [
 		LuDateRangePickerComponent,
-		//		DateRangeModalComponent,
+		LuDateRangeModalComponent,
 	],
 	// 	exports: [LuDateRangePickerComponent],
 	// 	providers: [

@@ -9,7 +9,7 @@ import { IDateRange } from '../date-range-picker.model';
 	styleUrls: ['./date-range-modal.scss'],
 	templateUrl: './date-range-modal.component.html',
 })
-export class DateRangeModalComponent implements OnInit {
+export class LuDateRangeModalComponent implements OnInit {
 	// start: moment.Moment = null;
 	// end: moment.Moment = null;
 	// locale: string;
