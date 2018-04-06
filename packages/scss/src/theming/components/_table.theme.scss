@@ -4,6 +4,6 @@ $table: (
 	line-height: _theme('sizes.standard.line-height'),
 	zebra: (background: _theme('commons.background.base')),
 	hover: (background: _theme('commons.background.dark')),
-	/ / mod card: (padding: 1.5rem)
+	/* mod */ card: (padding: 1.5rem)
 );
 $theme: _set($theme, 'component.table', $table);
