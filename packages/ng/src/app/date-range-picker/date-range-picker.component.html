@@ -1,8 +1,0 @@
-<mat-select class="textfield-input" (change)="onChoiceChange($event.value)" [ngModel]="_selectedChoice" placeholder="{{placeholder}}" floatPlaceholder="never">
-	<mat-option *ngFor="let choice of preConfiguredRanges" [value]="choice">
-		{{choice.label}}
-	</mat-option>
-	<mat-option (click)="pickCustomRange()" [value]="customChoice">
-		{{ 'LU_DATE_RANGE_PICKER_CUSTOM_RANGE_LABEL' | translate }}
-	</mat-option>
-</mat-select>

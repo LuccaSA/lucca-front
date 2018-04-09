@@ -38,14 +38,13 @@
 	padding: _component('textfield.framed.top-padding') 0 0;
 
 	.select-value {
-		height: 100%;
 		padding: 0 _component('textfield.framed.side-padding') * 3
 			_component('textfield.framed.bottom-padding')
 			_component('textfield.framed.side-padding');
 	}
 
 	&::after {
-		bottom: 0.75rem;
+		bottom: 0.95rem;
 		right: _component('textfield.framed.side-padding');
 	}
 }

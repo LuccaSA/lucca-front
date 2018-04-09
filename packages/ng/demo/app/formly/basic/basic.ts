@@ -83,17 +83,28 @@ export class BasicComponent {
 			},
 		},
 		{
-			key: 'department',
-			type: 'api',
+			key: 'manager',
+			type: 'user',
 			templateOptions: {
-				label: 'department - api',
-				placeholder: 'pings /api/v3/departments',
-				api: '/api/v3/departments',
+				label: 'manager - user',
+				placeholder: 'pings /api/v3/users/find',
 			},
 		},
+		// {
+		// 	key: 'department',
+		// 	type: 'api',
+		// 	templateOptions: {
+		// 		label: 'department - api',
+		// 		placeholder: 'pings /api/v3/departments',
+		// 		api: '/api/v3/departments',
+		// 	},
+		// },
 	];
 
-	user = {};
+	user = {
+		orientation: { id: 0, name: 'female' },
+		manager: { id: 421, firstName: 'Lulu', lastName: 'B.' },
+	};
 
 	submit(user) {
 		console.log(user);

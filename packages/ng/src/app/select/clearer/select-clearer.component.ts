@@ -3,8 +3,10 @@ import { ISelectClearer } from './select-clearer.model';
 
 @Component({
 	selector: 'lu-select-clearer',
-	templateUrl: './select-clearer.component.html',
-	styleUrls: ['./select-clearer.component.scss'],
+	templateUrl: 'select-clearer.component.html',
+	styleUrls: ['select-clearer.component.scss'],
+	moduleId: module.id,
+	exportAs: 'luSelectClearer',
 })
 /**
  * Component that manage the possibility to clear a select. null value will be set when we click on it

@@ -11,6 +11,8 @@ import {
 } from '@angular/material';
 import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
 import { LuEmptyModule } from '../empty/empty.module';
+import { LuSelectModule, LuSelectOptionModule, LuSelectClearerModule } from '../select';
+import { LuUserSelectModule } from '../user';
 
 @NgModule({
 	declarations: [...LU_FORMLY_COMPONENTS],
@@ -25,6 +27,10 @@ import { LuEmptyModule } from '../empty/empty.module';
 		MatDatepickerModule,
 
 		LuEmptyModule,
+		LuSelectModule,
+		LuSelectOptionModule,
+		LuSelectClearerModule,
+		LuUserSelectModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],
