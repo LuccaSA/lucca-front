@@ -40,7 +40,7 @@ export abstract class ARDDSelectFeeder<T extends IRddItem>
 	extends AApiSelectFeederWithPaging<T>
 	implements IRDDSelectApiFeeder<T> {
 	constructor(protected _http: HttpClient) {
-		super(_http);
+		super();
 	}
 
 	/**

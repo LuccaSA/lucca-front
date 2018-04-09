@@ -61,7 +61,7 @@ export abstract class AApiSelectFeederWithPaging<T>
 	implements IApiSelectFeederWithPaging<T> {
 	_pagingStart = undefined;
 
-	constructor(protected _http: HttpClient) {}
+	constructor() {}
 
 	/**
 	 * See ISelectApiFeeder
