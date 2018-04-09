@@ -7,6 +7,17 @@
 ### Updated dependencies
 ### Updated devDependencies
 
+## 0.6.1
+### New features
+-✨ `formly` - use lu-select instead of mat-select
+-✨ `formly` - add type user that uses lu-user-select
+### Fixes
+- fixed root index.ts file
+- `select` - rerender after feeder initialization
+### Breaking changes
+- rem old component that arent in any module cuz it breaks aot build otherwise
+- `daterange`removed code cuz it was commented anyway but sometimes broke aot build
+
 ## 0.6.0
 ### New features
 - `lu-api-select` Add Component for Api Select
