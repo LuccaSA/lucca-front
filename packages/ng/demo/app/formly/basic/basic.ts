@@ -82,6 +82,14 @@ export class BasicComponent {
 				],
 			},
 		},
+		{
+			key: 'manager',
+			type: 'user',
+			templateOptions: {
+				label: 'manager - user',
+				placeholder: 'pings /api/v3/users/find',
+			},
+		},
 		// {
 		// 	key: 'department',
 		// 	type: 'api',
@@ -95,6 +103,7 @@ export class BasicComponent {
 
 	user = {
 		orientation: { id: 0, name: 'female' },
+		manager: { id: 421, firstName: 'Lulu', lastName: 'B.' },
 	};
 
 	submit(user) {
