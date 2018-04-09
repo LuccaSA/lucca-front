@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 export class DemoCustomApiSelectFeeder extends AApiSelectFeederWithPaging<any>
 	implements IApiSelectFeederWithPaging<any> {
 	constructor(protected _http: HttpClient) {
-		super(_http);
+		super();
 	}
 	getPagedItems(
 		clue: string,

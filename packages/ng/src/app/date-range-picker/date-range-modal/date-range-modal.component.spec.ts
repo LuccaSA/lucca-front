@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DateRangeModalComponent } from './date-range-modal.component';
+// import { DateRangeModalComponent } from './date-range-modal.component';
 
 describe('DateRangeModalComponent', () => {
 	// let component: DateRangeModalComponent;

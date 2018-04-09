@@ -29,7 +29,7 @@ export class UserSelectApiFeeder<
 	private _api = '/api/v3/users/find';
 
 	constructor(protected _http: HttpClient) {
-		super(_http);
+		super();
 	}
 
 	getPagingStep(): number {
