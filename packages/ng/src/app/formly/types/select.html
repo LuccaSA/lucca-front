@@ -2,5 +2,6 @@
 	<lu-select-option *ngFor="let option of _options" [luOptionValue]="option">
 		{{ option.name }}
 	</lu-select-option>
+	<lu-select-clearer #clearer="luSelectClearer"></lu-select-clearer>
 </lu-select>
 <label [attr.for]="id" class="textfield-label">{{ to.label }}</label>
