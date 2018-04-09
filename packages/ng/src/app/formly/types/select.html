@@ -1,6 +1,6 @@
-<mat-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
-	<mat-option *ngFor="let option of _options" [value]="option">
+<lu-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
+	<lu-select-option *ngFor="let option of _options" [luOptionValue]="option">
 		{{ option.name }}
-	</mat-option>
-</mat-select>
+	</lu-select-option>
+</lu-select>
 <label [attr.for]="id" class="textfield-label">{{ to.label }}</label>
