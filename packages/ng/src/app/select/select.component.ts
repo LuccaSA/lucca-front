@@ -179,7 +179,7 @@ export class LuSelect<T>
 
 	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
 		return null;
-	};
+	}
 	private _cvaOnChange: (value: T) => void = () => {};
 	_onTouched = () => {};
 
@@ -270,6 +270,11 @@ export class LuSelect<T>
 		optionFeeder.registerKeyevent(this.onKeydown.bind(this));
 		optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
 		optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+
+		// render async to avoid expressionchanged exception
+		Promise.resolve().then(() => {
+			this.render();
+		});
 	}
 
 	/** true if the component allow to remove data */
