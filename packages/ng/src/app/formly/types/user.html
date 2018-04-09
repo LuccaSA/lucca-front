@@ -1,0 +1,4 @@
+<lu-user-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
+	<lu-select-clearer #clearer="luSelectClearer"></lu-select-clearer>
+</lu-user-select>
+<label [attr.for]="id" class="textfield-label">{{ to.label }}</label>

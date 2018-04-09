@@ -40,7 +40,7 @@ export class UserSelectApiFeeder<
 		pagingStart: number,
 		pagingStep: number,
 	): Observable<T[]> {
-		const fields = ['id', 'firstName', 'lastName'].concat(this.fields);
+		const fields = ['id', 'firstName', 'lastName', ...this.fields];
 		const params = [
 			`formerEmployees=${this.formerEmployees}`,
 			`clue=${encodeURIComponent(clue)}`,
