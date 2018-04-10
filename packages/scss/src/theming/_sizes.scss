@@ -1,10 +1,28 @@
 $sizes: (
-	smaller: (font-size: 0.75rem, line-height: 1.3rem),
-	small: (font-size: 0.85rem, line-height: 1.3rem),
-	standard: (font-size: 1rem, line-height: 1.618rem),
-	big: (font-size: 1.38rem, line-height: 1.9rem),
-	bigger: (font-size: 1.94rem, line-height: 2.5rem),
-	biggest: (font-size: 2.75rem, line-height: 3.2rem)
+	smaller: (
+		font-size: .75rem,
+		line-height: 1.5,
+	),
+	small: (
+		font-size: .85rem,
+		line-height: 1.5,
+	),
+	standard: (
+		font-size: 1rem,
+		line-height: 1.5,
+	),
+	big: (
+		font-size: 1.38rem,
+		line-height: 1.45,
+	),
+	bigger: (
+		font-size: 1.94rem,
+		line-height: 1.3,
+	),
+	biggest: (
+		font-size: 2.75rem,
+		line-height: 1.3,
+	),
 );
 $spacings: (
 	'reset': 0,

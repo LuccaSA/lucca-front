@@ -3,7 +3,6 @@ body {
 	color: #666666;
 	font-family: "Source Sans Pro", Tahoma, sans-serif;
 	font-size: 1rem;
-	line-height: 1.618rem;
 	vertical-align: middle;
 }
 
@@ -30,7 +29,6 @@ body {
 	background: #FEF1F5;
 	border-radius: 3px;
 	color: #EC407A;
-	line-height: 1.4rem;
 	margin: .1rem;
 	padding: 0 .3rem;
 	-moz-tab-size: 2;

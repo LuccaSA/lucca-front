@@ -25,9 +25,9 @@ h1 {
 	margin: 0 0 0.9rem;
 
 	&.mod-headline {
-		font-size: _theme('sizes.biggest.font-size');
-		line-height: _theme('sizes.biggest.line-height');
-		margin: 0 0 1.7rem;
+		font-size: _theme("sizes.biggest.font-size");
+		line-height: _theme("sizes.biggest.line-height");
+		margin: 0 0 1rem;
 	}
 }
 
