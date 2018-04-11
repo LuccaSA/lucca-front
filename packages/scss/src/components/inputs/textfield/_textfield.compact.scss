@@ -43,8 +43,8 @@
 	}
 
 	.textfield-suffix {
-		top: _component("textfield.compact.padding");
-		right: _component("textfield.compact.padding");
+		top: _component('textfield.compact.suffix.top');
+		right: _component('textfield.compact.suffix.padding-right');
 	}
 
 	// MODS

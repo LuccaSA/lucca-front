@@ -1,4 +1,5 @@
 $textfield: (
+<<<<<<< HEAD
   font-size: _theme("sizes.standard.font-size"),
   background: #FFFFFF,
   border-radius: .2rem,
@@ -89,5 +90,73 @@ $textfield: (
       padding-right: 2.5rem
     ),
   ),
+=======
+	font-size: _theme('sizes.standard.font-size'),
+	background: #ffffff,
+	border-radius: 0.2rem,
+	input:
+		(
+			padding-horizontal: 0.5rem,
+			padding-vertical: 0.5rem,
+			color: _color('text.default')
+		),
+	label:
+		(color: _color('text.default'), font-size: _theme('sizes.small.font-size')),
+	suffix: (top: 1.9rem, padding-right: 1.5rem),
+	border: (color: #cccccc, focus: #999999),
+	message: (font-size: _theme('sizes.small.font-size')),
+	sizes:
+		(
+			shortest: 3rem,
+			shorter: 6rem,
+			short: 9rem,
+			default: 13rem,
+			long: 17rem,
+			longer: 22rem,
+			longest: 28rem
+		),
+	material:
+		(
+			padding-top: 1rem,
+			default-palette: (color: _color('primary')),
+			label: (color: #a6a6a6, font-size: _theme('sizes.standard.font-size')),
+			suffix: (top: 1.15rem, padding-right: 1rem)
+		),
+	compact:
+		(
+			padding: 0.5rem,
+			label:
+				(
+					color: _color('text.light'),
+					font-size: _theme('sizes.standard.font-size'),
+					right-margin: 0.3rem,
+					sizes:
+						(
+							shorter: 3rem,
+							short: 5rem,
+							default: 7rem,
+							long: 9rem,
+							longer: 11rem
+						)
+				),
+				suffix: (top: .6rem, padding-right: .5rem)
+		),
+	framed:
+		(
+			default-palette:
+				(color: _color('text.light'), text: _color('text.default')),
+			side-padding: 1rem,
+			top-padding: 2.2rem,
+			bottom-padding: 0.7rem,
+			label-top-offset: 0.5rem,
+			textarea: (height: 7rem, margin-top: 1.5rem),
+			title:
+				(
+					font-size: _theme('sizes.big.font-size'),
+					line-height: _theme('sizes.big.line-height')
+				),
+			suffix: (padding-right: 2.5rem)
+		)
+>>>>>>> [ref] remove scss autocomplete
 );
 $theme: _set($theme, "components.textfield", $textfield);

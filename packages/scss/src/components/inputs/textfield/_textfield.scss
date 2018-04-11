@@ -180,9 +180,9 @@
 		}
 	}
 
-	/* Autocomplete & Search */
+	/* Search */
 
-	&.mod-autocomplete, &.mod-search {
+	&.mod-search {
 		&::after {
 			color: _color("text.light");
 			@include makeIcon("search");
