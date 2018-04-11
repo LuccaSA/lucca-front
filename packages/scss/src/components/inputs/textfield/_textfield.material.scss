@@ -7,7 +7,7 @@
 		box-shadow: 0 1px 0 0 _component("textfield.border.color");
 		padding: {
 			left: 0;
-			right: 0;
+			right: 1.75rem;
 		}
 
 		&::placeholder {
@@ -107,7 +107,7 @@
 	&.mod-autocomplete, &.mod-search {
 		&::after {
 			right: 0;
-			bottom: .1rem;
+			bottom: 0;
 		}
 
 		.textfield-label {
