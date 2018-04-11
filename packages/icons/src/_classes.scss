@@ -35,18 +35,10 @@
 	@return $return;
 }
 
-%classIcon {
-	font-family: "Lucca icons";
-	display: inline-block;
-	vertical-align: middle;
-	font-style: normal;
-}
-
 .lucca-icon {
 	@each $ligature, $char in $mappings {
 		$class: str-camelcase($ligature);
 		&.icon-#{$class}::before {
-			@extend %classIcon;
 			content: "#{$char}";
 		}
 	}
