@@ -1,10 +1,31 @@
 $breakpoints: (
-	'xs': ('breakAt': 0, 'spacing': 0),
-	'sm': ('breakAt': 576px, 'spacing': 20px),
-	'md': ('breakAt': 768px, 'spacing': 30px),
-	'lg': ('breakAt': 992px, 'spacing': 40px),
-	'xl': ('breakAt': 1200px, 'spacing': 60px),
-	'xxl': ('breakAt': 1350px, 'spacing': 60px),
-	'xxxl': ('breakAt': 1500px, 'spacing': 60px)
+	"xs": (
+		"breakAt": 0,
+		"spacing": 0,
+	),
+	"sm": (
+		"breakAt": 576px,
+		"spacing": 20px,
+	),
+	"md": (
+		"breakAt": 768px,
+		"spacing": 30px,
+	),
+	"lg": (
+		"breakAt": 992px,
+		"spacing": 40px,
+	),
+	"xl": (
+		"breakAt": 1200px,
+		"spacing": 60px,
+	),
+	"xxl": (
+		"breakAt": 1350px,
+		"spacing": 60px,
+	),
+	"xxxl": (
+		"breakAt": 1500px,
+		"spacing": 60px,
+	)
 );
-$theme: _set($theme, 'breakpoints', $breakpoints);
+$theme: _set($theme, "breakpoints", $breakpoints);

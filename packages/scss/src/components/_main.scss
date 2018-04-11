@@ -3,20 +3,19 @@
 }
 
 .navSide ~ .main-content {
-	margin-left: _theme('components.navSide.width');
+	margin-left: _theme("components.navSide.width");
 }
 
 .navSide.mod-compact ~ .main-content {
-	margin-left: _theme('components.navSide.compact.width');
+	margin-left: _theme("components.navSide.compact.width");
 }
 
-.navSide.mod-withBanner ~ .main-content,
-.main-content.mod-withBanner {
-	height: calc(100vh - #{_theme('commons.banner-height')});
+.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
+	height: calc(100vh - #{_theme("commons.banner-height")});
 	overflow-y: auto;
 }
 
-@include media_smaller_than('md') {
+@include media_smaller_than("md") {
 	.main-content {
 		margin-left: 0 !important;
 		overflow-x: hidden;
@@ -28,12 +27,7 @@
 		overflow: hidden;
 	}
 
-	.navSide.mod-withBanner ~ .main-content,
-	.main-content.mod-withBanner {
-		height: calc(
-			100vh - #{_theme('commons.banner-height')} - #{_component(
-					'navSide.mobile.toggle-height'
-				)}
-		);
+	.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
+		height: calc(100vh - #{_theme("commons.banner-height")} - #{_component("navSide.mobile.toggle-height")});
 	}
 }

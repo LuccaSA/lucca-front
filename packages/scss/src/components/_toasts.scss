@@ -2,24 +2,24 @@
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-	font-size: _theme('sizes.small.font-size');
-	line-height: _theme('sizes.small.line-height');
+	font-size: _theme("sizes.small.font-size");
+	line-height: _theme("sizes.small.line-height");
 	position: fixed;
-	right: _component('toasts.right');
-	top: _component('toasts.top');
-	width: _component('toasts.width');
+	right: _component("toasts.right");
+	top: _component("toasts.top");
+	width: _component("toasts.width");
 	z-index: 9999;
 }
 
 .toasts-item {
-	animation: toast _theme('commons.animations.durations.standard') 1;
-	background: rgba(0, 0, 0, 0.85);
-	border-radius: _theme('commons.border.radius');
+	animation: toast _theme("commons.animations.durations.standard") 1;
+	background: rgba(0, 0, 0, .85);
+	border-radius: _theme("commons.border.radius");
 	color: white;
-	margin-bottom: _component('toasts.margin-bottom');
+	margin-bottom: _component("toasts.margin-bottom");
 	margin-left: auto;
 	overflow: hidden;
-	padding: _component('toasts.padding');
+	padding: _component("toasts.padding");
 	position: relative;
 	transform-origin: top;
 }
@@ -34,18 +34,18 @@
 	margin: auto;
 	padding: 0;
 	position: absolute;
-	right: 0.5rem;
+	right: .5rem;
 	top: 0;
-	transition: opacity _theme('commons.animations.durations.fast') ease;
+	transition: opacity _theme("commons.animations.durations.fast") ease;
 	width: 1.25rem;
 
 	&:hover {
-		opacity: 0.66;
+		opacity: .66;
 	}
 
 	&::after {
-		@include makeIcon('cross');
-		font-size: _theme('sizes.standard.font-size');
+		@include makeIcon("cross");
+		font-size: _theme("sizes.standard.font-size");
 	}
 }
 

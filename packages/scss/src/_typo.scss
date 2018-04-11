@@ -1,74 +1,71 @@
 html {
-	font-size: _theme('commons.font.size');
+	font-size: _theme("commons.font.size");
 }
 
-*,
-::after,
-::before {
+*, ::after, ::before {
 	box-sizing: border-box;
 }
 
 body {
-	background: _theme('commons.background.base');
-	color: _color('text.default');
-	font-family: unquote(_theme('commons.font.family'));
-	font-size: _theme('sizes.standard.font-size');
-	line-height: _theme('sizes.standard.line-height');
+	background: _theme("commons.background.base");
+	color: _color("text.default");
+	font-family: unquote(_theme("commons.font.family"));
+	font-size: _theme("sizes.standard.font-size");
+	line-height: _theme("sizes.standard.line-height");
 	vertical-align: middle;
 }
 
 h1 {
-	color: _color('text.dark');
-	font-size: _theme('sizes.bigger.font-size');
+	color: _color("text.dark");
+	font-size: _theme("sizes.bigger.font-size");
 	font-weight: 600;
-	line-height: _theme('sizes.bigger.line-height');
-	margin: 0 0 0.9rem;
+	line-height: _theme("sizes.bigger.line-height");
+	margin: 0 0 .9rem;
 
 	&.mod-headline {
-		font-size: _theme('sizes.biggest.font-size');
-		line-height: _theme('sizes.biggest.line-height');
+		font-size: _theme("sizes.biggest.font-size");
+		line-height: _theme("sizes.biggest.line-height");
 		margin: 0 0 1.7rem;
 	}
 }
 
 h2 {
-	color: _color('text.dark');
-	font-size: _theme('sizes.big.font-size');
+	color: _color("text.dark");
+	font-size: _theme("sizes.big.font-size");
 	font-weight: 600;
-	line-height: _theme('sizes.big.line-height');
-	margin: 0 0 0.7rem;
+	line-height: _theme("sizes.big.line-height");
+	margin: 0 0 .7rem;
 }
 
 h3 {
-	color: _color('text.dark');
-	font-size: _theme('sizes.standard.font-size');
+	color: _color("text.dark");
+	font-size: _theme("sizes.standard.font-size");
 	font-weight: 600;
-	line-height: _theme('sizes.standard.line-height');
-	margin: 0 0 0.3rem;
+	line-height: _theme("sizes.standard.line-height");
+	margin: 0 0 .3rem;
 }
 
 h4 {
-	color: _color('text.light');
-	font-size: _theme('sizes.standard.font-size');
+	color: _color("text.light");
+	font-size: _theme("sizes.standard.font-size");
 	font-weight: 400;
-	line-height: _theme('sizes.standard.line-height');
-	margin: 0 0 0.5rem;
+	line-height: _theme("sizes.standard.line-height");
+	margin: 0 0 .5rem;
 }
 
 p {
-	margin: 0 0 0.7rem;
+	margin: 0 0 .7rem;
 }
 
 b {
 	font-weight: 600;
 }
 
-a,
-.link {
-	color: _color('text.link');
+a, .link {
+	color: _color("text.link");
 	text-decoration: underline;
 
 	&:hover {
-		color: lighten(_color('text.link'), 15%);
+		color: lighten(_color("text.link"), 15%);
 	}
 }

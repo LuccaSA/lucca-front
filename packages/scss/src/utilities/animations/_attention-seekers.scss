@@ -6,7 +6,7 @@
 
 	50% {
 		transform: scale(1.1);
-		opacity: 0.8;
+		opacity: .8;
 	}
 
 	100% {
@@ -16,17 +16,14 @@
 }
 
 @keyframes shake {
-	from,
-	to {
+	from, to {
 		transform: translate3d(0, 0, 0);
 	}
-	20%,
-	60% {
+	20%, 60% {
 		transform: translate3d(-10px, 0, 0);
 	}
 
-	40%,
-	80% {
+	40%, 80% {
 		transform: translate3d(10px, 0, 0);
 	}
 }

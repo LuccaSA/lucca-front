@@ -32,12 +32,7 @@ body {
  * Add the correct display in IE 9-.
  */
 
-article,
-aside,
-footer,
-header,
-nav,
-section {
+article, aside, footer, header, nav, section {
 	display: block;
 }
 
@@ -48,7 +43,7 @@ section {
 
 h1 {
 	font-size: 2em;
-	margin: 0.67em 0;
+	margin: .67em 0;
 }
 
 /* Grouping content
@@ -59,9 +54,7 @@ h1 {
  * 1. Add the correct display in IE.
  */
 
-figcaption,
-figure,
-main {
+figcaption, figure, main {
 	/* 1 */
 	display: block;
 }
@@ -113,8 +106,7 @@ a {
  * in all browsers (opinionated).
  */
 
-a:active,
-a:hover {
+a:active, a:hover {
 	outline-width: 0;
 }
 
@@ -133,8 +125,7 @@ abbr[title] {
  * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
  */
 
-b,
-strong {
+b, strong {
 	font-weight: inherit;
 }
 
@@ -142,8 +133,7 @@ strong {
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
 
-b,
-strong {
+b, strong {
 	font-weight: bolder;
 }
 
@@ -152,9 +142,7 @@ strong {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
-code,
-kbd,
-samp {
+code, kbd, samp {
 	font-family: monospace, monospace; /* 1 */
 	font-size: 1em; /* 2 */
 }
@@ -172,7 +160,7 @@ dfn {
  */
 
 mark {
-	background-color: #ffff00;
+	background-color: #FFFF00;
 	color: #000000;
 }
 
@@ -189,8 +177,7 @@ small {
  * all browsers.
  */
 
-sub,
-sup {
+sub, sup {
 	font-size: 75%;
 	line-height: 0;
 	position: relative;
@@ -198,11 +185,11 @@ sup {
 }
 
 sub {
-	bottom: -0.25em;
+	bottom: -.25em;
 }
 
 sup {
-	top: -0.5em;
+	top: -.5em;
 }
 
 /* Embedded content
@@ -212,8 +199,7 @@ sup {
  * Add the correct display in IE 9-.
  */
 
-audio,
-video {
+audio, video {
 	display: inline-block;
 }
 
@@ -250,11 +236,7 @@ svg:not(:root) {
  * 2. Remove the margin in Firefox and Safari.
  */
 
-button,
-input,
-optgroup,
-select,
-textarea {
+button, input, optgroup, select, textarea {
 	font-family: sans-serif; /* 1 */
 	font-size: 100%; /* 1 */
 	line-height: 1.15; /* 1 */
@@ -266,8 +248,7 @@ textarea {
  * 1. Show the overflow in Edge.
  */
 
-button,
-input {
+button, input {
 	/* 1 */
 	overflow: visible;
 }
@@ -277,8 +258,7 @@ input {
  * 1. Remove the inheritance of text transform in Firefox.
  */
 
-button,
-select {
+button, select {
 	/* 1 */
 	text-transform: none;
 }
@@ -298,10 +278,7 @@ button, html [type="button"], /* 1 */
  * Remove the inner border and padding in Firefox.
  */
 
-button::-moz-focus-inner,
-[type='button']::-moz-focus-inner,
-[type='reset']::-moz-focus-inner,
-[type='submit']::-moz-focus-inner {
+button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
 	border-style: none;
 	padding: 0;
 }
@@ -310,10 +287,7 @@ button::-moz-focus-inner,
  * Restore the focus styles unset by the previous rule.
  */
 
-button:-moz-focusring,
-[type='button']:-moz-focusring,
-[type='reset']:-moz-focusring,
-[type='submit']:-moz-focusring {
+button:-moz-focusring, [type="button"]:-moz-focusring, [type="reset"]:-moz-focusring, [type="submit"]:-moz-focusring {
 	outline: 1px dotted ButtonText;
 }
 
@@ -322,9 +296,9 @@ button:-moz-focusring,
  */
 
 fieldset {
-	border: 1px solid #c0c0c0;
+	border: 1px solid #C0C0C0;
 	margin: 0 2px;
-	padding: 0.35em 0.625em 0.75em;
+	padding: .35em .625em .75em;
 }
 
 /**
@@ -366,8 +340,7 @@ textarea {
  * 2. Remove the padding in IE 10-.
  */
 
-[type='checkbox'],
-[type='radio'] {
+[type="checkbox"], [type="radio"] {
 	box-sizing: border-box; /* 1 */
 	padding: 0; /* 2 */
 }
@@ -376,8 +349,7 @@ textarea {
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
 
-[type='number']::-webkit-inner-spin-button,
-[type='number']::-webkit-outer-spin-button {
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
 	height: auto;
 }
 
@@ -386,7 +358,7 @@ textarea {
  * 2. Correct the outline style in Safari.
  */
 
-[type='search'] {
+[type="search"] {
 	-webkit-appearance: textfield; /* 1 */
 	outline-offset: -2px; /* 2 */
 }
@@ -395,8 +367,7 @@ textarea {
  * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
  */
 
-[type='search']::-webkit-search-cancel-button,
-[type='search']::-webkit-search-decoration {
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
 	-webkit-appearance: none;
 }
 

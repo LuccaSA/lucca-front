@@ -1,19 +1,39 @@
 $sizes: (
-	smaller: (font-size: 0.75rem, line-height: 1.3rem),
-	small: (font-size: 0.85rem, line-height: 1.3rem),
-	standard: (font-size: 1rem, line-height: 1.618rem),
-	big: (font-size: 1.38rem, line-height: 1.9rem),
-	bigger: (font-size: 1.94rem, line-height: 2.5rem),
-	biggest: (font-size: 2.75rem, line-height: 3.2rem)
+	smaller: (
+		font-size: .75rem,
+		line-height: 1.3rem,
+	),
+	small: (
+		font-size: .85rem,
+		line-height: 1.3rem,
+	),
+	standard: (
+		font-size: 1rem,
+		line-height: 1.618rem,
+	),
+	big: (
+		font-size: 1.38rem,
+		line-height: 1.9rem,
+	),
+	bigger: (
+		font-size: 1.94rem,
+		line-height: 2.5rem,
+	),
+	biggest: (
+		font-size: 2.75rem,
+		line-height: 3.2rem,
+	),
 );
+
 $spacings: (
-	'reset': 0,
-	'smaller': 0.5rem,
-	'small': 1rem,
-	'standard': 2rem,
-	'big': 3rem,
-	'bigger': 4rem,
-	'biggest': 6rem
+	"reset": 0,
+	"smaller": .5rem,
+	"small": 1rem,
+	"standard": 2rem,
+	"big": 3rem,
+	"bigger": 4rem,
+	"biggest": 6rem,
 );
-$theme: _set($theme, 'sizes', $sizes);
-$theme: _set($theme, 'spacings', $spacings);
+
+$theme: _set($theme, "sizes", $sizes);
+$theme: _set($theme, "spacings", $spacings);

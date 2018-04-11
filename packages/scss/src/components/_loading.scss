@@ -6,10 +6,9 @@
 	padding-left: 2rem;
 	position: relative;
 
-	&::after,
-	&::before {
+	&::after, &::before {
 		height: 1rem;
-		margin: 0.35rem;
+		margin: .35rem;
 		width: 1rem;
 	}
 }
@@ -22,8 +21,7 @@
 		text-align: center;
 		width: 100%;
 
-		&::after,
-		&::before {
+		&::after, &::before {
 			margin: auto;
 		}
 	}

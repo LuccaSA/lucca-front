@@ -1,19 +1,33 @@
 $palettes: (
-	'primary': ('color': #ffcc00, 'text': #666666),
-	'secondary': ('color': #ff6600, 'text': #ffffff),
-	'success': ('color': #9acd32, 'text': #ffffff),
-	'warning': ('color': #ff9900, 'text': #ffffff),
-	'error': ('color': #ff3300, 'text': #ffffff)
+	"primary": (
+		"color": #FFCC00,
+		"text": #666666,
+	),
+	"secondary": (
+		"color": #FF6600,
+		"text": #FFFFFF,
+	),
+	"success": (
+		"color": #9ACD32,
+		"text": #FFFFFF,
+	),
+	"warning": (
+		"color": #FF9900,
+		"text": #FFFFFF,
+	),
+	"error": (
+		"color": #FF3300,
+		"text": #FFFFFF,
+	),
 );
 
 $colors: (
-	text:
-		(
-			'dark': #444444,
-			'default': #666666,
-			'light': #999999,
-			'placeholder': #cccccc
-		)
+	text: (
+		"dark": #444444,
+		"default": #666666,
+		"light": #999999,
+		"placeholder": #CCCCCC,
+	),
 );
-$theme: _set($theme, 'palettes', $palettes);
-$theme: _set($theme, 'colors', $colors);
+$theme: _set($theme, "palettes", $palettes);
+$theme: _set($theme, "colors", $colors);
