@@ -28,9 +28,12 @@ import { LuSelectSearchIntl } from '../../utils';
 export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 	implements ISelectScrollable<T>, AfterViewInit, OnDestroy {
 	// Inner references
+	private _processLoad = false;
 	_loading = false;
 	_options: T[];
 	_noResults = false;
+	_noMoreResults = false;
+	private _timeoutRef = null;
 	protected _requestSubscription: Subscription;
 
 	private _intlChanges: Subscription;
@@ -73,15 +76,25 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 		const top = this._scrollElement.nativeElement.scrollTop;
 		if (
 			scrollHeight - height - top < 50 &&
-			!this._loading &&
-			!this._noResults
+			!this._processLoad &&
+			!this._noResults &&
+			!this._noMoreResults
 		) {
 			this._populateList();
 		}
 	}
 
 	protected _populateList(): void {
-		this._loading = true;
+		this._processLoad = true;
+
+		// We manage Timeout for showing loader
+		if (this._timeoutRef) {
+			clearTimeout(this._timeoutRef);
+		}
+		this._timeoutRef = setTimeout(() => {
+			this._loading = this._processLoad && true;
+		}, 500);
+
 		// We manage a clean way to cancel the previous observable
 		if (this._requestSubscription && !this._requestSubscription.closed) {
 			this._requestSubscription.unsubscribe();
@@ -94,10 +107,12 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 				this._options = this._options.concat(additionnalOptions);
 				this._optionsList.setDirty();
 				this._optionsList.notifyOnChanges();
-				this._noResults = additionnalOptions.length === 0;
+				this._noResults = this._options.length === 0;
+				this._noMoreResults = additionnalOptions.length === 0;
 
 				this._requestSubscription = null;
 				this._loading = false;
+				this._processLoad = false;
 			},
 		);
 	}
