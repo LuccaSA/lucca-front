@@ -48,7 +48,7 @@ export class LuSelectDirective extends LuPopoverTrigger {
 		config.hasBackdrop = true;
 		config.backdropClass = 'cdk-overlay-transparent-backdrop';
 		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
-		config.minWidth = `${clientRect.width}px`;
+		config.width = `${clientRect.width}px`;
 		return config;
 	}
 }
