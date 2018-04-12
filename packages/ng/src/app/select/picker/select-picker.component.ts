@@ -173,6 +173,9 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 		this._highlightIndex = selectOptions.findIndex(selectOption => {
 			return selectOption.viewValue === clue;
 		});
+		if (this._highlightIndex === -1) {
+			this._highlightIndex = 0;
+		}
 
 		this._highlightIndex$.next(this._highlightIndex);
 		// });
