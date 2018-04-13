@@ -6,6 +6,7 @@
 ### Adding
 ### Enhancements
 ### Fixes
+- `navSide` toggle height on small resolutions
 
 ## 0.6.0
 ### Breaking changes
