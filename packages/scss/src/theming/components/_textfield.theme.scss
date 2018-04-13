@@ -1,17 +1,17 @@
 $textfield: (
-	font-size: _theme('sizes.standard.font-size'),
+	font-size: _theme("sizes.standard.font-size"),
 	background: #ffffff,
 	border-radius: 0.2rem,
 
   input: (
 		padding-horizontal: 0.5rem,
 		padding-vertical: 0.5rem,
-		color: _color('text.default')
+		color: _color("text.default")
 	),
 
   label: (
-    color: _color('text.default'),
-    font-size: _theme('sizes.small.font-size')
+    color: _color("text.default"),
+    font-size: _theme("sizes.small.font-size")
   ),
 
   suffix: (
@@ -25,7 +25,7 @@ $textfield: (
   ),
 
 	message: (
-    font-size: _theme('sizes.small.font-size')
+    font-size: _theme("sizes.small.font-size")
   ),
 
 	sizes: (
@@ -41,11 +41,11 @@ $textfield: (
 	material: (
 		padding-top: 1rem,
 		default-palette: (
-      color: _color('primary')
+      color: _color("primary")
     ),
 		label: (
       color: #a6a6a6,
-      font-size: _theme('sizes.standard.font-size')
+      font-size: _theme("sizes.standard.font-size")
     ),
 		suffix: (
       top: 1.15rem,
@@ -56,8 +56,8 @@ $textfield: (
 	compact: (
 		padding: 0.5rem,
 		label: (
-			color: _color('text.light'),
-			font-size: _theme('sizes.standard.font-size'),
+			color: _color("text.light"),
+			font-size: _theme("sizes.standard.font-size"),
 			right-margin: 0.3rem,
 			sizes: (
 				shorter: 3rem,
@@ -72,8 +72,8 @@ $textfield: (
 
   framed: (
   	default-palette:(
-      color: _color('text.light'),
-      text: _color('text.default')
+      color: _color("text.light"),
+      text: _color("text.default")
     ),
   	side-padding: 1rem,
   	top-padding: 2.2rem,
@@ -84,8 +84,8 @@ $textfield: (
       margin-top: 1.5rem
     ),
   	title: (
-  		font-size: _theme('sizes.big.font-size'),
-  		line-height: _theme('sizes.big.line-height')
+  		font-size: _theme("sizes.big.font-size"),
+  		line-height: _theme("sizes.big.line-height")
   	),
   	suffix: (padding-right: 2.5rem)
   )

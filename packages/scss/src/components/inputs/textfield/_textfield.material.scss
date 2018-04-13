@@ -40,12 +40,7 @@
 	.textfield-suffix {
 		position: absolute;
 		right: 0;
-<<<<<<< HEAD
-		top: _component("textfield.material.padding-top") + _component("textfield.input.padding-vertical");
-=======
-		top: _component('textfield.material.suffix.top') +
-			_component('textfield.input.padding-vertical');
->>>>>>> [ref] remove scss autocomplete
+		top: _component('textfield.material.suffix.top') + _component('textfield.input.padding-vertical');
 	}
 
 
