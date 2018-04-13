@@ -117,7 +117,7 @@
 		transition: opacity _theme("commons.animations.durations.fast") ease;
 		white-space: nowrap;
 
-		* {
+		> * {
 			opacity: 0;
 		}
 	}
@@ -127,7 +127,7 @@
 	&:hover {
 		.table-body-row-cell, .table-head-row-cell {
 			&.mod-actions {
-				* {
+				> * {
 					opacity: 1;
 				}
 			}
