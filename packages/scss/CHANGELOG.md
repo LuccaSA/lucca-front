@@ -7,6 +7,7 @@
 ### Enhancements
 ### Fixes
 - `navSide` toggle height on small resolutions
+- `tables` fix borders alignment
 
 ## 0.6.0
 ### Breaking changes
