@@ -104,7 +104,7 @@
 		}
 	}
 
-	&.mod-search {
+	&.mod-search, &.mod-autocomplete {
 		&::after {
 			right: 0;
 			bottom: 0;

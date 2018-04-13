@@ -182,7 +182,7 @@
 
 	/* Search */
 
-	&.mod-search {
+	&.mod-search, &.mod-autocomplete {
 		&::after {
 			color: _color("text.light");
 			@include makeIcon("search");
