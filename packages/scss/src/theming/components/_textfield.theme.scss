@@ -15,7 +15,7 @@ $textfield: (
   ),
 
   suffix: (
-    top: 1.9rem,
+    top: 1.75rem,
     padding-right: 1.5rem
   ),
 
@@ -48,7 +48,7 @@ $textfield: (
       font-size: _theme("sizes.standard.font-size")
     ),
 		suffix: (
-      top: 1.15rem,
+      top: 1rem,
       padding-right: 1rem
     )
 	),
@@ -66,8 +66,7 @@ $textfield: (
 				long: 9rem,
 				longer: 11rem
 			)
-		),
-		suffix: (top: .6rem, padding-right: .5rem)
+		)
   ),
 
   framed: (

@@ -40,7 +40,7 @@
 	.textfield-suffix {
 		position: absolute;
 		right: 0;
-		top: _component('textfield.material.suffix.top') + _component('textfield.input.padding-vertical');
+		top: _component("textfield.material.suffix.top") + _component("textfield.input.padding-vertical");
 	}
 
 
