@@ -6,6 +6,7 @@
 ### Adding
 ### Enhancements
 ### Fixes
+- `tables` fix borders alignment
 
 ## 0.6.0
 ### Breaking changes

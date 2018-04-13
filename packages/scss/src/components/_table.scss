@@ -1,6 +1,5 @@
 .table {
-	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
-	border-collapse: collapse;
+	border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
 	border-spacing: 0;
 	display: table;
 	font-size: _theme("component.table.font-size");
@@ -110,7 +109,6 @@
 
 .table-body-row-cell, .table-head-row-cell {
 	&.mod-actions {
-		opacity: 0;
 		padding: {
 			bottom: .3rem;
 			top: .3rem;
@@ -118,6 +116,10 @@
 		text-align: right;
 		transition: opacity _theme("commons.animations.durations.fast") ease;
 		white-space: nowrap;
+
+		> * {
+			opacity: 0;
+		}
 	}
 }
 
@@ -125,7 +127,9 @@
 	&:hover {
 		.table-body-row-cell, .table-head-row-cell {
 			&.mod-actions {
-				opacity: 1;
+				> * {
+					opacity: 1;
+				}
 			}
 		}
 	}
