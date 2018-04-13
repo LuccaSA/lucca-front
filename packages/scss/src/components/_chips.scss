@@ -1,47 +1,48 @@
 .chip {
-	background: _theme('commons.background.dark');
+	background: _theme("commons.background.dark");
 	border-radius: 1rem;
 	display: inline-block;
-	margin: 0 0.2rem 0.3rem 0;
-	padding: 0.15rem 1.8rem 0.15rem 0.75rem;
+	margin: 0 .2rem .3rem 0;
+	padding: .15rem 1.8rem .15rem .75rem;
 	position: relative;
 	vertical-align: middle;
 }
 
 .chip-kill {
-	background-color: _theme('commons.background.darkest');
+	background-color: _theme("commons.background.darkest");
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;
 	color: white;
 	cursor: pointer;
-	font-size: 0.8rem;
+	font-size: .8rem;
 	font-weight: 700;
 	height: 1rem;
 	margin: auto;
-	padding: 0.05rem 0 0;
+	padding: .05rem 0 0;
 	position: absolute;
-	right: 0.5rem;
+	right: .5rem;
 	top: 0;
 	transition: 150ms background ease;
 	width: 1rem;
 
 	&::before {
-		@include makeIcon('cross');
-		font-family: 'Lucca icons';
+		@include makeIcon("cross");
+		font-family: "Lucca icons";
 	}
 
 	&:hover {
-		background-color: _color('error');
+		background-color: _color("error");
 	}
 }
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .chip {
 	&.mod-unkillable {
-		padding: 0.15rem 0.75rem;
+		padding: .15rem .75rem;
 
 		.chip-kill {
 			display: none;

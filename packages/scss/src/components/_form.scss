@@ -6,12 +6,13 @@
 .form-group-label {
 	display: block;
 	font-weight: 600;
-	margin-bottom: 0.3rem;
+	margin-bottom: .3rem;
 }
 
 .form-actions {
 	text-align: right;
 }
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -35,20 +36,18 @@
 			}
 
 			&.mod-selection {
-				@include fakeBorder(1px, _theme('commons.divider.color'));
-				padding: _component('textfield.framed.top-padding')
-					_component('textfield.framed.side-padding')
-					_component('textfield.framed.bottom-padding');
+				@include fakeBorder(1px, _theme("commons.divider.color"));
+				padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
 			}
 		}
 
 		.form-group-line-label {
-			color: _color('text.light');
-			font-size: _theme('sizes.small.font-size');
-			left: _component('textfield.framed.side-padding');
+			color: _color("text.light");
+			font-size: _theme("sizes.small.font-size");
+			left: _component("textfield.framed.side-padding");
 			position: absolute;
-			right: _component('textfield.framed.side-padding');
-			top: _component('textfield.framed.label-top-offset');
+			right: _component("textfield.framed.side-padding");
+			top: _component("textfield.framed.label-top-offset");
 			width: auto;
 		}
 
@@ -80,6 +79,7 @@
 		}
 	}
 }
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

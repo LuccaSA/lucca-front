@@ -1,7 +1,7 @@
 .filters {
 	@include elevate(1);
 	align-items: center;
-	background: _component('filters.background');
+	background: _component("filters.background");
 	display: flex;
 	position: relative;
 	z-index: 1;
@@ -20,6 +20,7 @@
 	padding-left: 2rem;
 }
 
+
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -30,14 +31,14 @@
 	}
 }
 
+
 // CHILDS COMPONENTS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .filters {
 	.textfield {
 		&.mod-framed {
-			border-right: _theme('commons.divider.width') solid
-				_theme('commons.divider.color');
+			border-right: _theme("commons.divider.width") solid _theme("commons.divider.color");
 			max-width: 16rem;
 
 			.textfield-input {
@@ -50,8 +51,7 @@
 .filters-sectionRight {
 	.textfield {
 		&.mod-framed {
-			border-left: _theme('commons.divider.width') solid
-				_theme('commons.divider.color');
+			border-left: _theme("commons.divider.width") solid _theme("commons.divider.color");
 			border-right: 0;
 		}
 	}

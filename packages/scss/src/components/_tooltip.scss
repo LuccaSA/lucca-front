@@ -1,18 +1,18 @@
 .tooltip {
-	background: _color('text.default');
+	background: _color("text.default");
 	border-radius: 3px;
 	color: white;
 	display: inline-block;
-	font-size: _theme('sizes.small.font-size');
-	padding: 0.5rem 1rem;
+	font-size: _theme("sizes.small.font-size");
+	padding: .5rem 1rem;
 	position: relative;
 
 	&::before {
-		border-color: _color('text.default') transparent transparent transparent;
+		border-color: _color("text.default") transparent transparent transparent;
 		border-style: solid;
 		border-width: 7px 7px 0;
 		bottom: -6px;
-		content: '';
+		content: "";
 		height: 0;
 		left: 0;
 		margin: auto;
@@ -24,11 +24,11 @@
 
 .tooltip {
 	&.mod-primary {
-		background: _color('primary');
-		color: _color('text.default');
+		background: _color("primary");
+		color: _color("text.default");
 
 		&::before {
-			border-color: _color('primary') transparent transparent transparent;
+			border-color: _color("primary") transparent transparent transparent;
 		}
 	}
 }

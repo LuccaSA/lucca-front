@@ -1,9 +1,9 @@
 .header {
 	@include elevate(1);
 	align-items: flex-end;
-	background: _component('header.background');
+	background: _component("header.background");
 	display: flex;
-	padding: _component('header.padding');
+	padding: _component("header.padding");
 	position: relative;
 	z-index: 1;
 }
@@ -20,16 +20,17 @@
 .header.is-loading {
 	height: 75px;
 	&::after {
-		content: '';
+		content: "";
 		display: block;
 		position: absolute;
 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0;
-		@include loadingGradientAnimation(rgba(0, 0, 0, 0.1), true);
+		@include loadingGradientAnimation(rgba(0,0,0, .1), true);
 	}
 }
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

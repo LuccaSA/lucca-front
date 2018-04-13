@@ -1,10 +1,10 @@
 %input_material {
-	padding-top: _component('textfield.material.padding-top');
+	padding-top: _component("textfield.material.padding-top");
 
 	.textfield-input {
 		background: transparent;
 		border-radius: 0;
-		box-shadow: 0 1px 0 0 _component('textfield.border.color');
+		box-shadow: 0 1px 0 0 _component("textfield.border.color");
 		padding: {
 			left: 0;
 			right: 0;
@@ -14,22 +14,21 @@
 			opacity: 0;
 		}
 
-		&:focus,
-		&.is-focused {
+		&:focus, &.is-focused {
 			&::placeholder {
 				opacity: 1;
 			}
 
 			~ .textfield-label {
-				font-size: _theme('sizes.small.font-size');
+				font-size: _theme("sizes.small.font-size");
 				top: 0;
 			}
 		}
 	}
 
 	.textfield-label {
-		color: _component('textfield.material.label.color');
-		font-size: _component('textfield.material.label.font-size');
+		color: _component("textfield.material.label.color");
+		font-size: _component("textfield.material.label.font-size");
 		font-weight: 400;
 		left: 0;
 		pointer-events: none;
@@ -41,9 +40,9 @@
 	.textfield-suffix {
 		position: absolute;
 		right: 0;
-		top: _component('textfield.material.padding-top') +
-			_component('textfield.input.padding-vertical');
+		top: _component("textfield.material.padding-top") + _component("textfield.input.padding-vertical");
 	}
+
 
 	// PALETTE
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -52,12 +51,11 @@
 
 	@mixin inputColoring($palette) {
 		.textfield-input {
-			&:focus,
-			&.is-focused {
-				box-shadow: 0 2px 0 0 _get($palette, 'color');
+			&:focus, &.is-focused {
+				box-shadow: 0 2px 0 0 _get($palette, "color");
 
 				~ .textfield-label {
-					color: _get($palette, 'color');
+					color: _get($palette, "color");
 				}
 			}
 		}
@@ -65,13 +63,13 @@
 		// Needed when textfield label is not next to the textfield-input
 		&.is-focused {
 			.textfield-label {
-				color: _get($palette, 'color');
+				color: _get($palette, "color");
 			}
 		}
 	}
 
 	// default color
-	@include inputColoring(_component('textfield.material.default-palette'));
+	@include inputColoring(_component("textfield.material.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -80,12 +78,13 @@
 		}
 	}
 
+
 	// MOD
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	&.mod-withSuffix {
 		.textfield-input {
-			padding-right: _component('textfield.material.suffix.padding-right');
+			padding-right: _component("textfield.material.suffix.padding-right");
 		}
 	}
 
@@ -101,15 +100,14 @@
 		}
 
 		.textfield-suffix {
-			top: _component('textfield.input.padding-vertical');
+			top: _component("textfield.input.padding-vertical");
 		}
 	}
 
-	&.mod-autocomplete,
-	&.mod-search {
+	&.mod-autocomplete, &.mod-search {
 		&::after {
 			right: 0;
-			bottom: 0.1rem;
+			bottom: .1rem;
 		}
 
 		.textfield-label {
@@ -122,16 +120,16 @@
 
 	// Inline validation
 	&.is-loading {
-		&::before,
-		&::after {
-			bottom: 0.4rem;
+
+		&::before, &::after {
+			bottom: .4rem;
 			right: 0;
 		}
 	}
 
 	&.is-valid {
 		&::before {
-			bottom: 0.7rem;
+			bottom: .7rem;
 			right: 0;
 		}
 
@@ -155,14 +153,9 @@
 			@include textfieldMaterialFilled();
 		}
 
-		&[disabled],
-		&[readonly] {
+		&[disabled], &[readonly] {
 			background: transparent;
-			background-image: linear-gradient(
-				to right,
-				_component('textfield.border.color') 33%,
-				rgba(255, 255, 255, 0) 0%
-			); // Dashed line
+			background-image: linear-gradient(to right, _component("textfield.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
 			background-position: bottom;
 			background-repeat: repeat-x;
 			background-size: 3px 1px;
@@ -177,7 +170,7 @@
 	// Needed when textfield label is not next to the textfield-input
 	&.is-focused {
 		.textfield-label {
-			font-size: _theme('sizes.small.font-size');
+			font-size: _theme("sizes.small.font-size");
 			top: 0;
 		}
 	}

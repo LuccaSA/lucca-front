@@ -4,14 +4,14 @@
 	flex-direction: row;
 
 	.textfield-label {
-		color: _component('textfield.compact.label.color');
-		font-size: _component('textfield.compact.label.font-size');
+		color: _component("textfield.compact.label.color");
+		font-size: _component("textfield.compact.label.font-size");
 		font-weight: 400;
 		flex: 0 0 auto;
 		margin-bottom: 0;
-		margin-right: _component('textfield.compact.label.right-margin');
+		margin-right: _component("textfield.compact.label.right-margin");
 		order: -1;
-		width: _component('textfield.compact.label.sizes.default');
+		width: _component("textfield.compact.label.sizes.default");
 	}
 
 	.textfield-messages {
@@ -24,17 +24,13 @@
 		position: absolute;
 		top: 0;
 		width: 100%;
-		max-width: _component('textfield.compact.label.sizes.default');
+		max-width: _component("textfield.compact.label.sizes.default");
 
 		&.mod-helper {
 			bottom: auto;
 			left: 0;
 			max-width: 100%;
-			padding-left: calc(
-				#{_component('textfield.compact.label.sizes.default')} + #{_component(
-						'textfield.compact.label.right-margin'
-					)}
-			);
+			padding-left: calc(#{_component("textfield.compact.label.sizes.default")} + #{_component("textfield.compact.label.right-margin")});
 			right: 0;
 			top: 100%;
 		}
@@ -43,16 +39,12 @@
 	.textfield-options {
 		right: 0;
 		left: auto;
-		width: calc(
-			100% - #{_component('textfield.compact.label.right-margin')} - #{_component(
-					'textfield.compact.label.sizes.default'
-				)}
-		);
+		width: calc(100% - #{_component("textfield.compact.label.right-margin")} - #{_component("textfield.compact.label.sizes.default")});
 	}
 
 	.textfield-suffix {
-		top: _component('textfield.compact.padding');
-		right: _component('textfield.compact.padding');
+		top: _component("textfield.compact.padding");
+		right: _component("textfield.compact.padding");
 	}
 
 	// MODS
@@ -61,30 +53,20 @@
 	/* Label Width */
 
 	@mixin inputWidth($iWidth, $lWidth) {
-		width: calc(
-			#{$iWidth} + #{_component('textfield.compact.label.right-margin')} + #{$lWidth}
-		);
+		width: calc(#{$iWidth} + #{_component("textfield.compact.label.right-margin")} + #{$lWidth});
 	}
 
 	& {
-		@include inputWidth(
-			_component('textfield.sizes.default'),
-			_component('textfield.compact.label.sizes.default')
-		);
+		@include inputWidth(_component("textfield.sizes.default"), _component("textfield.compact.label.sizes.default"));
 	}
 
-	@each $input-size-name, $input-width in _component('textfield.sizes') {
+	@each $input-size-name, $input-width in _component("textfield.sizes") {
 		&.mod-#{$input-size-name} {
-			@include inputWidth(
-				$input-width,
-				_component('textfield.compact.label.sizes.default')
-			);
+			@include inputWidth($input-width, _component("textfield.compact.label.sizes.default"));
 			.textfield-options {
 				width: $input-width;
 			}
-			@each $label-size-name,
-				$label-width in _component('textfield.compact.label.sizes')
-			{
+			@each $label-size-name, $label-width in _component("textfield.compact.label.sizes") {
 				&.mod-label-#{$label-size-name} {
 					@include inputWidth($input-width, $label-width);
 				}
@@ -92,16 +74,14 @@
 		}
 	}
 
-	@each $label-size-name, $label-width in _component('textfield.sizes') {
+	@each $label-size-name, $label-width in _component("textfield.sizes") {
 		&.mod-label-#{$label-size-name} {
 			.textfield-label {
 				width: $label-width;
 			}
 
 			.textfield-messages.mod-helper {
-				padding-left: calc(
-					$label-width + #{_component('textfield.compact.label.right-margin')}
-				);
+				padding-left: calc($label-width + #{_component("textfield.compact.label.right-margin")});
 			}
 		}
 	}
@@ -119,14 +99,14 @@
 	.textfield-input {
 		&.is-error {
 			~ .textfield-label {
-				color: _color('error');
+				color: _color("error");
 			}
 		}
 	}
 
 	&.is-error {
 		.textfield-label {
-			color: _color('error');
+			color: _color("error");
 		}
 	}
 }

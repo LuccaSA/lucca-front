@@ -2,15 +2,14 @@
 	background: white;
 	@include elevate(1);
 	list-style: none;
-	margin-bottom: _component('list.margin-bottom');
+	margin-bottom: _component("list.margin-bottom");
 	padding: 0;
 }
 
 .list-item {
 	align-items: center;
-	border-bottom: _theme('commons.divider.width') solid
-		_theme('commons.divider.color');
-	color: _color('text.default');
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	color: _color("text.default");
 	display: flex;
 	position: relative;
 	text-decoration: none;
@@ -27,8 +26,8 @@
 }
 
 .list-item-content {
-	color: _color('text.default');
-	padding: _component('list.padding');
+	color: _color("text.default");
+	padding: _component("list.padding");
 	text-decoration: none;
 	width: 100%;
 }
@@ -44,19 +43,19 @@
 .list-item-actions {
 	margin-left: auto;
 	opacity: 0;
-	padding: _component('list.padding');
+	padding: _component("list.padding");
 	padding-left: 0;
-	transition: all _theme('commons.animations.durations.fast') ease;
+	transition: all _theme("commons.animations.durations.fast") ease;
 	white-space: nowrap;
 }
 
 .list-item {
 	&.mod-clickable {
 		cursor: pointer;
-		transition: background _theme('commons.animations.durations.fast') ease;
+		transition: background _theme("commons.animations.durations.fast") ease;
 
 		&:hover {
-			background: _component('list.hover.background');
+			background: _component("list.hover.background");
 		}
 	}
 }

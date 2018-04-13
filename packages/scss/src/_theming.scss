@@ -1,10 +1,13 @@
-@import 'theming/utils', 'theming/get-set';
+@import
+	"theming/utils",
+	"theming/get-set";
 
 $theme: () !default;
 
-@import 'theming/palettes',
-	'theming/sizes',
-	'theming/breakpoints',
-	'theming/icons',
-	'theming/commons',
-	'theming/components';
+@import
+	"theming/palettes",
+	"theming/sizes",
+	"theming/breakpoints",
+	"theming/icons",
+	"theming/commons",
+	"theming/components";

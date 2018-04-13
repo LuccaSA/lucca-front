@@ -1,67 +1,65 @@
 @mixin textfieldError() {
-	box-shadow: 0 0 0 1px _color('error');
-	background-color: rgba(_color('error'), 0.1);
+	box-shadow: 0 0 0 1px _color("error");
+	background-color: rgba( _color("error"), .1 );
 
 	&::placeholder {
-		color: rgba(_color('error'), 0.5);
+		color: rgba( _color("error"), .5 );
 	}
 
 	~ .textfield-label {
-		color: _color('error');
+		color: _color("error");
 	}
 
 	&:focus ~ .textfield-label {
-		color: _color('error');
+		color: _color("error");
 	}
 }
 
 @mixin textfieldMaterialError() {
-	box-shadow: 0 2px 0 0 _color('error');
+	box-shadow: 0 2px 0 0 _color("error");
 
 	&::placeholder {
-		color: rgba(_color('error'), 0.5);
+		color: rgba( _color("error"), .5 );
 	}
 
 	~ .textfield-label {
-		color: _color('error');
+		color: _color("error");
 	}
 
 	&:focus ~ .textfield-label {
-		color: _color('error');
+		color: _color("error");
 	}
 }
 
 @mixin textfieldFramedError() {
-	background-color: transparentize(_color('error'), 0.9);
+	background-color: transparentize(_color("error"), .9);
 
 	&::placeholder {
-		color: rgba(_color('error'), 0.5);
+		color: rgba( _color("error"), .5 );
 	}
 
-	&:focus,
-	&:hover {
-		@include fakeBorder(1px, _color('error'));
-		background-color: transparentize(_color('error'), 0.9);
+	&:focus, &:hover {
+		@include fakeBorder(1px, _color("error"));
+		background-color: transparentize(_color("error"), .9);
 	}
 
-	~ .textfield-label,
-	~ .textfield-suffix {
-		color: _color('error') !important;
+	~ .textfield-label, ~ .textfield-suffix {
+		color: _color("error") !important;
 	}
 }
 
 @mixin textfieldMaterialFilled() {
 	~ .textfield-label {
-		font-size: _theme('sizes.small.font-size');
+		font-size: _theme("sizes.small.font-size");
 		top: 0;
 	}
 }
 
 %isRequired {
-	color: _color('error');
-	content: '*';
+	color: _color("error");
+	content: "*";
 	display: inline-block;
 	font-size: 1.2rem;
-	margin-left: 0.25em;
+	margin-left: .25em;
 	position: absolute;
 }

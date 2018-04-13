@@ -1,18 +1,18 @@
 .collapse-title {
 	cursor: pointer;
 	display: inline-block;
-	margin: 0 0 0.2rem;
+	margin: 0 0 .2rem;
 
 	&:hover {
-		color: darken(_color('text.default'), 15%);
+		color: darken(_color("text.default"), 15%);
 	}
 
 	&::before {
-		@include makeIcon('chevron_east');
-		font-size: _theme('sizes.smaller.font-size');
+		@include makeIcon("chevron_east");
+		font-size: _theme("sizes.smaller.font-size");
 		font-weight: 400;
-		margin-right: 0.25rem;
-		transition: all _theme('commons.animations.durations.fast') ease;
+		margin-right: .25rem;
+		transition: all _theme("commons.animations.durations.fast") ease;
 	}
 }
 
@@ -22,6 +22,7 @@
 	animation-name: fadeIn;
 	animation-fill-mode: none;
 }
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

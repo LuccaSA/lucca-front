@@ -9,8 +9,8 @@
 		@if (map-has-key($result, $key)) {
 			$result: map-get($result, $key);
 		} @else {
-			@error 'There is no #{$key} key in map';
-			@return '';
+			@error "There is no #{$key} key in map";
+			@return "";
 		}
 	}
 	@return $result;
@@ -45,7 +45,7 @@
 	@return $map;
 }
 @function _replace($map, $keys, $values) {
-	@error 'not implemented';
+	@error "not implemented";
 }
 
 @function _theme($keys) {
@@ -53,42 +53,42 @@
 }
 
 @function _palettes() {
-	@return _get($theme, 'palettes');
+	@return _get($theme, "palettes");
 }
 
-@function _color($keys, $type: 'color') {
+@function _color($keys, $type:"color") {
 	// try to find it in colors
-	$result: _safeGet($theme, 'colors.' + $keys);
+	$result: _safeGet($theme, "colors." + $keys);
 	@if $result {
 		@return $result;
 	}
 	// try to find color associated with same palette
-	$result: _safeGet($theme, 'palettes.' + $keys + '.' + $type);
+	$result: _safeGet($theme, "palettes." + $keys + "." + $type);
 	@if $result {
 		@return $result;
 	}
 	// try to find it in commons
-	$result: _safeGet($theme, 'commons.' + $keys + '.' + $type);
+	$result: _safeGet($theme, "commons." + $keys + "." + $type);
 	@if $result {
 		@return $result;
 	}
 	// throw
 	@error "couldn't find color #{$keys} in theme";
-	@return '';
+	@return "";
 }
 
 @function _component($keys) {
-	$result: _safeGet($theme, 'components.' + $keys);
+	$result: _safeGet($theme, "components." + $keys);
 	@if $result {
 		@return $result;
 	}
 
 	// try to find in commons
-	$commonKeys: 'commons' + str-slice($keys, str-index($keys, '.'));
+	$commonKeys: "commons" + str-slice($keys, str-index($keys, '.'));
 	$result: _safeGet($theme, $commonKeys);
 	@if $result {
 		@return $result;
 	}
 	@error "couldn't find #{$keys} in components or in commons";
-	@return '';
+	@return "";
 }

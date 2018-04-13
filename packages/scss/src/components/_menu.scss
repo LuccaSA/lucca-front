@@ -1,34 +1,33 @@
 .menu {
 	align-items: center;
-	border-bottom: _theme('commons.divider.width') solid
-		_theme('commons.divider.color');
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 	line-height: 1;
 }
 
 .menu-link {
-	color: _color('text.default');
-	margin: _component('menu.margin');
-	opacity: 0.75;
-	padding: _component('menu.padding');
+	color: _color("text.default");
+	margin: _component("menu.margin");
+	opacity: .75;
+	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
-	transition: opacity _component('menu.animations.durations.standard') ease;
+	transition: opacity _component("menu.animations.durations.standard") ease;
 
 	&::after {
 		bottom: -1px;
-		content: '';
+		content: "";
 		display: block;
 		height: 3px;
 		left: 0;
 		position: absolute;
 		right: 0;
 		transform: scale(0, 1);
-		transition: transform _component('menu.animations.durations.standard') ease;
+		transition: transform _component("menu.animations.durations.standard") ease;
 	}
 
 	&:hover {
-		color: _color('text.default');
+		color: _color("text.default");
 		opacity: 1;
 
 		&::after {
@@ -42,12 +41,12 @@
 
 .menu {
 	@mixin menuColoring($palette) {
-		background: _get($palette, 'color');
+		background: _get($palette, "color");
 	}
 
 	// default color
 	.menu-link::after {
-		@include menuColoring(_component('menu.default-palette'));
+		@include menuColoring(_component("menu.default-palette"));
 	}
 
 	// palette colors
@@ -59,6 +58,7 @@
 		}
 	}
 }
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

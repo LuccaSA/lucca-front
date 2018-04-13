@@ -1,24 +1,24 @@
 .container {
-	margin: _component('container.margin-top') auto
-		_component('container.margin-bottom');
-	padding: 0 0.5rem;
-	max-width: _component('container.max-width');
+	margin: _component("container.margin-top") auto _component("container.margin-bottom");
+	padding: 0 .5rem;
+	max-width: _component("container.max-width");
 
 	@each $bp-name, $bp-obj in $breakpoints {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			width: map-get($bp-obj, breakAt) - map-get($bp-obj, spacing);
+			width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing);
 		}
 	}
 
-	@media (max-width: _component('container.min-width')) {
+	@media (max-width: _component("container.min-width")) {
 		width: 100%;
 	}
 
 	&:last-child {
-		padding-bottom: _component('container.margin-bottom');
+		padding-bottom: _component("container.margin-bottom");
 		margin-bottom: 0;
 	}
 }
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -31,6 +31,7 @@
 	}
 }
 
+
 // LAYOUT WITH ASIDE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -38,16 +39,12 @@
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
 			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-				width: calc(
-					#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme(
-							'components.navSide.width'
-						)}
-				);
+				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.width")});
 			}
 		}
 
-		@media (max-width: _theme('breakpoints.sm.breakAt')) {
-			width: calc(100% - _theme('components.navSide.width'));
+		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+			width: calc(100% - _theme("components.navSide.width"));
 		}
 	}
 }
@@ -56,16 +53,12 @@
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
 			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-				width: calc(
-					#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme(
-							'components.navSide.compact.width'
-						)}
-				);
+				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.compact.width")});
 			}
 		}
 
-		@media (max-width: _theme('breakpoints.sm.breakAt')) {
-			width: calc(100% - _theme('components.navSide.compact.width'));
+		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+			width: calc(100% - _theme("components.navSide.compact.width"));
 		}
 	}
 }

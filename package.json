@@ -23,23 +23,13 @@
     "lerna": "lerna",
     "travis": "lerna run travis --scope=@lucca-front/ng",
     "format": "npm run format-ng && npm run format-scss && npm run format-icons",
-    "format-icons": "prettier --config ./.prettierrc --write \"packages/icons/{src,demo}/**/*.scss\"",
-    "format-ng": "prettier --config ./.prettierrc --write \"packages/ng/{src,demo}/**/*.{ts,scss}\"",
-    "format-scss": "prettier --config ./.prettierrc --write \"packages/scss/{src,demo}/**/*.scss\"",
+    "format-ng": "prettier --config ./.prettierrc --write \"packages/ng/{src,demo}/**/*.{ts}\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "gitDir": "./",
     "linters": {
-      "packages/icons/{src,demo}/**/*.scss": [
-        "prettier --config ./.prettierrc --write",
-        "git add"
-      ],
-      "packages/ng/{src,demo}/**/*.{ts,scss}": [
-        "prettier --config ./.prettierrc --write",
-        "git add"
-      ],
-      "packages/scss/{src,demo}/**/*.scss": [
+      "packages/ng/{src,demo}/**/*.{ts}": [
         "prettier --config ./.prettierrc --write",
         "git add"
       ]
