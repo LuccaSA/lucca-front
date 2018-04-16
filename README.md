@@ -20,21 +20,7 @@ npm install @lucca-front/scss --save
 npm install @lucca-front/ng --save
 ```
 
-### Create override files
-
-It will allow you to customize scss & ng components.
-Create an override folder (for example src/scss/overrides/) and add these empty files in in:
-
-```
-breakpoints.override.scss
-commons.override.scss
-components.override.scss
-icons.override.scss
-palettes.override.scss
-sizes.override.scss
-```
-
-### Import scss and overrides
+### Import scss and NG style
 
 Import Lucca Front in src/style.scss (or your main scss file):
 
@@ -42,7 +28,7 @@ Import Lucca Front in src/style.scss (or your main scss file):
 @import "~@lucca-front/scss/src/main.overridable.scss";
 ```
 
-In angular-cli.json, edit your style path and add the path of your overrides folder:
+In angular-cli.json, add this to your stylePreprocessorOptions includePaths:
 
 ```
 "apps": [
@@ -50,22 +36,62 @@ In angular-cli.json, edit your style path and add the path of your overrides fol
 	"styles": [
 		"styles.scss"		
 	],
-  	"stylePreprocessorOptions": {
-        	"includePaths": ["scss/overrides"]
-     	},
+	"stylePreprocessorOptions": {
+		"includePaths": [
+			"path_to_node_modules/@lucca-front/scss/src/overrides",
+			"path_to_node_modules/@lucca-front/ng/src/styles/overrides" // if you use the ng package
+		]
+	},
 	...
 ],
 ```
 
 ### Import fonts
 
-Don't forget to add your fonts in src/index.html:
+If you are using our default font (Source Sans Pro), don't forget to add your fonts in your `<header>`:
 
 ```
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
 ```
 
 ## Theming
+### Setup
+
+You can override many variables to tailor Lucca-Front style to your needs.
+To do so, you must create a folder and reference it in your angular-cli.json as a stylePreprocessorOptions includePaths
+```
+"apps": [
+	...
+	"stylePreprocessorOptions": {
+		"includePaths": [
+			"path_to_node_modules/@lucca-front/scss/src/overrides",
+			"path to your override folder"
+		]
+	},
+	...
+],
+```
+
+In your override folder, you can create different files for different needs :
+* [breakpoints.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_breakpoints.scss)
+
+   Contains a map of breakpoints values.
+* [commons.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_commons.scss)
+
+   Contains a map of the most common values such as border-radius, font-family, and so on.
+* [components.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_components.scss)
+
+   Can either have directly components maps such as the [button map](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/components/_button.theme.scss).
+	 Or it can just be a file importing every component theme override you have
+* [icons.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_icons.scss)
+
+   Contains a map of with the prefix (class) used for the icons and the path to the icon file (without its extension).
+* [palette.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_palettes.scss)
+
+   Contains a map of the color themes (palette) used in the framework. Palette must have a `color` key but can be extended to as many keys as you need.
+
+You only have to write down the variables you wish to modify or add. More details on each variable are available in the [SCSS demo](https://latest-lucca-front-luccasa.surge.sh/).
+
 ### Palettes
 
 You can set a custom palette in palettes.override.scss. Your palette will be accessible in some components with `palette-*` classes.

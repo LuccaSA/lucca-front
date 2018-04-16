@@ -1,10 +1,40 @@
-<h2 class="demo-divider">Mixins</h2>
+<h2 class="demo-divider">Mixins & Functions</h2>
 <section class="contentSection">
-	<h2>Mixin</h2>
+	<h2>Theming Functions</h2>
+	<p>
+		These are functions you can use to access variables from the theme. 
+		They are available by adding <code class="code"~@lucca-front/scss/src/theming.overridable>@import "~@lucca-front/scss/src/theming.overridable"</code> in your file.
+		They return variables from maps. They use the dot notation <code class="code">parent.child.[...]</code>.
+	</p>
+	<h3>Color/Palettes</h3>
+<code class="code mod-block">_color("palette_name") // returns the palette.color value
+_color("palette_name", "key") // return the palette.key value
+</code>
+	<h3>Component</h3>
+<code class="code mod-block">_component("componentname.key.[...]")
+</code>
+	<h3>Theme</h3>
+	<p>This is the generic way to access our maps</p>
+<code class="code mod-block">_theme("mapname.key.[...]")
+</code>
+	<h3>Get</h3>
+	<p>If you need to access value in your own map, you can use the _get() function</p>
+<code class="code mod-block">_get($mapname, "key.[...]")
+</code>
+</section>
+<section class="contentSection">
+	<h2>Mixins</h2>
+	<p>These mixins are available by adding <code class="code">@import "~@lucca-front/scss/src/mixins";</code> in your file</p>
 	<h3>Elevated</h3>
-	<p>You can add shadow to your own component by using elevated(1~5) mixin</p>
-<code class="code mod-block">@import "~@lucca-front/scss/src/theming.overridable";
-@import "~@lucca-front/scss/src/mixins";
-@include elevate(1);
+	<p>You can add shadow to your own component by using elevated(1-5) mixin</p>
+<code class="code mod-block">@include elevate(1);</code>
+	<h3>Loader</h3>
+	<p>You can use this mixins to turn your element into a spinner</p>
+<code class="code mod-block">@include loading($size);</code>
+	<h3>Media queries</h3>
+	<p>Using the breakpoint values in the breakpoints map, you can easily handle your media queries</p>
+<code class="code mod-block">@include media_smaller_than("breakpoint_key"){} // <==> @media (max-width: breakpoint_value) {}
+@include media_larger_than("breakpoint_key"){} //<==> @media (min-width: breakpoint_value) {}
+@include media_between("breakpoint1_key", "breakpoint2_key"){} //<==> @media (min-width: breakpoint1_value) and (max-width: breakpoint2_value) {}
 </code>
 </section>
