@@ -32,7 +32,7 @@
 
 .textfield-suffix {
 	top: _component("textfield.suffix.top");
-	line-height: 1.15;
+	line-height: 1.3;
 	position: absolute;
 	right: _component("textfield.input.padding-horizontal");
 	z-index: 1;
@@ -180,16 +180,16 @@
 		}
 	}
 
-	/* Autocomplete & Search */
+	/* Search */
 
-	&.mod-autocomplete, &.mod-search {
+	&.mod-search, &.mod-autocomplete {
 		&::after {
 			color: _color("text.light");
 			@include makeIcon("search");
 			font-size: 1.4rem;
 			position: absolute;
-			bottom: .2rem;
-			right: .5rem;
+			bottom: .1rem;
+			right: .33rem;
 		}
 
 		.textfield-input {
