@@ -131,9 +131,11 @@
 
 	.navSide-item-link {
 		color: _component("navSide.bottom-section-palette.text");
+
 		&:hover {
 			background-color: _component("navSide.bottom-section-palette.selected-bg");
 			color: _component("navSide.bottom-section-palette.selected-text");
+
 			.navSide-item-alert {
 				background: _component("navSide.bottom-section-palette.alert-color");
 				color: _component("navSide.bottom-section-palette.alert-text");
@@ -365,19 +367,20 @@
 		position: relative;
 		width: auto;
 		height: auto;
+
 		.navSide-item-link {
-			opacity: 1;
 			color: _component("navSide.bottom-section-palette.text");
 			background: _component("navSide.bottom-section-palette.bg-color");
 		}
 	}
 
 	.navSide.mod-withBottomSection {
-		margin-bottom: 0;
+		padding-bottom: 0;
 	}
 
 	.navSide.is-open {
 		height: 100vh;
+		
 		.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
 			position: static;
 			visibility: visible;
