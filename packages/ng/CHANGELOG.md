@@ -1,6 +1,8 @@
 # Changelog
 
 ## In Dev
+- `animations` - add in/out timing and triggerName parameters to LuXAnimationFactory
+- `animations` - remove generic LuAnimationFactory
 ### New features
 ### Fixes
 ### Breaking changes
