@@ -27,18 +27,21 @@ export function LuAnimationFactory(
 export function LuFadeAnimationFactory(
 	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	triggerName: string = 'fadeAnimation',
 ): AnimationTriggerMetadata {
-	return trigger('fadeAnimation', [...fadingAnimations(animationInTiming, animationOutTiming)]);
+	return trigger(triggerName, [...fadingAnimations(animationInTiming, animationOutTiming)]);
 }
 export function LuScaleAnimationFactory(
 	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	triggerName: string = 'scaleAnimation',
 ): AnimationTriggerMetadata {
-	return trigger('scaleAnimation', [...scalingAnimations(animationInTiming, animationOutTiming)]);
+	return trigger(triggerName, [...scalingAnimations(animationInTiming, animationOutTiming)]);
 }
 export function LuSlideAnimationFactory(
 	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	triggerName: string = 'slideAnimation',
 ): AnimationTriggerMetadata {
-	return trigger('slideAnimation', [...slidingAnimations(animationInTiming, animationOutTiming)]);
+	return trigger(triggerName, [...slidingAnimations(animationInTiming, animationOutTiming)]);
 }
