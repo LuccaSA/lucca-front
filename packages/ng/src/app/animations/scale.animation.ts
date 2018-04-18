@@ -6,7 +6,7 @@ import {
 	AnimationMetadata,
 } from '@angular/animations';
 
-export function scalingAnimations(timing: string): AnimationMetadata[] {
+export function scalingAnimations(inTiming: string, outTiming: string): AnimationMetadata[] {
 	return [
 		transition('void => left', [
 			// ---> entering --->
@@ -16,7 +16,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'left center',
 					transform: 'scaleX(1)',
@@ -32,7 +32,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'left center',
 					transform: 'scaleX(0)',
@@ -49,7 +49,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'right center',
 					transform: 'scaleX(1)',
@@ -65,7 +65,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'right center',
 					transform: 'scaleX(0)',
@@ -82,7 +82,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'center top',
 					transform: 'scaleY(1)',
@@ -98,7 +98,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'center top',
 					transform: 'scaleY(0)',
@@ -115,7 +115,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'center bottom',
 					transform: 'scaleY(1)',
@@ -131,7 +131,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'center bottom',
 					transform: 'scaleY(0)',
@@ -143,7 +143,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 		transition('void => center, void => *', [
 			style({ transformOrigin: 'center', transform: 'scale(0)', opacity: '0' }),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'center',
 					transform: 'scale(1)',
@@ -154,7 +154,7 @@ export function scalingAnimations(timing: string): AnimationMetadata[] {
 		transition('center => void , * => void', [
 			style({ transformOrigin: 'center', transform: 'scale(1)', opacity: '1' }),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'center',
 					transform: 'scale(0)',

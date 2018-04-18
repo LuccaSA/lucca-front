@@ -9,32 +9,36 @@ export const DEFAULT_LF_ANIMATION_TIMING = '250ms 0ms ease-out';
 
 export function LuAnimationFactory(
 	type: AnimationType = 'fade',
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 ): AnimationTriggerMetadata {
 	switch (type) {
 		case 'fade':
-			return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
+			return trigger('fadeAnimation', [...fadingAnimations(animationInTiming, animationOutTiming)]);
 		case 'scale':
-			return trigger('scaleAnimation', [...scalingAnimations(animationTiming)]);
+			return trigger('scaleAnimation', [...scalingAnimations(animationInTiming, animationOutTiming)]);
 		case 'slide':
-			return trigger('slideAnimation', [...slidingAnimations(animationTiming)]);
+			return trigger('slideAnimation', [...slidingAnimations(animationInTiming, animationOutTiming)]);
 		default:
 			throw Error(`${type} is not a valid AnimationType`);
 	}
 }
 
 export function LuFadeAnimationFactory(
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 ): AnimationTriggerMetadata {
-	return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
+	return trigger('fadeAnimation', [...fadingAnimations(animationInTiming, animationOutTiming)]);
 }
 export function LuScaleAnimationFactory(
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 ): AnimationTriggerMetadata {
-	return trigger('scaleAnimation', [...scalingAnimations(animationTiming)]);
+	return trigger('scaleAnimation', [...scalingAnimations(animationInTiming, animationOutTiming)]);
 }
 export function LuSlideAnimationFactory(
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
 ): AnimationTriggerMetadata {
-	return trigger('slideAnimation', [...slidingAnimations(animationTiming)]);
+	return trigger('slideAnimation', [...slidingAnimations(animationInTiming, animationOutTiming)]);
 }
