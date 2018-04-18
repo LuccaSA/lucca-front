@@ -64,8 +64,8 @@ To do so, you must create a folder and reference it in your angular-cli.json as 
 	...
 	"stylePreprocessorOptions": {
 		"includePaths": [
+			"path to your override folder" // must be first
 			"path_to_node_modules/@lucca-front/scss/src/overrides",
-			"path to your override folder"
 		]
 	},
 	...
