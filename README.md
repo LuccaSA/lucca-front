@@ -39,7 +39,7 @@ In angular-cli.json, add this to your stylePreprocessorOptions includePaths:
 	"stylePreprocessorOptions": {
 		"includePaths": [
 			"path_to_node_modules/@lucca-front/scss/src/overrides",
-			"path_to_node_modules/@lucca-front/ng/src/styles/overrides" // if you use the ng package
+			"path_to_node_modules/@lucca-front/ng/src/style/overrides" // if you use the ng package
 		]
 	},
 	...

@@ -23,7 +23,7 @@
 }
 
 @mixin media_between($breakpoint1, $breakpoint2) {
-	@if map-has-key(_theme("breakpoints"), $breakpoint1) && map-has-key(_theme("breakpoints"), $breakpoint2) {
+	@if map-has-key(_theme("breakpoints"), $breakpoint1) and map-has-key(_theme("breakpoints"), $breakpoint2) {
 		@media (min-width: #{_theme("breakpoints.#{$breakpoint1}.breakAt")}) and (max-width: #{_theme("breakpoints.#{$breakpoint2}.breakAt")}) {
 			@content;
 		}
