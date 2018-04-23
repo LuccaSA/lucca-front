@@ -1,0 +1,45 @@
+{
+	"name": "@lucca-front/ng",
+	"version": "0.6.2",
+	"description": "a library of usefull components for angular web app",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LuccaSA/lucca-front.git"
+	},
+	"keywords": ["lucca", "angular", "ng"],
+	"author": "lucien bertin <lbertin@lucca.fr>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/LuccaSA/lucca-front/issues"
+	},
+	"scripts": {
+		"build": "cd lib && npm run build:lib"
+	},
+	"files": ["dist", "src"],
+	"main": "dist/bundles/lucca-front-ng.umd.js",
+	"typings": "dist/lucca-front-ng.d.ts",
+	"module": "dist/esm5/lucca-front-ng.js",
+	"es2015": "dist/esm2015/lucca-front-ng.js",
+	"metadata": "dist/lucca-front-ng.metadata.json",
+	"dependencies": {
+		"@ngx-formly/core": "^2.0.0-beta.3"
+	},
+	"peerDependencies": {
+		"@angular/cdk": "^5.0.0-rc0",
+		"@angular/material": "^5.0.0-rc0",
+		"@lucca-front/icons": "^0.6.2",
+		"@lucca-front/scss": "^0.6.2",
+		"moment": "^2.19.1"
+	},
+	"ngPackage": {
+		"whitelistedNonPeerDependencies": ["@ngx-formly/core", "tslib"],
+		"lib": {
+			"entryFile": "lib/src/public_api.ts",
+			"styleIncludePaths": [
+				"lib/src/style/overrides",
+				"lib/node_modules/@lucca-front/scss/src/overrides"
+			]
+		},
+		"dest": "dist"
+	}
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@lucca-front/ng",
+  "name": "@lucca-front/ng-dev",
   "version": "0.6.2",
   "description": "a library of usefull components for angular web app",
   "repository": {
@@ -21,6 +21,7 @@
     "prestart": "npm run generatedoc",
     "start": "ng serve -a=demo",
     "build": "gulp build",
+    "build:lib": "ng-packagr -p ../package.json",
     "test": "ng test -a=src -sr -sm=false",
     "test-debug": "ng test -a=src -sm=false --browsers=Chrome",
     "lint": "ng lint",
@@ -84,6 +85,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "merge2": "^1.1.0",
     "moment": "^2.19.1",
+    "ng-packagr": "^2.4.2",
     "node-sass": "^4.5.2",
     "prismjs": "^1.6.0",
     "prismjs-loader": "0.0.4",
@@ -92,13 +94,5 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2"
-  },
-  "peerDependencies": {
-    "@angular/cdk": "^5.0.0-rc0",
-    "@angular/material": "^5.0.0-rc0",
-    "@lucca-front/icons": "^0.6.2",
-    "@lucca-front/scss": "^0.6.2",
-    "@ngx-formly/core": "^2.0.0-beta.3",
-    "moment": "^2.19.1"
   }
 }
