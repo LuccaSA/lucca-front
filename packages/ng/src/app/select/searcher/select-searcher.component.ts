@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	Input,
 	AfterContentInit,
@@ -23,6 +24,7 @@ import { LuSelectSearchIntl } from '../utils';
 	selector: 'lu-select-searcher',
 	templateUrl: './select-searcher.component.html',
 	styleUrls: ['./select-searcher.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: ASelectOptionFeeder,
@@ -70,6 +72,7 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 				if (this._callbackOptions) {
 					this._callbackOptions(optionsFiltered);
 				}
+				this._changeDetectorRef.markForCheck();
 			});
 		this._intlChanges = _intl.changes.subscribe(() =>
 			this._changeDetectorRef.markForCheck(),

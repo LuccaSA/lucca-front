@@ -46,7 +46,7 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 	constructor(
 		protected _elementRef: ElementRef,
 		public _intl: LuSelectSearchIntl,
-		private _changeDetectorRef: ChangeDetectorRef,
+		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
 		super();
 		this._options = [];
@@ -93,6 +93,7 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 		}
 		this._timeoutRef = setTimeout(() => {
 			this._loading = this._processLoad && true;
+			this._changeDetectorRef.markForCheck();
 		}, 500);
 
 		// We manage a clean way to cancel the previous observable
@@ -113,6 +114,7 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 				this._requestSubscription = null;
 				this._loading = false;
 				this._processLoad = false;
+				this._changeDetectorRef.markForCheck();
 			},
 		);
 	}

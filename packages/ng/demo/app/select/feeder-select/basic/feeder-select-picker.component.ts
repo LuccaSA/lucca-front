@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	Input,
 	AfterContentInit,
@@ -27,6 +28,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 	selector: 'demo-select-feeder-picker',
 	templateUrl: './feeder-select-picker.component.html',
 	styleUrls: ['./feeder-select-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: ASelectOptionFeeder,
@@ -71,6 +73,7 @@ export class DemoSelectFeederPickerComponent extends ASelectOptionFeeder<any>
 			this.options = optionsTmp;
 			this.luOptions.setDirty();
 			this.luOptions.notifyOnChanges();
+			this._changeDetectorRef.markForCheck();
 		}, 1000);
 	}
 

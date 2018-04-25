@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component
+} from '@angular/core';
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'basic-mod-select',
 	templateUrl: './basic.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicModSelectComponent {
 	options = [

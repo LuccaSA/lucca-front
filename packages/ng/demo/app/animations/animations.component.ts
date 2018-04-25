@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 declare var require: any;
 
@@ -7,6 +7,7 @@ declare var require: any;
 	templateUrl: './animations.component.html',
 	styles: [],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoAnimationsComponent implements OnInit {
 	constructor() {}

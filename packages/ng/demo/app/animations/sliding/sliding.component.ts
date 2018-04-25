@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { LuSlideAnimationFactory } from '../../../../src/app/animations';
 
@@ -7,6 +7,7 @@ import { LuSlideAnimationFactory } from '../../../../src/app/animations';
 	templateUrl: './sliding.component.html',
 	styleUrls: ['../animations.scss'],
 	animations: [LuSlideAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlidingComponent {
 	slidingLeft = false;

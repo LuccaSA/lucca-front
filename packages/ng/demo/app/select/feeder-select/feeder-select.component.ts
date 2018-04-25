@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 declare var require: any;
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'demo-feeder-select',
 	templateUrl: './feeder-select.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoFeederSelectComponent {
 	snippets = {

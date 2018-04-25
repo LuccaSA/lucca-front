@@ -2,6 +2,7 @@
 
 ## In Dev
 ### New features
+-✨ The package is now compatible with ChangeDetectionStrategy.OnPush
 ### Fixes
 ### Breaking changes
 ### Updated dependencies

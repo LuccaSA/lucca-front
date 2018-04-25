@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	OnInit,
 	Input,
@@ -7,6 +8,7 @@ import {
 	OnDestroy,
 	ViewEncapsulation,
 	ElementRef,
+	ChangeDetectorRef,
 } from '@angular/core';
 import { LuSelectOptionSelectionChange } from './select-option.event';
 
@@ -18,6 +20,7 @@ import { LuSelectOptionSelectionChange } from './select-option.event';
 	templateUrl: './select-option.component.html',
 	styleUrls: ['./select-option.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [],
 })
 // tslint:disable-next-line:component-class-suffix
@@ -51,6 +54,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 */
 	set displayed(display: boolean) {
 		this._displayed = display;
+		this._changeDetector.markForCheck();
 	}
 
 	/**
@@ -71,7 +75,10 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	@Output()
 	onSelectionChange = new EventEmitter<LuSelectOptionSelectionChange<T>>();
 
-	constructor(protected _elementRef: ElementRef) {}
+	constructor(
+		protected _elementRef: ElementRef,
+		protected _changeDetector: ChangeDetectorRef,
+	) {}
 
 	// LifeCycle methods
 	ngOnInit() {}
@@ -102,6 +109,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 */
 	focus(): void {
 		this._focused = true;
+		this._changeDetector.markForCheck();
 	}
 
 	/**
@@ -109,6 +117,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 */
 	unfocus(): void {
 		this._focused = false;
+		this._changeDetector.markForCheck();
 	}
 
 	/**
@@ -117,6 +126,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	select(): void {
 		this._selected = true;
 		this._selectOption();
+		this._changeDetector.markForCheck();
 	}
 
 	/**
@@ -124,6 +134,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 */
 	unselect(): void {
 		this._selected = false;
+		this._changeDetector.markForCheck();
 	}
 
 	/**
@@ -133,6 +144,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 		if (!this._boudingRect) {
 			this._boudingRect = this._elementRef.nativeElement.getBoundingClientRect();
 		}
+		this._changeDetector.markForCheck();
 		return this._elementRef.nativeElement.offsetTop - this._boudingRect.height;
 	}
 }

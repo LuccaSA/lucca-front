@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component
+} from '@angular/core';
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'basic-searcher-select',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './basic.html',
 })
 export class BasicSearcherSelectComponent {

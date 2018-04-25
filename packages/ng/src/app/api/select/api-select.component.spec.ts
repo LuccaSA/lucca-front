@@ -125,7 +125,7 @@ describe('LuSelectApi', () => {
 				{ id: 1, name: 'test 1' },
 				{ id: 2, name: 'test 2' },
 			].map(item => {
-				const luSelectOption = new LuSelectOption(null);
+				const luSelectOption = new LuSelectOption(null, null);
 				luSelectOption.luOptionValue = item;
 				return luSelectOption;
 			});

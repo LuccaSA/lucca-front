@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ContentChildren,
 	ContentChild,
@@ -10,6 +11,7 @@ import {
 	OnDestroy,
 	QueryList,
 	ElementRef,
+	ChangeDetectorRef,
 } from '@angular/core';
 import {
 	LuPopoverComponent,
@@ -46,6 +48,7 @@ import { sameOption } from '../utils';
 	selector: 'lu-select-picker',
 	templateUrl: './select-picker.component.html',
 	styleUrls: ['./select-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [transformPopover],
 })
 // tslint:disable-next-line:component-class-suffix
@@ -99,7 +102,11 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 			.pipe(take(1), switchMap(() => this._optionSelectionChanges));
 	});
 
-	constructor(protected _elementRef: ElementRef, private _ngZone: NgZone) {
+	constructor(
+		protected _elementRef: ElementRef,
+		private _ngZone: NgZone,
+		protected _changeDetector: ChangeDetectorRef,
+	) {
 		super(_elementRef);
 		this.triggerEvent = 'none';
 	}
@@ -162,6 +169,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 		this._options$.next(
 			this.luOptions$.getValue().map<T>(luOption => luOption.luOptionValue),
 		);
+		this._changeDetector.markForCheck();
 	}
 
 	/**

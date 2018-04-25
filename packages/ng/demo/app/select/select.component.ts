@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+	Component,
+	OnInit,
+	ChangeDetectionStrategy
+} from '@angular/core';
 declare var require: any;
 
 @Component({
 	// tslint:disable-next-line:component-selector
 	selector: 'demo-select',
 	templateUrl: './select.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [],
 })
 export class DemoSelectComponent implements OnInit {

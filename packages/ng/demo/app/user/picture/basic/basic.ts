@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IUser } from '../../../../../src/app/user';
 
 @Component({
 	selector: 'demo-user-picture-basic',
 	templateUrl: './basic.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [],
 })
 export class DemoUserPictureBasicComponent implements OnInit {

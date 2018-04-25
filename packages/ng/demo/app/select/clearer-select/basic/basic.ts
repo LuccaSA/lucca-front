@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component
+} from '@angular/core';
 @Component({
 	selector: 'basic-clearer-select',
 	templateUrl: './basic.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicClearerSelectComponent {
 	options = [

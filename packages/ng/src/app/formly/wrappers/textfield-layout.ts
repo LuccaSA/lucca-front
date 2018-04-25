@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import {
 	FieldWrapper,
 	FormlyFieldConfig,
@@ -11,6 +11,7 @@ import {
 	selector: 'lu-formly-wrapper-layout',
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './textfield-layout.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef })

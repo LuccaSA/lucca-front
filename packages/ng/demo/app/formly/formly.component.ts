@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 declare var require: any;
 
 @Component({
 	selector: 'demo-formly',
 	templateUrl: './formly.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [],
 })
 export class DemoFormlyComponent implements OnInit {

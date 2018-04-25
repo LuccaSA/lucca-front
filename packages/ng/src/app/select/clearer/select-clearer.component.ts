@@ -1,4 +1,9 @@
-import { Component, HostBinding, EventEmitter } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	HostBinding,
+	EventEmitter
+} from '@angular/core';
 import { ISelectClearer } from './select-clearer.model';
 
 @Component({
@@ -6,6 +11,7 @@ import { ISelectClearer } from './select-clearer.model';
 	templateUrl: 'select-clearer.component.html',
 	styleUrls: ['select-clearer.component.scss'],
 	moduleId: module.id,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luSelectClearer',
 })
 /**

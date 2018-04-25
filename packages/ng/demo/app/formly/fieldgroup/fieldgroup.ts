@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'demo-formly-fieldgroup',
 	templateUrl: './fieldgroup.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FieldgroupComponent {
 	form: FormGroup = new FormGroup({});

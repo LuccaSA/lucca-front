@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	Input,
 	AfterViewInit,
@@ -34,6 +35,7 @@ import { empty } from 'rxjs/observable/empty';
 	selector: 'lu-api-select-picker',
 	templateUrl: './api-select-picker.component.html',
 	styleUrls: ['./api-select-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: ASelectOptionFeeder,
@@ -62,7 +64,7 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 	constructor(
 		protected _elementRef: ElementRef,
 		public _intl: LuSelectSearchIntl,
-		_changeDetectorRef: ChangeDetectorRef,
+		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
 		super(_elementRef, _intl, _changeDetectorRef);
 
@@ -78,6 +80,7 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 				}
 				this._options = [];
 				this._populateList();
+				this._changeDetectorRef.markForCheck();
 			});
 
 		this._options = [];
@@ -98,6 +101,7 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 		this._focused = true;
 		// We prevent propagation to avoid lost of focus in input field
 		$e.stopPropagation();
+		this._changeDetectorRef.markForCheck();
 	}
 
 	_onBlur() {
@@ -105,6 +109,7 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 		// When we quit the field, we reset the search item
 		this._noResults = false;
 		this._clue$.next('');
+		this._changeDetectorRef.markForCheck();
 	}
 
 	_onKeydown($event: KeyboardEvent) {
@@ -129,6 +134,7 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 			this._options = [];
 			this._populateList();
 		}
+		this._changeDetectorRef.markForCheck();
 	}
 
 	/**

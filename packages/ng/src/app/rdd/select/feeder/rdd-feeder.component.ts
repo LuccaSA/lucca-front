@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	Input
+} from '@angular/core';
 import { ARDDSelectFeeder } from './rdd-feeder.model';
 import { IRddItem } from '../../rdd.model';
 
@@ -7,6 +11,7 @@ import { IRddItem } from '../../rdd.model';
 	selector: 'lu-rdd-feeder',
 	template: '',
 	exportAs: 'luRddFeeder',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RDDApiFeederComponent<T extends IRddItem> extends ARDDSelectFeeder<
 	T

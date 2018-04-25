@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
 // import {IDateRange, IDateRangeSelectChoice} from '../../../../src/app/date-range-picker/date-range-picker.model';
 
 @Component({
 	selector: 'demo-basic-date-range-picker',
 	templateUrl: './basic.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [''],
 })
 export class BasicComponent {

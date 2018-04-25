@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, ViewChild, ViewContainerRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
 	FormlyFieldConfig,
@@ -11,6 +11,7 @@ import {
 	selector: 'lu-formly-wrapper-error',
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './error.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperError extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef })
