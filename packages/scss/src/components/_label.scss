@@ -15,17 +15,16 @@
 // Palettes
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .label {
-
 	// todo - move default palette in theming under elements.label
 	$default-palette: ( "color": #CCCCCC, "text": #666666 );
+	// default coloring
+
+	@include labelColoring($default-palette);
 
 	@mixin labelColoring($palette) {
 		background: _get($palette, "color");
 		color: _get($palette, "text");
 	}
-
-	// default coloring
-	@include labelColoring($default-palette);
 	// palettes coloring
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {

@@ -1,7 +1,6 @@
 // will try to get $map.$keys or throw if no result
 @function _get($map, $keys) {
-	$keys: str-explode($keys, '.');
-
+	$keys: str-explode($keys, ".");
 	$result: $map;
 
 	@for $i from 1 through length($keys) {
@@ -18,8 +17,7 @@
 
 // will try to get $map.$keys or false if no result - might still throw depending on keys
 @function _safeGet($map, $keys) {
-	$keys: str-explode($keys, '.');
-
+	$keys: str-explode($keys, ".");
 	$result: $map;
 
 	@for $i from 1 through length($keys) {
@@ -35,13 +33,13 @@
 
 // sets stuff
 @function _set($map, $keys, $values) {
-	$keys: str-explode($keys, '.');
+	$keys: str-explode($keys, ".");
 	$l: length($keys);
+	$map: map-extend($map, $values, true);
 	@for $i from 1 through $l {
 		$key: nth($keys, $l - $i + 1);
 		$values: ($key: $values);
 	}
-	$map: map-extend($map, $values, true);
 	@return $map;
 }
 @function _replace($map, $keys, $values) {
@@ -56,19 +54,19 @@
 	@return _get($theme, "palettes");
 }
 
-@function _color($keys, $type:"color") {
+@function _color($keys, $type: "color") {
 	// try to find it in colors
 	$result: _safeGet($theme, "colors." + $keys);
-	@if $result {
-		@return $result;
-	}
 	// try to find color associated with same palette
 	$result: _safeGet($theme, "palettes." + $keys + "." + $type);
+	// try to find it in commons
+	$result: _safeGet($theme, "commons." + $keys + "." + $type);
 	@if $result {
 		@return $result;
 	}
-	// try to find it in commons
-	$result: _safeGet($theme, "commons." + $keys + "." + $type);
+	@if $result {
+		@return $result;
+	}
 	@if $result {
 		@return $result;
 	}
@@ -79,13 +77,12 @@
 
 @function _component($keys) {
 	$result: _safeGet($theme, "components." + $keys);
+	// try to find in commons
+	$commonKeys: "commons" + str-slice($keys, str-index($keys, "."));
+	$result: _safeGet($theme, $commonKeys);
 	@if $result {
 		@return $result;
 	}
-
-	// try to find in commons
-	$commonKeys: "commons" + str-slice($keys, str-index($keys, '.'));
-	$result: _safeGet($theme, $commonKeys);
 	@if $result {
 		@return $result;
 	}

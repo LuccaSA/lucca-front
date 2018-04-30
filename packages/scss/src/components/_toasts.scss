@@ -45,14 +45,15 @@
 
 	&::after {
 		@include makeIcon("cross");
+
 		font-size: _theme("sizes.standard.font-size");
 	}
 }
 
 @keyframes toast {
 	from {
-		transform: translateY(1rem);
 		opacity: 0;
+		transform: translateY(1rem);
 	}
 
 	to {

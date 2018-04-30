@@ -31,24 +31,24 @@
 }
 
 .textfield-suffix {
-	top: _component("textfield.suffix.top");
 	line-height: 1.3;
 	position: absolute;
 	right: _component("textfield.input.padding-horizontal");
+	top: _component("textfield.suffix.top");
 	z-index: 1;
 }
 
 .textfield-label {
 	color: _color("text.default");
-	font-weight: 600;
 	font-size: _component("textfield.label.font-size");
+	font-weight: 600;
 	order: -1;
 	overflow: hidden;
 	position: relative;
 	text-overflow: ellipsis;
 	transition: all 150ms ease;
-	word-break: break-word;
 	white-space: nowrap;
+	word-break: break-word;
 }
 
 .textfield-messages {
@@ -70,9 +70,10 @@
 }
 
 .textfield-options {
+	@include elevate(3);
+
 	background: white;
 	border-radius: _theme("commons.border.radius");
-	@include elevate(3);
 	left: 0;
 	list-style: none;
 	margin: 3px 0 0;
@@ -85,8 +86,8 @@
 	transform: scaleY(0);
 	transform-origin: right top;
 	transition: all 150ms ease;
-	z-index: 999;
 	width: 100%;
+	z-index: 999;
 }
 
 .textfield-options-entry {
@@ -108,12 +109,11 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
-
 	@mixin inputColoring($palette) {
 		.textfield-input:focus {
 			box-shadow: 0 0 0 1px _get($palette, "color");
 
-			~ .textfield-label {
+			& ~ .textfield-label {
 				color: _color("text.default");
 			}
 		}
@@ -139,7 +139,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .textfield {
-
 	/* Width */
 
 	@each $textfield-size-name, $textfield-width in _component("textfield.sizes") {
@@ -184,11 +183,12 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			color: _color("text.light");
 			@include makeIcon("search");
+
+			bottom: .1rem;
+			color: _color("text.light");
 			font-size: 1.4rem;
 			position: absolute;
-			bottom: .1rem;
 			right: .33rem;
 		}
 
@@ -237,9 +237,9 @@
 		&::before, &::after {
 			bottom: .6rem;
 			left: inherit;
+			position: absolute;
 			right: .5rem;
 			top: inherit;
-			position: absolute;
 			z-index: 2;
 		}
 
@@ -249,10 +249,10 @@
 	}
 
 	&.is-valid {
-
 		&::before {
-			animation: isValid 3s forwards;
 			@include makeIcon("tick_bold");
+
+			animation: isValid 3s forwards;
 			border-radius: 50%;
 			bottom: .85rem;
 			color: _color("success");
@@ -276,7 +276,6 @@
 }
 
 .textfield-input {
-
 	&[disabled], &[readonly] {
 		background: _theme("commons.background.dark");
 		color: _color("text.light");

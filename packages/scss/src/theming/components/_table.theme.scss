@@ -14,5 +14,4 @@ $table: (
 		padding: 1.5rem,
 	),
 );
-
 $theme: _set($theme, "component.table", $table);

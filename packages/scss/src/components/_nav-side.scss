@@ -114,7 +114,7 @@
 	padding: .8em 1em .8em 3.35em;
 	transform: translate3d(-1.5em, 0, 0);
 	transition: opacity _theme("commons.animations.durations.fast") ease-out,
-              transform _theme("commons.animations.durations.standard") ease-out .05s;
+	transform _theme("commons.animations.durations.standard") ease-out .05s;
 	vertical-align: middle;
 }
 
@@ -230,6 +230,7 @@
 
 	&::after {
 		@include loadingGradientAnimation(rgba(0, 0, 0, _component("navSide.placeholder.opacity")), true, rgba(0, 0, 0, _component("navSide.placeholder.opacity")));
+
 		border-radius: _theme("commons.border.radius");
 		flex: 1 1 auto;
 		height: .9em;
@@ -347,30 +348,30 @@
 	}
 
 	.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
-		position: absolute;
-		visibility: hidden;
-		transform: translateX(-15px);
-		opacity: 0;
-		top: 0;
 		bottom: 100%;
+		opacity: 0;
 		overflow: hidden;
+		position: absolute;
+		top: 0;
+		transform: translateX(-15px);
+		visibility: hidden;
 	}
 
 	.navSide-item.mod-mobileToggle {
+		cursor: pointer;
 		display: block;
 		height: _component("navSide.mobile.toggle-height");
-		cursor: pointer;
 	}
 
 	.navSide-bottomSection {
 		background: transparent;
+		height: auto;
 		position: relative;
 		width: auto;
-		height: auto;
 
 		.navSide-item-link {
-			color: _component("navSide.bottom-section-palette.text");
 			background: _component("navSide.bottom-section-palette.bg-color");
+			color: _component("navSide.bottom-section-palette.text");
 		}
 	}
 
@@ -380,13 +381,13 @@
 
 	.navSide.is-open {
 		height: 100vh;
-		
+
 		.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
-			position: static;
-			visibility: visible;
-			transform: translateX(0);
 			opacity: 1;
+			position: static;
+			transform: translateX(0);
 			transition: all .2s cubic-bezier(.25, .8, .25, 1);
+			visibility: visible;
 			@for $i from 0 through 10 {
 				&:nth-child(#{$i+2}) {
 					transition-delay: $i*.05s;

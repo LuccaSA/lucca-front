@@ -3,7 +3,7 @@
 	@return not(index($list, $var) == null);
 }
 // string
-@function to-string($list, $glue: '', $is-nested: false) {
+@function to-string($list, $glue: "", $is-nested: false) {
 	$result: null;
 
 	@for $i from 1 through length($list) {
@@ -22,7 +22,7 @@
 }
 
 
-@function str-replace($string, $search, $replace: '') {
+@function str-replace($string, $search, $replace: "") {
 	$index: str-index($string, $search);
 
 	@if $index {
@@ -40,7 +40,7 @@
 		$str: str-index($string, $dem);
 		@if str-length($string) >= 1 and $str == null {
 			$list: append($list,$string);
-			$string: '';
+			$string: "";
 		}
 
 		@if type-of($str) == number {
@@ -64,10 +64,10 @@
 	$return: "";
 	@for $i from 1 through length($words) {
 		$word: nth($words, $i);
+		$return: $return + $word;
 		@if $i > 1 {
 			$word: to-upper-case(str-slice($word, 1, 1)) + str-slice($word, 2, str-length($word));
 		}
-		$return: $return + $word;
 	}
 	@return $return;
 }
@@ -94,15 +94,13 @@
 		} @else {
 			// If in deep mode, loop through all tuples in current map
 			@each $key, $value in $current {
-
+				// Merge current tuple with map
+				$map: map-merge($map, ($key: $value));
 				// If value is a nested map and same key from map is a nested map as well
 				@if type-of($value) == "map" and type-of(map-get($map, $key)) == "map" {
 					// Recursive extend
 					$value: map-extend(map-get($map, $key), $value, true);
 				}
-
-				// Merge current tuple with map
-				$map: map-merge($map, ($key: $value));
 			}
 		}
 	}

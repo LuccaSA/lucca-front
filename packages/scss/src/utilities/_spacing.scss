@@ -18,7 +18,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 @each $name, $spacings in _theme("spacings") {
-
 	.u-marginBottom#{str-capitalize($name)} {
 		margin-bottom: $spacings !important;
 	}

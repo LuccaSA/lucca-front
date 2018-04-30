@@ -30,7 +30,7 @@ $commons: (
 		"radius": 3px,
 	),
 	"font": (
-		"family": '"Source Sans Pro", Tahoma, sans-serif',
+		"family": "\"Source Sans Pro\", Tahoma, sans-serif",
 		"size": 16px,
 	),
 	"elevations": (
@@ -43,5 +43,4 @@ $commons: (
 	"banner-height": 50px,
 	"transition": "all 150ms ease"
 );
-
 $theme: _set($theme, "commons", $commons);
