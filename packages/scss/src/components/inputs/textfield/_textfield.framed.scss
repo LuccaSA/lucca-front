@@ -16,7 +16,7 @@
 		&:focus {
 			z-index: 1;
 
-			~ .textfield-messages {
+			& ~ .textfield-messages {
 				transform: translateY(100%);
 			}
 
@@ -28,7 +28,7 @@
 		&:hover {
 			z-index: 1;
 
-			~ .textfield-messages {
+			& ~ .textfield-messages {
 				transform: translateY(100%);
 			}
 		}
@@ -93,7 +93,7 @@
 			@include fakeBorder(1px, _get($palette, "color"));
 
 			background-color: transparentize(_get($palette, "color"), .95);
-			~ .textfield-label {
+			& ~ .textfield-label {
 				color: _get($palette, "color");
 			}
 		}

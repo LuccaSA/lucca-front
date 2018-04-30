@@ -19,7 +19,7 @@
 				opacity: 1;
 			}
 
-			~ .textfield-label {
+			& ~ .textfield-label {
 				font-size: _theme("sizes.small.font-size");
 				top: 0;
 			}
@@ -54,7 +54,7 @@
 			&:focus, &.is-focused {
 				box-shadow: 0 2px 0 0 _get($palette, "color");
 
-				~ .textfield-label {
+				& ~ .textfield-label {
 					color: _get($palette, "color");
 				}
 			}

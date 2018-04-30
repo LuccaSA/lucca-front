@@ -98,7 +98,7 @@
 	// Disabled & readonly
 	.textfield-input {
 		&.is-error {
-			~ .textfield-label {
+			& ~ .textfield-label {
 				color: _color("error");
 			}
 		}

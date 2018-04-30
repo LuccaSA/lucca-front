@@ -113,7 +113,7 @@
 		.textfield-input:focus {
 			box-shadow: 0 0 0 1px _get($palette, "color");
 
-			~ .textfield-label {
+			& ~ .textfield-label {
 				color: _color("text.default");
 			}
 		}

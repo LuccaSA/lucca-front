@@ -283,7 +283,7 @@
 		position: relative;
 	}
 
-	> .button {
+	& > .button {
 
 		&:first-child {
 			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");

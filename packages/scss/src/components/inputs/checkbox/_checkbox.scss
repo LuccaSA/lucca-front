@@ -105,7 +105,7 @@
 
 .checkbox .checkbox-input {
 	&[disabled] {
-		~ .checkbox-label {
+		& ~ .checkbox-label {
 			color: _color("text.light");
 			cursor: not-allowed;
 

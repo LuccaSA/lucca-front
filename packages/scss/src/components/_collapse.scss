@@ -29,7 +29,7 @@
 
 .collapse {
 	&.is-open {
-		> .collapse-title {
+		& > .collapse-title {
 			&::before {
 				transform: rotate(90deg);
 			}

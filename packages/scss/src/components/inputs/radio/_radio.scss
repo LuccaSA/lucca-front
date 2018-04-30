@@ -108,7 +108,7 @@
 
 .radio .radio-input {
 	&[disabled] {
-		~ .radio-label {
+		& ~ .radio-label {
 			color: _color("text.light");
 			cursor: not-allowed;
 
