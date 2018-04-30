@@ -6,53 +6,63 @@
 }
 
 .u-animatedFadeIn, .u-animatedFadeOut {
-	animation-name: fadeIn;
 	@extend %base_animated_element;
+
+	animation-name: fadeIn;
 }
 
 .u-animatedScaleIn, .u-animatedScaleOut {
-	animation-name: scaleIn;
 	@extend %base_animated_element;
+
+	animation-name: scaleIn;
 }
 
 .u-animatedScaleInTop, .u-animatedScaleOutTop {
-	animation-name: scaleInTop;
 	@extend %base_animated_element;
+
+	animation-name: scaleInTop;
 }
 
 .u-animatedScaleInRight, .u-animatedScaleOutRight {
-	animation-name: scaleInRight;
 	@extend %base_animated_element;
+
+	animation-name: scaleInRight;
 }
 
 .u-animatedScaleInBottom, .u-animatedScaleOutBottom {
-	animation-name: scaleInBottom;
 	@extend %base_animated_element;
+
+	animation-name: scaleInBottom;
 }
 
 .u-animatedScaleInLeft, .u-animatedScaleOutLeft {
-	animation-name: scaleInLeft;
 	@extend %base_animated_element;
+
+	animation-name: scaleInLeft;
 }
 
 .u-animatedSlideIn, .u-animatedSlideInTop, .u-animatedSlideOut, .u-animatedSlideOutTop {
-	animation-name: slideIn;
 	@extend %base_animated_element;
+
+	animation-name: slideIn;
 }
 
 .u-animatedSlideInRight, .u-animatedSlideOutRight {
-	animation-name: slideInRight;
 	@extend %base_animated_element;
+
+	animation-name: slideInRight;
 }
 
 .u-animatedSlideInBottom, .u-animatedSlideOutBottom {
-	animation-name: slideInBottom;
 	@extend %base_animated_element;
+
+	animation-name: slideInBottom;
 }
 
 .u-animatedSlideInLeft, .u-animatedSlideOutLeft {
-	animation-name: slideInLeft;
 	@extend %base_animated_element;
+
+	animation-name: slideInLeft;
 }
 
 // EXIT ANIMATIONS
@@ -64,15 +74,17 @@
 // ATTENTION SEEKERS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .u-animatedPulse {
+	@extend %base_animated_element;
+
 	animation-direction: alternate;
 	animation-iteration-count: _theme("commons.animations.iteration-count");
 	animation-name: pulse;
-	@extend %base_animated_element;
 }
 
 .u-animatedShake {
-	animation-name: shake;
 	@extend %base_animated_element;
+
+	animation-name: shake;
 }
 
 // DURATION MOD

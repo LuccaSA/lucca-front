@@ -1,6 +1,7 @@
 .list {
-	background: white;
 	@include elevate(1);
+
+	background: white;
 	list-style: none;
 	margin-bottom: _component("list.margin-bottom");
 	padding: 0;

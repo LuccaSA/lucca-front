@@ -61,7 +61,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .switch .switch-input {
-
 	/*
 		Checked
 	*/
@@ -98,6 +97,8 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .switch {
+	// default color
+	@include switchColoring(_component("switch.default-palette"));
 	@mixin switchColoring($palette) {
 		.switch-input:checked {
 			& ~ .switch-label {
@@ -124,9 +125,6 @@
 			}
 		}
 	}
-
-	// default color
-	@include switchColoring(_component("switch.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {

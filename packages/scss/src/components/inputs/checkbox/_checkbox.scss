@@ -17,8 +17,8 @@
 .checkbox-label {
 	cursor: pointer;
 	display: inline-block;
-	padding: _component("checkbox.label.padding");
 	line-height: _component("checkbox.label.line-height");
+	padding: _component("checkbox.label.padding");
 	transition: color 150ms ease;
 
 	&::before {
@@ -35,9 +35,10 @@
 	}
 
 	&::after {
+		@include makeIcon("tick");
+
 		color: white;
 		font-size: .8rem;
-		@include makeIcon("tick");
 		left: 0;
 		line-height: _component("checkbox.input.size");
 		padding-top: .05rem;
@@ -62,6 +63,8 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .checkbox {
+	// default color
+	@include checkboxColoring(_component("checkbox.default-palette"));
 	@mixin checkboxColoring($palette) {
 		.checkbox-input:checked ~ .checkbox-label {
 			&::before {
@@ -70,9 +73,6 @@
 			}
 		}
 	}
-
-	// default color
-	@include checkboxColoring(_component("checkbox.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -124,8 +124,9 @@
 
 	&.is-incomplete ~ .checkbox-label {
 		&::after {
-			font-size: .6rem;
 			@include makeIcon("minimize");
+
+			font-size: .6rem;
 		}
 	}
 }

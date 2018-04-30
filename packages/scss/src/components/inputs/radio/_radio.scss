@@ -61,6 +61,8 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .radio {
+	// default color
+	@include radioColoring(_component("radio.default-palette"));
 	@mixin radioColoring($palette) {
 		.radio-input:checked ~ .radio-label {
 			&::before {
@@ -74,9 +76,6 @@
 			}
 		}
 	}
-
-	// default color
-	@include radioColoring(_component("radio.default-palette"));
 
 	// palette colors
 	@each $name, $palette in _palettes() {

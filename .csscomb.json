@@ -10,7 +10,7 @@
 		"sort-order-fallback": "abc",
 		"sort-order": [
 			["$variable", "$mixin"],
-			["$include", "$extend"],
+			["$extend", "$include"],
 			["..."]
 		],
 		"space-before-colon": "",

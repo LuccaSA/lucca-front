@@ -1,4 +1,7 @@
 %input_material {
+	// default color
+	@include inputColoring(_component("textfield.material.default-palette"));
+
 	padding-top: _component("textfield.material.padding-top");
 
 	.textfield-input {
@@ -68,9 +71,6 @@
 		}
 	}
 
-	// default color
-	@include inputColoring(_component("textfield.material.default-palette"));
-
 	// palette colors
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
@@ -106,8 +106,8 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			right: 0;
 			bottom: 0;
+			right: 0;
 		}
 
 		.textfield-input {
@@ -124,7 +124,6 @@
 
 	// Inline validation
 	&.is-loading {
-
 		&::before, &::after {
 			bottom: .4rem;
 			right: 0;

@@ -10,48 +10,48 @@
 
 @keyframes scaleInTop {
 	from {
-		transform-origin: top center;
 		transform: scale(1, 0);
+		transform-origin: top center;
 	}
 
 	to {
-		transform-origin: top center;
 		transform: scale(1, 1);
+		transform-origin: top center;
 	}
 }
 
 @keyframes scaleInRight {
 	from {
-		transform-origin: right center;
 		transform: scale(0, 1);
+		transform-origin: right center;
 	}
 
 	to {
-		transform-origin: right center;
 		transform: scale(1, 1);
+		transform-origin: right center;
 	}
 }
 
 @keyframes scaleInBottom {
 	from {
-		transform-origin: bottom center;
 		transform: scale(1, 0);
+		transform-origin: bottom center;
 	}
 
 	to {
-		transform-origin: bottom center;
 		transform: scale(1, 1);
+		transform-origin: bottom center;
 	}
 }
 
 @keyframes scaleInLeft {
 	from {
-		transform-origin: left center;
 		transform: scale(0, 1);
+		transform-origin: left center;
 	}
 
 	to {
-		transform-origin: left center;
 		transform: scale(1, 1);
+		transform-origin: left center;
 	}
 }

@@ -1,6 +1,6 @@
 @mixin textfieldError() {
-	box-shadow: 0 0 0 1px _color("error");
 	background-color: rgba( _color("error"), .1 );
+	box-shadow: 0 0 0 1px _color("error");
 
 	&::placeholder {
 		color: rgba( _color("error"), .5 );
@@ -40,6 +40,7 @@
 
 	&:focus, &:hover {
 		@include fakeBorder(1px, _color("error"));
+
 		background-color: transparentize(_color("error"), .9);
 	}
 

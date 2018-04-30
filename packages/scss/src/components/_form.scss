@@ -37,6 +37,7 @@
 
 			&.mod-selection {
 				@include fakeBorder(1px, _theme("commons.divider.color"));
+
 				padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
 			}
 		}
@@ -53,15 +54,6 @@
 
 		// Form group grid system
 		@each $bp-name, $bp-obj in $breakpoints {
-			@for $i from 1 through 12 {
-				.form-group-line-#{$bp-name}#{$i} {
-					flex: 0 0 auto;
-					flex-basis: 100%;
-					max-width: 100%;
-					position: relative;
-				}
-			}
-
 			@include media_larger_than($bp-name) {
 				.form-group-line-#{$bp-name} {
 					flex-basis: 0;
@@ -74,6 +66,14 @@
 						flex-basis: percentage($i / 12);
 						max-width: percentage($i / 12);
 					}
+				}
+			}
+			@for $i from 1 through 12 {
+				.form-group-line-#{$bp-name}#{$i} {
+					flex: 0 0 auto;
+					flex-basis: 100%;
+					max-width: 100%;
+					position: relative;
 				}
 			}
 		}
