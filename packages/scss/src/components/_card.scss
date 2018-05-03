@@ -1,7 +1,8 @@
 .card {
+	@include elevate(1);
+
 	background: white;
 	border-radius: 3px;
-	@include elevate(1);
 	display: block;
 	margin-bottom: 1rem;
 	position: relative;

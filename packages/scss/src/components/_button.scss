@@ -1,19 +1,19 @@
 .button {
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
-	text-decoration: none;
 	border: 0;
-	font-size: _component("button.sizing.default.font-size");
-	line-height: _component("button.line-height");
-	padding: _component("button.sizing.default.padding");
-	vertical-align: middle;
-	white-space: nowrap;
-	margin: _component("button.margin");
 	border-radius: _component("button.border.radius");
 	box-shadow: unquote(_component("button.box-shadow"));
+	cursor: pointer;
+	display: inline-block;
 	font-family: unquote(_component("button.font.family"));
+	font-size: _component("button.sizing.default.font-size");
+	line-height: _component("button.line-height");
+	margin: _component("button.margin");
+	padding: _component("button.sizing.default.padding");
+	position: relative;
+	text-decoration: none;
 	transition: unquote(_component("button.transition"));
+	vertical-align: middle;
+	white-space: nowrap;
 
 	&:first-of-type {
 		margin-left: 0;
@@ -36,8 +36,8 @@
 	}
 
 	&:active {
-		outline: 0;
 		box-shadow: unquote(_component("button.box-shadow"));
+		outline: 0;
 
 		&:focus {
 			outline: 0;
@@ -62,7 +62,9 @@
 	}
 
 	// default color
-	@include buttonColoring(_component("button.default-palette"));
+	& {
+		@include buttonColoring(_component("button.default-palette"));
+	}
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -90,7 +92,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-
 	&.mod-flat {
 		background: transparent;
 		box-shadow: none;
@@ -118,7 +119,9 @@
 		}
 
 		// default color
-		@include buttonWiredColoring(_component("button.wired.default-palette"));
+		& {
+			@include buttonWiredColoring(_component("button.wired.default-palette"));
+		}
 
 		// palette colors
 		@each $name, $palette in _palettes() {
@@ -142,7 +145,9 @@
 		}
 
 		// default color
-		@include buttonFillingColoring(_component("button.filling.default-palette"));
+		& {
+			@include buttonFillingColoring(_component("button.filling.default-palette"));
+		}
 
 		// palette colors
 		@each $name, $palette in _palettes() {
@@ -172,7 +177,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-
 	/* Disabled */
 
 	&[disabled] {
@@ -189,6 +193,7 @@
 
 	&.is-loading {
 		@include loading(_component("button.sizing.default.font-size"));
+
 		color: transparent;
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
@@ -212,6 +217,7 @@
 
 		&::after {
 			@include makeIcon("tick");
+
 			bottom: 0;
 			color: white;
 			font-size: 1.5 * _component("button.sizing.default.font-size");
@@ -245,6 +251,7 @@
 
 		&::after {
 			@include makeIcon("cross");
+
 			bottom: 0;
 			color: white;
 			font-size: 1.5 * _component("button.sizing.default.font-size");
@@ -284,7 +291,6 @@
 	}
 
 	& > .button {
-
 		&:first-child {
 			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
 		}
@@ -300,7 +306,6 @@
 }
 
 .button-group-item {
-
 	&:first-child {
 		.button {
 			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");

@@ -9,6 +9,7 @@
 
 	&::before {
 		@include makeIcon("chevron_east");
+
 		font-size: _theme("sizes.smaller.font-size");
 		font-weight: 400;
 		margin-right: .25rem;
@@ -18,9 +19,10 @@
 
 .collapse-content {
 	@extend %base_animated_element;
-	display: none;
-	animation-name: fadeIn;
+
 	animation-fill-mode: none;
+	animation-name: fadeIn;
+	display: none;
 }
 
 

@@ -9,8 +9,8 @@
 }
 
 .file-icon {
-	font-size: 3rem;
 	color: _color("text.placeholder");
+	font-size: 3rem;
 }
 
 .file-or {
@@ -18,8 +18,8 @@
 }
 
 .file-title {
-	margin: 0 0 .5rem;
 	font-size: 1.25rem;
+	margin: 0 0 .5rem;
 }
 
 .file-progress {
@@ -41,10 +41,10 @@
 		text-align: left;
 
 		.file-icon {
+			font-size: 2.5rem;
+			left: 1.3rem;
 			position: absolute;
 			top: .25rem;
-			left: 1.3rem;
-			font-size: 2.5rem;
 		}
 
 		.file-title {

@@ -2,8 +2,8 @@
 	background: _theme("commons.background.dark");
 	height: _component("progress.height");
 	margin: _component("progress.margin");
-	position: relative;
 	overflow: hidden;
+	position: relative;
 }
 
 .progress-bar {
@@ -35,9 +35,9 @@
 .progress {
 	&.mod-indeterminate {
 		.progress-bar {
-			width: 30%;
 			animation: progressIndetereminate _component("progress.duration") infinite;
 			animation-timing-function: linear;
+			width: 30%;
 		}
 	}
 }
@@ -75,13 +75,13 @@
 
 @keyframes progress {
 	from {
-		transform: scale(0, 1);
 		opacity: 1;
+		transform: scale(0, 1);
 	}
 
 	to {
-		transform: scale(1, 1);
 		opacity: .3;
+		transform: scale(1, 1);
 	}
 }
 

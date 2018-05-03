@@ -40,6 +40,7 @@
 
 	&::before {
 		@include makeIcon("cross");
+
 		font-family: "Lucca icons";
 	}
 
@@ -49,13 +50,13 @@
 }
 
 .callout-icon {
-	position: absolute;
-	top: calc(1rem - .05rem);
-	left: .75rem;
-	width: 2rem;
-	margin: auto;
 	border-radius: 50%;
+	left: .75rem;
+	margin: auto;
+	position: absolute;
 	text-align: center;
+	top: calc(1rem - .05rem);
+	width: 2rem;
 
 	.lucca-icon {
 		font-size: 1.5rem;
