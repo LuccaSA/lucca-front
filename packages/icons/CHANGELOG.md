@@ -5,6 +5,7 @@
 ### Fix
 - `icons` height consistency between browsers & OS
 ### New icons
+- `light bulb`, `toll`, `rotate`
 
 ## 0.6.0
 ### New icons
