@@ -3,6 +3,10 @@
 ## In dev
 ### Enhancement
 ### Fix
+### New icons
+
+## 0.7.0
+### Fix
 - `icons` height consistency between browsers & OS
 ### New icons
 - `light bulb`, `toll`, `rotate`
