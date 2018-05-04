@@ -6,7 +6,7 @@ import {
 	AnimationMetadata,
 } from '@angular/animations';
 
-export function slidingAnimations(timing: string): AnimationMetadata[] {
+export function slidingAnimations(inTiming: string, outTiming: string): AnimationMetadata[] {
 	return [
 		transition('void => right', [
 			// <--- entering <---
@@ -16,7 +16,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'right center',
 					transform: 'translateX(0)',
@@ -32,7 +32,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'right center',
 					transform: 'translateX(50px)',
@@ -49,7 +49,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'center',
 					transform: 'translateY(0)',
@@ -65,7 +65,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'center',
 					transform: 'translateY(-20px)',
@@ -82,7 +82,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'center',
 					transform: 'translateY(0)',
@@ -98,7 +98,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'center',
 					transform: 'translateY(20px)',
@@ -115,7 +115,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '0',
 			}),
 			animate(
-				timing,
+				inTiming,
 				style({
 					transformOrigin: 'left center',
 					transform: 'translateX(0)',
@@ -131,7 +131,7 @@ export function slidingAnimations(timing: string): AnimationMetadata[] {
 				opacity: '1',
 			}),
 			animate(
-				timing,
+				outTiming,
 				style({
 					transformOrigin: 'left center',
 					transform: 'translateX(-50px)',

@@ -7,34 +7,24 @@ import { slidingAnimations } from './slide.animation';
 export type AnimationType = 'scale' | 'slide' | 'fade';
 export const DEFAULT_LF_ANIMATION_TIMING = '250ms 0ms ease-out';
 
-export function LuAnimationFactory(
-	type: AnimationType = 'fade',
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
-): AnimationTriggerMetadata {
-	switch (type) {
-		case 'fade':
-			return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
-		case 'scale':
-			return trigger('scaleAnimation', [...scalingAnimations(animationTiming)]);
-		case 'slide':
-			return trigger('slideAnimation', [...slidingAnimations(animationTiming)]);
-		default:
-			throw Error(`${type} is not a valid AnimationType`);
-	}
-}
-
 export function LuFadeAnimationFactory(
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	triggerName: string = 'fadeAnimation',
 ): AnimationTriggerMetadata {
-	return trigger('fadeAnimation', [...fadingAnimations(animationTiming)]);
+	return trigger(triggerName, [...fadingAnimations(animationInTiming, animationOutTiming)]);
 }
 export function LuScaleAnimationFactory(
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	triggerName: string = 'scaleAnimation',
 ): AnimationTriggerMetadata {
-	return trigger('scaleAnimation', [...scalingAnimations(animationTiming)]);
+	return trigger(triggerName, [...scalingAnimations(animationInTiming, animationOutTiming)]);
 }
 export function LuSlideAnimationFactory(
-	animationTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationInTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	animationOutTiming: string = DEFAULT_LF_ANIMATION_TIMING,
+	triggerName: string = 'slideAnimation',
 ): AnimationTriggerMetadata {
-	return trigger('slideAnimation', [...slidingAnimations(animationTiming)]);
+	return trigger(triggerName, [...slidingAnimations(animationInTiming, animationOutTiming)]);
 }

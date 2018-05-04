@@ -6,15 +6,15 @@ import {
 	AnimationMetadata,
 } from '@angular/animations';
 
-export function fadingAnimations(timing: string): AnimationMetadata[] {
+export function fadingAnimations(inTiming: string, outTiming: string): AnimationMetadata[] {
 	return [
 		transition('void => *', [
 			style({ opacity: '0' }),
-			animate(timing, style({ opacity: '1' })),
+			animate(inTiming, style({ opacity: '1' })),
 		]),
 		transition('* => void', [
 			style({ opacity: '1' }),
-			animate(timing, style({ opacity: '0' })),
+			animate(outTiming, style({ opacity: '0' })),
 		]),
 	];
 }
