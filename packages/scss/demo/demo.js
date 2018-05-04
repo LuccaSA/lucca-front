@@ -166,10 +166,12 @@ function generateIconDemo() {
 		'phone',
 		'smartphone',
 		'flash',
+		'light_bulb',
 		'book',
 
 		'refresh',
 		'history',
+		'rotate',
 		'update',
 		'timer',
 		'clock',
@@ -225,6 +227,7 @@ function generateIconDemo() {
 		'milestone',
 		'mileage',
 		'gasoline',
+		'toll',
 		'toll_euro',
 		'toll_dollar',
 
