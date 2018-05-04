@@ -1,6 +1,8 @@
 import {
 	AfterContentInit,
 	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	Input,
 	Output,
@@ -68,6 +70,7 @@ const TAB = 'Tab';
 @Component({
 	selector: 'lu-select',
 	encapsulation: ViewEncapsulation.Emulated,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './select.component.html',
 	providers: [
 		{
@@ -186,6 +189,7 @@ export class LuSelect<T>
 	constructor(
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
+		protected _changeDetector: ChangeDetectorRef,
 	) {}
 
 	// Life Cycle methods
@@ -289,6 +293,7 @@ export class LuSelect<T>
 		this._forceChangeValue = false;
 		this.luOptions.reset(options);
 		this.luOptions.notifyOnChanges();
+		this._changeDetector.markForCheck();
 	}
 
 	/** set the value to null */

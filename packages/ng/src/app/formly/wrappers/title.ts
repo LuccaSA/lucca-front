@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import {
 	FieldWrapper,
 	FormlyFieldConfig,
@@ -11,6 +11,7 @@ import {
 	selector: 'lu-formly-wrapper-title',
 	styleUrls: ['wrappers.common.scss'],
 	templateUrl: './title.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperTitle extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef })

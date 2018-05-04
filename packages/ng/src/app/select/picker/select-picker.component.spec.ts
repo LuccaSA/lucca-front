@@ -79,7 +79,7 @@ describe('LuSelectPicker', () => {
 		fixture.whenStable().then(() => {
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -218,7 +218,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -253,7 +253,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -296,7 +296,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -332,7 +332,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -366,7 +366,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -404,7 +404,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -438,7 +438,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -475,7 +475,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -509,7 +509,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -546,7 +546,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),
@@ -580,7 +580,7 @@ describe('LuSelectPicker', () => {
 			// Act
 			picker.resetOptions(
 				globalOptions.map(option => {
-					const luSelectOption = new LuSelectOption(null);
+					const luSelectOption = new LuSelectOption(null, null);
 					luSelectOption.luOptionValue = option;
 					return luSelectOption;
 				}),

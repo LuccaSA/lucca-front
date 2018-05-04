@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 declare var require: any;
 @Component({
 	selector: 'demo-api-select',
 	templateUrl: './api-select.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoApiSelectComponent {
 	snippets = {

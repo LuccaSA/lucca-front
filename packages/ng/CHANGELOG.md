@@ -4,6 +4,7 @@
 - `animations` - add in/out timing and triggerName parameters to LuXAnimationFactory
 - `animations` - remove generic LuAnimationFactory
 ### New features
+-✨ The package is now compatible with ChangeDetectionStrategy.OnPush
 ### Fixes
 ### Breaking changes
 ### Updated dependencies

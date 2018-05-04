@@ -1,9 +1,11 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	forwardRef,
 	Renderer2,
 	ElementRef,
 	Input,
+	ChangeDetectorRef,
 } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { LuSelect } from '../../select';
@@ -18,6 +20,7 @@ import { IApiSelectFeeder } from './feeder';
 	selector: 'lu-api-select',
 	templateUrl: './api-select.component.html',
 	styleUrls: ['./api-select.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -41,7 +44,8 @@ export class LuApiSelect<T = any> extends LuSelect<T> {
 	constructor(
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
+		protected _changeDetector: ChangeDetectorRef,
 	) {
-		super(_elementRef, _renderer);
+		super(_elementRef, _renderer, _changeDetector);
 	}
 }

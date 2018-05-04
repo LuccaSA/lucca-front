@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { IUser } from '../index';
 import {
 	LuUserDisplayPipe,
@@ -14,23 +14,52 @@ import {
 	selector: 'lu-user-tile',
 	templateUrl: './user-tile.component.html',
 	styleUrls: ['./user-tile.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserTileComponent {
+
+	private _user: IUser;
 	/**
 	 * IUser to display.
 	 */
-	@Input() user: IUser;
+	@Input()
+	set user(user: IUser) {
+		this._user = user;
+		this._changeDetector.markForCheck();
+	}
 
+	get user(): IUser {
+		return this._user;
+	}
+
+	private _displayFormat = 'lf';
 	/**
 	 * User Display format.
 	 * It is set to 'fl' by default
 	 */
-	@Input() displayFormat = 'fl';
+	@Input()
+	set displayFormat(displayFormat: string) {
+		this._displayFormat = displayFormat;
+		this._changeDetector.markForCheck();
+	}
 
+	get displayFormat(): string {
+		return this._displayFormat;
+	}
+
+	private _role: string;
 	/**
 	 * IUser role to display
 	 */
-	@Input() role: string;
+	@Input()
+	set role(role: string) {
+		this._role = role;
+		this._changeDetector.markForCheck();
+	}
+
+	get role(): string {
+		return this._role;
+	}
 
 	get displayPictureFormat(): DisplayInitials {
 		switch (this.displayFormat) {
@@ -54,5 +83,7 @@ export class LuUserTileComponent {
 		}
 	}
 
-	constructor() {}
+	constructor(
+		private _changeDetector: ChangeDetectorRef
+	) {}
 }

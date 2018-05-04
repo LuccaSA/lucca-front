@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit
+} from '@angular/core';
 @Component({
 	selector: 'demo-simple-select',
 	templateUrl: './simple-select.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoSimpleSelectComponent implements OnInit {
 	options = [

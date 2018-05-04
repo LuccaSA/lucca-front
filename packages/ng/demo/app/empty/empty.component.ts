@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 declare var require: any;
 
 @Component({
 	selector: 'demo-empty',
 	templateUrl: './empty.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [],
 })
 export class DemoEmptyComponent implements OnInit {

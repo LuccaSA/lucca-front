@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	forwardRef,
 	Renderer2,
@@ -7,6 +8,7 @@ import {
 	OnChanges,
 	Input,
 	SimpleChanges,
+	ChangeDetectorRef,
 } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { IUser } from '../user.model';
@@ -22,6 +24,7 @@ import { UserSelectApiFeeder } from './user-select-api-feeder';
 	selector: 'lu-user-select',
 	templateUrl: './user-select.component.html',
 	styleUrls: ['./user-select.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -51,9 +54,10 @@ export class LuUserSelect<T extends IUser> extends LuSelect<T>
 	constructor(
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
+		protected _changeDetector: ChangeDetectorRef,
 		public userSelectApiFeeder: UserSelectApiFeeder<T>,
 	) {
-		super(_elementRef, _renderer);
+		super(_elementRef, _renderer, _changeDetector);
 	}
 
 	ngOnInit() {

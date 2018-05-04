@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 const choose = {
@@ -48,6 +48,7 @@ const autocomplete = {
 @Component({
 	selector: 'demo-formly-change',
 	templateUrl: './change.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChangeComponent implements OnInit {
 	form: FormGroup = new FormGroup({});

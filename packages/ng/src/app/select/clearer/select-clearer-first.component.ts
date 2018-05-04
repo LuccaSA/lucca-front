@@ -1,10 +1,17 @@
-import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import {
+	Component,
+	Input,
+	forwardRef,
+	OnInit,
+	ChangeDetectionStrategy
+} from '@angular/core';
 import { LuSelectClearerComponent } from './select-clearer.component';
 
 @Component({
 	selector: 'lu-select-clearer-first',
 	templateUrl: './select-clearer.component.html',
 	styleUrls: ['./select-clearer.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: LuSelectClearerComponent,

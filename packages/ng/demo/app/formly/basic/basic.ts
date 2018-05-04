@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'demo-formly-basic',
 	templateUrl: './basic.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicComponent {
 	form: FormGroup = new FormGroup({});

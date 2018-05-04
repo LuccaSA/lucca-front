@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import {
 	FieldWrapper,
 	FormlyFieldConfig,
@@ -11,6 +11,7 @@ import {
 	selector: 'lu-formly-wrapper-button',
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './button.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperButton extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { LuFadeAnimationFactory } from '../../../../src/app/animations';
 // const fade = LfAnimationFactory(); // defaults to fade
@@ -7,6 +7,7 @@ import { LuFadeAnimationFactory } from '../../../../src/app/animations';
 	templateUrl: './fading.component.html',
 	styleUrls: ['../animations.scss'],
 	animations: [LuFadeAnimationFactory()],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FadingComponent {
 	fading = false;
