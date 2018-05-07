@@ -49,6 +49,7 @@
 	transition: all 150ms ease;
 	word-break: break-word;
 	white-space: nowrap;
+	margin-bottom: _component("textfield.label.margin-bottom");
 }
 
 .textfield-messages {
