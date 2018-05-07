@@ -10,7 +10,7 @@
 .breadcrumb-item {
 	color: _color("text.light");
 	cursor: pointer;
-	transition: color 150ms ease;
+	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&:hover {
 		color: _color("text.default");
@@ -22,7 +22,7 @@
 			text-decoration: underline;
 			color: _color("text.placeholder");
 			display: inline-block;
-			margin: 0 2px;
+			margin: 0 .25rem;
 			text-decoration: none;
 		}
 	}
