@@ -197,6 +197,20 @@
 		}
 	}
 
+	/* Inside radio */
+
+	&.mod-radio {
+		display: inline-block;
+		margin-left: .25rem;
+
+		.textfield-input {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+
+	/* Style */
+
 	&.mod-material {
 		@extend %input_material;
 	}
