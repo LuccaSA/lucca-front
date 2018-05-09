@@ -74,10 +74,10 @@
 			}
 		}
 	}
-
 	// default color
-	@include radioColoring(_component("radio.default-palette"));
-
+	& {
+		@include radioColoring(_component("radio.default-palette"));
+	}
 	// palette colors
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
@@ -108,7 +108,7 @@
 
 .radio .radio-input {
 	&[disabled] {
-		~ .radio-label {
+		& ~ .radio-label {
 			color: _color("text.light");
 			cursor: not-allowed;
 

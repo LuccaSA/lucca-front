@@ -1,7 +1,7 @@
 .container {
 	margin: _component("container.margin-top") auto _component("container.margin-bottom");
-	padding: 0 .5rem;
 	max-width: _component("container.max-width");
+	padding: 0 .5rem;
 
 	@each $bp-name, $bp-obj in $breakpoints {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
@@ -14,8 +14,8 @@
 	}
 
 	&:last-child {
-		padding-bottom: _component("container.margin-bottom");
 		margin-bottom: 0;
+		padding-bottom: _component("container.margin-bottom");
 	}
 }
 

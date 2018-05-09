@@ -19,7 +19,7 @@
 				opacity: 1;
 			}
 
-			~ .textfield-label {
+			& ~ .textfield-label {
 				font-size: _theme("sizes.small.font-size");
 				top: 0;
 			}
@@ -54,7 +54,7 @@
 			&:focus, &.is-focused {
 				box-shadow: 0 2px 0 0 _get($palette, "color");
 
-				~ .textfield-label {
+				& ~ .textfield-label {
 					color: _get($palette, "color");
 				}
 			}
@@ -69,7 +69,9 @@
 	}
 
 	// default color
-	@include inputColoring(_component("textfield.material.default-palette"));
+	& {
+		@include inputColoring(_component("textfield.material.default-palette"));
+	}
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -106,8 +108,8 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			right: 0;
 			bottom: 0;
+			right: 0;
 		}
 
 		.textfield-input {
@@ -124,7 +126,6 @@
 
 	// Inline validation
 	&.is-loading {
-
 		&::before, &::after {
 			bottom: .4rem;
 			right: 0;

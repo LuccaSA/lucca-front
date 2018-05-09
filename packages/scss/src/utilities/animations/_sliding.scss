@@ -12,36 +12,36 @@
 
 @keyframes slideInLeft {
 	from {
-		transform: translate(-100px, 0);
 		opacity: 0;
+		transform: translate(-100px, 0);
 	}
 
 	to {
-		transform: translate(0, 0);
 		opacity: 1;
+		transform: translate(0, 0);
 	}
 }
 
 @keyframes slideInRight {
 	from {
-		transform: translate(100px, 0);
 		opacity: 0;
+		transform: translate(100px, 0);
 	}
 
 	to {
-		transform: translate(0, 0);
 		opacity: 1;
+		transform: translate(0, 0);
 	}
 }
 
 @keyframes slideInBottom {
 	from {
-		transform: translate(0, 100px);
 		opacity: 0;
+		transform: translate(0, 100px);
 	}
 
 	to {
-		transform: translate(0, 0);
 		opacity: 1;
+		transform: translate(0, 0);
 	}
 }

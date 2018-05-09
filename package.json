@@ -24,6 +24,7 @@
     "travis": "lerna run travis --scope=@lucca-front/ng",
     "format": "npm run format-ng && npm run format-scss && npm run format-icons",
     "format-ng": "prettier --config ./.prettierrc --write \"packages/ng/{src,demo}/**/*.{ts}\"",
+    "format-scss": "csscomb --config ./.csscomb.json ./packages/scss/src",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "colors": "^1.1.2",
+    "csscomb": "^4.2.0",
     "glob": "^7.1.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.3",

@@ -1,9 +1,10 @@
 %input_framed {
-	width: 100%;
 	flex-direction: row;
+	width: 100%;
 
 	.textfield-input {
 		@include fakeBorder(1px, _theme("commons.divider.color"));
+
 		background: transparent;
 		border-radius: 0;
 		height: 100%;
@@ -16,7 +17,7 @@
 		&:focus {
 			z-index: 1;
 
-			~ .textfield-messages {
+			& ~ .textfield-messages {
 				transform: translateY(100%);
 			}
 
@@ -28,17 +29,17 @@
 		&:hover {
 			z-index: 1;
 
-			~ .textfield-messages {
+			& ~ .textfield-messages {
 				transform: translateY(100%);
 			}
 		}
 	}
 
 	.textfield-suffix {
-		bottom: _component("textfield.framed.bottom-padding");
-		right: _component("textfield.framed.side-padding");
-		display: flex;
 		align-items: flex-end;
+		bottom: _component("textfield.framed.bottom-padding");
+		display: flex;
+		right: _component("textfield.framed.side-padding");
 	}
 
 	.textfield-label {
@@ -93,7 +94,7 @@
 			@include fakeBorder(1px, _get($palette, "color"));
 
 			background-color: transparentize(_get($palette, "color"), .95);
-			~ .textfield-label {
+			& ~ .textfield-label {
 				color: _get($palette, "color");
 			}
 		}
@@ -105,7 +106,9 @@
 		}
 	}
 
-	@include inputColoring(_component("textfield.framed.default-palette"));
+	& {
+		@include inputColoring(_component("textfield.framed.default-palette"));
+	}
 
 	// palette colors
 	@each $name, $palette in _palettes() {
@@ -119,15 +122,16 @@
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	&.mod-multiline {
-		max-width: none;
-		padding: 1rem;
 		@include fakeBorder(1px, _theme("commons.divider.color"));
 
+		max-width: none;
+		padding: 1rem;
+
 		textarea.textfield-input {
-			height: _component("textfield.framed.textarea.height");
-			padding: 0;
-			margin-top: _component("textfield.framed.textarea.margin-top");
 			box-shadow: none;
+			height: _component("textfield.framed.textarea.height");
+			margin-top: _component("textfield.framed.textarea.margin-top");
+			padding: 0;
 			resize: none;
 		}
 
@@ -137,20 +141,23 @@
 		@mixin inputColoring($palette) {
 			&:hover, &:focus {
 				@include fakeBorder(1px, _get($palette, "color"));
+
 				background-color: transparentize(_get($palette, "color"), .95);
 				z-index: 2;
 			}
 
 			textarea.textfield-input {
 				&:focus, &:hover {
-					box-shadow: none;
 					background: transparent;
+					box-shadow: none;
 					z-index: auto;
 				}
 			}
 		}
 
-		@include inputColoring(_component("textfield.framed.default-palette"));
+		& {
+			@include inputColoring(_component("textfield.framed.default-palette"));
+		}
 
 		// palette colors
 		@each $name, $palette in _palettes() {

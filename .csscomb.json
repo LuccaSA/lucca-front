@@ -1,4 +1,14 @@
 {
+		"exclude": [
+			"**/scss/src/variables/*.scss",
+			"**/scss/src/_normalize.scss",
+			"**/scss/src/mixins/*.scss",
+			"**/scss/src/overrides/*.scss",
+			"**/scss/src/theming/*.scss",
+			"**/scss/src/theming/**/*.scss",
+			"**/scss/src/functions/*.scss"
+		],
+		
 		"remove-empty-rulesets": true,
 		"always-semicolon": true,
 		"block-indent": "\t",

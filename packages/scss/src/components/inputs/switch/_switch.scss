@@ -61,7 +61,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .switch .switch-input {
-
 	/*
 		Checked
 	*/
@@ -79,7 +78,7 @@
 	*/
 
 	&[disabled], &[readonly] {
-		~ .switch-label {
+		& ~ .switch-label {
 			color: _color("text.light");
 			cursor: not-allowed;
 
@@ -100,7 +99,7 @@
 .switch {
 	@mixin switchColoring($palette) {
 		.switch-input:checked {
-			~ .switch-label {
+			& ~ .switch-label {
 				&::before {
 					background: lighten(_get($palette, "color"), 20%);
 				}
@@ -112,7 +111,7 @@
 
 			// Palette > Disabled switch
 			&[disabled], &[readonly] {
-				~ .switch-label {
+				& ~ .switch-label {
 					&::before {
 						background: desaturate(lighten(_get($palette, "color"), 30%), 15%);
 					}
@@ -126,7 +125,9 @@
 	}
 
 	// default color
-	@include switchColoring(_component("switch.default-palette"));
+	& {
+		@include switchColoring(_component("switch.default-palette"));
+	}
 
 	// palette colors
 	@each $name, $palette in _palettes() {
