@@ -103,8 +103,15 @@
               "docs/demo/src/assets"
             ],
             "styles": [
-              "docs/demo/src/styles.css"
+              "docs/demo/src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/theming",
+                "node_modules/@lucca-front/scss/src/overrides",
+                "node_modules/@lucca-front/ng/src/style/overrides"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
