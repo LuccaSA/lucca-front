@@ -7,7 +7,7 @@
       "root": "libraries/core",
       "sourceRoot": "libraries/core/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "lf",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -47,7 +47,7 @@
       "root": "libraries/formly",
       "sourceRoot": "libraries/formly/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "lf",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -87,13 +87,13 @@
       "root": "docs/demo/",
       "sourceRoot": "docs/demo/src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "demo",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo",
+            "outputPath": "docs/dist/demo",
             "index": "docs/demo/src/index.html",
             "main": "docs/demo/src/main.ts",
             "polyfills": "docs/demo/src/polyfills.ts",
