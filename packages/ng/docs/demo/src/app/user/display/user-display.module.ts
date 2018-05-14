@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DemoUserDisplayComponent } from './user-display.component';
-import { LuUserDisplayModule } from '../../../../../../dist';
+import { LuUserDisplayModule } from '@core';
 import { MatSelectModule } from '@angular/material';
 
 // import { SharedModule } from '../../shared';
