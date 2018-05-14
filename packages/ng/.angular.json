@@ -24,6 +24,86 @@
           }
         }
       }
+    },
+    "core": {
+      "root": "libraries/core",
+      "sourceRoot": "libraries/core/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/core/tsconfig.lib.json",
+            "project": "libraries/core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libraries/core/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/core/src/test.ts",
+            "tsConfig": "libraries/core/tsconfig.spec.json",
+            "karmaConfig": "libraries/core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/core/tsconfig.lib.json",
+              "libraries/core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "formly": {
+      "root": "libraries/formly",
+      "sourceRoot": "libraries/formly/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/formly/tsconfig.lib.json",
+            "project": "libraries/formly/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libraries/formly/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/formly/src/test.ts",
+            "tsConfig": "libraries/formly/tsconfig.spec.json",
+            "karmaConfig": "libraries/formly/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/formly/tsconfig.lib.json",
+              "libraries/formly/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "e2e"
