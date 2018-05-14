@@ -16,6 +16,8 @@ import { DemoUserDisplayModule } from './display/user-display.module';
 		// DemoUserSelectModule,
 	],
 	declarations: [],
-	exports: [],
+	exports: [
+		// DemoUserDisplayModule,
+	],
 })
 export class DemoUserModule {}

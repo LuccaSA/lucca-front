@@ -35,7 +35,7 @@ import { DemoUserModule } from './user/user.module';
 		// DemoAnimationsModule,
 		// DemoPopoverModule,
 		// DemoDateRangePickerModule,
-		// DemoUserModule,
+		DemoUserModule,
 		// DemoFormlyModule,
 		// DemoEmptyModule,
 		// DemoApiModule,
