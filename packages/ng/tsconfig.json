@@ -17,9 +17,8 @@
       "dom"
     ],
     "paths": {
-      "core": [
-        "dist",
-        "librairies/core/src"
+      "@core": [
+        "libraries/core/src/index"
       ],
       "formly": [
         "dist/formly"
