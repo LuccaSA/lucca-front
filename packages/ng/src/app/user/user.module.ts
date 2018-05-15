@@ -3,22 +3,21 @@ import { CommonModule } from '@angular/common';
 import { LuUserTileModule } from './tile';
 import { LuUserPictureModule } from './picture';
 import { LuUserDisplayModule } from './display';
-import { LuSelectModule } from '../select';
+import { LuUserSelectModule } from './select';
 
 @NgModule({
 	imports: [
-		CommonModule,
 		LuUserTileModule,
 		LuUserPictureModule,
 		LuUserDisplayModule,
-		LuSelectModule,
+		LuUserSelectModule,
 	],
 	declarations: [],
 	exports: [
 		LuUserPictureModule,
 		LuUserDisplayModule,
 		LuUserTileModule,
-		LuSelectModule,
+		LuUserSelectModule,
 	],
 })
 export class LuUserModule {}
