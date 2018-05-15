@@ -1,2 +1,2 @@
-export { LuUserTileModule } from './user-tile.module';
-export { LuUserTileComponent } from './user-tile.component';
+export * from './user-tile.module';
+export * from './user-tile.component';
