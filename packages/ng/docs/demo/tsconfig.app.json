@@ -8,6 +8,9 @@
     "paths": {
       "@core": [
         "../../dist"
+      ],
+      "@formly": [
+        "../../dist/formly"
       ]
     }
   },

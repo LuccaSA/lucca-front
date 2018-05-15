@@ -20,7 +20,7 @@
       "@core": [
         "dist",
       ],
-      "formly": [
+      "@formly": [
         "dist/formly"
       ]
     }
