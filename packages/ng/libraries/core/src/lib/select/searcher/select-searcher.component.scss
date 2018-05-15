@@ -1,0 +1,23 @@
+@import '~@lucca-front/scss/src/theming.scss';
+@import '~@lucca-front/icons/src/mixins.scss';
+
+.textfield.mod-search {
+	width: 100%;
+}
+.textfield-input {
+	border-radius: 0;
+	box-shadow: none;
+	border-bottom: _theme('commons.divider.width') solid
+		_theme('commons.divider.color');
+}
+
+.select-options {
+	max-height: 200px; // for 240px height of .lu-popover-content. Will need a refactor
+	overflow: auto;
+}
+
+.select-options-noResult {
+	padding: 0.5rem;
+	background: _theme('commons.background.base');
+	color: _color('text.light');
+}
