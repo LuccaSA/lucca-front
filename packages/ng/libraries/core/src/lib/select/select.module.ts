@@ -9,7 +9,6 @@ import { LuSelectOptionModule } from './option';
 import { LuSelectPickerModule } from './picker';
 import { LuSelectSearcherModule } from './searcher';
 import { LuSelect } from './select.component';
-import { LuEmptyModule } from '../empty/empty.module';
 import { LuPopoverModule } from '../popover/popover.module';
 
 @NgModule({
@@ -19,14 +18,16 @@ import { LuPopoverModule } from '../popover/popover.module';
 		BrowserModule,
 		OverlayModule,
 		LuPopoverModule,
-		LuEmptyModule,
+
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,
 		LuSelectOptionModule,
 		LuSelectPickerModule,
 		LuSelectSearcherModule,
 	],
-	declarations: [LuSelect],
+	declarations: [
+		LuSelect,
+	],
 	exports: [
 		LuSelectClearerModule,
 		LuSelectDirectiveModule,

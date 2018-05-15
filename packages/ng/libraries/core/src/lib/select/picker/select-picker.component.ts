@@ -15,8 +15,7 @@ import {
 } from '@angular/core';
 import {
 	LuPopoverComponent,
-	transformPopover,
-	PopoverTriggerEvent,
+	luTransformPopover,
 } from '../../popover';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -49,7 +48,7 @@ import { sameOption } from '../utils';
 	templateUrl: './select-picker.component.html',
 	styleUrls: ['./select-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [transformPopover],
+	animations: [luTransformPopover],
 })
 // tslint:disable-next-line:component-class-suffix
 export class LuSelectPicker<T> extends LuPopoverComponent
