@@ -17,7 +17,7 @@ import { DemoEmptyModule } from './empty/empty.module';
 import { DemoPopoverModule } from './popover/popover.module';
 import { DemoAnimationsModule } from './animation/animation.module';
 import { DemoApiModule } from './api/api.module';
-// import { DemoSelectModule } from './select/select.module';
+import { DemoSelectModule } from './select/select.module';
 
 import { DemoUserModule } from './user/user.module';
 
@@ -39,7 +39,7 @@ import { DemoUserModule } from './user/user.module';
 		// DemoFormlyModule,
 		DemoEmptyModule,
 		DemoApiModule,
-		// DemoSelectModule,
+		DemoSelectModule,
 	],
 	bootstrap: [AppComponent],
 })

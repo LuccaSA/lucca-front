@@ -5,7 +5,7 @@ import { popoverRoutes } from '../popover/popover.router';
 import { animationsRoutes } from '../animation/animation.router';
 import { apiRoutes } from '../api/api.router';
 import { userRoutes } from '../user/user.router';
-// import { selectRoutes } from '../select/select.router';
+import { selectRoutes } from '../select/select.router';
 export const featuresRoutes = [
 	// ...dateRangePickerRoutes,
 	// ...formlyRoutes,
@@ -14,5 +14,5 @@ export const featuresRoutes = [
 	...animationsRoutes,
 	...apiRoutes,
 	...userRoutes,
-	// ...selectRoutes,
+	...selectRoutes,
 ];
