@@ -33,13 +33,13 @@ import { AnimationEvent } from '@angular/animations';
 
 @Component({
 	selector: 'lu-popover',
-	templateUrl: 'popover.component.html',
-	styleUrls: ['popover.component.scss'],
+	templateUrl: './popover.component.html',
+	styleUrls: ['./popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	animations: [luTransformPopover],
 	exportAs: 'LuPopover',
-	moduleId: module.id,
+	// moduleId: module.id,
 })
 export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 	// @HostBinding() private role = 'dialog';
@@ -58,7 +58,7 @@ export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 	private _scrollStrategy: LuPopoverScrollStrategy = 'reposition';
 
 	/** Config object to be passed into the popover's ngClass */
-	private _classList: any = {};
+	public _classList: any = {};
 
 	public containerPositioning = false;
 
