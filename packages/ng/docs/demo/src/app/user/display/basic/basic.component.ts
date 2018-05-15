@@ -22,7 +22,7 @@ export class BasicComponent implements OnInit {
 		'l',
 		'L',
 	];
-	selectedFormat = 'fl';
+	selectedFormat = 'Fl';
 
 	constructor() {}
 

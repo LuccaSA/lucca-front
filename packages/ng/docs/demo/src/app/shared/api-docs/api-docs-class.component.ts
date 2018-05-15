@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import docs from '@misc';
+import docs from '@api-docs';
 import { ClassDesc, MethodDesc, signature } from './api-docs.model';
 
 /**

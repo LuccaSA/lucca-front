@@ -9,8 +9,8 @@ let gulpFile = require('gulp-file');
 // copy-pasted from ng-bootstrap
 // https://github.com/ng-bootstrap/ng-bootstrap/blob/master/gulpfile.js#L235
 function getFileNames() {
-	return glob.sync('docs/demo/src/**/*.ts', {
-		ignore: ['docs/demo/src/**/*.spec.ts', 'docs/demo/src/util/**']
+	return glob.sync('libraries/*/src/**/*.ts', {
+		ignore: ['**/*.spec.ts']
 	});
 }
 

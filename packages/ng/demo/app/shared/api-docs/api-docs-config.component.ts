@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import docs from '../../../api-docs';
+import docs from '@api-docs';
 import { ClassDesc } from './api-docs.model';
 
 const CONFIG_SUFFIX_LENGTH = 'Config'.length;
@@ -20,10 +20,13 @@ export class DemoApiDocsConfig {
 	apiDocs: ClassDesc;
 	directiveName: string;
 
-	constructor() {}
+	constructor() {
+		console.log(docs);
+	}
 
 	@Input()
 	set type(typeName: string) {
+		console.log(docs);
 		this.apiDocs = docs[typeName];
 		this.directiveName = typeName.slice(0, -CONFIG_SUFFIX_LENGTH);
 	}

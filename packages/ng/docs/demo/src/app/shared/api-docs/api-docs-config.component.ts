@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import docs from '@misc';
+import docs from '@api-docs';
 import { ClassDesc } from './api-docs.model';
 
 const CONFIG_SUFFIX_LENGTH = 'Config'.length;

@@ -12,8 +12,8 @@
       "@formly": [
         "../../dist/formly"
       ],
-      "@misc": [
-        "../../misc"
+      "@api-docs": [
+        "../../docs/demo/api-docs"
       ]
     }
   },
