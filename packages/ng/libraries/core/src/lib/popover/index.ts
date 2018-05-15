@@ -1,6 +1,6 @@
-export { LuPopoverModule } from './popover.module';
-export { LuPopoverComponent } from './popover.component';
-export { LuPopoverTrigger } from './popover.triggers';
-export { LuPopoverTarget } from './popover.target';
+export * from './popover.module';
+export * from './popover.component';
+export * from './popover.triggers';
+export * from './popover.target';
 export * from './popover.model';
-export { transformPopover } from './popover.animations';
+export * from './popover.animation';

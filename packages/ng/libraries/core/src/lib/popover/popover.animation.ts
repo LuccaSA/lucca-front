@@ -7,7 +7,7 @@ import {
 	AnimationTriggerMetadata,
 } from '@angular/animations';
 
-export const transformPopover: AnimationTriggerMetadata = trigger(
+export const luTransformPopover: AnimationTriggerMetadata = trigger(
 	'transformPopover',
 	[
 		state(

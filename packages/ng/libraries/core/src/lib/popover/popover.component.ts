@@ -25,7 +25,7 @@ import {
 	LuPopoverTriggerEvent,
 	LuPopoverScrollStrategy,
 } from './popover.model';
-import { transformPopover } from './popover.animations';
+import { luTransformPopover } from './popover.animation';
 
 import { AnimationEvent } from '@angular/animations';
 
@@ -33,12 +33,13 @@ import { AnimationEvent } from '@angular/animations';
 
 @Component({
 	selector: 'lu-popover',
-	templateUrl: './popover.component.html',
-	styleUrls: ['./popover.component.scss'],
+	templateUrl: 'popover.component.html',
+	styleUrls: ['popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	animations: [transformPopover],
+	animations: [luTransformPopover],
 	exportAs: 'LuPopover',
+	moduleId: module.id,
 })
 export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 	// @HostBinding() private role = 'dialog';
@@ -47,22 +48,22 @@ export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 	private _position: LuPopoverPosition = 'below';
 	private _alignment: LuPopoverAlignment = 'left';
 	private _triggerEvent: LuPopoverTriggerEvent = 'hover';
-	private _enterDelay: number = 200;
-	private _leaveDelay: number = 200;
-	private _overlapTrigger: boolean = false;
-	private _targetOffsetX: number = 0;
-	private _targetOffsetY: number = 0;
-	private _closeOnClick: boolean = false;
-	private _focusTrapEnabled: boolean = false;
+	private _enterDelay = 200;
+	private _leaveDelay = 200;
+	private _overlapTrigger = false;
+	private _targetOffsetX = 0;
+	private _targetOffsetY = 0;
+	private _closeOnClick = false;
+	private _focusTrapEnabled = false;
 	private _scrollStrategy: LuPopoverScrollStrategy = 'reposition';
 
 	/** Config object to be passed into the popover's ngClass */
 	private _classList: any = {};
 
-	public containerPositioning: boolean = false;
+	public containerPositioning = false;
 
 	/** Closing disabled on popover */
-	public closeDisabled: boolean = false;
+	public closeDisabled = false;
 
 	/** Config object to be passed into the popover's panel ngStyle */
 	public popoverPanelStyles: {};
