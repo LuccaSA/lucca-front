@@ -1,0 +1,6 @@
+<li *ngIf="displayed"
+		class="lu-select-option"
+		(click)="_selectOption()"
+		[ngClass]="{'is-focus': focused}">
+		<ng-content></ng-content>
+	</li>
