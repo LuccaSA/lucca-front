@@ -7,7 +7,6 @@ import { ARDDSelectFeeder } from './rdd-feeder.model';
 import { IRddItem } from '../../rdd.model';
 
 @Component({
-	moduleId: module.id,
 	selector: 'lu-rdd-feeder',
 	template: '',
 	exportAs: 'luRddFeeder',
