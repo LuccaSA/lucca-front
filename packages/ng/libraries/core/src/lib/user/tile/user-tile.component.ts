@@ -5,6 +5,7 @@ import {
 	LuDisplayInitials,
 	LuDisplayFullname,
 	LuDisplayHybrid,
+	LuDisplayFormat,
 } from '../display';
 
 /**
@@ -32,18 +33,18 @@ export class LuUserTileComponent {
 		return this._user;
 	}
 
-	private _displayFormat = 'lf';
+	private _displayFormat: LuDisplayFormat = LuDisplayFullname.lastfirst;
 	/**
 	 * User Display format.
 	 * It is set to 'fl' by default
 	 */
 	@Input()
-	set displayFormat(displayFormat: string) {
+	set displayFormat(displayFormat: LuDisplayFormat) {
 		this._displayFormat = displayFormat;
 		this._changeDetector.markForCheck();
 	}
 
-	get displayFormat(): string {
+	get displayFormat(): LuDisplayFormat {
 		return this._displayFormat;
 	}
 
