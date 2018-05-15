@@ -40,4 +40,4 @@ Thumbs.db
 yarn-*.log
 
 # demo
-/demo/api-docs.ts
+docs/demo/api-docs.ts

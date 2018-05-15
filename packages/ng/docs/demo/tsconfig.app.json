@@ -13,7 +13,7 @@
         "../../dist/formly"
       ],
       "@misc": [
-        "misc"
+        "../../misc"
       ]
     }
   },
