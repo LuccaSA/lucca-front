@@ -1,4 +1,7 @@
-@import '../../../style/theming.overridable';
+@import '~@lucca-front/scss/src/theming.scss';
+@import '~@lucca-front/scss/src/mixins.scss';
+@import '../../../style/theming';
+
 :host {
 	.picture {
 		border-radius: 100%;

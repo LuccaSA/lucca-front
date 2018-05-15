@@ -1,0 +1,14 @@
+.textfield,
+.textfield.mod-multiline {
+	.textfield-input.ng-invalid.ng-touched {
+		@include textfieldError();
+	}
+
+	&.mod-material .textfield-input.ng-invalid.ng-touched {
+		@include textfieldMaterialError();
+	}
+
+	&.mod-framed .textfield-input.ng-invalid.ng-touched {
+		@include textfieldFramedError();
+	}
+}
