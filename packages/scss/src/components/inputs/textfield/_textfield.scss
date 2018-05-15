@@ -9,7 +9,7 @@
 	background: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
-	box-shadow: 0 0 0 1px _component("textfield.border.color");
+	box-shadow: inset 0 0 0 1px _component("textfield.border.color");
 	color: _component("textfield.input.color");
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("textfield.font-size");
@@ -26,7 +26,7 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 1px _component("textfield.border.focus");
+		box-shadow: inset 0 0 0 1px _component("textfield.border.focus");
 	}
 }
 
@@ -111,7 +111,7 @@
 
 	@mixin inputColoring($palette) {
 		.textfield-input:focus {
-			box-shadow: 0 0 0 1px _get($palette, "color");
+			box-shadow: inset 0 0 0 1px _get($palette, "color");
 
 			~ .textfield-label {
 				color: _color("text.default");
