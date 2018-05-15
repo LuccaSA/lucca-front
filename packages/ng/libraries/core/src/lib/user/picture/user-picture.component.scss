@@ -1,7 +1,5 @@
 @import '~@lucca-front/scss/src/theming.scss';
-@import '~@lucca-front/scss/src/mixins.scss';
 @import '../../../style/theming';
-
 :host {
 	.picture {
 		border-radius: 100%;
@@ -21,7 +19,6 @@
 			transform: translate(-50%, -50%);
 		}
 	}
-
 	@each $name, $size in _component('user-picture.sizes') {
 		&.mod-#{$name} .picture {
 			font-size: _get($size, 'font-size');
