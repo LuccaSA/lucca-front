@@ -2,9 +2,9 @@ import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@a
 import { IUser } from '../index';
 import {
 	LuUserDisplayPipe,
-	DisplayInitials,
-	DisplayFullname,
-	DisplayHybrid,
+	LuDisplayInitials,
+	LuDisplayFullname,
+	LuDisplayHybrid,
 } from '../display';
 
 /**
@@ -61,25 +61,25 @@ export class LuUserTileComponent {
 		return this._role;
 	}
 
-	get displayPictureFormat(): DisplayInitials {
+	get displayPictureFormat(): LuDisplayInitials {
 		switch (this.displayFormat) {
-			case DisplayFullname.lastfirst:
-			case DisplayInitials.lastfirst:
-			case DisplayHybrid.lastIfirstFull:
-			case DisplayHybrid.lastFullfirstI:
-				return DisplayInitials.lastfirst;
-			case DisplayFullname.last:
-			case DisplayInitials.last:
-				return DisplayInitials.last;
-			case DisplayFullname.first:
-			case DisplayInitials.first:
-				return DisplayInitials.first;
-			case DisplayFullname.firstlast:
-			case DisplayInitials.firstlast:
-			case DisplayHybrid.firstIlastFull:
-			case DisplayHybrid.firstFulllastI:
+			case LuDisplayFullname.lastfirst:
+			case LuDisplayInitials.lastfirst:
+			case LuDisplayHybrid.lastIfirstFull:
+			case LuDisplayHybrid.lastFullfirstI:
+				return LuDisplayInitials.lastfirst;
+			case LuDisplayFullname.last:
+			case LuDisplayInitials.last:
+				return LuDisplayInitials.last;
+			case LuDisplayFullname.first:
+			case LuDisplayInitials.first:
+				return LuDisplayInitials.first;
+			case LuDisplayFullname.firstlast:
+			case LuDisplayInitials.firstlast:
+			case LuDisplayHybrid.firstIlastFull:
+			case LuDisplayHybrid.firstFulllastI:
 			default:
-				return DisplayInitials.firstlast;
+				return LuDisplayInitials.firstlast;
 		}
 	}
 

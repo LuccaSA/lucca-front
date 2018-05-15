@@ -1,6 +1,3 @@
-// import { IRddItem } from '../rdd';
-
-// export interface IUser extends IRddItem {
 export interface IUser {
 	id: number;
 	name?: string;

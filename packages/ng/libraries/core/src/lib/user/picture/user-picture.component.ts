@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, Input, HostBinding, ChangeDetectorR
 import { IUser } from '../user.model';
 import {
 	LuUserDisplayPipe,
-	DisplayFormat,
-	DisplayInitials,
-	DisplayFullname,
+	LuDisplayFormat,
+	LuDisplayInitials,
+	LuDisplayFullname,
 } from '../display';
 
 /**
@@ -18,18 +18,18 @@ import {
 })
 export class LuUserPictureComponent {
 
-	private _displayFormat: DisplayInitials = DisplayInitials.firstlast;
+	private _displayFormat: LuDisplayInitials = LuDisplayInitials.firstlast;
 	/**
 	 * User Display format.
 	 * It is set to 'FL' by default
 	 */
 	@Input()
-	set displayFormat(displayFormat: DisplayInitials) {
+	set displayFormat(displayFormat: LuDisplayInitials) {
 		this._displayFormat = displayFormat;
 		this._changeDetector.markForCheck();
 	}
 
-	get displayFormat(): DisplayInitials {
+	get displayFormat(): LuDisplayInitials {
 		return this._displayFormat;
 	}
 
@@ -65,10 +65,10 @@ export class LuUserPictureComponent {
 		private _changeDetector: ChangeDetectorRef
 	) {}
 
-	private getNameHue() {
+	private getNameHue(): number {
 		// we sum the chars in user's firstname + lastname
 		const charSum = this.displayPipe
-			.transform(this._user, DisplayFullname.firstlast)
+			.transform(this._user, LuDisplayFullname.firstlast)
 			.split('')
 			.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue
