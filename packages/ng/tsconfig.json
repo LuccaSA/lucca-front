@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -17,10 +17,10 @@
       "dom"
     ],
     "paths": {
-      "core": [
-        "dist"
+      "@core": [
+        "dist",
       ],
-      "formly": [
+      "@formly": [
         "dist/formly"
       ]
     }
