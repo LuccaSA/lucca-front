@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LuPopoverModule,  } from './popover';
+import { LuPopoverModule } from './popover';
 import { LuUserModule } from './user';
 
 @NgModule({
