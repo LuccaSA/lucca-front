@@ -22,6 +22,9 @@
       ],
       "@formly": [
         "dist/formly"
+      ],
+      "@misc": [
+        "misc"
       ]
     }
   }
