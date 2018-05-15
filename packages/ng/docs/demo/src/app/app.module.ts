@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-// import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 // router
 import { RouterModule } from '@angular/router';
@@ -24,7 +24,7 @@ import { DemoUserModule } from './user/user.module';
 @NgModule({
 	declarations: [
 		AppComponent,
-		// NavigationComponent
+		NavigationComponent,
 	],
 	imports: [
 		CommonModule,
