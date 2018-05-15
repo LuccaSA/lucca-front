@@ -18,7 +18,7 @@
     ],
     "paths": {
       "@core": [
-        "libraries/core/src/index"
+        "dist",
       ],
       "formly": [
         "dist/formly"

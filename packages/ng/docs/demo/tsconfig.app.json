@@ -7,7 +7,7 @@
     "baseUrl": ".",
     "paths": {
       "@core": [
-        "../../libraries/core/src/index"
+        "../../dist"
       ]
     }
   },
