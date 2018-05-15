@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { IRddItem } from '../../rdd.model';
 import {
 	IApiSelectFeederWithPaging,
-	AApiSelectFeederWithPaging,
+	ALuApiSelectFeederWithPaging,
 } from '../../../api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -37,7 +37,7 @@ export interface IRDDSelectApiFeeder<T extends IRddItem>
  */
 @Injectable()
 export abstract class ARDDSelectFeeder<T extends IRddItem>
-	extends AApiSelectFeederWithPaging<T>
+	extends ALuApiSelectFeederWithPaging<T>
 	implements IRDDSelectApiFeeder<T> {
 	constructor(protected _http: HttpClient) {
 		super();

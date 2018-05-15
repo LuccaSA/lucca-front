@@ -1,5 +1,5 @@
 export {
-	AApiSelectFeederWithPaging,
+	ALuApiSelectFeederWithPaging,
 	IApiSelectFeeder,
 	IApiSelectFeederWithPaging,
 } from './api-feeder.model';

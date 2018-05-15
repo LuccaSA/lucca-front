@@ -57,7 +57,7 @@ export interface IApiSelectFeederWithPaging<T> extends IApiSelectFeeder<T> {
  * Abstract class that propose an implementation of Lucca RDD Api for the interface ISelectApiFeeder
  */
 @Injectable()
-export abstract class AApiSelectFeederWithPaging<T>
+export abstract class ALuApiSelectFeederWithPaging<T>
 	implements IApiSelectFeederWithPaging<T> {
 	_pagingStart = undefined;
 
