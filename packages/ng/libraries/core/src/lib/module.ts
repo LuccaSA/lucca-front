@@ -4,9 +4,11 @@ import { LuUserModule } from './user';
 import { LuSelectModule } from './select';
 import { LuApiModule } from './api';
 import { LuRddModule } from './rdd';
+import { LuEmptyModule } from './empty';
 
 @NgModule({
 	imports: [
+		LuEmptyModule,
 		LuUserModule,
 		LuPopoverModule,
 		LuSelectModule,
@@ -14,6 +16,7 @@ import { LuRddModule } from './rdd';
 		LuRddModule,
 	],
 	exports: [
+		LuEmptyModule,
 		LuUserModule,
 		LuPopoverModule,
 		LuSelectModule,
