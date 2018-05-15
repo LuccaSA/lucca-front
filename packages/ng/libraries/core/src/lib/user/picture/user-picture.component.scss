@@ -1,0 +1,29 @@
+@import '../../../style/theming.overridable';
+:host {
+	.picture {
+		border-radius: 100%;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: white;
+		font-size: _component('user-picture.sizes.standard.font-size');
+		position: relative;
+		height: _component('user-picture.sizes.standard.image-size');
+		width: _component('user-picture.sizes.standard.image-size');
+
+		> span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	@each $name, $size in _component('user-picture.sizes') {
+		&.mod-#{$name} .picture {
+			font-size: _get($size, 'font-size');
+			height: _get($size, 'image-size');
+			width: _get($size, 'image-size');
+		}
+	}
+}
