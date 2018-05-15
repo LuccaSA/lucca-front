@@ -6,7 +6,10 @@ import {
 	AnimationMetadata,
 } from '@angular/animations';
 
-export function scalingAnimations(inTiming: string, outTiming: string): AnimationMetadata[] {
+export function luScalingAnimation(
+	inTiming: string,
+	outTiming: string,
+): AnimationMetadata[] {
 	return [
 		transition('void => left', [
 			// ---> entering --->

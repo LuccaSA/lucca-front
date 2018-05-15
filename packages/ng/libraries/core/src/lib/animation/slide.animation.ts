@@ -6,7 +6,10 @@ import {
 	AnimationMetadata,
 } from '@angular/animations';
 
-export function slidingAnimations(inTiming: string, outTiming: string): AnimationMetadata[] {
+export function luSlidingAnimation(
+	inTiming: string,
+	outTiming: string,
+): AnimationMetadata[] {
 	return [
 		transition('void => right', [
 			// <--- entering <---

@@ -6,7 +6,10 @@ import {
 	AnimationMetadata,
 } from '@angular/animations';
 
-export function fadingAnimations(inTiming: string, outTiming: string): AnimationMetadata[] {
+export function luFadingAnimation(
+	inTiming: string,
+	outTiming: string,
+): AnimationMetadata[] {
 	return [
 		transition('void => *', [
 			style({ opacity: '0' }),
