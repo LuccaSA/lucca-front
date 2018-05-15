@@ -7,7 +7,7 @@
       "root": "libraries/core",
       "sourceRoot": "libraries/core/src",
       "projectType": "library",
-      "prefix": "lf",
+      "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -47,7 +47,7 @@
       "root": "libraries/formly",
       "sourceRoot": "libraries/formly/src",
       "projectType": "library",
-      "prefix": "lf",
+      "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
