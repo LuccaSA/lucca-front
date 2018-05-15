@@ -21,9 +21,9 @@ export class LuEmptyDirective implements OnInit {
 	constructor(
 		private element: ElementRef,
 		private renderer: Renderer2,
-		// private ngModel: NgModel,
 		private ngControl: NgControl,
 	) {}
+
 	ngOnInit() {
 		const applyClasses = (newVal: any) => {
 			if (this.isEmptyFn(newVal)) {
