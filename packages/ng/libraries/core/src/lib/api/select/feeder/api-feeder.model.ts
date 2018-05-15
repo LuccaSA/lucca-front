@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /**
  * Interface that define how to fill a select based on an API
