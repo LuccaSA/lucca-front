@@ -1,22 +1,22 @@
-export enum DisplayFullname {
+export enum LuDisplayFullname {
 	firstlast = 'fl',
 	lastfirst = 'lf',
 	first = 'f',
 	last = 'l',
 }
 
-export enum DisplayInitials {
+export enum LuDisplayInitials {
 	firstlast = 'FL',
 	lastfirst = 'LF',
 	last = 'L',
 	first = 'F',
 }
 
-export enum DisplayHybrid {
+export enum LuDisplayHybrid {
 	firstIlastFull = 'Fl',
 	firstFulllastI = 'fL',
 	lastIfirstFull = 'Lf',
 	lastFullfirstI = 'lF',
 }
 
-export type DisplayFormat = DisplayFullname | DisplayInitials | DisplayHybrid;
+export type LuDisplayFormat = LuDisplayFullname | LuDisplayInitials | LuDisplayHybrid;

@@ -1,55 +1,56 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IUser } from '../user.model';
 import {
-	DisplayFullname,
-	DisplayHybrid,
-	DisplayInitials,
-	DisplayFormat,
+	LuDisplayFullname,
+	LuDisplayHybrid,
+	LuDisplayInitials,
+	LuDisplayFormat,
 } from './display-format.model';
 /**
- * Displays a user name according to specified format. Supported formats: f for first name, F for first initial, l for last name, L for last initial.
+ * Displays a user name according to specified format. Supported formats: f for first name,
+ * F for first initial, l for last name, L for last initial.
  */
 @Pipe({ name: 'luUserDisplay' })
 export class LuUserDisplayPipe implements PipeTransform {
-	transform(user: IUser, format: DisplayFormat): string {
+	transform(user: IUser, format: LuDisplayFormat): string {
 		let result = '';
 
 		if (!!user && !!user.firstName && !!user.lastName) {
 			switch (format) {
-				case DisplayFullname.lastfirst:
+				case LuDisplayFullname.lastfirst:
 					result = user.lastName + ' ' + user.firstName;
 					break;
-				case DisplayFullname.firstlast:
+				case LuDisplayFullname.firstlast:
 					result = user.firstName + ' ' + user.lastName;
 					break;
-				case DisplayFullname.first:
+				case LuDisplayFullname.first:
 					result = user.firstName;
 					break;
-				case DisplayFullname.last:
+				case LuDisplayFullname.last:
 					result = user.lastName;
 					break;
-				case DisplayInitials.lastfirst:
+				case LuDisplayInitials.lastfirst:
 					result = user.lastName.charAt(0) + user.firstName.charAt(0);
 					break;
-				case DisplayInitials.firstlast:
+				case LuDisplayInitials.firstlast:
 					result = user.firstName.charAt(0) + user.lastName.charAt(0);
 					break;
-				case DisplayInitials.first:
+				case LuDisplayInitials.first:
 					result = user.firstName.charAt(0);
 					break;
-				case DisplayInitials.last:
+				case LuDisplayInitials.last:
 					result = user.lastName.charAt(0);
 					break;
-				case DisplayHybrid.firstIlastFull:
+				case LuDisplayHybrid.firstIlastFull:
 					result = user.firstName.charAt(0) + '. ' + user.lastName;
 					break;
-				case DisplayHybrid.lastIfirstFull:
+				case LuDisplayHybrid.lastIfirstFull:
 					result = user.lastName.charAt(0) + '. ' + user.firstName;
 					break;
-				case DisplayHybrid.lastFullfirstI:
+				case LuDisplayHybrid.lastFullfirstI:
 					result = user.lastName + ' ' + user.firstName.charAt(0) + '.';
 					break;
-				case DisplayHybrid.firstFulllastI:
+				case LuDisplayHybrid.firstFulllastI:
 					result = user.firstName + ' ' + user.lastName.charAt(0) + '.';
 					break;
 				default:
