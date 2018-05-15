@@ -1,0 +1,42 @@
+@import 'node_modules/@lucca-front/scss/src/theming.overridable';
+@import 'node_modules/@lucca-front/icons/src/mixins';
+
+:host-context(.lu-popover-above) {
+	.textfield.mod-search {
+		order: 1;
+		border-radius: 0;
+		box-shadow: none;
+		border-top: _theme('commons.divider.width') solid
+			_theme('commons.divider.color');
+	}
+}
+
+.textfield.mod-search {
+	width: 100%;
+}
+
+.textfield-input {
+	border-radius: 0;
+	box-shadow: none;
+	border-bottom: _theme('commons.divider.width') solid
+		_theme('commons.divider.color');
+}
+
+.select-options {
+	max-height: 200px; // for 240px height of .lu-popover-content. Will need a refactor
+	width: 100%;
+	overflow: auto;
+}
+
+.select-options-noResult,
+.select-options-loading {
+	padding: 0.5rem;
+	background: _theme('commons.background.base');
+	color: _color('text.light');
+}
+
+.loading {
+	display: block;
+	margin: auto;
+	width: 1.7rem;
+}
