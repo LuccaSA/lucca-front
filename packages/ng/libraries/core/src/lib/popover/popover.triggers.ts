@@ -325,7 +325,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 		this._positionSubscription = position.onPositionChange.subscribe(change => {
 			const posX: LuPopoverPosition =
 				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
-			let posY: LuPopoverPosition =
+			const posY: LuPopoverPosition =
 				change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
 
 			this.popover.setPositionClassesChanges(posX, posY);
