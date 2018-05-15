@@ -15,6 +15,14 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "paths": {
+      "core": [
+        "dist"
+      ],
+      "formly": [
+        "dist/formly"
+      ]
+    }
   }
 }
