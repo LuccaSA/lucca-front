@@ -1,5 +1,5 @@
 .table {
-	border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	border-spacing: 0;
 	display: table;
 	font-size: _theme("component.table.font-size");
@@ -23,7 +23,6 @@
 	padding: _theme("component.table.padding");
 }
 
-
 .table-body {
 	display: table-row-group;
 }
@@ -37,6 +36,7 @@
 	display: table-cell;
 	padding: _theme("component.table.padding");
 }
+
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -105,6 +105,30 @@
 	}
 }
 
+.table-head-row-cell {
+	&.mod-sortable {
+		cursor: pointer;
+
+		&::after {
+			@include makeIcon("arrow_south");
+			font-weight: 400;
+			font-size: .75rem;
+			margin-left: .15rem;
+			opacity: 0;
+			position: relative;
+			top: -.25rem;
+			transition: all _theme("commons.animations.durations.standard") ease;
+		}
+
+		&:hover {
+			&::after {
+				top: 0;
+				opacity: .5;
+			}
+		}
+	}
+}
+
 /* Hidden action buttons */
 
 .table-body-row-cell, .table-head-row-cell {
@@ -130,6 +154,40 @@
 				> * {
 					opacity: 1;
 				}
+			}
+		}
+	}
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.table-head-row-cell {
+	&.is-sorted-descending {
+		&::after {
+			@include makeIcon("arrow_south");
+			opacity: 1;
+			top: 0;
+		}
+
+		&:hover {
+			&::after {
+				opacity: .75;
+			}
+		}
+	}
+
+	&.is-sorted-ascending {
+		&::after {
+			@include makeIcon("arrow_north");
+			opacity: 1;
+			top: 0;
+		}
+
+		&:hover {
+			&::after {
+				opacity: .75;
 			}
 		}
 	}
