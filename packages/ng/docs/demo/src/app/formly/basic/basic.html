@@ -1,0 +1,11 @@
+<h3>
+	Basic input types supported
+</h3>
+<form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(user)">
+	<formly-form [model]="user" [fields]="userFields">
+		<button type="submit" class="button">submit</button>
+	</formly-form>
+</form>
+<p>
+	{{ user | json }}
+</p>
