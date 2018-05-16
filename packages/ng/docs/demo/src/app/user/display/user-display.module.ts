@@ -3,19 +3,19 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DemoUserDisplayComponent } from './user-display.component';
 import { LuUserDisplayModule } from '@core';
-import { MatSelectModule } from '@angular/material';
 
-// import { SharedModule } from '../../shared';
+import { SharedModule } from '../../shared';
 import { BasicComponent } from './basic/basic.component';
+import { LuEmptyModule, LuSelectModule } from '@core';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		// FormsModule,
+		FormsModule,
 		LuUserDisplayModule,
-		// SharedModule,
-		// MatSelectModule,
-		// LuEmptyModule,
+		SharedModule,
+		LuEmptyModule,
+		LuSelectModule,
 	],
 	declarations: [DemoUserDisplayComponent, BasicComponent],
 	exports: [DemoUserDisplayComponent, BasicComponent],

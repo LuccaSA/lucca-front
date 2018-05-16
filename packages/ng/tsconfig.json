@@ -22,6 +22,9 @@
       ],
       "@formly": [
         "dist/formly"
+      ],
+      "@api-docs": [
+        "docs/demo/api-docs"
       ]
     }
   }
