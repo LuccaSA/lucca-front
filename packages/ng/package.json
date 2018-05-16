@@ -103,7 +103,7 @@
     "@angular/material": "6.0.1",
     "@lucca-front/icons": "^0.7.0",
     "@lucca-front/scss": "^0.7.0",
-    "@ngx-formly/core": "^2.0.0-beta.3",
+    "@ngx-formly/core": "^4.0.0",
     "moment": "^2.19.1"
   }
 }
