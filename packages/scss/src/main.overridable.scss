@@ -1,3 +1,4 @@
+$useCssVar: false !default;
 @import
 
 	"theming.overridable",
@@ -8,3 +9,7 @@
 	"icons",
 	"components",
 	"shame"; // Shame - Put here the bad code, weirdo
+
+@if $useCssVar {
+	@include generateAllCSSVars($theme);
+}
