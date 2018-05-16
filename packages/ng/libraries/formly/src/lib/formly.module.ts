@@ -10,9 +10,9 @@ import {
 	MatDatepickerModule,
 } from '@angular/material';
 import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
-import { LuEmptyModule } from '@lucca-front/ng';
-import { LuSelectModule, LuSelectOptionModule, LuSelectClearerModule } from '@lucca-front/ng';
-import { LuUserSelectModule } from '@lucca-front/ng';
+import { LuEmptyModule } from '@core';
+import { LuSelectModule, LuSelectOptionModule, LuSelectClearerModule } from '@core';
+import { LuUserSelectModule } from '@core';
 
 @NgModule({
 	declarations: [...LU_FORMLY_COMPONENTS],
