@@ -1,5 +1,5 @@
 {
-  "name": "@lucca-front/ng",
+  "name": "@lucca-front/ng-internal",
   "version": "0.7.0",
   "description": "a library of usefull components for angular web app",
   "repository": {
@@ -31,7 +31,9 @@
     "build-aot": "ng build:demo --prod",
     "pretravis": "npm run build-aot",
     "travis": "npm test",
-    "posttravis": "npm run build-demo"
+    "posttravis": "npm run build-demo",
+
+    "build:libs": "ng build core && ng build formly"
   },
   "files": [
     "dist",
@@ -75,10 +77,6 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-file": "^0.3.0",
-    "gulp-inline-ng2-template": "^4.0.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-typescript": "^3.2.2",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",

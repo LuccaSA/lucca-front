@@ -13,13 +13,13 @@ import {
 	ASelectOptionFeeder,
 	ISelectOptionFeeder,
 	LuSelectOption,
-} from '../../option';
+} from '../../option/index';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ISelectScrollable } from './select-scroll-picker.model';
-import { LuSelectSearchIntl } from '../../utils';
+import { LuSelectSearchIntl } from '../../utils/index';
 
 /**
  * Component that manage the possibility to load the options in an infinite scroll way

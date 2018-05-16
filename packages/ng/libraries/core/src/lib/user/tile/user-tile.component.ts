@@ -1,12 +1,12 @@
 import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { IUser } from '../index';
+import { IUser } from '../user.model';
 import {
 	LuUserDisplayPipe,
 	LuDisplayInitials,
 	LuDisplayFullname,
 	LuDisplayHybrid,
 	LuDisplayFormat,
-} from '../display';
+} from '../display/index';
 
 /**
  * Displays user picture and name. IUser's role can be specified, and the footer is customizable.

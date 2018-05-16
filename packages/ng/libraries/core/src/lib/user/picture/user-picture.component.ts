@@ -5,7 +5,7 @@ import {
 	LuDisplayFormat,
 	LuDisplayInitials,
 	LuDisplayFullname,
-} from '../display';
+} from '../display/index';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'

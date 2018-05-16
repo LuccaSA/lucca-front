@@ -1,4 +1,4 @@
-import { IRddItem } from '../rdd';
+import { IRddItem } from '../rdd/index';
 
 export interface IUser extends IRddItem {
 	firstName: string;

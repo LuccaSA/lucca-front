@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { LuPopoverModule } from './popover';
-import { LuUserModule } from './user';
-import { LuSelectModule } from './select';
-import { LuApiModule } from './api';
-import { LuRddModule } from './rdd';
-import { LuEmptyModule } from './empty';
+import { LuPopoverModule } from './popover/index';
+import { LuUserModule } from './user/index';
+import { LuSelectModule } from './select/index';
+import { LuApiModule } from './api/index';
+import { LuRddModule } from './rdd/index';
+import { LuEmptyModule } from './empty/index';
 
 @NgModule({
 	imports: [

@@ -3,7 +3,7 @@ import { IRddItem } from '../../rdd.model';
 import {
 	IApiSelectFeederWithPaging,
 	ALuApiSelectFeederWithPaging,
-} from '../../../api';
+} from '../../../api/index';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /**

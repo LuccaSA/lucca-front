@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { LuSelectModule } from '../../select';
-import { LuApiSelectPickerModule } from './picker';
+import { LuSelectModule } from '../../select/index';
+import { LuApiSelectPickerModule } from './picker/index';
 import { LuApiSelect } from './api-select.component';
 
 @NgModule({

@@ -7,7 +7,7 @@ import { LuApiSelectPicker } from './api-select-picker.component';
 import {
 	LuSelectOptionModule,
 	LU_SELECT_SEARCH_INTL_PROVIDER,
-} from '../../../select';
+} from '../../../select/index';
 
 @NgModule({
 	imports: [

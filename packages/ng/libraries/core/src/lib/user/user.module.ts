@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { LuUserDisplayModule } from './display';
-import { LuUserPictureModule } from './picture';
-import { LuUserTileModule } from './tile';
-import { LuUserSelectModule } from './select/user-select.module';
+import { LuUserDisplayModule } from './display/index';
+import { LuUserPictureModule } from './picture/index';
+import { LuUserTileModule } from './tile/index';
+import { LuUserSelectModule } from './select/index';
 
 @NgModule({
 	imports: [

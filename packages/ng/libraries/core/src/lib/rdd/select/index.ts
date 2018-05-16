@@ -1,1 +1,1 @@
-export * from './feeder';
+export * from './feeder/index';
