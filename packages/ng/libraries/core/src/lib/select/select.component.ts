@@ -42,9 +42,9 @@ import {
 	LuSelectOption,
 	ASelectOptionFeeder,
 	ISelectOptionFeeder,
-} from './option';
-import { ISelectClearer, LuSelectClearerComponent } from './clearer';
-import { sameOption, findOption } from './utils';
+} from './option/index';
+import { ISelectClearer, LuSelectClearerComponent } from './clearer/index';
+import { sameOption, findOption } from './utils/index';
 
 /** KeyCode for End Key */
 const END = 'End';

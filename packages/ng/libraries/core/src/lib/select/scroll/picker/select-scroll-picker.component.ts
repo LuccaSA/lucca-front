@@ -13,7 +13,7 @@ import {
 	ASelectOptionFeeder,
 	ISelectOptionFeeder,
 	LuSelectOption,
-} from '../../option';
+} from '../../option/index';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
