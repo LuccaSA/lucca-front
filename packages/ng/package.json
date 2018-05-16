@@ -37,7 +37,7 @@
     "postbuild:core": "gulp copy:core-style",
     "build:formly": "ng build formly",
     "postbuild:formly": "gulp copy:formly-style",
-    "build:libs": "build:core && build:formly"
+    "build:libs": "npm run build:core && npm run build:formly"
   },
   "files": [
     "dist",
