@@ -31,7 +31,9 @@
     "build-aot": "ng build:demo --prod",
     "pretravis": "npm run build-aot",
     "travis": "npm test",
-    "posttravis": "npm run build-demo"
+    "posttravis": "npm run build-demo",
+
+    "build:libs": "ng build core && ng build formly"
   },
   "files": [
     "dist",
