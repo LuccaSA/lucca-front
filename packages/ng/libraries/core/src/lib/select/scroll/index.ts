@@ -1,1 +1,1 @@
-export * from './picker';
+export * from './picker/index';
