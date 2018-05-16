@@ -18,8 +18,8 @@ import {
 	LuSelectOptionSelectionChange,
 	LuSelectSearchIntl,
 	ASelectScrollPicker,
-} from '../../../select';
-import { IApiSelectFeeder, IApiSelectFeederWithPaging } from '../feeder';
+} from '../../../select/index';
+import { IApiSelectFeeder, IApiSelectFeederWithPaging } from '../feeder/index';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';

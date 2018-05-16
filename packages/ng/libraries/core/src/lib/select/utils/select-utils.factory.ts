@@ -1,4 +1,4 @@
-import { LuSelectOption } from '../option';
+import { LuSelectOption } from '../option/index';
 
 /**
  * Check if two objects are equals (use JSON.Stringify)

@@ -1,4 +1,4 @@
-import { LuSelectOption } from '../option/select-option.component';
+import { LuSelectOption } from '../option/index';
 
 export interface ISelectSearcher<T> {
 	/**

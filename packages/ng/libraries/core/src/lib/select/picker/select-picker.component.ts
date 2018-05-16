@@ -16,7 +16,7 @@ import {
 import {
 	LuPopoverComponent,
 	luTransformPopover,
-} from '../../popover';
+} from '../../popover/index';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -37,8 +37,8 @@ import {
 	LuSelectOption,
 	LuSelectOptionSelectionChange,
 	ISelectOptionFeeder,
-} from '../option';
-import { sameOption } from '../utils';
+} from '../option/index';
+import { sameOption } from '../utils/index';
 
 /**
  * The component that provides available options with the luSelect directive

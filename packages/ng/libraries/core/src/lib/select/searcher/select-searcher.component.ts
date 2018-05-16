@@ -15,10 +15,10 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { LuSelectOption, ASelectOptionFeeder } from '../option';
-import { findOption } from '../utils';
+import { LuSelectOption, ASelectOptionFeeder } from '../option/index';
+import { findOption } from '../utils/index';
 import { ISelectSearcher } from './select-searcher.model';
-import { LuSelectSearchIntl } from '../utils';
+import { LuSelectSearchIntl } from '../utils/index';
 
 @Component({
 	selector: 'lu-select-searcher',

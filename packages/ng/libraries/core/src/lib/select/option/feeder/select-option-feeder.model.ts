@@ -1,4 +1,4 @@
-import { LuSelectOption } from '../';
+import { LuSelectOption } from '../select-option.component';
 
 /**
  * Interface to implement when you want to create your own feeder of options fot the select

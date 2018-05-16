@@ -8,8 +8,8 @@ import {
 	ChangeDetectorRef,
 } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
-import { LuSelect } from '../../select';
-import { IApiSelectFeeder } from './feeder';
+import { LuSelect } from '../../select/index';
+import { IApiSelectFeeder } from './feeder/index';
 
 /**
  * Api select : A select that will load items from an external service
