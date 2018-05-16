@@ -24,10 +24,7 @@ gulp.task('generatedoc', () => {
 	return gulpFile('api-docs.ts', docs, {src: true}).pipe(gulp.dest("docs/demo"));
 });
 
-
 // Copying styles
-var gulpCopy = require('gulp-copy');
-
 gulp.task('copy:core-style', () => {
 	const sourceFiles = [ 'libraries/core/src/style/**' ];
 	gulp
