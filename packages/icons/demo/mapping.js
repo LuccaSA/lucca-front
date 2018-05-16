@@ -173,6 +173,10 @@ var mappings = {
     {'iconName':'info', 'char': '\e9b0'},
     {'iconName':'light_bulb', 'char': '\e9b1'},
     {'iconName':'rotate', 'char': '\e9b2'},
-    {'iconName':'toll', 'char': '\e9b3'}
+    {'iconName':'toll', 'char': '\e9b3'},
+    {'iconName':'arrow_full_west', 'char': '\e9b4'},
+    {'iconName':'arrow_full_south', 'char': '\e9b5'},
+    {'iconName':'arrow_full_east', 'char': '\e9b6'},
+    {'iconName':'arrow_full_north', 'char': '\e9b7'}
   ]
 }

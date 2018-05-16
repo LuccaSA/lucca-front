@@ -79,6 +79,11 @@ function generateIconDemo() {
 		'arrow_south',
 		'arrow_west',
 
+			'arrow_full_east',
+			'arrow_full_north',
+			'arrow_full_south',
+			'arrow_full_west',
+
 		'arrow_east_thin',
 		'arrow_north_thin',
 		'arrow_south_thin',
