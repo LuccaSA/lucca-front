@@ -5,6 +5,7 @@
 ### Breaking changes
 ### Adding
 ### Enhancements
+- `tables` sortable 
 ### Fixes
 
 ## 0.7.0
