@@ -53,6 +53,7 @@
     "@angular/platform-browser-dynamic": "6.0.1",
     "@lucca-front/icons": "^0.7.0",
     "@lucca-front/scss": "^0.7.0",
+    "@ngx-formly/core": "^4.0.0",
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^6.1.0",
