@@ -9,7 +9,8 @@
     "rxjs-compat": "^6.1.0"
   },
   "files": [
-    "formly"
+    "formly",
+    "style"
   ],
   "script": {}
 }
