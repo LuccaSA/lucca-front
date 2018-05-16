@@ -39,10 +39,6 @@
     "postbuild:formly": "gulp copy:formly-style",
     "build:libs": "npm run build:core && npm run build:formly"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "dependencies": {

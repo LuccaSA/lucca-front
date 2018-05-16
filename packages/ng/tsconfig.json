@@ -18,13 +18,16 @@
     ],
     "paths": {
       "@core": [
-        "dist",
+        "dist"
       ],
       "@formly": [
         "dist/formly"
       ],
       "@api-docs": [
         "docs/demo/api-docs"
+      ],
+      "material": [
+        "dist/material"
       ]
     }
   }

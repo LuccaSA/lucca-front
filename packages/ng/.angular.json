@@ -159,7 +159,7 @@
             "tsConfig": "docs/demo/tsconfig.spec.json",
             "karmaConfig": "docs/demo/karma.conf.js",
             "styles": [
-              "docs/demo/src/styles.css"
+              "docs/demo/src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -197,6 +197,46 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "docs/demo-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "material": {
+      "root": "libraries/material",
+      "sourceRoot": "libraries/material/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/material/tsconfig.lib.json",
+            "project": "libraries/material/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libraries/material/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/material/src/test.ts",
+            "tsConfig": "libraries/material/tsconfig.spec.json",
+            "karmaConfig": "libraries/material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/material/tsconfig.lib.json",
+              "libraries/material/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
