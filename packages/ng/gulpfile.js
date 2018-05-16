@@ -34,6 +34,12 @@ gulp.task('copy:core-style', () => {
 	.src(sourceFiles)
 	.pipe(gulp.dest('dist/style'));
 });
+gulp.task('copy:material-style', () => {
+	const sourceFiles = [ 'libraries/material/src/style/**' ];
+	gulp
+	.src(sourceFiles)
+	.pipe(gulp.dest('dist/material/style'));
+});
 gulp.task('copy:formly-style', () => {
 	const sourceFiles = [ 'libraries/formly/src/style/**' ];
 	gulp

@@ -35,9 +35,11 @@
     "build:demo": "ng build:demo",
     "build:core": "ng build core",
     "postbuild:core": "gulp copy:core-style",
+    "build:material": "ng build material",
+    "postbuild:material": "gulp copy:material-style",
     "build:formly": "ng build formly",
     "postbuild:formly": "gulp copy:formly-style",
-    "build:libs": "npm run build:core && npm run build:formly"
+    "build:libs": "npm run build:core && npm run build:material && npm run build:formly"
   },
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
