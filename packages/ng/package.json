@@ -20,7 +20,7 @@
     "ng": "ng",
     "prestart": "npm run generatedoc",
     "start": "ng serve demo",
-    "build": "npm run build:libs",
+    "build": "npm run build:lib",
     "test": "ng test core",
     "test:sr": "ng test core --watch=false",
     "lint": "ng lint",
