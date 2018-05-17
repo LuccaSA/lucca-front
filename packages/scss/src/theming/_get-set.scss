@@ -1,5 +1,6 @@
 // will try to get $map.$keys or throw if no result
-@function _get($map, $keys, $cssvar: false) {
+
+@function _get($map, $keys, $cssvar: $useCssVar) {
 	$keysArray: str-explode($keys, '.');
 
 	$result: $map;
@@ -21,7 +22,7 @@
 }
 
 // will try to get $map.$keys or false if no result - might still throw depending on keys
-@function _safeGet($map, $keys, $cssvar: false) {
+@function _safeGet($map, $keys, $cssvar: $useCssVar) {
 	$keysArray: str-explode($keys, '.');
 
 	$result: $map;
@@ -36,7 +37,7 @@
 	}
 
 	@if $cssvar {
-		@return var(#{_getCSSVarName($keys)}, #{$result});
+		@return var(#{_getCSSVarName($keys)});
 	}
 	@return $result;
 }
@@ -57,19 +58,15 @@
 	@return str-replace("--"+$string, ".", "-");
 }
 
-@function _replace($map, $keys, $values) {
-	@error "not implemented";
-}
-
-@function _theme($keys, $cssvar: false) {
+@function _theme($keys, $cssvar: $useCssVar) {
 	@return _get($theme, $keys, $cssvar);
 }
 
-@function _palettes() {
-	@return _get($theme, "palettes");
+@function _getMap($keys) {
+	@return _get($theme, $keys, false);
 }
 
-@function _color($keys, $type:"color", $cssvar: false) {
+@function _color($keys, $type:"color", $cssvar: $useCssVar) {
 	// try to find it in colors
 	$result: _safeGet($theme, "colors." + $keys, $cssvar);
 	@if $result {
@@ -90,7 +87,7 @@
 	@return "";
 }
 
-@function _component($keys, $cssvar: false) {
+@function _component($keys, $cssvar: $useCssVar) {
 	$result: _safeGet($theme, "components." + $keys, $cssvar);
 	@if $result {
 		@return $result;
