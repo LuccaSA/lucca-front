@@ -3,6 +3,8 @@ $button: (
 	// theming
 	default-palette: (
 		color: white,
+		light: white,
+		dark: white,
 		text: _color("text.default")
 	),
 	margin: .2rem,
@@ -22,16 +24,16 @@ $button: (
 
 	// mod
 	wired: (
-		default-palette: _theme("palettes.primary"),
+		default-palette: _getMap("palettes.primary"),
 	),
 	filling: (
-		default-palette: _theme("palettes.primary"),
+		default-palette: _getMap("palettes.primary"),
 	),
 	flat: (
 		color: black,
 	),
 
-	checked: _theme("palettes.primary"),
+	checked: _getMap("palettes.primary"),
 
 	// sizing
 	sizing: (
@@ -49,11 +51,11 @@ $button: (
 		),
 		big: (
 			padding: .75rem 1.5rem,
-			font-size: _theme("sizes.standard.font-size") * 1.15
+			font-size: 1.15rem
 		),
 		bigger: (
 			padding: 1rem 2rem,
-			font-size: _theme("sizes.standard.font-size") * 1.3
+			font-size: 1.3rem
 		)
 	),
 );

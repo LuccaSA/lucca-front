@@ -14,7 +14,7 @@
 	// SCROLLBAR
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	&::-webkit-scrollbar-track {
-		background-color: _component("navSide.fullwidth-palette.bg-color");
+		background-color: _component("navSide.scrollbar.bg-color");
 	}
 
 	&::-webkit-scrollbar {
@@ -22,7 +22,7 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: lighten(_component("navSide.fullwidth-palette.bg-color"), 20%);
+		background-color: _component("navSide.scrollbar.thumb-color");
 		border-radius: _component("navSide.scrollbar.border-radius");
 	}
 }
@@ -222,14 +222,14 @@
 	}
 
 	&::before {
-		background: rgba(0, 0, 0, _component("navSide.placeholder.opacity"));
+		background: rgba(0, 0, 0, .15);
 		border-radius: 1em;
 		height: 1em;
 		width: 1em;
 	}
 
 	&::after {
-		@include loadingGradientAnimation(rgba(0, 0, 0, _component("navSide.placeholder.opacity")), true, rgba(0, 0, 0, _component("navSide.placeholder.opacity")));
+		@include loadingGradientAnimation(rgba(0, 0, 0, .15), true, rgba(0, 0, 0, .15));
 		border-radius: _theme("commons.border.radius");
 		flex: 1 1 auto;
 		height: .9em;
@@ -238,11 +238,11 @@
 
 	&.mod-inverted {
 		&::before {
-			background: rgba(255, 255, 255, _component("navSide.placeholder.opacity"));
+			background: rgba(255, 255, 255, .15);
 		}
 
 		&::after {
-			@include loadingGradientAnimation(rgba(255, 255, 255, _component("navSide.placeholder.opacity")), true, rgba(255, 255, 255, _component("navSide.placeholder.opacity")));
+			@include loadingGradientAnimation(rgba(255, 255, 255, .15), true, rgba(255, 255, 255, .15));
 		}
 	}
 }
@@ -257,11 +257,11 @@
 
 		// SCROLLBAR
 		&::-webkit-scrollbar-track {
-			background-color: _component("navSide.compact-palette.bg-color");
+			background-color: _component("navSide.scrollbar.bg-color");
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background-color: lighten(_component("navSide.compact-palette.bg-color"), 20%);
+			background-color: _component("navSide.scrollbar.thumb-color");
 		}
 
 		.navSide-scrollWrapper {

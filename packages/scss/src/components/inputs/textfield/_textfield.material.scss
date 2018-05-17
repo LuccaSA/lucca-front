@@ -69,10 +69,10 @@
 	}
 
 	// default color
-	@include inputColoring(_component("textfield.material.default-palette"));
+	@include inputColoring(_getMap("components.textfield.material.default-palette"));
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include inputColoring($palette);
 		}

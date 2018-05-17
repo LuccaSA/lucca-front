@@ -76,10 +76,10 @@
 	}
 
 	// default color
-	@include radioColoring(_component("radio.default-palette"));
+	@include radioColoring(_getMap("components.radio.default-palette"));
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include radioColoring($palette);
 		}
@@ -113,17 +113,17 @@
 			cursor: not-allowed;
 
 			&::before {
-				box-shadow: inset 0 0 0 2px lighten(_color("text.light"), 15%);
+				box-shadow: inset 0 0 0 2px _color("text.placeholder");
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				box-shadow: inset 0 0 0 2px lighten(_color("text.light"), 15%);
+				box-shadow: inset 0 0 0 2px _color("text.placeholder");
 			}
 
 			&::after {
-				background-color: lighten(_color("text.light"), 15%);
+				background-color: _color("text.placeholder");
 			}
 		}
 	}

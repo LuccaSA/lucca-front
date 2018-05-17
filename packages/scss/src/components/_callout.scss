@@ -72,8 +72,8 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background: rgba(_get($palette, "color"), .1);
-	color: darken(_get($palette, "color"), 20%);
+	background: _get($palette, "transparent");
+	color: _get($palette, "darker");
 
 	.callout-icon {
 		color: _get($palette, "color");
@@ -84,7 +84,7 @@
 	}
 }
 .callout {
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include calloutDefaultPalette($palette);
 		}

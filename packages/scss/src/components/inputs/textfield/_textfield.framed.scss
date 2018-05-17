@@ -92,7 +92,7 @@
 		.textfield-input:focus, .textfield-input:not([disabled]):hover {
 			@include fakeBorder(1px, _get($palette, "color"));
 
-			background-color: transparentize(_get($palette, "color"), .95);
+			background-color: _get($palette, "transparent");
 			~ .textfield-label {
 				color: _get($palette, "color");
 			}
@@ -105,10 +105,10 @@
 		}
 	}
 
-	@include inputColoring(_component("textfield.framed.default-palette"));
+	@include inputColoring(_getMap("components.textfield.framed.default-palette"));
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include inputColoring($palette);
 		}
@@ -137,7 +137,7 @@
 		@mixin inputColoring($palette) {
 			&:hover, &:focus {
 				@include fakeBorder(1px, _get($palette, "color"));
-				background-color: transparentize(_get($palette, "color"), .95);
+				background-color: _get($palette, "transparent");
 				z-index: 2;
 			}
 
@@ -150,10 +150,10 @@
 			}
 		}
 
-		@include inputColoring(_component("textfield.framed.default-palette"));
+		@include inputColoring(_getMap("components.textfield.framed.default-palette"));
 
 		// palette colors
-		@each $name, $palette in _palettes() {
+		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include inputColoring($palette);
 			}
@@ -167,7 +167,7 @@
 		}
 
 		&.is-error {
-			background-color: transparentize(_color("error"), .9);
+			background-color: _color("error", "transparent");
 		}
 	}
 
@@ -238,7 +238,7 @@
 
 	.textfield-input {
 		&[disabled], &[readonly] {
-			background-color: transparentize(_color("text.placeholder"), .8);
+			background-color: _theme("commons.background.dark");
 			background-image: none;
 			opacity: .6;
 

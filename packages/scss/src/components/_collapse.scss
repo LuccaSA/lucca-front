@@ -4,7 +4,7 @@
 	margin: 0 0 .2rem;
 
 	&:hover {
-		color: darken(_color("text.default"), 15%);
+		color: _color("text.dark");
 	}
 
 	&::before {

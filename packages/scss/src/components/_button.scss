@@ -54,18 +54,18 @@
 		background: _get($palette, "color");
 		color: _get($palette, "text");
 		&:hover, &:focus {
-			background: lighten(_get($palette, "color"), 5%);
+			background: _get($palette, "light");
 		}
 		&:active {
-			background: darken(_get($palette, "color"), 5%);
+			background: _get($palette, "dark");
 		}
 	}
 
 	// default color
-	@include buttonColoring(_component("button.default-palette"));
+	@include buttonColoring(_getMap("components.button.default-palette"));
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include buttonColoring($palette);
 		}
@@ -77,7 +77,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	@each $button-size, $size-obj in _component("button.sizing") {
+	@each $button-size, $size-obj in _getMap("components.button.sizing") {
 		&.size-#{$button-size} {
 			font-size: _get($size-obj, "font-size");
 			padding: _get($size-obj, "padding");
@@ -118,10 +118,10 @@
 		}
 
 		// default color
-		@include buttonWiredColoring(_component("button.wired.default-palette"));
+		@include buttonWiredColoring(_getMap("components.button.wired.default-palette"));
 
 		// palette colors
-		@each $name, $palette in _palettes() {
+		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include buttonWiredColoring($palette);
 			}
@@ -142,10 +142,10 @@
 		}
 
 		// default color
-		@include buttonFillingColoring(_component("button.filling.default-palette"));
+		@include buttonFillingColoring(_getMap("components.button.filling.default-palette"));
 
 		// palette colors
-		@each $name, $palette in _palettes() {
+		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include buttonFillingColoring($palette);
 			}
@@ -162,7 +162,7 @@
 		&:hover, &:focus, &:active {
 			background: transparent;
 			box-shadow: none;
-			color: lighten(_color("text.link"), 15%);
+			opacity: .85;
 		}
 	}
 }
@@ -195,7 +195,7 @@
 		user-select: none;
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _getMap("components.button.sizing") {
 			&.size-#{$button-size} {
 				@include loading(_get($size-obj, "font-size"));
 			}
@@ -214,8 +214,8 @@
 			@include makeIcon("tick");
 			bottom: 0;
 			color: white;
-			font-size: 1.5 * _component("button.sizing.default.font-size");
-			height: 1.5 * _component("button.sizing.default.font-size");
+			font-size: calc(1.5 * _component("button.sizing.default.font-size"));
+			height: calc(1.5 * _component("button.sizing.default.font-size"));
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -225,11 +225,11 @@
 		}
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _getMap("components.button.sizing") {
 			&.size-#{$button-size} {
 				&::after {
-					font-size: 1.5 * _get($size-obj, "font-size");
-					height: 1.5 * _get($size-obj, "font-size");
+					font-size: calc(1.5 * _get($size-obj, "font-size"));
+					height: calc(1.5 * _get($size-obj, "font-size"));
 				}
 			}
 		}
@@ -247,8 +247,8 @@
 			@include makeIcon("cross");
 			bottom: 0;
 			color: white;
-			font-size: 1.5 * _component("button.sizing.default.font-size");
-			height: 1.5 * _component("button.sizing.default.font-size");
+			font-size: calc(1.5 * _component("button.sizing.default.font-size"));
+			height: calc(1.5 * _component("button.sizing.default.font-size"));
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -258,11 +258,11 @@
 		}
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _getMap("components.button.sizing") {
 			&.size-#{$button-size} {
 				&::after {
-					font-size: 1.5 * _get($size-obj, "font-size");
-					height: 1.5 * _get($size-obj, "font-size");
+					font-size: calc(1.5 * _get($size-obj, "font-size"));
+					height: calc(1.5 * _get($size-obj, "font-size"));
 				}
 			}
 		}
