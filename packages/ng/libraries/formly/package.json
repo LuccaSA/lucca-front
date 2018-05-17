@@ -1,0 +1,17 @@
+{
+  "name": "@lucca-front/ng/formly",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "^6.0.0",
+    "@angular/cdk": "^6.0.0",
+    "@angular/material": "^6.0.0",
+    "@ngx-formly/core": "^4.0.0",
+    "rxjs": "^6.1.0",
+    "rxjs-compat": "^6.1.0"
+  },
+  "files": [
+    "style"
+  ],
+  "script": {}
+}

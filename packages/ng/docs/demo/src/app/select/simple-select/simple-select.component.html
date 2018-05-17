@@ -1,0 +1,27 @@
+<section class="contentSection">
+	<h3>Component basic</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelect"
+			class="textfield-input"
+			placeholder="placeholder"
+			name="itemOptions">
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
+
+<section class="contentSection">
+	<h3>Component With High number of Options</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemLotOfOptionsSelect"
+			class="textfield-input"
+			placeholder="placeholder"
+			name="itemOptions">
+			<lu-select-option *ngFor="let option of lotOfOptions" [luOptionValue]="option">{{option.name}}</lu-select-option>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemLotOfOptionsSelect | json }}</code>
+</section>

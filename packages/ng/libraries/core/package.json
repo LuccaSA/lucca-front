@@ -1,0 +1,16 @@
+{
+  "name": "@lucca-front/ng",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "6.0.1",
+    "@angular/cdk": "6.0.0",
+    "rxjs": "^6.1.0",
+    "rxjs-compat": "^6.1.0"
+  },
+  "files": [
+    "formly",
+    "style"
+  ],
+  "script": {}
+}

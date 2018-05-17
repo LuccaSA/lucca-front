@@ -1,0 +1,3 @@
+$table: (zebra: (background: _theme('commons.background.dark')));
+
+$theme: _set($theme, 'component.table', $table);

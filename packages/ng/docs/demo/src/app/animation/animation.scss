@@ -1,0 +1,18 @@
+:host {
+	display: flex;
+	flex-wrap: wrap;
+}
+.animation-block {
+	position: relative;
+	height: 105px;
+	width: 305px;
+	flex: 0 0 auto;
+}
+
+.animated-block {
+	border: 1px solid grey;
+	background: white;
+	padding: 0.5em 1em;
+	height: 60px;
+	width: 300px;
+}

@@ -1,0 +1,109 @@
+<h1>
+	<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/{{apiDocs.fileName}}" target="_blank">{{apiDocs.className}}</a>
+</h1>
+<p>{{apiDocs.description}}</p>
+
+<div *ngIf="apiDocs.pipeName">
+	<h2>How to use</h2>
+	<code class="code">{{apiDocs.input.name}} | {{apiDocs.pipeName}}</code>
+	<code class="code" *ngFor="let arg of apiDocs.args">[:{{arg.name}}]</code>
+</div>
+
+<section class="contentSection">
+	<div class="card">
+		<table class="table mod-small">
+			<tr class="table-body-row" *ngIf="apiDocs.selector">
+				<td class="table-body-row-cell">Selector</td>
+				<td class="table-body-row-cell">
+					<code class="code">{{apiDocs.selector}}</code>
+				</td>
+			</tr>
+			<tr *ngIf="apiDocs.exportAs">
+				<td class="table-body-row-cell">Exported as</td>
+				<td class="table-body-row-cell">
+					<code class="code">{{apiDocs.exportAs}}</code>
+				</td>
+			</tr>
+		</table>
+	</div>
+</section>
+
+<ng-template [ngIf]="apiDocs.inputs.length">
+	<section class="contentSection">
+		<h2>Inputs</h2>
+		<div class="card">
+			<table class="table mod-small">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let input of apiDocs.inputs">
+						<td class="table-body-row-cell label-cell"><code class="code">{{input.name}}</code></td>
+						<td class="table-body-row-cell content-cell">
+							<div><i>Type: </i><code class="code">{{ input.type }}</code></div>
+							<ng-template [ngIf]="defaultInputValue(input) || hasConfigProperty(input)">
+								<div>
+									<span><i>Default value: </i><code class="code">{{ defaultInputValue(input) || '-' }}</code></span>
+									<span *ngIf="hasConfigProperty(input)">&mdash; initialized from {{ configServiceName }} service</span>
+								</div>
+							</ng-template>
+							<div>{{ input.description }}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</ng-template>
+
+<ng-template [ngIf]="apiDocs.outputs.length">
+	<section class="contentSection">
+		<h2>Outputs</h2>
+		<div class="card">
+			<table class="table mod-small">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let output of apiDocs.outputs">
+						<td class="table-body-row-cell label-cell"><code class="code">{{output.name}}</code></td>
+						<td class="table-body-row-cell content-cell">{{output.description}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</ng-template>
+
+<ng-template [ngIf]="filterPublic(apiDocs.properties).length">
+	<section class="contentSection">
+		<h2>Properties</h2>
+		<div class="card">
+			<table class="table mod-small">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let property of filterPublic(apiDocs.properties)">
+						<td class="table-body-row-cell label-cell"><code class="code">{{property.name}}</code></td>
+						<td class="table-body-row-cell content-cell">
+							<div><i>Type: </i><code class="code">{{ property.type }}</code></div>
+							<div style="margin: 10px 0">{{ property.description }}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</ng-template>
+
+<ng-template [ngIf]="filterPublic(apiDocs.methods).length">
+	<section class="contentSection">
+		<h2>Methods</h2>
+		<div class="card">
+			<table class="table mod-small">
+				<tbody class="table-body">
+					<tr class="table-body-row" *ngFor="let method of filterPublic(apiDocs.methods)">
+						<td class="table-body-row-cell label-cell"><code class="code">{{method.name}}</code></td>
+						<td class="table-body-row-cell content-cell">
+							<div><i>Signature: </i><code class="code">{{ methodSignature(method) }}</code></div>
+							<div><i>Return type: </i><code class="code">{{ method.returnType }}</code></div>
+							<div style="margin: 10px 0">{{ method.description }}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="tiles">
+	<lu-user-tile class="user-tile" [user]="jeanMich"></lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="jeanPascal"></lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="anais"></lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="anais" [role]="'French actress'"></lu-user-tile>
+	<lu-user-tile class="user-tile" [user]="anais" [role]="'French actress'">
+		<a href="/">Contact</a>
+	</lu-user-tile>
+
+	<lu-user-tile class="user-tile" [user]="anais" [role]="'Approved by'">
+		<div matTooltip="This guy, that other guy" [matTooltipPosition]="'above'">
+			and two others
+		</div>
+	</lu-user-tile>
+
+	<lu-user-tile class="user-tile" [user]="anais" [role]="'Approved by'">
+		<div>
+			Be careful <br/> what you put <br/> inside <br/> this footer !
+		</div>
+	</lu-user-tile>
+</div>

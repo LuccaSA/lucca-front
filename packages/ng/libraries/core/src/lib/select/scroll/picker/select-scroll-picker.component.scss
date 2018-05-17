@@ -1,0 +1,18 @@
+@import '~@lucca-front/scss/src/_theming';
+
+.select-options {
+	max-height: 200px; // for 240px height of .lu-popover-content. Will need a refactor
+	overflow: auto;
+}
+
+.select-options-loading {
+	padding: 0.5rem;
+	background: _theme('commons.background.base');
+	color: _color('text.light');
+}
+
+.loading {
+	display: block;
+	margin: auto;
+	width: 1.7rem;
+}

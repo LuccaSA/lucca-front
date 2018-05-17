@@ -17,7 +17,6 @@
 *.launch
 .settings/
 *.sublime-workspace
-yarn.lock
 
 
 # misc
@@ -38,8 +37,7 @@ testem.log
 Thumbs.db
 
 # yarn
-yarn.lock
 yarn-*.log
 
 # demo
-/demo/api-docs.ts
+docs/demo/api-docs.ts

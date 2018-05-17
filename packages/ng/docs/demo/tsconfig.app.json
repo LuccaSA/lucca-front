@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/app",
+    "module": "es2015",
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@lucca-front/ng": [
+        "../../dist"
+      ],
+      "@lucca-front/ng/material": [
+        "../../dist/material"
+      ],
+      "@lucca-front/ng/formly": [
+        "../../dist/formly"
+      ],
+      "@api-docs": [
+        "../../docs/demo/api-docs"
+      ]
+    }
+  },
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,17 @@
+<div class="button" [luPopoverTriggerFor]="popover">Popover on click</div>
+<div class="button" [luPopoverTriggerFor]="userDetails">Popover on hover, overlapping</div>
+<div class="button" [luPopoverTriggerFor]="lol">using input template</div>
+
+<div class="spacer" style="height: 300px"></div>
+<lu-popover #popover trigger-on="click" [overlap-trigger]="false" [close-on-click]="false" [position]="'after'" [alignment]="'top'">
+	<lu-user-tile class="user-tile" [user]="user"></lu-user-tile>
+</lu-popover>
+
+<lu-popover #userDetails trigger-on="hover" [overlap-trigger]="true">
+	<lu-user-tile class="user-tile" [user]="user"></lu-user-tile>
+</lu-popover>
+
+<lu-popover #lol [template]="mdr" trigger-on="click"></lu-popover>
+<ng-template #mdr>
+	<lu-user-tile class="user-tile" [user]="user"></lu-user-tile>
+</ng-template>
