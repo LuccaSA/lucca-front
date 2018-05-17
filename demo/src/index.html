@@ -9,27 +9,36 @@
   <link rel="stylesheet" href="/scss/lucca-front.css">
   <link rel="stylesheet" href="/scss/demo.css">
 </head>
-<body>
-  <main class="main">
-    <section class="main-content">
-      <div class="container u-textCenter u-marginTopBiggest">
-        <div class="titleSection">
-          <h1>Lucca Front Demo</h1>
-        </div>
-        <div class="grid">
-          <div class="grid-md6">
-            <a href="/scss/demo.html" class="card mod-clickable">
-              <h2>SCSS</h2>
-            </a>
-          </div>
-          <div class="grid-md6">
-            <a href="/ng/" class="card mod-clickable">
-              <h2>NG</h2>
-            </a>
-          </div>
-        </div>
+<body class="home">
+  <header class="home-header">
+    <a href="https://github.com/LuccaSA/lucca-front/" target="_blank" class="home-header-github"><img src="assets/github.png">Show in Github</a>
+    <h1 class="home-header-title">Lucca Front</h1>
+    <div class="home-header-description">A modular framework for developing web application by lucca</div>
+  </header>
+
+  <div class="container mod-sm">
+    <a href="/scss/demo.html" class="card mod-clickable mod-sass">
+      <div class="card-visual">
+        <img class="card-visual-asset" src="assets/sass.png">
       </div>
-    </section>
-  </main>
+      <div class="card-content">
+        <h2>Sass components</h2>
+        <div>A set of icons and CSS components with a customizable theme.</div>
+      </div>
+    </a>
+    <a href="/ng/" class="card mod-clickable mod-ng">
+      <div class="card-visual">
+        <img class="card-visual-asset" src="assets/ng.png">
+      </div>
+      <div class="card-content">
+        <h2>Angular components</h2>
+        <div>A library of usefull and modular Angular components.</div>
+      </div>
+    </a>
+
+    <footer class="home-footer">
+      Crafted with 💕 by <a href="https://www.lucca.fr/societe/equipe" target="_blank">Lucca's tribe</a> 
+    </footer>
+  </div>
 </body>
 </html>
