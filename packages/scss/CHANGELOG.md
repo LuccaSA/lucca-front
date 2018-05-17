@@ -6,6 +6,7 @@
 ### Adding
 - `breadcrumb`
 ### Enhancements
+- `tables` sortable 
 - `textfield` Supports inside radio label display
 - `textfields` / `form` Improve margin system
 - `card` Disabled status
