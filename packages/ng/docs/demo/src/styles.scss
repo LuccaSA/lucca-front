@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@lucca-front/scss/src/main.overridable';
-	// '../src/plugins/ngMaterial/general',
-	// '../src/main';
+@import 'libraries/core/src/style/main';
+@import 'libraries/material/src/style/main';
+@import 'libraries/formly/src/style/main';
 
-// .demo-box {
-// 	display: inline-flex;
-// 	flex-direction: column;
-// 	justify-content: center;
-// 	align-items: center;
-// }
+
+.demo-box {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
