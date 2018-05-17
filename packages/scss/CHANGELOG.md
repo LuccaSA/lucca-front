@@ -11,6 +11,7 @@
 - `textfields` / `form` Improve margin system
 - `card` Disabled status
 ### Fixes
+- `textfields` Show all borders even with browser zoom
 
 ## 0.7.0
 ### Fixes

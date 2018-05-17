@@ -1,5 +1,5 @@
 @mixin textfieldError() {
-	box-shadow: 0 0 0 1px _color("error");
+	box-shadow: inset 0 0 0 1px _color("error");
 	background-color: rgba( _color("error"), .1 );
 
 	&::placeholder {
