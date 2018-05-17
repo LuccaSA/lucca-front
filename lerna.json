@@ -1,12 +1,15 @@
 {
   "lerna": "2.5.1",
   "packages": [
-    "packages/*"
+    "packages/*",
+    "packages/ng/dist"
   ],
   "version": "0.7.0",
   "command": {
     "publish": {
-      "message": "publish %s"
+      "message": "publish %s",
+      "force-publish": "*",
+      "ignore": "@lucca-front/ng-internal"
     }
   }
 }
