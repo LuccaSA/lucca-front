@@ -116,13 +116,13 @@
 			margin-left: .15rem;
 			opacity: 0;
 			position: relative;
-			top: -.25rem;
-			transition: all _theme("commons.animations.durations.standard") ease;
+			transform: translateY(-.25rem);
+			transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
 		}
 
 		&:hover {
 			&::after {
-				top: 0;
+				transform: translateY(0);
 				opacity: .5;
 			}
 		}
@@ -170,7 +170,7 @@
 		&::after {
 			@include makeIcon("arrow_full_south");
 			opacity: 1;
-			top: 0;
+			transform: translateY(0);
 		}
 
 		&:hover {
@@ -186,7 +186,7 @@
 		&::after {
 			@include makeIcon("arrow_full_north");
 			opacity: 1;
-			top: 0;
+			transform: translateY(0);
 		}
 
 		&:hover {
