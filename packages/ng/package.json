@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
   },
+  "private": true,
   "keywords": [
     "lucca",
     "angular",
