@@ -5,6 +5,10 @@
 ### Fix
 ### New icons
 
+## 0.7.1
+### New icons
+- `arrow full west`, `arrow full south`, `arrow full east`, `arrow full north`
+
 ## 0.7.0
 ### Fix
 - `icons` height consistency between browsers & OS

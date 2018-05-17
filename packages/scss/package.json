@@ -38,7 +38,7 @@
     "gulp-stylelint": "^3.9.0"
   },
   "peerDependencies": {
-    "@lucca-front/icons": "^0.7.0"
+    "@lucca-front/icons": "^0.7.1"
   },
   "dependencies": {
     "@lucca-front/icons": "^0.7.0"

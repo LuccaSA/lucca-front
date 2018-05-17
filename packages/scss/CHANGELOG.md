@@ -4,9 +4,14 @@
 ### New features
 ### Breaking changes
 ### Adding
+### Enhancements
+### Fixes
+
+## 0.7.1
+### Adding
 - `breadcrumb`
 ### Enhancements
-- `tables` sortable 
+- `tables` sortable
 - `textfield` Supports inside radio label display
 - `textfields` / `form` Improve margin system
 - `card` Disabled status
