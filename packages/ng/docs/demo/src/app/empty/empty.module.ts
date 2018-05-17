@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DemoEmptyComponent } from './empty.component';
-import { LuEmptyModule } from '@core';
+import { LuEmptyModule } from '@lucca-front/ng';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';

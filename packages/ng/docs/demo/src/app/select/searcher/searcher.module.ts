@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LuSelectModule, LuSelectSearchIntl } from '@core';
+import { LuSelectModule, LuSelectSearchIntl } from '@lucca-front/ng';
 import { SharedModule } from '../../shared/index';
 import { BasicSearcherSelectComponent } from './basic/basic';
 import { DemoSearcherSelectComponent } from './searcher';

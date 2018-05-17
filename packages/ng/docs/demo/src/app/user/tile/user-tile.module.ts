@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoUserTileComponent } from './user-tile.component';
-import { LuUserTileModule } from '@core';
+import { LuUserTileModule } from '@lucca-front/ng';
 import { SharedModule } from '../../shared/index';
 import { BasicComponent } from './basic/basic.component';
 import { MatTooltipModule } from '@angular/material';

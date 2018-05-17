@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { luScaleAnimationFactory } from '@core';
+import { luScaleAnimationFactory } from '@lucca-front/ng';
 @Component({
 	selector: 'demo-animations-scaling',
 	templateUrl: './scaling.html',

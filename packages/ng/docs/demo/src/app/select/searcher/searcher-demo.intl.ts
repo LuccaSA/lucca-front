@@ -1,4 +1,4 @@
-import { LuSelectSearchIntl } from '@core';
+import { LuSelectSearchIntl } from '@lucca-front/ng';
 
 export function getOverrideLuSelectSearchIntl(): LuSelectSearchIntl {
 	const luSelectSearchIntl = new LuSelectSearchIntl();

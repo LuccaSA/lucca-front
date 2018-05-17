@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BasicModSelectComponent } from './basic/basic';
 import { DemoModSelectComponent } from './mod-select.component';
-import { LuSelectModule } from '@core';
+import { LuSelectModule } from '@lucca-front/ng';
 import { SharedModule } from '../../shared';
 
 @NgModule({

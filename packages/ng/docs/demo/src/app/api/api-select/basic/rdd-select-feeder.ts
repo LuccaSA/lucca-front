@@ -1,4 +1,4 @@
-import { ARDDSelectFeeder } from '@core';
+import { ARDDSelectFeeder } from '@lucca-front/ng';
 import { Injectable } from '@angular/core';
 
 @Injectable()

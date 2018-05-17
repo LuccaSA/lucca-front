@@ -18,7 +18,7 @@ import {
 	LuSelectOption,
 	LuSelectOptionSelectionChange,
 	LuSelectSearchIntl,
-} from '@core';
+} from '@lucca-front/ng';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
