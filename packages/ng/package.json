@@ -19,8 +19,8 @@
   "scripts": {
     "ng": "ng",
     "prestart": "npm run generatedoc",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve demo",
+    "build": "npm run build:libs",
     "test": "ng test core",
     "test:sr": "ng test core --watch=false",
     "lint": "ng lint",
