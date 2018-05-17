@@ -49,6 +49,7 @@
 	transition: all 150ms ease;
 	word-break: break-word;
 	white-space: nowrap;
+	margin-bottom: _component("textfield.label.margin-bottom");
 }
 
 .textfield-messages {
@@ -196,6 +197,20 @@
 			padding-right: 2rem;
 		}
 	}
+
+	/* Inside radio */
+
+	&.mod-radio {
+		display: inline-block;
+		margin-left: .25rem;
+
+		.textfield-input {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+
+	/* Style */
 
 	&.mod-material {
 		@extend %input_material;
