@@ -213,9 +213,9 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
-"@ngx-formly/core@^2.0.0-beta.3":
-  version "2.0.0-rc.29"
-  resolved "https://registry.yarnpkg.com/@ngx-formly/core/-/core-2.0.0-rc.29.tgz#fb20ccdb7e35b3647d43e29790ad49a8eaa136ec"
+"@ngx-formly/core@^4.0.0":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@ngx-formly/core/-/core-4.0.3.tgz#b7b40d958cb8f72eaac10e655085ca47328d33bc"
   dependencies:
     tslib "^1.7.1"
 

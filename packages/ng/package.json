@@ -32,7 +32,7 @@
     "pretravis": "npm run build-aot",
     "travis": "npm test",
     "posttravis": "npm run build-demo",
-    "build:demo": "ng build:demo",
+    "build:demo": "ng build demo",
     "build:core": "ng build core",
     "postbuild:core": "gulp copy:core-style",
     "build:material": "ng build material",
@@ -53,6 +53,7 @@
     "@angular/platform-browser-dynamic": "6.0.1",
     "@lucca-front/icons": "^0.7.0",
     "@lucca-front/scss": "^0.7.0",
+    "@ngx-formly/core": "^4.0.0",
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^6.1.0",
@@ -102,7 +103,7 @@
     "@angular/material": "6.0.1",
     "@lucca-front/icons": "^0.7.0",
     "@lucca-front/scss": "^0.7.0",
-    "@ngx-formly/core": "^2.0.0-beta.3",
+    "@ngx-formly/core": "^4.0.0",
     "moment": "^2.19.1"
   }
 }
