@@ -1,5 +1,5 @@
-@import '~@lucca-front/scss/src/theming.scss';
-@import '../../../style/theming';
+@import '~@lucca-front/scss/src/_theming';
+@import 'theme/user-picture.theme';
 :host {
 	display: flex;
 	align-items: center;
