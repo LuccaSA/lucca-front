@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { LuEmptyModule } from '@core';
+import { LuEmptyModule } from '@lucca-front/ng';
 
 import { RedirectComponent } from './redirect.component';
 import { RedirectService, RedirectEnvironment } from './redirect.service';

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BasicFeederSelectComponent } from './basic/basic';
 import { DemoSelectFeederPickerComponent } from './basic/feeder-select-picker';
 import { DemoFeederSelectComponent } from './feeder';
-import { LuSelectModule } from '@core';
+import { LuSelectModule } from '@lucca-front/ng';
 import { SharedModule } from '../../shared/index';
 
 @NgModule({

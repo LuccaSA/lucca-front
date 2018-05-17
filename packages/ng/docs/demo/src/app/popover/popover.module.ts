@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoPopoverComponent } from './popover.component';
-import { LuUserModule, LuPopoverModule } from '@core';
+import { LuUserModule, LuPopoverModule } from '@lucca-front/ng';
 import { SharedModule } from '../shared';
 import { DemoPopoverBasicComponent } from './basic/basic';
 import { DemoPopoverTriggerComponent } from './trigger/trigger';

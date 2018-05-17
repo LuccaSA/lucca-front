@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoUserPictureComponent } from './user-picture.component';
-import { LuUserPictureModule } from '@core';
+import { LuUserPictureModule } from '@lucca-front/ng';
 import { SharedModule } from '../../shared';
 import { DemoUserPictureBasicComponent } from './basic/basic';
 

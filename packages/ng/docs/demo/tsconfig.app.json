@@ -6,10 +6,13 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@core": [
+      "@lucca-front/ng": [
         "../../dist"
       ],
-      "@formly": [
+      "@lucca-front/ng/material": [
+        "../../dist/material"
+      ],
+      "@lucca-front/ng/formly": [
         "../../dist/formly"
       ],
       "@api-docs": [

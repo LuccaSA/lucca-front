@@ -17,16 +17,16 @@
       "dom"
     ],
     "paths": {
-      "@core": [
+      "@lucca-front/ng": [
         "dist"
       ],
-      "@formly": [
+      "@lucca-front/ng/formly": [
         "dist/formly"
       ],
       "@api-docs": [
         "docs/demo/api-docs"
       ],
-      "@material": [
+      "@lucca-front/ng/material": [
         "dist/material"
       ]
     }

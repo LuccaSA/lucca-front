@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { luFadeAnimationFactory } from '@core';
+import { luFadeAnimationFactory } from '@lucca-front/ng';
 // const fade = LfAnimationFactory(); // defaults to fade
 @Component({
 	selector: 'demo-animations-fading',

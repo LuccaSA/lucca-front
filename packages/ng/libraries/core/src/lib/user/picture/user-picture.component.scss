@@ -1,5 +1,5 @@
-@import '~@lucca-front/scss/src/theming.scss';
-@import '../../../style/theme/user-picture.theme';
+@import '~@lucca-front/scss/src/_theming';
+@import 'theme/user-picture.theme';
 :host {
 	.picture {
 		border-radius: 100%;

@@ -1,5 +1,4 @@
-@import '~@lucca-front/scss/src/theming.scss';
-@import '~@lucca-front/icons/src/mixins.scss';
+@import '~@lucca-front/scss/src/_theming';
 
 :host-context(.lu-popover-above) {
 	.textfield.mod-search {

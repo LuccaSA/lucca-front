@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { IUser } from '@core';
+import { IUser } from '@lucca-front/ng';
 
 @Component({
 	selector: 'demo-basic',

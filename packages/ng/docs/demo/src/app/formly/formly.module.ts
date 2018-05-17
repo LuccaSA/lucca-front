@@ -11,8 +11,8 @@ import {
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { DemoFormlyComponent } from './formly.component';
-import { LuFormlyModule } from '@formly';
-import { LuEmptyModule } from '@core';
+import { LuFormlyModule } from '@lucca-front/ng/formly';
+import { LuEmptyModule } from '@lucca-front/ng';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';

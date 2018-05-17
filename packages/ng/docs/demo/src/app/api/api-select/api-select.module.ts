@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LuSelectModule, LuApiSelectModule, LuRddFeederModule } from '@core';
+import { LuSelectModule, LuApiSelectModule, LuRddFeederModule } from '@lucca-front/ng';
 import { SharedModule } from '../../shared/index';
 import { BasicApiSelectComponent } from './basic/basic';
 import { DemoApiSelectFeeder } from './basic/rdd-select-feeder';

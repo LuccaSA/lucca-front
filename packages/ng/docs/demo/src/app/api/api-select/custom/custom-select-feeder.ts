@@ -1,7 +1,7 @@
 import {
 	ALuApiSelectFeederWithPaging,
 	IApiSelectFeederWithPaging,
-} from '@core';
+} from '@lucca-front/ng';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
