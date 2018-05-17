@@ -20,6 +20,26 @@ function getApiDocs() {
 
 gulp.task('generatedoc', () => {
 	var docs = `const API_DOCS = ${JSON.stringify(getApiDocs(), null, 2)};\n\nexport default API_DOCS;`;
-
+	
 	return gulpFile('api-docs.ts', docs, {src: true}).pipe(gulp.dest("docs/demo"));
-})
+});
+
+// Copying styles
+gulp.task('copy:core-style', () => {
+	const sourceFiles = [ 'libraries/core/src/style/**' ];
+	gulp
+	.src(sourceFiles)
+	.pipe(gulp.dest('dist/style'));
+});
+gulp.task('copy:material-style', () => {
+	const sourceFiles = [ 'libraries/material/src/style/**' ];
+	gulp
+	.src(sourceFiles)
+	.pipe(gulp.dest('dist/material/style'));
+});
+gulp.task('copy:formly-style', () => {
+	const sourceFiles = [ 'libraries/formly/src/style/**' ];
+	gulp
+	.src(sourceFiles)
+	.pipe(gulp.dest('dist/formly/style'));
+});

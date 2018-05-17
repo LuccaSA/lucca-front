@@ -1,0 +1,60 @@
+.cdk-overlay-container {
+	position: fixed;
+	z-index: 1000;
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+	height: 100%;
+	left: 0;
+	pointer-events: none;
+	top: 0;
+	width: 100%;
+}
+
+.cdk-global-overlay-wrapper {
+	display: flex;
+	position: absolute;
+	z-index: 1000;
+}
+
+.cdk-overlay-pane {
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 1000;
+}
+
+.cdk-overlay-backdrop {
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	pointer-events: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: opacity 0.2 ease-in-out;
+	z-index: 1000;
+
+	&.cdk-overlay-backdrop-showing {
+		opacity: 0.4;
+	}
+
+	&.cdk-overlay-dark-backdrop {
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+	&.cdk-overlay-transparent-backdrop {
+		background: 0 0;
+	}
+}
+
+.cdk-visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	text-transform: none;
+	width: 1px;
+}

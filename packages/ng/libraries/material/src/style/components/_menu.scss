@@ -1,0 +1,19 @@
+.mat-menu-item {
+	background-color: transparent;
+	@extend .textfield-options-entry;
+	&.mat-selected,
+	&.mat-active {
+		@extend .textfield-options-entry.is-focus;
+	}
+}
+
+.mat-menu-panel {
+	@extend .textfield-options;
+	position: relative;
+	top: auto;
+}
+
+.mat-menu-content {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
