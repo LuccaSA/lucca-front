@@ -8,8 +8,7 @@
   "command": {
     "publish": {
       "message": "publish %s",
-      "force-publish": "*",
-      "ignore": "@lucca-front/ng-internal"
+      "forcePublish": "*"
     }
   }
 }
