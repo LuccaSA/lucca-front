@@ -1,8 +1,9 @@
+$theme: () !default;
+$useCssVar: false !default;
 @import
 	"theming/utils",
 	"theming/get-set";
 
-$theme: () !default;
 
 @import
 	"theming/palettes",
@@ -21,4 +22,6 @@ $theme: () !default;
 	"commons.override",
 
 	"theming/components",
-	"components.override";
+	"components.override",
+
+	"theming/cssvars";
