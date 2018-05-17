@@ -489,3 +489,33 @@
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br>
 	<em><b>Tip:</b> Use <code class="code">&lt;div class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em>
 </section>
+
+
+<h2>Radio label</h2>
+
+<!-- Radio label -->
+<section class="contentSection">
+	<div class="radio">
+		<input class="radio-input" type="radio" name="radioListID" id="radioTextfield0" checked>
+		<label class="radio-label" for="radioTextfield0">Option</label>
+	</div>
+	<div class="radio">
+		<input class="radio-input" type="radio" name="radioListID" id="radioTextfield1" checked>
+		<label class="radio-label" for="radioTextfield1">
+			Or
+			<div class="textfield mod-radio">
+				<input class="textfield-input" id="textfieldID" type="text">
+			</div>
+		</label>
+	</div>
+</section>
+
+<code class="code mod-block">&lt;div class="radio"&gt;
+	&lt;input class="radio-input" type="radio" id="radioID"&gt;
+	&lt;label class="radio-label" for="radioID"&gt;
+		Or
+		&lt;div class="textfield mod-radio"&gt;
+			&lt;input class="textfield-input" type="text"&gt;
+		&lt;/div&gt;
+	&lt;/label&gt;
+&lt;/div&gt;</code>

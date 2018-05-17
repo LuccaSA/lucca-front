@@ -4,7 +4,11 @@
 ### New features
 ### Breaking changes
 ### Adding
+- `breadcrumb`
 ### Enhancements
+- `textfield` Supports inside radio label display
+- `textfields` / `form` Improve margin system
+- `card` Disabled status
 ### Fixes
 
 ## 0.7.0
