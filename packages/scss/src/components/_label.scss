@@ -27,7 +27,7 @@
 	// default coloring
 	@include labelColoring($default-palette);
 	// palettes coloring
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include labelColoring($palette);
 		}

@@ -46,11 +46,11 @@
 
 	// default color
 	.menu-link::after {
-		@include menuColoring(_component("menu.default-palette"));
+		@include menuColoring(_getMap("components.menu.default-palette"));
 	}
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			.menu-link::after {
 				@include menuColoring($palette);

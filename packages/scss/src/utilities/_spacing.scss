@@ -17,7 +17,7 @@
 // MARGINS & PADDINGS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-@each $name, $spacings in _theme("spacings") {
+@each $name, $spacings in _getMap("spacings") {
 
 	.u-marginBottom#{str-capitalize($name)} {
 		margin-bottom: $spacings !important;

@@ -60,13 +60,13 @@
 		@include inputWidth(_component("textfield.sizes.default"), _component("textfield.compact.label.sizes.default"));
 	}
 
-	@each $input-size-name, $input-width in _component("textfield.sizes") {
+	@each $input-size-name, $input-width in _getMap("components.textfield.sizes") {
 		&.mod-#{$input-size-name} {
 			@include inputWidth($input-width, _component("textfield.compact.label.sizes.default"));
 			.textfield-options {
 				width: $input-width;
 			}
-			@each $label-size-name, $label-width in _component("textfield.compact.label.sizes") {
+			@each $label-size-name, $label-width in _getMap("components.textfield.compact.label.sizes") {
 				&.mod-label-#{$label-size-name} {
 					@include inputWidth($input-width, $label-width);
 				}
@@ -74,7 +74,7 @@
 		}
 	}
 
-	@each $label-size-name, $label-width in _component("textfield.sizes") {
+	@each $label-size-name, $label-width in _getMap("components.textfield.sizes") {
 		&.mod-label-#{$label-size-name} {
 			.textfield-label {
 				width: $label-width;

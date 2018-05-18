@@ -12,7 +12,7 @@
 	&:hover {
 		&:not([disabled]) {
 			background: _component("actionIcon.hover.background");
-			color: darken(_color("text.default"), 25%);
+			color: _color("text.dark");
 		}
 	}
 

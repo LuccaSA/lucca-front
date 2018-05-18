@@ -1,6 +1,6 @@
 @mixin media_smaller_than($breakpoint) {
-	@if map-has-key(_theme("breakpoints"), $breakpoint) {
-		@media (max-width: #{_theme("breakpoints.#{$breakpoint}.breakAt")}) {
+	@if map-has-key(_getMap("breakpoints"), $breakpoint) {
+		@media (max-width: #{_theme("breakpoints.#{$breakpoint}.breakAt", false)}) {
 			@content;
 		}
 	}
@@ -11,8 +11,8 @@
 }
 
 @mixin media_larger_than($breakpoint) {
-	@if map-has-key(_theme("breakpoints"), $breakpoint) {
-		@media (min-width: #{_theme("breakpoints.#{$breakpoint}.breakAt")}) {
+	@if map-has-key(_getMap("breakpoints"), $breakpoint) {
+		@media (min-width: #{_theme("breakpoints.#{$breakpoint}.breakAt", false)}) {
 			@content;
 		}
 	}
@@ -23,8 +23,8 @@
 }
 
 @mixin media_between($breakpoint1, $breakpoint2) {
-	@if map-has-key(_theme("breakpoints"), $breakpoint1) and map-has-key(_theme("breakpoints"), $breakpoint2) {
-		@media (min-width: #{_theme("breakpoints.#{$breakpoint1}.breakAt")}) and (max-width: #{_theme("breakpoints.#{$breakpoint2}.breakAt")}) {
+	@if map-has-key(_getMap("breakpoints"), $breakpoint1) and map-has-key(_getMap("breakpoints"), $breakpoint2) {
+		@media (min-width: #{_theme("breakpoints.#{$breakpoint1}.breakAt", false)}) and (max-width: #{_theme("breakpoints.#{$breakpoint2}.breakAt", false)}) {
 			@content;
 		}
 	}

@@ -30,7 +30,7 @@ $commons: (
 		"radius": 3px,
 	),
 	"font": (
-		"family": '"Source Sans Pro", Tahoma, sans-serif',
+		"family": unquote('"Source Sans Pro", Tahoma, sans-serif'),
 		"size": 16px,
 	),
 	"elevations": (
