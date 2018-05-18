@@ -9,7 +9,7 @@
 }
 
 .card-content {
-	padding: _theme("component.card.content.padding");
+	padding: _component("card.content.padding");
 }
 
 .card-footer {
@@ -17,7 +17,7 @@
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 	min-height: 3rem;
-	padding: _theme("component.card.footer.padding");
+	padding: _component("card.footer.padding");
 }
 
 .card-footer-right {

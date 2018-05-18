@@ -25,9 +25,9 @@
 		height: _component("switch.input.size");
 		left: 0;
 		position: absolute;
-		top: _component("switch.input.handler.size") - _component("switch.input.size");
+		top: calc( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")});
 		transition: all 150ms ease;
-		width: calc(_component("switch.input.size") * 2);
+		width: calc(#{_component("switch.input.size")} * 2);
 	}
 
 	&::after {
@@ -37,9 +37,9 @@
 		content: "";
 		display: block;
 		height: _component("switch.input.handler.size");
-		left: - ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
+		left: calc(-1 * ( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")} ) / 2);
 		position: absolute;
-		top: ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
+		top: calc(( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")} ) / 2);
 		transition: all 150ms ease;
 		width: _component("switch.input.handler.size");
 	}
@@ -102,11 +102,11 @@
 		.switch-input:checked {
 			~ .switch-label {
 				&::before {
-					background: _get($palette, "lighter");
+					background: _color($palette, "lighter");
 				}
 
 				&::after {
-					background: _get($palette, "color");
+					background: _color($palette);
 				}
 			}
 
@@ -114,11 +114,11 @@
 			&[disabled], &[readonly] {
 				~ .switch-label {
 					&::before {
-						background: _get($palette, "lighter");
+						background: _color($palette, "lighter");
 					}
 
 					&::after {
-						background: _get($palette, "lighter");
+						background: _color($palette, "lighter");
 					}
 				}
 			}
@@ -126,12 +126,12 @@
 	}
 
 	// default color
-	@include switchColoring(_getMap("components.switch.default-palette"));
+	@include switchColoring("switch.default-palette");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include switchColoring($palette);
+			@include switchColoring($name);
 		}
 	}
 }

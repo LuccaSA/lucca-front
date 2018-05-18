@@ -1,9 +1,9 @@
 .table {
-	border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	border-spacing: 0;
 	display: table;
-	font-size: _theme("component.table.font-size");
-	line-height: _theme("component.table.line-height");
+	font-size: _component("table.font-size");
+	line-height: _component("table.line-height");
 	text-align: left;
 	width: 100%;
 }
@@ -20,7 +20,7 @@
 .table-head-row-cell {
 	display: table-cell;
 	font-weight: 600;
-	padding: _theme("component.table.padding");
+	padding: _component("table.padding");
 }
 
 
@@ -35,7 +35,7 @@
 .table-body-row-cell {
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table-cell;
-	padding: _theme("component.table.padding");
+	padding: _component("table.padding");
 }
 
 // MODS
@@ -50,7 +50,7 @@
 	&.mod-zebra {
 		.table-body {
 			tr:nth-child(odd) {
-				background-color: _theme("component.table.zebra.background");
+				background-color: _component("table.zebra.background");
 			}
 		}
 	}
@@ -62,7 +62,7 @@
 			transition: all _theme("commons.animations.durations.fast") ease;
 
 			&:hover {
-				background: _theme("component.table.hover.background");
+				background: _component("table.hover.background");
 			}
 		}
 	}
@@ -78,18 +78,18 @@
 
 		.table-head-row-cell {
 			&:first-child {
-				padding-left: _theme("component.table.card.padding");
+				padding-left: _component("table.card.padding");
 			}
 			&:last-child {
-				padding-right: _theme("component.table.card.padding");
+				padding-right: _component("table.card.padding");
 			}
 		}
 		.table-body-row-cell {
 			&:first-child {
-				padding-left: _theme("component.table.card.padding");
+				padding-left: _component("table.card.padding");
 			}
 			&:last-child {
-				padding-right: _theme("component.table.card.padding");
+				padding-right: _component("table.card.padding");
 			}
 		}
 	}

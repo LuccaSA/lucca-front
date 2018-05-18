@@ -41,19 +41,19 @@
 
 .menu {
 	@mixin menuColoring($palette) {
-		background: _get($palette, "color");
+		background: _color($palette);
 	}
 
 	// default color
 	.menu-link::after {
-		@include menuColoring(_getMap("components.menu.default-palette"));
+		@include menuColoring("menu.default-palette");
 	}
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			.menu-link::after {
-				@include menuColoring($palette);
+				@include menuColoring($name);
 			}
 		}
 	}

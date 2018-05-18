@@ -52,10 +52,10 @@
 	@mixin inputColoring($palette) {
 		.textfield-input {
 			&:focus, &.is-focused {
-				box-shadow: 0 2px 0 0 _get($palette, "color");
+				box-shadow: 0 2px 0 0 _color($palette);
 
 				~ .textfield-label {
-					color: _get($palette, "color");
+					color: _color($palette);
 				}
 			}
 		}
@@ -63,18 +63,18 @@
 		// Needed when textfield label is not next to the textfield-input
 		&.is-focused {
 			.textfield-label {
-				color: _get($palette, "color");
+				color: _color($palette);
 			}
 		}
 	}
 
 	// default color
-	@include inputColoring(_getMap("components.textfield.material.default-palette"));
+	@include inputColoring("textfield.material.default-palette");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include inputColoring($palette);
+			@include inputColoring($name);
 		}
 	}
 

@@ -17,8 +17,8 @@
 h1 {
 	&.mod-headline {
 		~ .titleSection-sub {
-			font-size: calc(_theme("sizes.standard.font-size") * 1.3);
-			line-height: calc(_theme("sizes.standard.line-height") * 1.3);
+			font-size: calc(#{_theme("sizes.standard.font-size")} * 1.3);
+			line-height: calc(#{_theme("sizes.standard.line-height")} * 1.3);
 			margin: .2rem 0 0;
 		}
 	}
