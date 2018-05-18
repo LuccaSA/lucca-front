@@ -19,6 +19,7 @@ import {
 	LuSelectOptionSelectionChange,
 	LuSelectSearchIntl,
 } from '../../../../../src/app/select/';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -111,4 +112,12 @@ export class DemoSelectFeederPickerComponent extends ASelectOptionFeeder<any>
 	 * See ISelectOptionFeeder
 	 */
 	open(): void {}
+
+	length(): number {
+		return this.options.length;
+	}
+
+	getAllEntities(): Observable<any[]> {
+		return Observable.of(this.options);
+	}
 }

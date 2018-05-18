@@ -8,10 +8,12 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DemoCustomApiSelectFeeder extends AApiSelectFeederWithPaging<any>
-	implements IApiSelectFeederWithPaging<any> {
+implements IApiSelectFeederWithPaging<any> {
+	private totalCountItems = 0;
 	constructor(protected _http: HttpClient) {
 		super();
 	}
+
 	getPagedItems(
 		clue: string,
 		pagingStart: number,
@@ -24,6 +26,7 @@ export class DemoCustomApiSelectFeeder extends AApiSelectFeederWithPaging<any>
 				label: `Item ${clue} ${i}`,
 			});
 		}
+		this.totalCountItems += pagingStep;
 
 		return this._http
 			.get(
@@ -40,5 +43,13 @@ export class DemoCustomApiSelectFeeder extends AApiSelectFeederWithPaging<any>
 
 	textValue(item: any): string {
 		return item.label;
+	}
+
+	length(): number {
+		return this.totalCountItems;
+	}
+
+	getAllEntities(): Observable<any[]> {
+		return Observable.of([]);
 	}
 }

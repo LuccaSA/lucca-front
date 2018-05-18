@@ -16,6 +16,7 @@ export class DemoSimpleSelectComponent implements OnInit {
 		{ id: 4, name: 'blue' },
 	];
 	itemSelect = { id: 1, name: 'red' };
+	itemSelectMultiple = [{ id: 1, name: 'red' }];
 
 	lotOfOptions = [];
 	itemLotOfOptionsSelect = { id: 1, name: 'option 1' };
