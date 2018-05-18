@@ -1,10 +1,10 @@
-@import '~@lucca-front/scss/src/_theming';
+@import 'theming';
 @import '~@lucca-front/icons/src/_mixins';
 
 .select-clear {
 	position: absolute;
 	bottom: 0.45rem;
-	right: 2.75 * _component('textfield.input.padding-horizontal');
+	right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
 	padding: 0;
 	width: 1rem;
 	height: 1rem;
@@ -28,13 +28,13 @@
 
 :host-context(.textfield.mod-material) {
 	.select-clear {
-		right: 2 * _component('textfield.input.padding-horizontal');
+		right: calc(2 * #{_component('textfield.input.padding-horizontal')});
 	}
 }
 
 :host-context(.textfield.mod-framed) {
 	.select-clear {
 		bottom: 0.85rem;
-		right: 3.75 * _component('textfield.input.padding-horizontal');
+		right: calc(3.75 * #{_component('textfield.input.padding-horizontal')});
 	}
 }

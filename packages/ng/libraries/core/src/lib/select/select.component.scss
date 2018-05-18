@@ -1,4 +1,4 @@
-@import '~@lucca-front/scss/src/_theming';
+@import 'theming';
 @import '~@lucca-front/icons/src/_mixins';
 
 :host {
@@ -43,7 +43,7 @@
 	padding: _component('textfield.framed.top-padding') 0 0;
 
 	.select-value {
-		padding: 0 _component('textfield.framed.side-padding') * 3
+		padding: 0 calc(#{_component('textfield.framed.side-padding')} * 3)
 			_component('textfield.framed.bottom-padding')
 			_component('textfield.framed.side-padding');
 	}

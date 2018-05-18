@@ -1,5 +1,4 @@
-@import '~@lucca-front/scss/src/_theming';
-@import 'theme/user-picture.theme';
+@import 'theming';
 :host {
 	.picture {
 		border-radius: 100%;
@@ -19,11 +18,11 @@
 			transform: translate(-50%, -50%);
 		}
 	}
-	@each $name, $size in _component('user-picture.sizes') {
+	@each $name, $size in _getMap('components.user-picture.sizes') {
 		&.mod-#{$name} .picture {
-			font-size: _get($size, 'font-size');
-			height: _get($size, 'image-size');
-			width: _get($size, 'image-size');
+			font-size: _component('user-picture.sizes.'+$name+'.font-size');
+			height: _component('user-picture.sizes.'+$name+'.image-size');
+			width: _component('user-picture.sizes.'+$name+'.image-size');
 		}
 	}
 }

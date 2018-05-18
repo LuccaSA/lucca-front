@@ -9,4 +9,3 @@ $navSide: (
 );
 
 $theme: _set($theme, 'components.navSide', $navSide);
-@warn 'overriding navside'
