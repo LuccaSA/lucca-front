@@ -25,7 +25,7 @@
 		height: _component("switch.input.size");
 		left: 0;
 		position: absolute;
-		top: calc( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")});
+		top: calc(#{_component("switch.input.handler.size")} - #{_component("switch.input.size")});
 		transition: all 150ms ease;
 		width: calc(#{_component("switch.input.size")} * 2);
 	}
