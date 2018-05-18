@@ -52,7 +52,7 @@ gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 });
 
 gulp.task('sass:debug', () => {
-	return gulp.src('./src/main.scss')
+	return gulp.src(['./src/main.cssvar.scss'])
 	.pipe(sass(SASS_OPTIONS_DEBUG).on('error', sass.logError))
 	.pipe(rename('lucca-front.css'))
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
@@ -61,7 +61,7 @@ gulp.task('sass:debug', () => {
 });
 
 gulp.task('sass:dist', () => {
-	return gulp.src('./src/main.scss')
+	return gulp.src('./src/main.cssvar.scss')
 	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
 	.pipe(rename('lucca-front.css'))
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
