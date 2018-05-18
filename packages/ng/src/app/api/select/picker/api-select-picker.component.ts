@@ -160,4 +160,12 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 	_selectOption(option: LuSelectOptionSelectionChange<T>) {
 		this._callbackSelectOption(option.source);
 	}
+
+	length(): number {
+		return this.selectApiFeeder.length();
+	}
+
+	getAllEntities(): Observable<T[]> {
+		return this.selectApiFeeder.getAllEntities();
+	}
 }

@@ -11,6 +11,7 @@ import {
 	OnDestroy,
 	QueryList,
 } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -165,5 +166,13 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 	textValue(item: T): string {
 		const value = findOption(this.luOptions.toArray(), item);
 		return value ? value.viewValue : '';
+	}
+
+	length(): number {
+		return this._originalList.length;
+	}
+
+	getAllEntities(): Observable<T[]> {
+		return Observable.of(this._originalList.map(luOption => luOption.luOptionValue));
 	}
 }

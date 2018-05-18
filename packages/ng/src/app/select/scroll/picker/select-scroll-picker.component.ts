@@ -141,4 +141,6 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 	 * See ISelectScrollable
 	 */
 	abstract loadMoreOptions(): Observable<T[]>;
+
+	abstract length(): number;
 }

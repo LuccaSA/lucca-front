@@ -1,4 +1,5 @@
 import { LuSelectOption } from '../';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Interface to implement when you want to create your own feeder of options fot the select
@@ -44,6 +45,10 @@ export interface ISelectOptionFeeder<T> {
 	 * @param item The item to display
 	 */
 	textValue(item: T): string;
+
+	length(): number;
+
+	getAllEntities(): Observable<T[]>;
 }
 
 /**
@@ -98,4 +103,8 @@ export abstract class ASelectOptionFeeder<T> implements ISelectOptionFeeder<T> {
 	 * See ISelectOptionFeeder
 	 */
 	abstract textValue(item: T): string;
+
+	abstract length(): number;
+
+	abstract getAllEntities(): Observable<T[]>;
 }

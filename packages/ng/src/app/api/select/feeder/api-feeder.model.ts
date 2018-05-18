@@ -22,6 +22,10 @@ export interface IApiSelectFeeder<T> {
 	 * Return true if the api as a paging mecanism => then it will be cast to ISelectApiFeederWithPaging
 	 */
 	isPaged(): boolean;
+
+	length(): number;
+
+	getAllEntities(): Observable<T[]>;
 }
 
 /**
@@ -109,4 +113,8 @@ export abstract class AApiSelectFeederWithPaging<T>
 		pagingStart: number,
 		pagingStep: number,
 	): Observable<T[]>;
+
+	abstract length(): number;
+
+	abstract getAllEntities(): Observable<T[]>;
 }

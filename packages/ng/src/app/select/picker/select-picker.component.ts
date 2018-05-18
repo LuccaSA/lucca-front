@@ -74,7 +74,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 	private _highlightedOption: T;
 	/** Observable for highlight mecanism */
 	private _highlightedOptionSub: Subscription;
-	private _selectOptionValue: T;
+	private _selectOptionValue: T | T[];
 
 	/** emits when the user selects an element */
 	@Output() itemSelected = new EventEmitter<LuSelectOption<T>>();
@@ -193,7 +193,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 	 * This method will fire an event of itemSelected
 	 * @param option : the option should be in the list of options of the popover
 	 */
-	selectOption(option: T): void {
+	selectOption(option: T | T[]): void {
 		this._selectOptionValue = option;
 		const selectOptions = this.luOptions$.getValue();
 		this._selectWithoutEmit(option);
@@ -211,14 +211,17 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 		return this.luOptions$.getValue();
 	}
 
-	private _selectWithoutEmit(option: T): void {
+	private _selectWithoutEmit(option: T | T[]): void {
 		const selectOptions = this.luOptions$.getValue();
-		if (!selectOptions || selectOptions.length === 0) {
+		if (!selectOptions
+			|| selectOptions.length === 0
+			|| !option
+			|| (Array.isArray(option) && (<T[]>option).length === 0)) {
 			return;
 		}
 
 		this._highlightIndex = selectOptions.findIndex(selectOption => {
-			return sameOption(selectOption.luOptionValue, option);
+			return sameOption(selectOption.luOptionValue, Array.isArray(option) ? (<T[]>option)[0] : option);
 		});
 
 		this._highlightIndex$.next(this._highlightIndex);
