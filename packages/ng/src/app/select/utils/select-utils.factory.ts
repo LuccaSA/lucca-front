@@ -32,3 +32,40 @@ export function findOption<T>(
 		sameOption(selectOption.luOptionValue, option),
 	);
 }
+
+/**
+ * Search an option in the list of options of the popover
+ * @param optionsToFind the options to find
+ * @returns an observable of the LuSelectOption find
+ */
+export function findArrayOption<T>(
+	optionArray: LuSelectOption<T>[],
+	optionsToFind: T[],
+): LuSelectOption<T>[] {
+
+	// Hash string method to avoid to many operations
+	const hash = function(text: string): string {
+		return text.split('').reduce(function(a: any, b: any) {
+			// tslint:disable-next-line:no-bitwise
+			a = (( a << 5) - a ) + b.charCodeAt(0);
+			// tslint:disable-next-line:no-bitwise
+			return a & a;
+		}, 0);
+	};
+
+	const optionsInputHashCode = [];
+	optionsToFind.forEach(option => {
+		optionsInputHashCode.push(hash(JSON.stringify(option)));
+	});
+	const filterArray: LuSelectOption<T>[] = [];
+	optionArray.forEach(luOption => {
+		const hashOfOption = hash(JSON.stringify(luOption.luOptionValue));
+		if (optionsInputHashCode.indexOf(hashOfOption) !== -1) {
+			filterArray.push(luOption);
+		}
+	});
+
+	return filterArray;
+}
+
+
