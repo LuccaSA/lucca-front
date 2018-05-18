@@ -7,6 +7,8 @@ $useCssVar: true;
 @import 'dist/style/main';
 @import 'dist/material/style/main';
 @import 'dist/formly/style/main';
+@import '~@lucca-front/scss/src/theming.overridable';
+
 
 
 .demo-box {
@@ -15,3 +17,4 @@ $useCssVar: true;
 	justify-content: center;
 	align-items: center;
 }
+@import '~@lucca-front/scss/src/theming/cssvars';
