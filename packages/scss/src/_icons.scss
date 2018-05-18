@@ -1,4 +1,4 @@
-$font-path: _theme("icons.font-path");
+$font-path: _theme("icons.font-path", false);
 @import "node_modules/@lucca-front/icons/src/main";
 @import "node_modules/@lucca-front/icons/src/mixins";
 
@@ -8,7 +8,7 @@ $font-path: _theme("icons.font-path");
 
 	// Sizing mixin
 	@mixin iconSizing($size) {
-		font-size: calc(_get($size, "font-size") * 1.25);
+		font-size: calc(#{_get($size, "font-size")} * 1.25);
 	}
 
 	// all sizes

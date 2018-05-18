@@ -64,24 +64,24 @@
 	@mixin radioColoring($palette) {
 		.radio-input:checked ~ .radio-label {
 			&::before {
-				box-shadow: inset 0 0 0 2px _get($palette, "color");
+				box-shadow: inset 0 0 0 2px _color($palette);
 			}
 		}
 
 		.radio-label {
 			&::after {
-				background: _get($palette, "color");
+				background: _color($palette);
 			}
 		}
 	}
 
 	// default color
-	@include radioColoring(_getMap("components.radio.default-palette"));
+	@include radioColoring("radio.default-palette");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include radioColoring($palette);
+			@include radioColoring($name);
 		}
 	}
 }

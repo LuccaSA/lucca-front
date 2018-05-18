@@ -20,34 +20,34 @@
 @each $name, $spacings in _getMap("spacings") {
 
 	.u-marginBottom#{str-capitalize($name)} {
-		margin-bottom: $spacings !important;
+		margin-bottom: _theme("spacings."+$name) !important;
 	}
 
 	.u-marginTop#{str-capitalize($name)} {
-		margin-top: $spacings !important;
+		margin-top: _theme("spacings."+$name) !important;
 	}
 
 	.u-marginLeft#{str-capitalize($name)} {
-		margin-left: $spacings !important;
+		margin-left: _theme("spacings."+$name) !important;
 	}
 
 	.u-marginRight#{str-capitalize($name)} {
-		margin-right: $spacings !important;
+		margin-right: _theme("spacings."+$name) !important;
 	}
 
 	.u-paddingBottom#{str-capitalize($name)} {
-		padding-bottom: $spacings !important;
+		padding-bottom: _theme("spacings."+$name) !important;
 	}
 
 	.u-paddingTop#{str-capitalize($name)} {
-		padding-top: $spacings !important;
+		padding-top: _theme("spacings."+$name) !important;
 	}
 
 	.u-paddingLeft#{str-capitalize($name)} {
-		padding-left: $spacings !important;
+		padding-left: _theme("spacings."+$name) !important;
 	}
 
 	.u-paddingRight#{str-capitalize($name)} {
-		padding-right: $spacings !important;
+		padding-right: _theme("spacings."+$name) !important;
 	}
 }

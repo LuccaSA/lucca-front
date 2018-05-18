@@ -16,7 +16,7 @@
 	}
 
 	@if $cssvar {
-		@return var(#{_getCSSVarName($keys)}, #{$result});
+		@return var(#{_getCSSVarName($keys)});
 	}
 	@return $result;
 }
@@ -74,6 +74,11 @@
 	}
 	// try to find color associated with same palette
 	$result: _safeGet($theme, "palettes." + $keys + "." + $type, $cssvar);
+	@if $result {
+		@return $result;
+	}
+		// try to find it in components
+	$result: _safeGet($theme, "components." + $keys + "." + $type, $cssvar);
 	@if $result {
 		@return $result;
 	}

@@ -4,12 +4,12 @@
 	max-width: _component("container.max-width");
 
 	@each $bp-name, $bp-obj in $breakpoints {
-		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			width: map-get($bp-obj, breakAt) -  map-get($bp-obj, spacing);
+		@include media_larger_than($bp-name) {
+			width: #{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)};
 		}
 	}
 
-	@media (max-width: _component("container.min-width")) {
+	@media (max-width: _component("container.min-width", false)) {
 		width: 100%;
 	}
 
@@ -38,13 +38,13 @@
 .navSide ~ .main-content {
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
-			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			@include media_larger_than($bp-name) {
 				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.width")});
 			}
 		}
 
-		@media (max-width: _theme("breakpoints.sm.breakAt")) {
-			width: calc(100% - _theme("components.navSide.width"));
+		@include media_smaller_than("sm") {
+			width: calc(100% - #{_theme("components.navSide.width")});
 		}
 	}
 }
@@ -52,12 +52,12 @@
 .navSide.mod-compact ~ .main-content {
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
-			@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			@include media_larger_than($bp-name) {
 				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.compact.width")});
 			}
 		}
 
-		@media (max-width: _theme("breakpoints.sm.breakAt")) {
+		@include media_smaller_than("sm") {
 			width: calc(100% - _theme("components.navSide.compact.width"));
 		}
 	}
