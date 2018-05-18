@@ -7,6 +7,8 @@ let styleLint = require('gulp-stylelint');
 let clean = require('gulp-clean');
 let rename = require('gulp-rename');
 let browserSync = require('browser-sync').create();
+let postcss = require('gulp-postcss');
+let postCSSCustomProperties = require('postcss-custom-properties');
 
 const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
@@ -65,6 +67,13 @@ gulp.task('sass:dist', () => {
 	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
 	.pipe(rename('lucca-front.css'))
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
+	.pipe(
+		postcss([
+			postCSSCustomProperties({
+				strict: true
+			})
+		])
+	)
 	.pipe(gulp.dest(OUT_DIR));
 });
 

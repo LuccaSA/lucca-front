@@ -41,6 +41,8 @@
     "@lucca-front/icons": "^0.7.0"
   },
   "dependencies": {
-    "@lucca-front/icons": "^0.7.0"
+    "@lucca-front/icons": "^0.7.0",
+    "gulp-postcss": "^7.0.1",
+    "postcss-custom-properties": "^7.0.0"
   }
 }
