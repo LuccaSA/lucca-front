@@ -13,7 +13,7 @@
 	}
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
 			@include tooltipColoring($palette);
 		}
