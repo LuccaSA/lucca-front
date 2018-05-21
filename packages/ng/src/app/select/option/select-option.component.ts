@@ -42,6 +42,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 
 	set multiple(multiple: boolean) {
 		this._multiple = multiple;
+		this._changeDetector.markForCheck();
 	}
 
 	/**
@@ -78,6 +79,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 
 	set checked(checked: boolean) {
 		this._checked = checked;
+		this._changeDetector.markForCheck();
 	}
 
 	/**

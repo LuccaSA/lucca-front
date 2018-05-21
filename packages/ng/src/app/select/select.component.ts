@@ -116,6 +116,9 @@ export class LuSelect<T>
 			}
 			// Else we take the value offer by the clearer
 			valueTemp = this.clearer.clearValue();
+			if (this.multiple) {
+				valueTemp = valueTemp ? [valueTemp] : [];
+			}
 		}
 		const lastValue = this._value;
 		this._value = valueTemp;
@@ -172,33 +175,6 @@ export class LuSelect<T>
 	_partialSelectAll = false;
 	_selectAllLabel = '';
 
-	_selectAllItems(): void {
-		this.selectAll = !this.selectAll;
-		this._partialSelectAll = false;
-		this._picker.luSelectOptions().map(luOption =>  luOption.checked = this.selectAll);
-		const selectedValues = <T[]>this.value;
-		selectedValues.length = 0;
-		if (!this.selectAll) {
-			this.value = selectedValues;
-			this._changeDetectorRef.markForCheck();
-			return;
-		}
-
-		if (!this._optionFeeder) {
-			selectedValues.push(...this._picker.luSelectOptions().map(luOption => luOption.luOptionValue));
-			this.value = selectedValues;
-			this._changeDetectorRef.markForCheck();
-			return;
-		}
-
-		// We delegate the select all behaviour to the option feeder
-		this._optionFeeder.getAllEntities().subscribe((options: T[]) => {
-			selectedValues.push(...options);
-			this.value = selectedValues;
-			this._changeDetectorRef.markForCheck();
-		});
-
-	}
 	/**
 	 * Reference of the clearer
 	 */
@@ -295,7 +271,16 @@ export class LuSelect<T>
 				let first = true;
 				this.clearer.subscribe((value: T) => {
 					if (!first && this.value) {
-						this.value = value;
+						if (this.multiple) {
+							// We update the state of checked items
+							const tempValue = value ? [value] : [];
+							this.luOptions.map(luOption => luOption.checked = false);
+							findArrayOption(this.luOptions.toArray(), <T[]>tempValue).map(luOption => luOption.checked = true);
+							this.value =  tempValue;
+							this._selectAll = (<T[]>this.value).length > 0;
+						} else {
+							this.value = value;
+						}
 					}
 					if (first) {
 						first = false;
@@ -370,7 +355,7 @@ export class LuSelect<T>
 	 */
 	_optionSelected(option: LuSelectOption<T>): void {
 		if (this.multiple) {
-			const selectedValues = (<T[]>this.value);
+			const selectedValues = [...(<T[]>this.value)];
 			if (option.checked) {
 				// We have to check that the value wasn't already selected
 				if (!selectedValues.find(value => sameOption(value, option.luOptionValue))) {
@@ -394,6 +379,31 @@ export class LuSelect<T>
 		}
 
 		this.value = option ? option.luOptionValue : null;
+	}
+
+	_selectAllItems(): void {
+		this.selectAll = !this.selectAll;
+		this._partialSelectAll = false;
+		this._picker.luSelectOptions().map(luOption =>  luOption.checked = this.selectAll);
+		const selectedValues = [...<T[]>this.value];
+		selectedValues.length = 0;
+		if (!this.selectAll) {
+			this.value = selectedValues;
+			return;
+		}
+
+		if (!this._optionFeeder) {
+			selectedValues.push(...this._picker.luSelectOptions().map(luOption => luOption.luOptionValue));
+			this.value = selectedValues;
+			return;
+		}
+
+		// We delegate the select all behaviour to the option feeder
+		this._optionFeeder.getAllEntities().subscribe((options: T[]) => {
+			selectedValues.push(...options);
+			this.value = selectedValues;
+		});
+
 	}
 
 	// render/display
@@ -437,7 +447,17 @@ export class LuSelect<T>
 			case DELETE:
 			case BACKSPACE:
 				if (this.clearer) {
-					this.value = this.clearer.clearValue();
+					const clearValue = this.clearer.clearValue();
+					if (this.multiple) {
+						const tempValue = clearValue ? [clearValue] : [];
+						this.luOptions.map(luOption => luOption.checked = false);
+						findArrayOption(this.luOptions.toArray(), <T[]>tempValue).map(luOption => luOption.checked = true);
+						this._selectAll = (<T[]>tempValue).length > 0;
+						this.value = tempValue;
+						// We update the state of check items
+					} else {
+						this.value = clearValue;
+					}
 				}
 				break;
 			case HOME:
@@ -508,6 +528,7 @@ export class LuSelect<T>
 			: this.placeholder ? this.placeholder : '';
 	}
 	private _emitClearable() {
-		this.canRemove(this.clearer && !!this.value);
+		this.canRemove(this.clearer
+			&& this.multiple ? (!!this.value && (<T[]>this.value).length !== 0) : !!this.value);
 	}
 }

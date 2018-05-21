@@ -214,9 +214,7 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 	private _selectWithoutEmit(option: T | T[]): void {
 		const selectOptions = this.luOptions$.getValue();
 		if (!selectOptions
-			|| selectOptions.length === 0
-			|| !option
-			|| (Array.isArray(option) && (<T[]>option).length === 0)) {
+			|| selectOptions.length === 0) {
 			return;
 		}
 

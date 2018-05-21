@@ -54,16 +54,18 @@ export function findArrayOption<T>(
 	};
 
 	const optionsInputHashCode = [];
-	optionsToFind.forEach(option => {
-		optionsInputHashCode.push(hash(JSON.stringify(option)));
-	});
+	if (optionsToFind && optionsToFind.length > 0) {
+		optionsToFind.forEach(option => {
+			optionsInputHashCode.push(hash(JSON.stringify(option)));
+		});
+	}
 	const filterArray: LuSelectOption<T>[] = [];
-	optionArray.forEach(luOption => {
-		const hashOfOption = hash(JSON.stringify(luOption.luOptionValue));
-		if (optionsInputHashCode.indexOf(hashOfOption) !== -1) {
-			filterArray.push(luOption);
-		}
-	});
+		optionArray.forEach(luOption => {
+			const hashOfOption = hash(JSON.stringify(luOption.luOptionValue));
+			if (optionsInputHashCode.indexOf(hashOfOption) !== -1) {
+				filterArray.push(luOption);
+			}
+		});
 
 	return filterArray;
 }
