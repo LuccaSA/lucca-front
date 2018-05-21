@@ -14,6 +14,7 @@ export class LuSelectIntl {
 	readonly changes: Subject<void> = new Subject<void>();
 
 	/** A label for empty. */
+	selectAllLabel: string = 'Select all';
 	noLabel: string = 'None';
 	allLabel: string = 'All';
 	allTypeLabel: string = 'the entities';

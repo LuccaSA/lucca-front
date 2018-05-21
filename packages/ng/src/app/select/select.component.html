@@ -11,7 +11,7 @@
 				[ngClass]="{'is-incomplete': _partialSelectAll}"
 				[checked]="_selectAll">
 			<div class="checkbox-label" for="selectAllID">
-				Selectionner tout
+				{{_selectAllLabel}}
 			</div>
 		</div>
 		<ng-content select="[luOptionValue],[luOptionFeeder]"></ng-content>

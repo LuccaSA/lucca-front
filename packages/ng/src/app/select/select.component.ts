@@ -170,6 +170,7 @@ export class LuSelect<T>
 		return this._selectAll;
 	}
 	_partialSelectAll = false;
+	_selectAllLabel = '';
 
 	_selectAllItems(): void {
 		this.selectAll = !this.selectAll;
@@ -241,9 +242,12 @@ export class LuSelect<T>
 		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
-		this._intlChanges = _intl.changes.subscribe(() =>
-		this._changeDetectorRef.markForCheck(),
-	);
+		this._selectAllLabel = this._intl.selectAllLabel;
+		this._intlChanges = _intl.changes.subscribe(() => {
+			this._changeDetectorRef.markForCheck();
+			this._selectAllLabel = this._intl.selectAllLabel;
+			}
+		);
 	}
 
 	// Life Cycle methods
