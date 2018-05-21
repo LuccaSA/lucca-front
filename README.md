@@ -86,7 +86,7 @@ In your override folder, you can create different files for different needs :
 * [icons.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_icons.scss)
 
    Contains a map of with the prefix (class) used for the icons and the path to the icon file (without its extension).
-* [palette.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_palettes.scss)
+* [palettes.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_palettes.scss)
 
    Contains a map of the color themes (palette) used in the framework. Palette must have a `color` key but can be extended to as many keys as you need.
 
