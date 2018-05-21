@@ -10,7 +10,6 @@ import { ISelectClearer } from './select-clearer.model';
 	selector: 'lu-select-clearer',
 	templateUrl: 'select-clearer.component.html',
 	styleUrls: ['select-clearer.component.scss'],
-	moduleId: module.id,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luSelectClearer',
 })

@@ -3,6 +3,7 @@
 ## In Dev
 ### New features
 ### Fixes
+- Remove `module.id` from declaration of `select-clearer` and `rdd-feeder`
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies
