@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 export class DemoCustomApiSelectFeeder extends AApiSelectFeederWithPaging<any>
 implements IApiSelectFeederWithPaging<any> {
 	private totalCountItems = 0;
+	private totalItems = [];
 	constructor(protected _http: HttpClient) {
 		super();
 	}
@@ -19,6 +20,9 @@ implements IApiSelectFeederWithPaging<any> {
 		pagingStart: number,
 		pagingStep: number,
 	): Observable<any[]> {
+		if (pagingStart === 0 ) {
+			this.totalItems = [];
+		}
 		const values = [];
 		for (let i = pagingStart; i < pagingStart + pagingStep; i++) {
 			values.push({
@@ -34,7 +38,11 @@ implements IApiSelectFeederWithPaging<any> {
 					JSON.stringify(values),
 				)}`,
 			)
-			.map(response => JSON.parse(decodeURIComponent((<any>response).values)));
+			.map(response => {
+				const items = JSON.parse(decodeURIComponent((<any>response).values));
+				this.totalItems.push(...items);
+				return items;
+			});
 	}
 
 	getPagingStep(): number {
@@ -50,6 +58,6 @@ implements IApiSelectFeederWithPaging<any> {
 	}
 
 	getAllEntities(): Observable<any[]> {
-		return Observable.of([]);
+		return Observable.of(this.totalItems);
 	}
 }
