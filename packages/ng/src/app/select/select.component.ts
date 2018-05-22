@@ -411,7 +411,7 @@ export class LuSelect<T>
 		this._elementRef.nativeElement.value = this.display(value);
 	}
 	protected display(value: LuSelectOption<T> | LuSelectOption<T>[] | null): string {
-		if (!value) {
+		if (!value && !this._optionFeeder) {
 			return '';
 		}
 
