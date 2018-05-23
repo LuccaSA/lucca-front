@@ -1,6 +1,6 @@
 .breadcrumb {
 
-	&:before {
+	&::before {
 		@include makeIcon("arrow_west");
 		font-size: .75rem;
 		color: _color("text.light");
@@ -17,13 +17,11 @@
 	}
 
 	&:not(:first-child) {
-		&:before {
-			content: '/';
-			text-decoration: underline;
+		&::before {
+			content: "/";
 			color: _color("text.placeholder");
 			display: inline-block;
 			margin: 0 .25rem;
-			text-decoration: none;
 		}
 	}
 }

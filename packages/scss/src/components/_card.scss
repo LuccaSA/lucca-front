@@ -50,7 +50,7 @@
 
 .card {
 	&.is-disabled {
-		background-color: _theme('commons.background.darker');
+		background-color: _theme("commons.background.darker");
 		color: _color("text.light");
 
 		h1, h2, h3 {
