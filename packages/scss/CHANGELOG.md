@@ -5,6 +5,7 @@
 ### Breaking changes
 ### Adding
 ### Enhancements
+- `loading` Inverted colors
 ### Fixes
 
 ## 0.7.1
