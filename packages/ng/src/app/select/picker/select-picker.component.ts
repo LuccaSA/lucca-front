@@ -231,6 +231,10 @@ export class LuSelectPicker<T> extends LuPopoverComponent
 	}
 	/** Call when the key "Enter" is hit */
 	onEnterKeydown(): void {
+		const selectOptions = this.luOptions$.getValue();
+		const luSelectOption = selectOptions[this._highlightIndex];
+		luSelectOption.checked = !luSelectOption.checked;
+		this._changeDetector.markForCheck();
 		this.selectOption(this._highlightedOption);
 	}
 	/**
