@@ -1,7 +1,0 @@
-<input matInput [matAutocomplete]="auto" [formControl]="searchControl" luEmpty class="textfield-input" [formlyAttributes]="field" (focus)="focus()" (blur)="blur()">
-<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="select($event)">
-	<mat-option *ngFor="let option of (options$ | async)" [value]="option">
-		<span>{{ option.name }}</span>
-	</mat-option>
-</mat-autocomplete>
-<label [attr.for]="id" class="textfield-label">{{ to.label }}</label>
