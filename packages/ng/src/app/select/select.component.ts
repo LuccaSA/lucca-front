@@ -138,7 +138,7 @@ export class LuSelect<T>
 
 		// We check the option if multiple
 		if (this.multiple) {
-			(<LuSelectOption<T>[]>this._selectOption).map(luOption => luOption.checked = true);
+			(<LuSelectOption<T>[]>this._selectOption).forEach(luOption => luOption.checked = true);
 		}
 		// render
 		this.render(this._selectOption);
@@ -161,10 +161,12 @@ export class LuSelect<T>
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
 
+	/** true if the select has to be a multiple select */
 	@Input() multiple = false;
 
-	private _selectAll = true;
+	private _selectAll = false;
 
+	/** true if the checkbox selectAll is select */
 	set selectAll(selectAll) {
 		this._selectAll = selectAll;
 		if (this._optionFeeder) {
@@ -176,6 +178,7 @@ export class LuSelect<T>
 	get selectAll(): boolean {
 		return this._selectAll;
 	}
+	// Partial select is use to detect when selectAll is check but when we do not select all the value
 	_partialSelectAll = false;
 	set partialSelectAll(partialSelectAll: boolean) {
 		this._partialSelectAll = partialSelectAll;
@@ -269,15 +272,19 @@ export class LuSelect<T>
 		.pipe(startWith(null), takeUntil(this._destroy$))
 			.subscribe(option => {
 				Promise.resolve().then(() => {
-					this.luOptions.map(luOption => luOption.multiple = this.multiple);
+					// We transfert to option the multiple state
+					this.luOptions.forEach(luOption => luOption.multiple = this.multiple);
+					// by default we initialize all items to check state
 					if (this.multiple) {
-						findArrayOption(this.luOptions.toArray(), <T[]>this.value).map(luOption => luOption.checked = true);
+						this.luOptions.toArray().forEach(luOption => luOption.checked = this.selectAll);
+						findArrayOption(this.luOptions.toArray(), <T[]>this.value).forEach(luOption => luOption.checked = true);
 					}
 					this._picker.resetOptions(
 						this.luOptions.toArray(),
 						this._forceChangeValue,
 					);
 					this._forceChangeValue = true;
+					this._changeDetectorRef.markForCheck();
 				});
 			});
 
@@ -289,10 +296,11 @@ export class LuSelect<T>
 						if (this.multiple) {
 							// We update the state of checked items
 							const tempValue = value ? [value] : [];
-							this.luOptions.map(luOption => luOption.checked = false);
-							findArrayOption(this.luOptions.toArray(), <T[]>tempValue).map(luOption => luOption.checked = true);
+							this.luOptions.forEach(luOption => luOption.checked = false);
+							findArrayOption(this.luOptions.toArray(), <T[]>tempValue).forEach(luOption => luOption.checked = false);
 							this.value =  tempValue;
-							this._selectAll = (<T[]>this.value).length > 0;
+							this.selectAll = false;
+							this._changeDetectorRef.markForCheck();
 						} else {
 							this.value = value;
 						}
@@ -375,6 +383,7 @@ export class LuSelect<T>
 	 * @param option : the LuSelectOption to apply
 	 */
 	_optionSelected(option: LuSelectOption<T>): void {
+		// We have to deal with multiple select in order to update the selected list
 		if (this.multiple) {
 			const selectedValues = [...(<T[]>this.value)];
 			if (option.checked) {
@@ -402,10 +411,11 @@ export class LuSelect<T>
 		this.value = option ? option.luOptionValue : null;
 	}
 
+	/** Check all the items  */
 	_selectAllItems(): void {
 		this.selectAll = !this.selectAll;
-		this._partialSelectAll = false;
-		this._picker.luSelectOptions().map(luOption =>  luOption.checked = this.selectAll);
+		this.partialSelectAll = false;
+		this._picker.luSelectOptions().forEach(luOption =>  luOption.checked = this.selectAll);
 		const selectedValues = [...<T[]>this.value];
 		selectedValues.length = 0;
 		if (!this.selectAll) {
@@ -424,6 +434,7 @@ export class LuSelect<T>
 			selectedValues.push(...options);
 			this.value = selectedValues;
 		});
+		this._changeDetectorRef.markForCheck();
 
 	}
 
@@ -471,9 +482,9 @@ export class LuSelect<T>
 					const clearValue = this.clearer.clearValue();
 					if (this.multiple) {
 						const tempValue = clearValue ? [clearValue] : [];
-						this.luOptions.map(luOption => luOption.checked = false);
-						findArrayOption(this.luOptions.toArray(), <T[]>tempValue).map(luOption => luOption.checked = true);
-						this._selectAll = (<T[]>tempValue).length > 0;
+						this.luOptions.forEach(luOption => luOption.checked = false);
+						// findArrayOption(this.luOptions.toArray(), <T[]>tempValue).map(luOption => luOption.checked = false);
+						this.selectAll = false;
 						this.value = tempValue;
 						// We update the state of check items
 					} else {
