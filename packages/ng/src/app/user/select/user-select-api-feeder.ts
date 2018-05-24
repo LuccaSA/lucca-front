@@ -49,9 +49,8 @@ export class UserSelectApiFeeder<
 			`fields=${fields.join(',')}`,
 		];
 
-		if (pagingStep !== -1) {
-			params.push(`paging=${this.pagingStart},${this.pagingSize}`);
-		}
+		const magicNumberAllUsers = 999999999;
+		params.push(`paging=${this.pagingStart},${pagingStep !== -1 ? this.pagingSize : magicNumberAllUsers}`);
 
 		const url = `${this._api}?${params.join('&')}`;
 		return this._http.get<{ data: { count: number, items: T[] } }>(url).map(r => {
