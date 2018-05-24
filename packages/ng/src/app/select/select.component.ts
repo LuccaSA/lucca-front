@@ -276,7 +276,6 @@ export class LuSelect<T>
 					this.luOptions.forEach(luOption => luOption.multiple = this.multiple);
 					// by default we initialize all items to check state
 					if (this.multiple) {
-						this.luOptions.toArray().forEach(luOption => luOption.checked = this.selectAll);
 						findArrayOption(this.luOptions.toArray(), <T[]>this.value).forEach(luOption => luOption.checked = true);
 					}
 					this._picker.resetOptions(
