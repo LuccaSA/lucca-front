@@ -18,6 +18,7 @@ import {
 	LuSelectOption,
 	LuSelectOptionSelectionChange,
 	LuSelectSearchIntl,
+	LuSelectIntl,
 } from '../../../../../src/app/select/';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -42,7 +43,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
  */
 export class DemoSelectFeederPickerComponent extends ASelectOptionFeeder<any>
 	implements OnDestroy, OnInit, AfterViewInit {
-	private _intlChanges: Subscription;
+	protected _intlChanges: Subscription;
 
 	options: any[];
 	/**
@@ -52,10 +53,11 @@ export class DemoSelectFeederPickerComponent extends ASelectOptionFeeder<any>
 	@ViewChildren(LuSelectOption) luOptions: QueryList<LuSelectOption<any>>;
 
 	constructor(
+		public _intlSelect: LuSelectIntl,
 		public _intl: LuSelectSearchIntl,
-		private _changeDetectorRef: ChangeDetectorRef,
+		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
-		super();
+		super(_intlSelect, _changeDetectorRef);
 
 		this._intlChanges = _intl.changes.subscribe(() =>
 			this._changeDetectorRef.markForCheck(),

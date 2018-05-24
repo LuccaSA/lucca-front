@@ -167,12 +167,27 @@ export class LuSelect<T>
 
 	set selectAll(selectAll) {
 		this._selectAll = selectAll;
+		if (this._optionFeeder) {
+			this._optionFeeder.selectAll = selectAll;
+		}
+		this._changeDetectorRef.markForCheck();
 	}
 
 	get selectAll(): boolean {
 		return this._selectAll;
 	}
 	_partialSelectAll = false;
+	set partialSelectAll(partialSelectAll: boolean) {
+		this._partialSelectAll = partialSelectAll;
+		if (this._optionFeeder) {
+			this._optionFeeder.partialSelectAll = partialSelectAll;
+		}
+		this._changeDetectorRef.markForCheck();
+	}
+
+	get partialSelectAll(): boolean {
+		return this._partialSelectAll;
+	}
 	_selectAllLabel = '';
 
 	/**
@@ -185,7 +200,7 @@ export class LuSelect<T>
 	@ContentChild(ASelectOptionFeeder)
 	optionFeederContent: ISelectOptionFeeder<T>;
 	@ViewChild(ASelectOptionFeeder) optionFeederView: ISelectOptionFeeder<T>;
-	private _optionFeeder: ISelectOptionFeeder<T>;
+	protected _optionFeeder: ISelectOptionFeeder<T>;
 	/**
 	 * Emits an event when the select recieve or lost the focus
 	 */
@@ -323,6 +338,9 @@ export class LuSelect<T>
 		optionFeeder.registerKeyevent(this.onKeydown.bind(this));
 		optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
 		optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+		optionFeeder.registerSelectAllEvent(this._selectAllChanges.bind(this));
+		optionFeeder.multiple = this.multiple;
+		this._changeDetectorRef.markForCheck();
 
 		// render async to avoid expressionchanged exception
 		Promise.resolve().then(() => {
@@ -338,6 +356,9 @@ export class LuSelect<T>
 		this._canRemove = canRemove;
 	}
 
+	private _selectAllChanges(): void {
+		this._selectAllItems();
+	}
 	private _optionChanges(options: LuSelectOption<T>[]): void {
 		this._forceChangeValue = false;
 		this.luOptions.reset(options);
@@ -373,7 +394,7 @@ export class LuSelect<T>
 			if (!this.selectAll && selectedValues.length === nbOptions) {
 				this.selectAll = true;
 			}
-			this._partialSelectAll = this.selectAll && selectedValues.length !== nbOptions;
+			this.partialSelectAll = this.selectAll && selectedValues.length !== nbOptions;
 			this.value = selectedValues;
 			return;
 		}

@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ISelectScrollable } from './select-scroll-picker.model';
-import { LuSelectSearchIntl } from '../../utils';
+import { LuSelectSearchIntl, LuSelectIntl } from '../../utils';
 
 /**
  * Component that manage the possibility to load the options in an infinite scroll way
@@ -36,7 +36,7 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 	private _timeoutRef = null;
 	protected _requestSubscription: Subscription;
 
-	private _intlChanges: Subscription;
+	protected _intlChanges: Subscription;
 
 	/** The scroll element */
 	@ViewChild('scrollElement') _scrollElement: ElementRef;
@@ -45,10 +45,11 @@ export abstract class ASelectScrollPicker<T> extends ASelectOptionFeeder<T>
 
 	constructor(
 		protected _elementRef: ElementRef,
+		public _intlSelect: LuSelectIntl,
 		public _intl: LuSelectSearchIntl,
 		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
-		super();
+		super(_intlSelect, _changeDetectorRef);
 		this._options = [];
 		this._populateList();
 		this._intlChanges = _intl.changes.subscribe(() =>

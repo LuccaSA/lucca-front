@@ -19,7 +19,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { LuSelectOption, ASelectOptionFeeder } from '../option';
 import { findOption } from '../utils';
 import { ISelectSearcher } from './select-searcher.model';
-import { LuSelectSearchIntl } from '../utils';
+import { LuSelectSearchIntl, LuSelectIntl } from '../utils';
 
 @Component({
 	selector: 'lu-select-searcher',
@@ -42,7 +42,7 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 	_noResults = false;
 	private _clue$: Subject<string> = new Subject<string>();
 
-	private _intlChanges: Subscription;
+	protected _intlChanges: Subscription;
 
 	private innerMap = {};
 
@@ -56,10 +56,11 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 	@ViewChild('scrollElement') _scrollElement: ElementRef;
 
 	constructor(
+		public _intlSelect: LuSelectIntl,
 		public _intl: LuSelectSearchIntl,
-		private _changeDetectorRef: ChangeDetectorRef,
+		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
-		super();
+		super(_intlSelect, _changeDetectorRef);
 		this._clue$
 			.debounceTime(100) // wait 100ms after the last event before emitting last event
 			.distinctUntilChanged() // only emit if value is different from previous value
