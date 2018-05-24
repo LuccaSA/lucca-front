@@ -1,4 +1,4 @@
-@import '~@lucca-front/scss/src/_theming';
+@import 'theming';
 
 .select-options {
 	max-height: 200px; // for 240px height of .lu-popover-content. Will need a refactor

@@ -8,14 +8,14 @@
 	line-height: 1.3;
 
 	@mixin tooltipColoring($palette) {
-		background: _get($palette, 'color');
-		color: _get($palette, 'text');
+		background: _color($palette);
+		color: _color($palette, 'text');
 	}
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
-			@include tooltipColoring($palette);
+			@include tooltipColoring($name);
 		}
 	}
 }

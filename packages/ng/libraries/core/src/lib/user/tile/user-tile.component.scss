@@ -1,5 +1,4 @@
-@import '~@lucca-front/scss/src/_theming';
-@import 'theme/user-picture.theme';
+@import 'theming';
 :host {
 	display: flex;
 	align-items: center;
@@ -49,11 +48,11 @@
 			text-align: center;
 		}
 	}
-	@each $name, $size in _component('user-picture.sizes') {
+	@each $name, $size in _getMap('components.user-picture.sizes') {
 		&.mod-#{$name} lu-user-picture::ng-deep .picture {
-			font-size: _get($size, 'font-size');
-			height: _get($size, 'image-size');
-			width: _get($size, 'image-size');
+			font-size: _component('user-picture.sizes.'+ $name +'.font-size');
+			height: _component('user-picture.sizes.'+ $name +'.image-size');
+			width: _component('user-picture.sizes.'+ $name +'.image-size');
 		}
 	}
 }

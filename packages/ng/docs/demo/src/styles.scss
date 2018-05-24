@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+$useCssVar: true;
 @import '~@lucca-front/scss/src/main.overridable';
 // @import 'libraries/core/src/style/main';
 // @import 'libraries/material/src/style/main';
@@ -6,6 +7,8 @@
 @import 'dist/style/main';
 @import 'dist/material/style/main';
 @import 'dist/formly/style/main';
+@import '~@lucca-front/scss/src/theming.overridable';
+
 
 
 .demo-box {
@@ -14,3 +17,4 @@
 	justify-content: center;
 	align-items: center;
 }
+@import '~@lucca-front/scss/src/theming/cssvars';
