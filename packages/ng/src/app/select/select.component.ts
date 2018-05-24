@@ -203,7 +203,7 @@ export class LuSelect<T>
 	@ContentChild(ASelectOptionFeeder)
 	optionFeederContent: ISelectOptionFeeder<T>;
 	@ViewChild(ASelectOptionFeeder) optionFeederView: ISelectOptionFeeder<T>;
-	protected _optionFeeder: ISelectOptionFeeder<T>;
+	_optionFeeder: ISelectOptionFeeder<T>;
 	/**
 	 * Emits an event when the select recieve or lost the focus
 	 */
