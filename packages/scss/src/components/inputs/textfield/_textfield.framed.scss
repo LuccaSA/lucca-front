@@ -90,27 +90,27 @@
 
 	@mixin inputColoring($palette) {
 		.textfield-input:focus, .textfield-input:not([disabled]):hover {
-			@include fakeBorder(1px, _get($palette, "color"));
+			@include fakeBorder(1px, _color($palette));
 
-			background-color: transparentize(_get($palette, "color"), .95);
+			background-color: _color($palette, "transparent");
 			~ .textfield-label {
-				color: _get($palette, "color");
+				color: _color($palette);
 			}
 		}
 		// Needed when textfield label is not next to the textfield-input
 		&.is-focused {
 			.textfield-label {
-				color: _get($palette, "color");
+				color: _color($palette);
 			}
 		}
 	}
 
-	@include inputColoring(_component("textfield.framed.default-palette"));
+	@include inputColoring("textfield.framed.default-palette");
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include inputColoring($palette);
+			@include inputColoring($name);
 		}
 	}
 
@@ -136,8 +136,8 @@
 
 		@mixin inputColoring($palette) {
 			&:hover, &:focus {
-				@include fakeBorder(1px, _get($palette, "color"));
-				background-color: transparentize(_get($palette, "color"), .95);
+				@include fakeBorder(1px, _color($palette));
+				background-color: _color($palette);
 				z-index: 2;
 			}
 
@@ -150,12 +150,12 @@
 			}
 		}
 
-		@include inputColoring(_component("textfield.framed.default-palette"));
+		@include inputColoring("textfield.framed.default-palette");
 
 		// palette colors
-		@each $name, $palette in _palettes() {
+		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
-				@include inputColoring($palette);
+				@include inputColoring($name);
 			}
 		}
 
@@ -167,7 +167,7 @@
 		}
 
 		&.is-error {
-			background-color: transparentize(_color("error"), .9);
+			background-color: _color("error", "transparent");
 		}
 	}
 
@@ -238,7 +238,7 @@
 
 	.textfield-input {
 		&[disabled], &[readonly] {
-			background-color: transparentize(_color("text.placeholder"), .8);
+			background-color: _theme("commons.background.dark");
 			background-image: none;
 			opacity: .6;
 

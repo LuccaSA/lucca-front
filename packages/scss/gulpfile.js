@@ -7,6 +7,8 @@ let styleLint = require('gulp-stylelint');
 let clean = require('gulp-clean');
 let rename = require('gulp-rename');
 let browserSync = require('browser-sync').create();
+let postcss = require('gulp-postcss');
+let postCSSCustomProperties = require('postcss-custom-properties');
 
 const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
@@ -52,7 +54,7 @@ gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 });
 
 gulp.task('sass:debug', () => {
-	return gulp.src('./src/main.scss')
+	return gulp.src(['./src/main.cssvar.scss'])
 	.pipe(sass(SASS_OPTIONS_DEBUG).on('error', sass.logError))
 	.pipe(rename('lucca-front.css'))
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
@@ -61,10 +63,17 @@ gulp.task('sass:debug', () => {
 });
 
 gulp.task('sass:dist', () => {
-	return gulp.src('./src/main.scss')
+	return gulp.src('./src/main.cssvar.scss')
 	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
 	.pipe(rename('lucca-front.css'))
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
+	.pipe(
+		postcss([
+			postCSSCustomProperties({
+				strict: true
+			})
+		])
+	)
 	.pipe(gulp.dest(OUT_DIR));
 });
 

@@ -25,9 +25,9 @@
 		height: _component("switch.input.size");
 		left: 0;
 		position: absolute;
-		top: _component("switch.input.handler.size") - _component("switch.input.size");
+		top: calc(#{_component("switch.input.handler.size")} - #{_component("switch.input.size")});
 		transition: all 150ms ease;
-		width: _component("switch.input.size") * 2;
+		width: calc(#{_component("switch.input.size")} * 2);
 	}
 
 	&::after {
@@ -37,9 +37,9 @@
 		content: "";
 		display: block;
 		height: _component("switch.input.handler.size");
-		left: - ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
+		left: calc(-1 * ( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")} ) / 2);
 		position: absolute;
-		top: ( _component("switch.input.handler.size") - _component("switch.input.size") ) / 2;
+		top: calc(( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")} ) / 2);
 		transition: all 150ms ease;
 		width: _component("switch.input.handler.size");
 	}
@@ -84,10 +84,10 @@
 			cursor: not-allowed;
 
 			&::before {
-				background: lighten(_color("text.light"), 25%);
+				background: _color("text.placeholder");
 			}
 			&::after {
-				background: lighten(_color("text.light"), 15%);
+				background: _color("text.placeholder");
 			}
 		}
 	}
@@ -102,11 +102,11 @@
 		.switch-input:checked {
 			~ .switch-label {
 				&::before {
-					background: lighten(_get($palette, "color"), 20%);
+					background: _color($palette, "lighter");
 				}
 
 				&::after {
-					background: _get($palette, "color");
+					background: _color($palette);
 				}
 			}
 
@@ -114,11 +114,11 @@
 			&[disabled], &[readonly] {
 				~ .switch-label {
 					&::before {
-						background: desaturate(lighten(_get($palette, "color"), 30%), 15%);
+						background: _color($palette, "lighter");
 					}
 
 					&::after {
-						background: desaturate(lighten(_get($palette, "color"), 20%), 15%);
+						background: _color($palette, "lighter");
 					}
 				}
 			}
@@ -126,12 +126,12 @@
 	}
 
 	// default color
-	@include switchColoring(_component("switch.default-palette"));
+	@include switchColoring("switch.default-palette");
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include switchColoring($palette);
+			@include switchColoring($name);
 		}
 	}
 }

@@ -1,8 +1,8 @@
+$theme: () !default;
+$useCssVar: false !default;
 @import
 	"theming/utils",
 	"theming/get-set";
-
-$theme: () !default;
 
 @import
 	"theming/palettes",
@@ -10,4 +10,5 @@ $theme: () !default;
 	"theming/breakpoints",
 	"theming/icons",
 	"theming/commons",
-	"theming/components";
+	"theming/components",
+	"theming/cssvars";

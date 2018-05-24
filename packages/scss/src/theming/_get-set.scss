@@ -1,11 +1,12 @@
 // will try to get $map.$keys or throw if no result
-@function _get($map, $keys) {
-	$keys: str-explode($keys, '.');
+
+@function _get($map, $keys, $cssvar: $useCssVar) {
+	$keysArray: str-explode($keys, '.');
 
 	$result: $map;
 
-	@for $i from 1 through length($keys) {
-		$key: nth($keys, $i);
+	@for $i from 1 through length($keysArray) {
+		$key: nth($keysArray, $i);
 		@if (map-has-key($result, $key)) {
 			$result: map-get($result, $key);
 		} @else {
@@ -13,22 +14,30 @@
 			@return "";
 		}
 	}
+
+	@if $cssvar {
+		@return var(#{_getCSSVarName($keys)});
+	}
 	@return $result;
 }
 
 // will try to get $map.$keys or false if no result - might still throw depending on keys
-@function _safeGet($map, $keys) {
-	$keys: str-explode($keys, '.');
+@function _safeGet($map, $keys, $cssvar: $useCssVar) {
+	$keysArray: str-explode($keys, '.');
 
 	$result: $map;
 
-	@for $i from 1 through length($keys) {
-		$key: nth($keys, $i);
+	@for $i from 1 through length($keysArray) {
+		$key: nth($keysArray, $i);
 		@if (map-has-key($result, $key)) {
 			$result: map-get($result, $key);
 		} @else {
 			@return false;
 		}
+	}
+
+	@if $cssvar {
+		@return var(#{_getCSSVarName($keys)});
 	}
 	@return $result;
 }
@@ -44,31 +53,37 @@
 	$map: map-extend($map, $values, true);
 	@return $map;
 }
-@function _replace($map, $keys, $values) {
-	@error "not implemented";
+
+@function _getCSSVarName($string) {
+	@return str-replace("--"+$string, ".", "-");
 }
 
-@function _theme($keys) {
-	@return _get($theme, $keys);
+@function _theme($keys, $cssvar: $useCssVar) {
+	@return _get($theme, $keys, $cssvar);
 }
 
-@function _palettes() {
-	@return _get($theme, "palettes");
+@function _getMap($keys) {
+	@return _get($theme, $keys, false);
 }
 
-@function _color($keys, $type:"color") {
+@function _color($keys, $type:"color", $cssvar: $useCssVar) {
 	// try to find it in colors
-	$result: _safeGet($theme, "colors." + $keys);
+	$result: _safeGet($theme, "colors." + $keys, $cssvar);
 	@if $result {
 		@return $result;
 	}
 	// try to find color associated with same palette
-	$result: _safeGet($theme, "palettes." + $keys + "." + $type);
+	$result: _safeGet($theme, "palettes." + $keys + "." + $type, $cssvar);
+	@if $result {
+		@return $result;
+	}
+		// try to find it in components
+	$result: _safeGet($theme, "components." + $keys + "." + $type, $cssvar);
 	@if $result {
 		@return $result;
 	}
 	// try to find it in commons
-	$result: _safeGet($theme, "commons." + $keys + "." + $type);
+	$result: _safeGet($theme, "commons." + $keys + "." + $type, $cssvar);
 	@if $result {
 		@return $result;
 	}
@@ -77,15 +92,15 @@
 	@return "";
 }
 
-@function _component($keys) {
-	$result: _safeGet($theme, "components." + $keys);
+@function _component($keys, $cssvar: $useCssVar) {
+	$result: _safeGet($theme, "components." + $keys, $cssvar);
 	@if $result {
 		@return $result;
 	}
 
 	// try to find in commons
 	$commonKeys: "commons" + str-slice($keys, str-index($keys, '.'));
-	$result: _safeGet($theme, $commonKeys);
+	$result: _safeGet($theme, $commonKeys, $cssvar);
 	@if $result {
 		@return $result;
 	}

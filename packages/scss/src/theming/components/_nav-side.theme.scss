@@ -1,30 +1,30 @@
 $navSide: (
 
 	"fullwidth-palette": (
-		bg-color: darken(_theme("palettes.primary.color"), 23%),
+		bg-color: _color("primary", "dark"),
 		text: white,
-		selected-bg:  _theme("palettes.primary.color"),
-		selected-text: _theme("palettes.primary.text"),
-		alert-color: _theme("palettes.secondary.color"),
-		alert-text: _theme("palettes.secondary.text")
+		selected-bg: _color("primary"),
+		selected-text: _color("primary", "text"),
+		alert-color: _color("secondary"),
+		alert-text: _color("secondary", "text")
 	),
 
 	"compact-palette": (
-		bg-color: darken(_theme("palettes.primary.color"), 23%),
+		bg-color: _color("primary", "dark"),
 		text: white,
-		selected-bg:  _theme("palettes.primary.color"),
-		selected-text: _theme("palettes.primary.text"),
-		alert-color: _theme("palettes.secondary.color"),
-		alert-text: _theme("palettes.secondary.text")
+		selected-bg: _color("primary"),
+		selected-text: _color("primary", "text"),
+		alert-color: _color("secondary"),
+		alert-text: _color("secondary", "text")
 	),
 
 	"bottom-section-palette": (
-		bg-color: darken(_theme("palettes.primary.color"), 23%),
+		bg-color: _color("primary", "dark"),
 		text: white,
-		selected-bg:  _theme("palettes.primary.color"),
-		selected-text: _theme("palettes.primary.text"),
-		alert-color: _theme("palettes.secondary.color"),
-		alert-text: _theme("palettes.secondary.text")
+		selected-bg: _color("primary"),
+		selected-text: _color("primary", "text"),
+		alert-color: _color("secondary"),
+		alert-text: _color("secondary", "text")
 	),
 
 	"bottom-section-height": 3.1rem,
@@ -35,6 +35,8 @@ $navSide: (
 	"scrollbar": (
 		"width": .5rem,
 		"border-radius": 10px,
+		"bg-color": _color("primary", "dark"),
+		"thumb-color": _color("primary")
 	),
 	"submenu": (
 		"max-height": 33rem,
@@ -45,10 +47,6 @@ $navSide: (
 		"width": 6.125rem,
 		"bottom-section-height": 5rem,
 		"font-size": _theme("sizes.small.font-size")
-	),
-
-	"placeholder": (
-		"opacity": .15,
 	),
 
 	"mobile": (
