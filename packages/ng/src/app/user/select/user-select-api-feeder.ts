@@ -54,7 +54,9 @@ export class UserSelectApiFeeder<
 
 		const url = `${this._api}?${params.join('&')}`;
 		return this._http.get<{ data: { count: number, items: T[] } }>(url).map(r => {
-			this.totalCountUsers = r.data.count;
+			if (!clue || clue.length === 0) {
+				this.totalCountUsers = r.data.count;
+			}
 			return r.data.items;
 		});
 	}

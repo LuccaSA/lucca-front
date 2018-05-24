@@ -66,7 +66,9 @@ export abstract class ARDDSelectFeeder<T extends IRddItem>
 		}
 		const url = `${this.getApiUrl()}?${params.join('&')}`;
 		return this._http.get<{ data: { count: number, items: T[] } }>(url).map(r => {
-			this.totalCountItems = r.data.count;
+			if (!clue || clue.length === 0) {
+				this.totalCountItems = r.data.count;
+			}
 			return r.data.items;
 		});
 	}
