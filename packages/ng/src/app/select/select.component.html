@@ -4,7 +4,7 @@
 	<div class="select-value">{{_strValue}}</div>
 	<ng-content></ng-content>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
-		<div *ngIf="multiple && !_optionFeeder" class="lu-select-option check-select-all" (click)="_selectAllItems()">
+		<div *ngIf="multiple && !_optionFeeder" class="lu-select-option" (click)="_selectAllItems()">
 			<div class="checkbox">
 				<input class="checkbox-input"
 					type="checkbox"
