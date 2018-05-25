@@ -15,10 +15,10 @@ export class LuSelectIntl {
 
 	/** A label for empty. */
 	selectAllLabel: string = 'Select all';
-	noLabel: string = 'None';
+	noLabel: string = 'No items';
 	allLabel: string = 'All';
-	allTypeLabel: string = 'the entities';
-	typeLabel: string = 'entities';
+	allTypeLabel: string = 'the items';
+	typeLabel: string = 'items';
 }
 
 /** @docs-private */

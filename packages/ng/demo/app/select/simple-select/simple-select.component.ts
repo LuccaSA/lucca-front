@@ -3,10 +3,15 @@ import {
 	Component,
 	OnInit
 } from '@angular/core';
+import { LuSelectIntl } from '../../../../src/app/select';
+import {getOverrideLuSelectIntl} from './simple-select-intl';
 @Component({
 	selector: 'demo-simple-select',
 	templateUrl: './simple-select.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{ provide: LuSelectIntl, useValue: getOverrideLuSelectIntl() },
+	],
 })
 export class DemoSimpleSelectComponent implements OnInit {
 	options = [

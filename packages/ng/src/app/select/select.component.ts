@@ -399,10 +399,8 @@ export class LuSelect<T>
 				}
 			}
 			const nbOptions = this._optionFeeder ? this._optionFeeder.length() : this._picker.luSelectOptions().length;
-			if (!this.selectAll && selectedValues.length === nbOptions) {
-				this.selectAll = true;
-			}
-			this.partialSelectAll = this.selectAll && selectedValues.length !== nbOptions;
+			this.selectAll = selectedValues.length > 0;
+			this.partialSelectAll = selectedValues.length !== nbOptions;
 			this.value = selectedValues;
 			return;
 		}
@@ -446,12 +444,15 @@ export class LuSelect<T>
 			return '';
 		}
 
+		// We have to deal with the special case of no values if multiple
+		if (this.multiple && (<T[]>this.value).length === 0) {
+			return this._intl.noLabel;
+		}
 		// We have to deal with multiple values, if more than one element is selected, we
 		// show the number and the type, else, we show the value expected
 		if (this.multiple && (<T[]>this.value).length > 1) {
 			const allEntitiesSelected = (<T[]>this.value).length === this.luOptions.length;
-			const noEntitiesSelected = (<T[]>this.value).length === 0;
-			const quantityLabel = noEntitiesSelected ? this._intl.noLabel : allEntitiesSelected ? this._intl.allLabel : (<T[]>this.value).length;
+			const quantityLabel = allEntitiesSelected ? this._intl.allLabel : (<T[]>this.value).length;
 			const typeLabel = allEntitiesSelected ? this._intl.allTypeLabel : this._intl.typeLabel;
 			return `${quantityLabel} ${typeLabel}`;
 		}
