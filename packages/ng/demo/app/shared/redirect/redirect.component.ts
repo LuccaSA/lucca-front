@@ -29,9 +29,12 @@ export class RedirectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		/*
+		Comment in order to let people choose to connect and enter the right env before connecting
 		if (!this.env.redirect) {
 			this.connect();
 		}
+		*/
 	}
 
 	connect() {
