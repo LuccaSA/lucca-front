@@ -2,7 +2,7 @@ $font-path: _theme("icons.font-path", false);
 @import "node_modules/@lucca-front/icons/src/main";
 @import "node_modules/@lucca-front/icons/src/mixins";
 
-.lucca-icon, .#{_theme("icons.prefix")} {
+.lucca-icon, .#{_theme("icons.prefix", false)} {
 	// default lucca-icon style
 	@extend %lucca-icon;
 
