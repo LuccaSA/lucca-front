@@ -3,6 +3,7 @@ import docs from '../../../api-docs';
 import {
 	PropertyDesc,
 	DirectiveDesc,
+	ModuleDesc,
 	InputDesc,
 	MethodDesc,
 	ClassDesc,
@@ -33,11 +34,21 @@ export class DemoApiDocs {
 	apiDocs: DirectiveDesc;
 	configServiceName: string;
 
+	moduleDoc: ModuleDesc;
+	moduleDocList: string[];
 	constructor() {}
 
 	@Input()
 	set directive(directiveName: string) {
 		this.apiDocs = docs[directiveName];
+		const declarationModule = Object.keys((<any>docs))
+			.map(key => docs[key])
+			.find(declaration => declaration.className.indexOf('Module') !== -1
+			&& declaration.declarations.indexOf(directiveName) !== -1);
+		if (declarationModule) {
+			this.moduleDoc = declarationModule;
+			this.moduleDocList = this.getAllDeclaredModules(declarationModule);
+		}
 		this.configServiceName = `${directiveName}Config`;
 		const configApiDocs = docs[this.configServiceName];
 		this._configProperties = {};
@@ -50,6 +61,23 @@ export class DemoApiDocs {
 					)),
 			);
 		}
+	}
+
+	getAllDeclaredModules(currentModule: ModuleDesc): string[] {
+		const moduleList = [];
+		let currentModuleName = currentModule.className;
+		while (currentModuleName) {
+			const exportModule = Object.keys((<any>docs))
+			.map(key => docs[key])
+			.find(declaration => declaration.className.indexOf('Module') !== -1
+			&& declaration.exports
+			&& declaration.exports.indexOf(currentModuleName) !== -1);
+			if (!!exportModule) {
+				moduleList.push(exportModule.className);
+			}
+			currentModuleName = !!exportModule ? exportModule.className : null;
+		}
+		return moduleList;
 	}
 
 	/**
