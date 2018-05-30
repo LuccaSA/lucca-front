@@ -36,8 +36,8 @@ function isAngularLifecycleHook(methodName) {
 }
 
 function isPrivate(member) {
-	return (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Private) !== 0
-	|| (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Protected) !== 0;
+  return (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Private) !== 0
+  || (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Protected) !== 0;
 }
 
 function isPrivateOrInternal(member) {
@@ -122,6 +122,35 @@ class APIDocVisitor {
             methods: [],
             properties: [],
           }];
+        } else {
+          const decorator = classDeclaration.decorators[i];
+          const symbolDecorator = this.program.getTypeChecker().getSymbolAtLocation(decorator.expression.getFirstToken());
+          const decoratorName = symbolDecorator.getName();
+          if (decoratorName === "NgModule") {
+            const details = ts.displayPartsToString(symbolDecorator.getDocumentationComment());
+            const detailsToken = ts.displayPartsToString(symbolDecorator.getDeclarations());
+            const declarationsElements = [];
+            const exportsElements = [];
+            decorator.expression.getChildren()[2].getChildren()[0].properties.forEach((properties) => {
+              if (properties.symbol.getName() === "declarations") {
+                properties.initializer.elements.forEach(elementDeclaration => {
+                  declarationsElements.push(elementDeclaration.getFullText());
+                })
+              } else if (properties.symbol.getName() === "exports") {
+                properties.initializer.elements.forEach(elementDeclaration => {
+                  exportsElements.push(elementDeclaration.getFullText().trim());
+                })
+              }
+            });
+            if (declarationsElements.length > 0 || exportsElements.length > 0){
+              return [{
+                fileName,
+                className,
+                declarations: declarationsElements,
+                exports: exportsElements
+              }]
+            }
+          }
         }
       }
     } else if (description) {
