@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LuUserTileModule } from './tile';
 import { LuUserPictureModule } from './picture';
 import { LuUserDisplayModule } from './display';
+import { LuUserSelectModule } from './select';
 import { LuSelectModule } from '../select';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { LuSelectModule } from '../select';
 		LuUserTileModule,
 		LuUserPictureModule,
 		LuUserDisplayModule,
+		LuUserSelectModule,
 		LuSelectModule,
 	],
 	declarations: [],
@@ -18,7 +20,7 @@ import { LuSelectModule } from '../select';
 		LuUserPictureModule,
 		LuUserDisplayModule,
 		LuUserTileModule,
-		LuSelectModule,
+		LuUserSelectModule,
 	],
 })
 export class LuUserModule {}
