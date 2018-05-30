@@ -1,5 +1,5 @@
 $theme: () !default;
-$useCssVar: false !default;
+$noCssVar: false !default;
 @import
 	"theming/utils",
 	"theming/get-set";
@@ -23,5 +23,3 @@ $useCssVar: false !default;
 
 	"theming/components",
 	"components.override";
-
-// @import "theming/cssvars";

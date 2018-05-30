@@ -1,6 +1,6 @@
 // will try to get $map.$keys or throw if no result
 
-@function _get($map, $keys, $cssvar: $useCssVar) {
+@function _get($map, $keys, $noVars: $noCssVar) {
 	$keysArray: str-explode($keys, '.');
 
 	$result: $map;
@@ -15,14 +15,14 @@
 		}
 	}
 
-	@if $cssvar {
-		@return var(#{_getCSSVarName($keys)});
+	@if $noVars {
+		@return $result;
 	}
-	@return $result;
+	@return var(#{_getCSSVarName($keys)});
 }
 
 // will try to get $map.$keys or false if no result - might still throw depending on keys
-@function _safeGet($map, $keys, $cssvar: $useCssVar) {
+@function _safeGet($map, $keys, $noVars: $noCssVar) {
 	$keysArray: str-explode($keys, '.');
 
 	$result: $map;
@@ -36,10 +36,10 @@
 		}
 	}
 
-	@if $cssvar {
-		@return var(#{_getCSSVarName($keys)});
+	@if $noVars {
+		@return $result;
 	}
-	@return $result;
+	@return var(#{_getCSSVarName($keys)});
 }
 
 // sets stuff
@@ -58,32 +58,32 @@
 	@return str-replace("--"+$string, ".", "-");
 }
 
-@function _theme($keys, $cssvar: $useCssVar) {
-	@return _get($theme, $keys, $cssvar);
+@function _theme($keys, $noVars: $noCssVar) {
+	@return _get($theme, $keys, $noVars);
 }
 
 @function _getMap($keys) {
-	@return _get($theme, $keys, false);
+	@return _get($theme, $keys, true);
 }
 
-@function _color($keys, $type:"color", $cssvar: $useCssVar) {
+@function _color($keys, $type:"color", $noVars: $noCssVar) {
 	// try to find it in colors
-	$result: _safeGet($theme, "colors." + $keys, $cssvar);
+	$result: _safeGet($theme, "colors." + $keys, $noVars);
 	@if $result {
 		@return $result;
 	}
 	// try to find color associated with same palette
-	$result: _safeGet($theme, "palettes." + $keys + "." + $type, $cssvar);
+	$result: _safeGet($theme, "palettes." + $keys + "." + $type, $noVars);
 	@if $result {
 		@return $result;
 	}
 		// try to find it in components
-	$result: _safeGet($theme, "components." + $keys + "." + $type, $cssvar);
+	$result: _safeGet($theme, "components." + $keys + "." + $type, $noVars);
 	@if $result {
 		@return $result;
 	}
 	// try to find it in commons
-	$result: _safeGet($theme, "commons." + $keys + "." + $type, $cssvar);
+	$result: _safeGet($theme, "commons." + $keys + "." + $type, $noVars);
 	@if $result {
 		@return $result;
 	}
@@ -92,15 +92,15 @@
 	@return "";
 }
 
-@function _component($keys, $cssvar: $useCssVar) {
-	$result: _safeGet($theme, "components." + $keys, $cssvar);
+@function _component($keys, $noVars: $noCssVar) {
+	$result: _safeGet($theme, "components." + $keys, $noVars);
 	@if $result {
 		@return $result;
 	}
 
 	// try to find in commons
 	$commonKeys: "commons" + str-slice($keys, str-index($keys, '.'));
-	$result: _safeGet($theme, $commonKeys, $cssvar);
+	$result: _safeGet($theme, $commonKeys, $noVars);
 	@if $result {
 		@return $result;
 	}

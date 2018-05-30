@@ -9,7 +9,7 @@
 		}
 	}
 
-	@media (max-width: _component("container.min-width", false)) {
+	@media (max-width: _component("container.min-width", true)) {
 		width: 100%;
 	}
 
