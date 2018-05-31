@@ -77,7 +77,7 @@ export class DemoApiDocs {
 			}
 			currentModuleName = !!exportModule ? exportModule.className : null;
 		}
-		return moduleList;
+		return moduleList.reverse();
 	}
 
 	/**
