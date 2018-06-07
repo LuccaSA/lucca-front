@@ -4,6 +4,7 @@
 ### New features
 ### Breaking changes
 ### Adding
+- `utility` ellipsis
 ### Enhancements
 ### Fixes
 
