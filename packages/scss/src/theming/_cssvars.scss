@@ -1,5 +1,5 @@
 @import '../mixins/cssvars';
-@if $useCssVar {
+@if $noCssVar == false {
 	:root {
 		@include generateCSSVarsFromTheme($theme);
 	}

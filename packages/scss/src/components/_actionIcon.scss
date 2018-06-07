@@ -16,7 +16,7 @@
 		}
 	}
 
-	.lucca-icon, .#{_theme("icons.prefix", false)} {
+	.lucca-icon, .#{_theme("icons.prefix", true)} {
 		font-size: 1.2rem;
 	}
 }
