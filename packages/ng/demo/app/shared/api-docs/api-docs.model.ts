@@ -1,3 +1,10 @@
+export interface ModuleDesc {
+	fileName: string;
+	className: string;
+	declarations: string[];
+	exports: string[];
+}
+
 export interface ClassDesc {
 	fileName: string;
 	className: string;

@@ -9,6 +9,7 @@
 	<code class="code" *ngFor="let arg of apiDocs.args">[:{{arg.name}}]</code>
 </div>
 
+
 <section class="contentSection">
 	<div class="card">
 		<table class="table mod-small">
@@ -24,6 +25,12 @@
 					<code class="code">{{apiDocs.exportAs}}</code>
 				</td>
 			</tr>
+			<tr class="table-body-row"  *ngIf="moduleDoc">
+					<td class="table-body-row-cell label-cell">Declared module</td>
+					<td class="table-body-row-cell">
+						<code class="code">{{moduleDocList.length > 0 ? moduleDocList.join(' > ') + ' > ' : ''}}{{moduleDoc.className}}</code>
+					</td>
+				</tr>
 		</table>
 	</div>
 </section>
