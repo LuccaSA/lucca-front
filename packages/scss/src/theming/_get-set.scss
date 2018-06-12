@@ -67,6 +67,10 @@
 }
 
 @function _color($keys, $type:"color", $noVars: $noCssVar) {
+	$result: _safeGet($theme, "colors." + $keys + "." + $type, $noVars);
+	@if $result {
+		@return $result;
+	}
 	// try to find it in colors
 	$result: _safeGet($theme, "colors." + $keys, $noVars);
 	@if $result {
