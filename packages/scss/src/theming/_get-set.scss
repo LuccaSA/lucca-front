@@ -71,11 +71,6 @@
 	@if $result {
 		@return $result;
 	}
-	// try to find it in colors
-	$result: _safeGet($theme, "colors." + $keys, $noVars);
-	@if $result {
-		@return $result;
-	}
 	// try to find color associated with same palette
 	$result: _safeGet($theme, "palettes." + $keys + "." + $type, $noVars);
 	@if $result {
@@ -92,7 +87,7 @@
 		@return $result;
 	}
 	// throw
-	@error "couldn't find color #{$keys} in theme";
+	@warn "couldn't find color #{$keys} in theme";
 	@return "";
 }
 

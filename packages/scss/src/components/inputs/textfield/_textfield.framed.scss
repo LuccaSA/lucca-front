@@ -137,7 +137,7 @@
 		@mixin inputColoring($palette) {
 			&:hover, &:focus {
 				@include fakeBorder(1px, _color($palette));
-				background-color: _color($palette);
+				background-color: _color($palette, "transparent");
 				z-index: 2;
 			}
 

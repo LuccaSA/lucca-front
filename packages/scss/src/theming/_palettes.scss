@@ -48,10 +48,18 @@ $palettes: (
 
 $colors: (
 	text: (
-		"dark": #444444,
-		"default": #666666,
-		"light": #999999,
-		"placeholder": #CCCCCC,
+		"dark": (
+			color: #444444
+		),
+		"default": (
+			color: #666666
+		),
+		"light": (
+			color: #999999
+		),
+		"placeholder": (
+			color: #CCCCCC
+		)
 	),
 );
 $theme: _set($theme, "palettes", $palettes);
