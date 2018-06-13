@@ -2,7 +2,14 @@
 	position: fixed;
 	z-index: 1000;
 }
-
+.cdk-overlay-connected-position-bounding-box {
+	position: absolute;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	min-width: 1px;
+	min-height: 1px;
+}
 .cdk-global-overlay-wrapper,
 .cdk-overlay-container {
 	height: 100%;

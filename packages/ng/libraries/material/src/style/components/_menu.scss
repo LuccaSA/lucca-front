@@ -11,6 +11,8 @@
 	@extend .textfield-options;
 	position: relative;
 	top: auto;
+	opacity: 1;
+	transform: none;
 }
 
 .mat-menu-content {
