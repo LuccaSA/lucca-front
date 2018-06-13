@@ -6,6 +6,7 @@
 ### Adding
 - `utility` ellipsis
 ### Enhancements
+- `loading` Inverted colors
 ### Fixes
 - `table` sortable arrow always stay on the last line
 

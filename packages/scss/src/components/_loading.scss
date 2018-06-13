@@ -13,6 +13,10 @@
 	}
 }
 
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
 .loading {
 	&.mod-block {
 		display: block;
@@ -23,6 +27,18 @@
 
 		&::after, &::before {
 			margin: auto;
+		}
+	}
+
+	&.mod-invert {
+		color: white;
+
+		&::before {
+			border-color: rgba(255, 255, 255, .25);
+		}
+
+		&::after {
+			border-color: rgba(255, 255, 255, .66) transparent transparent transparent;
 		}
 	}
 }
