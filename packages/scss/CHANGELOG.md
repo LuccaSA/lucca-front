@@ -7,6 +7,7 @@
 - `utility` ellipsis
 ### Enhancements
 ### Fixes
+- `table` sortable arrow always stay on the last line
 
 ## 0.7.1
 ### Adding
