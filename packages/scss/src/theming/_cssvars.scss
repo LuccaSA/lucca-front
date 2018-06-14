@@ -1,6 +1,0 @@
-@import '../mixins/cssvars';
-@if $noCssVar == false {
-	:root {
-		@include generateCSSVarsFromTheme($theme);
-	}
-}
