@@ -4,6 +4,7 @@
     "packages/*",
     "packages/ng/dist"
   ],
+  "npmClient": "yarn",
   "version": "1.0.0-beta.1",
   "command": {
     "publish": {
