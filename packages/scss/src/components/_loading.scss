@@ -31,19 +31,19 @@
 	}
 
 	&.mod-fullPage {
-	  display: block;
-	  margin: 38vh auto 0;
-	  width: 5rem;
+		display: block;
+		margin: 38vh auto 0;
+		width: 5rem;
 
-	  &::after {
+		&::after {
 			height: 5rem;
-	    width: 5rem;
-	  }
-
-	  &::before {
-	    height: 5rem;
 			width: 5rem;
-	  }
+		}
+
+		&::before {
+			height: 5rem;
+			width: 5rem;
+		}
 	}
 
 	&.mod-invert {
