@@ -3,6 +3,7 @@
 ## In Dev
 ### New features
 ### Fixes
+- `user tile` word break
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies

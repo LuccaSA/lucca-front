@@ -7,8 +7,11 @@
 - `utility` ellipsis
 ### Enhancements
 - `loading` Inverted colors
+- `loading` Full page
 ### Fixes
 - `table` sortable arrow always stay on the last line
+- `table` sortable arrow direction
+- `button` mod-link vertical alignment
 
 ## 0.7.1
 ### Adding
