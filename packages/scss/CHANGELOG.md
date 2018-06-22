@@ -8,6 +8,7 @@
 ### Enhancements
 - `loading` Inverted colors
 - `loading` Full page
+- `label` new UI
 ### Fixes
 - `table` sortable arrow always stay on the last line
 - `table` sortable arrow direction

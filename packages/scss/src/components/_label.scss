@@ -1,6 +1,8 @@
 .label {
+	background: _theme('commons.background.dark');
 	border-radius: 3px;
 	display: inline-block;
+	color: _color("text.default");
 	font-size: _theme("sizes.small.font-size");
 	font-weight: 400;
 	line-height: 1;
@@ -15,17 +17,11 @@
 // Palettes
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .label {
-
-	// todo - move default palette in theming under elements.label
-	$default-palette: ( "color": #CCCCCC, "text": #666666 );
-
 	@mixin labelColoring($palette) {
-		background: _get($palette, "color");
-		color: _get($palette, "text");
+		background: rgba(_get($palette, "color"), .2);
+		color: darken(_get($palette, "color"), 25%);
 	}
 
-	// default coloring
-	@include labelColoring($default-palette);
 	// palettes coloring
 	@each $name, $palette in _palettes() {
 		&.palette-#{$name} {
