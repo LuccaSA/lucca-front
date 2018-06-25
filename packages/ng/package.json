@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "a library of usefull components for angular web app",
   "repository": {
     "type": "git",
@@ -49,8 +49,8 @@
     "@angular/forms": "^5.0.0",
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
-    "@lucca-front/icons": "^0.7.3",
-    "@lucca-front/scss": "^0.7.3",
+    "@lucca-front/icons": "^0.7.4",
+    "@lucca-front/scss": "^0.7.4",
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.2",
