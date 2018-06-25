@@ -2,6 +2,7 @@
 
 ## In Dev
 ### New features
+- `lu-select` - add multiple values support
 ### Fixes
 ### Breaking changes
 ### Updated dependencies

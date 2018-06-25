@@ -10,6 +10,7 @@ import {
 })
 export class BasicFeederSelectComponent implements OnInit {
 	itemSelect = { id: 1, name: 'option 1' };
+	itemSelectMultiple = [{ id: 1, name: 'option 1' }];
 
 	ngOnInit(): void {}
 }

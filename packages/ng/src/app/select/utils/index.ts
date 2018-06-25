@@ -1,5 +1,9 @@
-export { findOption, sameOption } from './select-utils.factory';
+export { findOption, findArrayOption, sameOption } from './select-utils.factory';
 export {
 	LU_SELECT_SEARCH_INTL_PROVIDER,
 	LuSelectSearchIntl,
 } from './select-searcher.intl';
+export {
+	LU_SELECT_INTL_PROVIDER,
+	LuSelectIntl,
+} from './select.intl';

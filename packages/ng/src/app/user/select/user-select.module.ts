@@ -3,8 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { LuSelectModule } from '../../select';
+import {
+	LuSelectModule,
+	LuSelectIntl,
+} from '../../select';
 import { LuApiSelectModule } from '../../api/select';
+import { getOverrideLuSelectIntl } from './user-select.int';
 import { LuUserSelect } from './user-select.component';
 import { UserSelectApiFeeder } from './user-select-api-feeder';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
 	],
 	declarations: [LuUserSelect],
 	exports: [LuUserSelect],
-	providers: [{ provide: UserSelectApiFeeder, useClass: UserSelectApiFeeder }],
+	providers: [
+		{ provide: UserSelectApiFeeder, useClass: UserSelectApiFeeder },
+		{ provide: LuSelectIntl, useValue: getOverrideLuSelectIntl() },
+	],
 })
 export class LuUserSelectModule {}

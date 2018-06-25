@@ -4,6 +4,7 @@
 .textfield.mod-search {
 	width: 100%;
 }
+
 .textfield-input {
 	border-radius: 0;
 	box-shadow: none;
@@ -12,8 +13,9 @@
 }
 
 .select-options {
-	max-height: 200px; // for 240px height of .lu-popover-content. Will need a refactor
-	overflow: auto;
+	max-height: 200px; // for 280px height of .lu-popover-content. Will need a refactor
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .select-options-noResult {

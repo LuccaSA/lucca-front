@@ -39,6 +39,8 @@ export interface IRDDSelectApiFeeder<T extends IRddItem>
 export abstract class ARDDSelectFeeder<T extends IRddItem>
 	extends AApiSelectFeederWithPaging<T>
 	implements IRDDSelectApiFeeder<T> {
+
+	private totalCountItems = 0;
 	constructor(protected _http: HttpClient) {
 		super();
 	}
@@ -53,15 +55,22 @@ export abstract class ARDDSelectFeeder<T extends IRddItem>
 	): Observable<T[]> {
 		const params = [
 			`${this.getClueField()}=like,${encodeURIComponent(clue)}`,
-			`paging=${pagingStart},${pagingStep}`,
-			`fields=${this.getFields().join(',')}`,
+			`fields=${this.getFields().join(',')},collection.count`,
 		];
+		if (pagingStep !== -1) {
+			params.push(`paging=${pagingStart},${pagingStep}`);
+		}
 		const additionalParams = this.getParams();
 		if (additionalParams && additionalParams.length > 0) {
 			params.push(...additionalParams);
 		}
 		const url = `${this.getApiUrl()}?${params.join('&')}`;
-		return this._http.get<{ data: { items: T[] } }>(url).map(r => r.data.items);
+		return this._http.get<{ data: { count: number, items: T[] } }>(url).map(r => {
+			if (!clue || clue.length === 0) {
+				this.totalCountItems = r.data.count;
+			}
+			return r.data.items;
+		});
 	}
 
 	/**
@@ -69,6 +78,14 @@ export abstract class ARDDSelectFeeder<T extends IRddItem>
 	 */
 	textValue(item: T): string {
 		return item.name;
+	}
+
+	length(): number {
+		return this.totalCountItems;
+	}
+
+	getAllEntities(): Observable<T[]> {
+		return this.getPagedItems('', -1, -1);
 	}
 
 	/**
