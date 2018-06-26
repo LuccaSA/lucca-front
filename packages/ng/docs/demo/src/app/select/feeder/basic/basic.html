@@ -11,3 +11,18 @@
 	</div>
 	<code class="code mod-block">{{ itemSelect | json }}</code>
 </section>
+
+<section class="contentSection">
+	<h2>Auto load options (Select Multiple)</h2>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelectMultiple"
+			class="textfield-input"
+			placeholder="placeholder"
+			multiple="true"
+			name="itemOptionsMultiple">
+			<demo-select-feeder-picker luOptionFeeder></demo-select-feeder-picker>
+		</lu-select>
+		<label class="textfield-label" for="itemOptionsMultiple">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelectMultiple | json }}</code>
+</section>

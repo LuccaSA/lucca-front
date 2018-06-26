@@ -4,6 +4,7 @@ import { LuUserSelect } from './user-select.component';
 import {
 	LuSelectOption,
 	LuSelectSearchIntl,
+	LuSelectIntl,
 	LuSelect,
 	LuSelectPicker,
 	LuSelectDirective,
@@ -81,6 +82,7 @@ describe('LuUserSelect', () => {
 				ScrollStrategyOptions,
 				ScrollDispatcher,
 				LuSelectSearchIntl,
+				LuSelectIntl,
 				{ provide: LuUserSelectApiFeeder, useClass: LuUserSelectApiFeeder },
 			],
 			imports: [HttpClientTestingModule, FormsModule],

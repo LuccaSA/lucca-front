@@ -16,4 +16,6 @@ export class BasicClearerSelectComponent {
 	];
 	itemSelect = { id: 1, name: 'red' };
 	itemSelectDefault = { id: 4, name: 'blue' };
+	itemSelectMultiple = [{ id: 1, name: 'red' }];
+	itemSelectMultipleDefault = [{ id: 4, name: 'blue' }];
 }

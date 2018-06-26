@@ -27,3 +27,35 @@
 	</div>
 	<code class="code mod-block">{{ itemSelectDefault | json }}</code>
 </section>
+
+<section class="contentSection">
+	<h2>Select Multiple - Clear with null value</h2>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelectMultiple"
+			class="textfield-input"
+			placeholder="placeholder"
+			multiple="true"
+			name="itemOptions">
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+				<lu-select-clearer></lu-select-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelectMultiple | json }}</code>
+</section>
+
+<section class="contentSection">
+	<h2>Select Multiple - Clear with default value</h2>
+	<div class="textfield">
+		<lu-select [(ngModel)]="itemSelectMultipleDefault"
+			class="textfield-input"
+			placeholder="placeholder"
+			multiple="true"
+			name="itemOptions">
+				<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+				<lu-select-clearer-first [options]="options"></lu-select-clearer-first>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelectMultipleDefault | json }}</code>
+</section>

@@ -44,7 +44,8 @@ import {
 	ISelectOptionFeeder,
 } from './option/index';
 import { ISelectClearer, LuSelectClearerComponent } from './clearer/index';
-import { sameOption, findOption } from './utils/index';
+import { sameOption, findOption, findArrayOption, LuSelectIntl } from './utils/index';
+import { Subscription } from 'rxjs/Subscription';
 
 /** KeyCode for End Key */
 const END = 'End';
@@ -102,11 +103,11 @@ export class LuSelect<T>
 	/** True if the the component allow the clear of data  */
 	_canRemove = false;
 	/** The value of the select */
-	get value(): T | null {
+	get value(): T | T[] | null {
 		return this._value;
 	}
 	/** Set the value, an event (canremove) will be sent if the directive is clearable */
-	set value(value: T | null | undefined) {
+	set value(value: T | T[] | null | undefined) {
 		let valueTemp = value;
 		if (valueTemp === null) {
 			// We have to deal with the fact that the clearer could not be set => we do nothing
@@ -115,6 +116,9 @@ export class LuSelect<T>
 			}
 			// Else we take the value offer by the clearer
 			valueTemp = this.clearer.clearValue();
+			if (this.multiple) {
+				valueTemp = valueTemp ? [valueTemp] : [];
+			}
 		}
 		const lastValue = this._value;
 		this._value = valueTemp;
@@ -129,14 +133,20 @@ export class LuSelect<T>
 			this._picker.selectOption(value);
 		}
 		// We render the option
-		this._selectOption = findOption(this._picker.luSelectOptions(), value);
+		this._selectOption = this.multiple ? findArrayOption(this._picker.luSelectOptions(), <T[]>value) :
+				findOption(this._picker.luSelectOptions(), <T>value);
+
+		// We check the option if multiple
+		if (this.multiple) {
+			(<LuSelectOption<T>[]>this._selectOption).forEach(luOption => luOption.checked = true);
+		}
 		// render
 		this.render(this._selectOption);
 	}
 
 	// Inner values
-	protected _value: T | null;
-	protected _selectOption: LuSelectOption<T> | null;
+	protected _value: T | T[] | null;
+	protected _selectOption: LuSelectOption<T> | LuSelectOption<T>[] | null;
 	private _forceChangeValue = true;
 
 	// Inner Children
@@ -150,6 +160,39 @@ export class LuSelect<T>
 
 	/** The placeholder of the component, it is used as label (material design) */
 	@Input() placeholder: string;
+
+	/** true if the select has to be a multiple select */
+	@Input() multiple = false;
+
+	private _selectAll = false;
+
+	/** true if the checkbox selectAll is select */
+	set selectAll(selectAll) {
+		this._selectAll = selectAll;
+		if (this._optionFeeder) {
+			this._optionFeeder.selectAll = selectAll;
+		}
+		this._changeDetectorRef.markForCheck();
+	}
+
+	get selectAll(): boolean {
+		return this._selectAll;
+	}
+	// Partial select is use to detect when selectAll is check but when we do not select all the value
+	_partialSelectAll = false;
+	set partialSelectAll(partialSelectAll: boolean) {
+		this._partialSelectAll = partialSelectAll;
+		if (this._optionFeeder) {
+			this._optionFeeder.partialSelectAll = partialSelectAll;
+		}
+		this._changeDetectorRef.markForCheck();
+	}
+
+	get partialSelectAll(): boolean {
+		return this._partialSelectAll;
+	}
+	_selectAllLabel = '';
+
 	/**
 	 * Reference of the clearer
 	 */
@@ -160,7 +203,7 @@ export class LuSelect<T>
 	@ContentChild(ASelectOptionFeeder)
 	optionFeederContent: ISelectOptionFeeder<T>;
 	@ViewChild(ASelectOptionFeeder) optionFeederView: ISelectOptionFeeder<T>;
-	private _optionFeeder: ISelectOptionFeeder<T>;
+	_optionFeeder: ISelectOptionFeeder<T>;
 	/**
 	 * Emits an event when the select recieve or lost the focus
 	 */
@@ -175,6 +218,7 @@ export class LuSelect<T>
 	 */
 	@HostBinding('class.is-focused') isFocused = false;
 
+	private _intlChanges: Subscription;
 	// validators
 	validate(c: AbstractControl): ValidationErrors | null {
 		return this._validator ? this._validator(c) : null;
@@ -183,14 +227,22 @@ export class LuSelect<T>
 	private _itemValidator: ValidatorFn = (): ValidationErrors | null => {
 		return null;
 	}
-	private _cvaOnChange: (value: T) => void = () => {};
+	private _cvaOnChange: (value: T | T[]) => void = () => {};
 	_onTouched = () => {};
 
 	constructor(
+		public _intl: LuSelectIntl,
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
-		protected _changeDetector: ChangeDetectorRef,
-	) {}
+		protected _changeDetectorRef: ChangeDetectorRef,
+	) {
+		this._selectAllLabel = this._intl.selectAllLabel;
+		this._intlChanges = _intl.changes.subscribe(() => {
+			this._changeDetectorRef.markForCheck();
+			this._selectAllLabel = this._intl.selectAllLabel;
+			}
+		);
+	}
 
 	// Life Cycle methods
 	ngOnInit() {
@@ -202,10 +254,12 @@ export class LuSelect<T>
 			'0',
 		);
 		this._picker.itemSelected.subscribe(item => {
-			this.value = item ? item.luOptionValue : undefined;
-			this._field.closePopover();
-			this.isFocused = false;
-			this.selectFocus.emit(false);
+			if (!this.multiple) {
+				this.value = item ? item.luOptionValue : undefined;
+				this._field.closePopover();
+				this.isFocused = false;
+				this.selectFocus.emit(false);
+			}
 		});
 	}
 	ngOnDestroy() {
@@ -215,14 +269,21 @@ export class LuSelect<T>
 
 	ngAfterContentInit() {
 		this.luOptions.changes
-			.pipe(startWith(null), takeUntil(this._destroy$))
+		.pipe(startWith(null), takeUntil(this._destroy$))
 			.subscribe(option => {
 				Promise.resolve().then(() => {
+					// We transfert to option the multiple state
+					this.luOptions.forEach(luOption => luOption.multiple = this.multiple);
+					// by default we initialize all items to check state
+					if (this.multiple) {
+						findArrayOption(this.luOptions.toArray(), <T[]>this.value).forEach(luOption => luOption.checked = true);
+					}
 					this._picker.resetOptions(
 						this.luOptions.toArray(),
 						this._forceChangeValue,
 					);
 					this._forceChangeValue = true;
+					this._changeDetectorRef.markForCheck();
 				});
 			});
 
@@ -231,7 +292,17 @@ export class LuSelect<T>
 				let first = true;
 				this.clearer.subscribe((value: T) => {
 					if (!first && this.value) {
-						this.value = value;
+						if (this.multiple) {
+							// We update the state of checked items
+							const tempValue = value ? [value] : [];
+							this.luOptions.forEach(luOption => luOption.checked = false);
+							findArrayOption(this.luOptions.toArray(), <T[]>tempValue).forEach(luOption => luOption.checked = false);
+							this.value =  tempValue;
+							this.selectAll = false;
+							this._changeDetectorRef.markForCheck();
+						} else {
+							this.value = value;
+						}
 					}
 					if (first) {
 						first = false;
@@ -274,6 +345,9 @@ export class LuSelect<T>
 		optionFeeder.registerKeyevent(this.onKeydown.bind(this));
 		optionFeeder.registerChangeOptions(this._optionChanges.bind(this));
 		optionFeeder.registerSelectOption(this._optionSelected.bind(this));
+		optionFeeder.registerSelectAllEvent(this._selectAllChanges.bind(this));
+		optionFeeder.multiple = this.multiple;
+		this._changeDetectorRef.markForCheck();
 
 		// render async to avoid expressionchanged exception
 		Promise.resolve().then(() => {
@@ -289,11 +363,14 @@ export class LuSelect<T>
 		this._canRemove = canRemove;
 	}
 
+	private _selectAllChanges(): void {
+		this._selectAllItems();
+	}
 	private _optionChanges(options: LuSelectOption<T>[]): void {
 		this._forceChangeValue = false;
 		this.luOptions.reset(options);
 		this.luOptions.notifyOnChanges();
-		this._changeDetector.markForCheck();
+		this._changeDetectorRef.markForCheck();
 	}
 
 	/** set the value to null */
@@ -305,23 +382,89 @@ export class LuSelect<T>
 	 * @param option : the LuSelectOption to apply
 	 */
 	_optionSelected(option: LuSelectOption<T>): void {
+		// We have to deal with multiple select in order to update the selected list
+		if (this.multiple) {
+			const selectedValues = [...(<T[]>this.value)];
+			if (option.checked) {
+				// We have to check that the value wasn't already selected
+				if (!selectedValues.find(value => sameOption(value, option.luOptionValue))) {
+					selectedValues.push(option.luOptionValue);
+				}
+			}
+
+			if (!option.checked) {
+				const indexOption = selectedValues.findIndex(value => sameOption(value, option.luOptionValue));
+				if (indexOption !== -1) {
+					selectedValues.splice(indexOption, 1);
+				}
+			}
+			const nbOptions = this._optionFeeder ? this._optionFeeder.length() : this._picker.luSelectOptions().length;
+			this.selectAll = selectedValues.length > 0;
+			this.partialSelectAll = selectedValues.length !== nbOptions;
+			this.value = selectedValues;
+			return;
+		}
+
 		this.value = option ? option.luOptionValue : null;
+	}
+
+	/** Check all the items  */
+	_selectAllItems(): void {
+		this.selectAll = !this.selectAll;
+		this.partialSelectAll = false;
+		this._picker.luSelectOptions().forEach(luOption =>  luOption.checked = this.selectAll);
+		const selectedValues = [...<T[]>this.value];
+		selectedValues.length = 0;
+		if (!this.selectAll) {
+			this.value = selectedValues;
+			return;
+		}
+
+		if (!this._optionFeeder) {
+			selectedValues.push(...this._picker.luSelectOptions().map(luOption => luOption.luOptionValue));
+			this.value = selectedValues;
+			return;
+		}
+
+		// We delegate the select all behaviour to the option feeder
+		this._optionFeeder.getAllEntities().subscribe((options: T[]) => {
+			selectedValues.push(...options);
+			this.value = selectedValues;
+		});
+		this._changeDetectorRef.markForCheck();
+
 	}
 
 	// render/display
 	protected render(value = this._selectOption) {
 		this._elementRef.nativeElement.value = this.display(value);
 	}
-	protected display(value: LuSelectOption<T> | null): string {
-		// If we haven't a LuSelectOption but there is a value on select, and if we have an optionFeeder, then
-		// we show the display value offer by the optionFeeder
-		if (!value && this.value && this._optionFeeder) {
-			return this._optionFeeder.textValue(this.value);
-		}
-		if (!value) {
+	protected display(value: LuSelectOption<T> | LuSelectOption<T>[] | null): string {
+		if (!value && !this._optionFeeder) {
 			return '';
 		}
-		return value.viewValue;
+
+		// We have to deal with the special case of no values if multiple
+		if (this.multiple && (<T[]>this.value).length === 0) {
+			return this._intl.noLabel;
+		}
+		// We have to deal with multiple values, if more than one element is selected, we
+		// show the number and the type, else, we show the value expected
+		if (this.multiple && (<T[]>this.value).length > 1) {
+			const allEntitiesSelected = (<T[]>this.value).length === this.luOptions.length;
+			const quantityLabel = allEntitiesSelected ? this._intl.allLabel : (<T[]>this.value).length;
+			const typeLabel = allEntitiesSelected ? this._intl.allTypeLabel : this._intl.typeLabel;
+			return `${quantityLabel} ${typeLabel}`;
+		}
+
+		const tempValue = this.multiple ? (<T[]>this.value)[0] : <T>this.value;
+		// If we haven't a LuSelectOption but there is a value on select, and if we have an optionFeeder, then
+		// we show the display value offer by the optionFeeder
+		if (tempValue && this._optionFeeder) {
+			return this._optionFeeder.textValue(tempValue);
+		}
+		const optionValue = this.multiple ? (<LuSelectOption<T>[]>value)[0] : <LuSelectOption<T>>value;
+		return optionValue ? optionValue.viewValue : '';
 	}
 
 	// host listening
@@ -336,7 +479,17 @@ export class LuSelect<T>
 			case DELETE:
 			case BACKSPACE:
 				if (this.clearer) {
-					this.value = this.clearer.clearValue();
+					const clearValue = this.clearer.clearValue();
+					if (this.multiple) {
+						const tempValue = clearValue ? [clearValue] : [];
+						this.luOptions.forEach(luOption => luOption.checked = false);
+						// findArrayOption(this.luOptions.toArray(), <T[]>tempValue).map(luOption => luOption.checked = false);
+						this.selectAll = false;
+						this.value = tempValue;
+						// We update the state of check items
+					} else {
+						this.value = clearValue;
+					}
 				}
 				break;
 			case HOME:
@@ -407,6 +560,7 @@ export class LuSelect<T>
 			: this.placeholder ? this.placeholder : '';
 	}
 	private _emitClearable() {
-		this.canRemove(this.clearer && !!this.value);
+		this.canRemove(this.clearer
+			&& this.multiple ? (!!this.value && (<T[]>this.value).length !== 0) : !!this.value);
 	}
 }

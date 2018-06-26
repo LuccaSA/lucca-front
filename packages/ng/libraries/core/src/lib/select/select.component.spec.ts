@@ -5,6 +5,7 @@ import { LuSelectClearerFirstOrDefaultComponent } from './clearer';
 import { LuSelectDirective } from './directive/select.directive';
 import { LuSelectPicker } from './picker/select-picker.component';
 import { LuSelect } from './select.component';
+import { LuSelectIntl } from './utils';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { escapeHtml } from '@angular/platform-browser/src/browser/transfer_state';
@@ -57,6 +58,7 @@ describe('LuSelect', () => {
 				OVERLAY_PROVIDERS,
 				ScrollStrategyOptions,
 				ScrollDispatcher,
+				LuSelectIntl,
 				Platform,
 			],
 			declarations: [

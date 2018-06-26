@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { LuSelectOption } from '../option/select-option.component';
 import { ISelectSearcher } from './select-searcher.model';
 import { LuSelectSearcherComponent } from './select-searcher.component';
-import { LuSelectSearchIntl } from '../utils';
+import { LuSelectSearchIntl, LuSelectIntl } from '../utils';
 import { FormsModule } from '@angular/forms';
 import { Platform } from '@angular/cdk/platform';
 import { Component } from '@angular/core';
@@ -43,7 +43,7 @@ export class WrapperSearcherElementComponent {
 describe('LuSelectSearcher', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [Platform, LuSelectSearchIntl],
+			providers: [Platform, LuSelectSearchIntl, LuSelectIntl],
 			declarations: [LuSelectOption, LuSelectSearcherComponent],
 			imports: [FormsModule],
 		}).compileComponents();

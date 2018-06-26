@@ -17,6 +17,7 @@ import {
 	LuSelectOption,
 	LuSelectOptionSelectionChange,
 	LuSelectSearchIntl,
+	LuSelectIntl,
 	ASelectScrollPicker,
 } from '../../../select/index';
 import { IApiSelectFeeder, IApiSelectFeederWithPaging } from '../feeder/index';
@@ -63,10 +64,11 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 
 	constructor(
 		protected _elementRef: ElementRef,
+		public _intlSelect: LuSelectIntl,
 		public _intl: LuSelectSearchIntl,
 		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
-		super(_elementRef, _intl, _changeDetectorRef);
+		super(_elementRef, _intlSelect, _intl, _changeDetectorRef);
 
 		this._clue$
 			.debounceTime(100) // wait 100ms after the last event before emitting last event
@@ -159,5 +161,13 @@ export class LuApiSelectPicker<T = any> extends ASelectScrollPicker<T>
 
 	_selectOption(option: LuSelectOptionSelectionChange<T>) {
 		this._callbackSelectOption(option.source);
+	}
+
+	length(): number {
+		return this.selectApiFeeder.length();
+	}
+
+	getAllEntities(): Observable<T[]> {
+		return this.selectApiFeeder.getAllEntities();
 	}
 }

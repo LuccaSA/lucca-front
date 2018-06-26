@@ -1,3 +1,15 @@
+<div *ngIf="multiple" class="lu-select-option" (click)="_selectAllItems()">
+	<div class="checkbox">
+		<input class="checkbox-input"
+			type="checkbox"
+			id="selectAllID"
+			[ngClass]="{'is-incomplete': _partialSelectAll}"
+			[checked]="_selectAll">
+		<div class="checkbox-label" for="selectAllID">
+			{{_selectAllLabel}}
+		</div>
+	</div>
+</div>
 <div class="select-options" #scrollElement>
 	<lu-select-option [luOptionValue]="item" *ngFor="let item of options" (onSelectionChange)="selectOption($event)">{{textValue(item)}}</lu-select-option>
 </div>

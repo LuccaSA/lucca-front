@@ -9,7 +9,7 @@
 	background: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
-	box-shadow: 0 0 0 1px _component("textfield.border.color");
+	box-shadow: inset 0 0 0 1px _component("textfield.border.color");
 	color: _component("textfield.input.color");
 	font-family: unquote(_theme("commons.font.family"));
 	font-size: _component("textfield.font-size");
@@ -26,7 +26,7 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 1px _component("textfield.border.focus");
+		box-shadow: inset 0 0 0 1px _component("textfield.border.focus");
 	}
 }
 
@@ -49,6 +49,7 @@
 	transition: all 150ms ease;
 	word-break: break-word;
 	white-space: nowrap;
+	margin-bottom: _component("textfield.label.margin-bottom");
 }
 
 .textfield-messages {
@@ -196,6 +197,20 @@
 			padding-right: 2rem;
 		}
 	}
+
+	/* Inside radio */
+
+	&.mod-radio {
+		display: inline-block;
+		margin-left: .25rem;
+
+		.textfield-input {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+
+	/* Style */
 
 	&.mod-material {
 		@extend %input_material;
