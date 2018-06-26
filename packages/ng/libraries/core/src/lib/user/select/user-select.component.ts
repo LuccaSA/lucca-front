@@ -12,8 +12,7 @@ import {
 } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { IUser } from '../user.model';
-import { LuSelect, LuSelectIntl } from '../../select';
-import { LuApiSelectPicker } from '../../api';
+import { LuSelect, LuSelectIntl } from '../../select/index';
 import { LuUserSelectApiFeeder } from './user-select-api-feeder';
 /**
  * User select

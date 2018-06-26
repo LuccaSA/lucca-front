@@ -1,11 +1,10 @@
 import {
 	ALuApiSelectFeederWithPaging,
-	IApiSelectFeederWithPaging,
-} from '../../api';
+} from '../../api/index';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '../';
+import { IUser } from '../user.model';
 
 @Injectable()
 export class LuUserSelectApiFeeder<
