@@ -33,7 +33,7 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	private _multiple = false;
 	private _boudingRect: any;
 
-	protected _checked = false;
+	public _checked = false;
 
 
 	get multiple(): boolean {

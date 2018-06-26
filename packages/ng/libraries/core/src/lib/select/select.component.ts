@@ -231,7 +231,7 @@ export class LuSelect<T>
 	_onTouched = () => {};
 
 	constructor(
-		public _intl: LuSelectIntl,
+		protected _intl: LuSelectIntl,
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,

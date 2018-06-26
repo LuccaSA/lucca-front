@@ -1,4 +1,4 @@
-import { LuSelectIntl } from '../../../../src/app/select/';
+import { LuSelectIntl } from '../../select/index';
 
 export function getOverrideLuSelectIntl(): LuSelectIntl {
 	const luSelectIntl = new LuSelectIntl();
