@@ -13,12 +13,12 @@ addons:
 before_script:
 
 script:
- - npm run travis
+ - yarn travis
 
 after_success:
   - cd ./demo
   - yarn
-  - npm run build
+  - yarn build
   - cd ../
   - chmod ugo+x ./deploy.sh
   - ./deploy.sh
