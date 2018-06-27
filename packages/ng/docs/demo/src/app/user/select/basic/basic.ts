@@ -14,5 +14,11 @@ export class DemoBasicUserSelectComponent {
 		lastName: 'Garreau',
 	};
 
+	userSelectMultiple = [{
+		id: 464,
+		firstName: 'Jean-François',
+		lastName: 'Garreau',
+	}];
+
 	constructor() {}
 }

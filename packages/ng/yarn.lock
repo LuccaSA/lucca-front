@@ -207,15 +207,15 @@
   dependencies:
     tslib "^1.9.0"
 
-"@lucca-front/icons@^1.0.0-beta.1":
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@lucca-front/icons/-/icons-1.0.0-beta.1.tgz#57a71c6047a46cd93135bf58ea983de00a071e5f"
+"@lucca-front/icons@1.0.0-rc.0", "@lucca-front/icons@^1.0.0-rc.0":
+  version "1.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@lucca-front/icons/-/icons-1.0.0-rc.0.tgz#fb1b8aed87a1501b986ef0b5beeedc1b4d5c3469"
 
-"@lucca-front/scss@^1.0.0-beta.1":
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@lucca-front/scss/-/scss-1.0.0-beta.1.tgz#54298897c1e65ee4ac07addbd1536a9ff283a3d5"
+"@lucca-front/scss@1.0.0-rc.0":
+  version "1.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@lucca-front/scss/-/scss-1.0.0-rc.0.tgz#416eb84a74164c44d19c83245fa9d1e556be73ba"
   dependencies:
-    "@lucca-front/icons" "^1.0.0-beta.1"
+    "@lucca-front/icons" "^1.0.0-rc.0"
     gulp-postcss "^7.0.1"
     postcss-custom-properties "^7.0.0"
 
@@ -5675,9 +5675,17 @@ postcss-value-parser@^3.2.3:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
 
-postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.18, postcss@^6.0.19, postcss@^6.0.2, postcss@^6.0.22, postcss@^6.x:
+postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.19, postcss@^6.0.2, postcss@^6.0.22, postcss@^6.x:
   version "6.0.22"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.22.tgz#e23b78314905c3b90cbd61702121e7a78848f2a3"
+  dependencies:
+    chalk "^2.4.1"
+    source-map "^0.6.1"
+    supports-color "^5.4.0"
+
+postcss@^6.0.18:
+  version "6.0.23"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.23.tgz#61c82cc328ac60e677645f979054eb98bc0e3324"
   dependencies:
     chalk "^2.4.1"
     source-map "^0.6.1"

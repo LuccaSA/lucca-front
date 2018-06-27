@@ -11,7 +11,8 @@ $textfield: (
 
 	label: (
 		color: _color("text.default"),
-		font-size: _theme("sizes.small.font-size")
+		font-size: _theme("sizes.small.font-size"),
+		margin-bottom: .25rem,
 	),
 
 	suffix: (

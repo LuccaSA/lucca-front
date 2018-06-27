@@ -12,5 +12,6 @@ export class BasicApiSelectComponent {
 	params = ['axisId=5'];
 
 	itemSelect: any;
+	itemSelectMultiple: any = [];
 	constructor(public apiSelectFeeder: DemoApiSelectFeeder) {}
 }

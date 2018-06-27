@@ -12,8 +12,7 @@ import {
 } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { IUser } from '../user.model';
-import { LuSelect } from '../../select';
-import { LuApiSelectPicker } from '../../api';
+import { LuSelect, LuSelectIntl } from '../../select/index';
 import { LuUserSelectApiFeeder } from './user-select-api-feeder';
 /**
  * User select
@@ -52,12 +51,13 @@ export class LuUserSelect<T extends IUser> extends LuSelect<T>
 	@Input() fields = [];
 
 	constructor(
+		public _intl: LuSelectIntl,
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
 		protected _changeDetector: ChangeDetectorRef,
 		public userSelectApiFeeder: LuUserSelectApiFeeder<T>,
 	) {
-		super(_elementRef, _renderer, _changeDetector);
+		super(_intl, _elementRef, _renderer, _changeDetector);
 	}
 
 	ngOnInit() {

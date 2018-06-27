@@ -38,11 +38,9 @@
     "gulp-stylelint": "^3.9.0"
   },
   "peerDependencies": {
-    "@lucca-front/icons": "^0.7.0"
+    "@lucca-front/icons": "^1.0.0-rc.0"
   },
   "dependencies": {
-    "@lucca-front/icons": "^1.0.0-rc.0",
-    "gulp-postcss": "^7.0.1",
-    "postcss-custom-properties": "^7.0.0"
+    "@lucca-front/icons": "^1.0.0-rc.0"
   }
 }

@@ -10,6 +10,7 @@ import { LuSelectPickerModule } from './picker/index';
 import { LuSelectSearcherModule } from './searcher/index';
 import { LuSelect } from './select.component';
 import { LuPopoverModule } from '../popover/popover.module';
+import { LU_SELECT_INTL_PROVIDER } from './utils/select.intl';
 
 @NgModule({
 	imports: [
@@ -36,5 +37,6 @@ import { LuPopoverModule } from '../popover/popover.module';
 		LuSelectSearcherModule,
 		LuSelect,
 	],
+	providers: [LU_SELECT_INTL_PROVIDER],
 })
 export class LuSelectModule {}

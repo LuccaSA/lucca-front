@@ -160,4 +160,5 @@ export class BasicSearcherSelectComponent {
 		{ name: 'yellowgreen', code: '#9acd32' },
 	];
 	colorSelect = { name: 'red', code: '#ff0000' };
+	colorSelectMultiple = [{ name: 'red', code: '#ff0000' }];
 }

@@ -1,12 +1,17 @@
 .form-group {
-	margin-bottom: 1rem;
+	margin-bottom: _component("form.group.margin-bottom");
 	position: relative;
 }
 
 .form-group-label {
 	display: block;
 	font-weight: 600;
-	margin-bottom: .3rem;
+	font-size: _component("form.label.font-size");
+	margin-bottom: _component("form.label.margin-bottom");
+}
+
+.form-title {
+  margin-bottom: _theme("spacings.small");
 }
 
 .form-actions {

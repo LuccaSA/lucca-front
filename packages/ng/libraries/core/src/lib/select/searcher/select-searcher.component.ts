@@ -11,14 +11,16 @@ import {
 	OnDestroy,
 	QueryList,
 } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { LuSelectOption, ASelectOptionFeeder } from '../option/index';
 import { findOption } from '../utils/index';
 import { ISelectSearcher } from './select-searcher.model';
-import { LuSelectSearchIntl } from '../utils/index';
+import { LuSelectSearchIntl, LuSelectIntl } from '../utils/index';
 
 @Component({
 	selector: 'lu-select-searcher',
@@ -41,7 +43,7 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 	_noResults = false;
 	private _clue$: Subject<string> = new Subject<string>();
 
-	private _intlChanges: Subscription;
+	protected _intlChanges: Subscription;
 
 	private innerMap = {};
 
@@ -55,10 +57,11 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 	@ViewChild('scrollElement') _scrollElement: ElementRef;
 
 	constructor(
+		public _intlSelect: LuSelectIntl,
 		public _intl: LuSelectSearchIntl,
-		private _changeDetectorRef: ChangeDetectorRef,
+		protected _changeDetectorRef: ChangeDetectorRef,
 	) {
-		super();
+		super(_intlSelect, _changeDetectorRef);
 		this._clue$
 			.debounceTime(100) // wait 100ms after the last event before emitting last event
 			.distinctUntilChanged() // only emit if value is different from previous value
@@ -165,5 +168,13 @@ export class LuSelectSearcherComponent<T> extends ASelectOptionFeeder<T>
 	textValue(item: T): string {
 		const value = findOption(this.luOptions.toArray(), item);
 		return value ? value.viewValue : '';
+	}
+
+	length(): number {
+		return this._originalList.length;
+	}
+
+	getAllEntities(): Observable<T[]> {
+		return Observable.of(this._originalList.map(luOption => luOption.luOptionValue));
 	}
 }

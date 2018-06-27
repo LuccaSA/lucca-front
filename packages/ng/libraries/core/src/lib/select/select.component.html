@@ -4,6 +4,18 @@
 	<div class="select-value">{{_strValue}}</div>
 	<ng-content></ng-content>
 	<lu-select-picker #selectRef (itemSelected)="_optionSelected($event)">
+		<div *ngIf="multiple && !_optionFeeder" class="lu-select-option" (click)="_selectAllItems()">
+			<div class="checkbox">
+				<input class="checkbox-input"
+					type="checkbox"
+					id="selectAllID"
+					[ngClass]="{'is-incomplete': _partialSelectAll}"
+					[checked]="selectAll">
+				<div class="checkbox-label" for="selectAllID">
+					{{_selectAllLabel}}
+				</div>
+			</div>
+		</div>
 		<ng-content select="[luOptionValue],[luOptionFeeder]"></ng-content>
 	</lu-select-picker>
 </div>

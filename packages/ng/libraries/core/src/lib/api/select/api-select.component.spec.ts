@@ -6,6 +6,7 @@ import { IApiSelectFeeder } from './feeder';
 import {
 	LuSelectOption,
 	LuSelectSearchIntl,
+	LuSelectIntl,
 	LuSelect,
 	LuSelectPicker,
 	LuSelectDirective,
@@ -34,6 +35,17 @@ export class MockApiFeeder implements IApiSelectFeeder<any> {
 	}
 	textValue(item: any): string {
 		return 'hello mock';
+	}
+
+	length(): number {
+		return 2;
+	}
+
+	getAllEntities(): Observable<any[]> {
+		return Observable.of(<any[]>[
+			{ id: 1, name: 'test 1' },
+			{ id: 2, name: 'test 2' },
+		]);
 	}
 }
 @Component({
@@ -95,6 +107,7 @@ describe('LuSelectApi', () => {
 				OVERLAY_PROVIDERS,
 				ScrollStrategyOptions,
 				ScrollDispatcher,
+				LuSelectIntl,
 				LuSelectSearchIntl,
 			],
 			imports: [FormsModule],

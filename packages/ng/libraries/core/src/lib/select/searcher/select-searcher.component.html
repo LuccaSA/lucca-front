@@ -9,6 +9,18 @@
 	(input)="_onFieldChange($event.target.value)"
 	>
 </div>
+<div *ngIf="multiple" class="lu-select-option" (click)="_selectAllItems()">
+	<div class="checkbox">
+		<input class="checkbox-input"
+			type="checkbox"
+			id="selectAllID"
+			[ngClass]="{'is-incomplete': _partialSelectAll}"
+			[checked]="selectAll">
+		<div class="checkbox-label" for="selectAllID">
+			{{_selectAllLabel}}
+		</div>
+	</div>
+</div>
 <div class="select-options" #scrollElement>
 	<ng-content select="[luOptionValue]"></ng-content>
 	<div class="select-options-noResult" *ngIf="_noResults">{{_intl.noResultsLabel}}</div>

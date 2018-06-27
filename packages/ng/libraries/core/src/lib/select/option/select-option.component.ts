@@ -9,6 +9,7 @@ import {
 	ViewEncapsulation,
 	ElementRef,
 	ChangeDetectorRef,
+	ViewChild,
 } from '@angular/core';
 import { LuSelectOptionSelectionChange } from './select-option.event';
 
@@ -28,7 +29,21 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	private _focused = false;
 	private _selected = false;
 	private _displayed = true;
+
+	private _multiple = false;
 	private _boudingRect: any;
+
+	public _checked = false;
+
+
+	get multiple(): boolean {
+		return this._multiple;
+	}
+
+	set multiple(multiple: boolean) {
+		this._multiple = multiple;
+		this._changeDetector.markForCheck();
+	}
 
 	/**
 	 * true if the option is focused
@@ -57,12 +72,23 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 		this._changeDetector.markForCheck();
 	}
 
+
+	get checked(): boolean {
+		return this._checked;
+	}
+
+	set checked(checked: boolean) {
+		this._checked = checked;
+		this._changeDetector.markForCheck();
+	}
+
 	/**
 	 * the representation as string of the option
 	 */
 	get viewValue(): string {
 		return (this._elementRef.nativeElement.textContent || '').trim();
 	}
+
 
 	/**
 	 * The value of the option
@@ -99,6 +125,9 @@ export class LuSelectOption<T> implements OnInit, OnDestroy {
 	 * Select the current option. This method will emit an event onSelectionChange
 	 */
 	_selectOption(): void {
+		if (this.multiple) {
+			this._checked = !this._checked;
+		}
 		this.onSelectionChange.emit(
 			new LuSelectOptionSelectionChange<T>(this, true),
 		);

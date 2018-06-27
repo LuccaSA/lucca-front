@@ -3,10 +3,15 @@ import {
 	Component,
 	OnInit
 } from '@angular/core';
+import { LuSelectIntl } from '@lucca-front/ng';
+import {overrideSelectIntl} from './simple-select-intl';
 @Component({
 	selector: 'demo-simple-select',
 	templateUrl: './simple-select.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{ provide: LuSelectIntl, useValue: overrideSelectIntl },
+	],
 })
 export class DemoSimpleSelectComponent implements OnInit {
 	options = [
@@ -16,6 +21,7 @@ export class DemoSimpleSelectComponent implements OnInit {
 		{ id: 4, name: 'blue' },
 	];
 	itemSelect = { id: 1, name: 'red' };
+	itemSelectMultiple = [{ id: 1, name: 'red' }];
 
 	lotOfOptions = [];
 	itemLotOfOptionsSelect = { id: 1, name: 'option 1' };

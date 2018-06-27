@@ -7,6 +7,17 @@
 ### Enhancements
 ### Fixes
 
+## 0.7.1
+### Adding
+- `breadcrumb`
+### Enhancements
+- `tables` sortable
+- `textfield` Supports inside radio label display
+- `textfields` / `form` Improve margin system
+- `card` Disabled status
+### Fixes
+- `textfields` Show all borders even with browser zoom
+
 ## 0.7.0
 ### Fixes
 - `navSide` toggle height on small resolutions
