@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -15,6 +15,20 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@lucca-front/ng": [
+        "dist"
+      ],
+      "@lucca-front/ng/formly": [
+        "dist/formly"
+      ],
+      "@api-docs": [
+        "docs/demo/api-docs"
+      ],
+      "@lucca-front/ng/material": [
+        "dist/material"
+      ]
+    }
   }
 }

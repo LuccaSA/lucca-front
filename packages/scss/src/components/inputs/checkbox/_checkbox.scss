@@ -65,19 +65,19 @@
 	@mixin checkboxColoring($palette) {
 		.checkbox-input:checked ~ .checkbox-label {
 			&::before {
-				background-color: _get($palette, "color");
-				box-shadow: inset 0 0 0 2px _get($palette, "color");
+				background-color: _color($palette);
+				box-shadow: inset 0 0 0 2px _color($palette);
 			}
 		}
 	}
 
 	// default color
-	@include checkboxColoring(_component("checkbox.default-palette"));
+	@include checkboxColoring("checkbox.default-palette");
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include checkboxColoring($palette);
+			@include checkboxColoring($name);
 		}
 	}
 }
@@ -110,14 +110,14 @@
 			cursor: not-allowed;
 
 			&::before {
-				box-shadow: inset 0 0 0 2px lighten(_color("text.light"), 15%);
+				box-shadow: inset 0 0 0 2px _color("text.placeholder");
 			}
 		}
 
 		&:checked ~ .checkbox-label {
 			&::before {
-				background-color: lighten(_color("text.light"), 15%);
-				box-shadow: inset 0 0 0 2px lighten(_color("text.light"), 15%);
+				background-color: _color("text.placeholder");
+				box-shadow: inset 0 0 0 2px _color("text.placeholder");
 			}
 		}
 	}

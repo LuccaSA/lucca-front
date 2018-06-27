@@ -1,8 +1,9 @@
+$theme: () !default;
+$noCssVar: false !default;
 @import
 	"theming/utils",
 	"theming/get-set";
 
-$theme: () !default;
 
 @import
 	"theming/palettes",

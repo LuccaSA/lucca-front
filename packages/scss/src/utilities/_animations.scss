@@ -78,7 +78,7 @@
 // DURATION MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 [class*="u-animated"] {
-	@each $name, $duration in _theme("commons.animations.durations") {
+	@each $name, $duration in _getMap("commons.animations.durations") {
 		&.mod-animation-duration-#{$name} {
 			animation-duration: $duration;
 		}

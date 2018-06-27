@@ -2,31 +2,64 @@ $palettes: (
 	"primary": (
 		"color": #FFCC00,
 		"text": #666666,
+		"transparent": rgba(#FFCC00, .1),
+		"dark": darken(#FFCC00, 5%),
+		"darker": darken(#FFCC00, 20%),
+		"light": lighten(#FFCC00, 5%),
+		"lighter": lighten(#FFCC00, 20%)
 	),
 	"secondary": (
 		"color": #FF6600,
 		"text": #FFFFFF,
+		"transparent": rgba(#FF6600, .1),
+		"dark": darken(#FF6600, 5%),
+		"darker": darken(#FF6600, 20%),
+		"light": lighten(#FF6600, 5%),
+		"lighter": lighten(#FF6600, 20%)
 	),
 	"success": (
 		"color": #9ACD32,
 		"text": #FFFFFF,
+		"transparent": rgba(#9ACD32, .1),
+		"dark": darken(#9ACD32, 5%),
+		"darker": darken(#9ACD32, 20%),
+		"light": lighten(#9ACD32, 5%),
+		"lighter": lighten(#9ACD32, 20%)
 	),
 	"warning": (
 		"color": #FF9900,
 		"text": #FFFFFF,
+		"transparent": rgba(#FF9900, .1),
+		"dark": darken(#FF9900, 5%),
+		"darker": darken(#FF9900, 20%),
+		"light": lighten(#FF9900, 5%),
+		"lighter": lighten(#FF9900, 20%)
 	),
 	"error": (
 		"color": #FF3300,
 		"text": #FFFFFF,
+		"transparent": rgba(#FF3300, .1),
+		"dark": darken(#FF3300, 5%),
+		"darker": darken(#FF3300, 20%),
+		"light": lighten(#FF3300, 5%),
+		"lighter": lighten(#FF3300, 20%)
 	),
 );
 
 $colors: (
 	text: (
-		"dark": #444444,
-		"default": #666666,
-		"light": #999999,
-		"placeholder": #CCCCCC,
+		"dark": (
+			color: #444444
+		),
+		"default": (
+			color: #666666
+		),
+		"light": (
+			color: #999999
+		),
+		"placeholder": (
+			color: #CCCCCC
+		)
 	),
 );
 $theme: _set($theme, "palettes", $palettes);

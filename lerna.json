@@ -1,9 +1,11 @@
 {
   "lerna": "2.5.1",
   "packages": [
-    "packages/*"
+    "packages/*",
+    "packages/ng/dist"
   ],
-  "version": "0.7.4",
+  "npmClient": "yarn",
+  "version": "1.0.0-rc.0",
   "command": {
     "publish": {
       "message": "publish %s",
