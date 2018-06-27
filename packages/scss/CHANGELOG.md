@@ -4,8 +4,11 @@
 ### New features
 ### Breaking changes
 ### Adding
+- `utility` ellipsis
 ### Enhancements
+- `loading` Inverted colors
 ### Fixes
+- `table` sortable arrow always stay on the last line
 
 ## 0.7.1
 ### Adding

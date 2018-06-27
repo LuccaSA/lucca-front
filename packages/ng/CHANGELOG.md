@@ -8,6 +8,10 @@
 ### Updated dependencies
 ### Updated devDependencies
 
+## 0.7.2
+### Fixes
+- Remove `module.id` from declaration of `select-clearer` and `rdd-feeder`
+
 ## 0.7.0
 - `animations` - add in/out timing and triggerName parameters to LuXAnimationFactory
 - `animations` - remove generic LuAnimationFactory
