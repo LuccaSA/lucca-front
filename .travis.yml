@@ -11,6 +11,7 @@ addons:
   chrome: stable
 
 before_script:
+ - yarn build
 
 script:
  - yarn travis
