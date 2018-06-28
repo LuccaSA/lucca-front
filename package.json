@@ -24,7 +24,8 @@
     "travis": "lerna run travis --scope=@lucca-front/ng-internal",
     "format": "npm run format-ng && npm run format-scss && npm run format-icons",
     "format-ng": "prettier --config ./.prettierrc --write \"packages/ng/{src,demo}/**/*.{ts}\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "build": "lerna run build"
   },
   "lint-staged": {
     "gitDir": "./",
