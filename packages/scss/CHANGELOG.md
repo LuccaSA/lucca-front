@@ -3,6 +3,33 @@
 ## In Dev
 ### New features
 ### Breaking changes
+
+## 1.0.0
+The library has been revamped to use CSSVars by default.
+If you want to disable it, just add this at the top of your main stylesheet, before any import.
+```
+$noCssVar: true;
+```
+
+We avoid as much breaking changes as possible, but here's a few:
+### Breaking changes
+- You need to add this in your main CSS to generate the CSS vars from the theme:
+```
+:root {
+  @include generateCSSVarsFromTheme($theme);
+}
+```
+- Palettes now needs 5 new properties: 
+  - `darker`
+  - `dark`
+  - `light`
+  - `lighter`
+  - `transparent`
+- The `colors.text` children are now maps with at least a `color` property 
+- The getter functions returns CSS vars by default.
+  - if you need to access a map, use the new `_getMap("keys")` function
+  - if you need to get the value, set the last parameter to `true` in getter functions (eg. `_color("palette", "key", true)`). It comes handy wherever your using SCSS variable manipulation
+
 ### Adding
 - `utility` ellipsis
 ### Enhancements
