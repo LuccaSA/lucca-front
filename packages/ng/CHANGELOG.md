@@ -3,10 +3,35 @@
 ## In Dev
 ### New features
 ### Fixes
-- `user tile` word break
 ### Breaking changes
 ### Updated dependencies
 ### Updated devDependencies
+
+## 1.0.0
+### New features
+- :sparkles: standard distribution: no need to import
+- :hammer: uses cssvars to allow components to be fully customizable
+
+### Fixes
+- `user tile` word break
+
+### Breaking changes
+- some namming fixes, some things didn't respect the right prefix or the camel/kebab case convention
+- split package in 3:
+	- `@lucca-front/ng` depends on angular 6, contains our components that dont depend on any 3rd party lib
+	- `@lucca-front/ng/material` depends on angular 6 + angular/material, contains style override for ng-mat components
+	- `@lucca-front/ng/formly` depends on angular 6 + angular/material + ngx-formly, offers the formly override compatible with our css
+
+### Updated dependencies
+all dependencies are moved to peer dependencies
+- angular 6+
+- ngx-formly 4+
+- angular material 6+
+- rxjs 6+
+
+## 0.7.3
+### New features
+- `lu-select` - add multiple values support
 
 ## 0.7.2
 ### Fixes

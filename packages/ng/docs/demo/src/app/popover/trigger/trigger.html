@@ -1,0 +1,18 @@
+<div class="button" [luPopoverTriggerFor]="click">Popover on click</div>
+<div class="button" [luPopoverTriggerFor]="hover">Popover on hover</div>
+<!-- <div class="button" [luPopoverTriggerFor]="focus">Popover on focus</div> -->
+<div class="textfield mod-material">
+		<input class="textfield-input" name="api" [luPopoverTriggerFor]="focus">
+		<label class="textfield-label" for="api">popover on focus</label>
+	</div>
+<div class="spacer" style="height: 300px"></div>
+<lu-popover #click trigger-on="click">
+	on click
+</lu-popover>
+
+<lu-popover #hover trigger-on="hover">
+	on Hover
+</lu-popover>
+<lu-popover #focus trigger-on="focus">
+	on Focus
+</lu-popover>

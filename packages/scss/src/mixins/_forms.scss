@@ -1,9 +1,9 @@
 @mixin textfieldError() {
-	box-shadow: inset 0 0 0 1px _color("error");
-	background-color: rgba( _color("error"), .1 );
+	box-shadow: 0 0 0 1px _color("error");
+	background-color: _color("error", "transparent");
 
 	&::placeholder {
-		color: rgba( _color("error"), .5 );
+		color: _color("error", "light");
 	}
 
 	~ .textfield-label {
@@ -19,7 +19,7 @@
 	box-shadow: 0 2px 0 0 _color("error");
 
 	&::placeholder {
-		color: rgba( _color("error"), .5 );
+		color: _color("error", "transparent");
 	}
 
 	~ .textfield-label {
@@ -32,15 +32,15 @@
 }
 
 @mixin textfieldFramedError() {
-	background-color: transparentize(_color("error"), .9);
+	background-color: _color("error", "transparent");
 
 	&::placeholder {
-		color: rgba( _color("error"), .5 );
+		color: _color("error", "dark");
 	}
 
 	&:focus, &:hover {
 		@include fakeBorder(1px, _color("error"));
-		background-color: transparentize(_color("error"), .9);
+		background-color: _color("error", "transparent");
 	}
 
 	~ .textfield-label, ~ .textfield-suffix {

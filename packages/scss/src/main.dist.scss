@@ -1,0 +1,7 @@
+@import
+	"main",
+	"mixins/cssvars";
+
+:root {
+	@include generateCSSVarsFromTheme($theme);
+}

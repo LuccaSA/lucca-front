@@ -1,0 +1,36 @@
+<section class="contentSection">
+	<h2>Search</h2>
+	<div class="form-group">
+		<div class="textfield">
+			<lu-select [(ngModel)]="colorSelect"
+				class="textfield-input"
+				placeholder="placeholder"
+				name="itemMods">
+				<lu-select-searcher luOptionFeeder>
+					<lu-select-option *ngFor="let color of colorOptions" [luOptionValue]="color">{{color.name}}</lu-select-option>
+				</lu-select-searcher>
+			</lu-select>
+			<label class="textfield-label" for="itemMods">Colors</label>
+		</div>
+	</div>
+	<code class="code mod-block">{{ colorSelect | json }}</code>
+</section>
+
+<section class="contentSection">
+	<h2>Search - Multiple</h2>
+	<div class="form-group">
+		<div class="textfield">
+			<lu-select [(ngModel)]="colorSelectMultiple"
+				class="textfield-input"
+				placeholder="placeholder"
+				multiple="true"
+				name="itemMods">
+				<lu-select-searcher luOptionFeeder>
+					<lu-select-option *ngFor="let color of colorOptions" [luOptionValue]="color">{{color.name}}</lu-select-option>
+				</lu-select-searcher>
+			</lu-select>
+			<label class="textfield-label" for="itemMods">Colors</label>
+		</div>
+	</div>
+	<code class="code mod-block">{{ colorSelectMultiple | json }}</code>
+</section>

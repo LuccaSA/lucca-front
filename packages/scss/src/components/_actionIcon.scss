@@ -12,11 +12,11 @@
 	&:hover {
 		&:not([disabled]) {
 			background: _component("actionIcon.hover.background");
-			color: darken(_color("text.default"), 25%);
+			color: _color("text.dark");
 		}
 	}
 
-	.lucca-icon, .#{_theme("icons.prefix")} {
+	.lucca-icon, .#{_theme("icons.prefix", true)} {
 		font-size: 1.2rem;
 	}
 }

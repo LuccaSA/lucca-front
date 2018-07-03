@@ -112,7 +112,7 @@
 
 	@mixin inputColoring($palette) {
 		.textfield-input:focus {
-			box-shadow: inset 0 0 0 1px _get($palette, "color");
+			box-shadow: 0 0 0 1px _color($palette);
 
 			~ .textfield-label {
 				color: _color("text.default");
@@ -128,9 +128,9 @@
 	}
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include inputColoring($palette);
+			@include inputColoring($name);
 		}
 	}
 }
@@ -143,9 +143,9 @@
 
 	/* Width */
 
-	@each $textfield-size-name, $textfield-width in _component("textfield.sizes") {
+	@each $textfield-size-name, $textfield-width in _getMap("components.textfield.sizes") {
 		&.mod-#{$textfield-size-name} {
-			width: $textfield-width;
+			width: _component("textfield.sizes."+$textfield-size-name);
 		}
 	}
 

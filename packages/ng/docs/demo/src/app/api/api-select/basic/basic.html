@@ -1,0 +1,42 @@
+<section class="contentSection">
+	<h2>Load by module</h2>
+	<div class="textfield">
+		<lu-api-select [(ngModel)]="itemSelect"
+			[selectApiFeeder]="apiSelectFeeder"
+			class="textfield-input"
+			placeholder="placeholder"
+			name="itemOptions">
+		</lu-api-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
+<section class="contentSection">
+	<h2>Load by component</h2>
+	<div class="textfield">
+		<lu-api-select [(ngModel)]="itemSelect"
+			[selectApiFeeder]="feeder"
+			class="textfield-input"
+			name="feederComp">
+			<lu-rdd-feeder #feeder [api]="api" [params]="params"></lu-rdd-feeder>
+		</lu-api-select>
+		<label class="textfield-label" for="feederComp">my label</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
+
+
+<section class="contentSection">
+		<h2>Load by module - Multiple</h2>
+		<div class="textfield">
+			<lu-api-select [(ngModel)]="itemSelectMultiple"
+				[selectApiFeeder]="apiSelectFeeder"
+				class="textfield-input"
+				placeholder="placeholder"
+				multiple="true"
+				name="itemOptions">
+			</lu-api-select>
+			<label class="textfield-label" for="itemOptions">my label</label>
+		</div>
+		<code class="code mod-block">{{ itemSelectMultiple | json }}</code>
+	</section>

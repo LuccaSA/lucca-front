@@ -18,14 +18,14 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .label {
 	@mixin labelColoring($palette) {
-		background: rgba(_get($palette, "color"), .2);
-		color: darken(_get($palette, "color"), 25%);
+		background: _color($palette, "transparent");
+		color: _color($palette, "darker");
 	}
 
 	// palettes coloring
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include labelColoring($palette);
+			@include labelColoring($name);
 		}
 	}
 }

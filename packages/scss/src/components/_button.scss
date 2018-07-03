@@ -51,23 +51,23 @@
 
 .button {
 	@mixin buttonColoring($palette) {
-		background: _get($palette, "color");
-		color: _get($palette, "text");
+		background: _color($palette);
+		color: _color($palette, "text");
 		&:hover, &:focus {
-			background: lighten(_get($palette, "color"), 5%);
+			background: _color($palette, "light");
 		}
 		&:active {
-			background: darken(_get($palette, "color"), 5%);
+			background: _color($palette, "dark");
 		}
 	}
 
 	// default color
-	@include buttonColoring(_component("button.default-palette"));
+	@include buttonColoring("button.default-palette");
 
 	// palette colors
-	@each $name, $palette in _palettes() {
+	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include buttonColoring($palette);
+			@include buttonColoring($name);
 		}
 	}
 }
@@ -77,10 +77,10 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	@each $button-size, $size-obj in _component("button.sizing") {
+	@each $button-size, $size-obj in _getMap("components.button.sizing") {
 		&.size-#{$button-size} {
-			font-size: _get($size-obj, "font-size");
-			padding: _get($size-obj, "padding");
+			font-size: _component("button.sizing."+$button-size+".font-size");
+			padding: _component("button.sizing."+$button-size+".padding");
 		}
 	}
 }
@@ -111,19 +111,19 @@
 
 			&:hover, &:focus {
 				&:not([disabled]) {
-					box-shadow: 0 0 0 2px _get($palette, "color") inset;
-					color: _get($palette, "color");
+					box-shadow: 0 0 0 2px _color($palette) inset;
+					color: _color($palette);
 				}
 			}
 		}
 
 		// default color
-		@include buttonWiredColoring(_component("button.wired.default-palette"));
+		@include buttonWiredColoring("button.wired.default-palette");
 
 		// palette colors
-		@each $name, $palette in _palettes() {
+		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
-				@include buttonWiredColoring($palette);
+				@include buttonWiredColoring($name);
 			}
 		}
 	}
@@ -135,19 +135,19 @@
 
 			&:hover, &:focus {
 				&:not([disabled]) {
-					background: _get($palette, "color");
-					color: _get($palette, "text");
+					background: _color($palette);
+					color: _color($palette);
 				}
 			}
 		}
 
 		// default color
-		@include buttonFillingColoring(_component("button.filling.default-palette"));
+		@include buttonFillingColoring("button.filling.default-palette");
 
 		// palette colors
-		@each $name, $palette in _palettes() {
+		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
-				@include buttonFillingColoring($palette);
+				@include buttonFillingColoring($name);
 			}
 		}
 	}
@@ -163,7 +163,7 @@
 		&:hover, &:focus, &:active {
 			background: transparent;
 			box-shadow: none;
-			color: lighten(_color("text.link"), 15%);
+			opacity: .85;
 		}
 	}
 }
@@ -196,9 +196,9 @@
 		user-select: none;
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _getMap("components.button.sizing") {
 			&.size-#{$button-size} {
-				@include loading(_get($size-obj, "font-size"));
+				@include loading(_component("button.sizing."+$button-size+".font-size"));
 			}
 		}
 	}
@@ -215,8 +215,8 @@
 			@include makeIcon("tick");
 			bottom: 0;
 			color: white;
-			font-size: 1.5 * _component("button.sizing.default.font-size");
-			height: 1.5 * _component("button.sizing.default.font-size");
+			font-size: calc(1.5 * #{_component("button.sizing.default.font-size")});
+			height: calc(1.5 * #{_component("button.sizing.default.font-size")});
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -226,11 +226,11 @@
 		}
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _getMap("components.button.sizing") {
 			&.size-#{$button-size} {
 				&::after {
-					font-size: 1.5 * _get($size-obj, "font-size");
-					height: 1.5 * _get($size-obj, "font-size");
+					font-size: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
+					height: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
 				}
 			}
 		}
@@ -248,8 +248,8 @@
 			@include makeIcon("cross");
 			bottom: 0;
 			color: white;
-			font-size: 1.5 * _component("button.sizing.default.font-size");
-			height: 1.5 * _component("button.sizing.default.font-size");
+			font-size: calc(1.5 * #{_component("button.sizing.default.font-size")});
+			height: calc(1.5 * #{_component("button.sizing.default.font-size")});
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -259,11 +259,11 @@
 		}
 
 		// Sizing
-		@each $button-size, $size-obj in _component("button.sizing") {
+		@each $button-size, $size-obj in _getMap("components.button.sizing") {
 			&.size-#{$button-size} {
 				&::after {
-					font-size: 1.5 * _get($size-obj, "font-size");
-					height: 1.5 * _get($size-obj, "font-size");
+					font-size: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
+					height: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
 				}
 			}
 		}

@@ -30,9 +30,9 @@
 }
 
 // palette
-@each $name, $palette in _palettes() {
+@each $name, $palette in _getMap("palettes") {
 	.u-text#{str-capitalize($name)} {
-		color: _get($palette, "color") !important;
+		color: _color($name) !important;
 	}
 }
 
@@ -40,10 +40,10 @@
 // SIZE
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-@each $name, $sizes in _theme("sizes") {
+@each $name, $sizes in _getMap("sizes") {
 	.u-text#{str-capitalize($name)} {
-		font-size: _get($sizes, "font-size") !important;
-		line-height: _get($sizes, "line-height") !important;
+		font-size: _theme("sizes."+$name+".font-size") !important;
+		line-height: _theme("sizes."+$name+".line-height") !important;
 	}
 }
 

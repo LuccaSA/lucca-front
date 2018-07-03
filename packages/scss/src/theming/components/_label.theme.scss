@@ -1,0 +1,8 @@
+$label: (
+	default-palette: ( 
+		color: #CCCCCC, 
+		text: #666666
+	)
+);
+
+$theme: _set($theme, "components.label", $label);

@@ -1,0 +1,31 @@
+<div class="textfield mod-search">
+	<input
+	#inputClue
+	(keydown)="_onKeydown($event)"
+	(mousedown)="_onMouseDown($event)"
+
+	(blur)="_onBlur()"
+	class="textfield-input"
+	[(ngModel)]="_clue"
+	(input)="_onFieldChange($event.target.value)"
+	>
+</div>
+<div *ngIf="multiple" class="lu-select-option" (click)="_selectAllItems()">
+	<div class="checkbox">
+		<input class="checkbox-input"
+			type="checkbox"
+			id="selectAllID"
+			[ngClass]="{'is-incomplete': _partialSelectAll}"
+			[checked]="selectAll">
+		<div class="checkbox-label" for="selectAllID">
+			{{_selectAllLabel}}
+		</div>
+	</div>
+</div>
+<div class="select-options" #scrollElement
+	(scroll)="_onScroll($event)"
+	>
+	<lu-select-option [luOptionValue]="option" *ngFor="let option of _options" (onSelectionChange)="_selectOption($event)">{{textValue(option)}}</lu-select-option>
+	<div class="select-options-loading u-textCenter" *ngIf="_loading"><span class="loading"></span></div>
+	<div class="select-options-noResult" *ngIf="_noResults">{{_intl.noResultsLabel}}</div>
+</div>
