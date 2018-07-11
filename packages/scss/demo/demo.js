@@ -213,6 +213,8 @@ function generateIconDemo() {
 		'restaurant',
 		'pressing',
 
+		'sprout',
+
 		'bus',
 		'car_clean',
 		'taxi',
