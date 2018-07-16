@@ -2,7 +2,9 @@
 
 ## In Dev
 ### New features
-### Breaking changes
+- :hammer: link hover color is themable, not just opacity .85
+### Fixes
+- :bug: icon sizing broken
 
 ## 1.0.0
 The library has been revamped to use CSSVars by default.
