@@ -1,6 +1,8 @@
 # Changelog
 
 ## In Dev
+
+## 1.0.1
 ### New features
 - `loading` Full page
 - `label` new UI

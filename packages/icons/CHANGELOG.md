@@ -1,8 +1,8 @@
 # Changelog
 
 ## In dev
-### Enhancement
-### Fix
+
+## 1.0.1
 ### New icons
 - `sprout`
 
