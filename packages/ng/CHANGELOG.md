@@ -3,6 +3,8 @@
 ## In Dev
 ### New features
 - :sparkles: add default value to user display pipe - default _first name last name_ -> `John Doe`
+- :sparkles: use said default value for user-tile
+
 ### Fixes
 - `user tile` word break
 
