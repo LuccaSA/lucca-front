@@ -7,6 +7,8 @@
 ### Fixes
 - `table` sortable arrow direction
 - `button` mod-link vertical alignment
+- :hammer: link hover color is themable, not just opacity .85
+- :bug: icon sizing broken
 
 ## 1.0.0
 The library has been revamped to use CSSVars by default.

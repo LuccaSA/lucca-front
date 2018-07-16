@@ -4,6 +4,7 @@
 ### Enhancement
 ### Fix
 ### New icons
+- `sprout`
 
 ## 0.7.1
 ### New icons

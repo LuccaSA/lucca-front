@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@lucca-front/icons@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@lucca-front/icons/-/icons-0.4.0.tgz#ff8e42df9ed75a531f3e29ab3aa59d04a3b86a0d"
+"@lucca-front/icons@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@lucca-front/icons/-/icons-1.0.0.tgz#9845ebfc9fc06787913f6408b3a1e00c4c35aa6f"
 
 JSONStream@^0.8.4:
   version "0.8.4"
