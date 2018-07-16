@@ -9,7 +9,8 @@
   "command": {
     "publish": {
       "message": "publish %s",
-      "forcePublish": "*"
+      "forcePublish": "*",
+      "skipGit": true
     }
   }
 }
