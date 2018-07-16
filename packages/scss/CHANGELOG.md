@@ -2,7 +2,11 @@
 
 ## In Dev
 ### New features
-### Breaking changes
+- `loading` Full page
+- `label` new UI
+### Fixes
+- `table` sortable arrow direction
+- `button` mod-link vertical alignment
 
 ## 1.0.0
 The library has been revamped to use CSSVars by default.
@@ -34,12 +38,8 @@ We avoid as much breaking changes as possible, but here's a few:
 - `utility` ellipsis
 ### Enhancements
 - `loading` Inverted colors
-- `loading` Full page
-- `label` new UI
 ### Fixes
 - `table` sortable arrow always stay on the last line
-- `table` sortable arrow direction
-- `button` mod-link vertical alignment
 
 ## 0.7.1
 ### Adding

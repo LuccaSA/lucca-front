@@ -3,9 +3,7 @@
 ## In Dev
 ### New features
 ### Fixes
-### Breaking changes
-### Updated dependencies
-### Updated devDependencies
+- `user tile` word break
 
 ## 1.0.0
 ### New features
@@ -13,7 +11,6 @@
 - :hammer: uses cssvars to allow components to be fully customizable
 
 ### Fixes
-- `user tile` word break
 
 ### Breaking changes
 - some namming fixes, some things didn't respect the right prefix or the camel/kebab case convention
