@@ -177,6 +177,7 @@ var mappings = {
     {'iconName':'arrow_full_west', 'char': '\e9b4'},
     {'iconName':'arrow_full_south', 'char': '\e9b5'},
     {'iconName':'arrow_full_east', 'char': '\e9b6'},
-    {'iconName':'arrow_full_north', 'char': '\e9b7'}
+    {'iconName':'arrow_full_north', 'char': '\e9b7'},
+    {'iconName':'sprout', 'char': '\e9b8'}
   ]
 }
