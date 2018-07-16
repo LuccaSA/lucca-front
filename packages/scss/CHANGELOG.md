@@ -2,8 +2,12 @@
 
 ## In Dev
 ### New features
-- :hammer: link hover color is themable, not just opacity .85
+- `loading` Full page
+- `label` new UI
 ### Fixes
+- `table` sortable arrow direction
+- `button` mod-link vertical alignment
+- :hammer: link hover color is themable, not just opacity .85
 - :bug: icon sizing broken
 
 ## 1.0.0

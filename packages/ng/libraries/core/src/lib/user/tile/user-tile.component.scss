@@ -27,8 +27,10 @@
 		font-size: _theme('sizes.small.font-size');
 		line-height: _theme('sizes.small.line-height');
 	}
+
 	.user-info {
 		margin: auto 0;
+		word-break: break-all;
 	}
 
 	&.mod-nameOnly {

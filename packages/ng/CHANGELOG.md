@@ -4,13 +4,15 @@
 ### New features
 - :sparkles: add default value to user display pipe - default _first name last name_ -> `John Doe`
 ### Fixes
+- `user tile` word break
 
 ## 1.0.0
 ### New features
-- :sparkles: standard distribution: no need to import 
+- :sparkles: standard distribution: no need to import
 - :hammer: uses cssvars to allow components to be fully customizable
 
 ### Fixes
+
 ### Breaking changes
 - some namming fixes, some things didn't respect the right prefix or the camel/kebab case convention
 - split package in 3:

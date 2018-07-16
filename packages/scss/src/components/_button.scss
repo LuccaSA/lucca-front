@@ -158,6 +158,7 @@
 		color: _color("text.link");
 		padding: 0;
 		text-decoration: underline;
+		vertical-align: baseline;
 
 		&:hover, &:focus, &:active {
 			background: transparent;
