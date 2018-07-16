@@ -2,10 +2,8 @@
 
 ## In Dev
 ### New features
+- :sparkles: add default value to user display pipe - default _first name last name_ -> `John Doe`
 ### Fixes
-### Breaking changes
-### Updated dependencies
-### Updated devDependencies
 
 ## 1.0.0
 ### New features
