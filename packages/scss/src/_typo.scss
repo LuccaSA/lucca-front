@@ -66,6 +66,6 @@ a, .link {
 	text-decoration: underline;
 
 	&:hover {
-		opacity: .85;
+		color: _color("text.link", "hover");
 	}
 }
