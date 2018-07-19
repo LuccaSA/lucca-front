@@ -217,6 +217,9 @@ export class LuSelect<T>
 	 * Add a class binding for 'is-focused' when the select is focused
 	 */
 	@HostBinding('class.is-focused') isFocused = false;
+	@HostBinding('attr.disabled') get isDisabled(): boolean {
+		return this._disabled;
+	};
 
 	private _intlChanges: Subscription;
 	// validators
@@ -229,6 +232,7 @@ export class LuSelect<T>
 	}
 	private _cvaOnChange: (value: T | T[]) => void = () => {};
 	_onTouched = () => {};
+	_disabled: boolean;
 
 	constructor(
 		protected _intl: LuSelectIntl,
@@ -337,6 +341,10 @@ export class LuSelect<T>
 	// From ControlValueAccessor interface
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
+	}
+	// From ControlValueAccessor interface
+	setDisabledState(isDisabled: boolean) {
+		this._disabled = isDisabled;
 	}
 
 	protected initOptionFeeder(optionFeeder: ISelectOptionFeeder<T>): void {
