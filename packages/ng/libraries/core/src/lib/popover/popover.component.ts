@@ -232,6 +232,8 @@ export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 		}
 	}
 
+	@Input('disabled') disabled: boolean = false;
+
 	/** Event emitted when the popover is closed. */
 	@Output() close = new EventEmitter<void>();
 
