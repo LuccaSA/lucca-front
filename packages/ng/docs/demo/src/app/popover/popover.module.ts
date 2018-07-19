@@ -6,9 +6,10 @@ import { SharedModule } from '../shared';
 import { DemoPopoverBasicComponent } from './basic/basic';
 import { DemoPopoverTriggerComponent } from './trigger/trigger';
 import { DemoPopoverScrollComponent } from './scroll/scroll';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-	imports: [CommonModule, LuPopoverModule, SharedModule, LuUserModule],
+	imports: [CommonModule, FormsModule, LuPopoverModule, SharedModule, LuUserModule],
 	declarations: [
 		DemoPopoverComponent,
 		DemoPopoverBasicComponent,
