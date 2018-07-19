@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { LuSelectIntl } from '@lucca-front/ng';
 import {overrideSelectIntl} from './simple-select-intl';
+import { FormControl } from '@angular/forms';
 @Component({
 	selector: 'demo-simple-select',
 	templateUrl: './simple-select.component.html',
@@ -25,6 +26,7 @@ export class DemoSimpleSelectComponent implements OnInit {
 
 	lotOfOptions = [];
 	itemLotOfOptionsSelect = { id: 1, name: 'option 1' };
+	disabledFormControl = new FormControl(this.itemSelect);
 
 	ngOnInit(): void {
 		const optionsTmp = [];
@@ -37,5 +39,6 @@ export class DemoSimpleSelectComponent implements OnInit {
 			}
 			this.lotOfOptions = optionsTmp;
 		}, 1000);
+		this.disabledFormControl.disable();
 	}
 }

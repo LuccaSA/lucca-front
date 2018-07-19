@@ -1,6 +1,9 @@
 # Changelog
 
 ## In Dev
+### New features
+- :sparkles: add support for disabled state on `lu-select`
+- :sparkles: add support for disabled input on `lu-popover`
 
 ## 1.0.1
 ### New features

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { IUser } from '@lucca-front/ng';
 
 @Component({
@@ -8,6 +8,7 @@ import { IUser } from '@lucca-front/ng';
 	styles: [],
 })
 export class DemoPopoverBasicComponent implements OnInit {
+	disabled = false;
 	user: IUser = {
 		id: 12,
 		firstName: 'Anaïs',
@@ -18,7 +19,7 @@ export class DemoPopoverBasicComponent implements OnInit {
 		},
 		jobTitle: 'Actress',
 	};
-	constructor() {}
+	constructor() { }
 
-	ngOnInit() {}
+	ngOnInit() { }
 }

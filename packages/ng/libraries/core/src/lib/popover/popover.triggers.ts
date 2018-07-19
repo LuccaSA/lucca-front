@@ -150,7 +150,8 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 
 	/** Opens the popover. */
 	openPopover(): void {
-		if (!this._popoverOpen && !this._halt) {
+		const canOpenPopover = !this._popoverOpen && !this._halt && !this.popover.disabled;
+		if(canOpenPopover) {
 			this._createOverlay().attach(this._portal);
 
 			/** Only subscribe to backdrop if trigger event is click */

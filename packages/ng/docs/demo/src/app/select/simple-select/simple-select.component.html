@@ -43,4 +43,19 @@
 	<code class="code mod-block">{{ itemSelectMultiple | json }}</code>
 </section>
 
-
+<section class="contentSection">
+	<h3>Disabled component</h3>
+	<div class="textfield mod-inline">
+		<lu-select [(ngModel)]="itemSelect" class="textfield-input" placeholder="placeholder" name="itemOptions" [disabled]="true">
+			<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label (ngModel + disabled)</label>
+	</div>
+	<div class="textfield mod-inline">
+		<lu-select [formControl]="disabledFormControl" class="textfield-input" placeholder="placeholder" name="itemOptions">
+			<lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label (disabled formControl)</label>
+	</div>
+	<code class="code mod-block">{{ itemSelect | json }}</code>
+</section>
