@@ -1,13 +1,14 @@
 # Changelog
 
 ## In Dev
+### New features
+- :sparkles: add support for disabled state on `lu-select`
+- :sparkles: add support for disabled input on `lu-popover`
 
 ## 1.0.1
 ### New features
 - :sparkles: add default value to user display pipe - default _first name last name_ -> `John Doe`
 - :sparkles: use said default value for user-tile
-- :sparkles: add support for disabled state on `lu-select`
-- :sparkles: add support for disabled input on `lu-popover`
 
 ### Fixes
 - `user tile` word break
