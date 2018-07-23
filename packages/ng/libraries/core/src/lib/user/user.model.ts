@@ -1,6 +1,6 @@
-import { IRddItem } from '../rdd/index';
+import { IApiItem } from '../api/index';
 
-export interface IUser extends IRddItem {
+export interface IUser extends IApiItem<number> {
 	firstName: string;
 	lastName: string;
 	picture?: { href: string };
