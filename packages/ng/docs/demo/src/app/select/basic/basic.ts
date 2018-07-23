@@ -10,7 +10,7 @@ import {
 	providers: [
 	],
 })
-export class BasicSelectComponent implements OnInit {
+export class BasicSelectComponent {
 	options = [
 		{ id: 1, name: 'red' },
 		{ id: 2, name: 'green' },
