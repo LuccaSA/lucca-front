@@ -2,7 +2,7 @@ import { Routes, Route } from '@angular/router';
 import { DemoUserDisplayComponent } from './display/user-display.component';
 import { DemoUserPictureComponent } from './picture/user-picture.component';
 import { DemoUserTileComponent } from './tile/user-tile.component';
-import { DemoUserSelectComponent } from './select/user-select-basic.component';
+// import { DemoUserSelectComponent } from './select/user-select-basic.component';
 
 export const userRoutes: Routes = [
 	{
@@ -24,11 +24,11 @@ export const userRoutes: Routes = [
 				label: 'Tile',
 				component: DemoUserTileComponent,
 			} as Route,
-			{
-				path: 'select',
-				label: 'Select',
-				component: DemoUserSelectComponent,
-			} as Route,
+			// {
+			// 	path: 'select',
+			// 	label: 'Select',
+			// 	component: DemoUserSelectComponent,
+			// } as Route,
 			{ path: '', redirectTo: 'display', pathMatch: 'full' },
 		],
 	} as Route,
