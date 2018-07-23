@@ -3,6 +3,6 @@ export interface ICoerce<T> {
 	item: T | null;
 }
 export interface IApiItem<TId = number> {
-	id: IApiItem;
+	id: TId;
 	name?: string;
 }

@@ -11,8 +11,8 @@ import {
 } from '@angular/material';
 import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
 import { LuEmptyModule } from '@lucca-front/ng';
-import { LuSelectModule, LuSelectOptionModule, LuSelectClearerModule } from '@lucca-front/ng';
-import { LuUserSelectModule } from '@lucca-front/ng';
+import { LuSelectModule } from '@lucca-front/ng';
+// import { LuUserSelectModule } from '@lucca-front/ng';
 
 @NgModule({
 	declarations: [...LU_FORMLY_COMPONENTS],
@@ -28,9 +28,9 @@ import { LuUserSelectModule } from '@lucca-front/ng';
 
 		LuEmptyModule,
 		LuSelectModule,
-		LuSelectOptionModule,
-		LuSelectClearerModule,
-		LuUserSelectModule,
+		// LuSelectOptionModule,
+		// LuSelectClearerModule,
+		// LuUserSelectModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],

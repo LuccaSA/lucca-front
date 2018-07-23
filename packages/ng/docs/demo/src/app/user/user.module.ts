@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoUserDisplayModule } from './display/user-display.module';
 import { DemoUserTileModule } from './tile/user-tile.module';
 import { DemoUserPictureModule } from './picture/user-picture.module';
-import { DemoUserSelectModule } from './select/user-select-basic.module';
+// import { DemoUserSelectModule } from './select/user-select-basic.module';
 
 @NgModule({
 	imports: [
@@ -14,7 +14,7 @@ import { DemoUserSelectModule } from './select/user-select-basic.module';
 		DemoUserDisplayModule,
 		DemoUserTileModule,
 		DemoUserPictureModule,
-		DemoUserSelectModule,
+		// DemoUserSelectModule,
 	],
 })
 export class DemoUserModule {}
