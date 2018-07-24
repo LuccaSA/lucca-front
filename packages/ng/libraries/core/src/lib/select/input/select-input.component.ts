@@ -73,8 +73,13 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	/**
 	 * popover trigger class extension
 	 */
-	popover: ILuSelectPickerPanel;
+	popover: ILuSelectPickerPanel<T>;
 	@Input('picker') set _attrPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
 	@ContentChild(LuSelectPickerComponent) set _contentChildPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
+
+	openPopover() {
+		super.openPopover();
+		this.popover.onSelect.subscribe(val => this.value = val);
+	}
 
 }
