@@ -252,6 +252,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	/** set state rather than toggle to support triggers sharing a popover */
 	private _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
+		this.popover.onOpen();
 		this._popoverOpen ? this.onPopoverOpen.emit() : this.onPopoverClose.emit();
 	}
 
