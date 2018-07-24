@@ -10,9 +10,9 @@ import {
 	ViewChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { LuPopoverTrigger, ILuPopoverPanel } from '../../popover/index';
+import { LuPopoverTrigger } from '../../popover/index';
 import { Overlay } from '@angular/cdk/overlay';
-import { LuSelectPickerComponent } from '../picker/index';
+import { LuSelectPickerComponent, ILuSelectPickerPanel } from '../picker/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -72,5 +72,6 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	/**
 	 * popover trigger class extension
 	 */
-	@ViewChild(LuSelectPickerComponent) popover: ILuPopoverPanel;
+	@ViewChild(LuSelectPickerComponent) popover: ILuSelectPickerPanel;
+
 }

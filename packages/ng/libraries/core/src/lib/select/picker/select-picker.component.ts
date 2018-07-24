@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
-import { ILuPopoverPanel, LuPopoverComponent, luTransformPopover } from '../../popover/index';
+import { ILuPopoverPanel, LuPopoverComponent, luTransformPopover, LuPopoverTriggerEvent } from '../../popover/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -18,5 +18,6 @@ export class LuSelectPickerComponent<T = any> extends LuPopoverComponent impleme
 		protected _elementRef: ElementRef,
 	) {
 		super(_elementRef);
+		this.triggerEvent = 'click';
 	}
 }
