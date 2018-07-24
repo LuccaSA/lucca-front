@@ -48,6 +48,10 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	 * contriol value accessor interface implementation
 	 */
 	private _value: T;
+	setValue(value) {
+		this.value = value;
+		this._cvaOnChange(value);
+	}
 	get value(): T {
 		return this._value;
 	}
@@ -60,7 +64,7 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	private _cvaOnChange = () => {};
+	private _cvaOnChange = (v: T) => {};
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
@@ -79,7 +83,7 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 
 	openPopover() {
 		super.openPopover();
-		this.popover.onSelect.subscribe(val => this.value = val);
+		this.popover.onSelect.subscribe(value => this.setValue(value));
 	}
 
 }
