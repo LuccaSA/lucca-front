@@ -13,7 +13,7 @@ import {
 export class BasicSelectComponent {
 	// options = [
 	red =	{ id: 1, name: 'red' };
-		// { id: 2, name: 'green' },
+	green = { id: 2, name: 'green' };
 		// { id: 3, name: 'yellow' },
 		// { id: 4, name: 'blue' },
 	// ];
