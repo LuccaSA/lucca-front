@@ -7,7 +7,8 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	ViewChild
+	ViewChild,
+	ContentChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { LuPopoverTrigger } from '../../popover/index';
@@ -72,6 +73,8 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	/**
 	 * popover trigger class extension
 	 */
-	@ViewChild(LuSelectPickerComponent) popover: ILuSelectPickerPanel;
+	popover: ILuSelectPickerPanel;
+	@Input('picker') set _attrPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
+	@ContentChild(LuSelectPickerComponent) set _contentChildPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
 
 }

@@ -1,5 +1,17 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
-import { ILuPopoverPanel, LuPopoverComponent, luTransformPopover, LuPopoverTriggerEvent } from '../../popover/index';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	ViewEncapsulation,
+	ViewChildren,
+	ContentChildren,
+	AfterContentInit,
+	AfterViewInit,
+	QueryList,
+} from '@angular/core';
+import { LuPopoverComponent, luTransformPopover, LuPopoverTriggerEvent } from '../../popover/index';
+import { ILuOption, LuOptionComponent } from '../../option';
+import { ILuSelectPickerPanel } from './select-picker.model';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -13,11 +25,22 @@ import { ILuPopoverPanel, LuPopoverComponent, luTransformPopover, LuPopoverTrigg
 	animations: [luTransformPopover],
 	exportAs: 'LuSelectPicker',
 })
-export class LuSelectPickerComponent<T = any> extends LuPopoverComponent implements ILuPopoverPanel {
+export class LuSelectPickerComponent<T = any> extends LuPopoverComponent implements ILuSelectPickerPanel, AfterContentInit {
 	constructor(
 		protected _elementRef: ElementRef,
 	) {
 		super(_elementRef);
 		this.triggerEvent = 'click';
+	}
+	@ContentChildren(LuOptionComponent, { descendants: true}) ccoptions: QueryList<ILuOption>;
+	// @ViewChildren(LuOptionComponent) vcoptions: QueryList<ILuOption>;
+	ngAfterContentInit() {
+		// console.log('content init');
+		// console.log(this.ccoptions);
+	}
+	onOpen() {
+		console.log('open');
+		console.log(this.ccoptions);
+		super.onOpen();
 	}
 }
