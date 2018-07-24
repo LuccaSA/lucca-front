@@ -19,10 +19,20 @@ import { LuPopoverTrigger } from '../../popover/index';
 	],
 })
 export class LuSelectInputComponent<T = any> /* extends LuPopoverTrigger */ implements ControlValueAccessor {
-	_value: T;
+	constructor(
+		protected _changeDetectorRef: ChangeDetectorRef,
+	) {}
+	private _value: T;
+	get value(): T {
+		return this._value;
+	}
+	set value(value: T) {
+		this._value = value;
+		this._changeDetectorRef.markForCheck();
+	}
 	// From ControlValueAccessor interface
 	writeValue(value: T) {
-		this._value = value;
+		this.value = value;
 	}
 	// From ControlValueAccessor interface
 	private _cvaOnChange = () => {};
