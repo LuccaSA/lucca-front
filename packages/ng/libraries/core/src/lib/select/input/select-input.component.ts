@@ -1,6 +1,18 @@
-import { ChangeDetectionStrategy, Component, Input, HostBinding, ChangeDetectorRef, forwardRef } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	Input,
+	HostBinding,
+	ChangeDetectorRef,
+	forwardRef,
+	ViewContainerRef,
+	ElementRef,
+	ViewChild
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { LuPopoverTrigger } from '../../popover/index';
+import { LuPopoverTrigger, ILuPopoverPanel } from '../../popover/index';
+import { Overlay } from '@angular/cdk/overlay';
+import { LuSelectPickerComponent } from '../picker/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -18,10 +30,22 @@ import { LuPopoverTrigger } from '../../popover/index';
 		},
 	],
 })
-export class LuSelectInputComponent<T = any> /* extends LuPopoverTrigger */ implements ControlValueAccessor {
+export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements ControlValueAccessor {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
-	) {}
+		protected _overlay: Overlay,
+		protected _elementRef: ElementRef,
+		protected _viewContainerRef: ViewContainerRef,
+	) {
+		super(
+			_overlay,
+			_elementRef,
+			_viewContainerRef,
+		);
+	}
+	/**
+	 * contriol value accessor interface implementation
+	 */
 	private _value: T;
 	get value(): T {
 		return this._value;
@@ -44,4 +68,9 @@ export class LuSelectInputComponent<T = any> /* extends LuPopoverTrigger */ impl
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
+
+	/**
+	 * popover trigger class extension
+	 */
+	@ViewChild(LuSelectPickerComponent) popover: ILuPopoverPanel;
 }

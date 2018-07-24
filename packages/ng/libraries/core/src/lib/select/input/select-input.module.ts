@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-// import { LuPopoverModule } from '../../popover/index';
 import { LuSelectInputComponent } from './select-input.component';
 import { CommonModule } from '@angular/common';
+import { LuSelectPickerModule } from '../picker/index';
 
 @NgModule({
 	imports: [
-		// LuPopoverModule,
 		CommonModule,
+		LuSelectPickerModule,
 	],
 	declarations: [
 		LuSelectInputComponent,

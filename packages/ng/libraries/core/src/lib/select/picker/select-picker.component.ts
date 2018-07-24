@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, HostBinding, ChangeDetectorRef, forwardRef, ElementRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { LuPopoverTrigger, ILuPopoverPanel, LuPopoverComponent } from '../../popover/index';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { ILuPopoverPanel, LuPopoverComponent, luTransformPopover } from '../../popover/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -10,6 +9,9 @@ import { LuPopoverTrigger, ILuPopoverPanel, LuPopoverComponent } from '../../pop
 	templateUrl: './select-picker.component.html',
 	styleUrls: ['./select-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
+	animations: [luTransformPopover],
+	exportAs: 'LuSelectPicker',
 })
 export class LuSelectPickerComponent<T = any> extends LuPopoverComponent implements ILuPopoverPanel {
 	constructor(
