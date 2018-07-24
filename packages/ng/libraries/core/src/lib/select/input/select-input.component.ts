@@ -18,7 +18,7 @@ import { LuPopoverTrigger } from '../../popover/index';
 		},
 	],
 })
-export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements ControlValueAccessor {
+export class LuSelectInputComponent<T = any> /* extends LuPopoverTrigger */ implements ControlValueAccessor {
 	_value: T;
 	// From ControlValueAccessor interface
 	writeValue(value: T) {

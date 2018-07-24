@@ -17,4 +17,5 @@ export class BasicSelectComponent {
 		{ id: 3, name: 'yellow' },
 		{ id: 4, name: 'blue' },
 	];
+	itemSelect = { id: 1, name: 'red' };
 }
