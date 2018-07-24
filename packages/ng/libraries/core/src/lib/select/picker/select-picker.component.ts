@@ -18,6 +18,7 @@ import { ILuSelectPickerPanel } from './select-picker.model';
 import { Subscription } from 'rxjs/Subscription';
 // import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
+// import { switchMap, merge } from 'rxjs/operators';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -51,9 +52,9 @@ export class LuSelectPickerComponent<T = any> extends LuPopoverComponent impleme
 		super._emitCloseEvent();
 	}
 	subToOptionSelected() {
+		const allOptionsOnSelect = this.options.toArray().map(o => o.onSelect);
 		this.subs.add(
-			// merge(this.options.toArray().map(o => o.onSelect))
-			this.options.first.onSelect
+			merge(...allOptionsOnSelect)
 			.subscribe((val: T) => this._select(val))
 		);
 	}
