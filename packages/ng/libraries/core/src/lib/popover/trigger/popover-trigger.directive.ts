@@ -56,7 +56,7 @@ extends ALuPopoverTrigger<T>
 implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 
 	/** References the popover instance that the trigger is associated with. */
-	@Input('luPopoverTriggerFor') popover: ILuPopoverPanel;
+	@Input('luPopoverTriggerFor') popover: T;
 
 	/** References the popover target instance that the trigger is associated with. */
 	@Input('luPopoverTargetAt') targetElement: ILuPopoverTarget;

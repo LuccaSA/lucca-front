@@ -33,8 +33,8 @@ import { AnimationEvent } from '@angular/animations';
 
 @Component({
 	selector: 'lu-popover',
-	templateUrl: './popover.component.html',
-	styleUrls: ['./popover.component.scss'],
+	templateUrl: './popover-panel.component.html',
+	styleUrls: ['./popover-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	animations: [luTransformPopover],

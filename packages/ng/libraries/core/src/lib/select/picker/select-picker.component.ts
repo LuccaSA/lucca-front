@@ -10,7 +10,7 @@ import {
 	EventEmitter,
 	OnDestroy,
 } from '@angular/core';
-import { LuPopoverComponent, luTransformPopover, LuPopoverTriggerEvent } from '../../popover/index';
+import { LuPopoverPanelComponent, luTransformPopover } from '../../popover/index';
 import { ILuOption, LuOptionComponent } from '../../option/index';
 import { ILuSelectPickerPanel } from './select-picker.model';
 import { Subscription } from 'rxjs/Subscription';
@@ -32,7 +32,7 @@ import 'rxjs/add/operator/mergeMap';
 	animations: [luTransformPopover],
 	exportAs: 'LuSelectPicker',
 })
-export class LuSelectPickerComponent<T = any> extends LuPopoverComponent implements ILuSelectPickerPanel, OnDestroy, AfterContentInit {
+export class LuSelectPickerComponent<T = any> extends LuPopoverPanelComponent implements ILuSelectPickerPanel, OnDestroy, AfterContentInit {
 	subs: Subscription;
 	@Output() onSelect = new EventEmitter<T>();
 	constructor(
@@ -69,4 +69,5 @@ export class LuSelectPickerComponent<T = any> extends LuPopoverComponent impleme
 	ngOnDestroy() {
 		this.unSubToOptionSelected();
 	}
+	
 }
