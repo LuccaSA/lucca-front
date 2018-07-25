@@ -2,10 +2,10 @@
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
-			<lu-select-picker>
+			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red">{{red.name}}</lu-option>
-			</lu-select-picker>
+			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
@@ -15,9 +15,9 @@
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="number" class="textfield-input">
-			<lu-select-picker>
+			<lu-option-picker>
 				<lu-option *ngFor="let option of options$ | async" [value]="option">{{option.name}}</lu-option>
-			</lu-select-picker>
+			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>

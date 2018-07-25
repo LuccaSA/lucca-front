@@ -30,3 +30,27 @@ export interface ILuPopoverPanel {
 	_emitCloseEvent: () => void;
 	_emitOpenEvent: () => void;
 }
+export abstract class ALuPopoverPanel implements ILuPopoverPanel {
+	position: LuPopoverPosition;
+	alignment: LuPopoverAlignment;
+	scrollStrategy: LuPopoverScrollStrategy;
+	containerPositioning: boolean;
+	overlapTrigger: boolean;
+	triggerEvent: LuPopoverTriggerEvent;
+	enterDelay: number;
+	leaveDelay: number;
+	targetOffsetX: number;
+	targetOffsetY: number;
+	closeOnClick: boolean;
+	closeDisabled: boolean;
+	templateRef?: TemplateRef<any>;
+	close: EventEmitter<void>;
+	open: EventEmitter<void>;
+	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
+	setPositionClassesChanges: (
+		posX: LuPopoverPosition,
+		posY: LuPopoverPosition,
+	) => void;
+	_emitCloseEvent: () => void;
+	_emitOpenEvent: () => void;
+}

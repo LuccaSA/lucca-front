@@ -1,3 +1,3 @@
-export * from './option.model';
-export * from './option.component';
+export * from './item/index';
+export * from './picker/index';
 export * from './option.module';

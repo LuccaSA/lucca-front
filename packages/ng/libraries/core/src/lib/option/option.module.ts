@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
-import { LuOptionComponent } from './option.component';
-import { CommonModule } from '@angular/common';
+import { LuOptionItemModule } from './item/index';
+import { LuOptionPickerModule } from './picker/index';
 
 @NgModule({
 	imports: [
-		CommonModule,
-	],
-	declarations: [
-		LuOptionComponent,
+		LuOptionItemModule,
+		LuOptionPickerModule,
 	],
 	exports: [
-		LuOptionComponent,
+		LuOptionItemModule,
+		LuOptionPickerModule,
 	],
 })
 export class LuOptionModule {}

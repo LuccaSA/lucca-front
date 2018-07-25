@@ -12,7 +12,7 @@ import {
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay } from '@angular/cdk/overlay';
-import { LuSelectPickerComponent, ILuSelectPickerPanel } from '../picker/index';
+import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -30,7 +30,9 @@ import { LuSelectPickerComponent, ILuSelectPickerPanel } from '../picker/index';
 		},
 	],
 })
-export class LuSelectInputComponent<T = any> extends ALuPopoverTrigger<ILuSelectPickerPanel<T>> implements ControlValueAccessor {
+export class LuSelectInputComponent<TValue = any, TPanel extends ILuPickerPanel<TValue> = ILuPickerPanel<TValue>>
+extends ALuPopoverTrigger<TPanel>
+implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -46,24 +48,24 @@ export class LuSelectInputComponent<T = any> extends ALuPopoverTrigger<ILuSelect
 	/**
 	 * contriol value accessor interface implementation
 	 */
-	private _value: T;
+	private _value: TValue;
 	setValue(value) {
 		this.value = value;
 		this._cvaOnChange(value);
 	}
-	get value(): T {
+	get value(): TValue {
 		return this._value;
 	}
-	set value(value: T) {
+	set value(value: TValue) {
 		this._value = value;
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
-	writeValue(value: T) {
+	writeValue(value: TValue) {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	private _cvaOnChange = (v: T) => {};
+	private _cvaOnChange = (v: TValue) => {};
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
@@ -76,14 +78,15 @@ export class LuSelectInputComponent<T = any> extends ALuPopoverTrigger<ILuSelect
 	/**
 	 * popover trigger class extension
 	 */
-	@Input('picker') set _attrPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
-	@ContentChild(LuSelectPickerComponent) set _contentChildPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
-
-	openPopover() {
-		super.openPopover();
-		this.popover.onSelect.subscribe(value => this.setValue(value));
+	@Input('picker') set _attrPicker(picker: TPanel) {
+		this.popover = picker;
+		this.popover.onSelectValue.subscribe(value => this.setValue(value));
 	}
-	
+	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: TPanel) {
+		this.popover = picker;
+		this.popover.onSelectValue.subscribe(value => this.setValue(value));
+	}
+
 	@HostListener('click')
 	onClick() {
 		super.onClick();

@@ -9,45 +9,56 @@ import {
 	Output,
 	EventEmitter,
 	OnDestroy,
+	forwardRef,
 } from '@angular/core';
 import { LuPopoverPanelComponent, luTransformPopover } from '../../popover/index';
-import { ILuOption, LuOptionComponent } from '../../option/index';
-import { ILuSelectPickerPanel } from './select-picker.model';
+import { ILuOptionItem, LuOptionItemComponent } from '../item/index';
+import { ILuOptionPickerPanel } from './option-picker.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+import { ALuPickerPanel } from '../../input/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
 */
 @Component({
-	selector: 'lu-select-picker',
-	templateUrl: './select-picker.component.html',
-	styleUrls: ['./select-picker.component.scss'],
+	selector: 'lu-option-picker',
+	templateUrl: './option-picker.component.html',
+	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	animations: [luTransformPopover],
-	exportAs: 'LuSelectPicker',
+	exportAs: 'LuOptionPicker',
+	providers: [
+		{
+			provide: ALuPickerPanel,
+			useExisting: forwardRef(() => LuOptionPickerComponent),
+		},
+	]
 })
-export class LuSelectPickerComponent<T = any> extends LuPopoverPanelComponent implements ILuSelectPickerPanel, OnDestroy, AfterContentInit {
+export class LuOptionPickerComponent<T = any>
+extends LuPopoverPanelComponent
+implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
 	subs: Subscription;
-	@Output() onSelect = new EventEmitter<T>();
+	@Output() onSelectValue = new EventEmitter<T>();
+	setValue(value: T) {}
 	constructor(
 		protected _elementRef: ElementRef,
 	) {
 		super(_elementRef);
 		this.triggerEvent = 'click';
 	}
-	@ContentChildren(LuOptionComponent, { descendants: true }) optionsQL: QueryList<ILuOption<T>>;
+	@ContentChildren(LuOptionItemComponent, { descendants: true }) optionsQL: QueryList<ILuOptionItem<T>>;
 
 	subToOptionSelected() {
 		this.subs = new Subscription();
 		const allOptionsOnSelect$ =
 		merge(Observable.of(this.optionsQL), this.optionsQL.changes)
-			.map<QueryList<ILuOption<T>>, Observable<T>>(ql => {
+			.map<QueryList<ILuOptionItem<T>>, Observable<T>>(ql => {
 				return merge(...ql.toArray().map(o => o.onSelect));
 			})
 			.mergeMap(o => o);
@@ -60,7 +71,7 @@ export class LuSelectPickerComponent<T = any> extends LuPopoverPanelComponent im
 		this.subs.unsubscribe();
 	}
 	_select(val: T) {
-		this.onSelect.emit(val);
+		this.onSelectValue.emit(val);
 		this._emitCloseEvent();
 	}
 	ngAfterContentInit() {
@@ -69,5 +80,4 @@ export class LuSelectPickerComponent<T = any> extends LuPopoverPanelComponent im
 	ngOnDestroy() {
 		this.unSubToOptionSelected();
 	}
-	
 }
