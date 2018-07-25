@@ -1,35 +1,66 @@
-import { ILuPopoverPanel } from '../panel/index';
-import { AfterViewInit, OnDestroy } from '@angular/core';
+import {
+	AfterViewInit,
+	ElementRef,
+	EventEmitter,
+	OnDestroy,
+	ViewContainerRef,
+} from '@angular/core';
+
+import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
+import { Direction } from '@angular/cdk/bidi';
+import {
+	ConnectedPositionStrategy,
+	OriginConnectionPosition,
+	Overlay,
+	OverlayConnectionPosition,
+	OverlayRef,
+	OverlayConfig,
+	HorizontalConnectionPos,
+	VerticalConnectionPos,
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+
+import { Subscription } from 'rxjs/Subscription';
+
+import {
+	ILuPopoverPanel,
+	LuPopoverPosition,
+} from '../panel/popover-panel.model';
+import {
+	ILuPopoverTarget,
+} from '../target/popover-target.model';
+import { throwLuPopoverMissingError } from '../popover.errors';
 
 export interface ILuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPanel> {
 	popover: T;
 }
 
-export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPanel> implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
-	private _portal: TemplatePortal<any>;
-	private _overlayRef: OverlayRef | null = null;
-	private _popoverOpen = false;
-	private _halt = false;
-	private _backdropSubscription: Subscription;
-	private _positionSubscription: Subscription;
+export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPanel>
+implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
+	protected _portal: TemplatePortal<any>;
+	protected _overlayRef: OverlayRef | null = null;
+	protected _popoverOpen = false;
+	protected _halt = false;
+	protected _backdropSubscription: Subscription;
+	protected _positionSubscription: Subscription;
 
-	private _mouseoverTimer: any;
+	protected _mouseoverTimer: any;
 
 	// tracking input type is necessary so it's possible to only auto-focus
 	// the first item of the list when the popover is opened via the keyboard
-	private _openedByMouse: boolean = false;
+	protected _openedByMouse = false;
 
 	/** References the popover instance that the trigger is associated with. */
-	@Input('luPopoverTriggerFor') popover: ILuPopoverPanel;
+	popover: T;
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('luPopoverTargetAt') targetElement: ILuPopoverTarget;
+	targetElement: ILuPopoverTarget;
 
 	/** Event emitted when the associated popover is opened. */
-	@Output() onPopoverOpen = new EventEmitter<void>();
+	onPopoverOpen = new EventEmitter<void>();
 
 	/** Event emitted when the associated popover is closed. */
-	@Output() onPopoverClose = new EventEmitter<void>();
+	onPopoverClose = new EventEmitter<void>();
 
 	constructor(
 		protected _overlay: Overlay,
@@ -51,14 +82,12 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 		return this._popoverOpen;
 	}
 
-	@HostListener('click')
 	onClick() {
 		if (this.popover.triggerEvent === 'click') {
 			this.togglePopover();
 		}
 	}
 
-	@HostListener('mouseenter')
 	onMouseEnter() {
 		this._halt = false;
 		if (this.popover.triggerEvent === 'hover') {
@@ -68,7 +97,6 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 		}
 	}
 
-	@HostListener('mouseleave')
 	onMouseLeave() {
 		if (this.popover.triggerEvent === 'hover') {
 			if (this._mouseoverTimer) {
@@ -86,13 +114,11 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 			}
 		}
 	}
-	@HostListener('focus')
 	onFocus() {
 		if (this.popover.triggerEvent === 'focus') {
 			this.openPopover();
 		}
 	}
-	@HostListener('blur')
 	onBlur() {
 		if (this.popover.triggerEvent === 'focus') {
 			this.closePopover();
@@ -186,7 +212,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	 * This method sets the popover state to open and focuses the first item if
 	 * the popover was opened via the keyboard.
 	 */
-	private _initPopover(): void {
+	protected _initPopover(): void {
 		this._setIsPopoverOpen(true);
 	}
 
@@ -194,7 +220,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	 * This method resets the popover when it's closed, most importantly restoring
 	 * focus to the popover trigger if the popover was opened via the keyboard.
 	 */
-	private _resetPopover(): void {
+	protected _resetPopover(): void {
 		this._setIsPopoverOpen(false);
 
 		// Focus only needs to be reset to the host element if the popover was opened
@@ -206,7 +232,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	}
 
 	/** set state rather than toggle to support triggers sharing a popover */
-	private _setIsPopoverOpen(isOpen: boolean): void {
+	protected _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
 		this._popoverOpen ? this.popover._emitOpenEvent() : this.popover._emitCloseEvent();
 		this._popoverOpen ? this.onPopoverOpen.emit() : this.onPopoverClose.emit();
@@ -216,7 +242,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	 *  This method checks that a valid instance of MdPopover has been passed into
 	 *  mdPopoverTriggerFor. If not, an exception is thrown.
 	 */
-	private _checkPopover() {
+	protected _checkPopover() {
 		if (!this.popover) {
 			throwLuPopoverMissingError();
 		}
@@ -226,7 +252,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	 *  This method creates the overlay from the provided popover's template and saves its
 	 *  OverlayRef so that it can be attached to the DOM when openPopover is called.
 	 */
-	private _createOverlay(): OverlayRef {
+	protected _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
 			this._portal = new TemplatePortal(
 				this.popover.templateRef,
@@ -278,7 +304,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	 * on the popover based on the new position. This ensures the animation origin is always
 	 * correct, even if a fallback position is used for the overlay.
 	 */
-	private _subscribeToPositions(position: ConnectedPositionStrategy): void {
+	protected _subscribeToPositions(position: ConnectedPositionStrategy): void {
 		this._positionSubscription = position.onPositionChange.subscribe(change => {
 			const posX: LuPopoverPosition =
 				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
@@ -294,7 +320,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 	 * to the trigger.
 	 * @returns ConnectedPositionStrategy
 	 */
-	private _getPosition(): ConnectedPositionStrategy {
+	protected _getPosition(): ConnectedPositionStrategy {
 		const position: OriginConnectionPosition = {
 			originX: 'start',
 			originY: 'top',
@@ -428,7 +454,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 			.withOffsetY(offsetY);
 	}
 
-	private _invertVerticalPos(y: VerticalConnectionPos) {
+	protected _invertVerticalPos(y: VerticalConnectionPos) {
 		if (y === 'top') {
 			y = 'bottom';
 		} else if (y === 'bottom') {
@@ -437,7 +463,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 		return y;
 	}
 
-	private _invertHorizontalPos(x: HorizontalConnectionPos) {
+	protected _invertHorizontalPos(x: HorizontalConnectionPos) {
 		if (x === 'end') {
 			x = 'start';
 		} else if (x === 'start') {
@@ -447,7 +473,7 @@ export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPa
 		return x;
 	}
 
-	private _cleanUpSubscriptions(): void {
+	protected _cleanUpSubscriptions(): void {
 		if (this._backdropSubscription) {
 			this._backdropSubscription.unsubscribe();
 		}
