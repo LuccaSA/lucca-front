@@ -2,16 +2,15 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	Input,
-	HostBinding,
 	ChangeDetectorRef,
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	ViewChild,
-	ContentChild
+	ContentChild,
+	HostListener
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { LuPopoverTrigger } from '../../popover/index';
+import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay } from '@angular/cdk/overlay';
 import { LuSelectPickerComponent, ILuSelectPickerPanel } from '../picker/index';
 
@@ -31,7 +30,7 @@ import { LuSelectPickerComponent, ILuSelectPickerPanel } from '../picker/index';
 		},
 	],
 })
-export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements ControlValueAccessor {
+export class LuSelectInputComponent<T = any> extends ALuPopoverTrigger<ILuSelectPickerPanel<T>> implements ControlValueAccessor {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -77,7 +76,6 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	/**
 	 * popover trigger class extension
 	 */
-	popover: ILuSelectPickerPanel<T>;
 	@Input('picker') set _attrPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
 	@ContentChild(LuSelectPickerComponent) set _contentChildPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
 
@@ -85,5 +83,27 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 		super.openPopover();
 		this.popover.onSelect.subscribe(value => this.setValue(value));
 	}
+	
+	@HostListener('click')
+	onClick() {
+		super.onClick();
+	}
 
+	@HostListener('mouseenter')
+	onMouseEnter() {
+		super.onMouseEnter();
+	}
+
+	@HostListener('mouseleave')
+	onMouseLeave() {
+		super.onMouseLeave();
+	}
+	@HostListener('focus')
+	onFocus() {
+		super.onFocus();
+	}
+	@HostListener('blur')
+	onBlur() {
+		super.onBlur();
+	}
 }
