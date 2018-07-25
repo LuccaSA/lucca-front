@@ -14,6 +14,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
+import { LuOptionItemComponent } from '../../option';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -53,6 +54,7 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	setValue(value) {
 		this.value = value;
 		this._cvaOnChange(value);
+		this._onTouched();
 	}
 	get value(): TValue {
 		return this._value;
@@ -82,22 +84,22 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	@Input('picker') set _attrPicker(picker: TPanel) {
 		this.popover = picker;
 		this.popover.onSelectValue.subscribe(value => this.setValue(value));
+		this.popover.close.subscribe(e => this._onTouched());
 	}
 	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: TPanel) {
 		this.popover = picker;
 		this.popover.onSelectValue.subscribe(value => this.setValue(value));
+		this.popover.close.subscribe(e => this._onTouched());
 	}
-	
+
 	@HostListener('click')
 	onClick() {
 		super.onClick();
 	}
-	
 	@HostListener('mouseenter')
 	onMouseEnter() {
 		super.onMouseEnter();
 	}
-	
 	@HostListener('mouseleave')
 	onMouseLeave() {
 		super.onMouseLeave();
