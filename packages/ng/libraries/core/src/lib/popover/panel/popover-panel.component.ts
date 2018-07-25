@@ -17,15 +17,15 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import {
 	throwLuPopoverInvalidPosition,
 	throwLuPopoverInvalidAlignement,
-} from './popover.errors';
+} from '../popover.errors';
 import {
 	ILuPopoverPanel,
 	LuPopoverAlignment,
 	LuPopoverPosition,
 	LuPopoverTriggerEvent,
 	LuPopoverScrollStrategy,
-} from './popover.model';
-import { luTransformPopover } from './popover.animation';
+} from './popover-panel.model';
+import { luTransformPopover } from '../animation/index';
 
 import { AnimationEvent } from '@angular/animations';
 
@@ -38,10 +38,9 @@ import { AnimationEvent } from '@angular/animations';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	animations: [luTransformPopover],
-	exportAs: 'LuPopover',
-	// moduleId: module.id,
+	exportAs: 'LuPopoverPanel',
 })
-export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
+export class LuPopoverPanelComponent implements ILuPopoverPanel, OnDestroy {
 	// @HostBinding() private role = 'dialog';
 
 	/** Settings for popover, view setters and getters for more detail */

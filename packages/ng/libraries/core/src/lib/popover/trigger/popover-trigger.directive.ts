@@ -28,14 +28,16 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs/Subscription';
 
 import {
+	ILuPopoverTrigger,
+} from './popover-trigger.model';
+import {
 	ILuPopoverPanel,
-	ILuPopoverTarget,
-	LuPopoverAlignment,
 	LuPopoverPosition,
-	LuPopoverTriggerEvent,
-	LuPopoverScrollStrategy,
-} from './popover.model';
-import { throwLuPopoverMissingError } from './popover.errors';
+} from '../panel/popover-panel.model';
+import {
+	ILuPopoverTarget,
+} from '../target/popover-target.model';
+import { throwLuPopoverMissingError } from '../popover.errors';
 
 /**
  * This directive is intended to be used in conjunction with an lu-popover tag.  It is
@@ -252,7 +254,7 @@ export class LuPopoverTrigger implements AfterViewInit, OnDestroy {
 	/** set state rather than toggle to support triggers sharing a popover */
 	private _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
-		this.popover.onOpen();
+		this._popoverOpen ? this.popover._emitOpenEvent() : this.popover._emitCloseEvent();
 		this._popoverOpen ? this.onPopoverOpen.emit() : this.onPopoverClose.emit();
 	}
 
