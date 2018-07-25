@@ -16,6 +16,7 @@ import { ILuSelectPickerPanel } from './select-picker.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeAll';
@@ -44,12 +45,12 @@ export class LuSelectPickerComponent<T = any> extends LuPopoverComponent impleme
 		super(_elementRef);
 		this.triggerEvent = 'click';
 	}
-	@ContentChildren(LuOptionComponent, { descendants: true}) optionsQL: QueryList<ILuOption<T>>;
+	@ContentChildren(LuOptionComponent, { descendants: true }) optionsQL: QueryList<ILuOption<T>>;
 
 	subToOptionSelected() {
 		this.subs = new Subscription();
 		const allOptionsOnSelect$ =
-			this.optionsQL.changes
+		merge(Observable.of(this.optionsQL), this.optionsQL.changes)
 			.map<QueryList<ILuOption<T>>, Observable<T>>(ql => {
 				return merge(...ql.toArray().map(o => o.onSelect));
 			})
