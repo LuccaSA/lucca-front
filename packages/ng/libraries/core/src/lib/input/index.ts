@@ -1,2 +1,2 @@
-export * from './picker/input-picker.model';
+export * from './picker/index';
 export * from './input.model';

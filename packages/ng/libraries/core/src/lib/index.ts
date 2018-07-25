@@ -5,5 +5,6 @@ export * from './api/index';
 export * from './animation/index';
 export * from './empty/index';
 export * from './option/index';
+export * from './input/index';
 
 export { LuModule } from './module';
