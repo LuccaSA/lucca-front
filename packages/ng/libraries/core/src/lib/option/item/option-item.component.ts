@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter } from '@angular/core';
+import { ILuOptionItem } from './option-item.model';
 
 @Component({
 	selector: 'lu-option',
-	templateUrl: './option.component.html',
-	styleUrls: ['./option.component.scss'],
+	templateUrl: './option-item.component.html',
+	styleUrls: ['./option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuOptionComponent<T = any> {
+export class LuOptionItemComponent<T = any> implements ILuOptionItem<T> {
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<T>();
 	@HostListener('click')

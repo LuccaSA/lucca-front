@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
 
-export interface ILuOption<T = any> {
+export interface ILuOptionItem<T = any> {
 	onSelect: Observable<T>;
 }

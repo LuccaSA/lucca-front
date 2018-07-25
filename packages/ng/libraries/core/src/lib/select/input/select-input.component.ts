@@ -12,8 +12,7 @@ import {
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay } from '@angular/cdk/overlay';
-import { LuSelectPickerComponent, ILuSelectPickerPanel } from '../picker/index';
-import { ILuInputWithPicker, ILuPickerPanel } from '../../input/index';
+import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -83,7 +82,7 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 		this.popover = picker;
 		this.popover.onSelectValue.subscribe(value => this.setValue(value));
 	}
-	@ContentChild(APickerPanel) set _contentChildPicker(picker: TPanel) {
+	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: TPanel) {
 		this.popover = picker;
 		this.popover.onSelectValue.subscribe(value => this.setValue(value));
 	}
