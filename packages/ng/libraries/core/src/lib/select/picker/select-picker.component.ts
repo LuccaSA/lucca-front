@@ -11,18 +11,14 @@ import {
 	OnDestroy,
 } from '@angular/core';
 import { LuPopoverComponent, luTransformPopover, LuPopoverTriggerEvent } from '../../popover/index';
-import { ILuOption, LuOptionComponent } from '../../option';
+import { ILuOption, LuOptionComponent } from '../../option/index';
 import { ILuSelectPickerPanel } from './select-picker.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeAll';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/concat';
-// import { switchMap, merge } from 'rxjs/operators';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
