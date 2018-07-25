@@ -7,7 +7,8 @@ import {
 	ViewContainerRef,
 	ElementRef,
 	ContentChild,
-	HostListener
+	HostListener,
+	TemplateRef
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
@@ -86,17 +87,17 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 		this.popover = picker;
 		this.popover.onSelectValue.subscribe(value => this.setValue(value));
 	}
-
+	
 	@HostListener('click')
 	onClick() {
 		super.onClick();
 	}
-
+	
 	@HostListener('mouseenter')
 	onMouseEnter() {
 		super.onMouseEnter();
 	}
-
+	
 	@HostListener('mouseleave')
 	onMouseLeave() {
 		super.onMouseLeave();
@@ -108,5 +109,10 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	@HostListener('blur')
 	onBlur() {
 		super.onBlur();
+	}
+
+	displayTemplate: TemplateRef<any>;
+	@ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
+		this.displayTemplate = templateRef;
 	}
 }
