@@ -7,7 +7,8 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	ViewChild
+	ViewChild,
+	ContentChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { LuPopoverTrigger } from '../../popover/index';
@@ -47,6 +48,10 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	 * contriol value accessor interface implementation
 	 */
 	private _value: T;
+	setValue(value) {
+		this.value = value;
+		this._cvaOnChange(value);
+	}
 	get value(): T {
 		return this._value;
 	}
@@ -59,7 +64,7 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	private _cvaOnChange = () => {};
+	private _cvaOnChange = (v: T) => {};
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
@@ -72,6 +77,13 @@ export class LuSelectInputComponent<T = any> extends LuPopoverTrigger implements
 	/**
 	 * popover trigger class extension
 	 */
-	@ViewChild(LuSelectPickerComponent) popover: ILuSelectPickerPanel;
+	popover: ILuSelectPickerPanel<T>;
+	@Input('picker') set _attrPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
+	@ContentChild(LuSelectPickerComponent) set _contentChildPicker(picker: ILuSelectPickerPanel) { this.popover = picker; }
+
+	openPopover() {
+		super.openPopover();
+		this.popover.onSelect.subscribe(value => this.setValue(value));
+	}
 
 }

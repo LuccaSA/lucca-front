@@ -234,6 +234,7 @@ export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 
 	/** Event emitted when the popover is closed. */
 	@Output() close = new EventEmitter<void>();
+	@Output() open = new EventEmitter<void>();
 
 	@ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
@@ -270,6 +271,12 @@ export class LuPopoverComponent implements ILuPopoverPanel, OnDestroy {
 		}
 	}
 
+	onOpen() {
+		this._emitOpenEvent();
+	}
+	_emitOpenEvent(): void {
+		this.open.emit();
+	}
 	/**
 	 * TODO: Refactor when @angular/cdk includes feature I mentioned on github see link below.
 	 * https://github.com/angular/material2/pull/5493#issuecomment-313085323

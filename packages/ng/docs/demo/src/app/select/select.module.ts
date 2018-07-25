@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LuEmptyModule, LuSelectModule } from '@lucca-front/ng';
+import { LuEmptyModule, LuSelectModule, LuOptionModule } from '@lucca-front/ng';
 import { DemoSelectComponent } from './select.component';
 import { BasicSelectComponent } from './basic/basic';
 
@@ -15,6 +15,7 @@ import { SharedModule } from '../shared';
 		SharedModule,
 		LuEmptyModule,
 		LuSelectModule,
+		LuOptionModule,
 	],
 	declarations: [DemoSelectComponent, BasicSelectComponent],
 	exports: [DemoSelectComponent],

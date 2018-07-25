@@ -1,17 +1,28 @@
 <section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
-		<lu-select [(ngModel)]="itemSelect"
-			class="textfield-input"
-			placeholder="placeholder"
-			name="itemOptions"
-			>
-				<!-- <lu-select-option *ngFor="let option of options" [luOptionValue]="option">{{option.name}}</lu-select-option> -->
+		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
+			<lu-select-picker>
+				<lu-option [value]="green">{{green.name}}</lu-option>
+				<lu-option [value]="red">{{red.name}}</lu-option>
+			</lu-select-picker>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ itemSelect | json }}</code>
 </section>
+<section class="contentSection">
+	<h3>Component basic</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="number" class="textfield-input">
+			<lu-select-picker>
+				<lu-option *ngFor="let option of options$ | async" [value]="option">{{option.name}}</lu-option>
+			</lu-select-picker>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ number | json }}</code>
 
+</section>
 
 
