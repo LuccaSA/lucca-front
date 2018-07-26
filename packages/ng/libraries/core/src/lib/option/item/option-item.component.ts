@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, TemplateRef } from '@angular/core';
 import { ILuOptionItem } from './option-item.model';
 
 @Component({
@@ -8,6 +8,7 @@ import { ILuOptionItem } from './option-item.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuOptionItemComponent<T = any> implements ILuOptionItem<T> {
+	constructor() {}
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<T>();
 	@HostListener('click')

@@ -6,6 +6,7 @@
 				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red">{{red.name}}</lu-option>
 			</lu-option-picker>
+			<ng-template let-value>{{value | json}}</ng-template>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
@@ -16,7 +17,7 @@
 	<div class="textfield">
 		<lu-select [(ngModel)]="number" class="textfield-input">
 			<lu-option-picker>
-				<lu-option *ngFor="let option of options$ | async" [value]="option">{{option.name}}</lu-option>
+				<lu-option *ngFor="let option of options$ | async" [value]="option">{{option?.name}}</lu-option>
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
