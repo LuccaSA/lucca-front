@@ -25,6 +25,9 @@ export class BasicSelectComponent {
 
 	number = { id: 1, name: 1 };
 	options$ = interval(1000)
-	.map(i => ({ id: i, name: i }))
+	.map(i => ({ id: i, name: '' + i }))
 	.scan((acc, curr) => [ ...acc, curr], []);
+	searchFn(o, c) {
+		return o.name.startsWith(c);
+	}
 }
