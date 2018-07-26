@@ -1,4 +1,4 @@
-<!-- <section class="contentSection">
+<section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
@@ -23,20 +23,27 @@
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ number | json }}</code>
-
-</section> -->
+</section>
 
 <section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
-		<lu-select [(ngModel)]="number" class="textfield-input">
-			<lu-option-picker>
-				<lu-option-feeder [options]="[red, green]"></lu-option-feeder>
-				<lu-option-template>
-					{{option?.name}}
-				</lu-option-template>
-			</lu-option-picker>
-		</lu-select>
+	<lu-select [(ngModel)]="number" class="textfield-input">
+		<lu-option-picker>
+			<lu-option-feeder [options]="[red, green]"></lu-option-feeder>
+			<!-- <lu-option-searcher></lu-option-searcher> -->
+			<!-- <lu-option-pager></lu-option-pager> -->
+			<!-- <lu-option *luOptionTemplate let-option [value]="option">{{option?.name}}</lu-option> -->
+			<!-- <lu-option *luOptionTemplate let-option [value]="option">{{option?.name}}</lu-option> -->
+			<lu-option-template>
+				<ng-template let-option>{{option.name}}</ng-template>
+			</lu-option-template>
+			<!-- <lu-options>
+				<lu-option-template let-option>{{option.name}}</lu-option-template>
+			</lu-options> -->
+		</lu-option-picker>
+	</lu-select>
+
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ number | json }}</code>

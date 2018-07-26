@@ -22,7 +22,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { ALuPickerPanel } from '../../input/index';
-import { ALuOptionOperator, ILuOptionOperator, ILuOptionProvider, ALuOptionProvider } from '../operator/index';
+import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -44,7 +44,7 @@ import { ALuOptionOperator, ILuOptionOperator, ILuOptionProvider, ALuOptionProvi
 })
 export class LuOptionPickerComponent<T = any>
 extends LuPopoverPanelComponent
-implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
+implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
 	subs: Subscription;
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
@@ -56,7 +56,6 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true }) optionsQL: QueryList<ILuOptionItem<T>>;
 	@ContentChildren(ALuOptionOperator, { descendants: true }) operatorsQL: QueryList<ILuOptionOperator<T>>;
-	// @ContentChildren(ALuOptionProvider, { descendants: true }) providersQL: QueryList<ILuOptionProvider<T>>;
 
 	subToOptionSelected() {
 		const allOptionsOnSelect$ =
@@ -77,7 +76,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		this.onSelectValue.emit(val);
 		this._emitCloseEvent();
 	}
-	ngAfterViewInit() {
+	ngAfterContentInit() {
 		this.subs = new Subscription();
 		this.subToOptionSelected();
 		this.initOperators();
@@ -93,16 +92,6 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;
 		});
-		// const providers: ILuOptionProvider<T>[] = this.providersQL.toArray();
-		// const lol = providers[0].luOptions$;
-		// const allOptionsOnSelect$ =
-		// merge(...providers.map(p => p.luOptions$))
-		// .map(options => merge(...options.map(o => o.onSelect)))
-		// .mergeMap(o => o);
-		// this.subs.add(
-		// 	allOptionsOnSelect$
-		// 	.subscribe((val: T) => this._select(val))
-		// );
 	}
 
 }

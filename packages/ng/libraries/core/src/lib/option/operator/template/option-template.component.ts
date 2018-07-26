@@ -1,9 +1,21 @@
-import { ChangeDetectionStrategy, Component, forwardRef, QueryList, ViewChildren, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	QueryList,
+	ViewChildren,
+	AfterViewInit,
+	Output,
+	EventEmitter,
+	TemplateRef,
+	ContentChild,
+} from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from '../../item/index';
-import { ILuOptionOperator, ALuOptionOperator, ALuOptionProvider, ILuOptionProvider } from '../option-operator.model';
+import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
 
 @Component({
 	selector: 'lu-option-template',
@@ -24,13 +36,13 @@ import 'rxjs/add/operator/mergeMap';
 	],
 })
 export class LuOptionTemplateComponent<T = any> implements ILuOptionOperator<T>, ILuOptionItem<T>, AfterViewInit {
+	@ContentChild(TemplateRef, { read: TemplateRef }) optionTemplate: TemplateRef<any>;
 	@Output() onSelect = new EventEmitter<T>();
 	set inOptions$(options$: Observable<T[]>) {
 		this.options$ = options$;
 	}
 	get outOptions$() { return this.options$; }
 	options$: Observable<T[]>;
-	// luOptions$: Observable<ILuOptionItem<T>[]>;
 
 	@ViewChildren(ALuOptionItem) optionsVC: QueryList<ILuOptionItem<T>>;
 	ngAfterViewInit() {
