@@ -30,5 +30,5 @@ export class BasicSelectComponent {
 	searchFn(o, c) {
 		return o.name.startsWith(c);
 	}
-	withOperators = number;
+	withOperators = this.number;
 }
