@@ -1,0 +1,5 @@
+<ng-container *ngFor="let option of options$ | async">
+	<lu-option [value]="option">
+		<ng-container *ngTemplateOutlet="optionTemplate; context: {$implicit: option}"></ng-container>
+	</lu-option>
+</ng-container>

@@ -114,7 +114,7 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	}
 
 	displayTemplate: TemplateRef<any>;
-	@ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
-		this.displayTemplate = templateRef;
-	}
+	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
+	// 	this.displayTemplate = templateRef;
+	// }
 }
