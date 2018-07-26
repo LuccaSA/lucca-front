@@ -1,1 +1,5 @@
-// @import '../../popover/popover.component';
+.lu-popover-content {
+	padding: 0;
+	max-height: 280px;
+	overflow-y: auto;
+}

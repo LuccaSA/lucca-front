@@ -7,8 +7,8 @@ import { of } from 'rxjs/observable/of';
 import { FormControl } from '@angular/forms';
 @Component({
 	selector: 'lu-option-searcher',
-	template: '<input [formControl]="searchControl">',
-	styleUrls: [],
+	templateUrl: 'option-searcher.component.html',
+	styleUrls: ['option-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

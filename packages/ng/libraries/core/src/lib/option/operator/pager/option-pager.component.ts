@@ -6,7 +6,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 const MAGIC_STEP = 5;
 @Component({
 	selector: 'lu-option-pager',
-	template: '0 - {{paging$.value}} <button (click)="next()">next</button>',
+	template: '',
 	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [

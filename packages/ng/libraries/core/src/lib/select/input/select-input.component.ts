@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 import { LuOptionItemComponent } from '../../option';
 
@@ -111,6 +111,13 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	@HostListener('blur')
 	onBlur() {
 		super.onBlur();
+	}
+
+	protected _getOverlayConfig(): OverlayConfig {
+		const config = super._getOverlayConfig();
+		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
+		config.width = `${clientRect.width}px`; // might become min/maxWidth
+		return config;
 	}
 
 	displayTemplate: TemplateRef<any>;
