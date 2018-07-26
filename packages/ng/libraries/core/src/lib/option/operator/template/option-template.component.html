@@ -1,0 +1,6 @@
+<ng-template #template let-option>
+	<ng-content></ng-content>
+</ng-template>
+<ng-template *ngFor="let option of inOptions$ | async">
+	<ng-container *ngTemplateOutlet="template; context: {$implicit: option}"></ng-container>
+</ng-template>
