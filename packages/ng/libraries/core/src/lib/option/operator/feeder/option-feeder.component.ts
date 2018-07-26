@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/
 import { ILuOptionItem } from '../../item/index';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
 	selector: 'lu-option-feeder',
@@ -17,8 +18,8 @@ import { Subject } from 'rxjs/Subject';
 	],
 })
 export class LuOptionFeederComponent<T = any> implements ILuOptionOperator<T> {
-	outOptions$ = new Subject<ILuOptionItem<T>[]>();
-	@Input() set options(options: ILuOptionItem<T>[]) {
+	outOptions$ = new BehaviorSubject<T[]>([]);
+	@Input() set options(options: T[]) {
 		this.outOptions$.next(options);
 	}
 }

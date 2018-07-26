@@ -1,4 +1,4 @@
-<section class="contentSection">
+<!-- <section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
@@ -24,6 +24,21 @@
 	</div>
 	<code class="code mod-block">{{ number | json }}</code>
 
+</section> -->
+
+<section class="contentSection">
+	<h3>Component basic</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="number" class="textfield-input">
+			<lu-option-picker>
+				<lu-option-feeder [options]="[red, green]"></lu-option-feeder>
+				<lu-option-template>
+					{{option?.name}}
+				</lu-option-template>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ number | json }}</code>
+
 </section>
-
-

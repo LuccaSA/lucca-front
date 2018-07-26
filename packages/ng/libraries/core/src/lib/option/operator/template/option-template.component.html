@@ -1,6 +1,7 @@
 <ng-template #template let-option>
-	<ng-content></ng-content>
+	<!-- <ng-content></ng-content> -->
+	<lu-option [value]="option">{{ option?.name }}</lu-option>
 </ng-template>
-<ng-template *ngFor="let option of inOptions$ | async">
+<ng-container *ngFor="let option of options$ | async">
 	<ng-container *ngTemplateOutlet="template; context: {$implicit: option}"></ng-container>
-</ng-template>
+</ng-container>

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOptionItem } from '../../item/index';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -19,10 +18,10 @@ import { Subject } from 'rxjs/Subject';
 	],
 })
 export class LuOptionPagerComponent<T = any> implements ILuOptionOperator<T> {
-	set inOptions$(in$: Observable<ILuOptionItem<T>[]>) {
+	set inOptions$(in$: Observable<T[]>) {
 		// in$.do(options => this.outOptions$.next(options))
 	}
-	outOptions$: Observable<ILuOptionItem<T>[]> = new Subject<ILuOptionItem<T>[]>();
+	outOptions$: Observable<T[]> = new Subject<T[]>();
 	// paging$ = new Subject<number>();
 
 }

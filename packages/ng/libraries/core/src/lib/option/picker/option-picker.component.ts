@@ -10,9 +10,10 @@ import {
 	EventEmitter,
 	OnDestroy,
 	forwardRef,
+	AfterViewInit,
 } from '@angular/core';
 import { LuPopoverPanelComponent, luTransformPopover } from '../../popover/index';
-import { ILuOptionItem, LuOptionItemComponent } from '../item/index';
+import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel } from './option-picker.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -21,6 +22,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { ALuPickerPanel } from '../../input/index';
+import { ALuOptionOperator, ILuOptionOperator, ILuOptionProvider, ALuOptionProvider } from '../operator/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -42,7 +44,7 @@ import { ALuPickerPanel } from '../../input/index';
 })
 export class LuOptionPickerComponent<T = any>
 extends LuPopoverPanelComponent
-implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
+implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	subs: Subscription;
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
@@ -52,10 +54,11 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
 		super(_elementRef);
 		this.triggerEvent = 'click';
 	}
-	@ContentChildren(LuOptionItemComponent, { descendants: true }) optionsQL: QueryList<ILuOptionItem<T>>;
+	@ContentChildren(ALuOptionItem, { descendants: true }) optionsQL: QueryList<ILuOptionItem<T>>;
+	@ContentChildren(ALuOptionOperator, { descendants: true }) operatorsQL: QueryList<ILuOptionOperator<T>>;
+	// @ContentChildren(ALuOptionProvider, { descendants: true }) providersQL: QueryList<ILuOptionProvider<T>>;
 
 	subToOptionSelected() {
-		this.subs = new Subscription();
 		const allOptionsOnSelect$ =
 		merge(Observable.of(this.optionsQL), this.optionsQL.changes)
 			.map<QueryList<ILuOptionItem<T>>, Observable<T>>(ql => {
@@ -74,10 +77,32 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
 		this.onSelectValue.emit(val);
 		this._emitCloseEvent();
 	}
-	ngAfterContentInit() {
+	ngAfterViewInit() {
+		this.subs = new Subscription();
 		this.subToOptionSelected();
+		this.initOperators();
 	}
 	ngOnDestroy() {
 		this.unSubToOptionSelected();
 	}
+
+	initOperators() {
+		const operators: ILuOptionOperator<T>[] = this.operatorsQL.toArray();
+		let options$: Observable<T[]>;
+		operators.forEach(operator => {
+			operator.inOptions$ = options$;
+			options$ = operator.outOptions$;
+		});
+		// const providers: ILuOptionProvider<T>[] = this.providersQL.toArray();
+		// const lol = providers[0].luOptions$;
+		// const allOptionsOnSelect$ =
+		// merge(...providers.map(p => p.luOptions$))
+		// .map(options => merge(...options.map(o => o.onSelect)))
+		// .mergeMap(o => o);
+		// this.subs.add(
+		// 	allOptionsOnSelect$
+		// 	.subscribe((val: T) => this._select(val))
+		// );
+	}
+
 }
