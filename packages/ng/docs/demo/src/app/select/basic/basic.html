@@ -28,16 +28,15 @@
 <section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
-	<lu-select [(ngModel)]="number" class="textfield-input">
+	<lu-select [(ngModel)]="withOperators" class="textfield-input">
 		<lu-option-picker>
-			<lu-option-feeder [options]="[red, green]"></lu-option-feeder>
+			<lu-option-feeder [options]="options$ | async"></lu-option-feeder>
 			<!-- <lu-option-searcher></lu-option-searcher> -->
-			<!-- <lu-option-pager></lu-option-pager> -->
-			<!-- <lu-option *luOptionTemplate let-option [value]="option">{{option?.name}}</lu-option> -->
-			<!-- <lu-option *luOptionTemplate let-option [value]="option">{{option?.name}}</lu-option> -->
+			<lu-option-pager></lu-option-pager>
 			<lu-option-template>
 				<ng-template let-option>{{option.name}}</ng-template>
 			</lu-option-template>
+			<!-- target synthax -->
 			<!-- <lu-options>
 				<lu-option-template let-option>{{option.name}}</lu-option-template>
 			</lu-options> -->
@@ -46,6 +45,6 @@
 
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
-	<code class="code mod-block">{{ number | json }}</code>
+	<code class="code mod-block">{{ withOperators | json }}</code>
 
 </section>

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-// import 'rxjs/add/operators/do';
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+const MAGIC_STEP = 5;
 @Component({
 	selector: 'lu-option-pager',
-	template: '',
+	template: '0 - {{paging$.value}} <button (click)="next()">next</button>',
 	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
@@ -17,11 +17,18 @@ import { Subject } from 'rxjs/Subject';
 		},
 	],
 })
-export class LuOptionPagerComponent<T = any> implements ILuOptionOperator<T> {
+export class LuOptionPagerComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T> {
 	set inOptions$(in$: Observable<T[]>) {
-		// in$.do(options => this.outOptions$.next(options))
+		this.outOptions$ = combineLatest(
+			in$,
+			this.paging$,
+			(options, paging) => {
+				return (options || []).slice(0, paging);
+			}
+		);
 	}
-	outOptions$: Observable<T[]> = new Subject<T[]>();
-	// paging$ = new Subject<number>();
-
+	paging$ = new BehaviorSubject<number>(MAGIC_STEP);
+	next() {
+		this.paging$.next(this.paging$.value + MAGIC_STEP);
+	}
 }
