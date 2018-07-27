@@ -1,4 +1,7 @@
 <lu-user-picker>
-	<lu-option [value]="bob">{{ bob | luUserDisplay: 'lf' }}</lu-option>
+	<lu-option-feeder [options]="[bob]"></lu-option-feeder>
+	<lu-option-template>
+		<ng-template let-user>{{user | luUserDisplay: 'lf' }}</ng-template>
+	</lu-option-template>
 </lu-user-picker>
 {{ value | luUserDisplay }}

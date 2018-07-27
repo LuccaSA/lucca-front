@@ -47,8 +47,9 @@ implements ILuUserPickerPanel<U>, OnDestroy {
 		merge(Observable.of(ql), ql.changes)
 		.map<QueryList<ILuOptionItem<U>>, ILuOptionItem<U>[]>(q => q.toArray());
 	}
-	@ContentChildren(ALuOptionOperator) operatorsQL: QueryList<ILuOptionOperator<U>>;
-
+	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<U>>) {
+		this._operators = ql.toArray();
+	}
 	constructor(
 		protected _elementRef: ElementRef,
 	) {
