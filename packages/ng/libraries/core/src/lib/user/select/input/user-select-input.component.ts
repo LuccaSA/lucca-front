@@ -14,7 +14,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel } from '../../../input/index';
 import { IUser } from '../../user.model';
 import { ALuSelectInput } from '../../../select/index';
-import { ILuUserPickerPanel, LuUserPickerComponent } from '../../picker/index';
+import { ILuOptionPickerPanel } from '../../../option/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -32,7 +32,7 @@ import { ILuUserPickerPanel, LuUserPickerComponent } from '../../picker/index';
 		},
 	],
 })
-export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuUserPickerPanel<U> = ILuUserPickerPanel<U>>
+export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
 extends ALuSelectInput<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U> {
 	constructor(
@@ -93,7 +93,5 @@ implements ControlValueAccessor, ILuInputWithPicker<U> {
 	// 	this.displayTemplate = templateRef;
 	// }
 
-	
-	// debug
-	bob = { id: 12, firstName: 'bob', lastName: 'sponge' } as IUser;
+
 }
