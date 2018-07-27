@@ -50,9 +50,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	/**
 	 * popover trigger class extension
 	 */
-	@Input('picker') set _attrPicker(picker: P) {
-		this._picker = picker;
-	}
 	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: P) {
 		this._picker = picker;
 	}
