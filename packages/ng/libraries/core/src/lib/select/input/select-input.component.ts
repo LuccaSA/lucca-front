@@ -50,7 +50,7 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	/**
 	 * contriol value accessor interface implementation
 	 */
-	private _value: TValue;
+	protected _value: TValue;
 	setValue(value) {
 		this.value = value;
 		this._cvaOnChange(value);
@@ -68,12 +68,12 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	private _cvaOnChange = (v: TValue) => {};
+	protected _cvaOnChange = (v: TValue) => {};
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	private _onTouched = () => {};
+	protected _onTouched = () => {};
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
