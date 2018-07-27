@@ -30,11 +30,20 @@ export class LuUserFeederComponent<U extends IUser = IUser> implements ILuOption
 	page$ = new BehaviorSubject<number>(0);
 	clue$ = merge(of(''), this.searchControl.valueChanges).do(c => this.page$.next(0));
 
+	refresh$;
+	loading$;
+
 	constructor(protected service: LuUserFeederService<U>) {}
 
 	ngOnInit() {
-		this.outOptions$ = combineLatest(this.clue$, this.page$)
+		this.refresh$ = combineLatest(this.clue$, this.page$)
+		this.outOptions$ = this.refresh$
 		.debounceTime(25)
 		.switchMap(([clue, page]) => this.service.search(clue, page).catch(err => of([])));
+
+		this.loading$ = merge(
+			this.refresh$.map(() => true),
+			this.outOptions$.map(() => false),
+		);
 	}
 }
