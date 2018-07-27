@@ -34,7 +34,7 @@ export class LuUserFeederComponent<U extends IUser = IUser> implements ILuOption
 
 	ngOnInit() {
 		this.outOptions$ = combineLatest(this.clue$, this.page$)
-		.debounceTime(1000)
+		.debounceTime(25)
 		.switchMap(([clue, page]) => this.service.search(clue, page).catch(err => of([])));
 	}
 }
