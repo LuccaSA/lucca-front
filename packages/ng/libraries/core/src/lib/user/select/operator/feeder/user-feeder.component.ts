@@ -46,4 +46,7 @@ export class LuUserFeederComponent<U extends IUser = IUser> implements ILuOption
 			this.outOptions$.map(() => false),
 		);
 	}
+	onScrollBottom() {
+		this.page$.next(this.page$.value + 1);
+	}
 }

@@ -8,11 +8,13 @@ import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { ILuOptionOperator } from '../operator/index';
+import { ILuScrollable } from '../../scroll';
 
 export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 
 export abstract class ALuOptionPicker<T = any> extends LuPopoverPanelComponent implements ILuOptionPickerPanel<T> {
-	subs = new Subscription();
+	private __operators;
+	private __subs = new Subscription();
 	onSelectValue: Observable<T>;
 	setValue(value: T) {}
 	constructor(
@@ -23,20 +25,41 @@ export abstract class ALuOptionPicker<T = any> extends LuPopoverPanelComponent i
 	}
 	protected set _optionItems$(optionItems$: Observable<ILuOptionItem<T>[]>) {
 		const singleFlow$ = optionItems$.map(items => merge(...items.map(i => i.onSelect))).mergeMap(item => item);
-		this.subs.add(
+		this.__subs.add(
 			singleFlow$
 			.subscribe((value: T) => this._select(value))
 		);
 	}
 	protected set _operators(operators: ILuOptionOperator<T>[]) {
+		this.__operators = operators;
 		let options$: Observable<T[]>;
 		operators.forEach(operator => {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;
 		});
 	}
+	// protected set _scrollable(scrollable: ILuScrollable) {
+	// 	if (!scrollable) {
+	// 		return;
+	// 	}
+	// 	this.__subs.add(
+	// 		scrollable.onScrollBottom
+	// 		.subscribe(e => this.__operators.forEach(o => {
+	// 			if (o.onScrollBottom) {
+	// 				o.onScrollBottom();
+	// 			}
+	// 		}))
+	// 	);
+	// }
+	onScrollBottom() {
+		if (!this.__operators) { return; }
+		this.__operators.forEach(o => {
+			if (!o.onScrollBottom) { return; }
+			o.onScrollBottom();
+		});
+	}
 	protected abstract _select(val: T);
 	protected destroy() {
-		this.subs.unsubscribe();
+		this.__subs.unsubscribe();
 	}
 }

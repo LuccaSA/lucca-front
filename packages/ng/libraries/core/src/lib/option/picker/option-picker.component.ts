@@ -9,6 +9,7 @@ import {
 	EventEmitter,
 	OnDestroy,
 	forwardRef,
+	ViewChild,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -20,6 +21,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
+import { LuScrollDirective, ILuScrollable } from '../../scroll';
 
 /**
 * basic option picker panel
