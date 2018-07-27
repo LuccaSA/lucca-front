@@ -3,7 +3,7 @@ import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { combineLatest } from 'rxjs/observable/combineLatest';
-const MAGIC_STEP = 5;
+const MAGIC_STEP = 10;
 @Component({
 	selector: 'lu-option-pager',
 	template: '',
@@ -30,5 +30,8 @@ export class LuOptionPagerComponent<T = any> extends ALuOptionOperator<T> implem
 	paging$ = new BehaviorSubject<number>(MAGIC_STEP);
 	next() {
 		this.paging$.next(this.paging$.value + MAGIC_STEP);
+	}
+	onScrollBottom() {
+		this.next();
 	}
 }
