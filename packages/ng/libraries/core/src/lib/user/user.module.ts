@@ -3,7 +3,6 @@ import { LuUserDisplayModule } from './display/index';
 import { LuUserPictureModule } from './picture/index';
 import { LuUserTileModule } from './tile/index';
 import { LuUserSelectModule } from './select/index';
-import { LuUserPickerModule } from './picker/index';
 
 @NgModule({
 	imports: [
@@ -11,14 +10,12 @@ import { LuUserPickerModule } from './picker/index';
 		LuUserPictureModule,
 		LuUserTileModule,
 		LuUserSelectModule,
-		LuUserPickerModule,
 	],
 	exports: [
 		LuUserDisplayModule,
 		LuUserPictureModule,
 		LuUserTileModule,
 		LuUserSelectModule,
-		LuUserPickerModule,
 	],
 })
 export class LuUserModule {}
