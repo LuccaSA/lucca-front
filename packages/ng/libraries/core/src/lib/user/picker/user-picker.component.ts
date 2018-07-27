@@ -3,22 +3,23 @@ import {
 	Component,
 	ElementRef,
 	ViewEncapsulation,
-	ContentChildren,
-	AfterContentInit,
 	QueryList,
 	Output,
 	EventEmitter,
 	OnDestroy,
 	forwardRef,
-	AfterViewInit,
 	ViewChildren,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ALuPickerPanel } from '../../input/index';
-import { ALuOptionOperator, ILuOptionOperator, ILuOptionItem, ALuOptionItem, LuOptionPickerComponent } from '../../option/index';
+import { ALuOptionOperator, ILuOptionOperator, ILuOptionItem, ALuOptionItem, ALuOptionPicker } from '../../option/index';
 import { ILuUserPickerPanel } from './user-picker.model';
 import { IUser } from '../user.model';
-
+import { Observable } from 'rxjs/Observable';
+import { merge } from 'rxjs/observable/merge';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
 */
@@ -38,18 +39,28 @@ import { IUser } from '../user.model';
 	]
 })
 export class LuUserPickerComponent<U extends IUser = IUser>
-extends LuOptionPickerComponent<U>
+extends ALuOptionPicker<U>
 implements ILuUserPickerPanel<U>, OnDestroy {
 	@Output() onSelectValue = new EventEmitter<U>();
-	@ViewChildren(ALuOptionItem) optionsQL: QueryList<ILuOptionItem<U>>;
+	@ViewChildren(ALuOptionItem) set optionsQL(ql: QueryList<ILuOptionItem<U>>) {
+		this._optionItems$ =
+		merge(Observable.of(ql), ql.changes)
+		.map<QueryList<ILuOptionItem<U>>, ILuOptionItem<U>[]>(q => q.toArray());
+	}
 	@ViewChildren(ALuOptionOperator) operatorsQL: QueryList<ILuOptionOperator<U>>;
+
 	constructor(
 		protected _elementRef: ElementRef,
 	) {
 		super(_elementRef);
 	}
-
-
+	ngOnDestroy() {
+		super.destroy();
+	}
+	protected _select(val: U) {
+		this.onSelectValue.emit(val);
+		super._emitCloseEvent();
+	}
 	// debug
 	bob = { id: 12, firstName: 'bob', lastName: 'sponge' } as IUser;
 }
