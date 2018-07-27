@@ -3,11 +3,12 @@
 	 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
 	 [@transformPopover]="'enter'">
 		<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
+			<ng-content></ng-content>
 			<!-- <lu-user-feeder></lu-user-feeder> -->
 			<!-- <lu-option-template>
 				<ng-template let-option>{{ option | luUserDisplay: 'lf' }}</ng-template>
 			</lu-option-template> -->
-			<lu-option [value]="bob">{{ bob | luUserDisplay: 'lf' }}</lu-option>
+			<!-- <lu-option [value]="bob">{{ bob | luUserDisplay: 'lf' }}</lu-option> -->
 		</div>
 	</div>
 </ng-template>

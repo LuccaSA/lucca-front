@@ -92,4 +92,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U> {
 	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
 	// 	this.displayTemplate = templateRef;
 	// }
+
+	
+	// debug
+	bob = { id: 12, firstName: 'bob', lastName: 'sponge' } as IUser;
 }

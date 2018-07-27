@@ -8,7 +8,7 @@ import {
 	EventEmitter,
 	OnDestroy,
 	forwardRef,
-	ViewChildren,
+	ContentChildren,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ALuPickerPanel } from '../../input/index';
@@ -42,12 +42,12 @@ export class LuUserPickerComponent<U extends IUser = IUser>
 extends ALuOptionPicker<U>
 implements ILuUserPickerPanel<U>, OnDestroy {
 	@Output() onSelectValue = new EventEmitter<U>();
-	@ViewChildren(ALuOptionItem) set optionsQL(ql: QueryList<ILuOptionItem<U>>) {
+	@ContentChildren(ALuOptionItem) set optionsQL(ql: QueryList<ILuOptionItem<U>>) {
 		this._optionItems$ =
 		merge(Observable.of(ql), ql.changes)
 		.map<QueryList<ILuOptionItem<U>>, ILuOptionItem<U>[]>(q => q.toArray());
 	}
-	@ViewChildren(ALuOptionOperator) operatorsQL: QueryList<ILuOptionOperator<U>>;
+	@ContentChildren(ALuOptionOperator) operatorsQL: QueryList<ILuOptionOperator<U>>;
 
 	constructor(
 		protected _elementRef: ElementRef,
@@ -61,6 +61,4 @@ implements ILuUserPickerPanel<U>, OnDestroy {
 		this.onSelectValue.emit(val);
 		super._emitCloseEvent();
 	}
-	// debug
-	bob = { id: 12, firstName: 'bob', lastName: 'sponge' } as IUser;
 }
