@@ -39,7 +39,7 @@ import { IUser } from '../user.model';
 })
 export class LuUserPickerComponent<U extends IUser = IUser>
 extends LuOptionPickerComponent<U>
-implements ILuUserPickerPanel<U>, OnDestroy, AfterContentInit {
+implements ILuUserPickerPanel<U>, OnDestroy {
 	@Output() onSelectValue = new EventEmitter<U>();
 	@ViewChildren(ALuOptionItem) optionsQL: QueryList<ILuOptionItem<U>>;
 	@ViewChildren(ALuOptionOperator) operatorsQL: QueryList<ILuOptionOperator<U>>;

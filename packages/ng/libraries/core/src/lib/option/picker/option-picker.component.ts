@@ -44,7 +44,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 })
 export class LuOptionPickerComponent<T = any>
 extends LuPopoverPanelComponent
-implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
+implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	subs: Subscription;
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
@@ -76,7 +76,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
 		this.onSelectValue.emit(val);
 		this._emitCloseEvent();
 	}
-	ngAfterContentInit() {
+	ngAfterViewInit() {
 		this.subs = new Subscription();
 		this.subToOptionSelected();
 		this.initOperators();

@@ -11,10 +11,9 @@ import {
 	TemplateRef
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { ALuPopoverTrigger } from '../../popover/index';
-import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
-import { LuOptionItemComponent } from '../../option';
+import { ALuSelectInput } from './select-input.model';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -32,64 +31,30 @@ import { LuOptionItemComponent } from '../../option';
 		},
 	],
 })
-export class LuSelectInputComponent<TValue = any, TPanel extends ILuPickerPanel<TValue> = ILuPickerPanel<TValue>>
-extends ALuPopoverTrigger<TPanel>
-implements ControlValueAccessor, ILuInputWithPicker<TValue> {
+export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
+extends ALuSelectInput<T, P>
+implements ControlValueAccessor, ILuInputWithPicker<T> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 	) {
-		super(
+		super(_changeDetectorRef,
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
 		);
 	}
-	/**
-	 * contriol value accessor interface implementation
-	 */
-	protected _value: TValue;
-	setValue(value) {
-		this.value = value;
-		this._cvaOnChange(value);
-		this._onTouched();
-	}
-	get value(): TValue {
-		return this._value;
-	}
-	set value(value: TValue) {
-		this._value = value;
-		this._changeDetectorRef.markForCheck();
-	}
-	// From ControlValueAccessor interface
-	writeValue(value: TValue) {
-		this.value = value;
-	}
-	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: TValue) => {};
-	registerOnChange(fn: any) {
-		this._cvaOnChange = fn;
-	}
-	// From ControlValueAccessor interface
-	protected _onTouched = () => {};
-	registerOnTouched(fn: any) {
-		this._onTouched = fn;
-	}
 
 	/**
 	 * popover trigger class extension
 	 */
-	@Input('picker') set _attrPicker(picker: TPanel) {
-		this.popover = picker;
-		this.popover.onSelectValue.subscribe(value => this.setValue(value));
-		this.popover.close.subscribe(e => this._onTouched());
+	@Input('picker') set _attrPicker(picker: P) {
+		this._picker = picker;
 	}
-	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: TPanel) {
-		this.popover = picker;
-		this.popover.onSelectValue.subscribe(value => this.setValue(value));
-		this.popover.close.subscribe(e => this._onTouched());
+	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: P) {
+		this._picker = picker;
 	}
 
 	@HostListener('click')
@@ -111,13 +76,6 @@ implements ControlValueAccessor, ILuInputWithPicker<TValue> {
 	@HostListener('blur')
 	onBlur() {
 		super.onBlur();
-	}
-
-	protected _getOverlayConfig(): OverlayConfig {
-		const config = super._getOverlayConfig();
-		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
-		config.width = `${clientRect.width}px`; // might become min/maxWidth
-		return config;
 	}
 
 	displayTemplate: TemplateRef<any>;

@@ -1,21 +1,20 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	Input,
 	ChangeDetectorRef,
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	ContentChild,
 	HostListener,
-	TemplateRef
+	TemplateRef,
+	ViewChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel } from '../../../input/index';
+import { ILuInputWithPicker } from '../../../input/index';
 import { IUser } from '../../user.model';
-import { LuSelectInputComponent } from '../../../select/index';
-import { ILuUserPickerPanel } from '../../picker/index';
+import { ALuSelectInput } from '../../../select/index';
+import { ILuUserPickerPanel, LuUserPickerComponent } from '../../picker/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -28,13 +27,13 @@ import { ILuUserPickerPanel } from '../../picker/index';
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuSelectInputComponent),
+			useExisting: forwardRef(() => LuUserSelectInputComponent),
 			multi: true,
 		},
 	],
 })
 export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuUserPickerPanel<U> = ILuUserPickerPanel<U>>
-extends LuSelectInputComponent<U, P>
+extends ALuSelectInput<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -54,15 +53,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U> {
 	/**
 	 * popover trigger class extension
 	 */
-	@Input('picker') set _attrPicker(picker: P) {
-		this.popover = picker;
-		this.popover.onSelectValue.subscribe(value => this.setValue(value));
-		this.popover.close.subscribe(e => this._onTouched());
-	}
-	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: P) {
-		this.popover = picker;
-		this.popover.onSelectValue.subscribe(value => this.setValue(value));
-		this.popover.close.subscribe(e => this._onTouched());
+	@ViewChild(LuUserPickerComponent) set _vcPicker(picker: P) {
+		this._picker = picker;
 	}
 
 	/**
