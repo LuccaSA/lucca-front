@@ -18,6 +18,7 @@ export class LuUserFeederService<U extends IUser = IUser> {
 			// `paging=${page * MAGIC_PAGESIZE},${MAGIC_PAGESIZE}`,
 			`paging=0,${(page + 1) * MAGIC_PAGESIZE}`,
 			`dtcontractend=until,today,null`,
+			'orderby=lastname,asc,firstname,asc',
 		];
 
 		if (!!urlSafeClue) {
