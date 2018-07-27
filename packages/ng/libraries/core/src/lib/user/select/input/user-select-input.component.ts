@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker } from '../../../input/index';
+import { ILuInputWithPicker, ALuPickerPanel } from '../../../input/index';
 import { IUser } from '../../user.model';
 import { ALuSelectInput } from '../../../select/index';
 import { ILuUserPickerPanel, LuUserPickerComponent } from '../../picker/index';
@@ -53,7 +53,7 @@ implements ControlValueAccessor, ILuInputWithPicker<U> {
 	/**
 	 * popover trigger class extension
 	 */
-	@ViewChild(LuUserPickerComponent) set _vcPicker(picker: P) {
+	@ViewChild(ALuPickerPanel) set _vcPicker(picker: P) {
 		this._picker = picker;
 	}
 
