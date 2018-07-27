@@ -11,6 +11,7 @@ import {
 	OnDestroy,
 	forwardRef,
 	AfterViewInit,
+	ViewChildren,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ALuPickerPanel } from '../../input/index';
@@ -40,11 +41,15 @@ export class LuUserPickerComponent<U extends IUser = IUser>
 extends LuOptionPickerComponent<U>
 implements ILuUserPickerPanel<U>, OnDestroy, AfterContentInit {
 	@Output() onSelectValue = new EventEmitter<U>();
-	@ContentChildren(ALuOptionItem, { descendants: true }) optionsQL: QueryList<ILuOptionItem<U>>;
-	@ContentChildren(ALuOptionOperator, { descendants: true }) operatorsQL: QueryList<ILuOptionOperator<U>>;
+	@ViewChildren(ALuOptionItem) optionsQL: QueryList<ILuOptionItem<U>>;
+	@ViewChildren(ALuOptionOperator) operatorsQL: QueryList<ILuOptionOperator<U>>;
 	constructor(
 		protected _elementRef: ElementRef,
 	) {
 		super(_elementRef);
 	}
+
+
+	// debug
+	bob = { id: 12, firstName: 'bob', lastName: 'sponge' } as IUser;
 }

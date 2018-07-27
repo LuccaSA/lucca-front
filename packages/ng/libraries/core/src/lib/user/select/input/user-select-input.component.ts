@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../../input/index';
+import { ILuInputWithPicker, ALuPickerPanel } from '../../../input/index';
 import { IUser } from '../../user.model';
-import { LuSelectInputComponent } from '../../../select';
-import { ILuUserPickerPanel } from '../picker/index';
+import { LuSelectInputComponent } from '../../../select/index';
+import { ILuUserPickerPanel } from '../../picker/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
