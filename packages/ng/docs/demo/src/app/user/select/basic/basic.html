@@ -4,5 +4,6 @@
 		<lu-user-select [(ngModel)]="user" class="textfield-input"></lu-user-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
-	<code class="code mod-block">{{ user | json }}</code>
+	<!-- <code class="code mod-block">{{ user | json }}</code> -->
+	<lu-user-tile [user]="user"></lu-user-tile>
 </section>

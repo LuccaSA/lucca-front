@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DemoUserSelectComponent } from './user-select.component';
-import { LuUserSelectModule } from '@lucca-front/ng';
+import { LuUserSelectModule, LuUserTileModule } from '@lucca-front/ng';
 
 import { SharedModule } from '../../shared';
 import { BasicComponent } from './basic/basic';
@@ -13,6 +13,7 @@ import { LuEmptyModule, LuSelectModule } from '@lucca-front/ng';
 		CommonModule,
 		FormsModule,
 		LuUserSelectModule,
+		LuUserTileModule,
 		SharedModule,
 		LuEmptyModule,
 		LuSelectModule,
