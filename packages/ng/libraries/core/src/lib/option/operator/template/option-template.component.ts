@@ -16,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
+import { ENTER, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
 
 @Component({
 	selector: 'lu-option-template',
@@ -38,6 +39,7 @@ import 'rxjs/add/operator/do';
 export class LuOptionTemplateComponent<T = any> implements ILuOptionOperator<T>, ILuOptionItem<T>, AfterViewInit {
 	@ContentChild(TemplateRef, { read: TemplateRef }) optionTemplate: TemplateRef<any>;
 	@Output() onSelect = new EventEmitter<T>();
+	highlightIndex = 0;
 	set inOptions$(options$: Observable<T[]>) {
 		this.options$ = options$;
 	}
@@ -53,5 +55,40 @@ export class LuOptionTemplateComponent<T = any> implements ILuOptionOperator<T>,
 			.mergeMap(val => val);
 
 		allOptionsOnSelect$.subscribe(value => this.onSelect.emit(value));
+	}
+	onKeydown(keycode: number): void {
+		switch (keycode) {
+			case ENTER:
+				return this.selectHighlight();
+			case UP_ARROW:
+				return this.highlightPrevious();
+			case DOWN_ARROW:
+				return this.highlightNext();
+			default:
+				return this.resetHighlight();
+		}
+	}
+
+	// highlight
+	resetHighlight() {
+		this.highlightIndex = 0;
+	}
+	highlightNext() {
+		const optionsCount = this.optionsVC.length;
+		this.highlightIndex = Math.min(this.highlightIndex + 1, optionsCount);
+	}
+	highlightPrevious() {
+		this.highlightIndex = Math.max(this.highlightIndex - 1, 0);
+	}
+	selectHighlight() {
+		const highlightedOption = this.optionsVC.toArray()[this.highlightIndex];
+		if (!!highlightedOption) {
+			const value = highlightedOption.value;
+			this.onSelect.emit(value);
+		}
+	}
+	get value() {
+		const highlightedOption = this.optionsVC.toArray()[this.highlightIndex];
+		return !!highlightedOption ? highlightedOption.value : undefined;
 	}
 }
