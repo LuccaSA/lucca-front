@@ -56,6 +56,8 @@ export class LuOptionTemplateComponent<T = any> implements ILuOptionOperator<T>,
 
 		allOptionsOnSelect$.subscribe(value => this.onSelect.emit(value));
 	}
+
+	// operator events
 	onKeydown(keycode: number): void {
 		switch (keycode) {
 			case ENTER:
@@ -67,6 +69,9 @@ export class LuOptionTemplateComponent<T = any> implements ILuOptionOperator<T>,
 			default:
 				return this.resetHighlight();
 		}
+	}
+	onClose() {
+		this.resetHighlight();
 	}
 
 	// highlight

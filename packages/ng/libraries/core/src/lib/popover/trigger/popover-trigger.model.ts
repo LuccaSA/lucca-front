@@ -203,7 +203,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 			this._backdropSubscription = this._overlayRef
 				.backdropClick()
 				.subscribe(() => {
-					this.popover._emitCloseEvent();
+					this.popover.onClose();
 				});
 		}
 	}
@@ -234,7 +234,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	/** set state rather than toggle to support triggers sharing a popover */
 	protected _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
-		// this._popoverOpen ? this.popover._emitOpenEvent() : this.popover._emitCloseEvent();
+		this._popoverOpen ? this.popover.onOpen() : (() => {})();
 		this._popoverOpen ? this.onPopoverOpen.emit() : this.onPopoverClose.emit();
 	}
 

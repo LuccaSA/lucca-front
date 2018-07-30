@@ -35,6 +35,8 @@ export interface ILuPopoverPanel {
 	) => void;
 	_emitCloseEvent(): void;
 	_emitOpenEvent(): void;
+	onOpen(): void;
+	onClose(): void;
 }
 /**
  * abstract class for basic implementation of a popover panel
