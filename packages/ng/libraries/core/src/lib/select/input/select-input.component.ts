@@ -79,6 +79,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	}
 
 	displayTemplate: TemplateRef<any>;
+	clearerTemplate: TemplateRef<any>;
+	@ContentChild(ALuClearer, { read: ViewContainerRef}) set contentChildClearerTemplate(template: TemplateRef<any>) {
+		this.clearerTemplate = template;
+	}
+
 	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
 	// 	this.displayTemplate = templateRef;
 	// }

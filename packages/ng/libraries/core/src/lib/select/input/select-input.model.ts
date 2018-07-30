@@ -62,7 +62,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 		this.subToPickerEvts();
 	}
 	protected set _clearer(clearer: C) {
-		clearer.onClear.subscribe(value => this.setValue(value));
+		if (!!clearer && !!clearer.onClear) {
+			clearer.onClear.subscribe(value => this.setValue(value));
+		}
 	}
 	protected subToPickerEvts() {
 		if (!!this.popover) {

@@ -15,6 +15,7 @@ import { ALuClearer, ILuClearer } from '../../input/index';
 	templateUrl: './select-clearer.component.html',
 	styleUrls: ['./select-clearer.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	exportAs: 'luClearer',
 	providers: [
 		{
 			provide: ALuClearer,
