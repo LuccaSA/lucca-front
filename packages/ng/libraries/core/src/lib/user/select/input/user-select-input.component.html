@@ -1,0 +1,9 @@
+<lu-option-picker>
+	<lu-user-feeder></lu-user-feeder>
+	<lu-option-template>
+		<ng-template let-user>{{user | luUserDisplay: 'lf' }}</ng-template>
+	</lu-option-template>
+</lu-option-picker>
+<div class="select-value">
+	{{ value | luUserDisplay }}
+</div>

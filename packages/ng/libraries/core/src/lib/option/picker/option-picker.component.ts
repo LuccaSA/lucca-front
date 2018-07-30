@@ -4,18 +4,15 @@ import {
 	ElementRef,
 	ViewEncapsulation,
 	ContentChildren,
-	AfterContentInit,
 	QueryList,
 	Output,
 	EventEmitter,
 	OnDestroy,
 	forwardRef,
-	AfterViewInit,
 } from '@angular/core';
-import { LuPopoverPanelComponent, luTransformPopover } from '../../popover/index';
+import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
-import { ILuOptionPickerPanel } from './option-picker.model';
-import { Subscription } from 'rxjs/Subscription';
+import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/observable/of';
@@ -25,7 +22,7 @@ import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 
 /**
-* Displays user'picture or a placeholder with his/her initials and random bg color'
+* basic option picker panel
 */
 @Component({
 	selector: 'lu-option-picker',
@@ -43,9 +40,8 @@ import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 	]
 })
 export class LuOptionPickerComponent<T = any>
-extends LuPopoverPanelComponent
-implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
-	subs: Subscription;
+extends ALuOptionPicker<T>
+implements ILuOptionPickerPanel<T>, OnDestroy {
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
 	constructor(
@@ -54,44 +50,19 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterContentInit {
 		super(_elementRef);
 		this.triggerEvent = 'click';
 	}
-	@ContentChildren(ALuOptionItem, { descendants: true }) optionsQL: QueryList<ILuOptionItem<T>>;
-	@ContentChildren(ALuOptionOperator, { descendants: true }) operatorsQL: QueryList<ILuOptionOperator<T>>;
-
-	subToOptionSelected() {
-		const allOptionsOnSelect$ =
-		merge(Observable.of(this.optionsQL), this.optionsQL.changes)
-			.map<QueryList<ILuOptionItem<T>>, Observable<T>>(ql => {
-				return merge(...ql.toArray().map(o => o.onSelect));
-			})
-			.mergeMap(o => o);
-		this.subs.add(
-			allOptionsOnSelect$
-			.subscribe((val: T) => this._select(val))
-		);
+	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
+		this._optionItems$ =
+			merge(Observable.of(ql), ql.changes)
+			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray());
 	}
-	unSubToOptionSelected() {
-		this.subs.unsubscribe();
+	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
+		this._operators = ql.toArray();
 	}
-	_select(val: T) {
+	protected _select(val: T) {
 		this.onSelectValue.emit(val);
-		this._emitCloseEvent();
-	}
-	ngAfterContentInit() {
-		this.subs = new Subscription();
-		this.subToOptionSelected();
-		this.initOperators();
+		super._emitCloseEvent();
 	}
 	ngOnDestroy() {
-		this.unSubToOptionSelected();
+		super.destroy();
 	}
-
-	initOperators() {
-		const operators: ILuOptionOperator<T>[] = this.operatorsQL.toArray();
-		let options$: Observable<T[]>;
-		operators.forEach(operator => {
-			operator.inOptions$ = options$;
-			options$ = operator.outOptions$;
-		});
-	}
-
 }
