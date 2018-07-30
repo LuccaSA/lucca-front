@@ -15,6 +15,7 @@ import { ILuInputWithPicker, ALuPickerPanel } from '../../../input/index';
 import { IUser } from '../../user.model';
 import { ALuSelectInput } from '../../../select/index';
 import { ILuOptionPickerPanel } from '../../../option/index';
+import { LuDisplayFullname } from '../../display/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -35,6 +36,7 @@ import { ILuOptionPickerPanel } from '../../../option/index';
 export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
 extends ALuSelectInput<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U> {
+	searchFormat = LuDisplayFullname.lastfirst;
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
