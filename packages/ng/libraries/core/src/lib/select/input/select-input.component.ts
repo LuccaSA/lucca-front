@@ -34,6 +34,7 @@ import { ALuSelectInput } from './select-input.model';
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T> {
+	@ContentChild(ALuClearer, { read: TemplateRef}) clearerTemplate: TemplateRef<any>;
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -79,11 +80,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	}
 
 	displayTemplate: TemplateRef<any>;
-	clearerTemplate: TemplateRef<any>;
-	@ContentChild(ALuClearer, { read: ViewContainerRef}) set contentChildClearerTemplate(template: TemplateRef<any>) {
-		this.clearerTemplate = template;
-	}
-
 	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
 	// 	this.displayTemplate = templateRef;
 	// }
