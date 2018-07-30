@@ -10,6 +10,7 @@ import { LuUserFeederService } from './user-feeder.service';
 import { IUser } from '../../../user.model';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/catch';
 
 @Component({
 	selector: 'lu-user-feeder',
@@ -36,7 +37,7 @@ export class LuUserFeederComponent<U extends IUser = IUser> implements ILuOption
 	constructor(protected service: LuUserFeederService<U>) {}
 
 	ngOnInit() {
-		this.refresh$ = combineLatest(this.clue$, this.page$)
+		this.refresh$ = combineLatest(this.clue$, this.page$);
 		this.outOptions$ = this.refresh$
 		.debounceTime(25)
 		.switchMap(([clue, page]) => this.service.search(clue, page).catch(err => of([])));
@@ -45,5 +46,8 @@ export class LuUserFeederComponent<U extends IUser = IUser> implements ILuOption
 			this.refresh$.map(() => true),
 			this.outOptions$.map(() => false),
 		);
+	}
+	onScrollBottom() {
+		this.page$.next(this.page$.value + 1);
 	}
 }

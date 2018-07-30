@@ -1,7 +1,6 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ElementRef,
 	ViewEncapsulation,
 	ContentChildren,
 	QueryList,
@@ -9,6 +8,8 @@ import {
 	EventEmitter,
 	OnDestroy,
 	forwardRef,
+	ViewChild,
+	TemplateRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -42,12 +43,12 @@ import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
 implements ILuOptionPickerPanel<T>, OnDestroy {
+	@Output() close = new EventEmitter<void>();
+	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
-	constructor(
-		protected _elementRef: ElementRef,
-	) {
-		super(_elementRef);
+	constructor() {
+		super();
 		this.triggerEvent = 'click';
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
@@ -60,9 +61,19 @@ implements ILuOptionPickerPanel<T>, OnDestroy {
 	}
 	protected _select(val: T) {
 		this.onSelectValue.emit(val);
-		super._emitCloseEvent();
+		this._emitCloseEvent();
 	}
 	ngOnDestroy() {
 		super.destroy();
+	}
+	_emitOpenEvent(): void {
+		this.open.emit();
+	}
+	_emitCloseEvent(): void {
+		this.close.emit();
+	}
+	@ViewChild(TemplateRef)
+	set vcTemplateRef(tr: TemplateRef<any>) {
+		this.templateRef = tr;
 	}
 }
