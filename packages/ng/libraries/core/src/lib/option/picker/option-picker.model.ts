@@ -8,7 +8,6 @@ import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { ILuOptionOperator } from '../operator/index';
-import { ILuScrollable } from '../../scroll';
 
 export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 
@@ -38,19 +37,6 @@ export abstract class ALuOptionPicker<T = any> extends LuPopoverPanelComponent i
 			options$ = operator.outOptions$;
 		});
 	}
-	// protected set _scrollable(scrollable: ILuScrollable) {
-	// 	if (!scrollable) {
-	// 		return;
-	// 	}
-	// 	this.__subs.add(
-	// 		scrollable.onScrollBottom
-	// 		.subscribe(e => this.__operators.forEach(o => {
-	// 			if (o.onScrollBottom) {
-	// 				o.onScrollBottom();
-	// 			}
-	// 		}))
-	// 	);
-	// }
 	onScrollBottom() {
 		if (!this.__operators) { return; }
 		this.__operators.forEach(o => {
