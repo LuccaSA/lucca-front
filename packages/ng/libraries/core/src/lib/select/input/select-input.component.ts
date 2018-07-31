@@ -1,18 +1,27 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	Input,
 	ChangeDetectorRef,
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
 	ContentChild,
 	HostListener,
-	TemplateRef
+	TemplateRef,
+	ViewChild,
+	AfterViewInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ALuClearer, ILuClearer } from '../../input/index';
+import {
+	ILuInputWithPicker,
+	ILuPickerPanel,
+	ALuPickerPanel,
+	ALuClearer,
+	ILuClearer,
+	ILuInputDisplayer,
+	ALuInputDisplayer,
+} from '../../input/index';
 import { ALuSelectInput } from './select-input.model';
 
 /**
@@ -33,8 +42,11 @@ import { ALuSelectInput } from './select-input.model';
 })
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
-implements ControlValueAccessor, ILuInputWithPicker<T> {
-	@ContentChild(ALuClearer, { read: TemplateRef}) clearerTemplate: TemplateRef<any>;
+implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
+	protected _oldView;
+	protected displayer: ILuInputDisplayer<T>;
+	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
+
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -56,6 +68,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	}
 	@ContentChild(ALuClearer) set _ContentChildClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
+	}
+	@ContentChild(ALuInputDisplayer) set _displayer(displayer: ILuInputDisplayer<T>) {
+		this.displayer = displayer;
+		this.render();
 	}
 
 	@HostListener('click')
@@ -79,8 +95,31 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 		super.onBlur();
 	}
 
-	displayTemplate: TemplateRef<any>;
-	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
-	// 	this.displayTemplate = templateRef;
-	// }
+	protected clearView(view) {
+		if (!!view) {
+			const index = this._displayContainer.indexOf(this._oldView);
+			this._displayContainer.remove(index);
+		}
+	}
+	protected getNewView() {
+		if (!!this.displayer) {
+			return this.displayer.getEmbedViewRef(this.value);
+		}
+		return undefined;
+	}
+	protected displayView(view) {
+		if (!!view) {
+			this._displayContainer.insert(view);
+		}
+	}
+	protected render() {
+		const oldView = this._oldView;
+		const newView = this.getNewView();
+		this.clearView(oldView);
+		this.displayView(newView);
+		this._oldView = newView;
+	}
+	ngAfterViewInit() {
+		this.render();
+	}
 }
