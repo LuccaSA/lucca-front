@@ -25,7 +25,8 @@ import { ALuClearer, ILuClearer } from '../../input/index';
 })
 export class LuSelectClearerComponent<T = any> extends ALuClearer<T>implements ILuClearer<T> {
 	@Output() onClear = new EventEmitter<T>();
-	onClick() {
+	onClick($event: Event) {
 		this.onClear.emit(undefined);
+		$event.stopPropagation();
 	}
 }
