@@ -87,18 +87,15 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}
-	getViewRef(value: T) {
+	getElementRef(value: T) {
 		// try to find the lo-option with the right value
 		const options = this._options || [];
-		// const optionItem = options.find(oi => JSON.stringify(oi.value) === JSON.stringify(value));
-		// if (!!optionItem) {
-		// 	return optionItem.viewRef;
-		// }
 		const index = options.findIndex(oi => JSON.stringify(oi.value) === JSON.stringify(value));
 		if (index >= 0) {
 			const vcr = this.optionsQLVR.toArray()[index];
-			// return (<any>vcr.injector).view.context;
+			return vcr.element;
 		}
 		return undefined;
 	}
+	getViewRef(value: T) { return undefined; }
 }

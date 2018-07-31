@@ -9,7 +9,9 @@ import {
 	HostListener,
 	TemplateRef,
 	ViewChild,
-	AfterViewInit
+	AfterViewInit,
+	ViewRef,
+	Renderer2,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -43,17 +45,21 @@ import { ALuSelectInput } from './select-input.model';
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-	protected _oldView;
+	protected oldView;
+	protected oldElt;
 	protected displayer: ILuInputDisplayer<T>;
 	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
+	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
 
 	constructor(
+		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 	) {
-		super(_changeDetectorRef,
+		super(
+			_changeDetectorRef,
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
@@ -95,9 +101,20 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		super.onBlur();
 	}
 
+	protected render() {
+		this.renderAsElt();
+	}
+
+	protected renderAsView() {
+		const oldView = this.oldView;
+		this.clearView(oldView);
+		const newView = this.getNewView();
+		this.displayView(newView);
+		this.oldView = newView;
+	}
 	protected clearView(view) {
 		if (!!view) {
-			const index = this._displayContainer.indexOf(this._oldView);
+			const index = this._displayContainer.indexOf(this.oldView);
 			this._displayContainer.remove(index);
 		}
 	}
@@ -112,14 +129,39 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			this._displayContainer.insert(view);
 		}
 	}
-	protected render() {
-		const oldView = this._oldView;
-		const newView = this.getNewView();
-		this.clearView(oldView);
-		this.displayView(newView);
-		this._oldView = newView;
+
+	protected clearElt(elt) {
+		if (!!elt) {
+			this._renderer.removeChild(this._displayElt.nativeElement, elt.nativeElement);
+		}
+	}
+	protected getNewElt() {
+		if (!!this.displayer) {
+			return this.displayer.getElementRef(this.value);
+		}
+		return undefined;
+	}
+	protected displayElt(elt) {
+		if (!!elt) {
+			this._renderer.appendChild(this._displayElt.nativeElement, elt.nativeElement);
+		}
+	}
+	protected renderAsElt() {
+		const oldElt = this.oldElt;
+		this.clearElt(oldElt);
+		const newElt = this.getNewElt();
+		this.displayElt(newElt);
+		this.oldElt = newElt;
 	}
 	ngAfterViewInit() {
 		this.render();
+		this.debug();
+	}
+
+	// debug
+	@ContentChild(ALuClearer, { read: ElementRef }) clearerEltRef: ElementRef;
+	@ViewChild('suffix', { read: ElementRef }) sufficEltRef: ElementRef;
+	debug() {
+		this._renderer.appendChild(this.sufficEltRef.nativeElement, this.clearerEltRef.nativeElement);
 	}
 }

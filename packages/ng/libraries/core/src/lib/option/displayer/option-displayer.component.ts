@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, forwardRef, ContentChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, forwardRef, ContentChild, EmbeddedViewRef } from '@angular/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '../../input/index';
 
 @Component({
@@ -23,4 +23,5 @@ export class LuOptionDisplayerComponent<T = any> extends ALuInputDisplayer<T> im
 		if (!this._template) { return undefined; }
 		return this._template.createEmbeddedView({ $implicit: value });
 	}
+	getElementRef(value: T) { return undefined; }
 }
