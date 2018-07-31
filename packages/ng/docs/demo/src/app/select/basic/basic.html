@@ -4,12 +4,12 @@
 		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
-				<lu-option [value]="red">{{red.name}}</lu-option>
+				<lu-option [value]="red"><i class="lucca-icon">heart</i>{{red.name}}</lu-option>
 			</lu-option-picker>
 			<lu-select-clearer></lu-select-clearer>
-			<lu-option-displayer>
+			<!-- <lu-option-displayer>
 				<ng-template let-value>{{value | json}}</ng-template>
-			</lu-option-displayer>
+			</lu-option-displayer> -->
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
