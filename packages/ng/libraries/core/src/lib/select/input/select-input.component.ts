@@ -132,18 +132,18 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 
 	protected clearElt(elt) {
 		if (!!elt) {
-			this._renderer.removeChild(this._displayElt.nativeElement, elt.nativeElement);
+			this._renderer.removeChild(this._displayElt.nativeElement, elt);
 		}
 	}
 	protected getNewElt() {
-		if (!!this.displayer) {
-			return this.displayer.getElementRef(this.value);
+		if (!!this.displayer && !!this.displayer.getElementRef(this.value)) {
+			return this.displayer.getElementRef(this.value).nativeElement.cloneNode(true);
 		}
 		return undefined;
 	}
 	protected displayElt(elt) {
 		if (!!elt) {
-			this._renderer.appendChild(this._displayElt.nativeElement, elt.nativeElement);
+			this._renderer.appendChild(this._displayElt.nativeElement, elt);
 		}
 	}
 	protected renderAsElt() {
