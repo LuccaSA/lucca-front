@@ -1,10 +1,8 @@
-import { TemplateRef, EmbeddedViewRef } from '@angular/core';
+import { ViewRef } from '@angular/core';
 
 export interface ILuInputDisplayer<T = any> {
-	// display(value: T): string;
-	getEmbedViewRef(value: T): EmbeddedViewRef<any>;
+	getViewRef(value: T): ViewRef;
 }
 export abstract class ALuInputDisplayer<T = any> implements ILuInputDisplayer<T> {
-	// abstract display(value: T): string;
-	abstract getEmbedViewRef(value: T): EmbeddedViewRef<any>;
+	abstract getViewRef(value: T): ViewRef;
 }
