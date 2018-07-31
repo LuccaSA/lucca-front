@@ -37,6 +37,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	}
 	set value(value: T) {
 		this._value = value;
+		this.render();
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
@@ -80,4 +81,5 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 		return config;
 	}
 
+	protected abstract render();
 }
