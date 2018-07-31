@@ -7,13 +7,15 @@
 				<lu-option [value]="red">{{red.name}}</lu-option>
 			</lu-option-picker>
 			<lu-select-clearer></lu-select-clearer>
-			<ng-template let-value>{{value | json}}</ng-template>
+			<lu-option-displayer>
+				<ng-template let-value>{{value | json}}</ng-template>
+			</lu-option-displayer>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ itemSelect | json }}</code>
 </section>
-<section class="contentSection">
+<!-- <section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="number" class="textfield-input">
@@ -24,9 +26,9 @@
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ number | json }}</code>
-</section>
+</section> -->
 
-<section class="contentSection">
+<!-- <section class="contentSection">
 	<h3>Component basic</h3>
 	<div class="textfield">
 	<lu-select [(ngModel)]="withOperators" class="textfield-input">
@@ -36,16 +38,16 @@
 			<lu-option-pager></lu-option-pager>
 			<lu-option-template>
 				<ng-template let-option>{{option.name}}</ng-template>
-			</lu-option-template>
+			</lu-option-template> -->
 			<!-- target synthax -->
 			<!-- <lu-options>
 				<lu-option-template let-option>{{option.name}}</lu-option-template>
 			</lu-options> -->
-		</lu-option-picker>
+		<!-- </lu-option-picker>
 	</lu-select>
 
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ withOperators | json }}</code>
 
-</section>
+</section> -->
