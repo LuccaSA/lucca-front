@@ -19,7 +19,7 @@ export class LuOptionDisplayerComponent<T = any> extends ALuInputDisplayer<T> im
 	@ContentChild(TemplateRef) set template(t: TemplateRef<any>) {
 		this._template = t;
 	}
-	getEmbedViewRef(value: T) {
+	getViewRef(value: T) {
 		if (!this._template) { return undefined; }
 		return this._template.createEmbeddedView({ $implicit: value });
 	}

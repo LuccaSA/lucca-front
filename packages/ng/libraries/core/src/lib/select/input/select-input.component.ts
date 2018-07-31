@@ -103,7 +103,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	protected getNewView() {
 		if (!!this.displayer) {
-			return this.displayer.getEmbedViewRef(this.value);
+			return this.displayer.getViewRef(this.value);
 		}
 		return undefined;
 	}
