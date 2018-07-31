@@ -70,7 +70,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	protected subToPickerEvts() {
 		if (!!this.popover) {
 			this.popover.onSelectValue.subscribe(value => this.setValue(value));
-			this.popover.close.subscribe(e => this._onTouched());
+			this.popover.close.subscribe(e => {
+				this._onTouched();
+				this.closePopover();
+			});
 		}
 	}
 
