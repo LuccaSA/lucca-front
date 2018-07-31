@@ -10,6 +10,7 @@ import {
 	forwardRef,
 	ViewChild,
 	TemplateRef,
+	ViewContainerRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -19,7 +20,8 @@ import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
-import { ALuPickerPanel } from '../../input/index';
+import 'rxjs/add/operator/do';
+import { ALuPickerPanel, ALuInputDisplayer, ILuInputDisplayer } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 
 /**
@@ -38,24 +40,33 @@ import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 			provide: ALuPickerPanel,
 			useExisting: forwardRef(() => LuOptionPickerComponent),
 		},
+		{
+			provide: ALuInputDisplayer,
+			useExisting: forwardRef(() => LuOptionPickerComponent),
+			multi: true,
+		},
 	]
 })
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
-implements ILuOptionPickerPanel<T>, OnDestroy {
+implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
-	constructor() {
+	constructor(protected _vcr: ViewContainerRef) {
 		super();
 		this.triggerEvent = 'click';
 	}
+	protected _options: ILuOptionItem<T>[];
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
 		this._optionItems$ =
 			merge(Observable.of(ql), ql.changes)
-			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray());
+			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
+			.do(o => this._options = o);
 	}
+	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
+
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		this._operators = ql.toArray();
 	}
@@ -75,5 +86,19 @@ implements ILuOptionPickerPanel<T>, OnDestroy {
 	@ViewChild(TemplateRef)
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
+	}
+	getViewRef(value: T) {
+		// try to find the lo-option with the right value
+		const options = this._options || [];
+		// const optionItem = options.find(oi => JSON.stringify(oi.value) === JSON.stringify(value));
+		// if (!!optionItem) {
+		// 	return optionItem.viewRef;
+		// }
+		const index = options.findIndex(oi => JSON.stringify(oi.value) === JSON.stringify(value));
+		if (index >= 0) {
+			const vcr = this.optionsQLVR.toArray()[index];
+			// return (<any>vcr.injector).view.context;
+		}
+		return undefined;
 	}
 }
