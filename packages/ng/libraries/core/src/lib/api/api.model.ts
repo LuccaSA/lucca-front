@@ -6,6 +6,7 @@ export interface IApiItem<TId = number> {
 	id: TId;
 	name?: string;
 }
-export interface IApiCollectionResponse<T extends IApiItem = IApiItem> {
-	items: T[];
+export interface IApiResponse<D = any> {
+	data: D;
 }
+export interface IApiCollectionResponse<T extends IApiItem = IApiItem> extends IApiResponse<{ items: T[] }> {}
