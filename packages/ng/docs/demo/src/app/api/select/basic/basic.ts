@@ -7,7 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 	styles: [],
 })
 export class BasicComponent implements OnInit {
-	item = { id: 1, name: 'lucca' };
+	department = { id: 1, name: 'lucca' };
+	le = { id: 1, name: 'lucca' };
 
 	constructor() {}
 
