@@ -88,7 +88,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}
-	getElementRef(value: T) {
+	getElementRef(value: T): ElementRef {
 		// try to find the lo-option with the right value
 		const options = this._options || [];
 		const index = options.findIndex(oi => JSON.stringify(oi.value) === JSON.stringify(value));
