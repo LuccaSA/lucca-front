@@ -24,7 +24,13 @@ export class LuApiSearcherComponent<T extends IApiItem = IApiItem> extends ALuAp
 	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
 	@Input() set api(api: string) { this.service.api = api; }
 	@Input() set fields(fields: string) { this.service.fields = fields; }
-	@Input() set filters(filters: string) { this.service.filters = filters; }
+	@Input() set filters(filters: string[]) { this.service.filters = filters; }
+	@Input() set orderBy(orderBy: string) { this.service.orderBy = orderBy; }
+	/**
+	 * a function to transform the item fetched from the api into the kind of item you want
+	 * if you wnat to cast dates into moments for example
+	 */
+	@Input() set transformFn(transformFn: (item: any) => T) { this.service.transformFn = transformFn; }
 
 	constructor(protected service: ALuApiSearcherService<T>) { super(service); }
 
