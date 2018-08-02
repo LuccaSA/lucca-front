@@ -11,6 +11,7 @@ import {
 	ViewChild,
 	TemplateRef,
 	ViewContainerRef,
+	ElementRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
