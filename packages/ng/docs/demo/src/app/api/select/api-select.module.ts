@@ -6,6 +6,7 @@ import { LuApiModule, LuSelectModule, LuOptionModule } from '@lucca-front/ng';
 
 import { SharedModule } from '../../shared';
 import { FeederComponent } from './feeder/feeder';
+import { SearcherComponent } from './searcher/searcher';
 
 @NgModule({
 	imports: [
@@ -16,7 +17,15 @@ import { FeederComponent } from './feeder/feeder';
 		LuSelectModule,
 		LuOptionModule,
 	],
-	declarations: [DemoApiSelectComponent, FeederComponent],
-	exports: [DemoApiSelectComponent, FeederComponent],
+	declarations: [
+		DemoApiSelectComponent,
+		FeederComponent,
+		SearcherComponent,
+	],
+	exports: [
+		DemoApiSelectComponent,
+		FeederComponent,
+		SearcherComponent,
+	],
 })
 export class DemoApiSelectModule {}

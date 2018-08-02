@@ -1,0 +1,28 @@
+<section class="contentSection">
+		<h3>Api searcher</h3>
+		<div class="textfield">
+			<lu-select [(ngModel)]="department" class="textfield-input">
+				<lu-option-picker>
+					<lu-api-searcher api="/api/v3/departments"></lu-api-searcher>
+					<lu-option-template>
+						<ng-template let-option>{{option.name}}</ng-template>
+					</lu-option-template>
+				</lu-option-picker>
+			</lu-select>
+			<label class="textfield-label">department</label>
+		</div>
+		<code class="code mod-block">{{ department | json }}</code>
+		<div class="textfield">
+			<lu-select [(ngModel)]="le" class="textfield-input">
+				<lu-option-picker>
+					<lu-api-searcher api="/api/v3/legalentities"></lu-api-searcher>
+					<lu-option-template>
+						<ng-template let-option>{{option.name}}</ng-template>
+					</lu-option-template>
+				</lu-option-picker>
+			</lu-select>
+			<label class="textfield-label">legal entity</label>
+		</div>
+		<code class="code mod-block">{{ le | json }}</code>
+	</section>
+	
