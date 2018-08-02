@@ -1,0 +1,15 @@
+<section class="contentSection">
+	<h3>Component basic</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="item" class="textfield-input">
+			<lu-option-picker>
+				<lu-api-feeder api="/api/v3/departments"></lu-api-feeder>
+				<lu-option-template>
+					<ng-template let-option>{{option.name}}</ng-template>
+				</lu-option-template>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ item | json }}</code>
+</section>
