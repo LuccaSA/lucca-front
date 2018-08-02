@@ -159,13 +159,15 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	ngAfterViewInit() {
 		this.render();
-		this.debug();
+		this.displayClearer();
 	}
 
-	// debug
+	// display clearer
 	@ContentChild(ALuClearer, { read: ElementRef }) clearerEltRef: ElementRef;
-	@ViewChild('suffix', { read: ElementRef }) sufficEltRef: ElementRef;
-	debug() {
-		this._renderer.appendChild(this.sufficEltRef.nativeElement, this.clearerEltRef.nativeElement);
+	@ViewChild('suffix', { read: ElementRef }) suffixEltRef: ElementRef;
+	displayClearer() {
+		if (!!this.clearerEltRef) {
+			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);
+		}
 	}
 }
