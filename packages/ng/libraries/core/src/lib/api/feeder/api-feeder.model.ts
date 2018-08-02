@@ -23,17 +23,22 @@ export abstract class ALuApiFeederService<T extends IApiItem> implements ILuApiF
 	set api(api: string) { this._api = api; }
 	protected _fields = 'fields=id,name';
 	set fields(fields: string) { this._fields = `fields=${fields}`; }
-	protected _filters: string;
-	set filters(filters: string) { this._filters = filters; }
+	protected _filters: string[] = [];
+	set filters(filters: string[]) { this._filters = filters; }
+	protected _orderBy = 'orderBy=name,asc';
+	set orderBy(orderBy: string) { this._orderBy = `orderBy=${orderBy}`; }
+	protected _transformFn = (item: any) => item as T;
+	set transformFn(transformFn: (item: any) => T) { this._transformFn = transformFn; }
+
 	get url() {
-		return `${this._api}?${[this._filters, this._fields].filter(f => !!f).join('&')}`;
+		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter(f => !!f).join('&')}`;
 	}
 	constructor(protected http: HttpClient) {}
 	getAll(): Observable<T[]> {
 		return this._get(this.url);
 	}
 	protected _get(url): Observable<T[]> {
-		return this.http.get<IApiCollectionResponse<T>>(url)
-		.map(response => response.data.items);
+		return this.http.get<IApiCollectionResponse<any>>(url)
+		.map(response => response.data.items.map(i => this._transformFn(i)));
 	}
 }
