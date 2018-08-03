@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../../option/index';
+import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LuApiFeederService } from './api-feeder.service';
-import { IApiItem } from '../api.model';
+import { IApiItem } from '../../api.model';
 import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
 
 @Component({

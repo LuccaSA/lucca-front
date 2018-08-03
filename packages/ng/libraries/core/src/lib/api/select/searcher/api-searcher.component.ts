@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ALuOptionOperator } from '../../option/index';
+import { ALuOptionOperator } from '../../../option/index';
 import { ALuApiOptionSearcher, ALuApiSearcherService } from './api-searcher.model';
-import { IApiItem } from '../api.model';
+import { IApiItem } from '../../api.model';
 import { LuApiSearcherService } from './api-searcher.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators/debounceTime';

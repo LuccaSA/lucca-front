@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IApiItem } from '../api.model';
+import { IApiItem } from '../../api.model';
 import { ALuApiSearcherService } from './api-searcher.model';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { IApiItem } from '../api.model';
+import { IApiItem } from '../../api.model';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ILuApiOptionFeeder, ILuApiFeederService, ALuApiFeederService } from '../feeder/index';
