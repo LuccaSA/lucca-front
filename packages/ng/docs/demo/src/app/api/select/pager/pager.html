@@ -4,9 +4,9 @@
 		<lu-select [(ngModel)]="user" class="textfield-input">
 			<lu-option-picker>
 				<lu-api-pager api="/api/v3/users"></lu-api-pager>
-				<lu-option-template>
-					<ng-template let-option>{{option.name}}</ng-template>
-				</lu-option-template>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label">users</label>
@@ -16,9 +16,9 @@
 		<lu-select [(ngModel)]="role" class="textfield-input">
 			<lu-option-picker>
 				<lu-api-pager api="/api/v3/roles"></lu-api-pager>
-				<lu-option-template>
-					<ng-template let-option>{{option.name}}</ng-template>
-				</lu-option-template>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label">role</label>
