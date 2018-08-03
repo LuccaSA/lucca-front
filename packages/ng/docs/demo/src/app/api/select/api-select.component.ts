@@ -13,6 +13,10 @@ export class DemoApiSelectComponent implements OnInit {
 			code: require('!!prismjs-loader?lang=typescript!./feeder/feeder'),
 			markup: require('!!prismjs-loader?lang=markup!./feeder/feeder.html'),
 		},
+		pager: {
+			code: require('!!prismjs-loader?lang=typescript!./pager/pager'),
+			markup: require('!!prismjs-loader?lang=markup!./pager/pager.html'),
+		},
 		searcher: {
 			code: require('!!prismjs-loader?lang=typescript!./searcher/searcher'),
 			markup: require('!!prismjs-loader?lang=markup!./searcher/searcher.html'),
