@@ -13,6 +13,10 @@ export class DemoUserSelectComponent implements OnInit {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
 			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
+		searcher: {
+			code: require('!!prismjs-loader?lang=typescript!./searcher/searcher'),
+			markup: require('!!prismjs-loader?lang=markup!./searcher/searcher.html'),
+		},
 	};
 
 	constructor() {}

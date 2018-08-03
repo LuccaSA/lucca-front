@@ -1,0 +1,41 @@
+<section class="contentSection">
+	<h3>user paged searcher</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="user" class="textfield-input">
+			<lu-option-picker>
+				<lu-user-paged-searcher></lu-user-paged-searcher>
+				<lu-option-template>
+					<ng-template let-option>{{option.lastName}} {{ option.firstName}}</ng-template>
+				</lu-option-template>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">user</label>
+	</div>
+	<code class="code mod-block">{{ user | json }}</code>
+	<div class="textfield">
+		<lu-select [(ngModel)]="consultant" class="textfield-input">
+			<lu-option-picker>
+				<lu-user-paged-searcher [filters]="filters"></lu-user-paged-searcher>
+				<lu-option-template>
+					<ng-template let-option>{{option.lastName}} {{ option.firstName}}</ng-template>
+				</lu-option-template>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">user in customer success</label>
+	</div>
+	<code class="code mod-block">{{ consultant | json }}</code>
+	<div class="textfield">
+		<lu-select [(ngModel)]="tile" class="textfield-input">
+			<lu-option-picker>
+				<lu-user-paged-searcher [fields]="fields"></lu-user-paged-searcher>
+				<lu-option-template>
+					<ng-template let-option>
+						<lu-user-tile [user]="option"></lu-user-tile>
+					</ng-template>
+				</lu-option-template>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">with custom fields and templating</label>
+	</div>
+	<code class="code mod-block">{{ tile | json }}</code>
+</section>
