@@ -37,21 +37,21 @@ import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../search
 export class LuApiSelectInputComponent<T extends IApiItem = IApiItem, P extends ILuOptionPickerPanel<T> = ILuOptionPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T> {
-	@Input() set api(api: string) { this.service.api = api; }
-	@Input() set fields(fields: string) { this.service.fields = fields; }
-	@Input() set filters(filters: string[]) { this.service.filters = filters; }
-	@Input() set orderBy(orderBy: string) { this.service.orderBy = orderBy; }
+	@Input() set api(api: string) { this._service.api = api; }
+	@Input() set fields(fields: string) { this._service.fields = fields; }
+	@Input() set filters(filters: string[]) { this._service.filters = filters; }
+	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
 	/**
 	 * a function to transform the item fetched from the api into the kind of item you want
 	 * if you wnat to cast dates into moments for example
 	 */
-	@Input() set transformFn(transformFn: (item: any) => T) { this.service.transformFn = transformFn; }
+	@Input() set transformFn(transformFn: (item: any) => T) { this._service.transformFn = transformFn; }
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
-		protected service: ALuApiPagedSearcherService<T>,
+		protected _service: ALuApiPagedSearcherService<T>,
 	) {
 		super(
 			_changeDetectorRef,

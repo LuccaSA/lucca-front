@@ -7,7 +7,8 @@ import {
 	ElementRef,
 	HostListener,
 	TemplateRef,
-	ViewChild
+	ViewChild,
+	Input
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -16,6 +17,7 @@ import { IUser } from '../../user.model';
 import { ALuSelectInput } from '../../../select/index';
 import { ILuOptionPickerPanel } from '../../../option/index';
 import { LuDisplayFullname } from '../../display/index';
+import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -31,17 +33,31 @@ import { LuDisplayFullname } from '../../display/index';
 			useExisting: forwardRef(() => LuUserSelectInputComponent),
 			multi: true,
 		},
+		{
+			provide: ALuUserPagedSearcherService,
+			useClass: LuUserPagedSearcherService,
+		},
 	],
 })
 export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
 extends ALuSelectInput<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U> {
 	searchFormat = LuDisplayFullname.lastfirst;
+	@Input() set fields(fields: string) { this._service.fields = fields; }
+	@Input() set filters(filters: string[]) { this._service.filters = filters; }
+	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	/**
+	 * a function to transform the item fetched from the api into the kind of item you want
+	 * if you wnat to cast dates into moments for example
+	 */
+	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
+
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
+		protected _service: ALuUserPagedSearcherService<U>,
 	) {
 		super(
 			_changeDetectorRef,
@@ -85,17 +101,6 @@ implements ControlValueAccessor, ILuInputWithPicker<U> {
 		super.onBlur();
 	}
 
-	// protected _getOverlayConfig(): OverlayConfig {
-	// 	const config = super._getOverlayConfig();
-	// 	const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
-	// 	config.width = `${clientRect.width}px`; // might become min/maxWidth
-	// 	return config;
-	// }
-
-	displayTemplate: TemplateRef<any>;
-	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
-	// 	this.displayTemplate = templateRef;
-	// }
 	render() {
 		return undefined;
 	}
