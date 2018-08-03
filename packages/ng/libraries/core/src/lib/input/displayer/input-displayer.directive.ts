@@ -21,6 +21,6 @@ export class LuInputDisplayerDirective<T = any> implements ILuInputDisplayer<T> 
 	}
 }
 
-export class LuInputDisplayerContext<T> {
+export class LuInputDisplayerContext<T = any> {
 	constructor(public $implicit: T) {}
 }
