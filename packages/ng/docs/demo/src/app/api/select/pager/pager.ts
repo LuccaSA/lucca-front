@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class PagerComponent implements OnInit {
 	user;
+	role;
 
 	constructor() {}
 
