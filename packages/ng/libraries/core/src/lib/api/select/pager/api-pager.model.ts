@@ -54,7 +54,7 @@ implements ILuApiOptionPager<T> {
 	}
 }
 
-export abstract class ALuApiPagerService<T extends IApiItem> extends ALuApiFeederService<T> implements ILuApiPagerService<T> {
+export abstract class ALuApiPagerService<T extends IApiItem = IApiItem> extends ALuApiFeederService<T> implements ILuApiPagerService<T> {
 	constructor(protected http: HttpClient) { super(http); }
 	getPaged(page = 0) {
 		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;

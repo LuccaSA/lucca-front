@@ -27,10 +27,10 @@ extends ALuApiOptionFeeder<T, S>
 implements ILuOptionOperator<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	constructor(
-		@Inject(ALuApiFeederService) @Optional() @SkipSelf() hostService: S,
-		@Inject(ALuApiFeederService) @Self() selfService: S,
+		@Inject(ALuApiFeederService) @Optional() @SkipSelf() hostService: ALuApiFeederService,
+		@Inject(ALuApiFeederService) @Self() selfService: ALuApiFeederService,
 	) {
-		super(hostService || selfService);
+		super((hostService || selfService) as S);
 	}
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }

@@ -27,10 +27,10 @@ extends ALuApiOptionPager<T, S>
 implements ILuOptionOperator<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	constructor(
-		@Inject(ALuApiPagerService) @Optional() @SkipSelf() hostService: S,
-		@Inject(ALuApiPagerService) @Self() selfService: S,
+		@Inject(ALuApiPagerService) @Optional() @SkipSelf() hostService: ALuApiPagerService,
+		@Inject(ALuApiPagerService) @Self() selfService: ALuApiPagerService,
 	) {
-		super(hostService || selfService);
+		super((hostService || selfService) as S);
 	}
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }

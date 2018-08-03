@@ -37,10 +37,10 @@ extends ALuApiOptionSearcher<T, S> {
 
 	clueControl: FormControl;
 	constructor(
-		@Inject(ALuApiSearcherService) @Optional() @SkipSelf() hostService: S,
-		@Inject(ALuApiSearcherService) @Self() selfService: S,
+		@Inject(ALuApiSearcherService) @Optional() @SkipSelf() hostService: ALuApiSearcherService,
+		@Inject(ALuApiSearcherService) @Self() selfService: ALuApiSearcherService,
 	) {
-		super(hostService || selfService);
+		super((hostService || selfService) as S);
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
 		.pipe(debounceTime(250));
@@ -87,10 +87,10 @@ extends ALuApiOptionPagedSearcher<T, S> {
 
 	clueControl: FormControl;
 	constructor(
-		@Inject(ALuApiPagedSearcherService) @Optional() @SkipSelf() hostService: S,
-		@Inject(ALuApiPagedSearcherService) @Self() selfService: S,
+		@Inject(ALuApiPagedSearcherService) @Optional() @SkipSelf() hostService: ALuApiPagedSearcherService,
+		@Inject(ALuApiPagedSearcherService) @Self() selfService: ALuApiPagedSearcherService,
 	) {
-		super(hostService || selfService);
+		super((hostService || selfService) as S);
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
 		.pipe(debounceTime(250));
