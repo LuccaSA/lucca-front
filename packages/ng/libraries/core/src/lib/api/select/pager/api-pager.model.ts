@@ -17,15 +17,16 @@ export interface ILuApiPagerService<T extends IApiItem = IApiItem> {
 	getPaged(page: number): Observable<T[]>;
 }
 
-export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem> implements ILuApiOptionPager<T> {
+export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
+implements ILuApiOptionPager<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	loading$: Observable<boolean>;
 
 	protected _loading = false;
 	protected _results$: Observable<T[]>;
 	protected _page$ = new BehaviorSubject<number>(undefined);
-
-	constructor(protected service: ILuApiPagerService<T>) {
+	protected _service: S;
+	constructor(service: S) {
 		this.initObservables();
 	}
 	onOpen() {
@@ -37,7 +38,7 @@ export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem> implement
 		}
 	}
 	protected initObservables() {
-		this._results$ = this._page$.switchMap(page => this.service.getPaged(page).catch(err => of([])));
+		this._results$ = this._page$.switchMap(page => this._service.getPaged(page).catch(err => of([])));
 
 		this._results$.subscribe(items => {
 			if (this._page$.value === 0) {

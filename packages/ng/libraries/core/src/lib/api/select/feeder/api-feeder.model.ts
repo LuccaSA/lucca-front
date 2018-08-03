@@ -9,16 +9,20 @@ export interface ILuApiFeederService<T extends IApiItem = IApiItem> {
 	getAll(): Observable<T[]>;
 }
 
-export abstract class ALuApiOptionFeeder<T extends IApiItem = IApiItem> implements ILuApiOptionFeeder<T> {
+export abstract class ALuApiOptionFeeder<T extends IApiItem = IApiItem, S extends ILuApiFeederService<T> =  ILuApiFeederService<T>>
+implements ILuApiOptionFeeder<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
-	constructor(protected service: ILuApiFeederService<T>) {}
+	protected _service: S;
+	constructor(service: S) {
+		this._service = service;
+	}
 	onOpen() {
-		this.service.getAll()
+		this._service.getAll()
 		.subscribe(items => this.outOptions$.next(items));
 	}
 }
 
-export abstract class ALuApiFeederService<T extends IApiItem> implements ILuApiFeederService<T> {
+export abstract class ALuApiFeederService<T extends IApiItem = IApiItem> implements ILuApiFeederService<T> {
 	protected _api: string;
 	set api(api: string) { this._api = api; }
 	protected _fields = 'fields=id,name';
