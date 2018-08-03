@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ContentChild, TemplateRef, ContentChildren, QueryList } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, TemplateRef, ContentChildren, QueryList, ElementRef, ViewRef, EmbeddedViewRef } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable } from 'rxjs/Observable';
 import { ALuInputDisplayer, ILuInputDisplayer, LuInputDisplayerContext } from '../../../input/index';
@@ -34,13 +34,13 @@ export class LuOptionsComponent<T = any> extends ALuOptionOperator<T> implements
 	@ContentChildren(ALuInputDisplayer) set displayers(ql: QueryList<ILuInputDisplayer<T>>) {
 		this._displayer = ql.toArray()[1];
 	}
-	getElementRef(value) {
+	getElementRef(value): ElementRef {
 		if (!!this._displayer) {
 			return this._displayer.getElementRef(value);
 		}
 		return undefined;
 	}
-	getViewRef(value) {
+	getViewRef(value): ViewRef {
 		if (!!this._displayer) {
 			return this._displayer.getViewRef(value);
 		}

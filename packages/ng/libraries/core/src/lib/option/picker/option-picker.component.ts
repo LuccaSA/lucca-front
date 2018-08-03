@@ -12,7 +12,8 @@ import {
 	TemplateRef,
 	ViewContainerRef,
 	ElementRef,
-	ContentChild,
+	ViewRef,
+	EmbeddedViewRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -103,13 +104,13 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 		}
 		return undefined;
 	}
-	getElementRef(value) {
+	getElementRef(value): ElementRef {
 		if (!!this._displayer) {
 			return this._displayer.getElementRef(value);
 		}
 		return this.findElementRef(value);
 	}
-	getViewRef(value) {
+	getViewRef(value): ViewRef {
 		if (!!this._displayer) {
 			return this._displayer.getViewRef(value);
 		}
