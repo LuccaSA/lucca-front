@@ -17,7 +17,7 @@ export interface ILuApiPagerService<T extends IApiItem = IApiItem> {
 	getPaged(page: number): Observable<T[]>;
 }
 
-export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
+export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem, S extends ILuApiPagerService<T> = ILuApiPagerService<T>>
 implements ILuApiOptionPager<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	loading$: Observable<boolean>;

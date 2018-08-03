@@ -9,6 +9,10 @@ declare var require: any;
 })
 export class DemoApiSelectComponent implements OnInit {
 	snippets = {
+		basic: {
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
+		},
 		feeder: {
 			code: require('!!prismjs-loader?lang=typescript!./feeder/feeder'),
 			markup: require('!!prismjs-loader?lang=markup!./feeder/feeder.html'),

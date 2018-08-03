@@ -88,7 +88,7 @@ implements ILuApiPagedSearcherService<T> {
 		return this._get(url);
 	}
 }
-export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem, S extends ALuApiPagedSearcherService<T> = ALuApiPagedSearcherService<T>>
+export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem, S extends ILuApiPagedSearcherService<T> = ILuApiPagedSearcherService<T>>
 extends ALuApiOptionSearcher<T, S>
 implements ILuApiOptionPagedSearcher<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
