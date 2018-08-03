@@ -3,6 +3,8 @@ import { ALuOptionOperator } from '../../option/index';
 import { ALuApiOptionSearcher, ALuApiSearcherService } from './api-searcher.model';
 import { IApiItem } from '../api.model';
 import { LuApiSearcherService } from './api-searcher.service';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 @Component({
 	selector: 'lu-api-searcher',
 	templateUrl: 'api-searcher.component.html',
@@ -32,10 +34,19 @@ export class LuApiSearcherComponent<T extends IApiItem = IApiItem> extends ALuAp
 	 */
 	@Input() set transformFn(transformFn: (item: any) => T) { this.service.transformFn = transformFn; }
 
-	constructor(protected service: ALuApiSearcherService<T>) { super(service); }
+	clueControl: FormControl;
+	constructor(protected service: ALuApiSearcherService<T>) {
+		super(service);
+		this.clueControl = new FormControl(undefined);
+		this.clue$ = this.clueControl.valueChanges
+		.pipe(debounceTime(250));
+	}
 
 	onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
+	}
+	resetClue() {
+		this.clueControl.setValue('');
 	}
 }
