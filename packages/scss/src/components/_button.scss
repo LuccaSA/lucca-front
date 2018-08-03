@@ -5,6 +5,7 @@
 	text-decoration: none;
 	border: 0;
 	font-size: _component("button.sizing.default.font-size");
+	font-weight: _component("button.font-weight");
 	line-height: _component("button.line-height");
 	padding: _component("button.sizing.default.padding");
 	vertical-align: middle;
@@ -53,21 +54,45 @@
 	@mixin buttonColoring($palette) {
 		background: _color($palette);
 		color: _color($palette, "text");
-		&:hover, &:focus {
+
+		&:hover {
 			background: _color($palette, "light");
 		}
+
 		&:active {
 			background: _color($palette, "dark");
+		}
+	}
+
+	@mixin buttonLesserColoring($palette) {
+		background: _color($palette, "lightest");
+		color: _color($palette);
+		box-shadow: 0 -2px 0 _color($palette, "transparent") inset;
+
+		&:hover {
+			opacity: .8;
 		}
 	}
 
 	// default color
 	@include buttonColoring("button.default-palette");
 
+	// white color
+	&.palette-white {
+		@include buttonColoring("button.white-palette");
+	}
+
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include buttonColoring($name);
+		}
+	}
+
+	// palette lesser
+	@each $name, $palette in _getMap("palettes") {
+		&.mod-lesser.palette-#{$name} {
+			@include buttonLesserColoring($name);
 		}
 	}
 }
