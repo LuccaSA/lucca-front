@@ -1,6 +1,6 @@
 $textfield: (
 	font-size: _theme("sizes.standard.font-size"),
-	background: #FFFFFF,
+	background: _theme("commons.background.dark"),
 	border-radius: .2rem,
 
 	input: (
@@ -15,14 +15,18 @@ $textfield: (
 		margin-bottom: .25rem,
 	),
 
-	suffix: (
-		top: 1.75rem,
-		padding-right: 1.5rem
+	hover: (
+		background: _theme("commons.background.base")
 	),
 
 	border: (
 		color: #CCCCCC,
 		focus: #999999
+	),
+
+	suffix: (
+		top: 2rem,
+		padding-right: 1.5rem
 	),
 
 	message: (
