@@ -16,17 +16,9 @@ $button: (
 	margin: .2rem,
 	line-height: 1.15,
 	font-weight: 600,
-	box-shadow: unquote("0 -2px 0 rgba(0, 0, 0, .1) inset"),
-
-	// states
-	hover: (
-		box-shadow: unquote("0 -2px 0 rgba(0, 0, 0, .1) inset"),
-	),
-	focus: (
-		box-shadow: unquote("0 0 0 rgba(0, 0, 0, .1) inset"),
-	),
-	active: (
-		box-shadow: unquote("0 0 0 rgba(0, 0, 0, .1) inset"),
+	box-shadow: (
+		offset: -2px,
+		color: rgba(0, 0, 0, .1)
 	),
 
 	// mod
