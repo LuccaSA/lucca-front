@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 export class SearcherComponent implements OnInit {
 	department = { id: 1, name: 'lucca' };
 	le = { id: 1, name: 'lucca' };
+	section;
 
 	constructor() {}
 
