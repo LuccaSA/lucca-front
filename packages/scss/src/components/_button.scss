@@ -99,6 +99,7 @@
 	&.mod-flat {
 		background: transparent;
 		box-shadow: none;
+		font-weight: normal;
 		text-decoration: underline;
 
 		&:hover, &:focus {
@@ -288,8 +289,13 @@
 	.button {
 		border-radius: 0;
 		display: block;
-		margin: 0 0 0 -1px;
+		margin: 0;
 		position: relative;
+		border-right: 1px solid _component("button.box-shadow.color");
+
+		&:last-of-type {
+			border: 0;
+		}
 	}
 
 	> .button {
@@ -308,7 +314,10 @@
 	}
 }
 
-.button-group-item {
+.button-group .button-group-item { // 2 classes needed to override button-group's "last-of-type"
+	.button {
+		border-right: 1px solid _component("button.box-shadow.color");
+	}
 
 	&:first-child {
 		.button {
@@ -318,6 +327,7 @@
 
 	&:last-child {
 		.button {
+			border: 0;
 			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
 		}
 	}
