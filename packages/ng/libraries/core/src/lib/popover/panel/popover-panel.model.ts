@@ -5,7 +5,7 @@ import {
 	throwLuPopoverInvalidAlignement,
 } from '../popover.errors';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { Subscription } from 'rxjs/subscription';
+import { Subscription } from 'rxjs/Subscription';
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
