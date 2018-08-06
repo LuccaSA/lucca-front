@@ -14,6 +14,7 @@ import {
 	ElementRef,
 	ViewRef,
 	EmbeddedViewRef,
+	Renderer2,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -26,6 +27,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import { ALuPickerPanel, ALuInputDisplayer, ILuInputDisplayer } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
+import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
 /**
 * basic option picker panel
@@ -57,12 +59,14 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
-	constructor(protected _vcr: ViewContainerRef) {
+	constructor(protected _vcr: ViewContainerRef, protected _renderer: Renderer2) {
 		super();
 		this.triggerEvent = 'click';
 	}
 	protected _options: ILuOptionItem<T>[];
+	protected _optionsQL: QueryList<ILuOptionItem<T>>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
+		this._optionsQL = ql;
 		this._optionItems$ =
 			merge(Observable.of(ql), ql.changes)
 			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
@@ -90,6 +94,10 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
+	onOpen() {
+		super.onOpen();
+		this._initHighlight();
+	}
 	@ViewChild(TemplateRef)
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
@@ -115,5 +123,62 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 			return this._displayer.getViewRef(value);
 		}
 		return undefined;
+	}
+
+	// keydown
+	_handleKeydown(event: KeyboardEvent) {
+		super._handleKeydown(event);
+		switch (event.keyCode) {
+			case ENTER:
+				this._selectHighlighted();
+				this.onClose();
+				break;
+			case UP_ARROW:
+				this._decrHighlight();
+				break;
+			case DOWN_ARROW:
+				this._incrHighlight();
+				break;
+		}
+	}
+	protected _highlightIndex = 0;
+	get highlightIndex() { return this._highlightIndex; }
+	set highlightIndex(i: number) {
+		this._highlightIndex = i;
+		this._applyHighlight();
+	}
+	protected _initHighlight() {
+		this._highlightIndex = 0;
+		this.optionsQLVR.changes.subscribe(options => {
+			const optionCount = options.toArray().length;
+			this.highlightIndex = Math.min(this.highlightIndex, optionCount);
+		});
+	}
+	protected _incrHighlight() {
+		const optionCount = this.optionsQLVR.toArray().length;
+		this.highlightIndex = Math.min(this.highlightIndex + 1, optionCount);
+	}
+	protected _decrHighlight() {
+		this.highlightIndex = Math.max(this.highlightIndex - 1, 0);
+	}
+	protected _applyHighlight() {
+		const highlightClass = 'is-highlighted';
+		const options = this.optionsQLVR.toArray();
+		// remove `is-highlighted` class from all other options
+		options.forEach(ovcr => this._renderer.removeClass(ovcr.element.nativeElement, highlightClass));
+		// apply `is-highlighted` to current highlight
+		const highlightedOption = options[this.highlightIndex];
+		if (!!highlightedOption) {
+			this._renderer.addClass(highlightedOption.element.nativeElement, highlightClass);
+			// scroll to let the highlighted option visible
+			// TODO
+		}
+	}
+	protected _selectHighlighted() {
+		const options = this._optionsQL.toArray();
+		const highlightedOption = options[this.highlightIndex];
+		if (!!highlightedOption) {
+			this._select(highlightedOption.value);
+		}
 	}
 }

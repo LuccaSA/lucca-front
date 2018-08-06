@@ -51,11 +51,6 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			case ESCAPE:
 				this.onClose();
 				return;
-			default:
-				this.__operators.forEach(o => {
-					if (!o.onKeydown) { return; }
-					o.onKeydown(event.keyCode);
-				});
 		}
 	}
 	onOpen() {
