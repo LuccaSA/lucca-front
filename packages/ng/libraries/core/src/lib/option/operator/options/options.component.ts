@@ -23,7 +23,7 @@ import { ALuInputDisplayer, ILuInputDisplayer, LuInputDisplayerContext } from '.
 export class LuOptionsComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuInputDisplayer<T> {
 	options$;
 	set inOptions$(in$: Observable<T[]>) {
-		this.options$ = in$
+		this.options$ = in$;
 	}
 	@Input() trackByFn: (option: T) => any;
 	displayTemplate: TemplateRef<LuInputDisplayerContext<T>>;

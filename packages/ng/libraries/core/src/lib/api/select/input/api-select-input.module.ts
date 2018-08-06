@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LuOptionOperatorModule, LuOptionItemModule, LuOptionPickerModule } from '../../../option/index';
 import { LuSelectClearerModule } from '../../../select/index';
 import { LuApiSearcherModule } from '../searcher/index';
+import { LuInputDisplayerModule } from '../../../input/index';
 
 @NgModule({
 	imports: [
@@ -13,6 +14,7 @@ import { LuApiSearcherModule } from '../searcher/index';
 		LuApiSearcherModule,
 		LuOptionPickerModule,
 		LuSelectClearerModule,
+		LuInputDisplayerModule,
 	],
 	declarations: [
 		LuApiSelectInputComponent,
