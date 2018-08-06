@@ -1,0 +1,24 @@
+import { NgModule } from '@angular/core';
+import { LuApiSelectInputComponent } from './api-select-input.component';
+import { CommonModule } from '@angular/common';
+import { LuOptionOperatorModule, LuOptionItemModule, LuOptionPickerModule } from '../../../option/index';
+import { LuSelectClearerModule } from '../../../select/index';
+import { LuApiSearcherModule } from '../searcher/index';
+
+@NgModule({
+	imports: [
+		CommonModule,
+		LuOptionItemModule,
+		LuOptionOperatorModule,
+		LuApiSearcherModule,
+		LuOptionPickerModule,
+		LuSelectClearerModule,
+	],
+	declarations: [
+		LuApiSelectInputComponent,
+	],
+	exports: [
+		LuApiSelectInputComponent,
+	],
+})
+export class LuApiSelectInputModule {}

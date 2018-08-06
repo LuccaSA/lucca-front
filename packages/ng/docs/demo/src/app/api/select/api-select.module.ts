@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared';
 import { FeederComponent } from './feeder/feeder';
 import { SearcherComponent } from './searcher/searcher';
 import { PagerComponent } from './pager/pager';
+import { BasicComponent } from './basic/basic';
 
 @NgModule({
 	imports: [
@@ -23,6 +24,7 @@ import { PagerComponent } from './pager/pager';
 		FeederComponent,
 		SearcherComponent,
 		PagerComponent,
+		BasicComponent,
 	],
 	exports: [
 		DemoApiSelectComponent,

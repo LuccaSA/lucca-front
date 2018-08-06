@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, Optional, SkipSelf, Inject, Self } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LuApiFeederService } from './api-feeder.service';
@@ -22,18 +22,19 @@ import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
 		},
 	],
 })
-export class LuApiFeederComponent<T extends IApiItem = IApiItem> extends ALuApiOptionFeeder<T> implements ILuOptionOperator<T> {
+export class LuApiFeederComponent<T extends IApiItem = IApiItem, S extends ALuApiFeederService<T> = ALuApiFeederService<T>>
+extends ALuApiOptionFeeder<T, S>
+implements ILuOptionOperator<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
-	constructor(protected service: ALuApiFeederService<T>) {
-		super(service);
+	constructor(
+		@Inject(ALuApiFeederService) @Optional() @SkipSelf() hostService: ALuApiFeederService,
+		@Inject(ALuApiFeederService) @Self() selfService: ALuApiFeederService,
+	) {
+		super((hostService || selfService) as S);
 	}
-	@Input() set api(api: string) { this.service.api = api; }
-	@Input() set fields(fields: string) { this.service.fields = fields; }
-	@Input() set filters(filters: string[]) { this.service.filters = filters; }
-	@Input() set orderBy(orderBy: string) { this.service.orderBy = orderBy; }
-	/**
-	 * a function to transform the item fetched from the api into the kind of item you want
-	 * if you wnat to cast dates into moments for example
-	 */
-	@Input() set transformFn(transformFn: (item: any) => T) { this.service.transformFn = transformFn; }
+	@Input() set api(api: string) { this._service.api = api; }
+	@Input() set fields(fields: string) { this._service.fields = fields; }
+	@Input() set filters(filters: string[]) { this._service.filters = filters; }
+	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	@Input() set transformFn(transformFn: (item: any) => T) { this._service.transformFn = transformFn; }
 }

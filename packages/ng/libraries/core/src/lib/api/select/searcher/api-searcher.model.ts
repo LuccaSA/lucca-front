@@ -17,22 +17,27 @@ export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends IL
 	searchAll(clue: string): Observable<T[]>;
 }
 
-export abstract class ALuApiOptionSearcher<T extends IApiItem = IApiItem> implements ILuApiOptionFeeder<T> {
+export abstract class ALuApiOptionSearcher<T extends IApiItem = IApiItem, S extends ILuApiSearcherService<T> = ILuApiSearcherService<T>>
+implements ILuApiOptionFeeder<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	loading$: Observable<boolean>;
 
 	protected _results$: Observable<T[]>;
 	protected _clue$: Observable<string>;
+
+	protected _service: S;
 	set clue$(clue$: Observable<string>) {
 		this.initObservables(clue$);
 	}
-	constructor(protected service: ILuApiSearcherService<T>) {}
+	constructor(service: S) {
+		this._service = service;
+	}
 	onOpen() {
 		this.resetClue();
 	}
 	protected initObservables(clue$) {
 		this._clue$ = clue$;
-		this._results$ = this._clue$.switchMap(clue => this.service.searchAll(clue).catch(err => of([])));
+		this._results$ = this._clue$.switchMap(clue => this._service.searchAll(clue).catch(err => of([])));
 
 		this._results$.subscribe(items => this.outOptions$.next(items));
 		this.loading$ = merge(
@@ -83,15 +88,17 @@ implements ILuApiPagedSearcherService<T> {
 		return this._get(url);
 	}
 }
-export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem>
-extends ALuApiOptionSearcher<T>
+export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem, S extends ILuApiPagedSearcherService<T> = ILuApiPagedSearcherService<T>>
+extends ALuApiOptionSearcher<T, S>
 implements ILuApiOptionPagedSearcher<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	loading$: Observable<boolean>;
 	protected _loading = false;
 	protected _page$ = new BehaviorSubject<number>(undefined);
 
-	constructor(protected service: ILuApiPagedSearcherService<T>) { super(service); }
+	constructor(service: S) {
+		super(service);
+	}
 	onOpen() {
 		this.resetClue();
 		this.resetPage();
@@ -107,10 +114,10 @@ implements ILuApiOptionPagedSearcher<T> {
 		merge(
 			this._clue$
 			.withLatestFrom(this._page$)
-			.switchMap(([clue, page]) => this.service.searchPaged(clue, page).catch(err => of([]))),
+			.switchMap(([clue, page]) => this._service.searchPaged(clue, page).catch(err => of([]))),
 			this._page$
 			.withLatestFrom(this._clue$)
-			.switchMap(([page, clue]) => this.service.searchPaged(clue, page).catch(err => of([]))),
+			.switchMap(([page, clue]) => this._service.searchPaged(clue, page).catch(err => of([]))),
 		);
 
 		this._results$
