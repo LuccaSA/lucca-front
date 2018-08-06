@@ -5,6 +5,7 @@ import {
 	throwLuPopoverInvalidAlignement,
 } from '../popover.errors';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { Subscription } from 'rxjs/subscription';
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
@@ -37,6 +38,8 @@ export interface ILuPopoverPanel {
 	_emitOpenEvent(): void;
 	onOpen(): void;
 	onClose(): void;
+
+	keydownEvents$: Observable<KeyboardEvent>;
 }
 /**
  * abstract class for basic implementation of a popover panel
@@ -146,6 +149,13 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	protected _popoverContentStyles: any = {};
 	public get popoverContentStyles() { return this._popoverContentStyles; }
 	public set popoverContentStyles(pcs) { this._popoverContentStyles = pcs; }
+
+	protected _keydownEventsSub;
+	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
+		if (!this._keydownEventsSub) {
+			this._keydownEventsSub = evt$.subscribe(e => this._handleKeydown(e));
+		}
+	}
 
 	close: Observable<void>;
 	open: Observable<void>;

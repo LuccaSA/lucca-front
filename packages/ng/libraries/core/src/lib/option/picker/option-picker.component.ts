@@ -15,6 +15,9 @@ import {
 	ViewRef,
 	EmbeddedViewRef,
 	Renderer2,
+	ChangeDetectorRef,
+	OnInit,
+	AfterViewInit,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -54,12 +57,15 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 })
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
-implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
+implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T>, AfterViewInit {
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
 	setValue(value: T) {}
-	constructor(protected _vcr: ViewContainerRef, protected _renderer: Renderer2) {
+	constructor(
+		protected _vcr: ViewContainerRef,
+		protected _changeDetectorRef: ChangeDetectorRef,
+		protected _renderer: Renderer2) {
 		super();
 		this.triggerEvent = 'click';
 	}
@@ -75,7 +81,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
 	@ContentChildren(ALuInputDisplayer) displayers: QueryList<ILuInputDisplayer<T>>;
 	protected get _displayer() {
-		return this.displayers.toArray()[1];
+		return this.displayers ? this.displayers.toArray()[1] : undefined;
 	}
 
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
@@ -88,6 +94,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	ngOnDestroy() {
 		super.destroy();
 	}
+	ngAfterViewInit() {
+		this._initHighlight();
+	}
 	_emitOpenEvent(): void {
 		this.open.emit();
 	}
@@ -96,7 +105,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	}
 	onOpen() {
 		super.onOpen();
-		this._initHighlight();
+		this.highlightIndex = 0;
 	}
 	@ViewChild(TemplateRef)
 	set vcTemplateRef(tr: TemplateRef<any>) {
@@ -148,15 +157,17 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 		this._applyHighlight();
 	}
 	protected _initHighlight() {
-		this._highlightIndex = 0;
-		this.optionsQLVR.changes.subscribe(options => {
+		this._subs.add(this.optionsQLVR.changes.subscribe(options => {
 			const optionCount = options.toArray().length;
-			this.highlightIndex = Math.min(this.highlightIndex, optionCount);
-		});
+			this.highlightIndex = Math.max(Math.min(this.highlightIndex, optionCount - 1), 0);
+		}));
+		setTimeout(() => {
+			this.highlightIndex = 0;
+		}, 1);
 	}
 	protected _incrHighlight() {
 		const optionCount = this.optionsQLVR.toArray().length;
-		this.highlightIndex = Math.min(this.highlightIndex + 1, optionCount);
+		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, optionCount - 1), 0);
 	}
 	protected _decrHighlight() {
 		this.highlightIndex = Math.max(this.highlightIndex - 1, 0);
@@ -173,9 +184,10 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 			// scroll to let the highlighted option visible
 			// TODO
 		}
+		this._changeDetectorRef.markForCheck();
 	}
 	protected _selectHighlighted() {
-		const options = this._optionsQL.toArray();
+		const options = this._optionsQL ? this._optionsQL.toArray() : [];
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
 			this._select(highlightedOption.value);
