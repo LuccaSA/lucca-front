@@ -5,6 +5,7 @@ import { LuUserDisplayModule } from '../../display/index';
 import { LuOptionOperatorModule, LuOptionItemModule, LuOptionPickerModule } from '../../../option/index';
 import { LuSelectClearerModule } from '../../../select/index';
 import { LuUserSearcherModule } from '../searcher/index';
+import { LuInputDisplayerModule } from '../../../input/index';
 
 @NgModule({
 	imports: [
@@ -15,6 +16,7 @@ import { LuUserSearcherModule } from '../searcher/index';
 		LuOptionPickerModule,
 		LuSelectClearerModule,
 		LuUserSearcherModule,
+		LuInputDisplayerModule
 	],
 	declarations: [
 		LuUserSelectInputComponent,
