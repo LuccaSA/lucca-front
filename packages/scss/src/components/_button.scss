@@ -135,30 +135,6 @@
 		}
 	}
 
-	&.mod-filling {
-		@mixin buttonFillingColoring($palette) {
-			background: transparent;
-			color: _color("text.default");
-
-			&:hover, &:focus {
-				&:not([disabled]) {
-					background: _color($palette);
-					color: _color($palette);
-				}
-			}
-		}
-
-		// default color
-		@include buttonFillingColoring("button.filling.default-palette");
-
-		// palette colors
-		@each $name, $palette in _getMap("palettes") {
-			&.palette-#{$name} {
-				@include buttonFillingColoring($name);
-			}
-		}
-	}
-
 	&.mod-link {
 		background: transparent;
 		box-shadow: none;
