@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
+import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ALuClearer, ILuClearer } from '../../input/index';
 import { ALuSelectInput } from './select-input.model';
 
 /**
@@ -34,6 +34,7 @@ import { ALuSelectInput } from './select-input.model';
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T> {
+	@ContentChild(ALuClearer, { read: TemplateRef}) clearerTemplate: TemplateRef<any>;
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -52,6 +53,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	 */
 	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: P) {
 		this._picker = picker;
+	}
+	@ContentChild(ALuClearer) set _ContentChildClearer(clearer: ILuClearer) {
+		this._clearer = clearer;
 	}
 
 	@HostListener('click')

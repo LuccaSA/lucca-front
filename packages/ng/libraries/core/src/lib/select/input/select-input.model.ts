@@ -6,9 +6,9 @@ import {
 import { ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel } from '../../input/index';
+import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ILuClearer } from '../../input/index';
 
-export abstract class ALuSelectInput<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
+export abstract class ALuSelectInput<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
 extends ALuPopoverTrigger<P>
 implements ControlValueAccessor, ILuInputWithPicker<T> {
 	constructor(
@@ -60,6 +60,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	protected set _picker(picker: P) {
 		this.popover = picker;
 		this.subToPickerEvts();
+	}
+	protected set _clearer(clearer: C) {
+		if (!!clearer && !!clearer.onClear) {
+			clearer.onClear.subscribe(value => this.setValue(value));
+		}
 	}
 	protected subToPickerEvts() {
 		if (!!this.popover) {
