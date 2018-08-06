@@ -4,7 +4,7 @@ import { LuUserModule } from './user/index';
 import { LuSelectModule } from './select/index';
 import { LuOptionModule } from './option/index';
 import { LuScrollModule } from './scroll/index';
-// import { LuApiModule } from './api/index';
+import { LuApiModule } from './api/index';
 import { LuEmptyModule } from './empty/index';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { LuEmptyModule } from './empty/index';
 		LuSelectModule,
 		LuOptionModule,
 		LuScrollModule,
-		// LuApiModule,
+		LuApiModule,
 	],
 	exports: [
 		LuEmptyModule,
@@ -24,7 +24,7 @@ import { LuEmptyModule } from './empty/index';
 		LuSelectModule,
 		LuOptionModule,
 		LuScrollModule,
-		// LuApiModule,
+		LuApiModule,
 	],
 })
 export class LuModule {}
