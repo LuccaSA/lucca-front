@@ -16,7 +16,7 @@ import { LuInputDisplayerModule } from '../../../input/index';
 		LuOptionPickerModule,
 		LuSelectClearerModule,
 		LuUserSearcherModule,
-		LuInputDisplayerModule
+		LuInputDisplayerModule,
 	],
 	declarations: [
 		LuUserSelectInputComponent,
