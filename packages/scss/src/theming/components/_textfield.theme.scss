@@ -19,11 +19,6 @@ $textfield: (
 		background: _theme("commons.background.base")
 	),
 
-	border: (
-		color: #CCCCCC,
-		focus: #999999
-	),
-
 	suffix: (
 		top: 2rem,
 		padding-right: 1.5rem
@@ -47,6 +42,9 @@ $textfield: (
 		padding-top: 1rem,
 		default-palette: (
 			color: _color("primary")
+		),
+		border: (
+			color: #CCCCCC
 		),
 		label: (
 			color: #A6A6A6,
