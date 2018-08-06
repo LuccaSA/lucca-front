@@ -58,9 +58,12 @@ implements ILuApiSearcherService<T> {
 		if (!clue) {
 			return this.getAll();
 		}
-		const urlSafeClue = encodeURIComponent(clue);
-		const url = `${this.url}&${this._searchProperty}=like,${urlSafeClue}`;
+		const url = `${this.url}&${this._clueFilter(clue)}`;
 		return this._get(url);
+	}
+	protected _clueFilter(clue) {
+		const urlSafeClue = encodeURIComponent(clue);
+		return `${this._searchProperty}=like,${urlSafeClue}`;
 	}
 }
 // paged
@@ -82,11 +85,11 @@ implements ILuApiPagedSearcherService<T> {
 		if (!clue) {
 			return this.getPaged(page);
 		}
-		const urlSafeClue = encodeURIComponent(clue);
 		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
-		const url = `${this.url}&${this._searchProperty}=like,${urlSafeClue}&${paging}`;
+		const url = `${this.url}&${this._clueFilter(clue)}&${paging}`;
 		return this._get(url);
 	}
+
 }
 export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem, S extends ILuApiPagedSearcherService<T> = ILuApiPagedSearcherService<T>>
 extends ALuApiOptionSearcher<T, S>

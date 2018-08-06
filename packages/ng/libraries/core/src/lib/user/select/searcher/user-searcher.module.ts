@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
+import { LuUserPagedSearcherComponent } from './user-searcher.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LuUserFeederComponent } from './user-feeder.component';
-import { LuUserFeederService } from './user-feeder.service';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -12,13 +11,10 @@ import { CommonModule } from '@angular/common';
 		CommonModule,
 	],
 	declarations: [
-		LuUserFeederComponent,
+		LuUserPagedSearcherComponent,
 	],
 	exports: [
-		LuUserFeederComponent,
+		LuUserPagedSearcherComponent,
 	],
-	providers: [
-		LuUserFeederService,
-	]
 })
-export class LuUserFeederModule {}
+export class LuUserSearcherModule {}

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DemoUserSelectComponent } from './user-select.component';
-import { LuUserSelectModule, LuUserTileModule } from '@lucca-front/ng';
+import { LuUserSelectModule, LuUserTileModule, LuOptionModule } from '@lucca-front/ng';
 
 import { SharedModule } from '../../shared';
 import { BasicComponent } from './basic/basic';
 import { LuEmptyModule, LuSelectModule } from '@lucca-front/ng';
+import { SearcherComponent } from './searcher/searcher';
 
 @NgModule({
 	imports: [
@@ -17,8 +18,9 @@ import { LuEmptyModule, LuSelectModule } from '@lucca-front/ng';
 		SharedModule,
 		LuEmptyModule,
 		LuSelectModule,
+		LuOptionModule,
 	],
-	declarations: [DemoUserSelectComponent, BasicComponent],
-	exports: [DemoUserSelectComponent, BasicComponent],
+	declarations: [DemoUserSelectComponent, BasicComponent, SearcherComponent],
+	exports: [DemoUserSelectComponent],
 })
 export class DemoUserSelectModule {}
