@@ -7,6 +7,7 @@ import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { ILuOptionOperator } from '../operator/index';
+import { ESCAPE } from '@angular/cdk/keycodes';
 
 export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 
@@ -44,5 +45,31 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	protected abstract _select(val: T);
 	protected destroy() {
 		this.__subs.unsubscribe();
+	}
+	_handleKeydown(event: KeyboardEvent) {
+		switch (event.keyCode) {
+			case ESCAPE:
+				this.onClose();
+				return;
+			default:
+				this.__operators.forEach(o => {
+					if (!o.onKeydown) { return; }
+					o.onKeydown(event.keyCode);
+				});
+		}
+	}
+	onOpen() {
+		this.__operators.forEach(o => {
+			if (!o.onOpen) { return; }
+			o.onOpen();
+		});
+		this._emitOpenEvent();
+	}
+	onClose() {
+		this.__operators.forEach(o => {
+			if (!o.onClose) { return; }
+			o.onClose();
+		});
+		this._emitCloseEvent();
 	}
 }
