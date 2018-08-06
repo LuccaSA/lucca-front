@@ -2,14 +2,12 @@
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
+			<lu-option *luDisplayer="let value" [value]="value">{{value.id}} - {{value.name}}</lu-option>
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
-				<lu-option [value]="red"><i class="lucca-icon">heart</i>{{red.name}}</lu-option>
+				<lu-option [value]="red"><i class="lucca-icon">heart</i> {{red.name}}</lu-option>
 			</lu-option-picker>
 			<lu-select-clearer></lu-select-clearer>
-			<!-- <lu-option-displayer>
-				<ng-template let-value>{{value | json}}</ng-template>
-			</lu-option-displayer> -->
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
@@ -28,26 +26,20 @@
 	<code class="code mod-block">{{ number | json }}</code>
 </section> -->
 
-<!-- <section class="contentSection">
-	<h3>Component basic</h3>
+<section class="contentSection">
+	<h3>With operators</h3>
 	<div class="textfield">
-	<lu-select [(ngModel)]="withOperators" class="textfield-input">
-		<lu-option-picker>
-			<lu-option-feeder [options]="options$ | async"></lu-option-feeder>
-			<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-			<lu-option-pager></lu-option-pager>
-			<lu-option-template>
-				<ng-template let-option>{{option.name}}</ng-template>
-			</lu-option-template> -->
-			<!-- target synthax -->
-			<!-- <lu-options>
-				<lu-option-template let-option>{{option.name}}</lu-option-template>
-			</lu-options> -->
-		<!-- </lu-option-picker>
-	</lu-select>
-
+		<lu-select [(ngModel)]="withOperators" class="textfield-input">
+			<lu-option-picker>
+				<lu-option-feeder [options]="options$ | async"></lu-option-feeder>
+				<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
+				<lu-option-pager></lu-option-pager>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
+			</lu-option-picker>
+		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 	<code class="code mod-block">{{ withOperators | json }}</code>
-
-</section> -->
+</section>

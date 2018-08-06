@@ -1,8 +1,8 @@
 <lu-option-picker>
 	<lu-user-paged-searcher></lu-user-paged-searcher>
-	<lu-option-template>
-		<ng-template let-user>{{ user | luUserDisplay: searchFormat }}</ng-template>
-	</lu-option-template>
+	<lu-options>
+		<lu-option *luDisplayer="let user" [value]="user">{{ user | luUserDisplay: searchFormat }}</lu-option>
+	</lu-options>
 </lu-option-picker>
 <lu-select-clearer></lu-select-clearer>
 <div class="select-value">

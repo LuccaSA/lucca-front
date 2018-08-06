@@ -110,10 +110,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	protected renderAsView() {
 		const oldView = this.oldView;
 		this.clearView(oldView);
-		const newView = this.getNewView();
-		this.displayView(newView);
-		this.oldView = newView;
-		return !!newView;
+		if (!!this.value) {
+			const newView = this.getNewView();
+			this.displayView(newView);
+			this.oldView = newView;
+			return !!newView;
+		}
+		return false;
 	}
 	protected clearView(view) {
 		if (!!view) {
@@ -152,10 +155,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	protected renderAsElt() {
 		const oldElt = this.oldElt;
 		this.clearElt(oldElt);
-		const newElt = this.getNewElt();
-		this.displayElt(newElt);
-		this.oldElt = newElt;
-		return !!newElt;
+		if (!!this.value) {
+			const newElt = this.getNewElt();
+			this.displayElt(newElt);
+			this.oldElt = newElt;
+			return !!newElt;
+		}
+		return false;
 	}
 	ngAfterViewInit() {
 		this.render();

@@ -12,6 +12,8 @@ import {
 	TemplateRef,
 	ViewContainerRef,
 	ElementRef,
+	ViewRef,
+	EmbeddedViewRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -67,6 +69,10 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 			.do(o => this._options = o);
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
+	@ContentChildren(ALuInputDisplayer) displayers: QueryList<ILuInputDisplayer<T>>;
+	protected get _displayer() {
+		return this.displayers.toArray()[1];
+	}
 
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		this._operators = ql.toArray();
@@ -88,7 +94,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}
-	getElementRef(value: T): ElementRef {
+	findElementRef(value: T): ElementRef {
 		// try to find the lo-option with the right value
 		const options = this._options || [];
 		const index = options.findIndex(oi => JSON.stringify(oi.value) === JSON.stringify(value));
@@ -98,5 +104,16 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T> {
 		}
 		return undefined;
 	}
-	getViewRef(value: T) { return undefined; }
+	getElementRef(value): ElementRef {
+		if (!!this._displayer) {
+			return this._displayer.getElementRef(value);
+		}
+		return this.findElementRef(value);
+	}
+	getViewRef(value): ViewRef {
+		if (!!this._displayer) {
+			return this._displayer.getViewRef(value);
+		}
+		return undefined;
+	}
 }

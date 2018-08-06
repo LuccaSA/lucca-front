@@ -1,0 +1,3 @@
+<ng-template ngFor [ngForOf]="options$ | async" let-option [ngForTrackBy]="trackByFn">
+	<ng-container *ngTemplateOutlet="displayTemplate; context: {$implicit: option}"></ng-container>
+</ng-template>

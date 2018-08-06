@@ -4,9 +4,9 @@
 		<lu-select [(ngModel)]="user" class="textfield-input">
 			<lu-option-picker>
 				<lu-user-paged-searcher></lu-user-paged-searcher>
-				<lu-option-template>
-					<ng-template let-option>{{option.lastName}} {{ option.firstName}}</ng-template>
-				</lu-option-template>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.lastName}} {{ option.firstName}}</lu-option>
+				</lu-options>
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label">user</label>
@@ -16,9 +16,9 @@
 		<lu-select [(ngModel)]="consultant" class="textfield-input">
 			<lu-option-picker>
 				<lu-user-paged-searcher [filters]="filters"></lu-user-paged-searcher>
-				<lu-option-template>
-					<ng-template let-option>{{option.lastName}} {{ option.firstName}}</ng-template>
-				</lu-option-template>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.lastName}} {{ option.firstName}}</lu-option>
+				</lu-options>
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label">user in customer success</label>
@@ -28,11 +28,11 @@
 		<lu-select [(ngModel)]="tile" class="textfield-input">
 			<lu-option-picker>
 				<lu-user-paged-searcher [fields]="fields"></lu-user-paged-searcher>
-				<lu-option-template>
-					<ng-template let-option>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">
 						<lu-user-tile [user]="option"></lu-user-tile>
-					</ng-template>
-				</lu-option-template>
+					</lu-option>
+				</lu-options>
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label">with custom fields and templating</label>

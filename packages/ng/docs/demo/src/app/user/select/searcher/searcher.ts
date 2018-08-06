@@ -10,6 +10,8 @@ export class SearcherComponent implements OnInit {
 	user;
 	filters = ['departmentId=16'];
 	fields = 'id,firstname,lastname,picture[href],jobtitle';
+	consultant;
+	tile;
 
 	constructor() {}
 
