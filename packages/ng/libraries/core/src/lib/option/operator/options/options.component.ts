@@ -30,7 +30,7 @@ export class LuOptionsComponent<T = any> extends ALuOptionOperator<T> implements
 	@ContentChildren(ALuInputDisplayer, { read: TemplateRef }) set displayTemplates(ql: QueryList<TemplateRef<LuInputDisplayerContext<T>>>) {
 		this.displayTemplate = ql.toArray()[1]; // exclude `this`
 	}
-	protected _displayer: ILuInputDisplayer<T>
+	protected _displayer: ILuInputDisplayer<T>;
 	@ContentChildren(ALuInputDisplayer) set displayers(ql: QueryList<ILuInputDisplayer<T>>) {
 		this._displayer = ql.toArray()[1];
 	}

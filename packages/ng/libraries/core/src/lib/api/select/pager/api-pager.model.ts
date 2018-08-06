@@ -24,9 +24,8 @@ implements ILuApiOptionPager<T> {
 
 	protected _loading = false;
 	protected _results$: Observable<T[]>;
-	protected _page$ = new BehaviorSubject<number>(undefined);
-	protected _service: S;
-	constructor(service: S) {
+	protected _page$ = new BehaviorSubject<number>(0);
+	constructor(protected _service: S) {
 		this.initObservables();
 	}
 	onOpen() {

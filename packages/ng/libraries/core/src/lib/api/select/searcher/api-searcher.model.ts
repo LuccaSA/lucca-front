@@ -25,13 +25,10 @@ implements ILuApiOptionFeeder<T> {
 	protected _results$: Observable<T[]>;
 	protected _clue$: Observable<string>;
 
-	protected _service: S;
 	set clue$(clue$: Observable<string>) {
 		this.initObservables(clue$);
 	}
-	constructor(service: S) {
-		this._service = service;
-	}
+	constructor(protected _service: S) {}
 	onOpen() {
 		this.resetClue();
 	}

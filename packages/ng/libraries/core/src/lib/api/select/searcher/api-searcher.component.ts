@@ -25,7 +25,9 @@ import { debounceTime } from 'rxjs/operators/debounceTime';
 export class LuApiSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiSearcherService<T> = ALuApiSearcherService<T>>
 extends ALuApiOptionSearcher<T, S> {
 	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
-	@Input() set api(api: string) { this._service.api = api; }
+	@Input() set api(api: string) {
+		this._service.api = api;
+	}
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
