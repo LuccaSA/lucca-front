@@ -70,7 +70,9 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 
 	ngAfterViewInit() {
 		this._checkPopover();
-		this.popover.close.subscribe(() => this.closePopover());
+		this.popover.close.subscribe(() => {
+			this.closePopover()
+		});
 	}
 
 	ngOnDestroy() {

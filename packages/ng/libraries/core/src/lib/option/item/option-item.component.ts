@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, TemplateRef, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, forwardRef, ViewContainerRef } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
 @Component({
@@ -21,4 +21,10 @@ export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements 
 	onclick() {
 		this.onSelect.emit(this.value);
 	}
+	constructor(protected _vcr: ViewContainerRef) {
+		super();
+	}
+	// get viewRef() {
+	// 	return this._vcr.get(0);
+	// }
 }

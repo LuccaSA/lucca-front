@@ -1,18 +1,29 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	Input,
 	ChangeDetectorRef,
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
 	ContentChild,
 	HostListener,
-	TemplateRef
+	TemplateRef,
+	ViewChild,
+	AfterViewInit,
+	ViewRef,
+	Renderer2,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ALuClearer, ILuClearer } from '../../input/index';
+import {
+	ILuInputWithPicker,
+	ILuPickerPanel,
+	ALuPickerPanel,
+	ALuClearer,
+	ILuClearer,
+	ILuInputDisplayer,
+	ALuInputDisplayer,
+} from '../../input/index';
 import { ALuSelectInput } from './select-input.model';
 
 /**
@@ -33,15 +44,22 @@ import { ALuSelectInput } from './select-input.model';
 })
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
-implements ControlValueAccessor, ILuInputWithPicker<T> {
-	@ContentChild(ALuClearer, { read: TemplateRef}) clearerTemplate: TemplateRef<any>;
+implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
+	protected oldView;
+	protected oldElt;
+	protected displayer: ILuInputDisplayer<T>;
+	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
+	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
+
 	constructor(
+		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 	) {
-		super(_changeDetectorRef,
+		super(
+			_changeDetectorRef,
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
@@ -56,6 +74,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	}
 	@ContentChild(ALuClearer) set _ContentChildClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
+	}
+	@ContentChild(ALuInputDisplayer) set _displayer(displayer: ILuInputDisplayer<T>) {
+		this.displayer = displayer;
+		this.render();
 	}
 
 	@HostListener('click')
@@ -79,8 +101,73 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 		super.onBlur();
 	}
 
-	displayTemplate: TemplateRef<any>;
-	// @ContentChild(TemplateRef) set _contentChildDisplayTemplate(templateRef: TemplateRef<any>) {
-	// 	this.displayTemplate = templateRef;
-	// }
+	protected render() {
+		if (!this.renderAsView()) {
+			this.renderAsElt();
+		}
+	}
+
+	protected renderAsView() {
+		const oldView = this.oldView;
+		this.clearView(oldView);
+		const newView = this.getNewView();
+		this.displayView(newView);
+		this.oldView = newView;
+		return !!newView;
+	}
+	protected clearView(view) {
+		if (!!view) {
+			const index = this._displayContainer.indexOf(this.oldView);
+			this._displayContainer.remove(index);
+		}
+	}
+	protected getNewView() {
+		if (!!this.displayer) {
+			return this.displayer.getViewRef(this.value);
+		}
+		return undefined;
+	}
+	protected displayView(view) {
+		if (!!view) {
+			this._displayContainer.insert(view);
+		}
+	}
+
+	protected clearElt(elt) {
+		if (!!elt) {
+			this._renderer.removeChild(this._displayElt.nativeElement, elt);
+		}
+	}
+	protected getNewElt() {
+		if (!!this.displayer && !!this.displayer.getElementRef(this.value)) {
+			return this.displayer.getElementRef(this.value).nativeElement.cloneNode(true);
+		}
+		return undefined;
+	}
+	protected displayElt(elt) {
+		if (!!elt) {
+			this._renderer.appendChild(this._displayElt.nativeElement, elt);
+		}
+	}
+	protected renderAsElt() {
+		const oldElt = this.oldElt;
+		this.clearElt(oldElt);
+		const newElt = this.getNewElt();
+		this.displayElt(newElt);
+		this.oldElt = newElt;
+		return !!newElt;
+	}
+	ngAfterViewInit() {
+		this.render();
+		this.displayClearer();
+	}
+
+	// display clearer
+	@ContentChild(ALuClearer, { read: ElementRef }) clearerEltRef: ElementRef;
+	@ViewChild('suffix', { read: ElementRef }) suffixEltRef: ElementRef;
+	displayClearer() {
+		if (!!this.clearerEltRef) {
+			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);
+		}
+	}
 }
