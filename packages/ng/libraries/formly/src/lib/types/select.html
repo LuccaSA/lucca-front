@@ -1,7 +1,9 @@
-<!-- <lu-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
-	<lu-select-option *ngFor="let option of _options" [luOptionValue]="option">
-		{{ option.name }}
-	</lu-select-option>
-	<lu-select-clearer #clearer="luSelectClearer" *ngIf="!to.required"></lu-select-clearer>
+<lu-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
+	<lu-option-picker>
+		<lu-option *ngFor="let option of _options" [value]="option">
+			{{ option.name }}
+		</lu-option>
+	</lu-option-picker>
+	<lu-select-clearer *ngIf="!to.required"></lu-select-clearer>
 </lu-select>
-<label [attr.for]="id" class="textfield-label">{{ to.label }}</label> -->
+<label [attr.for]="id" class="textfield-label">{{ to.label }}</label>
