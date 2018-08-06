@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { LuApiFeederModule } from './feeder/index';
+import { LuApiSelectModule } from './select/index';
 
 @NgModule({
 	imports: [
-		LuApiFeederModule,
+		LuApiSelectModule,
 	],
 	exports: [
-		LuApiFeederModule,
+		LuApiSelectModule,
 	],
 })
 export class LuApiModule {}

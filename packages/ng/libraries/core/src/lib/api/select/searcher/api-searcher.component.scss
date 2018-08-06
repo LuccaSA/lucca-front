@@ -1,0 +1,12 @@
+@import 'theming';
+
+.textfield.mod-search {
+	width: 100%;
+}
+
+.textfield-input {
+	border-radius: 0;
+	box-shadow: none;
+	border-bottom: _theme('commons.divider.width') solid
+		_theme('commons.divider.color');
+}
