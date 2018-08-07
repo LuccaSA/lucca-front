@@ -205,16 +205,6 @@
   dependencies:
     tslib "^1.9.0"
 
-"@lucca-front/icons@^1.1.0-beta.0":
-  version "1.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@lucca-front/icons/-/icons-1.1.0-beta.0.tgz#f74e837e912f5dc76aa2ec77f35a7abcbb99dd30"
-
-"@lucca-front/scss@^1.1.0-beta.0":
-  version "1.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@lucca-front/scss/-/scss-1.1.0-beta.0.tgz#eaa3756d2770165a24995edaeaefa8341b91231f"
-  dependencies:
-    "@lucca-front/icons" "^1.1.0-beta.0"
-
 "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"
