@@ -32,6 +32,10 @@
 	white-space: nowrap;
 }
 
+.lu-select-value {
+	display: none;
+}
+
 .lu-select-suffix {
 	position: absolute;
 	bottom: 0.45rem;
@@ -84,12 +88,6 @@
 			display: none;
 		}
 	}
-
-	&.is-filled {
-		.lu-select-value {
-			opacity: 1;
-		}
-	}
 }
 
 :host-context(.textfield.mod-material .textfield-input.is-focused) {
@@ -105,5 +103,8 @@
 :host-context(.textfield-input.is-filled) {
 	.lu-select-placeholder {
 		display: none;
+	}
+	.lu-select-value {
+		display: block;
 	}
 }

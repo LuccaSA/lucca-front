@@ -6,18 +6,14 @@
 	padding: 0.5rem;
 	transition: background 50ms ease;
 
-	&:hover {
-		background: _theme('commons.background.dark');
-	}
-
-	&.is-focus {
+	&:hover, &.is-highlighted, &.is-focus{
 		background: _theme('commons.background.dark');
 	}
 }
 
 :host-context(.lu-select-value) {
 	padding: 0;
-	&:hover, &.is-focus {
+	&:hover, &.is-focus, &.is-highlighted {
 		background: inherit;
 	}
 }
