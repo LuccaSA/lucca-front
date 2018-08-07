@@ -63,6 +63,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
+			_renderer,
 		);
 	}
 
