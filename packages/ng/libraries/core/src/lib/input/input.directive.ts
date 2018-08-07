@@ -16,7 +16,7 @@ import { ALuInput } from './input.model';
 		},
 	],
 })
-export class LuInputDirective<T> extends ALuInput<T> {
+export class LuInputDirective<T = any> extends ALuInput<T> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _elementRef: ElementRef,
