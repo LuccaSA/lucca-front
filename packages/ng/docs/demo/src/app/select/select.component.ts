@@ -14,9 +14,9 @@ declare var require: any;
 })
 export class DemoSelectComponent implements OnInit {
 	snippets = {
-		simple: {
-			code: require('!!prismjs-loader?lang=typescript!./simple-select/simple-select.component'),
-			markup: require('!!prismjs-loader?lang=markup!./simple-select/simple-select.component.html'),
+		basic: {
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
 	};
 	constructor() {}

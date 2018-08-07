@@ -8,14 +8,14 @@ import { LuUserSelectModule } from './select/index';
 	imports: [
 		LuUserDisplayModule,
 		LuUserPictureModule,
-		LuUserSelectModule,
 		LuUserTileModule,
+		LuUserSelectModule,
 	],
 	exports: [
 		LuUserDisplayModule,
-		LuUserSelectModule,
 		LuUserPictureModule,
 		LuUserTileModule,
+		LuUserSelectModule,
 	],
 })
 export class LuUserModule {}

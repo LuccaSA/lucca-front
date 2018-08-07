@@ -1,0 +1,23 @@
+@import 'theming';
+
+:host {
+	display: block;
+	cursor: pointer;
+	padding: 0.5rem;
+	transition: background 50ms ease;
+
+	&:hover {
+		background: _theme('commons.background.dark');
+	}
+
+	&.is-focus {
+		background: _theme('commons.background.dark');
+	}
+}
+
+:host-context(.lu-select-value) {
+	padding: 0;
+	&:hover, &.is-focus {
+		background: inherit;
+	}
+}

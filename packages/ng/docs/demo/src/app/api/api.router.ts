@@ -1,5 +1,5 @@
 import { Routes, Route } from '@angular/router';
-import { DemoApiSelectComponent } from './api-select/api-select.component';
+import { DemoApiSelectComponent } from './select/api-select.component';
 
 export const apiRoutes: Routes = [
 	{
@@ -11,7 +11,6 @@ export const apiRoutes: Routes = [
 				label: 'Select',
 				component: DemoApiSelectComponent,
 			} as Route,
-
 			{ path: '', redirectTo: 'select', pathMatch: 'full' },
 		],
 	} as Route,

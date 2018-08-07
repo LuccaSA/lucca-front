@@ -1,0 +1,27 @@
+<section class="contentSection">
+	<h3>Api pager</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="user" class="textfield-input">
+			<lu-option-picker>
+				<lu-api-pager api="/api/v3/users"></lu-api-pager>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">users</label>
+	</div>
+	<code class="code mod-block">{{ user | json }}</code>
+	<div class="textfield">
+		<lu-select [(ngModel)]="role" class="textfield-input">
+			<lu-option-picker>
+				<lu-api-pager api="/api/v3/roles"></lu-api-pager>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">role</label>
+	</div>
+	<code class="code mod-block">{{ role | json }}</code>
+</section>

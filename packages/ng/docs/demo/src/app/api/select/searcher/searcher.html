@@ -1,0 +1,43 @@
+<section class="contentSection">
+	<h3>Api paged searcher</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="section" class="textfield-input">
+			<lu-option-picker>
+				<lu-api-paged-searcher api="/api/v3/axissections"></lu-api-paged-searcher>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">axis section</label>
+	</div>
+	<code class="code mod-block">{{ section | json }}</code>
+</section>
+<section class="contentSection">
+	<h3>Api searcher</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="department" class="textfield-input">
+			<lu-option-picker>
+				<lu-api-searcher api="/api/v3/departments"></lu-api-searcher>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">department</label>
+	</div>
+	<code class="code mod-block">{{ department | json }}</code>
+	<div class="textfield">
+		<lu-select [(ngModel)]="le" class="textfield-input">
+			<lu-option-picker>
+				<lu-api-searcher api="/api/v3/legalentities"></lu-api-searcher>
+				<lu-options>
+					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
+				</lu-options>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">legal entity</label>
+	</div>
+	<code class="code mod-block">{{ le | json }}</code>
+</section>
+

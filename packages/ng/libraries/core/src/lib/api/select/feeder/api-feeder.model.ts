@@ -1,120 +1,48 @@
+import { ILuOptionOperator } from '../../../option/index';
+import { IApiItem, IApiCollectionResponse } from '../../api.model';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-/**
- * Interface that define how to fill a select based on an API
- */
-export interface IApiSelectFeeder<T> {
-	/**
-	 * Return a list of Items according to the clue (and external parameters)
-	 *
-	 * @param clue the search clue
-	 */
-	getItems(clue: string): Observable<T[]>;
 
-	/**
-	 * Return the text to display (on option list and in the text area)
-	 * @param item The item to transform into string
-	 */
-	textValue(item: T): string;
-
-	/**
-	 * Return true if the api as a paging mecanism => then it will be cast to ISelectApiFeederWithPaging
-	 */
-	isPaged(): boolean;
-
-	length(): number;
-
-	getAllEntities(): Observable<T[]>;
+export interface ILuApiOptionFeeder<T extends IApiItem = IApiItem> extends ILuOptionOperator<T> {}
+export interface ILuApiFeederService<T extends IApiItem = IApiItem> {
+	getAll(): Observable<T[]>;
 }
 
-/**
- * Interface to add paging behaviour to feeder
- */
-export interface IApiSelectFeederWithPaging<T> extends IApiSelectFeeder<T> {
-	/**
-	 * Reset the paging indicator
-	 */
-	resetPagingStart();
-
-	/**
-	 * Give the paging step of api
-	 */
-	getPagingStep(): number;
-
-	/**
-	 * Return a list of Items according to the clue (and external parameters)
-	 * It's recommand to increment after each call of this method the paging
-	 *
-	 * @param clue the search clue
-	 * @param pagingStart the start paging number
-	 * @param pagingStep the paging size
-	 */
-	getPagedItems(
-		clue: string,
-		pagingStart: number,
-		pagingStep: number,
-	): Observable<T[]>;
+export abstract class ALuApiOptionFeeder<T extends IApiItem = IApiItem, S extends ILuApiFeederService<T> =  ILuApiFeederService<T>>
+implements ILuApiOptionFeeder<T> {
+	outOptions$ = new BehaviorSubject<T[]>([]);
+	protected _service: S;
+	constructor(service: S) {
+		this._service = service;
+	}
+	onOpen() {
+		this._service.getAll()
+		.subscribe(items => this.outOptions$.next(items));
+	}
 }
 
-/**
- * Abstract class that propose an implementation of Lucca RDD Api for the interface ISelectApiFeeder
- */
-@Injectable()
-export abstract class ALuApiSelectFeederWithPaging<T>
-	implements IApiSelectFeederWithPaging<T> {
-	_pagingStart = undefined;
+export abstract class ALuApiFeederService<T extends IApiItem = IApiItem> implements ILuApiFeederService<T> {
+	protected _api: string;
+	set api(api: string) { this._api = api; }
+	protected _fields = 'fields=id,name';
+	set fields(fields: string) { this._fields = `fields=${fields}`; }
+	protected _filters: string[] = [];
+	set filters(filters: string[]) { this._filters = filters; }
+	protected _orderBy = 'orderBy=name,asc';
+	set orderBy(orderBy: string) { this._orderBy = `orderBy=${orderBy}`; }
+	protected _transformFn = (item: any) => item as T;
+	set transformFn(transformFn: (item: any) => T) { this._transformFn = transformFn; }
 
-	constructor() {}
-
-	/**
-	 * See ISelectApiFeeder
-	 */
-	getItems(clue: string): Observable<T[]> {
-		if (this._pagingStart === undefined) {
-			this._pagingStart = 0;
-		} else {
-			this._pagingStart += this.getPagingStep();
-		}
-
-		return this.getPagedItems(clue, this._pagingStart, this.getPagingStep());
+	get url() {
+		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter(f => !!f).join('&')}`;
 	}
-
-	/**
-	 * See ISelectApiFeeder
-	 */
-	resetPagingStart() {
-		this._pagingStart = undefined;
+	constructor(protected http: HttpClient) {}
+	getAll(): Observable<T[]> {
+		return this._get(this.url);
 	}
-
-	/**
-	 * See ISelectApiFeeder
-	 */
-	isPaged(): boolean {
-		return true;
+	protected _get(url): Observable<T[]> {
+		return this.http.get<IApiCollectionResponse<any>>(url)
+		.map(response => response.data.items.map(i => this._transformFn(i)));
 	}
-
-	/**
-	 * See ISelectApiFeeder
-	 */
-	abstract textValue(item: T): string;
-
-	/**
-	 * Give the paging step of api
-	 * See ISelectApiFeederWithPaging
-	 */
-	abstract getPagingStep(): number;
-
-	/**
-	 * See ISelectApiFeederWithPaging
-	 */
-	abstract getPagedItems(
-		clue: string,
-		pagingStart: number,
-		pagingStep: number,
-	): Observable<T[]>;
-
-	abstract length(): number;
-
-	abstract getAllEntities(): Observable<T[]>;
 }

@@ -1,0 +1,13 @@
+<div class="lu-select-placeholder"></div>
+<div class="lu-select-value">
+	{{ value | luUserDisplay }}
+</div>
+<div class="lu-select-suffix">
+	<lu-select-clearer></lu-select-clearer>
+</div>
+<lu-option-picker>
+	<lu-user-paged-searcher></lu-user-paged-searcher>
+	<lu-options>
+		<lu-option *luDisplayer="let user" [value]="user">{{ user | luUserDisplay: searchFormat }}</lu-option>
+	</lu-options>
+</lu-option-picker>

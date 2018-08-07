@@ -1,4 +1,3 @@
-<lu-user-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
-	<lu-select-clearer #clearer="luSelectClearer" *ngIf="!to.required"></lu-select-clearer>
+<lu-user-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" (focus)="focus()" (blur)="blur()">
 </lu-user-select>
 <label [attr.for]="id" class="textfield-label">{{ to.label }}</label>

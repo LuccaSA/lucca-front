@@ -13,15 +13,15 @@
 			To test this component you might need to redirect all xhr requests to one of your local website.
 		</div>
 		<div class="textfield mod-material mod-inline">
-			<input class="textfield-input" [(ngModel)]="url" name="url" luEmpty>
+			<input class="textfield-input" [(ngModel)]="url" name="url" luInput>
 			<label class="textfield-label" for="url">Url</label>
 		</div>
 		<div class="textfield mod-material mod-inline">
-			<input class="textfield-input" [(ngModel)]="login" name="login" luEmpty>
+			<input class="textfield-input" [(ngModel)]="login" name="login" luInput>
 			<label class="textfield-label" for="login">login</label>
 		</div>
 		<div class="textfield mod-material mod-inline">
-			<input class="textfield-input" [(ngModel)]="password" name="password" luEmpty type="password">
+			<input class="textfield-input" [(ngModel)]="password" name="password" luInput type="password">
 			<label class="textfield-label" for="password">password</label>
 		</div>
 		<button class="button" (click)="connect()" [ngClass]="{'is-loading': loading}">Connect</button>

@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
-import { LuSelectModule } from '../../select/index';
-import { LuApiSelectPickerModule } from './picker/index';
-import { LuApiSelect } from './api-select.component';
+import { LuApiFeederModule } from './feeder/index';
+import { LuApiSearcherModule } from './searcher/index';
+import { LuApiPagerModule } from './pager/index';
+import { LuApiSelectInputModule } from './input/api-select-input.module';
 
 @NgModule({
 	imports: [
-		CommonModule,
-		FormsModule,
-		BrowserModule,
-		OverlayModule,
-		HttpClientModule,
-		LuApiSelectPickerModule,
-		LuSelectModule,
+		LuApiFeederModule,
+		LuApiSearcherModule,
+		LuApiPagerModule,
+		LuApiSelectInputModule,
 	],
-	declarations: [LuApiSelect],
-	exports: [LuApiSelect, LuApiSelectPickerModule],
+	exports: [
+		LuApiFeederModule,
+		LuApiSearcherModule,
+		LuApiPagerModule,
+		LuApiSelectInputModule,
+	],
 })
 export class LuApiSelectModule {}

@@ -1,26 +1,9 @@
 <section class="contentSection">
-	<div class="textfield mod-material">
-		<lu-user-select [(ngModel)]="userSelect"
-			class="textfield-input"
-			placeholder="placeholder"
-			name="itemOptions">
-			<lu-select-clearer></lu-select-clearer>
-		</lu-user-select>
+	<h3>Component basic</h3>
+	<div class="textfield">
+		<lu-user-select [(ngModel)]="user" class="textfield-input"></lu-user-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
-	<code class="code mod-block">{{ userSelect | json }}</code>
-</section>
-
-<section class="contentSection">
-	<div class="textfield mod-material">
-		<lu-user-select [(ngModel)]="userSelectMultiple"
-			class="textfield-input"
-			placeholder="placeholder"
-			multiple="true"
-			name="itemOptions">
-			<lu-select-clearer></lu-select-clearer>
-		</lu-user-select>
-		<label class="textfield-label" for="itemOptions">my label</label>
-	</div>
-	<code class="code mod-block">{{ userSelectMultiple | json }}</code>
+	<!-- <code class="code mod-block">{{ user | json }}</code> -->
+	<lu-user-tile [user]="user"></lu-user-tile>
 </section>
