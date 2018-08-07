@@ -7,7 +7,8 @@ import {
 	ElementRef,
 	HostListener,
 	ViewChild,
-	Input
+	Input,
+	Renderer2
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -51,6 +52,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
+		protected _renderer: Renderer2,
 		protected _service: ALuApiPagedSearcherService<T>,
 	) {
 		super(
@@ -58,6 +60,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
+			_renderer,
 		);
 	}
 

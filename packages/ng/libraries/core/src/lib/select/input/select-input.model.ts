@@ -2,20 +2,22 @@ import {
 	ChangeDetectorRef,
 	ViewContainerRef,
 	ElementRef,
+	Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ILuClearer } from '../../input/index';
+import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ILuClearer, ILuInput } from '../../input/index';
 
 export abstract class ALuSelectInput<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
 extends ALuPopoverTrigger<P>
-implements ControlValueAccessor, ILuInputWithPicker<T> {
+implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
+		protected _renderer: Renderer2,
 	) {
 		super(
 			_overlay,
@@ -38,6 +40,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	set value(value: T) {
 		this._value = value;
 		this.render();
+		this.applyClasses();
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
@@ -54,7 +57,16 @@ implements ControlValueAccessor, ILuInputWithPicker<T> {
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
-
+	protected isEmpty() {
+		return this.value === null || this.value === undefined;
+	}
+	protected applyClasses() {
+		if (this.isEmpty()) {
+			this._renderer.removeClass(this._elementRef.nativeElement, 'is-filled');
+		} else {
+			this._renderer.addClass(this._elementRef.nativeElement, 'is-filled');
+		}
+	}
 	/**
 	 * popover trigger class extension
 	 */
