@@ -149,9 +149,11 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T>, AfterViewIn
 				break;
 			case UP_ARROW:
 				this._decrHighlight();
+				event.preventDefault();
 				break;
 			case DOWN_ARROW:
 				this._incrHighlight();
+				event.preventDefault();
 				break;
 		}
 	}
