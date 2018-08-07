@@ -1,10 +1,13 @@
+<div class="lu-select-placeholder"></div>
+<div class="lu-select-value">
+	{{ value?.name }}
+</div>
+<div class="lu-select-suffix">
+	<lu-select-clearer></lu-select-clearer>
+</div>
 <lu-option-picker>
 	<lu-api-paged-searcher></lu-api-paged-searcher>
 	<lu-options>
 		<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
 	</lu-options>
 </lu-option-picker>
-<lu-select-clearer></lu-select-clearer>
-<div class="select-value">
-	{{ value?.name }}
-</div>

@@ -1,0 +1,109 @@
+@import 'theming';
+@import '~@lucca-front/icons/src/_mixins';
+
+:host {
+	cursor: pointer;
+	outline: none;
+	padding: 0;
+	height: 2em; //temp until we have display
+
+	&::after {
+		bottom: 0.55rem;
+		color: _color('text.light');
+		@include makeIcon('arrow_south');
+		font-size: 0.75rem;
+		pointer-events: none;
+		position: absolute;
+		right: _component('textfield.input.padding-horizontal');
+	}
+}
+.lu-select-placeholder {
+	color: _color('text.placeholder');
+}
+.lu-select-value, .lu-select-placeholder {
+	line-height: 1;
+	height: 2rem;
+	overflow: hidden;
+	padding: _component('textfield.input.padding-vertical') 1.5rem
+		_component('textfield.input.padding-vertical')
+		_component('textfield.input.padding-horizontal');
+	text-overflow: ellipsis;
+	transition: all _theme('commons.animations.durations.standard') ease;
+	white-space: nowrap;
+}
+
+.lu-select-suffix {
+	position: absolute;
+	bottom: 0.45rem;
+	right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
+}
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// Framed
+:host-context(.textfield.mod-framed) {
+	padding: _component('textfield.framed.top-padding') 0 0;
+
+	&::after {
+		bottom: 0.95rem;
+		right: _component('textfield.framed.side-padding');
+	}
+
+	.lu-select-value, .lu-select-placeholder {
+		padding: 0 calc(#{_component('textfield.framed.side-padding')} * 3)
+			_component('textfield.framed.bottom-padding')
+			_component('textfield.framed.side-padding');
+	}
+
+
+	.lu-select-suffix {
+		bottom: 0.85rem;
+		right: calc(3.75 * #{_component('textfield.input.padding-horizontal')});
+	}
+}
+
+// Material
+:host-context(.textfield.mod-material) {
+	&::after {
+		bottom: 0.6rem;
+		right: 0;
+	}
+
+	.lu-select-value, .lu-select-placeholder {
+		padding-left: 0;
+		padding-right: 0.8rem;
+	}
+
+	.lu-select-suffix {
+		right: calc(2 * #{_component('textfield.input.padding-horizontal')});
+	}
+
+
+	&.is-select {
+		.lu-select-placeholder {
+			display: none;
+		}
+	}
+
+	&.is-filled {
+		.lu-select-value {
+			opacity: 1;
+		}
+	}
+}
+
+:host-context(.textfield.mod-material .textfield-input.is-focused) {
+	.lu-select-placeholder {
+		display: none;
+	}
+}
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// Filled
+:host-context(.textfield-input.is-filled) {
+	.lu-select-placeholder {
+		display: none;
+	}
+}

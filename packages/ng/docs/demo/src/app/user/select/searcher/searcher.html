@@ -1,7 +1,7 @@
 <section class="contentSection">
 	<h3>user paged searcher</h3>
 	<div class="textfield">
-		<lu-select [(ngModel)]="user" class="textfield-input">
+		<lu-select [(ngModel)]="user" class="textfield-input" luEmpty>
 			<lu-option-picker>
 				<lu-user-paged-searcher></lu-user-paged-searcher>
 				<lu-options>
@@ -13,7 +13,7 @@
 	</div>
 	<code class="code mod-block">{{ user | json }}</code>
 	<div class="textfield">
-		<lu-select [(ngModel)]="consultant" class="textfield-input">
+		<lu-select [(ngModel)]="consultant" class="textfield-input" luEmpty>
 			<lu-option-picker>
 				<lu-user-paged-searcher [filters]="filters"></lu-user-paged-searcher>
 				<lu-options>
@@ -25,7 +25,7 @@
 	</div>
 	<code class="code mod-block">{{ consultant | json }}</code>
 	<div class="textfield">
-		<lu-select [(ngModel)]="tile" class="textfield-input">
+		<lu-select [(ngModel)]="tile" class="textfield-input" luEmpty>
 			<lu-option-picker>
 				<lu-user-paged-searcher [fields]="fields"></lu-user-paged-searcher>
 				<lu-options>
