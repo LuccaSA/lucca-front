@@ -18,6 +18,7 @@ import {
 	ChangeDetectorRef,
 	OnInit,
 	AfterViewInit,
+	Input,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -58,6 +59,10 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
 implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T>, AfterViewInit {
+	@Input('overlap-trigger')
+	set inputOverlapTrigger(v: boolean) {
+		this.overlapTrigger = v;
+	}
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
