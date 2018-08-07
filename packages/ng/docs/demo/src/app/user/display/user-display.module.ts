@@ -6,7 +6,7 @@ import { LuUserDisplayModule } from '@lucca-front/ng';
 
 import { SharedModule } from '../../shared';
 import { BasicComponent } from './basic/basic.component';
-import { LuEmptyModule, LuSelectModule } from '@lucca-front/ng';
+import { LuSelectModule, LuInputModule, LuOptionModule } from '@lucca-front/ng';
 
 @NgModule({
 	imports: [
@@ -14,8 +14,9 @@ import { LuEmptyModule, LuSelectModule } from '@lucca-front/ng';
 		FormsModule,
 		LuUserDisplayModule,
 		SharedModule,
-		LuEmptyModule,
 		LuSelectModule,
+		LuInputModule,
+		LuOptionModule,
 	],
 	declarations: [DemoUserDisplayComponent, BasicComponent],
 	exports: [DemoUserDisplayComponent, BasicComponent],

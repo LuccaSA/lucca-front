@@ -1,10 +1,10 @@
 <div class="textfield mod-material">
 
-	<!-- <lu-select class="textfield-input" [(ngModel)]="selectedFormat" luEmpty>
-		<lu-select-option *ngFor="let format of availableFormats" [luOptionValue]="format">
-			{{format}}
-		</lu-select-option>
-	</lu-select> -->
+	<lu-select class="textfield-input" [(ngModel)]="selectedFormat" luInput>
+		<lu-option-picker>
+			<lu-option *ngFor="let format of availableFormats" [value]="format">{{format}}</lu-option>
+		</lu-option-picker>
+	</lu-select>
 	<label class="textfield-label">Format</label>
 </div>
 

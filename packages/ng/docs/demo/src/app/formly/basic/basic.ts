@@ -57,19 +57,19 @@ export class BasicComponent {
 				placeholder: 'enter your life journey',
 			},
 		},
-		{
-			key: 'gender',
-			type: 'autocomplete',
-			templateOptions: {
-				label: 'gender - autocomplete',
-				placeholder: 'choose well',
-				options: [
-					{ id: 0, name: 'female' },
-					{ id: 1, name: 'male' },
-					{ id: 2, name: 'other' },
-				],
-			},
-		},
+		// {
+		// 	key: 'gender',
+		// 	type: 'autocomplete',
+		// 	templateOptions: {
+		// 		label: 'gender - autocomplete',
+		// 		placeholder: 'choose well',
+		// 		options: [
+		// 			{ id: 0, name: 'female' },
+		// 			{ id: 1, name: 'male' },
+		// 			{ id: 2, name: 'other' },
+		// 		],
+		// 	},
+		// },
 		{
 			key: 'orientation',
 			type: 'select',

@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { LuEmptyModule } from '@lucca-front/ng';
 
 import { RedirectComponent } from './redirect.component';
 import { RedirectService, RedirectEnvironment } from './redirect.service';
 import { RedirectInterceptor } from './redirect.interceptor';
 
 @NgModule({
-	imports: [CommonModule, FormsModule, LuEmptyModule, HttpClientModule],
+	imports: [CommonModule, FormsModule, HttpClientModule],
 	declarations: [RedirectComponent],
 	exports: [RedirectComponent],
 	providers: [

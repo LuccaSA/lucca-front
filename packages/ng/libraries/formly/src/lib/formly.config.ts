@@ -3,7 +3,6 @@ import { ConfigOption } from '@ngx-formly/core';
 import { LuFormlyFieldInput } from './types/input';
 import { LuFormlyFieldDate } from './types/date';
 import { LuFormlyFieldTextarea } from './types/textarea';
-import { LuFormlyFieldAutocomplete } from './types/autocomplete';
 import { LuFormlyFieldSelect } from './types/select';
 import { LuFormlyFieldUser } from './types/user';
 // wrappers
@@ -26,7 +25,6 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyFieldInput,
 	LuFormlyFieldDate,
 	LuFormlyFieldTextarea,
-	LuFormlyFieldAutocomplete,
 	LuFormlyFieldSelect,
 	LuFormlyFieldUser,
 
@@ -58,11 +56,6 @@ export const LU_FORMLY_CONFIG = {
 			wrappers: ['textfield-layout'],
 		},
 		{
-			name: 'autocomplete',
-			component: LuFormlyFieldAutocomplete,
-			wrappers: ['textfield-layout'],
-		},
-		{
 			name: 'select',
 			component: LuFormlyFieldSelect,
 			wrappers: ['textfield-layout'],
@@ -75,7 +68,6 @@ export const LU_FORMLY_CONFIG = {
 	],
 	wrappers: [
 		{ name: 'title', component: LuFormlyWrapperTitle },
-		// { name: 'label', component: LuFormlyWrapperLabel }, // label added to templates for technical reasons
 		{ name: 'helper', component: LuFormlyWrapperHelper },
 		{ name: 'textfield-layout', component: LuFormlyWrapperTextfieldLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },
@@ -91,6 +83,5 @@ export const LU_FORMLY_CONFIG = {
 		{ class: TemplateHelper, method: 'run' }, // fourth
 		{ class: TemplateSuffix, method: 'run' }, // third
 		{ class: TemplateIcon, method: 'run' }, // second
-		// { class: TemplateLabel, method: 'run' }, // first
 	],
 } as ConfigOption;
