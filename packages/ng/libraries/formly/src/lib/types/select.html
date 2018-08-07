@@ -1,4 +1,4 @@
-<lu-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" luEmpty (focus)="focus()" (blur)="blur()">
+<lu-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" (focus)="focus()" (blur)="blur()">
 	<lu-option-picker>
 		<lu-option *ngFor="let option of _options" [value]="option">
 			{{ option.name }}
