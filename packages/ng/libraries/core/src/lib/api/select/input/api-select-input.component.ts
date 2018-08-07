@@ -20,7 +20,7 @@ import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../search
 @Component({
 	selector: 'lu-api-select',
 	templateUrl: './api-select-input.component.html',
-	styleUrls: ['./api-select-input.component.scss'],
+	styleUrls: ['../../../select/input/select-input.common.scss', './api-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
