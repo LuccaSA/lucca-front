@@ -5,26 +5,26 @@ import { LuSelectModule } from './select/index';
 import { LuOptionModule } from './option/index';
 import { LuScrollModule } from './scroll/index';
 import { LuApiModule } from './api/index';
-import { LuEmptyModule } from './empty/index';
+import { LuInputModule } from './input/index';
 
 @NgModule({
 	imports: [
-		LuEmptyModule,
 		LuUserModule,
 		LuPopoverModule,
 		LuSelectModule,
 		LuOptionModule,
 		LuScrollModule,
 		LuApiModule,
+		LuInputModule,
 	],
 	exports: [
-		LuEmptyModule,
 		LuUserModule,
 		LuPopoverModule,
 		LuSelectModule,
 		LuOptionModule,
 		LuScrollModule,
 		LuApiModule,
+		LuInputModule,
 	],
 })
 export class LuModule {}
