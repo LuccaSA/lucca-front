@@ -13,7 +13,7 @@ export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 
 export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	private __operators;
-	private __subs = new Subscription();
+	protected _subs = new Subscription();
 	onSelectValue: Observable<T>;
 	setValue(value: T) {}
 	constructor() {
@@ -22,7 +22,7 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	}
 	protected set _optionItems$(optionItems$: Observable<ILuOptionItem<T>[]>) {
 		const singleFlow$ = optionItems$.map(items => merge(...items.map(i => i.onSelect))).mergeMap(item => item);
-		this.__subs.add(
+		this._subs.add(
 			singleFlow$
 			.subscribe((value: T) => this._select(value))
 		);
@@ -44,18 +44,14 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	}
 	protected abstract _select(val: T);
 	protected destroy() {
-		this.__subs.unsubscribe();
+		this._subs.unsubscribe();
 	}
 	_handleKeydown(event: KeyboardEvent) {
+		event.preventDefault();
 		switch (event.keyCode) {
 			case ESCAPE:
 				this.onClose();
 				return;
-			default:
-				this.__operators.forEach(o => {
-					if (!o.onKeydown) { return; }
-					o.onKeydown(event.keyCode);
-				});
 		}
 	}
 	onOpen() {

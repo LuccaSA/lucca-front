@@ -135,7 +135,8 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	/** Opens the popover. */
 	openPopover(): void {
 		if (!this._popoverOpen && !this._halt) {
-			this._createOverlay().attach(this._portal);
+			this._createOverlay();
+			this._overlayRef.attach(this._portal);
 
 			/** Only subscribe to backdrop if trigger event is click */
 			if (this.popover.triggerEvent === 'click') {
@@ -216,6 +217,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	 */
 	protected _initPopover(): void {
 		this._setIsPopoverOpen(true);
+		this.popover.keydownEvents$ = this._overlayRef.keydownEvents();
 	}
 
 	/**
