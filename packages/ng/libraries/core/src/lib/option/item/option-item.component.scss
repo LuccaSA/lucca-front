@@ -13,6 +13,8 @@
 
 :host-context(.lu-select-value) {
 	padding: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	&:hover, &.is-focus, &.is-highlighted {
 		background: inherit;
 	}
