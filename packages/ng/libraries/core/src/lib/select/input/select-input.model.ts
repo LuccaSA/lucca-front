@@ -25,6 +25,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 			_viewContainerRef,
 		);
 	}
+	protected _placeholder: string;
+	get placeholder() { return this._placeholder; }
 	/**
 	 * contriol value accessor interface implementation
 	 */

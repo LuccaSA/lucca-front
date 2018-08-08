@@ -9,6 +9,8 @@ export interface ILuInputWithPicker<TValue = any, TPanel extends ILuPickerPanel<
 extends ILuInput<TValue>, ControlValueAccessor, ILuPopoverTrigger<TPanel> {}
 
 export abstract class ALuInput<T = any> implements ILuInput<T> {
+	protected _placeholder: string;
+	get placeholder() { return this._placeholder; }
 	protected _value: T;
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,

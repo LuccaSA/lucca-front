@@ -44,7 +44,7 @@ export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOp
 extends ALuSelectInput<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U> {
 	searchFormat = LuDisplayFullname.lastfirst;
-	@Input() placeholder: string;
+	@Input() set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
