@@ -1,6 +1,15 @@
 # Changelog
 
 ## In Dev
+### Breaking change
+- complete overhaul of the component `lu-select` and its sub components
+- removed `luEmpty` directive cuz `luInput` directive does the same but better
+
+### New features
+- :hammer: better modelisation of `input` and `picker` 
+- :hammer: myriad of interfaces and abstract classes to allow for easy overriding
+- :sparkles: select, select with operators, api-select, user-select
+- :sparkles: `luInput` directive that adds classes `is-filled` when ngmodel not empty (like luempty, but with potential growth)
 
 ## 1.0.1
 ### New features
