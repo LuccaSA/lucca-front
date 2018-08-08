@@ -1,5 +1,8 @@
 @import 'theming';
-
+:host {
+	display: block;
+	flex: 0 0 auto;
+}
 .textfield.mod-search {
 	width: 100%;
 }

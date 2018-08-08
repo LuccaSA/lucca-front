@@ -2,4 +2,6 @@
 	padding: 0;
 	max-height: 280px;
 	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
 }

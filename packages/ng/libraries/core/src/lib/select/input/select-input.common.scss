@@ -21,7 +21,7 @@
 	color: _color('text.placeholder');
 }
 .lu-select-value, .lu-select-placeholder {
-	line-height: 1;
+	line-height: 1.1;
 	height: 2rem;
 	overflow: hidden;
 	padding: _component('textfield.input.padding-vertical') 1.5rem
@@ -44,6 +44,24 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+:host(.mod-search) {
+	&::after {
+		@include makeIcon("search");
+		font-size: 1.4rem;
+		line-height: 2rem;
+		bottom: 0;
+	}
+
+	.lu-select-suffix {
+		right: calc(3.5 * #{_component('textfield.input.padding-horizontal')});
+	}
+}
+
+:host(.is-clearable) {
+	.lu-select-value lu-option {
+		padding-right: 1rem;
+	}
+}
 // Framed
 :host-context(.textfield.mod-framed) {
 	padding: _component('textfield.framed.top-padding') 0 0;
@@ -63,6 +81,15 @@
 	.lu-select-suffix {
 		bottom: 0.85rem;
 		right: calc(3.75 * #{_component('textfield.input.padding-horizontal')});
+	}
+
+	&.mod-search {
+		&::after {
+			bottom: .5rem;
+		}
+		.lu-select-suffix {
+			right: calc(4.8 * #{_component('textfield.input.padding-horizontal')});
+		}
 	}
 }
 
@@ -86,6 +113,15 @@
 	&.is-select {
 		.lu-select-placeholder {
 			display: none;
+		}
+	}
+
+	&.mod-search {
+		&::after {
+			bottom: 0;
+		}
+		.lu-select-suffix {
+			right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
 		}
 	}
 }
