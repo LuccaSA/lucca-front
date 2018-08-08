@@ -38,6 +38,8 @@ import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../search
 export class LuApiSelectInputComponent<T extends IApiItem = IApiItem, P extends ILuOptionPickerPanel<T> = ILuOptionPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T> {
+	@Input() placeholder: string;
+
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }

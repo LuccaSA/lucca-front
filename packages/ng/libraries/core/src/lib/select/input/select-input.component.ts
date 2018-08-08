@@ -12,6 +12,7 @@ import {
 	AfterViewInit,
 	ViewRef,
 	Renderer2,
+	Input,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -51,6 +52,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
 	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
 
+	@Input() placeholder: string;
 	constructor(
 		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
