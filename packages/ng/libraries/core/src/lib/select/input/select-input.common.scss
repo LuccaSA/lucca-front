@@ -16,6 +16,10 @@
 		position: absolute;
 		right: _component('textfield.input.padding-horizontal');
 	}
+	&[disabled] {
+		cursor: not-allowed;
+		pointer-events: none;
+	}
 }
 .lu-select-placeholder {
 	color: _color('text.placeholder');
