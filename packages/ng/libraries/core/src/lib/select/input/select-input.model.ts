@@ -32,6 +32,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	 */
 	protected _value: T;
 	setValue(value) {
+		if (this.disabled) {
+			return;
+		}
 		this.value = value;
 		this._cvaOnChange(value);
 		this._onTouched();
