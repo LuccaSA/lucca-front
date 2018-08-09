@@ -43,6 +43,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	protected _halt = false;
 	protected _backdropSubscription: Subscription;
 	protected _positionSubscription: Subscription;
+	protected _disabled: boolean;
 
 	protected _mouseoverTimer: any;
 
@@ -134,7 +135,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 
 	/** Opens the popover. */
 	openPopover(): void {
-		if (!this._popoverOpen && !this._halt) {
+		if (!this._popoverOpen && !this._halt && !this._disabled) {
 			this._createOverlay();
 			this._overlayRef.attach(this._portal);
 
