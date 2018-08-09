@@ -13,6 +13,7 @@ import {
 	ViewRef,
 	Renderer2,
 	Input,
+	HostBinding,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -68,6 +69,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			_renderer,
 		);
 	}
+	@HostBinding('class.is-disabled')
+	get isDisabled() { return this.disabled; }
 
 	/**
 	 * popover trigger class extension

@@ -59,6 +59,12 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
+	protected _disabled: boolean;
+	set disabled(d) { this._disabled = d; }
+	get disabled() { return this._disabled; }
+	setDisabledState(disabled: boolean) {
+		this.disabled = disabled;
+	}
 	protected isEmpty() {
 		return this.value === null || this.value === undefined;
 	}
