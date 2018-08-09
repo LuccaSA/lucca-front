@@ -5,6 +5,7 @@ import { ILuOptionItem } from '../item/index';
 import { ElementRef } from '@angular/core';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { ILuOptionOperator } from '../operator/index';
 import { ESCAPE } from '@angular/cdk/keycodes';
@@ -21,7 +22,10 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		this.triggerEvent = 'click';
 	}
 	protected set _optionItems$(optionItems$: Observable<ILuOptionItem<T>[]>) {
-		const singleFlow$ = optionItems$.map(items => merge(...items.map(i => i.onSelect))).mergeMap(item => item);
+		const singleFlow$ = optionItems$.switchMap(
+			items => merge(...items.map(i => i.onSelect))
+		)
+		// .mergeMap(item => item);
 		this._subs.add(
 			singleFlow$
 			.subscribe((value: T) => this._select(value))
