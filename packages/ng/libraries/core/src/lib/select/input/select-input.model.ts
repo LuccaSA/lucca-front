@@ -111,4 +111,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	}
 
 	protected abstract render();
+
+	// multiple
+	protected _multiple = false;
+	protected set multiple(m: boolean) {
+		this._multiple = m;
+		// this._picker.multiple = m;
+	}
 }
