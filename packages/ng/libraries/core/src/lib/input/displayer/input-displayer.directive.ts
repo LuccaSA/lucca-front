@@ -16,9 +16,6 @@ export class LuInputDisplayerDirective<T = any> implements ILuInputDisplayer<T> 
 	getViewRef(value: T): ViewRef {
 		return this.template.createEmbeddedView({ $implicit: value });
 	}
-	getElementRef(value: T): ElementRef {
-		return undefined;
-	}
 }
 
 export class LuInputDisplayerContext<T = any> {
