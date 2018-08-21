@@ -9,7 +9,7 @@ export interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
 	/**
 	 * emits when a value was selected on the picker
 	 */
-	onSelectValue: Observable<T>;
+	onSelectValue: Observable<T | T[]>;
 	/**
 	 * called to tell the picker what's the current value
 	 * @param value
@@ -18,6 +18,6 @@ export interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
 }
 export abstract class ALuPickerPanel<T = any> extends ALuPopoverPanel implements ILuPickerPanel<T> {
 	multiple: boolean;
-	onSelectValue: Observable<T>;
+	onSelectValue: Observable<T | T[]>;
 	abstract setValue(value: T | T[]): void;
 }

@@ -85,6 +85,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	 */
 	protected set _picker(picker: P) {
 		this.popover = picker;
+		picker.multiple = this._multiple;
 		this.subToPickerEvts();
 	}
 	protected get _picker() { return this.popover; }
@@ -116,6 +117,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	protected _multiple = false;
 	protected set multiple(m: boolean) {
 		this._multiple = m;
-		// this._picker.multiple = m;
+		this._picker.multiple = m;
 	}
 }

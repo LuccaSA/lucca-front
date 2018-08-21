@@ -58,9 +58,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		if (m === '') {
 			// allows to have multiple = true when writing
 			// <lu-select multiple>
-			this._multiple = true;
+			this.multiple = true;
 		} else {
-			this._multiple = !!m;
+			this.multiple = !!m;
 		}
 	}
 	constructor(

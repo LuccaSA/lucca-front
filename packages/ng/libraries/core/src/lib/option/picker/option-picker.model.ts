@@ -14,9 +14,9 @@ export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	private __operators;
 	protected _subs = new Subscription();
-	onSelectValue: Observable<T>;
-	protected _value: T;
-	setValue(value: T) {
+	onSelectValue: Observable<T | T[]>;
+	protected _value: T | T[];
+	setValue(value: T | T[]) {
 		this._value = value;
 		this._applySelected();
 	}
@@ -36,8 +36,24 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		);
 		this._subs.add(
 			singleFlow$
-			.subscribe((value: T) => this._select(value))
+			.subscribe((value: T) => this._updateValue(value))
 		);
+	}
+	protected _updateValue(value: T) {
+		if (!this.multiple) {
+			this._select(value);
+		} else {
+			const values = <T[]>this._value || [];
+			let newValues;
+			if (values.find(v => JSON.stringify(v) === JSON.stringify(value))) {
+				// value was present, we remove it
+				newValues = values.filter(v => JSON.stringify(v) !== JSON.stringify(value));
+			} else {
+				// value was absent, we add it
+				newValues = [...values, value];
+			}
+			this._select(newValues);
+		}
 	}
 	protected set _operators(operators: ILuOptionOperator<T>[]) {
 		this.__operators = operators;
@@ -54,7 +70,7 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			o.onScrollBottom();
 		});
 	}
-	protected abstract _select(val: T);
+	protected abstract _select(val: T | T[]);
 	protected abstract _applySelected();
 	protected destroy() {
 		this._subs.unsubscribe();
