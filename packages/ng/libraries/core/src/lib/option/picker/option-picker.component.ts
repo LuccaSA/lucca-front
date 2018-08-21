@@ -61,7 +61,6 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
-	setValue(value: T) {}
 	constructor(
 		protected _vcr: ViewContainerRef,
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -83,6 +82,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		this._operators = ql.toArray();
 	}
+
 	protected _select(val: T) {
 		this.onSelectValue.emit(val);
 		this._emitCloseEvent();
@@ -102,6 +102,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	onOpen() {
 		super.onOpen();
 		this.highlightIndex = 0;
+		this._applySelected();
 	}
 	@ViewChild(TemplateRef)
 	set vcTemplateRef(tr: TemplateRef<any>) {
@@ -167,6 +168,20 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
 			this._select(highlightedOption.value);
+		}
+	}
+	protected _applySelected() {
+		if (!this.optionsQLVR) { return; }
+		const selectedClass = 'is-selected';
+
+		const options = this.optionsQLVR.toArray();
+		// remove `is-selected` class from all other options
+		options.forEach(ovcr => this._renderer.removeClass(ovcr.element.nativeElement, selectedClass));
+
+		// add `is-selected` to all selected indexes
+		const selectedIndex = this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(this._value));
+		if (selectedIndex !== -1) {
+			this._renderer.addClass(options[selectedIndex].element.nativeElement, selectedClass);
 		}
 	}
 }

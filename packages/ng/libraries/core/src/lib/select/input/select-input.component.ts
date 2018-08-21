@@ -141,6 +141,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	ngAfterViewInit() {
 		this.render();
 		this.displayClearer();
+		this._picker.setValue(this.value);
 	}
 
 	// display clearer

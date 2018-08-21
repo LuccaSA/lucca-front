@@ -46,6 +46,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this._value = value;
 		this.render();
 		this.applyClasses();
+		if (!!this._picker) {
+			this._picker.setValue(value);
+		}
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
@@ -84,6 +87,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this.popover = picker;
 		this.subToPickerEvts();
 	}
+	protected get _picker() { return this.popover; }
 	protected set _clearer(clearer: C) {
 		if (!!clearer && !!clearer.onClear) {
 			clearer.onClear.subscribe(value => this.setValue(value));
