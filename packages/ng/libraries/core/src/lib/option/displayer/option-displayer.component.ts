@@ -23,5 +23,4 @@ export class LuOptionDisplayerComponent<T = any> extends ALuInputDisplayer<T> im
 		if (!this._template) { return undefined; }
 		return this._template.createEmbeddedView({ $implicit: value });
 	}
-	getElementRef(value: T) { return undefined; }
 }

@@ -49,16 +49,11 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 			provide: ALuPickerPanel,
 			useExisting: forwardRef(() => LuOptionPickerComponent),
 		},
-		{
-			provide: ALuInputDisplayer,
-			useExisting: forwardRef(() => LuOptionPickerComponent),
-			multi: true,
-		},
 	]
 })
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
-implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T>, AfterViewInit {
+implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@Input('overlap-trigger')
 	set inputOverlapTrigger(v: boolean) {
 		this.overlapTrigger = v;
@@ -84,10 +79,6 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T>, AfterViewIn
 			.do(o => this._options = o);
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
-	@ContentChildren(ALuInputDisplayer) displayers: QueryList<ILuInputDisplayer<T>>;
-	protected get _displayer() {
-		return this.displayers ? this.displayers.toArray()[1] : undefined;
-	}
 
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		this._operators = ql.toArray();
@@ -115,28 +106,6 @@ implements ILuOptionPickerPanel<T>, OnDestroy, ILuInputDisplayer<T>, AfterViewIn
 	@ViewChild(TemplateRef)
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
-	}
-	findElementRef(value: T): ElementRef {
-		// try to find the lo-option with the right value
-		const options = this._options || [];
-		const index = options.findIndex(oi => JSON.stringify(oi.value) === JSON.stringify(value));
-		if (index >= 0) {
-			const vcr = this.optionsQLVR.toArray()[index];
-			return vcr.element;
-		}
-		return undefined;
-	}
-	getElementRef(value): ElementRef {
-		if (!!this._displayer) {
-			return this._displayer.getElementRef(value);
-		}
-		return this.findElementRef(value);
-	}
-	getViewRef(value): ViewRef {
-		if (!!this._displayer) {
-			return this._displayer.getViewRef(value);
-		}
-		return undefined;
 	}
 
 	// keydown
