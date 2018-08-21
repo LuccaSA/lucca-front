@@ -48,12 +48,21 @@ export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPi
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	protected oldView;
-	protected oldElt;
+	protected oldViews;
 	protected displayer: ILuInputDisplayer<T>;
 	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
 	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input('multiple') set inputMultiple(m: boolean | string) {
+		if (m === '') {
+			// allows to have multiple = true when writing
+			// <lu-select multiple>
+			this._multiple = true;
+		} else {
+			this._multiple = !!m;
+		}
+	}
 	constructor(
 		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -108,15 +117,22 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 
 	protected render() {
-		this.renderAsView();
+		// if (this.useSingleView()) {
+			this.renderSingleView();
+		// } else {
+			// this.renderMultipleViews();
+		// }
 	}
+	// protected useSingleView() {
+	// 	return !this._multiple || !this.displayer.multiple;
+	// }
 
-	protected renderAsView() {
+	protected renderSingleView() {
 		const oldView = this.oldView;
 		this.clearView(oldView);
 		if (!!this.value) {
-			const newView = this.getNewView();
-			this.displayView(newView);
+			const newView = this.getNewSingleView();
+			this.displaySingleView(newView);
 			this.oldView = newView;
 		}
 	}
@@ -126,17 +142,27 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			this._displayContainer.remove(index);
 		}
 	}
-	protected getNewView() {
+	protected getNewSingleView() {
 		if (!!this.displayer) {
 			return this.displayer.getViewRef(this.value);
 		}
 		return undefined;
 	}
-	protected displayView(view) {
+	protected displaySingleView(view) {
 		if (!!view) {
 			this._displayContainer.insert(view);
 		}
 	}
+	// protected clearViews(views) {
+	// 	if (!!views) {
+	// 		views.forEach(view => {
+	// 			this.clearView(view);
+	// 		});
+	// 	}
+	// }
+	// protected renderMultipleViews() {
+		
+	// }
 
 	ngAfterViewInit() {
 		this.render();

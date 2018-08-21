@@ -1,8 +1,10 @@
-import { ViewRef, ElementRef } from '@angular/core';
+import { ViewRef } from '@angular/core';
 
 export interface ILuInputDisplayer<T = any> {
-	getViewRef(value: T): ViewRef;
+	multiple: boolean;
+	getViewRef(value: T | T[]): ViewRef;
 }
 export abstract class ALuInputDisplayer<T = any> implements ILuInputDisplayer<T> {
-	abstract getViewRef(value: T): ViewRef;
+	multiple = false;
+	abstract getViewRef(value: T | T[]): ViewRef;
 }

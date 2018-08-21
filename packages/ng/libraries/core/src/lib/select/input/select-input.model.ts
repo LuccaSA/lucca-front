@@ -30,8 +30,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	/**
 	 * contriol value accessor interface implementation
 	 */
-	protected _value: T;
-	setValue(value) {
+	protected _value: T | T[];
+	setValue(value: T | T[]) {
 		if (this.disabled) {
 			return;
 		}
@@ -39,10 +39,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this._cvaOnChange(value);
 		this._onTouched();
 	}
-	get value(): T {
+	get value(): T | T[] {
 		return this._value;
 	}
-	set value(value: T) {
+	set value(value: T | T[]) {
 		this._value = value;
 		this.render();
 		this.applyClasses();
@@ -52,11 +52,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
-	writeValue(value: T) {
+	writeValue(value: T | T[]) {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T) => {};
+	protected _cvaOnChange = (v: T | T[]) => {};
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}

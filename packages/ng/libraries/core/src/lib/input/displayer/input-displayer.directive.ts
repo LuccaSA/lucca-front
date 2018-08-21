@@ -11,13 +11,13 @@ import { ILuInputDisplayer, ALuInputDisplayer } from './input-displayer.model';
 		},
 	],
 })
-export class LuInputDisplayerDirective<T = any> implements ILuInputDisplayer<T> {
-	constructor(protected template: TemplateRef<LuInputDisplayerContext<T>>) {}
-	getViewRef(value: T): ViewRef {
+export class LuInputDisplayerDirective<T = any> extends ALuInputDisplayer<T> implements ILuInputDisplayer<T> {
+	constructor(protected template: TemplateRef<LuInputDisplayerContext<T>>) { super(); }
+	getViewRef(value: T | T[]): ViewRef {
 		return this.template.createEmbeddedView({ $implicit: value });
 	}
 }
 
 export class LuInputDisplayerContext<T = any> {
-	constructor(public $implicit: T) {}
+	constructor(public $implicit: T | T[]) {}
 }
