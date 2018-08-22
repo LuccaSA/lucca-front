@@ -16,8 +16,11 @@
 <section class="contentSection">
 	<h3>multiple</h3>
 	<div class="textfield">
-		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
-			<ng-container *luDisplayer="let values; multiple: true">{{values?.length}} items</ng-container>
+		<lu-select [(ngModel)]="colors" class="textfield-input" multiple>
+			<ng-container *luDisplayer="let values; multiple: true">{{values?.length}} colors</ng-container>
+			<!-- <ng-template luDisplayer multiple let-values>
+				{{values?.length}} colors
+			</ng-template> -->
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red">{{red.name}}</lu-option>
@@ -26,5 +29,5 @@
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
-	<code class="code mod-block">{{ items | json }}</code>
+	<code class="code mod-block">{{ colors | json }}</code>
 </section>

@@ -14,4 +14,5 @@ export class MultipleSelectComponent {
 	red =	{ id: 1, name: 'red' };
 	green = { id: 2, name: 'green' };
 	items = [this.red];
+	colors = [];
 }
