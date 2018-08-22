@@ -85,7 +85,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 	protected _select(val: T) {
 		this.onSelectValue.emit(val);
-		this._emitCloseEvent();
+		if (!this.multiple) {
+			this._emitCloseEvent();
+		}
 	}
 	ngOnDestroy() {
 		super.destroy();
