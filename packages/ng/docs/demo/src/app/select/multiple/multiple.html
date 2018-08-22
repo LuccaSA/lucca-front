@@ -13,3 +13,18 @@
 	</div>
 	<code class="code mod-block">{{ items | json }}</code>
 </section>
+<section class="contentSection">
+	<h3>multiple</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
+			<ng-container *luDisplayer="let values; multiple: true">{{values?.length}} items</ng-container>
+			<lu-option-picker>
+				<lu-option [value]="green">{{green.name}}</lu-option>
+				<lu-option [value]="red">{{red.name}}</lu-option>
+			</lu-option-picker>
+			<lu-select-clearer></lu-select-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ items | json }}</code>
+</section>
