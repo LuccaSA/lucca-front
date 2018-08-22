@@ -169,7 +169,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		const options = this._optionsQL ? this._optionsQL.toArray() : [];
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
-			this._select(highlightedOption.value);
+			this._updateValue(highlightedOption.value);
 		}
 	}
 	protected _applySelected() {
@@ -181,9 +181,18 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		options.forEach(ovcr => this._renderer.removeClass(ovcr.element.nativeElement, selectedClass));
 
 		// add `is-selected` to all selected indexes
-		const selectedIndex = this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(this._value));
-		if (selectedIndex !== -1) {
-			this._renderer.addClass(options[selectedIndex].element.nativeElement, selectedClass);
+		const selectedIndexes = [];
+		if (!this.multiple) {
+			const selectedIndex = this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(this._value));
+			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
+		} else {
+			const values = <T[]> this._value || [];
+			selectedIndexes.push(
+				...values
+				.map(v => this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(v)))
+				.filter(i => i !== -1)
+			);
 		}
+		selectedIndexes.forEach(i => this._renderer.addClass(options[i].element.nativeElement, selectedClass));
 	}
 }
