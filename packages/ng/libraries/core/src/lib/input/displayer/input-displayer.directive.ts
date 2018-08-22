@@ -15,7 +15,16 @@ export class LuInputDisplayerDirective<T = any> extends ALuInputDisplayer<T> imp
 	@Input('luDisplayerMultiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
 			// allows to have multiple = true when writing
-			// <ANY *luDisplayer="let value" multiple>
+			// <ng-template luDisplayer luDisplayerMultiple>
+			this.multiple = true;
+		} else {
+			this.multiple = !!m;
+		}
+	}
+	@Input('multiple') set inputMultipleBis(m: boolean | string) {
+		if (m === '') {
+			// allows to have multiple = true when writing
+			// <ng-template luDisplayer multiple>
 			this.multiple = true;
 		} else {
 			this.multiple = !!m;
