@@ -2,7 +2,7 @@
 	<h3>multiple</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
-			<!-- <ng-container *luDisplayer="let value">{{value.id}} - {{value.name}}</ng-container> -->
+			<ng-container *luDisplayer="let value">{{value.id}} - {{value.name}}</ng-container>
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red">{{red.name}}</lu-option>

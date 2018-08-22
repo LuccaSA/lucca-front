@@ -47,8 +47,6 @@ import { ALuSelectInput } from './select-input.model';
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-	protected oldView;
-	protected oldViews;
 	protected displayer: ILuInputDisplayer<T>;
 	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
 	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
@@ -117,52 +115,45 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 
 	protected render() {
-		// if (this.useSingleView()) {
+		if (!this.displayer) { return; }
+		if (this.useMultipleViews()) {
+			this.renderMultipleViews();
+		} else {
 			this.renderSingleView();
-		// } else {
-			// this.renderMultipleViews();
-		// }
+		}
 	}
-	// protected useSingleView() {
-	// 	return !this._multiple || !this.displayer.multiple;
-	// }
+	protected useMultipleViews() {
+		return this._multiple  && !this.displayer.multiple;
+	}
 
 	protected renderSingleView() {
-		const oldView = this.oldView;
-		this.clearView(oldView);
+		this.clearDisplay();
 		if (!!this.value) {
-			const newView = this.getNewSingleView();
-			this.displaySingleView(newView);
-			this.oldView = newView;
+			const newView = this.getView(this.value);
+			this.displayView(newView);
 		}
 	}
-	protected clearView(view) {
-		if (!!view) {
-			const index = this._displayContainer.indexOf(this.oldView);
-			this._displayContainer.remove(index);
-		}
+	protected clearDisplay() {
+		this._displayContainer.clear();
 	}
-	protected getNewSingleView() {
+	protected getView(value: T | T[]) {
 		if (!!this.displayer) {
-			return this.displayer.getViewRef(this.value);
+			return this.displayer.getViewRef(value);
 		}
 		return undefined;
 	}
-	protected displaySingleView(view) {
+	protected displayView(view) {
 		if (!!view) {
 			this._displayContainer.insert(view);
 		}
 	}
-	// protected clearViews(views) {
-	// 	if (!!views) {
-	// 		views.forEach(view => {
-	// 			this.clearView(view);
-	// 		});
-	// 	}
-	// }
-	// protected renderMultipleViews() {
-		
-	// }
+
+	protected renderMultipleViews() {
+		this.clearDisplay();
+		const values = <T[]>this.value || [];
+		const views = values.map(value => this.getView(value));
+		views.forEach(view => this.displayView(view));
+	}
 
 	ngAfterViewInit() {
 		this.render();
