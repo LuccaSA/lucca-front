@@ -1,4 +1,4 @@
-import { Directive, TemplateRef, forwardRef, ElementRef, ViewRef, EmbeddedViewRef } from '@angular/core';
+import { Directive, TemplateRef, forwardRef, ElementRef, ViewRef, EmbeddedViewRef, Input } from '@angular/core';
 import { ILuInputDisplayer, ALuInputDisplayer } from './input-displayer.model';
 
 @Directive({
@@ -12,6 +12,15 @@ import { ILuInputDisplayer, ALuInputDisplayer } from './input-displayer.model';
 	],
 })
 export class LuInputDisplayerDirective<T = any> extends ALuInputDisplayer<T> implements ILuInputDisplayer<T> {
+	@Input('luDisplayerMultiple') set inputMultiple(m: boolean | string) {
+		if (m === '') {
+			// allows to have multiple = true when writing
+			// <ANY *luDisplayer="let value" multiple>
+			this.multiple = true;
+		} else {
+			this.multiple = !!m;
+		}
+	}
 	constructor(protected template: TemplateRef<LuInputDisplayerContext<T>>) { super(); }
 	getViewRef(value: T | T[]): ViewRef {
 		return this.template.createEmbeddedView({ $implicit: value });
