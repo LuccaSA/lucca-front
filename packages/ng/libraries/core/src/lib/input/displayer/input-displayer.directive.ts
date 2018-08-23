@@ -12,16 +12,10 @@ import { ILuInputDisplayer, ALuInputDisplayer } from './input-displayer.model';
 	],
 })
 export class LuInputDisplayerDirective<T = any> extends ALuInputDisplayer<T> implements ILuInputDisplayer<T> {
-	@Input('luDisplayerMultiple') set inputMultiple(m: boolean | string) {
-		if (m === '') {
-			// allows to have multiple = true when writing
-			// <ng-template luDisplayer luDisplayerMultiple>
-			this.multiple = true;
-		} else {
-			this.multiple = !!m;
-		}
+	@Input('luDisplayerMultiple') set argMultiple(m: boolean) {
+		this.multiple = !!m;
 	}
-	@Input('multiple') set inputMultipleBis(m: boolean | string) {
+	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
 			// allows to have multiple = true when writing
 			// <ng-template luDisplayer multiple>
