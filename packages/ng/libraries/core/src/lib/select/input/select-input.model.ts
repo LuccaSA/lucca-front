@@ -3,11 +3,12 @@ import {
 	ViewContainerRef,
 	ElementRef,
 	Renderer2,
+	ViewRef,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ILuClearer, ILuInput, ILuInputDisplayer } from '../../input/index';
+import { ILuInputWithPicker, ILuPickerPanel, ILuClearer, ILuInput, ILuInputDisplayer } from '../../input/index';
 
 export abstract class ALuSelectInput<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
 extends ALuPopoverTrigger<P>
