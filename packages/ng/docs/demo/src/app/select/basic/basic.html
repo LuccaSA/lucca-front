@@ -13,18 +13,6 @@
 	</div>
 	<code class="code mod-block">{{ itemSelect | json }}</code>
 </section>
-<!-- <section class="contentSection">
-	<h3>Component basic</h3>
-	<div class="textfield">
-		<lu-select [(ngModel)]="number" class="textfield-input">
-			<lu-option-picker>
-				<lu-option *ngFor="let option of options$ | async" [value]="option">{{option?.name}}</lu-option>
-			</lu-option-picker>
-		</lu-select>
-		<label class="textfield-label" for="itemOptions">my label</label>
-	</div>
-	<code class="code mod-block">{{ number | json }}</code>
-</section> -->
 
 <section class="contentSection">
 	<h3>With operators</h3>
@@ -42,9 +30,6 @@
 				<!-- <ng-template luForOptions let-option>
 					<lu-option [value]="option">{{option.name}}</lu-option>
 				</ng-template> -->
-				<!-- <lu-options>
-					<lu-option *luDisplayer="let option" [value]="option">{{option.name}}</lu-option>
-				</lu-options> -->
 			</lu-option-picker>
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
