@@ -2,7 +2,7 @@
 	<h3>Component basic</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="itemSelect" class="textfield-input">
-			<!-- <lu-option *luDisplayer="let value" [value]="value">{{value.id}} - {{value.name}}</lu-option> -->
+			<ng-container *luDisplayer="let value">{{value.id}} - {{value.name}}</ng-container>
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red"><i class="lucca-icon">heart</i> {{red.name}}</lu-option>

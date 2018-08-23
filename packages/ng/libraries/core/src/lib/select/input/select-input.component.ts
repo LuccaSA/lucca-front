@@ -108,9 +108,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 
 	protected render() {
-		if (!this.renderAsView()) {
-			this.renderAsElt();
-		}
+		this.renderAsView();
 	}
 
 	protected renderAsView() {
@@ -120,9 +118,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			const newView = this.getNewView();
 			this.displayView(newView);
 			this.oldView = newView;
-			return !!newView;
 		}
-		return false;
 	}
 	protected clearView(view) {
 		if (!!view) {
@@ -142,33 +138,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		}
 	}
 
-	protected clearElt(elt) {
-		if (!!elt) {
-			this._renderer.removeChild(this._displayElt.nativeElement, elt);
-		}
-	}
-	protected getNewElt() {
-		if (!!this.displayer && !!this.displayer.getElementRef(this.value)) {
-			return this.displayer.getElementRef(this.value).nativeElement.cloneNode(true);
-		}
-		return undefined;
-	}
-	protected displayElt(elt) {
-		if (!!elt) {
-			this._renderer.appendChild(this._displayElt.nativeElement, elt);
-		}
-	}
-	protected renderAsElt() {
-		const oldElt = this.oldElt;
-		this.clearElt(oldElt);
-		if (!!this.value) {
-			const newElt = this.getNewElt();
-			this.displayElt(newElt);
-			this.oldElt = newElt;
-			return !!newElt;
-		}
-		return false;
-	}
 	ngAfterViewInit() {
 		this.render();
 		this.displayClearer();
