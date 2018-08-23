@@ -49,7 +49,6 @@ extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	protected displayer: ILuInputDisplayer<T>;
 	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
-	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input('multiple') set inputMultiple(m: boolean | string) {
