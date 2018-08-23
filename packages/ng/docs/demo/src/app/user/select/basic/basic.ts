@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class BasicComponent implements OnInit {
 	user = { firstName: 'John', lastName: 'Doe' };
-
+	users = [];
 	constructor() {}
 
 	ngOnInit() {}
