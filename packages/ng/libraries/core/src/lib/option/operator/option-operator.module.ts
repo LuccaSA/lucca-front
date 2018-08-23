@@ -2,20 +2,20 @@ import { NgModule } from '@angular/core';
 import { LuOptionPagerModule } from './pager/index';
 import { LuOptionFeederModule } from './feeder/index';
 import { LuOptionSearcherModule } from './searcher/index';
-import { LuOptionsModule } from './options/index';
+import { LuForOptionsModule } from './for-options/index';
 
 @NgModule({
 	imports: [
 		LuOptionPagerModule,
 		LuOptionFeederModule,
 		LuOptionSearcherModule,
-		LuOptionsModule,
+		LuForOptionsModule,
 	],
 	exports: [
 		LuOptionPagerModule,
 		LuOptionFeederModule,
 		LuOptionSearcherModule,
-		LuOptionsModule,
+		LuForOptionsModule,
 	],
 })
 export class LuOptionOperatorModule {}
