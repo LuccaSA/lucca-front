@@ -2,7 +2,6 @@ import { ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { ILuOptionItem } from '../item/index';
-import { ElementRef } from '@angular/core';
 import { merge } from 'rxjs/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -16,16 +15,25 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	private __operators;
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T>;
-	setValue(value: T) {}
+	protected _value: T;
+	setValue(value: T) {
+		this._value = value;
+		this._applySelected();
+	}
 	constructor() {
 		super();
 		this.triggerEvent = 'click';
 	}
 	protected set _optionItems$(optionItems$: Observable<ILuOptionItem<T>[]>) {
+		// reapply selected when the options change
+		this._subs.add(
+			optionItems$
+			.subscribe(o => this._applySelected())
+		);
+		// subscribe to any option.onSelect
 		const singleFlow$ = optionItems$.switchMap(
 			items => merge(...items.map(i => i.onSelect))
-		)
-		// .mergeMap(item => item);
+		);
 		this._subs.add(
 			singleFlow$
 			.subscribe((value: T) => this._select(value))
@@ -47,14 +55,15 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		});
 	}
 	protected abstract _select(val: T);
+	protected abstract _applySelected();
 	protected destroy() {
 		this._subs.unsubscribe();
 	}
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
-				this.onClose();
-				return;
+			this.onClose();
+			return;
 		}
 	}
 	onOpen() {
