@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ILuInputDisplayer } from '../../../input/index';
+import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
 import { IUser } from '../../user.model';
 import { ALuSelectInput } from '../../../select/index';
 import { ILuOptionPickerPanel } from '../../../option/index';
@@ -91,6 +91,10 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	}
 	@ViewChild(ALuClearer) set _ContentChildClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
+	}
+	@ViewChild(ALuInputDisplayer) set _displayer(displayer: ILuInputDisplayer<U>) {
+		this.displayer = displayer;
+		this.render();
 	}
 	/**
 	 * bind to dom events
