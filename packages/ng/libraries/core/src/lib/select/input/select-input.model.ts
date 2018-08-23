@@ -3,11 +3,12 @@ import {
 	ViewContainerRef,
 	ElementRef,
 	Renderer2,
+	ViewRef,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { ALuPopoverTrigger } from '../../popover/index';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ALuPickerPanel, ILuClearer, ILuInput } from '../../input/index';
+import { ILuInputWithPicker, ILuPickerPanel, ILuClearer, ILuInput, ILuInputDisplayer } from '../../input/index';
 
 export abstract class ALuSelectInput<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
 extends ALuPopoverTrigger<P>
@@ -111,12 +112,61 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		return config;
 	}
 
-	protected abstract render();
+	/* Rendering via a inpt displayer */
+	protected _displayer: ILuInputDisplayer<T>;
+	protected _displayContainer: ViewContainerRef;
+	protected set displayer(d: ILuInputDisplayer<T>) {
+		this._displayer = d;
+		this.render();
+	}
+	protected set displayContainer(vcr: ViewContainerRef) {
+		this._displayContainer = vcr;
+	}
+	protected render() {
+		if (!this._displayer) { return; }
+		if (this.useMultipleViews()) {
+			this.renderMultipleViews();
+		} else {
+			this.renderSingleView();
+		}
+	}
+	protected useMultipleViews() {
+		return this._multiple  && !this._displayer.multiple;
+	}
 
+	protected renderSingleView() {
+		this.clearDisplay();
+		if (!!this.value) {
+			const newView = this.getView(this.value);
+			this.displayView(newView);
+		}
+	}
+	protected clearDisplay() {
+		this._displayContainer.clear();
+	}
+	protected getView(value: T | T[]) {
+		if (!!this._displayer) {
+			return this._displayer.getViewRef(value);
+		}
+		return undefined;
+	}
+	protected displayView(view) {
+		if (!!view) {
+			this._displayContainer.insert(view);
+		}
+	}
+
+	protected renderMultipleViews() {
+		this.clearDisplay();
+		const values = <T[]>this.value || [];
+		const views = values.map(value => this.getView(value));
+		views.forEach(view => this.displayView(view));
+	}
 	// multiple
 	protected _multiple = false;
-	protected set multiple(m: boolean) {
+	set multiple(m: boolean) {
 		this._multiple = m;
 		this._picker.multiple = m;
 	}
+	get multiple() { return this._multiple; }
 }

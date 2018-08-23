@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class BasicComponent implements OnInit {
 	department = { id: 1, name: 'lucca' };
+	departments = [];
 
 	constructor() {}
 
