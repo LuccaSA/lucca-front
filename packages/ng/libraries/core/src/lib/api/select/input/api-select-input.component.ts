@@ -40,9 +40,9 @@ import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../search
 export class LuApiSelectInputComponent<T extends IApiItem = IApiItem, P extends ILuOptionPickerPanel<T> = ILuOptionPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-	protected displayer: ILuInputDisplayer<T>;
-	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
-
+	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
+		this.displayContainer = vcr;
+	}
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 
 	@Input() set api(api: string) { this._service.api = api; }
@@ -84,10 +84,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	@ViewChild(ALuPickerPanel) set _vcPicker(picker: P) {
 		this._picker = picker;
 	}
-	@ViewChild(ALuClearer) set _ContentChildClearer(clearer: ILuClearer) {
+	@ViewChild(ALuClearer) set _contentChildClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
 	}
-	@ViewChild(ALuInputDisplayer) set _displayer(displayer: ILuInputDisplayer<T>) {
+	@ViewChild(ALuInputDisplayer) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this.displayer = displayer;
 		this.render();
 	}
@@ -113,47 +113,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	@HostListener('blur')
 	onBlur() {
 		super.onBlur();
-	}
-
-	protected render() {
-		if (!this.displayer) { return; }
-		if (this.useMultipleViews()) {
-			this.renderMultipleViews();
-		} else {
-			this.renderSingleView();
-		}
-	}
-	protected useMultipleViews() {
-		return this._multiple  && !this.displayer.multiple;
-	}
-
-	protected renderSingleView() {
-		this.clearDisplay();
-		if (!!this.value) {
-			const newView = this.getView(this.value);
-			this.displayView(newView);
-		}
-	}
-	protected clearDisplay() {
-		this._displayContainer.clear();
-	}
-	protected getView(value: T | T[]) {
-		if (!!this.displayer) {
-			return this.displayer.getViewRef(value);
-		}
-		return undefined;
-	}
-	protected displayView(view) {
-		if (!!view) {
-			this._displayContainer.insert(view);
-		}
-	}
-
-	protected renderMultipleViews() {
-		this.clearDisplay();
-		const values = <T[]>this.value || [];
-		const views = values.map(value => this.getView(value));
-		views.forEach(view => this.displayView(view));
 	}
 
 	ngAfterViewInit() {
