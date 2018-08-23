@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LuSelectModule, LuOptionModule, LuInputModule } from '@lucca-front/ng';
 import { DemoSelectComponent } from './select.component';
 import { BasicSelectComponent } from './basic/basic';
+import { MultipleSelectComponent } from './multiple/multiple';
 
 import { SharedModule } from '../shared';
 
@@ -18,7 +19,7 @@ import { SharedModule } from '../shared';
 
 		LuInputModule,
 	],
-	declarations: [DemoSelectComponent, BasicSelectComponent],
+	declarations: [DemoSelectComponent, BasicSelectComponent, MultipleSelectComponent],
 	exports: [DemoSelectComponent],
 })
 export class DemoSelectModule {}

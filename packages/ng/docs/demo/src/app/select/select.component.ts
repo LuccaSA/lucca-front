@@ -18,6 +18,10 @@ export class DemoSelectComponent implements OnInit {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
 			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
+		multiple: {
+			code: require('!!prismjs-loader?lang=typescript!./multiple/multiple'),
+			markup: require('!!prismjs-loader?lang=markup!./multiple/multiple.html'),
+		},
 	};
 	constructor() {}
 	ngOnInit() {}

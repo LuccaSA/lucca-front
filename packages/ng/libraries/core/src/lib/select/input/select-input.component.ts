@@ -47,13 +47,20 @@ import { ALuSelectInput } from './select-input.model';
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-	protected oldView;
-	protected oldElt;
 	protected displayer: ILuInputDisplayer<T>;
 	@ViewChild('display', { read: ViewContainerRef }) protected _displayContainer: ViewContainerRef;
 	@ViewChild('display', { read: ElementRef }) protected _displayElt: ElementRef;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input('multiple') set inputMultiple(m: boolean | string) {
+		if (m === '') {
+			// allows to have multiple = true when writing
+			// <lu-select multiple>
+			this.multiple = true;
+		} else {
+			this.multiple = !!m;
+		}
+	}
 	constructor(
 		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -71,7 +78,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	@HostBinding('class.is-disabled')
 	get isDisabled() { return this.disabled; }
-
+	@HostBinding('class.mod-multiple')
+	get modMultiple() { return this._multiple; }
 	/**
 	 * popover trigger class extension
 	 */
@@ -108,27 +116,30 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 
 	protected render() {
-		this.renderAsView();
+		if (!this.displayer) { return; }
+		if (this.useMultipleViews()) {
+			this.renderMultipleViews();
+		} else {
+			this.renderSingleView();
+		}
+	}
+	protected useMultipleViews() {
+		return this._multiple  && !this.displayer.multiple;
 	}
 
-	protected renderAsView() {
-		const oldView = this.oldView;
-		this.clearView(oldView);
+	protected renderSingleView() {
+		this.clearDisplay();
 		if (!!this.value) {
-			const newView = this.getNewView();
+			const newView = this.getView(this.value);
 			this.displayView(newView);
-			this.oldView = newView;
 		}
 	}
-	protected clearView(view) {
-		if (!!view) {
-			const index = this._displayContainer.indexOf(this.oldView);
-			this._displayContainer.remove(index);
-		}
+	protected clearDisplay() {
+		this._displayContainer.clear();
 	}
-	protected getNewView() {
+	protected getView(value: T | T[]) {
 		if (!!this.displayer) {
-			return this.displayer.getViewRef(this.value);
+			return this.displayer.getViewRef(value);
 		}
 		return undefined;
 	}
@@ -136,6 +147,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		if (!!view) {
 			this._displayContainer.insert(view);
 		}
+	}
+
+	protected renderMultipleViews() {
+		this.clearDisplay();
+		const values = <T[]>this.value || [];
+		const views = values.map(value => this.getView(value));
+		views.forEach(view => this.displayView(view));
 	}
 
 	ngAfterViewInit() {
