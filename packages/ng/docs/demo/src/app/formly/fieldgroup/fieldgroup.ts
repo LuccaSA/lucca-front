@@ -95,21 +95,13 @@ export class FieldgroupComponent {
 					type: 'select',
 					templateOptions: {
 						label: 'The selection',
+						multiple: true,
 						options: [
 							{ id: 0, name: 'female' },
 							{ id: 1, name: 'male' },
 							{ id: 2, name: 'other' },
 						],
 						mod: 'mod-framed',
-					},
-				},
-				{
-					key: 'autocomplete',
-					type: 'autocomplete',
-					templateOptions: {
-						label: 'Autocompletion',
-						mod: 'mod-framed mod-autocomplete',
-						options: [{ name: 'female' }, { name: 'male' }, { name: 'other' }],
 					},
 				},
 			],
