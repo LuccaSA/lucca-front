@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-	MatAutocompleteModule,
 	MatInputModule,
-	MatOptionModule,
-	MatSelectModule,
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -29,10 +26,7 @@ import { OptionComponent } from './option/option';
 		FormlyModule.forRoot(),
 		LuFormlyModule,
 
-		MatAutocompleteModule,
 		MatInputModule,
-		MatOptionModule,
-		MatSelectModule,
 
 		MatMomentDateModule, // we use moment here
 	],

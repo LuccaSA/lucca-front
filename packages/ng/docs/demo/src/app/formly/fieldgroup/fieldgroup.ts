@@ -91,10 +91,10 @@ export class FieldgroupComponent {
 			},
 			fieldGroup: [
 				{
-					key: 'selection',
+					key: 'iam',
 					type: 'select',
 					templateOptions: {
-						label: 'The selection',
+						label: 'I am (select single)',
 						options: [
 							{ id: 0, name: 'female' },
 							{ id: 1, name: 'male' },
@@ -102,14 +102,18 @@ export class FieldgroupComponent {
 						],
 						mod: 'mod-framed',
 					},
-				},
-				{
-					key: 'autocomplete',
-					type: 'autocomplete',
+				}, {
+					key: 'iwant',
+					type: 'select',
 					templateOptions: {
-						label: 'Autocompletion',
-						mod: 'mod-framed mod-autocomplete',
-						options: [{ name: 'female' }, { name: 'male' }, { name: 'other' }],
+						label: 'And im looking for (select multiple)',
+						multiple: true,
+						options: [
+							{ id: 0, name: 'female' },
+							{ id: 1, name: 'male' },
+							{ id: 2, name: 'other' },
+						],
+						mod: 'mod-framed',
 					},
 				},
 			],
