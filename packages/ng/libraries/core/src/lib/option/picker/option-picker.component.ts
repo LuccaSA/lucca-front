@@ -103,7 +103,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 	onOpen() {
 		super.onOpen();
-		this.highlightIndex = 0;
+		this.highlightIndex = -1;
 		this._applySelected();
 	}
 	@ViewChild(TemplateRef)
@@ -117,7 +117,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		switch (event.keyCode) {
 			case ENTER:
 				this._selectHighlighted();
-				this.onClose();
+				// this.onClose();
 				break;
 			case UP_ARROW:
 				this._decrHighlight();
@@ -129,7 +129,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 				break;
 		}
 	}
-	protected _highlightIndex = 0;
+	protected _highlightIndex = -1;
 	get highlightIndex() { return this._highlightIndex; }
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
@@ -138,18 +138,18 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	protected _initHighlight() {
 		this._subs.add(this.optionsQLVR.changes.subscribe(options => {
 			const optionCount = options.toArray().length;
-			this.highlightIndex = Math.max(Math.min(this.highlightIndex, optionCount - 1), 0);
+			this.highlightIndex = Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
 		}));
 		setTimeout(() => {
-			this.highlightIndex = 0;
+			this.highlightIndex = -1;
 		}, 1);
 	}
 	protected _incrHighlight() {
 		const optionCount = this.optionsQLVR.toArray().length;
-		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, optionCount - 1), 0);
+		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, optionCount - 1), -1);
 	}
 	protected _decrHighlight() {
-		this.highlightIndex = Math.max(this.highlightIndex - 1, 0);
+		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
 	}
 	protected _applyHighlight() {
 		const highlightClass = 'is-highlighted';
