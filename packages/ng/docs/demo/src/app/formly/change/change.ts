@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormGroup, FormControl } from '@angular/forms';
 const choose = {
 	key: 'choose',
 	type: 'select',
@@ -10,7 +9,6 @@ const choose = {
 		options: [
 			{ id: 0, name: 'input' },
 			{ id: 1, name: 'select' },
-			// { id: 2, name: 'autocomplete' },
 		],
 	},
 };
@@ -33,18 +31,6 @@ const select = {
 		],
 	},
 };
-// const autocomplete = {
-// 	key: 'autocomplete',
-// 	type: 'autocomplete',
-// 	templateOptions: {
-// 		label: 'autocomplete',
-// 		options: [
-// 			{ id: 1, name: 'one' },
-// 			{ id: 2, name: 'two' },
-// 			{ id: 3, name: 'three' },
-// 		],
-// 	},
-// };
 @Component({
 	selector: 'demo-formly-change',
 	templateUrl: './change.html',
