@@ -1,0 +1,9 @@
+$options: (
+	checkbox: (
+		left: .5rem,
+		size: .95rem,
+		border-radius: 3px
+	)
+);
+$theme: _set($theme, 'components.options', $options);
+@warn 'LOL';
