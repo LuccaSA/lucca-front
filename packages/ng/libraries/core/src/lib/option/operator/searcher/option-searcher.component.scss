@@ -1,5 +1,7 @@
 @import 'theming';
 :host {
+	position: sticky;
+	top: 0;
 	display: block;
 	flex: 0 0 auto;
 }

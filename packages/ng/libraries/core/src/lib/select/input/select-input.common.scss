@@ -5,7 +5,6 @@
 	cursor: pointer;
 	outline: none;
 	padding: 0;
-	height: 2em; //temp until we have display
 
 	&::after {
 		bottom: 0.55rem;
@@ -26,7 +25,7 @@
 }
 .lu-select-value, .lu-select-placeholder {
 	line-height: 1.1;
-	height: 2rem;
+	height: _component('select.height');
 	overflow: hidden;
 	padding: _component('textfield.input.padding-vertical') 1.5rem
 		_component('textfield.input.padding-vertical')
@@ -47,12 +46,31 @@
 }
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+:host(.mod-multiple) {
+	.lu-select-value {
+		overflow: visible;
+		white-space: normal;
+		height: auto;
+		min-height: _component('select.height');
+		padding-top: 0;
+		padding-bottom: 0;
+		align-items: center;
+		flex-wrap: wrap;
+	}
 
+	::ng-deep {
+		.lu-select-value .label {
+			margin-top: _component('select.tag.margin');
+			margin-bottom: _component('select.tag.margin');
+			margin-left: 0;
+		}
+	}
+}
 :host(.mod-search) {
 	&::after {
 		@include makeIcon("search");
 		font-size: 1.4rem;
-		line-height: 2rem;
+		line-height: _component('select.height');
 		bottom: 0;
 	}
 
@@ -146,5 +164,8 @@
 	}
 	.lu-select-value {
 		display: block;
+	}
+	&.mod-multiple .lu-select-value {
+		display: flex;
 	}
 }
