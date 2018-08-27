@@ -5,7 +5,7 @@
 <div class="lu-select-suffix">
 	<lu-select-clearer></lu-select-clearer>
 </div>
-<span [class.chip]="multiple" *luDisplayer="let option">{{option.name}}</span>
+<span [class.label]="multiple" *luDisplayer="let option">{{option.name}}</span>
 <lu-option-picker>
 	<lu-api-paged-searcher></lu-api-paged-searcher>
 	<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>

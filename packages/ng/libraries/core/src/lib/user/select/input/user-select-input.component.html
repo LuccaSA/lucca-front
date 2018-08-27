@@ -5,7 +5,7 @@
 <div class="lu-select-suffix">
 	<lu-select-clearer></lu-select-clearer>
 </div>
-<span [class.chip]="multiple" *luDisplayer="let user">{{user | luUserDisplay}}</span>
+<span [class.label]="multiple" *luDisplayer="let user">{{user | luUserDisplay}}</span>
 <lu-option-picker>
 	<lu-user-paged-searcher></lu-user-paged-searcher>
 	<lu-option *luForOptions="let user" [value]="user">{{ user | luUserDisplay: searchFormat }}</lu-option>
