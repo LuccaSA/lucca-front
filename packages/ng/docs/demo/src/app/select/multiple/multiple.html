@@ -2,10 +2,12 @@
 	<h3>multiple</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
-			<ng-container *luDisplayer="let value">{{value.id}} - {{value.name}}</ng-container>
+			<span class="label" *luDisplayer="let value">{{value.id}} - {{value.name}}</span>
 			<lu-option-picker>
-				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red">{{red.name}}</lu-option>
+				<lu-option [value]="green">{{green.name}}</lu-option>
+				<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+				<lu-option [value]="blue">{{blue.name}}</lu-option>
 			</lu-option-picker>
 			<lu-select-clearer></lu-select-clearer>
 		</lu-select>
@@ -24,7 +26,7 @@
 			<!-- <ng-template luDisplayer luDisplayerMultiple let-values>
 				{{values?.length}} colors
 			</ng-template> -->
-			
+
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
 				<lu-option [value]="red">{{red.name}}</lu-option>
