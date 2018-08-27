@@ -8,7 +8,7 @@ import { debounceTime } from 'rxjs/operators/debounceTime';
 @Component({
 	selector: 'lu-api-searcher',
 	templateUrl: 'api-searcher.component.html',
-	styleUrls: ['api-searcher.component.scss'],
+	styleUrls: ['../../../option/operator/searcher/searcher.common.scss', 'api-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

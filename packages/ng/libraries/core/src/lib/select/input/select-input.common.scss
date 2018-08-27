@@ -63,6 +63,8 @@
 			margin-top: _component('select.tag.margin');
 			margin-bottom: _component('select.tag.margin');
 			margin-left: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }
