@@ -87,7 +87,7 @@
 		@return $result;
 	}
 	// throw
-	@warn "couldn't find color #{$keys} in theme";
+	@warn "couldn't find color #{$keys}.#{$type} in theme";
 	@return "";
 }
 

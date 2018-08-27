@@ -91,8 +91,7 @@
 	@mixin inputColoring($palette) {
 		.textfield-input:focus, .textfield-input:not([disabled]):hover {
 			@include fakeBorder(1px, _color($palette));
-
-			background-color: _color($palette, "transparent");
+			background-color: _color($palette, see-through);
 			~ .textfield-label {
 				color: _color($palette);
 			}
@@ -137,7 +136,7 @@
 		@mixin inputColoring($palette) {
 			&:hover, &:focus {
 				@include fakeBorder(1px, _color($palette));
-				background-color: _color($palette, "transparent");
+				background-color: _color($palette, see-through);
 				z-index: 2;
 			}
 
@@ -167,7 +166,7 @@
 		}
 
 		&.is-error {
-			background-color: _color("error", "transparent");
+			background-color: _color("error", see-through);
 		}
 	}
 
