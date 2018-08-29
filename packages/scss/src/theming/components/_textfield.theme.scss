@@ -71,9 +71,9 @@ $textfield: (
 
 	framed: (
 		default-palette:(
-			"color": _color("text.light", "color", true),
-			"transparent": transparentize(_color("text.light", "color", true), .95),
-			"text": _color("text.default", "color", true)
+			color: _color("text.light", "color", true),
+			see-through: transparentize(_color("text.light", "color", true), .95),
+			text: _color("text.default", "color", true)
 		),
 		side-padding: 1rem,
 		top-padding: 2.2rem,

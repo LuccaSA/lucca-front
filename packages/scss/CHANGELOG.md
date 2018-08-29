@@ -1,6 +1,8 @@
 # Changelog
 
 ## In Dev
+### Breaking changes
+- `transparent` key in palettes is now `see-through`
 
 ## 1.0.1
 ### New features

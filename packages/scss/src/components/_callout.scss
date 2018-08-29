@@ -72,7 +72,7 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background: _color($palette, "transparent");
+	background: _color($palette, "see-through");
 	color: _color($palette, "darker");
 
 	.callout-icon {
