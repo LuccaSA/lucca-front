@@ -1,19 +1,2 @@
-@import 'theming';
-@import '~@lucca-front/icons/src/_mixins';
-
-:host {
-	cursor: pointer;
-	outline: none;
-	padding: 0;
-	height: 2em; //temp until we have display
-
-	&::after {
-		bottom: 0.55rem;
-		color: _color('text.light');
-		@include makeIcon('arrow_south');
-		font-size: 0.75rem;
-		pointer-events: none;
-		position: absolute;
-		right: _component('textfield.input.padding-horizontal');
-	}
-}
+@import '_definitions';
+@include selectInputStyle;

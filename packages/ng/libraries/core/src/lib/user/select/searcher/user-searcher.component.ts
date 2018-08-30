@@ -10,7 +10,7 @@ import { ALuApiOptionPagedSearcher } from '../../../api/index';
 @Component({
 	selector: 'lu-user-paged-searcher',
 	templateUrl: 'user-searcher.component.html',
-	styleUrls: ['../../../option/operator/searcher/searcher.common.scss', 'user-searcher.component.scss'],
+	styleUrls: ['user-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

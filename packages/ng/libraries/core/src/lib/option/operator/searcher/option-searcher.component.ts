@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 @Component({
 	selector: 'lu-option-searcher',
 	templateUrl: 'option-searcher.component.html',
-	styleUrls: ['searcher.common.scss', 'option-searcher.component.scss'],
+	styleUrls: ['option-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

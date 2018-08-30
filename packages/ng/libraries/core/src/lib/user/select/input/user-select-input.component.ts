@@ -28,7 +28,7 @@ import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../sear
 @Component({
 	selector: 'lu-user-select',
 	templateUrl: './user-select-input.component.html',
-	styleUrls: ['../../../select/input/select-input.common.scss', './user-select-input.component.scss'],
+	styleUrls: ['./user-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
