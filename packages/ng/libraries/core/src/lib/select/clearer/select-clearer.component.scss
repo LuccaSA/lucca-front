@@ -1,18 +1,2 @@
-:host {
-	display: none;
-}
-
-:host-context(.textfield-input.is-filled) {
-	display: block;
-}
-
-.actionIcon {
-	width: 1rem;
-	height: 1rem;
-	padding: 0;
-}
-
-.lucca-icon {
-	display: block;
-	font-size: 0.9rem;
-}
+@import '_placeholders';
+@include selectClearerStyle;

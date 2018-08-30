@@ -34,7 +34,7 @@ import { ALuSelectInput } from './select-input.model';
 @Component({
 	selector: 'lu-select',
 	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.common.scss', './select-input.component.scss'],
+	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
