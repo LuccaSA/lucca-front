@@ -1,28 +1,34 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2, ChangeDetectorRef, forwardRef, ChangeDetectionStrategy } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ALuInput } from './input.model';
+import { Directive, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 /**
  * adds class is-filled when model is empty
  */
 @Directive({
 	selector: '[luInput]',
-	// changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuInputDirective),
-			multi: true,
-		},
-	],
 })
-export class LuInputDirective<T = any> extends ALuInput<T> {
+export class LuInputDirective implements OnInit {
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
-	) {
-		super(_changeDetectorRef, _elementRef, _renderer);
+		protected _ngControl: NgControl,
+	) {}
+	protected isEmpty(value) {
+		if (typeof value === 'string') {
+			return value === '';
+		}
+		return value === null || value === undefined;
 	}
-	protected render() {}
+	protected applyClasses(value) {
+		if (this.isEmpty(value)) {
+			this._renderer.removeClass(this._elementRef.nativeElement, 'is-filled');
+		} else {
+			this._renderer.addClass(this._elementRef.nativeElement, 'is-filled');
+		}
+	}
+	ngOnInit() {
+		this._ngControl.valueChanges.subscribe(v => this.applyClasses(v));
+		const val = this._ngControl.value;
+		this.applyClasses(val);
+	}
 }

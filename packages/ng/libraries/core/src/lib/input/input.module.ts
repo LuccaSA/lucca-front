@@ -5,6 +5,6 @@ import { LuInputDirective } from './input.directive';
 @NgModule({
 	declarations: [LuInputDirective],
 	imports: [LuInputDisplayerModule],
-	exports: [LuInputDisplayerModule],
+	exports: [LuInputDisplayerModule, LuInputDirective],
 })
 export class LuInputModule {}
