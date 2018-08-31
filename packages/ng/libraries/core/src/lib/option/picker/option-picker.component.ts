@@ -94,6 +94,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 	ngAfterViewInit() {
 		this._initHighlight();
+		this._initSelected();
 	}
 	_emitOpenEvent(): void {
 		this.open.emit();
@@ -172,6 +173,11 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 			this._updateValue(highlightedOption.value);
 		}
 	}
+	protected _initSelected() {
+		this._subs.add(this.optionsQLVR.changes.subscribe(() => {
+			this._applySelected();
+		}));
+	}
 	protected _applySelected() {
 		if (!this.optionsQLVR) { return; }
 		const selectedClass = 'is-selected';
@@ -193,6 +199,11 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 				.filter(i => i !== -1)
 			);
 		}
-		selectedIndexes.forEach(i => this._renderer.addClass(options[i].element.nativeElement, selectedClass));
+		selectedIndexes.forEach(i => {
+			const option = options[i];
+			if (!!option) {
+				this._renderer.addClass(option.element.nativeElement, selectedClass);
+			}
+		});
 	}
 }

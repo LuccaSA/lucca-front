@@ -4,6 +4,7 @@ import {
 	ViewContainerRef,
 	OnDestroy,
 	forwardRef,
+	ChangeDetectorRef,
 } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Subscription } from 'rxjs/Subscription';
@@ -47,6 +48,7 @@ export class LuForOptionsDirective<T> implements ILuOptionOperator<T>, OnDestroy
 	constructor(
 			protected _viewContainer: ViewContainerRef,
 			protected _template: TemplateRef<LuForOptionsContext<T>>,
+			protected _changeDetectorRef: ChangeDetectorRef
 	) {}
 
 
@@ -58,5 +60,6 @@ export class LuForOptionsDirective<T> implements ILuOptionOperator<T>, OnDestroy
 		const count = options.length;
 		const views = options.map((option, index) => this._template.createEmbeddedView(new LuForOptionsContext(option, index, count)));
 		views.forEach(view => this._viewContainer.insert(view));
+		this._changeDetectorRef.markForCheck();
 	}
 }
