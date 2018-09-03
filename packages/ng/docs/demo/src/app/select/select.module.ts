@@ -8,6 +8,7 @@ import { LuSelectModule, LuOptionModule, LuInputModule } from '@lucca-front/ng';
 
 import { SharedModule } from '../shared';
 import { DemoSelectFoundationsModule } from './foundations/select-foundations.module';
+import { DemoOptionPickerModule } from './option-picker/option-picker.module';
 
 @NgModule({
 	imports: [
@@ -19,6 +20,7 @@ import { DemoSelectFoundationsModule } from './foundations/select-foundations.mo
 		LuOptionModule,
 		DemoSelectFoundationsModule,
 		LuInputModule,
+		DemoOptionPickerModule,
 	],
 	// declarations: [DemoSelectComponent, BasicSelectComponent, MultipleSelectComponent],
 	// exports: [DemoSelectComponent],

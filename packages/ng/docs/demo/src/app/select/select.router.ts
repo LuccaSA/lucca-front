@@ -1,5 +1,6 @@
 import { Routes, Route } from '@angular/router';
 import { DemoSelectFoundationsComponent } from './foundations/select-foundations.component';
+import { DemoOptionPickerComponent } from './option-picker/option-picker.component';
 // import { DemoSelectComponent } from './select.component';
 
 export const selectRoutes: Routes = [
@@ -12,11 +13,11 @@ export const selectRoutes: Routes = [
 				label: 'Foundations',
 				component: DemoSelectFoundationsComponent,
 			} as Route,
-		// 	{
-		// 		path: 'mod',
-		// 		label: 'Mods',
-		// 		component: DemoModSelectComponent,
-		// 	} as Route,
+			{
+				path: 'picker',
+				label: 'picker',
+				component: DemoOptionPickerComponent,
+			} as Route,
 		// 	{
 		// 		path: 'feeder',
 		// 		label: 'Feeder',
@@ -28,6 +29,7 @@ export const selectRoutes: Routes = [
 		// 		component: DemoSearcherSelectComponent,
 		// 	} as Route,
 			// { path: '', component: DemoSelectComponent } as Route,
+			{ path: '', redirectTo: 'foundations', pathMatch: 'full' },
 		],
 	} as Route,
 ];
