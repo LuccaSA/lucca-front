@@ -87,7 +87,9 @@ $textfield: (
 			font-size: _theme("sizes.big.font-size"),
 			line-height: _theme("sizes.big.line-height")
 		),
-		suffix: (padding-right: 2.5rem)
+		suffix: (
+			padding-right: 2.5rem
+		)
 	)
 );
 
