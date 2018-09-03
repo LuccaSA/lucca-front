@@ -1,16 +1,17 @@
 import { Routes, Route } from '@angular/router';
-import { DemoSelectComponent } from './select.component';
+import { DemoSelectFoundationsComponent } from './foundations/select-foundations.component';
+// import { DemoSelectComponent } from './select.component';
 
 export const selectRoutes: Routes = [
 	{
 		path: 'select',
 		label: 'Select',
 		children: [
-		// 	{
-		// 		path: 'clear',
-		// 		label: 'Clear',
-		// 		component: DemoClearerSelectComponent,
-		// 	} as Route,
+			{
+				path: 'foundations',
+				label: 'Foundations',
+				component: DemoSelectFoundationsComponent,
+			} as Route,
 		// 	{
 		// 		path: 'mod',
 		// 		label: 'Mods',
@@ -26,7 +27,7 @@ export const selectRoutes: Routes = [
 		// 		label: 'Search',
 		// 		component: DemoSearcherSelectComponent,
 		// 	} as Route,
-			{ path: '', component: DemoSelectComponent } as Route,
+			// { path: '', component: DemoSelectComponent } as Route,
 		],
 	} as Route,
 ];

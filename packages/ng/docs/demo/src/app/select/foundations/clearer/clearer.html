@@ -1,0 +1,25 @@
+<section class="contentSection">
+	<h3>With Clearer</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="item" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
+			<lu-option-picker>
+			</lu-option-picker>
+			<!-- pass the clearer as a content child -->
+			<lu-select-clearer></lu-select-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+</section>
+
+<section class="contentSection">
+	<h3>Without Clearer</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="item" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
+			<lu-option-picker>
+			</lu-option-picker>
+		</lu-select>
+	</div>
+</section>
+
