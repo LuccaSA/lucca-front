@@ -12,11 +12,11 @@ declare var require: any;
 	styles: [],
 })
 export class DemoSelectMultipleComponent {
-	// snippets = {
-	// 	basic: {
-	// 		code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
-	// 		markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
-	// 	},
-	// };
+	snippets = {
+		basic: {
+			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
+			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
+		},
+	};
 	constructor() {}
 }

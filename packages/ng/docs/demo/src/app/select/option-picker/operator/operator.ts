@@ -15,6 +15,7 @@ export class OperatorComponent {
 	searchFn(o, c) {
 		return o.name.startsWith(c);
 	}
+	item;
 	colors = [
 		{ name: 'aliceblue', code: '#f0f8ff' },
 		{ name: 'antiquewhite', code: '#faebd7' },
