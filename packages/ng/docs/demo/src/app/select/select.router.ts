@@ -1,7 +1,7 @@
 import { Routes, Route } from '@angular/router';
 import { DemoSelectFoundationsComponent } from './foundations/select-foundations.component';
 import { DemoOptionPickerComponent } from './option-picker/option-picker.component';
-// import { DemoSelectComponent } from './select.component';
+import { DemoSelectMultipleComponent } from './multiple/select-multiple.component';
 
 export const selectRoutes: Routes = [
 	{
@@ -15,20 +15,14 @@ export const selectRoutes: Routes = [
 			} as Route,
 			{
 				path: 'picker',
-				label: 'picker',
+				label: 'Picker',
 				component: DemoOptionPickerComponent,
 			} as Route,
-		// 	{
-		// 		path: 'feeder',
-		// 		label: 'Feeder',
-		// 		component: DemoFeederSelectComponent,
-		// 	} as Route,
-		// 	{
-		// 		path: 'search',
-		// 		label: 'Search',
-		// 		component: DemoSearcherSelectComponent,
-		// 	} as Route,
-			// { path: '', component: DemoSelectComponent } as Route,
+			{
+				path: 'multiple',
+				label: 'Multiple',
+				component: DemoSelectMultipleComponent,
+			} as Route,
 			{ path: '', redirectTo: 'foundations', pathMatch: 'full' },
 		],
 	} as Route,

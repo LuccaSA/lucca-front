@@ -4,17 +4,16 @@ import {
 } from '@angular/core';
 
 @Component({
-	selector: 'multiple-select',
-	templateUrl: './multiple.html',
+	selector: 'basic',
+	templateUrl: './basic.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 	],
 })
-export class MultipleSelectComponent {
+export class BasicComponent {
 	red =	{ id: 1, name: 'red' };
 	green = { id: 2, name: 'green' };
-	blue = { id: 3, name: 'blue' };
-	yellow =	{ id: 4, name: 'yellow' };
-	items = [this.red];
-	colors = [];
+	yellow =	{ id: 3, name: 'yellow' };
+	blue =	{ id: 4, name: 'blue' };
+	items = [this.red, this.blue];
 }

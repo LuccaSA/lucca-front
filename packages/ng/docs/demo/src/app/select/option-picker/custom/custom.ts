@@ -26,7 +26,7 @@ export class CustomComponent {
 }
 @Component({
 	selector: 'color-option',
-	styleUrls: ['./custom.scss'],
+	styleUrls: ['./color-option.scss'],
 	template: `<span [style.color]="value.name">{{value.name}}</span>`,
 	providers: [
 		{
