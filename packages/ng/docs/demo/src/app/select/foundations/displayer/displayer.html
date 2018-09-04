@@ -1,0 +1,10 @@
+<section class="contentSection">
+	<h3>Displaying id and name</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="item" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.id}} - {{value.name}}</ng-container>
+			<lu-option-picker></lu-option-picker>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+</section>

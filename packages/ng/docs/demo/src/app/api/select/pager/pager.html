@@ -2,6 +2,7 @@
 	<h3>Api pager</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="user" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
 			<lu-option-picker>
 				<lu-api-pager api="/api/v3/users"></lu-api-pager>
 					<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>
@@ -9,15 +10,4 @@
 		</lu-select>
 		<label class="textfield-label">users</label>
 	</div>
-	<code class="code mod-block">{{ user | json }}</code>
-	<div class="textfield">
-		<lu-select [(ngModel)]="role" class="textfield-input">
-			<lu-option-picker>
-				<lu-api-pager api="/api/v3/roles"></lu-api-pager>
-					<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>
-			</lu-option-picker>
-		</lu-select>
-		<label class="textfield-label">role</label>
-	</div>
-	<code class="code mod-block">{{ role | json }}</code>
 </section>

@@ -2,6 +2,7 @@
 	<h3>user paged searcher</h3>
 	<div class="textfield">
 		<lu-select [(ngModel)]="user" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
 			<lu-option-picker>
 				<lu-user-paged-searcher></lu-user-paged-searcher>
 				<lu-option *luForOptions="let option" [value]="option">{{option.lastName}} {{ option.firstName}}</lu-option>
@@ -12,6 +13,7 @@
 	<code class="code mod-block">{{ user | json }}</code>
 	<div class="textfield">
 		<lu-select [(ngModel)]="consultant" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
 			<lu-option-picker>
 				<lu-user-paged-searcher [filters]="filters"></lu-user-paged-searcher>
 				<lu-option *luForOptions="let option" [value]="option">{{option.lastName}} {{ option.firstName}}</lu-option>
@@ -22,6 +24,7 @@
 	<code class="code mod-block">{{ consultant | json }}</code>
 	<div class="textfield">
 		<lu-select [(ngModel)]="tile" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
 			<lu-option-picker>
 				<lu-user-paged-searcher [fields]="fields"></lu-user-paged-searcher>
 				<lu-option *luForOptions="let option" [value]="option">

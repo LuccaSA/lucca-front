@@ -24,7 +24,4 @@ export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements 
 	constructor(protected _vcr: ViewContainerRef) {
 		super();
 	}
-	// get viewRef() {
-	// 	return this._vcr.get(0);
-	// }
 }
