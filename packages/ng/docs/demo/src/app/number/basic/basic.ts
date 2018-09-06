@@ -8,5 +8,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 export class BasicComponent {
 	number = 0;
 	pi = 3.141592;
+	ten = 10;
 	e = 2.71727;
 }

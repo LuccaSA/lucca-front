@@ -13,14 +13,23 @@
 			<td class="table-body-row-cell u-textRight" [innerHTML]="pi | luNumber"></td>
 		</tr>
 		<tr class="table-body-row">
+			<td class="table-body-row-cell">ten</td>
+			<td class="table-body-row-cell u-textRight">{{ ten }}</td>
+			<td class="table-body-row-cell u-textRight" [innerHTML]="ten | luNumber"></td>
+		</tr>
+		<tr class="table-body-row">
 			<td class="table-body-row-cell"><i>e</i></td>
 			<td class="table-body-row-cell u-textRight">{{ e }}</td>
-			<td class="table-body-row-cell u-textRight" [innerHTML]="e | luNumber">Contenu</td>
+			<td class="table-body-row-cell u-textRight" [innerHTML]="e | luNumber"></td>
 		</tr>
-		<!-- <tr class="table-body-row">
-			<td class="table-body-row-cell">Contenu</td>
-			<td class="table-body-row-cell">Contenu</td>
-			<td class="table-body-row-cell">Contenu</td>
-		</tr> -->
+		<tr class="table-body-row">
+			<td class="table-body-row-cell">
+				<div class="textfield mod-block">
+					<input [(ngModel)]="number" class="textfield-input">
+				</div>
+			</td>
+			<td class="table-body-row-cell u-textRight">{{ number }}</td>
+			<td class="table-body-row-cell u-textRight" [innerHTML]="number | luNumber"></td>
+		</tr>
 	</tbody>
 </table>
