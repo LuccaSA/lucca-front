@@ -1,0 +1,9 @@
+<div class="textfield">
+	<input [(ngModel)]="number" class="textfield-input" type="number">
+	<label class="textfield-label">number</label>
+</div>
+<div class="textfield">
+	<input [(ngModel)]="precision" class="textfield-input" type="number">
+	<label class="textfield-label">precision</label>
+</div>
+<code [innerHTML]="number | luNumber: precision"></code>

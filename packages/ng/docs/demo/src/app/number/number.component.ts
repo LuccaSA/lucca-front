@@ -13,5 +13,9 @@ export class DemoNumberComponent {
 			code: require('!!prismjs-loader?lang=typescript!./basic/basic'),
 			markup: require('!!prismjs-loader?lang=markup!./basic/basic.html'),
 		},
+		parameters: {
+			code: require('!!prismjs-loader?lang=typescript!./parameters/parameters'),
+			markup: require('!!prismjs-loader?lang=markup!./parameters/parameters.html'),
+		},
 	};
 }

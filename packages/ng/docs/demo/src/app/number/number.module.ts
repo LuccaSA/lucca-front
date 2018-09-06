@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
 import { FormsModule } from '@angular/forms';
+import { ParametersComponent } from './parameters/parameters';
 
 @NgModule({
 	imports: [
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 	declarations: [
 		DemoNumberComponent,
 		BasicComponent,
+		ParametersComponent,
 	],
 	exports: [DemoNumberComponent],
 })
