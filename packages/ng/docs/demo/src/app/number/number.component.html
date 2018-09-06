@@ -2,10 +2,9 @@
 <p>
 	The goal of this pipe is to allow you to display number with or wthout decimal part aligned to the right on the decimal separator
 </p>
-<!-- <code class="code mod-block">
-	123.45
-	  3
-</code> -->
+<p>
+	As it isolate the decimal part into a span, you cant just use the pipe inside braces, you must bind to a tag's innerHTML
+</p>
 <h2>Examples</h2>
 <section class="contentSection">
 	<demo-example-box [snippets]="snippets" demo="basic">
