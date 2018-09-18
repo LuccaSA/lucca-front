@@ -46,7 +46,7 @@
 	@mixin buttonLesserColoring($palette) {
 		background: _color($palette, "lightest");
 		box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette, "transparent") inset;
-		color: _color($palette);
+		color: _color($palette, "dark");
 
 		&:hover:not([disabled]) {
 			background: _color($palette, "lightest");
@@ -58,7 +58,7 @@
 	@include buttonColoring("button.default-palette");
 
 	// white color
-	&.palette-white {
+	&.mod-white {
 		@include buttonColoring("button.white-palette");
 	}
 
@@ -96,7 +96,7 @@
 
 .button {
 
-	&.mod-flat {
+	&.mod-link {
 		background: transparent;
 		box-shadow: none;
 		font-weight: 400;
@@ -131,23 +131,6 @@
 		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include buttonWiredColoring($name);
-			}
-		}
-	}
-
-	&.mod-link {
-		background: transparent;
-		box-shadow: none;
-		color: _color("text.link");
-		padding: 0;
-		text-decoration: underline;
-		vertical-align: baseline;
-
-		&:hover, &:focus, &:active {
-			&:not([disabled]) {
-				background: transparent;
-				box-shadow: none;
-				opacity: .85;
 			}
 		}
 	}

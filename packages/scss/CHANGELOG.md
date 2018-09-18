@@ -3,6 +3,8 @@
 ## In Dev
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`
+- `button.mod-link` is now .link
+- `button.mod-flat` is now .button.mod-link
 ### Enhancements
 - `buttons` New style & remove mod-filling
 - `textfield` New default style
