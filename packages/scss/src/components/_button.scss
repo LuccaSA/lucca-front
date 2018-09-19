@@ -45,7 +45,7 @@
 
 	@mixin buttonLesserColoring($palette) {
 		background: _color($palette, "lightest");
-		box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette, "transparent") inset;
+		box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette, "see-through") inset;
 		color: _color($palette, "dark");
 
 		&:hover:not([disabled]) {
