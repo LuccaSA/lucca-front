@@ -78,6 +78,25 @@ export class FieldgroupComponent {
 					],
 					templateOptions: {},
 				},
+				{
+					className: 'form-group-line',
+					fieldGroup: [
+						{
+							className: 'form-group-line-md4',
+							key: 'radio_choice',
+							type: 'radio',
+							templateOptions: {
+								label: 'Radio choices',
+								options: [
+									{ value: 1, label: 'Option 1'},
+									{ value: 2, label: 'Option 2'},
+								],
+								mod: 'mod-framed',
+							},
+						},
+					],
+					templateOptions: {},
+				},
 			],
 			templateOptions: {
 				title: 'section 1',

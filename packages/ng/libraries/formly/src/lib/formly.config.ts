@@ -5,6 +5,7 @@ import { LuFormlyFieldDate } from './types/date';
 import { LuFormlyFieldTextarea } from './types/textarea';
 import { LuFormlyFieldSelect } from './types/select';
 import { LuFormlyFieldUser } from './types/user';
+import { LuFormlyFieldRadios } from './types/radios';
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
 import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
@@ -26,6 +27,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyFieldTextarea,
 	LuFormlyFieldSelect,
 	LuFormlyFieldUser,
+	LuFormlyFieldRadios,
 
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
@@ -41,6 +43,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'input',
 			component: LuFormlyFieldInput,
+			wrappers: ['textfield-layout'],
+		},
+		{
+			name: 'radio',
+			component: LuFormlyFieldRadios,
 			wrappers: ['textfield-layout'],
 		},
 		{

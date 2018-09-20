@@ -1,0 +1,16 @@
+<div class="radios-group" *ngIf="_options.length < 3; else buttonGroup">
+	<div *ngFor="let option of _options, let i = index" class="radio">
+		<input class="radio-input" type="radio" [value]="option.value" [id]="id + '_'+ i" [formControl]="formControl" [formlyAttributes]="field">
+		<label class="radio-label" [for]="id + '_'+ i">{{option.label}}</label>
+	</div>
+</div>
+<label class="textfield-label">{{to.label}}</label>
+
+<ng-template #buttonGroup>
+<div class="button-group">
+	<div class="button-group-item" *ngFor="let option of _options, let i = index">
+		<input class="button-group-input" type="radio" [value]="option.value" [id]="id + '_'+ i" [formControl]="formControl" [formlyAttributes]="field">
+		<label class="button" [for]="id + '_'+ i">{{option.label}}</label>
+	</div>
+</div>
+</ng-template>

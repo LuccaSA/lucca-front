@@ -1,0 +1,14 @@
+@import 'theming';
+@import '~@lucca-front/scss/src/_mixins';
+
+:host-context(.mod-framed) {
+	.radios-group, .checkboxes-group, .button-group {
+		display: inherit;
+		flex-wrap: wrap;
+		flex-direction: inherit;
+		width: 100%;
+		margin: 0;
+		@include fakeBorder(1px, _theme("commons.divider.color"));
+		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+	}
+}
