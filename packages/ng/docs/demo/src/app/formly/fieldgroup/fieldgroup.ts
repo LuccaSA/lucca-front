@@ -94,6 +94,15 @@ export class FieldgroupComponent {
 								mod: 'mod-framed',
 							},
 						},
+						{
+							className: 'form-group-line-md',
+							key: 'checkbox_choice',
+							type: 'checkbox',
+							templateOptions: {
+								label: 'Checkbox choice',
+								mod: 'mod-framed',
+							},
+						},
 					],
 					templateOptions: {},
 				},

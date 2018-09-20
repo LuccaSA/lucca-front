@@ -104,6 +104,13 @@ export class BasicComponent {
 				]
 			}
 		},
+		{
+			key: 'checkbox',
+			type: 'checkbox',
+			templateOptions: {
+				label: 'Checkboxes',
+			}
+		},
 		// {
 		// 	key: 'department',
 		// 	type: 'api',

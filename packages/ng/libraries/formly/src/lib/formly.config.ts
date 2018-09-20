@@ -18,6 +18,7 @@ import {
 	TemplateError,
 	LuFormlyErrorMessage,
 } from './wrappers/error';
+import { LuFormlyFieldCheckboxes } from './types/checkboxes';
 
 export const LU_FORMLY_COMPONENTS = [
 	LuFormlyErrorMessage,
@@ -28,6 +29,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyFieldSelect,
 	LuFormlyFieldUser,
 	LuFormlyFieldRadios,
+	LuFormlyFieldCheckboxes,
 
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
@@ -48,6 +50,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'radio',
 			component: LuFormlyFieldRadios,
+			wrappers: ['textfield-layout'],
+		},
+		{
+			name: 'checkbox',
+			component: LuFormlyFieldCheckboxes,
 			wrappers: ['textfield-layout'],
 		},
 		{
