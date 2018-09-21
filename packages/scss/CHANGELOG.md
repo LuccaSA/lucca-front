@@ -1,6 +1,10 @@
 # Changelog
 
 ## In Dev
+### New features
+- `.radios-group` & `.checkboxes-group`
+### Fixes
+- `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`
 
