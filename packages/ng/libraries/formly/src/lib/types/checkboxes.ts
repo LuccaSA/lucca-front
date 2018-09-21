@@ -3,7 +3,7 @@ import { FieldType } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-checkboxes',
-	styleUrls: ['formly-field.common.scss', 'grouped-inputs.scss'],
+	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './checkboxes.html',
 })
 export class LuFormlyFieldCheckboxes extends FieldType {

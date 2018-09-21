@@ -3,7 +3,7 @@ import { FieldType } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-radios',
-	styleUrls: ['formly-field.common.scss', 'grouped-inputs.scss'],
+	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './radios.html',
 })
 export class LuFormlyFieldRadios extends FieldType {
