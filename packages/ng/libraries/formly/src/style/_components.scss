@@ -6,3 +6,9 @@ formly-field {
 	flex-direction: inherit;
 	width: 100%;
 }
+
+.form:not(.mod-framed) {
+	formly-field {
+		margin-bottom: _component("form.field.margin-bottom");
+	}
+}
