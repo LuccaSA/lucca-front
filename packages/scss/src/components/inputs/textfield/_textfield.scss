@@ -225,6 +225,21 @@
 	}
 }
 
+/* Style can & should be applied at the form level */
+.form {
+	&.mod-material .textfield {
+		@extend %input_material;
+	}
+
+	&.mod-compact .textfield {
+		@extend %input_compact;
+	}
+
+	&.mod-framed .textfield {
+		@extend %input_framed;
+	}
+}
+
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
