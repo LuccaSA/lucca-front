@@ -11,14 +11,16 @@
 		&::after {
 			transform: scale(1);
 		}
+		&::before {
+			@include makeIcon("tick");
+		}
 	}
 }
 
 .checkbox-label {
 	cursor: pointer;
-	display: inline-block;
-	padding: _component("checkbox.label.padding");
-	line-height: _component("checkbox.label.line-height");
+	display: flex;
+	align-items: flex-start;
 	transition: color 150ms ease;
 
 	&::before {
@@ -26,27 +28,16 @@
 		box-shadow: inset 0 0 0 2px #999999;
 		content: "";
 		display: block;
-		height: _component("checkbox.input.size");
-		left: 0;
-		position: absolute;
-		top: _component("checkbox.input.top");
-		transition: all 100ms ease;
 		width: _component("checkbox.input.size");
-	}
-
-	&::after {
+		height: _component("checkbox.input.size");
+		line-height: _component("checkbox.input.size");
+		transition: all 100ms ease;
 		color: white;
 		font-size: .8rem;
-		@include makeIcon("tick");
-		left: 0;
-		line-height: _component("checkbox.input.size");
-		padding-top: .05rem;
-		position: absolute;
 		text-align: center;
-		top: _component("checkbox.input.top");
-		transform: scale(0);
-		transition: all 100ms ease;
-		width: _component("checkbox.input.size");
+		margin-right: _component("checkbox.input.margin-right");
+		margin-top: _component("checkbox.input.margin-top");
+		flex: 0 0 auto;
 	}
 
 	&:hover {
@@ -88,14 +79,29 @@
 
 .checkbox {
 	&.mod-inline {
+		vertical-align: middle;
 		display: inline-block;
 		margin-right: 1.5rem;
 	}
 }
 
 .form.mod-framed {
-	.checkbox {
-		margin-right: 2em;
+	.checkbox, .checkbox-label {
+		width: 100%;
+	}
+	.checkbox .checkbox-label{
+		@include fakeBorder(1px, _theme("commons.divider.color"));
+		padding: _component("textfield.framed.side-padding");
+		display: inline-flex;
+		align-items: center;
+		&::before {
+			position: relative;
+			margin-top: 0;
+		}
+	}
+
+	.checkbox.is-offset .checkbox-label{
+		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");		
 	}
 }
 
@@ -123,7 +129,7 @@
 	}
 
 	&.is-incomplete ~ .checkbox-label {
-		&::after {
+		&::before{
 			font-size: .6rem;
 			@include makeIcon("minimize");
 		}
