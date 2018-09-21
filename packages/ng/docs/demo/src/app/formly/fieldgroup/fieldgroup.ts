@@ -95,8 +95,22 @@ export class FieldgroupComponent {
 							type: 'checkbox',
 							templateOptions: {
 								label: 'Checkbox choice',
+								mod: 'is-offset'
 							},
 						},
+					],
+					templateOptions: {},
+				},
+				{
+					className: 'form-group-line',
+					fieldGroup: [
+							{
+									key: 'checkbox_choice2',
+									type: 'checkbox',
+									templateOptions: {
+											label: 'Checkbox choice 2'
+									},
+							},
 					],
 					templateOptions: {},
 				},
