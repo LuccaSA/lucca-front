@@ -89,7 +89,7 @@
 	.checkbox, .checkbox-label {
 		width: 100%;
 	}
-	.checkbox .checkbox-label{
+	.checkbox .checkbox-label {
 		@include fakeBorder(1px, _theme("commons.divider.color"));
 		padding: _component("textfield.framed.side-padding");
 		display: inline-flex;
@@ -100,8 +100,8 @@
 		}
 	}
 
-	.checkbox.is-offset .checkbox-label{
-		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");		
+	.checkbox.is-offset .checkbox-label {
+		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
 	}
 }
 
@@ -129,7 +129,7 @@
 	}
 
 	&.is-incomplete ~ .checkbox-label {
-		&::before{
+		&::before {
 			font-size: .6rem;
 			@include makeIcon("minimize");
 		}
