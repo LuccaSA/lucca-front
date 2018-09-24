@@ -17,6 +17,7 @@ import { DemoApiModule } from './api/api.module';
 import { DemoSelectModule } from './select/select.module';
 
 import { DemoUserModule } from './user/user.module';
+import { DemoNumberModule } from './number/number.module';
 
 @NgModule({
 	declarations: [
@@ -35,6 +36,7 @@ import { DemoUserModule } from './user/user.module';
 		DemoFormlyModule,
 		DemoApiModule,
 		DemoSelectModule,
+		DemoNumberModule,
 	],
 	bootstrap: [AppComponent],
 })

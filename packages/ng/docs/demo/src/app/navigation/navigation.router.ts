@@ -4,7 +4,9 @@ import { animationsRoutes } from '../animation/animation.router';
 import { apiRoutes } from '../api/api.router';
 import { userRoutes } from '../user/user.router';
 import { selectRoutes } from '../select/select.router';
+import { numberRoutes } from '../number/number.router';
 export const featuresRoutes = [
+	...numberRoutes,
 	...formlyRoutes,
 	...popoverRoutes,
 	...animationsRoutes,
