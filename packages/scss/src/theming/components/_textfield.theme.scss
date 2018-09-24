@@ -1,18 +1,10 @@
 $textfield: (
-	font-size: _theme("sizes.standard.font-size"),
 	background: #FFFFFF,
 	border-radius: .2rem,
 
 	input: (
 		padding-horizontal: .5rem,
-		padding-vertical: .5rem,
-		color: _color("text.default")
-	),
-
-	label: (
-		color: _color("text.default"),
-		font-size: _theme("sizes.small.font-size"),
-		margin-bottom: .25rem,
+		padding-vertical: .5rem
 	),
 
 	suffix: (
@@ -23,10 +15,6 @@ $textfield: (
 	border: (
 		color: #CCCCCC,
 		focus: #999999
-	),
-
-	message: (
-		font-size: _theme("sizes.small.font-size")
 	),
 
 	sizes: (
@@ -70,22 +58,9 @@ $textfield: (
 	),
 
 	framed: (
-		default-palette:(
-			color: _color("text.light", "color", true),
-			see-through: transparentize(_color("text.light", "color", true), .95),
-			text: _color("text.default", "color", true)
-		),
-		side-padding: 1rem,
-		top-padding: 2.2rem,
-		bottom-padding: .7rem,
-		label-top-offset: .5rem,
 		textarea: (
 			height: 7rem,
 			margin-top: 1.5rem
-		),
-		title: (
-			font-size: _theme("sizes.big.font-size"),
-			line-height: _theme("sizes.big.line-height")
 		),
 		suffix: (
 			padding-right: 2.5rem

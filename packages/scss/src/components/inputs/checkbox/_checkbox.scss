@@ -91,7 +91,7 @@
 	}
 	.checkbox .checkbox-label {
 		@include fakeBorder(1px, _theme("commons.divider.color"));
-		padding: _component("textfield.framed.side-padding");
+		padding: _component("field.framed.side-padding");
 		display: inline-flex;
 		align-items: center;
 		&::before {
@@ -101,7 +101,7 @@
 	}
 
 	.checkbox.is-offset .checkbox-label {
-		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 	}
 }
 

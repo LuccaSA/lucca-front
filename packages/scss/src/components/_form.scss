@@ -41,17 +41,17 @@
 
 			&.mod-selection {
 				@include fakeBorder(1px, _theme("commons.divider.color"));
-				padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+				padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 			}
 		}
 
 		.form-group-line-label {
 			color: _color("text.light");
 			font-size: _theme("sizes.small.font-size");
-			left: _component("textfield.framed.side-padding");
+			left: _component("field.framed.side-padding");
 			position: absolute;
-			right: _component("textfield.framed.side-padding");
-			top: _component("textfield.framed.label-top-offset");
+			right: _component("field.framed.side-padding");
+			top: _component("field.framed.label-top-offset");
 			width: auto;
 		}
 
@@ -89,7 +89,7 @@
 			width: 100%;
 			margin: 0;
 			@include fakeBorder(1px, _theme("commons.divider.color"));
-			padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+			padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 		}
 	}
 }

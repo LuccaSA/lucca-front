@@ -12,8 +12,8 @@
 	}
 
 	.textfield-suffix {
-		bottom: _component("textfield.framed.bottom-padding");
-		right: _component("textfield.framed.side-padding");
+		bottom: _component("field.framed.bottom-padding");
+		right: _component("field.framed.side-padding");
 		display: flex;
 		align-items: flex-end;
 	}
@@ -53,7 +53,7 @@
 			}
 		}
 
-		@include inputColoring("textfield.framed.default-palette");
+		@include inputColoring("field.framed.default-palette");
 
 		// palette colors
 		@each $name, $palette in _getMap("palettes") {
@@ -82,9 +82,9 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			bottom: _component("textfield.framed.bottom-padding");
+			bottom: _component("field.framed.bottom-padding");
 			line-height: 1;
-			right: _component("textfield.framed.side-padding");
+			right: _component("field.framed.side-padding");
 		}
 
 		.textfield-input {

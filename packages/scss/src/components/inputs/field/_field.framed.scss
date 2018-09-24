@@ -7,7 +7,7 @@
 		background: transparent;
 		border-radius: 0;
 		height: 100%;
-		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
+		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 
 		&:focus {
 			z-index: 1;
@@ -34,11 +34,11 @@
 		color: _color("text.light");
 		font-size: _theme("sizes.small.font-size");
 		font-weight: 400;
-		left: _component("textfield.framed.side-padding");
+		left: _component("field.framed.side-padding");
 		pointer-events: none;
 		position: absolute;
-		right: _component("textfield.framed.side-padding");
-		top: _component("textfield.framed.label-top-offset");
+		right: _component("field.framed.side-padding");
+		top: _component("field.framed.label-top-offset");
 		z-index: 1;
 	}
 
@@ -57,26 +57,26 @@
 	.#{$fieldname}-messages-error {
 		background-color: _color("error");
 		color: _theme("palettes.error.text");
-		font-size: _component("textfield.message.font-size");
+		font-size: _component("field.message.font-size");
 		margin: 0;
 	}
 
 	.#{$fieldname}-messages-warning {
 		background-color: _color("warning");
 		color: _theme("palettes.warning.text");
-		font-size: _component("textfield.message.font-size");
+		font-size: _component("field.message.font-size");
 		margin: 0;
 	}
 
 	.#{$fieldname}-messages-helper {
 		background-color: _color("text.light");
 		color: white;
-		font-size: _component("textfield.message.font-size");
+		font-size: _component("field.message.font-size");
 		margin: 0;
 	}
 
 	// COLORING
-	@include inputColoring("textfield.framed.default-palette", $fieldname);
+	@include inputColoring("field.framed.default-palette", $fieldname);
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
@@ -165,9 +165,9 @@
 			color: _color($palette);
 		}
 	}
-	// Needed when textfield label is not next to the textfield-input
+	// Needed when field label is not next to the field-input
 	&.is-focused {
-		.textfield-label {
+		.field-label {
 			color: _color($palette);
 		}
 	}
