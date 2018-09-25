@@ -1,13 +1,13 @@
 $textfield: (
 	font-size: _theme("sizes.standard.font-size"),
-	background: desaturate(lighten(_color("primary", "color", true), 44%), 30%),
+	background: lighten(_color("primary", "color", true), 40%),
 	border-radius: .2rem,
 
 	input: (
 		padding-horizontal: .5rem,
 		padding-vertical: .5rem,
 		color: _color("text.default"),
-		placeholder: desaturate(lighten(_color("primary", "color", true), 25%), 75%)
+		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 50%)
 	),
 
 	label: (
@@ -17,7 +17,7 @@ $textfield: (
 	),
 
 	hover: (
-		background: desaturate(lighten(_color("primary", "color", true), 41%), 30%),
+		background: lighten(_color("primary", "color", true), 37%)
 	),
 
 	focus: (
