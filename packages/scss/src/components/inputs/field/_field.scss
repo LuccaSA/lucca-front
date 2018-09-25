@@ -129,5 +129,40 @@
 	}
 }
 
+// ANIMATIONS / MIXINS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+@keyframes isValid {
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	5% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	7% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	93% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	95% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(0);
+	}
+}
+
 @import './field.compact';
 @import './field.framed';
