@@ -1,12 +1,13 @@
 $textfield: (
 	font-size: _theme("sizes.standard.font-size"),
-	background: _theme("commons.background.dark"),
+	background: desaturate(lighten(_color("primary", "color", true), 44%), 30%),
 	border-radius: .2rem,
 
 	input: (
 		padding-horizontal: .5rem,
 		padding-vertical: .5rem,
-		color: _color("text.default")
+		color: _color("text.default"),
+		placeholder: desaturate(lighten(_color("primary", "color", true), 25%), 75%)
 	),
 
 	label: (
@@ -16,7 +17,15 @@ $textfield: (
 	),
 
 	hover: (
-		background: _theme("commons.background.base")
+		background: desaturate(lighten(_color("primary", "color", true), 41%), 30%),
+	),
+
+	focus: (
+		placeholder: _color("text.placeholder")
+	),
+
+	disabled: (
+		background: #F5F5F5
 	),
 
 	suffix: (
@@ -75,7 +84,8 @@ $textfield: (
 		default-palette:(
 			color: _color("text.light", "color", true),
 			see-through: transparentize(_color("text.light", "color", true), .95),
-			text: _color("text.default", "color", true)
+			text: _color("text.default", "color", true),
+			placeholder: #CCCCCC
 		),
 		side-padding: 1rem,
 		top-padding: 2.2rem,

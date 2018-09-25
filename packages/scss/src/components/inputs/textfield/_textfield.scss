@@ -16,12 +16,12 @@
 	outline: 0;
 	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
 	position: relative;
-	transition: box-shadow 150ms ease, color 150ms ease, background 150ms ease;
+	transition: box-shadow _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, background _theme("commons.animations.durations.fast") ease;
 	width: 100%;
 
 	&::placeholder {
-		color: _color("text.placeholder");
-		transition: opacity 150ms ease;
+		color: _component("textfield.input.placeholder");
+		transition: opacity _theme("commons.animations.durations.fast") ease;
 	}
 
 	&:hover {
@@ -31,6 +31,11 @@
 	&:focus {
 		background: white;
 		box-shadow: 0 0 0 2px _color("primary", "lighter");
+
+		&::placeholder {
+			color: _component("textfield.focus.placeholder");
+			transition: opacity _theme("commons.animations.durations.fast") ease;
+		}
 	}
 }
 
@@ -51,7 +56,7 @@
 	overflow: hidden;
 	position: relative;
 	text-overflow: ellipsis;
-	transition: all 150ms ease;
+	transition: all _theme("commons.animations.durations.fast") ease;
 	word-break: break-word;
 	white-space: nowrap;
 	margin-bottom: _component("textfield.label.margin-bottom");
@@ -90,7 +95,7 @@
 	top: 100%;
 	transform: scaleY(0);
 	transform-origin: right top;
-	transition: all 150ms ease;
+	transition: all _theme("commons.animations.durations.fast") ease;
 	z-index: 999;
 	width: 100%;
 }
@@ -298,7 +303,7 @@
 .textfield-input {
 
 	&[disabled] {
-		background: _theme("commons.background.base");
+		background: _component("textfield.disabled.background");
 		color: _color("text.light");
 		cursor: not-allowed;
 	}

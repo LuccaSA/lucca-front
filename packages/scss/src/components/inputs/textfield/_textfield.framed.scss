@@ -10,6 +10,7 @@
 		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
 
 		&::placeholder {
+			color: _component("textfield.framed.default-palette.placeholder");
 			opacity: 0;
 		}
 
@@ -21,6 +22,7 @@
 			}
 
 			&::placeholder {
+				color: _component("textfield.framed.default-palette.placeholder");
 				opacity: 1;
 			}
 		}

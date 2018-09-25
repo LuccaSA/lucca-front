@@ -15,10 +15,10 @@ $commons: (
 		opacity: .5,
 	),
 	background: (
-		base: #F7F7F5,
-		dark: #F0EFED,
-		darker: #E5E5E3,
-		darkest: #CCCCCA
+		base: desaturate(lighten(_color("primary", "color", true), 46%), 88%),
+		dark: desaturate(lighten(_color("primary", "color", true), 43%), 90%),
+		darker: desaturate(lighten(_color("primary", "color", true), 39%), 94%),
+		darkest: desaturate(lighten(_color("primary", "color", true), 30%), 98%)
 	),
 	text: (
 		default: (
