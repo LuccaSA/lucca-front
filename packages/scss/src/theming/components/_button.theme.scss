@@ -51,12 +51,8 @@ $button: (
 		),
 		big: (
 			padding: .75rem 1.5rem,
-			font-size: 1.15rem
+			font-size: _theme("sizes.big.font-size")
 		),
-		bigger: (
-			padding: 1rem 2rem,
-			font-size: 1.3rem
-		)
 	),
 );
 $theme: _set($theme, "components.button", $button);
