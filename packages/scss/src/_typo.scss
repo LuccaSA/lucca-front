@@ -54,11 +54,11 @@ h4 {
 }
 
 h5 {
-	color: _color("text.light");
-	font-size: _theme("sizes.standard.font-size");
-	font-weight: 400;
-	line-height: _theme("sizes.standard.line-height");
-	margin: 0 0 .5rem;
+	color: _color("text.dark");
+	font-size: _theme("sizes.small.font-size");
+	font-weight: 600;
+	line-height: _theme("sizes.small.line-height");
+	margin: 0 0 .3rem;
 }
 
 p {
