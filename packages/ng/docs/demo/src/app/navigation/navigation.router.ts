@@ -5,6 +5,7 @@ import { apiRoutes } from '../api/api.router';
 import { userRoutes } from '../user/user.router';
 import { selectRoutes } from '../select/select.router';
 import { numberRoutes } from '../number/number.router';
+import { tooltipRoutes } from '../tooltip/tooltip.router';
 export const featuresRoutes = [
 	...numberRoutes,
 	...formlyRoutes,
@@ -13,4 +14,5 @@ export const featuresRoutes = [
 	...apiRoutes,
 	...userRoutes,
 	...selectRoutes,
+	...tooltipRoutes,
 ];
