@@ -13,6 +13,9 @@ a {
 	border: 0;
 	color: _color("text.link");
 	cursor: pointer;
+	display: inline;
+	margin: 0;
+	padding: 0;
 	text-decoration: underline;
 
 	&:hover {
