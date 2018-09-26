@@ -1,0 +1,24 @@
+a {
+	color: _color("text.link");
+	cursor: pointer;
+	text-decoration: underline;
+
+	&:hover {
+		color: _color("text.link", "hover");
+	}
+}
+
+.link {
+	background: transparent;
+	border: 0;
+	color: _color("text.link");
+	cursor: pointer;
+	display: inline;
+	margin: 0;
+	padding: 0;
+	text-decoration: underline;
+
+	&:hover {
+		color: _color("text.link", "hover");
+	}
+}

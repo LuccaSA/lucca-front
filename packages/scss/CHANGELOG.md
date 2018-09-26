@@ -3,6 +3,11 @@
 ## In Dev
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`
+- `button.mod-link` is now .link
+- `button.mod-flat` is now .button.mod-link
+### Enhancements
+- `buttons` New style & remove mod-filling
+- `textfield` New default style
 
 ## 1.0.1
 ### New features
@@ -29,13 +34,13 @@ We avoid as much breaking changes as possible, but here's a few:
   @include generateCSSVarsFromTheme($theme);
 }
 ```
-- Palettes now needs 5 new properties: 
+- Palettes now needs 5 new properties:
   - `darker`
   - `dark`
   - `light`
   - `lighter`
   - `transparent`
-- The `colors.text` children are now maps with at least a `color` property 
+- The `colors.text` children are now maps with at least a `color` property
 - The getter functions returns CSS vars by default.
   - if you need to access a map, use the new `_getMap("keys")` function
   - if you need to get the value, set the last parameter to `true` in getter functions (eg. `_color("palette", "key", true)`). It comes handy wherever your using SCSS variable manipulation

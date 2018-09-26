@@ -1,12 +1,13 @@
 $textfield: (
 	font-size: _theme("sizes.standard.font-size"),
-	background: #FFFFFF,
+	background: lighten(_color("primary", "color", true), 40%),
 	border-radius: .2rem,
 
 	input: (
 		padding-horizontal: .5rem,
 		padding-vertical: .5rem,
-		color: _color("text.default")
+		color: _color("text.default"),
+		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 50%)
 	),
 
 	label: (
@@ -15,14 +16,21 @@ $textfield: (
 		margin-bottom: .25rem,
 	),
 
-	suffix: (
-		top: 1.75rem,
-		padding-right: 1.5rem
+	hover: (
+		background: lighten(_color("primary", "color", true), 37%)
 	),
 
-	border: (
-		color: #CCCCCC,
-		focus: #999999
+	focus: (
+		placeholder: _color("text.placeholder")
+	),
+
+	disabled: (
+		background: #F5F5F5
+	),
+
+	suffix: (
+		top: 2rem,
+		padding-right: 1.5rem
 	),
 
 	message: (
@@ -43,6 +51,9 @@ $textfield: (
 		padding-top: 1rem,
 		default-palette: (
 			color: _color("primary")
+		),
+		border: (
+			color: #CCCCCC
 		),
 		label: (
 			color: #A6A6A6,
@@ -73,7 +84,8 @@ $textfield: (
 		default-palette:(
 			color: _color("text.light", "color", true),
 			see-through: transparentize(_color("text.light", "color", true), .95),
-			text: _color("text.default", "color", true)
+			text: _color("text.default", "color", true),
+			placeholder: #CCCCCC
 		),
 		side-padding: 1rem,
 		top-padding: 2.2rem,

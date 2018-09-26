@@ -1,48 +1,53 @@
 $palettes: (
-	primary: (
-		color: #FFCC00,
-		text: #666666,
-		see-through: rgba(#FFCC00, .1),
-		dark: darken(#FFCC00, 5%),
-		darker: darken(#FFCC00, 20%),
-		light: lighten(#FFCC00, 5%),
-		lighter: lighten(#FFCC00, 20%)
+	"primary": (
+		"color": #FFB900,
+		"text": #666666,
+		"dark": darken(#FFB900, 7%),
+		"darker": darken(#FFB900, 20%),
+		"light": lighten(#FFB900, 10%),
+		"lighter": lighten(#FFB900, 20%),
+		"lightest": lighten(#FFB900, 42%),
+		"see-through": rgba(#FFB900, .15)
 	),
-	secondary: (
-		color: #FF6600,
-		text: #FFFFFF,
-		see-through: rgba(#FF6600, .1),
-		dark: darken(#FF6600, 5%),
-		darker: darken(#FF6600, 20%),
-		light: lighten(#FF6600, 5%),
-		lighter: lighten(#FF6600, 20%)
+	"secondary": (
+		"color": #FF6600,
+		"text": #FFFFFF,
+		"dark": darken(#FF6600, 5%),
+		"darker": darken(#FF6600, 20%),
+		"light": lighten(#FF6600, 10%),
+		"lighter": lighten(#FF6600, 20%),
+		"lightest": lighten(#FF6600, 45%),
+		"see-through": rgba(#FF6600, .15)
 	),
-	success: (
-		color: #9ACD32,
-		text: #FFFFFF,
-		see-through: rgba(#9ACD32, .1),
-		dark: darken(#9ACD32, 5%),
-		darker: darken(#9ACD32, 20%),
-		light: lighten(#9ACD32, 5%),
-		lighter: lighten(#9ACD32, 20%)
+	"success": (
+		"color": #9ACD32,
+		"text": #FFFFFF,
+		"dark": darken(#9ACD32, 5%),
+		"darker": darken(#9ACD32, 20%),
+		"light": lighten(#9ACD32, 10%),
+		"lighter": lighten(#9ACD32, 20%),
+		"lightest": lighten(#9ACD32, 43%),
+		"see-through": rgba(#9ACD32, .15)
 	),
-	warning: (
-		color: #FF9900,
-		text: #FFFFFF,
-		see-through: rgba(#FF9900, .1),
-		dark: darken(#FF9900, 5%),
-		darker: darken(#FF9900, 20%),
-		light: lighten(#FF9900, 5%),
-		lighter: lighten(#FF9900, 20%)
+	"warning": (
+		"color": #FF9900,
+		"text": #FFFFFF,
+		"dark": darken(#FF9900, 5%),
+		"darker": darken(#FF9900, 20%),
+		"light": lighten(#FF9900, 10%),
+		"lighter": lighten(#FF9900, 20%),
+		"lightest": lighten(#FF9900, 43%),
+		"see-through": rgba(#FF9900, .15)
 	),
-	error: (
-		color: #FF3300,
-		text: #FFFFFF,
-		see-through: rgba(#FF3300, .1),
-		dark: darken(#FF3300, 5%),
-		darker: darken(#FF3300, 20%),
-		light: lighten(#FF3300, 5%),
-		lighter: lighten(#FF3300, 20%)
+	"error": (
+		"color": #FF3300,
+		"text": #FFFFFF,
+		"dark": darken(#FF3300, 5%),
+		"darker": darken(#FF3300, 20%),
+		"light": lighten(#FF3300, 10%),
+		"lighter": lighten(#FF3300, 20%),
+		"lightest": lighten(#FF3300, 43%),
+		"see-through": rgba(#FF3300, .15)
 	),
 );
 

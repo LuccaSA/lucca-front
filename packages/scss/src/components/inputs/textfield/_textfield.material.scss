@@ -4,7 +4,7 @@
 	.textfield-input {
 		background: transparent;
 		border-radius: 0;
-		box-shadow: 0 1px 0 0 _component("textfield.border.color");
+		box-shadow: 0 1px 0 0 _component("textfield.material.border.color");
 		padding: {
 			left: 0;
 			right: 0;
@@ -40,7 +40,7 @@
 	.textfield-suffix {
 		position: absolute;
 		right: 0;
-		top: _component("textfield.material.padding-top") + _component("textfield.input.padding-vertical");
+		top: calc(#{_component("textfield.material.padding-top")} + #{_component("textfield.input.padding-vertical")});
 	}
 
 
@@ -163,7 +163,7 @@
 
 		&[disabled], &[readonly] {
 			background: transparent;
-			background-image: linear-gradient(to right, _component("textfield.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
+			background-image: linear-gradient(to right, _component("textfield.material.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
 			background-position: bottom;
 			background-repeat: repeat-x;
 			background-size: 3px 1px;

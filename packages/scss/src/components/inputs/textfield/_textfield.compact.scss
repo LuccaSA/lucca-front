@@ -4,6 +4,7 @@
 	flex-direction: row;
 
 	.textfield-label {
+		align-self: inherit;
 		color: _component("textfield.compact.label.color");
 		font-size: _component("textfield.compact.label.font-size");
 		font-weight: 400;
