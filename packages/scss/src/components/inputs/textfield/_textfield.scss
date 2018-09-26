@@ -147,6 +147,15 @@
 			padding-right: 2rem;
 		}
 	}
+
+	&.mod-radio {	
+		display: inline-block;	
+		margin-left: .25rem;	
+ 		.textfield-input {	
+			padding-top: 0;	
+			padding-bottom: 0;	
+		}	
+	}
 }
 
 .form.mod-compact .textfield, .textfield.mod-compact {
