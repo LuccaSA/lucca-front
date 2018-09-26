@@ -6,6 +6,6 @@ import { LuSafeContentPipe } from './safe-content.pipe';
 	imports: [ CommonModule ],
 	declarations: [LuSafeContentPipe],
 	exports: [LuSafeContentPipe],
-	providers: [LuSafeContentPipe],
+	providers: [],
 })
 export class LuSafeContentModule {}

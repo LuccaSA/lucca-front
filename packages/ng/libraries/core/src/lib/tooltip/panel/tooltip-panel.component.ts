@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input, HostBinding, ChangeDetectorRef } from '@angular/core';
-import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '../../popover';
+import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '../../popover/index';
 
 @Component({
 	selector: 'lu-tooltip-panel',

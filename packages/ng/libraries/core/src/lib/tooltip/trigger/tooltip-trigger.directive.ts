@@ -7,15 +7,15 @@ import {
 	ComponentFactoryResolver,
 	AfterViewInit,
 	HostListener } from '@angular/core';
-import { ALuPopoverTrigger } from '../popover';
-import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
-import { LuTooltipPanelComponent } from './panel/tooltip-panel.component';
-import { ComponentPortal } from '@angular/cdk/portal';
+	import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
+	import { ComponentPortal } from '@angular/cdk/portal';
+	import { ALuPopoverTrigger } from '../../popover/index';
+	import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
 	selector: '[luTooltip]',
 })
-export class LuTooltipDirective extends ALuPopoverTrigger<LuTooltipPanelComponent> implements OnInit, AfterViewInit {
+export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent> implements OnInit, AfterViewInit {
 
 	@Input('luTooltip') tooltipContent;
 	@Input() enterDelay = 300;

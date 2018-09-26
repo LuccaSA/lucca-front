@@ -1,23 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LuTooltipDirective } from './tooltip.directive';
-import { LuTooltipPanelComponent } from './panel/tooltip-panel.component';
-import { LuSafeContentModule } from '../safe-content';
+import { LuTooltipTriggerModule } from './trigger/index';
+import { LuTooltipPanelModule } from './panel/index';
 
 @NgModule({
 	imports: [
-		CommonModule,
-		LuSafeContentModule,
-	],
-	declarations: [
-		LuTooltipDirective,
-		LuTooltipPanelComponent,
+		LuTooltipTriggerModule,
+		LuTooltipPanelModule,
 	],
 	exports: [
-		LuTooltipDirective,
-	],
-	entryComponents: [
-		LuTooltipPanelComponent,
+		LuTooltipTriggerModule,
+		LuTooltipPanelModule,
 	]
 })
 export class LuTooltipModule {}
