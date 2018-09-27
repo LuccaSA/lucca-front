@@ -1,5 +1,7 @@
 .radio {
 	position: relative;
+	display: block;
+	margin: .25rem 0;
 }
 
 .radio-input {
@@ -94,12 +96,8 @@
 	&.mod-inline {
 		display: inline-block;
 		margin-right: 1.5rem;
-	}
-}
-
-.form.mod-framed {
-	.radio {
-		margin-right: 2em;
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 }
 

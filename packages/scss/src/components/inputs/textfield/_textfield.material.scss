@@ -152,13 +152,13 @@
 
 	&.is-invalid {
 		.textfield-input {
-			@include textfieldMaterialError();
+			@include fieldMaterialError("textfield");
 		}
 	}
 
 	.textfield-input {
 		&.is-filled {
-			@include textfieldMaterialFilled();
+			@include fieldMaterialFilled("textfield");
 		}
 
 		&[disabled], &[readonly] {
@@ -171,7 +171,7 @@
 		}
 
 		&.is-error {
-			@include textfieldMaterialError();
+			@include fieldMaterialError("textfield");
 		}
 	}
 
