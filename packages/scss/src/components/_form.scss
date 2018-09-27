@@ -19,7 +19,7 @@
 }
 
 .form:not(.mod-framed) {
-	.textfield, .radiosfield, .checkboxesfield {
+	.textfield, .radiosfield, .checkboxesfield, .checkbox.mod-field {
 		margin-bottom: _component("form.field.margin-bottom");
 	}
 }
