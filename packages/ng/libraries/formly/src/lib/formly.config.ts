@@ -9,7 +9,7 @@ import { LuFormlyFieldRadios } from './types/radios';
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
 import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
-import { LuFormlyWrapperLabel, TemplateLabel } from './wrappers/label';
+import { LuFormlyWrapperLabel } from './wrappers/label';
 import { LuFormlyWrapperTextfieldLayout } from './wrappers/textfield-layout';
 import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
 import { LuFormlyWrapperIcon, TemplateIcon } from './wrappers/icon';
@@ -19,6 +19,7 @@ import {
 	LuFormlyErrorMessage,
 } from './wrappers/error';
 import { LuFormlyFieldCheckboxes } from './types/checkboxes';
+import { LuFormlyWrapperRadiosfieldLayout } from './wrappers/radiosfield-layout';
 
 export const LU_FORMLY_COMPONENTS = [
 	LuFormlyErrorMessage,
@@ -34,6 +35,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
+	LuFormlyWrapperRadiosfieldLayout,
 	LuFormlyWrapperSuffix,
 	LuFormlyWrapperIcon,
 	LuFormlyWrapperError,
@@ -50,12 +52,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'radio',
 			component: LuFormlyFieldRadios,
-			wrappers: ['textfield-layout'],
+			wrappers: ['radiosfield-layout'],
 		},
 		{
 			name: 'checkbox',
 			component: LuFormlyFieldCheckboxes,
-			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'date',
@@ -81,6 +82,7 @@ export const LU_FORMLY_CONFIG = {
 	wrappers: [
 		{ name: 'title', component: LuFormlyWrapperTitle },
 		{ name: 'helper', component: LuFormlyWrapperHelper },
+		{ name: 'radiosfield-layout', component: LuFormlyWrapperRadiosfieldLayout },
 		{ name: 'textfield-layout', component: LuFormlyWrapperTextfieldLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },
 		{ name: 'icon', component: LuFormlyWrapperIcon },
