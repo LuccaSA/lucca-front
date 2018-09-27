@@ -1,4 +1,4 @@
-@import '../field/field';
+@import "../field/field";
 
 .textfield {
 	width: _component("field.sizes.default");
@@ -9,17 +9,26 @@
 	background: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
-	box-shadow: inset 0 0 0 1px _component("textfield.border.color");
 	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
-	transition: box-shadow 150ms ease, color 150ms ease;
+	transition: box-shadow _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, background _theme("commons.animations.durations.fast") ease;
 
 	&::placeholder {
-		color: _color("text.placeholder");
-		transition: opacity 150ms ease;
+		color: _component("textfield.input.placeholder");
+		transition: opacity _theme("commons.animations.durations.fast") ease;
+	}
+
+	&:hover {
+		background: _component("textfield.hover.background");
 	}
 
 	&:focus {
-		box-shadow: inset 0 0 0 1px _component("textfield.border.focus");
+		background: white;
+		box-shadow: 0 0 0 2px _color("primary", "lighter");
+
+		&::placeholder {
+			color: _component("textfield.focus.placeholder");
+			transition: opacity _theme("commons.animations.durations.fast") ease;
+		}
 	}
 }
 
@@ -46,7 +55,7 @@
 	top: 100%;
 	transform: scaleY(0);
 	transform-origin: right top;
-	transition: all 150ms ease;
+	transition: all _theme("commons.animations.durations.fast") ease;
 	z-index: 999;
 	width: 100%;
 }
@@ -73,7 +82,7 @@
 
 	@mixin inputColoring($palette) {
 		.textfield-input:focus {
-			box-shadow: 0 0 0 1px _color($palette);
+			box-shadow: 0 0 0 2px _color($palette, "light");
 
 			~ .textfield-label {
 				color: _color("text.default");
@@ -148,13 +157,13 @@
 		}
 	}
 
-	&.mod-radio {	
-		display: inline-block;	
-		margin-left: .25rem;	
- 		.textfield-input {	
-			padding-top: 0;	
-			padding-bottom: 0;	
-		}	
+	&.mod-radio {
+		display: inline-block;
+		margin-left: .25rem;
+		.textfield-input {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
 	}
 }
 
@@ -195,7 +204,7 @@
 	@include field-input("textfield");
 
 	&[disabled], &[readonly] {
-		background: _theme("commons.background.dark");
+		background: _component("textfield.disabled.background");
 	}
 
 	&.is-error {

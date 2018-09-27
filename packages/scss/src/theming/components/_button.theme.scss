@@ -2,31 +2,27 @@ $button: (
 
 	// theming
 	default-palette: (
+		color: _theme("commons.background.base"),
+		light: _theme("commons.background.dark"),
+		dark: _theme("commons.background.darker"),
+		text: _color("text.default")
+	),
+	white-palette: (
 		color: white,
-		light: white,
-		dark: white,
+		light: _theme("commons.background.base"),
+		dark: _theme("commons.background.dark"),
 		text: _color("text.default")
 	),
 	margin: .2rem,
 	line-height: 1.15,
-	box-shadow: unquote("0 0 0 1px rgba(50, 50, 50, .2) inset"),
-
-	// states
-	hover: (
-		box-shadow: unquote("0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24)"),
-	),
-	focus: (
-		box-shadow: unquote("0 0 0 1px rgba(50, 50, 50, .2) inset, 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24)"),
-	),
-	active: (
-		box-shadow: unquote("0 0 0 1px rgba(50, 50, 50, .2) inset"),
+	font-weight: 600,
+	box-shadow: (
+		offset: -2px,
+		color: rgba(0, 0, 0, .1)
 	),
 
 	// mod
 	wired: (
-		default-palette: _getMap("palettes.primary"),
-	),
-	filling: (
 		default-palette: _getMap("palettes.primary"),
 	),
 	flat: (

@@ -1,20 +1,29 @@
 $textfield: (
-	background: #FFFFFF,
+
+	background: lighten(_color("primary", "color", true), 40%),
 	border-radius: .2rem,
 
 	input: (
 		padding-horizontal: .5rem,
-		padding-vertical: .5rem
+		padding-vertical: .5rem,
+		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 50%)
+	),
+
+	hover: (
+		background: lighten(_color("primary", "color", true), 37%)
+	),
+
+	focus: (
+		placeholder: _color("text.placeholder")
+	),
+
+	disabled: (
+		background: #F5F5F5
 	),
 
 	suffix: (
-		top: 1.75rem,
+		top: 2rem,
 		padding-right: 1.5rem
-	),
-
-	border: (
-		color: #CCCCCC,
-		focus: #999999
 	),
 
 	sizes: (
@@ -31,6 +40,9 @@ $textfield: (
 		padding-top: 1rem,
 		default-palette: (
 			color: _color("primary")
+		),
+		border: (
+			color: #CCCCCC
 		),
 		label: (
 			color: #A6A6A6,

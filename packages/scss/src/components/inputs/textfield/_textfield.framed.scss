@@ -1,11 +1,13 @@
 %input_framed {
 	.textfield-input {
 		&::placeholder {
+			color: _component("field.framed.default-palette.placeholder");
 			opacity: 0;
 		}
 
 		&:focus {
 			&::placeholder {
+				color: _component("field.framed.default-palette.placeholder");
 				opacity: 1;
 			}
 		}

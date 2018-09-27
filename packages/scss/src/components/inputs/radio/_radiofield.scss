@@ -1,4 +1,4 @@
-@import '../field/field';
+@import "../field/field";
 
 .radiosfield {
 	@include field("radiosfield");
@@ -12,7 +12,7 @@
 	}
 }
 
-.form.mod-compact .radiosfield, .radiosfield.mod-compact{
+.form.mod-compact .radiosfield, .radiosfield.mod-compact {
 	@include field-compact("radiosfield");
 
 	.radiosfield-input {

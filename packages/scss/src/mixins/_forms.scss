@@ -1,9 +1,9 @@
 @mixin fieldError($fieldname) {
-	box-shadow: 0 0 0 1px _color("error");
+	box-shadow: 0 0 0 1px _color("error") inset;
 	background-color: _color("error", "see-through");
 
 	&::placeholder {
-		color: _color("error", "light");
+		color: _color("error", "lighter");
 	}
 
 	~ .#{$fieldname}-label {

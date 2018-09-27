@@ -136,7 +136,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 
 	protected renderSingleView() {
 		this.clearDisplay();
-		if (!!this.value) {
+		if (this.value !== null && this.value !== undefined) {
 			const newView = this.getView(this.value);
 			this.displayView(newView);
 		}
