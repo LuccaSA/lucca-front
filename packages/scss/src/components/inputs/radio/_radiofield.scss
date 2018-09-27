@@ -14,7 +14,7 @@
 
 .form.mod-compact .radiosfield, .radiosfield.mod-compact {
 	@include field-compact("radiosfield");
-
+	align-items: flex-start;
 	.radiosfield-input {
 		@extend %radiosfield-row;
 	}
@@ -30,11 +30,12 @@
 
 %radiosfield-row {
 	display: flex;
+	flex-wrap: wrap;
 	.radio {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
-	.radio + .radio {
-		margin-left: 1.5rem;
+	.radio {
+		margin-right: 1.5rem;
 	}
 }

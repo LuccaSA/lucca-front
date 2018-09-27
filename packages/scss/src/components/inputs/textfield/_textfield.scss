@@ -9,6 +9,7 @@
 	background: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
+	line-height: 1;
 	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
 	transition: box-shadow _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, background _theme("commons.animations.durations.fast") ease;
 
