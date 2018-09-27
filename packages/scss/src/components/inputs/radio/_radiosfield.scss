@@ -10,6 +10,9 @@
 	&.mod-row {
 		@extend %radiosfield-row;
 	}
+	&.button-group {
+		display: flex;
+	}
 }
 
 .form.mod-compact .radiosfield, .radiosfield.mod-compact {
