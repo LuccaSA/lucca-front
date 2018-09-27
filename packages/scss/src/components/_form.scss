@@ -18,6 +18,12 @@
 	text-align: right;
 }
 
+.form:not(.mod-framed) {
+	.textfield, .radiosfield, .checkboxesfield {
+		margin-bottom: _component("form.field.margin-bottom");
+	}
+}
+
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -82,7 +88,7 @@
 			}
 		}
 
-		.radios-group, .checkboxes-group, .button-group {
+		.button-group {
 			display: inherit;
 			flex-wrap: wrap;
 			flex-direction: inherit;
