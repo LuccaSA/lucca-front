@@ -78,8 +78,12 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	@HostBinding('class.is-disabled')
 	get isDisabled() { return this.disabled; }
+	@HostBinding('class.is-clearable')
+	get isClearable() { return !!this.clearerEltRef; }
 	@HostBinding('class.mod-multiple')
 	get modMultiple() { return this._multiple; }
+	@HostBinding('class.mod-multipleView')
+	get modMultipleView() { return this.useMultipleViews(); }
 	/**
 	 * popover trigger class extension
 	 */
