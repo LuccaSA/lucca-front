@@ -1,7 +1,7 @@
 <section class="contentSection">
 	<h3>Multiple</h3>
 	<div class="textfield">
-		<lu-select [(ngModel)]="item" class="textfield-input" multiple>
+		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
 			<span class="chip mod-unkillable" *luDisplayer="let value">{{value.name}}</span>
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
@@ -13,6 +13,6 @@
 		</lu-select>
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
-	<code class="code mod-block">{{ item | json }}</code>
+	<code class="code mod-block">{{ items | json }}</code>
 </section>
 

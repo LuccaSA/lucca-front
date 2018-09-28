@@ -16,5 +16,5 @@ export class MultipleComponent {
 	green = { id: 2, name: 'green' };
 	yellow =	{ id: 3, name: 'yellow' };
 	blue =	{ id: 4, name: 'blue' };
-	item = this.red;
+	items = [this.red];
 }
