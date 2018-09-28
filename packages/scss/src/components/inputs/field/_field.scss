@@ -1,0 +1,172 @@
+@mixin field($fieldname) {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+
+	.#{$fieldname}-input {
+		color: _component("field.input.color");
+		font-family: unquote(_theme("commons.font.family"));
+		font-size: _component("field.font-size");
+		outline: 0;
+		position: relative;
+		width: 100%;
+	}
+
+	.#{$fieldname}-label {
+		color: _color("text.default");
+		font-weight: 600;
+		font-size: _component("field.label.font-size");
+		margin-bottom: _component("field.label.margin-bottom");
+		order: -1;
+		overflow: hidden;
+		position: relative;
+		text-overflow: ellipsis;
+		transition: all 150ms ease;
+		word-break: break-word;
+		white-space: nowrap;
+	}
+
+	.#{$fieldname}-messages {
+		font-size: _component("field.message.font-size");
+		line-height: 1.3;
+		margin-top: _component("field.message.margin-top");
+
+		> * {
+			margin: 0;
+		}
+	}
+
+	.#{$fieldname}-messages-error {
+		color: _color("error");
+	}
+
+	.#{$fieldname}-messages-warning {
+		color: _color("warning");
+	}
+
+	.#{$fieldname}-messages-helper {
+		color: _color("text.light");
+	}
+
+	/* Display */
+
+	&.mod-inline {
+		display: inline-flex;
+		margin-left: _component("field.input.inline-margin");
+		margin-right: _component("field.input.inline-margin");
+	}
+
+	&.mod-block {
+		width: 100%;
+	}
+
+	/* State */
+	&.is-required {
+		.#{$fieldname}-label {
+			&::after {
+				@extend %isRequired;
+			}
+		}
+	}
+
+	// Inline validation
+	&.is-loading {
+		@include loading(1rem);
+
+		&::before, &::after {
+			bottom: .6rem;
+			left: inherit;
+			right: .5rem;
+			top: inherit;
+			position: absolute;
+			z-index: 2;
+		}
+
+		.#{$fieldname}-input {
+			padding-right: 2rem;
+		}
+	}
+
+	&.is-valid {
+
+		&::before {
+			animation: isValid 3s forwards;
+			@include makeIcon("tick_bold");
+			border-radius: 50%;
+			bottom: .85rem;
+			color: _color("success");
+			font-size: 1.2rem;
+			height: 1rem;
+			position: absolute;
+			right: .4rem;
+			z-index: 1;
+		}
+
+		.#{$fieldname}-input {
+			padding-right: 2rem;
+		}
+	}
+
+	&.is-error, &.is-invalid {
+		.#{$fieldname}-label {
+			color: _color("error");
+		}
+	}
+}
+
+@mixin field-input($fieldname) {
+	display: block;
+	&[disabled], &[readonly] {
+		color: _color("text.light");
+		cursor: not-allowed;
+	}
+
+	&.is-invalid, &.is-error {
+		~ .#{$fieldname}-label {
+			color: _color("error");
+		}
+
+		&:focus ~ .#{$fieldname}-label {
+			color: _color("error");
+		}
+	}
+}
+
+// ANIMATIONS / MIXINS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+@keyframes isValid {
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	5% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	7% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	93% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	95% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(0);
+	}
+}
+
+@import "./field.compact";
+@import "./field.framed";

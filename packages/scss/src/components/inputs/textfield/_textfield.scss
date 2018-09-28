@@ -1,23 +1,17 @@
+@import "../field/field";
+
 .textfield {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	width: _component("textfield.sizes.default");
+	width: _component("field.sizes.default");
+	@include field("textfield");
 }
 
 .textfield-input {
 	background: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
-	color: _component("textfield.input.color");
-	font-family: unquote(_theme("commons.font.family"));
-	font-size: _component("textfield.font-size");
 	line-height: 1;
-	outline: 0;
 	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
-	position: relative;
 	transition: box-shadow _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, background _theme("commons.animations.durations.fast") ease;
-	width: 100%;
 
 	&::placeholder {
 		color: _component("textfield.input.placeholder");
@@ -45,39 +39,6 @@
 	position: absolute;
 	right: _component("textfield.input.padding-horizontal");
 	z-index: 1;
-}
-
-.textfield-label {
-	align-self: flex-start;
-	color: _color("text.default");
-	font-weight: 600;
-	font-size: _component("textfield.label.font-size");
-	order: -1;
-	overflow: hidden;
-	position: relative;
-	text-overflow: ellipsis;
-	transition: all _theme("commons.animations.durations.fast") ease;
-	word-break: break-word;
-	white-space: nowrap;
-	margin-bottom: _component("textfield.label.margin-bottom");
-}
-
-.textfield-messages {
-	font-size: _component("textfield.message.font-size");
-	line-height: 1.3;
-	margin-top: .35rem;
-}
-
-.textfield-messages-error {
-	color: _color("error");
-}
-
-.textfield-messages-warning {
-	color: _color("warning");
-}
-
-.textfield-messages-helper {
-	color: _color("text.light");
 }
 
 .textfield-options {
@@ -152,24 +113,13 @@
 .textfield {
 
 	/* Width */
-
 	@each $textfield-size-name, $textfield-width in _getMap("components.textfield.sizes") {
 		&.mod-#{$textfield-size-name} {
-			width: _component("textfield.sizes."+$textfield-size-name);
+			width: _component("field.sizes."+$textfield-size-name);
 		}
 	}
 
 	/* Display */
-
-	&.mod-inline {
-		display: inline-flex;
-		margin-left: .15rem;
-		margin-right: .15rem;
-	}
-
-	&.mod-block {
-		width: 100%;
-	}
 
 	&.mod-withSuffix {
 		.textfield-input {
@@ -208,31 +158,28 @@
 		}
 	}
 
-	/* Inside radio */
-
 	&.mod-radio {
 		display: inline-block;
 		margin-left: .25rem;
-
 		.textfield-input {
 			padding-top: 0;
 			padding-bottom: 0;
 		}
 	}
+}
 
-	/* Style */
+.form.mod-compact .textfield, .textfield.mod-compact {
+	@include field-compact("textfield");
+	@extend %input_compact;
+}
 
-	&.mod-material {
-		@extend %input_material;
-	}
+.form.mod-framed .textfield, .textfield.mod-framed {
+	@include field-framed("textfield");
+	@extend %input_framed;
+}
 
-	&.mod-compact, &.compact {
-		@extend %input_compact;
-	}
-
-	&.mod-framed {
-		@extend %input_framed;
-	}
+.form.mod-material .textfield, .textfield.mod-material {
+	@extend %input_material;
 }
 
 
@@ -247,112 +194,28 @@
 		}
 	}
 
-	&.is-required {
-		.textfield-label {
-			&::after {
-				@extend %isRequired;
-			}
-		}
-	}
-
-	// Inline validation
-	&.is-loading {
-		@include loading(1rem);
-
-		&::before, &::after {
-			bottom: .6rem;
-			left: inherit;
-			right: .5rem;
-			top: inherit;
-			position: absolute;
-			z-index: 2;
-		}
-
-		.textfield-input {
-			padding-right: 2rem;
-		}
-	}
-
-	&.is-valid {
-
-		&::before {
-			animation: isValid 3s forwards;
-			@include makeIcon("tick_bold");
-			border-radius: 50%;
-			bottom: .85rem;
-			color: _color("success");
-			font-size: 1.2rem;
-			height: 1rem;
-			position: absolute;
-			right: .4rem;
-			z-index: 1;
-		}
-
-		.textfield-input {
-			padding-right: 2rem;
-		}
-	}
-
 	&.is-invalid {
 		.textfield-input {
-			@include textfieldError();
+			@include fieldError("textfield");
 		}
 	}
 }
 
 .textfield-input {
+	@include field-input("textfield");
 
-	&[disabled] {
+	&[disabled], &[readonly] {
 		background: _component("textfield.disabled.background");
-		color: _color("text.light");
-		cursor: not-allowed;
 	}
 
 	&.is-error {
-		@include textfieldError();
+		@include fieldError("textfield");
 
 		&:focus {
-			@include textfieldError();
+			@include fieldError("textfield");
 		}
 	}
 }
-
-
-// ANIMATIONS / MIXINS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-@keyframes isValid {
-	from {
-		opacity: 0;
-		transform: scale(0);
-	}
-
-	5% {
-		opacity: 1;
-		transform: scale(1.2);
-	}
-
-	7% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	93% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	95% {
-		opacity: 1;
-		transform: scale(1.2);
-	}
-
-	to {
-		opacity: 0;
-		transform: scale(0);
-	}
-}
-
 
 // MATERIAL, COMPACT & FRAMED
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
