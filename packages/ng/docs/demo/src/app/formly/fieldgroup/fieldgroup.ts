@@ -23,7 +23,6 @@ export class FieldgroupComponent {
 							templateOptions: {
 								type: 'text',
 								label: 'first name',
-								mod: 'mod-framed',
 							},
 						},
 						{
@@ -33,7 +32,6 @@ export class FieldgroupComponent {
 							templateOptions: {
 								type: 'text',
 								label: 'last name',
-								mod: 'mod-framed',
 							},
 						},
 					],
@@ -49,7 +47,6 @@ export class FieldgroupComponent {
 							templateOptions: {
 								type: 'text',
 								label: 'Building Number',
-								mod: 'mod-framed',
 							},
 						},
 						{
@@ -59,7 +56,6 @@ export class FieldgroupComponent {
 							templateOptions: {
 								type: 'text',
 								label: 'Street Name',
-								mod: 'mod-framed',
 							},
 						},
 					],
@@ -72,9 +68,49 @@ export class FieldgroupComponent {
 							type: 'textarea',
 							templateOptions: {
 								label: 'comments',
-								mod: 'mod-framed textarea',
+								mod: 'textarea',
 							},
 						},
+					],
+					templateOptions: {},
+				},
+				{
+					className: 'form-group-line',
+					fieldGroup: [
+						{
+							className: 'form-group-line-md4',
+							key: 'radio_choice',
+							type: 'radio',
+							templateOptions: {
+								label: 'Radio choices',
+								options: [
+									{ value: 1, label: 'Option 1' },
+									{ value: 2, label: 'Option 2' },
+								],
+							},
+						},
+						{
+							className: 'form-group-line-md',
+							key: 'checkbox_choice',
+							type: 'checkbox',
+							templateOptions: {
+								label: 'Checkbox choice',
+								mod: 'is-offset'
+							},
+						},
+					],
+					templateOptions: {},
+				},
+				{
+					className: 'form-group-line',
+					fieldGroup: [
+							{
+									key: 'checkbox_choice2',
+									type: 'checkbox',
+									templateOptions: {
+											label: 'Checkbox choice 2'
+									},
+							},
 					],
 					templateOptions: {},
 				},
@@ -87,7 +123,6 @@ export class FieldgroupComponent {
 			className: 'form-group',
 			templateOptions: {
 				title: 'section 2',
-				mod: 'mod-framed',
 			},
 			fieldGroup: [
 				{
@@ -100,7 +135,6 @@ export class FieldgroupComponent {
 							{ id: 1, name: 'male' },
 							{ id: 2, name: 'other' },
 						],
-						mod: 'mod-framed',
 					},
 				}, {
 					key: 'iwant',
@@ -113,7 +147,6 @@ export class FieldgroupComponent {
 							{ id: 1, name: 'male' },
 							{ id: 2, name: 'other' },
 						],
-						mod: 'mod-framed',
 					},
 				},
 			],
