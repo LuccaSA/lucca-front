@@ -1,8 +1,10 @@
 # Changelog
 
-## In Dev
+## In dev
+
+## 1.1
 ### New features
-- `.radios-group` & `.checkboxes-group`
+- Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
 ### Fixes
 - `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
 ### Breaking changes
