@@ -29,6 +29,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/delay';
 import { ALuPickerPanel, ALuInputDisplayer, ILuInputDisplayer } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
@@ -68,13 +69,14 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		super();
 		this.triggerEvent = 'click';
 	}
-	protected _options: ILuOptionItem<T>[];
+	protected _options: ILuOptionItem<T>[] = [];
 	protected _optionsQL: QueryList<ILuOptionItem<T>>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
 		this._optionsQL = ql;
 		this._optionItems$ =
 			merge(Observable.of(ql), ql.changes)
 			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
+			.delay(0)
 			.do(o => this._options = o);
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;

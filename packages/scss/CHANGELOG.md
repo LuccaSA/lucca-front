@@ -1,9 +1,18 @@
 # Changelog
 
 ## In Dev
+### New features
+- `.radios-group` & `.checkboxes-group`
+### Fixes
+- `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`
 - `titles` adding one title level
+- `button.mod-link` is now .link
+- `button.mod-flat` is now .button.mod-link
+### Enhancements
+- `buttons` New style & remove mod-filling
+- `textfield` New default style
 
 ## 1.0.1
 ### New features

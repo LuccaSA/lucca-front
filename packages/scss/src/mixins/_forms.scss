@@ -1,37 +1,37 @@
-@mixin textfieldError() {
-	box-shadow: 0 0 0 1px _color("error");
+@mixin fieldError($fieldname) {
+	box-shadow: 0 0 0 1px _color("error") inset;
 	background-color: _color("error", "see-through");
 
 	&::placeholder {
-		color: _color("error", "light");
+		color: _color("error", "lighter");
 	}
 
-	~ .textfield-label {
+	~ .#{$fieldname}-label {
 		color: _color("error");
 	}
 
-	&:focus ~ .textfield-label {
+	&:focus ~ .#{$fieldname}-label {
 		color: _color("error");
 	}
 }
 
-@mixin textfieldMaterialError() {
+@mixin fieldMaterialError($fieldname) {
 	box-shadow: 0 2px 0 0 _color("error");
 
 	&::placeholder {
 		color: _color("error", "see-through");
 	}
 
-	~ .textfield-label {
+	~ .#{$fieldname}-label {
 		color: _color("error");
 	}
 
-	&:focus ~ .textfield-label {
+	&:focus ~ .#{$fieldname}-label {
 		color: _color("error");
 	}
 }
 
-@mixin textfieldFramedError() {
+@mixin fieldFramedError($fieldname) {
 	background-color: _color("error", "see-through");
 
 	&::placeholder {
@@ -43,13 +43,13 @@
 		background-color: _color("error", "see-through");
 	}
 
-	~ .textfield-label, ~ .textfield-suffix {
+	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
 		color: _color("error") !important;
 	}
 }
 
-@mixin textfieldMaterialFilled() {
-	~ .textfield-label {
+@mixin fieldMaterialFilled($fieldname) {
+	~ .#{$fieldname}-label {
 		font-size: _theme("sizes.small.font-size");
 		top: 0;
 	}

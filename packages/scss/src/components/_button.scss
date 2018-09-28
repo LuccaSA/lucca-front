@@ -1,19 +1,20 @@
 .button {
+	border: 0;
+	border-radius: _component("button.border.radius");
+	box-shadow: 0 _component("button.box-shadow.offset") 0 _component("button.box-shadow.color") inset;
 	cursor: pointer;
 	display: inline-block;
+	font-family: unquote(_component("button.font.family"));
+	font-size: _component("button.sizing.default.font-size");
+	font-weight: _component("button.font-weight");
+	line-height: _component("button.line-height");
+	margin: _component("button.margin");
+	padding: _component("button.sizing.default.padding");
 	position: relative;
 	text-decoration: none;
-	border: 0;
-	font-size: _component("button.sizing.default.font-size");
-	line-height: _component("button.line-height");
-	padding: _component("button.sizing.default.padding");
+	transition: unquote(_component("button.transition"));
 	vertical-align: middle;
 	white-space: nowrap;
-	margin: _component("button.margin");
-	border-radius: _component("button.border.radius");
-	box-shadow: unquote(_component("button.box-shadow"));
-	font-family: unquote(_component("button.font.family"));
-	transition: unquote(_component("button.transition"));
 
 	&:first-of-type {
 		margin-left: 0;
@@ -21,27 +22,6 @@
 
 	&:last-of-type {
 		margin-right: 0;
-	}
-
-	&:hover {
-		&:not([disabled]) {
-			box-shadow: unquote(_component("button.hover.box-shadow"));
-		}
-	}
-
-	&:focus {
-		&:not([disabled]) {
-			box-shadow: unquote(_component("button.focus.box-shadow"));
-		}
-	}
-
-	&:active {
-		outline: 0;
-		box-shadow: unquote(_component("button.box-shadow"));
-
-		&:focus {
-			outline: 0;
-		}
 	}
 }
 
@@ -53,21 +33,46 @@
 	@mixin buttonColoring($palette) {
 		background: _color($palette);
 		color: _color($palette, "text");
-		&:hover, &:focus {
+
+		&:hover:not([disabled]) {
 			background: _color($palette, "light");
 		}
-		&:active {
+
+		&:active:not([disabled]) {
 			background: _color($palette, "dark");
+		}
+	}
+
+	@mixin buttonLesserColoring($palette) {
+		background: _color($palette, "lightest");
+		box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette, "see-through") inset;
+		color: _color($palette, "dark");
+
+		&:hover:not([disabled]) {
+			background: _color($palette, "lightest");
+			opacity: .8;
 		}
 	}
 
 	// default color
 	@include buttonColoring("button.default-palette");
 
+	// white color
+	&.mod-white {
+		@include buttonColoring("button.white-palette");
+	}
+
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include buttonColoring($name);
+		}
+	}
+
+	// palette lesser
+	@each $name, $palette in _getMap("palettes") {
+		&.mod-lesser.palette-#{$name} {
+			@include buttonLesserColoring($name);
 		}
 	}
 }
@@ -91,13 +96,15 @@
 
 .button {
 
-	&.mod-flat {
+	&.mod-link {
 		background: transparent;
 		box-shadow: none;
+		font-weight: 400;
 		text-decoration: underline;
 
 		&:hover, &:focus {
 			&:not([disabled]) {
+				background: transparent;
 				box-shadow: none;
 				color: _component("button.flat.color");
 			}
@@ -111,7 +118,7 @@
 
 			&:hover, &:focus {
 				&:not([disabled]) {
-					box-shadow: 0 0 0 2px _color($palette) inset;
+					box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette) inset;
 					color: _color($palette);
 				}
 			}
@@ -125,45 +132,6 @@
 			&.palette-#{$name} {
 				@include buttonWiredColoring($name);
 			}
-		}
-	}
-
-	&.mod-filling {
-		@mixin buttonFillingColoring($palette) {
-			background: transparent;
-			color: _color("text.default");
-
-			&:hover, &:focus {
-				&:not([disabled]) {
-					background: _color($palette);
-					color: _color($palette);
-				}
-			}
-		}
-
-		// default color
-		@include buttonFillingColoring("button.filling.default-palette");
-
-		// palette colors
-		@each $name, $palette in _getMap("palettes") {
-			&.palette-#{$name} {
-				@include buttonFillingColoring($name);
-			}
-		}
-	}
-
-	&.mod-link {
-		background: transparent;
-		box-shadow: none;
-		color: _color("text.link");
-		padding: 0;
-		text-decoration: underline;
-		vertical-align: baseline;
-
-		&:hover, &:focus, &:active {
-			background: transparent;
-			box-shadow: none;
-			opacity: .85;
 		}
 	}
 }
@@ -280,8 +248,13 @@
 	.button {
 		border-radius: 0;
 		display: block;
-		margin: 0 0 0 -1px;
+		margin: 0;
 		position: relative;
+		border-right: 1px solid _component("button.box-shadow.color");
+
+		&:last-of-type {
+			border: 0;
+		}
 	}
 
 	> .button {
@@ -300,7 +273,10 @@
 	}
 }
 
-.button-group-item {
+.button-group .button-group-item { // 2 classes needed to override button-group's "last-of-type"
+	.button {
+		border-right: 1px solid _component("button.box-shadow.color");
+	}
 
 	&:first-child {
 		.button {
@@ -310,6 +286,7 @@
 
 	&:last-child {
 		.button {
+			border: 0;
 			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
 		}
 	}

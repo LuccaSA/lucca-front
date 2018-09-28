@@ -88,17 +88,17 @@
 	}
 	// Framed
 	:host-context(.textfield.mod-framed) {
-		padding: _component('textfield.framed.top-padding') 0 0;
+		padding: _component('field.framed.top-padding') 0 0;
 
 		&::after {
 			bottom: 0.95rem;
-			right: _component('textfield.framed.side-padding');
+			right: _component('field.framed.side-padding');
 		}
 
 		.lu-select-value, .lu-select-placeholder {
-			padding: 0 calc(#{_component('textfield.framed.side-padding')} * 3)
-				_component('textfield.framed.bottom-padding')
-				_component('textfield.framed.side-padding');
+			padding: 0 calc(#{_component('field.framed.side-padding')} * 3)
+				_component('field.framed.bottom-padding')
+				_component('field.framed.side-padding');
 		}
 
 

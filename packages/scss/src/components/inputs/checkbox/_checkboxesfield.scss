@@ -1,0 +1,41 @@
+@import "../field/field";
+
+.checkboxesfield {
+	@include field("checkboxesfield");
+}
+
+.checkboxesfield-input {
+	@include field-input("checkboxesfield");
+
+	&.mod-row {
+		@extend %checkboxesfield-row;
+	}
+}
+
+.form.mod-compact .checkboxesfield, .checkboxesfield.mod-compact {
+	@include field-compact("checkboxesfield");
+	align-items: flex-start;
+	.checkboxesfield-input {
+		@extend %checkboxesfield-row;
+	}
+}
+
+.form.mod-framed .checkboxesfield, .checkboxesfield.mod-framed {
+	@include field-framed("checkboxesfield");
+
+	.checkboxesfield-input {
+		@extend %checkboxesfield-row;
+	}
+}
+
+%checkboxesfield-row {
+	display: flex;
+	flex-wrap: wrap;
+	.radio {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	.radio {
+		margin-right: 1.5rem;
+	}
+}

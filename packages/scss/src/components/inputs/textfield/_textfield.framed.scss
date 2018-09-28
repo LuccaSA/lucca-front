@@ -1,118 +1,24 @@
 %input_framed {
-	width: 100%;
-	flex-direction: row;
-
 	.textfield-input {
-		@include fakeBorder(1px, _theme("commons.divider.color"));
-		background: transparent;
-		border-radius: 0;
-		height: 100%;
-		padding: _component("textfield.framed.top-padding") _component("textfield.framed.side-padding") _component("textfield.framed.bottom-padding");
-
 		&::placeholder {
+			color: _component("field.framed.default-palette.placeholder");
 			opacity: 0;
 		}
 
 		&:focus {
-			z-index: 1;
-
-			~ .textfield-messages {
-				transform: translateY(100%);
-			}
-
 			&::placeholder {
+				color: _component("field.framed.default-palette.placeholder");
 				opacity: 1;
-			}
-		}
-
-		&:hover {
-			z-index: 1;
-
-			~ .textfield-messages {
-				transform: translateY(100%);
 			}
 		}
 	}
 
 	.textfield-suffix {
-		bottom: _component("textfield.framed.bottom-padding");
-		right: _component("textfield.framed.side-padding");
+		bottom: _component("field.framed.bottom-padding");
+		right: _component("field.framed.side-padding");
 		display: flex;
 		align-items: flex-end;
 	}
-
-	.textfield-label {
-		color: _color("text.light");
-		font-size: _theme("sizes.small.font-size");
-		font-weight: 400;
-		left: _component("textfield.framed.side-padding");
-		pointer-events: none;
-		position: absolute;
-		right: _component("textfield.framed.side-padding");
-		top: _component("textfield.framed.label-top-offset");
-		z-index: 1;
-	}
-
-	.textfield-messages {
-		bottom: 0;
-		left: 0;
-		pointer-events: none;
-		position: absolute;
-		right: -1px;
-		text-align: center;
-		transform: translateY(0);
-		transition: transform _theme("commons.animations.durations.standard");
-		z-index: 2;
-	}
-
-	.textfield-messages-error {
-		background-color: _color("error");
-		color: _theme("palettes.error.text");
-		font-size: _component("textfield.message.font-size");
-		margin: 0;
-	}
-
-	.textfield-messages-warning {
-		background-color: _color("warning");
-		color: _theme("palettes.warning.text");
-		font-size: _component("textfield.message.font-size");
-		margin: 0;
-	}
-
-	.textfield-messages-helper {
-		background-color: _color("text.light");
-		color: white;
-		font-size: _component("textfield.message.font-size");
-		margin: 0;
-	}
-
-	// COLORING
-
-	@mixin inputColoring($palette) {
-		.textfield-input:focus, .textfield-input:not([disabled]):hover {
-			@include fakeBorder(1px, _color($palette));
-			background-color: _color($palette, "see-through");
-			~ .textfield-label {
-				color: _color($palette);
-			}
-		}
-		// Needed when textfield label is not next to the textfield-input
-		&.is-focused {
-			.textfield-label {
-				color: _color($palette);
-			}
-		}
-	}
-
-	@include inputColoring("textfield.framed.default-palette");
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include inputColoring($name);
-		}
-	}
-
 
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -149,7 +55,7 @@
 			}
 		}
 
-		@include inputColoring("textfield.framed.default-palette");
+		@include inputColoring("field.framed.default-palette");
 
 		// palette colors
 		@each $name, $palette in _getMap("palettes") {
@@ -178,9 +84,9 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			bottom: _component("textfield.framed.bottom-padding");
+			bottom: _component("field.framed.bottom-padding");
 			line-height: 1;
-			right: _component("textfield.framed.side-padding");
+			right: _component("field.framed.side-padding");
 		}
 
 		.textfield-input {
@@ -189,78 +95,6 @@
 
 		.textfield-options {
 			margin-top: 1px;
-		}
-	}
-
-
-	// STATUS
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-	// Inline validation
-
-	&.is-loading {
-		&::before, &::after {
-			bottom: inherit;
-			right: .7rem;
-			top: .7rem;
-		}
-	}
-
-	&.is-valid {
-		&::before {
-			bottom: inherit;
-			margin: auto;
-			right: .7rem;
-			top: .5rem;
-		}
-	}
-
-	&.is-invalid {
-		z-index: 2;
-
-		&::before {
-			bottom: inherit;
-			margin: auto;
-			right: .7rem;
-			top: .5rem;
-		}
-
-		.textfield-input {
-			@include textfieldFramedError();
-			@include fakeBorder(1px, _color("error"));
-
-			&:hover, &:active, &:focus {
-				@include textfieldFramedError();
-			}
-		}
-	}
-
-	.textfield-input {
-		&[disabled], &[readonly] {
-			background-color: _theme("commons.background.dark");
-			background-image: none;
-			opacity: .6;
-
-			& + .textfield-label {
-				opacity: .5;
-			}
-		}
-
-		&.is-error {
-			@include textfieldFramedError();
-		}
-	}
-
-	// Needed when not next to input-field (formly)
-	&.is-error {
-		.textfield-label, .textfield-suffix {
-			color: _color("error") !important;
-		}
-	}
-	// Needed when not next to input-field (formly)
-	&.is-focused, &:hover {
-		.textfield-messages {
-			transform: translateY(100%);
 		}
 	}
 }
