@@ -18,6 +18,7 @@ import { DemoSelectModule } from './select/select.module';
 
 import { DemoUserModule } from './user/user.module';
 import { DemoNumberModule } from './number/number.module';
+import { DemoTooltipModule } from './tooltip/tooltip.module';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import { DemoNumberModule } from './number/number.module';
 		DemoApiModule,
 		DemoSelectModule,
 		DemoNumberModule,
+		DemoTooltipModule,
 	],
 	bootstrap: [AppComponent],
 })

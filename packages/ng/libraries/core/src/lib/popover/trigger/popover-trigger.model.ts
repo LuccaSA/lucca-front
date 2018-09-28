@@ -18,7 +18,7 @@ import {
 	HorizontalConnectionPos,
 	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
+import { TemplatePortal, ComponentPortal } from '@angular/cdk/portal';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -37,7 +37,7 @@ export interface ILuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPanel> 
 
 export abstract class ALuPopoverTrigger<T extends ILuPopoverPanel = ILuPopoverPanel>
 implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
-	protected _portal: TemplatePortal<any>;
+	protected _portal: TemplatePortal<any> | ComponentPortal<any>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
 	protected _halt = false;
@@ -72,7 +72,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	ngAfterViewInit() {
 		this._checkPopover();
 		this.popover.close.subscribe(() => {
-			this.closePopover()
+			this.closePopover();
 		});
 	}
 

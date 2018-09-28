@@ -8,5 +8,7 @@ export * from './option/index';
 export * from './input/index';
 export * from './scroll/index';
 export * from './number/index';
+export * from './tooltip/index';
+export * from './safe-content/index';
 
 export { LuModule } from './module';

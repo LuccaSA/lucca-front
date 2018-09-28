@@ -7,6 +7,8 @@ import { LuScrollModule } from './scroll/index';
 import { LuApiModule } from './api/index';
 import { LuInputModule } from './input/index';
 import { LuNumberModule } from './number/index';
+import { LuSafeContentModule } from './safe-content/index';
+import { LuTooltipModule } from './tooltip/index';
 
 @NgModule({
 	imports: [
@@ -18,6 +20,8 @@ import { LuNumberModule } from './number/index';
 		LuApiModule,
 		LuInputModule,
 		LuNumberModule,
+		LuSafeContentModule,
+		LuTooltipModule,
 	],
 	exports: [
 		LuUserModule,
@@ -28,6 +32,8 @@ import { LuNumberModule } from './number/index';
 		LuApiModule,
 		LuInputModule,
 		LuNumberModule,
+		LuSafeContentModule,
+		LuTooltipModule,
 	],
 })
 export class LuModule {}
