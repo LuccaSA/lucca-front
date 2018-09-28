@@ -47,15 +47,17 @@
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	:host(.mod-multiple) {
-		.lu-select-value {
-			overflow: visible;
-			white-space: normal;
-			height: auto;
-			min-height: _component('select.height');
-			padding-top: 0;
-			padding-bottom: 0;
-			align-items: center;
-			flex-wrap: wrap;
+		&.mod-multipleView {
+			.lu-select-value {
+				overflow: visible;
+				white-space: normal;
+				height: auto;
+				min-height: _component('select.height');
+				padding-bottom: 0;
+				align-items: center;
+				flex-wrap: wrap;
+				padding-top: .3rem;
+			}
 		}
 
 		::ng-deep {
@@ -65,6 +67,12 @@
 				margin-left: 0;
 				overflow: hidden;
 				text-overflow: ellipsis;
+				vertical-align: top;
+			}
+
+			.lu-select-value > .chip, .lu-select-value > .label {
+				background: _component("select.tag.background");
+				color: _component("select.tag.color");
 			}
 		}
 	}
@@ -78,12 +86,6 @@
 
 		.lu-select-suffix {
 			right: calc(3.5 * #{_component('textfield.input.padding-horizontal')});
-		}
-	}
-
-	:host(.is-clearable) {
-		.lu-select-value lu-option {
-			padding-right: 1rem;
 		}
 	}
 	// Framed
@@ -167,8 +169,14 @@
 		.lu-select-value {
 			display: block;
 		}
-		&.mod-multiple .lu-select-value {
+		&.mod-multiple.mod-multipleView .lu-select-value {
 			display: flex;
+		}
+	}
+
+	:host-context(.textfield-input.is-clearable) {
+		.lu-select-value {
+			padding-right: 2.5rem;
 		}
 	}
 

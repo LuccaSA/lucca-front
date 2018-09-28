@@ -1,7 +1,9 @@
 $select: (
 	height: 2rem,
 	tag: (
-		margin: .2rem
+		background: _color("primary"),
+		color: _color("primary", "text"),
+		margin: -.2rem
 	)
 );
 $theme: _set($theme, 'components.select', $select);
