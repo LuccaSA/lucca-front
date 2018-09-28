@@ -7,6 +7,7 @@
 - `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`
+- `titles` adding one title level
 - `button.mod-link` is now .link
 - `button.mod-flat` is now .button.mod-link
 ### Enhancements
