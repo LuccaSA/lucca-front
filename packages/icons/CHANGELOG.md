@@ -5,6 +5,8 @@
 ## 1.0.1
 ### New icons
 - `sprout`
+### Update icons
+- `drag`
 
 ## 0.7.1
 ### New icons
