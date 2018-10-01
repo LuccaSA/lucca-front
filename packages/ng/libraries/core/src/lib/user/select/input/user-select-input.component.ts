@@ -120,6 +120,13 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	onBlur() {
 		super.onBlur();
 	}
+	@HostListener('keydown.space', ['$event'])
+	@HostListener('keydown.enter', ['$event'])
+	onKeydown($event: KeyboardEvent) {
+		this.openPopover();
+		$event.stopPropagation();
+		$event.preventDefault();
+	}
 
 	ngAfterViewInit() {
 		this.render();

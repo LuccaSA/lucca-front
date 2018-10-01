@@ -122,7 +122,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	@HostListener('keydown.space', ['$event'])
 	@HostListener('keydown.enter', ['$event'])
-	onkeydown($event: KeyboardEvent) {
+	onKeydown($event: KeyboardEvent) {
 		this.openPopover();
 		$event.stopPropagation();
 		$event.preventDefault();
