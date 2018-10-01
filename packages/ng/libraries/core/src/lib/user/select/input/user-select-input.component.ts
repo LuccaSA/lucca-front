@@ -83,6 +83,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	}
 	@HostBinding('class.is-disabled')
 	get isDisabled() { return this.disabled; }
+	@HostBinding('class.is-focused')
+	get isFocused() { return this._popoverOpen; }
 
 	/**
 	 * popover trigger class extension
