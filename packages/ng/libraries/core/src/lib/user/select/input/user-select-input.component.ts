@@ -49,6 +49,7 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 		this.displayContainer = vcr;
 	}
 	searchFormat = LuDisplayFullname.lastfirst;
+	@HostBinding('tabindex') tabindex = 0;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
@@ -82,6 +83,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	}
 	@HostBinding('class.is-disabled')
 	get isDisabled() { return this.disabled; }
+	@HostBinding('class.is-focused')
+	get isFocused() { return this._popoverOpen; }
 
 	/**
 	 * popover trigger class extension
@@ -118,6 +121,13 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	@HostListener('blur')
 	onBlur() {
 		super.onBlur();
+	}
+	@HostListener('keydown.space', ['$event'])
+	@HostListener('keydown.enter', ['$event'])
+	onKeydown($event: KeyboardEvent) {
+		this.openPopover();
+		$event.stopPropagation();
+		$event.preventDefault();
 	}
 
 	ngAfterViewInit() {

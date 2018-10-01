@@ -120,15 +120,18 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		switch (event.keyCode) {
 			case ENTER:
 				this._selectHighlighted();
-				// this.onClose();
+				event.preventDefault();
+				event.stopPropagation();
 				break;
 			case UP_ARROW:
 				this._decrHighlight();
 				event.preventDefault();
+				event.stopPropagation();
 				break;
 			case DOWN_ARROW:
 				this._incrHighlight();
 				event.preventDefault();
+				event.stopPropagation();
 				break;
 		}
 	}
@@ -193,6 +196,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		if (!this.multiple) {
 			const selectedIndex = this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(this._value));
 			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
+			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
 		} else {
 			const values = <T[]> this._value || [];
 			selectedIndexes.push(

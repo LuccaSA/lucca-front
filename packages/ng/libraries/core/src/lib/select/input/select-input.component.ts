@@ -51,6 +51,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		this.displayContainer = vcr;
 	}
 
+	@HostBinding('tabindex') tabindex = 0;
+
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
@@ -78,6 +80,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	@HostBinding('class.is-disabled')
 	get isDisabled() { return this.disabled; }
+	@HostBinding('class.is-focused')
+	get isFocused() { return this._popoverOpen; }
 	@HostBinding('class.is-clearable')
 	get isClearable() { return !!this.clearerEltRef; }
 	@HostBinding('class.mod-multiple')
@@ -118,6 +122,14 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	onBlur() {
 		super.onBlur();
 	}
+	@HostListener('keydown.space', ['$event'])
+	@HostListener('keydown.enter', ['$event'])
+	onKeydown($event: KeyboardEvent) {
+		this.openPopover();
+		$event.stopPropagation();
+		$event.preventDefault();
+	}
+
 
 	ngAfterViewInit() {
 		this.render();

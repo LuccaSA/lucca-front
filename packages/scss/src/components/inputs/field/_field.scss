@@ -127,7 +127,7 @@
 			color: _color("error");
 		}
 
-		&:focus ~ .#{$fieldname}-label {
+		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
 			color: _color("error");
 		}
 	}

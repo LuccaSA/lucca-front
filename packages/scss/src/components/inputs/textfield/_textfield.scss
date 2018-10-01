@@ -22,7 +22,7 @@
 		background: _component("textfield.hover.background");
 	}
 
-	&:focus {
+	&:focus, &.is-focused {
 		background: white;
 		box-shadow: 0 0 0 2px _color("primary", "lighter");
 
