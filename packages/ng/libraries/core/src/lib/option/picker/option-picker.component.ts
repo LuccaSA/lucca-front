@@ -190,6 +190,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		if (!this.multiple) {
 			const selectedIndex = this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(this._value));
 			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
+			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
 		} else {
 			const values = <T[]> this._value || [];
 			selectedIndexes.push(
