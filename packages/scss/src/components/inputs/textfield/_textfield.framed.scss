@@ -5,7 +5,7 @@
 			opacity: 0;
 		}
 
-		&:focus {
+		&:focus, &.is-focused {
 			&::placeholder {
 				color: _component("field.framed.default-palette.placeholder");
 				opacity: 1;
