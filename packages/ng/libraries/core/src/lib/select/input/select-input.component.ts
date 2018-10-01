@@ -52,6 +52,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 
 	@HostBinding('tabindex') tabindex = 0;
+
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
@@ -119,6 +120,14 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	onBlur() {
 		super.onBlur();
 	}
+	@HostListener('keydown.space', ['$event'])
+	@HostListener('keydown.enter', ['$event'])
+	onkeydown($event: KeyboardEvent) {
+		this.openPopover();
+		$event.stopPropagation();
+		$event.preventDefault();
+	}
+
 
 	ngAfterViewInit() {
 		this.render();
