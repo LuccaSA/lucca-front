@@ -51,6 +51,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		this.displayContainer = vcr;
 	}
 
+	@HostBinding('tabindex') tabindex = 0;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {

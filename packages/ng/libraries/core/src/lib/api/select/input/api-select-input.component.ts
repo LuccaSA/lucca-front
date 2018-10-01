@@ -43,6 +43,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
+	@HostBinding('tabindex') tabindex = 0;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 
 	@Input() set api(api: string) { this._service.api = api; }
