@@ -120,15 +120,12 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		switch (event.keyCode) {
 			case ENTER:
 				this._selectHighlighted();
-				// this.onClose();
 				break;
 			case UP_ARROW:
 				this._decrHighlight();
-				event.preventDefault();
 				break;
 			case DOWN_ARROW:
 				this._incrHighlight();
-				event.preventDefault();
 				break;
 		}
 	}

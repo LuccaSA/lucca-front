@@ -79,8 +79,9 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		switch (event.keyCode) {
 			case ESCAPE:
 			this.onClose();
-			return;
 		}
+		event.preventDefault();
+		event.stopPropagation();
 	}
 	onOpen() {
 		this.__operators.forEach(o => {
