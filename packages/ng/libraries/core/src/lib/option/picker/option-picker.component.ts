@@ -125,9 +125,13 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 				break;
 			case UP_ARROW:
 				this._decrHighlight();
+				event.preventDefault();
+				event.stopPropagation();
 				break;
 			case DOWN_ARROW:
 				this._incrHighlight();
+				event.preventDefault();
+				event.stopPropagation();
 				break;
 		}
 	}
