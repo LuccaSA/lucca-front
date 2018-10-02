@@ -1,16 +1,15 @@
 $textfield: (
-
-	background: lighten(_color("primary", "color", true), 40%),
+	background: lighten(_color("primary", "color", true), 43%),
 	border-radius: .2rem,
 
 	input: (
 		padding-horizontal: .5rem,
 		padding-vertical: .5rem,
-		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 50%)
+		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 25%)
 	),
 
 	hover: (
-		background: lighten(_color("primary", "color", true), 37%)
+		background: lighten(_color("primary", "color", true), 40%)
 	),
 
 	focus: (
@@ -18,7 +17,8 @@ $textfield: (
 	),
 
 	disabled: (
-		background: #F5F5F5
+		background: #F5F5F5,
+		color: #999999
 	),
 
 	suffix: (

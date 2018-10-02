@@ -1,12 +1,12 @@
 $palettes: (
 	"primary": (
 		"color": #FFB900,
-		"text": #666666,
+		"text": #444444,
 		"dark": darken(#FFB900, 7%),
 		"darker": darken(#FFB900, 20%),
 		"light": lighten(#FFB900, 10%),
 		"lighter": lighten(#FFB900, 20%),
-		"lightest": lighten(#FFB900, 42%),
+		"lightest": lighten(#FFB900, 45%),
 		"see-through": rgba(#FFB900, .15)
 	),
 	"secondary": (
@@ -26,7 +26,7 @@ $palettes: (
 		"darker": darken(#9ACD32, 20%),
 		"light": lighten(#9ACD32, 10%),
 		"lighter": lighten(#9ACD32, 20%),
-		"lightest": lighten(#9ACD32, 43%),
+		"lightest": lighten(#9ACD32, 42%),
 		"see-through": rgba(#9ACD32, .15)
 	),
 	"warning": (
@@ -36,7 +36,7 @@ $palettes: (
 		"darker": darken(#FF9900, 20%),
 		"light": lighten(#FF9900, 10%),
 		"lighter": lighten(#FF9900, 20%),
-		"lightest": lighten(#FF9900, 43%),
+		"lightest": lighten(#FF9900, 42%),
 		"see-through": rgba(#FF9900, .15)
 	),
 	"error": (
@@ -46,7 +46,7 @@ $palettes: (
 		"darker": darken(#FF3300, 20%),
 		"light": lighten(#FF3300, 10%),
 		"lighter": lighten(#FF3300, 20%),
-		"lightest": lighten(#FF3300, 43%),
+		"lightest": lighten(#FF3300, 44%),
 		"see-through": rgba(#FF3300, .15)
 	),
 );
@@ -60,10 +60,10 @@ $colors: (
 			color: #666666
 		),
 		light: (
-			color: #999999
+			color: desaturate(lighten(#FFB900, 20%), 80%)
 		),
 		placeholder: (
-			color: #CCCCCC
+			color: desaturate(lighten(#FFB900, 25%), 50%)
 		)
 	),
 );

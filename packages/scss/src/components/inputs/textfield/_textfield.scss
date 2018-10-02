@@ -24,7 +24,7 @@
 
 	&:focus, &.is-focused {
 		background: white;
-		box-shadow: 0 0 0 2px _color("primary", "lighter");
+		box-shadow: 0 0 0 2px _color("primary", "light");
 
 		&::placeholder {
 			color: _component("textfield.focus.placeholder");
@@ -145,11 +145,11 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			color: _color("text.light");
 			@include makeIcon("search");
+			bottom: .1rem;
+			color: _color("primary", "light");
 			font-size: 1.4rem;
 			position: absolute;
-			bottom: .1rem;
 			right: .33rem;
 		}
 
@@ -205,7 +205,8 @@
 	@include field-input("textfield");
 
 	&[disabled], &[readonly] {
-		background: _component("textfield.disabled.background");
+		background: _theme("commons.disabled.background");
+		color: _theme("commons.disabled.color");
 	}
 
 	&.is-error {

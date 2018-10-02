@@ -106,8 +106,9 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			right: 0;
+			color: _color("text.light");
 			bottom: 0;
+			right: 0;
 		}
 
 		.textfield-input {

@@ -10,7 +10,7 @@
 }
 
 .switch-label {
-	color: _color("text.light");
+	color: _theme("commons.disabled.color");
 	cursor: pointer;
 	display: inline-block;
 	line-height: _component("switch.label.line-height");
@@ -80,14 +80,14 @@
 
 	&[disabled], &[readonly] {
 		~ .switch-label {
-			color: _color("text.light");
+			color: _theme("commons.disabled.color");
 			cursor: not-allowed;
 
 			&::before {
-				background: _color("text.placeholder");
+				background: _theme("commons.disabled.placeholder");
 			}
 			&::after {
-				background: _color("text.placeholder");
+				background: _theme("commons.disabled.placeholder");
 			}
 		}
 	}
