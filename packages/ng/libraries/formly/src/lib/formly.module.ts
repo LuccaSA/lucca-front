@@ -7,7 +7,14 @@ import {
 	MatDatepickerModule,
 } from '@angular/material';
 import { LU_FORMLY_COMPONENTS, LU_FORMLY_CONFIG } from './formly.config';
-import { LuSelectModule, LuInputModule, LuUserSelectModule, LuOptionModule, LuSelectClearerModule } from '@lucca-front/ng';
+import {
+	LuSelectModule,
+	LuInputModule,
+	LuUserSelectModule,
+	LuOptionModule,
+	LuSelectClearerModule,
+	LuApiSelectModule
+} from '@lucca-front/ng';
 
 @NgModule({
 	declarations: [...LU_FORMLY_COMPONENTS],
@@ -23,6 +30,7 @@ import { LuSelectModule, LuInputModule, LuUserSelectModule, LuOptionModule, LuSe
 		LuSelectClearerModule,
 		LuUserSelectModule,
 		LuInputModule,
+		LuApiSelectModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],
