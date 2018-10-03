@@ -41,8 +41,6 @@
     "postbuild:formly": "gulp copy:formly-style",
     "build:lib": "npm run build:core && npm run build:material && npm run build:formly"
   },
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
   "dependencies": {
     "@angular/animations": "^6.1.0",
     "@angular/cdk": "^6.1.0",
@@ -98,13 +96,4 @@
     "tslint": "~5.7.0",
     "typescript": "2.7.2"
   },
-  "peerDependencies": {
-    "@angular/cdk": "6.0.1",
-    "@angular/material": "6.0.1",
-    "@lucca-front/icons": "^0.7.0",
-    "@lucca-front/scss": "^0.7.0",
-    "@ngx-formly/core": "^4.0.0",
-    "moment": "^2.19.1",
-    "typescript": "2.7.2"
-  }
 }
