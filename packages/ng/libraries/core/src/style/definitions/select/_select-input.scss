@@ -51,7 +51,7 @@
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	:host(.mod-multiple) {
-		&.mod-multipleView {
+		&.mod-multipleView:not(.mod-singleLine) {
 			.lu-select-value {
 				height: auto;
 				min-height: _component('select.height');
