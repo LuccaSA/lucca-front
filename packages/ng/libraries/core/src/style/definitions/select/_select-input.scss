@@ -26,15 +26,17 @@
 	.lu-select-value, .lu-select-placeholder {
 		line-height: 1.1;
 		height: _component('select.height');
-		overflow: hidden;
 		padding: _component('textfield.input.padding-vertical') 1.5rem
 			_component('textfield.input.padding-vertical')
 			_component('textfield.input.padding-horizontal');
-		text-overflow: ellipsis;
 		transition: all _theme('commons.animations.durations.standard') ease;
-		white-space: nowrap;
-		display: flex;
 		align-items: center;
+	}
+
+	.lu-select-display-wrapper, .lu-select-placeholder {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.lu-select-value {
@@ -51,14 +53,15 @@
 	:host(.mod-multiple) {
 		&.mod-multipleView {
 			.lu-select-value {
-				overflow: visible;
-				white-space: normal;
 				height: auto;
 				min-height: _component('select.height');
 				padding-bottom: 0;
 				align-items: center;
-				flex-wrap: wrap;
 				padding-top: .3rem;
+			}
+			.lu-select-display-wrapper {
+				overflow: visible;
+				white-space: normal;
 			}
 		}
 
@@ -72,7 +75,7 @@
 				vertical-align: top;
 			}
 
-			.lu-select-value > .chip, .lu-select-value > .label {
+			.lu-select-value .lu-select-display-wrapper > .chip, .lu-select-value .lu-select-display-wrapper > .label {
 				background: _component("select.tag.background");
 				color: _component("select.tag.color");
 			}
@@ -91,7 +94,7 @@
 		}
 	}
 	:host(.mod-overflow) {
-		.lu-select-value, .lu-select-placeholder {
+		.lu-select-display-wrapper, .lu-select-placeholder {
 			overflow: visible;
 		}
 	}
@@ -180,9 +183,6 @@
 			display: none;
 		}
 		.lu-select-value {
-			display: block;
-		}
-		&.mod-multiple.mod-multipleView .lu-select-value {
 			display: flex;
 		}
 	}
