@@ -21,7 +21,7 @@
 		}
 	}
 	.lu-select-placeholder {
-		color: _color('text.placeholder');
+		color: _component("textfield.input.placeholder");
 	}
 	.lu-select-value, .lu-select-placeholder {
 		line-height: 1.1;
@@ -33,6 +33,8 @@
 		text-overflow: ellipsis;
 		transition: all _theme('commons.animations.durations.standard') ease;
 		white-space: nowrap;
+		display: flex;
+		align-items: center;
 	}
 
 	.lu-select-value {
@@ -86,6 +88,11 @@
 
 		.lu-select-suffix {
 			right: calc(3.5 * #{_component('textfield.input.padding-horizontal')});
+		}
+	}
+	:host(.mod-overflow) {
+		.lu-select-value, .lu-select-placeholder {
+			overflow: visible;
 		}
 	}
 	// Framed
