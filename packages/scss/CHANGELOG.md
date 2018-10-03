@@ -1,6 +1,8 @@
 # Changelog
 
 ## In dev
+### Enhancements
+- `animations` theming
 
 ## 1.1
 ### New features

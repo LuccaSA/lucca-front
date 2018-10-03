@@ -1,7 +1,7 @@
 @keyframes slideIn {
 	from {
 		opacity: 0;
-		transform: translate(0, -200px);
+		transform: translate(0, calc(-1 * #{_theme("commons.animations.translate")}));
 	}
 
 	to {
@@ -12,7 +12,7 @@
 
 @keyframes slideInLeft {
 	from {
-		transform: translate(-100px, 0);
+		transform: translate(calc(-1 * #{_theme("commons.animations.translate")}), 0);
 		opacity: 0;
 	}
 
@@ -24,7 +24,7 @@
 
 @keyframes slideInRight {
 	from {
-		transform: translate(100px, 0);
+		transform: translate(_theme("commons.animations.translate"), 0);
 		opacity: 0;
 	}
 
@@ -36,7 +36,7 @@
 
 @keyframes slideInBottom {
 	from {
-		transform: translate(0, 100px);
+		transform: translate(0, _theme("commons.animations.translate"));
 		opacity: 0;
 	}
 
