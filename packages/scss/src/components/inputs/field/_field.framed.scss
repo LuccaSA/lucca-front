@@ -92,18 +92,18 @@
 
 	&.is-loading {
 		&::before, &::after {
-			bottom: inherit;
-			right: .7rem;
-			top: .7rem;
+			bottom: inherit !important;
+			right: .7rem !important;
+			top: .7rem !important;
 		}
 	}
 
 	&.is-valid {
 		&::before {
-			bottom: inherit;
-			margin: auto;
-			right: .7rem;
-			top: .5rem;
+			bottom: inherit !important;
+			margin: auto !important;
+			right: .7rem !important;
+			top: .5rem !important;
 		}
 	}
 
@@ -111,10 +111,10 @@
 		z-index: 2;
 
 		&::before {
-			bottom: inherit;
-			margin: auto;
-			right: .7rem;
-			top: .5rem;
+			bottom: inherit !important;
+			margin: auto !important;
+			right: .7rem !important;
+			top: .5rem !important;
 		}
 
 		.#{$fieldname}-input {

@@ -75,12 +75,13 @@
 		@include loading(1rem);
 
 		&::before, &::after {
-			bottom: .6rem;
-			left: inherit;
-			right: .5rem;
-			top: inherit;
-			position: absolute;
-			z-index: 2;
+			content: '' !important;
+			bottom: .6rem !important;
+			left: inherit !important;
+			right: .5rem !important;
+			top: inherit !important;
+			position: absolute !important;
+			z-index: 2 !important;
 		}
 
 		.#{$fieldname}-input {
