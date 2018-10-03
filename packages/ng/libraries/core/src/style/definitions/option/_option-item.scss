@@ -5,7 +5,7 @@
 	:host {
 		display: block;
 		cursor: pointer;
-		padding: 0.5rem;
+		padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal");
 		transition: background 50ms ease;
 		&.is-selected {
 			background: _theme('commons.background.darker');
@@ -27,11 +27,11 @@
 
 	:host-context(.mod-multiple) {
 		position: relative;
-		padding-left: 2rem;
+		padding-left: _component("options.item.multiple-padding");
 		&::after, &::before {
 			display: block;
 			position: absolute;
-			left: _component("options.checkbox.left");;
+			left: _component("options.checkbox.left");
 			top: 50%;
 			transform: translateY(-50%);
 		}
