@@ -29,6 +29,7 @@ export interface ILuPopoverPanel {
 	templateRef?: TemplateRef<any>;
 	close: Observable<void>;
 	open: Observable<void>;
+	popoverPanelStyles: any;
 	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
 	setPositionClassesChanges: (
 		posX: LuPopoverPosition,
