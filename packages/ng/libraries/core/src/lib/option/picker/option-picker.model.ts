@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { ILuOptionOperator } from '../operator/index';
-import { ESCAPE } from '@angular/cdk/keycodes';
+import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 
 export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 
@@ -78,9 +78,13 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
-			this.onClose();
-			event.preventDefault();
-			event.stopPropagation();
+				this.onClose();
+				event.preventDefault();
+				event.stopPropagation();
+				break;
+			case TAB:
+				this.onClose();
+				break;
 		}
 	}
 	onOpen() {
