@@ -42,7 +42,6 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 	templateUrl: './option-picker.component.html',
 	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
 	providers: [

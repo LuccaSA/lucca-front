@@ -130,15 +130,15 @@
 	&.is-loading {
 
 		&::before, &::after {
-			bottom: .4rem;
-			right: 0;
+			bottom: .4rem !important;
+			right: 0 !important;
 		}
 	}
 
 	&.is-valid {
 		&::before {
-			bottom: .7rem;
-			right: 0;
+			bottom: .7rem !important;
+			right: 0 !important;
 		}
 
 		.textfield-label {

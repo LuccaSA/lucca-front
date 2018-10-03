@@ -21,17 +21,21 @@
 		}
 	}
 	.lu-select-placeholder {
-		color: _color('text.placeholder');
+		color: _component("textfield.input.placeholder");
 	}
 	.lu-select-value, .lu-select-placeholder {
 		line-height: 1.1;
 		height: _component('select.height');
-		overflow: hidden;
 		padding: _component('textfield.input.padding-vertical') 1.5rem
 			_component('textfield.input.padding-vertical')
 			_component('textfield.input.padding-horizontal');
-		text-overflow: ellipsis;
 		transition: all _theme('commons.animations.durations.standard') ease;
+		align-items: center;
+	}
+
+	.lu-select-display-wrapper, .lu-select-placeholder {
+		overflow: hidden;
+		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 
@@ -47,16 +51,17 @@
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	:host(.mod-multiple) {
-		&.mod-multipleView {
+		&.mod-multipleView:not(.mod-singleLine) {
 			.lu-select-value {
-				overflow: visible;
-				white-space: normal;
 				height: auto;
 				min-height: _component('select.height');
 				padding-bottom: 0;
 				align-items: center;
-				flex-wrap: wrap;
 				padding-top: .3rem;
+			}
+			.lu-select-display-wrapper {
+				overflow: visible;
+				white-space: normal;
 			}
 		}
 
@@ -70,7 +75,7 @@
 				vertical-align: top;
 			}
 
-			.lu-select-value > .chip, .lu-select-value > .label {
+			.lu-select-value .lu-select-display-wrapper > .chip, .lu-select-value .lu-select-display-wrapper > .label {
 				background: _component("select.tag.background");
 				color: _component("select.tag.color");
 			}
@@ -88,33 +93,44 @@
 			right: calc(3.5 * #{_component('textfield.input.padding-horizontal')});
 		}
 	}
+	:host(.mod-overflow) {
+		.lu-select-display-wrapper, .lu-select-placeholder {
+			overflow: visible;
+		}
+	}
 	// Framed
 	:host-context(.textfield.mod-framed) {
-		padding: _component('field.framed.top-padding') 0 0;
+		&.textfield-input {
+			padding: _component('field.framed.top-padding') 0 0;
 
-		&::after {
-			bottom: 0.95rem;
-			right: _component('field.framed.side-padding');
-		}
-
-		.lu-select-value, .lu-select-placeholder {
-			padding: 0 calc(#{_component('field.framed.side-padding')} * 3)
-				_component('field.framed.bottom-padding')
-				_component('field.framed.side-padding');
-		}
-
-
-		.lu-select-suffix {
-			bottom: 0.85rem;
-			right: calc(3.75 * #{_component('textfield.input.padding-horizontal')});
-		}
-
-		&.mod-search {
 			&::after {
-				bottom: .5rem;
+				bottom: 0.95rem;
+				right: _component('field.framed.side-padding');
 			}
+
+			.lu-select-value, .lu-select-placeholder {
+				padding: 0 calc(#{_component('field.framed.side-padding')} * 3)
+					_component('field.framed.bottom-padding')
+					_component('field.framed.side-padding');
+			}
+
+
 			.lu-select-suffix {
-				right: calc(4.8 * #{_component('textfield.input.padding-horizontal')});
+				bottom: 0.85rem;
+				right: calc(3.75 * #{_component('textfield.input.padding-horizontal')});
+			}
+
+			&.mod-search {
+				&::after {
+					bottom: .5rem;
+				}
+				.lu-select-suffix {
+					right: calc(4.8 * #{_component('textfield.input.padding-horizontal')});
+				}
+			}
+
+			&.mod-multiple.mod-multipleView.is-filled .lu-select-value {
+				margin-bottom: -.3rem;
 			}
 		}
 	}
@@ -167,9 +183,6 @@
 			display: none;
 		}
 		.lu-select-value {
-			display: block;
-		}
-		&.mod-multiple.mod-multipleView .lu-select-value {
 			display: flex;
 		}
 	}
