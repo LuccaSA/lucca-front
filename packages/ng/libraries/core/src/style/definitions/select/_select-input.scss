@@ -125,6 +125,10 @@
 					right: calc(4.8 * #{_component('textfield.input.padding-horizontal')});
 				}
 			}
+
+			&.mod-multiple.mod-multipleView.is-filled .lu-select-value {
+				margin-bottom: -.3rem;
+			}
 		}
 	}
 
