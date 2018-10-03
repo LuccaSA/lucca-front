@@ -57,19 +57,6 @@ export class BasicComponent {
 				placeholder: 'enter your life journey',
 			},
 		},
-		// {
-		// 	key: 'gender',
-		// 	type: 'autocomplete',
-		// 	templateOptions: {
-		// 		label: 'gender - autocomplete',
-		// 		placeholder: 'choose well',
-		// 		options: [
-		// 			{ id: 0, name: 'female' },
-		// 			{ id: 1, name: 'male' },
-		// 			{ id: 2, name: 'other' },
-		// 		],
-		// 	},
-		// },
 		{
 			key: 'orientation',
 			type: 'select',
@@ -88,7 +75,17 @@ export class BasicComponent {
 			type: 'user',
 			templateOptions: {
 				label: 'manager - user',
-				placeholder: 'pings /api/v3/users/find',
+				placeholder: 'pings /api/v3/users/search',
+			},
+		},
+		{
+			key: 'department',
+			type: 'api',
+			templateOptions: {
+				label: 'department - api',
+				placeholder: 'pings /api/v3/departments',
+				api: '/api/v3/departments',
+				filters: ['isActive=true'],
 			},
 		},
 		{
@@ -111,15 +108,6 @@ export class BasicComponent {
 				label: 'Checkboxes',
 			}
 		},
-		// {
-		// 	key: 'department',
-		// 	type: 'api',
-		// 	templateOptions: {
-		// 		label: 'department - api',
-		// 		placeholder: 'pings /api/v3/departments',
-		// 		api: '/api/v3/departments',
-		// 	},
-		// },
 	];
 
 	user = {
