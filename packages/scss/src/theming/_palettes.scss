@@ -60,10 +60,10 @@ $colors: (
 			color: #666666
 		),
 		light: (
-			color: desaturate(lighten(#FFB900, 20%), 80%)
+			color: desaturate(lighten(#FFB900, 20%), 90%)
 		),
 		placeholder: (
-			color: desaturate(lighten(#FFB900, 25%), 50%)
+			color: desaturate(lighten(#FFB900, 25%), 70%)
 		)
 	),
 );
