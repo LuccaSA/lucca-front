@@ -30,8 +30,8 @@ const AUTOPREFIXER_OPTIONS = {
 }
 
 gulp.task('dist:clean', () => {
-	return gulp.src(OUT_DIR, { read: false })
-		.pipe(clean());
+	return gulp.src(OUT_DIR, { read: false, allowEmpty: true })
+	.pipe(clean());
 });
 
 // gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
