@@ -18,7 +18,7 @@ const AUTOPREFIXER_OPTIONS = {
 };
 
 gulp.task('dist:clean', () => {
-	return gulp.src(OUT_DIR, { read: false })
+	return gulp.src(OUT_DIR, { read: false, allowEmpty: true })
 		.pipe(clean());
 });
 
