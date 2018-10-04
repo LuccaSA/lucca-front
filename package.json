@@ -20,6 +20,7 @@
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "postci": "lerna run ci",
     "lerna": "lerna",
     "travis": "lerna run travis --scope=@lucca-front/ng-internal",
     "format": "npm run format-ng && npm run format-scss && npm run format-icons",

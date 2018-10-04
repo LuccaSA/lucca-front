@@ -17,7 +17,7 @@ script:
 
 after_success:
   - cd ./demo
-  - npm ci
+  - npm install
   - npm run build
   - cd ../
   - chmod ugo+x ./deploy.sh

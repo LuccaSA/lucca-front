@@ -9,7 +9,7 @@
   },
   "scripts": {
     "publish": "npm run build",
-    "build": "gulp dist",
+    "build": "gulp build",
     "start": "gulp serve"
   },
   "keywords": [
@@ -32,11 +32,12 @@
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
-  "devDependencies": {
-    "browser-sync": "^2.24.7",
+  "dependencies": {
+    "browser-sync": "^2.23.6",
     "gulp": "^4.0.0",
     "gulp-clean": "^0.3.2",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "run-sequence": "^2.2.1"
   }
 }
