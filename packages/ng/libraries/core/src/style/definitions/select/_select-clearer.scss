@@ -8,9 +8,15 @@
 	}
 
 	.actionIcon {
-		width: 1rem;
+		color: _color("primary");
 		height: 1rem;
 		padding: 0;
+		width: 1rem;
+
+		&:hover {
+			background: _color("primary", "see-through");
+			color: _color("primary", "dark");
+		}
 	}
 
 	.lucca-icon {
@@ -18,4 +24,17 @@
 		font-size: 0.9rem;
 	}
 
+	// Material
+	:host-context(.textfield.mod-material) {
+		.actionIcon {
+			color: _color("text.light");
+		}
+	}
+
+	// Material
+	:host-context(.textfield.mod-framed) {
+		.actionIcon {
+			color: _color("text.light");
+		}
+	}
 }

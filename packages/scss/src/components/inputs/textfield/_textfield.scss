@@ -39,6 +39,11 @@
 	position: absolute;
 	right: _component("textfield.input.padding-horizontal");
 	z-index: 1;
+
+	&.mod-icon {
+		color: _color("primary", "light");
+		line-height: 1.15;
+	}
 }
 
 .textfield-options {

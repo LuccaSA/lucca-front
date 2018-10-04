@@ -3,6 +3,7 @@
 .lu-popover-panel {
 	display: flex;
 	flex-direction: column;
+	margin-top: 2px;
 	max-height: calc(100vh + 48px);
 	position: relative;
 }
