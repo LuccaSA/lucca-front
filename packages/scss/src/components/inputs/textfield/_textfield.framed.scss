@@ -85,6 +85,7 @@
 	&.mod-search, &.mod-autocomplete {
 		&::after {
 			bottom: _component("field.framed.bottom-padding");
+			color: _color("text.light");
 			line-height: 1;
 			right: _component("field.framed.side-padding");
 		}

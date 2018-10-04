@@ -26,7 +26,7 @@
 			height: 0;
 			left: _component("box.toggle.arrow.left");
 			position: absolute;
-			top: - _component("box.toggle.arrow.size");
+			top: calc(-1 * #{_component("box.toggle.arrow.size")});
 			width: 0;
 		}
 	}

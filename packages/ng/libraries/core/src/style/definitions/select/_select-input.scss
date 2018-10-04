@@ -8,7 +8,7 @@
 
 		&::after {
 			bottom: 0.55rem;
-			color: _color('text.light');
+			color: _color("primary");
 			@include makeIcon('arrow_south');
 			font-size: 0.75rem;
 			pointer-events: none;
@@ -104,6 +104,7 @@
 			padding: _component('field.framed.top-padding') 0 0;
 
 			&::after {
+				color: _color('text.light');
 				bottom: 0.95rem;
 				right: _component('field.framed.side-padding');
 			}
@@ -138,6 +139,7 @@
 	// Material
 	:host-context(.textfield.mod-material) {
 		&::after {
+			color: _color('text.light');
 			bottom: 0.6rem;
 			right: 0;
 		}

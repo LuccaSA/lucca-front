@@ -1,8 +1,8 @@
 .mat-datepicker-content {
 	@include box-shadow-override();
 	@extend .card;
-
 	display: block;
+	margin-top: 2px;
 }
 
 .mat-datepicker-toggle {

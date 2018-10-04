@@ -10,7 +10,7 @@
 
 .file-icon {
 	font-size: 3rem;
-	color: _color("text.placeholder");
+	color: _theme("commons.background.darker");
 }
 
 .file-or {
@@ -70,5 +70,13 @@
 .file {
 	&.is-droppable {
 		background: _theme("commons.background.base");
+
+		.file-icon {
+			color: _theme("commons.background.darkest");
+		}
+
+		.file-button {
+			background: white;
+		}
 	}
 }

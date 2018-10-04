@@ -15,23 +15,17 @@ $commons: (
 	),
 	disabled: (
 		opacity: .5,
+		background: #E5E5E5,
+		color: #999999,
+		placeholder: #CCCCCC
 	),
 	background: (
-		base: desaturate(lighten(_color("primary", "color", true), 46%), 88%),
-		dark: desaturate(lighten(_color("primary", "color", true), 43%), 90%),
-		darker: desaturate(lighten(_color("primary", "color", true), 39%), 94%),
-		darkest: desaturate(lighten(_color("primary", "color", true), 30%), 98%)
+		base: #F5F5F5,
+		dark: #EEEEEE,
+		darker: #E5E5E5,
+		darkest: #CCCCCC
 	),
 	text: (
-		default: (
-			color: #666666
-		),
-		light: (
-			color: #999999
-		),
-		placeholder: (
-			color: #CCCCCC
-		),
 		link: (
 			color: #00B2ED,
 			hover: #16C5FE
