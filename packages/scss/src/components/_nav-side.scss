@@ -204,7 +204,8 @@
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide.mod-withBanner {
-	top: _theme("commons.banner-height");
+	top: 0;
+	margin-top: 0;
 }
 
 // LOADING PLACEHOLDERS
