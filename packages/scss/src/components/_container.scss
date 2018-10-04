@@ -43,8 +43,8 @@
 			}
 		}
 
-		@include media_smaller_than("sm") {
-			width: calc(100% - #{_theme("components.navSide.width")});
+		@include media_smaller_than("md") {
+			width: calc(100% - #{_theme("breakpoints.md.spacing")});
 		}
 	}
 }
@@ -57,8 +57,8 @@
 			}
 		}
 
-		@include media_smaller_than("sm") {
-			width: calc(100% - _theme("components.navSide.compact.width"));
+		@include media_smaller_than("md") {
+			width: calc(100% - #{_theme("breakpoints.md.spacing")});
 		}
 	}
 }
