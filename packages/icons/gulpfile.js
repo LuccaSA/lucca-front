@@ -1,6 +1,5 @@
 'use strict';
 let gulp = require('gulp');
-let runSequence = require('run-sequence');
 let sass = require('gulp-sass');
 let clean = require('gulp-clean');
 let rename = require('gulp-rename');
