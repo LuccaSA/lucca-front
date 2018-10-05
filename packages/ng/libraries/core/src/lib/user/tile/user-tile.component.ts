@@ -20,6 +20,7 @@ import {
 export class LuUserTileComponent {
 
 	private _user: IUser;
+	@Input() imageWidth = 80;
 	/**
 	 * IUser to display.
 	 */
@@ -78,5 +79,5 @@ export class LuUserTileComponent {
 
 	constructor(
 		private _changeDetector: ChangeDetectorRef
-	) {}
+	) { }
 }
