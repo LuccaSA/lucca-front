@@ -68,3 +68,7 @@ p {
 b {
 	font-weight: 600;
 }
+
+button {
+	font-family: unquote(_theme("commons.font.family"));
+}
