@@ -19,6 +19,8 @@ import {
 export class LuUserPictureComponent {
 
 	private _displayFormat: LuDisplayInitials = LuDisplayInitials.firstlast;
+	@Input() imageWidth = 80;
+
 	/**
 	 * User Display format.
 	 * It is set to 'FL' by default
@@ -44,7 +46,7 @@ export class LuUserPictureComponent {
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
 		this.hasPicture = !!user.picture && !!user.picture.href;
 		if (this.hasPicture) {
-			this.style = { 'background-image': `url('${this._user.picture.href}')` };
+			this.style = { 'background-image': `url('${this._user.picture.href}')&width=${this.imageWidth}` };
 		} else {
 			const hsl = this.getNameHue();
 			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
@@ -63,7 +65,7 @@ export class LuUserPictureComponent {
 	constructor(
 		private displayPipe: LuUserDisplayPipe,
 		private _changeDetector: ChangeDetectorRef
-	) {}
+	) { }
 
 	private getNameHue(): number {
 		// we sum the chars in user's firstname + lastname
