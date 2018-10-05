@@ -9,7 +9,7 @@ html {
 body {
 	background: _theme("commons.background.base");
 	color: _color("text.default");
-	font-family: unquote(_theme("commons.font.family"));
+	font-family: _theme("commons.font.family");
 	font-size: _theme("sizes.standard.font-size");
 	line-height: _theme("sizes.standard.line-height");
 	vertical-align: middle;
@@ -67,4 +67,8 @@ p {
 
 b {
 	font-weight: 600;
+}
+
+button {
+	font-family: _theme("commons.font.family");
 }
