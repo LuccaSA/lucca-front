@@ -6,7 +6,7 @@
 
 	.#{$fieldname}-input {
 		color: _component("field.input.color");
-		font-family: unquote(_theme("commons.font.family"));
+		font-family: _theme("commons.font.family");
 		font-size: _component("field.font-size");
 		outline: 0;
 		position: relative;
