@@ -76,7 +76,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 			merge(Observable.of(ql), ql.changes)
 			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
 			.delay(0)
-			.do(o => this._options = o);
+			.do(o => this._options = o || []);
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
 
