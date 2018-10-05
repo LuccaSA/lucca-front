@@ -25,7 +25,7 @@ import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
@@ -73,7 +73,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
 		this._optionsQL = ql;
 		this._optionItems$ =
-			merge(Observable.of(ql), ql.changes)
+			merge(of(ql), ql.changes)
 			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
 			.delay(0)
 			.do(o => this._options = o || []);
