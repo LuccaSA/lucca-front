@@ -72,7 +72,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this.disabled = disabled;
 	}
 	protected isEmpty() {
-		return this.value === null || this.value === undefined;
+		return this.value === null || this.value === undefined || (this.value instanceof Array && this.value.length === 0);
 	}
 	protected applyClasses() {
 		if (this.isEmpty()) {
