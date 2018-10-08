@@ -40,14 +40,14 @@
   },
   "dependencies": {
     "lerna": "^2.9.0",
-    "surge": "^0.19.0"
+    "surge": "^0.20.1"
   },
   "devDependencies": {
     "colors": "^1.1.2",
     "glob": "^7.1.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.3",
-    "npm-run": "^4.1.2",
+    "npm-run": "^5.0.1",
     "prettier": "^1.5.3",
     "yargs": "^7.1.0"
   }
