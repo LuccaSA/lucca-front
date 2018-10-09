@@ -2,3 +2,12 @@
 
 @import 'theme/user-picture.theme';
 @import 'user-picture.override';
+
+@import 'theme/options.theme';
+@import 'options.override';
+
+@import 'theme/select.theme';
+@import 'select.override';
+
+@import 'theme/tooltip.theme';
+@import 'tooltip.override';

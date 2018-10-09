@@ -1,49 +1,52 @@
 $commons: (
-	"animations": (
-		"durations": (
-			"fast": 100ms,
-			"standard": 250ms,
-			"slow": 350ms,
+	animations: (
+		durations: (
+			fast: 100ms,
+			standard: 250ms,
+			slow: 350ms,
 		),
-		"iteration-count": 5,
+		translate: 3rem,
+		function: ease-out,
+		iteration-count: 5,
 	),
-	"divider": (
-		"width": 1px,
-		"color": #D6D6D6,
+	divider: (
+		width: 1px,
+		color: #D6D6D6,
 	),
-	"disabled": (
-		"opacity": .5,
+	disabled: (
+		opacity: .5,
+		background: #E5E5E5,
+		color: #999999,
+		placeholder: #CCCCCC
 	),
-	"background": (
-		"base": #F5F5F5,
-		"dark": #EEEEEE,
-		"darker": #E5E5E5,
-		"darkest": #CCCCCC
+	background: (
+		base: #F5F5F5,
+		dark: #EEEEEE,
+		darker: #E5E5E5,
+		darkest: #CCCCCC
 	),
-	"text": (
-		"default": ( "color": #666666 ),
-		"light": ( "color": #999999 ),
-		"placeholder": ( "color": #CCCCCC ),
-		"link": ( 
-			"color": #00B2ED,
-			"hover": #16C5FE ),
+	text: (
+		link: (
+			color: #00B2ED,
+			hover: #16C5FE
+		),
 	),
-	"border": (
-		"radius": 3px,
+	border: (
+		radius: 3px,
 	),
-	"font": (
-		"family": unquote('"Source Sans Pro", Tahoma, sans-serif'),
-		"size": 16px,
+	font: (
+		family: unquote("Source Sans Pro, Tahoma, sans-serif"),
+		size: 16px,
 	),
-	"elevations": (
-		"1": unquote("0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"),
-		"2": unquote("0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"),
-		"3": unquote("0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)"),
-		"4": unquote("0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"),
-		"5": unquote("0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)")
+	elevations: (
+		elevation-1: unquote("0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"),
+		elevation-2: unquote("0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"),
+		elevation-3: unquote("0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)"),
+		elevation-4: unquote("0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"),
+		elevation-5: unquote("0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)")
 	),
-	"banner-height": 50px,
-	"transition": unquote("all 150ms ease")
+	banner-height: 50px,
+	transition: unquote("all 150ms ease")
 );
 
 $theme: _set($theme, "commons", $commons);

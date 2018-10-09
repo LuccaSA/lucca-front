@@ -30,11 +30,12 @@ const AUTOPREFIXER_OPTIONS = {
 }
 
 gulp.task('dist:clean', () => {
-	return gulp.src(OUT_DIR, { read: false })
-		.pipe(clean());
+	return gulp.src(OUT_DIR, { read: false, allowEmpty: true })
+	.pipe(clean());
 });
 
-gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
+// gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
+gulp.task('serve', () => {
 	browserSync.init({
 		server: {
 			baseDir: DEMO_DIR,
@@ -47,7 +48,7 @@ gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 		}
 	});
 
-	gulp.watch(["./src/*.scss", "./src/**/*.scss","./demo/*.css"], ['scss-lint','sass:debug']);
+	gulp.watch(["./src/*.scss", "./src/**/*.scss","./demo/*.css"], gulp.series('debug'));
 	gulp.watch(["./demo/*.html","./demo/**/*.html"], browserSync.reload);
 });
 
@@ -68,7 +69,7 @@ gulp.task('sass:dist', () => {
 	.pipe(gulp.dest(OUT_DIR));
 });
 
-gulp.task('scss-lint', () => {
+gulp.task('sass:lint', () => {
 	return gulp.src(["./src/*.scss", "./src/**/*.scss"])
 	.pipe(styleLint({
 		reporters: [
@@ -77,5 +78,7 @@ gulp.task('scss-lint', () => {
 	}));
 });
 
-gulp.task('dist', ['dist:clean', 'sass:dist']);
-gulp.task('default', ['serve']);
+gulp.task('build', gulp.series('dist:clean', 'sass:dist'));
+gulp.task('debug', gulp.parallel('sass:lint', 'sass:dist'));
+gulp.task('start', gulp.series('debug', 'serve'));
+

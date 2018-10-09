@@ -90,6 +90,9 @@ In your override folder, you can create different files for different needs :
 * [palettes.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_palettes.scss)
 
    Contains a map of the color themes (palette) used in the framework. Palette must have a `color` key but can be extended to as many keys as you need.
+* [sizes.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_sizes.scss)
+
+  Contains a map of font sizes and spacings (padding & margin).
 
 You only have to write down the variables you wish to modify or add. More details on each variable are available in the [SCSS demo](https://latest-lucca-front-luccasa.surge.sh/).
 

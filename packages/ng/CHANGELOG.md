@@ -1,6 +1,20 @@
 # Changelog
 
-## In Dev
+## In dev
+
+## 1.1
+### Breaking changes
+- complete overhaul of the component `lu-select` and its sub components
+- removed `luEmpty` directive including it into `luInput` directive
+
+### New features
+- :hammer: better modelisation of `input` and `picker` 
+- :hammer: myriad of interfaces and abstract classes to allow for easy overriding
+- :sparkles: select, select with operators, api-select, user-select
+- :sparkles: `luInput` directive that adds classes `is-filled` when ngmodel not empty (like luempty, but with potential growth)
+- :sparkles: `luTooltip` directive, supporting HTML
+- :sparkles: support for checkboxes & radios for Formly
+- :sparkles: `luNumber` pipe to handle number alignment in arrays & columns.
 
 ## 1.0.1
 ### New features

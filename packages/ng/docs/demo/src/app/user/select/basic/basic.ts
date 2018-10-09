@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { IUser } from '@lucca-front/ng';
 
 @Component({
 	selector: 'demo-basic-user-select',
@@ -7,18 +6,10 @@ import { IUser } from '@lucca-front/ng';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [],
 })
-export class DemoBasicUserSelectComponent {
-	userSelect = {
-		id: 464,
-		firstName: 'Jean-François',
-		lastName: 'Garreau',
-	};
-
-	userSelectMultiple = [{
-		id: 464,
-		firstName: 'Jean-François',
-		lastName: 'Garreau',
-	}];
-
+export class BasicComponent implements OnInit {
+	user = { firstName: 'John', lastName: 'Doe' };
+	users = [];
 	constructor() {}
+
+	ngOnInit() {}
 }

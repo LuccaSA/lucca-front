@@ -1,9 +1,23 @@
 # Changelog
 
-## In Dev
+## 2.0 - in dev
+### New features
+- Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
 ### Fixes
+- `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
+
+### Breaking changes
+- `transparent` key in palettes is now `see-through`
+- `titles` adding one title level
+- `button.mod-link` is now .link
+- `button.mod-flat` is now .button.mod-link
+### Enhancements
+- `buttons` New style & remove mod-filling
+- `textfield` New default style
+- `animations` theming
 - `navSide` mobile positioning
 - `container` mobile width
+
 
 ## 1.0.1
 ### New features

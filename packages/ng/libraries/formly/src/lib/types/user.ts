@@ -7,9 +7,6 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './user.html',
 })
 export class LuFormlyFieldUser extends FieldType {
-	get _options() {
-		return <any[]>this.to.options || [];
-	}
 	focus() {
 		this.to._isFocused = true;
 	}

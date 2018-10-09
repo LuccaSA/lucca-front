@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LuSelectClearerComponent } from './select-clearer.component';
-import { LuSelectClearerFirstOrDefaultComponent } from './select-clearer-first.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-	imports: [CommonModule],
+	imports: [
+		CommonModule,
+	],
 	declarations: [
 		LuSelectClearerComponent,
-		LuSelectClearerFirstOrDefaultComponent,
 	],
-	exports: [LuSelectClearerFirstOrDefaultComponent, LuSelectClearerComponent],
+	exports: [
+		LuSelectClearerComponent,
+	],
 })
 export class LuSelectClearerModule {}

@@ -1,5 +1,5 @@
 .label {
-	background: _theme('commons.background.dark');
+	background: _theme("commons.background.dark");
 	border-radius: 3px;
 	display: inline-block;
 	color: _color("text.default");
@@ -18,7 +18,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .label {
 	@mixin labelColoring($palette) {
-		background: _color($palette, "transparent");
+		background: _color($palette, "see-through");
 		color: _color($palette, "darker");
 	}
 

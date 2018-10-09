@@ -1,8 +1,8 @@
 .mat-datepicker-content {
 	@include box-shadow-override();
 	@extend .card;
-
 	display: block;
+	margin-top: 2px;
 }
 
 .mat-datepicker-toggle {
@@ -31,7 +31,7 @@
 	width: 296px;
 
 	.mat-button {
-		@extend .button.mod-flat;
+		@extend .button.mod-link;
 
 		font-size: 1em;
 		text-decoration: none;
@@ -40,7 +40,7 @@
 		display: none;
 	}
 	.mat-icon-button {
-		@extend .button.mod-flat;
+		@extend .button.mod-link;
 
 		border-radius: 3px;
 	}
@@ -73,7 +73,7 @@
 
 		border: none;
 		border-radius: 0;
-		color: _theme('commons.text.light.color');
+		color: _color("text.light");
 		height: 100%;
 		left: 0;
 		top: 0;
@@ -94,7 +94,7 @@
 md-month-view,
 mat-month-view {
 	.mat-calendar-table-header th {
-		color: _theme('commons.text.light.color');
+		color: _color("text.light");
 		font-size: 0.9em;
 		padding-bottom: 0.4em;
 	}

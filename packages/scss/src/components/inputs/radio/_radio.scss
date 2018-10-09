@@ -1,5 +1,6 @@
 .radio {
 	position: relative;
+	display: block;
 }
 
 .radio-input {
@@ -94,12 +95,8 @@
 	&.mod-inline {
 		display: inline-block;
 		margin-right: 1.5rem;
-	}
-}
-
-.form.mod-framed {
-	.radio {
-		margin-right: 2em;
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 }
 
@@ -109,21 +106,21 @@
 .radio .radio-input {
 	&[disabled] {
 		~ .radio-label {
-			color: _color("text.light");
+			color: _theme("commons.disabled.color");
 			cursor: not-allowed;
 
 			&::before {
-				box-shadow: inset 0 0 0 2px _color("text.placeholder");
+				box-shadow: inset 0 0 0 2px _theme("commons.disabled.placeholder");
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				box-shadow: inset 0 0 0 2px _color("text.placeholder");
+				box-shadow: inset 0 0 0 2px _theme("commons.disabled.placeholder");
 			}
 
 			&::after {
-				background-color: _color("text.placeholder");
+				background-color: _theme("commons.disabled.placeholder");
 			}
 		}
 	}

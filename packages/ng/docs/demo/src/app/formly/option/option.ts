@@ -76,59 +76,6 @@ export class OptionComponent {
 				},
 			],
 		},
-		{
-			className: 'form-group',
-			fieldGroup: [
-				{
-					className: 'form-group-line',
-					fieldGroup: [
-						{
-							className: 'form-group-line-md6',
-							key: 'firstName',
-							type: 'input',
-							templateOptions: {
-								type: 'text',
-								label: 'first name',
-							},
-						},
-						{
-							className: 'form-group-line-md6',
-							key: 'lastName',
-							type: 'input',
-							templateOptions: {
-								type: 'text',
-								label: 'last name',
-								button: {
-									click: () => {
-										console.log('click on the button after a field');
-									},
-									label: 'button after a field',
-									className: 'palette-primary',
-								},
-							},
-						},
-					],
-					templateOptions: {
-						button: {
-							click: () => {
-								console.log('click on the button after a line');
-							},
-							label: 'button after a line',
-							className: 'mod-flat',
-						},
-					},
-				},
-			],
-			templateOptions: {
-				title: 'add a button after a field/line/section',
-				button: {
-					click: () => {
-						console.log('click on the button after a section');
-					},
-					label: 'button after a section',
-				},
-			},
-		},
 	];
 
 	user = {};

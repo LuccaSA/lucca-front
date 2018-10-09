@@ -1,9 +1,7 @@
 import { Routes, Route } from '@angular/router';
-import { DemoSelectComponent } from './select.component';
-import { DemoClearerSelectComponent } from './clearer/clearer';
-import { DemoModSelectComponent } from './mod-select/mod-select.component';
-import { DemoFeederSelectComponent } from './feeder/feeder';
-import { DemoSearcherSelectComponent } from './searcher/searcher';
+import { DemoSelectFoundationsComponent } from './foundations/select-foundations.component';
+import { DemoOptionPickerComponent } from './option-picker/option-picker.component';
+import { DemoSelectMultipleComponent } from './multiple/select-multiple.component';
 
 export const selectRoutes: Routes = [
 	{
@@ -11,26 +9,21 @@ export const selectRoutes: Routes = [
 		label: 'Select',
 		children: [
 			{
-				path: 'clear',
-				label: 'Clear',
-				component: DemoClearerSelectComponent,
+				path: 'foundations',
+				label: 'Foundations',
+				component: DemoSelectFoundationsComponent,
 			} as Route,
 			{
-				path: 'mod',
-				label: 'Mods',
-				component: DemoModSelectComponent,
+				path: 'picker',
+				label: 'Picker',
+				component: DemoOptionPickerComponent,
 			} as Route,
 			{
-				path: 'feeder',
-				label: 'Feeder',
-				component: DemoFeederSelectComponent,
+				path: 'multiple',
+				label: 'Multiple',
+				component: DemoSelectMultipleComponent,
 			} as Route,
-			{
-				path: 'search',
-				label: 'Search',
-				component: DemoSearcherSelectComponent,
-			} as Route,
-			{ path: '', component: DemoSelectComponent } as Route,
+			{ path: '', redirectTo: 'foundations', pathMatch: 'full' },
 		],
 	} as Route,
 ];

@@ -1,0 +1,40 @@
+@mixin selectClearerStyle {
+	:host {
+		display: none;
+	}
+
+	:host-context(.textfield-input.is-filled) {
+		display: block;
+	}
+
+	.actionIcon {
+		color: _color("primary");
+		height: 1rem;
+		padding: 0;
+		width: 1rem;
+
+		&:hover {
+			background: _color("primary", "see-through");
+			color: _color("primary", "dark");
+		}
+	}
+
+	.lucca-icon {
+		display: block;
+		font-size: 0.9rem;
+	}
+
+	// Material
+	:host-context(.textfield.mod-material) {
+		.actionIcon {
+			color: _color("text.light");
+		}
+	}
+
+	// Framed
+	:host-context(.textfield.mod-framed) {
+		.actionIcon {
+			color: _color("text.light");
+		}
+	}
+}

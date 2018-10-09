@@ -4,7 +4,7 @@
 	.textfield-input {
 		background: transparent;
 		border-radius: 0;
-		box-shadow: 0 1px 0 0 _component("textfield.border.color");
+		box-shadow: 0 1px 0 0 _component("textfield.material.border.color");
 		padding: {
 			left: 0;
 			right: 0;
@@ -40,7 +40,7 @@
 	.textfield-suffix {
 		position: absolute;
 		right: 0;
-		top: _component("textfield.material.padding-top") + _component("textfield.input.padding-vertical");
+		top: calc(#{_component("textfield.material.padding-top")} + #{_component("textfield.input.padding-vertical")});
 	}
 
 
@@ -106,8 +106,9 @@
 
 	&.mod-search, &.mod-autocomplete {
 		&::after {
-			right: 0;
+			color: _color("text.light");
 			bottom: 0;
+			right: 0;
 		}
 
 		.textfield-input {
@@ -130,15 +131,15 @@
 	&.is-loading {
 
 		&::before, &::after {
-			bottom: .4rem;
-			right: 0;
+			bottom: .4rem !important;
+			right: 0 !important;
 		}
 	}
 
 	&.is-valid {
 		&::before {
-			bottom: .7rem;
-			right: 0;
+			bottom: .7rem !important;
+			right: 0 !important;
 		}
 
 		.textfield-label {
@@ -152,18 +153,18 @@
 
 	&.is-invalid {
 		.textfield-input {
-			@include textfieldMaterialError();
+			@include fieldMaterialError("textfield");
 		}
 	}
 
 	.textfield-input {
 		&.is-filled {
-			@include textfieldMaterialFilled();
+			@include fieldMaterialFilled("textfield");
 		}
 
 		&[disabled], &[readonly] {
 			background: transparent;
-			background-image: linear-gradient(to right, _component("textfield.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
+			background-image: linear-gradient(to right, _component("textfield.material.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
 			background-position: bottom;
 			background-repeat: repeat-x;
 			background-size: 3px 1px;
@@ -171,7 +172,7 @@
 		}
 
 		&.is-error {
-			@include textfieldMaterialError();
+			@include fieldMaterialError("textfield");
 		}
 	}
 

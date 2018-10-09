@@ -8,6 +8,7 @@
     "paths": {
       "@lucca-front/ng": [
         "../../dist"
+        // "../../libraries/core/src/index"
       ],
       "@lucca-front/ng/material": [
         "../../dist/material"

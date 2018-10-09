@@ -110,6 +110,7 @@
                 // "src/theme",
                 "docs/demo/src/theme/overrides",
                 "libraries/core/src/style/overrides",
+                "libraries/core/src/style",
                 // "libraries/material/src/style",
                 // "libraries/formly/src/style",
                 "node_modules/@lucca-front/scss/src/overrides",

@@ -1,0 +1,31 @@
+<section class="contentSection">
+	<h3>Multiple</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
+			<span class="chip mod-unkillable" *luDisplayer="let value">{{value.name}}</span>
+			<lu-option-picker>
+				<lu-option [value]="green">{{green.name}}</lu-option>
+				<lu-option [value]="red">{{red.name}}</lu-option>
+				<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+				<lu-option [value]="blue">{{blue.name}}</lu-option>
+			</lu-option-picker>
+			<lu-select-clearer></lu-select-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<div class="textfield mod-framed">
+		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
+			<span class="chip mod-unkillable" *luDisplayer="let value">{{value.name}}</span>
+			<lu-option-picker>
+				<lu-option [value]="green">{{green.name}}</lu-option>
+				<lu-option [value]="red">{{red.name}}</lu-option>
+				<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+				<lu-option [value]="blue">{{blue.name}}</lu-option>
+			</lu-option-picker>
+			<lu-select-clearer></lu-select-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">my label</label>
+	</div>
+	<code class="code mod-block">{{ items | json }}</code>
+</section>
+

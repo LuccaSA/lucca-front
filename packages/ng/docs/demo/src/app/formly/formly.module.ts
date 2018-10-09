@@ -3,16 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-	MatAutocompleteModule,
 	MatInputModule,
-	MatOptionModule,
-	MatSelectModule,
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { DemoFormlyComponent } from './formly.component';
 import { LuFormlyModule } from '@lucca-front/ng/formly';
-import { LuEmptyModule } from '@lucca-front/ng';
 import { SharedModule } from '../shared/index';
 
 import { BasicComponent } from './basic/basic';
@@ -29,12 +25,8 @@ import { OptionComponent } from './option/option';
 		SharedModule,
 		FormlyModule.forRoot(),
 		LuFormlyModule,
-		LuEmptyModule,
 
-		MatAutocompleteModule,
 		MatInputModule,
-		MatOptionModule,
-		MatSelectModule,
 
 		MatMomentDateModule, // we use moment here
 	],

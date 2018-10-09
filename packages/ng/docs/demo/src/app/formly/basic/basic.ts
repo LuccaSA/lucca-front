@@ -58,19 +58,6 @@ export class BasicComponent {
 			},
 		},
 		{
-			key: 'gender',
-			type: 'autocomplete',
-			templateOptions: {
-				label: 'gender - autocomplete',
-				placeholder: 'choose well',
-				options: [
-					{ id: 0, name: 'female' },
-					{ id: 1, name: 'male' },
-					{ id: 2, name: 'other' },
-				],
-			},
-		},
-		{
 			key: 'orientation',
 			type: 'select',
 			templateOptions: {
@@ -88,18 +75,39 @@ export class BasicComponent {
 			type: 'user',
 			templateOptions: {
 				label: 'manager - user',
-				placeholder: 'pings /api/v3/users/find',
+				placeholder: 'pings /api/v3/users/search',
 			},
 		},
-		// {
-		// 	key: 'department',
-		// 	type: 'api',
-		// 	templateOptions: {
-		// 		label: 'department - api',
-		// 		placeholder: 'pings /api/v3/departments',
-		// 		api: '/api/v3/departments',
-		// 	},
-		// },
+		{
+			key: 'department',
+			type: 'api',
+			templateOptions: {
+				label: 'department - api',
+				placeholder: 'pings /api/v3/departments',
+				api: '/api/v3/departments',
+				filters: ['isActive=true'],
+			},
+		},
+		{
+			key: 'Radio',
+			type: 'radio',
+			templateOptions: {
+				label: 'Radio input',
+				options: [
+					{ value: 1, label: 'Option 1'},
+					{ value: 2, label: 'Option 2'},
+					{ value: 3, label: 'Option 3'},
+					{ value: 4, label: 'Option 4'},
+				]
+			}
+		},
+		{
+			key: 'checkbox',
+			type: 'checkbox',
+			templateOptions: {
+				label: 'Checkboxes',
+			}
+		},
 	];
 
 	user = {

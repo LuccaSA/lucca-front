@@ -1,5 +1,4 @@
 'use strict';
-
 let gulp = require('gulp');
 let sass = require('gulp-sass');
 let clean = require('gulp-clean');
@@ -19,7 +18,7 @@ const AUTOPREFIXER_OPTIONS = {
 };
 
 gulp.task('dist:clean', () => {
-	return gulp.src(OUT_DIR, { read: false })
+	return gulp.src(OUT_DIR, { read: false, allowEmpty: true })
 		.pipe(clean());
 });
 
@@ -30,12 +29,14 @@ gulp.task('sass:dist', () => {
 	.pipe(gulp.dest(OUT_DIR));
 });
 
-gulp.task('prepare-dist-folder', ['dist:clean'], () => {
+gulp.task('copy:font', () => {
 	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf'])
 	.pipe(gulp.dest(OUT_DIR));
 });
 
-gulp.task('serve', ['prepare-dist-folder', 'sass:dist'], () => {
+gulp.task('build', gulp.series('dist:clean', 'copy:font', 'sass:dist'));
+
+gulp.task('serve', () => {
 	browserSync.init({
 		server: {
 			baseDir: DEMO_DIR,
@@ -49,5 +50,4 @@ gulp.task('serve', ['prepare-dist-folder', 'sass:dist'], () => {
 	gulp.watch(["./demo/*.html", "./demo/*.css"], browserSync.reload);
 });
 
-gulp.task('dist', ['prepare-dist-folder', 'sass:dist']);
-gulp.task('default', ['dist']);
+gulp.task('start', gulp.series('build', 'serve'));

@@ -1,4 +1,4 @@
-export * from './select/index';
+export * from './api.model';
+export * from './api.module';
 
-export { LuApiModule } from './api.module';
-export { ICoerce } from './api.model';
+export * from './select/index';

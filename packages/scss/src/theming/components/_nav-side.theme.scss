@@ -1,6 +1,6 @@
 $navSide: (
 
-	"fullwidth-palette": (
+	fullwidth-palette: (
 		bg-color: _color("primary", "dark"),
 		text: white,
 		selected-bg: _color("primary"),
@@ -9,7 +9,7 @@ $navSide: (
 		alert-text: _color("secondary", "text")
 	),
 
-	"compact-palette": (
+	compact-palette: (
 		bg-color: _color("primary", "dark"),
 		text: white,
 		selected-bg: _color("primary"),
@@ -18,7 +18,7 @@ $navSide: (
 		alert-text: _color("secondary", "text")
 	),
 
-	"bottom-section-palette": (
+	bottom-section-palette: (
 		bg-color: _color("primary", "dark"),
 		text: white,
 		selected-bg: _color("primary"),
@@ -27,30 +27,30 @@ $navSide: (
 		alert-text: _color("secondary", "text")
 	),
 
-	"bottom-section-height": 3.1rem,
-	"offset-top": 0,
-	"padding-top": 0,
-	"main-font-size": _theme("sizes.standard.font-size"),
-	"sub-font-size": _theme("sizes.small.font-size"),
-	"scrollbar": (
-		"width": .5rem,
-		"border-radius": 10px,
-		"bg-color": _color("primary", "dark"),
-		"thumb-color": _color("primary")
+	bottom-section-height: 3.1rem,
+	offset-top: 0,
+	padding-top: 0,
+	main-font-size: _theme("sizes.standard.font-size"),
+	sub-font-size: _theme("sizes.small.font-size"),
+	scrollbar: (
+		width: .5rem,
+		border-radius: 10px,
+		bg-color: _color("primary", "dark"),
+		thumb-color: _color("primary")
 	),
-	"submenu": (
-		"max-height": 33rem,
+	submenu: (
+		max-height: 33rem,
 	),
-	"width": 15rem,
+	width: 15rem,
 
-	"compact": (
-		"width": 6.125rem,
-		"bottom-section-height": 5rem,
-		"font-size": _theme("sizes.small.font-size")
+	compact: (
+		width: 6.125rem,
+		bottom-section-height: 5rem,
+		font-size: _theme("sizes.small.font-size")
 	),
 
-	"mobile": (
-		"toggle-height": 3.5rem,
+	mobile: (
+		toggle-height: 3.5rem,
 	),
 );
 

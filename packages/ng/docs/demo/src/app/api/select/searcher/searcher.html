@@ -1,0 +1,27 @@
+<section class="contentSection">
+	<h3>Api paged searcher</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="section" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
+			<lu-option-picker>
+				<lu-api-paged-searcher api="/api/v3/axissections"></lu-api-paged-searcher>
+					<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">axis section</label>
+	</div>
+</section>
+<section class="contentSection">
+	<h3>Api searcher</h3>
+	<div class="textfield">
+		<lu-select [(ngModel)]="department" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
+			<lu-option-picker>
+				<lu-api-searcher api="/api/v3/departments"></lu-api-searcher>
+					<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">department</label>
+	</div>
+</section>
+

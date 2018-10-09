@@ -1,4 +1,5 @@
 .checkbox {
+	display: block;
 	position: relative;
 }
 
@@ -6,45 +7,27 @@
 	opacity: 0;
 	pointer-events: none;
 	position: absolute;
-
-	&:checked ~ .checkbox-label {
-		&::after {
-			transform: scale(1);
-		}
-	}
 }
 
 .checkbox-label {
 	cursor: pointer;
-	display: inline-block;
-	padding: _component("checkbox.label.padding");
-	line-height: _component("checkbox.label.line-height");
-	transition: color 150ms ease;
+	display: inline-flex;
+	align-items: flex-start;
+	transition: color _theme("commons.animations.durations.standard") ease;
 
 	&::before {
+		@include makeIcon("tick");
 		border-radius: _component("checkbox.input.border-radius");
 		box-shadow: inset 0 0 0 2px #999999;
-		content: "";
+		color: transparent;
 		display: block;
-		height: _component("checkbox.input.size");
-		left: 0;
-		position: absolute;
-		top: _component("checkbox.input.top");
-		transition: all 100ms ease;
-		width: _component("checkbox.input.size");
-	}
-
-	&::after {
-		color: white;
+		flex: 0 0 auto;
 		font-size: .8rem;
-		@include makeIcon("tick");
-		left: 0;
+		height: _component("checkbox.input.size");
 		line-height: _component("checkbox.input.size");
-		padding-top: .05rem;
-		position: absolute;
+		margin-right: _component("checkbox.input.margin-right");
+		margin-top: _component("checkbox.input.margin-top");
 		text-align: center;
-		top: _component("checkbox.input.top");
-		transform: scale(0);
 		transition: all 100ms ease;
 		width: _component("checkbox.input.size");
 	}
@@ -65,6 +48,7 @@
 	@mixin checkboxColoring($palette) {
 		.checkbox-input:checked ~ .checkbox-label {
 			&::before {
+				color: #FFFFFF;
 				background-color: _color($palette);
 				box-shadow: inset 0 0 0 2px _color($palette);
 			}
@@ -88,14 +72,29 @@
 
 .checkbox {
 	&.mod-inline {
+		vertical-align: middle;
 		display: inline-block;
 		margin-right: 1.5rem;
 	}
 }
 
 .form.mod-framed {
-	.checkbox {
-		margin-right: 2em;
+	.checkbox, .checkbox-label {
+		width: 100%;
+	}
+	.checkbox .checkbox-label {
+		@include fakeBorder(1px, _theme("commons.divider.color"));
+		padding: _component("field.framed.side-padding");
+		display: inline-flex;
+		align-items: center;
+		&::before {
+			position: relative;
+			margin-top: 0;
+		}
+	}
+
+	.checkbox.is-offset .checkbox-label {
+		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 	}
 }
 
@@ -106,24 +105,24 @@
 .checkbox .checkbox-input {
 	&[disabled] {
 		~ .checkbox-label {
-			color: _color("text.light");
+			color: _theme("commons.disabled.color");
 			cursor: not-allowed;
 
 			&::before {
-				box-shadow: inset 0 0 0 2px _color("text.placeholder");
+				box-shadow: inset 0 0 0 2px _theme("commons.disabled.placeholder");
 			}
 		}
 
 		&:checked ~ .checkbox-label {
 			&::before {
-				background-color: _color("text.placeholder");
-				box-shadow: inset 0 0 0 2px _color("text.placeholder");
+				background-color: _theme("commons.disabled.placeholder");
+				box-shadow: inset 0 0 0 2px _theme("commons.disabled.placeholder");
 			}
 		}
 	}
 
 	&.is-incomplete ~ .checkbox-label {
-		&::after {
+		&::before {
 			font-size: .6rem;
 			@include makeIcon("minimize");
 		}

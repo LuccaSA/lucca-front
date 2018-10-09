@@ -1,8 +1,7 @@
 %base_animated_element {
 	animation-duration: _theme("commons.animations.durations.standard");
 	animation-fill-mode: both;
-	animation-timing-function: ease-out;
-	backface-visibility: hidden;
+	animation-timing-function: _theme("commons.animations.function");
 }
 
 .u-animatedFadeIn, .u-animatedFadeOut {
