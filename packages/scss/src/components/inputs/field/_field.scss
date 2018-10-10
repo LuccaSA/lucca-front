@@ -1,8 +1,10 @@
 @mixin field($fieldname) {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	position: relative;
+	.#{$fieldname} {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: relative;
+	}
 
 	.#{$fieldname}-input {
 		color: _component("field.input.color");
@@ -49,71 +51,72 @@
 		color: _color("text.light");
 	}
 
-	/* Display */
-
-	&.mod-inline {
-		display: inline-flex;
-		margin-left: _component("field.input.inline-margin");
-		margin-right: _component("field.input.inline-margin");
-	}
-
-	&.mod-block {
-		width: 100%;
-	}
-
-	/* State */
-	&.is-required {
-		.#{$fieldname}-label {
-			&::after {
-				@extend %isRequired;
+	.#{$fieldname} {
+		/* Display */
+		&.mod-inline {
+			display: inline-flex;
+			margin-left: _component("field.input.inline-margin");
+			margin-right: _component("field.input.inline-margin");
+		}
+	
+		&.mod-block {
+			width: 100%;
+		}
+		/* State */
+		&.is-required {
+			.#{$fieldname}-label {
+				&::after {
+					@extend %isRequired;
+				}
+			}
+		}
+	
+		// Inline validation
+		&.is-loading {
+			@include loading(1rem);
+	
+			&::before, &::after {
+				content: '' !important;
+				bottom: .6rem !important;
+				left: inherit !important;
+				right: .5rem !important;
+				top: inherit !important;
+				position: absolute !important;
+				z-index: 2 !important;
+			}
+	
+			.#{$fieldname}-input {
+				padding-right: 2rem;
+			}
+		}
+	
+		&.is-valid {
+	
+			&::before {
+				animation: isValid 3s forwards;
+				@include makeIcon("tick_bold");
+				border-radius: 50%;
+				bottom: .85rem;
+				color: _color("success");
+				font-size: 1.2rem;
+				height: 1rem;
+				position: absolute;
+				right: .4rem;
+				z-index: 1;
+			}
+	
+			.#{$fieldname}-input {
+				padding-right: 2rem;
+			}
+		}
+	
+		&.is-error, &.is-invalid {
+			.#{$fieldname}-label {
+				color: _color("error");
 			}
 		}
 	}
 
-	// Inline validation
-	&.is-loading {
-		@include loading(1rem);
-
-		&::before, &::after {
-			content: '' !important;
-			bottom: .6rem !important;
-			left: inherit !important;
-			right: .5rem !important;
-			top: inherit !important;
-			position: absolute !important;
-			z-index: 2 !important;
-		}
-
-		.#{$fieldname}-input {
-			padding-right: 2rem;
-		}
-	}
-
-	&.is-valid {
-
-		&::before {
-			animation: isValid 3s forwards;
-			@include makeIcon("tick_bold");
-			border-radius: 50%;
-			bottom: .85rem;
-			color: _color("success");
-			font-size: 1.2rem;
-			height: 1rem;
-			position: absolute;
-			right: .4rem;
-			z-index: 1;
-		}
-
-		.#{$fieldname}-input {
-			padding-right: 2rem;
-		}
-	}
-
-	&.is-error, &.is-invalid {
-		.#{$fieldname}-label {
-			color: _color("error");
-		}
-	}
 }
 
 @mixin field-input($fieldname) {

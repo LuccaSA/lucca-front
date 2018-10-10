@@ -1,8 +1,9 @@
 @import "../field/field";
 
+@include field("textfield");
+
 .textfield {
 	width: _component("field.sizes.default");
-	@include field("textfield");
 }
 
 .textfield-input {
