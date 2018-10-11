@@ -1,5 +1,7 @@
-import { Directive, Output, HostListener, EventEmitter, ElementRef } from '@angular/core';
+import { Directive, Output, HostListener, EventEmitter, ElementRef, OnInit, Input } from '@angular/core';
 import { ILuScrollable } from './scroll.model';
+import { Subject } from 'rxjs/Subject';
+import { throttleTime } from 'rxjs/operators';
 
 /**
  * emits on scroll events
@@ -8,14 +10,24 @@ import { ILuScrollable } from './scroll.model';
 	selector: '[luScroll]',
 	exportAs: 'luScroll',
 })
-export class LuScrollDirective implements ILuScrollable {
+export class LuScrollDirective implements ILuScrollable, OnInit {
+	@Input() throttleTime = 100;
 	@Output() onScroll = new EventEmitter<Event>();
 	@Output() onScrollTop = new EventEmitter<Event>();
 	@Output() onScrollBottom = new EventEmitter<Event>();
 	@Output() onScrollLeft = new EventEmitter<Event>();
 	@Output() onScrollRight = new EventEmitter<Event>();
+	private scrollSubject = new Subject<Event>();
+	private scroll$ = this.scrollSubject.asObservable().pipe(throttleTime(this.throttleTime));
 	@HostListener('scroll', ['$event'])
 	_scroll($event: Event) {
+		this.scrollSubject.next($event);
+	}
+
+	ngOnInit(): void {
+		this.scroll$.subscribe(scrollEvent => this.emitScrollEvents(scrollEvent));
+	}
+	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);
 		const scrollLeft = $event.srcElement.scrollLeft;
 		const scrollTop = $event.srcElement.scrollTop;
