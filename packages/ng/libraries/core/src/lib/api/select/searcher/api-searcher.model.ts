@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/withLatestFrom';
 import { merge } from 'rxjs/observable/merge';
 import { ILuApiPagerService } from '../pager';
+import { share, tap, switchMap } from 'rxjs/operators';
 
 export interface ILuApiOptionSearcher<T extends IApiItem = IApiItem> extends ILuApiOptionFeeder<T> {}
 export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends ILuApiFeederService<T> {
@@ -33,8 +34,11 @@ implements ILuApiOptionFeeder<T> {
 		this.resetClue();
 	}
 	protected initObservables(clue$) {
-		this._clue$ = clue$;
-		this._results$ = this._clue$.switchMap(clue => this._service.searchAll(clue).catch(err => of([])));
+		this._clue$ = clue$.pipe(share());
+		this._results$ = this._clue$.pipe(
+			switchMap(clue => this._service.searchAll(clue).catch(err => of([]))),
+			share(),
+		);
 
 		this._results$.subscribe(items => this.outOptions$.next(items));
 		this.loading$ = merge(
@@ -109,7 +113,10 @@ implements ILuApiOptionPagedSearcher<T> {
 		}
 	}
 	protected initObservables(clue$) {
-		this._clue$ = clue$.do(c => this._page$.next(0));
+		this._clue$ = clue$.pipe(
+			tap(c => this._page$.next(0)),
+			share()
+		);
 		this._results$ =
 		merge(
 			this._clue$
@@ -118,7 +125,7 @@ implements ILuApiOptionPagedSearcher<T> {
 			this._page$
 			.withLatestFrom(this._clue$)
 			.switchMap(([page, clue]) => this._service.searchPaged(clue, page).catch(err => of([]))),
-		);
+		).pipe(share());
 
 		this._results$
 		.withLatestFrom(this._page$)

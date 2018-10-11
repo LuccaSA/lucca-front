@@ -5,6 +5,8 @@ import { IApiItem } from '../../api.model';
 import { LuApiSearcherService, LuApiPagedSearcherService } from './api-searcher.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators/debounceTime';
+import { share } from 'rxjs/operators';
+
 @Component({
 	selector: 'lu-api-searcher',
 	templateUrl: 'api-searcher.component.html',
@@ -95,8 +97,7 @@ extends ALuApiOptionPagedSearcher<T, S> {
 		super((hostService || selfService) as S);
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-		.pipe(debounceTime(250));
-	}
+		.pipe(debounceTime(250));	}
 
 	onOpen() {
 		this.searchInput.nativeElement.focus();
