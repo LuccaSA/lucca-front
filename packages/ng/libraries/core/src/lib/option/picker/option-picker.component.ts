@@ -1,7 +1,6 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ViewEncapsulation,
 	ContentChildren,
 	QueryList,
 	Output,
@@ -11,26 +10,21 @@ import {
 	ViewChild,
 	TemplateRef,
 	ViewContainerRef,
-	ElementRef,
-	ViewRef,
-	EmbeddedViewRef,
 	Renderer2,
 	ChangeDetectorRef,
-	OnInit,
 	AfterViewInit,
 	Input,
 } from '@angular/core';
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
-import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
-import { ALuPickerPanel, ALuInputDisplayer, ILuInputDisplayer } from '../../input/index';
+import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
@@ -61,22 +55,22 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
+
+	protected _isOptionItemsInited: boolean;
+
 	constructor(
 		protected _vcr: ViewContainerRef,
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _renderer: Renderer2) {
 		super();
 		this.triggerEvent = 'click';
+		this._isOptionItemsInited = false;
 	}
 	protected _options: ILuOptionItem<T>[] = [];
 	protected _optionsQL: QueryList<ILuOptionItem<T>>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
 		this._optionsQL = ql;
-		this._optionItems$ =
-			merge(of(ql), ql.changes)
-			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
-			.delay(0)
-			.do(o => this._options = o || []);
+		this.initOptionItemsObservable();
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
 
@@ -210,5 +204,19 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 				this._renderer.addClass(option.element.nativeElement, selectedClass);
 			}
 		});
+	}
+
+	protected initOptionItemsObservable() {
+		if (this._isOptionItemsInited) {
+			return;
+		}
+
+		this._isOptionItemsInited = true;
+
+		this._optionItems$ =
+			merge(of(this._optionsQL), this._optionsQL.changes)
+			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
+			.delay(0)
+			.do(o => this._options = o || []);
 	}
 }
