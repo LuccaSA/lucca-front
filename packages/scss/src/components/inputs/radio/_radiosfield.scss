@@ -1,8 +1,6 @@
 @import "../field/field";
 
-.radiosfield {
-	@include field("radiosfield");
-}
+@include field("radiosfield");
 
 .radiosfield-input {
 	@include field-input("radiosfield");

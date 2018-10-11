@@ -1,8 +1,6 @@
 @import "../field/field";
 
-.checkboxesfield {
-	@include field("checkboxesfield");
-}
+@include field("checkboxesfield");
 
 .checkboxesfield-input {
 	@include field-input("checkboxesfield");
