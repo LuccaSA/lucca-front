@@ -1,17 +1,17 @@
-import { IApiItem } from '../../api.model';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ILuApiOptionFeeder, ILuApiFeederService, ALuApiFeederService } from '../feeder/index';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/withLatestFrom';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { combineLatest } from 'rxjs/Observable/combineLatest';
 import { merge } from 'rxjs/observable/merge';
+import { of } from 'rxjs/observable/of';
+import { share, switchMap, tap, distinctUntilChanged } from 'rxjs/operators';
+import { IApiItem } from '../../api.model';
+import { ALuApiFeederService, ILuApiFeederService, ILuApiOptionFeeder } from '../feeder/index';
 import { ILuApiPagerService } from '../pager';
-import { share, tap, switchMap } from 'rxjs/operators';
 
 export interface ILuApiOptionSearcher<T extends IApiItem = IApiItem> extends ILuApiOptionFeeder<T> {}
 export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends ILuApiFeederService<T> {
@@ -113,22 +113,23 @@ implements ILuApiOptionPagedSearcher<T> {
 		}
 	}
 	protected initObservables(clue$) {
+		const distinctPage$ = this._page$.pipe(distinctUntilChanged());
+
 		this._clue$ = clue$.pipe(
-			tap(c => this._page$.next(0)),
+			tap(() => this._page$.next(0)),
+			distinctUntilChanged(),
 			share()
 		);
-		this._results$ =
-		merge(
-			this._clue$
-			.withLatestFrom(this._page$)
-			.switchMap(([clue, page]) => this._service.searchPaged(clue, page).catch(err => of([]))),
-			this._page$
-			.withLatestFrom(this._clue$)
-			.switchMap(([page, clue]) => this._service.searchPaged(clue, page).catch(err => of([]))),
-		).pipe(share());
+		this._results$ = combineLatest(
+			distinctPage$,
+			this._clue$,
+		).pipe(
+			switchMap(([page, clue]) => this._service.searchPaged(clue, page).catch(err => of([]))),
+			share(),
+		);
 
 		this._results$
-		.withLatestFrom(this._page$)
+		.withLatestFrom(distinctPage$)
 		.subscribe(([items, page]) => {
 			if (page === 0) {
 				this.outOptions$.next([...items]);
