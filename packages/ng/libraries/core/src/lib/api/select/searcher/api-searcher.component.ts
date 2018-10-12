@@ -5,7 +5,6 @@ import { IApiItem } from '../../api.model';
 import { LuApiSearcherService, LuApiPagedSearcherService } from './api-searcher.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators/debounceTime';
-import { share } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-api-searcher',

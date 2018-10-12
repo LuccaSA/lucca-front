@@ -4,7 +4,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/withLatestFrom';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { merge } from 'rxjs/observable/merge';
 import { of } from 'rxjs/observable/of';

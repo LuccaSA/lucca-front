@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { merge } from 'rxjs/observable/merge';
 import { of } from 'rxjs/observable/of';
