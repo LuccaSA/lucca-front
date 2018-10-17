@@ -20,6 +20,16 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@Input('luTooltip') tooltipContent;
 	@Input() enterDelay = 300;
 	@Input() leaveDelay = 100;
+	@Input('luTooltipDisabled')
+	get disabled(): boolean {
+		return this._disabled;
+	}
+	set disabled(value: boolean) {
+		this._disabled = value;
+		if (this._popoverOpen && this._disabled) {
+			this.closePopover();
+		}
+	}
 
 	@HostListener('mouseenter')
 	onMouseEnter() {
