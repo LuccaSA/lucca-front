@@ -1,8 +1,19 @@
 # Changelog
 
-## In dev
+## in dev
 
-## 1.1
+## 2.0.1
+### Bug fixes & optims
+- NG - [issue 444](https://github.com/LuccaSA/lucca-front/issues/444) - fix select clearer not working in firefox
+
+## 2.0.1
+### Bug fixes & optims
+- NG - Fixing the number of calls output by the various selects
+- NG - Using observable for lu-scroll and debouncing the event emission
+- NG - Using disabled on formly select wrapper
+- SCSS - Flattening field-messages style
+
+## 2.0.0
 ### Breaking changes
 - complete overhaul of the component `lu-select` and its sub components
 - removed `luEmpty` directive including it into `luInput` directive
