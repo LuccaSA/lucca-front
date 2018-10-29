@@ -2,7 +2,7 @@
 
 ## in dev
 
-## 2.0.1
+## 2.0.2
 ### Bug fixes & optims
 - NG - [issue 444](https://github.com/LuccaSA/lucca-front/issues/444) - fix select clearer not working in firefox
 
