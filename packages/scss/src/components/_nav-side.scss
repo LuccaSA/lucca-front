@@ -124,9 +124,6 @@
 	position: fixed;
 	width: _component("navSide.width");
 	z-index: 1;
-	&.is-elevated {
-		box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.12);
-	}
 
 	.navSide-item, .navSide-item-link {
 		height: 100%;
@@ -384,9 +381,6 @@
 		position: relative;
 		width: auto;
 		height: auto;
-		&.is-elevated {
-			box-shadow: none;
-		}
 
 		.navSide-item-link {
 			color: _component("navSide.bottom-section-palette.text");
