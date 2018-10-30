@@ -13,6 +13,7 @@
 .navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
 	height: calc(100vh - #{_theme("commons.banner-height")});
 	overflow-y: auto;
+	margin-top: _theme("commons.banner-height");
 }
 
 @include media_smaller_than("md") {

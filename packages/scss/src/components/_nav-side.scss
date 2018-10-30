@@ -212,10 +212,8 @@
 // MOD
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide.mod-withBanner {
-	top: 0;
-	margin-top: 0;
+	top: _theme("commons.banner-height");
 }
-
 // LOADING PLACEHOLDERS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -373,8 +371,12 @@
 	.navSide-item.mod-mobileToggle {
 		display: block;
 		height: _component("navSide.mobile.toggle-height");
+		background-color: _color("primary", "dark");
 		cursor: pointer;
 		overflow: hidden;
+		position: sticky;
+		top: 0;
+		z-index: 1;
 	}
 
 	.navSide-bottomSection {
@@ -398,6 +400,9 @@
 
 	.navSide.is-open {
 		height: 100vh;
+		&.mod-withBanner {
+			height: calc(100vh - #{_theme("commons.banner-height")});
+		}
 
 		.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
 			position: static;
