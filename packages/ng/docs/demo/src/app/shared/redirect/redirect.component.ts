@@ -29,9 +29,9 @@ export class RedirectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		if (!this.env.redirect) {
-			this.connect();
-		}
+		// if (!this.env.redirect) {
+		// 	this.connect();
+		// }
 	}
 
 	connect() {
