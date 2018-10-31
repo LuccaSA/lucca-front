@@ -58,7 +58,6 @@
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^6.2.2",
-    "rxjs-compat": "^6.2.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
