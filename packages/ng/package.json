@@ -27,6 +27,7 @@
     "lint": "ng lint",
     "gulp": "gulp",
     "generatedoc": "gulp generatedoc",
+    "pretravis": "npm run build:lib",
     "travis": "npm run build:aot",
     "posttravis": "npm run build:demo",
     "prebuild:demo": "npm run generatedoc",
