@@ -18,7 +18,7 @@ import {
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
-import { merge, of } from 'rxjs/';
+import { merge, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
