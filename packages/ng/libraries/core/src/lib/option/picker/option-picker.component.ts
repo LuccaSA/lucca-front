@@ -209,12 +209,12 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 		this._isOptionItemsInited = true;
 
-		this._optionItems$ =
-			merge(of(this._optionsQL), this._optionsQL.changes)
+		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
 			.pipe(
 				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
 				delay(0),
 			);
-		this._optionItems$.subscribe(o => this._options = o || []);
+		items$.subscribe(o => this._options = o || []);
+		this._optionItems$ = items$;
 	}
 }
