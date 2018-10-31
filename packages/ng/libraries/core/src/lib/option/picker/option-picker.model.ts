@@ -1,9 +1,7 @@
 import { ILuPickerPanel, ALuPickerPanel } from '../../input/index';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { Subscription, Observable, merge } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/index';
-import { merge } from 'rxjs/observable/merge';
-import { switchMap } from 'rxjs/operators/switchMap';
 import { ILuOptionOperator } from '../operator/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 

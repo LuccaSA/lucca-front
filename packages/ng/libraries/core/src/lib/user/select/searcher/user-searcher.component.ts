@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject } from '@angular/core';
 import { ALuOptionOperator } from '../../../option/index';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { debounceTime } from 'rxjs/operators';
 import { LuUserPagedSearcherService } from './user-searcher.service';
 import { ALuUserPagedSearcherService } from './user-searcher.model';
 import { IUser } from '../../user.model';

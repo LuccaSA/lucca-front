@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 
-import { _throw } from 'rxjs/observable/throw';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { map, catchError } from 'rxjs/operators';
 
 export enum RedirectStatus {
 	disconnected,
@@ -72,7 +69,7 @@ export class RedirectService {
 				}),
 				catchError(r => {
 					this.env.loginError();
-					return _throw(r);
+					return throwError(r);
 				})
 			);
 	}

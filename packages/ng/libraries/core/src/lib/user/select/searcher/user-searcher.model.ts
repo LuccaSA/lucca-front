@@ -1,8 +1,8 @@
 import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ISuggestion } from '../../../api/index';
 import { IUser } from '../../user.model';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators/map';
-import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export abstract class ALuUserPagedSearcherService<U extends IUser = IUser>
 extends ALuApiPagedSearcherService<U>

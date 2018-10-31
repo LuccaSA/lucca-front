@@ -4,9 +4,8 @@ import {
 	RedirectEnvironment,
 	RedirectStatus,
 } from './redirect.service';
-import { of } from 'rxjs/observable/of';
-import { catchError } from 'rxjs/operators/catchError';
-import { map } from 'rxjs/operators/map';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
 	selector: 'demo-redirect',

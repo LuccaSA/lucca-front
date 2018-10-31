@@ -18,11 +18,8 @@ import {
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
-import { merge } from 'rxjs/observable/merge';
-import { of } from 'rxjs/observable/of';
-import { map } from 'rxjs/operators/map';
-import { tap } from 'rxjs/operators/tap';
-import { delay } from 'rxjs/operators/delay';
+import { merge, of } from 'rxjs/';
+import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
@@ -217,7 +214,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 			.pipe(
 				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
 				delay(0),
-				tap(o => this._options = o || [])
 			);
+		this._optionItems$.subscribe(o => this._options = o || []);
 	}
 }
