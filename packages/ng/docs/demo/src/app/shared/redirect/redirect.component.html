@@ -6,6 +6,9 @@
 		<div class="u-textRight" *ngIf="disconnected$ | async">
 			<span class="label">You are not connected</span>
 		</div>
+		<div class="u-textRight" *ngIf="error$ | async">
+			<span class="label palette-error">error while trying to connect</span>
+		</div>
 		<div class="u-textRight" *ngIf="connecting$ | async">
 			<span class="label">Connecting...</span>
 		</div>

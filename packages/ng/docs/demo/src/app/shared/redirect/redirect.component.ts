@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
 	RedirectService,
 	RedirectEnvironment,
 	RedirectStatus,
 } from './redirect.service';
+import { of } from 'rxjs/observable/of';
 
 @Component({
 	selector: 'demo-redirect',
 	templateUrl: './redirect.component.html',
 })
-export class RedirectComponent implements OnInit {
+export class RedirectComponent {
 	url = 'lucca.local.dev';
 	login = 'passepartout';
 	password = '';
@@ -21,6 +22,7 @@ export class RedirectComponent implements OnInit {
 	connected$ = this.status$.map(s => s === RedirectStatus.connected);
 	connecting$ = this.status$.map(s => s === RedirectStatus.connecting);
 	disconnected$ = this.status$.map(s => s === RedirectStatus.disconnected);
+	error$ = this.status$.map(s => s === RedirectStatus.error);
 
 	loading = false;
 	constructor(
@@ -28,15 +30,16 @@ export class RedirectComponent implements OnInit {
 		private env: RedirectEnvironment,
 	) {}
 
-	ngOnInit() {
-		// if (!this.env.redirect) {
-		// 	this.connect();
-		// }
-	}
-
 	connect() {
 		this.loading = true;
-		this.service.login(this.url, this.login, this.password).subscribe(() => {
+		const loginRequest = this.service.login(this.url, this.login, this.password);
+
+		loginRequest.subscribe(() => {
+			this.loading = false;
+		});
+		loginRequest.catch(err => of(err))
+		.subscribe(err => {
+			console.log(err);
 			this.loading = false;
 		});
 	}
