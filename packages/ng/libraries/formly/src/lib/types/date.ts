@@ -1,9 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { MatDatepicker } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/observable/of';
 
 @Component({
 	selector: 'lu-formly-field-date',
@@ -42,11 +39,9 @@ export class LuFormlyFieldDate extends FieldType {
 		picker.close();
 	}
 	private refocusInput() {
-		Observable.of({})
-			.delay(1) // need timeout here because shenanigans
-			.subscribe(() => {
-				this.input.nativeElement.focus();
-			});
+		setTimeout(() => { // need timeout here because shenanigans
+			this.input.nativeElement.focus();
+		}, 1);
 	}
 	focus(picker: MatDatepicker<any>) {
 		this.to._isFocused = true;
