@@ -5,6 +5,8 @@ import {
 	RedirectStatus,
 } from './redirect.service';
 import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators/catchError';
+import { map } from 'rxjs/operators/map';
 
 @Component({
 	selector: 'demo-redirect',
@@ -19,10 +21,10 @@ export class RedirectComponent {
 	url$ = this.env.url$;
 	login$ = this.env.login$;
 
-	connected$ = this.status$.map(s => s === RedirectStatus.connected);
-	connecting$ = this.status$.map(s => s === RedirectStatus.connecting);
-	disconnected$ = this.status$.map(s => s === RedirectStatus.disconnected);
-	error$ = this.status$.map(s => s === RedirectStatus.error);
+	connected$ = this.status$.pipe(map(s => s === RedirectStatus.connected));
+	connecting$ = this.status$.pipe(map(s => s === RedirectStatus.connecting));
+	disconnected$ = this.status$.pipe(map(s => s === RedirectStatus.disconnected));
+	error$ = this.status$.pipe(map(s => s === RedirectStatus.error));
 
 	loading = false;
 	constructor(
@@ -37,7 +39,7 @@ export class RedirectComponent {
 		loginRequest.subscribe(() => {
 			this.loading = false;
 		});
-		loginRequest.catch(err => of(err))
+		loginRequest.pipe(catchError(err => of(err)))
 		.subscribe(err => {
 			console.log(err);
 			this.loading = false;

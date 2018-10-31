@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { _throw } from 'rxjs/observable/throw';
 import { map } from 'rxjs/operators/map';
+import { catchError } from 'rxjs/operators/catchError';
 
 export enum RedirectStatus {
 	disconnected,
@@ -63,14 +64,16 @@ export class RedirectService {
 
 		return this.http
 			.post(loginUrl, {}, options)
-			.pipe(map(r => {
-				const token = (<any>r).substring(1, (<any>r).length - 1);
-				this.env.loginSuccess(url, token, login);
-				return RedirectStatus.connected;
-			}))
-			.catch(r => {
-				this.env.loginError();
-				return _throw(r);
-			});
+			.pipe(
+				map(r => {
+					const token = (<any>r).substring(1, (<any>r).length - 1);
+					this.env.loginSuccess(url, token, login);
+					return RedirectStatus.connected;
+				}),
+				catchError(r => {
+					this.env.loginError();
+					return _throw(r);
+				})
+			);
 	}
 }
