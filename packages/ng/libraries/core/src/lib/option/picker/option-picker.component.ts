@@ -20,10 +20,9 @@ import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { merge } from 'rxjs/observable/merge';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
+import { map } from 'rxjs/operators/map';
+import { tap } from 'rxjs/operators/tap';
+import { delay } from 'rxjs/operators/delay';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
@@ -215,8 +214,10 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 		this._optionItems$ =
 			merge(of(this._optionsQL), this._optionsQL.changes)
-			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
-			.delay(0)
-			.do(o => this._options = o || []);
+			.pipe(
+				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
+				delay(0),
+				tap(o => this._options = o || [])
+			);
 	}
 }

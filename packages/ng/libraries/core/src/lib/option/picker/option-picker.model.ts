@@ -3,9 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { ILuOptionItem } from '../item/index';
 import { merge } from 'rxjs/observable/merge';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeMap';
+import { switchMap } from 'rxjs/operators/switchMap';
 import { ILuOptionOperator } from '../operator/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 
@@ -31,9 +29,9 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			.subscribe(o => this._applySelected())
 		);
 		// subscribe to any option.onSelect
-		const singleFlow$ = optionItems$.switchMap(
+		const singleFlow$ = optionItems$.pipe(switchMap(
 			items => merge(...items.map(i => i.onSelect))
-		);
+		));
 		this._subs.add(
 			singleFlow$
 			.subscribe((value: T) => this._updateValue(value))
