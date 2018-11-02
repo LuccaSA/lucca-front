@@ -28,15 +28,15 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "gulp-stylelint": "^3.9.0"
+    "gulp-stylelint": "^8.0.0"
   },
   "dependencies": {
-    "@lucca-front/icons": "^2.0.2"
+    "@lucca-front/icons": "2.0.2"
   }
 }
