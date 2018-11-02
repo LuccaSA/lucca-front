@@ -5,8 +5,7 @@
   "main": "src/main.scss",
   "scripts": {
     "build": "gulp build",
-    "start": "gulp start",
-    "prepublish": "npm run build"
+    "start": "gulp start"
   },
   "files": [
     "src",

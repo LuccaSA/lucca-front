@@ -8,7 +8,6 @@
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
   },
   "scripts": {
-    "publish": "npm run build",
     "build": "gulp build",
     "start": "gulp serve"
   },
