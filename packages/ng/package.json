@@ -26,7 +26,6 @@
     "test:sr": "ng test core --watch=false",
     "lint": "ng lint",
     "gulp": "gulp",
-    "prepublish": "npm run build",
     "generatedoc": "gulp generatedoc",
     "travis": "npm run build:aot",
     "posttravis": "npm run build:demo",
