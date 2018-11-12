@@ -55,6 +55,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
 	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
+	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
+	@Input() set operations(operations: number[]) { this._service.operations = operations; }
 
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {

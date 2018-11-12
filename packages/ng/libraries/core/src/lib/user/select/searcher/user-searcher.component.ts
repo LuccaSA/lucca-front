@@ -30,10 +30,8 @@ extends ALuApiOptionPagedSearcher<U, S> {
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	/**
-	 * a function to transform the item fetched from the api into the kind of item you want
-	 * if you wnat to cast dates into moments for example
-	 */
+	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
+	@Input() set operations(operations: number[]) { this._service.operations = operations; }
 	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
 
 	clueControl: FormControl;
