@@ -56,6 +56,9 @@ export interface ILuPopoverPanel {
 </ng-template>
  */
 export abstract class ALuPopoverPanel implements ILuPopoverPanel {
+	protected _isOpen: boolean;
+	get isOpen() { return this._isOpen; }
+
 	protected _position: LuPopoverPosition = 'below';
 	get position(): LuPopoverPosition { return this._position; }
 	set position(position: LuPopoverPosition) {
@@ -197,9 +200,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	}
 
 	onOpen() {
+		this._isOpen = true;
 		this._emitOpenEvent();
 	}
 	onClose() {
+		this._isOpen = false;
 		this._emitCloseEvent();
 	}
 	/**
