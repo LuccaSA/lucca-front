@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
 import { ALuOptionOperator } from '../../../option/index';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators/debounceTime';
@@ -26,6 +26,7 @@ import { ALuApiOptionPagedSearcher } from '../../../api/index';
 })
 export class LuUserPagedSearcherComponent<U extends IUser = IUser, S extends ALuUserPagedSearcherService<U> = ALuUserPagedSearcherService<U>>
 extends ALuApiOptionPagedSearcher<U, S> {
+	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
