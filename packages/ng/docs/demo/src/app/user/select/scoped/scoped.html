@@ -5,11 +5,11 @@
 	</p>
 	<div class="textfield">
 		<input [(ngModel)]="appInstanceId" class="textfield-input">
-		<label class="textfield-label">app id</label>
+		<label class="textfield-label">app instance id</label>
 	</div>
 	<div class="textfield">
 		<lu-select [(ngModel)]="operations" class="textfield-input" multiple>
-			<ng-container *luDisplayer="let values; multiple: true">{{values.length}} selected operations</ng-container>
+			<ng-container *luDisplayer="let values; multiple: true"><span class="label">{{values.length}}</span> operations selected</ng-container>
 			<lu-option-picker>
 				<lu-option *ngFor="let op of ops" [value]="op">{{op}}</lu-option>
 			</lu-option-picker>
