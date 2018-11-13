@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/icons",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A library of icons made by the team @Lucca",
   "main": "gulpfile.js",
   "repository": {
@@ -8,7 +8,6 @@
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
   },
   "scripts": {
-    "publish": "npm run build",
     "build": "gulp build",
     "start": "gulp serve"
   },
@@ -32,8 +31,8 @@
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
-  "dependencies": {
-    "browser-sync": "^2.23.6",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
     "gulp-clean": "^0.3.2",
     "gulp-rename": "^1.2.2",

@@ -4,7 +4,7 @@
 
 .home-header {
 	background: #FF6600;
-	background: linear-gradient(304deg, rgba(255,128,0,1) 39%, rgba(252,187,49,1) 100%);
+	background: linear-gradient(304deg, rgba(255, 128, 0, 1) 39%, rgba(252, 187, 49, 1) 100%);
 	padding: 6rem 0 8rem;
 	text-align: center;
 }
@@ -104,14 +104,13 @@
 	color: rgba(139, 137, 202, .66);
 }
 
-.demo-body{
+.demo-body {
 	background: white;
 	padding: 60px 0 100px 180px;
 }
 
-@media screen and (max-width: 992px){
-
-	.demo-body{
+@media screen and (max-width: 992px) {
+	.demo-body {
 		padding-left: 0;
 	}
 }
@@ -128,20 +127,19 @@
 	overflow: auto;
 }
 
-@media screen and (max-width: 992px){
-
-	.demo-nav{
+@media screen and (max-width: 992px) {
+	.demo-nav {
 		display: none;
 	}
 }
 
-.demo-nav ul{
+.demo-nav ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.demo-nav-link{
+.demo-nav-link {
 	color: grey;
 	display: block;
 	padding: .5rem .8rem;
@@ -149,7 +147,7 @@
 	font-size: .95rem;
 }
 
-.demo-nav-link-child{
+.demo-nav-link-child {
 	color: grey;
 	display: block;
 	padding: .2rem .8rem;
@@ -158,21 +156,21 @@
 	font-size: .8rem;
 }
 
-.demo-nav a:hover{
+.demo-nav a:hover {
 	text-decoration: underline;
 }
 
-.container.mod-demo{
+.container.mod-demo {
 	max-width: 850px;
 }
 
-@media screen and (max-width: 1200px){
-	.container.mod-demo{
+@media screen and (max-width: 1200px) {
+	.container.mod-demo {
 		max-width: 700px;
 	}
 }
 
-.demo-divider{
+.demo-divider {
 	color: #ccc;
 	display: table;
 	font-size: 1.3rem;
@@ -181,13 +179,12 @@
 	letter-spacing: 3px;
 	margin: 0;
 	padding: 50px 0;
-	text-align:center;
+	text-align: center;
 	text-transform: lowercase;
 	white-space: nowrap;
 }
 
-.demo-divider:before,
-.demo-divider:after{
+.demo-divider:before, .demo-divider:after {
 	content: "";
 	display: table-cell;
 	width: 50%;
@@ -196,23 +193,23 @@
 	top: 20px;
 }
 
-.demo-divider:before{
+.demo-divider:before {
 	border-right: 30px solid transparent;
 }
 
-.demo-divider:after{
+.demo-divider:after {
 	border-left: 30px solid transparent;
 }
 
-.demo-typo{
+.demo-typo {
 	max-width: 550px;
 }
 
-.demo-textColor span{
+.demo-textColor span {
 	padding: 0 .5rem;
 }
 
-.demo-grid{
+.demo-grid {
 	background: #eee;
 	border-radius: 3px;
 	min-height: 2.7rem;
@@ -226,12 +223,12 @@
 	margin-bottom: 2rem;
 }
 
-.demo-icon .lucca-icon{
+.demo-icon .lucca-icon {
 	font-size: 2rem;
 	display: block;
 }
 
-.demo-animation{
+.demo-animation {
 	overflow: hidden;
 	float: left;
 	width: 190px;
@@ -247,4 +244,17 @@
 	display: inline-block;
 	padding: .5rem 1rem;
 	border-radius: 3px;
+}
+
+.fake-banner {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 90;
+	height: 50px;
+	background: #fff;
+	font-size: 16px;
+	color: #666;
+	box-shadow: 1px 2px 3px -1px rgba(0, 0, 0, .2);
 }

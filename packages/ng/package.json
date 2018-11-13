@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng-internal",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "a library of usefull components for angular web app",
   "repository": {
     "type": "git",
@@ -26,7 +26,6 @@
     "test:sr": "ng test core --watch=false",
     "lint": "ng lint",
     "gulp": "gulp",
-    "prepublish": "npm run build",
     "generatedoc": "gulp generatedoc",
     "travis": "npm run build:aot",
     "posttravis": "npm run build:demo",
@@ -52,8 +51,8 @@
     "@angular/material": "^6.1.0",
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
-    "@lucca-front/icons": "^2.0.2",
-    "@lucca-front/scss": "^2.0.2",
+    "@lucca-front/icons": "^2.0.3",
+    "@lucca-front/scss": "^2.0.3",
     "@ngx-formly/core": "^4.0.0",
     "@ngx-translate/core": "^8.0.0",
     "core-js": "^2.4.1",
