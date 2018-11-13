@@ -27,7 +27,7 @@ import { DemoTooltipModule } from './tooltip/tooltip.module';
 	],
 	imports: [
 		CommonModule,
-		RouterModule.forRoot(appRoutes{
+		RouterModule.forRoot(appRoutes, {
 			useHash: true,
 		}),
 		BrowserModule,
