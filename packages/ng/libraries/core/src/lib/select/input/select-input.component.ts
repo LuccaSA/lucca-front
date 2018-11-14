@@ -9,7 +9,7 @@ import {
 	HostListener,
 	TemplateRef,
 	ViewChild,
-	AfterViewInit,
+	AfterContentInit,
 	ViewRef,
 	Renderer2,
 	Input,
@@ -46,7 +46,7 @@ import { ALuSelectInput } from './select-input.model';
 })
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
+implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
@@ -99,7 +99,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 	@ContentChild(ALuInputDisplayer) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this.displayer = displayer;
-		this.render();
 	}
 
 	@HostListener('click')
@@ -131,7 +130,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 	}
 
 
-	ngAfterViewInit() {
+	ngAfterContentInit() {
+		this._isContentInitialized = true;
 		this.render();
 		this.displayClearer();
 		this._picker.setValue(this.value);
