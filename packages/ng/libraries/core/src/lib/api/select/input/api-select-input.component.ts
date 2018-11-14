@@ -10,7 +10,7 @@ import {
 	Input,
 	Renderer2,
 	HostBinding,
-	AfterViewInit
+	AfterContentInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -39,7 +39,7 @@ import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../search
 })
 export class LuApiSelectInputComponent<T extends IApiItem = IApiItem, P extends ILuOptionPickerPanel<T> = ILuOptionPickerPanel<T>>
 extends ALuSelectInput<T, P>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
+implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
@@ -124,7 +124,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		$event.stopPropagation();
 		$event.preventDefault();
 	}
-	ngAfterViewInit() {
+	ngAfterContentInit() {
 		this.render();
 		this._picker.setValue(this.value);
 	}
