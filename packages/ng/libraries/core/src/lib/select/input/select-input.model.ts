@@ -27,7 +27,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		);
 	}
 	protected _placeholder: string;
-	protected _isContentInitilized = false;
+	protected _isContentInitialized = false;
 
 	get placeholder() { return this._placeholder; }
 	/**
@@ -126,7 +126,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this._displayContainer = vcr;
 	}
 	protected render() {
-		if (!this._displayer || !this._isContentInitilized) { return; }
+		if (!this._displayer || !this._isContentInitialized) { return; }
 		if (this.useMultipleViews()) {
 			this.renderMultipleViews();
 		} else {
