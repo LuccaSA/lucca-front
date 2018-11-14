@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "lerna": "^2.9.0",
+    "lerna": "^3.4.0",
     "surge": "^0.20.1",
     "cryptiles": "^4.1.2",
     "minimatch": "^3.0.2"
