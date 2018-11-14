@@ -124,6 +124,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 		$event.preventDefault();
 	}
 	ngAfterContentInit() {
+		this._isContentInitilized = true;
 		this.render();
 		this._picker.setValue(this.value);
 	}
