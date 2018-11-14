@@ -92,7 +92,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	}
 	@ViewChild(ALuInputDisplayer) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this.displayer = displayer;
-		this.render();
 	}
 	/**
 	 * bind to dom events

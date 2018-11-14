@@ -99,7 +99,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	}
 	@ContentChild(ALuInputDisplayer) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this.displayer = displayer;
-		this.render();
 	}
 
 	@HostListener('click')
