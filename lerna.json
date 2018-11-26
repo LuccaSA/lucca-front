@@ -1,16 +1,16 @@
 {
-  "lerna": "2.5.1",
+  "lerna": "3.4.3",
   "packages": [
     "packages/*",
     "packages/ng/dist"
   ],
   "npmClient": "npm",
-  "version": "2.0.3",
+  "version": "2.0.6",
   "command": {
     "publish": {
       "message": "publish %s",
       "forcePublish": "*",
-      "skipGit": true
+      "ignoreChanges": "packages/ng/dist/**"
     }
   }
 }
