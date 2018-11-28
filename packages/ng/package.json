@@ -71,6 +71,7 @@
     "@types/jasmine": "2.5.53",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.4.3",
+    "css-vars-ponyfill": "^1.15.1",
     "gulp": "^4.0.0",
     "gulp-clean": "^0.3.2",
     "jasmine-core": "~2.6.2",

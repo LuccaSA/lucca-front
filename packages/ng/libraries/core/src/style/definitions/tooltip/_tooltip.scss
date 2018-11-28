@@ -2,9 +2,13 @@
 @mixin tooltipStyle {
 	:host {
 		display: block;
+		background: _component("tooltip.background", true);
 		background: _component("tooltip.background");
+		border-radius: _theme("commons.border.radius", true);
 		border-radius: _theme("commons.border.radius");
+		color: _component("tooltip.color", true);
 		color: _component("tooltip.color");
+		padding: _component("tooltip.padding", true);
 		padding: _component("tooltip.padding");
 		position: relative;
 
@@ -16,6 +20,7 @@
 			height: 0;
 			border-left: 5px solid transparent;
 			border-right: 5px solid transparent;
+			border-top: 5px solid _component("tooltip.background", true);
 			border-top: 5px solid _component("tooltip.background");
 			bottom: -4px;
 			left: 50%;
