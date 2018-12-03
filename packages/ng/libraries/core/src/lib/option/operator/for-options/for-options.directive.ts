@@ -7,8 +7,7 @@ import {
 	ChangeDetectorRef,
 } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { Subscription, Observable } from 'rxjs';
 
 export class LuForOptionsContext<T> {
 	constructor(

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Inject, Optional, SkipSelf, Self } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { LuApiPagerService } from './api-pager.service';
 import { IApiItem } from '../../api.model';
 import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';

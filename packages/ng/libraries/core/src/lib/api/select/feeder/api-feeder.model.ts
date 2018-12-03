@@ -1,7 +1,7 @@
 import { ILuOptionOperator } from '../../../option/index';
 import { IApiItem, IApiCollectionResponse } from '../../api.model';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 export interface ILuApiOptionFeeder<T extends IApiItem = IApiItem> extends ILuOptionOperator<T> {}
@@ -43,6 +43,6 @@ export abstract class ALuApiFeederService<T extends IApiItem = IApiItem> impleme
 	}
 	protected _get(url): Observable<T[]> {
 		return this.http.get<IApiCollectionResponse<any>>(url)
-		.map(response => response.data.items.map(i => this._transformFn(i)));
+		.pipe(map(response => response.data.items.map(i => this._transformFn(i))));
 	}
 }

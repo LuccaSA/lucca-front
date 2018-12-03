@@ -18,12 +18,8 @@ import {
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
-import { merge } from 'rxjs/observable/merge';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
+import { merge, of } from 'rxjs';
+import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
@@ -237,10 +233,12 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 		this._isOptionItemsInitialized = true;
 
-		this._optionItems$ =
-			merge(of(this._optionsQL), this._optionsQL.changes)
-			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
-			.delay(0)
-			.do(o => this._options = o || []);
+		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
+			.pipe(
+				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
+				delay(0),
+			);
+		items$.subscribe(o => this._options = o || []);
+		this._optionItems$ = items$;
 	}
 }

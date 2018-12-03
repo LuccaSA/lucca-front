@@ -1,11 +1,10 @@
 import { TemplateRef, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {
 	throwLuPopoverInvalidPosition,
 	throwLuPopoverInvalidAlignement,
 } from '../popover.errors';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { Subscription } from 'rxjs/Subscription';
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';

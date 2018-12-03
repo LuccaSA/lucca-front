@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export interface ILuOptionOperator<T = any> {
 	inOptions$?: Observable<T[]>;

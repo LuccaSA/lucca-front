@@ -1,8 +1,8 @@
 import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ISuggestion } from '../../../api/index';
 import { IUser } from '../../user.model';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export abstract class ALuUserPagedSearcherService<U extends IUser = IUser>
 extends ALuApiPagedSearcherService<U>
@@ -31,7 +31,8 @@ implements ILuApiPagedSearcherService<U> {
 		}
 	}
 	protected _get(url) {
-		return (<any>super._get(url) as Observable<ISuggestion<U>[]>).map(suggestions => suggestions.map(s => s.item));
+		return (<any>super._get(url) as Observable<ISuggestion<U>[]>)
+		.pipe(map(suggestions => suggestions.map(s => s.item)));
 	}
 	protected _clueFilter(clue) {
 		const urlSafeClue = clue.split(' ').map(c => encodeURIComponent(c)).join(',');
