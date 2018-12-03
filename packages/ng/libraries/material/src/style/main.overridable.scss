@@ -5,5 +5,5 @@
 
 // CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
 @include angular-material-typography(
-	mat-typography-config($font-family: _theme('commons.font.family'))
+	mat-typography-config($font-family: _theme('commons.font.family', true))
 );

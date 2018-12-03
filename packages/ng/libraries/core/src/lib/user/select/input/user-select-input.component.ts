@@ -11,7 +11,7 @@ import {
 	Input,
 	Renderer2,
 	HostBinding,
-	AfterViewInit
+	AfterContentInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -44,7 +44,7 @@ import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../sear
 })
 export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
 extends ALuSelectInput<U, P>
-implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
+implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
@@ -92,10 +92,10 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	@ViewChild(ALuPickerPanel) set _vcPicker(picker: P) {
 		this._picker = picker;
 	}
-	@ViewChild(ALuClearer) set _contentChildClearer(clearer: ILuClearer) {
+	@ViewChild(ALuClearer) set _vcClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
 	}
-	@ViewChild(ALuInputDisplayer) set _ccDisplayer(displayer: ILuInputDisplayer<U>) {
+	@ViewChild(ALuInputDisplayer) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
 		this.displayer = displayer;
 		this.render();
 	}
@@ -130,7 +130,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 		$event.preventDefault();
 	}
 
-	ngAfterViewInit() {
+	ngAfterContentInit() {
+		this._isContentInitialized = true;
 		this.render();
 		this._picker.setValue(this.value);
 	}
