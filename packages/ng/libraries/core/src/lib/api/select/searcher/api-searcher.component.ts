@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
 import { ALuOptionOperator } from '../../../option/index';
 import { ALuApiOptionSearcher, ALuApiSearcherService, ALuApiOptionPagedSearcher, ALuApiPagedSearcherService } from './api-searcher.model';
 import { IApiItem } from '../../api.model';
@@ -25,6 +25,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class LuApiSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiSearcherService<T> = ALuApiSearcherService<T>>
 extends ALuApiOptionSearcher<T, S> {
+	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
 	@Input() set api(api: string) {
 		this._service.api = api;
@@ -77,6 +78,7 @@ extends ALuApiOptionSearcher<T, S> {
 })
 export class LuApiPagedSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiPagedSearcherService<T> = ALuApiPagedSearcherService<T>>
 extends ALuApiOptionPagedSearcher<T, S> {
+	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }

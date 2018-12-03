@@ -1,0 +1,30 @@
+<section class="contentSection">
+	<h3>user paged searcher with application scope</h3>
+	<p>
+		If you precise inputs <code>appInstanceId</code> and <code>operations</code>, it automatically calls the api <code>/scopedSearch</code> so the results are only the users having one of the specified operations for the specified app instance
+	</p>
+	<div class="textfield">
+		<input [(ngModel)]="appInstanceId" class="textfield-input">
+		<label class="textfield-label">app instance id</label>
+	</div>
+	<div class="textfield">
+		<lu-select [(ngModel)]="operations" class="textfield-input" multiple>
+			<ng-container *luDisplayer="let values; multiple: true"><span class="label">{{values.length}}</span> operations selected</ng-container>
+			<lu-option-picker>
+				<lu-option *ngFor="let op of ops" [value]="op">{{op}}</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">operations</label>
+	</div>
+	<div class="textfield">
+		<lu-select [(ngModel)]="user" class="textfield-input">
+			<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
+			<lu-option-picker>
+				<lu-user-paged-searcher [appInstanceId]="appInstanceId" [operations]="operations"></lu-user-paged-searcher>
+				<lu-option *luForOptions="let option" [value]="option">{{option | luUserDisplay: 'lf'}}</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">user</label>
+	</div>
+	<code class="code mod-block">{{ user | json }}</code>
+</section>

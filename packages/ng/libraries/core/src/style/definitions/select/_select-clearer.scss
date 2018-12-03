@@ -8,13 +8,16 @@
 	}
 
 	.actionIcon {
+		color: _color("primary", "color", true);
 		color: _color("primary");
 		height: 1rem;
 		padding: 0;
 		width: 1rem;
 
 		&:hover {
+			background: _color("primary", "see-through", true);
 			background: _color("primary", "see-through");
+			color: _color("primary", "dark", true);
 			color: _color("primary", "dark");
 		}
 	}
@@ -27,6 +30,7 @@
 	// Material
 	:host-context(.textfield.mod-material) {
 		.actionIcon {
+			color: _color("text.light", "color", true);
 			color: _color("text.light");
 		}
 	}
@@ -34,6 +38,7 @@
 	// Framed
 	:host-context(.textfield.mod-framed) {
 		.actionIcon {
+			color: _color("text.light", "color", true);
 			color: _color("text.light");
 		}
 	}

@@ -88,13 +88,13 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			if (!o.onOpen) { return; }
 			o.onOpen();
 		});
-		this._emitOpenEvent();
+		super.onOpen();
 	}
 	onClose() {
 		this.__operators.forEach(o => {
 			if (!o.onClose) { return; }
 			o.onClose();
 		});
-		this._emitCloseEvent();
+		super.onClose();
 	}
 }
