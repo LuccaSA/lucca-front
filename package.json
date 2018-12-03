@@ -20,8 +20,7 @@
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "precleaninstall": "lerna clean --yes",
-    "cleaninstall": "npm ci",
+    "clean": "lerna clean --yes",
     "lerna": "lerna",
     "travis": "lerna run travis --scope=@lucca-front/ng-internal",
     "format": "npm run format-ng && npm run format-scss && npm run format-icons",
