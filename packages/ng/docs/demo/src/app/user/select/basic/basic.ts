@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
 	selector: 'demo-basic-user-select',
@@ -6,10 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [],
 })
-export class BasicComponent implements OnInit {
+export class BasicComponent {
 	user = { firstName: 'John', lastName: 'Doe' };
 	users = [];
-	constructor() {}
-
-	ngOnInit() {}
 }
