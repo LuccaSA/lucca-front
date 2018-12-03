@@ -1,7 +1,3 @@
-export interface ICoerce<T> {
-	clue: string;
-	item: T | null;
-}
 export interface ISuggestion<T> {
 	relevance: any;
 	item: T;
