@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
@@ -19,6 +19,7 @@ import { FormControl } from '@angular/forms';
 	],
 })
 export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T> {
+	@HostBinding('class.position-fixed') fixed = true;
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
 	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
