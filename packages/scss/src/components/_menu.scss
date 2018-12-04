@@ -1,5 +1,6 @@
 .menu {
 	align-items: center;
+	background: _component("menu.background");
 	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 	line-height: 1;
