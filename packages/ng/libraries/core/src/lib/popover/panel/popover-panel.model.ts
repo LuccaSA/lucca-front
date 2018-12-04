@@ -1,11 +1,10 @@
 import { TemplateRef, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {
 	throwLuPopoverInvalidPosition,
 	throwLuPopoverInvalidAlignement,
 } from '../popover.errors';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { Subscription } from 'rxjs/Subscription';
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
@@ -56,6 +55,9 @@ export interface ILuPopoverPanel {
 </ng-template>
  */
 export abstract class ALuPopoverPanel implements ILuPopoverPanel {
+	protected _isOpen: boolean;
+	get isOpen() { return this._isOpen; }
+
 	protected _position: LuPopoverPosition = 'below';
 	get position(): LuPopoverPosition { return this._position; }
 	set position(position: LuPopoverPosition) {
@@ -197,9 +199,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	}
 
 	onOpen() {
+		this._isOpen = true;
 		this._emitOpenEvent();
 	}
 	onClose() {
+		this._isOpen = false;
 		this._emitCloseEvent();
 	}
 	/**

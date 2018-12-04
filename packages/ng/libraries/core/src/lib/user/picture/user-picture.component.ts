@@ -42,7 +42,7 @@ export class LuUserPictureComponent {
 	set user(user: IUser) {
 		this._user = user;
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
-		this.hasPicture = !!user.picture && !!user.picture.href;
+		this.hasPicture = !!user && !!user.picture && !!user.picture.href;
 		if (this.hasPicture) {
 			this.style = { 'background-image': `url('${this._user.picture.href}')` };
 		} else {

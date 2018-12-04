@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 const MAGIC_STEP = 10;
 @Component({
 	selector: 'lu-option-pager',

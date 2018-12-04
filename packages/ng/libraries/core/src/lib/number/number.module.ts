@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { LuNumberPipe } from './number.pipe';
 import { CommonModule } from '@angular/common';
+import { LuNumberPipe } from './number.pipe';
 
 @NgModule({
 	imports: [CommonModule],

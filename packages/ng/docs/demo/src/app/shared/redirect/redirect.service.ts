@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { map, catchError } from 'rxjs/operators';
 
 export enum RedirectStatus {
 	disconnected,
 	connecting,
 	connected,
+	error,
 }
 
 @Injectable()
@@ -41,7 +39,7 @@ export class RedirectEnvironment {
 		this._url$.next(baseUrl);
 	}
 	loginError() {
-		this._status$.next(RedirectStatus.disconnected);
+		this._status$.next(RedirectStatus.error);
 	}
 }
 
@@ -63,14 +61,16 @@ export class RedirectService {
 
 		return this.http
 			.post(loginUrl, {}, options)
-			.map(r => {
-				const token = (<any>r).substring(1, (<any>r).length - 1);
-				this.env.loginSuccess(url, token, login);
-				return RedirectStatus.connected;
-			})
-			.catch(r => {
-				this.env.loginError();
-				return Observable.throw(RedirectStatus.disconnected);
-			});
+			.pipe(
+				map(r => {
+					const token = (<any>r).substring(1, (<any>r).length - 1);
+					this.env.loginSuccess(url, token, login);
+					return RedirectStatus.connected;
+				}),
+				catchError(r => {
+					this.env.loginError();
+					return throwError(r);
+				})
+			);
 	}
 }

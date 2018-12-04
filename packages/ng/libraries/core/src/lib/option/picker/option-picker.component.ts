@@ -18,12 +18,8 @@ import {
 import { luTransformPopover } from '../../popover/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
-import { merge } from 'rxjs/observable/merge';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
+import { merge, of } from 'rxjs';
+import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
@@ -56,7 +52,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
 
-	protected _isOptionItemsInited: boolean;
+	protected _isOptionItemsInitialized: boolean;
 
 	constructor(
 		protected _vcr: ViewContainerRef,
@@ -64,7 +60,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		protected _renderer: Renderer2) {
 		super();
 		this.triggerEvent = 'click';
-		this._isOptionItemsInited = false;
+		this._isOptionItemsInitialized = false;
 	}
 	protected _options: ILuOptionItem<T>[] = [];
 	protected _optionsQL: QueryList<ILuOptionItem<T>>;
@@ -100,6 +96,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	onOpen() {
 		super.onOpen();
 		this.highlightIndex = -1;
+		// this._initObserver();
 		this._applySelected();
 	}
 	@ViewChild(TemplateRef)
@@ -128,6 +125,10 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 				break;
 		}
 	}
+	// protected _highlightObserver: IntersectionObserver;
+	// protected _initObserver() {
+
+	// }
 	protected _highlightIndex = -1;
 	get highlightIndex() { return this._highlightIndex; }
 	set highlightIndex(i: number) {
@@ -151,6 +152,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
 	}
 	protected _applyHighlight() {
+		if (!this.isOpen) { return; }
 		const highlightClass = 'is-highlighted';
 		const options = this.optionsQLVR.toArray();
 		// remove `is-highlighted` class from all other options
@@ -160,9 +162,27 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		if (!!highlightedOption) {
 			this._renderer.addClass(highlightedOption.element.nativeElement, highlightClass);
 			// scroll to let the highlighted option visible
-			// TODO
+			setTimeout(() => {
+				this._scrollToHighlight(highlightedOption.element.nativeElement);
+			}, 1);
 		}
 		this._changeDetectorRef.markForCheck();
+	}
+	protected _scrollToHighlight(targetElt: HTMLElement) {
+		const contentElt = document.querySelector('.lu-popover-content') as HTMLElement;
+		const contentFixedElt = document.querySelector('.lu-popover-content .position-fixed') as HTMLElement;
+		const offsetTop = contentFixedElt ? contentFixedElt.offsetHeight : 0;
+		// highlighted option is too high
+		if (contentElt.scrollTop + offsetTop > targetElt.offsetTop) {
+			contentElt.scrollTop = targetElt.offsetTop - offsetTop;
+			return;
+		}
+		// highlight option is too low
+		const offsetHeight = contentElt.offsetHeight;
+		if (contentElt.scrollTop + offsetHeight < targetElt.offsetTop + targetElt.offsetHeight) {
+			contentElt.scrollTop = targetElt.offsetTop + targetElt.offsetHeight - offsetHeight;
+			return;
+		}
 	}
 	protected _selectHighlighted() {
 		const options = this._optionsQL ? this._optionsQL.toArray() : [];
@@ -207,16 +227,18 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 
 	protected initOptionItemsObservable() {
-		if (this._isOptionItemsInited) {
+		if (this._isOptionItemsInitialized) {
 			return;
 		}
 
-		this._isOptionItemsInited = true;
+		this._isOptionItemsInitialized = true;
 
-		this._optionItems$ =
-			merge(of(this._optionsQL), this._optionsQL.changes)
-			.map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray())
-			.delay(0)
-			.do(o => this._options = o || []);
+		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
+			.pipe(
+				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
+				delay(0),
+			);
+		items$.subscribe(o => this._options = o || []);
+		this._optionItems$ = items$;
 	}
 }

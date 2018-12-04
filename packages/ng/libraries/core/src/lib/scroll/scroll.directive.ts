@@ -1,7 +1,7 @@
 import { Directive, Output, HostListener, EventEmitter, ElementRef, OnInit, Input } from '@angular/core';
 import { ILuScrollable } from './scroll.model';
-import { Subject } from 'rxjs/Subject';
-import { throttleTime, debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 /**
  * emits on scroll events

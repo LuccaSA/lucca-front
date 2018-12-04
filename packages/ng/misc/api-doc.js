@@ -13,21 +13,20 @@ const ANGULAR_LIFECYCLE_METHODS = [
   'ngAfterViewInit', 'ngAfterViewChecked', 'writeValue', 'registerOnChange', 'registerOnTouched', 'setDisabledState'
 ];
 
-function hasNoJSDoc(member) {
+function hasNoJSDoc(member, checker) {
   if (!member.symbol) {
     return true;
   }
 
-  const jsDoc = ts.displayPartsToString(member.symbol.getDocumentationComment());
+  const jsDoc = ts.displayPartsToString(member.symbol.getDocumentationComment(checker));
   return jsDoc.trim().length === 0;
 }
 
-function isInternalMember(member) {
+function isInternalMember(member, checker) {
   if (!member.symbol) {
     return true;
   }
-
-  const jsDoc = ts.displayPartsToString(member.symbol.getDocumentationComment());
+  const jsDoc = ts.displayPartsToString(member.symbol.getDocumentationComment(checker));
   return jsDoc.indexOf('@internal') > -1;
 }
 
@@ -35,13 +34,13 @@ function isAngularLifecycleHook(methodName) {
   return ANGULAR_LIFECYCLE_METHODS.indexOf(methodName) >= 0;
 }
 
-function isPrivate(member) {
+function isPrivate(member, checker) {
   return (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Private) !== 0
   || (ts.getCombinedModifierFlags(member) & ts.ModifierFlags.Protected) !== 0;
 }
 
-function isPrivateOrInternal(member) {
-  return isPrivate(member) || hasNoJSDoc(member) || isInternalMember(member);
+function isPrivateOrInternal(member, checker) {
+  return isPrivate(member, checker) || hasNoJSDoc(member, checker) || isInternalMember(member, checker);
 }
 
 class APIDocVisitor {
@@ -70,7 +69,7 @@ class APIDocVisitor {
 
   visitInterfaceDeclaration(fileName, interfaceDeclaration) {
     var symbol = this.program.getTypeChecker().getSymbolAtLocation(interfaceDeclaration.name);
-    var description = ts.displayPartsToString(symbol.getDocumentationComment());
+    var description = ts.displayPartsToString(symbol.getDocumentationComment(this.program.getTypeChecker()));
     var className = interfaceDeclaration.name.text;
     var members = this.visitMembers(interfaceDeclaration.members);
 
@@ -79,7 +78,7 @@ class APIDocVisitor {
 
   visitClassDeclaration(fileName, classDeclaration) {
     var symbol = this.program.getTypeChecker().getSymbolAtLocation(classDeclaration.name);
-    var description = ts.displayPartsToString(symbol.getDocumentationComment());
+    var description = ts.displayPartsToString(symbol.getDocumentationComment(this.program.getTypeChecker()));
     var className = classDeclaration.name.text;
     var directiveInfo;
     var pipeInfo;
@@ -127,7 +126,7 @@ class APIDocVisitor {
           const symbolDecorator = this.program.getTypeChecker().getSymbolAtLocation(decorator.expression.getFirstToken());
           const decoratorName = symbolDecorator.getName();
           if (decoratorName === "NgModule") {
-            const details = ts.displayPartsToString(symbolDecorator.getDocumentationComment());
+            const details = ts.displayPartsToString(symbolDecorator.getDocumentationComment(this.program.getTypeChecker()));
             const detailsToken = ts.displayPartsToString(symbolDecorator.getDeclarations());
             const declarationsElements = [];
             const exportsElements = [];
@@ -224,12 +223,12 @@ class APIDocVisitor {
 
       } else if (
           (members[i].kind === ts.SyntaxKind.MethodDeclaration || members[i].kind === ts.SyntaxKind.MethodSignature) &&
-          !isAngularLifecycleHook(members[i].name.text) && !isPrivateOrInternal(members[i])) {
+          !isAngularLifecycleHook(members[i].name.text) && !isPrivateOrInternal(members[i], this.program.getTypeChecker())) {
         methods.push(this.visitMethodDeclaration(members[i]));
       } else if (
           (members[i].kind === ts.SyntaxKind.PropertyDeclaration ||
            members[i].kind === ts.SyntaxKind.PropertySignature || members[i].kind === ts.SyntaxKind.GetAccessor) &&
-          !isPrivate(members[i]) && !isInternalMember(members[i])) {
+          !isPrivate(members[i], this.program.getTypeChecker()) && !isInternalMember(members[i], this.program.getTypeChecker())) {
         properties.push(this.visitProperty(members[i]));
       }
     }
@@ -243,7 +242,7 @@ class APIDocVisitor {
 
   visitMethodDeclaration(method) {
     return {
-      name: method.name.text, description: ts.displayPartsToString(method.symbol.getDocumentationComment()),
+      name: method.name.text, description: ts.displayPartsToString(method.symbol.getDocumentationComment(this.program.getTypeChecker())),
           args: method.parameters ? method.parameters.map((prop) => this.visitArgument(prop)) : [],
           returnType: this.visitType(method.type)
     }
@@ -259,7 +258,7 @@ class APIDocVisitor {
       name: inArgs.length ? inArgs[0].text : property.name.text,
       defaultValue: property.initializer ? this.stringifyDefaultValue(property.initializer) : undefined,
       type: this.visitType(property),
-      description: ts.displayPartsToString(property.symbol.getDocumentationComment())
+      description: ts.displayPartsToString(property.symbol.getDocumentationComment(this.program.getTypeChecker()))
     };
   }
 
@@ -277,7 +276,7 @@ class APIDocVisitor {
     var outArgs = outDecorator.expression.arguments;
     return {
       name: outArgs.length ? outArgs[0].text : property.name.text,
-      description: ts.displayPartsToString(property.symbol.getDocumentationComment())
+      description: ts.displayPartsToString(property.symbol.getDocumentationComment(this.program.getTypeChecker()))
     };
   }
 
@@ -286,7 +285,7 @@ class APIDocVisitor {
       name: property.name.text,
       defaultValue: property.initializer ? this.stringifyDefaultValue(property.initializer) : undefined,
       type: this.visitType(property),
-      description: ts.displayPartsToString(property.symbol.getDocumentationComment())
+      description: ts.displayPartsToString(property.symbol.getDocumentationComment(this.program.getTypeChecker()))
     };
   }
 

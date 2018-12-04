@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/withLatestFrom';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { merge } from 'rxjs/observable/merge';
-import { of } from 'rxjs/observable/of';
-import { share, switchMap, tap, distinctUntilChanged } from 'rxjs/operators';
+
+import { Observable, BehaviorSubject, combineLatest, merge, of } from 'rxjs';
+
+import {
+	mapTo,
+	tap,
+	withLatestFrom,
+	share,
+	switchMap,
+	distinctUntilChanged,
+	catchError,
+} from 'rxjs/operators';
+
 import { IApiItem } from '../../api.model';
 import { ALuApiFeederService, ILuApiFeederService, ILuApiOptionFeeder } from '../feeder/index';
-import { ILuApiPagerService } from '../pager';
+import { ILuApiPagerService } from '../pager/index';
 
 export interface ILuApiOptionSearcher<T extends IApiItem = IApiItem> extends ILuApiOptionFeeder<T> {}
 export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends ILuApiFeederService<T> {
@@ -35,15 +38,17 @@ implements ILuApiOptionFeeder<T> {
 	}
 	protected initObservables(clue$) {
 		this._clue$ = clue$.pipe(share());
-		this._results$ = this._clue$.pipe(
-			switchMap(clue => this._service.searchAll(clue).catch(err => of([]))),
+		this._results$ = this._clue$
+		.pipe(
+			switchMap(clue => this._service.searchAll(clue)),
+			catchError(err => of([])),
 			share(),
 		);
 
 		this._results$.subscribe(items => this.outOptions$.next(items));
 		this.loading$ = merge(
-			this._clue$.mapTo(true),
-			this._results$.mapTo(false),
+			this._clue$.pipe(mapTo(true)),
+			this._results$.pipe(mapTo(false)),
 		);
 	}
 	abstract resetClue();
@@ -124,12 +129,13 @@ implements ILuApiOptionPagedSearcher<T> {
 			distinctPage$,
 			this._clue$,
 		).pipe(
-			switchMap(([page, clue]) => this._service.searchPaged(clue, page).catch(err => of([]))),
+			switchMap(([page, clue]) => this._service.searchPaged(clue, page)),
+			catchError(err => of([])),
 			share(),
 		);
 
 		this._results$
-		.withLatestFrom(distinctPage$)
+		.pipe(withLatestFrom(distinctPage$))
 		.subscribe(([items, page]) => {
 			if (page === 0) {
 				this.outOptions$.next([...items]);
@@ -138,9 +144,10 @@ implements ILuApiOptionPagedSearcher<T> {
 			}
 		});
 		this.loading$ = merge(
-			this._clue$.mapTo(true),
-			this._results$.mapTo(false),
-		).do(l => this._loading = l);
+			this._clue$.pipe(mapTo(true)),
+			this._results$.pipe(mapTo(false)),
+		);
+		this.loading$.subscribe(l => this._loading = l);
 	}
 	abstract resetClue();
 	resetPage() {

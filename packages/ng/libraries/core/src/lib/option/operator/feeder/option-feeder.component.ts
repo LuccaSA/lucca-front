@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
-import { ILuOptionItem } from '../../item/index';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'lu-option-feeder',

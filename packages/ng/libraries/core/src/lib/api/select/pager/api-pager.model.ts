@@ -1,14 +1,8 @@
 import { ILuOptionOperator } from '../../../option/index';
 import { IApiItem } from '../../api.model';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/catch';
-import { merge } from 'rxjs/observable/merge';
+import { Observable, BehaviorSubject, of, merge } from 'rxjs';
+import { switchMap, catchError, mapTo } from 'rxjs/operators';
 import { ALuApiFeederService } from '../feeder/index';
 
 const MAGIC_PAGE_SIZE = 20;
@@ -37,7 +31,11 @@ implements ILuApiOptionPager<T> {
 		}
 	}
 	protected initObservables() {
-		this._results$ = this._page$.switchMap(page => this._service.getPaged(page).catch(err => of([])));
+		this._results$ = this._page$
+		.pipe(
+			switchMap(page => this._service.getPaged(page))),
+			catchError(err => of([])
+		);
 
 		this._results$.subscribe(items => {
 			if (this._page$.value === 0) {
@@ -47,9 +45,10 @@ implements ILuApiOptionPager<T> {
 			}
 		});
 		this.loading$ = merge(
-			this._page$.mapTo(true),
-			this._results$.mapTo(false),
-		).do(l => this._loading = l);
+			this._page$.pipe(mapTo(true)),
+			this._results$.pipe(mapTo(false)),
+		);
+		this.loading$.subscribe(l => this._loading = l);
 	}
 }
 
