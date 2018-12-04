@@ -6,6 +6,8 @@
     "@angular/core": "^7.0.0",
     "@angular/forms": "^7.0.0",
     "@angular/cdk": "^7.0.0",
+    "@lucca-front/icons": "^2.1.0",
+    "@lucca-front/scss": "^2.1.0",
     "rxjs": "^6.3.0"
   },
   "script": {}
