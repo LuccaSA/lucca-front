@@ -144,10 +144,7 @@
 
 .table-body-row-cell, .table-head-row-cell {
 	&.mod-actions {
-		padding: {
-			bottom: .3rem;
-			top: .3rem;
-		}
+		padding: .3rem _theme("spacings.smaller") .3rem 0;
 		text-align: right;
 		transition: opacity _theme("commons.animations.durations.fast") ease;
 		white-space: nowrap;
