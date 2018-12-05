@@ -3,6 +3,7 @@
 	align-items: flex-end;
 	background: _component("header.background");
 	display: flex;
+	min-height: 4rem;
 	padding: _component("header.padding");
 	position: relative;
 	z-index: 1;
