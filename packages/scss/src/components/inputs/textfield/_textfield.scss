@@ -148,6 +148,27 @@
 		}
 	}
 
+  &.mod-invert {
+    .textfield-input {
+      background: white;
+
+      &::placeholder {
+        color: _component("textfield.focus.placeholder");
+      }
+
+      &:focus {
+        &::placeholder {
+          color: _component("textfield.focus.placeholder");
+        }
+      }
+    }
+
+		.textfield-label {
+			color: white;
+		}
+  }
+
+
 	/* Search */
 
 	&.mod-search, &.mod-autocomplete {
