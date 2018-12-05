@@ -19,7 +19,7 @@
 	&::before {
 		@include makeIcon("tick");
 		border-radius: _component("checkbox.input.border-radius");
-		box-shadow: inset 0 0 0 2px #999999;
+		box-shadow: inset 0 0 0 2px _component("checkbox.input.border.color");
 		color: transparent;
 		display: block;
 		flex: 0 0 auto;
@@ -80,7 +80,7 @@
 
 	&.mod-big {
 		margin-bottom: .2rem;
-		
+
 		.checkbox-label {
 			&::before {
 				font-size: 1.1rem;
