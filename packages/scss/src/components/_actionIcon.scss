@@ -35,4 +35,12 @@
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 	}
+
+	&.is-loading {
+	  @include loading(1rem);
+	  color: transparent;
+	  opacity: _theme("commons.disabled.opacity");
+	  pointer-events: none;
+	  position: relative;
+	}
 }
