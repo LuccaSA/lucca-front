@@ -34,6 +34,22 @@
 			background: rgba(255, 255, 255, .15);
 		}
 	}
+
+	@mixin buttonColoring($palette) {
+		color: _color($palette, "light");
+
+		&:hover {
+			background: _color($palette, "see-through");
+			color: _color($palette);
+		}
+	}
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			@include buttonColoring($name);
+		}
+	}
 }
 
 
