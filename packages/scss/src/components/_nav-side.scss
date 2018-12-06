@@ -60,11 +60,6 @@
 	&:hover {
 		background-color: _component("navSide.fullwidth-palette.selected-bg");
 		color: _component("navSide.fullwidth-palette.selected-text");
-
-		.navSide-item-alert {
-			background: _component("navSide.fullwidth-palette.alert-color");
-			color: _component("navSide.fullwidth-palette.alert-text");
-		}
 	}
 }
 
@@ -143,6 +138,7 @@
 			color: _component("navSide.bottom-section-palette.selected-text");
 		}
 	}
+
 	.navSide-item-alert {
 		background: _component("navSide.bottom-section-palette.alert-color");
 		color: _component("navSide.bottom-section-palette.alert-text");
@@ -161,6 +157,7 @@
 		opacity: 1;
 	}
 }
+
 .navSide-item.is-open {
 	.navSide-item-arrow {
 		transform: rotate(90deg);
@@ -187,13 +184,6 @@
 			color: _component("navSide.fullwidth-palette.selected-text");
 			opacity: 1;
 		}
-
-		&:hover, &.is-active {
-			.navSide-item-alert {
-				background: _component("navSide.fullwidth-palette.alert-color");
-				color: _component("navSide.fullwidth-palette.alert-text");
-			}
-		}
 	}
 }
 
@@ -203,8 +193,8 @@
 	opacity: 1;
 
 	.navSide-item-alert {
-		background: _component("navSide.fullwidth-palette.alert-color");
-		color: _component("navSide.fullwidth-palette.alert-text");
+		background: _component("navSide.fullwidth-palette.selected-alert-color");
+		color: _component("navSide.fullwidth-palette.selected-alert-text");
 	}
 }
 
@@ -291,6 +281,8 @@
 		}
 
 		.navSide-item-alert {
+			background: _component("navSide.compact-palette.alert-color");
+			color: _component("navSide.compact-palette.alert-text");
 			padding: 0 .4em;
 			position: absolute;
 			right: 10px;
@@ -325,6 +317,11 @@
 				background-color: _component("navSide.compact-palette.selected-bg");
 				color: _component("navSide.compact-palette.selected-text");
 				opacity: 1;
+
+				.navSide-item-alert {
+					background: _component("navSide.compact-palette.selected-alert-color");
+					color: _component("navSide.compact-palette.selected-alert-text");
+				}
 			}
 		}
 
@@ -388,11 +385,6 @@
 		position: relative;
 		width: auto;
 		height: auto;
-
-		.navSide-item-link {
-			color: _component("navSide.bottom-section-palette.text");
-			background: _component("navSide.bottom-section-palette.bg-color");
-		}
 	}
 
 	.navSide.mod-withBottomSection {

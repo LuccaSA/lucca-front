@@ -6,7 +6,9 @@ $navSide: (
 		selected-bg: _color("primary"),
 		selected-text: _color("primary", "text"),
 		alert-color: _color("secondary"),
-		alert-text: _color("secondary", "text")
+		alert-text: _color("secondary", "text"),
+		selected-alert-color: _color("secondary"),
+		selected-alert-text: _color("secondary", "text")
 	),
 
 	compact-palette: (
@@ -15,7 +17,9 @@ $navSide: (
 		selected-bg: _color("primary"),
 		selected-text: _color("primary", "text"),
 		alert-color: _color("secondary"),
-		alert-text: _color("secondary", "text")
+		alert-text: _color("secondary", "text"),
+		selected-alert-color: _color("secondary"),
+		selected-alert-text: _color("secondary", "text")
 	),
 
 	bottom-section-palette: (
@@ -24,7 +28,9 @@ $navSide: (
 		selected-bg: _color("primary"),
 		selected-text: _color("primary", "text"),
 		alert-color: _color("secondary"),
-		alert-text: _color("secondary", "text")
+		alert-text: _color("secondary", "text"),
+		selected-alert-color: _color("secondary"),
+		selected-alert-text: _color("secondary", "text")
 	),
 
 	bottom-section-height: 3.1rem,
