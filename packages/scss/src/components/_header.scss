@@ -70,7 +70,7 @@
 .header {
 	&.mod-sticky {
 		position: sticky;
-		top: 0;
+		top: _theme("commons.banner-height");
 	}
 
 	&.mod-nav {
