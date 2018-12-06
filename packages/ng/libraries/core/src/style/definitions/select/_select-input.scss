@@ -222,4 +222,16 @@
 		}
 	}
 
+	// Error
+	:host-context(.textfield-input.is-error) {
+		&::after {
+			color: _color("error", "color", true);
+			color: _color("error");
+		}
+
+		.lu-select-placeholder {
+			color: _color("error", "lighter", true);
+			color: _color("error", "lighter");
+		}
+	}
 }
