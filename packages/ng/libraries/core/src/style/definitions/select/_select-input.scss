@@ -234,4 +234,17 @@
 			color: _color("error", "lighter");
 		}
 	}
+
+	// Disabled
+	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+		&::after {
+			color: _theme("commons.disabled.color", "true");
+			color: _theme("commons.disabled.color");
+		}
+
+		.lu-select-placeholder {
+			color: _theme("commons.disabled.placeholder", "true");
+			color: _theme("commons.disabled.placeholder");
+		}
+	}
 }
