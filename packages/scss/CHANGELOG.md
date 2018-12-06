@@ -1,8 +1,48 @@
 # Changelog
 
-## 2.0 - in dev
+## in dev
+### New features
+- `utilities` vertical align
+- `utilities` units format
+
+### Fixes
+- `menu` set white background
+- `table` fix headers horizontal alignment for IE
+- `textfield` fix click on search icon & suffix
+- `radio & checkbox` set white background color
+- `grid` supports inside absolute positioning
+- `link` font family for buttons
+- `animations` remove fill mode which created z positioning issues
+- `menu` set a min height for loading issues
+- `container` avoid top margin collapsing
+- `button` fix mod-white hovering
+- `dialog` set white background color
+- `select` is-disabled & is-error carets & delete colors
+
+### Enhancements
+- `menu` replace text opacity by text colors
+- `loading` add mod-big & reduce animation speed
+- `table` reduce action's cell padding
+- `table` add mod-draggable for rows
+- `textfield` add mod-inverted
+- `checkbox` add mod-big
+- `checkbox & radio` theming for border color
+- `grid` supports inside absolute positioning
+- `animations` improve default animation
+- `menu` supports back navigation
+- `menu` improve padding & vertical alignment
+- `actionIcon` add is-loading state
+- `actionIcon` add mod-invert
+- `actionIcon` supports palette
+- `card` restrict transitions to colors & shadow
+- `navSide` supports active badge colors
+- `header & filter` stick mod binded with banner height
+
+
+## 2.0
 ### New features
 - Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
+
 ### Fixes
 - `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
 
@@ -17,7 +57,6 @@
 - `animations` theming
 - `navSide` mobile positioning
 - `container` mobile width
-
 
 ## 1.0.1
 ### New features
