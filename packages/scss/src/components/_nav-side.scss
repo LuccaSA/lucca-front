@@ -376,9 +376,17 @@
 		background-color: _color("primary", "dark");
 		cursor: pointer;
 		overflow: hidden;
-		position: sticky;
+		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
 		z-index: 1;
+	}
+
+	.navSide.mod-withBanner {
+		.navSide-item.mod-mobileToggle {
+			top: _theme("commons.banner-height");
+		}
 	}
 
 	.navSide-bottomSection {
