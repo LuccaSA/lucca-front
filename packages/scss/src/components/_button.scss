@@ -291,13 +291,3 @@
 		}
 	}
 }
-
-.button-group-input {
-	display: none;
-
-	&:checked + .button {
-		background: _component("button.checked.color");
-		color: _component("button.checked.text");
-		z-index: 1;
-	}
-}
