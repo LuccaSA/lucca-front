@@ -1,6 +1,8 @@
 # Changelog
 
 ## In dev
+### New icons
+- `sprout`, `distribute`
 
 ## 1.0.1
 ### New icons
