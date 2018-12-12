@@ -180,6 +180,7 @@ var mappings = {
     {'iconName':'arrow_full_north', 'char': '\e9b7'},
     {'iconName':'sprout', 'char': '\e9b8'},
     {'iconName':'distribute', 'char': '\e9b9'},
-    {'iconName':'reply', 'char': '\e9ba'}
+    {'iconName':'reply', 'char': '\e9ba'},
+    {'iconName':'evolution', 'char': '\e9bb'}
   ]
 }
