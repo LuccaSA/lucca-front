@@ -18,12 +18,15 @@ implements ILuApiOptionPager<T> {
 
 	protected _loading = false;
 	protected _results$: Observable<T[]>;
-	protected _page$ = new BehaviorSubject<number>(0);
+	protected _page$ = new BehaviorSubject<number>(undefined);
 	constructor(protected _service: S) {
 		this.initObservables();
 	}
 	onOpen() {
 		this._page$.next(0);
+	}
+	onClose() {
+		this._page$.next(undefined);
 	}
 	onScrollBottom() {
 		if (!this._loading) {
@@ -33,7 +36,12 @@ implements ILuApiOptionPager<T> {
 	protected initObservables() {
 		this._results$ = this._page$
 		.pipe(
-			switchMap(page => this._service.getPaged(page))),
+			switchMap(page => {
+				if (page === undefined) {
+					return of([]);
+				}
+				return this._service.getPaged(page);
+			})),
 			catchError(err => of([])
 		);
 
