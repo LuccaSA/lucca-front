@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.0 - in dev
+## in dev
+### New features
+- Adding `gauge` component
+
+## 2.0
 ### New features
 - Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
 ### Fixes
