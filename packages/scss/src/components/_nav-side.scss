@@ -3,16 +3,32 @@
 	bottom: 0;
 	display: block;
 	left: 0;
-	overflow-x: hidden;
-	overflow-y: auto;
 	padding-top: _component("navSide.padding-top");
 	position: fixed;
 	top: 0;
 	width: _component("navSide.width");
 	z-index: 2;
 
+	
+}
+
+// NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
+.navSide-mainSection {
+	display: block;
+	height: 100%;
+	position: relative;
+	width: _component("navSide.width");
+	overflow-x: hidden;
+	overflow-y: auto;
 	// SCROLLBAR
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	scrollbar-face-color: _component("navSide.scrollbar.thumb-color");
+	scrollbar-arrow-color:_component("navSide.scrollbar.arrow-color");
+	scrollbar-track-color: _component("navSide.scrollbar.bg-color");
+	scrollbar-shadow-color: _component("navSide.scrollbar.thumb-color");
+	scrollbar-3dlight-color:_component("navSide.scrollbar.thumb-color");
+
 	&::-webkit-scrollbar-track {
 		background-color: _component("navSide.scrollbar.bg-color");
 	}
@@ -27,13 +43,9 @@
 	}
 }
 
-// NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
 .navSide-scrollWrapper {
-	display: block;
-	position: relative;
 	width: _component("navSide.width");
 }
-
 // MOBILE TOGGLE
 .navSide-item.mod-mobileToggle {
 	display: none;
@@ -118,10 +130,7 @@
 // BOTTOM MENU
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide-bottomSection {
-	bottom: 0;
 	height: _component("navSide.bottom-section-height");
-	left: 0;
-	position: fixed;
 	width: _component("navSide.width");
 	z-index: 1;
 
@@ -149,8 +158,9 @@
 }
 
 .navSide.mod-withBottomSection {
-	margin-bottom: 0;
-	padding-bottom: _component("navSide.bottom-section-height");
+	.navSide-mainSection {
+		height: calc(100% - #{_component("navSide.bottom-section-height")});
+	}
 }
 
 // ACTIVE & OPEN STATE
@@ -259,18 +269,10 @@
 		text-align: center;
 		width: _component("navSide.compact.width");
 
-		// SCROLLBAR
-		&::-webkit-scrollbar-track {
-			background-color: _component("navSide.scrollbar.bg-color");
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background-color: _component("navSide.scrollbar.thumb-color");
-		}
-
-		.navSide-scrollWrapper {
+		.navSide-mainSection, .navSide-scrollWrapper {
 			width: _component("navSide.compact.width");
 		}
+
 		.navSide-item-link {
 			color: _component("navSide.compact-palette.text");
 			flex-direction: column;
@@ -348,11 +350,14 @@
 @include media_smaller_than("md") {
 	.navSide {
 		position: relative;
+		padding-top: _theme("commons.banner-height");
 		width: 100%;
-	}
-
-	.navSide-scrollWrapper {
-		width: 100%;
+		&, &.mod-withBottomSection {
+			.navSide-mainSection, .navSide-scrollWrapper {
+				width: 100%;
+				height: auto;
+			}
+		}
 	}
 
 	.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
@@ -371,14 +376,21 @@
 		background-color: _color("primary", "dark");
 		cursor: pointer;
 		overflow: hidden;
-		position: sticky;
+		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
 		z-index: 1;
+	}
+
+	.navSide.mod-withBanner {
+		.navSide-item.mod-mobileToggle {
+			top: _theme("commons.banner-height");
+		}
 	}
 
 	.navSide-bottomSection {
 		background: transparent;
-		position: relative;
 		width: auto;
 		height: auto;
 
@@ -388,12 +400,10 @@
 		}
 	}
 
-	.navSide.mod-withBottomSection {
-		padding-bottom: 0;
-	}
-
 	.navSide.is-open {
 		height: 100vh;
+		overflow-x: hidden;
+		overflow-y: auto;
 		&.mod-withBanner {
 			height: calc(100vh - #{_theme("commons.banner-height")});
 		}

@@ -1,6 +1,9 @@
 # Changelog
+## 2.1 - in dev
+### Fixes
+- Adding `.navSide-mainSection` to fix navSide scroll issue on IE11
 
-## 2.0 - in dev
+## 2.0
 ### New features
 - Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
 ### Fixes
