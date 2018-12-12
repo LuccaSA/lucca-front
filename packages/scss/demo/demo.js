@@ -265,6 +265,7 @@ function generateIconDemo() {
 		'database',
 		'analytics',
 		'dashboard',
+		'evolution',
 		'compass',
 		'bow',
 

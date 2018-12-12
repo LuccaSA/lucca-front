@@ -2,7 +2,7 @@
 
 ## In dev
 ### New icons
-- `sprout`, `distribute`
+- `sprout`, `distribute`, `evolution`
 
 ## 1.0.1
 ### New icons
