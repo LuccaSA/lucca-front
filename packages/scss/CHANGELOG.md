@@ -2,6 +2,7 @@
 ## In dev
 ### Fixes
 - `textfield` is-required character is visible again
+- `callout` background can be edited in theme
 
 ## 2.1
 ### Fixes
@@ -11,7 +12,7 @@
 ### New features
 - Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
 ### Fixes
-- `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
+- `.form` now supports `.mod-compact`, `.mod-framed`, `.mod-material` to stylised the whole form
 
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`
