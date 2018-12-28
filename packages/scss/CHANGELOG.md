@@ -1,5 +1,9 @@
 # Changelog
-## 2.1 - in dev
+## In dev
+### Fixes
+- `textfield` is-required character is visible again
+
+## 2.1
 ### Fixes
 - Adding `.navSide-mainSection` to fix navSide scroll issue on IE11
 
