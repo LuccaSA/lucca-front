@@ -1,0 +1,47 @@
+.gauge {
+	background: rgba(0, 0, 0, .05);
+	border-radius: _theme("commons.border.radius");
+	height: _component("gauge.height");
+	overflow: hidden;
+	position: relative;
+}
+
+.gauge-bar {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+
+/////////////////////////////////////
+// MODS
+
+.gauge {
+	&.mod-thin {
+		height: _component("gauge.thin.height");
+	}
+}
+
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.gauge {
+	@mixin gaugeColoring($palette) {
+		background: linear-gradient(to right, _color($palette), _color($palette, "lighter"));
+	}
+
+	.gauge-bar {
+		@include gaugeColoring("gauge.default-palette");
+	}
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			.gauge-bar {
+				@include gaugeColoring($name);
+			}
+		}
+	}
+}

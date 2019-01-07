@@ -1,12 +1,13 @@
 # Changelog
 ## In dev
-### Fixes
-- `textfield` is-required character is visible again
-- `callout` background can be edited in theme
+### New features
+- Adding `gauge` component
 
 ## 2.1
 ### Fixes
 - Adding `.navSide-mainSection` to fix navSide scroll issue on IE11
+- `textfield` is-required character is visible again
+- `callout` background can be edited in theme
 
 ## 2.0
 ### New features
