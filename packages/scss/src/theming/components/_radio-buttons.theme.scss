@@ -1,0 +1,5 @@
+$radioButtons: (
+	padding: .15rem .5rem,
+	outlineHeight: 2px
+);
+$theme: _set($theme, "components.radioButtons", $radioButtons);

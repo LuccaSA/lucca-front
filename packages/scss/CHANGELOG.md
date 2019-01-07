@@ -2,6 +2,7 @@
 ## In dev
 ### New features
 - Adding `gauge` component
+- Adding `radioButtons` component
 - `utilities` vertical align
 - `utilities` units format
 
