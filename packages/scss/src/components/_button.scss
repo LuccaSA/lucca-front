@@ -57,11 +57,6 @@
 	// default color
 	@include buttonColoring("button.default-palette");
 
-	// white color
-	&.mod-white {
-		@include buttonColoring("button.white-palette");
-	}
-
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
@@ -95,6 +90,16 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
+	&.mod-white {
+		background: white;
+
+		&:hover, &:focus {
+			&:not([disabled]) {
+				background: white;
+				color: _color("text.dark");
+			}
+		}
+	}
 
 	&.mod-link {
 		background: transparent;

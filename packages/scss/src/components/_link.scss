@@ -14,6 +14,7 @@ a {
 	color: _color("text.link");
 	cursor: pointer;
 	display: inline;
+	font-family: _theme("commons.font.family");
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;

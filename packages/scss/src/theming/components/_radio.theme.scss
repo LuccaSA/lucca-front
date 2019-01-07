@@ -9,7 +9,10 @@ $radio: (
   ),
   input: (
     top: .25rem,
-    size: 1rem
+    size: 1rem,
+    border: (
+      color: #999999
+    )
   )
 );
 $theme: _set($theme, "components.radio", $radio);
