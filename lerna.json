@@ -10,7 +10,8 @@
     "publish": {
       "message": "publish %s",
       "forcePublish": "*",
-      "ignoreChanges": "packages/ng/dist/**"
+      "ignoreChanges": "packages/ng/dist/**",
+      "preid": "rc"
     }
   }
 }
