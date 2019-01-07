@@ -146,6 +146,7 @@ function generateIconDemo() {
 		'outside',
 		'trash',
 		'send',
+		'reply',
 		'synchronization',
 		'search',
 
@@ -198,6 +199,7 @@ function generateIconDemo() {
 		'move_vertically',
 		'move_horizontally',
 		'drag',
+		'distribute',
 
 		'menu',
 		'menu_thin',
@@ -263,6 +265,7 @@ function generateIconDemo() {
 		'database',
 		'analytics',
 		'dashboard',
+		'evolution',
 		'compass',
 		'bow',
 

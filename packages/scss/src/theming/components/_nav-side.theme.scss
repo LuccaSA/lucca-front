@@ -42,7 +42,8 @@ $navSide: (
 		width: .5rem,
 		border-radius: 10px,
 		bg-color: _color("primary", "dark"),
-		thumb-color: _color("primary")
+		thumb-color: _color("primary"),
+		arrow-color: _color("primary", "text"),
 	),
 	submenu: (
 		max-height: 33rem,

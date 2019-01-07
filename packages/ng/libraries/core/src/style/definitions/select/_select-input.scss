@@ -7,7 +7,7 @@
 		padding: 0;
 
 		&::after {
-			bottom: 0.55rem;
+			bottom: 0.6rem;
 			color: _color("primary", "color", true);
 			color: _color("primary");
 			@include makeIcon('arrow_south');
@@ -53,7 +53,7 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: 0.45rem;
+		bottom: 0.5rem;
 		right: calc(2.75 * #{_component('textfield.input.padding-horizontal', true)});
 		right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
 	}

@@ -12,40 +12,42 @@
 	<body>
 		<main class="main">
 			<aside class="navSide mod-compact">
-				<nav class="navSide-scrollWrapper">
-					<div class="navSide-item-placeholder"></div>
-					<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
-						<a href="#" class="navSide-item-link">
-							<span class="navSide-item-link-title">Menu</span>
-							<i class="navSide-item-arrow lucca-icon icon-arrowSouthThin"></i>
-						</a>
-					</div>
-					<div class="navSide-item is-active">
-						<a href="#" class="navSide-item-link is-active" onclick="setActive(event)">
-							<i class="lucca-icon icon-tilesNine"></i>
-							<span class="navSide-item-link-title">Section 1</span>
-						</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link" onclick="setActive(event)">
-							<i class="lucca-icon icon-user"></i>
-							<span class="navSide-item-link-title">Section 2</span>
-						</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link" onclick="setActive(event)">
-							<i class="lucca-icon icon-settings"></i>
-							<span class="navSide-item-link-title">Section 3</span>
-						</a>
-					</div>
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link" onclick="setActive(event)">
-							<i class="lucca-icon icon-sliders"></i>
-							<span class="navSide-item-link-title">Section 4</span>
-							<span class="navSide-item-alert">9</span>
-						</a>
-					</div>
-				</nav>
+				<div class="navSide-mainSection">
+					<nav class="navSide-scrollWrapper">
+						<div class="navSide-item-placeholder"></div>
+						<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
+							<a href="#" class="navSide-item-link">
+								<span class="navSide-item-link-title">Menu</span>
+								<i class="navSide-item-arrow lucca-icon icon-arrowSouthThin"></i>
+							</a>
+						</div>
+						<div class="navSide-item is-active">
+							<a href="#" class="navSide-item-link is-active" onclick="setActive(event)">
+								<i class="lucca-icon icon-tilesNine"></i>
+								<span class="navSide-item-link-title">Section 1</span>
+							</a>
+						</div>
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event)">
+								<i class="lucca-icon icon-user"></i>
+								<span class="navSide-item-link-title">Section 2</span>
+							</a>
+						</div>
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event)">
+								<i class="lucca-icon icon-settings"></i>
+								<span class="navSide-item-link-title">Section 3</span>
+							</a>
+						</div>
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event)">
+								<i class="lucca-icon icon-sliders"></i>
+								<span class="navSide-item-link-title">Section 4</span>
+								<span class="navSide-item-alert">9</span>
+							</a>
+						</div>
+					</nav>
+				</div>
 				<div class="navSide-bottomSection">
 					<div class="navSide-item">
 						<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
@@ -62,28 +64,30 @@
 							<h1>Side with cards</h1>
 <code class="code mod-block">&lt;main class="main"&gt;
 	&lt;aside class="navSide mod-compact"&gt;
-		&lt;nav class="navSide-scrollWrapper"&gt;
-			&lt;div class="navSide-item-placeholder"&gt;&lt;/div&gt;
-			&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
-				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
-					&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
-					&lt;i class=&quot;navSide-item-arrow lucca-icon icon-arrowSouthThin&quot;&gt;&lt;/i&gt;
-				&lt;/a&gt;
-			&lt;/div&gt;
-			&lt;div class="navSide-item is-active"&gt;
-				&lt;a href="#" class="navSide-item-link is-active"&gt;
-					&lt;i class="lucca-icon icon-tilesNine"&gt;&lt;/i&gt;
-					&lt;span class="navSide-item-link-title"&gt;Section 1&lt;/span&gt;
-				&lt;/a&gt;
-			&lt;/div&gt;
-			&lt;div class="navSide-item"&gt;
-				&lt;a href="#" class="navSide-item-link"&gt;
-					&lt;i class="lucca-icon icon-user"&gt;&lt;/i&gt;
-					&lt;span class="navSide-item-link-title"&gt;Section 2&lt;/span&gt;
-				&lt;/a&gt;
-			&lt;/div&gt;
-			...
-		&lt;/nav&gt;
+		&lt;div class="navSide-mainSection"&gt;
+			&lt;nav class="navSide-scrollWrapper"&gt;
+				&lt;div class="navSide-item-placeholder"&gt;&lt;/div&gt;
+				&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
+						&lt;i class=&quot;navSide-item-arrow lucca-icon icon-arrowSouthThin&quot;&gt;&lt;/i&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class="navSide-item is-active"&gt;
+					&lt;a href="#" class="navSide-item-link is-active"&gt;
+						&lt;i class="lucca-icon icon-tilesNine"&gt;&lt;/i&gt;
+						&lt;span class="navSide-item-link-title"&gt;Section 1&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class="navSide-item"&gt;
+					&lt;a href="#" class="navSide-item-link"&gt;
+						&lt;i class="lucca-icon icon-user"&gt;&lt;/i&gt;
+						&lt;span class="navSide-item-link-title"&gt;Section 2&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				...
+			&lt;/nav&gt;
+		&lt;/div&gt;
 		&lt;div class="navSide-bottomSection"&gt;
 			&lt;div class="navSide-item"&gt;
 				&lt;a href="#" class="navSide-item-link" onclick="setActive(event, true)"&gt;

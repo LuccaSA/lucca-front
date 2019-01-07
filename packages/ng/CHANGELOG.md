@@ -1,6 +1,8 @@
 # Changelog
 
 ## in dev
+### Bug fixes
+- `select` Increase height
 
 ## 2.0.2
 ### Bug fixes & optims
