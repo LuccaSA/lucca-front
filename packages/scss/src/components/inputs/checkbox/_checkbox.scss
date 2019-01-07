@@ -103,6 +103,7 @@
 		padding: _component("field.framed.side-padding");
 		display: inline-flex;
 		align-items: center;
+		height: 100%;
 		&::before {
 			position: relative;
 			margin-top: 0;

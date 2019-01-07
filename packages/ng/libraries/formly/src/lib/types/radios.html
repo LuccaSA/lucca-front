@@ -7,10 +7,10 @@
 <label class="radiosfield-label">{{to.label}}</label>
 
 <ng-template #buttonGroup>
-<div class="radiosfield-input button-group">
-	<div class="button-group-item" *ngFor="let option of _options, let i = index">
-		<input class="button-group-input" type="radio" [value]="option.value" [id]="id + '_'+ i" [formControl]="formControl" [formlyAttributes]="field">
-		<label class="button" [for]="id + '_'+ i">{{option.label}}</label>
+<div class="radioButtons">
+	<div class="radioButtons-item" *ngFor="let option of _options, let i = index">
+		<input class="radioButtons-item-input" type="radio" [value]="option.value" [id]="id + '_'+ i" [formControl]="formControl" [formlyAttributes]="field">
+		<label class="radioButtons-item-label" [for]="id + '_'+ i">{{option.label}}</label>
 	</div>
 </div>
 </ng-template>
