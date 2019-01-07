@@ -350,7 +350,7 @@
 @include media_smaller_than("md") {
 	.navSide {
 		position: relative;
-		padding-top: _theme("commons.banner-height");
+		padding-top: _component("navSide.mobile.toggle-height");
 		width: 100%;
 		&, &.mod-withBottomSection {
 			.navSide-mainSection, .navSide-scrollWrapper {

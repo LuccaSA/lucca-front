@@ -1,5 +1,10 @@
 # Changelog
-## 2.1 - in dev
+## In dev
+### Fixes
+- `textfield` is-required character is visible again
+- `callout` background can be edited in theme
+
+## 2.1
 ### Fixes
 - Adding `.navSide-mainSection` to fix navSide scroll issue on IE11
 
@@ -7,7 +12,7 @@
 ### New features
 - Adding `.radiosfield` & `.checkboxesfield`, the equivalent of `.textfield` for the corresponding inputs
 ### Fixes
-- `.form` now supports `.mod-compact`, `.mod-framedt`, `.mod-material` to stylised the whole form
+- `.form` now supports `.mod-compact`, `.mod-framed`, `.mod-material` to stylised the whole form
 
 ### Breaking changes
 - `transparent` key in palettes is now `see-through`

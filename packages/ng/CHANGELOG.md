@@ -1,6 +1,8 @@
 # Changelog
 
 ## in dev
+### Bug fixes
+- `select` Increase height
 
 ## 2.0.2
 ### Bug fixes & optims
@@ -19,7 +21,7 @@
 - removed `luEmpty` directive including it into `luInput` directive
 
 ### New features
-- :hammer: better modelisation of `input` and `picker` 
+- :hammer: better modelisation of `input` and `picker`
 - :hammer: myriad of interfaces and abstract classes to allow for easy overriding
 - :sparkles: select, select with operators, api-select, user-select
 - :sparkles: `luInput` directive that adds classes `is-filled` when ngmodel not empty (like luempty, but with potential growth)
