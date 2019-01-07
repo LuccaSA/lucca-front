@@ -29,11 +29,11 @@
 %checkboxesfield-row {
 	display: flex;
 	flex-wrap: wrap;
-	.radio {
+	.checkbox {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
-	.radio {
-		margin-right: 1.5rem;
+	.checkbox {
+		margin-right: _component("field.horizontal-spacing");
 	}
 }
