@@ -41,7 +41,7 @@
 	cursor: pointer;
 	display: block;
 	overflow: hidden;
-	padding: _component("toggleButton.padding");
+	padding: _component("toggleButtons.padding");
 	position: relative;
 	transition: all _theme("commons.animations.durations.standard") ease;
 
@@ -55,7 +55,7 @@
 		bottom: 0;
 		left: 0;
 		right: 100%;
-		height: _component("toggleButton.outlineHeight");
+		height: _component("toggleButtons.outlineHeight");
 		background: _color("primary");
 		transition: all _theme("commons.animations.durations.standard") ease;
 		z-index: 1;
