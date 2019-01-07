@@ -1,18 +1,18 @@
 .menu {
 	align-items: center;
+	background: _component("menu.background");
 	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
 	line-height: 1;
 }
 
 .menu-link {
-	color: _color("text.default");
+	color: _color("text.light");
 	margin: _component("menu.margin");
-	opacity: .75;
 	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
-	transition: opacity _component("menu.animations.durations.standard") ease;
+	transition: color _component("menu.animations.durations.standard") ease;
 
 	&::after {
 		bottom: -1px;
@@ -27,8 +27,7 @@
 	}
 
 	&:hover {
-		color: _color("text.default");
-		opacity: 1;
+		color: _color("text.dark");
 
 		&::after {
 			transform: scale(1);
@@ -65,8 +64,8 @@
 
 .menu-link {
 	&.is-active {
+		color: _color("text.dark");
 		font-weight: 600;
-		opacity: 1;
 
 		&::after {
 			transform: scale(1);

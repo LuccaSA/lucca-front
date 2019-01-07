@@ -21,6 +21,7 @@
 	display: table-cell;
 	font-weight: 600;
 	padding: _component("table.padding");
+	text-align: left;
 }
 
 .table-body {
@@ -28,6 +29,7 @@
 }
 
 .table-body-row {
+	background: white;
 	display: table-row;
 }
 
@@ -111,6 +113,26 @@
 	&.mod-filters {
 		vertical-align: bottom;
 	}
+
+	&.mod-draggable {
+		.table-body-row-cell:first-child {
+			padding-left: 2rem;
+			position: relative;
+
+			&::before {
+				@include makeIcon("drag");
+				bottom: 0;
+				color: _color("text.placeholder");
+				cursor: move;
+				font-size: 1.3rem;
+				height: 2rem;
+				left: 0;
+				margin: auto;
+				position: absolute;
+				top: 0;
+			}
+		}
+	}
 }
 
 .table-head-row-cell {
@@ -143,10 +165,7 @@
 
 .table-body-row-cell, .table-head-row-cell {
 	&.mod-actions {
-		padding: {
-			bottom: .3rem;
-			top: .3rem;
-		}
+		padding: .3rem _theme("spacings.smaller") .3rem 0;
 		text-align: right;
 		transition: opacity _theme("commons.animations.durations.fast") ease;
 		white-space: nowrap;

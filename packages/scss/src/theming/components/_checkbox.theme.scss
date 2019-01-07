@@ -11,7 +11,10 @@ $checkbox: (
     margin-top: .3rem,
     margin-right: .5rem,
     size: .95rem,
-    border-radius: 3px
+    border-radius: 3px,
+    border: (
+      color: #999999
+    )
   )
 );
 $theme: _set($theme, "components.checkbox", $checkbox);

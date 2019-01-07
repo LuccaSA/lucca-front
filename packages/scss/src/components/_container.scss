@@ -1,6 +1,6 @@
 .container {
-	margin: _component("container.margin-top") auto _component("container.margin-bottom");
-	padding: 0 .5rem;
+	margin: 0 auto _component("container.margin-bottom");
+	padding: _component("container.margin-top") .5rem 0;
 	max-width: _component("container.max-width");
 
 	@each $bp-name, $bp-obj in $breakpoints {

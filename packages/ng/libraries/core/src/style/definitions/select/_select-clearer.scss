@@ -42,4 +42,24 @@
 			color: _color("text.light");
 		}
 	}
+
+	// Error
+	:host-context(.textfield-input.is-error) {
+		.actionIcon {
+			color: _color("error", "color", true);
+			color: _color("error");
+
+			&:hover {
+				background: _color("error", "see-through", true);
+				background: _color("error", "see-through");
+				color: _color("error", "dark", true);
+				color: _color("error", "dark");
+			}
+		}
+	}
+
+	// Disabled
+	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+		display: none;
+	}
 }
