@@ -6,11 +6,8 @@
 }
 
 .mat-datepicker-toggle {
-	top: _component("textfield.suffix.top");
-	line-height: 1.3;
-	position: absolute;
-	right: _component("textfield.input.padding-horizontal");
-	z-index: 2;
+	@extend .textfield-suffix;
+	pointer-events: auto;
 
 	button {
 		background: none !important;
