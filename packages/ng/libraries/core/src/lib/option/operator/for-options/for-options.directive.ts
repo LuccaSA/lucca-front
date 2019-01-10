@@ -10,8 +10,7 @@ import {
 	TrackByFunction,
 	ViewContainerRef,
 } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subscription } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Directive({
