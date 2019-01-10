@@ -1,6 +1,13 @@
 $actionIcon: (
-  hover: (
-    background: _color("primary", "see-through")
+  color: (
+    _color("text.default")
   ),
+  hover: (
+    background: _color("primary", "see-through"),
+    color: _color("text.dark")
+  ),
+  invert: (
+    color: white
+  )
 );
 $theme: _set($theme, "components.actionIcon", $actionIcon);
