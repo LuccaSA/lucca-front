@@ -3,20 +3,20 @@
 
 	<!-- Basics -->
 
-		<div class="grid">
-			<div class="grid-md6">
-				<div class="textfield mod-block">
-					<input class="textfield-input" id="textfield0" type="text" placeholder="placeholder">
-					<label class="textfield-label" for="textfield0">Textfield label</label>
-				</div>
-			</div>
-			<div class="grid-md6">
-				<div class="textfield mod-block">
-					<input class="textfield-input" type="text" value="disabled input" disabled>
-					<label class="textfield-label">Textfield label</label>
-				</div>
+	<div class="grid">
+		<div class="grid-md6">
+			<div class="textfield mod-block">
+				<input class="textfield-input" id="textfield0" type="text" placeholder="placeholder">
+				<label class="textfield-label" for="textfield0">Textfield label</label>
 			</div>
 		</div>
+		<div class="grid-md6">
+			<div class="textfield mod-block">
+				<input class="textfield-input" type="text" value="disabled input" disabled>
+				<label class="textfield-label">Textfield label</label>
+			</div>
+		</div>
+	</div>
 <code class="code mod-block">&lt;div class="textfield"&gt;
 	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
 	&lt;label class="textfield-label" for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
@@ -411,16 +411,30 @@
 	</div>
 	<code class="code mod-block">&lt;div class="textfield palette-primary"&gt;
 	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
-	&lt;label class="textfield-label for="<b>textfieldID</b>""&gt;...&lt;/label&gt;
+	&lt;label class="textfield-label for="<b>textfieldID</b>"&gt;...&lt;/label&gt;
 &lt;/div&gt;</code>
 <em><b>Tip:</b> It will works with all palette's colors</em></br>
 <em><b>Tip:</b> It also works with input using <code class="code">mod-material</code> & <code class="code">mod-compact</code></em>
 </section>
 
-<h2>Multiline</h2>
+<!-- Invert -->
+<section class="contentSection">
+	<h2>Inverted</h2>
+	<div class="demo-invert">
+		<div class="textfield mod-block mod-invert">
+			<input class="textfield-input" id="textfield16" type="text" placeholder="placeholder">
+			<label class="textfield-label" for="textfield16">Textfield label</label>
+		</div>
+	</div>
+<code class="code mod-block">&lt;div class="textfield mod-invert"&gt;
+	&lt;input class="textfield-input" id="<b>textfieldID</b>" type="text"&gt;
+	&lt;label class="textfield-label for="<b>textfieldID</b>&gt;...&lt;/label&gt;
+&lt;/div&gt;</code>
+</section>
 
 <!-- Multilines -->
 <section class="contentSection">
+	<h2>Multilines</h2>
 	<div class="form">
 		<div class="grid">
 			<div class="grid-sm6">

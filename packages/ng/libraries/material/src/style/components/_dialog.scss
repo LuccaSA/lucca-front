@@ -1,6 +1,7 @@
 .mat-dialog-container {
 	@extend .card;
 
+	background: white;
 	max-width: 80vw; // MIGHT BE CHANGED INTO A THEME VARIABLE
 	overflow: visible !important;
 	padding: 0 !important;

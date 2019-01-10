@@ -1,6 +1,7 @@
 @import
 
-	"components/actionIcon",
+	"components/action-icon",
+	"components/box",
 	"components/breadcrumb",
 	"components/button",
 	"components/callout",
@@ -10,10 +11,10 @@
 	"components/collapse",
 	"components/container",
 	"components/content-section",
+	"components/emptystate",
 	"components/filters",
 	"components/form",
-	"components/box",
-	"components/emptystate",
+	"components/gauge",
 	"components/grid",
 	"components/header",
 	"components/label",
@@ -35,5 +36,6 @@
 	"components/inputs/textfield/textfield",
 	"components/inputs/radio/radio",
 	"components/inputs/radio/radiosfield",
+	"components/inputs/radio-buttons/radio-buttons",
 	"components/inputs/switch/switch",
 	"components/inputs/file/file";

@@ -49,8 +49,8 @@
 
 <!-- Action buttons  -->
 <section class="contentSection">
-	<h2>Action buttons</h2>
-	<p>You can use icons as action buttons:</p>
+	<h2>Action icons</h2>
+	<p>You can use icons as action:</p>
 	<button class="actionIcon"><i class="lucca-icon">edit</i></button>
 	<button class="actionIcon"><i class="lucca-icon">trash</i></button>
 	<button class="actionIcon"><i class="lucca-icon">star</i></button>
@@ -64,9 +64,45 @@
 	<button class="actionIcon" disabled><i class="lucca-icon">edit</i></button>
 	<button class="actionIcon" disabled><i class="lucca-icon">trash</i></button>
 	<button class="actionIcon" disabled><i class="lucca-icon">star</i></button>
-	<button class="actionIcon" disabled><i class="lucca-icon u-textError">hearth</i></button>
+	<button class="actionIcon" disabled><i class="lucca-icon u-textError">heart</i></button>
 <code class="code mod-block">&lt;button class="actionIcon" disabled&gt;
 	&lt;i class="lucca-icon"&gt;heart&lt;/i&gt;
 &lt;/button&gt;</code>
 	<em><b>Tip:</b> actionIcon can also be disabled with a class <code class="code">class="actionIcon is-disabled"</code>, but you will not be able to use a tooltip on it.</em>
+</section>
+
+<!-- LOADING -->
+<section class="contentSection">
+	<h2>Loading</h2>
+	<button class="actionIcon is-loading"><i class="lucca-icon">trash</i></button>
+<code class="code mod-block">&lt;button class="actionIcon is-loading"&gt;
+	&lt;i class="lucca-icon"&gt;trash&lt;/i&gt;
+&lt;/button&gt;</code>
+</section>
+
+<!-- INVERTED -->
+<section class="contentSection">
+	<h2>Inverted</h2>
+	<div class="demo-invert">
+		<button class="actionIcon mod-invert"><i class="lucca-icon">edit</i></button>
+		<button class="actionIcon mod-invert"><i class="lucca-icon">trash</i></button>
+		<button class="actionIcon mod-invert"><i class="lucca-icon">start</i></button>
+		<button class="actionIcon mod-invert"><i class="lucca-icon u-textError">heart</i></button>
+	</div>
+<code class="code mod-block">&lt;button class="actionIcon mod-invert"&gt;
+	&lt;i class="lucca-icon"&gt;trash&lt;/i&gt;
+&lt;/button&gt;</code>
+</section>
+
+<!-- Palette -->
+<section class="contentSection">
+	<h2>Palette</h2>
+	<button class="actionIcon palette-primary"><i class="lucca-icon">arrow_full_east</i></button>
+	<button class="actionIcon palette-secondary"><i class="lucca-icon">arrow_full_east</i></button>
+	<button class="actionIcon palette-success"><i class="lucca-icon">arrow_full_east</i></button>
+	<button class="actionIcon palette-warning"><i class="lucca-icon">arrow_full_east</i></button>
+	<button class="actionIcon palette-error"><i class="lucca-icon">arrow_full_east</i></button>
+<code class="code mod-block">&lt;button class="actionIcon palette-error"&gt;
+	&lt;i class="lucca-icon"&gt;trash&lt;/i&gt;
+&lt;/button&gt;</code>
 </section>

@@ -7,12 +7,6 @@ $button: (
 		dark: _theme("commons.background.darker"),
 		text: _color("text.default")
 	),
-	white-palette: (
-		color: white,
-		light: _theme("commons.background.base"),
-		dark: _theme("commons.background.dark"),
-		text: _color("text.default")
-	),
 	margin: .2rem,
 	line-height: 1.15,
 	font-weight: 600,
@@ -28,8 +22,6 @@ $button: (
 	flat: (
 		color: black,
 	),
-
-	checked: _getMap("palettes.primary"),
 
 	// sizing
 	sizing: (

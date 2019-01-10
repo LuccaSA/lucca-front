@@ -1,0 +1,63 @@
+.radioButtons {
+	display: flex;
+}
+
+.radioButtons-item {
+	margin-left: -1px;
+
+	&:first-child {
+		margin-left: 0;
+
+		.radioButtons-item-label {
+			border-radius: _theme("commons.border.radius") 0 0 _theme("commons.border.radius");
+		}
+	}
+
+	&:last-child {
+		.radioButtons-item-label {
+			border-radius: 0 _theme("commons.border.radius") _theme("commons.border.radius") 0;
+		}
+	}
+}
+
+.radioButtons-item-input {
+	display: none;
+
+	&:checked ~ .radioButtons-item-label {
+		background: white;
+		color: _color("text.dark");
+		z-index: 1;
+
+		&::after {
+			right: 0;
+		}
+	}
+}
+
+.radioButtons-item-label {
+	background: _theme("commons.background.base");
+	box-shadow: inset 0 0 0 1px _theme("commons.divider.color");
+	color: _color("text.light");
+	cursor: pointer;
+	display: block;
+	overflow: hidden;
+	padding: _component("radioButtons.padding");
+	position: relative;
+	transition: all _theme("commons.animations.durations.standard") ease;
+
+	&:hover {
+		background: white;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 100%;
+		height: _component("radioButtons.outlineHeight");
+		background: _color("primary");
+		transition: all _theme("commons.animations.durations.standard") ease;
+		z-index: 1;
+	}
+}

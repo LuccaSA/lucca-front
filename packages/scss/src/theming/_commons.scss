@@ -6,7 +6,7 @@ $commons: (
 			slow: 350ms,
 		),
 		translate: 3rem,
-		function: ease-out,
+		function: ease,
 		iteration-count: 5,
 	),
 	divider: (
@@ -17,7 +17,7 @@ $commons: (
 		opacity: .5,
 		background: #E5E5E5,
 		color: #999999,
-		placeholder: #CCCCCC
+		placeholder: #BBBBBB
 	),
 	background: (
 		base: #F5F5F5,
