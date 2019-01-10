@@ -1,19 +1,17 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'operator',
 	templateUrl: './operator.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [
-	],
+	providers: [],
 })
 export class OperatorComponent {
 	searchFn(o, c) {
 		return o.name.startsWith(c);
+	}
+	trackBy(idx, color): string {
+		return color.code;
 	}
 	item;
 	colors = [
