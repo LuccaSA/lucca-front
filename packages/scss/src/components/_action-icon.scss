@@ -2,7 +2,7 @@
 	background: transparent;
 	border: 0;
 	border-radius: 50%;
-	color: _color("text.default");
+	color: _component("actionIcon.color");
 	cursor: pointer;
 	height: 2rem;
 	margin-left: .1rem;
@@ -12,7 +12,7 @@
 	&:hover {
 		&:not([disabled]) {
 			background: _component("actionIcon.hover.background");
-			color: _color("text.dark");
+			color: _component("actionIcon.hover.color");
 		}
 	}
 
@@ -27,11 +27,11 @@
 
 .actionIcon {
 	&.mod-invert {
-		color: #CCC;
+		color: _component("actionIcon.invert.color");
 
 		&:hover {
-			color: white;
 			background: rgba(255, 255, 255, .15);
+			color: _component("actionIcon.invert.color");
 		}
 	}
 
@@ -68,10 +68,10 @@
 	}
 
 	&.is-loading {
-	  @include loading(1rem);
-	  color: transparent;
-	  opacity: _theme("commons.disabled.opacity");
-	  pointer-events: none;
-	  position: relative;
+		@include loading(1rem);
+		color: transparent;
+		opacity: _theme("commons.disabled.opacity");
+		pointer-events: none;
+		position: relative;
 	}
 }

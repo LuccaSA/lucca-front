@@ -148,26 +148,25 @@
 		}
 	}
 
-  &.mod-invert {
-    .textfield-input {
-      background: white;
+	&.mod-invert {
+		.textfield-input {
+			background: white;
 
-      &::placeholder {
-        color: _component("textfield.focus.placeholder");
-      }
+			&::placeholder {
+				color: _component("textfield.focus.placeholder");
+			}
 
-      &:focus {
-        &::placeholder {
-          color: _component("textfield.focus.placeholder");
-        }
-      }
-    }
+			&:focus {
+				&::placeholder {
+					color: _component("textfield.focus.placeholder");
+				}
+			}
+		}
 
 		.textfield-label {
 			color: white;
 		}
-  }
-
+	}
 
 	/* Search */
 
@@ -237,6 +236,10 @@
 		background: _theme("commons.disabled.background");
 		color: _theme("commons.disabled.color");
 		pointer-events: none;
+
+		&::placeholder {
+			color: _theme("commons.disabled.placeholder");
+		}
 	}
 
 	&.is-error {

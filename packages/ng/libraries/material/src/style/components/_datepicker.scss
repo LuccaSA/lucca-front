@@ -7,23 +7,25 @@
 
 .mat-datepicker-toggle {
 	@extend .textfield-suffix;
+	pointer-events: auto;
 
-	z-index: 2;
-}
-.mat-datepicker-toggle button {
-	background: none !important;
-	border-radius: 0;
-	height: auto;
-	line-height: 1;
-	width: auto;
+	button {
+		background: none !important;
+		border-radius: 0;
+		height: auto;
+		line-height: 1;
+		width: auto;
 
-	&::after {
-		@include makeIcon('calendar');
-	}
-	mat-icon {
-		display: none;
+		&::after {
+			@include makeIcon('calendar');
+		}
+
+		mat-icon {
+			display: none;
+		}
 	}
 }
+
 
 // CALENDAR
 .mat-calendar {
@@ -32,16 +34,16 @@
 
 	.mat-button {
 		@extend .button.mod-link;
-
 		font-size: 1em;
 		text-decoration: none;
 	}
+
 	.mat-calendar-arrow {
 		display: none;
 	}
+
 	.mat-icon-button {
 		@extend .button.mod-link;
-
 		border-radius: 3px;
 	}
 
@@ -58,9 +60,11 @@
 		flex: 1;
 		order: 1;
 	}
+
 	.mat-calendar-next-button {
 		order: 2;
 	}
+
 	.mat-calendar-spacer {
 		display: none;
 	}
@@ -70,7 +74,6 @@
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
 		@include fakeBorder(1px, _theme('commons.divider.color'));
-
 		border: none;
 		border-radius: 0;
 		color: _color("text.light");
@@ -78,12 +81,14 @@
 		left: 0;
 		top: 0;
 		width: 100%;
+
 		&:hover,
 		&.mat-calendar-body-selected {
 			background-color: _color('primary');
 			color: _color('primary', 'text');
 		}
 	}
+
 	&.mat-calendar-body-disabled {
 		opacity: 0.5;
 		pointer-events: none;
