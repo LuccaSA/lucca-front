@@ -8,8 +8,6 @@
 	top: 0;
 	width: _component("navSide.width");
 	z-index: 2;
-
-	
 }
 
 // NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
@@ -21,13 +19,11 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	// SCROLLBAR
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
 	scrollbar-face-color: _component("navSide.scrollbar.thumb-color");
-	scrollbar-arrow-color:_component("navSide.scrollbar.arrow-color");
+	scrollbar-arrow-color: _component("navSide.scrollbar.arrow-color");
 	scrollbar-track-color: _component("navSide.scrollbar.bg-color");
 	scrollbar-shadow-color: _component("navSide.scrollbar.thumb-color");
-	scrollbar-3dlight-color:_component("navSide.scrollbar.thumb-color");
+	scrollbar-3dlight-color: _component("navSide.scrollbar.thumb-color");
 
 	&::-webkit-scrollbar-track {
 		background-color: _component("navSide.scrollbar.bg-color");
