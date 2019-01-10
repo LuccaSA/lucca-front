@@ -27,10 +27,9 @@
 
 .actionIcon {
 	&.mod-invert {
-		color: #CCC;
+		color: white;
 
 		&:hover {
-			color: white;
 			background: rgba(255, 255, 255, .15);
 		}
 	}
