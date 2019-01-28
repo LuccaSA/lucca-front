@@ -9,7 +9,7 @@ import {
 	HostListener } from '@angular/core';
 	import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
 	import { ComponentPortal } from '@angular/cdk/portal';
-	import { ALuPopoverTrigger } from '../../popover/index';
+	import { ALuPopoverTrigger, LuPopoverPosition } from '../../popover/index';
 	import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
@@ -20,6 +20,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@Input('luTooltip') tooltipContent;
 	@Input() enterDelay = 300;
 	@Input() leaveDelay = 100;
+	@Input('luTooltipPosition') position: LuPopoverPosition = 'above';
 	@Input('luTooltipDisabled')
 	get disabled(): boolean {
 		return this._disabled;
@@ -106,6 +107,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this._createOverlay();
 		this.popover = this._overlayRef.attach(this._portal).instance;
 		this.popover.content = this.tooltipContent;
+		this.popover.position = this.position;
 		this.popover.markForChange();
 		this.popover.close.subscribe(() => {
 			this.closePopover();
