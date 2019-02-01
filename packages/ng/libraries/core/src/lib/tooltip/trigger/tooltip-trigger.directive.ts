@@ -76,17 +76,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 
 	_getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
-		overlayState.positionStrategy = this._overlay.position()
-			.connectedTo(this._elementRef, {
-				originX: 'center',
-				originY: 'top',
-			}, {
-				overlayX: 'center',
-				overlayY: 'bottom',
-			});
-
-		overlayState.hasBackdrop = false;
-		overlayState.direction = this.dir;
+		overlayState.positionStrategy = this._getPosition().withDirection(this.dir);
 		overlayState.scrollStrategy = this._overlay.scrollStrategies.close();
 		return overlayState;
 	}
