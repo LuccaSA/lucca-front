@@ -10,21 +10,24 @@
 		color: _component("tooltip.color");
 		padding: _component("tooltip.padding", true);
 		padding: _component("tooltip.padding");
-		position: relative;
 
-		&::after {
-			content: '';
-			display: block;
-			position: absolute;
-			width: 0;
-			height: 0;
-			border-left: 5px solid transparent;
-			border-right: 5px solid transparent;
-			border-top: 5px solid _component("tooltip.background", true);
-			border-top: 5px solid _component("tooltip.background");
-			bottom: -4px;
-			left: 50%;
-			transform: translateX(-50%);
+		&.lu-tooltip-above {
+			transform-origin: bottom center;
+		}
+
+		&.lu-tooltip-below {
+			transform-origin: top center;
+			margin-top: 2px;
+		}
+
+		&.lu-tooltip-before {
+			transform-origin: center right;
+			margin-right: 5px;
+		}
+
+		&.lu-tooltip-after {
+			transform-origin: center left;
+			margin-left: 5px;
 		}
 	}
 }

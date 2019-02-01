@@ -10,6 +10,21 @@ import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '../../popo
 export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnInit {
 
 	@HostBinding('@transformPopover') animationState = 'enter';
+	@HostBinding('class') get classes() {
+		if (this._classList['lu-popover-above']) {
+			return 'lu-tooltip-above';
+		}
+		if (this._classList['lu-popover-below']) {
+			return 'lu-tooltip-below';
+		}
+		if (this._classList['lu-popover-before']) {
+			return 'lu-tooltip-before';
+		}
+		if (this._classList['lu-popover-after']) {
+			return 'lu-tooltip-after';
+		}
+		return '';
+	}
 
 	@Input() content;
 

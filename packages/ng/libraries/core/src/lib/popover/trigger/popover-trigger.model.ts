@@ -328,7 +328,6 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
 			const posY: LuPopoverPosition =
 				change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
-
 			this.popover.setPositionClassesChanges(posX, posY);
 		});
 	}
