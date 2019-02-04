@@ -49,14 +49,10 @@
 		margin: 38vh auto 0;
 		width: 5rem;
 
-		&::after {
+		&::before, &::after {
 			height: 5rem;
 			width: 5rem;
-		}
-
-		&::before {
-			height: 5rem;
-			width: 5rem;
+			border-width: 3px;
 		}
 	}
 
