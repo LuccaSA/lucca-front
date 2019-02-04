@@ -56,6 +56,43 @@
 		}
 	}
 
+	&.mod-dialog {
+		display: block;
+		text-align: center;
+		position: relative;
+		padding: 8rem 0 0;
+		margin: 0 2rem 2rem;
+
+		&::before, &::after {
+			height: 5rem;
+			width: 5rem;
+			content: '';
+			left: 0;
+			right: 0;
+			margin: auto;
+			border-width: 3px;
+		}
+	}
+
+	&.mod-sidePanel {
+		display: block;
+		text-align: center;
+		position: relative;
+		padding: 8rem 0 0;
+		margin: 0 2rem 2rem;
+		top: 35vh;
+
+		&::before, &::after {
+			height: 5rem;
+			width: 5rem;
+			content: '';
+			left: 0;
+			right: 0;
+			margin: auto;
+			border-width: 3px;
+		}
+	}
+
 	&.mod-invert {
 		color: white;
 
