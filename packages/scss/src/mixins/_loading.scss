@@ -16,7 +16,7 @@
 	}
 
 	&::after {
-		animation: rotating _theme("commons.animations.durations.slow") linear infinite;
+		animation: rotating _component("loading.speed") linear infinite;
 		border: 2px solid _component("loading.frontground");
 		border-color: _component("loading.frontground") transparent transparent transparent;
 		border-radius: 50%;
