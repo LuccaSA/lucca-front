@@ -1,5 +1,10 @@
 # Changelog
 ## In dev
+## 2.3
+### Enhancements
+- `radioButton` add color to theme
+
+## 2.2
 ### New features
 - Adding `gauge` component
 - Adding `radioButtons` component
