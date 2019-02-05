@@ -5,13 +5,17 @@
     "packages/ng/dist"
   ],
   "npmClient": "npm",
-  "version": "2.2.0",
+  "version": "2.3.0-rc.0",
   "command": {
     "publish": {
       "message": "publish %s",
       "forcePublish": "*",
       "ignoreChanges": "packages/ng/dist/**",
-      "preid": "rc"
+      "preid": "rc",
+      "allowBranch": ["master", "rc"]
+    },
+    "version": {
+      "allowBranch": ["master", "rc"]
     }
   }
 }

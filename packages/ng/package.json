@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng-internal",
-  "version": "2.2.0",
+  "version": "2.3.0-rc.0",
   "description": "a library of usefull components for angular web app",
   "repository": {
     "type": "git",
