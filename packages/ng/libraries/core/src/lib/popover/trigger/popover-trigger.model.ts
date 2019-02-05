@@ -25,6 +25,9 @@ import { Subscription } from 'rxjs';
 import {
 	ILuPopoverPanel,
 	LuPopoverPosition,
+	LuPopoverTriggerEvent,
+	LuPopoverAlignment,
+	LuPopoverScrollStrategy,
 } from '../panel/popover-panel.model';
 import {
 	ILuPopoverTarget,
@@ -53,6 +56,14 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 
 	/** References the popover instance that the trigger is associated with. */
 	popover: T;
+	position: LuPopoverPosition = 'above';
+	alignment: LuPopoverAlignment;
+	scrollStrategy: LuPopoverScrollStrategy = 'close';
+	containerPositioning: boolean;
+	overlapTrigger: boolean;
+	triggerEvent: LuPopoverTriggerEvent = 'click';
+	targetOffsetX: number;
+	targetOffsetY: number;
 
 	/** References the popover target instance that the trigger is associated with. */
 	targetElement: ILuPopoverTarget;
@@ -191,8 +202,9 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 
 	/** Return if the popover main positionning is vertical */
 	get isVerticallyPositionned(): boolean {
+		const position = this.popover ? this.popover.position : this.position;
 		return (
-			this.popover.position === 'below' || this.popover.position === 'above'
+			position === 'below' || position === 'above'
 		);
 	}
 
@@ -280,15 +292,16 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	protected _getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
 		overlayState.positionStrategy = this._getPosition().withDirection(this.dir);
-
+		const triggerEvent = this.popover ? this.popover.triggerEvent : this.triggerEvent;
 		/** Display overlay backdrop if trigger event is click */
-		if (this.popover.triggerEvent === 'click') {
+		if (triggerEvent === 'click') {
 			overlayState.hasBackdrop = true;
 			overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
 		}
 
 		overlayState.direction = this.dir;
-		switch (this.popover.scrollStrategy) {
+		const scrollStrategy = this.popover ? this.popover.scrollStrategy : this.scrollStrategy;
+		switch (scrollStrategy) {
 			case 'block':
 				overlayState.scrollStrategy = this._overlay.scrollStrategies.block();
 				break;
@@ -315,7 +328,6 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
 			const posY: LuPopoverPosition =
 				change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
-
 			this.popover.setPositionClassesChanges(posX, posY);
 		});
 	}
@@ -326,38 +338,42 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	 * @returns ConnectedPositionStrategy
 	 */
 	protected _getPosition(): ConnectedPositionStrategy {
-		const position: OriginConnectionPosition = {
+		const connectionPosition: OriginConnectionPosition = {
 			originX: 'start',
 			originY: 'top',
 		};
 
 		// Position
-		if (this.popover.position === 'above') {
-			position.originY = this.popover.overlapTrigger ? 'bottom' : 'top';
-		} else if (this.popover.position === 'below') {
-			position.originY = this.popover.overlapTrigger ? 'top' : 'bottom';
-		} else if (this.popover.position === 'before') {
-			position.originX = this.popover.overlapTrigger ? 'end' : 'start';
-		} else if (this.popover.position === 'after') {
-			position.originX = this.popover.overlapTrigger ? 'start' : 'end';
+		const position = this.popover ? this.popover.position : this.position;
+		const popoverOverlapTrigger = this.popover ? this.popover.overlapTrigger : false;
+		const overlapTrigger = popoverOverlapTrigger || this.overlapTrigger;
+		if (position === 'above') {
+			connectionPosition.originY = overlapTrigger ? 'bottom' : 'top';
+		} else if (position === 'below') {
+			connectionPosition.originY = overlapTrigger ? 'top' : 'bottom';
+		} else if (position === 'before') {
+			connectionPosition.originX = overlapTrigger ? 'end' : 'start';
+		} else if (position === 'after') {
+			connectionPosition.originX = overlapTrigger ? 'start' : 'end';
 		}
 
 		// Alignment
+		const alignment = this.popover ? this.popover.alignment : this.alignment;
 		if (this.isVerticallyPositionned) {
-			if (this.popover.alignment === 'left') {
-				position.originX = 'start';
-			} else if (this.popover.alignment === 'right') {
-				position.originX = 'end';
+			if (alignment === 'left') {
+				connectionPosition.originX = 'start';
+			} else if (alignment === 'right') {
+				connectionPosition.originX = 'end';
 			} else {
-				position.originX = 'center';
+				connectionPosition.originX = 'center';
 			}
 		} else {
-			if (this.popover.alignment === 'top') {
-				position.originY = 'top';
-			} else if (this.popover.alignment === 'bottom') {
-				position.originY = 'bottom';
+			if (alignment === 'top') {
+				connectionPosition.originY = 'top';
+			} else if (alignment === 'bottom') {
+				connectionPosition.originY = 'bottom';
 			} else {
-				position.originY = 'center';
+				connectionPosition.originY = 'center';
 			}
 		}
 
@@ -366,44 +382,47 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 			overlayY: 'top',
 		};
 
-		if (this.popover.overlapTrigger) {
-			overlayPosition.overlayX = position.originX;
-			overlayPosition.overlayY = position.originY;
+		if (overlapTrigger) {
+			overlayPosition.overlayX = connectionPosition.originX;
+			overlayPosition.overlayY = connectionPosition.originY;
 		} else if (this.isVerticallyPositionned) {
-			overlayPosition.overlayX = position.originX;
+			overlayPosition.overlayX = connectionPosition.originX;
 			overlayPosition.overlayY =
-				this.popover.position === 'above' ? 'bottom' : 'top';
+				position === 'above' ? 'bottom' : 'top';
 		} else {
 			overlayPosition.overlayX =
-				this.popover.position === 'before' ? 'end' : 'start';
-			overlayPosition.overlayY = position.originY;
+				position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayY = connectionPosition.originY;
 		}
 
 		let offsetX = 0;
 		let offsetY = 0;
 
+		const targetOffsetX = this.popover ? this.popover.targetOffsetX : this.targetOffsetX;
+		const targetOffsetY = this.popover ? this.popover.targetOffsetY : this.targetOffsetY;
+
 		if (
-			this.popover.overlapTrigger &&
+			overlapTrigger &&
 			!this.isVerticallyPositionned &&
-			this.popover.targetOffsetX &&
-			!isNaN(Number(this.popover.targetOffsetX))
+			targetOffsetX &&
+			!isNaN(Number(targetOffsetX))
 		) {
 			if (overlayPosition.overlayX === 'end') {
-				offsetX = -Number(this.popover.targetOffsetX);
+				offsetX = -Number(targetOffsetX);
 			} else if (overlayPosition.overlayX === 'start') {
-				offsetX = Number(this.popover.targetOffsetX);
+				offsetX = Number(targetOffsetX);
 			}
 		}
 
 		if (
 			this.isVerticallyPositionned &&
-			this.popover.targetOffsetY &&
-			!isNaN(Number(this.popover.targetOffsetY))
+			targetOffsetY &&
+			!isNaN(Number(targetOffsetY))
 		) {
 			if (overlayPosition.overlayY === 'top') {
-				offsetY = Number(this.popover.targetOffsetY);
+				offsetY = Number(targetOffsetY);
 			} else if (overlayPosition.overlayY === 'bottom') {
-				offsetY = -Number(this.popover.targetOffsetY);
+				offsetY = -Number(targetOffsetY);
 			}
 		}
 
@@ -413,7 +432,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 		 * If undefined defaults to the trigger element reference.
 		 */
 		let element = this._elementRef;
-		if (typeof this.targetElement !== 'undefined') {
+		if (typeof this.targetElement !== 'undefined' && this.popover) {
 			this.popover.containerPositioning = true;
 			element = this.targetElement._elementRef;
 		}
@@ -424,11 +443,11 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 
 		return this._overlay
 			.position()
-			.connectedTo(element, position, overlayPosition)
+			.connectedTo(element, connectionPosition, overlayPosition)
 			.withFallbackPosition(
 				{
-					originX: position.originX,
-					originY: this._invertVerticalPos(position.originY),
+					originX: connectionPosition.originX,
+					originY: this._invertVerticalPos(connectionPosition.originY),
 				},
 				{
 					overlayX: overlayPosition.overlayX,
@@ -437,8 +456,8 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 			)
 			.withFallbackPosition(
 				{
-					originX: this._invertHorizontalPos(position.originX),
-					originY: position.originY,
+					originX: this._invertHorizontalPos(connectionPosition.originX),
+					originY: connectionPosition.originY,
 				},
 				{
 					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
@@ -447,8 +466,8 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 			)
 			.withFallbackPosition(
 				{
-					originX: this._invertHorizontalPos(position.originX),
-					originY: this._invertVerticalPos(position.originY),
+					originX: this._invertHorizontalPos(connectionPosition.originX),
+					originY: this._invertVerticalPos(connectionPosition.originY),
 				},
 				{
 					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
