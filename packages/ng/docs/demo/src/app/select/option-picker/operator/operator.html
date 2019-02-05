@@ -11,7 +11,7 @@
 					<!-- adds paging to the results to not break your DOM -->
 					<lu-option-pager></lu-option-pager>
 					<!-- specify the template to display each color -->
-					<lu-option *luForOptions="let color" [value]="color">{{color.name}}</lu-option>
+					<lu-option *luForOptions="let color; trackBy: trackBy" [value]="color">{{color.name}}</lu-option>
 				</lu-option-picker>
 			</lu-select>
 			<label class="textfield-label" for="itemOptions">my label</label>
