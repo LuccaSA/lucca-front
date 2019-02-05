@@ -133,12 +133,15 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	get highlightIndex() { return this._highlightIndex; }
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
-		this._applyHighlight();
+		this._applyHighlight(true);
 	}
 	protected _initHighlight() {
 		this._subs.add(this.optionsQLVR.changes.subscribe(options => {
 			const optionCount = options.toArray().length;
-			this.highlightIndex = Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
+			const newHighlight =  Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
+			if (newHighlight !== this.highlightIndex) {
+				this.highlightIndex = newHighlight;
+			}
 		}));
 		setTimeout(() => {
 			this.highlightIndex = -1;
@@ -151,7 +154,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	protected _decrHighlight() {
 		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
 	}
-	protected _applyHighlight() {
+	protected _applyHighlight(reScroll = false) {
 		if (!this.isOpen) { return; }
 		const highlightClass = 'is-highlighted';
 		const options = this.optionsQLVR.toArray();
@@ -162,9 +165,11 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		if (!!highlightedOption) {
 			this._renderer.addClass(highlightedOption.element.nativeElement, highlightClass);
 			// scroll to let the highlighted option visible
-			setTimeout(() => {
-				this._scrollToHighlight(highlightedOption.element.nativeElement);
-			}, 1);
+			if (reScroll) {
+				setTimeout(() => {
+					this._scrollToHighlight(highlightedOption.element.nativeElement);
+				}, 1);
+			}
 		}
 		this._changeDetectorRef.markForCheck();
 	}
