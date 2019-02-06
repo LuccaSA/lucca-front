@@ -1,29 +1,17 @@
+import { NgForOf, NgForOfContext } from '@angular/common';
 import {
-	Directive,
-	TemplateRef,
-	ViewContainerRef,
-	OnDestroy,
-	forwardRef,
 	ChangeDetectorRef,
+	Directive,
+	forwardRef,
+	Input,
+	IterableDiffers,
+	OnDestroy,
+	TemplateRef,
+	TrackByFunction,
+	ViewContainerRef,
 } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
-import { Subscription, Observable } from 'rxjs';
-
-export class LuForOptionsContext<T> {
-	constructor(
-		public $implicit: T,
-		public index: number,
-		public count: number,
-	) {}
-
-	get first(): boolean { return this.index === 0; }
-
-	get last(): boolean { return this.index === this.count - 1; }
-
-	get even(): boolean { return this.index % 2 === 0; }
-
-	get odd(): boolean { return !this.even; }
-}
+import { Observable, Subscription } from 'rxjs';
+import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Directive({
 	selector: '[luForOptions]',
@@ -35,30 +23,31 @@ export class LuForOptionsContext<T> {
 		},
 	],
 })
-export class LuForOptionsDirective<T> implements ILuOptionOperator<T>, OnDestroy {
+export class LuForOptionsDirective<T> extends NgForOf<T>
+	implements ILuOptionOperator<T>, OnDestroy {
 	protected _subs = new Subscription();
 	set inOptions$(options$: Observable<T[]>) {
 		this._subs.add(
-			options$.subscribe(options => this.render(options))
+			options$.subscribe(options => {
+				this.ngForOf = options;
+			}),
 		);
 	}
-
+	@Input()
+	set luForOptionsTrackBy(fn: TrackByFunction<T>) {
+		this.ngForTrackBy = fn;
+	}
 
 	constructor(
-			protected _viewContainer: ViewContainerRef,
-			protected _template: TemplateRef<LuForOptionsContext<T>>,
-			protected _changeDetectorRef: ChangeDetectorRef
-	) {}
-
+		_viewContainer: ViewContainerRef,
+		_template: TemplateRef<NgForOfContext<T>>,
+		_differs: IterableDiffers,
+		protected _changeDetectionRef: ChangeDetectorRef,
+	) {
+		super(_viewContainer, _template, _differs);
+	}
 
 	ngOnDestroy() {
 		this._subs.unsubscribe();
-	}
-	render(options: T[]) {
-		this._viewContainer.clear();
-		const count = options.length;
-		const views = options.map((option, index) => this._template.createEmbeddedView(new LuForOptionsContext(option, index, count)));
-		views.forEach(view => this._viewContainer.insert(view));
-		this._changeDetectorRef.markForCheck();
 	}
 }

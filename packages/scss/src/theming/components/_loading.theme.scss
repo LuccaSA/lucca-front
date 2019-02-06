@@ -1,6 +1,7 @@
 $loading: (
 	background: _theme("commons.background.darker"),
-	frontground: _color("primary")
+	frontground: _color("primary"),
+	speed: 600ms,
 );
 
 $theme: _set($theme, "components.loading", $loading);

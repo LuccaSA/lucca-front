@@ -56,7 +56,7 @@
 		left: 0;
 		right: 100%;
 		height: _component("radioButtons.outlineHeight");
-		background: _color("primary");
+		background: _component("radioButtons.default-palette");
 		transition: all _theme("commons.animations.durations.standard") ease;
 		z-index: 1;
 	}
