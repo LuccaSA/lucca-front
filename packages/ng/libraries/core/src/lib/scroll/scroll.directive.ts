@@ -29,8 +29,10 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);
-		const scrollLeft = $event.srcElement.scrollLeft;
-		const scrollTop = $event.srcElement.scrollTop;
+		
+		const srcElement = $event.srcElement || $event.target as Element;
+		const scrollLeft = srcElement.scrollLeft;
+		const scrollTop = srcElement.scrollTop;
 		if (scrollLeft === 0) {
 			this.onScrollLeft.emit($event);
 		}
