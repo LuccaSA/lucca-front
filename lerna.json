@@ -5,7 +5,7 @@
     "packages/ng/dist"
   ],
   "npmClient": "npm",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "command": {
     "publish": {
       "message": "publish %s",
@@ -16,6 +16,9 @@
     },
     "version": {
       "allowBranch": ["master", "rc"]
+    },
+    "clean": {
+      "ignore": "@lucca-front/ng"
     }
   }
 }
