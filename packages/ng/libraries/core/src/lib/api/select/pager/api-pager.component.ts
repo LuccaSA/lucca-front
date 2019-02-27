@@ -25,7 +25,6 @@ import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 export class LuApiPagerComponent<T extends IApiItem = IApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
 extends ALuApiOptionPager<T, S>
 implements ILuOptionOperator<T>, OnInit {
-	// outOptions$ = new BehaviorSubject<T[]>([]);
 	constructor(
 		@Inject(ALuApiPagerService) @Optional() @SkipSelf() hostService: ALuApiPagerService,
 		@Inject(ALuApiPagerService) @Self() selfService: ALuApiPagerService,

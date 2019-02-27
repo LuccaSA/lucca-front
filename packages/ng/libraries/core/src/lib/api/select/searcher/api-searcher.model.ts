@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, Subject, combineLatest, merge, of } from 'rxjs';
+import { Observable, Subject, combineLatest, merge, of } from 'rxjs';
 
 import {
 	mapTo,
