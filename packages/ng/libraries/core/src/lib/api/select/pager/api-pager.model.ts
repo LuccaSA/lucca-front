@@ -2,7 +2,7 @@ import { ILuOptionOperator } from '../../../option/index';
 import { IApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, merge, Subject } from 'rxjs';
-import { switchMap, catchError, mapTo, tap, debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
+import { switchMap, catchError, mapTo, tap, map, distinctUntilChanged } from 'rxjs/operators';
 import { ALuApiFeederService } from '../feeder/index';
 
 enum Strategy {
