@@ -109,7 +109,7 @@ implements ILuApiOptionPagedSearcher<T> {
 	constructor(service: S) {
 		super(service);
 	}
-	onOpen() {
+	onClose() {
 		this.resetClue();
 		this.resetPage();
 	}

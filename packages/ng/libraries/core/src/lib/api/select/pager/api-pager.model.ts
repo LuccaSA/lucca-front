@@ -2,7 +2,7 @@ import { ILuOptionOperator } from '../../../option/index';
 import { IApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, merge, Subject } from 'rxjs';
-import { switchMap, catchError, mapTo, tap, debounceTime, map } from 'rxjs/operators';
+import { switchMap, catchError, mapTo, tap, map, distinctUntilChanged } from 'rxjs/operators';
 import { ALuApiFeederService } from '../feeder/index';
 
 enum Strategy {
@@ -34,7 +34,7 @@ implements ILuApiOptionPager<T> {
 		this._page$.next(0);
 	}
 	onClose() {
-		this._page$.next(undefined);
+		this._page$.next(0);
 	}
 	onScrollBottom() {
 		if (!this._loading) {
@@ -44,6 +44,7 @@ implements ILuApiOptionPager<T> {
 	protected initObservables() {
 		const _results$: Observable<{ items: T[], strategy: Strategy }> = this._page$
 		.pipe(
+			distinctUntilChanged(),
 			tap(p => this._page = p),
 			switchMap<number, { items: T[], strategy: Strategy }>(page => {
 				if (page === undefined) {
