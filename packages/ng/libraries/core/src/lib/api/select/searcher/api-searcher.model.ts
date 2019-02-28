@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, combineLatest, merge, of } from 'rxjs';
+import { Observable, Subject, combineLatest, merge, of } from 'rxjs';
 
 import {
 	mapTo,
@@ -23,10 +23,9 @@ export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends IL
 
 export abstract class ALuApiOptionSearcher<T extends IApiItem = IApiItem, S extends ILuApiSearcherService<T> = ILuApiSearcherService<T>>
 implements ILuApiOptionFeeder<T> {
-	outOptions$ = new BehaviorSubject<T[]>([]);
+	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 
-	protected _results$: Observable<T[]>;
 	protected _clue$: Observable<string>;
 
 	set clue$(clue$: Observable<string>) {
@@ -38,17 +37,17 @@ implements ILuApiOptionFeeder<T> {
 	}
 	protected initObservables(clue$) {
 		this._clue$ = clue$.pipe(share());
-		this._results$ = this._clue$
+		const results$ = this._clue$
 		.pipe(
 			switchMap(clue => this._service.searchAll(clue)),
 			catchError(err => of([])),
 			share(),
 		);
 
-		this._results$.subscribe(items => this.outOptions$.next(items));
+		results$.subscribe(items => this.outOptions$.next(items));
 		this.loading$ = merge(
 			this._clue$.pipe(mapTo(true)),
-			this._results$.pipe(mapTo(false)),
+			results$.pipe(mapTo(false)),
 		);
 	}
 	abstract resetClue();
@@ -100,10 +99,12 @@ implements ILuApiPagedSearcherService<T> {
 export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem, S extends ILuApiPagedSearcherService<T> = ILuApiPagedSearcherService<T>>
 extends ALuApiOptionSearcher<T, S>
 implements ILuApiOptionPagedSearcher<T> {
-	outOptions$ = new BehaviorSubject<T[]>([]);
+	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 	protected _loading = false;
-	protected _page$ = new BehaviorSubject<number>(undefined);
+	protected _page$ = new Subject<number>();
+	protected _page: number;
+	protected _options: T[] = [];
 
 	constructor(service: S) {
 		super(service);
@@ -114,18 +115,18 @@ implements ILuApiOptionPagedSearcher<T> {
 	}
 	onScrollBottom() {
 		if (!this._loading) {
-			this._page$.next(this._page$.value + 1);
+			this._page$.next(this._page + 1);
 		}
 	}
 	protected initObservables(clue$) {
-		const distinctPage$ = this._page$.pipe(distinctUntilChanged());
+		const distinctPage$ = this._page$.pipe(distinctUntilChanged(), tap(p => this._page = p));
 
 		this._clue$ = clue$.pipe(
 			tap(() => this._page$.next(0)),
 			distinctUntilChanged(),
 			share()
 		);
-		this._results$ = combineLatest(
+		const results$ = combineLatest(
 			distinctPage$,
 			this._clue$,
 		).pipe(
@@ -134,18 +135,19 @@ implements ILuApiOptionPagedSearcher<T> {
 			share(),
 		);
 
-		this._results$
+		results$
 		.pipe(withLatestFrom(distinctPage$))
 		.subscribe(([items, page]) => {
 			if (page === 0) {
-				this.outOptions$.next([...items]);
+				this._options = [...items];
 			} else {
-				this.outOptions$.next([...this.outOptions$.value, ...items]);
+				this._options.push(...items);
 			}
+			this.outOptions$.next([...this._options]);
 		});
 		this.loading$ = merge(
 			this._clue$.pipe(mapTo(true)),
-			this._results$.pipe(mapTo(false)),
+			results$.pipe(mapTo(false)),
 		);
 		this.loading$.subscribe(l => this._loading = l);
 	}
