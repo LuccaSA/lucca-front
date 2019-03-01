@@ -181,6 +181,7 @@ var mappings = {
     {'iconName':'sprout', 'char': '\e9b8'},
     {'iconName':'distribute', 'char': '\e9b9'},
     {'iconName':'reply', 'char': '\e9ba'},
-    {'iconName':'evolution', 'char': '\e9bb'}
+    {'iconName':'evolution', 'char': '\e9bb'},
+    {'iconName':'puzzle', 'char': '\e9bc'}
   ]
 }
