@@ -246,6 +246,13 @@
 	border-radius: 3px;
 }
 
+.demo-white {
+	background: #F7F7F7;
+	display: inline-block;
+	padding: .5rem 1rem;
+	border-radius: 3px;
+}
+
 .fake-banner {
 	position: fixed;
 	top: 0;
