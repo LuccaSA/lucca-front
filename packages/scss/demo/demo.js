@@ -174,6 +174,7 @@ function generateIconDemo() {
 		'flash',
 		'light_bulb',
 		'book',
+		'puzzle',
 
 		'refresh',
 		'history',
