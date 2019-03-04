@@ -8,6 +8,10 @@
 		border-radius: _theme("commons.border.radius");
 		color: _component("tooltip.color", true);
 		color: _component("tooltip.color");
+		font-size: _theme("sizes.small.font-size");
+		line-height: _theme("sizes.small.line-height");
+		max-width: _component("tooltip.max-width", true);
+		max-width: _component("tooltip.max-width");
 		padding: _component("tooltip.padding", true);
 		padding: _component("tooltip.padding");
 
