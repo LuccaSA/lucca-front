@@ -5,8 +5,8 @@
     "@angular/core": "^7.0.0",
     "@angular/cdk": "^7.0.0",
     "@angular/material": "^7.0.0",
-    "@lucca-front/icons": "^2.3.0",
-    "@lucca-front/scss": "^2.3.0",
+    "@lucca-front/icons": "^2.4.0 || 2.4.0-rc.0",
+    "@lucca-front/scss": "^2.4.0 || 2.4.0-rc.0",
     "rxjs": "^6.3.0"
   },
   "script": {}
