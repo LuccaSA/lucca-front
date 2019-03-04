@@ -34,7 +34,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.0",
     "gulp-stylelint": "^8.0.0",
-    "stylelint": "^9.6.0"
+    "stylelint": "^9.10.1"
   },
   "dependencies": {
     "@lucca-front/icons": "2.3.5"
