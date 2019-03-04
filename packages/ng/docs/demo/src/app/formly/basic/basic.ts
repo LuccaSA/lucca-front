@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-
+import * as moment from 'moment';
 @Component({
 	selector: 'demo-formly-basic',
 	templateUrl: './basic.html',
@@ -47,6 +47,8 @@ export class BasicComponent {
 			type: 'date',
 			templateOptions: {
 				label: 'birthDate - date',
+				max: moment(),
+				min: moment().add(-10, 'years'),
 			},
 		},
 		{
