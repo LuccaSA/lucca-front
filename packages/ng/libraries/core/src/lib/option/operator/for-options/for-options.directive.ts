@@ -30,6 +30,7 @@ export class LuForOptionsDirective<T> extends NgForOf<T>
 		this._subs.add(
 			options$.subscribe(options => {
 				this.ngForOf = options;
+				this._changeDetectionRef.markForCheck();
 			}),
 		);
 	}

@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, Inject, Optional, SkipSelf, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, Inject, Optional, SkipSelf, Self, OnInit } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
-import { BehaviorSubject } from 'rxjs';
 import { LuApiPagerService } from './api-pager.service';
 import { IApiItem } from '../../api.model';
 import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
@@ -24,8 +23,7 @@ import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 })
 export class LuApiPagerComponent<T extends IApiItem = IApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
 extends ALuApiOptionPager<T, S>
-implements ILuOptionOperator<T> {
-	outOptions$ = new BehaviorSubject<T[]>([]);
+implements ILuOptionOperator<T>, OnInit {
 	constructor(
 		@Inject(ALuApiPagerService) @Optional() @SkipSelf() hostService: ALuApiPagerService,
 		@Inject(ALuApiPagerService) @Self() selfService: ALuApiPagerService,
@@ -43,4 +41,7 @@ implements ILuOptionOperator<T> {
 	 * if you wnat to cast dates into moments for example
 	 */
 	@Input() set transformFn(transformFn: (item: any) => T) { this._service.transformFn = transformFn; }
+	ngOnInit() {
+		super.init();
+	}
 }

@@ -1,10 +1,14 @@
 import { ILuOptionOperator } from '../../../option/index';
 import { IApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of, merge } from 'rxjs';
-import { switchMap, catchError, mapTo } from 'rxjs/operators';
+import { Observable, of, merge, Subject } from 'rxjs';
+import { switchMap, catchError, mapTo, tap, map, distinctUntilChanged } from 'rxjs/operators';
 import { ALuApiFeederService } from '../feeder/index';
 
+enum Strategy {
+	append,
+	replace,
+}
 const MAGIC_PAGE_SIZE = 20;
 export interface ILuApiOptionPager<T extends IApiItem = IApiItem> extends ILuOptionOperator<T> {}
 export interface ILuApiPagerService<T extends IApiItem = IApiItem> {
@@ -13,48 +17,57 @@ export interface ILuApiPagerService<T extends IApiItem = IApiItem> {
 
 export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem, S extends ILuApiPagerService<T> = ILuApiPagerService<T>>
 implements ILuApiOptionPager<T> {
-	outOptions$ = new BehaviorSubject<T[]>([]);
+	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 
 	protected _loading = false;
-	protected _results$: Observable<T[]>;
-	protected _page$ = new BehaviorSubject<number>(undefined);
+	protected _results$: Observable<{ items: T[], strategy: Strategy }>;
+	protected _options: T[] = [];
+	protected _page$ = new Subject<number>();
+	protected _page: number;
 	constructor(protected _service: S) {
+	}
+	protected init() {
 		this.initObservables();
 	}
 	onOpen() {
 		this._page$.next(0);
 	}
 	onClose() {
-		this._page$.next(undefined);
+		this._page$.next(0);
 	}
 	onScrollBottom() {
 		if (!this._loading) {
-			this._page$.next(this._page$.value + 1);
+			this._page$.next(this._page + 1);
 		}
 	}
 	protected initObservables() {
-		this._results$ = this._page$
+		const _results$: Observable<{ items: T[], strategy: Strategy }> = this._page$
 		.pipe(
-			switchMap(page => {
+			distinctUntilChanged(),
+			tap(p => this._page = p),
+			switchMap<number, { items: T[], strategy: Strategy }>(page => {
 				if (page === undefined) {
-					return of([]);
+					return of({ items: [], strategy: Strategy.replace });
 				}
-				return this._service.getPaged(page);
-			})),
-			catchError(err => of([])
+				return this._service.getPaged(page).pipe(
+					map(items => ({ items: items, strategy: page === 0 ? Strategy.replace : Strategy.append }))
+				);
+			}),
+			catchError(err => of({ items: [], strategy: Strategy.replace })),
+			tap(results => {
+				if (results.strategy === Strategy.replace) {
+					this._options = [...results.items];
+				} else {
+					this._options.push(...results.items);
+				}
+				this.outOptions$.next([...this._options]);
+			}),
 		);
 
-		this._results$.subscribe(items => {
-			if (this._page$.value === 0) {
-				this.outOptions$.next([...items]);
-			} else {
-				this.outOptions$.next([...this.outOptions$.value, ...items]);
-			}
-		});
 		this.loading$ = merge(
 			this._page$.pipe(mapTo(true)),
-			this._results$.pipe(mapTo(false)),
+			_results$.pipe(mapTo(false)),
 		);
 		this.loading$.subscribe(l => this._loading = l);
 	}
