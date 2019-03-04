@@ -174,7 +174,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		this._changeDetectorRef.markForCheck();
 	}
 	protected _scrollToHighlight(targetElt: HTMLElement) {
+		if (!targetElt) { return; }
 		const contentElt = document.querySelector('.lu-popover-content') as HTMLElement;
+		if (!contentElt) { return; }
 		const contentFixedElt = document.querySelector('.lu-popover-content .position-fixed') as HTMLElement;
 		const offsetTop = contentFixedElt ? contentFixedElt.offsetHeight : 0;
 		// highlighted option is too high
