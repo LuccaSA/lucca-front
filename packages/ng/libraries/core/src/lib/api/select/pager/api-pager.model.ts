@@ -46,7 +46,7 @@ implements ILuApiOptionPager<T> {
 		.pipe(
 			distinctUntilChanged(),
 			tap(p => this._page = p),
-			switchMap<number, { items: T[], strategy: Strategy }>(page => {
+			switchMap(page => {
 				if (page === undefined) {
 					return of({ items: [], strategy: Strategy.replace });
 				}

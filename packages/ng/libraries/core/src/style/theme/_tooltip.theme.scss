@@ -1,6 +1,7 @@
 $tooltip: (
-	background: _color("primary", "dark"),
-	color: _color("primary", "text"),
-	padding: 0.1rem .75rem,
+	background: #666,
+	color: white,
+	padding: .25rem .5rem,
+	max-width: 15rem
 );
 $theme: _set($theme, 'components.tooltip', $tooltip);

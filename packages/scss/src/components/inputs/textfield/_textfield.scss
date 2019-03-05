@@ -148,6 +148,22 @@
 		}
 	}
 
+	&.mod-white {
+		.textfield-input {
+			background: white;
+
+			&::placeholder {
+				color: _component("textfield.focus.placeholder");
+			}
+
+			&:focus {
+				&::placeholder {
+					color: _component("textfield.focus.placeholder");
+				}
+			}
+		}
+	}
+
 	&.mod-invert {
 		.textfield-input {
 			background: white;
