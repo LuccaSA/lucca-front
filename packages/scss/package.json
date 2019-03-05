@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/scss",
-  "version": "2.4.0-rc.0",
+  "version": "2.4.0",
   "description": "a scss-framework based on trello's css naming",
   "main": "src/main.scss",
   "scripts": {
@@ -37,6 +37,6 @@
     "stylelint": "^9.10.1"
   },
   "dependencies": {
-    "@lucca-front/icons": "2.4.0-rc.0"
+    "@lucca-front/icons": "2.4.0"
   }
 }

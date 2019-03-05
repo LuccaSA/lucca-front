@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "version": "2.4.0-rc.0",
+  "version": "2.4.0",
   "description": "a library of usefull components for web developpement",
   "repository": {
     "type": "git",
@@ -26,7 +26,8 @@
     "format": "npm run format-ng && npm run format-scss && npm run format-icons",
     "format-ng": "prettier --config ./.prettierrc --write \"packages/ng/{src,demo}/**/*.{ts}\"",
     "precommit": "lint-staged",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "ls": "lerna ls -a -l"
   },
   "lint-staged": {
     "gitDir": "./",
