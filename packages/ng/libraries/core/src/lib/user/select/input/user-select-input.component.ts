@@ -50,6 +50,11 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	}
 	searchFormat = LuDisplayFullname.lastfirst;
 	@HostBinding('tabindex') tabindex = 0;
+	@HostBinding('class.mod-multiple')
+	get modMultiple() { return this._multiple; }
+	@HostBinding('class.mod-multipleView')
+	get modMultipleView() { return this.useMultipleViews(); }
+
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
