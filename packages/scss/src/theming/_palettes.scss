@@ -1,23 +1,23 @@
 $palettes: (
 	"primary": (
-		"color": #FFB900,
-		"text": #444444,
-		"dark": darken(#FFB900, 7%),
-		"darker": darken(#FFB900, 20%),
-		"light": lighten(#FFB900, 10%),
-		"lighter": lighten(#FFB900, 20%),
-		"lightest": lighten(#FFB900, 45%),
-		"see-through": rgba(#FFB900, .15)
+		"color": #888888,
+		"text": #FFFFFF,
+		"dark": darken(#888888, 7%),
+		"darker": darken(#888888, 20%),
+		"light": lighten(#888888, 7%),
+		"lighter": lighten(#888888, 15%),
+		"lightest": lighten(#888888, 42%),
+		"see-through": rgba(#888888, .15)
 	),
 	"secondary": (
-		"color": #FF6600,
+		"color": #888888,
 		"text": #FFFFFF,
-		"dark": darken(#FF6600, 5%),
-		"darker": darken(#FF6600, 20%),
-		"light": lighten(#FF6600, 10%),
-		"lighter": lighten(#FF6600, 20%),
-		"lightest": lighten(#FF6600, 45%),
-		"see-through": rgba(#FF6600, .15)
+		"dark": darken(#888888, 5%),
+		"darker": darken(#888888, 15%),
+		"light": lighten(#888888, 7%),
+		"lighter": lighten(#888888, 20%),
+		"lightest": lighten(#888888, 42%),
+		"see-through": rgba(#888888, .15)
 	),
 	"success": (
 		"color": #9ACD32,
@@ -60,10 +60,10 @@ $colors: (
 			color: #666666
 		),
 		light: (
-			color: desaturate(lighten(#FFB900, 15%), 95%)
+			color: #999999
 		),
 		placeholder: (
-			color: desaturate(lighten(#FFB900, 25%), 70%)
+			color: #CCCCCC
 		)
 	),
 );
