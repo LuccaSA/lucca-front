@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 0;
 	width: _component("navSide.width");
-	z-index: 2;
+	z-index: 100;
 }
 
 // NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS

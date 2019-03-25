@@ -28,7 +28,11 @@
 .filters {
 	&.mod-sticky {
 		position: sticky;
-		top: _theme("commons.banner-height");
+		top: 0;
+
+		@include media_smaller_than("md") {
+			top: _component("navSide.mobile.toggle-height");
+		}
 	}
 }
 

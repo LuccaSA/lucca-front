@@ -19,7 +19,6 @@
 @include media_smaller_than("md") {
 	.main-content {
 		margin-left: 0 !important;
-		overflow-x: hidden;
 	}
 
 	// MOD TO BE ADDED TO .MAIN WHEN THE MENU IS TOGGLED
