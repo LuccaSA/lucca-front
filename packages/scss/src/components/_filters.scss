@@ -3,6 +3,7 @@
 	align-items: center;
 	background: _component("filters.background");
 	display: flex;
+	min-height: _component("filters.height");
 	position: relative;
 	z-index: 1;
 }
