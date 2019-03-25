@@ -1,0 +1,93 @@
+.tableOfContent {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	position: sticky;
+}
+
+.tableOfContent-item {
+	border-radius: _theme("commons.border.radius");
+	color: _color("text.light");
+	cursor: pointer;
+	display: block;
+	outline: none;
+	padding: _component("tableOfContent.item.padding");
+	position: relative;
+	transition: all _theme("commons.animations.durations.standard") ease;
+	text-decoration: none;
+
+	&:hover {
+		background: white;
+		color: _component("tableOfContent.default-palette");
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: _component("tableOfContent.item.border-width");
+		background: _component("tableOfContent.default-palette");
+		transform: scaleY(0);
+		opacity: 0;
+		transition: all _theme("commons.animations.durations.fast") ease;
+	}
+}
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.tableOfContent {
+	&.mod-grey {
+		.tableOfContent-item {
+			&:hover {
+				background: _theme("commons.background.base");
+			}
+		}
+	}
+}
+
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+@mixin tableOfContentColoring($palette) {
+	.tableOfContent-item {
+		&:hover {
+			color: _color($palette);
+		}
+
+		&::before {
+			background: _color($palette);
+		}
+	}
+}
+
+.tableOfContent {
+	// default color
+	@include tableOfContentColoring("tableOfContent.default-palette");
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			@include tableOfContentColoring($name);
+		}
+	}
+}
+
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.tableOfContent-item {
+	&.is-active {
+		color: _component("tableOfContent.default-palette");
+
+		&::before {
+			opacity: 1;
+			transform: scaleY(1);
+		}
+	}
+}
