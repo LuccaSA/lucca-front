@@ -18,7 +18,7 @@
 
 	&:hover {
 		background: white;
-		color: _component("tableOfContent.default-palette");
+		color: _component("tableOfContent.default-palette.color");
 	}
 
 	&::before {
@@ -28,7 +28,7 @@
 		left: 0;
 		bottom: 0;
 		width: _component("tableOfContent.item.border-width");
-		background: _component("tableOfContent.default-palette");
+		background: _component("tableOfContent.default-palette.color");
 		transform: scaleY(0);
 		opacity: 0;
 		transition: all _theme("commons.animations.durations.fast") ease;
@@ -83,7 +83,7 @@
 
 .tableOfContent-item {
 	&.is-active {
-		color: _component("tableOfContent.default-palette");
+		color: _component("tableOfContent.default-palette.color");
 
 		&::before {
 			opacity: 1;
