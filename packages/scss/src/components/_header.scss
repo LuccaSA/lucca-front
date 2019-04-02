@@ -3,9 +3,10 @@
 	align-items: center;
 	background: _component("header.background");
 	display: flex;
+	min-height: _component("header.height");
 	padding: _component("header.padding");
 	position: relative;
-	z-index: 1;
+	z-index: 99;
 }
 
 .header-contentLeft {
@@ -21,9 +22,9 @@
 	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
-	height: 4rem;
+	height: _component("header.height");
 	justify-content: center;
-	padding-left: 5rem;
+	padding-left: calc(#{_component("header.height")} + 1rem);
 	position: relative;
 }
 
@@ -32,15 +33,15 @@
 	color: _color("text.light");
 	display: block;
 	font-size: 1.3rem;
-	height: 4rem;
+	height: _component("header.height");
 	left: 0;
-	line-height: 4rem;
+	line-height: _component("header.height");
 	position: absolute;
 	text-align: center;
 	text-decoration: none;
 	top: 0;
 	transition: all _theme("commons.animations.durations.fast") ease;
-	width: 4rem;
+	width: _component("header.height");
 
 	&:hover {
 		background: _theme("commons.background.base");
@@ -70,7 +71,11 @@
 .header {
 	&.mod-sticky {
 		position: sticky;
-		top: _theme("commons.banner-height");
+		top: 0;
+
+		@include media_smaller_than("md") {
+			top: _component("navSide.mobile.toggle-height");
+		}
 	}
 
 	&.mod-nav {

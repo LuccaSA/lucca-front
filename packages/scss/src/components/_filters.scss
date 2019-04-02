@@ -3,8 +3,9 @@
 	align-items: center;
 	background: _component("filters.background");
 	display: flex;
+	min-height: _component("filters.height");
 	position: relative;
-	z-index: 1;
+	z-index: 99;
 }
 
 .filters-sectionLeft {
@@ -27,7 +28,11 @@
 .filters {
 	&.mod-sticky {
 		position: sticky;
-		top: _theme("commons.banner-height");
+		top: 0;
+
+		@include media_smaller_than("md") {
+			top: _component("navSide.mobile.toggle-height");
+		}
 	}
 }
 
