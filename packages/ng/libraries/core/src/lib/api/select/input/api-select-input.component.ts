@@ -44,6 +44,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 		this.displayContainer = vcr;
 	}
 	@HostBinding('tabindex') tabindex = 0;
+	@HostBinding('class.mod-multiple')
+	get modMultiple() { return this._multiple; }
+	@HostBinding('class.mod-multipleView')
+	get modMultipleView() { return this.useMultipleViews(); }
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 
 	@Input() set api(api: string) { this._service.api = api; }

@@ -1,5 +1,5 @@
 $textfield: (
-	background: lighten(_color("primary", "color", true), 43%),
+	background: lighten(_color("primary", "color", true), 42%),
 	border-radius: .2rem,
 
 	input: (
@@ -9,7 +9,7 @@ $textfield: (
 	),
 
 	hover: (
-		background: lighten(_color("primary", "color", true), 40%)
+		background: lighten(_color("primary", "color", true), 39%)
 	),
 
 	focus: (
