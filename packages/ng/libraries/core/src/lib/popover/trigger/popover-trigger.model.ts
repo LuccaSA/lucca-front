@@ -300,6 +300,7 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 		}
 
 		overlayState.direction = this.dir;
+		overlayState.panelClass = this.popover.overlayPaneClass;
 		const scrollStrategy = this.popover ? this.popover.scrollStrategy : this.scrollStrategy;
 		switch (scrollStrategy) {
 			case 'block':

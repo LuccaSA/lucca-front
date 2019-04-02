@@ -48,11 +48,25 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	set inputOverlapTrigger(v: boolean) {
 		this.overlapTrigger = v;
 	}
+
+	/**
+	 * Add classes to the overlay pane.
+	 * @param classes list or single class name
+	 */
+	@Input('overlayPaneClass')
+	set inputOverlayPaneClass(classes: string | string[]) {
+		this.overlayPaneClass = [
+			...this._defaultOverlayPaneClasses,
+			...(Array.isArray(classes) ? classes : [classes])
+		];
+	}
+
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
+	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
 
 	constructor(
 		protected _vcr: ViewContainerRef,
@@ -61,6 +75,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		super();
 		this.triggerEvent = 'click';
 		this._isOptionItemsInitialized = false;
+		this.overlayPaneClass = this._defaultOverlayPaneClasses;
 	}
 	protected _options: ILuOptionItem<T>[] = [];
 	protected _optionsQL: QueryList<ILuOptionItem<T>>;
