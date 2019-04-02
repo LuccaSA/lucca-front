@@ -251,7 +251,7 @@
 	&[disabled], &[readonly], &.is-disabled, &.is-readonly {
 		background: _theme("commons.disabled.background");
 		color: _theme("commons.disabled.color");
-		pointer-events: none;
+		pointer-events: not-allowed;
 
 		&::placeholder {
 			color: _theme("commons.disabled.placeholder");
