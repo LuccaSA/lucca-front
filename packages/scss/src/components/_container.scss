@@ -50,7 +50,7 @@
 	}
 }
 
-.navSide.mod-compact ~ .main-content {
+.navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
 	.container {
 		@each $bp-name, $bp-obj in $breakpoints {
 			@include media_larger_than($bp-name) {
