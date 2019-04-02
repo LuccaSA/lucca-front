@@ -65,3 +65,17 @@
 	text-transform: none;
 	width: 1px;
 }
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.cdk-overlay-pane {
+
+	/* Option picker */
+
+  &.mod-optionPicker {
+		width: auto !important;
+    min-width: 13rem;
+		max-width: 30rem;
+  }
+}
