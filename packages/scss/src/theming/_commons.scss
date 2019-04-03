@@ -45,6 +45,10 @@ $commons: (
 		elevation-4: unquote("0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"),
 		elevation-5: unquote("0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)")
 	),
+	overlays: (
+		background: #555555,
+		text: #FFFFFF
+	),
 	banner-height: 50px,
 	transition: unquote("all 150ms ease")
 );

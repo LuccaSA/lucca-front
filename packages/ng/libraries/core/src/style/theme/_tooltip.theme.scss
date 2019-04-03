@@ -1,6 +1,6 @@
 $tooltip: (
-	background: #666,
-	color: white,
+	background: _theme("commons.overlays.background"),
+	color: _theme("commons.overlays.text"),
 	padding: .25rem .5rem,
 	max-width: 15rem
 );

@@ -40,10 +40,10 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 
 	protected _template: TemplateRef<any>;
 	/** Template to Use for the popover */
-	@Input()
 	get template(): TemplateRef<any> {
 		return this._template;
 	}
+	@Input()
 	set template(value: TemplateRef<any>) {
 		this._template = value;
 	}
@@ -137,6 +137,17 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 					obj[className] = true;
 					return obj;
 				}, {});
+		}
+	}
+
+	/**
+	 * Add classes to the overlay pane.
+	 * @param classes list or single class name
+	 */
+	@Input('overlayPaneClass')
+	set overlayPaneClass(classes: string | string[]) {
+		if (classes) {
+			this.overlayPaneClass = classes;
 		}
 	}
 

@@ -1,0 +1,18 @@
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+	.header {
+		&.mod-sticky {
+			@include media_smaller_than("md") {
+				top: 0;
+			}
+		}
+	}
+
+	.filters {
+		&.mod-sticky {
+			@include media_smaller_than("md") {
+				top: 0;
+			}
+		}
+	}
+}

@@ -2,15 +2,15 @@
 	position: relative;
 }
 
-.navSide ~ .main-content {
+.navSide ~ .main-content, .mod-withMenu .main-content {
 	margin-left: _theme("components.navSide.width");
 }
 
-.navSide.mod-compact ~ .main-content {
+.navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
 	margin-left: _theme("components.navSide.compact.width");
 }
 
-.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
+.navSide.mod-withBanner ~ .main-content, .mod-withBanner .main-content, .main-content.mod-withBanner {
 	height: calc(100vh - #{_theme("commons.banner-height")});
 	overflow-y: auto;
 	margin-top: _theme("commons.banner-height");
@@ -19,7 +19,6 @@
 @include media_smaller_than("md") {
 	.main-content {
 		margin-left: 0 !important;
-		overflow-x: hidden;
 	}
 
 	// MOD TO BE ADDED TO .MAIN WHEN THE MENU IS TOGGLED
@@ -28,7 +27,7 @@
 		overflow: hidden;
 	}
 
-	.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner {
+	.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner, .mod-withBanner .main-content {
 		height: calc(100vh - #{_theme("commons.banner-height")} - #{_component("navSide.mobile.toggle-height")});
 		margin-top: _component("navSide.mobile.toggle-height");
 	}

@@ -29,6 +29,7 @@ export interface ILuPopoverPanel {
 	close: Observable<void>;
 	open: Observable<void>;
 	popoverPanelStyles: any;
+	overlayPaneClass: string | string[];
 	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
 	setPositionClassesChanges: (
 		posX: LuPopoverPosition,
@@ -147,6 +148,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	protected _popoverPanelStyles: any = {};
 	public get popoverPanelStyles() { return this._popoverPanelStyles; }
 	public set popoverPanelStyles(pps) { this._popoverPanelStyles = pps; }
+
+	/** Classes to be passed into the popover's overlay */
+	protected _overlayPaneClass: string | string[];
+	public get overlayPaneClass() { return this._overlayPaneClass; }
+	public set overlayPaneClass(opc) { this._overlayPaneClass = opc; }
 
 	/** Config object to be passed into the popover's content ngStyle */
 	protected _popoverContentStyles: any = {};

@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "version": "2.4.1",
+  "version": "2.5.0-rc.0",
   "description": "a library of usefull components for web developpement",
   "repository": {
     "type": "git",
@@ -23,34 +23,12 @@
     "clean": "lerna clean --yes",
     "lerna": "lerna",
     "travis": "lerna run travis --scope=@lucca-front/ng-internal",
-    "format": "npm run format-ng && npm run format-scss && npm run format-icons",
-    "format-ng": "prettier --config ./.prettierrc --write \"packages/ng/{src,demo}/**/*.{ts}\"",
-    "precommit": "lint-staged",
     "build": "lerna run build",
     "ls": "lerna ls -a -l"
   },
-  "lint-staged": {
-    "gitDir": "./",
-    "linters": {
-      "packages/ng/{src,demo}/**/*.{ts}": [
-        "prettier --config ./.prettierrc --write",
-        "git add"
-      ]
-    }
-  },
   "dependencies": {
-    "lerna": "^3.10.0",
-    "surge": "^0.20.1",
-    "cryptiles": "^4.1.2",
-    "minimatch": "^3.0.2"
+    "lerna": "^3.13.1",
+    "surge": "^0.20.3"
   },
-  "devDependencies": {
-    "colors": "^1.1.2",
-    "glob": "^7.1.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.0.3",
-    "npm-run": "^5.0.1",
-    "prettier": "^1.5.3",
-    "yargs": "^7.1.0"
-  }
+  "devDependencies": {}
 }

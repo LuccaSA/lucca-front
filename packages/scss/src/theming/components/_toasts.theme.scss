@@ -1,4 +1,6 @@
 $toasts: (
+	background: _theme("commons.overlays.background"),
+	color: _theme("commons.overlays.text"),
 	top: 1.5rem,
 	right: 1.5rem,
 	width: 16rem,
