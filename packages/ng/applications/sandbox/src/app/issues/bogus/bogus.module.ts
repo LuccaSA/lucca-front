@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BogusComponent } from './bogus.component';
 import { LuUserDisplayModule, LuUserSelectModule } from '@lucca-front/ng';
-import { RedirectModule } from '../redirect';
+import { RedirectModule } from '../../redirect';
 
 @NgModule({
 	declarations: [
