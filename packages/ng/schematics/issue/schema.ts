@@ -1,6 +1,6 @@
 import { IOptions } from '../schema';
 
-export interface IExampleOptions extends IOptions {
+export interface IIssueOptions extends IOptions {
 	prefix?: string;
-	ts?: boolean;
+	proxy?: boolean;
 }

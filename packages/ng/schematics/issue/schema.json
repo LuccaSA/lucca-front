@@ -23,6 +23,10 @@
 			"$default": {
 				"$source": "projectName"
 			}
+		},
+		"proxy": {
+			"type": "boolean",
+			"description": "if the component needs to proxy its calls to api"
 		}
 	}
 }
