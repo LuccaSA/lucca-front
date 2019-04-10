@@ -19,8 +19,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "prestart": "npm run generatedoc",
-    "start": "ng serve demo",
+    "prestart_old": "npm run generatedoc",
+    "start": "ng serve sandbox",
     "build": "npm run build:lib",
     "test": "ng test core",
     "test:sr": "ng test core --watch=false",
