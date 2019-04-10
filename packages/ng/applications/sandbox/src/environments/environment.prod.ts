@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+	apiUrl: 'http://prisme-proxy.lucca.io',
+	production: true,
 };
