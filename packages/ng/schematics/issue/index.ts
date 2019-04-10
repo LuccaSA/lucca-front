@@ -10,12 +10,13 @@ import {
 	chain,
 	mergeWith,
 	DirEntry,
+	SchematicsException,
 } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { IIssueOptions } from './schema';
-import { SourceFile, SyntaxKind, Node } from 'typescript';
+import { SourceFile, SyntaxKind, Node, createSourceFile, ScriptTarget } from 'typescript';
 import { Change, InsertChange, NoopChange } from '@schematics/angular/utility/change';
 import { insertImport, findNodes } from '@schematics/angular/utility/ast-utils';
 
@@ -51,12 +52,14 @@ export default function factory(options: IIssueOptions): Rule {
 		const rule = chain([
 			mergeWith(templateSource),
 			// addRoute(options),
+			addRouteToRouter(routerPath, options),
 		]);
 		return rule(tree, _context);
 	};
 }
-// function addRoute(options) {
-// }
+
+// =======================
+
 function findRouterFromOptions(host: Tree, options: IIssueOptions) {
 	const path = options.path;
 	if (!path) { return; }
@@ -68,4 +71,55 @@ function findRouterFromOptions(host: Tree, options: IIssueOptions) {
 		}
 		dir = dir.parent;
 	}
+}
+function addRouteToRouter(routerPath: Path | undefined, options: IIssueOptions) {
+	return (host: Tree) => {
+		if (!routerPath) { return host; }
+
+		const source = readIntoSourceFile(host, routerPath);
+		const issuePath = `/${options.path}`;
+		const relativePath = buildRelativePath(routerPath, issuePath);
+		const issueModule = `${strings.camelize(options.name)}Module`;
+		const changes = addRoute(source, routerPath, issuePath, issueModule, relativePath);
+		const recorder = host.beginUpdate(routerPath);
+		for (const change of changes) {
+			if (change instanceof InsertChange) {
+				recorder.insertLeft(change.pos, change.toAdd);
+			}
+		}
+		host.commitUpdate(recorder);
+		return host;
+	};
+}
+function addRoute(source: SourceFile, routerPath: string, issuePath: string, issueName: string, relativePath: string): Change[] {
+	const changes: Change[] = [];
+	// insert import { xxxModule } from './xxx';
+	const insertImportChange = insertImport(source, routerPath, issueName, relativePath);
+	changes.push(insertImportChange);
+
+	// find node containing all subpages
+	// const subpagesNode = findSubPagesNode(source);
+	// if (!!subpagesNode) {
+	// 	const statement = `\r\n\t${issueName},`;
+	// 	const subpagesChange = new InsertChange(routerPath, subpagesNode.pos, statement);
+	// 	changes.push(subpagesChange);
+	// }
+	return changes;
+}
+// function findSubPagesNode(source: SourceFile): Node | null {
+// 	const newNode = findNodes(source, SyntaxKind.NewKeyword)[0];
+// 	if (!newNode) { return null; }
+// 	const constructorNode = newNode.parent;
+// 	const subpagesNode = constructorNode.getChildAt(3).getChildAt(4).getChildAt(1);
+
+// 	return subpagesNode;
+// }
+
+export function readIntoSourceFile(host: Tree, modulePath: string) {
+	const text = host.read(modulePath);
+	if (text === null) {
+		throw new SchematicsException(`File ${modulePath} does not exist.`);
+	}
+	const sourceText = text.toString('utf-8');
+	return createSourceFile(modulePath, sourceText, ScriptTarget.Latest, true);
 }
