@@ -4,14 +4,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 
-const issuesRoutes: Routes = [
+const routes: Routes = [
 	{ path: 'bogus', loadChildren: () => BogusModule },
 ];
 
 
 
 @NgModule({
-	imports: [RouterModule.forChild(issuesRoutes)],
+	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
 export class IssuesRouter { }
