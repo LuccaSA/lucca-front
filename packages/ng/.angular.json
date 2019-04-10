@@ -381,5 +381,10 @@
       }
     }
   },
-  "defaultProject": "demo"
+  "defaultProject": "demo",
+  "schematics": {
+    "@lucca-front/schematics:issue": {
+      "project": "sandbox"
+    }
+  }
 }

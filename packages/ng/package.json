@@ -19,6 +19,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "tsc": "tsc",
     "prestart_old": "npm run generatedoc",
     "start": "ng serve sandbox",
     "build": "npm run build:lib",
@@ -40,7 +41,11 @@
     "postbuild:material": "gulp copy:material-style",
     "build:formly": "ng build formly",
     "postbuild:formly": "gulp copy:formly-style",
-    "build:lib": "npm run build:core && npm run build:material && npm run build:formly"
+    "build:lib": "npm run build:core && npm run build:material && npm run build:formly",
+    "build:schematics": "tsc --project schematics",
+    "postbuild:schematics": "npm run link:schematics",
+    "link:schematics": "cd schematics && npm link",
+    "postlink:schematics": "npm link @lucca-front/schematics"
   },
   "dependencies": {
     "@angular/animations": "^7.2.11",
@@ -60,11 +65,13 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.7",
-    "@angular-devkit/build-ng-packagr": "^0.13.7",
-    "@angular/cli": "^7.3.7",
+    "@angular-devkit/build-angular": "^0.13.8",
+    "@angular-devkit/build-ng-packagr": "^0.13.8",
+    "@angular/cli": "^7.3.8",
     "@angular/compiler-cli": "^7.2.11",
     "@angular/material-moment-adapter": "^7.3.6",
+    "@angular-devkit/schematics": "^7.3.8",
+    "@angular-devkit/schematics-cli": "^0.13.8",
     "@angular/router": "^7.2.11",
     "@types/jasmine": "3.3.0",
     "@types/node": "^10.12.10",
