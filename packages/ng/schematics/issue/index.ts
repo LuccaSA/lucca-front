@@ -54,6 +54,7 @@ export default function factory(options: IIssueOptions): Rule {
 			// addRoute(options),
 			addRouteToRouter(routerPath, options),
 		]);
+		console.log(`new issue available at http://localhost:4200/${options.name}`);
 		return rule(tree, _context);
 	};
 }
@@ -79,8 +80,8 @@ function addRouteToRouter(routerPath: Path | undefined, options: IIssueOptions) 
 		const source = readIntoSourceFile(host, routerPath);
 		const issuePath = `/${options.path}`;
 		const relativePath = buildRelativePath(routerPath, issuePath);
-		const issueModule = `${strings.camelize(options.name)}Module`;
-		const changes = addRoute(source, routerPath, issuePath, issueModule, relativePath);
+		const issueModule = `${strings.classify(options.name)}Module`;
+		const changes = addRoute(source, routerPath, options.name, issueModule, relativePath);
 		const recorder = host.beginUpdate(routerPath);
 		for (const change of changes) {
 			if (change instanceof InsertChange) {
@@ -91,29 +92,28 @@ function addRouteToRouter(routerPath: Path | undefined, options: IIssueOptions) 
 		return host;
 	};
 }
-function addRoute(source: SourceFile, routerPath: string, issuePath: string, issueName: string, relativePath: string): Change[] {
+function addRoute(source: SourceFile, routerPath: string, issueName: string, issueModule: string, relativePath: string): Change[] {
 	const changes: Change[] = [];
 	// insert import { xxxModule } from './xxx';
-	const insertImportChange = insertImport(source, routerPath, issueName, relativePath);
+	const insertImportChange = insertImport(source, routerPath, issueModule, relativePath);
 	changes.push(insertImportChange);
 
 	// find node containing all subpages
-	// const subpagesNode = findSubPagesNode(source);
-	// if (!!subpagesNode) {
-	// 	const statement = `\r\n\t${issueName},`;
-	// 	const subpagesChange = new InsertChange(routerPath, subpagesNode.pos, statement);
-	// 	changes.push(subpagesChange);
-	// }
+	const routesNode = findRoutesNode(source);
+	if (!!routesNode) {
+		const statement = `\t{ path: '${issueName}', loadChildren: () => ${issueModule}},\r\n`;
+		const routesChanges = new InsertChange(routerPath, routesNode.end - 1, statement);
+		changes.push(routesChanges);
+	}
 	return changes;
 }
-// function findSubPagesNode(source: SourceFile): Node | null {
-// 	const newNode = findNodes(source, SyntaxKind.NewKeyword)[0];
-// 	if (!newNode) { return null; }
-// 	const constructorNode = newNode.parent;
-// 	const subpagesNode = constructorNode.getChildAt(3).getChildAt(4).getChildAt(1);
+function findRoutesNode(source: SourceFile): Node | null {
+	const constNode = findNodes(source, SyntaxKind.ConstKeyword)[0];
+	if (!constNode) { return null; }
+	const routesNode = constNode.parent.getChildAt(1).getChildAt(0).getChildAt(4);
 
-// 	return subpagesNode;
-// }
+	return routesNode;
+}
 
 export function readIntoSourceFile(host: Tree, modulePath: string) {
 	const text = host.read(modulePath);

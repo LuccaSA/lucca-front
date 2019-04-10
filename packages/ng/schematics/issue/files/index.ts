@@ -1,1 +1,1 @@
-export * from './<%=dasherize(name)%>.module.ts';
+export * from './<%=dasherize(name)%>.module';
