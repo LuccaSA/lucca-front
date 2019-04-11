@@ -3,7 +3,11 @@
 	 (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
 	 [@transformPopover]="'enter'">
 		<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled" luScroll (onScrollBottom)="onScrollBottom()">
-			<ng-content></ng-content>
+			<ng-content *ngIf="!(loading$ | async); else loading"></ng-content>
 		</div>
 	</div>
+</ng-template>
+
+<ng-template #loading>
+	<div class="loading mod-block"></div>
 </ng-template>
