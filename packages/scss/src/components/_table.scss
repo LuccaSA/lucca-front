@@ -196,7 +196,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .table-head-row-cell {
-	&.is-sorted-descending {
+	&.is-sorted-descending, &.is-sorted-ascending {
 		color: _color("text.dark");
 
 		&::after {
@@ -212,19 +212,11 @@
 		}
 	}
 
-	&.is-sorted-ascending {
-		color: _color("text.dark");
+	&.is-sorted-ascending::after {
+			@include makeIcon("arrow_full_north");
+	}
 
-		&::after {
+	&.is-sorted-descending::after {
 			@include makeIcon("arrow_full_south");
-			opacity: 1;
-			transform: translateY(0);
-		}
-
-		&:hover {
-			&::after {
-				opacity: 1;
-			}
-		}
 	}
 }
