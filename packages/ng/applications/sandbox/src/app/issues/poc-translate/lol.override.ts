@@ -1,11 +1,11 @@
 export const lolOverrides = {
 	en: {
-		lol: 'rofl',
+		lol: 'overrided',
 	},
 	fr: {
-		lol: 'xptdr',
+		lol: 'surchargé',
 	},
 	de : {
-		lol: 'lol mais avec un accent allemand',
+		lol: 'überwiegen',
 	}
 };
