@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { BogusComponent } from './bogus.component';
+import { PocTranslateComponent } from './poc-translate.component';
 import { LuUserDisplayModule, LuUserSelectModule } from '@lucca-front/ng';
-import { RedirectModule } from '../../redirect';
+
 
 @NgModule({
 	declarations: [
-		BogusComponent,
+		PocTranslateComponent,
 	],
 	imports: [
-		HttpClientModule,
-		RedirectModule,
+
 		RouterModule.forChild([
-			{ path: '', component: BogusComponent },
+			{ path: '', component: PocTranslateComponent },
 		]),
 		LuUserDisplayModule,
 		LuUserSelectModule,
 	],
 })
-export class BogusModule {}
+export class PocTranslateModule {}
