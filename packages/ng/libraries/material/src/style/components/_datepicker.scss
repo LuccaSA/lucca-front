@@ -29,7 +29,6 @@
 
 // CALENDAR
 .mat-calendar {
-	height: auto !important;
 	width: 296px;
 
 	.mat-button {
@@ -55,7 +54,9 @@
 // CALENDAR HEADER
 .mat-calendar-controls {
 	margin-top: 0 !important;
-
+	.mat-icon-button[disabled] {
+		opacity: .4
+	}
 	.mat-calendar-period-button {
 		flex: 1;
 		order: 1;

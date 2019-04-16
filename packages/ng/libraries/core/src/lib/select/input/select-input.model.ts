@@ -111,7 +111,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	protected _getOverlayConfig(): OverlayConfig {
 		const config = super._getOverlayConfig();
 		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
-		config.width = `${clientRect.width}px`; // might become min/maxWidth
+		config.minWidth = `${Math.max(185, clientRect.width)}px`; // might become min/maxWidth
 		return config;
 	}
 

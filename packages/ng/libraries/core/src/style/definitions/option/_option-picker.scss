@@ -4,5 +4,11 @@
 		max-height: 280px;
 		overflow-y: auto;
 		display: block;
+
+		.loading {
+			height: 280px;
+			margin: 0;
+			overflow: hidden;
+		}
 	}
 }
