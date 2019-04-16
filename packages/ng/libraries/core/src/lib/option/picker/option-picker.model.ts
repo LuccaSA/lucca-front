@@ -1,6 +1,6 @@
 import { ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 import { Subscription, Observable, merge } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first, startWith, mapTo, shareReplay } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/index';
 import { ILuOptionOperator } from '../operator/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
@@ -11,6 +11,8 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	private __operators;
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T | T[]>;
+	loading$: Observable<boolean>;
+	isEmpty$: Observable<boolean>;
 	protected _value: T | T[];
 	setValue(value: T | T[]) {
 		this._value = value;
@@ -58,6 +60,15 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;
 		});
+		const lastOperator = operators[operators.length - 1];
+		if (lastOperator && lastOperator.outOptions$) {
+			this.loading$ = lastOperator.outOptions$.pipe(
+				first(),
+				mapTo(false),
+				startWith(true),
+				shareReplay()
+			);
+		}
 	}
 	onScrollBottom() {
 		if (!this.__operators) { return; }
