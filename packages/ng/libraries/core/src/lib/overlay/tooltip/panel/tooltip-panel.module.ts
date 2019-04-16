@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LuTooltipPanelComponent } from './tooltip-panel.component';
-import { LuSafeContentModule } from '../../safe-content/index';
+import { LuSafeContentModule } from '../../../safe-content/index';
 
 @NgModule({
 	imports: [
@@ -18,4 +18,4 @@ import { LuSafeContentModule } from '../../safe-content/index';
 		LuTooltipPanelComponent,
 	]
 })
-export class LuTooltipPanelModule { }
+export class LuOverlayTooltipPanelModule { }

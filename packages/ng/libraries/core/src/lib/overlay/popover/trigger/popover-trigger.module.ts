@@ -19,4 +19,4 @@ import { LuPopoverTargetModule } from '../target/index';
 		LuPopoverTriggerDirective,
 	],
 })
-export class LuPopoverTriggerModule {}
+export class LuOverlayPopoverTriggerModule {}

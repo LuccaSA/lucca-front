@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { LuTooltipTriggerModule } from './trigger/index';
-import { LuTooltipPanelModule } from './panel/index';
+import { LuOverlayTooltipTriggerModule } from './trigger/index';
+import { LuOverlayTooltipPanelModule } from './panel/index';
 
 @NgModule({
 	imports: [
-		LuTooltipTriggerModule,
-		LuTooltipPanelModule,
+		LuOverlayTooltipTriggerModule,
+		LuOverlayTooltipPanelModule,
 	],
 	exports: [
-		LuTooltipTriggerModule,
-		LuTooltipPanelModule,
+		LuOverlayTooltipTriggerModule,
+		LuOverlayTooltipPanelModule,
 	]
 })
 export class LuOverlayTooltipModule {}

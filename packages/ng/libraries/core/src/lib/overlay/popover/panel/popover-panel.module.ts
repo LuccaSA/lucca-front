@@ -15,4 +15,4 @@ import { LuPopoverPanelComponent } from './popover-panel.component';
 		LuPopoverPanelComponent,
 	],
 })
-export class LuPopoverPanelModule {}
+export class LuOverlayPopoverPanelModule {}
