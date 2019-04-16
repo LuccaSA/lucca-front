@@ -12,4 +12,4 @@ import { LuTooltipPanelModule } from './panel/index';
 		LuTooltipPanelModule,
 	]
 })
-export class LuTooltipModule {}
+export class LuOverlayTooltipModule {}

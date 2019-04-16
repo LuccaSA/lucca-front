@@ -16,4 +16,4 @@ import { LuPopoverTriggerModule } from './trigger/index';
 		LuPopoverTriggerModule,
 	],
 })
-export class LuPopoverModule {}
+export class LuOverlayPopoverModule {}
