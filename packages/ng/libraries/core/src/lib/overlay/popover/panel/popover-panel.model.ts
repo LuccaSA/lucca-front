@@ -159,7 +159,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		// }
 	}
 	/** does nothing but must be overridable */
-	// onMouseDown($event) {}
+	onMouseDown($event) {}
 
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
