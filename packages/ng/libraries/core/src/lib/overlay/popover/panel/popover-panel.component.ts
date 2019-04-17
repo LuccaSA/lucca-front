@@ -16,7 +16,6 @@ import {
 } from './popover-panel.model';
 import { luTransformPopover } from '../animation/index';
 
-import { AnimationEvent } from '@angular/animations';
 
 // import { standardPopoverTemplate } from './popover.template';
 
