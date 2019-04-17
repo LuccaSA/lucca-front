@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@lucca-front/scss/src/main.overridable';
+
+@import 'dist/style/main.overridable';
+@import 'dist/material/style/main.overridable';
+@import 'dist/formly/style/main.overridable';
+
+:root {
+	@include generateCSSVarsFromTheme($theme);
+}
