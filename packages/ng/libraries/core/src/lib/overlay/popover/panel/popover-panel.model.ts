@@ -1,41 +1,32 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-	throwLuPopoverInvalidPosition,
-	throwLuPopoverInvalidAlignement,
-} from '../popover.errors';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { LuPopoverPosition, LuPopoverAlignment } from '../target/index';
 
-export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
-export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
-
-export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
 export interface ILuPopoverPanel {
 	// position: LuPopoverPosition;
 	// alignment: LuPopoverAlignment;
 	/** how the panel will handle scroll events on the body, allowed values: reposition, block, close */
-	scrollStrategy: LuPopoverScrollStrategy;
 	// overlapTrigger: boolean;
-	triggerEvent: LuPopoverTriggerEvent;
-	enterDelay: number;
-	leaveDelay: number;
+	// triggerEvent: LuPopoverTriggerEvent;
+	// enterDelay: number;
+	// leaveDelay: number;
 	// targetOffsetX: number;
 	// targetOffsetY: number;
+	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
 	closeDisabled: boolean;
 	templateRef?: TemplateRef<any>;
 	close: Observable<void>;
 	open: Observable<void>;
-	popoverPanelStyles: any;
-	overlayPaneClass: string | string[];
+	// popoverPanelStyles: any;
+	// overlayPaneClass: string | string[];
 	keydownEvents$: Observable<KeyboardEvent>;
+
 	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
-	setPositionClassesChanges: (
-		posX: LuPopoverPosition,
-		posY: LuPopoverPosition,
-	) => void;
+
 	_emitCloseEvent(): void;
 	_emitOpenEvent(): void;
 	onOpen(): void;
@@ -60,59 +51,6 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	protected _isOpen: boolean;
 	get isOpen() { return this._isOpen; }
 
-	protected _position: LuPopoverPosition = 'below';
-	get position(): LuPopoverPosition { return this._position; }
-	set position(position: LuPopoverPosition) {
-		if (
-			position !== 'above' &&
-			position !== 'below' &&
-			position !== 'after' &&
-			position !== 'before'
-		) {
-			throwLuPopoverInvalidPosition();
-		}
-		this._position = position;
-		this.setPositionClasses(this._position, this._alignment);
-	}
-
-	protected _alignment: LuPopoverAlignment = 'left';
-	get alignment(): LuPopoverAlignment { return this._alignment; }
-	set alignment(alignment: LuPopoverAlignment) {
-		if (
-			alignment !== 'top' &&
-			alignment !== 'bottom' &&
-			alignment !== 'right' &&
-			alignment !== 'left'
-		) {
-			throwLuPopoverInvalidAlignement();
-		}
-		this._alignment = alignment;
-		this.setPositionClasses(this._position, this._alignment);
-	}
-
-	protected _triggerEvent: LuPopoverTriggerEvent = 'hover';
-	get triggerEvent() { return this._triggerEvent; }
-	set triggerEvent(te: LuPopoverTriggerEvent) { this._triggerEvent = te; }
-
-	protected _enterDelay = 200;
-	get enterDelay() { return this._enterDelay; }
-	set enterDelay(ed: number) { this._enterDelay = ed; }
-
-	protected _leaveDelay = 200;
-	get leaveDelay() { return this._leaveDelay; }
-	set leaveDelay(ld: number) { this._leaveDelay = ld; }
-
-	protected _overlapTrigger = false;
-	get overlapTrigger() { return this._overlapTrigger; }
-	set overlapTrigger(ot: boolean) { this._overlapTrigger = ot; }
-
-	protected _targetOffsetX = 0;
-	get targetOffsetX() { return this._targetOffsetX; }
-	set targetOffsetX(tox: number) { this._targetOffsetX = tox; }
-
-	protected _targetOffsetY = 0;
-	get targetOffsetY() { return this._targetOffsetY; }
-	set targetOffsetY(toy: number) { this._targetOffsetY = toy; }
 
 	protected _closeOnClick = false;
 	get closeOnClick() { return this._closeOnClick; }
@@ -126,10 +64,6 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	get scrollStrategy() { return this._scrollStrategy; }
 	set scrollStrategy(ss: LuPopoverScrollStrategy) { this._scrollStrategy = ss; }
 
-	protected _containerPositioning = false;
-	get containerPositioning() { return this._containerPositioning; }
-	set containerPositioning(cp: boolean) { this._containerPositioning = cp; }
-
 	protected _closeDisabled = false;
 	get closeDisabled() { return this._closeDisabled; }
 	set closeDisabled(cd: boolean) { this._closeDisabled = cd; }
@@ -138,27 +72,27 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	get templateRef() { return this._templateRef; }
 	set templateRef(tr: TemplateRef<any>) { this._templateRef = tr; }
 
-	protected _classList: any = {};
-	get classList() { return this._classList; }
-	set classList(cl) {
-		this._classList = cl;
-		this.setPositionClasses(this.position, this.alignment);
+	protected _positionClasses: any = {};
+	protected _panelClasses: any = {};
+	get panelClasses() { return { ...this._panelClasses, ...this._positionClasses }; }
+	set panelClasses(cl) {
+		this._panelClasses = { ...cl };
 	}
 
-	/** Config object to be passed into the popover's panel ngStyle */
-	protected _popoverPanelStyles: any = {};
-	public get popoverPanelStyles() { return this._popoverPanelStyles; }
-	public set popoverPanelStyles(pps) { this._popoverPanelStyles = pps; }
+	// /** Config object to be passed into the popover's panel ngStyle */
+	// protected _popoverPanelStyles: any = {};
+	// public get popoverPanelStyles() { return this._popoverPanelStyles; }
+	// public set popoverPanelStyles(pps) { this._popoverPanelStyles = pps; }
 
 	/** Classes to be passed into the popover's overlay */
 	protected _overlayPaneClass: string | string[];
 	public get overlayPaneClass() { return this._overlayPaneClass; }
 	public set overlayPaneClass(opc) { this._overlayPaneClass = opc; }
 
-	/** Config object to be passed into the popover's content ngStyle */
-	protected _popoverContentStyles: any = {};
-	public get popoverContentStyles() { return this._popoverContentStyles; }
-	public set popoverContentStyles(pcs) { this._popoverContentStyles = pcs; }
+	// /** Config object to be passed into the popover's content ngStyle */
+	// protected _popoverContentStyles: any = {};
+	// public get popoverContentStyles() { return this._popoverContentStyles; }
+	// public set popoverContentStyles(pcs) { this._popoverContentStyles = pcs; }
 
 	protected _keydownEventsSub;
 	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
@@ -173,7 +107,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	abstract _emitOpenEvent(): void;
 
 	constructor() {
-		this.setPositionClasses(this.position, this.alignment);
+		// this.setPositionClasses(this.position, this.alignment);
 	}
 	setPositionClasses(pos: LuPopoverPosition, al: LuPopoverAlignment): void {
 		let posX: LuPopoverPosition;
@@ -187,18 +121,12 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 			posY = al === 'top' ? 'below' : 'after';
 		}
 
-		this.setPositionClassesChanges(posX, posY);
+		this._positionClasses['lu-popover-before'] = posX === 'before';
+		this._positionClasses['lu-popover-after'] = posX === 'after';
+		this._positionClasses['lu-popover-above'] = posY === 'above';
+		this._positionClasses['lu-popover-below'] = posY === 'below';
 	}
 
-	setPositionClassesChanges(
-		posX: LuPopoverPosition,
-		posY: LuPopoverPosition,
-	): void {
-		this._classList['lu-popover-before'] = posX === 'before';
-		this._classList['lu-popover-after'] = posX === 'after';
-		this._classList['lu-popover-above'] = posY === 'above';
-		this._classList['lu-popover-below'] = posY === 'below';
-	}
 	onClick() {
 		if (this.closeOnClick) {
 			this.onClose();
@@ -219,19 +147,19 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	 */
 	/** Disables close of popover when leaving trigger element and mouse over the popover */
 	onMouseOver() {
-		if (this.triggerEvent === 'hover') {
-			this.closeDisabled = true;
-		}
+		// if (this.triggerEvent === 'hover') {
+		// 	this.closeDisabled = true;
+		// }
 	}
 	/** Enables close of popover when mouse leaving popover element */
 	onMouseLeave() {
-		if (this.triggerEvent === 'hover') {
-			this.closeDisabled = false;
-			this.onClose();
-		}
+		// if (this.triggerEvent === 'hover') {
+		// 	this.closeDisabled = false;
+		// 	this.onClose();
+		// }
 	}
 	/** does nothing but must be overridable */
-	onMouseDown($event) {}
+	// onMouseDown($event) {}
 
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {

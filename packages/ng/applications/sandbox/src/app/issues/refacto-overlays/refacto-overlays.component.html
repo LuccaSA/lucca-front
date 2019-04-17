@@ -1,1 +1,7 @@
-<h1>LOL</h1>
+<h1>refacto overlays</h1>
+
+<button class="button" [luPopover]="popover">click me</button>
+<br>
+<button class="button" [luPopover]="popover" [luPopoverTarget]="target">trigger for my neighbour</button> <span class="label" luPopoverTarget #target="LuPopoverTarget">neighbour</span>
+
+<lu-popover #popover>basic-est of popovers</lu-popover>

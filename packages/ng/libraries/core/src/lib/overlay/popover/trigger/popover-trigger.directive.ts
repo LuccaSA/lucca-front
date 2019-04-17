@@ -8,6 +8,7 @@ import {
 	Output,
 	ViewContainerRef,
 	HostListener,
+	HostBinding,
 } from '@angular/core';
 
 import {
@@ -20,32 +21,32 @@ import {
 } from './popover-trigger.model';
 import {
 	ILuPopoverPanel,
-} from '../panel/popover-panel.model';
+} from '../panel/index';
 import {
-	ILuPopoverTarget,
-} from '../target/popover-target.model';
+	ILuPopoverTarget, LuPopoverPosition, LuPopoverAlignment, LuPopoverTarget,
+} from '../target/index';
 
 /**
 * This directive is intended to be used in conjunction with an lu-popover tag.  It is
 * responsible for toggling the display of the provided popover instance.
 */
 @Directive({
-	selector: '[luPopoverTriggerFor]',
-	host: {
-		'aria-haspopup': 'true',
-		'(mousedown)': '_handleMousedown($event)',
-	},
+	selector: '[luPopover]',
+	// host: {
+	// 	'aria-haspopup': 'true',
+	// 	'(mousedown)': '_handleMousedown($event)',
+	// },
 	exportAs: 'LuPopoverTrigger',
 })
-export class LuPopoverTriggerDirective<T extends ILuPopoverPanel = ILuPopoverPanel>
-extends ALuPopoverTrigger<T>
-implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
+export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
+extends ALuPopoverTrigger<TPanel, TTarget>
+implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 
 	/** References the popover instance that the trigger is associated with. */
-	@Input('luPopoverTriggerFor') popover: T;
+	@Input('luPopover') set inputPanel(p: TPanel) { this.panel = p; }
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('luPopoverTargetAt') targetElement: ILuPopoverTarget;
+	@Input('luPopoverTarget') set inputTarget(t: TTarget) { this.target = t; }
 
 	/** Event emitted when the associated popover is opened. */
 	@Output() onPopoverOpen = new EventEmitter<void>();
@@ -53,12 +54,21 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	/** Event emitted when the associated popover is closed. */
 	@Output() onPopoverClose = new EventEmitter<void>();
 
+	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
+	@Input('luPopoverPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
+	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
+	@Input('luPopoverAlignment') set inputAlignment(al: LuPopoverAlignment) { this.target.alignment = al; }
+
+	@HostBinding('attr.aria-haspopup') hasPopup = true;
+
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 	) {
 		super(_overlay, _elementRef, _viewContainerRef);
+		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
+		this.target.elementRef = this._elementRef;
 	}
 
 	@HostListener('click')
@@ -82,5 +92,16 @@ implements ILuPopoverTrigger<T>, AfterViewInit, OnDestroy {
 	@HostListener('blur')
 	onBlur() {
 		super.onBlur();
+	}
+
+	ngAfterViewInit() {
+		this._checkPanel();
+		this._checkTarget();
+		// this.popover.close.subscribe(() => {
+		// 	this.closePopover();
+		// });
+	}
+	ngOnDestroy() {
+		this.destroyPopover();
 	}
 }

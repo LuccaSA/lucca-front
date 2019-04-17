@@ -3,7 +3,6 @@ import { throwLuPopoverInvalidAlignement, throwLuPopoverInvalidPosition } from '
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
-export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
 /**
  * anchor for a popover panel
@@ -13,8 +12,8 @@ export interface ILuPopoverTarget {
 	alignment: LuPopoverAlignment;
 	/** the element used to position the panel */
 	elementRef: ElementRef;
-	/** set to true if you want the panel to appear on top of the target */
-	overlap: boolean;
+	// /** set to true if you want the panel to appear on top of the target */
+	// overlap: boolean;
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
 	position: LuPopoverPosition;
 
@@ -60,10 +59,10 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 		// this.setPositionClasses(this._position, this._alignment);
 	}
 
-	protected _overlap = false;
-	/** set to true if you want the panel to appear on top of the target */
-	get overlap() { return this._overlap; }
-	set overlap(ot: boolean) { this._overlap = ot; }
+	// protected _overlap = false;
+	// /** set to true if you want the panel to appear on top of the target */
+	// get overlap() { return this._overlap; }
+	// set overlap(ot: boolean) { this._overlap = ot; }
 
 	// protected _offsetX = 0;
 	// get offsetX() { return this._offsetX; }
@@ -72,5 +71,8 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 	// protected _offsetY = 0;
 	// get offsetY() { return this._offsetY; }
 	// set offsetY(toy: number) { this._offsetY = toy; }
+}
 
+export class LuPopoverTarget extends ALuPopoverTarget {
+	constructor() { super(); }
 }
