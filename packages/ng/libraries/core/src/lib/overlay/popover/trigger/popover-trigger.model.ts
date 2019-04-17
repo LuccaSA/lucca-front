@@ -78,7 +78,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	protected _triggerEvent: LuPopoverTriggerEvent = 'click';
 	get triggerEvent() { return this._triggerEvent; }
-	set triggerEvvent(te: LuPopoverTriggerEvent) { this._triggerEvent = te; }
+	set triggerEvent(te: LuPopoverTriggerEvent) { this._triggerEvent = te; }
 
 
 	/** Event emitted when the associated popover is opened. */
