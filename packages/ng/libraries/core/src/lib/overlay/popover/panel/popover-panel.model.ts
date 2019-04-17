@@ -1,4 +1,4 @@
-import { TemplateRef, ElementRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
 	throwLuPopoverInvalidPosition,
@@ -13,16 +13,16 @@ export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
 export interface ILuPopoverPanel {
-	position: LuPopoverPosition;
-	alignment: LuPopoverAlignment;
+	// position: LuPopoverPosition;
+	// alignment: LuPopoverAlignment;
+	/** how the panel will handle scroll events on the body, allowed values: reposition, block, close */
 	scrollStrategy: LuPopoverScrollStrategy;
-	containerPositioning: boolean;
-	overlapTrigger: boolean;
+	// overlapTrigger: boolean;
 	triggerEvent: LuPopoverTriggerEvent;
 	enterDelay: number;
 	leaveDelay: number;
-	targetOffsetX: number;
-	targetOffsetY: number;
+	// targetOffsetX: number;
+	// targetOffsetY: number;
 	closeOnClick: boolean;
 	closeDisabled: boolean;
 	templateRef?: TemplateRef<any>;
@@ -41,6 +41,7 @@ export interface ILuPopoverPanel {
 	onOpen(): void;
 	onClose(): void;
 
+	// containerPositioning: boolean; // idont inow what it is
 }
 /**
  * abstract class for basic implementation of a popover panel
