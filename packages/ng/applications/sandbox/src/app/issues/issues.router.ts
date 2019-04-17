@@ -2,9 +2,11 @@ import { Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PocTranslateModule } from './poc-translate';
+import { RefactoOverlaysModule } from './refacto-overlays';
 
 const routes: Routes = [
 	{ path: 'poc-translate', loadChildren: () => PocTranslateModule},
+	{ path: 'refacto-overlays', loadChildren: () => RefactoOverlaysModule},
 ];
 
 @NgModule({
