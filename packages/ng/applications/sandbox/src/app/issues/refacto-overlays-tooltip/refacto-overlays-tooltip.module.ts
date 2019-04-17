@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { RefactoOverlaysTooltipComponent } from './refacto-overlays-tooltip.component';
+import { LuTooltipModule } from '@lucca-front/ng';
 
 
 @NgModule({
@@ -9,7 +10,7 @@ import { RefactoOverlaysTooltipComponent } from './refacto-overlays-tooltip.comp
 		RefactoOverlaysTooltipComponent,
 	],
 	imports: [
-
+		LuTooltipModule,
 		RouterModule.forChild([
 			{ path: '', component: RefactoOverlaysTooltipComponent },
 		]),
