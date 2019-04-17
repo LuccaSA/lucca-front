@@ -62,6 +62,8 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
 	@Input('luPopoverAlignment') set inputAlignment(al: LuPopoverAlignment) { this.target.alignment = al; }
 
+	@Input('luPopoverEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
+	@Input('luPopoverLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
 	@HostBinding('attr.aria-haspopup') hasPopup = true;
 
 	constructor(
