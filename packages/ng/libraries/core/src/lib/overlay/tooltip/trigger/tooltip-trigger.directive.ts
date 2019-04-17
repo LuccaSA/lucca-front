@@ -20,7 +20,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@Input('luTooltip') tooltipContent;
 	// @Input() enterDelay = 300;
 	// @Input() leaveDelay = 100;
-	// @Input('luTooltipPosition') position: LuPopoverPosition = 'above';
+	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
 
 	@HostListener('mouseenter')
 	onMouseEnter() {
