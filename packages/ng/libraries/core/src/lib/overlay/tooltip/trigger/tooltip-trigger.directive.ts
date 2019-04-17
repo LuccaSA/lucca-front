@@ -20,7 +20,11 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@Input('luTooltip') tooltipContent;
 	// @Input() enterDelay = 300;
 	// @Input() leaveDelay = 100;
-	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
+		/** when trigger = hover, delay before the popover panel appears, default 300ms */
+		@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
+		/** when trigger = hover, delay before the popover panel disappears, defaiult 100ms */
+		@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
+		@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
 
 	@HostListener('mouseenter')
 	onMouseEnter() {
@@ -43,6 +47,8 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this.target.elementRef = this._elementRef;
 		this.triggerEvent = 'hover';
 		this.target.position = 'above';
+		this.enterDelay = 300;
+		this.leaveDelay = 100;
 	}
 
 	ngAfterViewInit() {
