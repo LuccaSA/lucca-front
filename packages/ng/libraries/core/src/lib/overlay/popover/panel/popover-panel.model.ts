@@ -30,6 +30,7 @@ export interface ILuPopoverPanel {
 	open: Observable<void>;
 	popoverPanelStyles: any;
 	overlayPaneClass: string | string[];
+	keydownEvents$: Observable<KeyboardEvent>;
 	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
 	setPositionClassesChanges: (
 		posX: LuPopoverPosition,
@@ -40,7 +41,6 @@ export interface ILuPopoverPanel {
 	onOpen(): void;
 	onClose(): void;
 
-	keydownEvents$: Observable<KeyboardEvent>;
 }
 /**
  * abstract class for basic implementation of a popover panel

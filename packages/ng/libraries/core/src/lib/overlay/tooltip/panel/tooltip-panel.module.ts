@@ -18,4 +18,4 @@ import { LuSafeContentModule } from '../../../safe-content/index';
 		LuTooltipPanelComponent,
 	]
 })
-export class LuOverlayTooltipPanelModule { }
+export class LuTooltipPanelModule { }

@@ -13,4 +13,4 @@ import { LuTooltipTriggerDirective } from './tooltip-trigger.directive';
 		LuTooltipTriggerDirective,
 	]
 })
-export class LuOverlayTooltipTriggerModule { }
+export class LuTooltipTriggerModule { }

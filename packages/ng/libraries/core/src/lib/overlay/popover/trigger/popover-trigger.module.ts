@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuPopoverTriggerDirective } from './popover-trigger.directive';
-import { LuOverlayPopoverPanelModule } from '../panel/index';
-import { LuOverlayPopoverTargetModule } from '../target/index';
+import { LuPopoverPanelModule } from '../panel/index';
+import { LuPopoverTargetModule } from '../target/index';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		OverlayModule,
-		LuOverlayPopoverPanelModule,
-		LuOverlayPopoverTargetModule,
+		LuPopoverPanelModule,
+		LuPopoverTargetModule,
 	],
 	declarations: [
 		LuPopoverTriggerDirective,
@@ -19,4 +19,4 @@ import { LuOverlayPopoverTargetModule } from '../target/index';
 		LuPopoverTriggerDirective,
 	],
 })
-export class LuOverlayPopoverTriggerModule {}
+export class LuPopoverTriggerModule {}

@@ -15,4 +15,4 @@ import { LuPopoverTargetDirective } from './popover-target.directive';
 		LuPopoverTargetDirective,
 	],
 })
-export class LuOverlayPopoverTargetModule {}
+export class LuPopoverTargetModule {}
