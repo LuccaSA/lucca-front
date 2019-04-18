@@ -1,6 +1,13 @@
 <h1>refacto-overlay-advanced</h1>
+<h2>overlapping popovers</h2>
+<button class="button" [luPopover]="overlap" luPopoverOverlap="true">click me</button>
+<br />
+<button class="button" [luPopover]="overlap" [luPopoverTarget]="target">trigger for my neighbour</button>
+<span class="label" luPopoverTarget #target="LuPopoverTarget" luPopoverOverlap="true">neighbour</span>
+<br />
+<span class="label" [luPopover]="overlap" luPopoverTrigger="hover" luPopoverOverlap="true">on hover</span>
 
-// overlap
+<lu-popover #overlap>overlapping popover</lu-popover>
 <br />
 // scroll strat
 <br />
