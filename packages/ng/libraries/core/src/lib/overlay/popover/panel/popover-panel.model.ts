@@ -19,8 +19,12 @@ export interface ILuPopoverPanel {
 	closeOnClick: boolean;
 	closeDisabled: boolean;
 	templateRef?: TemplateRef<any>;
+
+	/** will emit when the panel wants to close */
 	close: Observable<void>;
+	/** will emit when the panel wants to open */
 	open: Observable<void>;
+	/** will emit when the panel is hovered */
 	hovered: Observable<boolean>;
 	// popoverPanelStyles: any;
 	// overlayPaneClass: string | string[];
@@ -30,7 +34,10 @@ export interface ILuPopoverPanel {
 
 	_emitCloseEvent(): void;
 	_emitOpenEvent(): void;
+
+	/** method called by the trigger when it opens the popover */
 	onOpen(): void;
+	/** method called by the trigger when it closes the popover */
 	onClose(): void;
 
 	// containerPositioning: boolean; // idont inow what it is
@@ -132,17 +139,15 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 
 	onClick() {
 		if (this.closeOnClick) {
-			this.onClose();
+			this._emitCloseEvent();
 		}
 	}
 
 	onOpen() {
 		this._isOpen = true;
-		this._emitOpenEvent();
 	}
 	onClose() {
 		this._isOpen = false;
-		this._emitCloseEvent();
 	}
 	/**
 	 * TODO: Refactor when @angular/cdk includes feature I mentioned on github see link below.

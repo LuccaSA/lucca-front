@@ -65,7 +65,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	protected _hovered$ = new Subject();
 	protected _hoveredSubscription: Subscription;
-	protected _panelHoveredSubscription: Subscription;
+	protected _panelEventsSubscriptions: Subscription;
 
 	// tracking input type is necessary so it's possible to only auto-focus
 	// the first item of the list when the popover is opened via the keyboard
@@ -191,9 +191,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			}
 
 			/** Only subscribe to mouse enter/leave of the panel if trigger = hover */
-			if (this.triggerEvent === 'hover') {
-				this._subscribeToPanelHover();
-			}
 
 			this._initPopover();
 		}
@@ -251,12 +248,30 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	/**
 	 * This method ensures that the popover
 	 */
-	protected _subscribeToPanelHover(): void {
+	protected _subscribeToPanelEvents(): void {
 		if (this._overlayRef) {
-			this._panelHoveredSubscription = this.panel.hovered
-				.subscribe((hovered) => {
-					this._hovered$.next(hovered);
-				});
+			this._panelEventsSubscriptions = new Subscription();
+			if (this.triggerEvent === 'hover') {
+
+				this._panelEventsSubscriptions.add(
+					this.panel.hovered
+					.subscribe((hovered) => {
+						this._hovered$.next(hovered);
+					}),
+				);
+			}
+			this._panelEventsSubscriptions.add(
+				this.panel.close
+				.subscribe(() => {
+					this.closePopover();
+				}),
+			);
+			this._panelEventsSubscriptions.add(
+				this.panel.open
+				.subscribe(() => {
+					this.openPopover();
+				}),
+			);
 		}
 	}
 		/**
@@ -283,6 +298,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _initPopover(): void {
 		this._setIsPopoverOpen(true);
 		this.panel.keydownEvents$ = this._overlayRef.keydownEvents();
+		this._subscribeToPanelEvents();
 	}
 
 	/**
@@ -303,9 +319,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	/** set state rather than toggle to support triggers sharing a popover */
 	protected _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
-		// TODO - i dont remember what it does
-		// this._popoverOpen ? this.popover.onOpen() : (() => {})();
-		// this._popoverOpen ? this.onPopoverOpen.emit() : this.onPopoverClose.emit();
+		// tell the panel it's opening/closing
+		isOpen ? this.panel.onOpen() : this.panel.onClose();
 	}
 
 	/**
@@ -562,8 +577,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		if (this._hoveredSubscription) {
 			this._hoveredSubscription.unsubscribe();
 		}
-		if (this._panelHoveredSubscription) {
-			this._panelHoveredSubscription.unsubscribe();
+		if (this._panelEventsSubscriptions) {
+			this._panelEventsSubscriptions.unsubscribe();
 		}
 	}
 }
