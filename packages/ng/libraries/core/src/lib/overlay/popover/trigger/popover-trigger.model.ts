@@ -385,9 +385,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 		// Position
 		const position = this.target.position;
-		// disable overlap for now
-		// const overlap = this.target.overlap;
-		const overlap = false;
+		const overlap = this.target.overlap;
 		if (position === 'above') {
 			connectionPosition.originY = overlap ? 'bottom' : 'top';
 		} else if (position === 'below') {
