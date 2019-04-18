@@ -17,14 +17,6 @@
 <h2>close on click</h2>
 <button class="button" [luPopover]="closer">click me</button>
 <lu-popover #closer close-on-click="true">close on click popover</lu-popover>
-<h2>scroll strat</h2>
-<button class="button" [luPopover]="scrollBlock">block scroll</button>
-<button class="button" [luPopover]="scrollClose">close on scroll</button>
-<button class="button" [luPopover]="scrollFollow">follw scroll</button>
-<lu-popover #scrollBlock scroll-strategy="block">block scroll</lu-popover>
-<lu-popover #scrollClose scroll-strategy="close">close on scroll</lu-popover>
-<lu-popover #scrollFollow scroll-strategy="reposition">follow scroll</lu-popover>
-<p>scroll block doesnt seem to work but i dont know how to do it</p>
 
 <h2>panel-content-backdrop classes injection</h2>
 <button class="button" [luPopover]="class" luPopoverOverlap="true">1 class</button>
