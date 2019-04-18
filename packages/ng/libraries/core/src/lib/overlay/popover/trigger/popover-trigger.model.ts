@@ -65,6 +65,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	protected _hovered$ = new Subject();
 	protected _hoveredSubscription: Subscription;
+	protected _panelHoveredSubscription: Subscription;
 
 	// tracking input type is necessary so it's possible to only auto-focus
 	// the first item of the list when the popover is opened via the keyboard
@@ -93,10 +94,10 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			).subscribe(h => h ? this.openPopover() : this.closePopover());
 		}
 	}
-	protected _enterDelay = 0;
+	protected _enterDelay = 50;
 	get enterDelay() { return this._enterDelay; }
 	set enterDelay(d: number) { this._enterDelay = d; }
-	protected _leaveDelay = 0;
+	protected _leaveDelay = 50;
 	get leaveDelay() { return this._leaveDelay; }
 	set leaveDelay(d: number) { this._leaveDelay = d; }
 
@@ -189,6 +190,11 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 				this._subscribeToBackdrop();
 			}
 
+			/** Only subscribe to mouse enter/leave of the panel if trigger = hover */
+			if (this.triggerEvent === 'hover') {
+				this._subscribeToPanelHover();
+			}
+
 			this._initPopover();
 		}
 	}
@@ -243,6 +249,17 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	}
 
 	/**
+	 * This method ensures that the popover
+	 */
+	protected _subscribeToPanelHover(): void {
+		if (this._overlayRef) {
+			this._panelHoveredSubscription = this.panel.hovered
+				.subscribe((hovered) => {
+					this._hovered$.next(hovered);
+				});
+		}
+	}
+		/**
 	 * This method ensures that the popover closes when the overlay backdrop is clicked.
 	 * We do not use first() here because doing so would not catch clicks from within
 	 * the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
@@ -257,6 +274,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 				});
 		}
 	}
+	
 
 	/**
 	 * This method sets the popover state to open and focuses the first item if
@@ -545,6 +563,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		}
 		if (this._hoveredSubscription) {
 			this._hoveredSubscription.unsubscribe();
+		}
+		if (this._panelHoveredSubscription) {
+			this._panelHoveredSubscription.unsubscribe();
 		}
 	}
 }

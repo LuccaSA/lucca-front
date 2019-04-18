@@ -21,6 +21,7 @@ export interface ILuPopoverPanel {
 	templateRef?: TemplateRef<any>;
 	close: Observable<void>;
 	open: Observable<void>;
+	hovered: Observable<boolean>;
 	// popoverPanelStyles: any;
 	// overlayPaneClass: string | string[];
 	keydownEvents$: Observable<KeyboardEvent>;
@@ -103,8 +104,10 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 
 	close: Observable<void>;
 	open: Observable<void>;
+	hovered: Observable<boolean>;
 	abstract _emitCloseEvent(): void;
 	abstract _emitOpenEvent(): void;
+	abstract _emitHoveredEvent(hovered: boolean): void;
 
 	constructor() {
 		// this.setPositionClasses(this.position, this.alignment);
@@ -147,12 +150,14 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	 */
 	/** Disables close of popover when leaving trigger element and mouse over the popover */
 	onMouseOver() {
+		this._emitHoveredEvent(true);
 		// if (this.triggerEvent === 'hover') {
 		// 	this.closeDisabled = true;
 		// }
 	}
 	/** Enables close of popover when mouse leaving popover element */
 	onMouseLeave() {
+		this._emitHoveredEvent(false);
 		// if (this.triggerEvent === 'hover') {
 		// 	this.closeDisabled = false;
 		// 	this.onClose();

@@ -97,6 +97,7 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	/** Event emitted when the popover is closed. */
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
+	@Output() hovered = new EventEmitter<boolean>();
 
 	@ViewChild(TemplateRef)
 	set vcTemplateRef(tr: TemplateRef<any>) {
@@ -117,5 +118,8 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 
 	_emitOpenEvent(): void {
 		this.open.emit();
+	}
+	_emitHoveredEvent(hovered: boolean): void {
+		this.hovered.emit(hovered);
 	}
 }

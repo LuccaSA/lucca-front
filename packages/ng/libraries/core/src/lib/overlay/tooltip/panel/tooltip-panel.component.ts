@@ -30,6 +30,7 @@ export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopov
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
+	@Output() hovered = new EventEmitter<boolean>();
 
 	constructor(private _changeDetectorRef: ChangeDetectorRef) {
 		super();
@@ -41,6 +42,9 @@ export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopov
 
 	_emitOpenEvent(): void {
 		this.open.emit();
+	}
+	_emitHoveredEvent(hovered: boolean): void {
+		this.hovered.emit(hovered);
 	}
 
 	markForChange() {
