@@ -64,9 +64,9 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	get closeOnClick() { return this._closeOnClick; }
 	set closeOnClick(coc: boolean) { this._closeOnClick = coc; }
 
-	protected _focusTrapEnabled = false;
-	get focusTrapEnabled() { return this._focusTrapEnabled; }
-	set focusTrapEnabled(fte: boolean) { this._focusTrapEnabled = fte; }
+	protected _trapFocus = false;
+	get trapFocus() { return this._trapFocus; }
+	set trapFocus(tf: boolean) { this._trapFocus = tf; }
 
 	protected _scrollStrategy: LuPopoverScrollStrategy = 'reposition';
 	get scrollStrategy() { return this._scrollStrategy; }

@@ -51,9 +51,9 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	 * Popover focus trap using cdkTrapFocus
 	 * default: false
 	 */
-	@Input('focus-trap-enabled')
-	set inputFocusTrapEnabled(v: boolean) {
-		this.focusTrapEnabled = v;
+	@Input('trap-focus')
+	set inputTrapFocus(v: boolean) {
+		this.trapFocus = v;
 	}
 
 	/**
