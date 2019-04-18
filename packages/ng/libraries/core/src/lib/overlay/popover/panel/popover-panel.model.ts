@@ -174,7 +174,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
-				this.onClose();
+				this._emitCloseEvent();
 				return;
 		}
 	}
