@@ -94,8 +94,8 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 
 	openPopover() {
-		if (!this._popoverOpen && !this._halt && !this._disabled) {
-			const overlay = this._createOverlay();
+		if (!this._popoverOpen && !this._disabled) {
+			this._createOverlay();
 			this._initPopover();
 			this._setIsPopoverOpen(true);
 		}

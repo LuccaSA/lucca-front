@@ -42,8 +42,13 @@ export interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPa
 
 	/** when to display the popover */
 	triggerEvent: LuPopoverTriggerEvent;
+	/** delay before popover apparition when trigger is 'hover' */
 	enterDelay: number;
+	/** delay before popover disparition when trigger is 'hover' */
 	leaveDelay: number;
+
+	/** disable popover apparition */
+	disabled: boolean;
 
 	openPopover();
 	closePopover();
@@ -51,15 +56,15 @@ export interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPa
 	destroyPopover();
 }
 
+// tslint:disable-next-line: max-line-length
 export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _portal: TemplatePortal<any> | ComponentPortal<any>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
-	protected _halt = false;
+	// protected _halt = false;
 	protected _backdropSubscription: Subscription;
 	protected _positionSubscription: Subscription;
-	protected _disabled: boolean;
 
 	protected _mouseoverTimer: any;
 
@@ -101,11 +106,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	get leaveDelay() { return this._leaveDelay; }
 	set leaveDelay(d: number) { this._leaveDelay = d; }
 
-	/** Event emitted when the associated popover is opened. */
-	// onPopoverOpen = new EventEmitter<void>();
-
-	/** Event emitted when the associated popover is closed. */
-	// onPopoverClose = new EventEmitter<void>();
+	protected _disabled = false;
+	get disabled() { return this._disabled; }
+	set disabled(d: boolean) { this._disabled = d; }
 
 	constructor(
 		protected _overlay: Overlay,
@@ -181,7 +184,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	/** Opens the popover. */
 	openPopover(): void {
-		if (!this._popoverOpen && !this._halt && !this._disabled) {
+		if (!this._popoverOpen && !this._disabled) {
 			this._createOverlay();
 			this._overlayRef.attach(this._portal);
 
@@ -289,7 +292,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 				});
 		}
 	}
-	
 
 	/**
 	 * This method sets the popover state to open and focuses the first item if

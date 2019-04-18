@@ -26,7 +26,6 @@ export interface ILuPopoverPanel {
 	open: Observable<void>;
 	/** will emit when the panel is hovered */
 	hovered: Observable<boolean>;
-
 	/** classes to apply to the panel, uses ' ' for separating values */
 	panelClasses: string;
 	/** class to apply to the panel content, uses ' ' for separating values */

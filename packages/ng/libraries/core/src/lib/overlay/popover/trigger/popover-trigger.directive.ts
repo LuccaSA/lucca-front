@@ -66,6 +66,10 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
 	/** when trigger = hover, delay before the popover panel disappears */
 	@Input('luPopoverLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
+
+	/** when trigger = hover, delay before the popover panel disappears */
+	@Input('luPopoverDisabled') set inputDisabled(d: boolean) { this.disabled = d; }
+
 	/** set to true if you want the panel to appear on top of the target */
 	@Input('luPopoverOverlap') set inputOverlap(ov: boolean) { this.target.overlap = ov; }
 
