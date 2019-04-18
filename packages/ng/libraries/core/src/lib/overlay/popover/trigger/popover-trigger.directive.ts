@@ -67,7 +67,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	/** when trigger = hover, delay before the popover panel disappears */
 	@Input('luPopoverLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
 
-	/** when trigger = hover, delay before the popover panel disappears */
+	/** disable popover apparition */
 	@Input('luPopoverDisabled') set inputDisabled(d: boolean) { this.disabled = d; }
 
 	/** set to true if you want the panel to appear on top of the target */
