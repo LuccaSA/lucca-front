@@ -29,18 +29,32 @@
 <br />
 
 <br />
-// disabled
+<h2>disabled</h2>
+<button class="button" [luPopover]="disabled">enabled popover</button>
+<button class="button" [luPopover]="disabled" luPopoverDisabled="true">disabled popover</button>
+<button class="button" [luPopover]="disabled" disabled="true" luPopoverTrigger="hover">disabled button</button>
+<button class="button is-disabled" [luPopover]="disabled"  luPopoverTrigger="hover">is-disabled button</button>
+<span [luPopover]="disabled"  luPopoverTrigger="hover">
+	<button class="button is-disabled">is-disabled button in a span</button>
+</span>
+<lu-popover #disabled>normal popover</lu-popover>
+<p>
+	i cant trigger hover or click if there's no pointer event :'(
+</p>
+<button class="button" luTooltip="tooltip enabled">enabled tooltip</button>
+<button class="button" luTooltip="ttooltip disabled" luTooltipDisabled="true">disabled tooltip</button>
+<button class="button" luTooltip="disabled button" disabled="disabled">disabled button</button>
 <br />
 <h2>focus trap</h2>
 <button class="button" [luPopover]="trapped">click me</button>
 <lu-popover #trapped trap-focus="true">
 	<div class="textfiled">
 		<input type="text" class="textfield-input">
-		<label for="" class="textfield-label">asdasd</label>
+		<label for="" class="textfield-label">label</label>
 	</div>
 	<div class="textfiled">
 		<input type="text" class="textfield-input">
-		<label for="" class="textfield-label">asdasd</label>
+		<label for="" class="textfield-label">label</label>
 	</div>
 </lu-popover>
 <br />
