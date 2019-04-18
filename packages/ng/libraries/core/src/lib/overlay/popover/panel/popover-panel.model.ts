@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { LuPopoverPosition, LuPopoverAlignment } from '../target/index';
 
@@ -26,14 +26,15 @@ export interface ILuPopoverPanel {
 	open: Observable<void>;
 	/** will emit when the panel is hovered */
 	hovered: Observable<boolean>;
-	// popoverPanelStyles: any;
-	// overlayPaneClass: string | string[];
+
+	/** classes to apply to the panel, uses ' ' for separating values */
+	panelClasses: string;
+	/** class to apply to the panel content, uses ' ' for separating values */
+	contentClasses: string;
+
 	keydownEvents$: Observable<KeyboardEvent>;
 
 	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
-
-	_emitCloseEvent(): void;
-	_emitOpenEvent(): void;
 
 	/** method called by the trigger when it opens the popover */
 	onOpen(): void;
@@ -44,16 +45,6 @@ export interface ILuPopoverPanel {
 }
 /**
  * abstract class for basic implementation of a popover panel
- * it is highly recommended to use this template
- * <ng-template>
-	<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="_classList" [ngStyle]="popoverPanelStyles"
-	 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
-	 [@transformPopover]="'enter'">
-		<div class="lu-popover-content" [ngStyle]="popoverContentStyles" cdkTrapFocus="focusTrapEnabled">
-			### PUT HERE THE CONTENT OF THE POPOVER ###
-		</div>
-	</div>
-</ng-template>
  */
 export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	protected _isOpen: boolean;
@@ -80,13 +71,36 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	get templateRef() { return this._templateRef; }
 	set templateRef(tr: TemplateRef<any>) { this._templateRef = tr; }
 
-	protected _positionClasses: any = {};
-	protected _panelClasses: any = {};
-	get panelClasses() { return { ...this._panelClasses, ...this._positionClasses }; }
-	set panelClasses(cl) {
-		this._panelClasses = { ...cl };
+	protected _positionClassesMap: any = {};
+	protected _panelClasses = '';
+	get panelClasses() { return this._panelClasses; }
+	set panelClasses(cl: string) {
+		this._panelClasses = cl;
+	}
+	get panelClassesMap() {
+		const map = this._panelClasses
+			.split(' ')
+			.reduce((obj: any, className: string) => {
+				obj[className] = true;
+				return obj;
+			}, {});
+		// also add positiopn classes 
+		return { ...map, ...this._positionClassesMap };
 	}
 
+	protected _contentClasses = '';
+	get contentClasses() { return this._contentClasses; }
+	set contentClasses(cl: string) {
+		this._contentClasses = cl;
+	}
+	get contentClassesMap() {
+		return this._contentClasses
+			.split(' ')
+			.reduce((obj: any, className: string) => {
+				obj[className] = true;
+				return obj;
+			}, {});
+	}
 	// /** Config object to be passed into the popover's panel ngStyle */
 	// protected _popoverPanelStyles: any = {};
 	// public get popoverPanelStyles() { return this._popoverPanelStyles; }
@@ -102,7 +116,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	// public get popoverContentStyles() { return this._popoverContentStyles; }
 	// public set popoverContentStyles(pcs) { this._popoverContentStyles = pcs; }
 
-	protected _keydownEventsSub;
+	protected _keydownEventsSub: Subscription;
 	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
 		if (!this._keydownEventsSub) {
 			this._keydownEventsSub = evt$.subscribe(e => this._handleKeydown(e));
@@ -131,10 +145,10 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 			posY = al === 'top' ? 'below' : 'after';
 		}
 
-		this._positionClasses['lu-popover-before'] = posX === 'before';
-		this._positionClasses['lu-popover-after'] = posX === 'after';
-		this._positionClasses['lu-popover-above'] = posY === 'above';
-		this._positionClasses['lu-popover-below'] = posY === 'below';
+		this._positionClassesMap['lu-popover-before'] = posX === 'before';
+		this._positionClassesMap['lu-popover-after'] = posX === 'after';
+		this._positionClassesMap['lu-popover-above'] = posY === 'above';
+		this._positionClassesMap['lu-popover-below'] = posY === 'below';
 	}
 
 	onClick() {

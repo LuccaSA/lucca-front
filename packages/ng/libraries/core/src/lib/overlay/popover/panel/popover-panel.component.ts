@@ -71,27 +71,19 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	@Input('panelClasses')
-	set inputClasses(classes: string) {
-		if (classes && classes.length) {
-			this.panelClasses = classes
-				.split(' ')
-				.reduce((obj: any, className: string) => {
-					obj[className] = true;
-					return obj;
-				}, {});
-		}
+	@Input('panel-classes')
+	set inputPanelClasses(classes: string) {
+		this.panelClasses = classes;
 	}
-
 	/**
-	 * Add classes to the overlay pane.
-	 * @param classes list or single class name
+	 * This method takes classes set on the host lu-popover element and applies them on the
+	 * popover template that displays in the overlay container. Otherwise, it's difficult
+	 * to style the containing popover from outside the component.
+	 * @param classes list of class names
 	 */
-	@Input('overlayPaneClass')
-	set overlayPaneClass(classes: string | string[]) {
-		if (classes) {
-			this.overlayPaneClass = classes;
-		}
+	@Input('content-classes')
+	set inputContentClasses(classes: string) {
+		this.contentClasses = classes;
 	}
 
 	/** Event emitted when the popover is closed. */

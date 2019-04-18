@@ -372,7 +372,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		}
 
 		overlayState.direction = this.dir;
-		// overlayState.panelClass = this.panel.overlayPaneClass;
 		const scrollStrategy = this.panel.scrollStrategy;
 		switch (scrollStrategy) {
 			case 'block':
