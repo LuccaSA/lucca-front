@@ -2,12 +2,18 @@
 <h2>overlapping popovers</h2>
 <button class="button" [luPopover]="overlap" luPopoverOverlap="true">click me</button>
 <br />
-<button class="button" [luPopover]="overlap" [luPopoverTarget]="target">trigger for my neighbour</button>
-<span class="label" luPopoverTarget #target="LuPopoverTarget" luPopoverOverlap="true">neighbour</span>
+<button class="button" [luPopover]="overlap" [luPopoverTarget]="overlapTarget">trigger for my neighbour</button>
+<span class="label" luPopoverTarget #overlapTarget="LuPopoverTarget" luPopoverOverlap="true">neighbour</span>
 <br />
 <span class="label" [luPopover]="overlap" luPopoverTrigger="hover" luPopoverOverlap="true">on hover + overlap</span>
 
 <lu-popover #overlap>overlapping popover</lu-popover>
+<h2>offset</h2>
+<button class="button" [luPopover]="offset" [luPopoverTarget]="targetOffset">trigger for my neighbour</button>
+<span class="label" luPopoverTarget #targetOffset="LuPopoverTarget" luPopoverOffsetX="-50" luPopoverOffsetY="10">neighbour</span>
+<lu-popover #offset>offset popover</lu-popover>
+<br />
+<button class="button" [luPopover]="offset" luPopoverOffsetX="50" luPopoverOffsetY="100">click me</button>
 <br />
 // scroll strat
 <br />
