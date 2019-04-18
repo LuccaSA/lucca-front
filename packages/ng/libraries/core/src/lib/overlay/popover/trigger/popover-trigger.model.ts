@@ -452,14 +452,12 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			overlayPosition.overlayY = connectionPosition.originY;
 		}
 
-		// let offsetX = 0;
-		// let offsetY = 0;
 
-		// const targetOffsetX = this.popover ? this.popover.targetOffsetX : this.targetOffsetX;
-		// const targetOffsetY = this.popover ? this.popover.targetOffsetY : this.targetOffsetY;
+		const offsetX = this.target.offsetX;
+		const offsetY = this.target.offsetY;
 
 		// if (
-		// 	overlapTrigger &&
+		// 	overlap &&
 		// 	!this.isVerticallyPositionned &&
 		// 	targetOffsetX &&
 		// 	!isNaN(Number(targetOffsetX))
@@ -531,8 +529,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
 				},
 			)
-			// .withOffsetX(offsetX)
-			// .withOffsetY(offsetY);
+			.withOffsetX(offsetX)
+			.withOffsetY(offsetY);
 	}
 
 	protected _invertVerticalPos(y: VerticalConnectionPos) {

@@ -17,8 +17,8 @@ export interface ILuPopoverTarget {
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
 	position: LuPopoverPosition;
 
-	// offsetX: number;
-	// offsetY: number;
+	offsetX: number;
+	offsetY: number;
 }
 
 export abstract class ALuPopoverTarget implements ILuPopoverTarget {
@@ -64,13 +64,13 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 	get overlap() { return this._overlap; }
 	set overlap(ot: boolean) { this._overlap = ot; }
 
-	// protected _offsetX = 0;
-	// get offsetX() { return this._offsetX; }
-	// set offsetX(tox: number) { this._offsetX = tox; }
+	protected _offsetX = 0;
+	get offsetX() { return this._offsetX; }
+	set offsetX(ox: number) { this._offsetX = ox; }
 
-	// protected _offsetY = 0;
-	// get offsetY() { return this._offsetY; }
-	// set offsetY(toy: number) { this._offsetY = toy; }
+	protected _offsetY = 0;
+	get offsetY() { return this._offsetY; }
+	set offsetY(oy: number) { this._offsetY = oy; }
 }
 
 export class LuPopoverTarget extends ALuPopoverTarget {

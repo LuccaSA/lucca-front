@@ -16,4 +16,7 @@ export class LuPopoverTargetDirective extends ALuPopoverTarget {
 	@Input('luPopoverAlignment') set inputAlignment(al: LuPopoverAlignment) { this.alignment = al; }
 	/** set to true if you want the panel to appear on top of the target */
 	@Input('luPopoverOverlap') set inputOverlap(ov: boolean) { this.overlap = ov; }
+
+	@Input('luPopoverOffsetX') set inputOffsetX(ox: number) { this.offsetX = ox; }
+	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) { this.offsetY = oy; }
 }

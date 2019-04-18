@@ -69,6 +69,9 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	/** set to true if you want the panel to appear on top of the target */
 	@Input('luPopoverOverlap') set inputOverlap(ov: boolean) { this.target.overlap = ov; }
 
+	@Input('luPopoverOffsetX') set inputOffsetX(ox: number) { this.target.offsetX = ox; }
+	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) { this.target.offsetY = oy; }
+
 	@HostBinding('attr.aria-haspopup') hasPopup = true;
 
 	constructor(
