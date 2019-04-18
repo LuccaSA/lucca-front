@@ -24,6 +24,19 @@
 <br />
 // disabled
 <br />
+<h2>focus trap</h2>
+<button class="button" [luPopover]="trapped">click me</button>
+<lu-popover #trapped trap-focus="true">
+	<div class="textfiled">
+		<input type="text" class="textfield-input">
+		<label for="" class="textfield-label">asdasd</label>
+	</div>
+	<div class="textfiled">
+		<input type="text" class="textfield-input">
+		<label for="" class="textfield-label">asdasd</label>
+	</div>
+</lu-popover>
+<br />
 // reposition
 <br />
 // reposition + offset
