@@ -20,7 +20,14 @@
 <br />
 // scroll strat
 <br />
-// panel/content/overlay classes
+<h2>panel-content-backdrop classes injection</h2>
+<button class="button" [luPopover]="class" luPopoverOverlap="true">1 class</button>
+<lu-popover #class panel-classes="my-panel" content-classes="my-content">popover with custom class for content and panel</lu-popover>
+<br />
+<button class="button" [luPopover]="classes" luPopoverOverlap="true">2 classes</button>
+<lu-popover #classes panel-classes="my-panel my-panel-again" content-classes="my-content my-content-again">popover with custom class<b>es</b> for content and panel</lu-popover>
+<br />
+
 <br />
 // disabled
 <br />
