@@ -15,7 +15,7 @@ import {
 	AfterViewInit,
 	Input,
 } from '@angular/core';
-import { luTransformPopover } from '../../popover/index';
+import { luTransformPopover } from '../../overlay/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { merge, of } from 'rxjs';
@@ -44,25 +44,11 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
 implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
-	@Input('overlap-trigger')
-	set inputOverlapTrigger(v: boolean) {
-		this.overlapTrigger = v;
-	}
 
-	/**
-	 * Add classes to the overlay pane.
-	 * @param classes list or single class name
-	 */
-	@Input('overlayPaneClass')
-	set inputOverlayPaneClass(classes: string | string[]) {
-		this.overlayPaneClass = [
-			...this._defaultOverlayPaneClasses,
-			...(Array.isArray(classes) ? classes : [classes])
-		];
-	}
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
+	@Output() hovered = new EventEmitter<boolean>();
 	@Output() onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
@@ -73,7 +59,6 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _renderer: Renderer2) {
 		super();
-		this.triggerEvent = 'click';
 		this._isOptionItemsInitialized = false;
 		this.overlayPaneClass = this._defaultOverlayPaneClasses;
 	}
@@ -89,11 +74,8 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		this._operators = ql.toArray();
 	}
 
-	protected _select(val: T) {
+	protected _emitSelectValue(val: T) {
 		this.onSelectValue.emit(val);
-		if (!this.multiple) {
-			this.onClose();
-		}
 	}
 	ngOnDestroy() {
 		super.destroy();
@@ -107,6 +89,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 	_emitCloseEvent(): void {
 		this.close.emit();
+	}
+	_emitHoveredEvent(h): void {
+		this.hovered.emit(h);
 	}
 	onOpen() {
 		super.onOpen();

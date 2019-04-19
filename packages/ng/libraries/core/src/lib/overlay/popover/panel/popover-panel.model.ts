@@ -1,7 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { LuPopoverPosition, LuPopoverAlignment } from '../target/index';
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
@@ -31,8 +30,6 @@ export interface ILuPopoverPanel {
 	onOpen(): void;
 	/** method called by the trigger when it closes the popover */
 	onClose(): void;
-
-	// containerPositioning: boolean; // idont inow what it is
 }
 /**
  * abstract class for basic implementation of a popover panel
@@ -93,10 +90,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 				return obj;
 			}, {});
 	}
-	// /** Config object to be passed into the popover's panel ngStyle */
-	// protected _popoverPanelStyles: any = {};
-	// public get popoverPanelStyles() { return this._popoverPanelStyles; }
-	// public set popoverPanelStyles(pps) { this._popoverPanelStyles = pps; }
+
 
 	/** Classes to be passed into the popover's overlay */
 	protected _overlayPaneClass: string | string[];
@@ -104,9 +98,6 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	public set overlayPaneClass(opc) { this._overlayPaneClass = opc; }
 
 	// /** Config object to be passed into the popover's content ngStyle */
-	// protected _popoverContentStyles: any = {};
-	// public get popoverContentStyles() { return this._popoverContentStyles; }
-	// public set popoverContentStyles(pcs) { this._popoverContentStyles = pcs; }
 
 	protected _keydownEventsSub: Subscription;
 	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
@@ -148,9 +139,6 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	/** Disables close of popover when leaving trigger element and mouse over the popover */
 	onMouseOver() {
 		this._emitHoveredEvent(true);
-		// if (this.triggerEvent === 'hover') {
-		// 	this.closeDisabled = true;
-		// }
 	}
 	/** Enables close of popover when mouse leaving popover element */
 	onMouseLeave() {
