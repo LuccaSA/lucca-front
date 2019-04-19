@@ -114,9 +114,6 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	ngAfterViewInit() {
 		this._checkPanel();
 		this._checkTarget();
-		// this.popover.close.subscribe(() => {
-		// 	this.closePopover();
-		// });
 	}
 	ngOnDestroy() {
 		this.destroyPopover();

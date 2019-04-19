@@ -42,12 +42,4 @@ export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopov
 	_emitHoveredEvent(hovered: boolean): void {
 		this.hovered.emit(hovered);
 	}
-
-	// markForChange() {
-	// 	this._changeDetectorRef.markForCheck();
-	// }
-	// setPositionClasses(posX, posY) {
-	// 	super.setPositionClasses(posX, posY);
-	// 	this._changeDetectorRef.markForCheck();
-	// }
 }

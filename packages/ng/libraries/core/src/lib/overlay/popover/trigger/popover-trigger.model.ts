@@ -116,22 +116,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		protected _viewContainerRef: ViewContainerRef,
 	) {}
 
-	// ngAfterViewInit() {
-	// 	this._checkPopover();
-	// 	this.popover.close.subscribe(() => {
-	// 		this.closePopover();
-	// 	});
-	// }
-
-	// ngOnDestroy() {
-	// 	this.destroyPopover();
-	// }
-
-	/** Whether the popover is open. */
-	// get popoverOpen(): boolean {
-	// 	return this._popoverOpen;
-	// }
-
 	onClick() {
 		if (this.triggerEvent === 'click') {
 			this.togglePopover();
@@ -139,31 +123,14 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	}
 
 	onMouseEnter() {
-		// this._halt = false;
 		if (this.triggerEvent === 'hover') {
 			this._hovered$.next(true);
-			// this._mouseoverTimer = setTimeout(() => {
-				// this.openPopover();
-			// }, this.enterDelay);
 		}
 	}
 
 	onMouseLeave() {
 		if (this.triggerEvent === 'hover') {
 			this._hovered$.next(false);
-			// if (this._mouseoverTimer) {
-			// 	clearTimeout(this._mouseoverTimer);
-			// 	this._mouseoverTimer = null;
-			// }
-			// if (this._popoverOpen) {
-			// 	setTimeout(() => {
-			// 		if (!this.popover.closeDisabled) {
-						// this.closePopover();
-			// 		}
-			// 	}, this.popover.leaveDelay);
-			// } else {
-			// 	this._halt = true;
-			// }
 		}
 	}
 	onFocus() {
@@ -471,31 +438,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 		const offsetX = this.target.offsetX;
 		const offsetY = this.target.offsetY;
-
-		// if (
-		// 	overlap &&
-		// 	!this.isVerticallyPositionned &&
-		// 	targetOffsetX &&
-		// 	!isNaN(Number(targetOffsetX))
-		// ) {
-		// 	if (overlayPosition.overlayX === 'end') {
-		// 		offsetX = -Number(targetOffsetX);
-		// 	} else if (overlayPosition.overlayX === 'start') {
-		// 		offsetX = Number(targetOffsetX);
-		// 	}
-		// }
-
-		// if (
-		// 	this.isVerticallyPositionned &&
-		// 	targetOffsetY &&
-		// 	!isNaN(Number(targetOffsetY))
-		// ) {
-		// 	if (overlayPosition.overlayY === 'top') {
-		// 		offsetY = Number(targetOffsetY);
-		// 	} else if (overlayPosition.overlayY === 'bottom') {
-		// 		offsetY = -Number(targetOffsetY);
-		// 	}
-		// }
 
 		/**
 		 * For overriding position element, when LuPopoverTargetAt has a valid element reference.

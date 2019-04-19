@@ -8,7 +8,6 @@ export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 export interface ILuPopoverPanel {
 	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
-	closeDisabled: boolean;
 	templateRef?: TemplateRef<any>;
 
 	/** will emit when the panel wants to close */
@@ -50,10 +49,6 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	protected _scrollStrategy: LuPopoverScrollStrategy = 'reposition';
 	get scrollStrategy() { return this._scrollStrategy; }
 	set scrollStrategy(ss: LuPopoverScrollStrategy) { this._scrollStrategy = ss; }
-
-	protected _closeDisabled = false;
-	get closeDisabled() { return this._closeDisabled; }
-	set closeDisabled(cd: boolean) { this._closeDisabled = cd; }
 
 	protected _templateRef: TemplateRef<any>;
 	get templateRef() { return this._templateRef; }
@@ -143,10 +138,6 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	/** Enables close of popover when mouse leaving popover element */
 	onMouseLeave() {
 		this._emitHoveredEvent(false);
-		// if (this.triggerEvent === 'hover') {
-		// 	this.closeDisabled = false;
-		// 	this.onClose();
-		// }
 	}
 	/** does nothing but must be overridable */
 	onMouseDown($event) {}
