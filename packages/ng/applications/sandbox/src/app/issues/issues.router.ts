@@ -9,6 +9,7 @@ import { IssuesComponent, ISSUES_INDEX_TOKEN } from './issues.component';
 import { RefactoOverlayAdvancedModule } from './refacto-overlay-advanced';
 import { RefactoOverlaysRepositionModule } from './refacto-overlays-reposition';
 import { RefactoTooltipModule } from './refacto-tooltip';
+import { RefactorSelectModule } from './refactor-select';
 
 const routes: Routes = [
 	{ path: '', component: IssuesComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
 	{ path: 'refacto-overlay-advanced', loadChildren: () => RefactoOverlayAdvancedModule},
 	{ path: 'refacto-overlays-reposition', loadChildren: () => RefactoOverlaysRepositionModule},
 	{ path: 'refacto-tooltip', loadChildren: () => RefactoTooltipModule},
+	{ path: 'refactor-select', loadChildren: () => RefactorSelectModule},
 ];
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
