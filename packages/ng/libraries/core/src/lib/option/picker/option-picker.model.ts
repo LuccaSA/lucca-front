@@ -86,12 +86,12 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
-				this.onClose();
+				this._emitCloseEvent();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
 			case TAB:
-				this.onClose();
+				this._emitCloseEvent();
 				break;
 		}
 	}
