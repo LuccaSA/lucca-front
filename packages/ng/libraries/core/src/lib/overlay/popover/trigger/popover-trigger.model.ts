@@ -397,13 +397,13 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 * correct, even if a fallback position is used for the overlay.
 	 */
 	protected _subscribeToPositions(position: ConnectedPositionStrategy): void {
-		// this._positionSubscription = position.onPositionChange.subscribe(change => {
-		// 	const posX: LuPopoverPosition =
-		// 		change.connectionPair.overlayX === 'end' ? 'before' : 'after';
-		// 	const posY: LuPopoverPosition =
-		// 		change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
-		// 	this.panel.setPositionClassesChanges(posX, posY);
-		// });
+		this._positionSubscription = position.onPositionChange.subscribe(change => {
+			const posX: LuPopoverPosition =
+				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
+			const posY: LuPopoverPosition =
+				change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
+			this.panel.setPositionClasses(change.connectionPair.overlayX, change.connectionPair.overlayY);
+		});
 	}
 
 	/**
