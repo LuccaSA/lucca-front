@@ -1,39 +1,35 @@
-import { Component, OnInit, EventEmitter, Output, Input, HostBinding, ChangeDetectorRef } from '@angular/core';
-import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '../../popover/index';
+import { Component, EventEmitter, Output, HostBinding, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { ALuPopoverPanel, ILuPopoverPanel } from '../../popover/index';
+import { luTransformTooltip } from '../animation/index';
 
 @Component({
 	selector: 'lu-tooltip-panel',
 	templateUrl: './tooltip-panel.component.html',
 	styleUrls: ['./tooltip-panel.component.scss'],
-	animations: [luTransformPopover],
+	animations: [luTransformTooltip],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel {
 
-	@HostBinding('@transformPopover') animationState = 'enter';
-	@HostBinding('class') get classes() {
-		if (this.panelClasses['lu-popover-above']) {
-			return 'lu-tooltip-above';
-		}
-		if (this.panelClasses['lu-popover-below']) {
-			return 'lu-tooltip-below';
-		}
-		if (this.panelClasses['lu-popover-before']) {
-			return 'lu-tooltip-before';
-		}
-		if (this.panelClasses['lu-popover-after']) {
-			return 'lu-tooltip-after';
-		}
-		return '';
-	}
+	@HostBinding('@transformTooltip') animationState = 'enter';
 
-	@Input() content;
+	private _content;
+	get content() { return this._content; }
+	set content(c) {
+		this._content = c;
+		this._changeDetectorRef.markForCheck();
+	}
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() hovered = new EventEmitter<boolean>();
-
+	@ViewChild(TemplateRef)
+	set vcTemplateRef(tr: TemplateRef<any>) {
+		this.templateRef = tr;
+	}
 	constructor(private _changeDetectorRef: ChangeDetectorRef) {
 		super();
+		this.scrollStrategy = 'close';
 	}
 
 	_emitCloseEvent(): void {
@@ -47,7 +43,11 @@ export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopov
 		this.hovered.emit(hovered);
 	}
 
-	markForChange() {
-		this._changeDetectorRef.markForCheck();
-	}
+	// markForChange() {
+	// 	this._changeDetectorRef.markForCheck();
+	// }
+	// setPositionClasses(posX, posY) {
+	// 	super.setPositionClasses(posX, posY);
+	// 	this._changeDetectorRef.markForCheck();
+	// }
 }

@@ -24,10 +24,10 @@ import {
 	ILuPopoverPanel,
 } from '../panel/index';
 import {
-	ILuPopoverTarget, LuPopoverPosition,
+	ILuPopoverTarget,
 } from '../target/index';
 import { throwLuPopoverMissingTargetError, throwLuPopoverMissingPanelError } from './popover-trigger.error';
-import { debounce } from 'rxjs/operators';
+import { debounce, map, distinctUntilChanged } from 'rxjs/operators';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
@@ -397,12 +397,12 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 * correct, even if a fallback position is used for the overlay.
 	 */
 	protected _subscribeToPositions(position: ConnectedPositionStrategy): void {
-		this._positionSubscription = position.onPositionChange.subscribe(change => {
-			const posX: LuPopoverPosition =
-				change.connectionPair.overlayX === 'end' ? 'before' : 'after';
-			const posY: LuPopoverPosition =
-				change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
-			this.panel.setPositionClasses(change.connectionPair.overlayX, change.connectionPair.overlayY);
+		this._positionSubscription = position.onPositionChange.pipe(
+			map(c => c.connectionPair),
+			distinctUntilChanged(),
+		)
+		.subscribe(connectionPair => {
+			this.panel.setPositionClasses(connectionPair.overlayX, connectionPair.overlayY);
 		});
 	}
 

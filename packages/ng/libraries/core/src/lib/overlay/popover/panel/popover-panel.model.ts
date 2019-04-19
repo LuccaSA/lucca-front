@@ -71,11 +71,12 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	get panelClassesMap() {
 		const map = this._panelClasses
 			.split(' ')
+			.filter(c => !!c)
 			.reduce((obj: any, className: string) => {
 				obj[className] = true;
 				return obj;
 			}, {});
-		// also add positiopn classes 
+		// also add positiopn classes
 		return { ...map, ...this._positionClassesMap };
 	}
 
@@ -121,14 +122,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	abstract _emitOpenEvent(): void;
 	abstract _emitHoveredEvent(hovered: boolean): void;
 
-	constructor() {
-		// this.setPositionClasses(this.position, this.alignment);
-	}
 	setPositionClasses(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
-		this._positionClassesMap['lu-popover-before'] = posX === 'end';
-		this._positionClassesMap['lu-popover-after'] = posX === 'start';
-		this._positionClassesMap['lu-popover-above'] = posY === 'bottom';
-		this._positionClassesMap['lu-popover-below'] = posY === 'top';
+		this._positionClassesMap['is-before'] = posX === 'end';
+		this._positionClassesMap['is-after'] = posX === 'start';
+		this._positionClassesMap['is-above'] = posY === 'bottom';
+		this._positionClassesMap['is-below'] = posY === 'top';
 	}
 
 	onClick() {
