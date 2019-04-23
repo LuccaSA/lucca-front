@@ -34,8 +34,8 @@ import { LuOptionPickerComponent } from './option-picker.component';
 export class LuOptionPickerAdvancedComponent<T = any>
 extends LuOptionPickerComponent<T> {
 	loading$: Observable<boolean>;
-	protected _operators;
 
+	protected _operators;
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		const operators = ql.toArray();
 		this._operators = operators;
