@@ -42,8 +42,13 @@ export interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPa
 
 	/** when to display the popover */
 	triggerEvent: LuPopoverTriggerEvent;
+	/** delay before popover apparition when trigger is 'hover' */
 	enterDelay: number;
+	/** delay before popover disparition when trigger is 'hover' */
 	leaveDelay: number;
+
+	/** disable popover apparition */
+	disabled: boolean;
 
 	openPopover();
 	closePopover();
@@ -51,20 +56,21 @@ export interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPa
 	destroyPopover();
 }
 
+// tslint:disable-next-line: max-line-length
 export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _portal: TemplatePortal<any> | ComponentPortal<any>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
-	protected _halt = false;
+	// protected _halt = false;
 	protected _backdropSubscription: Subscription;
 	protected _positionSubscription: Subscription;
-	protected _disabled: boolean;
 
 	protected _mouseoverTimer: any;
 
 	protected _hovered$ = new Subject();
 	protected _hoveredSubscription: Subscription;
+	protected _panelEventsSubscriptions: Subscription;
 
 	// tracking input type is necessary so it's possible to only auto-focus
 	// the first item of the list when the popover is opened via the keyboard
@@ -93,18 +99,16 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			).subscribe(h => h ? this.openPopover() : this.closePopover());
 		}
 	}
-	protected _enterDelay = 0;
+	protected _enterDelay = 50;
 	get enterDelay() { return this._enterDelay; }
 	set enterDelay(d: number) { this._enterDelay = d; }
-	protected _leaveDelay = 0;
+	protected _leaveDelay = 50;
 	get leaveDelay() { return this._leaveDelay; }
 	set leaveDelay(d: number) { this._leaveDelay = d; }
 
-	/** Event emitted when the associated popover is opened. */
-	// onPopoverOpen = new EventEmitter<void>();
-
-	/** Event emitted when the associated popover is closed. */
-	// onPopoverClose = new EventEmitter<void>();
+	protected _disabled = false;
+	get disabled() { return this._disabled; }
+	set disabled(d: boolean) { this._disabled = d; }
 
 	constructor(
 		protected _overlay: Overlay,
@@ -180,7 +184,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	/** Opens the popover. */
 	openPopover(): void {
-		if (!this._popoverOpen && !this._halt && !this._disabled) {
+		if (!this._popoverOpen && !this._disabled) {
 			this._createOverlay();
 			this._overlayRef.attach(this._portal);
 
@@ -188,6 +192,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			if (this.triggerEvent === 'click') {
 				this._subscribeToBackdrop();
 			}
+
+			/** Only subscribe to mouse enter/leave of the panel if trigger = hover */
 
 			this._initPopover();
 		}
@@ -243,6 +249,35 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	}
 
 	/**
+	 * This method ensures that the popover
+	 */
+	protected _subscribeToPanelEvents(): void {
+		if (this._overlayRef) {
+			this._panelEventsSubscriptions = new Subscription();
+			if (this.triggerEvent === 'hover') {
+
+				this._panelEventsSubscriptions.add(
+					this.panel.hovered
+					.subscribe((hovered) => {
+						this._hovered$.next(hovered);
+					}),
+				);
+			}
+			this._panelEventsSubscriptions.add(
+				this.panel.close
+				.subscribe(() => {
+					this.closePopover();
+				}),
+			);
+			this._panelEventsSubscriptions.add(
+				this.panel.open
+				.subscribe(() => {
+					this.openPopover();
+				}),
+			);
+		}
+	}
+		/**
 	 * This method ensures that the popover closes when the overlay backdrop is clicked.
 	 * We do not use first() here because doing so would not catch clicks from within
 	 * the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
@@ -265,6 +300,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _initPopover(): void {
 		this._setIsPopoverOpen(true);
 		this.panel.keydownEvents$ = this._overlayRef.keydownEvents();
+		this._subscribeToPanelEvents();
 	}
 
 	/**
@@ -285,9 +321,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	/** set state rather than toggle to support triggers sharing a popover */
 	protected _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
-		// TODO - i dont remember what it does
-		// this._popoverOpen ? this.popover.onOpen() : (() => {})();
-		// this._popoverOpen ? this.onPopoverOpen.emit() : this.onPopoverClose.emit();
+		// tell the panel it's opening/closing
+		isOpen ? this.panel.onOpen() : this.panel.onClose();
 	}
 
 	/**
@@ -339,7 +374,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		}
 
 		overlayState.direction = this.dir;
-		// overlayState.panelClass = this.panel.overlayPaneClass;
 		const scrollStrategy = this.panel.scrollStrategy;
 		switch (scrollStrategy) {
 			case 'block':
@@ -385,9 +419,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 		// Position
 		const position = this.target.position;
-		// disable overlap for now
-		// const overlap = this.target.overlap;
-		const overlap = false;
+		const overlap = this.target.overlap;
 		if (position === 'above') {
 			connectionPosition.originY = overlap ? 'bottom' : 'top';
 		} else if (position === 'below') {
@@ -436,14 +468,12 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			overlayPosition.overlayY = connectionPosition.originY;
 		}
 
-		// let offsetX = 0;
-		// let offsetY = 0;
 
-		// const targetOffsetX = this.popover ? this.popover.targetOffsetX : this.targetOffsetX;
-		// const targetOffsetY = this.popover ? this.popover.targetOffsetY : this.targetOffsetY;
+		const offsetX = this.target.offsetX;
+		const offsetY = this.target.offsetY;
 
 		// if (
-		// 	overlapTrigger &&
+		// 	overlap &&
 		// 	!this.isVerticallyPositionned &&
 		// 	targetOffsetX &&
 		// 	!isNaN(Number(targetOffsetX))
@@ -515,8 +545,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
 				},
 			)
-			// .withOffsetX(offsetX)
-			// .withOffsetY(offsetY);
+			.withOffsetX(offsetX)
+			.withOffsetY(offsetY);
 	}
 
 	protected _invertVerticalPos(y: VerticalConnectionPos) {
@@ -547,6 +577,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		}
 		if (this._hoveredSubscription) {
 			this._hoveredSubscription.unsubscribe();
+		}
+		if (this._panelEventsSubscriptions) {
+			this._panelEventsSubscriptions.unsubscribe();
 		}
 	}
 }

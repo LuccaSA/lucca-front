@@ -1,8 +1,8 @@
 <ng-template>
-	<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="panelClasses"
+	<div class="lu-popover-panel" role="dialog" [class.lu-popover-overlap]="overlapTrigger" [ngClass]="panelClassesMap"
 	 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
 	 [@transformPopover]="'enter'">
-		<div class="lu-popover-content" [ngClass]="contentClasses" cdkTrapFocus="focusTrapEnabled">
+		<div class="lu-popover-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
 			<ng-content></ng-content><ng-container *ngTemplateOutlet="template"></ng-container>
 		</div>
 	</div>

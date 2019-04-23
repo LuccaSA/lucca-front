@@ -18,13 +18,14 @@ import {
 export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit {
 
 	@Input('luTooltip') tooltipContent;
-	// @Input() enterDelay = 300;
-	// @Input() leaveDelay = 100;
-		/** when trigger = hover, delay before the popover panel appears, default 300ms */
-		@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
-		/** when trigger = hover, delay before the popover panel disappears, defaiult 100ms */
-		@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
-		@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
+	/** when trigger = hover, delay before the popover panel appears, default 300ms */
+	@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
+	/** when trigger = hover, delay before the popover panel disappears, defaiult 100ms */
+	@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
+	/** disable popover apparition */
+	@Input('luTooltipDisabled') set inputDisabled(d: boolean) { this.disabled = d; }
+
+	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
 
 	@HostListener('mouseenter')
 	onMouseEnter() {
@@ -94,8 +95,8 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 
 	openPopover() {
-		if (!this._popoverOpen && !this._halt && !this._disabled) {
-			const overlay = this._createOverlay();
+		if (!this._popoverOpen && !this._disabled) {
+			this._createOverlay();
 			this._initPopover();
 			this._setIsPopoverOpen(true);
 		}
