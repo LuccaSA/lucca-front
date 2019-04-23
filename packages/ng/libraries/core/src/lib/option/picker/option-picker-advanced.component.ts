@@ -3,33 +3,23 @@ import {
 	Component,
 	ContentChildren,
 	QueryList,
-	Output,
-	EventEmitter,
-	OnDestroy,
 	forwardRef,
-	ViewChild,
-	TemplateRef,
-	ViewContainerRef,
 	Renderer2,
 	ChangeDetectorRef,
-	AfterViewInit,
-	Input,
 } from '@angular/core';
 import { luTransformPopover } from '../../overlay/index';
-import { ILuOptionItem, ALuOptionItem } from '../item/index';
-import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
-import { merge, of, Observable } from 'rxjs';
-import { map, delay, first, mapTo, startWith, shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { first, mapTo, startWith, shareReplay, tap } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { LuOptionPickerComponent } from './option-picker.component';
 
 /**
-* basic option picker panel
+* advanced option picker panel
 */
 @Component({
 	selector: 'lu-option-picker-advanced',
-	templateUrl: './option-picker.component.html',
+	templateUrl: './option-picker-advanced.component.html',
 	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
@@ -42,7 +32,8 @@ import { LuOptionPickerComponent } from './option-picker.component';
 	]
 })
 export class LuOptionPickerAdvancedComponent<T = any>
-extends LuOptionPickerComponent {
+extends LuOptionPickerComponent<T> {
+	loading$: Observable<boolean>;
 	protected _operators;
 
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
@@ -59,7 +50,7 @@ extends LuOptionPickerComponent {
 				first(),
 				mapTo(false),
 				startWith(true),
-				shareReplay()
+				shareReplay(),
 			);
 		}
 	}

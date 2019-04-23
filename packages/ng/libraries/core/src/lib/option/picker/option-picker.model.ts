@@ -9,8 +9,6 @@ export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T | T[]>;
-	loading$: Observable<boolean>;
-	isEmpty$: Observable<boolean>;
 	protected _value: T | T[];
 	setValue(value: T | T[]) {
 		this._value = value;
