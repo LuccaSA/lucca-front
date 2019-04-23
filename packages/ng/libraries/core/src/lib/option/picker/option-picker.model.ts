@@ -18,10 +18,6 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		this._value = value;
 		this._applySelected();
 	}
-	constructor() {
-		super();
-		this.triggerEvent = 'click';
-	}
 	protected set _optionItems$(optionItems$: Observable<ILuOptionItem<T>[]>) {
 		// reapply selected when the options change
 		this._subs.add(
@@ -77,7 +73,12 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			o.onScrollBottom();
 		});
 	}
-	protected abstract _select(val: T | T[]);
+	protected _select(val: T | T[]) {
+		this._emitSelectValue(val);
+		if (!this.multiple) {
+			this._emitCloseEvent();
+		}
+	}
 	protected abstract _applySelected();
 	protected destroy() {
 		this._subs.unsubscribe();
@@ -85,12 +86,12 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
-				this.onClose();
+				this._emitCloseEvent();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
 			case TAB:
-				this.onClose();
+				this._emitCloseEvent();
 				break;
 		}
 	}
@@ -108,4 +109,5 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		});
 		super.onClose();
 	}
+	protected abstract _emitSelectValue(value: T | T[]);
 }

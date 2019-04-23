@@ -3,12 +3,11 @@ import { LuApiModule } from './api/index';
 import { LuInputModule } from './input/index';
 import { LuNumberModule } from './number/index';
 import { LuOptionModule } from './option/index';
-import { LuPopoverModule } from './popover/index';
 import { LuSafeContentModule } from './safe-content/index';
 import { LuScrollModule } from './scroll/index';
 import { LuSelectModule } from './select/index';
-import { LuTooltipModule } from './tooltip/index';
 import { LuUserModule } from './user/index';
+import { LuOverlayModule } from './overlay/index';
 
 @NgModule({
 	imports: [
@@ -16,24 +15,22 @@ import { LuUserModule } from './user/index';
 		LuInputModule,
 		LuNumberModule,
 		LuOptionModule,
-		LuPopoverModule,
 		LuSafeContentModule,
 		LuScrollModule,
 		LuSelectModule,
-		LuTooltipModule,
 		LuUserModule,
+		LuOverlayModule,
 	],
 	exports: [
 		LuApiModule,
 		LuInputModule,
 		LuNumberModule,
 		LuOptionModule,
-		LuPopoverModule,
 		LuSafeContentModule,
 		LuScrollModule,
 		LuSelectModule,
-		LuTooltipModule,
 		LuUserModule,
+		LuOverlayModule,
 	],
 })
 export class LuModule {}

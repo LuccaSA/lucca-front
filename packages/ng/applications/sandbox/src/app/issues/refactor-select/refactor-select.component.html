@@ -1,0 +1,10 @@
+<h1>refactor-select</h1>
+<div class="textfield">
+	<lu-select class="textfield-input" [(ngModel)]="model">
+		<span *luDisplayer="let value">{{value}}</span>
+		<lu-option-picker>
+			<lu-option value="1">1</lu-option>
+			<lu-option value="2">2</lu-option>
+		</lu-option-picker>
+	</lu-select>
+</div>

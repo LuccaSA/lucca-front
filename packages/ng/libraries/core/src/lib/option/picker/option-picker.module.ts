@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LuOptionItemModule } from '../item/index';
 import { LuScrollModule } from '../../scroll/index';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
 	imports: [
@@ -11,6 +12,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 		OverlayModule,
 		LuOptionItemModule,
 		LuScrollModule,
+		A11yModule,
 	],
 	declarations: [
 		LuOptionPickerComponent,
