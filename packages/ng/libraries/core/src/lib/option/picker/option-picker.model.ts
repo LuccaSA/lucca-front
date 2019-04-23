@@ -1,14 +1,12 @@
 import { ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 import { Subscription, Observable, merge } from 'rxjs';
-import { switchMap, first, startWith, mapTo, shareReplay } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/index';
-import { ILuOptionOperator } from '../operator/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 
 export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
 
 export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
-	private __operators;
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T | T[]>;
 	loading$: Observable<boolean>;
@@ -49,30 +47,7 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			this._select(newValues);
 		}
 	}
-	protected set _operators(operators: ILuOptionOperator<T>[]) {
-		this.__operators = operators;
-		let options$: Observable<T[]>;
-		operators.forEach(operator => {
-			operator.inOptions$ = options$;
-			options$ = operator.outOptions$;
-		});
-		const lastOperator = operators[operators.length - 1];
-		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(
-				first(),
-				mapTo(false),
-				startWith(true),
-				shareReplay()
-			);
-		}
-	}
-	onScrollBottom() {
-		if (!this.__operators) { return; }
-		this.__operators.forEach(o => {
-			if (!o.onScrollBottom) { return; }
-			o.onScrollBottom();
-		});
-	}
+
 	protected _select(val: T | T[]) {
 		this._emitSelectValue(val);
 		if (!this.multiple) {
@@ -95,19 +70,6 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 				break;
 		}
 	}
-	onOpen() {
-		this.__operators.forEach(o => {
-			if (!o.onOpen) { return; }
-			o.onOpen();
-		});
-		super.onOpen();
-	}
-	onClose() {
-		this.__operators.forEach(o => {
-			if (!o.onClose) { return; }
-			o.onClose();
-		});
-		super.onClose();
-	}
+
 	protected abstract _emitSelectValue(value: T | T[]);
 }
