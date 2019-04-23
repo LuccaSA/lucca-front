@@ -7,6 +7,8 @@ import { RefactoOverlaysTooltipModule } from './refacto-overlays-tooltip';
 import { CommonModule } from '@angular/common';
 import { IssuesComponent, ISSUES_INDEX_TOKEN } from './issues.component';
 import { RefactoOverlayAdvancedModule } from './refacto-overlay-advanced';
+import { RefactoOverlaysRepositionModule } from './refacto-overlays-reposition';
+import { RefactoTooltipModule } from './refacto-tooltip';
 
 const routes: Routes = [
 	{ path: '', component: IssuesComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [
 	{ path: 'refacto-overlays', loadChildren: () => RefactoOverlaysModule},
 	{ path: 'refacto-overlays-tooltip', loadChildren: () => RefactoOverlaysTooltipModule},
 	{ path: 'refacto-overlay-advanced', loadChildren: () => RefactoOverlayAdvancedModule},
+	{ path: 'refacto-overlays-reposition', loadChildren: () => RefactoOverlaysRepositionModule},
+	{ path: 'refacto-tooltip', loadChildren: () => RefactoTooltipModule},
 ];
 const issues = [ ...routes].map(r => r.path);
 issues.shift();

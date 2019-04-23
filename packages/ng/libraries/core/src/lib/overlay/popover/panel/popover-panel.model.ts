@@ -2,19 +2,11 @@ import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { LuPopoverPosition, LuPopoverAlignment } from '../target/index';
+import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
 export interface ILuPopoverPanel {
-	// position: LuPopoverPosition;
-	// alignment: LuPopoverAlignment;
-	/** how the panel will handle scroll events on the body, allowed values: reposition, block, close */
-	// overlapTrigger: boolean;
-	// triggerEvent: LuPopoverTriggerEvent;
-	// enterDelay: number;
-	// leaveDelay: number;
-	// targetOffsetX: number;
-	// targetOffsetY: number;
 	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
 	closeDisabled: boolean;
@@ -33,7 +25,7 @@ export interface ILuPopoverPanel {
 
 	keydownEvents$: Observable<KeyboardEvent>;
 
-	setPositionClasses: (pos: LuPopoverPosition, al: LuPopoverAlignment) => void;
+	setPositionClasses: (posX: HorizontalConnectionPos, posY: VerticalConnectionPos) => void;
 
 	/** method called by the trigger when it opens the popover */
 	onOpen(): void;
@@ -79,11 +71,12 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	get panelClassesMap() {
 		const map = this._panelClasses
 			.split(' ')
+			.filter(c => !!c)
 			.reduce((obj: any, className: string) => {
 				obj[className] = true;
 				return obj;
 			}, {});
-		// also add positiopn classes 
+		// also add positiopn classes
 		return { ...map, ...this._positionClassesMap };
 	}
 
@@ -129,25 +122,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	abstract _emitOpenEvent(): void;
 	abstract _emitHoveredEvent(hovered: boolean): void;
 
-	constructor() {
-		// this.setPositionClasses(this.position, this.alignment);
-	}
-	setPositionClasses(pos: LuPopoverPosition, al: LuPopoverAlignment): void {
-		let posX: LuPopoverPosition;
-		let posY: LuPopoverPosition;
-
-		if (pos === 'above' || pos === 'below') {
-			posY = pos;
-			posX = al === 'left' ? 'after' : 'before';
-		} else {
-			posX = pos;
-			posY = al === 'top' ? 'below' : 'after';
-		}
-
-		this._positionClassesMap['lu-popover-before'] = posX === 'before';
-		this._positionClassesMap['lu-popover-after'] = posX === 'after';
-		this._positionClassesMap['lu-popover-above'] = posY === 'above';
-		this._positionClassesMap['lu-popover-below'] = posY === 'below';
+	setPositionClasses(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
+		this._positionClassesMap['is-before'] = posX === 'end';
+		this._positionClassesMap['is-after'] = posX === 'start';
+		this._positionClassesMap['is-above'] = posY === 'bottom';
+		this._positionClassesMap['is-below'] = posY === 'top';
 	}
 
 	onClick() {

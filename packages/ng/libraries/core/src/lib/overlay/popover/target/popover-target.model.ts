@@ -2,7 +2,7 @@ import { ElementRef } from '@angular/core';
 import { throwLuPopoverInvalidAlignement, throwLuPopoverInvalidPosition } from './popover-target.error';
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
-export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right';
+export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right' | 'center';
 
 /**
  * anchor for a popover panel
@@ -43,11 +43,12 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 		// this.setPositionClasses(this._position, this._alignment);
 	}
 
-	protected _alignment: LuPopoverAlignment = 'left';
+	protected _alignment: LuPopoverAlignment = 'center';
 	/** how the panel will be align with the target, allowed values: top, bottom, left, right */
 	get alignment(): LuPopoverAlignment { return this._alignment; }
 	set alignment(alignment: LuPopoverAlignment) {
 		if (
+			alignment !== 'center' &&
 			alignment !== 'top' &&
 			alignment !== 'bottom' &&
 			alignment !== 'right' &&
