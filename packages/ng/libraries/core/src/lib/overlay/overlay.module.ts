@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { LuPopoverModule } from './popover/index';
-// import { LuTooltipModule } from './tooltip/index';
+import { LuTooltipModule } from './tooltip/index';
 
 @NgModule({
 	imports: [
 		LuPopoverModule,
-		// LuTooltipModule,
+		LuTooltipModule,
 	],
 	exports: [
 		LuPopoverModule,
-		// LuTooltipModule,
+		LuTooltipModule,
 	]
 })
 export class LuOverlayModule {}

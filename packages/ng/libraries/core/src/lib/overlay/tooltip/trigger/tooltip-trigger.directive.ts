@@ -1,87 +1,68 @@
 import {
 	Directive,
 	Input,
-	OnInit,
 	ElementRef,
 	ViewContainerRef,
 	ComponentFactoryResolver,
 	AfterViewInit,
-	HostListener } from '@angular/core';
+	HostListener,
+} from '@angular/core';
 	import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
 	import { ComponentPortal } from '@angular/cdk/portal';
-	import { ALuPopoverTrigger, LuPopoverPosition } from '../../popover/index';
+	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '../../popover/index';
 	import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
 	selector: '[luTooltip]',
 })
-export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent> implements OnInit, AfterViewInit {
+export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit {
 
 	@Input('luTooltip') tooltipContent;
-	@Input() enterDelay = 300;
-	@Input() leaveDelay = 100;
-	@Input('luTooltipPosition') position: LuPopoverPosition = 'above';
-	@Input('luTooltipDisabled')
-	get disabled(): boolean {
-		return this._disabled;
-	}
-	set disabled(value: boolean) {
-		this._disabled = value;
-		if (this._popoverOpen && this._disabled) {
-			this.closePopover();
-		}
-	}
+	// @Input() enterDelay = 300;
+	// @Input() leaveDelay = 100;
+		/** when trigger = hover, delay before the popover panel appears, default 300ms */
+		@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
+		/** when trigger = hover, delay before the popover panel disappears, defaiult 100ms */
+		@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
+		@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
 
 	@HostListener('mouseenter')
 	onMouseEnter() {
-		this._halt = false;
-		if (this._mouseoverTimer) {
-			clearTimeout(this._mouseoverTimer);
-			this._mouseoverTimer = null;
-		}
-		this._mouseoverTimer = setTimeout(() => {
-			this.openPopover();
-		}, this.enterDelay);
+		super.onMouseEnter();
 	}
 
 	@HostListener('mouseleave')
 	onMouseLeave() {
-		if (this._mouseoverTimer) {
-			clearTimeout(this._mouseoverTimer);
-			this._mouseoverTimer = null;
-		}
-		if (this._popoverOpen) {
-			this._mouseoverTimer = setTimeout(() => {
-				if (!this.popover.closeDisabled) {
-					this.closePopover();
-				}
-			}, this.leaveDelay);
-		} else {
-			this._halt = true;
-		}
+		super.onMouseLeave();
 	}
 
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
-		protected _componentFactoryResolver: ComponentFactoryResolver) {
+		protected _componentFactoryResolver: ComponentFactoryResolver,
+	) {
 		super(_overlay, _elementRef, _viewContainerRef);
+		this.target = new LuPopoverTarget();
+		this.target.elementRef = this._elementRef;
+		this.triggerEvent = 'hover';
+		this.target.position = 'above';
+		this.enterDelay = 300;
+		this.leaveDelay = 100;
 	}
 
 	ngAfterViewInit() {
-	}
-	ngOnInit(): void {
+		this._checkTarget();
 	}
 
-	_getOverlayConfig(): OverlayConfig {
+	protected _getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
 		overlayState.positionStrategy = this._getPosition().withDirection(this.dir);
 		overlayState.scrollStrategy = this._overlay.scrollStrategies.close();
 		return overlayState;
 	}
 
-	_createOverlay(): OverlayRef {
+	protected _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
 			this._portal = new ComponentPortal(
 				LuTooltipPanelComponent,
@@ -93,20 +74,29 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		return this._overlayRef;
 	}
 
-	_createTooltip() {
-		this._createOverlay();
-		this.popover = this._overlayRef.attach(this._portal).instance;
-		this.popover.content = this.tooltipContent;
-		this.popover.position = this.position;
-		this.popover.markForChange();
-		this.popover.close.subscribe(() => {
+	// _createTooltip() {
+	// 	this._createOverlay();
+	// 	this.panel = this._overlayRef.attach(this._portal).instance;
+	// 	this.panel.content = this.tooltipContent;
+	// 	this.panel.markForChange();
+	// 	this.panel.close.subscribe(() => {
+	// 		this.closePopover();
+	// 	});
+	// }
+
+	protected _initPopover() {
+		this.panel = this._overlayRef.attach(this._portal).instance;
+		this.panel.content = this.tooltipContent;
+		this.panel.markForChange();
+		this.panel.close.subscribe(() => {
 			this.closePopover();
 		});
 	}
 
 	openPopover() {
 		if (!this._popoverOpen && !this._halt && !this._disabled) {
-			this._createTooltip();
+			const overlay = this._createOverlay();
+			this._initPopover();
 			this._setIsPopoverOpen(true);
 		}
 	}

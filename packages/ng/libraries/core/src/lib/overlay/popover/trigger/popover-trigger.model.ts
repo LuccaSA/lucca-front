@@ -18,7 +18,7 @@ import {
 } from '@angular/cdk/overlay';
 import { TemplatePortal, ComponentPortal } from '@angular/cdk/portal';
 
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, timer } from 'rxjs';
 
 import {
 	ILuPopoverPanel,
@@ -27,6 +27,7 @@ import {
 	ILuPopoverTarget, LuPopoverPosition,
 } from '../target/index';
 import { throwLuPopoverMissingTargetError, throwLuPopoverMissingPanelError } from './popover-trigger.error';
+import { debounce } from 'rxjs/operators';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
@@ -41,8 +42,8 @@ export interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPa
 
 	/** when to display the popover */
 	triggerEvent: LuPopoverTriggerEvent;
-	// enterDelay: number;
-	// leaveDelay: number;
+	enterDelay: number;
+	leaveDelay: number;
 
 	openPopover();
 	closePopover();
@@ -62,6 +63,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	protected _mouseoverTimer: any;
 
+	protected _hovered$ = new Subject();
+	protected _hoveredSubscription: Subscription;
+
 	// tracking input type is necessary so it's possible to only auto-focus
 	// the first item of the list when the popover is opened via the keyboard
 	protected _openedByMouse = false;
@@ -78,8 +82,23 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	protected _triggerEvent: LuPopoverTriggerEvent = 'click';
 	get triggerEvent() { return this._triggerEvent; }
-	set triggerEvent(te: LuPopoverTriggerEvent) { this._triggerEvent = te; }
-
+	set triggerEvent(te: LuPopoverTriggerEvent) {
+		this._triggerEvent = te;
+		if (te = 'hover') {
+			if (this._hoveredSubscription) {
+				this._hoveredSubscription.unsubscribe();
+			}
+			this._hoveredSubscription = this._hovered$.pipe(
+				debounce(h => h ? timer(this.enterDelay) : timer(this.leaveDelay))
+			).subscribe(h => h ? this.openPopover() : this.closePopover());
+		}
+	}
+	protected _enterDelay = 0;
+	get enterDelay() { return this._enterDelay; }
+	set enterDelay(d: number) { this._enterDelay = d; }
+	protected _leaveDelay = 0;
+	get leaveDelay() { return this._leaveDelay; }
+	set leaveDelay(d: number) { this._leaveDelay = d; }
 
 	/** Event emitted when the associated popover is opened. */
 	// onPopoverOpen = new EventEmitter<void>();
@@ -118,14 +137,16 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	onMouseEnter() {
 		// this._halt = false;
 		if (this.triggerEvent === 'hover') {
+			this._hovered$.next(true);
 			// this._mouseoverTimer = setTimeout(() => {
-				this.openPopover();
+				// this.openPopover();
 			// }, this.enterDelay);
 		}
 	}
 
 	onMouseLeave() {
 		if (this.triggerEvent === 'hover') {
+			this._hovered$.next(false);
 			// if (this._mouseoverTimer) {
 			// 	clearTimeout(this._mouseoverTimer);
 			// 	this._mouseoverTimer = null;
@@ -133,7 +154,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			// if (this._popoverOpen) {
 			// 	setTimeout(() => {
 			// 		if (!this.popover.closeDisabled) {
-						this.closePopover();
+						// this.closePopover();
 			// 		}
 			// 	}, this.popover.leaveDelay);
 			// } else {
@@ -523,6 +544,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		}
 		if (this._positionSubscription) {
 			this._positionSubscription.unsubscribe();
+		}
+		if (this._hoveredSubscription) {
+			this._hoveredSubscription.unsubscribe();
 		}
 	}
 }
