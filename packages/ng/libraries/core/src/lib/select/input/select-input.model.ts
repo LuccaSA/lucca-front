@@ -6,12 +6,12 @@ import {
 	ViewRef,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { ALuPopoverTrigger } from '../../popover/index';
+import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '../../overlay/index';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ILuPickerPanel, ILuClearer, ILuInput, ILuInputDisplayer } from '../../input/index';
 
-export abstract class ALuSelectInput<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
-extends ALuPopoverTrigger<P>
+export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
+extends ALuPopoverTrigger<TPicker>
 implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -25,11 +25,15 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 			_elementRef,
 			_viewContainerRef,
 		);
+		this.target = new LuPopoverTarget() as ILuPopoverTarget;
+		this.target.elementRef = this._elementRef;
+		this.target.position = 'below';
+		this.target.alignment = 'left';
 	}
-	protected _placeholder: string;
 	protected _isContentInitialized = false;
-
+	protected _placeholder: string;
 	get placeholder() { return this._placeholder; }
+	set placeholder(p: string) { this._placeholder = p; }
 	/**
 	 * contriol value accessor interface implementation
 	 */
@@ -87,21 +91,21 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	/**
 	 * popover trigger class extension
 	 */
-	protected set _picker(picker: P) {
-		this.popover = picker;
+	protected set _picker(picker: TPicker) {
+		this.panel = picker;
 		picker.multiple = this._multiple;
 		this.subToPickerEvts();
 	}
-	protected get _picker() { return this.popover; }
+	protected get _picker() { return this.panel; }
 	protected set _clearer(clearer: C) {
 		if (!!clearer && !!clearer.onClear) {
 			clearer.onClear.subscribe(value => this.setValue(value));
 		}
 	}
 	protected subToPickerEvts() {
-		if (!!this.popover) {
-			this.popover.onSelectValue.subscribe(value => this.setValue(value));
-			this.popover.close.subscribe(e => {
+		if (!!this.panel) {
+			this.panel.onSelectValue.subscribe(value => this.setValue(value));
+			this.panel.close.subscribe(e => {
 				this._onTouched();
 				this.closePopover();
 			});

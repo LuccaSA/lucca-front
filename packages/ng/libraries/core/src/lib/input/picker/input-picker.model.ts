@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ILuPopoverPanel, ALuPopoverPanel } from '../../popover/index';
+import { ILuPopoverPanel, ALuPopoverPanel } from '../../overlay/index';
 
 export interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
 	/**
