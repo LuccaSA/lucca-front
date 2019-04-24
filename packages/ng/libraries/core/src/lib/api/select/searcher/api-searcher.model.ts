@@ -15,6 +15,7 @@ import {
 import { IApiItem } from '../../api.model';
 import { ALuApiFeederService, ILuApiFeederService, ILuApiOptionFeeder } from '../feeder/index';
 import { ILuApiPagerService } from '../pager/index';
+import { ILuOnOpenSubscriber } from '../../../option/index';
 
 export interface ILuApiOptionSearcher<T extends IApiItem = IApiItem> extends ILuApiOptionFeeder<T> {}
 export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends ILuApiFeederService<T> {
@@ -22,7 +23,7 @@ export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends IL
 }
 
 export abstract class ALuApiOptionSearcher<T extends IApiItem = IApiItem, S extends ILuApiSearcherService<T> = ILuApiSearcherService<T>>
-implements ILuApiOptionFeeder<T> {
+implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 
