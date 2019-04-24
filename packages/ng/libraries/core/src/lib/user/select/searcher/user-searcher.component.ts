@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
-import { ALuOptionOperator } from '../../../option/index';
+import { ALuOptionOperator, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { LuUserPagedSearcherService } from './user-searcher.service';
@@ -15,6 +15,16 @@ import { ALuApiOptionPagedSearcher } from '../../../api/index';
 	providers: [
 		{
 			provide: ALuOptionOperator,
+			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnScrollBottomSubscriber,
 			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
 			multi: true,
 		},
