@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
+import { ILuOptionOperator, ALuOptionOperator, ILuOnOpenSubscriber, ILuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnCloseSubscriber } from '../option-operator.model';
 import { Observable, combineLatest, merge, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 @Component({
@@ -13,9 +13,19 @@ import { FormControl } from '@angular/forms';
 			useExisting: forwardRef(() => LuOptionSearcherComponent),
 			multi: true,
 		},
+		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuOptionSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnCloseSubscriber,
+			useExisting: forwardRef(() => LuOptionSearcherComponent),
+			multi: true,
+		},
 	],
 })
-export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T> {
+export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber, ILuOnCloseSubscriber {
 	@HostBinding('class.position-fixed') fixed = true;
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
