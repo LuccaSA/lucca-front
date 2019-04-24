@@ -9,9 +9,15 @@ import {
 } from '@angular/core';
 import { luTransformPopover } from '../../overlay/index';
 import { Observable } from 'rxjs';
-import { first, mapTo, startWith, shareReplay, tap } from 'rxjs/operators';
+import { first, mapTo, startWith, shareReplay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
-import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
+import {
+	ALuOptionOperator,
+	ILuOptionOperator,
+	ALuOnOpenSubscriber,
+	ALuOnCloseSubscriber,
+	ALuOnScrollBottomSubscriber,
+} from '../operator/index';
 import { LuOptionPickerComponent } from './option-picker.component';
 
 /**
@@ -35,7 +41,7 @@ export class LuOptionPickerAdvancedComponent<T = any>
 extends LuOptionPickerComponent<T> {
 	loading$: Observable<boolean>;
 
-	protected _operators;
+	protected _operators = [];
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		const operators = ql.toArray();
 		this._operators = operators;
@@ -54,6 +60,19 @@ extends LuOptionPickerComponent<T> {
 			);
 		}
 	}
+	protected _onOpenSubscribers = [];
+	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(ql: QueryList<ILuOptionOperator<T>>) {
+		this._onOpenSubscribers = ql.toArray();
+	}
+	protected _onCloseSubscribers = [];
+	@ContentChildren(ALuOnCloseSubscriber, { descendants: true }) set onCloseSubsQL(ql: QueryList<ILuOptionOperator<T>>) {
+		this._onCloseSubscribers = ql.toArray();
+	}
+	protected _onScrollBottomSubscribers = [];
+	@ContentChildren(ALuOnScrollBottomSubscriber, { descendants: true }) set onScrollBottomSubsQL(ql: QueryList<ILuOptionOperator<T>>) {
+		this._onScrollBottomSubscribers = ql.toArray();
+	}
+
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_renderer: Renderer2,
@@ -61,22 +80,19 @@ extends LuOptionPickerComponent<T> {
 		super(_changeDetectorRef, _renderer);
 	}
 	onScrollBottom() {
-		if (!this._operators) { return; }
-		this._operators.forEach(o => {
+		this._onScrollBottomSubscribers.forEach(o => {
 			if (!o.onScrollBottom) { return; }
 			o.onScrollBottom();
 		});
 	}
 	onOpen() {
-		this._operators.forEach(o => {
-			if (!o.onOpen) { return; }
+		this._onOpenSubscribers.forEach(o => {
 			o.onOpen();
 		});
 		super.onOpen();
 	}
 	onClose() {
-		this._operators.forEach(o => {
-			if (!o.onClose) { return; }
+		this._onCloseSubscribers.forEach(o => {
 			o.onClose();
 		});
 		super.onClose();
