@@ -15,6 +15,7 @@ import { SplitOptionPickerModule } from './split-option-picker';
 import { SplitOptionPickerApiAuserModule } from './split-option-picker-api-auser';
 import { SplitOperatorsModule } from './split-operators';
 import { SplitOperatorsApiModule } from './split-operators-api';
+import { PocPopupModule } from './poc-popup';
 
 const routes: Routes = [
 	{ path: '', component: IssuesComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
 	{ path: 'split-option-picker-api-auser', loadChildren: () => SplitOptionPickerApiAuserModule},
 	{ path: 'split-operators', loadChildren: () => SplitOperatorsModule},
 	{ path: 'split-operators-api', loadChildren: () => SplitOperatorsApiModule},
+	{ path: 'poc-popup', loadChildren: () => PocPopupModule},
 ];
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
