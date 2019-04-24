@@ -1,5 +1,6 @@
 <h1>split-operators-api</h1>
-<h2>api pager (on open, on scrollBottom)</h2>
+<h2>api</h2>
+<h3>api pager (on open, on scrollBottom)</h3>
 <div class="textfield">
 	<lu-select class="textfield-input" [(ngModel)]="item">
 		<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
@@ -10,7 +11,7 @@
 	</lu-select>
 	<label for="" class="textfield-label">section</label>
 </div>
-<h2>api searcher (on open)</h2>
+<h3>api searcher (on open)</h3>
 <div class="textfield">
 	<lu-select class="textfield-input" [(ngModel)]="item">
 		<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
@@ -21,7 +22,7 @@
 	</lu-select>
 	<label for="" class="textfield-label">section</label>
 </div>
-<h2>api paged searcher (on open, on scrollbottom)</h2>
+<h3>api paged searcher (on open, on scrollbottom)</h3>
 <div class="textfield">
 	<lu-select class="textfield-input" [(ngModel)]="item">
 		<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
@@ -32,8 +33,25 @@
 	</lu-select>
 	<label for="" class="textfield-label">section</label>
 </div>
-<h2>api select</h2>
+<h3>api select</h3>
 <div class="textfield">
 	<lu-api-select class="textfield-input" [(ngModel)]="item" api="/api/v3/axissections"></lu-api-select>
 	<label for="" class="textfield-label">section</label>
+</div>
+<h2>user</h2>
+<h3>user paged searcher</h3>
+<div class="textfield">
+	<lu-select class="textfield-input" [(ngModel)]="user">
+		<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
+		<lu-option-picker-advanced>
+			<lu-user-paged-searcher></lu-user-paged-searcher>
+			<lu-option *luForOptions="let user; trackBy: trackBy" [value]="user">{{user | luUserDisplay}}</lu-option>
+		</lu-option-picker-advanced>
+	</lu-select>
+	<label for="" class="textfield-label">user</label>
+</div>
+<h3>user select</h3>
+<div class="textfield">
+	<lu-user-select class="textfield-input" [(ngModel)]="user"></lu-user-select>
+	<label for="" class="textfield-label">user</label>
 </div>
