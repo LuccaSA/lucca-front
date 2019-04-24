@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
 	templateUrl: './split-operators-api.component.html'
 })
 export class SplitOperatorsApiComponent {
+	item;
 }
