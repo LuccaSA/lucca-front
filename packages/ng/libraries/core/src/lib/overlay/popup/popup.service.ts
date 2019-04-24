@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Overlay, OverlayRef, OverlayConfig, OriginConnectionPosition } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Injectable()
 export class LuPopup {
 	protected _overlayRef: OverlayRef;
+	protected _backdropSubscription: Subscription = new Subscription();
 	constructor(
 		protected _overlay: Overlay,
 	) {}
@@ -38,6 +41,14 @@ export class LuPopup {
 	}
 	protected _openPopup(component) {
 		const portal = new ComponentPortal(component);
-		this._overlayRef.attach(portal);
+		const popupRef = this._overlayRef.attach(portal);
+		this._overlayRef.backdropClick().pipe(
+			first(),
+		)
+		.subscribe(c => {
+			popupRef.destroy();
+			this._overlayRef.detachBackdrop();
+			this._overlayRef.detach();
+		});
 	}
 }
