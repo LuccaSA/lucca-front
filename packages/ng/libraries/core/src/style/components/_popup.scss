@@ -1,0 +1,12 @@
+.lu-popup-backdrop {
+}
+.lu-popup-panel {
+	// got that from the popover styling
+	display: flex;
+	flex-direction: column;
+	margin-top: 2px;
+	max-height: calc(100vh + 48px);
+	position: relative;
+	background-color: _component('popup.panel.background-color'),
+}
+@warn 'lol';
