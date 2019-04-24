@@ -1,4 +1,4 @@
-import { ILuOptionOperator, ILuOnOpenSubscriber, ILuOnCloseSubscriber, ILuOnScrollBottomSubscriber } from '../../../option/index';
+import { ILuOptionOperator, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '../../../option/index';
 import { IApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, merge, Subject } from 'rxjs';
