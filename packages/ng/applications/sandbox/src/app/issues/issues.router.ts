@@ -13,6 +13,7 @@ import { RefactorSelectModule } from './refactor-select';
 import { RefactorApiSelectModule } from './refactor-api-select';
 import { SplitOptionPickerModule } from './split-option-picker';
 import { SplitOptionPickerApiAuserModule } from './split-option-picker-api-auser';
+import { SplitOperatorsModule } from './split-operators';
 
 const routes: Routes = [
 	{ path: '', component: IssuesComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
 	{ path: 'refactor-api-select', loadChildren: () => RefactorApiSelectModule},
 	{ path: 'split-option-picker', loadChildren: () => SplitOptionPickerModule},
 	{ path: 'split-option-picker-api-auser', loadChildren: () => SplitOptionPickerApiAuserModule},
+	{ path: 'split-operators', loadChildren: () => SplitOperatorsModule},
 ];
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
