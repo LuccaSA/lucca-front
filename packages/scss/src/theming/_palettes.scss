@@ -20,34 +20,34 @@ $palettes: (
 		"see-through": rgba(#888888, .15)
 	),
 	"success": (
-		"color": #9ACD32,
+		"color": #64C442,
 		"text": #FFFFFF,
-		"dark": darken(#9ACD32, 5%),
-		"darker": darken(#9ACD32, 20%),
-		"light": lighten(#9ACD32, 10%),
-		"lighter": lighten(#9ACD32, 20%),
-		"lightest": lighten(#9ACD32, 42%),
-		"see-through": rgba(#9ACD32, .15)
+		"dark": darken(#64C442, 5%),
+		"darker": darken(#64C442, 20%),
+		"light": lighten(#64C442, 10%),
+		"lighter": lighten(#64C442, 20%),
+		"lightest": lighten(#64C442, 42%),
+		"see-through": rgba(#64C442, .15)
 	),
 	"warning": (
-		"color": #FF9900,
+		"color": #FF7A1A,
 		"text": #FFFFFF,
-		"dark": darken(#FF9900, 5%),
-		"darker": darken(#FF9900, 20%),
-		"light": lighten(#FF9900, 10%),
-		"lighter": lighten(#FF9900, 20%),
-		"lightest": lighten(#FF9900, 42%),
-		"see-through": rgba(#FF9900, .15)
+		"dark": darken(#FF7A1A, 5%),
+		"darker": darken(#FF7A1A, 20%),
+		"light": lighten(#FF7A1A, 10%),
+		"lighter": lighten(#FF7A1A, 20%),
+		"lightest": lighten(#FF7A1A, 42%),
+		"see-through": rgba(#FF7A1A, .15)
 	),
 	"error": (
-		"color": #FF3300,
+		"color": #F42144,
 		"text": #FFFFFF,
-		"dark": darken(#FF3300, 5%),
-		"darker": darken(#FF3300, 20%),
-		"light": lighten(#FF3300, 10%),
-		"lighter": lighten(#FF3300, 20%),
-		"lightest": lighten(#FF3300, 42%),
-		"see-through": rgba(#FF3300, .15)
+		"dark": darken(#F42144, 5%),
+		"darker": darken(#F42144, 20%),
+		"light": lighten(#F42144, 10%),
+		"lighter": lighten(#F42144, 20%),
+		"lightest": lighten(#F42144, 42%),
+		"see-through": rgba(#F42144, .15)
 	),
 );
 
