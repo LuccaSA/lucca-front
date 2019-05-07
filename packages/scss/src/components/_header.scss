@@ -68,12 +68,27 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+.navSide ~ .main-content, .mod-withMenu .main-content {
+	.header.mod-sticky {
+		left: _theme("components.navSide.width");
+	}
+}
+
+.navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
+	.header.mod-sticky {
+		left: _theme("components.navSide.compact.width");
+	}
+}
+
 .header {
 	&.mod-sticky {
-		position: sticky;
+		position: fixed;
+		left: 0;
+		right: 0;
 		top: 0;
 
 		@include media_smaller_than("md") {
+			left: 0 !important;
 			top: _component("navSide.mobile.toggle-height");
 		}
 	}
