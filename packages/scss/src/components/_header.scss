@@ -71,14 +71,24 @@
 .navSide ~ .main-content, .mod-withMenu .main-content {
 	.header.mod-sticky {
 		left: _theme("components.navSide.width");
+
+		@include media_smaller_than("md") {
+			top: _component("navSide.mobile.toggle-height");
+		}
 	}
 }
 
 .navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
 	.header.mod-sticky {
 		left: _theme("components.navSide.compact.width");
+
+		@include media_smaller_than("md") {
+			top: _component("navSide.mobile.toggle-height");
+		}
 	}
 }
+
+
 
 .header {
 	&.mod-sticky {
@@ -89,7 +99,6 @@
 
 		@include media_smaller_than("md") {
 			left: 0 !important;
-			top: _component("navSide.mobile.toggle-height");
 		}
 	}
 
