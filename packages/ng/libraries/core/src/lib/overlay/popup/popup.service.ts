@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ export class LuPopup {
 	protected _backdropSubscription: Subscription = new Subscription();
 	constructor(
 		protected _overlay: Overlay,
+		protected _injector: Injector,
 	) {}
 	open(component) {
 		this._createOverlay();
@@ -18,7 +19,7 @@ export class LuPopup {
 	}
 
 	openV2(component) {
-		const ref = new LuPopupRef(this._overlay, component);
+		const ref = new LuPopupRef(this._overlay, this._injector, component);
 		ref.open();
 		return ref;
 	}

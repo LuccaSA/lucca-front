@@ -1,9 +1,10 @@
 import { Observable, Subject, Subscription, merge } from 'rxjs';
 import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { first, filter } from 'rxjs/operators';
 import { ComponentRef } from '@angular/core/src/render3';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { Injector } from '@angular/core';
 
 export interface ILuPopupRef {
 	onOpen: Observable<void>;
@@ -21,6 +22,7 @@ export class LuPopupRef {
 	protected _sub: Subscription;
 	constructor(
 		protected _overlay: Overlay,
+		protected _injector: Injector,
 		protected _component,
 	) {}
 
@@ -66,7 +68,10 @@ export class LuPopupRef {
 		return overlayConfig;
 	}
 	protected _openPopup(): ComponentRef<any> {
-		const portal = new ComponentPortal(this._component);
+		const injector = new PortalInjector(this._injector, new WeakMap([
+			[LuPopupRef, this]
+		]))
+		const portal = new ComponentPortal(this._component, undefined, injector);
 		const componentRef = this._overlayRef.attach(portal);
 		return <any>componentRef;
 	}

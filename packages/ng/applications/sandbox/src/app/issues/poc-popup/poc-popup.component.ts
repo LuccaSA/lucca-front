@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuPopup } from '@lucca-front/ng';
+import { LuPopup, LuPopupRef } from '@lucca-front/ng';
 import { timer } from 'rxjs';
 
 @Component({
@@ -21,8 +21,14 @@ export class PocPopupComponent {
 
 @Component({
 	selector: 'lu-poc-popup-inside',
-	template: `content of the popup`,
+	template: `
+	<h1>title</h1>
+	<button class="button" (click)="closePopup()">close</button>
+	`,
 })
 export class PocPopupInsideComponent {
-
+	constructor(protected _ref: LuPopupRef) {}
+	closePopup() {
+		this._ref.close();
+	}
 }
