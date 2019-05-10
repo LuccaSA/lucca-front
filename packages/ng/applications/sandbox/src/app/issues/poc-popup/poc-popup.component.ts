@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LuPopup } from '@lucca-front/ng';
+import { timer } from 'rxjs';
 
 @Component({
 	selector: 'lu-poc-popup',
@@ -10,6 +11,11 @@ export class PocPopupComponent {
 	open() {
 		this._popup.open(PocPopupInsideComponent);
 	}
+	openV2() {
+		const ref = this._popup.openV2(PocPopupInsideComponent);
+		// timer(1000).subscribe(() => ref.close());
+	}
+	
 }
 
 

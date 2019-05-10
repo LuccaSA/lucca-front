@@ -3,6 +3,7 @@ import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { LuPopupRef } from './popup-ref.model';
 
 @Injectable()
 export class LuPopup {
@@ -14,6 +15,12 @@ export class LuPopup {
 	open(component) {
 		this._createOverlay();
 		this._openPopup(component);
+	}
+
+	openV2(component) {
+		const ref = new LuPopupRef(this._overlay, component);
+		ref.open();
+		return ref;
 	}
 	/**
 	 * This method builds the configuration object needed to create the overlay, the OverlayConfig.

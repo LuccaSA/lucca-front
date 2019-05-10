@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlSerializer, DefaultUrlSerializer, UrlTree } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PocTranslateModule } from './poc-translate';
@@ -36,6 +36,11 @@ const routes: Routes = [
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
 
+class LowerCaseUrlSerializer extends DefaultUrlSerializer {
+	parse(url: string): UrlTree {
+		return super.parse(url.toLowerCase());
+	}
+}
 @NgModule({
 	imports: [
 		RouterModule.forChild(routes),
@@ -49,6 +54,7 @@ issues.shift();
 	],
 	providers: [
 		{ provide: ISSUES_INDEX_TOKEN, useValue: issues },
+		{ provide: UrlSerializer, useClass: LowerCaseUrlSerializer },
 	]
 })
 export class IssuesRouter { }
