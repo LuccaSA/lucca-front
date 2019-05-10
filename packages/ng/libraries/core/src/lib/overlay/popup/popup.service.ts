@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, ComponentType } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
 import { LuPopupRef } from './popup-ref.model';
 
@@ -12,8 +12,8 @@ export class LuPopup {
 		protected _injector: Injector,
 	) {}
 
-	open(component, data = undefined) {
-		const ref = new LuPopupRef(this._overlay, this._injector, component);
+	open<T, D, R>(component: ComponentType<T>, data: D = undefined) {
+		const ref = new LuPopupRef<T, D, R>(this._overlay, this._injector, component);
 		ref.open(data);
 		return ref;
 	}

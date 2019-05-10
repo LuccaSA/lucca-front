@@ -1,30 +1,30 @@
 import { Observable, Subject, Subscription, merge } from 'rxjs';
 import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ComponentPortal, PortalInjector, ComponentType } from '@angular/cdk/portal';
 import { first, filter } from 'rxjs/operators';
-import { ComponentRef } from '@angular/core/src/render3';
+import { ComponentRef } from '@angular/core';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { Injector } from '@angular/core';
 import { LU_POPUP_DATA } from './popup.token';
 
-export interface ILuPopupRef<D = any, R = any> {
+export interface ILuPopupRef<T, D = any, R = any> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	open(data: D): void;
 	close(result: R): void;
 }
-export class LuPopupRef<D = any, R = any> implements ILuPopupRef<D, R> {
+export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 
 	protected _overlayRef: OverlayRef;
-	protected _componentRef: ComponentRef<any>;
+	protected _componentRef: ComponentRef<T>;
 
 	protected _sub: Subscription;
 	constructor(
 		protected _overlay: Overlay,
 		protected _injector: Injector,
-		protected _component,
+		protected _component: ComponentType<T>,
 	) {}
 
 	open(data?: D) {
@@ -68,14 +68,14 @@ export class LuPopupRef<D = any, R = any> implements ILuPopupRef<D, R> {
 		overlayConfig.scrollStrategy = this._overlay.scrollStrategies.block();
 		return overlayConfig;
 	}
-	protected _openPopup(data?: D): ComponentRef<any> {
+	protected _openPopup(data?: D): ComponentRef<T> {
 		const injectionMap = new WeakMap();
 		injectionMap.set(LuPopupRef, this);
 		injectionMap.set(LU_POPUP_DATA, data);
 		const injector = new PortalInjector(this._injector, injectionMap);
 		const portal = new ComponentPortal(this._component, undefined, injector);
-		const componentRef = this._overlayRef.attach(portal);
-		return <any>componentRef;
+		const componentRef = this._overlayRef.attach<T>(portal);
+		return componentRef;
 	}
 
 	protected _destroyOverlay() {

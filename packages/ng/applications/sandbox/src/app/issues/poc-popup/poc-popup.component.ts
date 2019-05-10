@@ -29,7 +29,7 @@ export class PocPopupComponent {
 })
 export class PocPopupInsideComponent {
 	constructor(
-		protected _ref: LuPopupRef,
+		protected _ref: LuPopupRef<PocPopupInsideComponent>,
 		protected _popup: LuPopup,
 		@Optional() @Inject(LU_POPUP_DATA) public data,
 		) {}
@@ -49,7 +49,7 @@ export class PocPopupInsideComponent {
 })
 export class PocPopupSecondaryComponent {
 	constructor(
-		protected _ref: LuPopupRef,
+		protected _ref: LuPopupRef<PocPopupSecondaryComponent>,
 	) {}
 	closePopup() {
 		this._ref.close(8);
