@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { LuPopup, LuPopupRef, LU_POPUP_DATA } from '@lucca-front/ng';
 import { timer } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class PocPopupComponent {
 		this._popup.open(PocPopupInsideComponent);
 	}
 	openV2() {
-		const ref = this._popup.openV2(PocPopupInsideComponent, 3);
+		const ref = this._popup.open(PocPopupInsideComponent, 3);
 		ref.onClose.subscribe(r => console.log(r))
 	}
 	
@@ -31,13 +31,13 @@ export class PocPopupInsideComponent {
 	constructor(
 		protected _ref: LuPopupRef,
 		protected _popup: LuPopup,
-		@Inject(LU_POPUP_DATA) public data,
+		@Optional() @Inject(LU_POPUP_DATA) public data,
 		) {}
 	closePopup() {
 		this._ref.close(8);
 	}
 	openSecondary() {
-		this._popup.openV2(PocPopupSecondaryComponent);
+		this._popup.open(PocPopupSecondaryComponent);
 	}
 }
 @Component({
