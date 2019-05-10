@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
-import { PocPopupComponent, PocPopupInsideComponent } from './poc-popup.component';
+import { PocPopupComponent, PocPopupInsideComponent, PocPopupSecondaryComponent } from './poc-popup.component';
 import { LuPopupModule } from '@lucca-front/ng';
 
 
@@ -10,6 +10,7 @@ import { LuPopupModule } from '@lucca-front/ng';
 	declarations: [
 		PocPopupComponent,
 		PocPopupInsideComponent,
+		PocPopupSecondaryComponent,
 	],
 	imports: [
 		LuPopupModule,
@@ -19,6 +20,7 @@ import { LuPopupModule } from '@lucca-front/ng';
 	],
 	entryComponents: [
 		PocPopupInsideComponent,
+		PocPopupSecondaryComponent,
 	],
 })
 export class PocPopupModule {}
