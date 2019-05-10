@@ -5,16 +5,17 @@ import { first, filter } from 'rxjs/operators';
 import { ComponentRef } from '@angular/core/src/render3';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { Injector } from '@angular/core';
+import { LU_POPUP_DATA } from './popup.token';
 
-export interface ILuPopupRef {
-	onOpen: Observable<void>;
-	onClose: Observable<void>;
-	open(): void;
-	close(): void;
+export interface ILuPopupRef<D = any, R = any> {
+	onOpen: Observable<D>;
+	onClose: Observable<R>;
+	open(data: D): void;
+	close(result: R): void;
 }
-export class LuPopupRef {
-	onOpen = new Subject<void>();
-	onClose = new Subject<void>();
+export class LuPopupRef<D = any, R = any> implements ILuPopupRef<D, R> {
+	onOpen = new Subject<D>();
+	onClose = new Subject<R>();
 
 	protected _overlayRef: OverlayRef;
 	protected _componentRef: ComponentRef<any>;
@@ -26,20 +27,20 @@ export class LuPopupRef {
 		protected _component,
 	) {}
 
-	open() {
+	open(data?: D) {
 		this._overlayRef = this._createOverlay();
-		this._componentRef = this._openPopup();
+		this._componentRef = this._openPopup(data);
 		this._sub = this._subToCloseEvents();
 
-		this.onOpen.next();
+		this.onOpen.next(data);
 		this.onOpen.complete();
 	}
-	close() {
+	close(result?: R) {
 		this._cleanSubscription();
 		this._closePopup();
 		this._destroyOverlay();
 
-		this.onClose.next();
+		this.onClose.next(result);
 		this.onClose.complete();
 	}
 
@@ -67,10 +68,11 @@ export class LuPopupRef {
 		overlayConfig.scrollStrategy = this._overlay.scrollStrategies.block();
 		return overlayConfig;
 	}
-	protected _openPopup(): ComponentRef<any> {
-		const injector = new PortalInjector(this._injector, new WeakMap([
-			[LuPopupRef, this]
-		]))
+	protected _openPopup(data?: D): ComponentRef<any> {
+		const injectionMap = new WeakMap();
+		injectionMap.set(LuPopupRef, this);
+		injectionMap.set(LU_POPUP_DATA, data);
+		const injector = new PortalInjector(this._injector, injectionMap);
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		const componentRef = this._overlayRef.attach(portal);
 		return <any>componentRef;
@@ -89,7 +91,7 @@ export class LuPopupRef {
 			filter(evt => evt.keyCode === ESCAPE),
 		);
 		return merge(bdClicked$, escPressed$).pipe(first())
-		.subscribe(e => this.close());
+		.subscribe(e => this.close(undefined));
 	}
 	protected _cleanSubscription() {
 		this._sub.unsubscribe();

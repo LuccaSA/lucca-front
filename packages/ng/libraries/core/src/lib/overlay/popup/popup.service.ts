@@ -18,9 +18,9 @@ export class LuPopup {
 		this._openPopup(component);
 	}
 
-	openV2(component) {
+	openV2(component, data = undefined) {
 		const ref = new LuPopupRef(this._overlay, this._injector, component);
-		ref.open();
+		ref.open(data);
 		return ref;
 	}
 	/**
