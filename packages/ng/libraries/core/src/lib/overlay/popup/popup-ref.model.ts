@@ -6,6 +6,7 @@ import { ComponentRef } from '@angular/core';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { Injector } from '@angular/core';
 import { LU_POPUP_DATA } from './popup.token';
+import { ILuPopupConfig } from './popup-config.model';
 
 export interface ILuPopupRef<T, D = any, R = any> {
 	onOpen: Observable<D>;
@@ -25,6 +26,7 @@ export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 		protected _overlay: Overlay,
 		protected _injector: Injector,
 		protected _component: ComponentType<T>,
+		protected _config: ILuPopupConfig,
 	) {}
 
 	open(data?: D) {
@@ -50,8 +52,8 @@ export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	 */
 	protected _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
-			const config = this._getOverlayConfig();
-			return this._overlay.create(config);
+			const overlayConfig = this._getOverlayConfig();
+			return this._overlay.create(overlayConfig);
 		}
 		return this._overlayRef;
 	}
@@ -61,10 +63,15 @@ export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	 */
 	protected _getOverlayConfig(): OverlayConfig {
 		const overlayConfig = new OverlayConfig();
-		overlayConfig.positionStrategy =  this._overlay.position().global().centerHorizontally().centerVertically();
-		overlayConfig.hasBackdrop = true;
-		overlayConfig.backdropClass = 'cdk-overlay-dark-backdrop';
-		overlayConfig.panelClass = 'lu-popup-panel';
+		switch (this._config.position) {
+			case 'center':
+			default:
+				overlayConfig.positionStrategy =  this._overlay.position().global().centerHorizontally().centerVertically();
+				break;
+		}
+		overlayConfig.hasBackdrop = !this._config.noBackdrop;
+		overlayConfig.backdropClass = this._config.backdropClass;
+		overlayConfig.panelClass = this._config.panelClass;
 		overlayConfig.scrollStrategy = this._overlay.scrollStrategies.block();
 		return overlayConfig;
 	}
