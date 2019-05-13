@@ -1,6 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { LuPopup, LuPopupRef, LU_POPUP_DATA } from '@lucca-front/ng';
-import { timer } from 'rxjs';
+import { LuPopup, LuPopupRef, LU_POPUP_DATA, ILuPopupConfig } from '@lucca-front/ng';
 
 @Component({
 	selector: 'lu-poc-popup',
@@ -11,11 +10,13 @@ export class PocPopupComponent {
 	open() {
 		this._popup.open(PocPopupInsideComponent);
 	}
-	openV2() {
-		const ref = this._popup.open(PocPopupInsideComponent, 3);
-		ref.onClose.subscribe(r => console.log(r))
+	openWithConfig() {
+		const config: ILuPopupConfig = {
+			noBackdrop: true,
+		};
+
+		this._popup.open(PocPopupInsideComponent, 3, config);
 	}
-	
 }
 
 
