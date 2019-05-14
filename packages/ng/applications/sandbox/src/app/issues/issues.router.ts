@@ -36,7 +36,7 @@ const routes: Routes = [
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
 
-class LowerCaseUrlSerializer extends DefaultUrlSerializer {
+export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
 	parse(url: string): UrlTree {
 		return super.parse(url.toLowerCase());
 	}
