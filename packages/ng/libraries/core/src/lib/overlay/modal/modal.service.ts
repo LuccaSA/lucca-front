@@ -1,19 +1,23 @@
-import { Injectable, Inject } from '@angular/core';
-import { ComponentType } from '@angular/cdk/overlay';
+import { Injectable, Inject, Injector } from '@angular/core';
+import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { LU_MODAL_CONFIG } from './modal.token';
 import { ILuModalConfig } from './modal-config.model';
 import { LuPopup } from '../popup/index';
-import { LuModalPanelComponent } from './modal-panel.component';
+import { LuModalRef, ILuModalRef } from './modal-ref.model';
 
 @Injectable()
-export class LuModal {
+export class LuModal extends LuPopup {
 	constructor(
-		protected _popup: LuPopup,
+		protected _overlay: Overlay,
+		protected _injector: Injector,
 		@Inject(LU_MODAL_CONFIG) protected _config: ILuModalConfig,
-	) {}
-
-	open<T, D, R>(component: ComponentType<T>, data: D = undefined, config: ILuModalConfig = {}) {
+	) {
+		super(_overlay, _injector, _config);
+	}
+	open<T, D, R>(component: ComponentType<T>, data: D = undefined, config: ILuModalConfig = {}): ILuModalRef<T, D, R> {
 		const extendedConfig = { ...this._config, ...config };
-		return this._popup.open(LuModalPanelComponent, data, extendedConfig);
+		const ref = new LuModalRef<T, D, R>(this._overlay, this._injector, component, extendedConfig) as ILuModalRef<T, D, R>;
+		ref.open(data);
+		return ref;
 	}
 }

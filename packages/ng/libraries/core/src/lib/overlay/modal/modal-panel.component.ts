@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { PortalOutlet, CdkPortalOutlet } from '@angular/cdk/portal';
 
 
 @Component({
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
 	styleUrls: ['./modal-panel.component.scss']
 })
 export class LuModalPanelComponent {
-	constructor() {}
+	@ViewChild('outlet', { read: CdkPortalOutlet }) outlet: PortalOutlet;
 }
