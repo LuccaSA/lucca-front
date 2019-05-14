@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuModal, LuPopupRef } from '@lucca-front/ng';
+import { LuModal, LuModalRef } from '@lucca-front/ng';
 
 @Component({
 	selector: 'lu-poc-modal',
@@ -20,7 +20,7 @@ export class PocModalComponent {
 })
 export class PocModalInsideComponent {
 	constructor(
-		protected _ref: LuPopupRef<PocModalInsideComponent>,
+		protected _ref: LuModalRef<PocModalInsideComponent>,
 	) {}
 	closeModal() {
 		this._ref.close();
