@@ -1,6 +1,5 @@
 import { Injectable, Injector, Inject } from '@angular/core';
 import { Overlay, OverlayRef, ComponentType } from '@angular/cdk/overlay';
-import { Subscription } from 'rxjs';
 import { LuPopupRef } from './popup-ref.model';
 import { LU_POPUP_CONFIG } from './popup.token';
 import { ILuPopupConfig } from './popup-config.model';
@@ -8,7 +7,6 @@ import { ILuPopupConfig } from './popup-config.model';
 @Injectable()
 export class LuPopup {
 	protected _overlayRef: OverlayRef;
-	protected _backdropSubscription: Subscription = new Subscription();
 	constructor(
 		protected _overlay: Overlay,
 		protected _injector: Injector,
