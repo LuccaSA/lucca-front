@@ -26,13 +26,12 @@ export class LuModalRef<T, D = any, R = any> extends LuPopupRef<T, D, R> impleme
 		const injector = new PortalInjector(this._injector, injectionMap);
 		const containerPortal = new ComponentPortal(LuModalPanelComponent, undefined, injector);
 		this._containerRef = this._overlayRef.attach<LuModalPanelComponent>(containerPortal);
-		this._containerOutlet = this._containerRef.instance.outlet;
+		this._containerOutlet = this._containerRef.instance;
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;
 	}
 	protected _closePopup() {
 		this._componentRef.destroy();
-		this._containerOutlet.detach();
 		this._containerRef.destroy();
 	}
 }
