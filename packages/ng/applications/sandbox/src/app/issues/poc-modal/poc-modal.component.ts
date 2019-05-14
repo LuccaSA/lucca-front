@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuModal, LuModalRef } from '@lucca-front/ng';
+import { LuModal, ALuModalRef } from '@lucca-front/ng';
 
 @Component({
 	selector: 'lu-poc-modal',
@@ -14,13 +14,13 @@ export class PocModalComponent {
 @Component({
 	selector: 'lu-poc-modal-inside',
 	template: `
-	<h1>title</h1>
-	<section>content n stuff</section>
+		only the content in this injected component
 	`,
 })
 export class PocModalInsideComponent {
+	title = 'title of the component';
 	constructor(
-		protected _ref: LuModalRef<PocModalInsideComponent>,
+		protected _ref: ALuModalRef<PocModalInsideComponent>,
 	) {}
 	closeModal() {
 		this._ref.close();
