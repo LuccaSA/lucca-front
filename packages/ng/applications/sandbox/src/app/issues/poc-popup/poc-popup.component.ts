@@ -22,11 +22,7 @@ export class PocPopupComponent {
 
 @Component({
 	selector: 'lu-poc-popup-inside',
-	template: `
-	<h1>title {{data}}</h1>
-	<button class="button" (click)="openSecondary()">open other popup</button>
-	<button class="button" (click)="closePopup()">close</button>
-	`,
+	templateUrl: './poc-popup.template.html',
 })
 export class PocPopupInsideComponent {
 	constructor(
