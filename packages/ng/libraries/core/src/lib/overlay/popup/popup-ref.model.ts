@@ -7,14 +7,15 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { Injector } from '@angular/core';
 import { LU_POPUP_DATA } from './popup.token';
 import { ILuPopupConfig } from './popup-config.model';
+import { IPopupContent } from './popup.model';
 
-export interface ILuPopupRef<T, D = any, R = any> {
+export interface ILuPopupRef<T extends IPopupContent = IPopupContent, D = any, R = any> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	open(data: D): void;
 	close(result: R): void;
 }
-export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
+export abstract class ALuPopupRef<T extends IPopupContent = IPopupContent, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 
@@ -22,12 +23,14 @@ export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	protected _componentRef: ComponentRef<T>;
 
 	protected _sub: Subscription;
+
 	constructor(
 		protected _overlay: Overlay,
 		protected _injector: Injector,
 		protected _component: ComponentType<T>,
 		protected _config: ILuPopupConfig,
 	) {}
+
 
 	open(data?: D) {
 		this._createOverlay();
@@ -45,7 +48,6 @@ export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 		this.onClose.next(result);
 		this.onClose.complete();
 	}
-
 	/**
 	 *  This method creates the overlay from the provided popover's template and saves its
 	 *  OverlayRef so that it can be attached to the DOM when openPopover is called.
@@ -76,7 +78,7 @@ export class LuPopupRef<T, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	}
 	protected _openPopup(data?: D) {
 		const injectionMap = new WeakMap();
-		injectionMap.set(LuPopupRef, this);
+		injectionMap.set(ALuPopupRef, this);
 		injectionMap.set(LU_POPUP_DATA, data);
 		const injector = new PortalInjector(this._injector, injectionMap);
 		const portal = new ComponentPortal(this._component, undefined, injector);
