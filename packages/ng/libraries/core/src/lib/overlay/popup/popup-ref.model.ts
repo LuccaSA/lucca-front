@@ -7,15 +7,19 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { Injector } from '@angular/core';
 import { LU_POPUP_DATA } from './popup.token';
 import { ILuPopupConfig } from './popup-config.model';
-import { IPopupContent } from './popup.model';
+import { ILuPopupContent } from './popup.model';
 
-export interface ILuPopupRef<T extends IPopupContent = IPopupContent, D = any, R = any> {
+export interface ILuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	open(data: D): void;
 	close(result: R): void;
 }
-export abstract class ALuPopupRef<T extends IPopupContent = IPopupContent, D = any, R = any> implements ILuPopupRef<T, D, R> {
+export interface ILuPopupRefFactory<TComponent = any, TConfig extends ILuPopupConfig = ILuPopupConfig> {
+	forge<T extends TComponent, C extends TConfig>(component: ComponentType<T>, config: C): ILuPopupRef<T>;
+}
+
+export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 

@@ -1,1 +1,1 @@
-export interface IPopupContent {}
+export interface ILuPopupContent {}

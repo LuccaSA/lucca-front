@@ -1,5 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { LuPopup, LuPopupRef, LU_POPUP_DATA, ILuPopupConfig } from '@lucca-front/ng';
+import { LuPopup, ALuPopupRef, LU_POPUP_DATA, ILuPopupConfig } from '@lucca-front/ng';
 
 @Component({
 	selector: 'lu-poc-popup',
@@ -26,7 +26,7 @@ export class PocPopupComponent {
 })
 export class PocPopupInsideComponent {
 	constructor(
-		protected _ref: LuPopupRef<PocPopupInsideComponent>,
+		protected _ref: ALuPopupRef<PocPopupInsideComponent>,
 		protected _popup: LuPopup,
 		@Optional() @Inject(LU_POPUP_DATA) public data,
 		) {}
@@ -46,7 +46,7 @@ export class PocPopupInsideComponent {
 })
 export class PocPopupSecondaryComponent {
 	constructor(
-		protected _ref: LuPopupRef<PocPopupSecondaryComponent>,
+		protected _ref: ALuPopupRef<PocPopupSecondaryComponent>,
 	) {}
 	closePopup() {
 		this._ref.close(8);

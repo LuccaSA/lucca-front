@@ -1,5 +1,5 @@
-import { IPopupContent } from '../popup/index';
+import { ILuPopupContent } from '../popup/index';
 
-export interface IModalContent extends IPopupContent {
+export interface ILuModalContent extends ILuPopupContent {
 	title: string;
 }

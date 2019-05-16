@@ -1,6 +1,6 @@
 import { Component, ViewChild, ComponentRef, OnDestroy } from '@angular/core';
 import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
-import { IModalContent } from './modal.model';
+import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 
 
@@ -9,7 +9,7 @@ import { ALuModalRef } from './modal-ref.model';
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss']
 })
-export class LuModalPanelComponent<T extends IModalContent = IModalContent> implements PortalOutlet, OnDestroy {
+export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet }) protected _outlet: PortalOutlet;
 	protected _componentInstance: T;
 	get title() {
