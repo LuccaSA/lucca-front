@@ -2,8 +2,11 @@
 	<div class="lu-popover-panel" role="dialog" [ngClass]="panelClassesMap"
 	 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
 	 [@transformPopover]="'enter'">
-		<div class="lu-popover-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
-			<ng-content></ng-content>
+		<div class="lu-popover-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus" luScroll (onScrollBottom)="onScrollBottom()">
+			<ng-content *ngIf="!(loading$ | async); else loading"></ng-content>
 		</div>
 	</div>
+</ng-template>
+<ng-template #loading>
+	<div class="loading mod-block"></div>
 </ng-template>
