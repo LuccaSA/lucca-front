@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LuModal, ALuModalRef, ILuModalContent } from '@lucca-front/ng';
-import { timer, Subject } from 'rxjs';
-import { mapTo } from 'rxjs/operators';
+import { timer, Subject, throwError } from 'rxjs';
+import { mapTo, catchError } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-poc-modal',
@@ -17,7 +17,8 @@ export class PocModalComponent {
 @Component({
 	selector: 'lu-poc-modal-inside',
 	template: `
-		only the content in this injected component
+		<p>only the content in this injected component</p>
+		<label class="label">{{error}}</label>
 		<div class="textfield">
 			<input class="textfield-input" [(ngModel)]="result">
 			<label class="textfield-label">result</label>
@@ -34,7 +35,15 @@ export class PocModalInsideComponent implements ILuModalContent {
 	submitDisabled = false;
 
 	result = 0;
-	submitAction = () => timer(1500).pipe(mapTo(this.result));
+	error;
+	// submitAction = () => timer(1500).pipe(mapTo(this.result));
+	submitAction = () => {
+		const obs$ = throwError(`error with result ${this.result}`);
+
+		return obs$.pipe(
+			catchError(err => { this.error = err; return throwError(`error message`); })
+		)
+	};
 	constructor(
 		protected _ref: ALuModalRef<PocModalInsideComponent>,
 	) {}
