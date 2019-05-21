@@ -45,7 +45,7 @@
 		right: 0;
 		top: 0;
 
-		@include media_smaller_than("md") {
+		@include media_smaller_than(_theme("commons.mobile")) {
 			left: 0 !important;
 			top: _component("navSide.mobile.toggle-height");
 		}

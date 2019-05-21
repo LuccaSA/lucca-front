@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlSerializer, DefaultUrlSerializer, UrlTree } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PocTranslateModule } from './poc-translate';
@@ -11,6 +11,11 @@ import { RefactoOverlaysRepositionModule } from './refacto-overlays-reposition';
 import { RefactoTooltipModule } from './refacto-tooltip';
 import { RefactorSelectModule } from './refactor-select';
 import { RefactorApiSelectModule } from './refactor-api-select';
+import { SplitOptionPickerModule } from './split-option-picker';
+import { SplitOptionPickerApiAuserModule } from './split-option-picker-api-auser';
+import { SplitOperatorsModule } from './split-operators';
+import { SplitOperatorsApiModule } from './split-operators-api';
+import { PocPopupModule } from './poc-popup';
 
 const routes: Routes = [
 	{ path: '', component: IssuesComponent },
@@ -22,10 +27,20 @@ const routes: Routes = [
 	{ path: 'refacto-tooltip', loadChildren: () => RefactoTooltipModule},
 	{ path: 'refactor-select', loadChildren: () => RefactorSelectModule},
 	{ path: 'refactor-api-select', loadChildren: () => RefactorApiSelectModule},
+	{ path: 'split-option-picker', loadChildren: () => SplitOptionPickerModule},
+	{ path: 'split-option-picker-api-auser', loadChildren: () => SplitOptionPickerApiAuserModule},
+	{ path: 'split-operators', loadChildren: () => SplitOperatorsModule},
+	{ path: 'split-operators-api', loadChildren: () => SplitOperatorsApiModule},
+	{ path: 'poc-popup', loadChildren: () => PocPopupModule},
 ];
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
 
+class LowerCaseUrlSerializer extends DefaultUrlSerializer {
+	parse(url: string): UrlTree {
+		return super.parse(url.toLowerCase());
+	}
+}
 @NgModule({
 	imports: [
 		RouterModule.forChild(routes),
@@ -39,6 +54,7 @@ issues.shift();
 	],
 	providers: [
 		{ provide: ISSUES_INDEX_TOKEN, useValue: issues },
+		{ provide: UrlSerializer, useClass: LowerCaseUrlSerializer },
 	]
 })
 export class IssuesRouter { }

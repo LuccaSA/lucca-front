@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
-import { ALuOptionOperator } from '../../../option/index';
+import { ALuOptionOperator, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
 import { ALuApiOptionSearcher, ALuApiSearcherService, ALuApiOptionPagedSearcher, ALuApiPagedSearcherService } from './api-searcher.model';
 import { IApiItem } from '../../api.model';
 import { LuApiSearcherService, LuApiPagedSearcherService } from './api-searcher.service';
@@ -14,6 +14,11 @@ import { debounceTime } from 'rxjs/operators';
 	providers: [
 		{
 			provide: ALuOptionOperator,
+			useExisting: forwardRef(() => LuApiSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnOpenSubscriber,
 			useExisting: forwardRef(() => LuApiSearcherComponent),
 			multi: true,
 		},
@@ -67,6 +72,16 @@ extends ALuApiOptionSearcher<T, S> {
 	providers: [
 		{
 			provide: ALuOptionOperator,
+			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnScrollBottomSubscriber,
 			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
 			multi: true,
 		},

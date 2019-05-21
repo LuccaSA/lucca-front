@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
+import { ILuOptionOperator, ALuOptionOperator, ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../option-operator.model';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 const MAGIC_STEP = 10;
 @Component({
@@ -13,9 +13,14 @@ const MAGIC_STEP = 10;
 			useExisting: forwardRef(() => LuOptionPagerComponent),
 			multi: true,
 		},
+		{
+			provide: ALuOnScrollBottomSubscriber,
+			useExisting: forwardRef(() => LuOptionPagerComponent),
+			multi: true,
+		},
 	],
 })
-export class LuOptionPagerComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T> {
+export class LuOptionPagerComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnScrollBottomSubscriber {
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest(
 			in$,

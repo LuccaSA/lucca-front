@@ -50,7 +50,8 @@ $commons: (
 		text: #FFFFFF
 	),
 	banner-height: 50px,
-	transition: unquote("all 150ms ease")
+	transition: unquote("all 150ms ease"),
+	mobile: "md"
 );
 
 $theme: _set($theme, "commons", $commons);
