@@ -1,11 +1,17 @@
 .main-content {
 	position: relative;
+
+	&.mod-withStickyHeader {
+		padding-top: _component("header.height");
+	}
 }
 
+// with vertical navigation
 .navSide ~ .main-content, .mod-withMenu .main-content {
 	margin-left: _theme("components.navSide.width");
 }
 
+// with compact vertical navigation
 .navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
 	margin-left: _theme("components.navSide.compact.width");
 }
