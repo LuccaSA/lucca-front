@@ -1,0 +1,49 @@
+.lu-popup-backdrop {
+}
+.lu-popup-panel {
+	@include elevate(1);
+	position: relative;
+	max-height: calc(100vh - 80px);
+	background-color: _component("popup.panel.background-color");
+	border-radius: _theme("commons.border.radius");
+}
+
+.lu-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: .5rem _component("popup.padding");
+}
+
+.lu-modal-header-title {
+	font-size: _theme("sizes.bigger.font-size");
+	font-weight: 600;
+	color: _color("text.default");
+	margin: 0;
+}
+
+.lu-modal-header-closeButton {
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: .5rem;
+	border-radius: _theme("commons.border.radius");
+	margin-left: .875rem;
+
+	&:hover {
+		background-color: _component("button.default-palette.light");
+	}
+}
+
+.lu-modal-content:not(.mod-noPadding) {
+	padding: 0 _component("popup.padding") 1rem;
+}
+
+.lu-modal-footer {
+	border-top: 1px solid _theme("commons.divider.color");
+	padding: .5rem _component("popup.padding");
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}

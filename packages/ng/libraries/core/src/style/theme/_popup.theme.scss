@@ -1,0 +1,10 @@
+$popup: (
+	padding: 2rem,
+	backdrop: (
+
+	),
+	panel: (
+		background-color: #fff,
+	),
+);
+$theme: _set($theme, 'components.popup', $popup);
