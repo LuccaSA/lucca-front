@@ -3,6 +3,8 @@ import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
 import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
+import { Subject, of } from 'rxjs';
+import { tap, delay, catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -16,6 +18,13 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 	get title() {
 		return this._componentInstance.title;
 	}
+	get submitLabel() {
+		return this._componentInstance.submitLabel;
+	}
+	get submitDisabled() {
+		return this._componentInstance.submitDisabled;
+	}
+	submitClass$ = new Subject();
 	constructor(
 		protected _ref: ALuModalRef<LuModalPanelComponent>,
 		public intl: LuModalIntl,
@@ -40,5 +49,22 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 	}
 	dismiss() {
 		this._ref.close();
+	}
+	submit() {
+		this.submitClass$.next('is-loading');
+		const action$ = this._componentInstance.submitAction();
+		action$.pipe(
+			tap(_ => this.submitClass$.next('is-success')),
+			delay(500),
+		)
+		.subscribe(result => {
+			this._ref.close(result);
+		});
+		action$.pipe(
+			catchError(err => {
+				this.submitClass$.next('is-error');
+				return of(err);
+			}),
+		).subscribe(() => {});
 	}
 }

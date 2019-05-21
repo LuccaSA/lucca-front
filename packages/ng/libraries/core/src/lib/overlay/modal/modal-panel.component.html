@@ -6,5 +6,6 @@
 	<ng-container cdkPortalOutlet #outlet></ng-container>
 </div>
 <div class="lu-modal-footer">
+	<button *ngIf="submitLabel" class="button palette-primary" [class.is-disabled]="submitDisabled" [ngClass]="submitClass$ | async" (click)="submit()">{{submitLabel}}</button>
 	<button class="button mod-link" (click)="dismiss()">{{intl.cancel}}</button>
 </div>

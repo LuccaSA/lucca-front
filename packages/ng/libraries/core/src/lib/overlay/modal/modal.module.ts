@@ -9,12 +9,14 @@ import { LU_POPUP_REF_FACTORY, LU_POPUP_CONFIG } from '../popup';
 import { LuModalRefFactory } from './modal-ref.factory';
 import { LuModalIntl } from './modal.intl';
 import { luModalTranslations } from './modal.translate';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
 	imports: [
 		OverlayModule,
 		PortalModule,
+		CommonModule,
 	],
 	declarations: [LuModalPanelComponent],
 	entryComponents: [LuModalPanelComponent],
