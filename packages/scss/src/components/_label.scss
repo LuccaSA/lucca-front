@@ -19,7 +19,7 @@
 .label {
 	@mixin labelColoring($palette) {
 		background: _color($palette, "see-through");
-		color: _color($palette, "darker");
+		color: _color($palette, "dark");
 	}
 
 	// palettes coloring
