@@ -1,4 +1,4 @@
-import { Component, ViewChild, ComponentRef, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ComponentRef, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
 import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
@@ -10,7 +10,8 @@ import { tap, delay, catchError } from 'rxjs/operators';
 @Component({
 	selector: 'lu-modal-panel',
 	templateUrl: './modal-panel.component.html',
-	styleUrls: ['./modal-panel.component.scss']
+	styleUrls: ['./modal-panel.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet }) protected _outlet: PortalOutlet;
@@ -25,8 +26,10 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 		return this._componentInstance.submitDisabled;
 	}
 	submitClass$ = new Subject();
+	error$ = new Subject();
 	constructor(
 		protected _ref: ALuModalRef<LuModalPanelComponent>,
+		protected _cdr: ChangeDetectorRef,
 		public intl: LuModalIntl,
 	) {}
 	attach<U extends T = T>(portal: Portal<U>) {
@@ -51,10 +54,12 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 		this._ref.close();
 	}
 	submit() {
+		this.error$.next(undefined);
 		this.submitClass$.next('is-loading');
 		const action$ = this._componentInstance.submitAction();
 		action$.pipe(
 			tap(_ => this.submitClass$.next('is-success')),
+			tap(() => this._cdr.markForCheck()),
 			delay(500),
 		)
 		.subscribe(result => {
@@ -62,9 +67,14 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 		});
 		action$.pipe(
 			catchError(err => {
-				this.submitClass$.next('is-error');
 				return of(err);
 			}),
+			tap(err => this.error$.next(err)),
+			tap(() => this.submitClass$.next('is-error')),
+			tap(() => this._cdr.markForCheck()),
+			delay(2000),
+			tap(() => this.submitClass$.next('')),
+			tap(() => this._cdr.markForCheck()),
 		).subscribe(() => {});
 	}
 }
