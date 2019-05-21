@@ -82,7 +82,6 @@
     "karma-coverage-istanbul-reporter": "^2.0.5",
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "merge2": "^1.2.3",
     "moment": "^2.22.2",
     "ng-packagr": "^5.1.0",
     "node-sass": "^4.12.0",
