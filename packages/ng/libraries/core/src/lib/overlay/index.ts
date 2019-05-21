@@ -1,3 +1,4 @@
+export * from './modal/index';
 export * from './popover/index';
 export * from './popup/index';
 export * from './tooltip/index';

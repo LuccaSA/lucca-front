@@ -1,23 +1,20 @@
-import { Injectable, Injector, Inject } from '@angular/core';
-import { Overlay, OverlayRef, ComponentType } from '@angular/cdk/overlay';
-import { Subscription } from 'rxjs';
-import { LuPopupRef } from './popup-ref.model';
-import { LU_POPUP_CONFIG } from './popup.token';
+import { Injectable, Inject } from '@angular/core';
+import { ComponentType } from '@angular/cdk/overlay';
+import { ILuPopupRef, ILuPopupRefFactory } from './popup-ref.model';
+import { LU_POPUP_CONFIG, LU_POPUP_REF_FACTORY } from './popup.token';
 import { ILuPopupConfig } from './popup-config.model';
+import { ILuPopupContent } from './popup.model';
 
 @Injectable()
 export class LuPopup {
-	protected _overlayRef: OverlayRef;
-	protected _backdropSubscription: Subscription = new Subscription();
 	constructor(
-		protected _overlay: Overlay,
-		protected _injector: Injector,
+		@Inject(LU_POPUP_REF_FACTORY) protected _factory: ILuPopupRefFactory,
 		@Inject(LU_POPUP_CONFIG) protected _config: ILuPopupConfig,
 	) {}
 
-	open<T, D, R>(component: ComponentType<T>, data: D = undefined, config: ILuPopupConfig = {}) {
+	open<T extends ILuPopupContent = ILuPopupContent, D = any, R = any>(component: ComponentType<T>, data: D = undefined, config: ILuPopupConfig = {}): ILuPopupRef<T, D, R> {
 		const extendedConfig = { ...this._config, ...config };
-		const ref = new LuPopupRef<T, D, R>(this._overlay, this._injector, component, extendedConfig);
+		const ref = this._factory.forge(component, extendedConfig);
 		ref.open(data);
 		return ref;
 	}
