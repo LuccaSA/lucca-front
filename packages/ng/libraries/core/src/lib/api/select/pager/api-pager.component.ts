@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Inject, Optional, SkipSelf, Self, OnInit } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
+import { ILuOptionOperator, ALuOptionOperator, ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '../../../option/index';
 import { LuApiPagerService } from './api-pager.service';
 import { IApiItem } from '../../api.model';
 import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
@@ -19,11 +19,21 @@ import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 			provide: ALuApiPagerService,
 			useClass: LuApiPagerService,
 		},
+		{
+			provide: ALuOnScrollBottomSubscriber,
+			useExisting: forwardRef(() => LuApiPagerComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuApiPagerComponent),
+			multi: true,
+		},
 	],
 })
 export class LuApiPagerComponent<T extends IApiItem = IApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
 extends ALuApiOptionPager<T, S>
-implements ILuOptionOperator<T>, OnInit {
+implements ILuOptionOperator<T>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenSubscriber {
 	constructor(
 		@Inject(ALuApiPagerService) @Optional() @SkipSelf() hostService: ALuApiPagerService,
 		@Inject(ALuApiPagerService) @Self() selfService: ALuApiPagerService,

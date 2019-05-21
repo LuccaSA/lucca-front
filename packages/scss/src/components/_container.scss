@@ -44,7 +44,7 @@
 			}
 		}
 
-		@include media_smaller_than("md") {
+		@include media_smaller_than(_theme("commons.mobile")) {
 			width: calc(100% - #{_theme("breakpoints.md.spacing")});
 		}
 	}
@@ -58,7 +58,7 @@
 			}
 		}
 
-		@include media_smaller_than("md") {
+		@include media_smaller_than(_theme("commons.mobile")) {
 			width: calc(100% - #{_theme("breakpoints.md.spacing")});
 		}
 	}

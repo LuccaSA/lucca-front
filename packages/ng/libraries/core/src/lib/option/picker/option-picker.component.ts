@@ -15,13 +15,12 @@ import {
 	AfterViewInit,
 	Input,
 } from '@angular/core';
-import { luTransformPopover } from '../../popover/index';
+import { luTransformPopover } from '../../overlay/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { merge, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
-import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
 /**
@@ -44,39 +43,16 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 export class LuOptionPickerComponent<T = any>
 extends ALuOptionPicker<T>
 implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
-	@Input('overlap-trigger')
-	set inputOverlapTrigger(v: boolean) {
-		this.overlapTrigger = v;
-	}
 
-	/**
-	 * Add classes to the overlay pane.
-	 * @param classes list or single class name
-	 */
-	@Input('overlayPaneClass')
-	set inputOverlayPaneClass(classes: string | string[]) {
-		this.overlayPaneClass = [
-			...this._defaultOverlayPaneClasses,
-			...(Array.isArray(classes) ? classes : [classes])
-		];
-	}
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
+	@Output() hovered = new EventEmitter<boolean>();
 	@Output() onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
 
-	constructor(
-		protected _vcr: ViewContainerRef,
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _renderer: Renderer2) {
-		super();
-		this.triggerEvent = 'click';
-		this._isOptionItemsInitialized = false;
-		this.overlayPaneClass = this._defaultOverlayPaneClasses;
-	}
 	protected _options: ILuOptionItem<T>[] = [];
 	protected _optionsQL: QueryList<ILuOptionItem<T>>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
@@ -85,15 +61,16 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
 
-	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
-		this._operators = ql.toArray();
+	constructor(
+		protected _changeDetectorRef: ChangeDetectorRef,
+		protected _renderer: Renderer2) {
+		super();
+		this._isOptionItemsInitialized = false;
+		this.overlayPaneClass = this._defaultOverlayPaneClasses;
 	}
 
-	protected _select(val: T) {
+	protected _emitSelectValue(val: T) {
 		this.onSelectValue.emit(val);
-		if (!this.multiple) {
-			this.onClose();
-		}
 	}
 	ngOnDestroy() {
 		super.destroy();
@@ -107,6 +84,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	}
 	_emitCloseEvent(): void {
 		this.close.emit();
+	}
+	_emitHoveredEvent(h): void {
+		this.hovered.emit(h);
 	}
 	onOpen() {
 		super.onOpen();

@@ -1,0 +1,14 @@
+<div class="lu-modal-header">
+	<h1 class="lu-modal-header-title">{{title}}</h1>
+	<button class="lu-modal-header-closeButton" (click)="dismiss()"><i class="lucca-icon">cross_thin</i></button>
+</div>
+<div class="lu-modal-content">
+	<ng-container cdkPortalOutlet #outlet></ng-container>
+</div>
+<div class="lu-modal-footer">
+	<!-- <ng-template [ngIf]="error$ | async as error"> -->
+		<label *ngIf="error$ | async as error" class="label palette-error">{{error}}</label>
+	<!-- </ng-template> -->
+	<button *ngIf="submitLabel" class="button palette-primary" [class.is-disabled]="submitDisabled" [ngClass]="submitClass$ | async" (click)="submit()">{{submitLabel}}</button>
+	<button class="button mod-link" (click)="dismiss()">{{intl.cancel}}</button>
+</div>

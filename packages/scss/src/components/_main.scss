@@ -16,7 +16,7 @@
 	margin-top: _theme("commons.banner-height");
 }
 
-@include media_smaller_than("md") {
+@include media_smaller_than(_theme("commons.mobile")) {
 	.main-content {
 		margin-left: 0 !important;
 	}
