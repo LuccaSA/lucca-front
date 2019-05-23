@@ -27,8 +27,8 @@
     "ls": "lerna ls -a -l"
   },
   "dependencies": {
-    "lerna": "^3.13.1",
-    "surge": "^0.20.3"
+    "lerna": "^3.14.1",
+    "surge": "^0.20.5"
   },
   "devDependencies": {}
 }
