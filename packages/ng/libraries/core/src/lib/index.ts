@@ -7,6 +7,7 @@ export * from './overlay/index';
 export * from './safe-content/index';
 export * from './scroll/index';
 export * from './select/index';
+export * from './translate/index';
 export * from './user/index';
 
 export { LuModule } from './module';
