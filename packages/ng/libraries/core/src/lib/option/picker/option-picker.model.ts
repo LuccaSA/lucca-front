@@ -1,6 +1,6 @@
 import { ILuPickerPanel, ALuPickerPanel } from '../../input/index';
 import { Subscription, Observable, merge } from 'rxjs';
-import { switchMap, first, startWith, mapTo, shareReplay } from 'rxjs/operators';
+import { switchMap, first, startWith, mapTo, shareReplay, tap, delay } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/index';
 import { ILuOptionOperator } from '../operator/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
@@ -66,8 +66,16 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 				first(),
 				mapTo(false),
 				startWith(true),
-				shareReplay()
+				shareReplay(),
 			);
+			this.loading$.pipe(
+				delay(1),
+			).subscribe(l => {
+				if (!l) {
+					// replay onOpen when loading is done
+					this.onOpen();
+				}
+			})
 		}
 	}
 	onScrollBottom() {
