@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { luTransformPopover } from '../../overlay/index';
 import { Observable } from 'rxjs';
-import { first, mapTo, startWith, shareReplay } from 'rxjs/operators';
+import { first, mapTo, startWith, shareReplay, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import {
 	ALuOptionOperator,
@@ -58,6 +58,14 @@ extends LuOptionPickerComponent<T> {
 				startWith(true),
 				shareReplay(),
 			);
+			this.loading$.pipe(
+				delay(1),
+			).subscribe(l => {
+				if (!l) {
+					// replay onOpen when loading is done
+					this.onOpen();
+				}
+			})
 		}
 	}
 	protected _onOpenSubscribers = [];
