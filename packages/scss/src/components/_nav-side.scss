@@ -346,7 +346,7 @@
 
 
 // Mobile version
-@include media_smaller_than(_theme("commons.mobile")) {
+@include media_smaller_than(_theme("commons.mobile", true)) {
 	.navSide {
 		position: relative;
 		padding-top: _component("navSide.mobile.toggle-height");
