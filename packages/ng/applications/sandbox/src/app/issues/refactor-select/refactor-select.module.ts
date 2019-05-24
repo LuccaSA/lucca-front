@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RefactorSelectComponent } from './refactor-select.component';
 import { LuSelectModule, LuOptionModule, LuInputModule } from '@lucca-front/ng';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 		LuOptionModule,
 		FormsModule,
 		LuInputModule,
+		CommonModule,
 		RouterModule.forChild([
 			{ path: '', component: RefactorSelectComponent },
 		]),
