@@ -94,7 +94,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		// this._initObserver();
 		this._applySelected();
 	}
-	@ViewChild(TemplateRef)
+	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}

@@ -47,7 +47,7 @@ import { ALuSelectInput } from './select-input.model';
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
-	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
+	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
 
@@ -91,13 +91,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	/**
 	 * popover trigger class extension
 	 */
-	@ContentChild(ALuPickerPanel) set _contentChildPicker(picker: P) {
+	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: P) {
 		this._picker = picker;
 	}
-	@ContentChild(ALuClearer) set _contentChildClearer(clearer: ILuClearer) {
+	@ContentChild(ALuClearer, { static: true }) set _contentChildClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
 	}
-	@ContentChild(ALuInputDisplayer) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
+	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this.displayer = displayer;
 	}
 
@@ -138,8 +138,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	}
 
 	// display clearer
-	@ContentChild(ALuClearer, { read: ElementRef }) clearerEltRef: ElementRef;
-	@ViewChild('suffix', { read: ElementRef }) suffixEltRef: ElementRef;
+	@ContentChild(ALuClearer, { read: ElementRef, static: true }) clearerEltRef: ElementRef;
+	@ViewChild('suffix', { read: ElementRef, static: true }) suffixEltRef: ElementRef;
 	displayClearer() {
 		if (!!this.clearerEltRef) {
 			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);

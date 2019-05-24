@@ -37,7 +37,7 @@ import { ALuApiOptionPagedSearcher } from '../../../api/index';
 export class LuUserPagedSearcherComponent<U extends IUser = IUser, S extends ALuUserPagedSearcherService<U> = ALuUserPagedSearcherService<U>>
 extends ALuApiOptionPagedSearcher<U, S> {
 	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }

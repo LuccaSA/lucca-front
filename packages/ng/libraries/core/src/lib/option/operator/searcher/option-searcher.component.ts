@@ -24,7 +24,7 @@ export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> imp
 	@HostBinding('class.position-fixed') fixed = true;
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
-	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest(
 			in$,

@@ -14,7 +14,7 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperError extends FieldWrapper {
-	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	fieldComponent: ViewContainerRef;
 
 	get validationId() {

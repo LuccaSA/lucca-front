@@ -91,7 +91,7 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	@Output() open = new EventEmitter<void>();
 	@Output() hovered = new EventEmitter<boolean>();
 
-	@ViewChild(TemplateRef)
+	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}

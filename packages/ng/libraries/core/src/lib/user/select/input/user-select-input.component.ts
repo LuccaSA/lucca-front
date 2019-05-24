@@ -45,7 +45,7 @@ import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../sear
 export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
 extends ALuSelectInput<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
-	@ViewChild('display', { read: ViewContainerRef }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
+	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
 	searchFormat = LuDisplayFullname.lastfirst;
@@ -96,13 +96,13 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	/**
 	 * popover trigger class extension
 	 */
-	@ViewChild(ALuPickerPanel) set _vcPicker(picker: P) {
+	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
 		this._picker = picker;
 	}
-	@ViewChild(ALuClearer) set _vcClearer(clearer: ILuClearer) {
+	@ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
 		this._clearer = clearer;
 	}
-	@ViewChild(ALuInputDisplayer) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
+	@ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
 		this.displayer = displayer;
 		this.render();
 	}
