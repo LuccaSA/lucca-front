@@ -8,6 +8,7 @@
     "@angular/cdk": "^8.0.0 || ^8.0.0-rc.0",
     "@lucca-front/icons": "3.0.0-beta.1",
     "@lucca-front/scss": "3.0.0-beta.1",
+    "node-sass": "^4.12.0",
     "rxjs": "^6.4.0"
   },
   "script": {}

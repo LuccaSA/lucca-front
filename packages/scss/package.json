@@ -37,6 +37,7 @@
     "stylelint": "^9.10.1"
   },
   "dependencies": {
-    "@lucca-front/icons": "3.0.0-beta.1"
+    "@lucca-front/icons": "3.0.0-beta.1",
+    "node-sass": "^4.12.0"
   }
 }
