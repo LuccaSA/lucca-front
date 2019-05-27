@@ -43,7 +43,7 @@ export class PocModalInsideComponent implements ILuModalContent {
 		return obs$.pipe(
 			catchError(err => { this.error = err; return throwError(`error message`); })
 		)
-	};
+	}
 	constructor(
 		protected _ref: ALuModalRef<PocModalInsideComponent>,
 	) {}
