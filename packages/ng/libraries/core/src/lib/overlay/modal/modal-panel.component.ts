@@ -4,7 +4,7 @@ import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
 import { ILuModalLabel } from './modal.translate'
-import { Subject, of } from 'rxjs';
+import { Subject, of, timer } from 'rxjs';
 import { tap, delay, catchError } from 'rxjs/operators';
 
 
@@ -65,17 +65,14 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 		)
 		.subscribe(result => {
 			this._ref.close(result);
+		}, err => {
+			this.submitClass$.next('is-error');
+			this.error$.next(err);
+			this._cdr.markForCheck();
+			timer(2000).subscribe(_ => {
+				this.submitClass$.next('');
+				this._cdr.markForCheck();
+			});
 		});
-		action$.pipe(
-			catchError(err => {
-				return of(err);
-			}),
-			tap(err => this.error$.next(err)),
-			tap(() => this.submitClass$.next('is-error')),
-			tap(() => this._cdr.markForCheck()),
-			delay(2000),
-			tap(() => this.submitClass$.next('')),
-			tap(() => this._cdr.markForCheck()),
-		).subscribe(() => {});
 	}
 }
