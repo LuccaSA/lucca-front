@@ -308,6 +308,14 @@
           "configurations": {
             "production": {
               "tsConfig": "applications/sandbox/tsconfig.aot.json",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "dist/style/overrides",
+                  "dist/style",
+                  "node_modules/@lucca-front/scss/src/overrides",
+                  "node_modules/@lucca-front/ng/src/style/overrides"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "applications/sandbox/src/environments/environment.ts",
