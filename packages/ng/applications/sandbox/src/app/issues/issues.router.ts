@@ -17,6 +17,7 @@ import { SplitOperatorsModule } from './split-operators';
 import { SplitOperatorsApiModule } from './split-operators-api';
 import { PocPopupModule } from './poc-popup';
 import { PocModalModule } from './poc-modal';
+import { FormlyModule } from './formly';
 
 const routes: Routes = [
 	{ path: '', component: IssuesComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
 	{ path: 'split-operators-api', loadChildren: () => SplitOperatorsApiModule},
 	{ path: 'poc-popup', loadChildren: () => PocPopupModule},
 	{ path: 'poc-modal', loadChildren: () => PocModalModule},
+	{ path: 'formly', loadChildren: () => FormlyModule},
 ];
 const issues = [ ...routes].map(r => r.path);
 issues.shift();
