@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 export class SplitOperatorsApiComponent {
 	item;
 	user;
+	searchFn(o, c) {
+		return o.name.startsWith(c);
+	}
+	trackBy(idx, color): string {
+		return color.code;
+	}
 }
