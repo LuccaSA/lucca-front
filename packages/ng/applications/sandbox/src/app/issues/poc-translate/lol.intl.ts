@@ -3,6 +3,7 @@ import { LOL_TRANSLATIONS_TOKEN } from './lol.translate';
 
 @Injectable()
 export class LolIntl {
+	lol;
 	constructor(@Inject(LOL_TRANSLATIONS_TOKEN) translations, @Inject(LOCALE_ID) locale) {
 		const fallback = translations['en'] || {};
 		const current = translations[locale] || translations[locale.substring(0, 2)] || {};

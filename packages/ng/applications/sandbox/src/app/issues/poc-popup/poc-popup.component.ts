@@ -47,6 +47,7 @@ export class PocPopupInsideComponent {
 export class PocPopupSecondaryComponent {
 	constructor(
 		protected _ref: ALuPopupRef<PocPopupSecondaryComponent>,
+		@Optional() @Inject(LU_POPUP_DATA) public data,
 	) {}
 	closePopup() {
 		this._ref.close(8);

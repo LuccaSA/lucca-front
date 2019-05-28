@@ -9,7 +9,7 @@
     "build-ng": "cd ../packages/ng && npm run ng build demo -- --base-href /ng/",
     "postbuild-icons": "mkdirp ./dist/icons/font && cp -r ../packages/icons/font/* ./dist/icons/font",
     "postbuild-scss": "mkdirp ./dist/scss && cp -r ../packages/scss/demo/* ./dist/scss/ && cp -r ../packages/scss/dist/* ./dist/scss/",
-    "postbuild-ng": "mkdirp ./dist/ng && cp -r ../packages/ng/docs/dist/demo/* ./dist/ng/",
+    "postbuild-ng": "mkdirp ./dist/ng && cp -r ../packages/ng/dist-spa/sandbox/* ./dist/ng/",
     "build-demo": "cp -r src/* ./dist/",
     "build": "npm run build-icons && npm run build-scss && npm run build-ng && npm run build-demo",
     "start": "npm run build && node server.js",

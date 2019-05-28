@@ -1,7 +1,7 @@
 <h1>split-option-picker</h1>
 <h2>standard option picker - no operators</h2>
 <div class="textfield">
-	<lu-select class="textfield-input" [(ngModel)]="model">
+	<lu-select class="textfield-input" [(ngModel)]="item">
 		<span *luDisplayer="let value">{{value}}</span>
 		<lu-option-picker>
 			<lu-option value="1">1</lu-option>
@@ -11,7 +11,7 @@
 </div>
 <h2>advanced option picker - still no operators</h2>
 <div class="textfield">
-	<lu-select class="textfield-input" [(ngModel)]="model">
+	<lu-select class="textfield-input" [(ngModel)]="item">
 		<span *luDisplayer="let value">{{value}}</span>
 		<lu-option-picker-advanced>
 			<lu-option value="1">1</lu-option>
