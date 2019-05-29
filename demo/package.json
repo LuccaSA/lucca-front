@@ -6,7 +6,7 @@
   "scripts": {
     "build-icons": " ",
     "build-scss": "cd ../packages/scss && npm run build",
-    "build-ng": "cd ../packages/ng && npm run ng build demo -- --base-href /ng/",
+    "build-ng": "cd ../packages/ng && npm run ng build sandbox -- --base-href /ng/",
     "postbuild-icons": "mkdirp ./dist/icons/font && cp -r ../packages/icons/font/* ./dist/icons/font",
     "postbuild-scss": "mkdirp ./dist/scss && cp -r ../packages/scss/demo/* ./dist/scss/ && cp -r ../packages/scss/dist/* ./dist/scss/",
     "postbuild-ng": "mkdirp ./dist/ng && cp -r ../packages/ng/dist-spa/sandbox/* ./dist/ng/",
