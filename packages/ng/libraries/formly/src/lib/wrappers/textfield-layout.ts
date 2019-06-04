@@ -35,6 +35,10 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 		return !!this.to && !!this.to.required ? 'is-required' : '';
 	}
 
+	get isDisabled() {
+		return !!this.to && !!this.to.disabled ? 'is-disabled' : '';
+	}
+
 	get isFocused() {
 		return !!this.to && this.to._isFocused ? 'is-focused' : '';
 	}
