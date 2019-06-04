@@ -56,6 +56,7 @@ export class FieldgroupComponent {
 							templateOptions: {
 								type: 'text',
 								label: 'Street Name',
+								disabled: true,
 							},
 						},
 					],
@@ -69,6 +70,7 @@ export class FieldgroupComponent {
 							templateOptions: {
 								label: 'comments',
 								mod: 'textarea',
+								disabled: true
 							},
 						},
 					],

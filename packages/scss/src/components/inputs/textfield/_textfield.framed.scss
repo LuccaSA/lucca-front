@@ -41,9 +41,11 @@
 
 		@mixin inputColoring($palette) {
 			&:hover, &:focus {
-				@include fakeBorder(1px, _color($palette));
-				background-color: _color($palette, "see-through");
-				z-index: 2;
+				&:not([disabled]):not([readonly]):not(.is-disabled):not(.is-readonly) {
+					@include fakeBorder(1px, _color($palette));
+					background-color: _color($palette, "see-through");
+					z-index: 2;
+				}
 			}
 
 			textarea.textfield-input {
@@ -76,9 +78,12 @@
 		}
 
 		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
-			background-color: _theme("commons.disabled.background");
-			color: _theme("commons.disabled.color");
-			pointer-events: not-allowed;
+			&, &:hover, &:focus {
+				background-color: _theme("commons.disabled.background");
+				color: _theme("commons.disabled.color");
+				opacity: .6;
+				cursor: not-allowed;
+			}
 		}
 	}
 
