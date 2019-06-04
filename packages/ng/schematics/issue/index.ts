@@ -94,14 +94,11 @@ function addRouteToRouter(routerPath: Path | undefined, options: IIssueOptions) 
 }
 function addRoute(source: SourceFile, routerPath: string, issueName: string, issueModule: string, relativePath: string): Change[] {
 	const changes: Change[] = [];
-	// insert import { xxxModule } from './xxx';
-	const insertImportChange = insertImport(source, routerPath, issueModule, relativePath);
-	changes.push(insertImportChange);
 
 	// find node containing all subpages
 	const routesNode = findRoutesNode(source);
 	if (!!routesNode) {
-		const statement = `\t{ path: '${issueName}', loadChildren: () => ${issueModule}},\r\n`;
+		const statement = `\t{ path: '${issueName}', loadChildren: () => import('./${issueName}').then(m => m.${issueModule}) },\r\n`;
 		const routesChanges = new InsertChange(routerPath, routesNode.end - 1, statement);
 		changes.push(routesChanges);
 	}
