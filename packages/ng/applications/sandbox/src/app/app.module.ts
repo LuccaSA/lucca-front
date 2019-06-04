@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { IssuesRouter } from './issues';
+import { environment } from '../environments/environment';
 
 @NgModule({
 	declarations: [
@@ -13,7 +14,9 @@ import { IssuesRouter } from './issues';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
-		RouterModule.forRoot([]),
+		RouterModule.forRoot([], {
+			useHash: environment.useHash,
+		}),
 		IssuesRouter,
 	],
 	bootstrap: [AppComponent]
