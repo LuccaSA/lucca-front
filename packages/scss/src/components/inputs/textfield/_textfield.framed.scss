@@ -74,6 +74,12 @@
 		&.is-error {
 			background-color: _color("error", "see-through");
 		}
+
+		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
+			background-color: _theme("commons.disabled.background");
+			color: _theme("commons.disabled.color");
+			pointer-events: not-allowed;
+		}
 	}
 
 	&.mod-withSuffix {
