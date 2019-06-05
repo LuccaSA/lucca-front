@@ -10,4 +10,6 @@ export class PocTreeComponent {
 	node111 = { id: 111, name: 'leaf 1.1.1' };
 	node12 = { id: 11, name: 'node 1.2' };
 
+	item;
+	collection = [];
 }

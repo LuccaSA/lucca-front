@@ -1,6 +1,6 @@
 <h1>poc-tree</h1>
 <div class="textfield">
-	<lu-select class="textfield-input">
+	<lu-select class="textfield-input" [(ngModel)]="item">
 		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 		<lu-option-picker>
 			<lu-tree-option [value]="node1">
@@ -17,4 +17,26 @@
 			</lu-tree-option>
 		</lu-option-picker>
 	</lu-select>
+	<label for="" class="textfield-label">select single</label>
 </div>
+
+<div class="textfield">
+		<lu-select class="textfield-input" [(ngModel)]="collection" multiple>
+			<ng-container *luDisplayer="let values; multiple: true">{{ values.length }} items selected</ng-container>
+			<lu-option-picker>
+				<lu-tree-option [value]="node1">
+					{{node1.name}}
+					<lu-tree-option [value]="node11">
+						{{node11.name}}
+						<lu-tree-option [value]="node111">
+							{{node111.name}}
+						</lu-tree-option>
+					</lu-tree-option>
+					<lu-tree-option [value]="node12">
+						{{node12.name}}
+					</lu-tree-option>
+				</lu-tree-option>
+			</lu-option-picker>
+		</lu-select>
+		<label for="" class="textfield-label">select multiple</label>
+	</div>
