@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, forwardRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ContentChildren, ElementRef, ViewChild, QueryList, Renderer2 } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from '../../../option/index';
 import { ALuTreeOptionItem } from './tree-option-item.model';
 
@@ -20,14 +20,27 @@ import { ALuTreeOptionItem } from './tree-option-item.model';
 		},
 	],
 })
-export class LuTreeOptionItemComponent<T = any> extends ALuOptionItem<T> implements ILuOptionItem<T> {
+export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuOptionItem<T> {
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<T>();
-	@HostListener('click')
-	onclick() {
+	select() {
 		this.onSelect.emit(this.value);
 	}
-	constructor(protected _vcr: ViewContainerRef) {
+	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ElementRef }) set _childrenElts(ql: QueryList<ElementRef>) {
+		const children = ql.toArray();
+		// need to remove item at index 0 cuz its this one
+		children.shift();
+		this.displayChildren(children);
+	}
+	@ViewChild('children', { read: ElementRef, static: true }) _childrenContainer: ElementRef;
+	constructor(
+		protected _renderer: Renderer2,
+	) {
 		super();
+	}
+	private displayChildren(childrenEltRef: ElementRef[]) {
+		childrenEltRef.forEach(c => {
+			this._renderer.appendChild(this._childrenContainer.nativeElement, c.nativeElement);
+		});
 	}
 }
