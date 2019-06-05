@@ -1,1 +1,17 @@
 <h1>poc-tree</h1>
+<div class="textfield">
+	<lu-select class="textfield-input">
+		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+		<lu-option-picker>
+			<lu-tree-option [value]="node1">
+				{{node1.name}}
+				<lu-tree-option [value]="node11">
+					{{node11.name}}
+					<lu-tree-option [value]="node111">
+						{{node111.name}}
+					</lu-tree-option>
+				</lu-tree-option>
+			</lu-tree-option>
+		</lu-option-picker>
+	</lu-select>
+</div>
