@@ -1,0 +1,15 @@
+<h1>fix-472</h1>
+<a href="https://github.com/LuccaSA/lucca-front/issues/472" class="link">issue 472</a>
+<div class="textfield">
+	<lu-select class="textfield-input" multiple [(ngModel)]="items">
+		<span *luDisplayer="let value">{{value}}</span>
+		<lu-option-picker>
+			<!-- <lu-option value="0">zero</lu-option>
+			<lu-option value="1">one</lu-option>
+			<lu-option value="2">two</lu-option>
+			<lu-option value="3">three</lu-option> -->
+			<lu-option *ngFor="let o of options" [value]="o.value">{{o.name}}</lu-option>
+		</lu-option-picker>
+	</lu-select>
+	<label for="" class="textfield-label">label</label>
+</div>

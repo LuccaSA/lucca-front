@@ -35,7 +35,7 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		} else {
 			const values = <T[]>this._value || [];
 			let newValues;
-			if (values.find(v => JSON.stringify(v) === JSON.stringify(value))) {
+			if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
 				// value was present, we remove it
 				newValues = values.filter(v => JSON.stringify(v) !== JSON.stringify(value));
 			} else {
