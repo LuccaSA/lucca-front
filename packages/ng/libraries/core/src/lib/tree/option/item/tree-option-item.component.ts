@@ -8,11 +8,11 @@ import { ALuTreeOptionItem } from './tree-option-item.model';
 	styleUrls: ['./tree-option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
-		{
-			provide: ALuOptionItem,
-			useExisting: forwardRef(() => LuTreeOptionItemComponent),
-			multi: true,
-		},
+		// {
+		// 	provide: ALuOptionItem,
+		// 	useExisting: forwardRef(() => LuTreeOptionItemComponent),
+		// 	multi: true,
+		// },
 		{
 			provide: ALuTreeOptionItem,
 			useExisting: forwardRef(() => LuTreeOptionItemComponent),
