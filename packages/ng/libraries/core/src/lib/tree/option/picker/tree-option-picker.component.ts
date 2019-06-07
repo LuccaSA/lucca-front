@@ -4,8 +4,8 @@ import { ALuPickerPanel } from '../../../input/index';
 import { LuOptionPickerComponent } from '../../../option/index';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item';
-import { Observable } from 'rxjs';
-import { switchMap, merge } from 'rxjs/operators';
+import { Observable, merge } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 /**
 * basic option picker panel
