@@ -3,7 +3,7 @@ import { luTransformPopover } from '../../../overlay/index';
 import { ALuPickerPanel } from '../../../input/index';
 import { LuOptionPickerComponent } from '../../../option/index';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
-import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item';
+import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
 import { Observable, merge } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
