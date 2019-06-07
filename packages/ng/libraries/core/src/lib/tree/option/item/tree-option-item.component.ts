@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ContentChildren, ElementRef, ViewChild, QueryList, Renderer2 } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from '../../../option/index';
-import { ALuTreeOptionItem } from './tree-option-item.model';
+import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -26,12 +26,12 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	select() {
 		this.onSelect.emit(this);
 	}
-	childrenOptionItems: ILuOptionItem<T>[] = [];
+	children: ILuTreeOptionItem<T>[] = [];
 	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ALuTreeOptionItem }) set _childrenItems(ql: QueryList<ALuTreeOptionItem>) {
 		const children = ql.toArray();
 		// need to remove item at index 0 cuz its this LuTreeOptionItemComponent
 		children.shift();
-		this.childrenOptionItems = children;
+		this.children = children;
 		// TODO - plug ql.changes to refresh if children changes
 	}
 

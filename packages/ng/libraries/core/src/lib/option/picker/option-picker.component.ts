@@ -190,7 +190,7 @@ implements ILuOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 		const options = this._optionsQL ? this._optionsQL.toArray() : [];
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
-			this._updateValue(highlightedOption);
+			this._toggle(highlightedOption);
 		}
 	}
 	protected _initSelected() {

@@ -25,10 +25,10 @@ export abstract class ALuOptionPicker<T = any, I extends ILuOptionItem<T> = ILuO
 			items => merge(...items.map(i => i.onSelect))
 		));
 		this._subs.add(
-			singleFlow$.subscribe(option => this._updateValue(option))
+			singleFlow$.subscribe(option => this._toggle(option))
 		);
 	}
-	protected _updateValue(option: I) {
+	protected _toggle(option: I) {
 		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);

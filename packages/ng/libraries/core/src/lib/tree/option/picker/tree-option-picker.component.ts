@@ -44,19 +44,33 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 		));
 		this._subs.add(
 			singleFlowSelect$
-			.subscribe(option => this._updateValue(option))
+			.subscribe(option => this._toggle(option))
 		);
 	}
-	protected _updateValue(option: I) {
+	protected _toggle(option: I) {
 		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);
 			return;
 		}
-		const children = option.childrenOptionItems.map(i => i.value);
+		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
+		let newValues;
 		if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
-			
+			// remove option and its children
+			newValues = this._remove(values, [value, ...allChildren]);
+		} else {
+			// add option and its children
+			newValues = this._add(values, [value, ...allChildren]);
 		}
+		this._select(newValues);
+	}
+	protected _add(values: T[], entries: T[]): T[] {
+		const newEntries = entries.filter(entry => !values.some(v => JSON.stringify(v) === JSON.stringify(entry)));
+		return [...values, ...newEntries];
+	}
+	protected _remove(values: T[], entries: T[]): T[] {
+		const entriesToKeep = values.filter(value => !entries.some(e => JSON.stringify(e) === JSON.stringify(value)));
+		return [...entriesToKeep];
 	}
 }
