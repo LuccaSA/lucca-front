@@ -23,8 +23,16 @@ import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuOptionItem<T> {
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<this>();
+	@Output() onSelectSelf = new EventEmitter<this>();
+	@Output() onSelectChildren = new EventEmitter<this>();
 	select() {
 		this.onSelect.emit(this);
+	}
+	selectSelf() {
+		this.onSelectSelf.emit(this);
+	}
+	selectChildren() {
+		this.onSelectChildren.emit(this);
 	}
 	children: ILuTreeOptionItem<T>[] = [];
 	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ALuTreeOptionItem }) set _childrenItems(ql: QueryList<ALuTreeOptionItem>) {

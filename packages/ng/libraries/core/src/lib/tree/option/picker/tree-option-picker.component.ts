@@ -7,6 +7,11 @@ import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item';
 import { Observable, merge } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+enum ToggleMode {
+	all,
+	self,
+	children,
+}
 /**
 * basic option picker panel
 */
@@ -42,12 +47,38 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 		const singleFlowSelect$ = optionItems$.pipe(switchMap(
 			items => merge(...items.map(i => i.onSelect))
 		));
+		const singleFlowSelectSelf$ = optionItems$.pipe(switchMap(
+			items => merge(...items.map(i => i.onSelectSelf))
+		));
+		const singleFlowSelectChildren$ = optionItems$.pipe(switchMap(
+			items => merge(...items.map(i => i.onSelectChildren))
+		));
+
 		this._subs.add(
 			singleFlowSelect$
-			.subscribe(option => this._toggle(option))
+			.subscribe(option => this._toggle(option, ToggleMode.all))
+		);
+		this._subs.add(
+			singleFlowSelectSelf$
+			.subscribe(option => this._toggle(option, ToggleMode.self))
+		);
+		this._subs.add(
+			singleFlowSelectChildren$
+			.subscribe(option => this._toggle(option, ToggleMode.children))
 		);
 	}
-	protected _toggle(option: I) {
+	protected _toggle(option: I, mod = ToggleMode.all) {
+		switch (mod) {
+			case ToggleMode.self:
+				return this._toggleSelf(option);
+			case ToggleMode.children:
+				return this._toggleChildren(option);
+			case ToggleMode.self:
+			default:
+				return this._toggleAll(option);
+		}
+	}
+	protected _toggleAll(option: I) {
 		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);
@@ -62,6 +93,41 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 		} else {
 			// add option and its children
 			newValues = this._add(values, [value, ...allChildren]);
+		}
+		this._select(newValues);
+	}
+	protected _toggleSelf(option: I) {
+		const value = option.value;
+		if (!this.multiple) {
+			this._select(value);
+			return;
+		}
+		const allChildren = option.allChildren.map(i => i.value);
+		const values = <T[]>this._value || [];
+		let newValues = this._remove(values, [...allChildren]);
+		if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
+			// remove option and its children
+			newValues = this._remove(newValues, [value]);
+		} else {
+			// add option and its children
+			newValues = this._add(newValues, [value]);
+		}
+		this._select(newValues);
+	}
+	protected _toggleChildren(option: I) {
+		const value = option.value;
+		if (!this.multiple) {
+			this._select(value);
+			return;
+		}
+		const allChildren = option.allChildren.map(i => i.value);
+		const values = <T[]>this._value || [];
+		let newValues = this._remove(values, [value]);
+		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+		if (allChildrenSelected) {
+			newValues = this._remove(newValues, allChildren);
+		} else {
+			newValues = this._add(newValues, allChildren);
 		}
 		this._select(newValues);
 	}

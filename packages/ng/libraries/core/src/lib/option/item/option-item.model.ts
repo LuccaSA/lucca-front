@@ -5,6 +5,6 @@ export interface ILuOptionItem<T = any> {
 	onSelect: Observable<this>;
 }
 export abstract class ALuOptionItem<T = any> implements ILuOptionItem<T> {
-	value: T;
-	onSelect: Observable<this>;
+	abstract value: T;
+	abstract onSelect: Observable<this>;
 }
