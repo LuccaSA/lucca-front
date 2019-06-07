@@ -22,15 +22,25 @@ import { ALuTreeOptionItem } from './tree-option-item.model';
 })
 export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuOptionItem<T> {
 	@Input() value: T;
-	@Output() onSelect = new EventEmitter<T>();
+	@Output() onSelect = new EventEmitter<this>();
 	select() {
-		this.onSelect.emit(this.value);
+		this.onSelect.emit(this);
 	}
+	childrenOptionItems: ILuOptionItem<T>[] = [];
+	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ALuTreeOptionItem }) set _childrenItems(ql: QueryList<ALuTreeOptionItem>) {
+		const children = ql.toArray();
+		// need to remove item at index 0 cuz its this LuTreeOptionItemComponent
+		children.shift();
+		this.childrenOptionItems = children;
+		// TODO - plug ql.changes to refresh if children changes
+	}
+
 	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ElementRef }) set _childrenElts(ql: QueryList<ElementRef>) {
 		const children = ql.toArray();
-		// need to remove item at index 0 cuz its this one
+		// need to remove item at index 0 cuz its this LuTreeOptionItemComponent
 		children.shift();
 		this.displayChildren(children);
+		// TODO - plug ql.changes to refresh if children changes
 	}
 	@ViewChild('children', { read: ElementRef, static: true }) _childrenContainer: ElementRef;
 	constructor(

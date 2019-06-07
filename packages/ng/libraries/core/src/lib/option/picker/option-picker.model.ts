@@ -25,8 +25,7 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			items => merge(...items.map(i => i.onSelect))
 		));
 		this._subs.add(
-			singleFlow$
-			.subscribe((value: T) => this._updateValue(value))
+			singleFlow$.subscribe(option => this._updateValue(option.value)),
 		);
 	}
 	protected _updateValue(value: T) {
