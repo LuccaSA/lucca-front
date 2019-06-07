@@ -1,0 +1,9 @@
+<ng-template>
+	<div class="lu-popover-panel" role="dialog" [ngClass]="panelClassesMap" [class.mod-multiple]="multiple"
+	 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
+	 [@transformPopover]="'enter'">
+		<div class="lu-popover-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
+			<ng-content></ng-content>
+		</div>
+	</div>
+</ng-template>
