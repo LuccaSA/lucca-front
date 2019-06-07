@@ -4,9 +4,9 @@ import { switchMap } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 
-export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> {}
+export interface ILuOptionPickerPanel<T = any, I extends ILuOptionItem<T> = ILuOptionItem<T>> extends ILuPickerPanel<T> {}
 
-export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
+export abstract class ALuOptionPicker<T = any, I extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T, I> {
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T | T[]>;
 	protected _value: T | T[];
@@ -14,7 +14,7 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 		this._value = value;
 		this._applySelected();
 	}
-	protected set _optionItems$(optionItems$: Observable<ILuOptionItem<T>[]>) {
+	protected set _optionItems$(optionItems$: Observable<I[]>) {
 		// reapply selected when the options change
 		this._subs.add(
 			optionItems$
@@ -25,10 +25,11 @@ export abstract class ALuOptionPicker<T = any> extends ALuPickerPanel<T> impleme
 			items => merge(...items.map(i => i.onSelect))
 		));
 		this._subs.add(
-			singleFlow$.subscribe(option => this._updateValue(option.value)),
+			singleFlow$.subscribe(option => this._updateValue(option))
 		);
 	}
-	protected _updateValue(value: T) {
+	protected _updateValue(option: I) {
+		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);
 		} else {

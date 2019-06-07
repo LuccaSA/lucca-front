@@ -40,9 +40,9 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 		},
 	]
 })
-export class LuOptionPickerComponent<T = any>
-extends ALuOptionPicker<T>
-implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
+export class LuOptionPickerComponent<T = any, I extends ILuOptionItem<T> = ILuOptionItem<T>>
+extends ALuOptionPicker<T, I>
+implements ILuOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 
 
 	@Output() close = new EventEmitter<void>();
@@ -53,9 +53,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
 
-	protected _options: ILuOptionItem<T>[] = [];
-	protected _optionsQL: QueryList<ILuOptionItem<T>>;
-	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
+	protected _options: I[] = [];
+	protected _optionsQL: QueryList<I>;
+	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<I>) {
 		this._optionsQL = ql;
 		this.initOptionItemsObservable();
 	}
@@ -190,7 +190,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		const options = this._optionsQL ? this._optionsQL.toArray() : [];
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
-			this._updateValue(highlightedOption.value);
+			this._updateValue(highlightedOption);
 		}
 	}
 	protected _initSelected() {
@@ -237,7 +237,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
 			.pipe(
-				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
+				map<QueryList<I>, I[]>(q => q.toArray()),
 				delay(0),
 			);
 		items$.subscribe(o => this._options = o || []);
