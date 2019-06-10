@@ -107,7 +107,7 @@ extends ALuTreeOptionPickerComponent<T, O> {
 		},
 	]
 })
-export class LuTreeOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
+export class LuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_renderer: Renderer2,
