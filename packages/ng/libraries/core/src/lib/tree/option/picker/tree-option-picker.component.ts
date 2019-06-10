@@ -143,7 +143,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 }
 /**
-* basic option picker panel
+* basic tree option picker panel
 */
 @Component({
 	selector: 'lu-tree-option-picker',

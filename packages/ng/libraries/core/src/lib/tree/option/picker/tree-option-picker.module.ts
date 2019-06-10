@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LuScrollModule } from '../../../scroll/index';
 import { A11yModule } from '@angular/cdk/a11y';
+import { LuTreeOptionPickerAdvancedComponent } from './tree-option-picker-advanced.component';
 
 @NgModule({
 	imports: [
@@ -14,9 +15,11 @@ import { A11yModule } from '@angular/cdk/a11y';
 	],
 	declarations: [
 		LuTreeOptionPickerComponent,
+		LuTreeOptionPickerAdvancedComponent,
 	],
 	exports: [
 		LuTreeOptionPickerComponent,
+		LuTreeOptionPickerAdvancedComponent,
 	],
 })
 export class LuTreeOptionPickerModule {}
