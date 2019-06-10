@@ -1,7 +1,18 @@
-import { ChangeDetectionStrategy, Component, forwardRef, OnDestroy, AfterViewInit, ContentChildren, ViewContainerRef, QueryList } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	OnDestroy,
+	AfterViewInit,
+	ContentChildren,
+	ViewContainerRef,
+	QueryList,
+	ChangeDetectorRef,
+	Renderer2,
+} from '@angular/core';
 import { luTransformPopover } from '../../../overlay/index';
 import { ALuPickerPanel } from '../../../input/index';
-import { LuOptionPickerComponent } from '../../../option/index';
+import { ALuOptionPickerComponent } from '../../../option/index';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
 import { Observable, merge } from 'rxjs';
@@ -12,25 +23,9 @@ enum ToggleMode {
 	self,
 	children,
 }
-/**
-* basic option picker panel
-*/
-@Component({
-	selector: 'lu-tree-option-picker',
-	templateUrl: './tree-option-picker.component.html',
-	styleUrls: ['./tree-option-picker.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
-	exportAs: 'LuTreeOptionPicker',
-	providers: [
-		{
-			provide: ALuPickerPanel,
-			useExisting: forwardRef(() => LuTreeOptionPickerComponent),
-		},
-	]
-})
-export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends LuOptionPickerComponent<T, O>
+
+export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
+extends ALuOptionPickerComponent<T, O>
 implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
@@ -66,6 +61,12 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 			singleFlowSelectChildren$
 			.subscribe(option => this._toggle(option, ToggleMode.children))
 		);
+	}
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_renderer: Renderer2,
+	) {
+		super(_changeDetectorRef, _renderer);
 	}
 	protected _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
@@ -124,7 +125,8 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		const values = <T[]>this._value || [];
 		let newValues = this._remove(values, [value]);
 		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
-		if (allChildrenSelected) {
+		const parentSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
+		if (allChildrenSelected && !parentSelected) {
 			newValues = this._remove(newValues, allChildren);
 		} else {
 			newValues = this._add(newValues, allChildren);
@@ -138,5 +140,31 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _remove(values: T[], entries: T[]): T[] {
 		const entriesToKeep = values.filter(value => !entries.some(e => JSON.stringify(e) === JSON.stringify(value)));
 		return [...entriesToKeep];
+	}
+}
+/**
+* basic option picker panel
+*/
+@Component({
+	selector: 'lu-tree-option-picker',
+	templateUrl: './tree-option-picker.component.html',
+	styleUrls: ['./tree-option-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [luTransformPopover],
+	exportAs: 'LuTreeOptionPicker',
+	providers: [
+		{
+			provide: ALuPickerPanel,
+			useExisting: forwardRef(() => LuTreeOptionPickerComponent),
+		},
+	]
+})
+export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
+extends ALuTreeOptionPickerComponent<T, O> {
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_renderer: Renderer2,
+	) {
+		super(_changeDetectorRef, _renderer);
 	}
 }
