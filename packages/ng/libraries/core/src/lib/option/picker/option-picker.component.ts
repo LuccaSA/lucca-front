@@ -23,26 +23,10 @@ import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
-/**
-* basic option picker panel
-*/
-@Component({
-	selector: 'lu-option-picker',
-	templateUrl: './option-picker.component.html',
-	styleUrls: ['./option-picker.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
-	exportAs: 'LuOptionPicker',
-	providers: [
-		{
-			provide: ALuPickerPanel,
-			useExisting: forwardRef(() => LuOptionPickerComponent),
-		},
-	]
-})
-export class LuOptionPickerComponent<T = any, I extends ILuOptionItem<T> = ILuOptionItem<T>>
-extends ALuOptionPicker<T, I>
-implements ILuOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
+
+export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
+extends ALuOptionPicker<T, O>
+implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 
 
 	@Output() close = new EventEmitter<void>();
@@ -53,9 +37,9 @@ implements ILuOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
 
-	protected _options: I[] = [];
-	protected _optionsQL: QueryList<I>;
-	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<I>) {
+	protected _options: O[] = [];
+	protected _optionsQL: QueryList<O>;
+	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 		this.initOptionItemsObservable();
 	}
@@ -237,10 +221,35 @@ implements ILuOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 
 		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
 			.pipe(
-				map<QueryList<I>, I[]>(q => q.toArray()),
+				map<QueryList<O>, O[]>(q => q.toArray()),
 				delay(0),
 			);
 		items$.subscribe(o => this._options = o || []);
 		this._optionItems$ = items$;
+	}
+}
+/**
+* basic option picker panel
+*/
+@Component({
+	selector: 'lu-option-picker',
+	templateUrl: './option-picker.component.html',
+	styleUrls: ['./option-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [luTransformPopover],
+	exportAs: 'LuOptionPicker',
+	providers: [
+		{
+			provide: ALuPickerPanel,
+			useExisting: forwardRef(() => LuOptionPickerComponent),
+		},
+	]
+})
+export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_renderer: Renderer2,
+	) {
+		super(_changeDetectorRef, _renderer);
 	}
 }
