@@ -17,6 +17,9 @@ import {
 	ALuOnOpenSubscriber,
 	ALuOnCloseSubscriber,
 	ALuOnScrollBottomSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnScrollBottomSubscriber,
 } from '../operator/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuOptionItem } from '../item/index';
@@ -53,15 +56,15 @@ extends ALuOptionPickerComponent<T, O> {
 		}
 	}
 	protected _onOpenSubscribers = [];
-	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(ql: QueryList<ILuOptionOperator<T>>) {
+	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(ql: QueryList<ILuOnOpenSubscriber>) {
 		this._onOpenSubscribers = ql.toArray();
 	}
 	protected _onCloseSubscribers = [];
-	@ContentChildren(ALuOnCloseSubscriber, { descendants: true }) set onCloseSubsQL(ql: QueryList<ILuOptionOperator<T>>) {
+	@ContentChildren(ALuOnCloseSubscriber, { descendants: true }) set onCloseSubsQL(ql: QueryList<ILuOnCloseSubscriber>) {
 		this._onCloseSubscribers = ql.toArray();
 	}
 	protected _onScrollBottomSubscribers = [];
-	@ContentChildren(ALuOnScrollBottomSubscriber, { descendants: true }) set onScrollBottomSubsQL(ql: QueryList<ILuOptionOperator<T>>) {
+	@ContentChildren(ALuOnScrollBottomSubscriber, { descendants: true }) set onScrollBottomSubsQL(ql: QueryList<ILuOnScrollBottomSubscriber>) {
 		this._onScrollBottomSubscribers = ql.toArray();
 	}
 
