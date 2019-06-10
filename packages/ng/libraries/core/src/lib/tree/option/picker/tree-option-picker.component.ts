@@ -29,15 +29,15 @@ enum ToggleMode {
 		},
 	]
 })
-export class LuTreeOptionPickerComponent<T = any, I extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends LuOptionPickerComponent<T, I>
-implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
-	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<I>) {
+export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
+extends LuOptionPickerComponent<T, O>
+implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 		this.initOptionItemsObservable();
 	}
 	@ContentChildren(ALuTreeOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
-	protected set _optionItems$(optionItems$: Observable<I[]>) {
+	protected set _optionItems$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change
 		this._subs.add(
 			optionItems$
@@ -67,7 +67,7 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 			.subscribe(option => this._toggle(option, ToggleMode.children))
 		);
 	}
-	protected _toggle(option: I, mod = ToggleMode.all) {
+	protected _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
 			case ToggleMode.self:
 				return this._toggleSelf(option);
@@ -78,7 +78,7 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 				return this._toggleAll(option);
 		}
 	}
-	protected _toggleAll(option: I) {
+	protected _toggleAll(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);
@@ -96,7 +96,7 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 		}
 		this._select(newValues);
 	}
-	protected _toggleSelf(option: I) {
+	protected _toggleSelf(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);
@@ -114,7 +114,7 @@ implements ILuTreeOptionPickerPanel<T, I>, OnDestroy, AfterViewInit {
 		}
 		this._select(newValues);
 	}
-	protected _toggleChildren(option: I) {
+	protected _toggleChildren(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
 			this._select(value);
