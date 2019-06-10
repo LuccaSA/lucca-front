@@ -4,7 +4,7 @@ import { ILuTreeOptionOperator, ALuTreeOptionOperator } from '../tree-option-ope
 import { ILuTree } from '../../../tree.model';
 
 @Component({
-	selector: 'lu-option-feeder',
+	selector: 'lu-tree-option-feeder',
 	template: '',
 	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,

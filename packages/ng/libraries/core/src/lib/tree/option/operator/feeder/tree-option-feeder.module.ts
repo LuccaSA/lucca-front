@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuTreeOptionFeederComponent } from './tree-option-feeder.component';
 
 @NgModule({
-	imports: [
+	declarations: [
 		LuTreeOptionFeederComponent,
 	],
 	exports: [
