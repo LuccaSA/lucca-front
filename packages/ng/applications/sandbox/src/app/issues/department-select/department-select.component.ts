@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
 	templateUrl: './department-select.component.html'
 })
 export class DepartmentSelectComponent {
+	collection = [];
+	searchFn(o, c) {
+		return o.name.toLowerCase().startsWith(c.toLowerCase());
+	}
 }

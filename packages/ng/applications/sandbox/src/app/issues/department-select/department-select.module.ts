@@ -7,6 +7,9 @@ import { DepartmentSelectComponent } from './department-select.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 
+import { FormsModule } from '@angular/forms';
+import { LuSelectModule, LuTreeModule, LuDepartmentModule, LuInputDisplayerModule } from '@lucca-front/ng';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
 	declarations: [
@@ -15,6 +18,12 @@ import { RedirectModule } from '../../redirect';
 	imports: [
 		HttpClientModule,
 		RedirectModule,
+		LuDepartmentModule,
+		LuInputDisplayerModule,
+		LuSelectModule,
+		LuTreeModule,
+		FormsModule,
+		CommonModule,
 		RouterModule.forChild([
 			{ path: '', component: DepartmentSelectComponent },
 		]),
