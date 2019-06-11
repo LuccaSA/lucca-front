@@ -3,17 +3,8 @@
 	<lu-select class="textfield-input" [(ngModel)]="item">
 		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 		<lu-tree-option-picker>
-			<lu-tree-option [value]="node1">
-				{{node1.name}}
-				<lu-tree-option [value]="node11">
-					{{node11.name}}
-					<lu-tree-option [value]="node111">
-						{{node111.name}}
-					</lu-tree-option>
-				</lu-tree-option>
-				<lu-tree-option [value]="node12">
-					{{node12.name}}
-				</lu-tree-option>
+			<lu-tree-option [tree]="tree">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 			</lu-tree-option>
 		</lu-tree-option-picker>
 	</lu-select>
@@ -24,17 +15,8 @@
 		<lu-select class="textfield-input" [(ngModel)]="collection" multiple>
 			<ng-container *luDisplayer="let values; multiple: true">{{ values.length }} items selected</ng-container>
 			<lu-tree-option-picker>
-				<lu-tree-option [value]="node1">
-					{{node1.name}}
-					<lu-tree-option [value]="node11">
-						{{node11.name}}
-						<lu-tree-option [value]="node111">
-							{{node111.name}}
-						</lu-tree-option>
-					</lu-tree-option>
-					<lu-tree-option [value]="node12">
-						{{node12.name}}
-					</lu-tree-option>
+				<lu-tree-option [tree]="tree">
+					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 				</lu-tree-option>
 			</lu-tree-option-picker>
 		</lu-select>
