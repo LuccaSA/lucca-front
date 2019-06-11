@@ -15,12 +15,12 @@ export class TreePickerAdvancedComponent {
 	collection = [];
 
 	options: ILuTree[] = [
-		{ node: this.node1, children: [
-			{ node: this.node11, children: [
-				{node: this.node111, children: [] }
+		{ value: this.node1, children: [
+			{ value: this.node11, children: [
+				{value: this.node111, children: [] },
 			]},
-			{ node: this.node12, children: [] },
+			{ value: this.node12, children: [] },
 		]},
-		{ node: this.node2, children: [] },
+		{ value: this.node2, children: [] },
 	];
 }
