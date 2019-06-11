@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { LuApiModule } from './api/index';
+import { LuDepartmentModule } from './department/index';
 import { LuInputModule } from './input/index';
 import { LuNumberModule } from './number/index';
 import { LuOptionModule } from './option/index';
@@ -13,6 +14,7 @@ import { LuTreeModule } from './tree/index';
 @NgModule({
 	imports: [
 		LuApiModule,
+		LuDepartmentModule,
 		LuInputModule,
 		LuNumberModule,
 		LuOptionModule,
@@ -25,6 +27,7 @@ import { LuTreeModule } from './tree/index';
 	],
 	exports: [
 		LuApiModule,
+		LuDepartmentModule,
 		LuInputModule,
 		LuNumberModule,
 		LuOptionModule,
