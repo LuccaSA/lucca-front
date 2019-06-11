@@ -1,19 +1,10 @@
 <h1>tree-picker-advanced</h1>
 <div class="textfield">
 	<lu-select class="textfield-input" [(ngModel)]="collection" multiple>
-			<ng-container *luDisplayer="let values; multiple: true">{{ values.length }} items selected</ng-container>
+		<ng-container *luDisplayer="let values; multiple: true">{{ values.length }} items selected</ng-container>
 		<lu-tree-option-picker-advanced>
-			<lu-tree-option [value]="node1">
-				{{node1.name}}
-				<lu-tree-option [value]="node11">
-					{{node11.name}}
-					<lu-tree-option [value]="node111">
-						{{node111.name}}
-					</lu-tree-option>
-				</lu-tree-option>
-				<lu-tree-option [value]="node12">
-					{{node12.name}}
-				</lu-tree-option>
+			<lu-tree-option [tree]="options[0]">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 			</lu-tree-option>
 		</lu-tree-option-picker-advanced>
 	</lu-select>
@@ -25,12 +16,9 @@
 		<ng-container *luDisplayer="let values; multiple: true">{{ values.length }} items selected</ng-container>
 		<lu-tree-option-picker-advanced>
 			<lu-tree-option-feeder [options]="options"></lu-tree-option-feeder>
-			<ng-template luForTreeOptions let-option #recursiveTemplate>
-				<lu-tree-option [value]="option.value">
-					{{option.value.name}}
-					<ng-template ngFor [ngForOf]="option.children" [ngForTemplate]="recursiveTemplate"></ng-template>
-				</lu-tree-option>
-			</ng-template>
+			<lu-tree-option *luForTreeOptions="let option" [tree]="option">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+			</lu-tree-option>
 		</lu-tree-option-picker-advanced>
 	</lu-select>
 	<label for="" class="textfield-label">without operators</label>

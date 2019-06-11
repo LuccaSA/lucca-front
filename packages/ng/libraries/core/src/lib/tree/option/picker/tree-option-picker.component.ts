@@ -26,7 +26,7 @@ enum ToggleMode {
 
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
-implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 		this.initOptionItemsObservable();
