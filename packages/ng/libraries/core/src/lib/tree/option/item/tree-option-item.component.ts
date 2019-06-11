@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ContentChildren, ElementRef, ViewChild, QueryList, Renderer2, OnDestroy, ViewChildren, ContentChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { ILuOptionItem } from '../../../option/index';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { ILuTree } from '../../tree.model';
 import { ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';

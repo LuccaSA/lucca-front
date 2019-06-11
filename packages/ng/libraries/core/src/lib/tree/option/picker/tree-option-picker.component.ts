@@ -3,7 +3,6 @@ import {
 	Component,
 	forwardRef,
 	OnDestroy,
-	AfterViewInit,
 	ContentChildren,
 	ViewContainerRef,
 	QueryList,
