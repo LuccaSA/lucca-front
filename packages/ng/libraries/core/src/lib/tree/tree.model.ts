@@ -1,4 +1,4 @@
 export interface ILuTree<T = any> {
-	node: T;
+	value: T;
 	children: ILuTree<T>[]
 }

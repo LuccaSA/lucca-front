@@ -1,5 +1,5 @@
 
-import { ChangeDetectorRef, Directive, forwardRef, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, forwardRef, OnDestroy, TemplateRef, ViewContainerRef, EmbeddedViewRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
@@ -10,6 +10,7 @@ export class LuForTreeOptionsContext<T> {
 		public $implicit: ILuTree<T>,
 		public index: number,
 		public count: number,
+		public _views: EmbeddedViewRef<LuForTreeOptionsContext<T>>[],
 	) {}
 
 	get first(): boolean { return this.index === 0; }
@@ -20,7 +21,7 @@ export class LuForTreeOptionsContext<T> {
 
 	get odd(): boolean { return !this.even; }
 
-	get node(): T { return this.$implicit.node; }
+	get node(): T { return this.$implicit.value; }
 
 	get children(): ILuTree<T>[] { return this.$implicit.children; }
 }
@@ -45,9 +46,9 @@ export class LuForTreeOptionsDirective<T> implements ILuTreeOptionOperator<T>, O
 	}
 
 	constructor(
-		protected _viewContainer: ViewContainerRef,
+		protected _vcr: ViewContainerRef,
 		protected _template: TemplateRef<LuForTreeOptionsContext<T>>,
-		protected _changeDetectorRef: ChangeDetectorRef
+		protected _cdr: ChangeDetectorRef
 	) {
 	}
 
@@ -55,17 +56,17 @@ export class LuForTreeOptionsDirective<T> implements ILuTreeOptionOperator<T>, O
 		this._subs.unsubscribe();
 	}
 
-	public render(options: ILuTree<T>[]) {
-		this._viewContainer.clear();
+	public render(options: ILuTree<T>[], vcr = this._vcr) {
+		vcr.clear();
 		const count = options.length;
-		const views = [];
-		options.forEach((option, index) => views
-					.push(
-						this._template.createEmbeddedView(
-							new LuForTreeOptionsContext<T>(option, index, count))
-					)
-			);
-		views.forEach(view => this._viewContainer.insert(view));
-		this._changeDetectorRef.markForCheck();
+		options.forEach((option, index) => {
+			vcr.createEmbeddedView(this._template, new LuForTreeOptionsContext<T>(option, index, count, []));
+		});
+		this._cdr.markForCheck();
+	}
+	public createView(option: ILuTree<T>, index: number, count: number) {
+		const childrenViews = option.children ? option.children.map((c, i) => this.createView(c, i, option.children.length)) : [];
+		const evr = this._template.createEmbeddedView(new LuForTreeOptionsContext<T>(option, index, count, childrenViews));
+		return evr;
 	}
 }
