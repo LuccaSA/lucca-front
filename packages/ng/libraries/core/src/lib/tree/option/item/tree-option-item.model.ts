@@ -2,15 +2,15 @@ import { ILuOptionItem, ALuOptionItem } from '../../../option/index';
 import { Observable } from 'rxjs';
 
 export interface ILuTreeOptionItem<T = any> extends ILuOptionItem<T> {
-	children: ILuTreeOptionItem<T>[];
-	allChildren: ILuTreeOptionItem<T>[];
+	children: this[];
+	allChildren: this[];
 
 	onSelectSelf: Observable<this>;
 	onSelectChildren: Observable<this>;
 }
 export abstract class ALuTreeOptionItem<T = any>extends ALuOptionItem<T> implements ILuTreeOptionItem<T> {
-	abstract children: ILuTreeOptionItem<T>[];
-	get allChildren(): ILuTreeOptionItem<T>[] {
+	abstract children: this[];
+	get allChildren(): this[] {
 		return this.children
 		.map(c => [c, ...c.children])
 		.reduce((aggr, val) => [...aggr, ...val], []);

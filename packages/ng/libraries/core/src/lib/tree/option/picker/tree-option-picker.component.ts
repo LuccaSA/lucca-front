@@ -15,8 +15,8 @@ import { ALuPickerPanel } from '../../../input/index';
 import { ALuOptionPickerComponent } from '../../../option/index';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
-import { Observable, merge } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, merge, of } from 'rxjs';
+import { switchMap, map, delay } from 'rxjs/operators';
 
 enum ToggleMode {
 	all,
@@ -140,6 +140,23 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _remove(values: T[], entries: T[]): T[] {
 		const entriesToKeep = values.filter(value => !entries.some(e => JSON.stringify(e) === JSON.stringify(value)));
 		return [...entriesToKeep];
+	}
+
+	protected initOptionItemsObservable() {
+		if (this._isOptionItemsInitialized) {
+			return;
+		}
+
+		this._isOptionItemsInitialized = true;
+
+		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
+			.pipe(
+				map<QueryList<O>, O[]>(q => q.toArray()),
+				map(roots => roots.map(r => [r, ...r.allChildren]).reduce((agg, val) => [...agg, ...val], [])),
+				delay(0),
+			);
+		items$.subscribe(o => this._options = o || []);
+		this._optionItems$ = items$;
 	}
 }
 /**
