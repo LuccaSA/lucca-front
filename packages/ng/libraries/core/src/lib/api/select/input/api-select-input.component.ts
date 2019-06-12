@@ -63,9 +63,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 			_renderer,
 		);
 	}
-	/**
-	 * popover trigger class extension
-	 */
+
 	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
 		if (!picker) { return; }
 		this._picker = picker;
