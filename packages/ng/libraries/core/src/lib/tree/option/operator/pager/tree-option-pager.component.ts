@@ -40,6 +40,20 @@ export class LuTreeOptionPagerComponent<T = any> extends ALuTreeOptionOperator<T
 		this.next();
 	}
 	trim(trees: ILuTree<T>[] = [], paging: number = MAGIC_STEP): ILuTree<T>[] {
-		return trees;
+		const flat = this.flatten(trees);
+		const flatTrimmed = flat.slice(0, paging);
+
+		return this.filter(trees, flatTrimmed);
+	}
+	flatten(trees: ILuTree<T>[] = []): T[] {
+		return trees.map(t => [t.value, ...this.flatten(t.children)]).reduce((a, v) => [...a, ...v], []);
+	}
+	filter(trees: ILuTree<T>[] = [], values: T[]): ILuTree<T>[] {
+		return trees.map(t => {
+			if (!values.includes(t.value)) {
+				return undefined;
+			}
+			return { ...t, children: this.filter(t.children, values) }
+		}).filter(t => !!t);
 	}
 }
