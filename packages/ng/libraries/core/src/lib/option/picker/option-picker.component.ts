@@ -19,7 +19,7 @@ import { luTransformPopover } from '../../overlay/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { merge, of } from 'rxjs';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
@@ -110,7 +110,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 		this._applyHighlight(true);
 	}
 	protected _initHighlight() {
-		this._subs.add(this._optionItems$.subscribe(options => {
+		this._subs.add(this._options$.subscribe(options => {
 			const optionCount = options.length;
 			const newHighlight =  Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
 			if (newHighlight !== this.highlightIndex) {
@@ -173,7 +173,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 		}
 	}
 	protected _initSelected() {
-		this._subs.add(this._optionItems$.subscribe(() => {
+		this._subs.add(this._options$.subscribe(() => {
 			this._applySelected();
 		}));
 	}
@@ -218,9 +218,10 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 			.pipe(
 				map<QueryList<O>, O[]>(q => q.toArray()),
 				delay(0),
+				share(),
 			);
 		items$.subscribe(o => this._options = o || []);
-		this._optionItems$ = items$;
+		this._options$ = items$;
 		this._initHighlight();
 		this._initSelected();
 	}
