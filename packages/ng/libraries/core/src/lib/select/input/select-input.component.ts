@@ -76,10 +76,12 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	 * popover trigger class extension
 	 */
 	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: P) {
+		if (!picker) { return; }
 		this._picker = picker;
 	}
 
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
+		if (!displayer) { return; }
 		this.displayer = displayer;
 	}
 
@@ -140,6 +142,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 })
 export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInputComponent<T, P> {
 	@ContentChild(ALuClearer, { static: true }) set _contentChildClearer(clearer: ILuClearer) {
+		if (!clearer) { return; }
 		this._clearer = clearer;
 	}
 
