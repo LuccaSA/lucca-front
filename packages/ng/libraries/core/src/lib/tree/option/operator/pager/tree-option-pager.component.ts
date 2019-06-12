@@ -50,7 +50,7 @@ export class LuTreeOptionPagerComponent<T = any> extends ALuTreeOptionOperator<T
 	}
 	filter(trees: ILuTree<T>[] = [], values: T[]): ILuTree<T>[] {
 		return trees.map(t => {
-			if (!values.includes(t.value)) {
+			if (!values.some(v => v === t.value)) {
 				return undefined;
 			}
 			return { ...t, children: this.filter(t.children, values) }
