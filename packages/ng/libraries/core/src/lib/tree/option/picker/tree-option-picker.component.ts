@@ -87,7 +87,9 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
 		let newValues;
-		if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
+		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
+		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+		if (selfSelected && allChildrenSelected) {
 			// remove option and its children
 			newValues = this._remove(values, [value, ...allChildren]);
 		} else {

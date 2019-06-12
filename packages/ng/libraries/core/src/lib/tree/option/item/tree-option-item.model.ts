@@ -12,7 +12,7 @@ export abstract class ALuTreeOptionItem<T = any>extends ALuOptionItem<T> impleme
 	abstract children: this[];
 	get allChildren(): this[] {
 		return this.children
-		.map(c => [c, ...c.children])
+		.map(c => [c, ...c.allChildren])
 		.reduce((aggr, val) => [...aggr, ...val], []);
 	}
 	abstract onSelectSelf: Observable<this>;
