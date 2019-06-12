@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Optional, SkipSelf, Inject, Self } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ALuDepartmentFeederService, ILuDepartmentFeederService } from './department-feeder.model';
 import { LuDepartmentFeederService } from './department-feeder.service';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator, ILuTree } from '../../../tree/index';
@@ -30,7 +30,8 @@ import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../../../option/index'
 })
 export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepartment>
 implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
-	outOptions$ = new BehaviorSubject<ILuTree<ILuDepartment>[]>([]);
+	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
+	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
 	protected _service: ILuDepartmentFeederService;
 	constructor(
 		@Inject(ALuDepartmentFeederService) @Optional() @SkipSelf() hostService: ILuDepartmentFeederService,
@@ -38,8 +39,9 @@ implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
 	) {
 		super();
 		this._service = hostService || selfService;
+		this.outOptions$ = this._out$.asObservable();
 	}
 	onOpen() {
-		this._service.getTrees().subscribe(trees => this.outOptions$.next(trees))
+		this._service.getTrees().subscribe(trees => this._out$.next(trees));
 	}
 }
