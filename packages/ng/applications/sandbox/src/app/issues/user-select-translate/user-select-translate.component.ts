@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
 	templateUrl: './user-select-translate.component.html'
 })
 export class UserSelectTranslateComponent {
+	item;
+	collection = [];
 }
