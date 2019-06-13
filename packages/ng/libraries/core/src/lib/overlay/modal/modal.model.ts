@@ -6,4 +6,5 @@ export interface ILuModalContent<T = any> extends ILuPopupContent {
 	submitAction?: () => Observable<T>;
 	submitLabel?: string;
 	submitDisabled?: boolean;
+	cancelLabel?: string;
 }
