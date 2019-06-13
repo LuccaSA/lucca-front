@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 })
 export class DepartmentSelectComponent {
 	collection = [];
+	item;
 	searchFn(o, c) {
 		return o.name.toLowerCase().startsWith(c.toLowerCase());
 	}
