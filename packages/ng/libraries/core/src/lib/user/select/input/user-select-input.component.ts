@@ -11,7 +11,8 @@ import {
 	Input,
 	Renderer2,
 	HostBinding,
-	AfterContentInit
+	AfterContentInit,
+	Inject
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -21,6 +22,8 @@ import { ALuSelectInputComponent } from '../../../select/index';
 import { ILuOptionPickerPanel } from '../../../option/index';
 import { LuDisplayFullname } from '../../display/index';
 import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
+import { LuUserSelectInputIntl } from './user-select-input.intl';
+import { ILuUserSelectInputLabel } from './user-select-input.translate';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -62,7 +65,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
 		protected _service: ALuUserPagedSearcherService<U>,
-	) {
+		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
+		) {
 		super(
 			_changeDetectorRef,
 			_overlay,
