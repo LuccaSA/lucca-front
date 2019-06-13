@@ -68,8 +68,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	get isFocused() { return this._popoverOpen; }
 	@HostBinding('class.mod-multiple')
 	get modMultiple() { return this._multiple; }
-	@HostBinding('class.mod-multipleView')
-	get modMultipleView() { return this.useMultipleViews(); }
+
 	@HostBinding('class.is-clearable')
 	get isClearable() { return !!this._clearer; }
 	/**
@@ -145,7 +144,8 @@ export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPi
 		if (!clearer) { return; }
 		this._clearer = clearer;
 	}
-
+	@HostBinding('class.mod-multipleView')
+	get modMultipleView() { return this.useMultipleViews(); }
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,

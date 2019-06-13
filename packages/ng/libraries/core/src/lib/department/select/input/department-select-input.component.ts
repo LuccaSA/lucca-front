@@ -7,7 +7,8 @@ import {
 	ElementRef,
 	ViewChild,
 	Renderer2,
-	AfterContentInit
+	AfterContentInit,
+	Inject
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -15,6 +16,8 @@ import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ALuInputDis
 import { ALuSelectInputComponent } from '../../../select/index';
 import { ILuOptionPickerPanel } from '../../../option/index';
 import { ILuDepartment } from '../../department.model';
+import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
+import { ILuDepartmentSelectInputLabel } from './department-select-input.translate';
 
 @Component({
 	selector: 'lu-department-select',
@@ -39,6 +42,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
+		@Inject(LuDepartmentSelectInputIntl) public intl: ILuDepartmentSelectInputLabel,
 	) {
 		super(
 			_changeDetectorRef,
