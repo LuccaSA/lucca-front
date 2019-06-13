@@ -16,8 +16,13 @@
 </div>
 <h2>all in one directive</h2>
 <div class="textfield">
-	<lu-department-select class="textfield-input" [(ngModel)]="collection" multiple></lu-department-select>
+	<lu-department-select class="textfield-input" [(ngModel)]="item"></lu-department-select>
 	<label for="" class="textfield-label">departments select</label>
+</div>
+<code>{{item | json }}</code>
+<div class="textfield">
+	<lu-department-select class="textfield-input" [(ngModel)]="collection" multiple></lu-department-select>
+	<label for="" class="textfield-label">departments select multiple</label>
 </div>
 <code>{{collection | json }}</code>
 

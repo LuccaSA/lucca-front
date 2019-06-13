@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { DepartmentSelectComponent } from './department-select.component';
@@ -28,5 +28,9 @@ import { CommonModule } from '@angular/common';
 			{ path: '', component: DepartmentSelectComponent },
 		]),
 	],
+	providers: [
+		{ provide: LOCALE_ID, useValue: 'fr-FR' },
+	]
+
 })
 export class DepartmentSelectModule {}
