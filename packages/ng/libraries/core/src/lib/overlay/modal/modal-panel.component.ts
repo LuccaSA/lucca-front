@@ -4,16 +4,9 @@ import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
 import { ILuModalLabel } from './modal.translate'
-import { Subject, of, timer } from 'rxjs';
-import { tap, delay, catchError } from 'rxjs/operators';
+import { Subject, timer } from 'rxjs';
+import { tap, delay } from 'rxjs/operators';
 
-
-@Component({
-	selector: 'lu-modal-panel',
-	templateUrl: './modal-panel.component.html',
-	styleUrls: ['./modal-panel.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
 export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true }) protected _outlet: PortalOutlet;
 	protected _componentInstance: T;
