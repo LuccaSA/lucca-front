@@ -128,7 +128,7 @@
 	}
 
 	.#{$fieldname}-input {
-		&[disabled], &[readonly] {
+		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
 			background-color: _theme("commons.disabled.background");
 			color: _theme("commons.disabled.color");
 			background-image: none;
