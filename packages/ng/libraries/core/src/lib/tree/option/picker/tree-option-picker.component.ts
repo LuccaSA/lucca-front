@@ -31,7 +31,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 		this.initOptionItemsObservable();
 	}
 	@ContentChildren(ALuTreeOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
-	protected set _optionItems$(optionItems$: Observable<O[]>) {
+	protected set _options$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change
 		this._subs.add(
 			optionItems$
@@ -87,7 +87,9 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
 		let newValues;
-		if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
+		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
+		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+		if (selfSelected && allChildrenSelected) {
 			// remove option and its children
 			newValues = this._remove(values, [value, ...allChildren]);
 		} else {
@@ -158,7 +160,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 				delay(0),
 			);
 		items$.subscribe(o => this._options = o || []);
-		this._optionItems$ = items$;
+		this._options$ = items$;
 	}
 }
 /**

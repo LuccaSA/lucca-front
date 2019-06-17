@@ -11,16 +11,19 @@ import {
 	Input,
 	Renderer2,
 	HostBinding,
-	AfterContentInit
+	AfterContentInit,
+	Inject
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
 import { IUser } from '../../user.model';
-import { ALuSelectInput } from '../../../select/index';
+import { ALuSelectInputComponent } from '../../../select/index';
 import { ILuOptionPickerPanel } from '../../../option/index';
 import { LuDisplayFullname } from '../../display/index';
 import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
+import { LuUserSelectInputIntl } from './user-select-input.intl';
+import { ILuUserSelectInputLabel } from './user-select-input.translate';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -43,17 +46,9 @@ import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../sear
 	],
 })
 export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
-extends ALuSelectInput<U, P>
+extends ALuSelectInputComponent<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
-	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
-		this.displayContainer = vcr;
-	}
 	searchFormat = LuDisplayFullname.lastfirst;
-	@HostBinding('tabindex') tabindex = 0;
-	@HostBinding('class.mod-multiple')
-	get modMultiple() { return this._multiple; }
-	@HostBinding('class.mod-multipleView')
-	get modMultipleView() { return this.useMultipleViews(); }
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
@@ -63,15 +58,6 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
 	@Input() set operations(operations: number[]) { this._service.operations = operations; }
 
-	@Input('multiple') set inputMultiple(m: boolean | string) {
-		if (m === '') {
-			// allows to have multiple = true when writing
-			// <lu-api-select multiple>
-			this.multiple = true;
-		} else {
-			this.multiple = !!m;
-		}
-	}
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -79,7 +65,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
 		protected _service: ALuUserPagedSearcherService<U>,
-	) {
+		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
+		) {
 		super(
 			_changeDetectorRef,
 			_overlay,
@@ -88,59 +75,17 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 			_renderer,
 		);
 	}
-	// @HostBinding('attr.disabled')
-	// get isDisabled() { return this.disabled; }
-	@HostBinding('class.is-focused')
-	get isFocused() { return this._popoverOpen; }
 
-	/**
-	 * popover trigger class extension
-	 */
 	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
+		if (!picker) { return; }
 		this._picker = picker;
 	}
 	@ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
+		if (!clearer) { return; }
 		this._clearer = clearer;
 	}
 	@ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
+		if (!displayer) { return; }
 		this.displayer = displayer;
-		this.render();
 	}
-	/**
-	 * bind to dom events
-	 */
-	@HostListener('click')
-	onClick() {
-		super.onClick();
-	}
-	@HostListener('mouseenter')
-	onMouseEnter() {
-		super.onMouseEnter();
-	}
-	@HostListener('mouseleave')
-	onMouseLeave() {
-		super.onMouseLeave();
-	}
-	@HostListener('focus')
-	onFocus() {
-		super.onFocus();
-	}
-	@HostListener('blur')
-	onBlur() {
-		super.onBlur();
-	}
-	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.enter', ['$event'])
-	onKeydown($event: KeyboardEvent) {
-		this.openPopover();
-		$event.stopPropagation();
-		$event.preventDefault();
-	}
-
-	ngAfterContentInit() {
-		this._isContentInitialized = true;
-		this.render();
-		this._picker.setValue(this.value);
-	}
-
 }

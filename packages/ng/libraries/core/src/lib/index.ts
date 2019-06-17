@@ -1,5 +1,6 @@
 export * from './animation/index';
 export * from './api/index';
+export * from './department/index';
 export * from './input/index';
 export * from './number/index';
 export * from './option/index';

@@ -7,7 +7,10 @@
 <div class="lu-select-suffix">
 	<lu-select-clearer></lu-select-clearer>
 </div>
-<span [class.chip]="multiple" *luDisplayer="let user">{{user | luUserDisplay}}</span>
+<ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
+	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="label">{{values.length}}</span> {{intl.users}}</span>
+	<ng-template #singleView>{{(values[0] || values) | luUserDisplay}}</ng-template>
+</ng-template>
 <lu-option-picker-advanced>
 	<lu-user-paged-searcher></lu-user-paged-searcher>
 	<lu-option *luForOptions="let user" [value]="user">{{ user | luUserDisplay: searchFormat }}</lu-option>

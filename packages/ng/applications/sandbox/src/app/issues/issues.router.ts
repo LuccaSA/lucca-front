@@ -25,6 +25,9 @@ const routes: Routes = [
 	{ path: 'fix-472', loadChildren: () => import('./fix-472').then(m => m.Fix472Module) },
 	{ path: 'poc-tree', loadChildren: () => import('./poc-tree').then(m => m.PocTreeModule) },
 	{ path: 'tree-picker-advanced', loadChildren: () => import('./tree-picker-advanced').then(m => m.TreePickerAdvancedModule) },
+	{ path: 'department-select', loadChildren: () => import('./department-select').then(m => m.DepartmentSelectModule) },
+	{ path: 'split-select', loadChildren: () => import('./split-select').then(m => m.SplitSelectModule) },
+	{ path: 'user-select-translate', loadChildren: () => import('./user-select-translate').then(m => m.UserSelectTranslateModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);

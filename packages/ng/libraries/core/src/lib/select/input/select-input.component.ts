@@ -28,23 +28,7 @@ import {
 } from '../../input/index';
 import { ALuSelectInput } from './select-input.model';
 
-/**
-* Displays user'picture or a placeholder with his/her initials and random bg color'
-*/
-@Component({
-	selector: 'lu-select',
-	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuSelectInputComponent),
-			multi: true,
-		},
-	],
-})
-export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
+export abstract class ALuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
@@ -64,11 +48,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 		}
 	}
 	constructor(
-		protected _renderer: Renderer2,
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
+		protected _renderer: Renderer2,
 	) {
 		super(
 			_changeDetectorRef,
@@ -82,22 +66,21 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	get isDisabled() { return this.disabled; }
 	@HostBinding('class.is-focused')
 	get isFocused() { return this._popoverOpen; }
-	@HostBinding('class.is-clearable')
-	get isClearable() { return !!this.clearerEltRef; }
 	@HostBinding('class.mod-multiple')
 	get modMultiple() { return this._multiple; }
-	@HostBinding('class.mod-multipleView')
-	get modMultipleView() { return this.useMultipleViews(); }
+
+	@HostBinding('class.is-clearable')
+	get isClearable() { return !!this._clearer; }
 	/**
 	 * popover trigger class extension
 	 */
 	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: P) {
+		if (!picker) { return; }
 		this._picker = picker;
 	}
-	@ContentChild(ALuClearer, { static: true }) set _contentChildClearer(clearer: ILuClearer) {
-		this._clearer = clearer;
-	}
+
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
+		if (!displayer) { return; }
 		this.displayer = displayer;
 	}
 
@@ -133,10 +116,51 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	ngAfterContentInit() {
 		this._isContentInitialized = true;
 		this.render();
-		this.displayClearer();
 		this._picker.setValue(this.value);
 	}
 
+
+}
+
+
+/**
+* select input
+*/
+@Component({
+	selector: 'lu-select',
+	templateUrl: './select-input.component.html',
+	styleUrls: ['./select-input.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => LuSelectInputComponent),
+			multi: true,
+		},
+	],
+})
+export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInputComponent<T, P> {
+	@ContentChild(ALuClearer, { static: true }) set _contentChildClearer(clearer: ILuClearer) {
+		if (!clearer) { return; }
+		this._clearer = clearer;
+	}
+	@HostBinding('class.mod-multipleView')
+	get modMultipleView() { return this.useMultipleViews(); }
+	constructor(
+		protected _changeDetectorRef: ChangeDetectorRef,
+		protected _overlay: Overlay,
+		protected _elementRef: ElementRef,
+		protected _viewContainerRef: ViewContainerRef,
+		protected _renderer: Renderer2,
+	) {
+		super(
+			_changeDetectorRef,
+			_overlay,
+			_elementRef,
+			_viewContainerRef,
+			_renderer,
+		);
+	}
 	// display clearer
 	@ContentChild(ALuClearer, { read: ElementRef, static: true }) clearerEltRef: ElementRef;
 	@ViewChild('suffix', { read: ElementRef, static: true }) suffixEltRef: ElementRef;
@@ -144,5 +168,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 		if (!!this.clearerEltRef) {
 			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);
 		}
+	}
+
+	ngAfterContentInit() {
+		super.ngAfterContentInit();
+		this.displayClearer(); // dont keep
 	}
 }

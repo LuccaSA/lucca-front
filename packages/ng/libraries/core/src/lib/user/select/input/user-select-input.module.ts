@@ -6,6 +6,9 @@ import { LuOptionOperatorModule, LuOptionItemModule, LuOptionPickerModule } from
 import { LuSelectClearerModule } from '../../../select/index';
 import { LuUserSearcherModule } from '../searcher/index';
 import { LuInputDisplayerModule } from '../../../input/index';
+import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.token';
+import { luUserSelectInputTranslations } from './user-select-input.translate';
+import { LuUserSelectInputIntl } from './user-select-input.intl';
 
 @NgModule({
 	imports: [
@@ -24,5 +27,9 @@ import { LuInputDisplayerModule } from '../../../input/index';
 	exports: [
 		LuUserSelectInputComponent,
 	],
+	providers: [
+		{ provide: LU_USER_SELECT_INPUT_TRANSLATIONS, useValue: luUserSelectInputTranslations },
+		LuUserSelectInputIntl,
+	]
 })
 export class LuUserSelectInputModule {}
