@@ -25,4 +25,8 @@ export class TreePickerAdvancedComponent {
 	}];
 	item;
 	collection = [];
+
+	searchFn(o, c) {
+		return o.name.startsWith(c);
+	}
 }
