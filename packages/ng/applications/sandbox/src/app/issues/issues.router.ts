@@ -24,6 +24,7 @@ const routes: Routes = [
 	{ path: 'poc-modal', loadChildren: () => import('./poc-modal').then(m => m.PocModalModule) },
 	{ path: 'fix-472', loadChildren: () => import('./fix-472').then(m => m.Fix472Module) },
 	{ path: 'poc-tree', loadChildren: () => import('./poc-tree').then(m => m.PocTreeModule) },
+	{ path: 'tree-picker-advanced', loadChildren: () => import('./tree-picker-advanced').then(m => m.TreePickerAdvancedModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);

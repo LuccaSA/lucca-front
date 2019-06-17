@@ -7,32 +7,28 @@ import {
 	Renderer2,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { luTransformPopover } from '../../overlay/index';
+import { luTransformPopover } from '../../../overlay/index';
 import { Observable } from 'rxjs';
 import { first, mapTo, startWith, shareReplay, delay } from 'rxjs/operators';
-import { ALuPickerPanel } from '../../input/index';
+import { ALuPickerPanel } from '../../../input/index';
 import {
-	ALuOptionOperator,
-	ILuOptionOperator,
-	ALuOnOpenSubscriber,
-	ALuOnCloseSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnCloseSubscriber,
-	ILuOnScrollBottomSubscriber,
+	ALuTreeOptionOperator,
+	ILuTreeOptionOperator,
 } from '../operator/index';
-import { ALuOptionPickerComponent } from './option-picker.component';
-import { ILuOptionItem } from '../item/index';
+import { ILuTreeOptionItem } from '../item/index';
+import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
+import { ILuTree } from '../../tree.model';
+import { ALuOnOpenSubscriber, ILuOnOpenSubscriber, ALuOnCloseSubscriber, ILuOnCloseSubscriber, ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
 
-export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
-extends ALuOptionPickerComponent<T, O> {
+export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
+extends ALuTreeOptionPickerComponent<T, O> {
 	loading$: Observable<boolean>;
 
-	protected _operators = [];
-	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
+	protected _operators: ILuTreeOptionOperator<T>[] = [];
+	@ContentChildren(ALuTreeOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuTreeOptionOperator<T>>) {
 		const operators = ql.toArray();
 		this._operators = operators;
-		let options$: Observable<T[]>;
+		let options$: Observable<ILuTree<T>[]>;
 		operators.forEach(operator => {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;
@@ -98,20 +94,20 @@ extends ALuOptionPickerComponent<T, O> {
 * advanced option picker panel
 */
 @Component({
-	selector: 'lu-option-picker-advanced',
-	templateUrl: './option-picker-advanced.component.html',
-	styleUrls: ['./option-picker.component.scss'],
+	selector: 'lu-tree-option-picker-advanced',
+	templateUrl: './tree-option-picker-advanced.component.html',
+	styleUrls: ['./tree-option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
 	providers: [
 		{
 			provide: ALuPickerPanel,
-			useExisting: forwardRef(() => LuOptionPickerAdvancedComponent),
+			useExisting: forwardRef(() => LuTreeOptionPickerAdvancedComponent),
 		},
 	]
 })
-export class LuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
+export class LuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_renderer: Renderer2,

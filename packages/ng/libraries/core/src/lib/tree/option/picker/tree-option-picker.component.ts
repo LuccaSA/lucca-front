@@ -3,7 +3,6 @@ import {
 	Component,
 	forwardRef,
 	OnDestroy,
-	AfterViewInit,
 	ContentChildren,
 	ViewContainerRef,
 	QueryList,
@@ -15,8 +14,8 @@ import { ALuPickerPanel } from '../../../input/index';
 import { ALuOptionPickerComponent } from '../../../option/index';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
-import { Observable, merge } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, merge, of } from 'rxjs';
+import { switchMap, map, delay } from 'rxjs/operators';
 
 enum ToggleMode {
 	all,
@@ -26,7 +25,7 @@ enum ToggleMode {
 
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
-implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 		this.initOptionItemsObservable();
@@ -105,12 +104,15 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
+		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
+		const someChildSelected = allChildren.some(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+
 		let newValues = this._remove(values, [...allChildren]);
-		if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
-			// remove option and its children
+		if (selfSelected && !someChildSelected) {
+			// remove option
 			newValues = this._remove(newValues, [value]);
 		} else {
-			// add option and its children
+			// add option
 			newValues = this._add(newValues, [value]);
 		}
 		this._select(newValues);
@@ -123,10 +125,10 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
-		const parentSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
+		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
 		let newValues = this._remove(values, [value]);
 		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
-		if (allChildrenSelected && !parentSelected) {
+		if (allChildrenSelected && !selfSelected) {
 			newValues = this._remove(newValues, allChildren);
 		} else {
 			newValues = this._add(newValues, allChildren);
@@ -141,9 +143,26 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		const entriesToKeep = values.filter(value => !entries.some(e => JSON.stringify(e) === JSON.stringify(value)));
 		return [...entriesToKeep];
 	}
+
+	protected initOptionItemsObservable() {
+		if (this._isOptionItemsInitialized) {
+			return;
+		}
+
+		this._isOptionItemsInitialized = true;
+
+		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
+			.pipe(
+				map<QueryList<O>, O[]>(q => q.toArray()),
+				map(roots => roots.map(r => [r, ...r.allChildren]).reduce((agg, val) => [...agg, ...val], [])),
+				delay(0),
+			);
+		items$.subscribe(o => this._options = o || []);
+		this._optionItems$ = items$;
+	}
 }
 /**
-* basic option picker panel
+* basic tree option picker panel
 */
 @Component({
 	selector: 'lu-tree-option-picker',

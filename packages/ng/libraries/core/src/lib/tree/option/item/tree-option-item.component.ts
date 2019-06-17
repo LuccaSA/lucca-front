@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ContentChildren, ElementRef, ViewChild, QueryList, Renderer2 } from '@angular/core';
-import { ILuOptionItem, ALuOptionItem } from '../../../option/index';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
+import { ILuTree } from '../../tree.model';
+import { ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -8,11 +9,6 @@ import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 	styleUrls: ['./tree-option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
-		// {
-		// 	provide: ALuOptionItem,
-		// 	useExisting: forwardRef(() => LuTreeOptionItemComponent),
-		// 	multi: true,
-		// },
 		{
 			provide: ALuTreeOptionItem,
 			useExisting: forwardRef(() => LuTreeOptionItemComponent),
@@ -20,8 +16,13 @@ import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 		},
 	],
 })
-export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuOptionItem<T> {
-	@Input() value: T;
+export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
+	protected _children = [];
+	protected _tree: ILuTree<T>;
+	protected _displayer: ILuInputDisplayer<T>;
+	@ViewChild('value', { static: true, read: ViewContainerRef }) protected _valueVCR: ViewContainerRef;
+	@ViewChild('children', { static: true, read: ViewContainerRef }) protected _childrenVCR: ViewContainerRef;
+
 	@Output() onSelect = new EventEmitter<this>();
 	@Output() onSelectSelf = new EventEmitter<this>();
 	@Output() onSelectChildren = new EventEmitter<this>();
@@ -34,31 +35,36 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	selectChildren() {
 		this.onSelectChildren.emit(this);
 	}
-	children: ILuTreeOptionItem<T>[] = [];
-	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ALuTreeOptionItem }) set _childrenItems(ql: QueryList<ALuTreeOptionItem>) {
-		const children = ql.toArray();
-		// need to remove item at index 0 cuz its this LuTreeOptionItemComponent
-		children.shift();
-		this.children = children;
-		// TODO - plug ql.changes to refresh if children changes
+
+	@Input() set tree(t: ILuTree<T>) {
+		this._tree = t;
+		this._renderValue(t.value);
+		this._renderChildren(t.children);
+	}
+	get value() { return this._tree.value; }
+	get children() { return this._children; }
+	set children(c) { this._children = c; }
+	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
+		this._displayer = displayer;
 	}
 
-	@ContentChildren(ALuTreeOptionItem, { descendants: false, read: ElementRef }) set _childrenElts(ql: QueryList<ElementRef>) {
-		const children = ql.toArray();
-		// need to remove item at index 0 cuz its this LuTreeOptionItemComponent
-		children.shift();
-		this.displayChildren(children);
-		// TODO - plug ql.changes to refresh if children changes
-	}
-	@ViewChild('children', { read: ElementRef, static: true }) _childrenContainer: ElementRef;
-	constructor(
-		protected _renderer: Renderer2,
-	) {
+	constructor(private _componentFactoryResolver: ComponentFactoryResolver, public element: ElementRef) {
 		super();
 	}
-	private displayChildren(childrenEltRef: ElementRef[]) {
-		childrenEltRef.forEach(c => {
-			this._renderer.appendChild(this._childrenContainer.nativeElement, c.nativeElement);
+
+	private _renderValue(value: T) {
+		const evr = this._displayer.getViewRef(value);
+		this._valueVCR.clear();
+		this._valueVCR.insert(evr);
+	}
+	private _renderChildren(children: ILuTree<T>[] = []) {
+		const factory = this._componentFactoryResolver.resolveComponentFactory(LuTreeOptionItemComponent);
+		this._childrenVCR.clear();
+		this.children = children.map(c => {
+			const ref = this._childrenVCR.createComponent(factory);
+			ref.instance._displayer = this._displayer;
+			ref.instance.tree = c;
+			return ref.instance;
 		});
 	}
 }

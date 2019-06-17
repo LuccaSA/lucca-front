@@ -8,5 +8,8 @@ import { LuTreeOptionItemComponent } from './tree-option-item.component';
 	exports: [
 		LuTreeOptionItemComponent,
 	],
+	entryComponents: [
+		LuTreeOptionItemComponent,
+	]
 })
 export class LuTreeOptionItemModule {}

@@ -26,7 +26,7 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPicker<T, O>
-implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+implements ILuOptionPickerPanel<T, O>, OnDestroy {
 
 
 	@Output() close = new EventEmitter<void>();
@@ -41,9 +41,8 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _optionsQL: QueryList<O>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
-		this.initOptionItemsObservable();
+		this.init();
 	}
-	@ContentChildren(ALuOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -58,10 +57,6 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 	ngOnDestroy() {
 		super.destroy();
-	}
-	ngAfterViewInit() {
-		this._initHighlight();
-		this._initSelected();
 	}
 	_emitOpenEvent(): void {
 		this.open.emit();
@@ -115,8 +110,8 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this._applyHighlight(true);
 	}
 	protected _initHighlight() {
-		this._subs.add(this.optionsQLVR.changes.subscribe(options => {
-			const optionCount = options.toArray().length;
+		this._subs.add(this._optionItems$.subscribe(options => {
+			const optionCount = options.length;
 			const newHighlight =  Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
 			if (newHighlight !== this.highlightIndex) {
 				this.highlightIndex = newHighlight;
@@ -127,7 +122,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}, 1);
 	}
 	protected _incrHighlight() {
-		const optionCount = this.optionsQLVR.toArray().length;
+		const optionCount = this._options.length;
 		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, optionCount - 1), -1);
 	}
 	protected _decrHighlight() {
@@ -136,9 +131,9 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _applyHighlight(reScroll = false) {
 		if (!this.isOpen) { return; }
 		const highlightClass = 'is-highlighted';
-		const options = this.optionsQLVR.toArray();
+		const options = this._options;
 		// remove `is-highlighted` class from all other options
-		options.forEach(ovcr => this._renderer.removeClass(ovcr.element.nativeElement, highlightClass));
+		options.forEach(option => this._renderer.removeClass(option.element.nativeElement, highlightClass));
 		// apply `is-highlighted` to current highlight
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
@@ -171,24 +166,24 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}
 	}
 	protected _selectHighlighted() {
-		const options = this._optionsQL ? this._optionsQL.toArray() : [];
+		const options = this._options ? this._options : [];
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
 			this._toggle(highlightedOption);
 		}
 	}
 	protected _initSelected() {
-		this._subs.add(this.optionsQLVR.changes.subscribe(() => {
+		this._subs.add(this._optionItems$.subscribe(() => {
 			this._applySelected();
 		}));
 	}
 	protected _applySelected() {
-		if (!this.optionsQLVR) { return; }
+		if (!this._options) { return; }
 		const selectedClass = 'is-selected';
 
-		const options = this.optionsQLVR.toArray();
+		const options = this._options;
 		// remove `is-selected` class from all other options
-		options.forEach(ovcr => this._renderer.removeClass(ovcr.element.nativeElement, selectedClass));
+		options.forEach(option => this._renderer.removeClass(option.element.nativeElement, selectedClass));
 
 		// add `is-selected` to all selected indexes
 		const selectedIndexes = [];
@@ -212,7 +207,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		});
 	}
 
-	protected initOptionItemsObservable() {
+	protected init() {
 		if (this._isOptionItemsInitialized) {
 			return;
 		}
@@ -226,6 +221,8 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 			);
 		items$.subscribe(o => this._options = o || []);
 		this._optionItems$ = items$;
+		this._initHighlight();
+		this._initSelected();
 	}
 }
 /**
