@@ -21,7 +21,10 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 		return this._componentInstance.title;
 	}
 	get submitLabel() {
-		return this._componentInstance.submitLabel;
+		return this._componentInstance.submitLabel || this.intl.submit;
+	}
+	get cancelLabel() {
+		return this._componentInstance.cancelLabel || this.intl.cancel;
 	}
 	get submitDisabled() {
 		return this._componentInstance.submitDisabled;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LuModal, ALuModalRef, ILuModalContent } from '@lucca-front/ng';
-import { timer, Subject, throwError } from 'rxjs';
-import { mapTo, catchError } from 'rxjs/operators';
+import { timer, Subject, throwError, of } from 'rxjs';
+import { mapTo, catchError, delay } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-poc-modal',
@@ -20,7 +20,7 @@ export class PocModalComponent {
 		<p>only the content in this injected component</p>
 		<label class="label">{{error}}</label>
 		<div class="textfield">
-			<input class="textfield-input" [(ngModel)]="result">
+			<input class="textfield-input" type="number" [(ngModel)]="result">
 			<label class="textfield-label">result</label>
 		</div>
 		<div class="checkbox">
@@ -32,13 +32,20 @@ export class PocModalComponent {
 export class PocModalInsideComponent implements ILuModalContent {
 	title = 'title of the component';
 	submitLabel = 'submit';
+	cancelLabel = 'dismiss';
 	submitDisabled = false;
 
 	result = 0;
 	error;
 	// submitAction = () => timer(1500).pipe(mapTo(this.result));
 	submitAction = () => {
-		const obs$ = throwError(`error with result ${this.result}`);
+		let obs$;
+		if (this.result % 2 === 0) {
+			obs$ = throwError(`error with result ${this.result}`);
+		} else {
+			obs$ = of(this.result).pipe(delay(2000));
+
+		}
 
 		return obs$.pipe(
 			catchError(err => { this.error = err; return throwError(`error message`); })
