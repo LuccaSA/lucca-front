@@ -4,17 +4,10 @@ import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
 import { ILuModalLabel } from './modal.translate'
-import { Subject, of, timer } from 'rxjs';
-import { tap, delay, catchError } from 'rxjs/operators';
+import { Subject, timer } from 'rxjs';
+import { tap, delay } from 'rxjs/operators';
 
-
-@Component({
-	selector: 'lu-modal-panel',
-	templateUrl: './modal-panel.component.html',
-	styleUrls: ['./modal-panel.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
+export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true }) protected _outlet: PortalOutlet;
 	protected _componentInstance: T;
 	get title() {
@@ -34,7 +27,7 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 	constructor(
 		protected _ref: ALuModalRef<LuModalPanelComponent>,
 		protected _cdr: ChangeDetectorRef,
-		@Inject(LuModalIntl) public intl: ILuModalLabel,
+		public intl: ILuModalLabel,
 	) {}
 	attach<U extends T = T>(portal: Portal<U>) {
 		const ref = this._outlet.attach(portal) as ComponentRef<U>;
@@ -77,5 +70,21 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 				this._cdr.markForCheck();
 			});
 		});
+	}
+}
+
+@Component({
+	selector: 'lu-modal-panel',
+	templateUrl: './modal-panel.component.html',
+	styleUrls: ['./modal-panel.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
+	constructor(
+		_ref: ALuModalRef<LuModalPanelComponent>,
+		_cdr: ChangeDetectorRef,
+		@Inject(LuModalIntl) intl: ILuModalLabel,
+	) {
+		super(_ref, _cdr, intl);
 	}
 }

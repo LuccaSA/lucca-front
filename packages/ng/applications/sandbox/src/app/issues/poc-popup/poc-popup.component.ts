@@ -17,6 +17,18 @@ export class PocPopupComponent {
 
 		this._popup.open(PocPopupInsideComponent, 3, config);
 	}
+	top() {
+		this._popup.open(PocPopupInsideComponent, 3, { position: 'top' });
+	}
+	bottom() {
+		this._popup.open(PocPopupInsideComponent, 3, { position: 'bottom' });
+	}
+	left() {
+		this._popup.open(PocPopupInsideComponent, 3, { position: 'left' });
+	}
+	right() {
+		this._popup.open(PocPopupInsideComponent, 3, { position: 'right' });
+	}
 }
 
 

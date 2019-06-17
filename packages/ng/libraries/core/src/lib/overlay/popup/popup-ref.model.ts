@@ -69,6 +69,19 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 	protected _getOverlayConfig(): OverlayConfig {
 		const overlayConfig = new OverlayConfig();
 		switch (this._config.position) {
+			case 'top':
+				overlayConfig.positionStrategy =  this._overlay.position().global().centerHorizontally().top('0');
+				break;
+			case 'bottom':
+				overlayConfig.positionStrategy =  this._overlay.position().global().centerHorizontally().bottom('0');
+				break;
+			case 'left':
+				overlayConfig.positionStrategy =  this._overlay.position().global().centerVertically().left('0');
+				break;
+			case 'right':
+				overlayConfig.positionStrategy =  this._overlay.position().global().centerVertically().right('0');
+				break;
+
 			case 'center':
 			default:
 				overlayConfig.positionStrategy =  this._overlay.position().global().centerHorizontally().centerVertically();

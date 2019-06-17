@@ -1,6 +1,6 @@
 export interface ILuPopupConfig {
-	position?: 'center';
+	position?: 'center' | 'top' | 'bottom' | 'left' | 'right';
 	noBackdrop?: boolean;
-	backdropClass?: string;
-	panelClass?: string;
+	backdropClass?: string | string[];
+	panelClass?: string | string[];
 }

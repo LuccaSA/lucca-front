@@ -1,0 +1,14 @@
+<div class="lu-sidepanel-header">
+	<h1 class="lu-sidepanel-header-title">{{title}}</h1>
+	<button class="lu-sidepanel-header-closeButton" (click)="dismiss()"><i class="lucca-icon">cross_thin</i></button>
+</div>
+<div class="lu-sidepanel-content">
+	<ng-container cdkPortalOutlet #outlet></ng-container>
+</div>
+<div class="lu-sidepanel-footer">
+	<!-- <ng-template [ngIf]="error$ | async as error"> -->
+		<label *ngIf="error$ | async as error" class="label palette-error">{{error}}</label>
+	<!-- </ng-template> -->
+	<button *ngIf="submitLabel" class="button palette-primary" [class.is-disabled]="submitDisabled" [ngClass]="submitClass$ | async" (click)="submit()">{{submitLabel}}</button>
+	<button class="button mod-link" (click)="dismiss()">{{cancelLabel}}</button>
+</div>
