@@ -1,7 +1,13 @@
-<div class="value" (click)="select()">
-	<ng-container #value></ng-container>
+<div class="treeOptionItem">
+	<div class="treeOptionItem-value" (click)="select()">
+		<ng-container #value></ng-container>
+	</div>
+	<div class="treeOptionItem-icons">
+		<i class="icon" (click)="selectSelf()">S</i><i class="icon" (click)="selectChildren()">C</i>
+	</div>
 </div>
-<i class="icon" (click)="selectSelf()">self</i><i class="icon" (click)="selectChildren()">children</i>
+
+
 <div #children class="children">
 	<ng-container #children></ng-container>
 </div>

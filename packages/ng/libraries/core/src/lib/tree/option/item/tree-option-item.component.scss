@@ -1,2 +1,144 @@
 @import '_definitions';
 @include optionItemStyle;
+
+:host {
+  &.is-selected {
+    > .treeOptionItem {
+        background: _theme('commons.background.darker', true);
+        background: _theme('commons.background.darker');
+    }
+  }
+}
+
+.treeOptionItem {
+  &:hover {
+    background: _theme('commons.background.dark', true) !important;
+		background: _theme('commons.background.dark') !important;
+
+    .treeOptionItem-icons {
+      opacity: 1;
+    }
+  }
+}
+
+.treeOptionItem-icons {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  opacity: 0;
+  transition: all _theme('commons.animations.durations.fast', true) ease;
+  transition: all _theme('commons.animations.durations.fast') ease;
+}
+
+.treeOptionItem-value {
+  padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true) _component("options.item.padding-vertical", true) 2rem;
+  padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal") _component("options.item.padding-vertical") 2rem;
+}
+
+:host-context(.lu-popover-panel.mod-multiple) {
+  padding: 0;
+
+  &:hover, &.is-highlighted, &.is-focus {
+    background: inherit;
+  }
+
+  &.is-selected {
+    background: inherit;
+  }
+
+  &::before {
+    top: 1.3rem;
+    left: .5rem;
+    pointer-events: none;
+  }
+
+  &::after {
+    top: 1.3rem;
+    left: .5rem;
+    pointer-events: none;
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option) {
+  .treeOptionItem-value {
+    padding-left: 3rem;
+  }
+
+  &::before {
+    left: 1.5rem;
+  }
+
+  &::after {
+    left: 1.5rem;
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option) {
+  .treeOptionItem-value {
+    padding-left: 4rem;
+  }
+
+  &::before {
+    left: 2.5rem;
+  }
+
+  &::after {
+    left: 2.5rem;
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
+  .treeOptionItem-value {
+    padding-left: 5rem;
+  }
+
+  &::before {
+    left: 3.5rem;
+  }
+
+  &::after {
+    left: 3.5rem;
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+  .treeOptionItem-value {
+    padding-left: 6rem;
+  }
+
+  &::before {
+    left: 4.5rem;
+  }
+
+  &::after {
+    left: 4.5rem;
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+  .treeOptionItem-value {
+    padding-left: 7rem;
+  }
+
+  &::before {
+    left: 5.5rem;
+  }
+
+  &::after {
+    left: 5.5rem;
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+  .treeOptionItem-value {
+    padding-left: 8rem;
+  }
+
+  &::before {
+    left: 6.5rem;
+  }
+
+  &::after {
+    left: 6.5rem;
+  }
+}
