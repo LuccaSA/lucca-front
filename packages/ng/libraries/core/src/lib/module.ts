@@ -8,6 +8,7 @@ import { LuScrollModule } from './scroll/index';
 import { LuSelectModule } from './select/index';
 import { LuUserModule } from './user/index';
 import { LuOverlayModule } from './overlay/index';
+import { LuTreeModule } from './tree/index';
 
 @NgModule({
 	imports: [
@@ -20,6 +21,7 @@ import { LuOverlayModule } from './overlay/index';
 		LuSelectModule,
 		LuUserModule,
 		LuOverlayModule,
+		LuTreeModule,
 	],
 	exports: [
 		LuApiModule,
@@ -31,6 +33,7 @@ import { LuOverlayModule } from './overlay/index';
 		LuSelectModule,
 		LuUserModule,
 		LuOverlayModule,
+		LuTreeModule,
 	],
 })
 export class LuModule {}

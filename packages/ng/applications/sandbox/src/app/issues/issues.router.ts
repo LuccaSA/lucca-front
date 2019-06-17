@@ -23,6 +23,7 @@ const routes: Routes = [
 	{ path: 'poc-popup', loadChildren: () => import('./poc-popup').then(m => m.PocPopupModule) },
 	{ path: 'poc-modal', loadChildren: () => import('./poc-modal').then(m => m.PocModalModule) },
 	{ path: 'fix-472', loadChildren: () => import('./fix-472').then(m => m.Fix472Module) },
+	{ path: 'poc-tree', loadChildren: () => import('./poc-tree').then(m => m.PocTreeModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
