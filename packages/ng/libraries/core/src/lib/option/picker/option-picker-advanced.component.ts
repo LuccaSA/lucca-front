@@ -18,27 +18,11 @@ import {
 	ALuOnCloseSubscriber,
 	ALuOnScrollBottomSubscriber,
 } from '../operator/index';
-import { LuOptionPickerComponent } from './option-picker.component';
+import { ALuOptionPickerComponent } from './option-picker.component';
+import { ILuOptionItem } from '../item/index';
 
-/**
-* advanced option picker panel
-*/
-@Component({
-	selector: 'lu-option-picker-advanced',
-	templateUrl: './option-picker-advanced.component.html',
-	styleUrls: ['./option-picker.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
-	exportAs: 'LuOptionPicker',
-	providers: [
-		{
-			provide: ALuPickerPanel,
-			useExisting: forwardRef(() => LuOptionPickerAdvancedComponent),
-		},
-	]
-})
-export class LuOptionPickerAdvancedComponent<T = any>
-extends LuOptionPickerComponent<T> {
+export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
+extends ALuOptionPickerComponent<T, O> {
 	loading$: Observable<boolean>;
 
 	protected _operators = [];
@@ -104,5 +88,31 @@ extends LuOptionPickerComponent<T> {
 			o.onClose();
 		});
 		super.onClose();
+	}
+}
+
+/**
+* advanced option picker panel
+*/
+@Component({
+	selector: 'lu-option-picker-advanced',
+	templateUrl: './option-picker-advanced.component.html',
+	styleUrls: ['./option-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [luTransformPopover],
+	exportAs: 'LuOptionPicker',
+	providers: [
+		{
+			provide: ALuPickerPanel,
+			useExisting: forwardRef(() => LuOptionPickerAdvancedComponent),
+		},
+	]
+})
+export class LuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_renderer: Renderer2,
+	) {
+		super(_changeDetectorRef, _renderer);
 	}
 }

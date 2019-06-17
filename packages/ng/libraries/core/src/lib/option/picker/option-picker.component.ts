@@ -23,26 +23,10 @@ import { map, delay } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../input/index';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
-/**
-* basic option picker panel
-*/
-@Component({
-	selector: 'lu-option-picker',
-	templateUrl: './option-picker.component.html',
-	styleUrls: ['./option-picker.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	animations: [luTransformPopover],
-	exportAs: 'LuOptionPicker',
-	providers: [
-		{
-			provide: ALuPickerPanel,
-			useExisting: forwardRef(() => LuOptionPickerComponent),
-		},
-	]
-})
-export class LuOptionPickerComponent<T = any>
-extends ALuOptionPicker<T>
-implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
+
+export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
+extends ALuOptionPicker<T, O>
+implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 
 
 	@Output() close = new EventEmitter<void>();
@@ -53,9 +37,9 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
 
-	protected _options: ILuOptionItem<T>[] = [];
-	protected _optionsQL: QueryList<ILuOptionItem<T>>;
-	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<ILuOptionItem<T>>) {
+	protected _options: O[] = [];
+	protected _optionsQL: QueryList<O>;
+	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 		this.initOptionItemsObservable();
 	}
@@ -190,7 +174,7 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		const options = this._optionsQL ? this._optionsQL.toArray() : [];
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
-			this._updateValue(highlightedOption.value);
+			this._toggle(highlightedOption);
 		}
 	}
 	protected _initSelected() {
@@ -237,10 +221,35 @@ implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
 			.pipe(
-				map<QueryList<ILuOptionItem<T>>, ILuOptionItem<T>[]>(q => q.toArray()),
+				map<QueryList<O>, O[]>(q => q.toArray()),
 				delay(0),
 			);
 		items$.subscribe(o => this._options = o || []);
 		this._optionItems$ = items$;
+	}
+}
+/**
+* basic option picker panel
+*/
+@Component({
+	selector: 'lu-option-picker',
+	templateUrl: './option-picker.component.html',
+	styleUrls: ['./option-picker.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [luTransformPopover],
+	exportAs: 'LuOptionPicker',
+	providers: [
+		{
+			provide: ALuPickerPanel,
+			useExisting: forwardRef(() => LuOptionPickerComponent),
+		},
+	]
+})
+export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_renderer: Renderer2,
+	) {
+		super(_changeDetectorRef, _renderer);
 	}
 }

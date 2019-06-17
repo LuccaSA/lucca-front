@@ -16,10 +16,10 @@ import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 })
 export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements ILuOptionItem<T> {
 	@Input() value: T;
-	@Output() onSelect = new EventEmitter<T>();
+	@Output() onSelect = new EventEmitter<this>();
 	@HostListener('click')
 	onclick() {
-		this.onSelect.emit(this.value);
+		this.onSelect.emit(this);
 	}
 	constructor(protected _vcr: ViewContainerRef) {
 		super();
