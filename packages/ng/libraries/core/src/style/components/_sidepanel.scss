@@ -10,21 +10,16 @@ lu-sidepanel-panel {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: 39rem;
+	width: _component("sidepanel.sizes.default");
 	max-height: 100vh;
 	border-radius: 0;
 
 	animation-name: sidepanelAnimation;
 	transform-origin: center center;
-
-	&.side-large {
-		width: 45rem;
-	}
-	&.size-larger{
-		width: 60rem;
-	}
-	&.size-largest {
-		width: 80rem;
+	@each $panel-size, $size-obj in _getMap("components.sidepanel.sizes") {
+		&.size-#{$panel-size} {
+			width: _component("sidepanel.sizes."+$panel-size);
+		}
 	}
 }
 

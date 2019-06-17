@@ -1,6 +1,12 @@
 .lu-popup-backdrop {
+	opacity: _component("popup.backdrop.opacity");
 	animation: fadeInBackdrop 100ms ease-out;
 }
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
+	opacity: _component("popup.backdrop.opacity");
+}
+
 .lu-popup-panel {
 	@include elevate(1);
 	position: relative;
