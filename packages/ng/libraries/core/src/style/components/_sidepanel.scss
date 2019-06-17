@@ -1,0 +1,49 @@
+lu-sidepanel-panel {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	height: 100%;
+}
+
+.lu-popup-panel.lu-sidepanel-panel {
+	position: fixed !important;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 39rem;
+	max-height: 100vh;
+	border-radius: 0;
+
+	animation-name: sidepanelAnimation;
+	transform-origin: center center;
+
+	&.side-large {
+		width: 45rem;
+	}
+	&.size-larger{
+		width: 60rem;
+	}
+	&.size-largest {
+		width: 80rem;
+	}
+}
+
+.lu-sidepanel-header, .lu-sidepanel-footer {
+	flex: 0 0 auto;
+}
+
+.lu-sidepanel-content {
+	flex: 1 1 0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+@keyframes sidepanelAnimation {
+	from {
+		transform: translate(_theme("commons.animations.translate"), 0);
+	}
+
+	to {
+		transform: translate(0, 0);
+	}
+}
