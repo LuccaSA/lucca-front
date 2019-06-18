@@ -28,6 +28,17 @@
   opacity: 0;
   transition: all _theme('commons.animations.durations.fast', true) ease;
   transition: all _theme('commons.animations.durations.fast') ease;
+
+  .lucca-icon {
+    font-size: 1.2rem;
+    opacity: .66;
+    transition: all _theme('commons.animations.durations.fast', true) ease;
+    transition: all _theme('commons.animations.durations.fast') ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .treeOptionItem-value {
