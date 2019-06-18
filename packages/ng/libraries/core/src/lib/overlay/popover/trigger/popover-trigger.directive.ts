@@ -116,6 +116,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 		this._checkTarget();
 	}
 	ngOnDestroy() {
+		this.closePopover();
 		this.destroyPopover();
 	}
 }

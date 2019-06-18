@@ -7,6 +7,7 @@ import {
 	AfterViewInit,
 	HostListener,
 	Injector,
+	OnDestroy,
 } from '@angular/core';
 	import { Overlay } from '@angular/cdk/overlay';
 	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '../../popover/index';
@@ -15,7 +16,7 @@ import {
 @Directive({
 	selector: '[luTooltip]',
 })
-export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit {
+export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
 
 	@Input('luTooltip') set tooltipContent(c) {
 		this.panel.content = c;
@@ -60,5 +61,9 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 
 	ngAfterViewInit() {
 		this._checkTarget();
+	}
+	ngOnDestroy() {
+		this.closePopover();
+		this.destroyPopover();
 	}
 }

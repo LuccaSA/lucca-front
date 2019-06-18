@@ -14,6 +14,7 @@ import {
 	Renderer2,
 	Input,
 	HostBinding,
+	OnDestroy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -30,7 +31,7 @@ import { ALuSelectInput } from './select-input.model';
 
 export abstract class ALuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
+implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
@@ -118,7 +119,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 		this.render();
 		this._picker.setValue(this.value);
 	}
-
+	ngOnDestroy() {
+		this.closePopover();
+		this.destroyPopover();
+	}
 
 }
 
