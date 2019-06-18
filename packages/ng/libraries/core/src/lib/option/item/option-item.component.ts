@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, forwardRef, ElementRef, HostBinding } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
 @Component({
@@ -24,4 +24,6 @@ export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements 
 	constructor(public element: ElementRef) {
 		super();
 	}
+	@HostBinding('class.is-selected') selected;
+	@HostBinding('class.is-highlighted') highlighted;
 }

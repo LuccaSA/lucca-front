@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver, Inject } from '@angular/core';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { ILuTree } from '../../tree.model';
 import { ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
+import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
+import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -44,11 +46,20 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	get value() { return this._tree.value; }
 	get children() { return this._children; }
 	set children(c) { this._children = c; }
+	get hasChildren() { return !!this.children && this.children.length > 0; }
+
+	selected;
+	highlighted;
+
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this._displayer = displayer;
 	}
 
-	constructor(private _componentFactoryResolver: ComponentFactoryResolver, public element: ElementRef) {
+	constructor(
+		private _componentFactoryResolver: ComponentFactoryResolver,
+		public element: ElementRef,
+		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
+	) {
 		super();
 	}
 
