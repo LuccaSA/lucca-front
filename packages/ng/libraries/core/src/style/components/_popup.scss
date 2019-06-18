@@ -1,11 +1,18 @@
-.lu-popup-backdrop {
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
+	opacity: _component("popup.backdrop.opacity");
+	animation: fadeInBackdrop 100ms ease-out;
+
 }
+
 .lu-popup-panel {
 	@include elevate(1);
 	position: relative;
 	max-height: calc(100vh - 80px);
 	background-color: _component("popup.panel.background-color");
 	border-radius: _theme("commons.border.radius");
+	animation-name: popupAnimation;
+	animation-duration: 150ms;
+	animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .lu-modal-header {
@@ -46,4 +53,24 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+}
+
+
+@keyframes popupAnimation {
+	from {
+		transform: scale(.7);
+	}
+
+	to {
+		transform: none;
+	}
+}
+
+@keyframes fadeInBackdrop {
+	from {
+		opacity: 0;
+	}
+
+	to {
+	}
 }

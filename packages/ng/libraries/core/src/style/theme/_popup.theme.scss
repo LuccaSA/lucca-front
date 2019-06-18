@@ -1,10 +1,20 @@
 $popup: (
 	padding: 2rem,
 	backdrop: (
-
+		opacity: .4,
 	),
 	panel: (
 		background-color: #fff,
 	),
 );
+
+$sidePanel: (
+	sizes: (
+		default: 39rem,
+		large: 45rem,
+		larger: 60rem,
+		largest: 80rem,
+	)
+);
 $theme: _set($theme, 'components.popup', $popup);
+$theme: _set($theme, 'components.sidepanel', $sidePanel);
