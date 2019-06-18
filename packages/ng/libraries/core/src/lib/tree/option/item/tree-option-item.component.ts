@@ -44,6 +44,7 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	get value() { return this._tree.value; }
 	get children() { return this._children; }
 	set children(c) { this._children = c; }
+	get hasChildren() { return !!this.children && this.children.length > 0; }
 
 	selected;
 	highlighted;

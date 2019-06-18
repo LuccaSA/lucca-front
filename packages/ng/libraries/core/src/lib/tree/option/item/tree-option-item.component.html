@@ -2,7 +2,7 @@
 	<div class="treeOptionItem-value" (click)="select()">
 		<ng-container #value></ng-container>
 	</div>
-	<div class="treeOptionItem-icons">
+	<div class="treeOptionItem-icons" *ngIf="hasChildren">
 		<i class="lucca-icon icon-parentOnly" (click)="selectSelf()"></i>
 		<i class="lucca-icon icon-childrenOnly" (click)="selectChildren()"></i>
 	</div>
