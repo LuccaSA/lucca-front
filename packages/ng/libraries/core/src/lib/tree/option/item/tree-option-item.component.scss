@@ -29,11 +29,16 @@
   transition: all _theme('commons.animations.durations.fast', true) ease;
   transition: all _theme('commons.animations.durations.fast') ease;
 
-  .lucca-icon {
-    font-size: 1.2rem;
+  .treeOptionItem-icon {
+		svg {
+			fill: _component("actionIcon.color");
+			width: 1.4rem;
+			height: 1.4rem;
+		}
     opacity: .66;
     transition: all _theme('commons.animations.durations.fast', true) ease;
-    transition: all _theme('commons.animations.durations.fast') ease;
+		transition: all _theme('commons.animations.durations.fast') ease;
+		margin-left: .5rem;
 
     &:hover {
       opacity: 1;
