@@ -3,8 +3,8 @@
 		<ng-container #value></ng-container>
 	</div>
 	<div class="treeOptionItem-icons" *ngIf="hasChildren">
-		<i class="lucca-icon icon-parentOnly" (click)="selectSelf()"></i>
-		<i class="lucca-icon icon-childrenOnly" (click)="selectChildren()"></i>
+		<i class="lucca-icon icon-parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly"></i>
+		<i class="lucca-icon icon-childrenOnly" (click)="selectChildren()" [luTooltip]="intl.childrenOnly"></i>
 	</div>
 </div>
 

@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver, Inject } from '@angular/core';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { ILuTree } from '../../tree.model';
 import { ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
+import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
+import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -53,7 +55,11 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 		this._displayer = displayer;
 	}
 
-	constructor(private _componentFactoryResolver: ComponentFactoryResolver, public element: ElementRef) {
+	constructor(
+		private _componentFactoryResolver: ComponentFactoryResolver,
+		public element: ElementRef,
+		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
+	) {
 		super();
 	}
 
