@@ -44,6 +44,10 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	get value() { return this._tree.value; }
 	get children() { return this._children; }
 	set children(c) { this._children = c; }
+
+	selected;
+	highlighted;
+
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this._displayer = displayer;
 	}
