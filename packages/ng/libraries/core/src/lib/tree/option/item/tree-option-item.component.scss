@@ -70,6 +70,7 @@
   }
 }
 
+/* clean-css ignore:start */
 :host-context(.lu-popover-panel.mod-multiple lu-tree-option) {
   .treeOptionItem-value {
     padding-left: 3rem;
@@ -153,3 +154,4 @@
     left: 6.5rem;
   }
 }
+/* clean-css ignore:end */
