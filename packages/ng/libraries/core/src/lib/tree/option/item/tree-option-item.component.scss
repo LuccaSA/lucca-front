@@ -17,11 +17,6 @@
 .optionItem-value {
   padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true) _component("options.item.padding-vertical", true) 2rem;
   padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal") _component("options.item.padding-vertical") 2rem;
-
-  &.is-selected {
-    background: _theme('commons.background.darker', true);
-    background: _theme('commons.background.darker');
-  }
 }
 
 .optionItem-icons {
