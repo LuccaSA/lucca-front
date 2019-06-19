@@ -10,6 +10,14 @@
 	max-height: calc(100vh - 80px);
 	background-color: _component("popup.panel.background-color");
 	border-radius: _theme("commons.border.radius");
+	width: _component("popup.sizes.small");
+	max-width: 100vw;
+
+	@each $panel-size, $size-obj in _getMap("components.popup.sizes") {
+		&.size-#{$panel-size} {
+			width: _component("popup.sizes."+$panel-size);
+		}
+	}
 	animation-name: popupAnimation;
 	animation-duration: 150ms;
 	animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
