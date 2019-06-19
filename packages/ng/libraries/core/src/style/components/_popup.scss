@@ -1,3 +1,7 @@
+.cdk-global-scrollblock {
+	overflow: hidden;
+}
+
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
 	opacity: _component("popup.backdrop.opacity");
 	animation: fadeInBackdrop 100ms ease-out;

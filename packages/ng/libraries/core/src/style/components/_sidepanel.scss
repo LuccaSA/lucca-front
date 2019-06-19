@@ -1,7 +1,6 @@
 lu-sidepanel-panel {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
+	display: block;
+	overflow: auto;
 	height: 100%;
 }
 
@@ -10,7 +9,7 @@ lu-sidepanel-panel {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: _component("sidepanel.sizes.default");
+	width: _component("sidepanel.sizes.medium");
 	max-height: 100vh;
 	border-radius: 0;
 
@@ -23,15 +22,19 @@ lu-sidepanel-panel {
 	}
 }
 
-.lu-sidepanel-header, .lu-sidepanel-footer {
-	flex: 0 0 auto;
+.lu-sidepanel-footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: _component("sidepanel.footer-height");
+	background-color: _component("popup.panel.background-color");
 }
 
-.lu-sidepanel-content {
-	flex: 1 1 0px;
-	overflow-x: hidden;
-	overflow-y: auto;
+.lu-modal-content.lu-sidepanel-content {
+	padding-bottom: _component("sidepanel.content-padding-bottom")
 }
+
 
 @keyframes sidepanelAnimation {
 	from {
