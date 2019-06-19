@@ -20,6 +20,7 @@
 }
 
 .optionItem-icons {
+  display: none;
   position: absolute;
   top: .5rem;
   right: .5rem;
@@ -48,6 +49,10 @@
 
 :host-context(.lu-popover-panel.mod-multiple) {
   padding: 0;
+
+  .optionItem-icons {
+    display: block;
+  }
 
   .optionItem-value {
     &::before {
