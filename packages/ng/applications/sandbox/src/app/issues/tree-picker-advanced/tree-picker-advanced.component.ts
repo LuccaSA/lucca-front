@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ILuTree } from '@lucca-front/ng';
 
 const node1 = { id: 1, name: 'root 1' };
 const node11 = { id: 11, name: 'node 1.1' };
