@@ -21,7 +21,10 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 		// reapply selected when the options change
 		this._subs.add(
 			options$
-			.subscribe(o => this._applySelected())
+			.subscribe(o => {
+				this._applySelected();
+				this._applyHighlight();
+			})
 		);
 		// subscribe to any option.onSelect
 		const singleFlow$ = options$.pipe(switchMap(
@@ -56,6 +59,7 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 		}
 	}
 	protected abstract _applySelected();
+	protected abstract _applyHighlight();
 	protected destroy() {
 		this._subs.unsubscribe();
 	}

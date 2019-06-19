@@ -65,7 +65,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 	}
 	onOpen() {
 		super.onOpen();
-		this.highlightIndex = -1;
+		this.highlightIndex = 0;
 		// this._initObserver();
 		this._applySelected();
 	}
@@ -95,7 +95,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 				break;
 		}
 	}
-	protected _highlightIndex = -1;
+	protected _highlightIndex = 0;
 	get highlightIndex() { return this._highlightIndex; }
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
@@ -110,7 +110,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 			}
 		}));
 		setTimeout(() => {
-			this.highlightIndex = -1;
+			this.highlightIndex = 0;
 		}, 1);
 	}
 	protected _incrHighlight() {
