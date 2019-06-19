@@ -50,13 +50,7 @@
 :host-context(.lu-popover-panel) {
   padding: 0;
 
-  .optionItem-icons {
-    display: block;
-  }
-
   .optionItem-value {
-    padding-right: 2.5rem;
-
     &::before {
       top: 1.3rem;
       left: .5rem;
@@ -68,6 +62,16 @@
       left: .5rem;
       pointer-events: none;
     }
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple) {
+  .optionItem-icons {
+    display: block;
+  }
+
+  .optionItem-value {
+    padding-right: 4rem;
   }
 }
 
