@@ -15,8 +15,8 @@
 }
 
 .optionItem-value {
-  padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true) _component("options.item.padding-vertical", true) 2rem;
-  padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal") _component("options.item.padding-vertical") 2rem;
+  padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true) _component("options.item.padding-vertical", true) .5rem;
+  padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal") _component("options.item.padding-vertical") .5rem;
 }
 
 .optionItem-icons {
@@ -47,7 +47,7 @@
   height: 1.4rem;
 }
 
-:host-context(.lu-popover-panel.mod-multiple) {
+:host-context(.lu-popover-panel) {
   padding: 0;
 
   .optionItem-icons {
@@ -55,7 +55,7 @@
   }
 
   .optionItem-value {
-    padding-right: 4.5rem;
+    padding-right: 2.5rem;
 
     &::before {
       top: 1.3rem;
@@ -72,9 +72,9 @@
 }
 
 /* clean-css ignore:start */
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option) {
+:host-context(.lu-popover-panel lu-tree-option) {
   .optionItem-value {
-    padding-left: 3rem;
+    padding-left: 1.5rem;
 
     &::before {
       left: 1.5rem;
@@ -82,6 +82,26 @@
 
     &::after {
       left: 1.5rem;
+    }
+  }
+}
+
+:host-context(.lu-popover-panel.mod-multiple lu-tree-option) {
+  .optionItem-value {
+    padding-left: 3rem;
+  }
+}
+
+:host-context(.lu-popover-panel lu-tree-option lu-tree-option) {
+  .optionItem-value {
+    padding-left: 2.5rem;
+
+    &::before {
+      left: 2.5rem;
+    }
+
+    &::after {
+      left: 2.5rem;
     }
   }
 }
@@ -89,13 +109,19 @@
 :host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 4rem;
+  }
+}
+
+:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option) {
+  .optionItem-value {
+    padding-left: 3.5rem;
 
     &::before {
-      left: 2.5rem;
+      left: 3.5rem;
     }
 
     &::after {
-      left: 2.5rem;
+      left: 3.5rem;
     }
   }
 }
@@ -103,13 +129,19 @@
 :host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 5rem;
+  }
+}
+
+:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+  .optionItem-value {
+    padding-left: 4.5rem;
 
     &::before {
-      left: 3.5rem;
+      left: 4.5rem;
     }
 
     &::after {
-      left: 3.5rem;
+      left: 4.5rem;
     }
   }
 }
@@ -117,13 +149,19 @@
 :host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 6rem;
+  }
+}
+
+:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+  .optionItem-value {
+    padding-left: 5.5rem;
 
     &::before {
-      left: 4.5rem;
+      left: 5.5rem;
     }
 
     &::after {
-      left: 4.5rem;
+      left: 5.5rem;
     }
   }
 }
@@ -131,13 +169,19 @@
 :host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 7rem;
+  }
+}
+
+:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+  .optionItem-value {
+    padding-left: 6.5rem;
 
     &::before {
-      left: 5.5rem;
+      left: 6.5rem;
     }
 
     &::after {
-      left: 5.5rem;
+      left: 6.5rem;
     }
   }
 }
@@ -145,14 +189,6 @@
 :host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 8rem;
-
-    &::before {
-      left: 6.5rem;
-    }
-
-    &::after {
-      left: 6.5rem;
-    }
   }
 }
 /* clean-css ignore:end */
