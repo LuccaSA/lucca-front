@@ -17,7 +17,8 @@
 			background: _theme('commons.background.darker', true);
 			background: _theme('commons.background.darker');
 		}
-		&:hover, &.is-highlighted, &.is-focus{
+		
+		&:hover, &.is-highlighted, &.is-focus {
 			background: _theme('commons.background.dark', true);
 			background: _theme('commons.background.dark');
 		}
