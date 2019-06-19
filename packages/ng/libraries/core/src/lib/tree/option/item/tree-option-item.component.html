@@ -1,10 +1,10 @@
-<div class="treeOptionItem">
-	<div class="treeOptionItem-value" (click)="select()" [class.is-selected]="selected" [class.is-highlighted]="highlighted">
+<div class="optionItem">
+	<div class="optionItem-value" (click)="select()" [class.is-selected]="selected" [class.is-highlighted]="highlighted">
 		<ng-container #value></ng-container>
 	</div>
-	<div class="treeOptionItem-icons" *ngIf="hasChildren">
-		<i class="treeOptionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
-			<svg viewBox="0 0 24 24">
+	<div class="optionItem-icons" *ngIf="hasChildren">
+		<i class="optionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
+			<svg class="optionItem-icon-shape" viewBox="0 0 24 24">
 				<path opacity="0.2"
 					d="M8 13C8.55 13 9 12.55 9 12C9 11.45 8.55 11 8 11C7.45 11 7 11.45 7 12C7 12.55 7.45 13 8 13ZM8 18C8.55 18 9 17.55 9 17C9 16.45 8.55 16 8 16C7.45 16 7 16.45 7 17C7 17.55 7.45 18 8 18ZM12 13H20C20.55 13 21 12.55 21 12C21 11.45 20.55 11 20 11H12C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13ZM12 18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H12C11.45 16 11 16.45 11 17C11 17.55 11.45 18 12 18ZM8 13C8.55 13 9 12.55 9 12C9 11.45 8.55 11 8 11C7.45 11 7 11.45 7 12C7 12.55 7.45 13 8 13ZM8 18C8.55 18 9 17.55 9 17C9 16.45 8.55 16 8 16C7.45 16 7 16.45 7 17C7 17.55 7.45 18 8 18ZM12 13H20C20.55 13 21 12.55 21 12C21 11.45 20.55 11 20 11H12C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13ZM12 18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H12C11.45 16 11 16.45 11 17C11 17.55 11.45 18 12 18Z"
 				/>
@@ -13,8 +13,8 @@
 				/>
 			</svg>
 		</i>
-		<i class="treeOptionItem-icon childrenOnly" (click)="selectChildren()" [luTooltip]="intl.childrenOnly">
-			<svg viewBox="0 0 24 24">
+		<i class="optionItem-icon childrenOnly" (click)="selectChildren()" [luTooltip]="intl.childrenOnly">
+			<svg class="optionItem-icon-shape" viewBox="0 0 24 24">
 				<path
 					d="M8 13C8.55 13 9 12.55 9 12C9 11.45 8.55 11 8 11C7.45 11 7 11.45 7 12C7 12.55 7.45 13 8 13ZM8 18C8.55 18 9 17.55 9 17C9 16.45 8.55 16 8 16C7.45 16 7 16.45 7 17C7 17.55 7.45 18 8 18ZM12 13H20C20.55 13 21 12.55 21 12C21 11.45 20.55 11 20 11H12C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13ZM12 18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H12C11.45 16 11 16.45 11 17C11 17.55 11.45 18 12 18ZM8 13C8.55 13 9 12.55 9 12C9 11.45 8.55 11 8 11C7.45 11 7 11.45 7 12C7 12.55 7.45 13 8 13ZM8 18C8.55 18 9 17.55 9 17C9 16.45 8.55 16 8 16C7.45 16 7 16.45 7 17C7 17.55 7.45 18 8 18ZM12 13H20C20.55 13 21 12.55 21 12C21 11.45 20.55 11 20 11H12C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13ZM12 18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H12C11.45 16 11 16.45 11 17C11 17.55 11.45 18 12 18Z"
 				/>
