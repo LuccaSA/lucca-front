@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, forwardRef, ElementRef, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, HostBinding } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
 @Component({
@@ -15,15 +15,14 @@ import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 	],
 })
 export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements ILuOptionItem<T> {
+	@Input() selected;
+	@Input() highlighted;
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<this>();
-	@HostListener('click')
-	onclick() {
+	select() {
 		this.onSelect.emit(this);
 	}
 	constructor(public element: ElementRef) {
 		super();
 	}
-	@HostBinding('class.is-selected') selected;
-	@HostBinding('class.is-highlighted') highlighted;
 }
