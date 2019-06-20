@@ -63,9 +63,8 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 	}
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
-		_renderer: Renderer2,
 	) {
-		super(_changeDetectorRef, _renderer);
+		super(_changeDetectorRef);
 	}
 	protected _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
@@ -184,8 +183,7 @@ export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T>
 extends ALuTreeOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
-		_renderer: Renderer2,
 	) {
-		super(_changeDetectorRef, _renderer);
+		super(_changeDetectorRef);
 	}
 }

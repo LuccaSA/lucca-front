@@ -4,7 +4,6 @@ import {
 	ContentChildren,
 	QueryList,
 	forwardRef,
-	Renderer2,
 	ChangeDetectorRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../overlay/index';
@@ -70,9 +69,8 @@ extends ALuOptionPickerComponent<T, O> {
 
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
-		_renderer: Renderer2,
 	) {
-		super(_changeDetectorRef, _renderer);
+		super(_changeDetectorRef);
 	}
 	onScrollBottom() {
 		this._onScrollBottomSubscribers.forEach(o => {
@@ -114,8 +112,7 @@ extends ALuOptionPickerComponent<T, O> {
 export class LuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
-		_renderer: Renderer2,
 	) {
-		super(_changeDetectorRef, _renderer);
+		super(_changeDetectorRef);
 	}
 }

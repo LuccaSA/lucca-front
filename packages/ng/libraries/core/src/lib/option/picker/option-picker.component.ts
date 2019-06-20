@@ -9,11 +9,7 @@ import {
 	forwardRef,
 	ViewChild,
 	TemplateRef,
-	ViewContainerRef,
-	Renderer2,
 	ChangeDetectorRef,
-	AfterViewInit,
-	Input,
 } from '@angular/core';
 import { luTransformPopover } from '../../overlay/index';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -46,7 +42,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _renderer: Renderer2) {
+	) {
 		super();
 		this._isOptionItemsInitialized = false;
 		this.overlayPaneClass = this._defaultOverlayPaneClasses;
@@ -69,7 +65,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 	}
 	onOpen() {
 		super.onOpen();
-		this.highlightIndex = -1;
+		this.highlightIndex = 0;
 		// this._initObserver();
 		this._applySelected();
 	}
@@ -99,11 +95,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 				break;
 		}
 	}
-	// protected _highlightObserver: IntersectionObserver;
-	// protected _initObserver() {
-
-	// }
-	protected _highlightIndex = -1;
+	protected _highlightIndex = 0;
 	get highlightIndex() { return this._highlightIndex; }
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
@@ -118,7 +110,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 			}
 		}));
 		setTimeout(() => {
-			this.highlightIndex = -1;
+			this.highlightIndex = 0;
 		}, 1);
 	}
 	protected _incrHighlight() {
@@ -130,14 +122,14 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 	}
 	protected _applyHighlight(reScroll = false) {
 		if (!this.isOpen) { return; }
-		const highlightClass = 'is-highlighted';
+		// const highlightClass = 'is-highlighted';
 		const options = this._options;
 		// remove `is-highlighted` class from all other options
-		options.forEach(option => this._renderer.removeClass(option.element.nativeElement, highlightClass));
+		options.forEach(option => option.highlighted = false);
 		// apply `is-highlighted` to current highlight
 		const highlightedOption = options[this.highlightIndex];
 		if (!!highlightedOption) {
-			this._renderer.addClass(highlightedOption.element.nativeElement, highlightClass);
+			highlightedOption.highlighted = true;
 			// scroll to let the highlighted option visible
 			if (reScroll) {
 				setTimeout(() => {
@@ -179,11 +171,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 	}
 	protected _applySelected() {
 		if (!this._options) { return; }
-		const selectedClass = 'is-selected';
+		// const selectedClass = 'is-selected';
 
 		const options = this._options;
 		// remove `is-selected` class from all other options
-		options.forEach(option => this._renderer.removeClass(option.element.nativeElement, selectedClass));
+		options.forEach(option => option.selected = false);
 
 		// add `is-selected` to all selected indexes
 		const selectedIndexes = [];
@@ -202,7 +194,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 		selectedIndexes.forEach(i => {
 			const option = options[i];
 			if (!!option) {
-				this._renderer.addClass(option.element.nativeElement, selectedClass);
+				option.selected = true;
 			}
 		});
 	}
@@ -246,8 +238,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
-		_renderer: Renderer2,
 	) {
-		super(_changeDetectorRef, _renderer);
+		super(_changeDetectorRef);
 	}
 }

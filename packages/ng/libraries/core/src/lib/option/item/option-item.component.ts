@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, HostListener, Input, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
 @Component({
@@ -15,13 +15,28 @@ import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 	],
 })
 export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements ILuOptionItem<T> {
+	protected _selected = false;
+	get selected() { return this._selected; }
+	@Input() set selected(s: boolean) {
+		if (s !== this._selected) {
+			this._selected = s;
+			this._cdr.markForCheck();
+		}
+	}
+	protected _highlighted = false;
+	get highlighted() { return this._highlighted; }
+	@Input() set highlighted(h: boolean) {
+		if (h !== this._highlighted) {
+			this._highlighted = h;
+			this._cdr.markForCheck();
+		}
+	}
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<this>();
-	@HostListener('click')
-	onclick() {
+	select() {
 		this.onSelect.emit(this);
 	}
-	constructor(public element: ElementRef) {
+	constructor(public element: ElementRef, private _cdr: ChangeDetectorRef) {
 		super();
 	}
 }

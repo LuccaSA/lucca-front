@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver, Inject, ChangeDetectorRef } from '@angular/core';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { ILuTree } from '../../tree.model';
 import { ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
+import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
+import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -44,11 +46,35 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	get value() { return this._tree.value; }
 	get children() { return this._children; }
 	set children(c) { this._children = c; }
+	get hasChildren() { return !!this.children && this.children.length > 0; }
+
+	protected _selected = false;
+	get selected() { return this._selected; }
+	@Input() set selected(s: boolean) {
+		if (s !== this._selected) {
+			this._selected = s;
+			this._cdr.markForCheck();
+		}
+	}
+	protected _highlighted = false;
+	get highlighted() { return this._highlighted; }
+	@Input() set highlighted(h: boolean) {
+		if (h !== this._highlighted) {
+			this._highlighted = h;
+			this._cdr.markForCheck();
+		}
+	}
+
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this._displayer = displayer;
 	}
 
-	constructor(private _componentFactoryResolver: ComponentFactoryResolver, public element: ElementRef) {
+	constructor(
+		private _componentFactoryResolver: ComponentFactoryResolver,
+		public element: ElementRef,
+		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
+		private _cdr: ChangeDetectorRef,
+	) {
 		super();
 	}
 
