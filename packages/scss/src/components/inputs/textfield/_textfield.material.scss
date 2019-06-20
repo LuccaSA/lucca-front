@@ -162,7 +162,7 @@
 			@include fieldMaterialFilled("textfield");
 		}
 
-		&[disabled], &[readonly] {
+		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
 			background: transparent;
 			background-image: linear-gradient(to right, _component("textfield.material.border.color") 33%, rgba(255, 255, 255, 0) 0%); // Dashed line
 			background-position: bottom;
