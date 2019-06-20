@@ -3,6 +3,7 @@
 @include field("textfield");
 
 .textfield {
+	vertical-align: middle;
 	width: _component("field.sizes.default");
 }
 

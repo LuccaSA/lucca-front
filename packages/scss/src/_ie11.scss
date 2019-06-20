@@ -2,7 +2,7 @@
 
 	.header {
 		&.mod-sticky {
-			@include media_smaller_than("md") {
+			@include media_smaller_than(_theme("commons.mobile", true)) {
 				top: 0;
 			}
 		}
@@ -10,7 +10,7 @@
 
 	.filters {
 		&.mod-sticky {
-			@include media_smaller_than("md") {
+			@include media_smaller_than(_theme("commons.mobile", true)) {
 				top: 0;
 			}
 		}

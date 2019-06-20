@@ -2,88 +2,101 @@
 @import '~@lucca-front/icons/src/_mixins';
 
 @mixin optionItemStyle {
-	:host {
+	.optionItem {
+		position: relative;
+	}
+
+	.optionItem-value {
 		display: block;
 		cursor: pointer;
 		padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true);
 		padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal");
 		transition: background 50ms ease;
+
 		&.is-selected {
 			background: _theme('commons.background.darker', true);
 			background: _theme('commons.background.darker');
 		}
-		&:hover, &.is-highlighted, &.is-focus{
+
+		&:hover, &.is-highlighted, &.is-focus {
 			background: _theme('commons.background.dark', true);
 			background: _theme('commons.background.dark');
 		}
-
 	}
 
 	:host-context(.lu-select-value) {
-		padding: 0;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		&:hover, &.is-focus, &.is-highlighted {
-			background: inherit;
+		.optionItem-value {
+			padding: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			&:hover, &.is-focus, &.is-highlighted {
+				background: inherit;
+			}
 		}
 	}
 
 	:host-context(.mod-multiple) {
-		position: relative;
-		padding-left: _component("options.item.multiple-padding", true);
-		padding-left: _component("options.item.multiple-padding");
-		&::after, &::before {
-			display: block;
-			position: absolute;
-			left: _component("options.checkbox.left", true);
-			left: _component("options.checkbox.left");
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		&::before {
-			border-radius: _component("options.checkbox.border-radius", true);
-			border-radius: _component("options.checkbox.border-radius");
-			box-shadow: inset 0 0 0 2px #999999;
-			content: "";
-			display: block;
-			height: _component("options.checkbox.size", true);
-			height: _component("options.checkbox.size");
-			transition: all 100ms ease;
-			width: _component("options.checkbox.size", true);
-			width: _component("options.checkbox.size");
-		}
+		.optionItem-value {
+			position: relative;
+			padding-left: _component("options.item.multiple-padding", true);
+			padding-left: _component("options.item.multiple-padding");
 
-		&::after {
-			color: white;
-			font-size: .8rem;
-			@include makeIcon("tick");
-			line-height: _component("options.checkbox.size", true);
-			line-height: _component("options.checkbox.size");
-			padding-top: .05rem;
-			position: absolute;
-			text-align: center;
-			transform: translateY(-50%) scale(0);
-			transition: all 100ms ease;
-			width: _component("options.checkbox.size", true);
-			width: _component("options.checkbox.size");
-		}
-
-		&.is-selected {
-			&::before {
-				background-color: _color("primary", "color", true);
-				background-color: _color("primary");
-				box-shadow: inset 0 0 0 2px _color("primary", "color", true);
-				box-shadow: inset 0 0 0 2px _color("primary");
+			&::after, &::before {
+				display: block;
+				position: absolute;
+				left: _component("options.checkbox.left", true);
+				left: _component("options.checkbox.left");
+				top: 50%;
+				transform: translateY(-50%);
 			}
+
+			&::before {
+				border-radius: _component("options.checkbox.border-radius", true);
+				border-radius: _component("options.checkbox.border-radius");
+				box-shadow: inset 0 0 0 2px #999999;
+				content: "";
+				display: block;
+				height: _component("options.checkbox.size", true);
+				height: _component("options.checkbox.size");
+				transition: all 100ms ease;
+				width: _component("options.checkbox.size", true);
+				width: _component("options.checkbox.size");
+			}
+
 			&::after {
-				transform: translateY(-50%) scale(1);
+				color: white;
+				font-size: .8rem;
+				@include makeIcon("tick");
+				line-height: _component("options.checkbox.size", true);
+				line-height: _component("options.checkbox.size");
+				padding-top: .05rem;
+				position: absolute;
+				text-align: center;
+				transform: translateY(-50%) scale(0);
+				transition: all 100ms ease;
+				width: _component("options.checkbox.size", true);
+				width: _component("options.checkbox.size");
 			}
-		}
 
-		&:hover {
-			&::before {
-				box-shadow: inset 0 0 0 2px _color("primary", "color", true);
-				box-shadow: inset 0 0 0 2px _color("primary");
+			&.is-selected {
+				&::before {
+					background-color: _color("primary", "color", true);
+					background-color: _color("primary");
+					box-shadow: inset 0 0 0 2px _color("primary", "color", true);
+					box-shadow: inset 0 0 0 2px _color("primary");
+				}
+
+				&::after {
+					transform: translateY(-50%) scale(1);
+				}
+			}
+
+			&:hover {
+				&::before {
+					box-shadow: inset 0 0 0 2px _color("primary", "color", true);
+					box-shadow: inset 0 0 0 2px _color("primary");
+				}
 			}
 		}
 	}

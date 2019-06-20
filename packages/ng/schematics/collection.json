@@ -1,0 +1,10 @@
+{
+	"$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+	"schematics": {
+		"issue": {
+			"description": "Generate an issue page in the sandbox",
+			"factory": "./issue",
+			"schema": "./issue/schema.json"
+		}
+	}
+}

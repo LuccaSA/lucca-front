@@ -1,0 +1,11 @@
+{
+  "name": "@lucca-front/schematics",
+  "version": "0.0.0",
+  "description": "schematics for lucca-front",
+  "keywords": [
+    "schematics"
+  ],
+  "author": "lucien bertin <me@lucienbertin.com>",
+  "license": "MIT",
+  "schematics": "./collection.json"
+}

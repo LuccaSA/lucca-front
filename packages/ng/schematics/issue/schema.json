@@ -1,0 +1,32 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"id": "SchemanticsForMenu",
+	"title": "Menu Schema",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			}
+		},
+		"path": {
+			"type": "string",
+			"format": "path",
+			"description": "The path to create the component.",
+			"visible": false
+		},
+		"project": {
+			"type": "string",
+			"description": "The name of the project.",
+			"$default": {
+				"$source": "projectName"
+			}
+		},
+		"proxy": {
+			"type": "boolean",
+			"description": "if the component needs to proxy its calls to api"
+		}
+	}
+}

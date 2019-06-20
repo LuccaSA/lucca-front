@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
-import { ALuOptionOperator } from '../../../option/index';
+import { ALuOptionOperator, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { LuUserPagedSearcherService } from './user-searcher.service';
@@ -19,6 +19,16 @@ import { ALuApiOptionPagedSearcher } from '../../../api/index';
 			multi: true,
 		},
 		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnScrollBottomSubscriber,
+			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
+			multi: true,
+		},
+		{
 			provide: ALuUserPagedSearcherService,
 			useClass: LuUserPagedSearcherService,
 		},
@@ -27,7 +37,7 @@ import { ALuApiOptionPagedSearcher } from '../../../api/index';
 export class LuUserPagedSearcherComponent<U extends IUser = IUser, S extends ALuUserPagedSearcherService<U> = ALuUserPagedSearcherService<U>>
 extends ALuApiOptionPagedSearcher<U, S> {
 	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
