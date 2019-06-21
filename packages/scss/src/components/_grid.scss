@@ -99,15 +99,16 @@
 
 // GRID UTILITIES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-@each $bp-name, $bp-obj in $breakpoints {
-	@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-		&.u-#{$bp-name}First {
-			order: -1;
-		}
-
-		&.u-#{$bp-name}Last {
-			order: 1;
+.grid {
+	@each $bp-name, $bp-obj in $breakpoints {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			&.u-#{$bp-name}First {
+				order: -1;
+			}
+			
+			&.u-#{$bp-name}Last {
+				order: 1;
+			}
 		}
 	}
 }
