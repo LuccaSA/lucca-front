@@ -13,8 +13,8 @@
 			background: _theme('commons.background.darker');
 		}
 		&:hover, &.is-highlighted, &.is-focus{
-			background: _theme('commons.background.dark', true);
-			background: _theme('commons.background.dark');
+			background: _theme('commons.highlight',true);
+			background: _theme('commons.highlight');
 		}
 
 	}
