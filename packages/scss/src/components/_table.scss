@@ -241,13 +241,31 @@
 				opacity: 1;
 			}
 		}
+
+		&.mod-alignRight {
+			&::before {
+				@include makeIcon("arrow_full_north");
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			&::after {
+				content: none;
+			}
+
+			&:hover {
+				&::before {
+					opacity: 1;
+				}
+			}
+		}
 	}
 
-	&.is-sorted-ascending::after {
+	&.is-sorted-ascending::after, &.is-sorted-ascending.mod-alignRight::before {
 		@include makeIcon("arrow_full_north");
 	}
 
-	&.is-sorted-descending::after {
+	&.is-sorted-descending::after, &.is-sorted-descending.mod-alignRight::before {
 		@include makeIcon("arrow_full_south");
 	}
 }
