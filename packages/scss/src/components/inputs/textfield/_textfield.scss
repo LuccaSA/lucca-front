@@ -184,6 +184,30 @@
 		}
 	}
 
+	&.mod-inline {
+		.chip-kill {
+			top: 1.5rem;
+		}
+	}
+
+	&.mod-compact.mod-search.mod-block.mod-clearable {
+		.chip-kill {
+			top: 0;
+		}
+	}
+
+	&.mod-material.mod-search.mod-block.mod-clearable {
+		.textfield-input {
+			padding-right: 3rem;
+		}
+	}
+
+	&.mod-clearable {
+		.textfield-input {
+			padding-right: 3rem;
+		}
+	}
+
 	/* Search */
 
 	&.mod-search, &.mod-autocomplete {
@@ -199,6 +223,17 @@
 
 		.textfield-input {
 			padding-right: 2rem;
+		}
+
+		&.mod-clearable {
+			.textfield-input {
+				padding-right: 3rem;
+			}
+
+			.chip-kill {
+				top: 1.5rem;
+				right: 1.8rem;
+			}
 		}
 	}
 
