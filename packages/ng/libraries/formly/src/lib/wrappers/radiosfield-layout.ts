@@ -11,7 +11,7 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {
-	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	fieldComponent: ViewContainerRef;
 
 	get mod() {

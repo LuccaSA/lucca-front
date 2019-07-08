@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
-import { ALuOptionOperator } from '../../../option/index';
+import { ALuOptionOperator, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
 import { ALuApiOptionSearcher, ALuApiSearcherService, ALuApiOptionPagedSearcher, ALuApiPagedSearcherService } from './api-searcher.model';
 import { IApiItem } from '../../api.model';
 import { LuApiSearcherService, LuApiPagedSearcherService } from './api-searcher.service';
@@ -18,6 +18,11 @@ import { debounceTime } from 'rxjs/operators';
 			multi: true,
 		},
 		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuApiSearcherComponent),
+			multi: true,
+		},
+		{
 			provide: ALuApiSearcherService,
 			useClass: LuApiSearcherService,
 		},
@@ -26,7 +31,7 @@ import { debounceTime } from 'rxjs/operators';
 export class LuApiSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiSearcherService<T> = ALuApiSearcherService<T>>
 extends ALuApiOptionSearcher<T, S> {
 	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set api(api: string) {
 		this._service.api = api;
 	}
@@ -71,6 +76,16 @@ extends ALuApiOptionSearcher<T, S> {
 			multi: true,
 		},
 		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnScrollBottomSubscriber,
+			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
+			multi: true,
+		},
+		{
 			provide: ALuApiPagedSearcherService,
 			useClass: LuApiPagedSearcherService,
 		},
@@ -79,7 +94,7 @@ extends ALuApiOptionSearcher<T, S> {
 export class LuApiPagedSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiPagedSearcherService<T> = ALuApiPagedSearcherService<T>>
 extends ALuApiOptionPagedSearcher<T, S> {
 	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }

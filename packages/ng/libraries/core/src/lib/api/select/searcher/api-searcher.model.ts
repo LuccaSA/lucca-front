@@ -15,6 +15,7 @@ import {
 import { IApiItem } from '../../api.model';
 import { ALuApiFeederService, ILuApiFeederService, ILuApiOptionFeeder } from '../feeder/index';
 import { ILuApiPagerService } from '../pager/index';
+import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '../../../option/index';
 
 export interface ILuApiOptionSearcher<T extends IApiItem = IApiItem> extends ILuApiOptionFeeder<T> {}
 export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends ILuApiFeederService<T> {
@@ -22,7 +23,7 @@ export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends IL
 }
 
 export abstract class ALuApiOptionSearcher<T extends IApiItem = IApiItem, S extends ILuApiSearcherService<T> = ILuApiSearcherService<T>>
-implements ILuApiOptionFeeder<T> {
+implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 
@@ -98,7 +99,7 @@ implements ILuApiPagedSearcherService<T> {
 }
 export abstract class ALuApiOptionPagedSearcher<T extends IApiItem = IApiItem, S extends ILuApiPagedSearcherService<T> = ILuApiPagedSearcherService<T>>
 extends ALuApiOptionSearcher<T, S>
-implements ILuApiOptionPagedSearcher<T> {
+implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 	protected _loading = false;
@@ -109,7 +110,7 @@ implements ILuApiOptionPagedSearcher<T> {
 	constructor(service: S) {
 		super(service);
 	}
-	onClose() {
+	onOpen() {
 		this.resetClue();
 		this.resetPage();
 	}

@@ -1,6 +1,6 @@
 import { ControlValueAccessor } from '@angular/forms';
 import { ILuPickerPanel } from './picker/input-picker.model';
-import { ILuPopoverTrigger } from '../popover/index';
+import { ILuPopoverTrigger } from '../overlay/index';
 import { ChangeDetectorRef, Renderer2, ElementRef } from '@angular/core';
 
 export interface ILuInput<T = any> extends ControlValueAccessor {}

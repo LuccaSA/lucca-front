@@ -14,7 +14,7 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
-	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	fieldComponent: ViewContainerRef;
 
 	get mod() {

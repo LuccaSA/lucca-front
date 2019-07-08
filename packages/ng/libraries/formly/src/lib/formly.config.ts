@@ -6,6 +6,7 @@ import { LuFormlyFieldTextarea } from './types/textarea';
 import { LuFormlyFieldSelect } from './types/select';
 import { LuFormlyFieldUser } from './types/user';
 import { LuFormlyFieldApi } from './types/api';
+import { LuFormlyFieldDepartment } from './types/department';
 import { LuFormlyFieldRadios } from './types/radios';
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
@@ -31,6 +32,7 @@ export const LU_FORMLY_COMPONENTS = [
 	LuFormlyFieldSelect,
 	LuFormlyFieldUser,
 	LuFormlyFieldApi,
+	LuFormlyFieldDepartment,
 	LuFormlyFieldRadios,
 	LuFormlyFieldCheckboxes,
 
@@ -83,6 +85,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'api',
 			component: LuFormlyFieldApi,
+			wrappers: ['textfield-layout'],
+		},
+		{
+			name: 'department',
+			component: LuFormlyFieldDepartment,
 			wrappers: ['textfield-layout'],
 		},
 	],
