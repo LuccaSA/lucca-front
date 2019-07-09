@@ -129,9 +129,19 @@
 	/* Display */
 
 	&.mod-clearable {
-		.chip-kill {
-			bottom: 0.6rem;
-			top: inherit;
+		.textfield-actionClear {
+			position: absolute;
+			bottom: .5rem;
+			right: .5rem;
+			width: 1rem;
+			height: 1rem;
+			padding: 0;
+			line-height: 0;
+			text-align: center;
+
+			.lucca-icon {
+				font-size: .9rem;
+			}
 		}
 	}
 
@@ -191,18 +201,6 @@
 		}
 	}
 
-	// &.mod-inline {
-	// 	.chip-kill {
-	// 		top: 1.5rem;
-	// 	}
-	// }
-
-	// &.mod-compact.mod-search.mod-block.mod-clearable {
-	// 	.chip-kill {
-	// 		top: 0;
-	// 	}
-	// }
-
 	&.mod-material.mod-search.mod-block.mod-clearable {
 		.textfield-input {
 			padding-right: 3rem;
@@ -237,8 +235,8 @@
 				padding-right: 3rem;
 			}
 
-			.chip-kill {
-				right: 1.8rem;
+			.textfield-actionClear {
+				right: 1.6rem;
 			}
 		}
 	}
