@@ -128,6 +128,13 @@
 
 	/* Display */
 
+	&.mod-clearable {
+		.chip-kill {
+			bottom: 0.6rem;
+			top: inherit;
+		}
+	}
+
 	&.mod-withSuffix {
 		.textfield-input {
 			padding-right: _component("textfield.suffix.padding-right");
@@ -184,17 +191,17 @@
 		}
 	}
 
-	&.mod-inline {
-		.chip-kill {
-			top: 1.5rem;
-		}
-	}
+	// &.mod-inline {
+	// 	.chip-kill {
+	// 		top: 1.5rem;
+	// 	}
+	// }
 
-	&.mod-compact.mod-search.mod-block.mod-clearable {
-		.chip-kill {
-			top: 0;
-		}
-	}
+	// &.mod-compact.mod-search.mod-block.mod-clearable {
+	// 	.chip-kill {
+	// 		top: 0;
+	// 	}
+	// }
 
 	&.mod-material.mod-search.mod-block.mod-clearable {
 		.textfield-input {
@@ -231,7 +238,6 @@
 			}
 
 			.chip-kill {
-				top: 1.5rem;
 				right: 1.8rem;
 			}
 		}
