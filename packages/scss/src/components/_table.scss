@@ -177,6 +177,37 @@
 			opacity: 0;
 		}
 	}
+
+	&.mod-alignRight {
+		text-align: right;
+	}
+}
+
+.table-head-row-cell {
+	&.mod-alignRight {
+		padding-right: 1rem;
+
+		&::after {
+			content: none;
+		}
+
+		&::before {
+			@include makeIcon("arrow_full_north");
+			font-weight: 400;
+			font-size: .95rem;
+			margin: 0 .25rem 0 0;
+			opacity: 0;
+			transform: translateY(.25rem);
+			transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
+		}
+
+		&:hover {
+			&::before {
+				transform: translateY(0);
+				opacity: .5;
+			}
+		}
+	}
 }
 
 .table-head-row, .table-body-row {
@@ -210,13 +241,31 @@
 				opacity: 1;
 			}
 		}
+
+		&.mod-alignRight {
+			&::before {
+				@include makeIcon("arrow_full_north");
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			&::after {
+				content: none;
+			}
+
+			&:hover {
+				&::before {
+					opacity: 1;
+				}
+			}
+		}
 	}
 
-	&.is-sorted-ascending::after {
-			@include makeIcon("arrow_full_north");
+	&.is-sorted-ascending::after, &.is-sorted-ascending.mod-alignRight::before {
+		@include makeIcon("arrow_full_north");
 	}
 
-	&.is-sorted-descending::after {
-			@include makeIcon("arrow_full_south");
+	&.is-sorted-descending::after, &.is-sorted-descending.mod-alignRight::before {
+		@include makeIcon("arrow_full_south");
 	}
 }
