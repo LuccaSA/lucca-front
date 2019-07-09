@@ -129,6 +129,23 @@
 
 	/* Display */
 
+	&.mod-clearable {
+		.textfield-actionClear {
+			position: absolute;
+			bottom: .5rem;
+			right: .5rem;
+			width: 1rem;
+			height: 1rem;
+			padding: 0;
+			line-height: 0;
+			text-align: center;
+
+			.lucca-icon {
+				font-size: .9rem;
+			}
+		}
+	}
+
 	&.mod-withSuffix {
 		.textfield-input {
 			padding-right: _component("textfield.suffix.padding-right");
@@ -185,6 +202,18 @@
 		}
 	}
 
+	&.mod-material.mod-search.mod-block.mod-clearable {
+		.textfield-input {
+			padding-right: 3rem;
+		}
+	}
+
+	&.mod-clearable {
+		.textfield-input {
+			padding-right: 3rem;
+		}
+	}
+
 	/* Search */
 
 	&.mod-search, &.mod-autocomplete {
@@ -200,6 +229,16 @@
 
 		.textfield-input {
 			padding-right: 2rem;
+		}
+
+		&.mod-clearable {
+			.textfield-input {
+				padding-right: 3rem;
+			}
+
+			.textfield-actionClear {
+				right: 1.6rem;
+			}
 		}
 	}
 
