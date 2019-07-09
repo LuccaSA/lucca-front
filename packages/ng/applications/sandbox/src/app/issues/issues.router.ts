@@ -29,6 +29,7 @@ const routes: Routes = [
 	{ path: 'split-select', loadChildren: () => import('./split-select').then(m => m.SplitSelectModule) },
 	{ path: 'user-select-translate', loadChildren: () => import('./user-select-translate').then(m => m.UserSelectTranslateModule) },
 	{ path: 'sidepanel', loadChildren: () => import('./sidepanel').then(m => m.SidepanelModule) },
+	{ path: 'node-sass-end', loadChildren: () => import('./node-sass-end').then(m => m.NodeSassEndModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);

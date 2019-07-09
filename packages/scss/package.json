@@ -5,6 +5,7 @@
   "main": "src/main.scss",
   "scripts": {
     "build": "gulp build",
+    "temp": "gulp temp",
     "start": "gulp start"
   },
   "files": [
@@ -31,13 +32,12 @@
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-clean": "^0.4.0",
+    "gulp-dart-sass": "^0.9.1",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.0",
     "gulp-stylelint": "^9.0.0",
     "stylelint": "^10.1.0"
   },
   "dependencies": {
-    "@lucca-front/icons": "3.0.0-rc.0",
-    "node-sass": "^4.12.0"
+    "@lucca-front/icons": "3.0.0-rc.0"
   }
 }
