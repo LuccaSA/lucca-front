@@ -270,6 +270,7 @@ function generateIconDemo() {
 		'compass',
 		'bow',
 
+		'weight',
 		'iron',
 		'jumping_cc',
 		'credit_debit',
