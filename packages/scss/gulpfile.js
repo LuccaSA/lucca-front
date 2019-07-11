@@ -1,7 +1,7 @@
 'use strict';
 
 let gulp = require('gulp');
-let sass = require('gulp-sass');
+let sass = require('gulp-dart-sass');
 let autoprefixer = require('gulp-autoprefixer');
 let styleLint = require('gulp-stylelint');
 let clean = require('gulp-clean');
@@ -25,7 +25,7 @@ const SASS_OPTIONS_DIST = {
 	]
 };
 const AUTOPREFIXER_OPTIONS = {
-	browsers: ['last 2 versions'],
+	// browsers: ['last 2 versions'],
 	cascade: false
 }
 

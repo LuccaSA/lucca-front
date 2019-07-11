@@ -29,25 +29,27 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);
-		
-		const srcElement = $event.srcElement || $event.target as Element;
-		const scrollLeft = srcElement.scrollLeft;
-		const scrollTop = srcElement.scrollTop;
-		if (scrollLeft === 0) {
-			this.onScrollLeft.emit($event);
-		}
-		if (scrollTop === 0) {
-			this.onScrollTop.emit($event);
-		}
-		const scrollWidth = $event.srcElement.scrollWidth;
-		const scrollHeight = $event.srcElement.scrollHeight;
-		const eltHeight = this._elementRef.nativeElement.clientHeight;
-		const eltWidth = this._elementRef.nativeElement.clientWidth;
-		if (scrollWidth - scrollLeft - eltWidth < 10) {
-			this.onScrollRight.emit($event);
-		}
-		if (scrollHeight - scrollTop - eltHeight < 10) {
-			this.onScrollBottom.emit($event);
+
+		const target = $event.target;
+		if (target instanceof Element) {
+			const scrollLeft = target.scrollLeft;
+			const scrollTop = target.scrollTop;
+			if (scrollLeft === 0) {
+				this.onScrollLeft.emit($event);
+			}
+			if (scrollTop === 0) {
+				this.onScrollTop.emit($event);
+			}
+			const scrollWidth = target.scrollWidth;
+			const scrollHeight = target.scrollHeight;
+			const eltHeight = this._elementRef.nativeElement.clientHeight;
+			const eltWidth = this._elementRef.nativeElement.clientWidth;
+			if (scrollWidth - scrollLeft - eltWidth < 10) {
+				this.onScrollRight.emit($event);
+			}
+			if (scrollHeight - scrollTop - eltHeight < 10) {
+				this.onScrollBottom.emit($event);
+			}
 		}
 	}
 	constructor(protected _elementRef: ElementRef) {

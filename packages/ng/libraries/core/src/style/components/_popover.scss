@@ -15,28 +15,28 @@
 }
 
 .lu-popover-panel {
-	&.lu-popover-above {
+	&.is-above {
 		transform-origin: bottom center;
 	}
-	&.lu-popover-below {
+	&.is-below {
 		transform-origin: top center;
 	}
 
-	&.lu-popover-before {
+	&.is-before {
 		transform-origin: center right;
-		&.lu-popover-above {
+		&.is-above {
 			transform-origin: bottom right;
 		}
-		&.lu-popover-below {
+		&.is-below {
 			transform-origin: top right;
 		}
 	}
-	&.lu-popover-after {
+	&.is-after {
 		transform-origin: center left;
-		&.lu-popover-above {
+		&.is-above {
 			transform-origin: bottom left;
 		}
-		&.lu-popover-below {
+		&.is-below {
 			transform-origin: top left;
 		}
 	}

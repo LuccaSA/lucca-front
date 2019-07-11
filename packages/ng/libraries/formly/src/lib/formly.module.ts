@@ -13,7 +13,8 @@ import {
 	LuUserSelectModule,
 	LuOptionModule,
 	LuSelectClearerModule,
-	LuApiSelectModule
+	LuApiSelectModule,
+	LuDepartmentSelectModule
 } from '@lucca-front/ng';
 
 @NgModule({
@@ -31,6 +32,7 @@ import {
 		LuUserSelectModule,
 		LuInputModule,
 		LuApiSelectModule,
+		LuDepartmentSelectModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],

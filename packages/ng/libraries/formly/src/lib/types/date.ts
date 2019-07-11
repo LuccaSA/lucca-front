@@ -8,7 +8,7 @@ import { MatDatepicker } from '@angular/material';
 	templateUrl: './date.html',
 })
 export class LuFormlyFieldDate extends FieldType {
-	@ViewChild('input') input: ElementRef;
+	@ViewChild('input', { read: ElementRef, static: true }) input: ElementRef;
 
 	openPicker(picker: MatDatepicker<any>) {
 		if (!picker.opened) {

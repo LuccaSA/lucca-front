@@ -1,0 +1,16 @@
+<h2>Mat-datepicker</h2>
+<div class="textfield mod-withSuffix">
+	<input [matDatepicker]="myDatepicker" class="textfield-input" #input (click)="togglePicker(myDatepicker)">
+	<label class="textfield-label" for="">Pick a date</label>
+	<div class="textfield-suffix">
+		<i class="lucca-icon icon-calendar"></i>
+	</div>
+	<mat-datepicker #myDatepicker></mat-datepicker>
+</div>
+
+<h2>Mat-menu</h2>
+<button class="button" [matMenuTriggerFor]="appMenu">Menu</button>
+<mat-menu #appMenu="matMenu">
+	<button mat-menu-item>Settings</button>
+	<button mat-menu-item>Help</button>
+</mat-menu>

@@ -13,7 +13,7 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperLabel extends FieldWrapper {
-	@ViewChild('fieldComponent', { read: ViewContainerRef })
+	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper

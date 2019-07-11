@@ -1,1 +1,5 @@
-<ng-content></ng-content>
+<div class="optionItem">
+	<div class="optionItem-value" (click)="select()" [class.is-selected]="selected" [class.is-highlighted]="highlighted">
+		<ng-content></ng-content>
+	</div>
+</div>

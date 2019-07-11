@@ -1,4 +1,4 @@
-import { ILuOptionOperator } from '../../../option/index';
+import { ILuOptionOperator, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '../../../option/index';
 import { IApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, merge, Subject } from 'rxjs';
@@ -16,7 +16,7 @@ export interface ILuApiPagerService<T extends IApiItem = IApiItem> {
 }
 
 export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem, S extends ILuApiPagerService<T> = ILuApiPagerService<T>>
-implements ILuApiOptionPager<T> {
+implements ILuApiOptionPager<T>, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 
@@ -25,17 +25,21 @@ implements ILuApiOptionPager<T> {
 	protected _options: T[] = [];
 	protected _page$ = new Subject<number>();
 	protected _page: number;
+	protected _initialized = false;
 	constructor(protected _service: S) {
 	}
 	protected init() {
 		this.initObservables();
 	}
 	onOpen() {
-		this._page$.next(0);
+		if (!this._initialized) {
+			this._page$.next(0);
+			this._initialized = true;
+		}
 	}
-	onClose() {
-		this._page$.next(0);
-	}
+	// onClose() {
+	// 	this._page$.next(0);
+	// }
 	onScrollBottom() {
 		if (!this._loading) {
 			this._page$.next(this._page + 1);

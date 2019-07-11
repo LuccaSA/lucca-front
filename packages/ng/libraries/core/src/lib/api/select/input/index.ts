@@ -1,2 +1,2 @@
-export * from './api-select.module';
-export * from './api-select.component';
+export * from './api-select-input.module';
+export * from './api-select-input.component';
