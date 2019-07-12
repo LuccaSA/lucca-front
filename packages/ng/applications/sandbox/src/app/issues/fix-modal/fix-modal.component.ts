@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { LuModal, LuPopup, LuSidepanel } from '@lucca-front/ng';
+import { Component, Inject } from '@angular/core';
+import { LuModal, LuPopup, LuSidepanel, LU_MODAL_DATA } from '@lucca-front/ng';
 import { of } from 'rxjs';
 
 @Component({
@@ -12,21 +12,25 @@ export class FixModalComponent {
 		private _modal: LuModal,
 		private _sidepanel: LuSidepanel,
 	) {}
-	openPopup() {
-		this._popup.open(BasicModalContent);
+	openPopup(data?) {
+		this._popup.open(BasicModalContent, data);
 	}
-	openModal() {
-		this._modal.open(BasicModalContent);
+	openModal(data?) {
+		this._modal.open(BasicModalContent, data);
 	}
-	openSidepanel() {
-		this._sidepanel.open(BasicModalContent);
+	openSidepanel(data?) {
+		this._sidepanel.open(BasicModalContent, data);
 	}
 }
 @Component({
 	selector: 'lu-modal-content',
-	template: 'content'
+	template: 'content {{data}}'
 })
 export class BasicModalContent {
 	title = 'title';
 	submitAction = () => of(true);
+
+	constructor(
+		@Inject(LU_MODAL_DATA) public data,
+	) {}
 }
