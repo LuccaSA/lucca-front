@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { LuModal, LuPopup, LuSidepanel, LU_MODAL_DATA } from '@lucca-front/ng';
+import { Component, Inject, Optional } from '@angular/core';
+import { LuModal, LuPopup, LuSidepanel, LU_MODAL_DATA, LU_POPUP_DATA, LU_SIDEPANEL_DATA } from '@lucca-front/ng';
 import { of } from 'rxjs';
 
 @Component({
@@ -24,13 +24,19 @@ export class FixModalComponent {
 }
 @Component({
 	selector: 'lu-modal-content',
-	template: 'content {{data}}'
+	template: `content of the modal component <br />
+	popup data: {{popupData}}<br />
+	modal data: {{modalData}}<br />
+	sidepanel data: {{sidepanelData}}<br />
+	`
 })
 export class BasicModalContent {
 	title = 'title';
 	submitAction = () => of(true);
 
 	constructor(
-		@Inject(LU_MODAL_DATA) public data,
+		@Optional()@Inject(LU_POPUP_DATA) public popupData,
+		@Optional()@Inject(LU_MODAL_DATA) public modalData,
+		@Optional()@Inject(LU_SIDEPANEL_DATA) public sidepanelData,
 	) {}
 }
