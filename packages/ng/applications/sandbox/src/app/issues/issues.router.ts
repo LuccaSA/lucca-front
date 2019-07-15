@@ -32,6 +32,7 @@ const routes: Routes = [
 	{ path: 'node-sass-end', loadChildren: () => import('./node-sass-end').then(m => m.NodeSassEndModule) },
 	{ path: 'fix-modal', loadChildren: () => import('./fix-modal').then(m => m.FixModalModule) },
 	{ path: 'modals-no-submit', loadChildren: () => import('./modals-no-submit').then(m => m.ModalsNoSubmitModule) },
+	{ path: 'select-overlap', loadChildren: () => import('./select-overlap').then(m => m.SelectOverlapModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
