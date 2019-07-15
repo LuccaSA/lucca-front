@@ -30,6 +30,7 @@ const routes: Routes = [
 	{ path: 'user-select-translate', loadChildren: () => import('./user-select-translate').then(m => m.UserSelectTranslateModule) },
 	{ path: 'sidepanel', loadChildren: () => import('./sidepanel').then(m => m.SidepanelModule) },
 	{ path: 'node-sass-end', loadChildren: () => import('./node-sass-end').then(m => m.NodeSassEndModule) },
+	{ path: 'fix-modal', loadChildren: () => import('./fix-modal').then(m => m.FixModalModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
