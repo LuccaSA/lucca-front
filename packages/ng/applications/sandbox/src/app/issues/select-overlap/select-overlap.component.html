@@ -9,3 +9,15 @@
 		</lu-option-picker>
 	</lu-select>
 </div>
+<div class="textfield">
+	<lu-api-select class="textfield-input" [(ngModel)]="model" api="/api/v3/departments" pickerOverlap="true"></lu-api-select>
+	<label for="" class="textfield-label">api select</label>
+</div>
+<div class="textfield">
+	<lu-user-select class="textfield-input" [(ngModel)]="user" pickerOverlap="true"></lu-user-select>
+	<label for="" class="textfield-label">user select</label>
+</div>
+<div class="textfield">
+	<lu-department-select class="textfield-input" [(ngModel)]="item" pickerOverlap="true"></lu-department-select>
+	<label for="" class="textfield-label">department select</label>
+</div>
