@@ -106,7 +106,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 		super.onBlur();
 	}
 	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.enter', ['$event'])
+	// @HostListener('keydown.enter', ['$event'])
 	onKeydown($event: KeyboardEvent) {
 		this.openPopover();
 		$event.stopPropagation();
