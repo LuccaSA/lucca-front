@@ -128,7 +128,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 
 }
 
-
 /**
 * select input
 */
