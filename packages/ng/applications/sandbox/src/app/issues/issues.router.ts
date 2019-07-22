@@ -31,6 +31,7 @@ const routes: Routes = [
 	{ path: 'sidepanel', loadChildren: () => import('./sidepanel').then(m => m.SidepanelModule) },
 	{ path: 'node-sass-end', loadChildren: () => import('./node-sass-end').then(m => m.NodeSassEndModule) },
 	{ path: 'fix-modal', loadChildren: () => import('./fix-modal').then(m => m.FixModalModule) },
+	{ path: 'fix-705-select-enter', loadChildren: () => import('./fix-705-select-enter').then(m => m.Fix705SelectEnterModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
