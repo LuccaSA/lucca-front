@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
 })
 export class SelectOverlapComponent {
 	model = 1;
+	item;
+	user;
 }
