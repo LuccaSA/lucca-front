@@ -38,6 +38,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 
 	@HostBinding('tabindex') tabindex = 0;
 
+	@Input('pickerOverlap') set overlapInput(o: boolean) {
+		this.target.overlap = o;
+	}
+
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
