@@ -22,6 +22,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	get submitDisabled() {
 		return this._componentInstance.submitDisabled;
 	}
+	get submitHidden() {
+		return !this._componentInstance.submitAction;
+	}
 	submitClass$ = new Subject();
 	error$ = new Subject();
 	constructor(
