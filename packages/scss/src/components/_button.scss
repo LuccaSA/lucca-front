@@ -114,6 +114,15 @@
 				color: _component("button.flat.color");
 			}
 		}
+
+		&.mod-invert {
+			color: white;
+
+			&:hover, &:focus {
+				opacity: .8;
+				color: white;
+			}
+		}
 	}
 
 	&.mod-wired {
