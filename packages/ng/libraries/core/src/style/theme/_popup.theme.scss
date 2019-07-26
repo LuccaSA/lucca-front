@@ -1,5 +1,8 @@
 $popup: (
-	padding: 2rem,
+	padding: (
+		horizontal: 2rem,
+		vertical: 1rem,
+	),
 	backdrop: (
 		opacity: .4,
 	),
@@ -7,8 +10,8 @@ $popup: (
 		background-color: #fff,
 	),
 	sizes: (
-		small: 25rem,
-		medium: 37rem,
+		small: 32rem,
+		medium: 42rem,
 		large: 60rem,
 	)
 );
