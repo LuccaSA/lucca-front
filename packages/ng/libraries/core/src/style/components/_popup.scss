@@ -12,7 +12,8 @@
 	position: relative;
 	background-color: _component("popup.panel.background-color");
 	border-radius: _theme("commons.border.radius");
-	max-width: _component("popup.sizes.medium");
+	width: _component("popup.sizes.medium");
+	max-width: 95%;
 	max-height: 90vh;
 	overflow: auto;
 	animation: popupAnimation _theme("commons.animations.durations.fast") cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -64,10 +65,14 @@
 	}
 }
 
-.lu-modal-content:not(.mod-noPadding) {
+.lu-modal-content {
 	padding: 0 _component("popup.padding.horizontal") _component("popup.padding.vertical");
 	overflow: auto;
 	height: auto;
+
+	&.mod-noPadding {
+		padding: 0;
+	}
 }
 
 .lu-modal-footer {

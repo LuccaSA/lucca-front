@@ -20,10 +20,9 @@ $sidePanel: (
 	sizes: (
 		small: 39rem,
 		medium: 45rem,
-		large: 60rem,
+		large: 70rem,
 	),
-	footer-height: 50px,
-	content-padding-bottom: 66px
+	footer-height: 4rem
 );
 $theme: _set($theme, 'components.popup', $popup);
 $theme: _set($theme, 'components.sidepanel', $sidePanel);
