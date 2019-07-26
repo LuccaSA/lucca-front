@@ -38,6 +38,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 
 	@HostBinding('tabindex') tabindex = 0;
 
+	@Input('pickerOverlap') set overlapInput(o: boolean) {
+		this.target.overlap = o;
+	}
+
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
@@ -108,9 +112,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	@HostListener('keydown.space', ['$event'])
 	@HostListener('keydown.enter', ['$event'])
 	onKeydown($event: KeyboardEvent) {
-		this.openPopover();
-		$event.stopPropagation();
-		$event.preventDefault();
+		if (!this._popoverOpen) {
+			this.openPopover();
+			$event.stopPropagation();
+			$event.preventDefault();
+		}
 	}
 
 
@@ -125,7 +131,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	}
 
 }
-
 
 /**
 * select input

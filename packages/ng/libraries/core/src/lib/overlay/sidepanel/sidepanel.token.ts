@@ -4,3 +4,4 @@ import { InjectionToken } from '@angular/core';
 export const LU_SIDEPANEL_DATA = new InjectionToken<any>('LuSidepanelData');
 export const LU_SIDEPANEL_CONFIG = new InjectionToken<any>('LuSidepanelDefaultConfig');
 export const LU_SIDEPANEL_TRANSLATIONS = new InjectionToken('LuSidepanelTranslations');
+export const LU_SIDEPANEL_REF_FACTORY = new InjectionToken<any>('LuSidepanelRefFactory');
