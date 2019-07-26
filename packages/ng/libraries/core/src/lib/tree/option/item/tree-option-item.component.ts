@@ -24,6 +24,7 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 	protected _displayer: ILuInputDisplayer<T>;
 	@ViewChild('value', { static: true, read: ViewContainerRef }) protected _valueVCR: ViewContainerRef;
 	@ViewChild('children', { static: true, read: ViewContainerRef }) protected _childrenVCR: ViewContainerRef;
+	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
 
 	@Output() onSelect = new EventEmitter<this>();
 	@Output() onSelectSelf = new EventEmitter<this>();
@@ -71,7 +72,6 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 
 	constructor(
 		private _componentFactoryResolver: ComponentFactoryResolver,
-		public element: ElementRef,
 		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
 		private _cdr: ChangeDetectorRef,
 	) {
