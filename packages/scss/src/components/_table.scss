@@ -77,6 +77,10 @@
 			&:hover {
 				background: _component("table.hover.background");
 			}
+
+			&.mod-filters {
+				background: none;
+			}
 		}
 	}
 
