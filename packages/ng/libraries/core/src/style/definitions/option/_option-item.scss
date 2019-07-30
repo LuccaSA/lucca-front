@@ -17,7 +17,7 @@
 			background: _theme('commons.background.darker', true);
 			background: _theme('commons.background.darker');
 		}
-    
+
 		&:hover, &.is-highlighted, &.is-focus{
 			background: _theme('commons.highlight',true);
 			background: _theme('commons.highlight');
@@ -81,10 +81,10 @@
 
 			&.is-selected {
 				&::before {
-					background-color: _color("primary", "color", true);
-					background-color: _color("primary");
-					box-shadow: inset 0 0 0 2px _color("primary", "color", true);
-					box-shadow: inset 0 0 0 2px _color("primary");
+					background-color: _component("options.checkbox.color", true);
+					background-color: _component("options.checkbox.color");
+					box-shadow: inset 0 0 0 2px _component("options.checkbox.color", true);
+					box-shadow: inset 0 0 0 2px _component("options.checkbox.color");
 				}
 
 				&::after {
@@ -94,8 +94,8 @@
 
 			&:hover {
 				&::before {
-					box-shadow: inset 0 0 0 2px _color("primary", "color", true);
-					box-shadow: inset 0 0 0 2px _color("primary");
+					box-shadow: inset 0 0 0 2px _component("options.checkbox.color", true);
+					box-shadow: inset 0 0 0 2px _component("options.checkbox.color");
 				}
 			}
 		}

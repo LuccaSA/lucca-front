@@ -7,7 +7,8 @@ $options: (
 	checkbox: (
 		left: .5rem,
 		size: .95rem,
-		border-radius: 3px
+		border-radius: 3px,
+		color: _color("primary")
 	)
 );
 $theme: _set($theme, 'components.options', $options);
