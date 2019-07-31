@@ -33,7 +33,7 @@
 	<div class="textfield">
 		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
 			<ng-container *luDisplayer="let values; multiple: true">
-				<span class="label">{{values?.length || 0}}</span> colors selected
+				<span class="chip mod-unkillable">{{values?.length || 0}}</span> colors selected
 			</ng-container>
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
@@ -48,7 +48,7 @@
 	<div class="textfield mod-framed">
 		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
 			<ng-container *luDisplayer="let values; multiple: true">
-				<span class="label">{{values?.length || 0}}</span> colors selected
+				<span class="chip mod-unkillable">{{values?.length || 0}}</span> colors selected
 			</ng-container>
 			<lu-option-picker>
 				<lu-option [value]="green">{{green.name}}</lu-option>
@@ -61,4 +61,3 @@
 		<label class="textfield-label" for="itemOptions">my label</label>
 	</div>
 </section>
-

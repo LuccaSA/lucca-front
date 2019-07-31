@@ -1,9 +1,8 @@
 $select: (
 	height: 2.25rem,
-	tag: (
-		background: _color("primary", "lighter"),
-		color: _color("primary", "text"),
-		margin: -.2rem
+	chip: (
+		background: _theme("commons.background.dark"),
+		text: _color("text.default")
 	)
 );
 $theme: _set($theme, 'components.select', $select);

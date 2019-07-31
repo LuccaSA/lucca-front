@@ -8,7 +8,7 @@
 	<lu-select-clearer></lu-select-clearer>
 </div>
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="label">{{values.length}}</span> {{intl.users}}</span>
+	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.users}}</span>
 	<ng-template #singleView>{{(values[0] || values) | luUserDisplay}}</ng-template>
 </ng-template>
 <lu-option-picker-advanced>

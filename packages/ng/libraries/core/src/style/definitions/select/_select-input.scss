@@ -22,10 +22,12 @@
 			pointer-events: none;
 		}
 	}
+
 	.lu-select-placeholder {
 		color: _component("textfield.input.placeholder", true);
 		color: _component("textfield.input.placeholder");
 	}
+
 	.lu-select-value, .lu-select-placeholder {
 		line-height: 1.1;
 		height: _component('select.height', true);
@@ -57,6 +59,16 @@
 		right: calc(2.75 * #{_component('textfield.input.padding-horizontal', true)});
 		right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
 	}
+
+	::ng-deep .chip {
+		background: _component("select.chip.background", true);
+		background: _component("select.chip.background");
+		color: _component("select.chip.text", true);
+		color: _component("select.chip.text");
+		vertical-align: baseline;
+		margin: .1rem;
+	}
+
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	:host(.mod-multiple) {
@@ -65,36 +77,18 @@
 				height: auto;
 				min-height: _component('select.height', true);
 				min-height: _component('select.height');
-				padding-bottom: 0;
 				align-items: center;
-				padding-top: .3rem;
+				padding-bottom: 0;
+				padding-top: 0;
 			}
+
 			.lu-select-display-wrapper {
 				overflow: visible;
 				white-space: normal;
 			}
 		}
-
-		::ng-deep {
-			.lu-select-value .label {
-				margin-top: _component('select.tag.margin', true);
-				margin-top: _component('select.tag.margin');
-				margin-bottom: _component('select.tag.margin', true);
-				margin-bottom: _component('select.tag.margin');
-				margin-left: 0;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				vertical-align: top;
-			}
-
-			.lu-select-value .lu-select-display-wrapper > .chip, .lu-select-value .lu-select-display-wrapper > .label {
-				background: _component("select.tag.background", true);
-				background: _component("select.tag.background");
-				color: _component("select.tag.color", true);
-				color: _component("select.tag.color");
-			}
-		}
 	}
+
 	:host(.mod-search) {
 		&::after {
 			@include makeIcon("search");
@@ -109,11 +103,13 @@
 			right: calc(3.5 * #{_component('textfield.input.padding-horizontal')});
 		}
 	}
+
 	:host(.mod-overflow) {
 		.lu-select-display-wrapper, .lu-select-placeholder {
 			overflow: visible;
 		}
 	}
+
 	// Framed
 	:host-context(.textfield.mod-framed) {
 		&.textfield-input {
@@ -136,7 +132,6 @@
 					_component('field.framed.bottom-padding')
 					_component('field.framed.side-padding');
 			}
-
 
 			.lu-select-suffix {
 				bottom: 0.85rem;
