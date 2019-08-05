@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Optional, SkipSelf, Inject, Self } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
+import { ILuOptionOperator, ALuOptionOperator, ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../../../option/index';
 import { BehaviorSubject } from 'rxjs';
 import { LuApiFeederService } from './api-feeder.service';
 import { IApiItem } from '../../api.model';
 import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
-
 @Component({
 	selector: 'lu-api-feeder',
 	template: '',
@@ -17,6 +16,11 @@ import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
 			multi: true,
 		},
 		{
+			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuApiFeederComponent),
+			multi: true,
+		},
+		{
 			provide: ALuApiFeederService,
 			useClass: LuApiFeederService,
 		},
@@ -24,7 +28,7 @@ import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
 })
 export class LuApiFeederComponent<T extends IApiItem = IApiItem, S extends ALuApiFeederService<T> = ALuApiFeederService<T>>
 extends ALuApiOptionFeeder<T, S>
-implements ILuOptionOperator<T> {
+implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	constructor(
 		@Inject(ALuApiFeederService) @Optional() @SkipSelf() hostService: ALuApiFeederService,
