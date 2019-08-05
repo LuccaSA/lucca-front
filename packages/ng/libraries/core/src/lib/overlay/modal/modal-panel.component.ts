@@ -80,6 +80,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	selector: 'lu-modal-panel',
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
+	host: {'class': 'lu-modal-panel'},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
