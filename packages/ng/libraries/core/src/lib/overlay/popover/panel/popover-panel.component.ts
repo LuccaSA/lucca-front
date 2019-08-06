@@ -27,8 +27,9 @@ import { luTransformPopover } from '../animation/index';
 	exportAs: 'LuPopoverPanel',
 })
 export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
-
 	protected _template: TemplateRef<any>;
+	protected _templateContext: any;
+
 	/** Template to Use for the popover */
 	get template(): TemplateRef<any> {
 		return this._template;
@@ -36,6 +37,15 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	@Input()
 	set template(value: TemplateRef<any>) {
 		this._template = value;
+	}
+
+	/** Template context to use for the popover when created using a template */
+	get templateContext(): any {
+		return this._templateContext;
+	}
+	@Input()
+	set templateContext(value: any) {
+		this._templateContext = value;
 	}
 
 	/**

@@ -3,7 +3,7 @@
 	 (keydown)="_handleKeydown($event)" (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)"
 	 [@transformPopover]="'enter'">
 		<div class="lu-popover-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
-			<ng-content></ng-content><ng-container *ngTemplateOutlet="template"></ng-container>
+			<ng-content></ng-content><ng-container *ngTemplateOutlet="template; context: templateContext"></ng-container>
 		</div>
 	</div>
 </ng-template>
