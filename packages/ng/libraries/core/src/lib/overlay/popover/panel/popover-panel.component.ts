@@ -43,7 +43,7 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	get templateContext(): any {
 		return this._templateContext;
 	}
-	@Input()
+	@Input('template-context')
 	set templateContext(value: any) {
 		this._templateContext = value;
 	}
