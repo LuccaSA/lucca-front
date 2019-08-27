@@ -16,6 +16,6 @@
 	<lu-user-homonyms></lu-user-homonyms>
 	<lu-option *luForOptions="let user" [value]="user">
 		<div>{{ user | luUserDisplay: searchFormat }}</div>
-		<div *ngIf="user.additionalInfo"><i>{{user.additionalInfo}}</i></div>
+		<div *ngIf="user.additionalInformation"><i>{{user.additionalInformation}}</i></div>
 	</lu-option>
 </lu-option-picker-advanced>
