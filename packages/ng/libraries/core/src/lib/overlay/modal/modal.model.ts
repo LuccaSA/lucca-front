@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 export interface ILuModalContent<T = any> extends ILuPopupContent {
 	title: string;
-	submitAction?: () => Observable<T>;
+	submitAction?: () => T | Observable<T>;
 	submitLabel?: string;
 	submitDisabled?: boolean;
 	cancelLabel?: string;
