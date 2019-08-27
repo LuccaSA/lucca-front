@@ -9,6 +9,7 @@ import { LuSidepanelIntl } from './sidepanel.intl';
 import { LuSidepanelPanelComponent } from './sidepanel-panel.component';
 import { luDefaultSidepanelConfig } from './sidepanel-config.default';
 import { LuSidepanelRefFactory } from './sidepanel-ref.factory';
+import { A11yModule } from '@angular/cdk/a11y';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { LuSidepanelRefFactory } from './sidepanel-ref.factory';
 		OverlayModule,
 		PortalModule,
 		CommonModule,
+		A11yModule,
 	],
 	declarations: [LuSidepanelPanelComponent],
 	entryComponents: [LuSidepanelPanelComponent],
