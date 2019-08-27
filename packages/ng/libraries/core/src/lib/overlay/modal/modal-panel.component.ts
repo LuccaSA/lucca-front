@@ -26,6 +26,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 		return !this._componentInstance.submitAction;
 	}
 	submitClass$ = new Subject();
+	dismissClass$ = new Subject();
 	error$ = new Subject();
 	constructor(
 		protected _ref: ALuModalRef<LuModalPanelComponent>,
@@ -51,13 +52,26 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 		this.dispose();
 	}
 	dismiss() {
-		this._ref.close();
+		if (!this._componentInstance.cancelAction) {
+			return this._ref.close();
+		}
+		const result$ = this._componentInstance.cancelAction();
+		if (result$ instanceof Observable) {
+			this.dismissClass$.next('is-loading');
+			result$.subscribe(
+				result => this._ref.close(result),
+				err => this._ref.close(err),
+			);
+		} else {
+			const result = result$;
+			this._ref.close(result);
+		}
 	}
 	submit() {
 		this.error$.next(undefined);
-		this.submitClass$.next('is-loading');
 		const result$ = this._componentInstance.submitAction();
 		if (result$ instanceof Observable) {
+			this.submitClass$.next('is-loading');
 			result$.pipe(
 				tap(_ => this.submitClass$.next('is-success')),
 				tap(() => this._cdr.markForCheck()),
