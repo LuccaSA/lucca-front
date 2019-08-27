@@ -7,6 +7,8 @@ import { LuUserModule } from '@lucca-front/ng';
 // needed to reroute api calls to prisme-proxy
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { RedirectModule } from '../../redirect';
 		UserSelectHomonymsComponent,
 	],
 	imports: [
+		FormsModule,
+		CommonModule,
 		LuUserModule,
 		HttpClientModule,
 		RedirectModule,

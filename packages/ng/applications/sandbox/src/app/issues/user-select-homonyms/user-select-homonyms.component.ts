@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
 	templateUrl: './user-select-homonyms.component.html'
 })
 export class UserSelectHomonymsComponent {
+	item;
 }
