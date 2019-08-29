@@ -18,9 +18,7 @@ export abstract class ALuUserHomonymsService<U extends IUser = IUser> implements
 	abstract enrichHomonyms(homonyms: U[]): Observable<U[]>;
 }
 export class LuUserHomonymsService<U extends IUser = IUser> extends ALuUserHomonymsService<U> implements ILuUserHomonymsService<U> {
-	//  temp - match homonyms on initials to get more homonyms match in dev mode
-	// private _format = LuDisplayFullname.lastfirst;
-	private _format = LuDisplayInitials.lastfirst;
+	private _format = LuDisplayFullname.lastfirst;
 	extractHomonyms(users: U[]): U[] {
 		const namesCount = {} as { [key: string]: number};
 		users.forEach(user => {
