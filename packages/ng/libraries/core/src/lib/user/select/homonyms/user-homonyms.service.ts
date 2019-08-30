@@ -1,12 +1,10 @@
 import { IUser } from '../../user.model';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LuUserDisplayPipe, LuDisplayFullname, LuDisplayInitials } from '../../display/index';
-import { delay, map, catchError } from 'rxjs/operators';
+import { LuUserDisplayPipe, LuDisplayFullname } from '../../display/index';
+import { map, catchError } from 'rxjs/operators';
+import { IApiCollectionResponse } from '../../../api/index';
 
-interface IHomonyms<U extends IUser = IUser> {
-	[key: string]: U[];
-}
 
 export interface ILuUserHomonymsService<U extends IUser = IUser> {
 	extractHomonyms(users: U[]): U[];
@@ -30,18 +28,16 @@ export class LuUserHomonymsService<U extends IUser = IUser> extends ALuUserHomon
 		const nonUniqNames = Object.keys(namesCount)
 		.filter(key => namesCount[key] > 1);
 
-		const homonymsByname = {} as IHomonyms<U>;
-		nonUniqNames.forEach(name => {
-			homonymsByname[name] = users.filter(u => name === this._pipe.transform(u, this._format));
-		});
 		const homonyms = [] as U[];
-		Object.keys(homonymsByname).forEach(name => homonyms.push(...homonymsByname[name]));
+		nonUniqNames.forEach(name => {
+			homonyms.push(...users.filter(u => name === this._pipe.transform(u, this._format)));
+		});
 		return homonyms;
 	}
 
 	enrichHomonyms(homonyms: U[]): Observable<U[]> {
 		if (!homonyms || homonyms.length === 0) { return of([]); }
-		return this._http.get<any>(`/api/v3/users`, { params: {
+		return this._http.get<IApiCollectionResponse<{ id: number, department: { name: string }}>>(`/api/v3/users`, { params: {
 			'id': homonyms.map(u => u.id).join(','),
 			'fields': 'id,department.name',
 		}}).pipe(
