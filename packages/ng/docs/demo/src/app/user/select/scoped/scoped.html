@@ -9,7 +9,7 @@
 	</div>
 	<div class="textfield">
 		<lu-select [(ngModel)]="operations" class="textfield-input" multiple>
-			<ng-container *luDisplayer="let values; multiple: true"><span class="label">{{values.length}}</span> operations selected</ng-container>
+			<ng-container *luDisplayer="let values; multiple: true"><span class="chip mod-unkillable">{{values.length}}</span> operations selected</ng-container>
 			<lu-option-picker>
 				<lu-option *ngFor="let op of ops" [value]="op">{{op}}</lu-option>
 			</lu-option-picker>
