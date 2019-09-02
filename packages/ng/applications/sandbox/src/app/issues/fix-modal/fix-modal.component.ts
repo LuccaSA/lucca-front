@@ -24,10 +24,10 @@ export class FixModalComponent {
 }
 @Component({
 	selector: 'lu-modal-content',
-	template: `content of the modal component <br />
-	popup data: {{popupData}}<br />
-	modal data: {{modalData}}<br />
-	sidepanel data: {{sidepanelData}}<br />
+	template: `content of the modal component <br>
+	popup data: {{popupData}}<br>
+	modal data: {{modalData}}<br>
+	sidepanel data: {{sidepanelData}}<br>
 	`
 })
 export class BasicModalContent {
