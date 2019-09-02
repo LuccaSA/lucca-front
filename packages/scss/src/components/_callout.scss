@@ -5,7 +5,7 @@
 	padding: _component("callout.padding");
 	position: relative;
 
-	a:not([class]) {
+	a, .link {
 		color: inherit;
 
 		&:hover {
