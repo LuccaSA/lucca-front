@@ -77,6 +77,10 @@
 			&:hover {
 				background: _component("table.hover.background");
 			}
+
+			&.mod-filters {
+				background: none;
+			}
 		}
 	}
 
@@ -115,6 +119,11 @@
 
 	&.mod-filters {
 		vertical-align: bottom;
+
+		.table-body-row-cell {
+			border-top: 0;
+			padding-top: 0;
+		}
 	}
 
 	&.mod-draggable {

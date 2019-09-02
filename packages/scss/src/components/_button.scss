@@ -104,14 +104,21 @@
 	&.mod-link {
 		background: transparent;
 		box-shadow: none;
-		font-weight: 400;
-		text-decoration: underline;
 
 		&:hover, &:focus {
 			&:not([disabled]) {
 				background: transparent;
 				box-shadow: none;
 				color: _component("button.flat.color");
+			}
+		}
+
+		&.mod-invert {
+			color: white;
+
+			&:hover, &:focus {
+				opacity: .8;
+				color: white;
 			}
 		}
 	}

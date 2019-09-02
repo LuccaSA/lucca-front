@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
 @Component({
@@ -36,7 +36,8 @@ export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements 
 	select() {
 		this.onSelect.emit(this);
 	}
-	constructor(public element: ElementRef, private _cdr: ChangeDetectorRef) {
+	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
+	constructor(private _cdr: ChangeDetectorRef) {
 		super();
 	}
 }

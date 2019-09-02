@@ -27,3 +27,12 @@
 .u-nowrap {
 	white-space: nowrap;
 }
+
+// Icons 
+
+.u-help {
+	color: _color("text.light");
+	cursor: help;
+	margin-left: 0.15rem;
+	font-size: 1.3rem;
+}
