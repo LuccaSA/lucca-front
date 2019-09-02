@@ -60,7 +60,7 @@
 		right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
 	}
 
-	::ng-deep .chip {
+	::ng-deep .lu-select-value .chip {
 		background: _component("select.chip.background", true);
 		background: _component("select.chip.background");
 		color: _component("select.chip.text", true);
