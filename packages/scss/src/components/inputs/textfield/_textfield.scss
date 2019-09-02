@@ -285,7 +285,7 @@
 	}
 }
 
-.textfield-input {
+.textfield .textfield-input {
 	@include field-input("textfield");
 
 	&[disabled], &[readonly], &.is-disabled, &.is-readonly {

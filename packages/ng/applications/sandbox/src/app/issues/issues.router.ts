@@ -40,6 +40,7 @@ const routes: Routes = [
 	{ path: 'modals-no-submit', loadChildren: () => import('./modals-no-submit').then(m => m.ModalsNoSubmitModule) },
 	{ path: 'select-overlap', loadChildren: () => import('./select-overlap').then(m => m.SelectOverlapModule) },
 	{ path: 'modal-synched', loadChildren: () => import('./modal-synched').then(m => m.ModalSynchedModule) },
+	{ path: 'user-select-homonyms', loadChildren: () => import('./user-select-homonyms').then(m => m.UserSelectHomonymsModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
