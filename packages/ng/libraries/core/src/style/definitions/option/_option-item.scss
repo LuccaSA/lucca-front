@@ -14,8 +14,8 @@
 		transition: background 50ms ease;
 
 		&.is-selected {
-			background: _theme('commons.background.darker', true);
-			background: _theme('commons.background.darker');
+			background: _theme('commons.selected',true);
+			background: _theme('commons.selected');
 		}
 
 		&:hover, &.is-highlighted, &.is-focus{
