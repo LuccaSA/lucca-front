@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LuUserDisplayPipe, LuDisplayFullname } from '../../display/index';
 import { map, catchError } from 'rxjs/operators';
 import { IApiCollectionResponse } from '../../../api/index';
+import { Injectable } from '@angular/core';
 
 
 export interface ILuUserHomonymsService<U extends IUser = IUser> {
@@ -15,6 +16,7 @@ export abstract class ALuUserHomonymsService<U extends IUser = IUser> implements
 	abstract extractHomonyms(users: U[]): U[];
 	abstract enrichHomonyms(homonyms: U[]): Observable<U[]>;
 }
+@Injectable()
 export class LuUserHomonymsService<U extends IUser = IUser> extends ALuUserHomonymsService<U> implements ILuUserHomonymsService<U> {
 	private _format = LuDisplayFullname.lastfirst;
 	extractHomonyms(users: U[]): U[] {
