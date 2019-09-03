@@ -30,7 +30,6 @@
     "travis": "npm run build:aot",
     "build:aot": "ng build sandbox --prod",
     "build:core": "ng build core",
-    "lolpostbuild:core": "gulp copy:core-style",
     "postbuild:core": "cpx \"libraries/core/src/style/**\" dist/style",
     "build:material": "ng build material",
     "postbuild:material": "cpx \"libraries/material/src/style/**\" dist/material/style",
@@ -88,6 +87,6 @@
     "tsickle": "^0.35.0",
     "tslib": "^1.10.0",
     "tslint": "~5.17.0",
-    "typescript": ">=3.4.0 and <3.6.0"
+    "typescript": ">=3.4 & <3.6"
   }
 }
