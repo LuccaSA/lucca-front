@@ -102,11 +102,11 @@
 .grid {
 	@each $bp-name, $bp-obj in $breakpoints {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			&.u-#{$bp-name}First {
+			.u-#{$bp-name}First {
 				order: -1;
 			}
 			
-			&.u-#{$bp-name}Last {
+			.u-#{$bp-name}Last {
 				order: 1;
 			}
 		}

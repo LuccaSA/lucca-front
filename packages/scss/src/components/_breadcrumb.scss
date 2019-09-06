@@ -1,9 +1,11 @@
 .breadcrumb {
+	margin-bottom: _theme("spacings.smaller");
 
 	&::before {
 		@include makeIcon("arrow_west");
 		font-size: .75rem;
 		color: _color("text.light");
+		margin-right: _theme('spacings.smaller');
 	}
 }
 
@@ -21,7 +23,7 @@
 			content: "/";
 			color: _color("text.placeholder");
 			display: inline-block;
-			margin: 0 .25rem;
+			padding: 0 .5rem;
 		}
 	}
 }

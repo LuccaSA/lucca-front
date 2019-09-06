@@ -77,6 +77,10 @@
 			&:hover {
 				background: _component("table.hover.background");
 			}
+
+			&.mod-filters {
+				background: none;
+			}
 		}
 	}
 
@@ -106,6 +110,24 @@
 			}
 		}
 	}
+
+	&.mod-borderless { 
+		border-bottom: none;
+
+		.table-body-row-cell,
+		.table-head-row-cell {
+			border-top: none;
+			padding: 0 1rem;
+
+			&:first-child {
+				padding-left: 0;
+			}
+
+			&:last-child {
+				padding-right: 0;
+			}
+		}
+	}
 }
 
 .table-body-row {
@@ -115,6 +137,11 @@
 
 	&.mod-filters {
 		vertical-align: bottom;
+
+		.table-body-row-cell {
+			border-top: 0;
+			padding-top: 0;
+		}
 	}
 
 	&.mod-draggable {

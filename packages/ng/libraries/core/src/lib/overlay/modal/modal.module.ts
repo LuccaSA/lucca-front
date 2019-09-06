@@ -9,6 +9,7 @@ import { LuModalRefFactory } from './modal-ref.factory';
 import { LuModalIntl } from './modal.intl';
 import { luModalTranslations } from './modal.translate';
 import { CommonModule } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
 		OverlayModule,
 		PortalModule,
 		CommonModule,
+		A11yModule,
 	],
 	declarations: [LuModalPanelComponent],
 	entryComponents: [LuModalPanelComponent],
