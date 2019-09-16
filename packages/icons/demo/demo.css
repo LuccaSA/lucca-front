@@ -6,23 +6,18 @@ body {
 	vertical-align: middle;
 }
 
-#icons {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.icon {
-	width: 120px;
+#icons-section{
 	text-align: center;
-	background: #FAFAFA;
-	margin: .3em;
-	padding: .5em .1em;
+}
+.demo-icon {
+	width: 125px;
+	float: left;
+	margin-bottom: 2rem;
 }
 
-.lucca-icon.demo-icon{
+.demo-icon .lucca-icon {
+	font-size: 2rem;
 	display: block;
-	margin-bottom: .2em;
-	font-size: 2em;
 }
 
 .code {

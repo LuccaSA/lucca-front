@@ -30,7 +30,7 @@ gulp.task('sass:dist', () => {
 });
 
 gulp.task('copy:font', () => {
-	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf'])
+	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf', './icons-list.js'])
 	.pipe(gulp.dest(OUT_DIR));
 });
 
