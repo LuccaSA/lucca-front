@@ -26,19 +26,19 @@
 				</li>
 			</ul>
 		</div>
-		<section id="icons">
-			<div class="icon" w3-repeat="icons">
-				<i class="lucca-icon demo-icon">{{iconName}}</i>
-				<code class="code">{{iconName}}</code>
+		<section id="icons-section">
+			<div class="demo-icon" w3-repeat="icon-name in icons">
+				<i class="lucca-icon">{{icon-name}}</i>
+				<code class="code">{{icon-name}}</code>
 			</div>
+			<div class="u-clear"></div>
 		</section>
 	</main>
 
 	<script src="https://www.w3schools.com/lib/w3.js"></script>
+	<script src="/dist/icons-list.js"></script>
 	<script src="mapping.js"></script>
-	<script>
-		w3.displayObject("icons", mappings);
-	</script>
+	<script>w3.includeHTML(afterIncludeHTML);</script>
 </body>
 
 </html>
