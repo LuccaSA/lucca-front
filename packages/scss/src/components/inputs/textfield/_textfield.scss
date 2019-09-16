@@ -264,6 +264,7 @@
 
 .form.mod-material .textfield, .textfield.mod-material {
 	@extend %input_material;
+	vertical-align: baseline;
 }
 
 
