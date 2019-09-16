@@ -169,7 +169,8 @@
 	&.mod-white {
 		.textfield-input {
 			background: white;
-
+			box-shadow: 0 0 0 1px _theme("commons.divider.color");
+			
 			&::placeholder {
 				color: _component("textfield.focus.placeholder");
 			}
