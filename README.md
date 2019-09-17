@@ -16,7 +16,7 @@ Uses sub-packages architecture with unified versioning, a la [angular](https://g
 ### Add Lucca Front to your npm package
 
 ```
-npm install @lucca-front/icon --save
+npm install @lucca-front/icons --save
 npm install @lucca-front/scss --save
 npm install @lucca-front/ng --save
 ```
