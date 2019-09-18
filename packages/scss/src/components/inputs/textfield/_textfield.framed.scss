@@ -2,14 +2,6 @@
 	.textfield-input {
 		&::placeholder {
 			color: _component("field.framed.default-palette.placeholder");
-			opacity: 0;
-		}
-
-		&:focus, &.is-focused {
-			&::placeholder {
-				color: _component("field.framed.default-palette.placeholder");
-				opacity: 1;
-			}
 		}
 	}
 
@@ -45,6 +37,12 @@
 					@include fakeBorder(1px, _color($palette));
 					background-color: _color($palette, "see-through");
 					z-index: 2;
+
+					.textfield-input {
+						&::placeholder {
+							color: _color($palette, "light");
+						}
+					}
 				}
 			}
 
