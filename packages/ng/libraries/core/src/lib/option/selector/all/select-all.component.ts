@@ -23,6 +23,7 @@ import { ALuOptionOperator } from '../../operator/option-operator.model';
 export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionSelector<T> {
 	multiple = true;
 	onSelectValue = new Subject<T | T[]>();
+	private _values: T[];
 
 	@HostBinding('class.position-fixed') fixed = true;
 	options;
@@ -35,6 +36,6 @@ export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> im
 		this.onSelectValue.next([...this.options]);
 	}
 	setValue(values: T | T[]): void {
-		
+		this._values = values as T[];
 	}
 }

@@ -105,6 +105,10 @@ extends ALuOptionPickerComponent<T, O> {
 		});
 		super.onClose();
 	}
+	setValue(value: T | T[]) {
+		super.setValue(value);
+		this._selectors.forEach(s => s.setValue(value));
+	}
 }
 
 /**
