@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { OptionSelectorComponent } from './option-selector.component';
-import { LuSelectModule, LuOptionModule } from '@lucca-front/ng';
+import { LuSelectModule, LuOptionModule, LuInputModule } from '@lucca-front/ng';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -13,6 +15,9 @@ import { LuSelectModule, LuOptionModule } from '@lucca-front/ng';
 	imports: [
 		LuSelectModule,
 		LuOptionModule,
+		FormsModule,
+		LuInputModule,
+		CommonModule,
 		RouterModule.forChild([
 			{ path: '', component: OptionSelectorComponent },
 		]),
