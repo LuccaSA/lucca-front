@@ -23,7 +23,7 @@ import {
 } from '../operator/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuOptionItem } from '../item/index';
-import { ALuOptionSelector, ILuOptionSelector } from '../selector';
+import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 
 export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPickerComponent<T, O> {
