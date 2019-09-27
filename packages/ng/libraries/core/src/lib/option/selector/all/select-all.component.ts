@@ -6,6 +6,7 @@ import { ALuOptionOperator } from '../../operator/option-operator.model';
 @Component({
 	selector: 'lu-option-select-all',
 	templateUrl: './select-all.component.html',
+	styleUrls: ['select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
@@ -34,6 +35,9 @@ export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> im
 	}
 	selectAll() {
 		this.onSelectValue.next([...this.options]);
+	}
+	deselectAll() {
+		this.onSelectValue.next([]);
 	}
 	setValue(values: T | T[]): void {
 		this._values = values as T[];
