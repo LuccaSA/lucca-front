@@ -113,11 +113,10 @@
 		}
 	}
 
-	&.mod-borderless { 
+	&.mod-borderless {
 		border-bottom: none;
 
-		.table-body-row-cell,
-		.table-head-row-cell {
+		.table-body-row-cell, .table-head-row-cell {
 			border-top: none;
 			padding: 0 1rem;
 
