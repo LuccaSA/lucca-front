@@ -84,37 +84,6 @@
 }
 
 
-// PALETTE
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.textfield {
-
-	@mixin inputColoring($palette) {
-		.textfield-input:focus {
-			box-shadow: 0 0 0 2px _color($palette, "light");
-
-			~ .textfield-label {
-				color: _color("text.default");
-			}
-		}
-
-		// Needed when not next to input (formly)
-		&.is-focused {
-			.textfield-label {
-				color: _color("text.default");
-			}
-		}
-	}
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include inputColoring($name);
-		}
-	}
-}
-
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
