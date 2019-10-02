@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'lu-option-selector',
+	styleUrls: ['./option-selector.component.scss'],
 	templateUrl: './option-selector.component.html'
 })
 export class OptionSelectorComponent {
