@@ -251,7 +251,7 @@
 		height: _component("filters.height");
 		position: relative;
 		transform: background _theme("commons.animations.durations.standard") ease;
-		width: 18rem;
+		width: _component("textfield.filter.width");
 
 		&:hover {
 			background: _theme("commons.background.base");
