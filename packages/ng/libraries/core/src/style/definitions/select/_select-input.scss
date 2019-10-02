@@ -155,6 +155,22 @@
 		}
 	}
 
+	// Filter
+	:host-context(.textfield.mod-filter) {
+
+		.lu-select-value, .lu-select-placeholder {
+			padding: 0;
+			height: auto;
+			padding-top: 1rem;
+			color: _color('text.default', 'color', true);
+			color: _color('text.default');
+		}
+
+		.lu-select-suffix {
+			bottom: .9rem;
+		}
+	}
+
 	// Material
 	:host-context(.textfield.mod-material) {
 		&::after {
