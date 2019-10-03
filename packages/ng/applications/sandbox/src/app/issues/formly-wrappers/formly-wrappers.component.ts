@@ -32,6 +32,19 @@ export class FormlyWrappersComponent {
 			label: 'this one has a suffix',
 			suffix: 'LOL',
 		},
+	}, {
+		key: 'error',
+		type: 'input',
+		templateOptions: {
+			type: 'text',
+			label: 'this one has an error',
+			required: true,
+		},
+		validation: {
+			messages: {
+				required: 'this field is required',
+			},
+		},
 	}];
 
 	submit() {}
