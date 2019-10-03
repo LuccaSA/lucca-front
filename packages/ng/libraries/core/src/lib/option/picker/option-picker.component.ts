@@ -143,7 +143,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 		if (!targetElt) { return; }
 		const contentElt = document.querySelector('.lu-popover-content') as HTMLElement;
 		if (!contentElt) { return; }
-		const contentFixedElt = document.querySelector('.lu-popover-content .position-fixed') as HTMLElement;
+		const contentFixedElt = document.querySelector('.lu-popover-content .optionSelector-sticky') as HTMLElement;
 		const offsetTop = contentFixedElt ? contentFixedElt.offsetHeight : 0;
 		// highlighted option is too high
 		if (contentElt.scrollTop + offsetTop > targetElt.offsetTop) {
