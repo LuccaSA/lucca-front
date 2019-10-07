@@ -35,7 +35,7 @@
 	background-color: _color("error", "see-through");
 
 	&::placeholder {
-		color: _color("error", "dark");
+		color: _color("error", "lighter");
 	}
 
 	&:focus, &:hover {
