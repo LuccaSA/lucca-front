@@ -3,3 +3,4 @@ export * from './tree-option-item.model';
 export * from './tree-option-item.module';
 export * from './tree-option-item.token';
 export * from './tree-option-item.translate';
+export * from './tree-option-item.intl';
