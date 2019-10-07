@@ -1,0 +1,19 @@
+# https://dependabot.com/docs/config-file/
+version: 1
+update_configs:
+  - package_manager: "javascript"
+    directory: "/"
+    update_schedule: "weekly"
+    target_branch: "feat/dependencies"
+  - package_manager: "javascript"
+    directory: "/packages/icons"
+    update_schedule: "weekly"
+    target_branch: "feat/dependencies"
+  - package_manager: "javascript"
+    directory: "/packages/scss"
+    update_schedule: "weekly"
+    target_branch: "feat/dependencies"
+  - package_manager: "javascript"
+    directory: "/packages/ng"
+    update_schedule: "weekly"
+    target_branch: "feat/dependencies"
