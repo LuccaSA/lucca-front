@@ -73,6 +73,7 @@
 			color: _color("text.default");
 			text-decoration: none;
 			transition: all _theme("commons.animations.durations.fast") ease;
+			cursor: pointer;
 
 			&:hover {
 				background: _component("table.hover.background");
@@ -80,6 +81,7 @@
 
 			&.mod-filters {
 				background: none;
+				cursor: inherit;
 			}
 		}
 	}
