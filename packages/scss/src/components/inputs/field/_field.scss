@@ -56,8 +56,7 @@
 		/* Display */
 		&.mod-inline {
 			display: inline-flex;
-			margin-left: _component("field.input.inline-margin");
-			margin-right: _component("field.input.inline-margin");
+			margin-right: _component("field.input.inline-margin") * 2;
 		}
 
 		&.mod-block {

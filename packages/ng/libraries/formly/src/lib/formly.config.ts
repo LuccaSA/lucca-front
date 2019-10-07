@@ -1,27 +1,27 @@
 import { ConfigOption } from '@ngx-formly/core';
 // inputs
-import { LuFormlyFieldInput } from './types/input';
-import { LuFormlyFieldDate } from './types/date';
-import { LuFormlyFieldTextarea } from './types/textarea';
-import { LuFormlyFieldSelect } from './types/select';
-import { LuFormlyFieldUser } from './types/user';
-import { LuFormlyFieldApi } from './types/api';
-import { LuFormlyFieldDepartment } from './types/department';
-import { LuFormlyFieldRadios } from './types/radios';
+import { LuFormlyFieldInput,
+	LuFormlyFieldDate,
+	LuFormlyFieldTextarea,
+	LuFormlyFieldSelect,
+	LuFormlyFieldUser,
+	LuFormlyFieldApi,
+	LuFormlyFieldDepartment,
+	LuFormlyFieldCheckboxes,
+	LuFormlyFieldRadios,
+} from './types/index';
 // wrappers
-import { LuFormlyWrapperHelper, TemplateHelper } from './wrappers/helper';
-import { LuFormlyWrapperTitle, TemplateTitle } from './wrappers/title';
-import { LuFormlyWrapperLabel } from './wrappers/label';
-import { LuFormlyWrapperTextfieldLayout } from './wrappers/textfield-layout';
-import { LuFormlyWrapperSuffix, TemplateSuffix } from './wrappers/suffix';
-import { LuFormlyWrapperIcon, TemplateIcon } from './wrappers/icon';
-import {
+import { LuFormlyWrapperHelper, TemplateHelper,
+	LuFormlyWrapperTitle, TemplateTitle,
+	LuFormlyWrapperLabel,
+	LuFormlyWrapperTextfieldLayout,
+	LuFormlyWrapperSuffix, TemplateSuffix,
+	LuFormlyWrapperIcon, TemplateIcon,
 	LuFormlyWrapperError,
 	TemplateError,
 	LuFormlyErrorMessage,
-} from './wrappers/error';
-import { LuFormlyFieldCheckboxes } from './types/checkboxes';
-import { LuFormlyWrapperRadiosfieldLayout } from './wrappers/radiosfield-layout';
+	LuFormlyWrapperRadiosfieldLayout
+} from './wrappers/index';
 
 export const LU_FORMLY_COMPONENTS = [
 	LuFormlyErrorMessage,
