@@ -127,12 +127,14 @@
 		&::before {
 			content: "";
 			@include makeIcon("arrow_south");
-			position: absolute;
-			top: 0;
-			left: 0;
+			bottom: 0;
 			font-size: .7rem;
-			top: .75rem;
-			left: .6rem;
+			height: .7rem;
+			left: 0;
+			margin: auto;
+			position: absolute;
+			right: 0;
+			top: 0;
 		}
 	}
 
