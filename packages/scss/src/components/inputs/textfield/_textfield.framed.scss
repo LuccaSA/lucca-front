@@ -1,7 +1,8 @@
 %input_framed {
 	.textfield-input {
+
 		&::placeholder {
-			color: _component("field.framed.default-palette.placeholder");
+			color: _component("field.framed.placeholder");
 		}
 	}
 
@@ -28,39 +29,13 @@
 			resize: none;
 		}
 
-		// PALETTE
-		// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-		@mixin inputColoring($palette) {
-			&:hover, &:focus {
-				&:not([disabled]):not([readonly]):not(.is-disabled):not(.is-readonly) {
-					@include fakeBorder(1px, _color($palette));
-					background-color: _color($palette, "see-through");
-					z-index: 2;
-
-					.textfield-input {
-						&::placeholder {
-							color: _color($palette, "light");
-						}
-					}
-				}
-			}
+		&:hover {
+			@include fakeBorder(1px, _component("field.framed.color"));
+			background: _component("field.framed.see-through");
+			z-index: 1;
 
 			textarea.textfield-input {
-				&:focus, &:hover {
-					box-shadow: none;
-					background: transparent;
-					z-index: auto;
-				}
-			}
-		}
-
-		@include inputColoring("field.framed.default-palette");
-
-		// palette colors
-		@each $name, $palette in _getMap("palettes") {
-			&.palette-#{$name} {
-				@include inputColoring($name);
+				background: transparent;
 			}
 		}
 

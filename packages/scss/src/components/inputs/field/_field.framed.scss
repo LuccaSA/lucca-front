@@ -22,6 +22,8 @@
 		}
 
 		&:hover {
+			@include fakeBorder(1px, _component("field.framed.color"));
+			background: _component("field.framed.see-through");
 			z-index: 1;
 
 			~ .#{$fieldname}-messages {
@@ -75,15 +77,6 @@
 		margin: 0;
 	}
 
-	// COLORING
-	@include inputColoring("field.framed.default-palette", $fieldname);
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include inputColoring($name, $fieldname);
-		}
-	}
 
 	// STATUS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -154,22 +147,6 @@
 	&.is-focused, &:hover {
 		.#{$fieldname}-messages {
 			transform: translateY(100%);
-		}
-	}
-}
-
-@mixin inputColoring($palette, $fieldname) {
-	.#{$fieldname}-input:focus, .#{$fieldname}-input:not([disabled]):hover {
-		@include fakeBorder(1px, _color($palette));
-		background-color: _color($palette, "see-through");
-		~ .#{$fieldname}-label {
-			color: _color($palette);
-		}
-	}
-	// Needed when field label is not next to the field-input
-	&.is-focused {
-		.field-label {
-			color: _color($palette);
 		}
 	}
 }
