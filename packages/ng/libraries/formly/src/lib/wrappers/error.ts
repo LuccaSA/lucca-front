@@ -54,7 +54,7 @@ export class LuFormlyErrorMessage {
 export class TemplateError {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.validators) {
+			if (field && field.validation) {
 				return 'error';
 			}
 		});
