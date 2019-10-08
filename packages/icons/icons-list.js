@@ -226,6 +226,9 @@ var icons = {
 
 			"certif_ok",
 			"certif_waiting",
-			"certif_ko"
+			"certif_ko",
+
+			"sync",
+			"sync_disabled"
 	]
 };
