@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/LuccaSA/lucca-front.svg?branch=master)](https://travis-ci.org/LuccaSA/lucca-front)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=LuccaSA/lucca-front)](https://dependabot.com)
+
 # lucca-front
 
 A modular framework for developing web application by [lucca](http://www.lucca.fr).

@@ -1,2 +1,6 @@
 # Code is owned by ux team
 * @LuccaSA/ux-devs
+
+# dependencies are handled by admins
+**/package.json @LuccaSA/ux-admins
+**/package-lock.json @LuccaSA/ux-admins
