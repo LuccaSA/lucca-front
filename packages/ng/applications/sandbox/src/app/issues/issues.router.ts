@@ -41,6 +41,9 @@ const routes: Routes = [
 	{ path: 'select-overlap', loadChildren: () => import('./select-overlap').then(m => m.SelectOverlapModule) },
 	{ path: 'modal-synched', loadChildren: () => import('./modal-synched').then(m => m.ModalSynchedModule) },
 	{ path: 'user-select-homonyms', loadChildren: () => import('./user-select-homonyms').then(m => m.UserSelectHomonymsModule) },
+	{ path: 'formly', loadChildren: () => import('./formly').then(m => m.FormlyModule) },
+	{ path: 'formly-wrappers', loadChildren: () => import('./formly-wrappers').then(m => m.FormlyWrappersModule) },
+	{ path: 'formly-framed', loadChildren: () => import('./formly-framed').then(m => m.FormlyFramedModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
