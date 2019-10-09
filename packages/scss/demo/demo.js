@@ -295,7 +295,10 @@ function generateIconDemo() {
 
 		'certif_ok',
 		'certif_waiting',
-		'certif_ko'
+		'certif_ko',
+
+		'sync',
+		'sync_disabled',
 	]};
 
 	w3.displayObject("icons-section", icons);
