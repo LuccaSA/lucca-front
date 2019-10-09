@@ -65,11 +65,10 @@
 	font-size: .66em !important;
 }
 
-// Images
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.u-imageResponsive {
-	display: block;
-	margin: 0;
-	max-width: 100%;
+// COMMA
+//
+.u-comma:not(:last-child) {
+	&::after {
+	content: ', ';
+	}
 }
