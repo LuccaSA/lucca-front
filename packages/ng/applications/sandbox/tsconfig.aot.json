@@ -8,6 +8,10 @@
       "@lucca-front/ng": [
         "../../dist"
         // "../../libraries/core/src/index"
+      ],
+      "@lucca-front/ng/formly": [
+        "../../dist/formly"
+        // "../../libraries/formly/src/index"
       ]
     }
   },

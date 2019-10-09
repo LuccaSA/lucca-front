@@ -123,6 +123,21 @@
 		}
 	}
 
+	&.mod-more {
+		&::before {
+			content: "";
+			@include makeIcon("arrow_south");
+			bottom: 0;
+			font-size: .7rem;
+			height: .7rem;
+			left: 0;
+			margin: auto;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
+
 	&.mod-wired {
 		@mixin buttonWiredColoring($palette) {
 			background: transparent;

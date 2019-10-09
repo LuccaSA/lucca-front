@@ -5,7 +5,7 @@
 		@include makeIcon("arrow_west");
 		font-size: .75rem;
 		color: _color("text.light");
-		margin-right: _theme('spacings.smaller');
+		margin-right: _theme("spacings.smaller");
 	}
 }
 
