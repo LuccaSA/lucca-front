@@ -188,13 +188,10 @@
 		  @include makeIcon('drag');
 		  color: _color('text.placeholder');
 		  font-size: 1.3rem;
-		  position: absolute;
-		  top: 0;
-		  bottom: 0;
-		  left: 0;
-		  right: 0;
 		  margin: auto;
-		  height: 2rem;
+		  height: 100%;
+		  display: flex;
+		  align-items: center;
 		}
 	}
 }
