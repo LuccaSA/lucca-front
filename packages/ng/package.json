@@ -68,7 +68,7 @@
     "@angular-devkit/schematics": "^8.3.8",
     "@angular-devkit/schematics-cli": "^0.803.8",
     "@angular/router": "^8.2.9",
-    "@types/jasmine": "3.4.2",
+    "@types/jasmine": "3.4.4",
     "@types/node": "^12.7.11",
     "codelyzer": "^5.1.2",
     "cpx": "^1.5.0",
