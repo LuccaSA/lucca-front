@@ -1,5 +1,4 @@
 @import "~@lucca-front/scss/src/mixins/forms";
-@import "@angular/cdk/text-field-prebuilt.css";
 
 .textfield,
 .textfield.mod-multiline {
@@ -14,11 +13,4 @@
 	&.mod-framed .textfield-input.ng-invalid.ng-touched {
 		@include fieldFramedError("textfield");
 	}
-}
-
-.cdk-textarea-autosize {
-	resize: none;
-	line-height: 1.3;
-	box-sizing: content-box;
-	width: calc(100% - (2 * #{_component("textfield.input.padding-horizontal")}));
 }
