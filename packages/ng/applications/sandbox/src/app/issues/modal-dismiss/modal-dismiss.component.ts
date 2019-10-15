@@ -62,6 +62,6 @@ export class BasicPopupContent {
 		this._ref.close(true);
 	}
 	dismiss() {
-		this._ref.dismiss(true);
+		this._ref.dismiss();
 	}
 }
