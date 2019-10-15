@@ -21,16 +21,18 @@ export class ModalDismissComponent {
 
 	openPopup(data?) {
 		const ref = this._popup.open(BasicPopupContent, data);
-		this.subs.add(ref.onDismiss.subscribe(
-			() => this.event$.next('popup dismissed'),
-		));
-		this.subs.add(ref.onClose.subscribe(() => this.event$.next('popup closed')))
+		this.subs.add(ref.onDismiss.subscribe(() => this.event$.next('popup dismissed')));
+		this.subs.add(ref.onClose.subscribe(() => this.event$.next('popup closed')));
 	}
 	openModal(data?) {
-		this._modal.open(BasicModalContent, data);
+		const ref = this._modal.open(BasicModalContent, data);
+		this.subs.add(ref.onDismiss.subscribe(() => this.event$.next('modal dismissed')));
+		this.subs.add(ref.onClose.subscribe(() => this.event$.next('modal closed')));
 	}
 	openSidepanel(data?) {
-		this._sidepanel.open(BasicModalContent, data);
+		const ref = this._sidepanel.open(BasicModalContent, data);
+		this.subs.add(ref.onDismiss.subscribe(() => this.event$.next('sidepanel dismissed')));
+		this.subs.add(ref.onClose.subscribe(() => this.event$.next('sidepanel closed')));
 	}
 }
 @Component({
