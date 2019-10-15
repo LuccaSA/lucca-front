@@ -12,8 +12,10 @@ import { ILuPopupContent } from './popup.model';
 export interface ILuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
+	onDismiss: Observable<void>;
 	open(data: D): void;
 	close(result: R): void;
+	dismiss(): void;
 }
 export interface ILuPopupRefFactory<TComponent = any, TConfig extends ILuPopupConfig = ILuPopupConfig> {
 	forge<T extends TComponent, C extends TConfig>(component: ComponentType<T>, config: C): ILuPopupRef<T>;
@@ -22,6 +24,7 @@ export interface ILuPopupRefFactory<TComponent = any, TConfig extends ILuPopupCo
 export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
+	onDismiss = new Subject<void>();
 
 	protected _overlayRef: OverlayRef;
 	protected _componentRef: ComponentRef<T>;
@@ -45,12 +48,12 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 		this.onOpen.complete();
 	}
 	close(result?: R) {
-		this._cleanSubscription();
-		this._closePopup();
-		this._destroyOverlay();
-
 		this.onClose.next(result);
-		this.onClose.complete();
+		this._destroy();
+	}
+	dismiss() {
+		this.onDismiss.next();
+		this._destroy();
 	}
 	/**
 	 *  This method creates the overlay from the provided popover's template and saves its
@@ -102,6 +105,19 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 		this._componentRef = this._overlayRef.attach<T>(portal);
 	}
 
+	protected _destroy() {
+		this._cleanSubscription();
+		this._closePopup();
+		this._destroyOverlay();
+		this._completeSubjects();
+
+	}
+	_completeSubjects() {
+		this.onClose.complete();
+		this.onOpen.complete();
+		this.onDismiss.complete();
+	}
+
 	protected _destroyOverlay() {
 		this._overlayRef.detachBackdrop();
 		this._overlayRef.detach();
@@ -115,7 +131,7 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 			filter(evt => evt.keyCode === ESCAPE),
 		);
 		this._sub = merge(bdClicked$, escPressed$).pipe(first())
-		.subscribe(e => this.close(undefined));
+		.subscribe(e => this.dismiss());
 	}
 	protected _cleanSubscription() {
 		this._sub.unsubscribe();
