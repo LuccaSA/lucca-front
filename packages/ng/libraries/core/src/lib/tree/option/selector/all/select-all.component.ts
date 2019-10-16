@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ATreeLuOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
+import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
 import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/tree-option-operator.model';
 import { ILuTreeOptionSelectAllLabel } from './select-all.translate';
@@ -18,7 +18,7 @@ import { ILuTree } from '../../../tree.model';
 			multi: true,
 		},
 		{
-			provide: ATreeLuOptionSelector,
+			provide: ALuTreeOptionSelector,
 			useExisting: forwardRef(() => LuTreeOptionSelectAllComponent),
 			multi: true,
 		},
@@ -30,10 +30,10 @@ export class LuTreeOptionSelectAllComponent<T = any> extends ALuTreeOptionOperat
 	private _values: T[];
 
 	@HostBinding('class.position-fixed') fixed = true;
-	options;
+	flatOptions: T[];
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
 		this.outOptions$ = in$.pipe(
-			tap(options => this.options = options)
+			tap(options => this.flatOptions = this.flattenTree(options))
 		);
 	}
 
@@ -44,12 +44,18 @@ export class LuTreeOptionSelectAllComponent<T = any> extends ALuTreeOptionOperat
 	}
 
 	selectAll() {
-		this.onSelectValue.next([...this.options]);
+		this.onSelectValue.next([...this.flatOptions]);
 	}
 	deselectAll() {
 		this.onSelectValue.next([]);
 	}
 	setValue(values: T | T[]): void {
 		this._values = values as T[];
+	}
+
+	private flattenTree(tree: ILuTree<T>[] = []): T[] {
+		return tree
+			.map(t => [t.value, ...this.flattenTree(t.children)])
+			.reduce((agg, cur) => [...agg, ...cur], []);
 	}
 }
