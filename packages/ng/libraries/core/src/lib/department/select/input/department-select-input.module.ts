@@ -3,7 +3,7 @@ import { LuDepartmentSelectInputComponent } from './department-select-input.comp
 import { CommonModule } from '@angular/common';
 import { LuSelectClearerModule } from '../../../select/index';
 import { LuInputDisplayerModule } from '../../../input/index';
-import { LuTreeOptionPickerModule, LuTreeOptionPagerModule, LuTreeOptionSearcherModule, LuTreeOptionItemModule, LuForTreeOptionsModule } from '../../../tree/index';
+import { LuTreeOptionPickerModule, LuTreeOptionPagerModule, LuTreeOptionSearcherModule, LuTreeOptionItemModule, LuForTreeOptionsModule, LuTreeOptionSelectAllModule } from '../../../tree/index';
 import { LuDepartmentFeederModule } from '../feeder/index';
 import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.token';
 import { luDepartmentSelectInputTranslations } from './department-select-input.translate';
@@ -19,6 +19,7 @@ import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 		LuTreeOptionSearcherModule,
 		LuTreeOptionItemModule,
 		LuForTreeOptionsModule,
+		LuTreeOptionSelectAllModule,
 		LuDepartmentFeederModule,
 	],
 	declarations: [
