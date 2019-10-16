@@ -21,7 +21,6 @@ import { FormControl } from '@angular/forms';
 	],
 })
 export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
-	@HostBinding('class.position-fixed') fixed = true;
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;

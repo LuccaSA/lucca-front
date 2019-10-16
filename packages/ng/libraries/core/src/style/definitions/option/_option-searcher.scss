@@ -1,12 +1,12 @@
 @mixin optionSearcherStyle {
-	:host {
-		position: sticky;
-		top: 0;
-		left: 0;
-		right: 0;
-		display: block;
-		z-index: 1;
-	}
+	// :host {
+	// 	position: sticky;
+	// 	top: 0;
+	// 	left: 0;
+	// 	right: 0;
+	// 	display: block;
+	// 	z-index: 1;
+	// }
 	.textfield.mod-search {
 		width: 100%;
 	}

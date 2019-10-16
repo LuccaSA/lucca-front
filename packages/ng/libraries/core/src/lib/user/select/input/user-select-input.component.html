@@ -12,7 +12,9 @@
 	<ng-template #singleView>{{(values[0] || values) | luUserDisplay}}</ng-template>
 </ng-template>
 <lu-option-picker-advanced>
-	<lu-user-paged-searcher></lu-user-paged-searcher>
+	<header class="lu-picker-header">
+		<lu-user-paged-searcher></lu-user-paged-searcher>
+	</header>
 	<lu-user-homonyms></lu-user-homonyms>
 	<lu-option *luForOptions="let user" [value]="user">
 		<div>{{ user | luUserDisplay: searchFormat }}</div>
