@@ -142,7 +142,10 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo:build"
+            "browserTarget": "demo:build",
+            "ssl": true,
+            "sslCert": "/",
+            "sslKey": "/"
           },
           "configurations": {
             "production": {
@@ -344,7 +347,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sandbox:build"
+            "browserTarget": "sandbox:build",
+            "ssl": true
           },
           "configurations": {
             "production": {
