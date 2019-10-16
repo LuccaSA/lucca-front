@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-// import { LuOptionSelectAllModule } from './all/index';
+import { LuTreeOptionSelectAllModule } from './all/index';
 
 @NgModule({
 	imports: [
-		// LuOptionSelectAllModule,
+		LuTreeOptionSelectAllModule,
 	],
 	exports: [
-		// LuOptionSelectAllModule,
+		LuTreeOptionSelectAllModule,
 	],
 })
 export class LuTreeOptionSelectorModule {}

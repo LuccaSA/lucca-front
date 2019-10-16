@@ -1,4 +1,4 @@
 export * from './tree-option-selector.model';
 export * from './tree-option-selector.module';
 
-// export * from './all/index';
+export * from './all/index';
