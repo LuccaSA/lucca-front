@@ -19,7 +19,8 @@ export class OptionSelectorComponent {
 	trackBy(idx, color): string {
 		return color.code;
 	}
-	collection = [];
+	items = [];
+	nodes = [];
 	colors = [
 		{ name: 'aliceblue', code: '#f0f8ff' },
 		{ name: 'antiquewhite', code: '#faebd7' },
@@ -176,42 +177,6 @@ export class OptionSelectorComponent {
 			{ value: node11, children: [ { value: node111 } ] },
 			{ value: node12, children: [] },
 		]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
-	}, {
-		value: node2,
-		children: [ { value: node21 }]
 	}, {
 		value: node2,
 		children: [ { value: node21 }]
