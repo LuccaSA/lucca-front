@@ -1,7 +1,7 @@
 <h1>option-selector</h1>
 <div class="textfield">
 	<lu-select class="textfield-input" [(ngModel)]="collection" multiple>
-	<span *luDisplayer="let values; multiple: true">{{values.length}} colors</span>
+		<span *luDisplayer="let values; multiple: true">{{values.length}} colors</span>
 		<lu-option-picker-advanced>
 			<header class="lu-picker-header">
 				<!-- transforms the colors array to be passed between operators -->
@@ -17,4 +17,24 @@
 			<lu-option *luForOptions="let color; trackBy: trackBy" [value]="color">{{color.name}}</lu-option>
 		</lu-option-picker-advanced>
 	</lu-select>
+	<label for="" class="textfield-label">option picker</label>
 </div>
+
+<div class="textfield">
+	<lu-select class="textfield-input" [(ngModel)]="collection" multiple>
+		<ng-container *luDisplayer="let values; multiple: true">{{ values.length }} items selected</ng-container>
+		<lu-tree-option-picker-advanced>
+			<header class="lu-picker-header">
+				<lu-tree-option-feeder [options]="options"></lu-tree-option-feeder>
+				<lu-tree-option-searcher [searchFn]="searchFn"></lu-tree-option-searcher>
+				<!-- <lu-tree-option-select-all></lu-tree-option-select-all> -->
+			</header>
+			<lu-tree-option *luForTreeOptions="let option" [tree]="option">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+			</lu-tree-option>
+		</lu-tree-option-picker-advanced>
+	</lu-select>
+	<label for="" class="textfield-label">tree option picker</label>
+	
+</div>
+
