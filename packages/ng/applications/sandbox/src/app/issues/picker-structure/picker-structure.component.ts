@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 export class PickerStructureComponent {
 	model = 1;
 	item;
+	user;
+	department;
 }

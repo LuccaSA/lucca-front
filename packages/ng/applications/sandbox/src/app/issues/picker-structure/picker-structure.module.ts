@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { PickerStructureComponent } from './picker-structure.component';
-import { LuSelectModule, LuOptionModule, LuInputModule, LuApiModule } from '@lucca-front/ng';
+import { LuSelectModule, LuOptionModule, LuInputModule, LuApiModule, LuUserModule, LuDepartmentModule } from '@lucca-front/ng';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -15,6 +15,8 @@ import { RedirectModule } from '../../redirect';
 	],
 	imports: [
 		LuApiModule,
+		LuUserModule,
+		LuDepartmentModule,
 		LuSelectModule,
 		LuOptionModule,
 		FormsModule,
