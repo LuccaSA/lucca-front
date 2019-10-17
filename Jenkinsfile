@@ -142,7 +142,7 @@ node {
 				// 			bat "npm run build:publish"
 				// 		},
 						ng: {
-							bat "npm run build:publish -- --base-href /${branchName}/ng/"
+							bat "npm run build:publish --prefix ${ngDirectory} -- --base-href /${branchName}/ng/"
 						},
 						failFast: true,
 					)
