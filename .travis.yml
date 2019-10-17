@@ -1,21 +1,21 @@
-language: node_js
+# language: node_js
 
-os:
-  - linux
+# os:
+#   - linux
 
-node_js:
-  - lts/*
-sudo: required
+# node_js:
+#   - lts/*
+# sudo: required
 
-script:
- - npm run build
- - npm run travis
+# script:
+#  - npm run build
+#  - npm run travis
 
-after_success:
-  - cd ./demo
-  - npm install
-  - npm run build
-  - cd ../
-  - chmod ugo+x ./deploy.sh
-  - ./deploy.sh
+# # after_success:
+# #   - cd ./demo
+# #   - npm install
+# #   - npm run build
+# #   - cd ../
+# #   - chmod ugo+x ./deploy.sh
+# #   - ./deploy.sh
 
