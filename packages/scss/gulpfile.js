@@ -44,7 +44,7 @@ gulp.task('serve', () => {
 	browserSync.init({
 		server: {
 			baseDir: DEMO_DIR,
-			index: "demo.html",
+			index: "index.html",
 			routes: {
 				"./lucca-front.css": "./dist/lucca-front.css",
 				"./demo.css": "./demo/demo.css",
