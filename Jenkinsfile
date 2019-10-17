@@ -58,8 +58,8 @@ node {
 						}
 					},
 					publish: {
-						if(fileExists(publishDirectoryName)) {
-							dir(publishDirectoryName) {
+						if(fileExists('demo')) {
+							dir('demo') {
 								deleteDir()
 							}
 						}
