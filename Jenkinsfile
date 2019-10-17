@@ -8,7 +8,8 @@ node {
 
 	def projectTechnicalName = 'lucca-front'
 	def repoName = "lucca-front"
-	def publishDirectoryName = "${projectTechnicalName}-publish"
+
+	def branchName = env.BRANCH_NAME;
 
 	def iconsDirectory = "packages/icons"
 	def scssDirectory = "packages/scss"
@@ -63,6 +64,27 @@ node {
 							}
 						}
 					},
+					icons: {
+						if(fileExists("${iconsDirectory}\\node_modules")) {
+							dir("${iconsDirectory}\\node_modules") {
+								deleteDir()
+							}
+						}
+					},
+					scss: {
+						if(fileExists("${scssDirectory}\\node_modules")) {
+							dir("${scssDirectory}\\node_modules") {
+								deleteDir()
+							}
+						}
+					},
+					ng: {
+						if(fileExists("${ngDirectory}\\node_modules")) {
+							dir("${ngDirectory}\\node_modules") {
+								deleteDir()
+							}
+						}
+					},
 					failFast: true,
 				)
 			}
@@ -110,20 +132,23 @@ node {
 					failFast: true,
 				)
 			}
-			// stage('Publish') {
-			// 	parallel(
-			// 		icons: {
-			// 			bat "npm run deploy"
-			// 		},
-			// 		scss: {
-			// 			bat "npm run deploy"
-			// 		},
-			// 		ng: {
-			// 			bat "npm run deploy"
-			// 		},
-			// 		failFast: true,
-			// 	)
-			// }
+			if (isPr) {
+				stage('Publish') {
+					parallel(
+				// 		icons: {
+				// 			bat "npm run build:publish"
+				// 		},
+				// 		scss: {
+				// 			bat "npm run build:publish"
+				// 		},
+						ng: {
+							bat "npm run build:publish -- --base-href /${branchName}/ng/"
+						},
+						failFast: true,
+					)
+				}
+
+			}
 			// stage('Deploy') {
 			// 	parallel(
 			// 		prisme: {
