@@ -109,37 +109,37 @@ node {
 					},
 					failFast: true,
 				)
-			}
-			stage('Publish') {
-				// parallel(
-				// 	icons: {
-				// 		bat "npm run deploy"
-				// 	},
-				// 	scss: {
-				// 		bat "npm run deploy"
-				// 	},
-				// 	ng: {
-				// 		bat "npm run deploy"
-				// 	},
-				// 	failFast: true,
-				// )
-			}
-			stage('Deploy') {
-				// parallel(
-				// 	prisme: {
-				// 		// continuous deploy of branch rc and master
-				// 		if (isRc) {
-				// 			echo "deploying prisme-rc"
-				// 			bat "npx cpx ${publishDirectoryName}\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\prisme-rc"
-				// 		}
-				// 		if (isMaster) {
-				// 			echo "deploying prisme"
-				// 			bat "npx cpx ${publishDirectoryName}\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\prisme"
-				// 		}
-				// 	},
-				// 	failFast: true
-				// )
-			}
+			// }
+			// stage('Publish') {
+			// 	parallel(
+			// 		icons: {
+			// 			bat "npm run deploy"
+			// 		},
+			// 		scss: {
+			// 			bat "npm run deploy"
+			// 		},
+			// 		ng: {
+			// 			bat "npm run deploy"
+			// 		},
+			// 		failFast: true,
+			// 	)
+			// }
+			// stage('Deploy') {
+			// 	parallel(
+			// 		prisme: {
+			// 			// continuous deploy of branch rc and master
+			// 			if (isRc) {
+			// 				echo "deploying prisme-rc"
+			// 				bat "npx cpx ${publishDirectoryName}\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\prisme-rc"
+			// 			}
+			// 			if (isMaster) {
+			// 				echo "deploying prisme"
+			// 				bat "npx cpx ${publishDirectoryName}\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\prisme"
+			// 			}
+			// 		},
+			// 		failFast: true
+			// 	)
+			// }
 		}
 	} catch(err) {
 		stage('Error') {
