@@ -5,6 +5,7 @@
   "main": "src/main.scss",
   "scripts": {
     "build": "gulp build",
+    "deploy": "gulp deploy",
     "temp": "gulp temp",
     "start": "gulp start"
   },

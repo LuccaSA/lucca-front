@@ -24,6 +24,7 @@
     "lerna": "lerna",
     "travis": "lerna run travis --scope=@lucca-front/ng-internal",
     "build": "lerna run build",
+    "deploy": "lerna run deploy",
     "ls": "lerna ls -a -l"
   },
   "dependencies": {

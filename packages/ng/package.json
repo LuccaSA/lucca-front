@@ -40,7 +40,8 @@
     "postbuild:schematics": "npm run link:schematics",
     "link:schematics": "cd schematics && npm link",
     "postlink:schematics": "npm link @lucca-front/schematics",
-    "issue": "ng g @lucca-front/schematics:issue"
+    "issue": "ng g @lucca-front/schematics:issue",
+    "deploy": "ng build sandbox --prod --base-href /ng/ --output-path ../../demo/ng"
   },
   "dependencies": {
     "@angular/animations": "^8.2.9",

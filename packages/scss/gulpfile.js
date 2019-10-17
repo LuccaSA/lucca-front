@@ -10,6 +10,7 @@ let browserSync = require('browser-sync').create();
 
 const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
+const DEPLOY_DIR = '../../demo/scss';
 const SASS_OPTIONS_DEBUG = {
 	outputStyle: 'extended',
 	sourceMapEmbed: true,
@@ -68,6 +69,13 @@ gulp.task('sass:dist', () => {
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
 	.pipe(gulp.dest(OUT_DIR));
 });
+gulp.task('sass:deploy', () => {
+	return gulp.src('./src/main.dist.scss')
+	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
+	.pipe(rename('lucca-front.css'))
+	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
+	.pipe(gulp.dest(DEPLOY_DIR));
+});
 
 gulp.task('sass:lint', () => {
 	return gulp.src(["./src/*.scss", "./src/**/*.scss"])
@@ -79,6 +87,7 @@ gulp.task('sass:lint', () => {
 });
 
 gulp.task('build', gulp.series('dist:clean', 'sass:dist'));
+gulp.task('deploy', gulp.series('sass:deploy'));
 gulp.task('debug', gulp.parallel('sass:lint', 'sass:dist'));
 gulp.task('start', gulp.series('debug', 'serve'));
 
