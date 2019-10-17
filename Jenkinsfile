@@ -138,9 +138,9 @@ node {
 				// 		icons: {
 				// 			bat "npm run build:publish"
 				// 		},
-				// 		scss: {
-				// 			bat "npm run build:publish"
-				// 		},
+						scss: {
+							bat "npm run build:publish --prefix ${scssDirectory}"
+						},
 						ng: {
 							bat "npm run build:publish --prefix ${ngDirectory} -- --base-href /${branchName}/ng/"
 						},
