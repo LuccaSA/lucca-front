@@ -148,17 +148,16 @@ node {
 					)
 				}
 
-			stage('Deploy') {
-				parallel(
-					prisme: {
+				stage('Deploy') {
+					parallel(
+						prisme: {
 							echo "deploying ${branchName}"
 							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
-						}
 
-					},
-					failFast: true
-				)
-			}
+						},
+						failFast: true
+					)
+				}
 			}
 
 		}
