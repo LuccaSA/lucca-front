@@ -109,7 +109,7 @@ node {
 					},
 					failFast: true,
 				)
-			// }
+			}
 			// stage('Publish') {
 			// 	parallel(
 			// 		icons: {
