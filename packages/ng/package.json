@@ -29,6 +29,9 @@
     "pretravis": "npm run build:lib",
     "travis": "npm run build:aot",
     "build:aot": "ng build sandbox --prod",
+
+    "build:publish": "ng build sandbox --prod --output-path ../../demo/ng",
+
     "build:core": "ng build core",
     "postbuild:core": "cpx \"libraries/core/src/style/**\" dist/style",
     "build:material": "ng build material",
