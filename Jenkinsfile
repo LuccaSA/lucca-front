@@ -166,7 +166,7 @@ node {
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 								def url = "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${PrNumber}/comments"
 								def deployUrl = "http://lucca-front.lucca.local/${branchName}"
-								curl -H "Authorization: token ${githubToken}" ${url} --request POST  --data '{"body":"Jenkins automatic deployment: '${deployUrl}'"}'
+								curl -H "Authorization: token ${githubToken}" ${url} --request POST  --data "{\"body\":\"Jenkins automatic deployment: '${deployUrl}'\"}"
 							}
 						},
 						failFast: true
