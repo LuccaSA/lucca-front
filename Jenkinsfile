@@ -108,7 +108,7 @@ node {
 							def githubToken = "SENTRY_AUTH_TOKEN=${devops_config['ux-comment-token']}"
 							echo githubToken
 						}
-					}
+					},
 					failFast: true,
 				)
 			}
