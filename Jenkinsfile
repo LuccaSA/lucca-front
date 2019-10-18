@@ -46,9 +46,9 @@ node {
 					},
 					github: {
 						if (isPr) {
-
+							echo "test"
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-								curl "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments" -H "Authorization: token ${githubToken}"  --request POST  --data "{\"body\":\"test test test\"}"
+								curl  -H "Authorization: token ${githubToken}" "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments"  --request POST  --data "{\"body\":\"test test test\"}"
 							}
 						}
 					},
