@@ -15,7 +15,7 @@ node {
 	def scssDirectory = "packages/scss"
 	def ngDirectory = "packages/ng"
 
-	def githubToken;
+	// def githubToken;
 
 	
 	def isPr = false
@@ -103,9 +103,9 @@ node {
 						scmVars = checkout scm
 					},
 					github: {
-						withCredentials([file(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+						withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 							// githubToken = env.githubToken
-							echo env.githubToken
+							echo githubToken
 						}
 					},
 					failFast: true,
