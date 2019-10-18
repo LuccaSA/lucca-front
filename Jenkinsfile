@@ -44,18 +44,6 @@ node {
 							echo prNumber
 						}
 					},
-					github: {
-						if (isPr) {
-							echo "test"
-							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-									// curl -H "Authorization: token ${githubToken}" https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments --request POST  --data '{\"body\":\"test test test\"}'
-								powershell """
-									[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-									Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="test test test"}) -UseBasicParsing
-								"""
-							}
-						}
-					},
 					failFast: true,
 				)
 			}
@@ -116,12 +104,6 @@ node {
 					checkout: {
 						scmVars = checkout scm
 					},
-					// github: {
-					// 	withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-					// 		// githubToken = env.githubToken
-					// 		echo githubToken
-					// 	}
-					// },
 					failFast: true,
 				)
 			}
@@ -175,11 +157,13 @@ node {
 							echo "deploying ${branchName}"
 							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
 							// post PR comment
-							// withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-							// 	def url = "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments"
-							// 	def deployUrl = "http://lucca-front.lucca.local/${branchName}"
-							// 	curl "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments" -H "Authorization: token ${githubToken}"  --request POST  --data "{\"body\":\"Jenkins automatic deployment: 'http://lucca-front.lucca.local/${branchName}'\"}"
-							// }
+							def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+								powershell """
+									[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+									Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
+								"""
+							}
 						},
 						failFast: true
 					)
