@@ -50,6 +50,7 @@ node {
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 									// curl -H "Authorization: token ${githubToken}" https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments --request POST  --data '{\"body\":\"test test test\"}'
 								powershell """
+									[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 									Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="test test test"}) -UseBasicParsing
 								"""
 							}
