@@ -104,8 +104,8 @@ node {
 					},
 					github: {
 						withCredentials([file(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-							githubToken = env.githubToken
-							echo githubToken
+							// githubToken = env.githubToken
+							echo env.githubToken
 						}
 					},
 					failFast: true,
