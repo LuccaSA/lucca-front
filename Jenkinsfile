@@ -103,10 +103,8 @@ node {
 						scmVars = checkout scm
 					},
 					github: {
-						withCredentials([file(credentialsId: '86b37cd3-224e-4c64-b90d-843764ba9d30', variable: 'devops_config')]) {
-							def devops_config = readJSON file: env.devops_config
-							echo devops_config['ux-comment-token']
-							githubToken = devops_config['ux-comment-token']
+						withCredentials([file(credentialsId: 'ux-comment-token', variable: 'githubToken')])
+							githubToken = env.githubToken
 							echo githubToken
 						}
 					},
