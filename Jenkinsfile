@@ -40,7 +40,7 @@ node {
 						echo "project ${projectTechnicalName}"
 						echo "branch ${env.BRANCH_NAME}"
 						echo "slave ${env.NODE_NAME}"
-						if (isPR) {
+						if (isPr) {
 							echo prNumber
 						}
 					},
