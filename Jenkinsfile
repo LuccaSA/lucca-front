@@ -165,8 +165,8 @@ node {
 							// post PR comment
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 								// def url = "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments"
-								def deployUrl = "http://lucca-front.lucca.local/${branchName}"
-								curl "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments" -H "Authorization: token ${githubToken}"  --request POST  --data "{\"body\":\"Jenkins automatic deployment: '${deployUrl}'\"}"
+								// def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+								curl "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments" -H "Authorization: token ${githubToken}"  --request POST  --data "{\"body\":\"Jenkins automatic deployment: 'http://lucca-front.lucca.local/${branchName}'\"}"
 							}
 						},
 						failFast: true
