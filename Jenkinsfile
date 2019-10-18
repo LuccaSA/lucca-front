@@ -48,8 +48,8 @@ node {
 						if (isPr) {
 							echo "test"
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-								bat """
-									curl  -H "Authorization: token ${githubToken}" "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments" --request POST  --data "{\"body\":\"test test test\"}"
+								powershell """
+									curl -H "Authorization: token ${githubToken}" https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments --request POST  --data '{\"body\":\"test test test\"}'
 								"""
 							}
 						}
