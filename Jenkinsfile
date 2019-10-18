@@ -135,7 +135,7 @@ node {
 					failFast: true,
 				)
 			}
-			if (isPr) {
+			if (isPr || isRc || isMaster) {
 				stage('Publish') {
 					parallel(
 				// 		icons: {
@@ -156,13 +156,15 @@ node {
 						'lf.lucca.local': {
 							echo "deploying ${branchName}"
 							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
-							// post PR comment
-							def deployUrl = "http://lucca-front.lucca.local/${branchName}"
-							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-								powershell """
-									[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-									Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
-								"""
+							if (isPr) {
+								// post PR comment
+								def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+								withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+									powershell """
+										[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+										Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
+									"""
+								}
 							}
 						},
 						failFast: true
