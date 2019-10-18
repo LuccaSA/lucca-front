@@ -103,7 +103,7 @@ node {
 						scmVars = checkout scm
 					},
 					github: {
-						withCredentials([file(credentialsId: 'ux-comment-token', variable: 'githubToken')])
+						withCredentials([file(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 							githubToken = env.githubToken
 							echo githubToken
 						}
