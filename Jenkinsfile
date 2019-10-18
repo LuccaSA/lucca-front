@@ -51,7 +51,7 @@ node {
 								curl "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments" -H "Authorization: token ${githubToken}"  --request POST  --data "{\"body\":\"test test test\"}"
 							}
 						}
-					}
+					},
 					failFast: true,
 				)
 			}
