@@ -41,7 +41,7 @@ node {
 						echo "branch ${env.BRANCH_NAME}"
 						echo "slave ${env.NODE_NAME}"
 						if (isPr) {
-							echo prNumber
+							echo "pr number ${prNumber}"
 						}
 					},
 					failFast: true,
