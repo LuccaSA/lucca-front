@@ -164,8 +164,9 @@ node {
 							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
 							// post PR comment
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-								// def url = "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${PrNumber}/comments"
-
+								def url = "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${PrNumber}/comments"
+								def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+								curl -H "Authorization: token ${githubToken}" --request POST url --data '{"body":"Jenkins automatic deployment: '${deployUrl}'"}'
 							}
 						},
 						failFast: true
