@@ -48,8 +48,9 @@ node {
 						if (isPr) {
 							echo "test"
 							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+									// curl -H "Authorization: token ${githubToken}" https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments --request POST  --data '{\"body\":\"test test test\"}'
 								powershell """
-									curl -H "Authorization: token ${githubToken}" https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments --request POST  --data '{\"body\":\"test test test\"}'
+									Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="test test test"}) -UseBasicParsing
 								"""
 							}
 						}
