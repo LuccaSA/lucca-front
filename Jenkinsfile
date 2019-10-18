@@ -15,6 +15,7 @@ node {
 	def scssDirectory = "packages/scss"
 	def ngDirectory = "packages/ng"
 
+	def githubToken;
 
 	
 	def isPr = false
@@ -101,6 +102,13 @@ node {
 					checkout: {
 						scmVars = checkout scm
 					},
+					github: {
+						withCredentials([file(credentialsId: '86b37cd3-224e-4c64-b90d-843764ba9d30', variable: 'devops_config')]) {
+							def devops_config = readJSON file: env.devops_config
+							def githubToken = "SENTRY_AUTH_TOKEN=${devops_config['ux-comment-token']}"
+							echo githubToken
+						}
+					}
 					failFast: true,
 				)
 			}
@@ -153,7 +161,6 @@ node {
 						'lf.lucca.local': {
 							echo "deploying ${branchName}"
 							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
-
 						},
 						failFast: true
 					)
