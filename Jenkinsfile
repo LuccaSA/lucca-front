@@ -15,12 +15,10 @@ node {
 	def scssDirectory = "packages/scss"
 	def ngDirectory = "packages/ng"
 
-	// def githubToken;
-
-	
 	def isPr = false
 	def isMaster = false
 	def isRc = false
+	def prNumber = 0
 
 	if(env.BRANCH_NAME == "master") {
 		isMaster = true
@@ -30,6 +28,7 @@ node {
 	}
 	if(env.BRANCH_NAME ==~ /^PR-\d*/) {
 		isPr = true
+		prNumber = env.BRANCH_NAME.substring(3)
 	}
 
 	def isResultSuccessful = true
@@ -41,6 +40,9 @@ node {
 						echo "project ${projectTechnicalName}"
 						echo "branch ${env.BRANCH_NAME}"
 						echo "slave ${env.NODE_NAME}"
+						if (isPR) {
+							echo prNumber
+						}
 					},
 					failFast: true,
 				)
@@ -102,12 +104,12 @@ node {
 					checkout: {
 						scmVars = checkout scm
 					},
-					github: {
-						withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-							// githubToken = env.githubToken
-							echo githubToken
-						}
-					},
+					// github: {
+					// 	withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+					// 		// githubToken = env.githubToken
+					// 		echo githubToken
+					// 	}
+					// },
 					failFast: true,
 				)
 			}
@@ -160,6 +162,11 @@ node {
 						'lf.lucca.local': {
 							echo "deploying ${branchName}"
 							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
+							// post PR comment
+							withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+								// def url = "https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${PrNumber}/comments"
+
+							}
 						},
 						failFast: true
 					)
