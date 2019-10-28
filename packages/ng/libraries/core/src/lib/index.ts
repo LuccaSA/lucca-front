@@ -11,5 +11,6 @@ export * from './select/index';
 export * from './translate/index';
 export * from './tree/index';
 export * from './user/index';
+export * from './remove-diacritics/index';
 
 export { LuModule } from './module';
