@@ -4,3 +4,10 @@
 	box-sizing: content-box;
 	width: calc(100% - (2 * #{_component("textfield.input.padding-horizontal")}));
 }
+
+.cdk-textarea-autosize-measuring {
+	height: auto !important;
+	overflow: hidden !important;
+	padding: 2px 0 !important;
+	box-sizing: content-box !important;
+}

@@ -1,12 +1,3 @@
-.cdk-global-scrollblock {
-	overflow: hidden;
-}
-
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
-	opacity: _component("popup.backdrop.opacity");
-	animation: fadeInBackdrop _theme("commons.animations.durations.fast") ease-out;
-}
-
 .lu-popup-panel {
 	@include elevate(3);
 	position: relative;
