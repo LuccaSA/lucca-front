@@ -4,7 +4,7 @@ import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
 import { ILuModalLabel } from './modal.translate'
-import { Subject, timer, Observable } from 'rxjs';
+import { Subject, timer, Observable, Subscription } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 
 export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
@@ -27,6 +27,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	}
 	submitClass$ = new Subject();
 	error$ = new Subject();
+
+	private _subs = new Subscription();
+
 	constructor(
 		protected _ref: ALuModalRef<LuModalPanelComponent>,
 		protected _cdr: ChangeDetectorRef,
@@ -47,6 +50,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 		return this._outlet.hasAttached();
 	}
 	ngOnDestroy() {
+		this._subs.unsubscribe();
 		this.detach();
 		this.dispose();
 	}
@@ -58,7 +62,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 		this.submitClass$.next('is-loading');
 		const result$ = this._componentInstance.submitAction();
 		if (result$ instanceof Observable) {
-			result$.pipe(
+			this._subs.add(result$.pipe(
 				tap(_ => this.submitClass$.next('is-success')),
 				tap(() => this._cdr.markForCheck()),
 				delay(500),
@@ -73,7 +77,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 					this.submitClass$.next('');
 					this._cdr.markForCheck();
 				});
-			});
+			}));
 		} else {
 			const result = result$;
 			this._ref.close(result);
