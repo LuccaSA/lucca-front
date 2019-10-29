@@ -15,7 +15,7 @@ export const luTreeOptionItemTranslations = {
 		childrenOnly: 'Children only',
 	},
 	fr: {
-		parentOnly: 'seulement le parent',
+		parentOnly: 'Seulement le parent',
 		childrenOnly: 'Seulement les enfants',
 	},
 } as ILuTranslation<ILuTreeOptionItemLabel>;

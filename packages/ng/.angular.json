@@ -4,7 +4,7 @@
   "cli": {
     "packageManager": "npm"
   },
-  "newProjectRoot": "applications",
+  "newProjectRoot": "libraries",
   "projects": {
     "core": {
       "root": "libraries/core",
@@ -79,132 +79,6 @@
               "libraries/formly/tsconfig.lib.json",
               "libraries/formly/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "demo": {
-      "root": "docs/demo/",
-      "sourceRoot": "docs/demo/src",
-      "projectType": "application",
-      "prefix": "demo",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "docs/dist/demo",
-            "index": "docs/demo/src/index.html",
-            "main": "docs/demo/src/main.ts",
-            "polyfills": "docs/demo/src/polyfills.ts",
-            "tsConfig": "docs/demo/tsconfig.app.json",
-            "assets": [
-              "docs/demo/src/favicon.ico",
-              "docs/demo/src/assets"
-            ],
-            "styles": [
-              "docs/demo/src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "docs/demo/src/theme/overrides",
-                "libraries/core/src/style/overrides",
-                "libraries/core/src/style",
-                "node_modules/@lucca-front/scss/src/overrides",
-                "node_modules/@lucca-front/ng/src/style/overrides"
-              ]
-            },
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "docs/demo/src/environments/environment.ts",
-                  "with": "docs/demo/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "demo:build",
-            "ssl": true,
-            "sslCert": "/",
-            "sslKey": "/"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "demo:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "demo:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "docs/demo/src/test.ts",
-            "polyfills": "docs/demo/src/polyfills.ts",
-            "tsConfig": "docs/demo/tsconfig.spec.json",
-            "karmaConfig": "docs/demo/karma.conf.js",
-            "styles": [
-              "docs/demo/src/styles.scss"
-            ],
-            "scripts": [],
-            "assets": [
-              "docs/demo/src/favicon.ico",
-              "docs/demo/src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "docs/demo/tsconfig.app.json",
-              "docs/demo/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "demo-e2e": {
-      "root": "docs/demo-e2e/",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "docs/demo-e2e/protractor.conf.js",
-            "devServerTarget": "demo:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "docs/demo-e2e/tsconfig.e2e.json",
             "exclude": [
               "**/node_modules/**"
             ]
@@ -394,7 +268,7 @@
       }
     }
   },
-  "defaultProject": "demo",
+  "defaultProject": "sandbox",
   "schematics": {
     "@lucca-front/schematics:issue": {
       "project": "sandbox"
