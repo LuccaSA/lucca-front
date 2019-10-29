@@ -6,6 +6,7 @@ let rename = require('gulp-rename');
 let browserSync = require('browser-sync').create();
 
 const OUT_DIR = './dist';
+const DEPLOY_DIR = '../../demo/icons';
 const DEMO_DIR = './demo';
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
@@ -28,13 +29,24 @@ gulp.task('sass:dist', () => {
 	.pipe(rename('lucca-icons.min.css'))
 	.pipe(gulp.dest(OUT_DIR));
 });
+gulp.task('sass:deploy', () => {
+	return gulp.src('./src/main.scss')
+	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
+	.pipe(rename('lucca-icons.min.css'))
+	.pipe(gulp.dest(DEPLOY_DIR));
+});
 
-gulp.task('copy:font', () => {
+gulp.task('font:dist', () => {
 	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf', './icons-list.js'])
 	.pipe(gulp.dest(OUT_DIR));
 });
+gulp.task('font:deploy', () => {
+	return gulp.src(['./font/lucca-icons.woff', './font/lucca-icons.eot', './font/lucca-icons.svg', './font/lucca-icons.ttf', './icons-list.js'])
+	.pipe(gulp.dest(DEPLOY_DIR));
+});
 
-gulp.task('build', gulp.series('dist:clean', 'copy:font', 'sass:dist'));
+gulp.task('build', gulp.series('dist:clean', 'font:dist', 'sass:dist'));
+gulp.task('deploy', gulp.series('font:deploy', 'sass:deploy'));
 
 gulp.task('serve', () => {
 	browserSync.init({

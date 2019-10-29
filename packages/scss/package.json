@@ -1,11 +1,12 @@
 {
   "name": "@lucca-front/scss",
-  "version": "3.2.0-rc.1",
+  "version": "4.0.0-placeholder",
   "description": "a scss-framework based on trello's css naming",
   "main": "src/main.scss",
   "scripts": {
     "build": "gulp build",
-    "temp": "gulp temp",
+    "deploy": "gulp deploy",
+    "build:publish": "gulp build:publish",
     "start": "gulp start"
   },
   "files": [
@@ -38,6 +39,6 @@
     "stylelint": "^10.1.0"
   },
   "dependencies": {
-    "@lucca-front/icons": "3.2.0-rc.1"
+    "@lucca-front/icons": "4.0.0-placeholder"
   }
 }

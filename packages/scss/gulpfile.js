@@ -10,6 +10,7 @@ let browserSync = require('browser-sync').create();
 
 const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
+const PUBLISH_DIR = '../../demo/scss';
 const SASS_OPTIONS_DEBUG = {
 	outputStyle: 'extended',
 	sourceMapEmbed: true,
@@ -33,16 +34,20 @@ gulp.task('dist:clean', () => {
 	return gulp.src(OUT_DIR, { read: false, allowEmpty: true })
 	.pipe(clean());
 });
+gulp.task('publish:clean', () => {
+	return gulp.src(PUBLISH_DIR, { read: false, allowEmpty: true })
+	.pipe(clean());
+});
 
 // gulp.task('serve', ['scss-lint', 'dist:clean', 'sass:debug'], () => {
 gulp.task('serve', () => {
 	browserSync.init({
 		server: {
 			baseDir: DEMO_DIR,
-			index: "demo.html",
+			index: "index.html",
 			routes: {
-				"/scss/lucca-front.css": "./dist/lucca-front.css",
-				"/scss/demo.css": "./demo/demo.css",
+				"./lucca-front.css": "./dist/lucca-front.css",
+				"./demo.css": "./demo/demo.css",
 				"/icons": "../icons"
 			}
 		}
@@ -69,6 +74,7 @@ gulp.task('sass:dist', () => {
 	.pipe(gulp.dest(OUT_DIR));
 });
 
+
 gulp.task('sass:lint', () => {
 	return gulp.src(["./src/*.scss", "./src/**/*.scss"])
 	.pipe(styleLint({
@@ -78,7 +84,17 @@ gulp.task('sass:lint', () => {
 	}));
 });
 
+gulp.task('publish:demo', () => {
+	return gulp.src(['./demo/**'])
+	.pipe(gulp.dest(PUBLISH_DIR))
+});
+gulp.task('publish:dist', () => {
+	return gulp.src(['./dist/**'])
+	.pipe(gulp.dest(PUBLISH_DIR))
+});
+
 gulp.task('build', gulp.series('dist:clean', 'sass:dist'));
 gulp.task('debug', gulp.parallel('sass:lint', 'sass:dist'));
 gulp.task('start', gulp.series('debug', 'serve'));
 
+gulp.task('build:publish', gulp.series('publish:clean', 'dist:clean', 'sass:dist', 'publish:demo', 'publish:dist'));
