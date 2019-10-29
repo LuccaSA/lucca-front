@@ -4,3 +4,6 @@
 # dependencies are handled by admins
 **/package.json @LuccaSA/ux-admins
 **/package-lock.json @LuccaSA/ux-admins
+
+# CI is handled by admins
+Jenkinsfile @LuccaSA/ux-admins
