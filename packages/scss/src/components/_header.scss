@@ -93,11 +93,11 @@
 		position: fixed;
 		left: 0;
 		right: 0;
-		top: 0;
+		top: _theme("commons.banner-height");
 
 		@include media_smaller_than(_theme("commons.mobile", true)) {
 			left: 0 !important;
-			top: _component("navSide.mobile.toggle-height");
+			top: calc(#{_theme("commons.banner-height")} + #{_component("navSide.mobile.toggle-height")});
 		}
 	}
 

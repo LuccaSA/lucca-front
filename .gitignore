@@ -22,3 +22,8 @@ dist
 !.vscode/launch.json
 !.vscode/extensions.json
 .vscode/
+
+# demo
+demo/icons
+demo/scss
+demo/ng
