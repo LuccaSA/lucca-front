@@ -30,6 +30,10 @@
 			max-width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)});
 		}
 	}
+
+	&.mod-withStickyHeader {
+		padding-top: _component("header.height");
+	}
 }
 
 
