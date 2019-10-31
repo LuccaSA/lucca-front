@@ -131,7 +131,6 @@
 	}
 
 	&.mod-noOffset {
-		background-color: red;
 	  .table-head-row-cell,
 	  .table-body-row-cell {
 		&:first-child {
@@ -142,10 +141,6 @@
 		}
 	  }
 	}
-}
-
-.table {
-	background-color: red;
 }
 
 .table-body-row {
