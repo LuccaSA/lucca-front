@@ -12,7 +12,7 @@ const DEMO_DIR = './demo';
 const OUT_DIR = './dist';
 const PUBLISH_DIR = '../../demo/scss';
 const SASS_OPTIONS_DEBUG = {
-	outputStyle: 'extended',
+	outputStyle: 'expanded',
 	sourceMapEmbed: true,
 	includePaths: [
 		'src/overrides/',
@@ -46,7 +46,7 @@ gulp.task('serve', () => {
 			baseDir: DEMO_DIR,
 			index: "index.html",
 			routes: {
-				"./lucca-front.css": "./dist/lucca-front.css",
+				"./lucca-front.css": "./demo/lucca-front.css",
 				"./demo.css": "./demo/demo.css",
 				"/icons": "../icons"
 			}
@@ -62,7 +62,7 @@ gulp.task('sass:debug', () => {
 	.pipe(sass(SASS_OPTIONS_DEBUG).on('error', sass.logError))
 	.pipe(rename('lucca-front.css'))
 	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
-	.pipe(gulp.dest(OUT_DIR))
+	.pipe(gulp.dest(DEMO_DIR))
 	.pipe(browserSync.stream());
 });
 
@@ -94,7 +94,7 @@ gulp.task('publish:dist', () => {
 });
 
 gulp.task('build', gulp.series('dist:clean', 'sass:dist'));
-gulp.task('debug', gulp.parallel('sass:lint', 'sass:dist'));
+gulp.task('debug', gulp.parallel('sass:lint', 'sass:debug'));
 gulp.task('start', gulp.series('debug', 'serve'));
 
 gulp.task('build:publish', gulp.series('publish:clean', 'dist:clean', 'sass:dist', 'publish:demo', 'publish:dist'));
