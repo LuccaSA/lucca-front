@@ -129,6 +129,23 @@
 			}
 		}
 	}
+
+	&.mod-noOffset {
+		background-color: red;
+	  .table-head-row-cell,
+	  .table-body-row-cell {
+		&:first-child {
+		  padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+	  }
+	}
+}
+
+.table {
+	background-color: red;
 }
 
 .table-body-row {
