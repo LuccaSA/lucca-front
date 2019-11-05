@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { PocRootComponent } from './poc-root.component';
+import { PocCoreModule } from '@lf/poc/core';
+import { PocOverlayModule } from '@lf/poc/overlay';
 
 
 
 @NgModule({
-  declarations: [PocRootComponent],
-  imports: [
-  ],
-  exports: [PocRootComponent]
+	imports: [
+		PocCoreModule,
+		PocOverlayModule,
+	],
+	exports: [
+		PocCoreModule,
+		PocOverlayModule,
+	],
 })
-export class PocRootModule { }
+export class PocModule { }

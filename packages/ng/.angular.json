@@ -370,6 +370,105 @@
           }
         }
       }
+    },
+    "poc-spa": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "poc/poc-spa",
+      "sourceRoot": "poc/poc-spa/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/poc-spa",
+            "index": "poc/poc-spa/src/index.html",
+            "main": "poc/poc-spa/src/main.ts",
+            "polyfills": "poc/poc-spa/src/polyfills.ts",
+            "tsConfig": "poc/poc-spa/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "poc/poc-spa/src/favicon.ico",
+              "poc/poc-spa/src/assets"
+            ],
+            "styles": [
+              "poc/poc-spa/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "poc/poc-spa/src/environments/environment.ts",
+                  "with": "poc/poc-spa/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "poc-spa:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "poc-spa:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "poc-spa:build"
+          }
+        }
+      }
     }
   },
   "defaultProject": "sandbox",
