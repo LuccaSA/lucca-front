@@ -4,7 +4,7 @@
   "cli": {
     "packageManager": "npm"
   },
-  "newProjectRoot": "libraries",
+  "newProjectRoot": "poc",
   "projects": {
     "core": {
       "root": "libraries/core",
@@ -258,6 +258,111 @@
             "tsConfig": [
               "applications/sandbox/tsconfig.app.json",
               "applications/sandbox/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "poc-root": {
+      "projectType": "library",
+      "root": "poc/poc-root",
+      "sourceRoot": "poc/poc-root/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "poc/poc-root/tsconfig.lib.json",
+            "project": "poc/poc-root/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "poc/poc-root/src/test.ts",
+            "tsConfig": "poc/poc-root/tsconfig.spec.json",
+            "karmaConfig": "poc/poc-root/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "poc/poc-root/tsconfig.lib.json",
+              "poc/poc-root/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "poc-core": {
+      "projectType": "library",
+      "root": "poc/poc-core",
+      "sourceRoot": "poc/poc-core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "poc/poc-core/tsconfig.lib.json",
+            "project": "poc/poc-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "poc/poc-core/src/test.ts",
+            "tsConfig": "poc/poc-core/tsconfig.spec.json",
+            "karmaConfig": "poc/poc-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "poc/poc-core/tsconfig.lib.json",
+              "poc/poc-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "poc-overlay": {
+      "projectType": "library",
+      "root": "poc/poc-overlay",
+      "sourceRoot": "poc/poc-overlay/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "poc/poc-overlay/tsconfig.lib.json",
+            "project": "poc/poc-overlay/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "poc/poc-overlay/src/test.ts",
+            "tsConfig": "poc/poc-overlay/tsconfig.spec.json",
+            "karmaConfig": "poc/poc-overlay/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "poc/poc-overlay/tsconfig.lib.json",
+              "poc/poc-overlay/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
