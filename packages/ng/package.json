@@ -61,11 +61,11 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.8",
     "@angular-devkit/build-ng-packagr": "^0.803.8",
+    "@angular-devkit/schematics": "^8.3.8",
+    "@angular-devkit/schematics-cli": "^0.803.8",
     "@angular/cli": "^8.3.8",
     "@angular/compiler-cli": "^8.2.9",
     "@angular/material-moment-adapter": "^8.2.2",
-    "@angular-devkit/schematics": "^8.3.8",
-    "@angular-devkit/schematics-cli": "^0.803.8",
     "@angular/router": "^8.2.9",
     "@types/jasmine": "3.4.2",
     "@types/node": "^12.7.11",
@@ -86,6 +86,7 @@
     "tsickle": "^0.37.0",
     "tslib": "^1.10.0",
     "tslint": "~5.20.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "webpack-bundle-analyzer": "^3.6.0"
   }
 }
