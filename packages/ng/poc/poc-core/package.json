@@ -1,5 +1,5 @@
 {
-  "name": "poc-core",
+  "name": "@lf/poc/core",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^8.2.9",
