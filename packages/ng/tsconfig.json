@@ -29,6 +29,15 @@
       ],
       "@lucca-front/ng/material": [
         "dist/material"
+      ],
+      "@lf/poc": [
+        "poc/dist"
+      ],
+      "@lf/poc/core": [
+        "poc/dist/core"
+      ],
+      "@lf/poc/overlay": [
+        "poc/dist/overlay"
       ]
     }
   }
