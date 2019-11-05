@@ -404,12 +404,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/poc-spa",
+            "outputPath": "poc/dist/poc-spa",
             "index": "poc/poc-spa/src/index.html",
             "main": "poc/poc-spa/src/main.ts",
             "polyfills": "poc/poc-spa/src/polyfills.ts",
             "tsConfig": "poc/poc-spa/tsconfig.app.json",
             "aot": false,
+            "commonChunk": false,
             "assets": [
               "poc/poc-spa/src/favicon.ico",
               "poc/poc-spa/src/assets"
