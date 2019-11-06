@@ -166,6 +166,15 @@
 	}
 }
 
+.table-head-row {
+	&.mod-draggable {
+		.table-head-row-cell:first-child {
+			padding-left: 2rem;
+			position: relative;
+		}
+	}
+}
+
 .table-head-row-cell {
 	&.mod-sortable {
 		cursor: pointer;
