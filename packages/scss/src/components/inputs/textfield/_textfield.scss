@@ -138,6 +138,8 @@
 			}
 
 			&:focus {
+				box-shadow: 0 0 0 2px _color("primary", "light");
+				
 				&::placeholder {
 					color: _component("textfield.focus.placeholder");
 				}
