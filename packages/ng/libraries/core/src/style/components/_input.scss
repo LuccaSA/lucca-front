@@ -13,3 +13,9 @@
 		@include fieldFramedError("textfield");
 	}
 }
+
+.textfield.mod-search {
+	.textfield-input {
+		background-color: inherit;
+	}
+}
