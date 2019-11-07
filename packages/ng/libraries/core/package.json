@@ -1,13 +1,13 @@
 {
   "name": "@lucca-front/ng",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
     "@angular/forms": "^8.0.0",
     "@angular/cdk": "^8.0.0",
-    "@lucca-front/icons": "3.2.2",
-    "@lucca-front/scss": "3.2.2",
+    "@lucca-front/icons": "3.2.3",
+    "@lucca-front/scss": "3.2.3",
     "rxjs": "^6.4.0"
   },
   "script": {}
