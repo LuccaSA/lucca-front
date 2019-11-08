@@ -138,27 +138,13 @@
 		}
 	}
 
-	&.mod-wired {
-		@mixin buttonWiredColoring($palette) {
-			background: transparent;
-			color: _color("text.default");
-
-			&:hover, &:focus {
-				&:not([disabled]) {
-					box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette) inset;
-					color: _color($palette);
-				}
-			}
-		}
-
-		// default color
-		@include buttonWiredColoring("button.wired.default-palette");
-
-		// palette colors
-		@each $name, $palette in _getMap("palettes") {
-			&.palette-#{$name} {
-				@include buttonWiredColoring($name);
-			}
+	&.mod-ghost {
+		background: transparent;
+		color: _color("text.default");
+		box-shadow: inset 0 0 0 1px _color("text.default");
+	
+		&:hover {
+		  background: _theme("commons.background.base");
 		}
 	}
 }
