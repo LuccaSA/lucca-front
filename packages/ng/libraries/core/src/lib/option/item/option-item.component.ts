@@ -33,10 +33,10 @@ export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements 
 	}
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<this>();
+	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
 	select() {
 		this.onSelect.emit(this);
 	}
-	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
 	constructor(private _cdr: ChangeDetectorRef) {
 		super();
 	}
