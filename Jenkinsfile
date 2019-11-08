@@ -34,24 +34,12 @@ node {
 	def isResultSuccessful = true
 	try {
 		timeout(time: 15, unit: 'MINUTES') {
-			stage('Notify') {
-				parallel(
-					env: {
-						echo "project ${projectTechnicalName}"
-						echo "branch ${env.BRANCH_NAME}"
-						echo "slave ${env.NODE_NAME}"
-						if (isPr) {
-							echo "pr number ${prNumber}"
-						}
-					},
-					failFast: true,
-				)
-			}
+
 
 
 			def scmVars = null
 
-			stage('Cleanup') {
+			stage('1. Cleanup') {
 				parallel (
 					tools: {
 						if(fileExists('.jenkins')) {
@@ -92,7 +80,7 @@ node {
 				)
 			}
 
-			stage('Prepare') {
+			stage('2. Prepare') {
 
 				parallel (
 					node: {
@@ -107,7 +95,7 @@ node {
 					failFast: true,
 				)
 			}
-			stage('Restore') {
+			stage('3. Restore') {
 				parallel (
 					all: {
 						bat "npm ci"
@@ -115,7 +103,7 @@ node {
 					failFast: true,
 				)
 			}
-			stage('Qualif') {
+			stage('4. Qualif') {
 				parallel (
 					icons: {
 						bat "npm run build --prefix ${iconsDirectory}"
@@ -136,7 +124,7 @@ node {
 				)
 			}
 			if (isPr || isRc || isMaster) {
-				stage('Publish') {
+				stage('5. Build') {
 					parallel(
 				// 		icons: {
 				// 			bat "npm run build:publish"
@@ -151,7 +139,7 @@ node {
 					)
 				}
 
-				stage('Deploy') {
+				stage('6. Deploy') {
 					parallel(
 						'lf.lucca.local': {
 							echo "deploying ${branchName}"
