@@ -24,12 +24,13 @@
       "@lucca-front/ng/formly": [
         "dist/formly"
       ],
-      "@api-docs": [
-        "docs/demo/api-docs"
-      ],
       "@lucca-front/ng/material": [
         "dist/material"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "generateDeepReexports": true,
+    "enableIvy": false
   }
 }
