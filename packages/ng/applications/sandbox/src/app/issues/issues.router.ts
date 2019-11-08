@@ -14,7 +14,7 @@ const routes: Routes = [
 	{ path: 'refacto-overlay-advanced', loadChildren: () => import('./refacto-overlay-advanced').then(m => m.RefactoOverlayAdvancedModule) },
 	{ path: 'refacto-overlays-reposition', loadChildren: () => import('./refacto-overlays-reposition').then(m => m.RefactoOverlaysRepositionModule) },
 	{ path: 'refacto-tooltip', loadChildren: () => import('./refacto-tooltip').then(m => m.RefactoTooltipModule) },
-	{ path: 'refactor-select', loadChildren: () => import('./refactor-select/refactor-select.module').then(m => m.RefactorSelectModule) },
+	{ path: 'refactor-select', loadChildren: () => import('./refactor-select').then(m => m.RefactorSelectModule) },
 	{ path: 'refactor-api-select', loadChildren: () => import('./refactor-api-select').then(m => m.RefactorApiSelectModule) },
 	{ path: 'split-option-picker', loadChildren: () => import('./split-option-picker').then(m => m.SplitOptionPickerModule) },
 	{ path: 'split-option-picker-api-auser', loadChildren: () => import('./split-option-picker-api-auser').then(m => m.SplitOptionPickerApiAuserModule) },
