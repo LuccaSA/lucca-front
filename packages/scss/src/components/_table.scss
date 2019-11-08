@@ -149,19 +149,31 @@
 		.table-body-row-cell:first-child {
 			padding-left: 2rem;
 			position: relative;
+		}
+	}
 
-			&::before {
-				@include makeIcon("drag");
-				bottom: 0;
-				color: _color("text.light");
-				cursor: move;
-				font-size: 1.3rem;
-				height: 2rem;
-				left: 0;
-				margin: auto;
-				position: absolute;
-				top: 0;
-			}
+	.table-body-row-cell-handler {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 2rem;
+		cursor: move;
+	  
+		&:hover {
+		  &::after {
+			color: _color('text.light');
+		  }
+		}
+	  
+		&::after {
+		  @include makeIcon('drag');
+		  color: _color('text.placeholder');
+		  font-size: 1.3rem;
+		  margin: auto;
+		  height: 100%;
+		  display: flex;
+		  align-items: center;
 		}
 	}
 }
