@@ -1,4 +1,3 @@
-@import 'theming';
 @import '~@lucca-front/icons/src/_mixins';
 @mixin selectInputStyle {
 	:host {
@@ -14,8 +13,8 @@
 			font-size: 0.75rem;
 			pointer-events: none;
 			position: absolute;
-			right: _component('textfield.input.padding-horizontal', true);
-			right: _component('textfield.input.padding-horizontal');
+			right: _component('select.input.padding-horizontal', true);
+			right: _component('select.input.padding-horizontal');
 		}
 		&[disabled] {
 			cursor: not-allowed;
@@ -24,20 +23,20 @@
 	}
 
 	.lu-select-placeholder {
-		color: _component("textfield.input.placeholder", true);
-		color: _component("textfield.input.placeholder");
+		color: _component("select.input.placeholder", true);
+		color: _component("select.input.placeholder");
 	}
 
 	.lu-select-value, .lu-select-placeholder {
 		line-height: 1.1;
 		height: _component('select.height', true);
 		height: _component('select.height');
-		padding: _component('textfield.input.padding-vertical', true) 1.5rem
-			_component('textfield.input.padding-vertical', true)
-			_component('textfield.input.padding-horizontal', true);
-		padding: _component('textfield.input.padding-vertical') 1.5rem
-			_component('textfield.input.padding-vertical')
-			_component('textfield.input.padding-horizontal');
+		padding: _component('select.input.padding-vertical', true) 1.5rem
+			_component('select.input.padding-vertical', true)
+			_component('select.input.padding-horizontal', true);
+		padding: _component('select.input.padding-vertical') 1.5rem
+			_component('select.input.padding-vertical')
+			_component('select.input.padding-horizontal');
 		transition: all _theme('commons.animations.durations.standard', true) ease;
 		transition: all _theme('commons.animations.durations.standard') ease;
 		align-items: center;
@@ -56,8 +55,8 @@
 	.lu-select-suffix {
 		position: absolute;
 		bottom: 0.5rem;
-		right: calc(2.75 * #{_component('textfield.input.padding-horizontal', true)});
-		right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
+		right: calc(2.75 * #{_component('select.input.padding-horizontal', true)});
+		right: calc(2.75 * #{_component('select.input.padding-horizontal')});
 	}
 
 	::ng-deep .lu-select-value .chip {
@@ -99,8 +98,8 @@
 		}
 
 		.lu-select-suffix {
-			right: calc(3.5 * #{_component('textfield.input.padding-horizontal', true)});
-			right: calc(3.5 * #{_component('textfield.input.padding-horizontal')});
+			right: calc(3.5 * #{_component('select.input.padding-horizontal', true)});
+			right: calc(3.5 * #{_component('select.input.padding-horizontal')});
 		}
 	}
 
@@ -113,30 +112,30 @@
 	// Framed
 	:host-context(.textfield.mod-framed) {
 		&.textfield-input {
-			padding: _component('field.framed.top-padding', true) 0 0;
-			padding: _component('field.framed.top-padding') 0 0;
+			padding: _component('select.framed.top-padding', true) 0 0;
+			padding: _component('select.framed.top-padding') 0 0;
 
 			&::after {
 				color: _color('text.light', 'color', true);
 				color: _color('text.light');
 				bottom: 0.95rem;
-				right: _component('field.framed.side-padding', true);
-				right: _component('field.framed.side-padding');
+				right: _component('select.framed.side-padding', true);
+				right: _component('select.framed.side-padding');
 			}
 
 			.lu-select-value, .lu-select-placeholder {
-				padding: 0 calc(#{_component('field.framed.side-padding', true)} * 3)
-					_component('field.framed.bottom-padding', true)
-					_component('field.framed.side-padding', true);
-				padding: 0 calc(#{_component('field.framed.side-padding')} * 3)
-					_component('field.framed.bottom-padding')
-					_component('field.framed.side-padding');
+				padding: 0 calc(#{_component('select.framed.side-padding', true)} * 3)
+					_component('select.framed.bottom-padding', true)
+					_component('select.framed.side-padding', true);
+				padding: 0 calc(#{_component('select.framed.side-padding')} * 3)
+					_component('select.framed.bottom-padding')
+					_component('select.framed.side-padding');
 			}
 
 			.lu-select-suffix {
 				bottom: 0.85rem;
-				right: calc(3.75 * #{_component('textfield.input.padding-horizontal', true)});
-				right: calc(3.75 * #{_component('textfield.input.padding-horizontal')});
+				right: calc(3.75 * #{_component('select.input.padding-horizontal', true)});
+				right: calc(3.75 * #{_component('select.input.padding-horizontal')});
 			}
 
 			&.mod-search {
@@ -144,8 +143,8 @@
 					bottom: .5rem;
 				}
 				.lu-select-suffix {
-					right: calc(4.8 * #{_component('textfield.input.padding-horizontal', true)});
-					right: calc(4.8 * #{_component('textfield.input.padding-horizontal')});
+					right: calc(4.8 * #{_component('select.input.padding-horizontal', true)});
+					right: calc(4.8 * #{_component('select.input.padding-horizontal')});
 				}
 			}
 
@@ -186,8 +185,8 @@
 		}
 
 		.lu-select-suffix {
-			right: calc(2 * #{_component('textfield.input.padding-horizontal', true)});
-			right: calc(2 * #{_component('textfield.input.padding-horizontal')});
+			right: calc(2 * #{_component('select.input.padding-horizontal', true)});
+			right: calc(2 * #{_component('select.input.padding-horizontal')});
 		}
 
 
@@ -202,8 +201,8 @@
 				bottom: 0;
 			}
 			.lu-select-suffix {
-				right: calc(2.75 * #{_component('textfield.input.padding-horizontal', true)});
-				right: calc(2.75 * #{_component('textfield.input.padding-horizontal')});
+				right: calc(2.75 * #{_component('select.input.padding-horizontal', true)});
+				right: calc(2.75 * #{_component('select.input.padding-horizontal')});
 			}
 		}
 	}

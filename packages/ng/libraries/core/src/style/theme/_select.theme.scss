@@ -3,6 +3,21 @@ $select: (
 	chip: (
 		background: _theme("commons.background.dark"),
 		text: _color("text.default")
+	),
+	input: (
+		padding-horizontal: .5rem,
+		padding-vertical: .45rem,
+		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 25%)
+	),
+	framed: (
+		color: _color("text.light", "color", true),
+		see-through: transparentize(_color("text.light", "color", true), .95),
+		text: _color("text.default", "color", true),
+		placeholder: #CCCCCC,
+		side-padding: 1rem,
+		top-padding: 2.2rem,
+		bottom-padding: .7rem,
+		label-top-offset: .5rem,
 	)
 );
 $theme: _set($theme, 'components.select', $select);
