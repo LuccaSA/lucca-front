@@ -50,6 +50,18 @@
       ],
       "@lucca-front/ng/material": [
         "dist/material"
+      ],
+      "@lucca-front/ng/tooltip": [
+        "dist/tooltip"
+      ],
+      "@lucca-front/ng/picker": [
+        "dist/picker"
+      ],
+      "@lucca-front/ng/modal": [
+        "dist/modal"
+      ],
+      "@lucca-front/ng/sidepanel": [
+        "dist/sidepanel"
       ]
     }
   }

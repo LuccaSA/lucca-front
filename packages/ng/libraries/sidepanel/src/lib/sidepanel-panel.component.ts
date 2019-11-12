@@ -3,7 +3,7 @@ import { ILuSidepanelContent } from './sidepanel.model';
 import { ALuSidepanelRef } from './sidepanel-ref.model';
 import { LuSidepanelIntl } from './sidepanel.intl';
 import { ILuSidepanelLabel } from './sidepanel.translate';
-import { ALuModalPanelComponent } from '../modal/index';
+import { ALuModalPanelComponent } from '@lucca-front/ng/modal';
 
 
 @Component({

@@ -1,4 +1,4 @@
-import { ILuPopupRefFactory } from '../popup/index';
+import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { Overlay, ComponentType } from '@angular/cdk/overlay';
 import { Injector, Injectable, ComponentRef } from '@angular/core';
 import { PortalOutlet, PortalInjector, ComponentPortal } from '@angular/cdk/portal';

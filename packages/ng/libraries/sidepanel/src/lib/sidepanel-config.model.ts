@@ -1,4 +1,4 @@
-import { ILuModalConfig } from '../modal/index';
+import { ILuModalConfig } from '@lucca-front/ng/modal';
 
 export interface ILuSidepanelConfig extends ILuModalConfig {
 	position?: 'left' | 'right';

@@ -1,3 +1,3 @@
-import { ILuModalContent } from '../modal/index';
+import { ILuModalContent } from '@lucca-front/ng/modal';
 
 export interface ILuSidepanelContent<T = any> extends ILuModalContent<T> {}
