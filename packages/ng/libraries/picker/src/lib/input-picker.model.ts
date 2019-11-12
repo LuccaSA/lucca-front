@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { ILuPopoverPanel, ALuPopoverPanel, ILuPopoverTrigger } from '../../overlay/index';
-import { ControlValueAccessor } from '@angular/forms';
+import { ILuPopoverPanel, ALuPopoverPanel, ILuPopoverTrigger } from '@lucca-front/ng/popover';
+import { ILuInput } from '@lucca-front/ng/input';
 
 export interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
 	/**
@@ -24,4 +24,4 @@ export abstract class ALuPickerPanel<T = any> extends ALuPopoverPanel implements
 }
 
 export interface ILuInputWithPicker<TValue = any, TPanel extends ILuPickerPanel<TValue> = ILuPickerPanel<TValue>>
-extends ILuInput<TValue>, ControlValueAccessor, ILuPopoverTrigger<TPanel> {}
+extends ILuInput<TValue>, ILuPopoverTrigger<TPanel> {}
