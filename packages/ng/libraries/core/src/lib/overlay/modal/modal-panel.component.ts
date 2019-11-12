@@ -55,7 +55,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 		this.dispose();
 	}
 	dismiss() {
-		this._ref.close();
+		this._ref.dismiss();
 	}
 	submit() {
 		this.error$.next(undefined);
