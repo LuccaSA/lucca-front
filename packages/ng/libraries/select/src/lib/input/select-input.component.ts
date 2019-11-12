@@ -7,10 +7,8 @@ import {
 	ElementRef,
 	ContentChild,
 	HostListener,
-	TemplateRef,
 	ViewChild,
 	AfterContentInit,
-	ViewRef,
 	Renderer2,
 	Input,
 	HostBinding,
@@ -22,11 +20,13 @@ import {
 	ILuInputWithPicker,
 	ILuPickerPanel,
 	ALuPickerPanel,
+} from '@lucca-front/ng/picker';
+import {
 	ALuClearer,
 	ILuClearer,
 	ILuInputDisplayer,
 	ALuInputDisplayer,
-} from '../../input/index';
+} from '@lucca-front/ng/input';
 import { ALuSelectInput } from './select-input.model';
 
 export abstract class ALuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>

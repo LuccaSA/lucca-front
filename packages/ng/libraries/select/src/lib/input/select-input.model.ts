@@ -3,12 +3,12 @@ import {
 	ViewContainerRef,
 	ElementRef,
 	Renderer2,
-	ViewRef,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '../../overlay/index';
+import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '@lucca-front/ng/popover';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ILuPickerPanel, ILuClearer, ILuInput, ILuInputDisplayer } from '../../input/index';
+import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 
 export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
 extends ALuPopoverTrigger<TPicker>

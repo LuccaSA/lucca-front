@@ -5,7 +5,7 @@ import {
 	forwardRef,
 	EventEmitter,
 } from '@angular/core';
-import { ALuClearer, ILuClearer } from '../../input/index';
+import { ALuClearer, ILuClearer } from '@lucca-front/ng/input';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'

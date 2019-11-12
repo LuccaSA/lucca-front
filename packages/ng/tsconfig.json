@@ -62,6 +62,9 @@
       ],
       "@lucca-front/ng/sidepanel": [
         "dist/sidepanel"
+      ],
+      "@lucca-front/ng/select": [
+        "dist/select"
       ]
     }
   }
