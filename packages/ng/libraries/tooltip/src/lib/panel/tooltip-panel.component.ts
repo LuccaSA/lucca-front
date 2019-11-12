@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, HostBinding, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import { ALuPopoverPanel, ILuPopoverPanel } from '../../popover/index';
+import { ALuPopoverPanel, ILuPopoverPanel } from '@lucca-front/ng/popover';
 import { luTransformTooltip } from '../animation/index';
 
 @Component({

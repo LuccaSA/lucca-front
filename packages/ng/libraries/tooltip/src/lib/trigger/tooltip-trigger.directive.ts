@@ -10,7 +10,7 @@ import {
 	OnDestroy,
 } from '@angular/core';
 	import { Overlay } from '@angular/cdk/overlay';
-	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '../../popover/index';
+	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
 	import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
