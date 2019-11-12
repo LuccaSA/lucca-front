@@ -7,8 +7,8 @@ import {
 	ChangeDetectorRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../../overlay/index';
-import { Observable } from 'rxjs';
-import { first, mapTo, startWith, shareReplay, delay } from 'rxjs/operators';
+import { Observable, merge } from 'rxjs';
+import { first, mapTo, startWith, shareReplay, delay, mergeAll } from 'rxjs/operators';
 import { ALuPickerPanel } from '../../../input/index';
 import {
 	ALuTreeOptionOperator,
@@ -18,6 +18,7 @@ import { ILuTreeOptionItem } from '../item/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 import { ILuTree } from '../../tree.model';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber, ALuOnCloseSubscriber, ILuOnCloseSubscriber, ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
+import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index';
 
 export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuTreeOptionPickerComponent<T, O> {
@@ -63,6 +64,20 @@ extends ALuTreeOptionPickerComponent<T, O> {
 		this._onScrollBottomSubscribers = ql.toArray();
 	}
 
+	protected _selectors: ILuTreeOptionSelector<T>[] = [];
+	@ContentChildren(ALuTreeOptionSelector, {descendants: true}) set selectorsQL(ql: QueryList<ILuTreeOptionSelector<T>>) {
+		this._selectors = ql.toArray();
+		this._subs.add(
+			merge(
+				this._selectors.map(s => s.onSelectValue),
+			).pipe(
+				mergeAll(),
+			).subscribe(values => {
+				this._select(values);
+			})
+		);
+	}
+
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 	) {
@@ -85,6 +100,10 @@ extends ALuTreeOptionPickerComponent<T, O> {
 			o.onClose();
 		});
 		super.onClose();
+	}
+	setValue(value: T | T[]) {
+		super.setValue(value);
+		this._selectors.forEach(s => s.setValue(value));
 	}
 }
 
