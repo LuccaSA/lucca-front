@@ -3,7 +3,7 @@ import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
 import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
-import { ILuModalLabel } from './modal.translate'
+import { ILuModalLabel } from './modal.translate';
 import { Subject, timer, Observable, Subscription } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 
