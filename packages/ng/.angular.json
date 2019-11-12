@@ -266,6 +266,41 @@
           }
         }
       }
+    },
+    "animations": {
+      "projectType": "library",
+      "root": "libraries/animations",
+      "sourceRoot": "libraries/animations/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/animations/tsconfig.lib.json",
+            "project": "libraries/animations/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/animations/src/test.ts",
+            "tsConfig": "libraries/animations/tsconfig.spec.json",
+            "karmaConfig": "libraries/animations/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/animations/tsconfig.lib.json",
+              "libraries/animations/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sandbox",
