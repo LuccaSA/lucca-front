@@ -441,6 +441,41 @@
           }
         }
       }
+    },
+    "popover": {
+      "projectType": "library",
+      "root": "libraries/popover",
+      "sourceRoot": "libraries/popover/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/popover/tsconfig.lib.json",
+            "project": "libraries/popover/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/popover/src/test.ts",
+            "tsConfig": "libraries/popover/tsconfig.spec.json",
+            "karmaConfig": "libraries/popover/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/popover/tsconfig.lib.json",
+              "libraries/popover/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sandbox",
