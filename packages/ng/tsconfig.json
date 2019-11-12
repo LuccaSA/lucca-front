@@ -21,11 +21,29 @@
       "@lucca-front/ng": [
         "dist"
       ],
+      "@lucca-front/ng/core": [
+        "dist/core"
+      ],
+      "@lucca-front/ng/animations": [
+        "dist/animations"
+      ],
+      "@lucca-front/ng/input": [
+        "dist/input"
+      ],
+      "@lucca-front/ng/scroll": [
+        "dist/scroll"
+      ],
+      "@lucca-front/ng/safe-content": [
+        "dist/safe-content"
+      ],
+      "@lucca-front/ng/number": [
+        "dist/number"
+      ],
+      "@lucca-front/ng/popover": [
+        "dist/popover"
+      ],
       "@lucca-front/ng/formly": [
         "dist/formly"
-      ],
-      "@api-docs": [
-        "docs/demo/api-docs"
       ],
       "@lucca-front/ng/material": [
         "dist/material"
