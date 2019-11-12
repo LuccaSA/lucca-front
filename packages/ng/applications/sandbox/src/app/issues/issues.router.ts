@@ -45,6 +45,7 @@ const routes: Routes = [
 	{ path: 'formly-wrappers', loadChildren: () => import('./formly-wrappers').then(m => m.FormlyWrappersModule) },
 	{ path: 'formly-framed', loadChildren: () => import('./formly-framed').then(m => m.FormlyFramedModule) },
 	{ path: 'picker-structure', loadChildren: () => import('./picker-structure').then(m => m.PickerStructureModule) },
+	{ path: 'modal-dismiss', loadChildren: () => import('./modal-dismiss').then(m => m.ModalDismissModule) },
 	{ path: 'option-selector', loadChildren: () => import('./option-selector').then(m => m.OptionSelectorModule) },
 ];
 /*tslint:enable*/
