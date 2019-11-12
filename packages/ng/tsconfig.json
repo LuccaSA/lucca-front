@@ -65,6 +65,9 @@
       ],
       "@lucca-front/ng/select": [
         "dist/select"
+      ],
+      "@lucca-front/ng/option": [
+        "dist/option"
       ]
     }
   }

@@ -6,11 +6,11 @@ import {
 	forwardRef,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { luTransformPopover } from '../../overlay/index';
+import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
 import { first, mapTo, startWith, shareReplay, delay, mergeAll } from 'rxjs/operators';
 
-import { ALuPickerPanel } from '../../input/index';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import {
 	ALuOptionOperator,
 	ILuOptionOperator,

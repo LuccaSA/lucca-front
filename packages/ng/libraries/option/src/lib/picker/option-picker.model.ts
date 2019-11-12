@@ -1,4 +1,4 @@
-import { ILuPickerPanel, ALuPickerPanel } from '../../input/index';
+import { ILuPickerPanel, ALuPickerPanel } from '@lucca-front/ng/picker';
 import { Subscription, Observable, merge } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/index';

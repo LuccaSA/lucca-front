@@ -11,12 +11,12 @@ import {
 	TemplateRef,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { luTransformPopover } from '../../overlay/index';
+import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
 import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { merge, of } from 'rxjs';
 import { map, delay, share } from 'rxjs/operators';
-import { ALuPickerPanel } from '../../input/index';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
 
