@@ -5,11 +5,13 @@
 	padding-right: 2.5rem;
 }
 
-.option-selector {
-	display: none;
-}
-.mod-multiple {
+.lu-picker-header {
 	.option-selector {
-		display: initial;
+		display: none;
+	}
+	&.mod-multiple {
+		.option-selector {
+			display: initial;
+		}
 	}
 }
