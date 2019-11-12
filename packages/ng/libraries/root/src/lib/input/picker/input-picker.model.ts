@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
-import { ILuPopoverPanel, ALuPopoverPanel } from '../../overlay/index';
+import { ILuPopoverPanel, ALuPopoverPanel, ILuPopoverTrigger } from '../../overlay/index';
+import { ControlValueAccessor } from '@angular/forms';
 
 export interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
 	/**
@@ -21,3 +22,6 @@ export abstract class ALuPickerPanel<T = any> extends ALuPopoverPanel implements
 	onSelectValue: Observable<T | T[]>;
 	abstract setValue(value: T | T[]): void;
 }
+
+export interface ILuInputWithPicker<TValue = any, TPanel extends ILuPickerPanel<TValue> = ILuPickerPanel<TValue>>
+extends ILuInput<TValue>, ControlValueAccessor, ILuPopoverTrigger<TPanel> {}
