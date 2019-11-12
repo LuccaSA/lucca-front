@@ -29,7 +29,7 @@
     "build:publish": "ng build sandbox --prod --output-path ../../demo/ng",
     "build:lib": "npm run build:depth0 && npm run build:depth1",
     "build:depth0": "npm run ng build core && npm run ng build animations",
-    "build:depth1": "npm run ng build input && npm run ng build scroll && npm run ng build safe-content && npm run ng build number && npm run ng build material && npm run ng build popover",
+    "build:depth1": "npm run ng build input && npm run ng build scroll && npm run ng build safe-content && npm run ng build number && npm run ng build material && npm run ng build popover && npm run ng build popup",
     "build:schematics": "tsc --project schematics",
     "postbuild:schematics": "npm run link:schematics",
     "link:schematics": "cd schematics && npm link",
