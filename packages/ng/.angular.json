@@ -616,6 +616,41 @@
           }
         }
       }
+    },
+    "modal": {
+      "projectType": "library",
+      "root": "libraries/modal",
+      "sourceRoot": "libraries/modal/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/modal/tsconfig.lib.json",
+            "project": "libraries/modal/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/modal/src/test.ts",
+            "tsConfig": "libraries/modal/tsconfig.spec.json",
+            "karmaConfig": "libraries/modal/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/modal/tsconfig.lib.json",
+              "libraries/modal/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sandbox",

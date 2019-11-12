@@ -1,3 +1,3 @@
-import { ILuPopupConfig } from '../popup/index';
+import { ILuPopupConfig } from '@lucca-front/ng/popup';
 
 export interface ILuModalConfig extends ILuPopupConfig {}

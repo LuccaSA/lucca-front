@@ -1,4 +1,4 @@
-import { ILuPopupRef, ALuPopupRef } from '../popup/index';
+import { ILuPopupRef, ALuPopupRef } from '@lucca-front/ng/popup';
 import { ILuModalContent } from './modal.model';
 
 export interface ILuModalRef<T extends ILuModalContent = ILuModalContent, D = any, R = any> extends ILuPopupRef<T, D, R> {}

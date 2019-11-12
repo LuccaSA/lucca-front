@@ -42,6 +42,9 @@
       "@lucca-front/ng/popover": [
         "dist/popover"
       ],
+      "@lucca-front/ng/popup": [
+        "dist/popup"
+      ],
       "@lucca-front/ng/formly": [
         "dist/formly"
       ],

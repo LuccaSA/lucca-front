@@ -1,4 +1,4 @@
-import { ILuPopupContent } from '../popup/index';
+import { ILuPopupContent } from '@lucca-front/ng/popup';
 import { Observable } from 'rxjs';
 
 export interface ILuModalContent<T = any> extends ILuPopupContent {

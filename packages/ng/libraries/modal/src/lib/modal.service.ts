@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { LuPopup, ILuPopupRefFactory } from '../popup/index';
+import { LuPopup, ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { ILuModalConfig } from './modal-config.model';
 import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY } from './modal.token';
 
