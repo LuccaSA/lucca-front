@@ -129,6 +129,18 @@
 			}
 		}
 	}
+
+	&.mod-noOffset {
+	  .table-head-row-cell,
+	  .table-body-row-cell {
+		&:first-child {
+		  padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+	  }
+	}
 }
 
 .table-body-row {
