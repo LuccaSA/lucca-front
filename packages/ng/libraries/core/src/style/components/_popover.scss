@@ -1,20 +1,11 @@
 @import '~@lucca-front/scss/src/_mixins';
 
-.lu-popover-panel {
+%popover-panel {
 	display: flex;
 	flex-direction: column;
 	margin-top: 2px;
 	max-height: calc(100vh + 48px);
 	position: relative;
-}
-
-.lu-popover-content {
-	background: white;
-	padding: 1em;
-	@include elevate(2);
-}
-
-.lu-popover-panel {
 	&.is-above {
 		transform-origin: bottom center;
 	}
@@ -47,3 +38,19 @@
 		}
 	}
 }
+
+%popover-content {
+	background: white;
+	@include elevate(2);
+
+}
+
+.lu-popover-panel {
+	@extend %popover-panel;
+}
+
+.lu-popover-content {
+	@extend %popover-content;
+	padding: 1em;
+}
+
