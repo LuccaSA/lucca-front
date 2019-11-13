@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 import {  LuUserService } from './user-searcher.service';
 import { ALuUserService } from './user-searcher.model';
 import { ILuUser } from '../../user.model';
+import { Observable } from 'rxjs';
 // import { ALuApiOptionPagedSearcher } from '../../../api/index';
 
 @Component({
@@ -46,6 +47,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser, S extends
 	// @Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
 
 	clueControl: FormControl;
+	loading$: Observable<boolean>;
 	// constructor(
 	// 	@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
 	// 	@Inject(ALuUserService) @Self() selfService: ALuUserService,

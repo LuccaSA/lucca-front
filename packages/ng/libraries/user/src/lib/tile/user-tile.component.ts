@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { IUser } from '../user.model';
+import { ILuUser } from '../user.model';
 import {
 	LuUserDisplayPipe,
 	LuDisplayInitials,
@@ -9,7 +9,7 @@ import {
 } from '../display/index';
 
 /**
- * Displays user picture and name. IUser's role can be specified, and the footer is customizable.
+ * Displays user picture and name. ILuUser's role can be specified, and the footer is customizable.
  */
 @Component({
 	selector: 'lu-user-tile',
@@ -19,17 +19,17 @@ import {
 })
 export class LuUserTileComponent {
 
-	private _user: IUser;
+	private _user: ILuUser;
 	/**
-	 * IUser to display.
+	 * ILuUser to display.
 	 */
 	@Input()
-	set user(user: IUser) {
+	set user(user: ILuUser) {
 		this._user = user;
 		this._changeDetector.markForCheck();
 	}
 
-	get user(): IUser {
+	get user(): ILuUser {
 		return this._user;
 	}
 
@@ -42,7 +42,7 @@ export class LuUserTileComponent {
 
 	private _role: string;
 	/**
-	 * IUser role to display
+	 * ILuUser role to display
 	 */
 	@Input()
 	set role(role: string) {

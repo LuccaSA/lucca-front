@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ChangeDetectorRef } from '@angular/core';
-import { IUser } from '../user.model';
+import { ILuUser } from '../user.model';
 import {
 	LuUserDisplayPipe,
 	LuDisplayFormat,
@@ -34,12 +34,12 @@ export class LuUserPictureComponent {
 	}
 
 	/**
-	 * IUser whose picture you wanna display.
+	 * ILuUser whose picture you wanna display.
 	 */
-	private _user: IUser;
+	private _user: ILuUser;
 
 	@Input()
-	set user(user: IUser) {
+	set user(user: ILuUser) {
 		this._user = user;
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
 		this.hasPicture = !!user && !!user.picture && !!user.picture.href;

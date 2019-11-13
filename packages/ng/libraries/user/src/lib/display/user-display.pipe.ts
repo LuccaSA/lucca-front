@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IUser } from '../user.model';
+import { ILuUser } from '../user.model';
 import {
 	LuDisplayFullname,
 	LuDisplayHybrid,
@@ -12,7 +12,7 @@ import {
  */
 @Pipe({ name: 'luUserDisplay' })
 export class LuUserDisplayPipe implements PipeTransform {
-	transform(user: IUser, format: LuDisplayFormat = LuDisplayFullname.firstlast): string {
+	transform(user: ILuUser, format: LuDisplayFormat = LuDisplayFullname.firstlast): string {
 		let result = '';
 
 		if (!!user && !!user.firstName && !!user.lastName) {
