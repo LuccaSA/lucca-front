@@ -8,7 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LuModule } from '@lucca-front/ng';
+import { LuSelectModule } from '@lucca-front/ng';
+import { LuOptionModule } from '@lucca-front/ng';
+import { LuInputModule } from '@lucca-front/ng';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { LuModule } from '@lucca-front/ng';
 		SplitSelectComponent,
 	],
 	imports: [
-		LuModule,
+		LuSelectModule,
+		LuOptionModule,
+		LuInputModule,
 		CommonModule,
 		FormsModule,
 		HttpClientModule,

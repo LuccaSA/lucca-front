@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 
 import { FormsModule } from '@angular/forms';
-import { LuSelectModule, LuTreeModule, LuDepartmentModule, LuInputDisplayerModule } from '@lucca-front/ng';
+import { LuSelectModule, LuOptionModule, LuDepartmentModule, LuInputDisplayerModule } from '@lucca-front/ng';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 		LuDepartmentModule,
 		LuInputDisplayerModule,
 		LuSelectModule,
-		LuTreeModule,
+		LuOptionModule,
 		FormsModule,
 		CommonModule,
 		RouterModule.forChild([

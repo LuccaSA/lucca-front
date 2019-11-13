@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { FixModalComponent, BasicModalContent } from './fix-modal.component';
-import { LuOverlayModule } from '@lucca-front/ng';
+import {
+	LuPopupModule,
+	LuModalModule,
+	LuSidepanelModule,
+} from '@lucca-front/ng';
 
 @NgModule({
 	declarations: [
@@ -10,7 +14,9 @@ import { LuOverlayModule } from '@lucca-front/ng';
 		BasicModalContent,
 	],
 	imports: [
-		LuOverlayModule,
+		LuPopupModule,
+		LuModalModule,
+		LuSidepanelModule,
 
 		RouterModule.forChild([
 			{ path: '', component: FixModalComponent },

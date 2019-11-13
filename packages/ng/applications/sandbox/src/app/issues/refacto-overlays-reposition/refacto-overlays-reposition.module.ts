@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { RefactoOverlaysRepositionComponent } from './refacto-overlays-reposition.component';
-import { LuOverlayModule } from '@lucca-front/ng';
+import { LuPopoverModule } from '@lucca-front/ng';
 
 
 
@@ -11,7 +11,7 @@ import { LuOverlayModule } from '@lucca-front/ng';
 		RefactoOverlaysRepositionComponent,
 	],
 	imports: [
-		LuOverlayModule,
+		LuPopoverModule,
 		RouterModule.forChild([
 			{ path: '', component: RefactoOverlaysRepositionComponent },
 		]),

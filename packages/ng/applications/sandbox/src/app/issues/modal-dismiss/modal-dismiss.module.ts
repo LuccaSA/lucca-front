@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { ModalDismissComponent, BasicModalContent, BasicPopupContent } from './modal-dismiss.component';
-import { LuOverlayModule } from '@lucca-front/ng';
+import {
+	LuPopupModule,
+	LuModalModule,
+	LuSidepanelModule,
+} from '@lucca-front/ng';
 import { CommonModule } from '@angular/common';
 
 
@@ -18,7 +22,9 @@ import { CommonModule } from '@angular/common';
 		BasicPopupContent,
 	],
 	imports: [
-		LuOverlayModule,
+		LuPopupModule,
+		LuModalModule,
+		LuSidepanelModule,
 		CommonModule,
 
 		RouterModule.forChild([
