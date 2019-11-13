@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Optional, SkipSelf, Inject, Self } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ALuDepartmentFeederService, ILuDepartmentFeederService } from './department-feeder.model';
-import { LuDepartmentFeederService } from './department-feeder.service';
-import { ALuTreeOptionOperator, ILuTreeOptionOperator, ILuTree } from '../../../tree/index';
+import { ALuDepartmentService, ILuDepartmentService } from './department-feeder.model';
+import { LuDepartmentService } from './department-feeder.service';
+import { ILuTree } from '@lucca-front/ng/core';
 import { ILuDepartment } from '../../department.model';
-import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../../../option/index';
+import { ALuTreeOptionOperator, ILuTreeOptionOperator, ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/option';
 
 @Component({
 	selector: 'lu-department-feeder',
@@ -18,8 +18,8 @@ import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../../../option/index'
 			multi: true,
 		},
 		{
-			provide: ALuDepartmentFeederService,
-			useClass: LuDepartmentFeederService,
+			provide: ALuDepartmentService,
+			useClass: LuDepartmentService,
 		},
 		{
 			provide: ALuOnOpenSubscriber,
@@ -32,16 +32,16 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
 	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
-	protected _service: ILuDepartmentFeederService;
+	protected _service: ILuDepartmentService;
 	constructor(
-		@Inject(ALuDepartmentFeederService) @Optional() @SkipSelf() hostService: ILuDepartmentFeederService,
-		@Inject(ALuDepartmentFeederService) @Self() selfService: ILuDepartmentFeederService,
+		@Inject(ALuDepartmentService) @Optional() @SkipSelf() hostService: ILuDepartmentService,
+		@Inject(ALuDepartmentService) @Self() selfService: ILuDepartmentService,
 	) {
 		super();
 		this._service = hostService || selfService;
 		this.outOptions$ = this._out$.asObservable();
 	}
 	onOpen() {
-		this._service.getTrees().subscribe(trees => this._out$.next(trees));
+		this._service.get().subscribe(trees => this._out$.next(trees));
 	}
 }

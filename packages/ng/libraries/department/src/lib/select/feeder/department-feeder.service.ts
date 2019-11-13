@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ALuDepartmentFeederService, ILuDepartmentFeederService } from './department-feeder.model';
+import { ALuDepartmentService, ILuDepartmentService } from './department-feeder.model';
 import { map } from 'rxjs/operators';
-import { ILuTree } from '../../../tree/index';
+import { ILuTree, ILuParams } from '@lucca-front/ng/core';
 import { ILuDepartment } from '../../department.model';
 
 @Injectable()
-export class LuDepartmentFeederService extends ALuDepartmentFeederService implements ILuDepartmentFeederService {
+export class LuDepartmentService extends ALuDepartmentService<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
 	constructor(protected _http: HttpClient) { super(); }
-	getTrees() {
+	get(params?: ILuParams) {
 		return this._http.get('/api/v3/departments/tree?fields=id,name').pipe(
 			map((response: any): ILuTree<ILuDepartment>[] => {
 				const tree = response.data;

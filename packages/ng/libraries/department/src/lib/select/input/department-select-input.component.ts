@@ -12,9 +12,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ALuInputDisplayer, ILuInputDisplayer } from '../../../input/index';
-import { ALuSelectInputComponent } from '../../../select/index';
-import { ILuOptionPickerPanel } from '../../../option/index';
+import { ALuClearer, ILuClearer, ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
+import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { ILuDepartment } from '../../department.model';
 import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 import { ILuDepartmentSelectInputLabel } from './department-select-input.translate';
