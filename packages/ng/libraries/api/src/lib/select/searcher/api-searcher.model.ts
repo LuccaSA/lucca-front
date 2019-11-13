@@ -15,7 +15,7 @@ import {
 import { IApiItem } from '../../api.model';
 import { ALuApiFeederService, ILuApiFeederService, ILuApiOptionFeeder } from '../feeder/index';
 import { ILuApiPagerService } from '../pager/index';
-import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '../../../option/index';
+import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/option';
 
 export interface ILuApiOptionSearcher<T extends IApiItem = IApiItem> extends ILuApiOptionFeeder<T> {}
 export interface ILuApiSearcherService<T extends IApiItem = IApiItem> extends ILuApiFeederService<T> {

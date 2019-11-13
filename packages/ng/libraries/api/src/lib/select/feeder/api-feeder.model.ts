@@ -1,4 +1,4 @@
-import { ILuOptionOperator } from '../../../option/index';
+import { ILuOptionOperator } from '@lucca-front/ng/option';
 import { IApiItem, IApiCollectionResponse } from '../../api.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';

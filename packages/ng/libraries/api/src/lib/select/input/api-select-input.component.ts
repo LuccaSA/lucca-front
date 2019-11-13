@@ -14,9 +14,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ALuInputDisplayer, ILuInputDisplayer } from '../../../input/index';
-import { ALuSelectInputComponent } from '../../../select/index';
-import { ILuOptionPickerPanel } from '../../../option/index';
+import { ALuClearer, ILuClearer, ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
+import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { IApiItem } from '../../api.model';
 import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../searcher/index';
 

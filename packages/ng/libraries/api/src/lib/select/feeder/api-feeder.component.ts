@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Optional, SkipSelf, Inject, Self } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator, ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../../../option/index';
+import { ILuOptionOperator, ALuOptionOperator, ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/option';
 import { BehaviorSubject } from 'rxjs';
 import { LuApiFeederService } from './api-feeder.service';
 import { IApiItem } from '../../api.model';
