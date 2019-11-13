@@ -33,6 +33,7 @@
     "build:depth2": "npm run ng build tooltip && npm run ng build picker && npm run ng build modal",
     "build:depth3": "npm run ng build select && npm run ng build sidepanel && npm run ng build option",
     "build:depth4": "npm run ng build api && npm run ng build department && npm run ng build user",
+    "build:formly": "npm run ng build formly",
     "build:root": "npm run ng build root",
     "postbuild:root": "cpx \"libraries/root/src/style/**\" dist/style",
     "build:schematics": "tsc --project schematics",
