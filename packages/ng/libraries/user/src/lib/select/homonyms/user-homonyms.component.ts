@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SkipSelf, Self, Optional, Inject, OnInit } from '@angular/core';
-import { ALuOptionOperator, ILuOptionOperator} from '../../../option/index';
-import { IUser } from '../../user.model';
-import { share, map, withLatestFrom, switchMap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, forwardRef, SkipSelf, Self, Optional, Inject } from '@angular/core';
+import { ALuOptionOperator, ILuOptionOperator} from '@lucca-front/ng/option';
+import { ILuUser } from '../../user.model';
+import { map, withLatestFrom, switchMap } from 'rxjs/operators';
 import { ALuUserHomonymsService, LuUserHomonymsService, ILuUserHomonymsService } from './user-homonyms.service';
 import { merge, Observable } from 'rxjs';
 
@@ -21,7 +21,7 @@ import { merge, Observable } from 'rxjs';
 		},
 	],
 })
-export class LuUserHomonymsComponent<U extends IUser = IUser> implements ILuOptionOperator<U> {
+export class LuUserHomonymsComponent<U extends ILuUser = ILuUser> implements ILuOptionOperator<U> {
 	set inOptions$(in$: Observable<U[]>) {
 		this._outOptions$ = merge(
 			in$,

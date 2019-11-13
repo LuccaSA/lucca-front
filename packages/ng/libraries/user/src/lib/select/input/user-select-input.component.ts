@@ -5,21 +5,19 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	HostListener,
-	TemplateRef,
 	ViewChild,
 	Input,
 	Renderer2,
-	HostBinding,
 	AfterContentInit,
 	Inject
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel, ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
-import { IUser } from '../../user.model';
-import { ALuSelectInputComponent } from '../../../select/index';
-import { ILuOptionPickerPanel } from '../../../option/index';
+import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
+import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
+import { ILuUser } from '../../user.model';
+import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { LuDisplayFullname } from '../../display/index';
 import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
@@ -45,7 +43,7 @@ import { ILuUserSelectInputLabel } from './user-select-input.translate';
 		},
 	],
 })
-export class LuUserSelectInputComponent<U extends IUser = IUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
+export class LuUserSelectInputComponent<U extends ILuUser = ILuUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
 extends ALuSelectInputComponent<U, P>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	searchFormat = LuDisplayFullname.lastfirst;

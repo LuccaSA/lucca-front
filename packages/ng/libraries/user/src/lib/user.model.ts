@@ -1,6 +1,5 @@
-import { IApiItem } from '../api/index';
-
-export interface IUser extends IApiItem<number> {
+export interface ILuUser {
+	id: number;
 	firstName: string;
 	lastName: string;
 	picture?: { href: string };

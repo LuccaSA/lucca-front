@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, HostBinding, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ChangeDetectorRef } from '@angular/core';
 import { IUser } from '../user.model';
 import {
 	LuUserDisplayPipe,

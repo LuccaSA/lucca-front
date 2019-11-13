@@ -1,12 +1,12 @@
-import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ISuggestion } from '../../../api/index';
-import { IUser } from '../../user.model';
+import { ALuPagedSearcherService, ILuPagedSearcherService, ILuSuggestion } from '@lucca-front/ng/core';
+import { ILuUser } from '../../user.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-export abstract class ALuUserPagedSearcherService<U extends IUser = IUser>
-extends ALuApiPagedSearcherService<U>
-implements ILuApiPagedSearcherService<U> {
+export abstract class ALuUserPagedSearcherService<U extends ILuUser = ILuUser>
+extends ALuPagedSearcherService<U>
+implements ILuPagedSearcherService<U> {
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) { this._appInstanceId = appInstanceId; }
 	protected _operations: number[] = [];
@@ -31,7 +31,7 @@ implements ILuApiPagedSearcherService<U> {
 		}
 	}
 	protected _get(url) {
-		return (<any>super._get(url) as Observable<ISuggestion<U>[]>)
+		return (<any>super._get(url) as Observable<ILuSuggestion<U>[]>)
 		.pipe(map(suggestions => suggestions.map(s => s.item)));
 	}
 	protected _clueFilter(clue) {
