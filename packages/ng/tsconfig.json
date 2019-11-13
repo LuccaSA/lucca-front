@@ -68,6 +68,15 @@
       ],
       "@lucca-front/ng/option": [
         "dist/option"
+      ],
+      "@lucca-front/ng/api": [
+        "dist/api"
+      ],
+      "@lucca-front/ng/department": [
+        "dist/department"
+      ],
+      "@lucca-front/ng/user": [
+        "dist/user"
       ]
     }
   }
