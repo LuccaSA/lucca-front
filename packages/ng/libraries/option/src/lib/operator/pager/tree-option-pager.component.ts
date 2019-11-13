@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../../../../option/index';
+import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../option-operator.model';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
-import { ILuTree } from '../../../tree.model';
+import { ILuTree } from '@lucca-front/ng/core';
 const MAGIC_STEP = 10;
 @Component({
 	selector: 'lu-tree-option-pager',

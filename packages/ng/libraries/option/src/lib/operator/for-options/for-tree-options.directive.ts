@@ -2,8 +2,8 @@
 import { Directive, forwardRef, OnDestroy } from '@angular/core';
 
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
-import { ILuTree } from '../../../tree.model';
-import { LuForOptionsDirective } from '../../../../option/index';
+import { ILuTree } from '@lucca-front/ng/core';
+import { LuForOptionsDirective } from './for-options.directive';
 
 @Directive({
 	selector: '[luForTreeOptions]',
@@ -15,6 +15,4 @@ import { LuForOptionsDirective } from '../../../../option/index';
 		},
 	],
 })
-export class LuForTreeOptionsDirective<T> extends LuForOptionsDirective<ILuTree<T>> implements ILuTreeOptionOperator<T>, OnDestroy {
-
-}
+export class LuForTreeOptionsDirective<T> extends LuForOptionsDirective<ILuTree<T>> implements ILuTreeOptionOperator<T>, OnDestroy {}

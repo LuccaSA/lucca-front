@@ -6,18 +6,25 @@ import {
 	forwardRef,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { luTransformPopover } from '../../../overlay/index';
+import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
 import { first, mapTo, startWith, shareReplay, delay, mergeAll } from 'rxjs/operators';
-import { ALuPickerPanel } from '../../../input/index';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import {
 	ALuTreeOptionOperator,
 	ILuTreeOptionOperator,
 } from '../operator/index';
 import { ILuTreeOptionItem } from '../item/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
-import { ILuTree } from '../../tree.model';
-import { ALuOnOpenSubscriber, ILuOnOpenSubscriber, ALuOnCloseSubscriber, ILuOnCloseSubscriber, ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../../../option/index';
+import { ILuTree } from '@lucca-front/ng/core';
+import {
+	ALuOnOpenSubscriber,
+	ILuOnOpenSubscriber,
+	ALuOnCloseSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnScrollBottomSubscriber,
+	ALuOnScrollBottomSubscriber
+} from '../operator/index';
 import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index';
 
 export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>

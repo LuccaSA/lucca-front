@@ -1,4 +1,4 @@
-import { ILuOptionItem, ALuOptionItem } from '../../../option/index';
+import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 import { Observable } from 'rxjs';
 
 export interface ILuTreeOptionItem<T = any> extends ILuOptionItem<T> {

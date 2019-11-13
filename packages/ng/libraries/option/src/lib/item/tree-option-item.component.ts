@@ -1,7 +1,21 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ViewChild, ContentChild, ViewContainerRef, ComponentFactoryResolver, Inject, ChangeDetectorRef } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	Output,
+	Input,
+	EventEmitter,
+	forwardRef,
+	ElementRef,
+	ViewChild,
+	ContentChild,
+	ViewContainerRef,
+	ComponentFactoryResolver,
+	Inject,
+	ChangeDetectorRef,
+} from '@angular/core';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
-import { ILuTree } from '../../tree.model';
-import { ILuInputDisplayer, ALuInputDisplayer } from '../../../input/index';
+import { ILuTree } from '@lucca-front/ng/core';
+import { ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
 import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 

@@ -7,11 +7,10 @@ import {
 	ViewContainerRef,
 	QueryList,
 	ChangeDetectorRef,
-	Renderer2,
 } from '@angular/core';
-import { luTransformPopover } from '../../../overlay/index';
-import { ALuPickerPanel } from '../../../input/index';
-import { ALuOptionPickerComponent } from '../../../option/index';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
 import { Observable, merge, of } from 'rxjs';

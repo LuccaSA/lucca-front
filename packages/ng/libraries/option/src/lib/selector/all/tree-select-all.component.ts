@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } f
 import { Observable, Subject } from 'rxjs';
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
 import { tap } from 'rxjs/operators';
-import { ALuTreeOptionOperator } from '../../operator/tree-option-operator.model';
-import { ILuTreeOptionSelectAllLabel } from './select-all.translate';
-import { LuTreeOptionSelectAllIntl } from './select-all.intl';
-import { ILuTree } from '../../../tree.model';
+import { ALuTreeOptionOperator } from '../../operator/index';
+import { ILuOptionSelectAllLabel } from './select-all.translate';
+import { LuOptionSelectAllIntl } from './select-all.intl';
+import { ILuTree } from '@lucca-front/ng/core';
 @Component({
 	selector: 'lu-tree-option-select-all',
 	templateUrl: './select-all.component.html',
@@ -38,7 +38,7 @@ export class LuTreeOptionSelectAllComponent<T = any> extends ALuTreeOptionOperat
 	}
 
 	constructor(
-		@Inject(LuTreeOptionSelectAllIntl) public intl: ILuTreeOptionSelectAllLabel,
+		@Inject(LuOptionSelectAllIntl) public intl: ILuOptionSelectAllLabel,
 	) {
 		super();
 	}

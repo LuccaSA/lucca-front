@@ -1,7 +1,5 @@
-import { ILuOptionPickerPanel, ALuOptionPicker } from '../../../option/index';
-import { Observable } from 'rxjs';
+import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
 import { ILuTreeOptionItem } from '../item/index';
-import { switchMap, merge } from 'rxjs/operators';
 
 export interface ILuTreeOptionPickerPanel<T = any, I extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>> extends ILuOptionPickerPanel<T, I> {}
 

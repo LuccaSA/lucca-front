@@ -1,4 +1,4 @@
-import { ILuTranslation } from '../../../translate/index';
+import { ILuTranslation } from '@lucca-front/ng/core';
 
 export interface ILuTreeOptionItemLabel {
 	parentOnly: string;

@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, Eleme
 import { Observable, combineLatest, merge, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
-import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../../../../option/index';
-import { ILuTree } from '../../../tree.model';
+import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../option-operator.model';
+import { ILuTree } from '@lucca-front/ng/core';
 import { tap } from 'rxjs/operators';
 @Component({
 	selector: 'lu-tree-option-searcher',
-	templateUrl: './tree-option-searcher.component.html',
-	styleUrls: ['./tree-option-searcher.component.scss'],
+	templateUrl: './option-searcher.component.html',
+	styleUrls: ['./option-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

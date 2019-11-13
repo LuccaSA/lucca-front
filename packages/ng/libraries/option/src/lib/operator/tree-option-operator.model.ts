@@ -1,5 +1,5 @@
-import { ILuOptionOperator, ALuOptionOperator } from '../../../option/index';
-import { ILuTree } from '../../tree.model';
+import { ILuOptionOperator, ALuOptionOperator } from './option-operator.model';
+import { ILuTree } from '@lucca-front/ng/core';
 
 export interface ILuTreeOptionOperator<T> extends ILuOptionOperator<ILuTree<T>> {}
 
