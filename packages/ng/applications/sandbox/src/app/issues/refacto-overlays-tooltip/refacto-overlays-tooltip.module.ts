@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { RefactoOverlaysTooltipComponent } from './refacto-overlays-tooltip.component';
-import { LuTooltipModule } from '@lucca-front/ng';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 
 @NgModule({

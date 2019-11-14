@@ -1,5 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { LuPopup, ALuPopupRef, LU_POPUP_DATA, ILuPopupConfig } from '@lucca-front/ng';
+import { LuPopup, ALuPopupRef, LU_POPUP_DATA, ILuPopupConfig } from '@lucca-front/ng/popup';
 
 @Component({
 	selector: 'lu-poc-popup',

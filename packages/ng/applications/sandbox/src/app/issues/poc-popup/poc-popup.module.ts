@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { PocPopupComponent, PocPopupInsideComponent, PocPopupSecondaryComponent } from './poc-popup.component';
-import { LuPopupModule } from '@lucca-front/ng';
+import { LuPopupModule } from '@lucca-front/ng/popup';
 
 
 

@@ -7,7 +7,11 @@ import { SplitOperatorsApiComponent } from './split-operators-api.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { FormsModule } from '@angular/forms';
-import { LuUserSelectModule, LuApiSelectModule, LuSelectModule, LuOptionModule, LuInputDisplayerModule, LuUserDisplayModule } from '@lucca-front/ng';
+import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
+import { LuApiModule } from '@lucca-front/ng/api';
+import { LuUserModule } from '@lucca-front/ng/user';
 
 @NgModule({
 	declarations: [
@@ -20,12 +24,11 @@ import { LuUserSelectModule, LuApiSelectModule, LuSelectModule, LuOptionModule, 
 			{ path: '', component: SplitOperatorsApiComponent },
 		]),
 		FormsModule,
-		LuUserSelectModule,
-		LuApiSelectModule,
+		LuUserModule,
+		LuApiModule,
 		LuSelectModule,
 		LuOptionModule,
-		LuInputDisplayerModule,
-		LuUserDisplayModule,
+		LuInputModule,
 	],
 })
 export class SplitOperatorsApiModule {}

@@ -1,5 +1,8 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { LuModal, LuPopup, LuSidepanel, LU_MODAL_DATA, LU_POPUP_DATA, LU_SIDEPANEL_DATA } from '@lucca-front/ng';
+import { LuPopup, LU_POPUP_DATA } from '@lucca-front/ng/popup';
+import { LuModal, LU_MODAL_DATA } from '@lucca-front/ng/modal';
+import { LuSidepanel, LU_SIDEPANEL_DATA } from '@lucca-front/ng/sidepanel';
+
 import { of } from 'rxjs';
 
 @Component({

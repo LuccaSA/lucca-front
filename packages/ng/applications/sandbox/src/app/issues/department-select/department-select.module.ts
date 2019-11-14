@@ -8,8 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 
 import { FormsModule } from '@angular/forms';
-import { LuSelectModule, LuTreeOptionModule, LuDepartmentModule, LuInputDisplayerModule } from '@lucca-front/ng';
 import { CommonModule } from '@angular/common';
+
+import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuTreeOptionModule } from '@lucca-front/ng/option';
+import { LuDepartmentModule } from '@lucca-front/ng/department';
+import { LuInputDisplayerModule } from '@lucca-front/ng/input';
 
 @NgModule({
 	declarations: [

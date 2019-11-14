@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { LuModal, LuSidepanel } from '@lucca-front/ng';
+import { LuModal } from '@lucca-front/ng/modal';
+import { LuSidepanel } from '@lucca-front/ng/sidepanel';
 
 @Component({
 	selector: 'lu-modals-no-submit',

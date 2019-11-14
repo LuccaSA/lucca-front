@@ -6,7 +6,10 @@ import { Fix705SelectEnterComponent } from './fix-705-select-enter.component';
 // needed to reroute api calls to prisme-proxy
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
-import { LuApiModule, LuSelectModule, LuInputDisplayerModule, LuOptionModule } from '@lucca-front/ng';
+import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuApiModule } from '@lucca-front/ng/api';
+import { LuInputDisplayerModule } from '@lucca-front/ng/input';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

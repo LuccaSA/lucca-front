@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { RefactoOverlaysComponent } from './refacto-overlays.component';
-import { LuPopoverModule } from '@lucca-front/ng';
+import { LuPopoverModule } from '@lucca-front/ng/popover';
 
 
 @NgModule({

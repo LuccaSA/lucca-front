@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { RefactoTooltipComponent } from './refacto-tooltip.component';
-import { LuTooltipModule, LuPopoverModule } from '@lucca-front/ng';
+import { LuPopoverModule } from '@lucca-front/ng/popover';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 
 

@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { ModalSynchedComponent, SyncModalContent, AsyncModalContent } from './modal-synched.component';
-import {
-	LuModalModule,
-	LuSidepanelModule,
-} from '@lucca-front/ng';
+import { LuModalModule } from '@lucca-front/ng/modal';
+import { LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 
 
 
