@@ -39,7 +39,7 @@ const MAGIC_PAGE_SIZE = 20;
 })
 export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implements ILuOptionOperator<U>, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, OnInit, OnDestroy {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
-	@Input() fields: string = 'id,firstname,lastname';
+	@Input() fields: string = 'id,firstname,lastname,picture[href]';
 	@Input() filters: { [key: string]: string | string[] } = {};
 	@Input() orderBy: string = 'lastname,asc,firstname,asc';
 
