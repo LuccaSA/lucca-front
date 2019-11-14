@@ -3,6 +3,7 @@
 # compiled output
 /demo-dist
 /dist
+/dist-spa
 /tmp
 /out-tsc
 
