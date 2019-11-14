@@ -9,7 +9,7 @@ import { RedirectModule } from '../../redirect';
 import { LuSelectModule } from '@lucca-front/ng/select';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuApiModule } from '@lucca-front/ng/api';
-import { LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuInputModule } from '@lucca-front/ng/input';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 	imports: [
 		LuSelectModule,
 		LuApiModule,
-		LuInputDisplayerModule,
+		LuInputModule,
 		LuOptionModule,
 		FormsModule,
 		CommonModule,
