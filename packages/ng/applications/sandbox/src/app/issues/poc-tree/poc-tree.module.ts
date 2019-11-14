@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { PocTreeComponent } from './poc-tree.component';
-import { LuSelectModule, LuOptionModule, LuInputDisplayerModule } from '@lucca-front/ng';
+import { LuSelectModule, LuTreeOptionModule, LuInputDisplayerModule } from '@lucca-front/ng';
 import { FormsModule } from '@angular/forms';
 
 
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 	imports: [
 		LuInputDisplayerModule,
 		LuSelectModule,
-		LuOptionModule,
+		LuTreeOptionModule,
 		FormsModule,
 		// LuOptionPickerModule,
 		RouterModule.forChild([

@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LuSelectModule } from '@lucca-front/ng';
+import { LuSelectModule, LuUserModule, LuApiModule } from '@lucca-front/ng';
 import { LuOptionModule } from '@lucca-front/ng';
 import { LuInputModule } from '@lucca-front/ng';
 
@@ -21,6 +21,8 @@ import { LuInputModule } from '@lucca-front/ng';
 		LuSelectModule,
 		LuOptionModule,
 		LuInputModule,
+		LuUserModule,
+		LuApiModule,
 		CommonModule,
 		FormsModule,
 		HttpClientModule,

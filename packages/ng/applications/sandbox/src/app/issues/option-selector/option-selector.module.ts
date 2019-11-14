@@ -2,7 +2,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { OptionSelectorComponent } from './option-selector.component';
-import { LuSelectModule, LuOptionModule, LuInputModule } from '@lucca-front/ng';
+import { LuSelectModule, LuOptionModule, LuInputModule, LuTreeOptionModule } from '@lucca-front/ng';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 	imports: [
 		LuSelectModule,
 		LuOptionModule,
+		LuTreeOptionModule,
 		FormsModule,
 		LuInputModule,
 		CommonModule,
