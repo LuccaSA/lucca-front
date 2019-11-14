@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, Eleme
 import { Observable, combineLatest, merge, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
-import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '../option-operator.model';
+import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { tap } from 'rxjs/operators';
 @Component({

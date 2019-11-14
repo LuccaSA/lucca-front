@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../option-operator.model';
+import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { ILuTree } from '@lucca-front/ng/core';

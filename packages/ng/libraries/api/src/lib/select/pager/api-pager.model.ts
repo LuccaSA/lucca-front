@@ -1,4 +1,5 @@
-import { ILuOptionOperator, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/option';
+import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ILuOptionOperator } from '@lucca-front/ng/option';
 import { IApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, merge, Subject } from 'rxjs';

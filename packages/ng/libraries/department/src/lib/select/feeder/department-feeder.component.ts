@@ -4,7 +4,8 @@ import { ALuDepartmentService, ILuDepartmentService } from './department-feeder.
 import { LuDepartmentService } from './department-feeder.service';
 import { ILuTree } from '@lucca-front/ng/core';
 import { ILuDepartment } from '../../department.model';
-import { ALuTreeOptionOperator, ILuTreeOptionOperator, ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/option';
+import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
+import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '@lucca-front/ng/option';
 
 @Component({
 	selector: 'lu-department-feeder',

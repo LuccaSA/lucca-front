@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator, ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '../option-operator.model';
+import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 const MAGIC_STEP = 10;
 @Component({

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
-import { ALuOptionOperator, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/option';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import {  LuUserService } from './user-searcher.service';

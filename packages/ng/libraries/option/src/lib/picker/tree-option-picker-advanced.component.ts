@@ -24,7 +24,7 @@ import {
 	ILuOnCloseSubscriber,
 	ILuOnScrollBottomSubscriber,
 	ALuOnScrollBottomSubscriber
-} from '../operator/index';
+} from '@lucca-front/ng/core';
 import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index';
 
 export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator, ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '../option-operator.model';
+import { ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '@lucca-front/ng/core';
+import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable, combineLatest, merge, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 @Component({
