@@ -180,7 +180,8 @@
               ]
             },
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "commonChunk": false
           },
           "configurations": {
             "production": {
