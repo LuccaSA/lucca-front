@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LuSelectClearerComponent } from './select-clearer.component';
+import { LuInputClearerComponent } from './clearer.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -7,10 +7,10 @@ import { CommonModule } from '@angular/common';
 		CommonModule,
 	],
 	declarations: [
-		LuSelectClearerComponent,
+		LuInputClearerComponent,
 	],
 	exports: [
-		LuSelectClearerComponent,
+		LuInputClearerComponent,
 	],
 })
-export class LuSelectClearerModule {}
+export class LuInputClearerModule {}
