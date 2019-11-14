@@ -11,10 +11,10 @@ interface ILuSuggestion<T = any> {
 export abstract class ALuUserService<U extends ILuUser = ILuUser>
 extends ALuService<U>
 implements ILuService<U> {
-	protected _appInstanceId: number | string;
-	set appInstanceId(appInstanceId: number | string) { this._appInstanceId = appInstanceId; }
-	protected _operations: number[] = [];
-	set operations(operations: number[]) { this._operations = operations; }
+	// protected _appInstanceId: number | string;
+	// set appInstanceId(appInstanceId: number | string) { this._appInstanceId = appInstanceId; }
+	// protected _operations: number[] = [];
+	// set operations(operations: number[]) { this._operations = operations; }
 	constructor(protected _http: HttpClient) {
 		super();
 		// this.api = '/api/v3/users/search';
@@ -43,6 +43,32 @@ implements ILuService<U> {
 	// 	return `clue=${urlSafeClue}`;
 	// }
 	get(params: ILuParams): Observable<U[]> {
-		return of([]); // temp - will be refactored soon
+		let url = '/api/v3/users';
+		let suggestionResults = false;
+		if (params.applicationId && params.operations && params.clue) {
+			suggestionResults = true;
+			url = '/api/v3/users/scopedSearch';
+		} else if (params.clue) {
+			suggestionResults = true;
+			url = '/api/v3/users/search';
+		} else if (params.applicationId && params.operations) {
+			url = '/api/v3/users/scoped';
+		}
+		params.fields = params.fields || 'id,firstname,lastname';
+		Object.keys(params).forEach(k => {
+			if (params[k] === undefined) {
+				delete params[k];
+			}
+		});
+		return this._http.get(url, { params: params })
+		.pipe(
+			map((response: any) => {
+				if (suggestionResults) {
+					return response.data.items.map(i => i.item as U);
+				} else {
+					return response.data.items;
+				}
+			}),
+		);
 	}
 }
