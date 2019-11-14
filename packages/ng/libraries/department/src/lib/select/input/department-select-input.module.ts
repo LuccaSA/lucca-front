@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LuDepartmentSelectInputComponent } from './department-select-input.component';
 import { CommonModule } from '@angular/common';
-import { LuSelectClearerModule } from '@lucca-front/ng/select';
+import { LuInputClearerModule } from '@lucca-front/ng/input';
 import { LuInputDisplayerModule } from '@lucca-front/ng/input';
 import {
 	LuTreeOptionPickerModule,
@@ -19,7 +19,7 @@ import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 @NgModule({
 	imports: [
 		CommonModule,
-		LuSelectClearerModule,
+		LuInputClearerModule,
 		LuInputDisplayerModule,
 		LuTreeOptionPickerModule,
 		LuTreeOptionPagerModule,

@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="lu-select-suffix">
-	<lu-select-clearer></lu-select-clearer>
+	<lu-input-clearer></lu-input-clearer>
 </div>
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
 	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.users}}</span>
