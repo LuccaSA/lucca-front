@@ -1,0 +1,10 @@
+<h1>date-picker</h1>
+<h2>with a select</h2>
+<div class="textfield">
+	<lu-select class="textfield-input" [(ngModel)]="item">
+		<ng-container *luDisplayer="let value">{{ value | date }}</ng-container>
+		<!-- <lu-date-picker></lu-date-picker> -->
+		<lu-input-clearer></lu-input-clearer>
+	</lu-select>
+	<label class="textfield-label">in a select</label>
+</div>

@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+
+import { RouterModule } from '@angular/router';
+import { DatePickerComponent } from './date-picker.component';
+
+import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuDateModule } from '@lucca-front/ng/date';
+import { LuInputModule } from '@lucca-front/ng/input';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+
+@NgModule({
+	declarations: [
+		DatePickerComponent,
+	],
+	imports: [
+		LuSelectModule,
+		LuDateModule,
+		LuInputModule,
+		CommonModule,
+		FormsModule,
+		RouterModule.forChild([
+			{ path: '', component: DatePickerComponent },
+		]),
+	],
+})
+export class DatePickerModule {}
