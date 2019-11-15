@@ -53,6 +53,9 @@
       "@lucca-front/ng/select": [
         "../../libraries/select/src/index"
       ],
+      "@lucca-front/ng/date": [
+        "../../libraries/date/src/index"
+      ],
       "@lucca-front/ng/option": [
         "../../libraries/option/src/index"
       ],
