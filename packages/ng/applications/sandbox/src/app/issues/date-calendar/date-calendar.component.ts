@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
 	templateUrl: './date-calendar.component.html'
 })
 export class DateCalendarComponent {
+	date = new Date();
 }

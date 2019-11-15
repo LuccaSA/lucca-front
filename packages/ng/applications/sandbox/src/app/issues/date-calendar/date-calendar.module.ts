@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DateCalendarComponent } from './date-calendar.component';
 import { LuDateModule } from '@lucca-front/ng/date';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -12,7 +14,8 @@ import { LuDateModule } from '@lucca-front/ng/date';
 	],
 	imports: [
 		LuDateModule,
-
+		FormsModule,
+		CommonModule,
 		RouterModule.forChild([
 			{ path: '', component: DateCalendarComponent },
 		]),
