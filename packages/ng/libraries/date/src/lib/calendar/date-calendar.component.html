@@ -1,0 +1,28 @@
+<section class="calendar">
+	<header class="calendar-header">
+		<div class="calendar-header-date"> // Caché si on rentre en sélection de mois ou année 
+			<button class="calendar-header-date-month">Janvier</button>
+			<button class="calendar-header-date-year">2020</button>
+		</div>
+		<button class="calendar-header-back"></button> // Retour à la selection de jours. Visible en sélection de mois ou année
+		<button class="calendar-header-previous"></button>
+		<button class="calendar-header-next"></button>
+	</header>
+	<section class="calendar-labels">
+		<div class="calendar-labels-item">Mo</div>
+		<div class="calendar-labels-item">Tu</div>
+		<div class="calendar-labels-item">Th</div>
+		...
+	</section>
+	<section class="calendar-grid"> // mod-months, mod-years
+		// Ca devrait être possible à gérer avec un display grid. Sinon on ajoutera des lignes (calendar-grid-line) 
+		<button class="calendar-grid-item is-previousMonth">30</button>
+		<button class="calendar-grid-item is-previousMonth">31</button>
+		<button class="calendar-grid-item">1</button>
+		<button class="calendar-grid-item">2</button>
+		<button class="calendar-grid-item is-today">3</button>
+		<button class="calendar-grid-item is-active">4</button>
+		<button class="calendar-grid-item is-disabled">5</button>
+		...
+	</section>
+</section>
