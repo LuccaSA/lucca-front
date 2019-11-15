@@ -48,6 +48,7 @@ const routes: Routes = [
 	{ path: 'modal-dismiss', loadChildren: () => import('./modal-dismiss').then(m => m.ModalDismissModule) },
 	{ path: 'option-selector', loadChildren: () => import('./option-selector').then(m => m.OptionSelectorModule) },
 	{ path: 'date-picker', loadChildren: () => import('./date-picker').then(m => m.DatePickerModule) },
+	{ path: 'date-calendar', loadChildren: () => import('./date-calendar').then(m => m.DateCalendarModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
