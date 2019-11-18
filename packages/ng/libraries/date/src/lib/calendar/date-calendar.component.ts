@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, ElementRef, Renderer2, Inject, LOCALE_ID } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, ElementRef, Renderer2, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getLocaleFirstDayOfWeek } from '@angular/common';
@@ -16,9 +16,10 @@ import { getLocaleFirstDayOfWeek } from '@angular/common';
 		},
 	],
 })
-export class LuDateCalendarComponent extends ALuInput implements ControlValueAccessor {
+export class LuDateCalendarComponent extends ALuInput<Date> implements ControlValueAccessor, OnInit {
 	// daily view
-	days = [];
+	month: Date;
+	days: Date[] = [];
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef,
@@ -27,13 +28,19 @@ export class LuDateCalendarComponent extends ALuInput implements ControlValueAcc
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
+	set value(v: Date) {
+		this.month = v ? new Date(v) : new Date();
+		this.month.setDate(1);
+		super.value = v;
+	}
+	ngOnInit() {
+		// this.month = this.value ? new Date(this.value) : new Date();
+	}
 	protected render() {
-		const month = new Date();
-		month.setMonth(11);
-		this.renderDailyView(month);
+		this.renderDailyView();
 	}
 
-	protected renderDailyView(month: Date) {
+	protected renderDailyView(month: Date = this.month) {
 		this.days = [];
 		const start = new Date(month);
 		let index = 1;
@@ -58,5 +65,17 @@ export class LuDateCalendarComponent extends ALuInput implements ControlValueAcc
 	}
 	selectDay(day: Date) {
 		this.setValue(day);
+	}
+	previousMonth() {
+		this.month = new Date(this.month);
+		this.month.setDate(-10);
+		this.month.setDate(1);
+		this.renderDailyView();
+	}
+	nextMonth() {
+		this.month = new Date(this.month);
+		this.month.setDate(32);
+		this.month.setDate(1);
+		this.renderDailyView();
 	}
 }
