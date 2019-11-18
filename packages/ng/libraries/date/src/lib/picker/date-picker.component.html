@@ -1,0 +1,8 @@
+<ng-template>
+	<div class="lu-picker-panel lu-date-picker-panel" role="dialog" [ngClass]="panelClassesMap" [class.mod-multiple]="multiple"
+	(click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)">
+		<div class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
+			<lu-date-calendar [ngModel]="_value" (ngModelChange)="_select($event)"></lu-date-calendar>
+		</div>
+	</div>
+</ng-template>
