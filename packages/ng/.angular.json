@@ -153,6 +153,9 @@
         },
         "@schematics/angular:service": {
           "skipTests": true
+        },
+        "@lucca-front/schematics:issue": {
+          "prefix": "sand"
         }
       },
       "architect": {
