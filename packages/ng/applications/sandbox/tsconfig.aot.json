@@ -64,6 +64,9 @@
       ],
       "@lucca-front/ng/user": [
         "../../dist/user"
+      ],
+      "@lucca-front/ng/date": [
+        "../../dist/date"
       ]
     }
   },
