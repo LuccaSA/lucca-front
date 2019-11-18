@@ -44,7 +44,7 @@ export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 	setValue(value: Date) {
 		this._value = value;
 	}
-	protected _select(val: Date) {
+	_select(val: Date) {
 		this._emitSelectValue(val);
 		// if (!this.multiple) {
 			this._emitCloseEvent();
