@@ -1,0 +1,23 @@
+.calendar {
+  width: 14rem;
+}
+
+.calendar-header {
+  display: flex;
+}
+
+.calendar-header-date {
+  margin-right: auto;
+}
+
+.calendar-labels {
+  display: grid;
+  grid-template-columns: repeat(7, 2rem);
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 2rem);  
+  text-align: center;
+}
