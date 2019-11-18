@@ -36,8 +36,6 @@ export class LuDateCalendarComponent extends ALuInput implements ControlValueAcc
 	protected renderDailyView(month: Date) {
 		this.days = [];
 		const start = new Date(month);
-		// const isFirstMonth = start.getMonth() === 0;
-		// console.log(`${this._locale} - ${getLocaleFirstDayOfWeek(this._locale)}`);
 		let index = 1;
 		start.setDate(index);
 		const isFirstDayOfWeek = start.getDay() === getLocaleFirstDayOfWeek(this._locale);
@@ -46,7 +44,6 @@ export class LuDateCalendarComponent extends ALuInput implements ControlValueAcc
 			index = -1 * offset;
 			start.setDate(-1 * offset);
 		}
-		// console.log(start);
 		while (true) {
 			const day = new Date(month);
 			day.setDate(index++);
