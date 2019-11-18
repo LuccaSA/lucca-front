@@ -8,6 +8,7 @@ import { LuDateModule } from '@lucca-front/ng/date';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LuOptionModule } from '@lucca-front/ng/option';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 		LuSelectModule,
 		LuDateModule,
 		LuInputModule,
+		LuOptionModule,
 		CommonModule,
 		FormsModule,
 		RouterModule.forChild([
