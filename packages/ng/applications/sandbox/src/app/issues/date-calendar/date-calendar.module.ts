@@ -25,9 +25,9 @@ registerLocaleData(localeGb);
 		]),
 	],
 	providers: [
-		{ provide: LOCALE_ID, useValue: 'fr-FR' }
-		// { provide: LOCALE_ID, useValue: 'en-GB' }
-		// { provide: LOCALE_ID, useValue: 'en-US' }
+		// { provide: LOCALE_ID, useValue: 'fr-FR' },
+		// { provide: LOCALE_ID, useValue: 'en-GB' },
+		{ provide: LOCALE_ID, useValue: 'en-US' },
 	]
 })
 export class DateCalendarModule {}

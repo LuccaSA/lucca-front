@@ -20,6 +20,7 @@ export class LuDateCalendarComponent extends ALuInput<Date> implements ControlVa
 	// daily view
 	month: Date;
 	days: Date[] = [];
+	labels: Date[] = [];
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef,
@@ -62,6 +63,7 @@ export class LuDateCalendarComponent extends ALuInput<Date> implements ControlVa
 				this.days.push(day);
 			}
 		}
+		this.labels = this.days.filter((v, i) => i < 7);
 	}
 	selectDay(day: Date) {
 		this.setValue(day);
