@@ -41,7 +41,7 @@ export class LuDateCalendarComponent extends ALuInput<Date> implements ControlVa
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	ngOnInit() {
-		// this.month = this.value ? new Date(this.value) : new Date();
+		this.month = this.value ? new Date(this.value) : new Date();
 	}
 	protected render() {
 		this.renderDailyView();
