@@ -12,14 +12,6 @@
 		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label | date: 'EEEEE' }}</div>
 	</section>
 	<section class="calendar-grid">
-		<!-- <button class="calendar-grid-item is-previousMonth">30</button>
-		<button class="calendar-grid-item is-previousMonth">31</button>
-		<button class="calendar-grid-item">1</button>
-		<button class="calendar-grid-item">2</button>
-		<button class="calendar-grid-item is-today">3</button>
-		<button class="calendar-grid-item is-active">4</button>
-		<button class="calendar-grid-item is-disabled">5</button> -->
-
 		<button class="calendar-grid-item" *ngFor="let day of days; trackBy: trackBy" [ngClass]="day.mods" (click)="selectDay(day)">{{ day.date | date: 'd' }}</button>
 	</section>
 </section>

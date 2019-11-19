@@ -15,19 +15,19 @@ function isSameDay(a: Date, b: Date): boolean {
 		&& a.getDate() === b.getDate();
 }
 @Component({
-	selector: 'lu-date-calendar',
-	templateUrl: './date-calendar.component.html',
-	styleUrls: ['./date-calendar.component.scss'],
+	selector: 'lu-calendar',
+	templateUrl: './calendar-input.component.html',
+	styleUrls: ['./calendar-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuDateCalendarComponent),
+			useExisting: forwardRef(() => LuCalendarInputComponent),
 			multi: true,
 		},
 	],
 })
-export class LuDateCalendarComponent extends ALuInput<Date> implements ControlValueAccessor, OnInit {
+export class LuCalendarInputComponent extends ALuInput<Date> implements ControlValueAccessor, OnInit {
 	// daily view
 	month: Date;
 	days: IDay[] = [];

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LuDateCalendarModule } from '../calendar/index';
+import { LuCalendarInputModule } from '../calendar/index';
 import { LuDatePickerComponent } from './date-picker.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -10,7 +10,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 	imports: [
 		FormsModule,
 		CommonModule,
-		LuDateCalendarModule,
+		LuCalendarInputModule,
 		OverlayModule,
 		A11yModule,
 	],

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LuDateCalendarComponent } from './date-calendar.component';
+import { LuCalendarInputComponent } from './calendar-input.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,10 +9,10 @@ import { CommonModule } from '@angular/common';
 		CommonModule,
 	],
 	exports: [
-		LuDateCalendarComponent,
+		LuCalendarInputComponent,
 	],
 	declarations: [
-		LuDateCalendarComponent,
+		LuCalendarInputComponent,
 	],
 })
-export class LuDateCalendarModule {}
+export class LuCalendarInputModule {}

@@ -1,2 +1,2 @@
-export * from './date-calendar.module';
-export * from './date-calendar.component';
+export * from './calendar-input.module';
+export * from './calendar-input.component';
