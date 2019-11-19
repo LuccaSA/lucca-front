@@ -1,13 +1,12 @@
 import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, ElementRef, Renderer2, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getLocaleFirstDayOfWeek } from '@angular/common';
+import { getLocaleFirstDayOfWeek, DatePipe, getLocaleDayNames, FormStyle, TranslationWidth } from '@angular/common';
+import { LuCalendarItemFactory } from './calendar-item.factory';
+import { ICalendarItem } from './calendar-item.interface';
 
-interface IDay {
-	id: string;
-	date: Date;
-	mods: string[];
-}
+
+
 function isSameDay(a: Date, b: Date): boolean {
 	return !!a && !!b
 		&& a.getFullYear() === b.getFullYear()
@@ -30,73 +29,82 @@ function isSameDay(a: Date, b: Date): boolean {
 export class LuCalendarInputComponent extends ALuInput<Date> implements ControlValueAccessor, OnInit {
 	// daily view
 	month: Date;
-	days: IDay[] = [];
-	labels: Date[] = [];
+	header: ICalendarItem;
+	items: ICalendarItem[] = [];
+	labels: string[] = [];
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef,
 		_renderer: Renderer2,
 		@Inject(LOCALE_ID) private _locale: string,
+		private _factory: LuCalendarItemFactory,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	ngOnInit() {
 		this.month = this.value ? new Date(this.value) : new Date();
+		this.initDayLabels();
+	}
+	initDayLabels() {
+		this.labels = getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Narrow);
+		if (getLocaleFirstDayOfWeek(this._locale) === 1) {
+			this.labels.push(this.labels.shift());
+		}
 	}
 	protected render() {
 		this.renderDailyView();
 	}
 
 	protected renderDailyView(month: Date = this.month) {
-		this.days = [];
+		this.items = [];
 		const start = new Date(month);
 		let index = 1;
 		const today = new Date();
 		start.setDate(index);
 		const isFirstDayOfWeek = start.getDay() === getLocaleFirstDayOfWeek(this._locale);
+		this.header = this._factory.forgeMonth(month);
 		if (!isFirstDayOfWeek) {
 			const offset = (start.getDay() - getLocaleFirstDayOfWeek(this._locale) - 1 + 7) % 7;
 			index = -1 * offset;
 			start.setDate(-1 * offset);
 		}
 		while (true) {
-			const day = { date: new Date(month), mods: [], id: '' } as IDay;
-			day.date.setDate(index++);
-			day.id = day.date.toISOString();
+			const date = new Date(month);
+			date.setDate(index++);
+			const day = this._factory.forgeDay(date);
+
 			if (index <= 1) {
 				day.mods.push('is-previousMonth');
-			} else if (day.date.getMonth() !== month.getMonth()) {
+			} else if (date.getMonth() !== month.getMonth()) {
 				day.mods.push('is-nextMonth');
 			}
-			if (isSameDay(day.date, today)) {
+			if (isSameDay(date, today)) {
 				day.mods.push('is-today');
 			}
-			if (isSameDay(day.date, this.value)) {
+			if (isSameDay(date, this.value)) {
 				day.mods.push('is-active');
 			}
-			console.log(isSameDay(day.date, this.value))
 			const isNextMonth = index > 1 && day.date.getMonth() !== month.getMonth();
 			const isFDOW = day.date.getDay() === getLocaleFirstDayOfWeek(this._locale);
 			if (isFDOW && isNextMonth) {
 				break;
 			} else {
-				this.days.push(day);
+				this.items.push(day);
 			}
 		}
-		this.labels = this.days.filter((v, i) => i < 7).map(d => d.date);
 	}
-	selectDay(day: IDay) {
-		this.month = day.date ? new Date(day.date) : new Date();
+	select(item: ICalendarItem) {
+		this.month = item.date ? new Date(item.date) : new Date();
 		this.month.setDate(1);
-		this.setValue(day.date);
+		this.setValue(item.date);
 	}
-	previousMonth() {
+	previous() {
 		this.month = new Date(this.month);
 		this.month.setDate(-10);
 		this.month.setDate(1);
 		this.renderDailyView();
 	}
-	nextMonth() {
+	next() {
 		this.month = new Date(this.month);
 		this.month.setDate(32);
 		this.month.setDate(1);

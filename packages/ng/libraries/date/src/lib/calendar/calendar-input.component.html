@@ -1,17 +1,18 @@
 <section class="calendar">
 	<header class="calendar-header">
-		<div class="calendar-header-date">
-			{{ month | date: 'MMMM y'}}
-		</div>
+		<button class="calendar-header-date">
+			<!-- {{ month | date: 'MMMM y'}} -->
+			{{ header.label }}
+		</button>
 		<!-- <button class="calendar-header-previous"></button>
 		<button class="calendar-header-next"></button> -->
-		<button class="actionIcon" (click)="previousMonth()"><i class="lucca-icon">arrow_west_thin</i></button>
-		<button class="actionIcon" (click)="nextMonth()"><i class="lucca-icon">arrow_east_thin</i></button>
+		<button class="actionIcon" (click)="previous()"><i class="lucca-icon">arrow_west_thin</i></button>
+		<button class="actionIcon" (click)="next()"><i class="lucca-icon">arrow_east_thin</i></button>
 	</header>
 	<section class="calendar-labels">
-		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label | date: 'EEEEE' }}</div>
+		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
 	</section>
 	<section class="calendar-grid">
-		<button class="calendar-grid-item" *ngFor="let day of days; trackBy: trackBy" [ngClass]="day.mods" (click)="selectDay(day)">{{ day.date | date: 'd' }}</button>
+		<button class="calendar-grid-item" *ngFor="let item of items; trackBy: trackBy" [ngClass]="item.mods" (click)="select(item)">{{ item.label }}</button>
 	</section>
 </section>
