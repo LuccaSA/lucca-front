@@ -40,12 +40,6 @@ export class LuDateCalendarComponent extends ALuInput<Date> implements ControlVa
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
-	set value(v: Date) {
-		this.month = v ? new Date(v) : new Date();
-		this.month.setDate(1);
-		super.value = v;
-	}
-	get value() { return super.value; }
 	ngOnInit() {
 		// this.month = this.value ? new Date(this.value) : new Date();
 	}
@@ -92,6 +86,8 @@ export class LuDateCalendarComponent extends ALuInput<Date> implements ControlVa
 		this.labels = this.days.filter((v, i) => i < 7).map(d => d.date);
 	}
 	selectDay(day: IDay) {
+		this.month = day.date ? new Date(day.date) : new Date();
+		this.month.setDate(1);
 		this.setValue(day.date);
 	}
 	previousMonth() {
