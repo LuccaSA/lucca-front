@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
-import { ILuSidepanelContent } from './sidepanel.model';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { ALuModalPanelComponent } from '../modal/index';
 import { ALuSidepanelRef } from './sidepanel-ref.model';
 import { LuSidepanelIntl } from './sidepanel.intl';
+import { ILuSidepanelContent } from './sidepanel.model';
 import { ILuSidepanelLabel } from './sidepanel.translate';
-import { ALuModalPanelComponent } from '../modal/index';
 
 
 @Component({
@@ -11,7 +11,6 @@ import { ALuModalPanelComponent } from '../modal/index';
 	templateUrl: './sidepanel-panel.component.html',
 	styleUrls: ['./sidepanel-panel.component.scss'],
 	host: {'class': 'lu-sidepanel-panel'},
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepanelContent> extends ALuModalPanelComponent<T> {
 	constructor(

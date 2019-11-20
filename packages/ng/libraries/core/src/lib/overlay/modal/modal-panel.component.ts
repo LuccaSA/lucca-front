@@ -1,11 +1,11 @@
-import { Component, ViewChild, ComponentRef, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
-import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
-import { ILuModalContent } from './modal.model';
+import { CdkPortalOutlet, Portal, PortalOutlet } from '@angular/cdk/portal';
+import { ChangeDetectorRef, Component, ComponentRef, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
-import { ILuModalLabel } from './modal.translate'
-import { Subject, timer, Observable, Subscription } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
+import { ILuModalContent } from './modal.model';
+import { ILuModalLabel } from './modal.translate';
 
 export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true }) protected _outlet: PortalOutlet;
@@ -91,7 +91,6 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
 	host: {'class': 'lu-modal-panel'},
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	constructor(
