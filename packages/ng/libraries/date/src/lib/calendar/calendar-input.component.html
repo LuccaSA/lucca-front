@@ -13,6 +13,8 @@
 		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
 	</section>
 	<section class="calendar-grid" [ngClass]="mod">
-		<button class="calendar-grid-item" *ngFor="let item of items; trackBy: trackBy" [ngClass]="item.mods" (click)="select(item)">{{ item.label }}</button>
+		<button class="calendar-grid-item" *ngFor="let item of items; trackBy: trackBy" [ngClass]="item.mods" (click)="select(item)">
+			<div class="calendar-grid-item-content">{{ item.label }}</div>
+		</button>
 	</section>
 </section>

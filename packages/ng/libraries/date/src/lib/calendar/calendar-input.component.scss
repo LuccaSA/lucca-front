@@ -67,11 +67,12 @@
 	height: 2.4rem;
 	border: none;
 	cursor: pointer;
-	border-radius: 2rem;
 	background: transparent;
 	position: relative;
+	padding: 0;
+	outline: none;
 
-	&.is-previousMonth {
+	&.is-previousMonth, &.is-nextMonth {
 		color: _color("text.placeholder");
 	}
 
@@ -92,26 +93,40 @@
 	}
 
 	&:hover {
-		background: _theme("commons.background.dark");
+		.calendar-grid-item-content {
+			background: _theme("commons.background.dark");
+		}
 	}
 
 	&.is-active {
-		background: _color("primary");
-		color: _color("primary", "text");
+		.calendar-grid-item-content {
+			background: _color("primary");
+			color: _color("primary", "text");
+		}
 
 		&.is-today {
-			&:after {
-				content: "";
-				z-index: 1;
-				color: _color("primary");
-				box-shadow: inset 0 0 0 4px white;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				border-radius: 50%;
+			.calendar-grid-item-content {
+				&:after {
+					content: "";
+					z-index: 1;
+					color: _color("primary");
+					box-shadow: inset 0 0 0 4px white;
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					border-radius: 50%;
+				}
 			}
 		}
 	}
+}
+
+.calendar-grid-item-content {
+	position: relative;
+	height: 2.4rem;
+	width: 2.4rem;
+	line-height: 2.4rem;
+	border-radius: 50%;
 }
