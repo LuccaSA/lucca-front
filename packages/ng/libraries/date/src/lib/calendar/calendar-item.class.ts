@@ -34,3 +34,12 @@ export class YearItem extends ACalendarItem implements ICalendarItem {
 		super();
 	}
 }
+export class DecadeItem extends ACalendarItem implements ICalendarItem {
+	readonly granularity = CalendarGranularity.decade;
+	constructor(
+		public date: Date,
+		public label: string,
+		) {
+		super();
+	}
+}

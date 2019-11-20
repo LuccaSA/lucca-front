@@ -1,6 +1,6 @@
 <section class="calendar">
 	<header class="calendar-header">
-		<button class="calendar-header-date">
+		<button class="calendar-header-date" (click)="changeGranularity()">
 			<!-- {{ month | date: 'MMMM y'}} -->
 			{{ header.label }}
 		</button>
@@ -9,10 +9,10 @@
 		<button class="actionIcon" (click)="previous()"><i class="lucca-icon">arrow_west_thin</i></button>
 		<button class="actionIcon" (click)="next()"><i class="lucca-icon">arrow_east_thin</i></button>
 	</header>
-	<section class="calendar-labels">
+	<section class="calendar-labels" [ngClass]="mod">
 		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
 	</section>
-	<section class="calendar-grid">
+	<section class="calendar-grid" [ngClass]="mod">
 		<button class="calendar-grid-item" *ngFor="let item of items; trackBy: trackBy" [ngClass]="item.mods" (click)="select(item)">{{ item.label }}</button>
 	</section>
 </section>

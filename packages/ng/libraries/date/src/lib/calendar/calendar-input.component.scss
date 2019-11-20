@@ -1,23 +1,34 @@
 .calendar {
-  width: 14rem;
+	width: 14rem;
 }
 
 .calendar-header {
-  display: flex;
+	display: flex;
 }
 
 .calendar-header-date {
-  margin-right: auto;
+	margin-right: auto;
 }
 
 .calendar-labels {
-  display: grid;
-  grid-template-columns: repeat(7, 2rem);
-  text-align: center;
+	display: none;
+	&.mod-dailyView {
+		display: grid;
+		grid-template-columns: repeat(7, 2rem);
+		text-align: center;
+	}
 }
 
 .calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 2rem);  
-  text-align: center;
+	display: grid;
+	text-align: center;
+	&.mod-dailyView {
+		grid-template-columns: repeat(7, 2rem);
+	}
+	&.mod-monthlyView {
+		grid-template-columns: repeat(3, 4rem);
+	}
+	&.mod-yearlyView {
+		grid-template-columns: repeat(3, 4rem);
+	}
 }
