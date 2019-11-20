@@ -55,11 +55,11 @@
 	}
 
 	&.mod-monthlyView {
-		grid-template-columns: repeat(3, 4rem);
+		grid-template-columns: repeat(3, 5.83rem);
 	}
 
 	&.mod-yearlyView {
-		grid-template-columns: repeat(3, 4rem);
+		grid-template-columns: repeat(3, 5.83rem);
 	}
 }
 
@@ -67,7 +67,7 @@
 	height: 2.5rem;
 	border: none;
 	cursor: pointer;
-	border-radius: 50%;
+	border-radius: 2rem;
 	background: transparent;
 	position: relative;
 
