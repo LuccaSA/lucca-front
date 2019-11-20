@@ -2,7 +2,7 @@
 
 .calendar {
 	background: white;
-	width: 17.5rem;
+	width: 16.8rem;
 }
 
 .calendar-header {
@@ -38,7 +38,7 @@
 
 	&.mod-dailyView {
 		display: grid;
-		grid-template-columns: repeat(7, 2.5rem);
+		grid-template-columns: repeat(7, 2.4rem);
 		text-align: center;
 		font-size: _theme("sizes.small.font-size");
 		color: _color("text.light");
@@ -51,20 +51,20 @@
 	text-align: center;
 
 	&.mod-dailyView {
-		grid-template-columns: repeat(7, 2.5rem);
+		grid-template-columns: repeat(7, 2.4rem);
 	}
 
 	&.mod-monthlyView {
-		grid-template-columns: repeat(3, 5.83rem);
+		grid-template-columns: repeat(3, 5.6rem);
 	}
 
 	&.mod-yearlyView {
-		grid-template-columns: repeat(3, 5.83rem);
+		grid-template-columns: repeat(3, 5.6rem);
 	}
 }
 
 .calendar-grid-item {
-	height: 2.5rem;
+	height: 2.4rem;
 	border: none;
 	cursor: pointer;
 	border-radius: 2rem;
