@@ -15,6 +15,7 @@ import { LuDateAdapter } from './date.adapter';
 	],
 })
 export class LuDateInputDirective extends ALuInput<Date> {
+	private _focused = false;
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,
@@ -25,8 +26,10 @@ export class LuDateInputDirective extends ALuInput<Date> {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	protected render() {
-		const text = this.value ? formatDate(this.value, 'shortDate', this._locale) : undefined;
-		// this._elementRef.nativeElement.value = text;
+		if (!this._focused) {
+			const text = this.value ? formatDate(this.value, 'shortDate', this._locale) : undefined;
+			this._elementRef.nativeElement.value = text;
+		}
 	}
 	@HostListener('input', ['$event'])
 	onInput(event) {
@@ -34,8 +37,17 @@ export class LuDateInputDirective extends ALuInput<Date> {
 		const value = this.parse(text);
 		this.setValue(value);
 	}
-	parse(text): Date {
+	private parse(text): Date {
 		const date = this._adapter.parseText(text);
 		return date;
+	}
+	@HostListener('focus')
+	onFocus() {
+		this._focused = true;
+	}
+	@HostListener('blur')
+	onBlur() {
+		this._focused = false;
+		this.render();
 	}
 }
