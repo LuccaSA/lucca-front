@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Renderer2, ChangeDetectorRef, Inject, LOCALE_ID, forwardRef, HostListener } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { formatDate } from '@angular/common';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@angular/forms';
 import { LuDateAdapter } from './date.adapter';
 
 @Directive({
@@ -12,9 +12,14 @@ import { LuDateAdapter } from './date.adapter';
 			useExisting: forwardRef(() => LuDateInputDirective),
 			multi: true,
 		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: LuDateInputDirective,
+			multi: true,
+		},
 	],
 })
-export class LuDateInputDirective extends ALuInput<Date> {
+export class LuDateInputDirective extends ALuInput<Date> implements Validator {
 	private _focused = false;
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
@@ -48,5 +53,12 @@ export class LuDateInputDirective extends ALuInput<Date> {
 	onBlur() {
 		this._focused = false;
 		this.render();
+	}
+	validate(control: AbstractControl): ValidationErrors | null {
+		const d = control.value;
+		if (!d) { return null; }
+		if (!(d instanceof Date)) { return { date: true }; }
+		if (isNaN(d.getTime())) { return { date: true }; }
+		return null;
 	}
 }

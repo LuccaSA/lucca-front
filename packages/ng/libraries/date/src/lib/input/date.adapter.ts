@@ -47,9 +47,10 @@ export class LuDateAdapter {
 			return false;
 		}
 	}
-	parseText(text: string): Date {
+	parseText(text: string = ''): Date {
+		if (!text) { return undefined; }
 		if (!this.isValidText(text)) {
-			return undefined;
+			return new Date('Invalid Date');
 		}
 		const groups = text.split(this._regex);
 		const date = parseInt(groups[this._order.date], 10);
