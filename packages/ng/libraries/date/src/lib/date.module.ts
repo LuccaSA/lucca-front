@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LuCalendarInputModule } from './calendar/index';
 import { LuDatePickerModule } from './picker/index';
-import { LuDateInputModule } from './input';
+import { LuDateInputModule } from './input/index';
 
 @NgModule({
 	imports: [
