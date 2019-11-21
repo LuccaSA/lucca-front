@@ -9,4 +9,8 @@ export class DateCalendarComponent implements OnInit {
 	ngOnInit() {
 		// this.date.setFullYear(2016);
 	}
+	random() {
+		this.date = new Date(this.date);
+		this.date.setDate(Math.ceil(Math.random() * 30));
+	}
 }

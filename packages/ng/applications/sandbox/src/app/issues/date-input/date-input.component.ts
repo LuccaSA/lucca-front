@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
 })
 export class DateInputComponent {
 	date = new Date();
+	random() {
+		this.date = new Date(this.date);
+		this.date.setDate(Math.ceil(Math.random() * 30));
+	}
 }
