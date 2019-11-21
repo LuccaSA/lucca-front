@@ -8,6 +8,6 @@ export class DateInputComponent {
 	date = new Date();
 	random() {
 		this.date = new Date(this.date);
-		this.date.setDate(Math.ceil(Math.random() * 30));
+		this.date.setDate(Math.ceil(Math.random() * 1));
 	}
 }
