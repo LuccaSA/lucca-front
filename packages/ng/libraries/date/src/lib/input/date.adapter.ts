@@ -1,7 +1,9 @@
 import { Injectable, Inject, LOCALE_ID } from '@angular/core';
+import { getLocaleDateFormat, FormatWidth } from '@angular/common';
 
 @Injectable()
 export class LuDateAdapter {
+	private _regex = /[\/\,\.\-\s]/i;
 	private _order = {
 		date: 0,
 		month: 1,
@@ -13,15 +15,17 @@ export class LuDateAdapter {
 		this.initOrder();
 	}
 	private initOrder() {
-		this._order = {
-			date: 1,
-			month: 0,
-			year: 2,
-		};
+		const format = getLocaleDateFormat(this._locale, FormatWidth.Short);
+		const groups = format.split(this._regex);
+		groups.forEach((g, i) => {
+			if (g.indexOf('d') !== -1) { return this._order.date = i; }
+			if (g.indexOf('M') !== -1) { return this._order.month = i; }
+			if (g.indexOf('y') !== -1) { return this._order.year = i; }
+		});
 	}
 	isValidText(text: string): boolean {
 		if (!text) { return false; }
-		const groups = text.split(/\s/i);
+		const groups = text.split(this._regex);
 		if (groups.length !== 3) { return false; }
 		try {
 			const date = parseInt(groups[this._order.date], 10);
@@ -47,7 +51,7 @@ export class LuDateAdapter {
 		if (!this.isValidText(text)) {
 			return undefined;
 		}
-		const groups = text.split(/\s/i);
+		const groups = text.split(this._regex);
 		const date = parseInt(groups[this._order.date], 10);
 		const month = parseInt(groups[this._order.month], 10);
 		const year = parseInt(groups[this._order.year], 10);
