@@ -26,10 +26,9 @@ export class LuDateInputDirective extends ALuInput<Date> {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	protected render() {
-		if (!this._focused) {
-			const text = this.value ? formatDate(this.value, 'shortDate', this._locale) : undefined;
-			this._elementRef.nativeElement.value = text;
-		}
+		if (this._focused) { return; }
+		const text = this.value ? formatDate(this.value, 'shortDate', this._locale) : '';
+		this._elementRef.nativeElement.value = text;
 	}
 	@HostListener('input', ['$event'])
 	onInput(event) {
