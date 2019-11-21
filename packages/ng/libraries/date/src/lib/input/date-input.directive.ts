@@ -13,7 +13,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 		},
 	],
 })
-export class LuDateInputDirective extends ALuInput {
+export class LuDateInputDirective extends ALuInput<Date> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,
