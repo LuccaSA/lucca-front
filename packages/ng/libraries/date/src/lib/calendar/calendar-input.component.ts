@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getLocaleFirstDayOfWeek, getLocaleDayNames, FormStyle, TranslationWidth } from '@angular/common';
 import { LuCalendarItemFactory } from './calendar-item.factory';
 import { ICalendarItem, CalendarGranularity } from './calendar-item.interface';
+import { LuDateAdapter } from '../input/date.adapter';
 
 
 
@@ -48,6 +49,7 @@ export class LuCalendarInputComponent extends ALuInput<Date> implements ControlV
 		_renderer: Renderer2,
 		@Inject(LOCALE_ID) private _locale: string,
 		private _factory: LuCalendarItemFactory,
+		private _adapter: LuDateAdapter,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
