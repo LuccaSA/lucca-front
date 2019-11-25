@@ -3,6 +3,7 @@ import { LOCALE_ID, Inject } from '@angular/core';
 import { getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
 
 export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
+
 	private _regex = /[\/\,\.\-\s]/i;
 	private _order = {
 		date: 0,
@@ -76,6 +77,36 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		return isADate && isARealDate;
 	}
 	compare(a: Date, b: Date, granularity: DateGranularity): number {
-		throw new Error('Method not implemented.');
+		if (!a || !b || !this.isValid(a) || !this.isValid(b)) {
+			throw new Error('you must provide valid and not null dates to be compared');
+		}
+		const aDecade = Math.floor(a.getFullYear() / 10);
+		const bDecade = Math.floor(b.getFullYear() / 10);
+		if (aDecade < bDecade) { return -1; }
+		if (aDecade > bDecade) { return 1; }
+		if (granularity === DateGranularity.decade) { return 0; }
+
+		const aYear = a.getFullYear();
+		const bYear = b.getFullYear();
+		if (aYear < bYear) { return -1; }
+		if (aYear > bYear) { return 1; }
+		if (granularity === DateGranularity.year) { return 0; }
+
+		const aMonth = a.getMonth();
+		const bMonth = b.getMonth();
+		if (aMonth < bMonth) { return -1; }
+		if (aMonth > bMonth) { return 1; }
+		if (granularity === DateGranularity.month) { return 0; }
+
+		const aDate = a.getDate();
+		const bDate = b.getDate();
+		if (aDate < bDate) { return -1; }
+		if (aDate > bDate) { return 1; }
+		if (granularity === DateGranularity.day) { return 0; }
+
+		return 0;
+	}
+	clone(d: Date): Date {
+		return new Date(d);
 	}
 }

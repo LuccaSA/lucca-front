@@ -8,4 +8,5 @@ export interface ILuDateAdapter<D> {
 	isParsable(text: string): boolean;
 	parse(text: string): D;
 	format(d: D, format: string): string;
+	clone(d: D): D;
 }
