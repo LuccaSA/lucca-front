@@ -79,45 +79,45 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 
 	protected renderDailyView(month: D = this.header.date) {
 		// TODO - fix it
-		// this.items = [];
-		// const start = new Date(month);
-		// let index = 1;
-		// const today = new Date();
+		this.items = [];
+		const start = new Date(this._adapter.getYear(month), this._adapter.getMonth(month) - 1, 1);
+		let index = 1;
+		const t = new Date();
+		const today = this._adapter.forge(t.getFullYear(), t.getMonth() + 1, t.getDate());
 		// start.setDate(index);
-		// const isFirstDayOfWeek = start.getDay() === getLocaleFirstDayOfWeek(this._locale);
-		// this.header = this._factory.forgeMonth(month, 'MMMM y');
-		// if (!isFirstDayOfWeek) {
-		// 	const offset = (start.getDay() - getLocaleFirstDayOfWeek(this._locale) - 1 + 7) % 7;
-		// 	index = -1 * offset;
-		// 	start.setDate(-1 * offset);
-		// }
-		// while (true) {
-		// 	const date = new Date(month);
-		// 	date.setDate(index++);
-		// 	const day = this._factory.forgeDay(date);
+		const isFirstDayOfWeek = start.getDay() === getLocaleFirstDayOfWeek(this._locale);
+		this.header = this._factory.forgeMonth(month, 'MMMM y');
+		if (!isFirstDayOfWeek) {
+			const offset = (start.getDay() - getLocaleFirstDayOfWeek(this._locale) - 1 + 7) % 7;
+			index = -1 * offset;
+			start.setDate(-1 * offset);
+		}
+		while (true) {
+			const date = new Date(this._adapter.getYear(month), this._adapter.getMonth(month) - 1, 1);
+			date.setDate(index++);
+			const d = this._adapter.forge(date.getFullYear(), date.getMonth() + 1, date.getDate());
+			const day = this._factory.forgeDay(d);
 
-			// if (index <= 1) {
-			// 	day.mods.push('is-previousMonth');
-			// } else if (date.getMonth() !== month.getMonth()) {
-			// 	day.mods.push('is-nextMonth');
-			// }
-			// if (isSameDay(date, today)) {
-			// 	day.mods.push('is-today');
-			// }
-			// if (isSameDay(date, this.value)) {
-			// 	day.mods.push('is-active');
-			// }
-		// 	if (this._adapter.compare(date, month, DateGranularity.month) < 0) {
-		// 	// 	day.mods.push('is-previousMonth');
-		// 	}
-		// 	const isNextMonth = index > 1 && day.date.getMonth() !== month.getMonth();
-		// 	const isFDOW = day.date.getDay() === getLocaleFirstDayOfWeek(this._locale);
-		// 	if (isFDOW && isNextMonth) {
-		// 		break;
-		// 	} else {
-		// 		this.items.push(day);
-		// 	}
-		// }
+			if (this._adapter.compare(d, month, DateGranularity.month) < 0) {
+				day.mods.push('is-previousMonth');
+			}
+			if (this._adapter.compare(d, month, DateGranularity.month) > 0) {
+				day.mods.push('is-nextMonth');
+			}
+			if (this._adapter.compare(d, today, DateGranularity.day) === 0) {
+				day.mods.push('is-today');
+			}
+			if (this.value && this._adapter.isValid(this.value) && this._adapter.compare(d, this.value, DateGranularity.day) === 0) {
+				day.mods.push('is-active');
+			}
+			const isNextMonth = this._adapter.compare(d, month, DateGranularity.month) > 0;
+			const isFDOW = date.getDay() === getLocaleFirstDayOfWeek(this._locale);
+			if (isFDOW && isNextMonth) {
+				break;
+			} else {
+				this.items.push(day);
+			}
+		}
 	}
 	protected renderMonthlyView(year: D = this.header.date) {
 		this.header = this._factory.forgeYear(year);
