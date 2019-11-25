@@ -4,9 +4,9 @@ export enum CalendarGranularity {
 	year = 'year',
 	decade = 'decade',
 }
-export interface ICalendarItem {
+export interface ICalendarItem<D> {
 	id: string;
-	date: Date;
+	date: D;
 	mods: string[];
 	label: string;
 	granularity: CalendarGranularity;
