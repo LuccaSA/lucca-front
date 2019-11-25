@@ -1,8 +1,7 @@
 import { Directive, ElementRef, Renderer2, ChangeDetectorRef, Inject, LOCALE_ID, forwardRef, HostListener } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
-import { formatDate } from '@angular/common';
 import { NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@angular/forms';
-import { LuDateAdapter } from './date.adapter';
+import { ALuDateAdapter } from '../adapter/index';
 
 @Directive({
 	selector: 'input[luDateInput]',
@@ -19,20 +18,20 @@ import { LuDateAdapter } from './date.adapter';
 		},
 	],
 })
-export class LuDateInputDirective extends ALuInput<Date> implements Validator {
+export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 	private _focused = false;
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,
 		_renderer: Renderer2,
 		@Inject(LOCALE_ID) private _locale: string,
-		private _adapter: LuDateAdapter,
+		private _adapter: ALuDateAdapter<D>,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	protected render() {
 		if (this._focused) { return; }
-		const text = this.value ? formatDate(this.value, 'shortDate', this._locale) : '';
+		const text = this.value ? this._adapter.format(this.value, 'shortDate') : '';
 		this._elementRef.nativeElement.value = text;
 	}
 	@HostListener('input', ['$event'])
@@ -41,8 +40,8 @@ export class LuDateInputDirective extends ALuInput<Date> implements Validator {
 		const value = this.parse(text);
 		this.setValue(value);
 	}
-	private parse(text): Date {
-		const date = this._adapter.parseText(text);
+	private parse(text): D {
+		const date = this._adapter.parse(text);
 		return date;
 	}
 	@HostListener('focus')
@@ -57,8 +56,8 @@ export class LuDateInputDirective extends ALuInput<Date> implements Validator {
 	validate(control: AbstractControl): ValidationErrors | null {
 		const d = control.value;
 		if (!d) { return null; }
-		if (!(d instanceof Date)) { return { 'date': true }; }
-		if (isNaN(d.getTime())) { return { 'date': true }; }
+		if (!this._adapter.isValid(d)) { return { 'date': true }; }
 		return null;
 	}
 }
+
