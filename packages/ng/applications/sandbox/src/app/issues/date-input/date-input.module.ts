@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DateInputComponent } from './date-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LuDateModule } from '@lucca-front/ng/date';
+import { LuDateModule, LuNativeDateAdapterModule } from '@lucca-front/ng/date';
 
 import localeFr from '@angular/common/locales/fr';
 import localeGb from '@angular/common/locales/en-GB';
@@ -21,6 +21,7 @@ registerLocaleData(localeDe);
 	imports: [
 		FormsModule,
 		LuDateModule,
+		LuNativeDateAdapterModule,
 		CommonModule,
 		ReactiveFormsModule,
 		RouterModule.forChild([
