@@ -109,4 +109,14 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 	clone(d: Date): Date {
 		return new Date(d);
 	}
+
+	getYear(d: Date): number {
+		return d.getFullYear();
+	}
+	getMonth(d: Date): number {
+		return d.getMonth() + 1;
+	}
+	getDate(d: Date): number {
+		return d.getDate();
+	}
 }

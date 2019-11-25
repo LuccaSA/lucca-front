@@ -9,4 +9,8 @@ export interface ILuDateAdapter<D> {
 	parse(text: string): D;
 	format(d: D, format: string): string;
 	clone(d: D): D;
+
+	getYear(d: D): number;
+	getMonth(d: D): number;
+	getDate(d: D): number;
 }
