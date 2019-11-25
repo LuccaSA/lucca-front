@@ -1,14 +1,15 @@
-import { ICalendarItem, CalendarGranularity } from './calendar-item.interface';
+import { ICalendarItem } from './calendar-item.interface';
+import { DateGranularity } from '../adapter/index';
 
 export abstract class ACalendarItem<D> implements ICalendarItem<D> {
 	get id() { return `${this.granularity}-${this.date.toString()}`; }
 	date: D;
 	mods: string[] = [];
 	label: string;
-	readonly granularity: CalendarGranularity;
+	readonly granularity: DateGranularity;
 }
 export class DayItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = CalendarGranularity.day;
+	readonly granularity = DateGranularity.day;
 	constructor(
 		public date: D,
 		public label: string,
@@ -17,7 +18,7 @@ export class DayItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	}
 }
 export class MonthItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = CalendarGranularity.month;
+	readonly granularity = DateGranularity.month;
 	constructor(
 		public date: D,
 		public label: string,
@@ -26,7 +27,7 @@ export class MonthItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	}
 }
 export class YearItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = CalendarGranularity.year;
+	readonly granularity = DateGranularity.year;
 	constructor(
 		public date: D,
 		public label: string,
@@ -35,7 +36,7 @@ export class YearItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	}
 }
 export class DecadeItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = CalendarGranularity.decade;
+	readonly granularity = DateGranularity.decade;
 	constructor(
 		public date: D,
 		public label: string,
