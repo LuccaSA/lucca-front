@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { DatePickerComponent } from './date-picker.component';
 
 import { LuSelectModule } from '@lucca-front/ng/select';
-import { LuDateModule } from '@lucca-front/ng/date';
+import { LuDateModule, ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/date';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,5 +26,8 @@ import { LuOptionModule } from '@lucca-front/ng/option';
 			{ path: '', component: DatePickerComponent },
 		]),
 	],
+	providers: [
+		{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },
+	]
 })
 export class DatePickerModule {}
