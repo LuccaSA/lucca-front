@@ -15,7 +15,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ALuDateAdapter } from '../adapter/index';
+import { ALuDateAdapter, DateGranularity } from '../adapter/index';
 
 @Component({
 	selector: 'lu-date-select',
@@ -38,7 +38,8 @@ import { ALuDateAdapter } from '../adapter/index';
 export class LuDateSelectInputComponent<D, P extends ILuPickerPanel<D> = ILuPickerPanel<D>>
 extends ALuSelectInputComponent<D, P>
 implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit, Validator {
-
+	@Input() min?: D;
+	@Input() max?: D;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	overlapInput = true;
 	constructor(
@@ -74,6 +75,12 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit, Valida
 		const d = control.value;
 		if (!d) { return null; }
 		if (!this._adapter.isValid(d)) { return { 'date': true }; }
+		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, DateGranularity.day) > 0) {
+			return { 'min': true };
+		}
+		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, DateGranularity.day) < 0) {
+			return { 'max': true };
+		}
 		return null;
 	}
 }
