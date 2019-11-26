@@ -7,4 +7,4 @@ import { LuNativeDateAdapter } from './native-date.adapter';
 		{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },
 	]
 })
-export class LuNativeDateAdapterModule {}
+export class LuNativeDateModule {}
