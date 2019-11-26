@@ -4,3 +4,4 @@ export * from './input/index';
 export * from './picker/index';
 export * from './adapter/index';
 export * from './native/index';
+export * from './select/index';
