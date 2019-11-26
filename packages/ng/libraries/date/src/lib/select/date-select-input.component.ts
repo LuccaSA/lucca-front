@@ -15,7 +15,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ALuDateAdapter } from 'dist/date/lib';
+import { ALuDateAdapter } from '../adapter/index';
 
 @Component({
 	selector: 'lu-date-select',
