@@ -204,36 +204,45 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 	// TODO - fix
 	protected nextMonth() {
-		// const date = new Date(this.header.date);
-		// date.setDate(32);
-		// date.setDate(1);
-		// this.header = this._factory.forgeMonth(date);
+		const year = this._adapter.getYear(this.header.date);
+		const month = this._adapter.getMonth(this.header.date);
+		const date = this._adapter.getDate(this.header.date);
+		const temp = new Date(year, month - 1, date);
+		temp.setDate(32);
+		temp.setDate(1);
+
+		const d = this._adapter.forge(temp.getFullYear(), temp.getMonth() + 1, 1);
+		this.header = this._factory.forgeMonth(d);
 	}
 	protected nextYear() {
-		// const date = new Date(this.header.date);
-		// date.setFullYear(date.getFullYear() + 1);
-		// date.setDate(1);
-		// this.header = this._factory.forgeYear(date);
+		const year = this._adapter.getYear(this.header.date) + 1;
+		const d = this._adapter.forge(year, 1, 1);
+		this.header = this._factory.forgeYear(d);
 	}
 	protected nextDecade() {
-		// const date = new Date(this.header.date);
-		// date.setFullYear(date.getFullYear() + 10);
-		// this.header = this._factory.forgeDecade(date);
+		const year = this._adapter.getYear(this.header.date) + 10;
+		const d = this._adapter.forge(year, 1, 1);
+		this.header = this._factory.forgeDecade(d);
 	}
 	protected previousMonth() {
-		// const date = new Date(this.header.date);
-		// date.setDate(-10);
-		// date.setDate(1);
-		// this.header = this._factory.forgeMonth(date);
+		const year = this._adapter.getYear(this.header.date);
+		const month = this._adapter.getMonth(this.header.date);
+		const date = this._adapter.getDate(this.header.date);
+		const temp = new Date(year, month - 1, date);
+		temp.setDate(-10);
+		temp.setDate(1);
+
+		const d = this._adapter.forge(temp.getFullYear(), temp.getMonth() + 1, 1);
+		this.header = this._factory.forgeMonth(d);
 	}
 	protected previousYear() {
-		// const date = new Date(this.header.date);
-		// date.setFullYear(date.getFullYear() - 1);
-		// this.header = this._factory.forgeYear(date);
+		const year = this._adapter.getYear(this.header.date) - 1;
+		const d = this._adapter.forge(year, 1, 1);
+		this.header = this._factory.forgeYear(d);
 	}
 	protected previousDecade() {
-		// const date = new Date(this.header.date);
-		// date.setFullYear(date.getFullYear() - 10);
-		// this.header = this._factory.forgeDecade(date);
+		const year = this._adapter.getYear(this.header.date) - 10;
+		const d = this._adapter.forge(year, 1, 1);
+		this.header = this._factory.forgeDecade(d);
 	}
 }
