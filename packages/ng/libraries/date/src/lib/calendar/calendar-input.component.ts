@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, ElementRef, Renderer2, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, ElementRef, Renderer2, Inject, LOCALE_ID, OnInit, Input } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, ValidationErrors, NG_VALIDATORS } from '@angular/forms';
 import { getLocaleFirstDayOfWeek, getLocaleDayNames, FormStyle, TranslationWidth } from '@angular/common';
 import { LuCalendarItemFactory } from './calendar-item.factory';
 import { ICalendarItem } from './calendar-item.interface';
@@ -17,9 +17,17 @@ import { ALuDateAdapter, DateGranularity } from '../adapter/index';
 			useExisting: forwardRef(() => LuCalendarInputComponent),
 			multi: true,
 		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: LuCalendarInputComponent,
+			multi: true,
+		},
 	],
 })
-export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit {
+export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
+	@Input() min?: D;
+	@Input() max?: D;
+
 	granularity: DateGranularity;
 	header: ICalendarItem<D>;
 	items: ICalendarItem<D>[] = [];
@@ -78,13 +86,12 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 
 	protected renderDailyView(month: D = this.header.date) {
-		// TODO - fix it
+		// todo - add class is-disabled to prevent selecting date over min/max
 		this.items = [];
 		const start = new Date(this._adapter.getYear(month), this._adapter.getMonth(month) - 1, 1);
 		let index = 1;
 		const t = new Date();
 		const today = this._adapter.forge(t.getFullYear(), t.getMonth() + 1, t.getDate());
-		// start.setDate(index);
 		const isFirstDayOfWeek = start.getDay() === getLocaleFirstDayOfWeek(this._locale);
 		this.header = this._factory.forgeMonth(month, 'MMMM y');
 		if (!isFirstDayOfWeek) {
@@ -120,6 +127,8 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		}
 	}
 	protected renderMonthlyView(year: D = this.header.date) {
+		// todo - add class is-active, is-today
+		// todo - add class is-disabled to prevent selecting date over min/max
 		this.header = this._factory.forgeYear(year);
 		this.items = [...Array(12).keys()].map(i => {
 			const d = this._adapter.forge(this._adapter.getYear(year), i + 1, 1);
@@ -127,6 +136,8 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		});
 	}
 	protected renderYearlyView(decade: D = this.header.date) {
+		// todo - add class is-active, is-today
+		// todo - add class is-disabled to prevent selecting date over min/max
 		this.header = this._factory.forgeDecade(decade);
 		this.items = [...Array(10).keys()].map(i => {
 			const d = this._adapter.forge(this._adapter.getYear(decade) + i, 1, 1);
@@ -244,5 +255,18 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		const year = this._adapter.getYear(this.header.date) - 10;
 		const d = this._adapter.forge(year, 1, 1);
 		this.header = this._factory.forgeDecade(d);
+	}
+
+	validate(control: AbstractControl): ValidationErrors | null {
+		const d = control.value;
+		if (!d) { return null; }
+		if (!this._adapter.isValid(d)) { return { 'date': true }; }
+		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, DateGranularity.day) > 0) {
+			return { 'min': true };
+		}
+		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, DateGranularity.day) < 0) {
+			return { 'max': true };
+		}
+		return null;
 	}
 }
