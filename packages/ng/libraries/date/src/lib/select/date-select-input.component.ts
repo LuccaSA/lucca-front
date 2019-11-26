@@ -10,11 +10,12 @@ import {
 	Renderer2,
 	AfterContentInit,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { ALuDateAdapter } from 'dist/date/lib';
 
 @Component({
 	selector: 'lu-date-select',
@@ -27,11 +28,16 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 			useExisting: forwardRef(() => LuDateSelectInputComponent),
 			multi: true,
 		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: LuDateSelectInputComponent,
+			multi: true,
+		},
 	],
 })
 export class LuDateSelectInputComponent<D, P extends ILuPickerPanel<D> = ILuPickerPanel<D>>
 extends ALuSelectInputComponent<D, P>
-implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit {
+implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit, Validator {
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	overlapInput = true;
@@ -41,6 +47,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
+		private _adapter: ALuDateAdapter<D>,
 		) {
 		super(
 			_changeDetectorRef,
@@ -62,5 +69,11 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit {
 	@ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<D>) {
 		if (!displayer) { return; }
 		this.displayer = displayer;
+	}
+	validate(control: AbstractControl): ValidationErrors | null {
+		const d = control.value;
+		if (!d) { return null; }
+		if (!this._adapter.isValid(d)) { return { 'date': true }; }
+		return null;
 	}
 }
