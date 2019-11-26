@@ -1,8 +1,7 @@
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, ElementRef, AfterViewInit, ContentChild, Directive, AfterContentInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
-import { LuDateInputDirective } from '../input/index';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -20,17 +19,13 @@ import { LuDateInputDirective } from '../input/index';
 export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 	_value: Date;
 
+	@Input() min?: Date;
+	@Input() max?: Date;
+
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() hovered = new EventEmitter<boolean>();
 	@Output() onSelectValue = new EventEmitter<Date>();
-
-	// @ViewChild(LuDateInputDirective, { read: ElementRef, static: true }) set _vc(elt: ElementRef<HTMLInputElement>) {
-	// 	debugger;
-	// }
-	// @ContentChild(LuDateInputDirective, { read: ElementRef, static: true }) set _cc(elt: ElementRef<HTMLInputElement>) {
-	// 	debugger;
-	// }
 
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {

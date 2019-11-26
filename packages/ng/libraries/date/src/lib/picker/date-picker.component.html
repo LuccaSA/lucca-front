@@ -3,9 +3,9 @@
 	(click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)">
 		<div class="lu-picker-content" [ngClass]="contentClassesMap" cdkTrapFocus="false"  cdkTrapFocusAutoCapture="true">
 			<div class="textfield">
-				<input luDateInput class="textfield-input" [ngModel]="_value" (ngModelChange)="_onInput($event)" (keydown.enter)="_onEnter()">
+				<input luDateInput class="textfield-input" [ngModel]="_value" (ngModelChange)="_onInput($event)" (keydown.enter)="_onEnter()"[min]="min" [max]="max">
 			</div>
-			<lu-calendar [ngModel]="_value" (ngModelChange)="_onCalendar($event)"></lu-calendar>
+			<lu-calendar [ngModel]="_value" (ngModelChange)="_onCalendar($event)"[min]="min" [max]="max"></lu-calendar>
 		</div>
 	</div>
 </ng-template>
