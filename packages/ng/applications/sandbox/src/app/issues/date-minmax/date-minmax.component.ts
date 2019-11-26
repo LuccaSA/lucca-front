@@ -9,10 +9,18 @@ export class DateMinmaxComponent {
 	date = new Date();
 	min = new Date();
 	max = new Date();
-	form = new FormGroup({
+	formDir = new FormGroup({
+		date: new FormControl(new Date()),
+	});
+	formCal = new FormGroup({
+		date: new FormControl(new Date()),
+	});
+	formPic = new FormGroup({
+		date: new FormControl(new Date()),
+	});
+	formSel = new FormGroup({
 		date: new FormControl(new Date()),
 	});
 	submit() {
-		console.log(this.form.value);
 	}
 }
