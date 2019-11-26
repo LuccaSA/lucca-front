@@ -12,4 +12,7 @@ export class DateMinmaxComponent {
 	form = new FormGroup({
 		date: new FormControl(new Date()),
 	});
+	submit() {
+		console.log(this.form.value);
+	}
 }
