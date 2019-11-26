@@ -52,7 +52,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	writeValue(value?: D) {
 		const t = new Date();
 		const today = this._adapter.forge(t.getFullYear(), t.getMonth(), t.getDate());
-		const date = value ? this._adapter.clone(value) : today;
+		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : today;
 		this.header = this._factory.forgeMonth(date);
 		super.writeValue(value);
 	}

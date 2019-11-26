@@ -31,7 +31,7 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 	}
 	protected render() {
 		if (this._focused) { return; }
-		const text = this.value ? this._adapter.format(this.value, 'shortDate') : '';
+		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, 'shortDate') : '';
 		this._elementRef.nativeElement.value = text;
 	}
 	@HostListener('input', ['$event'])

@@ -72,9 +72,9 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		return new Date('Invalid Date');
 	}
 	isValid(d: Date): boolean {
-		const isADate = d instanceof Date;
-		const isARealDate = !isNaN(d.getTime());
-		return isADate && isARealDate;
+		if (!(d instanceof Date)) { return false; }
+		if (isNaN(d.getTime())) { return false; }
+		return true;
 	}
 	compare(a: Date, b: Date, granularity: DateGranularity): number {
 		if (!a || !b || !this.isValid(a) || !this.isValid(b)) {
