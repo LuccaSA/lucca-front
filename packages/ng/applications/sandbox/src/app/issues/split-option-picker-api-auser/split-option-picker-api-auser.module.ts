@@ -7,7 +7,8 @@ import { SplitOptionPickerApiAuserComponent } from './split-option-picker-api-au
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { FormsModule } from '@angular/forms';
-import { LuUserSelectModule, LuApiSelectModule } from '@lucca-front/ng';
+import { LuApiModule } from '@lucca-front/ng/api';
+import { LuUserModule } from '@lucca-front/ng/user';
 
 
 @NgModule({
@@ -18,8 +19,8 @@ import { LuUserSelectModule, LuApiSelectModule } from '@lucca-front/ng';
 		HttpClientModule,
 		RedirectModule,
 		FormsModule,
-		LuUserSelectModule,
-		LuApiSelectModule,
+		LuUserModule,
+		LuApiModule,
 		RouterModule.forChild([
 			{ path: '', component: SplitOptionPickerApiAuserComponent },
 		]),
