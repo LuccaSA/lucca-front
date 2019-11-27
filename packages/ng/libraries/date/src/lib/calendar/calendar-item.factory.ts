@@ -1,31 +1,33 @@
-import { Injectable, Inject, LOCALE_ID } from '@angular/core';
-import { formatDate } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { DayItem, MonthItem, YearItem, DecadeItem } from './calendar-item.class';
+import { ALuDateAdapter } from '../adapter/index';
 
 @Injectable()
-export class LuCalendarItemFactory {
+export class LuCalendarItemFactory<D> {
 	constructor(
-		@Inject(LOCALE_ID) private _locale: string,
+		private _adapter: ALuDateAdapter<D>,
 	) {}
-	forgeDay(date: Date, format = 'd'): DayItem {
-		return new DayItem(date, formatDate(date, format, this._locale));
+	forgeDay(d: D, format = 'd'): DayItem<D> {
+		const date = this._adapter.clone(d);
+		return new DayItem(date, this._adapter.format(date, format));
 	}
-	forgeMonth(date: Date, format = 'MMM'): MonthItem {
-		date.setDate(1);
-		return new MonthItem(date, formatDate(date, format, this._locale));
+	forgeMonth(d: D, format = 'MMM'): MonthItem<D> {
+		const year = this._adapter.getYear(d);
+		const month = this._adapter.getMonth(d);
+		const date = this._adapter.getDate(d);
+		const monthStart = this._adapter.forge(year, month, 1);
+		return new MonthItem(monthStart, this._adapter.format(monthStart, format));
 	}
-	forgeYear(date: Date, format = 'y'): YearItem {
-		date.setMonth(0);
-		date.setDate(1);
-		return new YearItem(date, formatDate(date, format, this._locale));
+	forgeYear(d: D, format = 'y'): YearItem<D> {
+		const year = this._adapter.getYear(d);
+		const yearStart = this._adapter.forge(year, 1, 1);
+		return new YearItem(yearStart, this._adapter.format(yearStart, format));
 	}
-	forgeDecade(date: Date, format = 'y'): DecadeItem {
-		date.setMonth(0);
-		date.setDate(1);
-		date.setFullYear(10 * Math.floor(date.getFullYear() / 10));
-		const decadeEnd = new Date(date);
-		decadeEnd.setFullYear(date.getFullYear() + 9);
-		const label = `${formatDate(date, format, this._locale)} - ${formatDate(decadeEnd, format, this._locale)}`;
-		return new DecadeItem(date, label);
+	forgeDecade(d: D, format = 'y'): DecadeItem<D> {
+		const year = this._adapter.getYear(d);
+		const decadeStart = this._adapter.forge(10 * Math.floor(year / 10), 1, 1);
+		const decadeEnd = this._adapter.forge(10 * Math.floor(year / 10) + 9, 1, 1);
+		const label = `${this._adapter.format(decadeStart, format)} - ${this._adapter.format(decadeEnd, format)}`;
+		return new DecadeItem(decadeStart, label);
 	}
 }

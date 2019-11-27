@@ -1,8 +1,8 @@
 <h1>date-picker</h1>
 <h2>with a select</h2>
 <div class="textfield">
-	<lu-select class="textfield-input" [(ngModel)]="date">
-		<ng-container *luDisplayer="let value">{{ value | date }}</ng-container>
+	<lu-select class="textfield-input" [(ngModel)]="date" pickerOverlap="true">
+		<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 		<lu-date-picker></lu-date-picker>
 		<lu-input-clearer></lu-input-clearer>
 	</lu-select>

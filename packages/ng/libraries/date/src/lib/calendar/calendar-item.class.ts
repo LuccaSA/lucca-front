@@ -1,43 +1,44 @@
-import { ICalendarItem, CalendarGranularity } from './calendar-item.interface';
+import { ICalendarItem } from './calendar-item.interface';
+import { DateGranularity } from '../adapter/index';
 
-export abstract class ACalendarItem implements ICalendarItem {
-	get id() { return `${this.granularity}-${this.date.toISOString()}`; }
-	date: Date;
+export abstract class ACalendarItem<D> implements ICalendarItem<D> {
+	get id() { return `${this.granularity}-${this.date.toString()}`; }
+	date: D;
 	mods: string[] = [];
 	label: string;
-	readonly granularity: CalendarGranularity;
+	readonly granularity: DateGranularity;
 }
-export class DayItem extends ACalendarItem implements ICalendarItem {
-	readonly granularity = CalendarGranularity.day;
+export class DayItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
+	readonly granularity = DateGranularity.day;
 	constructor(
-		public date: Date,
+		public date: D,
 		public label: string,
 	) {
 		super();
 	}
 }
-export class MonthItem extends ACalendarItem implements ICalendarItem {
-	readonly granularity = CalendarGranularity.month;
+export class MonthItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
+	readonly granularity = DateGranularity.month;
 	constructor(
-		public date: Date,
+		public date: D,
 		public label: string,
 	) {
 		super();
 	}
 }
-export class YearItem extends ACalendarItem implements ICalendarItem {
-	readonly granularity = CalendarGranularity.year;
+export class YearItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
+	readonly granularity = DateGranularity.year;
 	constructor(
-		public date: Date,
+		public date: D,
 		public label: string,
 		) {
 		super();
 	}
 }
-export class DecadeItem extends ACalendarItem implements ICalendarItem {
-	readonly granularity = CalendarGranularity.decade;
+export class DecadeItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
+	readonly granularity = DateGranularity.decade;
 	constructor(
-		public date: Date,
+		public date: D,
 		public label: string,
 		) {
 		super();
