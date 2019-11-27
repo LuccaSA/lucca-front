@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { NodeSassEndComponent } from './node-sass-end.component';
-import { MatDatepickerModule, MatMenuModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
