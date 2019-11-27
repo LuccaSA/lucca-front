@@ -13,6 +13,7 @@ export * from '@lucca-front/ng/tooltip';
 export * from '@lucca-front/ng/picker';
 export * from '@lucca-front/ng/select';
 export * from '@lucca-front/ng/option';
+export * from '@lucca-front/ng/date';
 export * from '@lucca-front/ng/api';
 export * from '@lucca-front/ng/user';
 export * from '@lucca-front/ng/department';
