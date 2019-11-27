@@ -2,25 +2,29 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "rootDir": "./",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2015",
+    "downlevelIteration": true,
     "module": "esnext",
+    "esModuleInterop": true,
+    "importHelpers": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2016",
+      "es2018",
       "dom"
     ],
     "paths": {
-      "@lucca-front/ng": [
-        "dist"
-      ],
+      // "@lucca-front/ng": [
+      //   "dist"
+      // ],
       "@lucca-front/ng/core": [
         "dist/core"
       ],
@@ -84,6 +88,12 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": false
-  }
+    "enableIvy": false,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": false
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
 }
