@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuModal, ALuModalRef, ILuModalContent } from '@lucca-front/ng';
+import { LuModal, ALuModalRef, ILuModalContent } from '@lucca-front/ng/modal';
 import { timer, Subject, throwError, of } from 'rxjs';
 import { mapTo, catchError, delay } from 'rxjs/operators';
 

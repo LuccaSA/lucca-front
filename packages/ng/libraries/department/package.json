@@ -1,0 +1,8 @@
+{
+  "name": "@lucca-front/ng/department",
+  "version": "4.0.0-placeholder",
+  "peerDependencies": {
+    "@angular/common": "^8.2.9",
+    "@angular/core": "^8.2.9"
+  }
+}

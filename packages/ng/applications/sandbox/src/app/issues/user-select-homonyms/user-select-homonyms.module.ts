@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { UserSelectHomonymsComponent } from './user-select-homonyms.component';
-import { LuUserModule } from '@lucca-front/ng';
+import { LuUserModule } from '@lucca-front/ng/user';
 
 // needed to reroute api calls to prisme-proxy
 import { HttpClientModule } from '@angular/common/http';

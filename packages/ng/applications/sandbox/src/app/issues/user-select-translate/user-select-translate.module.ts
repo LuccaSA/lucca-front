@@ -7,7 +7,7 @@ import { UserSelectTranslateComponent } from './user-select-translate.component'
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { FormsModule } from '@angular/forms';
-import { LuUserModule } from '@lucca-front/ng';
+import { LuUserModule } from '@lucca-front/ng/user';
 import { CommonModule } from '@angular/common';
 
 

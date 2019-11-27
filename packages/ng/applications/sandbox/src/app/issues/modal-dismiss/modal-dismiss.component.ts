@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { LuModal, LuSidepanel, LuPopup, ILuPopupRef, ALuPopupRef } from '@lucca-front/ng';
+import { LuPopup, ALuPopupRef, ILuPopupRef } from '@lucca-front/ng/popup';
+import { LuModal } from '@lucca-front/ng/modal';
+import { LuSidepanel } from '@lucca-front/ng/sidepanel';
 import { Subject, Subscription } from 'rxjs';
 
 /*tslint:disable*/
