@@ -49,6 +49,9 @@ const routes: Routes = [
 	{ path: 'option-selector', loadChildren: () => import('./option-selector').then(m => m.OptionSelectorModule) },
 	{ path: 'date-picker', loadChildren: () => import('./date-picker').then(m => m.DatePickerModule) },
 	{ path: 'date-calendar', loadChildren: () => import('./date-calendar').then(m => m.DateCalendarModule) },
+	{ path: 'date-input', loadChildren: () => import('./date-input').then(m => m.DateInputModule) },
+	{ path: 'date-select', loadChildren: () => import('./date-select').then(m => m.DateSelectModule) },
+	{ path: 'date-minmax', loadChildren: () => import('./date-minmax').then(m => m.DateMinmaxModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);

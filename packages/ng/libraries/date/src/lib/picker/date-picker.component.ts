@@ -1,5 +1,5 @@
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 
@@ -18,6 +18,9 @@ import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 })
 export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 	_value: Date;
+
+	@Input() min?: Date;
+	@Input() max?: Date;
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
@@ -44,11 +47,19 @@ export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 	setValue(value: Date) {
 		this._value = value;
 	}
-	_select(val: Date) {
+	_onCalendar(val: Date) {
+		this._value = val;
 		this._emitSelectValue(val);
 		// if (!this.multiple) {
 			this._emitCloseEvent();
 		// }
+	}
+	_onInput(val: Date) {
+		this._value = val;
+		this._emitSelectValue(val);
+	}
+	_onEnter() {
+		this._emitCloseEvent();
 	}
 	_handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
@@ -62,4 +73,7 @@ export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 				break;
 		}
 	}
+	// ngAfterViewInit() {
+	// 	this._dateInput.nativeElement.focus();
+	// }
 }
