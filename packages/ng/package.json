@@ -31,7 +31,7 @@
     "build:depth0": "npm run ng build core && npm run ng build animations",
     "build:depth1": "npm run ng build input && npm run ng build scroll && npm run ng build safe-content && npm run ng build number && npm run ng build material && npm run ng build popover && npm run ng build popup",
     "build:depth2": "npm run ng build tooltip && npm run ng build picker && npm run ng build modal",
-    "build:depth3": "npm run ng build select && npm run ng build sidepanel && npm run ng build option",
+    "build:depth3": "npm run ng build select && npm run ng build sidepanel && npm run ng build option && npm run ng build date",
     "build:depth4": "npm run ng build api && npm run ng build department && npm run ng build user",
     "build:formly": "npm run ng build formly",
     "build:root": "npm run ng build root",
