@@ -183,8 +183,8 @@
               ]
             },
             "scripts": [],
-            "es5BrowserSupport": true,
-            "commonChunk": false
+            "commonChunk": false,
+            "aot": true
           },
           "configurations": {
             "production": {
