@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ALuDateAdapter } from '../adapter';
+import { ALuDateAdapter } from '../adapter/index';
 import { LuNativeDateAdapter } from './native-date.adapter';
 
 @NgModule({
