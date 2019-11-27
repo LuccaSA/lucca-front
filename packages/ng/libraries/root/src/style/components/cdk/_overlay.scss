@@ -1,6 +1,11 @@
 .cdk-overlay-container {
 	position: fixed;
 	z-index: 1000;
+	height: 100%;
+	left: 0;
+	pointer-events: none;
+	top: 0;
+	width: 100%;
 }
 .cdk-overlay-connected-position-bounding-box {
 	position: absolute;
@@ -9,20 +14,6 @@
 	flex-direction: column;
 	min-width: 1px;
 	min-height: 1px;
-}
-.cdk-global-overlay-wrapper,
-.cdk-overlay-container {
-	height: 100%;
-	left: 0;
-	pointer-events: none;
-	top: 0;
-	width: 100%;
-}
-
-.cdk-global-overlay-wrapper {
-	display: flex;
-	position: absolute;
-	z-index: 1000;
 }
 
 .cdk-overlay-pane {
@@ -54,16 +45,9 @@
 	}
 }
 
-.cdk-visually-hidden {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	text-transform: none;
-	width: 1px;
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
+	opacity: _component("popup.backdrop.opacity");
+	animation: fadeInBackdrop _theme("commons.animations.durations.fast") ease-out;
 }
 
 // MODS

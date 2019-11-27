@@ -7,7 +7,7 @@ import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuInputDisplayerModule } from '@lucca-front/ng/input';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 
 @NgModule({
@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 		LuOptionModule,
 		FormsModule,
 		LuInputDisplayerModule,
+		TextFieldModule,
 		RouterModule.forChild([
 			{ path: '', component: Fix472Component },
 		]),
