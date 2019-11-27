@@ -21,10 +21,10 @@ export class LuFormlyWrapperIcon extends FieldWrapper {
 export class TemplateIcon {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.type === 'date') {
-				field.templateOptions.icon = 'calendar';
-				return 'icon';
-			}
+			// if (field && field.type === 'date') {
+			// 	field.templateOptions.icon = 'calendar';
+			// 	return 'icon';
+			// }
 			// if (field && field.type === 'api') {
 			// 	field.templateOptions.icon = 'search';
 			// 	return 'icon';
