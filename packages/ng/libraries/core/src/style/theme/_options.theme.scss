@@ -3,6 +3,11 @@ $options: (
 		padding-vertical: .5rem,
 		padding-horizontal: .5rem,
 		multiple-padding: 2rem,
+		icon: (
+			color: (
+				_color("text.default")
+			),
+		)
 	),
 	checkbox: (
 		left: .5rem,

@@ -7,8 +7,9 @@ import {
 	ChangeDetectorRef,
 } from '@angular/core';
 import { luTransformPopover } from '../../overlay/index';
-import { Observable } from 'rxjs';
-import { first, mapTo, startWith, shareReplay, delay } from 'rxjs/operators';
+import { Observable, merge } from 'rxjs';
+import { first, mapTo, startWith, shareReplay, delay, mergeAll } from 'rxjs/operators';
+
 import { ALuPickerPanel } from '../../input/index';
 import {
 	ALuOptionOperator,
@@ -22,6 +23,7 @@ import {
 } from '../operator/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuOptionItem } from '../item/index';
+import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 
 export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPickerComponent<T, O> {
@@ -51,7 +53,7 @@ extends ALuOptionPickerComponent<T, O> {
 					// replay onOpen when loading is done
 					this.onOpen();
 				}
-			})
+			});
 		}
 	}
 	protected _onOpenSubscribers = [];
@@ -65,6 +67,19 @@ extends ALuOptionPickerComponent<T, O> {
 	protected _onScrollBottomSubscribers = [];
 	@ContentChildren(ALuOnScrollBottomSubscriber, { descendants: true }) set onScrollBottomSubsQL(ql: QueryList<ILuOnScrollBottomSubscriber>) {
 		this._onScrollBottomSubscribers = ql.toArray();
+	}
+	protected _selectors: ILuOptionSelector<T>[] = [];
+	@ContentChildren(ALuOptionSelector, {descendants: true}) set selectorsQL(ql: QueryList<ILuOptionSelector<T>>) {
+		this._selectors = ql.toArray();
+		this._subs.add(
+			merge(
+				this._selectors.map(s => s.onSelectValue),
+			).pipe(
+				mergeAll(),
+			).subscribe(values => {
+				this._select(values);
+			})
+		);
 	}
 
 	constructor(
@@ -89,6 +104,10 @@ extends ALuOptionPickerComponent<T, O> {
 			o.onClose();
 		});
 		super.onClose();
+	}
+	setValue(value: T | T[]) {
+		super.setValue(value);
+		this._selectors.forEach(s => s.setValue(value));
 	}
 }
 

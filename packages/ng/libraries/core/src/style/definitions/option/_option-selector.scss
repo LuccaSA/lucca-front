@@ -1,0 +1,12 @@
+@import 'theming';
+@mixin optionSelectorStyle {
+	.selectAll-button {
+		color: _color("text.light");
+		font-size: _theme('sizes.small.font-size');
+		outline: none;
+	
+		&:hover {
+			color: _color("text.default");
+		}
+	}
+}

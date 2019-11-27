@@ -4,3 +4,14 @@
 .lu-select-value {
 	padding-right: 2.5rem;
 }
+
+.lu-picker-header {
+	.option-selector {
+		display: none;
+	}
+	&.mod-multiple {
+		.option-selector {
+			display: initial;
+		}
+	}
+}

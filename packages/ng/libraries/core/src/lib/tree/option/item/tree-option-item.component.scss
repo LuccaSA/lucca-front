@@ -42,12 +42,12 @@
 }
 
 .optionItem-icon-shape {
-  fill: _component("actionIcon.color");
+  fill: _component("options.item.icon.color");
   width: 1.4rem;
   height: 1.4rem;
 }
 
-:host-context(.lu-popover-panel) {
+:host-context(.lu-picker-panel) {
   padding: 0;
 
   .optionItem-value {
@@ -65,7 +65,7 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple) {
+:host-context(.lu-picker-panel.mod-multiple) {
   .optionItem-icons {
     display: block;
   }
@@ -76,7 +76,7 @@
 }
 
 /* clean-css ignore:start */
-:host-context(.lu-popover-panel lu-tree-option) {
+:host-context(.lu-picker-panel lu-tree-option) {
   .optionItem-value {
     padding-left: 1.5rem;
 
@@ -90,13 +90,13 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option) {
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
   .optionItem-value {
     padding-left: 3rem;
   }
 }
 
-:host-context(.lu-popover-panel lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 2.5rem;
 
@@ -110,13 +110,13 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 4rem;
   }
 }
 
-:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 3.5rem;
 
@@ -130,13 +130,13 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 5rem;
   }
 }
 
-:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 4.5rem;
 
@@ -150,13 +150,13 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 6rem;
   }
 }
 
-:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 5.5rem;
 
@@ -170,13 +170,13 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 7rem;
   }
 }
 
-:host-context(.lu-popover-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 6.5rem;
 
@@ -190,7 +190,7 @@
   }
 }
 
-:host-context(.lu-popover-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
   .optionItem-value {
     padding-left: 8rem;
   }

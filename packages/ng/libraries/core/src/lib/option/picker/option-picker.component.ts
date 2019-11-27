@@ -141,19 +141,21 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 	}
 	protected _scrollToHighlight(targetElt: HTMLElement) {
 		if (!targetElt) { return; }
-		const contentElt = document.querySelector('.lu-popover-content') as HTMLElement;
+		const contentElt = document.querySelector('.lu-picker-content') as HTMLElement;
 		if (!contentElt) { return; }
-		const contentFixedElt = document.querySelector('.lu-popover-content .position-fixed') as HTMLElement;
-		const offsetTop = contentFixedElt ? contentFixedElt.offsetHeight : 0;
+		const headerElt = document.querySelector('.lu-picker-content .lu-picker-header') as HTMLElement;
+		const headerHeight = headerElt ? headerElt.offsetHeight : 0;
+		const footerElt = document.querySelector('.lu-picker-content .lu-picker-footer') as HTMLElement;
+		const footerHeight = footerElt ? footerElt.offsetHeight : 0;
 		// highlighted option is too high
-		if (contentElt.scrollTop + offsetTop > targetElt.offsetTop) {
-			contentElt.scrollTop = targetElt.offsetTop - offsetTop;
+		if (contentElt.scrollTop + headerHeight > targetElt.offsetTop) {
+			contentElt.scrollTop = targetElt.offsetTop - headerHeight;
 			return;
 		}
 		// highlight option is too low
 		const offsetHeight = contentElt.offsetHeight;
-		if (contentElt.scrollTop + offsetHeight < targetElt.offsetTop + targetElt.offsetHeight) {
-			contentElt.scrollTop = targetElt.offsetTop + targetElt.offsetHeight - offsetHeight;
+		if (contentElt.scrollTop + offsetHeight - footerHeight < targetElt.offsetTop + targetElt.offsetHeight) {
+			contentElt.scrollTop = targetElt.offsetTop + targetElt.offsetHeight - offsetHeight + footerHeight;
 			return;
 		}
 	}
