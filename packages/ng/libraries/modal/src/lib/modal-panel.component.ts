@@ -25,6 +25,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	get submitHidden() {
 		return !this._componentInstance.submitAction;
 	}
+	get submitPalette() {
+		return this._componentInstance.submitPalette || 'primary';
+	}
 	submitClass$ = new Subject();
 	error$ = new Subject();
 
