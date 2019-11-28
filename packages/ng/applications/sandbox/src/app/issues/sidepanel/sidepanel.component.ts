@@ -33,7 +33,7 @@ export class PocSidepanelInsideComponent implements ILuSidepanelContent {
 	submitLabel = 'submit';
 	cancelLabel = 'dismiss';
 	submitDisabled = false;
-
+	submitPalette = 'error';
 	result = 0;
 	error;
 	// submitAction = () => timer(1500).pipe(mapTo(this.result));
