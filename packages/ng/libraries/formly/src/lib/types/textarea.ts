@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 @Component({
 	selector: 'lu-formly-field-input',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './textarea.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldTextarea extends FieldType {
 	focus() {

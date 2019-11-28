@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-radios',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './radios.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldRadios extends FieldType {
 	get _options() {
