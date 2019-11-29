@@ -92,7 +92,14 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 		}
 		overlayConfig.hasBackdrop = !this._config.noBackdrop;
 		overlayConfig.backdropClass = this._config.backdropClass;
-		overlayConfig.panelClass = this._config.panelClass;
+		const panelClasses = [];
+		if (Array.isArray(this._config.panelClass)) {
+			panelClasses.push(...this._config.panelClass);
+		} else {
+			panelClasses.push(this._config.panelClass);
+		}
+		panelClasses.push(`size-${this._config.size}`);
+		overlayConfig.panelClass = panelClasses;
 		overlayConfig.scrollStrategy = this._overlay.scrollStrategies.block();
 		return overlayConfig;
 	}
