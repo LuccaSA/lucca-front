@@ -5,10 +5,10 @@ import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token
 import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
 
 @Injectable()
-export class LuSidepanel extends LuModal {
+export class LuSidepanel<C extends ILuSidepanelConfig = ILuSidepanelConfig> extends LuModal<C> {
 	constructor(
 		@Inject(LU_SIDEPANEL_REF_FACTORY) protected _factory: ILuPopupRefFactory,
-		@Inject(LU_SIDEPANEL_CONFIG) protected _config: ILuSidepanelConfig,
+		@Inject(LU_SIDEPANEL_CONFIG) protected _config: C,
 	) {
 		super(_factory, _config);
 	}

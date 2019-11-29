@@ -24,7 +24,7 @@ export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepa
 }
 
 @Component({
-	selector: 'lu-sidepanel-panel',
+	selector: 'lu-sidepanel-panel-default',
 	templateUrl: './sidepanel-panel.component.html',
 	styleUrls: ['./sidepanel-panel.component.scss'],
 	host: {'class': 'lu-sidepanel-panel'},
