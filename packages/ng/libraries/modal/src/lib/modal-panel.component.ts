@@ -105,3 +105,19 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 		super(_ref, _cdr, intl);
 	}
 }
+@Component({
+	selector: 'lu-modal-panel-default',
+	templateUrl: './modal-panel.component.html',
+	styleUrls: ['./modal-panel.component.scss'],
+	host: {'class': 'lu-modal-panel'},
+	changeDetection: ChangeDetectionStrategy.Default,
+})
+export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
+	constructor(
+		_ref: ALuModalRef<LuModalPanelComponent>,
+		_cdr: ChangeDetectorRef,
+		@Inject(LuModalIntl) intl: ILuModalLabel,
+	) {
+		super(_ref, _cdr, intl);
+	}
+}
