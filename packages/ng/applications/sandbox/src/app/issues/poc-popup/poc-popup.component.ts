@@ -13,6 +13,7 @@ export class PocPopupComponent {
 	openWithConfig() {
 		const config: ILuPopupConfig = {
 			noBackdrop: true,
+			size: 'bigger',
 		};
 
 		this._popup.open(PocPopupInsideComponent, 3, config);
