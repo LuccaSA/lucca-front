@@ -12,8 +12,8 @@ export class LuPopup<C extends ILuPopupConfig = ILuPopupConfig> {
 		@Inject(LU_POPUP_CONFIG) protected _config: C,
 	) {}
 
-	open<T extends ILuPopupContent = ILuPopupContent, D = any, R = any>(component: ComponentType<T>, data: D = undefined, config?: C): ILuPopupRef<T, D, R> {
-		const extendedConfig = { ...(this._config || {}), ...config };
+	open<T extends ILuPopupContent = ILuPopupContent, D = any, R = any>(component: ComponentType<T>, data: D = undefined, config: C = {} as any): ILuPopupRef<T, D, R> {
+		const extendedConfig = { ...this._config, ...config };
 		const ref = this._factory.forge(component, extendedConfig);
 		ref.open(data);
 		return ref;
