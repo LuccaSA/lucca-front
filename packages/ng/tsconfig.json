@@ -82,5 +82,8 @@
         "dist/user"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }
