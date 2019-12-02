@@ -1,8 +1,5 @@
 {
   "name": "@lucca-front/ng/core",
   "version": "4.0.0-placeholder",
-  "peerDependencies": {
-    "@angular/core": "^8.0.0"
-  },
   "script": {}
 }
