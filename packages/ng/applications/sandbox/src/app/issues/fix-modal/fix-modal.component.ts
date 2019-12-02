@@ -1,4 +1,4 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, Optional, ChangeDetectionStrategy } from '@angular/core';
 import { LuPopup, LU_POPUP_DATA } from '@lucca-front/ng/popup';
 import { LuModal, LU_MODAL_DATA } from '@lucca-front/ng/modal';
 import { LuSidepanel, LU_SIDEPANEL_DATA } from '@lucca-front/ng/sidepanel';
@@ -19,10 +19,10 @@ export class FixModalComponent {
 		this._popup.open(BasicModalContent, data);
 	}
 	openModal(data?) {
-		this._modal.open(BasicModalContent, data);
+		this._modal.open(BasicModalContent, data, { changeDetection: ChangeDetectionStrategy.Default});
 	}
 	openSidepanel(data?) {
-		this._sidepanel.open(BasicModalContent, data);
+		this._sidepanel.open(BasicModalContent, data, { changeDetection: ChangeDetectionStrategy.Default});
 	}
 }
 @Component({

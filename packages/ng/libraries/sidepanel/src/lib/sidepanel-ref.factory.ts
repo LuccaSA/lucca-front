@@ -1,11 +1,11 @@
 import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { Overlay, ComponentType } from '@angular/cdk/overlay';
-import { Injector, Injectable, ComponentRef } from '@angular/core';
+import { Injector, Injectable, ComponentRef, ChangeDetectionStrategy } from '@angular/core';
 import { PortalOutlet, PortalInjector, ComponentPortal } from '@angular/cdk/portal';
 import { ILuSidepanelContent } from './sidepanel.model';
 import { ALuSidepanelRef, ILuSidepanelRef } from './sidepanel-ref.model';
 import { LU_SIDEPANEL_DATA } from './sidepanel.token';
-import { LuSidepanelPanelComponent } from './sidepanel-panel.component';
+import { LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD } from './sidepanel-panel.component';
 import { ILuSidepanelConfig } from './sidepanel-config.model';
 
 class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = any, R = any> extends ALuSidepanelRef<T, D, R> implements ILuSidepanelRef<T, D, R> {
@@ -24,8 +24,13 @@ class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = an
 		injectionMap.set(ALuSidepanelRef, this);
 		injectionMap.set(LU_SIDEPANEL_DATA, data);
 		const injector = new PortalInjector(this._injector, injectionMap);
-		const containerPortal = new ComponentPortal(LuSidepanelPanelComponent, undefined, injector);
-		this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
+		if (this._config.changeDetection === ChangeDetectionStrategy.OnPush) {
+			const containerPortal = new ComponentPortal(LuSidepanelPanelComponent, undefined, injector);
+			this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
+		} else {
+			const containerPortal = new ComponentPortal(LuSidepanelPanelComponentDefaultCD, undefined, injector);
+			this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
+		}
 		this._containerOutlet = this._containerRef.instance;
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;

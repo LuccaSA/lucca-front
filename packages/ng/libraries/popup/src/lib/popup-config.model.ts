@@ -3,4 +3,5 @@ export interface ILuPopupConfig {
 	noBackdrop?: boolean;
 	backdropClass?: string | string[];
 	panelClass?: string | string[];
+	size?: string;
 }
