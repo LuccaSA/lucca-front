@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "version": "4.0.0-placeholder",
+  "version": "4.0.0-rc.0",
   "description": "a library of usefull components for web developpement",
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "ls": "lerna ls -a -l"
   },
   "dependencies": {
-    "lerna": "^3.16.5"
+    "lerna": "^3.19.0"
   },
   "devDependencies": {
     "cpx": "^1.5.0"
