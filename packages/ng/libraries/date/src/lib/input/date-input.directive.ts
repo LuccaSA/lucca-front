@@ -1,7 +1,9 @@
-import { Directive, ElementRef, Renderer2, ChangeDetectorRef, forwardRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, ChangeDetectorRef, forwardRef, HostListener, Input, Inject } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@angular/forms';
 import { ALuDateAdapter, DateGranularity } from '../adapter/index';
+import { ILuDateInputLabel } from './date-input.translate';
+import { LuDateInputIntl } from './date-input.intl';
 
 @Directive({
 	selector: 'input[luDateInput]',
@@ -22,13 +24,18 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 	private _focused = false;
 	@Input() min?: D;
 	@Input() max?: D;
+	@Input() set placeholder(p: string) {
+		this._elementRef.nativeElement.placeholder = p;
+	}
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,
 		_renderer: Renderer2,
 		private _adapter: ALuDateAdapter<D>,
+		@Inject(LuDateInputIntl) private _intl: ILuDateInputLabel,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
+		this.placeholder = this._intl.placeholder;
 	}
 	protected render() {
 		if (this._focused) { return; }
