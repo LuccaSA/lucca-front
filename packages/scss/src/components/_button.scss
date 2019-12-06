@@ -97,7 +97,7 @@
 	}
 
 	&.mod-more {
-		padding: 0;
+		padding: 0 !important;
 		text-align: center;
 		width: 2rem;
 
@@ -106,7 +106,11 @@
 			@include makeIcon("arrow_south");
 			font-size: .7rem;
 			height: 0;
-			vertical-align: middle;
+			vertical-align: initial;
+		}
+
+		.mod-small {
+			width: 1.75rem;
 		}
 	}
 
