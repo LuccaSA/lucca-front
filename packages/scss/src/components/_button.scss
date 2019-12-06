@@ -1,7 +1,6 @@
 .button {
 	border: 0;
 	border-radius: _component("button.border.radius");
-	box-shadow: 0 _component("button.box-shadow.offset") 0 _component("button.box-shadow.color") inset;
 	cursor: pointer;
 	display: inline-block;
 	font-family: unquote(_component("button.font.family"));
