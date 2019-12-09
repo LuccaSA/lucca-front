@@ -12,7 +12,7 @@ import {
  */
 @Pipe({ name: 'luUserDisplay' })
 export class LuUserDisplayPipe implements PipeTransform {
-	transform(user: ILuUser, format: LuDisplayFormat = LuDisplayFullname.firstlast): string {
+	transform(user: ILuUser, format: LuDisplayFormat = LuDisplayFullname.lastfirst): string {
 		let result = '';
 
 		if (!!user && !!user.firstName && !!user.lastName) {

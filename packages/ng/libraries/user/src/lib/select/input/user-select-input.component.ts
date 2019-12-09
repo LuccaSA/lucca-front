@@ -5,21 +5,24 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
+	HostListener,
+	TemplateRef,
 	ViewChild,
 	Input,
 	Renderer2,
+	HostBinding,
 	AfterContentInit,
 	Inject
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
+import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
 import { ILuUser } from '../../user.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { LuDisplayFullname } from '../../display/index';
-import { ALuUserService, LuUserService } from '../searcher/index';
+import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { ILuUserSelectInputLabel } from './user-select-input.translate';
 
@@ -38,8 +41,8 @@ import { ILuUserSelectInputLabel } from './user-select-input.translate';
 			multi: true,
 		},
 		{
-			provide: ALuUserService,
-			useClass: LuUserService,
+			provide: ALuUserPagedSearcherService,
+			useClass: LuUserPagedSearcherService,
 		},
 	],
 })
@@ -49,14 +52,12 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	searchFormat = LuDisplayFullname.lastfirst;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
-
-	// TEMP - must fix all this
-	// @Input() set fields(fields: string) { this._service.fields = fields; }
-	// @Input() set filters(filters: string[]) { this._service.filters = filters; }
-	// @Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	// @Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
-	// @Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
-	// @Input() set operations(operations: number[]) { this._service.operations = operations; }
+	@Input() set fields(fields: string) { this._service.fields = fields; }
+	@Input() set filters(filters: string[]) { this._service.filters = filters; }
+	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
+	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
+	@Input() set operations(operations: number[]) { this._service.operations = operations; }
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -64,7 +65,7 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-		protected _service: ALuUserService<U>,
+		protected _service: ALuUserPagedSearcherService<U>,
 		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
 		) {
 		super(

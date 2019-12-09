@@ -1,9 +1,9 @@
 import { ALuPopupRef, ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { Overlay, ComponentType } from '@angular/cdk/overlay';
-import { Injector, Injectable, ComponentRef } from '@angular/core';
+import { Injector, Injectable, ComponentRef, ChangeDetectionStrategy } from '@angular/core';
 import { ILuModalContent } from './modal.model';
 import { ILuModalRef, ALuModalRef } from './modal-ref.model';
-import { LuModalPanelComponent } from './modal-panel.component';
+import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
 import { PortalOutlet, PortalInjector, ComponentPortal } from '@angular/cdk/portal';
 import { ILuModalConfig } from './modal-config.model';
 import { LU_MODAL_DATA } from './modal.token';
@@ -24,8 +24,13 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = any, R = any> 
 		injectionMap.set(ALuModalRef, this);
 		injectionMap.set(LU_MODAL_DATA, data);
 		const injector = new PortalInjector(this._injector, injectionMap);
-		const containerPortal = new ComponentPortal(LuModalPanelComponent, undefined, injector);
-		this._containerRef = this._overlayRef.attach<LuModalPanelComponent>(containerPortal);
+		if (this._config.changeDetection === ChangeDetectionStrategy.OnPush) {
+			const containerPortal = new ComponentPortal(LuModalPanelComponent, undefined, injector);
+			this._containerRef = this._overlayRef.attach<LuModalPanelComponent>(containerPortal);
+		} else {
+			const containerPortal = new ComponentPortal(LuModalPanelComponentDefaultCD, undefined, injector);
+			this._containerRef = this._overlayRef.attach<LuModalPanelComponent>(containerPortal);
+		}
 		this._containerOutlet = this._containerRef.instance;
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;

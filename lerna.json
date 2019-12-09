@@ -1,11 +1,11 @@
 {
-  "lerna": "3.10.7",
+  "lerna": "3.19.0",
   "packages": [
     "packages/*",
     "packages/ng/dist"
   ],
   "npmClient": "npm",
-  "version": "4.0.0-placeholder",
+  "version": "4.0.0-rc.1",
   "command": {
     "publish": {
       "message": "publish %s",

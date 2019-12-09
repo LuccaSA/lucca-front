@@ -22,3 +22,20 @@ export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepa
 		super(_ref, _cdr, intl);
 	}
 }
+
+@Component({
+	selector: 'lu-sidepanel-panel-default',
+	templateUrl: './sidepanel-panel.component.html',
+	styleUrls: ['./sidepanel-panel.component.scss'],
+	host: {'class': 'lu-sidepanel-panel'},
+	changeDetection: ChangeDetectionStrategy.Default,
+})
+export class LuSidepanelPanelComponentDefaultCD<T extends ILuSidepanelContent = ILuSidepanelContent> extends ALuModalPanelComponent<T> {
+	constructor(
+		_ref: ALuSidepanelRef<LuSidepanelPanelComponent>,
+		_cdr: ChangeDetectorRef,
+		@Inject(LuSidepanelIntl) intl: ILuSidepanelLabel,
+	) {
+		super(_ref, _cdr, intl);
+	}
+}

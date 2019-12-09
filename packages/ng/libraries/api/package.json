@@ -1,8 +1,5 @@
 {
   "name": "@lucca-front/ng/api",
-  "version": "4.0.0-placeholder",
-  "peerDependencies": {
-    "@angular/common": "^8.2.9",
-    "@angular/core": "^8.2.9"
-  }
+  "version": "4.0.0-rc.1",
+  "script": {}
 }
