@@ -7,6 +7,9 @@ import {
 	ViewContainerRef,
 	QueryList,
 	ChangeDetectorRef,
+	AfterContentInit,
+	AfterViewInit,
+	OnInit,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
@@ -14,7 +17,7 @@ import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
 import { Observable, merge, of } from 'rxjs';
-import { switchMap, map, delay } from 'rxjs/operators';
+import { switchMap, map, delay, startWith } from 'rxjs/operators';
 
 enum ToggleMode {
 	all,
@@ -24,10 +27,9 @@ enum ToggleMode {
 
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
-implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
+implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
-		this.initOptionItemsObservable();
 	}
 	@ContentChildren(ALuTreeOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
 	protected set _options$(optionItems$: Observable<O[]>) {
@@ -145,20 +147,19 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy {
 	}
 
 	protected initOptionItemsObservable() {
-		if (this._isOptionItemsInitialized) {
-			return;
-		}
 
-		this._isOptionItemsInitialized = true;
-
-		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
+		const items$ = this._optionsQL.changes
 			.pipe(
+				startWith(this._optionsQL),
 				map<QueryList<O>, O[]>(q => q.toArray()),
 				map(roots => roots.map(r => [r, ...r.allChildren]).reduce((agg, val) => [...agg, ...val], [])),
 				delay(0),
 			);
-		items$.subscribe(o => this._options = o || []);
+		this._subs.add(items$.subscribe(o => this._options = o || []));
 		this._options$ = items$;
+	}
+	ngAfterViewInit() {
+		this.initOptionItemsObservable();
 	}
 }
 /**
