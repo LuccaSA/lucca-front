@@ -47,6 +47,7 @@ const routes: Routes = [
 	{ path: 'tree-picker-advanced', loadChildren: () => import('./tree-picker-advanced').then(m => m.TreePickerAdvancedModule) },
 	{ path: 'user-select-homonyms', loadChildren: () => import('./user-select-homonyms').then(m => m.UserSelectHomonymsModule) },
 	{ path: 'user-select-translate', loadChildren: () => import('./user-select-translate').then(m => m.UserSelectTranslateModule) },
+	{ path: 'ivy-option-picker', loadChildren: () => import('./ivy-option-picker').then(m => m.IvyOptionPickerModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
