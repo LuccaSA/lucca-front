@@ -1,0 +1,12 @@
+<h1>ivy-tree</h1>
+<div class="textfield">
+	<lu-select class="textfield-input" [(ngModel)]="item">
+		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+		<lu-tree-option-picker>
+			<lu-tree-option [tree]="tree">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+			</lu-tree-option>
+		</lu-tree-option-picker>
+	</lu-select>
+	<label for="" class="textfield-label">select single</label>
+</div>
