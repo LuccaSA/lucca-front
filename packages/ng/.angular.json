@@ -130,7 +130,7 @@
       "root": "applications/sandbox/",
       "sourceRoot": "applications/sandbox/src",
       "projectType": "application",
-      "prefix": "lu",
+      "prefix": "sand",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
