@@ -11,7 +11,8 @@ $radio: (
     top: .25rem,
     size: 1rem,
     border: (
-      color: #999999
+      color: _color("grey"),
+      hover: _color("grey", "dark")
     )
   )
 );

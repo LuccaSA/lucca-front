@@ -57,10 +57,10 @@
 	}
 
 	&:hover {
-		color: black;
+		color: _color("text.dark");
 
 		&::before {
-			border: 2px solid _color("text.default");
+			border-color: _component("radio.input.border.hover");
 		}
 	}
 }
