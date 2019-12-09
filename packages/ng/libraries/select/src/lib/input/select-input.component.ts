@@ -70,7 +70,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	@HostBinding('class.is-disabled')
 	get isDisabled() { return this.disabled; }
 	@HostBinding('class.is-focused')
-	get isFocused() { return this._popoverOpen; }
+	get isFocused() { return this._popoverOpen && !this.target.overlap; }
 	@HostBinding('class.mod-multiple')
 	get modMultiple() { return this._multiple; }
 
