@@ -1,7 +1,5 @@
 $menu: (
-  default-palette: (
-    color: _theme("palettes.primary.color")
-  ),
+  default-palette: _getMap("palettes.primary"),
   background: transparent,
   padding: (
     horizontal: _theme("spacings.small"),

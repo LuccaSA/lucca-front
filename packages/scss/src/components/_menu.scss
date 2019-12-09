@@ -27,7 +27,6 @@
 	}
 
 	&:hover:not(.is-active) {
-		background: _color("primary", "lightest");
 		color: _color("text.dark");
 	}
 
@@ -39,20 +38,28 @@
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+
+
 .menu {
 	@mixin menuColoring($palette) {
-		background: _color($palette);
+		&:after {
+			background: _color($palette);
+		}
+
+		&:hover:not(.is-active) {
+			background: _color($palette, "lightest");
+		}
 	}
 
 	// default color
-	.menu-link::after {
+	.menu-link {
 		@include menuColoring("menu.default-palette");
 	}
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			.menu-link::after {
+			.menu-link {
 				@include menuColoring($name);
 			}
 		}
