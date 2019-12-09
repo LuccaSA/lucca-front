@@ -5,6 +5,7 @@ import { IvyOptionPickerComponent } from './ivy-option-picker.component';
 import { LuSelectModule } from '@lucca-front/ng/select';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import { LuOptionModule } from '@lucca-front/ng/option';
 	imports: [
 		LuSelectModule,
 		LuInputModule,
+		FormsModule,
 		LuOptionModule,
 		RouterModule.forChild([
 			{ path: '', component: IvyOptionPickerComponent },
