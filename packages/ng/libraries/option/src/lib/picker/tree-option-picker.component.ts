@@ -146,7 +146,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		return [...entriesToKeep];
 	}
 
-	protected initOptionItemsObservable() {
+	protected initItems() {
 
 		const items$ = this._optionsQL.changes
 			.pipe(
@@ -159,7 +159,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this._options$ = items$;
 	}
 	ngAfterViewInit() {
-		this.initOptionItemsObservable();
+		this.initItems();
 	}
 }
 /**
