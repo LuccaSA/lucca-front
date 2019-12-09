@@ -142,6 +142,7 @@
 		color: _component("navSide.bottom-section-palette.text");
 		cursor: pointer;
 		box-sizing: border-box;
+		padding: _theme("spacings.small");
 
 		&:hover {
 			background-color: _component("navSide.bottom-section-palette.hovered-bg");
@@ -349,7 +350,7 @@
 		position: relative;
 		padding-top: _component("navSide.mobile.toggle-height");
 		width: 100%;
-		
+
 		&, &.mod-withBottomSection {
 			.navSide-mainSection, .navSide-scrollWrapper {
 				width: 100%;
