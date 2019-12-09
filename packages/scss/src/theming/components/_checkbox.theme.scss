@@ -11,9 +11,10 @@ $checkbox: (
     margin-top: .3rem,
     margin-right: .5rem,
     size: .95rem,
-    border-radius: 3px,
+    border-radius: _theme("commons.border.radius"),
     border: (
-      color: #999999
+      color: _color("grey"),
+      hover: _color("grey", "dark")
     )
   )
 );

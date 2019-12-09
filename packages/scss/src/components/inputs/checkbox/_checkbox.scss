@@ -41,10 +41,10 @@
 	}
 
 	&:hover {
-		color: black;
+		color: _color("text.darker");
 
 		&::before {
-			border: 2px solid _color("text.default");
+			border-color: _component("checkbox.input.border.hover");
 		}
 	}
 }
