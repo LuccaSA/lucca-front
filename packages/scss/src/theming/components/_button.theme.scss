@@ -5,6 +5,10 @@ $button: (
 	margin: 0 _theme("spacings.smaller") 0 0,
 	font-weight: 600,
 	line-height: 1rem,
+	box-shadow: (
+		offset: -2px,
+		color: rgba(0, 0, 0, .1)
+	),
 
 	// sizing
 	sizing: (
