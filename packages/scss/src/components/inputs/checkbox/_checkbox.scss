@@ -41,7 +41,7 @@
 	}
 
 	&:hover {
-		color: _color("text.darker");
+		color: _color("text.dark");
 
 		&::before {
 			border-color: _component("checkbox.input.border.hover");

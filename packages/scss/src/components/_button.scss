@@ -43,7 +43,7 @@
 	}
 
 	// default color
-	@include buttonColoring(_component("button.default-palette"));
+	@include buttonColoring("button.default-palette");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {

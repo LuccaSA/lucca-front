@@ -1,5 +1,5 @@
 $button: (
-	default-palette: "primary",
+	default-palette: _getMap("palettes.primary"),
 
 	// theming
 	margin: 0 _theme("spacings.smaller") 0 0,
