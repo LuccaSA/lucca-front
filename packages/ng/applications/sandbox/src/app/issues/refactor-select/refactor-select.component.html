@@ -1,5 +1,5 @@
 <h1>refactor-select</h1>
-<div class="filters">
+<div class="filters u-marginBottomBig">
 	<div class="textfield mod-filter">
 		<lu-select class="textfield-input" [(ngModel)]="model">
 			<span *luDisplayer="let value">{{value}}</span>
@@ -12,6 +12,45 @@
 		<label class="textfield-label">Textfield label</label>
 	</div>
 	<div class="textfield mod-filter">
+		<input class="textfield-input" type="text" value="Filter">
+		<label class="textfield-label">Textfield label</label>
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="textfield mod-white">
+		<lu-select class="textfield-input" [(ngModel)]="model">
+			<span *luDisplayer="let value">{{value}}</span>
+			<lu-input-clearer *ngIf="true"></lu-input-clearer>
+			<lu-option-picker>
+				<lu-option value="1">1</lu-option>
+				<lu-option value="2">2</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">Textfield label</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="textfield mod-small mod-white">
+		<lu-select class="textfield-input" [(ngModel)]="model">
+			<span *luDisplayer="let value">{{value}}</span>
+			<lu-input-clearer *ngIf="true"></lu-input-clearer>
+			<lu-option-picker>
+				<lu-option value="1">1</lu-option>
+				<lu-option value="2">2</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">Textfield label</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="textfield mod-white">
+		<input class="textfield-input" type="text" value="Filter">
+		<label class="textfield-label">Textfield label</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="textfield mod-small mod-white">
 		<input class="textfield-input" type="text" value="Filter">
 		<label class="textfield-label">Textfield label</label>
 	</div>
