@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
 	templateUrl: './refactor-select.component.html'
 })
 export class RefactorSelectComponent {
-	model = 1;
+	item = '1';
+	collection = ['1'];
 }

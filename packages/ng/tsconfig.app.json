@@ -1,0 +1,73 @@
+{
+  "extends": "./tsconfig.json",
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
+  "compilerOptions": {
+    "paths": {
+      "@lucca-front/ng": [
+        "./libraries/root/src/index"
+      ],
+      "@lucca-front/ng/core": [
+        "./libraries/core/src/index"
+      ],
+      "@lucca-front/ng/animations": [
+        "./libraries/animations/src/index"
+      ],
+      "@lucca-front/ng/input": [
+        "./libraries/input/src/index"
+      ],
+      "@lucca-front/ng/scroll": [
+        "./libraries/scroll/src/index"
+      ],
+      "@lucca-front/ng/safe-content": [
+        "./libraries/safe-content/src/index"
+      ],
+      "@lucca-front/ng/number": [
+        "./libraries/number/src/index"
+      ],
+      "@lucca-front/ng/popover": [
+        "./libraries/popover/src/index"
+      ],
+      "@lucca-front/ng/popup": [
+        "./libraries/popup/src/index"
+      ],
+      "@lucca-front/ng/formly": [
+        "./libraries/formly/src/index"
+      ],
+      "@lucca-front/ng/material": [
+        "./libraries/material/src/index"
+      ],
+      "@lucca-front/ng/tooltip": [
+        "./libraries/tooltip/src/index"
+      ],
+      "@lucca-front/ng/picker": [
+        "./libraries/picker/src/index"
+      ],
+      "@lucca-front/ng/modal": [
+        "./libraries/modal/src/index"
+      ],
+      "@lucca-front/ng/sidepanel": [
+        "./libraries/sidepanel/src/index"
+      ],
+      "@lucca-front/ng/select": [
+        "./libraries/select/src/index"
+      ],
+      "@lucca-front/ng/date": [
+        "./libraries/date/src/index"
+      ],
+      "@lucca-front/ng/option": [
+        "./libraries/option/src/index"
+      ],
+      "@lucca-front/ng/api": [
+        "./libraries/api/src/index"
+      ],
+      "@lucca-front/ng/department": [
+        "./libraries/department/src/index"
+      ],
+      "@lucca-front/ng/user": [
+        "./libraries/user/src/index"
+      ]
+    }
+  }
+}

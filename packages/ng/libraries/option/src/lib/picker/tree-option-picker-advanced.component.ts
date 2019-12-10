@@ -5,6 +5,7 @@ import {
 	QueryList,
 	forwardRef,
 	ChangeDetectorRef,
+	AfterViewInit,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
@@ -28,35 +29,14 @@ import {
 import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index';
 
 export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends ALuTreeOptionPickerComponent<T, O> {
+extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;
 
 	protected _operators: ILuTreeOptionOperator<T>[] = [];
+	protected _operatorsQL: QueryList<ILuTreeOptionOperator<T>>;
 	@ContentChildren(ALuTreeOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuTreeOptionOperator<T>>) {
-		const operators = ql.toArray();
-		this._operators = operators;
-		let options$: Observable<ILuTree<T>[]>;
-		operators.forEach(operator => {
-			operator.inOptions$ = options$;
-			options$ = operator.outOptions$;
-		});
-		const lastOperator = operators[operators.length - 1];
-		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(
-				first(),
-				mapTo(false),
-				startWith(true),
-				shareReplay(),
-			);
-			this.loading$.pipe(
-				delay(1),
-			).subscribe(l => {
-				if (!l) {
-					// replay onOpen when loading is done
-					this.onOpen();
-				}
-			})
-		}
+		this._operatorsQL = ql;
+
 	}
 	protected _onOpenSubscribers = [];
 	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(ql: QueryList<ILuOnOpenSubscriber>) {
@@ -71,18 +51,10 @@ extends ALuTreeOptionPickerComponent<T, O> {
 		this._onScrollBottomSubscribers = ql.toArray();
 	}
 
+	protected _selectorsQL: QueryList<ILuTreeOptionSelector<T>>;
 	protected _selectors: ILuTreeOptionSelector<T>[] = [];
 	@ContentChildren(ALuTreeOptionSelector, {descendants: true}) set selectorsQL(ql: QueryList<ILuTreeOptionSelector<T>>) {
-		this._selectors = ql.toArray();
-		this._subs.add(
-			merge(
-				this._selectors.map(s => s.onSelectValue),
-			).pipe(
-				mergeAll(),
-			).subscribe(values => {
-				this._select(values);
-			})
-		);
+		this._selectorsQL = ql;
 	}
 
 	constructor(
@@ -111,6 +83,50 @@ extends ALuTreeOptionPickerComponent<T, O> {
 	setValue(value: T | T[]) {
 		super.setValue(value);
 		this._selectors.forEach(s => s.setValue(value));
+	}
+
+	protected initOperators() {
+		const operators = this._operatorsQL.toArray();
+		this._operators = operators;
+		let options$: Observable<ILuTree<T>[]>;
+		operators.forEach(operator => {
+			operator.inOptions$ = options$;
+			options$ = operator.outOptions$;
+		});
+		const lastOperator = operators[operators.length - 1];
+		if (lastOperator && lastOperator.outOptions$) {
+			this.loading$ = lastOperator.outOptions$.pipe(
+				first(),
+				mapTo(false),
+				startWith(true),
+				shareReplay(),
+			);
+			this.loading$.pipe(
+				delay(1),
+			).subscribe(l => {
+				if (!l) {
+					// replay onOpen when loading is done
+					this.onOpen();
+				}
+			});
+		}
+	}
+	protected initSelectors() {
+		this._selectors = this._selectorsQL.toArray();
+		this._subs.add(
+			merge(
+				this._selectors.map(s => s.onSelectValue),
+			).pipe(
+				mergeAll(),
+			).subscribe(values => {
+				this._select(values);
+			})
+		);
+	}
+	ngAfterViewInit() {
+		super.ngAfterViewInit();
+		this.initOperators();
+		this.initSelectors();
 	}
 }
 

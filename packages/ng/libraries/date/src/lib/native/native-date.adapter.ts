@@ -1,7 +1,8 @@
 import { ALuDateAdapter, ILuDateAdapter, DateGranularity } from '../adapter/index';
-import { LOCALE_ID, Inject } from '@angular/core';
+import { LOCALE_ID, Inject, Injectable } from '@angular/core';
 import { getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
 
+@Injectable()
 export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
 
 	private _regex = /[\/\,\.\-\s]/i;

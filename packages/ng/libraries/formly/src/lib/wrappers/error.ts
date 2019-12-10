@@ -26,6 +26,7 @@ export class LuFormlyWrapperError extends FieldWrapper {
 @Component({
 	selector: 'lu-formly-error-message',
 	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">{{ message }}</div>`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyErrorMessage {
 	@Input() fieldForm: FormControl;
