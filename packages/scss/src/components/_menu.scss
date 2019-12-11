@@ -39,10 +39,9 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 
-
 .menu {
 	@mixin menuColoring($palette) {
-		&:after {
+		&::after {
 			background: _color($palette);
 		}
 

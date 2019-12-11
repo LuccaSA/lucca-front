@@ -69,6 +69,6 @@
 //
 .u-comma:not(:last-child) {
 	&::after {
-	content: ', ';
+		content: ", ";
 	}
 }

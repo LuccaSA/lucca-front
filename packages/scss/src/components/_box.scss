@@ -23,7 +23,7 @@
 		margin-top: _component("box.toggle.arrow.size");
 
 		&::before {
-			border-color: transparent transparent white transparent;
+			border-color: transparent transparent white;
 			border-style: solid;
 			border-width: 0 _component("box.toggle.arrow.size") _component("box.toggle.arrow.size") _component("box.toggle.arrow.size");
 			content: "";
@@ -36,7 +36,7 @@
 
 		&.mod-grey {
 			&::before {
-				border-color: transparent transparent _component("box.background") transparent;
+				border-color: transparent transparent _component("box.background");
 			}
 		}
 	}
