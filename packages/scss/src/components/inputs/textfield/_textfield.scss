@@ -78,11 +78,11 @@
 	transition: background 50ms ease;
 
 	&:hover {
-		background: _theme("commons.background.dark");
+		background: _color("primary", "lightest");
 	}
 
 	&.is-focus {
-		background: _theme("commons.background.dark");
+		background: _color("primary", "lightest");
 	}
 }
 
