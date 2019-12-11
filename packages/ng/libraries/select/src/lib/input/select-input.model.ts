@@ -173,7 +173,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	protected _multiple = false;
 	set multiple(m: boolean) {
 		this._multiple = m;
-		this._picker.multiple = m;
+		if (this._picker) {
+			this._picker.multiple = m;
+		}
 	}
 	get multiple() { return this._multiple; }
 }

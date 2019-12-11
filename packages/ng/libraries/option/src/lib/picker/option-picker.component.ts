@@ -10,6 +10,7 @@ import {
 	ViewChild,
 	TemplateRef,
 	ChangeDetectorRef,
+	AfterViewInit,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -22,7 +23,7 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPicker<T, O>
-implements ILuOptionPickerPanel<T, O>, OnDestroy {
+implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 
 
 	@Output() close = new EventEmitter<void>();
@@ -37,7 +38,6 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 	protected _optionsQL: QueryList<O>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
-		this.init();
 	}
 
 	constructor(
@@ -201,12 +201,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 		});
 	}
 
-	protected init() {
-		if (this._isOptionItemsInitialized) {
-			return;
-		}
-
-		this._isOptionItemsInitialized = true;
+	protected initItems() {
 
 		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
 			.pipe(
@@ -218,6 +213,9 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy {
 		this._options$ = items$;
 		this._initHighlight();
 		this._initSelected();
+	}
+	ngAfterViewInit() {
+		this.initItems();
 	}
 }
 /**

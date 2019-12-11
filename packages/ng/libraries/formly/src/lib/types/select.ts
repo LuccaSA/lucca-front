@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-select',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './select.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldSelect extends FieldType {
 	get _options() {
