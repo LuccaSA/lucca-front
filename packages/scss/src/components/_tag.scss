@@ -1,0 +1,53 @@
+.tag {
+	border-radius: _theme("commons.border.radius");
+	display: inline-block;
+	font-size: _theme("sizes.smaller.font-size");
+	font-weight: 600;
+	line-height: 1rem;
+	margin-right: _theme("spacings.smallest");
+	padding: 0 _theme("spacings.smallest");
+	text-align: center;
+	text-decoration: none;
+	vertical-align: baseline;
+	white-space: nowrap;
+}
+
+
+// Palettes
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.tag {
+	@mixin tagColoring($palette) {
+		background: _color($palette, "see-through");
+		color: _color($palette, "dark");
+
+		&.mod-clickable {
+			&:hover {
+				color: _color($palette, "darker");
+			}
+		}
+	}
+
+	@include tagColoring("tag.default-palette");
+
+	// palettes coloring
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			@include tagColoring($name);
+		}
+	}
+}
+
+
+// Mods
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.tag {
+	&.mod-clickable {
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

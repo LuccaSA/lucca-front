@@ -1,5 +1,4 @@
 .label {
-	background: _theme("commons.background.dark");
 	border-radius: 1rem;
 	display: inline-block;
 	color: _color("text.default");
@@ -21,6 +20,8 @@
 		background: _color($palette, "see-through");
 		color: _color($palette, "dark");
 	}
+
+	@include labelColoring("label.default-palette");
 
 	// palettes coloring
 	@each $name, $palette in _getMap("palettes") {
