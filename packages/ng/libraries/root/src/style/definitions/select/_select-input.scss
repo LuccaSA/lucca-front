@@ -6,11 +6,11 @@
 		padding: 0;
 
 		&::after {
+			@include makeIcon("arrow_south");
 			bottom: _component("select.input.padding-horizontal", true);
 			bottom: _component("select.input.padding-horizontal");
 			color: _color("primary", "color", true);
 			color: _color("primary");
-			@include makeIcon("arrow_south");
 			font-size: 0.75rem;
 			line-height: 1.3rem;
 			pointer-events: none;
@@ -18,10 +18,17 @@
 			right: _component("select.input.padding-horizontal", true);
 			right: _component("select.input.padding-horizontal");
 		}
+
 		&[disabled] {
 			cursor: not-allowed;
 			pointer-events: none;
 		}
+	}
+
+	.lu-select-display-wrapper {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.lu-select-placeholder {
@@ -29,7 +36,7 @@
 		color: _component("select.input.placeholder");
 	}
 
-	.lu-select-value, .lu-select-placeholder {
+	.lu-select-value {
 		line-height: 1.5rem;
 		min-height: 2.5rem;
 		padding: _component("select.input.padding-vertical", true) 1.5rem
@@ -40,17 +47,23 @@
 			_component("select.input.padding-horizontal");
 		transition: all _theme("commons.animations.durations.standard", true) ease;
 		transition: all _theme("commons.animations.durations.standard") ease;
-		align-items: center;
+		display: none;
 	}
 
-	.lu-select-display-wrapper, .lu-select-placeholder {
+	.lu-select-placeholder {
+		line-height: 1.5rem;
+		min-height: 2.5rem;
+		padding: _component("select.input.padding-vertical", true) 1.5rem
+			_component("select.input.padding-vertical", true)
+			_component("select.input.padding-horizontal", true);
+		padding: _component("select.input.padding-vertical") 1.5rem
+			_component("select.input.padding-vertical")
+			_component("select.input.padding-horizontal");
+		transition: all _theme("commons.animations.durations.standard", true) ease;
+		transition: all _theme("commons.animations.durations.standard") ease;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-	}
-
-	.lu-select-value {
-		display: none;
 	}
 
 	.lu-select-suffix {
@@ -73,40 +86,20 @@
 		margin: 0 .25rem 0 0;
 	}
 
+
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-	:host(.mod-multiple) {
-		&.mod-multipleView:not(.mod-singleLine) {
-			.lu-select-value {
-				height: auto;
-				align-items: center;
-				padding-bottom: 0;
-				padding-top: 0;
-			}
 
-			.lu-select-display-wrapper {
-				overflow: visible;
-				white-space: normal;
-			}
+	// Small
+	:host-context(.textfield.mod-small) {
+		.lu-select-value, .lu-select-placeholder {
+			font-size: _theme("sizes.small.font-size");
+			line-height: _theme("sizes.small.line-height");
+			min-height: 2rem;
 		}
-	}
 
-	:host(.mod-search) {
 		&::after {
-			@include makeIcon("search");
-			font-size: 1.4rem;
-			bottom: 0;
-		}
-
-		.lu-select-suffix {
-			right: calc(3.5 * #{_component("select.input.padding-horizontal", true)});
-			right: calc(3.5 * #{_component("select.input.padding-horizontal")});
-		}
-	}
-
-	:host(.mod-overflow) {
-		.lu-select-display-wrapper, .lu-select-placeholder {
-			overflow: visible;
+			line-height: .9rem;
 		}
 	}
 
@@ -139,38 +132,14 @@
 				right: calc(3.75 * #{_component("select.input.padding-horizontal")});
 			}
 
-			&.mod-search {
-				&::after {
-					bottom: .5rem;
-				}
-				.lu-select-suffix {
-					right: calc(4.8 * #{_component("select.input.padding-horizontal", true)});
-					right: calc(4.8 * #{_component("select.input.padding-horizontal")});
-				}
-			}
-
 			&.mod-multiple.mod-multipleView.is-filled .lu-select-value {
 				margin-bottom: -.3rem;
 			}
 		}
 	}
 
-	// Small
-	:host-context(.textfield.mod-small) {
-		.lu-select-value, .lu-select-placeholder {
-			font-size: _theme("sizes.small.font-size");
-			line-height: _theme("sizes.small.line-height");
-			min-height: 2rem;
-		}
-
-		&::after {
-			line-height: .9rem;
-		}
-	}
-
 	// Filter
 	:host-context(.textfield.mod-filter) {
-
 		.lu-select-value, .lu-select-placeholder {
 			padding: 0;
 			height: auto;
@@ -227,6 +196,23 @@
 		}
 	}
 
+	// Multiple
+	:host(.mod-multiple) {
+		&.mod-multipleView:not(.mod-singleLine) {
+			.lu-select-value {
+				height: auto;
+				align-items: center;
+				padding-bottom: 0;
+				padding-top: 0;
+			}
+
+			.lu-select-display-wrapper {
+				overflow: visible;
+				white-space: normal;
+			}
+		}
+	}
+
 	// STATES
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -235,11 +221,13 @@
 		.lu-select-placeholder {
 			display: none;
 		}
+
 		.lu-select-value {
 			display: flex;
 		}
 	}
 
+	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
 			padding-right: 2.5rem;
