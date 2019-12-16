@@ -4,6 +4,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LuPopoverTriggerDirective } from './popover-trigger.directive';
 import { LuPopoverPanelModule } from '../panel/index';
 import { LuPopoverTargetModule } from '../target/index';
+import {	LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
 	imports: [
@@ -11,6 +12,7 @@ import { LuPopoverTargetModule } from '../target/index';
 		OverlayModule,
 		LuPopoverPanelModule,
 		LuPopoverTargetModule,
+		LayoutModule,
 	],
 	declarations: [
 		LuPopoverTriggerDirective,

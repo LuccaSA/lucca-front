@@ -25,6 +25,7 @@ import {
 import {
 	ILuPopoverTarget, LuPopoverPosition, LuPopoverAlignment, LuPopoverTarget,
 } from '../target/index';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 /**
 * This directive is intended to be used in conjunction with an lu-popover tag.  It is
@@ -82,8 +83,9 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
-	) {
-		super(_overlay, _elementRef, _viewContainerRef);
+		protected _breakpointObserver: BreakpointObserver,
+		) {
+		super(_overlay, _elementRef, _viewContainerRef, _breakpointObserver);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;
 	}

@@ -15,6 +15,7 @@ import {
 	OverlayConfig,
 	HorizontalConnectionPos,
 	VerticalConnectionPos,
+	PositionStrategy,
 } from '@angular/cdk/overlay';
 import { TemplatePortal, ComponentPortal } from '@angular/cdk/portal';
 
@@ -28,6 +29,7 @@ import {
 } from '../target/index';
 import { throwLuPopoverMissingTargetError, throwLuPopoverMissingPanelError } from './popover-trigger.error';
 import { debounce, map, distinctUntilChanged } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
@@ -114,6 +116,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
+		protected _breakpointObserver?: BreakpointObserver,
 	) {}
 
 	onClick() {
@@ -319,7 +322,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			);
 			const config = this._getOverlayConfig();
 			this._subscribeToPositions(
-				config.positionStrategy as ConnectedPositionStrategy,
+				config.positionStrategy,
 			);
 			this._overlayRef = this._overlay.create(config);
 		}
@@ -333,7 +336,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 */
 	protected _getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
-		overlayState.positionStrategy = this._getPosition().withDirection(this.dir);
+		overlayState.positionStrategy = this._getPosition();
 		/** Display overlay backdrop if trigger event is click */
 		if (this.triggerEvent === 'click') {
 			overlayState.hasBackdrop = true;
@@ -363,14 +366,16 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 * on the popover based on the new position. This ensures the animation origin is always
 	 * correct, even if a fallback position is used for the overlay.
 	 */
-	protected _subscribeToPositions(position: ConnectedPositionStrategy): void {
-		this._positionSubscription = position.onPositionChange.pipe(
-			map(c => c.connectionPair),
-			distinctUntilChanged(),
-		)
-		.subscribe(connectionPair => {
-			this.panel.setPositionClasses(connectionPair.overlayX, connectionPair.overlayY);
-		});
+	protected _subscribeToPositions(position: PositionStrategy): void {
+		if (position instanceof ConnectedPositionStrategy) {
+			this._positionSubscription = position.onPositionChange.pipe(
+				map(c => c.connectionPair),
+				distinctUntilChanged(),
+			)
+			.subscribe(connectionPair => {
+				this.panel.setPositionClasses(connectionPair.overlayX, connectionPair.overlayY);
+			});
+		}
 	}
 
 	/**
@@ -378,7 +383,13 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 * to the trigger.
 	 * @returns ConnectedPositionStrategy
 	 */
-	protected _getPosition(): ConnectedPositionStrategy {
+	protected _getPosition(): PositionStrategy {
+
+		if (this._isMobile()) {
+			return this._overlay.position().global().centerHorizontally().centerVertically();
+		}
+
+		// normal
 		const connectionPosition: OriginConnectionPosition = {
 			originX: 'start',
 			originY: 'top',
@@ -488,7 +499,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 				},
 			)
 			.withOffsetX(offsetX)
-			.withOffsetY(offsetY);
+			.withOffsetY(offsetY)
+			.withDirection(this.dir);
 	}
 
 	protected _invertVerticalPos(y: VerticalConnectionPos) {
@@ -523,5 +535,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		if (this._panelEventsSubscriptions) {
 			this._panelEventsSubscriptions.unsubscribe();
 		}
+	}
+	protected _isMobile(): boolean {
+		return this._breakpointObserver && this._breakpointObserver.isMatched('(max-width: 576px)');
+		return true;
 	}
 }
