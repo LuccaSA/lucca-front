@@ -28,6 +28,7 @@ import {
 	ALuInputDisplayer,
 } from '@lucca-front/ng/input';
 import { ALuSelectInput } from './select-input.model';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 export abstract class ALuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, P>
@@ -58,13 +59,15 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-	) {
+		protected _breakpointObserver?: BreakpointObserver,
+		) {
 		super(
 			_changeDetectorRef,
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
 			_renderer,
+			_breakpointObserver,
 		);
 	}
 	@HostBinding('class.is-disabled')
@@ -161,13 +164,15 @@ export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPi
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-	) {
+		protected _breakpointObserver?: BreakpointObserver,
+		) {
 		super(
 			_changeDetectorRef,
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
 			_renderer,
+			_breakpointObserver,
 		);
 	}
 	// display clearer

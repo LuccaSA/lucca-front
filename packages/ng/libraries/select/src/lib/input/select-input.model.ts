@@ -9,6 +9,7 @@ import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '@lucca-fro
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
 extends ALuPopoverTrigger<TPicker>
@@ -19,11 +20,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-	) {
+		protected _breakpointObserver?: BreakpointObserver,
+		) {
 		super(
 			_overlay,
 			_elementRef,
 			_viewContainerRef,
+			_breakpointObserver,
 		);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget;
 		this.target.elementRef = this._elementRef;
