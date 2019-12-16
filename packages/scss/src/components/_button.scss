@@ -24,6 +24,25 @@
 	}
 }
 
+.button-counter {
+	border-radius: 1rem;
+	display: inline-block;
+	font-size: _theme("sizes.smaller.font-size");
+	font-weight: 600;
+	height: 1.5rem;
+	min-width: 1.5rem;
+	margin-left: _theme("spacings.smaller");
+	padding: 0 _theme("spacings.smallest");
+	vertical-align: bottom;
+}
+
+.button-icon {
+	height: 1.5rem;
+	line-height: 1.5rem;
+	font-size: 1.5rem;
+	transform: translateX(-.2rem);
+	vertical-align: bottom;
+}
 
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -39,6 +58,10 @@
 
 		&:active:not([disabled]) {
 			background: _color($palette, "dark");
+		}
+
+		.button-counter {
+			background: _color($palette, "lighter");
 		}
 	}
 
@@ -121,6 +144,31 @@
 		&:hover {
 			background: _color("primary", "lightest");
 			color: _color("primary");
+		}
+	}
+
+	&.mod-counter {
+		padding-left: _theme("spacings.small");
+		padding-right: _theme("spacings.small");
+
+		&.size-small {
+			.button-counter {
+				height: 1rem;
+				min-width: 1rem;
+			}
+		}
+	}
+
+	&.mod-icon {
+		padding-left: _theme("spacings.small");
+		padding-right: _theme("spacings.small");
+
+		&.size-small {
+			.button-icon {
+				font-size: 1rem;
+				height: 1rem;
+				line-height: 1rem;
+			}
 		}
 	}
 }
