@@ -2,6 +2,19 @@
 	align-items: center;
 	background: _component("menu.background");
 	display: flex;
+	margin-left: - _component("menu.padding.horizontal");
+	margin-right: - _component("menu.padding.horizontal");
+	position: relative;
+
+	&:after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		height: 1px;
+		left: _component("menu.padding.horizontal");
+		right: _component("menu.padding.horizontal");
+		border-bottom: 1px solid _theme("commons.divider.color");
+	}
 }
 
 .menu-link {
@@ -24,6 +37,7 @@
 		right: _component("menu.padding.horizontal");
 		transform: scale(0, 1);
 		transition: transform _component("menu.animations.durations.fast") ease;
+		z-index: 1;
 	}
 
 	&:hover:not(.is-active) {
