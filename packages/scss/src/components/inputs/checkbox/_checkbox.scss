@@ -150,6 +150,8 @@
 			font-size: .6rem;
 			padding: .15rem;
 			@include makeIcon("minimize");
+			line-height: .8;
+			text-indent: -1.5px;
 		}
 	}
 }
