@@ -8,7 +8,7 @@
 		&::after {
 			@include makeIcon("arrow_south");
 			bottom: _component("select.input.padding-vertical", true);
-			bottom: _component("select.input.padding-horizontal");
+			bottom: _component("select.input.padding-vertical");
 			color: _color("primary", "color", true);
 			color: _color("primary");
 			font-size: 0.75rem;
