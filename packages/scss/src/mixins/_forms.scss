@@ -3,7 +3,7 @@
 	background-color: _color("error", "lightest");
 
 	&::placeholder {
-		color: _color("error");
+		color: _color("error", "lighter");
 	}
 
 	~ .#{$fieldname}-label {

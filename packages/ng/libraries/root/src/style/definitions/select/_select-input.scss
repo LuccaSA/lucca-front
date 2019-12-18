@@ -68,7 +68,7 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: .4rem;
+		bottom: .4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
 		right: calc(2.75 * #{_component("select.input.padding-horizontal", true)});
 		right: calc(2.75 * #{_component("select.input.padding-horizontal")});
 	}
@@ -149,7 +149,7 @@
 		}
 
 		.lu-select-suffix {
-			bottom: .4rem;
+			bottom: .4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
 		}
 	}
 
