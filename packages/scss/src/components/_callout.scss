@@ -29,12 +29,11 @@
 	border: 0;
 	color: _color("text.default");
 	cursor: pointer;
-	height: 1rem;
-	opacity: .5;
+	height: 1.5rem;
 	padding: 0;
 	position: absolute;
-	right: .25rem;
-	top: .25rem;
+	right: _theme("spacings.small");
+	top: .5rem;
 	transition: 150ms background ease;
 	width: 1rem;
 
@@ -50,7 +49,7 @@
 
 .callout-icon {
 	position: absolute;
-	top: calc(1rem - .05rem);
+	top: .4rem;
 	left: .75rem;
 	width: 2rem;
 	margin: auto;
@@ -68,6 +67,27 @@
 .callout {
 	&.mod-icon {
 		padding-left: 3rem;
+	}
+
+	&.mod-small {
+		font-size: _theme("sizes.small.font-size");
+		line-height: _theme("sizes.small.line-height");
+
+		&.mod-icon {
+			padding-left: 2.8rem;
+
+			.callout-icon {
+				top: .4rem;
+
+				.lucca-icon {
+					font-size: 1.25rem;
+				}
+			}
+		}
+	}
+
+	&.mod-killable {
+		padding-right: 2.5rem;
 	}
 }
 

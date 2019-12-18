@@ -16,9 +16,9 @@
 	}
 
 	.#{$fieldname}-label {
-		color: _color("text.default");
-		font-weight: 600;
+		color: _color("text.light");
 		font-size: _component("field.label.font-size");
+		line-height: 1rem;
 		margin-bottom: _component("field.label.margin-bottom");
 		order: -1;
 		overflow: hidden;
@@ -78,7 +78,7 @@
 
 			&::before, &::after {
 				content: "" !important;
-				bottom: .6rem !important;
+				bottom: .7rem !important;
 				left: inherit !important;
 				right: .5rem !important;
 				top: inherit !important;

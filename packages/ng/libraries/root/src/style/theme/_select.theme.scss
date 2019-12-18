@@ -1,12 +1,11 @@
 $select: (
-	height: 2.25rem,
 	chip: (
-		background: _theme("commons.background.dark"),
-		text: _color("text.default")
+		background: _color("primary"),
+		text: _color("primary", "text")
 	),
 	input: (
-		padding-horizontal: .5rem,
-		padding-vertical: .45rem,
+		padding-horizontal: _theme("spacings.smaller"),
+		padding-vertical: _theme("spacings.smaller"),
 		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 25%)
 	),
 	framed: (

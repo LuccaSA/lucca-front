@@ -95,7 +95,7 @@
 
 	&:hover {
 		.calendar-grid-item-content {
-			background: _theme("commons.background.dark");
+			background: _color("primary", "lighter");
 		}
 	}
 

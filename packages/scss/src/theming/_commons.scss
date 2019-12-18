@@ -14,16 +14,13 @@ $commons: (
 		color: #D6D6D6,
 	),
 	disabled: (
-		opacity: .5,
+		opacity: .4,
 		background: #E5E5E5,
 		color: #999999,
 		placeholder: #BBBBBB
 	),
 	background: (
-		base: #F5F5F5,
-		dark: #EEEEEE,
-		darker: #E5E5E5,
-		darkest: #CCCCCC
+		base: #F5F5F5
 	),
 	highlight: #E5E5E5,
 	selected: #EEEEEE,
@@ -34,11 +31,13 @@ $commons: (
 		),
 	),
 	border: (
-		radius: 3px,
+		radius: 4px,
+		radius-big: 8px
 	),
 	font: (
 		family: unquote("Source Sans Pro, Tahoma, sans-serif"),
-		size: 16px,
+		line-height: 1.5rem,
+		size: 16px
 	),
 	elevations: (
 		elevation-1: unquote("0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"),
@@ -48,7 +47,7 @@ $commons: (
 		elevation-5: unquote("0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)")
 	),
 	overlays: (
-		background: #555555,
+		background: #323232,
 		text: #FFFFFF
 	),
 	banner-height: 50px,

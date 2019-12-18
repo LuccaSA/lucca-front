@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 export class RefactorSelectComponent {
 	item = '1';
 	collection = ['1'];
+	model = '1';
 }

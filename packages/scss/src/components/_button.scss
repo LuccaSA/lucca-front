@@ -1,15 +1,14 @@
 .button {
 	border: 0;
 	border-radius: _component("button.border.radius");
-	box-shadow: 0 _component("button.box-shadow.offset") 0 _component("button.box-shadow.color") inset;
 	cursor: pointer;
 	display: inline-block;
 	font-family: unquote(_component("button.font.family"));
-	font-size: _component("button.sizing.default.font-size");
+	font-size: _component("button.font-size");
 	font-weight: _component("button.font-weight");
 	line-height: _component("button.line-height");
 	margin: _component("button.margin");
-	padding: _component("button.sizing.default.padding");
+	padding: _component("button.padding");
 	position: relative;
 	text-decoration: none;
 	transition: unquote(_component("button.transition"));
@@ -25,6 +24,25 @@
 	}
 }
 
+.button-counter {
+	border-radius: 1rem;
+	display: inline-block;
+	font-size: _theme("sizes.smaller.font-size");
+	font-weight: 600;
+	height: 1.5rem;
+	min-width: 1.5rem;
+	margin-left: _theme("spacings.smaller");
+	padding: 0 _theme("spacings.smallest");
+	vertical-align: bottom;
+}
+
+.button-icon {
+	height: 1.5rem;
+	line-height: 1.5rem;
+	font-size: 1.5rem;
+	transform: translateX(-.2rem);
+	vertical-align: bottom;
+}
 
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -41,16 +59,9 @@
 		&:active:not([disabled]) {
 			background: _color($palette, "dark");
 		}
-	}
 
-	@mixin buttonLesserColoring($palette) {
-		background: _color($palette, "lightest");
-		box-shadow: 0 _component("button.box-shadow.offset") 0 _color($palette, "see-through") inset;
-		color: _color($palette, "dark");
-
-		&:hover:not([disabled]) {
-			background: _color($palette, "lightest");
-			opacity: .8;
+		.button-counter {
+			background: _color($palette, "lighter");
 		}
 	}
 
@@ -63,26 +74,6 @@
 			@include buttonColoring($name);
 		}
 	}
-
-	// palette lesser
-	@each $name, $palette in _getMap("palettes") {
-		&.mod-lesser.palette-#{$name} {
-			@include buttonLesserColoring($name);
-		}
-	}
-}
-
-
-// SIZING
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.button {
-	@each $button-size, $size-obj in _getMap("components.button.sizing") {
-		&.size-#{$button-size} {
-			font-size: _component("button.sizing."+$button-size+".font-size");
-			padding: _component("button.sizing."+$button-size+".padding");
-		}
-	}
 }
 
 
@@ -90,26 +81,20 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	&.mod-white {
-		background: white;
-
-		&:hover, &:focus {
-			&:not([disabled]) {
-				background: white;
-				color: _color("text.dark");
-			}
-		}
+	&.mod-small {
+		font-size: _component("button.small.font-size");
+		line-height: _component("button.small.line-height");
+		padding: _component("button.small.padding");
 	}
 
 	&.mod-link {
 		background: transparent;
-		box-shadow: none;
+		color: _color("text.default");
 
 		&:hover, &:focus {
 			&:not([disabled]) {
-				background: transparent;
-				box-shadow: none;
-				color: _component("button.flat.color");
+				background: _color("primary", "lightest");
+				color: _color("primary");
 			}
 		}
 
@@ -117,34 +102,63 @@
 			color: white;
 
 			&:hover, &:focus {
-				opacity: .8;
-				color: white;
+				background: rgba(255, 255, 255, .1);
+				color: rgba(255, 255, 255, .8);
 			}
 		}
 	}
 
 	&.mod-more {
+		padding: 0 !important;
+		text-align: center;
+		width: 2rem;
+
 		&::before {
 			content: "";
 			@include makeIcon("arrow_south");
-			bottom: 0;
 			font-size: .7rem;
-			height: .7rem;
-			left: 0;
-			margin: auto;
-			position: absolute;
-			right: 0;
-			top: 0;
+			height: 0;
+			vertical-align: text-top;
+		}
+
+		.mod-small {
+			width: 1.75rem;
 		}
 	}
 
-	&.mod-ghost {
+	&.mod-outline {
 		background: transparent;
 		color: _color("text.default");
-		box-shadow: inset 0 0 0 1px _color("text.default");
-	
+		box-shadow: inset 0 0 0 1px _color("grey", "light");
+
 		&:hover {
-		  background: _theme("commons.background.base");
+			background: _color("primary", "lightest");
+			color: _color("primary");
+		}
+	}
+
+	&.mod-counter {
+		padding-left: _theme("spacings.small");
+		padding-right: _theme("spacings.small");
+
+		&.mod-small {
+			.button-counter {
+				height: 1rem;
+				min-width: 1rem;
+			}
+		}
+	}
+
+	&.mod-icon {
+		padding-left: _theme("spacings.small");
+		padding-right: _theme("spacings.small");
+
+		&.mod-small {
+			.button-icon {
+				font-size: _component("button.small.font-size");
+				height: _component("button.small.line-height");
+				line-height: _component("button.small.line-height");
+			}
 		}
 	}
 }
@@ -170,17 +184,15 @@
 	/* Loading */
 
 	&.is-loading {
-		@include loading(_component("button.sizing.default.font-size"));
+		@include loading(_component("button.font-size"));
 		color: transparent;
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
+		@include loading(_component("button.font-size"));
 
-		// Sizing
-		@each $button-size, $size-obj in _getMap("components.button.sizing") {
-			&.size-#{$button-size} {
-				@include loading(_component("button.sizing."+$button-size+".font-size"));
-			}
+		&.mod-small {
+			@include loading(_component("button.small.font-size"));
 		}
 	}
 
@@ -196,8 +208,8 @@
 			@include makeIcon("tick");
 			bottom: 0;
 			color: white;
-			font-size: calc(1.5 * #{_component("button.sizing.default.font-size")});
-			height: calc(1.5 * #{_component("button.sizing.default.font-size")});
+			font-size: calc(1.5 * #{_component("button.font-size")});
+			height: _component("button.line-height");
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -206,13 +218,10 @@
 			vertical-align: middle;
 		}
 
-		// Sizing
-		@each $button-size, $size-obj in _getMap("components.button.sizing") {
-			&.size-#{$button-size} {
-				&::after {
-					font-size: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
-					height: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
-				}
+		&.mod-small {
+			&::after {
+				font-size: calc(1.5 * #{_component("button.small.font-size")});
+				height: _component("button.small.font-size");
 			}
 		}
 	}
@@ -229,8 +238,8 @@
 			@include makeIcon("cross");
 			bottom: 0;
 			color: white;
-			font-size: calc(1.5 * #{_component("button.sizing.default.font-size")});
-			height: calc(1.5 * #{_component("button.sizing.default.font-size")});
+			font-size: calc(1.5 * #{_component("button.font-size")});
+			height: _component("button.line-height");
 			left: 0;
 			margin: auto;
 			position: absolute;
@@ -239,13 +248,10 @@
 			vertical-align: middle;
 		}
 
-		// Sizing
-		@each $button-size, $size-obj in _getMap("components.button.sizing") {
-			&.size-#{$button-size} {
-				&::after {
-					font-size: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
-					height: calc(1.5 * #{_component("button.sizing."+$button-size+".font-size")});
-				}
+		&.mod-small {
+			&::after {
+				font-size: calc(1.5 * #{_component("button.small.font-size")});
+				height: _component("button.small.font-size");
 			}
 		}
 	}
@@ -261,8 +267,10 @@
 		border-radius: 0;
 		display: block;
 		margin: 0;
+		padding-left: _theme("spacings.small");
+		padding-right: _theme("spacings.small");
 		position: relative;
-		border-right: 1px solid _component("button.box-shadow.color");
+		border-right: 1px solid rgba(0, 0, 0, .1);
 
 		&:last-of-type {
 			border: 0;
@@ -287,7 +295,7 @@
 
 .button-group .button-group-item { // 2 classes needed to override button-group's "last-of-type"
 	.button {
-		border-right: 1px solid _component("button.box-shadow.color");
+		border-right: 1px solid rgba(0, 0, 0, .1);
 	}
 
 	&:first-child {

@@ -1,57 +1,78 @@
 .menu {
 	align-items: center;
 	background: _component("menu.background");
-	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
-	line-height: 1;
+	margin-left: - _component("menu.padding.horizontal");
+	margin-right: - _component("menu.padding.horizontal");
+	position: relative;
+
+	&:after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		height: 1px;
+		left: _component("menu.padding.horizontal");
+		right: _component("menu.padding.horizontal");
+		border-bottom: 1px solid _theme("commons.divider.color");
+	}
 }
 
 .menu-link {
+	border-radius: _theme("commons.border.radius");
 	color: _color("text.light");
-	margin: _component("menu.margin");
-	padding: _component("menu.padding");
+	margin: 0 _theme("spacings.smaller") _theme("spacings.smaller") 0;
+	padding: _component("menu.padding.vertical") _component("menu.padding.horizontal");
 	position: relative;
 	text-decoration: none;
-	transition: color _component("menu.animations.durations.standard") ease;
+	transition: color _component("menu.animations.durations.fast") ease;
 
 	&::after {
-		bottom: -1px;
+		border-radius: _theme("commons.border.radius") _theme("commons.border.radius") 0 0;
+		bottom: - _theme("spacings.smaller");
 		content: "";
 		display: block;
 		height: 3px;
-		left: 0;
+		left: _component("menu.padding.horizontal");
 		position: absolute;
-		right: 0;
+		right: _component("menu.padding.horizontal");
 		transform: scale(0, 1);
-		transition: transform _component("menu.animations.durations.standard") ease;
+		transition: transform _component("menu.animations.durations.fast") ease;
+		z-index: 1;
 	}
 
-	&:hover {
+	&:hover:not(.is-active) {
 		color: _color("text.dark");
+	}
 
-		&::after {
-			transform: scale(1);
-		}
+	&:last-child {
+		margin-right: 0;
 	}
 }
 
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+
 .menu {
 	@mixin menuColoring($palette) {
-		background: _color($palette);
+		&::after {
+			background: _color($palette);
+		}
+
+		&:hover:not(.is-active) {
+			background: _color($palette, "lightest");
+		}
 	}
 
 	// default color
-	.menu-link::after {
+	.menu-link {
 		@include menuColoring("menu.default-palette");
 	}
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			.menu-link::after {
+			.menu-link {
 				@include menuColoring($name);
 			}
 		}

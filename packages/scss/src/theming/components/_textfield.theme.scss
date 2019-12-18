@@ -1,19 +1,20 @@
 $textfield: (
-	background: lighten(_color("primary", "color", true), 42%),
+	background: _color("primary", "lightest"),
 	border-radius: .2rem,
 
 	input: (
-		padding-horizontal: .5rem,
-		padding-vertical: .45rem,
-		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 25%)
+		padding-horizontal: _theme("spacings.smaller"),
+		padding-vertical: _theme("spacings.smaller"),
+		placeholder: _color("primary", "lighter")
 	),
 
 	hover: (
-		background: lighten(_color("primary", "color", true), 39%)
+		background: _color("primary", "lighter"),
+		placeholder: _color("primary", "light")
 	),
 
 	focus: (
-		placeholder: _color("text.placeholder")
+		placeholder: _color("primary", "lighter")
 	),
 
 	disabled: (

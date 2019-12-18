@@ -1,10 +1,12 @@
 $navSide: (
 
 	fullwidth-palette: (
-		bg-color: _color("primary", "dark"),
+		bg-color: #333333,
 		text: white,
 		selected-bg: _color("primary"),
 		selected-text: _color("primary", "text"),
+		hovered-bg: _color("primary", "dark"),
+		hovered-text: _color("primary", "text"),
 		alert-color: _color("secondary"),
 		alert-text: _color("secondary", "text"),
 		selected-alert-color: _color("secondary"),
@@ -12,10 +14,12 @@ $navSide: (
 	),
 
 	compact-palette: (
-		bg-color: _color("primary", "dark"),
+		bg-color: #333333,
 		text: white,
 		selected-bg: _color("primary"),
 		selected-text: _color("primary", "text"),
+		hovered-bg: _color("primary", "dark"),
+		hovered-text: _color("primary", "text"),
 		alert-color: _color("secondary"),
 		alert-text: _color("secondary", "text"),
 		selected-alert-color: _color("secondary"),
@@ -23,10 +27,12 @@ $navSide: (
 	),
 
 	bottom-section-palette: (
-		bg-color: _color("primary", "dark"),
+		bg-color: transparent,
 		text: white,
 		selected-bg: _color("primary"),
 		selected-text: _color("primary", "text"),
+		hovered-bg: _color("primary", "dark"),
+		hovered-text: _color("primary", "text"),
 		alert-color: _color("secondary"),
 		alert-text: _color("secondary", "text"),
 		selected-alert-color: _color("secondary"),
@@ -36,7 +42,7 @@ $navSide: (
 	bottom-section-height: 3.1rem,
 	offset-top: 0,
 	padding-top: 0,
-	main-font-size: _theme("sizes.standard.font-size"),
+	main-font-size: _theme("sizes.small.font-size"),
 	sub-font-size: _theme("sizes.small.font-size"),
 	scrollbar: (
 		width: .5rem,
@@ -51,7 +57,7 @@ $navSide: (
 	width: 15rem,
 
 	compact: (
-		width: 6.125rem,
+		width: 7.5rem,
 		font-size: _theme("sizes.small.font-size"),
 	),
 

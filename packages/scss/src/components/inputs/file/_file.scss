@@ -10,7 +10,7 @@
 
 .file-icon {
 	font-size: 3rem;
-	color: _theme("commons.background.darker");
+	color: _color("primary", "lighter");
 }
 
 .file-or {
@@ -72,11 +72,7 @@
 		background: _theme("commons.background.base");
 
 		.file-icon {
-			color: _theme("commons.background.darkest");
-		}
-
-		.file-button {
-			background: white;
+			color: _color("primary", "light");
 		}
 	}
 }

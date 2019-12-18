@@ -1,52 +1,62 @@
 $palettes: (
 	"primary": (
-		"color": #888888,
+		"lightest": #F7F7F7,
+		"lighter": #E4E4E4,
+		"light": #C7C7C7,
+		"color": #808080,
+		"dark": #4D4D4D,
+		"darker": #323232,
 		"text": #FFFFFF,
-		"dark": darken(#888888, 7%),
-		"darker": darken(#888888, 20%),
-		"light": lighten(#888888, 7%),
-		"lighter": lighten(#888888, 15%),
-		"lightest": lighten(#888888, 42%),
-		"see-through": rgba(#888888, .15)
+		"see-through": rgba(#808080, .15)
 	),
 	"secondary": (
-		"color": #888888,
+		"lightest": #F7F7F7,
+		"lighter": #E4E4E4,
+		"light": #C7C7C7,
+		"color": #808080,
+		"dark": #4D4D4D,
+		"darker": #323232,
 		"text": #FFFFFF,
-		"dark": darken(#888888, 5%),
-		"darker": darken(#888888, 15%),
-		"light": lighten(#888888, 7%),
-		"lighter": lighten(#888888, 20%),
-		"lightest": lighten(#888888, 42%),
-		"see-through": rgba(#888888, .15)
+		"see-through": rgba(#808080, .15)
+	),
+	"grey": (
+		"lightest": #F7F7F7,
+		"lighter": #E4E4E4,
+		"light": #C7C7C7,
+		"color": #808080,
+		"dark": #4D4D4D,
+		"darker": #323232,
+		"text": #FFFFFF,
+		"see-through": rgba(#808080, .15)
 	),
 	"success": (
-		"color": #64C442,
+		"lightest": #F1FBEE,
+		"lighter": #E3F8DC,
+		"light": #7DE559,
+		"color": #75DA52,
+		"dark": #379816,
+		"darker": #217703,
 		"text": #FFFFFF,
-		"dark": darken(#64C442, 5%),
-		"darker": darken(#64C442, 20%),
-		"light": lighten(#64C442, 10%),
-		"lighter": lighten(#64C442, 20%),
-		"lightest": lighten(#64C442, 42%),
-		"see-through": rgba(#64C442, .15)
+		"see-through": rgba(#75DA52, .15)
 	),
-	"warning": (
+		"warning": (
+		"lightest": #FFF2E8,
+		"lighter": #FFE4D1,
+		"light": #FF8C38,
 		"color": #FF7A1A,
+		"dark": #D15700,
+		"darker": #953600,
 		"text": #FFFFFF,
-		"dark": darken(#FF7A1A, 5%),
-		"darker": darken(#FF7A1A, 20%),
-		"light": lighten(#FF7A1A, 10%),
-		"lighter": lighten(#FF7A1A, 20%),
-		"lightest": lighten(#FF7A1A, 42%),
 		"see-through": rgba(#FF7A1A, .15)
 	),
 	"error": (
+		"lightest": #FFECEF,
+		"lighter": #FBA7B5,
+		"light": #FA3F5E,
 		"color": #F42144,
+		"dark": #CA0224,
+		"darker": #810016,
 		"text": #FFFFFF,
-		"dark": darken(#F42144, 5%),
-		"darker": darken(#F42144, 20%),
-		"light": lighten(#F42144, 10%),
-		"lighter": lighten(#F42144, 20%),
-		"lightest": lighten(#F42144, 42%),
 		"see-through": rgba(#F42144, .15)
 	),
 );
@@ -54,16 +64,16 @@ $palettes: (
 $colors: (
 	text: (
 		dark: (
-			color: #444444
+			color: #323232
 		),
 		default: (
-			color: #666666
+			color: #4D4D4D
 		),
 		light: (
-			color: #999999
+			color: #808080
 		),
 		placeholder: (
-			color: #CCCCCC
+			color: #C7C7C7
 		)
 	),
 );

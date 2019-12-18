@@ -131,15 +131,15 @@
 	}
 
 	&.mod-noOffset {
-	  .table-head-row-cell,
-	  .table-body-row-cell {
-		&:first-child {
-		  padding-left: 0;
+		.table-head-row-cell, .table-body-row-cell {
+			&:first-child {
+				padding-left: 0;
+			}
+
+			&:last-child {
+				padding-right: 0;
+			}
 		}
-		&:last-child {
-			padding-right: 0;
-		}
-	  }
 	}
 }
 
@@ -171,21 +171,21 @@
 		left: 0;
 		width: 2rem;
 		cursor: move;
-	  
+
 		&:hover {
-		  &::after {
-			color: _color('text.light');
-		  }
+			&::after {
+				color: _color("text.light");
+			}
 		}
-	  
+
 		&::after {
-		  @include makeIcon('drag');
-		  color: _color('text.placeholder');
-		  font-size: 1.3rem;
-		  margin: auto;
-		  height: 100%;
-		  display: flex;
-		  align-items: center;
+			@include makeIcon("drag");
+			color: _color("text.placeholder");
+			font-size: 1.3rem;
+			margin: auto;
+			height: 100%;
+			display: flex;
+			align-items: center;
 		}
 	}
 }

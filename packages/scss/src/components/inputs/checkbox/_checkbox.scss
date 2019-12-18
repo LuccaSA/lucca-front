@@ -41,10 +41,10 @@
 	}
 
 	&:hover {
-		color: black;
+		color: _color("text.dark");
 
 		&::before {
-			border: 2px solid _color("text.default");
+			border-color: _component("checkbox.input.border.hover");
 		}
 	}
 }
@@ -150,6 +150,8 @@
 			font-size: .6rem;
 			padding: .15rem;
 			@include makeIcon("minimize");
+			line-height: .4rem;
+			text-indent: -1.5px;
 		}
 	}
 }
