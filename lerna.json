@@ -5,7 +5,7 @@
     "packages/ng/dist"
   ],
   "npmClient": "npm",
-  "version": "4.0.0-rc.2",
+  "version": "4.0.0-rc.3",
   "command": {
     "publish": {
       "message": "publish %s",
