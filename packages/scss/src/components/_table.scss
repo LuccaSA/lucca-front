@@ -1,5 +1,4 @@
 .table {
-	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	border-spacing: 0;
 	display: table;
 	font-size: _component("table.font-size");
@@ -18,12 +17,14 @@
 }
 
 .table-head-row-cell {
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	color: _color("text.light");
 	display: table-cell;
 	font-weight: 600;
 	font-size: _theme("sizes.small.font-size");
 	line-height: _theme("sizes.small.line-height");
-	padding: _component("table.padding");
+	padding: _theme("spacings.small");
 	text-align: left;
 }
 
@@ -37,7 +38,7 @@
 }
 
 .table-body-row-cell {
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table-cell;
 	padding: _component("table.padding");
 }
@@ -117,7 +118,7 @@
 		border-bottom: none;
 
 		.table-body-row-cell, .table-head-row-cell {
-			border-top: none;
+			border-bottom: none;
 			padding: 0 1rem;
 
 			&:first-child {
@@ -152,8 +153,18 @@
 		vertical-align: bottom;
 
 		.table-body-row-cell {
-			border-top: 0;
+			border-bottom: 0;
 			padding-top: 0;
+		}
+	}
+
+	&.mod-parent {
+		.table-body-row-cell {
+			background: _color("grey", "lightest");
+			color: _color("grey", "dark");
+			font-size: _theme("sizes.small.font-size");
+			font-weight: 600;
+			line-height: _theme("sizes.small.line-height");
 		}
 	}
 

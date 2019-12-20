@@ -1,34 +1,34 @@
 $palettes: (
-	"primary": (
-		"lightest": #F7F7F7,
-		"lighter": #E4E4E4,
-		"light": #C7C7C7,
-		"color": #808080,
-		"dark": #4D4D4D,
-		"darker": #323232,
-		"text": #FFFFFF,
-		"see-through": rgba(#808080, .15)
-	),
-	"secondary": (
-		"lightest": #F7F7F7,
-		"lighter": #E4E4E4,
-		"light": #C7C7C7,
-		"color": #808080,
-		"dark": #4D4D4D,
-		"darker": #323232,
-		"text": #FFFFFF,
-		"see-through": rgba(#808080, .15)
-	),
-	"grey": (
-		"lightest": #F7F7F7,
-		"lighter": #E4E4E4,
-		"light": #C7C7C7,
-		"color": #808080,
-		"dark": #4D4D4D,
-		"darker": #323232,
-		"text": #FFFFFF,
-		"see-through": rgba(#808080, .15)
-	),
+"primary": (
+	"darker": #202160,
+	"dark": #4547A1,
+	"color": #7072D2,
+	"light": #7A7DE8,
+	"lighter": #DCDDFE,
+	"lightest": #F5F5FF,
+	"text": #FFFFFF,
+	"see-through": rgba(#7072D2, .15),
+),
+"secondary": (
+	"darker": #AF5F00,
+	"dark": #D99207,
+	"color": #FFB900,
+	"light": #FFC938,
+	"lighter": #FFF1CC,
+	"lightest": #FFF8E5,
+	"text": #121212,
+	"see-through": rgba(#FFB900, .15)
+),
+"grey": (
+	"darker": #2D354D,
+	"dark": #4C5775,
+	"color": #9299B0,
+	"light": #CCD1E0,
+	"lighter": #E8EAF3,
+	"lightest": #F7F9FD,
+	"text": #FFFFFF,
+	"see-through": rgba(#9299B0, .15)
+),
 	"success": (
 		"lightest": #F1FBEE,
 		"lighter": #E3F8DC,
@@ -64,13 +64,13 @@ $palettes: (
 $colors: (
 	text: (
 		dark: (
-			color: #323232
+			color: #2D354D
 		),
 		default: (
-			color: #4D4D4D
+			color: #4C5775
 		),
 		light: (
-			color: #808080
+			color: #9299B0
 		),
 		placeholder: (
 			color: #C7C7C7
