@@ -53,7 +53,12 @@ $commons: (
 	banner-height: 50px,
 	transition: unquote("all 150ms ease"),
 	focused: 0 0 1px 2px #A6C7FF,
-	mobile: "md"
+	mobile: "md",
+	loading: (
+		background: _color("primary", "lighter"),
+		frontground: _color("primary"),
+		speed: 600ms,
+	)
 );
 
 $theme: _set($theme, "commons", $commons);
