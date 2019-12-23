@@ -83,6 +83,14 @@
 	// MOD
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+	&.mod-small {
+		.textfield-label {
+			line-height: _theme("sizes.small.line-height");
+			font-size: _theme("sizes.small.font-size");
+		}
+	}
+
+
 	&.mod-withSuffix {
 		.textfield-input {
 			padding-right: _component("textfield.material.suffix.padding-right");

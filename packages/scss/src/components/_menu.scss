@@ -2,17 +2,15 @@
 	align-items: center;
 	background: _component("menu.background");
 	display: flex;
-	margin-left: - _component("menu.padding.horizontal");
-	margin-right: - _component("menu.padding.horizontal");
 	position: relative;
 
-	&:after {
+	&::after {
 		content: "";
 		position: absolute;
 		bottom: 0;
 		height: 1px;
-		left: _component("menu.padding.horizontal");
-		right: _component("menu.padding.horizontal");
+		left: 0;
+		right: 0;
 		border-bottom: 1px solid _theme("commons.divider.color");
 	}
 }
@@ -20,28 +18,32 @@
 .menu-link {
 	border-radius: _theme("commons.border.radius");
 	color: _color("text.light");
-	margin: 0 _theme("spacings.smaller") _theme("spacings.smaller") 0;
-	padding: _component("menu.padding.vertical") _component("menu.padding.horizontal");
+	margin: 0 2.5rem 0 0;
+	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
 	transition: color _component("menu.animations.durations.fast") ease;
 
 	&::after {
 		border-radius: _theme("commons.border.radius") _theme("commons.border.radius") 0 0;
-		bottom: - _theme("spacings.smaller");
+		bottom: 0;
 		content: "";
 		display: block;
 		height: 3px;
-		left: _component("menu.padding.horizontal");
+		left: 0;
 		position: absolute;
-		right: _component("menu.padding.horizontal");
+		right: 0;
 		transform: scale(0, 1);
 		transition: transform _component("menu.animations.durations.fast") ease;
 		z-index: 1;
 	}
 
 	&:hover:not(.is-active) {
-		color: _color("text.dark");
+		color: _color("text.light");
+
+		&::after {
+			transform: scale(1);
+		}
 	}
 
 	&:last-child {
@@ -49,18 +51,24 @@
 	}
 }
 
-// PALETTES
+
+// MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+.menu {
+	&.mod-header {
+		padding: 0 2.5rem;
+	}
+}
+
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .menu {
 	@mixin menuColoring($palette) {
 		&::after {
 			background: _color($palette);
-		}
-
-		&:hover:not(.is-active) {
-			background: _color($palette, "lightest");
 		}
 	}
 

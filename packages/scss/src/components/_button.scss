@@ -22,6 +22,12 @@
 	&:last-of-type {
 		margin-right: 0;
 	}
+
+	.lucca-icon {
+		vertical-align: top;
+		line-height: 1.5rem;
+		font-size: 1rem;
+	}
 }
 
 .button-counter {
@@ -85,6 +91,11 @@
 		font-size: _component("button.small.font-size");
 		line-height: _component("button.small.line-height");
 		padding: _component("button.small.padding");
+
+		.lucca-icon {
+			line-height: 1rem;
+			font-size: .875rem;
+		}
 	}
 
 	&.mod-link {

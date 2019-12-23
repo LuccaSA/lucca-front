@@ -48,7 +48,7 @@
 
 	&.mod-icon {
 		color: _color("primary", "light");
-		line-height: 1.15;
+		line-height: 1.5rem;
 	}
 }
 
@@ -107,6 +107,13 @@
 
 			.lucca-icon {
 				font-size: .9rem;
+			}
+		}
+
+		&.mod-small {
+			.textfield-actionClear {
+				bottom: .5rem;
+				right: 1.4rem;
 			}
 		}
 	}
@@ -217,6 +224,13 @@
 				right: 1.8rem;
 			}
 		}
+
+		&.mod-small {
+			&::after {
+				line-height: 1rem;
+				font-size: 1rem;
+			}
+		}
 	}
 
 	&.mod-radio {
@@ -270,6 +284,16 @@
 		.textfield-input {
 			line-height: _theme("sizes.small.line-height");
 			font-size: _theme("sizes.small.font-size");
+		}
+
+		.textfield-suffix {
+			line-height: _theme("sizes.small.line-height");
+			font-size: _theme("sizes.small.font-size");
+
+			&.mod-icon {
+				line-height: _theme("sizes.small.line-height");
+				font-size: _theme("sizes.small.font-size");
+			}
 		}
 	}
 
