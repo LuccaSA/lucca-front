@@ -12,6 +12,7 @@
 	position: relative;
 	text-decoration: none;
 	transition: unquote(_component("button.transition"));
+	vertical-align: baseline;
 	white-space: nowrap;
 
 	&:first-of-type {
