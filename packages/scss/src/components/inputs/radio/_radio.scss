@@ -63,7 +63,7 @@
 	}
 
 	&:hover {
-		color: _color("grey");
+		color: _color("text.light");
 
 		&::before {
 			border-color: _component("radio.input.border.hover");
