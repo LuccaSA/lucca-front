@@ -18,7 +18,7 @@
 	cursor: pointer;
 	display: inline-block;
 	line-height: 1.5rem;
-	padding: 0 0 0 calc(2rem - 4px + #{_theme("spacings.smaller")});
+	padding: 0 0 0 calc(2rem - 4px + #{_theme("spacings.smaller", true)});
 	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&::before {
