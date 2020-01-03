@@ -269,3 +269,10 @@
 .filters.mod-sticky {
 	top: 0;
 }
+
+.demo-avatar {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	background-image: url(https://i.pravatar.cc/32);
+}

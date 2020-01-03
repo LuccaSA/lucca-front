@@ -1,5 +1,4 @@
 .switch {
-	margin: .25rem 0;
 	position: relative;
 }
 
@@ -16,38 +15,44 @@
 }
 
 .switch-label {
-	color: _theme("commons.disabled.color");
 	cursor: pointer;
 	display: inline-block;
-	line-height: _component("switch.label.line-height");
-	padding: _component("switch.label.padding");
-	transition: color 150ms ease;
+	line-height: 1.5rem;
+	padding: 0 0 0 calc(2rem - 4px + #{_theme("spacings.smaller", true)});
+	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&::before {
-		background: #BBBBBB;
-		border-radius: 10px;
+		background: _color("grey", "dark");
+		border-radius: .5rem;
 		content: "";
 		display: block;
-		height: _component("switch.input.size");
+		height: 1rem;
 		left: 0;
 		position: absolute;
-		top: calc(#{_component("switch.input.handler.size")} - #{_component("switch.input.size")});
-		transition: all 150ms ease;
-		width: calc(#{_component("switch.input.size")} * 2);
+		top: _theme("spacings.smallest");
+		transition: all _theme("commons.animations.durations.fast") ease;
+		width: calc(2rem - 4px);
 	}
 
 	&::after {
 		background: white;
 		border-radius: 50%;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
 		content: "";
 		display: block;
-		height: _component("switch.input.handler.size");
-		left: calc(-1 * ( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")} ) / 2);
+		height: calc(1rem - 4px);
+		left: 2px;
 		position: absolute;
-		top: calc(( #{_component("switch.input.handler.size")} - #{_component("switch.input.size")} ) / 2);
-		transition: all 150ms ease;
-		width: _component("switch.input.handler.size");
+		top: calc(#{_theme("spacings.smallest", true)} + 2px);
+		transition: all _theme("commons.animations.durations.fast") ease;
+		width: calc(1rem - 4px);
+	}
+
+	&:hover {
+		color: _color("grey");
+
+		&::before {
+			background: _color("grey");
+		}
 	}
 }
 
@@ -73,10 +78,8 @@
 	*/
 
 	&:checked ~ .switch-label {
-		color: _color("text.default");
-
 		&::after {
-			left: 14px;
+			left: calc(1rem - 2px);
 		}
 	}
 
@@ -86,14 +89,11 @@
 
 	&[disabled], &[readonly] {
 		~ .switch-label {
-			color: _theme("commons.disabled.color");
+			color: _color("grey");
 			cursor: not-allowed;
 
 			&::before {
-				background: _theme("commons.disabled.placeholder");
-			}
-			&::after {
-				background: _theme("commons.disabled.placeholder");
+				background: _color("grey", "light") !important;
 			}
 		}
 	}
@@ -105,26 +105,16 @@
 
 .switch {
 	@mixin switchColoring($palette) {
+
 		.switch-input:checked {
 			~ .switch-label {
 				&::before {
-					background: _color($palette, "lighter");
-				}
-
-				&::after {
 					background: _color($palette);
 				}
-			}
 
-			// Palette > Disabled switch
-			&[disabled], &[readonly] {
-				~ .switch-label {
+				&:hover {
 					&::before {
-						background: _color($palette, "lighter");
-					}
-
-					&::after {
-						background: _color($palette, "lighter");
+						background: _color($palette, "light");
 					}
 				}
 			}

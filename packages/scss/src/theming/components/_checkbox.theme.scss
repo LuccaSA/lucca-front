@@ -1,20 +1,18 @@
 $checkbox: (
   // theming
-  default-palette: (
-    color: _color("primary"),
-  ),
+  default-palette: _getMap("palettes.primary"),
   label: (
     line-height: 1.5rem,
     padding: 0 0 0 1.5rem
   ),
   input: (
-    margin-top: .3rem,
-    margin-right: .5rem,
-    size: .95rem,
+    margin-top: _theme("spacings.smallest"),
+    margin-right: _theme("spacings.smaller"),
+    size: 1rem,
     border-radius: _theme("commons.border.radius"),
     border: (
       color: _color("grey"),
-      hover: _color("grey", "dark")
+      hover: _color("primary", "light")
     )
   )
 );

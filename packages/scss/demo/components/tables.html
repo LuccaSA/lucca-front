@@ -47,6 +47,157 @@
 <em><b>Tip:</b> You can align cells on top with a <code class="code">mod-alignTop</code> class on <code class="code">table</code>.</em>
 </section>
 
+<!-- Parents -->
+<section class="contentSection">
+	<h2>Parents</h2>
+	<table class="table">
+		<thead class="table-head">
+			<tr class="table-head-row">
+				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">Head cell</th>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row mod-parent">
+				<td class="table-body-row-cell" colspan="3">Parent</td>
+			</tr>
+			<tr class="table-body-row mod-child">
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row mod-child">
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row mod-parent mod-collapsable">
+				<td class="table-body-row-cell" colspan="3">Parent</td>
+			</tr>
+			<tr class="table-body-row mod-child">
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row mod-parent mod-collapsable is-collapsed">
+				<td class="table-body-row-cell" colspan="3">Parent</td>
+			</tr>
+		</tbody>
+	</table>
+<code class="code mod-block">&lt;table class="table"&gt;
+  &lt;thead class="table-head"&gt;
+    &lt;tr class="table-head-row"&gt;
+      &lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+      &lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+      &lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class="table-body"&gt;
+    &lt;tr class="table-body-row mod-parent"&gt;
+      &lt;td class="table-body-row-cell" colspan="3"&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class="table-body-row"&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class="table-body-row"&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code>
+</section>
+
+<!-- Checkbox -->
+<section class="contentSection">
+	<h1>Selectable</h1>
+	<table class="table">
+		<thead class="table-head">
+			<tr class="table-head-row mod-selectable">
+				<th class="table-head-row-cell">
+					<div class="checkbox mod-noLabel">
+						<input class="checkbox-input" type="checkbox" id="rowAll">
+						<label class="checkbox-label" for="rowAll"></label>
+					</div>
+				</th>
+				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">Head cell</th>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row mod-selectable">
+				<td class="table-body-row-cell">
+					<div class="checkbox mod-noLabel">
+						<input class="checkbox-input" type="checkbox" id="row0" checked>
+						<label class="checkbox-label" for="row0"></label>
+					</div>
+				</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row mod-selectable">
+				<td class="table-body-row-cell">
+					<div class="checkbox mod-noLabel">
+						<input class="checkbox-input" type="checkbox" id="row1" checked>
+						<label class="checkbox-label" for="row1"></label>
+					</div>
+				</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row mod-selectable">
+				<td class="table-body-row-cell">
+					<div class="checkbox mod-noLabel">
+						<input class="checkbox-input" type="checkbox" id="row2">
+						<label class="checkbox-label" for="row2"></label>
+					</div>
+				</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+		</tbody>
+	</table>
+
+<code class="code mod-block">&lt;table class="table"&gt;
+  &lt;thead class="table-head"&gt;
+    &lt;tr class="table-head-row mod-selectable"&gt;
+      &lt;th class="table-head-row-cell"&gt;
+        &lt;div class="checkbox mod-noLabel"&gt;
+          &lt;input class="checkbox-input" type="checkbox" id="rowAll"&gt;
+          &lt;label class="checkbox-label" for="rowAll"&gt;&lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/th&gt;
+      &lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+      &lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+      &lt;th class="table-head-row-cell"&gt;...&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class="table-body"&gt;
+    &lt;tr class="table-body-row mod-selectable"&gt;
+      &lt;td class="table-body-row-cell"&gt;
+        &lt;div class="checkbox mod-noLabel"&gt;
+          &lt;input class="checkbox-input" type="checkbox" id="rowID" checked&gt;
+          &lt;label class="checkbox-label" for="rowID"&gt;&lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code>
+</section>
+
+
 <!-- Zebra -->
 <section class="contentSection">
 	<h2>Zebra table</h2>
@@ -394,29 +545,24 @@
 	<table class="table">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell">Head cell</th>
-				<th class="table-head-row-cell">Head cell</th>
-				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell">
+					Head cell
+					<div class="textfield mod-search mod-block mod-small u-marginTopSmaller">
+					<input class="textfield-input" type="text" placeholder="Search">
+				</div></th>
+				<th class="table-head-row-cell">
+					Head cell
+					<div class="textfield mod-search mod-block mod-small u-marginTopSmaller">
+					<input class="textfield-input" type="text" placeholder="Search">
+				</div></th>
+				<th class="table-head-row-cell">
+					Head cell
+					<div class="textfield mod-search mod-block mod-small u-marginTopSmaller">
+					<input class="textfield-input" type="text" placeholder="Search">
+				</div></th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
-			<tr class="table-body-row mod-filters">
-				<td class="table-body-row-cell">
-					<div class="textfield mod-search mod-block">
-						<input class="textfield-input" type="text" placeholder="Search">
-					</div>
-				</td>
-				<td class="table-body-row-cell">
-					<div class="textfield mod-search mod-block">
-						<input class="textfield-input" type="text" placeholder="Search">
-					</div>
-				</td>
-				<td class="table-body-row-cell">
-					<div class="textfield mod-search mod-block">
-						<input class="textfield-input" type="text" placeholder="Search">
-					</div>
-				</td>
-			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
@@ -450,17 +596,51 @@
 
 </section>
 
-<!-- Basics -->
+<section class="contentSection">
+	<h2>Users table</h2>
+	<table class="table">
+		<thead class="table-head">
+			<tr class="table-head-row">
+				<th class="table-head-row-cell"></th>
+				<th class="table-head-row-cell">User Name</th>
+				<th class="table-head-row-cell">Some data</th>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row">
+				<td class="table-body-row-cell mod-avatar"><div class="demo-avatar"></div></td>
+				<td class="table-body-row-cell">User Name</td>
+				<td class="table-body-row-cell">Some data</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell mod-avatar"><div class="demo-avatar"></div></td>
+				<td class="table-body-row-cell">User Name</td>
+				<td class="table-body-row-cell">Some data</td>
+			</tr>
+		</tbody>
+	</table>
+<code class="code mod-block">&lt;table class="table"&gt;
+  &lt;tbody class="table-body"&gt;
+    &lt;tr class="table-body-row"&gt;
+      &lt;td class="table-body-row-cell mod-avatar"&gt;&lt;div class="demo-avatar"&gt;&lt;/div&gt;&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr class="table-body-row"&gt;
+      &lt;td class="table-body-row-cell mod-avatar"&gt;&lt;div class="demo-avatar"&gt;&lt;/div&gt;&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+      &lt;td class="table-body-row-cell"&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+	</code>
+</section>
+
+
+<!-- Borderless -->
 <section class="contentSection">
 	<h2>Tables borderless</h2>
 	<table class="table mod-borderless">
-		<thead class="table-head">
-			<tr class="table-head-row">
-				<th class="table-head-row-cell">Head cell</th>
-				<th class="table-head-row-cell">Head cell</th>
-				<th class="table-head-row-cell">Head cell</th>
-			</tr>
-		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Body cell</td>
