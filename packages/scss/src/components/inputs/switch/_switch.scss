@@ -42,7 +42,7 @@
 		height: calc(1rem - 4px);
 		left: 2px;
 		position: absolute;
-		top: calc(#{_theme("spacings.smallest")} + 2px);
+		top: calc(#{_theme("spacings.smallest", true)} + 2px);
 		transition: all _theme("commons.animations.durations.fast") ease;
 		width: calc(1rem - 4px);
 	}
