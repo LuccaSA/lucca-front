@@ -21,7 +21,7 @@ export class LuUserPictureComponent {
 	private _displayFormat: LuDisplayInitials = LuDisplayInitials.lastfirst;
 	/**
 	 * User Display format.
-	 * It is set to 'FL' by default
+	 * It is set to 'LF' by default
 	 */
 	@Input()
 	set displayFormat(displayFormat: LuDisplayInitials) {
