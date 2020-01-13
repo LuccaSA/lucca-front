@@ -18,7 +18,6 @@
 
 .table-head-row-cell {
 	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	color: _color("text.light");
 	display: table-cell;
 	font-weight: 600;
@@ -38,9 +37,21 @@
 }
 
 .table-body-row-cell {
-	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table-cell;
 	padding: _component("table.padding");
+}
+
+.table-body-row:first-child {
+	.table-body-row-cell {
+		border-top: none;
+	}
+}
+
+.table-body-row:last-child {
+	.table-body-row-cell {
+		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	}
 }
 
 .table-body-row-cell-handler {
@@ -114,7 +125,7 @@
 	}
 
 	&.mod-card {
-		border-bottom: 0;
+		border-top: 0;
 
 		.table-head-row-cell {
 			&:first-child {
@@ -138,7 +149,7 @@
 		border: none;
 
 		.table-body-row-cell, .table-head-row-cell {
-			border-bottom: none;
+			border-top: none;
 			padding: 0 1rem;
 
 			&:first-child {
