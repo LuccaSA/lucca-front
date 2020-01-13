@@ -7,8 +7,8 @@
 		border-radius: _theme("commons.border.radius");
 		color: _component("tooltip.color", true);
 		color: _component("tooltip.color");
-		font-size: _theme("sizes.smaller.font-size");
-		font-size: _theme("sizes.smaller.font-size", true);
+		font-size: _theme("sizes.small.font-size");
+		font-size: _theme("sizes.small.font-size", true);
 		font-weight: 600;
 		line-height: 1rem;
 		max-width: _component("tooltip.max-width", true);
