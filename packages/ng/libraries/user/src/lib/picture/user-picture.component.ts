@@ -18,7 +18,7 @@ import {
 })
 export class LuUserPictureComponent {
 
-	private _displayFormat: LuDisplayInitials = LuDisplayInitials.firstlast;
+	private _displayFormat: LuDisplayInitials = LuDisplayInitials.lastfirst;
 	/**
 	 * User Display format.
 	 * It is set to 'FL' by default
