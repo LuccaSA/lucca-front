@@ -1,7 +1,7 @@
 $tooltip: (
-	background: _theme("commons.overlays.background"),
-	color: _theme("commons.overlays.text"),
-	padding: _theme("spacings.smallest") _theme("spacings.smaller"),
+	background: _theme("commons.overlays.background", true),
+	color: _theme("commons.overlays.text", true),
+	padding: _theme("spacings.smallest", true) _theme("spacings.smaller", true),
 	max-width: 15rem
 );
 
