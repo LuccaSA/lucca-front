@@ -2,5 +2,13 @@
   "extends": "../../tsconfig.json",
   "angularCompilerOptions": {
     "enableIvy": true
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts",
+    "**/*.prod.ts"
+  ]
 }
