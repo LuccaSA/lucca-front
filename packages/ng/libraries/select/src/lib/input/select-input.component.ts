@@ -29,8 +29,8 @@ import {
 } from '@lucca-front/ng/input';
 import { ALuSelectInput } from './select-input.model';
 
-export abstract class ALuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>>
-extends ALuSelectInput<T, P>
+export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
+extends ALuSelectInput<T>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
@@ -79,7 +79,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	/**
 	 * popover trigger class extension
 	 */
-	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: P) {
+	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: ILuPickerPanel<T>) {
 		if (!picker) { return; }
 		this._picker = picker;
 	}
@@ -148,7 +148,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 		},
 	],
 })
-export class LuSelectInputComponent<T = any, P extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInputComponent<T, P> {
+export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> {
 	@ContentChild(ALuClearer, { static: true }) set _contentChildClearer(clearer: ILuClearer) {
 		if (!clearer) { return; }
 		this._clearer = clearer;

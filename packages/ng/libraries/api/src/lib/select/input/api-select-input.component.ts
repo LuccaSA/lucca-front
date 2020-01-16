@@ -5,11 +5,9 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	HostListener,
 	ViewChild,
 	Input,
 	Renderer2,
-	HostBinding,
 	AfterContentInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
@@ -17,9 +15,9 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ALuClearer, ILuClearer, ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { IApiItem } from '../../api.model';
 import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../searcher/index';
+import { ILuPickerPanel } from '@lucca-front/ng/picker';
 
 @Component({
 	selector: 'lu-api-select',
@@ -38,8 +36,8 @@ import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../search
 		},
 	],
 })
-export class LuApiSelectInputComponent<T extends IApiItem = IApiItem, P extends ILuOptionPickerPanel<T> = ILuOptionPickerPanel<T>>
-extends ALuSelectInputComponent<T, P>
+export class LuApiSelectInputComponent<T extends IApiItem = IApiItem>
+extends ALuSelectInputComponent<T>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 
 	@Input() set api(api: string) { this._service.api = api; }
@@ -65,7 +63,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 		);
 	}
 
-	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
+	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<T>) {
 		if (!picker) { return; }
 		this._picker = picker;
 	}

@@ -10,8 +10,8 @@ import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 
-export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>, C extends ILuClearer<T> = ILuClearer<T>>
-extends ALuPopoverTrigger<TPicker>
+export abstract class ALuSelectInput<T = any>
+extends ALuPopoverTrigger<ILuPickerPanel<T>>
 implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -91,13 +91,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	/**
 	 * popover trigger class extension
 	 */
-	protected set _picker(picker: TPicker) {
+	protected set _picker(picker: ILuPickerPanel<T>) {
 		this.panel = picker;
 		picker.multiple = this._multiple;
 		this.subToPickerEvts();
 	}
 	protected get _picker() { return this.panel; }
-	protected set _clearer(clearer: C) {
+	protected set _clearer(clearer: ILuClearer<T>) {
 		if (!!clearer && !!clearer.onClear) {
 			clearer.onClear.subscribe(value => this.setValue(value));
 		}
