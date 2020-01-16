@@ -20,7 +20,7 @@ import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@l
 import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
 import { ILuUser } from '../../user.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
+import { ILuPickerPanel } from '@lucca-front/ng/picker';
 import { LuDisplayFullname } from '../../display/index';
 import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
@@ -46,8 +46,8 @@ import { ILuUserSelectInputLabel } from './user-select-input.translate';
 		},
 	],
 })
-export class LuUserSelectInputComponent<U extends ILuUser = ILuUser, P extends ILuOptionPickerPanel<U> = ILuOptionPickerPanel<U>>
-extends ALuSelectInputComponent<U, P>
+export class LuUserSelectInputComponent<U extends ILuUser = ILuUser>
+extends ALuSelectInputComponent<U>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	searchFormat = LuDisplayFullname.lastfirst;
 
@@ -77,7 +77,7 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 		);
 	}
 
-	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
+	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<U>) {
 		if (!picker) { return; }
 		this._picker = picker;
 	}

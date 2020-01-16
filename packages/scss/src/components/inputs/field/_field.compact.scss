@@ -61,7 +61,7 @@
 			}
 
 			.#{$fieldname}-messages.mod-helper {
-				padding-left: calc($label-width + #{_component("field.compact.label.right-margin")});
+				padding-left: calc(#{$label-width} + #{_component("field.compact.label.right-margin")});
 			}
 		}
 	}

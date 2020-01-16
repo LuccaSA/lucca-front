@@ -5,7 +5,7 @@ import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/ove
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
-export interface ILuPopoverPanel {
+export declare interface ILuPopoverPanel {
 	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
 	templateRef?: TemplateRef<any>;

@@ -35,8 +35,8 @@ import { ALuDateAdapter, DateGranularity } from '../adapter/index';
 		},
 	],
 })
-export class LuDateSelectInputComponent<D, P extends ILuPickerPanel<D> = ILuPickerPanel<D>>
-extends ALuSelectInputComponent<D, P>
+export class LuDateSelectInputComponent<D>
+extends ALuSelectInputComponent<D>
 implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
@@ -59,7 +59,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit, Valida
 		);
 	}
 
-	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
+	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<D>) {
 		if (!picker) { return; }
 		this._picker = picker;
 	}

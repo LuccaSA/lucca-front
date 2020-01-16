@@ -34,7 +34,7 @@ export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 /**
  * component that will decide when to show the popover and attach it to the target
  */
-export interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> {
+export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> {
 	/** the popover panel to display */
 	panel: TPanel;
 	/** the popover target to attach the panel */
