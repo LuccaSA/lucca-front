@@ -5,7 +5,7 @@ $options: (
 		multiple-padding: 2rem,
 		icon: (
 			color: (
-				_color("text.default")
+				_color("text.default", "color", true)
 			),
 		)
 	),
@@ -13,7 +13,7 @@ $options: (
 		left: .5rem,
 		size: .95rem,
 		border-radius: 3px,
-		color: _color("primary")
+		color: _color("primary", "color", true)
 	)
 );
 $theme: _set($theme, 'components.options', $options);
