@@ -30,7 +30,7 @@ import {
 import { ALuSelectInput } from './select-input.model';
 
 export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
-extends ALuSelectInput<T>
+extends ALuSelectInput<T, TPicker>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
@@ -79,7 +79,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	/**
 	 * popover trigger class extension
 	 */
-	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: ILuPickerPanel<T>) {
+	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: TPicker) {
 		if (!picker) { return; }
 		this._picker = picker;
 	}
