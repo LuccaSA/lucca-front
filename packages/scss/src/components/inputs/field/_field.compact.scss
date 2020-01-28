@@ -61,7 +61,7 @@
 			}
 
 			.#{$fieldname}-messages.mod-helper {
-				padding-left: calc(#{$label-width} + #{_component("field.compact.label.right-margin")});
+				padding-left: calc(#{$label-width} + #{_component("field.compact.label.right-margin", true)});
 			}
 		}
 	}
@@ -74,5 +74,5 @@
 }
 
 @mixin inputWidth($iWidth, $lWidth) {
-	width: calc(#{$iWidth} + #{_component("field.compact.label.right-margin")} + #{$lWidth});
+	width: calc(#{$iWidth} + #{_component("field.compact.label.right-margin", true)} + #{$lWidth});
 }
