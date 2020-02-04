@@ -11,6 +11,7 @@ import {
 	TemplateRef,
 	ChangeDetectorRef,
 	AfterViewInit,
+	Input,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -24,6 +25,26 @@ import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPicker<T, O>
 implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+	/**
+	 * This method takes classes set on the host lu-popover element and applies them on the
+	 * popover template that displays in the overlay container.  Otherwise, it's difficult
+	 * to style the containing popover from outside the component.
+	 * @param classes list of class names
+	 */
+	@Input('panel-classes')
+	set inputPanelClasses(classes: string) {
+		this.panelClasses = classes;
+	}
+	/**
+	 * This method takes classes set on the host lu-popover element and applies them on the
+	 * popover template that displays in the overlay container. Otherwise, it's difficult
+	 * to style the containing popover from outside the component.
+	 * @param classes list of class names
+	 */
+	@Input('content-classes')
+	set inputContentClasses(classes: string) {
+		this.contentClasses = classes;
+	}
 
 
 	@Output() close = new EventEmitter<void>();
