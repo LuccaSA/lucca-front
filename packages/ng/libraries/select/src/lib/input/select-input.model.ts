@@ -105,11 +105,12 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	protected subToPickerEvts() {
 		if (!!this.panel) {
 			this.panel.onSelectValue.subscribe(value => this.setValue(value));
-			this.panel.close.subscribe(e => {
-				this._onTouched();
-				this.closePopover();
-			});
 		}
+	}
+
+	closePopover() {
+		this._onTouched();
+		super.closePopover();
 	}
 
 	protected _getOverlayConfig(): OverlayConfig {

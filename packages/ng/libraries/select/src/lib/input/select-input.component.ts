@@ -149,7 +149,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	],
 })
 export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> {
-	@ContentChild(ALuClearer, { static: true }) set _contentChildClearer(clearer: ILuClearer) {
+	@ContentChild(ALuClearer, { static: false }) set _contentChildClearer(clearer: ILuClearer) {
 		if (!clearer) { return; }
 		this._clearer = clearer;
 	}
@@ -171,7 +171,7 @@ export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> 
 		);
 	}
 	// display clearer
-	@ContentChild(ALuClearer, { read: ElementRef, static: true }) clearerEltRef: ElementRef;
+	@ContentChild(ALuClearer, { read: ElementRef, static: false }) clearerEltRef: ElementRef;
 	@ViewChild('suffix', { read: ElementRef, static: true }) suffixEltRef: ElementRef;
 	displayClearer() {
 		if (!!this.clearerEltRef) {
