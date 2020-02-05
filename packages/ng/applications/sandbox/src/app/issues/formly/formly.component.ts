@@ -14,6 +14,7 @@ export class FormlyComponent {
 			templateOptions: {
 				type: 'text',
 				label: 'name - text',
+				name: 'inputTest1',
 			},
 		},
 		{
@@ -22,6 +23,7 @@ export class FormlyComponent {
 			templateOptions: {
 				type: 'email',
 				label: 'email - email',
+				name: 'inputTest2',
 			},
 		},
 		{
@@ -30,6 +32,7 @@ export class FormlyComponent {
 			templateOptions: {
 				type: 'password',
 				label: 'password - password',
+				name: 'inputTest3',
 			},
 		},
 		{
@@ -38,6 +41,7 @@ export class FormlyComponent {
 			templateOptions: {
 				type: 'number',
 				label: 'age - number',
+				name: 'inputTest4',
 			},
 		},
 		{
@@ -52,6 +56,7 @@ export class FormlyComponent {
 			type: 'textarea',
 			templateOptions: {
 				label: 'description - textarea',
+				name: 'textareaTest',
 				placeholder: 'enter your life journey',
 			},
 		},
@@ -92,6 +97,7 @@ export class FormlyComponent {
 			type: 'radio',
 			templateOptions: {
 				label: 'Radio input',
+				name: 'radioTest',
 				options: [
 					{ value: 1, label: 'Option 1'},
 					{ value: 2, label: 'Option 2'},
@@ -105,6 +111,7 @@ export class FormlyComponent {
 			type: 'checkbox',
 			templateOptions: {
 				label: 'Checkboxes',
+				name: 'checkboxTest',
 			}
 		},
 	];
