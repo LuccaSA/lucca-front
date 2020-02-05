@@ -12,7 +12,7 @@
 		transform-origin: center center;
 
 		@each $panel-size, $size-obj in _getMap("components.sidepanel.sizes") {
-			&.mod-#{$panel-size} {
+			&.mod-#{$panel-size}, &.size-#{$panel-size} {
 				width: _component("sidepanel.sizes."+$panel-size);
 			}
 		}
