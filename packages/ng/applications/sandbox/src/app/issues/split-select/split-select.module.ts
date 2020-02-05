@@ -7,7 +7,7 @@ import { SplitSelectComponent } from './split-select.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LuSelectModule } from '@lucca-front/ng/select';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuInputModule } from '@lucca-front/ng/input';
@@ -27,6 +27,7 @@ import { LuUserModule } from '@lucca-front/ng/user';
 		LuApiModule,
 		CommonModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpClientModule,
 		RedirectModule,
 		RouterModule.forChild([
