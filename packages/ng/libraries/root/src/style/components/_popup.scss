@@ -10,7 +10,7 @@
 	animation: popupAnimation _theme("commons.animations.durations.fast") cubic-bezier(0.25, 0.8, 0.25, 1);
 
 	@each $panel-size, $size-obj in _getMap("components.popup.sizes") {
-		&.mod-#{$panel-size} {
+		&.mod-#{$panel-size}, &.size-#{$panel-size} {
 			max-width: none;
 			width: _component("popup.sizes."+$panel-size);
 		}
