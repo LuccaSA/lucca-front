@@ -40,6 +40,7 @@
 	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: table-cell;
 	padding: _component("table.padding");
+	vertical-align: middle;
 }
 
 .table-body-row:first-child {
@@ -239,6 +240,15 @@
 				padding-right: _theme("spacings.smaller");
 				width: 1rem;
 			}
+		}
+	}
+}
+
+.table-head-row {
+	&.mod-draggable {
+		.table-head-row-cell:first-child {
+			padding-left: 2rem;
+			position: relative;
 		}
 	}
 }
