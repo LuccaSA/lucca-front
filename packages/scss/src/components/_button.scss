@@ -139,12 +139,43 @@
 
 	&.mod-outline {
 		background: transparent;
-		color: _color("text.default");
 		box-shadow: inset 0 0 0 1px _color("grey", "light");
+		color: _color("text.default");
 
 		&:hover {
 			background: _color("primary", "lightest");
 			color: _color("primary");
+		}
+
+		@mixin buttonOutlineColoring($palette) {
+			box-shadow: inset 0 0 0 1px _color($palette, "light");
+			color: _color($palette);
+
+			&:hover:not([disabled]) {
+				background: _color($palette, "lightest");
+				color: _color($palette);
+				box-shadow: inset 0 0 0 1px _color($palette);
+			}
+
+			&:active:not([disabled]) {
+				background: _color($palette, "lightest");
+				color: _color($palette, "dark");
+				box-shadow: inset 0 0 0 1px _color($palette, "dark");
+			}
+
+			.button-counter {
+				background: _color($palette);
+			}
+		}
+
+		// default color
+		@include buttonOutlineColoring("button.default-palette");
+
+		// palette colors
+		@each $name, $palette in _getMap("palettes") {
+			&.palette-#{$name} {
+				@include buttonOutlineColoring($name);
+			}
 		}
 	}
 
