@@ -198,6 +198,12 @@
 
 	// Multiple
 	:host(.mod-multiple) {
+		.lu-select-display-wrapper .label {
+			height: 1.4rem;
+			min-width: 1.4rem;
+			line-height: 1.6;
+			padding: 0 .4rem;
+		}
 		&.mod-multipleView:not(.mod-singleLine) {
 			.lu-select-value {
 				height: auto;
