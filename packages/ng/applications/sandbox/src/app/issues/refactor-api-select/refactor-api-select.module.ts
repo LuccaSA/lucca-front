@@ -6,7 +6,8 @@ import { RefactorApiSelectComponent } from './refactor-api-select.component';
 // needed to reroute api calls to prisme-proxy
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
-import { LuApiModule, LuUserModule } from '@lucca-front/ng';
+import { LuApiModule } from '@lucca-front/ng/api';
+import { LuUserModule } from '@lucca-front/ng/user';
 import { FormsModule } from '@angular/forms';
 
 

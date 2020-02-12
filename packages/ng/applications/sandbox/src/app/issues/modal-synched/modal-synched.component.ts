@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuModal } from '@lucca-front/ng';
+import { LuModal } from '@lucca-front/ng/modal';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 

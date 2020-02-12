@@ -1,5 +1,5 @@
 .chip {
-	background: _theme("commons.background.dark");
+	background: _color("primary", "lightest");
 	border-radius: 1rem;
 	display: inline-block;
 	margin: 0 .2rem .3rem 0;
@@ -9,7 +9,7 @@
 }
 
 .chip-kill {
-	background-color: _theme("commons.background.darkest");
+	background-color: _color("primary", "light");
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;

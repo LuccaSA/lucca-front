@@ -1,8 +1,5 @@
 $label: (
-	default-palette: ( 
-		color: #CCCCCC, 
-		text: #666666
-	)
+	default-palette: _getMap("palettes.primary"),
 );
 
 $theme: _set($theme, "components.label", $label);

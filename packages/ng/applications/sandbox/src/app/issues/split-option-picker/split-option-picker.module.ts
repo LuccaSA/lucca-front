@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { SplitOptionPickerComponent } from './split-option-picker.component';
-import { LuSelectModule, LuInputDisplayerModule, LuOptionModule } from '@lucca-front/ng';
+import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
 import { FormsModule } from '@angular/forms';
 
 
@@ -14,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 	imports: [
 		LuSelectModule,
 		LuOptionModule,
-		LuInputDisplayerModule,
+		LuInputModule,
 		FormsModule,
 		RouterModule.forChild([
 			{ path: '', component: SplitOptionPickerComponent },

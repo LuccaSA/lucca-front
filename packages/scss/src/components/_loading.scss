@@ -47,9 +47,10 @@
 	&.mod-fullPage {
 		display: block;
 		margin: 0 auto;
-		transform: translateY(37vh);
+		transform: translateY(30vh);
 
 		&::before, &::after {
+			margin: 0 auto;
 			height: 5rem;
 			width: 5rem;
 			border-width: 3px;

@@ -10,11 +10,12 @@
 
 .file-icon {
 	font-size: 3rem;
-	color: _theme("commons.background.darker");
+	color: _color("primary", "lighter");
 }
 
 .file-or {
 	font-size: _theme("sizes.small.font-size");
+	margin-bottom: _theme("spacings.smallest");
 }
 
 .file-title {
@@ -72,11 +73,7 @@
 		background: _theme("commons.background.base");
 
 		.file-icon {
-			color: _theme("commons.background.darkest");
-		}
-
-		.file-button {
-			background: white;
+			color: _color("primary", "light");
 		}
 	}
 }

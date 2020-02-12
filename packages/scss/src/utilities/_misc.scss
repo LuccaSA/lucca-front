@@ -28,10 +28,20 @@
 	white-space: nowrap;
 }
 
-// Icons
+// ICONS
+//
 .u-help {
 	color: _color("text.light");
 	cursor: help;
 	margin-left: .15rem;
 	font-size: 1.3rem;
+}
+
+
+// IMAGES
+//
+.u-imageResponsive {
+	display: block;
+	margin: 0;
+	max-width: 100%;
 }

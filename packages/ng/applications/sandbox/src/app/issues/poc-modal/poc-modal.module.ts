@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { PocModalComponent, PocModalInsideComponent } from './poc-modal.component';
-import { LuModalModule } from '@lucca-front/ng';
+import { LuModalModule } from '@lucca-front/ng/modal';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

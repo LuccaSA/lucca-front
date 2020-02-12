@@ -6,7 +6,6 @@ import { FormlyWrappersComponent } from './formly-wrappers.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { LuFormlyModule } from '@lucca-front/ng/formly';
-import { MatNativeDateModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule as NgxFormlyModule } from '@ngx-formly/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +19,6 @@ import { CommonModule } from '@angular/common';
 		HttpClientModule,
 		RedirectModule,
 		LuFormlyModule,
-		MatNativeDateModule,
 		FormsModule,
 		NgxFormlyModule.forRoot(),
 		ReactiveFormsModule,

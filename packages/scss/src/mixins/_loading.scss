@@ -1,6 +1,6 @@
 @mixin loading($size) {
 	&::before {
-		border: 2px solid _component("loading.background");
+		border: 2px solid _theme("commons.loading.background");
 		border-radius: 50%;
 		bottom: 0;
 		content: "";
@@ -16,9 +16,9 @@
 	}
 
 	&::after {
-		animation: rotating _component("loading.speed") linear infinite;
-		border: 2px solid _component("loading.frontground");
-		border-color: _component("loading.frontground") transparent transparent transparent;
+		animation: rotating _theme("commons.loading.speed") linear infinite;
+		border: 2px solid _theme("commons.loading.frontground");
+		border-color: _theme("commons.loading.frontground") transparent transparent transparent;
 		border-radius: 50%;
 		bottom: 0;
 		content: "";

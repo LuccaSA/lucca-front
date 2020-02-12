@@ -1,22 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../out-tsc/app",
-    "types": [],
-    "baseUrl": ".",
-    "paths": {
-      "@lucca-front/ng": [
-        // "../../dist"
-        "../../libraries/core/src/index"
-      ],
-      "@lucca-front/ng/formly": [
-        // "../../dist"
-        "../../libraries/formly/src/index"
-      ]
-    }
-  },
+  "extends": "../../tsconfig.app.json",
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+    "src/test.ts",
+    "**/*.spec.ts",
+    "**/*.prod.ts"
   ]
 }

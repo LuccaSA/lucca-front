@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { ModalSynchedComponent, SyncModalContent, AsyncModalContent } from './modal-synched.component';
-import { LuOverlayModule } from '@lucca-front/ng';
+import { LuModalModule } from '@lucca-front/ng/modal';
+import { LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 
 
 
@@ -17,7 +18,8 @@ import { LuOverlayModule } from '@lucca-front/ng';
 		AsyncModalContent,
 	],
 	imports: [
-		LuOverlayModule,
+		LuModalModule,
+		LuSidepanelModule,
 
 		RouterModule.forChild([
 			{ path: '', component: ModalSynchedComponent },

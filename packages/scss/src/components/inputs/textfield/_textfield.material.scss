@@ -31,9 +31,10 @@
 		font-size: _component("textfield.material.label.font-size");
 		font-weight: 400;
 		left: 0;
+		line-height: 1.5rem;
 		pointer-events: none;
 		position: absolute;
-		top: 1.4rem;
+		top: 1.5rem;
 		width: 100%;
 	}
 
@@ -82,6 +83,14 @@
 	// MOD
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+	&.mod-small {
+		.textfield-label {
+			line-height: _theme("sizes.small.line-height");
+			font-size: _theme("sizes.small.font-size");
+		}
+	}
+
+
 	&.mod-withSuffix {
 		.textfield-input {
 			padding-right: _component("textfield.material.suffix.padding-right");
@@ -107,7 +116,7 @@
 	&.mod-search, &.mod-autocomplete {
 		&::after {
 			color: _color("text.light");
-			bottom: 0;
+			bottom: .5rem;
 			right: 0;
 		}
 

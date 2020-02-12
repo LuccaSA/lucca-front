@@ -1,21 +1,32 @@
 .menu {
 	align-items: center;
 	background: _component("menu.background");
-	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
 	display: flex;
-	line-height: 1;
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		height: 1px;
+		left: 0;
+		right: 0;
+		border-bottom: 1px solid _theme("commons.divider.color");
+	}
 }
 
 .menu-link {
+	border-radius: _theme("commons.border.radius");
 	color: _color("text.light");
-	margin: _component("menu.margin");
+	margin: 0 2.5rem 0 0;
 	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
-	transition: color _component("menu.animations.durations.standard") ease;
+	transition: color _component("menu.animations.durations.fast") ease;
 
 	&::after {
-		bottom: -1px;
+		border-radius: _theme("commons.border.radius") _theme("commons.border.radius") 0 0;
+		bottom: 0;
 		content: "";
 		display: block;
 		height: 3px;
@@ -23,35 +34,53 @@
 		position: absolute;
 		right: 0;
 		transform: scale(0, 1);
-		transition: transform _component("menu.animations.durations.standard") ease;
+		transition: transform _component("menu.animations.durations.fast") ease;
+		z-index: 1;
 	}
 
-	&:hover {
-		color: _color("text.dark");
+	&:hover:not(.is-active) {
+		color: _color("text.light");
 
 		&::after {
 			transform: scale(1);
 		}
 	}
+
+	&:last-child {
+		margin-right: 0;
+	}
 }
+
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.menu {
+	&.mod-header {
+		padding: 0 2.5rem;
+	}
+}
+
 
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .menu {
 	@mixin menuColoring($palette) {
-		background: _color($palette);
+		&::after {
+			background: _color($palette);
+		}
 	}
 
 	// default color
-	.menu-link::after {
+	.menu-link {
 		@include menuColoring("menu.default-palette");
 	}
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			.menu-link::after {
+			.menu-link {
 				@include menuColoring($name);
 			}
 		}

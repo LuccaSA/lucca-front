@@ -137,6 +137,7 @@
 		color: _component("navSide.bottom-section-palette.text");
 		cursor: pointer;
 		box-sizing: border-box;
+		padding: _theme("spacings.small");
 
 		&:hover {
 			background-color: _component("navSide.bottom-section-palette.selected-bg");

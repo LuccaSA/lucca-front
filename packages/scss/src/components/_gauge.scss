@@ -30,7 +30,7 @@
 
 .gauge {
 	@mixin gaugeColoring($palette) {
-		background: linear-gradient(to right, _color($palette), _color($palette, "lighter"));
+		background: _color($palette);
 	}
 
 	.gauge-bar {

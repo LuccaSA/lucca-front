@@ -13,6 +13,12 @@
 		&::after {
 			transform: scale(.55);
 		}
+
+		color: _color("grey", "dark");
+
+		&::before {
+			border-color: _component("radio.input.border.color");
+		}
 	}
 
 	&:focus ~ .radio-label {
@@ -27,7 +33,7 @@
 	display: inline-block;
 	line-height: _component("radio.label.line-height");
 	padding: _component("radio.label.padding");
-	transition: color 150ms ease;
+	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&::before {
 		border-radius: 50%;
@@ -38,7 +44,7 @@
 		left: 0;
 		position: absolute;
 		top: _component("radio.input.top");
-		transition: all 100ms ease;
+		transition: all _theme("commons.animations.durations.fast") ease;
 		width: _component("radio.input.size");
 	}
 
@@ -52,15 +58,15 @@
 		position: absolute;
 		top: _component("radio.input.top");
 		transform: scale(0);
-		transition: all 100ms ease;
+		transition: all _theme("commons.animations.durations.fast") ease;
 		width: _component("radio.input.size");
 	}
 
 	&:hover {
-		color: black;
+		color: _color("text.light");
 
 		&::before {
-			border: 2px solid _color("text.default");
+			border-color: _component("radio.input.border.hover");
 		}
 	}
 }
@@ -113,21 +119,21 @@
 .radio .radio-input {
 	&[disabled] {
 		~ .radio-label {
-			color: _theme("commons.disabled.color");
+			color: _color("grey");
 			cursor: not-allowed;
 
 			&::before {
-				border: 2px solid _theme("commons.disabled.placeholder");
+				border: 2px solid _color("grey", "light");
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				border: 2px solid _theme("commons.disabled.placeholder");
+				border: 2px solid _color("grey", "light");
 			}
 
 			&::after {
-				background-color: _theme("commons.disabled.placeholder");
+				background-color: _color("grey", "light");
 			}
 		}
 	}

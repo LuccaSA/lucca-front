@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { ModalsNoSubmitComponent, BasicModalContent } from './modals-no-submit.component';
-import { LuOverlayModule } from '@lucca-front/ng';
-
-
+import { LuModalModule } from '@lucca-front/ng/modal';
+import { LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 
 @NgModule({
 	declarations: [
@@ -15,7 +14,8 @@ import { LuOverlayModule } from '@lucca-front/ng';
 		BasicModalContent,
 	],
 	imports: [
-		LuOverlayModule,
+		LuModalModule,
+		LuSidepanelModule,
 
 		RouterModule.forChild([
 			{ path: '', component: ModalsNoSubmitComponent },

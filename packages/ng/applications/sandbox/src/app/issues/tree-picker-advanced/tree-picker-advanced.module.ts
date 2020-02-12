@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TreePickerAdvancedComponent } from './tree-picker-advanced.component';
 import { FormsModule } from '@angular/forms';
-import { LuSelectModule, LuTreeModule, LuInputDisplayerModule } from '@lucca-front/ng';
+import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuTreeOptionModule } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
 import { CommonModule } from '@angular/common';
 
 
@@ -13,9 +15,9 @@ import { CommonModule } from '@angular/common';
 		TreePickerAdvancedComponent,
 	],
 	imports: [
-		LuInputDisplayerModule,
+		LuInputModule,
 		LuSelectModule,
-		LuTreeModule,
+		LuTreeOptionModule,
 		FormsModule,
 		CommonModule,
 		RouterModule.forChild([

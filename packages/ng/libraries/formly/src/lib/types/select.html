@@ -7,6 +7,6 @@
 			{{ option.name }}
 		</lu-option>
 	</lu-option-picker>
-	<lu-select-clearer *ngIf="!to.required && !to.multiple"></lu-select-clearer>
+	<lu-input-clearer *ngIf="!to.required && !to.multiple"></lu-input-clearer>
 </lu-select>
 <label [attr.for]="id" class="textfield-label">{{ to.label }}</label>

@@ -1,0 +1,10 @@
+{
+  "name": "@lucca-front/ng/root",
+  "version": "4.0.0-rc.19",
+  "peerDependencies": {
+    "@angular/core": "^9.0.0",
+    "@angular/cdk": "^9.0.0",
+    "@angular/common": "^9.0.0",
+    "@angular/forms": "^9.0.0"
+  }
+}

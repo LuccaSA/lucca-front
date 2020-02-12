@@ -5,8 +5,6 @@
 
 	.#{$fieldname}-label {
 		color: _component("field.compact.label.color");
-		font-size: _component("field.compact.label.font-size");
-		font-weight: 400;
 		flex: 0 0 auto;
 		margin-bottom: 0;
 		margin-right: _component("field.compact.label.right-margin");
@@ -63,7 +61,7 @@
 			}
 
 			.#{$fieldname}-messages.mod-helper {
-				padding-left: calc($label-width + #{_component("field.compact.label.right-margin")});
+				padding-left: calc(#{$label-width} + #{_component("field.compact.label.right-margin", true)});
 			}
 		}
 	}
@@ -76,5 +74,5 @@
 }
 
 @mixin inputWidth($iWidth, $lWidth) {
-	width: calc(#{$iWidth} + #{_component("field.compact.label.right-margin")} + #{$lWidth});
+	width: calc(#{$iWidth} + #{_component("field.compact.label.right-margin", true)} + #{$lWidth});
 }

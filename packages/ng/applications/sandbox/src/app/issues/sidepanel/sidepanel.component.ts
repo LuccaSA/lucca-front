@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuSidepanel, ALuSidepanelRef, ILuSidepanelContent } from '@lucca-front/ng';
+import { LuSidepanel, ALuSidepanelRef, ILuSidepanelContent } from '@lucca-front/ng/sidepanel';
 import { timer, Subject, throwError, of } from 'rxjs';
 import { mapTo, catchError, delay } from 'rxjs/operators';
 @Component({
@@ -33,7 +33,7 @@ export class PocSidepanelInsideComponent implements ILuSidepanelContent {
 	submitLabel = 'submit';
 	cancelLabel = 'dismiss';
 	submitDisabled = false;
-
+	submitPalette = 'error';
 	result = 0;
 	error;
 	// submitAction = () => timer(1500).pipe(mapTo(this.result));

@@ -6,7 +6,7 @@
 		<lu-option-picker>
 			<lu-option [value]="option">{{option.name}}</lu-option>
 		</lu-option-picker>
-		<lu-select-clearer></lu-select-clearer>
+		<lu-input-clearer></lu-input-clearer>
 	</lu-select>
 	<label class="textfield-label">select basic</label>
 </div>
@@ -33,3 +33,18 @@
 	</lu-user-select>
 	<label class="textfield-label">user select with custom displayer</label>
 </div>
+
+<h2>touched</h2>
+<div class="textfield">
+	<lu-select class="textfield-input" [formControl]="formControl">
+		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+		<lu-option-picker>
+			<lu-option [value]="option">{{option.name}}</lu-option>
+		</lu-option-picker>
+		<lu-input-clearer></lu-input-clearer>
+	</lu-select>
+	<label class="textfield-label">select basic</label>
+</div>
+<pre>
+	{{formControl.touched}}
+</pre>

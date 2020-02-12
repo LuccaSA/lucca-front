@@ -13,38 +13,38 @@ import { LuFormlyFieldInput,
 // wrappers
 import { LuFormlyWrapperHelper, TemplateHelper,
 	LuFormlyWrapperTitle, TemplateTitle,
-	LuFormlyWrapperLabel,
+	// LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
 	LuFormlyWrapperSuffix, TemplateSuffix,
 	LuFormlyWrapperIcon, TemplateIcon,
 	LuFormlyWrapperError,
 	TemplateError,
-	LuFormlyErrorMessage,
+	// LuFormlyErrorMessage,
 	LuFormlyWrapperRadiosfieldLayout
 } from './wrappers/index';
 
-export const LU_FORMLY_COMPONENTS = [
-	LuFormlyErrorMessage,
+// export const LU_FORMLY_COMPONENTS = [
+// 	LuFormlyErrorMessage,
 
-	LuFormlyFieldInput,
-	LuFormlyFieldDate,
-	LuFormlyFieldTextarea,
-	LuFormlyFieldSelect,
-	LuFormlyFieldUser,
-	LuFormlyFieldApi,
-	LuFormlyFieldDepartment,
-	LuFormlyFieldRadios,
-	LuFormlyFieldCheckboxes,
+// 	LuFormlyFieldInput,
+// 	LuFormlyFieldDate,
+// 	LuFormlyFieldTextarea,
+// 	LuFormlyFieldSelect,
+// 	LuFormlyFieldUser,
+// 	LuFormlyFieldApi,
+// 	LuFormlyFieldDepartment,
+// 	LuFormlyFieldRadios,
+// 	LuFormlyFieldCheckboxes,
 
-	LuFormlyWrapperHelper,
-	LuFormlyWrapperLabel,
-	LuFormlyWrapperTextfieldLayout,
-	LuFormlyWrapperRadiosfieldLayout,
-	LuFormlyWrapperSuffix,
-	LuFormlyWrapperIcon,
-	LuFormlyWrapperError,
-	LuFormlyWrapperTitle,
-];
+// 	LuFormlyWrapperHelper,
+// 	LuFormlyWrapperLabel,
+// 	LuFormlyWrapperTextfieldLayout,
+// 	LuFormlyWrapperRadiosfieldLayout,
+// 	LuFormlyWrapperSuffix,
+// 	LuFormlyWrapperIcon,
+// 	LuFormlyWrapperError,
+// 	LuFormlyWrapperTitle,
+// ];
 
 export const LU_FORMLY_CONFIG = {
 	types: [

@@ -10,7 +10,7 @@ $field: (
 	label: (
 		color: _color("text.default"),
 		font-size: _theme("sizes.small.font-size"),
-		margin-bottom: .25rem,
+		margin-bottom: _theme("spacings.smaller"),
 	),
 
 	message: (

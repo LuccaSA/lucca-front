@@ -1,17 +1,16 @@
 $radio: (
   // theming
-  default-palette: (
-    color:  _color("primary"),
-  ),
+  default-palette: _getMap("palettes.primary"),
   label: (
-    line-height: 1.3,
+    line-height: 1.5rem,
     padding: 0 0 0 1.5rem
   ),
   input: (
-    top: .25rem,
+    top: _theme("spacings.smallest"),
     size: 1rem,
     border: (
-      color: #999999
+      color: _color("grey"),
+      hover: _color("primary", "light")
     )
   )
 );
