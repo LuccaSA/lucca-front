@@ -44,4 +44,6 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 	abstract getYear(d: D): number;
 	abstract getMonth(d: D): number;
 	abstract getDate(d: D): number;
+	abstract getDay(d: D): number;
+
 }

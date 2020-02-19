@@ -14,4 +14,5 @@ export interface ILuDateAdapter<D> {
 	getYear(d: D): number;
 	getMonth(d: D): number;
 	getDate(d: D): number;
+	getDay(d: D): number;
 }
