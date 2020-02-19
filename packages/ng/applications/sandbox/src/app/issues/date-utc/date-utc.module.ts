@@ -26,8 +26,8 @@ registerLocaleData(localeGb);
 		]),
 	],
 	providers: [
-		{ provide: LOCALE_ID, useValue: 'fr-FR' },
-		// { provide: LOCALE_ID, useValue: 'en-GB' },
+		// { provide: LOCALE_ID, useValue: 'fr-FR' },
+		{ provide: LOCALE_ID, useValue: 'en-GB' },
 		// { provide: LOCALE_ID, useValue: 'en-US' },
 	]
 })
