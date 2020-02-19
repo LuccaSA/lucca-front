@@ -15,4 +15,6 @@ export interface ILuDateAdapter<D> {
 	getMonth(d: D): number;
 	getDate(d: D): number;
 	getDay(d: D): number;
+
+	add(d: D, count: number, granularity: DateGranularity): D;
 }

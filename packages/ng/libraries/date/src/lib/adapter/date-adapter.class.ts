@@ -46,4 +46,5 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 	abstract getDate(d: D): number;
 	abstract getDay(d: D): number;
 
+	abstract add(d: D, count: number, granularity: DateGranularity): D;
 }

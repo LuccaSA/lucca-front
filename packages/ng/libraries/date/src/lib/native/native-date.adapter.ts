@@ -97,4 +97,26 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 	getDay(d: Date): number {
 		return d.getDay();
 	}
+
+	add(d: Date, count: number, granularity: DateGranularity): Date {
+		let year = this.getYear(d);
+		let month = this.getMonth(d);
+		let date = this.getDate(d);
+		switch (granularity) {
+			case DateGranularity.decade:
+				year += 10 * count;
+				break;
+			case DateGranularity.year:
+				year += count;
+				break;
+			case DateGranularity.month:
+				month += count;
+				break;
+			case DateGranularity.day:
+				date += count;
+				break;
+		}
+		return this.forge(year, month, date);
+	}
+
 }
