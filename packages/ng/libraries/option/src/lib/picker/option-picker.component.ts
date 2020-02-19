@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
-import { ILuOptionPickerPanel, ALuOptionPicker } from './option-picker.model';
+import { ILuOptionPickerPanel, ALuOptionPicker, LuOptionComparer } from './option-picker.model';
 import { merge, of } from 'rxjs';
 import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
@@ -44,6 +44,15 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	@Input('content-classes')
 	set inputContentClasses(classes: string) {
 		this.contentClasses = classes;
+	}
+
+	/**
+	 * This method take a function that compare options from feeder and options from form value.
+	 * By default, compare JSON values.
+	 */
+	@Input('option-comparer')
+	set inputOptionComparer(comparer: LuOptionComparer<T>) {
+		this.optionComparer = comparer;
 	}
 
 
@@ -203,14 +212,14 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		// add `is-selected` to all selected indexes
 		const selectedIndexes = [];
 		if (!this.multiple) {
-			const selectedIndex = this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(this._value));
+			const selectedIndex = this._options.findIndex(o => this.optionComparer(o.value, this._value as T));
 			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
 			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
 		} else {
 			const values = <T[]> this._value || [];
 			selectedIndexes.push(
 				...values
-				.map(v => this._options.findIndex(o => JSON.stringify(o.value) === JSON.stringify(v)))
+				.map(v => this._options.findIndex(o => this.optionComparer(o.value, v)))
 				.filter(i => i !== -1)
 			);
 		}
