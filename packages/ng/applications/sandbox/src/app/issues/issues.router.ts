@@ -13,6 +13,7 @@ const routes: Routes = [
 	{ path: 'date-minmax', loadChildren: () => import('./date-minmax').then(m => m.DateMinmaxModule) },
 	{ path: 'date-picker', loadChildren: () => import('./date-picker').then(m => m.DatePickerModule) },
 	{ path: 'date-select', loadChildren: () => import('./date-select').then(m => m.DateSelectModule) },
+	{ path: 'date-utc', loadChildren: () => import('./date-utc').then(m => m.DateUtcModule) },
 	{ path: 'department-select', loadChildren: () => import('./department-select').then(m => m.DepartmentSelectModule) },
 	{ path: 'fix-472', loadChildren: () => import('./fix-472').then(m => m.Fix472Module) },
 	{ path: 'fix-705-select-enter', loadChildren: () => import('./fix-705-select-enter').then(m => m.Fix705SelectEnterModule) },

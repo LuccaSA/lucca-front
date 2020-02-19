@@ -1,0 +1,16 @@
+<h1>date-utc</h1>
+<h2>to string</h2>
+<pre>
+	utc valentine's day: {{ utcValentine }}
+	valentine's day: {{ valentine }}
+</pre>
+<h2>to isostring</h2>
+<pre>
+	utc valentine's day: {{ utcValentine.toISOString() }}
+	valentine's day: {{ valentine.toISOString() }}
+</pre>
+<h2>luDate pipe 'long'</h2>
+<pre>
+	utc valentine's day: {{ utcValentine | luDate: 'long' }}
+	valentine's day: {{ valentine | luDate: 'long' }}
+</pre>
