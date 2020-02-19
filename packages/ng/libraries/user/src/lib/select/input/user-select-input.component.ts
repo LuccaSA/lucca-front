@@ -25,6 +25,7 @@ import { LuDisplayFullname } from '../../display/index';
 import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { ILuUserSelectInputLabel } from './user-select-input.translate';
+import { LuOptionComparer } from '@lucca-front/ng/option';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -58,6 +59,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
 	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
 	@Input() set operations(operations: number[]) { this._service.operations = operations; }
+
+	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,

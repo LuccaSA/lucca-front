@@ -13,7 +13,7 @@
 	<ng-template #singleView>{{(values[0] || values).name}}</ng-template>
 </ng-template>
 
-<lu-tree-option-picker-advanced>
+<lu-tree-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header" [class.mod-multiple]="multiple">
 		<lu-department-feeder></lu-department-feeder>
 		<lu-tree-option-searcher [searchFn]="searchFn"></lu-tree-option-searcher>

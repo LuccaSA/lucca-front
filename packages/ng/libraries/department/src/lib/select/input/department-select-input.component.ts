@@ -19,6 +19,7 @@ import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { ILuDepartment } from '../../department.model';
 import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 import { ILuDepartmentSelectInputLabel } from './department-select-input.translate';
+import { LuOptionComparer } from '@lucca-front/ng/option';
 
 @Component({
 	selector: 'lu-department-select',
@@ -36,6 +37,7 @@ import { ILuDepartmentSelectInputLabel } from './department-select-input.transla
 export class LuDepartmentSelectInputComponent<D extends ILuDepartment = ILuDepartment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
 extends ALuSelectInputComponent<D, P>
 implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit {
+	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,

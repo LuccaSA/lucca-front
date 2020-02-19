@@ -18,6 +18,7 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { IApiItem } from '../../api.model';
 import { ALuApiPagedSearcherService, LuApiPagedSearcherService } from '../searcher/index';
 import { ILuPickerPanel } from '@lucca-front/ng/picker';
+import { LuOptionComparer } from '@lucca-front/ng/option';
 
 @Component({
 	selector: 'lu-api-select',
@@ -46,6 +47,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit {
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
 	@Input() set transformFn(transformFn: (item: any) => T) { this._service.transformFn = transformFn; }
 
+	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
