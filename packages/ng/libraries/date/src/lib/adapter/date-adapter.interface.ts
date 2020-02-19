@@ -2,6 +2,7 @@ import { DateGranularity } from './date-granularity.enum';
 
 export interface ILuDateAdapter<D> {
 	forge(year: number, month: number, date: number): D;
+	forgeToday(): D;
 	forgeInvalid(): D;
 	isValid(d: D): boolean;
 	compare(a: D, b: D, granularity: DateGranularity): number;

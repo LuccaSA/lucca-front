@@ -69,6 +69,10 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 	forge(year: number, month: number, date: number): Date {
 		return new Date(year, month - 1, date); // month-1 cuz 0 -> january
 	}
+	forgeToday(): Date {
+		const today = new Date();
+		return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+	}
 	forgeInvalid(): Date {
 		return new Date('Invalid Date');
 	}

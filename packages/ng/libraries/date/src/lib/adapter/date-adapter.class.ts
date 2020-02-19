@@ -3,7 +3,7 @@ import { DateGranularity } from './date-granularity.enum';
 
 export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 	abstract forge(year: number, month: number, date: number): D;
-	abstract forge(year: number, month: number, date: number): D;
+	abstract forgeToday(): D;
 	abstract forgeInvalid(): D;
 	abstract isValid(d: D): boolean;
 	abstract compare(a: D, b: D, granularity: DateGranularity): number;

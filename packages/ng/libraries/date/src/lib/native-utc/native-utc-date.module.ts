@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ALuDateAdapter } from '../adapter/index';
-import { LuNativelUTCDateAdapter } from './native-utc-date.adapter';
+import { LuNativeUTCDateAdapter } from './native-utc-date.adapter';
 
 @NgModule({
 	providers: [
-		LuNativelUTCDateAdapter,
-		{ provide: ALuDateAdapter, useClass: LuNativelUTCDateAdapter },
+		LuNativeUTCDateAdapter,
+		{ provide: ALuDateAdapter, useClass: LuNativeUTCDateAdapter },
 	]
 })
 export class LuNativeUTCDateModule {}
