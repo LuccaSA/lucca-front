@@ -14,3 +14,11 @@
 	utc valentine's day: {{ utcValentine | luDate: 'long' }}
 	valentine's day: {{ valentine | luDate: 'long' }}
 </pre>
+<h2>date adapter</h2>
+<pre>
+	today iso string: {{ today.toISOString() }}
+</pre>
+<h2>lu-date-calendar</h2>
+<p>
+	<lu-calendar [(ngModel)]="utcValentine"></lu-calendar>
+</p>

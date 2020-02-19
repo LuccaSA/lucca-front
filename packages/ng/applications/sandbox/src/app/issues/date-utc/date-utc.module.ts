@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { DateUtcComponent } from './date-utc.component';
 import { LuDateModule, LuNativeUTCDateModule, LuNativeDateModule } from '@lucca-front/ng/date';
 
+import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import localeGb from '@angular/common/locales/en-GB';
@@ -17,16 +18,17 @@ registerLocaleData(localeGb);
 	],
 	imports: [
 		LuDateModule,
-		// LuNativeDateModule,
-		LuNativeUTCDateModule,
+		LuNativeDateModule,
+		// LuNativeUTCDateModule,
+		FormsModule,
 		RouterModule.forChild([
 			{ path: '', component: DateUtcComponent },
 		]),
 	],
 	providers: [
-		// { provide: LOCALE_ID, useValue: 'fr-FR' },
+		{ provide: LOCALE_ID, useValue: 'fr-FR' },
 		// { provide: LOCALE_ID, useValue: 'en-GB' },
-		{ provide: LOCALE_ID, useValue: 'en-US' },
+		// { provide: LOCALE_ID, useValue: 'en-US' },
 	]
 })
 export class DateUtcModule {}
