@@ -66,7 +66,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		super.writeValue(value);
 	}
 	initDayLabels() {
-		this.labels = getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Narrow);
+		this.labels = [...getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Narrow)];
 		if (getLocaleFirstDayOfWeek(this._locale) === 1) {
 			this.labels.push(this.labels.shift());
 		}
@@ -93,7 +93,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		const isFirstDayOfWeek = this._adapter.getDay(start) === getLocaleFirstDayOfWeek(this._locale);
 		this.header = this._factory.forgeMonth(month, 'MMMM y');
 		if (!isFirstDayOfWeek) {
-			const offset = (this._adapter.getDay(start) - getLocaleFirstDayOfWeek(this._locale) - 1 + 7) % 7;
+			const offset = (this._adapter.getDay(start) - getLocaleFirstDayOfWeek(this._locale) + 7) % 7;
 			index = -1 * offset;
 		}
 		while (true) {
