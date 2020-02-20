@@ -58,14 +58,13 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		this.initDayLabels();
 	}
 	writeValue(value?: D) {
-		const t = new Date();
-		const today = this._adapter.forge(t.getFullYear(), t.getMonth(), t.getDate());
+		const today = this._adapter.forgeToday();
 		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : today;
 		this.header = this._factory.forgeMonth(date);
 		super.writeValue(value);
 	}
 	initDayLabels() {
-		this.labels = getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Narrow);
+		this.labels = [...getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Narrow)];
 		if (getLocaleFirstDayOfWeek(this._locale) === 1) {
 			this.labels.push(this.labels.shift());
 		}
@@ -86,28 +85,20 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 
 	protected renderDailyView(month: D = this.header.date) {
-		// todo - add class is-disabled to prevent selecting date over min/max
 		this.items = [];
-		const start = new Date(this._adapter.getYear(month), this._adapter.getMonth(month) - 1, 1);
-		let index = 1;
-		const t = new Date();
-		const today = this._adapter.forge(t.getFullYear(), t.getMonth() + 1, t.getDate());
-		const isFirstDayOfWeek = start.getDay() === getLocaleFirstDayOfWeek(this._locale);
+		const start = this._adapter.forge(this._adapter.getYear(month), this._adapter.getMonth(month), 1);
+		let index = 0;
+		const isFirstDayOfWeek = this._adapter.getDay(start) === getLocaleFirstDayOfWeek(this._locale);
 		this.header = this._factory.forgeMonth(month, 'MMMM y');
-		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
-		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
 		if (!isFirstDayOfWeek) {
-			const offset = (start.getDay() - getLocaleFirstDayOfWeek(this._locale) - 1 + 7) % 7;
+			const offset = (this._adapter.getDay(start) - getLocaleFirstDayOfWeek(this._locale) + 7) % 7;
 			index = -1 * offset;
-			start.setDate(-1 * offset);
 		}
 		while (true) {
-			const date = new Date(this._adapter.getYear(month), this._adapter.getMonth(month) - 1, 1);
-			date.setDate(index++);
-			const d = this._adapter.forge(date.getFullYear(), date.getMonth() + 1, date.getDate());
+			const d = this._adapter.add(start, index++, DateGranularity.day);
 			const day = this._factory.forgeDay(d);
 			const isNextMonth = this._adapter.compare(d, month, DateGranularity.month) > 0;
-			const isFDOW = date.getDay() === getLocaleFirstDayOfWeek(this._locale);
+			const isFDOW = this._adapter.getDay(d) === getLocaleFirstDayOfWeek(this._locale);
 			if (isFDOW && isNextMonth) {
 				break;
 			} else {
@@ -136,8 +127,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 	protected applyDailyMods() {
 		const month = this.header.date;
-		const t = new Date();
-		const today = this._adapter.forge(t.getFullYear(), t.getMonth() + 1, t.getDate());
+		const today = this._adapter.forgeToday();
 		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
 		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
 		this.items.forEach(item => {
@@ -163,8 +153,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		});
 	}
 	protected applyMonthlyMods() {
-		const t = new Date();
-		const today = this._adapter.forge(t.getFullYear(), t.getMonth() + 1, t.getDate());
+		const today = this._adapter.forgeToday();
 		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
 		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
 		this.items.forEach(item => {
@@ -184,8 +173,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		});
 	}
 	protected applyYearlyMods() {
-		const t = new Date();
-		const today = this._adapter.forge(t.getFullYear(), t.getMonth() + 1, t.getDate());
+		const today = this._adapter.forgeToday();
 		const min = this.min && this._adapter.isValid(this.min) ? this.min : undefined;
 		const max = this.max && this._adapter.isValid(this.max) ? this.max : undefined;
 		this.items.forEach(item => {
@@ -219,8 +207,6 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		}
 	}
 	protected selectDay(item: ICalendarItem<D>) {
-		// const date = item.date ? new Date(item.date) : new Date();
-		// date.setDate(1);
 		const year = this._adapter.getYear(item.date);
 		const month = this._adapter.getMonth(item.date);
 		const d = this._adapter.forge(year, month, 1);
@@ -273,47 +259,28 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		this.granularity = this.header.granularity;
 		this.render();
 	}
-	// TODO - fix
 	protected nextMonth() {
-		const year = this._adapter.getYear(this.header.date);
-		const month = this._adapter.getMonth(this.header.date);
-		const date = this._adapter.getDate(this.header.date);
-		const temp = new Date(year, month - 1, date);
-		temp.setDate(32);
-		temp.setDate(1);
-
-		const d = this._adapter.forge(temp.getFullYear(), temp.getMonth() + 1, 1);
+		const d = this._adapter.add(this.header.date, 1, DateGranularity.month);
 		this.header = this._factory.forgeMonth(d);
 	}
 	protected nextYear() {
-		const year = this._adapter.getYear(this.header.date) + 1;
-		const d = this._adapter.forge(year, 1, 1);
+		const d = this._adapter.add(this.header.date, 1, DateGranularity.year);
 		this.header = this._factory.forgeYear(d);
 	}
 	protected nextDecade() {
-		const year = this._adapter.getYear(this.header.date) + 10;
-		const d = this._adapter.forge(year, 1, 1);
+		const d = this._adapter.add(this.header.date, 1, DateGranularity.decade);
 		this.header = this._factory.forgeDecade(d);
 	}
 	protected previousMonth() {
-		const year = this._adapter.getYear(this.header.date);
-		const month = this._adapter.getMonth(this.header.date);
-		const date = this._adapter.getDate(this.header.date);
-		const temp = new Date(year, month - 1, date);
-		temp.setDate(-10);
-		temp.setDate(1);
-
-		const d = this._adapter.forge(temp.getFullYear(), temp.getMonth() + 1, 1);
+		const d = this._adapter.add(this.header.date, -1, DateGranularity.month);
 		this.header = this._factory.forgeMonth(d);
 	}
 	protected previousYear() {
-		const year = this._adapter.getYear(this.header.date) - 1;
-		const d = this._adapter.forge(year, 1, 1);
+		const d = this._adapter.add(this.header.date, -1, DateGranularity.year);
 		this.header = this._factory.forgeYear(d);
 	}
 	protected previousDecade() {
-		const year = this._adapter.getYear(this.header.date) - 10;
-		const d = this._adapter.forge(year, 1, 1);
+		const d = this._adapter.add(this.header.date, -1, DateGranularity.decade);
 		this.header = this._factory.forgeDecade(d);
 	}
 

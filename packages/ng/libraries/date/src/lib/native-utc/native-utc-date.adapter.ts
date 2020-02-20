@@ -1,9 +1,9 @@
-import { ALuDateAdapter, ILuDateAdapter, DateGranularity } from '../adapter/index';
+import { ILuDateAdapter, ALuDateAdapter, DateGranularity } from '../adapter/index';
 import { LOCALE_ID, Inject, Injectable } from '@angular/core';
 import { getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
 
 @Injectable()
-export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
+export class LuNativeUTCDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
 
 	private _regex = /[\/\,\.\-\s]/i;
 	private _order = {
@@ -34,7 +34,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			const date = parseInt(groups[this._order.date], 10);
 			const month = parseInt(groups[this._order.month], 10);
 			const year = parseInt(groups[this._order.year], 10);
-			const d = new Date(year, month - 1, date);
+			const d = new Date(Date.UTC(year, month - 1, date));
 			// checking if its a valid date
 			// https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
 			if (!(d instanceof Date)) { return false; }
@@ -42,9 +42,9 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			// d is a valid date, but
 			// as i can write new Date(1234, 56, 78) and mr javascript accepts it
 			// i check now that the generated date has the same year/month/date as what i entered
-			// if (d.getFullYear() !== year && d.getYear() !== year) { return false; } // getYear doesn't exist anymore
-			if (d.getMonth() !== month - 1) { return false; }
-			if (d.getDate() !== date) { return false; }
+			if (d.getUTCFullYear() !== year) { return false; }
+			if (d.getUTCMonth() !== month - 1) { return false; }
+			if (d.getUTCDate() !== date) { return false; }
 			return true;
 		} catch {
 			return false;
@@ -64,14 +64,14 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		return this.forge(year, month, date);
 	}
 	format(d: Date, format: string): string {
-		return formatDate(d, format, this._locale);
+		return formatDate(d, format, this._locale, 'UTC');
 	}
 	forge(year: number, month: number, date: number): Date {
-		return new Date(year, month - 1, date); // month-1 cuz 0 -> january
+		return new Date(Date.UTC(year, month - 1, date)); // month-1 cuz 0 -> january
 	}
 	forgeToday(): Date {
-		const today = new Date();
-		return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+		const nonUTCToday = new Date();
+		return new Date(Date.UTC(nonUTCToday.getFullYear(), nonUTCToday.getMonth(), nonUTCToday.getDate()));
 	}
 	forgeInvalid(): Date {
 		return new Date('Invalid Date');
@@ -81,21 +81,22 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		if (isNaN(d.getTime())) { return false; }
 		return true;
 	}
+
 	clone(d: Date): Date {
 		return new Date(d);
 	}
 
 	getYear(d: Date): number {
-		return d.getFullYear();
+		return d.getUTCFullYear();
 	}
 	getMonth(d: Date): number {
-		return d.getMonth() + 1;
+		return d.getUTCMonth() + 1;
 	}
 	getDate(d: Date): number {
-		return d.getDate();
+		return d.getUTCDate();
 	}
 	getDay(d: Date): number {
-		return d.getDay();
+		return d.getUTCDay();
 	}
 
 	add(d: Date, count: number, granularity: DateGranularity): Date {
