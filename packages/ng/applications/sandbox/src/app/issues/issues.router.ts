@@ -28,6 +28,7 @@ const routes: Routes = [
 	{ path: 'modal-synched', loadChildren: () => import('./modal-synched').then(m => m.ModalSynchedModule) },
 	{ path: 'modals-no-submit', loadChildren: () => import('./modals-no-submit').then(m => m.ModalsNoSubmitModule) },
 	{ path: 'node-sass-end', loadChildren: () => import('./node-sass-end').then(m => m.NodeSassEndModule) },
+	{ path: 'option-comparer', loadChildren: () => import('./option-comparer').then(m => m.OptionComparerModule) },
 	{ path: 'option-selector', loadChildren: () => import('./option-selector').then(m => m.OptionSelectorModule) },
 	{ path: 'picker-structure', loadChildren: () => import('./picker-structure').then(m => m.PickerStructureModule) },
 	{ path: 'poc-modal', loadChildren: () => import('./poc-modal').then(m => m.PocModalModule) },

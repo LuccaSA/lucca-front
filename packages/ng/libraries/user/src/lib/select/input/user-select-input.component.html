@@ -11,7 +11,7 @@
 	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.users}}</span>
 	<ng-template #singleView>{{(values[0] || values) | luUserDisplay}}</ng-template>
 </ng-template>
-<lu-option-picker-advanced>
+<lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
 		<lu-user-paged-searcher></lu-user-paged-searcher>
 	</header>

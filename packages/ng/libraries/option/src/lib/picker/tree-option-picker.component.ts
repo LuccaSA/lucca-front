@@ -87,8 +87,8 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
 		let newValues;
-		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
-		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+		const selfSelected = values.some(v => this.optionComparer(v, value));
+		const allChildrenSelected = allChildren.every(child => values.some(v => this.optionComparer(v, child)));
 		if (selfSelected && allChildrenSelected) {
 			// remove option and its children
 			newValues = this._remove(values, [value, ...allChildren]);
@@ -106,8 +106,8 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
-		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
-		const someChildSelected = allChildren.some(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+		const selfSelected = values.some(v => this.optionComparer(v, value));
+		const someChildSelected = allChildren.some(child => values.some(v => this.optionComparer(v, child)));
 
 		let newValues = this._remove(values, [...allChildren]);
 		if (selfSelected && !someChildSelected) {
@@ -127,9 +127,9 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}
 		const allChildren = option.allChildren.map(i => i.value);
 		const values = <T[]>this._value || [];
-		const selfSelected = values.some(v => JSON.stringify(v) === JSON.stringify(value));
+		const selfSelected = values.some(v => this.optionComparer(v, value));
 		let newValues = this._remove(values, [value]);
-		const allChildrenSelected = allChildren.every(child => values.some(v => JSON.stringify(v) === JSON.stringify(child)));
+		const allChildrenSelected = allChildren.every(child => values.some(v => this.optionComparer(v, child)));
 		if (allChildrenSelected && !selfSelected) {
 			newValues = this._remove(newValues, allChildren);
 		} else {
@@ -138,11 +138,11 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this._select(newValues);
 	}
 	protected _add(values: T[], entries: T[]): T[] {
-		const newEntries = entries.filter(entry => !values.some(v => JSON.stringify(v) === JSON.stringify(entry)));
+		const newEntries = entries.filter(entry => !values.some(v => this.optionComparer(v, entry)));
 		return [...values, ...newEntries];
 	}
 	protected _remove(values: T[], entries: T[]): T[] {
-		const entriesToKeep = values.filter(value => !entries.some(e => JSON.stringify(e) === JSON.stringify(value)));
+		const entriesToKeep = values.filter(value => !entries.some(e => this.optionComparer(e, value)));
 		return [...entriesToKeep];
 	}
 

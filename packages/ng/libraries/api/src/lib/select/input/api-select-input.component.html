@@ -8,7 +8,7 @@
 	<lu-input-clearer></lu-input-clearer>
 </div>
 <span [class.chip]="multiple" *luDisplayer="let option">{{option.name}}</span>
-<lu-option-picker-advanced>
+<lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
 		<lu-api-paged-searcher></lu-api-paged-searcher>
 	</header>

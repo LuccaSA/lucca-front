@@ -6,6 +6,8 @@ import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 
 export interface ILuOptionPickerPanel<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ILuPickerPanel<T> {}
 
+export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
+
 export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T, O> {
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T | T[]>;
@@ -34,6 +36,8 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 			singleFlow$.subscribe(option => this._toggle(option))
 		);
 	}
+	protected optionComparer: LuOptionComparer<T> =
+		(option1: T, option2: T) => JSON.stringify(option1) === JSON.stringify(option2)
 	protected _toggle(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
@@ -41,9 +45,9 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 		} else {
 			const values = <T[]>this._value || [];
 			let newValues;
-			if (values.some(v => JSON.stringify(v) === JSON.stringify(value))) {
+			if (values.some(v => this.optionComparer(v, value))) {
 				// value was present, we remove it
-				newValues = values.filter(v => JSON.stringify(v) !== JSON.stringify(value));
+				newValues = values.filter(v => !this.optionComparer(v, value));
 			} else {
 				// value was absent, we add it
 				newValues = [...values, value];
