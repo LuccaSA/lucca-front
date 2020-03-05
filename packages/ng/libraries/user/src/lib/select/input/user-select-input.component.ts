@@ -12,7 +12,8 @@ import {
 	Renderer2,
 	HostBinding,
 	AfterContentInit,
-	Inject
+	Inject,
+	AfterViewInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -49,7 +50,7 @@ import { LuOptionComparer } from '@lucca-front/ng/option';
 })
 export class LuUserSelectInputComponent<U extends ILuUser = ILuUser>
 extends ALuSelectInputComponent<U>
-implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
+implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	searchFormat = LuDisplayFullname.lastfirst;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
@@ -80,16 +81,16 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterContentInit {
 		);
 	}
 
-	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<U>) {
-		if (!picker) { return; }
-		this._picker = picker;
-	}
-	@ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
-		if (!clearer) { return; }
-		this._clearer = clearer;
-	}
-	@ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
-		if (!displayer) { return; }
-		this.displayer = displayer;
-	}
+	// @ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<U>) {
+	// 	if (!picker) { return; }
+	// 	this._picker = picker;
+	// }
+	// @ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
+	// 	if (!clearer) { return; }
+	// 	this._clearer = clearer;
+	// }
+	// @ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
+	// 	if (!displayer) { return; }
+	// 	this.displayer = displayer;
+	// }
 }
