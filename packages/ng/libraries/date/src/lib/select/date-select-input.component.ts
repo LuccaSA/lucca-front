@@ -9,6 +9,7 @@ import {
 	Input,
 	Renderer2,
 	AfterContentInit,
+	AfterViewInit,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -37,7 +38,7 @@ import { ALuDateAdapter, DateGranularity } from '../adapter/index';
 })
 export class LuDateSelectInputComponent<D>
 extends ALuSelectInputComponent<D>
-implements ControlValueAccessor, ILuInputWithPicker<D>, AfterContentInit, Validator {
+implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }

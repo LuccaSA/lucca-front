@@ -13,6 +13,7 @@ import {
 	Input,
 	HostBinding,
 	OnDestroy,
+	AfterViewInit,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -31,7 +32,7 @@ import { ALuSelectInput } from './select-input.model';
 
 export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, TPicker>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDestroy {
+implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
@@ -79,15 +80,20 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 	/**
 	 * popover trigger class extension
 	 */
-	@ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: TPicker) {
-		if (!picker) { return; }
-		this._picker = picker;
-	}
+	@ContentChild(ALuPickerPanel, { static: true }) ccPicker: TPicker;
+	@ViewChild(ALuPickerPanel, { static: true }) vcPicker: TPicker;
 
-	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
-		if (!displayer) { return; }
-		this.displayer = displayer;
-	}
+	@ContentChild(ALuInputDisplayer, { static: true }) ccDisplayer: ILuInputDisplayer<T>;
+	@ViewChild(ALuInputDisplayer, { static: true }) vcDisplayer: ILuInputDisplayer<T>;
+	// @ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: TPicker) {
+	// 	if (!picker) { return; }
+	// 	this._picker = picker;
+	// }
+
+	// @ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
+	// 	if (!displayer) { return; }
+	// 	this.displayer = displayer;
+	// }
 
 	@HostListener('click')
 	onClick() {
@@ -119,12 +125,23 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterContentInit, OnDest
 		}
 	}
 
-
-	ngAfterContentInit() {
+	ngAfterViewInit() {
 		this._isContentInitialized = true;
+
+		// init picker and displayer
+		const picker = this.ccPicker || this.vcPicker;
+		if (!!picker) {
+			this._picker = picker;
+		}
+		const displayer = this.ccDisplayer || this.vcDisplayer;
+		if (!!displayer) {
+			this._displayer = displayer;
+		}
+
 		this.render();
 		this._picker.setValue(this.value);
 	}
+
 	ngOnDestroy() {
 		this.closePopover();
 		this.destroyPopover();
@@ -179,8 +196,8 @@ export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> 
 		}
 	}
 
-	ngAfterContentInit() {
-		super.ngAfterContentInit();
+	ngAfterViewInit() {
+		super.ngAfterViewInit();
 		this.displayClearer(); // dont keep
 	}
 }
