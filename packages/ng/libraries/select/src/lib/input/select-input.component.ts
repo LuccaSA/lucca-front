@@ -85,15 +85,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 
 	@ContentChild(ALuInputDisplayer, { static: true }) ccDisplayer: ILuInputDisplayer<T>;
 	@ViewChild(ALuInputDisplayer, { static: true }) vcDisplayer: ILuInputDisplayer<T>;
-	// @ContentChild(ALuPickerPanel, { static: true }) set _contentChildPicker(picker: TPicker) {
-	// 	if (!picker) { return; }
-	// 	this._picker = picker;
-	// }
-
-	// @ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
-	// 	if (!displayer) { return; }
-	// 	this.displayer = displayer;
-	// }
 
 	@HostListener('click')
 	onClick() {
@@ -140,6 +131,14 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 
 		this.render();
 		this._picker.setValue(this.value);
+
+		// strange bug where the view renderred in the displayer was only injected after a hover
+		// no matter how many cdr.markforchack i added
+		// but with a timeout it works
+		// shrug emoji
+		setTimeout(() => {
+			this._changeDetectorRef.markForCheck();
+		}, 1);
 	}
 
 	ngOnDestroy() {
