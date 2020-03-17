@@ -86,6 +86,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 	@ContentChild(ALuInputDisplayer, { static: true }) ccDisplayer: ILuInputDisplayer<T>;
 	@ViewChild(ALuInputDisplayer, { static: true }) vcDisplayer: ILuInputDisplayer<T>;
 
+	@ContentChild(ALuClearer, { static: true }) ccClearer: ILuClearer<T>;
+	@ViewChild(ALuClearer, { static: true }) vcClearer: ILuClearer<T>;
+
 	@HostListener('click')
 	onClick() {
 		super.onClick();
@@ -119,7 +122,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 	ngAfterViewInit() {
 		this._isContentInitialized = true;
 
-		// init picker and displayer
+		// init picker and displayer and clearer
 		const picker = this.ccPicker || this.vcPicker;
 		if (!!picker) {
 			this._picker = picker;
@@ -127,6 +130,10 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 		const displayer = this.ccDisplayer || this.vcDisplayer;
 		if (!!displayer) {
 			this._displayer = displayer;
+		}
+		const clearer = this.ccClearer || this.vcClearer;
+		if (!!clearer) {
+			this._clearer = clearer;
 		}
 
 		this.render();
@@ -165,10 +172,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 	],
 })
 export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> {
-	@ContentChild(ALuClearer, { static: false }) set _contentChildClearer(clearer: ILuClearer) {
-		if (!clearer) { return; }
-		this._clearer = clearer;
-	}
 	@HostBinding('class.mod-multipleView')
 	get modMultipleView() { return this.useMultipleViews(); }
 	constructor(
