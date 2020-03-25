@@ -139,7 +139,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		}
 	}
 	protected useMultipleViews() {
-		return this._multiple  && !this._displayer.multiple;
+		return this._multiple && !!this._displayer && !this._displayer.multiple;
 	}
 
 	protected renderSingleView() {
