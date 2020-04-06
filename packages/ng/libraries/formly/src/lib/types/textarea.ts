@@ -4,7 +4,7 @@ import { FieldType } from '@ngx-formly/core';
 	selector: 'lu-formly-field-input',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './textarea.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldTextarea extends FieldType {
 	focus() {

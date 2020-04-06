@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
 	selector: 'lu-formly-field-department',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './department.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldDepartment extends FieldType {
 	focus() {
