@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
 	selector: 'lu-formly-field-select',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './select.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldSelect extends FieldType {
 	get _options() {

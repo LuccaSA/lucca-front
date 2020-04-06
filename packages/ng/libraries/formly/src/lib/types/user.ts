@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
 	selector: 'lu-formly-field-user',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './user.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldUser extends FieldType {
 	focus() {
