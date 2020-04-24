@@ -51,7 +51,7 @@
 
 <h2>temp</h2>
 <div class="textfield mod-framed">
-	<lu-select class="textfield-input">
+	<lu-select class="textfield-input" [(ngModel)]="lol">
 		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 		<lu-option-picker>
 			<lu-option [value]="option">{{option.name}}</lu-option>

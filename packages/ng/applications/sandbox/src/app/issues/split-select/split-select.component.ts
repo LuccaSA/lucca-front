@@ -9,4 +9,5 @@ export class SplitSelectComponent {
 	item = { id: 1, name: 'initial value' };
 	option = { id: 2, name: 'option' };
 	formControl = new FormControl();
+	lol = 'mdr';
 }
