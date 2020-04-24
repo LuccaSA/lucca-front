@@ -124,6 +124,7 @@
 				padding: 0 calc(#{_component("select.framed.side-padding")} * 3)
 					_component("select.framed.bottom-padding")
 					_component("select.framed.side-padding");
+				min-height: 1.5rem;
 			}
 
 			.lu-select-suffix {
