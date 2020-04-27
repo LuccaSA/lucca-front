@@ -5,7 +5,11 @@ import { Component } from '@angular/core';
 	templateUrl: './refactor-select.component.html'
 })
 export class RefactorSelectComponent {
-	item = '1';
-	collection = ['1'];
 	model = '1';
+
+	red = { id: 1, name: 'red' };
+	green = { id: 2, name: 'green' };
+	yellow = { id: 3, name: 'yellow' };
+	blue = { id: 4, name: 'blue' };
+	items = [this.red, this.blue];
 }
