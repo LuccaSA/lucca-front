@@ -24,6 +24,9 @@
 					<lu-option [value]="green">{{green.name}}</lu-option>
 					<lu-option [value]="red">{{red.name}}</lu-option>
 					<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+					<lu-option [value]="orange">{{orange.name}}</lu-option>
+					<lu-option [value]="purple">{{purple.name}}</lu-option>
+					<lu-option [value]="pink">{{pink.name}}</lu-option>
 					<lu-option [value]="blue">{{blue.name}}</lu-option>
 				</lu-option-picker>
 			</lu-select>
@@ -55,6 +58,9 @@
 					<lu-option [value]="green">{{green.name}}</lu-option>
 					<lu-option [value]="red">{{red.name}}</lu-option>
 					<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+					<lu-option [value]="orange">{{orange.name}}</lu-option>
+					<lu-option [value]="purple">{{purple.name}}</lu-option>
+					<lu-option [value]="pink">{{pink.name}}</lu-option>
 					<lu-option [value]="blue">{{blue.name}}</lu-option>
 				</lu-option-picker>
 				<lu-input-clearer></lu-input-clearer>
@@ -70,6 +76,9 @@
 					<lu-option [value]="green">{{green.name}}</lu-option>
 					<lu-option [value]="red">{{red.name}}</lu-option>
 					<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+					<lu-option [value]="orange">{{orange.name}}</lu-option>
+					<lu-option [value]="purple">{{purple.name}}</lu-option>
+					<lu-option [value]="pink">{{pink.name}}</lu-option>
 					<lu-option [value]="blue">{{blue.name}}</lu-option>
 				</lu-option-picker>
 				<lu-input-clearer></lu-input-clearer>
@@ -109,6 +118,12 @@
 			<div class="form-group-line">
 				<div class="form-group-line-lg3">
 					<div class="textfield mod-framed">
+						<input class="textfield-input" value="Filter">
+						<label class="textfield-label">Textfield framed</label>
+					</div>
+				</div>
+				<div class="form-group-line-lg3">
+					<div class="textfield mod-framed">
 						<lu-select class="textfield-input" [(ngModel)]="model">
 							<span *luDisplayer="let value">{{value}}</span>
 							<lu-input-clearer *ngIf="true"></lu-input-clearer>
@@ -131,6 +146,9 @@
 								<lu-option [value]="green">{{green.name}}</lu-option>
 								<lu-option [value]="red">{{red.name}}</lu-option>
 								<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+								<lu-option [value]="orange">{{orange.name}}</lu-option>
+								<lu-option [value]="purple">{{purple.name}}</lu-option>
+								<lu-option [value]="pink">{{pink.name}}</lu-option>
 								<lu-option [value]="blue">{{blue.name}}</lu-option>
 							</lu-option-picker>
 							<lu-input-clearer></lu-input-clearer>
@@ -146,17 +164,14 @@
 								<lu-option [value]="green">{{green.name}}</lu-option>
 								<lu-option [value]="red">{{red.name}}</lu-option>
 								<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+								<lu-option [value]="orange">{{orange.name}}</lu-option>
+								<lu-option [value]="purple">{{purple.name}}</lu-option>
+								<lu-option [value]="pink">{{pink.name}}</lu-option>
 								<lu-option [value]="blue">{{blue.name}}</lu-option>
 							</lu-option-picker>
 							<lu-input-clearer></lu-input-clearer>
 						</lu-select>
 						<label class="textfield-label" for="itemOptions">Select multiple all values</label>
-					</div>
-				</div>
-				<div class="form-group-line-lg3">
-					<div class="textfield mod-framed">
-						<input class="textfield-input" value="Filter">
-						<label class="textfield-label">Textfield framed</label>
 					</div>
 				</div>
 			</div>

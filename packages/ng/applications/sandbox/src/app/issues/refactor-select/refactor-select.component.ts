@@ -10,6 +10,9 @@ export class RefactorSelectComponent {
 	red = { id: 1, name: 'red' };
 	green = { id: 2, name: 'green' };
 	yellow = { id: 3, name: 'yellow' };
-	blue = { id: 4, name: 'blue' };
+	orange = { id: 4, name: 'orange' };
+	purple = { id: 5, name: 'purple' };
+	pink = { id: 6, name: 'pink' };
+	blue = { id: 7, name: 'blue' };
 	items = [this.red, this.blue];
 }

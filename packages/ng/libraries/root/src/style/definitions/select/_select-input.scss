@@ -39,10 +39,10 @@
 	.lu-select-value {
 		line-height: 1.5rem;
 		min-height: 2.5rem;
-		padding: #{_component("select.input.padding-vertical", true)} 1.5rem
+		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
 			#{_component("select.input.padding-vertical", true)}
 			#{_component("select.input.padding-horizontal", true)};
-		padding: _component("select.input.padding-vertical") 1.5rem
+		padding: _component("select.input.padding-vertical") 2.5rem
 			_component("select.input.padding-vertical")
 			_component("select.input.padding-horizontal");
 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
@@ -108,6 +108,7 @@
 		&.textfield-input {
 			padding: #{_component("select.framed.top-padding", true)} 0 0;
 			padding: _component("select.framed.top-padding") 0 0;
+			min-height: 4.5rem;
 
 			&::after {
 				color: _color("text.light", "color", true);
@@ -134,8 +135,11 @@
 			}
 
 			&.mod-multiple.mod-multipleView.is-filled .lu-select-value {
-				margin-bottom: -.3rem;
+				padding-bottom: _component("select.framed.bottom-padding", true);
 			}
+		}
+		& .mod-small.textfield-input {
+			min-height: 3.875rem;
 		}
 	}
 
@@ -209,8 +213,7 @@
 			.lu-select-value {
 				height: auto;
 				align-items: center;
-				padding-bottom: 0;
-				padding-top: 0;
+				line-height: 2rem;
 			}
 
 			.lu-select-display-wrapper {
