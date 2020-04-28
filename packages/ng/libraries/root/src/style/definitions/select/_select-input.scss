@@ -37,7 +37,7 @@
 	}
 
 	.lu-select-value {
-		line-height: 1.5rem;
+		line-height: _component("select.line-height");
 		min-height: 2.5rem;
 		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
 			#{_component("select.input.padding-vertical", true)}
@@ -51,7 +51,7 @@
 	}
 
 	.lu-select-placeholder {
-		line-height: 1.5rem;
+		line-height: _component("select.line-height");
 		min-height: 2.5rem;
 		padding: #{_component("select.input.padding-vertical", true)} 1.5rem
 			#{_component("select.input.padding-vertical", true)}
@@ -124,7 +124,7 @@
 				padding: 0 calc(#{_component("select.framed.side-padding")} * 3)
 					_component("select.framed.bottom-padding")
 					_component("select.framed.side-padding");
-				min-height: 1.5rem;
+				min-height: _component("select.line-height");
 			}
 
 			.lu-select-suffix {
@@ -137,7 +137,7 @@
 				padding-bottom: _component("select.framed.bottom-padding", true);
 			}
 			&.mod-multiple.mod-multipleView:not(.mod-singleLine) .lu-select-value {
-					min-height: 1.5rem;
+					min-height: _component("select.line-height");
 			}
 			&.mod-multiple{
 				padding: calc(#{_component("select.framed.top-padding", true)} - .2rem ) 0 0;
