@@ -143,9 +143,6 @@
 				padding: calc(#{_component("select.framed.top-padding", true)} - .2rem ) 0 0;
 			}
 		}
-		& .mod-small.textfield-input {
-			min-height: 3.875rem;
-		}
 	}
 
 	// Filter
