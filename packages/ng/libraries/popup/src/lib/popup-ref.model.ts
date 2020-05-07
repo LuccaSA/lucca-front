@@ -42,7 +42,10 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 	open(data?: D) {
 		this._createOverlay();
 		this._openPopup(data);
-		this._subToCloseEvents();
+
+		if (!this._config.disableClose) {
+			this._subToCloseEvents();
+		}
 
 		this.onOpen.next(data);
 		this.onOpen.complete();
