@@ -1,0 +1,18 @@
+<div class="button-group">
+	<button class="button palette-primary">Main action</button>
+	<button class="button palette-primary mod-more" [luPopover]="dropdown" luPopoverPosition="below" luPopoverAlignment="right"></button>
+</div>
+
+<lu-popover panel-classes="dropdown" content-classes="dropdown-options" #dropdown>
+	<a href="#" class="dropdown-options-item">Link one</a>
+	<button class="dropdown-options-item">Button action</button>
+	<div class="dropdown-options-item mod-withChildren" [ngClass]="{'is-open': isToggleOpen}">
+		<button (click)="toggle()" class="dropdown-options-item-toggle">Toggle Catégorie</button>
+		<ul class="dropdown-options-item-children">
+			<li class="dropdown-options-item-children-item">
+				<a href="" class="dropdown-options-item-children-item-link">Enfant 1</a>
+				<button class="dropdown-options-item-children-item-link">Enfant 2</button>
+			</li>
+		</ul>
+	</div>
+</lu-popover>
