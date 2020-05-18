@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
 	selector: 'lu-formly-field-api',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './api.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldApi extends FieldType {
 	get _api() {
