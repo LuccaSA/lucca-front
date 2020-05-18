@@ -52,6 +52,7 @@ const routes: Routes = [
 	{ path: 'tree-picker-advanced', loadChildren: () => import('./tree-picker-advanced').then(m => m.TreePickerAdvancedModule) },
 	{ path: 'user-select-homonyms', loadChildren: () => import('./user-select-homonyms').then(m => m.UserSelectHomonymsModule) },
 	{ path: 'user-select-translate', loadChildren: () => import('./user-select-translate').then(m => m.UserSelectTranslateModule) },
+	{ path: 'style-select-chips', loadChildren: () => import('./style-select-chips').then(m => m.StyleSelectChipsModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
