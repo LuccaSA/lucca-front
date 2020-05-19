@@ -128,7 +128,6 @@ var icons = {
 		"stamp",
 		"postage",
 		"menu",
-		"hamburger_menu",
 		"ellipsis",
 		"mileage",
 		"money",
