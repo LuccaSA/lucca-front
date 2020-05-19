@@ -105,7 +105,7 @@ function addRoute(source: SourceFile, routerPath: string, issueName: string, iss
 	return changes;
 }
 function findRoutesNode(source: SourceFile): Node | null {
-	const constNode = findNodes(source as any as import('D:/lucca-front/packages/ng/node_modules/@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript').Node, SyntaxKind.ConstKeyword)[0];
+	const constNode = findNodes(source as any as import("../../node_modules/@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript").Node, SyntaxKind.ConstKeyword)[0];
 	if (!constNode) { return null; }
 	const routesNode = constNode.parent.getChildAt(1).getChildAt(0).getChildAt(4);
 
