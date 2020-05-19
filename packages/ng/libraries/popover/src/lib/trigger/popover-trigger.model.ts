@@ -19,6 +19,7 @@ import {
 import { TemplatePortal, ComponentPortal } from '@angular/cdk/portal';
 
 import { Subscription, Subject, timer } from 'rxjs';
+import { generateId } from '@lucca-front/ng/core';
 
 import {
 	ILuPopoverPanel,
@@ -117,7 +118,11 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
-	) {}
+	) {
+		
+		this._triggerId = `popoverTrigger_${generateId()}`;
+		this._panelId = `popoverPanel_${generateId()}`;
+	}
 
 	onClick() {
 		if (this.triggerEvent === 'click') {

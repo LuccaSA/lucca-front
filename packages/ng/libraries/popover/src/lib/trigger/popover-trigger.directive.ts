@@ -15,6 +15,7 @@ import {
 	Overlay,
 } from '@angular/cdk/overlay';
 
+import { generateId } from '@lucca-front/ng/core';
 
 import {
 	ILuPopoverTrigger, ALuPopoverTrigger, LuPopoverTriggerEvent,
@@ -26,9 +27,7 @@ import {
 	ILuPopoverTarget, LuPopoverPosition, LuPopoverAlignment, LuPopoverTarget,
 } from '../target/index';
 
-function randomId() {
-	return 'xxxxxxxx'.replace(/[x]/g, () => Math.floor(Math.random() * 16).toString(16));
-}
+
 
 /**
 * This directive is intended to be used in conjunction with an lu-popover tag.  It is
@@ -36,10 +35,6 @@ function randomId() {
 */
 @Directive({
 	selector: '[luPopover]',
-	// host: {
-	// 	'aria-haspopup': 'true',
-	// 	'(mousedown)': '_handleMousedown($event)',
-	// },
 	exportAs: 'LuPopoverTrigger',
 })
 export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
@@ -80,9 +75,11 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverOffsetX') set inputOffsetX(ox: number) { this.target.offsetX = ox; }
 	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) { this.target.offsetY = oy; }
 
+	/** accessibility attribute - dont override */
 	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() { return this._popoverOpen; }
-
+	/** accessibility attribute - dont override */
 	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
+	/** accessibility attribute - dont override */
 	@HostBinding('attr.aria-controls') get _attrAriaControls() { return this._panelId; }
 
 	constructor(
@@ -93,8 +90,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;
-		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || `popovercontrol_${randomId()}`;
-		this._panelId = `popoverpanel_${randomId()}`;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 	}
 
 	@HostListener('click')
