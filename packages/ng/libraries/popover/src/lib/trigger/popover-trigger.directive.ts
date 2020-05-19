@@ -48,7 +48,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverTarget') set inputTarget(t: TTarget) { this.target = t; }
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('luPopoverTrigger') set inoutTriggerEvent(te: LuPopoverTriggerEvent) { this.triggerEvent = te; }
+	@Input('luPopoverTrigger') set inputTriggerEvent(te: LuPopoverTriggerEvent) { this.triggerEvent = te; }
 
 	/** Event emitted when the associated popover is opened. */
 	@Output() onPopoverOpen = new EventEmitter<void>();
