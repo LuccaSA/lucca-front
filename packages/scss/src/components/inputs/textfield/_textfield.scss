@@ -106,7 +106,7 @@
 			text-align: center;
 
 			.lucca-icon {
-				font-size: .9rem;
+				font-size: 1rem;
 			}
 		}
 
@@ -205,8 +205,8 @@
 			@include makeIcon("search");
 			bottom: .5rem;
 			color: _color("primary", "light");
-			font-size: 1.4rem;
-			line-height: 1.5rem;
+			font-size: 1.2rem;
+			line-height: 1.4rem;
 			pointer-events: none;
 			position: absolute;
 			right: .33rem;
