@@ -15,8 +15,6 @@ import {
 	Overlay,
 } from '@angular/cdk/overlay';
 
-import { generateId } from '@lucca-front/ng/core';
-
 import {
 	ILuPopoverTrigger, ALuPopoverTrigger, LuPopoverTriggerEvent,
 } from './popover-trigger.model';
