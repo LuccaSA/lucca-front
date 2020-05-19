@@ -76,7 +76,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverOffsetX') set inputOffsetX(ox: number) { this.target.offsetX = ox; }
 	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) { this.target.offsetY = oy; }
 
-	@HostBinding('attr.aria-haspopup') hasPopup = true;
+	@HostBinding('attr.aria-expanded') get _ariaExpanded() { return this._popoverOpen; }
 
 	constructor(
 		protected _overlay: Overlay,
