@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
 	templateUrl: './dropdown.component.html'
 })
 export class DropdownComponent {
-	public isToggleOpen: boolean;
+	public isToggleOpen = true;
+
 	public toggle() {
 		this.isToggleOpen = !this.isToggleOpen;
 	}
