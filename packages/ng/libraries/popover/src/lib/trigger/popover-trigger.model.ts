@@ -119,7 +119,6 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 	) {
-		
 		this._triggerId = `popoverTrigger_${generateId()}`;
 		this._panelId = `popoverPanel_${generateId()}`;
 	}
