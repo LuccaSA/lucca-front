@@ -110,6 +110,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	get disabled() { return this._disabled; }
 	set disabled(d: boolean) { this._disabled = d; }
 
+	protected _triggerId: string;
+	protected _panelId: string;
+
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
@@ -266,6 +269,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 */
 	protected _initPopover(): void {
 		this._setIsPopoverOpen(true);
+		this.panel.panelId = this._panelId;
+		this.panel.triggerId = this._triggerId;
 		this.panel.keydownEvents$ = this._overlayRef.keydownEvents();
 		this._subscribeToPanelEvents();
 	}

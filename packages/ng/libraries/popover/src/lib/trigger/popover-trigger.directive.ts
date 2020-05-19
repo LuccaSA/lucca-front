@@ -82,9 +82,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 
 	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() { return this._popoverOpen; }
 
-	private _id: string;
-	@HostBinding('attr.id') get _attrId() { return this._id; }
-	private _panelId: string;
+	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
 	@HostBinding('attr.aria-controls') get _attrAriaControls() { return this._panelId; }
 
 	constructor(
@@ -95,7 +93,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;
-		this._id = this._elementRef.nativeElement.getAttribute('id') || `popovercontrol_${randomId()}`;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || `popovercontrol_${randomId()}`;
 		this._panelId = `popoverpanel_${randomId()}`;
 	}
 
