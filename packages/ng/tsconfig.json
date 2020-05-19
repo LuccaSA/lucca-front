@@ -22,9 +22,6 @@
       "dom"
     ],
     "paths": {
-      // "@lucca-front/ng": [
-      //   "dist"
-      // ],
       "@lucca-front/ng/core": [
         "dist/core"
       ],
@@ -84,6 +81,9 @@
       ],
       "@lucca-front/ng/user": [
         "dist/user"
+      ],
+      "@lucca-front/ng/dropdown": [
+        "dist/dropdown"
       ]
     }
   },
