@@ -1,2 +1,1 @@
-// export * from './id.generator';
-export const lol = '';
+export * from './id.generator';
