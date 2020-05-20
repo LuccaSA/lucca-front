@@ -7,72 +7,35 @@
 	</button>
 </div>
 
-<!-- <lu-popover panel-classes="panel" content-classes="content" #dropdown>
-	<ul class="lu-dropdown-options">
-		<li class="lu-dropdown-options-item">
-			<a href="#" class="lu-dropdown-options-item-action">Link 1</a>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<a href="#" class="lu-dropdown-options-item-action">Link 2</a>
-		</li>
-		<li class="lu-dropdown-options-item mod-withChildren" [attr.aria-hidden]="isToggleOpen">	
-			<button (click)="toggle()" class="lu-dropdown-options-item-toggle">
-				Toggle
-				<span aria-hidden="true" class="lucca-icon expand">expand</span>
-				<span aria-hidden="true" class="lucca-icon collapse">collapse</span>
-			</button>
-			<ul class="lu-dropdown-options-item-children">
-				<li class="lu-dropdown-options-item-children-item">
-					<a href="#" class="lu-dropdown-options-item-children-item-action">Toggle link 1</a>
-				</li>
-				<li class="lu-dropdown-options-item-children-item">
-					<button class="lu-dropdown-options-item-children-item-action">Toggle button 2</button>
-				</li>
-			</ul>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<a href="#" class="lu-dropdown-options-item-action">Link 3</a>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<button class="lu-dropdown-options-item-action">Button 4</button>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<div role="button" tabindex="0" class="lu-dropdown-options-item-action">Div 5</div>
-		</li>
-	</ul>
-</lu-popover> -->
-
 <lu-dropdown #dropdown>
-	<ul class="lu-dropdown-options">
-		<li class="lu-dropdown-options-item">
-			<a href="#" class="lu-dropdown-options-item-action">Link 1</a>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<a href="#" class="lu-dropdown-options-item-action">Link 2</a>
-		</li>
-		<li class="lu-dropdown-options-item mod-withChildren" [attr.aria-hidden]="isToggleOpen">	
-			<button (click)="toggle()" class="lu-dropdown-options-item-toggle">
-				Toggle
-				<span aria-hidden="true" class="lucca-icon expand">expand</span>
-				<span aria-hidden="true" class="lucca-icon collapse">collapse</span>
-			</button>
-			<ul class="lu-dropdown-options-item-children">
-				<li class="lu-dropdown-options-item-children-item">
-					<a href="#" class="lu-dropdown-options-item-children-item-action">Toggle link 1</a>
-				</li>
-				<li class="lu-dropdown-options-item-children-item">
-					<button class="lu-dropdown-options-item-children-item-action">Toggle button 2</button>
-				</li>
-			</ul>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<a href="#" class="lu-dropdown-options-item-action">Link 3</a>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<button class="lu-dropdown-options-item-action">Button 4</button>
-		</li>
-		<li class="lu-dropdown-options-item">
-			<div role="button" tabindex="0" class="lu-dropdown-options-item-action">Div 5</div>
-		</li>
-	</ul>
+	<li class="lu-dropdown-options-item" luDropdownItem>
+		<a href="#" class="lu-dropdown-options-item-action">Link 1</a>
+	</li>
+	<li class="lu-dropdown-options-item" luDropdownItem>
+		<a href="#" class="lu-dropdown-options-item-action">Link 2</a>
+	</li>
+	<!-- <li class="lu-dropdown-options-item mod-withChildren" [attr.aria-hidden]="isToggleOpen">	
+		<button (click)="toggle()" class="lu-dropdown-options-item-toggle">
+			Toggle
+			<span aria-hidden="true" class="lucca-icon expand">expand</span>
+			<span aria-hidden="true" class="lucca-icon collapse">collapse</span>
+		</button>
+		<ul class="lu-dropdown-options-item-children">
+			<li class="lu-dropdown-options-item-children-item">
+				<a href="#" class="lu-dropdown-options-item-children-item-action">Toggle link 1</a>
+			</li>
+			<li class="lu-dropdown-options-item-children-item">
+				<button class="lu-dropdown-options-item-children-item-action">Toggle button 2</button>
+			</li>
+		</ul>
+	</li> -->
+	<li class="lu-dropdown-options-item" luDropdownItem>
+		<a href="#" class="lu-dropdown-options-item-action">Link 3</a>
+	</li>
+	<li class="lu-dropdown-options-item" luDropdownItem>
+		<button class="lu-dropdown-options-item-action">Button 4</button>
+	</li>
+	<li class="lu-dropdown-options-item" luDropdownItem>
+		<div role="button" tabindex="0" class="lu-dropdown-options-item-action">Div 5</div>
+	</li>
 </lu-dropdown>
