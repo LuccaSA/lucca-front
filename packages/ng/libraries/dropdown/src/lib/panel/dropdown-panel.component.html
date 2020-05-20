@@ -11,7 +11,9 @@
 		[@transformPopover]="'enter'"
 	>
 		<div class="lu-dropdown-content" [ngClass]="contentClassesMap">
-			<ng-content></ng-content>
+			<ul class="lu-dropdown-options">
+				<ng-content></ng-content>
+			</ul>
 		</div>
 	</div>
 </ng-template>
