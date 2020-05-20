@@ -7,6 +7,8 @@ import {
 	TemplateRef,
 	ViewChild,
 	ChangeDetectionStrategy,
+	QueryList,
+	ContentChildren,
 } from '@angular/core';
 
 import {
@@ -14,6 +16,10 @@ import {
 	ALuPopoverPanel,
 	luTransformPopover,
 } from '@lucca-front/ng/popover';
+import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
+import { ENTER, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { merge, of } from 'rxjs';
+import { map, startWith, delay, share } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-dropdown',
@@ -62,8 +68,38 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.templateRef = tr;
 	}
 
+	protected _highlightIndex = 0;
+	get highlightIndex() { return this._highlightIndex; }
+	set highlightIndex(i: number) {
+		this._highlightIndex = i;
+		this._applyHighlight();
+	}
+	protected _items: ILuDropdownItem[] = [];
+	protected _itemsQL: QueryList<ILuDropdownItem>;
+	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(ql: QueryList<ILuDropdownItem>) {
+		this._itemsQL = ql;
+	}
+
 	constructor() {
 		super();
+	}
+	protected initItems() {
+
+		const items$ = this._itemsQL.changes
+			.pipe(
+				startWith(this._itemsQL),
+				map<QueryList<ILuDropdownItem>, ILuDropdownItem[]>(ql => ql.toArray()),
+				delay(0),
+				share(),
+			);
+		items$.subscribe(i => this._items = i || []);
+		this.highlightIndex = 0;
+		// this._options$ = items$;
+		// this._initHighlight();
+		// this._initSelected();
+	}
+	ngAfterViewInit() {
+		this.initItems();
 	}
 
 	ngOnDestroy() {
@@ -79,5 +115,35 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	}
 	_emitHoveredEvent(hovered: boolean): void {
 		this.hovered.emit(hovered);
+	}
+
+	// keydown
+	_handleKeydown(event: KeyboardEvent) {
+		super._handleKeydown(event);
+		switch (event.keyCode) {
+			case UP_ARROW:
+				this._decrHighlight();
+				event.preventDefault();
+				event.stopPropagation();
+				break;
+			case DOWN_ARROW:
+				this._incrHighlight();
+				event.preventDefault();
+				event.stopPropagation();
+				break;
+		}
+	}
+	protected _incrHighlight() {
+		const itemsCount = this._items.length;
+		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, itemsCount - 1), -1);
+	}
+	protected _decrHighlight() {
+		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
+	}
+	protected _applyHighlight() {
+		const highlightedItem = this._items[this.highlightIndex];
+		if (highlightedItem) {
+			highlightedItem.focus();
+		}
 	}
 }

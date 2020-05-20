@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { LuDropdownPanelComponent } from './dropdown-panel.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -7,6 +8,7 @@ import { LuDropdownPanelComponent } from './dropdown-panel.component';
 		LuDropdownPanelComponent,
 	],
 	imports: [
+		CommonModule,
 	],
 	exports: [
 		LuDropdownPanelComponent,

@@ -1,4 +1,4 @@
-import { Directive, forwardRef } from '@angular/core';
+import { Directive, forwardRef, ElementRef } from '@angular/core';
 import { ALuDropdownItem } from './dropdown-item.model';
 
 @Directive({
@@ -12,4 +12,13 @@ import { ALuDropdownItem } from './dropdown-item.model';
 		}
 	]
 })
-export class LuDropdownItemDirective extends ALuDropdownItem {}
+export class LuDropdownItemDirective extends ALuDropdownItem {
+	constructor(
+		private _eltRef: ElementRef,
+	) {
+		super();
+	}
+	focus() {
+		this._eltRef.nativeElement.focus();
+	}
+}
