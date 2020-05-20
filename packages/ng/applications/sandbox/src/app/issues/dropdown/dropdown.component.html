@@ -8,11 +8,11 @@
 </div>
 
 <lu-dropdown #dropdown>
-	<li class="lu-dropdown-options-item" luDropdownItem>
-		<a href="#" class="lu-dropdown-options-item-action">Link 1</a>
+	<li class="lu-dropdown-options-item" >
+		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action" luDropdownItem>Link 1</a>
 	</li>
-	<li class="lu-dropdown-options-item" luDropdownItem>
-		<a href="#" class="lu-dropdown-options-item-action">Link 2</a>
+	<li class="lu-dropdown-options-item">
+		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>Link 2</a>
 	</li>
 	<!-- <li class="lu-dropdown-options-item mod-withChildren" [attr.aria-hidden]="isToggleOpen">	
 		<button (click)="toggle()" class="lu-dropdown-options-item-toggle">
@@ -29,13 +29,13 @@
 			</li>
 		</ul>
 	</li> -->
-	<li class="lu-dropdown-options-item" luDropdownItem>
-		<a href="#" class="lu-dropdown-options-item-action">Link 3</a>
+	<li class="lu-dropdown-options-item" >
+		<a routerLink="." fragment="link3"  class="lu-dropdown-options-item-action" luDropdownItem>Link 3</a>
 	</li>
-	<li class="lu-dropdown-options-item" luDropdownItem>
-		<button class="lu-dropdown-options-item-action">Button 4</button>
+	<li class="lu-dropdown-options-item" >
+		<button class="lu-dropdown-options-item-action" luDropdownItem (click)="debug(4)">Button 4</button>
 	</li>
-	<li class="lu-dropdown-options-item" luDropdownItem>
-		<div role="button" tabindex="0" class="lu-dropdown-options-item-action">Div 5</div>
+	<li class="lu-dropdown-options-item" >
+		<div role="button" tabindex="0" class="lu-dropdown-options-item-action"  (click)="debug(4)" luDropdownItem>Div 5</div>
 	</li>
 </lu-dropdown>
