@@ -18,10 +18,6 @@
 @mixin fieldMaterialError($fieldname) {
 	box-shadow: 0 2px 0 0 _color("error");
 
-	&::placeholder {
-		color: _color("error", "see-through");
-	}
-
 	~ .#{$fieldname}-label {
 		color: _color("error");
 	}

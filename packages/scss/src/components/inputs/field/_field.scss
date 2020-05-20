@@ -4,15 +4,50 @@
 		flex-direction: column;
 		align-items: flex-start;
 		position: relative;
+
+		// palette colors
+		@each $name, $palette in _getMap("palettes") {
+			&.palette-#{$name} {
+				.#{$fieldname}-label {
+					color: _theme("palettes.#{$name}.color");
+				}
+
+				.#{$fieldname}-input {
+					&:hover {
+						&::placeholder {
+							color: _theme("palettes.#{$name}.light");
+						}
+					}
+
+					&, &:focus {
+						&::placeholder {
+							color: _theme("palettes.#{$name}.lighter");
+						}
+					}
+				}
+			}
+		}
 	}
 
 	.#{$fieldname}-input {
-		color: _component("field.input.color");
 		font-family: _theme("commons.font.family");
 		font-size: _component("field.font-size");
 		outline: 0;
 		position: relative;
 		width: 100%;
+		color: _component("field.input.color");
+
+		&:hover {
+			&::placeholder {
+				color: _component("field.input.color", "light");
+			}
+		}
+
+		&, &:focus {
+			&::placeholder {
+				color: _component("field.input.color", "lighter");
+			}
+		}
 	}
 
 	.#{$fieldname}-label {
@@ -45,6 +80,10 @@
 
 	.#{$fieldname}-messages-warning {
 		color: _color("warning");
+	}
+
+	.#{$fieldname}-messages-success {
+		color: _color("success");
 	}
 
 	.#{$fieldname}-messages-helper {
@@ -92,7 +131,6 @@
 		}
 
 		&.is-valid {
-
 			&::before {
 				animation: isValid 3s forwards;
 				@include makeIcon("tick_bold");
@@ -121,14 +159,71 @@
 
 @mixin field-input($fieldname) {
 	display: block;
+
 	&[disabled], &[readonly] {
 		color: _color("text.light");
 		cursor: not-allowed;
 	}
 
+	&.is-success {
+		~ .#{$fieldname}-label {
+			color: _color("success");
+		}
+
+		&:hover {
+			&::placeholder {
+				color: _color("success", "light");
+			}
+		}
+
+		&, &:focus {
+			&::placeholder {
+				color: _color("success", "lighter");
+			}
+		}
+
+		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
+			color: _color("success");
+		}
+	}
+
+	&.is-warning {
+		~ .#{$fieldname}-label {
+			color: _color("warning");
+		}
+
+		&:hover {
+			&::placeholder {
+				color: _color("warning", "light");
+			}
+		}
+
+		&, &:focus {
+			&::placeholder {
+				color: _color("warning", "lighter");
+			}
+		}
+
+		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
+			color: _color("warning");
+		}
+	}
+
 	&.is-invalid, &.is-error {
 		~ .#{$fieldname}-label {
 			color: _color("error");
+		}
+
+		&:hover {
+			&::placeholder {
+				color: _color("error", "light");
+			}
+		}
+
+		&, &:focus {
+			&::placeholder {
+				color: _color("error", "lighter");
+			}
 		}
 
 		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {

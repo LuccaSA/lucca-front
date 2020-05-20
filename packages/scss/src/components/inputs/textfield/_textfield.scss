@@ -18,6 +18,7 @@
 	&::placeholder {
 		color: _component("textfield.input.placeholder");
 		transition: color _theme("commons.animations.durations.fast") ease;
+		opacity: 1;
 	}
 
 	&:hover {
@@ -275,7 +276,7 @@
 			&::after {
 				bottom: .5rem;
 				color: _color("primary", "light");
-				font-weight: normal;
+				font-weight: 400;
 			}
 		}
 	}
