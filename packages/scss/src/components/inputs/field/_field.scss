@@ -13,6 +13,8 @@
 				}
 
 				.#{$fieldname}-input {
+					background-color: _theme("palettes.#{$name}.lightest");
+
 					&:hover {
 						&::placeholder {
 							color: _theme("palettes.#{$name}.light");
@@ -23,6 +25,14 @@
 						&::placeholder {
 							color: _theme("palettes.#{$name}.lighter");
 						}
+					}
+
+					&:focus {
+						box-shadow: 0 0 0 2px _theme("palettes.#{$name}.color");
+					}
+
+					@if ($name == "error") {
+						box-shadow: 0 0 0 2px _theme("palettes.#{$name}.color");
 					}
 				}
 			}
@@ -153,6 +163,20 @@
 			.#{$fieldname}-label {
 				color: _color("error");
 			}
+
+			.#{$fieldname}-input {
+				&:hover {
+					&::placeholder {
+						color: _color("error", "light");
+					}
+				}
+
+				&, &:focus {
+					&::placeholder {
+						color: _color("error", "lighter");
+					}
+				}
+			}
 		}
 	}
 }
@@ -166,69 +190,15 @@
 	}
 
 	&.is-success {
-		~ .#{$fieldname}-label {
-			color: _color("success");
-		}
-
-		&:hover {
-			&::placeholder {
-				color: _color("success", "light");
-			}
-		}
-
-		&, &:focus {
-			&::placeholder {
-				color: _color("success", "lighter");
-			}
-		}
-
-		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
-			color: _color("success");
-		}
+		@include fieldState($fieldname, "success");
 	}
 
 	&.is-warning {
-		~ .#{$fieldname}-label {
-			color: _color("warning");
-		}
-
-		&:hover {
-			&::placeholder {
-				color: _color("warning", "light");
-			}
-		}
-
-		&, &:focus {
-			&::placeholder {
-				color: _color("warning", "lighter");
-			}
-		}
-
-		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
-			color: _color("warning");
-		}
+		@include fieldState($fieldname, "warning");
 	}
 
 	&.is-invalid, &.is-error {
-		~ .#{$fieldname}-label {
-			color: _color("error");
-		}
-
-		&:hover {
-			&::placeholder {
-				color: _color("error", "light");
-			}
-		}
-
-		&, &:focus {
-			&::placeholder {
-				color: _color("error", "lighter");
-			}
-		}
-
-		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
-			color: _color("error");
-		}
+		@include fieldState($fieldname, "error");
 	}
 }
 

@@ -1,46 +1,84 @@
-@mixin fieldError($fieldname) {
-	box-shadow: 0 0 0 2px _color("error");
-	background-color: _color("error", "lightest");
-
-	&::placeholder {
-		color: _color("error", "lighter");
-	}
+@mixin fieldState($fieldname, $state) {
+	background-color: _color($state, "lightest");
 
 	~ .#{$fieldname}-label {
-		color: _color("error");
+		color: _color($state);
 	}
 
-	&:focus ~ .#{$fieldname}-label {
-		color: _color("error");
+	&:hover {
+		&::placeholder {
+			color: _color($state, "light");
+		}
+	}
+
+	&, &:focus {
+		&::placeholder {
+			color: _color($state, "lighter");
+		}
+	}
+
+	&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
+		color: _color($state);
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 2px _color($state);
+	}
+
+	@if ($state == "error") {
+		box-shadow: 0 0 0 2px _color($state);
 	}
 }
 
-@mixin fieldMaterialError($fieldname) {
-	box-shadow: 0 2px 0 0 _color("error");
+@mixin fieldMaterialState($fieldname, $state) {
+	&:focus {
+		box-shadow: 0 2px 0 0 _color($state);
+	}
+
+	@if ($state == 'error') {
+		box-shadow: 0 2px 0 0 _color($state);
+	}
+
+	&:focus {
+		background-color: _color($state, "lightest");
+	}
 
 	~ .#{$fieldname}-label {
-		color: _color("error");
+		color: _color($state);
 	}
 
 	&:focus ~ .#{$fieldname}-label {
-		color: _color("error");
+		color: _color($state);
 	}
 }
 
-@mixin fieldFramedError($fieldname) {
-	background-color: _color("error", "see-through");
+@mixin fieldFramedState($fieldname, $state) {
+	background-color: _color($state, "see-through");
 
-	&::placeholder {
-		color: _color("error", "lighter");
+	&:hover {
+		&::placeholder {
+			color: _color($state, "light");
+		}
+	}
+
+	&, &:focus {
+		&::placeholder {
+			color: _color($state, "lighter");
+		}
 	}
 
 	&:focus, &:hover {
-		@include fakeBorder(1px, _color("error"));
-		background-color: _color("error", "see-through");
+		@include fakeBorder(1px, _color($state));
+		background-color: _color($state, "see-through");
 	}
 
 	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
-		color: _color("error") !important;
+		color: _color($state) !important;
+	}
+
+	@if ($state == 'error') {
+		@include fakeBorder(1px, _color($state));
+		z-index: 1;
 	}
 }
 

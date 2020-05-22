@@ -333,12 +333,6 @@
 			transform: scaleY(1);
 		}
 	}
-
-	&.is-invalid {
-		.textfield-input {
-			@include fieldError("textfield");
-		}
-	}
 }
 
 .textfield .textfield-input {
@@ -351,14 +345,6 @@
 
 		&::placeholder {
 			color: _theme("commons.disabled.placeholder");
-		}
-	}
-
-	&.is-error {
-		@include fieldError("textfield");
-
-		&:focus {
-			@include fieldError("textfield");
 		}
 	}
 }
