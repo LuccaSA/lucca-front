@@ -30,6 +30,10 @@
 	}
 }
 
+@mixin fieldError ($fieldname) {
+	@include fieldState($fieldname, "error");
+}
+
 @mixin fieldMaterialState($fieldname, $state) {
 	&:focus {
 		box-shadow: 0 2px 0 0 _color($state);
@@ -50,6 +54,10 @@
 	&:focus ~ .#{$fieldname}-label {
 		color: _color($state);
 	}
+}
+
+@mixin fieldMaterialError ($fieldname) {
+	@include fieldMaterialState($fieldname, "error");
 }
 
 @mixin fieldFramedState($fieldname, $state) {
@@ -80,6 +88,10 @@
 		@include fakeBorder(1px, _color($state));
 		z-index: 1;
 	}
+}
+
+@mixin fieldFramedError ($fieldname) {
+	@include fieldFramedState($fieldname, "error");
 }
 
 @mixin fieldMaterialFilled($fieldname) {
