@@ -17,9 +17,9 @@ import {
 	luTransformPopover,
 } from '@lucca-front/ng/popover';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
-import { ENTER, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
-import { merge, of } from 'rxjs';
-import { map, startWith, delay, share } from 'rxjs/operators';
+import { UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { merge, of, Subscription, Observable } from 'rxjs';
+import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-dropdown',
@@ -29,13 +29,7 @@ import { map, startWith, delay, share } from 'rxjs/operators';
 	exportAs: 'LuDropdownPanel',
 })
 export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
-	// protected _template: TemplateRef<any>;
-	// protected _templateContext: any;
 
-	// /** Template to Use for the popover */
-	// get template(): TemplateRef<any> {
-	// 	return this._template;
-	// }
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -80,6 +74,8 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this._itemsQL = ql;
 	}
 
+	private _subs = new Subscription();
+
 	constructor() {
 		super();
 	}
@@ -97,6 +93,14 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		// this._options$ = items$;
 		// this._initHighlight();
 		// this._initSelected();
+
+		const singleFlow$: Observable<boolean> = items$.pipe(
+			switchMap(items => merge(...items.map(i => i.onSelect))),
+			debounceTime(1),
+		);
+
+		const itemSelectSub = singleFlow$.subscribe(shouldClose => this.close.emit());
+		this._subs.add(itemSelectSub);
 	}
 	ngAfterViewInit() {
 		this.initItems();
@@ -105,6 +109,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	ngOnDestroy() {
 		this.onClose();
 		this.close.complete();
+		this._subs.unsubscribe();
 	}
 	_emitCloseEvent(): void {
 		this.close.emit();

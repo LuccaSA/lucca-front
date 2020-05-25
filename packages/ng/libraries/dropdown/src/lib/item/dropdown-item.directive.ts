@@ -19,10 +19,12 @@ export class LuDropdownItemDirective extends ALuDropdownItem implements OnDestro
 	) {
 		super();
 	}
-	@HostListener('click') onClick() {
+	@HostListener('click', ['$event']) onClick($event: Event) {
+		// $event.stopPropagation();
 		this.onSelect.emit(true);
 	}
-	@HostListener('keydown.enter') onEnter() {
+	@HostListener('keydown.enter', ['$event']) onEnter($event: Event) {
+		// $event.stopPropagation();
 		this.onSelect.emit(true);
 	}
 	focus() {
