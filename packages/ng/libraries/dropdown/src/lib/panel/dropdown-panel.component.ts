@@ -17,7 +17,7 @@ import {
 	luTransformPopover,
 } from '@lucca-front/ng/popover';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
-import { UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 import { merge, of, Subscription, Observable } from 'rxjs';
 import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/operators';
 
@@ -62,7 +62,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.templateRef = tr;
 	}
 
-	protected _highlightIndex = 0;
+	protected _highlightIndex = -1;
 	get highlightIndex() { return this._highlightIndex; }
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
@@ -89,10 +89,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 				share(),
 			);
 		items$.subscribe(i => this._items = i || []);
-		this.highlightIndex = 0;
-		// this._options$ = items$;
-		// this._initHighlight();
-		// this._initSelected();
+		this.highlightIndex = -1;
 
 		const singleFlow$: Observable<boolean> = items$.pipe(
 			switchMap(items => merge(...items.map(i => i.onSelect))),
@@ -133,6 +130,15 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 				break;
 			case DOWN_ARROW:
 				this._incrHighlight();
+				event.preventDefault();
+				event.stopPropagation();
+				break;
+			case TAB:
+				if (event.shiftKey) {
+					this._decrHighlight();
+				} else {
+					this._incrHighlight();
+				}
 				event.preventDefault();
 				event.stopPropagation();
 				break;
