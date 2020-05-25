@@ -1,15 +1,9 @@
-.lu-dropdown {
+.lu-dropdown-content {
 	margin: calc(#{_theme("spacings.smaller", true)} * -1);
 	margin: calc(#{_theme("spacings.smaller")} * -1);
-}
-
-.lu-dropdown-options,
-.lu-dropdown-options-item-children {
+	padding: 0;
 	border-radius: _theme("commons.border.radius", true);
 	border-radius: _theme("commons.border.radius");
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
 	width: _component("dropdown.width", true);
 	width: _component("dropdown.width");
 	max-width: _component("dropdown.max-width", true);
@@ -20,6 +14,14 @@
 	overflow-y: auto;
 }
 
+//.lu-dropdown-options-item-children, 
+.lu-dropdown-options {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+/*
 .lu-dropdown-options-item {
 	&.mod-withChildren {
 		border-color: _color("primary", "lighter", true);
@@ -53,10 +55,11 @@
 		}
 	}
 }
+*/
 
-.lu-dropdown-options-item-toggle,
-.lu-dropdown-options-item-action,
-.lu-dropdown-options-item-children-item-action {
+//.lu-dropdown-options-item-toggle,
+//.lu-dropdown-options-item-children-item-action,
+.lu-dropdown-options-item-action {
 	display: block;
 	background-color: transparent;
 	border: 0;
@@ -76,13 +79,21 @@
 	&:focus {
 		color: currentColor;
 	}
+
+	/*
+	&:focus {
+		outline: 1px dotted;
+	}
+	*/
 	
+	&:focus, // delete this line when sub-menus are implemented
 	&:hover {
 		background-color: _color("primary", "lightest", true);
 		background-color: _color("primary", "lightest");
 	}
 }
 
+/*
 .lu-dropdown-options-item-toggle {
 	position: relative;
 	padding-right: _theme("spacings.big", true);
@@ -98,3 +109,4 @@
 		font-size: _theme("sizes.smaller.font-size");
 	}
 }
+*/
