@@ -10,9 +10,12 @@
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	width: 14rem; // magic number
-	max-width: 90vw; // magic number
-	max-height: 60vh; // magic number
+	width: _component("dropdown.width", true);
+	width: _component("dropdown.width");
+	max-width: _component("dropdown.max-width", true);
+	max-width: _component("dropdown.max-width");
+	max-height: _component("dropdown.max-height", true);
+	max-height: _component("dropdown.max-height");
 	overflow-x: hidden;
 	overflow-y: auto;
 }
