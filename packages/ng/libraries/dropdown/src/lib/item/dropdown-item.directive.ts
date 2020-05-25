@@ -1,4 +1,4 @@
-import { Directive, forwardRef, ElementRef } from '@angular/core';
+import { Directive, forwardRef, ElementRef, HostListener, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { ALuDropdownItem } from './dropdown-item.model';
 
 @Directive({
@@ -12,13 +12,23 @@ import { ALuDropdownItem } from './dropdown-item.model';
 		}
 	]
 })
-export class LuDropdownItemDirective extends ALuDropdownItem {
+export class LuDropdownItemDirective extends ALuDropdownItem implements OnDestroy {
+	@Output() onSelect = new EventEmitter<boolean>();
 	constructor(
 		private _eltRef: ElementRef,
 	) {
 		super();
 	}
+	@HostListener('click') onClick() {
+		this.onSelect.emit(true);
+	}
+	@HostListener('keydown.enter') onEnter() {
+		this.onSelect.emit(true);
+	}
 	focus() {
 		this._eltRef.nativeElement.focus();
+	}
+	ngOnDestroy() {
+		this.onSelect.complete();
 	}
 }
