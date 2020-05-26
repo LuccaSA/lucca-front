@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
 	templateUrl: './select-me-first.component.html'
 })
 export class SelectMeFirstComponent {
+	item;
+	collection = [];
 }
