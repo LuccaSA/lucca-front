@@ -19,7 +19,7 @@ import { ALuDateAdapter, LuStringDateAdapter, LU_STRING_DATE_ADAPTER_OPTIONS } f
 	providers: [
 		
 		{ provide: LOCALE_ID, useValue: 'en-US' },
-		// { provide: LU_STRING_DATE_ADAPTER_OPTIONS, useValue: { useUtc: false, timezone: 'z' } },
+		{ provide: LU_STRING_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true, timezone: 'z' } },
 		{ provide: ALuDateAdapter, useClass: LuStringDateAdapter },
 	]
 })
