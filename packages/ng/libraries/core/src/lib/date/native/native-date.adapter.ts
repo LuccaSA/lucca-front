@@ -53,11 +53,11 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			// as i can write new Date(1234, 56, 78) and mr javascript accepts it
 			// i check now that the generated date has the same year/month/date as what i entered
 			if (this._options.useUtc) {
-				if (d.getUTCFullYear() !== year) { return false; }
+				if (d.getUTCFullYear() % 100 !== year) { return false; }
 				if (d.getUTCMonth() !== month - 1) { return false; }
 				if (d.getUTCDate() !== date) { return false; }
 			} else {
-				if (d.getFullYear() !== year) { return false; }
+				if (d.getFullYear() % 100 !== year) { return false; }
 				if (d.getMonth() !== month - 1) { return false; }
 				if (d.getDate() !== date) { return false; }
 			}
