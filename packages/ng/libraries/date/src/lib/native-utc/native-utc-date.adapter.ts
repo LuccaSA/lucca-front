@@ -29,11 +29,11 @@ export class LuNativeUTCDateAdapter extends ALuDateAdapter<Date> implements ILuD
 	isParsable(text: string): boolean {
 		if (!text) { return false; }
 		const groups = text.split(this._regex);
-		if (groups.length !== 3) { return false; }
+		if (groups.length !== 3 && groups.length !== 2) { return false; }
 		try {
 			const date = parseInt(groups[this._order.date], 10);
 			const month = parseInt(groups[this._order.month], 10);
-			const year = parseInt(groups[this._order.year], 10);
+			const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 			const d = new Date(Date.UTC(year, month - 1, date));
 			// checking if its a valid date
 			// https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
@@ -59,7 +59,7 @@ export class LuNativeUTCDateAdapter extends ALuDateAdapter<Date> implements ILuD
 		const groups = text.split(this._regex);
 		const date = parseInt(groups[this._order.date], 10);
 		const month = parseInt(groups[this._order.month], 10);
-		const year = parseInt(groups[this._order.year], 10);
+		const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 
 		return this.forge(year, month, date);
 	}
