@@ -48,7 +48,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 					break;
 				case 'gmt':
 					const gmtInfo = d.toString().match(/GMT(\+|-)\d{4}/i)[0];
-					result = `${d.toISOString().substring(0, 23)} ${gmtInfo}`;
+					result = `${d.toISOString().substring(0, 23)}${gmtInfo.substring(3)}`;
 					break;
 				case 'none':
 				default:
