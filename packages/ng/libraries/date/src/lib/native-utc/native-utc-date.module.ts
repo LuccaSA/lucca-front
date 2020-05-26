@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ALuDateAdapter } from '../adapter/index';
+import { ALuDateAdapter } from '@lucca-front/ng/core';
 import { LuNativeUTCDateAdapter } from './native-utc-date.adapter';
 
 @NgModule({

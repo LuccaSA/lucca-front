@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ALuDateAdapter } from './date-adapter.class';
+import { ALuDateAdapter } from '@lucca-front/ng/core';
 
 @Pipe({
 	name: 'luDate',

@@ -1,9 +1,9 @@
-import { DateGranularity } from '../adapter/index';
+import { ELuDateGranularity } from '@lucca-front/ng/core';
 
 export interface ICalendarItem<D> {
 	id: string;
 	date: D;
 	mods: string[];
 	label: string;
-	granularity: DateGranularity;
+	granularity: ELuDateGranularity;
 }

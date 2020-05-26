@@ -1,4 +1,4 @@
-import { ILuDateAdapter, ALuDateAdapter, DateGranularity } from '../adapter/index';
+import { ILuDateAdapter, ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { LOCALE_ID, Inject, Injectable } from '@angular/core';
 import { getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
 
@@ -99,21 +99,21 @@ export class LuNativeUTCDateAdapter extends ALuDateAdapter<Date> implements ILuD
 		return d.getUTCDay();
 	}
 
-	add(d: Date, count: number, granularity: DateGranularity): Date {
+	add(d: Date, count: number, granularity: ELuDateGranularity): Date {
 		let year = this.getYear(d);
 		let month = this.getMonth(d);
 		let date = this.getDate(d);
 		switch (granularity) {
-			case DateGranularity.decade:
+			case ELuDateGranularity.decade:
 				year += 10 * count;
 				break;
-			case DateGranularity.year:
+			case ELuDateGranularity.year:
 				year += count;
 				break;
-			case DateGranularity.month:
+			case ELuDateGranularity.month:
 				month += count;
 				break;
-			case DateGranularity.day:
+			case ELuDateGranularity.day:
 				date += count;
 				break;
 		}
