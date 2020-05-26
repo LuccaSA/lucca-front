@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface ILuNativeDateAdapterOptions {
-	useUtc: boolean;
+	useUtc?: boolean;
 }
 export const luDefaultNativeDateAdapterOptions: ILuNativeDateAdapterOptions = {
 	useUtc: false,
