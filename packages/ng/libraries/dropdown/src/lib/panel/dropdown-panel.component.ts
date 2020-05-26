@@ -17,7 +17,7 @@ import {
 	luTransformPopover,
 } from '@lucca-front/ng/popover';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
-import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
+// import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 import { merge, of, Subscription, Observable } from 'rxjs';
 import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/operators';
 
@@ -62,12 +62,12 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.templateRef = tr;
 	}
 
-	protected _highlightIndex = -1;
-	get highlightIndex() { return this._highlightIndex; }
-	set highlightIndex(i: number) {
-		this._highlightIndex = i;
-		this._applyHighlight();
-	}
+	// protected _highlightIndex = -1;
+	// get highlightIndex() { return this._highlightIndex; }
+	// set highlightIndex(i: number) {
+	// 	this._highlightIndex = i;
+	// 	this._applyHighlight();
+	// }
 	protected _items: ILuDropdownItem[] = [];
 	protected _itemsQL: QueryList<ILuDropdownItem>;
 	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(ql: QueryList<ILuDropdownItem>) {
@@ -89,7 +89,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 				share(),
 			);
 		items$.subscribe(i => this._items = i || []);
-		this.highlightIndex = -1;
+		// this.highlightIndex = -1;
 
 		const singleFlow$: Observable<boolean> = items$.pipe(
 			switchMap(items => merge(...items.map(i => i.onSelect))),
@@ -122,39 +122,49 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	// keydown
 	_handleKeydown(event: KeyboardEvent) {
 		super._handleKeydown(event);
-		switch (event.keyCode) {
-			case UP_ARROW:
-				this._decrHighlight();
-				event.preventDefault();
-				event.stopPropagation();
-				break;
-			case DOWN_ARROW:
-				this._incrHighlight();
-				event.preventDefault();
-				event.stopPropagation();
-				break;
-			case TAB:
-				if (event.shiftKey) {
-					this._decrHighlight();
-				} else {
-					this._incrHighlight();
-				}
-				event.preventDefault();
-				event.stopPropagation();
-				break;
-		}
+		// switch (event.keyCode) {
+		// 	case UP_ARROW:
+		// 		this._decrHighlight();
+		// 		if (!this._highlightOutOfBounds()) {
+		// 			event.preventDefault();
+		// 			event.stopPropagation();
+		// 		}
+		// 		break;
+		// 	case DOWN_ARROW:
+		// 		this._incrHighlight();
+		// 		if (!this._highlightOutOfBounds()) {
+		// 			event.preventDefault();
+		// 			event.stopPropagation();
+		// 		}
+		// 		break;
+		// 	case TAB:
+		// 		if (event.shiftKey) {
+		// 			this._decrHighlight();
+		// 		} else {
+		// 			this._incrHighlight();
+		// 		}
+		// 		if (!this._highlightOutOfBounds()) {
+		// 			event.preventDefault();
+		// 			event.stopPropagation();
+		// 		}
+		// 		break;
+		// }
 	}
-	protected _incrHighlight() {
-		const itemsCount = this._items.length;
-		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, itemsCount - 1), -1);
-	}
-	protected _decrHighlight() {
-		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
-	}
-	protected _applyHighlight() {
-		const highlightedItem = this._items[this.highlightIndex];
-		if (highlightedItem) {
-			highlightedItem.focus();
-		}
-	}
+	// protected _incrHighlight() {
+	// 	this.highlightIndex++;
+	// }
+	// protected _decrHighlight() {
+	// 	this.highlightIndex--;
+	// }
+	// protected _highlightOutOfBounds(): boolean {
+	// 	const itemsCount = this._items.length;
+	// 	return this.highlightIndex < 0 || this.highlightIndex >= itemsCount;
+	// }
+	// protected _applyHighlight() {
+
+	// 	const highlightedItem = this._items[this.highlightIndex];
+	// 	if (highlightedItem) {
+	// 		highlightedItem.focus();
+	// 	}
+	// }
 }
