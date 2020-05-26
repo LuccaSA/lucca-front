@@ -1,4 +1,4 @@
-import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ISuggestion } from '@lucca-front/ng/api';
+import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ILuApiSuggestion, ILuApiResponse } from '@lucca-front/ng/api';
 import { ILuUser } from '../../user.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -31,11 +31,16 @@ implements ILuApiPagedSearcherService<U> {
 		}
 	}
 	protected _get(url) {
-		return (<any>super._get(url) as Observable<ISuggestion<U>[]>)
+		return (<any>super._get(url) as Observable<ILuApiSuggestion<U>[]>)
 		.pipe(map(suggestions => suggestions.map(s => s.item)));
 	}
 	protected _clueFilter(clue) {
 		const urlSafeClue = clue.split(' ').map(c => encodeURIComponent(c)).join(',');
 		return `clue=${urlSafeClue}`;
+	}
+	protected getMe(): Observable<ILuUser> {
+		return this.http.get<ILuApiResponse<ILuUser>>(`/api/v3/users/me?${this.fields}`).pipe(
+			map(r => r.data),
+		);
 	}
 }

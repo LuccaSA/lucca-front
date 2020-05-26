@@ -1,6 +1,6 @@
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator } from '@lucca-front/ng/option';
-import { IApiItem } from '../../api.model';
+import { ILuApiItem } from '../../api.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, merge, Subject } from 'rxjs';
 import { switchMap, catchError, mapTo, tap, map, distinctUntilChanged } from 'rxjs/operators';
@@ -11,12 +11,12 @@ enum Strategy {
 	replace,
 }
 const MAGIC_PAGE_SIZE = 20;
-export interface ILuApiOptionPager<T extends IApiItem = IApiItem> extends ILuOptionOperator<T> {}
-export interface ILuApiPagerService<T extends IApiItem = IApiItem> {
+export interface ILuApiOptionPager<T extends ILuApiItem = ILuApiItem> extends ILuOptionOperator<T> {}
+export interface ILuApiPagerService<T extends ILuApiItem = ILuApiItem> {
 	getPaged(page: number): Observable<T[]>;
 }
 
-export abstract class ALuApiOptionPager<T extends IApiItem = IApiItem, S extends ILuApiPagerService<T> = ILuApiPagerService<T>>
+export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S extends ILuApiPagerService<T> = ILuApiPagerService<T>>
 implements ILuApiOptionPager<T>, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
@@ -78,7 +78,7 @@ implements ILuApiOptionPager<T>, ILuOnOpenSubscriber, ILuOnScrollBottomSubscribe
 	}
 }
 
-export abstract class ALuApiPagerService<T extends IApiItem = IApiItem> extends ALuApiFeederService<T> implements ILuApiPagerService<T> {
+export abstract class ALuApiPagerService<T extends ILuApiItem = ILuApiItem> extends ALuApiFeederService<T> implements ILuApiPagerService<T> {
 	constructor(protected http: HttpClient) { super(http); }
 	getPaged(page = 0) {
 		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;

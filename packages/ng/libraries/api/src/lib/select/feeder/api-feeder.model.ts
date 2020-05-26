@@ -1,15 +1,15 @@
 import { ILuOptionOperator } from '@lucca-front/ng/option';
-import { IApiItem, IApiCollectionResponse } from '../../api.model';
+import { ILuApiItem, ILuApiCollectionResponse } from '../../api.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-export interface ILuApiOptionFeeder<T extends IApiItem = IApiItem> extends ILuOptionOperator<T> {}
-export interface ILuApiFeederService<T extends IApiItem = IApiItem> {
+export interface ILuApiOptionFeeder<T extends ILuApiItem = ILuApiItem> extends ILuOptionOperator<T> {}
+export interface ILuApiFeederService<T extends ILuApiItem = ILuApiItem> {
 	getAll(): Observable<T[]>;
 }
 
-export abstract class ALuApiOptionFeeder<T extends IApiItem = IApiItem, S extends ILuApiFeederService<T> =  ILuApiFeederService<T>>
+export abstract class ALuApiOptionFeeder<T extends ILuApiItem = ILuApiItem, S extends ILuApiFeederService<T> =  ILuApiFeederService<T>>
 implements ILuApiOptionFeeder<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	protected _service: S;
@@ -22,7 +22,7 @@ implements ILuApiOptionFeeder<T> {
 	}
 }
 
-export abstract class ALuApiFeederService<T extends IApiItem = IApiItem> implements ILuApiFeederService<T> {
+export abstract class ALuApiFeederService<T extends ILuApiItem = ILuApiItem> implements ILuApiFeederService<T> {
 	protected _api: string;
 	set api(api: string) { this._api = api; }
 	protected _fields = 'fields=id,name';
@@ -42,7 +42,7 @@ export abstract class ALuApiFeederService<T extends IApiItem = IApiItem> impleme
 		return this._get(this.url);
 	}
 	protected _get(url): Observable<T[]> {
-		return this.http.get<IApiCollectionResponse<any>>(url)
+		return this.http.get<ILuApiCollectionResponse<any>>(url)
 		.pipe(map(response => response.data.items.map(i => this._transformFn(i))));
 	}
 }
