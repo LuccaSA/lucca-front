@@ -28,7 +28,7 @@ registerLocaleData(localeGb);
 		// { provide: LOCALE_ID, useValue: 'fr-FR' },
 		{ provide: LOCALE_ID, useValue: 'en-GB' },
 		// { provide: LOCALE_ID, useValue: 'en-US' },
-		{ provide: LU_NATIVE_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+		{ provide: LU_NATIVE_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true} },
 		{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },
 	]
 })
