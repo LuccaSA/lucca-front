@@ -29,7 +29,7 @@ export class LuTreeOptionPlaceholderComponent<T = any> extends ALuTreeOptionOper
 	) {
 		super();
 	}
-	private _toggle(options: T[]) {
+	private _toggle(options: ILuTree<T>[]) {
 		if (!options || !options.length) {
 			this.displayed = true;
 		} else {
