@@ -7,6 +7,7 @@ import {
 	LuTreeOptionPickerModule,
 	LuTreeOptionItemModule,
 	LuTreeOptionOperatorModule,
+	LuTreeOptionSelectorModule,
 } from '@lucca-front/ng/option';
 import { LuDepartmentFeederModule } from '../feeder/index';
 import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.token';
@@ -24,6 +25,7 @@ import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 		LuTreeOptionPickerModule,
 		LuTreeOptionItemModule,
 		LuTreeOptionOperatorModule,
+		LuTreeOptionSelectorModule,
 	],
 	declarations: [
 		LuDepartmentSelectInputComponent,
