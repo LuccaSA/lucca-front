@@ -12,6 +12,8 @@ export class SelectOptionPlaceholderComponent {
 		return color.code;
 	}
 	item;
+	dpt;
+	user;
 	colors = [
 		{ name: 'aliceblue', code: '#f0f8ff' },
 		{ name: 'antiquewhite', code: '#faebd7' },

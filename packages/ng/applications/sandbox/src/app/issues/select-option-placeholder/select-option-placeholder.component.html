@@ -1,4 +1,5 @@
 <h1>select-option-placeholder</h1>
+<h2>Basic select</h2>
 <div class="textfield">
 	<lu-select class="textfield-input" [(ngModel)]="item">
 		<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
@@ -14,4 +15,15 @@
 			<lu-option-placeholder></lu-option-placeholder>
 		</lu-option-picker-advanced>
 	</lu-select>
+</div>
+<h2>Api select</h2>
+<div class="textfield">
+	<lu-api-select class="textfield-input" [(ngModel)]="dpt" api="/api/v3/departments" placeholder="Everything"></lu-api-select>
+	<label class="textfield-label">Woobwoob</label>
+</div>
+<h2>User select</h2>
+<h2>Single</h2>
+<div class="textfield">
+	<lu-user-select class="textfield-input" [(ngModel)]="user"></lu-user-select>
+	<label for="" class="textfield-label">user select</label>
 </div>
