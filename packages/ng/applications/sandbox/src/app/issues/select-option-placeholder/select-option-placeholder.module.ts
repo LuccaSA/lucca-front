@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RedirectModule } from '../../redirect';
 import { LuApiModule } from '@lucca-front/ng/api';
 import { LuUserModule } from '@lucca-front/ng/user';
+import { LuDepartmentModule } from '@lucca-front/ng/department';
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { LuUserModule } from '@lucca-front/ng/user';
 		RedirectModule,
 		LuApiModule,
 		LuUserModule,
+		LuDepartmentModule,
 
 	],
 })
