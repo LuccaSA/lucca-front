@@ -5,11 +5,8 @@ import { LuInputClearerModule } from '@lucca-front/ng/input';
 import { LuInputDisplayerModule } from '@lucca-front/ng/input';
 import {
 	LuTreeOptionPickerModule,
-	LuTreeOptionPagerModule,
-	LuTreeOptionSearcherModule,
 	LuTreeOptionItemModule,
-	LuForTreeOptionsModule,
-	LuTreeOptionSelectAllModule
+	LuTreeOptionOperatorModule,
 } from '@lucca-front/ng/option';
 import { LuDepartmentFeederModule } from '../feeder/index';
 import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.token';
@@ -22,12 +19,11 @@ import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 		LuInputClearerModule,
 		LuInputDisplayerModule,
 		LuTreeOptionPickerModule,
-		LuTreeOptionPagerModule,
-		LuTreeOptionSearcherModule,
 		LuTreeOptionItemModule,
-		LuForTreeOptionsModule,
-		LuTreeOptionSelectAllModule,
 		LuDepartmentFeederModule,
+		LuTreeOptionPickerModule,
+		LuTreeOptionItemModule,
+		LuTreeOptionOperatorModule,
 	],
 	declarations: [
 		LuDepartmentSelectInputComponent,
