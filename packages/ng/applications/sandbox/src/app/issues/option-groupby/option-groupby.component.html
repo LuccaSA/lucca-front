@@ -11,7 +11,10 @@
 			<!-- adds paging to the results to not break your DOM -->
 			<lu-option-pager></lu-option-pager>
 			<!-- specify the template to display each color -->
-			<lu-option *luForOptions="let color; trackBy: trackBy" [value]="color">{{color.name}}</lu-option>
+			<lu-option *luForOptions="let color; trackBy: trackBy" [value]="color">
+				<div class="color-preview" [style.background-color]="color.code"></div>
+				{{color.name}}
+			</lu-option>
 		</lu-option-picker-advanced>
 	</lu-select>
 	<label for="" class="textfield-label">colors not grouped</label>
@@ -30,8 +33,12 @@
 			<!-- specify the template to display each color -->
 			<!-- <lu-option *luForOptions="let color; trackBy: trackBy" [value]="color">{{color.name}}</lu-option> -->
 			<ng-template luForGroups let-group [luForGroupsGroupBy]="groupBy">
-				<h6>{{group.key}}</h6>
-				<lu-option *ngFor="let color of group.items; trackBy: trackBy" [value]="color">{{color.name}}</lu-option>
+				<h4>{{group.key}}</h4>
+
+				<lu-option *ngFor="let color of group.items; trackBy: trackBy" [value]="color">
+					<div class="color-preview" [style.background-color]="color.code"></div>
+					{{color.name}}
+				</lu-option>
 			</ng-template>
 		</lu-option-picker-advanced>
 	</lu-select>

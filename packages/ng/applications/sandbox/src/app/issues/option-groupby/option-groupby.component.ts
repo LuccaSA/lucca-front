@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'sand-option-groupby',
-	templateUrl: './option-groupby.component.html'
+	templateUrl: './option-groupby.component.html',
+	styles: [
+		`.color-preview { height: 16px; width: 16px; display: inline-block; }`
+	]
 })
 export class OptionGroupbyComponent {
 	searchFn(o, c) {
@@ -12,7 +15,14 @@ export class OptionGroupbyComponent {
 		return color.code;
 	}
 	groupBy(color): string {
-		return 'all';
+		const hsl = hexToHsl(color.code);
+		if (hsl.l < .1 ) { return 'Blacks'; }
+		if (hsl.l > .95 ) { return 'Whites'; }
+		if (hsl.s < .1 ) { return 'Greys'; }
+		if (hsl.h < 1/6) { return 'Reds'; }
+		if (hsl.h < 3/6) { return 'Greens'; }
+		if (hsl.h < 5/6) { return 'Blues'; }
+		return 'Reds';
 	}
 	item;
 	colors = [
@@ -165,4 +175,31 @@ export class OptionGroupbyComponent {
 		{ name: 'yellow', code: '#ffff00' },
 		{ name: 'yellowgreen', code: '#9acd32' },
 	];
+}
+
+function hexToHsl(hex: string) {
+	const r = parseInt(hex.substring(1, 3), 16) / 255;
+	const g = parseInt(hex.substring(3, 5), 16) / 255;
+	const b = parseInt(hex.substring(5, 7), 16) / 255;
+	// r /= 255, g /= 255, b /= 255;
+
+	const max = Math.max(r, g, b), min = Math.min(r, g, b);
+	let h, s, l = (max + min) / 2;
+
+	if (max == min) {
+		h = s = 0; // achromatic
+	} else {
+		let d = max - min;
+		s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+		switch (max) {
+			case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+			case g: h = (b - r) / d + 2; break;
+			case b: h = (r - g) / d + 4; break;
+		}
+
+		h /= 6;
+	}
+
+	return { h, s, l };
 }

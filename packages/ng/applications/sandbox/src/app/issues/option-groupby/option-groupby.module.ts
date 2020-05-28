@@ -7,6 +7,7 @@ import { LuSelectModule } from '@lucca-front/ng/select';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
 	declarations: [
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 	],
 	imports: [
 		FormsModule,
+		CommonModule,
 		LuSelectModule,
 		LuOptionModule,
 		LuInputModule,
