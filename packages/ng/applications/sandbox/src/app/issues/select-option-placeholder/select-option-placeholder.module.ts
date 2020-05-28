@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { SelectOptionPlaceholderComponent } from './select-option-placeholder.component';
@@ -33,5 +33,8 @@ import { LuDepartmentModule } from '@lucca-front/ng/department';
 		LuDepartmentModule,
 
 	],
+	providers: [
+		{ provide: LOCALE_ID, useValue: 'fr-FR' }
+	]
 })
 export class SelectOptionPlaceholderModule {}
