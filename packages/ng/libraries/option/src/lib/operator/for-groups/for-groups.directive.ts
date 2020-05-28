@@ -33,7 +33,7 @@ export class LuForGroupContext<T> {
 export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionOperator<TItem>, OnDestroy {
 
 	private _groupByFn: (item: TItem) => TKey;
-	@Input('luForGroupGroupBy')
+	@Input('luForGroupsGroupBy')
 	public set attrGroupBy(fn: (item: TItem) => TKey) {
 		this._groupByFn = fn;
 	}
@@ -59,10 +59,8 @@ export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionO
 		this._vcr.clear();
 		const count = options.length;
 		const groups = this.groupBy(options);
-		const views = [];
 		groups.forEach((group, index) => {
 			const view = this._vcr.createEmbeddedView(this._templateRef, new LuForGroupContext<ILuGroup<TItem, TKey>>(group, index, count));
-			views.push(view);
 		});
 		this._cdr.markForCheck();
 	}
@@ -71,7 +69,11 @@ export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionO
 		const groups: ILuGroup<TItem, TKey>[] = [];
 		items.forEach((item) => {
 			const key = this._groupByFn(item);
-			const group = groups.find(g => g.key === key) || { key: key, items: [] }
+			let group = groups.find(g => g.key === key);
+			if (!group) {
+				group = { key: key, items: [] };
+				groups.push(group);
+			}
 			group.items.push(item);
 		});
 		return groups;
