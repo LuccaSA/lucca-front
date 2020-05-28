@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class OptionGroupbyComponent {
 	searchFn(o, c) {
-		return o.name.startsWith(c);
+		return o.name.includes(c);
 	}
 	trackBy(idx, color): string {
 		return color.code;
