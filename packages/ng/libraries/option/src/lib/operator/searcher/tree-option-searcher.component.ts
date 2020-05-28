@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding, Inject } from '@angular/core';
 import { Observable, combineLatest, merge, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { tap, map } from 'rxjs/operators';
+import { LuOptionSearcherIntl } from './option-searcher.intl';
+import { ILuOptionSearcherLabel } from './option-searcher.translate';
 @Component({
 	selector: 'lu-tree-option-searcher',
 	templateUrl: './option-searcher.component.html',
@@ -44,6 +46,11 @@ export class LuTreeOptionSearcherComponent<T = any> extends ALuTreeOptionOperato
 		);
 	}
 	@Input() searchFn: (option: T, clue: string) => boolean = () => true;
+	constructor(
+		@Inject(LuOptionSearcherIntl) public intl: ILuOptionSearcherLabel,
+	){
+		super();
+	}
 	onOpen() {
 		this.searchInput.nativeElement.focus();
 		this.searchControl.setValue('');

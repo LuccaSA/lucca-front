@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="empty$ | async" class="optionPlaceholder">
 	<p class="optionPlaceholder-content u-marginBottomReset">
-		No results match your search criteria.
+		{{intl.emptyDescription}}
 	</p>
-	<button class="link" (click)="resetClue()">Clear search</button>
+	<button class="link" (click)="resetClue()">{{intl.emptyAction}}</button>
 </div>
