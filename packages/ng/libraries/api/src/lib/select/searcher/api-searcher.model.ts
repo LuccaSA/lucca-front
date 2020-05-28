@@ -10,6 +10,7 @@ import {
 	switchMap,
 	distinctUntilChanged,
 	catchError,
+	map,
 } from 'rxjs/operators';
 
 import { IApiItem } from '../../api.model';
@@ -26,6 +27,7 @@ export abstract class ALuApiOptionSearcher<T extends IApiItem = IApiItem, S exte
 implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
+	empty$: Observable<boolean>; 
 
 	protected _clue$: Observable<string>;
 
@@ -49,6 +51,9 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 		this.loading$ = merge(
 			this._clue$.pipe(mapTo(true)),
 			results$.pipe(mapTo(false)),
+		);
+		this.empty$ = results$.pipe(
+			map(o => o.length === 0),
 		);
 	}
 	abstract resetClue();
@@ -151,6 +156,9 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 			results$.pipe(mapTo(false)),
 		);
 		this.loading$.subscribe(l => this._loading = l);
+		this.empty$ = results$.pipe(
+			map(o => o.length === 0),
+		);
 	}
 	abstract resetClue();
 	resetPage() {

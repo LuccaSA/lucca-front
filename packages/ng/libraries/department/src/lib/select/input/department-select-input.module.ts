@@ -19,8 +19,6 @@ import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 		CommonModule,
 		LuInputClearerModule,
 		LuInputDisplayerModule,
-		LuTreeOptionPickerModule,
-		LuTreeOptionItemModule,
 		LuDepartmentFeederModule,
 		LuTreeOptionPickerModule,
 		LuTreeOptionItemModule,

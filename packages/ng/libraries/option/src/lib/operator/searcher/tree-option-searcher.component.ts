@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuTree } from '@lucca-front/ng/core';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 @Component({
 	selector: 'lu-tree-option-searcher',
 	templateUrl: './option-searcher.component.html',
@@ -24,9 +24,9 @@ import { tap } from 'rxjs/operators';
 	],
 })
 export class LuTreeOptionSearcherComponent<T = any> extends ALuTreeOptionOperator<T> implements ILuTreeOptionOperator<T>, ILuOnOpenSubscriber {
-	@HostBinding('class.position-fixed') fixed = true;
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
+	empty$: Observable<boolean>;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
 		this.outOptions$ = combineLatest(
@@ -38,8 +38,9 @@ export class LuTreeOptionSearcherComponent<T = any> extends ALuTreeOptionOperato
 				}
 				return this.trim(options, clue);
 			}
-		).pipe(
-			tap(o => o),
+		);
+		this.empty$ = this.outOptions$.pipe(
+			map(o => !o || o.length === 0),
 		);
 	}
 	@Input() searchFn: (option: T, clue: string) => boolean = () => true;
@@ -58,5 +59,8 @@ export class LuTreeOptionSearcherComponent<T = any> extends ALuTreeOptionOperato
 			}
 			return undefined;
 		}).filter(o => !!o);
+	}
+	resetClue() {
+		this.searchControl.setValue('');
 	}
 }
