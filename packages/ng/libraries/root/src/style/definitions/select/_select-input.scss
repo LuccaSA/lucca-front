@@ -21,6 +21,12 @@
 
 		&[disabled] {
 			cursor: not-allowed;
+			pointer-events: all;
+		}
+
+		&.is-disabled {
+			cursor: not-allowed;
+			pointer-events: all;
 		}
 	}
 
