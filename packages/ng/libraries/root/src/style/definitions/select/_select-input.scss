@@ -37,12 +37,14 @@
 	}
 
 	.lu-select-value {
-		line-height: 1.5rem;
-		min-height: 2.5rem;
-		padding: #{_component("select.input.padding-vertical", true)} 1.5rem
+		line-height: _theme("sizes.standard.line-height", true);
+		line-height: _theme("sizes.standard.line-height");
+		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
+		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
+		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
 			#{_component("select.input.padding-vertical", true)}
 			#{_component("select.input.padding-horizontal", true)};
-		padding: _component("select.input.padding-vertical") 1.5rem
+		padding: _component("select.input.padding-vertical") 2.5rem
 			_component("select.input.padding-vertical")
 			_component("select.input.padding-horizontal");
 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
@@ -51,12 +53,14 @@
 	}
 
 	.lu-select-placeholder {
-		line-height: 1.5rem;
-		min-height: 2.5rem;
-		padding: #{_component("select.input.padding-vertical", true)} 1.5rem
+		line-height: _theme("sizes.standard.line-height", true);
+		line-height: _theme("sizes.standard.line-height");
+		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
+		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
+		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
 			#{_component("select.input.padding-vertical", true)}
 			#{_component("select.input.padding-horizontal", true)};
-		padding: _component("select.input.padding-vertical") 1.5rem
+		padding: _component("select.input.padding-vertical") 2.5rem
 			_component("select.input.padding-vertical")
 			_component("select.input.padding-horizontal");
 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
@@ -68,23 +72,31 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: .4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
-		right: calc(2.75 * #{_component("select.input.padding-horizontal", true)});
-		right: calc(2.75 * #{_component("select.input.padding-horizontal")});
+		bottom: .5rem;
+		right: 1.6rem;
 	}
 
-	::ng-deep .lu-select-value .chip {
-		background: _component("select.chip.background", true);
-		background: _component("select.chip.background");
-		color: _component("select.chip.text", true);
-		color: _component("select.chip.text");
-		vertical-align: baseline;
-		height: 1.5rem;
-		line-height: 1.5rem;
-		padding: 0 _theme("spacings.smaller", true);
-		padding: 0 _theme("spacings.smaller");
-		margin: 0 .25rem 0 0;
-	}
+	::ng-deep .lu-select-value {
+		.label {
+			padding: _theme("spacings.smallest", true) .25rem .5rem _theme("spacings.smaller", true);
+			padding: _theme("spacings.smallest") _theme("spacings.smaller");
+			margin-left: 0;
+		}
+		.chip {
+			background: _component("select.chip.background", true);
+			background: _component("select.chip.background");
+			color: _component("select.chip.text", true);
+			color: _component("select.chip.text");
+			vertical-align: baseline;
+			height: _theme("sizes.standard.line-height", true);
+			height: _theme("sizes.standard.line-height");
+			line-height: _theme("sizes.standard.line-height", true);
+			line-height: _theme("sizes.standard.line-height");
+			padding: 0 _theme("spacings.smaller", true);
+			padding: 0 _theme("spacings.smaller");
+			margin: 0 .25rem 0 0;
+		}
+	} 
 
 
 	// MODS
@@ -93,19 +105,43 @@
 	// Small
 	:host-context(.textfield.mod-small) {
 		.lu-select-value, .lu-select-placeholder {
+			font-size: _theme("sizes.small.font-size", true);
 			font-size: _theme("sizes.small.font-size");
+			line-height: _theme("sizes.small.line-height", true);
 			line-height: _theme("sizes.small.line-height");
-			min-height: 2rem;
+			min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.small.line-height", true)});
+			min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.small.line-height")});
 		}
 
 		&::after {
-			font-size: 1rem;
-			line-height: 1rem;
+			line-height: _theme("sizes.small.line-height", true);
+			line-height: _theme("sizes.small.line-height");
+		}
+
+		::ng-deep .lu-select-value {
+			.label {
+				font-size: _theme("sizes.small.font-size", true);
+				font-size: _theme("sizes.small.font-size");
+				line-height: _theme("sizes.small.line-height", true);
+				line-height: _theme("sizes.small.line-height");
+				font-weight: 600;
+				margin: 0;
+				padding: 0;
+				background: transparent;
+			}
+
+			.chip {
+				height: _theme("sizes.small.line-height", true);
+				height: _theme("sizes.small.line-height");
+				line-height: _theme("sizes.small.line-height", true);
+				line-height: _theme("sizes.small.line-height");
+			}
 		}
 	}
 
 	// Framed
-	:host-context(.textfield.mod-framed) {
+	:host-context(.textfield.mod-framed),
+	:host-context(.form.mod-framed) {
 		&.textfield-input {
 			padding: #{_component("select.framed.top-padding", true)} 0 0;
 			padding: _component("select.framed.top-padding") 0 0;
@@ -113,9 +149,10 @@
 			&::after {
 				color: _color("text.light", "color", true);
 				color: _color("text.light");
-				bottom: 0.95rem;
-				right: _component("select.framed.side-padding", true);
-				right: _component("select.framed.side-padding");
+				bottom: _component("select.framed.bottom-padding", true);
+				bottom: _component("select.framed.bottom-padding");
+				right: _theme("spacings.smaller", true);
+				right: _theme("spacings.smaller");
 			}
 
 			.lu-select-value, .lu-select-placeholder {
@@ -128,13 +165,9 @@
 			}
 
 			.lu-select-suffix {
-				bottom: 0.85rem;
-				right: calc(3.75 * #{_component("select.input.padding-horizontal", true)});
-				right: calc(3.75 * #{_component("select.input.padding-horizontal")});
-			}
-
-			&.mod-multiple.mod-multipleView.is-filled .lu-select-value {
-				margin-bottom: -.3rem;
+				bottom: _component("select.framed.bottom-padding", true);
+				bottom: _component("select.framed.bottom-padding");
+				right: 1.7rem;
 			}
 		}
 	}
@@ -199,18 +232,10 @@
 
 	// Multiple
 	:host(.mod-multiple) {
-		.lu-select-display-wrapper .label {
-			height: 1.4rem;
-			min-width: 1.4rem;
-			line-height: 1.6;
-			padding: 0 .4rem;
-		}
 		&.mod-multipleView:not(.mod-singleLine) {
 			.lu-select-value {
 				height: auto;
 				align-items: center;
-				padding-bottom: 0;
-				padding-top: 0;
 			}
 
 			.lu-select-display-wrapper {
