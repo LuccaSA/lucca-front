@@ -115,6 +115,44 @@
 		</div>
 	</div>
 
+	<div class="textfield mod-framed">
+		<input class="textfield-input" value="Filter">
+		<label class="textfield-label">Textfield framed</label>
+	</div>
+
+	<div class="textfield mod-framed">
+		<lu-select class="textfield-input" [(ngModel)]="model">
+			<span *luDisplayer="let value">{{value}}</span>
+			<lu-input-clearer *ngIf="true"></lu-input-clearer>
+			<lu-option-picker>
+				<lu-option value="1">1</lu-option>
+				<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze
+					fojizefzfzeof ezf
+				</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<label class="textfield-label">Select single mod-framed</label>
+	</div>
+
+	<div class="textfield mod-framed">
+		<lu-select [(ngModel)]="items" class="textfield-input" multiple>
+			<ng-container *luDisplayer="let values; multiple: true">
+				<span class="label">{{values?.length || 0}}</span> colors selected
+			</ng-container>
+			<lu-option-picker>
+				<lu-option [value]="green">{{green.name}}</lu-option>
+				<lu-option [value]="red">{{red.name}}</lu-option>
+				<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+				<lu-option [value]="orange">{{orange.name}}</lu-option>
+				<lu-option [value]="purple">{{purple.name}}</lu-option>
+				<lu-option [value]="pink">{{pink.name}}</lu-option>
+				<lu-option [value]="blue">{{blue.name}}</lu-option>
+			</lu-option-picker>
+			<lu-input-clearer></lu-input-clearer>
+		</lu-select>
+		<label class="textfield-label" for="itemOptions">Select multiple onelinge</label>
+	</div>
+
 	<h2>Select mod framed</h2>
 	<div class="form mod-framed">
 		<div class="form-group">
@@ -241,5 +279,57 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="form mod-framed">
+		<div class="form-group">
+			<div class="form-group-line">
+				<div class="form-group-line-lg3">
+					<div class="textfield mod-framed">
+						<lu-select [(ngModel)]="items" class="textfield-input" multiple>
+							<ng-container *luDisplayer="let values; multiple: true">
+								<span class="label">{{values?.length || 0}}</span> colors selected
+							</ng-container>
+							<lu-option-picker>
+								<lu-option [value]="green">{{green.name}}</lu-option>
+								<lu-option [value]="red">{{red.name}}</lu-option>
+								<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+								<lu-option [value]="blue">{{blue.name}}</lu-option>
+							</lu-option-picker>
+							<lu-input-clearer></lu-input-clearer>
+						</lu-select>
+						<label class="textfield-label" for="itemOptions">Select multiple onelinge</label>
+					</div>
+				</div>
+				<div class="form-group-line-lg3">
+					<div class="textfield mod-framed">
+						<lu-api-select class="textfield-input" [(ngModel)]="item" api="/api/v3/axissections"></lu-api-select>
+						<label class="textfield-label" for="itemOptions">Lu Api</label>
+					</div>
+				</div>
+				<div class="form-group-line-lg3">
+					<div class="textfield mod-framed mod-small">
+						<lu-select [(ngModel)]="items" class="textfield-input" multiple>
+							<ng-container *luDisplayer="let values; multiple: true">
+								<span class="label">{{values?.length || 0}}</span> colors selected
+							</ng-container>
+							<lu-option-picker>
+								<lu-option [value]="green">{{green.name}}</lu-option>
+								<lu-option [value]="red">{{red.name}}</lu-option>
+								<lu-option [value]="yellow">{{yellow.name}}</lu-option>
+								<lu-option [value]="blue">{{blue.name}}</lu-option>
+							</lu-option-picker>
+							<lu-input-clearer></lu-input-clearer>
+						</lu-select>
+						<label class="textfield-label" for="itemOptions">Select multiple onelinge</label>
+					</div>
+				</div>
+				<div class="form-group-line-lg3">
+					<div class="textfield mod-framed mod-small">
+						<lu-api-select class="textfield-input" [(ngModel)]="item" api="/api/v3/axissections"></lu-api-select>
+						<label class="textfield-label" for="itemOptions">Lu Api</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </section>

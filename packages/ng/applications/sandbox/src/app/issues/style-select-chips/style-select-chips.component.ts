@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 	templateUrl: './style-select-chips.component.html'
 })
 export class StyleSelectChipsComponent {
+	item;
 	model = '1';
 	red = { id: 1, name: 'red' };
 	green = { id: 2, name: 'green' };
