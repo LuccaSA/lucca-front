@@ -57,6 +57,7 @@ const routes: Routes = [
 	{ path: 'dropdown', loadChildren: () => import('./dropdown').then(m => m.DropdownModule) },
 	{ path: 'date-string', loadChildren: () => import('./date-string').then(m => m.DateStringModule) },
 	{ path: 'select-me-first', loadChildren: () => import('./select-me-first').then(m => m.SelectMeFirstModule) },
+	{ path: 'style-select-chips', loadChildren: () => import('./style-select-chips').then(m => m.StyleSelectChipsModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
