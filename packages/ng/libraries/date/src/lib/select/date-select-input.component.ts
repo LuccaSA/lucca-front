@@ -8,7 +8,6 @@ import {
 	ViewChild,
 	Input,
 	Renderer2,
-	AfterContentInit,
 	AfterViewInit,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
@@ -16,7 +15,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ALuDateAdapter, DateGranularity } from '../adapter/index';
+import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-date-select',
@@ -76,10 +75,10 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 		const d = control.value;
 		if (!d) { return null; }
 		if (!this._adapter.isValid(d)) { return { 'date': true }; }
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, DateGranularity.day) > 0) {
+		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
 			return { 'min': true };
 		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, DateGranularity.day) < 0) {
+		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
 			return { 'max': true };
 		}
 		return null;

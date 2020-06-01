@@ -55,6 +55,7 @@ const routes: Routes = [
 	{ path: 'popover-accessible', loadChildren: () => import('./popover-accessible').then(m => m.PopoverAccessibleModule) },
 	{ path: 'modal-undismissable', loadChildren: () => import('./modal-undismissable').then(m => m.ModalUndismissableModule) },
 	{ path: 'dropdown', loadChildren: () => import('./dropdown').then(m => m.DropdownModule) },
+	{ path: 'date-string', loadChildren: () => import('./date-string').then(m => m.DateStringModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
