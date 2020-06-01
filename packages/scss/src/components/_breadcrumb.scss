@@ -3,7 +3,7 @@
 
 	&::before {
 		@include makeIcon("arrow_west");
-		font-size: .75rem;
+		vertical-align: middle;
 		color: _color("text.light");
 		margin-right: _theme("spacings.smaller");
 	}

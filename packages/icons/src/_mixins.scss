@@ -5,7 +5,7 @@
 		content: map-get($mappings, $ligature);
 		font-family: "Lucca icons";
 		display: inline-block;
-		vertical-align: middle;
+		vertical-align: text-bottom;
 		font-style: normal;
 	} @else {
 		@error "'#{$ligature}' wasn't found in @lucca-front/icons $mappings map";

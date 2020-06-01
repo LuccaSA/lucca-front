@@ -53,6 +53,7 @@ const routes: Routes = [
 	{ path: 'user-select-homonyms', loadChildren: () => import('./user-select-homonyms').then(m => m.UserSelectHomonymsModule) },
 	{ path: 'user-select-translate', loadChildren: () => import('./user-select-translate').then(m => m.UserSelectTranslateModule) },
 	{ path: 'popover-accessible', loadChildren: () => import('./popover-accessible').then(m => m.PopoverAccessibleModule) },
+	{ path: 'modal-undismissable', loadChildren: () => import('./modal-undismissable').then(m => m.ModalUndismissableModule) },
 	{ path: 'dropdown', loadChildren: () => import('./dropdown').then(m => m.DropdownModule) },
 ];
 /*tslint:enable*/

@@ -72,7 +72,6 @@
 	&::after {
 		@include makeIcon("drag");
 		color: _color("text.placeholder");
-		font-size: 1.3rem;
 		margin: auto;
 		height: 100%;
 		display: flex;
@@ -200,9 +199,8 @@
 
 				&::before {
 					@include makeIcon("arrow_south");
-					font-size: .7rem;
+					vertical-align: middle;
 					margin-right: _theme("spacings.smaller");
-					vertical-align: baseline;
 					transition: transform _theme("commons.animations.durations.fast") ease;
 				}
 			}
@@ -261,8 +259,6 @@
 
 		&::after {
 			@include makeIcon("arrow_full_north");
-			font-weight: 400;
-			font-size: .95rem;
 			margin: 0 0 0 .2rem;
 			opacity: 0;
 			position: absolute;
@@ -306,8 +302,6 @@
 
 		&::before {
 			@include makeIcon("arrow_full_north");
-			font-weight: 400;
-			font-size: .95rem;
 			margin: 0 .25rem 0 0;
 			opacity: 0;
 			transform: translateY(.25rem);

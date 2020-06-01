@@ -22,6 +22,7 @@
 		"cpx": "cpx",
 		"tsc": "tsc",
 		"start": "ng serve sandbox",
+		"ie11": "ng serve sandbox --configuration es5",
 		"build": "npm run build:lib",
 		"test": "ng test core",
 		"test:sr": "ng test core --watch=false",
