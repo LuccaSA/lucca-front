@@ -1,5 +1,5 @@
 $icons: (
 	prefix: unquote("lucca-icon"),
-	font-path: unquote("//cdn.lucca.fr/lucca-front/icons/latest/font/lucca-icons"),
+	font-path: unquote("//cdn.lucca.fr/lucca-front/icons/next/lucca-icons"), // TODO: remove when everyone is on this version
 );
 $theme: _set($theme, "icons", $icons);

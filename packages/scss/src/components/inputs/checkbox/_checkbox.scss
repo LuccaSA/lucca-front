@@ -4,10 +4,7 @@
 }
 
 .checkbox-input {
-	background: white;
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
+	@include mask;
 
 	&:focus ~ .checkbox-label {
 		&::before {
@@ -163,11 +160,7 @@
 
 	&.is-incomplete ~ .checkbox-label {
 		&::before {
-			font-size: .6rem;
-			padding: .15rem;
-			@include makeIcon("minimize");
-			line-height: .4rem;
-			text-indent: -1.5px;
+			@include makeIcon("partial");
 		}
 	}
 }

@@ -65,17 +65,4 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			_renderer,
 		);
 	}
-
-	// @ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<T>) {
-	// 	if (!picker) { return; }
-	// 	this._picker = picker;
-	// }
-	// @ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
-	// 	if (!clearer) { return; }
-	// 	this._clearer = clearer;
-	// }
-	// @ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<T>) {
-	// 	if (!displayer) { return; }
-	// 	this.displayer = displayer;
-	// }
 }

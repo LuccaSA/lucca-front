@@ -11,8 +11,8 @@
 			bottom: _component("select.input.padding-vertical");
 			color: _color("primary", "color", true);
 			color: _color("primary");
-			font-size: 0.75rem;
-			line-height: 1.3rem;
+			font-size: 1.2rem;
+			line-height: 1.4rem;
 			pointer-events: none;
 			position: absolute;
 			right: #{_component("select.input.padding-horizontal", true)};
@@ -99,7 +99,8 @@
 		}
 
 		&::after {
-			line-height: .9rem;
+			font-size: 1rem;
+			line-height: 1rem;
 		}
 	}
 

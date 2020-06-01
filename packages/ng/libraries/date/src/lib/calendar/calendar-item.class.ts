@@ -1,15 +1,15 @@
 import { ICalendarItem } from './calendar-item.interface';
-import { DateGranularity } from '../adapter/index';
+import { ELuDateGranularity } from '@lucca-front/ng/core';
 
 export abstract class ACalendarItem<D> implements ICalendarItem<D> {
 	get id() { return `${this.granularity}-${this.date.toString()}`; }
 	date: D;
 	mods: string[] = [];
 	label: string;
-	readonly granularity: DateGranularity;
+	readonly granularity: ELuDateGranularity;
 }
 export class DayItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = DateGranularity.day;
+	readonly granularity = ELuDateGranularity.day;
 	constructor(
 		public date: D,
 		public label: string,
@@ -18,7 +18,7 @@ export class DayItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	}
 }
 export class MonthItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = DateGranularity.month;
+	readonly granularity = ELuDateGranularity.month;
 	constructor(
 		public date: D,
 		public label: string,
@@ -27,7 +27,7 @@ export class MonthItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	}
 }
 export class YearItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = DateGranularity.year;
+	readonly granularity = ELuDateGranularity.year;
 	constructor(
 		public date: D,
 		public label: string,
@@ -36,7 +36,7 @@ export class YearItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	}
 }
 export class DecadeItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
-	readonly granularity = DateGranularity.decade;
+	readonly granularity = ELuDateGranularity.decade;
 	constructor(
 		public date: D,
 		public label: string,

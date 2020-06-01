@@ -1,10 +1,11 @@
 @mixin selectClearerStyle {
 	:host {
 		display: none;
+		vertical-align: text-bottom;
 	}
 
 	:host-context(.textfield-input.is-filled) {
-		display: block;
+		display: inline-block;
 	}
 
 	.actionIcon {
@@ -24,7 +25,7 @@
 
 	.lucca-icon {
 		display: block;
-		font-size: 0.9rem;
+		font-size: 1rem;
 	}
 
 	// Material

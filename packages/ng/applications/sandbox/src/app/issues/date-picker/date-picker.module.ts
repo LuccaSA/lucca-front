@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { DatePickerComponent } from './date-picker.component';
 
 import { LuSelectModule } from '@lucca-front/ng/select';
-import { LuDateModule, ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/date';
+import { LuDateModule } from '@lucca-front/ng/date';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LuOptionModule } from '@lucca-front/ng/option';
+import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 
 
 @NgModule({
