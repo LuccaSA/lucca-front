@@ -46,10 +46,6 @@
 			}
 		}
 
-		&.is-error {
-			background-color: _color("error", "see-through");
-		}
-
 		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
 			&, &:hover, &:focus {
 				background-color: _theme("commons.disabled.background");

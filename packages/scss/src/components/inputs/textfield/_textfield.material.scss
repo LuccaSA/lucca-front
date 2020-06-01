@@ -53,8 +53,6 @@
 	@mixin inputColoring($palette) {
 		.textfield-input {
 			&:focus, &.is-focused {
-				box-shadow: 0 2px 0 0 _color($palette);
-
 				~ .textfield-label {
 					color: _color($palette);
 				}
@@ -160,12 +158,6 @@
 		}
 	}
 
-	&.is-invalid {
-		.textfield-input {
-			@include fieldMaterialError("textfield");
-		}
-	}
-
 	.textfield-input {
 		&.is-filled {
 			@include fieldMaterialFilled("textfield");
@@ -180,8 +172,16 @@
 			box-shadow: none;
 		}
 
-		&.is-error {
-			@include fieldMaterialError("textfield");
+		&.is-invalid, &.is-error {
+			@include fieldMaterialState("textfield", "error");
+		}
+
+		&.is-warning {
+			@include fieldMaterialState("textfield", "warning");
+		}
+
+		&.is-success {
+			@include fieldMaterialState("textfield", "success");
 		}
 	}
 

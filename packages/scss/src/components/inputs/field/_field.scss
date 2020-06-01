@@ -4,15 +4,60 @@
 		flex-direction: column;
 		align-items: flex-start;
 		position: relative;
+
+		// palette colors
+		@each $name, $palette in _getMap("palettes") {
+			&.palette-#{$name} {
+				.#{$fieldname}-label {
+					color: _theme("palettes.#{$name}.color");
+				}
+
+				.#{$fieldname}-input {
+					background-color: _theme("palettes.#{$name}.lightest");
+
+					&:hover {
+						&::placeholder {
+							color: _theme("palettes.#{$name}.light");
+						}
+					}
+
+					&, &:focus {
+						&::placeholder {
+							color: _theme("palettes.#{$name}.lighter");
+						}
+					}
+
+					&:focus {
+						box-shadow: 0 0 0 2px _theme("palettes.#{$name}.color");
+					}
+
+					@if ($name == "error") {
+						box-shadow: 0 0 0 2px _theme("palettes.#{$name}.color");
+					}
+				}
+			}
+		}
 	}
 
 	.#{$fieldname}-input {
-		color: _component("field.input.color");
 		font-family: _theme("commons.font.family");
 		font-size: _component("field.font-size");
 		outline: 0;
 		position: relative;
 		width: 100%;
+		color: _component("field.input.color");
+
+		&:hover {
+			&::placeholder {
+				color: _component("field.input.color", "light");
+			}
+		}
+
+		&, &:focus {
+			&::placeholder {
+				color: _component("field.input.color", "lighter");
+			}
+		}
 	}
 
 	.#{$fieldname}-label {
@@ -45,6 +90,10 @@
 
 	.#{$fieldname}-messages-warning {
 		color: _color("warning");
+	}
+
+	.#{$fieldname}-messages-success {
+		color: _color("success");
 	}
 
 	.#{$fieldname}-messages-helper {
@@ -92,7 +141,6 @@
 		}
 
 		&.is-valid {
-
 			&::before {
 				animation: isValid 3s forwards;
 				@include makeIcon("tick_bold");
@@ -115,25 +163,42 @@
 			.#{$fieldname}-label {
 				color: _color("error");
 			}
+
+			.#{$fieldname}-input {
+				&:hover {
+					&::placeholder {
+						color: _color("error", "light");
+					}
+				}
+
+				&, &:focus {
+					&::placeholder {
+						color: _color("error", "lighter");
+					}
+				}
+			}
 		}
 	}
 }
 
 @mixin field-input($fieldname) {
 	display: block;
+
 	&[disabled], &[readonly] {
 		color: _color("text.light");
 		cursor: not-allowed;
 	}
 
-	&.is-invalid, &.is-error {
-		~ .#{$fieldname}-label {
-			color: _color("error");
-		}
+	&.is-success {
+		@include fieldState($fieldname, "success");
+	}
 
-		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
-			color: _color("error");
-		}
+	&.is-warning {
+		@include fieldState($fieldname, "warning");
+	}
+
+	&.is-invalid, &.is-error {
+		@include fieldState($fieldname, "error");
 	}
 }
 

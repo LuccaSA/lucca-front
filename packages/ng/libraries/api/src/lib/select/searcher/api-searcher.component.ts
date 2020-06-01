@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, Eleme
 import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { ALuApiOptionSearcher, ALuApiSearcherService, ALuApiOptionPagedSearcher, ALuApiPagedSearcherService } from './api-searcher.model';
-import { IApiItem } from '../../api.model';
+import { ILuApiItem } from '../../api.model';
 import { LuApiSearcherService, LuApiPagedSearcherService } from './api-searcher.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
@@ -29,7 +29,7 @@ import { debounceTime } from 'rxjs/operators';
 		},
 	],
 })
-export class LuApiSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiSearcherService<T> = ALuApiSearcherService<T>>
+export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiSearcherService<T> = ALuApiSearcherService<T>>
 extends ALuApiOptionSearcher<T, S> {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set api(api: string) {
@@ -91,7 +91,7 @@ extends ALuApiOptionSearcher<T, S> {
 		},
 	],
 })
-export class LuApiPagedSearcherComponent<T extends IApiItem = IApiItem, S extends ALuApiPagedSearcherService<T> = ALuApiPagedSearcherService<T>>
+export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiPagedSearcherService<T> = ALuApiPagedSearcherService<T>>
 extends ALuApiOptionPagedSearcher<T, S> {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set api(api: string) { this._service.api = api; }

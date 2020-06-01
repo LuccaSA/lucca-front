@@ -8,6 +8,8 @@ export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 export declare interface ILuPopoverPanel {
 	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
+	panelId?: string;
+	triggerId?: string;
 	templateRef?: TemplateRef<any>;
 
 	/** will emit when the panel wants to close */
@@ -34,6 +36,9 @@ export declare interface ILuPopoverPanel {
  * abstract class for basic implementation of a popover panel
  */
 export abstract class ALuPopoverPanel implements ILuPopoverPanel {
+	panelId: string;
+	triggerId: string;
+
 	protected _isOpen: boolean;
 	get isOpen() { return this._isOpen; }
 
