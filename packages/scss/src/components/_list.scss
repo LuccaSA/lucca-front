@@ -53,7 +53,6 @@
 	color: _color("text.placeholder");
 	cursor: move;
 	font-size: 1.3rem;
-	height: 2.4rem;
 	left: 0;
 	text-align: center;
 	position: absolute;
@@ -61,6 +60,7 @@
 
 	&::before {
 		@include makeIcon("drag");
+		vertical-align: middle;
 	}
 }
 
