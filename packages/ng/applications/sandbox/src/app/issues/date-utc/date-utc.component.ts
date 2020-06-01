@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ALuDateAdapter } from '@lucca-front/ng/date';
+import { ALuDateAdapter } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'sand-date-utc',

@@ -9,6 +9,7 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.token';
 import { luUserSelectInputTranslations } from './user-select-input.translate';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { LuUserHomonymsModule } from '../homonyms/index';
+import { LuUserMeOptionModule } from '../me/index';
 
 @NgModule({
 	imports: [
@@ -21,6 +22,7 @@ import { LuUserHomonymsModule } from '../homonyms/index';
 		LuUserSearcherModule,
 		LuInputDisplayerModule,
 		LuUserHomonymsModule,
+		LuUserMeOptionModule,
 	],
 	declarations: [
 		LuUserSelectInputComponent,

@@ -110,11 +110,11 @@
 		}
 
 		.#{$fieldname}-input {
-			@include fieldFramedError($fieldname);
+			@include fieldFramedState($fieldname, "error");
 			@include fakeBorder(1px, _color("error"));
 
 			&:hover, &:active, &:focus {
-				@include fieldFramedError($fieldname);
+				@include fieldFramedState($fieldname, "error");
 			}
 		}
 	}
@@ -132,7 +132,15 @@
 		}
 
 		&.is-error {
-			@include fieldFramedError($fieldname);
+			@include fieldFramedState($fieldname, "error");
+		}
+
+		&.is-warning {
+			@include fieldFramedState($fieldname, "warning");
+		}
+
+		&.is-success {
+			@include fieldFramedState($fieldname, "success");
 		}
 	}
 

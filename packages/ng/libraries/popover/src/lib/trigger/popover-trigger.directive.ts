@@ -15,7 +15,6 @@ import {
 	Overlay,
 } from '@angular/cdk/overlay';
 
-
 import {
 	ILuPopoverTrigger, ALuPopoverTrigger, LuPopoverTriggerEvent,
 } from './popover-trigger.model';
@@ -26,16 +25,14 @@ import {
 	ILuPopoverTarget, LuPopoverPosition, LuPopoverAlignment, LuPopoverTarget,
 } from '../target/index';
 
+
+
 /**
 * This directive is intended to be used in conjunction with an lu-popover tag.  It is
 * responsible for toggling the display of the provided popover instance.
 */
 @Directive({
 	selector: '[luPopover]',
-	// host: {
-	// 	'aria-haspopup': 'true',
-	// 	'(mousedown)': '_handleMousedown($event)',
-	// },
 	exportAs: 'LuPopoverTrigger',
 })
 export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
@@ -49,7 +46,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverTarget') set inputTarget(t: TTarget) { this.target = t; }
 
 	/** References the popover target instance that the trigger is associated with. */
-	@Input('luPopoverTrigger') set inoutTriggerEvent(te: LuPopoverTriggerEvent) { this.triggerEvent = te; }
+	@Input('luPopoverTrigger') set inputTriggerEvent(te: LuPopoverTriggerEvent) { this.triggerEvent = te; }
 
 	/** Event emitted when the associated popover is opened. */
 	@Output() onPopoverOpen = new EventEmitter<void>();
@@ -76,7 +73,12 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverOffsetX') set inputOffsetX(ox: number) { this.target.offsetX = ox; }
 	@Input('luPopoverOffsetY') set inputOffsetY(oy: number) { this.target.offsetY = oy; }
 
-	@HostBinding('attr.aria-haspopup') hasPopup = true;
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() { return this._popoverOpen; }
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.aria-controls') get _attrAriaControls() { return this._panelId; }
 
 	constructor(
 		protected _overlay: Overlay,
@@ -86,6 +88,7 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 	}
 
 	@HostListener('click')

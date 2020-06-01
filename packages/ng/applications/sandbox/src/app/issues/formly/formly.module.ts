@@ -10,7 +10,7 @@ import { LuFormlyModule } from '@lucca-front/ng/formly';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule as NgxFormlyModule } from '@ngx-formly/core';
 import { CommonModule } from '@angular/common';
-import { LuNativeDateModule } from '@lucca-front/ng/date';
+import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 
 
 @NgModule({
@@ -21,7 +21,6 @@ import { LuNativeDateModule } from '@lucca-front/ng/date';
 		HttpClientModule,
 		RedirectModule,
 		LuFormlyModule,
-		LuNativeDateModule,
 		FormsModule,
 		NgxFormlyModule.forRoot(),
 		ReactiveFormsModule,
@@ -30,5 +29,8 @@ import { LuNativeDateModule } from '@lucca-front/ng/date';
 			{ path: '', component: FormlyComponent },
 		]),
 	],
+	providers: [
+		{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },
+	]
 })
 export class FormlyModule {}
