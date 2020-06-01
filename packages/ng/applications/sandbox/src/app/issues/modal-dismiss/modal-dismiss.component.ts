@@ -46,8 +46,6 @@ export class BasicModalContent {
 	title = 'title';
 	submitAction = () => true;
 
-	constructor(
-	) {}
 }
 @Component({
 	selector: 'lu-popup-content',
