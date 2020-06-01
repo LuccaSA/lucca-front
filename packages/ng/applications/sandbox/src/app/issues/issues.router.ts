@@ -56,6 +56,7 @@ const routes: Routes = [
 	{ path: 'modal-undismissable', loadChildren: () => import('./modal-undismissable').then(m => m.ModalUndismissableModule) },
 	{ path: 'dropdown', loadChildren: () => import('./dropdown').then(m => m.DropdownModule) },
 	{ path: 'date-string', loadChildren: () => import('./date-string').then(m => m.DateStringModule) },
+	{ path: 'select-me-first', loadChildren: () => import('./select-me-first').then(m => m.SelectMeFirstModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);

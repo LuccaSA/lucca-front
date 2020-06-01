@@ -210,18 +210,23 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		options.forEach(option => option.selected = false);
 
 		// add `is-selected` to all selected indexes
-		const selectedIndexes = [];
+		const selectedIndexes: number[] = [];
 		if (!this.multiple) {
 			const selectedIndex = this._options.findIndex(o => this.optionComparer(o.value, this._value as T));
 			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
 			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
 		} else {
 			const values = <T[]> this._value || [];
-			selectedIndexes.push(
-				...values
-				.map(v => this._options.findIndex(o => this.optionComparer(o.value, v)))
-				.filter(i => i !== -1)
-			);
+			const matchingIndexes = this._options.map(
+				o => values.some(v => this.optionComparer(o.value, v)),
+			).map((f, i) => f ? i : null)
+			.filter(i => i !== null);
+			selectedIndexes.push(...matchingIndexes);
+			// selectedIndexes.push(
+			// 	...values
+			// 	.map(v => this._options.findIndex(o => this.optionComparer(o.value, v)))
+			// 	.filter(i => i !== -1)
+			// );
 		}
 		selectedIndexes.forEach(i => {
 			const option = options[i];

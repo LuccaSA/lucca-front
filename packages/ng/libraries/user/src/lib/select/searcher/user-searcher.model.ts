@@ -1,8 +1,8 @@
-import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ISuggestion } from '@lucca-front/ng/api';
+import { ALuApiPagedSearcherService, ILuApiPagedSearcherService, ILuApiSuggestion, ILuApiResponse } from '@lucca-front/ng/api';
 import { ILuUser } from '../../user.model';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 export abstract class ALuUserPagedSearcherService<U extends ILuUser = ILuUser>
 extends ALuApiPagedSearcherService<U>
@@ -31,11 +31,17 @@ implements ILuApiPagedSearcherService<U> {
 		}
 	}
 	protected _get(url) {
-		return (<any>super._get(url) as Observable<ISuggestion<U>[]>)
+		return (<any>super._get(url) as Observable<ILuApiSuggestion<U>[]>)
 		.pipe(map(suggestions => suggestions.map(s => s.item)));
 	}
 	protected _clueFilter(clue) {
 		const urlSafeClue = clue.split(' ').map(c => encodeURIComponent(c)).join(',');
 		return `clue=${urlSafeClue}`;
+	}
+	getMe(): Observable<ILuUser> {
+		return this.http.get<ILuApiResponse<ILuUser>>(`/api/v3/users/me?fields=id`).pipe(
+			switchMap(r => this._get(this.url + `&id=${r.data.id}`)),
+			map(users => users[0]),
+		);
 	}
 }

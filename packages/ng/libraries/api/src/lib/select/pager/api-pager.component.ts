@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input, Inject, Optional
 import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator, ALuOptionOperator } from '@lucca-front/ng/option';
 import { LuApiPagerService } from './api-pager.service';
-import { IApiItem } from '../../api.model';
+import { ILuApiItem } from '../../api.model';
 import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 
 @Component({
@@ -32,7 +32,7 @@ import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 		},
 	],
 })
-export class LuApiPagerComponent<T extends IApiItem = IApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
+export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
 extends ALuApiOptionPager<T, S>
 implements ILuOptionOperator<T>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenSubscriber {
 	constructor(

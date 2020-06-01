@@ -3,7 +3,7 @@ import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator, ALuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject } from 'rxjs';
 import { LuApiFeederService } from './api-feeder.service';
-import { IApiItem } from '../../api.model';
+import { ILuApiItem } from '../../api.model';
 import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
 @Component({
 	selector: 'lu-api-feeder',
@@ -27,7 +27,7 @@ import { ALuApiOptionFeeder, ALuApiFeederService } from './api-feeder.model';
 		},
 	],
 })
-export class LuApiFeederComponent<T extends IApiItem = IApiItem, S extends ALuApiFeederService<T> = ALuApiFeederService<T>>
+export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiFeederService<T> = ALuApiFeederService<T>>
 extends ALuApiOptionFeeder<T, S>
 implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	outOptions$ = new BehaviorSubject<T[]>([]);
