@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Renderer2, ChangeDetectorRef, forwardRef, HostListener, Input, Inject } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@angular/forms';
-import { ALuDateAdapter, DateGranularity } from '../adapter/index';
+import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { ILuDateInputLabel } from './date-input.translate';
 import { LuDateInputIntl } from './date-input.intl';
 
@@ -65,10 +65,10 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 		const d = control.value;
 		if (!d) { return null; }
 		if (!this._adapter.isValid(d)) { return { 'date': true }; }
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, DateGranularity.day) > 0) {
+		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
 			return { 'min': true };
 		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, DateGranularity.day) < 0) {
+		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
 			return { 'max': true };
 		}
 		return null;

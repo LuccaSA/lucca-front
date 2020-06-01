@@ -1,12 +1,12 @@
-export interface ISuggestion<T> {
+export interface ILuApiSuggestion<T> {
 	relevance: any;
 	item: T;
 }
-export interface IApiItem<TId = number> {
+export interface ILuApiItem<TId = number> {
 	id: TId;
 	name?: string;
 }
-export interface IApiResponse<D = any> {
+export interface ILuApiResponse<D = any> {
 	data: D;
 }
-export interface IApiCollectionResponse<T extends IApiItem = IApiItem> extends IApiResponse<{ items: T[] }> {}
+export interface ILuApiCollectionResponse<T extends ILuApiItem = ILuApiItem> extends ILuApiResponse<{ items: T[] }> {}

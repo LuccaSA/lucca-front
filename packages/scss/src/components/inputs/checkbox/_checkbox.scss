@@ -4,10 +4,7 @@
 }
 
 .checkbox-input {
-	background: white;
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
+	@include mask;
 
 	&:focus ~ .checkbox-label {
 		&::before {

@@ -29,7 +29,7 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 	protected _overlayRef: OverlayRef;
 	protected _componentRef: ComponentRef<T>;
 
-	protected _sub: Subscription;
+	protected _subs = new Subscription();
 
 	constructor(
 		protected _overlay: Overlay,
@@ -42,6 +42,7 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 	open(data?: D) {
 		this._createOverlay();
 		this._openPopup(data);
+
 		this._subToCloseEvents();
 
 		this.onOpen.next(data);
@@ -133,14 +134,18 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 		this._componentRef.destroy();
 	}
 	protected _subToCloseEvents() {
-		const bdClicked$ = this._overlayRef.backdropClick();
-		const escPressed$ = this._overlayRef.keydownEvents().pipe(
-			filter(evt => evt.keyCode === ESCAPE),
-		);
-		this._sub = merge(bdClicked$, escPressed$).pipe(first())
-		.subscribe(e => this.dismiss());
+		if (!this._config.undismissable) {
+
+			const bdClicked$ = this._overlayRef.backdropClick();
+			const escPressed$ = this._overlayRef.keydownEvents().pipe(
+				filter(evt => evt.keyCode === ESCAPE),
+			);
+			const sub = merge(bdClicked$, escPressed$).pipe(first())
+			.subscribe(e => this.dismiss());
+			this._subs.add(sub);
+		}
 	}
 	protected _cleanSubscription() {
-		this._sub.unsubscribe();
+		this._subs.unsubscribe();
 	}
 }

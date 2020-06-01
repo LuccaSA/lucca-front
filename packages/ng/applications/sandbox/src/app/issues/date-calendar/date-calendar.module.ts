@@ -2,7 +2,8 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { DateCalendarComponent } from './date-calendar.component';
-import { LuDateModule, LuNativeDateModule } from '@lucca-front/ng/date';
+import { LuDateModule } from '@lucca-front/ng/date';
+import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, registerLocaleData } from '@angular/common';
 
@@ -20,7 +21,6 @@ registerLocaleData(localeGb);
 		LuDateModule,
 		FormsModule,
 		CommonModule,
-		LuNativeDateModule,
 		RouterModule.forChild([
 			{ path: '', component: DateCalendarComponent },
 		]),
@@ -29,6 +29,7 @@ registerLocaleData(localeGb);
 		// { provide: LOCALE_ID, useValue: 'fr-FR' },
 		// { provide: LOCALE_ID, useValue: 'en-GB' },
 		{ provide: LOCALE_ID, useValue: 'en-US' },
+		{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },
 	]
 })
 export class DateCalendarModule {}

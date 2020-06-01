@@ -6,7 +6,6 @@
 		@include fakeBorder(1px, _theme("commons.divider.color"));
 		background: transparent;
 		border-radius: 0;
-		height: 100%;
 		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 
 		&:focus {
@@ -111,11 +110,11 @@
 		}
 
 		.#{$fieldname}-input {
-			@include fieldFramedError($fieldname);
+			@include fieldFramedState($fieldname, "error");
 			@include fakeBorder(1px, _color("error"));
 
 			&:hover, &:active, &:focus {
-				@include fieldFramedError($fieldname);
+				@include fieldFramedState($fieldname, "error");
 			}
 		}
 	}
@@ -133,7 +132,15 @@
 		}
 
 		&.is-error {
-			@include fieldFramedError($fieldname);
+			@include fieldFramedState($fieldname, "error");
+		}
+
+		&.is-warning {
+			@include fieldFramedState($fieldname, "warning");
+		}
+
+		&.is-success {
+			@include fieldFramedState($fieldname, "success");
 		}
 	}
 

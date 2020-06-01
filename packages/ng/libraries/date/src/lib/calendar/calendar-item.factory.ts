@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DayItem, MonthItem, YearItem, DecadeItem } from './calendar-item.class';
-import { ALuDateAdapter } from '../adapter/index';
+import { ALuDateAdapter } from '@lucca-front/ng/core';
 
 @Injectable()
 export class LuCalendarItemFactory<D> {
