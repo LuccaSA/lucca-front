@@ -34,7 +34,7 @@
 .label {
 	&.mod-number {
 		border-radius: _theme("sizes.standard.line-height");
-		padding: _theme("spacings.reset");
+		padding: _theme("spacings.reset") _theme("spacings.smaller");
 		height: _theme("sizes.standard.line-height");
 		min-width: _theme("sizes.standard.line-height");
 		line-height: _theme("sizes.standard.line-height");
