@@ -31,14 +31,13 @@
 	}
 }
 
-
 .label {
 	&.mod-number {
-		border-radius: 50%;
+		border-radius: _theme("sizes.standard.line-height");
 		padding: _theme("spacings.reset");
-		height: 1.6rem;
-		min-width: 1.6rem;
-		line-height: 1.6rem;
+		height: _theme("sizes.standard.line-height");
+		min-width: _theme("sizes.standard.line-height");
+		line-height: _theme("sizes.standard.line-height");
 		font-weight: 600;
 	}
 }
