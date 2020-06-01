@@ -30,3 +30,16 @@
 		}
 	}
 }
+
+
+.label {
+	&.mod-number {
+		border-radius: 50%;
+		padding: _theme("spacings.reset");
+		height: 1.6rem;
+		min-width: 1.6rem;
+		line-height: 1.6rem;
+		font-weight: 600;
+		background-color: _color('primary', 'lightest');
+	}
+}
