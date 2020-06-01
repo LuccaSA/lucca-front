@@ -59,6 +59,7 @@ const routes: Routes = [
 	{ path: 'select-me-first', loadChildren: () => import('./select-me-first').then(m => m.SelectMeFirstModule) },
 	{ path: 'style-select-chips', loadChildren: () => import('./style-select-chips').then(m => m.StyleSelectChipsModule) },
 	{ path: 'option-groupby', loadChildren: () => import('./option-groupby').then(m => m.OptionGroupbyModule) },
+	{ path: 'select-option-placeholder', loadChildren: () => import('./select-option-placeholder').then(m => m.SelectOptionPlaceholderModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);

@@ -1,3 +1,9 @@
 <div class="textfield mod-search" [class.is-loading]="loading$ | async">
 	<input #searchInput class="textfield-input" [formControl]="clueControl">
 </div>
+<div *ngIf="empty$ | async" class="optionPlaceholder">
+	<p class="optionPlaceholder-content u-marginBottomReset">
+		No results match your search criteria.
+	</p>
+	<button class="link" (click)="resetClue()">Clear search</button>
+</div>
