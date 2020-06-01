@@ -3,6 +3,7 @@ import { LuOptionPagerModule } from './pager/index';
 import { LuOptionFeederModule } from './feeder/index';
 import { LuOptionSearcherModule } from './searcher/index';
 import { LuForOptionsModule } from './for-options/index';
+import { LuForGroupsModule } from './for-groups/index';
 
 @NgModule({
 	imports: [
@@ -10,12 +11,14 @@ import { LuForOptionsModule } from './for-options/index';
 		LuOptionFeederModule,
 		LuOptionSearcherModule,
 		LuForOptionsModule,
+		LuForGroupsModule,
 	],
 	exports: [
 		LuOptionPagerModule,
 		LuOptionFeederModule,
 		LuOptionSearcherModule,
 		LuForOptionsModule,
+		LuForGroupsModule,
 	],
 })
 export class LuOptionOperatorModule {}
