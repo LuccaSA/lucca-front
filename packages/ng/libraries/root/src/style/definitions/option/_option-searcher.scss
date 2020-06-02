@@ -17,12 +17,12 @@
 		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
 		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
 	}
-	.optionPlaceholder {
-		display: block;
-		padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true);
-		padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal");
-		font-style: italic;
-		color: _color("text.light", "color", true);
-		color: _color("text.light");
-	}
+	// .optionPlaceholder {
+	// 	display: block;
+	// 	padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true);
+	// 	padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal");
+	// 	font-style: italic;
+	// 	color: _color("text.light", "color", true);
+	// 	color: _color("text.light");
+	// }
 }

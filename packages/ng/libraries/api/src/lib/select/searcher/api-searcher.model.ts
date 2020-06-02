@@ -27,7 +27,7 @@ export abstract class ALuApiOptionSearcher<T extends ILuApiItem = ILuApiItem, S 
 implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
-	empty$: Observable<boolean>; 
+	empty$: Observable<boolean>;
 
 	protected _clue$: Observable<string>;
 
@@ -156,7 +156,7 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 			results$.pipe(mapTo(false)),
 		);
 		this.loading$.subscribe(l => this._loading = l);
-		this.empty$ = results$.pipe(
+		this.empty$ = this.outOptions$.pipe(
 			map(o => o.length === 0),
 		);
 	}

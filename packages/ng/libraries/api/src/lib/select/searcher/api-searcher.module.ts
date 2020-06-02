@@ -3,12 +3,14 @@ import { LuApiSearcherComponent, LuApiPagedSearcherComponent } from './api-searc
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LuOptionPlaceholderModule } from '@lucca-front/ng/option';
 
 @NgModule({
 	imports: [
 		HttpClientModule,
 		ReactiveFormsModule,
 		CommonModule,
+		LuOptionPlaceholderModule,
 	],
 	declarations: [
 		LuApiSearcherComponent,
