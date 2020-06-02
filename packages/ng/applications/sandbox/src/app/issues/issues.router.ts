@@ -60,6 +60,7 @@ const routes: Routes = [
 	{ path: 'style-select-chips', loadChildren: () => import('./style-select-chips').then(m => m.StyleSelectChipsModule) },
 	{ path: 'option-groupby', loadChildren: () => import('./option-groupby').then(m => m.OptionGroupbyModule) },
 	{ path: 'select-option-placeholder', loadChildren: () => import('./select-option-placeholder').then(m => m.SelectOptionPlaceholderModule) },
+	{ path: 'date-picker-width', loadChildren: () => import('./date-picker-width').then(m => m.DatePickerWidthModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
