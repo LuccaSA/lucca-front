@@ -9,6 +9,7 @@ import {
 	ChangeDetectionStrategy,
 	QueryList,
 	ContentChildren,
+	HostListener,
 } from '@angular/core';
 
 import {
@@ -119,9 +120,19 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.hovered.emit(hovered);
 	}
 
+	onOpen() {
+		this.focusFirstItem();
+	}
+	private focusFirstItem() {
+		const firstItem = this._items[0];
+		if (firstItem) {
+			firstItem.focus()
+		}
+	}
+
 	// keydown
-	_handleKeydown(event: KeyboardEvent) {
-		super._handleKeydown(event);
+	// _handleKeydown(event: KeyboardEvent) {
+	// 	super._handleKeydown(event);
 		// switch (event.keyCode) {
 		// 	case UP_ARROW:
 		// 		this._decrHighlight();
@@ -149,7 +160,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		// 		}
 		// 		break;
 		// }
-	}
+	// }
 	// protected _incrHighlight() {
 	// 	this.highlightIndex++;
 	// }
