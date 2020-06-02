@@ -282,9 +282,9 @@
 			background: _component("navSide.compact-palette.alert-color");
 			color: _component("navSide.compact-palette.alert-text");
 			padding: 0 .4em;
-			position: absolute;
-			right: 10px;
+			position: relative;
 			top: 10px;
+			margin: auto;
 		}
 
 		.navSide-item-placeholder {
