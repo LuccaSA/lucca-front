@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output, Host, HostBinding } from '@angular/core';
+import { Component, EventEmitter, Output, Inject } from '@angular/core';
+import { LuOptionPlaceholderIntl } from './option-placeholder.intl';
+import { ILuOptionPlaceholderLabel } from './option-placeholder.translate';
 
 @Component({
 	selector: 'lu-option-placeholder',
@@ -6,8 +8,12 @@ import { Component, EventEmitter, Output, Host, HostBinding } from '@angular/cor
 	styleUrls: ['./option-placeholder.component.scss']
 })
 export class LuOptionPlaceholderComponent {
-	@HostBinding('class.optionPlaceholder') private _optionPlaceholderClass = true;
 	@Output() onClear = new EventEmitter();
+
+	constructor(
+		@Inject(LuOptionPlaceholderIntl) public intl: ILuOptionPlaceholderLabel,
+	){}
+
 	clear() {
 		this.onClear.emit();
 	}
