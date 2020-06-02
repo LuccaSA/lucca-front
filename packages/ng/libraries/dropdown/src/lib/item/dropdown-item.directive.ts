@@ -27,9 +27,9 @@ export class LuDropdownItemDirective extends ALuDropdownItem implements OnDestro
 		// $event.stopPropagation();
 		this.onSelect.emit(true);
 	}
-	// focus() {
-	// 	this._eltRef.nativeElement.focus();
-	// }
+	focus() {
+		this._eltRef.nativeElement.focus();
+	}
 	ngOnDestroy() {
 		this.onSelect.complete();
 	}
