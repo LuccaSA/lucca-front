@@ -22,7 +22,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 		this._nativeAdapter = new LuNativeDateAdapter(this._locale, { useUtc: this._options.useUtc });
 	}
 
-	private stringToDate(s: string): Date {
+	protected stringToDate(s: string): Date {
 		switch (this._options.timezone) {
 			case 'z':
 				return new Date(s);
@@ -35,7 +35,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 				}
 		}
 	}
-	private dateToString(d: Date): string {
+	protected dateToString(d: Date): string {
 		let result: string;
 		if (d === undefined) {
 			result = undefined;
