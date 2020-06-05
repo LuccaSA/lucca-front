@@ -53,12 +53,17 @@
 }
 
 .lu-date-picker-panel {
+	min-width: _component("calendar.width", true);
+	min-width: _component("calendar.width");
+	max-width: _component("calendar.width", true);
+	max-width: _component("calendar.width");
 	.lu-picker-content {
 		max-height: none;
 	}
 	lu-calendar>.calendar {
-		width: auto;
 		min-width: _component("calendar.width", true);
 		min-width: _component("calendar.width");
+		max-width: _component("calendar.width", true);
+		max-width: _component("calendar.width");
 	}
 }
