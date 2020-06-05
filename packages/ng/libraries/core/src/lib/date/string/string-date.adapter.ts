@@ -29,7 +29,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 			case 'none':
 			default:
 				if (this._options.useUtc) {
-					return new Date(`${s}Z`);
+					return new Date(`${s}T00:00:00Z`);
 				} else {
 					return new Date(s);
 				}
@@ -76,7 +76,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 	compare(a: string, b: string, granularity: ELuDateGranularity): number {
 		const da = this.stringToDate(a);
 		const db = this.stringToDate(b);
-		
+
 		return this._nativeAdapter.compare(da, db, granularity);
 	}
 	isParsable(text: string): boolean {
