@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "version": "4.0.8",
+  "version": "4.1.0-rc.2",
   "description": "a library of usefull components for web developpement",
   "repository": {
     "type": "git",
@@ -22,13 +22,12 @@
     "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "lerna": "lerna",
-    "travis": "lerna run travis --scope=@lucca-front/ng-internal",
     "build": "lerna run build",
     "deploy": "lerna run deploy",
     "ls": "lerna ls -a -l"
   },
   "dependencies": {
-    "lerna": "^3.20.2"
+    "lerna": "^3.22.0"
   },
   "devDependencies": {
     "cpx": "^1.5.0"

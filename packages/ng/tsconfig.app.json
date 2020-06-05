@@ -67,6 +67,9 @@
       ],
       "@lucca-front/ng/user": [
         "./libraries/user/src/index"
+      ],
+      "@lucca-front/ng/dropdown": [
+        "./libraries/dropdown/src/index"
       ]
     }
   }

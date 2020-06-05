@@ -219,6 +219,9 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "applications/sandbox/tsconfig.es5.json"
             }
           }
         },
@@ -230,6 +233,9 @@
           "configurations": {
             "production": {
               "browserTarget": "sandbox:build:production"
+						},
+						"es5": {
+              "browserTarget": "sandbox:build:es5"
             }
           }
         },
@@ -892,6 +898,46 @@
             "tsConfig": [
               "libraries/date/tsconfig.lib.json",
               "libraries/date/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dropdown": {
+      "projectType": "library",
+      "root": "libraries/dropdown",
+      "sourceRoot": "libraries/dropdown/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libraries/dropdown/tsconfig.lib.json",
+            "project": "libraries/dropdown/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libraries/dropdown/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libraries/dropdown/src/test.ts",
+            "tsConfig": "libraries/dropdown/tsconfig.spec.json",
+            "karmaConfig": "libraries/dropdown/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libraries/dropdown/tsconfig.lib.json",
+              "libraries/dropdown/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

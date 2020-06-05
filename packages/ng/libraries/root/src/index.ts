@@ -16,3 +16,4 @@ export * from '@lucca-front/ng/date';
 export * from '@lucca-front/ng/api';
 export * from '@lucca-front/ng/user';
 export * from '@lucca-front/ng/department';
+export * from '@lucca-front/ng/dropdown';
