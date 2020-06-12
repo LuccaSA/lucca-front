@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/ng/root",
-  "version": "4.1.0-rc.2",
+  "version": "4.1.1",
   "peerDependencies": {
     "@angular/core": "^9.0.0",
     "@angular/cdk": "^9.0.0",
