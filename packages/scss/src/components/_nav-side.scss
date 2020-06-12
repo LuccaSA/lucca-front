@@ -40,8 +40,15 @@
 }
 
 .navSide-scrollWrapper {
+	width: _component("navSide.width");
 	padding: _theme("spacings.smaller");
 }
+
+.navSide-item + .navSide-item,
+.navSide-item-subMenu-link + .navSide-item-subMenu-link {
+	margin-top: 2px;
+}
+
 // MOBILE TOGGLE
 .navSide-item.mod-mobileToggle {
 	display: none;
@@ -260,6 +267,10 @@
 		background: _component("navSide.compact-palette.bg-color");
 		text-align: center;
 		width: _component("navSide.compact.width");
+
+		.navSide-mainSection, .navSide-scrollWrapper {
+			width: _component("navSide.compact.width");
+		}
 
 		.navSide-item-link {
 			color: _component("navSide.compact-palette.text");
