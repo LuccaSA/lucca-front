@@ -98,6 +98,17 @@
 		}
 	}
 
+	&.mod-smaller {
+		font-size: _component("button.smaller.font-size");
+		line-height: _component("button.smaller.line-height");
+		padding: _component("button.smaller.padding");
+
+		.lucca-icon {
+			line-height: 1rem;
+			font-size: .875rem;
+		}	
+	}
+
 	&.mod-link {
 		background: transparent;
 		color: _color("text.default");
@@ -182,7 +193,7 @@
 		padding-left: _theme("spacings.small");
 		padding-right: _theme("spacings.small");
 
-		&.mod-small {
+		&.mod-small, &.mod-smaller {
 			.button-counter {
 				height: 1rem;
 				min-width: 1rem;
@@ -199,6 +210,14 @@
 				font-size: _component("button.small.font-size");
 				height: _component("button.small.line-height");
 				line-height: _component("button.small.line-height");
+			}
+		}
+
+		&.mod-smaller {
+			.button-icon {
+				font-size: _component("button.smaller.font-size");
+				height: _component("button.smaller.line-height");
+				line-height: _component("button.smaller.line-height");
 			}
 		}
 	}
