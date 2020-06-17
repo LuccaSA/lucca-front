@@ -93,7 +93,7 @@
 		padding: _component("button.small.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
+			line-height: _component("button.small.line-height");
 			font-size: .875rem;
 		}
 	}
@@ -104,7 +104,7 @@
 		padding: _component("button.smaller.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
+			line-height: _component("button.small.line-height");
 			font-size: .875rem;
 		}	
 	}
