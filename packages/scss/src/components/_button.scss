@@ -63,7 +63,7 @@
 		}
 
 		&:focus {
-			box-shadow: inset 0 0 0 2px _color($palette, "200");
+			box-shadow: 0 0 0 4px _color($palette, "200");
 			outline: 0;		
 		}
 
@@ -313,7 +313,7 @@
 		display: inline-flex;
 
 		&:focus-within {
-			box-shadow: inset 0 0 0 2px _color("primary","200");
+			box-shadow:  0 0 0 4px _color("primary","200");
 		}
 
 		.button {
