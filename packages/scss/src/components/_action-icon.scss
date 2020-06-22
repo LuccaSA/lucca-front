@@ -1,7 +1,7 @@
 .actionIcon {
 	background: transparent;
 	border: 0;
-	border-radius: _component("textfield.border-radius");
+	border-radius: _component("commons.border.radius");
 	color: _component("actionIcon.color");
 	cursor: pointer;
 	height: 2rem;
