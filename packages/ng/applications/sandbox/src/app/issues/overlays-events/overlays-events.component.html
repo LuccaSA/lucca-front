@@ -40,22 +40,22 @@
 </div>
 <h3>Api</h3>
 <div class="textfield">
-	<lu-api-select class="textfield-input" [(ngModel)]="item" api="/api/v3/departments" placeholder="Everything" (onPickerOpen)="onOpen()" (onPickerClose)="onClose()"></lu-api-select>
+	<lu-api-select class="textfield-input" [(ngModel)]="item" api="/api/v3/departments" placeholder="Everything" (onOpen)="onOpen()" (onClose)="onClose()"></lu-api-select>
 	<label class="textfield-label">Woobwoob</label>
 </div>
 
 <h3>User</h3>
 <div class="textfield">
-	<lu-user-select class="textfield-input" [(ngModel)]="user" placeholder="Everything" (onPickerOpen)="onOpen()" (onPickerClose)="onClose()"></lu-user-select>
+	<lu-user-select class="textfield-input" [(ngModel)]="user" placeholder="Everything" (onOpen)="onOpen()" (onClose)="onClose()"></lu-user-select>
 	<label class="textfield-label">Woobwoob</label>
 </div>
 <h3>Department</h3>
 <div class="textfield">
-	<lu-department-select class="textfield-input" [(ngModel)]="department" (onPickerOpen)="onOpen()" (onPickerClose)="onClose()"></lu-department-select>
+	<lu-department-select class="textfield-input" [(ngModel)]="department" (onOpen)="onOpen()" (onClose)="onClose()"></lu-department-select>
 	<label for="" class="textfield-label">departments select</label>
 </div>
 <h3>Date</h3>
 <div class="textfield">
-	<lu-date-select class="textfield-input" [(ngModel)]="date" (onPickerOpen)="onOpen()" (onPickerClose)="onClose()"></lu-date-select>
+	<lu-date-select class="textfield-input" [(ngModel)]="date" (onOpen)="onOpen()" (onClose)="onClose()"></lu-date-select>
 	<label for="" class="textfield-label">date select</label>
 </div>

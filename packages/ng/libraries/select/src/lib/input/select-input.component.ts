@@ -55,9 +55,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 		}
 	}
 	/** Event emitted when the associated popover is opened. */
-	@Output('onPickerOpen') onOpen = new EventEmitter<void>();
+	@Output() onOpen = new EventEmitter<void>();
 	/** Event emitted when the associated popover is closed. */
-	@Output('onPickerClose') onClose = new EventEmitter<void>();
+	@Output() onClose = new EventEmitter<void>();
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
