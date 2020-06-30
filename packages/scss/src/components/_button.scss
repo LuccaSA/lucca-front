@@ -59,15 +59,15 @@
 		color: _color($palette, "text");
 
 		&:hover:not([disabled]) {
-			background: _color($palette, "light");
+			background: _color($palette, "500");
 		}
 
 		&:active:not([disabled]) {
-			background: _color($palette, "dark");
+			background: _color($palette, "800");
 		}
 
 		.button-counter {
-			background: _color($palette, "lighter");
+			background: _color($palette, "200");
 		}
 	}
 
@@ -104,7 +104,7 @@
 
 		&:hover, &:focus {
 			&:not([disabled]) {
-				background: _color("primary", "lightest");
+				background: _color("primary", "50");
 				color: _color("primary");
 			}
 		}
@@ -138,28 +138,32 @@
 
 	&.mod-outline {
 		background: transparent;
-		box-shadow: inset 0 0 0 1px _color("grey", "light");
+		box-shadow: inset 0 0 0 1px _color("grey", "500");
 		color: _color("text.default");
 
 		&:hover {
-			background: _color("primary", "lightest");
+			background: _color("primary", "50");
 			color: _color("primary");
 		}
 
 		@mixin buttonOutlineColoring($palette) {
-			box-shadow: inset 0 0 0 1px _color($palette, "light");
+			box-shadow: inset 0 0 0 1px _color($palette, "500");
 			color: _color($palette);
 
 			&:hover:not([disabled]) {
-				background: _color($palette, "lightest");
+				background: _color($palette, "50");
 				color: _color($palette);
 				box-shadow: inset 0 0 0 1px _color($palette);
 			}
 
 			&:active:not([disabled]) {
-				background: _color($palette, "lightest");
-				color: _color($palette, "dark");
-				box-shadow: inset 0 0 0 1px _color($palette, "dark");
+				background: _color($palette, "50");
+				color: _color($palette, "800");
+				box-shadow: inset 0 0 0 1px _color($palette, "800");
+			}
+
+			&:focus {
+				box-shadow: 0 0 0 4px _color($palette, "200");
 			}
 
 			.button-counter {
