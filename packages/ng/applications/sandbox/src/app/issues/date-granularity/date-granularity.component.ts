@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ELuDateGranularity } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'sand-date-granularity',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class DateGranularityComponent {
 	date = new Date();
+	gran = ELuDateGranularity.year;
 }
