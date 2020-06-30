@@ -67,7 +67,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			return false;
 		}
 	}
-	parse(text: string): Date {
+	parse(text: string, granularity = ELuDateGranularity.day): Date {
 		if (!text) { return undefined; }
 		if (!this.isParsable(text)) {
 			this.forgeInvalid();
