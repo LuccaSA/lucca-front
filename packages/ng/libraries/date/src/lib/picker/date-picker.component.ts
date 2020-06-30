@@ -2,6 +2,7 @@ import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
+import { ELuDateGranularity } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -21,6 +22,7 @@ export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 
 	@Input() min?: Date;
 	@Input() max?: Date;
+	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();

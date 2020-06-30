@@ -24,6 +24,8 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 	private _focused = false;
 	@Input() min?: D;
 	@Input() max?: D;
+	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+
 	@Input() set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}

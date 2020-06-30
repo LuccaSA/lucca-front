@@ -40,6 +40,7 @@ extends ALuSelectInputComponent<D>
 implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
+	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	overlapInput = true;
 	constructor(
