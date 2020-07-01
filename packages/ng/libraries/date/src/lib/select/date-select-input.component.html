@@ -8,6 +8,6 @@
 	<lu-input-clearer></lu-input-clearer>
 </div>
 <ng-template luDisplayer let-value>
-	{{ value | luDate }}
+	{{ value | luDate: format }}
 </ng-template>
 <lu-date-picker [min]="min" [max]="max" [granularity]="granularity"></lu-date-picker>
