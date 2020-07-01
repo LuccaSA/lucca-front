@@ -31,14 +31,34 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			if (g.indexOf('y') !== -1) { return this._order.year = i; }
 		});
 	}
-	isParsable(text: string): boolean {
+	private extract(text: string, granularity: ELuDateGranularity = ELuDateGranularity.day): { date: number, month: number, year: number } {
+		const groups = text.split(this._regex);
+		let date = 1, month = 1, year = 1;
+		switch(granularity) {
+			case ELuDateGranularity.year:
+				year = parseInt(groups[Math.max(this._order.year - 2, 0)], 10);
+				break;
+			case ELuDateGranularity.month:
+				month = parseInt(groups[Math.max(this._order.month - 1, 0)], 10);
+				year = parseInt(groups[Math.max(this._order.year - 1, 0)], 10) || new Date().getFullYear();
+				break;
+			case ELuDateGranularity.day:
+			default:
+				date = parseInt(groups[this._order.date], 10);
+				month = parseInt(groups[this._order.month], 10);
+				year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
+		}
+		return { date, month, year };
+	}
+	isParsable(text: string, granularity = ELuDateGranularity.day): boolean {
 		if (!text) { return false; }
 		const groups = text.split(this._regex);
 		if (groups.length !== 3 && groups.length !== 2) { return false; }
 		try {
-			const date = parseInt(groups[this._order.date], 10);
-			const month = parseInt(groups[this._order.month], 10);
-			const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
+			const { date, month, year } = this.extract(text, granularity);
+			// const date = parseInt(groups[this._order.date], 10);
+			// const month = parseInt(groups[this._order.month], 10);
+			// const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 			let d : Date;
 			if (this._options.useUtc) {
 				d = new Date(Date.UTC(year, month - 1, date));
@@ -73,10 +93,11 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			this.forgeInvalid();
 		}
 
-		const groups = text.split(this._regex);
-		const date = parseInt(groups[this._order.date], 10);
-		const month = parseInt(groups[this._order.month], 10);
-		const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
+		const { date, month, year } = this.extract(text, granularity);
+		// const groups = text.split(this._regex);
+		// const date = parseInt(groups[this._order.date], 10);
+		// const month = parseInt(groups[this._order.month], 10);
+		// const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 
 		return this.forge(year, month, date);
 	}

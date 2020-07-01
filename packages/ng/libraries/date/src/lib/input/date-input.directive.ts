@@ -51,7 +51,7 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 		this.setValue(value);
 	}
 	private parse(text): D {
-		const date = this._adapter.parse(text);
+		const date = this._adapter.parse(text, this.granularity);
 		return date;
 	}
 	@HostListener('focus')
