@@ -22,8 +22,8 @@ $commons: (
 	background: (
 		base: #F5F5F5
 	),
-	highlight: #E5E5E5,
-	selected: #EEEEEE,
+	highlight: _theme("primary", "50"),
+	selected: _theme("primary", "100"),
 	text: (
 		link: (
 			color: #00B2ED,
