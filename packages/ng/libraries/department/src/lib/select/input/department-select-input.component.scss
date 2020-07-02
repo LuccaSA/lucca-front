@@ -12,6 +12,7 @@
 	&.mod-multiple {
 		.option-selector {
 			display: initial;
+			padding: _theme("spacings.smaller");
 		}
 	}
 }

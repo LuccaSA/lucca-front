@@ -4,8 +4,8 @@
 .optionItem {
   &:hover {
     .optionItem-value {
-      background: _color("primary", "lighter", true);
-		  background: _color("primary", "lighter");
+      background: _theme('commons.highlight',true);
+			background: _theme('commons.highlight');
     }
 
     .optionItem-icons {
