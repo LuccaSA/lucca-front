@@ -7,6 +7,7 @@ $checkbox: (
   ),
   input: (
     margin-top: _theme("spacings.smallest"),
+    small-top: 1px,
     margin-right: _theme("spacings.smaller"),
     size: 1rem,
     border-radius: _theme("commons.border.radius"),

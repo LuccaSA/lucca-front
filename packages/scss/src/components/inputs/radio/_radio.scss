@@ -124,6 +124,18 @@
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+
+	&.mod-small .radio-label{
+		line-height: _theme("sizes.small.line-height");
+		font-size: _theme("sizes.small.font-size");
+		padding: _component("radio.label.small-padding");
+
+		&::before, &::after {
+			height: _theme("sizes.small.font-size");
+			width: _theme("sizes.small.font-size");
+			top: _component("radio.input.small-top");
+		}
+	}
 }
 
 // STATES

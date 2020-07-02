@@ -136,7 +136,7 @@
 				width: _theme("sizes.small.font-size");
 				height: _theme("sizes.small.font-size");
 				font-size: _theme("sizes.smaller.font-size");
-				margin-top: 1px;
+				margin-top: _component("checkbox.input.small-top");
 			}
 		}
 	}
