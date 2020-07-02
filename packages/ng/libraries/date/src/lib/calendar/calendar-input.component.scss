@@ -153,8 +153,8 @@
 	}
 
 	&.is-disabled {
-		pointer-events: none;
 		&:hover .calendar-grid-item-content {
+			pointer-events: none;
 			background-color: white;
 		}
 	}
