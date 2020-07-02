@@ -14,8 +14,16 @@
 	.textfield-input {
 		border-radius: 0;
 		box-shadow: none;
+		background: #FFFFFF;
 		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
 		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+		&:hover {
+			background-color: _color("grey", "50");
+		}
+		&:focus {
+			background-color: #FFFFFF;
+			border-bottom-color: _color("primary", "600")
+		}
 	}
 	// .optionPlaceholder {
 	// 	display: block;
