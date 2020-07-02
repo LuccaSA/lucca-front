@@ -60,6 +60,27 @@
 		display: inline-block;
 		margin-right: 1.5rem;
 	}
+
+	&.mod-small {
+		.switch-label{
+			padding: 0 0 0 calc(1.75rem - 4px + #{_theme("spacings.smaller", true)});
+			&::before {
+				margin-top: 1px;
+				height: _theme("sizes.small.font-size");
+				width: calc(1.75rem - 4px);
+			}
+			&::after {
+				margin-top: 1px;
+				height: calc(#{_theme("sizes.small.font-size")} - 4px);
+				width: calc(#{_theme("sizes.small.font-size")} - 4px);
+			}
+		}
+		.switch-input:checked ~ .switch-label {
+			&::after {
+				left: calc(#{_theme("sizes.small.font-size")} - 2px);
+			}
+		}
+	}
 }
 
 
