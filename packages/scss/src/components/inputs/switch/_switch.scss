@@ -65,12 +65,12 @@
 		.switch-label{
 			padding: 0 0 0 calc(1.75rem - 4px + #{_theme("spacings.smaller", true)});
 			&::before {
-				margin-top: 1px;
+				margin-top: _component("switch.small-top");
 				height: _theme("sizes.small.font-size");
 				width: calc(1.75rem - 4px);
 			}
 			&::after {
-				margin-top: 1px;
+				margin-top: _component("switch.small-top");
 				height: calc(#{_theme("sizes.small.font-size")} - 4px);
 				width: calc(#{_theme("sizes.small.font-size")} - 4px);
 			}
