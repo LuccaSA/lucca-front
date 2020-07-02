@@ -5,12 +5,6 @@
 
 .checkbox-input {
 	@include mask;
-
-	&:focus ~ .checkbox-label {
-		&::before {
-			box-shadow: _theme("commons.focused");
-		}
-	}
 }
 
 .checkbox-label {
@@ -53,16 +47,22 @@
 		.checkbox-input:checked ~ .checkbox-label {
 
 			&::before {
-				color: #FFFFFF;
+				color: _theme("colors.white");
 				background-color: _color($palette);
 				border: 2px solid _color($palette);
 			}
 
 			&:hover {
 				&::before {
-					background-color: _color($palette, "light");
-					border-color: _color($palette, "light");
+					background-color: _color($palette, "600");
+					border-color: _color($palette, "600");
 				}
+			}
+		}
+
+		.checkbox-input:focus ~ .checkbox-label {
+			&::before {
+				box-shadow: 0 0 0 4px _color($palette, "200");
 			}
 		}
 	}
@@ -70,12 +70,37 @@
 	// default color
 	@include checkboxColoring("checkbox.default-palette");
 
+	// Status and associated palettes
+	&.palette-error, &.is-error {
+		.checkbox-label {
+			&::before {
+				border-color: _color("error", "600")
+			}
+		}
+	}
+	&.palette-warning, &.is-warning {
+		.checkbox-label {
+			&::before {
+				border-color: _color("warning", "600")
+			}
+		}
+	}
+	&.palette-success, &.is-success {
+		.checkbox-label {
+			&::before {
+				border-color: _color("success", "600")
+			}
+		}
+	}
+
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
 			@include checkboxColoring($name);
 		}
 	}
+
+	
 }
 
 
@@ -146,14 +171,14 @@
 			cursor: not-allowed;
 
 			&::before {
-				border: 2px solid _color("grey", "light");
+				border: 2px solid _color("grey", "500");
 			}
 		}
 
 		&:checked ~ .checkbox-label {
 			&::before {
-				background-color: _color("grey", "light");
-				border: 2px solid _color("grey", "light");
+				background-color: _color("grey", "500");
+				border: 2px solid _color("grey", "500");
 			}
 		}
 	}
