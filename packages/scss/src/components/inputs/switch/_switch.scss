@@ -85,7 +85,7 @@
 	&[disabled], &[readonly] {
 		~ .switch-label {
 			color: _color("grey", "500");
-			cursor: not-allowed;
+			cursor: default;
 
 			&::before {
 				background: _color("grey", "500");

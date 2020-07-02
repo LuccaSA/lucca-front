@@ -168,7 +168,7 @@
 	&[disabled] {
 		~ .checkbox-label {
 			color: _color("grey");
-			cursor: not-allowed;
+			cursor: default;
 
 			&::before {
 				border: 2px solid _color("grey", "500");
