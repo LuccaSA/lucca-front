@@ -9,10 +9,10 @@
 	<div class="grid">
 		<div class="grid-md6">
 			<div class="file">
-				<i class="file-icon lucca-icon icon-cloudUpload"></i>
-				<div class="file-title">Drag and drop your file here</div>
+				<div class="file-title u-marginBottomReset">Drag and drop your file here</div>
 				<div class="file-or">Or</div>
-				<button class="button mod-outline mod-small">browse file</button>
+				<button class="button mod-outline">browse file</button>
+				<div class="file-format">Format de fichier supportés : .xls, .xlsx .csv</div>
 				<input class="file-input" type="file">
 			</div>
 <code class="code mod-block u-marginBottomStandard">&lt;div class="file"&gt;
@@ -67,10 +67,8 @@
 		</div>
 		<div class="grid-md6">
 			<div class="file mod-small">
-				<i class="file-icon lucca-icon icon-cloudUpload"></i>
 				<div class="file-title">Drag and drop your file here</div>
-				<div class="file-or">Or</div>
-				<a>browse file</a>
+				<button class="button mod-outline mod-small">browse file</button>
 				<input class="file-input" type="file">
 			</div>
 <code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small"&gt;
@@ -81,10 +79,8 @@
   &lt;input class="file-input" type="file"&gt;
 &lt;/div&gt;</code>
 			<div class="file mod-small is-droppable">
-				<i class="file-icon lucca-icon icon-cloudUpload"></i>
 				<div class="file-title">Drag and drop your file here</div>
-				<div class="file-or">Or</div>
-				<a>browse file</a>
+				<button class="button mod-outline mod-small">browse file</button>
 				<input class="file-input" type="file">
 			</div>
 <code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small is-droppable"&gt;
@@ -95,7 +91,6 @@
   &lt;input class="file-input" type="file"&gt;
 &lt;/div&gt;</code>
 			<div class="file mod-small">
-				<i class="file-icon lucca-icon icon-cloudUpload"></i>
 				<div class="file-title">Uploading your file...</div>
 				<div class="file-progress progress">
 					<div class="progress-bar" style="width: 50%"></div>
@@ -110,10 +105,17 @@
   &lt;/div&gt;
   &lt;input class="file-input" type="file"&gt;
 &lt;/div&gt;</code>
-			<div class="file mod-small">
+			<div class="file mod-small mod-icon">
 				<i class="file-icon lucca-icon icon-tick u-textSuccess"></i>
-				<div class="file-title">File uploaded</div>
-				file_name <button class="actionIcon"><i class="lucca-icon">trash</i></button>
+				<div class="file-title">
+					<div class="file-title-main u-textSuccess">
+						File uploaded
+					</div>
+					<div class="file-title-sub u-textSmall">
+						file_name
+					</div>
+				</div>
+				<button class="button mod-outline mod-small">Sélectionner un autre fichier</button>
 				<input class="file-input" type="file">
 			</div>
 <code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small"&gt;
