@@ -11,7 +11,7 @@
 	}
 	&.mod-multiple {
 		.option-selector {
-			display: initial;
+			display: inherit;
 			padding: _theme("spacings.smaller");
 		}
 	}
