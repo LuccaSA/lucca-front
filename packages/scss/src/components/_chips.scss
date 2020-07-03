@@ -1,5 +1,5 @@
 .chip {
-	background: _color("primary", "color");
+	background: _color("primary", "700");
 	border-radius: _theme("commons.border.radius");
 	color:  _color("primary", "text");
 	display: inline-block;
@@ -7,14 +7,30 @@
 	padding: .15rem 1.8rem .15rem .75rem;
 	position: relative;
 	vertical-align: middle;
+	&:hover, &:focus {
+		background: _color("primary", "600");
+	}
+	&:focus {
+		box-shadow: 0 0 1px 2px _color("primary", "400");
+		outline: none;
+	}
+	&.is-disabled {
+		background: _color("primary", "500");
+		color: _color("primary", "300");
+		pointer-events: none;
+		.chip-kill {
+			background: _color("primary", "300");
+			color:  _color("primary", "500");
+		}
+	}
 }
 
 .chip-kill {
-	background-color: _color("primary", "text");
+	background: _color("primary", "text");
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;
-	color:  _color("primary", "color");
+	color:  _color("primary", "700");
 	cursor: pointer;
 	font-size: .8rem;
 	font-weight: 700;
