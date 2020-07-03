@@ -94,7 +94,7 @@
 
 	&.is-disabled {
 		color: _color("text.placeholder", "color", true);
-		color: _color("text.placeholder");			color: _color("text.placeholder");
+		color: _color("text.placeholder");
 		&:hover, &:focus {
 			pointer-events: none;
 			background-color: #ffffff;
