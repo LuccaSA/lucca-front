@@ -55,10 +55,9 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		const groups = text.split(this._regex);
 		if (groups.length !== 3 && groups.length !== 2) { return false; }
 		try {
+
 			const { date, month, year } = this.extract(text, granularity);
-			// const date = parseInt(groups[this._order.date], 10);
-			// const month = parseInt(groups[this._order.month], 10);
-			// const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
+
 			let d : Date;
 			if (this._options.useUtc) {
 				d = new Date(Date.UTC(year, month - 1, date));
@@ -94,10 +93,6 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		}
 
 		const { date, month, year } = this.extract(text, granularity);
-		// const groups = text.split(this._regex);
-		// const date = parseInt(groups[this._order.date], 10);
-		// const month = parseInt(groups[this._order.month], 10);
-		// const year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 
 		return this.forge(year, month, date);
 	}
