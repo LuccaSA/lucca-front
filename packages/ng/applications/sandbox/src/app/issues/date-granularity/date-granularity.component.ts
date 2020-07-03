@@ -7,5 +7,5 @@ import { ELuDateGranularity } from '@lucca-front/ng/core';
 })
 export class DateGranularityComponent {
 	date = new Date();
-	gran = ELuDateGranularity.year;
+	gran = ELuDateGranularity.month;
 }
