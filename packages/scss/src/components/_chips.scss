@@ -1,6 +1,7 @@
 .chip {
-	background: _color("primary", "lightest");
-	border-radius: 1rem;
+	background: _color("primary", "color");
+	border-radius: _theme("commons.border.radius");
+	color:  _color("primary", "text");
 	display: inline-block;
 	margin: 0 .2rem .3rem 0;
 	padding: .15rem 1.8rem .15rem .75rem;
@@ -9,11 +10,11 @@
 }
 
 .chip-kill {
-	background-color: _color("primary", "light");
+	background-color: _color("primary", "text");
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;
-	color: white;
+	color:  _color("primary", "color");
 	cursor: pointer;
 	font-size: .8rem;
 	font-weight: 700;
