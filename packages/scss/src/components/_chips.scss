@@ -14,15 +14,6 @@
 		box-shadow: 0 0 1px 2px _color("primary", "400");
 		outline: none;
 	}
-	&.is-disabled {
-		background: _color("primary", "500");
-		color: _color("primary", "300");
-		pointer-events: none;
-		.chip-kill {
-			background: _color("primary", "300");
-			color:  _color("primary", "500");
-		}
-	}
 }
 
 .chip-kill {
