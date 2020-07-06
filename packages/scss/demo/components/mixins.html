@@ -37,4 +37,11 @@ _color("palette_name", "key") // return the palette.key value
 @include media_larger_than("breakpoint_key"){} //<==> @media (min-width: breakpoint_value) {}
 @include media_between("breakpoint1_key", "breakpoint2_key"){} //<==> @media (min-width: breakpoint1_value) and (max-width: breakpoint2_value) {}
 </code>
+	<h3>Mask</h3>
+	<p>To visually hide an element of the page, but leave it accessible to user agents (screen readers, indexing robots, translators, etc.).</p>
+	<p><code class="code mod-block">@include mask;</code></p>
+	<p><em><strong>Tip:</strong> a <code>u-mask</code> utility class also exists.</em></p>
+	<h3>IE 11</h3>
+	<p>A mixin to filter I.E. 11 in a more readable way than a hack directly in the code.</p>
+	<p><code class="code mod-block">@include ie11 { … };</code></p>
 </section>
