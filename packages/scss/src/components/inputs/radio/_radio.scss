@@ -10,18 +10,6 @@
 		&::after {
 			transform: scale(.55);
 		}
-
-		color: _color("grey", "dark");
-
-		&::before {
-			border-color: _component("radio.input.border.color");
-		}
-	}
-
-	&:focus ~ .radio-label {
-		&::before {
-			box-shadow: _theme("commons.focused");
-		}
 	}
 }
 
@@ -34,7 +22,6 @@
 
 	&::before {
 		border-radius: 50%;
-		border: 2px solid _component("radio.input.border.color");
 		content: "";
 		display: block;
 		height: _component("radio.input.size");
@@ -58,14 +45,6 @@
 		transition: all _theme("commons.animations.durations.fast") ease;
 		width: _component("radio.input.size");
 	}
-
-	&:hover {
-		color: _color("text.light");
-
-		&::before {
-			border-color: _component("radio.input.border.hover");
-		}
-	}
 }
 
 // PALETTE
@@ -75,13 +54,50 @@
 	@mixin radioColoring($palette) {
 		.radio-input:checked ~ .radio-label {
 			&::before {
-				border: 2px solid _color($palette);
+				border: 2px solid _color($palette, "700");
+			}
+
+			&::after {
+				background-color: _color($palette, "700");
+			}
+
+			&:hover {
+				&::before {
+					border-color: _color($palette, "600");
+				}
+
+				&::after {
+					background-color: _color($palette, "600");
+				}
 			}
 		}
 
 		.radio-label {
-			&::after {
-				background: _color($palette);
+			&::before {
+				border: 2px solid _color($palette, "700");
+			}
+
+			&:hover {
+				&::after {
+					background: _color($palette, "600");
+				}
+		
+				&::before {
+					border-color: _color($palette, "600");
+				}
+			}
+		}
+
+		.radio-input {
+			&:focus ~ .radio-label {
+				&::before {
+					box-shadow: 0 0 0 4px _color($palette, "200");
+					border-color: _color($palette, "600");
+				}
+
+				&::after {
+					background: _color($palette, "600");
+				}
 			}
 		}
 	}
@@ -120,17 +136,17 @@
 			cursor: not-allowed;
 
 			&::before {
-				border: 2px solid _color("grey", "light");
+				border: 2px solid _color("grey", "500");
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				border: 2px solid _color("grey", "light");
+				border: 2px solid _color("grey", "500");
 			}
 
 			&::after {
-				background-color: _color("grey", "light");
+				background-color: _color("grey", "500");
 			}
 		}
 	}
