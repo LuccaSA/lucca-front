@@ -76,6 +76,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	get disabled() { return this._disabled; }
 	setDisabledState(disabled: boolean) {
 		this.disabled = disabled;
+		this._changeDetectorRef.markForCheck();
 	}
 	protected isEmpty() {
 		const isEmptyArray = Array.isArray(this.value) && this.value.length === 0;

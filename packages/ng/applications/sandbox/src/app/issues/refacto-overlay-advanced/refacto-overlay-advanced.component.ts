@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
 	templateUrl: './refacto-overlay-advanced.component.html'
 })
 export class RefactoOverlayAdvancedComponent {
+	onOpen() {
+		console.log('onopen')
+	}
+	onClose() {
+		console.log('onclose')
+	}
 }

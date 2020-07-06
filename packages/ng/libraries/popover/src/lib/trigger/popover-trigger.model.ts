@@ -1,6 +1,5 @@
 import {
 	ElementRef,
-	EventEmitter,
 	ViewContainerRef,
 } from '@angular/core';
 
@@ -18,7 +17,7 @@ import {
 } from '@angular/cdk/overlay';
 import { TemplatePortal, ComponentPortal } from '@angular/cdk/portal';
 
-import { Subscription, Subject, timer } from 'rxjs';
+import { Subscription, Subject, timer, Observable } from 'rxjs';
 import { generateId } from '@lucca-front/ng/core';
 
 import {
@@ -50,6 +49,10 @@ export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuP
 
 	/** disable popover apparition */
 	disabled: boolean;
+	/** Event emitted when the associated popover is opened. */
+	onOpen: Observable<void>;
+	/** Event emitted when the associated popover is closed. */
+	onClose: Observable<void>;
 
 	openPopover();
 	closePopover();
@@ -114,6 +117,15 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _triggerId: string;
 	protected _panelId: string;
 
+
+	/** Event emitted when the associated popover is opened. */
+	abstract onOpen: Observable<void>;
+	/** Event emitted when the associated popover is closed. */
+	abstract onClose: Observable<void>;
+
+	protected abstract _emitOpen(): void;
+	protected abstract _emitClose(): void;
+
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
@@ -170,12 +182,13 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			/** Only subscribe to mouse enter/leave of the panel if trigger = hover */
 
 			this._initPopover();
+			this._emitOpen();
 		}
 	}
 
 	/** Closes the popover. */
 	closePopover(): void {
-		if (this._overlayRef) {
+		if (this._overlayRef && this._overlayRef.hasAttached()) {
 			this._overlayRef.detach();
 
 			/** unsubscribe to backdrop click if it was defined */
@@ -185,6 +198,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			}
 
 			this._resetPopover();
+			this._emitClose();
 		}
 	}
 

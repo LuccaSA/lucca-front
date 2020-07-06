@@ -8,12 +8,13 @@ import {
 	ContentChild,
 	HostListener,
 	ViewChild,
-	AfterContentInit,
 	Renderer2,
 	Input,
 	HostBinding,
 	OnDestroy,
 	AfterViewInit,
+	Output,
+	EventEmitter,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -53,6 +54,11 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 			this.multiple = !!m;
 		}
 	}
+	/** Event emitted when the associated popover is opened. */
+	@Output() onOpen = new EventEmitter<void>();
+	/** Event emitted when the associated popover is closed. */
+	@Output() onClose = new EventEmitter<void>();
+
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -152,7 +158,12 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 		this.closePopover();
 		this.destroyPopover();
 	}
-
+	protected _emitOpen(): void {
+		this.onOpen.emit();
+	}
+	protected _emitClose(): void {
+		this.onClose.emit();
+	}
 }
 
 /**
