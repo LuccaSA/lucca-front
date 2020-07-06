@@ -62,6 +62,7 @@ const routes: Routes = [
 	{ path: 'select-option-placeholder', loadChildren: () => import('./select-option-placeholder').then(m => m.SelectOptionPlaceholderModule) },
 	{ path: 'date-picker-width', loadChildren: () => import('./date-picker-width').then(m => m.DatePickerWidthModule) },
 	{ path: 'date-granularity', loadChildren: () => import('./date-granularity').then(m => m.DateGranularityModule) },
+	{ path: 'overlays-events', loadChildren: () => import('./overlays-events').then(m => m.OverlaysEventsModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
