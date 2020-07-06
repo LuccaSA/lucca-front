@@ -1,11 +1,8 @@
 .file {
-	border: 2px dashed _theme("commons.divider.color", true);
 	border: 2px dashed _theme("commons.divider.color");
-	border-radius: _theme("commons.border.radius", true);
 	border-radius: _theme("commons.border.radius");
 	display: block;
 	max-width: 30rem;
-	padding: _theme("spacings.biggest", true) _theme("spacings.standard", true);
 	padding: _theme("spacings.biggest") _theme("spacings.standard");
 	position: relative;
 	text-align: center;
@@ -13,33 +10,21 @@
 
 .file-icon {
 	font-size: 1.5rem;
-	color: _color("primary", "200", true);
 	color: _color("primary", "200");
 }
 
 .file-title {
 	margin-bottom: 0;
-	font-size: _theme("sizes.big.font-size", true);
 	font-size: _theme("sizes.big.font-size");
 	font-weight: 600;
 }
 
 .file-or {
-	font-size: _theme("sizes.small.font-size", true);
 	font-size: _theme("sizes.small.font-size");
-	margin-bottom: _theme("spacings.smallest", true);
 	margin-bottom: _theme("spacings.smallest");
 }
 
-.file-format {
-	color: _color("grey", "600", true);
-	color: _color("grey", "600");
-	margin-top: _theme("spacings.smaller", true);
-	margin-top: _theme("spacings.smaller");
-}
-
 .file-progress {
-	margin: _theme("spacings.small", true) 0 _theme("spacings.smaller", true);
 	margin: _theme("spacings.small") 0 _theme("spacings.smaller");
 }
 
@@ -56,7 +41,6 @@
 		align-items: center;
 		display: flex;
 		justify-content: space-between;
-		padding: _theme("spacings.smaller", true) _theme("spacings.standard", true);
 		padding: _theme("spacings.smaller") _theme("spacings.standard");
 		text-align: left;
 
@@ -70,7 +54,6 @@
 		.file-title {
 			display: flex;
 			flex-direction: column;
-			font-size: _theme("sizes.standard.font-size", true);
 			font-size: _theme("sizes.standard.font-size");
 			font-weight: 600;
 			margin: 0;
@@ -82,8 +65,6 @@
 	}
 	
 	&.mod-icon {
-		padding: _theme("spacings.smaller", true) _theme("spacings.standard", true)
-		_theme("spacings.smaller", true) _theme("spacings.bigger", true);
 		padding: _theme("spacings.smaller") _theme("spacings.standard")
 		_theme("spacings.smaller") _theme("spacings.bigger");
 	}
@@ -95,10 +76,8 @@
 
 .file {
 	&.is-droppable {
-		background: _theme("commons.background.base", true);
 		background: _theme("commons.background.base");
 		.file-icon {
-			color: _color("primary", "500", true);
 			color: _color("primary", "500");
 		}
 	}
@@ -107,7 +86,6 @@
 		.file-title,
 		.file-or,
 		.file-format {
-			color: _theme("commons.disabled.color", true);
 			color: _theme("commons.disabled.color");
 		}
 	}
