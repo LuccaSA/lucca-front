@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit } from '@angular/core';
 import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { ALuApiOptionSearcher, ALuApiSearcherService, ALuApiOptionPagedSearcher, ALuApiPagedSearcherService } from './api-searcher.model';
 import { ILuApiItem } from '../../api.model';
 import { LuApiSearcherService, LuApiPagedSearcherService } from './api-searcher.service';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, tap } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-api-searcher',
@@ -30,7 +30,7 @@ import { debounceTime } from 'rxjs/operators';
 	],
 })
 export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiSearcherService<T> = ALuApiSearcherService<T>>
-extends ALuApiOptionSearcher<T, S> {
+extends ALuApiOptionSearcher<T, S> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set api(api: string) {
 		this._service.api = api;
@@ -50,9 +50,13 @@ extends ALuApiOptionSearcher<T, S> {
 		@Inject(ALuApiSearcherService) @Self() selfService: ALuApiSearcherService,
 	) {
 		super((hostService || selfService) as S);
+
+	}
+	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
 		.pipe(debounceTime(250));
+		super.init();
 	}
 
 	onOpen() {
@@ -92,7 +96,7 @@ extends ALuApiOptionSearcher<T, S> {
 	],
 })
 export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiPagedSearcherService<T> = ALuApiPagedSearcherService<T>>
-extends ALuApiOptionPagedSearcher<T, S> {
+extends ALuApiOptionPagedSearcher<T, S> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
@@ -110,16 +114,23 @@ extends ALuApiOptionPagedSearcher<T, S> {
 		@Inject(ALuApiPagedSearcherService) @Self() selfService: ALuApiPagedSearcherService,
 	) {
 		super((hostService || selfService) as S);
+	}
+	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-		.pipe(debounceTime(250));	}
+		.pipe(
+			tap(c => this.resetPage()),
+			// debounceTime(250),
+		);
+		super.init();
+	}
 
 	onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}
 	resetClue() {
-		this.clueControl.setValue('');
+		this.clueControl.reset('')
 	}
 }
 
