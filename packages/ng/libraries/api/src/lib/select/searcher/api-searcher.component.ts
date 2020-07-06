@@ -130,7 +130,7 @@ extends ALuApiOptionPagedSearcher<T, S> implements OnInit {
 		super.onOpen();
 	}
 	resetClue() {
-		this.clueControl.reset('')
+		this.clueControl.reset('');
 	}
 }
 
