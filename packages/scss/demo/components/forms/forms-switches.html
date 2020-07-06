@@ -5,57 +5,65 @@
 	<div class="grid">
 		<div class="grid-xs4">
 			<div class="form-group">
-				<div class="switch">
-					<input class="switch-input" type="checkbox" id="switch0">
-					<label class="switch-label" for="switch0">Switch</label>
+				<div>
+					<label class="switch">
+						<input class="switch-input" type="checkbox" />
+						<span class="switch-label">Switch</span>
+					</label>
 				</div>
-				<div class="switch">
-					<input class="switch-input" type="checkbox" id="switch1" checked>
-					<label class="switch-label" for="switch1">Switch</label>
+				<div>
+					<label class="switch">
+						<input class="switch-input" type="checkbox" checked />
+						<span class="switch-label">Switch</span>
+					</label>
 				</div>
 			</div>
 		</div>
 		<div class="grid-xs4">
 			<div class="form-group">
-				<div class="switch">
-					<input class="switch-input" type="checkbox" id="switch2" disabled>
-					<label class="switch-label" for="switch2">Switch</label>
+				<div>
+					<label class="switch">
+						<input class="switch-input" type="checkbox" disabled />
+						<span class="switch-label">Switch</span>
+					</label>
 				</div>
-				<div class="switch">
-					<input class="switch-input" type="checkbox" id="switch3" disabled checked>
-					<label class="switch-label" for="switch3">Switch</label>
+				<div>
+					<label class="switch">
+						<input class="switch-input" type="checkbox" disabled checked />
+						<span class="switch-label">Switch</span>
+					</label>
 				</div>
 			</div>
 		</div>
 	</div>
-<code class="code mod-block">&lt;div class="switch"&gt;
-	&lt;input class="switch-input" type="checkbox" id="<b>switchID</b>"&gt;
-	&lt;label class="switch-label" for="<b>switchID</b>"&gt;Switch&lt;/label&gt;
-&lt;/div&gt;
+<code class="code mod-block">&lt;label class="switch"&gt;
+	&lt;input class="switch-input" type="checkbox" /&gt;
+	&lt;span class="switch-label"&gt;Switch&lt;/span&gt;
+&lt;/label&gt;
 </code>
-	<em><b>Tip:</b> To disable a switch, add a <code class="code">disabled</code> attribute to the checkbox input</em>
+	<em><strong>Tip:</strong> To disable a switch, add a <code class="code">disabled</code> attribute to the checkbox input</em>
 </section>
 
 
 <!-- Inline switch -->
 <section class="contentSection">
 	<h2>Inline</h2>
-	<div class="switch mod-inline">
-		<input class="switch-input" type="checkbox" id="switchInline0" checked>
-		<label class="switch-label" for="switchInline0">Switch</label>
-	</div>
-	<div class="switch mod-inline">
-		<input class="switch-input" type="checkbox" id="switchInline1" checked>
-		<label class="switch-label" for="switchInline1">Switch</label>
-	</div>
-	<div class="switch mod-inline">
-		<input class="switch-input" type="checkbox" id="switchInline2" checked>
-		<label class="switch-label" for="switchInline2">Switch</label>
-	</div>
-<code class="code mod-block">&lt;div class="switch mod-inline"&gt;
-	&lt;input class="switch-input" type="checkbox" id="<b>switchID</b>"&gt;
-	&lt;label class="switch-label" for="<b>switchID</b>"&gt;Switch&lt;/label&gt;
-&lt;/div&gt;
+	<label class="switch mod-inline">
+		<input class="switch-input" type="checkbox" checked />
+		<label class="switch-label">Switch</label>
+	</label>
+	<label class="switch mod-inline">
+		<input class="switch-input" type="checkbox" checked />
+		<label class="switch-label">Switch</label>
+	</label>
+	<label class="switch mod-inline">
+		<input class="switch-input" type="checkbox" checked />
+		<label class="switch-label">Switch</label>
+	</label>
+<code class="code mod-block">&lt;label class="switch mod-inline"&gt;
+	&lt;input class="switch-input" type="checkbox" /&gt;
+	&lt;span class="switch-label"&gt;Switch&lt;/span&gt;
+&lt;/label&gt;
 </code>
 </section>
 
@@ -63,29 +71,39 @@
 <!-- Palette -->
 <section class="contentSection">
 	<h2>Palette</h2>
-	<div class="switch palette-primary">
-		<input class="switch-input" type="checkbox" id="switch-palette-primary" checked>
-		<label class="switch-label" for="switch-palette-primary">palette-primary</label>
+	<div>
+		<label class="switch palette-primary">
+			<input class="switch-input" type="checkbox" checked />
+			<span class="switch-label">palette-primary</span>
+		</label>
 	</div>
-	<div class="switch palette-secondary">
-		<input class="switch-input" type="checkbox" id="switch-palette-secondary" checked>
-		<label class="switch-label" for="switch-palette-secondary">palette-secondary</label>
+	<div>
+		<label class="switch palette-secondary">
+			<input class="switch-input" type="checkbox" checked />
+			<span class="switch-label">palette-secondary</span>
+		</label>
 	</div>
-	<div class="switch palette-success">
-		<input class="switch-input" type="checkbox" id="switch-palette-success" checked>
-		<label class="switch-label" for="switch-palette-success">palette-success</label>
+	<div>
+		<label class="switch palette-success">
+			<input class="switch-input" type="checkbox" checked />
+			<span class="switch-label">palette-success</span>
+		</label>
 	</div>
-	<div class="switch palette-warning">
-		<input class="switch-input" type="checkbox" id="switch-palette-warning" checked>
-		<label class="switch-label" for="switch-palette-warning">palette-warning</label>
+	<div>
+		<label class="switch palette-warning">
+			<input class="switch-input" type="checkbox" checked />
+			<span class="switch-label">palette-warning</span>
+		</label>
 	</div>
-	<div class="switch palette-error">
-		<input class="switch-input" type="checkbox" id="switch-palette-error" checked>
-		<label class="switch-label" for="switch-palette-error">palette-error</label>
+	<div>
+		<label class="switch palette-error">
+			<input class="switch-input" type="checkbox" checked />
+			<span class="switch-label">palette-error</span>
+		</label>
 	</div>
-<code class="code mod-block">&lt;div class="switch palette-primary"&gt;
-	&lt;input class="switch-input" type="checkbox" id="<b>switchID</b>" checked&gt;
-	&lt;label class="switch-label" for="<b>switchID</b>"&gt;...&lt;/label&gt;
-&lt;/div&gt;</code>
-	<em><b>Tip:</b> It will works with all palette's colors</em>
+<code class="code mod-block">&lt;label class="switch palette-primary"&gt;
+	&lt;input class="switch-input" type="checkbox" checked /&gt;
+	&lt;span class="switch-label&gt;…&lt;/span&gt;
+&lt;/label&gt;</code>
+	<em><strong>Tip:</strong> It will works with all palette's colors</em>
 </section>
