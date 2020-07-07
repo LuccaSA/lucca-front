@@ -22,8 +22,8 @@ $commons: (
 	background: (
 		base: #F5F5F5
 	),
-	highlight: #E5E5E5,
-	selected: #EEEEEE,
+	highlight: _color("primary", "50"),
+	selected: _color("primary", "100"),
 	text: (
 		link: (
 			color: #00B2ED,
@@ -58,8 +58,8 @@ $commons: (
 	focused: 0 0 1px 2px #A6C7FF,
 	mobile: "md",
 	loading: (
-		background: _color("primary", "lighter"),
-		frontground: _color("primary"),
+		background: _color("primary", "200"),
+		frontground: _color("primary", "color"),
 		speed: 600ms,
 	)
 );
