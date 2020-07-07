@@ -39,6 +39,7 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 extends ALuPopoverTrigger<TPanel, TTarget>
 implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 
+
 	/** References the popover instance that the trigger is associated with. */
 	@Input('luPopover') set inputPanel(p: TPanel) { this.panel = p; }
 
@@ -49,10 +50,10 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@Input('luPopoverTrigger') set inputTriggerEvent(te: LuPopoverTriggerEvent) { this.triggerEvent = te; }
 
 	/** Event emitted when the associated popover is opened. */
-	@Output() onPopoverOpen = new EventEmitter<void>();
+	@Output('luPopoverOnOpen') onOpen = new EventEmitter<void>();
 
 	/** Event emitted when the associated popover is closed. */
-	@Output() onPopoverClose = new EventEmitter<void>();
+	@Output('luPopoverOnClose') onClose = new EventEmitter<void>();
 
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */
 	@Input('luPopoverPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
@@ -121,5 +122,11 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	ngOnDestroy() {
 		this.closePopover();
 		this.destroyPopover();
+	}
+	protected _emitOpen(): void {
+		this.onOpen.emit();
+	}
+	protected _emitClose(): void {
+		this.onClose.emit();
 	}
 }

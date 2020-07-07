@@ -8,6 +8,8 @@ import {
 	HostListener,
 	Injector,
 	OnDestroy,
+	Output,
+	EventEmitter,
 } from '@angular/core';
 	import { Overlay } from '@angular/cdk/overlay';
 	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
@@ -30,6 +32,10 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 
 	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
 
+	/** Event emitted when the associated popover is opened. */
+	@Output('luTooltipOnOpen') onOpen = new EventEmitter<void>();
+	/** Event emitted when the associated popover is closed. */
+	@Output('luTooltipOnClose') onClose = new EventEmitter<void>();
 	@HostListener('mouseenter')
 	onMouseEnter() {
 		super.onMouseEnter();
@@ -65,5 +71,11 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	ngOnDestroy() {
 		this.closePopover();
 		this.destroyPopover();
+	}
+	protected _emitOpen(): void {
+		this.onOpen.emit();
+	}
+	protected _emitClose(): void {
+		this.onClose.emit();
 	}
 }

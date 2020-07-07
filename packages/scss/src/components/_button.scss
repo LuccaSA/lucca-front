@@ -5,7 +5,7 @@
 	display: inline-block;
 	font-family: unquote(_component("button.font.family"));
 	font-size: _component("button.font-size");
-	font-weight: _component("button.font-weight");
+	font-weight: _component("button.font-weight"); /* stylelint-disable-line font-weight-notation */
 	line-height: _component("button.line-height");
 	margin: _component("button.margin");
 	padding: _component("button.padding");
@@ -98,9 +98,20 @@
 		padding: _component("button.small.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
+			line-height: _component("button.small.line-height");
 			font-size: .875rem;
 		}
+	}
+
+	&.mod-smaller {
+		font-size: _component("button.smaller.font-size");
+		line-height: _component("button.smaller.line-height");
+		padding: _component("button.smaller.padding");
+
+		.lucca-icon {
+			line-height: _component("button.small.line-height");
+			font-size: .875rem;
+		}	
 	}
 
 	&.mod-link {
@@ -185,8 +196,12 @@
 
 			&:active:not([disabled]) {
 				background: _color($palette, "50");
-				color: _color($palette, "dark");
+				color: _color($palette, "800");
 				box-shadow: inset 0 0 0 1px _color($palette, "800");
+			}
+
+			&:focus {
+				box-shadow: 0 0 0 4px _color($palette, "200");
 			}
 
 			.button-counter {
@@ -209,7 +224,7 @@
 		padding-left: _theme("spacings.small");
 		padding-right: _theme("spacings.small");
 
-		&.mod-small {
+		&.mod-small, &.mod-smaller {
 			.button-counter {
 				height: 1rem;
 				min-width: 1rem;
@@ -226,6 +241,14 @@
 				font-size: _component("button.small.font-size");
 				height: _component("button.small.line-height");
 				line-height: _component("button.small.line-height");
+			}
+		}
+
+		&.mod-smaller {
+			.button-icon {
+				font-size: _component("button.smaller.font-size");
+				height: _component("button.smaller.line-height");
+				line-height: _component("button.smaller.line-height");
 			}
 		}
 	}

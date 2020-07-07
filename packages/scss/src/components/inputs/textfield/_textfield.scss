@@ -8,6 +8,7 @@
 }
 
 .textfield-input {
+	min-width: 0;
 	background: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
@@ -71,6 +72,12 @@
 	transition: all _theme("commons.animations.durations.fast") ease;
 	z-index: 999;
 	width: 100%;
+}
+
+.textfield-options-mark {
+	background-color: transparent;
+	text-decoration: underline;
+	color: inherit;
 }
 
 .textfield-options-entry {

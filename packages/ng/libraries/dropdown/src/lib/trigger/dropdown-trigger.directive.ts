@@ -1,5 +1,5 @@
 import { ILuDropdownPanel } from '../panel/index';
-import { AfterViewInit, OnDestroy, Input, HostBinding, ElementRef, ViewContainerRef, HostListener, Directive } from '@angular/core';
+import { AfterViewInit, OnDestroy, Input, HostBinding, ElementRef, ViewContainerRef, HostListener, Directive, Output, EventEmitter } from '@angular/core';
 import { ALuPopoverTrigger, ILuPopoverTarget, ILuPopoverTrigger, LuPopoverTarget, LuPopoverPosition, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { Overlay } from '@angular/cdk/overlay';
 
@@ -25,6 +25,11 @@ implements ILuPopoverTrigger<TPanel, ILuPopoverTarget>, AfterViewInit, OnDestroy
 	@Input('luDropdownDisabled') set inputDisabled(d: boolean) { this.disabled = d; }
 	/** set to true if you want the panel to appear on top of the target */
 	@Input('luDropdownOverlap') set inputOverlap(ov: boolean) { this.target.overlap = ov; }
+
+	/** Event emitted when the associated popover is opened. */
+	@Output('luDropdownOnOpen') onOpen = new EventEmitter<void>();
+	/** Event emitted when the associated popover is closed. */
+	@Output('luDropdownOnClose') onClose = new EventEmitter<void>();
 
 	/** accessibility attribute - dont override */
 	@HostBinding('attr.aria-expanded') get _attrAriaExpanded() { return this._popoverOpen; }
@@ -59,5 +64,11 @@ implements ILuPopoverTrigger<TPanel, ILuPopoverTarget>, AfterViewInit, OnDestroy
 	ngOnDestroy() {
 		this.closePopover();
 		this.destroyPopover();
+	}
+	protected _emitOpen(): void {
+		this.onOpen.emit();
+	}
+	protected _emitClose(): void {
+		this.onClose.emit();
 	}
 }
