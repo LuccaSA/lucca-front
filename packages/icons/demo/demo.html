@@ -18,17 +18,17 @@
 			<ul>
 				<li>
 					using ligature: add the <code class="code">lucca-icon</code> class to your element and use the corresponding ligature (written here below each icon)
-					<span class="example">eg.: <code class="code">&lt;i class=&quot;lucca-icon&quot;&gt;user_roles&lt;/i&gt;</code></span>
+					<span class="example">eg.: <code class="code">&lt;span aria-hidden="true" class=&quot;lucca-icon&quot;&gt;user_roles&lt;/span&gt;</code></span>
 				</li>
 				<li>using classes: add the
 					<code class="code">lucca-icon</code> class and use the ligature in dash-case as a class. 
-					<span class="example">eg.:<code class="code">&lt;i class=&quot;lucca-icon user-roles&quot;&gt;&lt;/i&gt;</code></span>
+					<span class="example">eg.:<code class="code">&lt;span aria-hidden="true" class=&quot;lucca-icon user-roles&quot;&gt;&lt;/span&gt;</code></span>
 				</li>
 			</ul>
 		</div>
 		<section id="icons-section">
 			<div class="demo-icon" w3-repeat="icon-name in icons">
-				<i class="lucca-icon">{{icon-name}}</i>
+				<span aria-hidden="true" class="lucca-icon">{{icon-name}}</span>
 				<code class="code">{{icon-name}}</code>
 			</div>
 			<div class="u-clear"></div>
