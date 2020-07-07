@@ -28,11 +28,11 @@
 					}
 
 					&:focus {
-						box-shadow: 0 0 0 2px _theme("palettes.#{$name}.color");
+						box-shadow: 0 0 0 4px _color($name, "200"), 0 0 0 1px _theme("palettes.#{$name}.color") inset;
 					}
 
 					@if ($name == "error") {
-						box-shadow: 0 0 0 2px _theme("palettes.#{$name}.color");
+						box-shadow: 0 0 0 1px _theme("palettes.#{$name}.color");
 					}
 				}
 			}
@@ -165,17 +165,7 @@
 			}
 
 			.#{$fieldname}-input {
-				&:hover {
-					&::placeholder {
-						color: _color("error", "light");
-					}
-				}
-
-				&, &:focus {
-					&::placeholder {
-						color: _color("error", "lighter");
-					}
-				}
+				@include fieldState($fieldname, "error");
 			}
 		}
 	}

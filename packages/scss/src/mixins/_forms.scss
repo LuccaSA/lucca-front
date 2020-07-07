@@ -22,11 +22,11 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 2px _color($state);
+		box-shadow: 0 0 0 4px _color($state, "200"), 0 0 0 1px _color($state) inset;
 	}
 
 	@if ($state == "error") {
-		box-shadow: 0 0 0 2px _color($state);
+		box-shadow: 0 0 0 1px _color($state);
 	}
 }
 
@@ -39,7 +39,7 @@
 		box-shadow: 0 2px 0 0 _color($state);
 	}
 
-	@if ($state == 'error') {
+	@if ($state == "error") {
 		box-shadow: 0 2px 0 0 _color($state);
 	}
 
@@ -84,7 +84,7 @@
 		color: _color($state) !important;
 	}
 
-	@if ($state == 'error') {
+	@if ($state == "error") {
 		@include fakeBorder(1px, _color($state));
 		z-index: 1;
 	}

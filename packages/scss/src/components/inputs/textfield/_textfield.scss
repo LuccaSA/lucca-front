@@ -151,14 +151,14 @@
 	&.mod-white {
 		.textfield-input {
 			background: white;
-			box-shadow: 0 0 0 1px _theme("commons.divider.color");
+			box-shadow: 0 0 0 1px _color("primary", "500") inset;
 
 			&::placeholder {
 				color: _component("textfield.focus.placeholder");
 			}
 
 			&:focus {
-				box-shadow: 0 0 0 2px _color("primary", "500");
+				box-shadow: 0 0 0 4px _color("primary", "200"), 0 0 0 1px _color("primary", "500") inset;
 
 				&::placeholder {
 					color: _component("textfield.focus.placeholder");
@@ -176,6 +176,8 @@
 			}
 
 			&:focus {
+				box-shadow: 0 0 0 4px _color("primary", "700"), 0 0 0 1px _color("primary", "500") inset;
+
 				&::placeholder {
 					color: _component("textfield.focus.placeholder");
 				}
