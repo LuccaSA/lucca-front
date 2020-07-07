@@ -13,26 +13,22 @@
 				}
 
 				.#{$fieldname}-input {
-					background-color: _theme("palettes.#{$name}.lightest");
+					background-color: _color($name, 50);
 
-					&:hover {
-						&::placeholder {
-							color: _theme("palettes.#{$name}.light");
-						}
-					}
-
-					&, &:focus {
-						&::placeholder {
-							color: _theme("palettes.#{$name}.lighter");
-						}
+					&::placeholder {
+						color: _color($name, "400");
 					}
 
 					&:focus {
-						box-shadow: 0 0 0 4px _color($name, "200"), 0 0 0 1px _theme("palettes.#{$name}.color") inset;
+						background-color: white;
+						box-shadow: 0 0 0 4px _color($name, "200"), 0 0 0 1px _color($name, "700") inset;
+						&::placeholder {
+							color: _color($name, "300");
+						}
 					}
 
 					@if ($name == "error") {
-						box-shadow: 0 0 0 1px _theme("palettes.#{$name}.color");
+						box-shadow: 0 0 0 1px _color($name, "700");
 					}
 				}
 			}
