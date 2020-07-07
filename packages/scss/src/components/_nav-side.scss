@@ -44,8 +44,7 @@
 	padding: _theme("spacings.smaller");
 }
 
-.navSide-item + .navSide-item,
-.navSide-item-subMenu-link + .navSide-item-subMenu-link {
+.navSide-item + .navSide-item, .navSide-item-subMenu-link + .navSide-item-subMenu-link {
 	margin-top: 2px;
 }
 
@@ -361,7 +360,7 @@
 		position: relative;
 		padding-top: _component("navSide.mobile.toggle-height");
 		width: 100%;
-		
+
 		&, &.mod-withBottomSection {
 			.navSide-mainSection, .navSide-scrollWrapper {
 				width: 100%;
