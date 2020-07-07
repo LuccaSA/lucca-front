@@ -10,6 +10,7 @@
 
 		&:focus {
 			z-index: 1;
+			@include fakeBorder(1px, _component("field.framed.color"));
 
 			~ .#{$fieldname}-messages {
 				transform: translateY(100%);

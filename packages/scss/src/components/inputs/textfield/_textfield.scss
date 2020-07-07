@@ -32,7 +32,7 @@
 
 	&:focus, &.is-focused {
 		background: white;
-		box-shadow: 0 0 0 2px _color("primary", "light");
+		box-shadow: 0 0 0 4px _component("textfield.focus.shadow-color"), inset 0 0 0 1px _component("textfield.focus.border-color");
 
 		&::placeholder {
 			color: _component("textfield.focus.placeholder");
@@ -49,7 +49,7 @@
 	z-index: 1;
 
 	&.mod-icon {
-		color: _color("primary", "light");
+		color: _color("primary", "500");
 		line-height: 1.5rem;
 	}
 }
@@ -86,11 +86,11 @@
 	transition: background 50ms ease;
 
 	&:hover {
-		background: _color("primary", "lightest");
+		background: _color("primary", "50");
 	}
 
 	&.is-focus {
-		background: _color("primary", "lightest");
+		background: _color("primary", "50");
 	}
 }
 
@@ -158,14 +158,14 @@
 	&.mod-white {
 		.textfield-input {
 			background: white;
-			box-shadow: 0 0 0 1px _theme("commons.divider.color");
+			box-shadow: 0 0 0 1px _color("primary", "500") inset;
 
 			&::placeholder {
 				color: _component("textfield.focus.placeholder");
 			}
 
 			&:focus {
-				box-shadow: 0 0 0 2px _color("primary", "light");
+				box-shadow: 0 0 0 4px _color("primary", "200"), 0 0 0 1px _color("primary", "500") inset;
 
 				&::placeholder {
 					color: _component("textfield.focus.placeholder");
@@ -183,6 +183,8 @@
 			}
 
 			&:focus {
+				box-shadow: 0 0 0 4px _color("primary", "700"), 0 0 0 1px _color("primary", "500") inset;
+
 				&::placeholder {
 					color: _component("textfield.focus.placeholder");
 				}
@@ -212,7 +214,7 @@
 		&::after {
 			@include makeIcon("search");
 			bottom: .5rem;
-			color: _color("primary", "light");
+			color: _color("primary", "500");
 			font-size: 1.2rem;
 			line-height: 1.4rem;
 			pointer-events: none;
@@ -282,7 +284,7 @@
 
 			&::after {
 				bottom: .5rem;
-				color: _color("primary", "light");
+				color: _color("primary", "500");
 				font-weight: 400;
 			}
 		}
