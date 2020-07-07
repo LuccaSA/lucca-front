@@ -27,12 +27,13 @@ import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
+	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 
-	granularity: ELuDateGranularity;
+	viewGranularity: ELuDateGranularity;
 	header: ICalendarItem<D>;
 	items: ICalendarItem<D>[] = [];
 	get mod() {
-		switch (this.granularity) {
+		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
 				return 'mod-yearlyView';
 			case ELuDateGranularity.month:
@@ -54,7 +55,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	ngOnInit() {
-		this.granularity = ELuDateGranularity.day;
+		this.viewGranularity = this.granularity;
 		this.initDayLabels();
 	}
 	writeValue(value?: D) {
@@ -70,7 +71,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		}
 	}
 	protected render() {
-		switch (this.granularity) {
+		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
 				this.renderYearlyView();
 				break;
@@ -193,7 +194,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		});
 	}
 	select(item: ICalendarItem<D>) {
-		switch (this.granularity) {
+		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
 				this.selectYear(item);
 				break;
@@ -214,18 +215,26 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		this.setValue(item.date);
 	}
 	protected selectMonth(item: ICalendarItem<D>) {
-		this.header = item;
-		this.granularity = ELuDateGranularity.day;
-		this.render();
+		if (this.granularity === ELuDateGranularity.month) {
+			this.setValue(item.date);
+		} else {
+			this.header = item;
+			this.viewGranularity = ELuDateGranularity.day;
+			this.render();
+		}
 	}
 	protected selectYear(item: ICalendarItem<D>) {
-		this.header = item;
-		this.granularity = ELuDateGranularity.month;
-		this.render();
+		if (this.granularity === ELuDateGranularity.year) {
+			this.setValue(item.date);
+		} else {
+			this.header = item;
+			this.viewGranularity = ELuDateGranularity.month;
+			this.render();
+		}
 	}
 
 	previous() {
-		switch (this.granularity) {
+		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
 				this.previousDecade();
 				break;
@@ -240,7 +249,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		this.render();
 	}
 	next() {
-		switch (this.granularity) {
+		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
 				this.nextDecade();
 				break;
@@ -256,7 +265,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	}
 	trackBy(idx, item) { return item.id; }
 	changeGranularity() {
-		this.granularity = this.header.granularity;
+		this.viewGranularity = this.header.granularity;
 		this.render();
 	}
 	protected nextMonth() {

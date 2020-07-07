@@ -20,3 +20,9 @@
 	white-space: nowrap !important;
 	contain: paint !important;
 }
+
+@mixin ie11() {
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		@content;
+	}
+}

@@ -2,6 +2,12 @@
 
 @include field("radiosfield");
 
+.radiosfield {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
 .radiosfield-input {
 	@include field-input("radiosfield");
 
