@@ -45,3 +45,19 @@
 	margin: 0;
 	max-width: 100%;
 }
+
+.u-listReset {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.u-buttonReset {
+	background-color: transparent;
+	padding: 0;
+	border: 0;
+	text-align: left;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+}
