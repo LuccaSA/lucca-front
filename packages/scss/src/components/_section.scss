@@ -3,12 +3,12 @@
 	border-bottom: 1px solid #E5E5E5;
 	padding: 3rem;
 
-	@media (max-width: _theme("breakpoints.md.breakAt") - 1) {
+	@include media_smaller_than("md") {
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
 
-	@media (max-width: _theme("breakpoints.sm.breakAt") - 1) {
+	@include media_smaller_than("sm") {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
