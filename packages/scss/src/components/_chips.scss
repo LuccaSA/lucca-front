@@ -1,7 +1,7 @@
 .chip {
 	background: _color("primary", "700");
 	border-radius: _theme("commons.border.radius");
-	color:  _color("primary", "text");
+	color: _color("primary", "text");
 	display: inline-block;
 	margin: 0 .2rem .3rem 0;
 	padding: .15rem 1.8rem .15rem .75rem;
@@ -21,7 +21,7 @@
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;
-	color:  _color("primary", "700");
+	color: _color("primary", "700");
 	cursor: pointer;
 	font-size: .8rem;
 	font-weight: 700;
