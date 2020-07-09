@@ -17,6 +17,7 @@
 	margin-bottom: 0;
 	font-size: _theme("sizes.big.font-size");
 	font-weight: 600;
+	margin-bottom: 0;
 }
 
 .file-or {
@@ -24,8 +25,17 @@
 	margin-bottom: _theme("spacings.smallest");
 }
 
+.file-format {
+	color: _color("text.light");
+	margin-top: _theme("spacings.smaller");
+}
+
 .file-progress {
 	margin: _theme("spacings.small") 0 _theme("spacings.smaller");
+}
+
+.file-name {
+	color: _color("text.light");
 }
 
 .file-input {
@@ -61,6 +71,10 @@
 
 		.file-progress {
 			margin: _theme("spacings.smaller") 0;
+		}
+
+		.file-name {
+			font-size: _theme("sizes.small.font-size");
 		}
 	}
 	
