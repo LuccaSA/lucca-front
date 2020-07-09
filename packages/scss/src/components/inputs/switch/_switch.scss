@@ -6,12 +6,6 @@
 	opacity: 0;
 	pointer-events: none;
 	position: absolute;
-
-	&:focus ~ .switch-label {
-		&::before {
-			box-shadow: _theme("commons.focused");
-		}
-	}
 }
 
 .switch-label {
@@ -22,7 +16,7 @@
 	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&::before {
-		background: _color("grey", "dark");
+		background: _color("grey", "700");
 		border-radius: .5rem;
 		content: "";
 		display: block;
@@ -35,7 +29,8 @@
 	}
 
 	&::after {
-		background: white;
+		background: _theme("colors.white");
+		box-shadow: _theme("commons.box-shadow.hard");
 		border-radius: 50%;
 		content: "";
 		display: block;
@@ -51,7 +46,7 @@
 		color: _color("grey");
 
 		&::before {
-			background: _color("grey");
+			background: _color("grey", "600");
 		}
 	}
 }
@@ -64,6 +59,27 @@
 	&.mod-inline {
 		display: inline-block;
 		margin-right: 1.5rem;
+	}
+
+	&.mod-small {
+		.switch-label{
+			padding: 0 0 0 calc(1.75rem - 4px + #{_theme("spacings.smaller", true)});
+			&::before {
+				margin-top: _component("switch.small-top");
+				height: _theme("sizes.small.font-size");
+				width: calc(1.75rem - 4px);
+			}
+			&::after {
+				margin-top: _component("switch.small-top");
+				height: calc(#{_theme("sizes.small.font-size")} - 4px);
+				width: calc(#{_theme("sizes.small.font-size")} - 4px);
+			}
+		}
+		.switch-input:checked ~ .switch-label {
+			&::after {
+				left: calc(#{_theme("sizes.small.font-size")} - 2px);
+			}
+		}
 	}
 }
 
@@ -89,11 +105,11 @@
 
 	&[disabled], &[readonly] {
 		~ .switch-label {
-			color: _color("grey");
-			cursor: not-allowed;
+			color: _color("grey", "500");
+			cursor: default;
 
 			&::before {
-				background: _color("grey", "light") !important;
+				background: _color("grey", "500");
 			}
 		}
 	}
@@ -106,6 +122,14 @@
 .switch {
 	@mixin switchColoring($palette) {
 
+		.switch-input {
+			&:focus ~ .switch-label {
+				&::before {
+					box-shadow: 0 0 0 4px _color($palette, "200");
+				}
+			}
+		}
+
 		.switch-input:checked {
 			~ .switch-label {
 				&::before {
@@ -114,7 +138,20 @@
 
 				&:hover {
 					&::before {
-						background: _color($palette, "light");
+						background: _color($palette, "600");
+					}
+				}
+			}
+			&[disabled], &[readonly] {
+				~ .switch-label {
+					&::before {
+						background: _color($palette, "500");
+					}
+
+					&:hover {
+						&::before {
+							background: _color($palette, "500");
+						}
 					}
 				}
 			}

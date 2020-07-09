@@ -1,6 +1,7 @@
 .chip {
-	background: _color("primary", "lightest");
-	border-radius: 1rem;
+	background: _color("primary", "700");
+	border-radius: _theme("commons.border.radius");
+	color:  _color("primary", "text");
 	display: inline-block;
 	margin: 0 .2rem .3rem 0;
 	padding: .15rem 1.8rem .15rem .75rem;
@@ -9,11 +10,11 @@
 }
 
 .chip-kill {
-	background-color: _color("primary", "light");
+	background: _color("primary", "text");
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;
-	color: white;
+	color:  _color("primary", "700");
 	cursor: pointer;
 	font-size: .8rem;
 	font-weight: 700;
@@ -32,7 +33,12 @@
 	}
 
 	&:hover {
-		background-color: _color("error");
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06);
+		background-color: _component("chip.kill.hover");
+	}
+	&:focus {
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 2px _component("chip.kill.hover");
+		outline: 0;
 	}
 }
 
@@ -46,6 +52,17 @@
 
 		.chip-kill {
 			display: none;
+		}
+	}
+
+	&.mod-clickable {
+		cursor: pointer;
+		&:hover, &:focus {
+			background: _color("primary", "600");
+		}
+		&:focus {
+			box-shadow: 0 0 0 4px _color("primary", "200");
+			outline: none;
 		}
 	}
 }

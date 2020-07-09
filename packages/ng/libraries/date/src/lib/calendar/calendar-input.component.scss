@@ -95,7 +95,7 @@
 	padding: 0;
 	outline: none;
 
-	&.is-previousMonth, &.is-nextMonth {
+	&.is-previousMonth, &.is-nextMonth, &.is-disabled {
 		color: _color("text.placeholder", "color", true);
 		color: _color("text.placeholder");
 	}
@@ -149,6 +149,13 @@
 					border-radius: 2rem;
 				}
 			}
+		}
+	}
+
+	&.is-disabled {
+		&:hover .calendar-grid-item-content {
+			pointer-events: none;
+			background-color: white;
 		}
 	}
 }

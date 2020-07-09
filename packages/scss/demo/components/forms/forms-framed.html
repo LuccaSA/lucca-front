@@ -11,215 +11,319 @@
 		 your inputs to size them on a single line.
 	</p>
 
-	<div class="form mod-framed">
-		<div class="form-group">
-			<h2>Title Group 1</h2>
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="u-textBigger">Group 1</legend>
 			<div class="form-group-line">
-				<div class="textfield mod-framed is-required">
-					<input class="textfield-input" type="text" placeholder="placeholder">
-					<label class="textfield-label">Textfield label</label>
-				</div>
+				<label class="textfield mod-framed is-required">
+					<input class="textfield-input" type="text" placeholder="placeholder" />
+					<span class="textfield-label">Textfield label</span>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div class="textfield mod-framed is-required">
-					<input class="textfield-input is-warning" type="text" placeholder="placeholder">
-					<label class="textfield-label">Textfield label</label>
-				</div>
+				<label class="textfield mod-framed is-required">
+					<input class="textfield-input is-warning" type="text" placeholder="placeholder" />
+					<span class="textfield-label">Textfield label</span>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div class="textfield mod-framed is-required">
-					<input class="textfield-input is-success" type="text" placeholder="placeholder">
-					<label class="textfield-label">Textfield label</label>
-				</div>
+				<label class="textfield mod-framed is-required">
+					<input class="textfield-input is-success" type="text" placeholder="placeholder" />
+					<span class="textfield-label">Textfield label</span>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div class="textfield mod-framed is-required">
-					<input class="textfield-input is-error" type="text" placeholder="placeholder">
-					<label class="textfield-label">Textfield label</label>
-				</div>
+				<label class="textfield mod-framed is-required">
+					<input class="textfield-input is-error" type="text" placeholder="placeholder" />
+					<span class="textfield-label">Textfield label</span>
+				</label>
 			</div>
 			<div class="form-group-line">
 				<div class="form-group-line-lg8">
-					<div class="textfield mod-framed">
-						<input class="textfield-input" type="text" placeholder="placeholder">
-						<label class="textfield-label">Textfield label</label>
-					</div>
+					<label class="textfield mod-framed">
+						<input class="textfield-input" type="text" placeholder="placeholder" />
+						<span class="textfield-label">Textfield label</span>
+					</label>
 				</div>
 				<div class="form-group-line-lg4">
-					<div class="textfield mod-framed">
-						<input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled>
-						<label class="textfield-label">Textfield label</label>
-					</div>
+					<label class="textfield mod-framed">
+						<input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled />
+						<span class="textfield-label">Textfield label</span>
+					</label>
 				</div>
 			</div>
 			<div class="form-group-line">
-				<div class="textfield mod-framed mod-withSuffix">
-					<input class="textfield-input" type="text" placeholder="Money Money">
-					<label class="textfield-label">Textfield label</label>
-					<div class="textfield-suffix">
+				<label class="textfield mod-framed mod-withSuffix">
+					<input class="textfield-input" type="text" placeholder="Money Money" />
+					<span class="textfield-label">Textfield label</span>
+					<span class="textfield-suffix">
 						€
-					</div>
-				</div>
+					</span	>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div class="textfield mod-multiline mod-framed mod-withSuffix">
+				<label class="textfield mod-multiline mod-framed mod-withSuffix">
 					<textarea class="textfield-input" type="text" placeholder="Money Money"></textarea>
-					<label class="textfield-label">Textfield label</label>
+					<span class="textfield-label">Textfield label</span>
 					<div class="textfield-suffix">
-						<select class="" name="">
-							<option value="">Option 1</option>
+						<select>
+							<option value="1">Option 1</option>
 						</select>
 					</div>
-				</div>
+				</label>
 			</div>
-		</div>
-		<div class="form-group">
-			<h2>Title Group 2</h2>
+		</fieldset>
+		<fieldset class="form-group">
+			<legend class="u-textBigger">Group 2</legend>
 			<div class="form-group-line">
-				<div class="textfield mod-multiline mod-framed mod-withSuffix is-required">
+				<label class="textfield mod-multiline mod-framed mod-withSuffix is-required">
 					<textarea class="textfield-input" type="text" placeholder="Money Money"></textarea>
-					<label class="textfield-label">Textfield label</label>
+					<span class="textfield-label">Textfield label</span>
 					<div class="textfield-suffix">
-						<select class="" name="">
-							<option value="">Option 1</option>
+						<select>
+							<option value="1">Option 1</option>
 						</select>
 					</div>
-				</div>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div id="autocomplete-framed" class="textfield mod-framed mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')">
-					<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')">
-					<label class="textfield-label">User</label>
+				<label id="autocomplete-framed" class="textfield mod-framed mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')" />
+					<span class="textfield-label">User</span>
 					<ul class="textfield-options">
 						<li class="textfield-options-entry">
-							<u>va</u>lue A</li>
+							<mark class="textfield-options-mark">va</mark>lue A</li>
 						<li class="textfield-options-entry is-focus">
-							<u>va</u>lue B</li>
+							<mark class="textfield-options-mark">va</mark>lue B</li>
 						<li class="textfield-options-entry">
-							<u>va</u>lue C</li>
+							<mark class="textfield-options-mark">va</mark>lue C</li>
 					</ul>
-				</div>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div id="autocomplete-framed-select" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')">
-					<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')">
-					<label class="textfield-label">User</label>
+				<label id="autocomplete-framed-select" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')" />
+					<span class="textfield-label">User</span>
 					<ul class="textfield-options">
 						<li class="textfield-options-entry">
-							<u>va</u>lue A</li>
+							<mark class="textfield-options-mark">va</mark>lue A</li>
 						<li class="textfield-options-entry is-focus">
-							<u>va</u>lue B</li>
+							<mark class="textfield-options-mark">va</mark>lue B</li>
 						<li class="textfield-options-entry">
-							<u>va</u>lue C</li>
+							<mark class="textfield-options-mark">va</mark>lue C</li>
 					</ul>
-				</div>
+				</label>
 			</div>
 			<div class="form-group-line">
 				<div class="form-group-line-xs6">
-					<div id="autocomplete-framed-select2" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')">
-						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')">
-						<label class="textfield-label">User</label>
+					<label id="autocomplete-framed-select2" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')">
+						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')" />
+						<span class="textfield-label">User</span>
 						<ul class="textfield-options">
 							<li class="textfield-options-entry">
-								<u>va</u>lue A</li>
+								<mark class="textfield-options-mark">va</mark>lue A</li>
 							<li class="textfield-options-entry is-focus">
-								<u>va</u>lue B</li>
+								<mark class="textfield-options-mark">va</mark>lue B</li>
 							<li class="textfield-options-entry">
-								<u>va</u>lue C</li>
+								<mark class="textfield-options-mark">va</mark>lue C</li>
 						</ul>
-					</div>
+					</label>
 				</div>
 				<div class="form-group-line-xs6">
-					<div class="textfield mod-framed is-required">
-						<input class="textfield-input is-error" type="text" placeholder="placeholder">
-						<label class="textfield-label">Textfield label</label>
+					<label class="textfield mod-framed is-required">
+						<input class="textfield-input is-error" type="text" placeholder="placeholder" />
+						<span class="textfield-label">Textfield label</span>
 						<div class="textfield-messages">
 							<div class="textfield-messages-error">This field is required</div>
 						</div>
-					</div>
+					</label>
 				</div>
 			</div>
 			<div class="form-group-line">
-				<div class="checkbox">
-					<input class="checkbox-input" type="checkbox" id="checkboxID">
-					<label class="checkbox-label" for="checkboxID">Checkbox</label>
-				</div>
+				<label class="checkbox">
+					<input class="checkbox-input" type="checkbox" />
+					<span class="checkbox-label">Checkbox</span>
+				</label>
 			</div>
 			<div class="form-group-line">
-				<div class="radiosfield">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Textfield label</legend>
 					<div class="radiosfield-input">
-						<div class="radio">
-							<input class="radio-input" type="radio" name="radioframedlist" id="radioID">
-							<label class="radio-label" for="radioID">radio</label>
-						</div>
-						<div class="radio">
-							<input class="radio-input" type="radio" name="radioframedlist" id="radioID2">
-							<label class="radio-label" for="radioID2">radio</label>
-						</div>
-						<div class="radio">
-							<input class="radio-input" type="radio" name="radioframedlist" id="radioID3">
-							<label class="radio-label" for="radioID3">radio</label>
-						</div>
+						<label class="radio">
+							<input class="radio-input" type="radio" name="radioframedlist" />
+							<span class="radio-label">radio</span>
+						</label>
+						<label class="radio">
+							<input class="radio-input" type="radio" name="radioframedlist" />
+							<span class="radio-label">radio</span>
+						</label>
+						<label class="radio">
+							<input class="radio-input" type="radio" name="radioframedlist" />
+							<span class="radio-label">radio</span>
+						</label>
 					</div>
-					<label class="radiosfield-label">Textfield label</label>
-				</div>
+				</fieldset>
 			</div>
-		</div>
-	</div>
+		</fieldset>
+	</form>
 
-<code class="code mod-block">&lt;div class="form mod-framed"&gt;
-  &lt;div class="form-group"&gt;
-    &lt;h2&gt;Title Group&lt;/h2&gt;
-    &lt;div class="form-group-line"&gt;
-      &lt;div class="form-group-line-lg8"&gt;
-        &lt;div class="textfield mod-framed is-required"&gt;
-          &lt;input class="textfield-input" type="text" placeholder="..."&gt;
-          &lt;label class="textfield-label"&gt;...&lt;/label&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="form-group-line-lg4"&gt;
-        &lt;div class="textfield mod-framed"&gt;
-          &lt;input class="textfield-input" type="text" placeholder="..." disabled&gt;
-          &lt;label class="textfield-label"&gt;...&lt;/label&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="form-group-line"&gt;
-      &lt;div class="textfield mod-framed"&gt;
-        &lt;input class="textfield-input" type="text" placeholder="..."&gt;
-        &lt;label class="textfield-label"&gt;...&lt;/label&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="form-group-line"&gt;
-      &lt;div class="textfield mod-framed mod-withSuffix"&gt;
-        &lt;input class="textfield-input" type="text" placeholder="..."&gt;
-        &lt;label class="textfield-label"&gt;...&lt;/label&gt;
-        &lt;div class="textfield-suffix"&gt;€&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="form-group-line"&gt;
-      &lt;div class="textfield mod-multiline mod-framed mod-withSuffix"&gt;
-        &lt;textarea class="textfield-input" type="text" placeholder="..."&gt;&lt;/textarea&gt;
-        &lt;label class="textfield-label"&gt;...&lt;/label&gt;
-        &lt;div class="textfield-suffix"&gt;€&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="form-group-line mod-selection"&gt;
-      &lt;label class="form-group-line-label"&gt;...&lt;/label&gt;
-      &lt;div class="checkbox"&gt;
-        &lt;input class="checkbox-input" type="checkbox" id="checkboxFramed0"&gt;
-        &lt;label class="checkbox-label" for="checkboxFramed0"&gt;Checkbox&lt;/label&gt;
-      &lt;/div&gt;
-      &lt;div class="checkbox"&gt;
-        &lt;input class="checkbox-input" type="checkbox" id="checkboxFramed1"&gt;
-        &lt;label class="checkbox-label" for="checkboxFramed1"&gt;Checkbox&lt;/label&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code>
+<code class="code mod-block">&lt;form action="#" class="form mod-framed"&gt;
+	&lt;fieldset class="form-group"&gt;
+		&lt;legend class="u-textBigger"&gt;Group 1&lt;/legend&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-framed is-required"&gt;
+				&lt;input class="textfield-input" type="text" placeholder="placeholder" /&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-framed is-required"&gt;
+				&lt;input class="textfield-input is-warning" type="text" placeholder="placeholder" /&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-framed is-required"&gt;
+				&lt;input class="textfield-input is-success" type="text" placeholder="placeholder" /&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-framed is-required"&gt;
+				&lt;input class="textfield-input is-error" type="text" placeholder="placeholder" /&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;div class="form-group-line-lg8"&gt;
+				&lt;label class="textfield mod-framed"&gt;
+					&lt;input class="textfield-input" type="text" placeholder="placeholder" /&gt;
+					&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+				&lt;/label&gt;
+			&lt;/div&gt;
+			&lt;div class="form-group-line-lg4"&gt;
+				&lt;label class="textfield mod-framed"&gt;
+					&lt;input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled /&gt;
+					&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+				&lt;/label&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-framed mod-withSuffix"&gt;
+				&lt;input class="textfield-input" type="text" placeholder="Money Money" /&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+				&lt;span class="textfield-suffix"&gt;
+					&euro;
+				&lt;/span	&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-multiline mod-framed mod-withSuffix"&gt;
+				&lt;textarea class="textfield-input" type="text" placeholder="Money Money"&gt;&lt;/textarea&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+				&lt;div class="textfield-suffix"&gt;
+					&lt;select&gt;
+						&lt;option value="1"&gt;Option 1&lt;/option&gt;
+					&lt;/select&gt;
+				&lt;/div&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/fieldset&gt;
+	&lt;fieldset class="form-group"&gt;
+		&lt;legend class="u-textBigger"&gt;Group 2&lt;/legend&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="textfield mod-multiline mod-framed mod-withSuffix is-required"&gt;
+				&lt;textarea class="textfield-input" type="text" placeholder="Money Money"&gt;&lt;/textarea&gt;
+				&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+				&lt;div class="textfield-suffix"&gt;
+					&lt;select&gt;
+						&lt;option value="1"&gt;Option 1&lt;/option&gt;
+					&lt;/select&gt;
+				&lt;/div&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label id="autocomplete-framed" class="textfield mod-framed mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')"&gt;
+				&lt;input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')" /&gt;
+				&lt;span class="textfield-label"&gt;User&lt;/span&gt;
+				&lt;ul class="textfield-options"&gt;
+					&lt;li class="textfield-options-entry"&gt;
+						&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue A&lt;/li&gt;
+					&lt;li class="textfield-options-entry is-focus"&gt;
+						&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue B&lt;/li&gt;
+					&lt;li class="textfield-options-entry"&gt;
+						&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue C&lt;/li&gt;
+				&lt;/ul&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label id="autocomplete-framed-select" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')"&gt;
+				&lt;input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')" /&gt;
+				&lt;span class="textfield-label"&gt;User&lt;/span&gt;
+				&lt;ul class="textfield-options"&gt;
+					&lt;li class="textfield-options-entry"&gt;
+						&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue A&lt;/li&gt;
+					&lt;li class="textfield-options-entry is-focus"&gt;
+						&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue B&lt;/li&gt;
+					&lt;li class="textfield-options-entry"&gt;
+						&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue C&lt;/li&gt;
+				&lt;/ul&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;div class="form-group-line-xs6"&gt;
+				&lt;label id="autocomplete-framed-select2" class="textfield mod-framed mod-select" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')"&gt;
+					&lt;input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')" /&gt;
+					&lt;span class="textfield-label"&gt;User&lt;/span&gt;
+					&lt;ul class="textfield-options"&gt;
+						&lt;li class="textfield-options-entry"&gt;
+							&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue A&lt;/li&gt;
+						&lt;li class="textfield-options-entry is-focus"&gt;
+							&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue B&lt;/li&gt;
+						&lt;li class="textfield-options-entry"&gt;
+							&lt;mark class="textfield-options-mark"&gt;va&lt;/mark&gt;lue C&lt;/li&gt;
+					&lt;/ul&gt;
+				&lt;/label&gt;
+			&lt;/div&gt;
+			&lt;div class="form-group-line-xs6"&gt;
+				&lt;label class="textfield mod-framed is-required"&gt;
+					&lt;input class="textfield-input is-error" type="text" placeholder="placeholder" /&gt;
+					&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
+					&lt;div class="textfield-messages"&gt;
+						&lt;div class="textfield-messages-error"&gt;This field is required&lt;/div&gt;
+					&lt;/div&gt;
+				&lt;/label&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;label class="checkbox"&gt;
+				&lt;input class="checkbox-input" type="checkbox" /&gt;
+				&lt;span class="checkbox-label"&gt;Checkbox&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+		&lt;div class="form-group-line"&gt;
+			&lt;fieldset class="radiosfield"&gt;
+				&lt;legend class="radiosfield-label"&gt;Textfield label&lt;/legend&gt;
+				&lt;div class="radiosfield-input"&gt;
+					&lt;label class="radio"&gt;
+						&lt;input class="radio-input" type="radio" name="radioframedlist" /&gt;
+						&lt;span class="radio-label"&gt;radio&lt;/span&gt;
+					&lt;/label&gt;
+					&lt;label class="radio"&gt;
+						&lt;input class="radio-input" type="radio" name="radioframedlist" /&gt;
+						&lt;span class="radio-label"&gt;radio&lt;/span&gt;
+					&lt;/label&gt;
+					&lt;label class="radio"&gt;
+						&lt;input class="radio-input" type="radio" name="radioframedlist" /&gt;
+						&lt;span class="radio-label"&gt;radio&lt;/span&gt;
+					&lt;/label&gt;
+				&lt;/div&gt;
+			&lt;/fieldset&gt;
+		&lt;/div&gt;
+	&lt;/fieldset&gt;
+&lt;/form&gt;</code>
 
 	</code>
-<em><b>Tip:</b> Add <code class="code">.mod-selection</code> to the <code class="code">form-group-line</code> to add a border to your line (e.g. for checkbox or radio group).</em><br>
-<em><b>Tip:</b> Add <code class="code">.mod-stacked</code> to the <code class="code">form-group-line</code> to have your radio or checkbox stacked</em>
+<em><strong>Tip:</strong> Add <code class="code">.mod-selection</code> to the <code class="code">form-group-line</code> to add a border to your line (e.g. for checkbox or radio group).</em><br>
+<em><strong>Tip:</strong> Add <code class="code">.mod-stacked</code> to the <code class="code">form-group-line</code> to have your radio or checkbox stacked</em>
 </section>

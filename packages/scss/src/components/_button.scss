@@ -59,15 +59,21 @@
 		color: _color($palette, "text");
 
 		&:hover:not([disabled]) {
-			background: _color($palette, "light");
+			background: _color($palette, "500");
+			box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06);
+		}
+
+		&:focus {
+			box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "200");
+			outline: 0;
 		}
 
 		&:active:not([disabled]) {
-			background: _color($palette, "dark");
+			background: _color($palette, "800");
 		}
 
 		.button-counter {
-			background: _color($palette, "lighter");
+			background: _color($palette, "200");
 		}
 	}
 
@@ -102,10 +108,15 @@
 		background: transparent;
 		color: _color("text.default");
 
-		&:hover, &:focus {
-			&:not([disabled]) {
-				background: _color("primary", "lightest");
-				color: _color("primary");
+		&:hover {
+			background: _color("primary", "50");
+			color: _color("primary");
+		}
+
+		@mixin buttonLinkColoring($palette) {
+			&:focus:not([disabled]) {
+				box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
+				background: _color($palette, "100");
 			}
 		}
 
@@ -115,6 +126,16 @@
 			&:hover, &:focus {
 				background: rgba(255, 255, 255, .1);
 				color: rgba(255, 255, 255, .8);
+			}
+		}
+
+		// default color
+		@include buttonLinkColoring("button.default-palette");
+
+		// palette colors
+		@each $name, $palette in _getMap("palettes") {
+			&.palette-#{$name} {
+				@include buttonLinkColoring($name);
 			}
 		}
 	}
@@ -138,28 +159,35 @@
 
 	&.mod-outline {
 		background: transparent;
-		box-shadow: inset 0 0 0 1px _color("grey", "light");
+		box-shadow: inset 0 0 0 1px _color("grey", "500");
 		color: _color("text.default");
 
 		&:hover {
-			background: _color("primary", "lightest");
+			background: _color("primary", "50");
 			color: _color("primary");
 		}
 
 		@mixin buttonOutlineColoring($palette) {
-			box-shadow: inset 0 0 0 1px _color($palette, "light");
+			box-shadow: inset 0 0 0 1px _color($palette, "500");
 			color: _color($palette);
 
 			&:hover:not([disabled]) {
-				background: _color($palette, "lightest");
+				background: _color($palette, "50");
 				color: _color($palette);
-				box-shadow: inset 0 0 0 1px _color($palette);
+				box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), inset 0 0 0 1px _color($palette);
+			}
+
+			&:focus:not([disabled]) {
+				background: _color($palette, "50");
+				color: _color($palette);
+				box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "50"), inset 0 0 0 1px _color($palette, "500");
+				outline: 0;
 			}
 
 			&:active:not([disabled]) {
-				background: _color($palette, "lightest");
+				background: _color($palette, "50");
 				color: _color($palette, "dark");
-				box-shadow: inset 0 0 0 1px _color($palette, "dark");
+				box-shadow: inset 0 0 0 1px _color($palette, "800");
 			}
 
 			.button-counter {
@@ -304,6 +332,20 @@
 .button-group {
 	display: flex;
 
+	&.mod-more {
+		display: inline-flex;
+
+		&:focus-within {
+			box-shadow: 0 0 0 4px _color("primary", "200");
+		}
+
+		.button {
+			&:focus {
+				background-color: _color("primary", "600");
+			}
+		}
+	}
+
 	.button {
 		border-radius: 0;
 		display: block;
@@ -312,10 +354,6 @@
 		padding-right: _theme("spacings.small");
 		position: relative;
 		border-right: 1px solid rgba(0, 0, 0, .1);
-
-		&:last-of-type {
-			border: 0;
-		}
 	}
 
 	> .button {
@@ -326,6 +364,7 @@
 
 		&:last-child {
 			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
+			border-right: 0;
 		}
 
 		&:hover, &:focus {

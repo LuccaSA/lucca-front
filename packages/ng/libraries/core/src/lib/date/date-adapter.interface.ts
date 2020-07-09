@@ -6,8 +6,8 @@ export interface ILuDateAdapter<D> {
 	forgeInvalid(): D;
 	isValid(d: D): boolean;
 	compare(a: D, b: D, granularity: ELuDateGranularity): number;
-	isParsable(text: string): boolean;
-	parse(text: string): D;
+	isParsable(text: string, granularity?: ELuDateGranularity): boolean;
+	parse(text: string, granularity?: ELuDateGranularity): D;
 	format(d: D, format: string): string;
 	clone(d: D): D;
 
