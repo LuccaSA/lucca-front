@@ -363,6 +363,25 @@
 			box-shadow: none;
 		}
 	}
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			&:focus-within {
+				box-shadow: 0 0 0 4px _color($name, "200");
+				border-radius: _component("button.border.radius");
+			}
+
+			.button {
+				@include buttonColoring($name);
+
+				&:focus {
+					background-color: _color($name, "600");
+					box-shadow: none;
+				}
+			}
+		}
+	}
 }
 
 .button-group .button-group-item { // 2 classes needed to override button-group's "last-of-type"
