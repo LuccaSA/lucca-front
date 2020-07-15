@@ -6,7 +6,7 @@
 
 	&:hover {
 		&:not([disabled]) {
-			background-color: _color($palette, "see-through");
+			background-color: _color($palette, "50");
 			color: _color($palette);
 		}
 	}
