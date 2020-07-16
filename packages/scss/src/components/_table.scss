@@ -106,15 +106,40 @@
 	}
 
 	&.mod-clickable {
-		.table-body-row {
-			color: _color("text.default");
+		overflow: hidden;
+
+		.table-body-row-cell {
+			position: relative;
+
+			&:not(.table-body-row-cell-clickable) {
+				pointer-events: none;
+			}
+		}
+
+		.table-body-row-cell-clickable-action {
 			text-decoration: none;
-			transition: all _theme("commons.animations.durations.fast") ease;
+			color: currentColor;
 			cursor: pointer;
 
-			&:hover {
-				background: _component("table.hover.background");
+			&::before {
+				content: "";
+				position: absolute;
+				left: -9999px;
+				right: -9999px;
+				top: 0;
+				bottom: 0;
+				transition: background-color _theme("commons.animations.durations.fast") ease;
 			}
+
+			&:hover, &:focus {
+				&::before {
+					background-color: _component("table.hover.background");
+				}
+			}
+		}
+
+		.table-body-row-cell-clickable-action-inside {
+			position: relative;
 		}
 	}
 
