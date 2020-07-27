@@ -31,6 +31,7 @@ import {
 } from '@lucca-front/ng/input';
 import { ALuSelectInput } from './select-input.model';
 
+@Component({ template: '' })
 export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, TPicker>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy {

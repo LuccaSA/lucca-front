@@ -21,7 +21,7 @@ import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
-
+@Component({ template: '' })
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPicker<T, O>
 implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {

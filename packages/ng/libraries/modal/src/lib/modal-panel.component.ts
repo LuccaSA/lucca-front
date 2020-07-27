@@ -6,7 +6,9 @@ import { LuModalIntl } from './modal.intl';
 import { ILuModalLabel } from './modal.translate';
 import { Subject, timer, Observable, Subscription } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
+import { LU_MODAL_TRANSLATIONS } from './modal.token';
 
+@Component({ template: '' })
 export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true }) protected _outlet: PortalOutlet;
 	protected _componentInstance: T;
@@ -36,7 +38,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	constructor(
 		protected _ref: ALuModalRef<LuModalPanelComponent>,
 		protected _cdr: ChangeDetectorRef,
-		public intl: ILuModalLabel,
+		@Inject(LU_MODAL_TRANSLATIONS) public intl: ILuModalLabel,
 	) {}
 	attach<U extends T = T>(portal: Portal<U>) {
 		const ref = this._outlet.attach(portal) as ComponentRef<U>;

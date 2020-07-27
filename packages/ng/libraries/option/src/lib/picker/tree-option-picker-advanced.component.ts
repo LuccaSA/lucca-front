@@ -28,6 +28,7 @@ import {
 } from '@lucca-front/ng/core';
 import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index';
 
+@Component({ template: '' })
 export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;

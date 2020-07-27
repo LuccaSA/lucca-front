@@ -25,6 +25,7 @@ enum ToggleMode {
 	children,
 }
 
+@Component({ template: '' })
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
 implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
