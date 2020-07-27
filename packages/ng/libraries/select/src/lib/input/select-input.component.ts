@@ -15,6 +15,7 @@ import {
 	AfterViewInit,
 	Output,
 	EventEmitter,
+	Directive,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -31,7 +32,7 @@ import {
 } from '@lucca-front/ng/input';
 import { ALuSelectInput } from './select-input.model';
 
-@Component({ template: '' })
+@Directive()
 export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, TPicker>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy {

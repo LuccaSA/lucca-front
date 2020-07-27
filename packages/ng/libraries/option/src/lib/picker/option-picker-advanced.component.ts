@@ -6,6 +6,7 @@ import {
 	forwardRef,
 	ChangeDetectorRef,
 	AfterViewInit,
+	Directive,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
@@ -28,7 +29,7 @@ import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuOptionItem } from '../item/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 
-@Component({ template: '' })
+@Directive()
 export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ComponentRef, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
+import { Component, ViewChild, ComponentRef, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, Inject, Directive } from '@angular/core';
 import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
 import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
@@ -8,7 +8,7 @@ import { Subject, timer, Observable, Subscription } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { LU_MODAL_TRANSLATIONS } from './modal.token';
 
-@Component({ template: '' })
+@Directive()
 export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true }) protected _outlet: PortalOutlet;
 	protected _componentInstance: T;

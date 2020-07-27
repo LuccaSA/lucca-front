@@ -10,6 +10,7 @@ import {
 	AfterContentInit,
 	AfterViewInit,
 	OnInit,
+	Directive,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
@@ -25,7 +26,7 @@ enum ToggleMode {
 	children,
 }
 
-@Component({ template: '' })
+@Directive()
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
 implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
