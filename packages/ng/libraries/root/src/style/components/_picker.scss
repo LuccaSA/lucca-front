@@ -17,9 +17,6 @@
 
 	&.is-loading {
 		height: $height;
-		.loading {
-			background-color: _color("white");
-		}
 	}
 }
 
