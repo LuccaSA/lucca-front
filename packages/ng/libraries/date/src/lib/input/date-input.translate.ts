@@ -26,6 +26,14 @@ export const luDateInputTranslations = {
 		formatMonth: 'MM/y',
 		formatYear: 'y',
 	},
+	'en-GB': {
+		placeholderDay: 'dd/mm/yyyy',
+		placeholderMonth: 'mm/yyyy',
+		placeholderYear: 'yyyy',
+		formatDay: 'shortDate',
+		formatMonth: 'MM/y',
+		formatYear: 'y',
+	},
 	'en-US': {
 		placeholderDay: 'mm/dd/yyyy',
 		placeholderMonth: 'mm/yyyy',
