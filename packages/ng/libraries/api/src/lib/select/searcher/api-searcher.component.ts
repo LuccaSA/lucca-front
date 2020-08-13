@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit } from '@angular/core';
-import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, OnInit } from '@angular/core';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ALuOnCloseSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { ALuApiOptionSearcher, ALuApiSearcherService, ALuApiOptionPagedSearcher, ALuApiPagedSearcherService } from './api-searcher.model';
 import { ILuApiItem } from '../../api.model';
@@ -20,6 +20,11 @@ import { debounceTime, tap } from 'rxjs/operators';
 		},
 		{
 			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuApiSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnCloseSubscriber,
 			useExisting: forwardRef(() => LuApiSearcherComponent),
 			multi: true,
 		},

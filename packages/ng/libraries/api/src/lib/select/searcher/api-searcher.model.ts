@@ -43,6 +43,9 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	onOpen() {
 		this.resetClue();
 	}
+	onClose() {
+		this.clearOptions();
+	}
 	protected initObservables() {
 		// this._clue$ = clue$.pipe(share());
 		const results$ = this._clue$
@@ -62,6 +65,9 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 		);
 	}
 	abstract resetClue();
+	protected clearOptions() {
+		this.outOptions$.next([]);
+	}
 }
 
 export abstract class ALuApiSearcherService<T extends ILuApiItem = ILuApiItem>
