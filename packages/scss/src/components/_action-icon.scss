@@ -13,7 +13,7 @@
 
 	&:focus {
 		color: _color($palette);
-		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "50");
+		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "50");
 	}
 }
 
@@ -47,7 +47,7 @@
 	}
 
 	&:focus {
-		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color("button.default-palette", "200");
+		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color("button.default-palette", "200");
 		outline: none;
 	}
 
@@ -63,7 +63,7 @@
 .actionIcon {
 	&.mod-invert {
 		color: _component("actionIcon.invert.color");
-	
+
 		&:hover, &:focus {
 			&:not([disabled]) {
 				background-color: rgba(255, 255, 255, .1);
@@ -72,7 +72,7 @@
 		}
 
 		&:focus {
-			box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(0, 0, 0, .1);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px rgba(0, 0, 0, .1);
 		}
 	}
 
@@ -89,9 +89,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .actionIcon {
-	&[disabled],
-	&.is-disabled,
-	&.is-loading {
+	&[disabled], &.is-disabled, &.is-loading {
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		cursor: default;
