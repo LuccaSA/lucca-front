@@ -1,5 +1,5 @@
 .chip {
-	background: _color("primary", "700");
+	background-color: _color("primary", "700");
 	border-radius: _theme("commons.border.radius");
 	color: _color("primary", "text");
 	display: inline-block;
@@ -10,7 +10,7 @@
 }
 
 .chip-kill {
-	background: _color("primary", "text");
+	background-color: _color("primary", "text");
 	border: 0;
 	border-radius: 50%;
 	bottom: 0;
@@ -24,7 +24,7 @@
 	position: absolute;
 	right: .5rem;
 	top: 0;
-	transition: 150ms background ease;
+	transition: 150ms background-color ease;
 	width: 1rem;
 
 	&::before {
@@ -58,7 +58,7 @@
 	&.mod-clickable {
 		cursor: pointer;
 		&:hover, &:focus {
-			background: _color("primary", "600");
+			background-color: _color("primary", "600");
 		}
 		&:focus {
 			box-shadow: 0 0 0 4px _color("primary", "200");

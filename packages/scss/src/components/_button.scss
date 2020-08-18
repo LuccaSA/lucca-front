@@ -2,11 +2,11 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 @mixin buttonColoring($palette) {
-	background: _color($palette);
+	background-color: _color($palette);
 	color: _color($palette, "text");
 
 	&:hover:not([disabled]) {
-		background: _color($palette, "500");
+		background-color: _color($palette, "500");
 		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06);
 	}
 
@@ -16,18 +16,18 @@
 	}
 
 	&:active:not([disabled]) {
-		background: _color($palette, "800");
+		background-color: _color($palette, "800");
 	}
 
 	.button-counter {
-		background: _color($palette, "200");
+		background-color: _color($palette, "200");
 	}
 }
 
 @mixin buttonLinkColoring($palette) {
 	&:focus:not([disabled]) {
 		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
-		background: _color($palette, "100");
+		background-color: _color($palette, "100");
 	}
 }
 
@@ -36,26 +36,26 @@
 	color: _color($palette);
 
 	&:hover:not([disabled]) {
-		background: _color($palette, "50");
+		background-color: _color($palette, "50");
 		color: _color($palette);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), inset 0 0 0 1px _color($palette);
 	}
 
 	&:focus:not([disabled]) {
-		background: _color($palette, "50");
+		background-color: _color($palette, "50");
 		color: _color($palette);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "50"), inset 0 0 0 1px _color($palette, "500");
 		outline: 0;
 	}
 
 	&:active:not([disabled]) {
-		background: _color($palette, "50");
+		background-color: _color($palette, "50");
 		color: _color($palette, "dark");
 		box-shadow: inset 0 0 0 1px _color($palette, "800");
 	}
 
 	.button-counter {
-		background: _color($palette);
+		background-color: _color($palette);
 	}
 }
 
@@ -211,12 +211,12 @@
 	}
 
 	&.mod-outline {
-		background: transparent;
+		background-color: transparent;
 		box-shadow: inset 0 0 0 1px _color("grey", "500");
 		color: _color("text.default");
 
 		&:hover {
-			background: _color("primary", "50");
+			background-color: _color("primary", "50");
 			color: _color("primary");
 		}
 

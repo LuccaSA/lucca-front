@@ -1,11 +1,11 @@
 .card {
-	background: white;
+	background-color: white;
 	border-radius: 3px;
 	@include elevate(1);
 	display: block;
 	margin-bottom: 1rem;
 	position: relative;
-	transition: background _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, box-shadow _theme("commons.animations.durations.fast") ease;
+	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, box-shadow _theme("commons.animations.durations.fast") ease;
 }
 
 .card-content {
@@ -30,7 +30,7 @@
 
 .card {
 	&.mod-grey {
-		background: _theme("commons.background.base");
+		background-color: _theme("commons.background.base");
 	}
 
 	&.mod-clickable {

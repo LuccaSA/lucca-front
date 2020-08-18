@@ -79,7 +79,7 @@
 
 			&:hover {
 				&::after {
-					background: _color($palette, "600");
+					background-color: _color($palette, "600");
 				}
 
 				&::before {
@@ -96,7 +96,7 @@
 				}
 
 				&::after {
-					background: _color($palette, "600");
+					background-color: _color($palette, "600");
 				}
 			}
 		}

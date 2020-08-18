@@ -16,7 +16,7 @@
 	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&::before {
-		background: _color("grey", "700");
+		background-color: _color("grey", "700");
 		border-radius: .5rem;
 		content: "";
 		display: block;
@@ -29,7 +29,7 @@
 	}
 
 	&::after {
-		background: _color("white");
+		background-color: white;
 		box-shadow: _theme("commons.box-shadow.hard");
 		border-radius: 50%;
 		content: "";
@@ -46,7 +46,7 @@
 		color: _color("grey");
 
 		&::before {
-			background: _color("grey", "600");
+			background-color: _color("grey", "600");
 		}
 	}
 }
@@ -111,7 +111,7 @@
 			cursor: default;
 
 			&::before {
-				background: _color("grey", "500");
+				background-color: _color("grey", "500");
 			}
 		}
 	}
@@ -135,24 +135,24 @@
 		.switch-input:checked {
 			~ .switch-label {
 				&::before {
-					background: _color($palette);
+					background-color: _color($palette);
 				}
 
 				&:hover {
 					&::before {
-						background: _color($palette, "600");
+						background-color: _color($palette, "600");
 					}
 				}
 			}
 			&[disabled], &[readonly] {
 				~ .switch-label {
 					&::before {
-						background: _color($palette, "500");
+						background-color: _color($palette, "500");
 					}
 
 					&:hover {
 						&::before {
-							background: _color($palette, "500");
+							background-color: _color($palette, "500");
 						}
 					}
 				}

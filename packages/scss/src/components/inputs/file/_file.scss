@@ -76,7 +76,7 @@
 
 .file {
 	&.is-droppable {
-		background: _theme("commons.background.base");
+		background-color: _theme("commons.background.base");
 		.file-icon {
 			color: _color("primary", "500");
 		}

@@ -9,12 +9,12 @@
 
 .textfield-input {
 	min-width: 0;
-	background: _component("textfield.background");
+	background-color: _component("textfield.background");
 	border: 0;
 	border-radius: _component("textfield.border-radius");
 	line-height: 1.5rem;
 	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
-	transition: box-shadow _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, background _theme("commons.animations.durations.fast") ease;
+	transition: box-shadow _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, background-color _theme("commons.animations.durations.fast") ease;
 
 	&::placeholder {
 		color: _component("textfield.input.placeholder");
@@ -23,7 +23,7 @@
 	}
 
 	&:hover {
-		background: _component("textfield.hover.background");
+		background-color: _component("textfield.hover.background");
 
 		&::placeholder {
 			color: _component("textfield.hover.placeholder");
@@ -31,7 +31,7 @@
 	}
 
 	&:focus, &.is-focused {
-		background: white;
+		background-color: white;
 		box-shadow: 0 0 0 4px _component("textfield.focus.shadow-color"), inset 0 0 0 1px _component("textfield.focus.border-color");
 
 		&::placeholder {
@@ -55,7 +55,7 @@
 }
 
 .textfield-options {
-	background: white;
+	background-color: white;
 	border-radius: _theme("commons.border.radius");
 	@include elevate(3);
 	left: 0;
@@ -83,14 +83,14 @@
 .textfield-options-entry {
 	cursor: pointer;
 	padding: .5rem 1rem;
-	transition: background 50ms ease;
+	transition: background-color 50ms ease;
 
 	&:hover {
-		background: _color("primary", "50");
+		background-color: _color("primary", "50");
 	}
 
 	&.is-focus {
-		background: _color("primary", "50");
+		background-color: _color("primary", "50");
 	}
 }
 
@@ -157,7 +157,7 @@
 
 	&.mod-white {
 		.textfield-input {
-			background: white;
+			background-color: white;
 			box-shadow: 0 0 0 1px _color("primary", "500") inset;
 
 			&::placeholder {
@@ -176,7 +176,7 @@
 
 	&.mod-invert {
 		.textfield-input {
-			background: white;
+			background-color: white;
 
 			&::placeholder {
 				color: _component("textfield.focus.placeholder");
@@ -258,11 +258,11 @@
 		display: block;
 		height: _component("filters.height");
 		position: relative;
-		transform: background _theme("commons.animations.durations.standard") ease;
+		transform: background-color _theme("commons.animations.durations.standard") ease;
 		width: _component("textfield.filter.width");
 
 		&:hover {
-			background: _theme("commons.background.base");
+			background-color: _theme("commons.background.base");
 		}
 
 		.textfield-label {
@@ -275,7 +275,7 @@
 		}
 
 		.textfield-input {
-			background: transparent;
+			background-color: transparent;
 			box-shadow: none;
 			padding: 1rem 2.5rem 0 1rem;
 			font-weight: 600;
@@ -348,7 +348,7 @@
 	@include field-input("textfield");
 
 	&[disabled], &[readonly], &.is-disabled, &.is-readonly {
-		background: _theme("commons.disabled.background");
+		background-color: _theme("commons.disabled.background");
 		color: _theme("commons.disabled.color");
 		cursor: not-allowed;
 
