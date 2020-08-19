@@ -69,7 +69,7 @@
 	}
 
 	&:focus, &:hover {
-		@include fakeBorder(1px, _color($state));
+		box-shadow: fakeborderoverlay(_color($state));
 		background-color: _color($state, "50");
 	}
 
@@ -78,7 +78,7 @@
 	}
 
 	@if ($state == "error") {
-		@include fakeBorder(1px, _color($state));
+		box-shadow: fakeborderoverlay(_color($state));
 		z-index: 1;
 	}
 }
