@@ -91,6 +91,15 @@
 		background-color: _color("primary", "lightest", true);
 		background-color: _color("primary", "lightest");
 	}
+
+	&.is-disabled {
+		color: _color("text.placeholder", "color", true);
+		color: _color("text.placeholder");
+		&:hover, &:focus {
+			pointer-events: none;
+			background-color: #ffffff;
+		}
+	}
 }
 
 /*

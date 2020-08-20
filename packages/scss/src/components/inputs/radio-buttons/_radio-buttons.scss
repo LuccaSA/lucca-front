@@ -25,33 +25,76 @@
 
 	&:checked ~ .radioButtons-item-label {
 		z-index: 2;
-		background: _component("radioButtons.active");
-		box-shadow: inset 0 0 0 1px _component("radioButtons.active");
-		color: #FFFFFF;
-	}
-
-	&:focus ~ .radioButtons-item-label {
-		box-shadow: _theme("commons.focused");
 	}
 }
 
 .radioButtons-item-label {
-	color: _color("grey", "dark");
-	box-shadow: inset 0 0 0 1px _color("grey", "light");
 	cursor: pointer;
 	display: block;
 	overflow: hidden;
 	padding: _component("radioButtons.padding");
 	position: relative;
 	transition: all _theme("commons.animations.durations.fast") ease;
+}
 
-	&:hover {
-		background: _component("radioButtons.hover.lightest");
-		box-shadow: inset 0 0 0 1px _component("radioButtons.hover.lighter");
-		color: _component("radioButtons.hover.color");
+
+// PALETTES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.radioButtons-item-label {
+	@mixin radioColoring($palette) {
+		color: _color($palette, "800");
+		box-shadow: inset 0 0 0 1px _color($palette, "200");
+
+		&:hover {
+			background: _color($palette, "50");
+			box-shadow: inset 0 0 0 1px _color($palette, "200");
+		}
+	}
+
+	// default color
+	@include radioColoring("radio.default-palette");
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			@include radioColoring($name);
+		}
 	}
 }
 
+.radioButtons-item-input {
+	@mixin radioColoring($palette) {
+		&:checked ~ .radioButtons-item-label {
+			background: _color($palette, "50");
+			box-shadow: inset 0 0 0 1px _color($palette, "200");
+			color: _color($palette, "700");
+
+			&:hover {
+				background: _color($palette, "100");
+				box-shadow: inset 0 0 0 1px _color($palette, "400");
+			}
+
+			&:focus {
+				box-shadow: 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "400");
+			}
+		}
+
+		&:focus ~ .radioButtons-item-label {
+			box-shadow: 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "400");
+		}
+	}
+
+	// default color
+	@include radioColoring("radio.default-palette");
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			@include radioColoring($name);
+		}
+	}
+}
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

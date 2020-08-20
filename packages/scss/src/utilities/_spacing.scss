@@ -1,53 +1,26 @@
-// RESETS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+$prefix: "u-" !default;
+$properties: "margin", "padding", "border" !default;
+$hyphen: "-" !default;
+$directions: "top", "bottom", "left", "right", "" !default;
+$suffix: "!important" !default;
 
-/* Reset margins */
+$sep: "";
 
-.u-marginReset {
-	margin: 0 !important;
-}
+@each $property in $properties {
+	@each $name, $value in $spacings {
+		@each $direction in $directions {
+			@if ($direction == "") {
+				$sep: "";
+			}
+			@else {
+				$sep: $hyphen;
+			}
 
-/* Reset paddings */
-
-.u-paddingReset {
-	padding: 0 !important;
-}
-
-
-// MARGINS & PADDINGS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-@each $name, $spacings in _getMap("spacings") {
-
-	.u-marginBottom#{str-capitalize($name)} {
-		margin-bottom: _theme("spacings."+$name) !important;
-	}
-
-	.u-marginTop#{str-capitalize($name)} {
-		margin-top: _theme("spacings."+$name) !important;
-	}
-
-	.u-marginLeft#{str-capitalize($name)} {
-		margin-left: _theme("spacings."+$name) !important;
-	}
-
-	.u-marginRight#{str-capitalize($name)} {
-		margin-right: _theme("spacings."+$name) !important;
-	}
-
-	.u-paddingBottom#{str-capitalize($name)} {
-		padding-bottom: _theme("spacings."+$name) !important;
-	}
-
-	.u-paddingTop#{str-capitalize($name)} {
-		padding-top: _theme("spacings."+$name) !important;
-	}
-
-	.u-paddingLeft#{str-capitalize($name)} {
-		padding-left: _theme("spacings."+$name) !important;
-	}
-
-	.u-paddingRight#{str-capitalize($name)} {
-		padding-right: _theme("spacings."+$name) !important;
+			@if ($property != "border" or $value == 0) {
+				.#{$prefix}#{$property}#{str-capitalize($direction)}#{str-capitalize($name)} {
+					#{$property}#{$sep}#{$direction}: _theme("spacings." + $name) #{$suffix};
+				}
+			}
+		}
 	}
 }

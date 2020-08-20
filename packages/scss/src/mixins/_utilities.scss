@@ -38,3 +38,9 @@
 	width: 100% #{$suffix};
 	text-align: left #{$suffix};
 }
+
+@mixin ie11() {
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		@content;
+	}
+}

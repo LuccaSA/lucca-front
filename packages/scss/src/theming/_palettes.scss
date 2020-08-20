@@ -7,7 +7,17 @@ $palettes: (
 	"lighter": #E8EAF3,
 	"lightest": #F7F9FD,
 	"text": #FFFFFF,
-	"see-through": rgba(#9299B0, .15)
+	"see-through": rgba(#9299B0, .15),
+	"50": #F7F8FD,
+	"100": #F3F5FC,
+	"200": #ECEFF8,
+	"300": #DCDFEF,
+	"400": #CBCFE2,
+	"500": #B7BBD1,
+	"600": #898FAE,
+	"700": #485075,
+	"800": #31395E,
+	"900": #1E233E
 ),
 "secondary": (
 	"darker": #2D354D,
@@ -17,7 +27,17 @@ $palettes: (
 	"lighter": #E8EAF3,
 	"lightest": #F7F9FD,
 	"text": #FFFFFF,
-	"see-through": rgba(#9299B0, .15)
+	"see-through": rgba(#9299B0, .15),
+	"50": #FAFAFA,
+	"100": #F5F5F5,
+	"200": #EBEBEB,
+	"300": #E0E0E0,
+	"400": #CFCFCF,
+	"500": #ADADAD,
+	"600": #858585,
+	"700": #525252,
+	"800": #3D3D3D,
+	"900": #262626
 ),
 "grey": (
 	"darker": #2D354D,
@@ -27,55 +47,101 @@ $palettes: (
 	"lighter": #E8EAF3,
 	"lightest": #F7F9FD,
 	"text": #FFFFFF,
-	"see-through": rgba(#9299B0, .15)
+	"see-through": rgba(#9299B0, .15),
+	"50": #FAFAFA,
+	"100": #F5F5F5,
+	"200": #EBEBEB,
+	"300": #E0E0E0,
+	"400": #CFCFCF,
+	"500": #ADADAD,
+	"600": #858585,
+	"700": #525252,
+	"800": #3D3D3D,
+	"900": #262626
 ),
-	"success": (
-		"lightest": #F1FBEE,
-		"lighter": #E3F8DC,
-		"light": #7DE559,
-		"color": #75DA52,
-		"dark": #379816,
-		"darker": #217703,
-		"text": #FFFFFF,
-		"see-through": rgba(#75DA52, .15)
-	),
-		"warning": (
-		"lightest": #FFF2E8,
-		"lighter": #FFE4D1,
-		"light": #FF8C38,
-		"color": #FF7A1A,
-		"dark": #D15700,
-		"darker": #953600,
-		"text": #FFFFFF,
-		"see-through": rgba(#FF7A1A, .15)
-	),
-	"error": (
-		"lightest": #FFECEF,
-		"lighter": #FBA7B5,
-		"light": #FA3F5E,
-		"color": #F42144,
-		"dark": #CA0224,
-		"darker": #810016,
-		"text": #FFFFFF,
-		"see-through": rgba(#F42144, .15)
-	),
+"success": (
+	"lightest": #F1FBEE,
+	"lighter": #E3F8DC,
+	"light": #7DE559,
+	"color": #75DA52,
+	"dark": #379816,
+	"darker": #217703,
+	"text": #FFFFFF,
+	"see-through": rgba(#75DA52, .15),
+	"50": #F7FEF6,
+	"100": #E7FAE5,
+	"200": #D7F7D4,
+	"300": #C2F4BE,
+	"400": #ACECA7,
+	"500": #8CDB85,
+	"600": #49B540,
+	"700": #3C9933,
+	"800": #1B7D12,
+	"900": #0E6B06
+),
+"warning": (
+	"lightest": #FFF2E8,
+	"lighter": #FFE4D1,
+	"light": #FF8C38,
+	"color": #FF7A1A,
+	"dark": #D15700,
+	"darker": #953600,
+	"text": #FFFFFF,
+	"see-through": rgba(#FF7A1A, .15),
+	"50": #FEF5F0,
+	"100": #FFEBE0,
+	"200": #FFDDCC,
+	"300": #FFCFB8,
+	"400": #FCBC9C,
+	"500": #F79C6E,
+	"600": #F46A25,
+	"700": #E55006,
+	"800": #CC3D00,
+	"900": #B23000
+),
+"error": (
+	"lightest": #FFECEF,
+	"lighter": #FBA7B5,
+	"light": #FA3F5E,
+	"color": #F42144,
+	"dark": #CA0224,
+	"darker": #810016,
+	"text": #FFFFFF,
+	"see-through": rgba(#F42144, .15),
+	"50": #FFF5F7,
+	"100": #FFECEF,
+	"200": #FFE0E6,
+	"300": #FCC5CE,
+	"400": #FBA7B5,
+	"500": #EF8F9F,
+	"600": #EF3957,
+	"700": #E61A3B,
+	"800": #AF0E29,
+	"900": #91081F
+),
 );
 
 $colors: (
-	text: (
-		dark: (
-			color: #2D354D
+	"text": (
+		"dark": (
+			"color": #2D354D
 		),
-		default: (
-			color: #4C5775
+		"default": (
+			"color": #4C5775
 		),
-		light: (
-			color: #9299B0
+		"light": (
+			"color": #9299B0
 		),
-		placeholder: (
-			color: #C7C7C7
+		"placeholder": (
+			"color": #C7C7C7
 		)
 	),
+	"white": (
+		"color": #FFFFFF
+	),
+	"black": (
+		"color": #121212
+	)
 );
 $theme: _set($theme, "palettes", $palettes);
 $theme: _set($theme, "colors", $colors);

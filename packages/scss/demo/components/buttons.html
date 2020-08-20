@@ -43,6 +43,7 @@
 	<h2>Size</h2>
 	<button class="button">Standard button</button>
 	<button class="button mod-small">Small button</button>
+	<button class="button mod-smaller">Smaller button</button>
 <code class="code mod-block">&lt;button class="button mod-small"&gt;...&lt;/button&gt;</code>
 </section>
 
@@ -51,6 +52,7 @@
 	<h2>Counter</h2>
 	<button class="button mod-counter">Counting button<span class="button-counter">7</span></button>
 	<button class="button mod-counter mod-small">Counting button<span class="button-counter">7</span></button>
+	<button class="button mod-counter mod-smaller">Counting button<span class="button-counter">7</span></button>
 <code class="code mod-block">&lt;button class="button mod-counter"&gt;Counting button&lt;span class="button-counter"&gt;7&lt;/span&gt;&lt;/button&gt;</code>
 </section>
 
@@ -61,6 +63,8 @@
 	<button class="button mod-icon"><i class="button-icon lucca-icon icon-send"></i>Envoyer</button>
 	<button class="button mod-icon mod-small"><i class="button-icon lucca-icon icon-cloudDownload"></i>Sauvegarder</button>
 	<button class="button mod-icon mod-small"><i class="button-icon lucca-icon icon-send"></i>Envoyer</button>
+	<button class="button mod-icon mod-smaller"><i class="button-icon lucca-icon icon-cloudDownload"></i>Sauvegarder</button>
+	<button class="button mod-icon mod-smaller"><i class="button-icon lucca-icon icon-send"></i>Envoyer</button>
 </section>
 
 <!-- States -->
@@ -106,12 +110,12 @@
 	<h2>More button</h2>
 	<p>You can use button's group to add more action to a button.</p>
 
-	<div class="button-group">
+	<div class="button-group mod-more">
 		<button class="button palette-primary">Main action</button>
 		<button class="button palette-primary mod-more"></button>
 	</div>
 
-<code class="code mod-block">&lt;div class="button-group"&gt;
+<code class="code mod-block">&lt;div class="button-group mod-more"&gt;
 	&lt;button class="button palette-primary"&gt;Main action&lt;/button&gt;
 	&lt;button class="button palette-primary mod-more"&gt;&lt;/button&gt;
 &lt;/div&gt;
