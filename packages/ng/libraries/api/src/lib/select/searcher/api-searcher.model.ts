@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-
 import { Observable, Subject, combineLatest, merge, of } from 'rxjs';
-
 import {
 	mapTo,
 	tap,
@@ -15,16 +12,13 @@ import {
 } from 'rxjs/operators';
 
 import { ILuApiItem } from '../../api.model';
-import { ALuApiFeederService, ILuApiFeederService, ILuApiOptionFeeder } from '../feeder/index';
-import { ILuApiPagerService } from '../pager/index';
+import { ILuApiOptionFeeder } from '../feeder/index';
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ILuApiService } from '../../service/index';
 
 export interface ILuApiOptionSearcher<T extends ILuApiItem = ILuApiItem> extends ILuApiOptionFeeder<T> {}
-export interface ILuApiSearcherService<T extends ILuApiItem = ILuApiItem> extends ILuApiFeederService<T> {
-	searchAll(clue: string): Observable<T[]>;
-}
 
-export abstract class ALuApiOptionSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiSearcherService<T> = ILuApiSearcherService<T>>
+export abstract class ALuApiOptionSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
@@ -64,50 +58,9 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	abstract resetClue();
 }
 
-export abstract class ALuApiSearcherService<T extends ILuApiItem = ILuApiItem>
-extends ALuApiFeederService<T>
-implements ILuApiSearcherService<T> {
-	protected _searchProperty = 'name';
-	set searchProperty(sp: string) { this._searchProperty = sp; }
-	constructor(protected http: HttpClient) { super(http); }
-	searchAll(clue = '') {
-		if (!clue) {
-			return this.getAll();
-		}
-		const url = `${this.url}&${this._clueFilter(clue)}`;
-		return this._get(url);
-	}
-	protected _clueFilter(clue) {
-		const urlSafeClue = encodeURIComponent(clue);
-		return `${this._searchProperty}=like,${urlSafeClue}`;
-	}
-}
-// paged
-const MAGIC_PAGE_SIZE = 20;
 export interface ILuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem> extends ILuApiOptionSearcher<T> {}
-export interface ILuApiPagedSearcherService<T extends ILuApiItem = ILuApiItem> extends ILuApiSearcherService<T>, ILuApiPagerService<T> {
-	searchPaged(clue: string, page: number): Observable<T[]>;
-}
-export abstract class ALuApiPagedSearcherService<T extends ILuApiItem = ILuApiItem>
-extends ALuApiSearcherService<T>
-implements ILuApiPagedSearcherService<T> {
-	constructor(protected http: HttpClient) { super(http); }
-	getPaged(page = 0) {
-		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
-		const url = `${this.url}&${paging}`;
-		return this._get(url);
-	}
-	searchPaged(clue = '', page = 0) {
-		if (!clue) {
-			return this.getPaged(page);
-		}
-		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
-		const url = `${this.url}&${this._clueFilter(clue)}&${paging}`;
-		return this._get(url);
-	}
 
-}
-export abstract class ALuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiPagedSearcherService<T> = ILuApiPagedSearcherService<T>>
+export abstract class ALuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 extends ALuApiOptionSearcher<T, S>
 implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	outOptions$ = new Subject<T[]>();
