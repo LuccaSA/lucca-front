@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Inject, Optional, SkipSelf, Self, OnInit } from '@angular/core';
 import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator, ALuOptionOperator } from '@lucca-front/ng/option';
-import { LuApiPagerService } from './api-pager.service';
 import { ILuApiItem } from '../../api.model';
-import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
+import { ALuApiOptionPager } from './api-pager.model';
+import { ALuApiService } from '../../service/index';
+import { LuApiV3Service } from '../../service/index';
 
 @Component({
 	selector: 'lu-api-pager',
@@ -17,8 +18,8 @@ import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 			multi: true,
 		},
 		{
-			provide: ALuApiPagerService,
-			useClass: LuApiPagerService,
+			provide: ALuApiService,
+			useClass: LuApiV3Service,
 		},
 		{
 			provide: ALuOnScrollBottomSubscriber,
@@ -32,14 +33,14 @@ import { ALuApiOptionPager, ALuApiPagerService } from './api-pager.model';
 		},
 	],
 })
-export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem, S extends ALuApiPagerService<T> = ALuApiPagerService<T>>
-extends ALuApiOptionPager<T, S>
+export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
+extends ALuApiOptionPager<T, LuApiV3Service<T>>
 implements ILuOptionOperator<T>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenSubscriber {
 	constructor(
-		@Inject(ALuApiPagerService) @Optional() @SkipSelf() hostService: ALuApiPagerService,
-		@Inject(ALuApiPagerService) @Self() selfService: ALuApiPagerService,
+		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: LuApiV3Service<T>,
+		@Inject(ALuApiService) @Self() selfService: LuApiV3Service<T>,
 	) {
-		super((hostService || selfService) as S);
+		super((hostService || selfService) as LuApiV3Service<T>);
 	}
 	@Input() set api(api: string) {
 		this._service.api = api;
@@ -47,11 +48,7 @@ implements ILuOptionOperator<T>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenS
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	/**
-	 * a function to transform the item fetched from the api into the kind of item you want
-	 * if you wnat to cast dates into moments for example
-	 */
-	@Input() set transformFn(transformFn: (item: any) => T) { this._service.transformFn = transformFn; }
+
 	ngOnInit() {
 		super.init();
 	}
