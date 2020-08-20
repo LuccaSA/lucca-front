@@ -12,6 +12,7 @@ import {
 	ChangeDetectorRef,
 	AfterViewInit,
 	Input,
+	Directive,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -21,7 +22,7 @@ import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
-
+@Directive()
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPicker<T, O>
 implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
