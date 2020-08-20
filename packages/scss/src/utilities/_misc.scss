@@ -47,17 +47,9 @@
 }
 
 .u-listReset {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+	@include listReset('!important');
 }
 
 .u-buttonReset {
-	background-color: transparent;
-	padding: 0;
-	border: 0;
-	text-align: left;
-	color: inherit;
-	font: inherit;
-	cursor: pointer;
+	@include buttonReset('!important');
 }
