@@ -62,7 +62,7 @@
 
 .filters {
 	.textfield {
-		&.mod-framed { // todo
+		&.mod-framed {
 			border-right: _theme("commons.divider.width") solid _theme("commons.divider.color");
 			max-width: 16rem;
 
@@ -75,7 +75,7 @@
 
 .filters-sectionRight {
 	.textfield {
-		&.mod-framed { // todo
+		&.mod-framed {
 			border-left: _theme("commons.divider.width") solid _theme("commons.divider.color");
 			border-right: 0;
 		}

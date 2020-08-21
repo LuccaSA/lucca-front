@@ -5,11 +5,20 @@
 	position: relative;
 }
 
-.form-group-label {
+.form-group-label, .form-group-legend, .form-group-title {
 	display: block;
 	font-weight: 600;
 	font-size: _component("form.label.font-size");
-	margin-bottom: _component("form.label.margin-bottom");
+	margin: 0;
+	padding: 0 0 _component("form.label.margin-bottom");
+	width: 100%;
+	text-align: left;
+}
+
+.form-group-legend, .form-group-title {
+	font-size: _component("field.framed.title.font-size");
+	line-height: _component("field.framed.title.line-height");
+	padding-bottom: _theme("spacings.smallest");
 }
 
 .form-title {
@@ -31,73 +40,120 @@
 
 .form {
 	&.mod-framed {
-		.form-group {
-			display: flex;
-			flex-direction: column;
-		}
-
 		.form-group-line {
 			display: flex;
-			flex: 0 1 auto;
-			flex-direction: row;
-			flex-wrap: wrap;
 			position: relative;
+		}
 
-			&.mod-stacked {
-				flex-direction: column;
+		.form-group-line-col {
+			flex-basis: 0;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+
+			> * {
+				flex-grow: 1;
+			}
+
+			&.mod-half {
+				flex-basis: (100% / 2);
+				flex-grow: 0;
+			}
+
+			&.mod-third {
+				flex-basis: (100% / 3);
+				flex-grow: 0;
+			}
+
+			&.mod-quarter {
+				flex-basis: (100% / 4);
+				flex-grow: 0;
+			}
+
+			&.mod-twoThird {
+				flex-basis: (100% / 3 * 2);
+				flex-grow: 0;
+			}
+
+			&.mod-threeQuarter {
+				flex-basis: (100% / 4 * 3);
+				flex-grow: 0;
 			}
 
 			&.mod-selection {
-				@include fakeBorder(1px, _theme("commons.divider.color"));
-				padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
-			}
-		}
+				padding: 0;
+				box-shadow: fakeborderoverlay(_component("field.framed.border"));
+				transition: background-color _theme("commons.animations.durations.standard");
 
-		.form-group-line-label {
-			color: _color("text.light");
-			font-size: _theme("sizes.small.font-size");
-			left: _component("field.framed.side-padding");
-			position: absolute;
-			right: _component("field.framed.side-padding");
-			top: _component("field.framed.label-top-offset");
-			width: auto;
-		}
+				&:hover {
+					background-color: _component("field.framed.color50");
+				}
 
-		// Form group grid system
-		@each $bp-name, $bp-obj in $breakpoints {
-			@for $i from 1 through 12 {
-				.form-group-line-#{$bp-name}#{$i} {
-					flex: 0 0 auto;
-					flex-basis: 100%;
-					max-width: 100%;
+				&:focus-within {
 					position: relative;
-				}
-			}
-
-			@include media_larger_than($bp-name) {
-				.form-group-line-#{$bp-name} {
-					flex-basis: 0;
-					flex-grow: 1;
-					max-width: 100%;
+					z-index: 1;
+					box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
 				}
 
-				@for $i from 1 through 12 {
-					.form-group-line-#{$bp-name}#{$i} {
-						flex-basis: percentage($i / 12);
-						max-width: percentage($i / 12);
+				.radiosfield, .checkboxesfield {
+					margin-top: _component("field.framed.side-padding");
+					padding: 0 _component("field.framed.side-padding") _component("field.framed.bottom-padding");
+				}
+
+				&.is-error {
+					@include fieldFramedState("error");
+				}
+
+				&.is-warning {
+					@include fieldFramedState("warning");
+				}
+
+				&.is-success {
+					@include fieldFramedState("success");
+				}
+
+				&.is-disabled {
+					background-color: _theme("commons.disabled.background");
+
+					.radio-label, .checkbox-label {
+						cursor: not-allowed;
 					}
 				}
 			}
-		}
 
-		.button-group {
-			display: inherit;
-			flex-wrap: wrap;
-			flex-direction: inherit;
-			width: 100%;
-			margin: 0;
-			@include fakeBorder(1px, _theme("commons.divider.color"));
-			padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
+			&[class*="mod-overlay"] {
+				&:focus-within {
+					.textfield-input {
+						box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+						z-index: 4;
+					}
+
+					.is-error {
+						.textfield-input {
+							background-color: white !important;
+						}
+					}
+				}
+
+				.textfield, .checkbox, .radio, .select {
+					+ .textfield, + .checkbox, + .radio, + .select {
+						position: absolute;
+						bottom: 0;
+						right: 0;
+						z-index: 10;
+						padding: _component("field.framed.label-top-offset") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
+					}
+				}
+			}
+
+			&.mod-overlay-top {
+				.textfield, .checkbox, .radio, .select {
+					+ .textfield, + .checkbox, + .radio, + .select {
+						top: 0;
+						bottom: auto;
+					}
+				}
+			}
 		}
 	}
 }
@@ -108,8 +164,10 @@
 
 .form-group-label {
 	&.is-required {
-		&::after {
-			@extend %isRequired;
+		&:not(:empty) {
+			&::after {
+				@extend %isRequired;
+			}
 		}
 	}
 }

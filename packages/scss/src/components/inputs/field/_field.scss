@@ -59,13 +59,14 @@
 	.#{$fieldname}-label {
 		color: _color("text.light");
 		font-size: _component("field.label.font-size");
-		line-height: 1rem;
+		line-height: _theme("sizes.small.line-height");
+		min-height: _theme("spacings.small");
 		margin-bottom: _component("field.label.margin-bottom");
 		order: -1;
 		overflow: hidden;
 		position: relative;
 		text-overflow: ellipsis;
-		transition: all 150ms ease;
+		transition: all _theme("commons.animations.durations.fast");
 		word-break: break-word;
 		white-space: nowrap;
 	}
@@ -111,8 +112,10 @@
 		/* State */
 		&.is-required {
 			.#{$fieldname}-label {
-				&::after {
-					@extend %isRequired;
+				&:not(:empty) {
+					&::after {
+						@extend %isRequired;
+					}
 				}
 			}
 		}

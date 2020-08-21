@@ -1,6 +1,12 @@
 .radio {
 	position: relative;
 	display: block;
+
+	&.is-required {
+		&::after {
+			@extend %isRequired;
+		}
+	}
 }
 
 .radio-input {

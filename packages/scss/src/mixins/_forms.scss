@@ -1,7 +1,7 @@
 @mixin fieldState($fieldname, $state) {
 	background-color: _color($state, "50");
 
-	~ .#{$fieldname}-label {
+	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
 		color: _color($state);
 	}
 
@@ -55,7 +55,77 @@
 	@include fieldMaterialState($fieldname, "error");
 }
 
-@mixin fieldFramedState($fieldname, $state) {
+@mixin fieldFramedState($state) {
+	@if ($state == "error") {
+		z-index: 3;
+		box-shadow: fakeborderoverlay(_color(#{$state}));
+		background-color: _color(#{$state}, "50");
+		
+		&:focus-within,
+		&:hover {
+			z-index: 4;
+		}
+	}
+
+	&.mod-search, &.mod-autocomplete, &.mod-select {
+		&::after {
+			color: _color(#{$state});
+		}
+	}
+
+	.radiosfield-label, .checkboxesfield-label, .textfield-label {
+		color: _color(#{$state});
+	}
+
+	.textfield-input {
+		&:hover {
+			background-color: _color(#{$state}, "50") !important;
+		}
+
+		&:focus {
+			background-color: white !important;
+			box-shadow: fakeborderoverlay(_color(#{$state})), 0 0 0 4px _color(#{$state}, "50") !important;
+		}
+
+		&::placeholder {
+			color:  _color(#{$state}, "300");
+		}
+
+		@if ($state == "error") {
+			background-color: _color(#{$state}, "50") !important;
+			box-shadow: fakeborderoverlay(_color(#{$state})) !important;
+
+			&:hover {
+				background-color: _color(#{$state}, "100") !important;
+			}
+
+			&:focus {
+				box-shadow: fakeborderoverlay(_color(#{$state})), 0 0 0 4px _color(#{$state}, "50") !important;
+				background-color: white !important;
+			}
+		}
+	}
+
+	&:hover {
+		background-color: _color(#{$state}, "50");
+
+		.textfield-messages, .radiosfield-messages, .checkboxesfield-messages {
+			transform: translateY(100%);
+		}
+	}
+
+	&:focus-within {
+		background-color: white;
+		box-shadow: fakeborderoverlay(_color(#{$state})), 0 0 0 4px _color(#{$state}, "50");
+
+		.textfield-messages, .radiosfield-messages, .checkboxesfield-messages {
+			transform: translateY(100%);
+		}
+	}
+}
+
+// legacy
+@mixin fieldFramedError($fieldname) {
 	background-color: _color($state, "50");
 
 	&::placeholder {
@@ -83,10 +153,6 @@
 	}
 }
 
-@mixin fieldFramedError ($fieldname) {
-	@include fieldFramedState($fieldname, "error");
-}
-
 @mixin fieldMaterialFilled($fieldname) {
 	~ .#{$fieldname}-label {
 		font-size: _theme("sizes.small.font-size");
@@ -100,3 +166,4 @@
 	display: inline-block;
 	margin-left: .2em;
 }
+	
