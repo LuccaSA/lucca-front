@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
 		RedirectModule,
 		FormsModule,
 		CommonModule,
-
 		LuUserModule,
 		RouterModule.forChild([
 			{ path: '', component: FormerEmployeesComponent },
