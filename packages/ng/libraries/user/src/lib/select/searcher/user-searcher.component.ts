@@ -9,11 +9,12 @@ import {
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
-import { tap, distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map } from 'rxjs/operators';
+import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map } from 'rxjs/operators';
 import { ILuUser } from '../../user.model';
-import { ALuApiOptionPagedSearcher } from '@lucca-front/ng/api';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
 import { Subject, Observable, Subscription, combineLatest, of, merge } from 'rxjs';
+import { LuUserSearcherIntl } from './user-searcher.intl';
+import { ILuUserSearcherLabel } from './user-searcher.translate';
 
 @Component({
 	selector: 'lu-user-paged-searcher',
@@ -77,6 +78,8 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	constructor(
 		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
 		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
+		@Inject(LuUserSearcherIntl) public intl: ILuUserSearcherLabel,
+
 	) {
 		this._service = (hostService || selfService) as LuUserV3Service<U>;
 	}
