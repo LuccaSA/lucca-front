@@ -43,6 +43,6 @@ implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
 		this.outOptions$ = this._out$.asObservable();
 	}
 	onOpen() {
-		this._service.get().subscribe(trees => this._out$.next(trees));
+		this._service.getAll().subscribe(trees => this._out$.next(trees));
 	}
 }
