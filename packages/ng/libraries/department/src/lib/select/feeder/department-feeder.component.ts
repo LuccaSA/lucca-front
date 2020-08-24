@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Optional, SkipSelf, Inject, Self } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ALuDepartmentService, ILuDepartmentService } from './department-feeder.model';
-import { LuDepartmentService } from './department-feeder.service';
 import { ILuTree } from '@lucca-front/ng/core';
 import { ILuDepartment } from '../../department.model';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '@lucca-front/ng/option';
+import { ALuDepartmentService, LuDepartmentService, ILuDepartmentService } from '../../service/index';
 
 @Component({
 	selector: 'lu-department-feeder',
@@ -43,6 +42,6 @@ implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
 		this.outOptions$ = this._out$.asObservable();
 	}
 	onOpen() {
-		this._service.getAll().subscribe(trees => this._out$.next(trees));
+		this._service.getTrees().subscribe(trees => this._out$.next(trees));
 	}
 }
