@@ -9,16 +9,11 @@
 </div>
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.establishment}}</span>
+	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.establishments}}</span>
 	<ng-template #singleView>{{(values[0] || values).name}}</ng-template>
 </ng-template>
 
 <lu-option-picker-advanced [option-comparer]="byId">
-	<!-- <header class="lu-picker-header" [class.mod-multiple]="multiple">
-
-	</header> -->
 	<lu-establishment-pager></lu-establishment-pager>
-	<lu-option *luForOptions="let establishment" [value]="establishment">
-		{{establishment.name}}
-	</lu-option>
+	<lu-option *luForOptions="let establishment; trackBy: trackById" [value]="establishment">{{establishment.name}}</lu-option>
 </lu-option-picker-advanced>

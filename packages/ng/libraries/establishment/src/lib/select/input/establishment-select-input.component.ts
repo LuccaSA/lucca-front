@@ -53,5 +53,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 			_renderer,
 		);
 	}
-
+	trackById(idx: number, item: ILuEstablishment): number {
+		return item.id;
+	}
 }
