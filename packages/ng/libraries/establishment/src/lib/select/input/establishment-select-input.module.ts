@@ -7,6 +7,7 @@ import { LuEstablishmentPagerModule } from '../pager/index';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.token';
 import { luEstablishmentSelectInputTranslations } from './establishment-select-input.translate';
 import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
+import { LuEstablishmentSearcherModule } from '../searcher/index';
 
 @NgModule({
 	imports: [
@@ -14,6 +15,7 @@ import { LuEstablishmentSelectInputIntl } from './establishment-select-input.int
 		LuInputModule,
 		LuOptionModule,
 		LuEstablishmentPagerModule,
+		LuEstablishmentSearcherModule,
 	],
 	declarations: [
 		LuEstablishmentSelectInputComponent,

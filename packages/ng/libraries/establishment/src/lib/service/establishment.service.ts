@@ -16,20 +16,22 @@ export class LuEstablishmentService extends ALuEstablishmentService<ILuEstablish
 			map(res => res.items),
 		);
 	}
-	getPaged(page: number, filters: string[] = []): Observable<ILuEstablishment[]> {
+	getPaged(page: number = 0, filters: string[] = []): Observable<ILuEstablishment[]> {
 		const url = [`/organization/structure/api/establishments`, [`page=${page + 1}`, ...filters].join('&')].join('?');
 		return this._http.get<{ items: ILuEstablishment[] }>(url).pipe(
 			map(res => res.items),
 		);
 	}
-	searchAll(clue: string, filters: string[] = []): Observable<ILuEstablishment[]> {
+	searchAll(clue: string = '', filters: string[] = []): Observable<ILuEstablishment[]> {
+		if (!clue) { return this.getAll(filters); }
 		const urlSafeClues = clue.split(' ').map(c => encodeURIComponent(c));
 		const url = [`/organization/structure/api/establishments`, [`search=${urlSafeClues}`, ...filters].join('&')].join('?');
 		return this._http.get<{ items: ILuEstablishment[] }>(url).pipe(
 			map(res => res.items),
 		);
 	}
-	searchPaged(clue: string, page: number, filters: string[] = []): Observable<ILuEstablishment[]> {
+	searchPaged(clue: string = '', page: number = 0, filters: string[] = []): Observable<ILuEstablishment[]> {
+		if (!clue) { return this.getPaged(page, filters); }
 		const urlSafeClues = clue.split(' ').map(c => encodeURIComponent(c));
 		const url = [`/organization/structure/api/establishments`, [`search=${urlSafeClues}`, `page=${page + 1}`, ...filters].join('&')].join('?');
 		return this._http.get<{ items: ILuEstablishment[] }>(url).pipe(

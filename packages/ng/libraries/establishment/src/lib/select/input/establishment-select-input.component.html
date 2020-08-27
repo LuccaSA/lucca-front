@@ -14,6 +14,8 @@
 </ng-template>
 
 <lu-option-picker-advanced [option-comparer]="byId">
-	<lu-establishment-pager></lu-establishment-pager>
+	<header class="lu-picker-header">
+		<lu-establishment-searcher></lu-establishment-searcher>
+	</header>
 	<lu-option *luForOptions="let establishment; trackBy: trackById" [value]="establishment">{{establishment.name}}</lu-option>
 </lu-option-picker-advanced>
