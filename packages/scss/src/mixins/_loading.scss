@@ -1,4 +1,4 @@
-@mixin loading($size) {
+@mixin loading($size: 1rem) {
 	&::before {
 		border: 2px solid _theme("commons.loading.background");
 		border-radius: 50%;

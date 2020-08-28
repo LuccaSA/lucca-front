@@ -119,6 +119,17 @@
 						cursor: not-allowed;
 					}
 				}
+
+				&.is-loading {
+					@include loading;
+
+					&::before, &::after {
+						left: auto !important;
+						bottom: auto !important;
+						right: _component("field.framed.side-padding") !important;
+						top: _component("field.framed.side-padding") !important;
+					}
+				}
 			}
 
 			&[class*="mod-overlay"] {
@@ -131,6 +142,20 @@
 					.is-error {
 						.textfield-input {
 							background-color: white !important;
+						}
+					}
+
+					.is-warning {
+						.textfield-input {
+							background-color: white;
+							box-shadow: fakeborderoverlay(_color("warning")), 0 0 0 4px _color("warning", "50");
+						}
+					}
+
+					.is-success {
+						.textfield-input {
+							background-color: white;
+							box-shadow: fakeborderoverlay(_color("success")), 0 0 0 4px _color("success", "50");
 						}
 					}
 				}

@@ -62,4 +62,12 @@
 			padding-right: _component("field.framed.suffix.padding-right");
 		}
 	}
+
+	&.is-loading {
+		&::before, &::after {
+			bottom: auto !important;
+			right: _component("field.framed.side-padding") !important;
+			top: _component("field.framed.side-padding") !important;
+		}
+	}
 }
