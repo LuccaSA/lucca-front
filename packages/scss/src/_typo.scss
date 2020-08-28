@@ -92,3 +92,8 @@ b {
 button {
 	font-family: _theme("commons.font.family");
 }
+
+abbr[title] {
+	border: none;
+	text-decoration: none;
+}
