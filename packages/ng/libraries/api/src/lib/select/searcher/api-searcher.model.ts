@@ -11,6 +11,7 @@ import {
 	distinctUntilChanged,
 	catchError,
 	map,
+	debounceTime,
 } from 'rxjs/operators';
 
 import { ILuApiItem } from '../../api.model';
@@ -32,14 +33,21 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	protected _clue$: Observable<string>;
 
 	set clue$(clue$: Observable<string>) {
-		this.initObservables(clue$);
+		// this.initObservables(clue$);
+		this._clue$ = clue$;
 	}
 	constructor(protected _service: S) {}
+	init() {
+		this.initObservables();
+	}
 	onOpen() {
 		this.resetClue();
 	}
-	protected initObservables(clue$) {
-		this._clue$ = clue$.pipe(share());
+	onClose() {
+		this.clearOptions();
+	}
+	protected initObservables() {
+		// this._clue$ = clue$.pipe(share());
 		const results$ = this._clue$
 		.pipe(
 			switchMap(clue => this._service.searchAll(clue)),
@@ -57,6 +65,9 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 		);
 	}
 	abstract resetClue();
+	protected clearOptions() {
+		this.outOptions$.next([]);
+	}
 }
 
 export abstract class ALuApiSearcherService<T extends ILuApiItem = ILuApiItem>
@@ -124,18 +135,23 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 			this._page$.next(this._page + 1);
 		}
 	}
-	protected initObservables(clue$) {
-		const distinctPage$ = this._page$.pipe(distinctUntilChanged(), tap(p => this._page = p));
 
-		this._clue$ = clue$.pipe(
-			tap(() => this._page$.next(0)),
+	protected initObservables() {
+		const distinctPage$ = this._page$.pipe(
 			distinctUntilChanged(),
-			share()
+			tap(p => this._page = p),
 		);
+
+		// this._clue$ = clue$.pipe(
+		// 	tap(() => this._page$.next(0)),
+		// 	// distinctUntilChanged(),
+		// 	share()
+		// );
 		const results$ = combineLatest(
 			distinctPage$,
 			this._clue$,
 		).pipe(
+			debounceTime(100),
 			switchMap(([page, clue]) => this._service.searchPaged(clue, page)),
 			catchError(err => of([])),
 			share(),

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding } from '@angular/core';
-import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit } from '@angular/core';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ALuOnCloseSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, tap } from 'rxjs/operators';
 import { LuUserPagedSearcherService } from './user-searcher.service';
 import { ALuUserPagedSearcherService } from './user-searcher.model';
 import { ILuUser } from '../../user.model';
@@ -25,6 +25,11 @@ import { ALuApiOptionPagedSearcher } from '@lucca-front/ng/api';
 			multi: true,
 		},
 		{
+			provide: ALuOnCloseSubscriber,
+			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
+			multi: true,
+		},
+		{
 			provide: ALuOnScrollBottomSubscriber,
 			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
 			multi: true,
@@ -36,7 +41,7 @@ import { ALuApiOptionPagedSearcher } from '@lucca-front/ng/api';
 	],
 })
 export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser, S extends ALuUserPagedSearcherService<U> = ALuUserPagedSearcherService<U>>
-extends ALuApiOptionPagedSearcher<U, S> {
+extends ALuApiOptionPagedSearcher<U, S> implements OnInit {
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set fields(fields: string) { this._service.fields = fields; }
@@ -52,16 +57,22 @@ extends ALuApiOptionPagedSearcher<U, S> {
 		@Inject(ALuUserPagedSearcherService) @Self() selfService: ALuUserPagedSearcherService,
 	) {
 		super((hostService || selfService) as S);
-		this.clueControl = new FormControl(undefined);
-		this.clue$ = this.clueControl.valueChanges
-		.pipe(debounceTime(250));
 	}
 
 	onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}
+	ngOnInit() {
+		this.clueControl = new FormControl(undefined);
+		this.clue$ = this.clueControl.valueChanges
+		.pipe(
+			tap(c => this.resetPage()),
+			// debounceTime(250),
+		);
+		super.init();
+	}
 	resetClue() {
-		this.clueControl.setValue('');
+		this.clueControl.reset('');
 	}
 }

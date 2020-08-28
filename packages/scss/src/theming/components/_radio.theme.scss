@@ -3,10 +3,12 @@ $radio: (
   default-palette: _getMap("palettes.primary"),
   label: (
     line-height: 1.5rem,
-    padding: 0 0 0 1.5rem
+    padding: 0 0 0 1.5rem,
+    small-padding: 0 0 0 1.25rem
   ),
   input: (
     top: _theme("spacings.smallest"),
+    small-top: 6px,
     size: 1rem,
     border: (
       color: _color("grey"),

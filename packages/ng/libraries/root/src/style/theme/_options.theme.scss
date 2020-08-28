@@ -11,9 +11,12 @@ $options: (
 	),
 	checkbox: (
 		left: .5rem,
-		size: .95rem,
-		border-radius: 3px,
-		color: _color("primary", "color", true)
+		size: 1rem,
+		color: _color("primary", "color", true),
+		border: (
+			radius: _theme("commons.border.radius"),
+			color: _color("grey")
+		)
 	)
 );
 $theme: _set($theme, 'components.options', $options);

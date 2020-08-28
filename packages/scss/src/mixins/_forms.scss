@@ -1,19 +1,17 @@
 @mixin fieldState($fieldname, $state) {
-	background-color: _color($state, "lightest");
+	background-color: _color($state, "50");
 
 	~ .#{$fieldname}-label {
 		color: _color($state);
 	}
 
-	&:hover {
-		&::placeholder {
-			color: _color($state, "light");
-		}
+	&::placeholder {
+		color: _color($state, "400");
 	}
 
-	&, &:focus {
+	&:focus {
 		&::placeholder {
-			color: _color($state, "lighter");
+			color: _color($state, "300");
 		}
 	}
 
@@ -22,11 +20,12 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 2px _color($state);
+		background-color: white;
+		box-shadow: 0 0 0 4px _color($state, "200"), 0 0 0 1px _color($state) inset;
 	}
 
 	@if ($state == "error") {
-		box-shadow: 0 0 0 2px _color($state);
+		box-shadow: 0 0 0 1px _color($state);
 	}
 }
 
@@ -39,12 +38,8 @@
 		box-shadow: 0 2px 0 0 _color($state);
 	}
 
-	@if ($state == 'error') {
+	@if ($state == "error") {
 		box-shadow: 0 2px 0 0 _color($state);
-	}
-
-	&:focus {
-		background-color: _color($state, "lightest");
 	}
 
 	~ .#{$fieldname}-label {
@@ -61,30 +56,28 @@
 }
 
 @mixin fieldFramedState($fieldname, $state) {
-	background-color: _color($state, "see-through");
+	background-color: _color($state, "50");
 
-	&:hover {
-		&::placeholder {
-			color: _color($state, "light");
-		}
+	&::placeholder {
+		color: _color($state, "400");
 	}
 
-	&, &:focus {
+	&:focus {
 		&::placeholder {
-			color: _color($state, "lighter");
+			color: _color($state, "300");
 		}
 	}
 
 	&:focus, &:hover {
 		@include fakeBorder(1px, _color($state));
-		background-color: _color($state, "see-through");
+		background-color: _color($state, "50");
 	}
 
 	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
 		color: _color($state) !important;
 	}
 
-	@if ($state == 'error') {
+	@if ($state == "error") {
 		@include fakeBorder(1px, _color($state));
 		z-index: 1;
 	}

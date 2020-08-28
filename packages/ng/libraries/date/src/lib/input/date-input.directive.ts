@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, ChangeDetectorRef, forwardRef, HostListener, Input, Inject } from '@angular/core';
+import { Directive, ElementRef, Renderer2, ChangeDetectorRef, forwardRef, HostListener, Input, Inject, OnInit } from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
@@ -20,10 +20,12 @@ import { LuDateInputIntl } from './date-input.intl';
 		},
 	],
 })
-export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
+export class LuDateInputDirective<D> extends ALuInput<D> implements Validator, OnInit {
 	private _focused = false;
 	@Input() min?: D;
 	@Input() max?: D;
+	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+
 	@Input() set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
@@ -35,11 +37,37 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 		@Inject(LuDateInputIntl) private _intl: ILuDateInputLabel,
 	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
-		this.placeholder = this._intl.placeholder;
+	}
+	ngOnInit() {
+		switch (this.granularity) {
+			case ELuDateGranularity.year:
+				this.placeholder = this._intl.placeholderYear;
+				break;
+			case ELuDateGranularity.month:
+				this.placeholder = this._intl.placeholderMonth;
+				break;
+			case ELuDateGranularity.day:
+			default:
+				this.placeholder = this._intl.placeholderDay;
+				break;
+		}
 	}
 	protected render() {
 		if (this._focused) { return; }
-		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, 'shortDate') : '';
+		let format: string;;
+		switch (this.granularity) {
+			case ELuDateGranularity.year:
+				format = this._intl.formatYear;
+				break;
+			case ELuDateGranularity.month:
+				format = this._intl.formatMonth;
+				break;
+			case ELuDateGranularity.day:
+			default:
+				format = this._intl.formatDay;
+				break;
+		}
+		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, format) : '';
 		this._elementRef.nativeElement.value = text;
 	}
 	@HostListener('input', ['$event'])
@@ -49,7 +77,7 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator {
 		this.setValue(value);
 	}
 	private parse(text): D {
-		const date = this._adapter.parse(text);
+		const date = this._adapter.parse(text, this.granularity);
 		return date;
 	}
 	@HostListener('focus')

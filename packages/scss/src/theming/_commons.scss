@@ -22,8 +22,8 @@ $commons: (
 	background: (
 		base: #F5F5F5
 	),
-	highlight: #E5E5E5,
-	selected: #EEEEEE,
+	highlight: _color("primary", "50"),
+	selected: _color("primary", "100"),
 	text: (
 		link: (
 			color: #00B2ED,
@@ -46,6 +46,9 @@ $commons: (
 		elevation-4: unquote("0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"),
 		elevation-5: unquote("0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)")
 	),
+	box-shadow: (
+		hard: unquote("0px 2px 8px rgba(0, 0, 0, 0.2), 0px 1px 2px rgba(0, 0, 0, 0.15)")
+	),
 	overlays: (
 		background: #323232,
 		text: #FFFFFF
@@ -55,8 +58,8 @@ $commons: (
 	focused: 0 0 1px 2px #A6C7FF,
 	mobile: "md",
 	loading: (
-		background: _color("primary", "lighter"),
-		frontground: _color("primary"),
+		background: _color("primary", "200"),
+		frontground: _color("primary", "color"),
 		speed: 600ms,
 	)
 );

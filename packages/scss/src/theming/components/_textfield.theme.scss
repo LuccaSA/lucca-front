@@ -1,20 +1,22 @@
 $textfield: (
-	background: _color("primary", "lightest"),
-	border-radius: .2rem,
+	background: _color("primary", "50"),
+	border-radius: 4px,
 
 	input: (
 		padding-horizontal: _theme("spacings.smaller"),
 		padding-vertical: _theme("spacings.smaller"),
-		placeholder: _color("primary", "lighter")
+		placeholder: _color("primary", "400")
 	),
 
 	hover: (
-		background: _color("primary", "lighter"),
-		placeholder: _color("primary", "light")
+		background: _color("primary", "100"),
+		placeholder: _color("primary", "400")
 	),
 
 	focus: (
-		placeholder: _color("primary", "lighter")
+		placeholder: _color("primary", "300"),
+		shadow-color: _color("primary", "200"),
+		border-color: _color("primary", "600")
 	),
 
 	disabled: (
@@ -24,7 +26,7 @@ $textfield: (
 
 	suffix: (
 		top: 2rem,
-		padding-right: 1.5rem
+		padding-right: 1.5rem 
 	),
 
 	sizes: (

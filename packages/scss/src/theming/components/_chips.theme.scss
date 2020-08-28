@@ -1,0 +1,7 @@
+$chip: (
+	kill: (
+		hover: _color("primary", "300")
+	)
+);
+
+$theme: _set($theme, "components.chip", $chip);

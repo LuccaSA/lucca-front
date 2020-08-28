@@ -101,14 +101,6 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 				startWith(true),
 				shareReplay(),
 			);
-			this.loading$.pipe(
-				delay(1),
-			).subscribe(l => {
-				if (!l) {
-					// replay onOpen when loading is done
-					this.onOpen();
-				}
-			});
 		}
 	}
 	protected initSelectors() {
