@@ -65,6 +65,7 @@ const routes: Routes = [
 	{ path: 'overlays-events', loadChildren: () => import('./overlays-events').then(m => m.OverlaysEventsModule) },
 	{ path: 'former-employees', loadChildren: () => import('./former-employees').then(m => m.FormerEmployeesModule) },
 	{ path: 'establishment', loadChildren: () => import('./establishment').then(m => m.EstablishmentModule) },
+	{ path: 'api-v4', loadChildren: () => import('./api-v4').then(m => m.ApiV4Module) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
