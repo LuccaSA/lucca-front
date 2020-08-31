@@ -17,7 +17,7 @@ import { ALuApiOptionSearcher, ALuApiOptionPagedSearcher } from './api-searcher.
 import { ILuApiItem } from '../../api.model';
 import { FormControl } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs/operators';
-import { ALuApiService, LuApiV3Service } from '../../service/index';
+import { ALuApiService, LuApiHybridService } from '../../service/index';
 
 @Component({
 	selector: 'lu-api-searcher',
@@ -37,16 +37,16 @@ import { ALuApiService, LuApiV3Service } from '../../service/index';
 		},
 		{
 			provide: ALuApiService,
-			useClass: LuApiV3Service,
+			useClass: LuApiHybridService,
 		},
 	],
 })
 export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
-extends ALuApiOptionSearcher<T, LuApiV3Service<T>> implements OnInit {
+extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
-	@Input() set api(api: string) {
-		this._service.api = api;
-	}
+
+	@Input() set standard(standard: string) { this._service.standard = standard; }
+	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
@@ -54,9 +54,9 @@ extends ALuApiOptionSearcher<T, LuApiV3Service<T>> implements OnInit {
 	clueControl: FormControl;
 	constructor(
 		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: ALuApiService<T>,
-		@Inject(ALuApiService) @Self() selfService: LuApiV3Service<T>,
+		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
-		super((hostService || selfService) as LuApiV3Service<T>);
+		super((hostService || selfService) as LuApiHybridService<T>);
 
 	}
 	ngOnInit() {
@@ -98,13 +98,14 @@ extends ALuApiOptionSearcher<T, LuApiV3Service<T>> implements OnInit {
 		},
 		{
 			provide: ALuApiService,
-			useClass: LuApiV3Service,
+			useClass: LuApiHybridService,
 		},
 	],
 })
 export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
-extends ALuApiOptionPagedSearcher<T, LuApiV3Service<T>> implements OnInit {
+extends ALuApiOptionPagedSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
+	@Input() set standard(standard: string) { this._service.standard = standard; }
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
@@ -113,9 +114,9 @@ extends ALuApiOptionPagedSearcher<T, LuApiV3Service<T>> implements OnInit {
 	clueControl: FormControl;
 	constructor(
 		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: ALuApiService,
-		@Inject(ALuApiService) @Self() selfService: LuApiV3Service<T>,
+		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
-		super((hostService || selfService) as LuApiV3Service<T>);
+		super((hostService || selfService) as LuApiHybridService<T>);
 	}
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
