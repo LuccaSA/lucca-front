@@ -25,9 +25,10 @@
 	border: 0;
 	border-radius: _component("commons.border.radius");
 	color: _component("actionIcon.color");
+	margin-left: .1rem;
+	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, opacity _theme("commons.animations.durations.fast") ease;
 	height: _theme("spacings.big");
 	width: _theme("spacings.big");
-	transition: all _theme("commons.animations.durations.fast") ease;
 	vertical-align: middle;
 	text-decoration: none;
 	display: inline-flex;
