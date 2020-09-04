@@ -1,81 +1,134 @@
 %input_framed {
-	.textfield-input {
+	width: auto;
 
-		&::placeholder {
-			color: _component("field.framed.placeholder");
-		}
+	&.is-error {
+		@include fieldFramedState("error");
 	}
 
-	.textfield-suffix {
-		bottom: _component("field.framed.bottom-padding");
-		right: _component("field.framed.side-padding");
-		display: flex;
-		align-items: flex-end;
+	&.is-warning {
+		@include fieldFramedState("warning");
 	}
 
-	// MODS
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+	&.is-success {
+		@include fieldFramedState("success");
+	}
 
 	&.mod-multiline {
-		max-width: none;
-		padding: 1rem;
-		@include fakeBorder(1px, _theme("commons.divider.color"));
-
-		textarea.textfield-input {
-			height: _component("textfield.framed.textarea.height");
-			padding: 0;
-			margin-top: _component("textfield.framed.textarea.margin-top");
-			box-shadow: none;
-			resize: none;
-		}
-
-		&:hover {
-			@include fakeBorder(1px, _component("field.framed.color"));
-			background: _component("field.framed.see-through");
-			z-index: 1;
-
-			textarea.textfield-input {
-				background: transparent;
-			}
-		}
-
-		// MODS
-		&.mod-withSuffix {
-			textarea.textfield-input {
-				margin-right: 2em;
-			}
-		}
-
-		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
-			&, &:hover, &:focus {
-				background-color: _theme("commons.disabled.background");
-				color: _theme("commons.disabled.color");
-				opacity: .6;
-				cursor: not-allowed;
-			}
-		}
-	}
-
-	&.mod-withSuffix {
 		.textfield-input {
-			padding-right: _component("textfield.framed.suffix.padding-right");
+			height: _component("field.framed.textarea.height");
+			min-height: _component("field.framed.textarea.min-height");
+			max-height: _component("field.framed.textarea.max-height");
+		}
+
+		&.mod-small {
+			.textfield-input {
+				height: auto;
+			}
 		}
 	}
 
-	&.mod-search, &.mod-autocomplete {
+	&.mod-search, &.mod-autocomplete, &.mod-select {
 		&::after {
-			bottom: _component("field.framed.bottom-padding");
-			color: _color("text.light");
-			line-height: 1;
-			right: _component("field.framed.side-padding");
+			bottom: 0;
+			right: 0;
+			padding: _component("field.framed.side-padding");
+			z-index: 4;
+		}
+
+		.textfield {
+			width: 100%;
 		}
 
 		.textfield-input {
-			padding-right: _component("textfield.framed.suffix.padding-right");
+			padding-right: _component("field.framed.suffix.padding-right");
 		}
+	}
 
-		.textfield-options {
-			margin-top: 1px;
+	.textfield-options {
+		margin-top: -2px;
+		width: auto;
+		right: 1px;
+
+		mark {
+			background-color: transparent;
+			text-decoration: underline;
+			color: inherit;
 		}
+	}
+
+	.textfield-input {
+		width: 100%;
+		border-radius: 0;
+		box-shadow: fakeborderoverlay(_component("field.framed.border"));
+		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
+		line-height: _theme("sizes.standard.line-height");
+
+		&:not(:disabled) {
+			&:not(.is-error) {
+				&:not(.is-success) {
+					&:not(.is-warning) {
+						background-color: white;
+
+						&:hover {
+							background-color: _component("field.framed.color50");
+						}
+
+						&:focus {
+							background-color: white;
+							box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+						}
+					}
+				}
+			}
+
+			&.is-error {
+				box-shadow: fakeborderoverlay(_color("error"));
+				z-index: 3;
+
+				&:hover {
+					background-color: _color("error", "100");
+				}
+
+				&:focus {
+					background-color: white;
+					box-shadow: fakeborderoverlay(_color("error")), 0 0 0 4px _color("error", "50");
+				}
+			}
+
+			&.is-warning {
+				background-color: white;
+
+				&:hover {
+					background-color: _color("warning", "50");
+				}
+
+				&:focus {
+					background-color: white;
+					box-shadow: fakeborderoverlay(_color("warning")), 0 0 0 4px _color("warning", "50");
+				}
+			}
+
+			&.is-success {
+				background-color: white;
+
+				&:hover {
+					background-color: _color("success", "50");
+				}
+
+				&:focus {
+					background-color: white;
+					box-shadow: fakeborderoverlay(_color("success")), 0 0 0 4px _color("success", "50");
+				}
+			}
+		}
+	}
+
+	.textfield-label {
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: _component("field.framed.label-top-offset") _component("field.framed.side-padding");
+		z-index: 10;
+		line-height: 1.5rem;
 	}
 }
