@@ -63,7 +63,7 @@
 			margin: _theme("spacings.smaller") 0;
 		}
 	}
-	
+
 	&.mod-icon {
 		padding: _theme("spacings.smaller") _theme("spacings.standard")
 		_theme("spacings.smaller") _theme("spacings.bigger");
@@ -76,16 +76,14 @@
 
 .file {
 	&.is-droppable {
-		background: _theme("commons.background.base");
+		background-color: _theme("commons.background.base");
 		.file-icon {
 			color: _color("primary", "500");
 		}
 	}
 
 	&.is_disabled {
-		.file-title,
-		.file-or,
-		.file-format {
+		.file-title, .file-or, .file-format {
 			color: _theme("commons.disabled.color");
 		}
 	}
