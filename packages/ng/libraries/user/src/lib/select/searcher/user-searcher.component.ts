@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, Eleme
 import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ALuOnCloseSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl } from '@angular/forms';
-import { debounceTime, tap } from 'rxjs/operators';
-import { LuUserPagedSearcherService } from './user-searcher.service';
-import { ALuUserPagedSearcherService } from './user-searcher.model';
+import { tap } from 'rxjs/operators';
 import { ILuUser } from '../../user.model';
 import { ALuApiOptionPagedSearcher } from '@lucca-front/ng/api';
+import { ALuUserService, LuUserV3Service } from '../../service/index';
 
 @Component({
 	selector: 'lu-user-paged-searcher',
@@ -35,13 +34,13 @@ import { ALuApiOptionPagedSearcher } from '@lucca-front/ng/api';
 			multi: true,
 		},
 		{
-			provide: ALuUserPagedSearcherService,
-			useClass: LuUserPagedSearcherService,
+			provide: ALuUserService,
+			useClass: LuUserV3Service,
 		},
 	],
 })
-export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser, S extends ALuUserPagedSearcherService<U> = ALuUserPagedSearcherService<U>>
-extends ALuApiOptionPagedSearcher<U, S> implements OnInit {
+export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
+extends ALuApiOptionPagedSearcher<U, LuUserV3Service<U>> implements OnInit {
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set fields(fields: string) { this._service.fields = fields; }
@@ -49,14 +48,13 @@ extends ALuApiOptionPagedSearcher<U, S> implements OnInit {
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
 	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
 	@Input() set operations(operations: number[]) { this._service.operations = operations; }
-	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
 
 	clueControl: FormControl;
 	constructor(
-		@Inject(ALuUserPagedSearcherService) @Optional() @SkipSelf() hostService: ALuUserPagedSearcherService,
-		@Inject(ALuUserPagedSearcherService) @Self() selfService: ALuUserPagedSearcherService,
+		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
+		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
 	) {
-		super((hostService || selfService) as S);
+		super((hostService || selfService) as LuUserV3Service<U>);
 	}
 
 	onOpen() {

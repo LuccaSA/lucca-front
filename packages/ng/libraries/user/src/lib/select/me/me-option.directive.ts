@@ -1,8 +1,8 @@
 import { Directive, forwardRef, Inject, Optional, SkipSelf, Self, ViewContainerRef, TemplateRef } from '@angular/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
-import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 import { ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuUser } from '../../user.model';
+import { ALuUserService, LuUserV3Service } from '../../service/index';
 
 @Directive({
 	selector: '[luUserMeOption]',
@@ -13,8 +13,8 @@ import { ILuUser } from '../../user.model';
 			multi: true,
 		},
 		{
-			provide: ALuUserPagedSearcherService,
-			useClass: LuUserPagedSearcherService,
+			provide: ALuUserService,
+			useClass: LuUserV3Service,
 		},
 		
 		{
@@ -29,10 +29,10 @@ export class LuUserMeOptionDirective implements ILuOptionOperator {
 		this.outOptions$ = in$;
 	}
 	outOptions$;
-	private _service: ALuUserPagedSearcherService;
+	private _service: ALuUserService;
 	constructor(
-		@Inject(ALuUserPagedSearcherService) @Optional() @SkipSelf() hostService: ALuUserPagedSearcherService,
-		@Inject(ALuUserPagedSearcherService) @Self() selfService: ALuUserPagedSearcherService,
+		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
+		@Inject(ALuUserService) @Self() selfService: ALuUserService,
 		private _vcr: ViewContainerRef,
 		private _templateRef: TemplateRef<{ $implicit: ILuUser }>,
 	) {

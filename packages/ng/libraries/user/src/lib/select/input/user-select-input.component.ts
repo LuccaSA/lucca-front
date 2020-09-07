@@ -13,7 +13,10 @@ import {
 	HostBinding,
 	AfterContentInit,
 	Inject,
-	AfterViewInit
+	AfterViewInit,
+	Optional,
+	SkipSelf,
+	Self
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -23,10 +26,10 @@ import { ILuUser } from '../../user.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuPickerPanel } from '@lucca-front/ng/picker';
 import { LuDisplayFullname } from '../../display/index';
-import { ALuUserPagedSearcherService, LuUserPagedSearcherService } from '../searcher/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { ILuUserSelectInputLabel } from './user-select-input.translate';
 import { LuOptionComparer } from '@lucca-front/ng/option';
+import { ALuUserService, LuUserV3Service } from '../../service/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -43,21 +46,23 @@ import { LuOptionComparer } from '@lucca-front/ng/option';
 			multi: true,
 		},
 		{
-			provide: ALuUserPagedSearcherService,
-			useClass: LuUserPagedSearcherService,
+			provide: ALuUserService,
+			useClass: LuUserV3Service,
 		},
 	],
 })
 export class LuUserSelectInputComponent<U extends ILuUser = ILuUser>
 extends ALuSelectInputComponent<U>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
+	protected _service: LuUserV3Service<U>;
+
 	searchFormat = LuDisplayFullname.lastfirst;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	@Input() set transformFn(transformFn: (item: any) => U) { this._service.transformFn = transformFn; }
 	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
 	@Input() set operations(operations: number[]) { this._service.operations = operations; }
 
@@ -69,9 +74,10 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-		protected _service: ALuUserPagedSearcherService<U>,
+		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
+		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
 		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
-		) {
+	) {
 		super(
 			_changeDetectorRef,
 			_overlay,
@@ -79,18 +85,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 			_viewContainerRef,
 			_renderer,
 		);
+		this._service = hostService || selfService;
 	}
 
-	// @ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<U>) {
-	// 	if (!picker) { return; }
-	// 	this._picker = picker;
-	// }
-	// @ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
-	// 	if (!clearer) { return; }
-	// 	this._clearer = clearer;
-	// }
-	// @ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<U>) {
-	// 	if (!displayer) { return; }
-	// 	this.displayer = displayer;
-	// }
+
 }
