@@ -74,21 +74,21 @@
 	&.palette-error, &.is-error {
 		.checkbox-label {
 			&::before {
-				border-color: _color("error", "600")
+				border-color: _color("error", "600");
 			}
 		}
 	}
 	&.palette-warning, &.is-warning {
 		.checkbox-label {
 			&::before {
-				border-color: _color("warning", "600")
+				border-color: _color("warning", "600");
 			}
 		}
 	}
 	&.palette-success, &.is-success {
 		.checkbox-label {
 			&::before {
-				border-color: _color("success", "600")
+				border-color: _color("success", "600");
 			}
 		}
 	}
@@ -99,8 +99,6 @@
 			@include checkboxColoring($name);
 		}
 	}
-
-	
 }
 
 

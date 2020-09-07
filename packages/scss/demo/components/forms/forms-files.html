@@ -1,5 +1,5 @@
 <section class="contentSection">
-	<h1>File <span class="label palette-warning">Work in progress</span></h1>
+	<h1>File</h1>
 
 	<div class="callout mod-icon">
 		<div class="callout-icon"><span aria-hidden="true" class="lucca-icon">info</span></div>
@@ -9,162 +9,454 @@
 	<div class="grid">
 
 		<div class="grid-md6">
-			<div class="file">
-				<div class="file-title u-marginBottomReset">Drag and drop your file here</div>
-				<div class="file-or">Or</div>
-				<button class="button mod-outline">browse file</button>
-				<div class="u-marginTopSmaller u-textLight">Supported file formats : .xls, .xlsx .csv</div>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file"&gt;
-	&lt;div class="file-title u-marginBottomReset""&gt;Drag and drop your file here&lt;/div&gt;
-	&lt;div class="file-or"&gt;Or&lt;/div&gt;
-	&lt;button class="button mod-outline"&gt;browse file&lt;/button&gt;
-	&lt;div class="u-marginTopSmaller u-textLight"&gt;Supported file formats : .xls, .xlsx .csv&lt;/div&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file is-droppable">
-				<div class="file-title u-marginBottomReset">Drag and drop your file here</div>
-				<div class="file-or">Or</div>
-				<button class="button mod-outline">browse file</button>
-				<div class="u-marginTopSmaller u-textLight">Supported file formats : .xls, .xlsx .csv</div>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file is-droppable"&gt;
-	&lt;div class="file-title u-marginBottomReset""&gt;Drag and drop your file here&lt;/div&gt;
-	&lt;div class="file-or"&gt;Or&lt;/div&gt;
-	&lt;button class="button mod-outline"&gt;browse file&lt;/button&gt;
-	&lt;div class="u-marginTopSmaller u-textLight"&gt;Supported file formats : .xls, .xlsx .csv&lt;/div&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file">
-				<div class="file-title">Uploading your file...</div>
-				<div class="file-progress progress">
-					<div class="progress-bar" style="width: 50%"></div>
-				</div>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file"&gt;
-	&lt;div class="file-title"&gt;Uploading your file...&lt;/div&gt;
-	&lt;div class="file-progress progress"&gt;
-		&lt;div class="progress-bar" style="width: 50%"&gt;&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file">
-				<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
-				<div class="file-title u-textSuccess">File uploaded</div>
-				<div class="u-textLight">file_name</div>
-				<div class="file-or u-marginTopSmall">It's the wrong file?</div>
-				<button class="button mod-outline">Select another file</button>
-				<div class="u-marginTopSmaller u-textLight">Supported file formats : .xls, .xlsx .csv</div>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file"&gt;
-	&lt;span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"&gt;&lt;/span&gt;
-	&lt;div class="file-title"&gt;File uploaded&lt;/div&gt;
-	&lt;div class=" u-textLight"&gt;file_name&lt;/div&gt;
-	&lt;div class="file-or u-marginTopSmall"&gt;It's the wrong file?&lt;/div&gt;
-	&lt;button class="button mod-outline"&gt;Select another file&lt;/button&gt;
-	&lt;div class="u-marginTopSmaller u-textLight"&gt;Supported file formats : .xls, .xlsx .csv&lt;/div&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file">
-				<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
-				<div class="file-title u-textError">File uploaded</div>
-				<div class="u-textLight">file_name</div>
-				<div class="file-or u-marginTopSmall">It's the wrong file?</div>
-				<button class="button mod-outline">Select another file</button>
-				<div class="u-marginTopSmaller u-textLight">Supported file formats : .xls, .xlsx .csv</div>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file"&gt;
-	&lt;span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"&gt;&lt;/span&gt;
-	&lt;div class="file-title u-textError"&gt;File uploaded&lt;/div&gt;
-	&lt;div class=" u-textLight"&gt;file_name&lt;/div&gt;
-	&lt;div class="file-or u-marginTopSmall"&gt;It's the wrong file?&lt;/div&gt;
-	&lt;button class="button mod-outline"&gt;Select another file&lt;/button&gt;
-	&lt;div class="u-marginTopSmaller u-textLight"&gt;Supported file formats : .xls, .xlsx .csv&lt;/div&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
+			<h2>Default</h2>
+			<label class="file">
+				<input class="file-input" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Drag and drop your file here</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or">or</span>
+					<span class="file-button button mod-outline">browse files</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file&quot;&gt;
+	&lt;input class=&quot;file-input&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Drag and drop your file here&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;or&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;browse files&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Disabled</h2>
+			<label class="file">
+				<input class="file-input" type="file" title="" accept=".xls,.xlsx,.csv" disabled />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Drag and drop your file here</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or">or</span>
+					<span class="file-button button mod-outline">browse files</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file&quot;&gt;
+	&lt;input class=&quot;file-input&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; disabled /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Drag and drop your file here&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;or&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;browse files&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Droppable</h2>
+			<label class="file">
+				<input class="file-input is-droppable" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Drag and drop your file here</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or">or</span>
+					<span class="file-button button mod-outline">browse files</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file&quot;&gt;
+	&lt;input class=&quot;file-input is-droppable&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Drag and drop your file here&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;or&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;browse files&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Uploading</h2>
+			<label class="file">
+				<input class="file-input is-uploading" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Uploading your file…</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or"></span>
+					<span class="file-button button mod-outline"></span>
+					<span class="u-mask"></span>
+					<span class="file-formats u-marginTopSmaller"></span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file&quot;&gt;
+	&lt;input class=&quot;file-input is-uploading&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Uploading your file&hellip;&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Success</h2>
+			<label class="file">
+				<input class="file-input is-uploaded" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">File uploaded</span>
+						<span class="file-name">filename.xls</span>
+					</span>
+					<span class="file-or">It’s the wrong file?</span>
+					<span class="file-button button mod-outline">Select another file</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file&quot;&gt;
+	&lt;input class=&quot;file-input is-uploaded&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;File uploaded&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;filename.xls&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;It&rsquo;s the wrong file?&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;Select another file&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Error</h2>
+			<label class="file">
+				<input class="file-input" type="file" title="" accept=".xls,.xlsx,.csv" aria-invalid="true" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">File not supported</span>
+						<span class="file-name">filename.xls</span>
+					</span>
+					<span class="file-or">It’s the wrong file?</span>
+					<span class="file-button button mod-outline">Select another file</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file&quot;&gt;
+	&lt;input class=&quot;file-input&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; aria-invalid=&quot;true&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;File not supported&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;filename.xls&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;It&rsquo;s the wrong file?&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;Select another file&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
 		</div>
 
 		<div class="grid-md6">
-			<div class="file mod-small">
-				<div class="file-title">Drag and drop your file here</div>
-				<button class="button mod-outline mod-small">browse file</button>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small"&gt;
-	&lt;span aria-hidden="true" class="file-icon lucca-icon icon-cloudUpload"&gt;&lt;/span&gt;
-	&lt;div class="file-title"&gt;Drag and drop your file here&lt;/div&gt;
-	&lt;div class="file-or"&gt;Or&lt;/div&gt;
-	&lt;a&gt;browse file&lt;/a&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file mod-small is-droppable">
-				<div class="file-title">Drag and drop your file here</div>
-				<button class="button mod-outline mod-small">Browse file</button>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small is-droppable"&gt;
-	&lt;span aria-hidden="true" class="file-icon lucca-icon icon-cloudUpload"&gt;&lt;/span&gt;
-	&lt;div class="file-title"&gt;Drag and drop your file here&lt;/div&gt;
-	&lt;div class="file-or"&gt;Or&lt;/div&gt;
-	&lt;a&gt;browse file&lt;/a&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file mod-small">
-				<div class="file-title">Uploading your file...</div>
-				<div class="file-progress progress">
-					<div class="progress-bar" style="width: 50%"></div>
-				</div>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small"&gt;
-	&lt;Span aria-hidden="true" class="file-icon lucca-icon icon-cloudUpload"&gt;&lt;/span&gt;
-	&lt;div class="file-title"&gt;Uploading your file...&lt;/div&gt;
-	&lt;div class="file-progress progress"&gt;
-		&lt;div class="progress-bar" style="width: 50%"&gt;&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file mod-small mod-icon">
-				<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
-				<div class="file-title">
-					<div class="u-textSuccess">File uploaded</div>
-					<div class="u-textSmall u-textLight">file_name</div>
-				</div>
-				<button class="button mod-outline mod-small">Select another file</button>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small"&gt;
-	&lt;span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"&gt;&lt;/span&gt;
-	&lt;div class="file-title"&gt;
-		&lt;div class="u-textSuccess"&gt;File uploaded&lt;/div&gt;
-		&lt;div class="u-textSmall u-textLight"&gt;file_name&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;button class="button mod-outline mod-small"&gt;Select another file&lt;/button&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
-			<div class="file mod-small mod-icon">
-				<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
-				<div class="file-title">
-					<div class="u-textError">File uploaded</div>
-					<div class="u-textSmall u-textLight">file_name</div>
-				</div>
-				<button class="button mod-outline mod-small">browse file</button>
-				<input class="file-input" type="file">
-			</div>
-<code class="code mod-block u-marginBottomStandard">&lt;div class="file mod-small"&gt;
-	&lt;soan aria-hidden="true" class="file-icon lucca-icon icon-error u-textSError"&gt;&lt;/span&gt;
-	&lt;div class="file-title"&gt;
-		&lt;div class="u-textError"&gt;File uploaded&lt;/div&gt;
-		&lt;div class="u-textSmall u-textLight"&gt;file_name&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;button class="button mod-outline mod-small"&gt;Select another file&lt;/button&gt;
-	&lt;input class="file-input" type="file"&gt;
-&lt;/div&gt;</code>
+			<h2>Default and small modifier</h2>
+			<label class="file mod-small">
+				<input class="file-input" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Drag and drop your file here</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or">or</span>
+					<span class="file-button button mod-outline">browse files</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file mod-small&quot;&gt;
+	&lt;input class=&quot;file-input&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Drag and drop your file here&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;or&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;browse files&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Disabled and small modifier</h2>
+			<label class="file mod-small">
+				<input class="file-input" type="file" title="" accept=".xls,.xlsx,.csv" disabled />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Drag and drop your file here</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or">or</span>
+					<span class="file-button button mod-outline">browse files</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file mod-small&quot;&gt;
+	&lt;input class=&quot;file-input&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; disabled /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Drag and drop your file here&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;or&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;browse files&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Droppable and small modifier</h2>
+			<label class="file mod-small">
+				<input class="file-input is-droppable" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Drag and drop your file here</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or">or</span>
+					<span class="file-button button mod-outline">browse files</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file mod-small&quot;&gt;
+	&lt;input class=&quot;file-input is-droppable&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Drag and drop your file here&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;or&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;browse files&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Uploading and small modifier</h2>
+			<label class="file mod-small">
+				<input class="file-input is-uploading" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">Uploading your file…</span>
+						<span class="file-name"></span>
+					</span>
+					<span class="file-or"></span>
+					<span class="file-button button mod-outline"></span>
+					<span class="u-mask"></span>
+					<span class="file-formats u-marginTopSmaller"></span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file mod-small&quot;&gt;
+	&lt;input class=&quot;file-input is-uploading&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;Uploading your file&hellip;&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Success and small modifier</h2>
+			<label class="file mod-small">
+				<input class="file-input is-uploaded" type="file" title="" accept=".xls,.xlsx,.csv" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">File uploaded</span>
+						<span class="file-name">filename.xls</span>
+					</span>
+					<span class="file-or">It’s the wrong file?</span>
+					<span class="file-button button mod-outline">Select another file</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file mod-small&quot;&gt;
+	&lt;input class=&quot;file-input is-uploaded&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;File uploaded&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;filename.xls&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;It&rsquo;s the wrong file?&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;Select another file&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
+			<h2>Error and small modifier</h2>
+			<label class="file mod-small">
+				<input class="file-input" type="file" title="" accept=".xls,.xlsx,.csv" aria-invalid="true" />
+				<span role="text" class="file-content">
+					<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+					<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+					<span class="file-titleName">
+						<span class="file-title u-marginBottomReset">File not supported</span>
+						<span class="file-name">filename.xls</span>
+					</span>
+					<span class="file-or">It’s the wrong file?</span>
+					<span class="file-button button mod-outline">Select another file</span>
+					<span class="u-mask"> – </span>
+					<span class="file-formats u-marginTopSmaller">Supported file formats: .xls, .xlsx .csv</span>
+					<span class="file-progress progress">
+						<span class="progress-bar" style="width: 50%"></span>
+					</span>
+				</span>
+			</label>
+<code class="code mod-block u-marginBottomStandard">&lt;label class=&quot;file mod-small&quot;&gt;
+	&lt;input class=&quot;file-input&quot; type=&quot;file&quot; title=&quot;&quot; accept=&quot;.xls,.xlsx,.csv&quot; aria-invalid=&quot;true&quot; /&gt;
+	&lt;span role=&quot;text&quot; class=&quot;file-content&quot;&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-success u-textSuccess&quot;&gt;&lt;/span&gt;
+		&lt;span aria-hidden=&quot;true&quot; class=&quot;file-icon lucca-icon icon-error u-textError&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;file-titleName&quot;&gt;
+			&lt;span class=&quot;file-title u-marginBottomReset&quot;&gt;File not supported&lt;/span&gt;
+			&lt;span class=&quot;file-name&quot;&gt;filename.xls&lt;/span&gt;
+		&lt;/span&gt;
+		&lt;span class=&quot;file-or&quot;&gt;It&rsquo;s the wrong file?&lt;/span&gt;
+		&lt;span class=&quot;file-button button mod-outline&quot;&gt;Select another file&lt;/span&gt;
+		&lt;span class=&quot;u-mask&quot;&gt; &ndash; &lt;/span&gt;
+		&lt;span class=&quot;file-formats u-marginTopSmaller&quot;&gt;Supported file formats: .xls, .xlsx .csv&lt;/span&gt;
+		&lt;span class=&quot;file-progress progress&quot;&gt;
+			&lt;span class=&quot;progress-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/span&gt;
+		&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/label&gt;</code>
 		</div>
 	</div>
+	<em><strong>Tip:</strong> You can add a <code class="code">multiple</code> attribute to your <code class="code">input</code> to allow multiple files to be selected.</em><br>
 </section>

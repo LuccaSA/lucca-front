@@ -70,7 +70,7 @@
 	display: inline-block;
 	font-family: unquote(_component("button.font.family"));
 	font-size: _component("button.font-size");
-	font-weight: _component("button.font-weight");
+	font-weight: _component("button.font-weight"); /* stylelint-disable-line font-weight-notation */
 	line-height: _component("button.line-height");
 	margin: _component("button.margin");
 	padding: _component("button.padding");
