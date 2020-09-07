@@ -1,7 +1,7 @@
 .card {
-	background: white;
-	border-radius: 3px;
-	@include elevate(1);
+	background-color: white;
+	border-radius: _component("card.border.radius");
+	border: 1px solid _component("card.border.color");
 	display: block;
 	margin-bottom: 1rem;
 	position: relative;
@@ -14,7 +14,7 @@
 
 .card-footer {
 	align-items: center;
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	border-top: 1px solid _component("card.border.color");
 	display: flex;
 	min-height: 3rem;
 	padding: _component("card.footer.padding");
@@ -30,7 +30,7 @@
 
 .card {
 	&.mod-grey {
-		background: _theme("commons.background.base");
+		background-color: _component("card.mod-grey");
 	}
 
 	&.mod-clickable {
@@ -39,6 +39,16 @@
 		text-decoration: none;
 
 		&:hover {
+			border-color: _component("card.hover.border");
+			background-color: _component("card.hover.background");
+		}
+		
+	}
+
+	&.mod-elevated {
+		border: 0;
+		@include elevate(1);
+		&.mod-clickable:hover {
 			@include elevate(3);
 		}
 	}
