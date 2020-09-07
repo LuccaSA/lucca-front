@@ -1,13 +1,19 @@
 <section class="calendar">
 	<header class="calendar-header">
-		<button class="calendar-header-nav" (click)="previous()"><i class="lucca-icon">arrow_west</i></button>
+		<button class="calendar-header-nav" (click)="previous()">
+			<span aria-hidden="true" class="lucca-icon">arrow_west</span>
+			<span class="u-mask">Previous month</span>
+		</button>
 		<button class="calendar-header-date" (click)="changeGranularity()">
 			<!-- {{ month | date: 'MMMM y'}} -->
 			{{ header.label }}
 		</button>
 		<!-- <button class="calendar-header-previous"></button>
 		<button class="calendar-header-next"></button> -->
-		<button class="calendar-header-nav" (click)="next()"><i class="lucca-icon">arrow_east</i></button>
+		<button class="calendar-header-nav" (click)="next()">
+			<span aria-hidden="true" class="lucca-icon">arrow_east</span>
+			<span class="u-mask">Next month</span>
+		</button>
 	</header>
 	<section class="calendar-labels" [ngClass]="mod">
 		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>

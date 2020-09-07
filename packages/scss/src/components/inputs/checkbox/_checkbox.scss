@@ -47,7 +47,7 @@
 		.checkbox-input:checked ~ .checkbox-label {
 
 			&::before {
-				color: _theme("colors.white");
+				color: _color("white");
 				background-color: _color($palette);
 				border: 2px solid _color($palette);
 			}

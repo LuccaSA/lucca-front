@@ -1,7 +1,72 @@
+// MIXINS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+@mixin buttonColoring($palette) {
+	background: _color($palette);
+	color: _color($palette, "text");
+
+	&:hover:not([disabled]) {
+		background: _color($palette, "500");
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06);
+	}
+
+	&:focus {
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "200");
+		outline: 0;
+	}
+
+	&:active:not([disabled]) {
+		background: _color($palette, "800");
+	}
+
+	.button-counter {
+		background: _color($palette, "200");
+	}
+}
+
+@mixin buttonLinkColoring($palette) {
+	&:focus:not([disabled]) {
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
+		background: _color($palette, "100");
+	}
+}
+
+@mixin buttonOutlineColoring($palette) {
+	box-shadow: inset 0 0 0 1px _color($palette, "500");
+	color: _color($palette);
+
+	&:hover:not([disabled]) {
+		background: _color($palette, "50");
+		color: _color($palette);
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), inset 0 0 0 1px _color($palette);
+	}
+
+	&:focus:not([disabled]) {
+		background: _color($palette, "50");
+		color: _color($palette);
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px _color($palette, "50"), inset 0 0 0 1px _color($palette, "500");
+		outline: 0;
+	}
+
+	&:active:not([disabled]) {
+		background: _color($palette, "50");
+		color: _color($palette, "dark");
+		box-shadow: inset 0 0 0 1px _color($palette, "800");
+	}
+
+	.button-counter {
+		background: _color($palette);
+	}
+}
+
+// CLASSES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+
 .button {
+	cursor: pointer;
 	border: 0;
 	border-radius: _component("button.border.radius");
-	cursor: pointer;
 	display: inline-block;
 	font-family: unquote(_component("button.font.family"));
 	font-size: _component("button.font-size");
@@ -54,29 +119,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-	@mixin buttonColoring($palette) {
-		background: _color($palette);
-		color: _color($palette, "text");
-
-		&:hover:not([disabled]) {
-			background: _color($palette, "500");
-			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06);
-		}
-
-		&:focus {
-			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
-			outline: 0;
-		}
-
-		&:active:not([disabled]) {
-			background: _color($palette, "800");
-		}
-
-		.button-counter {
-			background: _color($palette, "200");
-		}
-	}
-
 	// default color
 	@include buttonColoring("button.default-palette");
 
@@ -104,30 +146,21 @@
 		}
 	}
 
+	&.mod-smaller {
+		font-size: _component("button.smaller.font-size");
+		line-height: _component("button.smaller.line-height");
+		padding: _component("button.smaller.padding");
+
+		.lucca-icon {
+			line-height: 1rem;
+			font-size: .875rem;
+		}	
+	}
+
+
 	&.mod-link {
-		background: transparent;
+		background-color: transparent;
 		color: _color("text.default");
-
-		&:hover {
-			background: _color("primary", "50");
-			color: _color("primary");
-		}
-
-		@mixin buttonLinkColoring($palette) {
-			&:focus:not([disabled]) {
-				box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
-				background: _color($palette, "100");
-			}
-		}
-
-		&.mod-invert {
-			color: white;
-
-			&:hover, &:focus {
-				background: rgba(255, 255, 255, .1);
-				color: rgba(255, 255, 255, .8);
-			}
-		}
 
 		// default color
 		@include buttonLinkColoring("button.default-palette");
@@ -136,6 +169,26 @@
 		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include buttonLinkColoring($name);
+			}
+		}
+
+		&:hover {
+			background-color: _color("primary", "50");
+			color: _color("primary");
+		}
+
+		&.mod-invert {
+			color: white;
+	
+			&:hover, &:focus {
+				&:not([disabled]) {
+					background-color: rgba(255, 255, 255, .1);
+					color: white;
+				}
+			}
+
+			&:focus {
+				box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04), 0px 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(0, 0, 0, .1);
 			}
 		}
 	}
@@ -167,34 +220,6 @@
 			color: _color("primary");
 		}
 
-		@mixin buttonOutlineColoring($palette) {
-			box-shadow: inset 0 0 0 1px _color($palette, "500");
-			color: _color($palette);
-
-			&:hover:not([disabled]) {
-				background: _color($palette, "50");
-				color: _color($palette);
-				box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), inset 0 0 0 1px _color($palette);
-			}
-
-			&:focus:not([disabled]) {
-				background: _color($palette, "50");
-				color: _color($palette);
-				box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "50"), inset 0 0 0 1px _color($palette, "500");
-				outline: 0;
-			}
-
-			&:active:not([disabled]) {
-				background: _color($palette, "50");
-				color: _color($palette, "dark");
-				box-shadow: inset 0 0 0 1px _color($palette, "800");
-			}
-
-			.button-counter {
-				background: _color($palette);
-			}
-		}
-
 		// default color
 		@include buttonOutlineColoring("button.default-palette");
 
@@ -210,7 +235,7 @@
 		padding-left: _theme("spacings.small");
 		padding-right: _theme("spacings.small");
 
-		&.mod-small {
+		&.mod-small, &.mod-smaller {
 			.button-counter {
 				height: 1rem;
 				min-width: 1rem;
@@ -227,6 +252,14 @@
 				font-size: _component("button.small.font-size");
 				height: _component("button.small.line-height");
 				line-height: _component("button.small.line-height");
+			}
+		}
+
+		&.mod-smaller {
+			.button-icon {
+				font-size: _component("button.smaller.font-size");
+				height: _component("button.smaller.line-height");
+				line-height: _component("button.smaller.line-height");
 			}
 		}
 	}
@@ -265,51 +298,35 @@
 		}
 	}
 
-	/* Success */
+	/* States */
 
 	&.is-success {
-		background: _color("success");
-		color: transparent;
-		pointer-events: none;
-		user-select: none;
+		@include buttonColoring("success");
 
 		&::after {
 			@include makeIcon("tick");
-			bottom: 0;
-			color: white;
-			font-size: calc(1.5 * #{_component("button.font-size")});
-			height: _component("button.line-height");
-			left: 0;
-			margin: auto;
-			position: absolute;
-			right: 0;
-			top: 0;
-			vertical-align: middle;
-		}
-
-		&.mod-small {
-			&::after {
-				font-size: calc(1.5 * #{_component("button.small.font-size")});
-				height: _component("button.small.font-size");
-			}
 		}
 	}
 
-	/* Error */
-
 	&.is-error {
-		background: _color("error");
+		@include buttonColoring("error");
+
+		&::after {
+			@include makeIcon("cross");
+		}
+	}
+
+	&.is-success, &.is-error {
 		color: transparent;
 		pointer-events: none;
 		user-select: none;
 
 		&::after {
-			@include makeIcon("cross");
-			bottom: 0;
 			color: white;
 			font-size: calc(1.5 * #{_component("button.font-size")});
 			height: _component("button.line-height");
 			left: 0;
+			bottom: 0;
 			margin: auto;
 			position: absolute;
 			right: 0;
@@ -330,23 +347,16 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button-group {
-	display: flex;
+	display: inline-flex;
 
-	&.mod-more {
-		display: inline-flex;
-
-		&:focus-within {
-			box-shadow: 0 0 0 4px _color("primary", "200");
-		}
-
-		.button {
-			&:focus {
-				background-color: _color("primary", "600");
-			}
-		}
+	&:focus-within {
+		box-shadow: 0 0 0 4px _color("primary", "200");
+		border-radius: _component("button.border.radius");
 	}
 
 	.button {
+		@include buttonColoring("button.default-palette");
+
 		border-radius: 0;
 		display: block;
 		margin: 0;
@@ -354,9 +364,6 @@
 		padding-right: _theme("spacings.small");
 		position: relative;
 		border-right: 1px solid rgba(0, 0, 0, .1);
-	}
-
-	> .button {
 
 		&:first-child {
 			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
@@ -369,6 +376,30 @@
 
 		&:hover, &:focus {
 			z-index: 1;
+		}
+
+		&:focus {
+			background-color: _color("primary", "600");
+			box-shadow: none;
+		}
+	}
+
+	// palette colors
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			&:focus-within {
+				box-shadow: 0 0 0 4px _color($name, "200");
+				border-radius: _component("button.border.radius");
+			}
+
+			.button {
+				@include buttonColoring($name);
+
+				&:focus {
+					background-color: _color($name, "600");
+					box-shadow: none;
+				}
+			}
 		}
 	}
 }

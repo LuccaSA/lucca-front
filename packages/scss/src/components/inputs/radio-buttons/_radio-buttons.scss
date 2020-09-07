@@ -42,7 +42,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .radioButtons-item-label {
-	@mixin buttonColoring($palette) {
+	@mixin radioColoring($palette) {
 		color: _color($palette, "800");
 		box-shadow: inset 0 0 0 1px _color($palette, "200");
 
@@ -53,18 +53,18 @@
 	}
 
 	// default color
-	@include buttonColoring("radio.default-palette");
+	@include radioColoring("radioButtons.default-palette");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include buttonColoring($name);
+			@include radioColoring($name);
 		}
 	}
 }
 
 .radioButtons-item-input {
-	@mixin buttonColoring($palette) {
+	@mixin radioColoring($palette) {
 		&:checked ~ .radioButtons-item-label {
 			background: _color($palette, "50");
 			box-shadow: inset 0 0 0 1px _color($palette, "200");
@@ -86,12 +86,12 @@
 	}
 
 	// default color
-	@include buttonColoring("radio.default-palette");
+	@include radioColoring("radio.default-palette");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			@include buttonColoring($name);
+			@include radioColoring($name);
 		}
 	}
 }

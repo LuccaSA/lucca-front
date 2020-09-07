@@ -29,7 +29,7 @@
 	}
 
 	&::after {
-		background: _theme("colors.white");
+		background: _color("white");
 		box-shadow: _theme("commons.box-shadow.hard");
 		border-radius: 50%;
 		content: "";
