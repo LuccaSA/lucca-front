@@ -248,6 +248,20 @@
 			position: relative;
 		}
 	}
+	&.mod-twoLines {
+		.table-head-row-cell {
+			vertical-align: top;
+		}
+		.table-head-row-cell-wrapper{
+			display: inline-block;
+			vertical-align: top;
+			max-width: calc(100% - #{_theme("spacings.big")});
+		}
+		.table-head-row-cell-secondLine{
+			display: block;
+			font-weight: 400;
+		}
+	}
 }
 
 .table-head-row-cell {
@@ -271,7 +285,13 @@
 				opacity: .5;
 			}
 		}
-	}
+	}	
+}
+
+.table-head-row-cell-secondLine  {
+	display: block;
+	margin-top: _theme("spacings.smallest");
+	font-weight: 400;
 }
 
 .table-body-row-cell, .table-head-row-cell {
