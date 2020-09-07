@@ -1,0 +1,244 @@
+<h1 class="demo-divider">Timelines</h1>
+
+<section class="contentSection">
+	<h1>Timelines</h1>
+	<ol class="timeline">
+		<li class="timeline-step">
+			Previous step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			<span>Current step</span>
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar" style="width: 50%"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Next step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar" style="width: 0%"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Final step
+		</li>
+	</ol>
+
+	<ol class="timeline u-textWarning">
+		<li class="timeline-step">
+			Previous step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin palette-warning">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step" aria-current="step">
+			<span>Current step</span>
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin palette-warning">
+				<div class="gauge-bar" style="width: 50%"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Next step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin palette-warning">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Final step
+		</li>
+	</ol>
+
+	<ol class="timeline">
+		<li class="timeline-step">
+			Previous step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step" aria-current="step">
+			<span>Current step</span>
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="progress mod-thin">
+				<div class="progress-bar" style="width: 50%"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Next step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Final step
+		</li>
+	</ol>
+
+	<ol class="timeline u-textSuccess">
+		<li class="timeline-step">
+			<a href="#" class="timeline-step-action">Previous step</a>
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin palette-success">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step" aria-current="step">
+			<span>Current step</span>
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin palette-success">
+				<div class="gauge-bar" style="width: 50%"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Next step
+		</li>
+		<li aria-hidden="true" class="timeline-content">
+			<div class="gauge mod-thin palette-success">
+				<div class="gauge-bar"></div>
+			</div>
+		</li>
+		<li class="timeline-step">
+			Final step
+		</li>
+	</ol>
+	
+<code class="code mod-block">&lt;ol class=&quot;timeline&quot;&gt;
+	&lt;li class=&quot;timeline-step&quot;&gt;
+		&lt;a href=&quot;#&quot; class=&quot;timeline-step-action&quot;&gt;Previous step&lt;/a&gt;
+	&lt;/li&gt;
+	&lt;li aria-hidden=&quot;true&quot; class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li class=&quot;timeline-step&quot; aria-current=&quot;step&quot;&gt;
+		&lt;span&gt;Current step&lt;/span&gt;
+	&lt;/li&gt;
+	&lt;li aria-hidden=&quot;true&quot; class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot; style=&quot;width: 50%&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li class=&quot;timeline-step&quot;&gt;
+		Next step
+	&lt;/li&gt;
+	&lt;li aria-hidden=&quot;true&quot; class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li class=&quot;timeline-step&quot;&gt;
+		Final step
+	&lt;/li&gt;
+&lt;/ol&gt;</code>
+<em><strong>Tip:</strong> The attribute <code class="code">aria-current="step"</code> applied to <code class="code">.timeline-step</code> disables the following steps.</em><br />
+<em><strong>Tip:</strong> The colored circles inherit the color of the adjacent text.</em><br />
+<em><strong>Tip:</strong> The active gauge can be replaced by a progress bar to be animated.</em><br />
+<em><strong>Tip:</strong> It is recommended to add links on the steps passed with <code class="code">.timeline-step-action</code>.</em><br />
+
+
+</section>
+
+<section class="contentSection">
+	<h1>Vertical timelines</h1>
+	<section class="timeline mod-vertical">
+		<h2 class="timeline-step u-textStandard">
+			<a href="#" class="timeline-step-action">Previous step</a>
+		</h2>
+		<div class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+		</div>
+		<h2 class="timeline-step u-textStandard" aria-current="step">
+			Current step
+		</h2>
+		<div class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar" style="height: 50%"></div>
+			</div>
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam, suscipit? Error animi incidunt quia laborum id cum asperiores mollitia necessitatibus. Recusandae veritatis laboriosam, a nobis temporibus tempore dolorem porro rem.
+		</div>
+		<h2 class="timeline-step u-textStandard">
+			Next step
+		</h2>
+		<div class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+		</div>
+		<h2 class="timeline-step u-textStandard">
+			Final step
+		</h2>
+		<div class="timeline-content">
+			<div class="gauge mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+		</div>
+	</section>
+	
+<code class="code mod-block">&lt;section class=&quot;timeline mod-vertical&quot;&gt;
+	&lt;h2 class=&quot;timeline-step u-textStandard&quot;&gt;
+		&lt;a href=&quot;#&quot; class=&quot;timeline-step-action&quot;&gt;Previous step&lt;/a&gt;
+	&lt;/h2&gt;
+	&lt;div class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+		Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+	&lt;/div&gt;
+	&lt;h2 class=&quot;timeline-step u-textStandard&quot; aria-current=&quot;step&quot;&gt;
+		Current step
+	&lt;/h2&gt;
+	&lt;div class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot; style=&quot;height: 50%&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+		Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam, suscipit? Error animi incidunt quia laborum id cum asperiores mollitia necessitatibus. Recusandae veritatis laboriosam, a nobis temporibus tempore dolorem porro rem.
+	&lt;/div&gt;
+	&lt;h2 class=&quot;timeline-step u-textStandard&quot;&gt;
+		Next step
+	&lt;/h2&gt;
+	&lt;div class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+		Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+	&lt;/div&gt;
+	&lt;h2 class=&quot;timeline-step u-textStandard&quot;&gt;
+		Final step
+	&lt;/h2&gt;
+	&lt;div class=&quot;timeline-content&quot;&gt;
+		&lt;div class=&quot;gauge mod-thin&quot;&gt;
+			&lt;div class=&quot;gauge-bar&quot;&gt;&lt;/div&gt;
+		&lt;/div&gt;
+		Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+	&lt;/div&gt;
+&lt;/section&gt;</code>
+<em><strong>Tip:</strong> You can change the level of titles by adapting this to your document plan.
+</section>
