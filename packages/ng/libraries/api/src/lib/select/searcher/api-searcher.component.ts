@@ -11,7 +11,7 @@ import {
 	Inject,
 	OnInit,
 } from '@angular/core';
-import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOnOpenSubscriber, ALuOnCloseSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { ALuApiOptionSearcher, ALuApiOptionPagedSearcher } from './api-searcher.model';
 import { ILuApiItem } from '../../api.model';
