@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit } from '@angular/core';
-import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ALuOnCloseSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
@@ -20,6 +20,11 @@ import { ALuUserService, LuUserV3Service } from '../../service/index';
 		},
 		{
 			provide: ALuOnOpenSubscriber,
+			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnCloseSubscriber,
 			useExisting: forwardRef(() => LuUserPagedSearcherComponent),
 			multi: true,
 		},

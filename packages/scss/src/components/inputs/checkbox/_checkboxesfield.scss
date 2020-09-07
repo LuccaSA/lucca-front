@@ -2,6 +2,12 @@
 
 @include field("checkboxesfield");
 
+.checkboxesfield {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
 .checkboxesfield-input {
 	@include field-input("checkboxesfield");
 

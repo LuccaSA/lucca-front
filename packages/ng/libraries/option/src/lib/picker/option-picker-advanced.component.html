@@ -3,7 +3,7 @@
 	 (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)">
 		<div [class.is-loading]="loading$ | async" class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus" luScroll (onScrollBottom)="onScrollBottom()">
 			<ng-content></ng-content>
-			<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>	
+			<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
 		</div>
 	</div>
 </ng-template>

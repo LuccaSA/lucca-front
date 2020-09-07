@@ -36,6 +36,11 @@ import { ALuApiService, LuApiV3Service } from '../../service/index';
 			multi: true,
 		},
 		{
+			provide: ALuOnCloseSubscriber,
+			useExisting: forwardRef(() => LuApiSearcherComponent),
+			multi: true,
+		},
+		{
 			provide: ALuApiService,
 			useClass: LuApiV3Service,
 		},
@@ -94,6 +99,11 @@ extends ALuApiOptionSearcher<T, LuApiV3Service<T>> implements OnInit {
 		{
 			provide: ALuOnScrollBottomSubscriber,
 			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnCloseSubscriber,
+			useExisting: forwardRef(() => LuApiSearcherComponent),
 			multi: true,
 		},
 		{
