@@ -19,7 +19,7 @@ import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuApiItem } from '../../api.model';
 import { LuOptionComparer } from '@lucca-front/ng/option';
-import { ALuApiService, LuApiV3Service } from '../../service/index';
+import { ALuApiService, LuApiHybridService } from '../../service/index';
 
 @Component({
 	selector: 'lu-api-select',
@@ -34,15 +34,16 @@ import { ALuApiService, LuApiV3Service } from '../../service/index';
 		},
 		{
 			provide: ALuApiService,
-			useClass: LuApiV3Service,
+			useClass: LuApiHybridService,
 		},
 	],
 })
 export class LuApiSelectInputComponent<T extends ILuApiItem = ILuApiItem>
 extends ALuSelectInputComponent<T>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-	protected _service: LuApiV3Service<T>
+	protected _service: LuApiHybridService<T>
 
+	@Input() set standard(standard: string) { this._service.standard = standard; }
 	@Input() set api(api: string) { this._service.api = api; }
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
@@ -55,8 +56,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: LuApiV3Service<T>,
-		@Inject(ALuApiService) @Self() selfService: LuApiV3Service<T>,
+		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: LuApiHybridService<T>,
+		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
 		super(
 			_changeDetectorRef,
