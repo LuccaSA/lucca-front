@@ -18,9 +18,15 @@
 		border: 0;
 	}
 
-	&:hover {
-		.list-item-actions {
-			opacity: 1;
+	// if no hover on list item
+	&:not(:hover) {
+		.actionIcon {
+			// and no focus on action icon
+			&:not(:focus) {
+				// then mask
+				@include mask;
+				opacity: 0;
+			}
 		}
 	}
 }
@@ -42,7 +48,6 @@
 
 .list-item-actions {
 	margin-left: auto;
-	opacity: 0;
 	padding: _component("list.padding");
 	padding-left: 0;
 	transition: all _theme("commons.animations.durations.fast") ease;

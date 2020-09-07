@@ -72,6 +72,16 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 		this._onOpenSubscribers.forEach(o => {
 			o.onOpen();
 		});
+		const operators = this._operators || [];
+		const lastOperator = operators[operators.length - 1];
+		if (lastOperator && lastOperator.outOptions$) {
+			this.loading$ = lastOperator.outOptions$.pipe(
+				first(),
+				mapTo(false),
+				startWith(true),
+				shareReplay(),
+			);
+		}
 		super.onOpen();
 	}
 	onClose() {
@@ -92,15 +102,6 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;
 		});
-		const lastOperator = operators[operators.length - 1];
-		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(
-				first(),
-				mapTo(false),
-				startWith(true),
-				shareReplay(),
-			);
-		}
 	}
 	protected initSelectors() {
 		this._selectors = this._selectorsQL.toArray();

@@ -33,9 +33,9 @@ _color("palette_name", "key") // return the palette.key value
 <code class="code mod-block">@include loading($size);</code>
 	<h3>Media queries</h3>
 	<p>Using the breakpoint values in the breakpoints map, you can easily handle your media queries</p>
-<code class="code mod-block">@include media_smaller_than("breakpoint_key"){} // <==> @media (max-width: breakpoint_value) {}
+<code class="code mod-block">@include media_smaller_than("breakpoint_key"){} // <==> @media (max-width: breakpoint_value - 1px) {}
 @include media_larger_than("breakpoint_key"){} //<==> @media (min-width: breakpoint_value) {}
-@include media_between("breakpoint1_key", "breakpoint2_key"){} //<==> @media (min-width: breakpoint1_value) and (max-width: breakpoint2_value) {}
+@include media_between("breakpoint1_key", "breakpoint2_key"){} //<==> @media (min-width: breakpoint1_value) and (max-width: breakpoint2_value - 1px) {}
 </code>
 	<h3>Mask</h3>
 	<p>To visually hide an element of the page, but leave it accessible to user agents (screen readers, indexing robots, translators, etc.).</p>

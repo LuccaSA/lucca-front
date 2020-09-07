@@ -11,7 +11,7 @@ import {
 	Inject,
 	OnInit,
 } from '@angular/core';
-import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ALuOnCloseSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { ALuApiOptionSearcher, ALuApiOptionPagedSearcher } from './api-searcher.model';
 import { ILuApiItem } from '../../api.model';
@@ -94,6 +94,11 @@ extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 		{
 			provide: ALuOnScrollBottomSubscriber,
 			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
+			multi: true,
+		},
+		{
+			provide: ALuOnCloseSubscriber,
+			useExisting: forwardRef(() => LuApiSearcherComponent),
 			multi: true,
 		},
 		{
