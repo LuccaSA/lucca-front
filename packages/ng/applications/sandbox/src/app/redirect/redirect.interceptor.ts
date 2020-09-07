@@ -11,7 +11,7 @@ export class RedirectInterceptor implements HttpInterceptor {
 		req: HttpRequest<any>,
 		next: HttpHandler,
 	): Observable<HttpEvent<any>> {
-		if (req.url.startsWith('/api')) {
+		if (req.url.includes('/api/')) {
 			const clonedRequest = req.clone({
 				url: `${environment.apiUrl}${req.url}`,
 				headers: req.headers,

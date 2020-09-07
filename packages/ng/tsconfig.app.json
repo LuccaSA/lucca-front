@@ -70,6 +70,9 @@
       ],
       "@lucca-front/ng/dropdown": [
         "./libraries/dropdown/src/index"
+      ],
+      "@lucca-front/ng/establishment": [
+        "./libraries/establishment/src/index"
       ]
     }
   }
