@@ -36,7 +36,7 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 
 	searchAll(clue: string, filters: string[] = []): Observable<T[]> {
 		if (!clue) {
-			return this.getAll();
+			return this.getAll(filters);
 		}
 		const url = [this.url, this._clueFilter(clue), ...filters].join('&');
 		return this._get(url);
@@ -44,7 +44,7 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 
 	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
 		if (!clue) {
-			return this.getPaged(page);
+			return this.getPaged(page, filters);
 		}
 		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
 		const url = [this.url, this._clueFilter(clue), paging, ...filters].join('&');
