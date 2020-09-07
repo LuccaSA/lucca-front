@@ -85,10 +85,15 @@ p {
 	font-style: italic;
 }
 
-b {
+b, strong {
 	font-weight: 600;
 }
 
 button {
 	font-family: _theme("commons.font.family");
+}
+
+abbr[title] {
+	border: none;
+	text-decoration: none;
 }
