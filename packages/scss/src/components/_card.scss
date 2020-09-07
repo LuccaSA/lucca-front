@@ -1,5 +1,5 @@
 .card {
-	background-color: white;
+	background-color: _color("white");
 	border-radius: _component("card.border.radius");
 	border: 1px solid _component("card.border.color");
 	display: block;

@@ -7,7 +7,7 @@ $card: (
 	),
 	mod-grey: _theme("commons.background.base"),
 	border: (
-		radius: 8px,
+		radius: _theme("commons.border.radius-big"),
 		color: _theme("commons.divider.color")
 	),
 	hover: (
