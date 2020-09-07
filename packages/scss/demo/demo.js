@@ -14,7 +14,7 @@ function toast() {
 		'Oops, something looks wrong :(',
 		'Marked as done',
 		'Please check <a href="#">this thing</a>',
-		'Here <u>is</u> <i>some</i> <b>HTML</b>'
+		'Here <ins>is</ins> <em>some</em> <strong>HTML</strong>'
 	];
 	var r = Math.floor(Math.random() * Math.floor(toastsValues.length));
 	toast.className = "toasts-item";
