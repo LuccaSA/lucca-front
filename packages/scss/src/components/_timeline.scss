@@ -6,7 +6,8 @@
 	align-items: center;
 
 	.progress, .gauge {
-		margin: 0;
+		margin: 0 _theme("spacings.smaller");
+		flex-grow: 1;
 	}
 
 	.progress-bar, .gauge-bar {
@@ -14,14 +15,41 @@
 	}
 }
 
-.timeline-content {
+.timeline-step {
 	flex-grow: 1;
-	padding: 0 _theme("spacings.smaller");
+	display: flex;
+	align-items: center;
+
+	&:last-child {
+		flex-grow: 0;
+
+		.gauge, .progress {
+			display: none;
+		}
+	}
+
+	&[aria-current="step"] {
+		~ .timeline-step {
+			.timeline-step-title {
+				color: _color("primary", "600");
+			}
+
+			.progress-bar, .gauge-bar {
+				width: 0;
+				height: 0;
+			}
+		}
+	}
 }
 
-.timeline-step {
+.timeline-step-title {
 	padding-left: _theme("spacings.standard");
 	position: relative;
+	display: block;
+	font-weight: 400;
+	margin: 0;
+	font-size: _theme("sizes.standard.font-size");
+	line-height: _theme("sizes.standard.line-height");
 
 	&::before, &::after {
 		content: "";
@@ -41,21 +69,9 @@
 		opacity: .25;
 		left: 0;
 	}
-
-	&[aria-current="step"] {
-		~ .timeline-content {
-			.progress-bar, .gauge-bar {
-				width: 0%;
-			}
-		}
-
-		~ .timeline-step {
-			color: _color("primary", "500");
-		}
-	}
 }
 
-.timeline-step-action {
+.timeline-step-title-action {
 	color: currentColor;
 	text-decoration: none;
 
@@ -68,34 +84,25 @@
 .timeline.mod-vertical {
 	display: block;
 
-	.timeline-content {
-		padding-left: _theme("spacings.standard");
-		position: relative;
-
-		.gauge, .progress {
-			position: absolute;
-			left: _theme("spacings.smaller") - (_theme("spacings.smallest") / 2);
-			top: _theme("spacings.smallest") * -1;
-			bottom: _theme("spacings.smallest") * -1;
-			height: auto;
-			width: _theme("spacings.smallest");
-		}
-
-		.gauge-bar, .progress-bar {
-			width: 100%;
-		}
+	.timeline-step-title {
+		margin: _theme("spacings.smaller") 0;
+		margin-left: _theme("spacings.standard") * -1;
 	}
 
 	.timeline-step {
 		margin: _theme("spacings.smaller") 0;
 		font-weight: 400;
+		display: block;
+		padding-left: _theme("spacings.standard");
+		position: relative;
 
-		&[aria-current="step"] {
-			~ .timeline-content {
-				.progress-bar, .gauge-bar {
-					height: 0%;
-				}
-			}
+		.gauge, .progress {
+			position: absolute;
+			left: (_theme("spacings.smallest") / -2);
+			top: _theme("spacings.standard") + _theme("spacings.smallest");
+			bottom: 0;
+			height: auto;
+			width: _theme("spacings.smallest");
 		}
 	}
 }
