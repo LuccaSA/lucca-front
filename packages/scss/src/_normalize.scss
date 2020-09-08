@@ -296,7 +296,7 @@
    * Remove the inner padding in Chrome and Safari on macOS.
    */
   
-  [type="search"]::-webkit-search-decoration {
+  [type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
 	-webkit-appearance: none;
   }
   
