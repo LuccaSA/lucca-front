@@ -17,6 +17,9 @@ export class LuFormlyFieldApi extends FieldType {
 	get _orderBy() {
 		return this.to.orderBy;
 	}
+	get _standard() {
+		return this.to.standard || 'v3';
+	}
 	focus() {
 		this.to._isFocused = true;
 	}
