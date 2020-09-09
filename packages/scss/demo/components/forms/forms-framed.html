@@ -100,10 +100,10 @@
 						<span class="textfield-label">auto</span>
 					</label>
 				</div>
-				<div class="form-group-line-col mod-half">
+				<div class="form-group-line-col mod-sm">
 					<label class="textfield">
 						<input class="textfield-input" type="text">
-						<span class="textfield-label">mod-half</span>
+						<span class="textfield-label">mod-sm6</span>
 					</label>
 				</div>
 			</div>
@@ -114,10 +114,10 @@
 						<span class="textfield-label">auto</span>
 					</label>
 				</div>
-				<div class="form-group-line-col mod-twoThird">
+				<div class="form-group-line-col mod-lg3">
 					<label class="textfield">
 						<input class="textfield-input" type="text">
-						<span class="textfield-label">mod-twoThird</span>
+						<span class="textfield-label">mod-lg3</span>
 					</label>
 				</div>
 			</div>
@@ -128,10 +128,10 @@
 						<span class="textfield-label">auto</span>
 					</label>
 				</div>
-				<div class="form-group-line-col mod-threeQuarter">
+				<div class="form-group-line-col mod-md9">
 					<label class="textfield">
 						<input class="textfield-input" type="text">
-						<span class="textfield-label">mod-threeQuarter</span>
+						<span class="textfield-label">mod-md9</span>
 					</label>
 				</div>
 			</div>
@@ -288,7 +288,7 @@
 							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
 						</label>
 					</div>
-				</label>
+				</div>
 			</div>
 			<div class="form-group-line">
 				<div class="form-group-line-col mod-selection">
@@ -334,9 +334,9 @@
 			</div>
 			<div class="form-group-line">
 				<div class="form-group-line-col">
-					<div id="framed-autocomplete-select" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select', 'is-open')">
+					<div id="framed-autocomplete-select-loading" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-loading', 'is-open')">
 						<label class="textfield is-loading">
-							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select', 'is-open')">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-loading', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-loading', 'is-open')">
 							<span class="textfield-label">Autocomplete</span>
 						</label>
 						<ul class="textfield-options">
@@ -351,7 +351,7 @@
 							</li>
 						</ul>
 					</div>
-				</label>
+				</div>
 			</div>
 			<div class="form-group-line">
 				<div class="form-group-line-col">
@@ -376,15 +376,15 @@
 					<fieldset class="radiosfield">
 						<legend class="radiosfield-label">Fieldset legend</legend>
 						<label class="radio">
-							<input type="radio" name="radio" class="radio-input">
+							<input type="radio" name="radio-loading" class="radio-input">
 							<span class="radio-label">Radio</span>
 						</label>
 						<label class="radio">
-							<input type="radio" name="radio" class="radio-input">
+							<input type="radio" name="radio-loading" class="radio-input">
 							<span class="radio-label">Radio</span>
 						</label>
 						<label class="radio">
-							<input type="radio" name="radio" class="radio-input">
+							<input type="radio" name="radio-loading" class="radio-input">
 							<span class="radio-label">Radio</span>
 						</label>
 					</fieldset>
@@ -404,15 +404,15 @@
 					<fieldset class="radiosfield">
 						<legend class="radiosfield-label">Fieldset legend</legend>
 						<label class="radio mod-inline">
-							<input type="radio" name="radioInline" class="radio-input">
+							<input type="radio" name="radioInline-loading" class="radio-input">
 							<span class="radio-label">Radio mod-inline</span>
 						</label>
 						<label class="radio mod-inline">
-							<input type="radio" name="radioInline" class="radio-input">
+							<input type="radio" name="radioInline-loading" class="radio-input">
 							<span class="radio-label">Radio mod-inline</span>
 						</label>
 						<label class="radio mod-inline">
-							<input type="radio" name="radioInline" class="radio-input">
+							<input type="radio" name="radioInline-loading" class="radio-input">
 							<span class="radio-label">Radio mod-inline</span>
 						</label>
 					</fieldset>
@@ -508,9 +508,9 @@
 			</div>
 			<div class="form-group-line">
 				<div class="form-group-line-col">
-					<div id="framed-autocomplete-select" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select', 'is-open')">
+					<div id="framed-autocomplete-select-placeholder" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-placeholder', 'is-open')">
 						<label class="textfield is-required">
-							<input aria-required="true" class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select', 'is-open')" placeholder="Placeholder">
+							<input aria-required="true" class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-placeholder', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-placeholder', 'is-open')" placeholder="Placeholder">
 							<span class="textfield-label">Autocomplete</span>
 						</label>
 						<ul class="textfield-options">
@@ -872,7 +872,7 @@
 								<mark>va</mark>lue
 							</li>
 						</ul>
-					</label>
+					</div>
 				</div>
 			</div>
 			<div class="form-group-line">
@@ -1367,7 +1367,6 @@
 			</div>
 		</fieldset>
 	</form>
-	
 
 	<form action="#" class="form mod-framed">
 		<fieldset class="form-group">
@@ -1411,7 +1410,7 @@
 						<span class="textfield-label">Textfield label</span>
 					</label>
 				</div>
-				<div class="form-group-line-col mod-third">
+				<div class="form-group-line-col mod-md6">
 					<label class="textfield">
 						<input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled>
 						<span class="textfield-label">Textfield label</span>
@@ -1434,7 +1433,7 @@
 			<div class="form-group-line">
 				<div class="form-group-line-col mod-overlay">
 					<label class="textfield mod-multiline mod-withSuffix">
-						<textarea class="textfield-input" type="text" placeholder="Money Money"></textarea>
+						<textarea class="textfield-input" placeholder="Money Money"></textarea>
 						<span class="textfield-label">Textfield label</span>
 					</label>
 					<label class="select">
@@ -1451,7 +1450,7 @@
 			<div class="form-group-line">
 				<div class="form-group-line-col">
 					<label class="textfield mod-multiline mod-withSuffix mod-small is-required">
-						<textarea aria-required="true" class="textfield-input" type="text" placeholder="Money Money"></textarea>
+						<textarea aria-required="true" class="textfield-input" placeholder="Money Money"></textarea>
 						<span class="textfield-label">Textfield label</span>
 					</label>
 				</div>
@@ -1518,7 +1517,7 @@
 				</div>
 			</div>
 			<div class="form-group-line">
-				<div class="form-group-line-col mod-twoThird mod-selection">
+				<div class="form-group-line-col mod-md8 mod-selection">
 					<fieldset class="checkboxesfield">
 						<legend class="radiosfield-label">Checkboxesfield label</legend>
 						<label class="checkbox">
@@ -1535,7 +1534,7 @@
 						</label>
 					</fieldset>
 				</div>
-				<div class="form-group-line-col mod-half mod-selection">
+				<div class="form-group-line-col mod-md6 mod-selection">
 					<div class="checkboxesfield">
 						<div class="radiosfield-label"></div>
 						<label class="checkbox">
@@ -1567,11 +1566,10 @@
 					</fieldset>
 				</div>
 			</div>
-		</fieldset>
+		</div>
 	</form>
 
 <code class="code mod-block"><!-- // todo framed --></code>
 
-	</code>
 <em><strong>Tip:</strong> Add <code class="code">.mod-selection</code> to the <code class="code">form-group-line-col</code> to add a border around your cell (e.g. for checkbox or radio group).</em><br>
 </section>

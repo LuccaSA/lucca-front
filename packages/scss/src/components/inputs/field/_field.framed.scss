@@ -59,17 +59,17 @@
 		padding: _component("field.framed.side-padding");
 
 		&.is-error {
-			@include fieldFramedState($fieldname, "error");
+			@include fieldFramedState("error");
 		}
 
 		&.is-warning {
-			@include fieldFramedState($fieldname, "warning");
+			@include fieldFramedState("warning");
 		}
 
 		&.is-success {
-			@include fieldFramedState($fieldname, "success");
+			@include fieldFramedState("success");
 		}
-		
+
 		~ .textfield-input {
 			padding-right: _component("field.framed.suffix.padding-right");
 		}

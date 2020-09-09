@@ -42,6 +42,7 @@
 	&.mod-framed {
 		.form-group-line {
 			display: flex;
+			flex-wrap: wrap;
 			position: relative;
 		}
 
@@ -55,29 +56,21 @@
 				flex-grow: 1;
 			}
 
-			&.mod-half {
-				flex-basis: (100% / 2);
-				flex-grow: 0;
-			}
+			@each $bp-name, $bp-obj in $breakpoints {
+				@for $i from 1 through 12 {
+					&.mod-#{$bp-name}#{$i} {
+						flex-basis: 100%;
+						flex-grow: 0;
+					}
+				}
 
-			&.mod-third {
-				flex-basis: (100% / 3);
-				flex-grow: 0;
-			}
-
-			&.mod-quarter {
-				flex-basis: (100% / 4);
-				flex-grow: 0;
-			}
-
-			&.mod-twoThird {
-				flex-basis: (100% / 3 * 2);
-				flex-grow: 0;
-			}
-
-			&.mod-threeQuarter {
-				flex-basis: (100% / 4 * 3);
-				flex-grow: 0;
+				@include media_larger_than($bp-name) {
+					@for $i from 1 through 12 {
+						&.mod-#{$bp-name}#{$i} {
+							flex-basis: (100% / 12 * $i);
+						}
+					}
+				}
 			}
 
 			&.mod-selection {
