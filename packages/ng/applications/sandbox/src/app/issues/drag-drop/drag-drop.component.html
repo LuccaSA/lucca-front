@@ -1,0 +1,16 @@
+<h1>drag-drop</h1>
+<h2>drag around</h2>
+<div class="card" cdkDrag [style.width]="'200px'">
+	<div class="card-content">
+		<h2>hello</h2>
+		<p>drag me around</p>
+	</div>
+</div>
+<h2>sorting - list</h2>
+<ul class="list" cdkDropList (cdkDropListDropped)="drop($event)">
+	<li class="list-item"*ngFor="let movie of movies" cdkDrag>
+		<div class="list-item-content">
+			<p class="list-item-content-description">{{movie}}</p>
+		</div>
+	</li>
+</ul>
