@@ -98,7 +98,7 @@ extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 		},
 		{
 			provide: ALuOnCloseSubscriber,
-			useExisting: forwardRef(() => LuApiSearcherComponent),
+			useExisting: forwardRef(() => LuApiPagedSearcherComponent),
 			multi: true,
 		},
 		{
