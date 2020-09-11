@@ -10,7 +10,7 @@
 		}
 	}
 
-	@media (max-width: _component("container.min-width", true)) {
+	@include media_smaller_than("sm") {
 		width: 100%;
 	}
 

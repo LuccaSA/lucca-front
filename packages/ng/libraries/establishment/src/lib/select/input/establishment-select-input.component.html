@@ -1,0 +1,21 @@
+<div class="lu-select-placeholder">{{placeholder}}</div>
+<div class="lu-select-value">
+	<div class="lu-select-display-wrapper">
+		<ng-container #display></ng-container>
+	</div>
+</div>
+<div class="lu-select-suffix">
+	<lu-input-clearer></lu-input-clearer>
+</div>
+
+<ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
+	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.establishments}}</span>
+	<ng-template #singleView>{{(values[0] || values).name}}</ng-template>
+</ng-template>
+
+<lu-option-picker-advanced [option-comparer]="byId">
+	<header class="lu-picker-header">
+		<lu-establishment-searcher></lu-establishment-searcher>
+	</header>
+	<lu-option *luForOptions="let establishment; trackBy: trackById" [value]="establishment">{{establishment.name}}</lu-option>
+</lu-option-picker-advanced>
