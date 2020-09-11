@@ -7,7 +7,7 @@
 	</div>
 </div>
 <h2>sorting - list</h2>
-<ul class="list" cdkDropList (cdkDropListDropped)="drop($event)">
+<ul class="list dragDrop-list" cdkDropList (cdkDropListDropped)="drop($event)">
 	<li class="list-item dragDrop-box"*ngFor="let movie of movies" cdkDrag>
 		<div class="list-item-content grid">
 			<div class="grid-md1">
