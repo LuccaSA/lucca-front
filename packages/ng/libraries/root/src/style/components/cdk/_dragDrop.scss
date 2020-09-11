@@ -1,0 +1,32 @@
+@import 'theming';
+@import '~@lucca-front/scss/src/mixins';
+
+.cdk-drag-placeholder {
+	@include fakeBorder(1px, _color("grey", "lighter"));
+	background-color: _color("grey", "lightest");
+	border-radius: _theme("commons.border.radius");
+	* {
+		opacity: 0;
+	}
+}
+
+.cdk-drag-handle,
+.cdk-drag-placeholder {
+	cursor: move;
+}
+.dragDrop-box {
+	cursor: grab;
+}
+.dragDrop-box:active {
+	cursor: grab;
+}
+.cdk-drag-preview {
+	z-index: 9999 !important;
+	box-sizing: border-box;
+	@include fakeBorder(_theme("commons.divider.width"), _color("secondary", "lighter"));
+	background-color: _color("secondary", "see-through");
+}
+.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+	border-radius: _theme("commons.border.radius");
+}
