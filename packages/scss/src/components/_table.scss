@@ -106,40 +106,29 @@
 	}
 
 	&.mod-clickable {
-		overflow: hidden;
-
 		.table-body-row-cell {
-			position: relative;
+			transition: background-color _theme("commons.animations.durations.fast") ease;
+		}
 
-			&:not(.table-body-row-cell-clickable) {
-				pointer-events: none;
+		.table-body-row-cell-action {
+			color: _color("text.default");
+			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				text-decoration: underline;
 			}
 		}
 
-		.table-body-row-cell-clickable-action {
-			text-decoration: none;
-			color: currentColor;
+		.table-body-row {
 			cursor: pointer;
-
-			&::before {
-				content: "";
-				position: absolute;
-				left: -9999px;
-				right: -9999px;
-				top: 0;
-				bottom: 0;
-				transition: background-color _theme("commons.animations.durations.fast") ease;
-			}
-
-			&:hover, &:focus {
-				&::before {
+			
+			&:hover,
+			&:focus-within {
+				.table-body-row-cell {
 					background-color: _component("table.hover.background");
 				}
 			}
-		}
-
-		.table-body-row-cell-clickable-action-inside {
-			position: relative;
 		}
 	}
 
