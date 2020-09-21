@@ -106,3 +106,30 @@
 		}
 	}
 }
+
+.timeline.mod-number {
+	counter-reset: timeline;
+
+	.timeline-step-title {
+		counter-increment: timeline;
+
+		&::before {
+			opacity: 1;
+			width: _theme("spacings.standard");
+			height: _theme("spacings.standard");
+			left: _theme("spacings.smallest") * -1;
+		}
+
+		&::after {
+			content: counter(timeline);
+			color: white;
+			width: _theme("spacings.standard");
+			height: auto;
+			left: _theme("spacings.smallest") * -1;
+			top: .6875rem; // magic number
+			bottom: auto;
+			background-color: transparent;
+			text-align: center;
+		}
+	}
+}
