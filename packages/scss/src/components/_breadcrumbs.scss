@@ -39,7 +39,7 @@
 }
 
 
-// MODS
+// STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .breadcrumbs-list-item-action {
@@ -52,6 +52,35 @@
 		&,
 		&:hover {
 			color: _color("text.light");
+		}
+	}
+}
+
+// MODS
+// ▒▒▒▒
+
+.breadcrumbs.mod-compact {
+	margin-bottom: 0;
+
+	.breadcrumbs-list-item {
+		// two items
+		&:nth-last-child(2):first-child,
+		&:nth-last-child(2):first-child + .breadcrumbs-list-item {
+			&:last-child {
+				@include mask;
+			}
+
+			&:first-child {
+				.breadcrumbs-list-item-action {
+					display: flex;
+					align-items: center;
+
+					&::before {
+						@include makeIcon("format_undo");
+						padding-right: _theme("spacings.smallest");
+					}
+				}
+			}
 		}
 	}
 }
