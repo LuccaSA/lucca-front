@@ -2,7 +2,7 @@
 @import '~@lucca-front/scss/src/mixins';
 
 .cdk-drag-placeholder {
-	@include fakeBorder(1px, _color("grey", "200"));
+	@include fakeBorder(_theme("commons.divider.width"), _color("grey", "200"));
 	background-color: _color("grey", "100");
 	* {
 		opacity: 0;
@@ -15,25 +15,46 @@
 }
 
 .dragDrop-list {
+	border-radius: _theme("commons.border.radius", true);
 	border-radius: _theme("commons.border.radius");
 }
 
-.dragDrop-box {
+.dragDrop-item {
 	cursor: grab;
+	&:first-of-type {
+		border-top-left-radius: _theme("commons.border.radius", true);
+		border-top-left-radius: _theme("commons.border.radius");
+		border-top-right-radius: _theme("commons.border.radius", true);
+		border-top-right-radius: _theme("commons.border.radius");
+		background-color: tomato;
+	}
+	&:last-of-type {
+		border-bottom-left-radius: _theme("commons.border.radius", true);
+		border-bottom-left-radius: _theme("commons.border.radius");
+		border-bottom-right-radius: _theme("commons.border.radius", true);
+		border-bottom-right-radius: _theme("commons.border.radius");
+	}
+	&:active {
+		cursor: grabbing;
+	}
 }
-
-.dragDrop-box:active {
-	cursor: grabbing;
+.dragDrop-item-content {
+	padding: _theme("spacings.smaller", true);
+	padding: _theme("spacings.smaller");
 }
 
 .cdk-drag-preview {
 	z-index: 9999 !important;
 	box-sizing: border-box;
 	@include fakeBorder(_theme("commons.divider.width"), _color("secondary", "200"));
+	background-color: _color("secondary", "50", true);
 	background-color: _color("secondary", "50");
+	border-radius: _theme("commons.border.radius", true);
+	border-radius: _theme("commons.border.radius");
 }
 
 .cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
 	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+	border-radius: _theme("commons.border.radius", true);
 	border-radius: _theme("commons.border.radius");
 }
