@@ -99,8 +99,8 @@
 		.gauge, .progress {
 			position: absolute;
 			left: (_theme("spacings.smallest") / -2);
-			top: _theme("spacings.standard") + _theme("spacings.smallest");
-			bottom: 0;
+			top: 1.375rem; // magic number
+			bottom: _theme("spacings.smaller") * -1;
 			height: auto;
 			width: _theme("spacings.smallest");
 		}
@@ -109,6 +109,17 @@
 
 .timeline.mod-number {
 	counter-reset: timeline;
+
+	&.mod-vertical {
+		.timeline-step {
+			margin: _theme("spacings.small") 0;
+
+			.gauge, .progress {
+				top: _theme("spacings.standard");
+				bottom: -.875rem; // magic number
+			}
+		}
+	}
 
 	.timeline-step-title {
 		counter-increment: timeline;
