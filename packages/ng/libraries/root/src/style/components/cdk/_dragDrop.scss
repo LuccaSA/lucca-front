@@ -20,12 +20,6 @@
 
 .dragDrop-box {
 	cursor: grab;
-	// palette colors
-	// @each $name, $palette in _getMap("palettes") {
-	// 	&.palette-#{$name} {
-	// 		@include checkboxColoring($name);
-	// 	}
-	// }
 }
 
 .dragDrop-box:active {
