@@ -65,7 +65,5 @@
 	}
 	.cdk-drag:not(.cdk-drag-placeholder) {
 		transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-		border-radius: _theme("commons.border.radius", true);
-		border-radius: _theme("commons.border.radius");
 	}
-} 
+}
