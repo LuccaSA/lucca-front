@@ -33,6 +33,7 @@
 		padding: _theme("spacings.smallest") _component("options.item.padding-horizontal");
 		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
 		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+		background-color: _color("grey", 50, true);
 		background-color: _color("grey", 50);
 		font-style: italic;
 	}
