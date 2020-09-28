@@ -27,6 +27,15 @@
 			border-bottom-color: _color("primary", "600");
 		}
 	}
+
+	.checkbox.mod-formerEmployee {
+		padding: _theme("spacings.smallest", true) _component("options.item.padding-horizontal", true);
+		padding: _theme("spacings.smallest") _component("options.item.padding-horizontal");
+		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
+		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+		background-color: _color("grey", 50);
+		font-style: italic;
+	}
 	// .optionPlaceholder {
 	// 	display: block;
 	// 	padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true);
