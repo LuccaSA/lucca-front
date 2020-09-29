@@ -89,7 +89,7 @@
 		color: _color("warning");
 	}
 
-	.#{$fieldname}-messages-success {
+	.#{$fieldname}-messages-valid, .#{$fieldname}-messages-success {
 		color: _color("success");
 	}
 
@@ -139,7 +139,7 @@
 			}
 		}
 
-		&.is-valid {
+		&.is-success, &.is-valid {
 			&::before {
 				animation: isValid 3s forwards;
 				@include makeIcon("tick_bold");
@@ -178,7 +178,7 @@
 		cursor: not-allowed;
 	}
 
-	&.is-success {
+	&.is-valid, &.is-success {
 		@include fieldState($fieldname, "success");
 	}
 
@@ -186,7 +186,7 @@
 		@include fieldState($fieldname, "warning");
 	}
 
-	&.is-invalid, &.is-error {
+	&.is-invalid, &.is-error, &:invalid {
 		@include fieldState($fieldname, "error");
 	}
 }

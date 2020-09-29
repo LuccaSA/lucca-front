@@ -24,7 +24,7 @@
 		color: _theme("palettes.warning.text");
 	}
 
-	.#{$fieldname}-messages-success {
+	.#{$fieldname}-messages-valid, .#{$fieldname}-messages-success {
 		background-color: _color("success");
 		color: _theme("palettes.success.text");
 	}
@@ -66,7 +66,7 @@
 			@include fieldFramedState("warning");
 		}
 
-		&.is-success {
+		&.is-valid, &.is-success {
 			@include fieldFramedState("success");
 		}
 

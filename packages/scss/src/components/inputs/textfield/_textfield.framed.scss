@@ -9,7 +9,7 @@
 		@include fieldFramedState("warning");
 	}
 
-	&.is-success {
+	&.is-valid, &.is-success {
 		@include fieldFramedState("success");
 	}
 
@@ -65,7 +65,7 @@
 
 		&:not(:disabled) {
 			&:not(.is-error) {
-				&:not(.is-success) {
+				&:not(.is-success), &:not(.is-valid) {
 					&:not(.is-warning) {
 						background-color: white;
 
@@ -108,7 +108,7 @@
 				}
 			}
 
-			&.is-success {
+			&.is-valid, &.is-success {
 				background-color: white;
 
 				&:hover {

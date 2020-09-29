@@ -101,11 +101,12 @@
 					@include fieldFramedState("warning");
 				}
 
+				&.is-valid,
 				&.is-success {
 					@include fieldFramedState("success");
 				}
 
-				&.is-disabled {
+				&.is-disabled, &.is-readonly {
 					background-color: _theme("commons.disabled.background");
 
 					.radio-label, .checkbox-label {
@@ -145,7 +146,7 @@
 						}
 					}
 
-					.is-success {
+					.is-valid, .is-success {
 						.textfield-input {
 							background-color: white;
 							box-shadow: fakeborderoverlay(_color("success")), 0 0 0 4px _color("success", "50");
