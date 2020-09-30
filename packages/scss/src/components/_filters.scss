@@ -1,7 +1,8 @@
 .filters {
 	@include elevate(1);
+
 	align-items: center;
-	background: _component("filters.background");
+	background-color: _component("filters.background");
 	display: flex;
 	min-height: _component("filters.height");
 	position: relative;
@@ -25,37 +26,48 @@
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+.filters.mod-sticky {
+	position: sticky;
+	top: 0;
 
-.navSide ~ .main-content, .mod-withMenu .main-content {
-	.filters.mod-sticky {
-		left: _theme("components.navSide.width");
+	@include media_smaller_than("md") {
+		top: _component("navSide.mobile.toggle-height");
 	}
-}
 
-.navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
-	.filters.mod-sticky {
-		left: _theme("components.navSide.compact.width");
-	}
-}
-
-.filters {
-	&.mod-sticky {
+	@include ie11 {
 		position: fixed;
-		left: 0;
 		right: 0;
-		top: _theme("commons.banner-height");
+		left: 0;
 
-		@include media_smaller_than(_theme("commons.mobile", true)) {
-			left: 0 !important;
-			top: calc(#{_theme("commons.banner-height")} + #{_component("navSide.mobile.toggle-height")});
+		@include media_larger_than("md") {
+			left: _component("navSide.width");
+		}
 
-			@include ie11 {
-				top: 0;
+		~ .filters-placeholder {
+			height: _component("filters.height");
+		}
+	}
+}
+
+.navSide.mod-compact ~ .main-content {
+	.filters.mod-sticky {
+		@include ie11 {
+			@include media_larger_than("md") {
+				left: _component("navSide.compact.width");
 			}
 		}
 	}
 }
 
+.main.mod-withBanner {
+	.filters.mod-sticky {
+		top: _theme("commons.banner-height");
+
+		@include media_smaller_than("md") {
+			top: calc(#{_theme("commons.banner-height")} + #{_component("navSide.mobile.toggle-height")});
+		}
+	}
+}
 
 // CHILDS COMPONENTS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

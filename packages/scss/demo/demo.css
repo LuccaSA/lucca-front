@@ -255,20 +255,21 @@
 }
 
 .fake-banner {
-	position: fixed;
+	position: sticky;
 	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 90;
+	z-index: 9000;
 	height: 50px;
-	background: #fff;
+	background-color: white;
 	font-size: 16px;
 	color: #666;
 	box-shadow: 1px 2px 3px -1px rgba(0, 0, 0, .2);
 }
 
-.filters.mod-sticky {
-	top: 0;
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.fake-banner {
+		position: fixed;
+		width: 100%;
+	}
 }
 
 .demo-avatar {

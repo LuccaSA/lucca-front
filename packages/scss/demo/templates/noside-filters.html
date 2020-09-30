@@ -1,69 +1,89 @@
 <!doctype html>
 <html lang="fr">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Lucca Front | No aside + filters template</title>
-		<link rel="icon" type="image/png" href="../lucca.png">
-		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
-		<link rel="stylesheet" href="../lucca-front.css">
-		<link rel="stylesheet" href="../demo.css">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="msapplication-TileColor" content="#ffb900" />
+		<meta name="msapplication-config" content="//cdn.lucca.fr/favicon/lucca/browserconfig.xml" />
+		<meta name="theme-color" content="#ffb900" />
+
+		<title>No side filters sticky template – Lucca Front</title>
+
+		<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600&display=swap" rel="stylesheet" />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="//cdn.lucca.fr/favicon/lucca/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="//cdn.lucca.fr/favicon/lucca/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="//cdn.lucca.fr/favicon/lucca/favicon-16x16.png" />
+		<link rel="manifest" href="//cdn.lucca.fr/favicon/lucca/site.webmanifest" />
+		<link rel="mask-icon" href="//cdn.lucca.fr/favicon/lucca/safari-pinned-tab.svg" color="#ffb900" />
+		<link rel="shortcut icon" href="//cdn.lucca.fr/favicon/lucca/favicon.ico" />
+		
+		<link rel="stylesheet" href="../lucca-front.css" />
+		<link rel="stylesheet" href="../demo.css" />
 	</head>
 	<body>
-		<main class="main">
-			<section class="main-content mod-withStickyHeader">
-				<div class="filters mod-sticky">
-					<div class="filters-sectionLeft">
-						<div class="textfield mod-framed">
-							<input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder">
-							<label class="textfield-label" for="textfieldID">Collaborator</label>
+		<div class="main">
+			<main class="main-content">
+				<div class="main-content-content">
+					<div class="filters mod-sticky">
+						<div class="filters-sectionLeft">
+							<div class="textfield mod-framed">
+								<input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder">
+								<label class="textfield-label" for="textfieldID">Collaborator</label>
+							</div>
+						</div>
+						<div class="filters-sectionLeft">
+							<div class="checkbox mod-inline">
+								<input class="checkbox-input" type="checkbox" id="checkbox0">
+								<label class="checkbox-label" for="checkbox0">Checkbox</label>
+							</div>
+						</div>
+						<div class="filters-sectionRight">
+							<div class="textfield mod-framed">
+								<input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder">
+								<label class="textfield-label" for="textfieldID">Something else</label>
+							</div>
 						</div>
 					</div>
-					<div class="filters-sectionLeft">
-						<div class="checkbox mod-inline">
-							<input class="checkbox-input" type="checkbox" id="checkbox0">
-							<label class="checkbox-label" for="checkbox0">Checkbox</label>
-						</div>
-					</div>
-					<div class="filters-sectionRight">
-						<div class="textfield mod-framed">
-							<input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder">
-							<label class="textfield-label" for="textfieldID">Something else</label>
-						</div>
+					<div class="filters-placeholder"></div>
+					<div class="container">
+						<h1>No side filters sticky</h1>
+<code class="code mod-block">&lt;div class=&quot;main&quot;&gt;
+	&lt;main class=&quot;main-content&quot;&gt;
+		&lt;div class=&quot;main-content-content&quot;&gt;
+			&lt;div class=&quot;filters mod-sticky&quot;&gt;
+				&lt;div class=&quot;filters-sectionLeft&quot;&gt;
+					&lt;div class=&quot;textfield mod-framed&quot;&gt;
+						&lt;input class=&quot;textfield-input&quot; id=&quot;textfieldID&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
+						&lt;label class=&quot;textfield-label&quot; for=&quot;textfieldID&quot;&gt;Collaborator&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;filters-sectionLeft&quot;&gt;
+					&lt;div class=&quot;checkbox mod-inline&quot;&gt;
+						&lt;input class=&quot;checkbox-input&quot; type=&quot;checkbox&quot; id=&quot;checkbox0&quot;&gt;
+						&lt;label class=&quot;checkbox-label&quot; for=&quot;checkbox0&quot;&gt;Checkbox&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;filters-sectionRight&quot;&gt;
+					&lt;div class=&quot;textfield mod-framed&quot;&gt;
+						&lt;input class=&quot;textfield-input&quot; id=&quot;textfieldID&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
+						&lt;label class=&quot;textfield-label&quot; for=&quot;textfieldID&quot;&gt;Something else&lt;/label&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;filters-placeholder&quot;&gt;&lt;/div&gt;
+			&lt;div class=&quot;container&quot;&gt;
+				…
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/main&gt;
+&lt;/div&gt;</code>
+						<p>
+							<em><strong>Tip:</strong> You can use multiple <code class="code">filters-sectionLeft</code> & <code class="code">filters-sectionRight</code> to seperate your content.</em>
+						</p>
 					</div>
 				</div>
-				<div class="container">
-					<h1>No side with filters</h1>
-<code class="code mod-block">&lt;main class="main"&gt;
-  &lt;section class="main-content mod-withStickyHeader"&gt;
-    &lt;div class="filters mod-sticky"&gt;
-      &lt;div class="filters-sectionLeft"&gt;
-        &lt;div class="textfield mod-framed"&gt;
-          &lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder"&gt;
-          &lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="filters-sectionLeft"&gt;
-        &lt;div class="checkbox mod-inline"&gt;
-          &lt;input class="checkbox-input" type="checkbox" id="checkbox0"&gt;
-          &lt;label class="checkbox-label" for="checkbox0"&gt;...&lt;/label&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="filters-sectionRight"&gt;
-        &lt;div class="textfield mod-framed"&gt;
-          &lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder"&gt;
-          &lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="container"&gt;
-      ...
-    &lt;/div&gt;
-  &lt;/section&gt;
-&lt;/main&gt;</code>
-					<em><b>Tip:</b> You can use multiple <code class="code">filters-sectionLeft</code> & <code class="code">filters-sectionRight</code> to seperate your content.</em>
-				</div>
-			</section>
-		</main>
+			</main>
+		</div>
 	</body>
 </html>

@@ -1,40 +1,51 @@
+.main {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+	@include media_larger_than("md") {
+		flex-direction: row;
+	}
+}
+
 .main-content {
-	position: relative;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	width: 100%; // IE11
+}
 
-	&.mod-withStickyHeader {
-		padding-top: _component("header.height");
+.main-content-content {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.main-content-footer {
+	background-color: white;
+	position: sticky;
+	bottom: 0;
+}
+
+.main.mod-withBanner {
+	min-height: calc(100vh - #{_component("commons.banner-height")});
+
+	.main-aside {
+		top: _theme("commons.banner-height");
+
+		&.isActive {
+			height: calc(100vh - #{_component("commons.banner-height")});
+		}
+
+		@include media_larger_than("md") {
+			height: calc(100vh - #{_component("commons.banner-height")});
+		}
 	}
 }
 
-// with vertical navigation
-.navSide ~ .main-content, .mod-withMenu .main-content {
-	margin-left: _theme("components.navSide.width");
-}
-
-// with compact vertical navigation
-.navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
-	margin-left: _theme("components.navSide.compact.width");
-}
-
-.navSide.mod-withBanner ~ .main-content, .mod-withBanner .main-content, .main-content.mod-withBanner {
-	height: calc(100vh - #{_theme("commons.banner-height")});
-	overflow-y: auto;
-	margin-top: _theme("commons.banner-height");
-}
-
-@include media_smaller_than(_theme("commons.mobile", true)) {
-	.main-content {
-		margin-left: 0 !important;
-	}
-
-	// MOD TO BE ADDED TO .MAIN WHEN THE MENU IS TOGGLED
-	.main.is-notScrollable {
-		height: 100vh;
-		overflow: hidden;
-	}
-
-	.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner, .mod-withBanner .main-content {
-		height: calc(100vh - #{_theme("commons.banner-height")} - #{_component("navSide.mobile.toggle-height")});
-		margin-top: _component("navSide.mobile.toggle-height");
+.banner-placeholder {
+	@include ie11 {
+		height: _component("commons.banner-height");
 	}
 }

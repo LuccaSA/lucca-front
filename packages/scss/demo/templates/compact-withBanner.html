@@ -1,153 +1,163 @@
 <!doctype html>
 <html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="msapplication-TileColor" content="#ffb900" />
+		<meta name="msapplication-config" content="//cdn.lucca.fr/favicon/lucca/browserconfig.xml" />
+		<meta name="theme-color" content="#ffb900" />
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Lucca Front | Aside + sections template</title>
-	<link rel="icon" type="image/png" href="../lucca.png">
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
-	<link rel="stylesheet" href="../lucca-front.css">
-	<link rel="stylesheet" href="../demo.css">
-</head>
+		<title>Aside compact banner template – Lucca Front</title>
 
-<body>
-	<div class="fake-banner"></div>
-	<main class="main">
-		<aside class="navSide mod-compact mod-withBottomSection mod-withBanner" id="navSide">
-			<div class="navSide-mainSection">
-				<nav class="navSide-scrollWrapper">
-					<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
-						<a href="#" class="navSide-item-link">
-							<span class="navSide-item-link-title">Menu</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
-						</a>
+		<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600&display=swap" rel="stylesheet" />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="//cdn.lucca.fr/favicon/lucca/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="//cdn.lucca.fr/favicon/lucca/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="//cdn.lucca.fr/favicon/lucca/favicon-16x16.png" />
+		<link rel="manifest" href="//cdn.lucca.fr/favicon/lucca/site.webmanifest" />
+		<link rel="mask-icon" href="//cdn.lucca.fr/favicon/lucca/safari-pinned-tab.svg" color="#ffb900" />
+		<link rel="shortcut icon" href="//cdn.lucca.fr/favicon/lucca/favicon.ico" />
+		
+		<link rel="stylesheet" href="../lucca-front.css" />
+		<link rel="stylesheet" href="../demo.css" />
+	</head>
+	<body>
+		<header class="fake-banner">
+
+		</header>
+		<div class="banner-placeholder"></div>
+		<div class="main mod-withBanner">
+			<aside id="navSide" class="navSide mod-compact">
+				<div class="navSide-item mod-mobileToggle">
+					<button aria-expanded="false" class="navSide-item-link" onclick="document.getElementsByTagName('html')[0].classList.toggle('has-overlay'); w3.toggleClass('#navSide', 'is-open'); if(this.getAttribute('aria-expanded') === 'false') this.setAttribute('aria-expanded', 'true'); else this.setAttribute('aria-expanded', 'false')">
+						<span class="navSide-item-link-title">Menu</span>
+						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
+					</button>
+				</div>
+				<nav class="navSide-mainSection">
+					<div class="navSide-scrollWrapper">
+						<div class="navSide-item-placeholder"></div>
+						<div class="navSide-item is-active">
+							<a href="#" class="navSide-item-link is-active" onclick="setActive(event)">
+								<span aria-hidden="true" class="lucca-icon icon-apps"></span>
+								<span class="navSide-item-link-title">Section 1</span>
+							</a>
+						</div>
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event)">
+								<span aria-hidden="true" class="lucca-icon icon-user"></span>
+								<span class="navSide-item-link-title">Section 2</span>
+							</a>
+						</div>
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event)">
+								<span aria-hidden="true" class="lucca-icon icon-settings"></span>
+								<span class="navSide-item-link-title">Section 3</span>
+							</a>
+						</div>
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event)">
+								<span aria-hidden="true" class="lucca-icon icon-sliders"></span>
+								<span class="navSide-item-link-title">Section 4</span>
+								<span class="navSide-item-alert">9</span>
+							</a>
+						</div>
 					</div>
-					<div class="navSide-item-placeholder"></div>
-					<div class="navSide-item is-active" id="item1">
-						<a href="#" class="navSide-item-link is-active" onclick="w3.toggleClass('#item1', 'is-open')">
-							<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-							<span class="navSide-item-link-title">Section 1</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
-						</a>
-						<nav class="navSide-item-subMenu">
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #1.1</a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #1.2 with large name
-								<span class="navSide-item-alert">12</span></a>
-						</nav>
-					</div>
-					<div class="navSide-item" id="item2">
-						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item2', 'is-open')">
-							<span aria-hidden="true" class="lucca-icon icon-user"></span>
-							<span class="navSide-item-link-title">Section#2 with a larger name</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
-						</a>
-						<nav class="navSide-item-subMenu">
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.1</a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.2</a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.3</a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.4 <span class="navSide-item-alert">12</span></a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.5</a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.6</a>
-						</nav>
-					</div>
-					<div class="navSide-item" id="item3">
-						<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
-							<span aria-hidden="true" class="lucca-icon icon-analytics"></span>
-							<span class="navSide-item-link-title">Section #3</span>
-						</a>
-					</div>
-					<div class="navSide-item" id="item4">
-						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item4', 'is-open')">
-							<span aria-hidden="true" class="lucca-icon icon-sliders"></span>
-							<span class="navSide-item-link-title">Section #4</span>
-							<span class="navSide-item-alert">9</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
-						</a>
-						<nav class="navSide-item-subMenu">
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #4.1</a>
-							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #4.2</a>
-						</nav>
+					<div class="navSide-bottomSection">
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
+								<span aria-hidden="true" class="lucca-icon icon-analytics"></span>
+								<span class="navSide-item-link-title">Bottom section</span>
+							</a>
+						</div>
 					</div>
 				</nav>
-			</div>
-			<div class="navSide-bottomSection">
-				<div class="navSide-item">
-					<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
-						<span aria-hidden="true" class="lucca-icon icon-analytics"></span>
-						<span class="navSide-item-link-title">Bottom section</span>
-					</a>
-				</div>
-			</div>
-		</aside>
-		<section class="main-content mod-withBanner">
-			<div class="container">
-				<h1>Markup</h1>
-				<code class="code mod-block">&lt;aside class=&quot;navSide&quot;&gt;
-	&lt;div class=&quot;navSide-mainSection&quot;&gt;
-		&lt;nav class=&quot;navSide-scrollWrapper&quot;&gt;
-		&lt;div class=&quot;navSide-item-placeholder&quot;&gt;&lt;/div&gt;
+			</aside>
+			<div class="navSide-placeholder"></div>
+			<main class="main-content">
+				<div class="main-content-content">
+					<div class="container">
+						<h1>Aside compact banner</h1>
+<code class="code mod-block">&lt;header class=&quot;fake-banner&quot;&gt;
+
+&lt;/header&gt;
+&lt;div class=&quot;banner-placeholder&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;main mod-withBanner&quot;&gt;
+	&lt;aside id=&quot;navSide&quot; class=&quot;navSide mod-compact&quot;&gt;
 		&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
+			&lt;button aria-expanded=&quot;false&quot; class=&quot;navSide-item-link&quot; onclick=&quot;document.getElementsByTagName('html')[0].classList.toggle('has-overlay'); w3.toggleClass('#navSide', 'is-open'); if(this.getAttribute('aria-expanded') === 'false') this.setAttribute('aria-expanded', 'true'); else this.setAttribute('aria-expanded', 'false')&quot;&gt;
 				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
-				&lt;span aria-hidden="true" class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
-			&lt;/a&gt;
+				&lt;span aria-hidden=&quot;true&quot; class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
+			&lt;/button&gt;
 		&lt;/div&gt;
-		&lt;div class=&quot;navSide-item is-active&quot;&gt;
-				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link is-active&quot;&gt;
-					&lt;span aria-hidden="true" class=&quot;lucca-icon icon-heart&quot;&gt;&lt;/span&gt;
-					&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section #1&lt;/span&gt;
-					&lt;span aria-hidden="true" class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
-				&lt;/a&gt;
-				&lt;nav class=&quot;navSide-item-subMenu&quot;&gt;
-					&lt;a href=&quot;#&quot; class=&quot;navSide-item-subMenu-link&quot;&gt;Subsection #1.1&lt;/a&gt;
-					[...]
-				&lt;/nav&gt;
+		&lt;nav class=&quot;navSide-mainSection&quot;&gt;
+			&lt;div class=&quot;navSide-scrollWrapper&quot;&gt;
+				&lt;div class=&quot;navSide-item-placeholder&quot;&gt;&lt;/div&gt;
+				&lt;div class=&quot;navSide-item is-active&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link is-active&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-apps&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 1&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-user&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 2&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-settings&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 3&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-sliders&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 4&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-alert&quot;&gt;9&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
 			&lt;/div&gt;
-			&lt;div class=&quot;navSide-item&quot;&gt;
-				&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
-					&lt;span aria-hidden="true" class=&quot;lucca-icon icon-heart&quot;&gt;&lt;/span&gt;
-					&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section #1&lt;/span&gt;
-					&lt;span aria-hidden="true" class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
-				&lt;/a&gt;
-				&lt;nav class=&quot;navSide-item-subMenu&quot;&gt;
-					&lt;a href=&quot;#&quot; class=&quot;navSide-item-subMenu-link&quot;&gt;Subsection #1.1&lt;/a&gt;
-					[...]
-				&lt;/nav&gt;
+			&lt;div class=&quot;navSide-bottomSection&quot;&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event, true)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-analytics&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Bottom section&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
 			&lt;/div&gt;
-			[...]
 		&lt;/nav&gt;
-	&lt;/div&gt;
-	&lt;div class=&quot;navSide-bottomSection&quot;&gt;
-		&lt;div class=&quot;navSide-item&quot;&gt;
-			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&quot;&gt;
-				&lt;span aria-hidden="true" class=&quot;lucca-icon icon-heart&quot;&gt;&lt;/span&gt;
-				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Bottom Section&lt;/span&gt;
-			&lt;/a&gt;
+	&lt;/aside&gt;
+	&lt;div class=&quot;navSide-placeholder&quot;&gt;&lt;/div&gt;
+	&lt;main class=&quot;main-content&quot;&gt;
+		&lt;div class=&quot;main-content-content&quot;&gt;
+			&lt;div class=&quot;container&quot;&gt;
+				…
+			&lt;/div&gt;
 		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/main&gt;
-</code>
-			</div>
-		</section>
-	</main>
-	<script src="https://www.w3schools.com/lib/w3.js"></script>
-	<script>
-		function setActive(event, onlyOne = false) {
-			w3.removeClass('#item1', 'is-active');
-			w3.removeClass('#item2', 'is-active');
-			w3.removeClass('#item3', 'is-active');
-			w3.removeClass('#item4', 'is-active');
-			w3.removeClass('.navSide-item-subMenu-link', 'is-active');
-			w3.removeClass('.navSide-item-link', 'is-active');
+	&lt;/main&gt;
+&lt;/div&gt;</code>
+					</div>
+				</div>
+			</main>
+		</div>
+		<script src="https://www.w3schools.com/lib/w3.js"></script>
+		<script>
+			function setActive(event, onlyOne = false) {
+				w3.removeClass('#item1', 'is-active');
+				w3.removeClass('#item2', 'is-active');
+				w3.removeClass('#item3', 'is-active');
+				w3.removeClass('#item4', 'is-active');
+				w3.removeClass('.navSide-item-subMenu-link', 'is-active');
+				w3.removeClass('.navSide-item-link', 'is-active');
 
-			var element = event.target;
-			var parent = element.parentElement.parentElement;
-			element.classList.add('is-active');
-			if (!onlyOne)
-				parent.classList.add('is-active');
-		}
-	</script>
-</body>
-
+				var element = event.target;
+				var parent = element.parentElement.parentElement;
+				element.classList.add('is-active');
+				if(!onlyOne)
+					parent.classList.add('is-active');
+			}
+		</script>
+	</body>
 </html>

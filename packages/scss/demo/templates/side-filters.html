@@ -1,29 +1,41 @@
 <!doctype html>
 <html lang="fr">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Lucca Front | Aside + filters template</title>
-		<link rel="icon" type="image/png" href="../lucca.png">
-		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
-		<link rel="stylesheet" href="../lucca-front.css">
-		<link rel="stylesheet" href="../demo.css">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="msapplication-TileColor" content="#ffb900" />
+		<meta name="msapplication-config" content="//cdn.lucca.fr/favicon/lucca/browserconfig.xml" />
+		<meta name="theme-color" content="#ffb900" />
+
+		<title>Aside compact filters sticky template – Lucca Front</title>
+
+		<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600&display=swap" rel="stylesheet" />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="//cdn.lucca.fr/favicon/lucca/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="//cdn.lucca.fr/favicon/lucca/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="//cdn.lucca.fr/favicon/lucca/favicon-16x16.png" />
+		<link rel="manifest" href="//cdn.lucca.fr/favicon/lucca/site.webmanifest" />
+		<link rel="mask-icon" href="//cdn.lucca.fr/favicon/lucca/safari-pinned-tab.svg" color="#ffb900" />
+		<link rel="shortcut icon" href="//cdn.lucca.fr/favicon/lucca/favicon.ico" />
+		
+		<link rel="stylesheet" href="../lucca-front.css" />
+		<link rel="stylesheet" href="../demo.css" />
 	</head>
 	<body>
-		<main class="main">
-			<aside class="navSide mod-compact">
-				<div class="navSide-mainSection">
-					<nav class="navSide-scrollWrapper">
+		<div class="main">
+			<aside id="navSide" class="navSide mod-compact">
+				<div class="navSide-item mod-mobileToggle">
+					<button aria-expanded="false" class="navSide-item-link" onclick="document.getElementsByTagName('html')[0].classList.toggle('has-overlay'); w3.toggleClass('#navSide', 'is-open'); if(this.getAttribute('aria-expanded') === 'false') this.setAttribute('aria-expanded', 'true'); else this.setAttribute('aria-expanded', 'false')">
+						<span class="navSide-item-link-title">Menu</span>
+						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
+					</button>
+				</div>
+				<nav class="navSide-mainSection">
+					<div class="navSide-scrollWrapper">
 						<div class="navSide-item-placeholder"></div>
-						<div class="navSide-item mod-mobileToggle" onclick="w3.toggleClass('#navSide', 'is-open')">
-							<a href="#" class="navSide-item-link">
-								<span class="navSide-item-link-title">Menu</span>
-								<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
-							</a>
-						</div>
 						<div class="navSide-item is-active">
 							<a href="#" class="navSide-item-link is-active" onclick="setActive(event)">
-								<span aria-hidden="true" class="lucca-icon icon-tilesNine"></span>
+								<span aria-hidden="true" class="lucca-icon icon-apps"></span>
 								<span class="navSide-item-link-title">Section 1</span>
 							</a>
 						</div>
@@ -46,27 +58,24 @@
 								<span class="navSide-item-alert">9</span>
 							</a>
 						</div>
-					</nav>
-				</div>
-				<div class="navSide-bottomSection">
-					<div class="navSide-item">
-						<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
-							<span aria-hidden="true" class="lucca-icon icon-analytics"></span>
-							<span class="navSide-item-link-title">Bottom section</span>
-						</a>
 					</div>
-				</div>
+					<div class="navSide-bottomSection">
+						<div class="navSide-item">
+							<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
+								<span aria-hidden="true" class="lucca-icon icon-analytics"></span>
+								<span class="navSide-item-link-title">Bottom section</span>
+							</a>
+						</div>
+					</div>
+				</nav>
 			</aside>
-			<section class="main-content mod-withStickyHeader">
+			<div class="navSide-placeholder"></div>
+			<main class="main-content">
 				<div class="filters mod-sticky">
 					<div class="filters-sectionLeft">
 						<div class="textfield mod-framed">
 							<input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder">
 							<label class="textfield-label" for="textfieldID">Collaborator</label>
-						</div>
-						<div class="textfield mod-framed">
-							<input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder">
-							<label class="textfield-label" for="textfieldID">Something else</label>
 						</div>
 					</div>
 					<div class="filters-sectionLeft">
@@ -82,91 +91,106 @@
 						</div>
 					</div>
 				</div>
-				<div class="container">
-					<h1>Side with filters</h1>
-<code class="code mod-block">&lt;main class="main"&gt;
-	&lt;aside class="navSide mod-compact"&gt;
-		&lt;div class="navSide-mainSection"&gt;
-			&lt;nav class="navSide-scrollWrapper"&gt;
-				&lt;div class="navSide-item-placeholder"&gt;&lt;/div&gt;
-				&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
-					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
-						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
-						&lt;span aria-hidden="true" class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
-					&lt;/a&gt;
-				&lt;/div&gt;
-				&lt;div class="navSide-item is-active"&gt;
-					&lt;a href="#" class="navSide-item-link is-active"&gt;
-						&lt;span aria-hidden="true" class="lucca-icon icon-tilesNine"&gt;&lt;/span&gt;
-						&lt;span class="navSide-item-link-title"&gt;Section 1&lt;/span&gt;
-					&lt;/a&gt;
-				&lt;/div&gt;
-				&lt;div class="navSide-item"&gt;
-					&lt;a href="#" class="navSide-item-link"&gt;
-						&lt;span aria-hidden="true" class="lucca-icon icon-user"&gt;&lt;/span&gt;
-						&lt;span class="navSide-item-link-title"&gt;Section 2&lt;/span&gt;
-					&lt;/a&gt;
-				&lt;/div&gt;
-				...
-			&lt;/nav&gt;
+				<div class="filters-placeholder"></div>
+				<div class="main-content-content">
+					<div class="container">
+						<h1>Aside compact filters sticky</h1>
+<code class="code mod-block">&lt;div class=&quot;main&quot;&gt;
+	&lt;aside id=&quot;navSide&quot; class=&quot;navSide mod-compact&quot;&gt;
+		&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
+			&lt;button aria-expanded=&quot;false&quot; class=&quot;navSide-item-link&quot; onclick=&quot;document.getElementsByTagName('html')[0].classList.toggle('has-overlay'); w3.toggleClass('#navSide', 'is-open'); if(this.getAttribute('aria-expanded') === 'false') this.setAttribute('aria-expanded', 'true'); else this.setAttribute('aria-expanded', 'false')&quot;&gt;
+				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
+				&lt;span aria-hidden=&quot;true&quot; class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
+			&lt;/button&gt;
 		&lt;/div&gt;
-		&lt;div class="navSide-bottomSection"&gt;
-			&lt;div class="navSide-item"&gt;
-				&lt;a href="#" class="navSide-item-link" onclick="setActive(event, true)"&gt;
-					&lt;span aria-hidden="true" class="lucca-icon icon-analytics"&gt;&lt;/span&gt;
-					&lt;span class="navSide-item-link-title"&gt;Bottom section&lt;/span&gt;
-				&lt;/a&gt;
+		&lt;nav class=&quot;navSide-mainSection&quot;&gt;
+			&lt;div class=&quot;navSide-scrollWrapper&quot;&gt;
+				&lt;div class=&quot;navSide-item-placeholder&quot;&gt;&lt;/div&gt;
+				&lt;div class=&quot;navSide-item is-active&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link is-active&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-apps&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 1&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-user&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 2&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-settings&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 3&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-sliders&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section 4&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-alert&quot;&gt;9&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
 			&lt;/div&gt;
-		&lt;/div&gt;
+			&lt;div class=&quot;navSide-bottomSection&quot;&gt;
+				&lt;div class=&quot;navSide-item&quot;&gt;
+					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot; onclick=&quot;setActive(event, true)&quot;&gt;
+						&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-analytics&quot;&gt;&lt;/span&gt;
+						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Bottom section&lt;/span&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/nav&gt;
 	&lt;/aside&gt;
-	&lt;section class="main-content mod-withStickyHeader"&gt;
-		&lt;div class="filters mod-sticky"&gt;
-			&lt;div class="filters-sectionLeft"&gt;
-				&lt;div class="filters-item"&gt;
-					&lt;div class="textfield mod-framed"&gt;
-						&lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder"&gt;
-						&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
-					&lt;/div&gt;
-					&lt;label class="textfield-label" for="textfieldID"&gt;Collaborator&lt;/label&gt;
-				&lt;/div&gt;
-				&lt;div class="filters-item"&gt;
-					&lt;div class="textfield mod-framed"&gt;
-						&lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder"&gt;
-						&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
-					&lt;/div&gt;
+	&lt;div class=&quot;navSide-placeholder&quot;&gt;&lt;/div&gt;
+	&lt;main class=&quot;main-content&quot;&gt;
+		&lt;div class=&quot;filters mod-sticky&quot;&gt;
+			&lt;div class=&quot;filters-sectionLeft&quot;&gt;
+				&lt;div class=&quot;textfield mod-framed&quot;&gt;
+					&lt;input class=&quot;textfield-input&quot; id=&quot;textfieldID&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
+					&lt;label class=&quot;textfield-label&quot; for=&quot;textfieldID&quot;&gt;Collaborator&lt;/label&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
-			&lt;div class="filters-sectionLeft"&gt;
-				&lt;div class="checkbox mod-inline"&gt;
-					&lt;input class="checkbox-input" type="checkbox" id="checkboxID"&gt;
-					&lt;label class="checkbox-label" for="checkboxID"&gt;Checkbox&lt;/label&gt;
+			&lt;div class=&quot;filters-sectionLeft&quot;&gt;
+				&lt;div class=&quot;checkbox mod-inline&quot;&gt;
+					&lt;input class=&quot;checkbox-input&quot; type=&quot;checkbox&quot; id=&quot;checkbox0&quot;&gt;
+					&lt;label class=&quot;checkbox-label&quot; for=&quot;checkbox0&quot;&gt;Checkbox&lt;/label&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
-			&lt;div class="filters-sectionRight"&gt;
-				&lt;div class="filters-item"&gt;
-					&lt;div class="textfield mod-framed"&gt;
-						&lt;input class="textfield-input" id="textfieldID" type="text" placeholder="placeholder"&gt;
-						&lt;label class="textfield-label" for="textfieldID"&gt;...&lt;/label&gt;
-					&lt;/div&gt;
+			&lt;div class=&quot;filters-sectionRight&quot;&gt;
+				&lt;div class=&quot;textfield mod-framed&quot;&gt;
+					&lt;input class=&quot;textfield-input&quot; id=&quot;textfieldID&quot; type=&quot;text&quot; placeholder=&quot;placeholder&quot;&gt;
+					&lt;label class=&quot;textfield-label&quot; for=&quot;textfieldID&quot;&gt;Something else&lt;/label&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
 		&lt;/div&gt;
-		&lt;div class="container"&gt;
-			...
+		&lt;div class=&quot;filters-placeholder&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;main-content-content&quot;&gt;
+			&lt;div class=&quot;container&quot;&gt;
+				…
+			&lt;/div&gt;
 		&lt;/div&gt;
-	&lt;/section&gt;
-&lt;/main&gt;</code>
-					<em><b>Tip:</b> You can use multiple <code class="code">filters-sectionLeft</code> & <code class="code">filters-sectionRight</code> to seperate your content.</em>
+	&lt;/main&gt;
+&lt;/div&gt;</code>
+					</div>
 				</div>
-			</section>
-		</main>
+			</main>
+		</div>
 		<script src="https://www.w3schools.com/lib/w3.js"></script>
 		<script>
-			function setActive(event) {
-				w3.removeClass('.navSide-item', 'is-active');
+			function setActive(event, onlyOne = false) {
+				w3.removeClass('#item1', 'is-active');
+				w3.removeClass('#item2', 'is-active');
+				w3.removeClass('#item3', 'is-active');
+				w3.removeClass('#item4', 'is-active');
+				w3.removeClass('.navSide-item-subMenu-link', 'is-active');
 				w3.removeClass('.navSide-item-link', 'is-active');
-				var element = event.currentTarget;
+
+				var element = event.target;
+				var parent = element.parentElement.parentElement;
 				element.classList.add('is-active');
+				if(!onlyOne)
+					parent.classList.add('is-active');
 			}
 		</script>
 	</body>

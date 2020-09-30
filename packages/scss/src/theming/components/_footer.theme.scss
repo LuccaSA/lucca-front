@@ -1,0 +1,6 @@
+$footer: (
+  background: white,
+  padding: _theme("spacings.smaller") _theme("spacings.small"),
+  height: 4rem
+);
+$theme: _set($theme, "components.footer", $footer);

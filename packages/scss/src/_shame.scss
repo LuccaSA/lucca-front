@@ -8,5 +8,9 @@
 // normalize 7+ dont hide the `x` added by webkit on input type=search
 // so we remove it ourselves
 [type="search"]::-webkit-search-cancel-button {
-	-webkit-appearance: none;
+	-webkit-appearance: none; /* stylelint-disable-line property-no-vendor-prefix */
+}
+
+.flexGrow1 {
+	flex-grow: 1;
 }

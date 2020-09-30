@@ -51,9 +51,22 @@
 }
 
 .u-listReset {
-	@include listReset('!important');
+	@include listReset("!important");
 }
 
 .u-buttonReset {
-	@include buttonReset('!important');
+	@include buttonReset("!important");
+}
+
+.has-overlay {
+	&,
+	body {
+		touch-action: none;
+		overscroll-behavior: none;
+		-webkit-overflow-scrolling: auto;
+	}
+
+	body {
+		overflow: hidden;
+	}
 }

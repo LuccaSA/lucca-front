@@ -1,22 +1,13 @@
 .navSide {
-	background: _component("navSide.fullwidth-palette.bg-color");
-	bottom: 0;
-	display: block;
-	left: 0;
-	padding-top: _component("navSide.padding-top");
-	position: fixed;
-	top: 0;
+	background-color: _component("navSide.fullwidth-palette.bg-color");
+	display: flex;
+	flex-direction: column;
 	width: _component("navSide.width");
+	position: sticky;
+	top: 0;
 	z-index: 100;
-}
-
-// NECESSARY TO AVOID MOVEMENT WHEN THE SCROLLBAR APPEARS
-.navSide-mainSection {
-	display: block;
-	height: 100%;
-	overflow-x: hidden;
-	overflow-y: auto;
-	position: relative;
+	flex-shrink: 0;
+	overflow: auto;
 
 	// SCROLLBAR
 	scrollbar-face-color: _component("navSide.scrollbar.thumb-color");
@@ -37,10 +28,55 @@
 		background-color: _component("navSide.scrollbar.thumb-color");
 		border-radius: _component("navSide.scrollbar.border-radius");
 	}
+
+	@include media_larger_than("md") {
+		align-self: flex-start;
+		height: 100vh;
+	}
+
+	&:not(.is-open) {
+		@include media_smaller_than("md") {
+			.navSide-mainSection {
+				display: none;
+			}
+		}
+	}
+
+	@include ie11 {
+		position: fixed;
+	}
+}
+
+.navSide-placeholder {
+	@include ie11 {
+		@include media_larger_than("md") {
+			width: _component("navSide.width");
+		}
+
+		@include media_smaller_than("md") {
+			height: _component("navSide.mobile.toggle-height");
+		}
+	}
+}
+
+.main.mod-withBanner {
+	.navSide {
+		top: _component("commons.banner-height");
+
+		@include media_larger_than("md") {
+			height: calc(100vh - #{_component("commons.banner-height")});
+		}
+	}
+}
+
+.navSide-mainSection {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 }
 
 .navSide-scrollWrapper {
-	width: _component("navSide.width");
+	flex-grow: 1;
 	padding: _theme("spacings.smaller");
 }
 
@@ -50,7 +86,16 @@
 
 // MOBILE TOGGLE
 .navSide-item.mod-mobileToggle {
-	display: none;
+	position: sticky;
+	top: 0;
+	height: _component("navSide.mobile.toggle-height");
+	flex-shrink: 0;
+	background-color: _color("primary", "dark");
+	z-index: 10;
+
+	@include media_larger_than("md") {
+		display: none;
+	}
 }
 
 .navSide-item-link, .navSide-item-subMenu-link {
@@ -72,6 +117,12 @@
 	font-weight: 600;
 	line-height: 1rem;
 	padding: _theme("spacings.small");
+	width: 100%;
+	background-color: transparent;
+	text-align: left;
+	border: 0;
+	cursor: pointer;
+	font: inherit; /* stylelint-disable-line declaration-block-no-shorthand-property-overrides */
 
 	&:hover {
 		background-color: _component("navSide.fullwidth-palette.hovered-bg");
@@ -97,7 +148,7 @@
 	margin-left: auto;
 	margin-right: .5rem;
 	padding: 0 .5em;
-	transition: background _theme("commons.animations.durations.standard") ease;
+	transition: background-color _theme("commons.animations.durations.standard") ease;
 }
 
 .navSide-item-arrow {
@@ -133,9 +184,15 @@
 // BOTTOM MENU
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .navSide-bottomSection {
-	height: _component("navSide.bottom-section-height");
-	width: _component("navSide.width");
-	z-index: 1;
+	border-top: 1px solid rgba(_component("navSide.bottom-section-palette.text"), .125);
+	position: sticky;
+	bottom: 0;
+	background-color: _component("navSide.fullwidth-palette.bg-color");
+	// height: _component("navSide.bottom-section-height");
+
+	//height: _component("navSide.bottom-section-height");
+	//width: _component("navSide.width");
+	//z-index: 1;
 
 	.navSide-item, .navSide-item-link {
 		height: 100%;
@@ -164,7 +221,7 @@
 
 .navSide.mod-withBottomSection {
 	.navSide-mainSection {
-		height: calc(100% - #{_component("navSide.bottom-section-height")});
+		//height: calc(100% - #{_component("navSide.bottom-section-height")});
 	}
 }
 
@@ -214,11 +271,6 @@
 	}
 }
 
-// MOD
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-.navSide.mod-withBanner {
-	top: _theme("commons.banner-height");
-}
 // LOADING PLACEHOLDERS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -263,13 +315,9 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 @include media_larger_than("md") {
 	.navSide.mod-compact {
-		background: _component("navSide.compact-palette.bg-color");
+		background-color: _component("navSide.compact-palette.bg-color");
 		text-align: center;
 		width: _component("navSide.compact.width");
-
-		.navSide-mainSection, .navSide-scrollWrapper {
-			width: _component("navSide.compact.width");
-		}
 
 		.navSide-item-link {
 			color: _component("navSide.compact-palette.text");
@@ -278,6 +326,7 @@
 			justify-content: center;
 			padding: _theme("spacings.small") _theme("spacings.smaller");
 			position: relative;
+			text-align: center;
 
 			.navSide-item-link-title {
 				margin: .8em 0 0;
@@ -289,7 +338,7 @@
 		}
 
 		.navSide-item-alert {
-			background: _component("navSide.compact-palette.alert-color");
+			background-color: _component("navSide.compact-palette.alert-color");
 			color: _component("navSide.compact-palette.alert-text");
 			padding: 0 .4em;
 			position: relative;
@@ -334,10 +383,8 @@
 		}
 
 		.navSide-bottomSection {
-			width: _component("navSide.compact.width");
-
 			.navSide-item-link {
-				background: _component("navSide.bottom-section-palette.bg-color");
+				background-color: _component("navSide.bottom-section-palette.bg-color");
 				color: _component("navSide.bottom-section-palette.text");
 				flex-direction: row;
 
@@ -350,26 +397,23 @@
 				}
 			}
 		}
+
+		& ~ .navSide-placeholder {
+			@include ie11 {
+				@include media_larger_than("md") {
+					width: _component("navSide.compact.width");
+					flex-shrink: 0;
+				}
+			}
+		}
 	}
 }
 
 
 // Mobile version
-@include media_smaller_than(_theme("commons.mobile", true)) {
+@include media_smaller_than("md") {
 	.navSide {
-		position: relative;
-		padding-top: _component("navSide.mobile.toggle-height");
 		width: 100%;
-
-		&, &.mod-withBottomSection {
-			.navSide-mainSection, .navSide-scrollWrapper {
-				width: 100%;
-				height: auto;
-			}
-		}
-	}
-	.navSide-scrollWrapper {
-		padding: 0;
 	}
 
 	.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
@@ -382,43 +426,8 @@
 		overflow: hidden;
 	}
 
-	.navSide-item.mod-mobileToggle {
-		display: block;
-		height: _component("navSide.mobile.toggle-height");
-		background-color: _color("primary", "dark");
-		cursor: pointer;
-		overflow: hidden;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-	}
-
-	.navSide.mod-withBanner {
-		.navSide-item.mod-mobileToggle {
-			top: _theme("commons.banner-height");
-		}
-	}
-
-	.navSide-bottomSection {
-		background: transparent;
-		width: auto;
-		height: auto;
-	}
-
 	.navSide.is-open {
 		height: 100vh;
-		overflow-x: hidden;
-		overflow-y: auto;
-
-		&.mod-withBanner {
-			height: calc(100vh - #{_theme("commons.banner-height")});
-		}
-
-		.navSide-scrollWrapper {
-			padding: _theme("spacings.smaller");
-		}
 
 		.navSide-item:not(.mod-mobileToggle), .navSide-item-placeholder {
 			position: static;
@@ -426,11 +435,18 @@
 			transform: translateX(0);
 			opacity: 1;
 			transition: all .2s cubic-bezier(.25, .8, .25, 1);
+
 			@for $i from 0 through 10 {
 				&:nth-child(#{$i+2}) {
 					transition-delay: $i*.05s;
 				}
 			}
+		}
+	}
+
+	.main.mod-withBanner {
+		.navSide.is-open {
+			height: calc(100vh - #{_component("commons.banner-height")});
 		}
 	}
 }

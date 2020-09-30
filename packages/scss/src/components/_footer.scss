@@ -1,0 +1,48 @@
+.footer {
+	@include elevate(1);
+
+	align-items: center;
+	background-color: _component("footer.background");
+	display: flex;
+	min-height: _component("footer.height");
+	padding: _component("footer.padding");
+	position: relative;
+	z-index: 99;
+}
+
+.footer-contentLeft {
+	display: flex;
+}
+
+.footer-contentRight {
+	display: flex;
+	margin-left: auto;
+}
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.footer.mod-sticky {
+	position: sticky;
+	bottom: 0;
+
+	@include ie11 {
+		position: fixed;
+		right: 0;
+		left: 0;
+
+		@include media_larger_than("md") {
+			.navSide ~ .main-content & {
+				left: _component("navSide.width");
+			}
+
+			.navSide.mod-compact ~ .main-content & {
+				left: _component("navSide.compact.width");
+			}
+		}
+
+		~ .footer-placeholder {
+			height: _component("footer.height");
+		}
+	}
+}
