@@ -10,6 +10,7 @@ import { LuUserModule } from '@lucca-front/ng/user';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuApiModule } from '@lucca-front/ng/api';
 import { LuDepartmentModule } from '@lucca-front/ng/department';
+import { LuEstablishmentModule } from '@lucca-front/ng/establishment';
 
 import {
 	LuFormlyFieldInput,
@@ -21,6 +22,7 @@ import {
 	LuFormlyFieldDepartment,
 	LuFormlyFieldCheckboxes,
 	LuFormlyFieldRadios,
+	LuFormlyFieldEstablishment
 } from './types/index';
 import {
 	LuFormlyWrapperHelper,
@@ -45,6 +47,7 @@ import {
 		LuFormlyFieldUser,
 		LuFormlyFieldApi,
 		LuFormlyFieldDepartment,
+		LuFormlyFieldEstablishment,
 		LuFormlyFieldRadios,
 		LuFormlyFieldCheckboxes,
 
@@ -68,9 +71,10 @@ import {
 		LuInputModule,
 		LuApiModule,
 		LuDepartmentModule,
+		LuEstablishmentModule,
 		LuDateModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],
 })
-export class LuFormlyModule {}
+export class LuFormlyModule { }
