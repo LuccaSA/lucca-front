@@ -92,6 +92,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 		const formValue$ = this.form.valueChanges.pipe(
 			startWith(this.form.value),
 		);
+		this._subs.add(formValue$.subscribe(() => this._page$.next(0)));
 		this._page$ = new Subject<number>();
 		const distinctPage$ = this._page$.pipe(
 			distinctUntilChanged(),
