@@ -12,7 +12,7 @@ import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
 import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map } from 'rxjs/operators';
 import { ILuUser } from '../../user.model';
-import { ALuUserService, LuUserV3Service } from '../../service/index';
+import { ALuUserService, LuUserHybridService } from '../../service/index';
 import { Subject, Observable, Subscription, combineLatest, of, merge } from 'rxjs';
 import { LuUserSearcherIntl } from './user-searcher.intl';
 import { ILuUserSearcherLabel } from './user-searcher.translate';
@@ -45,7 +45,7 @@ import { ILuUserSearcherLabel } from './user-searcher.translate';
 		},
 		{
 			provide: ALuUserService,
-			useClass: LuUserV3Service,
+			useClass: LuUserHybridService,
 		},
 	],
 })
@@ -53,12 +53,13 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber
 {
 
-	private _service: LuUserV3Service<U>;
+	private _service: LuUserHybridService<U>;
 	private _subs = new Subscription();
 
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 
+	@Input() set standard(standard: string) { if (standard !== undefined) this._service.standard = standard; }
 	@Input() set fields(fields: string) { if (fields !== undefined) { this._service.fields = fields; } }
 	@Input() set filters(filters: string[]) { if (filters !== undefined) { this._service.filters = filters; } }
 	@Input() set orderBy(orderBy: string) { if (orderBy !== undefined) { this._service.orderBy = orderBy; } }
@@ -78,10 +79,10 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 
 	constructor(
 		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
-		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
+		@Inject(ALuUserService) @Self() selfService: LuUserHybridService<U>,
 		@Inject(LuUserSearcherIntl) public intl: ILuUserSearcherLabel,
 	) {
-		this._service = (hostService || selfService) as LuUserV3Service<U>;
+		this._service = (hostService || selfService) as LuUserHybridService<U>;
 	}
 
 	ngOnInit() {
