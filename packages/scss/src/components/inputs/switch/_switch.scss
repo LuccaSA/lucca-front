@@ -29,7 +29,7 @@
 	}
 
 	&::after {
-		background: white;
+		background: _color("white");
 		box-shadow: _theme("commons.box-shadow.hard");
 		border-radius: 50%;
 		content: "";
@@ -62,7 +62,7 @@
 	}
 
 	&.mod-small {
-		.switch-label{
+		.switch-label {
 			padding: 0 0 0 calc(1.75rem - 4px + #{_theme("spacings.smaller", true)});
 			&::before {
 				margin-top: _component("switch.small-top");

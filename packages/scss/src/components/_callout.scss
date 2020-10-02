@@ -17,11 +17,6 @@
 
 .callout-title {
 	font-weight: 600;
-
-	&::after {
-		content: " —";
-		font-weight: 400;
-	}
 }
 
 .callout-kill {

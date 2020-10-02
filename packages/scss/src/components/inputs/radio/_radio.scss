@@ -81,7 +81,7 @@
 				&::after {
 					background: _color($palette, "600");
 				}
-		
+
 				&::before {
 					border-color: _color($palette, "600");
 				}
@@ -125,7 +125,7 @@
 		margin-bottom: 0;
 	}
 
-	&.mod-small .radio-label{
+	&.mod-small .radio-label {
 		line-height: _theme("sizes.small.line-height");
 		font-size: _theme("sizes.small.font-size");
 		padding: _component("radio.label.small-padding");
