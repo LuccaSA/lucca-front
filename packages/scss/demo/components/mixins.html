@@ -32,10 +32,11 @@ _color("palette_name", "key") // return the palette.key value
 	<p>You can use this mixins to turn your element into a spinner</p>
 <code class="code mod-block">@include loading($size);</code>
 	<h3>Media queries</h3>
-	<p>Using the breakpoint values in the breakpoints map, you can easily handle your media queries</p>
-<code class="code mod-block">@include media_smaller_than("breakpoint_key"){} // <==> @media (max-width: breakpoint_value - 1px) {}
-@include media_larger_than("breakpoint_key"){} //<==> @media (min-width: breakpoint_value) {}
-@include media_between("breakpoint1_key", "breakpoint2_key"){} //<==> @media (min-width: breakpoint1_value) and (max-width: breakpoint2_value - 1px) {}
+	<p>Using the breakpoint values in the breakpoints map, you can easily handle your media queries. You can also pass a value (preferably in em) directly as a parameter.</p>
+<code class="code mod-block">@include media_smaller_than("xl"){}
+@include media_larger_than("xl"){}
+
+@include media_larger_than("64em"){}
 </code>
 	<h3>Mask</h3>
 	<p>To visually hide an element of the page, but leave it accessible to user agents (screen readers, indexing robots, translators, etc.).</p>
