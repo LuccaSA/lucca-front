@@ -1,6 +1,3 @@
-@import 'theming';
-@import '~@lucca-front/scss/src/mixins';
-
 .cdk-drag-placeholder {
 	@include fakeBorder(_theme("commons.divider.width"), _color("grey", "200"));
 	background-color: _color("grey", "100");
