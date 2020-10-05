@@ -1,5 +1,5 @@
 .callout {
-	background: _component("callout.background");
+	background-color: _component("callout.background");
 	border-radius: _theme("commons.border.radius");
 	margin: _component("callout.margin");
 	padding: _component("callout.padding");
@@ -20,7 +20,7 @@
 }
 
 .callout-kill {
-	background: transparent;
+	background-color: transparent;
 	border: 0;
 	color: _color("text.default");
 	cursor: pointer;
@@ -29,7 +29,7 @@
 	position: absolute;
 	right: _theme("spacings.small");
 	top: .5rem;
-	transition: 150ms background ease;
+	transition: 150ms background-color ease;
 	width: 1rem;
 
 	&::before {
@@ -88,7 +88,7 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background: _color($palette, "see-through");
+	background-color: _color($palette, "see-through");
 	color: _color($palette, "dark");
 
 	.callout-icon {

@@ -1,5 +1,5 @@
 .section {
-	background: white;
+	background-color: white;
 	border-bottom: 1px solid #E5E5E5;
 	padding: 3rem;
 
@@ -20,6 +20,6 @@
 
 .section {
 	&.mod-grey {
-		background: _theme("commons.background.base");
+		background-color: _theme("commons.background.base");
 	}
 }

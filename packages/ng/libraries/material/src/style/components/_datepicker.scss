@@ -74,7 +74,7 @@
 // TABLE
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
-		@include fakeBorder(1px, _theme('commons.divider.color'));
+		box-shadow: fakeborderoverlay(_theme('commons.divider.color'));
 		border: none;
 		border-radius: 0;
 		color: _color("text.light");
