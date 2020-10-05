@@ -41,3 +41,15 @@
 		@content;
 	}
 }
+
+@mixin buttonReset($suffix: '') {
+	cursor: pointer #{$suffix};
+	font: inherit #{$suffix};
+	color: inherit #{$suffix};
+	background-color: transparent #{$suffix};
+	display: block #{$suffix};
+	padding: 0 #{$suffix};
+	border: 0 #{$suffix};
+	width: 100% #{$suffix};
+	text-align: left #{$suffix};
+}
