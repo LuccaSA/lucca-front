@@ -1,6 +1,9 @@
 # Changelog
 
 ## in dev
+### New features
+- :sparkles: added `establishment` formly field
+
 ### Bug fixes
 - `select` Increase height
 

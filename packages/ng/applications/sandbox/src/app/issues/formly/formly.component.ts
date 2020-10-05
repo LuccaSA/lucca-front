@@ -93,16 +93,23 @@ export class FormlyComponent {
 			},
 		},
 		{
+			key: 'establishment',
+			type: 'establishment',
+			templateOptions: {
+				label: 'establishment'
+			},
+		},
+		{
 			key: 'Radio',
 			type: 'radio',
 			templateOptions: {
 				label: 'Radio input',
 				name: 'radioTest',
 				options: [
-					{ value: 1, label: 'Option 1'},
-					{ value: 2, label: 'Option 2'},
-					{ value: 3, label: 'Option 3'},
-					{ value: 4, label: 'Option 4'},
+					{ value: 1, label: 'Option 1' },
+					{ value: 2, label: 'Option 2' },
+					{ value: 3, label: 'Option 3' },
+					{ value: 4, label: 'Option 4' },
 				]
 			}
 		},

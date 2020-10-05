@@ -1,4 +1,5 @@
 export * from './api';
+export * from './establishment';
 export * from './checkboxes';
 export * from './date';
 export * from './department';
