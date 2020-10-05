@@ -18,9 +18,9 @@
 				<nav class="navSide-scrollWrapper">
 					<div class="navSide-item" id="item1">
 						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item1', 'is-open');">
-							<i class="lucca-icon icon-tilesNine"></i>
+							<span aria-hidden="true" class="lucca-icon icon-tilesNine"></span>
 							<span class="navSide-item-link-title">Section 1</span>
-							<i class="lucca-icon navSide-item-arrow">arrow_east_thin</i>
+							<span aria-hidden="true" class="lucca-icon navSide-item-arrow">arrow_east_thin</span>
 						</a>
 						<nav class="navSide-item-subMenu">
 							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #1.1</a>
@@ -29,9 +29,9 @@
 					</div>
 					<div class="navSide-item" id="item2">
 						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item2', 'is-open')">
-							<i class="lucca-icon icon-user"></i>
+							<span aria-hidden="true" class="lucca-icon icon-user"></span>
 							<span class="navSide-item-link-title">Section#2 with a larger name</span>
-							<i class="lucca-icon navSide-item-arrow">arrow_east_thin</i>
+							<span aria-hidden="true" class="lucca-icon navSide-item-arrow">arrow_east_thin</span>
 						</a>
 						<nav class="navSide-item-subMenu">
 							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Section #2.1</a>
@@ -44,16 +44,16 @@
 					</div>
 					<div class="navSide-item" id="item3">
 						<a href="#" class="navSide-item-link" onclick="setActive(event, true)">
-							<i class="lucca-icon icon-settings"></i>
+							<span aria-hidden="true" class="lucca-icon icon-settings"></span>
 							<span class="navSide-item-link-title">Section #3</span>
 						</a>
 					</div>
 					<div class="navSide-item" id="item4">
 						<a href="#" class="navSide-item-link" onclick="w3.toggleClass('#item4', 'is-open')">
-							<i class="lucca-icon icon-sliders"></i>
+							<span aria-hidden="true" class="lucca-icon icon-sliders"></span>
 							<span class="navSide-item-link-title">Section #4</span>
 							<span class="navSide-item-alert">9</span>
-							<i class="lucca-icon navSide-item-arrow">arrow_east_thin</i>
+							<span aria-hidden="true" class="lucca-icon navSide-item-arrow">arrow_east_thin</span>
 						</a>
 						<nav class="navSide-item-subMenu">
 							<a href="#" class="navSide-item-subMenu-link" onclick="setActive(event)">Subsection #4.1</a>
@@ -73,9 +73,9 @@
 	&lt;nav class=&quot;navSide-scrollWrapper&quot;&gt;
 		&lt;div class=&quot;navSide-item&quot;&gt;
 			&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
-				&lt;i class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/i&gt;
+				&lt;span aria-hidden="true" class=&quot;lucca-icon&quot;&gt;icon_ligature&lt;/span&gt;
 				&lt;span class=&quot;navSide-item-link-title&quot;&gt;Section #1&lt;/span&gt;
-				&lt;i class=&quot;lucca-icon navSide-item-arrow&quot;&gt;arrow_east_thin&lt;/i&gt;
+				&lt;span aria-hidden="true" class=&quot;lucca-icon navSide-item-arrow&quot;&gt;arrow_east_thin&lt;/span&gt;
 			&lt;/a&gt;
 			&lt;nav class=&quot;navSide-item-subMenu&quot;&gt;
 				&lt;a href=&quot;#&quot; class=&quot;navSide-item-subMenu-link&quot;&gt;Subsection #1.1&lt;/a&gt;
@@ -148,10 +148,10 @@
 									<p>
 										The item displayed in the bar. It can contain :
 										<ul>
-											<li>an icon <code class="code">&lt;i&gt;</code></li>
+											<li>an icon <code class="code">&lt;span aria-hidden="true"&gt;</code></li>
 											<li>a <code class="code">&lt;span class="navSide-item-link-title"&gt;</code></li>
 										</ul>
-										If it has a submenu, it must ends with a <code class="code">&lt;i class="lucca-icon navSide-item-arrow"&gt;arrow_east_thin&lt;/i&gt;</code>
+										If it has a submenu, it must ends with a <code class="code">&lt;span aria-hidden="true" class="lucca-icon navSide-item-arrow"&gt;arrow_east_thin&lt;/span&gt;</code>
 									</p>
 								</td>
 								<td class="table-body-row-cell">

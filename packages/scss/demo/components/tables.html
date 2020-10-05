@@ -321,15 +321,21 @@
 &lt;/table&gt;</code>
 </section>
 
-<!-- Lines actions -->
+<!-- Sortable -->
 <section class="contentSection">
 	<h2>Sortable table</h2>
 	<table class="table">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell mod-sortable is-sorted-descending">Sortable column</th>
-				<th class="table-head-row-cell mod-sortable is-sorted-ascending">Sortable column</th>
-				<th class="table-head-row-cell mod-sortable">Sortable column</th>
+				<th class="table-head-row-cell" aria-sort="descending">
+					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+				</th>
+				<th class="table-head-row-cell" aria-sort="none">
+					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+				</th>
+				<th class="table-head-row-cell" aria-sort="none">
+					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+				</th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
@@ -346,29 +352,41 @@
 		</tbody>
 	</table>
 
-<code class="code mod-block">&lt;table class="table"&gt;
-	&lt;thead class="table-head"&gt;
-		&lt;tr class="table-head-row"&gt;
-			&lt;th class="table-head-row-cell mod-sortable is-sorted-descending"&gt;...&lt;/th&gt;
-			&lt;th class="table-head-row-cell mod-sortable is-sorted-ascending"&gt;...&lt;/th&gt;
-			&lt;th class="table-head-row-cell mod-sortable"&gt;...&lt;/th&gt;
+<code class="code mod-block">&lt;table class=&quot;table&quot;&gt;
+	&lt;thead class=&quot;table-head&quot;&gt;
+		&lt;tr class=&quot;table-head-row&quot;&gt;
+			&lt;th class=&quot;table-head-row-cell&quot; aria-sort=&quot;descending&quot;&gt;
+				&lt;button class=&quot;table-head-row-cell-sortableButton&quot;&gt;Sortable column&lt;/button&gt;
+			&lt;/th&gt;
+			&lt;th class=&quot;table-head-row-cell&quot; aria-sort=&quot;none&quot;&gt;
+				&lt;button class=&quot;table-head-row-cell-sortableButton&quot;&gt;Sortable column&lt;/button&gt;
+			&lt;/th&gt;
+			&lt;th class=&quot;table-head-row-cell&quot; aria-sort=&quot;none&quot;&gt;
+				&lt;button class=&quot;table-head-row-cell-sortableButton&quot;&gt;Sortable column&lt;/button&gt;
+			&lt;/th&gt;
 		&lt;/tr&gt;
 	&lt;/thead&gt;
-	&lt;tbody class="table-body"&gt;
-		...
+	&lt;tbody class=&quot;table-body&quot;&gt;
+		…
 	&lt;/tbody&gt;
 &lt;/table&gt;</code>
 </section>
 
-<!-- Lines actions -->
+<!-- Right align -->
 <section class="contentSection">
 	<h2>Right align table</h2>
 	<table class="table">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell mod-sortable mod-alignRight is-sorted-descending">Sortable column</th>
-				<th class="table-head-row-cell mod-sortable mod-alignRight is-sorted-ascending">Sortable column</th>
-				<th class="table-head-row-cell mod-sortable mod-alignRight mod-alignRight">Sortable column</th>
+				<th class="table-head-row-cell mod-alignRight" aria-sort="ascending">
+					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+				</th>
+				<th class="table-head-row-cell mod-alignRight" aria-sort="none">
+					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+				</th>
+				<th class="table-head-row-cell mod-alignRight" aria-sort="none">
+					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+				</th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
@@ -385,25 +403,22 @@
 		</tbody>
 	</table>
 
-<code class="code mod-block">&lt;table class="table"&gt;
-	&lt;thead class="table-head"&gt;
-		&lt;tr class="table-head-row"&gt;
-			&lt;th class="table-head-row-cell mod-sortable mod-alignRight is-sorted-descending"&gt;...&lt;/th&gt;
-			&lt;th class="table-head-row-cell mod-sortable mod-alignRight is-sorted-ascending"&gt;...&lt;/th&gt;
-			&lt;th class="table-head-row-cell mod-sortable mod-alignRight"&gt;...&lt;/th&gt;
+<code class="code mod-block">&lt;table class=&quot;table&quot;&gt;
+	&lt;thead class=&quot;table-head&quot;&gt;
+		&lt;tr class=&quot;table-head-row&quot;&gt;
+			&lt;th class=&quot;table-head-row-cell mod-alignRight&quot; aria-sort=&quot;ascending&quot;&gt;
+				&lt;button class=&quot;table-head-row-cell-sortableButton&quot;&gt;Sortable column&lt;/button&gt;
+			&lt;/th&gt;
+			&lt;th class=&quot;table-head-row-cell mod-alignRight&quot; aria-sort=&quot;none&quot;&gt;
+				&lt;button class=&quot;table-head-row-cell-sortableButton&quot;&gt;Sortable column&lt;/button&gt;
+			&lt;/th&gt;
+			&lt;th class=&quot;table-head-row-cell mod-alignRight&quot; aria-sort=&quot;none&quot;&gt;
+				&lt;button class=&quot;table-head-row-cell-sortableButton&quot;&gt;Sortable column&lt;/button&gt;
+			&lt;/th&gt;
 		&lt;/tr&gt;
 	&lt;/thead&gt;
-	&lt;tbody class="table-body"&gt;
-		&lt;tr class="table-body-row"&gt;
-			&lt;td class="table-body-row-cell mod-alignRight"&gt;...&lt;/td&gt;
-			&lt;td class="table-body-row-cell mod-alignRight"&gt;...&lt;/td&gt;
-			&lt;td class="table-body-row-cell mod-alignRight"&gt;...&lt;/td&gt;
-		&lt;/tr&gt;
-		&lt;tr class="table-body-row"&gt;
-			&lt;td class="table-body-row-cell mod-alignRight"&gt;...&lt;/td&gt;
-			&lt;td class="table-body-row-cell mod-alignRight"&gt;...&lt;/td&gt;
-			&lt;td class="table-body-row-cell mod-alignRight"&gt;...&lt;/td&gt;
-		&lt;/tr>
+	&lt;tbody class=&quot;table-body&quot;&gt;
+		…
 	&lt;/tbody&gt;
 &lt;/table&gt;</code>
 </section>
@@ -465,24 +480,24 @@
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell mod-actions">
-					<button class="actionIcon"><i class="lucca-icon">edit</i></button>
-					<button class="actionIcon"><i class="lucca-icon">trash</i></button>
+					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
 				</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell mod-actions">
-					<button class="actionIcon"><i class="lucca-icon">edit</i></button>
-					<button class="actionIcon"><i class="lucca-icon">trash</i></button>
+					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
 				</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell mod-actions">
-					<button class="actionIcon"><i class="lucca-icon">edit</i></button>
-					<button class="actionIcon"><i class="lucca-icon">trash</i></button>
+					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
 				</td>
 			</tr>
 		</tbody>
@@ -493,8 +508,8 @@
 			&lt;td class="table-body-row-cell"&gt;Table cell&lt;/td&gt;
 			&lt;td class="table-body-row-cell"&gt;Table cell&lt;/td&gt;
 			&lt;td class="table-body-row-cell mod-actions"&gt;
-				&lt;button class="actionIcon"&gt;&lt;i class="lucca-icon"&gt;edit&lt;/i&gt;&lt;/button&gt;
-				&lt;button class="actionIcon"&gt;&lt;i class="lucca-icon"&gt;trash&lt;/i&gt;&lt;/button&gt;
+				&lt;button class="actionIcon"&gt;&lt;span aria-hidden="true" class="lucca-icon"&gt;edit&lt;/span&gt;&lt;span class="u-mask"&gt;Edit&lt;/span&gt;&lt;/button&gt;
+				&lt;button class="actionIcon"&gt;&lt;span aria-hidden="true" class="lucca-icon"&gt;trash&lt;/span&gt;&lt;span class="u-mask"&gt;Delete&lt;/span&gt;&lt;/button&gt;
 			&lt;/td&gt;
 		&lt;/tr&gt;
 		...

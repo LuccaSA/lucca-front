@@ -1,0 +1,64 @@
+import { Injectable } from '@angular/core';
+import { ILuApiItem, ILuApiCollectionResponse } from '../api.model';
+import { ALuApiService } from './api-service.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+const MAGIC_PAGE_SIZE = 20;
+
+@Injectable()
+export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
+	protected _api: string;
+	set api(api: string) { this._api = api; }
+	protected _fields = 'fields=id,name';
+	set fields(fields: string) { this._fields = `fields=${fields}`; }
+	protected _filters: string[] = [];
+	set filters(filters: string[]) { this._filters = filters; }
+	protected _orderBy = 'orderBy=name,asc';
+	set orderBy(orderBy: string) { this._orderBy = `orderBy=${orderBy}`; }
+
+	get url() {
+		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter(f => !!f).join('&')}`;
+	}
+
+	constructor(protected _http: HttpClient) { super(); }
+
+	getAll(filters: string[] = []): Observable<T[]> {
+		return this._get([this.url, ...filters].join('&'));
+	}
+
+	getPaged(page: number, filters: string[] = []): Observable<T[]> {
+		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
+		const url = [this.url, paging, ...filters].join('&');
+		return this._get(url);
+	}
+
+	searchAll(clue: string, filters: string[] = []): Observable<T[]> {
+		if (!clue) {
+			return this.getAll(filters);
+		}
+		const url = [this.url, this._clueFilter(clue), ...filters].join('&');
+		return this._get(url);
+	}
+
+	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
+		if (!clue) {
+			return this.getPaged(page, filters);
+		}
+		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
+		const url = [this.url, this._clueFilter(clue), paging, ...filters].join('&');
+		return this._get(url);
+	}
+
+	protected _get(url): Observable<T[]> {
+		return this._http.get<ILuApiCollectionResponse<any>>(url)
+		.pipe(
+			map(response => response.data.items)
+		);
+	}
+	protected _clueFilter(clue) {
+		const urlSafeClue = encodeURIComponent(clue);
+		return `name=like,${urlSafeClue}`;
+	}
+}

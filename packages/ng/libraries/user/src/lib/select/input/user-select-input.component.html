@@ -13,7 +13,7 @@
 </ng-template>
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
-		<lu-user-paged-searcher></lu-user-paged-searcher>
+		<lu-user-paged-searcher [enableFormerEmployees]="enableFormerEmployees"></lu-user-paged-searcher>
 	</header>
 	<lu-user-homonyms></lu-user-homonyms>
 	<lu-option *luUserMeOption="let user" [value]="user">

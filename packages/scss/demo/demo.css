@@ -109,7 +109,7 @@
 	padding: 60px 0 100px 180px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
 	.demo-body {
 		padding-left: 0;
 	}
@@ -127,7 +127,7 @@
 	overflow: auto;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
 	.demo-nav {
 		display: none;
 	}
@@ -164,7 +164,7 @@
 	max-width: 850px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1199px) {
 	.container.mod-demo {
 		max-width: 700px;
 	}
@@ -243,6 +243,7 @@
 	background: #444;
 	display: inline-block;
 	padding: .5rem 1rem;
+	margin: 0 .5rem;
 	border-radius: 3px;
 }
 

@@ -8,7 +8,7 @@ html {
 }
 
 body {
-	background: _theme("commons.background.base");
+	background-color: _theme("commons.background.base");
 	color: _color("text.default");
 	font-family: _theme("commons.font.family");
 	font-size: _theme("sizes.standard.font-size");
@@ -85,10 +85,15 @@ p {
 	font-style: italic;
 }
 
-b {
+b, strong {
 	font-weight: 600;
 }
 
 button {
 	font-family: _theme("commons.font.family");
+}
+
+abbr[title] {
+	border: none;
+	text-decoration: none;
 }

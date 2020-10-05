@@ -2,6 +2,12 @@
 
 @include field("checkboxesfield");
 
+.checkboxesfield {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
 .checkboxesfield-input {
 	@include field-input("checkboxesfield");
 
@@ -20,6 +26,7 @@
 
 .form.mod-framed .checkboxesfield, .checkboxesfield.mod-framed {
 	@include field-framed("checkboxesfield");
+	display: block;
 
 	.checkboxesfield-input {
 		@extend %checkboxesfield-row;

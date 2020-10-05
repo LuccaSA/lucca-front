@@ -122,22 +122,26 @@ $palettes: (
 );
 
 $colors: (
-	text: (
-		dark: (
-			color: #2D354D
+	"text": (
+		"dark": (
+			"color": #2D354D
 		),
-		default: (
-			color: #4C5775
+		"default": (
+			"color": #4C5775
 		),
-		light: (
-			color: #9299B0
+		"light": (
+			"color": #9299B0
 		),
-		placeholder: (
-			color: #C7C7C7
+		"placeholder": (
+			"color": #C7C7C7
 		)
 	),
-	"white": #FFFFFF,
-	"black": #121212
+	"white": (
+		"color": #FFFFFF
+	),
+	"black": (
+		"color": #121212
+	)
 );
 $theme: _set($theme, "palettes", $palettes);
 $theme: _set($theme, "colors", $colors);

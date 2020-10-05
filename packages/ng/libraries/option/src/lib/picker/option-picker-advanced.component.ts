@@ -6,6 +6,7 @@ import {
 	forwardRef,
 	ChangeDetectorRef,
 	AfterViewInit,
+	Directive,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
@@ -28,6 +29,7 @@ import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuOptionItem } from '../item/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 
+@Directive()
 export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
 extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;
@@ -70,6 +72,16 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 		this._onOpenSubscribers.forEach(o => {
 			o.onOpen();
 		});
+		const operators = this._operators || [];
+		const lastOperator = operators[operators.length - 1];
+		if (lastOperator && lastOperator.outOptions$) {
+			this.loading$ = lastOperator.outOptions$.pipe(
+				first(),
+				mapTo(false),
+				startWith(true),
+				shareReplay(),
+			);
+		}
 		super.onOpen();
 	}
 	onClose() {
@@ -90,15 +102,6 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;
 		});
-		const lastOperator = operators[operators.length - 1];
-		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(
-				first(),
-				mapTo(false),
-				startWith(true),
-				shareReplay(),
-			);
-		}
 	}
 	protected initSelectors() {
 		this._selectors = this._selectorsQL.toArray();

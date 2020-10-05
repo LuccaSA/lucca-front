@@ -1,7 +1,7 @@
 .filters {
 	@include elevate(1);
 	align-items: center;
-	background: _component("filters.background");
+	background-color: _component("filters.background");
 	display: flex;
 	min-height: _component("filters.height");
 	position: relative;

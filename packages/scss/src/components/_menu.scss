@@ -1,6 +1,6 @@
 .menu {
 	align-items: center;
-	background: _component("menu.background");
+	background-color: _component("menu.background");
 	display: flex;
 	position: relative;
 
@@ -68,7 +68,7 @@
 .menu {
 	@mixin menuColoring($palette) {
 		&::after {
-			background: _color($palette);
+			background-color: _color($palette);
 		}
 	}
 

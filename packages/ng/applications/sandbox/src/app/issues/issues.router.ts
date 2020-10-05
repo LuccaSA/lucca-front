@@ -63,6 +63,9 @@ const routes: Routes = [
 	{ path: 'date-picker-width', loadChildren: () => import('./date-picker-width').then(m => m.DatePickerWidthModule) },
 	{ path: 'date-granularity', loadChildren: () => import('./date-granularity').then(m => m.DateGranularityModule) },
 	{ path: 'overlays-events', loadChildren: () => import('./overlays-events').then(m => m.OverlaysEventsModule) },
+	{ path: 'former-employees', loadChildren: () => import('./former-employees').then(m => m.FormerEmployeesModule) },
+	{ path: 'establishment', loadChildren: () => import('./establishment').then(m => m.EstablishmentModule) },
+	{ path: 'api-v4', loadChildren: () => import('./api-v4').then(m => m.ApiV4Module) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
