@@ -115,7 +115,7 @@ We avoid as much breaking changes as possible, but here's a few:
 
 ## 0.7.1
 ### Adding
-- `breadcrumb`
+- `breadcrumbs`
 ### Enhancements
 - `tables` sortable
 - `textfield` Supports inside radio label display
