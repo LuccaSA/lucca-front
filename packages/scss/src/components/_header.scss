@@ -1,7 +1,7 @@
 .header {
 	@include elevate(1);
 	align-items: center;
-	background: _component("header.background");
+	background-color: _component("header.background");
 	display: flex;
 	min-height: _component("header.height");
 	padding: _component("header.padding");
@@ -44,7 +44,7 @@
 	width: _component("header.height");
 
 	&:hover {
-		background: _theme("commons.background.base");
+		background-color: _theme("commons.background.base");
 		color: _color("text.default");
 	}
 
