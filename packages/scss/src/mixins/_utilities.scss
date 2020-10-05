@@ -1,11 +1,8 @@
-// Simulate border with border-collapse
-// Not my trick, but this guy's trick https://codepen.io/Hawkun/pen/rsIEp
-@mixin fakeBorder($width, $color) {
-	box-shadow: $width 0 0 0  $color,
-	0 $width 0 0  $color,
-	$width $width 0 0  $color,
-	$width 0 0 0  $color inset,
-	0 $width 0 0  $color inset;
+@function fakeborderoverlay($fakeborderoverlaycolor: currentColor, $fakeborderoverlaywidth: 1px) {
+	@return   ($fakeborderoverlaywidth * -1) 0                              $fakeborderoverlaycolor,       // left                outside
+			0 ($fakeborderoverlaywidth * -1)                                $fakeborderoverlaycolor,       // top                 outside
+			  ($fakeborderoverlaywidth * -1) ($fakeborderoverlaywidth * -1) $fakeborderoverlaycolor,       // top left     corner outside
+			  ($fakeborderoverlaywidth * -1) ($fakeborderoverlaywidth * -1) $fakeborderoverlaycolor inset; // bottom right         inside
 }
 
 @mixin mask($suffix: '!important') {
@@ -43,4 +40,16 @@
 	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 		@content;
 	}
+}
+
+@mixin buttonReset($suffix: '') {
+	cursor: pointer #{$suffix};
+	font: inherit #{$suffix};
+	color: inherit #{$suffix};
+	background-color: transparent #{$suffix};
+	display: block #{$suffix};
+	padding: 0 #{$suffix};
+	border: 0 #{$suffix};
+	width: 100% #{$suffix};
+	text-align: left #{$suffix};
 }

@@ -1,5 +1,5 @@
 .progress {
-	background: _theme("commons.background.base");
+	background-color: _theme("commons.background.base");
 	height: _component("progress.height");
 	margin: _component("progress.margin");
 	position: relative;
@@ -7,16 +7,16 @@
 }
 
 .progress-bar {
-	background: _component("progress.bar.background");
+	background-color: _component("progress.bar.background");
 	bottom: 0;
 	left: 0;
 	position: absolute;
 	top: 0;
-	transition: background _theme("commons.animations.durations.standard") ease, width _theme("commons.animations.durations.standard") ease;
+	transition: background-color _theme("commons.animations.durations.standard") ease, width _theme("commons.animations.durations.standard") ease;
 
 	&::after {
 		animation: progress _component("progress.duration") infinite;
-		background: _component("progress.bar.gradient");
+		background-color: _component("progress.bar.gradient");
 		bottom: 0;
 		content: "";
 		display: block;
@@ -49,7 +49,7 @@
 .progress {
 	&.is-success {
 		.progress-bar {
-			background: _color("success");
+			background-color: _color("success");
 			width: 100% !important;
 
 			&::after {
@@ -60,7 +60,7 @@
 
 	&.is-error {
 		.progress-bar {
-			background: _color("error");
+			background-color: _color("error");
 			width: 100% !important;
 
 			&::after {

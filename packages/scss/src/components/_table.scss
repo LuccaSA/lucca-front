@@ -32,7 +32,7 @@
 }
 
 .table-body-row {
-	background: white;
+	background-color: white;
 	display: table-row;
 }
 
@@ -89,7 +89,8 @@
 		line-height: _theme("sizes.small.line-height");
 
 		.table-head-row-cell {
-			&.mod-sortable {
+			&.mod-sortable, // legacy
+			.table-head-row-cell-sortableButton {
 				&::after {
 					margin-top: 0;
 				}
@@ -113,7 +114,7 @@
 			cursor: pointer;
 
 			&:hover {
-				background: _component("table.hover.background");
+				background-color: _component("table.hover.background");
 			}
 		}
 	}
@@ -181,7 +182,7 @@
 
 	&.mod-parent {
 		.table-body-row-cell {
-			background: _color("grey", "lightest");
+			background-color: _color("grey", "lightest");
 			color: _color("grey", "dark");
 			font-size: _theme("sizes.small.font-size");
 			font-weight: 600;
@@ -251,26 +252,28 @@
 }
 
 .table-head-row-cell {
-	&.mod-sortable {
+	&.mod-sortable, // legacy
+	.table-head-row-cell-sortableButton {
 		cursor: pointer;
-		padding-right: 2rem;
-		position: relative;
 
 		&::after {
 			@include makeIcon("arrow_full_north");
-			margin: 0 0 0 .2rem;
+			margin: 0 0 0 _theme("spacings.smallest");
 			opacity: 0;
-			position: absolute;
-			transform: translateY(.25rem);
+			transform: translateY(#{_theme("spacings.smallest")});
 			transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
 		}
 
-		&:hover {
+		&:hover, &:focus {
 			&::after {
 				transform: translateY(0);
 				opacity: .5;
 			}
 		}
+	}
+
+	.table-head-row-cell-sortableButton {
+		@include buttonReset;
 	}
 }
 
@@ -293,24 +296,25 @@
 
 .table-head-row-cell {
 	&.mod-alignRight {
-		padding-right: 1rem;
+		&.mod-sortable, // legacy
+		.table-head-row-cell-sortableButton {
+			&::after {
+				content: none;
+			}
 
-		&::after {
-			content: none;
-		}
-
-		&::before {
-			@include makeIcon("arrow_full_north");
-			margin: 0 .25rem 0 0;
-			opacity: 0;
-			transform: translateY(.25rem);
-			transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
-		}
-
-		&:hover {
 			&::before {
-				transform: translateY(0);
-				opacity: .5;
+				@include makeIcon("arrow_full_north");
+				margin: 0 _theme("spacings.smallest") 0 0;
+				opacity: 0;
+				transform: translateY(#{_theme("spacings.smallest")});
+				transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
+			}
+
+			&:hover, &:focus {
+				&::before {
+					transform: translateY(0);
+					opacity: .5;
+				}
 			}
 		}
 	}
@@ -340,6 +344,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .table-head-row-cell {
+	// legacy
 	&.is-sorted-descending, &.is-sorted-ascending {
 		color: _color("text.dark");
 
@@ -354,8 +359,37 @@
 				opacity: 1;
 			}
 		}
+	}
 
-		&.mod-alignRight {
+	&[aria-sort] {
+		padding: 0;
+
+		.table-head-row-cell-sortableButton {
+			padding: _theme("spacings.small");
+		}
+	}
+
+	&[aria-sort="descending"], &[aria-sort="ascending"] {
+		.table-head-row-cell-sortableButton {
+			color: _color("text.dark");
+
+			&::after {
+				@include makeIcon("arrow_full_north");
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			&:hover, &:focus {
+				&::after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	&.mod-alignRight {
+		// legacy
+		&.is-sorted-descending, &.is-sorted-ascending {
 			&::before {
 				@include makeIcon("arrow_full_north");
 				opacity: 1;
@@ -372,13 +406,93 @@
 				}
 			}
 		}
+
+		.table-head-row-cell-sortableButton {
+			text-align: right;
+		}
+
+		&[aria-sort="descending"], &[aria-sort="ascending"] {
+			.table-head-row-cell-sortableButton {
+				&::before {
+					@include makeIcon("arrow_full_north");
+					opacity: 1;
+					transform: translateY(0);
+				}
+
+				&::after {
+					content: none;
+				}
+
+				&:hover, &:focus {
+					&::before {
+						opacity: 1;
+					}
+				}
+			}
+		}
 	}
 
-	&.is-sorted-ascending::after, &.is-sorted-ascending.mod-alignRight::before {
-		@include makeIcon("arrow_full_north");
+	&[aria-sort="ascending"] {
+		.table-head-row-cell-sortableButton {
+			&::after {
+				@include makeIcon("arrow_full_north");
+			}
+		}
+
+		&.mod-alignRight {
+			.table-head-row-cell-sortableButton {
+				&::before {
+					@include makeIcon("arrow_full_north");
+				}
+			}
+		}
 	}
 
-	&.is-sorted-descending::after, &.is-sorted-descending.mod-alignRight::before {
-		@include makeIcon("arrow_full_south");
+	&[aria-sort="descending"] {
+		.table-head-row-cell-sortableButton {
+			&::after {
+				@include makeIcon("arrow_full_south");
+			}
+		}
+
+		&.mod-alignRight {
+			.table-head-row-cell-sortableButton {
+				&::before {
+					@include makeIcon("arrow_full_south");
+				}
+			}
+		}
+	}
+
+	// legacy
+	&.is-sorted-ascending {
+		&::after {
+			@include makeIcon("arrow_full_north");
+		}
+	}
+
+	// legacy
+	&.is-sorted-ascending {
+		.mod-alignRight {
+			&::before {
+				@include makeIcon("arrow_full_north");
+			}
+		}
+	}
+
+	// legacy
+	&.is-sorted-descending {
+		&::after {
+			@include makeIcon("arrow_full_south");
+		}
+	}
+
+	// legacy
+	&.is-sorted-descending {
+		.mod-alignRight {
+			&::before {
+				@include makeIcon("arrow_full_south");
+			}
+		}
 	}
 }

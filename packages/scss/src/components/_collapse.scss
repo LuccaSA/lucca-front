@@ -1,26 +1,25 @@
+.collapse {
+	display: block;
+}
+
 .collapse-title {
 	cursor: pointer;
-	display: inline-block;
-	margin: 0 0 .2rem;
+	display: inline-flex;
+	margin-bottom: _theme("spacings.smallest");
+	overflow: hidden;
 
+	&:focus-within,
 	&:hover {
 		color: _color("text.dark");
 	}
 
 	&::before {
 		@include makeIcon("chevron_east");
-		font-size: _theme("sizes.smaller.font-size");
-		font-weight: 400;
-		margin-right: .25rem;
-		transition: all _theme("commons.animations.durations.fast") ease;
-	}
-}
 
-.collapse-content {
-	@extend %base_animated_element;
-	display: none;
-	animation-name: fadeIn;
-	animation-fill-mode: none;
+		font-size: _theme("sizes.smaller.font-size");
+		margin-right: _theme("spacings.smallest");
+		transition: transform _theme("commons.animations.durations.fast");
+	}
 }
 
 
@@ -28,15 +27,20 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .collapse {
-	&.is-open {
+	&:not([open]) {
+		&:not(.is-open) {
+			> .collapse-content {
+				display: none;
+			}
+		}
+	}
+
+	&.is-open,
+	&[open] {
 		> .collapse-title {
 			&::before {
 				transform: rotate(90deg);
 			}
-		}
-
-		.collapse-content {
-			display: block;
 		}
 	}
 }
