@@ -25,7 +25,7 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 	}
 
 	// api v3 only
-	set fields(fields: string) { this._v3Service.fields = `fields=${fields}`; }
+	set fields(fields: string) { this._v3Service.fields = fields; }
 	set orderBy(orderBy: string) { this._v3Service.orderBy = orderBy; }
 
 
