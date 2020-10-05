@@ -14,6 +14,7 @@
 	&.mod-row {
 		@extend %radiosfield-row;
 	}
+
 	&.button-group {
 		display: flex;
 	}
@@ -21,7 +22,9 @@
 
 .form.mod-compact .radiosfield, .radiosfield.mod-compact {
 	@include field-compact("radiosfield");
+
 	align-items: flex-start;
+
 	.radiosfield-input {
 		@extend %radiosfield-row;
 	}
@@ -29,6 +32,8 @@
 
 .form.mod-framed .radiosfield, .radiosfield.mod-framed {
 	@include field-framed("radiosfield");
+
+	display: block;
 
 	.radiosfield-input {
 		@extend %radiosfield-row;
@@ -38,10 +43,12 @@
 %radiosfield-row {
 	display: flex;
 	flex-wrap: wrap;
+
 	.radio {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+
 	.radio {
 		margin-right: _component("field.horizontal-spacing");
 	}
