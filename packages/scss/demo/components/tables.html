@@ -235,36 +235,90 @@
 <!-- Clickable lines -->
 <section class="contentSection">
 	<h2>Clickable lines</h2>
-	<div class="table mod-clickable">
-		<div class="table-head">
-			<div class="table-head-row">
-				<div class="table-head-row-cell">Head cell</div>
-				<div class="table-head-row-cell">Head cell</div>
-				<div class="table-head-row-cell">Head cell</div>
-			</div>
-		</div>
-		<div class="table-body">
-			<a href="#" class="table-body-row">
-				<div class="table-body-row-cell">Body cell</div>
-				<div class="table-body-row-cell">Body cell</div>
-				<div class="table-body-row-cell">Body cell</div>
-			</a>
-			<a href="#" class="table-body-row">
-				<div class="table-body-row-cell">Body cell</div>
-				<div class="table-body-row-cell">Body cell</div>
-				<div class="table-body-row-cell">Body cell</div>
-			</a>
-			<a href="#" class="table-body-row">
-				<div class="table-body-row-cell">Body cell</div>
-				<div class="table-body-row-cell">Body cell</div>
-				<div class="table-body-row-cell">Body cell</div>
-			</a>
-		</div>
-	</div>
-<code class="code mod-block">&lt;table class="table mod-clickable"&gt;
-...
-</code>
-<em><b>Tip:</b> You can use a <code class="code">&lt;div&gt;</code> & <code class="code">&lt;a&gt;</code> structure if you want to have links on your rows.</em>
+<table class="table mod-clickable">
+	<thead class="table-head">
+		<tr class="table-head-row">
+			<td class="table-head-row-cell">Head cell</td>
+			<td class="table-head-row-cell">Head cell</td>
+			<td class="table-head-row-cell">Head cell</td>
+		</tr>
+	</thead>
+	<tbody class="table-body">
+		<tr class="table-body-row">
+			<td class="table-body-row-cell">
+				<a href="#" class="table-body-row-cell-action">
+					Body cell
+				</a>
+			</td>
+			<td class="table-body-row-cell">Body cell</td>
+			<td class="table-body-row-cell">Body cell</td>
+		</tr>
+		<tr class="table-body-row">
+			<td class="table-body-row-cell">
+				<a href="#" class="table-body-row-cell-action">
+					Body cell
+				</a>
+			</td>
+			<td class="table-body-row-cell">Body cell</td>
+			<td class="table-body-row-cell">Body cell</td>
+		</tr>
+		<tr class="table-body-row">
+			<td class="table-body-row-cell">
+				<a href="#" class="table-body-row-cell-action">
+					Body cell
+				</a>
+			</td>
+			<td class="table-body-row-cell">
+				<a href="#" class="table-body-row-cell-action">
+					Body cell
+				</a>
+			</td>
+			<td class="table-body-row-cell">Body cell</td>
+		</tr>
+	</tbody>
+</table>
+<code class="code mod-block">&lt;table class=&quot;table mod-clickable&quot;&gt;
+	&lt;thead class=&quot;table-head&quot;&gt;
+		&lt;tr class=&quot;table-head-row&quot;&gt;
+			&lt;td class=&quot;table-head-row-cell&quot;&gt;Head cell&lt;/td&gt;
+			&lt;td class=&quot;table-head-row-cell&quot;&gt;Head cell&lt;/td&gt;
+			&lt;td class=&quot;table-head-row-cell&quot;&gt;Head cell&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody class=&quot;table-body&quot;&gt;
+		&lt;tr class=&quot;table-body-row&quot;&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;table-body-row-cell-action&quot;&gt;
+					Body cell
+				&lt;/a&gt;
+			&lt;/td&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;Body cell&lt;/td&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;Body cell&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr class=&quot;table-body-row&quot;&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;table-body-row-cell-action&quot;&gt;
+					Body cell
+				&lt;/a&gt;
+			&lt;/td&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;Body cell&lt;/td&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;Body cell&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr class=&quot;table-body-row&quot;&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;table-body-row-cell-action&quot;&gt;
+					Body cell
+				&lt;/a&gt;
+			&lt;/td&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;
+				&lt;a href=&quot;#&quot; class=&quot;table-body-row-cell-action&quot;&gt;
+					Body cell
+				&lt;/a&gt;
+			&lt;/td&gt;
+			&lt;td class=&quot;table-body-row-cell&quot;&gt;Body cell&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</code>
 </section>
 
 <!-- Sortable -->
