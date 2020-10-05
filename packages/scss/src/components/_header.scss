@@ -72,7 +72,7 @@
 	.header.mod-sticky {
 		left: _theme("components.navSide.width");
 
-		@include media_smaller_than("md") {
+		@include media_smaller_than("s") {
 			top: _component("navSide.mobile.toggle-height");
 		}
 	}
@@ -82,7 +82,7 @@
 	.header.mod-sticky {
 		left: _theme("components.navSide.compact.width");
 
-		@include media_smaller_than("md") {
+		@include media_smaller_than("s") {
 			top: _component("navSide.mobile.toggle-height");
 		}
 	}

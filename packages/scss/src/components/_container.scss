@@ -1,69 +1,10 @@
 .container {
-	padding: _component("container.margin-top") .5rem 0;
+	padding: _component("container.padding");
 	position: relative;
-	margin: 0 auto _component("container.margin-bottom");
 	max-width: _component("container.max-width");
 
-	@each $bp-name, $bp-obj in $breakpoints {
-		@include media_larger_than($bp-name) {
-			width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)});
-		}
-	}
-
-	@include media_smaller_than("sm") {
-		width: 100%;
-	}
-
-	&:last-child {
-		padding-bottom: _component("container.margin-bottom");
-		margin-bottom: 0;
-	}
-}
-
-
-// MODS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.container {
-	@each $bp-name, $bp-obj in $breakpoints {
-		&.mod-#{$bp-name} {
-			max-width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)});
-		}
-	}
-
-	&.mod-withStickyHeader {
-		padding-top: _component("header.height");
-	}
-}
-
-
-// LAYOUT WITH ASIDE
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.navSide ~ .main-content, .mod-withMenu .main-content {
-	.container {
-		@each $bp-name, $bp-obj in $breakpoints {
-			@include media_larger_than($bp-name) {
-				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.width")});
-			}
-		}
-
-		@include media_smaller_than(_theme("commons.mobile", true)) {
-			width: calc(100% - #{_theme("breakpoints.md.spacing")});
-		}
-	}
-}
-
-.navSide.mod-compact ~ .main-content, .mod-withMenuCompact .main-content {
-	.container {
-		@each $bp-name, $bp-obj in $breakpoints {
-			@include media_larger_than($bp-name) {
-				width: calc(#{map-get($bp-obj, breakAt)} - #{map-get($bp-obj, spacing)} - #{_theme("components.navSide.compact.width")});
-			}
-		}
-
-		@include media_smaller_than(_theme("commons.mobile", true)) {
-			width: calc(100% - #{_theme("breakpoints.md.spacing")});
-		}
+	&.mod-center {
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
