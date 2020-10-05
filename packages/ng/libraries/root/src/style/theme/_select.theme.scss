@@ -8,15 +8,17 @@ $select: (
 		padding-vertical: _theme("spacings.smaller", true),
 		placeholder: desaturate(lighten(_color("primary", "color", true), 20%), 25%)
 	),
+	// legacy
 	framed: (
 		color: _color("text.light", "color", true),
-		see-through: transparentize(_color("text.light", "color", true), .95),
+		"color50": _color("grey", "50", true),
+		see-through: _color("grey", "50", true),
 		text: _color("text.default", "color", true),
 		placeholder: #CCCCCC,
-		side-padding: 1rem,
-		top-padding: 2.2rem,
-		bottom-padding: .7rem,
-		label-top-offset: .5rem,
+		side-padding: _theme("spacings.small"),
+		top-padding: _theme("spacings.big"),
+		bottom-padding: _theme("spacings.small"),
+		label-top-offset: _theme("spacings.smaller"),
 	)
 );
 $theme: _set($theme, 'components.select', $select);

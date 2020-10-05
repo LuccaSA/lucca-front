@@ -17,7 +17,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .label {
 	@mixin labelColoring($palette) {
-		background: _color($palette, "see-through");
+		background-color: _color($palette, "see-through");
 		color: _color($palette, "dark");
 	}
 

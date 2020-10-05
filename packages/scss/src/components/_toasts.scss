@@ -13,7 +13,7 @@
 
 .toasts-item {
 	animation: toast _theme("commons.animations.durations.standard") 1;
-	background: _component("toasts.background");
+	background-color: _component("toasts.background");
 	border-radius: _theme("commons.border.radius");
 	color: _component("toasts.color");
 	margin-bottom: _component("toasts.margin-bottom");
@@ -25,7 +25,7 @@
 }
 
 .toasts-item-kill {
-	background: transparent;
+	background-color: transparent;
 	border: 0;
 	bottom: 0;
 	color: white;

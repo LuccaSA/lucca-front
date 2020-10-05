@@ -1,7 +1,7 @@
 @mixin fieldState($fieldname, $state) {
 	background-color: _color($state, "50");
 
-	~ .#{$fieldname}-label {
+	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
 		color: _color($state);
 	}
 
@@ -55,36 +55,100 @@
 	@include fieldMaterialState($fieldname, "error");
 }
 
-@mixin fieldFramedState($fieldname, $state) {
-	background-color: _color($state, "50");
+@mixin fieldFramedState($state) {
+	@if ($state == "error") {
+		z-index: 3;
+		box-shadow: fakeborderoverlay(_color(#{$state}));
+		background-color: _color(#{$state}, "50");
+		
+		&:focus-within,
+		&:hover {
+			z-index: 4;
+		}
+	}
+
+	&.mod-search, &.mod-autocomplete, &.mod-select {
+		&::after {
+			color: _color(#{$state});
+		}
+	}
+
+	.radiosfield-label, .checkboxesfield-label, .textfield-label {
+		color: _color(#{$state});
+	}
+
+	.textfield-input {
+		&:hover {
+			background-color: _color(#{$state}, "50") !important;
+		}
+
+		&:focus {
+			background-color: white !important;
+			box-shadow: fakeborderoverlay(_color(#{$state})), 0 0 0 4px _color(#{$state}, "50") !important;
+		}
+
+		&::placeholder {
+			color:  _color(#{$state}, "300");
+		}
+
+		@if ($state == "error") {
+			background-color: _color(#{$state}, "50") !important;
+			box-shadow: fakeborderoverlay(_color(#{$state})) !important;
+
+			&:hover {
+				background-color: _color(#{$state}, "100") !important;
+			}
+
+			&:focus {
+				box-shadow: fakeborderoverlay(_color(#{$state})), 0 0 0 4px _color(#{$state}, "50") !important;
+				background-color: white !important;
+			}
+		}
+	}
+
+	&:hover {
+		background-color: _color(#{$state}, "50");
+
+		.textfield-messages, .radiosfield-messages, .checkboxesfield-messages {
+			transform: translateY(100%);
+		}
+	}
+
+	&:focus-within {
+		background-color: white;
+		box-shadow: fakeborderoverlay(_color(#{$state})), 0 0 0 4px _color(#{$state}, "50");
+
+		.textfield-messages, .radiosfield-messages, .checkboxesfield-messages {
+			transform: translateY(100%);
+		}
+	}
+}
+
+// legacy
+@mixin fieldFramedError($fieldname) {
+	background-color: _color("error", "50");
 
 	&::placeholder {
-		color: _color($state, "400");
+		color: _color("error", "400");
 	}
 
 	&:focus {
 		&::placeholder {
-			color: _color($state, "300");
+			color: _color("error", "300");
 		}
 	}
 
 	&:focus, &:hover {
-		@include fakeBorder(1px, _color($state));
-		background-color: _color($state, "50");
+		box-shadow: fakeborderoverlay(_color("error"));
+		background-color: _color("error", "50");
 	}
 
 	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
-		color: _color($state) !important;
+		color: _color("error") !important;
 	}
 
-	@if ($state == "error") {
-		@include fakeBorder(1px, _color($state));
-		z-index: 1;
-	}
-}
-
-@mixin fieldFramedError ($fieldname) {
-	@include fieldFramedState($fieldname, "error");
+	box-shadow: fakeborderoverlay(_color("error"));
+	z-index: 1;
 }
 
 @mixin fieldMaterialFilled($fieldname) {
