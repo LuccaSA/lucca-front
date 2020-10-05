@@ -1,160 +1,85 @@
 @mixin field-framed($fieldname) {
-	width: 100%;
-	flex-direction: row;
-
-	.#{$fieldname}-input {
-		@include fakeBorder(1px, _theme("commons.divider.color"));
-		background: transparent;
-		border-radius: 0;
-		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
-
-		&:focus {
-			z-index: 1;
-			@include fakeBorder(1px, _component("field.framed.color"));
-
-			~ .#{$fieldname}-messages {
-				transform: translateY(100%);
-			}
-
-			&::placeholder {
-				opacity: 1;
-			}
-		}
-
-		&:hover {
-			@include fakeBorder(1px, _component("field.framed.color"));
-			background: _component("field.framed.see-through");
-			z-index: 1;
-
-			~ .#{$fieldname}-messages {
-				transform: translateY(100%);
-			}
-		}
-	}
-
-	.#{$fieldname}-label {
-		color: _color("text.light");
-		font-size: _theme("sizes.small.font-size");
-		font-weight: 400;
-		left: _component("field.framed.side-padding");
-		pointer-events: none;
-		position: absolute;
-		right: _component("field.framed.side-padding");
-		top: _component("field.framed.label-top-offset");
-		z-index: 1;
-	}
-
 	.#{$fieldname}-messages {
-		bottom: 0;
-		left: 0;
-		pointer-events: none;
 		position: absolute;
-		right: -1px;
+		bottom: 0;
+		left: -1px;
+		right: 0;
 		text-align: center;
 		transform: translateY(0);
 		transition: transform _theme("commons.animations.durations.standard");
-		z-index: 2;
+		z-index: 4;
+
+		> * {
+			display: block;
+		}
 	}
 
 	.#{$fieldname}-messages-error {
 		background-color: _color("error");
 		color: _theme("palettes.error.text");
-		font-size: _component("field.message.font-size");
-		margin: 0;
 	}
 
 	.#{$fieldname}-messages-warning {
 		background-color: _color("warning");
 		color: _theme("palettes.warning.text");
-		font-size: _component("field.message.font-size");
-		margin: 0;
+	}
+
+	.#{$fieldname}-messages-valid, .#{$fieldname}-messages-success {
+		background-color: _color("success");
+		color: _theme("palettes.success.text");
 	}
 
 	.#{$fieldname}-messages-helper {
 		background-color: _color("text.light");
 		color: white;
-		font-size: _component("field.message.font-size");
-		margin: 0;
-	}
-
-
-	// STATUS
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-	// Inline validation
-
-	&.is-loading {
-		&::before, &::after {
-			bottom: inherit !important;
-			right: .7rem !important;
-			top: .7rem !important;
-		}
-	}
-
-	&.is-valid {
-		&::before {
-			bottom: inherit !important;
-			margin: auto !important;
-			right: .7rem !important;
-			top: .5rem !important;
-		}
-	}
-
-	&.is-invalid {
-		z-index: 2;
-
-		&::before {
-			bottom: inherit !important;
-			margin: auto !important;
-			right: .7rem !important;
-			top: .5rem !important;
-		}
-
-		.#{$fieldname}-input {
-			@include fieldFramedState($fieldname, "error");
-			@include fakeBorder(1px, _color("error"));
-
-			&:hover, &:active, &:focus {
-				@include fieldFramedState($fieldname, "error");
-			}
-		}
 	}
 
 	.#{$fieldname}-input {
-		&[disabled], &[readonly], &.is-disabled, &.is-readonly {
-			background-color: _theme("commons.disabled.background");
-			color: _theme("commons.disabled.color");
-			background-image: none;
-			opacity: .6;
+		&:not(:disabled) {
+			&:focus, &:hover {
+				position: relative;
+				z-index: 1;
 
-			& + .#{$fieldname}-label {
-				opacity: .5;
+				~ .#{$fieldname}-messages {
+					transform: translateY(100%);
+				}
+			}
+
+			&:focus {
+				z-index: 4;
 			}
 		}
+	}
+
+	.#{$fieldname}-suffix {
+		z-index: 10;
+		top: auto;
+		right: 0;
+		bottom: 0;
+		padding: _component("field.framed.side-padding");
 
 		&.is-error {
-			@include fieldFramedState($fieldname, "error");
+			@include fieldFramedState("error");
 		}
 
 		&.is-warning {
-			@include fieldFramedState($fieldname, "warning");
+			@include fieldFramedState("warning");
 		}
 
-		&.is-success {
-			@include fieldFramedState($fieldname, "success");
+		&.is-valid, &.is-success {
+			@include fieldFramedState("success");
+		}
+
+		~ .textfield-input {
+			padding-right: _component("field.framed.suffix.padding-right");
 		}
 	}
 
-	// Needed when not next to input-field (formly)
-	&.is-error {
-		.#{$fieldname}-label {
-			color: _color("error") !important;
-		}
-	}
-	// Needed when not next to input-field (formly)
-	&.is-focused, &:hover {
-		.#{$fieldname}-messages {
-			transform: translateY(100%);
+	&.is-loading {
+		&::before, &::after {
+			bottom: auto !important;
+			right: _component("field.framed.side-padding") !important;
+			top: _component("field.framed.side-padding") !important;
 		}
 	}
 }
