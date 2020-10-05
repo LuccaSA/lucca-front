@@ -1,17 +1,20 @@
 import { ConfigOption } from '@ngx-formly/core';
 // inputs
-import { LuFormlyFieldInput,
+import {
+	LuFormlyFieldInput,
 	LuFormlyFieldDate,
 	LuFormlyFieldTextarea,
 	LuFormlyFieldSelect,
 	LuFormlyFieldUser,
 	LuFormlyFieldApi,
 	LuFormlyFieldDepartment,
+	LuFormlyFieldEstablishment,
 	LuFormlyFieldCheckboxes,
 	LuFormlyFieldRadios,
 } from './types/index';
 // wrappers
-import { LuFormlyWrapperHelper, TemplateHelper,
+import {
+	LuFormlyWrapperHelper, TemplateHelper,
 	LuFormlyWrapperTitle, TemplateTitle,
 	// LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
@@ -92,6 +95,11 @@ export const LU_FORMLY_CONFIG = {
 			component: LuFormlyFieldDepartment,
 			wrappers: ['textfield-layout'],
 		},
+		{
+			name: 'establishment',
+			component: LuFormlyFieldEstablishment,
+			wrappers: ['textfield-layout']
+		}
 	],
 	wrappers: [
 		{ name: 'title', component: LuFormlyWrapperTitle },

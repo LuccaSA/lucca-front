@@ -1,0 +1,9 @@
+<lu-establishment-select class="textfield-input"
+	[formControl]="formControl"
+	[formlyAttributes]="field"
+	[multiple]="to.multiple"
+	(focus)="focus()"
+	(blur)="blur()"
+	[placeholder]="to.placeholder">
+</lu-establishment-select>
+<label [attr.for]="id" class="textfield-label">{{ to.label }}</label>
