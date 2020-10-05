@@ -54,8 +54,8 @@ $field: (
 		bottom-padding: _theme("spacings.small"),
 		label-top-offset: _theme("spacings.smaller"),
 		textarea: (
-			height: _theme("spacings.biggest") + _theme("spacings.standard") * 3,
-			min-height: _theme("spacings.biggest") + _theme("spacings.standard") * 1,
+			height: _theme("spacings.biggest", true) + _theme("spacings.standard", true) * 3,
+			min-height: _theme("spacings.biggest", true) + _theme("spacings.standard", true),
 			max-height: 80vh, // magic number
 		),
 		title: (
