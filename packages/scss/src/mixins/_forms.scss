@@ -126,31 +126,29 @@
 
 // legacy
 @mixin fieldFramedError($fieldname) {
-	background-color: _color($state, "50");
+	background-color: _color("error", "50");
 
 	&::placeholder {
-		color: _color($state, "400");
+		color: _color("error", "400");
 	}
 
 	&:focus {
 		&::placeholder {
-			color: _color($state, "300");
+			color: _color("error", "300");
 		}
 	}
 
 	&:focus, &:hover {
-		box-shadow: fakeborderoverlay(_color($state));
-		background-color: _color($state, "50");
+		box-shadow: fakeborderoverlay(_color("error"));
+		background-color: _color("error", "50");
 	}
 
 	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
-		color: _color($state) !important;
+		color: _color("error") !important;
 	}
 
-	@if ($state == "error") {
-		box-shadow: fakeborderoverlay(_color($state));
-		z-index: 1;
-	}
+	box-shadow: fakeborderoverlay(_color("error"));
+	z-index: 1;
 }
 
 @mixin fieldMaterialFilled($fieldname) {
