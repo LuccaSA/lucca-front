@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy, Input } from '@angular/core';
 import {
 	ALuOnOpenSubscriber,
 	ALuOnScrollBottomSubscriber,
@@ -9,8 +9,8 @@ import {
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
-import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map, tap } from 'rxjs/operators';
-import { ALuEstablishmentService, LuEstablishmentService, ILuEstablishmentService } from '../../service/index';
+import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map } from 'rxjs/operators';
+import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 import { Subject, Observable, Subscription, combineLatest, of, merge } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 
@@ -49,8 +49,9 @@ import { ILuEstablishment } from '../../establishment.model';
 export class LuEstablishmentSearcherComponent
 	implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment>
 {
+	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 
-	private _service: ILuEstablishmentService;
+	private _service: LuEstablishmentService;
 	private _subs = new Subscription();
 
 	@HostBinding('class.position-fixed') fixed = true;
@@ -70,7 +71,7 @@ export class LuEstablishmentSearcherComponent
 		@Inject(ALuEstablishmentService) @Self() selfService: LuEstablishmentService,
 
 	) {
-		this._service = hostService || selfService;
+		this._service = (hostService || selfService) as LuEstablishmentService;
 	}
 
 	ngOnInit() {

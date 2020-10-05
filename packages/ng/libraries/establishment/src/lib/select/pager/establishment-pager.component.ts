@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional, SkipSelf, Self, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional, SkipSelf, Self, OnInit, Input } from '@angular/core';
 import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator, ALuOptionOperator } from '@lucca-front/ng/option';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
@@ -35,6 +35,9 @@ import { ILuEstablishment } from '../../establishment.model';
 export class LuEstablishmentPagerComponent
 extends ALuApiOptionPager<ILuEstablishment, LuEstablishmentService>
 implements ILuOptionOperator<ILuEstablishment>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenSubscriber {
+
+	@Input() set filters(filters: string[]) { this._service.filters = filters; }
+
 	constructor(
 		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostService: LuEstablishmentService,
 		@Inject(ALuEstablishmentService) @Self() selfService: LuEstablishmentService,
