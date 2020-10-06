@@ -1,6 +1,6 @@
 <section class="contentSection">
 	<h1>Framed form</h1>
-<!--
+
 	<p>
 		Form can have a mod called <code class="code">mod-framed</code>.
 		In this mod <code class="code">form-group</code> behave differently and you have access to news
@@ -11,9 +11,8 @@
 		 your inputs to size them on a single line. Widths will be evenly distributed according to the number of elements.
 	</p>
 	<p>
-		You can also modify this distribution by adding classes such as <code class="code">.mod-half</code> or <code class="code">.mod-twoThird</code> on cols for example.
+		You can also modify this distribution by adding classes such as <code class="code">.mod-xl4</code> or <code class="code">.mod-xs6</code> on cols for example.
 	</p>
--->
 
 	<!-- fieldset legend -->
 	<form action="#" class="form mod-framed">
@@ -307,6 +306,180 @@
 							<span class="checkbox-label">Checkbox mod-inline</span>
 						</label>
 					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- mod-framed inline -->
+	<form action="#" class="form">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Framed inline</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-framed">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-search mod-framed">
+						<input class="textfield-input" type="search">
+						<span class="textfield-label">Search</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-framed">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-select-inline" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-inline', 'is-open')">
+						<label class="textfield mod-framed">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-inline', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-inline', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline mod-framed">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-selection">
+					<div class="radiosfield mod-framed">
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-selection">
+					<div class="radiosfield mod-framed" role="group" aria-labelledby="group1">
+						<div id="group1" class="radiosfield-label">Fieldset legend</div>
+						<label class="radio">
+							<input type="radio" name="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group-line-col mod-selection">
+					<div class="radiosfield mod-framed">
+						<div class="radiosfield-label"></div>
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-selection">
+					<div class="radiosfield mod-framed" role="group" aria-labelledby="group2">
+						<div id="group2" class="radiosfield-label">Fieldset legend</div>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-selection">
+					<div class="checkboxesfield mod-framed">
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-selection">
+					<div class="radiosfield mod-framed" role="group" aria-labelledby="group3">
+						<div id="group3" class="radiosfield-label">Fieldset legend</div>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group-line-col mod-selection">
+					<div class="checkboxesfield mod-framed">
+						<div class="checkboxesfield-label"></div>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-selection">
+					<div class="radiosfield mod-framed" role="group" aria-labelledby="group4">
+						<div id="group4" class="radiosfield-label">Fieldset legend</div>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</div>
 				</div>
 			</div>
 		</fieldset>
