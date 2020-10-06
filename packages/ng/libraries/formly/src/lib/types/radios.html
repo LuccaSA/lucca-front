@@ -1,4 +1,4 @@
-<legend class="radiosfield-label">{{to.label}}</legend>
+<span class="radiosfield-label">{{to.label}}</span>
 <div class="radiosfield-input">
 	<label *ngFor="let option of _options, let i = index" class="radio">
 		<input class="radio-input" type="radio" [name]="to.name" [value]="option.value" [id]="id + '_'+ i" [formControl]="formControl" [formlyAttributes]="field">
