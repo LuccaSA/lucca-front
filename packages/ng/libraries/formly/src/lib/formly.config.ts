@@ -9,44 +9,21 @@ import {
 	LuFormlyFieldApi,
 	LuFormlyFieldDepartment,
 	LuFormlyFieldEstablishment,
-	LuFormlyFieldCheckboxes,
+	LuFormlyFieldCheckbox,
 	LuFormlyFieldRadios,
 } from './types/index';
 // wrappers
 import {
 	LuFormlyWrapperHelper, TemplateHelper,
-	// LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
 	LuFormlyWrapperSuffix, TemplateSuffix,
 	LuFormlyWrapperIcon, TemplateIcon,
 	LuFormlyWrapperError,
 	TemplateError,
 	// LuFormlyErrorMessage,
-	LuFormlyWrapperRadiosfieldLayout
+	LuFormlyWrapperRadiosfieldLayout,
+	LuFormlyWrapperCheckboxLayout,
 } from './wrappers/index';
-
-// export const LU_FORMLY_COMPONENTS = [
-// 	LuFormlyErrorMessage,
-
-// 	LuFormlyFieldInput,
-// 	LuFormlyFieldDate,
-// 	LuFormlyFieldTextarea,
-// 	LuFormlyFieldSelect,
-// 	LuFormlyFieldUser,
-// 	LuFormlyFieldApi,
-// 	LuFormlyFieldDepartment,
-// 	LuFormlyFieldRadios,
-// 	LuFormlyFieldCheckboxes,
-
-// 	LuFormlyWrapperHelper,
-// 	LuFormlyWrapperLabel,
-// 	LuFormlyWrapperTextfieldLayout,
-// 	LuFormlyWrapperRadiosfieldLayout,
-// 	LuFormlyWrapperSuffix,
-// 	LuFormlyWrapperIcon,
-// 	LuFormlyWrapperError,
-// 	LuFormlyWrapperTitle,
-// ];
 
 export const LU_FORMLY_CONFIG = {
 	types: [
@@ -62,7 +39,8 @@ export const LU_FORMLY_CONFIG = {
 		},
 		{
 			name: 'checkbox',
-			component: LuFormlyFieldCheckboxes,
+			component: LuFormlyFieldCheckbox,
+			wrappers: ['checkbox-layout'],
 		},
 		{
 			name: 'date',
@@ -102,6 +80,7 @@ export const LU_FORMLY_CONFIG = {
 	],
 	wrappers: [
 		{ name: 'helper', component: LuFormlyWrapperHelper },
+		{ name: 'checkbox-layout', component: LuFormlyWrapperCheckboxLayout },
 		{ name: 'radiosfield-layout', component: LuFormlyWrapperRadiosfieldLayout },
 		{ name: 'textfield-layout', component: LuFormlyWrapperTextfieldLayout },
 		{ name: 'suffix', component: LuFormlyWrapperSuffix },

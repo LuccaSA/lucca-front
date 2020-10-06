@@ -1,4 +1,4 @@
-<div class="checkbox mod-field" [ngClass]="to.mod">
+<label class="checkbox" [ngClass]="to.mod">
 	<input class="checkbox-input" type="checkbox" [name]="to.name" [id]="id" [formControl]="formControl" [formlyAttributes]="field">
-	<label class="checkbox-label" [for]="id">{{to.label}}</label>
-</div>
+	<span class="checkbox-label">{{to.label}}</span>
+</label>
