@@ -15,7 +15,6 @@ import {
 // wrappers
 import {
 	LuFormlyWrapperHelper, TemplateHelper,
-	LuFormlyWrapperTitle, TemplateTitle,
 	// LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
 	LuFormlyWrapperSuffix, TemplateSuffix,
@@ -102,7 +101,6 @@ export const LU_FORMLY_CONFIG = {
 		}
 	],
 	wrappers: [
-		{ name: 'title', component: LuFormlyWrapperTitle },
 		{ name: 'helper', component: LuFormlyWrapperHelper },
 		{ name: 'radiosfield-layout', component: LuFormlyWrapperRadiosfieldLayout },
 		{ name: 'textfield-layout', component: LuFormlyWrapperTextfieldLayout },
@@ -111,7 +109,6 @@ export const LU_FORMLY_CONFIG = {
 		{ name: 'error', component: LuFormlyWrapperError },
 	],
 	manipulators: [
-		{ class: TemplateTitle, method: 'run' }, // for form group only
 
 		{ class: TemplateError, method: 'run' }, // fifth
 		{ class: TemplateHelper, method: 'run' }, // fourth
