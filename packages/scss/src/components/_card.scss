@@ -5,7 +5,7 @@
 	display: block;
 	margin-bottom: 1rem;
 	position: relative;
-	transition: background _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, box-shadow _theme("commons.animations.durations.fast") ease;
+	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, box-shadow _theme("commons.animations.durations.fast") ease;
 }
 
 .card-content {

@@ -25,10 +25,9 @@
 	border: 0;
 	border-radius: _component("commons.border.radius");
 	color: _component("actionIcon.color");
-	margin-left: .1rem;
-	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, opacity _theme("commons.animations.durations.fast") ease;
 	height: _theme("spacings.big");
 	width: _theme("spacings.big");
+	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, opacity _theme("commons.animations.durations.fast") ease;
 	vertical-align: middle;
 	text-decoration: none;
 	display: inline-flex;
@@ -90,9 +89,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .actionIcon {
-	&[disabled],
-	&.is-disabled,
-	&.is-loading {
+	&[disabled], &.is-disabled, &.is-loading {
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		cursor: default;

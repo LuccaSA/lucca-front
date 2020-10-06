@@ -1,5 +1,6 @@
 export * from './api';
-export * from './checkboxes';
+export * from './establishment';
+export * from './checkbox';
 export * from './date';
 export * from './department';
 export * from './input';

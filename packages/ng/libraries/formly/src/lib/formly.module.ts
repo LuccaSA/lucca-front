@@ -10,6 +10,7 @@ import { LuUserModule } from '@lucca-front/ng/user';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuApiModule } from '@lucca-front/ng/api';
 import { LuDepartmentModule } from '@lucca-front/ng/department';
+import { LuEstablishmentModule } from '@lucca-front/ng/establishment';
 
 import {
 	LuFormlyFieldInput,
@@ -19,19 +20,19 @@ import {
 	LuFormlyFieldUser,
 	LuFormlyFieldApi,
 	LuFormlyFieldDepartment,
-	LuFormlyFieldCheckboxes,
+	LuFormlyFieldCheckbox,
 	LuFormlyFieldRadios,
+	LuFormlyFieldEstablishment,
 } from './types/index';
 import {
 	LuFormlyWrapperHelper,
-	LuFormlyWrapperTitle,
-	LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
 	LuFormlyWrapperSuffix,
 	LuFormlyWrapperIcon,
 	LuFormlyWrapperError,
 	LuFormlyErrorMessage,
-	LuFormlyWrapperRadiosfieldLayout
+	LuFormlyWrapperRadiosfieldLayout,
+	LuFormlyWrapperCheckboxLayout,
 } from './wrappers/index';
 
 @NgModule({
@@ -45,17 +46,17 @@ import {
 		LuFormlyFieldUser,
 		LuFormlyFieldApi,
 		LuFormlyFieldDepartment,
+		LuFormlyFieldEstablishment,
 		LuFormlyFieldRadios,
-		LuFormlyFieldCheckboxes,
+		LuFormlyFieldCheckbox,
 
 		LuFormlyWrapperHelper,
-		LuFormlyWrapperLabel,
+		LuFormlyWrapperCheckboxLayout,
 		LuFormlyWrapperTextfieldLayout,
 		LuFormlyWrapperRadiosfieldLayout,
 		LuFormlyWrapperSuffix,
 		LuFormlyWrapperIcon,
 		LuFormlyWrapperError,
-		LuFormlyWrapperTitle,
 	],
 	imports: [
 		CommonModule,
@@ -68,9 +69,10 @@ import {
 		LuInputModule,
 		LuApiModule,
 		LuDepartmentModule,
+		LuEstablishmentModule,
 		LuDateModule,
 
 		FormlyModule.forChild(LU_FORMLY_CONFIG),
 	],
 })
-export class LuFormlyModule {}
+export class LuFormlyModule { }

@@ -1,13 +1,13 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
-	selector: 'lu-formly-field-checkboxes',
+	selector: 'lu-formly-field-checkbox',
 	styleUrls: ['formly-field.common.scss'],
-	templateUrl: './checkboxes.html',
+	templateUrl: './checkbox.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuFormlyFieldCheckboxes extends FieldType {
+export class LuFormlyFieldCheckbox extends FieldType {
 	focus() {
 		this.to._isFocused = true;
 	}

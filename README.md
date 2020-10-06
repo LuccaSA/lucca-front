@@ -152,10 +152,6 @@ You can set up custom breakpoints values in breakpoints.override.scss
 
 ```
 $breakpoints: (
-	"xs": (
-		"breakAt": 0,
-		"spacing": 0,
-	),
 	"sm": (
 		"breakAt": 576px,
 		"spacing": 20px,

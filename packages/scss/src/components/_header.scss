@@ -46,7 +46,7 @@
 
 	&:focus,
 	&:hover {
-		background: _theme("commons.background.base");
+		background-color: _theme("commons.background.base");
 		color: _color("text.default");
 	}
 

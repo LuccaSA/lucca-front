@@ -19,9 +19,13 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 		this._v3Service.api = api;
 		this._v4Service.api = api;
 	}
+	set filters(filters: string[]) {
+		this._v3Service.filters = filters;
+		this._v4Service.filters = filters;
+	}
+
 	// api v3 only
-	set fields(fields: string) { this._v3Service.fields = `fields=${fields}`; }
-	set filters(filters: string[]) { this._v3Service.filters = filters; }
+	set fields(fields: string) { this._v3Service.fields = fields; }
 	set orderBy(orderBy: string) { this._v3Service.orderBy = orderBy; }
 
 
