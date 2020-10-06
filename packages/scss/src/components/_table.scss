@@ -123,7 +123,7 @@
 
 		.table-body-row {
 			cursor: pointer;
-			
+
 			&:hover,
 			&:focus-within {
 				.table-body-row-cell {
@@ -267,12 +267,14 @@
 		.table-head-row-cell {
 			vertical-align: top;
 		}
-		.table-head-row-cell-wrapper{
+
+		.table-head-row-cell-wrapper {
 			display: inline-block;
 			vertical-align: top;
 			max-width: calc(100% - #{_theme("spacings.big")});
 		}
-		.table-head-row-cell-secondLine{
+
+		.table-head-row-cell-secondLine {
 			display: block;
 			font-weight: 400;
 		}
@@ -299,8 +301,8 @@
 			}
 		}
 	}
-  
-  .table-head-row-cell-sortableButton {
+
+	.table-head-row-cell-sortableButton {
 		@include buttonReset;
 	}
 }
