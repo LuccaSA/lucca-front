@@ -6,3 +6,8 @@ formly-field {
 	flex-direction: inherit;
 	width: 100%;
 }
+formly-form .checkboxesfield:not(fieldset),
+formly-form .radiosfield:not(fieldset) {
+	margin-top: 0 !important;
+	padding: _component("field.framed.side-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding") !important;
+}
