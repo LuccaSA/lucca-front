@@ -293,3 +293,9 @@
 	margin: 0 2.5rem;
 	flex: 0 0 auto;
 }
+
+formly-form .checkboxesfield:not(fieldset),
+formly-form .radiosfield:not(fieldset) {
+	margin-top: 0 !important;
+	padding: 1rem !important;
+}

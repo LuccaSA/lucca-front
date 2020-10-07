@@ -445,6 +445,156 @@
 		</fieldset>
 	</form>
 
+	<!-- formly -->
+	<formly-form action="#" class="form mod-framed mod-formly">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Formly</legend>
+			<div>
+				<label class="textfield">
+					<input class="textfield-input" type="text">
+					<span class="textfield-label">Text</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield mod-search">
+					<input class="textfield-input" type="search">
+					<span class="textfield-label">Search</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield">
+					<input class="textfield-input" type="password">
+					<span class="textfield-label">Password</span>
+				</label>
+			</div>
+			<div id="framed-autocomplete-select-formly" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-formly', 'is-open')">
+				<label class="textfield">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-formly', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-formly', 'is-open')">
+					<span class="textfield-label">Autocomplete</span>
+				</label>
+				<ul class="textfield-options">
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+				</ul>
+			</div>
+			<div>
+				<label class="textfield mod-multiline">
+					<textarea class="textfield-input"></textarea>
+					<span class="textfield-label">Textarea</span>
+				</label>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="radiosfield">
+					<label class="radio">
+						<input type="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="radio">
+						<input type="radio" name="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+					<label class="radio">
+						<input type="radio" name="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+					<label class="radio">
+						<input type="radio" name="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+				</fieldset>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="radiosfield">
+					<div class="radiosfield-label"></div>
+					<label class="radio">
+						<input type="radio" class="radio-input">
+						<span class="radio-label">Radio with empty radiosfield-label before</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="radio mod-inline">
+						<input type="radio" name="radioInline" class="radio-input">
+						<span class="radio-label">Radio mod-inline</span>
+					</label>
+					<label class="radio mod-inline">
+						<input type="radio" name="radioInline" class="radio-input">
+						<span class="radio-label">Radio mod-inline</span>
+					</label>
+					<label class="radio mod-inline">
+						<input type="radio" name="radioInline" class="radio-input">
+						<span class="radio-label">Radio mod-inline</span>
+					</label>
+				</fieldset>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="checkboxesfield">
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+				</fieldset>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="checkboxesfield">
+					<div class="checkboxesfield-label"></div>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="checkbox mod-inline">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox mod-inline</span>
+					</label>
+					<label class="checkbox mod-inline">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox mod-inline</span>
+					</label>
+					<label class="checkbox mod-inline">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox mod-inline</span>
+					</label>
+				</fieldset>
+			</div>
+		</fieldset>
+	</formly-form>
+
 	<!-- is-loading -->
 	<form action="#" class="form mod-framed">
 		<fieldset class="form-group">
