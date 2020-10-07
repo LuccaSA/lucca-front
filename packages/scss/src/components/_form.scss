@@ -127,6 +127,16 @@
 	padding: 0;
 	box-shadow: fakeborderoverlay(_component("field.framed.border"));
 	transition: background-color _theme("commons.animations.durations.standard");
+	
+	&::before,
+	&::after {
+    	content: " ";
+    	display: table;
+	}
+
+	&::after {
+    	clear: both;
+	}
 
 	&:hover {
 		background-color: _component("field.framed.color50");
@@ -176,11 +186,13 @@
 	}
 }
 
-.mod-framed.checkboxesfield,
-.mod-framed.radiosfield {
+.checkboxesfield.mod-framed,
+.radiosfield.mod-framed {
 	margin-top: 0;
 	padding: _component("field.framed.side-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 }
+
+
 
 .form-group-label {
 	&.is-required {
