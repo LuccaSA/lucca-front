@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
 })
 export class DateSelectComponent {
 	date;
+	hideClearer = false;
 }
