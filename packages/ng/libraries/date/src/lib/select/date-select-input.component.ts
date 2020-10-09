@@ -45,6 +45,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 	@Input() max?: D;
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input() hideClearer: boolean = false;
 	overlapInput = true;
 	get format(): string {
 		switch (this.granularity) {

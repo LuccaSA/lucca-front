@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 export class EstablishmentComponent {
 	collection = [];
 	item;
+	filters = ['limit=2'];
 	trackBy(idx, item): string {
 		return item.code;
 	}

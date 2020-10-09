@@ -1,5 +1,5 @@
 .box {
-	background: white;
+	background-color: white;
 	border-radius: _component("box.border.radius");
 	display: block;
 	margin: _component("box.margin");
@@ -17,7 +17,7 @@
 
 .box {
 	&.mod-grey {
-		background: _component("box.background");
+		background-color: _component("box.background");
 	}
 
 	&.mod-toggle {

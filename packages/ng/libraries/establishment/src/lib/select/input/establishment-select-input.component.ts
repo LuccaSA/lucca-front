@@ -7,7 +7,7 @@ import {
 	ElementRef,
 	Renderer2,
 	Inject,
-	AfterViewInit
+	AfterViewInit, Input
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
@@ -36,6 +36,7 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 extends ALuSelectInputComponent<D, P>
 implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
+	@Input() filters: string[];
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,

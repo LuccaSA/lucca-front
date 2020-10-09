@@ -109,7 +109,7 @@
 	padding: 60px 0 100px 180px;
 }
 
-@media screen and (max-width: 991px) {
+@media not all and (min-width: 990px) {
 	.demo-body {
 		padding-left: 0;
 	}
@@ -127,7 +127,7 @@
 	overflow: auto;
 }
 
-@media screen and (max-width: 991px) {
+@media not all and (min-width: 990px) {
 	.demo-nav {
 		display: none;
 	}
@@ -164,7 +164,7 @@
 	max-width: 850px;
 }
 
-@media screen and (max-width: 1199px) {
+@media not all and (min-width: 1200px) {
 	.container.mod-demo {
 		max-width: 700px;
 	}
@@ -276,4 +276,26 @@
 	width: 32px;
 	border-radius: 50%;
 	background-image: url(https://i.pravatar.cc/32);
+}
+
+#utilities-elevation ul {
+	display: flex;
+	padding: 1rem;
+	list-style: none;
+	margin: 0 -2.5rem;
+}
+#utilities-elevation li {
+	display: block;
+	width: 5rem;
+	height: 5rem;
+	border-radius: 8px;
+	background-color: #FFF;
+	margin: 0 2.5rem;
+	flex: 0 0 auto;
+}
+
+formly-form .checkboxesfield:not(fieldset),
+formly-form .radiosfield:not(fieldset) {
+	margin-top: 0 !important;
+	padding: 1rem !important;
 }

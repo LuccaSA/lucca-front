@@ -20,20 +20,19 @@ import {
 	LuFormlyFieldUser,
 	LuFormlyFieldApi,
 	LuFormlyFieldDepartment,
-	LuFormlyFieldCheckboxes,
+	LuFormlyFieldCheckbox,
 	LuFormlyFieldRadios,
-	LuFormlyFieldEstablishment
+	LuFormlyFieldEstablishment,
 } from './types/index';
 import {
 	LuFormlyWrapperHelper,
-	LuFormlyWrapperTitle,
-	LuFormlyWrapperLabel,
 	LuFormlyWrapperTextfieldLayout,
 	LuFormlyWrapperSuffix,
 	LuFormlyWrapperIcon,
 	LuFormlyWrapperError,
 	LuFormlyErrorMessage,
-	LuFormlyWrapperRadiosfieldLayout
+	LuFormlyWrapperRadiosfieldLayout,
+	LuFormlyWrapperCheckboxLayout,
 } from './wrappers/index';
 
 @NgModule({
@@ -49,16 +48,15 @@ import {
 		LuFormlyFieldDepartment,
 		LuFormlyFieldEstablishment,
 		LuFormlyFieldRadios,
-		LuFormlyFieldCheckboxes,
+		LuFormlyFieldCheckbox,
 
 		LuFormlyWrapperHelper,
-		LuFormlyWrapperLabel,
+		LuFormlyWrapperCheckboxLayout,
 		LuFormlyWrapperTextfieldLayout,
 		LuFormlyWrapperRadiosfieldLayout,
 		LuFormlyWrapperSuffix,
 		LuFormlyWrapperIcon,
 		LuFormlyWrapperError,
-		LuFormlyWrapperTitle,
 	],
 	imports: [
 		CommonModule,

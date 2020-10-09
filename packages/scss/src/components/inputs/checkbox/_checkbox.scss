@@ -1,6 +1,12 @@
 .checkbox {
 	display: block;
 	position: relative;
+
+	&.is-required {
+		&::after {
+			@extend %isRequired;
+		}
+	}
 }
 
 .checkbox-input {
@@ -47,7 +53,7 @@
 		.checkbox-input:checked ~ .checkbox-label {
 
 			&::before {
-				color: _color("white");
+				color: white;
 				background-color: _color($palette);
 				border: 2px solid _color($palette);
 			}
@@ -149,27 +155,6 @@
 				margin: 0;
 			}
 		}
-	}
-}
-
-.form.mod-framed {
-	.checkbox, .checkbox-label {
-		width: 100%;
-	}
-	.checkbox .checkbox-label {
-		@include fakeBorder(1px, _theme("commons.divider.color"));
-		padding: _component("field.framed.side-padding");
-		display: inline-flex;
-		align-items: center;
-		height: 100%;
-		&::before {
-			position: relative;
-			margin-top: 0;
-		}
-	}
-
-	.checkbox.is-offset .checkbox-label {
-		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 	}
 }
 
