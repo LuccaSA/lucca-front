@@ -1,6 +1,6 @@
 {
 	"name": "@lucca-front/ng-internal",
-	"version": "5.1.0-rc.2",
+	"version": "5.1.0",
 	"description": "a library of usefull components for angular web app",
 	"repository": {
 		"type": "git",
@@ -56,8 +56,8 @@
 		"@angular/material": "^10.1.0",
 		"@angular/platform-browser": "^10.0.0",
 		"@angular/platform-browser-dynamic": "^10.0.0",
-		"@lucca-front/icons": "5.1.0-rc.2",
-		"@lucca-front/scss": "5.1.0-rc.2",
+		"@lucca-front/icons": "5.1.0",
+		"@lucca-front/scss": "5.1.0",
 		"@ngx-formly/core": "^5.9.2",
 		"core-js": "^3.6.5",
 		"rxjs": "^6.6.0",
