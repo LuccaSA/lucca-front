@@ -96,7 +96,7 @@ In your override folder, you can create different files for different needs :
 
   Contains a map of font sizes and spacings (padding & margin).
 
-You only have to write down the variables you wish to modify or add. More details on each variable are available in the [SCSS demo](https://latest-lucca-front-luccasa.surge.sh/).
+You only have to write down the variables you wish to modify or add. More details on each variable are available in the [SCSS demo](http://lucca-front.lucca.local/master/).
 
 ### Palettes
 
