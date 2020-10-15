@@ -1,3 +1,5 @@
+@import "../mixins/utilities";
+
 @mixin fieldState($fieldname, $state) {
 	background-color: _color($state, "50");
 
@@ -124,31 +126,43 @@
 	}
 }
 
-// legacy
 @mixin fieldFramedError($fieldname) {
-	background-color: _color("error", "50");
 
-	&::placeholder {
-		color: _color("error", "400");
-	}
+	@if ($fieldname == "textfield") {
+		&:not(:disabled) {
+			z-index: 3;
+			box-shadow: fakeborderoverlay(_color("error"));
+			background-color: _color("error", "50");
+			transition: background-color _theme("commons.animations.durations.fast");
+			
+			&:hover {
+				z-index: 4;
+				background-color: _color("error", "100");
 
-	&:focus {
-		&::placeholder {
-			color: _color("error", "300");
+				~ .textfield-messages {
+					transform: translateY(100%);
+				}
+			}
+
+			&:focus {
+				background-color: white;
+				box-shadow: fakeborderoverlay(_color("error")), 0 0 0 4px _color("error", "50");
+
+				~ .textfield-messages {
+					transform: translateY(100%);
+				}
+			}
 		}
 	}
 
-	&:focus, &:hover {
-		box-shadow: fakeborderoverlay(_color("error"));
-		background-color: _color("error", "50");
+	@if ($fieldname == "radiosfield") {
+		~ .radio-label,
+		~ .checkbox-label {
+			&::before {
+				border-color: _color("error");
+			}
+		}
 	}
-
-	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
-		color: _color("error") !important;
-	}
-
-	box-shadow: fakeborderoverlay(_color("error"));
-	z-index: 1;
 }
 
 @mixin fieldMaterialFilled($fieldname) {

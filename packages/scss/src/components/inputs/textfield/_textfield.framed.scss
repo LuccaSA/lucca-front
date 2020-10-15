@@ -65,17 +65,23 @@
 
 		&:not(:disabled) {
 			&:not(.is-error) {
-				&:not(.is-success), &:not(.is-valid) {
-					&:not(.is-warning) {
-						background-color: white;
+				&:not(.is-success) {
+					&:not(.is-valid) {
+						&:not(.is-warning) {
+							&:not(.is-invalid) {
+								&:not(.ng-invalid) {
+									background-color: white;
 
-						&:hover {
-							background-color: _component("field.framed.color50");
-						}
+									&:hover {
+										background-color: _component("field.framed.color50");
+									}
 
-						&:focus {
-							background-color: white;
-							box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+									&:focus {
+										background-color: white;
+										box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+									}
+								}
+							}
 						}
 					}
 				}
