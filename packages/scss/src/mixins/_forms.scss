@@ -134,6 +134,10 @@
 			box-shadow: fakeborderoverlay(_color("error"));
 			background-color: _color("error", "50");
 			transition: background-color _theme("commons.animations.durations.fast");
+
+			~ .textfield-label {
+				color: _color("error");
+			}
 			
 			&:hover {
 				z-index: 4;

@@ -59,6 +59,7 @@
 	.textfield-input {
 		width: 100%;
 		border-radius: 0;
+		background-color: _color("white");
 		box-shadow: fakeborderoverlay(_component("field.framed.border"));
 		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 		line-height: _theme("sizes.standard.line-height");
@@ -125,6 +126,12 @@
 					background-color: white;
 					box-shadow: fakeborderoverlay(_color("success")), 0 0 0 4px _color("success", "50");
 				}
+			}
+		}
+
+		&:invalid {
+			~ .textfield-label {
+				color: _color("primary");
 			}
 		}
 	}
