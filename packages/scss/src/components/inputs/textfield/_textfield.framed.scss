@@ -1,5 +1,6 @@
 %input_framed {
-	width: auto;
+	width: 100%;
+	margin-bottom: 0 !important;
 
 	&.is-error {
 		@include fieldFramedState("error");
@@ -59,23 +60,30 @@
 	.textfield-input {
 		width: 100%;
 		border-radius: 0;
+		background-color: _color("white");
 		box-shadow: fakeborderoverlay(_component("field.framed.border"));
 		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 		line-height: _theme("sizes.standard.line-height");
 
 		&:not(:disabled) {
 			&:not(.is-error) {
-				&:not(.is-success), &:not(.is-valid) {
-					&:not(.is-warning) {
-						background-color: white;
+				&:not(.is-success) {
+					&:not(.is-valid) {
+						&:not(.is-warning) {
+							&:not(.is-invalid) {
+								&:not(.ng-invalid) {
+									background-color: white;
 
-						&:hover {
-							background-color: _component("field.framed.color50");
-						}
+									&:hover {
+										background-color: _component("field.framed.color50");
+									}
 
-						&:focus {
-							background-color: white;
-							box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+									&:focus {
+										background-color: white;
+										box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+									}
+								}
+							}
 						}
 					}
 				}
@@ -119,6 +127,12 @@
 					background-color: white;
 					box-shadow: fakeborderoverlay(_color("success")), 0 0 0 4px _color("success", "50");
 				}
+			}
+		}
+
+		&:invalid {
+			~ .textfield-label {
+				color: _color("primary");
 			}
 		}
 	}
