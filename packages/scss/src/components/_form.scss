@@ -30,8 +30,8 @@
 }
 
 .form:not(.mod-framed) {
-	.textfield {
-		width: 100%;
+	.textfield, .radiosfield, .checkboxesfield, .checkbox.mod-field {
+		margin-bottom: _component("form.field.margin-bottom");
 	}
 }
 
@@ -127,6 +127,7 @@
 	padding: 0;
 	box-shadow: fakeborderoverlay(_component("field.framed.border"));
 	transition: background-color _theme("commons.animations.durations.standard");
+	margin-bottom: 0 !important;
 
 	&::before,
 	&::after {
