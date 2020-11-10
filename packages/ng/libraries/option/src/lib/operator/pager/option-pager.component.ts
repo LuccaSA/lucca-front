@@ -22,6 +22,7 @@ const MAGIC_STEP = 10;
 	],
 })
 export class LuOptionPagerComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnScrollBottomSubscriber {
+	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest(
 			in$,

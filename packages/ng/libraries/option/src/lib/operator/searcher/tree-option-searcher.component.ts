@@ -29,6 +29,7 @@ export class LuTreeOptionSearcherComponent<T = any> extends ALuTreeOptionOperato
 	clue$ = merge(of(''), this.searchControl.valueChanges);
 	empty$: Observable<boolean>;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
+	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
 		this.outOptions$ = combineLatest(
 			in$,
