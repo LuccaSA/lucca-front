@@ -30,6 +30,7 @@ export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> im
 
 	@HostBinding('class.position-fixed') fixed = true;
 	options;
+	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = in$.pipe(
 			tap(options => this.options = options)

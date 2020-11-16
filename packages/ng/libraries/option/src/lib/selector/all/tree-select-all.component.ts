@@ -31,6 +31,7 @@ export class LuTreeOptionSelectAllComponent<T = any> extends ALuTreeOptionOperat
 
 	@HostBinding('class.position-fixed') fixed = true;
 	flatOptions: T[];
+	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
 		this.outOptions$ = in$.pipe(
 			tap(options => this.flatOptions = this.flattenTree(options))

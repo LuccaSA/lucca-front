@@ -28,6 +28,7 @@ export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> imp
 	clue$ = merge(of(''), this.searchControl.valueChanges);
 	empty$: Observable<boolean>;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
+	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest(
 			in$,

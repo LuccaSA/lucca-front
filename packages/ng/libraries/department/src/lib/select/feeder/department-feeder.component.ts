@@ -30,6 +30,7 @@ import { ALuDepartmentService, LuDepartmentService, ILuDepartmentService } from 
 })
 export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepartment>
 implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
+	inOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
 	protected _service: ILuDepartmentService;
