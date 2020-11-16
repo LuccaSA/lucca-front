@@ -20,12 +20,14 @@
 	font-size: _theme("sizes.big.font-size");
 	font-weight: 600;
 	display: block;
+	position: relative;
 }
 
 .file-or {
 	font-size: _theme("sizes.small.font-size");
 	margin-bottom: _theme("spacings.smallest");
 	display: block;
+	position: relative;
 }
 
 .file-progress {
@@ -44,6 +46,7 @@
 .file-formats {
 	display: block;
 	color: _color("primary", "600");
+	position: relative;
 }
 
 .file-button {
@@ -64,7 +67,6 @@
 	~ .file-content {
 		&::before {
 			content: "";
-			z-index: -1;
 			position: absolute;
 			top: 0;
 			left: 0;
