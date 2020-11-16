@@ -144,5 +144,6 @@
 		padding: _component("field.framed.label-top-offset") _component("field.framed.side-padding");
 		z-index: 10;
 		line-height: 1.5rem;
+		pointer-events: none;
 	}
 }
