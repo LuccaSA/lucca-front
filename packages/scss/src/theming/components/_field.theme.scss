@@ -56,7 +56,7 @@ $field: (
 		textarea: (
 			height: _theme("spacings.biggest", true) + _theme("spacings.standard", true) * 3,
 			min-height: _theme("spacings.biggest", true) + _theme("spacings.standard", true),
-			max-height: 80vh, // magic number
+			max-height: 80vh,
 		),
 		title: (
 			font-size: _theme("sizes.big.font-size"),
