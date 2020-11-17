@@ -46,7 +46,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() hideClearer: boolean = false;
-	overlapInput = true;
+	// overlapInput = true;
 	get format(): string {
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
@@ -66,8 +66,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 		protected _renderer: Renderer2,
 		private _adapter: ALuDateAdapter<D>,
 		@Inject(LuDateSelectInputIntl) private _intl: ILuDateSelectInputLabel,
-
-		) {
+	) {
 		super(
 			_changeDetectorRef,
 			_overlay,
@@ -75,6 +74,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 			_viewContainerRef,
 			_renderer,
 		);
+		this.overlapInput = true
 	}
 
 	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<D>) {
