@@ -86,7 +86,7 @@
 
 	.timeline-step-title {
 		margin: _theme("spacings.smaller") 0;
-		margin-left: _theme("spacings.standard") * -1;
+		margin-left: -1 * _theme("spacings.standard", true);
 	}
 
 	.timeline-step {
@@ -98,9 +98,9 @@
 
 		.gauge, .progress {
 			position: absolute;
-			left: (_theme("spacings.smallest") / -2);
+			left: (_theme("spacings.smallest", true) / -2);
 			top: 1.375rem; // magic number
-			bottom: _theme("spacings.smaller") * -1;
+			bottom: -1 * _theme("spacings.smaller", true);
 			height: auto;
 			width: _theme("spacings.smallest");
 		}
@@ -128,7 +128,7 @@
 			opacity: 1;
 			width: _theme("spacings.standard");
 			height: _theme("spacings.standard");
-			left: _theme("spacings.smallest") * -1;
+			left: -1 * _theme("spacings.smallest", true);
 		}
 
 		&::after {
@@ -136,7 +136,7 @@
 			color: white;
 			width: _theme("spacings.standard");
 			height: auto;
-			left: _theme("spacings.smallest") * -1;
+			left: -1 * _theme("spacings.smallest", true);
 			top: .6875rem; // magic number
 			bottom: auto;
 			background-color: transparent;
