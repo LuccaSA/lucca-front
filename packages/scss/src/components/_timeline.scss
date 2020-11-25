@@ -98,7 +98,7 @@
 
 		.gauge, .progress {
 			position: absolute;
-			left: cals(#{_theme("spacings.smallest")} / -2);
+			left: calc(#{_theme("spacings.smallest")} / -2);
 			top: 1.375rem; // magic number
 			bottom: calc(-1 * #{_theme("spacings.standard")});
 			height: auto;
