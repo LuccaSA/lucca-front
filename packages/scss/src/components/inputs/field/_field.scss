@@ -186,7 +186,7 @@
 		@include fieldState($fieldname, "warning");
 	}
 
-	&.is-invalid, &.is-error, &:invalid {
+	&.is-invalid, &.is-error {
 		@include fieldState($fieldname, "error");
 	}
 }
