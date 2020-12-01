@@ -11,7 +11,7 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 	protected _api: string;
 	set api(api: string) { this._api = api; }
 	protected _filters: string[] = [];
-	set filters(filters: string[]) { this._filters = filters; }
+	set filters(filters: string[]) { this._filters = filters || []; }
 
 	constructor(protected _http: HttpClient) { super(); }
 
