@@ -14,7 +14,7 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 	protected _fields = 'fields=id,name';
 	set fields(fields: string) { this._fields = `fields=${fields}`; }
 	protected _filters: string[] = [];
-	set filters(filters: string[]) { this._filters = filters; }
+	set filters(filters: string[]) { this._filters = filters || []; }
 	protected _orderBy = 'orderBy=name,asc';
 	set orderBy(orderBy: string) { this._orderBy = `orderBy=${orderBy}`; }
 
