@@ -13,7 +13,6 @@
 				}
 
 				.#{$fieldname}-input {
-					background-color: _color($name, 50);
 
 					&::placeholder {
 						color: _color($name, "400");
