@@ -195,6 +195,7 @@ var icons = {
 		"api_sync",
 		"postpone",
 		"pay_period",
+		"play",
 		"contract",
 		"unlink",
 		"timesheet",
