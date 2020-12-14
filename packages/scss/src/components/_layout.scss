@@ -1,0 +1,298 @@
+$bannerHeight: 50px;
+$navSideWidth: 15rem; // ÷ 2 pour le mode compact
+$asideWidth: 18rem;
+$layoutContentContainerMaxWidth: 62.5rem;
+
+.layout {
+	min-height: 100vh;
+	display: grid;
+
+	@include media_larger_than("xl") {
+		grid-template-columns: ($navSideWidth / 2) 1fr $asideWidth;
+		grid-template-rows: $bannerHeight 1fr;
+		grid-template-areas: "banner banner banner"
+			"navside content aside";
+	}
+
+	@include media_smaller_than("xl") {
+		grid-template-columns: ($navSideWidth / 2) 1fr;
+		grid-template-rows: $bannerHeight 1fr auto;
+		grid-template-areas: "banner banner"
+		"navside content"
+		"navside aside";
+	}
+
+	@include media_smaller_than("md") {
+		grid-template-columns: 1fr;
+		grid-template-rows: $bannerHeight auto 1fr auto;
+		grid-template-areas: "banner"
+			"navside"
+			"content"
+			"aside";
+	}
+}
+
+.layout-content-container {
+	max-width: $layoutContentContainerMaxWidth;
+}
+
+.layout-banner {
+	grid-area: banner;
+	height: $bannerHeight;
+	background-color: _color("white");
+	position: sticky;
+	top: 0;
+	z-index: 2;
+}
+
+.layout-content {
+	grid-area: content;
+	position: sticky;
+	top: $bannerHeight;
+	display: flex;
+	flex-direction: column;
+
+	@include media_smaller_than("md") {
+		position: static;
+	}
+}
+
+.layout-content-headers, .layout-content-headers-subheader, .layout-content-headers-header {
+	background-color: _color("white");
+	position: sticky;
+	top: $bannerHeight;
+
+	@include media_smaller_than("md") {
+		position: static;
+	}
+}
+
+.layout-content-headers-header {
+	z-index: 1;
+}
+
+.layout-content-inner {
+	flex-grow: 1;
+}
+
+.layout-content-footer {
+	background-color: _color("white");
+	position: sticky;
+	bottom: 0;
+
+	@include media_smaller_than("md") {
+		position: static;
+	}
+}
+
+.layout-navside, .layout-aside {
+	display: flex;
+	flex-direction: column;
+	align-self: self-start;
+	min-height: calc(100vh - #{$bannerHeight});
+	position: sticky;
+	top: $bannerHeight;
+
+	@include media_smaller_than("md") {
+		min-height: 0;
+	}
+}
+
+.layout-aside {
+	@include media_smaller_than("xl") {
+		min-height: 0;
+		position: static;
+	}
+}
+
+.layout-aside {
+	grid-area: aside;
+}
+
+.layout-navside {
+	grid-area: navside;
+	z-index: 2;
+	overflow: auto;
+	max-height: calc(100vh - #{$bannerHeight});
+
+	&.is-active {
+		@include media_smaller_than("md") {
+			position: fixed;
+			top: $bannerHeight;
+			height: calc(100vh - #{$bannerHeight});
+			left: 0;
+			right: 0;
+			background-color: _color("white");
+			overflow: auto;
+		}
+	}
+}
+
+.layout-navside-content-inner, .layout-aside-content-inner {
+	flex-grow: 1;
+}
+
+.layout-navside-footer, .layout-aside-footer {
+	position: sticky;
+	bottom: 0;
+	background-color: _color("white");
+
+	@include media_smaller_than("md") {
+		margin-top: 0;
+		position: static;
+	}
+}
+
+.layout-navside-toggle {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	color: inherit;
+	background-color: _color("white");
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+
+	@include media_larger_than("md") {
+		display: none;
+	}
+}
+
+.layout-aside-content, .layout-navside-content {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+// le contenu de la navside
+.layout-navside-content {
+	// si on est en mobile
+	@include media_smaller_than("md") {
+		// si il précédé par un bouton d’activation du menu non activé
+		.layout-navside-toggle[aria-expanded="false"] ~ & {
+			// est masqué
+			display: none;
+		}
+	}
+}
+
+.layout.mod-noNavsideScrollbar {
+	.layout-navside {
+		max-height: auto;
+		overflow: visible;
+	}
+}
+
+.layout.mod-noStickyContentHeader {
+	.layout-content-headers-header {
+		position: static;
+	}
+}
+
+.layout.mod-noStickyContentSubheader {
+	.layout-content-headers-subheader {
+		position: static;
+	}
+}
+
+.layout.mod-noStickyNavsideFooter {
+	.layout-navside-footer {
+		position: static;
+	}
+}
+
+.layout.mod-noStickyAsideFooter {
+	.layout-aside-footer {
+		position: static;
+	}
+}
+
+.layout.mod-noStickyContentFooter {
+	.layout-content-footer {
+		position: static;
+	}
+}
+
+.layout.mod-noAsideAfter {
+	&:not(.mod-noAside) {
+		@include media_larger_than("xl") {
+			grid-template-columns: $navSideWidth $asideWidth 1fr;
+			grid-template-areas: "banner	banner banner"
+				"navside aside	content";
+
+			&.mod-noNavsideCompact {
+				grid-template-columns: $navSideWidth $asideWidth 1fr;
+			}
+		}
+	}
+}
+
+.layout.mod-noHeader {
+	.layout-content-headers-header {
+		display: none;
+	}
+}
+
+.layout.mod-noSubheader {
+	.layout-content-headers-subheader {
+		display: none;
+	}
+}
+
+.layout.mod-noAside {
+	grid-template-columns: $navSideWidth / 2 1fr;
+
+	.layout-aside {
+		display: none;
+	}
+
+	&.mod-noNavsideCompact {
+		grid-template-columns: $navSideWidth 1fr;
+	}
+}
+
+.layout.mod-noAsideFooter {
+	.layout-aside-footer {
+		display: none;
+	}
+}
+
+.layout.mod-noFooter {
+	.layout-footer {
+		display: none;
+	}
+}
+
+.layout.mod-noNavsideFooter {
+	.layout-navside-footer {
+		display: none;
+	}
+}
+
+.layout.mod-noNavsideCompact {
+
+	@include media_larger_than("xl") {
+		grid-template-columns: $navSideWidth 1fr $asideWidth;
+	}
+
+	@include media_smaller_than("xl") {
+		grid-template-columns: $navSideWidth 1fr;
+	}
+
+	@include media_smaller_than("md") {
+		grid-template-columns: 1fr;
+	}
+}
+
+.has-overlay {
+	&, body {
+		touch-action: none;
+		overscroll-behavior: none;
+		-webkit-overflow-scrolling: auto;
+	}
+
+	body {
+		overflow: hidden;
+	}
+}
