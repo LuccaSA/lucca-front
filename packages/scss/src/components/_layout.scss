@@ -1,22 +1,17 @@
-$bannerHeight: 50px;
-$navSideWidth: 15rem; // ÷ 2 pour le mode compact
-$asideWidth: 18rem;
-$layoutContentContainerMaxWidth: 62.5rem;
-
 .layout {
 	min-height: 100vh;
 	display: grid;
 
 	@include media_larger_than("xl") {
-		grid-template-columns: ($navSideWidth / 2) 1fr $asideWidth;
-		grid-template-rows: $bannerHeight 1fr;
+		grid-template-columns: _component("layout.navside.compact.width") 1fr _component("layout.aside.width");
+		grid-template-rows: _component("layout.banner.height") 1fr;
 		grid-template-areas: "banner banner banner"
 			"navside content aside";
 	}
 
 	@include media_smaller_than("xl") {
-		grid-template-columns: ($navSideWidth / 2) 1fr;
-		grid-template-rows: $bannerHeight 1fr auto;
+		grid-template-columns: _component("layout.navside.compact.width") 1fr;
+		grid-template-rows: _component("layout.banner.height") 1fr auto;
 		grid-template-areas: "banner banner"
 		"navside content"
 		"navside aside";
@@ -24,7 +19,7 @@ $layoutContentContainerMaxWidth: 62.5rem;
 
 	@include media_smaller_than("md") {
 		grid-template-columns: 1fr;
-		grid-template-rows: $bannerHeight auto 1fr auto;
+		grid-template-rows: _component("layout.banner.height") auto 1fr auto;
 		grid-template-areas: "banner"
 			"navside"
 			"content"
@@ -33,12 +28,12 @@ $layoutContentContainerMaxWidth: 62.5rem;
 }
 
 .layout-content-container {
-	max-width: $layoutContentContainerMaxWidth;
+	max-width: _component("layout.container.width");
 }
 
 .layout-banner {
 	grid-area: banner;
-	height: $bannerHeight;
+	height: _component("layout.banner.height");
 	background-color: _color("white");
 	position: sticky;
 	top: 0;
@@ -48,7 +43,7 @@ $layoutContentContainerMaxWidth: 62.5rem;
 .layout-content {
 	grid-area: content;
 	position: sticky;
-	top: $bannerHeight;
+	top: _component("layout.banner.height");
 	display: flex;
 	flex-direction: column;
 
@@ -60,7 +55,7 @@ $layoutContentContainerMaxWidth: 62.5rem;
 .layout-content-headers, .layout-content-headers-subheader, .layout-content-headers-header {
 	background-color: _color("white");
 	position: sticky;
-	top: $bannerHeight;
+	top: _component("layout.banner.height");
 
 	@include media_smaller_than("md") {
 		position: static;
@@ -89,9 +84,9 @@ $layoutContentContainerMaxWidth: 62.5rem;
 	display: flex;
 	flex-direction: column;
 	align-self: self-start;
-	min-height: calc(100vh - #{$bannerHeight});
+	min-height: calc(100vh - #{_component("layout.banner.height")});
 	position: sticky;
-	top: $bannerHeight;
+	top: _component("layout.banner.height");
 
 	@include media_smaller_than("md") {
 		min-height: 0;
@@ -113,13 +108,13 @@ $layoutContentContainerMaxWidth: 62.5rem;
 	grid-area: navside;
 	z-index: 2;
 	overflow: auto;
-	max-height: calc(100vh - #{$bannerHeight});
+	max-height: calc(100vh - #{_component("layout.banner.height")});
 
 	&.is-active {
 		@include media_smaller_than("md") {
 			position: fixed;
-			top: $bannerHeight;
-			height: calc(100vh - #{$bannerHeight});
+			top: _component("layout.banner.height");
+			height: calc(100vh - #{_component("layout.banner.height")});
 			left: 0;
 			right: 0;
 			background-color: _color("white");
@@ -218,12 +213,12 @@ $layoutContentContainerMaxWidth: 62.5rem;
 	&.mod-asideBefore {
 		&:not(.mod-asideRemoved) {
 			@include media_larger_than("xl") {
-				grid-template-columns: $navSideWidth $asideWidth 1fr;
+				grid-template-columns: _component("layout.navside.width") _component("layout.aside.width") 1fr;
 				grid-template-areas: "banner	banner banner"
 					"navside aside	content";
 
 				&.mod-navsideLarge {
-					grid-template-columns: $navSideWidth $asideWidth 1fr;
+					grid-template-columns: _component("layout.navside.width") _component("layout.aside.width") 1fr;
 				}
 			}
 		}
@@ -242,14 +237,14 @@ $layoutContentContainerMaxWidth: 62.5rem;
 	}
 
 	&.mod-asideRemoved {
-		grid-template-columns: $navSideWidth / 2 1fr;
+		grid-template-columns: _component("layout.navside.compact.width") 1fr;
 
 		.layout-aside {
 			display: none;
 		}
 
 		&.mod-navsideLarge {
-			grid-template-columns: $navSideWidth 1fr;
+			grid-template-columns: _component("layout.navside.width") 1fr;
 		}
 	}
 
@@ -274,11 +269,11 @@ $layoutContentContainerMaxWidth: 62.5rem;
 	&.mod-navsideLarge {
 
 		@include media_larger_than("xl") {
-			grid-template-columns: $navSideWidth 1fr $asideWidth;
+			grid-template-columns: _component("layout.navside.width") 1fr _component("layout.aside.width");
 		}
 
 		@include media_smaller_than("xl") {
-			grid-template-columns: $navSideWidth 1fr;
+			grid-template-columns: _component("layout.navside.width") 1fr;
 		}
 
 		@include media_smaller_than("md") {
