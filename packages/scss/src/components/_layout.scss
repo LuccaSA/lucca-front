@@ -165,123 +165,125 @@ $layoutContentContainerMaxWidth: 62.5rem;
 	flex-direction: column;
 }
 
-// le contenu de la navside
+// the contents of the navside
 .layout-navside-content {
-	// si on est en mobile
+	// if you are on the move
 	@include media_smaller_than("md") {
-		// si il précédé par un bouton d’activation du menu non activé
+		// if it is preceded by a menu activation button that is not activated
 		.layout-navside-toggle[aria-expanded="false"] ~ & {
-			// est masqué
+			// is hidden
 			display: none;
 		}
 	}
 }
 
-.layout.mod-noNavsideScrollbar {
-	.layout-navside {
-		max-height: auto;
-		overflow: visible;
+.layout {
+	&.mod-navsideWithoutScrollbar {
+		.layout-navside {
+			max-height: auto;
+			overflow: visible;
+		}
 	}
-}
 
-.layout.mod-noStickyContentHeader {
-	.layout-content-headers-header {
-		position: static;
+	&.mod-contentHeaderStatic {
+		.layout-content-headers-header {
+			position: static;
+		}
 	}
-}
 
-.layout.mod-noStickyContentSubheader {
-	.layout-content-headers-subheader {
-		position: static;
+	&.mod-contentSubheaderStatic {
+		.layout-content-headers-subheader {
+			position: static;
+		}
 	}
-}
 
-.layout.mod-noStickyNavsideFooter {
-	.layout-navside-footer {
-		position: static;
+	&.mod-navsideFooterStatic {
+		.layout-navside-footer {
+			position: static;
+		}
 	}
-}
 
-.layout.mod-noStickyAsideFooter {
-	.layout-aside-footer {
-		position: static;
+	&.mod-asideFooterStatic {
+		.layout-aside-footer {
+			position: static;
+		}
 	}
-}
 
-.layout.mod-noStickyContentFooter {
-	.layout-content-footer {
-		position: static;
+	&.mod-contentFooterStatic {
+		.layout-content-footer {
+			position: static;
+		}
 	}
-}
 
-.layout.mod-noAsideAfter {
-	&:not(.mod-noAside) {
-		@include media_larger_than("xl") {
-			grid-template-columns: $navSideWidth $asideWidth 1fr;
-			grid-template-areas: "banner	banner banner"
-				"navside aside	content";
-
-			&.mod-noNavsideCompact {
+	&.mod-asideBefore {
+		&:not(.mod-asideRemoved) {
+			@include media_larger_than("xl") {
 				grid-template-columns: $navSideWidth $asideWidth 1fr;
+				grid-template-areas: "banner	banner banner"
+					"navside aside	content";
+
+				&.mod-navsideLarge {
+					grid-template-columns: $navSideWidth $asideWidth 1fr;
+				}
 			}
 		}
 	}
-}
 
-.layout.mod-noHeader {
-	.layout-content-headers-header {
-		display: none;
-	}
-}
-
-.layout.mod-noSubheader {
-	.layout-content-headers-subheader {
-		display: none;
-	}
-}
-
-.layout.mod-noAside {
-	grid-template-columns: $navSideWidth / 2 1fr;
-
-	.layout-aside {
-		display: none;
+	&.mod-headerRemoved {
+		.layout-content-headers-header {
+			display: none;
+		}
 	}
 
-	&.mod-noNavsideCompact {
-		grid-template-columns: $navSideWidth 1fr;
-	}
-}
-
-.layout.mod-noAsideFooter {
-	.layout-aside-footer {
-		display: none;
-	}
-}
-
-.layout.mod-noFooter {
-	.layout-footer {
-		display: none;
-	}
-}
-
-.layout.mod-noNavsideFooter {
-	.layout-navside-footer {
-		display: none;
-	}
-}
-
-.layout.mod-noNavsideCompact {
-
-	@include media_larger_than("xl") {
-		grid-template-columns: $navSideWidth 1fr $asideWidth;
+	&.mod-subheaderRemoved {
+		.layout-content-headers-subheader {
+			display: none;
+		}
 	}
 
-	@include media_smaller_than("xl") {
-		grid-template-columns: $navSideWidth 1fr;
+	&.mod-asideRemoved {
+		grid-template-columns: $navSideWidth / 2 1fr;
+
+		.layout-aside {
+			display: none;
+		}
+
+		&.mod-navsideLarge {
+			grid-template-columns: $navSideWidth 1fr;
+		}
 	}
 
-	@include media_smaller_than("md") {
-		grid-template-columns: 1fr;
+	&.mod-asideFooterRemoved {
+		.layout-aside-footer {
+			display: none;
+		}
+	}
+
+	&.mod-contentFooterRemoved {
+		.layout-footer {
+			display: none;
+		}
+	}
+
+	&.mod-navsideFooterRemoved {
+		.layout-navside-footer {
+			display: none;
+		}
+	}
+
+	&.mod-navsideLarge {
+
+		@include media_larger_than("xl") {
+			grid-template-columns: $navSideWidth 1fr $asideWidth;
+		}
+
+		@include media_smaller_than("xl") {
+			grid-template-columns: $navSideWidth 1fr;
+		}
+
+		@include media_smaller_than("md") {
+			grid-template-columns: 1fr;
+		}
 	}
 }
 
