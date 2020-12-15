@@ -3,15 +3,15 @@
 	display: grid;
 
 	@include media_larger_than("xl") {
-		grid-template-columns: _component("layout.navside.compact.width") 1fr _component("layout.aside.width");
-		grid-template-rows: _component("layout.banner.height") 1fr;
+		grid-template-columns: _theme("components.navSide.compact.width") 1fr _theme("components.aside.width");
+		grid-template-rows: _theme("commons.banner-height") 1fr;
 		grid-template-areas: "banner banner banner"
 			"navside content aside";
 	}
 
 	@include media_smaller_than("xl") {
-		grid-template-columns: _component("layout.navside.compact.width") 1fr;
-		grid-template-rows: _component("layout.banner.height") 1fr auto;
+		grid-template-columns: _theme("components.navSide.compact.width") 1fr;
+		grid-template-rows: _theme("commons.banner-height") 1fr auto;
 		grid-template-areas: "banner banner"
 		"navside content"
 		"navside aside";
@@ -19,7 +19,7 @@
 
 	@include media_smaller_than("md") {
 		grid-template-columns: 1fr;
-		grid-template-rows: _component("layout.banner.height") auto 1fr auto;
+		grid-template-rows: _theme("commons.banner-height") auto 1fr auto;
 		grid-template-areas: "banner"
 			"navside"
 			"content"
@@ -28,12 +28,12 @@
 }
 
 .layout-content-container {
-	max-width: _component("layout.container.width");
+	max-width: (_theme("breakpoints.lg.breakAt") / 16px * 1rem);
 }
 
 .layout-banner {
 	grid-area: banner;
-	height: _component("layout.banner.height");
+	height: _theme("commons.banner-height");
 	background-color: _color("white");
 	position: sticky;
 	top: 0;
@@ -43,7 +43,7 @@
 .layout-content {
 	grid-area: content;
 	position: sticky;
-	top: _component("layout.banner.height");
+	top: _theme("commons.banner-height");
 	display: flex;
 	flex-direction: column;
 
@@ -55,7 +55,7 @@
 .layout-content-headers, .layout-content-headers-subheader, .layout-content-headers-header {
 	background-color: _color("white");
 	position: sticky;
-	top: _component("layout.banner.height");
+	top: _theme("commons.banner-height");
 
 	@include media_smaller_than("md") {
 		position: static;
@@ -84,9 +84,9 @@
 	display: flex;
 	flex-direction: column;
 	align-self: self-start;
-	min-height: calc(100vh - #{_component("layout.banner.height")});
+	min-height: calc(100vh - #{_theme("commons.banner-height")});
 	position: sticky;
-	top: _component("layout.banner.height");
+	top: _theme("commons.banner-height");
 
 	@include media_smaller_than("md") {
 		min-height: 0;
@@ -108,13 +108,13 @@
 	grid-area: navside;
 	z-index: 2;
 	overflow: auto;
-	max-height: calc(100vh - #{_component("layout.banner.height")});
+	max-height: calc(100vh - #{_theme("commons.banner-height")});
 
 	&.is-active {
 		@include media_smaller_than("md") {
 			position: fixed;
-			top: _component("layout.banner.height");
-			height: calc(100vh - #{_component("layout.banner.height")});
+			top: _theme("commons.banner-height");
+			height: calc(100vh - #{_theme("commons.banner-height")});
 			left: 0;
 			right: 0;
 			background-color: _color("white");
@@ -213,12 +213,12 @@
 	&.mod-asideBefore {
 		&:not(.mod-asideRemoved) {
 			@include media_larger_than("xl") {
-				grid-template-columns: _component("layout.navside.width") _component("layout.aside.width") 1fr;
+				grid-template-columns: _theme("components.navSide.width") _theme("components.aside.width") 1fr;
 				grid-template-areas: "banner	banner banner"
 					"navside aside	content";
 
 				&.mod-navsideLarge {
-					grid-template-columns: _component("layout.navside.width") _component("layout.aside.width") 1fr;
+					grid-template-columns: _theme("components.navSide.width") _theme("components.aside.width") 1fr;
 				}
 			}
 		}
@@ -237,14 +237,14 @@
 	}
 
 	&.mod-asideRemoved {
-		grid-template-columns: _component("layout.navside.compact.width") 1fr;
+		grid-template-columns: _theme("components.navSide.compact.width") 1fr;
 
 		.layout-aside {
 			display: none;
 		}
 
 		&.mod-navsideLarge {
-			grid-template-columns: _component("layout.navside.width") 1fr;
+			grid-template-columns: _theme("components.navSide.width") 1fr;
 		}
 	}
 
@@ -269,11 +269,11 @@
 	&.mod-navsideLarge {
 
 		@include media_larger_than("xl") {
-			grid-template-columns: _component("layout.navside.width") 1fr _component("layout.aside.width");
+			grid-template-columns: _theme("components.navSide.width") 1fr _theme("components.aside.width");
 		}
 
 		@include media_smaller_than("xl") {
-			grid-template-columns: _component("layout.navside.width") 1fr;
+			grid-template-columns: _theme("components.navSide.width") 1fr;
 		}
 
 		@include media_smaller_than("md") {
