@@ -190,7 +190,20 @@ var icons = {
 		"weather_cloudy",
 		"weather_storm",
 		"weather_sun",
-		"weight"
+		"weight",
+		"unlink",
+		"api_sync",
+		"postpone",
+		"pay_period",
+		"play",
+		"contract",
+		"unlink",
+		"timesheet",
+		"thumbnail",
+		"thumb_up",
+		"thumb_down",
+		"format_justify",
+		"format_strikethrough"
 	]
 };
 
