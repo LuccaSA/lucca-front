@@ -123,12 +123,6 @@ $suffix: "!important" !default;
 	flex-basis: auto #{$suffix};
 }
 
-@for $i from 1 through 12 {
-	.#{$prefix}flexBasis#{$i} {
-		flex-basis: ((100% / $i) / 1) #{$suffix};
-	}
-}
-
 // order
 
 .#{$prefix}order-1 {
