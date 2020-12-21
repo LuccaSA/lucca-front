@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LuModal } from '@lucca-front/ng/modal';
+import { LuSidepanel } from '@lucca-front/ng/sidepanel';
 
 @Component({
 	selector: 'lu-modal-content',
@@ -15,10 +16,14 @@ export class BasicModalContent {
 })
 export class ModalA11yComponent {
 	constructor(
-		private _modal: LuModal
+		private _modal: LuModal,
+		private _sidepanel: LuSidepanel,
 	) {}
 	openModal() {
 		this._modal.open(BasicModalContent);
+	}
+	openSidepanel() {
+		this._sidepanel.open(BasicModalContent);
 	}
 }
 
