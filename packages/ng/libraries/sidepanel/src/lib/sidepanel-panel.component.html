@@ -13,7 +13,7 @@
 		<button
 			*ngIf="!isSubmitHidden"
 			class="button palette-{{submitPalette}}"
-			[class.is-disabled]="isSubmitDisabled"
+			[disabled]="isSubmitDisabled"
 			[class.mod-counter]="hasSubmitCounter"
 			[ngClass]="submitClass$ | async"
 			(click)="submit()"
