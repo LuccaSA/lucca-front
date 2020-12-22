@@ -1,14 +1,40 @@
 import { Component } from '@angular/core';
-import { LuModal } from '@lucca-front/ng/modal';
+import { ILuModalConfig, LuModal } from '@lucca-front/ng/modal';
 import { LuSidepanel } from '@lucca-front/ng/sidepanel';
-
+const MAGIC_POSITIONS = [
+	'center',
+	'top',
+	'right',
+	'bottom',
+	'left',
+];
+const MAGIC_SIZES = [
+	'small',
+	'medium',
+	'large',
+];
 @Component({
 	selector: 'lu-modal-content',
-	template: `content of the modal component`
+	template: `
+	<p>content of the modal component</p>
+	<button class="button" (click)="openModal()">more modals</button>
+	`
 })
 export class BasicModalContent {
 	title = 'title';
 	submitAction = () => true;
+	constructor(
+		private _modal: LuModal,
+	) {}
+	openModal() {
+		const randPosition = Math.floor(Math.random() * 5);
+		const randSize = Math.floor(Math.random() * 3);
+		const config = { position: undefined, size: undefined };
+		config.position = MAGIC_POSITIONS[randPosition];
+		config.size = MAGIC_SIZES[randSize];
+
+		this._modal.open(BasicModalContent, undefined, config);
+	}
 }
 @Component({
 	selector: 'sand-modal-a11y',
