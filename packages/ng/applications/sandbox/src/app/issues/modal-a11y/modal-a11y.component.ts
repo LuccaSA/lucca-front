@@ -26,6 +26,7 @@ export class BasicModalContent {
 	submitAction = () => true;
 	// submitPalette = 'warning';
 	submitCounter = 0;
+	get submitDisabled() { return this.submitCounter % 2; } 
 	constructor(
 		private _modal: LuModal,
 	) {}
