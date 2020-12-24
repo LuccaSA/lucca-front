@@ -146,10 +146,10 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 				item.mods.push('is-active');
 			}
 			if (min && this._adapter.compare(day, min, ELuDateGranularity.day) < 0) {
-				item.mods.push('is-disabled');
+				item.isDisabled = true;
 			}
 			if (max && this._adapter.compare(day, max, ELuDateGranularity.day) > 0) {
-				item.mods.push('is-disabled');
+				item.isDisabled = true;
 			}
 		});
 	}
@@ -166,10 +166,10 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 				item.mods.push('is-active');
 			}
 			if (min && this._adapter.compare(month, min, ELuDateGranularity.month) < 0) {
-				item.mods.push('is-disabled');
+				item.isDisabled = true;
 			}
 			if (max && this._adapter.compare(month, max, ELuDateGranularity.month) > 0) {
-				item.mods.push('is-disabled');
+				item.isDisabled = true;
 			}
 		});
 	}
@@ -186,10 +186,10 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 				item.mods.push('is-active');
 			}
 			if (min && this._adapter.compare(year, min, ELuDateGranularity.year) < 0) {
-				item.mods.push('is-disabled');
+				item.isDisabled = true;
 			}
 			if (max && this._adapter.compare(year, max, ELuDateGranularity.year) > 0) {
-				item.mods.push('is-disabled');
+				item.isDisabled = true;
 			}
 		});
 	}
