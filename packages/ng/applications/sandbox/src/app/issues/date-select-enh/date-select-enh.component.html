@@ -1,0 +1,15 @@
+<h1>date-select-enh</h1>
+<h2>Single</h2>
+<label class="textfield">
+	<lu-date-select class="textfield-input" [(ngModel)]="date" [min]="min"></lu-date-select>
+	<span class="textfield-label">enabled</span>
+</label>
+<label class="textfield">
+	<lu-date-select class="textfield-input is-disabled" [(ngModel)]="date" [min]="min"></lu-date-select>
+	<span class="textfield-label">class is-disabled</span>
+</label>
+<label class="textfield">
+	<lu-date-select class="textfield-input" [(ngModel)]="date" disabled [min]="min"></lu-date-select>
+	<span class="textfield-label">attr disabled</span>
+</label>
+<code>{{date | luDate }}</code>

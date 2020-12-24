@@ -67,6 +67,7 @@ const routes: Routes = [
 	{ path: 'establishment', loadChildren: () => import('./establishment').then(m => m.EstablishmentModule) },
 	{ path: 'api-v4', loadChildren: () => import('./api-v4').then(m => m.ApiV4Module) },
 	{ path: 'drag-drop', loadChildren: () => import('./drag-drop').then(m => m.DragDropModule) },
+	{ path: 'date-select-enh', loadChildren: () => import('./date-select-enh').then(m => m.DateSelectEnhModule) },
 ];
 /*tslint:enable*/
 const issues = [ ...routes].map(r => r.path);
