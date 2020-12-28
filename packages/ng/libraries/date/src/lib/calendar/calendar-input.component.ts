@@ -28,6 +28,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	@Input() min?: D;
 	@Input() max?: D;
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+	@Input() startOn: D = this._adapter.forgeToday();
 
 	viewGranularity: ELuDateGranularity;
 	header: ICalendarItem<D>;
@@ -59,8 +60,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		this.initDayLabels();
 	}
 	writeValue(value?: D) {
-		const today = this._adapter.forgeToday();
-		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : today;
+		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : this.startOn;
 		this.header = this._factory.forgeMonth(date);
 		super.writeValue(value);
 	}
