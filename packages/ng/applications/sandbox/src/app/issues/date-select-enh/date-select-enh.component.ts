@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 export class DateSelectEnhComponent {
 	date;
 	min = new Date();
+	startOn = new Date(2020, 3, 2);
 }
