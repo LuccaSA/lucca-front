@@ -9,7 +9,7 @@
 			@include makeIcon("arrow_south");
 			bottom: #{_component("select.input.padding-vertical", true)};
 			bottom: _component("select.input.padding-vertical");
-			color: _color("primary", "color", true);
+			color: _color("primary", 700, true);
 			color: _color("primary");
 			font-size: 1.2rem;
 			line-height: 1.4rem;
@@ -275,13 +275,13 @@
 	// Error
 	:host-context(.textfield-input.is-error) {
 		&::after {
-			color: _color("error", "color", true);
+			color: _color("error", 700, true);
 			color: _color("error");
 		}
 
 		.lu-select-placeholder {
-			color: _color("error", "lighter", true);
-			color: _color("error", "lighter");
+			color: _color("error", 200, true);
+			color: _color("error", 200);
 		}
 	}
 
