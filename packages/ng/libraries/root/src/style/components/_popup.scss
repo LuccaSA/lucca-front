@@ -11,7 +11,6 @@
 
 	@each $panel-size, $size-obj in _getMap("components.popup.sizes") {
 		&.mod-#{$panel-size}, &.size-#{$panel-size} {
-			max-width: none;
 			width: _component("popup.sizes."+$panel-size);
 		}
 	}
