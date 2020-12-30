@@ -101,3 +101,22 @@
 		opacity: 0;
 	}
 }
+
+@include media_smaller_than("sm") {
+	.lu-popup-panel {
+		border-radius: 0;
+		max-width: 100vw;
+		max-height: 100vh;
+		width: 100vw;
+		width: fill-available;
+		height: 100vh;
+		height: fill-available;
+	}
+
+	.lu-modal-panel-inner {
+		max-height: 100vh;
+		max-height: fill-available;
+		height: 100vh;
+		height: fill-available;
+	}
+}
