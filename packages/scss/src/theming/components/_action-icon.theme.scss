@@ -3,7 +3,7 @@ $actionIcon: (
     _color("text.default")
   ),
   hover: (
-    background: _color("primary", "see-through"),
+    background: _color("primary", 50),
     color: _color("text.dark")
   ),
   invert: (

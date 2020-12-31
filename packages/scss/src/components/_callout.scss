@@ -88,8 +88,8 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background-color: _color($palette, "see-through");
-	color: _color($palette, "dark");
+	background-color: _color($palette, 50);
+	color: _color($palette, 800);
 
 	.callout-icon {
 		color: _color($palette);
