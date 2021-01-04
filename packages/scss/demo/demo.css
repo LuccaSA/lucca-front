@@ -299,3 +299,18 @@ formly-form .radiosfield:not(fieldset) {
 	margin-top: 0 !important;
 	padding: 1rem !important;
 }
+
+.layout > * {
+	outline: 1px solid;
+	outline-offset: -2px;
+}
+
+.layout-content-headers-header,
+.layout-content-headers-subheader,
+.layout-content-footer,
+.layout-navside-toggle,
+.layout-navside-footer,
+.layout-aside-footer {
+	outline: 1px solid;
+	outline-offset: -2px;
+}
