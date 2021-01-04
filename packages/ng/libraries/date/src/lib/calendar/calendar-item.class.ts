@@ -5,6 +5,7 @@ export abstract class ACalendarItem<D> implements ICalendarItem<D> {
 	get id() { return `${this.granularity}-${this.date.toString()}`; }
 	date: D;
 	mods: string[] = [];
+	isDisabled: boolean = false;
 	label: string;
 	readonly granularity: ELuDateGranularity;
 }

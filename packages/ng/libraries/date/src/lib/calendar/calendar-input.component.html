@@ -2,24 +2,27 @@
 	<header class="calendar-header">
 		<button class="calendar-header-nav" (click)="previous()">
 			<span aria-hidden="true" class="lucca-icon">arrow_west</span>
-			<span class="u-mask">Previous month</span>
+			<span class="u-mask">Previous</span>
 		</button>
 		<button class="calendar-header-date" (click)="changeGranularity()">
-			<!-- {{ month | date: 'MMMM y'}} -->
 			{{ header.label }}
 		</button>
-		<!-- <button class="calendar-header-previous"></button>
-		<button class="calendar-header-next"></button> -->
 		<button class="calendar-header-nav" (click)="next()">
 			<span aria-hidden="true" class="lucca-icon">arrow_east</span>
-			<span class="u-mask">Next month</span>
+			<span class="u-mask">Next</span>
 		</button>
 	</header>
 	<section class="calendar-labels" [ngClass]="mod">
 		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
 	</section>
 	<section class="calendar-grid" [ngClass]="mod">
-		<button class="calendar-grid-item" *ngFor="let item of items; trackBy: trackBy" [ngClass]="item.mods" (click)="select(item)">
+		<button
+			*ngFor="let item of items; trackBy: trackBy"
+			class="calendar-grid-item"
+			[ngClass]="item.mods"
+			[disabled]="item.isDisabled"
+			(click)="select(item)"
+		>
 			<div class="calendar-grid-item-content">{{ item.label }}</div>
 		</button>
 	</section>
