@@ -7,5 +7,6 @@ export interface ILuModalContent<T = any> extends ILuPopupContent {
 	submitLabel?: string;
 	submitPalette?: string;
 	submitDisabled?: boolean;
+	submitCounter?: number;
 	cancelLabel?: string;
 }

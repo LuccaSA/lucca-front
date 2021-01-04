@@ -21,15 +21,22 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	get cancelLabel() {
 		return this._componentInstance.cancelLabel || this.intl.cancel;
 	}
-	get submitDisabled() {
+	get isSubmitDisabled() {
 		return this._componentInstance.submitDisabled;
 	}
-	get submitHidden() {
+	get isSubmitHidden() {
 		return !this._componentInstance.submitAction;
 	}
 	get submitPalette() {
 		return this._componentInstance.submitPalette || 'primary';
 	}
+	get hasSubmitCounter() {
+		return !!this._componentInstance.submitCounter;
+	}
+	get submitCounter() {
+		return this._componentInstance.submitCounter || 0;
+	}
+	
 	submitClass$ = new Subject();
 	error$ = new Subject();
 
