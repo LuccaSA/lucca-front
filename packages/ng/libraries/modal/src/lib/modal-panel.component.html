@@ -10,7 +10,17 @@
 		<!-- <ng-template [ngIf]="error$ | async as error"> -->
 			<label *ngIf="error$ | async as error" class="label palette-error">{{error}}</label>
 		<!-- </ng-template> -->
-		<button *ngIf="!submitHidden" class="button palette-{{submitPalette}}" [class.is-disabled]="submitDisabled" [ngClass]="submitClass$ | async" (click)="submit()">{{submitLabel}}</button>
+		<button
+			*ngIf="!isSubmitHidden"
+			class="button palette-{{submitPalette}}"
+			[disabled]="isSubmitDisabled"
+			[class.mod-counter]="hasSubmitCounter"
+			[ngClass]="submitClass$ | async"
+			(click)="submit()"
+		>
+			{{submitLabel}}
+			<label class="button-counter" *ngIf="hasSubmitCounter">{{submitCounter}}</label>
+		</button>
 		<button class="button mod-link" (click)="dismiss()">{{cancelLabel}}</button>
 	</div>
 </div>
