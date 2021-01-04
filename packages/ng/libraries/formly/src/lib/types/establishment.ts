@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './establishment.html'
 })
 export class LuFormlyFieldEstablishment extends FieldType {
+	readonly formControl: FormControl;
 	focus() {
 		this.to._isFocused = true;
 	}

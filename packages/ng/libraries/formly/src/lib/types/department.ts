@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -8,6 +9,7 @@ import { FieldType } from '@ngx-formly/core';
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyFieldDepartment extends FieldType {
+	readonly formControl: FormControl;
 	focus() {
 		this.to._isFocused = true;
 	}

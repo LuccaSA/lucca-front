@@ -17,6 +17,8 @@ export class LuFormlyWrapperError extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	fieldComponent: ViewContainerRef;
 
+	readonly formControl: FormControl;
+
 	get validationId() {
 		return this.field.id + '-message';
 	}
