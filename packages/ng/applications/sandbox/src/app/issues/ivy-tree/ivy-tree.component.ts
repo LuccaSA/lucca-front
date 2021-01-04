@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ILuTree } from '@lucca-front/ng/core';
 
 const node1 = { id: 1, name: 'root 1' };
 const node11 = { id: 11, name: 'node 1.1' };
@@ -12,22 +13,22 @@ const node21 = { id: 21, name: 'node 2.1' };
 	templateUrl: './ivy-tree.component.html'
 })
 export class IvyTreeComponent {
-	tree = {
+	tree: ILuTree<{ id: number, name: string }> = {
 		value: node1,
 		children: [
-			{ value: node11, children: [ { value: node111 } ] },
+			{ value: node11, children: [ { value: node111, children: [] } ] },
 			{ value: node12, children: [] },
 		]
 	};
-	options = [{
+	options: ILuTree<{ id: number, name: string }>[] = [{
 		value: node1,
 		children: [
-			{ value: node11, children: [ { value: node111 } ] },
+			{ value: node11, children: [ { value: node111, children: [] } ] },
 			{ value: node12, children: [] },
 		]
 	}, {
 		value: node2,
-		children: [ { value: node21 }]
+		children: [ { value: node21, children: [] }]
 	}];
 	item;
 	collection = [];
