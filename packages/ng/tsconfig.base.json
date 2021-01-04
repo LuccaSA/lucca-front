@@ -92,8 +92,9 @@
   },
   "angularCompilerOptions": {
     "enableIvy": false,
-    "fullTemplateTypeCheck": false,
-    "strictInjectionParameters": false
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "strictTemplates": true
   },
   "exclude": [
     "**/test.ts",
