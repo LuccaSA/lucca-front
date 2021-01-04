@@ -385,7 +385,7 @@
 	.navSide-item.mod-mobileToggle {
 		display: block;
 		height: _component("navSide.mobile.toggle-height");
-		background-color: _color("primary", "dark");
+		background-color: _color("primary", 800);
 		cursor: pointer;
 		overflow: hidden;
 		position: fixed;

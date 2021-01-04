@@ -59,8 +59,8 @@
 		text-align: center;
 		font-size: _theme("sizes.small.font-size", true);
 		font-size: _theme("sizes.small.font-size");
-		color: _color("text.light", "color", true);
-		color: _color("text.light");
+		color: _color("primary", 700, true);
+		color: _color("primary");
 		margin-bottom: _theme("spacings.smaller", true);
 		margin-bottom: _theme("spacings.smaller");
 	}
@@ -101,14 +101,14 @@
 	}
 
 	&.is-today {
-		color: _color("primary", "color", true);
-		color: _color("primary");
+		color: _color("grey", 800, true);
+		color: _color("grey", 800);
 
 		&:before {
 			content: "";
 			z-index: 2;
-			box-shadow: inset 0 0 0 2px _color("primary", "lighter", true);
-			box-shadow: inset 0 0 0 2px _color("primary", "lighter");
+			box-shadow: inset 0 0 0 2px _color("primary", 300, true);
+			box-shadow: inset 0 0 0 2px _color("primary", 300);
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -120,14 +120,14 @@
 
 	&:hover {
 		.calendar-grid-item-content {
-			background: _color("primary", "lighter", true);
-			background: _color("primary", "lighter");
+			background: _color("grey", 100, true);
+			background: _color("grey", 100);
 		}
 	}
 
 	&.is-active {
 		.calendar-grid-item-content {
-			background: _color("primary", "color", true);
+			background: _color("primary", 700, true);
 			background: _color("primary");
 			color: _color("primary", "text", true);
 			color: _color("primary", "text");
@@ -138,7 +138,7 @@
 				&:after {
 					content: "";
 					z-index: 1;
-					color: _color("primary", "color", true);
+					color: _color("primary", 700, true);
 					color: _color("primary");
 					box-shadow: inset 0 0 0 4px white;
 					position: absolute;
