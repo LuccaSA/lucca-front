@@ -53,7 +53,7 @@
 	}
 
 	// default color
-	@include radioColoring("radioButtons.default-palette");
+	@include radioColoring("grey");
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {

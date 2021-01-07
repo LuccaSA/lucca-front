@@ -28,7 +28,7 @@
 }
 
 .layout-content-container {
-	max-width: (_theme("breakpoints.lg.breakAt") / 16px * 1rem);
+	max-width: calc(#{_theme("breakpoints.lg.breakAt", true)} / 16px * 1rem);
 }
 
 .layout-banner {

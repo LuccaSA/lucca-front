@@ -5,5 +5,6 @@ export interface ICalendarItem<D> {
 	date: D;
 	mods: string[];
 	label: string;
+	isDisabled: boolean;
 	granularity: ELuDateGranularity;
 }

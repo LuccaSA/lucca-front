@@ -2,7 +2,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 @mixin actionIconColoring($palette) {
-	color: _color($palette, "light");
+	color: _color($palette, 500);
 
 	&:hover {
 		&:not([disabled]) {

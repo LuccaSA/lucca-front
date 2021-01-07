@@ -18,12 +18,12 @@
 
 .tag {
 	@mixin tagColoring($palette) {
-		background-color: _color($palette, "see-through");
-		color: _color($palette, "dark");
+		background-color: _color($palette, 50);
+		color: _color($palette, 800);
 
 		&.mod-clickable {
 			&:hover {
-				color: _color($palette, "darker");
+				color: _color($palette, 900);
 			}
 		}
 	}

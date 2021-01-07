@@ -16,10 +16,10 @@
 		width: 1rem;
 
 		&:hover {
-			background: _color("primary", "see-through", true);
-			background: _color("primary", "see-through");
-			color: _color("primary", "dark", true);
-			color: _color("primary", "dark");
+			background: _color("primary", 50, true);
+			background: _color("primary", 50);
+			color: _color("primary", 800, true);
+			color: _color("primary", 800);
 		}
 	}
 
@@ -51,10 +51,10 @@
 			color: _color("error");
 
 			&:hover {
-				background: _color("error", "see-through", true);
-				background: _color("error", "see-through");
-				color: _color("error", "dark", true);
-				color: _color("error", "dark");
+				background: _color("error", 50, true);
+				background: _color("error", 50);
+				color: _color("error", 800, true);
+				color: _color("error", 800);
 			}
 		}
 	}
