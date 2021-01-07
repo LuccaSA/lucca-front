@@ -1,7 +1,8 @@
 $font-path: "lucca-icons" !default;
+$font-name: "Lucca icons" !default;
 @at-root {
 	@font-face {
-		font-family: "Lucca icons";
+		font-family: $font-name;
 		font-style: normal;
 		font-weight: 400;
 		src:  url('#{$font-path}.eot');
