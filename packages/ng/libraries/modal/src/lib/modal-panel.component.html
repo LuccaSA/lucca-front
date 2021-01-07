@@ -7,9 +7,6 @@
 		<ng-container cdkPortalOutlet #outlet></ng-container>
 	</div>
 	<div class="lu-modal-footer">
-		<!-- <ng-template [ngIf]="error$ | async as error"> -->
-			<label *ngIf="error$ | async as error" class="label palette-error">{{error}}</label>
-		<!-- </ng-template> -->
 		<button
 			*ngIf="!isSubmitHidden"
 			class="button palette-{{submitPalette}}"
