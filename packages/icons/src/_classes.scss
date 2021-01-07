@@ -35,7 +35,7 @@
 	@return $return;
 }
 
-.lucca-icon {
+@mixin buildIconClasses {
 	@each $ligature, $char in $mappings {
 		$class: str-camelcase($ligature);
 		&.icon-#{$class}::before {
