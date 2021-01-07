@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 @Component({
 	selector: 'lu-formly-field-input',
@@ -10,6 +11,7 @@ export class LuFormlyFieldInput extends FieldType {
 	get type() {
 		return this.to.type || 'text';
 	}
+	readonly formControl: FormControl;
 	focus() {
 		this.to._isFocused = true;
 	}

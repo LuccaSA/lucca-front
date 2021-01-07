@@ -14,7 +14,7 @@
 	<input type="text" class="textfield-input" [luPopover]="basic" luPopoverTrigger="focus" placeholder="on focus">
 </div>
 <br />
-<span class="label" [luPopover]="basic" luPopoverTrigger="hover" luPopoverEnterDelay="2000" luPopoverLeaveDelay="1000">on hover with delay</span>
+<span class="label" [luPopover]="basic" luPopoverTrigger="hover" [luPopoverEnterDelay]="2000" [luPopoverLeaveDelay]="1000">on hover with delay</span>
 <br />
 <button class="button" [luPopover]="popoverUsingTemplate">using template</button>
 <br />

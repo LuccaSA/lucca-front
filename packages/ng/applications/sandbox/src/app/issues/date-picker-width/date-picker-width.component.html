@@ -2,7 +2,7 @@
 
 <h2>Basic</h2>
 <div class="textfield u-marginBottomBig">
-	<lu-select class="textfield-input" [(ngModel)]="date" pickerOverlap="true">
+	<lu-select class="textfield-input" [(ngModel)]="date" [pickerOverlap]="true">
 		<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 		<lu-date-picker></lu-date-picker>
 		<lu-input-clearer></lu-input-clearer>
@@ -12,7 +12,7 @@
 
 <h2>mod-shorter</h2>
 <div class="textfield mod-shorter u-marginBottomBig">
-	<lu-select class="textfield-input" [(ngModel)]="date" pickerOverlap="true">
+	<lu-select class="textfield-input" [(ngModel)]="date" [pickerOverlap]="true">
 		<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 		<lu-date-picker></lu-date-picker>
 		<lu-input-clearer></lu-input-clearer>
@@ -22,7 +22,7 @@
 
 <h2>mod-longest</h2>
 <div class="textfield mod-longest u-marginBottomBig">
-	<lu-select class="textfield-input" [(ngModel)]="date" pickerOverlap="true">
+	<lu-select class="textfield-input" [(ngModel)]="date" [pickerOverlap]="true">
 		<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 		<lu-date-picker></lu-date-picker>
 		<lu-input-clearer></lu-input-clearer>
@@ -32,7 +32,7 @@
 
 <h2>mod-block</h2>
 <div class="textfield mod-block">
-	<lu-select class="textfield-input" [(ngModel)]="date" pickerOverlap="true">
+	<lu-select class="textfield-input" [(ngModel)]="date" [pickerOverlap]="true">
 		<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 		<lu-date-picker></lu-date-picker>
 		<lu-input-clearer></lu-input-clearer>

@@ -171,7 +171,7 @@ export class SelectOptionPlaceholderComponent {
 		{ name: 'yellowgreen', code: '#9acd32' },
 	];
 
-	options: ILuTree[] = [{
+	options: ILuTree<{ id: number, name: string }>[] = [{
 		value: node1,
 		children: [
 			{ value: node11, children: [ { value: node111, children: [] } ] },

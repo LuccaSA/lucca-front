@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 	templateUrl: './date-picker-width.component.html'
 })
 export class DatePickerWidthComponent {
+	true = true;
 	date;
 }
 

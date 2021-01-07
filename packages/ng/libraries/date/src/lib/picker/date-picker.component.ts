@@ -17,7 +17,8 @@ import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 		},
 	]
 })
-export class LuDatePickerComponent<D> extends ALuPickerPanel<D> {
+
+export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_value: D;
 
 	@Input() min?: D;
