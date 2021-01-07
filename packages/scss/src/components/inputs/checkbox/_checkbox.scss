@@ -51,13 +51,14 @@
 .checkbox {
 	@mixin checkboxColoring($palette) {
 		.checkbox-input:checked ~ .checkbox-label {
-
 			&::before {
 				color: white;
 				background-color: _color($palette);
 				border: 2px solid _color($palette);
 			}
+		}
 
+		.checkbox-input:not(:disabled):checked ~ .checkbox-label {
 			&:hover {
 				&::before {
 					background-color: _color($palette, "600");
