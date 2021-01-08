@@ -2,7 +2,7 @@ import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
-import { ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -17,23 +17,30 @@ import { ELuDateGranularity } from '@lucca-front/ng/core';
 		},
 	]
 })
-export class LuDatePickerComponent extends ALuPickerPanel<Date> {
-	_value: Date;
 
-	@Input() min?: Date;
-	@Input() max?: Date;
+export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
+	_value: D;
+
+	@Input() min?: D;
+	@Input() max?: D;
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+	@Input() startOn: D = this._adapter.forgeToday();
 
 	@Output() close = new EventEmitter<void>();
 	@Output() open = new EventEmitter<void>();
 	@Output() hovered = new EventEmitter<boolean>();
-	@Output() onSelectValue = new EventEmitter<Date>();
+	@Output() onSelectValue = new EventEmitter<D>();
 
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}
-
+	
+	constructor(
+		private _adapter: ALuDateAdapter<D>,
+	) {
+		super();
+	}
 	_emitOpenEvent(): void {
 		this.open.emit();
 	}
@@ -43,20 +50,20 @@ export class LuDatePickerComponent extends ALuPickerPanel<Date> {
 	_emitHoveredEvent(h): void {
 		this.hovered.emit(h);
 	}
-	_emitSelectValue(val: Date) {
+	_emitSelectValue(val: D) {
 		this.onSelectValue.emit(val);
 	}
-	setValue(value: Date) {
+	setValue(value: D) {
 		this._value = value;
 	}
-	_onCalendar(val: Date) {
+	_onCalendar(val: D) {
 		this._value = val;
 		this._emitSelectValue(val);
 		// if (!this.multiple) {
 			this._emitCloseEvent();
 		// }
 	}
-	_onInput(val: Date) {
+	_onInput(val: D) {
 		this._value = val;
 		this._emitSelectValue(val);
 	}

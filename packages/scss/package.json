@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/scss",
-  "version": "5.1.8",
+  "version": "6.0.0-rc.2",
   "description": "a scss-framework based on trello's css naming",
   "main": "src/main.scss",
   "scripts": {
@@ -29,16 +29,16 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.26.13",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean": "^0.4.0",
     "gulp-dart-sass": "^1.0.2",
     "gulp-rename": "^2.0.0",
     "gulp-stylelint": "^13.0.0",
-    "stylelint": "^13.5.0"
+    "stylelint": "^13.8.0"
   },
   "dependencies": {
-    "@lucca-front/icons": "5.1.8"
+    "@lucca-front/icons": "6.0.0-rc.2"
   }
 }

@@ -196,8 +196,8 @@
 
 	&.mod-parent {
 		.table-body-row-cell {
-			background-color: _color("grey", "lightest");
-			color: _color("grey", "dark");
+			background-color: _color("grey", 100);
+			color: _color("grey", 800);
 			font-size: _theme("sizes.small.font-size");
 			font-weight: 600;
 			line-height: _theme("sizes.small.line-height");

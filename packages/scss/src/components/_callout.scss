@@ -22,7 +22,7 @@
 .callout-kill {
 	background-color: transparent;
 	border: 0;
-	color: _color("text.default");
+	color: currentColor;
 	cursor: pointer;
 	height: 1.5rem;
 	padding: 0;
@@ -34,7 +34,6 @@
 
 	&::before {
 		@include makeIcon("cross");
-		font-family: "Lucca icons";
 	}
 
 	&:hover {
@@ -50,7 +49,8 @@
 	margin: auto;
 	border-radius: 50%;
 	text-align: center;
-
+	color: currentColor;
+	
 	.lucca-icon {
 		font-size: 1.2rem;
 		vertical-align: middle;
@@ -88,16 +88,8 @@
 }
 
 @mixin calloutDefaultPalette($palette) {
-	background-color: _color($palette, "see-through");
-	color: _color($palette, "dark");
-
-	.callout-icon {
-		color: _color($palette);
-	}
-
-	.callout-kill {
-		color: _color($palette);
-	}
+	background-color: _color($palette, 50);
+	color: _color($palette, 800);
 }
 .callout {
 	@each $name, $palette in _getMap("palettes") {

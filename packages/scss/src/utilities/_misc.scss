@@ -57,3 +57,14 @@
 .u-buttonReset {
 	@include buttonReset("!important");
 }
+
+html,
+.u-scrollBehaviorSmooth {
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
+	}
+}
+
+.u-scrollBehaviorAuto {
+	scroll-behavior: auto;
+}

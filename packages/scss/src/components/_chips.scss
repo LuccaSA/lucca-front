@@ -29,7 +29,6 @@
 
 	&::before {
 		@include makeIcon("cross");
-		font-family: "Lucca icons";
 	}
 
 	&:hover {

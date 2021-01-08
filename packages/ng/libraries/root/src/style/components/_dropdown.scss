@@ -88,8 +88,8 @@
 	
 	&:focus, // delete this line when sub-menus are implemented
 	&:hover {
-		background-color: _color("primary", "lightest", true);
-		background-color: _color("primary", "lightest");
+		background-color: _color("primary", 100, true);
+		background-color: _color("primary", 100);
 	}
 
 	&.is-disabled {

@@ -11,7 +11,6 @@
 
 	@each $panel-size, $size-obj in _getMap("components.popup.sizes") {
 		&.mod-#{$panel-size}, &.size-#{$panel-size} {
-			max-width: none;
 			width: _component("popup.sizes."+$panel-size);
 		}
 	}
@@ -100,5 +99,24 @@
 @keyframes fadeInBackdrop {
 	from {
 		opacity: 0;
+	}
+}
+
+@include media_smaller_than("sm") {
+	.lu-popup-panel {
+		border-radius: 0;
+		max-width: none;
+		max-height: 100vh;
+		width: 100%;
+		width: fill-available;
+		height: 100vh;
+		height: fill-available;
+	}
+
+	.lu-modal-panel-inner {
+		max-height: 100vh;
+		max-height: fill-available;
+		height: 100vh;
+		height: fill-available;
 	}
 }

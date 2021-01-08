@@ -1,7 +1,7 @@
 $radioButtons: (
 	default-palette: _getMap("palettes.primary"),
 	hover: _getMap("palettes.primary"),
-	active: _color("grey", "dark"),
+	active: _color("grey", 800),
 	padding: _theme("spacings.smaller") _theme("spacings.small"),
 	small: (
 		font-size: _theme("sizes.small.font-size"),

@@ -39,7 +39,7 @@
 
 <h2>date-picker</h2>
 <div class="textfield">
-	<lu-select class="textfield-input" [(ngModel)]="date" pickerOverlap="true">
+	<lu-select class="textfield-input" [(ngModel)]="date" [pickerOverlap]="true">
 		<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 		<lu-date-picker [min]="min" [max]="max"></lu-date-picker>
 		<lu-input-clearer></lu-input-clearer>
@@ -49,7 +49,7 @@
 <h3>in a form</h3>
 <form [formGroup]="formPic" (ngSubmit)="submit()">
 	<div class="textfield">
-		<lu-select class="textfield-input" formControlName="date" required pickerOverlap="true">
+		<lu-select class="textfield-input" formControlName="date" required [pickerOverlap]="true">
 			<ng-container *luDisplayer="let value">{{ value | luDate }}</ng-container>
 			<lu-date-picker [min]="min" [max]="max"></lu-date-picker>
 			<lu-input-clearer></lu-input-clearer>

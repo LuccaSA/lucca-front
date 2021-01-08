@@ -46,6 +46,8 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() hideClearer: boolean = false;
+	@Input() startOn: D = this._adapter.forgeToday();
+
 	get format(): string {
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
