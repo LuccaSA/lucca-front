@@ -439,7 +439,7 @@
 </section>
 
 <section class="contentSection">
-	<h1>Ordered and vertical timeline with add step option</h1>
+	<h1>Ordered and vertical timeline with add on last step</h1>
 	<section class="timeline mod-smallNumber mod-add mod-vertical">
 		<div class="timeline-step">
 			<h2 class="timeline-step-title">
@@ -471,7 +471,7 @@
 		</div>
 		<div class="timeline-step">
 			<h2 class="timeline-step-title">
-				<button class="button timeline-step-add mod-small">
+				<button class="button timeline-step-addLast mod-small">
 					Add step
 				</button>
 			</h2>
@@ -488,12 +488,75 @@
 	…
 	&lt;div class=&quot;timeline-step&quot;&gt;
 		&lt;h2 class=&quot;timeline-step-title&quot;&gt;
-			&lt;button class=&quot;button mod-small timeline-step-add&quot;&gt;
+			&lt;button class=&quot;button mod-small timeline-step-addLast&quot;&gt;
 				Add step
 			&lt;/button&gt;
 		&lt;/h2&gt;
 		…
 	&lt;/div&gt;
+&lt;/ol&gt;</code>
+
+</section>
+
+<section class="contentSection">
+	<h1>Timeline with add between options</h1>
+	<section class="timeline mod-vertical mod-number">
+		<div class="timeline-step">
+			<h2 class="timeline-step-title">
+				First step
+			</h2>
+			<div class="gauge mod-vertical mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+			<div class="timeline-step-addBetween">
+				<button
+					type="button"
+					href="#"
+					class="timeline-step-addBetween-action"
+				>
+					<span class="timeline-step-addBetween-action-icon">
+						<span class="lucca-icon icon-plus" aria-hidden="true"></span>
+					</span>
+					<span class="u-mask">
+						Ajouter une étape intermédiaire entre l’étape 1 et l’étape 2
+					</span>
+					<span class="hr u-displayBlock"></span>
+				</button>
+			</div>
+		</div>
+		<div class="timeline-step">
+			<h2 class="timeline-step-title">
+				Second step
+			</h2>
+			<div class="gauge mod-vertical mod-thin">
+				<div class="gauge-bar"></div>
+			</div>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure porro atque, laboriosam at vitae expedita ab recusandae voluptas obcaecati commodi deleniti enim doloremque? Consequuntur quisquam natus obcaecati recusandae officia dicta.
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+		</div>
+	</section>
+
+	
+	
+<code class="code mod-block">&lt;ol class=&quot;timeline mod-vertical&quot;&gt;
+	…
+	&lt;div class=&quot;timeline-step-addBetween&quot;&gt;
+		&lt;button
+			type=&quot;button&quot;
+			href=&quot;#&quot;
+			class=&quot;timeline-step-addBetween-action&quot;
+		&gt;
+			&lt;span class=&quot;timeline-step-addBetween-action-icon&quot;&gt;
+				&lt;span class=&quot;lucca-icon icon-plus&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+			&lt;/span&gt;
+			&lt;span class=&quot;u-mask&quot;&gt;
+				Ajouter une &eacute;tape interm&eacute;diaire entre l&rsquo;&eacute;tape 1 et l&rsquo;&eacute;tape 2
+			&lt;/span&gt;
+			&lt;span class=&quot;hr u-displayBlock&quot;&gt;&lt;/span&gt;
+		&lt;/button&gt;
+	&lt;/div&gt;
+	…
 &lt;/ol&gt;</code>
 
 </section>
