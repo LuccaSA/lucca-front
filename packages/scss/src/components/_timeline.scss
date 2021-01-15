@@ -144,7 +144,7 @@
 
 		&::after {
 			content: counter(timeline);
-			color: white; // todo
+			color: _color("white");
 			bottom: auto;
 			background-color: transparent;
 			text-align: center;
@@ -164,7 +164,7 @@
 
 		&::after {
 			width: 1.25rem; // magic number
-			font-size: _theme("sizes.small.font-size", true);
+			font-size: _theme("sizes.small.font-size");
 		}
 	}
 
@@ -224,7 +224,7 @@
 		right: 100%;
 		top: 0;
 		bottom: 0;
-		width: 2rem; // todo
+		width: _theme("spacings.big");
 		z-index: 1;
 	}
 }
