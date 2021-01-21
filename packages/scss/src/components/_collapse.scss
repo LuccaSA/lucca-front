@@ -1,9 +1,5 @@
 .collapse {
 	display: block;
-
-	summary::-webkit-details-marker {
-		display: none;
-	}
 }
 
 .collapse-title {
@@ -11,6 +7,10 @@
 	display: inline-flex;
 	margin-bottom: _theme("spacings.smallest");
 	overflow: hidden;
+
+	&::-webkit-details-marker {
+		display: none;
+	}
 
 	&:focus-within,
 	&:hover {
