@@ -8,6 +8,10 @@
 	margin-bottom: _theme("spacings.smallest");
 	overflow: hidden;
 
+	&::-webkit-details-marker {
+		display: none;
+	}
+
 	&:focus-within,
 	&:hover {
 		color: _color("text.dark");
@@ -15,10 +19,10 @@
 
 	&::before {
 		@include makeIcon("chevron_east");
-
 		font-size: _theme("sizes.smaller.font-size");
 		margin-right: _theme("spacings.smallest");
 		transition: transform _theme("commons.animations.durations.fast");
+		vertical-align: middle;
 	}
 }
 
