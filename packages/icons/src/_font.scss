@@ -20,8 +20,9 @@ $font-name: "Lucca icons" !default;
 		font-feature-settings: "liga";
 		-webkit-font-variant-ligatures: discretionary-ligatures;
 		font-variant-ligatures: discretionary-ligatures;
-
-		/* Better Font Rendering =========== */
+	}
+	
+	body {
 		-moz-osx-font-smoothing: grayscale;
 	}
 }
