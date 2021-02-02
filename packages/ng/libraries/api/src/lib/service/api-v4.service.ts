@@ -12,18 +12,27 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 	set api(api: string) { this._api = api; }
 	protected _filters: string[] = [];
 	set filters(filters: string[]) { this._filters = filters || []; }
+	protected _sort: string;
+	set sort(sort: string) { this._sort = sort; }
 
 	constructor(protected _http: HttpClient) { super(); }
 
 	getAll(filters: string[] = []): Observable<T[]> {
-		const url = [this._api, [...this._filters, ...filters].join('&')].join('?');
-
+		const query = [...this._filters, ...filters]
+		if (this._sort != null) {
+			query.push(`sort=${this._sort}`);
+		}
+		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(
 			map(res => res.items),
 		);
 	}
 	getPaged(page: number = 0, filters: string[] = []): Observable<T[]> {
-		const url = [this._api, [`page=${page + 1}`, ...this._filters, ...filters].join('&')].join('?');
+		const query = [`page=${page + 1}`, ...this._filters, ...filters]
+		if (this._sort != null) {
+			query.push(`sort=${this._sort}`);
+		}
+		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(
 			map(res => res.items),
 		);
@@ -31,7 +40,11 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 	searchAll(clue: string = '', filters: string[] = []): Observable<T[]> {
 		if (!clue) { return this.getAll(filters); }
 		const urlSafeClues = clue.split(' ').map(c => encodeURIComponent(c));
-		const url = [this._api, [`search=${urlSafeClues}`, ...this._filters, ...filters].join('&')].join('?');
+		const query = [`search=${urlSafeClues}`, ...this._filters, ...filters];
+		if (this._sort != null) {
+			query.push(`sort=${this._sort}`);
+		}
+		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(
 			map(res => res.items),
 		);
@@ -39,7 +52,11 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 	searchPaged(clue: string = '', page: number = 0, filters: string[] = []): Observable<T[]> {
 		if (!clue) { return this.getPaged(page, filters); }
 		const urlSafeClues = clue.split(' ').map(c => encodeURIComponent(c));
-		const url = [this._api, [`search=${urlSafeClues}`, `page=${page + 1}`, ...this._filters, ...filters].join('&')].join('?');
+		const query = [`search=${urlSafeClues}`, `page=${page + 1}`, ...this._filters, ...filters];
+		if (this._sort != null) {
+			query.push(`sort=${this._sort}`);
+		}
+		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(
 			map(res => res.items),
 		);

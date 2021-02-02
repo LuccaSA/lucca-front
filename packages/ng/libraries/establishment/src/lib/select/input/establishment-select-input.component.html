@@ -9,13 +9,21 @@
 </div>
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else: singleView"><span class="chip mod-unkillable">{{values.length}}</span> {{intl.establishments}}</span>
+	<span *ngIf="multiple && values?.length > 1; else: singleView"><span
+			class="chip mod-unkillable">{{values.length}}</span> {{intl.establishments}}</span>
 	<ng-template #singleView>{{(values[0] || values).name}}</ng-template>
 </ng-template>
 
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
-		<lu-establishment-searcher [filters]="filters"></lu-establishment-searcher>
+		<lu-establishment-searcher [filters]="filters" sort="legalunit.name,name"></lu-establishment-searcher>
 	</header>
-	<lu-option *luForOptions="let establishment; trackBy: trackById" [value]="establishment">{{establishment.name}}</lu-option>
+
+	<ng-template luForGroups let-group [luForGroupsGroupBy]="groupBy">
+		<h4>{{group.key}}</h4>
+
+		<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment">
+			{{establishment.name}}
+		</lu-option>
+	</ng-template>
 </lu-option-picker-advanced>

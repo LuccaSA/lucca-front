@@ -50,6 +50,7 @@ export class LuEstablishmentSearcherComponent
 	implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment>
 {
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
+	@Input() set sort(sort: string) { this._service.sort = sort; }
 
 	private _service: LuEstablishmentService;
 	private _subs = new Subscription();
@@ -103,15 +104,15 @@ export class LuEstablishmentSearcherComponent
 		);
 
 		const resultsSub = results$
-		.pipe(withLatestFrom(distinctPage$))
-		.subscribe(([items, page]) => {
-			if (page === 0) {
-				this._options = [...items];
-			} else {
-				this._options.push(...items);
-			}
-			this.outOptions$.next([...this._options]);
-		});
+			.pipe(withLatestFrom(distinctPage$))
+			.subscribe(([items, page]) => {
+				if (page === 0) {
+					this._options = [...items];
+				} else {
+					this._options.push(...items);
+				}
+				this.outOptions$.next([...this._options]);
+			});
 		this._subs.add(resultsSub);
 
 		this.loading$ = merge(

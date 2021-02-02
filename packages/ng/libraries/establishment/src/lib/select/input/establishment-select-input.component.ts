@@ -33,10 +33,13 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 	],
 })
 export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
-extends ALuSelectInputComponent<D, P>
-implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
+	extends ALuSelectInputComponent<D, P>
+	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 	@Input() filters: string[];
+	public get establishmentFilters(): string {
+		return
+	}
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -56,5 +59,8 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	}
 	trackById(idx: number, item: ILuEstablishment): number {
 		return item.id;
+	}
+	groupBy(establishment: ILuEstablishment): string {
+		return establishment?.legalUnit?.name;
 	}
 }
