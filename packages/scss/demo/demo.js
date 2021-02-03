@@ -33,6 +33,32 @@ function toastKill() {
 //document.getElementsByClassName('toasts-item-kill').addEventListener('click', function() { alert() }, false);
 
 
+/* TOAST COMM IN APP */
+
+function toastCommInApp() {
+	var toastsCommInAppBox = document.getElementById("toastsCommInAppBox");
+	var toastCommInApp = document.createElement("div");
+	var toastsCommInAppValues = [
+		'<img src="../images/commInApp.svg">\
+		<div class="toasts-content"><div class="toasts-content-title"><strong>Le module fait peau neuve !</strong></div>\
+		<p>Carentibus et vates arduos quam gloriae honeste ob primo.</p>\
+		<button class="button mod-outline mod-white mod-smaller">Essayez maintenant</button><button class="button mod-link mod-invert mod-smaller">Plus tard</button></div>',
+	];
+	var r = Math.floor(Math.random() * Math.floor(toastsCommInAppValues.length));
+	toastCommInApp.className = "toasts-item";
+	toastCommInApp.innerHTML = toastsCommInAppValues[r];
+	var close = document.createElement('button');
+	close.className = "toasts-item-kill";
+	close.addEventListener('click', toastKill, false);
+	toastCommInApp.appendChild(close);
+	toastsCommInAppBox.appendChild(toastCommInApp);
+}
+
+function toastKill() {
+	this.parentElement.remove();
+}
+
+
 /* ANIMATIONS */
 function reloadAnimation(elem) {
 	var card = elem.getElementsByClassName('card')[0];
