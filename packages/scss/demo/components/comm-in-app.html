@@ -1,0 +1,32 @@
+<h1 class="demo-divider">Communication in App</h1>
+
+<section class="contentSection">
+	<h1>Toasts Comm In App <span class="label palette-warning">Work in progress</span></h1>
+	<p>Toasts Comm In App allow you to show information about new module, on a corner (bottom left) of your app.</p>
+	<p><span aria-hidden="true" class="lucca-icon u-textWarning">warning</span><span class="u-mask">Warning:</span> You have to manually create and kill your toasts for now, they will be added in the NG package in the future.
+        <div class="toasts mod-commInApp" id="toastsCommInAppBox"></div>
+        <button class="button palette-primary u-marginBottomStandard" id="toastGenerate" onclick="toastCommInApp()">Generate toast Comm in App</button>
+    <p>You have to use the same code as toast, BUT you need to add the mod-commInApp class to the div.toasts </p>
+<code class="code mod-block">&lt;div class="toasts mod-commInApp"&gt;
+    &lt;div class="toasts-item"&gt;
+		&lt;button class="toasts-item-kill"&gt;&lt;/button&gt;
+			...
+	&lt;/div&gt;
+	&lt;div class="toasts-item"&gt;
+		&lt;button class="toasts-item-kill"&gt;&lt;/button&gt;
+			...
+	&lt;/div&gt;
+&lt;/div&gt;
+</code>
+
+    <p class="u-marginTopStandard">If you want to use the same template for your comm In app, we recommand you to copy this code into your innerhtml toast item</p>
+<code class="code mod-block">&lt;img src="../images/commInApp.svg"&gt;
+&lt;div class="toasts-content"&gt;
+    &lt;div class="toasts-content-title"&gt;&lt;strong&gt;Le module fait peau neuve !&lt;/strong&gt;&lt;/div&gt;
+    &lt;p&gt;Carentibus et vates arduos quam gloriae honeste ob primo.&lt;/p&gt;
+    &lt;button class="button mod-outline mod-white mod-smaller"&gt;Essayez maintenant&lt;/button&gt;
+    &lt;button class="button mod-link mod-invert mod-smaller"&gt;Plus tard&lt;/button&gt;
+&lt;/div&gt;
+</code>
+
+</section>
