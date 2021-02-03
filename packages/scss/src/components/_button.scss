@@ -220,6 +220,11 @@
 			color: _color("primary");
 		}
 
+		&.mod-white {
+			background-color: white;
+			color: _color('grey', '700');
+		}
+
 		// default color
 		@include buttonOutlineColoring("button.default-palette");
 
