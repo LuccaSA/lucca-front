@@ -9,6 +9,35 @@
 	top: _component("toasts.top");
 	width: _component("toasts.width");
 	z-index: 9999;
+
+	&.mod-commInApp {
+		top:  inherit;
+		left:  _component("toasts.left");
+		bottom: _component("toasts.bottom");
+		width: _component("toasts.big");
+
+		.toasts-item {
+			background-color: _color('primary', '700');
+			margin-left: inherit;
+			padding: 0;
+			display: flex;
+		}
+
+		.toasts-content {
+			padding: _theme('spacings.standard') 0;
+			margin-left: _theme('spacings.standard');
+			margin-right: _theme('spacings.standard');
+		}
+
+		.toasts-content-title {
+			margin-bottom: _theme('spacings.smaller');
+		}
+		
+		.toasts-item-kill {
+			bottom: inherit;
+			top: _theme('spacings.smaller');
+		}
+	}
 }
 
 .toasts-item {
