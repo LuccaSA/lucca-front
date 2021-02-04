@@ -12,11 +12,10 @@ import {
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
 import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
-import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
-import { LuOptionComparer } from '@lucca-front/ng/option';
-import { ILuEstablishment } from '../../establishment.model';
+import { ILuOptionPickerPanel, LuOptionComparer, LU_OPTION_SELECT_ALL_TRANSLATIONS } from '@lucca-front/ng/option';
+import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
+import { luEstablishmentSelectAllTranslations, LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
 
 @Component({
@@ -29,7 +28,7 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuEstablishmentSelectInputComponent),
 			multi: true,
-		},
+		}
 	],
 })
 export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
