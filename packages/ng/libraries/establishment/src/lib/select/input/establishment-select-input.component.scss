@@ -1,4 +1,4 @@
-@import '_definitions';
+@import "_definitions";
 @include selectInputStyle;
 
 .lu-select-value {
@@ -13,6 +13,23 @@
 		.option-selector {
 			display: inherit;
 			padding: _theme("spacings.smaller");
+		}
+	}
+}
+
+.optionGroupName {
+	padding: #{_component("options.item.padding-vertical", true)} calc(2 * #{_component("options.item.padding-horizontal", true)});
+	border-top: 1px solid _theme("commons.divider.color");
+
+	h5, .button {
+		text-decoration: underline;
+		font-size: 14px;
+	}
+	.button {
+		padding: 0;
+		&:hover, &:active, &:focus {
+			background: inherit;
+			box-shadow: none;
 		}
 	}
 }
