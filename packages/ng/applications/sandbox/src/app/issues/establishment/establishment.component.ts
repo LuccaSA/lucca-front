@@ -10,4 +10,8 @@ export class EstablishmentComponent {
 	trackBy(idx, item): string {
 		return item.code;
 	}
+
+	display(collection) {
+		return collection.map(item => ({ id: item.id, name: item.name }));
+	}
 }

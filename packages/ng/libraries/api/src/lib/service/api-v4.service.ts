@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 @Injectable()
 export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
 	protected _api: string;
