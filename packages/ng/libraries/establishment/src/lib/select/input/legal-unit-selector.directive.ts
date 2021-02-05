@@ -30,7 +30,6 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 	constructor(
 		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostService: ALuEstablishmentService,
 		@Inject(ALuEstablishmentService) @Self() selfService: LuEstablishmentService,
-		private readonly changeDetectorRef: ChangeDetectorRef
 	) {
 		this._service = (hostService || selfService) as LuEstablishmentService;
 	}
@@ -40,8 +39,7 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 		const sub = this._service.getAll(
 			[`legalUnit.name=${this.legalUnitName}`]
 		).subscribe(establishments => {
-			this.onSelectValue.next(establishments);
-			this.changeDetectorRef.detectChanges();
+			this.onSelectValue.next([...establishments]);
 		});
 		this._subs.add(sub);
 	}
