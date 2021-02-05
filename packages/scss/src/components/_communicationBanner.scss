@@ -1,0 +1,38 @@
+.communicationBanner{
+    background-color: _color('primary', '700');
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: _theme("spacings.smaller") _theme("spacings.standard") _theme("spacings.smaller") 0; 
+    position: relative;
+}
+
+.communicationBanner-blob {
+    bottom: 0;
+    fill: _color('primary', '600');
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: _theme("spacings.bigger");
+}
+
+.communicationBanner-title {
+    font-size: _theme("sizes.small.font-size");
+    margin-left: calc(#{_theme("spacings.bigger")} + #{_theme("spacings.small")});
+}
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.communicationBanner {
+    &.mod-light {
+        background-color: _color('grey', '100');
+        color: _color("grey", "800");
+
+        .communicationBanner-blob {
+            fill: _color('primary', '300');
+        }
+    }
+}
