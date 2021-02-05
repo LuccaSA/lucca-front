@@ -12,11 +12,19 @@
 </div>
 
 <h2>all in one directive</h2>
+
 <div class="textfield">
 	<lu-establishment-select class="textfield-input" [(ngModel)]="item"></lu-establishment-select>
 	<label for="" class="textfield-label">establishment select</label>
 </div>
 <code><pre>{{item | json }}</pre></code>
+
+<div class="textfield">
+	<lu-establishment-select class="textfield-input" [(ngModel)]="item2" [establishmentDisplayer]="customDisplayer"></lu-establishment-select>
+	<label for="" class="textfield-label">establishment select with custom display</label>
+</div>
+<code><pre>{{item2 | json }}</pre></code>
+
 <div class="textfield">
 	<lu-establishment-select class="textfield-input" [(ngModel)]="collection" multiple></lu-establishment-select>
 	<label for="" class="textfield-label">establishment select multiple</label>

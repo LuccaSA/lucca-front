@@ -70,7 +70,6 @@ export class LuEstablishmentSearcherComponent
 	constructor(
 		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostService: ALuEstablishmentService,
 		@Inject(ALuEstablishmentService) @Self() selfService: LuEstablishmentService,
-
 	) {
 		this._service = (hostService || selfService) as LuEstablishmentService;
 	}

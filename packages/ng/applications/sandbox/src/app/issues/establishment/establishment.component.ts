@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ILuEstablishment } from '@lucca-front/ng/establishment';
 
 @Component({
 	selector: 'lu-establishment-issue',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 export class EstablishmentComponent {
 	collection = [];
 	item;
+	item2;
+
+	customDisplayer = (ets: ILuEstablishment) => {
+		return `${ets.name} (${ets.code})`
+	}
+
 	trackBy(idx, item): string {
 		return item.code;
 	}
