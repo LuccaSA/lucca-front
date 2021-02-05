@@ -9,6 +9,7 @@ import { luEstablishmentSelectInputTranslations } from './establishment-select-i
 import { luEstablishmentSelectAllTranslations, LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { LuEstablishmentSearcherModule } from '../searcher/index';
 import { LuLegalUnitSelectorDirective } from './legal-unit-selector.directive';
+import { LuForLegalUnitsDirective } from './for-legal-units.directive';
 
 @NgModule({
 	imports: [
@@ -21,6 +22,7 @@ import { LuLegalUnitSelectorDirective } from './legal-unit-selector.directive';
 	declarations: [
 		LuEstablishmentSelectInputComponent,
 		LuLegalUnitSelectorDirective,
+		LuForLegalUnitsDirective,
 	],
 	exports: [
 		LuEstablishmentSelectInputComponent,
