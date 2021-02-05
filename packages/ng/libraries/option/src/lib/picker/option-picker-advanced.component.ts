@@ -104,15 +104,22 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 		});
 	}
 	protected initSelectors() {
-		this._selectors = this._selectorsQL.toArray();
+		const selectors$: Observable<ILuOptionSelector<T>[]> = this._selectorsQL.changes.pipe(
+			startWith(this._selectorsQL.toArray()),
+		);
 		this._subs.add(
-			merge(
-				this._selectors.map(s => s.onSelectValue),
-			).pipe(
-				mergeAll(),
-			).subscribe(values => {
-				this._select(values);
-			})
+			selectors$.subscribe(selectors => {
+				this._selectors = selectors;
+				this._subs.add(
+					merge(
+						this._selectors.map(s => s.onSelectValue),
+					).pipe(
+						mergeAll(),
+					).subscribe(values => {
+						this._select(values);
+					})
+				);
+			}),
 		);
 	}
 	ngAfterViewInit() {
