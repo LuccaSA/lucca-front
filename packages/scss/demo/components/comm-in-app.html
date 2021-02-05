@@ -1,7 +1,7 @@
 <h1 class="demo-divider">Communication in App</h1>
 
 <section class="contentSection">
-	<h1>Toasts Comm In App <span class="label palette-warning">Work in progress</span></h1>
+	<h2>Toasts Comm In App <span class="label palette-warning">Work in progress</span></h2>
 	<p>Toasts Comm In App allow you to show information about new module, on a corner (bottom left) of your app.</p>
 	<p><span aria-hidden="true" class="lucca-icon u-textWarning">warning</span><span class="u-mask">Warning:</span> You have to manually create and kill your toasts for now, they will be added in the NG package in the future.
         <div class="toasts mod-commInApp" id="toastsCommInAppBox"></div>
@@ -28,5 +28,56 @@
     &lt;button class="button mod-link mod-invert mod-smaller"&gt;Plus tard&lt;/button&gt;
 &lt;/div&gt;
 </code>
+</section>
 
+<section class="contentSection">
+	<h2>Banner Comm In App <span class="label palette-warning">Work in progress</span></h2>
+	<p>Banner Comm In App allow you to show information about new module, on a banner at the top of your app.</p>
+	
+	<div class="communicationBanner">
+		<svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg">
+			<use href="../images/commInApp.svg#bannerBackground"></use>
+			</svg>
+		<span class="communicationBanner-title">Le module fait peau neuve, un nouvel affichage est disponible.</span>
+	
+		<div class="communicationBanner-buttons">
+			<button class="button mod-outline mod-white mod-smaller">Essayer maintenant</button>
+			<button class="button mod-link mod-invert mod-smaller">Ne plus afficher </button>		
+		</div>
+	</div>
+
+<code class="code mod-block">&lt;div class="communicationBanner"&gt;
+	&lt;svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg"&gt;
+		&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
+	&lt;/svg&gt;
+	&lt;span class="communicationBanner-title"&gt;...&lt;/span&gt;
+	&lt;div class="communicationBanner-buttons"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>	
+	
+	<p class="u-marginTopStandard">To display this banner with a light mod, just add the class "mod-light" on the div "communicationBanner"</p>
+	<div class="communicationBanner mod-light">
+		<svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg">
+			<use href="../images/commInApp.svg#bannerBackground"></use>
+		</svg>
+		<span class="communicationBanner-title">
+			Le module fait peau neuve, un nouvel affichage est disponible.
+			<a class="u-textSmall">
+				En savoir plus <span aria-hidden="true" class="lucca-icon size-smaller">outside</span>
+			</a>
+		</span>
+	
+		<div class="communicationBanner-buttons">
+			<button class="button mod-link mod-smaller">Revenir à  la version précédente</button>
+		</div>
+	</div>
+
+<code class="code mod-block">&lt;div class="communicationBanner mod-light"&gt;
+	&lt;svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg"&gt;
+		&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
+	&lt;/svg&gt;
+	&lt;span class="communicationBanner-title"&gt;...&lt;/span&gt;
+	&lt;div class="communicationBanner-buttons"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+</code>
 </section>
