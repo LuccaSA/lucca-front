@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Directive, forwardRef, HostListener, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
 import { ALuOptionSelector, ILuOptionSelector } from '@lucca-front/ng/option';
 import { Subject, Subscription } from 'rxjs';
-import { ILuEstablishment } from '../../establishment.model';
+import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
 @Directive({
@@ -25,7 +25,7 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 	private _service: LuEstablishmentService;
 	private _subs = new Subscription();
 
-	@Input('luLegalUnitSelector') legalUnitName: string;
+	@Input('luLegalUnitSelector') legalUnit: ILuLegalUnit;
 
 	constructor(
 		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostService: ALuEstablishmentService,
@@ -37,7 +37,7 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 	@HostListener('click')
 	onClick(): void {
 		const sub = this._service.getAll(
-			[`legalUnit.name=${this.legalUnitName}`]
+			[`legalUnitId=${this.legalUnit.id}`]
 		).subscribe(establishments => {
 			this.onSelectValue.next([...establishments]);
 		});
