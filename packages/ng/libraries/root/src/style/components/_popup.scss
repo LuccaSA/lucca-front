@@ -120,3 +120,11 @@
 		height: fill-available;
 	}
 }
+
+.lu-popup-panel {
+	&.mod-commInApp {
+		.lu-modal-footer {
+			display: none;
+		}
+	}
+}
