@@ -66,10 +66,33 @@
 			display: flex;
 		}
 
+		.toasts-visual {
+			bottom: 0;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			width: 5rem;
+		}
+		
+		.toasts-blob {
+			fill: _color('primary', '600');
+			height: 100%;
+			position: absolute;
+			width: 100%;
+		}
+		.toasts-illustration {
+			height: 100%;
+			left: _theme("spacings.small");
+			position: absolute;
+			top: - _theme("spacings.small");
+			width: 2.5rem;
+		}
+
 		.toasts-content {
 			padding: _theme('spacings.standard') 0;
-			margin-left: _theme('spacings.standard');
-			margin-right: _theme('spacings.standard');
+			margin-left: calc(#{_theme("spacings.small", true)} + 5rem);
+			margin-right: _theme('spacings.small');
 		}
 
 		.toasts-content-title {

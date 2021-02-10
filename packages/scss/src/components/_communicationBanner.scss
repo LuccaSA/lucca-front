@@ -7,20 +7,31 @@
     position: relative;
 }
 
-.communicationBanner-blob {
+.communicationBanner-visual {
     bottom: 0;
-    fill: _color('primary', '600');
-    height: 100%;
-    left: 0;
     position: absolute;
+    left: 0;
     right: 0;
     top: 0;
     width: _theme("spacings.bigger");
 }
 
+.communicationBanner-blob {
+    fill: _color('primary', '600');
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.communicationBanner-illustration {
+    height: 100%;
+    left: _theme("spacings.smallest");
+    position: absolute;
+    width: _theme("spacings.standard");
+}
+
 .communicationBanner-title {
     font-size: _theme("sizes.small.font-size");
-    margin-left: calc(#{_theme("spacings.bigger")} + #{_theme("spacings.small")});
+    margin-left: calc(#{_theme("spacings.bigger")});
 }
 
 // MODS
