@@ -35,12 +35,15 @@ import { of } from 'rxjs';
 export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
+
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 	@Input() filters: string[];
 	@Input() establishmentDisplayer = (establishment: ILuEstablishment) => of(establishment.name);
 
+	isSearching = false;
+
 	public get establishmentFilters(): string {
-		return
+		return;
 	}
 
 	constructor(
@@ -59,9 +62,16 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 			_renderer,
 		);
 	}
+
+	onIsSearchingChanged(isSearching: boolean) {
+		this.isSearching = isSearching;
+		this._changeDetectorRef.detectChanges();
+	}
+
 	trackById(idx: number, item: ILuEstablishment): number {
 		return item.id;
 	}
+
 	groupBy(establishment: ILuEstablishment): string {
 		return establishment?.legalUnit?.name;
 	}

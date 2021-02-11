@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import {
 	ALuOnOpenSubscriber,
 	ALuOnScrollBottomSubscriber,
@@ -9,7 +9,7 @@ import {
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
-import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map } from 'rxjs/operators';
+import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map, tap } from 'rxjs/operators';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 import { Subject, Observable, Subscription, combineLatest, of, merge } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
@@ -58,6 +58,10 @@ export class LuEstablishmentSearcherComponent
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 
+	@Output()
+	isSearching = new EventEmitter<boolean>();
+	private _isSearching = false;
+
 	form: FormGroup;
 	outOptions$ = new Subject<ILuEstablishment[]>();
 	loading$: Observable<boolean>;
@@ -94,6 +98,13 @@ export class LuEstablishmentSearcherComponent
 			formValue$
 		).pipe(
 			debounceTime(100),
+			tap(([_, val]) => {
+				const isSearching = val?.clue != null && val?.clue !== '';
+				if (this._isSearching !== isSearching) {
+					this._isSearching = isSearching
+					this.isSearching.emit(this._isSearching);
+				}
+			}),
 			switchMap(([page, val]) => {
 				const filters = [];
 				return this._service.searchPaged(val.clue, page, filters);
@@ -125,6 +136,7 @@ export class LuEstablishmentSearcherComponent
 			map(o => o.length === 0),
 		);
 	}
+
 	ngOnDestroy() {
 		this._subs.unsubscribe();
 	}
@@ -133,11 +145,13 @@ export class LuEstablishmentSearcherComponent
 		this.searchInput.nativeElement.focus();
 		this.reset();
 	}
+
 	onScrollBottom() {
 		if (!this._loading) {
 			this._page$.next(this._page + 1);
 		}
 	}
+
 	onClose() {
 		this.outOptions$.next([]);
 	}
