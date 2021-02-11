@@ -57,6 +57,6 @@ export class EstablishmentComponent implements OnInit {
 	}
 
 	display(collection) {
-		return collection.map(item => ({ id: item.id, name: item.name }));
+		return (collection ?? []).map(item => ({ id: item.id, name: item.name }));
 	}
 }
