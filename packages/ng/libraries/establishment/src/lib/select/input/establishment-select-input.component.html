@@ -18,7 +18,8 @@
 	<header class="lu-picker-header">
 		<lu-establishment-searcher [filters]="filters" sort="legalunit.name,name"
 			(isSearching)="onIsSearchingChanged($event)"></lu-establishment-searcher>
-		<lu-option-select-all *ngIf="multiple" class="u-displayBlock u-marginSmaller"></lu-option-select-all>
+		<lu-establishment-select-all *ngIf="multiple" class="u-displayBlock u-marginSmaller">
+		</lu-establishment-select-all>
 	</header>
 
 	<ng-template luForLegalUnits let-group>

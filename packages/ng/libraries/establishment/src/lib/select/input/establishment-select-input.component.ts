@@ -11,11 +11,11 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
-import { ILuOptionPickerPanel, LuOptionComparer, LU_OPTION_SELECT_ALL_TRANSLATIONS } from '@lucca-front/ng/option';
-import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
+import { ILuInputWithPicker } from '@lucca-front/ng/picker';
+import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import { ILuEstablishment } from '../../establishment.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { luEstablishmentSelectAllTranslations, LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
+import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
 import { of } from 'rxjs';
 
