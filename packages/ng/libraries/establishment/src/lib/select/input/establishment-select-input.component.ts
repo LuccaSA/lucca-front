@@ -17,6 +17,7 @@ import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { luEstablishmentSelectAllTranslations, LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
+import { of } from 'rxjs';
 
 @Component({
 	selector: 'lu-establishment-select',
@@ -36,7 +37,7 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 	@Input() filters: string[];
-	@Input() establishmentDisplayer = (establishment: ILuEstablishment) => establishment.name;
+	@Input() establishmentDisplayer = (establishment: ILuEstablishment) => of(establishment.name);
 
 	public get establishmentFilters(): string {
 		return
