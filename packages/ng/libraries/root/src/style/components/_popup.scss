@@ -123,16 +123,31 @@
 
 .lu-popup-panel {
 	&.mod-commInApp {
+		width: 30rem;
+
 		.lu-modal-content {
 			text-align: center;
+
+			&::after {
+				content: none;
+			}
 		}
 		.lu-modal-content-title {
 			color: _color("grey", 800);
 			font-size: _theme('sizes.bigger.font-size');
+			margin-top: 2.5rem;
 		}
 		.button {
 			margin-bottom: 2.5rem;
 		}
+		.modal-visual {
+			margin: 4.5rem -2rem 0 -2rem;
+		}
+
+		.modal-visual-illustration {
+			vertical-align: bottom;
+		}
+
 		.lu-modal-footer {
 			display: none;
 		}
