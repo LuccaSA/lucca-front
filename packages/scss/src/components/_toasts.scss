@@ -85,12 +85,12 @@
 			height: 100%;
 			left: _theme("spacings.small");
 			position: absolute;
-			top: - _theme("spacings.small");
+			top: - _theme("spacings.smaller");
 			width: 2.5rem;
 		}
 
 		.toasts-content {
-			padding: _theme('spacings.standard') 0;
+			padding: _theme('spacings.small') 0;
 			margin-left: calc(#{_theme("spacings.small", true)} + 5rem);
 			margin-right: _theme('spacings.small');
 		}

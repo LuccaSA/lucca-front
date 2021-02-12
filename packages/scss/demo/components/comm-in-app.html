@@ -20,7 +20,14 @@
 </code>
 
     <p class="u-marginTopStandard">If you want to use the same template for your comm In app, we recommand you to copy this code into your innerhtml toast item</p>
-<code class="code mod-block">&lt;img src="../images/commInApp.svg"&gt;
+<code class="code mod-block">&lt;div class="toasts-visual"&gt;
+	&lt;svg class="toasts-blob" xmlns="http://www.w3.org/2000/svg"&gt;
+		&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
+	&lt;/svg&gt;
+	&lt;svg class="toasts-illustration" xmlns="http://www.w3.org/2000/svg"&gt;
+		&lt;use&gt; href="../images/commInApp.svg#comminapp-illu"&gt;&lt;/use&gt;
+	&lt;/svg&gt;
+&lt;/div&gt;	
 &lt;div class="toasts-content"&gt;
     &lt;div class="toasts-content-title"&gt;&lt;strong&gt;Le module fait peau neuve !&lt;/strong&gt;&lt;/div&gt;
     &lt;p&gt;Carentibus et vates arduos quam gloriae honeste ob primo.&lt;/p&gt;
@@ -40,11 +47,10 @@
 				<use href="../images/commInApp.svg#bannerBackground"></use>
 			</svg>
 			<svg class="communicationBanner-illustration" xmlns="http://www.w3.org/2000/svg">
-				<use href="../images/commInApp.svg#illuTimmi"></use>
+				<use href="../images/commInApp.svg#comminapp-illu"></use>
 			</svg>
 		</div>
 		<span class="communicationBanner-title">Le module fait peau neuve, un nouvel affichage est disponible.</span>
-	
 		<div class="communicationBanner-buttons">
 			<button class="button mod-outline mod-white mod-smaller">Essayer maintenant</button>
 			<button class="button mod-link mod-invert mod-smaller">Ne plus afficher </button>		
@@ -52,9 +58,14 @@
 	</div>
 
 <code class="code mod-block">&lt;div class="communicationBanner"&gt;
-	&lt;svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg"&gt;
-		&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
-	&lt;/svg&gt;
+	&lt;div class="communicationBanner-visual"&gt;
+		&lt;svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg"&gt;
+			&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
+		&lt;/svg&gt;
+		&lt;svg class="communicationBanner-illustration" xmlns="http://www.w3.org/2000/svg"&gt;
+			&lt;use&gt; href="../images/commInApp.svg#comminapp-illu"&lt;/use&gt;
+		&lt;/svg&gt;
+	&lt;/div&gt;
 	&lt;span class="communicationBanner-title"&gt;...&lt;/span&gt;
 	&lt;div class="communicationBanner-buttons"&gt;...&lt;/div&gt;
 &lt;/div&gt;
@@ -67,26 +78,29 @@
 				<use href="../images/commInApp.svg#bannerBackground"></use>
 			</svg>
 			<svg class="communicationBanner-illustration" xmlns="http://www.w3.org/2000/svg">
-				<use href="../images/commInApp.svg#illuTimmi"></use>
+				<use href="../images/commInApp.svg#comminapp-illu"></use>
 			</svg>
 		</div>
-	
 		<span class="communicationBanner-title">
 			Le module fait peau neuve, un nouvel affichage est disponible.
 			<a class="u-textSmall">
 				En savoir plus <span aria-hidden="true" class="lucca-icon size-smaller">outside</span>
 			</a>
 		</span>
-	
 		<div class="communicationBanner-buttons">
 			<button class="button mod-link mod-smaller">Revenir à  la version précédente</button>
 		</div>
 	</div>
 
 <code class="code mod-block">&lt;div class="communicationBanner mod-light"&gt;
-	&lt;svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg"&gt;
-		&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
-	&lt;/svg&gt;
+	&lt;div class="communicationBanner-visual"&gt;
+		&lt;svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg"&gt;
+			&lt;use href="../images/commInApp.svg#bannerBackground"&gt;&lt;/use&gt;
+		&lt;/svg&gt;
+		&lt;svg class="communicationBanner-illustration" xmlns="http://www.w3.org/2000/svg"&gt;
+			&lt;use href="../images/commInApp.svg#comminapp-illu"&gt;&lt;/use&gt;
+		&lt;/svg&gt;
+	&lt;/div&gt;
 	&lt;span class="communicationBanner-title"&gt;...&lt;/span&gt;
 	&lt;div class="communicationBanner-buttons"&gt;...&lt;/div&gt;
 &lt;/div&gt;

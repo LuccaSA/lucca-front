@@ -43,7 +43,7 @@ function toastCommInApp() {
 			<use href="../images/commInApp.svg#bannerBackground"></use>\
 		</svg>\
 		<svg class="toasts-illustration" xmlns="http://www.w3.org/2000/svg">\
-			<use href="../images/commInApp.svg#illuTimmi"></use>\
+			<use href="../images/commInApp.svg#comminapp-illu"></use>\
 		</svg>\
 		</div>\
 		<div class="toasts-content"><div class="toasts-content-title"><strong>Le module fait peau neuve !</strong></div>\
