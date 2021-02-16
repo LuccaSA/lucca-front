@@ -38,11 +38,11 @@
 		<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment"
 			class="establishmentOption">
 			<ng-container *ngIf="isSearching; else emptySearch">
-				<span class="u-displayBlock" [innerHtml]="establishmentDisplayer(establishment) | async"></span>
+				<span class="u-displayBlock">{{establishment.name}}</span>
 				<span class="u-displayBlock u-textLight u-textSmall">{{ group.key.name }}</span>
 			</ng-container>
 			<ng-template #emptySearch>
-				<span [innerHtml]="establishmentDisplayer(establishment) | async"></span>
+				<span>{{establishment.name}}</span>
 			</ng-template>
 		</lu-option>
 	</ng-template>

@@ -5,7 +5,8 @@
 		<ng-container *luDisplayer="let value">{{value.name}}</ng-container>
 		<lu-option-picker-advanced>
 			<lu-establishment-pager></lu-establishment-pager>
-			<lu-option *luForOptions="let establishment; trackBy: trackBy" [value]="establishment">{{establishment.name}}</lu-option>
+			<lu-option *luForOptions="let establishment; trackBy: trackBy" [value]="establishment">
+				{{establishment.name}}</lu-option>
 		</lu-option-picker-advanced>
 	</lu-select>
 	<label for="" class="textfield-label">establishment</label>
@@ -18,12 +19,6 @@
 	<label for="" class="textfield-label">establishment select</label>
 </div>
 <code><pre>{{item | json }}</pre></code>
-
-<div class="textfield">
-	<lu-establishment-select class="textfield-input" [(ngModel)]="item2" [establishmentDisplayer]="customDisplayer"></lu-establishment-select>
-	<label for="" class="textfield-label">establishment select with custom display</label>
-</div>
-<code><pre>{{item2 | json }}</pre></code>
 
 <div class="textfield">
 	<lu-establishment-select class="textfield-input" [(ngModel)]="collection" multiple></lu-establishment-select>
