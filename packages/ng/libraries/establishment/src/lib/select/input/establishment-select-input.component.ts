@@ -17,7 +17,6 @@ import { ILuEstablishment } from '../../establishment.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
-import { of } from 'rxjs';
 
 @Component({
 	selector: 'lu-establishment-select',
@@ -69,9 +68,5 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 
 	trackById(idx: number, item: ILuEstablishment): number {
 		return item.id;
-	}
-
-	groupBy(establishment: ILuEstablishment): string {
-		return establishment?.legalUnit?.name;
 	}
 }
