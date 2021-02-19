@@ -47,25 +47,5 @@
 				background-color: _theme('commons.highlight');
 			} 
 		}
-
-		// .optionGroupName-suffix {
-		// 	opacity: 0;
-		// 	display: inline-block;
-		// 	transform: translateX(-.25rem);
-		// 	text-decoration: none;
-		// 	font-weight: 400;
-		// }
-		// &:hover {
-		// 	.optionGroupName-suffix {
-		// 		opacity: 1;
-		// 		transform: translateX(0);
-		// 		transition: 
-		// 			transform _theme("commons.animations.durations.fast", true) ease-out,
-		// 			opacity _theme("commons.animations.durations.standard", true) ease;
-		// 		transition: 
-		// 			transform _theme("commons.animations.durations.fast") ease-out,
-		// 			opacity _theme("commons.animations.durations.standard") ease;
-		// 	}
-		// }
 	}
 }

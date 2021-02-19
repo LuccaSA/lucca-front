@@ -27,7 +27,6 @@
 			<ng-container *ngIf="!isSearching">
 				<button class="optionGroupName button mod-link mod-block" [luLegalUnitSelector]="group.key" *ngIf="multiple; else singleViewGroup">
 					{{group.key.name}}
-					<!-- <span class="optionGroupName-suffix">(tout sélectionner)</span> -->
 				</button>
 				<ng-template #singleViewGroup>
 					<h5 class="optionGroupName mod-readonly u-marginReset">
