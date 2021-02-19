@@ -72,6 +72,13 @@ $textfield: (
 		)
 	),
 
+	outlined: (
+		border: (
+			width: 2px,
+			default-color: _color("grey", 200),
+		)
+	),
+
 	filter: (
 		width: 18rem
 	)
