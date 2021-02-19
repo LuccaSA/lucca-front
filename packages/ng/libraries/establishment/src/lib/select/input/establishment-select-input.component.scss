@@ -12,24 +12,40 @@
 	&.mod-multiple {
 		.option-selector {
 			display: inherit;
+			padding: _theme("spacings.smaller", true);
 			padding: _theme("spacings.smaller");
 		}
 	}
 }
 
 .optionGroupName {
-	padding: #{_component("options.item.padding-vertical", true)} calc(2 * #{_component("options.item.padding-horizontal", true)});
+	padding: #{_component("options.item.padding-vertical", true)} #{_component("options.item.padding-horizontal", true)};
+	padding: #{_component("options.item.padding-vertical")} #{_component("options.item.padding-horizontal")};
+	border-top: 1px solid _theme("commons.divider.color", true);
 	border-top: 1px solid _theme("commons.divider.color");
-
-	h5, .button {
-		text-decoration: underline;
-		font-size: 14px;
+	font-size: _theme("sizes.small.font-size", true);
+	font-size: _theme("sizes.small.font-size");
+	width: 100%;
+	text-align: left;
+	
+	&.mod-readonly {
+		color: _color("grey", 600, true);
+		color: _color("grey", 600);
+		font-weight: 400;
 	}
-	.button {
-		padding: 0;
-		&:hover, &:active, &:focus {
-			background: inherit;
+
+	&.button {
+		text-decoration: underline;
+		margin: 0;
+		
+		&:active, &:focus, &:hover {
 			box-shadow: none;
+			background-color: transparent;
+			
+			~ lu-option {
+				background-color: _theme('commons.highlight',true);
+				background-color: _theme('commons.highlight');
+			} 
 		}
 	}
 }
