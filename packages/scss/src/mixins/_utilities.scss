@@ -20,8 +20,12 @@
 
 @mixin listReset($suffix: '') {
 	list-style-type: none #{$suffix};
-	margin: 0 #{$suffix};
 	padding: 0 #{$suffix};
+	
+	&,
+	> * {
+		margin: 0 #{$suffix};
+	}
 }
 
 @mixin buttonReset($suffix: '') {
