@@ -41,6 +41,9 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 	@Input() filters: string[];
 
 	isSearching = false;
+	get sort(): string {
+		return this.isSearching ? 'name' : 'legalunit.name,name';
+	}
 
 	public get establishmentFilters(): string {
 		return;

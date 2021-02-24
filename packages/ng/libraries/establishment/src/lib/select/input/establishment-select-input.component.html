@@ -16,7 +16,7 @@
 
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
-		<lu-establishment-searcher [filters]="filters" sort="legalunit.name,name"
+		<lu-establishment-searcher [filters]="filters" [sort]="sort"
 			(isSearching)="onIsSearchingChanged($event)"></lu-establishment-searcher>
 		<lu-establishment-select-all *ngIf="multiple" class="u-displayBlock u-marginSmaller">
 		</lu-establishment-select-all>
