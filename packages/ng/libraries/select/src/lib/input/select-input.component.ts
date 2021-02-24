@@ -159,6 +159,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 	ngOnDestroy() {
 		this.closePopover();
 		this.destroyPopover();
+		this.onDestroy();
 	}
 	protected _emitOpen(): void {
 		this.onOpen.emit();

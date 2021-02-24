@@ -9,10 +9,12 @@ import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '@lucca-fro
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
+import { Subscription } from 'rxjs';
 
 export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuPopoverTrigger<TPicker>
 implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
+	protected _subs = new Subscription();
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,
@@ -100,18 +102,22 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	protected get _picker() { return this.panel; }
 	protected set _clearer(clearer: ILuClearer<T>) {
 		if (!!clearer && !!clearer.onClear) {
-			clearer.onClear.subscribe(value => this.setValue(value));
+			this._subs.add(clearer.onClear.subscribe(value => this.setValue(value)));
 		}
 	}
 	protected subToPickerEvts() {
 		if (!!this.panel) {
-			this.panel.onSelectValue.subscribe(value => this.setValue(value));
+			this._subs.add(this.panel.onSelectValue.subscribe(value => this.setValue(value)));
 		}
 	}
 
 	closePopover() {
 		this._onTouched();
 		super.closePopover();
+	}
+
+	onDestroy() {
+		this._subs.unsubscribe();
 	}
 
 	protected _getOverlayConfig(): OverlayConfig {
