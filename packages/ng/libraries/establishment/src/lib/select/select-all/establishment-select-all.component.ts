@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inje
 import { ALuOptionOperator, ALuOptionSelector, ILuOptionSelectAllLabel, LuOptionSelectAllComponent, LuOptionSelectAllIntl } from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
-import { ALuEstablishmentService, LuEstablishmentService } from '../../service';
+import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
 @Component({
 	selector: 'lu-establishment-select-all',

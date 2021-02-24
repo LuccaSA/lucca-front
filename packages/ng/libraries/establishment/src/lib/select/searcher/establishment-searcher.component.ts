@@ -1,4 +1,20 @@
-import { ChangeDetectionStrategy, Component, forwardRef, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	ViewChild,
+	ElementRef,
+	SkipSelf,
+	Self,
+	Optional,
+	Inject,
+	HostBinding,
+	OnInit,
+	OnDestroy,
+	Input,
+	Output,
+	EventEmitter,
+} from '@angular/core';
 import {
 	ALuOnOpenSubscriber,
 	ALuOnScrollBottomSubscriber,

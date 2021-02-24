@@ -11,10 +11,12 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
+
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
-import { ILuEstablishment } from '../../establishment.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+
+import { ILuEstablishment } from '../../establishment.model';
 import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
 
