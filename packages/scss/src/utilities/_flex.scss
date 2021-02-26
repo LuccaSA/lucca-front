@@ -68,6 +68,10 @@ $suffix: "!important" !default;
 	justify-content: space-evenly #{$suffix};
 }
 
+.#{$prefix}justifyContentCenter {
+	justify-content: center #{$suffix};
+}
+
 // align
 
 .#{$prefix}alignItemsFlexStart {
