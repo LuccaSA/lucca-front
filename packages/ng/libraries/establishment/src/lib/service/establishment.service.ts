@@ -8,4 +8,9 @@ export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
 	protected _api = `/organization/structure/api/establishments`;
 
 	constructor(protected _http: HttpClient) { super(_http); }
+
+	// /** @override */
+	// getAll(filters?: string[]): Observable<T[]> {
+
+	// }
 }

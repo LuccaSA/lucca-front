@@ -28,6 +28,10 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 	set fields(fields: string) { this._v3Service.fields = fields; }
 	set orderBy(orderBy: string) { this._v3Service.orderBy = orderBy; }
 
+	// api v4 only
+	set sort(sort: string) {
+		this._v4Service.sort = sort;
+	}
 
 	private get _service(): ALuApiService<T> {
 		switch(this._standard) {

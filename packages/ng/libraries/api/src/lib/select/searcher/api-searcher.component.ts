@@ -42,7 +42,7 @@ import { ALuApiService, LuApiHybridService } from '../../service/index';
 	],
 })
 export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
-extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
+	extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 
 	@Input() set standard(standard: string) { this._service.standard = standard; }
@@ -50,6 +50,7 @@ extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	@Input() set sort(sort: string) { this._service.sort = sort }
 
 	clueControl: FormControl;
 	constructor(
@@ -62,7 +63,7 @@ extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-		.pipe(debounceTime(250));
+			.pipe(debounceTime(250));
 		super.init();
 	}
 
@@ -108,7 +109,7 @@ extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	],
 })
 export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
-extends ALuApiOptionPagedSearcher<T, LuApiHybridService<T>> implements OnInit {
+	extends ALuApiOptionPagedSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set standard(standard: string) { this._service.standard = standard; }
 	@Input() set api(api: string) { this._service.api = api; }
@@ -126,10 +127,10 @@ extends ALuApiOptionPagedSearcher<T, LuApiHybridService<T>> implements OnInit {
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-		.pipe(
-			tap(c => this.resetPage()),
-			// debounceTime(250),
-		);
+			.pipe(
+				tap(c => this.resetPage()),
+				// debounceTime(250),
+			);
 		super.init();
 	}
 

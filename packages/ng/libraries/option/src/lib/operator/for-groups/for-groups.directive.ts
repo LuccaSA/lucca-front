@@ -65,7 +65,7 @@ export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionO
 		this._cdr.markForCheck();
 	}
 
-	private groupBy(items: TItem[]): ILuGroup<TItem, TKey>[] {
+	protected groupBy(items: TItem[]): ILuGroup<TItem, TKey>[] {
 		const groups: ILuGroup<TItem, TKey>[] = [];
 		items.forEach((item) => {
 			const key = this._groupByFn(item);
