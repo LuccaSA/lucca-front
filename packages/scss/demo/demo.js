@@ -46,9 +46,9 @@ function toastCommInApp() {
 			<use href="../images/commInApp.svg#comminapp-illu"></use>\
 		</svg>\
 		</div>\
-		<div class="toasts-content"><div class="toasts-content-title"><strong>Le module fait peau neuve !</strong></div>\
+		<div class="toasts-content"><div class="toasts-content-title"><strong>The module has a new look !</strong></div>\
 		<p>Carentibus et vates arduos quam gloriae honeste ob primo.</p>\
-		<button class="button mod-outline mod-white mod-smaller">Essayez maintenant</button><button class="button mod-link mod-invert mod-smaller">Plus tard</button></div>',
+		<button class="button mod-outline mod-white mod-smaller">Try now</button><button class="button mod-link mod-invert mod-smaller">Later</button></div>',
 	];
 	var r = Math.floor(Math.random() * Math.floor(toastsCommInAppValues.length));
 	toastCommInApp.className = "toasts-item";

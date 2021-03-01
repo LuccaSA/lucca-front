@@ -1,9 +1,10 @@
 .communicationBanner{
     background-color: _color('primary', '700');
-    color: white;
+    color: _color('white');
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    padding: _theme("spacings.smaller") _theme("spacings.standard") _theme("spacings.smaller") 0; 
+    padding: _theme("spacings.smaller") _theme("spacings.standard") _theme("spacings.smaller") _theme("spacings.bigger"); 
     position: relative;
 }
 
@@ -32,7 +33,6 @@
 
 .communicationBanner-title {
     font-size: _theme("sizes.small.font-size");
-    margin-left: calc(#{_theme("spacings.bigger")});
 }
 
 // MODS
