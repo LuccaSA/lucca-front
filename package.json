@@ -19,6 +19,7 @@
   },
   "private": true,
   "scripts": {
+    "cpy": "cpy",
     "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "lerna": "lerna",
@@ -27,6 +28,8 @@
     "ls": "lerna ls -a -l"
   },
   "dependencies": {
-    "lerna": "^3.22.0"
+    "lerna": "^3.22.0",
+    "cpy": "^8.1.1",
+    "cpy-cli": "^3.1.1"
   }
 }
