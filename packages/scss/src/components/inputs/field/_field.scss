@@ -38,7 +38,7 @@
 	.#{$fieldname}-input {
 		font-family: _theme("commons.font.family");
 		font-size: _component("field.font-size");
-		outline: 0;
+		outline: none;
 		position: relative;
 		width: 100%;
 		color: _component("field.input.color");

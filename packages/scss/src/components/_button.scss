@@ -12,7 +12,7 @@
 
 	&:focus {
 		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
-		outline: 0;
+		outline: none;
 	}
 
 	&:active:not([disabled]) {
@@ -45,7 +45,7 @@
 		background-color: _color($palette, "50");
 		color: _color($palette);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "50"), inset 0 0 0 1px _color($palette, "500");
-		outline: 0;
+		outline: none;
 	}
 
 	&:active:not([disabled]) {
@@ -262,6 +262,10 @@
 				line-height: _component("button.smaller.line-height");
 			}
 		}
+	}
+
+	&.mod-block {
+		width: 100%;
 	}
 }
 
