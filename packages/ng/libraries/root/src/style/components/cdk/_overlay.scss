@@ -19,6 +19,7 @@
 .cdk-overlay-pane {
 	box-sizing: border-box;
 	position: absolute;
+	pointer-events: auto;
 	z-index: 1000;
 }
 
