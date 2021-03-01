@@ -136,10 +136,15 @@
 			}
 
 			.chip {
+				max-width: 100%;
 				height: _theme("sizes.small.line-height", true);
 				height: _theme("sizes.small.line-height");
 				line-height: _theme("sizes.small.line-height", true);
 				line-height: _theme("sizes.small.line-height");
+				text-overflow: ellipsis;
+				overflow: hidden;
+				vertical-align: top;
+				white-space: nowrap;
 			}
 		}
 	}
@@ -244,7 +249,7 @@
 			}
 
 			.lu-select-display-wrapper {
-				overflow: visible;
+				overflow: hidden;
 				white-space: normal;
 				margin-bottom: -.25rem;
 			}
