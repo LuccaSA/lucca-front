@@ -93,6 +93,7 @@
 			color: _component("select.chip.text", true);
 			color: _component("select.chip.text");
 			vertical-align: baseline;
+			max-width: 100%;
 			height: _theme("sizes.standard.line-height", true);
 			height: _theme("sizes.standard.line-height");
 			line-height: _theme("sizes.standard.line-height", true);
@@ -100,6 +101,10 @@
 			padding: 0 _theme("spacings.smaller", true);
 			padding: 0 _theme("spacings.smaller");
 			margin: 0 .25rem .25rem 0;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			vertical-align: top;
+			white-space: nowrap;
 		}
 	} 
 
@@ -136,15 +141,10 @@
 			}
 
 			.chip {
-				max-width: 100%;
 				height: _theme("sizes.small.line-height", true);
 				height: _theme("sizes.small.line-height");
 				line-height: _theme("sizes.small.line-height", true);
 				line-height: _theme("sizes.small.line-height");
-				text-overflow: ellipsis;
-				overflow: hidden;
-				vertical-align: top;
-				white-space: nowrap;
 			}
 		}
 	}
