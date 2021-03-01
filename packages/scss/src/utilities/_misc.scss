@@ -54,6 +54,10 @@
 	@include listReset("!important");
 }
 
+.u-definitionlistReset {
+	@include definitionListReset("!important");
+}
+
 .u-buttonReset {
 	@include buttonReset("!important");
 }
@@ -68,3 +72,15 @@ html,
 .u-scrollBehaviorAuto {
 	scroll-behavior: auto;
 }
+
+// POINTERS
+//
+
+.u-pointerEventsNone {
+	pointer-events: none;
+}
+
+.u-pointerEventsAuto {
+	pointer-events: auto;
+}
+

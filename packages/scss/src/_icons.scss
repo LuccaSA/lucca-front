@@ -22,7 +22,7 @@ $font-name: _theme("icons.name", true);
 		// default lucca-icon style
 		@extend %lucca-icon;
 		@include buildIconClasses;
-			// all sizes
+		// all sizes
 		@each $name, $size in _getMap("sizes") {
 			&.size-#{$name} {
 				@include iconSizing($name);

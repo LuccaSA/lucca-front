@@ -21,6 +21,13 @@ $sep: "";
 					#{$property}#{$sep}#{$direction}: _theme("spacings." + $name) #{$suffix};
 				}
 			}
+
+			@if ($property == "margin") {
+				.#{$prefix}#{$property}#{str-capitalize($direction)}Auto {
+					#{$property}#{$sep}#{$direction}: auto #{$suffix};
+				}
+			}
 		}
 	}
 }
+
