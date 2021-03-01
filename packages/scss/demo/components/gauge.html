@@ -3,11 +3,11 @@
 <section class="contentSection">
 	<h1>Gauge</h1>
 	<div class="gauge">
-		<div class="gauge-bar" style="width:33%">
+		<div class="gauge-bar" style="width: 33%">
 		</div>
 	</div>
 <code class="code mod-block">&lt;div class="gauge"&gt;
-	&lt;div class="gauge-bar" style="width:33%"&gt;
+	&lt;div class="gauge-bar" style="width: 33%"&gt;
 	&lt;/div&gt;
 &lt;/div&gt;</code>
 </section>
@@ -15,23 +15,49 @@
 <section class="contentSection">
 	<h2>Thin</h2>
 	<div class="gauge mod-thin">
-		<div class="gauge-bar" style="width:50%">
+		<div class="gauge-bar" style="width: 50%">
 		</div>
 	</div>
 <code class="code mod-block">&lt;div class="gauge mod-thin"&gt;
-	&lt;div class="gauge-bar" style="width:50%"&gt;
+	&lt;div class="gauge-bar" style="width: 50%"&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code>
+</section>
+
+<section class="contentSection">
+	<h2>Vertical</h2>
+	<div class="u-displayFlex" style="height: 100px">
+		<div class="gauge mod-vertical">
+			<div class="gauge-bar" style="height: 50%">
+			</div>
+		</div>
+		<div class="gauge mod-vertical mod-thin palette-error u-marginLeftSmall">
+			<div class="gauge-bar" style="height: 75%">
+			</div>
+		</div>
+	</div>
+<code class="code mod-block">&lt;div class="gauge mod-vertical" style="height: 100px"&gt;
+	&lt;div class="gauge-bar" style="height: 50%"&gt;
 	&lt;/div&gt;
 &lt;/div&gt;</code>
 </section>
 
 <section class="contentSection">
 	<h2>Palette</h2>
-	<div class="gauge palette-success">
-		<div class="gauge-bar" style="width:66%">
+	<div class="gauge palette-success u-marginBottomSmall">
+		<div class="gauge-bar" style="width: 75%">
 		</div>
 	</div>
-<code class="code mod-block">&lt;div class="gauge mod-thin"&gt;
-	&lt;div class="gauge-bar" style="width:66%"&gt;
+	<div class="gauge palette-warning u-marginBottomSmall">
+		<div class="gauge-bar" style="width: 50%">
+		</div>
+	</div>
+	<div class="gauge palette-error u-marginBottomSmall">
+		<div class="gauge-bar" style="width: 25%">
+		</div>
+	</div>
+<code class="code mod-block">&lt;div class="gauge palette-success"&gt;
+	&lt;div class="gauge-bar" style="width: 75%"&gt;
 	&lt;/div&gt;
 &lt;/div&gt;</code>
 	<em><b>Tip:</b> It will works with all palette's colors</em>
