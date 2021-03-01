@@ -17,6 +17,10 @@ $options: (
 			radius: _theme("commons.border.radius"),
 			color: _color("grey")
 		)
+	),
+
+	establishment: (
+		multiple-padding: _theme("spacings.standard")
 	)
 );
 $theme: _set($theme, 'components.options', $options);

@@ -1,13 +1,19 @@
-import { NgModule } from '@angular/core';
-import { LuEstablishmentSelectInputComponent } from './establishment-select-input.component';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
+
+import { LuForLegalUnitsModule } from '../for-legal-units/index';
+import { LuLegalUnitSelectorModule } from '../legal-unit-selector/index';
 import { LuEstablishmentPagerModule } from '../pager/index';
+import { LuEstablishmentSearcherModule } from '../searcher/index';
+import { LuEstablishmentSelectAllModule } from '../select-all/index';
+
+import { LuEstablishmentSelectInputComponent } from './establishment-select-input.component';
+import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.token';
 import { luEstablishmentSelectInputTranslations } from './establishment-select-input.translate';
-import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
-import { LuEstablishmentSearcherModule } from '../searcher/index';
 
 @NgModule({
 	imports: [
@@ -16,9 +22,12 @@ import { LuEstablishmentSearcherModule } from '../searcher/index';
 		LuOptionModule,
 		LuEstablishmentPagerModule,
 		LuEstablishmentSearcherModule,
+		LuEstablishmentSelectAllModule,
+		LuForLegalUnitsModule,
+		LuLegalUnitSelectorModule,
 	],
 	declarations: [
-		LuEstablishmentSelectInputComponent,
+		LuEstablishmentSelectInputComponent
 	],
 	exports: [
 		LuEstablishmentSelectInputComponent,
@@ -28,4 +37,4 @@ import { LuEstablishmentSearcherModule } from '../searcher/index';
 		LuEstablishmentSelectInputIntl,
 	],
 })
-export class LuEstablishmentSelectInputModule {}
+export class LuEstablishmentSelectInputModule { }
