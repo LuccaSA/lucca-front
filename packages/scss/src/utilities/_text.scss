@@ -66,9 +66,43 @@
 }
 
 // COMMA
-//
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .u-comma:not(:last-child) {
 	&::after {
-		content: ", ";
+		content: ",\00a0";
 	}
+}
+
+// STYLE AND WEIGHT
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.u-fontStyleNormal {
+	font-style: normal;
+}
+
+.u-fontStyleItalic {
+	font-style: italic;
+}
+
+.u-fontWeightRegular {
+	font-weight: 400;
+}
+
+.u-fontWeightBold {
+	font-weight: 600;
+}
+
+// TEXT DECORATION
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.u-textDecorationNone {
+	text-decoration: none;
+}
+
+.u-textDecorationUnderline {
+	text-decoration: underline;
+}
+
+.u-textDecorationLineThrough {
+	text-decoration: line-through;
 }

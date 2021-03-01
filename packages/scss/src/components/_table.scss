@@ -313,8 +313,8 @@
 	font-weight: 400;
 }
 
-.table-body-row-cell,
-.table-head-row-cell {
+.table-body-row-cell, .table-head-row-cell {
+
 	&.mod-actions {
 		padding: .3rem _theme("spacings.smaller") .3rem 0;
 		text-align: right;
