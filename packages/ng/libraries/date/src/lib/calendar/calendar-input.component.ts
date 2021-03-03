@@ -43,6 +43,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 				return 'mod-dailyView';
 		}
 	}
+
 	// daily view
 	labels: string[] = [];
 	constructor(
@@ -263,10 +264,14 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		}
 		this.render();
 	}
-	trackBy(idx, item) { return item.id; }
-	changeGranularity() {
-		this.viewGranularity = this.header.granularity;
-		this.render();
+	trackBy(idx, item) {
+		return item.id;
+	}
+	increaseGranularity() {
+		if (this.header.granularity !== ELuDateGranularity.decade) {
+			this.viewGranularity = this.header.granularity;
+			this.render();
+		}
 	}
 	protected nextMonth() {
 		const d = this._adapter.add(this.header.date, 1, ELuDateGranularity.month);

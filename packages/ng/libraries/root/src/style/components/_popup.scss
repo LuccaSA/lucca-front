@@ -108,16 +108,16 @@
 		max-width: none;
 		max-height: 100vh;
 		width: 100%;
-		width: fill-available;
+		width: stretch;
 		height: 100vh;
-		height: fill-available;
+		height: stretch;
 	}
 
 	.lu-modal-panel-inner {
 		max-height: 100vh;
-		max-height: fill-available;
+		max-height: stretch;
 		height: 100vh;
-		height: fill-available;
+		height: stretch;
 	}
 }
 
