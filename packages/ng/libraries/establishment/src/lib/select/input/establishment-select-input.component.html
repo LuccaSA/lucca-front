@@ -26,6 +26,7 @@
 		<lu-establishment-select-all
 			*ngIf="multiple"
 			class="u-displayBlock u-marginSmaller"
+			[class.u-displayNone]="isSearching"
 			[filters]="filters"
 			[appInstanceId]="appInstanceId"
 			[operations]="operations"
