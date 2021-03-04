@@ -1,6 +1,5 @@
 export * from './establishment-select.module';
 export * from './for-legal-units/index';
-export * from './pager/index';
 export * from './input/index';
 export * from './searcher/index';
 export * from './select-all/index';
