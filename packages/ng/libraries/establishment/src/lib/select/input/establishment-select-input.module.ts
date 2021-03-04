@@ -6,7 +6,6 @@ import { LuOptionModule } from '@lucca-front/ng/option';
 
 import { LuForLegalUnitsModule } from '../for-legal-units/index';
 import { LuLegalUnitSelectorModule } from '../legal-unit-selector/index';
-import { LuEstablishmentPagerModule } from '../pager/index';
 import { LuEstablishmentSearcherModule } from '../searcher/index';
 import { LuEstablishmentSelectAllModule } from '../select-all/index';
 
@@ -20,7 +19,6 @@ import { luEstablishmentSelectInputTranslations } from './establishment-select-i
 		CommonModule,
 		LuInputModule,
 		LuOptionModule,
-		LuEstablishmentPagerModule,
 		LuEstablishmentSearcherModule,
 		LuEstablishmentSelectAllModule,
 		LuForLegalUnitsModule,

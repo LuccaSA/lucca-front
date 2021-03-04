@@ -38,7 +38,10 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
+
 	@Input() filters: string[];
+	@Input() appInstanceId: number;
+	@Input() operations: number[];
 
 	isSearching = false;
 	get sort(): string {

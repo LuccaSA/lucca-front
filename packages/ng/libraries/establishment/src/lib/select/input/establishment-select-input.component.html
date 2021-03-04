@@ -16,16 +16,35 @@
 
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
-		<lu-establishment-searcher [filters]="filters" [sort]="sort"
-			(isSearching)="onIsSearchingChanged($event)"></lu-establishment-searcher>
-		<lu-establishment-select-all *ngIf="multiple" class="u-displayBlock u-marginSmaller">
+		<lu-establishment-searcher
+			[filters]="filters"
+			[appInstanceId]="appInstanceId"
+			[operations]="operations"
+			[sort]="sort" 
+			(isSearching)="onIsSearchingChanged($event)"
+		></lu-establishment-searcher>
+		<lu-establishment-select-all
+			*ngIf="multiple"
+			class="u-displayBlock u-marginSmaller"
+			[class.u-displayNone]="isSearching"
+			[filters]="filters"
+			[appInstanceId]="appInstanceId"
+			[operations]="operations"
+		>
 		</lu-establishment-select-all>
 	</header>
 
 	<ng-template luForLegalUnits let-group>
 		<div class="optionGroup">
 			<ng-container *ngIf="!isSearching">
-				<button class="optionGroupName button mod-link mod-block" [luLegalUnitSelector]="group.key" *ngIf="multiple; else singleViewGroup">
+				<button
+					*ngIf="multiple; else singleViewGroup"
+					class="optionGroupName button mod-link mod-block"
+					[luLegalUnitSelector]="group.key"
+					[luLegalUnitSelectorFilters]="filters"
+					[luLegalUnitSelectorAppInstanceId]="appInstanceId"
+					[luLegalUnitSelectorOperations]="operations"
+				>
 					{{group.key.name}}
 				</button>
 				<ng-template #singleViewGroup>
