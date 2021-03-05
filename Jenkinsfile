@@ -143,7 +143,7 @@ node {
 					parallel(
 						'lf.lucca.local': {
 							echo "deploying ${branchName}"
-							bat "npx cpx demo\\** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --clean"
+							bat "npx cpy ** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --cwd=demo --parents"
 							if (isPr) {
 								// post PR comment
 								def deployUrl = "http://lucca-front.lucca.local/${branchName}"

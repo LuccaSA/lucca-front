@@ -33,6 +33,38 @@ function toastKill() {
 //document.getElementsByClassName('toasts-item-kill').addEventListener('click', function() { alert() }, false);
 
 
+/* TOAST COMM IN APP */
+
+function toastCommInApp() {
+	var toastsCommInAppBox = document.getElementById("toastsCommInAppBox");
+	var toastCommInApp = document.createElement("div");
+	var toastsCommInAppValues = [
+		'<div class="toasts-visual"><svg class="toasts-blob" xmlns="http://www.w3.org/2000/svg">\
+			<use href="../images/commInApp.svg#bannerBackground"></use>\
+		</svg>\
+		<svg class="toasts-illustration" xmlns="http://www.w3.org/2000/svg">\
+			<use href="../images/commInApp.svg#comminapp-illu"></use>\
+		</svg>\
+		</div>\
+		<div class="toasts-content"><div class="toasts-content-title"><strong>The module has a new look !</strong></div>\
+		<p>Carentibus et vates arduos quam gloriae honeste ob primo.</p>\
+		<button class="button mod-outline mod-white mod-smaller">Try now</button><button class="button mod-link mod-invert mod-smaller">Later</button></div>',
+	];
+	var r = Math.floor(Math.random() * Math.floor(toastsCommInAppValues.length));
+	toastCommInApp.className = "toasts-item";
+	toastCommInApp.innerHTML = toastsCommInAppValues[r];
+	var close = document.createElement('button');
+	close.className = "toasts-item-kill";
+	close.addEventListener('click', toastKill, false);
+	toastCommInApp.appendChild(close);
+	toastsCommInAppBox.appendChild(toastCommInApp);
+}
+
+function toastKill() {
+	this.parentElement.remove();
+}
+
+
 /* ANIMATIONS */
 function reloadAnimation(elem) {
 	var card = elem.getElementsByClassName('card')[0];

@@ -11,11 +11,12 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
-import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
-import { LuOptionComparer } from '@lucca-front/ng/option';
-import { ILuEstablishment } from '../../establishment.model';
+
+import { ILuInputWithPicker } from '@lucca-front/ng/picker';
+import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+
+import { ILuEstablishment } from '../../establishment.model';
 import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
 
@@ -29,14 +30,27 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuEstablishmentSelectInputComponent),
 			multi: true,
-		},
+		}
 	],
 })
 export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
-extends ALuSelectInputComponent<D, P>
-implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
+	extends ALuSelectInputComponent<D, P>
+	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
+
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
+
 	@Input() filters: string[];
+	@Input() appInstanceId: number;
+	@Input() operations: number[];
+
+	isSearching = false;
+	get sort(): string {
+		return this.isSearching ? 'name' : 'legalunit.name,name';
+	}
+
+	public get establishmentFilters(): string {
+		return;
+	}
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
@@ -54,6 +68,12 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 			_renderer,
 		);
 	}
+
+	onIsSearchingChanged(isSearching: boolean) {
+		this.isSearching = isSearching;
+		this._changeDetectorRef.detectChanges();
+	}
+
 	trackById(idx: number, item: ILuEstablishment): number {
 		return item.id;
 	}

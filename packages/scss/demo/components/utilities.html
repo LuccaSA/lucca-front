@@ -6,6 +6,7 @@
 	<h3>All</h3>
 	<p>
 		<code class="code">u-marginReset</code>
+		<code class="code">u-marginAuto</code>
 		<code class="code">u-marginSmaller</code>
 		<code class="code">u-marginSmall</code>
 		<code class="code">u-marginStandard</code>
@@ -16,6 +17,7 @@
 	<h3>Bottom</h3>
 	<p>
 		<code class="code">u-marginBottomReset</code>
+		<code class="code">u-marginBottomAuto</code>
 		<code class="code">u-marginBottomSmaller</code>
 		<code class="code">u-marginBottomSmall</code>
 		<code class="code">u-marginBottomStandard</code>
@@ -26,6 +28,7 @@
 	<h3>Top</h3>
 	<p>
 		<code class="code">u-marginTopReset</code>
+		<code class="code">u-marginTopAuto</code>
 		<code class="code">u-marginTopSmaller</code>
 		<code class="code">u-marginTopSmall</code>
 		<code class="code">u-marginTopStandard</code>
@@ -36,6 +39,7 @@
 	<h3>Right</h3>
 	<p>
 		<code class="code">u-marginRightReset</code>
+		<code class="code">u-marginRightAuto</code>
 		<code class="code">u-marginRightSmaller</code>
 		<code class="code">u-marginRightsmall</code>
 		<code class="code">u-marginRightstandard</code>
@@ -46,6 +50,7 @@
 	<h3>Left</h3>
 	<p>
 		<code class="code">u-marginLeftReset</code>
+		<code class="code">u-marginLeftAuto</code>
 		<code class="code">u-marginLeftSmaller</code>
 		<code class="code">u-marginLeftSmall</code>
 		<code class="code">u-marginLeftStandard</code>
@@ -212,6 +217,35 @@
 	</p>
 </section>
 
+<section class="contentSection" id="utilities-fontstyle">
+	<h2>Font style and weight</h2>
+	<p>You can change the weight and style of the texts with these atomic classes:</p>
+	<p>
+		<code class="code">u-fontStyleNormal</code>
+		<code class="code">u-fontStyleItalic</code>
+	</p>
+	<p>
+		<code class="code">u-fontWeightRegular</code>
+		<code class="code">u-fontWeightBold</code>
+	</p>
+</section>
+
+<section class="contentSection" id="utilities-textdecoration">
+	<h2>Text decoration</h2>
+	<p>Text decorations can be changed with:</p>
+	<p>
+		<span class="u-textDecorationNone">None</span>
+		<span class="u-textDecorationUnderline">Underlined</span>
+		<span class="u-textDecorationLineThrough">Striked</span>
+	</p>
+	<p>
+		<code class="code">u-textDecorationNone</code>
+		<code class="code">u-textDecorationUnderline</code>
+		<code class="code">u-textDecorationLineThrough</code>
+	</p>
+	<p><em><strong>Tip:</strong> be careful to differentiate visual styles from semantics by using the right HTML elements if necessary: <code class="code">&lt;a href="#"&gt;link&lt;/a&gt;</code>, <code class="code">&lt;s&gt;delete&lt;/s&gt;</code> and <code class="code">&lt;ins&gt;new&lt;/ins&gt; &lt;del&gt;old&lt;/del&gt;</code>.</em></p>
+</section>
+
 <section class="contentSection" id="utilities-elevation">
 	<h2>Elevate</h2>
 	<p>You can add a box-shadow following our 1-6 elevation through this</p>
@@ -254,6 +288,17 @@
 	<h2>Images</h2>
 	<p>You can use an utility to add a responsive image</p>
 	<code class="code">u-imageResponsive</code>
+</section>
+
+<section class="contentSection" id="utilities-pointer-events">
+	<h2>Pointer events</h2>
+	<p>
+		It is possible to enable or disable mouse events handlers.
+	</p>
+	<p>
+		<code class="code">u-pointerEventsNone</code>
+		<code class="code">u-pointerEventsAuto</code>
+	</p>
 </section>
 
 <section class="contentSection" id="utilities-help">
@@ -336,6 +381,36 @@
 	<p><em><strong>Tip:</strong> you can then combine easily <code class="code">u-positionFixed</code>, <code class="code">u-bottom0</code>, <code class="code">u-right0</code> and <code class="code">u-paddingSmall</code> for example.</em></p>
 </section>
 
+<section class="contentSection" id="utilities-listReset">
+	<h2>List reset</h2>
+	<p>All types of lists can have their paddings and margins reseted with these utilities.</p>
+	<ul class="u-listReset">
+		<li>unordered item</li>
+		<li>unordered item</li>
+	</ul>
+	<ol class="u-listReset">
+		<li>ordered item</li>
+		<li>ordered item</li>
+	</ol>
+	<dl class="u-definitionlistReset">
+		<dt>title item</dt>
+		<dd>defintion item</dd>
+	</dl>
+	<dl class="u-definitionlistReset">
+		<div>
+			<dt>title item with wrapping</dt>
+		</div>
+		<div>
+			<dd>defintion item with wrapping</dd>
+		</div>
+	</dl>
+	<p>
+		<code class="code">u-listReset</code> for <code class="code">ol</code> and <code class="code">ul</code>;<br />
+		<code class="code">u-definitionListReset</code> for <code class="code">dl</code>.
+	</p>
+	<p><em><strong>Tip:</strong> these utilities are also accessible via <code class="code">listReset()</code> and <code class="code">definitionListReset()</code>.</em></p>
+</section>
+
 <section class="contentSection" id="utilities-flex">
 	<h2>Flex</h2>
 	<p>You can quickly build column layouts with the flexbox utilities. Be careful however not to abuse these utilities which can make proofreading or maintenance more complex if they are used too much. They solve specific needs only.</p>
@@ -369,6 +444,7 @@
 		<code class="code">.u-justifyContentSpaceAround</code>
 		<code class="code">.u-justifyContentSpaceBetween</code>
 		<code class="code">.u-justifyContentSpaceEvenly</code>
+		<code class="code">.u-justifyContentCenter</code>
 	</p>
 	<p>
 		<code class="code">.u-alignItemsFlexStart</code>

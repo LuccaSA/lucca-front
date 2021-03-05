@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { ALuOptionOperator } from '../../operator/option-operator.model';
 import { ILuOptionSelectAllLabel } from './select-all.translate';
 import { LuOptionSelectAllIntl } from './select-all.intl';
+
 @Component({
 	selector: 'lu-option-select-all',
 	templateUrl: './select-all.component.html',

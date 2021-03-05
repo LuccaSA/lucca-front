@@ -31,7 +31,7 @@
 	}
 
 	&:focus, &.is-focused {
-		background-color: white;
+		background-color: _color("white");
 		box-shadow: 0 0 0 4px _component("textfield.focus.shadow-color"), inset 0 0 0 1px _component("textfield.focus.border-color");
 
 		&::placeholder {
@@ -56,7 +56,7 @@
 
 .textfield-options {
 	@include elevate(3);
-	background-color: white;
+	background-color: _color("white");
 	border-radius: _theme("commons.border.radius");
 	left: 0;
 	list-style: none;
@@ -157,7 +157,7 @@
 
 	&.mod-white {
 		.textfield-input {
-			background-color: white;
+			background-color: _color("white");
 			box-shadow: 0 0 0 1px _color("primary", "500") inset;
 
 			&::placeholder {
@@ -176,7 +176,7 @@
 
 	&.mod-invert {
 		.textfield-input {
-			background-color: white;
+			background-color: _color("white");
 
 			&::placeholder {
 				color: _component("textfield.focus.placeholder");
@@ -192,7 +192,7 @@
 		}
 
 		.textfield-label {
-			color: white;
+			color: _color("white");
 		}
 	}
 
@@ -330,6 +330,10 @@
 	vertical-align: baseline;
 }
 
+.form.mod-outlined .textfield,
+.textfield.mod-outlined {
+	@extend %input_outlined;
+}
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -365,4 +369,5 @@
 @import
 	"textfield.material",
 	"textfield.compact",
+	"textfield.outlined",
 	"textfield.framed";
