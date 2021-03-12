@@ -165,13 +165,27 @@
 			</div>
 		</div>
 	</div>
-<code class="code mod-block"></code>
-</section>
-<p>
+<code class="code mod-block">&lt;label class=&quot;textfield mod-block mod-togglePassword&quot;&gt;
+	&lt;input class=&quot;textfield-input&quot; type=&quot;password&quot; placeholder=&quot;placeholder&quot; value=&quot;azerty12345#@!%;&quot; /&gt;
+	&lt;span class=&quot;textfield-label&quot;&gt;Password label&lt;/span&gt;
+	&lt;span class=&quot;textfield-suffix&quot;&gt;
+		&lt;a
+			href=&quot;#&quot;
+			onClick=&quot;event.preventDefault()&quot;
+			role=&quot;button&quot;
+			aria-pressed=&quot;false&quot;
+			class=&quot;textfield-suffix-action&quot;
+		&gt;
+			&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-watch&quot;&gt;&lt;/span&gt;
+			&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-unwatch&quot;&gt;&lt;/span&gt;
+			&lt;span class=&quot;u-mask&quot;&gt;Show password&lt;/span&gt;
+		&lt;/a&gt;
+		&lt;/span&gt;
+&lt;/label&gt;</code>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width input.</em><br>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em><br>
 	<em><strong>Tip:</strong> You can use <code class="code">placeholder="…"</code> on <code class="code">textfield-input</code>.</em>
-</p>
+</section>
 
 <!-- Helpers & Errors -->
 <section class="contentSection">
