@@ -120,11 +120,58 @@
 &lt;/label&gt;
 </code>
 </section>
-
+<section class="contentSection">
+	<div class="grid">
+		<div class="grid-md6">
+			<div class="form-group">
+				<label class="textfield mod-block mod-togglePassword">
+					<input class="textfield-input" type="password" placeholder="placeholder" value="azerty12345#@!%;" />
+					<span class="textfield-label">Password label</span>
+					<span class="textfield-suffix">
+						<a
+						  href="#"
+						  onClick="event.preventDefault()"
+						  role="button"
+						  aria-pressed="false"
+						  class="textfield-suffix-action"
+						>
+						  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
+						  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
+						  <span class="u-mask">Show password</span>
+						</a>
+					  </span>
+				</label>
+			</div>
+		</div>
+		<div class="grid-md6">
+			<div class="form-group">
+				<label class="textfield mod-block mod-togglePassword">
+					<input class="textfield-input" type="text" placeholder="placeholder" value="azerty12345#@!%;" />
+					<span class="textfield-label">Password label</span>
+					<span class="textfield-suffix">
+						<a
+						  href="#"
+						  onClick="event.preventDefault()"
+						  role="button"
+						  aria-pressed="true"
+						  class="textfield-suffix-action"
+						>
+						  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
+						  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
+						  <span class="u-mask">Show password</span>
+						</a>
+					  </span>
+				</label>
+			</div>
+		</div>
+	</div>
+<code class="code mod-block"></code>
+</section>
+<p>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width input.</em><br>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em><br>
 	<em><strong>Tip:</strong> You can use <code class="code">placeholder="…"</code> on <code class="code">textfield-input</code>.</em>
-</section>
+</p>
 
 <!-- Helpers & Errors -->
 <section class="contentSection">
