@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input, ChangeDetectorRef } from '@a
 import { ILuUser } from '../user.model';
 import {
 	LuUserDisplayPipe,
-	LuDisplayFormat,
 	LuDisplayInitials,
 	LuDisplayFullname,
 } from '../display/index';
@@ -42,9 +41,10 @@ export class LuUserPictureComponent {
 	set user(user: ILuUser) {
 		this._user = user;
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
-		this.hasPicture = !!user && !!user.picture && !!user.picture.href;
+		const pictureHref = user?.picture?.href || user?.pictureHref
+		this.hasPicture = !!pictureHref;
 		if (this.hasPicture) {
-			this.style = { 'background-image': `url('${this._user.picture.href}')` };
+			this.style = { 'background-image': `url('${pictureHref}')` };
 		} else {
 			const hsl = this.getNameHue();
 			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
