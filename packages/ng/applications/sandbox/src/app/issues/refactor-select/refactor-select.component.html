@@ -65,3 +65,19 @@
 	</div>
 </div>
 </section>
+
+<section>
+	<label class="textfield">
+		<lu-select class="textfield-input" [formControl]="ctrl" *ngIf="showSelect">
+			<span *luDisplayer="let value">{{value}}</span>
+			<lu-input-clearer *ngIf="true"></lu-input-clearer>
+			<lu-option-picker>
+				<lu-option value="1">1</lu-option>
+				<lu-option value="2">2</lu-option>
+			</lu-option-picker>
+		</lu-select>
+		<span class="textfield-label">Textfield label</span>
+	</label>
+	<button class="button" (click)="toggle()">toggle</button>
+	<pre>touched : {{ctrl.touched}}</pre>
+</section>

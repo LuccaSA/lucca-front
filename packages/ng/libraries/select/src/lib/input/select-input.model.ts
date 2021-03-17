@@ -117,7 +117,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 	}
 
 	onDestroy() {
+		if (this._popoverOpen) {
+			this.closePopover();
+		}
+		this.destroyPopover();
 		this._subs.unsubscribe();
+		this._cleanUpSubscriptions();
+
 	}
 
 	protected _getOverlayConfig(): OverlayConfig {

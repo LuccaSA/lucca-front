@@ -120,7 +120,10 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 		this._checkTarget();
 	}
 	ngOnDestroy() {
-		this.closePopover();
+		this._cleanUpSubscriptions();
+		if (this._popoverOpen) {
+			this.closePopover();
+		}
 		this.destroyPopover();
 	}
 	protected _emitOpen(): void {
