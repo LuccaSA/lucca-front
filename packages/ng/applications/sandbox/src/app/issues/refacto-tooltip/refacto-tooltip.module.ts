@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RefactoTooltipComponent } from './refacto-tooltip.component';
 import { LuPopoverModule } from '@lucca-front/ng/popover';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -12,6 +13,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 		RefactoTooltipComponent,
 	],
 	imports: [
+		CommonModule,
 		LuPopoverModule,
 		LuTooltipModule,
 		RouterModule.forChild([
