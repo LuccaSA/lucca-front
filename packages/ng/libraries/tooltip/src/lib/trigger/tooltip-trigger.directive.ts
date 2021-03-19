@@ -10,6 +10,7 @@ import {
 	OnDestroy,
 	Output,
 	EventEmitter,
+	HostBinding,
 } from '@angular/core';
 	import { Overlay } from '@angular/cdk/overlay';
 	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
@@ -45,6 +46,15 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	onMouseLeave() {
 		super.onMouseLeave();
 	}
+	@HostListener('focus')
+	onFocus(){
+		super.onMouseEnter();
+	}
+	@HostListener('blur')
+	onBlur() {
+		super.onMouseLeave();
+	}
+	@HostBinding('attr.tabindex') tabindex = 0;
 
 	constructor(
 		protected _overlay: Overlay,
