@@ -358,7 +358,7 @@
 }
 
 .table-head-row, .table-body-row {
-	&:hover {
+	&:hover, &:focus-within {
 		.table-body-row-cell, .table-head-row-cell {
 			&.mod-actions {
 				> * {
