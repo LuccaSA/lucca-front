@@ -56,6 +56,11 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 	@HostBinding('attr.tabindex') tabindex = 0;
 
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.aria-describedby') get _attrAriaDescribedBy() { return this._panelId; }
+
 	constructor(
 		protected _overlay: Overlay,
 		protected _elementRef: ElementRef,
@@ -66,6 +71,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.triggerEvent = 'hover';
 		this.target.position = 'above';
 		this.enterDelay = 300;
