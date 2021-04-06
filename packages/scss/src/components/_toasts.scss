@@ -54,13 +54,13 @@
 .toasts {
 
 	&.mod-commInApp {
-		top:  inherit;
-		left:  _component("toasts.left");
+		top: inherit;
+		left: _component("toasts.left");
 		bottom: _component("toasts.bottom");
 		width: _component("toasts.big");
 
 		.toasts-item {
-			background-color: _color('primary', '700');
+			background-color: _color("primary", "700");
 			margin-left: inherit;
 			padding: 0;
 			display: flex;
@@ -74,9 +74,9 @@
 			top: 0;
 			width: 5rem;
 		}
-		
+
 		.toasts-blob {
-			fill: _color('primary', '600');
+			fill: _color("primary", "600");
 			height: 100%;
 			position: absolute;
 			width: 100%;
@@ -90,18 +90,18 @@
 		}
 
 		.toasts-content {
-			padding: _theme('spacings.small') 0;
+			padding: _theme("spacings.small") 0;
 			margin-left: calc(#{_theme("spacings.small", true)} + 5rem);
-			margin-right: _theme('spacings.small');
+			margin-right: _theme("spacings.small");
 		}
 
 		.toasts-content-title {
-			margin-bottom: _theme('spacings.smaller');
+			margin-bottom: _theme("spacings.smaller");
 		}
-		
+
 		.toasts-item-kill {
 			bottom: inherit;
-			top: _theme('spacings.smaller');
+			top: _theme("spacings.smaller");
 		}
 	}
 }
