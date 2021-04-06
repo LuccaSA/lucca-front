@@ -69,7 +69,10 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this._checkTarget();
 	}
 	ngOnDestroy() {
-		this.closePopover();
+		this._cleanUpSubscriptions();
+		if (this._popoverOpen) {
+			this.closePopover();
+		}
 		this.destroyPopover();
 	}
 	protected _emitOpen(): void {

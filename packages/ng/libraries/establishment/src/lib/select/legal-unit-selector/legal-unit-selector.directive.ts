@@ -42,16 +42,15 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 			[`legalUnitId=${this.legalUnit.id}`]
 		).subscribe(establishments => {
 			if (this.shouldAdd(establishments)) {
+				const selectedEstablishmentIds = new Set<number>((this._values ?? []).map(ets => ets.id));
 				this.onSelectValue.next(
-					Array.from(new Set<ILuEstablishment>([
+					Array.from([
 						...(this._values ?? []),
-						...establishments
-					]))
+						...establishments.filter(ets => !selectedEstablishmentIds.has(ets.id))
+					])
 				);
 			} else {
-				const establishmentIds = new Set<number>(
-					establishments.map(ets => ets.id)
-				);
+				const establishmentIds = new Set<number>(establishments.map(ets => ets.id));
 				this.onSelectValue.next(
 					(this._values ?? []).filter(ets => !establishmentIds.has(ets.id))
 				);

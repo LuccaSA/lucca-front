@@ -31,6 +31,7 @@ export class LuForGroupContext<T> {
 	],
 })
 export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionOperator<TItem>, OnDestroy {
+	outOptions$?: Observable<TItem[]>;
 
 	private _groupByFn: (item: TItem) => TKey;
 	@Input('luForGroupsGroupBy')
@@ -43,6 +44,7 @@ export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionO
 		this._subs.add(
 			options$.subscribe(options => this.render(options))
 		);
+		this.outOptions$ = options$;
 	}
 
 	public constructor(
