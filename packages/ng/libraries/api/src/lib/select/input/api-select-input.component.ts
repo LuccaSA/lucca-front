@@ -32,22 +32,17 @@ import { ALuApiService, LuApiHybridService } from '../../service/index';
 			useExisting: forwardRef(() => LuApiSelectInputComponent),
 			multi: true,
 		},
-		{
-			provide: ALuApiService,
-			useClass: LuApiHybridService,
-		},
 	],
 })
 export class LuApiSelectInputComponent<T extends ILuApiItem = ILuApiItem>
 extends ALuSelectInputComponent<T>
 implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-	protected _service: LuApiHybridService<T>
 
-	@Input() set standard(standard: string) { this._service.standard = standard; }
-	@Input() set api(api: string) { this._service.api = api; }
-	@Input() set fields(fields: string) { this._service.fields = fields; }
-	@Input() set filters(filters: string[]) { this._service.filters = filters; }
-	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	@Input() standard: string;
+	@Input() api: string;
+	@Input() fields: string;
+	@Input() filters: string[];
+	@Input() orderBy: string;
 
 	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 	constructor(
@@ -56,8 +51,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: LuApiHybridService<T>,
-		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
 		super(
 			_changeDetectorRef,
@@ -66,6 +59,5 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 			_viewContainerRef,
 			_renderer,
 		);
-		this._service = hostService || selfService;
 	}
 }

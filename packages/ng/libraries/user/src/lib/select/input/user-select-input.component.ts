@@ -45,27 +45,21 @@ import { ALuUserService, LuUserV3Service } from '../../service/index';
 			useExisting: forwardRef(() => LuUserSelectInputComponent),
 			multi: true,
 		},
-		{
-			provide: ALuUserService,
-			useClass: LuUserV3Service,
-		},
 	],
 })
 export class LuUserSelectInputComponent<U extends ILuUser = ILuUser>
 extends ALuSelectInputComponent<U>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
-	protected _service: LuUserV3Service<U>;
 
 	searchFormat = LuDisplayFullname.lastfirst;
 
 	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
 
-	@Input() set fields(fields: string) { this._service.fields = fields; }
-	@Input() set filters(filters: string[]) { this._service.filters = filters; }
-	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
-	@Input() set operations(operations: number[]) { this._service.operations = operations; }
-
+	@Input() fields: string;
+	@Input() filters: string[];
+	@Input() orderBy: string;
+	@Input() appInstanceId: number | string;
+	@Input() operations: number[];
 	@Input() enableFormerEmployees = false;
 
 	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
@@ -76,8 +70,6 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 		protected _elementRef: ElementRef,
 		protected _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
-		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
-		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
 		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
 	) {
 		super(
@@ -87,7 +79,6 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 			_viewContainerRef,
 			_renderer,
 		);
-		this._service = hostService || selfService;
 	}
 
 
