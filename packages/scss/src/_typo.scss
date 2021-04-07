@@ -14,6 +14,7 @@ body {
 	font-size: _theme("sizes.standard.font-size");
 	line-height: _theme("sizes.standard.line-height");
 	vertical-align: middle;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6, h1, h2, h3, h4, h5, h6 {

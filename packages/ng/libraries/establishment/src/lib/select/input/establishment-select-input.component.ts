@@ -48,10 +48,6 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
-	public get establishmentFilters(): string {
-		return;
-	}
-
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected _overlay: Overlay,

@@ -10,6 +10,7 @@ import {
 	OnDestroy,
 	Output,
 	EventEmitter,
+	HostBinding,
 } from '@angular/core';
 	import { Overlay } from '@angular/cdk/overlay';
 	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
@@ -45,6 +46,20 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	onMouseLeave() {
 		super.onMouseLeave();
 	}
+	@HostListener('focus')
+	onFocus(){
+		super.onMouseEnter();
+	}
+	@HostListener('blur')
+	onBlur() {
+		super.onMouseLeave();
+	}
+	@HostBinding('attr.tabindex') tabindex = 0;
+
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
+	/** accessibility attribute - dont override */
+	@HostBinding('attr.aria-describedby') get _attrAriaDescribedBy() { return this._panelId; }
 
 	constructor(
 		protected _overlay: Overlay,
@@ -56,6 +71,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.triggerEvent = 'hover';
 		this.target.position = 'above';
 		this.enterDelay = 300;
@@ -69,7 +85,10 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this._checkTarget();
 	}
 	ngOnDestroy() {
-		this.closePopover();
+		this._cleanUpSubscriptions();
+		if (this._popoverOpen) {
+			this.closePopover();
+		}
 		this.destroyPopover();
 	}
 	protected _emitOpen(): void {
