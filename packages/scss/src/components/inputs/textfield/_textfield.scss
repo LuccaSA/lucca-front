@@ -102,6 +102,35 @@
 
 	/* Display */
 
+	&.mod-password {
+
+		.textfield-suffix {
+			pointer-events: auto;
+		}
+
+		.textfield-input {
+			padding-right: _theme("spacings.bigger") !important;
+		}
+
+		.textfield-suffix-action {
+			text-decoration: none;
+			color: currentColor;
+			display: block;
+
+			&[aria-pressed="true"] {
+				.icon-watch {
+					display: none;
+				}
+			}
+
+			&[aria-pressed="false"] {
+				.icon-unwatch {
+					display: none;
+				}
+			}
+		}
+	}
+
 	&.mod-clearable {
 		.textfield-actionClear {
 			position: absolute;
