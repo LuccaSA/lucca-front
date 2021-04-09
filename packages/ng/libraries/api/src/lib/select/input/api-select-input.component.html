@@ -10,7 +10,13 @@
 <span [class.chip]="multiple" *luDisplayer="let option">{{option.name}}</span>
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
-		<lu-api-paged-searcher></lu-api-paged-searcher>
+		<lu-api-paged-searcher
+			[standard]="standard"
+			[api]="api"
+			[fields]="fields"
+			[filters]="filters"
+			[orderBy]="orderBy"
+		></lu-api-paged-searcher>
 	</header>
 	<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>
 </lu-option-picker-advanced>
