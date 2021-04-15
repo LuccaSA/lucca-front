@@ -43,6 +43,7 @@
     "@storybook/html": "^6.2.7",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.1",
+    "html-loader": "^0.5.5",
     "sass": "^1.32.8",
     "sass-loader": "^10.0.0",
     "style-loader": "^2.0.0"
