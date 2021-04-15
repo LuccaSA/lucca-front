@@ -20,16 +20,31 @@
   "private": true,
   "scripts": {
     "cpy": "cpy",
+    "start": "npm run storybook",
     "postinstall": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "lerna": "lerna",
     "build": "lerna run build",
     "deploy": "lerna run deploy",
-    "ls": "lerna ls -a -l"
+    "ls": "lerna ls -a -l",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "lerna": "^3.22.0",
     "cpy": "^8.1.1",
     "cpy-cli": "^3.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@storybook/addon-actions": "^6.2.7",
+    "@storybook/addon-essentials": "^6.2.7",
+    "@storybook/addon-links": "^6.2.7",
+    "@storybook/html": "^6.2.7",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.1",
+    "sass": "^1.32.8",
+    "sass-loader": "^10.0.0",
+    "style-loader": "^2.0.0"
   }
 }
