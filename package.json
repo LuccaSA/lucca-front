@@ -21,7 +21,7 @@
   "scripts": {
     "cpy": "cpy",
     "start": "npm run storybook",
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap && npm link @lucca-front/icons",
     "clean": "lerna clean --yes",
     "lerna": "lerna",
     "build": "lerna run build",
