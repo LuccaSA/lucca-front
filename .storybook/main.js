@@ -7,5 +7,11 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials"
   ],
+  "rules": [
+    {
+      test: /\.html$/i,
+      loader: 'html-loader',
+    }
+  ]
 };
 

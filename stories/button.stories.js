@@ -1,4 +1,4 @@
-import * as palettes from '!html-loader!./button-palettes.html';
+import palettes from './button-palettes.html';
 
 export default {
   title: 'SCSS/Button',
