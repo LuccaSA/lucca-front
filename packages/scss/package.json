@@ -7,7 +7,9 @@
     "build": "gulp build",
     "deploy": "gulp deploy",
     "build:publish": "gulp build:publish",
-    "start": "gulp start"
+    "start": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "files": [
     "src",
@@ -29,6 +31,12 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/html": "^6.2.8",
+    "babel-loader": "^8.2.2",
     "browser-sync": "^2.26.14",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
@@ -36,7 +44,12 @@
     "gulp-dart-sass": "^1.0.2",
     "gulp-rename": "^2.0.0",
     "gulp-stylelint": "^13.0.0",
-    "stylelint": "^13.11.0"
+    "stylelint": "^13.11.0",
+    "css-loader": "^5.2.1",
+    "html-loader": "^0.5.5",
+    "sass": "^1.32.8",
+    "sass-loader": "^10.0.0",
+    "style-loader": "^2.0.0"
   },
   "dependencies": {
     "@lucca-front/icons": "6.2.0"
