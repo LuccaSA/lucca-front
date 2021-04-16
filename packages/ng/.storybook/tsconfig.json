@@ -1,0 +1,18 @@
+{
+  "extends": "../applications/sandbox/tsconfig.app.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
+  "exclude": [
+    "../libraries/*/src/test.ts",
+    "../libraries/**/*.spec.ts"
+  ],
+  "include": [
+    "../libraries/**/*"
+  ],
+  "files": [
+    "./typings.d.ts"
+  ]
+}

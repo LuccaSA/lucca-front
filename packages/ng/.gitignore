@@ -42,3 +42,6 @@ yarn-*.log
 
 # demo
 docs/demo/api-docs.ts
+
+# storybook
+.storybook/documentation.json

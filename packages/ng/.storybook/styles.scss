@@ -1,0 +1,11 @@
+// Google Fonts
+// ====
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic");
+
+// LF
+$noCssVar: false;
+@import "@lucca-front/scss/src/main";
+@import "../libraries/root/src/style/main";
+:root {
+	@include generateCSSVarsFromTheme($theme);
+}

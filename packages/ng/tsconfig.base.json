@@ -99,6 +99,7 @@
   "exclude": [
     "**/test.ts",
     "**/environment.prod.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "./schematics/**"
   ]
 }
