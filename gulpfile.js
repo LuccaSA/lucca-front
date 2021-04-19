@@ -4,10 +4,9 @@ const sass = require('gulp-sass');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
+const styleLint = require('gulp-stylelint');
 
-const ICONS_SRC_DIR = './packages/icons/src';
-const ICONS_SRC_MAIN = './packages/icons/src/main.scss';
-const ICONS_OUT_DIR = './dist/icons';
+
 
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
@@ -19,6 +18,15 @@ const SASS_OPTIONS_DIST = {
 const AUTOPREFIXER_OPTIONS = {
 	cascade: false
 };
+
+
+/* -----------------------------
+ * ICONS *
+ -------------------------------*/
+
+const ICONS_SRC_DIR = './packages/icons/src';
+const ICONS_SRC_MAIN = './packages/icons/src/main.scss';
+const ICONS_OUT_DIR = './dist/icons';
 
 gulp.task('icons:clean', () => {
 	return gulp.src(ICONS_OUT_DIR, { read: false, allowEmpty: true })
@@ -63,5 +71,56 @@ gulp.task(
 		'icons:copy',
 		'icons:pck',
 		'icons:src',
+	),
+);
+
+/* -----------------------------
+ * SCSS *
+ -------------------------------*/
+
+ const SCSS_SRC_DIR = './packages/scss/src';
+ const SCSS_SRC_MAIN = './packages/scss/src/main.dist.scss';
+ const SCSS_OUT_DIR = './dist/scss';
+
+ gulp.task('scss:clean', () => {
+	return gulp.src(SCSS_OUT_DIR, { read: false, allowEmpty: true })
+	.pipe(clean());
+});
+
+gulp.task('scss:build', () => {
+	return gulp.src(SCSS_SRC_MAIN)
+	.pipe(sass(SASS_OPTIONS_DIST).on('error', sass.logError))
+	.pipe(rename('lucca-front.min.css'))
+	.pipe(autoprefixer(AUTOPREFIXER_OPTIONS))
+	.pipe(gulp.dest(`${SCSS_OUT_DIR}/dist`));
+});
+
+gulp.task('scss:pck', () => {
+	return gulp.src([
+		'./packages/scss/package.json',
+	])
+	.pipe(gulp.dest(SCSS_OUT_DIR));
+});
+gulp.task('scss:src', () => {
+	return gulp.src([`${SCSS_SRC_DIR}/**/*.scss`])
+	.pipe(gulp.dest(`${SCSS_OUT_DIR}/src`));
+});
+
+gulp.task('scss:lint', () => {
+	return gulp.src([`${SCSS_SRC_DIR}/**/*.scss`])
+	.pipe(styleLint({
+		reporters: [
+			{formatter:'string', console: true}
+		]
+	}));
+});
+
+gulp.task(
+	'scss',
+	gulp.series(
+		'scss:clean',
+		'scss:build',
+		'scss:pck',
+		'scss:src',
 	),
 );
