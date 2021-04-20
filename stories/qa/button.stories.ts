@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
-
 @Component({
+	selector: 'button-stories',
 	templateUrl: './button.stories.html',
 }) class ButtonStory {}
 
 export default {
-  title: 'SCSS/Button',
+  title: 'QA/Button',
   component: ButtonStory,
 	decorators: [
 		moduleMetadata({
@@ -16,8 +16,6 @@ export default {
 	]
 } as Meta;
 
-const template: Story<ButtonStory> = (args: ButtonStory) => ({
-  props: args,
-});
+const template: Story<ButtonStory> = () => ({});
 
 export const basic = template.bind({});
