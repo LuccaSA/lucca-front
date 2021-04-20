@@ -1,6 +1,6 @@
 'use strict';
 const gulp = require('gulp');
-const sass = require('gulp-sass');
+const sass = require('gulp-dart-sass');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
@@ -142,6 +142,9 @@ gulp.task('ng:core:build', () => {
 gulp.task('ng:animations:build', () => {
 	return run('ng build animations --prod').exec();
 });
+gulp.task('ng:input:build', () => {
+	return run('ng build input --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -150,5 +153,6 @@ gulp.task(
 		'ng:root:style',
 		'ng:core:build',
 		'ng:animations:build',
+		'ng:input:build',
 	),
 );

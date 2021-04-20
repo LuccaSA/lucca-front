@@ -20,7 +20,10 @@
       ],
       "@lucca-front/ng/animations": [
         "./packages/ng-bis/animations/src/index"
-      ]
+      ],
+      "@lucca-front/ng/input": [
+        "./packages/ng-bis/input/src/index"
+      ],
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",
