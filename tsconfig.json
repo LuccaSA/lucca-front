@@ -12,7 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "paths": {
-
+      "@lucca-front/ng": [".packages/ng-bis/src/index"]
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -28,7 +28,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
   },
   "exclude": [
     "packages/ng/schematics/**"

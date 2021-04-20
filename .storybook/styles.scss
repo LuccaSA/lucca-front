@@ -4,7 +4,8 @@
 
 // LF
 $noCssVar: false;
-@import "@lucca-front/scss/src/main";
+@import "./packages/scss/src/main";
+@import "./packages/ng-bis/src/style/main";
 :root {
 	@include generateCSSVarsFromTheme($theme);
 }

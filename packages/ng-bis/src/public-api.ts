@@ -1,7 +1,5 @@
 /*
- * Public API Surface of ng-bis
+ * Public API Surface of core
  */
 
-export * from './lib/ng-bis.service';
-export * from './lib/ng-bis.component';
-export * from './lib/ng-bis.module';
+export * from './index';

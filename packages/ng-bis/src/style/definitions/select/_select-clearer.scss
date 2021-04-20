@@ -1,0 +1,66 @@
+@mixin selectClearerStyle {
+	:host {
+		display: none;
+		vertical-align: text-bottom;
+	}
+
+	:host-context(.textfield-input.is-filled) {
+		display: inline-block;
+	}
+
+	.actionIcon {
+		color: _color("primary", "color", true);
+		color: _color("primary");
+		height: 1rem;
+		padding: 0;
+		width: 1rem;
+
+		&:hover {
+			background: _color("primary", 50, true);
+			background: _color("primary", 50);
+			color: _color("primary", 800, true);
+			color: _color("primary", 800);
+		}
+	}
+
+	.lucca-icon {
+		display: block;
+		font-size: 1rem;
+	}
+
+	// Material
+	:host-context(.textfield.mod-material) {
+		.actionIcon {
+			color: _color("text.light", "color", true);
+			color: _color("text.light");
+		}
+	}
+
+	// Framed
+	:host-context(.textfield.mod-framed) {
+		.actionIcon {
+			color: _color("text.light", "color", true);
+			color: _color("text.light");
+		}
+	}
+
+	// Error
+	:host-context(.textfield-input.is-error) {
+		.actionIcon {
+			color: _color("error", "color", true);
+			color: _color("error");
+
+			&:hover {
+				background: _color("error", 50, true);
+				background: _color("error", 50);
+				color: _color("error", 800, true);
+				color: _color("error", 800);
+			}
+		}
+	}
+
+	// Disabled
+	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+		display: none;
+	}
+}
