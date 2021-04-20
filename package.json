@@ -23,9 +23,8 @@
     "build:icons": "gulp icons",
     "build:scss": "gulp scss",
     "build:ng": "gulp ng",
-    "docs:json": "compodoc -p ./tsconfig.json -e json -d .storybook",
-    "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "prestart": "compodoc -p ./tsconfig.json -e json -d .storybook",
+    "start": "start-storybook -p 6006"
   },
   "dependencies": {
     "@angular/animations": "~11.2.10",
