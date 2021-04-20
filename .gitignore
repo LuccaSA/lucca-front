@@ -2,9 +2,6 @@
 node_modules
 npm-debug.log
 
-#yarn
-yarn.lock
-
 #lerna
 lerna-debug.log
 
@@ -13,7 +10,6 @@ dist
 
 #Sass
 .sass-cache
-
 
 # IDE - VSCode
 .vscode/*
@@ -27,3 +23,6 @@ dist
 demo/icons
 demo/scss
 demo/ng
+
+# storybook
+.storybook/documentation.json
