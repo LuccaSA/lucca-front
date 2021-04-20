@@ -145,6 +145,15 @@ gulp.task('ng:animations:build', () => {
 gulp.task('ng:input:build', () => {
 	return run('ng build input --prod').exec();
 });
+gulp.task('ng:scroll:build', () => {
+	return run('ng build scroll --prod').exec();
+});
+gulp.task('ng:safe-content:build', () => {
+	return run('ng build safe-content --prod').exec();
+});
+gulp.task('ng:number:build', () => {
+	return run('ng build number --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -154,5 +163,8 @@ gulp.task(
 		'ng:core:build',
 		'ng:animations:build',
 		'ng:input:build',
+		'ng:scroll:build',
+		'ng:safe-content:build',
+		'ng:number:build',
 	),
 );

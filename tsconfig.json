@@ -24,6 +24,15 @@
       "@lucca-front/ng/input": [
         "./packages/ng-bis/input/src/index"
       ],
+      "@lucca-front/ng/scroll": [
+        "./packages/ng-bis/scroll/src/index"
+      ],
+      "@lucca-front/ng/safe-content": [
+        "./packages/ng-bis/safe-content/src/index"
+      ],
+      "@lucca-front/ng/number": [
+        "./packages/ng-bis/number/src/index"
+      ]
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",
