@@ -129,10 +129,10 @@ gulp.task(
  -------------------------------*/
 
 gulp.task('ng:root:build', () => {
-	return run('ng build ng-bis --prod').exec();
+	return run('ng build root --prod').exec();
 });
 gulp.task('ng:root:style', () => {
-	return gulp.src([`packages/ng-bis/src/style/**/*.scss`])
+	return gulp.src([`packages/ng-bis/root/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/style`));
 });
 
@@ -154,6 +154,9 @@ gulp.task('ng:safe-content:build', () => {
 gulp.task('ng:number:build', () => {
 	return run('ng build number --prod').exec();
 });
+gulp.task('ng:popover:build', () => {
+	return run('ng build popover --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -166,5 +169,6 @@ gulp.task(
 		'ng:scroll:build',
 		'ng:safe-content:build',
 		'ng:number:build',
+		'ng:popover:build',
 	),
 );
