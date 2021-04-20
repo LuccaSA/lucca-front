@@ -19,7 +19,7 @@
   },
   "private": true,
   "scripts": {
-    "cpy": "cpy",
+    "postinstall": "gulp postinstall",
     "build:icons": "gulp icons",
     "build:scss": "gulp scss",
     "build:ng": "gulp ng",

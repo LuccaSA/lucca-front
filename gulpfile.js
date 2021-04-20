@@ -18,7 +18,27 @@ const AUTOPREFIXER_OPTIONS = {
 	cascade: false
 };
 
+/* -----------------------------
+ * postinstall *
+ -------------------------------*/
 
+ gulp.task('link:icons', () => {
+	return run('npm link --project packages/icons').exec();
+});
+gulp.task('link:scss', () => {
+	return run('npm link --project packages/scss').exec();
+});
+gulp.task('link', () => {
+	return run('npm link @lucca-front/icons @lucca-front/scss').exec();
+});
+gulp.task(
+	'postinstall',
+	gulp.series(
+		'link:icons',
+		'link:scss',
+		'link',
+	),
+);
 /* -----------------------------
  * ICONS *
  -------------------------------*/
