@@ -5,7 +5,7 @@
 // LF
 $noCssVar: false;
 @import "./packages/scss/src/main";
-@import "./packages/ng-bis/src/style/main";
+@import "./packages/ng-bis/root/src/style/main";
 :root {
 	@include generateCSSVarsFromTheme($theme);
 }

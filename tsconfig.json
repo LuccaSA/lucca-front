@@ -13,7 +13,7 @@
     "downlevelIteration": true,
     "paths": {
       "@lucca-front/ng": [
-        "./packages/ng-bis/src/index"
+        "./packages/ng-bis/root/src/index"
       ],
       "@lucca-front/ng/core": [
         "./packages/ng-bis/core/src/index"
