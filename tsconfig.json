@@ -35,6 +35,9 @@
       ],
       "@lucca-front/ng/popover": [
         "./packages/ng-bis/popover/src/index"
+      ],
+      "@lucca-front/ng/popup": [
+        "./packages/ng-bis/popup/src/index"
       ]
     },
     "experimentalDecorators": true,

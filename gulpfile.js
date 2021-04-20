@@ -177,6 +177,9 @@ gulp.task('ng:number:build', () => {
 gulp.task('ng:popover:build', () => {
 	return run('ng build popover --prod').exec();
 });
+gulp.task('ng:popup:build', () => {
+	return run('ng build popup --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -190,5 +193,6 @@ gulp.task(
 		'ng:safe-content:build',
 		'ng:number:build',
 		'ng:popover:build',
+		'ng:popup:build',
 	),
 );
