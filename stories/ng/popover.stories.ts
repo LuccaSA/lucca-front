@@ -10,16 +10,12 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 <button class="button"
 	[luPopover]="popover"
 	[luPopoverPosition]="position"
-	(luPopoverOnOpen)="onPopoverOpen.emit()"
-	(luPopoverOnClose)="onPopoverClose.emit()"
 >click me</button>
 <lu-popover #popover>{{popoverContent}}</lu-popover>
 `,
 }) class PopoverStory {
 	@Input() popoverContent: string;
 	@Input() position: string;
-	@Output() onPopoverOpen = new EventEmitter();
-	@Output() onPopoverClose = new EventEmitter();
 }
 
 export default {
