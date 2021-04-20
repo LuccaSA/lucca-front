@@ -5,14 +5,19 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitReturns": true,
+    "strict": false,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "paths": {
-      "@lucca-front/ng": [".packages/ng-bis/src/index"]
+      "@lucca-front/ng": [
+        "./packages/ng-bis/src/index"
+      ],
+      "@lucca-front/ng/core": [
+        "./packages/ng-bis/core/src/index"
+      ]
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",

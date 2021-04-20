@@ -46,38 +46,38 @@
         }
       }
     },
-    "user": {
+    "core": {
       "projectType": "library",
-      "root": "packages/ng-bis/user",
-      "sourceRoot": "packages/ng-bis/user/src",
+      "root": "packages/ng-bis/core",
+      "sourceRoot": "packages/ng-bis/core/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/user/tsconfig.lib.json",
-            "project": "packages/ng-bis/user/ng-package.json"
+            "tsConfig": "packages/ng-bis/core/tsconfig.lib.json",
+            "project": "packages/ng-bis/core/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/user/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng-bis/core/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/user/src/test.ts",
-            "tsConfig": "packages/ng-bis/user/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/user/karma.conf.js"
+            "main": "packages/ng-bis/core/src/test.ts",
+            "tsConfig": "packages/ng-bis/core/tsconfig.spec.json",
+            "karmaConfig": "packages/ng-bis/core/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/user/tsconfig.lib.json",
-              "packages/ng-bis/user/tsconfig.spec.json"
+              "packages/ng-bis/core/tsconfig.lib.json",
+              "packages/ng-bis/core/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

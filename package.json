@@ -22,7 +22,7 @@
     "cpy": "cpy",
     "build:icons": "gulp icons",
     "build:scss": "gulp scss",
-    "build:ng": "ng build ng-bis --prod && cpy ** \"../../../../dist/ng/style\" --cwd=packages/ng-bis/src/style --parents",
+    "build:ng": "ng build ng-bis --prod && cpy ** \"../../../../dist/ng/style\" --cwd=packages/ng-bis/src/style --parents && ng build core --prod",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .storybook",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"
