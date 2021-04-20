@@ -5,8 +5,7 @@ const clean = require('gulp-clean');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
 const styleLint = require('gulp-stylelint');
-
-
+const run = require('gulp-run');
 
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
@@ -122,5 +121,34 @@ gulp.task(
 		'scss:build',
 		'scss:pck',
 		'scss:src',
+	),
+);
+
+/* -----------------------------
+ * NG *
+ -------------------------------*/
+
+gulp.task('ng:root:build', () => {
+	return run('ng build ng-bis --prod').exec();
+});
+gulp.task('ng:root:style', () => {
+	return gulp.src([`packages/ng-bis/src/style/**/*.scss`])
+	.pipe(gulp.dest(`dist/ng/style`));
+});
+
+gulp.task('ng:core:build', () => {
+	return run('ng build core --prod').exec();
+});
+gulp.task('ng:animations:build', () => {
+	return run('ng build animations --prod').exec();
+});
+
+gulp.task(
+	'ng',
+	gulp.series(
+		'ng:root:build',
+		'ng:root:style',
+		'ng:core:build',
+		'ng:animations:build',
 	),
 );

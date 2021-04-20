@@ -17,6 +17,9 @@
       ],
       "@lucca-front/ng/core": [
         "./packages/ng-bis/core/src/index"
+      ],
+      "@lucca-front/ng/animations": [
+        "./packages/ng-bis/animations/src/index"
       ]
     },
     "experimentalDecorators": true,
