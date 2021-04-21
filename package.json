@@ -20,6 +20,7 @@
   "private": true,
   "scripts": {
     "postinstall": "gulp postinstall",
+    "build": "npm run build:icons && npm run build:scss && npm run build:ng",
     "build:icons": "gulp icons",
     "build:scss": "gulp scss",
     "build:ng": "gulp ng",

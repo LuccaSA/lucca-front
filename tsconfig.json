@@ -44,6 +44,12 @@
       ],
       "@lucca-front/ng/dropdown": [
         "./packages/ng-bis/dropdown/src/index"
+      ],
+      "@lucca-front/ng/picker": [
+        "./packages/ng-bis/picker/src/index"
+      ],
+      "@lucca-front/ng/modal": [
+        "./packages/ng-bis/modal/src/index"
       ]
     },
     "experimentalDecorators": true,

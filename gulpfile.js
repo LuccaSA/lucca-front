@@ -186,6 +186,12 @@ gulp.task('ng:tooltip:build', () => {
 gulp.task('ng:dropdown:build', () => {
 	return run('ng build dropdown --prod').exec();
 });
+gulp.task('ng:picker:build', () => {
+	return run('ng build picker --prod').exec();
+});
+gulp.task('ng:modal:build', () => {
+	return run('ng build modal --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -202,5 +208,7 @@ gulp.task(
 		'ng:popup:build',
 		'ng:tooltip:build',
 		'ng:dropdown:build',
+		'ng:picker:build',
+		'ng:modal:build',
 	),
 );
