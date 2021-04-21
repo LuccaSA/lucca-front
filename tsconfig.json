@@ -50,6 +50,9 @@
       ],
       "@lucca-front/ng/modal": [
         "./packages/ng-bis/modal/src/index"
+      ],
+      "@lucca-front/ng/select": [
+        "./packages/ng-bis/select/src/index"
       ]
     },
     "experimentalDecorators": true,
