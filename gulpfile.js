@@ -148,62 +148,29 @@ gulp.task(
  * NG *
  -------------------------------*/
 
-gulp.task('ng:root:build', () => {
-	return run('ng build root --prod').exec();
-});
+gulp.task('ng:root:build', ()=> run('ng build root --prod').exec());
 gulp.task('ng:root:style', () => {
 	return gulp.src([`packages/ng-bis/root/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/style`));
 });
 
-gulp.task('ng:core:build', () => {
-	return run('ng build core --prod').exec();
-});
-gulp.task('ng:animations:build', () => {
-	return run('ng build animations --prod').exec();
-});
-gulp.task('ng:input:build', () => {
-	return run('ng build input --prod').exec();
-});
-gulp.task('ng:scroll:build', () => {
-	return run('ng build scroll --prod').exec();
-});
-gulp.task('ng:safe-content:build', () => {
-	return run('ng build safe-content --prod').exec();
-});
-gulp.task('ng:number:build', () => {
-	return run('ng build number --prod').exec();
-});
-gulp.task('ng:popover:build', () => {
-	return run('ng build popover --prod').exec();
-});
-gulp.task('ng:popup:build', () => {
-	return run('ng build popup --prod').exec();
-});
-gulp.task('ng:tooltip:build', () => {
-	return run('ng build tooltip --prod').exec();
-});
-gulp.task('ng:dropdown:build', () => {
-	return run('ng build dropdown --prod').exec();
-});
-gulp.task('ng:picker:build', () => {
-	return run('ng build picker --prod').exec();
-});
-gulp.task('ng:modal:build', () => {
-	return run('ng build modal --prod').exec();
-});
-gulp.task('ng:select:build', () => {
-	return run('ng build select --prod').exec();
-});
-gulp.task('ng:sidepanel:build', () => {
-	return run('ng build sidepanel --prod').exec();
-});
-gulp.task('ng:option:build', () => {
-	return run('ng build option --prod').exec();
-});
-gulp.task('ng:date:build', () => {
-	return run('ng build date --prod').exec();
-});
+gulp.task('ng:core:build', () => run('ng build core --prod').exec());
+gulp.task('ng:animations:build', () => run('ng build animations --prod').exec());
+gulp.task('ng:input:build', () => run('ng build input --prod').exec());
+gulp.task('ng:scroll:build', () => run('ng build scroll --prod').exec());
+gulp.task('ng:safe-content:build', () => run('ng build safe-content --prod').exec());
+gulp.task('ng:number:build', () => run('ng build number --prod').exec());
+gulp.task('ng:popover:build', () => run('ng build popover --prod').exec());
+gulp.task('ng:popup:build', () => run('ng build popup --prod').exec());
+gulp.task('ng:tooltip:build', () => run('ng build tooltip --prod').exec());
+gulp.task('ng:dropdown:build', () => run('ng build dropdown --prod').exec());
+gulp.task('ng:picker:build', () => run('ng build picker --prod').exec());
+gulp.task('ng:modal:build', () => run('ng build modal --prod').exec());
+gulp.task('ng:select:build', () => run('ng build select --prod').exec());
+gulp.task('ng:sidepanel:build', () => run('ng build sidepanel --prod').exec());
+gulp.task('ng:option:build', () => run('ng build option --prod').exec());
+gulp.task('ng:date:build', () => run('ng build date --prod').exec());
+gulp.task('ng:api:build', () => run('ng build api --prod').exec());
 
 gulp.task(
 	'ng',
@@ -226,5 +193,6 @@ gulp.task(
 		'ng:sidepanel:build',
 		'ng:option:build',
 		'ng:date:build',
+		'ng:api:build',
 	),
 );
