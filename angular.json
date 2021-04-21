@@ -405,6 +405,46 @@
           }
         }
       }
+    },
+    "dropdown": {
+      "projectType": "library",
+      "root": "packages/ng-bis/dropdown",
+      "sourceRoot": "packages/ng-bis/dropdown/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "packages/ng-bis/dropdown/tsconfig.lib.json",
+            "project": "packages/ng-bis/dropdown/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/ng-bis/dropdown/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "packages/ng-bis/dropdown/src/test.ts",
+            "tsConfig": "packages/ng-bis/dropdown/tsconfig.spec.json",
+            "karmaConfig": "packages/ng-bis/dropdown/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "packages/ng-bis/dropdown/tsconfig.lib.json",
+              "packages/ng-bis/dropdown/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-bis"

@@ -41,6 +41,9 @@
       ],
       "@lucca-front/ng/tooltip": [
         "./packages/ng-bis/tooltip/src/index"
+      ],
+      "@lucca-front/ng/dropdown": [
+        "./packages/ng-bis/dropdown/src/index"
       ]
     },
     "experimentalDecorators": true,
