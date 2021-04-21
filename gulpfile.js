@@ -201,6 +201,9 @@ gulp.task('ng:sidepanel:build', () => {
 gulp.task('ng:option:build', () => {
 	return run('ng build option --prod').exec();
 });
+gulp.task('ng:date:build', () => {
+	return run('ng build date --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -222,5 +225,6 @@ gulp.task(
 		'ng:select:build',
 		'ng:sidepanel:build',
 		'ng:option:build',
+		'ng:date:build',
 	),
 );

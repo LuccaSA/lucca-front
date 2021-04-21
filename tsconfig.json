@@ -59,6 +59,9 @@
       ],
       "@lucca-front/ng/option": [
         "./packages/ng-bis/option/src/index"
+      ],
+      "@lucca-front/ng/date": [
+        "./packages/ng-bis/date/src/index"
       ]
     },
     "experimentalDecorators": true,
