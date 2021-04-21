@@ -63,3 +63,15 @@
 	width: 100% #{$suffix};
 	text-align: left #{$suffix};
 }
+
+@mixin clearfix($suffix: '') {
+	&::before,
+	&::after {
+		content: "" #{$suffix};
+		display: table #{$suffix};
+	}
+
+	&::after {
+		clear: both #{$suffix};
+	}
+}
