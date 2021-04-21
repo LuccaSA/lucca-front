@@ -53,6 +53,9 @@
       ],
       "@lucca-front/ng/select": [
         "./packages/ng-bis/select/src/index"
+      ],
+      "@lucca-front/ng/sidepanel": [
+        "./packages/ng-bis/sidepanel/src/index"
       ]
     },
     "experimentalDecorators": true,

@@ -195,6 +195,9 @@ gulp.task('ng:modal:build', () => {
 gulp.task('ng:select:build', () => {
 	return run('ng build select --prod').exec();
 });
+gulp.task('ng:sidepanel:build', () => {
+	return run('ng build sidepanel --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -214,5 +217,6 @@ gulp.task(
 		'ng:picker:build',
 		'ng:modal:build',
 		'ng:select:build',
+		'ng:sidepanel:build',
 	),
 );
