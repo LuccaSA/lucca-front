@@ -38,6 +38,9 @@
       ],
       "@lucca-front/ng/popup": [
         "./packages/ng-bis/popup/src/index"
+      ],
+      "@lucca-front/ng/tooltip": [
+        "./packages/ng-bis/tooltip/src/index"
       ]
     },
     "experimentalDecorators": true,

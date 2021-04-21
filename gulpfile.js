@@ -180,6 +180,9 @@ gulp.task('ng:popover:build', () => {
 gulp.task('ng:popup:build', () => {
 	return run('ng build popup --prod').exec();
 });
+gulp.task('ng:tooltip:build', () => {
+	return run('ng build tooltip --prod').exec();
+});
 
 gulp.task(
 	'ng',
@@ -194,5 +197,6 @@ gulp.task(
 		'ng:number:build',
 		'ng:popover:build',
 		'ng:popup:build',
+		'ng:tooltip:build',
 	),
 );
