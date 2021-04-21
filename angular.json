@@ -875,6 +875,86 @@
           }
         }
       }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "packages/ng-bis/material",
+      "sourceRoot": "packages/ng-bis/material/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "packages/ng-bis/material/tsconfig.lib.json",
+            "project": "packages/ng-bis/material/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/ng-bis/material/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "packages/ng-bis/material/src/test.ts",
+            "tsConfig": "packages/ng-bis/material/tsconfig.spec.json",
+            "karmaConfig": "packages/ng-bis/material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "packages/ng-bis/material/tsconfig.lib.json",
+              "packages/ng-bis/material/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "formly": {
+      "projectType": "library",
+      "root": "packages/ng-bis/formly",
+      "sourceRoot": "packages/ng-bis/formly/src",
+      "prefix": "lu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "packages/ng-bis/formly/tsconfig.lib.json",
+            "project": "packages/ng-bis/formly/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/ng-bis/formly/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "packages/ng-bis/formly/src/test.ts",
+            "tsConfig": "packages/ng-bis/formly/tsconfig.spec.json",
+            "karmaConfig": "packages/ng-bis/formly/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "packages/ng-bis/formly/tsconfig.lib.json",
+              "packages/ng-bis/formly/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "storybook"

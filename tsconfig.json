@@ -74,6 +74,12 @@
       ],
       "@lucca-front/ng/user": [
         "./packages/ng-bis/user/src/index"
+      ],
+      "@lucca-front/ng/material": [
+        "./packages/ng-bis/material/src/index"
+      ],
+      "@lucca-front/ng/formly": [
+        "./packages/ng-bis/formly/src/index"
       ]
     },
     "experimentalDecorators": true,

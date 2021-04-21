@@ -175,6 +175,18 @@ gulp.task('ng:department:build', () => run('ng build department --prod').exec())
 gulp.task('ng:establishment:build', () => run('ng build establishment --prod').exec());
 gulp.task('ng:user:build', () => run('ng build user --prod').exec());
 
+gulp.task('ng:material:build', () => run('ng build material --prod').exec());
+gulp.task('ng:material:style', () => {
+	return gulp.src([`packages/ng-bis/material/src/style/**/*.scss`])
+	.pipe(gulp.dest(`dist/ng/material/style`));
+});
+
+gulp.task('ng:formly:build', () => run('ng build formly --prod').exec());
+gulp.task('ng:formly:style', () => {
+	return gulp.src([`packages/ng-bis/formly/src/style/**/*.scss`])
+	.pipe(gulp.dest(`dist/ng/formly/style`));
+});
+
 gulp.task(
 	'ng',
 	gulp.series(
@@ -200,5 +212,9 @@ gulp.task(
 		'ng:department:build',
 		'ng:establishment:build',
 		'ng:user:build',
+		'ng:material:build',
+		'ng:material:style',
+		'ng:formly:build',
+		'ng:formly:style',
 	),
 );
