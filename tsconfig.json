@@ -68,6 +68,9 @@
       ],
       "@lucca-front/ng/department": [
         "./packages/ng-bis/department/src/index"
+      ],
+      "@lucca-front/ng/establishment": [
+        "./packages/ng-bis/establishment/src/index"
       ]
     },
     "experimentalDecorators": true,

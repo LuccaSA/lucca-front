@@ -172,6 +172,7 @@ gulp.task('ng:option:build', () => run('ng build option --prod').exec());
 gulp.task('ng:date:build', () => run('ng build date --prod').exec());
 gulp.task('ng:api:build', () => run('ng build api --prod').exec());
 gulp.task('ng:department:build', () => run('ng build department --prod').exec());
+gulp.task('ng:establishment:build', () => run('ng build establishment --prod').exec());
 
 gulp.task(
 	'ng',
@@ -196,5 +197,6 @@ gulp.task(
 		'ng:date:build',
 		'ng:api:build',
 		'ng:department:build',
+		'ng:establishment:build',
 	),
 );
