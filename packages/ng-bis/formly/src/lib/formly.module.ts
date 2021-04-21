@@ -35,6 +35,9 @@ import {
 	LuFormlyWrapperCheckboxLayout,
 } from './wrappers/index';
 
+/** HACK to avoid a 'Function calls are not supported in decorators' error */
+export const LuFormlyChild = FormlyModule.forChild(LU_FORMLY_CONFIG);
+
 @NgModule({
 	declarations: [
 		LuFormlyErrorMessage,
@@ -72,7 +75,8 @@ import {
 		LuEstablishmentModule,
 		LuDateModule,
 
-		FormlyModule.forChild(LU_FORMLY_CONFIG),
+		// FormlyModule.forChild(LU_FORMLY_CONFIG),
+		LuFormlyChild,
 	],
 })
 export class LuFormlyModule { }
