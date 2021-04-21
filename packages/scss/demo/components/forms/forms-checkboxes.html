@@ -95,15 +95,19 @@
 </code>
 </section>
 
-<!-- Incomplete checkbox -->
+<!-- Mixed checkbox -->
 <section class="contentSection">
-	<h2>Incomplete checkbox</h2>
+	<h2>Mixed checkbox</h2>
 	<label class="checkbox">
-		<input class="checkbox-input is-incomplete" type="checkbox" checked />
-		<span class="checkbox-label">Incomplete checkbox</span>
+		<input class="checkbox-input" type="checkbox" aria-hidden="true" checked="checked" />
+		<span class="checkbox-mixed" role="checkbox" aria-checked="mixed"></span>
+		<span class="checkbox-label">Mixed checkbox</span>
 	</label>
-	<p>For an incomplete checkbox, add class <code class="code">is-incomplete</code> to input <code class="code">checkbox-input</code>.</p>
-</section>
+	<code class="code mod-block">&lt;label class=&quot;checkbox&quot;&gt;
+		&lt;input class=&quot;checkbox-input&quot; type=&quot;checkbox&quot; aria-hidden=&quot;true&quot; checked=&quot;checked&quot; /&gt;
+		&lt;span class=&quot;checkbox-mixed&quot; role=&quot;checkbox&quot; aria-checked=&quot;mixed&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;checkbox-label&quot;&gt;Mixed checkbox&lt;/span&gt;
+	&lt;/label&gt;</code></section>
 
 <!-- Big checkbox -->
 <section class="contentSection">
