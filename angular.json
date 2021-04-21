@@ -845,7 +845,37 @@
           }
         }
       }
+    },
+    "storybook": {
+      "projectType": "application",
+      "root": ".storybook",
+      "sourceRoot": ".storybook/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/storybook",
+            "index": ".storybook/src/index.html",
+            "main": ".storybook/src/main.ts",
+            "tsConfig": ".storybook/tsconfig.json",
+            "aot": true,
+            "assets": [],
+            "styles": [
+              ".storybook/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "packages/scss/src/overrides",
+                "packages/ng-bis/root/src/style/overrides",
+                "packages/ng-bis/root/src/style"
+              ]
+            },
+            "scripts": []
+          }
+        }
+      }
     }
   },
-  "defaultProject": "ng-bis"
+  "defaultProject": "storybook"
 }
