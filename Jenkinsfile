@@ -11,7 +11,7 @@ node {
 
 	def branchName = env.BRANCH_NAME;
 
-	def isPr = false
+	def isPR = false
 	def isMaster = false
 	def isRc = false
 	def prNumber = 0
@@ -23,7 +23,7 @@ node {
 		isRc = true
 	}
 	if(env.BRANCH_NAME ==~ /^PR-\d*/) {
-		isPr = true
+		isPR = true
 		prNumber = env.BRANCH_NAME.substring(3)
 	}
 
@@ -74,13 +74,13 @@ node {
 				}
 			}
 
-			if (isPr || isRc || isMaster) {
+			if (isPR || isRc || isMaster) {
 				stage('5. Deploy') {
 					echo "deploying ${branchName}"
 					bat "npm run build-storybook -- -o \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
 				}
 
-				if (isPr) {
+				if (isPR) {
 					// post PR comment
 					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
 					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
