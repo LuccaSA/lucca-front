@@ -35,7 +35,7 @@ node {
 
 			def scmVars = null
 
-			stage('1. Cleanup') {
+			stage('Cleanup') {
 				// tools
 				if(fileExists('.jenkins')) {
 					dir('.jenkins') {
@@ -50,7 +50,7 @@ node {
 				}
 			}
 
-			stage('2. Prepare') {
+			stage('Prepare') {
 				env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
 				env.PATH="${env.NODEJS_HOME};${env.PATH}"
 				bat "node --version"
@@ -59,12 +59,12 @@ node {
 				scmVars = checkout scm
 			}
 
-			stage('3. Restore') {
+			stage('Restore') {
 				bat "npm ci"
 			}
 
 			if (!isPR) {
-				stage('4. Qualif') {
+				stage('Qualif') {
 					// it must be buildable
 					bat "npm run build"
 					// it must break no test
@@ -75,8 +75,9 @@ node {
 			}
 
 			if (isPR || isRc || isMaster) {
-				stage('5. Deploy') {
+				stage('Deploy') {
 					echo "deploying ${branchName}"
+					bat "npm run compodoc -- -p ./tsconfig.json -e json -d .storybook"
 					bat "npm run build-storybook -- -o \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
 				}
 
