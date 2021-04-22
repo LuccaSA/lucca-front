@@ -160,5 +160,5 @@ $suffix: "!important" !default;
 }
 
 .#{$prefix}minWidth0 {
-	min-width: 0;
+	min-width: 0 #{$suffix};
 }
