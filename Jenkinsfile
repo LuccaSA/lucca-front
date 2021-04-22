@@ -63,13 +63,15 @@ node {
 				bat "npm ci"
 			}
 
-			stage('4. Qualif') {
-				// it must be buildable
-				bat "npm run build"
-				// it must break no test
-				bat "npm run test"
-				// it must be lint compliant
-				bat "npm run lint"
+			if (!isPR) {
+				stage('4. Qualif') {
+					// it must be buildable
+					bat "npm run build"
+					// it must break no test
+					// bat "npm run test"
+					// it must be lint compliant
+					// bat "npm run lint"
+				}
 			}
 
 			if (isPr || isRc || isMaster) {
