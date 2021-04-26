@@ -2,9 +2,6 @@
 node_modules
 npm-debug.log
 
-#lerna
-lerna-debug.log
-
 #build stuff
 dist
 
@@ -26,3 +23,6 @@ demo/ng
 
 # storybook
 .storybook/documentation.json
+
+# packages stuff
+packages/*/package-lock.json
