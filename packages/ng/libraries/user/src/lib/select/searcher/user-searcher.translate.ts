@@ -14,4 +14,7 @@ export const luUserSearcherTranslations = {
 	fr: {
 		includeFormerEmployees: 'Inclure les salariés partis',
 	},
+	es: {
+		includeFormerEmployees: 'Incluir a los antiguos empleados',
+	}
 } as ILuTranslation<ILuUserSearcherLabel>;

@@ -14,4 +14,7 @@ export const luEstablishmentSelectInputTranslations = {
 	fr: {
 		establishments: 'établissements',
 	},
+	es: {
+		establishments: 'establecimiento',
+	}
 } as ILuTranslation<ILuEstablishmentSelectInputLabel>;

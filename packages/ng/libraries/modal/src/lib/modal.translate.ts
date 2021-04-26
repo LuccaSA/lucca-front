@@ -18,4 +18,8 @@ export const luModalTranslations = {
 		submit: 'Ok',
 		cancel: 'Annuler',
 	},
+	es: {
+		submit: 'Ok',
+		cancel: 'Cancelar',
+	}
 } as ILuTranslation<ILuModalLabel>;
