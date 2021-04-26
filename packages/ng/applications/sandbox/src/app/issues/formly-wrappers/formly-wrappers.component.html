@@ -1,9 +1,0 @@
-<h1>formly-wrappers</h1>
-<form class="form" role="form" novalidate [formGroup]="form" (ngSubmit)="submit()">
-	<formly-form [model]="model" [fields]="fields">
-		<button type="submit" class="button">submit</button>
-	</formly-form>
-</form>
-<p>
-	{{ model | json }}
-</p>
