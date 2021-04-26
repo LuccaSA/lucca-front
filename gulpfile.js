@@ -150,7 +150,7 @@ gulp.task(
 
 gulp.task('ng:root:build', ()=> run('ng build root --prod').exec());
 gulp.task('ng:root:style', () => {
-	return gulp.src([`packages/ng-bis/root/src/style/**/*.scss`])
+	return gulp.src([`packages/ng/root/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/style`));
 });
 
@@ -177,13 +177,13 @@ gulp.task('ng:user:build', () => run('ng build user --prod').exec());
 
 gulp.task('ng:material:build', () => run('ng build material --prod').exec());
 gulp.task('ng:material:style', () => {
-	return gulp.src([`packages/ng-bis/material/src/style/**/*.scss`])
+	return gulp.src([`packages/ng/material/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/material/style`));
 });
 
 gulp.task('ng:formly:build', () => run('ng build formly --prod').exec());
 gulp.task('ng:formly:style', () => {
-	return gulp.src([`packages/ng-bis/formly/src/style/**/*.scss`])
+	return gulp.src([`packages/ng/formly/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/formly/style`));
 });
 

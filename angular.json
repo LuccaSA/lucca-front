@@ -4,40 +4,40 @@
   "cli": {
     "packageManager": "npm"
   },
-  "newProjectRoot": "packages/ng-bis",
+  "newProjectRoot": "packages/ng",
   "projects": {
     "root": {
       "projectType": "library",
-      "root": "packages/ng-bis/root",
-      "sourceRoot": "packages/ng-bis/root/src",
+      "root": "packages/ng/root",
+      "sourceRoot": "packages/ng/root/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/root/tsconfig.lib.json",
-            "project": "packages/ng-bis/root/ng-package.json"
+            "tsConfig": "packages/ng/root/tsconfig.lib.json",
+            "project": "packages/ng/root/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/root/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/root/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/root/src/test.ts",
-            "tsConfig": "packages/ng-bis/root/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/root/karma.conf.js"
+            "main": "packages/ng/root/src/test.ts",
+            "tsConfig": "packages/ng/root/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/root/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/root/tsconfig.lib.json",
-              "packages/ng-bis/root/tsconfig.spec.json"
+              "packages/ng/root/tsconfig.lib.json",
+              "packages/ng/root/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -48,36 +48,36 @@
     },
     "core": {
       "projectType": "library",
-      "root": "packages/ng-bis/core",
-      "sourceRoot": "packages/ng-bis/core/src",
+      "root": "packages/ng/core",
+      "sourceRoot": "packages/ng/core/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/core/tsconfig.lib.json",
-            "project": "packages/ng-bis/core/ng-package.json"
+            "tsConfig": "packages/ng/core/tsconfig.lib.json",
+            "project": "packages/ng/core/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/core/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/core/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/core/src/test.ts",
-            "tsConfig": "packages/ng-bis/core/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/core/karma.conf.js"
+            "main": "packages/ng/core/src/test.ts",
+            "tsConfig": "packages/ng/core/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/core/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/core/tsconfig.lib.json",
-              "packages/ng-bis/core/tsconfig.spec.json"
+              "packages/ng/core/tsconfig.lib.json",
+              "packages/ng/core/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -88,36 +88,36 @@
     },
     "animations": {
       "projectType": "library",
-      "root": "packages/ng-bis/animations",
-      "sourceRoot": "packages/ng-bis/animations/src",
+      "root": "packages/ng/animations",
+      "sourceRoot": "packages/ng/animations/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/animations/tsconfig.lib.json",
-            "project": "packages/ng-bis/animations/ng-package.json"
+            "tsConfig": "packages/ng/animations/tsconfig.lib.json",
+            "project": "packages/ng/animations/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/animations/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/animations/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/animations/src/test.ts",
-            "tsConfig": "packages/ng-bis/animations/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/animations/karma.conf.js"
+            "main": "packages/ng/animations/src/test.ts",
+            "tsConfig": "packages/ng/animations/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/animations/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/animations/tsconfig.lib.json",
-              "packages/ng-bis/animations/tsconfig.spec.json"
+              "packages/ng/animations/tsconfig.lib.json",
+              "packages/ng/animations/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -128,36 +128,36 @@
     },
     "input": {
       "projectType": "library",
-      "root": "packages/ng-bis/input",
-      "sourceRoot": "packages/ng-bis/input/src",
+      "root": "packages/ng/input",
+      "sourceRoot": "packages/ng/input/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/input/tsconfig.lib.json",
-            "project": "packages/ng-bis/input/ng-package.json"
+            "tsConfig": "packages/ng/input/tsconfig.lib.json",
+            "project": "packages/ng/input/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/input/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/input/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/input/src/test.ts",
-            "tsConfig": "packages/ng-bis/input/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/input/karma.conf.js"
+            "main": "packages/ng/input/src/test.ts",
+            "tsConfig": "packages/ng/input/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/input/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/input/tsconfig.lib.json",
-              "packages/ng-bis/input/tsconfig.spec.json"
+              "packages/ng/input/tsconfig.lib.json",
+              "packages/ng/input/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -168,36 +168,36 @@
     },
     "scroll": {
       "projectType": "library",
-      "root": "packages/ng-bis/scroll",
-      "sourceRoot": "packages/ng-bis/scroll/src",
+      "root": "packages/ng/scroll",
+      "sourceRoot": "packages/ng/scroll/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/scroll/tsconfig.lib.json",
-            "project": "packages/ng-bis/scroll/ng-package.json"
+            "tsConfig": "packages/ng/scroll/tsconfig.lib.json",
+            "project": "packages/ng/scroll/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/scroll/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/scroll/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/scroll/src/test.ts",
-            "tsConfig": "packages/ng-bis/scroll/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/scroll/karma.conf.js"
+            "main": "packages/ng/scroll/src/test.ts",
+            "tsConfig": "packages/ng/scroll/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/scroll/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/scroll/tsconfig.lib.json",
-              "packages/ng-bis/scroll/tsconfig.spec.json"
+              "packages/ng/scroll/tsconfig.lib.json",
+              "packages/ng/scroll/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -208,36 +208,36 @@
     },
     "safe-content": {
       "projectType": "library",
-      "root": "packages/ng-bis/safe-content",
-      "sourceRoot": "packages/ng-bis/safe-content/src",
+      "root": "packages/ng/safe-content",
+      "sourceRoot": "packages/ng/safe-content/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/safe-content/tsconfig.lib.json",
-            "project": "packages/ng-bis/safe-content/ng-package.json"
+            "tsConfig": "packages/ng/safe-content/tsconfig.lib.json",
+            "project": "packages/ng/safe-content/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/safe-content/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/safe-content/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/safe-content/src/test.ts",
-            "tsConfig": "packages/ng-bis/safe-content/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/safe-content/karma.conf.js"
+            "main": "packages/ng/safe-content/src/test.ts",
+            "tsConfig": "packages/ng/safe-content/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/safe-content/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/safe-content/tsconfig.lib.json",
-              "packages/ng-bis/safe-content/tsconfig.spec.json"
+              "packages/ng/safe-content/tsconfig.lib.json",
+              "packages/ng/safe-content/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -248,36 +248,36 @@
     },
     "number": {
       "projectType": "library",
-      "root": "packages/ng-bis/number",
-      "sourceRoot": "packages/ng-bis/number/src",
+      "root": "packages/ng/number",
+      "sourceRoot": "packages/ng/number/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/number/tsconfig.lib.json",
-            "project": "packages/ng-bis/number/ng-package.json"
+            "tsConfig": "packages/ng/number/tsconfig.lib.json",
+            "project": "packages/ng/number/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/number/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/number/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/number/src/test.ts",
-            "tsConfig": "packages/ng-bis/number/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/number/karma.conf.js"
+            "main": "packages/ng/number/src/test.ts",
+            "tsConfig": "packages/ng/number/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/number/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/number/tsconfig.lib.json",
-              "packages/ng-bis/number/tsconfig.spec.json"
+              "packages/ng/number/tsconfig.lib.json",
+              "packages/ng/number/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -288,36 +288,36 @@
     },
     "popover": {
       "projectType": "library",
-      "root": "packages/ng-bis/popover",
-      "sourceRoot": "packages/ng-bis/popover/src",
+      "root": "packages/ng/popover",
+      "sourceRoot": "packages/ng/popover/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/popover/tsconfig.lib.json",
-            "project": "packages/ng-bis/popover/ng-package.json"
+            "tsConfig": "packages/ng/popover/tsconfig.lib.json",
+            "project": "packages/ng/popover/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/popover/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/popover/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/popover/src/test.ts",
-            "tsConfig": "packages/ng-bis/popover/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/popover/karma.conf.js"
+            "main": "packages/ng/popover/src/test.ts",
+            "tsConfig": "packages/ng/popover/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/popover/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/popover/tsconfig.lib.json",
-              "packages/ng-bis/popover/tsconfig.spec.json"
+              "packages/ng/popover/tsconfig.lib.json",
+              "packages/ng/popover/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -328,36 +328,36 @@
     },
     "popup": {
       "projectType": "library",
-      "root": "packages/ng-bis/popup",
-      "sourceRoot": "packages/ng-bis/popup/src",
+      "root": "packages/ng/popup",
+      "sourceRoot": "packages/ng/popup/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/popup/tsconfig.lib.json",
-            "project": "packages/ng-bis/popup/ng-package.json"
+            "tsConfig": "packages/ng/popup/tsconfig.lib.json",
+            "project": "packages/ng/popup/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/popup/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/popup/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/popup/src/test.ts",
-            "tsConfig": "packages/ng-bis/popup/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/popup/karma.conf.js"
+            "main": "packages/ng/popup/src/test.ts",
+            "tsConfig": "packages/ng/popup/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/popup/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/popup/tsconfig.lib.json",
-              "packages/ng-bis/popup/tsconfig.spec.json"
+              "packages/ng/popup/tsconfig.lib.json",
+              "packages/ng/popup/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -368,36 +368,36 @@
     },
     "tooltip": {
       "projectType": "library",
-      "root": "packages/ng-bis/tooltip",
-      "sourceRoot": "packages/ng-bis/tooltip/src",
+      "root": "packages/ng/tooltip",
+      "sourceRoot": "packages/ng/tooltip/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/tooltip/tsconfig.lib.json",
-            "project": "packages/ng-bis/tooltip/ng-package.json"
+            "tsConfig": "packages/ng/tooltip/tsconfig.lib.json",
+            "project": "packages/ng/tooltip/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/tooltip/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/tooltip/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/tooltip/src/test.ts",
-            "tsConfig": "packages/ng-bis/tooltip/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/tooltip/karma.conf.js"
+            "main": "packages/ng/tooltip/src/test.ts",
+            "tsConfig": "packages/ng/tooltip/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/tooltip/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/tooltip/tsconfig.lib.json",
-              "packages/ng-bis/tooltip/tsconfig.spec.json"
+              "packages/ng/tooltip/tsconfig.lib.json",
+              "packages/ng/tooltip/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -408,36 +408,36 @@
     },
     "dropdown": {
       "projectType": "library",
-      "root": "packages/ng-bis/dropdown",
-      "sourceRoot": "packages/ng-bis/dropdown/src",
+      "root": "packages/ng/dropdown",
+      "sourceRoot": "packages/ng/dropdown/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/dropdown/tsconfig.lib.json",
-            "project": "packages/ng-bis/dropdown/ng-package.json"
+            "tsConfig": "packages/ng/dropdown/tsconfig.lib.json",
+            "project": "packages/ng/dropdown/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/dropdown/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/dropdown/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/dropdown/src/test.ts",
-            "tsConfig": "packages/ng-bis/dropdown/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/dropdown/karma.conf.js"
+            "main": "packages/ng/dropdown/src/test.ts",
+            "tsConfig": "packages/ng/dropdown/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/dropdown/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/dropdown/tsconfig.lib.json",
-              "packages/ng-bis/dropdown/tsconfig.spec.json"
+              "packages/ng/dropdown/tsconfig.lib.json",
+              "packages/ng/dropdown/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -448,36 +448,36 @@
     },
     "picker": {
       "projectType": "library",
-      "root": "packages/ng-bis/picker",
-      "sourceRoot": "packages/ng-bis/picker/src",
+      "root": "packages/ng/picker",
+      "sourceRoot": "packages/ng/picker/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/picker/tsconfig.lib.json",
-            "project": "packages/ng-bis/picker/ng-package.json"
+            "tsConfig": "packages/ng/picker/tsconfig.lib.json",
+            "project": "packages/ng/picker/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/picker/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/picker/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/picker/src/test.ts",
-            "tsConfig": "packages/ng-bis/picker/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/picker/karma.conf.js"
+            "main": "packages/ng/picker/src/test.ts",
+            "tsConfig": "packages/ng/picker/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/picker/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/picker/tsconfig.lib.json",
-              "packages/ng-bis/picker/tsconfig.spec.json"
+              "packages/ng/picker/tsconfig.lib.json",
+              "packages/ng/picker/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -488,36 +488,36 @@
     },
     "modal": {
       "projectType": "library",
-      "root": "packages/ng-bis/modal",
-      "sourceRoot": "packages/ng-bis/modal/src",
+      "root": "packages/ng/modal",
+      "sourceRoot": "packages/ng/modal/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/modal/tsconfig.lib.json",
-            "project": "packages/ng-bis/modal/ng-package.json"
+            "tsConfig": "packages/ng/modal/tsconfig.lib.json",
+            "project": "packages/ng/modal/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/modal/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/modal/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/modal/src/test.ts",
-            "tsConfig": "packages/ng-bis/modal/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/modal/karma.conf.js"
+            "main": "packages/ng/modal/src/test.ts",
+            "tsConfig": "packages/ng/modal/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/modal/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/modal/tsconfig.lib.json",
-              "packages/ng-bis/modal/tsconfig.spec.json"
+              "packages/ng/modal/tsconfig.lib.json",
+              "packages/ng/modal/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -528,36 +528,36 @@
     },
     "select": {
       "projectType": "library",
-      "root": "packages/ng-bis/select",
-      "sourceRoot": "packages/ng-bis/select/src",
+      "root": "packages/ng/select",
+      "sourceRoot": "packages/ng/select/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/select/tsconfig.lib.json",
-            "project": "packages/ng-bis/select/ng-package.json"
+            "tsConfig": "packages/ng/select/tsconfig.lib.json",
+            "project": "packages/ng/select/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/select/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/select/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/select/src/test.ts",
-            "tsConfig": "packages/ng-bis/select/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/select/karma.conf.js"
+            "main": "packages/ng/select/src/test.ts",
+            "tsConfig": "packages/ng/select/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/select/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/select/tsconfig.lib.json",
-              "packages/ng-bis/select/tsconfig.spec.json"
+              "packages/ng/select/tsconfig.lib.json",
+              "packages/ng/select/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -568,36 +568,36 @@
     },
     "sidepanel": {
       "projectType": "library",
-      "root": "packages/ng-bis/sidepanel",
-      "sourceRoot": "packages/ng-bis/sidepanel/src",
+      "root": "packages/ng/sidepanel",
+      "sourceRoot": "packages/ng/sidepanel/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/sidepanel/tsconfig.lib.json",
-            "project": "packages/ng-bis/sidepanel/ng-package.json"
+            "tsConfig": "packages/ng/sidepanel/tsconfig.lib.json",
+            "project": "packages/ng/sidepanel/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/sidepanel/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/sidepanel/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/sidepanel/src/test.ts",
-            "tsConfig": "packages/ng-bis/sidepanel/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/sidepanel/karma.conf.js"
+            "main": "packages/ng/sidepanel/src/test.ts",
+            "tsConfig": "packages/ng/sidepanel/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/sidepanel/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/sidepanel/tsconfig.lib.json",
-              "packages/ng-bis/sidepanel/tsconfig.spec.json"
+              "packages/ng/sidepanel/tsconfig.lib.json",
+              "packages/ng/sidepanel/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -608,36 +608,36 @@
     },
     "option": {
       "projectType": "library",
-      "root": "packages/ng-bis/option",
-      "sourceRoot": "packages/ng-bis/option/src",
+      "root": "packages/ng/option",
+      "sourceRoot": "packages/ng/option/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/option/tsconfig.lib.json",
-            "project": "packages/ng-bis/option/ng-package.json"
+            "tsConfig": "packages/ng/option/tsconfig.lib.json",
+            "project": "packages/ng/option/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/option/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/option/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/option/src/test.ts",
-            "tsConfig": "packages/ng-bis/option/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/option/karma.conf.js"
+            "main": "packages/ng/option/src/test.ts",
+            "tsConfig": "packages/ng/option/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/option/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/option/tsconfig.lib.json",
-              "packages/ng-bis/option/tsconfig.spec.json"
+              "packages/ng/option/tsconfig.lib.json",
+              "packages/ng/option/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -648,36 +648,36 @@
     },
     "date": {
       "projectType": "library",
-      "root": "packages/ng-bis/date",
-      "sourceRoot": "packages/ng-bis/date/src",
+      "root": "packages/ng/date",
+      "sourceRoot": "packages/ng/date/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/date/tsconfig.lib.json",
-            "project": "packages/ng-bis/date/ng-package.json"
+            "tsConfig": "packages/ng/date/tsconfig.lib.json",
+            "project": "packages/ng/date/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/date/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/date/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/date/src/test.ts",
-            "tsConfig": "packages/ng-bis/date/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/date/karma.conf.js"
+            "main": "packages/ng/date/src/test.ts",
+            "tsConfig": "packages/ng/date/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/date/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/date/tsconfig.lib.json",
-              "packages/ng-bis/date/tsconfig.spec.json"
+              "packages/ng/date/tsconfig.lib.json",
+              "packages/ng/date/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -688,36 +688,36 @@
     },
     "api": {
       "projectType": "library",
-      "root": "packages/ng-bis/api",
-      "sourceRoot": "packages/ng-bis/api/src",
+      "root": "packages/ng/api",
+      "sourceRoot": "packages/ng/api/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/api/tsconfig.lib.json",
-            "project": "packages/ng-bis/api/ng-package.json"
+            "tsConfig": "packages/ng/api/tsconfig.lib.json",
+            "project": "packages/ng/api/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/api/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/api/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/api/src/test.ts",
-            "tsConfig": "packages/ng-bis/api/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/api/karma.conf.js"
+            "main": "packages/ng/api/src/test.ts",
+            "tsConfig": "packages/ng/api/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/api/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/api/tsconfig.lib.json",
-              "packages/ng-bis/api/tsconfig.spec.json"
+              "packages/ng/api/tsconfig.lib.json",
+              "packages/ng/api/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -728,36 +728,36 @@
     },
     "department": {
       "projectType": "library",
-      "root": "packages/ng-bis/department",
-      "sourceRoot": "packages/ng-bis/department/src",
+      "root": "packages/ng/department",
+      "sourceRoot": "packages/ng/department/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/department/tsconfig.lib.json",
-            "project": "packages/ng-bis/department/ng-package.json"
+            "tsConfig": "packages/ng/department/tsconfig.lib.json",
+            "project": "packages/ng/department/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/department/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/department/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/department/src/test.ts",
-            "tsConfig": "packages/ng-bis/department/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/department/karma.conf.js"
+            "main": "packages/ng/department/src/test.ts",
+            "tsConfig": "packages/ng/department/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/department/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/department/tsconfig.lib.json",
-              "packages/ng-bis/department/tsconfig.spec.json"
+              "packages/ng/department/tsconfig.lib.json",
+              "packages/ng/department/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -768,36 +768,36 @@
     },
     "establishment": {
       "projectType": "library",
-      "root": "packages/ng-bis/establishment",
-      "sourceRoot": "packages/ng-bis/establishment/src",
+      "root": "packages/ng/establishment",
+      "sourceRoot": "packages/ng/establishment/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/establishment/tsconfig.lib.json",
-            "project": "packages/ng-bis/establishment/ng-package.json"
+            "tsConfig": "packages/ng/establishment/tsconfig.lib.json",
+            "project": "packages/ng/establishment/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/establishment/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/establishment/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/establishment/src/test.ts",
-            "tsConfig": "packages/ng-bis/establishment/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/establishment/karma.conf.js"
+            "main": "packages/ng/establishment/src/test.ts",
+            "tsConfig": "packages/ng/establishment/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/establishment/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/establishment/tsconfig.lib.json",
-              "packages/ng-bis/establishment/tsconfig.spec.json"
+              "packages/ng/establishment/tsconfig.lib.json",
+              "packages/ng/establishment/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -808,36 +808,36 @@
     },
     "user": {
       "projectType": "library",
-      "root": "packages/ng-bis/user",
-      "sourceRoot": "packages/ng-bis/user/src",
+      "root": "packages/ng/user",
+      "sourceRoot": "packages/ng/user/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/user/tsconfig.lib.json",
-            "project": "packages/ng-bis/user/ng-package.json"
+            "tsConfig": "packages/ng/user/tsconfig.lib.json",
+            "project": "packages/ng/user/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/user/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/user/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/user/src/test.ts",
-            "tsConfig": "packages/ng-bis/user/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/user/karma.conf.js"
+            "main": "packages/ng/user/src/test.ts",
+            "tsConfig": "packages/ng/user/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/user/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/user/tsconfig.lib.json",
-              "packages/ng-bis/user/tsconfig.spec.json"
+              "packages/ng/user/tsconfig.lib.json",
+              "packages/ng/user/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -867,8 +867,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "packages/scss/src/overrides",
-                "packages/ng-bis/root/src/style/overrides",
-                "packages/ng-bis/root/src/style"
+                "packages/ng/root/src/style/overrides",
+                "packages/ng/root/src/style"
               ]
             },
             "scripts": []
@@ -878,36 +878,36 @@
     },
     "material": {
       "projectType": "library",
-      "root": "packages/ng-bis/material",
-      "sourceRoot": "packages/ng-bis/material/src",
+      "root": "packages/ng/material",
+      "sourceRoot": "packages/ng/material/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/material/tsconfig.lib.json",
-            "project": "packages/ng-bis/material/ng-package.json"
+            "tsConfig": "packages/ng/material/tsconfig.lib.json",
+            "project": "packages/ng/material/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/material/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/material/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/material/src/test.ts",
-            "tsConfig": "packages/ng-bis/material/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/material/karma.conf.js"
+            "main": "packages/ng/material/src/test.ts",
+            "tsConfig": "packages/ng/material/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/material/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/material/tsconfig.lib.json",
-              "packages/ng-bis/material/tsconfig.spec.json"
+              "packages/ng/material/tsconfig.lib.json",
+              "packages/ng/material/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -918,36 +918,36 @@
     },
     "formly": {
       "projectType": "library",
-      "root": "packages/ng-bis/formly",
-      "sourceRoot": "packages/ng-bis/formly/src",
+      "root": "packages/ng/formly",
+      "sourceRoot": "packages/ng/formly/src",
       "prefix": "lu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng-bis/formly/tsconfig.lib.json",
-            "project": "packages/ng-bis/formly/ng-package.json"
+            "tsConfig": "packages/ng/formly/tsconfig.lib.json",
+            "project": "packages/ng/formly/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng-bis/formly/tsconfig.lib.prod.json"
+              "tsConfig": "packages/ng/formly/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "packages/ng-bis/formly/src/test.ts",
-            "tsConfig": "packages/ng-bis/formly/tsconfig.spec.json",
-            "karmaConfig": "packages/ng-bis/formly/karma.conf.js"
+            "main": "packages/ng/formly/src/test.ts",
+            "tsConfig": "packages/ng/formly/tsconfig.spec.json",
+            "karmaConfig": "packages/ng/formly/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng-bis/formly/tsconfig.lib.json",
-              "packages/ng-bis/formly/tsconfig.spec.json"
+              "packages/ng/formly/tsconfig.lib.json",
+              "packages/ng/formly/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

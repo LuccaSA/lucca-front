@@ -13,73 +13,73 @@
     "downlevelIteration": true,
     "paths": {
       "@lucca-front/ng": [
-        "./packages/ng-bis/root/src/index"
+        "./packages/ng/root/src/index"
       ],
       "@lucca-front/ng/core": [
-        "./packages/ng-bis/core/src/index"
+        "./packages/ng/core/src/index"
       ],
       "@lucca-front/ng/animations": [
-        "./packages/ng-bis/animations/src/index"
+        "./packages/ng/animations/src/index"
       ],
       "@lucca-front/ng/input": [
-        "./packages/ng-bis/input/src/index"
+        "./packages/ng/input/src/index"
       ],
       "@lucca-front/ng/scroll": [
-        "./packages/ng-bis/scroll/src/index"
+        "./packages/ng/scroll/src/index"
       ],
       "@lucca-front/ng/safe-content": [
-        "./packages/ng-bis/safe-content/src/index"
+        "./packages/ng/safe-content/src/index"
       ],
       "@lucca-front/ng/number": [
-        "./packages/ng-bis/number/src/index"
+        "./packages/ng/number/src/index"
       ],
       "@lucca-front/ng/popover": [
-        "./packages/ng-bis/popover/src/index"
+        "./packages/ng/popover/src/index"
       ],
       "@lucca-front/ng/popup": [
-        "./packages/ng-bis/popup/src/index"
+        "./packages/ng/popup/src/index"
       ],
       "@lucca-front/ng/tooltip": [
-        "./packages/ng-bis/tooltip/src/index"
+        "./packages/ng/tooltip/src/index"
       ],
       "@lucca-front/ng/dropdown": [
-        "./packages/ng-bis/dropdown/src/index"
+        "./packages/ng/dropdown/src/index"
       ],
       "@lucca-front/ng/picker": [
-        "./packages/ng-bis/picker/src/index"
+        "./packages/ng/picker/src/index"
       ],
       "@lucca-front/ng/modal": [
-        "./packages/ng-bis/modal/src/index"
+        "./packages/ng/modal/src/index"
       ],
       "@lucca-front/ng/select": [
-        "./packages/ng-bis/select/src/index"
+        "./packages/ng/select/src/index"
       ],
       "@lucca-front/ng/sidepanel": [
-        "./packages/ng-bis/sidepanel/src/index"
+        "./packages/ng/sidepanel/src/index"
       ],
       "@lucca-front/ng/option": [
-        "./packages/ng-bis/option/src/index"
+        "./packages/ng/option/src/index"
       ],
       "@lucca-front/ng/date": [
-        "./packages/ng-bis/date/src/index"
+        "./packages/ng/date/src/index"
       ],
       "@lucca-front/ng/api": [
-        "./packages/ng-bis/api/src/index"
+        "./packages/ng/api/src/index"
       ],
       "@lucca-front/ng/department": [
-        "./packages/ng-bis/department/src/index"
+        "./packages/ng/department/src/index"
       ],
       "@lucca-front/ng/establishment": [
-        "./packages/ng-bis/establishment/src/index"
+        "./packages/ng/establishment/src/index"
       ],
       "@lucca-front/ng/user": [
-        "./packages/ng-bis/user/src/index"
+        "./packages/ng/user/src/index"
       ],
       "@lucca-front/ng/material": [
-        "./packages/ng-bis/material/src/index"
+        "./packages/ng/material/src/index"
       ],
       "@lucca-front/ng/formly": [
-        "./packages/ng-bis/formly/src/index"
+        "./packages/ng/formly/src/index"
       ]
     },
     "experimentalDecorators": true,
