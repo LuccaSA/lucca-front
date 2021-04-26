@@ -2,24 +2,14 @@
   "name": "@lucca-front/icons",
   "version": "6.2.0",
   "description": "A library of icons made by the team @Lucca",
-  "main": "gulpfile.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
   },
-  "scripts": {
-    "build": "gulp build",
-    "deploy": "gulp deploy",
-    "start": "gulp serve"
-  },
+  "scripts": {},
   "keywords": [
     "lucca",
     "icons"
-  ],
-  "files": [
-    "font",
-    "dist",
-    "src"
   ],
   "authors": [
     "Clotilde Martin-Lemerle <clot@lucca.fr>",
@@ -31,12 +21,5 @@
   "public": true,
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.26.14",
-    "gulp": "^4.0.2",
-    "gulp-clean": "^0.4.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.1.0"
   }
 }
