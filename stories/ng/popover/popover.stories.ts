@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuPopoverModule } from '@lucca-front/ng/popover';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
