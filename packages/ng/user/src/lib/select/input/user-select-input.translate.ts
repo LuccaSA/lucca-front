@@ -18,4 +18,8 @@ export const luUserSelectInputTranslations = {
 		users: 'utilisateurs',
 		me: 'Moi :'
 	},
+	es: {
+		users: 'empleados',
+		me: 'Yo :'
+	}
 } as ILuTranslation<ILuUserSelectInputLabel>;

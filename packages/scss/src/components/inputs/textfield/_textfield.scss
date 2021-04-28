@@ -110,6 +110,10 @@
 
 		.textfield-input {
 			padding-right: _theme("spacings.bigger") !important;
+			
+			&::-ms-reveal {
+				display: none;
+			}
 		}
 
 		.textfield-suffix-action {
