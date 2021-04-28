@@ -12,11 +12,11 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 	protected _api: string;
 	set api(api: string) { this._api = api; }
 	protected _fields = 'fields=id,name';
-	set fields(fields: string) { this._fields = `fields=${fields}`; }
+	set fields(fields: string) { if (fields) { this._fields = `fields=${fields}`; } }
 	protected _filters: string[] = [];
-	set filters(filters: string[]) { this._filters = filters || []; }
+	set filters(filters: string[]) { if (filters) { this._filters = filters || []; } }
 	protected _orderBy = 'orderBy=name,asc';
-	set orderBy(orderBy: string) { this._orderBy = `orderBy=${orderBy}`; }
+	set orderBy(orderBy: string) { if (orderBy) { this._orderBy = `orderBy=${orderBy}`; } }
 
 	get url() {
 		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter(f => !!f).join('&')}`;
