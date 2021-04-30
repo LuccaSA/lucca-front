@@ -1,0 +1,9 @@
+{
+	"uiDiff": [
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"relativePath": "/iframe.html?id=qa-icon--basic&args=&viewMode=story"
+		}
+	]
+}
