@@ -4,6 +4,7 @@
 		{
 			"description": "lucca-front",
 			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
 			"relativePath": "/iframe.html?id=qa-icon--basic&args=&viewMode=story"
 		}
 	]
