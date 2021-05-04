@@ -1,6 +1,6 @@
 {
   "name": "@lucca-front/scss",
-  "version": "6.2.2",
+  "version": "0.0.0",
   "description": "a scss-framework based on trello's css naming",
   "main": "src/main.scss",
   "scripts": {},
@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "peerDependencies": {
-    "@lucca-front/icons": "6.2.0"
+    "@lucca-front/icons": ">=6.0.0 <7.0.0"
   }
 }
