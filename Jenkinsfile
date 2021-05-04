@@ -101,7 +101,7 @@ node {
 
 
 			if (isRelease || isPreRelease) {
-				loggableStage('Publish') {
+				stage('Publish') {
 					def tag = "latest"
 					def version = env.BRANCH_NAME
 					if (isPreRelease) {
