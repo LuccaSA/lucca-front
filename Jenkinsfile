@@ -11,11 +11,7 @@ node {
 
 	def branchName = env.BRANCH_NAME;
 
-	def iconsDirectory = "packages/icons"
-	def scssDirectory = "packages/scss"
-	def ngDirectory = "packages/ng"
-
-	def isPr = false
+	def isPR = false
 	def isMaster = false
 	def isRc = false
 	def prNumber = 0
@@ -27,7 +23,7 @@ node {
 		isRc = true
 	}
 	if(env.BRANCH_NAME ==~ /^PR-\d*/) {
-		isPr = true
+		isPR = true
 		prNumber = env.BRANCH_NAME.substring(3)
 	}
 
@@ -39,124 +35,61 @@ node {
 
 			def scmVars = null
 
-			stage('1. Cleanup') {
-				parallel (
-					tools: {
-						if(fileExists('.jenkins')) {
-							dir('.jenkins') {
-								deleteDir()
-							}
-						}
-					},
-					publish: {
-						if(fileExists('demo')) {
-							dir('demo') {
-								deleteDir()
-							}
-						}
-					},
-					icons: {
-						if(fileExists("${iconsDirectory}\\node_modules")) {
-							dir("${iconsDirectory}\\node_modules") {
-								deleteDir()
-							}
-						}
-					},
-					scss: {
-						if(fileExists("${scssDirectory}\\node_modules")) {
-							dir("${scssDirectory}\\node_modules") {
-								deleteDir()
-							}
-						}
-					},
-					ng: {
-						if(fileExists("${ngDirectory}\\node_modules")) {
-							dir("${ngDirectory}\\node_modules") {
-								deleteDir()
-							}
-						}
-					},
-					failFast: true,
-				)
+			stage('Cleanup') {
+				// tools
+				if(fileExists('.jenkins')) {
+					dir('.jenkins') {
+						deleteDir()
+					}
+				}
+				// storybook static
+				if(fileExists('storybook')) {
+					dir('storybook') {
+						deleteDir()
+					}
+				}
 			}
 
-			stage('2. Prepare') {
+			stage('Prepare') {
+				env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
+				env.PATH="${env.NODEJS_HOME};${env.PATH}"
+				bat "node --version"
+				bat "npm --version"
 
-				parallel (
-					node: {
-						env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
-						env.PATH="${env.NODEJS_HOME};${env.PATH}"
-						bat "node --version"
-						bat "npm --version"
-					},
-					checkout: {
-						scmVars = checkout scm
-					},
-					failFast: true,
-				)
+				scmVars = checkout scm
 			}
-			stage('3. Restore') {
-				parallel (
-					all: {
-						bat "npm ci"
-					},
-					failFast: true,
-				)
+
+			stage('Restore') {
+				bat "npm ci"
 			}
-			stage('4. Qualif') {
-				parallel (
-					icons: {
-						bat "npm run build --prefix ${iconsDirectory}"
-						// bat "npm run test --prefix ${iconsDirectory}"
-						// bat "npm run lint --prefix ${iconsDirectory}"
-					},
-					scss: {
-						bat "npm run build --prefix ${scssDirectory}"
-						// bat "npm run test --prefix ${scssDirectory}"
-						// bat "npm run lint --prefix ${scssDirectory}"
-					},
-					ng: {
-						bat "npm run build --prefix ${ngDirectory}"
-						// bat "npm run test --prefix ${ngDirectory}"
-						// bat "npm run lint --prefix ${ngDirectory}"
-					},
-					failFast: true,
-				)
+
+			if (!isPR) {
+				stage('Qualif') {
+					// it must be buildable
+					bat "npm run build"
+					// it must break no test
+					// bat "npm run test"
+					// it must be lint compliant
+					// bat "npm run lint"
+				}
 			}
-			if (isPr || isRc || isMaster) {
-				stage('5. Build') {
-					parallel(
-				// 		icons: {
-				// 			bat "npm run build:publish"
-				// 		},
-						scss: {
-							bat "npm run build:publish --prefix ${scssDirectory}"
-						},
-						ng: {
-							bat "npm run build:publish --prefix ${ngDirectory} -- --base-href /${branchName}/ng/"
-						},
-						failFast: true,
-					)
+
+			if (isPR || isRc || isMaster) {
+				stage('Deploy') {
+					echo "deploying ${branchName}"
+					bat "npm run compodoc -- -p ./tsconfig.doc.json -e json -d .storybook"
+					bat "npm run build-storybook -- -o \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
 				}
 
-				stage('6. Deploy') {
-					parallel(
-						'lf.lucca.local': {
-							echo "deploying ${branchName}"
-							bat "npx cpy ** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --cwd=demo --parents"
-							if (isPr) {
-								// post PR comment
-								def deployUrl = "http://lucca-front.lucca.local/${branchName}"
-								withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-									powershell """
-										[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-										Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
-									"""
-								}
-							}
-						},
-						failFast: true
-					)
+				if (isPR) {
+					// post PR comment
+					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+						powershell """
+							[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+							Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
+						"""
+					}
 				}
 			}
 
@@ -175,13 +108,5 @@ node {
 			color = "danger"
 			endMessage = "Erreur"
 		}
-		// stage('Notify') {
-		// 	parallel(
-		// 		github: {
-
-		// 		},
-		// 		failFast: true,
-		// 	)
-		// }
 	}
 }

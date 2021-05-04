@@ -1,0 +1,13 @@
+{
+	"extends": "../tsconfig.json",
+	"include": [
+		"packages/ng/**/*.ts",
+		"packages/ng/**/*.html",
+		"packages/ng/**/*.scss",
+		"stories/**/*.ts",
+	],
+	"exclude": [
+		"**/test.ts",
+		"**/*.spec.ts",
+	]
+}
