@@ -10,11 +10,7 @@
 }
 
 .u-clear {
-	&::after {
-		clear: both;
-		content: "";
-		display: table;
-	}
+	@include clearfix('!important');
 }
 
 .u-middle {

@@ -1,0 +1,29 @@
+{
+  "name": "@lucca-front/ng",
+  "version": "0.0.0",
+  "description": "A library of icons made by the team @Lucca",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "license": "MIT",
+  "public": true,
+  "keywords": [
+    "lucca",
+    "angular"
+  ],
+  "authors": [
+    "Lucien Bertin <me@lucienbertin.com>",
+    "Sandy Goldscheider <sgoldscheider@lucca.fr>"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^11.2.10",
+    "@angular/core": "^11.2.10"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  }
+}
