@@ -1,0 +1,12 @@
+<nav class="menu">
+	<a
+		type="button"
+		class="menu-link"
+		*ngFor="let link of links"
+		[attr.aria-current]="link.isActive ? 'page' : null"
+		(click)="toggle(link)"
+	>
+		{{ link.label }}
+		<span class="menu-link-placeholder" aria-hidden="true" [attr.data-content-after]="link.label"></span>
+	</a>
+</nav>
