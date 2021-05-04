@@ -27,6 +27,11 @@ node {
 		prNumber = env.BRANCH_NAME.substring(3)
 	}
 
+	def releaseRegexPattern = /^v\d+\.\d+\.\d+$/
+	def preReleaseRegexPattern = /^v\d+\.\d+\.\d+-\w*(\.\d+)?$/
+	def isRelease = env.BRANCH_NAME ==~ releaseRegexPattern
+	def isPreRelease = env.BRANCH_NAME ==~ preReleaseRegexPattern
+
 	def isResultSuccessful = true
 	try {
 		timeout(time: 15, unit: 'MINUTES') {
@@ -93,6 +98,25 @@ node {
 				}
 			}
 
+
+
+			if (isRelease || isPreRelease) {
+				loggableStage('Publish') {
+					def tag = "latest"
+					def version = env.BRANCH_NAME
+					if (isPreRelease) {
+						tag = "next"
+					}
+
+					bat "npm version ${version} --prefix dist/icons"
+					bat "npm version ${version} --prefix dist/scss"
+					bat "npm version ${version} --prefix dist/ng"
+
+					bat "npm publish --tag ${tag} --folder dist/icons"
+					bat "npm publish --tag ${tag} --folder dist/scss"
+					bat "npm publish --tag ${tag} --folder dist/ng"
+				}
+			}
 		}
 	} catch(err) {
 		stage('Error') {
