@@ -129,10 +129,7 @@ export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-			.pipe(
-				tap(c => this.resetPage()),
-				debounceTime(this.debounceTime),
-			);
+			.pipe(debounceTime(this.debounceTime));
 		super.init();
 	}
 
