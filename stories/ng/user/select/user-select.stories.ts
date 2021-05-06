@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
-import { LuUserModule } from '@lucca-front/ng/user';
+import { ALuUserService, LuUserModule } from '@lucca-front/ng/user';
 import { FormsModule } from '@angular/forms';
-import { bob } from '../user.mocks';
+import { bob, FakeLuUserService } from '../user.mocks';
 
 @Component({
 	selector: 'user-select-stories',
@@ -26,6 +26,9 @@ export default {
 				LuUserModule,
 				BrowserAnimationsModule,
 				FormsModule,
+			],
+			providers: [
+				{ provide: ALuUserService, useClass: FakeLuUserService }
 			]
 		})
 	]
