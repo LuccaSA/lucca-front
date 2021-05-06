@@ -51,6 +51,7 @@ export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
 	@Input() set sort(sort: string) { this._service.sort = sort }
+	@Input() debounceTime: number = 250;
 
 	clueControl: FormControl;
 	constructor(
@@ -63,7 +64,7 @@ export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-			.pipe(debounceTime(250));
+			.pipe(debounceTime(this.debounceTime));
 		super.init();
 	}
 
@@ -116,6 +117,7 @@ export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	@Input() debounceTime: number = 250;
 
 	clueControl: FormControl;
 	constructor(
@@ -127,10 +129,7 @@ export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges
-			.pipe(
-				tap(c => this.resetPage()),
-				// debounceTime(250),
-			);
+			.pipe(debounceTime(this.debounceTime));
 		super.init();
 	}
 

@@ -78,18 +78,6 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 		this.overlapInput = true
 	}
 
-	@ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: ILuPickerPanel<D>) {
-		if (!picker) { return; }
-		this._picker = picker;
-	}
-	@ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
-		if (!clearer) { return; }
-		this._clearer = clearer;
-	}
-	@ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<D>) {
-		if (!displayer) { return; }
-		this.displayer = displayer;
-	}
 	validate(control: AbstractControl): ValidationErrors | null {
 		const d = control.value;
 		if (!d) { return null; }

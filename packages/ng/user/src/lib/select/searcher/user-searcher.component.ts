@@ -10,10 +10,10 @@ import {
 
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
-import { distinctUntilChanged, debounceTime, switchMap, catchError, share, startWith, withLatestFrom, mapTo, map } from 'rxjs/operators';
+import { debounceTime, switchMap, catchError, share, startWith, mapTo, map, scan, filter } from 'rxjs/operators';
 import { ILuUser } from '../../user.model';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
-import { Subject, Observable, Subscription, combineLatest, of, merge } from 'rxjs';
+import { Subject, Observable, Subscription, combineLatest, of, merge, BehaviorSubject } from 'rxjs';
 import { LuUserSearcherIntl } from './user-searcher.intl';
 import { ILuUserSearcherLabel } from './user-searcher.translate';
 
@@ -72,8 +72,9 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	loading$: Observable<boolean>;
 	empty$: Observable<boolean>;
 	private _loading = false;
-	private _page$ = new Subject<number>();
-	private _page: number;
+	private _isOpened$ = new BehaviorSubject(false);
+	private _page$ = new Subject<void>();
+	private _isLastPage: boolean;
 	private _options: U[] = [];
 
 	constructor(
@@ -90,47 +91,53 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 			clue: new FormControl(''),
 			formerEmployees: new FormControl(false),
 		});
+
 		const formValue$ = this.form.valueChanges.pipe(
 			startWith(this.form.value),
 		);
-		this._page$ = new Subject<number>();
-		const distinctPage$ = this._page$.pipe(
-			distinctUntilChanged(),
+
+		const pager$ = this._page$.pipe(
+			scan(acc => acc + 1, 0),
+			startWith(0),
 		);
 
-		const pageSub = this._page$.subscribe(p => this._page = p);
-		this._subs.add(pageSub);
+		const query$ = combineLatest([
+			formValue$.pipe(debounceTime(250)),
+			this._isOpened$,
+		]).pipe(
+			filter(([, isOpened]) => isOpened),
+			switchMap(([val]) => pager$.pipe(map(page => [val, page]))),
+			share(),
+		);
 
-		const results$ = combineLatest(
-			distinctPage$,
-			formValue$
-		).pipe(
-			debounceTime(100),
-			switchMap(([page, val]) => {
+		const results$ = query$.pipe(
+			switchMap(([val, page]) => {
 				const filters = [];
 				if (val.formerEmployees) {
 					filters.push(`formerEmployees=true`);
 				}
-				return this._service.searchPaged(val.clue, page, filters);
+				return this._service.searchPaged(val.clue, page, filters).pipe(
+					catchError(() => of([])),
+					map(items => [items, page] as [U[], number]),
+				)
 			}),
-			catchError(err => of([])),
 			share(),
 		);
 
 		const resultsSub = results$
-		.pipe(withLatestFrom(distinctPage$))
 		.subscribe(([items, page]) => {
 			if (page === 0) {
 				this._options = [...items];
 			} else {
 				this._options.push(...items);
 			}
+			this._isLastPage = !items.length;
 			this.outOptions$.next([...this._options]);
 		});
 		this._subs.add(resultsSub);
 
 		this.loading$ = merge(
-			formValue$.pipe(mapTo(true)),
+			query$.pipe(mapTo(true)),
 			results$.pipe(mapTo(false)),
 		);
 		const loadingSub = this.loading$.subscribe(l => this._loading = l);
@@ -146,19 +153,22 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 
 	onOpen() {
 		this.searchInput.nativeElement.focus();
-		this.reset();
+		this._isOpened$.next(true);
 	}
 	onScrollBottom() {
-		if (!this._loading) {
-			this._page$.next(this._page + 1);
+		if (!this._loading && !this._isLastPage) {
+			this._page$.next();
 		}
 	}
 	onClose() {
+		this._isOpened$.next(false);
 		this.outOptions$.next([]);
+		this.reset();
 	}
 
 	reset() {
-		this.form.reset();
-		this._page$.next(0);
+		if (this.form.dirty) {
+			this.form.reset();
+		}
 	}
 }
