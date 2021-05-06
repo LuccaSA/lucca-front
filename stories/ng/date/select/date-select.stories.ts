@@ -45,5 +45,5 @@ const template: Story<DateSelectStory> = (args: DateSelectStory) => ({
 
 export const basic = template.bind({});
 basic.args = {
-	model: "2021-05-06T12:00:00",
+	model: "2021-05-06",
 }
