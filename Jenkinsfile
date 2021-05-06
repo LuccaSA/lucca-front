@@ -11,11 +11,7 @@ node {
 
 	def branchName = env.BRANCH_NAME;
 
-	def iconsDirectory = "packages/icons"
-	def scssDirectory = "packages/scss"
-	def ngDirectory = "packages/ng"
-
-	def isPr = false
+	def isPR = false
 	def isMaster = false
 	def isRc = false
 	def prNumber = 0
@@ -27,9 +23,14 @@ node {
 		isRc = true
 	}
 	if(env.BRANCH_NAME ==~ /^PR-\d*/) {
-		isPr = true
+		isPR = true
 		prNumber = env.BRANCH_NAME.substring(3)
 	}
+
+	def releaseRegexPattern = /^v\d+\.\d+\.\d+$/
+	def preReleaseRegexPattern = /^v\d+\.\d+\.\d+-\w*(\.\d+)?$/
+	def isRelease = env.BRANCH_NAME ==~ releaseRegexPattern
+	def isPreRelease = env.BRANCH_NAME ==~ preReleaseRegexPattern
 
 	def isResultSuccessful = true
 	try {
@@ -39,127 +40,83 @@ node {
 
 			def scmVars = null
 
-			stage('1. Cleanup') {
-				parallel (
-					tools: {
-						if(fileExists('.jenkins')) {
-							dir('.jenkins') {
-								deleteDir()
-							}
-						}
-					},
-					publish: {
-						if(fileExists('demo')) {
-							dir('demo') {
-								deleteDir()
-							}
-						}
-					},
-					icons: {
-						if(fileExists("${iconsDirectory}\\node_modules")) {
-							dir("${iconsDirectory}\\node_modules") {
-								deleteDir()
-							}
-						}
-					},
-					scss: {
-						if(fileExists("${scssDirectory}\\node_modules")) {
-							dir("${scssDirectory}\\node_modules") {
-								deleteDir()
-							}
-						}
-					},
-					ng: {
-						if(fileExists("${ngDirectory}\\node_modules")) {
-							dir("${ngDirectory}\\node_modules") {
-								deleteDir()
-							}
-						}
-					},
-					failFast: true,
-				)
-			}
-
-			stage('2. Prepare') {
-
-				parallel (
-					node: {
-						env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
-						env.PATH="${env.NODEJS_HOME};${env.PATH}"
-						bat "node --version"
-						bat "npm --version"
-					},
-					checkout: {
-						scmVars = checkout scm
-					},
-					failFast: true,
-				)
-			}
-			stage('3. Restore') {
-				parallel (
-					all: {
-						bat "npm ci"
-					},
-					failFast: true,
-				)
-			}
-			stage('4. Qualif') {
-				parallel (
-					icons: {
-						bat "npm run build --prefix ${iconsDirectory}"
-						// bat "npm run test --prefix ${iconsDirectory}"
-						// bat "npm run lint --prefix ${iconsDirectory}"
-					},
-					scss: {
-						bat "npm run build --prefix ${scssDirectory}"
-						// bat "npm run test --prefix ${scssDirectory}"
-						// bat "npm run lint --prefix ${scssDirectory}"
-					},
-					ng: {
-						bat "npm run build --prefix ${ngDirectory}"
-						// bat "npm run test --prefix ${ngDirectory}"
-						// bat "npm run lint --prefix ${ngDirectory}"
-					},
-					failFast: true,
-				)
-			}
-			if (isPr || isRc || isMaster) {
-				stage('5. Build') {
-					parallel(
-				// 		icons: {
-				// 			bat "npm run build:publish"
-				// 		},
-						scss: {
-							bat "npm run build:publish --prefix ${scssDirectory}"
-						},
-						ng: {
-							bat "npm run build:publish --prefix ${ngDirectory} -- --base-href /${branchName}/ng/"
-						},
-						failFast: true,
-					)
+			stage('Cleanup') {
+				// tools
+				if(fileExists('.jenkins')) {
+					dir('.jenkins') {
+						deleteDir()
+					}
 				}
-
-				stage('6. Deploy') {
-					parallel(
-						'lf.lucca.local': {
-							echo "deploying ${branchName}"
-							bat "npx cpy ** \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} --cwd=demo --parents"
-							if (isPr) {
-								// post PR comment
-								def deployUrl = "http://lucca-front.lucca.local/${branchName}"
-								withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-									powershell """
-										[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-										Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
-									"""
-								}
-							}
-						},
-						failFast: true
-					)
+				// storybook static
+				if(fileExists('storybook')) {
+					dir('storybook') {
+						deleteDir()
+					}
 				}
 			}
 
+			stage('Prepare') {
+				env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
+				env.PATH="${env.NODEJS_HOME};${env.PATH}"
+				bat "node --version"
+				bat "npm --version"
+
+				scmVars = checkout scm
+			}
+
+			stage('Restore') {
+				bat "npm ci"
+			}
+
+			if (!isPR) {
+				stage('Qualif') {
+					// it must be buildable
+					bat "npm run build"
+					// it must break no test
+					// bat "npm run test"
+					// it must be lint compliant
+					// bat "npm run lint"
+				}
+			}
+
+			if (isPR || isRc || isMaster) {
+				stage('Deploy') {
+					echo "deploying ${branchName}"
+					bat "npm run compodoc -- -p ./tsconfig.doc.json -e json -d .storybook"
+					bat "npm run build-storybook -- -o \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
+				}
+
+				if (isPR) {
+					// post PR comment
+					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
+						powershell """
+							[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+							Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
+						"""
+					}
+				}
+			}
+
+
+
+			if (isRelease || isPreRelease) {
+				stage('Publish') {
+					def tag = "latest"
+					def version = env.BRANCH_NAME
+					if (isPreRelease) {
+						tag = "next"
+					}
+
+					bat "npm version ${version} --prefix dist/icons"
+					bat "npm version ${version} --prefix dist/scss"
+					bat "npm version ${version} --prefix dist/ng"
+
+					bat "npm publish --tag ${tag} --folder dist/icons"
+					bat "npm publish --tag ${tag} --folder dist/scss"
+					bat "npm publish --tag ${tag} --folder dist/ng"
+				}
+			}
 		}
 	} catch(err) {
 		stage('Error') {
@@ -175,13 +132,5 @@ node {
 			color = "danger"
 			endMessage = "Erreur"
 		}
-		// stage('Notify') {
-		// 	parallel(
-		// 		github: {
-
-		// 		},
-		// 		failFast: true,
-		// 	)
-		// }
 	}
 }
