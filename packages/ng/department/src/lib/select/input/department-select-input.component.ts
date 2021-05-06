@@ -57,19 +57,6 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 		);
 	}
 
-	// @ViewChild(ALuPickerPanel, { static: true }) set _vcPicker(picker: P) {
-	// 	if (!picker) { return; }
-	// 	this._picker = picker;
-	// }
-	// @ViewChild(ALuClearer, { static: true }) set _vcClearer(clearer: ILuClearer) {
-	// 	if (!clearer) { return; }
-	// 	this._clearer = clearer;
-	// }
-	// @ViewChild(ALuInputDisplayer, { static: true }) set _vcDisplayer(displayer: ILuInputDisplayer<D>) {
-	// 	if (!displayer) { return; }
-	// 	this.displayer = displayer;
-	// }
-
 	searchFn(o, c) {
 		return o.name.toLowerCase().startsWith(c.toLowerCase());
 	}
