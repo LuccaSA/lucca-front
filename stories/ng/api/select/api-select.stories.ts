@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ALuApiService, LuApiModule } from "@lucca-front/ng/api";
+import { LuApiModule } from "@lucca-front/ng/api";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
-import { FakeLuApiService } from "../api.mock";
 
 @Component({
 	selector: 'api-select-stories',
@@ -18,9 +17,6 @@ export default {
 				LuApiModule,
 				BrowserAnimationsModule,
 			],
-			providers: [
-				{ provide: ALuApiService, useClass: FakeLuApiService }
-			]
 		})
 	]
 } as Meta;
