@@ -74,6 +74,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	private _loading = false;
 	private _page$ = new Subject<number>();
 	private _page: number;
+	private _isLastPage: boolean;
 	private _options: U[] = [];
 
 	constructor(
@@ -125,6 +126,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 			} else {
 				this._options.push(...items);
 			}
+			this._isLastPage = !items.length;
 			this.outOptions$.next([...this._options]);
 		});
 		this._subs.add(resultsSub);
@@ -149,7 +151,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 		this.reset();
 	}
 	onScrollBottom() {
-		if (!this._loading) {
+		if (!this._loading && !this._isLastPage) {
 			this._page$.next(this._page + 1);
 		}
 	}
@@ -160,5 +162,6 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	reset() {
 		this.form.reset();
 		this._page$.next(0);
+		this._isLastPage = false;
 	}
 }

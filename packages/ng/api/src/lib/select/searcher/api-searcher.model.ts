@@ -74,6 +74,7 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	protected _loading = false;
 	protected _page$ = new Subject<number>();
 	protected _page: number;
+	protected _isLastPage: boolean;
 	protected _options: T[] = [];
 
 	constructor(service: S) {
@@ -84,7 +85,7 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 		this.resetPage();
 	}
 	onScrollBottom() {
-		if (!this._loading) {
+		if (!this._loading&& !this._isLastPage) {
 			this._page$.next(this._page + 1);
 		}
 	}
@@ -118,6 +119,7 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 			} else {
 				this._options.push(...items);
 			}
+			this._isLastPage = !items.length;
 			this.outOptions$.next([...this._options]);
 		});
 		this.loading$ = merge(
@@ -132,5 +134,6 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	abstract resetClue();
 	resetPage() {
 		this._page$.next(0);
+		this._isLastPage = false;
 	}
 }
