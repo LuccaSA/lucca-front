@@ -1,16 +1,49 @@
+$suffix: "!important";
+// TITLE
+//
+.u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6 {
+	@include commonsTitleStyles($suffix);
+}
+
+.u-h1 {
+    @include h1Styles($suffix);
+}
+
+.u-h2 {
+    @include h2Styles($suffix);
+}
+
+.u-h3 {
+    @include h3Styles($suffix);
+}
+
+.u-h4 {
+    @include h4Styles($suffix);
+}
+
+.u-h5 {
+    @include h5Styles($suffix);
+}
+
+.u-h6 {
+    @include h6Styles($suffix);
+}
+
+
+
 // ALIGN
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textLeft {
-	text-align: left !important;
+	text-align: left #{$suffix};
 }
 
 .u-textCenter {
-	text-align: center !important;
+	text-align: center #{$suffix};
 }
 
 .u-textRight {
-	text-align: right !important;
+	text-align: right #{$suffix};
 }
 
 
@@ -18,21 +51,21 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textDefault {
-	color: _color("text.default") !important;
+	color: _color("text.default") #{$suffix};
 }
 
 .u-textLight {
-	color: _color("text.light") !important;
+	color: _color("text.light") #{$suffix};
 }
 
 .u-textPlaceholder {
-	color: _color("text.placeholder") !important;
+	color: _color("text.placeholder") #{$suffix};
 }
 
 // palette
 @each $name, $palette in _getMap("palettes") {
 	.u-text#{str-capitalize($name)} {
-		color: _color($name) !important;
+		color: _color($name) #{$suffix};
 	}
 }
 
@@ -42,8 +75,8 @@
 
 @each $name, $sizes in _getMap("sizes") {
 	.u-text#{str-capitalize($name)} {
-		font-size: _theme("sizes."+$name+".font-size") !important;
-		line-height: _theme("sizes."+$name+".line-height") !important;
+		font-size: _theme("sizes."+$name+".font-size") #{$suffix};
+		line-height: _theme("sizes."+$name+".line-height") #{$suffix};
 	}
 }
 
@@ -52,9 +85,9 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-ellipsis {
-	overflow: hidden !important;
-	text-overflow: ellipsis !important;
-	white-space: nowrap !important;
+	overflow: hidden #{$suffix};
+	text-overflow: ellipsis #{$suffix};
+	white-space: nowrap #{$suffix};
 }
 
 
@@ -62,14 +95,14 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-unit {
-	font-size: .66em !important;
+	font-size: .66em #{$suffix};
 }
 
 // COMMA
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .u-comma:not(:last-child) {
 	&::after {
-		content: ",\00a0";
+		content: ",\00a0" #{$suffix};
 	}
 }
 
@@ -77,32 +110,32 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-fontStyleNormal {
-	font-style: normal;
+	font-style: normal #{$suffix};
 }
 
 .u-fontStyleItalic {
-	font-style: italic;
+	font-style: italic #{$suffix};
 }
 
 .u-fontWeightRegular {
-	font-weight: 400;
+	font-weight: 400 #{$suffix};
 }
 
 .u-fontWeightBold {
-	font-weight: 600;
+	font-weight: 600 #{$suffix};
 }
 
 // TEXT DECORATION
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-textDecorationNone {
-	text-decoration: none;
+	text-decoration: none #{$suffix};
 }
 
 .u-textDecorationUnderline {
-	text-decoration: underline;
+	text-decoration: underline #{$suffix};
 }
 
 .u-textDecorationLineThrough {
-	text-decoration: line-through;
+	text-decoration: line-through #{$suffix};
 }

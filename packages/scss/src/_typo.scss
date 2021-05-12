@@ -17,50 +17,77 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6, h1, h2, h3, h4, h5, h6 {
-	color: _color("text.dark");
-	font-weight: 600;
+@mixin commonsTitleStyles($suffix:"") {
+	color: _color("text.dark") #{$suffix};
+	font-weight: 600 #{$suffix};
 }
 
-.u-h1, h1 {
-	font-size: _theme("sizes.biggest.font-size");
-	line-height: _theme("sizes.biggest.line-height");
-	margin: 0 0 _theme("spacings.small");
-
+@mixin h1Styles($suffix:"") {
+	font-size: _theme("sizes.biggest.font-size") #{$suffix};
+	line-height: _theme("sizes.biggest.line-height") #{$suffix};
+	margin-bottom: _theme("spacings.small") #{$suffix};
 	&.mod-headline {
-		font-size: _theme("sizes.headline.font-size");
-		line-height: _theme("sizes.headline.line-height");
+		font-size: _theme("sizes.headline.font-size") #{$suffix};
+		line-height: _theme("sizes.headline.line-height") #{$suffix};
 	}
 }
 
-.u-h2, h2 {
-	font-size: _theme("sizes.bigger.font-size");
-	line-height: _theme("sizes.bigger.line-height");
-	margin: 0 0 _theme("spacings.smaller");
+@mixin h2Styles($suffix:"") {
+	font-size: _theme("sizes.bigger.font-size") #{$suffix};
+	line-height: _theme("sizes.bigger.line-height") #{$suffix};
+	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
-.u-h3, h3 {
-	font-size: _theme("sizes.big.font-size");
-	line-height: _theme("sizes.big.line-height");
-	margin: 0 0 _theme("spacings.smaller");
+@mixin h3Styles($suffix:"") {
+	font-size: _theme("sizes.big.font-size") #{$suffix};
+	line-height: _theme("sizes.big.line-height") #{$suffix};
+	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
-.u-h4, h4 {
-	font-size: _theme("sizes.standard.font-size");
-	line-height: _theme("sizes.standard.line-height");
-	margin: 0 0 _theme("spacings.smaller");
+@mixin h4Styles($suffix:"") {
+	font-size: _theme("sizes.standard.font-size") #{$suffix};
+	line-height: _theme("sizes.standard.line-height") #{$suffix};
+	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
-.u-h5, h5 {
-	font-size: _theme("sizes.small.font-size");
-	line-height: _theme("sizes.small.line-height");
-	margin: 0 0 _theme("spacings.smaller");
+@mixin h5Styles($suffix:"") {
+	font-size: _theme("sizes.small.font-size") #{$suffix};
+	line-height: _theme("sizes.small.line-height") #{$suffix};
+	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
-.u-h6, h6 {
-	font-size: _theme("sizes.smaller.font-size");
-	line-height: _theme("sizes.smaller.line-height");
-	margin: 0 0 _theme("spacings.smaller");
+@mixin h6Styles($suffix:"") {
+	font-size: _theme("sizes.smaller.font-size") #{$suffix};
+	line-height: _theme("sizes.smaller.line-height") #{$suffix};
+	margin-bottom: _theme("spacings.small") #{$suffix};
+}
+
+h1, h2, h3, h4, h5, h6 {
+	@include commonsTitleStyles;
+}
+
+h1 {
+	@include h1Styles;
+}
+
+h2 {
+	@include h2Styles;
+}
+
+h3 {
+	@include h3Styles;
+}
+
+h4 {
+	@include h4Styles;
+}
+
+h5 {
+	@include h5Styles;
+}
+
+h6 {
+	@include h6Styles;
 }
 
 p {
