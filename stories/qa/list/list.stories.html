@@ -1,0 +1,91 @@
+<h1>List</h1>
+
+<!-- Basics -->
+<section class="contentSection">
+	<h2>List</h2>
+	<ul class="list">
+		<li class="list-item">
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+			<div class="list-item-actions">
+ 				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+ 				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+ 		 </div>
+		</li>
+		<li class="list-item">
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+			<div class="list-item-actions">
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+ 		 </div>
+		</li>
+		<li class="list-item">
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+			<div class="list-item-actions">
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+ 		 </div>
+		</li>
+	</ul>
+	<em><b>Tip:</b> Just remove <code class="code">list-item-actions</code> to have a full width content list.</em>
+</section>
+<section class="contentSection">
+	<h2>Clickable list element</h2>
+	<ul class="list">
+		<li class="list-item mod-clickable">
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+			<div class="list-item-actions">
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+			</div>
+		</li>
+		<li class="list-item mod-clickable">
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+			<div class="list-item-actions">
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
+				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+		 </div>
+		</li>
+	</ul>
+
+	<em><b>Tip:</b> Put your click on <code class="code">list-item</code>.</em><br>
+	<em><b>Tip:</b> To prevent a double <code class="code">list-item</code> / <code class="code">actionIcon</code> click, you can use <code class="code">.preventDefault()</code> & <code class="code">.stopPropagation()</code> on <code class="code">actionIcon</code> click function.</em><br>
+	<em><b>Tip:</b> You can also use a <code class="code">div</code> / <code class="code">a</code> list structure.</em>
+</section>
+
+<section class="contentSection">
+	<h2>Draggable list</h2>
+	<ul class="list">
+		<li class="list-item mod-draggable">
+			<div class="list-item-handler"></div>
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+		</li>
+		<li class="list-item mod-draggable">
+			<div class="list-item-handler"></div>
+			<div class="list-item-content">
+				<h4 class="list-item-content-title">List item title</h4>
+				<p class="list-item-content-description">List item description</p>
+			</div>
+		</li>
+	</ul>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
