@@ -8,9 +8,6 @@ import { CommonModule } from '@angular/common';
 	templateUrl: './icon.stories.html',
 }) class IconStory {
 	icons: string[] = icons.default;
-	constructor() {
-		debugger;
-	}
 	public camelize(str): string{
 		let arr = str.split('_');
 		let capital = arr.map((item, index) => index ? item.charAt(0).toUpperCase() + item.slice(1).toLowerCase() : item.toLowerCase());
