@@ -187,6 +187,7 @@
 			}
 		}
 	}
+
 }
 
 .table-body-row {
@@ -245,7 +246,8 @@
 	}
 }
 
-.table-body-row, .table-head-row {
+.table-body-row, 
+.table-head-row {
 	&.mod-selectable {
 		.table-body-row-cell, .table-head-row-cell {
 			&:first-child {
@@ -313,7 +315,8 @@
 	font-weight: 400;
 }
 
-.table-body-row-cell, .table-head-row-cell {
+.table-body-row-cell, 
+.table-head-row-cell {
 
 	&.mod-actions {
 		padding: .3rem _theme("spacings.smaller") .3rem 0;
@@ -532,4 +535,41 @@
 			}
 		}
 	}
+}
+
+
+// Fixed colmuns width
+$nb-max-columns: 12;
+.table {
+	&.mod-layoutFixed {
+		table-layout: fixed;
+	}
+
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			&.mod-layoutFixed-#{$bp-name} {
+				table-layout: fixed;
+			}
+		}
+	}
+}
+
+.table-head-row-cell,
+.table-body-row-cell {
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@for $i from 1 through $nb-max-columns {
+			&.mod-layoutFixed-#{$i} {
+				width: percentage($i / $nb-max-columns);
+				max-width: percentage($i / $nb-max-columns);
+			}
+		}
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			@for $i from 1 through $nb-max-columns {
+				&.mod-layoutFixed-#{$bp-name}#{$i} {
+					width: percentage($i / $nb-max-columns);
+					max-width: percentage($i / $nb-max-columns);
+				}
+			}
+		}
+	  }
 }
