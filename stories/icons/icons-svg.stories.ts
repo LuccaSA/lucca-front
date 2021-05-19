@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import files from './files.json';
@@ -7,23 +7,15 @@ import files from './files.json';
 	selector: 'icons-svg-list-stories',
 	templateUrl: './icons-svg.stories.html',
 	styleUrls: ['./icons-svg.stories.scss'],
-}) class IconsSVGListStory  implements OnInit {
+}) class IconsSVGListStory {
 
 	@Input() set filter(query:string){
-		this.files = files.filter(file => !query || query.split(' ').filter(q => !!q).some(q => file.includes(q)));
+		// this.files = files.filter(file => !query || query.split(' ').filter(q => !!q).some(q => file.includes(q)));
+		this.files = files.filter(file => !query || file.includes(query));
 	};
 	@Input() rounded = false;
-	
 
-	cols = 15;
 	files = files;
-
-	// chargement asynchrone du json
-	ngOnInit(){
-		if(files) {
-			setTimeout(()=> this.files = files);
-		}
-	}
 }
 
 export default {

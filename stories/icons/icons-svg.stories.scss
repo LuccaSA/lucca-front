@@ -17,7 +17,7 @@ li {
     }
 }
 
-img {
+svg {
     width: 100%;
     background-color: white;
     display: block;
@@ -35,7 +35,7 @@ pre {
 }
 
 .rounded {
-    img {
+    svg {
         border-radius: 50%;
     }
 }

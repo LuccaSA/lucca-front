@@ -24,7 +24,7 @@ fs.readdir('packages/icons/svg/', function (err, files) {
   files
     .filter((file) => file.substr(-4) === '.svg')
     .forEach(function (file) {
-      filenames.push(file);
+      filenames.push('#lucca-icon-' + file.slice(0, -4));
     });
   let data = JSON.stringify(filenames);
   fs.writeFileSync('stories/icons/files.json', data);

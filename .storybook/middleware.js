@@ -25,5 +25,5 @@ module.exports = function expressMiddleware (router) {
 	router.use('/directory/api', proxy(p));
 	router.use('/getFile.ashx', proxy(p));
 
-	router.use('/icons-svg', express.static(path.join(__dirname, '../packages/icons/svg/')));
+	// router.use('/icons-svg', express.static(path.join(__dirname, '../packages/icons/svg/')));
 }
