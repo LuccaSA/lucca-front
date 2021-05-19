@@ -1,0 +1,8 @@
+<ul [class.rounded]="rounded">
+    <li *ngFor="let file of files">
+        <img [src]="'icons-svg/' + file" alt="" />
+        <pre>{{ file }}</pre>
+        
+    </li>
+    <li aria-hidden="true" *ngFor="let i of [].constructor(cols - 1)"></li>
+</ul>

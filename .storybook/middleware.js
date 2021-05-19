@@ -1,3 +1,5 @@
+const express = require('express');
+const path = require('path');
 
 const proxy = require('http-proxy-middleware');
 
@@ -23,4 +25,5 @@ module.exports = function expressMiddleware (router) {
 	router.use('/directory/api', proxy(p));
 	router.use('/getFile.ashx', proxy(p));
 
+	router.use('/icons-svg', express.static(path.join(__dirname, '../packages/icons/svg/')));
 }

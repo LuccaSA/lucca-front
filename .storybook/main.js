@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 module.exports = {
   stories: [
     "../stories/**/*.stories.mdx",
@@ -11,3 +14,18 @@ module.exports = {
     '@storybook/addon-knobs',
   ]
 }
+
+// création de la liste des icônes
+fs.readdir('packages/icons/svg/', function (err, files) {
+  let filenames = [];
+  if (err) {
+    return console.log('Unable to scan directory: ' + err);
+  }
+  files
+    .filter((file) => file.substr(-4) === '.svg')
+    .forEach(function (file) {
+      filenames.push(file);
+    });
+  let data = JSON.stringify(filenames);
+  fs.writeFileSync('stories/icons/files.json', data);
+});
