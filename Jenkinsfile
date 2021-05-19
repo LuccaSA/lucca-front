@@ -4,7 +4,7 @@ properties([
 	disableConcurrentBuilds(),
 ])
 
-node(label: CI.getSelectedNode(script:this)) {
+node {
 
 	def projectTechnicalName = 'lucca-front'
 	def repoName = "lucca-front"
