@@ -48,11 +48,11 @@ node {
 			}
 
 			stage('Prepare') {
+				scmVars = checkout scm
+
 				bat "volta --version"
 				bat "node --version"
 				bat "npm --version"
-
-				scmVars = checkout scm
 			}
 
 			stage('Restore') {
