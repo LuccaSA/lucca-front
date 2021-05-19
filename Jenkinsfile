@@ -56,8 +56,6 @@ node {
 			}
 
 			stage('Prepare') {
-				env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
-				env.PATH="${env.NODEJS_HOME};${env.PATH}"
 				bat "node --version"
 				bat "npm --version"
 
