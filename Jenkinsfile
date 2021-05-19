@@ -56,6 +56,7 @@ node('volta') {
 			}
 
 			stage('Prepare') {
+				bat "volta --version"
 				bat "node --version"
 				bat "npm --version"
 
