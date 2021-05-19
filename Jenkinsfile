@@ -4,7 +4,7 @@ properties([
 	disableConcurrentBuilds(),
 ])
 
-node {
+node('volta') {
 
 	def projectTechnicalName = 'lucca-front'
 	def repoName = "lucca-front"
