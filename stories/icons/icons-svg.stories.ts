@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
-import files from './files.json';
+import files from '../../packages/icons/svg/selection.json';
 
 @Component({
 	selector: 'icons-svg-list-stories',
@@ -9,13 +9,16 @@ import files from './files.json';
 	styleUrls: ['./icons-svg.stories.scss'],
 }) class IconsSVGListStory {
 
-	@Input() set filter(query:string){
-		// this.files = files.filter(file => !query || query.split(' ').filter(q => !!q).some(q => file.includes(q)));
-		this.files = files.filter(file => !query || file.includes(query));
+	@Input() set filter(query: string){
+		this.icons = files.icons.filter(icon => !query || icon.properties.name.includes(query));
 	};
-	@Input() rounded = false;
+	@Input() rounded: boolean;
+	@Input() fill: string;
+	@Input() background: string;
 
 	files = files;
+
+	icons = [];
 }
 
 export default {
@@ -32,6 +35,16 @@ export default {
 				type: 'boolean',
 			}
 		},
+		fill: {
+			control: {
+				type: 'color',
+			}
+		},
+		background: {
+			control: {
+				type: 'color',
+			}
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -46,4 +59,4 @@ const template: Story<IconsSVGListStory> = (args: IconsSVGListStory) => ({
 });
 
 export const list = template.bind({});
-list.args = { rounded: false, filter: '' };
+list.args = { rounded: false, filter: '', fill: '#000', background: '#FFF' };

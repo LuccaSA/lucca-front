@@ -16,16 +16,16 @@ module.exports = {
 }
 
 // création de la liste des icônes
-fs.readdir('packages/icons/svg/', function (err, files) {
-  let filenames = [];
-  if (err) {
-    return console.log('Unable to scan directory: ' + err);
-  }
-  files
-    .filter((file) => file.substr(-4) === '.svg')
-    .forEach(function (file) {
-      filenames.push('#lucca-icon-' + file.slice(0, -4));
-    });
-  let data = JSON.stringify(filenames);
-  fs.writeFileSync('stories/icons/files.json', data);
-});
+// fs.readdir('packages/icons/svg/', function (err, files) {
+//   let filenames = [];
+//   if (err) {
+//     return console.log('Unable to scan directory: ' + err);
+//   }
+//   files
+//     .filter((file) => file.substr(-4) === '.svg')
+//     .forEach(function (file) {
+//       filenames.push('#lucca-icon-' + file.slice(0, -4));
+//     });
+//   let data = JSON.stringify(filenames);
+//   fs.writeFileSync('stories/icons/files.json', data);
+// });
