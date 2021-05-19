@@ -538,8 +538,10 @@
 }
 
 
-// Fixed colmuns width
-$nb-max-columns: 12;
+// Fixed columns width
+$min-col-width: 1; //value in rem
+$max-col-width: 30; //value in rem
+
 .table {
 	&.mod-layoutFixed {
 		table-layout: fixed;
@@ -556,20 +558,49 @@ $nb-max-columns: 12;
 
 .table-head-row-cell,
 .table-body-row-cell {
-	@each $bp-name, $bp-obj in _getMap("breakpoints") {
-		@for $i from 1 through $nb-max-columns {
-			&.mod-layoutFixed-#{$i} {
-				width: percentage($i / $nb-max-columns);
-				max-width: percentage($i / $nb-max-columns);
-			}
+	@for $i from $min-col-width through $max-col-width {
+		&.mod-layoutFixed-#{$i} {
+			min-width: $i * 1rem;
+			width: $i * 1rem;
+			max-width: $i * 1rem;
 		}
+	}
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			@for $i from 1 through $nb-max-columns {
+			@for $i from $min-col-width through $max-col-width {
 				&.mod-layoutFixed-#{$bp-name}#{$i} {
-					width: percentage($i / $nb-max-columns);
-					max-width: percentage($i / $nb-max-columns);
+					min-width: $i * 1rem;
+					width: $i * 1rem;
+					max-width: $i * 1rem;
 				}
 			}
 		}
-	  }
+	}
+}
+
+// Sticky columns
+.table {
+	&.mod-columnSticky {
+		width: auto;
+		background-color: _color("white");
+	}
+}
+
+.table-head-row-cell,
+.table-body-row-cell {
+	
+	&[class*="mod-columnSticky"] {
+		position: sticky;
+		background-color: _color("white");
+		z-index: 1;
+	}
+
+	@for $i from 0 through $max-col-width {
+		&.mod-columnSticky-leftOffset#{$i} {
+			left: $i * 1rem;
+		}
+		&.mod-columnSticky-rightOffset#{$i} {
+			right: $i * 1rem;
+		}
+	}
 }
