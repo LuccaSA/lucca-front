@@ -4,7 +4,7 @@ properties([
 	disableConcurrentBuilds(),
 ])
 
-node('volta') {
+node {
 
 	def projectTechnicalName = 'lucca-front'
 	def repoName = "lucca-front"
@@ -36,17 +36,9 @@ node('volta') {
 	try {
 		timeout(time: 15, unit: 'MINUTES') {
 
-
-
 			def scmVars = null
 
 			stage('Cleanup') {
-				// tools
-				if(fileExists('.jenkins')) {
-					dir('.jenkins') {
-						deleteDir()
-					}
-				}
 				// storybook static
 				if(fileExists('storybook')) {
 					dir('storybook') {
