@@ -530,15 +530,15 @@
 	<table class="table mod-layoutFixed">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell mod-layoutFixed-4">Head cell</th>
-				<th class="table-head-row-cell mod-layoutFixed-15">Head cell</th>
+				<th class="table-head-row-cell mod-layoutFixed-8">Head cell</th>
+				<th class="table-head-row-cell mod-layoutFixed-12">Head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row">
-				<td class="table-body-row-cell">Body cell</td>
-				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Head cell with mod-layoutFixed-8</td>
+				<td class="table-body-row-cell">Head cell with mod-layoutFixed-12</td>
 				<td class="table-body-row-cell">Body cell</td>
 			</tr>
 			<tr class="table-body-row">
@@ -557,15 +557,15 @@
 	<table class="table mod-layoutFixed-md">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell mod-layoutFixed-md4">Head cell</th>
-				<th class="table-head-row-cell mod-layoutFixed-md15">Head cell</th>
+				<th class="table-head-row-cell mod-layoutFixed-md8">Head cell</th>
+				<th class="table-head-row-cell mod-layoutFixed-md12">Head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row">
-				<td class="table-body-row-cell">Body cell</td>
-				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Head cell with mod-layoutFixed-8</td>
+				<td class="table-body-row-cell">Head cell with mod-layoutFixed-12</td>
 				<td class="table-body-row-cell">Body cell</td>
 			</tr>
 			<tr class="table-body-row">
@@ -580,7 +580,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<em><b>Tip:</b> the column sizing is based on a 12 columns system, like the grid component</em>
+	<em><b>Tip:</b> the numeric value used in the class will be calculated in rem. Ex <code class="code">.mod-layoutFixed-<strong>8</strong></code> means a cell width of <strong>8</strong> rem</em>
 </section>
 
 <!-- Sticky columns -->
@@ -605,9 +605,9 @@
 		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row">
-				<td class="table-body-row-cell mod-columnSticky-leftOffset0">Body cell</td>
-				<td class="table-body-row-cell mod-columnSticky-leftOffset8">Body cell</td>
-				<td class="table-body-row-cell mod-columnSticky-leftOffset15">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-leftOffset0">fixed width: 8 // offset 0</td>
+				<td class="table-body-row-cell mod-columnSticky-leftOffset8">fixed width: 7 // offset 8</td>
+				<td class="table-body-row-cell mod-columnSticky-leftOffset15">fixed width: 2 // offset 8 + 7 = 15</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
@@ -616,7 +616,7 @@
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
-				<td class="table-body-row-cell mod-columnSticky-rightOffset0">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-rightOffset0">fixed width: 4 // offset 0</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell mod-columnSticky-leftOffset0">Body cell</td>
@@ -649,7 +649,7 @@
 		</tbody>
 	</table>
 	
-	<em><b>Tip:</b> the column sizing is based on a 12 columns system, like the grid component</em>
+	<em><b>Tip:</b> each cell must have a class <code class="code">.mod-columnSticky-leftOffset<strong>X</strong></code> or <code class="code">.mod-columnSticky-righOffset<strong>X</strong></code> with <strong>X</strong> equal to the cumulative size of previous cells in the specified axis (from left or from right)</em>
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
