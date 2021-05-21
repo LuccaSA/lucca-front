@@ -584,6 +584,23 @@ $max-col-width: 20; //value in rem
 		width: auto;
 		background-color: _color("white");
 	}
+
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			&.mod-columnSticky-#{$bp-name} {
+				width: auto;
+				background-color: _color("white");
+				.table-head-row-cell,
+				.table-body-row-cell {
+					&[class*="mod-columnSticky"] {
+						position: sticky;
+						background-color: _color("white");
+						z-index: 1;
+					}
+				}
+			}
+		}
+	}
 }
 
 .table-head-row-cell,
