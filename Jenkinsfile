@@ -36,17 +36,9 @@ node {
 	try {
 		timeout(time: 15, unit: 'MINUTES') {
 
-
-
 			def scmVars = null
 
 			stage('Cleanup') {
-				// tools
-				if(fileExists('.jenkins')) {
-					dir('.jenkins') {
-						deleteDir()
-					}
-				}
 				// storybook static
 				if(fileExists('storybook')) {
 					dir('storybook') {
@@ -56,12 +48,11 @@ node {
 			}
 
 			stage('Prepare') {
-				env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
-				env.PATH="${env.NODEJS_HOME};${env.PATH}"
+				scmVars = checkout scm
+
+				bat "volta --version"
 				bat "node --version"
 				bat "npm --version"
-
-				scmVars = checkout scm
 			}
 
 			stage('Restore') {
