@@ -652,5 +652,74 @@
 	<em><b>Tip:</b> each cell must have a class <code class="code">.mod-columnSticky-leftOffset<strong>X</strong></code> or <code class="code">.mod-columnSticky-righOffset<strong>X</strong></code> with <strong>X</strong> equal to the cumulative size of previous cells in the specified axis (from left or from right)</em>
 </section>
 
+<!-- Sticky columns shadow-->
+<section class="contentSection">
+	<h2>Sticky columns with shadow on overflow</h2>
+	<div class="tableColumnStickyWrapper" style="--columnStickyShadow-leftOffset:20rem;--columnStickyShadow-rightOffset:5rem;">
+		<table class="table mod-layoutFixed mod-columnSticky">
+			<thead class="table-head">
+				<tr class="table-head-row">
+					<th class="table-head-row-cell mod-layoutFixed-8 mod-columnSticky-leftOffset0">Head cell</th>
+					<th class="table-head-row-cell mod-layoutFixed-7 mod-columnSticky-leftOffset8">Head cell</th>
+					<th class="table-head-row-cell mod-layoutFixed-5 mod-columnSticky-leftOffset15">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell mod-layoutFixed-5 mod-columnSticky-rightOffset0">Head cell</th>
+				</tr>
+			</thead>
+			<tbody class="table-body">
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-columnSticky-leftOffset0">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-leftOffset8">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-leftOffset15">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-rightOffset0">Body cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-columnSticky-leftOffset0">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-leftOffset8">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-leftOffset15">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-rightOffset0">Body cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-columnSticky-leftOffset0">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-leftOffset8">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-leftOffset15">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell mod-columnSticky-rightOffset0">Body cell</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

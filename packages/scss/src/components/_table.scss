@@ -606,7 +606,7 @@ $max-col-width: 20; //value in rem
 
 .table-head-row-cell,
 .table-body-row-cell {
-	
+
 	&[class*="mod-columnSticky"] {
 		position: sticky;
 		background-color: _color("white");
@@ -620,5 +620,48 @@ $max-col-width: 20; //value in rem
 		&.mod-columnSticky-rightOffset#{$i} {
 			right: $i * 1rem;
 		}
+	}
+}
+
+//columns sticky css drop shadow on scroll
+.tableColumnStickyWrapper {
+	$columnStickyShadow-backgroundSize-width: 10px;
+	overflow: auto;
+	max-width: 100%;
+	background-image: 
+		/* Shadows */ 
+		linear-gradient(to right, _color(white), _color(white)),
+		linear-gradient(to right, _color(white), _color(white)),
+		/* Shadow covers */ 
+		linear-gradient(to right, rgba(0,0,0,.25), rgba(255,255,255,0)),
+		linear-gradient(to left, rgba(0,0,0,.25), rgba(255,255,255,0));   
+
+	background-position:
+		var(--columnStickyShadow-leftOffset) center, 
+		calc(100% - var(--columnStickyShadow-rightOffset)) center, 
+		var(--columnStickyShadow-leftOffset) center, 
+		calc(100% - var(--columnStickyShadow-rightOffset)) center;
+	
+	background-size: 
+		2*$columnStickyShadow-backgroundSize-width 100%, 
+		2*$columnStickyShadow-backgroundSize-width 100%, 
+		$columnStickyShadow-backgroundSize-width 100%, 
+		$columnStickyShadow-backgroundSize-width 100%;
+	
+	background-attachment: local, local, scroll, scroll;
+	background-repeat: no-repeat;
+	background-color: _color(white);
+	
+
+	.table,
+	.table-head-row-cell,
+	.table-body-row-cell,
+	.table-body-row,
+	.table-head-row {
+		background: transparent;
+	}
+
+	[class*="mod-columnSticky-"]{
+		background: _color(white);
 	}
 }
