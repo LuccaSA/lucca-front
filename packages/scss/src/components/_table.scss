@@ -582,6 +582,7 @@ $max-col-width: 20; //value in rem
 .table {
 	&.mod-columnSticky {
 		width: auto;
+		min-width: 100%;
 		background-color: _color("white");
 	}
 
