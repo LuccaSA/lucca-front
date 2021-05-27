@@ -22,20 +22,17 @@ export abstract class ALuUserHomonymsService<U extends ILuUser = ILuUser> implem
 export class LuUserHomonymsService<U extends ILuUser = ILuUser> extends ALuUserHomonymsService<U> implements ILuUserHomonymsService<U> {
 	private _format = LuDisplayFullname.lastfirst;
 	extractHomonyms(users: U[]): U[] {
-		const namesCount = {} as { [key: string]: number};
+		const usersByName = {} as { [key: string]: U[] };
 		users.forEach(user => {
 			const name = this._pipe.transform(user, this._format);
-			const count = namesCount[name] || 0;
-			namesCount[name] = count + 1;
+			usersByName[name] = [...(usersByName[name] || []), user];
 		});
 
-		const nonUniqNames = Object.keys(namesCount)
-		.filter(key => namesCount[key] > 1);
+		const nonUniqNames = Object.keys(usersByName)
+		.filter(key => usersByName[key].length > 1);
 
 		const homonyms = [] as U[];
-		nonUniqNames.forEach(name => {
-			homonyms.push(...users.filter(u => name === this._pipe.transform(u, this._format)));
-		});
+		nonUniqNames.forEach(name => homonyms.push(...usersByName[name]));
 		return homonyms;
 	}
 
