@@ -1,7 +1,7 @@
 .callout {
-	background-color: _component("callout.background");
+	background-color: _component("callout.background-color");
 	border-radius: _theme("commons.border.radius");
-	border: 1px solid _color("grey", 200, true);
+	border: _theme("commons.divider.width") solid _color("grey", 200, true);
 	margin: _component("callout.margin");
 	padding: _component("callout.padding");
 	position: relative;
@@ -92,7 +92,7 @@
 @mixin calloutDefaultPalette($palette) {
 	background-color: _color($palette, 100);
 	color: _color($palette, 800);
-	border: 1px solid _color($palette, 200);
+	border: _theme("commons.divider.width") solid _color($palette, 200);
 }
 .callout {
 	@each $name, $palette in _getMap("palettes") {

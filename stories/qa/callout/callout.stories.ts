@@ -9,17 +9,6 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 export default {
   title: 'QA/Callout',
   component: CalloutStory,
-	parameters: {
-		backgrounds: {
-			default: 'toto',
-			values: [
-				{
-					name: 'base',
-					value: '#fff',
-				}
-			]
-		}
-	},
 	decorators: [
 		moduleMetadata({
 			entryComponents: [CalloutStory]
