@@ -533,3 +533,126 @@
 		}
 	}
 }
+
+
+// Fixed columns width
+.table {
+	&.mod-layoutFixed {
+		table-layout: fixed;
+	}
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			&.mod-layoutFixed-#{$bp-name} {
+				table-layout: fixed;
+			}
+		}
+	}
+}
+
+.table-head-row-cell,
+.table-body-row-cell {
+	@for $i from  _component("table.fixed-column.min-col-width") through _component("table.fixed-column.max-col-width") {
+		&.mod-layoutFixed-#{$i} {
+			min-width: $i * 1rem;
+			width: $i * 1rem;
+			max-width: $i * 1rem;
+		}
+	}
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			@for $i from _component("table.fixed-column.min-col-width") through _component("table.fixed-column.max-col-width") {
+				&.mod-layoutFixed-#{$bp-name}#{$i} {
+					min-width: $i * 1rem;
+					width: $i * 1rem;
+					max-width: $i * 1rem;
+				}
+			}
+		}
+	}
+}
+
+// Sticky columns
+.table {
+	@mixin columnStickyCommons {
+		width: auto;
+		min-width: 100%;
+		background-color: _color("white");
+		.table-head-row-cell,
+		.table-body-row-cell {
+			&[class*="mod-columnSticky-"] {
+				position: sticky;
+				background-color: _color("white");
+				z-index: 3;
+			}
+			//columns sticky css drop shadow on scroll
+			&.mod-columnSticky-shadow {
+				width: _component("table.fixed-column.sticky-shadow.width");
+				min-width: _component("table.fixed-column.sticky-shadow.width");
+				max-width: _component("table.fixed-column.sticky-shadow.width");
+				padding: 0;
+				background-size: _component("table.fixed-column.sticky-shadow.width") 100%;
+				background-repeat: no-repeat;
+				background-color: transparent;
+				z-index: 1;
+				&[class*="mod-columnSticky-left"] {
+					background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color"), .75), transparentize(_component("table.fixed-column.sticky-shadow.color"), 1));
+				}
+				&[class*="mod-columnSticky-right"] {
+					background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color"), .75), transparentize(_component("table.fixed-column.sticky-shadow.color"), 1));
+				}
+			}
+			//mask for left stickies columns drop shadow when there is no scroll
+			&.mod-columnSticky-shadowMask {
+				position: relative;
+				z-index: auto;
+				&::before {
+					content: "";
+					display: block;
+					width: _component("table.fixed-column.sticky-shadow.width");
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: _component("table.fixed-column.sticky-shadow.width") * -1;
+					z-index: 2;
+					background: _color("white");	
+				}
+			}
+			//mask for right stickies columns drop shadow when there is no scroll
+			&:not([class*="mod-columnSticky"]) + .mod-columnSticky-shadowMask {
+				&::before {
+					left: auto;
+					right: _component("table.fixed-column.sticky-shadow.width") * -1;
+				}
+			}
+		}
+	}
+
+	//Sticky commons include, globaly and by BP
+	&.mod-columnSticky {
+		@include columnStickyCommons;
+	}
+
+	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+			&.mod-columnSticky-#{$bp-name} {
+				@include columnStickyCommons;
+			}
+		}
+	}
+
+
+	//Sticky column offset
+	&[class*="mod-columnSticky"] {
+		.table-head-row-cell,
+		.table-body-row-cell {
+			@for $i from 0 through _component("table.fixed-column.max-col-width") {
+				&.mod-columnSticky-leftOffset#{$i} {
+					left: $i * 1rem;
+				}
+				&.mod-columnSticky-rightOffset#{$i} {
+					right: $i * 1rem;
+				}
+			}
+		}
+	}
+}
