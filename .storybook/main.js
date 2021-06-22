@@ -9,5 +9,8 @@ module.exports = {
     '@storybook/addon-actions',
     '@storybook/addon-a11y',
     '@storybook/addon-knobs',
-  ]
+  ],
+  "core": {
+    "builder": "webpack5"
+  }
 }
