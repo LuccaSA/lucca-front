@@ -10,6 +10,7 @@
     "../**/*.spec.ts"
   ],
   "include": [
+    "./src/main.ts"
   ],
   "files": [
     "./typings.d.ts"
