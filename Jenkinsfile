@@ -34,7 +34,7 @@ node {
 
 	def isResultSuccessful = true
 	try {
-		timeout(time: 15, unit: 'MINUTES') {
+		timeout(time: 20, unit: 'MINUTES') {
 
 			def scmVars = null
 
