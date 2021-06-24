@@ -1,0 +1,42 @@
+.page-header {
+	@include elevate(1);
+	padding: _theme('commons.padding');
+	padding-bottom: _theme('spacings.standard');
+	background-color: _color('white');
+
+	.menu {
+		&::after {
+			display: none;
+		}
+	}
+
+	&.mod-withMenu {
+		padding: _theme('commons.padding');
+	}
+}
+
+.page-header-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.page-header-content-title,
+.page-header-content-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.page-header-content-actions {
+	& > *:not(:last-child){
+		margin-right: _theme('spacings.small');
+	}
+}
+
+.page-header-description {
+	max-width: 50rem;
+	margin-top: _theme('spacings.smaller');
+	color: _color('grey', '600');
+}
