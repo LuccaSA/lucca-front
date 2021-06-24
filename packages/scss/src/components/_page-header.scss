@@ -10,6 +10,12 @@
 		}
 	}
 
+	&.mod-withBreadcrumbs {
+		.breadcrumbs {
+			margin-bottom: 0;
+		}
+	}
+
 	&.mod-withMenu {
 		padding: _theme('commons.padding');
 	}
