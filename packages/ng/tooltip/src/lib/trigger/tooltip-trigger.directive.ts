@@ -42,22 +42,22 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@Output('luTooltipOnOpen') onOpen = new EventEmitter<void>();
 	/** Event emitted when the associated popover is closed. */
 	@Output('luTooltipOnClose') onClose = new EventEmitter<void>();
+
 	@HostListener('mouseenter')
 	onMouseEnter() {
 		super.onMouseEnter();
 	}
-
 	@HostListener('mouseleave')
 	onMouseLeave() {
 		super.onMouseLeave();
 	}
 	@HostListener('focus')
 	onFocus(){
-		super.onMouseEnter();
+		super.onFocus();
 	}
 	@HostListener('blur')
 	onBlur() {
-		super.onMouseLeave();
+		super.onBlur();
 	}
 	private _handleTabindex = false;
 	// @HostBinding('attr.tabindex') tabindex;
