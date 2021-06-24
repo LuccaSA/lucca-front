@@ -9,7 +9,6 @@ import { ALuModalPanelComponent } from '@lucca-front/ng/modal';
 @Component({
 	selector: 'lu-sidepanel-panel',
 	templateUrl: './sidepanel-panel.component.html',
-	styleUrls: ['./sidepanel-panel.component.scss'],
 	host: {'class': 'lu-sidepanel-panel'},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,7 +25,6 @@ export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepa
 @Component({
 	selector: 'lu-sidepanel-panel-default',
 	templateUrl: './sidepanel-panel.component.html',
-	styleUrls: ['./sidepanel-panel.component.scss'],
 	host: {'class': 'lu-sidepanel-panel'},
 	changeDetection: ChangeDetectionStrategy.Default,
 })
