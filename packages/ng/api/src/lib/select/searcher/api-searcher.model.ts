@@ -1,14 +1,12 @@
-import { Observable, Subject, combineLatest, merge, of } from 'rxjs';
+import { Observable, Subject, merge, of } from 'rxjs';
 import {
 	mapTo,
-	tap,
-	withLatestFrom,
 	share,
 	switchMap,
-	distinctUntilChanged,
 	catchError,
 	map,
-	debounceTime,
+	scan,
+	startWith,
 } from 'rxjs/operators';
 
 import { ILuApiItem } from '../../api.model';
@@ -72,8 +70,8 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 	protected _loading = false;
-	protected _page$ = new Subject<number>();
-	protected _page: number;
+	protected _page$ = new Subject<void>();
+	protected _isLastPage: boolean;
 	protected _options: T[] = [];
 
 	constructor(service: S) {
@@ -81,47 +79,43 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	}
 	onOpen() {
 		this.resetClue();
-		this.resetPage();
 	}
 	onScrollBottom() {
-		if (!this._loading) {
-			this._page$.next(this._page + 1);
+		if (!this._loading&& !this._isLastPage) {
+			this._page$.next();
 		}
 	}
 
 	protected initObservables() {
-		const distinctPage$ = this._page$.pipe(
-			distinctUntilChanged(),
-			tap(p => this._page = p),
+		const pager$ = this._page$.pipe(
+			scan(acc => acc + 1, 0),
+			startWith(0),
+		);
+		const query$ = this._clue$.pipe(
+			switchMap(clue => pager$.pipe(map(page => [page, clue] as [number, string]))),
+			share(),
 		);
 
-		// this._clue$ = clue$.pipe(
-		// 	tap(() => this._page$.next(0)),
-		// 	// distinctUntilChanged(),
-		// 	share()
-		// );
-		const results$ = combineLatest(
-			distinctPage$,
-			this._clue$,
-		).pipe(
-			debounceTime(100),
-			switchMap(([page, clue]) => this._service.searchPaged(clue, page)),
-			catchError(err => of([])),
+		const results$ = query$.pipe(
+			switchMap(([page, clue]) => this._service.searchPaged(clue, page).pipe(
+				catchError(() => of([])),
+				map(items => [items, page] as [T[], number])
+			)),
 			share(),
 		);
 
 		results$
-		.pipe(withLatestFrom(distinctPage$))
 		.subscribe(([items, page]) => {
 			if (page === 0) {
 				this._options = [...items];
 			} else {
 				this._options.push(...items);
 			}
+			this._isLastPage = !items.length;
 			this.outOptions$.next([...this._options]);
 		});
 		this.loading$ = merge(
-			this._clue$.pipe(mapTo(true)),
+			query$.pipe(mapTo(true)),
 			results$.pipe(mapTo(false)),
 		);
 		this.loading$.subscribe(l => this._loading = l);
@@ -130,7 +124,4 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 		);
 	}
 	abstract resetClue();
-	resetPage() {
-		this._page$.next(0);
-	}
 }

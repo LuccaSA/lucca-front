@@ -1,0 +1,38 @@
+$prefix: "u-" !default;
+$suffix: "!important" !default;
+
+.#{$prefix}printVisible,
+.#{$prefix}printVisibleBlock,
+.#{$prefix}printVisibleFlex,
+.#{$prefix}printVisibleInline,
+.#{$prefix}printVisibleInlineBlock,
+.#{$prefix}printVisibleInlineFlex {
+	display: none #{$suffix};
+}
+
+@media only print {
+	.u-printHidden {
+			display: none #{$suffix};
+	}
+
+	.u-printVisible,
+	.u-printVisibleBlock {
+			display: block #{$suffix};
+	}
+
+	.u-printVisibleFlex {
+			display: flex #{$suffix};
+	}
+
+	.u-printVisibleInline {
+			display: inline #{$suffix};
+	}
+
+	.u-printVisibleInlineBlock {
+			display: inline-block #{$suffix};
+	}
+
+	.u-printVisibleInlineFlex {
+			display: inline-flex #{$suffix};
+	}
+}

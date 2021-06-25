@@ -10,11 +10,7 @@
 }
 
 .u-clear {
-	&::after {
-		clear: both;
-		content: "";
-		display: table;
-	}
+	@include clearfix('!important');
 }
 
 .u-middle {
@@ -84,3 +80,22 @@ html,
 	pointer-events: auto;
 }
 
+// BORDER RADIUS
+//
+
+$directionsX: "top", "bottom" !default;
+$directionsY: "left", "right" !default;
+$prefix: "u-" !default;
+$suffix: "!important" !default;
+
+@each $directionX in $directionsX {
+	@each $directionY in $directionsY {
+		.#{$prefix}border#{str-capitalize($directionX)}#{str-capitalize($directionY)}RadiusBig {
+			border-#{$directionX}-#{$directionY}-radius: _theme("commons.border.radius-big");
+		}
+
+		.#{$prefix}border#{str-capitalize($directionX)}#{str-capitalize($directionY)}Radius {
+			border-#{$directionX}-#{$directionY}-radius: _theme("commons.border.radius");
+		}
+	}
+}

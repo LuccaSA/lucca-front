@@ -57,7 +57,7 @@
 	}
 
 	.#{$fieldname}-label {
-		color: _color("text.light");
+		color: _component("field.label.color");
 		font-size: _component("field.label.font-size");
 		line-height: _theme("sizes.small.line-height");
 		min-height: _theme("spacings.small");

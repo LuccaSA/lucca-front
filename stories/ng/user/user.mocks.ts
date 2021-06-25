@@ -1,5 +1,5 @@
+import { ILuUser } from '@lucca-front/ng/user';
 
-import { ILuUser} from '@lucca-front/ng/user';
 export const bob: ILuUser = {
 	id: 12,
 	firstName: 'SpongeBob',

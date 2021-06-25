@@ -5,7 +5,7 @@
 			  ($fakeborderoverlaywidth * -1) ($fakeborderoverlaywidth * -1) $fakeborderoverlaycolor inset; // bottom right         inside
 }
 
-@mixin mask($suffix: '!important') {
+@mixin mask($suffix: "!important") {
 	border: 0 #{$suffix};
 	clip: rect(1px, 1px, 1px, 1px) #{$suffix};
 	height: 1px #{$suffix};
@@ -18,13 +18,13 @@
 	contain: paint #{$suffix};
 }
 
-@mixin listReset($suffix: '') {
+@mixin listReset($suffix: "") {
 	list-style-type: none #{$suffix};
 	padding: 0 #{$suffix};
 	margin: 0 #{$suffix};
 }
 
-@mixin definitionListReset($suffix: '') {
+@mixin definitionListReset($suffix: "") {
 	padding: 0 #{$suffix};
 	
 	&,
@@ -34,7 +34,7 @@
 	}
 }
 
-@mixin buttonReset($suffix: '') {
+@mixin buttonReset($suffix: "") {
 	cursor: pointer #{$suffix};
 	font: inherit #{$suffix};
 	color: inherit #{$suffix};
@@ -52,7 +52,7 @@
 	}
 }
 
-@mixin buttonReset($suffix: '') {
+@mixin buttonReset($suffix: "") {
 	cursor: pointer #{$suffix};
 	font: inherit #{$suffix};
 	color: inherit #{$suffix};
@@ -62,4 +62,16 @@
 	border: 0 #{$suffix};
 	width: 100% #{$suffix};
 	text-align: left #{$suffix};
+}
+
+@mixin clearfix($suffix: "") {
+	&::before,
+	&::after {
+		content: " " #{$suffix};
+		display: table #{$suffix};
+	}
+
+	&::after {
+		clear: both #{$suffix};
+	}
 }

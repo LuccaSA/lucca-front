@@ -27,21 +27,18 @@ node {
 		prNumber = env.BRANCH_NAME.substring(3)
 	}
 
+	def releaseRegexPattern = /^v\d+\.\d+\.\d+$/
+	def preReleaseRegexPattern = /^v\d+\.\d+\.\d+-\w*(\.\d+)?$/
+	def isRelease = env.BRANCH_NAME ==~ releaseRegexPattern
+	def isPreRelease = env.BRANCH_NAME ==~ preReleaseRegexPattern
+
 	def isResultSuccessful = true
 	try {
 		timeout(time: 15, unit: 'MINUTES') {
 
-
-
 			def scmVars = null
 
 			stage('Cleanup') {
-				// tools
-				if(fileExists('.jenkins')) {
-					dir('.jenkins') {
-						deleteDir()
-					}
-				}
 				// storybook static
 				if(fileExists('storybook')) {
 					dir('storybook') {
@@ -51,12 +48,11 @@ node {
 			}
 
 			stage('Prepare') {
-				env.NODEJS_HOME = "${tool 'Node LTS v12.x.y'}"
-				env.PATH="${env.NODEJS_HOME};${env.PATH}"
+				scmVars = checkout scm
+
+				bat "volta --version"
 				bat "node --version"
 				bat "npm --version"
-
-				scmVars = checkout scm
 			}
 
 			stage('Restore') {
@@ -93,6 +89,25 @@ node {
 				}
 			}
 
+
+
+			if (isRelease || isPreRelease) {
+				stage('Publish') {
+					def tag = "latest"
+					def version = env.BRANCH_NAME
+					if (isPreRelease) {
+						tag = "next"
+					}
+
+					bat "npm version ${version} --prefix dist/icons"
+					bat "npm version ${version} --prefix dist/scss"
+					bat "npm version ${version} --prefix dist/ng"
+
+					bat "npm publish --tag ${tag} --folder dist/icons"
+					bat "npm publish --tag ${tag} --folder dist/scss"
+					bat "npm publish --tag ${tag} --folder dist/ng"
+				}
+			}
 		}
 	} catch(err) {
 		stage('Error') {

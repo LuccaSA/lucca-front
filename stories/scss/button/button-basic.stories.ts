@@ -12,7 +12,6 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	@Input() palette: string = '';
 	@Input() state: string = '';
 	@Input() size: string = '';
-
 }
 
 export default {

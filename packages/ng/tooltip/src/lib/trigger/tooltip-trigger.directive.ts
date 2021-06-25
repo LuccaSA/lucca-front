@@ -29,7 +29,12 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	/** when trigger = hover, delay before the popover panel disappears, default 100ms */
 	@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
 	/** disable popover apparition */
-	@Input('luTooltipDisabled') set inputDisabled(d: boolean) { this.disabled = d; }
+	@Input('luTooltipDisabled') set inputDisabled(d: boolean) {
+		this.disabled = d;
+		if (this._handleTabindex) {
+			this._setTabindex(d? null : 0);
+		}
+	}
 
 	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
 
@@ -54,7 +59,11 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	onBlur() {
 		super.onMouseLeave();
 	}
-	@HostBinding('attr.tabindex') tabindex = 0;
+	private _handleTabindex = false;
+	// @HostBinding('attr.tabindex') tabindex;
+	// private set tabindex(i: number = null) {
+
+	// }
 
 	/** accessibility attribute - dont override */
 	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
@@ -79,6 +88,12 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 
 		const factory = componentFactoryResolver.resolveComponentFactory(LuTooltipPanelComponent);
 		this.panel = factory.create(injector).instance;
+
+		this._handleTabindex = this._shouldHandleTabindex();
+
+		if (this._handleTabindex) {
+			this._setTabindex(0)
+		}
 	}
 
 	ngAfterViewInit() {
@@ -96,5 +111,20 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 	protected _emitClose(): void {
 		this.onClose.emit();
+	}
+
+	private _shouldHandleTabindex(): boolean {
+		const tag = this._elementRef.nativeElement.tagName?.toLowerCase();
+		// https://allyjs.io/data-tables/focusable.html
+		// i'm choosing to not support area and iframe, dont @ me
+		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
+		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag)
+
+		const hasATabIndex = this._elementRef.nativeElement.getAttribute('tabindex') !== null;
+
+		return !isNatevelyFocusableTag && !hasATabIndex;
+	}
+	private _setTabindex(i: number = null): void {
+		this._elementRef.nativeElement.setAttribute('tabindex', i);
 	}
 }

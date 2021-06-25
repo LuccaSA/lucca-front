@@ -182,6 +182,7 @@
 		}
 	}
 
+	~ .checkbox-mixed ~ .checkbox-label,
 	&.is-incomplete ~ .checkbox-label {
 		&::before {
 			@include makeIcon("partial");
