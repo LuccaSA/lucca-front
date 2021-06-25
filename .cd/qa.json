@@ -47,7 +47,115 @@
 			"description": "lucca-front",
 			"pageReadyCssSelector": "span.ready",
 			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-container--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-divider--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-empty-state--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-gauge--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-grid--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
 			"relativePath": "/iframe.html?id=qa-icon--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-label--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-links--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-list--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-loadings--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-main--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-pagination--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-progress--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-section--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-table--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-table-of-content--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-tags--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-timelines--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-typography--basic&args=&viewMode=story"
 		}
 	]
 }
