@@ -5,6 +5,48 @@
 			"description": "lucca-front",
 			"pageReadyCssSelector": "span.ready",
 			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-box--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-breadcrumb--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-button--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-callout--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-card--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-chip--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
+			"relativePath": "/iframe.html?id=qa-collapse--basic&args=&viewMode=story"
+		},
+		{
+			"description": "lucca-front",
+			"pageReadyCssSelector": "span.ready",
+			"principalLogins": ["no-login"],
 			"relativePath": "/iframe.html?id=qa-icon--basic&args=&viewMode=story"
 		}
 	]
