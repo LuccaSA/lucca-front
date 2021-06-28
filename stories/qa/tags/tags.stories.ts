@@ -18,4 +18,4 @@ export default {
 
 const template: Story<TagsStory> = () => ({});
 
-export const all = template.bind({});
+export const basic = template.bind({});
