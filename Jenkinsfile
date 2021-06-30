@@ -72,12 +72,10 @@ node(label: CI.getSelectedNode(script:this)) {
 				}
 			}
 
-			if (isRelease) {
-				loggableStage('Publish') {
-					publishNpmOnReleaseTag(publishFolder: 'dist/icons')
-					publishNpmOnReleaseTag(publishFolder: 'dist/scss')
-					publishNpmOnReleaseTag(publishFolder: 'dist/ng')
-				}
+			loggableStage('Publish') {
+				publishNpmOnReleaseTag(publishFolder: 'dist/icons')
+				publishNpmOnReleaseTag(publishFolder: 'dist/scss')
+				publishNpmOnReleaseTag(publishFolder: 'dist/ng')
 			}
 		}
 	} catch(err) {
