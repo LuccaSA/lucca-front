@@ -98,19 +98,19 @@
 			padding-left: _theme("spacings.standard");
 
 			&::after {
-				width: .5625rem;
-				height: .5625rem;
+				width: .5rem;
+				height: .5rem;
 			}
 		}
 	}
 	
 	&.mod-big {
 		.timeline-step-title {
-			padding-left: calc(#{_theme("spacings.big") + _theme("spacings.smaller")});
+			padding-left: 2.5rem;
 
 			&::after {
-				width: 1.5625rem;
-				height: 1.5625rem;
+				width: 1.5rem;
+				height: 1.5rem;
 			}
 		}
 	}
@@ -121,7 +121,6 @@
 		.timeline-step {
 			margin-top: _theme("spacings.smaller");
 			display: block;
-			padding-left: _theme("spacings.big");
 			position: relative;
 
 			&:not(:last-child)::after {
@@ -132,7 +131,7 @@
 				position: absolute;
 				top: _theme("spacings.big");
 				bottom: -0.75rem;
-				left: .66rem; // magic number
+				left: .45rem; // magic number
 				margin: 0;
 			}
 
@@ -149,7 +148,10 @@
 
 		.timeline-step-title {
 			margin: _theme("spacings.smaller") 0;
-			margin-left: _theme("spacings.big") * -1;
+
+			&:after {
+				left: 0;
+			}
 		}
 		
 		&.mod-small {
