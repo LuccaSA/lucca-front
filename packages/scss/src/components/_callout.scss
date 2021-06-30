@@ -1,5 +1,5 @@
 .callout {
-	background-color: _component("callout.background-color");
+	background-color: _component("callout.background");
 	border-radius: _theme("commons.border.radius");
 	border: _theme("commons.divider.width") solid _color("grey", 200, true);
 	margin: _component("callout.margin");

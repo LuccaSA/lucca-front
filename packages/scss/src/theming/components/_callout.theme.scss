@@ -1,6 +1,6 @@
 $callout: (
   margin: 0 0 _theme("spacings.small"),
   padding: _theme("spacings.smaller") _theme("spacings.small"),
-  background-color: _color("grey", "100")
+  background: _color("grey", "100")
 );
 $theme: _set($theme, "components.callout", $callout);
