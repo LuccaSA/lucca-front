@@ -69,8 +69,8 @@
 
 	&::after {
 		content: "";
-		width: 1.0625rem;
-		height: 1.0625rem;
+		width: 1rem;
+		height: 1rem;
 		border-radius: 50%;
 		background-color: _color('primary', 300);
 		position: absolute;
@@ -116,6 +116,7 @@
 	}
 
 	&.mod-vertical {
+		align-items: flex-start;
 		flex-direction: column;
 
 		.timeline-step {
@@ -129,7 +130,7 @@
 				height: auto;
 				width: 2px;
 				position: absolute;
-				top: _theme("spacings.big");
+				top: _theme("spacings.big") + _theme("spacings.smallest");
 				bottom: -0.75rem;
 				left: .45rem; // magic number
 				margin: 0;
@@ -137,7 +138,7 @@
 
 			&:not(:last-child)[aria-current="step"] {
 				&::after {
-					top: calc(#{_theme("spacings.big") + _theme("spacings.smallest")});
+					top: _theme("spacings.big") + _theme("spacings.smallest");
 				}
 			}
 
@@ -148,49 +149,55 @@
 
 		.timeline-step-title {
 			margin: _theme("spacings.smaller") 0;
+		}
 
-			&:after {
-				left: 0;
+		&:not(.mod-small):not(.mod-big) {
+			.timeline-step-title {	
+				&:after {
+					left: 0;
+				}
 			}
+		}
+
+		.timeline-step-description {
+			padding-left: _theme("spacings.big");
 		}
 		
 		&.mod-small {
 			.timeline-step {
-				padding-left: _theme("spacings.standard");
 				&::after {
 					bottom: _theme('spacings.small') * -1;
 					left: .45rem; // magic number
+					top: _theme('spacings.big');
 				}
 	
 				&[aria-current="step"] {
 					&::after {
-						top: calc(#{_theme("spacings.big") + _theme("spacings.smallest")});
+						top: calc(#{_theme("spacings.big")});
 					}
 				}
 			}
-			.timeline-step-title {
-				margin-left: _theme("spacings.standard") * -1;
+			.timeline-step-description {
+				padding-left: _theme("spacings.standard");
 			}
 		}
 		
 		&.mod-big {
 			.timeline-step {
-				padding-left: 2.5rem;
-
 				&::after {
-					bottom: _theme('spacings.smallest') * -1;
+					bottom: _theme('spacings.smaller') * -1;
 					left: .95rem; // magic number
 					top: 2.5rem;
 				}
 	
 				&[aria-current="step"] {
 					&::after {
-						top: _theme("spacings.bigger");
+						top: 2.5rem;
 					}
 				}
 			}
-			.timeline-step-title {
-				margin-left: -2.5rem;
+			.timeline-step-description {
+				padding-left: 2.5rem;
 			}
 		}
 	}
