@@ -1,66 +1,48 @@
-import hudson.Util;
+@Library('Lucca@v0.28.7') _
 
-properties([
-	disableConcurrentBuilds(),
-])
+import hudson.Util
+import fr.lucca.CI
 
-node {
+ciBuildProperties script:this
+
+node(label: CI.getSelectedNode(script:this)) {
+	notifyStartStats()
 
 	def projectTechnicalName = 'lucca-front'
 	def repoName = "lucca-front"
 
 	def branchName = env.BRANCH_NAME;
 
-	def isPR = false
-	def isMaster = false
-	def isRc = false
+	def isPR = env.BRANCH_NAME ==~ /^PR-\d*/
+	def isMaster = env.BRANCH_NAME == "master"
+	def isRc = env.BRANCH_NAME == "rc"
 	def prNumber = 0
 
-	if(env.BRANCH_NAME == "master") {
-		isMaster = true
-	}
-	if(env.BRANCH_NAME == "rc") {
-		isRc = true
-	}
-	if(env.BRANCH_NAME ==~ /^PR-\d*/) {
-		isPR = true
-		prNumber = env.BRANCH_NAME.substring(3)
-	}
+	cleanJenkins()
 
-	def releaseRegexPattern = /^v\d+\.\d+\.\d+$/
-	def preReleaseRegexPattern = /^v\d+\.\d+\.\d+-\w*(\.\d+)?$/
-	def isRelease = env.BRANCH_NAME ==~ releaseRegexPattern
-	def isPreRelease = env.BRANCH_NAME ==~ preReleaseRegexPattern
+	def scmVars = null
 
-	def isResultSuccessful = true
 	try {
 		timeout(time: 15, unit: 'MINUTES') {
-
-			def scmVars = null
-
-			stage('Cleanup') {
+			loggableStage('Cleanup') {
 				// storybook static
-				if(fileExists('storybook')) {
+				if (fileExists('storybook')) {
 					dir('storybook') {
 						deleteDir()
 					}
 				}
 			}
 
-			stage('Prepare') {
+			loggableStage('Checkout') {
 				scmVars = checkout scm
-
-				bat "volta --version"
-				bat "node --version"
-				bat "npm --version"
 			}
 
-			stage('Restore') {
-				bat "npm ci"
+			loggableStage('Restore') {
+				npmCi()
 			}
 
 			if (!isPR) {
-				stage('Qualif') {
+				loggableStage('Qualif') {
 					// it must be buildable
 					bat "npm run build"
 					// it must break no test
@@ -71,13 +53,14 @@ node {
 			}
 
 			if (isPR || isRc || isMaster) {
-				stage('Deploy') {
+				loggableStage('Deploy') {
 					echo "deploying ${branchName}"
 					bat "npm run compodoc -- -p ./tsconfig.doc.json -e json -d .storybook"
 					bat "npm run build-storybook -- -o \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
 				}
 
 				if (isPR) {
+					prNumber = env.BRANCH_NAME.substring(3)
 					// post PR comment
 					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
 					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
@@ -89,39 +72,18 @@ node {
 				}
 			}
 
-
-
-			if (isRelease || isPreRelease) {
-				stage('Publish') {
-					def tag = "latest"
-					def version = env.BRANCH_NAME
-					if (isPreRelease) {
-						tag = "next"
-					}
-
-					bat "npm version ${version} --prefix dist/icons"
-					bat "npm version ${version} --prefix dist/scss"
-					bat "npm version ${version} --prefix dist/ng"
-
-					bat "npm publish --tag ${tag} --folder dist/icons"
-					bat "npm publish --tag ${tag} --folder dist/scss"
-					bat "npm publish --tag ${tag} --folder dist/ng"
+			if (isRelease) {
+				loggableStage('Publish') {
+					publishNpmOnReleaseTag(publishFolder: 'dist/icons')
+					publishNpmOnReleaseTag(publishFolder: 'dist/scss')
+					publishNpmOnReleaseTag(publishFolder: 'dist/ng')
 				}
 			}
 		}
 	} catch(err) {
-		stage('Error') {
-			println err
-		}
-		isResultSuccessful = false
+		println err
 		currentBuild.result = 'failure'
-	} finally {
-		def color = "good"
-		def endMessage = "Succès"
-
-		if(!isResultSuccessful) {
-			color = "danger"
-			endMessage = "Erreur"
-		}
 	}
+
+	notifyEndStats()
 }
