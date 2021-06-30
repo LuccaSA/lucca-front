@@ -16,7 +16,7 @@ node(label: CI.getSelectedNode(script:this)) {
 	def isPR = env.BRANCH_NAME ==~ /^PR-\d*/
 	def isMaster = env.BRANCH_NAME == "master"
 	def isRc = env.BRANCH_NAME == "rc"
-	def prNumber = 0
+	def prNumber = env.CHANGE_ID
 
 	cleanJenkins()
 
@@ -60,7 +60,6 @@ node(label: CI.getSelectedNode(script:this)) {
 				}
 
 				if (isPR) {
-					prNumber = env.BRANCH_NAME.substring(3)
 					// post PR comment
 					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
 					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
