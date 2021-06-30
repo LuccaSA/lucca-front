@@ -69,7 +69,6 @@ $commons: (
 		frontground: _color("primary", "color"),
 		speed: 600ms,
 	),
-	padding: 1.5rem 2.5rem 0 2.5rem,
 );
 
 $theme: _set($theme, "commons", $commons);

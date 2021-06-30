@@ -1,23 +1,20 @@
 .page-header {
 	@include elevate(1);
-	padding: _theme('commons.padding');
-	padding-bottom: _theme('spacings.standard');
+	padding: _theme('spacings.standard') 2.5rem;
 	background-color: _color('white');
+
+	&.mod-withMenu {
+		padding-bottom: 0;
+	}
+
+	.breadcrumbs {
+		margin-bottom: 0;
+	}
 
 	.menu {
 		&::after {
 			display: none;
 		}
-	}
-
-	&.mod-withBreadcrumbs {
-		.breadcrumbs {
-			margin-bottom: 0;
-		}
-	}
-
-	&.mod-withMenu {
-		padding: _theme('commons.padding');
 	}
 }
 
