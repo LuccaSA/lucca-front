@@ -83,7 +83,7 @@ node {
 					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 						powershell """
 							[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-							Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"="jenkins auto deploy ${deployUrl}"}) -UseBasicParsing
+							Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"=":woman_cook: ${deployUrl}"}) -UseBasicParsing
 						"""
 					}
 				}
