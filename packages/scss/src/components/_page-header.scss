@@ -1,18 +1,14 @@
 .pageHeader {
 	@include elevate(1);
-	padding: 2.5rem 2.5rem _theme('spacings.standard');
+	padding: _theme('spacings.standard') 2.5rem;
 	background-color: _color('white');
 
 	&.mod-withMenu {
 		padding-bottom: 0;
 	}
 
-	&.mod-withBreadcrumbs {
-		padding-top: _theme('spacings.small');
-
-		.breadcrumbs {
-			margin-bottom: 0;
-		}
+	.breadcrumbs {
+		margin-bottom: 0;
 	}
 
 	.menu {
