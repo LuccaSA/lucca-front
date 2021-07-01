@@ -1,4 +1,4 @@
-.page-header {
+.pageHeader {
 	@include elevate(1);
 	padding: _theme('spacings.standard') 2.5rem;
 	background-color: _color('white');
@@ -18,27 +18,27 @@
 	}
 }
 
-.page-header-content {
+.pageHeader-content {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
 	flex-wrap: wrap;
 }
 
-.page-header-content-title,
-.page-header-content-actions {
+.pageHeader-content-title,
+.pageHeader-content-actions {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 }
 
-.page-header-content-actions {
+.pageHeader-content-actions {
 	& > *:not(:last-child){
 		margin-right: _theme('spacings.small');
 	}
 }
 
-.page-header-description {
+.pageHeader-description {
 	max-width: 50rem;
 	margin-top: _theme('spacings.smaller');
 	color: _color('grey', '600');
