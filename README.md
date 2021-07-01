@@ -152,30 +152,34 @@ You can set up custom breakpoints values in breakpoints.override.scss
 
 ```
 $breakpoints: (
-	"sm": (
-		"breakAt": 576px,
-		"spacing": 20px,
+	xxxs: (
+		"breakAt": 320px,
 	),
-	"md": (
-		"breakAt": 768px,
-		"spacing": 30px,
+	xxs: (
+		"breakAt": 480px,
 	),
-	"lg": (
-		"breakAt": 992px,
-		"spacing": 40px,
+	xs: (
+		"breakAt": 640px,
 	),
-	"xl": (
-		"breakAt": 1200px,
-		"spacing": 60px,
+	s: (
+		"breakAt": 800px,
 	),
-	"xxl": (
-		"breakAt": 1350px,
-		"spacing": 60px,
+	m: (
+		"breakAt": 1024px,
 	),
-	"xxxl": (
-		"breakAt": 1500px,
-		"spacing": 60px,
+	l: (
+		"breakAt": 1280px,
+	),
+	xl: (
+		"breakAt": 1366px,
+	),
+	xxl: (
+		"breakAt": 1600px,
+	),
+	xxxl: (
+		"breakAt": 1920px,
 	)
 );
+
 $theme: _set($theme, "breakpoints", $breakpoints);
 ```
