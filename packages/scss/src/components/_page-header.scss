@@ -39,7 +39,7 @@
 }
 
 .pageHeader-description {
-	max-width: 50%;
+	max-width: _theme('components.pageHeader.description.max-width');
 	margin-top: _theme('spacings.smaller');
 	color: _color('grey', '600');
 }
