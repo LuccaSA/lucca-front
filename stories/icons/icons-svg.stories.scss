@@ -1,0 +1,40 @@
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: -0.25rem;
+}
+
+li {
+    min-width: 100px;
+    width: calc(100% / 15);
+    flex-grow: 1;
+    padding: 0.25rem;
+
+    &:empty {
+        padding: 0;
+    }
+}
+
+svg {
+    width: 100%;
+    display: block;
+}
+
+pre {
+    margin: 0;
+    padding-bottom: 1rem;
+    overflow: auto;
+    display: block;
+    width: 100%;
+    font-size: 0.625rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.rounded {
+    svg {
+        border-radius: 50%;
+    }
+}

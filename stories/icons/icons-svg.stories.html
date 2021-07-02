@@ -1,0 +1,12 @@
+
+
+
+<ul *ngIf="icons" [class.rounded]="rounded" [attr.style]="'fill:' + fill">
+  <li *ngFor="let icon of icons;">
+    <svg aria-hidden="true" focusable="false" width="100" height="100" [attr.style]="'background-color:' + background">
+      <use [attr.xlink:href]="'#lucca-icon-' + icon.properties.name"></use>
+    </svg>
+    <pre>{{ icon.properties.name }}</pre>
+  </li>
+  <li aria-hidden="true" *ngFor="let i of [].constructor(15 - 1)"></li>
+</ul>
