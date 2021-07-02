@@ -68,6 +68,7 @@
 	margin: 0;
 	font-size: _theme("sizes.standard.font-size");
 	line-height: _theme("sizes.standard.line-height");
+	min-width: _theme("spacings.standard");
 
 	&::after {
 		content: "";
@@ -113,6 +114,7 @@
 	&.mod-big {
 		.timeline-step-title {
 			padding-left: 2.5rem;
+			min-width: _theme("spacings.big");
 
 			&::after {
 				width: 1.5rem;
@@ -155,6 +157,8 @@
 
 		.timeline-step-title {
 			margin: _theme("spacings.smaller") 0;
+			min-height: _theme("spacings.standard");
+			min-width: 0;
 		}
 
 		&:not(.mod-small):not(.mod-big) {
@@ -204,6 +208,22 @@
 			}
 			.timeline-step-description {
 				padding-left: 2.5rem;
+				min-height: _theme("spacings.big");
+			}
+		}
+
+		.timeline-stepAddBetweenStep {
+			min-height: 3rem;
+		}
+
+		&.mod-progress {
+			.timeline-step[aria-current="step"]{
+				$progress : var(--progress);
+	
+				&::after {
+					background: linear-gradient(180deg, _color('primary', 700) $progress, _color('grey', 200) $progress);
+				}
+	
 			}
 		}
 	}
@@ -227,12 +247,23 @@
 			}
 		}
 	}
+
+	&.mod-checkedPastStep {
+		.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) {
+			.timeline-step-title {
+				&::after {
+					@include makeIcon("tick");
+					display: flex;
+				}
+			}
+		}
+	}
 	
-	&.mod-add {
+	&.mod-addStep {
 		.timeline-step {
 			&:nth-last-child(2)::after {
-				background-color: rgba(_color("white"), 0);
-				background-image: linear-gradient(90deg, rgba(_color("white"), 0) 25%, _color('grey', 200) 25%, _color('grey', 200) 50%, rgba(_color("white"), 0) 50%, rgba(_color("white"), 0) 75%, _color('grey', 200) 75%, _color('grey', 200) 100%);
+				background-color: transparent;
+				background-image: linear-gradient(90deg, transparent 25%, _color('grey', 200) 25%, _color('grey', 200) 50%, transparent 50%, transparent 75%, _color('grey', 200) 75%, _color('grey', 200) 100%);
 				background-size: _theme('spacings.smaller') _theme('spacings.smaller');
 			}
 	
@@ -249,77 +280,35 @@
 		&.mod-vertical {
 			.timeline-step {
 				&:nth-last-child(2)::after {
-					background-color: rgba(_color("white"), 0);
-					background-image: linear-gradient(0deg, rgba(_color("white"), 0) 25%, _color('grey', 200) 25%, _color('grey', 200) 50%, rgba(_color("white"), 0) 50%, rgba(_color("white"), 0) 75%, _color('grey', 200) 75%, _color('grey', 200) 100%);
+					background-color: transparent;
+					background-image: linear-gradient(0deg, transparent 25%, _color('grey', 200) 25%, _color('grey', 200) 50%, transparent 50%, transparent 75%, _color('grey', 200) 75%, _color('grey', 200) 100%);
 					background-size: _theme('spacings.smaller') _theme('spacings.smaller');
 				}
 			}
 		}
 	}
-}
 
+	&.mod-addBetweenStep {
+		.timeline-stepAddBetweenStep-title {
+			@include buttonReset;
 
-.timeline-step-addLast {
-	position: relative;
-
-	&::after {
-		content: "";
-		position: absolute;
-		right: 100%;
-		top: 0;
-		bottom: 0;
-		width: _theme("spacings.big");
-		z-index: 1;
-	}
-}
-
-.timeline-step-addBetween {
-	.hr {
-		opacity: .5;
-	}
-}
-
-.timeline-step-addBetween-action {
-	@include buttonReset;
-
-	padding-top: _theme("spacings.small");
-	padding-bottom: _theme("spacings.small");
-	position: relative;
-	margin-left: (_theme("spacings.standard", true) + _theme("spacings.smallest", true)) * -1;
-	padding-left: _theme("spacings.standard", true) + _theme("spacings.smallest", true);
-	width: calc(100% + #{_theme("spacings.standard", true) + _theme("spacings.smallest", true)});
-	outline: none;
-
-	&:hover,
-	&:focus {
-		.hr {
-			opacity: 1;
-		}
-	}
-
-	&:not(:hover) {
-		&:not(:focus) {
-			.timeline-step-addBetween-action-icon {
-				opacity: 0;
+			width: auto;
+		
+			&::after {
+				@include makeIcon("plus");
+				display: flex;
 			}
 		}
 	}
-}
 
-.timeline-step-addBetween-action-icon {
-	position: absolute;
-	left: 0;
-	top: _theme("spacings.smallest");
-	z-index: 1;
-	border-radius: 50%;
-	background-color: currentColor;
-	box-shadow: 0 0 0 _theme("spacings.smallest") _color("white");
-	height: _theme("spacings.standard");
-	width: _theme("spacings.standard");
-	text-align: center;
-	transition: opacity _theme("commons.animations.durations.fast");
+	&.mod-progress {
+		.timeline-step[aria-current="step"]{
+			$progress : var(--progress);
 
-	.lucca-icon {
-		color: _color("white");
+			&::after {
+				background: linear-gradient(90deg, _color('primary', 700) $progress, _color('grey', 200) $progress);
+			}
+
+		}
 	}
 }
