@@ -13,6 +13,14 @@ $table: (
 	card: (
 		padding: 1.5rem,
 	),
+	fixed-column: (
+		min-col-width: 2,
+		max-col-width: 20,
+		sticky-shadow: (
+			width: .625rem,
+			color: _color("grey","800")
+		)
+	)
 );
 
 $theme: _set($theme, "components.table", $table);
