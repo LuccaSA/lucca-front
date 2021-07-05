@@ -610,10 +610,10 @@
 				background-color: transparent;
 				z-index: 1;
 				&[class*="mod-columnSticky-left"] {
-					background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color"), .75), transparentize(_component("table.fixed-column.sticky-shadow.color"), 1));
+					background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
 				}
 				&[class*="mod-columnSticky-right"] {
-					background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color"), .75), transparentize(_component("table.fixed-column.sticky-shadow.color"), 1));
+					background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
 				}
 			}
 			//mask for left stickies columns drop shadow when there is no scroll
