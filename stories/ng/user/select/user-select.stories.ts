@@ -9,11 +9,12 @@ import { bob } from '../user.mocks';
 	selector: 'user-select-stories',
 	template: `
 <label class="textfield">
-	<lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
+	<lu-user-select class="textfield-input" [ngModel]="model" [filters]="filters"></lu-user-select>
 </label>
 `,
 }) class UserSelectStory {
 	@Input() model: string;
+	filters = ['id=notequal,6,7,8,9']
 }
 
 export default {
