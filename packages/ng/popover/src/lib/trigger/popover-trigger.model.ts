@@ -94,7 +94,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	get triggerEvent() { return this._triggerEvent; }
 	set triggerEvent(te: LuPopoverTriggerEvent) {
 		this._triggerEvent = te;
-		if (te = 'hover') {
+		if (te === 'hover' || te === 'focus') {
 			if (this._hoveredSubscription) {
 				this._hoveredSubscription.unsubscribe();
 			}
@@ -142,23 +142,23 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	}
 
 	onMouseEnter() {
-		if (this.triggerEvent === 'hover') {
+		if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 			this._hovered$.next(true);
 		}
 	}
 
 	onMouseLeave() {
-		if (this.triggerEvent === 'hover') {
+		if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 			this._hovered$.next(false);
 		}
 	}
 	onFocus() {
-		if (this.triggerEvent === 'focus') {
+		if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 			this.openPopover();
 		}
 	}
 	onBlur() {
-		if (this.triggerEvent === 'focus') {
+		if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 			this.closePopover();
 		}
 	}
@@ -242,7 +242,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _subscribeToPanelEvents(): void {
 		if (this._overlayRef) {
 			this._panelEventsSubscriptions = new Subscription();
-			if (this.triggerEvent === 'hover') {
+			if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 
 				this._panelEventsSubscriptions.add(
 					this.panel.hovered
