@@ -18,4 +18,4 @@ export default {
 
 const template: Story<LinksStory> = () => ({});
 
-export const all = template.bind({});
+export const basic = template.bind({});

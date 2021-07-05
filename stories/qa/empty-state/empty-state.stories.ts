@@ -7,7 +7,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 }) class EmptyStateStory {}
 
 export default {
-  title: 'QA/EmptyState',
+  title: 'QA/Empty State',
   component: EmptyStateStory,
 	decorators: [
 		moduleMetadata({

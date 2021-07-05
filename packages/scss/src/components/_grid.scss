@@ -28,7 +28,7 @@
 }
 
 @each $bp-name, $bp-obj in $breakpoints {
-	@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+	@media (min-width: map-get($bp-obj, breakAt)) {
 		.grid-#{$bp-name} {
 			flex-basis: 0;
 			flex-grow: 1;
@@ -58,7 +58,7 @@
 	}
 
 	@each $bp-name, $bp-obj in $breakpoints {
-		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+		@media (min-width: map-get($bp-obj, breakAt)) {
 			&.mod-#{$bp-name}Start {
 				justify-content: flex-start;
 				text-align: start;
@@ -101,7 +101,7 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .grid {
 	@each $bp-name, $bp-obj in $breakpoints {
-		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
+		@media (min-width: map-get($bp-obj, breakAt)) {
 			.u-#{$bp-name}First {
 				order: -1;
 			}

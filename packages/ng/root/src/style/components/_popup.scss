@@ -102,7 +102,7 @@
 	}
 }
 
-@include media_smaller_than("sm") {
+@include media_smaller_than("xxs") {
 	.lu-popup-panel {
 		border-radius: 0;
 		max-width: none;

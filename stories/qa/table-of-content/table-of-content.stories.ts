@@ -7,7 +7,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 }) class TableOfContentStory {}
 
 export default {
-  title: 'QA/TableOfContent',
+  title: 'QA/Table Of Content',
   component: TableOfContentStory,
 	decorators: [
 		moduleMetadata({
@@ -18,4 +18,4 @@ export default {
 
 const template: Story<TableOfContentStory> = () => ({});
 
-export const all = template.bind({});
+export const basic = template.bind({});
