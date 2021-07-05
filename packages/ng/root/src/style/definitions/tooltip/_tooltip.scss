@@ -1,8 +1,8 @@
 @mixin tooltipStyle {
 	.lu-tooltip-panel {
 		display: block;
-		background: _component("tooltip.background", true);
-		background: _component("tooltip.background");
+		background: _component("tooltip.background-color", true);
+		background: _component("tooltip.background-color");
 		border-radius: _theme("commons.border.radius", true);
 		border-radius: _theme("commons.border.radius");
 		color: _component("tooltip.color", true);

@@ -54,7 +54,8 @@
 <!-- States -->
 <section class="contentSection">
 	<h2>States</h2>
-	<button class="button is-loading">Loading</button>
+	<!-- UI-Diff currently doesn't support css animations -->
+	<!-- <button class="button is-loading">Loading</button> -->
 	<button class="button is-success">Success</button>
 	<button class="button is-error">Success</button>
 </section>
@@ -92,3 +93,6 @@
 		<button class="button mod-more"></button>
 	</div>
 </section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
