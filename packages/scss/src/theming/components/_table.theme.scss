@@ -18,7 +18,7 @@ $table: (
 		max-col-width: 20,
 		sticky-shadow: (
 			width: .625rem,
-			color: _color("grey","800")
+			color: _color("grey", "800", true)
 		)
 	)
 );
