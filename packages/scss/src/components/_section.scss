@@ -3,12 +3,12 @@
 	border-bottom: 1px solid #E5E5E5;
 	padding: 3rem;
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
 
-	@include media_smaller_than("sm") {
+	@include media_smaller_than("xs") {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
