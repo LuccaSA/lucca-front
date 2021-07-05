@@ -566,7 +566,7 @@
 
 .table-head-row-cell,
 .table-body-row-cell {
-	@for $i from  _component("table.fixed-column.min-col-width") through _component("table.fixed-column.max-col-width") {
+	@for $i from  _component("table.fixed-column.min-col-width", true) through _component("table.fixed-column.max-col-width", true) {
 		&.mod-layoutFixed-#{$i} {
 			min-width: $i * 1rem;
 			width: $i * 1rem;
@@ -575,7 +575,7 @@
 	}
 	@each $bp-name, $bp-obj in _getMap("breakpoints") {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			@for $i from _component("table.fixed-column.min-col-width") through _component("table.fixed-column.max-col-width") {
+			@for $i from _component("table.fixed-column.min-col-width", true) through _component("table.fixed-column.max-col-width", true) {
 				&.mod-layoutFixed-#{$bp-name}#{$i} {
 					min-width: $i * 1rem;
 					width: $i * 1rem;
