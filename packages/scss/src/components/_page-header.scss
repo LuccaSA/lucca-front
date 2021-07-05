@@ -1,0 +1,45 @@
+.pageHeader {
+	@include elevate(1);
+	padding: _theme('spacings.standard') 2.5rem;
+	background-color: _color('white');
+
+	&.mod-withMenu {
+		padding-bottom: 0;
+	}
+
+	.breadcrumbs {
+		margin-bottom: 0;
+	}
+
+	.menu {
+		&::after {
+			display: none;
+		}
+	}
+}
+
+.pageHeader-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.pageHeader-content-title,
+.pageHeader-content-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.pageHeader-content-actions {
+	& > *:not(:last-child){
+		margin-right: _theme('spacings.small');
+	}
+}
+
+.pageHeader-description {
+	max-width: _theme('components.pageHeader.description.max-width');
+	margin-top: _theme('spacings.smaller');
+	color: _color('grey', '600');
+}

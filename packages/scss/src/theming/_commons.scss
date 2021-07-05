@@ -67,8 +67,8 @@ $commons: (
 	loading: (
 		background: _color("primary", "200"),
 		frontground: _color("primary", "color"),
-		speed: 600ms,
-	)
+		speed: 600ms
+	),
 );
 
 $theme: _set($theme, "commons", $commons);

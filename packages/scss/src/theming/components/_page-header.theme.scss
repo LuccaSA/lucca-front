@@ -1,0 +1,7 @@
+$pageHeader: (
+	description: (
+		max-width: 50rem
+	)
+);
+
+$theme: _set($theme, "components.pageHeader", $pageHeader);
