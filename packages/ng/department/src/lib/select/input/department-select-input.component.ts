@@ -5,17 +5,15 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	ViewChild,
 	Renderer2,
-	AfterContentInit,
 	Inject,
-	AfterViewInit
+	AfterViewInit,
+	Input
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ALuClearer, ILuClearer, ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
+import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ILuOptionPickerPanel } from '@lucca-front/ng/option';
 import { ILuDepartment } from '../../department.model';
 import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
@@ -39,6 +37,9 @@ export class LuDepartmentSelectInputComponent<D extends ILuDepartment = ILuDepar
 extends ALuSelectInputComponent<D, P>
 implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
+
+	@Input() appInstanceId: number | string;
+	@Input() operations: number[];
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,

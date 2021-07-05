@@ -4,7 +4,7 @@ import { ILuTree } from '@lucca-front/ng/core';
 import { ILuDepartment } from '../../department.model';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '@lucca-front/ng/option';
-import { ALuDepartmentService, LuDepartmentService, ILuDepartmentService } from '../../service/index';
+import { ALuDepartmentService, LuDepartmentV3Service, ILuDepartmentService } from '../../service/index';
 
 @Component({
 	selector: 'lu-department-feeder',
@@ -19,7 +19,7 @@ import { ALuDepartmentService, LuDepartmentService, ILuDepartmentService } from 
 		},
 		{
 			provide: ALuDepartmentService,
-			useClass: LuDepartmentService,
+			useClass: LuDepartmentV3Service,
 		},
 		{
 			provide: ALuOnOpenSubscriber,
@@ -33,13 +33,17 @@ implements ILuTreeOptionOperator<ILuDepartment>, ILuOnOpenSubscriber {
 	inOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
-	protected _service: ILuDepartmentService;
+	protected _service: LuDepartmentV3Service;
+	
+	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
+	@Input() set operations(operations: number[]) { this._service.operations = operations; }
+
 	constructor(
 		@Inject(ALuDepartmentService) @Optional() @SkipSelf() hostService: ILuDepartmentService,
 		@Inject(ALuDepartmentService) @Self() selfService: ILuDepartmentService,
 	) {
 		super();
-		this._service = hostService || selfService;
+		this._service = (hostService || selfService) as LuDepartmentV3Service;
 		this.outOptions$ = this._out$.asObservable();
 	}
 	onOpen() {
