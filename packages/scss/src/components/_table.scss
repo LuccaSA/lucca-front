@@ -627,7 +627,7 @@
 					position: absolute;
 					top: 0;
 					bottom: 0;
-					left: _component("table.fixed-column.sticky-shadow.width") * -1;
+					left: _component("table.fixed-column.sticky-shadow.width", true) * -1;
 					z-index: 2;
 					background: _color("white");	
 				}
@@ -636,7 +636,7 @@
 			&:not([class*="mod-columnSticky"]) + .mod-columnSticky-shadowMask {
 				&::before {
 					left: auto;
-					right: _component("table.fixed-column.sticky-shadow.width") * -1;
+					right: _component("table.fixed-column.sticky-shadow.width", true) * -1;
 				}
 			}
 		}
@@ -660,7 +660,7 @@
 	&[class*="mod-columnSticky"] {
 		.table-head-row-cell,
 		.table-body-row-cell {
-			@for $i from 0 through _component("table.fixed-column.max-col-width") {
+			@for $i from 0 through _component("table.fixed-column.max-col-width", true) {
 				&.mod-columnSticky-leftOffset#{$i} {
 					left: $i * 1rem;
 				}
