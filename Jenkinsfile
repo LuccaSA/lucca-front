@@ -23,7 +23,7 @@ node(label: CI.getSelectedNode(script:this)) {
 	def scmVars = null
 
 	try {
-		timeout(time: 15, unit: 'MINUTES') {
+		timeout(time: 10, unit: 'MINUTES') {
 			loggableStage('Cleanup') {
 				// storybook static
 				if (fileExists('storybook')) {
