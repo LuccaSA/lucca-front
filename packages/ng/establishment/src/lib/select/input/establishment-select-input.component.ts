@@ -75,16 +75,18 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 	}
 
 	ngOnInit() {
-		combineLatest([
-			this._legalUnitService.count(),
-			this._establishmentService.count()
-		])
-			.subscribe(([luCount, establishmentCount]) => {
-				this.groupByLu =
-					luCount > 1 &&
-					establishmentCount > 1 &&
-					luCount !== establishmentCount;
-			});
+		this._subs.add(
+			combineLatest([
+				this._legalUnitService.count(),
+				this._establishmentService.count()
+			])
+				.subscribe(([luCount, establishmentCount]) => {
+					this.groupByLu =
+						luCount > 1 &&
+						establishmentCount > 1 &&
+						luCount !== establishmentCount;
+				})
+		);
 	}
 
 	onIsSearchingChanged(isSearching: boolean) {
