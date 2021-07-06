@@ -55,4 +55,11 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 			map(res => res.items),
 		);
 	}
+	count(): Observable<number> {
+		const query = [...this.filters, 'fields.root=count', 'limit=0'].filter(f => !!f);
+		const url = [this._api, query.join('&')].join('?');
+		return this._http.get<{ count: number }>(url).pipe(
+			map(res => res.count)
+		);
+	}
 }
