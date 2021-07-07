@@ -123,7 +123,6 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
 		this.destroyPopover();
 		this._subs.unsubscribe();
 		this._cleanUpSubscriptions();
-
 	}
 
 	protected _getOverlayConfig(): OverlayConfig {
