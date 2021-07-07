@@ -11,7 +11,7 @@ $commons: (
 	),
 	divider: (
 		width: 1px,
-		color: #D6D6D6,
+		color: _color("grey", "200"),
 	),
 	disabled: (
 		opacity: .4,
@@ -63,12 +63,12 @@ $commons: (
 	banner-height: 50px,
 	transition: unquote("all 150ms ease"),
 	focused: 0 0 1px 2px #A6C7FF,
-	mobile: "md",
+	mobile: "s",
 	loading: (
 		background: _color("primary", "200"),
 		frontground: _color("primary", "color"),
-		speed: 600ms,
-	)
+		speed: 600ms
+	),
 );
 
 $theme: _set($theme, "commons", $commons);

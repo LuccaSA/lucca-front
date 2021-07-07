@@ -2,14 +2,14 @@
 	min-height: 100vh;
 	display: grid;
 
-	@include media_larger_than("xl") {
+	@include media_larger_than("l") {
 		grid-template-columns: _theme("components.navSide.compact.width") 1fr _theme("components.aside.width");
 		grid-template-rows: _theme("commons.banner-height") 1fr;
 		grid-template-areas: "banner banner banner"
 			"navside content aside";
 	}
 
-	@include media_smaller_than("xl") {
+	@include media_smaller_than("l") {
 		grid-template-columns: _theme("components.navSide.compact.width") 1fr;
 		grid-template-rows: _theme("commons.banner-height") 1fr auto;
 		grid-template-areas: "banner banner"
@@ -17,7 +17,7 @@
 		"navside aside";
 	}
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		grid-template-columns: 1fr;
 		grid-template-rows: _theme("commons.banner-height") auto 1fr auto;
 		grid-template-areas: "banner"
@@ -28,7 +28,7 @@
 }
 
 .layout-content-container {
-	max-width: calc(#{_theme("breakpoints.lg.breakAt", true)} / 16px * 1rem);
+	max-width: calc(#{_theme("breakpoints.m.breakAt", true)} / 16px * 1rem);
 }
 
 .layout-banner {
@@ -47,7 +47,7 @@
 	display: flex;
 	flex-direction: column;
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		position: static;
 	}
 }
@@ -57,7 +57,7 @@
 	position: sticky;
 	top: _theme("commons.banner-height");
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		position: static;
 	}
 }
@@ -75,7 +75,7 @@
 	position: sticky;
 	bottom: 0;
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		position: static;
 	}
 }
@@ -88,13 +88,13 @@
 	position: sticky;
 	top: _theme("commons.banner-height");
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		min-height: 0;
 	}
 }
 
 .layout-aside {
-	@include media_smaller_than("xl") {
+	@include media_smaller_than("l") {
 		min-height: 0;
 		position: static;
 	}
@@ -111,7 +111,7 @@
 	max-height: calc(100vh - #{_theme("commons.banner-height")});
 
 	&.is-active {
-		@include media_smaller_than("md") {
+		@include media_smaller_than("s") {
 			position: fixed;
 			top: _theme("commons.banner-height");
 			height: calc(100vh - #{_theme("commons.banner-height")});
@@ -132,7 +132,7 @@
 	bottom: 0;
 	background-color: _color("white");
 
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		margin-top: 0;
 		position: static;
 	}
@@ -149,7 +149,7 @@
 	position: sticky;
 	top: 0;
 
-	@include media_larger_than("md") {
+	@include media_larger_than("s") {
 		display: none;
 	}
 }
@@ -163,7 +163,7 @@
 // the contents of the navside
 .layout-navside-content {
 	// if you are on the move
-	@include media_smaller_than("md") {
+	@include media_smaller_than("s") {
 		// if it is preceded by a menu activation button that is not activated
 		.layout-navside-toggle[aria-expanded="false"] ~ & {
 			// is hidden
@@ -212,7 +212,7 @@
 
 	&.mod-asideBefore {
 		&:not(.mod-asideRemoved) {
-			@include media_larger_than("xl") {
+			@include media_larger_than("l") {
 				grid-template-columns: _theme("components.navSide.width") _theme("components.aside.width") 1fr;
 				grid-template-areas: "banner	banner banner"
 					"navside aside	content";
@@ -268,15 +268,15 @@
 
 	&.mod-navsideLarge {
 
-		@include media_larger_than("xl") {
+		@include media_larger_than("l") {
 			grid-template-columns: _theme("components.navSide.width") 1fr _theme("components.aside.width");
 		}
 
-		@include media_smaller_than("xl") {
+		@include media_smaller_than("l") {
 			grid-template-columns: _theme("components.navSide.width") 1fr;
 		}
 
-		@include media_smaller_than("md") {
+		@include media_smaller_than("s") {
 			grid-template-columns: 1fr;
 		}
 	}

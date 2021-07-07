@@ -23,6 +23,7 @@ demo/ng
 
 # storybook
 .storybook/documentation.json
+storybook-static
 
 # packages stuff
 packages/*/package-lock.json

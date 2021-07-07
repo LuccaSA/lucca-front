@@ -40,7 +40,7 @@
 	min-width: 350px;
 }
 
-@include media_smaller_than("md") {
+@include media_smaller_than("s") {
 	.errorPage {
 		overflow-y: auto;
 	}

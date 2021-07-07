@@ -10,10 +10,10 @@
 <ul class="dragDrop-list list" cdkDropList (cdkDropListDropped)="drop($event)">
 	<li class="dragDrop-item list-item"*ngFor="let movie of movies" cdkDrag>
 		<div class="dragDrop-item-content list-item-content grid">
-			<div class="grid-md1">
+			<div class="grid-s1">
 				<i class="column-drag lucca-icon">drag</i>
 			</div>
-			<div class="grid-md">
+			<div class="grid-s">
 				<span class="column-description">{{movie}}</span>
 			</div>
 		</div>

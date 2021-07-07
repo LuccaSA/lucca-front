@@ -30,13 +30,12 @@
 			[filters]="filters"
 			[appInstanceId]="appInstanceId"
 			[operations]="operations"
-		>
-		</lu-establishment-select-all>
+		></lu-establishment-select-all>
 	</header>
 
 	<ng-template luForLegalUnits let-group>
 		<div class="optionGroup">
-			<ng-container *ngIf="!isSearching">
+			<ng-container *ngIf="groupByLu && !isSearching">
 				<button
 					*ngIf="multiple; else singleViewGroup"
 					class="optionGroupName button mod-link mod-block"
@@ -58,7 +57,7 @@
 				class="establishmentOption">
 				<ng-container *ngIf="isSearching; else emptySearch">
 					<span class="u-displayBlock">{{establishment.name}}</span>
-					<span class="u-displayBlock u-textLight u-textSmall">{{ group.key.name }}</span>
+					<span *ngIf="groupByLu" class="u-displayBlock u-textLight u-textSmall">{{ group.key.name }}</span>
 				</ng-container>
 				<ng-template #emptySearch>
 					<span>{{establishment.name}}</span>

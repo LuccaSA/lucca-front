@@ -1,0 +1,55 @@
+<h1>Pagination</h1>
+
+<section class="contentSection">
+    <h2>Pagination</h2>
+    <nav class="pagination" role="navigation" aria-labelledby="pagination-count">
+        <div id="pagination-count" class="pagination-count">
+            <span class="pagination-count-current">
+                <span class="u-mask">Results from </span>
+                1<span aria-hidden="true"> – </span>
+                <span class="u-mask">to </span>10
+            </span>
+            <span class="pagination-count-separator"> of </span>
+            <span class="pagination-count-total">
+                50<span class="u-mask"> pages</span>
+            </span>
+        </div>
+        <div class="pagination-scrolling">
+            <button type="button" class="actionIcon" disabled>
+                <span aria-hidden="true" class="lucca-icon icon-arrowWest"></span>
+                <span class="u-mask">Previous</span>
+            </button>
+            <button type="button" class="actionIcon">
+                <span aria-hidden="true" class="lucca-icon icon-arrowEast"></span>
+                <span class="u-mask">Next</span>
+            </button>
+        </div>
+    </nav>
+</section>
+
+<section>
+    <h2>Per page</h2>
+    <nav class="pagination" role="navigation" aria-labelledby="pagination-navigation">
+        <ul id="pagination-navigation" class="pagination-navigation">
+            <li class="pagination-navigation-item is-active" aria-current="page"><span class="u-mask">You’re on page </span>1</li>
+            <li class="pagination-navigation-item"><a href="#">2</a></li>
+            <li class="pagination-navigation-item"><a href="#">3</a></li>
+            <li class="pagination-navigation-item is-ellipsis" aria-hidden="true"></li>
+            <li class="pagination-navigation-item"><a href="#">49</a></li>
+            <li class="pagination-navigation-item"><a href="#">50</a></li>
+        </ul>
+        <div class="pagination-scrolling">
+            <button type="button" class="actionIcon" disabled>
+                <span aria-hidden="true" class="lucca-icon icon-arrowWest"></span>
+                <span class="u-mask">Previous</span>
+            </button>
+            <button type="button" class="actionIcon">
+                <span aria-hidden="true" class="lucca-icon icon-arrowEast"></span>
+                <span class="u-mask">Next</span>
+            </button>
+        </div>
+    </nav>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

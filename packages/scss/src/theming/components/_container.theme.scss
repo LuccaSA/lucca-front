@@ -1,7 +1,6 @@
 $container: (
-  margin-top: 3rem,
-  margin-bottom: 4rem,
-  max-width: _theme("breakpoints.xxxl.breakAt"),
-  min-width: _theme("breakpoints.sm.breakAt")
+  padding: 3.5rem,
+  max-width: _theme("breakpoints.xxl.breakAt"),
 );
+
 $theme: _set($theme, "components.container", $container);

@@ -23,7 +23,7 @@
 }
 
 .breadcrumbs-list-item-action {
-	color: _color("text.light");
+	color: _color("grey", "600");
 	transition: color _theme("commons.animations.durations.fast");
 	text-decoration: none;
 	margin: 0;
@@ -34,7 +34,7 @@
 
 	&:focus,
 	&:hover {
-		color: _color("text.default");
+		color: _color("grey", "800");
 	}
 }
 
@@ -51,7 +51,7 @@
 
 		&,
 		&:hover {
-			color: _color("text.light");
+			color: _color("grey", "600");
 		}
 	}
 }

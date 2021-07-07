@@ -261,7 +261,7 @@
 
 // MOD COMPACT (must be defined only for desktop)
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-@include media_larger_than("md") {
+@include media_larger_than("s") {
 	.navSide.mod-compact {
 		background-color: _component("navSide.compact-palette.bg-color");
 		text-align: center;

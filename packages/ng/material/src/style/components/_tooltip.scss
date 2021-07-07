@@ -1,7 +1,7 @@
 .mat-tooltip {
 	border-radius: _theme("commons.border.radius");
-	background-color: _theme("commons.overlays.background");
-	color: white;
+	background-color: _component("tooltip.background-color");
+	color: _component("tooltip.color");
 	font-size: _theme("sizes.smaller.font-size") !important;
 	margin: 0.5em !important;
 	padding: .25rem .5rem !important;

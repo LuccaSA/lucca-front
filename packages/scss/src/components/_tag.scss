@@ -18,7 +18,7 @@
 
 .tag {
 	@mixin tagColoring($palette) {
-		background-color: _color($palette, 50);
+		background-color: _color($palette, 200);
 		color: _color($palette, 800);
 
 		&.mod-clickable {
@@ -49,5 +49,10 @@
 		&:hover {
 			text-decoration: underline;
 		}
+	}
+	&.mod-outlined {
+		color: _color("grey","600");
+		border: _theme("commons.divider.width") solid _color("grey","300");
+		background-color: _color("white");
 	}
 }
