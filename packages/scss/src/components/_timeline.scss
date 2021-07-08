@@ -4,15 +4,6 @@
 	margin: _theme("spacings.small") 0;
 	display: flex;
 	align-items: center;
-
-	.gauge {
-		margin: 0 _theme("spacings.smaller");
-		flex-grow: 1;
-	}
-
-	.gauge-bar {
-		width: 100%;
-	}
 }
 
 .timeline-step {
@@ -20,54 +11,79 @@
 	display: flex;
 	align-items: center;
 
+	//Line
+	&::after {
+		content: '';
+		display: flex;
+		flex-grow: 1;  
+		height: 2px;
+		margin: _theme('spacings.smaller');
+		background-color: _color('primary', 200);
+		border-radius: 2px;
+	}
+
 	&:last-child {
 		flex-grow: 0;
-
-		.gauge {
-			display: none;
-		}
 	}
 
 	&[aria-current="step"] {
-		~ .timeline-step {
-			.timeline-step-title {
-				color: _color("primary", "600");
-			}
+		//Line
+		&::after {
+			background-color: _color('grey', 200);
+		}
 
-			.gauge-bar {
-				width: 0;
-				height: 0;
+		.timeline-step-title {
+			color: _color("primary", 700);
+	
+			&::after {
+				background-color: _color('primary', 700);
+				box-shadow: 0 0 0 _theme("spacings.smallest") _color('primary', 200);
+				color: _color('white');
+			}
+		}
+
+		~ .timeline-step {
+			//Line
+			&::after {
+				background-color: _color('grey', 200);
+			}
+			.timeline-step-title {
+				color: _color("grey", 600);
+
+				&::after {
+					background-color: _color('grey', 200);
+					color: _color('grey', 600);
+				}
 			}
 		}
 	}
 }
 
 .timeline-step-title {
-	padding-left: _theme("spacings.standard");
+	padding-left: _theme("spacings.big");
 	position: relative;
 	display: block;
+	color: _color('primary', 600);
 	font-weight: 400;
 	margin: 0;
 	font-size: _theme("sizes.standard.font-size");
 	line-height: _theme("sizes.standard.line-height");
+	min-width: _theme("spacings.standard");
 
-	&::before, &::after {
+	&::after {
 		content: "";
-		width: _theme("spacings.smaller");
-		height: _theme("spacings.smaller");
+		color: _color('primary', 700);
+		width: 1rem;
+		height: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		border-radius: 50%;
-		background-color: currentColor;
+		background-color: _color('primary', 300);
 		position: absolute;
 		left: _theme("spacings.smallest");
 		top: 50%;
 		transform: translateY(-50%);
-	}
-
-	&::before {
-		width: _theme("spacings.small");
-		height: _theme("spacings.small");
-		opacity: .25;
-		left: 0;
 	}
 }
 
@@ -81,214 +97,218 @@
 	}
 }
 
-.timeline.mod-vertical {
-	display: block;
 
-	.gauge-bar {
-		height: 100%;
-	}
-
-	.timeline-step-title {
-		margin: _theme("spacings.smaller") 0;
-		margin-left: _theme("spacings.standard", true) * -1;
-
-		&::before, &::after {
-			top: .6875rem; // magic number
-		}
-	}
-
-	.timeline-step {
-		margin: _theme("spacings.smaller") 0;
-		font-weight: 400;
-		display: block;
-		padding-left: _theme("spacings.standard");
-		position: relative;
-
-		.gauge {
-			position: absolute;
-			left: calc(#{_component("gauge.height")} / -2);
-			top: 1.375rem; // magic number
-			bottom: _theme("spacings.smaller", true) * -1;
-
-			&.mod-thin {
-				left: calc(#{_component("gauge.thin.height")} / -2);
-			}
-		}
-	}
-}
-
-.timeline.mod-number, .timeline.mod-smallNumber {
-	counter-reset: timeline;
-
-	&.mod-vertical {
-		.timeline-step {
-			margin: _theme("spacings.small") 0;
-
-			.gauge {
-				top: 1.625rem; // magic number
-				bottom: -.625rem; // magic number
-			}
-		}
-	}
-
-	.timeline-step-title {
-		counter-increment: timeline;
-
-		&::before, &::after {
-			opacity: 1;
-			width: _theme("spacings.standard");
-			height: _theme("spacings.standard");
-			line-height: _theme("spacings.standard");
-			left: _theme("spacings.smallest", true) * -1;
-		}
-
-		&::after {
-			content: counter(timeline);
-			color: _color("white");
-			bottom: auto;
-			background-color: transparent;
-			text-align: center;
-		}
-	}
-}
-
-.timeline.mod-smallNumber {
-	.timeline-step-title {
-		&::before, &::after {
-			margin: 0 .125rem; // magic number
-			width: 1.25rem; // magic number
-			height: 1.25rem; // magic number
-			line-height: 1.25rem; // magic number
-			left: _theme("spacings.smallest", true) * -1;
-		}
-
-		&::after {
-			width: 1.25rem; // magic number
-			font-size: _theme("sizes.small.font-size");
-		}
-	}
-
-	&.mod-vertical {
+// MOD
+.timeline {
+	&.mod-small {
 		.timeline-step-title {
-			&::before, &::after {
-				margin: .125rem; // magic number
+			padding-left: _theme("spacings.standard");
+
+			&::after {
+				width: .5rem;
+				height: .5rem;
 			}
 		}
+	}
+	
+	&.mod-big {
+		.timeline-step-title {
+			padding-left: 2.5rem;
+			min-width: _theme("spacings.big");
+
+			&::after {
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+		}
+	}
+
+	&.mod-vertical {
+		align-items: flex-start;
+		flex-direction: column;
 
 		.timeline-step {
-			.gauge {
-				bottom: _theme("spacings.small", true) * -1;
+			margin-top: _theme("spacings.smaller");
+			display: block;
+			position: relative;
+
+			&:not(:last-child)::after {
+				content: "";
+				display: block;
+				height: auto;
+				width: 2px;
+				position: absolute;
+				top: _theme("spacings.big") + _theme("spacings.smallest");
+				bottom: -0.75rem;
+				left: .45rem; // magic number
+				margin: 0;
+			}
+
+			&:not(:last-child)[aria-current="step"] {
+				&::after {
+					top: _theme("spacings.big") + _theme("spacings.smallest");
+				}
+			}
+
+			&:last-child::after {
+				display: none;
+			}
+		}
+
+		.timeline-step-title {
+			margin: _theme("spacings.smaller") 0;
+			min-height: _theme("spacings.standard");
+			min-width: 0;
+		}
+
+		&:not(.mod-small):not(.mod-big) {
+			.timeline-step-title {	
+				&:after {
+					left: 0;
+				}
+			}
+		}
+
+		.timeline-step-description {
+			padding-left: _theme("spacings.big");
+		}
+		
+		&.mod-small {
+			.timeline-step {
+				&::after {
+					bottom: _theme('spacings.small') * -1;
+					left: .45rem; // magic number
+					top: _theme('spacings.big');
+				}
+	
+				&[aria-current="step"] {
+					&::after {
+						top: calc(#{_theme("spacings.big")});
+					}
+				}
+			}
+			.timeline-step-description {
+				padding-left: _theme("spacings.standard");
+			}
+		}
+		
+		&.mod-big {
+			.timeline-step {
+				&::after {
+					bottom: _theme('spacings.smaller') * -1;
+					left: .95rem; // magic number
+					top: 2.5rem;
+				}
+	
+				&[aria-current="step"] {
+					&::after {
+						top: 2.5rem;
+					}
+				}
+			}
+			.timeline-step-description {
+				padding-left: 2.5rem;
+				min-height: _theme("spacings.big");
+			}
+		}
+
+		.timeline-stepAddBetweenStep {
+			min-height: 3rem;
+		}
+
+		&.mod-progress {
+			.timeline-step[aria-current="step"]{
+				$progress : var(--progress);
+	
+				&::after {
+					background: linear-gradient(180deg, _color('primary', 700) $progress, _color('grey', 200) $progress);
+				}
+	
 			}
 		}
 	}
 
-	.timeline-step-addBetween-action-icon {
-		margin: 0 .125rem; // magic number
+	&.mod-number {
+		counter-reset: timeline;
 
-		&,
-		.lucca-icon {
-			height: 1.25rem; // magic number
-			width: 1.25rem; // magic number
-			line-height: 1.25rem; // magic number
-			font-size: _theme("sizes.small.font-size");
-			text-align: center;
+		.timeline-step-title {
+			counter-increment: timeline;
+
+			&::after {
+				content: counter(timeline);
+				font-size: _theme('sizes.smaller.font-size');
+				line-height: 1;
+			}
+		}
+
+		&.mod-big {
+			.timeline-step-title::after {
+				font-size: _theme('sizes.small.font-size');
+			}
 		}
 	}
-}
 
-.timeline.mod-add {
-	.timeline-step {
-		&:nth-last-child(2) {
-			.gauge {
-				background-color: transparent;
-			}
-
-			.gauge-bar {
-				border-bottom-style: dashed;
-			}
-		}
-
-		&:last-child {
+	&.mod-checkedPastStep {
+		.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) {
 			.timeline-step-title {
 				&::after {
-					@include makeIcon("plus");
+					@include makeIcon("tick");
+					display: flex;
 				}
 			}
 		}
 	}
-
-	&.mod-vertical {
+	
+	&.mod-addStep {
 		.timeline-step {
-			&:nth-last-child(2) {
-				.gauge-bar {
-					border-left-style: dashed;
+			&:nth-last-child(2)::after {
+				background-color: transparent;
+				background-image: linear-gradient(90deg, transparent 25%, _color('grey', 200) 25%, _color('grey', 200) 50%, transparent 50%, transparent 75%, _color('grey', 200) 75%, _color('grey', 200) 100%);
+				background-size: _theme('spacings.smaller') _theme('spacings.smaller');
+			}
+	
+			&:last-child {
+				.timeline-step-title {
+					&::after {
+						@include makeIcon("plus");
+						display: flex;
+					}
+				}
+			}
+		}
+	
+		&.mod-vertical {
+			.timeline-step {
+				&:nth-last-child(2)::after {
+					background-color: transparent;
+					background-image: linear-gradient(0deg, transparent 25%, _color('grey', 200) 25%, _color('grey', 200) 50%, transparent 50%, transparent 75%, _color('grey', 200) 75%, _color('grey', 200) 100%);
+					background-size: _theme('spacings.smaller') _theme('spacings.smaller');
 				}
 			}
 		}
 	}
-}
 
-.timeline-step-addLast {
-	position: relative;
+	&.mod-addBetweenStep {
+		.timeline-stepAddBetweenStep-title {
+			@include buttonReset;
 
-	&::after {
-		content: "";
-		position: absolute;
-		right: 100%;
-		top: 0;
-		bottom: 0;
-		width: _theme("spacings.big");
-		z-index: 1;
-	}
-}
-
-.timeline-step-addBetween {
-	.hr {
-		opacity: .5;
-	}
-}
-
-.timeline-step-addBetween-action {
-	@include buttonReset;
-
-	padding-top: _theme("spacings.small");
-	padding-bottom: _theme("spacings.small");
-	position: relative;
-	margin-left: (_theme("spacings.standard", true) + _theme("spacings.smallest", true)) * -1;
-	padding-left: _theme("spacings.standard", true) + _theme("spacings.smallest", true);
-	width: calc(100% + #{_theme("spacings.standard", true) + _theme("spacings.smallest", true)});
-	outline: none;
-
-	&:hover,
-	&:focus {
-		.hr {
-			opacity: 1;
-		}
-	}
-
-	&:not(:hover) {
-		&:not(:focus) {
-			.timeline-step-addBetween-action-icon {
-				opacity: 0;
+			width: auto;
+		
+			&::after {
+				@include makeIcon("plus");
+				display: flex;
 			}
 		}
 	}
-}
 
-.timeline-step-addBetween-action-icon {
-	position: absolute;
-	left: 0;
-	top: _theme("spacings.smallest");
-	z-index: 1;
-	border-radius: 50%;
-	background-color: currentColor;
-	box-shadow: 0 0 0 _theme("spacings.smallest") _color("white");
-	height: _theme("spacings.standard");
-	width: _theme("spacings.standard");
-	text-align: center;
-	transition: opacity _theme("commons.animations.durations.fast");
+	&.mod-progress {
+		.timeline-step[aria-current="step"]{
+			$progress : var(--progress);
 
-	.lucca-icon {
-		color: _color("white");
+			&::after {
+				background: linear-gradient(90deg, _color('primary', 700) $progress, _color('grey', 200) $progress);
+			}
+
+		}
 	}
 }
