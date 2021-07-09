@@ -100,6 +100,8 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 			panelClasses.push(this._config.panelClass);
 		}
 		panelClasses.push(`size-${this._config.size}`);
+		panelClasses.push(`position-${this._config.position}`);
+
 		overlayConfig.panelClass = panelClasses;
 		overlayConfig.scrollStrategy = this._overlay.scrollStrategies.block();
 		return overlayConfig;
