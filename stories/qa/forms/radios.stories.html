@@ -2,6 +2,7 @@
 	<h1>Radio</h1>
 
 	<!-- Basics -->
+	<h2>Basic</h2>
 	<div class="form">
 		<div class="form-group">
 			<div class="grid">
@@ -28,54 +29,44 @@
 			</div>
 		</div>
 	</div>
-	<code class="code mod-block">&lt;label class="radio"&gt;
-	&lt;input class="radio-input" type="radio" name="<strong>radioListID</strong>" checked /&gt;
-	&lt;span class="radio-label"&gt;Radio&lt;/span&gt;
-&lt;/label&gt;
-</code>
 	<em><strong>Tip:</strong> To disable a radio, add a <code class="code">disabled</code> attribute to the radio input.</em>
 </section>
 
 <section class="contentSection">
-	<h1>Radio smalls</h1>
-<!-- mod-small -->
-<div class="form">
-	<div class="form-group">
-		<div class="grid">
-			<div class="grid-s4">
-				<div class="radio mod-small">
-					<input class="radio-input" type="radio" name="radioList1" id="radio0" checked>
-					<label class="radio-label" for="radio0">Radio</label>
+	<h2>mod-small</h2>
+	<!-- mod-small -->
+	<div class="form">
+		<div class="form-group">
+			<div class="grid">
+				<div class="grid-s4">
+					<div class="radio mod-small">
+						<input class="radio-input" type="radio" name="radioList1" id="radio0" checked>
+						<label class="radio-label" for="radio0">Radio</label>
+					</div>
+					<div class="radio mod-small">
+						<input class="radio-input" type="radio" name="radioList1" id="radio1">
+						<label class="radio-label" for="radio1">Radio</label>
+					</div>
 				</div>
-				<div class="radio mod-small">
-					<input class="radio-input" type="radio" name="radioList1" id="radio1">
-					<label class="radio-label" for="radio1">Radio</label>
-				</div>
-			</div>
-			<div class="grid-s4">
-				<div class="radio mod-small">
-					<input class="radio-input" type="radio" name="radioList2" id="radio2" disabled checked>
-					<label class="radio-label" for="radio2">Disabled radio</label>
-				</div>
-				<div class="radio mod-small">
-					<input class="radio-input" type="radio" name="radioList2" id="radio3" disabled>
-					<label class="radio-label" for="radio3">Disabled radio</label>
+				<div class="grid-s4">
+					<div class="radio mod-small">
+						<input class="radio-input" type="radio" name="radioList2" id="radio2" disabled checked>
+						<label class="radio-label" for="radio2">Disabled radio</label>
+					</div>
+					<div class="radio mod-small">
+						<input class="radio-input" type="radio" name="radioList2" id="radio3" disabled>
+						<label class="radio-label" for="radio3">Disabled radio</label>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<code class="code mod-block">&lt;div class="radio mod-small"&gt;
-	&lt;input class="radio-input" type="radio" name="<b>radioListID</b>" id="<b>radioID</b>" checked&gt;
-	&lt;label class="radio-label" for="<b>radioID</b>"&gt;Radio&lt;/label&gt;
-&lt;/div&gt;
-</code>
-<em><b>Tip:</b> To disable a radio, add a <code class="code">disabled</code> attribute to the radio input.</em>
+	<em><b>Tip:</b> To disable a radio, add a <code class="code">disabled</code> attribute to the radio input.</em>
 </section>
 
 <!-- Inline radio -->
 <section class="contentSection">
-	<h2>Inline</h2>
+	<h2>mod-inline</h2>
 	<label class="radio mod-inline">
 		<input class="radio-input" name="radioInline" type="radio" checked />
 		<span class="radio-label">Radio</span>
@@ -88,11 +79,6 @@
 		<input class="radio-input" name="radioInline" type="radio" />
 		<span class="radio-label">Radio</span>
 	</label>
-	<code class="code mod-block">&lt;label class="radio mod-inline"&gt;
-	&lt;input class="radio-input" type="radio" name="<strong>radioListID</strong>" /&gt;
-	&lt;span class="radio-label"&gt;Radio&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
 
 <!-- Palette -->
@@ -118,10 +104,6 @@
 		<input class="radio-input" type="radio" checked />
 		<span class="radio-label">palette-error</span>
 	</label>
-	<code class="code mod-block">&lt;label class="radio palette-primary"&gt;
-	&lt;input class="radio-input" type="radio" name="<strong>radioName</strong>" checked /&gt;
-	&lt;label class="radio-label"&gt;…&lt;/label&gt;
-&lt;/label&gt;</code>
 	<em><strong>Tip:</strong> It will works with all palette's colors</em>
 </section>
 
@@ -168,3 +150,6 @@
 		</div>
 	</div>
 </section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
