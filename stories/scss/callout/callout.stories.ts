@@ -50,10 +50,3 @@ const template: Story<CalloutStory> = (args: CalloutStory) => ({
 
 export const def = template.bind({});
 def.args = { label: 'label', mod: [], palette: ''};
-
-// export const outline = template.bind({});
-// outline.args = { label: 'label', mod: 'mod-outline', palette: '' };
-
-// export const loading = template.bind({});
-// loading.args = { label: 'label', mod: '', palette: '' };
-
