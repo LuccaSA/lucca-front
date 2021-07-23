@@ -1,0 +1,29 @@
+<ng-container *ngIf="!isClickable; else clickable">
+    <div class="card" [ngClass]="appearance">
+        <div class="card-content">
+            <h2 *ngIf="cardTitle">{{cardTitle}}</h2>
+            <p *ngIf="cardContent">{{cardContent}}</p>
+        </div>
+        <footer *ngIf="hasFooter" class="card-footer">
+            <div class="card-footer-right">
+                <button class="button palette-primary">{{mainButton}}</button>
+                <button class="button mod-link">{{secondaryButton}}</button>
+            </div>
+        </footer>
+    </div>
+</ng-container>
+
+<ng-template #clickable>
+    <a href="#" class="card mod-clickable" [ngClass]="appearance">
+        <div class="card-content">
+            <h2 *ngIf="cardTitle">{{cardTitle}}</h2>
+            <p *ngIf="cardContent">{{cardContent}}</p>
+        </div>
+        <footer *ngIf="hasFooter" class="card-footer">
+            <div class="card-footer-right">
+                <button class="button palette-primary">{{mainButton}}</button>
+                <button class="button mod-link">{{secondaryButton}}</button>
+            </div>
+        </footer>
+    </a>
+</ng-template>
