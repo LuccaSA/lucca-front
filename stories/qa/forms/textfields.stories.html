@@ -2,7 +2,7 @@
 	<h1>Textfields</h1>
 
 	<!-- Basics -->
-
+	<h2>Basic</h2>
 	<div class="grid">
 		<div class="grid-s6">
 			<label class="textfield mod-block">
@@ -17,14 +17,11 @@
 			</label>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
+
 <section class="contentSection">
 	<!-- SMALL -->
+	<h2>mod-small</h2>
 	<div class="grid">
 		<div class="grid-s6">
 			<label class="textfield mod-small mod-block">
@@ -39,13 +36,10 @@
 			</label>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-small"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
+
 <section class="contentSection">
+	<h2>mod-material</h2>
 	<div class="grid">
 		<div class="grid-s6">
 			<div class="form-group">
@@ -64,13 +58,10 @@
 			</div>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-material"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
+
 <section class="contentSection">
+	<h2>mod-compact</h2>
 	<div class="grid">
 		<div class="grid-s6">
 			<div class="form-group">
@@ -89,13 +80,10 @@
 			</div>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-compact"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
+
 <section class="contentSection">
+	<h2>mod-block</h2>
 	<div class="grid">
 		<div class="grid-s6">
 			<div class="form-group">
@@ -114,13 +102,10 @@
 			</div>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-outlined"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
+
 <section class="contentSection">
+	<h2>mod-password</h2>
 	<div class="grid">
 		<div class="grid-s6">
 			<div class="form-group">
@@ -129,11 +114,11 @@
 					<span class="textfield-label">Password label</span>
 					<span class="textfield-suffix">
 						<a
-						  href="#"
-						  onClick="event.preventDefault()"
-						  role="button"
-						  aria-pressed="false"
-						  class="textfield-suffix-action"
+							href="#"
+							onClick="event.preventDefault()"
+							role="button"
+							aria-pressed="false"
+							class="textfield-suffix-action"
 						>
 						  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
 						  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
@@ -165,23 +150,7 @@
 			</div>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class=&quot;textfield mod-block mod-password&quot;&gt;
-	&lt;input class=&quot;textfield-input&quot; type=&quot;password&quot; placeholder=&quot;placeholder&quot; value=&quot;azerty12345#@!%;&quot; /&gt;
-	&lt;span class=&quot;textfield-label&quot;&gt;Password label&lt;/span&gt;
-	&lt;span class=&quot;textfield-suffix&quot;&gt;
-		&lt;a
-			href=&quot;#&quot;
-			onClick=&quot;event.preventDefault()&quot;
-			role=&quot;button&quot;
-			aria-pressed=&quot;false&quot;
-			class=&quot;textfield-suffix-action&quot;
-		&gt;
-			&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-watch&quot;&gt;&lt;/span&gt;
-			&lt;span aria-hidden=&quot;true&quot; class=&quot;lucca-icon icon-unwatch&quot;&gt;&lt;/span&gt;
-			&lt;span class=&quot;u-mask&quot;&gt;Show password&lt;/span&gt;
-		&lt;/a&gt;
-		&lt;/span&gt;
-&lt;/label&gt;</code>
+
 	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width input.</em><br>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em><br>
 	<em><strong>Tip:</strong> You can use <code class="code">placeholder="…"</code> on <code class="code">textfield-input</code>.</em>
@@ -197,19 +166,11 @@
 				<label class="textfield mod-block">
 					<input class="textfield-input" type="text" placeholder="placeholder" />
 					<span class="textfield-label">Textfield label</span>
-					<span class="textfield-messages">
-						<span class="textfield-messages-helper" />Few tips about the input</span>
-					</span>
-				</span>
+					<div class="textfield-messages">
+						<span class="textfield-messages-helper">Few tips about the input</span>
+					</div>
+				</label>
 			</div>
-<code class="code mod-block">&lt;label class="textfield"&gt;
-	&lt;input class="textfield-input" type="text" placeholder="placeholder" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-	&lt;span class="textfield-messages"&gt;
-		&lt;span class="textfield-messages-helper" /&gt;…&lt;/span&gt;
-	&lt;/span&gt;
-&lt;/label&gt;
-</code>
 		</div>
 		<div class="grid-s3">
 			<div class="form-group">
@@ -221,14 +182,6 @@
 					</span>
 				</label>
 			</div>
-<code class="code mod-block">&lt;label class="textfield"&gt;
-	&lt;input class="textfield-input is-warning" type="text" placeholder="placeholder" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-	&lt;span class="textfield-messages"&gt;
-		&lt;span class="textfield-messages-warning"&gt;…&lt;/span&gt;
-	&lt;/span&gt;
-&lt;/label&gt;
-</code>
 		</div>
 		<div class="grid-s3">
 			<div class="form-group">
@@ -240,14 +193,6 @@
 					</span>
 				</label>
 			</div>
-<code class="code mod-block">&lt;label class="textfield"&gt;
-	&lt;input class="textfield-input is-error" type="text" placeholder="placeholder" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-	&lt;span class="textfield-messages"&gt;
-		&lt;span class="textfield-messages-error" /&gt;…&lt;/span&gt;
-	&lt;/span&gt;
-&lt;/label&gt;
-</code>
 		</div>
 		<div class="grid-s3">
 			<div class="form-group">
@@ -259,18 +204,17 @@
 					</span>
 				</label>
 			</div>
-<code class="code mod-block">&lt;label class="textfield"&gt;
+<!-- <code class="code mod-block">&lt;label class="textfield"&gt;
 	&lt;input class="textfield-input is-success" type="text" placeholder="placeholder" /&gt;
 	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
 	&lt;span class="textfield-messages"&gt;
 		&lt;span class="textfield-messages-error" /&gt;…&lt;/span&gt;
 	&lt;/span&gt;
 &lt;/label&gt;
-</code>
+</code> -->
 		</div>
 	</div>
-</section>
-<section class="contentSection">
+
 	<div class="grid">
 		<div class="grid-s3">
 			<div class="form-group">
@@ -317,8 +261,7 @@
 			</div>
 		</div>
 	</div>
-</section>
-<section class="contentSection">
+
 	<div class="grid">
 		<div class="grid-xs6 grid-xsOffset2">
 			<label class="textfield mod-compact mod-block">
@@ -364,34 +307,34 @@
 					<span class="textfield-label">Textfield label primary</span>
 				</label>
 			</div>
-			<code class="code mod-block">&lt;label class="textfield palette-primary"&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield palette-primary"&gt;
 				&lt;input class="textfield-input" type="text"&gt;
 				&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-			&lt;/label&gt;</code>
+			&lt;/label&gt;</code> -->
 		</div>
 		<div class="grid-s4">
 			<div class="demo-palettes">
 				<label class="textfield mod-block palette-secondary">
-					<input class="textfield-input" type="text" placeholder="placeholder" /> 
+					<input class="textfield-input" type="text" placeholder="placeholder" />
 					<span class="textfield-label">Textfield label secondary</span>
 				</label>
 			</div>
-			<code class="code mod-block">&lt;label class="textfield palette-secondary"&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield palette-secondary"&gt;
 				&lt;input class="textfield-input" type="text"&gt;
 				&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-			&lt;/label&gt;</code>
+			&lt;/label&gt;</code> -->
 		</div>
 		<div class="grid-s4">
 			<div class="demo-palettes">
 				<label class="textfield mod-block palette-grey">
-					<input class="textfield-input" type="text" placeholder="placeholder" /> 
+					<input class="textfield-input" type="text" placeholder="placeholder" />
 					<span class="textfield-label">Textfield label gray</span>
 				</label>
 			</div>
-			<code class="code mod-block">&lt;label class="textfield palette-grey"&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield palette-grey"&gt;
 				&lt;input class="textfield-input" type="text"&gt;
 				&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-			&lt;/label&gt;</code>
+			&lt;/label&gt;</code> -->
 		</div>
 		<div class="grid-s4">
 			<div class="demo-palettes">
@@ -400,34 +343,34 @@
 					<span class="textfield-label">Textfield label success</span>
 				</label>
 			</div>
-			<code class="code mod-block">&lt;label class="textfield palette-success"&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield palette-success"&gt;
 				&lt;input class="textfield-input" type="text"&gt;
 				&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-			&lt;/label&gt;</code>
+			&lt;/label&gt;</code> -->
 		</div>
 		<div class="grid-s4">
 			<div class="demo-palettes">
 				<label class="textfield mod-block palette-warning">
-					<input class="textfield-input" type="text" placeholder="placeholder" /> 
+					<input class="textfield-input" type="text" placeholder="placeholder" />
 					<span class="textfield-label">Textfield label warning</span>
 				</label>
 			</div>
-			<code class="code mod-block">&lt;label class="textfield palette-warning"&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield palette-warning"&gt;
 				&lt;input class="textfield-input" type="text"&gt;
 				&lt;span class="textfield-label&gt;…&lt;/span&gt;
-			&lt;/label&gt;</code>
+			&lt;/label&gt;</code> -->
 		</div>
 		<div class="grid-s4">
 			<div class="demo-palettes">
 				<label class="textfield mod-block palette-error">
-					<input class="textfield-input" type="text" placeholder="placeholder" /> 
+					<input class="textfield-input" type="text" placeholder="placeholder" />
 					<span class="textfield-label">Textfield label error</span>
 				</label>
 			</div>
-			<code class="code mod-block">&lt;label class="textfield palette-error" /&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield palette-error" /&gt;
 				&lt;input class="textfield-input" type="text"&gt;
 				&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-			&lt;/label&gt;</code>
+			&lt;/label&gt;</code> -->
 		</div>
 	</div>
 </section>
@@ -486,11 +429,11 @@
 			</div>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-withSuffix"&gt;
+<!-- <code class="code mod-block">&lt;label class="textfield mod-withSuffix"&gt;
 	&lt;input class="textfield-input" type="text" /&gt;
 	&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
 	&lt;span class="textfield-suffix"&gt;€&lt;/span&gt;
-&lt;/label&gt;</code>
+&lt;/label&gt;</code> -->
 	<em><strong>Tip:</strong> If you are using a classic textfield without label, you'll need to add a <code class="code">mod-noLabel</code> class.</em>
 </section>
 
@@ -528,11 +471,11 @@
 	</label>
 
 
-	<code class="code mod-block">&lt;label class="textfield mod-inline"&gt;
+	<!-- <code class="code mod-block">&lt;label class="textfield mod-inline"&gt;
 	&lt;input class="textfield-input" type="text" /&gt;
 	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
 &lt;/label&gt;
-</code>
+</code> -->
 </section>
 
 <section class="contentSection">
@@ -576,11 +519,6 @@
 			</label>
 		</div>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-search"&gt;
-	&lt;input class="textfield-input" type="text" placeholder="e.g. Clark Kent" /&gt;
-	&lt;span class="textfield-label"&gt;Search&lt;/span&gt;
-&lt;/label&gt;
-</code>
 <em><strong>Tip:</strong> You can change the input style using <code class="code">mod-material</code> & <code class="code">mod-compact</code></em>
 </section>
 
@@ -628,15 +566,6 @@
 			</label>
 		</div>
 	</div>
-	<code class="code mod-block">&lt;label class="textfield mod-search mod-clearable"&gt;
-		&lt;input class="textfield-input" type="text" placeholder="e.g. Clark Kent" /&gt;
-		&lt;span class="textfield-label"&gt;Search&lt;/span&gt;
-		&lt;a href="#" onClick="event.preventDefault()" role="button" class="actionIcon textfield-actionClear"&gt;
-			&lt;span aria-hidden="true" class="lucca-icon"&gt;thin_cross&lt;/span&gt;
-			&lt;span class="u-mask"&gt;Clear&lt;/span&gt;
-		&lt;/a&gt;
-	&lt;/label&gt;
-	</code>
 </section>
 
 <!-- Required inputs -->
@@ -646,11 +575,6 @@
 		<input class="textfield-input" type="text" placeholder="placeholder" />
 		<span class="textfield-label">Required textfield</span>
 	</label>
-<label class="code mod-block">&lt;div class="textfield is-required"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;
-</code>
 </section>
 
 <!-- White -->
@@ -662,10 +586,6 @@
 			<span class="textfield-label">Textfield label</span>
 		</label>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-white"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label&gt;…&lt;/span&gt;
-&lt;/label&gt;</code>
 </section>
 
 <!-- Invert -->
@@ -677,10 +597,6 @@
 			<span class="textfield-label">Textfield label</span>
 		</label>
 	</div>
-<code class="code mod-block">&lt;label class="textfield mod-invert"&gt;
-	&lt;input class="textfield-input" type="text" /&gt;
-	&lt;span class="textfield-label&gt;…&lt;/span&gt;
-&lt;/label&gt;</code>
 </section>
 
 <!-- Multilines -->
@@ -742,11 +658,6 @@
 			</div>
 		</div>
 	</div>
-	<code class="code mod-block">&lt;label class="textfield mod-multiline"&gt;
-	&lt;textarea class="textfield-input"&gt;&lt;/textarea&gt;
-	&lt;span class="textfield-label"&gt;Textarea label&lt;/span&gt;
-&lt;/label&gt;
-	</code>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br>
 	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em>
 </section>
@@ -772,22 +683,6 @@
 	</div>
 </section>
 
-<code class="code mod-block">&lt;label class="radio"&gt;
-	&lt;input class="radio-input" type="radio" name="<strong>radioListID</strong>" checked /&gt;
-	&lt;span class="radio-label"&gt;Option&lt;/span&gt;
-&lt;/label&gt;
-&lt;div class="radio"&gt;
-	&lt;label&gt;
-		&lt;input class="radio-input" type="radio" name="<strong>radioListID</strong>" /&gt;
-		&lt;span class="radio-label"&gt;or&lt;/span&gt;
-	&lt;/label&gt;
-	&lt;label class="textfield mod-radio"&gt;
-		&lt;input class="textfield-input" type="text" /&gt;
-		&lt;span class="radio-label u-mask"&gt;textfield label&lt;/span&gt;
-	&lt;/label&gt;
-&lt;/div&gt;</code>
-
-
 <section class="contentSection">
 	<h2>Filters</h2>
 
@@ -798,9 +693,7 @@
 			<span class="textfield-label">Textfield label</span>
 		</label>
 	</div>
-
-<code class="code mod-block">&lt;label class="textfield mod-filter" /&gt;
-	&lt;input class="textfield-input" type="text" value="…" /&gt;
-	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
-&lt;/label&gt;</code>
 </section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
