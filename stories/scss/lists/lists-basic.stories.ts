@@ -11,7 +11,6 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	@Input() listContent: string;
 	@Input() mod: string = '';
 	@Input() hasActions: boolean;
-	@Input() isDraggable: boolean;
 
 	lists = [
 		{ listTitle: 'List item title', listContent: 'List item description' },

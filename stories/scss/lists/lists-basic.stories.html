@@ -9,9 +9,15 @@
 				<p class="list-item-content-description">{{listContent}}</p>
 			</div>
 			<div *ngIf="hasActions || mod === 'mod-clickable'" class="list-item-actions">
- 				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
- 				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
- 		 </div>
+ 				<button type="button" class="actionIcon">
+					 <span aria-hidden="true" class="lucca-icon icon-edit"></span>
+					 <span class="u-mask">Edit</span>
+				</button>
+ 				<button type="button" class="actionIcon">
+					 <span aria-hidden="true" class="lucca-icon icon-trash"></span>
+					 <span class="u-mask">Delete</span>
+					</button>
+ 		 	</div>
 		</li>
 	</ul>
 	<em><b>Tip:</b> Just remove <code class="code">list-item-actions</code> to have a full width content list.</em><br>
