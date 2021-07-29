@@ -8,7 +8,6 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	templateUrl: './label-basic.stories.html',
 }) class LabelBasicStory {
 	@Input() label: string;
-	@Input() mod: string = '';
 	@Input() palette: string = '';
 	@Input() isNumber: boolean = false;
 }
