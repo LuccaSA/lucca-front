@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
@@ -8,6 +8,9 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	selector: 'menu-stories',
 	templateUrl: './menu.stories.html',
 }) class MenuStory {
+	@Input() mod: string = '';
+	@Input() palette: string = '';
+	
 	links = [
 		{ label: 'link 1', isActive: true },
 		{ label: 'link 2', isActive: false },
@@ -23,6 +26,20 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 export default {
 	title: 'SCSS/Menu',
 	component: MenuStory,
+	argTypes: {
+		mod: {
+			control: {
+				type: 'radio',
+				options: ['', 'mod-header']
+			}
+		},
+		palette: {
+			control: {
+				type: 'radio',
+				options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error']
+			}
+		}
+	},
 	decorators: [
 		moduleMetadata({
 			entryComponents: [MenuStory],
