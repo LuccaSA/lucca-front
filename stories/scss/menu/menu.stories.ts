@@ -9,6 +9,8 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	templateUrl: './menu.stories.html',
 }) class MenuStory {
 	@Input() mod: string = '';
+	@Input() isNumber: boolean = false;
+	@Input() border: boolean = false;
 	@Input() palette: string = '';
 	@Input() withContainer: boolean = false;
 	
@@ -16,7 +18,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 		{ label: 'link 1', isActive: true },
 		{ label: 'link 2', isActive: false },
 		{ label: 'link 3', isActive: false },
-		{ label: 'link 4', isActive: false },
+		{ label: 'link 4', isActive: false, isDisabled: true },
 		{ label: 'link 5', isActive: false },
 		{ label: 'link 6', isActive: false },
 		{ label: 'link 7', isActive: false },
@@ -36,10 +38,10 @@ export default {
 			options: ['', 'mod-header'],
 			control: {
 				type: 'radio',
-			}
+				options: ['', 'mod-header', 'mod-small']
+			},
 		},
-		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+		isNumber: {
 			control: {
 				type: 'radio',
 			}
@@ -48,7 +50,13 @@ export default {
 			control: {
 				type: 'boolean',
 			}
-		} 
+		},
+		border: {
+			control: {
+				type: 'boolean',
+				option: ['menuWithoutBorder']
+			},
+		},
 	},
 	decorators: [
 		moduleMetadata({
