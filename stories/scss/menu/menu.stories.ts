@@ -71,7 +71,4 @@ const template: Story<MenuStory> = (args: MenuStory) => ({
 });
 
 export const basic = template.bind({});
-
-basic.args = {	
-	withContainer: false,
-};
+basic.args = { mod: '', isNumber: false, border: true, withContainer: false };
