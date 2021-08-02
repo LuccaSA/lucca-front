@@ -25,7 +25,9 @@ body {
 @mixin h1Styles($suffix:"") {
 	font-size: _theme("sizes.biggest.font-size") #{$suffix};
 	line-height: _theme("sizes.biggest.line-height") #{$suffix};
+	margin-top: 0;
 	margin-bottom: _theme("spacings.small") #{$suffix};
+
 	&.mod-headline {
 		font-size: _theme("sizes.headline.font-size") #{$suffix};
 		line-height: _theme("sizes.headline.line-height") #{$suffix};
@@ -35,30 +37,35 @@ body {
 @mixin h2Styles($suffix:"") {
 	font-size: _theme("sizes.bigger.font-size") #{$suffix};
 	line-height: _theme("sizes.bigger.line-height") #{$suffix};
+	margin-top: 0;
 	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
 @mixin h3Styles($suffix:"") {
 	font-size: _theme("sizes.big.font-size") #{$suffix};
 	line-height: _theme("sizes.big.line-height") #{$suffix};
+	margin-top: 0;
 	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
 @mixin h4Styles($suffix:"") {
 	font-size: _theme("sizes.standard.font-size") #{$suffix};
 	line-height: _theme("sizes.standard.line-height") #{$suffix};
+	margin-top: 0;
 	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
 @mixin h5Styles($suffix:"") {
 	font-size: _theme("sizes.small.font-size") #{$suffix};
 	line-height: _theme("sizes.small.line-height") #{$suffix};
+	margin-top: 0;
 	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
 @mixin h6Styles($suffix:"") {
 	font-size: _theme("sizes.smaller.font-size") #{$suffix};
 	line-height: _theme("sizes.smaller.line-height") #{$suffix};
+	margin-top: 0;
 	margin-bottom: _theme("spacings.small") #{$suffix};
 }
 
