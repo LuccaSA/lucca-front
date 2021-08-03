@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'toasts-stories',
@@ -20,18 +20,17 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 		toast.innerHTML = toastsValues[r];
 		var close = document.createElement('button');
 		close.className = "toasts-item-kill";
-		close.addEventListener('click', this.toastKill, false);
+		close.addEventListener('click', function () {
+			this.parentElement.remove();
+		}, false);
 		toast.appendChild(close);
 		toastsBox.appendChild(toast);
-	}
-	toastKill() {
-		this.parentElement.remove();
 	}
 }
 
 export default {
-  title: 'SCSS/Toasts',
-  component: ToastsStory,
+	title: 'SCSS/Toasts',
+	component: ToastsStory,
 	decorators: [
 		moduleMetadata({
 			entryComponents: [ToastsStory]
