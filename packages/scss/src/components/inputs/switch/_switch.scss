@@ -9,6 +9,7 @@
 }
 
 .switch-label {
+	color: _color("grey", "800");
 	cursor: pointer;
 	display: inline-block;
 	line-height: 1.5rem;
@@ -22,6 +23,7 @@
 		display: block;
 		height: 1rem;
 		left: 0;
+		margin-top: _component("switch.top");
 		position: absolute;
 		top: _theme("spacings.smallest");
 		transition: all _theme("commons.animations.durations.fast") ease;
@@ -36,6 +38,7 @@
 		display: block;
 		height: calc(1rem - 4px);
 		left: 2px;
+		margin-top: _component("switch.top");
 		position: absolute;
 		top: calc(#{_theme("spacings.smallest", true)} + 2px);
 		transition: all _theme("commons.animations.durations.fast") ease;
@@ -43,8 +46,6 @@
 	}
 
 	&:hover {
-		color: _color("grey");
-
 		&::before {
 			background-color: _color("grey", "600");
 		}
@@ -59,10 +60,21 @@
 	&.mod-inline {
 		display: inline-block;
 		margin-right: 1.5rem;
+
+		.switch-label {
+			&::before {
+				margin-top: 0;
+			}
+			&::after {
+				margin-top: 0;
+			}
+		}
 	}
 
 	&.mod-small {
 		.switch-label {
+			font-size: _theme("sizes.small.font-size");
+			line-height: _theme("sizes.small.line-height");
 			padding: 0 0 0 calc(1.75rem - 4px + #{_theme("spacings.smaller", true)});
 
 			&::before {
@@ -77,6 +89,10 @@
 			}
 		}
 		.switch-input:checked ~ .switch-label {
+			&::before {
+				font-size: _theme("sizes.smaller.font-size");
+			}
+
 			&::after {
 				left: calc(#{_theme("sizes.small.font-size")} - 2px);
 			}
@@ -94,9 +110,44 @@
 		Checked
 	*/
 
-	&:checked ~ .switch-label {
-		&::after {
-			left: calc(1rem - 2px);
+	&:checked {
+		~ .switch-label {
+			&::before {
+				@include makeIcon("tick");
+
+				align-items: center;
+				background-color: _color("secondary", "700");
+				color: _color("secondary", "900");
+				display: flex;
+				font-size: _theme("sizes.small.font-size");
+				line-height: _theme("sizes.small.line-height");
+				padding-left: _component("switch.icon-left");
+				padding-top: _component("switch.icon-top");
+			}
+			
+			&::after {
+				left: calc(1rem - 2px);
+			}
+		} 
+
+		&:hover ~ .switch-label {
+			&::before {
+				background-color: _color("secondary", "600");
+			}
+		}
+
+		&:focus ~ .switch-label {
+			&::before {
+				background-color: _color("secondary", "600");
+				box-shadow: 0 0 0 4px _color("secondary", "200");
+			}
+		}
+
+		&:active ~ .switch-label {
+			&::before {
+				background-color: _color("secondary", "800");
+				box-shadow: 0 0 0 4px _color("secondary", "300");
+			}
 		}
 	}
 
@@ -112,60 +163,42 @@
 			&::before {
 				background-color: _color("grey", "500");
 			}
-		}
-	}
-}
 
-
-// PALETTE
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.switch {
-	@mixin switchColoring($palette) {
-
-		.switch-input {
-			&:focus ~ .switch-label {
-				&::before {
-					box-shadow: 0 0 0 4px _color($palette, "200");
-				}
+			&::after {
+				background-color: _color("grey", "300");
 			}
 		}
 
-		.switch-input:checked {
-			~ .switch-label {
-				&::before {
-					background-color: _color($palette);
-				}
-
-				&:hover {
-					&::before {
-						background-color: _color($palette, "600");
-					}
-				}
+		&:checked ~ .switch-label {
+			&::before {
+				background-color: _color("secondary", "500");
+				color: _color("secondary", "700");
 			}
-			&[disabled], &[readonly] {
-				~ .switch-label {
-					&::before {
-						background-color: _color($palette, "500");
-					}
 
-					&:hover {
-						&::before {
-							background-color: _color($palette, "500");
-						}
-					}
-				}
+			&::after {
+				background-color: _color("secondary", "200");
 			}
 		}
 	}
 
-	// default color
-	@include switchColoring("switch.default-palette");
+	/*
+		Focus
+	*/
 
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include switchColoring($name);
+	&:focus ~ .switch-label {
+		&::before {
+			box-shadow: 0 0 0 4px _color("grey", "200");
 		}
 	}
+
+	/*
+		Active
+	*/
+
+	&:active ~ .switch-label {
+		&::before {
+			background-color: _color("grey", "800");
+			box-shadow: 0 0 0 4px _color("grey", "300");
+		}
+	} 
 }
