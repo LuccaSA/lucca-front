@@ -1,0 +1,15 @@
+/*
+ * @deprecated
+ * This entry point will be deprecated in LF 8.
+ * This file uses old @angular/material syntax and is not working on v12+.
+ */
+
+@import '~@angular/material/theming';
+
+@import 'theming.overridable';
+@import 'components';
+
+// CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
+@include angular-material-typography(
+	mat-typography-config($font-family: _theme('commons.font.family', true))
+);
