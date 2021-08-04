@@ -1,9 +1,11 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @import 'theming.overridable';
 @import 'components';
 
 // CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
-@include angular-material-typography(
-	mat-typography-config($font-family: _theme('commons.font.family', true))
+$lucca-front-mat-typography: mat.define-typography-config(
+  $font-family: _theme('commons.font.family', true),
 );
+
+@include mat.core($my-custom-typography);
