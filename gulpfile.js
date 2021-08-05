@@ -187,6 +187,12 @@ gulp.task('ng:formly:style', () => {
 	.pipe(gulp.dest(`dist/ng/formly/style`));
 });
 
+gulp.task('ng:schematics:build', () => run('tsc --project packages/ng/schematics').exec());
+gulp.task('ng:schematics:collection', () => {
+	return gulp.src([`packages/ng/schematics/collection.json`])
+	.pipe(gulp.dest(`dist/ng/schematics`));
+});
+
 gulp.task(
 	'ng',
 	gulp.series(
@@ -216,5 +222,7 @@ gulp.task(
 		'ng:material:style',
 		'ng:formly:build',
 		'ng:formly:style',
+		'ng:schematics:build',
+		'ng:schematics:collection',
 	),
 );

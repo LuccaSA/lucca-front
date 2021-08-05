@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
   },
+  "schematics": "./schematics/collection.json",
   "license": "MIT",
   "public": true,
   "keywords": [
