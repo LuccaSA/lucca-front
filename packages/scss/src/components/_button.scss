@@ -6,17 +6,27 @@
 	color: _color($palette, "text");
 
 	&:hover:not([disabled]) {
-		background-color: _color($palette, "500");
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06);
+		background-color: _color($palette, "600");
+		box-shadow: _theme('commons.box-shadow.xs');
 	}
 
 	&:focus {
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
+		box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, "200");
 		outline: none;
+		background-color: _color($palette, "600");
 	}
 
 	&:active:not([disabled]) {
 		background-color: _color($palette, "800");
+		box-shadow: 0 0 0 4px _color($palette, "300");
+	}
+
+	&[disabled],
+	&.is-disabled {
+		background-color: _color($palette, "500");
+		color: _color($palette, "300");
+		cursor: default;
+		pointer-events: none;
 	}
 
 	.button-counter {
@@ -90,9 +100,8 @@
 	}
 
 	.lucca-icon {
-		vertical-align: top;
-		line-height: 1.5rem;
-		font-size: 1rem;
+		font-size: 1.25rem;
+		line-height: 1;
 	}
 }
 
@@ -142,8 +151,8 @@
 		padding: _component("button.small.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
-			font-size: .875rem;
+			line-height: 1;
+			font-size: 1rem;
 		}
 	}
 
@@ -153,7 +162,7 @@
 		padding: _component("button.smaller.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
+			line-height: 1;
 			font-size: .875rem;
 		}
 	}
@@ -268,6 +277,9 @@
 	}
 
 	&.mod-icon {
+		align-items: center;
+		display: inline-flex;
+		gap: _theme('spacings.smaller');
 		padding-left: _theme("spacings.small");
 		padding-right: _theme("spacings.small");
 
@@ -280,6 +292,8 @@
 		}
 
 		&.mod-smaller {
+			gap: _theme('spacings.smallest');
+
 			.button-icon {
 				font-size: _component("button.smaller.font-size");
 				height: _component("button.smaller.line-height");
@@ -298,18 +312,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-
-	/* Disabled */
-
-	&[disabled] {
-		cursor: default;
-		opacity: _theme("commons.disabled.opacity");
-	}
-
-	&.is-disabled {
-		opacity: _theme("commons.disabled.opacity");
-		pointer-events: none;
-	}
 
 	/* Loading */
 
