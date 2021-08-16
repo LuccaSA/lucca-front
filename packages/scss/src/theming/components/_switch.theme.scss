@@ -1,6 +1,8 @@
 $switch: (
   // theming
-  default-palette: _getMap("palettes.primary"),
-  small-top: 1px
+  top: -1px,
+  small-top: 2px,
+  icon-top: 1px,
+  icon-left: 1px,
 );
 $theme: _set($theme, "components.switch", $switch);
