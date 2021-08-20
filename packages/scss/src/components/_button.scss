@@ -41,27 +41,24 @@
 	}
 }
 
-@mixin buttonOutlineColoring($palette) {
+@mixin buttonOutlineColoring($palette, $activeShadowPalette) {
 	box-shadow: inset 0 0 0 1px _color($palette, "400");
-	color: _color($palette);
+	color: _color($palette,"700");
 
 	&:hover:not([disabled]) {
 		background-color: _color($palette, "100");
-		color: _color($palette);
 		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color($palette, "400");
 	}
 
 	&:focus:not([disabled]) {
 		background-color: _color($palette, "100");
-		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
+		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($activeShadowPalette, "100"), inset 0 0 0 1px _color($activeShadowPalette, "400");
 		outline: none;
 	}
 
 	&:active:not([disabled]) {
 		background-color: _color($palette, "200");
-		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
+		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($activeShadowPalette, "200"), inset 0 0 0 1px _color($activeShadowPalette, "500");
 	}
 
 	.button-counter {
@@ -222,30 +219,9 @@
 
 	&.mod-outline,
 	&.mod-outlined {
-		background-color: _color("white");
-		box-shadow: inset 0 0 0 1px _color("grey", "400");
-		color: _color("text.default");
+		background-color: _color("white");		
+		@include buttonOutlineColoring("grey","primary");
 
-		&:hover:not([disabled]) {
-			background-color: _color("grey", "100");
-			color: _color("text.default");
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color("grey", "400");
-		}
-	
-		&:focus:not([disabled]) {
-			background-color: _color("grey", "100");
-			color: _color("text.default");
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
-			outline: none;
-		}
-	
-		&:active:not([disabled]) {
-			background-color: _color("grey", "200");
-			color: _color("text.default");
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
-		}
-
-		// TODO delete this class ?
 		&.mod-white {
 			background-color: _color("white");
 			color: _color("grey", "700");
@@ -254,7 +230,7 @@
 		// palette colors
 		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
-				@include buttonOutlineColoring($name);
+				@include buttonOutlineColoring($name, $name);
 			}
 		}
 
