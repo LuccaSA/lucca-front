@@ -12,7 +12,8 @@
 		}
 
 		&:focus {
-			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 200);
+			box-shadow: _theme('commons.box-shadow.xs'),
+				0 0 0 4px _color($palette, 200);
 			outline: none;
 			background-color: _color($palette, 600);
 		}
@@ -28,11 +29,29 @@
 	}
 }
 
-@mixin buttonLinkColoring($palette) {
+@mixin buttonLinkColoring($palette, $activeShadowPalette) {
+	color: _color($palette, 700);
+
 	&:not([disabled], .is-disabled) {
+		&:hover {
+			background-color: _color($palette, 50);
+		}
+
+		&:focus,
+		&:active {
+			box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04),
+				0 1px 2px rgba(19, 29, 53, 0.06),
+				0 0 0 4px _color($activeShadowPalette, 100),
+				inset 0 0 0 1px _color($activeShadowPalette, 400);
+		}
+
 		&:focus {
-			box-shadow: 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 300);
-			background: _color($palette, 100);
+			background-color: _color($palette, 50);
+			outline: none;
+		}
+
+		&:active {
+			background-color: _color($palette, 100);
 		}
 	}
 }
@@ -45,20 +64,23 @@
 		&:hover {
 			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.elevations.elevation-1'),
+				inset 0 0 0 1px _color($palette, 400);
 		}
 
 		&:focus {
 			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.elevations.elevation-1'),
+				0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
 			outline: none;
 		}
 
 		&:active {
 			background-color: _color($palette, 200);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
+			box-shadow: _theme('commons.elevations.elevation-1'),
+				0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
 		}
 	}
 
@@ -78,7 +100,9 @@
 	display: inline-block;
 	font-family: unquote(_component('button.font.family'));
 	font-size: _component('button.font-size');
-	font-weight: _component('button.font-weight'); /* stylelint-disable-line font-weight-notation */
+	font-weight: _component(
+		'button.font-weight'
+	); /* stylelint-disable-line font-weight-notation */
 	line-height: _component('button.line-height');
 	margin: _component('button.margin');
 	padding: _component('button.padding');
@@ -163,33 +187,36 @@
 		}
 	}
 
-	&.mod-link {
+	&.mod-link,
+	&.mod-text {
 		background-color: transparent;
+		box-shadow: none;
 		color: _color('text.default');
+		padding: _component('button.mod-text.padding');
 
 		// default color
-		@include buttonLinkColoring('button.default-palette');
+		@include buttonLinkColoring('grey', 'button.default-palette');
 
 		// palette colors
 		@each $name, $palette in _getMap('palettes') {
 			&.palette-#{$name} {
-				@include buttonLinkColoring($name);
+				@include buttonLinkColoring($name, $name);
 			}
 		}
 
-		&:hover {
-			box-shadow: none;
-			background-color: _color('primary', 50);
-			color: _color('primary');
+		&:not([disabled]) {
+			&:hover {
+				box-shadow: none;
+			}
 		}
 
 		&.mod-invert {
 			color: _color('white');
 
-			&:not([disabled], .is-disabled) {
-				&:hover,
-				&:focus {
-					background-color: rgba(255, 255, 255, 0.1);
+			&:hover,
+			&:focus {
+				&:not([disabled]) {
+					background-color: rgba(_color('white'), 0.1);
 					color: _color('white');
 				}
 
@@ -226,22 +253,28 @@
 
 		&:not([disabled], .is-disabled) {
 			&:hover {
-				background-color: _color('grey', 100);
+				background-color: _color('grey', '100');
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color('grey', 400);
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04),
+					0 1px 2px rgba(19, 29, 53, 0.06),
+					inset 0 0 0 1px _color('grey', '400');
 			}
 
 			&:focus {
-				background-color: _color('grey', 100);
+				background-color: _color('grey', '100');
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 100), inset 0 0 0 1px _color('primary', 400);
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04),
+					0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', '100'),
+					inset 0 0 0 1px _color('primary', '400');
 				outline: none;
 			}
 
 			&:active {
-				background-color: _color('grey', 200);
+				background-color: _color('grey', '200');
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 200), inset 0 0 0 1px _color('primary', 500);
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04),
+					0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', '200'),
+					inset 0 0 0 1px _color('primary', '500');
 			}
 		}
 
