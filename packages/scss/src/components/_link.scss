@@ -9,17 +9,15 @@ a {
 }
 
 .link {
-	background-color: transparent;
-	border: 0;
-	color: _color("text.link");
-	cursor: pointer;
+	color: _color("primary","700");
 	display: inline;
 	font-family: _theme("commons.font.family");
-	margin: 0;
-	padding: 0;
-	text-decoration: underline;
 
-	&:hover {
-		color: _color("text.link", "hover");
+	&:hover, &:focus {
+		color: _color("primary", "600");
+	}
+
+	&:visited {
+		color: _color("primary", '500');
 	}
 }
