@@ -8,4 +8,4 @@ $lucca-front-mat-typography: mat.define-typography-config(
   $font-family: _theme('commons.font.family', true),
 );
 
-@include mat.core($lucca-front-mat-typography);
+@include mat.all-component-typographies($lucca-front-mat-typography);
