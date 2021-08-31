@@ -17,84 +17,32 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-@mixin commonsTitleStyles($suffix:"") {
-	color: _color("text.dark");
-	font-weight: 600 #{$suffix};
-}
-
-@mixin h1Styles($suffix:"") {
-	font-size: _theme("sizes.biggest.font-size") #{$suffix};
-	line-height: _theme("sizes.biggest.line-height") #{$suffix};
-	margin-top: 0;
-	margin-bottom: _theme("spacings.small");
-
-	&.mod-headline {
-		font-size: _theme("sizes.headline.font-size") #{$suffix};
-		line-height: _theme("sizes.headline.line-height") #{$suffix};
-	}
-}
-
-@mixin h2Styles($suffix:"") {
-	font-size: _theme("sizes.bigger.font-size") #{$suffix};
-	line-height: _theme("sizes.bigger.line-height") #{$suffix};
-	margin-top: 0;
-	margin-bottom: _theme("spacings.small");
-}
-
-@mixin h3Styles($suffix:"") {
-	font-size: _theme("sizes.big.font-size") #{$suffix};
-	line-height: _theme("sizes.big.line-height") #{$suffix};
-	margin-top: 0;
-	margin-bottom: _theme("spacings.small");
-}
-
-@mixin h4Styles($suffix:"") {
-	font-size: _theme("sizes.standard.font-size") #{$suffix};
-	line-height: _theme("sizes.standard.line-height") #{$suffix};
-	margin-top: 0;
-	margin-bottom: _theme("spacings.small");
-}
-
-@mixin h5Styles($suffix:"") {
-	font-size: _theme("sizes.small.font-size") #{$suffix};
-	line-height: _theme("sizes.small.line-height") #{$suffix};
-	margin-top: 0;
-	margin-bottom: _theme("spacings.small");
-}
-
-@mixin h6Styles($suffix:"") {
-	font-size: _theme("sizes.smaller.font-size") #{$suffix};
-	line-height: _theme("sizes.smaller.line-height") #{$suffix};
-	margin-top: 0;
-	margin-bottom: _theme("spacings.small");
-}
-
 h1, h2, h3, h4, h5, h6 {
-	@include commonsTitleStyles;
+	@include hx;
 }
 
 h1 {
-	@include h1Styles;
+	@include h1;
 }
 
 h2 {
-	@include h2Styles;
+	@include h2;
 }
 
 h3 {
-	@include h3Styles;
+	@include h3;
 }
 
 h4 {
-	@include h4Styles;
+	@include h4;
 }
 
 h5 {
-	@include h5Styles;
+	@include h5;
 }
 
 h6 {
-	@include h6Styles;
+	@include h6;
 }
 
 p {
