@@ -170,7 +170,6 @@ var icons = [
 	'hamburger_menu',
 	'menu_ellipsis',
 	'ellipsis',
-	'messenger',
 	'mileage',
 	'money',
 	'payment',
