@@ -35,6 +35,7 @@
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: _color($palette, 50);
+			box-shadow: none;
 		}
 
 		&:focus,
