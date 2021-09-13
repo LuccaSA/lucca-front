@@ -150,6 +150,14 @@
 				padding-right: _component("table.card.padding");
 			}
 		}
+		.table-body-row {
+			background-color: transparent;
+			&:last-child {
+				.table-body-row-cell {
+					border-bottom: none;
+				}
+			}
+		}
 		.table-body-row-cell {
 			&:first-child {
 				padding-left: _component("table.card.padding");
