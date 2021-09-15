@@ -660,7 +660,7 @@
 	&[class*="mod-stickyColumn"] {
 		.table-head-row-cell,
 		.table-body-row-cell {
-			@for $i from 0 through _component("table.fixed-column.max-col-width", true) {
+			@for $i from 0 through _component("table.sticky-column.max-offset", true) {
 				&.mod-stickyColumn-leftOffset#{$i} {
 					left: $i * 1rem;
 				}
