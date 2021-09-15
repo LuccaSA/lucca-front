@@ -588,19 +588,19 @@
 
 // Sticky columns
 .table {
-	@mixin columnStickyCommons {
+	@mixin stickyColumnCommons {
 		width: auto;
 		min-width: 100%;
 		background-color: _color("white");
 		.table-head-row-cell,
 		.table-body-row-cell {
-			&[class*="mod-columnSticky-"] {
+			&[class*="mod-stickyColumn-"] {
 				position: sticky;
 				background-color: _color("white");
 				z-index: 3;
 			}
 			//columns sticky css drop shadow on scroll
-			&.mod-columnSticky-shadow {
+			&.mod-stickyColumn-shadow {
 				width: _component("table.fixed-column.sticky-shadow.width");
 				min-width: _component("table.fixed-column.sticky-shadow.width");
 				max-width: _component("table.fixed-column.sticky-shadow.width");
@@ -609,15 +609,15 @@
 				background-repeat: no-repeat;
 				background-color: transparent;
 				z-index: 1;
-				&[class*="mod-columnSticky-left"] {
+				&[class*="mod-stickyColumn-left"] {
 					background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
 				}
-				&[class*="mod-columnSticky-right"] {
+				&[class*="mod-stickyColumn-right"] {
 					background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
 				}
 			}
 			//mask for left stickies columns drop shadow when there is no scroll
-			&.mod-columnSticky-shadowMask {
+			&.mod-stickyColumn-shadowMask {
 				position: relative;
 				z-index: auto;
 				&::before {
@@ -633,7 +633,7 @@
 				}
 			}
 			//mask for right stickies columns drop shadow when there is no scroll
-			&:not([class*="mod-columnSticky"]) + .mod-columnSticky-shadowMask {
+			&:not([class*="mod-stickyColumn"]) + .mod-stickyColumn-shadowMask {
 				&::before {
 					left: auto;
 					right: _component("table.fixed-column.sticky-shadow.width", true) * -1;
@@ -643,28 +643,28 @@
 	}
 
 	//Sticky commons include, globaly and by BP
-	&.mod-columnSticky {
-		@include columnStickyCommons;
+	&.mod-stickyColumn {
+		@include stickyColumnCommons;
 	}
 
 	@each $bp-name, $bp-obj in _getMap("breakpoints") {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			&.mod-columnSticky-#{$bp-name} {
-				@include columnStickyCommons;
+			&.mod-stickyColumn-#{$bp-name} {
+				@include stickyColumnCommons;
 			}
 		}
 	}
 
 
 	//Sticky column offset
-	&[class*="mod-columnSticky"] {
+	&[class*="mod-stickyColumn"] {
 		.table-head-row-cell,
 		.table-body-row-cell {
 			@for $i from 0 through _component("table.fixed-column.max-col-width", true) {
-				&.mod-columnSticky-leftOffset#{$i} {
+				&.mod-stickyColumn-leftOffset#{$i} {
 					left: $i * 1rem;
 				}
-				&.mod-columnSticky-rightOffset#{$i} {
+				&.mod-stickyColumn-rightOffset#{$i} {
 					right: $i * 1rem;
 				}
 			}
