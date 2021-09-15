@@ -188,16 +188,21 @@
 		}
 	}
 
-	&.mod-stickyHeader {
+	&[class*="mod-stickyHeader"] {
 		.table-head-row-cell {
 			background-color: _color("white");
 			position: sticky;
 			z-index: 1;
+		}
+	}
+
+	&.mod-stickyHeader {
+		.table-head-row-cell {
 			top: 0;
 		}
 	}
 
-	&.mod-topBanner {
+	&.mod-stickyHeader-withBanner {
 		.table-head-row-cell {
 			top: _theme("commons.banner-height");
 		}
