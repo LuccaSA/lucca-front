@@ -93,6 +93,7 @@ var icons = [
 	'diner',
 	'discount',
 	'distribute',
+	'divide',
 	'dollar',
 	'download',
 	'drag',
