@@ -606,44 +606,44 @@
 			}
 			//columns sticky css drop shadow on scroll
 			&.mod-stickyColumn-shadow {
+				z-index: 1;
 				width: _component("table.fixed-column.sticky-shadow.width");
 				min-width: _component("table.fixed-column.sticky-shadow.width");
 				max-width: _component("table.fixed-column.sticky-shadow.width");
 				padding: 0;
-				background-size: _component("table.fixed-column.sticky-shadow.width") 100%;
-				background-repeat: no-repeat;
-				background-color: transparent;
-				z-index: 1;
-				&[class*="mod-stickyColumn-left"] {
-					background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-				}
-				&[class*="mod-stickyColumn-right"] {
-					background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-				}
+				background: transparent;
 			}
-			//mask for left stickies columns drop shadow when there is no scroll
-			&.mod-stickyColumn-shadowMask {
-				position: relative;
-				z-index: auto;
-				&::before {
-					content: "";
-					display: block;
-					width: _component("table.fixed-column.sticky-shadow.width");
-					position: absolute;
-					top: 0;
-					bottom: 0;
-					left: _component("table.fixed-column.sticky-shadow.width", true) * -1;
-					z-index: 2;
-					background: _color("white");	
-				}
-			}
-			//mask for right stickies columns drop shadow when there is no scroll
-			&:not([class*="mod-stickyColumn"]) + .mod-stickyColumn-shadowMask {
-				&::before {
-					left: auto;
-					right: _component("table.fixed-column.sticky-shadow.width", true) * -1;
-				}
-			}
+		}
+	}
+
+	.stickyColumn-shadow-wrapper {
+		position: absolute;
+		top: 0;
+		bottom: calc(#{_theme("commons.divider.width")} * -1);
+		display: flex;
+		width: _component("table.fixed-column.sticky-shadow.width");
+		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+		&::after {
+			content: "";
+			position: sticky;
+			display: block;
+			width:  _component("table.fixed-column.sticky-shadow.width");
+			height: 100%;
+			background-size: _component("table.fixed-column.sticky-shadow.width") 100%;
+			background-repeat: no-repeat;
+			background-color: transparent;
+		}
+	}
+	[class*="mod-stickyColumn-left"] .stickyColumn-shadow-wrapper {
+		left: -10px;
+		&::after {
+			background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+		}
+	}
+	[class*="mod-stickyColumn-right"] .stickyColumn-shadow-wrapper {
+		right: -10px;
+		&::after {
+			background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
 		}
 	}
 
@@ -660,7 +660,6 @@
 		}
 	}
 
-
 	//Sticky column offset
 	&[class*="mod-stickyColumn"] {
 		.table-head-row-cell,
@@ -668,9 +667,17 @@
 			@for $i from 0 through _component("table.sticky-column.max-offset", true) {
 				&.mod-stickyColumn-leftOffset#{$i} {
 					left: $i * 1rem;
+					&.mod-stickyColumn-shadow,
+					.stickyColumn-shadow-wrapper::after {
+						left: calc(#{$i} * 1rem + #{_component("table.fixed-column.sticky-shadow.width")});
+					}
 				}
 				&.mod-stickyColumn-rightOffset#{$i} {
 					right: $i * 1rem;
+					&.mod-stickyColumn-shadow,
+					.stickyColumn-shadow-wrapper::after {
+						right: calc(#{$i} * 1rem + #{_component("table.fixed-column.sticky-shadow.width")});
+					}
 				}
 			}
 		}
