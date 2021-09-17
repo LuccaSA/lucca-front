@@ -21,7 +21,8 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 		{ label: 'link 6', isActive: false },
 		{ label: 'link 7', isActive: false },
 	];
-	toggle(link) {
+	toggle(link, event) {
+		event.preventDefault();
 		this.links.forEach(l => l.isActive = false);
 		link.isActive = true;
 	}
