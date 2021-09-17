@@ -10,12 +10,16 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 }) class MenuStory {
 	@Input() mod: string = '';
 	@Input() palette: string = '';
+	@Input() withContainer: boolean = false;
 	
 	links = [
 		{ label: 'link 1', isActive: true },
 		{ label: 'link 2', isActive: false },
 		{ label: 'link 3', isActive: false },
 		{ label: 'link 4', isActive: false },
+		{ label: 'link 5', isActive: false },
+		{ label: 'link 6', isActive: false },
+		{ label: 'link 7', isActive: false },
 	];
 	toggle(link) {
 		this.links.forEach(l => l.isActive = false);
@@ -38,7 +42,12 @@ export default {
 				type: 'radio',
 				options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error']
 			}
-		}
+		},
+		withContainer: {
+			control: {
+				type: 'boolean',
+			}
+		} 
 	},
 	decorators: [
 		moduleMetadata({
@@ -53,3 +62,7 @@ const template: Story<MenuStory> = (args: MenuStory) => ({
 });
 
 export const basic = template.bind({});
+
+basic.args = {	
+	withContainer: false,
+};
