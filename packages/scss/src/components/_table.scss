@@ -596,41 +596,53 @@
 				padding: 0;
 				background: transparent;
 			}
+			.stickyColumn-shadow-wrapper {
+				display: flex;
+			}
 		}
-	}
+	
+		[class*="mod-stickyColumn-left"] .stickyColumn-shadow-wrapper {
+			left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			&::after {
+				background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+			}
+		}
+	
+		[class*="mod-stickyColumn-right"] .stickyColumn-shadow-wrapper {
+			right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			&::after {
+				background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+			}
+		}
 
-	.stickyColumn-shadow-wrapper {
-		position: absolute;
-		top: 0;
-		bottom: calc(#{_theme("commons.divider.width")} * -1);
-		display: flex;
-		width: _component("table.fixed-column.sticky-shadow.width");
-		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
-		&::after {
-			content: "";
-			position: sticky;
-			display: block;
-			width:  _component("table.fixed-column.sticky-shadow.width");
-			height: 100%;
-			background-color: transparent;
-		}
-	}
-	[class*="mod-stickyColumn-left"] .stickyColumn-shadow-wrapper {
-		left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
-		&::after {
-			background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-		}
-	}
-	[class*="mod-stickyColumn-right"] .stickyColumn-shadow-wrapper {
-		right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
-		&::after {
-			background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-		}
-	}
-	.mod-stickyHeader-shadow .stickyColumn-shadow-wrapper {
-		top: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
-		&::after {
-			background-image: linear-gradient(to bottom, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+		&[class*="mod-stickyHeader"] {
+			//Sticky Header + sticky column
+			&[class*="mod-stickyColumn"] {
+				.table-head-row-cell {	
+					&[class*="mod-stickyColumn"] {
+						z-index: 6;
+						&:not(.mod-stickyColumn-shadow) {
+							z-index: 7;
+						}
+					}
+					//shadowMask to fill void in header due to stickyColumn drop shadow tech
+					&.mod-columnSticky-shadowMask::before {
+						content: "";
+						position: absolute;
+						left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+						top: 0;
+						bottom: 0;
+						z-index: 4;
+						width: _component("table.fixed-column.sticky-shadow.width");
+						background: _color("white");
+					}
+					&:not(.mod-columnSticky-shadowMask):not([class*="mod-stickyColumn"]) + .mod-columnSticky-shadowMask::before {
+						left: auto;
+						right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+					}
+					
+				}
+			}
 		}
 	}
 
@@ -669,62 +681,73 @@
 			}
 		}
 	}
+	
+	//Sticky drop shadow
+	[class*="sticky"][class*="shadow-wrapper"] {
+		position: absolute;
+		top: 0;
+		bottom: calc(#{_theme("commons.divider.width")} * -1);
+		display: flex;
+		width: _component("table.fixed-column.sticky-shadow.width");
+		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+		&::after {
+			content: "";
+			position: sticky;
+			display: block;
+			width:  _component("table.fixed-column.sticky-shadow.width");
+			height: 100%;
+			background-color: transparent;
+		}
+	}
+
+	.mod-stickyColumn-shadow {
+		width: 0;
+		position: static;
+	}
 
 	//Sticky Header
 	&[class*="mod-stickyHeader"] {
 		.table-head-row-cell {
 			background-color: _color("white");
 			position: sticky;
-			z-index: 1;
+			z-index: 5;
 		}
-		&.mod-stickyColumn {
-			.table-head-row-cell {
-				z-index: 5;
-				&.mod-columnSticky-shadowMask::before {
-					content: "";
-					position: absolute;
-					width: 10px;
-					left: -10px;
-					top: 0;
-					bottom: 0;
-					background: _color("white");
-					z-index: 4;
-				}
-				&:not(.mod-columnSticky-shadowMask):not([class*="mod-stickyColumn"]) + .mod-columnSticky-shadowMask::before {
-					left: auto;
-					right: -10px;
-				}
-				&[class*="mod-stickyColumn"] {
-					z-index: 6;
-					&:not(.mod-stickyColumn-shadow) {
-						z-index: 7;
-					}
+		//Sticky header + sticky column at breakpoint
+		@each $bp-name, $bp-obj in _getMap("breakpoints") {
+			@media only screen and (max-width: map-get($bp-obj, breakAt)) {
+				&.mod-stickyColumn-#{$bp-name} .table-head-row-cell {
+					left: auto !important;
+					right: auto !important;
 				}
 			}
 		}
 	}
 
+	//header drop shadow only when sticky
 	.mod-stickyHeader-shadow {
 		.table-body-row-cell {
 			position: sticky;
-			top: calc(65px + 10px);
+			top: calc(var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
 			z-index: 4;
 			height: 0;
 			padding: 0;
 			border: 0;
 			background: transparent;
-			.stickyColumn-shadow-wrapper {
+		}
+		.stickyHeader-shadow-wrapper {
+			top: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			width: 100%;
+			height: 0;
+			border: 0;
+			&::after {
+				top: calc(var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
 				width: 100%;
-				height: 0;
-				border: 0;
-				&::after {
-					top: calc(65px + 10px);
-					width: 100%;
-					height: _component("table.fixed-column.sticky-shadow.width");
-					opacity: .5;
-				}
+				height: _component("table.fixed-column.sticky-shadow.width");
+				background-image: linear-gradient(to bottom, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+				opacity: .5;
 			}
 		}
+		
 		+ .table-body-row .table-body-row-cell {
 			border-top: 0;
 		}
@@ -739,6 +762,12 @@
 	&.mod-stickyHeader-withBanner {
 		.table-head-row-cell {
 			top: _theme("commons.banner-height");
+		}
+		.mod-stickyHeader-shadow .table-body-row-cell {
+			top: calc(#{_theme("commons.banner-height")} + var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+			.stickyHeader-shadow-wrapper::after {
+				top: calc(#{_theme("commons.banner-height")} + var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+			}
 		}
 	}
 }
