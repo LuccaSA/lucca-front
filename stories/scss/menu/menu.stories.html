@@ -1,12 +1,15 @@
 <nav class="menu {{mod}} {{palette}}">
-	<a
-		type="button"
-		class="menu-link"
-		*ngFor="let link of links"
-		[attr.aria-current]="link.isActive ? 'page' : null"
-		(click)="toggle(link)"
-	>
-		{{ link.label }}
-		<span class="menu-link-placeholder" aria-hidden="true" [attr.data-content-after]="link.label"></span>
-	</a>
+	<ul class="menu-list">
+		<li class="menu-list-item" *ngFor="let link of links">
+			<a
+				class="menu-list-item-action"
+				href="#"
+				[attr.aria-current]="link.isActive ? 'page' : null"
+				(click)="toggle(link)"
+			>
+				{{ link.label }}
+				<span class="menu-list-item-action-placeholder" aria-hidden="true" [attr.data-content-after]="link.label"></span>
+			</a>
+		</li>
+	</ul>
 </nav>

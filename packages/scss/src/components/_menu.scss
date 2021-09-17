@@ -3,6 +3,8 @@
 	background-color: _component("menu.background");
 	display: flex;
 	position: relative;
+	gap: 2.5rem; // magic number
+	flex-wrap: wrap;
 
 	&::after {
 		content: "";
@@ -15,15 +17,24 @@
 	}
 }
 
-.menu-link {
+.menu-list {
+	@include listReset;
+
+	display: flex;
+	gap: 2.5rem; // magic number
+	flex-wrap: wrap;
+}
+
+.menu-link, // legacy syntax
+.menu-list-item-action {
 	border-radius: _theme("commons.border.radius");
 	color: _color("text.light");
-	margin: 0 2.5rem 0 0;
 	padding: _component("menu.padding");
 	position: relative;
 	text-decoration: none;
 	transition: color _component("menu.animations.durations.fast") ease;
 	text-align: center;
+	display: block;
 
 	&::after {
 		border-radius: _theme("commons.border.radius") _theme("commons.border.radius") 0 0;
@@ -53,20 +64,17 @@
 	&:focus {
 		outline: none;
 
-		&.is-active,
+		&.is-active, // legacy syntax
 		&[aria-current="page"] {
 			&::after {
 				transform: scale(.75);
 			}
 		}
 	}
-
-	&:last-child {
-		margin-right: 0;
-	}
 }
 
-.menu-link-placeholder {
+.menu-link-placeholder, // legacy syntax
+.menu-list-item-action-placeholder {
 	&::after {
 		content: attr(data-content-after);
 		display: block;
@@ -98,14 +106,16 @@
 	}
 
 	// default color
-	.menu-link {
+	.menu-link,  // legacy syntax
+	.menu-list-item-action {
 		@include menuColoring("menu.default-palette");
 	}
 
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			.menu-link {
+			.menu-link,
+			.menu-list-item-action {
 				@include menuColoring($name);
 			}
 		}
@@ -116,9 +126,11 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.menu-link {
-	&[aria-current="page"],
-	&.is-active {
+.menu-link,
+.menu-list-item-action {
+	&.is-active,  // legacy syntax
+	&[aria-current="page"]
+	 {
 		color: _color("text.dark");
 		font-weight: 600;
 
