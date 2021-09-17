@@ -50,7 +50,7 @@
 		z-index: 1;
 	}
 
-	&:focus,
+	&:focus-visible,
 	&:hover {
 		&:not(.is-active, [aria-current="page"]) {
 			color: _color("text.light");
@@ -61,7 +61,7 @@
 		}
 	}
 
-	&:focus {
+	&:focus-visible {
 		outline: none;
 
 		&.is-active, // legacy syntax
