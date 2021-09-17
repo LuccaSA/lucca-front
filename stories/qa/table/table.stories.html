@@ -709,7 +709,7 @@
 <!-- Sticky columns with shadow-->
 <section class="contentSection">
 	<h2>Sticky columns with shadow on overflow</h2>
-	<table class="table mod-layoutFixed mod-stickyColumn">
+	<table class="table mod-layoutFixed mod-stickyColumn mod-stickyHeader">
 		<thead class="table-head">
 			<tr class="table-head-row">
 				<th class="table-head-row-cell mod-layoutFixed-8 mod-stickyColumn-leftOffset0">Head cell</th>
@@ -718,12 +718,12 @@
 				<th class="table-head-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</th>
+				<th class="table-head-row-cell mod-columnSticky-shadowMask">Head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
-				<th class="table-head-row-cell">Head cell</th>
-				<th class="table-head-row-cell">Head cell</th>
+				<th class="table-head-row-cell mod-columnSticky-shadowMask">Head cell</th>
 				<th class="table-head-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</th>
@@ -731,6 +731,11 @@
 			</tr>
 		</thead>
 		<tbody class="table-body">
+			<tr class="table-body-row mod-stickyHeader-shadow">
+				<td class="table-body-row-cell" style="--offsetTop: 65px;" colspan="12" role="presentation">
+					<div class="stickyColumn-shadow-wrapper"></div>
+				</td>
+			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell mod-stickyColumn-leftOffset0">Body cell</td>
 				<td class="table-body-row-cell mod-stickyColumn-leftOffset8">Body cell</td>
@@ -738,12 +743,12 @@
 				<td class="table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</td>
-				<td class="table-body-row-cell ">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
-				<td class="table-body-row-cell ">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 				<td class="table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</td>
@@ -756,12 +761,12 @@
 				<td class="table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</td>
-				<td class="table-body-row-cell ">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
-				<td class="table-body-row-cell ">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 				<td class="table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</td>
@@ -774,12 +779,12 @@
 				<td class="table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</td>
-				<td class="table-body-row-cell ">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
 				<td class="table-body-row-cell">Body cell</td>
-				<td class="table-body-row-cell ">Body cell</td>
+				<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 				<td class="table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow" role="presentation">
 					<div class="stickyColumn-shadow-wrapper"></div>
 				</td>
@@ -787,6 +792,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<div style="height: 550px"></div>
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
