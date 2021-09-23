@@ -1,21 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuApiSelectModule } from '@lucca-front/ng/api';
 import { LuQualificationSelectModule } from '@lucca-front/ng/qualification';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
-	selector: 'qualification-select-stories',
+	selector: 'qualification-picker-stories',
 	template: `
 <section class="section">
-	<lu-qualification-select placeholder="Select an qualification"></lu-qualification-select>
-	<lu-qualification-select placeholder="Select an qualification" [multiple]="true"></lu-qualification-select>
+	<lu-qualification-select placeholder="Select a qualification"></lu-qualification-select>
+	<lu-qualification-select placeholder="Select a qualification" [multiple]="true"></lu-qualification-select>
 </section>
 `,
 })
 class QualificationSelectStory { }
 
 export default {
-	title: 'NG/QualificationSelect',
+	title: 'NG/QualificationPicker',
 	component: QualificationSelectStory,
 	argTypes: {
 	},
@@ -24,6 +25,7 @@ export default {
 			entryComponents: [QualificationSelectStory],
 			imports: [
 				LuQualificationSelectModule,
+				LuApiSelectModule,
 				BrowserAnimationsModule,
 			]
 		})
