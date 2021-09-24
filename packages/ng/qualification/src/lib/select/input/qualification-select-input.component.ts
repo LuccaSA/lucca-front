@@ -28,6 +28,10 @@ export class LuQualificationSelectInputComponent<D extends ILuQualification = IL
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	@Input() filters: string[];
+	public get allFilters(): string[] {
+		return this.filters == null ? ['sort=job.name,level.position'] :
+			[...this.filters, 'sort=job.name,level.position'];
+	}
 
 	isSearching = false;
 
