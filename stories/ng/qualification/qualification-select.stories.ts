@@ -8,8 +8,15 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	selector: 'qualification-picker-stories',
 	template: `
 <section class="section">
-	<lu-qualification-select placeholder="Select a qualification"></lu-qualification-select>
-	<lu-qualification-select placeholder="Select a qualification" [multiple]="true"></lu-qualification-select>
+	<label class="textfield">
+		<lu-qualification-select placeholder="Select a qualification" class="textfield-input" ></lu-qualification-select>
+		<span class="textfield-label">Qualification</span>
+	</label>
+	<br/>
+	<label class="textfield">
+		<lu-qualification-select placeholder="Select a qualification" [multiple]="true" class="textfield-input" ></lu-qualification-select>
+		<span class="textfield-label">Qualifications</span>
+	</label>
 </section>
 `,
 })
