@@ -5,31 +5,20 @@ import {
 	forwardRef,
 	ViewContainerRef,
 	ElementRef,
-	HostListener,
-	TemplateRef,
-	ViewChild,
 	Input,
 	Renderer2,
-	HostBinding,
-	AfterContentInit,
 	Inject,
 	AfterViewInit,
-	Optional,
-	SkipSelf,
-	Self
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
-import { ILuInputWithPicker, ALuPickerPanel } from '@lucca-front/ng/picker';
+import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ILuUser } from '../../user.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuPickerPanel } from '@lucca-front/ng/picker';
 import { LuDisplayFullname } from '../../display/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { ILuUserSelectInputLabel } from './user-select-input.translate';
 import { LuOptionComparer } from '@lucca-front/ng/option';
-import { ALuUserService, LuUserV3Service } from '../../service/index';
 
 /**
 * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -82,6 +71,4 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 			_renderer,
 		);
 	}
-
-
 }
