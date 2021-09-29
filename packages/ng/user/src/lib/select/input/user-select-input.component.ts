@@ -62,6 +62,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	@Input() operations: number[];
 	@Input() enableFormerEmployees = false;
 
+	clue = '';
+
 	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
 	constructor(
