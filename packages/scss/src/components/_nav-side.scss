@@ -72,7 +72,13 @@
 	font-weight: 600;
 	line-height: 1rem;
 	padding: _theme("spacings.small");
+	width: 100%;
+	text-align: left;
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
 
+	&:focus-visible,
 	&:hover {
 		background-color: _component("navSide.fullwidth-palette.hovered-bg");
 		color: _component("navSide.fullwidth-palette.hovered-text");
