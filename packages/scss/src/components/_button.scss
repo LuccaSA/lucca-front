@@ -296,11 +296,10 @@
 
 	&.is-loading {
 		@include loading(_component("button.font-size"));
-		color: transparent;
+		color: transparent !important;
 		opacity: _theme("commons.disabled.opacity");
 		pointer-events: none;
 		user-select: none;
-		@include loading(_component("button.font-size"));
 
 		&.mod-small {
 			@include loading(_component("button.small.font-size"));
@@ -326,7 +325,7 @@
 	}
 
 	&.is-success, &.is-error {
-		color: transparent;
+		color: transparent !important;
 		pointer-events: none;
 		user-select: none;
 
@@ -357,6 +356,13 @@
 
 .button-group {
 	display: inline-flex;
+	flex-wrap: wrap;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	gap: _theme("commons.divider.width");
+	border-radius: var(--commons-border-radius);
+	overflow: hidden;
 
 	&:focus-within {
 		box-shadow: 0 0 0 4px _color("primary", "200");
@@ -372,16 +378,7 @@
 		padding-left: _theme("spacings.small");
 		padding-right: _theme("spacings.small");
 		position: relative;
-		border-right: 1px solid rgba(0, 0, 0, .1);
-
-		&:first-child {
-			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
-		}
-
-		&:last-child {
-			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
-			border-right: 0;
-		}
+		flex-grow: 1;
 
 		&:hover, &:focus {
 			z-index: 1;
@@ -393,9 +390,18 @@
 		}
 	}
 
+	.button-group-item {
+		flex-grow: 1;
+	
+		.button {
+			width: 100%;
+		}
+	}
+
 	// palette colors
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
+
 			&:focus-within {
 				box-shadow: 0 0 0 4px _color($name, "200");
 				border-radius: _component("button.border.radius");
@@ -409,25 +415,6 @@
 					box-shadow: none;
 				}
 			}
-		}
-	}
-}
-
-.button-group .button-group-item { // 2 classes needed to override button-group's "last-of-type"
-	.button {
-		border-right: 1px solid rgba(0, 0, 0, .1);
-	}
-
-	&:first-child {
-		.button {
-			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
-		}
-	}
-
-	&:last-child {
-		.button {
-			border: 0;
-			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
 		}
 	}
 }

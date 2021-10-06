@@ -4,19 +4,21 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
 
 @Component({
-	selector: 'button-basic-stories',
-	templateUrl: './button-basic.stories.html',
-}) class ButtonBasicStory {
+	selector: 'button-stories',
+	templateUrl: './button.stories.html',
+	styleUrls: ['./button-stories.scss'],
+}) class ButtonStory {
 	@Input() label: string;
 	@Input() mod: string = '';
 	@Input() palette: string = '';
 	@Input() state: string = '';
 	@Input() size: string = '';
+	@Input() group: string = '';
 }
 
 export default {
-	title: 'SCSS/Button/Basic',
-	component: ButtonBasicStory,
+	title: 'SCSS/Button',
+	component: ButtonStory,
 	argTypes: {
 		mod: {
 			control: {
@@ -42,26 +44,25 @@ export default {
 				options: ['', 'mod-smaller', 'mod-small']
 			}
 		},
+		group: {
+			control: {
+				type: 'radio',
+				options: ['', 'button-group']
+			}
+		},
 		
 	},
 	decorators: [
 		moduleMetadata({
-			entryComponents: [ButtonBasicStory],
+			entryComponents: [ButtonStory],
 			imports: [BrowserModule],
 		})
 	]
 } as Meta;
 
-const template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
+const template: Story<ButtonStory> = (args: ButtonStory) => ({
 	props: args,
 });
 
 export const def = template.bind({});
-def.args = { label: 'label', mod: '', size: '', state: '', palette: '' };
-
-export const outline = template.bind({});
-outline.args = { label: 'label', mod: 'mod-outline', size: '', state: '', palette: '' };
-
-export const loading = template.bind({});
-loading.args = { label: 'label', mod: '', size: '', state: 'is-loading', palette: '' };
-
+def.args = { label: 'label', mod: '', size: '', state: '', palette: '', group: '' };
