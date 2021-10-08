@@ -169,4 +169,12 @@ $suffix: "!important" !default;
 	.#{$prefix}gap#{str-capitalize($name)} {
 		gap: _theme("spacings." + $name) #{$suffix};
 	}
+
+	.#{$prefix}columnGap#{str-capitalize($name)} {
+		column-gap: _theme("spacings." + $name) #{$suffix};
+	}
+
+	.#{$prefix}rowGap#{str-capitalize($name)} {
+		row-gap: _theme("spacings." + $name) #{$suffix};
+	}
 }
