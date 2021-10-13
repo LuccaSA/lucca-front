@@ -173,6 +173,7 @@ gulp.task('ng:date:build', () => run('ng build date --prod').exec());
 gulp.task('ng:api:build', () => run('ng build api --prod').exec());
 gulp.task('ng:department:build', () => run('ng build department --prod').exec());
 gulp.task('ng:establishment:build', () => run('ng build establishment --prod').exec());
+gulp.task('ng:qualification:build', () => run('ng build qualification --prod').exec());
 gulp.task('ng:user:build', () => run('ng build user --prod').exec());
 
 gulp.task('ng:material:build', () => run('ng build material --prod').exec());
@@ -219,7 +220,7 @@ gulp.task(
 		),
 		gulp.parallel('ng:option:build','ng:select:build'),
 		gulp.parallel('ng:api:build','ng:date:build'),
-		gulp.parallel('ng:user:build','ng:department:build','ng:establishment:build'),
+		gulp.parallel('ng:user:build','ng:department:build','ng:establishment:build','ng:qualification:build'),
 		'ng:formly:build',
 		'ng:formly:style',
 	),
