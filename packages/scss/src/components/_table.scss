@@ -195,21 +195,6 @@
 			}
 		}
 	}
-
-	&.mod-stickyHeader {
-		.table-head-row-cell {
-			background-color: _color("white");
-			position: sticky;
-			z-index: 1;
-			top: 0;
-		}
-	}
-
-	&.mod-topBanner {
-		.table-head-row-cell {
-			top: _theme("commons.banner-height");
-		}
-	}
 }
 
 .table-body-row {
@@ -594,87 +579,202 @@
 	}
 }
 
-// Sticky columns
+/*****************
+* STICKY
+******************/
 .table {
-	@mixin columnStickyCommons {
+	//Sticky Columns
+	@mixin stickyColumnCommons {
 		width: auto;
 		min-width: 100%;
 		background-color: _color("white");
 		.table-head-row-cell,
 		.table-body-row-cell {
-			&[class*="mod-columnSticky-"] {
+			&[class*="mod-stickyColumn-"] {
 				position: sticky;
 				background-color: _color("white");
 				z-index: 3;
 			}
 			//columns sticky css drop shadow on scroll
-			&.mod-columnSticky-shadow {
+			&.mod-stickyColumn-shadow {
+				z-index: 1;
 				width: _component("table.fixed-column.sticky-shadow.width");
 				min-width: _component("table.fixed-column.sticky-shadow.width");
 				max-width: _component("table.fixed-column.sticky-shadow.width");
 				padding: 0;
-				background-size: _component("table.fixed-column.sticky-shadow.width") 100%;
-				background-repeat: no-repeat;
-				background-color: transparent;
-				z-index: 1;
-				&[class*="mod-columnSticky-left"] {
-					background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-				}
-				&[class*="mod-columnSticky-right"] {
-					background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-				}
+				background: transparent;
 			}
-			//mask for left stickies columns drop shadow when there is no scroll
-			&.mod-columnSticky-shadowMask {
-				position: relative;
-				z-index: auto;
-				&::before {
-					content: "";
-					display: block;
-					width: _component("table.fixed-column.sticky-shadow.width");
-					position: absolute;
-					top: 0;
-					bottom: 0;
-					left: _component("table.fixed-column.sticky-shadow.width", true) * -1;
-					z-index: 2;
-					background: _color("white");	
-				}
+			.stickyColumn-shadow-wrapper {
+				display: flex;
 			}
-			//mask for right stickies columns drop shadow when there is no scroll
-			&:not([class*="mod-columnSticky"]) + .mod-columnSticky-shadowMask {
-				&::before {
-					left: auto;
-					right: _component("table.fixed-column.sticky-shadow.width", true) * -1;
+		}
+	
+		[class*="mod-stickyColumn-left"] .stickyColumn-shadow-wrapper {
+			left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			&::after {
+				background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+			}
+		}
+	
+		[class*="mod-stickyColumn-right"] .stickyColumn-shadow-wrapper {
+			right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			&::after {
+				background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+			}
+		}
+
+		&[class*="mod-stickyHeader"] {
+			//Sticky Header + sticky column
+			&[class*="mod-stickyColumn"] {
+				.table-head-row-cell {	
+					&[class*="mod-stickyColumn"] {
+						z-index: 6;
+						&:not(.mod-stickyColumn-shadow) {
+							z-index: 7;
+						}
+					}
+					//shadowMask to fill void in header due to stickyColumn drop shadow tech
+					&.mod-columnSticky-shadowMask::before {
+						content: "";
+						position: absolute;
+						left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+						top: 0;
+						bottom: 0;
+						z-index: 4;
+						width: _component("table.fixed-column.sticky-shadow.width");
+						background: _color("white");
+					}
+					&:not(.mod-columnSticky-shadowMask):not([class*="mod-stickyColumn"]) + .mod-columnSticky-shadowMask::before {
+						left: auto;
+						right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+					}
+					
 				}
 			}
 		}
 	}
 
 	//Sticky commons include, globaly and by BP
-	&.mod-columnSticky {
-		@include columnStickyCommons;
+	&.mod-stickyColumn {
+		@include stickyColumnCommons;
 	}
 
 	@each $bp-name, $bp-obj in _getMap("breakpoints") {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			&.mod-columnSticky-#{$bp-name} {
-				@include columnStickyCommons;
+			&.mod-stickyColumn-#{$bp-name} {
+				@include stickyColumnCommons;
 			}
 		}
 	}
 
-
 	//Sticky column offset
-	&[class*="mod-columnSticky"] {
+	&[class*="mod-stickyColumn"] {
 		.table-head-row-cell,
 		.table-body-row-cell {
-			@for $i from 0 through _component("table.fixed-column.max-col-width", true) {
-				&.mod-columnSticky-leftOffset#{$i} {
+			@for $i from 0 through _component("table.sticky-column.max-offset", true) {
+				&.mod-stickyColumn-leftOffset#{$i} {
 					left: $i * 1rem;
+					&.mod-stickyColumn-shadow,
+					.stickyColumn-shadow-wrapper::after {
+						left: calc(#{$i} * 1rem + #{_component("table.fixed-column.sticky-shadow.width")});
+					}
 				}
-				&.mod-columnSticky-rightOffset#{$i} {
+				&.mod-stickyColumn-rightOffset#{$i} {
 					right: $i * 1rem;
+					&.mod-stickyColumn-shadow,
+					.stickyColumn-shadow-wrapper::after {
+						right: calc(#{$i} * 1rem + #{_component("table.fixed-column.sticky-shadow.width")});
+					}
 				}
+			}
+		}
+	}
+	
+	//Sticky drop shadow
+	[class*="sticky"][class*="shadow-wrapper"] {
+		position: absolute;
+		top: 0;
+		bottom: calc(#{_theme("commons.divider.width")} * -1);
+		display: flex;
+		width: _component("table.fixed-column.sticky-shadow.width");
+		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+		&::after {
+			content: "";
+			position: sticky;
+			display: block;
+			width:  _component("table.fixed-column.sticky-shadow.width");
+			height: 100%;
+			background-color: transparent;
+		}
+	}
+
+	.mod-stickyColumn-shadow {
+		width: 0;
+		position: static;
+	}
+
+	//Sticky Header
+	&[class*="mod-stickyHeader"] {
+		.table-head-row-cell {
+			background-color: _color("white");
+			position: sticky;
+			z-index: 5;
+		}
+		//Sticky header + sticky column at breakpoint
+		@each $bp-name, $bp-obj in _getMap("breakpoints") {
+			@media only screen and (max-width: map-get($bp-obj, breakAt)) {
+				&.mod-stickyColumn-#{$bp-name} .table-head-row-cell {
+					left: auto !important;
+					right: auto !important;
+				}
+			}
+		}
+	}
+
+	//header drop shadow only when sticky
+	.mod-stickyHeader-shadow {
+		.table-body-row-cell {
+			position: sticky;
+			top: calc(var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+			z-index: 4;
+			height: 0;
+			padding: 0;
+			border: 0;
+			background: transparent;
+		}
+		.stickyHeader-shadow-wrapper {
+			top: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			width: 100%;
+			height: 0;
+			border: 0;
+			&::after {
+				top: calc(var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+				width: 100%;
+				height: _component("table.fixed-column.sticky-shadow.width");
+				background-image: linear-gradient(to bottom, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+				opacity: .5;
+			}
+		}
+		
+		+ .table-body-row .table-body-row-cell {
+			border-top: 0;
+		}
+	}
+
+	&.mod-stickyHeader {
+		.table-head-row-cell {
+			top: 0;
+		}
+	}
+
+	&.mod-stickyHeader-withBanner {
+		.table-head-row-cell {
+			top: _theme("commons.banner-height");
+		}
+		.mod-stickyHeader-shadow .table-body-row-cell {
+			top: calc(#{_theme("commons.banner-height")} + var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+			.stickyHeader-shadow-wrapper::after {
+				top: calc(#{_theme("commons.banner-height")} + var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
 			}
 		}
 	}
