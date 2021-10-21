@@ -15,6 +15,7 @@
 	line-height: 1.5rem;
 	padding: _component("textfield.input.padding-vertical") _component("textfield.input.padding-horizontal");
 	transition: box-shadow _theme("commons.animations.durations.fast"), color _theme("commons.animations.durations.fast"), background-color _theme("commons.animations.durations.fast");
+	-webkit-appearance: none;
 
 	&::placeholder {
 		color: _component("textfield.input.placeholder");
