@@ -59,6 +59,6 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	}
 
 	searchFn(o, c) {
-		return o.name.toLowerCase().startsWith(c.toLowerCase());
+		return o.name.toLowerCase().includes(c.toLowerCase());
 	}
 }
