@@ -1,0 +1,78 @@
+.scrollbox {
+	--shadow-size-default: #{_theme('spacings.smallest')};
+	--shadow-color-default: #{_color('grey')};
+	--background-color-default: #{_color('white')};
+
+	position: relative;
+	display: flex;
+	overflow: auto;
+	background-color: var(--background-color, var(--background-color-default));
+  
+	&::before,
+	&::after {
+	  pointer-events: none;
+	  content: '';
+	  position: sticky;
+	  flex-shrink: 0;
+	  width: var(--shadow-size, var(--shadow-size-default));
+	}
+	
+	&::before {
+	  left: 0;
+	  background-image: radial-gradient(farthest-side at 0 50%,
+			var(--shadow-color, var(--shadow-color-default)),
+			rgba(0, 0, 0, 0)
+		);
+	}
+	
+	&::after {
+	  right: 0;
+	  background-image: radial-gradient(farthest-side at 100% 50%,
+	  		var(--shadow-color, var(--shadow-color-default)),
+			rgba(0, 0, 0, 0)
+		);
+	}
+  }
+  
+  .scrollbox-inner {
+	flex-shrink: 0;
+	position: relative;
+  
+	&::before,
+	&::after {
+	  content: "";
+	  position: absolute;
+	  z-index: 1;
+	  display: block;
+	  top: 0;
+	  bottom: 0;
+	  width: calc(var(--shadow-size, var(--shadow-size-default)) * 2);
+	  pointer-events: none;
+	}
+  
+	&::before {
+	  left: calc(var(--shadow-size, var(--shadow-size-default)) * -1);
+	  background-image: linear-gradient(to right,
+			var(--background-color, var(--background-color-default))
+			calc(var(--shadow-size, var(--shadow-size-default)) * 2),
+			rgba(256, 256, 256, 0)
+		);
+	}
+  
+	&::after {
+	  right: calc(var(--shadow-size, var(--shadow-size-default)) * -1);
+	  background-image: linear-gradient(to left,
+			var(--background-color, var(--background-color-default))
+			calc(var(--shadow-size, var(--shadow-size-default)) * 2),
+			rgba(256, 256, 256, 0)
+		);
+	}
+  }
+  
+  .scrollbox-inner-content {
+	margin-left: calc(var(--shadow-size, var(--shadow-size-default)) * -1);
+	margin-right: calc(var(--shadow-size, var(--shadow-size-default)) * -1);
+	position: relative;
+	z-index: 2;
+  }
+  
