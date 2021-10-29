@@ -55,7 +55,7 @@
 	  background-image: linear-gradient(to right,
 			var(--background-color, var(--background-color-default))
 			calc(var(--shadow-size, var(--shadow-size-default)) * 2),
-			rgba(256, 256, 256, 0)
+			rgba(255, 255, 255, 0)
 		);
 	}
   
@@ -64,7 +64,7 @@
 	  background-image: linear-gradient(to left,
 			var(--background-color, var(--background-color-default))
 			calc(var(--shadow-size, var(--shadow-size-default)) * 2),
-			rgba(256, 256, 256, 0)
+			rgba(255, 255, 255, 0)
 		);
 	}
   }
