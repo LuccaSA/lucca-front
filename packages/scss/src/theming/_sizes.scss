@@ -1,31 +1,40 @@
 $sizes: (
+  // deprecated
   smaller: (
 		font-size: .75rem,
 		line-height: 1rem,
+    vertical-padding: 0rem,
   ),
   small: (
 		font-size: .875rem,
-		line-height: 1rem,
+		line-height: 1.25rem,
+    vertical-padding: 0rem,
   ),
   standard: (
 		font-size: 1rem,
 		line-height: 1.5rem,
+    vertical-padding: 0.25rem,
   ),
   big: (
 		font-size: 1.125rem,
-		line-height: 2rem,
+		line-height: 1.5rem,
+    vertical-padding: 0.25rem,
   ),
   bigger: (
 		font-size: 1.375rem,
-		line-height: 2.5rem,
+		line-height: 1.75rem,
+    vertical-padding: 0.375rem,
   ),
-  biggest: (
+  biggest: ( 
 		font-size: 1.75rem,
-		line-height: 2.5rem,
+		line-height: 2rem,
+    vertical-padding: 0.125rem,
   ),
+  // deprecated
   headline: (
 		font-size: 2.25rem,
-		line-height: 3.5rem,
+		line-height: 2.5rem,
+    vertical-padding: 0.5rem,
   ),
 );
 
