@@ -14,4 +14,7 @@ export const luDepartmentSelectInputTranslations = {
 	fr: {
 		departments: 'départements',
 	},
+	es: {
+		departments: 'departamentos',
+	},
 } as ILuTranslation<ILuDepartmentSelectInputLabel>;
