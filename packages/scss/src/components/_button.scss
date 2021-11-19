@@ -5,63 +5,62 @@
 	background-color: _color($palette);
 	color: _color($palette, "text");
 
-	&:hover:not([disabled]) {
-		background-color: _color($palette, "600");
-		box-shadow: _theme('commons.box-shadow.xs');
+	&:not([disabled], .is-disabled) {
+		&:hover {
+			background-color: _color($palette, "600");
+			box-shadow: _theme('commons.box-shadow.xs');
+		}
+	
+		&:focus {
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, "200");
+			outline: none;
+			background-color: _color($palette, "600");
+		}
+	
+		&:active {
+			background-color: _color($palette, "800");
+			box-shadow: 0 0 0 4px _color($palette, "300");
+		}
 	}
 
-	&:focus {
-		box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, "200");
-		outline: none;
-		background-color: _color($palette, "600");
-	}
-
-	&:active:not([disabled]) {
-		background-color: _color($palette, "800");
-		box-shadow: 0 0 0 4px _color($palette, "300");
-	}
-
-	&[disabled],
-	&.is-disabled {
-		background-color: _color($palette, "500");
-		color: _color($palette, "300");
-		cursor: default;
-		pointer-events: none;
-	}
-
+	
 	.button-counter {
 		background-color: _color($palette, "500");
 	}
 }
 
 @mixin buttonLinkColoring($palette) {
-	&:focus:not([disabled]) {
-		box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
-		background: _color($palette, "100");
+	&:not([disabled], .is-disabled) {
+		&:focus {
+			box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
+			background: _color($palette, "100");
+		}
 	}
 }
 
 @mixin buttonOutlineColoring($palette) {
-	box-shadow: inset 0 0 0 1px _color($palette, "400");
-	color: _color($palette);
-
-	&:hover:not([disabled]) {
-		background-color: _color($palette, "100");
+	&:not([disabled], .is-disabled) {
 		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color($palette, "400");
-	}
+		box-shadow: inset 0 0 0 1px _color($palette, "400");
 
-	&:focus:not([disabled]) {
-		background-color: _color($palette, "100");
-		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
-		outline: none;
-	}
-
-	&:active:not([disabled]) {
-		background-color: _color($palette, "200");
-		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
+		&:hover {
+			background-color: _color($palette, "100");
+			color: _color($palette);
+			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color($palette, "400");
+		}
+	
+		&:focus {
+			background-color: _color($palette, "100");
+			color: _color($palette);
+			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
+			outline: none;
+		}
+	
+		&:active {
+			background-color: _color($palette, "200");
+			color: _color($palette);
+			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
+		}
 	}
 
 	.button-counter {
@@ -188,17 +187,17 @@
 		}
 
 		&.mod-invert {
-			color: white;
-
-			&:hover, &:focus {
-				&:not([disabled]) {
+			color: _color('white');
+			
+			&:not([disabled], .is-disabled) {
+				&:hover, &:focus {
 					background-color: rgba(255, 255, 255, .1);
-					color: white;
+					color: _color('white');
 				}
-			}
-
-			&:focus {
-				box-shadow: 0 0 0 4px rgba(0, 0, 0, .1);
+	
+				&:focus {
+					box-shadow: 0 0 0 4px rgba(0, 0, 0, .1);
+				}
 			}
 		}
 	}
@@ -209,8 +208,8 @@
 		width: 2rem;
 
 		&::before {
-			content: "";
 			@include makeIcon("arrow_south");
+			content: "";
 			height: 0;
 			vertical-align: text-top;
 		}
@@ -220,30 +219,34 @@
 		}
 	}
 
-	&.mod-outline,
-	&.mod-outlined {
+	&.mod-outlined,
+	&.mod-outline { // legacy
 		background-color: _color("white");
 		box-shadow: inset 0 0 0 1px _color("grey", "400");
 		color: _color("text.default");
 
-		&:hover:not([disabled]) {
-			background-color: _color("grey", "100");
-			color: _color("text.default");
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color("grey", "400");
+		&:not([disabled], .is-disabled) {
+			&:hover {
+				background-color: _color("grey", "100");
+				color: _color("text.default");
+				box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color("grey", "400");
+			}
+		
+			&:focus {
+				background-color: _color("grey", "100");
+				color: _color("text.default");
+				box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
+				outline: none;
+			}
+		
+			&:active {
+				background-color: _color("grey", "200");
+				color: _color("text.default");
+				box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
+			}
 		}
-	
-		&:focus:not([disabled]) {
-			background-color: _color("grey", "100");
-			color: _color("text.default");
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
-			outline: none;
-		}
-	
-		&:active:not([disabled]) {
-			background-color: _color("grey", "200");
-			color: _color("text.default");
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
-		}
+
+		
 
 		// TODO delete this class ?
 		&.mod-white {
@@ -312,6 +315,26 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
+	/* Disabled */
+
+	&.is-disabled, 
+	&[disabled] {
+		outline: none;
+		background-color: _color('grey', 100);
+		color: _color('grey', 500);
+		cursor: default;
+
+		&.mod-outlined,
+		&.mod-outline { // legacy
+			background-color: _color('white');
+			border-color: _color('grey', 200);
+		}
+
+		&.mod-link {
+			color: _color('grey', 500);
+			background-color: transparent;
+		}
+	}
 
 	/* Loading */
 
@@ -385,7 +408,7 @@
 	}
 
 	.button {
-		@include buttonColoring("button.default-palette");
+		// @include buttonColoring("button.default-palette");
 
 		border-radius: 0;
 		display: block;
@@ -404,13 +427,15 @@
 			border-right: 0;
 		}
 
-		&:hover, &:focus {
-			z-index: 1;
-		}
-
-		&:focus {
-			background-color: _color("primary", "600");
-			box-shadow: none;
+		&:not([disabled], .is-disabled) {
+			&:hover, &:focus {
+				z-index: 1;
+			}
+	
+			&:focus {
+				background-color: _color("primary", "600");
+				box-shadow: none;
+			}
 		}
 	}
 
