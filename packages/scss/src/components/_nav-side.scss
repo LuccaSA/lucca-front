@@ -326,7 +326,7 @@
 			padding: 0 .4em;
 			position: relative;
 			top: .625em;
-			margin: 0.166em;
+			margin: .166em;
 		}
 
 		.navSide-item-placeholder {
@@ -428,7 +428,6 @@
 			border-radius: 0;
 	
 			&:focus-visible {
-				outline: none;
 				box-shadow: 0 0 0 2px _component("navSide.fullwidth-palette.selected-text") inset;
 			}
 		}
