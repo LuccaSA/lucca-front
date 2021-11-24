@@ -35,6 +35,6 @@
 
 	.navSide.mod-withBanner ~ .main-content, .main-content.mod-withBanner, .mod-withBanner .main-content {
 		height: calc(100vh - #{_theme("commons.banner-height")} - #{_component("navSide.mobile.toggle-height")});
-		margin-top: _component("navSide.mobile.toggle-height");
+		margin-top: calc(#{_theme("commons.banner-height")} + _component("navSide.mobile.toggle-height"));
 	}
 }
