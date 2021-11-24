@@ -1,0 +1,26 @@
+<div class="grid">
+	<div class="grid-xxxs4">
+		<div class="form-group">
+			<label class="switch" [ngClass]="{'mod-small': isSmall, 'mod-inline': isInline}">
+				<input class="switch-input" id="switch1" type="checkbox" [checked]="isChecked" [disabled]="isDisabled"/>
+				<span for="switch1" class="switch-label">Switch 1</span>
+			</label>
+			<label class="switch" [ngClass]="{'mod-small': isSmall, 'mod-inline': isInline}">
+				<input class="switch-input" id="switch2" type="checkbox" [checked]="isChecked" [disabled]="isDisabled"/>
+				<span for="switch2" class="switch-label">Switch 2</span>
+			</label>
+		</div>
+	</div>
+	<div class="grid-xxxs4">
+		<div class="form-group">
+			<div class="switch" [ngClass]="{'mod-small': isSmall, 'mod-inline': isInline}">
+				<input class="switch-input" id="switch3" type="checkbox" [checked]="isChecked" [disabled]="isDisabled"/>
+				<label for="switch3" class="switch-label">Switch 3</label>
+			</div>
+			<div class="switch" [ngClass]="{'mod-small': isSmall, 'mod-inline': isInline}">
+				<input class="switch-input" id="switch4" type="checkbox" [checked]="isChecked" [disabled]="isDisabled"/>
+				<label for="switch4" class="switch-label">Switch 4</label>
+			</div>
+		</div>
+	</div>
+</div>
