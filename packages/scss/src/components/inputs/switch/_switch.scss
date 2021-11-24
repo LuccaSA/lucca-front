@@ -143,7 +143,7 @@
 			}
 		}
 
-		&:active ~ .switch-label {
+		&:active:not([disabled], [readonly]) ~ .switch-label {
 			&::before {
 				background-color: _color("secondary", "800");
 				box-shadow: 0 0 0 4px _color("secondary", "300");
@@ -161,22 +161,22 @@
 			cursor: default;
 
 			&::before {
-				background-color: _color("grey", "500");
+				background-color: _color("grey", "200");
 			}
 
 			&::after {
-				background-color: _color("grey", "300");
+				background-color: _color("grey", "500");
 			}
 		}
 
 		&:checked ~ .switch-label {
 			&::before {
-				background-color: _color("secondary", "500");
-				color: _color("secondary", "700");
+				background-color: _color("grey", "200");
+				color: _color("grey", "500");
 			}
 
 			&::after {
-				background-color: _color("secondary", "200");
+				background-color: _color("grey", "500");
 			}
 		}
 	}
@@ -195,7 +195,7 @@
 		Active
 	*/
 
-	&:active ~ .switch-label {
+	&:active:not([disabled], [readonly]) ~ .switch-label {
 		&::before {
 			background-color: _color("grey", "800");
 			box-shadow: 0 0 0 4px _color("grey", "300");
