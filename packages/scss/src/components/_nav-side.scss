@@ -342,7 +342,7 @@
 				flex-direction: row;
 
 				.navSide-item-link-title {
-					display: none;
+					@include mask;
 				}
 				&:hover {
 					background-color: _component("navSide.bottom-section-palette.hovered-bg");
