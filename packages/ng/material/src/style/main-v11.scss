@@ -4,7 +4,7 @@
  * This file uses old @angular/material syntax and is not working on v12+.
  */
 
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 @import 'theming';
 @import 'components';
