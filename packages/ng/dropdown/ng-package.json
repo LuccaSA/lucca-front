@@ -6,10 +6,6 @@
     "styleIncludePaths": [
       "../root/src/style",
       "../root/src/style/overrides"
-    ],
-    "umdModuleIds": {
-      "@lucca-front/ng/popover": "@lucca-front/ng/popover"
-    }
-
+    ]
   }
 }
