@@ -7,6 +7,7 @@ import {
 	ChangeDetectorRef,
 	AfterViewInit,
 	Directive,
+	Inject,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
@@ -28,6 +29,7 @@ import {
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuOptionItem } from '../item/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
+import { DOCUMENT } from '@angular/common';
 
 @Directive()
 export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
@@ -59,8 +61,9 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 	onScrollBottom() {
 		this._onScrollBottomSubscribers.forEach(o => {
@@ -149,7 +152,8 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 export class LuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }
