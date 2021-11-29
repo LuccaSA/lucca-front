@@ -6,12 +6,6 @@
     "styleIncludePaths": [
       "../root/src/style",
       "../root/src/style/overrides"
-    ],
-    "umdModuleIds": {
-      "@lucca-front/ng/input": "@lucca-front/ng/input",
-      "@lucca-front/ng/core": "@lucca-front/ng/core",
-      "@lucca-front/ng/option": "@lucca-front/ng/option",
-      "@lucca-front/ng/select": "@lucca-front/ng/select"
-    }
+    ]
   }
 }
