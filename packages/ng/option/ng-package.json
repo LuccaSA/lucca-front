@@ -6,14 +6,6 @@
     "styleIncludePaths": [
       "../root/src/style",
       "../root/src/style/overrides"
-    ],
-    "umdModuleIds": {
-      "@lucca-front/ng/input": "@lucca-front/ng/input",
-      "@lucca-front/ng/core": "@lucca-front/ng/core",
-      "@lucca-front/ng/tooltip": "@lucca-front/ng/tooltip",
-      "@lucca-front/ng/popover": "@lucca-front/ng/popover",
-      "@lucca-front/ng/picker": "@lucca-front/ng/picker",
-      "@lucca-front/ng/scroll": "@lucca-front/ng/scroll"
-    }
+    ]
   }
 }
