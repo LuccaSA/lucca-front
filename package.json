@@ -18,8 +18,11 @@
 		"url": "https://github.com/LuccaSA/lucca-front/issues"
 	},
 	"private": true,
+	"workspaces": [
+		"packages/icons",
+		"packages/scss"
+	],
 	"scripts": {
-		"postinstall": "gulp postinstall",
 		"build": "npm run build:icons && npm run build:scss && npm run build:ng",
 		"build:icons": "gulp icons",
 		"build:scss": "gulp scss",
@@ -31,7 +34,7 @@
 	},
 	"dependencies": {
 		"@angular/animations": "13.0.2",
-		"@angular/cdk": "12.0.3",
+		"@angular/cdk": "^13.0.2",
 		"@angular/common": "13.0.2",
 		"@angular/compiler": "13.0.2",
 		"@angular/core": "13.0.2",
@@ -50,7 +53,6 @@
 		"@angular-devkit/build-angular": "^13.0.3",
 		"@angular-devkit/core": "^13.0.3",
 		"@angular/cli": "^13.0.3",
-		"@angular/compiler-cli": "13.0.2",
 		"@angular/elements": "13.0.2",
 		"@babel/core": "^7.13.15",
 		"@compodoc/compodoc": "^1.1.11",
@@ -81,7 +83,7 @@
 		"karma-coverage": "~2.0.3",
 		"karma-jasmine": "~4.0.0",
 		"karma-jasmine-html-reporter": "^1.6.0",
-		"ng-packagr": "^12.0.0",
+		"ng-packagr": "^13.0.8",
 		"postcss": "^8.3.5",
 		"sass": "^1.32.11",
 		"stylelint": "^13.11.0",
