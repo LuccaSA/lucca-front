@@ -1,104 +1,54 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "paths": {
-      "@lucca-front/ng": [
-        "./packages/ng/root/src/index"
-      ],
-      "@lucca-front/ng/core": [
-        "./packages/ng/core/src/index"
-      ],
-      "@lucca-front/ng/animations": [
-        "./packages/ng/animations/src/index"
-      ],
-      "@lucca-front/ng/input": [
-        "./packages/ng/input/src/index"
-      ],
-      "@lucca-front/ng/scroll": [
-        "./packages/ng/scroll/src/index"
-      ],
-      "@lucca-front/ng/safe-content": [
-        "./packages/ng/safe-content/src/index"
-      ],
-      "@lucca-front/ng/number": [
-        "./packages/ng/number/src/index"
-      ],
-      "@lucca-front/ng/popover": [
-        "./packages/ng/popover/src/index"
-      ],
-      "@lucca-front/ng/popup": [
-        "./packages/ng/popup/src/index"
-      ],
-      "@lucca-front/ng/tooltip": [
-        "./packages/ng/tooltip/src/index"
-      ],
-      "@lucca-front/ng/dropdown": [
-        "./packages/ng/dropdown/src/index"
-      ],
-      "@lucca-front/ng/picker": [
-        "./packages/ng/picker/src/index"
-      ],
-      "@lucca-front/ng/modal": [
-        "./packages/ng/modal/src/index"
-      ],
-      "@lucca-front/ng/select": [
-        "./packages/ng/select/src/index"
-      ],
-      "@lucca-front/ng/sidepanel": [
-        "./packages/ng/sidepanel/src/index"
-      ],
-      "@lucca-front/ng/option": [
-        "./packages/ng/option/src/index"
-      ],
-      "@lucca-front/ng/date": [
-        "./packages/ng/date/src/index"
-      ],
-      "@lucca-front/ng/api": [
-        "./packages/ng/api/src/index"
-      ],
-      "@lucca-front/ng/department": [
-        "./packages/ng/department/src/index"
-      ],
-      "@lucca-front/ng/establishment": [
-        "./packages/ng/establishment/src/index"
-      ],
-      "@lucca-front/ng/qualification": [
-        "./packages/ng/qualification/src/index"
-      ],
-      "@lucca-front/ng/user": [
-        "./packages/ng/user/src/index"
-      ],
-      "@lucca-front/ng/material": [
-        "./packages/ng/material/src/index"
-      ],
-      "@lucca-front/ng/formly": [
-        "./packages/ng/formly/src/index"
-      ]
-    },
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"forceConsistentCasingInFileNames": true,
+		"strict": false,
+		"noImplicitReturns": false,
+		"noFallthroughCasesInSwitch": true,
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"rootDir": "./",
+		"paths": {
+			"@lucca-front/ng": ["packages/ng/root/src"],
+			"@lucca-front/ng/core": ["packages/ng/core/src"],
+			"@lucca-front/ng/animations": ["packages/ng/animations/src"],
+			"@lucca-front/ng/input": ["packages/ng/input/src"],
+			"@lucca-front/ng/scroll": ["packages/ng/scroll/src"],
+			"@lucca-front/ng/safe-content": ["packages/ng/safe-content/src"],
+			"@lucca-front/ng/number": ["packages/ng/number/src"],
+			"@lucca-front/ng/popover": ["packages/ng/popover/src"],
+			"@lucca-front/ng/popup": ["packages/ng/popup/src"],
+			"@lucca-front/ng/tooltip": ["packages/ng/tooltip/src"],
+			"@lucca-front/ng/dropdown": ["packages/ng/dropdown/src"],
+			"@lucca-front/ng/picker": ["packages/ng/picker/src"],
+			"@lucca-front/ng/modal": ["packages/ng/modal/src"],
+			"@lucca-front/ng/select": ["packages/ng/select/src"],
+			"@lucca-front/ng/sidepanel": ["packages/ng/sidepanel/src"],
+			"@lucca-front/ng/option": ["packages/ng/option/src"],
+			"@lucca-front/ng/date": ["packages/ng/date/src"],
+			"@lucca-front/ng/api": ["packages/ng/api/src"],
+			"@lucca-front/ng/department": ["packages/ng/department/src"],
+			"@lucca-front/ng/establishment": ["packages/ng/establishment/src"],
+			"@lucca-front/ng/qualification": ["packages/ng/qualification/src"],
+			"@lucca-front/ng/user": ["packages/ng/user/src"],
+			"@lucca-front/ng/material": ["packages/ng/material/src"],
+			"@lucca-front/ng/formly": ["packages/ng/formly/src"]
+		},
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "es2020",
+		"lib": ["es2018", "dom"]
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	}
 }
