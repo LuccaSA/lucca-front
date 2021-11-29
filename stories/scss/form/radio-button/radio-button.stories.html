@@ -1,22 +1,11 @@
-<div class="radioButtons">
-	<label class="radioButtons-item">
+<div class="radioButtons {{palette}}" [ngClass]="{'mod-small': isModSmall}">
+	<label *ngFor="let button of buttonsArray, let index = index"
+		class="radioButtons-item">
 		<input type="radio" 
-			name="radioButtonsIDa" 
-			class="radioButtons-item-input" 
-			[checked]="isChecked" 
-			[disabled]="isDisabled"/>
-		<span class="radioButtons-item-label">Button 1</span>
-	</label>
-	<label class="radioButtons-item">
-		<input type="radio" 
-			name="radioButtonsIDa" 
-			class="radioButtons-item-input"/>
-		<span class="radioButtons-item-label">Button 2</span>
-	</label>
-	<label class="radioButtons-item">
-		<input type="radio" 
-			name="radioButtonsIDa" 
-			class="radioButtons-item-input"/>
-		<span class="radioButtons-item-label">Button 3</span>
+			name="radioButtonsId" 
+			class="radioButtons-item-input"
+			[checked]="indexChecked === index + 1"
+			[disabled]="indexDisabled === index + 1"/>
+		<span class="radioButtons-item-label">Button {{ index + 1 }}</span>
 	</label>
 </div>

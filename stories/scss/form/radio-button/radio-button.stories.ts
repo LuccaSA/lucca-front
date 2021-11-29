@@ -9,16 +9,27 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	selector: 'radioButton-stories',
 	templateUrl: './radio-button.stories.html',
 }) class RadioButtonStory {
-	@Input() isDisabled: boolean;
-	@Input() isChecked: boolean;
-	// @Input() buttonsCount: number;
-	// @Input() indexDisabled: number;
-	// @Input() indexChecked: number;
+	@Input() buttonsCount: number;
+	@Input() indexDisabled: number;
+	@Input() indexChecked: number;
+	@Input() palette: string = '';
+	@Input() isModSmall: boolean;
+	get buttonsArray () {
+		return Array(this.buttonsCount).keys();
+	}
 }
 
 export default {
 	title: 'SCSS/Form/radioButtons',
 	component: RadioButtonStory,
+	argTypes: {
+		palette: {
+			control: {
+				type: 'radio',
+				options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error']
+			}
+		}
+	},
 	decorators: [
 		moduleMetadata({
 			entryComponents: [RadioButtonStory],
@@ -27,15 +38,16 @@ export default {
 	]
 } as Meta;
 
+
 const template: Story<RadioButtonStory> = (args: RadioButtonStory) => ({
 	props: args,
 });
 
 export const basic = template.bind({});
 basic.args = {
-	isDisabled: false,
-	isChecked: false,
-	// buttonsCount: 3,
-	// indexChecked: -1,
-	// indexDisabled: -1,
+	buttonsCount: 3,
+	indexChecked: 0,
+	indexDisabled: 0,
+	palette: '',
+	isModSmall: false
 };
