@@ -11,6 +11,7 @@ import {
 	AfterViewInit,
 	OnInit,
 	Directive,
+	Inject,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
@@ -19,6 +20,7 @@ import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
 import { Observable, merge, of } from 'rxjs';
 import { switchMap, map, delay, startWith } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 enum ToggleMode {
 	all,
@@ -66,8 +68,9 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 	protected _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
@@ -185,7 +188,8 @@ export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T>
 extends ALuTreeOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }

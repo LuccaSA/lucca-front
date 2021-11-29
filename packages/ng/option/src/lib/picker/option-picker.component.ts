@@ -13,6 +13,7 @@ import {
 	AfterViewInit,
 	Input,
 	Directive,
+	Inject,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuOptionItem, ALuOptionItem } from '../item/index';
@@ -21,6 +22,7 @@ import { merge, of } from 'rxjs';
 import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { DOCUMENT } from '@angular/common';
 
 @Directive()
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
@@ -73,6 +75,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) protected document: Document,
 	) {
 		super();
 		this._isOptionItemsInitialized = false;
@@ -172,11 +175,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 	protected _scrollToHighlight(targetElt: HTMLElement) {
 		if (!targetElt) { return; }
-		const contentElt = document.querySelector('.lu-picker-content') as HTMLElement;
+		const contentElt = this.document.querySelector<HTMLElement>('.lu-picker-content');
 		if (!contentElt) { return; }
-		const headerElt = document.querySelector('.lu-picker-content .lu-picker-header') as HTMLElement;
+		const headerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-header');
 		const headerHeight = headerElt ? headerElt.offsetHeight : 0;
-		const footerElt = document.querySelector('.lu-picker-content .lu-picker-footer') as HTMLElement;
+		const footerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-footer');
 		const footerHeight = footerElt ? footerElt.offsetHeight : 0;
 		// highlighted option is too high
 		if (contentElt.scrollTop + headerHeight > targetElt.offsetTop) {
@@ -274,7 +277,8 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }
