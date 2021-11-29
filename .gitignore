@@ -27,3 +27,6 @@ storybook-static
 
 # packages stuff
 packages/*/package-lock.json
+
+
+/.angular/cache
