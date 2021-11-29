@@ -1,36 +1,4 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../../out-tsc/lib",
-    "target": "es2015",
-    "declaration": true,
-    "declarationMap": true,
-    "inlineSources": true,
-    "types": [],
-    "lib": [
-      "dom",
-      "es2018"
-    ],
-    "paths": {
-      "@lucca-front/ng/modal": [
-        "./dist/ng/modal"
-      ],
-      "@lucca-front/ng/core": [
-        "./dist/ng/core"
-      ],
-      "@lucca-front/ng/popup": [
-        "./dist/ng/popup"
-      ]
-    }
-  },
-  "angularCompilerOptions": {
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "enableResourceInlining": true
-  },
-  "exclude": [
-    "src/test.ts",
-    "**/*.spec.ts"
-  ]
+	"extends": "../../../tsconfig.lib.json"
 }
