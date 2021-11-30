@@ -10,7 +10,7 @@ export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 
 export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	protected _subs = new Subscription();
-	onSelectValue: Observable<T | T[]>;
+	override onSelectValue: Observable<T | T[]>;
 	protected _value: T | T[];
 	setValue(value: T | T[]) {
 		this._value = value;
@@ -67,7 +67,7 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 	protected destroy() {
 		this._subs.unsubscribe();
 	}
-	_handleKeydown(event: KeyboardEvent) {
+	override _handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
 				this._emitCloseEvent();

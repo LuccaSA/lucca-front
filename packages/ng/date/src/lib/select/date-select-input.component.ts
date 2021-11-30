@@ -44,7 +44,7 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 	@Input() min?: D;
 	@Input() max?: D;
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
-	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input('placeholder') override set inputPlaceholder(p: string) { this._placeholder = p; }
 	@Input() hideClearer: boolean = false;
 	@Input() startOn: D = this._adapter.forgeToday();
 
@@ -60,11 +60,11 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator
 		}
 	}
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 		private _adapter: ALuDateAdapter<D>,
 		@Inject(LuDateSelectInputIntl) private _intl: ILuDateSelectInputLabel,
 	) {

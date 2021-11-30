@@ -20,11 +20,11 @@ enum ToggleMode {
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
 implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
-	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
+	@ContentChildren(ALuTreeOptionItem, { descendants: true }) override set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 	}
 	@ContentChildren(ALuTreeOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
-	protected set _options$(optionItems$: Observable<O[]>) {
+	protected override set _options$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change
 		this._subs.add(
 			optionItems$
@@ -60,7 +60,7 @@ implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	) {
 		super(_changeDetectorRef, document);
 	}
-	protected _toggle(option: O, mod = ToggleMode.all) {
+	protected override _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
 			case ToggleMode.self:
 				return this._toggleSelf(option);
@@ -139,7 +139,7 @@ implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		return [...entriesToKeep];
 	}
 
-	protected initItems() {
+	protected override initItems() {
 
 		const items$ = this._optionsQL.changes
 			.pipe(
@@ -151,7 +151,7 @@ implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		this._subs.add(items$.subscribe(o => this._options = o || []));
 		this._options$ = items$;
 	}
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		this.initItems();
 	}
 }
