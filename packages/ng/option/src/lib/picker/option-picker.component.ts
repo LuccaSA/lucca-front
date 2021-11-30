@@ -46,10 +46,10 @@ export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<
 	}
 
 
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
-	@Output() onSelectValue = new EventEmitter<T>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
+	@Output() override onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
@@ -84,7 +84,7 @@ export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<
 	_emitHoveredEvent(h): void {
 		this.hovered.emit(h);
 	}
-	onOpen() {
+	override onOpen() {
 		super.onOpen();
 		this.highlightIndex = 0;
 		// this._initObserver();
@@ -96,7 +96,7 @@ export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<
 	}
 
 	// keydown
-	_handleKeydown(event: KeyboardEvent) {
+	override _handleKeydown(event: KeyboardEvent) {
 		super._handleKeydown(event);
 		switch (event.keyCode) {
 			case ENTER:

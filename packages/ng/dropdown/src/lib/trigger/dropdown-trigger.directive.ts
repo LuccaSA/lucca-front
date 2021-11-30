@@ -39,9 +39,9 @@ implements ILuPopoverTrigger<TPanel, ILuPopoverTarget>, AfterViewInit, OnDestroy
 	@HostBinding('attr.aria-controls') get _attrAriaControls() { return this._panelId; }
 
 	constructor(
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
 	) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget;
@@ -54,7 +54,7 @@ implements ILuPopoverTrigger<TPanel, ILuPopoverTarget>, AfterViewInit, OnDestroy
 	}
 
 	@HostListener('click')
-	onClick() {
+	override onClick() {
 		super.onClick();
 	}
 	ngAfterViewInit() {

@@ -68,7 +68,7 @@ export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
 		super.init();
 	}
 
-	onOpen() {
+	override onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}
@@ -133,7 +133,7 @@ export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
 		super.init();
 	}
 
-	onOpen() {
+	override onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}

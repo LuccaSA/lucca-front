@@ -36,7 +36,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 		return this._nativeAdapter.isValid(this.stringToDate(d));
 	}
 
-	compare(a: string, b: string, granularity: ELuDateGranularity): number {
+	override compare(a: string, b: string, granularity: ELuDateGranularity): number {
 		const da = this.stringToDate(a);
 		const db = this.stringToDate(b);
 

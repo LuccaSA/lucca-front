@@ -42,11 +42,11 @@ implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	@Output() onClose = new EventEmitter<void>();
 
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 	) {
 		super(
 			_changeDetectorRef,
@@ -78,23 +78,23 @@ implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	@ViewChild(ALuClearer, { static: true }) vcClearer: ILuClearer<T>;
 
 	@HostListener('click')
-	onClick() {
+	override onClick() {
 		super.onClick();
 	}
 	@HostListener('mouseenter')
-	onMouseEnter() {
+	override onMouseEnter() {
 		super.onMouseEnter();
 	}
 	@HostListener('mouseleave')
-	onMouseLeave() {
+	override onMouseLeave() {
 		super.onMouseLeave();
 	}
 	@HostListener('focus')
-	onFocus() {
+	override onFocus() {
 		super.onFocus();
 	}
 	@HostListener('blur')
-	onBlur() {
+	override onBlur() {
 		super.onBlur();
 	}
 	@HostListener('keydown.space', ['$event'])
@@ -171,11 +171,11 @@ export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> 
 	@HostBinding('class.mod-multipleView')
 	get modMultipleView() { return this.useMultipleViews(); }
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 	) {
 		super(
 			_changeDetectorRef,
@@ -194,7 +194,7 @@ export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> 
 		}
 	}
 
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		super.ngAfterViewInit();
 		this.displayClearer(); // dont keep
 	}

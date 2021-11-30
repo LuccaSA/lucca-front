@@ -54,9 +54,9 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	}
 
 	/** Event emitted when the popover is closed. */
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
 
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {
@@ -120,7 +120,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.hovered.emit(hovered);
 	}
 
-	onOpen() {
+	override onOpen() {
 		this.focusFirstItem();
 	}
 	private focusFirstItem() {

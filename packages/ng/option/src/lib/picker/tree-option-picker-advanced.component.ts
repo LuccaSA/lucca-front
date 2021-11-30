@@ -73,19 +73,19 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 			o.onScrollBottom();
 		});
 	}
-	onOpen() {
+	override onOpen() {
 		this._onOpenSubscribers.forEach(o => {
 			o.onOpen();
 		});
 		super.onOpen();
 	}
-	onClose() {
+	override onClose() {
 		this._onCloseSubscribers.forEach(o => {
 			o.onClose();
 		});
 		super.onClose();
 	}
-	setValue(value: T | T[]) {
+	override setValue(value: T | T[]) {
 		super.setValue(value);
 		this._selectors.forEach(s => s.setValue(value));
 	}
@@ -120,7 +120,7 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 			})
 		);
 	}
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		super.ngAfterViewInit();
 		this.initOperators();
 		this.initSelectors();
