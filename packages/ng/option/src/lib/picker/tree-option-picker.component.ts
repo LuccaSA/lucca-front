@@ -1,26 +1,14 @@
+import { DOCUMENT } from '@angular/common';
 import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	OnDestroy,
-	ContentChildren,
-	ViewContainerRef,
-	QueryList,
-	ChangeDetectorRef,
-	AfterContentInit,
-	AfterViewInit,
-	OnInit,
-	Directive,
-	Inject,
+	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, OnDestroy, QueryList, ViewContainerRef
 } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, Observable } from 'rxjs';
+import { delay, map, startWith, switchMap } from 'rxjs/operators';
+import { ALuTreeOptionItem, ILuTreeOptionItem } from '../item/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
-import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
-import { Observable, merge, of } from 'rxjs';
-import { switchMap, map, delay, startWith } from 'rxjs/operators';
-import { DOCUMENT } from '@angular/common';
 
 enum ToggleMode {
 	all,
@@ -31,7 +19,7 @@ enum ToggleMode {
 @Directive()
 export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
 extends ALuOptionPickerComponent<T, O>
-implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 	}
