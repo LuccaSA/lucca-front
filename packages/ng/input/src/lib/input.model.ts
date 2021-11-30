@@ -1,9 +1,9 @@
+import { ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { ChangeDetectorRef, Renderer2, ElementRef } from '@angular/core';
 
-export declare interface ILuInput<T = any> extends ControlValueAccessor {}
+export declare interface ILuInput extends ControlValueAccessor {}
 
-export abstract class ALuInput<T = any> implements ILuInput<T> {
+export abstract class ALuInput<T = any> implements ILuInput {
 	protected _placeholder: string;
 	get placeholder() { return this._placeholder; }
 	protected _value: T;

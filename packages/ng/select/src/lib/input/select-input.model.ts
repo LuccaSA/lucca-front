@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 
 export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuPopoverTrigger<TPicker>
-implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput<T> {
+implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 	protected _subs = new Subscription();
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
