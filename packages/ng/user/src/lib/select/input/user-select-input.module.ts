@@ -1,21 +1,20 @@
-import { NgModule } from '@angular/core';
-import { LuUserSelectInputComponent } from './user-select-input.component';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuOptionOperatorModule, LuOptionPickerModule } from '@lucca-front/ng/option';
 import { LuUserDisplayModule } from '../../display/index';
-import { LuOptionOperatorModule, LuOptionItemModule, LuOptionPickerModule } from '@lucca-front/ng/option';
-import { LuUserSearcherModule } from '../searcher/index';
-import { LuInputDisplayerModule, LuInputClearerModule } from '@lucca-front/ng/input';
-import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.token';
-import { luUserSelectInputTranslations } from './user-select-input.translate';
-import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { LuUserHomonymsModule } from '../homonyms/index';
 import { LuUserMeOptionModule } from '../me/index';
+import { LuUserSearcherModule } from '../searcher/index';
+import { LuUserSelectInputComponent } from './user-select-input.component';
+import { LuUserSelectInputIntl } from './user-select-input.intl';
+import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.token';
+import { luUserSelectInputTranslations } from './user-select-input.translate';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		LuUserDisplayModule,
-		LuOptionItemModule,
 		LuOptionOperatorModule,
 		LuOptionPickerModule,
 		LuInputClearerModule,
@@ -35,4 +34,4 @@ import { LuUserMeOptionModule } from '../me/index';
 		LuUserSelectInputIntl,
 	]
 })
-export class LuUserSelectInputModule {}
+export class LuUserSelectInputModule { }
