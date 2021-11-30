@@ -141,7 +141,7 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
-	exportAs: 'LuOptionPicker',
+	exportAs: 'LuOptionPickerAdvanced',
 	providers: [
 		{
 			provide: ALuPickerPanel,
