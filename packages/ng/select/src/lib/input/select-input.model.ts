@@ -17,9 +17,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 	protected _subs = new Subscription();
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
 	) {
 		super(
@@ -65,17 +65,17 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T | T[]) => {};
+	protected _cvaOnChange = (v: T | T[]) => { };
 	registerOnChange(fn: any) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	protected _onTouched = () => {};
+	protected _onTouched = () => { };
 	registerOnTouched(fn: any) {
 		this._onTouched = fn;
 	}
-	set disabled(d) { this._disabled = d; }
-	get disabled() { return this._disabled; }
+	override set disabled(d) { this._disabled = d; }
+	override get disabled() { return this._disabled; }
 	setDisabledState(disabled: boolean) {
 		this.disabled = disabled;
 		this._changeDetectorRef.markForCheck();
@@ -111,7 +111,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		}
 	}
 
-	closePopover() {
+	override closePopover() {
 		this._onTouched();
 		super.closePopover();
 	}
@@ -125,7 +125,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		this._cleanUpSubscriptions();
 	}
 
-	protected _getOverlayConfig(): OverlayConfig {
+	protected override _getOverlayConfig(): OverlayConfig {
 		const config = super._getOverlayConfig();
 		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
 		config.minWidth = `${Math.max(185, clientRect.width)}px`; // might become min/maxWidth

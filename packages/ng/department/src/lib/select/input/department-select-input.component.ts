@@ -42,11 +42,11 @@ implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	@Input() operations: number[];
 
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 		@Inject(LuDepartmentSelectInputIntl) public intl: ILuDepartmentSelectInputLabel,
 	) {
 		super(

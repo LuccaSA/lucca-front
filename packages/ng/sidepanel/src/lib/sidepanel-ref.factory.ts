@@ -12,14 +12,14 @@ class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = an
 	protected _containerRef: ComponentRef<LuSidepanelPanelComponent>;
 	protected _containerOutlet: PortalOutlet;
 	constructor(
-		protected _overlay: Overlay,
-		protected _injector: Injector,
-		protected _component: ComponentType<T>,
-		protected _config: ILuSidepanelConfig,
+		protected override _overlay: Overlay,
+		protected override _injector: Injector,
+		protected override _component: ComponentType<T>,
+		protected override _config: ILuSidepanelConfig,
 	) {
 		super(_overlay, _injector, _component, _config);
 	}
-	protected _openPopup(data?: D) {
+	protected override _openPopup(data?: D) {
 		const injectionMap = new WeakMap();
 		injectionMap.set(ALuSidepanelRef, this);
 		injectionMap.set(LU_SIDEPANEL_DATA, data);
@@ -35,7 +35,7 @@ class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = an
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;
 	}
-	protected _closePopup() {
+	protected override _closePopup() {
 		this._componentRef.destroy();
 		this._containerRef.destroy();
 	}

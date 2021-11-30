@@ -97,9 +97,9 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	}
 
 	/** Event emitted when the popover is closed. */
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
 
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {

@@ -28,9 +28,9 @@ import { ALuApiService, LuApiHybridService } from '../../service/index';
 	],
 })
 export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem>
-extends ALuApiOptionFeeder<T, LuApiHybridService<T>>
-implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
-	outOptions$ = new BehaviorSubject<T[]>([]);
+	extends ALuApiOptionFeeder<T, LuApiHybridService<T>>
+	implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
+	override outOptions$ = new BehaviorSubject<T[]>([]);
 	constructor(
 		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: ALuApiService<T>,
 		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,

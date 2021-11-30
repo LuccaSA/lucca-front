@@ -82,9 +82,9 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	@HostBinding('attr.aria-controls') get _attrAriaControls() { return this._panelId; }
 
 	constructor(
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
 	) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
@@ -93,25 +93,25 @@ implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy {
 	}
 
 	@HostListener('click')
-	onClick() {
+	override onClick() {
 		super.onClick();
 	}
 
 	@HostListener('mouseenter')
-	onMouseEnter() {
+	override onMouseEnter() {
 		super.onMouseEnter();
 	}
 
 	@HostListener('mouseleave')
-	onMouseLeave() {
+	override onMouseLeave() {
 		super.onMouseLeave();
 	}
 	@HostListener('focus')
-	onFocus() {
+	override onFocus() {
 		super.onFocus();
 	}
 	@HostListener('blur')
-	onBlur() {
+	override onBlur() {
 		super.onBlur();
 	}
 
