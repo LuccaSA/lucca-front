@@ -20,9 +20,9 @@ export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopov
 		this._changeDetectorRef.markForCheck();
 	}
 
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
