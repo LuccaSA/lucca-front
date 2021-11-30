@@ -1,41 +1,21 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ChangeDetectorRef,
-	forwardRef,
-	ViewContainerRef,
-	ElementRef,
-	ContentChild,
-	HostListener,
-	ViewChild,
-	Renderer2,
-	Input,
-	HostBinding,
-	OnDestroy,
-	AfterViewInit,
-	Output,
-	EventEmitter,
-	Directive,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
 import {
-	ILuInputWithPicker,
-	ILuPickerPanel,
-	ALuPickerPanel,
-} from '@lucca-front/ng/picker';
+	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Input, OnDestroy, Output, Renderer2, ViewChild, ViewContainerRef
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-	ALuClearer,
-	ILuClearer,
-	ILuInputDisplayer,
-	ALuInputDisplayer,
+	ALuClearer, ALuInputDisplayer, ILuClearer,
+	ILuInputDisplayer
 } from '@lucca-front/ng/input';
+import {
+	ALuPickerPanel, ILuPickerPanel
+} from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
 @Directive()
 export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 extends ALuSelectInput<T, TPicker>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy {
+implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}

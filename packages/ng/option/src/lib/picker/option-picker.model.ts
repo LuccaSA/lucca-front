@@ -1,14 +1,14 @@
-import { ILuPickerPanel, ALuPickerPanel } from '@lucca-front/ng/picker';
-import { Subscription, Observable, merge } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { ILuOptionItem } from '../item/index';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
+import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
+import { merge, Observable, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ILuOptionItem } from '../item/option-item.model';
 
-export interface ILuOptionPickerPanel<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ILuPickerPanel<T> {}
+export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> { }
 
 export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 
-export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T, O> {
+export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	protected _subs = new Subscription();
 	onSelectValue: Observable<T | T[]>;
 	protected _value: T | T[];
@@ -23,10 +23,10 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 		// reapply selected when the options change
 		this._subs.add(
 			options$
-			.subscribe(o => {
-				this._applySelected();
-				this._applyHighlight();
-			})
+				.subscribe(o => {
+					this._applySelected();
+					this._applyHighlight();
+				})
 		);
 		// subscribe to any option.onSelect
 		const singleFlow$ = options$.pipe(switchMap(
