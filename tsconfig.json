@@ -11,6 +11,7 @@
 		"noImplicitReturns": false,
 		"noFallthroughCasesInSwitch": true,
 		"sourceMap": true,
+		"rootDirs": ["./"],
 		"paths": {
 			"@lucca-front/ng": ["packages/ng/root/src"],
 			"@lucca-front/ng/core": ["packages/ng/core/src"],
