@@ -1,33 +1,20 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ContentChildren,
-	QueryList,
-	Output,
-	EventEmitter,
-	OnDestroy,
-	forwardRef,
-	ViewChild,
-	TemplateRef,
-	ChangeDetectorRef,
-	AfterViewInit,
-	Input,
-	Directive,
-	Inject,
-} from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { ILuOptionItem, ALuOptionItem } from '../item/index';
-import { ILuOptionPickerPanel, ALuOptionPicker, LuOptionComparer } from './option-picker.model';
-import { merge, of } from 'rxjs';
-import { map, delay, share } from 'rxjs/operators';
-import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
+import {
+	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component,
+	ContentChildren, Directive, EventEmitter, forwardRef, Inject, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild
+} from '@angular/core';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, of } from 'rxjs';
+import { delay, map, share } from 'rxjs/operators';
+import { ALuOptionItem, ILuOptionItem } from '../item/option-item.model';
+import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
 @Directive()
 export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
-extends ALuOptionPicker<T, O>
-implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+	extends ALuOptionPicker<T, O>
+	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -138,7 +125,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _initHighlight() {
 		this._subs.add(this._options$.subscribe(options => {
 			const optionCount = options.length;
-			const newHighlight =  Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
+			const newHighlight = Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
 			if (newHighlight !== this.highlightIndex) {
 				this.highlightIndex = newHighlight;
 			}
@@ -220,11 +207,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
 			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
 		} else {
-			const values = <T[]> this._value || [];
+			const values = <T[]>this._value || [];
 			const matchingIndexes = this._options.map(
 				o => values.some(v => this.optionComparer(o.value, v)),
 			).map((f, i) => f ? i : null)
-			.filter(i => i !== null);
+				.filter(i => i !== null);
 			selectedIndexes.push(...matchingIndexes);
 			// selectedIndexes.push(
 			// 	...values
