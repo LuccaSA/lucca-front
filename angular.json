@@ -887,23 +887,16 @@
       }
     },
     "storybook": {
-      "projectType": "application",
+      "projectType": "library",
       "root": ".storybook",
       "sourceRoot": ".storybook/src",
       "prefix": "app",
       "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+        "start": {
+          "builder": "@storybook/angular:start-storybook",
           "options": {
-            "outputPath": "dist/storybook",
-            "index": ".storybook/src/index.html",
-            "main": ".storybook/src/main.ts",
             "tsConfig": ".storybook/tsconfig.json",
-            "aot": true,
-            "assets": [],
-            "styles": [
-              ".storybook/src/styles.scss"
-            ],
+            "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "packages/scss/src/overrides",
@@ -911,7 +904,23 @@
                 "packages/ng/root/src/style"
               ]
             },
-            "scripts": []
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "tsConfig": ".storybook/tsconfig.json",
+            "styles": [".storybook/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "packages/scss/src/overrides",
+                "packages/ng/root/src/style/overrides",
+                "packages/ng/root/src/style"
+              ]
+            },
+            "compodoc": false
           }
         }
       }

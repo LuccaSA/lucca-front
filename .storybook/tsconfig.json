@@ -3,15 +3,11 @@
   "compilerOptions": {
     "types": [
       "node"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": [
-    "../**/test.ts",
-    "../**/*.spec.ts"
-  ],
-  "include": [
-    "./src/main.ts"
-  ],
+  "exclude": ["../node_modules/**/*", "../dist/**/*", "../packages/**/*.spec.ts"],
+  "include": ["../packages/**/*", "../stories/**/*"],
   "files": [
     "./typings.d.ts"
   ]
