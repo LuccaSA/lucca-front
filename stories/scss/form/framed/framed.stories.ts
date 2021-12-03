@@ -12,7 +12,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 }
 
 export default {
-	title: 'SCSS/FramedStory',
+	title: 'SCSS/Form/FramedStory',
 	component: FramedStory,
 	argTypes: {
 		state: {
