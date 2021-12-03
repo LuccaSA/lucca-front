@@ -148,7 +148,8 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .radio .radio-input {
-	&[disabled] {
+	&[disabled],
+	&[read-only] {
 		~ .radio-label {
 			color: _color('grey', '500');
 			cursor: default;

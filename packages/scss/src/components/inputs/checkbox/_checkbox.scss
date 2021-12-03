@@ -165,7 +165,8 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .checkbox .checkbox-input {
-	&[disabled] {
+	&[disabled],
+	&[read-only] {
 		~ .checkbox-label {
 			color: _color('grey', '500');
 			cursor: default;
