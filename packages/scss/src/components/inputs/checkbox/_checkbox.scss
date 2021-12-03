@@ -17,30 +17,30 @@
 	cursor: pointer;
 	display: inline-flex;
 	align-items: flex-start;
-	transition: color _theme("commons.animations.durations.fast") ease;
+	transition: color _theme('commons.animations.durations.fast') ease;
 
 	&::before {
-		@include makeIcon("tick");
-		border-radius: _component("checkbox.input.border-radius");
-		border: 2px solid _component("checkbox.input.border.color");
+		@include makeIcon('tick');
+		border-radius: _component('checkbox.input.border-radius');
+		border: 2px solid _component('checkbox.input.border.color');
 		color: transparent;
 		display: block;
 		flex: 0 0 auto;
-		font-size: .8rem;
-		height: _component("checkbox.input.size");
+		font-size: 0.8rem;
+		height: _component('checkbox.input.size');
 		line-height: 1;
-		margin-right: _component("checkbox.input.margin-right");
-		margin-top: _component("checkbox.input.margin-top");
+		margin-right: _component('checkbox.input.margin-right');
+		margin-top: _component('checkbox.input.margin-top');
 		text-align: center;
-		transition: all _theme("commons.animations.durations.fast") ease;
-		width: _component("checkbox.input.size");
+		transition: all _theme('commons.animations.durations.fast') ease;
+		width: _component('checkbox.input.size');
 	}
 
 	&:hover {
-		color: _color("text.light");
+		color: _color('text.light');
 
 		&::before {
-			border-color: _component("checkbox.input.border.hover");
+			border-color: _component('checkbox.input.border.hover');
 		}
 	}
 }
@@ -61,53 +61,55 @@
 		.checkbox-input:not(:disabled):checked ~ .checkbox-label {
 			&:hover {
 				&::before {
-					background-color: _color($palette, "600");
-					border-color: _color($palette, "600");
+					background-color: _color($palette, '600');
+					border-color: _color($palette, '600');
 				}
 			}
 		}
 
 		.checkbox-input:focus ~ .checkbox-label {
 			&::before {
-				box-shadow: 0 0 0 4px _color($palette, "200");
+				box-shadow: 0 0 0 4px _color($palette, '200');
 			}
 		}
 	}
 
 	// default color
-	@include checkboxColoring("checkbox.default-palette");
+	@include checkboxColoring('checkbox.default-palette');
 
 	// Status and associated palettes
-	&.palette-error, &.is-error {
+	&.palette-error,
+	&.is-error {
 		.checkbox-label {
 			&::before {
-				border-color: _color("error", "600");
+				border-color: _color('error', '600');
 			}
 		}
 	}
-	&.palette-warning, &.is-warning {
+	&.palette-warning,
+	&.is-warning {
 		.checkbox-label {
 			&::before {
-				border-color: _color("warning", "600");
+				border-color: _color('warning', '600');
 			}
 		}
 	}
-	&.palette-success, &.is-success {
+	&.palette-success,
+	&.is-success {
 		.checkbox-label {
 			&::before {
-				border-color: _color("success", "600");
+				border-color: _color('success', '600');
 			}
 		}
 	}
 
 	// palette colors
-	@each $name, $palette in _getMap("palettes") {
+	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
 			@include checkboxColoring($name);
 		}
 	}
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -134,14 +136,14 @@
 
 	&.mod-small {
 		.checkbox-label {
-			font-size: _theme("sizes.small.font-size");
-			line-height: _theme("sizes.small.line-height");
+			font-size: _theme('sizes.small.font-size');
+			line-height: _theme('sizes.small.line-height');
 
 			&::before {
-				width: _theme("sizes.small.font-size");
-				height: _theme("sizes.small.font-size");
-				font-size: _theme("sizes.smaller.font-size");
-				margin-top: _component("checkbox.input.small-top");
+				width: _theme('sizes.small.font-size');
+				height: _theme('sizes.small.font-size');
+				font-size: _theme('sizes.smaller.font-size');
+				margin-top: _component('checkbox.input.small-top');
 			}
 		}
 	}
@@ -162,22 +164,23 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-
 .checkbox .checkbox-input {
-	&[disabled] {
+	&[disabled],
+	&[read-only] {
 		~ .checkbox-label {
-			color: _color("grey");
+			color: _color('grey', '500');
 			cursor: default;
 
 			&::before {
-				border: 2px solid _color("grey", "500");
+				border: 2px solid _color('grey', '500');
 			}
 		}
 
 		&:checked ~ .checkbox-label {
 			&::before {
-				background-color: _color("grey", "500");
-				border: 2px solid _color("grey", "500");
+				color: _color('grey', '500');
+				background-color: _color('grey', '200');
+				border: 2px solid _color('grey', '200');
 			}
 		}
 	}
@@ -185,7 +188,7 @@
 	~ .checkbox-mixed ~ .checkbox-label,
 	&.is-incomplete ~ .checkbox-label {
 		&::before {
-			@include makeIcon("partial");
+			@include makeIcon('partial');
 		}
 	}
 }

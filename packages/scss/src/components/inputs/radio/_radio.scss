@@ -14,7 +14,7 @@
 
 	&:checked ~ .radio-label {
 		&::after {
-			transform: scale(.55);
+			transform: scale(0.55);
 		}
 	}
 }
@@ -22,34 +22,34 @@
 .radio-label {
 	cursor: pointer;
 	display: inline-block;
-	line-height: _component("radio.label.line-height");
-	padding: _component("radio.label.padding");
-	transition: color _theme("commons.animations.durations.fast") ease;
+	line-height: _component('radio.label.line-height');
+	padding: _component('radio.label.padding');
+	transition: color _theme('commons.animations.durations.fast') ease;
 
 	&::before {
 		border-radius: 50%;
-		content: "";
+		content: '';
 		display: block;
-		height: _component("radio.input.size");
+		height: _component('radio.input.size');
 		left: 0;
 		position: absolute;
-		top: _component("radio.input.top");
-		transition: all _theme("commons.animations.durations.fast") ease;
-		width: _component("radio.input.size");
+		top: _component('radio.input.top');
+		transition: all _theme('commons.animations.durations.fast') ease;
+		width: _component('radio.input.size');
 	}
 
 	&::after {
 		border-radius: 50%;
 		color: transparent;
-		content: "";
+		content: '';
 		display: block;
-		height: _component("radio.input.size");
+		height: _component('radio.input.size');
 		left: 0;
 		position: absolute;
-		top: _component("radio.input.top");
+		top: _component('radio.input.top');
 		transform: scale(0);
-		transition: all _theme("commons.animations.durations.fast") ease;
-		width: _component("radio.input.size");
+		transition: all _theme('commons.animations.durations.fast') ease;
+		width: _component('radio.input.size');
 	}
 }
 
@@ -60,36 +60,36 @@
 	@mixin radioColoring($palette) {
 		.radio-input:checked ~ .radio-label {
 			&::before {
-				border: 2px solid _color($palette, "700");
+				border: 2px solid _color($palette, '700');
 			}
 
 			&::after {
-				background-color: _color($palette, "700");
+				background-color: _color($palette, '700');
 			}
 
 			&:hover {
 				&::before {
-					border-color: _color($palette, "600");
+					border-color: _color($palette, '600');
 				}
 
 				&::after {
-					background-color: _color($palette, "600");
+					background-color: _color($palette, '600');
 				}
 			}
 		}
 
 		.radio-label {
 			&::before {
-				border: 2px solid _color($palette, "700");
+				border: 2px solid _color($palette, '700');
 			}
 
 			&:hover {
 				&::after {
-					background-color: _color($palette, "600");
+					background-color: _color($palette, '600');
 				}
 
 				&::before {
-					border-color: _color($palette, "600");
+					border-color: _color($palette, '600');
 				}
 			}
 		}
@@ -97,28 +97,27 @@
 		.radio-input {
 			&:focus ~ .radio-label {
 				&::before {
-					box-shadow: 0 0 0 4px _color($palette, "200");
-					border-color: _color($palette, "600");
+					box-shadow: 0 0 0 4px _color($palette, '200');
+					border-color: _color($palette, '600');
 				}
 
 				&::after {
-					background-color: _color($palette, "600");
+					background-color: _color($palette, '600');
 				}
 			}
 		}
 	}
 
 	// default color
-	@include radioColoring("radio.default-palette");
+	@include radioColoring('radio.default-palette');
 
 	// palette colors
-	@each $name, $palette in _getMap("palettes") {
+	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
 			@include radioColoring($name);
 		}
 	}
 }
-
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -132,14 +131,15 @@
 	}
 
 	&.mod-small .radio-label {
-		line-height: _theme("sizes.small.line-height");
-		font-size: _theme("sizes.small.font-size");
-		padding: _component("radio.label.small-padding");
+		line-height: _theme('sizes.small.line-height');
+		font-size: _theme('sizes.small.font-size');
+		padding: _component('radio.label.small-padding');
 
-		&::before, &::after {
-			height: _theme("sizes.small.font-size");
-			width: _theme("sizes.small.font-size");
-			top: _component("radio.input.small-top");
+		&::before,
+		&::after {
+			height: _theme('sizes.small.font-size');
+			width: _theme('sizes.small.font-size');
+			top: _component('radio.input.small-top');
 		}
 	}
 }
@@ -148,23 +148,24 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .radio .radio-input {
-	&[disabled] {
+	&[disabled],
+	&[read-only] {
 		~ .radio-label {
-			color: _color("grey");
+			color: _color('grey', '500');
 			cursor: default;
 
 			&::before {
-				border: 2px solid _color("grey", "500");
+				border: 2px solid _color('grey', '500');
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				border: 2px solid _color("grey", "500");
+				border: 2px solid _color('grey', '500');
 			}
 
 			&::after {
-				background-color: _color("grey", "500");
+				background-color: _color('grey', '500');
 			}
 		}
 	}
