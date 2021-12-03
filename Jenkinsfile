@@ -56,7 +56,8 @@ node(label: CI.getSelectedNode(script:this)) {
 				loggableStage('Deploy') {
 					echo "deploying ${branchName}"
 					bat "npm run compodoc -- -p ./tsconfig.doc.json -e json -d .storybook"
-					bat "npm run build-storybook -- --output-dir \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
+					bat "npm run build-storybook"
+					powershell "Copy-Item storybook-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} -Recurse"
 				}
 
 				if (isPR) {
