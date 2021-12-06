@@ -403,13 +403,91 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		// 	element = this.targetElement._elementRef;
 		// }
 
-		/**
-		 * TODO: Updates when withFallbackPosition takes individual offsets
-		 */
+		const connectionPosition: OriginConnectionPosition = {
+			originX: 'start',
+			originY: 'top',
+		};
+
+		// Position
+		const position = this.target.position;
+		const overlap = this.target.overlap;
+		if (position === 'above') {
+			connectionPosition.originY = overlap ? 'bottom' : 'top';
+		} else if (position === 'below') {
+			connectionPosition.originY = overlap ? 'top' : 'bottom';
+		} else if (position === 'before') {
+			connectionPosition.originX = overlap ? 'end' : 'start';
+		} else if (position === 'after') {
+			connectionPosition.originX = overlap ? 'start' : 'end';
+		}
+
+		// Alignment
+		const alignment = this.target.alignment;
+		if (this.isVerticallyPositionned) {
+			if (alignment === 'left') {
+				connectionPosition.originX = 'start';
+			} else if (alignment === 'right') {
+				connectionPosition.originX = 'end';
+			} else {
+				connectionPosition.originX = 'center';
+			}
+		} else {
+			if (alignment === 'top') {
+				connectionPosition.originY = 'top';
+			} else if (alignment === 'bottom') {
+				connectionPosition.originY = 'bottom';
+			} else {
+				connectionPosition.originY = 'center';
+			}
+		}
+
+		const overlayPosition: OverlayConnectionPosition = {
+			overlayX: 'start',
+			overlayY: 'top',
+		};
+
+		if (overlap) {
+			overlayPosition.overlayX = connectionPosition.originX;
+			overlayPosition.overlayY = connectionPosition.originY;
+		} else if (this.isVerticallyPositionned) {
+			overlayPosition.overlayX = connectionPosition.originX;
+			overlayPosition.overlayY =
+				position === 'above' ? 'bottom' : 'top';
+		} else {
+			overlayPosition.overlayX =
+				position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayY = connectionPosition.originY;
+		}
 
 		return this._overlay
 			.position()
 			.flexibleConnectedTo(element)
+			.withPositions([
+				{
+					originX: connectionPosition.originX,
+					originY: connectionPosition.originY,
+					overlayX: overlayPosition.overlayX,
+					overlayY: overlayPosition.overlayY
+				},
+				{
+					originX: connectionPosition.originX,
+					originY: this._invertVerticalPos(connectionPosition.originY),
+					overlayX: overlayPosition.overlayX,
+					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
+				},
+				{
+					originX: this._invertHorizontalPos(connectionPosition.originX),
+					originY: connectionPosition.originY,
+					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
+					overlayY: overlayPosition.overlayY,
+				},
+				{
+					originX: this._invertHorizontalPos(connectionPosition.originX),
+					originY: this._invertVerticalPos(connectionPosition.originY),
+					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
+					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
+				},
+			])
 			.withDefaultOffsetX(this.target.offsetX)
 			.withDefaultOffsetY(this.target.offsetY);
 	}
