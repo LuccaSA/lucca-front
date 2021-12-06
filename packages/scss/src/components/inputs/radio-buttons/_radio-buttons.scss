@@ -48,7 +48,7 @@
 
 	&:hover {
 		background-color: _color($palette, 50);
-		box-shadow: 0px 1px 2px rgba(19, 29, 53, 0.06), 0px 2px 8px rgba(19, 29, 53, 0.04), inset 0 0 0 1px _color($palette, 200);
+		box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 200);
 	}
 }
 
@@ -60,7 +60,7 @@
 		color: _color($palette, 700);
 
 		&:hover {
-			box-shadow: 0px 1px 2px rgba(19, 29, 53, 0.06), 0px 2px 8px rgba(19, 29, 53, 0.04), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
 		}
 	}
 
@@ -139,9 +139,6 @@
 		color: _color("grey", 500);
 		cursor: default;
 		z-index: -1;
-		&:hover {
-			background-color: _color("white");
-		}
 	}
 
 	&:checked:disabled ~ .radioButtons-item-label,
