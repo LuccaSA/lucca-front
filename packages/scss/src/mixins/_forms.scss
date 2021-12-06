@@ -1,33 +1,35 @@
 @import "../mixins/utilities";
 
 @mixin fieldState($fieldname, $state) {
-	background-color: _color($state, "50");
+	&:not(:disabled, .is-disabled) {
+		background-color: _color($state, "50");
 
-	~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
-		color: _color($state);
-	}
-
-	&::placeholder {
-		color: _color($state, "400");
-	}
-
-	&:focus {
-		&::placeholder {
-			color: _color($state, "300");
+		~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
+			color: _color($state);
 		}
-	}
 
-	&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
-		color: _color($state);
-	}
+		&::placeholder {
+			color: _color($state, "400");
+		}
 
-	&:focus {
-		background-color: white;
-		box-shadow: 0 0 0 4px _color($state, "200"), 0 0 0 1px _color($state) inset;
-	}
+		&:focus {
+			&::placeholder {
+				color: _color($state, "300");
+			}
+		}
 
-	@if ($state == "error") {
-		box-shadow: 0 0 0 1px _color($state);
+		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
+			color: _color($state);
+		}
+
+		&:focus {
+			background-color: white;
+			box-shadow: 0 0 0 4px _color($state, "200"), 0 0 0 1px _color($state) inset;
+		}
+
+		@if ($state == "error") {
+			box-shadow: 0 0 0 1px _color($state);
+		}
 	}
 }
 
