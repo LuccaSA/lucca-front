@@ -53,5 +53,5 @@ const template: Story<TextfieldStory> = (args: TextfieldStory) => ({
 	props: args,
 });
 
-export const def = template.bind({});
-def.args = { state: '', palette: '', disabled: false };
+export const basic = template.bind({});
+basic.args = { state: '', palette: '', disabled: false };

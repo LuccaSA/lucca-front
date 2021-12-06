@@ -34,5 +34,5 @@ const template: Story<FramedStory> = (args: FramedStory) => ({
 	props: args,
 });
 
-export const def = template.bind({});
-def.args = { state: '', disabled: false };
+export const basic = template.bind({});
+basic.args = { state: '', disabled: false };
