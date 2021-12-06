@@ -1,7 +1,7 @@
 @import "../mixins/utilities";
 
 @mixin fieldState($fieldname, $state) {
-	&:not(:disabled) {
+	&:not(:disabled, .is-disabled) {
 		background-color: _color($state, "50");
 
 		~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
