@@ -21,7 +21,7 @@ export class LuFormlyWrapperHelper extends FieldWrapper {
 export class TemplateHelper {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.templateOptions && field.templateOptions.helper) {
+			if (field && field.templateOptions && field.templateOptions['helper']) {
 				return 'helper';
 			}
 			return '';

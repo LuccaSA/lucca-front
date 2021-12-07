@@ -1,4 +1,4 @@
-<lu-api-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" [multiple]="to.multiple"
+<lu-api-select class="textfield-input" [formControl]="formControl" [formlyAttributes]="field" [multiple]="to['multiple']"
  (focus)="focus()" (blur)="blur()" [placeholder]="to.placeholder" [api]="_api" [filters]="_filters" [orderBy]="_orderBy" [standard]="_standard">
 </lu-api-select>
 <span [attr.for]="id" class="textfield-label">{{ to.label }}</span>

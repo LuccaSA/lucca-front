@@ -12,9 +12,9 @@ export class LuFormlyFieldUser extends FieldType {
 	override readonly formControl: FormControl;
 
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }

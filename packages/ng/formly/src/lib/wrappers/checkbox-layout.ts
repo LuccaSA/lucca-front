@@ -15,7 +15,7 @@ export class LuFormlyWrapperCheckboxLayout extends FieldWrapper {
 	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return this.to.mod || '';
+		return this.to['mod'] || '';
 	}
 
 	get isRequired() {
@@ -23,7 +23,7 @@ export class LuFormlyWrapperCheckboxLayout extends FieldWrapper {
 	}
 
 	get isFocused() {
-		return !!this.to && this.to._isFocused ? 'is-focused' : '';
+		return !!this.to && this.to['_isFocused'] ? 'is-focused' : '';
 	}
 
 	get isError() {
