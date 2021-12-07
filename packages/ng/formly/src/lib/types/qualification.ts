@@ -8,7 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './qualification.html'
 })
 export class LuFormlyFieldQualification extends FieldType {
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
 		this.to._isFocused = true;
 	}
