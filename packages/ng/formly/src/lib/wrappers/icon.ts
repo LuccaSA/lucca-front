@@ -32,6 +32,7 @@ export class TemplateIcon {
 			if (field && field.templateOptions && field.templateOptions.icon) {
 				return 'icon';
 			}
+			return '';
 		});
 	}
 }

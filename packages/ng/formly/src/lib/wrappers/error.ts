@@ -60,6 +60,7 @@ export class TemplateError {
 			if (field && field.validation) {
 				return 'error';
 			}
+			return '';
 		});
 	}
 }
