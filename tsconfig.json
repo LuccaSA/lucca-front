@@ -14,39 +14,7 @@
 		"rootDirs": ["./"],
 		"paths": {
 			"@lucca-front/ng": ["packages/ng/root/src/public-api.ts"],
-			"@lucca-front/ng/core": ["packages/ng/core/src/public-api.ts"],
-			"@lucca-front/ng/animations": [
-				"packages/ng/animations/src/public-api.ts"
-			],
-			"@lucca-front/ng/input": ["packages/ng/input/src/public-api.ts"],
-			"@lucca-front/ng/scroll": ["packages/ng/scroll/src/public-api.ts"],
-			"@lucca-front/ng/safe-content": [
-				"packages/ng/safe-content/src/public-api.ts"
-			],
-			"@lucca-front/ng/number": ["packages/ng/number/src/public-api.ts"],
-			"@lucca-front/ng/popover": ["packages/ng/popover/src/public-api.ts"],
-			"@lucca-front/ng/popup": ["packages/ng/popup/src/public-api.ts"],
-			"@lucca-front/ng/tooltip": ["packages/ng/tooltip/src/public-api.ts"],
-			"@lucca-front/ng/dropdown": ["packages/ng/dropdown/src/public-api.ts"],
-			"@lucca-front/ng/picker": ["packages/ng/picker/src/public-api.ts"],
-			"@lucca-front/ng/modal": ["packages/ng/modal/src/public-api.ts"],
-			"@lucca-front/ng/select": ["packages/ng/select/src/public-api.ts"],
-			"@lucca-front/ng/sidepanel": ["packages/ng/sidepanel/src/public-api.ts"],
-			"@lucca-front/ng/option": ["packages/ng/option/src/public-api.ts"],
-			"@lucca-front/ng/date": ["packages/ng/date/src/public-api.ts"],
-			"@lucca-front/ng/api": ["packages/ng/api/src/public-api.ts"],
-			"@lucca-front/ng/department": [
-				"packages/ng/department/src/public-api.ts"
-			],
-			"@lucca-front/ng/establishment": [
-				"packages/ng/establishment/src/public-api.ts"
-			],
-			"@lucca-front/ng/qualification": [
-				"packages/ng/qualification/src/public-api.ts"
-			],
-			"@lucca-front/ng/user": ["packages/ng/user/src/public-api.ts"],
-			"@lucca-front/ng/material": ["packages/ng/material/src/public-api.ts"],
-			"@lucca-front/ng/formly": ["packages/ng/formly/src/public-api.ts"]
+			"@lucca-front/ng/*": ["packages/ng/*/src/public-api.ts"],
 		},
 		// "emitDecoratorMetadata": true,
 		"declaration": false,
