@@ -10,22 +10,22 @@ import { FieldType } from '@ngx-formly/core';
 })
 export class LuFormlyFieldApi extends FieldType {
 	get _api() {
-		return this.to.api;
+		return this.to['api'];
 	}
 	get _filters() {
-		return this.to.filters || [];
+		return this.to['filters'] || [];
 	}
 	get _orderBy() {
-		return this.to.orderBy;
+		return this.to['orderBy'];
 	}
 	get _standard() {
-		return this.to.standard || 'v3';
+		return this.to['standard'] || 'v3';
 	}
 	override readonly formControl: FormControl;
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }
