@@ -17,9 +17,9 @@ export default {
 	component: ChipStory,
 	argTypes: {
 		mod: {
+			options: ['', 'mod-unkillable'],
 			control: {
 				type: 'radio',
-				options: ['', 'mod-unkillable']
 			}
 		},
 	},

@@ -29,9 +29,9 @@ export default {
 	component: CheckboxStory,
 	argTypes: {
 		state: {
+			options: ['checked', 'unchecked', 'mixed'],
 			control: {
 				type: 'radio',
-				options: ['checked', 'unchecked', 'mixed']
 			}
 		},
 	},

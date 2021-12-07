@@ -19,27 +19,27 @@ export default {
 	component: ButtonBasicStory,
 	argTypes: {
 		mod: {
+			options: ['', ' mod-outline', 'mod-link'],
 			control: {
 				type: 'radio',
-				options: ['', ' mod-outline', 'mod-link']
 			}
 		},
 		palette: {
+			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
-				options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error']
 			}
 		},
 		state: {
+			options: ['', 'is-loading', 'is-error', 'is-success', 'is-disabled'],
 			control: {
 				type: 'radio',
-				options: ['', 'is-loading', 'is-error', 'is-success', 'is-disabled']
 			}
 		},
 		size: {
+			options: ['', 'mod-smaller', 'mod-small'],
 			control: {
 				type: 'radio',
-				options: ['', 'mod-smaller', 'mod-small']
 			}
 		},
 		
