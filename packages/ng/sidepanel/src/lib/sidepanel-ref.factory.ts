@@ -1,12 +1,12 @@
+import { ComponentType, Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal, PortalOutlet } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, ComponentRef, Injectable, Injector } from '@angular/core';
 import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
-import { Overlay, ComponentType } from '@angular/cdk/overlay';
-import { Injector, Injectable, ComponentRef, ChangeDetectionStrategy } from '@angular/core';
-import { PortalOutlet, PortalInjector, ComponentPortal } from '@angular/cdk/portal';
-import { ILuSidepanelContent } from './sidepanel.model';
-import { ALuSidepanelRef, ILuSidepanelRef } from './sidepanel-ref.model';
-import { LU_SIDEPANEL_DATA } from './sidepanel.token';
-import { LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD } from './sidepanel-panel.component';
 import { ILuSidepanelConfig } from './sidepanel-config.model';
+import { LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD } from './sidepanel-panel.component';
+import { ALuSidepanelRef, ILuSidepanelRef } from './sidepanel-ref.model';
+import { ILuSidepanelContent } from './sidepanel.model';
+import { LU_SIDEPANEL_DATA } from './sidepanel.token';
 
 class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = any, R = any> extends ALuSidepanelRef<T, D, R> implements ILuSidepanelRef<T, D, R> {
 	protected _containerRef: ComponentRef<LuSidepanelPanelComponent>;
@@ -20,10 +20,7 @@ class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = an
 		super(_overlay, _injector, _component, _config);
 	}
 	protected override _openPopup(data?: D) {
-		const injectionMap = new WeakMap();
-		injectionMap.set(ALuSidepanelRef, this);
-		injectionMap.set(LU_SIDEPANEL_DATA, data);
-		const injector = new PortalInjector(this._injector, injectionMap);
+		const injector = Injector.create({ providers: [{ provide: ALuSidepanelRef, useValue: this }, { provide: LU_SIDEPANEL_DATA, useValue: data }], parent: this._injector });
 		if (this._config.changeDetection === ChangeDetectionStrategy.OnPush) {
 			const containerPortal = new ComponentPortal(LuSidepanelPanelComponent, undefined, injector);
 			this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
@@ -46,7 +43,7 @@ export class LuSidepanelRefFactory implements ILuPopupRefFactory<ILuSidepanelCon
 	constructor(
 		protected _overlay: Overlay,
 		protected _injector: Injector,
-	) {}
+	) { }
 	forge<T extends ILuSidepanelContent, C extends ILuSidepanelConfig>(component: ComponentType<T>, config: C) {
 		return new LuSidepanelRef(this._overlay, this._injector, component, config);
 	}
