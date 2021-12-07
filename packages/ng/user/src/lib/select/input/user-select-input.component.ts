@@ -42,7 +42,7 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 
 	searchFormat = LuDisplayFullname.lastfirst;
 
-	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input('placeholder') override set inputPlaceholder(p: string) { this._placeholder = p; }
 
 	@Input() fields: string;
 	@Input() filters: string[];
@@ -56,11 +56,11 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
 	) {
 		super(

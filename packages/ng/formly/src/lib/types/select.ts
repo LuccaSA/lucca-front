@@ -12,7 +12,7 @@ export class LuFormlyFieldSelect extends FieldType {
 	get _options() {
 		return <any[]>this.to.options || [];
 	}
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
 		this.to._isFocused = true;
 	}
