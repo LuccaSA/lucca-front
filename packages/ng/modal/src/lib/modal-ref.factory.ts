@@ -1,11 +1,11 @@
+import { ComponentType, Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal, PortalOutlet } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, ComponentRef, Injectable, Injector } from '@angular/core';
 import { ALuPopupRef, ILuPopupRefFactory } from '@lucca-front/ng/popup';
-import { Overlay, ComponentType } from '@angular/cdk/overlay';
-import { Injector, Injectable, ComponentRef, ChangeDetectionStrategy } from '@angular/core';
-import { ILuModalContent } from './modal.model';
-import { ILuModalRef, ALuModalRef } from './modal-ref.model';
-import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
-import { PortalOutlet, PortalInjector, ComponentPortal } from '@angular/cdk/portal';
 import { ILuModalConfig } from './modal-config.model';
+import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
+import { ALuModalRef, ILuModalRef } from './modal-ref.model';
+import { ILuModalContent } from './modal.model';
 import { LU_MODAL_DATA } from './modal.token';
 
 class LuModalRef<T extends ILuModalContent = ILuModalContent, D = any, R = any> extends ALuPopupRef<T, D, R> implements ILuModalRef<T, D, R> {
@@ -20,10 +20,7 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = any, R = any> 
 		super(_overlay, _injector, _component, _config);
 	}
 	protected override _openPopup(data?: D) {
-		const injectionMap = new WeakMap();
-		injectionMap.set(ALuModalRef, this);
-		injectionMap.set(LU_MODAL_DATA, data);
-		const injector = new PortalInjector(this._injector, injectionMap);
+		const injector = Injector.create({ providers: [{ provide: ALuModalRef, useValue: this }, { provide: LU_MODAL_DATA, useValue: data }], parent: this._injector });
 		if (this._config.changeDetection === ChangeDetectionStrategy.OnPush) {
 			const containerPortal = new ComponentPortal(LuModalPanelComponent, undefined, injector);
 			this._containerRef = this._overlayRef.attach<LuModalPanelComponent>(containerPortal);
@@ -46,7 +43,7 @@ export class LuModalRefFactory implements ILuPopupRefFactory<ILuModalContent, IL
 	constructor(
 		protected _overlay: Overlay,
 		protected _injector: Injector,
-	) {}
+	) { }
 	forge<T extends ILuModalContent, C extends ILuModalConfig>(component: ComponentType<T>, config: C) {
 		return new LuModalRef(this._overlay, this._injector, component, config);
 	}
