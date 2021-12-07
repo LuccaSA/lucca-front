@@ -1,7 +1,7 @@
 import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import {
-	FlexibleConnectedPositionStrategy, HorizontalConnectionPos, Overlay, OverlayConfig, OverlayRef, VerticalConnectionPos
+	FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConfig, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
