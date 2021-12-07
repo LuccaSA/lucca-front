@@ -8,7 +8,7 @@
 		"strict": false,
 		"noImplicitOverride": true,
 		"noPropertyAccessFromIndexSignature": false,
-		"noImplicitReturns": false,
+		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"sourceMap": true,
 		"rootDirs": ["./"],
