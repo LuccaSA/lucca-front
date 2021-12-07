@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	@Input() indexChecked: number;
 	@Input() palette: string = '';
 	@Input() isModSmall: boolean;
-	get buttonsArray () {
+	get buttonsArray() {
 		return Array(this.buttonsCount).keys();
 	}
 }
@@ -24,9 +24,9 @@ export default {
 	component: RadioButtonStory,
 	argTypes: {
 		palette: {
+			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
-				options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error']
 			}
 		}
 	},

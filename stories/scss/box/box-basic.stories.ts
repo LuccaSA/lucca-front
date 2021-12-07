@@ -20,15 +20,15 @@ export default {
 	component: BoxBasicStory,
 	argTypes: {
 		mod: {
+			options: ['', 'mod-grey', 'mod-toggle'],
 			control: {
 				type: 'radio',
-				options: ['', 'mod-grey', 'mod-toggle']
 			}
 		},
 		state: {
+			options: ['', 'killable'],
 			control: {
 				type: 'radio',
-				options: ['', 'killable']
 			}
 		}
 	},

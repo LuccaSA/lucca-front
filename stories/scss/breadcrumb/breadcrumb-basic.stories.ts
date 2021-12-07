@@ -18,9 +18,9 @@ export default {
 	component: BreadcrumbBasicStory,
 	argTypes: {
 		mod: {
+			options: ['', ' mod-compact'],
 			control: {
 				type: 'radio',
-				options: ['', ' mod-compact']
 			}
 		}
 	},

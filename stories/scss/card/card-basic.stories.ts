@@ -21,9 +21,9 @@ export default {
 	component: CardBasicStory,
 	argTypes: {
 		appearance: {
+			options: ['mod-grey', 'mod-elevated', 'is-disabled'],
 			control: {
 				type: 'check',
-				options: ['mod-grey', 'mod-elevated', 'is-disabled'],
 			},
 		},
 		hasFooter: {
