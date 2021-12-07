@@ -29,6 +29,7 @@ export class TemplateSuffix {
 			) {
 				return 'suffix';
 			}
+			return '';
 		});
 	}
 }

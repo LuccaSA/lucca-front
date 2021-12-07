@@ -24,6 +24,7 @@ export class TemplateHelper {
 			if (field && field.templateOptions && field.templateOptions.helper) {
 				return 'helper';
 			}
+			return '';
 		});
 	}
 }
