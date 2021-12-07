@@ -15,7 +15,7 @@ import {
 })
 export class LuFormlyWrapperIcon extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper
 export class TemplateIcon {
