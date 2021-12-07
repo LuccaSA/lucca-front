@@ -24,8 +24,8 @@ export class TemplateSuffix {
 			if (
 				field &&
 				field.templateOptions &&
-				field.templateOptions.suffix &&
-				!field.templateOptions.icon
+				field.templateOptions['suffix'] &&
+				!field.templateOptions['icon']
 			) {
 				return 'suffix';
 			}

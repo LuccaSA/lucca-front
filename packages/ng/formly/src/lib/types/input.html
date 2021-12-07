@@ -1,8 +1,8 @@
 <ng-template [ngIf]="type !== 'number'" [ngIfElse]="numberInput">
-    <input [type]="type" class="textfield-input" [name]="to.name" [formControl]="formControl" [formlyAttributes]="field" luInput (focus)="focus()" (blur)="blur()" [placeholder]="to.placeholder">
+    <input [type]="type" class="textfield-input" [name]="to['name']" [formControl]="formControl" [formlyAttributes]="field" luInput (focus)="focus()" (blur)="blur()" [placeholder]="to.placeholder">
 </ng-template>
 <!-- type="number" has to be static in order to have NumberValueAccessor instead of DefaultValueAccessor -->
 <ng-template #numberInput>
-    <input type="number" class="textfield-input" [name]="to.name" [formControl]="formControl" [formlyAttributes]="field" luInput (focus)="focus()" (blur)="blur()" [placeholder]="to.placeholder">
+    <input type="number" class="textfield-input" [name]="to['name']" [formControl]="formControl" [formlyAttributes]="field" luInput (focus)="focus()" (blur)="blur()" [placeholder]="to.placeholder">
 </ng-template>
 <span class="textfield-label">{{ to.label }}</span>
