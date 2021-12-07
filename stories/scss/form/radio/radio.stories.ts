@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 
 @Component({
@@ -18,14 +18,14 @@ export default {
 	component: RadioStory,
 	argTypes: {
 		palette: {
+			options: [
+				'',
+				'palette-success',
+				'palette-warning',
+				'palette-error'
+			],
 			control: {
 				type: 'radio',
-				options: [
-					'',
-					'palette-success', 
-					'palette-warning',
-					'palette-error'
-				]
 			}
 		},
 	},

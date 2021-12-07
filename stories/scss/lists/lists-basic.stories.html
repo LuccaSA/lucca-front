@@ -5,8 +5,8 @@
 		<li class="list-item" [ngClass]="mod" *ngFor="let list of lists">
 			<div *ngIf="mod === 'mod-draggable'" class="list-item-handler"></div>
             <div class="list-item-content">
-				<h4 class="list-item-content-title">{{listTitle}}</h4>
-				<p class="list-item-content-description">{{listContent}}</p>
+				<h4 class="list-item-content-title">{{list.listTitle}}</h4>
+				<p class="list-item-content-description">{{list.listContent}}</p>
 			</div>
 			<div *ngIf="hasActions || mod === 'mod-clickable'" class="list-item-actions">
  				<button type="button" class="actionIcon">
