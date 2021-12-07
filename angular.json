@@ -15,12 +15,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/root/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/root/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/root/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -28,7 +28,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/root/src/test.ts",
-            "tsConfig": "packages/ng/root/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/root/karma.conf.js"
           }
         },
@@ -36,8 +36,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/root/tsconfig.lib.json",
-              "packages/ng/root/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -55,12 +55,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/core/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/core/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/core/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -68,7 +68,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/core/src/test.ts",
-            "tsConfig": "packages/ng/core/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/core/karma.conf.js"
           }
         },
@@ -76,8 +76,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/core/tsconfig.lib.json",
-              "packages/ng/core/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -95,12 +95,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/animations/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/animations/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/animations/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -108,7 +108,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/animations/src/test.ts",
-            "tsConfig": "packages/ng/animations/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/animations/karma.conf.js"
           }
         },
@@ -116,8 +116,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/animations/tsconfig.lib.json",
-              "packages/ng/animations/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -135,12 +135,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/input/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/input/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/input/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -148,7 +148,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/input/src/test.ts",
-            "tsConfig": "packages/ng/input/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/input/karma.conf.js"
           }
         },
@@ -156,8 +156,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/input/tsconfig.lib.json",
-              "packages/ng/input/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -175,12 +175,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/scroll/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/scroll/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/scroll/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -188,7 +188,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/scroll/src/test.ts",
-            "tsConfig": "packages/ng/scroll/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/scroll/karma.conf.js"
           }
         },
@@ -196,8 +196,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/scroll/tsconfig.lib.json",
-              "packages/ng/scroll/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -215,12 +215,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/safe-content/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/safe-content/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/safe-content/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -228,7 +228,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/safe-content/src/test.ts",
-            "tsConfig": "packages/ng/safe-content/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/safe-content/karma.conf.js"
           }
         },
@@ -236,8 +236,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/safe-content/tsconfig.lib.json",
-              "packages/ng/safe-content/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -255,12 +255,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/number/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/number/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/number/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -268,7 +268,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/number/src/test.ts",
-            "tsConfig": "packages/ng/number/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/number/karma.conf.js"
           }
         },
@@ -276,8 +276,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/number/tsconfig.lib.json",
-              "packages/ng/number/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -295,12 +295,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/popover/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/popover/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/popover/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -308,7 +308,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/popover/src/test.ts",
-            "tsConfig": "packages/ng/popover/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/popover/karma.conf.js"
           }
         },
@@ -316,8 +316,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/popover/tsconfig.lib.json",
-              "packages/ng/popover/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -335,12 +335,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/popup/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/popup/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/popup/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -348,7 +348,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/popup/src/test.ts",
-            "tsConfig": "packages/ng/popup/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/popup/karma.conf.js"
           }
         },
@@ -356,8 +356,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/popup/tsconfig.lib.json",
-              "packages/ng/popup/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -375,12 +375,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/tooltip/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/tooltip/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/tooltip/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -388,7 +388,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/tooltip/src/test.ts",
-            "tsConfig": "packages/ng/tooltip/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/tooltip/karma.conf.js"
           }
         },
@@ -396,8 +396,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/tooltip/tsconfig.lib.json",
-              "packages/ng/tooltip/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -415,12 +415,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/dropdown/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/dropdown/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/dropdown/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -428,7 +428,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/dropdown/src/test.ts",
-            "tsConfig": "packages/ng/dropdown/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/dropdown/karma.conf.js"
           }
         },
@@ -436,8 +436,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/dropdown/tsconfig.lib.json",
-              "packages/ng/dropdown/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -455,12 +455,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/picker/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/picker/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/picker/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -468,7 +468,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/picker/src/test.ts",
-            "tsConfig": "packages/ng/picker/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/picker/karma.conf.js"
           }
         },
@@ -476,8 +476,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/picker/tsconfig.lib.json",
-              "packages/ng/picker/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -495,12 +495,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/modal/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/modal/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/modal/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -508,7 +508,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/modal/src/test.ts",
-            "tsConfig": "packages/ng/modal/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/modal/karma.conf.js"
           }
         },
@@ -516,8 +516,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/modal/tsconfig.lib.json",
-              "packages/ng/modal/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -535,12 +535,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/select/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/select/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/select/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -548,7 +548,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/select/src/test.ts",
-            "tsConfig": "packages/ng/select/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/select/karma.conf.js"
           }
         },
@@ -556,8 +556,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/select/tsconfig.lib.json",
-              "packages/ng/select/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -575,12 +575,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/sidepanel/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/sidepanel/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/sidepanel/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -588,7 +588,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/sidepanel/src/test.ts",
-            "tsConfig": "packages/ng/sidepanel/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/sidepanel/karma.conf.js"
           }
         },
@@ -596,8 +596,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/sidepanel/tsconfig.lib.json",
-              "packages/ng/sidepanel/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -615,12 +615,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/option/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/option/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/option/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -628,7 +628,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/option/src/test.ts",
-            "tsConfig": "packages/ng/option/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/option/karma.conf.js"
           }
         },
@@ -636,8 +636,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/option/tsconfig.lib.json",
-              "packages/ng/option/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -655,12 +655,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/date/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/date/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/date/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -668,7 +668,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/date/src/test.ts",
-            "tsConfig": "packages/ng/date/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/date/karma.conf.js"
           }
         },
@@ -676,8 +676,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/date/tsconfig.lib.json",
-              "packages/ng/date/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -695,12 +695,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/api/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/api/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/api/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -708,7 +708,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/api/src/test.ts",
-            "tsConfig": "packages/ng/api/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/api/karma.conf.js"
           }
         },
@@ -716,8 +716,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/api/tsconfig.lib.json",
-              "packages/ng/api/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -735,12 +735,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/department/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/department/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/department/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -748,7 +748,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/department/src/test.ts",
-            "tsConfig": "packages/ng/department/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/department/karma.conf.js"
           }
         },
@@ -756,8 +756,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/department/tsconfig.lib.json",
-              "packages/ng/department/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -775,12 +775,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/establishment/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/establishment/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/establishment/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -788,7 +788,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/establishment/src/test.ts",
-            "tsConfig": "packages/ng/establishment/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/establishment/karma.conf.js"
           }
         },
@@ -796,8 +796,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/establishment/tsconfig.lib.json",
-              "packages/ng/establishment/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -815,12 +815,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/qualification/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/qualification/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/qualification/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -828,7 +828,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/qualification/src/test.ts",
-            "tsConfig": "packages/ng/qualification/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/qualification/karma.conf.js"
           }
         },
@@ -836,8 +836,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/qualification/tsconfig.lib.json",
-              "packages/ng/qualification/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -855,12 +855,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/user/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/user/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/user/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -868,7 +868,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/user/src/test.ts",
-            "tsConfig": "packages/ng/user/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/user/karma.conf.js"
           }
         },
@@ -876,8 +876,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/user/tsconfig.lib.json",
-              "packages/ng/user/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -934,12 +934,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/material/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/material/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/material/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -947,7 +947,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/material/src/test.ts",
-            "tsConfig": "packages/ng/material/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/material/karma.conf.js"
           }
         },
@@ -955,8 +955,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/material/tsconfig.lib.json",
-              "packages/ng/material/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -974,12 +974,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "packages/ng/formly/tsconfig.lib.json",
+            "tsConfig": "tsconfig.lib.json",
             "project": "packages/ng/formly/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "packages/ng/formly/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
@@ -987,7 +987,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "packages/ng/formly/src/test.ts",
-            "tsConfig": "packages/ng/formly/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "packages/ng/formly/karma.conf.js"
           }
         },
@@ -995,8 +995,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "packages/ng/formly/tsconfig.lib.json",
-              "packages/ng/formly/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
