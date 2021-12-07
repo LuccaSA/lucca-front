@@ -21,7 +21,7 @@ export class LuFormlyFieldApi extends FieldType {
 	get _standard() {
 		return this.to.standard || 'v3';
 	}
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
 		this.to._isFocused = true;
 	}

@@ -14,7 +14,7 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 	protected _operations: number[] = [];
 	set operations(operations: number[]) { this._operations = operations; }
 
-	constructor(protected _http: HttpClient) {
+	constructor(protected override _http: HttpClient) {
 		super(_http);
 		this.api = '/api/v3/users/search';
 		this.fields = 'id,firstname,lastname,picture[href]';
@@ -28,7 +28,7 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 		);
 	}
 
-	get url() {
+	override get url() {
 		if (!this._appInstanceId || !this._operations || !this._operations.length) {
 			return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter(f => !!f).join('&')}`;
 		} else {
@@ -42,12 +42,12 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 		}
 	}
 
-	protected _get(url) {
+	protected override _get(url) {
 		return (<any>super._get(url) as Observable<ILuApiSuggestion<U>[]>)
 		.pipe(map(suggestions => suggestions.map(s => s.item)));
 	}
 
-	protected _clueFilter(clue) {
+	protected override _clueFilter(clue) {
 		const urlSafeClue = clue.split(' ').map(c => encodeURIComponent(c)).join(',');
 		return `clue=${urlSafeClue}`;
 	}

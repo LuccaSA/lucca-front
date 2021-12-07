@@ -15,21 +15,19 @@ import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 })
 export class LuForLegalUnitsDirective extends LuForGroupsDirective<ILuEstablishment, ILuLegalUnit> {
 
-	/** @override */
-	public set attrGroupBy(fn: (item: ILuEstablishment) => ILuLegalUnit) {
+	public override set attrGroupBy(fn: (item: ILuEstablishment) => ILuLegalUnit) {
 		throw new Error('Unsupported');
 	}
 
 	public constructor(
-		protected _vcr: ViewContainerRef,
-		protected _cdr: ChangeDetectorRef,
-		protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<ILuEstablishment, ILuLegalUnit>>>,
+		protected override _vcr: ViewContainerRef,
+		protected override _cdr: ChangeDetectorRef,
+		protected override _templateRef: TemplateRef<LuForGroupContext<ILuGroup<ILuEstablishment, ILuLegalUnit>>>,
 	) {
 		super(_vcr, _cdr, _templateRef);
 	}
 
-	/** @override */
-	protected groupBy(items: ILuEstablishment[]): ILuGroup<ILuEstablishment, ILuLegalUnit>[] {
+	protected override groupBy(items: ILuEstablishment[]): ILuGroup<ILuEstablishment, ILuLegalUnit>[] {
 		const groups: ILuGroup<ILuEstablishment, ILuLegalUnit>[] = [];
 		items.forEach((item) => {
 			const legalUnit = item?.legalUnit;
