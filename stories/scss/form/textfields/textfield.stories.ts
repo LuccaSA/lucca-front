@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 
 @Component({
@@ -17,27 +17,27 @@ export default {
 	component: TextfieldStory,
 	argTypes: {
 		state: {
+			options: [
+				'',
+				'is-success',
+				'is-warning',
+				'is-error'
+			],
 			control: {
 				type: 'radio',
-				options: [
-					'', 
-					'is-success',
-					'is-warning',
-					'is-error'
-				]
 			}
 		},
 		palette: {
+			options: [
+				'',
+				'palette-primary',
+				'palette-secondary',
+				'palette-success',
+				'palette-warning',
+				'palette-error'
+			],
 			control: {
 				type: 'radio',
-				options: [
-					'',
-					'palette-primary',
-					'palette-secondary',
-					'palette-success',
-					'palette-warning',
-					'palette-error'
-				]
 			}
 		},
 	},

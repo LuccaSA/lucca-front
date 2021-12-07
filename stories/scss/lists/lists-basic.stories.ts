@@ -7,16 +7,14 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	selector: 'lists-basic-stories',
 	templateUrl: './lists-basic.stories.html',
 }) class ListsBasicStory {
-	@Input() listTitle: string;
-	@Input() listContent: string;
 	@Input() mod: string = '';
 	@Input() hasActions: boolean;
 
 	lists = [
-		{ listTitle: 'List item title', listContent: 'List item description' },
-		{ listTitle: 'List item title', listContent: 'List item description' },
-		{ listTitle: 'List item title', listContent: 'List item description' },
-		{ listTitle: 'List item title', listContent: 'List item description' },
+		{ listTitle: 'List item title 1', listContent: 'List item description 1' },
+		{ listTitle: 'List item title 2', listContent: 'List item description 2' },
+		{ listTitle: 'List item title 3', listContent: 'List item description 3' },
+		{ listTitle: 'List item title 4', listContent: 'List item description 4' },
 	];
 }
 
@@ -25,9 +23,9 @@ export default {
 	component: ListsBasicStory,
 	argTypes: {
 		mod: {
+			options: ['', 'mod-clickable', 'mod-draggable'],
 			control: {
 				type: 'radio',
-				options: ['', 'mod-clickable', 'mod-draggable']
 			}
 		},
 		hasActions: {
@@ -50,8 +48,6 @@ const template: Story<ListsBasicStory> = (args: ListsBasicStory) => ({
 
 export const basic = template.bind({});
 basic.args = {
-	listTitle: 'List item title',
-	listContent: 'List item description',
 	mod: '',
 	hasActions: true,
 };
