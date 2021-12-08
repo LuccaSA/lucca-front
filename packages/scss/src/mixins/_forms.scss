@@ -162,10 +162,12 @@
 	}
 
 	@if ($fieldname == "radiosfield") {
-		~ .radio-label,
-		~ .checkbox-label {
-			&::before {
-				border-color: _color("error");
+		&:not(:disabled) {
+			~ .radio-label,
+			~ .checkbox-label {
+				&::before {
+					border-color: _color("error");
+				}
 			}
 		}
 	}

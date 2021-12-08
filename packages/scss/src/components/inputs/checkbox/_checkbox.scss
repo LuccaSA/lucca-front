@@ -21,6 +21,7 @@
 
 	&::before {
 		@include makeIcon('tick');
+		background-color: _color("white");
 		border-radius: _component('checkbox.input.border-radius');
 		border: 2px solid _component('checkbox.input.border.color');
 		color: transparent;

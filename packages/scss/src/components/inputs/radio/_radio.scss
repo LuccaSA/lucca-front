@@ -27,6 +27,7 @@
 	transition: color _theme('commons.animations.durations.fast') ease;
 
 	&::before {
+		background-color: _color("white");
 		border-radius: 50%;
 		content: '';
 		display: block;
@@ -58,41 +59,39 @@
 
 .radio {
 	@mixin radioColoring($palette) {
-		.radio-input:checked ~ .radio-label {
-			&::before {
-				border: 2px solid _color($palette, '700');
-			}
-
-			&::after {
-				background-color: _color($palette, '700');
-			}
-
-			&:hover {
-				&::before {
-					border-color: _color($palette, '600');
-				}
-
-				&::after {
-					background-color: _color($palette, '600');
-				}
-			}
-		}
 
 		.radio-label {
 			&::before {
-				border: 2px solid _color($palette, '700');
+				border: 2px solid _color($palette, 700);
 			}
+		}
 
+		.radio-input:checked ~ .radio-label {
+			&::after {
+				background-color: _color($palette, 700);
+			}
+		}
+
+		.radio-input:not(:disabled):checked ~ .radio-label {
 			&:hover {
+				&::before {
+					border-color: _color($palette, 600);
+				}
+
 				&::after {
 					background-color: _color($palette, '600');
 				}
-
+			}
+		}
+		
+		.radio-input:not(:disabled) ~ .radio-label {
+			&:hover {
 				&::before {
-					border-color: _color($palette, '600');
+					border-color: _color($palette, 600);
 				}
 			}
 		}
+
 
 		.radio-input {
 			&:focus ~ .radio-label {
