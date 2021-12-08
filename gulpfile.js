@@ -127,41 +127,16 @@ gulp.task(
  * NG *
  -------------------------------*/
 
-gulp.task('ng:root:build', ()=> run('ng build root --configuration production').exec());
 gulp.task('ng:root:style', () => {
 	return gulp.src([`packages/ng/root/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/style`));
 });
 
-gulp.task('ng:core:build', () => run('ng build core --configuration production').exec());
-gulp.task('ng:animations:build', () => run('ng build animations --configuration production').exec());
-gulp.task('ng:input:build', () => run('ng build input --configuration production').exec());
-gulp.task('ng:scroll:build', () => run('ng build scroll --configuration production').exec());
-gulp.task('ng:safe-content:build', () => run('ng build safe-content --configuration production').exec());
-gulp.task('ng:number:build', () => run('ng build number --configuration production').exec());
-gulp.task('ng:popover:build', () => run('ng build popover --configuration production').exec());
-gulp.task('ng:popup:build', () => run('ng build popup --configuration production').exec());
-gulp.task('ng:tooltip:build', () => run('ng build tooltip --configuration production').exec());
-gulp.task('ng:dropdown:build', () => run('ng build dropdown --configuration production').exec());
-gulp.task('ng:picker:build', () => run('ng build picker --configuration production').exec());
-gulp.task('ng:modal:build', () => run('ng build modal --configuration production').exec());
-gulp.task('ng:select:build', () => run('ng build select --configuration production').exec());
-gulp.task('ng:sidepanel:build', () => run('ng build sidepanel --configuration production').exec());
-gulp.task('ng:option:build', () => run('ng build option --configuration production').exec());
-gulp.task('ng:date:build', () => run('ng build date --configuration production').exec());
-gulp.task('ng:api:build', () => run('ng build api --configuration production').exec());
-gulp.task('ng:department:build', () => run('ng build department --configuration production').exec());
-gulp.task('ng:establishment:build', () => run('ng build establishment --configuration production').exec());
-gulp.task('ng:qualification:build', () => run('ng build qualification --configuration production').exec());
-gulp.task('ng:user:build', () => run('ng build user --configuration production').exec());
-
-gulp.task('ng:material:build', () => run('ng build material --configuration production').exec());
 gulp.task('ng:material:style', () => {
 	return gulp.src([`packages/ng/material/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/material/style`));
 });
 
-gulp.task('ng:formly:build', () => run('ng build formly --configuration production').exec());
 gulp.task('ng:formly:style', () => {
 	return gulp.src([`packages/ng/formly/src/style/**/*.scss`])
 	.pipe(gulp.dest(`dist/ng/formly/style`));
@@ -176,31 +151,10 @@ gulp.task('ng:schematics:collection', () => {
 gulp.task(
 	'ng',
 	gulp.series(
-		gulp.parallel(
-			gulp.series('ng:root:build','ng:root:style'),
-			gulp.series('ng:material:build','ng:material:style'),
-			'ng:animations:build',
-			'ng:scroll:build',
-			'ng:safe-content:build',
-			'ng:number:build',
-			'ng:input:build',
-			'ng:popup:build',
-			'ng:schematics:build',
-			'ng:schematics:collection',
-			'ng:core:build',
-		),
-		gulp.parallel(
-			gulp.series('ng:popover:build','ng:picker:build'),
-			gulp.series(
-				'ng:modal:build',
-				gulp.parallel('ng:sidepanel:build','ng:tooltip:build','ng:dropdown:build'
-				),
-			),
-		),
-		gulp.parallel('ng:option:build','ng:select:build'),
-		gulp.parallel('ng:api:build','ng:date:build'),
-		gulp.parallel('ng:user:build','ng:department:build','ng:establishment:build','ng:qualification:build'),
-		'ng:formly:build',
+		'ng:root:style',
+		'ng:material:style',
+		'ng:schematics:build',
+		'ng:schematics:collection',
 		'ng:formly:style',
-	),
+	)
 );

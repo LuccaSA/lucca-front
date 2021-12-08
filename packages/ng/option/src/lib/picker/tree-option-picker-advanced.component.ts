@@ -17,7 +17,6 @@ import {
 	ALuTreeOptionOperator,
 	ILuTreeOptionOperator,
 } from '../operator/index';
-import { ILuTreeOptionItem } from '../item/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 import { ILuTree } from '@lucca-front/ng/core';
 import {
@@ -32,7 +31,7 @@ import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index'
 import { DOCUMENT } from '@angular/common';
 
 @Directive()
-export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
+export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
 extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;
 
@@ -144,7 +143,7 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 		},
 	]
 })
-export class LuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
+export class LuTreeOptionPickerAdvancedComponent<T = any, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		@Inject(DOCUMENT) document: Document,

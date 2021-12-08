@@ -31,7 +31,7 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 		}
 	],
 })
-export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
+export class LuEstablishmentSelectInputComponent<D extends import ('../../establishment.model').ILuEstablishment = import ('../../establishment.model').ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit {
 
