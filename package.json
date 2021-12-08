@@ -26,7 +26,7 @@
 		"build": "npm run build:icons && npm run build:scss && npm run build:ng",
 		"build:icons": "gulp icons",
 		"build:scss": "gulp scss",
-		"build:ng": "ng run ng:build && gulp ng",
+		"build:ng": "ng run ng:build && gulp ng:schematics",
 		"start": "ng run storybook:start",
 		"compodoc": "compodoc -p ./tsconfig.doc.json -e json -d .storybook",
 		"build-storybook": "ng run storybook:build"
