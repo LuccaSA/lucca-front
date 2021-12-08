@@ -21,7 +21,7 @@ import { ILuQualificationSelectInputLabel } from './qualification-select-input.t
 		}
 	],
 })
-export class LuQualificationSelectInputComponent<D extends ILuQualification = ILuQualification, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
+export class LuQualificationSelectInputComponent<D extends import('../../qualification.model').ILuQualification = import('../../qualification.model').ILuQualification, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 

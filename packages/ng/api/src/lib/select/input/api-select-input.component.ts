@@ -4,9 +4,8 @@ import {
 	Renderer2, ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LuOptionComparer } from '@lucca-front/ng/option';
+import { ILuOptionItem, LuOptionComparer, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuApiItem } from '../../api.model';
 
 @Component({
 	selector: 'lu-api-select',
@@ -21,8 +20,8 @@ import { ILuApiItem } from '../../api.model';
 		},
 	],
 })
-export class LuApiSelectInputComponent<T extends ILuApiItem = ILuApiItem>
-	extends ALuSelectInputComponent<T>
+export class LuApiSelectInputComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem>
+	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
 	implements ControlValueAccessor, AfterViewInit {
 
 	@Input() standard: string;

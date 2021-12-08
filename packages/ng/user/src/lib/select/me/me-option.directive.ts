@@ -24,7 +24,7 @@ import { ALuUserService, LuUserV3Service } from '../../service/index';
 		},
 	],
 })
-export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILuOptionOperator {
+export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILuOptionOperator<U> {
 	set inOptions$ (in$) {
 		this.outOptions$ = in$;
 	}
