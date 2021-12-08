@@ -23,12 +23,14 @@
 .radioButtons-item-input {
 	@include mask;
 
-	&:checked ~ .radioButtons-item-label {
+	&:checked ~ .radioButtons-item-label, 
+	&:focus ~ .radioButtons-item-label {
 		z-index: 2;
 	}
 }
 
 .radioButtons-item-label {
+	background-color: _color("white");
 	cursor: pointer;
 	display: block;
 	overflow: hidden;
@@ -41,45 +43,51 @@
 // PALETTES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 @mixin radioLabelColoring($palette) {
-	color: _color($palette, "800");
-	box-shadow: inset 0 0 0 1px _color($palette, "200");
+	color: _color($palette, 700);
+	box-shadow: inset 0 0 0 1px _color($palette, 200);
 
 	&:hover {
-		background-color: _color($palette, "50");
-		box-shadow: inset 0 0 0 1px _color($palette, "200");
+		background-color: _color($palette, 50);
+		box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 200);
 	}
 }
 
 @mixin radioInputColoring($palette) {
+
 	&:checked ~ .radioButtons-item-label {
-		background-color: _color($palette, "50");
-		box-shadow: inset 0 0 0 1px _color($palette, "200");
-		color: _color($palette, "700");
+		background-color: _color($palette, 50);
+		box-shadow: inset 0 0 0 1px _color($palette, 400);
+		color: _color($palette, 700);
 
 		&:hover {
-			background-color: _color($palette, "100");
-			box-shadow: inset 0 0 0 1px _color($palette, "400");
-		}
-
-		&:focus {
-			box-shadow: 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "400");
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
 		}
 	}
 
 	&:focus ~ .radioButtons-item-label {
-		box-shadow: 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "400");
+		box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 400);
+	}
+
+	&:focus:checked ~ .radioButtons-item-label {
+		background-color: _color($palette, 100);
+		box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 600);
+	}
+
+	&:focus:not(:checked) ~ .radioButtons-item-label {
+		background-color: _color("grey", 50);
 	}
 }
 
 .radioButtons {
 	@each $name, $palette in _getMap("palettes") {
 		&.palette-#{$name} {
-			.radioButtons-item-label {
-				@include radioLabelColoring($name);
-			}
 
-			.radioButtons-item-input {
+			.radioButtons-item-input:not(:disabled, .is-disabled) {
 				@include radioInputColoring($name);
+				
+				~ .radioButtons-item-label {
+					@include radioLabelColoring($name);
+				}
 			}
 		}
 	}
@@ -97,7 +105,7 @@
 	}
 }
 
-.radioButtons-item-input {
+.radioButtons-item-input:not(:disabled, .is-disabled) {
 	// default color
 	@include radioInputColoring("radioButtons.default-palette");
 
@@ -111,7 +119,6 @@
 
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
 .radioButtons {
 	&.mod-small {
 		.radioButtons-item-label {
@@ -119,5 +126,23 @@
 			line-height: _component("radioButtons.small.line-height");
 			padding: _component("radioButtons.small.padding");
 		}
+	}
+}
+
+// STATES
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.radioButtons-item-input {
+
+	&:disabled ~ .radioButtons-item-label,
+	&.is-disabled ~ .radioButtons-item-label { // legacy
+		box-shadow: inset 0 0 0 1px _color("grey", 200);
+		color: _color("grey", 500);
+		cursor: default;
+		z-index: -1;
+	}
+
+	&:checked:disabled ~ .radioButtons-item-label,
+	&:checked.is-disabled ~ .radioButtons-item-label { // legacy
+		background-color: _color("grey", 100);
 	}
 }
