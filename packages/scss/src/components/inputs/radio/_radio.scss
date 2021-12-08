@@ -62,20 +62,20 @@
 
 		.radio-label {
 			&::before {
-				border: 2px solid _color($palette, '700');
+				border: 2px solid _color($palette, 700);
 			}
 		}
 
 		.radio-input:checked ~ .radio-label {
 			&::after {
-				background-color: _color($palette, '700');
+				background-color: _color($palette, 700);
 			}
 		}
 
 		.radio-input:not(:disabled):checked ~ .radio-label {
 			&:hover {
 				&::before {
-					border-color: _color($palette, '600');
+					border-color: _color($palette, 600);
 				}
 
 				&::after {
@@ -87,7 +87,7 @@
 		.radio-input:not(:disabled) ~ .radio-label {
 			&:hover {
 				&::before {
-					border-color: _color($palette, '600');
+					border-color: _color($palette, 600);
 				}
 			}
 		}
