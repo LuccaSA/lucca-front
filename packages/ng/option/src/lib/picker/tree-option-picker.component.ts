@@ -6,7 +6,7 @@ import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
 import { delay, map, startWith, switchMap } from 'rxjs/operators';
-import { ALuTreeOptionItem, ILuTreeOptionItem } from '../item/index';
+import { ALuTreeOptionItem } from '../item/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
 
@@ -17,9 +17,9 @@ enum ToggleMode {
 }
 
 @Directive()
-export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends ALuOptionPickerComponent<T, O>
-implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
+export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
+	extends ALuOptionPickerComponent<T, O>
+	implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	@ContentChildren(ALuTreeOptionItem, { descendants: true }) override set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 	}
@@ -28,7 +28,7 @@ implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		// reapply selected when the options change
 		this._subs.add(
 			optionItems$
-			.subscribe(o => this._applySelected())
+				.subscribe(o => this._applySelected())
 		);
 		// subscribe to any option.onSelect
 		const singleFlowSelect$ = optionItems$.pipe(switchMap(
@@ -43,15 +43,15 @@ implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 
 		this._subs.add(
 			singleFlowSelect$
-			.subscribe(option => this._toggle(option, ToggleMode.all))
+				.subscribe(option => this._toggle(option, ToggleMode.all))
 		);
 		this._subs.add(
 			singleFlowSelectSelf$
-			.subscribe(option => this._toggle(option, ToggleMode.self))
+				.subscribe(option => this._toggle(option, ToggleMode.self))
 		);
 		this._subs.add(
 			singleFlowSelectChildren$
-			.subscribe(option => this._toggle(option, ToggleMode.children))
+				.subscribe(option => this._toggle(option, ToggleMode.children))
 		);
 	}
 	constructor(
@@ -172,8 +172,8 @@ implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 		},
 	]
 })
-export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends ALuTreeOptionPickerComponent<T, O> {
+export class LuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
+	extends ALuTreeOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		@Inject(DOCUMENT) document: Document,

@@ -27,12 +27,11 @@ import {
 	ILuOnScrollBottomSubscriber,
 } from '@lucca-front/ng/core';
 import { ALuOptionPickerComponent } from './option-picker.component';
-import { ILuOptionItem } from '../item/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 import { DOCUMENT } from '@angular/common';
 
 @Directive()
-export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
+export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;
 
@@ -149,7 +148,7 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 		},
 	]
 })
-export class LuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
+export class LuOptionPickerAdvancedComponent<T = any, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		@Inject(DOCUMENT) document: Document,

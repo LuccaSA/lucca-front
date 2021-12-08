@@ -8,11 +8,11 @@ import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
 import { delay, map, share } from 'rxjs/operators';
-import { ALuOptionItem, ILuOptionItem } from '../item/option-item.model';
+import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
 @Directive()
-export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
+export abstract class ALuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 	extends ALuOptionPicker<T, O>
 	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	/**
@@ -261,7 +261,7 @@ export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<
 		},
 	]
 })
-export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
+export class LuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		@Inject(DOCUMENT) document: Document,

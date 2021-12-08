@@ -9,14 +9,13 @@ import {
 	startWith,
 } from 'rxjs/operators';
 
-import { ILuApiItem } from '../../api.model';
 import { ILuApiOptionFeeder } from '../feeder/index';
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ILuApiService } from '../../service/index';
 
-export interface ILuApiOptionSearcher<T extends ILuApiItem = ILuApiItem> extends ILuApiOptionFeeder<T> {}
+export interface ILuApiOptionSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem> extends ILuApiOptionFeeder<T> {}
 
-export abstract class ALuApiOptionSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
+export abstract class ALuApiOptionSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
@@ -62,9 +61,9 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	}
 }
 
-export interface ILuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem> extends ILuApiOptionSearcher<T> {}
+export interface ILuApiOptionPagedSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem> extends ILuApiOptionSearcher<T> {}
 
-export abstract class ALuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
+export abstract class ALuApiOptionPagedSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 	extends ALuApiOptionSearcher<T, S>
 	implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	override outOptions$ = new Subject<T[]>();
