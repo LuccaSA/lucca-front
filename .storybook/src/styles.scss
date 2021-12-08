@@ -6,7 +6,7 @@
 // LF
 $noCssVar: false;
 @import "../../packages/scss/src/main.scss";
-@import "../../packages/ng/root/src/style/main.scss";
+@import "../../packages/ng/style/main.scss";
 
 :root {
 	@include generateCSSVarsFromTheme($theme);

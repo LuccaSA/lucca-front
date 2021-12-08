@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .form-group {
 	padding: 0;
 	border: 0;
@@ -62,7 +64,7 @@
 		@include media_larger_than($bp-name) {
 			@for $i from 1 through 12 {
 				&.mod-#{$bp-name}#{$i} {
-					flex-basis: (100% / 12 * $i);
+					flex-basis: (math.div(100%, 12) * $i);
 				}
 			}
 		}
