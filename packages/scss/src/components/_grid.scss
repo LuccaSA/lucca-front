@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .grid {
 	display: flex;
 	flex: 0 1 auto;
@@ -37,12 +39,12 @@
 
 		@for $i from 1 through 12 {
 			.grid-#{$bp-name}#{$i} {
-				flex-basis: percentage($i / 12);
-				max-width: percentage($i / 12);
+				flex-basis: percentage(math.div($i, 12));
+				max-width: percentage(math.div($i, 12));
 			}
 
 			.grid-#{$bp-name}Offset#{$i} {
-				margin-left: percentage($i / 12);
+				margin-left: percentage(math.div($i, 12));
 			}
 		}
 	}
