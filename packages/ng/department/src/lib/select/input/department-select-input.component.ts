@@ -6,7 +6,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ILuTreeOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuDepartment } from '../../department.model';
 import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 import { ILuDepartmentSelectInputLabel } from './department-select-input.translate';
 
@@ -23,7 +22,7 @@ import { ILuDepartmentSelectInputLabel } from './department-select-input.transla
 		},
 	],
 })
-export class LuDepartmentSelectInputComponent<D extends ILuDepartment = ILuDepartment, P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>>
+export class LuDepartmentSelectInputComponent<D extends import ('../../department.model').ILuDepartment = import ('../../department.model').ILuDepartment, P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;

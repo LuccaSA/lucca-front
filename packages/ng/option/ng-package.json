@@ -1,11 +1,7 @@
 {
-  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../dist/ng/option",
-  "lib": {
-    "entryFile": "src/public-api.ts",
-    "styleIncludePaths": [
-      "../root/src/style",
-      "../root/src/style/overrides"
-    ]
-  }
+	"$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+	"lib": {
+		"entryFile": "src/public-api.ts",
+		"styleIncludePaths": ["../root/src/style", "../root/src/style/overrides"]
+	}
 }

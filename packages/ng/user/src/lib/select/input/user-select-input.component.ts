@@ -36,7 +36,7 @@ import { LuOptionComparer } from '@lucca-front/ng/option';
 		},
 	],
 })
-export class LuUserSelectInputComponent<U extends ILuUser = ILuUser>
+export class LuUserSelectInputComponent<U extends import ('../../user.model').ILuUser = import ('../../user.model').ILuUser>
 extends ALuSelectInputComponent<U>
 implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 

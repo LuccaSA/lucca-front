@@ -13,7 +13,6 @@
 		"sourceMap": true,
 		"rootDirs": ["./"],
 		"paths": {
-			"@lucca-front/ng": ["packages/ng/root/src/public-api.ts"],
 			"@lucca-front/ng/*": ["packages/ng/*/src/public-api.ts"],
 		},
 		// "emitDecoratorMetadata": true,
