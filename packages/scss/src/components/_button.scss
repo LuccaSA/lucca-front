@@ -46,20 +46,20 @@
 		&:hover {
 			background-color: _color($palette, "100");
 			color: _color($palette);
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color($palette, "400");
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, "400");
 		}
 
 		&:focus {
 			background-color: _color($palette, "100");
 			color: _color($palette);
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
 			outline: none;
 		}
 
 		&:active {
 			background-color: _color($palette, "200");
 			color: _color($palette);
-			box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
 		}
 	}
 
@@ -229,20 +229,20 @@
 			&:hover {
 				background-color: _color("grey", "100");
 				color: _color("text.default");
-				box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), inset 0 0 0 1px _color("grey", "400");
+				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color("grey", "400");
 			}
 
 			&:focus {
 				background-color: _color("grey", "100");
 				color: _color("text.default");
-				box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
 				outline: none;
 			}
 
 			&:active {
 				background-color: _color("grey", "200");
 				color: _color("text.default");
-				box-shadow: 0 2px 8px rgba(19, 29, 53, .04), 0 1px 2px rgba(19, 29, 53, .06), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
 			}
 		}
 
@@ -418,7 +418,7 @@
 		position: relative;
 
 		&:not(.mod-outline, .mod-outlined) {
-			border-right: 1px solid rgba(0, 0, 0, .1);
+			border-right: _theme('commons.divider.width') solid rgba(0, 0, 0, .1);
 		}
 
 		&:first-child {
