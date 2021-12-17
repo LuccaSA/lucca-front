@@ -9,17 +9,18 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	selector: 'checkbox-stories',
 	templateUrl: './checkbox.stories.html',
 }) class CheckboxStory {
-	@Input() state: string = 'unchecked';
-	get isMixed(): boolean { return this.state === 'mixed'; }
-	get isChecked(): boolean { return this.state === 'checked' || this.state === 'mixed'; }
+	@Input() disabled: boolean = false;
+	@Input() checked: string = 'unchecked';
+	get isMixed(): boolean { return this.checked === 'mixed'; }
+	get isChecked(): boolean { return this.checked === 'checked' || this.checked === 'mixed'; }
 	get isAriaHidden(): boolean | null {
 		return this.isMixed ? true : null;
 	}
 	toggle(flag: boolean) {
 		if (flag) {
-			this.state = 'checked';
+			this.checked = 'checked';
 		} else {
-			this.state = 'unchecked';
+			this.checked = 'unchecked';
 		}
 	}
 }
@@ -28,10 +29,21 @@ export default {
 	title: 'SCSS/Form/Checkboxes',
 	component: CheckboxStory,
 	argTypes: {
-		state: {
+		checked: {
 			control: {
 				type: 'radio',
 				options: ['checked', 'unchecked', 'mixed']
+			}
+		},
+		palette: {
+			control: {
+				type: 'radio',
+				options: [
+					'',
+					'palette-success', 
+					'palette-warning',
+					'palette-error'
+				]
 			}
 		},
 	},
@@ -48,3 +60,4 @@ const template: Story<CheckboxStory> = (args: CheckboxStory) => ({
 });
 
 export const basic = template.bind({});
+basic.args = { checked: 'unchecked', palette: '', disabled: false };

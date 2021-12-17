@@ -1,5 +1,10 @@
-<label class="checkbox">
-	<input class="checkbox-input" type="checkbox" [attr.aria-hidden]="isAriaHidden" [ngModel]="isChecked" (ngModelChange)="toggle($event)"/>
+<label class="checkbox {{ palette }}">
+	<input class="checkbox-input" 
+		type="checkbox" 
+		[attr.aria-hidden]="isAriaHidden" 
+		[ngModel]="isChecked" 
+		(ngModelChange)="toggle($event)" 
+		[disabled]="disabled"/>
 	<span *ngIf="isMixed" class="checkbox-mixed" role="checkbox" aria-checked="mixed"></span>
-	<span class="checkbox-label">{{state}}</span>
+	<span class="checkbox-label">Checkbox input</span>
 </label>
