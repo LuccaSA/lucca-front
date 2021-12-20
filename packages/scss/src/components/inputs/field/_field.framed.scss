@@ -35,7 +35,7 @@
 	}
 
 	.#{$fieldname}-input {
-		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid, .ng-invalid) {
+		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: _color("white");
 
 			&:focus, &:hover {
