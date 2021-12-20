@@ -64,7 +64,7 @@
 		padding: _component("field.framed.top-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding");
 		line-height: _theme("sizes.standard.line-height");
 
-		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid, .ng-invalid) {
+		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: _color("white");
 
 			&:hover,

@@ -17,7 +17,7 @@
 		.textfield-input:focus {
 			&:not([disabled], &[readonly], &.is-disabled, &.is-readonly) {
 				background-color: _color("white");
-				box-shadow: 0 0 0 4px _color($palette, textfield-input200), inset 0 0 0 _component("textfield.outlined.border.width") _color($palette, 600);
+				box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 _component("textfield.outlined.border.width") _color($palette, 600);
 			}
 		}
 	}

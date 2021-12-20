@@ -140,7 +140,7 @@
 		clear: both;
 	}
 
-	&:not(.is-disabled, :disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid, .ng-invalid) {
+	&:not(.is-disabled, :disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 		&:hover,
 		&:focus {
 			position: relative;
