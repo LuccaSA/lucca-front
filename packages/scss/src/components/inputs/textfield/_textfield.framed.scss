@@ -65,15 +65,18 @@
 		line-height: _theme("sizes.standard.line-height");
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid, .ng-invalid) {
-			
 			background-color: _color("white");
 
-			&:hover {
-				background-color: _component("field.framed.color50");
+			&:hover,
+			&:focus {
+				position: relative;
+				z-index: 1;
+				background-color: _color("white");
+				box-shadow: fakeborderoverlay(_component("field.framed.color"));
 			}
 
 			&:focus {
-				background-color: _color("white");
+				z-index: 4;
 				box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
 			}
 

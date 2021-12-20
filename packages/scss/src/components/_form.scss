@@ -140,14 +140,19 @@
 		clear: both;
 	}
 
-	&:not(.is-disabled):hover {
-		background-color: _component("field.framed.color50");
-	}
+	&:not(.is-disabled, :disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid, .ng-invalid) {
+		&:hover,
+		&:focus {
+			position: relative;
+			z-index: 1;
+			background-color: _color("white");
+			box-shadow: fakeborderoverlay(_component("field.framed.color"));
+		}
 
-	&:focus-within {
-		position: relative;
-		z-index: 1;
-		box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+		&:focus {
+			z-index: 4;
+			box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+		}
 	}
 
 	.radiosfield, .checkboxesfield {
