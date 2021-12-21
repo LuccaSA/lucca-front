@@ -25,11 +25,15 @@
 }
 
 .form.mod-framed .checkboxesfield, .checkboxesfield.mod-framed {
-	@include field-framed("checkboxesfield");
 	display: block;
 
 	.checkboxesfield-input {
 		@extend %checkboxesfield-row;
+	}
+
+	fieldset {
+		border: none;
+		padding: 0;
 	}
 }
 
