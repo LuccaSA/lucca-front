@@ -111,7 +111,7 @@
 
 		.textfield-input {
 			padding-right: _theme("spacings.bigger") !important;
-			
+
 			&::-ms-reveal {
 				display: none;
 			}
@@ -387,12 +387,13 @@
 	@include field-input("textfield");
 
 	&[disabled], &[readonly], &.is-disabled, &.is-readonly {
-		background-color: _theme("commons.disabled.background");
-		color: _theme("commons.disabled.color");
-		cursor: not-allowed;
+		background-color: _component("textfield.disabled.background");
+		box-shadow: none;
+		color: _component("textfield.disabled.color");
+		cursor: default;
 
 		&::placeholder {
-			color: _theme("commons.disabled.placeholder");
+			color: _component("textfield.disabled.color");
 		}
 	}
 }
