@@ -1,7 +1,3 @@
-.breadcrumbs {
-	margin-bottom: _theme("spacings.smaller");
-}
-
 .breadcrumbs-list {
 	display: flex;
 	flex-wrap: wrap;
@@ -62,8 +58,6 @@
 // ▒▒▒▒
 
 .breadcrumbs.mod-compact {
-	margin-bottom: 0;
-
 	.breadcrumbs-list-item {
 		// two items
 		&:nth-last-child(2):first-child,
