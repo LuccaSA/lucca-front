@@ -1,4 +1,15 @@
-import { Directive, forwardRef, Inject, Optional, SkipSelf, Self, ViewContainerRef, TemplateRef, Input } from '@angular/core';
+import {
+	Directive,
+	forwardRef,
+	Inject,
+	Optional,
+	SkipSelf,
+	Self,
+	ViewContainerRef,
+	TemplateRef,
+	Input,
+	ChangeDetectorRef,
+} from '@angular/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuUser } from '../../user.model';
@@ -16,7 +27,7 @@ import { ALuUserService, LuUserV3Service } from '../../service/index';
 			provide: ALuUserService,
 			useClass: LuUserV3Service,
 		},
-		
+
 		{
 			provide: ALuOnOpenSubscriber,
 			useExisting: forwardRef(() => LuUserMeOptionDirective),
@@ -42,6 +53,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		@Inject(ALuUserService) @Self() selfService: ALuUserService,
 		private _vcr: ViewContainerRef,
 		private _templateRef: TemplateRef<{ $implicit: U }>,
+		private _cdr: ChangeDetectorRef,
 	) {
 		this._service = (hostService || selfService) as LuUserV3Service<U>;
 	}
@@ -58,6 +70,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		if (this.me && !this.meDisplayed) {
 			this.meDisplayed = true;
 			this._vcr.createEmbeddedView(this._templateRef, { $implicit: this.me });
+			this._cdr.markForCheck();
 		}
 	}
 }
