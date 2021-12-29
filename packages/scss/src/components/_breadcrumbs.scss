@@ -11,8 +11,10 @@
 }
 
 .breadcrumbs-list-item {
-	display: flex;
 	align-items: center;
+	display: flex;
+	font-size: _theme("sizes.small.font-size");
+	line-height: _theme("sizes.small.line-height");
 
 	&:not(:first-child) {
 		&::before {
