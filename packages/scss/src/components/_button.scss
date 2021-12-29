@@ -31,9 +31,21 @@
 
 @mixin buttonLinkColoring($palette) {
 	&:not([disabled], .is-disabled) {
+		color: _color($palette, "700");
+
+		&:hover {
+			background-color: _color($palette, "50");
+			box-shadow: none;
+		}
+
 		&:focus {
+			background-color: _color($palette, "50");
 			box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
-			background: _color($palette, "100");
+		}
+
+		&:active {
+			background-color: _color($palette, "100");
+			box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
 		}
 	}
 }
@@ -168,22 +180,30 @@
 
 	&.mod-link {
 		background-color: transparent;
-		color: _color("text.default");
 
-		// default color
-		@include buttonLinkColoring("button.default-palette");
+		// default colors
+		color: _color("grey", 700);
+		
+		&:hover {
+			box-shadow: none;
+			background-color: _color("grey", "50");
+		}
+
+		&:focus {
+			background-color: _color("grey", "50");
+			box-shadow: 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "300");
+		}
+
+		&:active {
+			background-color: _color("grey", "100");
+			box-shadow: 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "300");
+		}
 
 		// palette colors
 		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include buttonLinkColoring($name);
 			}
-		}
-
-		&:hover {
-			box-shadow: none;
-			background-color: _color("primary", "50");
-			color: _color("primary");
 		}
 
 		&.mod-invert {
