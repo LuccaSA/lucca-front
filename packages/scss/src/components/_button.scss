@@ -187,7 +187,7 @@
 		}
 	}
 
-	&.mod-link,
+	&.mod-link, // legacy class
 	&.mod-text {
 		background-color: transparent;
 		box-shadow: none;
