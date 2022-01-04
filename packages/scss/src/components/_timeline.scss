@@ -195,7 +195,7 @@
 		&.mod-big {
 			.timeline-step {
 				&::after {
-					bottom: _theme('spacings.smaller') * -1;
+					bottom: calc(#{_theme('spacings.smaller')} * -1);
 					left: .95rem; // magic number
 					top: 2.5rem;
 				}
