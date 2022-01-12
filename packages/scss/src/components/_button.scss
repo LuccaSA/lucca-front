@@ -209,7 +209,6 @@
 
 		&::before {
 			@include makeIcon("arrow_south");
-			content: "";
 			height: 0;
 			vertical-align: text-top;
 		}
