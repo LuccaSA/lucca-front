@@ -20,11 +20,12 @@
 			[appInstanceId]="appInstanceId"
 			[operations]="operations"
 			[enableFormerEmployees]="enableFormerEmployees"
+			(clueChange)="clue = $event"
 		></lu-user-paged-searcher>
 	</header>
 	<lu-user-homonyms></lu-user-homonyms>
 	<lu-option
-		*luUserMeOption="let user; fields: fields; filters: filters; orderBy: orderBy; appInstanceId: appInstanceId; operations: operations"
+		*luUserMeOption="let user; fields: fields; filters: filters; orderBy: orderBy; appInstanceId: appInstanceId; operations: operations; clue: clue"
 		[value]="user"
 	>
 		<div><b>{{intl.me}} {{ user | luUserDisplay: searchFormat }}</b></div>
