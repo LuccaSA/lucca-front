@@ -1,7 +1,7 @@
 {
 	"name": "lucca-front",
 	"version": "7.0.6",
-	"description": "a library of usefull components for web developpement",
+	"description": "a library of useful components for web developpement",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/LuccaSA/lucca-front.git"

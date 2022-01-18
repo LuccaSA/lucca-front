@@ -18,8 +18,11 @@ $table: (
 		max-col-width: 20,
 		sticky-shadow: (
 			width: .625rem,
-			color: _color("grey", "800", true)
-		)
+			color: _color("grey", "800", true),
+		),
+	),
+	sticky-column: (
+		max-offset: 50
 	)
 );
 

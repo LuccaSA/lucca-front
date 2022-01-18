@@ -72,6 +72,9 @@
       "@lucca-front/ng/establishment": [
         "./packages/ng/establishment/src/index"
       ],
+      "@lucca-front/ng/qualification": [
+        "./packages/ng/qualification/src/index"
+      ],
       "@lucca-front/ng/user": [
         "./packages/ng/user/src/index"
       ],

@@ -4,16 +4,21 @@
 			box-shadow: inset 0 0 0 _component("textfield.outlined.border.width") _component("textfield.outlined.border.default-color");
 			background-color: _color("white");
 		}
+
 		&:hover .textfield-input {
-			box-shadow: inset 0 0 0 _component("textfield.outlined.border.width") _color($palette, 200);
-			background-color: _color($palette, 50);
+			&:not([disabled], &[readonly], &.is-disabled, &.is-readonly) {
+				box-shadow: inset 0 0 0 _component("textfield.outlined.border.width") _color($palette, 200);
+				background-color: _color($palette, 50);
+			}
 		}
 
 		&.is-focused .textfield-input,
 		.textfield-input.is-focused,
 		.textfield-input:focus {
-			background-color: _color("white");
-			box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 _component("textfield.outlined.border.width") _color($palette, 600);
+			&:not([disabled], &[readonly], &.is-disabled, &.is-readonly) {
+				background-color: _color("white");
+				box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 _component("textfield.outlined.border.width") _color($palette, 600);
+			}
 		}
 	}
 
@@ -42,7 +47,9 @@
 			&,
 			&:focus,
 			&.is-focused {
-				background-color: _theme("commons.disabled.background");
+				background-color: _component("textfield.disabled.background");
+				color: _component("textfield.disabled.color");
+				cursor: default;
 				box-shadow: none;
 			}
 		}
@@ -53,7 +60,9 @@
 		&[readonly],
 		&.is-disabled,
 		&.is-readonly {
-			background-color: _theme("commons.disabled.background");
+			background-color: _component("textfield.disabled.background");
+			color: _component("textfield.disabled.color");
+			cursor: default;
 			box-shadow: none;
 		}
 	}

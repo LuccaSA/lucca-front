@@ -14,6 +14,8 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	@Input() state: string = '';
 	@Input() size: string = '';
 	@Input() group: string = '';
+	@Input() disabled: boolean = false;
+	// @Input() more: boolean = false; // lucca-icons needed
 }
 
 export default {
@@ -23,7 +25,7 @@ export default {
 		mod: {
 			control: {
 				type: 'radio',
-				options: ['', ' mod-outline', 'mod-link']
+				options: ['', ' mod-outline', 'mod-link', 'mod-link mod-invert']
 			}
 		},
 		palette: {
@@ -65,4 +67,4 @@ const template: Story<ButtonStory> = (args: ButtonStory) => ({
 });
 
 export const def = template.bind({});
-def.args = { label: 'label', mod: '', size: '', state: '', palette: '', group: '' };
+def.args = { label: 'label', mod: '', size: '', state: '', palette: '', group: '', disabled: false };

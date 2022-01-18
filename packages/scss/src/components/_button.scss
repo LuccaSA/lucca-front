@@ -5,19 +5,24 @@
 	background-color: _color($palette);
 	color: _color($palette, "text");
 
-	&:hover:not([disabled]) {
-		background-color: _color($palette, "500");
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06);
+	&:not([disabled], .is-disabled) {
+		&:hover {
+			background-color: _color($palette, "600");
+			box-shadow: _theme('commons.box-shadow.xs');
+		}
+
+		&:focus {
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, "200");
+			outline: none;
+			background-color: _color($palette, "600");
+		}
+
+		&:active {
+			background-color: _color($palette, "800");
+			box-shadow: 0 0 0 4px _color($palette, "300");
+		}
 	}
 
-	&:focus {
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
-		outline: none;
-	}
-
-	&:active:not([disabled]) {
-		background-color: _color($palette, "800");
-	}
 
 	.button-counter {
 		background-color: _color($palette, "500");
@@ -25,37 +30,42 @@
 }
 
 @mixin buttonLinkColoring($palette) {
-	&:focus:not([disabled]) {
-		box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
-		background: _color($palette, "100");
+	&:not([disabled], .is-disabled) {
+		&:focus {
+			box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
+			background: _color($palette, "100");
+		}
 	}
 }
 
 @mixin buttonOutlineColoring($palette) {
-	box-shadow: inset 0 0 0 1px _color($palette, "500");
-	color: _color($palette);
-
-	&:hover:not([disabled]) {
-		background-color: _color($palette, "50");
+	&:not([disabled], .is-disabled) {
 		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), inset 0 0 0 1px _color($palette);
-	}
+		box-shadow: inset 0 0 0 1px _color($palette, "400");
 
-	&:focus:not([disabled]) {
-		background-color: _color($palette, "50");
-		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "50"), inset 0 0 0 1px _color($palette, "500");
-		outline: none;
-	}
+		&:hover {
+			background-color: _color($palette, "100");
+			color: _color($palette);
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, "400");
+		}
 
-	&:active:not([disabled]) {
-		background-color: _color($palette, "50");
-		color: _color($palette, "dark");
-		box-shadow: inset 0 0 0 1px _color($palette, "800");
+		&:focus {
+			background-color: _color($palette, "100");
+			color: _color($palette);
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
+			outline: none;
+		}
+
+		&:active {
+			background-color: _color($palette, "200");
+			color: _color($palette);
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
+		}
 	}
 
 	.button-counter {
-		background-color: _color($palette, "500");
+		background-color: _color($palette, "300");
+		color: _color($palette);
 	}
 }
 
@@ -89,9 +99,8 @@
 	}
 
 	.lucca-icon {
-		vertical-align: top;
-		line-height: 1.5rem;
-		font-size: 1rem;
+		font-size: 1.25rem;
+		line-height: 1;
 	}
 }
 
@@ -141,8 +150,8 @@
 		padding: _component("button.small.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
-			font-size: .875rem;
+			line-height: 1;
+			font-size: 1rem;
 		}
 	}
 
@@ -152,7 +161,7 @@
 		padding: _component("button.smaller.padding");
 
 		.lucca-icon {
-			line-height: 1rem;
+			line-height: 1;
 			font-size: .875rem;
 		}
 	}
@@ -178,17 +187,17 @@
 		}
 
 		&.mod-invert {
-			color: white;
+			color: _color('white');
 
-			&:hover, &:focus {
-				&:not([disabled]) {
+			&:not([disabled], .is-disabled) {
+				&:hover, &:focus {
 					background-color: rgba(255, 255, 255, .1);
-					color: white;
+					color: _color('white');
 				}
-			}
 
-			&:focus {
-				box-shadow: 0 0 0 4px rgba(0, 0, 0, .1);
+				&:focus {
+					box-shadow: 0 0 0 4px rgba(0, 0, 0, .1);
+				}
 			}
 		}
 	}
@@ -199,7 +208,6 @@
 		width: 2rem;
 
 		&::before {
-			content: "";
 			@include makeIcon("arrow_south");
 			height: 0;
 			vertical-align: text-top;
@@ -210,29 +218,51 @@
 		}
 	}
 
-	&.mod-outline {
-		background-color: transparent;
-		box-shadow: inset 0 0 0 1px _color("grey", "500");
+	&.mod-outlined,
+	&.mod-outline { // legacy
+		background-color: _color("white");
+		box-shadow: inset 0 0 0 1px _color("grey", "400");
 		color: _color("text.default");
 
-		&:hover {
-			background-color: _color("primary", "50");
-			color: _color("primary");
+		&:not([disabled], .is-disabled) {
+			&:hover {
+				background-color: _color("grey", "100");
+				color: _color("text.default");
+				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color("grey", "400");
+			}
+
+			&:focus {
+				background-color: _color("grey", "100");
+				color: _color("text.default");
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
+				outline: none;
+			}
+
+			&:active {
+				background-color: _color("grey", "200");
+				color: _color("text.default");
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
+			}
 		}
 
+
+
+		// TODO delete this class ?
 		&.mod-white {
 			background-color: _color("white");
 			color: _color("grey", "700");
 		}
-
-		// default color
-		@include buttonOutlineColoring("button.default-palette");
 
 		// palette colors
 		@each $name, $palette in _getMap("palettes") {
 			&.palette-#{$name} {
 				@include buttonOutlineColoring($name);
 			}
+		}
+
+		.button-counter {
+			background-color: _color("grey", "300");
+			color: _color("text.default");
 		}
 	}
 
@@ -249,6 +279,9 @@
 	}
 
 	&.mod-icon {
+		align-items: center;
+		display: inline-flex;
+		gap: _theme('spacings.smaller');
 		padding-left: _theme("spacings.small");
 		padding-right: _theme("spacings.small");
 
@@ -261,6 +294,8 @@
 		}
 
 		&.mod-smaller {
+			gap: _theme('spacings.smallest');
+
 			.button-icon {
 				font-size: _component("button.smaller.font-size");
 				height: _component("button.smaller.line-height");
@@ -279,17 +314,25 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
-
 	/* Disabled */
 
+	&.is-disabled,
 	&[disabled] {
+		outline: none;
+		background-color: _color('grey', 100);
+		color: _color('grey', 500);
 		cursor: default;
-		opacity: _theme("commons.disabled.opacity");
-	}
 
-	&.is-disabled {
-		opacity: _theme("commons.disabled.opacity");
-		pointer-events: none;
+		&.mod-outlined,
+		&.mod-outline { // legacy
+			background-color: _color('white');
+			border-color: _color('grey', 200);
+		}
+
+		&.mod-link {
+			color: _color('grey', 500);
+			background-color: transparent;
+		}
 	}
 
 	/* Loading */
@@ -370,7 +413,7 @@
 	}
 
 	.button {
-		@include buttonColoring("button.default-palette");
+		// @include buttonColoring("button.default-palette");
 
 		border-radius: 0;
 		display: block;
@@ -381,13 +424,35 @@
 		flex-grow: 1;
 		white-space: normal;
 
-		&:hover, &:focus {
-			z-index: 1;
+		&:not(.mod-outline, .mod-outlined) {
+			border-right: _theme('commons.divider.width') solid rgba(0, 0, 0, .1);
 		}
 
-		&:focus {
-			background-color: _color("primary", "600");
-			box-shadow: none;
+		&:first-child {
+			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
+		}
+
+		&:last-child {
+			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
+			border-right: 0;
+		}
+
+		&:not(:first-child) {
+			&.mod-outline,
+			&.mod-outlined {
+				margin-left: -1px;
+			}
+		}
+
+		&:not([disabled], .is-disabled) {
+			&:hover, &:focus {
+				z-index: 1;
+			}
+
+			&:focus {
+				background-color: _color("primary", "600");
+				box-shadow: none;
+			}
 		}
 	}
 

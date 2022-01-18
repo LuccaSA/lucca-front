@@ -124,6 +124,7 @@
 .checkboxesfield.mod-framed,
 .radiosfield.mod-framed,
 .form.mod-framed .fieldsetWrapper {
+	background-color: _color("white");
 	padding: 0;
 	box-shadow: fakeborderoverlay(_component("field.framed.border"));
 	transition: background-color _theme("commons.animations.durations.standard");
@@ -139,14 +140,19 @@
 		clear: both;
 	}
 
-	&:hover {
-		background-color: _component("field.framed.color50");
-	}
+	&:not(.is-disabled, :disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
+		&:hover,
+		&:focus {
+			position: relative;
+			z-index: 1;
+			background-color: _color("white");
+			box-shadow: fakeborderoverlay(_component("field.framed.color"));
+		}
 
-	&:focus-within {
-		position: relative;
-		z-index: 1;
-		box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+		&:focus {
+			z-index: 4;
+			box-shadow: fakeborderoverlay(_component("field.framed.color")), 0 0 0 4px _component("field.framed.color50");
+		}
 	}
 
 	.radiosfield, .checkboxesfield {
@@ -169,10 +175,6 @@
 
 	&.is-disabled, &.is-readonly {
 		background-color: _theme("commons.disabled.background");
-
-		.radio-label, .checkbox-label {
-			cursor: not-allowed;
-		}
 	}
 
 	&.is-loading {

@@ -11,6 +11,7 @@ import {
 	LuFormlyFieldEstablishment,
 	LuFormlyFieldCheckbox,
 	LuFormlyFieldRadios,
+	LuFormlyFieldQualification
 } from './types/index';
 // wrappers
 import {
@@ -75,6 +76,11 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'establishment',
 			component: LuFormlyFieldEstablishment,
+			wrappers: ['textfield-layout']
+		},
+		{
+			name: 'qualification',
+			component: LuFormlyFieldQualification,
 			wrappers: ['textfield-layout']
 		}
 	],

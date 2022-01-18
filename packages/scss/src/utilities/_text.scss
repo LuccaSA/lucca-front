@@ -2,31 +2,31 @@ $suffix: "!important";
 // TITLE
 //
 .u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6 {
-	@include commonsTitleStyles($suffix);
+	@include hx($suffix);
 }
 
 .u-h1 {
-    @include h1Styles($suffix);
+    @include h1($suffix);
 }
 
 .u-h2 {
-    @include h2Styles($suffix);
+    @include h2($suffix);
 }
 
 .u-h3 {
-    @include h3Styles($suffix);
+    @include h3($suffix);
 }
 
 .u-h4 {
-    @include h4Styles($suffix);
+    @include h4($suffix);
 }
 
 .u-h5 {
-    @include h5Styles($suffix);
+    @include h5($suffix);
 }
 
 .u-h6 {
-    @include h6Styles($suffix);
+    @include h6($suffix);
 }
 
 

@@ -11,6 +11,7 @@ import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuApiModule } from '@lucca-front/ng/api';
 import { LuDepartmentModule } from '@lucca-front/ng/department';
 import { LuEstablishmentModule } from '@lucca-front/ng/establishment';
+import { LuQualificationModule } from '@lucca-front/ng/qualification';
 
 import {
 	LuFormlyFieldInput,
@@ -73,6 +74,7 @@ export const LuFormlyChild = FormlyModule.forChild(LU_FORMLY_CONFIG);
 		LuApiModule,
 		LuDepartmentModule,
 		LuEstablishmentModule,
+		LuQualificationModule,
 		LuDateModule,
 
 		// FormlyModule.forChild(LU_FORMLY_CONFIG),

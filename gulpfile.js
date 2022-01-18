@@ -173,6 +173,7 @@ gulp.task('ng:date:build', () => run('ng build date --prod').exec());
 gulp.task('ng:api:build', () => run('ng build api --prod').exec());
 gulp.task('ng:department:build', () => run('ng build department --prod').exec());
 gulp.task('ng:establishment:build', () => run('ng build establishment --prod').exec());
+gulp.task('ng:qualification:build', () => run('ng build qualification --prod').exec());
 gulp.task('ng:user:build', () => run('ng build user --prod').exec());
 
 gulp.task('ng:material:build', () => run('ng build material --prod').exec());
@@ -196,33 +197,31 @@ gulp.task('ng:schematics:collection', () => {
 gulp.task(
 	'ng',
 	gulp.series(
-		'ng:root:build',
-		'ng:root:style',
-		'ng:core:build',
-		'ng:animations:build',
-		'ng:input:build',
-		'ng:scroll:build',
-		'ng:safe-content:build',
-		'ng:number:build',
-		'ng:popover:build',
-		'ng:popup:build',
-		'ng:tooltip:build',
-		'ng:dropdown:build',
-		'ng:picker:build',
-		'ng:modal:build',
-		'ng:select:build',
-		'ng:sidepanel:build',
-		'ng:option:build',
-		'ng:date:build',
-		'ng:api:build',
-		'ng:department:build',
-		'ng:establishment:build',
-		'ng:user:build',
-		'ng:material:build',
-		'ng:material:style',
+		gulp.parallel(
+			gulp.series('ng:root:build','ng:root:style'),
+			gulp.series('ng:material:build','ng:material:style'),
+			'ng:animations:build',
+			'ng:scroll:build',
+			'ng:safe-content:build',
+			'ng:number:build',
+			'ng:input:build',
+			'ng:popup:build',
+			'ng:schematics:build',
+			'ng:schematics:collection',
+			'ng:core:build',
+		),
+		gulp.parallel(
+			gulp.series('ng:popover:build','ng:picker:build'),
+			gulp.series(
+				'ng:modal:build',
+				gulp.parallel('ng:sidepanel:build','ng:tooltip:build','ng:dropdown:build'
+				),
+			),
+		),
+		gulp.parallel('ng:option:build','ng:select:build'),
+		gulp.parallel('ng:api:build','ng:date:build'),
+		gulp.parallel('ng:user:build','ng:department:build','ng:establishment:build','ng:qualification:build'),
 		'ng:formly:build',
 		'ng:formly:style',
-		'ng:schematics:build',
-		'ng:schematics:collection',
 	),
 );

@@ -90,7 +90,7 @@
 
 .actionIcon {
 	&[disabled], &.is-disabled, &.is-loading {
-		opacity: _theme("commons.disabled.opacity");
+		color: _color("grey", 500);
 		pointer-events: none;
 		cursor: default;
 	}
