@@ -1,7 +1,3 @@
-.breadcrumbs {
-	margin-bottom: _theme("spacings.smaller");
-}
-
 .breadcrumbs-list {
 	display: flex;
 	flex-wrap: wrap;
@@ -11,8 +7,10 @@
 }
 
 .breadcrumbs-list-item {
-	display: flex;
 	align-items: center;
+	display: flex;
+	font-size: _theme("sizes.small.font-size");
+	line-height: _theme("sizes.small.line-height");
 
 	&:not(:first-child) {
 		&::before {
@@ -60,8 +58,6 @@
 // ▒▒▒▒
 
 .breadcrumbs.mod-compact {
-	margin-bottom: 0;
-
 	.breadcrumbs-list-item {
 		// two items
 		&:nth-last-child(2):first-child,
