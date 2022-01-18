@@ -8,3 +8,4 @@ export * from './radios';
 export * from './select';
 export * from './textarea';
 export * from './user';
+export * from './qualification';

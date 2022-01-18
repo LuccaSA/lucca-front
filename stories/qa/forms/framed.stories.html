@@ -1,0 +1,1996 @@
+<section class="contentSection">
+	<h1>Framed form</h1>
+
+	<p>
+		Form can have a mod called <code class="code">mod-framed</code>.
+		In this mod <code class="code">form-group</code> behave differently and you have access to news
+		DOM levels called <code class="code">form-group-line</code> and <code class="code">form-group-line-col</code>.
+	</p>
+	<p>
+		You can divide <code class="code">form-group-line</code> using <code class="code">form-group-line-col</code> classes over
+		 your inputs to size them on a single line. Widths will be evenly distributed according to the number of elements.
+	</p>
+	<p>
+		You can also modify this distribution by adding classes such as
+		<code class="code">.mod-l4</code> or
+		<code class="code">.mod-xxxs6</code>
+		on cols for example.
+	</p>
+
+	<!-- fieldset legend -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Fieldset legend</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Label</span>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<h2 class="form-group-legend">Title</h2>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Label</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<!-- col -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Col</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col mod-xs">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">mod-xs6</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col mod-m3">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">mod-m3</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">auto</span>
+					</label>
+				</div>
+				<div class="form-group-line-col mod-s9">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">mod-s9</span>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- type -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Type</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-search">
+						<input class="textfield-input" type="search">
+						<span class="textfield-label">Search</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-select" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select', 'is-open')">
+						<label class="textfield">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="radiosfield">
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio">
+							<input type="radio" name="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="radiosfield">
+						<div class="radiosfield-label"></div>
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="checkboxesfield">
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="checkboxesfield">
+						<div class="checkboxesfield-label"></div>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- ng status -->
+	<form action="#" class="form">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">ng status</legend>
+			<div>
+				<label class="textfield mod-framed is-required">
+					<input aria-required="true" required="true" class="textfield-input ng-invalid ng-touched" type="text">
+					<span class="textfield-label">Text</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield mod-search mod-framed">
+					<input class="textfield-input ng-invalid ng-touched" type="search">
+					<span class="textfield-label">Search</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield mod-framed">
+					<input class="textfield-input ng-invalid ng-touched" type="password">
+					<span class="textfield-label">Password</span>
+				</label>
+			</div>
+			<div id="framed-autocomplete-select-ng" class="textfield mod-select mod-framed" onclick="w3.addClass('#framed-autocomplete-select-ng', 'is-open')">
+				<label class="textfield mod-framed">
+					<input class="textfield-input ng-invalid ng-touched" type="text" onfocus="w3.addClass('#framed-autocomplete-select-ng', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-ng', 'is-open')">
+					<span class="textfield-label">Autocomplete</span>
+				</label>
+				<ul class="textfield-options">
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+				</ul>
+			</div>
+			<div>
+				<label class="textfield mod-multiline mod-framed">
+					<textarea class="textfield-input ng-invalid ng-touched"></textarea>
+					<span class="textfield-label">Textarea</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed">
+				<label class="radio">
+					<input type="radio" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group1">
+				<div id="group1" class="radiosfield-label">Fieldset legend</div>
+				<label class="radio">
+					<input type="radio" name="radioNg" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio</span>
+				</label>
+				<label class="radio">
+					<input type="radio" name="radioNg" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio</span>
+				</label>
+				<label class="radio">
+					<input type="radio" name="radioNg" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed">
+				<div class="radiosfield-label"></div>
+				<label class="radio">
+					<input type="radio" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio with empty radiosfield-label before</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group2">
+				<div id="group2" class="radiosfield-label">Fieldset legend</div>
+				<label class="radio mod-inline">
+					<input type="radio" name="radioNg2" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio mod-inline</span>
+				</label>
+				<label class="radio mod-inline">
+					<input type="radio" name="radioNg2" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio mod-inline</span>
+				</label>
+				<label class="radio mod-inline">
+					<input type="radio" name="radioNg2" class="radio-input ng-invalid ng-touched">
+					<span class="radio-label">Radio mod-inline</span>
+				</label>
+			</div>
+			<div class="checkboxesfield mod-framed">
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group3">
+				<div id="group3" class="radiosfield-label">Fieldset legend</div>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+			</div>
+			<div class="checkboxesfield mod-framed">
+				<div class="checkboxesfield-label"></div>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group4">
+				<div id="group4" class="radiosfield-label">Fieldset legend</div>
+				<label class="checkbox mod-inline">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox mod-inline</span>
+				</label>
+				<label class="checkbox mod-inline">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox mod-inline</span>
+				</label>
+				<label class="checkbox mod-inline">
+					<input type="checkbox" class="checkbox-input ng-invalid ng-touched">
+					<span class="checkbox-label">Checkbox mod-inline</span>
+				</label>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- standalone -->
+	<form action="#" class="form">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Standalone</legend>
+			<div>
+				<label class="textfield mod-framed is-required">
+					<input aria-required="true" required="true" class="textfield-input" type="text">
+					<span class="textfield-label">Text</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield mod-search mod-framed">
+					<input class="textfield-input" type="search">
+					<span class="textfield-label">Search</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield mod-framed">
+					<input class="textfield-input" type="password">
+					<span class="textfield-label">Password</span>
+				</label>
+			</div>
+			<div id="framed-autocomplete-select-inline" class="textfield mod-framed mod-select" onclick="w3.addClass('#framed-autocomplete-select-inline', 'is-open')">
+				<label class="textfield mod-framed">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-inline', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-inline', 'is-open')">
+					<span class="textfield-label">Autocomplete</span>
+				</label>
+				<ul class="textfield-options">
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+				</ul>
+			</div>
+			<div>
+				<label class="textfield mod-multiline mod-framed">
+					<textarea class="textfield-input"></textarea>
+					<span class="textfield-label">Textarea</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed">
+				<label class="radio">
+					<input type="radio" class="radio-input">
+					<span class="radio-label">Radio</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group1">
+				<div id="group1" class="radiosfield-label">Fieldset legend</div>
+				<label class="radio">
+					<input type="radio" name="radio" class="radio-input">
+					<span class="radio-label">Radio</span>
+				</label>
+				<label class="radio">
+					<input type="radio" name="radio" class="radio-input">
+					<span class="radio-label">Radio</span>
+				</label>
+				<label class="radio">
+					<input type="radio" name="radio" class="radio-input">
+					<span class="radio-label">Radio</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed">
+				<div class="radiosfield-label"></div>
+				<label class="radio">
+					<input type="radio" class="radio-input">
+					<span class="radio-label">Radio with empty radiosfield-label before</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group2">
+				<div id="group2" class="radiosfield-label">Fieldset legend</div>
+				<label class="radio mod-inline">
+					<input type="radio" name="radioInline" class="radio-input">
+					<span class="radio-label">Radio mod-inline</span>
+				</label>
+				<label class="radio mod-inline">
+					<input type="radio" name="radioInline" class="radio-input">
+					<span class="radio-label">Radio mod-inline</span>
+				</label>
+				<label class="radio mod-inline">
+					<input type="radio" name="radioInline" class="radio-input">
+					<span class="radio-label">Radio mod-inline</span>
+				</label>
+			</div>
+			<div class="checkboxesfield mod-framed">
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group3">
+				<div id="group3" class="radiosfield-label">Fieldset legend</div>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+			</div>
+			<div class="checkboxesfield mod-framed">
+				<div class="checkboxesfield-label"></div>
+				<label class="checkbox">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+				</label>
+			</div>
+			<div class="radiosfield mod-framed" role="group" aria-labelledby="group4">
+				<div id="group4" class="radiosfield-label">Fieldset legend</div>
+				<label class="checkbox mod-inline">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox mod-inline</span>
+				</label>
+				<label class="checkbox mod-inline">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox mod-inline</span>
+				</label>
+				<label class="checkbox mod-inline">
+					<input type="checkbox" class="checkbox-input">
+					<span class="checkbox-label">Checkbox mod-inline</span>
+				</label>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- formly -->
+	<formly-form action="#" class="form mod-framed mod-formly">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Formly</legend>
+			<div>
+				<label class="textfield is-required">
+					<input aria-required="true" required="true" class="textfield-input" type="text">
+					<span class="textfield-label">Text</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield mod-search">
+					<input class="textfield-input" type="search">
+					<span class="textfield-label">Search</span>
+				</label>
+			</div>
+			<div>
+				<label class="textfield">
+					<input class="textfield-input" type="password">
+					<span class="textfield-label">Password</span>
+				</label>
+			</div>
+			<div id="framed-autocomplete-select-formly" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-formly', 'is-open')">
+				<label class="textfield">
+					<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-formly', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-formly', 'is-open')">
+					<span class="textfield-label">Autocomplete</span>
+				</label>
+				<ul class="textfield-options">
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+					<li class="textfield-options-entry">
+						<mark>va</mark>lue
+					</li>
+				</ul>
+			</div>
+			<div>
+				<label class="textfield mod-multiline">
+					<textarea class="textfield-input"></textarea>
+					<span class="textfield-label">Textarea</span>
+				</label>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="radiosfield">
+					<label class="radio">
+						<input type="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="radio">
+						<input type="radio" name="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+					<label class="radio">
+						<input type="radio" name="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+					<label class="radio">
+						<input type="radio" name="radio" class="radio-input">
+						<span class="radio-label">Radio</span>
+					</label>
+				</fieldset>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="radiosfield">
+					<div class="radiosfield-label"></div>
+					<label class="radio">
+						<input type="radio" class="radio-input">
+						<span class="radio-label">Radio with empty radiosfield-label before</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="radio mod-inline">
+						<input type="radio" name="radioInline" class="radio-input">
+						<span class="radio-label">Radio mod-inline</span>
+					</label>
+					<label class="radio mod-inline">
+						<input type="radio" name="radioInline" class="radio-input">
+						<span class="radio-label">Radio mod-inline</span>
+					</label>
+					<label class="radio mod-inline">
+						<input type="radio" name="radioInline" class="radio-input">
+						<span class="radio-label">Radio mod-inline</span>
+					</label>
+				</fieldset>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="checkboxesfield">
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox</span>
+					</label>
+				</fieldset>
+			</div>
+			<div class="fieldsetWrapper">
+				<div class="checkboxesfield">
+					<div class="checkboxesfield-label"></div>
+					<label class="checkbox">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+					</label>
+				</div>
+			</div>
+			<div class="fieldsetWrapper">
+				<fieldset class="radiosfield">
+					<legend class="radiosfield-label">Fieldset legend</legend>
+					<label class="checkbox mod-inline">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox mod-inline</span>
+					</label>
+					<label class="checkbox mod-inline">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox mod-inline</span>
+					</label>
+					<label class="checkbox mod-inline">
+						<input type="checkbox" class="checkbox-input">
+						<span class="checkbox-label">Checkbox mod-inline</span>
+					</label>
+				</fieldset>
+			</div>
+		</fieldset>
+	</formly-form>
+
+	<!-- is-loading -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Loading</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-loading">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-loading">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-select-loading" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-loading', 'is-open')">
+						<label class="textfield is-loading">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-loading', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-loading', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline is-loading">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<div class="radiosfield">
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio">
+							<input type="radio" name="radio-loading" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radio-loading" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radio-loading" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<div class="radiosfield">
+						<div class="radiosfield-label"></div>
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline-loading" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline-loading" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInline-loading" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<div class="checkboxesfield">
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<div class="checkboxesfield">
+						<div class="checkboxesfield-label"></div>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-loading">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- placeholder + required -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Placeholder + required</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-required">
+						<input aria-required="true" class="textfield-input" type="text" placeholder="Placeholder">
+						<span class="textfield-label">Text</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-search is-required">
+						<input aria-required="true" class="textfield-input" type="search" placeholder="Placeholder">
+						<span class="textfield-label">Search</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-required">
+						<input aria-required="true" class="textfield-input" type="password" placeholder="Placeholder">
+						<span class="textfield-label">Password</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-select-placeholder" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-select-placeholder', 'is-open')">
+						<label class="textfield is-required">
+							<input aria-required="true" class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-select-placeholder', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-select-placeholder', 'is-open')" placeholder="Placeholder">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline is-required">
+						<textarea aria-required="true" class="textfield-input" placeholder="Placeholder"></textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="radiosfield">
+						<label class="radio is-required">
+							<input aria-required="true" type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="radiosfield is-required">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio">
+							<input aria-required="true" type="radio" name="radioRequired" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input aria-required="true" type="radio" name="radioRequired" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input aria-required="true" type="radio" name="radioRequired" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="radiosfield is-required">
+						<div class="radiosfield-label"></div>
+						<label class="radio is-required">
+							<input aria-required="true" type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="radiosfield is-required">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio mod-inline">
+							<input aria-required="true" type="radio" name="radioInlineRequired" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input aria-required="true" type="radio" name="radioInlineRequired" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input aria-required="true" type="radio" name="radioInlineRequired" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="checkboxesfield">
+						<label class="checkbox is-required">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="checkboxesfield is-required">
+						<legend class="checkboxesfield-label">Fieldset legend </legend>
+						<label class="checkbox">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper">
+					<div class="checkboxesfield is-required">
+						<div class="checkboxesfield-label"></div>
+						<label class="checkbox is-required">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper">
+					<fieldset class="checkboxesfield is-required">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox mod-inline">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input aria-required="true" type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- disabled + value -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Disabled + value</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input disabled value="Value" class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-search">
+						<input disabled value="Value" class="textfield-input" type="search">
+						<span class="textfield-label">Search</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input disabled value="Value" class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-selectDisabled" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-selectDisabled', 'is-open')">
+						<label class="textfield">
+							<input disabled value="Value" class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-selectDisabled', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-selectDisabled', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline">
+						<textarea disabled class="textfield-input">Value</textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<div class="radiosfield">
+						<label class="radio">
+							<input disabled checked type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio">
+							<input disabled checked type="radio" name="radioDisabled" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input disabled type="radio" name="radioDisabled" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input disabled type="radio" name="radioDisabled" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<div class="radiosfield">
+						<div class="radiosfield-label"></div>
+						<label class="radio">
+							<input disabled checked type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio mod-inline">
+							<input disabled checked type="radio" name="radioInlineDisabled" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input disabled type="radio" name="radioInlineDisabled" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input disabled type="radio" name="radioInlineDisabled" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<div class="checkboxesfield">
+						<label class="checkbox">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<div class="checkboxesfield">
+						<div class="checkboxesfield-label"></div>
+						<label class="checkbox">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-disabled">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox mod-inline">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input disabled checked type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- success -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Success</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-success">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-search is-success">
+						<input class="textfield-input" type="search">
+						<span class="textfield-label">Search</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-success">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-selectSuccess" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-selectSuccess', 'is-open')">
+						<label class="textfield is-success">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-selectSuccess', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-selectSuccess', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline is-success">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<div class="radiosfield">
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio">
+							<input type="radio" name="radioSuccess" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radioSuccess" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio">
+							<input type="radio" name="radioSuccess" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<div class="radiosfield">
+						<div class="radiosfield-label"></div>
+						<label class="radio">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInlineSuccess" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInlineSuccess" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline">
+							<input type="radio" name="radioInlineSuccess" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<div class="checkboxesfield">
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<div class="checkboxesfield">
+						<div class="checkboxesfield-label"></div>
+						<label class="checkbox">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-success">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- error + message -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Error + message</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-error">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+						<span class="textfield-messages">
+							<span class="textfield-messages-error">Message</span>
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-search is-error">
+						<input class="textfield-input" type="search">
+						<span class="textfield-label">Search</span>
+						<span class="textfield-messages">
+							<span class="textfield-messages-error">Message</span>
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-error">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+						<span class="textfield-messages">
+							<span class="textfield-messages-error">Message</span>
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="framed-autocomplete-selectError" class="textfield mod-select is-error" onclick="w3.addClass('#framed-autocomplete-selectError', 'is-open')">
+						<label class="textfield">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-selectError', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-selectError', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+							<span class="textfield-messages">
+								<span class="textfield-messages-error">Message</span>
+							</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline is-error">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+						<span class="textfield-messages">
+							<span class="textfield-messages-error">Message</span>
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<div class="radiosfield">
+						<div class="radiosfield-messages">
+							<span class="radiosfield-messages-error">Message</span>
+						</div>
+						<label class="radio palette-error">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<div class="radiosfield-messages">
+							<span class="radiosfield-messages-error">Message</span>
+						</div>
+						<div class="radiosfield-messages">
+							<span class="radiosfield-messages-error">Message</span>
+						</div>
+						<label class="radio palette-error">
+							<input type="radio" name="radioError" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio palette-error">
+							<input type="radio" name="radioError" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+						<label class="radio palette-error">
+							<input type="radio" name="radioError" class="radio-input">
+							<span class="radio-label">Radio</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<div class="radiosfield">
+						<div class="radiosfield-label"></div>
+						<div class="radiosfield-messages">
+							<span class="radiosfield-messages-error">Message</span>
+						</div>
+						<label class="radio palette-error">
+							<input type="radio" class="radio-input">
+							<span class="radio-label">Radio with empty radiosfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Fieldset legend</legend>
+						<div class="radiosfield-messages">
+							<span class="radiosfield-messages-error">Message</span>
+						</div>
+						<label class="radio mod-inline palette-error">
+							<input type="radio" name="radioInlineError" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline palette-error">
+							<input type="radio" name="radioInlineError" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+						<label class="radio mod-inline palette-error">
+							<input type="radio" name="radioInlineError" class="radio-input">
+							<span class="radio-label">Radio mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<div class="checkboxesfield">
+						<div class="checkboxesfield-messages">
+							<span class="checkboxesfield-messages-error">Message</span>
+						</div>
+						<label class="checkbox palette-error">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<div class="checkboxesfield-messages">
+							<span class="checkboxesfield-messages-error">Message</span>
+						</div>
+						<label class="checkbox palette-error">
+							<input type="checkbox" class="checkbox-input palette-error">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox palette-error">
+							<input type="checkbox" class="checkbox-input palette-error">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox palette-error">
+							<input type="checkbox" class="checkbox-input palette-error">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<div class="checkboxesfield">
+						<div class="checkboxesfield-label"></div>
+						<div class="checkboxesfield-messages">
+							<span class="checkboxesfield-messages-error">Message</span>
+						</div>
+						<label class="checkbox palette-error">
+							<input type="checkbox" class="checkbox-input palette-error">
+							<span class="checkbox-label">Checkbox with empty checkboxesfield-label before</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-error">
+					<fieldset class="checkboxesfield">
+						<legend class="checkboxesfield-label">Fieldset legend</legend>
+						<div class="checkboxesfield-messages">
+							<span class="checkboxesfield-messages-error">Message</span>
+						</div>
+						<label class="checkbox mod-inline palette-error">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline palette-error">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+						<label class="checkbox mod-inline palette-error">
+							<input type="checkbox" class="checkbox-input">
+							<span class="checkbox-label">Checkbox mod-inline</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- suffix + overlay top -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Suffix + overlay top</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay-top">
+					<label class="textfield">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+						<span class="textfield-suffix">$</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay top</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay-top">
+					<label class="textfield mod-search">
+						<input class="textfield-input" type="search">
+						<span class="textfield-label">Search</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay top</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay-top">
+					<label class="textfield">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+						<span class="textfield-suffix">$</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay top</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay-top">
+					<div id="framed-autocomplete-selectSuffix" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-selectSuffix', 'is-open')">
+						<label class="textfield">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-selectSuffix', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-selectSuffix', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+							<span class="textfield-suffix">$</span>
+						</label>
+						<label class="checkbox">
+							<input class="checkbox-input" type="checkbox">
+							<span class="checkbox-label">Overlay top</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay-top">
+					<label class="textfield mod-multiline">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+						<span class="textfield-suffix">$</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay top</span>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- warning + overlay -->
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Warning + overlay</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay">
+					<label class="textfield is-warning">
+						<input class="textfield-input" type="text">
+						<span class="textfield-label">Text</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay">
+					<label class="textfield is-warning">
+						<input class="textfield-input" type="password">
+						<span class="textfield-label">Password</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay">
+					<div id="framed-autocomplete-selectWarning" class="textfield mod-select" onclick="w3.addClass('#framed-autocomplete-selectWarning', 'is-open')">
+						<label class="textfield is-warning">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#framed-autocomplete-selectWarning', 'is-open')" onblur="w3.removeClass('#framed-autocomplete-selectWarning', 'is-open')">
+							<span class="textfield-label">Autocomplete</span>
+						</label>
+						<label class="checkbox">
+							<input class="checkbox-input" type="checkbox">
+							<span class="checkbox-label">Overlay</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay">
+					<label class="textfield mod-multiline is-warning">
+						<textarea class="textfield-input"></textarea>
+						<span class="textfield-label">Textarea</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Overlay</span>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<form action="#" class="form mod-framed">
+		<fieldset class="form-group">
+			<legend class="form-group-legend">Title Group 1</legend>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-required">
+						<input aria-required="true" class="textfield-input" type="text" placeholder="placeholder">
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-required">
+						<input aria-required="true" class="textfield-input is-warning" type="text" placeholder="placeholder">
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-required">
+						<input aria-required="true" class="textfield-input is-success" type="text" placeholder="placeholder">
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield is-required">
+						<input aria-required="true" class="textfield-input palette-error" type="text" placeholder="placeholder">
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield">
+						<input class="textfield-input" type="text" placeholder="placeholder">
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+				<div class="form-group-line-col mod-s6">
+					<label class="textfield">
+						<input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled>
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay-top">
+					<label class="textfield is-error">
+						<input class="textfield-input" type="text" placeholder="Money Money">
+						<span class="textfield-label">Textfield label</span>
+						<span class="textfield-suffix">€</span>
+					</label>
+					<label class="checkbox">
+						<input class="checkbox-input" type="checkbox">
+						<span class="checkbox-label">Auto</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-overlay">
+					<label class="textfield mod-multiline mod-withSuffix">
+						<textarea class="textfield-input" placeholder="Money Money"></textarea>
+						<span class="textfield-label">Textfield label</span>
+					</label>
+					<label class="select">
+						<select>
+							<option>Option 1</option>
+						</select>
+						<span class="u-mask">Select label</span>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<h2 class="form-group-title">Title Group 2</h2>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<label class="textfield mod-multiline mod-withSuffix mod-small is-required">
+						<textarea aria-required="true" class="textfield-input" placeholder="Money Money"></textarea>
+						<span class="textfield-label">Textfield label</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="autocomplete-framed" class="textfield mod-search" onclick="w3.addClass('#autocomplete-framed', 'is-open')">
+						<label class="textfield is-success">
+							<input placeholder="placeholder" class="textfield-input" type="search" onfocus="w3.addClass('#autocomplete-framed', 'is-open')" onblur="w3.removeClass('#autocomplete-framed', 'is-open')">
+							<span class="textfield-label">User</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue A</li>
+							<li class="textfield-options-entry is-focus">
+								<mark>va</mark>lue B</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue C</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="autocomplete-framed-select" class="textfield mod-select" onclick="w3.addClass('#autocomplete-framed-select', 'is-open')">
+						<label class="textfield">
+							<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select', 'is-open')">
+							<span class="textfield-label">User</span>
+						</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue A</li>
+							<li class="textfield-options-entry is-focus">
+								<mark>va</mark>lue B</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue C</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col">
+					<div id="autocomplete-framed-select2" class="textfield mod-select" onclick="w3.addClass('#autocomplete-framed-select2', 'is-open')">
+						<input class="textfield-input" type="text" onfocus="w3.addClass('#autocomplete-framed-select2', 'is-open')" onblur="w3.removeClass('#autocomplete-framed-select2', 'is-open')">
+						<label class="textfield-label">User</label>
+						<ul class="textfield-options">
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue A</li>
+							<li class="textfield-options-entry is-focus">
+								<mark>va</mark>lue B</li>
+							<li class="textfield-options-entry">
+								<mark>va</mark>lue C</li>
+						</ul>
+					</div>
+				</div>
+				<div class="form-group-line-col">
+					<label class="textfield is-required is-error">
+						<input aria-required="true" class="textfield-input" type="text" placeholder="placeholder">
+						<span class="textfield-label">Textfield label</span>
+						<span class="textfield-messages">
+							<span class="textfield-messages-error">This field is required</span>
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col mod-s8 fieldsetWrapper">
+					<fieldset class="checkboxesfield">
+						<legend class="radiosfield-label">Checkboxesfield label</legend>
+						<label class="checkbox">
+							<input class="checkbox-input" type="checkbox">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input class="checkbox-input" type="checkbox">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+						<label class="checkbox">
+							<input class="checkbox-input" type="checkbox">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</fieldset>
+				</div>
+				<div class="form-group-line-col mod-s6 fieldsetWrapper">
+					<div class="checkboxesfield">
+						<div class="radiosfield-label"></div>
+						<label class="checkbox">
+							<input class="checkbox-input" type="checkbox">
+							<span class="checkbox-label">Checkbox</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group-line">
+				<div class="form-group-line-col fieldsetWrapper is-warning">
+					<fieldset class="radiosfield">
+						<legend class="radiosfield-label">Radiosfield label</legend>
+						<div class="radiosfield-messages">
+							<span class="radiosfield-messages-warning">One of these options is required</span>
+						</div>
+						<label class="radio mod-inline">
+							<input class="radio-input" type="radio" name="radioframedlist">
+							<span class="radio-label">radio</span>
+						</label>
+						<label class="radio mod-inline">
+							<input class="radio-input" type="radio" name="radioframedlist">
+							<span class="radio-label">radio</span>
+						</label>
+						<label class="radio mod-inline">
+							<input class="radio-input" type="radio" name="radioframedlist">
+							<span class="radio-label">radio</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<em><strong>Tip:</strong> Add <code class="code">.fieldsetWrapper</code> to the <code class="code">form-group-line-col</code> to add a border around your cell (e.g. for checkbox or radio group).</em><br>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

@@ -20,13 +20,13 @@ $textfield: (
 	),
 
 	disabled: (
-		background: #F5F5F5,
-		color: #999999
+		background: _color("grey", "100"),
+		color: _color("grey", "400")
 	),
 
 	suffix: (
 		top: 2rem,
-		padding-right: 1.5rem 
+		padding-right: 1.5rem
 	),
 
 	sizes: (

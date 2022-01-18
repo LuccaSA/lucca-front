@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy, Output } from '@angular/core';
 import {
 	ALuOnOpenSubscriber,
 	ALuOnScrollBottomSubscriber,
@@ -10,7 +10,7 @@ import {
 
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, switchMap, catchError, share, startWith, mapTo, map, scan, filter } from 'rxjs/operators';
+import { debounceTime, switchMap, catchError, share, startWith, mapTo, map, scan, filter, distinctUntilChanged } from 'rxjs/operators';
 import { ILuUser } from '../../user.model';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
 import { Subject, Observable, Subscription, combineLatest, of, merge, BehaviorSubject } from 'rxjs';
@@ -66,6 +66,8 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	@Input() set operations(operations: number[]) { this._service.operations = operations; }
 	@Input() enableFormerEmployees = false;
 
+	@Output() clueChange: Observable<string>;
+
 	form: FormGroup;
 	// page$: Subject<number>;
 	outOptions$ = new Subject<U[]>();
@@ -84,14 +86,18 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 
 	) {
 		this._service = (hostService || selfService) as LuUserV3Service<U>;
-	}
 
-	ngOnInit() {
+		const clue = new FormControl('');
+
 		this.form = new FormGroup({
-			clue: new FormControl(''),
+			clue,
 			formerEmployees: new FormControl(false),
 		});
 
+		this.clueChange = clue.valueChanges;
+	}
+
+	ngOnInit() {
 		const formValue$ = this.form.valueChanges.pipe(
 			startWith(this.form.value),
 		);

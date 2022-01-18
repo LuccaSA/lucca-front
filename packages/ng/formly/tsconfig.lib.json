@@ -25,6 +25,9 @@
       "@lucca-front/ng/establishment": [
         "./dist/ng/establishment"
       ],
+      "@lucca-front/ng/qualification": [
+        "./dist/ng/qualification"
+      ],
       "@lucca-front/ng/date": [
         "./dist/ng/date"
       ],
