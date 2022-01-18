@@ -18,4 +18,8 @@ export const luOptionPlaceholderTranslations = {
 		placeholderDescription: 'Aucun résultat pour votre recherche',
 		placeholderAction: 'Vider la recherche',
 	},
+	es: {
+		placeholderDescription: 'No se han encontrado resultados para su búsqueda',
+		placeholderAction: 'Eliminar búsqueda',
+	},
 } as ILuTranslation<ILuOptionPlaceholderLabel>;
