@@ -31,12 +31,15 @@
 }
 
 .form.mod-framed .radiosfield, .radiosfield.mod-framed {
-	@include field-framed("radiosfield");
-
 	display: block;
 
 	.radiosfield-input {
 		@extend %radiosfield-row;
+	}
+
+	fieldset {
+		border: none;
+		padding: 0;
 	}
 }
 
