@@ -12,7 +12,7 @@
 	align-items: center;
 
 	//Line
-	&::after {
+	&:not(:last-child)::after {
 		content: '';
 		display: flex;
 		flex-grow: 1;  
@@ -35,7 +35,7 @@
 		.timeline-step-title {
 			color: _color("primary", 700);
 	
-			&::after {
+			&::before {
 				background-color: _color('primary', 700);
 				box-shadow: 0 0 0 _theme("spacings.smallest") _color('primary', 200);
 				color: _color('white');
@@ -50,7 +50,7 @@
 			.timeline-step-title {
 				color: _color("grey", 600);
 
-				&::after {
+				&::before {
 					background-color: _color('grey', 200);
 					color: _color('grey', 600);
 				}
@@ -60,7 +60,7 @@
 }
 
 .timeline-step-title {
-	padding-left: _theme("spacings.big");
+	padding-left: 1.75rem;
 	position: relative;
 	display: block;
 	color: _color('primary', 600);
@@ -70,9 +70,9 @@
 	line-height: _theme("sizes.standard.line-height");
 	min-width: _theme("spacings.standard");
 
-	&::after {
+	&::before {
 		content: "";
-		color: _color('primary', 700);
+		color: _color('primary', 800);
 		width: 1rem;
 		height: 1rem;
 		display: flex;
@@ -102,9 +102,9 @@
 .timeline {
 	&.mod-small {
 		.timeline-step-title {
-			padding-left: _theme("spacings.standard");
+			padding-left: 1.25rem;
 
-			&::after {
+			&::before {
 				width: .5rem;
 				height: .5rem;
 			}
@@ -113,10 +113,10 @@
 	
 	&.mod-big {
 		.timeline-step-title {
-			padding-left: 2.5rem;
+			padding-left: 2.25rem;
 			min-width: _theme("spacings.big");
 
-			&::after {
+			&::before {
 				width: 1.5rem;
 				height: 1.5rem;
 			}
@@ -132,6 +132,7 @@
 			display: block;
 			position: relative;
 
+			//line
 			&:not(:last-child)::after {
 				content: "";
 				display: block;
@@ -149,10 +150,6 @@
 					top: _theme("spacings.big") + _theme("spacings.smallest");
 				}
 			}
-
-			&:last-child::after {
-				display: none;
-			}
 		}
 
 		.timeline-step-title {
@@ -163,7 +160,7 @@
 
 		&:not(.mod-small):not(.mod-big) {
 			.timeline-step-title {	
-				&:after {
+				&:before {
 					left: 0;
 				}
 			}
@@ -183,7 +180,7 @@
 	
 				&[aria-current="step"] {
 					&::after {
-						top: calc(#{_theme("spacings.big")});
+						top: _theme("spacings.big");
 					}
 				}
 			}
@@ -234,7 +231,7 @@
 		.timeline-step-title {
 			counter-increment: timeline;
 
-			&::after {
+			&::before {
 				content: counter(timeline);
 				font-size: _theme('sizes.smaller.font-size');
 				line-height: 1;
@@ -251,7 +248,7 @@
 	&.mod-checkedPastStep {
 		.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) {
 			.timeline-step-title {
-				&::after {
+				&::before {
 					@include makeIcon("tick");
 					display: flex;
 				}
@@ -269,7 +266,7 @@
 	
 			&:last-child {
 				.timeline-step-title {
-					&::after {
+					&::before {
 						@include makeIcon("plus");
 						display: flex;
 					}
@@ -291,10 +288,9 @@
 	&.mod-addBetweenStep {
 		.timeline-stepAddBetweenStep-title {
 			@include buttonReset;
-
 			width: auto;
 		
-			&::after {
+			&::before {
 				@include makeIcon("plus");
 				display: flex;
 			}
@@ -303,10 +299,8 @@
 
 	&.mod-progress {
 		.timeline-step[aria-current="step"]{
-			$progress : var(--progress);
-
 			&::after {
-				background: linear-gradient(90deg, _color('primary', 700) $progress, _color('grey', 200) $progress);
+				background: linear-gradient(90deg, _color('primary', 700) var(--progress), _color('grey', 200) var(--progress));
 			}
 
 		}
