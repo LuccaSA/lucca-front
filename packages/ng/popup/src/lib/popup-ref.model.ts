@@ -1,13 +1,12 @@
-import { Observable, Subject, Subscription, merge } from 'rxjs';
-import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector, ComponentType } from '@angular/cdk/portal';
-import { first, filter } from 'rxjs/operators';
-import { ComponentRef } from '@angular/core';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { Injector } from '@angular/core';
-import { LU_POPUP_DATA } from './popup.token';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
+import { ComponentRef, Injector } from '@angular/core';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 import { ILuPopupConfig } from './popup-config.model';
 import { ILuPopupContent } from './popup.model';
+import { LU_POPUP_DATA } from './popup.token';
 
 export interface ILuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> {
 	onOpen: Observable<D>;
@@ -105,10 +104,7 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 		return overlayConfig;
 	}
 	protected _openPopup(data?: D) {
-		const injectionMap = new WeakMap();
-		injectionMap.set(ALuPopupRef, this);
-		injectionMap.set(LU_POPUP_DATA, data);
-		const injector = new PortalInjector(this._injector, injectionMap);
+		const injector = Injector.create({ providers: [{ provide: ALuPopupRef, useValue: this }, { provide: LU_POPUP_DATA, useValue: data }], parent: this._injector });
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._overlayRef.attach<T>(portal);
 	}

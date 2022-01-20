@@ -7,6 +7,7 @@ import {
 	ChangeDetectorRef,
 	AfterViewInit,
 	Directive,
+	Inject,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
@@ -26,11 +27,11 @@ import {
 	ILuOnScrollBottomSubscriber,
 } from '@lucca-front/ng/core';
 import { ALuOptionPickerComponent } from './option-picker.component';
-import { ILuOptionItem } from '../item/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
+import { DOCUMENT } from '@angular/common';
 
 @Directive()
-export abstract class ALuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
+export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;
 
@@ -59,8 +60,9 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 	onScrollBottom() {
 		this._onScrollBottomSubscribers.forEach(o => {
@@ -68,7 +70,7 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 			o.onScrollBottom();
 		});
 	}
-	onOpen() {
+	override onOpen() {
 		this._onOpenSubscribers.forEach(o => {
 			o.onOpen();
 		});
@@ -84,13 +86,13 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 		}
 		super.onOpen();
 	}
-	onClose() {
+	override onClose() {
 		this._onCloseSubscribers.forEach(o => {
 			o.onClose();
 		});
 		super.onClose();
 	}
-	setValue(value: T | T[]) {
+	override setValue(value: T | T[]) {
 		super.setValue(value);
 		this._selectors.forEach(s => s.setValue(value));
 	}
@@ -122,7 +124,7 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 			}),
 		);
 	}
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		super.ngAfterViewInit();
 		this.initOperators();
 		this.initSelectors();
@@ -138,7 +140,7 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
-	exportAs: 'LuOptionPicker',
+	exportAs: 'LuOptionPickerAdvanced',
 	providers: [
 		{
 			provide: ALuPickerPanel,
@@ -146,10 +148,11 @@ extends ALuOptionPickerComponent<T, O> implements AfterViewInit {
 		},
 	]
 })
-export class LuOptionPickerAdvancedComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
+export class LuOptionPickerAdvancedComponent<T = any, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>> extends ALuOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }

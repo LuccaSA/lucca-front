@@ -24,4 +24,4 @@ export abstract class ALuPickerPanel<T = any> extends ALuPopoverPanel implements
 }
 
 export declare interface ILuInputWithPicker<TValue = any>
-extends ILuInput<TValue>, ILuPopoverTrigger<ILuPickerPanel<TValue>> {}
+extends ILuInput, ILuPopoverTrigger<ILuPickerPanel<TValue>> {}

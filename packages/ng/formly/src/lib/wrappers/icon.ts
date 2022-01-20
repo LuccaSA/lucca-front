@@ -15,7 +15,7 @@ import {
 })
 export class LuFormlyWrapperIcon extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper
 export class TemplateIcon {
@@ -29,9 +29,10 @@ export class TemplateIcon {
 			// 	field.templateOptions.icon = 'search';
 			// 	return 'icon';
 			// }
-			if (field && field.templateOptions && field.templateOptions.icon) {
+			if (field && field.templateOptions && field.templateOptions['icon']) {
 				return 'icon';
 			}
+			return '';
 		});
 	}
 }

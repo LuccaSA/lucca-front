@@ -19,27 +19,6 @@ const AUTOPREFIXER_OPTIONS = {
 };
 
 /* -----------------------------
- * postinstall *
- -------------------------------*/
-
- gulp.task('link:icons', () => {
-	return run('npm link --project packages/icons').exec();
-});
-gulp.task('link:scss', () => {
-	return run('npm link --project packages/scss').exec();
-});
-gulp.task('link', () => {
-	return run('npm link @lucca-front/icons @lucca-front/scss').exec();
-});
-gulp.task(
-	'postinstall',
-	gulp.series(
-		'link:icons',
-		'link:scss',
-		'link',
-	),
-);
-/* -----------------------------
  * ICONS *
  -------------------------------*/
 
@@ -148,46 +127,6 @@ gulp.task(
  * NG *
  -------------------------------*/
 
-gulp.task('ng:root:build', ()=> run('ng build root --prod').exec());
-gulp.task('ng:root:style', () => {
-	return gulp.src([`packages/ng/root/src/style/**/*.scss`])
-	.pipe(gulp.dest(`dist/ng/style`));
-});
-
-gulp.task('ng:core:build', () => run('ng build core --prod').exec());
-gulp.task('ng:animations:build', () => run('ng build animations --prod').exec());
-gulp.task('ng:input:build', () => run('ng build input --prod').exec());
-gulp.task('ng:scroll:build', () => run('ng build scroll --prod').exec());
-gulp.task('ng:safe-content:build', () => run('ng build safe-content --prod').exec());
-gulp.task('ng:number:build', () => run('ng build number --prod').exec());
-gulp.task('ng:popover:build', () => run('ng build popover --prod').exec());
-gulp.task('ng:popup:build', () => run('ng build popup --prod').exec());
-gulp.task('ng:tooltip:build', () => run('ng build tooltip --prod').exec());
-gulp.task('ng:dropdown:build', () => run('ng build dropdown --prod').exec());
-gulp.task('ng:picker:build', () => run('ng build picker --prod').exec());
-gulp.task('ng:modal:build', () => run('ng build modal --prod').exec());
-gulp.task('ng:select:build', () => run('ng build select --prod').exec());
-gulp.task('ng:sidepanel:build', () => run('ng build sidepanel --prod').exec());
-gulp.task('ng:option:build', () => run('ng build option --prod').exec());
-gulp.task('ng:date:build', () => run('ng build date --prod').exec());
-gulp.task('ng:api:build', () => run('ng build api --prod').exec());
-gulp.task('ng:department:build', () => run('ng build department --prod').exec());
-gulp.task('ng:establishment:build', () => run('ng build establishment --prod').exec());
-gulp.task('ng:qualification:build', () => run('ng build qualification --prod').exec());
-gulp.task('ng:user:build', () => run('ng build user --prod').exec());
-
-gulp.task('ng:material:build', () => run('ng build material --prod').exec());
-gulp.task('ng:material:style', () => {
-	return gulp.src([`packages/ng/material/src/style/**/*.scss`])
-	.pipe(gulp.dest(`dist/ng/material/style`));
-});
-
-gulp.task('ng:formly:build', () => run('ng build formly --prod').exec());
-gulp.task('ng:formly:style', () => {
-	return gulp.src([`packages/ng/formly/src/style/**/*.scss`])
-	.pipe(gulp.dest(`dist/ng/formly/style`));
-});
-
 gulp.task('ng:schematics:build', () => run('tsc --project packages/ng/schematics').exec());
 gulp.task('ng:schematics:collection', () => {
 	return gulp.src([`packages/ng/schematics/collection.json`])
@@ -195,33 +134,9 @@ gulp.task('ng:schematics:collection', () => {
 });
 
 gulp.task(
-	'ng',
+	'ng:schematics',
 	gulp.series(
-		gulp.parallel(
-			gulp.series('ng:root:build','ng:root:style'),
-			gulp.series('ng:material:build','ng:material:style'),
-			'ng:animations:build',
-			'ng:scroll:build',
-			'ng:safe-content:build',
-			'ng:number:build',
-			'ng:input:build',
-			'ng:popup:build',
-			'ng:schematics:build',
-			'ng:schematics:collection',
-			'ng:core:build',
-		),
-		gulp.parallel(
-			gulp.series('ng:popover:build','ng:picker:build'),
-			gulp.series(
-				'ng:modal:build',
-				gulp.parallel('ng:sidepanel:build','ng:tooltip:build','ng:dropdown:build'
-				),
-			),
-		),
-		gulp.parallel('ng:option:build','ng:select:build'),
-		gulp.parallel('ng:api:build','ng:date:build'),
-		gulp.parallel('ng:user:build','ng:department:build','ng:establishment:build','ng:qualification:build'),
-		'ng:formly:build',
-		'ng:formly:style',
-	),
+		'ng:schematics:build',
+		'ng:schematics:collection',
+	)
 );

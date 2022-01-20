@@ -1,33 +1,23 @@
-import {
-	ElementRef,
-	ViewContainerRef,
-} from '@angular/core';
-
 import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import {
-	ConnectedPositionStrategy,
-	OriginConnectionPosition,
-	Overlay,
-	OverlayConnectionPosition,
-	OverlayRef,
-	OverlayConfig,
-	HorizontalConnectionPos,
-	VerticalConnectionPos,
+	FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConfig, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos
 } from '@angular/cdk/overlay';
-import { TemplatePortal, ComponentPortal } from '@angular/cdk/portal';
-
-import { Subscription, Subject, timer, Observable } from 'rxjs';
-import { generateId } from '@lucca-front/ng/core';
-
+import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
-	ILuPopoverPanel,
+	ElementRef,
+	ViewContainerRef
+} from '@angular/core';
+import { generateId } from '@lucca-front/ng/core';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
+import {
+	ILuPopoverPanel
 } from '../panel/index';
 import {
-	ILuPopoverTarget,
+	ILuPopoverTarget
 } from '../target/index';
-import { throwLuPopoverMissingTargetError, throwLuPopoverMissingPanelError } from './popover-trigger.error';
-import { debounce, map, distinctUntilChanged } from 'rxjs/operators';
+import { throwLuPopoverMissingPanelError, throwLuPopoverMissingTargetError } from './popover-trigger.error';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
@@ -342,7 +332,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			);
 			const config = this._getOverlayConfig();
 			this._subscribeToPositions(
-				config.positionStrategy as ConnectedPositionStrategy,
+				config.positionStrategy as FlexibleConnectedPositionStrategy,
 			);
 			this._overlayRef = this._overlay.create(config);
 		}
@@ -356,7 +346,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 */
 	protected _getOverlayConfig(): OverlayConfig {
 		const overlayState = new OverlayConfig();
-		overlayState.positionStrategy = this._getPosition().withDirection(this.dir);
+		overlayState.positionStrategy = this._getPosition();
 		/** Display overlay backdrop if trigger event is click */
 		if (this.triggerEvent === 'click') {
 			overlayState.hasBackdrop = true;
@@ -386,8 +376,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 * on the popover based on the new position. This ensures the animation origin is always
 	 * correct, even if a fallback position is used for the overlay.
 	 */
-	protected _subscribeToPositions(position: ConnectedPositionStrategy): void {
-		this._positionSubscription = position.onPositionChange.pipe(
+	protected _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
+		this._positionSubscription = position.positionChanges.pipe(
 			map(c => c.connectionPair),
 			distinctUntilChanged(),
 		)
@@ -399,9 +389,20 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	/**
 	 * This method builds the position strategy for the overlay, so the popover is properly connected
 	 * to the trigger.
-	 * @returns ConnectedPositionStrategy
+	 * @returns FlexibleConnectedPositionStrategy
 	 */
-	protected _getPosition(): ConnectedPositionStrategy {
+	protected _getPosition(): FlexibleConnectedPositionStrategy {
+		/**
+		 * For overriding position element, when LuPopoverTargetAt has a valid element reference.
+		 * Useful for sticking popover to parent element and offsetting arrow to trigger element.
+		 * If undefined defaults to the trigger element reference.
+		 */
+		const element = this.target.elementRef;
+		// if (typeof this.targetElement !== 'undefined' && this.popover) {
+		// 	this.popover.containerPositioning = true;
+		// 	element = this.targetElement._elementRef;
+		// }
+
 		const connectionPosition: OriginConnectionPosition = {
 			originX: 'start',
 			originY: 'top',
@@ -458,60 +459,37 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			overlayPosition.overlayY = connectionPosition.originY;
 		}
 
-
-		const offsetX = this.target.offsetX;
-		const offsetY = this.target.offsetY;
-
-		/**
-		 * For overriding position element, when LuPopoverTargetAt has a valid element reference.
-		 * Useful for sticking popover to parent element and offsetting arrow to trigger element.
-		 * If undefined defaults to the trigger element reference.
-		 */
-		const element = this.target.elementRef;
-		// if (typeof this.targetElement !== 'undefined' && this.popover) {
-		// 	this.popover.containerPositioning = true;
-		// 	element = this.targetElement._elementRef;
-		// }
-
-		/**
-		 * TODO: Updates when withFallbackPosition takes individual offsets
-		 */
-
 		return this._overlay
 			.position()
-			.connectedTo(element, connectionPosition, overlayPosition)
-			.withFallbackPosition(
+			.flexibleConnectedTo(element)
+			.withPositions([
+				{
+					originX: connectionPosition.originX,
+					originY: connectionPosition.originY,
+					overlayX: overlayPosition.overlayX,
+					overlayY: overlayPosition.overlayY
+				},
 				{
 					originX: connectionPosition.originX,
 					originY: this._invertVerticalPos(connectionPosition.originY),
-				},
-				{
 					overlayX: overlayPosition.overlayX,
 					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
 				},
-			)
-			.withFallbackPosition(
 				{
 					originX: this._invertHorizontalPos(connectionPosition.originX),
 					originY: connectionPosition.originY,
-				},
-				{
 					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
 					overlayY: overlayPosition.overlayY,
 				},
-			)
-			.withFallbackPosition(
 				{
 					originX: this._invertHorizontalPos(connectionPosition.originX),
 					originY: this._invertVerticalPos(connectionPosition.originY),
-				},
-				{
 					overlayX: this._invertHorizontalPos(overlayPosition.overlayX),
 					overlayY: this._invertVerticalPos(overlayPosition.overlayY),
 				},
-			)
-			.withOffsetX(offsetX)
-			.withOffsetY(offsetY);
+			])
+			.withDefaultOffsetX(this.target.offsetX)
+			.withDefaultOffsetY(this.target.offsetY);
 	}
 
 	protected _invertVerticalPos(y: VerticalConnectionPos) {

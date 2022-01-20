@@ -41,7 +41,7 @@ import { ALuApiService, LuApiHybridService } from '../../service/index';
 		},
 	],
 })
-export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
+export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem>
 	extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 
@@ -68,7 +68,7 @@ export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
 		super.init();
 	}
 
-	onOpen() {
+	override onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}
@@ -109,7 +109,7 @@ export class LuApiSearcherComponent<T extends ILuApiItem = ILuApiItem>
 		},
 	],
 })
-export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
+export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem>
 	extends ALuApiOptionPagedSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
 	@Input() set standard(standard: string) { this._service.standard = standard; }
@@ -133,7 +133,7 @@ export class LuApiPagedSearcherComponent<T extends ILuApiItem = ILuApiItem>
 		super.init();
 	}
 
-	onOpen() {
+	override onOpen() {
 		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}

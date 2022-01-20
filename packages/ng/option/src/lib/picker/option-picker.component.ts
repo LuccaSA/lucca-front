@@ -1,31 +1,20 @@
+import { DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOCUMENT } from '@angular/common';
 import {
-	ChangeDetectionStrategy,
-	Component,
-	ContentChildren,
-	QueryList,
-	Output,
-	EventEmitter,
-	OnDestroy,
-	forwardRef,
-	ViewChild,
-	TemplateRef,
-	ChangeDetectorRef,
-	AfterViewInit,
-	Input,
-	Directive,
+	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component,
+	ContentChildren, Directive, EventEmitter, forwardRef, Inject, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild
 } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { ILuOptionItem, ALuOptionItem } from '../item/index';
-import { ILuOptionPickerPanel, ALuOptionPicker, LuOptionComparer } from './option-picker.model';
-import { merge, of } from 'rxjs';
-import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, of } from 'rxjs';
+import { delay, map, share } from 'rxjs/operators';
+import { ALuOptionItem } from '../item/option-item.model';
+import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
 @Directive()
-export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
-extends ALuOptionPicker<T, O>
-implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+export abstract class ALuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
+	extends ALuOptionPicker<T, O>
+	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit {
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -57,10 +46,10 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 
 
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
-	@Output() onSelectValue = new EventEmitter<T>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
+	@Output() override onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
@@ -73,6 +62,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) protected document: Document,
 	) {
 		super();
 		this._isOptionItemsInitialized = false;
@@ -94,7 +84,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	_emitHoveredEvent(h): void {
 		this.hovered.emit(h);
 	}
-	onOpen() {
+	override onOpen() {
 		super.onOpen();
 		this.highlightIndex = 0;
 		// this._initObserver();
@@ -106,7 +96,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 
 	// keydown
-	_handleKeydown(event: KeyboardEvent) {
+	override _handleKeydown(event: KeyboardEvent) {
 		super._handleKeydown(event);
 		switch (event.keyCode) {
 			case ENTER:
@@ -135,7 +125,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _initHighlight() {
 		this._subs.add(this._options$.subscribe(options => {
 			const optionCount = options.length;
-			const newHighlight =  Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
+			const newHighlight = Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
 			if (newHighlight !== this.highlightIndex) {
 				this.highlightIndex = newHighlight;
 			}
@@ -172,11 +162,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 	protected _scrollToHighlight(targetElt: HTMLElement) {
 		if (!targetElt) { return; }
-		const contentElt = document.querySelector('.lu-picker-content') as HTMLElement;
+		const contentElt = this.document.querySelector<HTMLElement>('.lu-picker-content');
 		if (!contentElt) { return; }
-		const headerElt = document.querySelector('.lu-picker-content .lu-picker-header') as HTMLElement;
+		const headerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-header');
 		const headerHeight = headerElt ? headerElt.offsetHeight : 0;
-		const footerElt = document.querySelector('.lu-picker-content .lu-picker-footer') as HTMLElement;
+		const footerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-footer');
 		const footerHeight = footerElt ? footerElt.offsetHeight : 0;
 		// highlighted option is too high
 		if (contentElt.scrollTop + headerHeight > targetElt.offsetTop) {
@@ -217,11 +207,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
 			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
 		} else {
-			const values = <T[]> this._value || [];
+			const values = <T[]>this._value || [];
 			const matchingIndexes = this._options.map(
 				o => values.some(v => this.optionComparer(o.value, v)),
 			).map((f, i) => f ? i : null)
-			.filter(i => i !== null);
+				.filter(i => i !== null);
 			selectedIndexes.push(...matchingIndexes);
 			// selectedIndexes.push(
 			// 	...values
@@ -271,10 +261,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		},
 	]
 })
-export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
+export class LuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }

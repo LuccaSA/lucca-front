@@ -26,10 +26,10 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
 	@Input() startOn: D = this._adapter.forgeToday();
 
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
-	@Output() onSelectValue = new EventEmitter<D>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
+	@Output() override onSelectValue = new EventEmitter<D>();
 
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<any>) {
@@ -70,7 +70,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_onEnter() {
 		this._emitCloseEvent();
 	}
-	_handleKeydown(event: KeyboardEvent) {
+	override _handleKeydown(event: KeyboardEvent) {
 		switch (event.keyCode) {
 			case ESCAPE:
 				this._emitCloseEvent();

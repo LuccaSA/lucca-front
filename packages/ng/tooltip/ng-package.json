@@ -1,15 +1,7 @@
 {
-  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../dist/ng/tooltip",
-  "lib": {
-    "entryFile": "src/public-api.ts",
-    "styleIncludePaths": [
-      "../root/src/style",
-      "../root/src/style/overrides"
-    ],
-    "umdModuleIds": {
-      "@lucca-front/ng/popover": "@lucca-front/ng/popover",
-      "@lucca-front/ng/safe-content": "@lucca-front/ng/safe-content"
-    }
-  }
+	"$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+	"lib": {
+		"entryFile": "src/public-api.ts",
+		"styleIncludePaths": ["../style", "../style/overrides"]
+	}
 }

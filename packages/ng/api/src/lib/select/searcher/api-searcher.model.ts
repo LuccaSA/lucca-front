@@ -9,14 +9,13 @@ import {
 	startWith,
 } from 'rxjs/operators';
 
-import { ILuApiItem } from '../../api.model';
 import { ILuApiOptionFeeder } from '../feeder/index';
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ILuApiService } from '../../service/index';
 
-export interface ILuApiOptionSearcher<T extends ILuApiItem = ILuApiItem> extends ILuApiOptionFeeder<T> {}
+export interface ILuApiOptionSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem> extends ILuApiOptionFeeder<T> {}
 
-export abstract class ALuApiOptionSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
+export abstract class ALuApiOptionSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
@@ -62,13 +61,13 @@ implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber {
 	}
 }
 
-export interface ILuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem> extends ILuApiOptionSearcher<T> {}
+export interface ILuApiOptionPagedSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem> extends ILuApiOptionSearcher<T> {}
 
-export abstract class ALuApiOptionPagedSearcher<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
-extends ALuApiOptionSearcher<T, S>
-implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
-	outOptions$ = new Subject<T[]>();
-	loading$: Observable<boolean>;
+export abstract class ALuApiOptionPagedSearcher<T extends import ('../../api.model').ILuApiItem = import ('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
+	extends ALuApiOptionSearcher<T, S>
+	implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
+	override outOptions$ = new Subject<T[]>();
+	override loading$: Observable<boolean>;
 	protected _loading = false;
 	protected _page$ = new Subject<void>();
 	protected _isLastPage: boolean;
@@ -77,7 +76,7 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 	constructor(service: S) {
 		super(service);
 	}
-	onOpen() {
+	override onOpen() {
 		this.resetClue();
 	}
 	onScrollBottom() {
@@ -86,7 +85,7 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 		}
 	}
 
-	protected initObservables() {
+	protected override initObservables() {
 		const pager$ = this._page$.pipe(
 			scan(acc => acc + 1, 0),
 			startWith(0),
@@ -123,5 +122,5 @@ implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber {
 			map(o => o.length === 0),
 		);
 	}
-	abstract resetClue();
+	abstract override resetClue();
 }

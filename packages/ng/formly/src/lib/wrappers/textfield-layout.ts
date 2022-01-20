@@ -15,10 +15,10 @@ import {
 })
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return this.to.mod || '';
+		return this.to['mod'] || '';
 	}
 
 	get modMultiline() {
@@ -28,7 +28,7 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	}
 
 	get modWithSuffix() {
-		return !!this.to && !!this.to.suffix ? 'mod-withSuffix' : '';
+		return !!this.to && !!this.to['suffix'] ? 'mod-withSuffix' : '';
 	}
 
 	get isRequired() {
@@ -40,7 +40,7 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	}
 
 	get isFocused() {
-		return !!this.to && this.to._isFocused ? 'is-focused' : '';
+		return !!this.to && this.to['_isFocused'] ? 'is-focused' : '';
 	}
 
 	get isError() {

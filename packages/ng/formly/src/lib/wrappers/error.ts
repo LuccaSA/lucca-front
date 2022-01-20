@@ -15,9 +15,9 @@ import {
 })
 export class LuFormlyWrapperError extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 
 	get validationId() {
 		return this.field.id + '-message';
@@ -60,6 +60,7 @@ export class TemplateError {
 			if (field && field.validation) {
 				return 'error';
 			}
+			return '';
 		});
 	}
 }

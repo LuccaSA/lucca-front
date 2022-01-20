@@ -7,6 +7,7 @@ import {
 	ChangeDetectorRef,
 	AfterViewInit,
 	Directive,
+	Inject,
 } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { Observable, merge } from 'rxjs';
@@ -16,7 +17,6 @@ import {
 	ALuTreeOptionOperator,
 	ILuTreeOptionOperator,
 } from '../operator/index';
-import { ILuTreeOptionItem } from '../item/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 import { ILuTree } from '@lucca-front/ng/core';
 import {
@@ -28,9 +28,10 @@ import {
 	ALuOnScrollBottomSubscriber
 } from '@lucca-front/ng/core';
 import { ILuTreeOptionSelector, ALuTreeOptionSelector } from '../selector/index';
+import { DOCUMENT } from '@angular/common';
 
 @Directive()
-export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
+export abstract class ALuTreeOptionPickerAdvancedComponent<T = any, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
 extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 	loading$: Observable<boolean>;
 
@@ -61,8 +62,9 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 	onScrollBottom() {
 		this._onScrollBottomSubscribers.forEach(o => {
@@ -70,19 +72,19 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 			o.onScrollBottom();
 		});
 	}
-	onOpen() {
+	override onOpen() {
 		this._onOpenSubscribers.forEach(o => {
 			o.onOpen();
 		});
 		super.onOpen();
 	}
-	onClose() {
+	override onClose() {
 		this._onCloseSubscribers.forEach(o => {
 			o.onClose();
 		});
 		super.onClose();
 	}
-	setValue(value: T | T[]) {
+	override setValue(value: T | T[]) {
 		super.setValue(value);
 		this._selectors.forEach(s => s.setValue(value));
 	}
@@ -117,7 +119,7 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 			})
 		);
 	}
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		super.ngAfterViewInit();
 		this.initOperators();
 		this.initSelectors();
@@ -141,10 +143,11 @@ extends ALuTreeOptionPickerComponent<T, O> implements AfterViewInit {
 		},
 	]
 })
-export class LuTreeOptionPickerAdvancedComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
+export class LuTreeOptionPickerAdvancedComponent<T = any, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>> extends ALuTreeOptionPickerAdvancedComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }

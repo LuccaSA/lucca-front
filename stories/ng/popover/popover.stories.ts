@@ -29,21 +29,21 @@ export default {
   component: PopoverStory,
 	argTypes: {
 		position: {
+			options: ['above', 'below', 'before', 'after'],
 			control: {
 				type: 'radio',
-				options: ['above', 'below', 'before', 'after']
 			}
 		},
 		alignment: {
+			options: ['top', 'bottom', 'left', 'right', 'center'],
 			control: {
 				type: 'radio',
-				options: ['top', 'bottom', 'left', 'right', 'center']
 			}
 		},
 		trigger: {
+			options: ['none', 'hover', 'focus', 'click'],
 			control: {
 				type: 'radio',
-				options: ['none', 'hover', 'focus', 'click']
 			}
 		},
 	},

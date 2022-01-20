@@ -44,19 +44,19 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@Output('luTooltipOnClose') onClose = new EventEmitter<void>();
 
 	@HostListener('mouseenter')
-	onMouseEnter() {
+	override onMouseEnter() {
 		super.onMouseEnter();
 	}
 	@HostListener('mouseleave')
-	onMouseLeave() {
+	override onMouseLeave() {
 		super.onMouseLeave();
 	}
 	@HostListener('focus')
-	onFocus(){
+	override onFocus() {
 		super.onFocus();
 	}
 	@HostListener('blur')
-	onBlur() {
+	override onBlur() {
 		super.onBlur();
 	}
 	private _handleTabindex = false;
@@ -71,9 +71,9 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	@HostBinding('attr.aria-describedby') get _attrAriaDescribedBy() { return this._panelId; }
 
 	constructor(
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
 		componentFactoryResolver: ComponentFactoryResolver,
 		injector: Injector,
 	) {

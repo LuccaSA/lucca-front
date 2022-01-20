@@ -31,7 +31,7 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 		}
 	],
 })
-export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
+export class LuEstablishmentSelectInputComponent<D extends import ('../../establishment.model').ILuEstablishment = import ('../../establishment.model').ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit {
 
@@ -52,11 +52,11 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 	}
 
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 		@Inject(ALuLegalUnitService) @Optional() @SkipSelf() hostLuService: ALuLegalUnitService,
 		@Inject(ALuLegalUnitService) @Self() selfLuService: LuLegalUnitService,
 		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostEstablishmentService: ALuEstablishmentService,
