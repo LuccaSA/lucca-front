@@ -12,11 +12,11 @@ export class LuFormlyFieldRadios extends FieldType {
 	get _options() {
 		return <any[]>this.to.options || [];
 	}
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }

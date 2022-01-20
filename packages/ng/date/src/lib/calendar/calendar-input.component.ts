@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, ElementRef, Renderer2, Inject, LOCALE_ID, OnInit, Input } from '@angular/core';
+import { FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, ValidationErrors, NG_VALIDATORS } from '@angular/forms';
-import { getLocaleFirstDayOfWeek, getLocaleDayNames, FormStyle, TranslationWidth } from '@angular/common';
 import { LuCalendarItemFactory } from './calendar-item.factory';
 import { ICalendarItem } from './calendar-item.interface';
-import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-calendar',
@@ -40,6 +40,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 			case ELuDateGranularity.month:
 				return 'mod-monthlyView';
 			case ELuDateGranularity.day:
+			default:
 				return 'mod-dailyView';
 		}
 	}
@@ -60,7 +61,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		this.viewGranularity = this.granularity;
 		this.initDayLabels();
 	}
-	writeValue(value?: D) {
+	override writeValue(value?: D) {
 		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : this.startOn;
 		this.header = this._factory.forgeMonth(date);
 		super.writeValue(value);

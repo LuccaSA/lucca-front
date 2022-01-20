@@ -1,0 +1,15 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../../../out-tsc/lib",
+		"declaration": true,
+		"declarationMap": true,
+		"inlineSources": true,
+		"types": [],
+		"paths": {
+			"@lucca-front/ng": ["dist/ng/root"],
+			"@lucca-front/ng/*": ["dist/ng/*"],
+		}
+	},
+	"exclude": ["src/test.ts", "**/*.spec.ts"]
+}

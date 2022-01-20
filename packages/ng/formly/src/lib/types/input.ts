@@ -11,11 +11,11 @@ export class LuFormlyFieldInput extends FieldType {
 	get type() {
 		return this.to.type || 'text';
 	}
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }

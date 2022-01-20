@@ -1,20 +1,6 @@
 {
-  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../dist/ng/formly",
-  "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "@ngx-formly/core": "@ngx-formly/core",
-      "@lucca-front/ng/input": "@lucca-front/ng/input",
-      "@lucca-front/ng/api": "@lucca-front/ng/api",
-      "@lucca-front/ng/option": "@lucca-front/ng/option",
-      "@lucca-front/ng/select": "@lucca-front/ng/select",
-      "@lucca-front/ng/core": "@lucca-front/ng/core",
-      "@lucca-front/ng/date": "@lucca-front/ng/date",
-      "@lucca-front/ng/user": "@lucca-front/ng/user",
-      "@lucca-front/ng/department": "@lucca-front/ng/department",
-      "@lucca-front/ng/establishment": "@lucca-front/ng/establishment",
-      "@lucca-front/ng/qualification": "@lucca-front/ng/qualification"
-    }
-  }
+	"$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+	"lib": {
+		"entryFile": "src/public-api.ts"
+	}
 }

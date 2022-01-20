@@ -9,13 +9,13 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
-	protected _api = `/api/v3/departments`;
+	protected override _api = `/api/v3/departments`;
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) { this._appInstanceId = appInstanceId; }
 	protected _operations: number[] = [];
 	set operations(operations: number[]) { this._operations = operations; }
 
-	constructor(protected _http: HttpClient) { super(_http); }
+	constructor(protected override _http: HttpClient) { super(_http); }
 
 	getTrees() {
 		let call: Observable<any>;

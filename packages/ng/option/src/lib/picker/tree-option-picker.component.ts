@@ -1,24 +1,14 @@
+import { DOCUMENT } from '@angular/common';
 import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	OnDestroy,
-	ContentChildren,
-	ViewContainerRef,
-	QueryList,
-	ChangeDetectorRef,
-	AfterContentInit,
-	AfterViewInit,
-	OnInit,
-	Directive,
+	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, OnDestroy, QueryList, ViewContainerRef
 } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, Observable } from 'rxjs';
+import { delay, map, startWith, switchMap } from 'rxjs/operators';
+import { ALuTreeOptionItem } from '../item/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
-import { ILuTreeOptionItem, ALuTreeOptionItem } from '../item/index';
-import { Observable, merge, of } from 'rxjs';
-import { switchMap, map, delay, startWith } from 'rxjs/operators';
 
 enum ToggleMode {
 	all,
@@ -27,18 +17,18 @@ enum ToggleMode {
 }
 
 @Directive()
-export abstract class ALuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends ALuOptionPickerComponent<T, O>
-implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
-	@ContentChildren(ALuTreeOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
+export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
+	extends ALuOptionPickerComponent<T, O>
+	implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit {
+	@ContentChildren(ALuTreeOptionItem, { descendants: true }) override set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 	}
 	@ContentChildren(ALuTreeOptionItem, { descendants: true, read: ViewContainerRef }) optionsQLVR: QueryList<ViewContainerRef>;
-	protected set _options$(optionItems$: Observable<O[]>) {
+	protected override set _options$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change
 		this._subs.add(
 			optionItems$
-			.subscribe(o => this._applySelected())
+				.subscribe(o => this._applySelected())
 		);
 		// subscribe to any option.onSelect
 		const singleFlowSelect$ = optionItems$.pipe(switchMap(
@@ -53,23 +43,24 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 
 		this._subs.add(
 			singleFlowSelect$
-			.subscribe(option => this._toggle(option, ToggleMode.all))
+				.subscribe(option => this._toggle(option, ToggleMode.all))
 		);
 		this._subs.add(
 			singleFlowSelectSelf$
-			.subscribe(option => this._toggle(option, ToggleMode.self))
+				.subscribe(option => this._toggle(option, ToggleMode.self))
 		);
 		this._subs.add(
 			singleFlowSelectChildren$
-			.subscribe(option => this._toggle(option, ToggleMode.children))
+				.subscribe(option => this._toggle(option, ToggleMode.children))
 		);
 	}
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
-	protected _toggle(option: O, mod = ToggleMode.all) {
+	protected override _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
 			case ToggleMode.self:
 				return this._toggleSelf(option);
@@ -148,7 +139,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		return [...entriesToKeep];
 	}
 
-	protected initItems() {
+	protected override initItems() {
 
 		const items$ = this._optionsQL.changes
 			.pipe(
@@ -160,7 +151,7 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this._subs.add(items$.subscribe(o => this._options = o || []));
 		this._options$ = items$;
 	}
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		this.initItems();
 	}
 }
@@ -181,11 +172,12 @@ implements ILuTreeOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		},
 	]
 })
-export class LuTreeOptionPickerComponent<T = any, O extends ILuTreeOptionItem<T> = ILuTreeOptionItem<T>>
-extends ALuTreeOptionPickerComponent<T, O> {
+export class LuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
+	extends ALuTreeOptionPickerComponent<T, O> {
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) document: Document,
 	) {
-		super(_changeDetectorRef);
+		super(_changeDetectorRef, document);
 	}
 }

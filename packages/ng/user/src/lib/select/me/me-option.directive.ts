@@ -26,7 +26,7 @@ import { map } from 'rxjs/operators';
 		},
 	],
 })
-export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILuOptionOperator {
+export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILuOptionOperator<U> {
 	@Input() set luUserMeOptionFields(fields: string) { this._service.fields = fields; }
 	@Input() set luUserMeOptionFilters(filters: string[]) { this._service.filters = filters; }
 	@Input() set luUserMeOptionOrderBy(orderBy: string) { this._service.orderBy = orderBy; }

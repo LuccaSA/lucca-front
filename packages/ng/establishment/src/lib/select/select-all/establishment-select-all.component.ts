@@ -40,7 +40,7 @@ export class LuEstablishmentSelectAllComponent
 
 	constructor(
 		private readonly _changeDetectorRef: ChangeDetectorRef,
-		@Inject(LuOptionSelectAllIntl) public intl: ILuOptionSelectAllLabel,
+		@Inject(LuOptionSelectAllIntl) public override intl: ILuOptionSelectAllLabel,
 		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostService: ALuEstablishmentService,
 		@Inject(ALuEstablishmentService) @Self() selfService: LuEstablishmentService,
 	) {
@@ -48,8 +48,7 @@ export class LuEstablishmentSelectAllComponent
 		this._service = (hostService || selfService) as LuEstablishmentService;
 	}
 
-	/** @override */
-	selectAll() {
+	override selectAll() {
 		this.loading = true;
 		const sub = this._service.getAll().subscribe(
 			establishments => {

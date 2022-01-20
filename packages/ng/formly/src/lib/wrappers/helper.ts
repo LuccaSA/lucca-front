@@ -15,15 +15,16 @@ import {
 })
 export class LuFormlyWrapperHelper extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper
 export class TemplateHelper {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.templateOptions && field.templateOptions.helper) {
+			if (field && field.templateOptions && field.templateOptions['helper']) {
 				return 'helper';
 			}
+			return '';
 		});
 	}
 }

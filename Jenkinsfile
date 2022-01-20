@@ -1,4 +1,4 @@
-@Library('Lucca@v0.28.7') _
+@Library('Lucca@v0.42.0') _
 
 import hudson.Util
 import fr.lucca.CI
@@ -55,8 +55,10 @@ node(label: CI.getSelectedNode(script:this)) {
 			if (isPR || isRc || isMaster) {
 				loggableStage('Deploy') {
 					echo "deploying ${branchName}"
-					bat "npm run compodoc -- -p ./tsconfig.doc.json -e json -d .storybook"
-					bat "npm run build-storybook -- -o \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}"
+					bat "npm run compodoc"
+					bat "npm run build-storybook"
+					powershell "Remove-Item \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} -Recurse"
+					powershell "Copy-Item storybook-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} -Recurse"
 				}
 
 				if (isPR) {

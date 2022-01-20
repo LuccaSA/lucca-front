@@ -6,12 +6,12 @@ import { ILuPopupConfig } from './popup-config.model';
 
 export class LuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> extends ALuPopupRef<T, D, R> {
 	constructor(
-		protected _overlay: Overlay,
-		protected _injector: Injector,
-		protected _component: ComponentType<T>,
-		protected _config: ILuPopupConfig,
+		protected override _overlay: Overlay,
+		protected override _injector: Injector,
+		protected override _component: ComponentType<T>,
+		protected override _config: ILuPopupConfig,
 	) {
-		super (_overlay, _injector, _component, _config);
+		super(_overlay, _injector, _component, _config);
 	}
 }
 

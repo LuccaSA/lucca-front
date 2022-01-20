@@ -26,9 +26,9 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		const format = getLocaleDateFormat(this._locale, FormatWidth.Short);
 		const groups = format.split(this._regex);
 		groups.forEach((g, i) => {
-			if (g.indexOf('d') !== -1) { return this._order.date = i; }
-			if (g.indexOf('M') !== -1) { return this._order.month = i; }
-			if (g.indexOf('y') !== -1) { return this._order.year = i; }
+			if (g.indexOf('d') !== -1) { this._order.date = i; }
+			if (g.indexOf('M') !== -1) { this._order.month = i; }
+			if (g.indexOf('y') !== -1) { this._order.year = i; }
 		});
 	}
 	private extract(text: string, granularity: ELuDateGranularity = ELuDateGranularity.day): { date: number, month: number, year: number } {
