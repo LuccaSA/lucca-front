@@ -59,17 +59,9 @@
 	}
 }
 
-.timeline-step-title {
-	padding-left: 1.75rem;
-	position: relative;
-	display: block;
-	color: _color('primary', 600);
-	font-weight: 400;
-	margin: 0;
-	font-size: _theme("sizes.standard.font-size");
-	line-height: _theme("sizes.standard.line-height");
-	min-width: _theme("spacings.standard");
-
+.timeline-step-title,
+.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) .timeline-step-title-icon,
+.timeline.mod-addStep .timeline-step-title-icon {
 	&::before {
 		content: "";
 		color: _color('primary', 800);
@@ -85,6 +77,18 @@
 		top: 50%;
 		transform: translateY(-50%);
 	}
+}
+
+.timeline-step-title {
+	padding-left: 1.75rem;
+	position: relative;
+	display: block;
+	color: _color('primary', 600);
+	font-weight: 400;
+	margin: 0;
+	font-size: _theme("sizes.standard.font-size");
+	line-height: _theme("sizes.standard.line-height");
+	min-width: _theme("spacings.standard");
 }
 
 .timeline-step-title-action {
@@ -119,6 +123,13 @@
 			&::before {
 				width: 1.5rem;
 				height: 1.5rem;
+			}
+		}
+
+		.timeline-step:not([aria-current=step]):not([aria-current=step] ~ .timeline-step) .timeline-step-title-icon,
+		&.mod-addStep .timeline-step-title-icon {
+			&::before {
+				left: _theme("spacings.smaller");
 			}
 		}
 	}
@@ -215,10 +226,8 @@
 
 		&.mod-progress {
 			.timeline-step[aria-current="step"]{
-				$progress : var(--progress);
-	
 				&::after {
-					background: linear-gradient(180deg, _color('primary', 700) $progress, _color('grey', 200) $progress);
+					background: linear-gradient(180deg, _color('primary', 700) var(--progress), _color('grey', 200) var(--progress));
 				}
 	
 			}
@@ -248,9 +257,29 @@
 	&.mod-checkedPastStep {
 		.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) {
 			.timeline-step-title {
-				&::before {
+				.timeline-step-title-icon::before {
 					@include makeIcon("tick");
 					display: flex;
+				}
+			}
+		}
+
+		&.mod-vertical:not(.mod-big) {
+			.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) {
+				.timeline-step-title {
+					.timeline-step-title-icon::before {
+						left: 0;
+					}
+				}
+			}
+		}
+
+		&.mod-vertical.mod-big {
+			.timeline-step:not([aria-current="step"]):not([aria-current="step"] ~ .timeline-step) {
+				.timeline-step-title {
+					.timeline-step-title-icon::before {
+						left: _theme('spacings.smaller');
+					}
 				}
 			}
 		}
@@ -266,7 +295,7 @@
 	
 			&:last-child {
 				.timeline-step-title {
-					&::before {
+					.timeline-step-title-icon::before {
 						@include makeIcon("plus");
 						display: flex;
 					}
@@ -282,6 +311,26 @@
 					background-size: _theme('spacings.smaller') _theme('spacings.smaller');
 				}
 			}
+			
+			&:not(.mod-big) {
+				.timeline-step:last-child {
+					.timeline-step-title {
+						.timeline-step-title-icon::before {
+							left: 0;
+						}
+					}
+				}
+			}
+			
+			&.mod-big {
+				.timeline-step:last-child {
+					.timeline-step-title {
+						.timeline-step-title-icon::before {
+							left: _theme('spacings.smaller');
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -289,10 +338,15 @@
 		.timeline-stepAddBetweenStep-title {
 			@include buttonReset;
 			width: auto;
-		
-			&::before {
-				@include makeIcon("plus");
-				display: flex;
+		}
+		.timeline-step:not([aria-current=step]):not([aria-current=step] ~ .timeline-step) .timeline-step-title-icon::before {
+			@include makeIcon("plus");
+			display: flex;
+		}
+
+		&.mod-vertical:not(.mod-big) {
+			.timeline-step:not([aria-current=step]):not([aria-current=step] ~ .timeline-step) .timeline-step-title-icon::before {
+				left: 0
 			}
 		}
 	}
