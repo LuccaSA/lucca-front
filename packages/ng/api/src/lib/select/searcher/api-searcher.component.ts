@@ -117,6 +117,7 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 	@Input() set fields(fields: string) { this._service.fields = fields; }
 	@Input() set filters(filters: string[]) { this._service.filters = filters; }
 	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
+	@Input() set sort(sort: string) { this._service.sort = sort }
 	@Input() debounceTime: number = 250;
 
 	clueControl: FormControl;
