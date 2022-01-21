@@ -1,19 +1,23 @@
 .menu {
 	align-items: center;
-	background-color: _component("menu.background");
+	background-color: _component('menu.background');
 	display: flex;
 	position: relative;
-	gap: 2.5rem; // magic number
+	gap: _theme('spacings.big');
 	flex-wrap: wrap;
 
 	&:not(.mod-noBorder)::after {
-		content: "";
+		content: '';
 		position: absolute;
 		bottom: 0;
 		height: 1px;
 		left: 0;
 		right: 0;
-		border-bottom: 1px solid _theme("commons.divider.color");
+		border-bottom: 1px solid _theme('commons.divider.color');
+	}
+
+	.label {
+		margin-right: 0
 	}
 }
 
@@ -21,65 +25,61 @@
 	@include listReset;
 
 	display: flex;
-	gap: 2.5rem; // magic number
+	gap: _theme('spacings.big');
 	flex-wrap: wrap;
 }
 
-.menu-link { // legacy syntax
-	margin-right: 2.5rem; // magic number
+.menu-link {
+	// legacy syntax
+	margin-right: _theme('spacings.big'); // magic number
 }
 
 .menu-link, // legacy syntax
 .menu-list-item-action {
-	border-radius: _theme("commons.border.radius");
-	color: _color("grey", "700");
-	margin: 0 _theme('spacings.big') 0 0;
-	padding: _component("menu.padding");
+	border-radius: _theme('commons.border.radius');
+	color: _color('grey', '700');
+	padding: _component('menu.padding');
 	position: relative;
 	text-decoration: none;
-	transition: color _component("menu.animations.durations.fast") ease;
+	transition: color _component('menu.animations.durations.fast') ease;
 	text-align: center;
 	display: block;
 
 	&::after {
-		background-color: _color("primary", "700");
-		border-radius: _theme("commons.border.radius") _theme("commons.border.radius") 0 0;
+		background-color: _color('primary', '700');
+		border-radius: _theme('commons.border.radius')
+			_theme('commons.border.radius') 0 0;
 		bottom: 0;
-		content: "";
+		content: '';
 		display: block;
 		height: 2px;
 		left: 0;
 		position: absolute;
 		right: 0;
 		transform: scale(0, 1);
-		transition: transform _component("menu.animations.durations.fast") ease;
+		transition: transform _component('menu.animations.durations.fast') ease;
 		z-index: 1;
 	}
 
-	&:focus-visible,
-	&:hover {
-		&:not(.is-active, [aria-current="page"]) {
-			color: _color("text.light");
-
-		&::after {
-			transform: scale(.75);
+	&:not(.is-disabled) {
+		&:focus-visible,
+		&:hover {
+			&:not(.is-active, [aria-current='page']) {
+				color: _color("grey", "900");
+			}
+	
+			&::after {
+				transform: scale(0.75);
+			}
 		}
 	}
 
 	&:focus-visible {
 		outline: none;
-
-		&.is-active, // legacy syntax
-		&[aria-current="page"] {
-			&::after {
-				transform: scale(.75);
-			}
-		}
 	}
 }
 
-.menu-link-placeholder, // legacy syntax
-.menu-list-item-action-placeholder {
+.menu-link-placeholder { // legacy syntax 
 	&::after {
 		content: attr(data-content-after);
 		display: block;
@@ -89,7 +89,6 @@
 	}
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -97,36 +96,22 @@
 	&.mod-header {
 		padding: 0 2.5rem;
 	}
-&.mod-small {
-		.menu-link {
+
+	&.mod-small {
+		.menu-link,   // legacy syntax
+		.menu-list-item-action {
 			font-size: _theme('sizes.small.font-size');
 			line-height: _theme('sizes.small.line-height');
-}
-}
-
-// PALETTES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.menu {
-	@mixin menuColoring($palette) {
-		&::after {
-			background-color: _color($palette);
+			padding: .75rem 0;
 		}
-	}
 
-	// default color
-	.menu-link,  // legacy syntax
-	.menu-list-item-action {
-		@include menuColoring("menu.default-palette");
-	}
+		.label {
+			font-size: _theme('sizes.smaller.font-size');
+		}
 
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			.menu-link,
-			.menu-list-item-action {
-				@include menuColoring($name);
-			}
+		.menu-link {
+			// legacy syntax
+			margin-right: _theme('spacings.standard'); // magic number
 		}
 	}
 }
@@ -134,21 +119,22 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.menu-link,
+.menu-link,  // legacy syntax
 .menu-list-item-action {
 	&.is-active,  // legacy syntax
-	&[aria-current="page"]
-	 {
-		color: _color("primary", "700");
+	&[aria-current="page"] {
+		color: _color('primary', '700');
 
 		&::after {
+			background-color: _color('primary', '700');
 			transform: scale(1);
 		}
 	}
+
 	&.is-disabled {
-		&, 
+		&,
 		.label {
-			color: _color("grey", "500");
+			color: _color('grey', '500');
 			pointer-events: none;
 		}
 	}

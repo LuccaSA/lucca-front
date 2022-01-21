@@ -43,7 +43,7 @@ export default {
 		},
 		isNumber: {
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			}
 		},
 		withContainer: {
