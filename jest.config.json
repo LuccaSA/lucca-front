@@ -1,0 +1,16 @@
+{
+  "preset": "jest-preset-angular",
+  "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
+  "collectCoverage": false,
+  "testPathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "watchPathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
+  "moduleNameMapper": {
+    "^@lucca-front/ng/(.*)": "packages/ng/$1/src/public-api.ts"
+  },
+  "roots": ["<rootDir>/packages/ng"]
+}

@@ -1,5 +1,5 @@
 import { LuUserDisplayPipe } from './user-display.pipe';
-import { IUser } from '../user.model';
+import { ILuUser } from '../user.model';
 import {
 	LuDisplayFullname,
 	LuDisplayHybrid,
@@ -7,9 +7,9 @@ import {
 } from './display-format.model';
 
 describe('UserNamePipe', () => {
-	let user: IUser;
+	let user: ILuUser;
 	beforeEach(() => {
-		user = <IUser>{ firstName: 'John', lastName: 'Doe' };
+		user = <ILuUser>{ firstName: 'John', lastName: 'Doe' };
 	});
 
 	it('create an instance', () => {
