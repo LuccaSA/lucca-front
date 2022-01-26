@@ -55,8 +55,12 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		const groups = text.split(this._regex);
 		if (groups.length !== 3 && groups.length !== 2) { return false; }
 		try {
-
 			const { date, month, year } = this.extract(text, granularity);
+
+			// When year is greater than 10_000 ISO string goes from 2000-01-01 to +010000-01-01 which is not supported by backends
+			if (year > 10_000) {
+				return false;
+			}
 
 			let d : Date;
 			if (this._options.useUtc) {
@@ -72,11 +76,11 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			// as i can write new Date(1234, 56, 78) and mr javascript accepts it
 			// i check now that the generated date has the same year/month/date as what i entered
 			if (this._options.useUtc) {
-				if (d.getUTCFullYear() % 100 !== year) { return false; }
+				if (d.getUTCFullYear() !== year) { return false; }
 				if (d.getUTCMonth() !== month - 1) { return false; }
 				if (d.getUTCDate() !== date) { return false; }
 			} else {
-				if (d.getFullYear() % 100 !== year) { return false; }
+				if (d.getFullYear() !== year) { return false; }
 				if (d.getMonth() !== month - 1) { return false; }
 				if (d.getDate() !== date) { return false; }
 			}
@@ -89,7 +93,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 	parse(text: string, granularity = ELuDateGranularity.day): Date {
 		if (!text) { return undefined; }
 		if (!this.isParsable(text)) {
-			this.forgeInvalid();
+			return this.forgeInvalid();
 		}
 
 		const { date, month, year } = this.extract(text, granularity);
