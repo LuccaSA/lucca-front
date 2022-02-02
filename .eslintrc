@@ -1,0 +1,147 @@
+{
+	"root": true,
+	"ignorePatterns": [
+		"src/**/*"
+	],
+	"overrides": [
+		{
+			"files": [
+				"*.ts"
+			],
+			"parserOptions": {
+				"project": [
+					"tsconfig.json",
+					"packages/ng/tsconfig.lib.json"
+				],
+				"createDefaultProgram": true
+			},
+			"extends": [
+				"plugin:@angular-eslint/recommended",
+				"eslint:recommended",
+				"plugin:@typescript-eslint/recommended",
+				"plugin:@typescript-eslint/recommended-requiring-type-checking",
+				// "plugin:@angular-eslint/template/process-inline-templates",
+				// Keep prettier at the end
+				"plugin:prettier/recommended"
+				// "plugin:@angular-eslint/ng-cli-compat",
+				// "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+			],
+			"plugins": [
+				"@delagen/deprecation"
+			],
+			"rules": {
+				// OUR RULES
+				"@typescript-eslint/naming-convention": [
+					"error",
+					{
+						"selector": "enumMember",
+						"format": [
+							"PascalCase",
+							"camelCase",
+							"UPPER_CASE"
+						]
+					}
+				],
+				"@typescript-eslint/explicit-function-return-type": "off", // on aimerait bien dire oui sauf pour void
+				"@typescript-eslint/explicit-module-boundary-types": "off", // on aimerait bien dire oui sauf pour void
+				"@angular-eslint/no-input-rename": "off",
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^_",
+						"ignoreRestSiblings": true
+					}
+				],
+				"@typescript-eslint/unbound-method": "off",
+				"@typescript-eslint/type-annotation-spacing": [
+					"error"
+				],
+				"no-console": [
+					"error",
+					{
+						"allow": [
+							"warn",
+							"error"
+						]
+					}
+				],
+				"curly": "error",
+				"@delagen/deprecation/deprecation": "warn",
+				"no-restricted-imports": [
+					"error",
+					{
+						"paths": [
+							"rxjs/Rx"
+						]
+					}
+				],
+				"max-classes-per-file": "off",
+				"max-len": [
+					"error",
+					{
+						"code": 140,
+						"ignoreComments": true,
+						"ignoreTrailingComments": true,
+						"ignoreUrls": true,
+						"ignoreStrings": true
+					}
+				],
+				"quote-props": [
+					"error",
+					"as-needed"
+				],
+				"quotes": [
+					"error",
+					"single",
+					{
+						"avoidEscape": true,
+						"allowTemplateLiterals": true
+					}
+				],
+				"space-before-function-paren": [
+					"error",
+					{
+						"anonymous": "never",
+						"asyncArrow": "always",
+						"named": "never"
+					}
+				],
+				// BASIC RULES
+				"@angular-eslint/component-selector": [
+					"error",
+					{
+						"type": "element",
+						"prefix": "lu",
+						"style": "kebab-case"
+					}
+				],
+				"@angular-eslint/directive-selector": [
+					"error",
+					{
+						"type": "attribute",
+						"prefix": "lu",
+						"style": "camelCase"
+					}
+				]
+			}
+		},
+		{
+			"files": [
+				"*.html"
+			],
+			"extends": [
+				"plugin:@angular-eslint/template/recommended",
+				"plugin:prettier/recommended"
+			],
+			"rules": {}
+		},
+		{
+			"files": [
+				"*.js"
+			],
+			"env": {
+				"es6": true
+			}
+		}
+	]
+}

@@ -16,6 +16,12 @@
               "project": "packages/ng/ng-package.json",
               "tsConfig": "packages/ng/tsconfig.lib.prod.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["packages/**/*.ts", "packages/**/*.html"]
+          }
         }
       }
     },
