@@ -1,4 +1,4 @@
-import { DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
+/* eslint-disable @angular-eslint/no-output-native */
 import { DOCUMENT } from '@angular/common';
 import {
 	AfterViewInit,
@@ -69,6 +69,7 @@ export abstract class ALuOptionPickerComponent<
 	@Output() override close = new EventEmitter<void>();
 	@Output() override open = new EventEmitter<void>();
 	@Output() override hovered = new EventEmitter<boolean>();
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
@@ -103,7 +104,7 @@ export abstract class ALuOptionPickerComponent<
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
-	_emitHoveredEvent(h): void {
+	_emitHoveredEvent(h: boolean): void {
 		this.hovered.emit(h);
 	}
 	override onOpen() {
@@ -113,25 +114,25 @@ export abstract class ALuOptionPickerComponent<
 		this._applySelected();
 	}
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<HTMLElement>) {
 		this.templateRef = tr;
 	}
 
 	// keydown
 	override _handleKeydown(event: KeyboardEvent) {
 		super._handleKeydown(event);
-		switch (event.keyCode) {
-			case ENTER:
+		switch (event.key) {
+			case 'Enter':
 				this._selectHighlighted();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case UP_ARROW:
+			case 'ArrowUp':
 				this._decrHighlight();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case DOWN_ARROW:
+			case 'ArrowDown':
 				this._incrHighlight();
 				event.preventDefault();
 				event.stopPropagation();
@@ -308,7 +309,6 @@ export abstract class ALuOptionPickerComponent<
 @Component({
 	selector: 'lu-option-picker',
 	templateUrl: './option-picker.component.html',
-	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',

@@ -1,44 +1,37 @@
+import { DOCUMENT } from '@angular/common';
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ContentChildren,
-	QueryList,
-	forwardRef,
-	ChangeDetectorRef,
-	AfterViewInit,
 	Directive,
+	forwardRef,
 	Inject,
+	QueryList,
 } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { Observable, merge } from 'rxjs';
 import {
-	first,
-	mapTo,
-	startWith,
-	shareReplay,
-	delay,
-	mergeAll,
-} from 'rxjs/operators';
+	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnScrollBottomSubscriber,
+	ILuTree,
+} from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, Observable } from 'rxjs';
+import { first, mapTo, mergeAll, shareReplay, startWith } from 'rxjs/operators';
 import {
 	ALuTreeOptionOperator,
 	ILuTreeOptionOperator,
 } from '../operator/index';
-import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
-import { ILuTree } from '@lucca-front/ng/core';
 import {
-	ALuOnOpenSubscriber,
-	ILuOnOpenSubscriber,
-	ALuOnCloseSubscriber,
-	ILuOnCloseSubscriber,
-	ILuOnScrollBottomSubscriber,
-	ALuOnScrollBottomSubscriber,
-} from '@lucca-front/ng/core';
-import {
-	ILuTreeOptionSelector,
 	ALuTreeOptionSelector,
+	ILuTreeOptionSelector,
 } from '../selector/index';
-import { DOCUMENT } from '@angular/common';
+import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
 @Directive()
 export abstract class ALuTreeOptionPickerAdvancedComponent<
@@ -56,18 +49,18 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<
 	set operatorsQL(ql: QueryList<ILuTreeOptionOperator<T>>) {
 		this._operatorsQL = ql;
 	}
-	protected _onOpenSubscribers = [];
+	protected _onOpenSubscribers: ILuOnOpenSubscriber[] = [];
 	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(
 		ql: QueryList<ILuOnOpenSubscriber>,
 	) {
 		this._onOpenSubscribers = ql.toArray();
 	}
-	protected _onCloseSubscribers = [];
+	protected _onCloseSubscribers: ILuOnCloseSubscriber[] = [];
 	@ContentChildren(ALuOnCloseSubscriber, { descendants: true })
 	set onCloseSubsQL(ql: QueryList<ILuOnCloseSubscriber>) {
 		this._onCloseSubscribers = ql.toArray();
 	}
-	protected _onScrollBottomSubscribers = [];
+	protected _onScrollBottomSubscribers: ILuOnScrollBottomSubscriber[] = [];
 	@ContentChildren(ALuOnScrollBottomSubscriber, { descendants: true })
 	set onScrollBottomSubsQL(ql: QueryList<ILuOnScrollBottomSubscriber>) {
 		this._onScrollBottomSubscribers = ql.toArray();
@@ -152,7 +145,6 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<
 @Component({
 	selector: 'lu-tree-option-picker-advanced',
 	templateUrl: './tree-option-picker-advanced.component.html',
-	styleUrls: ['./tree-option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
@@ -164,7 +156,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<
 	],
 })
 export class LuTreeOptionPickerAdvancedComponent<
-	T = any,
+	T,
 	O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>,
 > extends ALuTreeOptionPickerAdvancedComponent<T, O> {
 	constructor(
