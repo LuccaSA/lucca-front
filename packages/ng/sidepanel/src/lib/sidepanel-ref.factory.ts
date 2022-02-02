@@ -8,7 +8,7 @@ import { ALuSidepanelRef, ILuSidepanelRef } from './sidepanel-ref.model';
 import { ILuSidepanelContent } from './sidepanel.model';
 import { LU_SIDEPANEL_DATA } from './sidepanel.token';
 
-class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = any, R = any> extends ALuSidepanelRef<T, D, R> implements ILuSidepanelRef<T, D, R> {
+class LuSidepanelRef<T extends ILuSidepanelContent<unknown> = ILuSidepanelContent<unknown>, D = unknown, R = unknown> extends ALuSidepanelRef<T, D, R> implements ILuSidepanelRef<T, D, R> {
 	protected _containerRef: ComponentRef<LuSidepanelPanelComponent>;
 	protected _containerOutlet: PortalOutlet;
 	constructor(protected override _overlay: Overlay, protected override _injector: Injector, protected override _component: ComponentType<T>, protected override _config: ILuSidepanelConfig) {
@@ -29,7 +29,7 @@ class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = an
 			const containerPortal = new ComponentPortal(LuSidepanelPanelComponentDefaultCD, undefined, injector);
 			this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
 		}
-		this._containerOutlet = this._containerRef.instance;
+		this._containerOutlet = this._containerRef.instance as unknown as PortalOutlet;
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;
 	}
@@ -40,9 +40,9 @@ class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = an
 }
 
 @Injectable()
-export class LuSidepanelRefFactory implements ILuPopupRefFactory<ILuSidepanelContent, ILuSidepanelConfig> {
+export class LuSidepanelRefFactory implements ILuPopupRefFactory<ILuSidepanelContent<unknown>, ILuSidepanelConfig> {
 	constructor(protected _overlay: Overlay, protected _injector: Injector) {}
-	forge<T extends ILuSidepanelContent, C extends ILuSidepanelConfig>(component: ComponentType<T>, config: C) {
+	forge<T extends ILuSidepanelContent<unknown>, C extends ILuSidepanelConfig>(component: ComponentType<T>, config: C) {
 		return new LuSidepanelRef(this._overlay, this._injector, component, config);
 	}
 }

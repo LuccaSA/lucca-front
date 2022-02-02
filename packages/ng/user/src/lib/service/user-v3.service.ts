@@ -42,7 +42,7 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 	}
 
 	// FIXME typing
-	protected override _get(url) {
+	protected override _get(url: string) {
 		return (super._get(url) as unknown as Observable<ILuApiSuggestion<U>[]>).pipe(map((suggestions) => suggestions.map((s: ILuApiSuggestion<U>) => s.item)));
 	}
 
