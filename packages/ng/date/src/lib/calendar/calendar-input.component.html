@@ -13,7 +13,9 @@
 		</button>
 	</header>
 	<section class="calendar-labels" [ngClass]="mod">
-		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
+		<div class="calendar-labels-item" *ngFor="let label of labels">
+			{{ label }}
+		</div>
 	</section>
 	<section class="calendar-grid" [ngClass]="mod">
 		<button

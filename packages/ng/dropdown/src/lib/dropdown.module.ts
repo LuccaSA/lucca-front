@@ -3,7 +3,6 @@ import { LuDropdownTriggerModule } from './trigger/index';
 import { LuDropdownPanelModule } from './panel/index';
 import { LuDropdownItemModule } from './item/index';
 
-
 @NgModule({
 	imports: [
 		LuDropdownTriggerModule,
@@ -14,6 +13,6 @@ import { LuDropdownItemModule } from './item/index';
 		LuDropdownTriggerModule,
 		LuDropdownPanelModule,
 		LuDropdownItemModule,
-	]
+	],
 })
 export class LuDropdownModule {}

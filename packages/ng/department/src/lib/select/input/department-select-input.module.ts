@@ -1,10 +1,15 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
+import {
+	LuInputClearerModule,
+	LuInputDisplayerModule,
+} from '@lucca-front/ng/input';
 import {
 	LuTreeOptionItemModule,
-	LuTreeOptionOperatorModule, LuTreeOptionPickerModule, LuTreeOptionSelectorModule
+	LuTreeOptionOperatorModule,
+	LuTreeOptionPickerModule,
+	LuTreeOptionSelectorModule,
 } from '@lucca-front/ng/option';
 import { LuDepartmentFeederModule } from '../feeder/index';
 import { LuDepartmentSelectInputComponent } from './department-select-input.component';
@@ -24,16 +29,14 @@ import { luDepartmentSelectInputTranslations } from './department-select-input.t
 		LuTreeOptionOperatorModule,
 		LuTreeOptionSelectorModule,
 	],
-	declarations: [
-		LuDepartmentSelectInputComponent,
-	],
-	exports: [
-		LuDepartmentSelectInputComponent,
-	],
+	declarations: [LuDepartmentSelectInputComponent],
+	exports: [LuDepartmentSelectInputComponent],
 	providers: [
-		{ provide: LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS, useValue: luDepartmentSelectInputTranslations },
+		{
+			provide: LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS,
+			useValue: luDepartmentSelectInputTranslations,
+		},
 		LuDepartmentSelectInputIntl,
 	],
 })
-export class LuDepartmentSelectInputModule { }
-
+export class LuDepartmentSelectInputModule {}

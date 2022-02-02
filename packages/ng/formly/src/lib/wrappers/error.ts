@@ -1,4 +1,11 @@
-import { Component, Input, ViewChild, ViewContainerRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+	Component,
+	Input,
+	ViewChild,
+	ViewContainerRef,
+	ChangeDetectorRef,
+	ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
 	FormlyFieldConfig,
@@ -27,7 +34,12 @@ export class LuFormlyWrapperError extends FieldWrapper {
 // component that display the right error message
 @Component({
 	selector: 'lu-formly-error-message',
-	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">{{ message }}</div>`,
+	template: `<div
+		class="textfield-messages-error"
+		*ngFor="let message of errorMessages"
+	>
+		{{ message }}
+	</div>`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyErrorMessage {
@@ -38,8 +50,8 @@ export class LuFormlyErrorMessage {
 
 	get errorMessages(): string[] {
 		const messages = [];
-		if (!!this.fieldForm.errors) {
-			Object.keys(this.fieldForm.errors).forEach(key => {
+		if (this.fieldForm.errors) {
+			Object.keys(this.fieldForm.errors).forEach((key) => {
 				if (
 					this.field.validation &&
 					this.field.validation.messages &&

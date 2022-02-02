@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	HostBinding,
+	Inject,
+} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { tap } from 'rxjs/operators';
@@ -24,7 +30,10 @@ import { LuOptionSelectAllIntl } from './select-all.intl';
 		},
 	],
 })
-export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionSelector<T> {
+export class LuOptionSelectAllComponent<T = any>
+	extends ALuOptionOperator<T>
+	implements ILuOptionSelector<T>
+{
 	multiple = true;
 	onSelectValue = new Subject<T | T[]>();
 	private _values: T[];
@@ -33,9 +42,7 @@ export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> im
 	options;
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
-		this.outOptions$ = in$.pipe(
-			tap(options => this.options = options)
-		);
+		this.outOptions$ = in$.pipe(tap((options) => (this.options = options)));
 	}
 
 	constructor(

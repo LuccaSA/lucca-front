@@ -1,9 +1,21 @@
 import { Overlay } from '@angular/cdk/overlay';
 import {
-	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	forwardRef,
+	Inject,
+	Input,
+	Renderer2,
+	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ILuTreeOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import {
+	ILuTreeOptionPickerPanel,
+	LuOptionComparer,
+} from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
@@ -22,10 +34,15 @@ import { ILuDepartmentSelectInputLabel } from './department-select-input.transla
 		},
 	],
 })
-export class LuDepartmentSelectInputComponent<D extends import ('../../department.model').ILuDepartment = import ('../../department.model').ILuDepartment, P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>>
+export class LuDepartmentSelectInputComponent<
+		D extends import('../../department.model').ILuDepartment = import('../../department.model').ILuDepartment,
+		P extends ILuTreeOptionPickerPanel<D> = ILuTreeOptionPickerPanel<D>,
+	>
 	extends ALuSelectInputComponent<D, P>
-	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit {
-	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
+	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit
+{
+	byId: LuOptionComparer<D> = (option1: D, option2: D) =>
+		option1 && option2 && option1.id === option2.id;
 
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
@@ -36,7 +53,8 @@ export class LuDepartmentSelectInputComponent<D extends import ('../../departmen
 		protected override _elementRef: ElementRef,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
-		@Inject(LuDepartmentSelectInputIntl) public intl: ILuDepartmentSelectInputLabel,
+		@Inject(LuDepartmentSelectInputIntl)
+		public intl: ILuDepartmentSelectInputLabel,
 	) {
 		super(
 			_changeDetectorRef,

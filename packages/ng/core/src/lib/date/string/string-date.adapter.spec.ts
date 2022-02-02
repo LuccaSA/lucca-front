@@ -13,12 +13,12 @@ describe('LuStringDateAdapter', () => {
 		${'01/01/20222'} | ${'Invalid Date'}
 	`(
 		'should return $expectedResult when parsing $date',
-		({ date, expectedResult }: { date: string, expectedResult: string }) => {
+		({ date, expectedResult }: { date: string; expectedResult: string }) => {
 			// Act
 			const result = adapter.parse(date);
 
 			// Assert
 			expect(result).toEqual(expectedResult);
-		}
+		},
 	);
 });

@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
-import { LuOptionOperatorModule, LuOptionPickerModule } from '@lucca-front/ng/option';
+import {
+	LuInputClearerModule,
+	LuInputDisplayerModule,
+} from '@lucca-front/ng/input';
+import {
+	LuOptionOperatorModule,
+	LuOptionPickerModule,
+} from '@lucca-front/ng/option';
 import { LuUserDisplayModule } from '../../display/index';
 import { LuUserHomonymsModule } from '../homonyms/index';
 import { LuUserMeOptionModule } from '../me/index';
@@ -23,15 +29,14 @@ import { luUserSelectInputTranslations } from './user-select-input.translate';
 		LuUserHomonymsModule,
 		LuUserMeOptionModule,
 	],
-	declarations: [
-		LuUserSelectInputComponent,
-	],
-	exports: [
-		LuUserSelectInputComponent,
-	],
+	declarations: [LuUserSelectInputComponent],
+	exports: [LuUserSelectInputComponent],
 	providers: [
-		{ provide: LU_USER_SELECT_INPUT_TRANSLATIONS, useValue: luUserSelectInputTranslations },
+		{
+			provide: LU_USER_SELECT_INPUT_TRANSLATIONS,
+			useValue: luUserSelectInputTranslations,
+		},
 		LuUserSelectInputIntl,
-	]
+	],
 })
-export class LuUserSelectInputModule { }
+export class LuUserSelectInputModule {}

@@ -16,7 +16,6 @@ import {
 } from './popover-panel.model';
 import { luTransformPopover } from '../animation/index';
 
-
 // import { standardPopoverTemplate } from './popover.template';
 
 @Component({
@@ -26,7 +25,10 @@ import { luTransformPopover } from '../animation/index';
 	animations: [luTransformPopover],
 	exportAs: 'LuPopoverPanel',
 })
-export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
+export class LuPopoverPanelComponent
+	extends ALuPopoverPanel
+	implements ILuPopoverPanel, OnDestroy
+{
 	protected _template: TemplateRef<any>;
 	protected _templateContext: any;
 

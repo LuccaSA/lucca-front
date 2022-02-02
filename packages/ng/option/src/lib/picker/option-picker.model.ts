@@ -4,11 +4,17 @@ import { merge, Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/option-item.model';
 
-export interface ILuOptionPickerPanel<T = any> extends ILuPickerPanel<T> { }
+export type ILuOptionPickerPanel<T = any> = ILuPickerPanel<T>;
 
 export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 
-export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
+export abstract class ALuOptionPicker<
+		T = any,
+		O extends ILuOptionItem<T> = ILuOptionItem<T>,
+	>
+	extends ALuPickerPanel<T>
+	implements ILuOptionPickerPanel<T>
+{
 	protected _subs = new Subscription();
 	override onSelectValue: Observable<T | T[]>;
 	protected _value: T | T[];
@@ -17,27 +23,26 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 		this._applySelected();
 	}
 	private __options$: Observable<O[]>;
-	protected get _options$() { return this.__options$; }
+	protected get _options$() {
+		return this.__options$;
+	}
 	protected set _options$(options$: Observable<O[]>) {
 		this.__options$ = options$;
 		// reapply selected when the options change
 		this._subs.add(
-			options$
-				.subscribe(o => {
-					this._applySelected();
-					this._applyHighlight();
-				})
+			options$.subscribe((o) => {
+				this._applySelected();
+				this._applyHighlight();
+			}),
 		);
 		// subscribe to any option.onSelect
-		const singleFlow$ = options$.pipe(switchMap(
-			items => merge(...items.map(i => i.onSelect))
-		));
-		this._subs.add(
-			singleFlow$.subscribe(option => this._toggle(option))
+		const singleFlow$ = options$.pipe(
+			switchMap((items) => merge(...items.map((i) => i.onSelect))),
 		);
+		this._subs.add(singleFlow$.subscribe((option) => this._toggle(option)));
 	}
-	protected optionComparer: LuOptionComparer<T> =
-		(option1: T, option2: T) => JSON.stringify(option1) === JSON.stringify(option2)
+	protected optionComparer: LuOptionComparer<T> = (option1: T, option2: T) =>
+		JSON.stringify(option1) === JSON.stringify(option2);
 	protected _toggle(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
@@ -45,9 +50,9 @@ export abstract class ALuOptionPicker<T = any, O extends ILuOptionItem<T> = ILuO
 		} else {
 			const values = <T[]>this._value || [];
 			let newValues;
-			if (values.some(v => this.optionComparer(v, value))) {
+			if (values.some((v) => this.optionComparer(v, value))) {
 				// value was present, we remove it
-				newValues = values.filter(v => !this.optionComparer(v, value));
+				newValues = values.filter((v) => !this.optionComparer(v, value));
 			} else {
 				// value was absent, we add it
 				newValues = [...values, value];

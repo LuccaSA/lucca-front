@@ -20,7 +20,14 @@ import {
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 // import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 import { merge, of, Subscription, Observable } from 'rxjs';
-import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/operators';
+import {
+	map,
+	startWith,
+	delay,
+	share,
+	switchMap,
+	debounceTime,
+} from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-dropdown',
@@ -29,9 +36,10 @@ import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/oper
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
 })
-export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
-
-
+export class LuDropdownPanelComponent
+	extends ALuPopoverPanel
+	implements ILuPopoverPanel, OnDestroy
+{
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -71,7 +79,9 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	// }
 	protected _items: ILuDropdownItem[] = [];
 	protected _itemsQL: QueryList<ILuDropdownItem>;
-	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(ql: QueryList<ILuDropdownItem>) {
+	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(
+		ql: QueryList<ILuDropdownItem>,
+	) {
 		this._itemsQL = ql;
 	}
 
@@ -81,23 +91,23 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		super();
 	}
 	protected initItems() {
-
-		const items$ = this._itemsQL.changes
-			.pipe(
-				startWith(this._itemsQL),
-				map<QueryList<ILuDropdownItem>, ILuDropdownItem[]>(ql => ql.toArray()),
-				delay(0),
-				share(),
-			);
-		items$.subscribe(i => this._items = i || []);
+		const items$ = this._itemsQL.changes.pipe(
+			startWith(this._itemsQL),
+			map<QueryList<ILuDropdownItem>, ILuDropdownItem[]>((ql) => ql.toArray()),
+			delay(0),
+			share(),
+		);
+		items$.subscribe((i) => (this._items = i || []));
 		// this.highlightIndex = -1;
 
 		const singleFlow$: Observable<boolean> = items$.pipe(
-			switchMap(items => merge(...items.map(i => i.onSelect))),
+			switchMap((items) => merge(...items.map((i) => i.onSelect))),
 			debounceTime(1),
 		);
 
-		const itemSelectSub = singleFlow$.subscribe(shouldClose => this.close.emit());
+		const itemSelectSub = singleFlow$.subscribe((shouldClose) =>
+			this.close.emit(),
+		);
 		this._subs.add(itemSelectSub);
 	}
 	ngAfterViewInit() {
@@ -126,40 +136,40 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	private focusFirstItem() {
 		const firstItem = this._items[0];
 		if (firstItem) {
-			firstItem.focus()
+			firstItem.focus();
 		}
 	}
 
 	// keydown
 	// _handleKeydown(event: KeyboardEvent) {
 	// 	super._handleKeydown(event);
-		// switch (event.keyCode) {
-		// 	case UP_ARROW:
-		// 		this._decrHighlight();
-		// 		if (!this._highlightOutOfBounds()) {
-		// 			event.preventDefault();
-		// 			event.stopPropagation();
-		// 		}
-		// 		break;
-		// 	case DOWN_ARROW:
-		// 		this._incrHighlight();
-		// 		if (!this._highlightOutOfBounds()) {
-		// 			event.preventDefault();
-		// 			event.stopPropagation();
-		// 		}
-		// 		break;
-		// 	case TAB:
-		// 		if (event.shiftKey) {
-		// 			this._decrHighlight();
-		// 		} else {
-		// 			this._incrHighlight();
-		// 		}
-		// 		if (!this._highlightOutOfBounds()) {
-		// 			event.preventDefault();
-		// 			event.stopPropagation();
-		// 		}
-		// 		break;
-		// }
+	// switch (event.keyCode) {
+	// 	case UP_ARROW:
+	// 		this._decrHighlight();
+	// 		if (!this._highlightOutOfBounds()) {
+	// 			event.preventDefault();
+	// 			event.stopPropagation();
+	// 		}
+	// 		break;
+	// 	case DOWN_ARROW:
+	// 		this._incrHighlight();
+	// 		if (!this._highlightOutOfBounds()) {
+	// 			event.preventDefault();
+	// 			event.stopPropagation();
+	// 		}
+	// 		break;
+	// 	case TAB:
+	// 		if (event.shiftKey) {
+	// 			this._decrHighlight();
+	// 		} else {
+	// 			this._incrHighlight();
+	// 		}
+	// 		if (!this._highlightOutOfBounds()) {
+	// 			event.preventDefault();
+	// 			event.stopPropagation();
+	// 		}
+	// 		break;
+	// }
 	// }
 	// protected _incrHighlight() {
 	// 	this.highlightIndex++;

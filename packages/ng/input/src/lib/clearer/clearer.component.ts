@@ -18,9 +18,12 @@ import { ALuClearer, ILuClearer } from './clearer.model';
 			provide: ALuClearer,
 			useExisting: forwardRef(() => LuInputClearerComponent),
 		},
-	]
+	],
 })
-export class LuInputClearerComponent<T = any> extends ALuClearer<T> implements ILuClearer<T> {
+export class LuInputClearerComponent<T = any>
+	extends ALuClearer<T>
+	implements ILuClearer<T>
+{
 	@Output() override onClear = new EventEmitter<T>();
 	onClick($event: Event) {
 		this.onClear.emit(undefined);

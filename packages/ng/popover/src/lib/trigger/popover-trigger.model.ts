@@ -1,30 +1,36 @@
 import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import {
-	FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConfig, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos
+	FlexibleConnectedPositionStrategy,
+	HorizontalConnectionPos,
+	OriginConnectionPosition,
+	Overlay,
+	OverlayConfig,
+	OverlayConnectionPosition,
+	OverlayRef,
+	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import {
-	ElementRef,
-	ViewContainerRef
-} from '@angular/core';
+import { ElementRef, ViewContainerRef } from '@angular/core';
 import { generateId } from '@lucca-front/ng/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
+import { ILuPopoverPanel } from '../panel/index';
+import { ILuPopoverTarget } from '../target/index';
 import {
-	ILuPopoverPanel
-} from '../panel/index';
-import {
-	ILuPopoverTarget
-} from '../target/index';
-import { throwLuPopoverMissingPanelError, throwLuPopoverMissingTargetError } from './popover-trigger.error';
+	throwLuPopoverMissingPanelError,
+	throwLuPopoverMissingTargetError,
+} from './popover-trigger.error';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
 /**
  * component that will decide when to show the popover and attach it to the target
  */
-export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> {
+export declare interface ILuPopoverTrigger<
+	TPanel extends ILuPopoverPanel = ILuPopoverPanel,
+	TTarget extends ILuPopoverTarget = ILuPopoverTarget,
+> {
 	/** the popover panel to display */
 	panel: TPanel;
 	/** the popover target to attach the panel */
@@ -51,8 +57,11 @@ export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuP
 }
 
 // tslint:disable-next-line: max-line-length
-export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
-implements ILuPopoverTrigger<TPanel, TTarget> {
+export abstract class ALuPopoverTrigger<
+	TPanel extends ILuPopoverPanel = ILuPopoverPanel,
+	TTarget extends ILuPopoverTarget = ILuPopoverTarget,
+> implements ILuPopoverTrigger<TPanel, TTarget>
+{
 	protected _portal: TemplatePortal<any> | ComponentPortal<any>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
@@ -72,41 +81,66 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 
 	protected _panel: TPanel;
 	/** References the popover instance that the trigger is associated with. */
-	get panel() { return this._panel; }
-	set panel(p: TPanel) { this._panel = p; }
+	get panel() {
+		return this._panel;
+	}
+	set panel(p: TPanel) {
+		this._panel = p;
+	}
 
 	protected _target: TTarget;
 	/** References the popover target instance that the trigger is associated with. */
-	get target() { return this._target; }
-	set target(t: TTarget) { this._target = t; }
+	get target() {
+		return this._target;
+	}
+	set target(t: TTarget) {
+		this._target = t;
+	}
 
 	protected _triggerEvent: LuPopoverTriggerEvent = 'click';
-	get triggerEvent() { return this._triggerEvent; }
+	get triggerEvent() {
+		return this._triggerEvent;
+	}
 	set triggerEvent(te: LuPopoverTriggerEvent) {
 		this._triggerEvent = te;
 		if (te === 'hover' || te === 'focus') {
 			if (this._hoveredSubscription) {
 				this._hoveredSubscription.unsubscribe();
 			}
-			this._hoveredSubscription = this._hovered$.pipe(
-				debounce(h => h ? timer(this.enterDelay) : timer(this.leaveDelay))
-			).subscribe(h => h ? this.openPopover() : this.closePopover());
+			this._hoveredSubscription = this._hovered$
+				.pipe(
+					debounce((h) =>
+						h ? timer(this.enterDelay) : timer(this.leaveDelay),
+					),
+				)
+				.subscribe((h) => (h ? this.openPopover() : this.closePopover()));
 		}
 	}
 	protected _enterDelay = 50;
-	get enterDelay() { return this._enterDelay; }
-	set enterDelay(d: number) { this._enterDelay = d; }
+	get enterDelay() {
+		return this._enterDelay;
+	}
+	set enterDelay(d: number) {
+		this._enterDelay = d;
+	}
 	protected _leaveDelay = 50;
-	get leaveDelay() { return this._leaveDelay; }
-	set leaveDelay(d: number) { this._leaveDelay = d; }
+	get leaveDelay() {
+		return this._leaveDelay;
+	}
+	set leaveDelay(d: number) {
+		this._leaveDelay = d;
+	}
 
 	protected _disabled = false;
-	get disabled() { return this._disabled; }
-	set disabled(d: boolean) { this._disabled = d; }
+	get disabled() {
+		return this._disabled;
+	}
+	set disabled(d: boolean) {
+		this._disabled = d;
+	}
 
 	protected _triggerId: string;
 	protected _panelId: string;
-
 
 	/** Event emitted when the associated popover is opened. */
 	abstract onOpen: Observable<void>;
@@ -182,7 +216,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			this._overlayRef.detach();
 
 			/** unsubscribe to backdrop click if it was defined */
-			if (!!this._backdropSubscription) {
+			if (this._backdropSubscription) {
 				// if (this.popover.triggerEvent === 'click') {
 				this._backdropSubscription.unsubscribe();
 			}
@@ -221,9 +255,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	/** Return if the popover main positionning is vertical */
 	get isVerticallyPositionned(): boolean {
 		const position = this.target.position;
-		return (
-			position === 'below' || position === 'above'
-		);
+		return position === 'below' || position === 'above';
 	}
 
 	/**
@@ -233,29 +265,25 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 		if (this._overlayRef) {
 			this._panelEventsSubscriptions = new Subscription();
 			if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
-
 				this._panelEventsSubscriptions.add(
-					this.panel.hovered
-					.subscribe((hovered) => {
+					this.panel.hovered.subscribe((hovered) => {
 						this._hovered$.next(hovered);
 					}),
 				);
 			}
 			this._panelEventsSubscriptions.add(
-				this.panel.close
-				.subscribe(() => {
+				this.panel.close.subscribe(() => {
 					this.closePopover();
 				}),
 			);
 			this._panelEventsSubscriptions.add(
-				this.panel.open
-				.subscribe(() => {
+				this.panel.open.subscribe(() => {
 					this.openPopover();
 				}),
 			);
 		}
 	}
-		/**
+	/**
 	 * This method ensures that the popover closes when the overlay backdrop is clicked.
 	 * We do not use first() here because doing so would not catch clicks from within
 	 * the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
@@ -365,7 +393,8 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 				break;
 
 			default:
-				overlayState.scrollStrategy = this._overlay.scrollStrategies.reposition();
+				overlayState.scrollStrategy =
+					this._overlay.scrollStrategies.reposition();
 				break;
 		}
 		return overlayState;
@@ -376,14 +405,20 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 	 * on the popover based on the new position. This ensures the animation origin is always
 	 * correct, even if a fallback position is used for the overlay.
 	 */
-	protected _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
-		this._positionSubscription = position.positionChanges.pipe(
-			map(c => c.connectionPair),
-			distinctUntilChanged(),
-		)
-		.subscribe(connectionPair => {
-			this.panel.setPositionClasses(connectionPair.overlayX, connectionPair.overlayY);
-		});
+	protected _subscribeToPositions(
+		position: FlexibleConnectedPositionStrategy,
+	): void {
+		this._positionSubscription = position.positionChanges
+			.pipe(
+				map((c) => c.connectionPair),
+				distinctUntilChanged(),
+			)
+			.subscribe((connectionPair) => {
+				this.panel.setPositionClasses(
+					connectionPair.overlayX,
+					connectionPair.overlayY,
+				);
+			});
 	}
 
 	/**
@@ -451,11 +486,9 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 			overlayPosition.overlayY = connectionPosition.originY;
 		} else if (this.isVerticallyPositionned) {
 			overlayPosition.overlayX = connectionPosition.originX;
-			overlayPosition.overlayY =
-				position === 'above' ? 'bottom' : 'top';
+			overlayPosition.overlayY = position === 'above' ? 'bottom' : 'top';
 		} else {
-			overlayPosition.overlayX =
-				position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayX = position === 'before' ? 'end' : 'start';
 			overlayPosition.overlayY = connectionPosition.originY;
 		}
 
@@ -467,7 +500,7 @@ implements ILuPopoverTrigger<TPanel, TTarget> {
 					originX: connectionPosition.originX,
 					originY: connectionPosition.originY,
 					overlayX: overlayPosition.overlayX,
-					overlayY: overlayPosition.overlayY
+					overlayY: overlayPosition.overlayY,
 				},
 				{
 					originX: connectionPosition.originX,

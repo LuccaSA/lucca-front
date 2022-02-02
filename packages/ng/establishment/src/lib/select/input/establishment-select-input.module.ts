@@ -23,15 +23,14 @@ import { luEstablishmentSelectInputTranslations } from './establishment-select-i
 		LuForLegalUnitsModule,
 		LuLegalUnitSelectorModule,
 	],
-	declarations: [
-		LuEstablishmentSelectInputComponent
-	],
-	exports: [
-		LuEstablishmentSelectInputComponent,
-	],
+	declarations: [LuEstablishmentSelectInputComponent],
+	exports: [LuEstablishmentSelectInputComponent],
 	providers: [
-		{ provide: LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS, useValue: luEstablishmentSelectInputTranslations },
+		{
+			provide: LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS,
+			useValue: luEstablishmentSelectInputTranslations,
+		},
 		LuEstablishmentSelectInputIntl,
 	],
 })
-export class LuEstablishmentSelectInputModule { }
+export class LuEstablishmentSelectInputModule {}

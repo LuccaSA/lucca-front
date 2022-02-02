@@ -1,1 +1,6 @@
-export type LuSafeContentType = 'html' | 'style' | 'script' | 'url' | 'resourceUrl';
+export type LuSafeContentType =
+	| 'html'
+	| 'style'
+	| 'script'
+	| 'url'
+	| 'resourceUrl';

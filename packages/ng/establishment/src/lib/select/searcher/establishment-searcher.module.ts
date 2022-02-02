@@ -12,11 +12,7 @@ import { LuOptionModule } from '@lucca-front/ng/option';
 		CommonModule,
 		LuOptionModule,
 	],
-	declarations: [
-		LuEstablishmentSearcherComponent,
-	],
-	exports: [
-		LuEstablishmentSearcherComponent,
-	],
+	declarations: [LuEstablishmentSearcherComponent],
+	exports: [LuEstablishmentSearcherComponent],
 })
 export class LuEstablishmentSearcherModule {}

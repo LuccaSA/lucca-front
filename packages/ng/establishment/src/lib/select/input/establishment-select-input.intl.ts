@@ -5,7 +5,10 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 
 @Injectable()
 export class LuEstablishmentSelectInputIntl extends ALuIntl<ILuEstablishmentSelectInputLabel> {
-	constructor(@Inject(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS) translations, @Inject(LOCALE_ID) locale) {
+	constructor(
+		@Inject(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS) translations,
+		@Inject(LOCALE_ID) locale,
+	) {
 		super(translations, locale);
 	}
 }

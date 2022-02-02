@@ -5,7 +5,10 @@ import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.token';
 
 @Injectable()
 export class LuOptionSelectAllIntl extends ALuIntl<ILuOptionSelectAllLabel> {
-	constructor(@Inject(LU_OPTION_SELECT_ALL_TRANSLATIONS) translations, @Inject(LOCALE_ID) locale) {
+	constructor(
+		@Inject(LU_OPTION_SELECT_ALL_TRANSLATIONS) translations,
+		@Inject(LOCALE_ID) locale,
+	) {
 		super(translations, locale);
 	}
 }

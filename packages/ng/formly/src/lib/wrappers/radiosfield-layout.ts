@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import {
-	FieldWrapper
-} from '@ngx-formly/core';
+	ChangeDetectionStrategy,
+	Component,
+	ViewChild,
+	ViewContainerRef,
+} from '@angular/core';
+import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
 @Component({

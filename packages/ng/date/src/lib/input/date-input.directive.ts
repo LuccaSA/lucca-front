@@ -1,6 +1,22 @@
-import { Directive, ElementRef, Renderer2, ChangeDetectorRef, forwardRef, HostListener, Input, Inject, OnInit } from '@angular/core';
+import {
+	Directive,
+	ElementRef,
+	Renderer2,
+	ChangeDetectorRef,
+	forwardRef,
+	HostListener,
+	Input,
+	Inject,
+	OnInit,
+} from '@angular/core';
 import { ALuInput } from '@lucca-front/ng/input';
-import { NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@angular/forms';
+import {
+	NG_VALUE_ACCESSOR,
+	Validator,
+	NG_VALIDATORS,
+	ValidationErrors,
+	AbstractControl,
+} from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { ILuDateInputLabel } from './date-input.translate';
 import { LuDateInputIntl } from './date-input.intl';
@@ -20,7 +36,10 @@ import { LuDateInputIntl } from './date-input.intl';
 		},
 	],
 })
-export class LuDateInputDirective<D> extends ALuInput<D> implements Validator, OnInit {
+export class LuDateInputDirective<D>
+	extends ALuInput<D>
+	implements Validator, OnInit
+{
 	private _focused = false;
 	@Input() min?: D;
 	@Input() max?: D;
@@ -53,8 +72,10 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator, O
 		}
 	}
 	protected render() {
-		if (this._focused) { return; }
-		let format: string;;
+		if (this._focused) {
+			return;
+		}
+		let format: string;
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
 				format = this._intl.formatYear;
@@ -67,7 +88,10 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator, O
 				format = this._intl.formatDay;
 				break;
 		}
-		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, format) : '';
+		const text =
+			this.value && this._adapter.isValid(this.value)
+				? this._adapter.format(this.value, format)
+				: '';
 		this._elementRef.nativeElement.value = text;
 	}
 	@HostListener('input', ['$event'])
@@ -91,15 +115,26 @@ export class LuDateInputDirective<D> extends ALuInput<D> implements Validator, O
 	}
 	validate(control: AbstractControl): ValidationErrors | null {
 		const d = control.value;
-		if (!d) { return null; }
-		if (!this._adapter.isValid(d)) { return { 'date': true }; }
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
-			return { 'min': true };
+		if (!d) {
+			return null;
 		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
-			return { 'max': true };
+		if (!this._adapter.isValid(d)) {
+			return { date: true };
+		}
+		if (
+			!!this.min &&
+			this._adapter.isValid(this.min) &&
+			this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0
+		) {
+			return { min: true };
+		}
+		if (
+			!!this.max &&
+			this._adapter.isValid(this.max) &&
+			this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0
+		) {
+			return { max: true };
 		}
 		return null;
 	}
 }
-

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ViewChild,
+	ViewContainerRef,
+} from '@angular/core';
 import {
 	FieldWrapper,
 	FormlyFieldConfig,

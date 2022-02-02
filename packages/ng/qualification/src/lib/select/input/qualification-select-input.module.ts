@@ -16,17 +16,16 @@ import { luQualificationSelectInputTranslations } from './qualification-select-i
 		LuOptionModule,
 		LuSelectInputModule,
 		LuForGroupsModule,
-		LuApiSearcherModule
+		LuApiSearcherModule,
 	],
-	declarations: [
-		LuQualificationSelectInputComponent
-	],
-	exports: [
-		LuQualificationSelectInputComponent,
-	],
+	declarations: [LuQualificationSelectInputComponent],
+	exports: [LuQualificationSelectInputComponent],
 	providers: [
-		{ provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS, useValue: luQualificationSelectInputTranslations },
+		{
+			provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS,
+			useValue: luQualificationSelectInputTranslations,
+		},
 		LuQualificationSelectInputIntl,
 	],
 })
-export class LuQualificationSelectInputModule { }
+export class LuQualificationSelectInputModule {}

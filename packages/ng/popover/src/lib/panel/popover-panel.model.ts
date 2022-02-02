@@ -1,7 +1,10 @@
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
+import {
+	HorizontalConnectionPos,
+	VerticalConnectionPos,
+} from '@angular/cdk/overlay';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
@@ -25,7 +28,10 @@ export declare interface ILuPopoverPanel {
 
 	keydownEvents$: Observable<KeyboardEvent>;
 
-	setPositionClasses: (posX: HorizontalConnectionPos, posY: VerticalConnectionPos) => void;
+	setPositionClasses: (
+		posX: HorizontalConnectionPos,
+		posY: VerticalConnectionPos,
+	) => void;
 
 	/** method called by the trigger when it opens the popover */
 	onOpen(): void;
@@ -40,35 +46,54 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	triggerId: string;
 
 	protected _isOpen: boolean;
-	get isOpen() { return this._isOpen; }
-
+	get isOpen() {
+		return this._isOpen;
+	}
 
 	protected _closeOnClick = false;
-	get closeOnClick() { return this._closeOnClick; }
-	set closeOnClick(coc: boolean) { this._closeOnClick = coc; }
+	get closeOnClick() {
+		return this._closeOnClick;
+	}
+	set closeOnClick(coc: boolean) {
+		this._closeOnClick = coc;
+	}
 
 	protected _trapFocus = false;
-	get trapFocus() { return this._trapFocus; }
-	set trapFocus(tf: boolean) { this._trapFocus = tf; }
+	get trapFocus() {
+		return this._trapFocus;
+	}
+	set trapFocus(tf: boolean) {
+		this._trapFocus = tf;
+	}
 
 	protected _scrollStrategy: LuPopoverScrollStrategy = 'reposition';
-	get scrollStrategy() { return this._scrollStrategy; }
-	set scrollStrategy(ss: LuPopoverScrollStrategy) { this._scrollStrategy = ss; }
+	get scrollStrategy() {
+		return this._scrollStrategy;
+	}
+	set scrollStrategy(ss: LuPopoverScrollStrategy) {
+		this._scrollStrategy = ss;
+	}
 
 	protected _templateRef: TemplateRef<any>;
-	get templateRef() { return this._templateRef; }
-	set templateRef(tr: TemplateRef<any>) { this._templateRef = tr; }
+	get templateRef() {
+		return this._templateRef;
+	}
+	set templateRef(tr: TemplateRef<any>) {
+		this._templateRef = tr;
+	}
 
 	protected _positionClassesMap: any = {};
 	protected _panelClasses = '';
-	get panelClasses() { return this._panelClasses; }
+	get panelClasses() {
+		return this._panelClasses;
+	}
 	set panelClasses(cl: string) {
 		this._panelClasses = cl;
 	}
 	get panelClassesMap() {
 		const map = this._panelClasses
 			.split(' ')
-			.filter(c => !!c)
+			.filter((c) => !!c)
 			.reduce((obj: any, className: string) => {
 				obj[className] = true;
 				return obj;
@@ -78,7 +103,9 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	}
 
 	protected _contentClasses = '';
-	get contentClasses() { return this._contentClasses; }
+	get contentClasses() {
+		return this._contentClasses;
+	}
 	set contentClasses(cl: string) {
 		this._contentClasses = cl;
 	}
@@ -91,18 +118,21 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 			}, {});
 	}
 
-
 	/** Classes to be passed into the popover's overlay */
 	protected _overlayPaneClass: string | string[];
-	public get overlayPaneClass() { return this._overlayPaneClass; }
-	public set overlayPaneClass(opc) { this._overlayPaneClass = opc; }
+	public get overlayPaneClass() {
+		return this._overlayPaneClass;
+	}
+	public set overlayPaneClass(opc) {
+		this._overlayPaneClass = opc;
+	}
 
 	// /** Config object to be passed into the popover's content ngStyle */
 
 	protected _keydownEventsSub: Subscription;
 	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
 		if (!this._keydownEventsSub) {
-			this._keydownEventsSub = evt$.subscribe(e => this._handleKeydown(e));
+			this._keydownEventsSub = evt$.subscribe((e) => this._handleKeydown(e));
 		}
 	}
 
@@ -113,7 +143,10 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	abstract _emitOpenEvent(): void;
 	abstract _emitHoveredEvent(hovered: boolean): void;
 
-	setPositionClasses(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
+	setPositionClasses(
+		posX: HorizontalConnectionPos,
+		posY: VerticalConnectionPos,
+	): void {
 		this._positionClassesMap['is-before'] = posX === 'end';
 		this._positionClassesMap['is-after'] = posX === 'start';
 		this._positionClassesMap['is-above'] = posY === 'bottom';

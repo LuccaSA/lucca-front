@@ -16,5 +16,5 @@ export const luEstablishmentSelectInputTranslations = {
 	},
 	es: {
 		establishments: 'establecimiento',
-	}
+	},
 } as ILuTranslation<ILuEstablishmentSelectInputLabel>;

@@ -4,15 +4,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LuPopoverTargetDirective } from './popover-target.directive';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		OverlayModule,
-	],
-	declarations: [
-		LuPopoverTargetDirective,
-	],
-	exports: [
-		LuPopoverTargetDirective,
-	],
+	imports: [CommonModule, OverlayModule],
+	declarations: [LuPopoverTargetDirective],
+	exports: [LuPopoverTargetDirective],
 })
 export class LuPopoverTargetModule {}

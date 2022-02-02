@@ -21,4 +21,4 @@ import { LuEstablishmentSelectAllModule } from './select-all/index';
 		LuEstablishmentSelectAllModule,
 	],
 })
-export class LuEstablishmentSelectModule { }
+export class LuEstablishmentSelectModule {}

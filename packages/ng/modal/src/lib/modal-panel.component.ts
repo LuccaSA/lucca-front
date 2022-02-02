@@ -1,4 +1,13 @@
-import { Component, ViewChild, ComponentRef, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, Inject, Directive } from '@angular/core';
+import {
+	Component,
+	ViewChild,
+	ComponentRef,
+	OnDestroy,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Inject,
+	Directive,
+} from '@angular/core';
 import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
 import { ILuModalContent } from './modal.model';
 import { ALuModalRef } from './modal-ref.model';
@@ -9,8 +18,12 @@ import { tap, delay } from 'rxjs/operators';
 import { LU_MODAL_TRANSLATIONS } from './modal.token';
 
 @Directive()
-export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModalContent> implements PortalOutlet, OnDestroy {
-	@ViewChild('outlet', { read: CdkPortalOutlet, static: true }) protected _outlet: PortalOutlet;
+export abstract class ALuModalPanelComponent<
+	T extends ILuModalContent = ILuModalContent,
+> implements PortalOutlet, OnDestroy
+{
+	@ViewChild('outlet', { read: CdkPortalOutlet, static: true })
+	protected _outlet: PortalOutlet;
 	protected _componentInstance: T;
 	get title() {
 		return this._componentInstance.title;
@@ -36,7 +49,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	get submitCounter() {
 		return this._componentInstance.submitCounter || 0;
 	}
-	
+
 	submitClass$ = new Subject();
 	error$ = new Subject();
 
@@ -74,27 +87,32 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 		this.submitClass$.next('is-loading');
 		const result$ = this._componentInstance.submitAction();
 		if (result$ instanceof Observable) {
-			this._subs.add(result$.pipe(
-				tap(_ => this.submitClass$.next('is-success')),
-				tap(() => this._cdr.markForCheck()),
-				delay(500),
-			)
-			.subscribe(result => {
-				this._ref.close(result);
-			}, err => {
-				this.submitClass$.next('is-error');
-				this.error$.next(err);
-				this._cdr.markForCheck();
-				timer(2000).subscribe(_ => {
-					this.submitClass$.next('');
-					this._cdr.markForCheck();
-				});
-			}));
+			this._subs.add(
+				result$
+					.pipe(
+						tap((_) => this.submitClass$.next('is-success')),
+						tap(() => this._cdr.markForCheck()),
+						delay(500),
+					)
+					.subscribe(
+						(result) => {
+							this._ref.close(result);
+						},
+						(err) => {
+							this.submitClass$.next('is-error');
+							this.error$.next(err);
+							this._cdr.markForCheck();
+							timer(2000).subscribe((_) => {
+								this.submitClass$.next('');
+								this._cdr.markForCheck();
+							});
+						},
+					),
+			);
 		} else {
 			const result = result$;
 			this._ref.close(result);
 		}
-
 	}
 }
 
@@ -102,10 +120,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent = ILuModa
 	selector: 'lu-modal-panel',
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
-	host: {'class': 'lu-modal-panel'},
+	host: { class: 'lu-modal-panel' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
+export class LuModalPanelComponent<
+	T extends ILuModalContent = ILuModalContent,
+> extends ALuModalPanelComponent<T> {
 	constructor(
 		_ref: ALuModalRef<LuModalPanelComponent>,
 		_cdr: ChangeDetectorRef,
@@ -118,10 +138,12 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 	selector: 'lu-modal-panel-default',
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
-	host: {'class': 'lu-modal-panel'},
+	host: { class: 'lu-modal-panel' },
 	changeDetection: ChangeDetectionStrategy.Default,
 })
-export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
+export class LuModalPanelComponentDefaultCD<
+	T extends ILuModalContent = ILuModalContent,
+> extends ALuModalPanelComponent<T> {
 	constructor(
 		_ref: ALuModalRef<LuModalPanelComponent>,
 		_cdr: ChangeDetectorRef,

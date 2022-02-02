@@ -11,14 +11,17 @@ import {
 	LuFormlyFieldEstablishment,
 	LuFormlyFieldCheckbox,
 	LuFormlyFieldRadios,
-	LuFormlyFieldQualification
+	LuFormlyFieldQualification,
 } from './types/index';
 // wrappers
 import {
-	LuFormlyWrapperHelper, TemplateHelper,
+	LuFormlyWrapperHelper,
+	TemplateHelper,
 	LuFormlyWrapperTextfieldLayout,
-	LuFormlyWrapperSuffix, TemplateSuffix,
-	LuFormlyWrapperIcon, TemplateIcon,
+	LuFormlyWrapperSuffix,
+	TemplateSuffix,
+	LuFormlyWrapperIcon,
+	TemplateIcon,
 	LuFormlyWrapperError,
 	TemplateError,
 	// LuFormlyErrorMessage,
@@ -76,13 +79,13 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'establishment',
 			component: LuFormlyFieldEstablishment,
-			wrappers: ['textfield-layout']
+			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'qualification',
 			component: LuFormlyFieldQualification,
-			wrappers: ['textfield-layout']
-		}
+			wrappers: ['textfield-layout'],
+		},
 	],
 	wrappers: [
 		{ name: 'helper', component: LuFormlyWrapperHelper },
@@ -94,7 +97,6 @@ export const LU_FORMLY_CONFIG = {
 		{ name: 'error', component: LuFormlyWrapperError },
 	],
 	manipulators: [
-
 		{ class: TemplateError, method: 'run' }, // fifth
 		{ class: TemplateHelper, method: 'run' }, // fourth
 		{ class: TemplateSuffix, method: 'run' }, // third

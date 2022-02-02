@@ -1,8 +1,20 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SkipSelf, Self, Optional, Inject } from '@angular/core';
-import { ALuOptionOperator, ILuOptionOperator} from '@lucca-front/ng/option';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	SkipSelf,
+	Self,
+	Optional,
+	Inject,
+} from '@angular/core';
+import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ILuUser } from '../../user.model';
 import { map, withLatestFrom, switchMap } from 'rxjs/operators';
-import { ALuUserHomonymsService, LuUserHomonymsService, ILuUserHomonymsService } from './user-homonyms.service';
+import {
+	ALuUserHomonymsService,
+	LuUserHomonymsService,
+	ILuUserHomonymsService,
+} from './user-homonyms.service';
 import { merge, Observable } from 'rxjs';
 
 @Component({
@@ -21,23 +33,25 @@ import { merge, Observable } from 'rxjs';
 		},
 	],
 })
-export class LuUserHomonymsComponent<U extends ILuUser = ILuUser> implements ILuOptionOperator<U> {
+export class LuUserHomonymsComponent<U extends ILuUser = ILuUser>
+	implements ILuOptionOperator<U>
+{
 	set inOptions$(in$: Observable<U[]>) {
 		this._outOptions$ = merge(
 			in$,
 			in$.pipe(
-				map(users => this._service.extractHomonyms(users)),
+				map((users) => this._service.extractHomonyms(users)),
 				switchMap((homonyms: U[]) => this._service.enrichHomonyms(homonyms)),
 				withLatestFrom(in$),
 				map<[U[], U[]], U[]>(([enrichedUsers, users]) => {
-					const result = [ ...users];
-					enrichedUsers.forEach(user => {
-						const i = result.findIndex(u => u.id === user.id);
+					const result = [...users];
+					enrichedUsers.forEach((user) => {
+						const i = result.findIndex((u) => u.id === user.id);
 						result[i] = user;
 					});
 					return result;
 				}),
-			)
+			),
 		);
 	}
 	private _outOptions$: Observable<U[]>;
@@ -46,10 +60,14 @@ export class LuUserHomonymsComponent<U extends ILuUser = ILuUser> implements ILu
 	}
 	private _service: ILuUserHomonymsService<U>;
 	constructor(
-		@Inject(ALuUserHomonymsService) @Optional() @SkipSelf() hostService: ILuUserHomonymsService<U>,
-		@Inject(ALuUserHomonymsService) @Self() selfService: ILuUserHomonymsService<U>,
+		@Inject(ALuUserHomonymsService)
+		@Optional()
+		@SkipSelf()
+		hostService: ILuUserHomonymsService<U>,
+		@Inject(ALuUserHomonymsService)
+		@Self()
+		selfService: ILuUserHomonymsService<U>,
 	) {
 		this._service = hostService || selfService;
 	}
 }
-

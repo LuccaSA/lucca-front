@@ -9,12 +9,12 @@ export abstract class ALuQualificationSelectInputLabel {
 
 export const luQualificationSelectInputTranslations = {
 	en: {
-		qualifications: 'qualifications'
+		qualifications: 'qualifications',
 	},
 	fr: {
-		qualifications: 'qualifications'
+		qualifications: 'qualifications',
 	},
 	es: {
-		qualifications: 'calificaciones'
-	}
+		qualifications: 'calificaciones',
+	},
 } as ILuTranslation<ILuQualificationSelectInputLabel>;

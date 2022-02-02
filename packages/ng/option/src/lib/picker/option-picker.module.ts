@@ -15,14 +15,11 @@ import { LuOptionPickerComponent } from './option-picker.component';
 		LuScrollModule,
 		A11yModule,
 	],
-	declarations: [
-		LuOptionPickerComponent,
-		LuOptionPickerAdvancedComponent,
-	],
+	declarations: [LuOptionPickerComponent, LuOptionPickerAdvancedComponent],
 	exports: [
 		LuOptionPickerComponent,
 		LuOptionPickerAdvancedComponent,
 		LuOptionItemModule,
 	],
 })
-export class LuOptionPickerModule { }
+export class LuOptionPickerModule {}

@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
 	selector: 'lu-formly-field-qualification',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
-	templateUrl: './qualification.html'
+	templateUrl: './qualification.html',
 })
 export class LuFormlyFieldQualification extends FieldType {
 	override readonly formControl: FormControl;

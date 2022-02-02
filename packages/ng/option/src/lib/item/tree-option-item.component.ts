@@ -32,12 +32,17 @@ import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 		},
 	],
 })
-export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
+export class LuTreeOptionItemComponent<T = any>
+	extends ALuTreeOptionItem<T>
+	implements ILuTreeOptionItem<T>
+{
 	protected _children = [];
 	protected _tree: ILuTree<T>;
 	protected _displayer: ILuInputDisplayer<T>;
-	@ViewChild('value', { static: true, read: ViewContainerRef }) protected _valueVCR: ViewContainerRef;
-	@ViewChild('children', { static: true, read: ViewContainerRef }) protected _childrenVCR: ViewContainerRef;
+	@ViewChild('value', { static: true, read: ViewContainerRef })
+	protected _valueVCR: ViewContainerRef;
+	@ViewChild('children', { static: true, read: ViewContainerRef })
+	protected _childrenVCR: ViewContainerRef;
 	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
 
 	@Output() onSelect = new EventEmitter<this>();
@@ -58,13 +63,23 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 		this._renderValue(t.value);
 		this._renderChildren(t.children);
 	}
-	get value() { return this._tree.value; }
-	get children() { return this._children; }
-	set children(c) { this._children = c; }
-	get hasChildren() { return !!this.children && this.children.length > 0; }
+	get value() {
+		return this._tree.value;
+	}
+	get children() {
+		return this._children;
+	}
+	set children(c) {
+		this._children = c;
+	}
+	get hasChildren() {
+		return !!this.children && this.children.length > 0;
+	}
 
 	protected _selected = false;
-	get selected() { return this._selected; }
+	get selected() {
+		return this._selected;
+	}
 	@Input() set selected(s: boolean) {
 		if (s !== this._selected) {
 			this._selected = s;
@@ -72,7 +87,9 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 		}
 	}
 	protected _highlighted = false;
-	get highlighted() { return this._highlighted; }
+	get highlighted() {
+		return this._highlighted;
+	}
 	@Input() set highlighted(h: boolean) {
 		if (h !== this._highlighted) {
 			this._highlighted = h;
@@ -80,7 +97,9 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 		}
 	}
 
-	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
+	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(
+		displayer: ILuInputDisplayer<T>,
+	) {
 		this._displayer = displayer;
 	}
 
@@ -98,9 +117,11 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 		this._valueVCR.insert(evr);
 	}
 	private _renderChildren(children: ILuTree<T>[] = []) {
-		const factory = this._componentFactoryResolver.resolveComponentFactory(LuTreeOptionItemComponent);
+		const factory = this._componentFactoryResolver.resolveComponentFactory(
+			LuTreeOptionItemComponent,
+		);
 		this._childrenVCR.clear();
-		this.children = children.map(c => {
+		this.children = children.map((c) => {
 			const ref = this._childrenVCR.createComponent(factory);
 			ref.instance._displayer = this._displayer;
 			ref.instance.tree = c;

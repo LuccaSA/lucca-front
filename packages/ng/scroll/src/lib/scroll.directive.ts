@@ -1,4 +1,12 @@
-import { Directive, Output, HostListener, EventEmitter, ElementRef, OnInit, Input } from '@angular/core';
+import {
+	Directive,
+	Output,
+	HostListener,
+	EventEmitter,
+	ElementRef,
+	OnInit,
+	Input,
+} from '@angular/core';
 import { ILuScrollable } from './scroll.model';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -18,14 +26,16 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	@Output() onScrollLeft = new EventEmitter<Event>();
 	@Output() onScrollRight = new EventEmitter<Event>();
 	private scrollSubject = new Subject<Event>();
-	private scroll$ = this.scrollSubject.asObservable().pipe(debounceTime(this.debounceTime));
+	private scroll$ = this.scrollSubject
+		.asObservable()
+		.pipe(debounceTime(this.debounceTime));
 	@HostListener('scroll', ['$event'])
 	_scroll($event: Event) {
 		this.scrollSubject.next($event);
 	}
 
 	ngOnInit(): void {
-		this.scroll$.subscribe(scrollEvent => this.emitScrollEvents(scrollEvent));
+		this.scroll$.subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);
@@ -52,6 +62,5 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 			}
 		}
 	}
-	constructor(protected _elementRef: ElementRef) {
-	}
+	constructor(protected _elementRef: ElementRef) {}
 }

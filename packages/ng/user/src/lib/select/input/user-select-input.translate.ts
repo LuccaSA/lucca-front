@@ -12,15 +12,14 @@ export abstract class ALuUserSelectInputLabel {
 export const luUserSelectInputTranslations = {
 	en: {
 		users: 'users',
-		me: 'Me:'
+		me: 'Me:',
 	},
 	fr: {
 		users: 'utilisateurs',
-		me: 'Moi :'
+		me: 'Moi :',
 	},
 	es: {
 		users: 'empleados',
-		me: 'Yo :'
-	}
+		me: 'Yo :',
+	},
 } as ILuTranslation<ILuUserSelectInputLabel>;
-

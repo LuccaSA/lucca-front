@@ -16,11 +16,7 @@ import { LuDateInputModule } from '../input/index';
 		OverlayModule,
 		A11yModule,
 	],
-	exports: [
-		LuDatePickerComponent,
-	],
-	declarations: [
-		LuDatePickerComponent,
-	],
+	exports: [LuDatePickerComponent],
+	declarations: [LuDatePickerComponent],
 })
 export class LuDatePickerModule {}

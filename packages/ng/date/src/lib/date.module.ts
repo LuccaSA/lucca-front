@@ -19,6 +19,6 @@ import { LuDateSelectInputModule } from './select/index';
 		LuDateInputModule,
 		LuDateAdapterModule,
 		LuDateSelectInputModule,
-	]
+	],
 })
 export class LuDateModule {}

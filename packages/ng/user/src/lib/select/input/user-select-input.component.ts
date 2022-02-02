@@ -21,8 +21,8 @@ import { ILuUserSelectInputLabel } from './user-select-input.translate';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 
 /**
-* Displays user'picture or a placeholder with his/her initials and random bg color'
-*/
+ * Displays user'picture or a placeholder with his/her initials and random bg color'
+ */
 @Component({
 	selector: 'lu-user-select',
 	templateUrl: './user-select-input.component.html',
@@ -36,13 +36,17 @@ import { LuOptionComparer } from '@lucca-front/ng/option';
 		},
 	],
 })
-export class LuUserSelectInputComponent<U extends import ('../../user.model').ILuUser = import ('../../user.model').ILuUser>
-extends ALuSelectInputComponent<U>
-implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
-
+export class LuUserSelectInputComponent<
+		U extends import('../../user.model').ILuUser = import('../../user.model').ILuUser,
+	>
+	extends ALuSelectInputComponent<U>
+	implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit
+{
 	searchFormat = LuDisplayFullname.lastfirst;
 
-	@Input('placeholder') override set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input('placeholder') override set inputPlaceholder(p: string) {
+		this._placeholder = p;
+	}
 
 	@Input() fields: string;
 	@Input() filters: string[];
@@ -53,7 +57,8 @@ implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit {
 
 	clue = '';
 
-	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
+	byId: LuOptionComparer<U> = (option1: U, option2: U) =>
+		option1 && option2 && option1.id === option2.id;
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

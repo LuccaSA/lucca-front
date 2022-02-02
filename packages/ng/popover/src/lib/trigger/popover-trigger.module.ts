@@ -12,11 +12,7 @@ import { LuPopoverTargetModule } from '../target/index';
 		LuPopoverPanelModule,
 		LuPopoverTargetModule,
 	],
-	declarations: [
-		LuPopoverTriggerDirective,
-	],
-	exports: [
-		LuPopoverTriggerDirective,
-	],
+	declarations: [LuPopoverTriggerDirective],
+	exports: [LuPopoverTriggerDirective],
 })
 export class LuPopoverTriggerModule {}

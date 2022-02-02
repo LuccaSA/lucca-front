@@ -5,7 +5,7 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
 	selector: 'lu-formly-field-establishment',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
-	templateUrl: './establishment.html'
+	templateUrl: './establishment.html',
 })
 export class LuFormlyFieldEstablishment extends FieldType {
 	override readonly formControl: FormControl;

@@ -1,8 +1,28 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { ALuOptionOperator, ALuOptionSelector, ILuOptionSelectAllLabel, LuOptionSelectAllComponent, LuOptionSelectAllIntl } from '@lucca-front/ng/option';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	forwardRef,
+	Inject,
+	Input,
+	OnDestroy,
+	Optional,
+	Self,
+	SkipSelf,
+} from '@angular/core';
+import {
+	ALuOptionOperator,
+	ALuOptionSelector,
+	ILuOptionSelectAllLabel,
+	LuOptionSelectAllComponent,
+	LuOptionSelectAllIntl,
+} from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
-import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
+import {
+	ALuEstablishmentService,
+	LuEstablishmentService,
+} from '../../service/index';
 
 @Component({
 	selector: 'lu-establishment-select-all',
@@ -28,11 +48,17 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 })
 export class LuEstablishmentSelectAllComponent
 	extends LuOptionSelectAllComponent<ILuEstablishment>
-	implements OnDestroy {
-
-	@Input() set filters(filters: string[]) { this._service.filters = filters; }
-	@Input() set appInstanceId(appInstanceId: number) { this._service.appInstanceId = appInstanceId; }
-	@Input() set operations(operations: number[]) { this._service.operations = operations; }
+	implements OnDestroy
+{
+	@Input() set filters(filters: string[]) {
+		this._service.filters = filters;
+	}
+	@Input() set appInstanceId(appInstanceId: number) {
+		this._service.appInstanceId = appInstanceId;
+	}
+	@Input() set operations(operations: number[]) {
+		this._service.operations = operations;
+	}
 
 	loading = false;
 	private _service: LuEstablishmentService;
@@ -40,9 +66,15 @@ export class LuEstablishmentSelectAllComponent
 
 	constructor(
 		private readonly _changeDetectorRef: ChangeDetectorRef,
-		@Inject(LuOptionSelectAllIntl) public override intl: ILuOptionSelectAllLabel,
-		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostService: ALuEstablishmentService,
-		@Inject(ALuEstablishmentService) @Self() selfService: LuEstablishmentService,
+		@Inject(LuOptionSelectAllIntl)
+		public override intl: ILuOptionSelectAllLabel,
+		@Inject(ALuEstablishmentService)
+		@Optional()
+		@SkipSelf()
+		hostService: ALuEstablishmentService,
+		@Inject(ALuEstablishmentService)
+		@Self()
+		selfService: LuEstablishmentService,
 	) {
 		super(intl);
 		this._service = (hostService || selfService) as LuEstablishmentService;
@@ -51,14 +83,15 @@ export class LuEstablishmentSelectAllComponent
 	override selectAll() {
 		this.loading = true;
 		const sub = this._service.getAll().subscribe(
-			establishments => {
+			(establishments) => {
 				this.onSelectValue.next([...establishments]);
 			},
-			() => { },
+			() => {},
 			() => {
 				this.loading = false;
 				this._changeDetectorRef.detectChanges();
-			});
+			},
+		);
 		this._subs.add(sub);
 	}
 

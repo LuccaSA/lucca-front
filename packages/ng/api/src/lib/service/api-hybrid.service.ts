@@ -7,12 +7,16 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
+export class LuApiHybridService<
+	T extends ILuApiItem = ILuApiItem,
+> extends ALuApiService<T> {
 	private _v3Service: LuApiV3Service<T>;
 	private _v4Service: LuApiV4Service<T>;
 
 	private _standard = 'v3';
-	set standard(std: string) { this._standard = std; }
+	set standard(std: string) {
+		this._standard = std;
+	}
 
 	// both
 	set api(api: string) {
@@ -25,8 +29,12 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 	}
 
 	// api v3 only
-	set fields(fields: string) { this._v3Service.fields = fields; }
-	set orderBy(orderBy: string) { this._v3Service.orderBy = orderBy; }
+	set fields(fields: string) {
+		this._v3Service.fields = fields;
+	}
+	set orderBy(orderBy: string) {
+		this._v3Service.orderBy = orderBy;
+	}
 
 	// api v4 only
 	set sort(sort: string) {
@@ -34,7 +42,7 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 	}
 
 	private get _service(): ALuApiService<T> {
-		switch(this._standard) {
+		switch (this._standard) {
 			case 'v4':
 				return this._v4Service;
 			case 'v3':
@@ -43,9 +51,7 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 		}
 	}
 
-	constructor(
-		private _http: HttpClient,
-	) {
+	constructor(private _http: HttpClient) {
 		super();
 		this._v3Service = new LuApiV3Service(this._http);
 		this._v4Service = new LuApiV4Service(this._http);
@@ -63,7 +69,11 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 		return this._service.searchAll(clue, filters);
 	}
 
-	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
+	searchPaged(
+		clue: string,
+		page: number,
+		filters: string[] = [],
+	): Observable<T[]> {
 		return this._service.searchPaged(clue, page, filters);
 	}
 }

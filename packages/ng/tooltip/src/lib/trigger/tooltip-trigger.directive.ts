@@ -12,31 +12,43 @@ import {
 	EventEmitter,
 	HostBinding,
 } from '@angular/core';
-	import { Overlay } from '@angular/cdk/overlay';
-	import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
-	import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
+import { Overlay } from '@angular/cdk/overlay';
+import {
+	ALuPopoverTrigger,
+	LuPopoverPosition,
+	LuPopoverTarget,
+} from '@lucca-front/ng/popover';
+import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
 	selector: '[luTooltip]',
 })
-export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-
+export class LuTooltipTriggerDirective
+	extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget>
+	implements AfterViewInit, OnDestroy
+{
 	@Input('luTooltip') set tooltipContent(c) {
 		this.panel.content = c;
 	}
 	/** when trigger = hover, delay before the popover panel appears, default 300ms */
-	@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) { this.enterDelay = d; }
+	@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) {
+		this.enterDelay = d;
+	}
 	/** when trigger = hover, delay before the popover panel disappears, default 100ms */
-	@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) { this.leaveDelay = d; }
+	@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) {
+		this.leaveDelay = d;
+	}
 	/** disable popover apparition */
 	@Input('luTooltipDisabled') set inputDisabled(d: boolean) {
 		this.disabled = d;
 		if (this._handleTabindex) {
-			this._setTabindex(d? null : 0);
+			this._setTabindex(d ? null : 0);
 		}
 	}
 
-	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) { this.target.position = pos; }
+	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) {
+		this.target.position = pos;
+	}
 
 	/** Event emitted when the associated popover is opened. */
 	@Output('luTooltipOnOpen') onOpen = new EventEmitter<void>();
@@ -66,9 +78,13 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	// }
 
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.id') get _attrId() { return this._triggerId; }
+	@HostBinding('attr.id') get _attrId() {
+		return this._triggerId;
+	}
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-describedby') get _attrAriaDescribedBy() { return this._panelId; }
+	@HostBinding('attr.aria-describedby') get _attrAriaDescribedBy() {
+		return this._panelId;
+	}
 
 	constructor(
 		protected override _overlay: Overlay,
@@ -80,19 +96,22 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
-		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
+		this._triggerId =
+			this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.triggerEvent = 'hover';
 		this.target.position = 'above';
 		this.enterDelay = 300;
 		this.leaveDelay = 100;
 
-		const factory = componentFactoryResolver.resolveComponentFactory(LuTooltipPanelComponent);
+		const factory = componentFactoryResolver.resolveComponentFactory(
+			LuTooltipPanelComponent,
+		);
 		this.panel = factory.create(injector).instance;
 
 		this._handleTabindex = this._shouldHandleTabindex();
 
 		if (this._handleTabindex) {
-			this._setTabindex(0)
+			this._setTabindex(0);
 		}
 	}
 
@@ -117,10 +136,17 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		const tag = this._elementRef.nativeElement.tagName?.toLowerCase();
 		// https://allyjs.io/data-tables/focusable.html
 		// i'm choosing to not support area and iframe, dont @ me
-		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
-		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag)
+		const nativelyFocusableTags = [
+			'a',
+			'button',
+			'input',
+			'select',
+			'textarea',
+		];
+		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
 
-		const hasATabIndex = this._elementRef.nativeElement.getAttribute('tabindex') !== null;
+		const hasATabIndex =
+			this._elementRef.nativeElement.getAttribute('tabindex') !== null;
 
 		return !isNatevelyFocusableTag && !hasATabIndex;
 	}

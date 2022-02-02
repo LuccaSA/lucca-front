@@ -30,6 +30,12 @@
 				"@delagen/deprecation"
 			],
 			"rules": {
+				"prettier/prettier": [
+					"error",
+					{
+						"endOfLine": "auto"
+					}
+				],
 				// OUR RULES
 				"@typescript-eslint/naming-convention": [
 					"error",
@@ -133,7 +139,14 @@
 				"plugin:@angular-eslint/template/recommended",
 				"plugin:prettier/recommended"
 			],
-			"rules": {}
+			"rules": {
+				"prettier/prettier": [
+					"error",
+					{
+						"endOfLine": "auto"
+					}
+				]
+			}
 		},
 		{
 			"files": [

@@ -1,5 +1,14 @@
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
+import {
+	Component,
+	ChangeDetectionStrategy,
+	forwardRef,
+	Output,
+	EventEmitter,
+	TemplateRef,
+	ViewChild,
+	Input,
+} from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
@@ -15,9 +24,8 @@ import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 			provide: ALuPickerPanel,
 			useExisting: forwardRef(() => LuDatePickerComponent),
 		},
-	]
+	],
 })
-
 export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_value: D;
 
@@ -35,10 +43,8 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	set vcTemplateRef(tr: TemplateRef<any>) {
 		this.templateRef = tr;
 	}
-	
-	constructor(
-		private _adapter: ALuDateAdapter<D>,
-	) {
+
+	constructor(private _adapter: ALuDateAdapter<D>) {
 		super();
 	}
 	_emitOpenEvent(): void {
@@ -60,7 +66,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 		this._value = val;
 		this._emitSelectValue(val);
 		// if (!this.multiple) {
-			this._emitCloseEvent();
+		this._emitCloseEvent();
 		// }
 	}
 	_onInput(val: D) {

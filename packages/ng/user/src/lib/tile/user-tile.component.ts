@@ -1,12 +1,16 @@
-import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { ILuUser } from '../user.model';
 import {
-	LuUserDisplayPipe,
-	LuDisplayInitials,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	Input,
+} from '@angular/core';
+import {
+	LuDisplayFormat,
 	LuDisplayFullname,
 	LuDisplayHybrid,
-	LuDisplayFormat,
+	LuDisplayInitials,
 } from '../display/index';
+import { ILuUser } from '../user.model';
 
 /**
  * Displays user picture and name. ILuUser's role can be specified, and the footer is customizable.
@@ -18,7 +22,6 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserTileComponent {
-
 	private _user: ILuUser;
 	/**
 	 * ILuUser to display.
@@ -76,7 +79,5 @@ export class LuUserTileComponent {
 		}
 	}
 
-	constructor(
-		private _changeDetector: ChangeDetectorRef
-	) {}
+	constructor(private _changeDetector: ChangeDetectorRef) {}
 }

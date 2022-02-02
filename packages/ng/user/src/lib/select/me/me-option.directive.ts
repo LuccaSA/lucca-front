@@ -1,4 +1,15 @@
-import { Directive, forwardRef, Inject, Optional, SkipSelf, Self, ViewContainerRef, TemplateRef, Input, EmbeddedViewRef } from '@angular/core';
+import {
+	Directive,
+	forwardRef,
+	Inject,
+	Optional,
+	SkipSelf,
+	Self,
+	ViewContainerRef,
+	TemplateRef,
+	Input,
+	EmbeddedViewRef,
+} from '@angular/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuUser } from '../../user.model';
@@ -26,23 +37,34 @@ import { map } from 'rxjs/operators';
 		},
 	],
 })
-export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILuOptionOperator<U> {
-	@Input() set luUserMeOptionFields(fields: string) { this._service.fields = fields; }
-	@Input() set luUserMeOptionFilters(filters: string[]) { this._service.filters = filters; }
-	@Input() set luUserMeOptionOrderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	@Input() set luUserMeOptionAppInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
-	@Input() set luUserMeOptionOperations(operations: number[]) { this._service.operations = operations; }
-	@Input() set luUserMeOptionClue(clue: string) { clue ? this.hideMe() : this.displayMe(); }
+export class LuUserMeOptionDirective<U extends ILuUser = ILuUser>
+	implements ILuOptionOperator<U>
+{
+	@Input() set luUserMeOptionFields(fields: string) {
+		this._service.fields = fields;
+	}
+	@Input() set luUserMeOptionFilters(filters: string[]) {
+		this._service.filters = filters;
+	}
+	@Input() set luUserMeOptionOrderBy(orderBy: string) {
+		this._service.orderBy = orderBy;
+	}
+	@Input() set luUserMeOptionAppInstanceId(appInstanceId: number | string) {
+		this._service.appInstanceId = appInstanceId;
+	}
+	@Input() set luUserMeOptionOperations(operations: number[]) {
+		this._service.operations = operations;
+	}
+	@Input() set luUserMeOptionClue(clue: string) {
+		clue ? this.hideMe() : this.displayMe();
+	}
 
 	set inOptions$(in$: Observable<U[]>) {
-		this.outOptions$ = combineLatest([in$, this.meDisplayed$])
-			.pipe(
-				map(
-					([options, meDisplayed]) => meDisplayed
-						? options?.filter(o => o.id !== this.me?.id)
-						: options
-				),
-			);
+		this.outOptions$ = combineLatest([in$, this.meDisplayed$]).pipe(
+			map(([options, meDisplayed]) =>
+				meDisplayed ? options?.filter((o) => o.id !== this.me?.id) : options,
+			),
+		);
 	}
 	outOptions$: Observable<U[]>;
 
@@ -61,7 +83,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	me: ILuUser = undefined;
 	private meDisplayed$ = new BehaviorSubject(false);
 	onOpen() {
-		this._service.getMe().subscribe(me => {
+		this._service.getMe().subscribe((me) => {
 			this.me = me;
 			this.displayMe();
 		});
@@ -69,7 +91,9 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	displayMe() {
 		if (this.me && !this.meDisplayed$.value) {
 			this.meDisplayed$.next(true);
-			this._viewRef = this._vcr.createEmbeddedView(this._templateRef, { $implicit: this.me });
+			this._viewRef = this._vcr.createEmbeddedView(this._templateRef, {
+				$implicit: this.me,
+			});
 		}
 	}
 	hideMe() {

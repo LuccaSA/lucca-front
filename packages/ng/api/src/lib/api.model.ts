@@ -9,4 +9,5 @@ export interface ILuApiItem<TId = number> {
 export interface ILuApiResponse<D = any> {
 	data: D;
 }
-export interface ILuApiCollectionResponse<T extends ILuApiItem = ILuApiItem> extends ILuApiResponse<{ items: T[] }> {}
+export type ILuApiCollectionResponse<T extends ILuApiItem = ILuApiItem> =
+	ILuApiResponse<{ items: T[] }>;

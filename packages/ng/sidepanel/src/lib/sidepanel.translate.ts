@@ -21,5 +21,5 @@ export const luSidepanelTranslations = {
 	es: {
 		submit: 'Ok',
 		cancel: 'Cancelar',
-	}
+	},
 } as ILuTranslation<ILuSidepanelLabel>;

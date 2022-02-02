@@ -15,15 +15,14 @@ import { luUserSearcherTranslations } from './user-searcher.translate';
 		CommonModule,
 		LuOptionPlaceholderModule,
 	],
-	declarations: [
-		LuUserPagedSearcherComponent,
-	],
-	exports: [
-		LuUserPagedSearcherComponent,
-	],
+	declarations: [LuUserPagedSearcherComponent],
+	exports: [LuUserPagedSearcherComponent],
 	providers: [
 		LuUserSearcherIntl,
-		{ provide: LU_USER_SEARCHER_TRANSLATIONS, useValue: luUserSearcherTranslations },
+		{
+			provide: LU_USER_SEARCHER_TRANSLATIONS,
+			useValue: luUserSearcherTranslations,
+		},
 	],
 })
 export class LuUserSearcherModule {}

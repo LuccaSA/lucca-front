@@ -11,4 +11,3 @@ export function throwLuPopoverMissingPanelError() {
 export function throwLuPopoverMissingTargetError() {
 	throw Error(`lu-popover-trigger: must pass in a popover target instance.`);
 }
-

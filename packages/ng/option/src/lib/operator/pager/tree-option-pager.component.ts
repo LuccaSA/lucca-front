@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import {
+	ILuOnScrollBottomSubscriber,
+	ALuOnScrollBottomSubscriber,
+} from '@lucca-front/ng/core';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
+import {
+	ALuTreeOptionOperator,
+	ILuTreeOptionOperator,
+} from '../tree-option-operator.model';
 import { ILuTree } from '@lucca-front/ng/core';
 const MAGIC_STEP = 10;
 @Component({
@@ -22,16 +28,15 @@ const MAGIC_STEP = 10;
 		},
 	],
 })
-export class LuTreeOptionPagerComponent<T = any> extends ALuTreeOptionOperator<T> implements ILuTreeOptionOperator<T>, ILuOnScrollBottomSubscriber {
+export class LuTreeOptionPagerComponent<T = any>
+	extends ALuTreeOptionOperator<T>
+	implements ILuTreeOptionOperator<T>, ILuOnScrollBottomSubscriber
+{
 	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
-		this.outOptions$ = combineLatest(
-			in$,
-			this.paging$,
-			(options, paging) => {
-				return this.trim(options, paging);
-			}
-		);
+		this.outOptions$ = combineLatest(in$, this.paging$, (options, paging) => {
+			return this.trim(options, paging);
+		});
 	}
 	paging$ = new BehaviorSubject<number>(MAGIC_STEP);
 	next() {
@@ -47,14 +52,18 @@ export class LuTreeOptionPagerComponent<T = any> extends ALuTreeOptionOperator<T
 		return this.filter(trees, flatTrimmed);
 	}
 	flatten(trees: ILuTree<T>[] = []): T[] {
-		return trees.map(t => [t.value, ...this.flatten(t.children)]).reduce((a, v) => [...a, ...v], []);
+		return trees
+			.map((t) => [t.value, ...this.flatten(t.children)])
+			.reduce((a, v) => [...a, ...v], []);
 	}
 	filter(trees: ILuTree<T>[] = [], values: T[]): ILuTree<T>[] {
-		return trees.map(t => {
-			if (!values.some(v => v === t.value)) {
-				return undefined;
-			}
-			return { ...t, children: this.filter(t.children, values) }
-		}).filter(t => !!t);
+		return trees
+			.map((t) => {
+				if (!values.some((v) => v === t.value)) {
+					return undefined;
+				}
+				return { ...t, children: this.filter(t.children, values) };
+			})
+			.filter((t) => !!t);
 	}
 }
