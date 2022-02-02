@@ -5,16 +5,16 @@ import {
 	HostBinding,
 	Inject,
 } from '@angular/core';
+import { ILuTree } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { ALuTreeOptionOperator } from '../../operator/index';
 import {
 	ALuTreeOptionSelector,
 	ILuTreeOptionSelector,
 } from '../tree-option-selector.model';
-import { tap } from 'rxjs/operators';
-import { ALuTreeOptionOperator } from '../../operator/index';
-import { ILuOptionSelectAllLabel } from './select-all.translate';
 import { LuOptionSelectAllIntl } from './select-all.intl';
-import { ILuTree } from '@lucca-front/ng/core';
+import { ILuOptionSelectAllLabel } from './select-all.translate';
 @Component({
 	selector: 'lu-tree-option-select-all',
 	templateUrl: './select-all.component.html',
@@ -33,7 +33,7 @@ import { ILuTree } from '@lucca-front/ng/core';
 		},
 	],
 })
-export class LuTreeOptionSelectAllComponent<T = any>
+export class LuTreeOptionSelectAllComponent<T>
 	extends ALuTreeOptionOperator<T>
 	implements ILuTreeOptionSelector<T>
 {
