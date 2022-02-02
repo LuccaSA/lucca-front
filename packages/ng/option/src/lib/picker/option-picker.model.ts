@@ -1,15 +1,14 @@
-import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { merge, Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ILuOptionItem } from '../item/option-item.model';
 
-export type ILuOptionPickerPanel<T = any> = ILuPickerPanel<T>;
+export type ILuOptionPickerPanel<T> = ILuPickerPanel<T>;
 
 export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 
 export abstract class ALuOptionPicker<
-		T = any,
+		T,
 		O extends ILuOptionItem<T> = ILuOptionItem<T>,
 	>
 	extends ALuPickerPanel<T>
@@ -30,7 +29,7 @@ export abstract class ALuOptionPicker<
 		this.__options$ = options$;
 		// reapply selected when the options change
 		this._subs.add(
-			options$.subscribe((o) => {
+			options$.subscribe(() => {
 				this._applySelected();
 				this._applyHighlight();
 			}),
@@ -49,7 +48,7 @@ export abstract class ALuOptionPicker<
 			this._select(value);
 		} else {
 			const values = <T[]>this._value || [];
-			let newValues;
+			let newValues: T[];
 			if (values.some((v) => this.optionComparer(v, value))) {
 				// value was present, we remove it
 				newValues = values.filter((v) => !this.optionComparer(v, value));
@@ -73,13 +72,13 @@ export abstract class ALuOptionPicker<
 		this._subs.unsubscribe();
 	}
 	override _handleKeydown(event: KeyboardEvent) {
-		switch (event.keyCode) {
-			case ESCAPE:
+		switch (event.key) {
+			case 'Escape':
 				this._emitCloseEvent();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case TAB:
+			case 'Tab':
 				this._emitCloseEvent();
 				break;
 		}

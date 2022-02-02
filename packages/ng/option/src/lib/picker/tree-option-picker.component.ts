@@ -45,7 +45,7 @@ export abstract class ALuTreeOptionPickerComponent<
 	optionsQLVR: QueryList<ViewContainerRef>;
 	protected override set _options$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change
-		this._subs.add(optionItems$.subscribe((o) => this._applySelected()));
+		this._subs.add(optionItems$.subscribe(() => this._applySelected()));
 		// subscribe to any option.onSelect
 		const singleFlowSelect$ = optionItems$.pipe(
 			switchMap((items) => merge(...items.map((i) => i.onSelect))),
@@ -85,7 +85,6 @@ export abstract class ALuTreeOptionPickerComponent<
 				return this._toggleSelf(option);
 			case ToggleMode.children:
 				return this._toggleChildren(option);
-			case ToggleMode.self:
 			default:
 				return this._toggleAll(option);
 		}
@@ -98,7 +97,7 @@ export abstract class ALuTreeOptionPickerComponent<
 		}
 		const allChildren = option.allChildren.map((i) => i.value);
 		const values = <T[]>this._value || [];
-		let newValues;
+		let newValues: T[];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
 		const allChildrenSelected = allChildren.every((child) =>
 			values.some((v) => this.optionComparer(v, child)),
@@ -192,7 +191,6 @@ export abstract class ALuTreeOptionPickerComponent<
 @Component({
 	selector: 'lu-tree-option-picker',
 	templateUrl: './tree-option-picker.component.html',
-	styleUrls: ['./tree-option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuTreeOptionPicker',

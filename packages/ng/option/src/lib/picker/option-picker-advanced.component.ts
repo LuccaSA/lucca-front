@@ -1,38 +1,30 @@
+import { DOCUMENT } from '@angular/common';
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ContentChildren,
-	QueryList,
-	forwardRef,
-	ChangeDetectorRef,
-	AfterViewInit,
 	Directive,
+	forwardRef,
 	Inject,
+	QueryList,
 } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { Observable, merge } from 'rxjs';
 import {
-	first,
-	mapTo,
-	startWith,
-	shareReplay,
-	delay,
-	mergeAll,
-} from 'rxjs/operators';
-
-import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
-import {
-	ALuOnOpenSubscriber,
 	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
 	ALuOnScrollBottomSubscriber,
-	ILuOnOpenSubscriber,
 	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
 	ILuOnScrollBottomSubscriber,
 } from '@lucca-front/ng/core';
-import { ALuOptionPickerComponent } from './option-picker.component';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, Observable } from 'rxjs';
+import { first, mapTo, mergeAll, shareReplay, startWith } from 'rxjs/operators';
+import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
-import { DOCUMENT } from '@angular/common';
+import { ALuOptionPickerComponent } from './option-picker.component';
 
 @Directive()
 export abstract class ALuOptionPickerAdvancedComponent<
@@ -44,25 +36,25 @@ export abstract class ALuOptionPickerAdvancedComponent<
 {
 	loading$: Observable<boolean>;
 
-	protected _operators = [];
+	protected _operators: ILuOptionOperator[] = [];
 	protected _operatorsQL: QueryList<ILuOptionOperator<T>>;
 	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(
 		ql: QueryList<ILuOptionOperator<T>>,
 	) {
 		this._operatorsQL = ql;
 	}
-	protected _onOpenSubscribers = [];
+	protected _onOpenSubscribers: ILuOnOpenSubscriber[] = [];
 	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(
 		ql: QueryList<ILuOnOpenSubscriber>,
 	) {
 		this._onOpenSubscribers = ql.toArray();
 	}
-	protected _onCloseSubscribers = [];
+	protected _onCloseSubscribers: ILuOnCloseSubscriber[] = [];
 	@ContentChildren(ALuOnCloseSubscriber, { descendants: true })
 	set onCloseSubsQL(ql: QueryList<ILuOnCloseSubscriber>) {
 		this._onCloseSubscribers = ql.toArray();
 	}
-	protected _onScrollBottomSubscribers = [];
+	protected _onScrollBottomSubscribers: ILuOnScrollBottomSubscriber[] = [];
 	@ContentChildren(ALuOnScrollBottomSubscriber, { descendants: true })
 	set onScrollBottomSubsQL(ql: QueryList<ILuOnScrollBottomSubscriber>) {
 		this._onScrollBottomSubscribers = ql.toArray();
@@ -82,15 +74,17 @@ export abstract class ALuOptionPickerAdvancedComponent<
 		super(_changeDetectorRef, document);
 	}
 	onScrollBottom() {
-		this._onScrollBottomSubscribers.forEach((o) => {
-			if (!o.onScrollBottom) {
-				return;
-			}
-			o.onScrollBottom();
-		});
+		this._onScrollBottomSubscribers.forEach(
+			(o: ILuOnScrollBottomSubscriber) => {
+				if (!o.onScrollBottom) {
+					return;
+				}
+				o.onScrollBottom();
+			},
+		);
 	}
 	override onOpen() {
-		this._onOpenSubscribers.forEach((o) => {
+		this._onOpenSubscribers.forEach((o: ILuOnOpenSubscriber) => {
 			o.onOpen();
 		});
 		const operators = this._operators || [];
@@ -106,7 +100,7 @@ export abstract class ALuOptionPickerAdvancedComponent<
 		super.onOpen();
 	}
 	override onClose() {
-		this._onCloseSubscribers.forEach((o) => {
+		this._onCloseSubscribers.forEach((o: ILuOnCloseSubscriber) => {
 			o.onClose();
 		});
 		super.onClose();
@@ -125,6 +119,8 @@ export abstract class ALuOptionPickerAdvancedComponent<
 		});
 	}
 	protected initSelectors() {
+		// TODO : FIX changes type
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const selectors$: Observable<ILuOptionSelector<T>[]> =
 			this._selectorsQL.changes.pipe(startWith(this._selectorsQL.toArray()));
 		this._subs.add(
@@ -153,7 +149,6 @@ export abstract class ALuOptionPickerAdvancedComponent<
 @Component({
 	selector: 'lu-option-picker-advanced',
 	templateUrl: './option-picker-advanced.component.html',
-	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPickerAdvanced',
@@ -165,7 +160,7 @@ export abstract class ALuOptionPickerAdvancedComponent<
 	],
 })
 export class LuOptionPickerAdvancedComponent<
-	T = any,
+	T,
 	O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>,
 > extends ALuOptionPickerAdvancedComponent<T, O> {
 	constructor(
