@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { LuOptionPlaceholderIntl } from './option-placeholder.intl';
 import { ILuOptionPlaceholderLabel } from './option-placeholder.translate';
 
@@ -8,6 +8,7 @@ import { ILuOptionPlaceholderLabel } from './option-placeholder.translate';
 	styleUrls: ['./option-placeholder.component.scss'],
 })
 export class LuOptionPlaceholderComponent {
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onClear = new EventEmitter();
 
 	constructor(
