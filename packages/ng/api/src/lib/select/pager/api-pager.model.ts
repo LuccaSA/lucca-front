@@ -3,23 +3,22 @@ import {
 	ILuOnScrollBottomSubscriber,
 } from '@lucca-front/ng/core';
 import { ILuOptionOperator } from '@lucca-front/ng/option';
-import { ILuApiItem } from '../../api.model';
-import { Observable, of, merge, Subject } from 'rxjs';
+import { merge, Observable, of, Subject } from 'rxjs';
 import {
-	switchMap,
 	catchError,
-	mapTo,
-	tap,
-	map,
 	distinctUntilChanged,
+	map,
+	mapTo,
+	switchMap,
+	tap,
 } from 'rxjs/operators';
+import { ILuApiItem } from '../../api.model';
 import { ILuApiService } from '../../service/index';
 
 enum Strategy {
 	append,
 	replace,
 }
-const MAGIC_PAGE_SIZE = 20;
 export type ILuApiOptionPager<T extends ILuApiItem = ILuApiItem> =
 	ILuOptionOperator<T>;
 export interface ILuApiPagerService<T extends ILuApiItem = ILuApiItem> {
@@ -68,7 +67,7 @@ export abstract class ALuApiOptionPager<
 				tap((p) => (this._page = p)),
 				switchMap((page) => {
 					if (page === undefined) {
-						return of({ items: [], strategy: Strategy.replace });
+						return of({ items: [] as T[], strategy: Strategy.replace });
 					}
 					return this._service.getPaged(page).pipe(
 						map((items) => ({
@@ -77,7 +76,7 @@ export abstract class ALuApiOptionPager<
 						})),
 					);
 				}),
-				catchError((err) => of({ items: [], strategy: Strategy.replace })),
+				catchError(() => of({ items: [] as T[], strategy: Strategy.replace })),
 				tap((results) => {
 					if (results.strategy === Strategy.replace) {
 						this._options = [...results.items];

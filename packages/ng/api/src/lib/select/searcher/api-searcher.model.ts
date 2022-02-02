@@ -49,7 +49,7 @@ export abstract class ALuApiOptionSearcher<
 		// this._clue$ = clue$.pipe(share());
 		const results$ = this._clue$.pipe(
 			switchMap((clue) => this._service.searchAll(clue)),
-			catchError((err) => of([])),
+			catchError(() => of([])),
 			share(),
 		);
 
