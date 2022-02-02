@@ -52,14 +52,14 @@ export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuP
 
 // tslint:disable-next-line: max-line-length
 export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> implements ILuPopoverTrigger<TPanel, TTarget> {
-	protected _portal: TemplatePortal<any> | ComponentPortal<any>;
+	protected _portal: TemplatePortal<unknown> | ComponentPortal<unknown>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
 	// protected _halt = false;
 	protected _backdropSubscription: Subscription;
 	protected _positionSubscription: Subscription;
 
-	protected _mouseoverTimer: any;
+	protected _mouseoverTimer: unknown;
 
 	protected _hovered$ = new Subject();
 	protected _hoveredSubscription: Subscription;
