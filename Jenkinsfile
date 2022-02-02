@@ -48,7 +48,7 @@ node(label: CI.getSelectedNode(script:this)) {
 					// it must break no test
 					bat "npm run jenkins-test"
 					// it must be lint compliant
-					// bat "npm run lint"
+					bat "npm run lint"
 				}
 			}
 

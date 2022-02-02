@@ -31,7 +31,8 @@
 		"jenkins-test": "jest --no-cache --runInBand",
 		"test": "jest --maxWorkers=4 --isolatedModules=true --detectOpenHandles --watchAll",
 		"compodoc": "compodoc -p ./tsconfig.doc.json -e json -d .storybook",
-		"build-storybook": "ng run storybook:build"
+		"build-storybook": "ng run storybook:build",
+		"lint": "ng lint"
 	},
 	"dependencies": {
 		"@angular/animations": "13.0.2",
