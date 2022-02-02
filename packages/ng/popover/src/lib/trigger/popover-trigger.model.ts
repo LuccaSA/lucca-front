@@ -134,7 +134,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	protected abstract _emitOpen(): void;
 	protected abstract _emitClose(): void;
 
-	constructor(protected _overlay: Overlay, protected _elementRef: ElementRef, protected _viewContainerRef: ViewContainerRef) {
+	constructor(protected _overlay: Overlay, protected _elementRef: ElementRef<HTMLElement>, protected _viewContainerRef: ViewContainerRef) {
 		this._triggerId = `popoverTrigger_${generateId()}`;
 		this._panelId = `popoverPanel_${generateId()}`;
 	}

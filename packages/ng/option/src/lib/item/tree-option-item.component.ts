@@ -1,23 +1,24 @@
+/* eslint-disable @angular-eslint/no-output-on-prefix */
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
-	Output,
-	Input,
+	ComponentFactoryResolver,
+	ContentChild,
+	ElementRef,
 	EventEmitter,
 	forwardRef,
-	ElementRef,
-	ViewChild,
-	ContentChild,
-	ViewContainerRef,
-	ComponentFactoryResolver,
 	Inject,
-	ChangeDetectorRef,
+	Input,
+	Output,
+	ViewChild,
+	ViewContainerRef,
 } from '@angular/core';
-import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { ILuTree } from '@lucca-front/ng/core';
-import { ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
-import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
+import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { LuTreeOptionItemIntl } from './tree-option-item.intl';
+import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
+import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -32,7 +33,7 @@ import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 		},
 	],
 })
-export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
+export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
 	protected _children = [];
 	protected _tree: ILuTree<T>;
 	protected _displayer: ILuInputDisplayer<T>;
@@ -98,7 +99,11 @@ export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> imp
 		this._displayer = displayer;
 	}
 
-	constructor(private _componentFactoryResolver: ComponentFactoryResolver, @Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
+	constructor(
+		private _componentFactoryResolver: ComponentFactoryResolver,
+		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
+		private _cdr: ChangeDetectorRef,
+	) {
 		super();
 	}
 

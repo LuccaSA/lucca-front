@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
 import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
 import { ILuPopoverPanel } from '../panel/index';
@@ -33,9 +32,11 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	}
 
 	/** Event emitted when the associated popover is opened. */
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output('luPopoverOnOpen') onOpen = new EventEmitter<void>();
 
 	/** Event emitted when the associated popover is closed. */
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output('luPopoverOnClose') onClose = new EventEmitter<void>();
 
 	/** how you want to position the panel relative to the target, allowed values: above, below, before, after */

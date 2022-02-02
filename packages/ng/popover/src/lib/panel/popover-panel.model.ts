@@ -1,4 +1,3 @@
-import { ESCAPE } from '@angular/cdk/keycodes';
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -76,7 +75,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		this._templateRef = tr;
 	}
 
-	protected _positionClassesMap: any = {};
+	protected _positionClassesMap: Record<string, boolean> = {};
 	protected _panelClasses = '';
 	get panelClasses() {
 		return this._panelClasses;
@@ -84,11 +83,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	set panelClasses(cl: string) {
 		this._panelClasses = cl;
 	}
-	get panelClassesMap() {
-		const map = this._panelClasses
+	get panelClassesMap(): Record<string, boolean> {
+		const map: Record<string, boolean> = this._panelClasses
 			.split(' ')
 			.filter((c) => !!c)
-			.reduce((obj: any, className: string) => {
+			.reduce((obj: Record<string, boolean>, className: string) => {
 				obj[className] = true;
 				return obj;
 			}, {});
@@ -104,7 +103,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		this._contentClasses = cl;
 	}
 	get contentClassesMap() {
-		return this._contentClasses.split(' ').reduce((obj: any, className: string) => {
+		return this._contentClasses.split(' ').reduce((obj: Record<string, boolean>, className: string) => {
 			obj[className] = true;
 			return obj;
 		}, {});
@@ -167,11 +166,12 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		this._emitHoveredEvent(false);
 	}
 	/** does nothing but must be overridable */
-	onMouseDown($event) {}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	onMouseDown() {}
 
 	_handleKeydown(event: KeyboardEvent) {
-		switch (event.keyCode) {
-			case ESCAPE:
+		switch (event.key) {
+			case 'Escape':
 				this._emitCloseEvent();
 				return;
 		}
