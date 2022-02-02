@@ -11,7 +11,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef<HTMLInputElement>,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
 	) {
@@ -126,7 +126,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 
 	protected override _getOverlayConfig(): OverlayConfig {
 		const config = super._getOverlayConfig();
-		const clientRect = (this._elementRef.nativeElement as HTMLElement).getBoundingClientRect();
+		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
 		config.minWidth = `${Math.max(185, clientRect.width)}px`; // might become min/maxWidth
 		return config;
 	}

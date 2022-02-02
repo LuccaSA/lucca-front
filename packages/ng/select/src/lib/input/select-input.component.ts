@@ -57,7 +57,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 	) {
@@ -192,7 +192,7 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 	) {
@@ -200,9 +200,9 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 	}
 	// display clearer
 	@ContentChild(ALuClearer, { read: ElementRef, static: false })
-	clearerEltRef: ElementRef;
+	clearerEltRef: ElementRef<HTMLElement>;
 	@ViewChild('suffix', { read: ElementRef, static: true })
-	suffixEltRef: ElementRef;
+	suffixEltRef: ElementRef<HTMLElement>;
 	displayClearer() {
 		if (this.clearerEltRef) {
 			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);

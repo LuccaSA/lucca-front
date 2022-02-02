@@ -31,7 +31,7 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 	) {
