@@ -33,7 +33,7 @@ export class LuForGroupContext<T> {
 		},
 	],
 })
-export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionOperator<TItem>, OnDestroy {
+export class LuForGroupsDirective<TItem, TKey> implements ILuOptionOperator<TItem>, OnDestroy {
 	outOptions$?: Observable<TItem[]>;
 
 	private _groupByFn: (item: TItem) => TKey;
@@ -48,7 +48,11 @@ export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionO
 		this.outOptions$ = options$;
 	}
 
-	public constructor(protected _vcr: ViewContainerRef, protected _cdr: ChangeDetectorRef, protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>) {}
+	public constructor(
+		protected _vcr: ViewContainerRef,
+		protected _cdr: ChangeDetectorRef,
+		protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>,
+	) {}
 
 	public ngOnDestroy(): void {
 		this._subs.unsubscribe();
@@ -59,7 +63,7 @@ export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionO
 		const count = options.length;
 		const groups = this.groupBy(options);
 		groups.forEach((group, index) => {
-			const view = this._vcr.createEmbeddedView(this._templateRef, new LuForGroupContext<ILuGroup<TItem, TKey>>(group, index, count));
+			this._vcr.createEmbeddedView(this._templateRef, new LuForGroupContext<ILuGroup<TItem, TKey>>(group, index, count));
 		});
 		this._cdr.markForCheck();
 	}

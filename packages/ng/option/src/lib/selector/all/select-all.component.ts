@@ -24,13 +24,13 @@ import { LuOptionSelectAllIntl } from './select-all.intl';
 		},
 	],
 })
-export class LuOptionSelectAllComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionSelector<T> {
+export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implements ILuOptionSelector<T> {
 	multiple = true;
 	onSelectValue = new Subject<T | T[]>();
 	private _values: T[];
 
 	@HostBinding('class.position-fixed') fixed = true;
-	options;
+	options: T[];
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = in$.pipe(tap((options) => (this.options = options)));

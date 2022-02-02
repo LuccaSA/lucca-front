@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
-import { ILuOnScrollBottomSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { ALuOnScrollBottomSubscriber, ILuOnScrollBottomSubscriber, ILuTree } from '@lucca-front/ng/core';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
-import { ILuTree } from '@lucca-front/ng/core';
 const MAGIC_STEP = 10;
 @Component({
 	selector: 'lu-tree-option-pager',
@@ -22,12 +22,17 @@ const MAGIC_STEP = 10;
 		},
 	],
 })
-export class LuTreeOptionPagerComponent<T = any> extends ALuTreeOptionOperator<T> implements ILuTreeOptionOperator<T>, ILuOnScrollBottomSubscriber {
+export class LuTreeOptionPagerComponent<T>
+	extends ALuTreeOptionOperator<T>
+	implements ILuTreeOptionOperator<T>, ILuOnScrollBottomSubscriber
+{
 	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
-		this.outOptions$ = combineLatest(in$, this.paging$, (options, paging) => {
-			return this.trim(options, paging);
-		});
+		this.outOptions$ = combineLatest([in$, this.paging$]).pipe(
+			map(([options, paging]) => {
+				return this.trim(options, paging);
+			}),
+		);
 	}
 	paging$ = new BehaviorSubject<number>(MAGIC_STEP);
 	next() {
