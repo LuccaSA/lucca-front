@@ -22,10 +22,7 @@ const MAGIC_STEP = 10;
 		},
 	],
 })
-export class LuTreeOptionPagerComponent<T>
-	extends ALuTreeOptionOperator<T>
-	implements ILuTreeOptionOperator<T>, ILuOnScrollBottomSubscriber
-{
+export class LuTreeOptionPagerComponent<T> extends ALuTreeOptionOperator<T> implements ILuTreeOptionOperator<T>, ILuOnScrollBottomSubscriber {
 	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
 		this.outOptions$ = combineLatest([in$, this.paging$]).pipe(

@@ -48,11 +48,7 @@ export class LuForGroupsDirective<TItem, TKey> implements ILuOptionOperator<TIte
 		this.outOptions$ = options$;
 	}
 
-	public constructor(
-		protected _vcr: ViewContainerRef,
-		protected _cdr: ChangeDetectorRef,
-		protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>,
-	) {}
+	public constructor(protected _vcr: ViewContainerRef, protected _cdr: ChangeDetectorRef, protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>) {}
 
 	public ngOnDestroy(): void {
 		this._subs.unsubscribe();

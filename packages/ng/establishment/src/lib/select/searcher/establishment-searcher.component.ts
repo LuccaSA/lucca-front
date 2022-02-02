@@ -1,44 +1,10 @@
 /* eslint-disable max-len */
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	EventEmitter,
-	forwardRef,
-	HostBinding,
-	Inject,
-	Input,
-	OnDestroy,
-	OnInit,
-	Optional,
-	Output,
-	Self,
-	SkipSelf,
-	ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-	ALuOnCloseSubscriber,
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-} from '@lucca-front/ng/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
-import {
-	catchError,
-	debounceTime,
-	distinctUntilChanged,
-	map,
-	mapTo,
-	share,
-	startWith,
-	switchMap,
-	tap,
-	withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, map, mapTo, share, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
@@ -74,9 +40,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 		},
 	],
 })
-export class LuEstablishmentSearcherComponent
-	implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment>
-{
+export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment> {
 	@Input() set filters(filters: string[]) {
 		this._service.filters = filters;
 	}

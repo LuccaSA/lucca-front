@@ -1,15 +1,5 @@
 import { NgForOf, NgForOfContext } from '@angular/common';
-import {
-	ChangeDetectorRef,
-	Directive,
-	forwardRef,
-	Input,
-	IterableDiffers,
-	OnDestroy,
-	TemplateRef,
-	TrackByFunction,
-	ViewContainerRef,
-} from '@angular/core';
+import { ChangeDetectorRef, Directive, forwardRef, Input, IterableDiffers, OnDestroy, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
@@ -40,12 +30,7 @@ export class LuForOptionsDirective<T> extends NgForOf<T> implements ILuOptionOpe
 		this.ngForTrackBy = fn;
 	}
 
-	constructor(
-		_viewContainer: ViewContainerRef,
-		_template: TemplateRef<NgForOfContext<T>>,
-		_differs: IterableDiffers,
-		protected _changeDetectionRef: ChangeDetectorRef,
-	) {
+	constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers, protected _changeDetectionRef: ChangeDetectorRef) {
 		super(_viewContainer, _template, _differs);
 	}
 

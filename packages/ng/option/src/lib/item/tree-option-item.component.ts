@@ -99,11 +99,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	constructor(
-		private _componentFactoryResolver: ComponentFactoryResolver,
-		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
-		private _cdr: ChangeDetectorRef,
-	) {
+	constructor(private _componentFactoryResolver: ComponentFactoryResolver, @Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
 		super();
 	}
 

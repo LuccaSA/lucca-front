@@ -1,15 +1,4 @@
-import {
-	Directive,
-	forwardRef,
-	Inject,
-	Optional,
-	SkipSelf,
-	Self,
-	ViewContainerRef,
-	TemplateRef,
-	Input,
-	EmbeddedViewRef,
-} from '@angular/core';
+import { Directive, forwardRef, Inject, Optional, SkipSelf, Self, ViewContainerRef, TemplateRef, Input, EmbeddedViewRef } from '@angular/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuUser } from '../../user.model';
@@ -58,9 +47,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	}
 
 	set inOptions$(in$: Observable<U[]>) {
-		this.outOptions$ = combineLatest([in$, this.meDisplayed$]).pipe(
-			map(([options, meDisplayed]) => (meDisplayed ? options?.filter((o) => o.id !== this.me?.id) : options)),
-		);
+		this.outOptions$ = combineLatest([in$, this.meDisplayed$]).pipe(map(([options, meDisplayed]) => (meDisplayed ? options?.filter((o) => o.id !== this.me?.id) : options)));
 	}
 	outOptions$: Observable<U[]>;
 

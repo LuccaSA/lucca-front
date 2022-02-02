@@ -5,10 +5,7 @@ import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
 
 @Injectable()
 export class LuTreeOptionItemIntl extends ALuIntl<ILuTreeOptionItemLabel> {
-	constructor(
-		@Inject(LU_TREE_OPTION_ITEM_TRANSLATIONS) translations: ILuTranslation<ILuTreeOptionItemLabel>,
-		@Inject(LOCALE_ID) locale: string,
-	) {
+	constructor(@Inject(LU_TREE_OPTION_ITEM_TRANSLATIONS) translations: ILuTranslation<ILuTreeOptionItemLabel>, @Inject(LOCALE_ID) locale: string) {
 		super(translations, locale);
 	}
 }
