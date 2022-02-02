@@ -1,6 +1,10 @@
 import { Tree } from '@angular-devkit/schematics';
 import { shameScss, stylesScss } from './file-content';
 
+// custom to make TS happy
+type AngularProject = { architect: { build: { options: { stylePreprocessorOptions: { includePaths: string[] } } } } };
+type AngularJsonSchema = { defaultProject: string; projects: Record<string, AngularProject> };
+
 const files = {
 	globalStyles: 'src/styles.scss',
 	shameStyles: 'src/scss/_shame.scss',
@@ -14,7 +18,7 @@ export function updateStylesScss(tree: Tree) {
 }
 
 export function updateAngularJson(tree: Tree) {
-	const angularJson = JSON.parse(tree.read('angular.json')?.toString() ?? '{}');
+	const angularJson = JSON.parse(tree.read('angular.json')?.toString() ?? '{}') as AngularJsonSchema;
 	const { defaultProject, projects } = angularJson;
 	projects[defaultProject].architect.build.options.stylePreprocessorOptions = {
 		includePaths: ['src/scss/overrides', 'src/scss', 'node_modules/@lucca-front/ng/style/overrides', 'node_modules/@lucca-front/scss/src/overrides', 'node_modules/@lucca-front/ng/style'],
