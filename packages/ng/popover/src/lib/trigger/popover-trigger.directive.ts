@@ -1,30 +1,9 @@
-import {
-	AfterViewInit,
-	Directive,
-	ElementRef,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	Output,
-	ViewContainerRef,
-	HostListener,
-	HostBinding,
-} from '@angular/core';
-
+/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
-
-import {
-	ILuPopoverTrigger,
-	ALuPopoverTrigger,
-	LuPopoverTriggerEvent,
-} from './popover-trigger.model';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
 import { ILuPopoverPanel } from '../panel/index';
-import {
-	ILuPopoverTarget,
-	LuPopoverPosition,
-	LuPopoverAlignment,
-	LuPopoverTarget,
-} from '../target/index';
+import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
+import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
 
 /**
  * This directive is intended to be used in conjunction with an lu-popover tag.  It is
@@ -34,10 +13,7 @@ import {
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',
 })
-export class LuPopoverTriggerDirective<
-		TPanel extends ILuPopoverPanel = ILuPopoverPanel,
-		TTarget extends ILuPopoverTarget = ILuPopoverTarget,
-	>
+export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 	extends ALuPopoverTrigger<TPanel, TTarget>
 	implements ILuPopoverTrigger<TPanel, TTarget>, AfterViewInit, OnDestroy
 {
@@ -110,16 +86,11 @@ export class LuPopoverTriggerDirective<
 		return this._panelId;
 	}
 
-	constructor(
-		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
-		protected override _viewContainerRef: ViewContainerRef,
-	) {
+	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;
-		this._triggerId =
-			this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 	}
 
 	@HostListener('click')

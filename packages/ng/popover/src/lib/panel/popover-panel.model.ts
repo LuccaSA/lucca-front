@@ -1,10 +1,10 @@
-import { TemplateRef } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import {
 	HorizontalConnectionPos,
 	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
+import { TemplateRef } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
@@ -98,7 +98,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 				obj[className] = true;
 				return obj;
 			}, {});
-		// also add positiopn classes
+		// also add position classes
 		return { ...map, ...this._positionClassesMap };
 	}
 
