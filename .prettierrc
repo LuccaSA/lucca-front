@@ -15,6 +15,13 @@
 			"options": {
 				"parser": "html"
 			}
+		},
+		{
+			"files": ["*.ts"],
+			"options": {
+				"parser": "typescript",
+				"printWidth": 200
+			}
 		}
 	]
 }
