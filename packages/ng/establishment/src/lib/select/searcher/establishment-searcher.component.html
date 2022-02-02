@@ -4,7 +4,4 @@
 	</div>
 </form>
 
-<lu-option-placeholder
-	*ngIf="(empty$ | async) && !(loading$ | async)"
-	(onClear)="reset()"
-></lu-option-placeholder>
+<lu-option-placeholder *ngIf="(empty$ | async) && (loading$ | async) === false" (onClear)="reset()"></lu-option-placeholder>

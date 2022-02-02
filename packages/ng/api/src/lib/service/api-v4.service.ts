@@ -67,7 +67,10 @@ export class LuApiV4Service<
 		if (!clue) {
 			return this.getPaged(page, filters);
 		}
-		const urlSafeClues = clue.split(' ').map((c) => encodeURIComponent(c)).join(',');
+		const urlSafeClues = clue
+			.split(' ')
+			.map((c) => encodeURIComponent(c))
+			.join(',');
 		const query = [
 			`search=${urlSafeClues}`,
 			`page=${page + 1}`,

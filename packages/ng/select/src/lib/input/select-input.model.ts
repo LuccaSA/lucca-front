@@ -1,24 +1,12 @@
-import {
-	ChangeDetectorRef,
-	ViewContainerRef,
-	ElementRef,
-	Renderer2,
-} from '@angular/core';
+import { ChangeDetectorRef, ViewContainerRef, ElementRef, Renderer2, ViewRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import {
-	ALuPopoverTrigger,
-	LuPopoverTarget,
-	ILuPopoverTarget,
-} from '@lucca-front/ng/popover';
+import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '@lucca-front/ng/popover';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { Subscription } from 'rxjs';
 
-export abstract class ALuSelectInput<
-		T = any,
-		TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>,
-	>
+export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 	extends ALuPopoverTrigger<TPicker>
 	implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput
 {
@@ -73,13 +61,13 @@ export abstract class ALuSelectInput<
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T | T[]) => {};
-	registerOnChange(fn: any) {
+	protected _cvaOnChange = (v: T | T[]) => void v;
+	registerOnChange(fn: (v: T | T[]) => unknown) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	protected _onTouched = () => {};
-	registerOnTouched(fn: any) {
+	protected _onTouched = () => void {};
+	registerOnTouched(fn: () => unknown) {
 		this._onTouched = fn;
 	}
 	override set disabled(d) {
@@ -116,16 +104,12 @@ export abstract class ALuSelectInput<
 	}
 	protected set _clearer(clearer: ILuClearer<T>) {
 		if (!!clearer && !!clearer.onClear) {
-			this._subs.add(
-				clearer.onClear.subscribe((value) => this.setValue(value)),
-			);
+			this._subs.add(clearer.onClear.subscribe((value) => this.setValue(value)));
 		}
 	}
 	protected subToPickerEvts() {
 		if (this.panel) {
-			this._subs.add(
-				this.panel.onSelectValue.subscribe((value) => this.setValue(value)),
-			);
+			this._subs.add(this.panel.onSelectValue.subscribe((value) => this.setValue(value)));
 		}
 	}
 
@@ -145,7 +129,7 @@ export abstract class ALuSelectInput<
 
 	protected override _getOverlayConfig(): OverlayConfig {
 		const config = super._getOverlayConfig();
-		const clientRect = this._elementRef.nativeElement.getBoundingClientRect();
+		const clientRect = (this._elementRef.nativeElement as HTMLElement).getBoundingClientRect();
 		config.minWidth = `${Math.max(185, clientRect.width)}px`; // might become min/maxWidth
 		return config;
 	}
@@ -190,7 +174,7 @@ export abstract class ALuSelectInput<
 		}
 		return undefined;
 	}
-	protected displayView(view) {
+	protected displayView(view: ViewRef) {
 		if (view) {
 			this._displayContainer.insert(view);
 		}

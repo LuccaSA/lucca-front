@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
 import {
 	AfterViewInit,
@@ -19,20 +20,12 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-	ALuClearer,
-	ALuInputDisplayer,
-	ILuClearer,
-	ILuInputDisplayer,
-} from '@lucca-front/ng/input';
+import { ALuClearer, ALuInputDisplayer, ILuClearer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
 @Directive()
-export abstract class ALuSelectInputComponent<
-		T = any,
-		TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>,
-	>
+export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
 	extends ALuSelectInput<T, TPicker>
 	implements ControlValueAccessor, AfterViewInit, OnDestroy
 {
@@ -71,13 +64,7 @@ export abstract class ALuSelectInputComponent<
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 	@HostBinding('class.is-disabled')
 	get isDisabled() {
@@ -200,9 +187,7 @@ export abstract class ALuSelectInputComponent<
 		},
 	],
 })
-export class LuSelectInputComponent<
-	T = any,
-> extends ALuSelectInputComponent<T> {
+export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implements AfterViewInit {
 	@HostBinding('class.mod-multipleView')
 	get modMultipleView() {
 		return this.useMultipleViews();
@@ -214,13 +199,7 @@ export class LuSelectInputComponent<
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 	// display clearer
 	@ContentChild(ALuClearer, { read: ElementRef, static: false })
@@ -229,10 +208,7 @@ export class LuSelectInputComponent<
 	suffixEltRef: ElementRef;
 	displayClearer() {
 		if (this.clearerEltRef) {
-			this._renderer.appendChild(
-				this.suffixEltRef.nativeElement,
-				this.clearerEltRef.nativeElement,
-			);
+			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);
 		}
 	}
 

@@ -1,55 +1,46 @@
+/* eslint-disable max-len */
 import {
 	ChangeDetectionStrategy,
 	Component,
-	forwardRef,
-	ViewChild,
 	ElementRef,
-	SkipSelf,
-	Self,
-	Optional,
-	Inject,
-	HostBinding,
-	OnInit,
-	OnDestroy,
-	Input,
-	Output,
 	EventEmitter,
+	forwardRef,
+	HostBinding,
+	Inject,
+	Input,
+	OnDestroy,
+	OnInit,
+	Optional,
+	Output,
+	Self,
+	SkipSelf,
+	ViewChild,
 } from '@angular/core';
-import {
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ALuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-} from '@lucca-front/ng/core';
-import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
-	distinctUntilChanged,
-	debounceTime,
-	switchMap,
+	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnScrollBottomSubscriber,
+} from '@lucca-front/ng/core';
+import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
+import { combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import {
 	catchError,
+	debounceTime,
+	distinctUntilChanged,
+	map,
+	mapTo,
 	share,
 	startWith,
-	withLatestFrom,
-	mapTo,
-	map,
+	switchMap,
 	tap,
+	withLatestFrom,
 } from 'rxjs/operators';
-import {
-	ALuEstablishmentService,
-	LuEstablishmentService,
-} from '../../service/index';
-import {
-	Subject,
-	Observable,
-	Subscription,
-	combineLatest,
-	of,
-	merge,
-} from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
+import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
 @Component({
 	selector: 'lu-establishment-searcher',
@@ -84,13 +75,7 @@ import { ILuEstablishment } from '../../establishment.model';
 	],
 })
 export class LuEstablishmentSearcherComponent
-	implements
-		OnInit,
-		OnDestroy,
-		ILuOnOpenSubscriber,
-		ILuOnScrollBottomSubscriber,
-		ILuOnCloseSubscriber,
-		ILuOptionOperator<ILuEstablishment>
+	implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment>
 {
 	@Input() set filters(filters: string[]) {
 		this._service.filters = filters;
@@ -141,14 +126,14 @@ export class LuEstablishmentSearcherComponent
 		this.form = new FormGroup({
 			clue: new FormControl(''),
 		});
-		const formValue$ = this.form.valueChanges.pipe(startWith(this.form.value));
+		const formValue$ = this.form.valueChanges.pipe(startWith(this.form.value)) as Observable<{ clue: string }>;
 		this._page$ = new Subject<number>();
 		const distinctPage$ = this._page$.pipe(distinctUntilChanged());
 
 		const pageSub = this._page$.subscribe((p) => (this._page = p));
 		this._subs.add(pageSub);
 
-		const results$ = combineLatest(distinctPage$, formValue$).pipe(
+		const results$ = combineLatest([distinctPage$, formValue$]).pipe(
 			debounceTime(100),
 			tap(([_, val]) => {
 				const isSearching = val?.clue != null && val?.clue !== '';
@@ -158,29 +143,24 @@ export class LuEstablishmentSearcherComponent
 				}
 			}),
 			switchMap(([page, val]) => {
-				const filters = [];
+				const filters: string[] = [];
 				return this._service.searchPaged(val.clue, page, filters);
 			}),
-			catchError((err) => of([])),
+			catchError(() => of([] as ILuEstablishment[])),
 			share(),
 		);
 
-		const resultsSub = results$
-			.pipe(withLatestFrom(distinctPage$))
-			.subscribe(([items, page]) => {
-				if (page === 0) {
-					this._options = [...items];
-				} else {
-					this._options.push(...items);
-				}
-				this.outOptions$.next([...this._options]);
-			});
+		const resultsSub = results$.pipe(withLatestFrom(distinctPage$)).subscribe(([items, page]) => {
+			if (page === 0) {
+				this._options = [...items];
+			} else {
+				this._options.push(...items);
+			}
+			this.outOptions$.next([...this._options]);
+		});
 		this._subs.add(resultsSub);
 
-		this.loading$ = merge(
-			formValue$.pipe(mapTo(true)),
-			results$.pipe(mapTo(false)),
-		);
+		this.loading$ = merge(formValue$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
 		const loadingSub = this.loading$.subscribe((l) => (this._loading = l));
 		this._subs.add(loadingSub);
 
@@ -192,7 +172,7 @@ export class LuEstablishmentSearcherComponent
 	}
 
 	onOpen() {
-		this.searchInput.nativeElement.focus();
+		(this.searchInput.nativeElement as HTMLElement).focus();
 		this.reset();
 	}
 

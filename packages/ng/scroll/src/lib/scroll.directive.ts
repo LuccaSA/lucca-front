@@ -1,15 +1,8 @@
-import {
-	Directive,
-	Output,
-	HostListener,
-	EventEmitter,
-	ElementRef,
-	OnInit,
-	Input,
-} from '@angular/core';
-import { ILuScrollable } from './scroll.model';
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { ILuScrollable } from './scroll.model';
 
 /**
  * emits on scroll events
@@ -26,9 +19,7 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	@Output() onScrollLeft = new EventEmitter<Event>();
 	@Output() onScrollRight = new EventEmitter<Event>();
 	private scrollSubject = new Subject<Event>();
-	private scroll$ = this.scrollSubject
-		.asObservable()
-		.pipe(debounceTime(this.debounceTime));
+	private scroll$ = this.scrollSubject.asObservable().pipe(debounceTime(this.debounceTime));
 	@HostListener('scroll', ['$event'])
 	_scroll($event: Event) {
 		this.scrollSubject.next($event);
@@ -52,8 +43,8 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 			}
 			const scrollWidth = target.scrollWidth;
 			const scrollHeight = target.scrollHeight;
-			const eltHeight = this._elementRef.nativeElement.clientHeight;
-			const eltWidth = this._elementRef.nativeElement.clientWidth;
+			const eltHeight = (this._elementRef.nativeElement as HTMLElement).clientHeight;
+			const eltWidth = (this._elementRef.nativeElement as HTMLElement).clientWidth;
 			if (scrollWidth - scrollLeft - eltWidth < 10) {
 				this.onScrollRight.emit($event);
 			}

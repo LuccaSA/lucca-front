@@ -1,15 +1,5 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ViewChild,
-	ViewContainerRef,
-} from '@angular/core';
-import {
-	FieldWrapper,
-	FormlyFieldConfig,
-	FormlyConfig,
-	FieldType,
-} from '@ngx-formly/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -18,6 +8,7 @@ import {
 	templateUrl: './helper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperHelper extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;

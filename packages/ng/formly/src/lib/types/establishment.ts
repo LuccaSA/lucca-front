@@ -7,6 +7,7 @@ import { FieldType } from '@ngx-formly/core';
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './establishment.html',
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldEstablishment extends FieldType {
 	override readonly formControl: FormControl;
 	focus() {
