@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-
-import { ILuPopoverPanel, LuPopoverScrollStrategy, ALuPopoverPanel } from './popover-panel.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
 import { luTransformPopover } from '../animation/index';
+import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
 
 // import { standardPopoverTemplate } from './popover.template';
 
@@ -13,24 +12,24 @@ import { luTransformPopover } from '../animation/index';
 	exportAs: 'LuPopoverPanel',
 })
 export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
-	protected _template: TemplateRef<any>;
-	protected _templateContext: any;
+	protected _template: TemplateRef<unknown>;
+	protected _templateContext: unknown;
 
 	/** Template to Use for the popover */
-	get template(): TemplateRef<any> {
+	get template(): TemplateRef<unknown> {
 		return this._template;
 	}
 	@Input()
-	set template(value: TemplateRef<any>) {
+	set template(value: TemplateRef<unknown>) {
 		this._template = value;
 	}
 
 	/** Template context to use for the popover when created using a template */
-	get templateContext(): any {
+	get templateContext(): unknown {
 		return this._templateContext;
 	}
 	@Input('template-context')
-	set templateContext(value: any) {
+	set templateContext(value: unknown) {
 		this._templateContext = value;
 	}
 
@@ -83,12 +82,14 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	}
 
 	/** Event emitted when the popover is closed. */
+	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override close = new EventEmitter<void>();
+	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override open = new EventEmitter<void>();
 	@Output() override hovered = new EventEmitter<boolean>();
 
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<unknown>) {
 		this.templateRef = tr;
 	}
 
