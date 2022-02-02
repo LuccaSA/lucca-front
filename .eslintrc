@@ -1,18 +1,11 @@
 {
 	"root": true,
-	"ignorePatterns": [
-		"src/**/*"
-	],
+	"ignorePatterns": ["src/**/*"],
 	"overrides": [
 		{
-			"files": [
-				"*.ts"
-			],
+			"files": ["*.ts"],
 			"parserOptions": {
-				"project": [
-					"tsconfig.json",
-					"packages/ng/tsconfig.lib.json"
-				],
+				"project": ["tsconfig.json", "packages/ng/tsconfig.lib.json"],
 				"createDefaultProgram": true
 			},
 			"extends": [
@@ -26,9 +19,7 @@
 				// "plugin:@angular-eslint/ng-cli-compat",
 				// "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
 			],
-			"plugins": [
-				"@delagen/deprecation"
-			],
+			"plugins": ["@delagen/deprecation"],
 			"rules": {
 				"prettier/prettier": [
 					"error",
@@ -41,11 +32,7 @@
 					"error",
 					{
 						"selector": "enumMember",
-						"format": [
-							"PascalCase",
-							"camelCase",
-							"UPPER_CASE"
-						]
+						"format": ["PascalCase", "camelCase", "UPPER_CASE"]
 					}
 				],
 				"@typescript-eslint/explicit-function-return-type": "off", // on aimerait bien dire oui sauf pour void
@@ -59,16 +46,11 @@
 					}
 				],
 				"@typescript-eslint/unbound-method": "off",
-				"@typescript-eslint/type-annotation-spacing": [
-					"error"
-				],
+				"@typescript-eslint/type-annotation-spacing": ["error"],
 				"no-console": [
 					"error",
 					{
-						"allow": [
-							"warn",
-							"error"
-						]
+						"allow": ["warn", "error"]
 					}
 				],
 				"curly": "error",
@@ -76,26 +58,11 @@
 				"no-restricted-imports": [
 					"error",
 					{
-						"paths": [
-							"rxjs/Rx"
-						]
+						"paths": ["rxjs/Rx"]
 					}
 				],
 				"max-classes-per-file": "off",
-				"max-len": [
-					"error",
-					{
-						"code": 140,
-						"ignoreComments": true,
-						"ignoreTrailingComments": true,
-						"ignoreUrls": true,
-						"ignoreStrings": true
-					}
-				],
-				"quote-props": [
-					"error",
-					"as-needed"
-				],
+				"quote-props": ["error", "as-needed"],
 				"quotes": [
 					"error",
 					"single",
@@ -132,13 +99,8 @@
 			}
 		},
 		{
-			"files": [
-				"*.html"
-			],
-			"extends": [
-				"plugin:@angular-eslint/template/recommended",
-				"plugin:prettier/recommended"
-			],
+			"files": ["*.html"],
+			"extends": ["plugin:@angular-eslint/template/recommended", "plugin:prettier/recommended"],
 			"rules": {
 				"prettier/prettier": [
 					"error",
@@ -149,9 +111,7 @@
 			}
 		},
 		{
-			"files": [
-				"*.js"
-			],
+			"files": ["*.js"],
 			"env": {
 				"es6": true
 			}

@@ -2,6 +2,6 @@
 	<input #searchInput class="textfield-input" [formControl]="clueControl" />
 </div>
 <lu-option-placeholder
-	*ngIf="(empty$ | async) && !(loading$ | async)"
+	*ngIf="(empty$ | async) && (loading$ | async) === false"
 	(onClear)="resetClue()"
 ></lu-option-placeholder>

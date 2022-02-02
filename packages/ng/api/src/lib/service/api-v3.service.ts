@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ILuApiItem, ILuApiCollectionResponse } from '../api.model';
-import { ALuApiService } from './api-service.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ILuApiCollectionResponse, ILuApiItem } from '../api.model';
+import { ALuApiService } from './api-service.model';
 
 const MAGIC_PAGE_SIZE = 20;
 
@@ -77,12 +77,12 @@ export class LuApiV3Service<
 		return this._get(url);
 	}
 
-	protected _get(url): Observable<T[]> {
+	protected _get(url: string): Observable<T[]> {
 		return this._http
-			.get<ILuApiCollectionResponse<any>>(url)
+			.get<ILuApiCollectionResponse<T>>(url)
 			.pipe(map((response) => response.data.items));
 	}
-	protected _clueFilter(clue) {
+	protected _clueFilter(clue: string) {
 		const urlSafeClue = encodeURIComponent(clue);
 		return `name=like,${urlSafeClue}`;
 	}

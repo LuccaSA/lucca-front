@@ -1,9 +1,8 @@
 import {
-	state,
-	style,
 	animate,
-	transition,
 	AnimationMetadata,
+	style,
+	transition,
 } from '@angular/animations';
 
 export function luSlidingAnimation(

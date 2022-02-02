@@ -1,30 +1,30 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	forwardRef,
-	Input,
-	ViewChild,
 	ElementRef,
-	SkipSelf,
-	Self,
-	Optional,
+	forwardRef,
 	Inject,
+	Input,
 	OnInit,
+	Optional,
+	Self,
+	SkipSelf,
+	ViewChild
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
 	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
-import {
-	ALuApiOptionSearcher,
-	ALuApiOptionPagedSearcher,
-} from './api-searcher.model';
-import { ILuApiItem } from '../../api.model';
-import { FormControl } from '@angular/forms';
-import { debounceTime, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
+import {
+	ALuApiOptionPagedSearcher,
+	ALuApiOptionSearcher
+} from './api-searcher.model';
 
 @Component({
 	selector: 'lu-api-searcher',
@@ -91,12 +91,12 @@ export class LuApiSearcherComponent<
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges.pipe(
 			debounceTime(this.debounceTime),
-		);
+		) as Observable<string>;
 		super.init();
 	}
 
 	override onOpen() {
-		this.searchInput.nativeElement.focus();
+		(this.searchInput.nativeElement as HTMLElement).focus();
 		super.onOpen();
 	}
 	resetClue() {
@@ -172,12 +172,12 @@ export class LuApiPagedSearcherComponent<
 		this.clueControl = new FormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges.pipe(
 			debounceTime(this.debounceTime),
-		);
+		) as Observable<string>;
 		super.init();
 	}
 
 	override onOpen() {
-		this.searchInput.nativeElement.focus();
+		(this.searchInput.nativeElement as HTMLElement).focus();
 		super.onOpen();
 	}
 	resetClue() {
