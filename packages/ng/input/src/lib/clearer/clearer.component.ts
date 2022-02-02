@@ -14,7 +14,7 @@ import { ALuClearer, ILuClearer } from './clearer.model';
 		},
 	],
 })
-export class LuInputClearerComponent<T = any> extends ALuClearer<T> implements ILuClearer<T> {
+export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClearer<T> {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();
 	onClick($event: Event) {
