@@ -1,11 +1,11 @@
-import { ILuUser } from '../../user.model';
-import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LuUserDisplayPipe, LuDisplayFullname } from '../../display/index';
-import { map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { LuDisplayFullname, LuUserDisplayPipe } from '../../display/index';
+import { ILuUser } from '../../user.model';
 
-interface IV3CollectionResponse<T = any> {
+interface IV3CollectionResponse<T> {
 	data: { items: T[] };
 }
 
@@ -44,7 +44,7 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser>
 
 	enrichHomonyms(homonyms: U[]): Observable<U[]> {
 		if (!homonyms || homonyms.length === 0) {
-			return of([]);
+			return of([]) as Observable<U[]>;
 		}
 		return this._http
 			.get<IV3CollectionResponse<{ id: number; department: { name: string } }>>(
@@ -72,7 +72,7 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser>
 						} as U;
 					}),
 				),
-				catchError((err) => of([])),
+				catchError(() => of([])),
 			);
 	}
 	constructor(private _pipe: LuUserDisplayPipe, private _http: HttpClient) {

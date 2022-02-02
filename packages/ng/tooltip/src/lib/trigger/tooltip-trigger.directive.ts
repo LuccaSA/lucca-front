@@ -1,18 +1,18 @@
+import { Overlay } from '@angular/cdk/overlay';
 import {
-	Directive,
-	Input,
-	ElementRef,
-	ViewContainerRef,
-	ComponentFactoryResolver,
 	AfterViewInit,
-	HostListener,
-	Injector,
-	OnDestroy,
-	Output,
+	ComponentFactoryResolver,
+	Directive,
+	ElementRef,
 	EventEmitter,
 	HostBinding,
+	HostListener,
+	Injector,
+	Input,
+	OnDestroy,
+	Output,
+	ViewContainerRef,
 } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
 import {
 	ALuPopoverTrigger,
 	LuPopoverPosition,
@@ -27,7 +27,7 @@ export class LuTooltipTriggerDirective
 	extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget>
 	implements AfterViewInit, OnDestroy
 {
-	@Input('luTooltip') set tooltipContent(c) {
+	@Input('luTooltip') set tooltipContent(c: string) {
 		this.panel.content = c;
 	}
 	/** when trigger = hover, delay before the popover panel appears, default 300ms */
@@ -50,9 +50,12 @@ export class LuTooltipTriggerDirective
 		this.target.position = pos;
 	}
 
+	// FIXME output native
 	/** Event emitted when the associated popover is opened. */
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output('luTooltipOnOpen') onOpen = new EventEmitter<void>();
 	/** Event emitted when the associated popover is closed. */
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output('luTooltipOnClose') onClose = new EventEmitter<void>();
 
 	@HostListener('mouseenter')
@@ -88,7 +91,7 @@ export class LuTooltipTriggerDirective
 
 	constructor(
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		componentFactoryResolver: ComponentFactoryResolver,
 		injector: Injector,

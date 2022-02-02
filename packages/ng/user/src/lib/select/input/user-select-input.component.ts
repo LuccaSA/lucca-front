@@ -1,24 +1,23 @@
+import { Overlay } from '@angular/cdk/overlay';
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
-	Component,
 	ChangeDetectorRef,
-	forwardRef,
-	ViewContainerRef,
+	Component,
 	ElementRef,
+	forwardRef,
+	Inject,
 	Input,
 	Renderer2,
-	Inject,
-	AfterViewInit,
+	ViewContainerRef,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Overlay } from '@angular/cdk/overlay';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
-import { ILuUser } from '../../user.model';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDisplayFullname } from '../../display/index';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
 import { ILuUserSelectInputLabel } from './user-select-input.translate';
-import { LuOptionComparer } from '@lucca-front/ng/option';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'
