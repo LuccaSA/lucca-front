@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
 import { LuModal } from './modal.service';
-import {
-	LU_MODAL_CONFIG,
-	LU_MODAL_TRANSLATIONS,
-	LU_MODAL_REF_FACTORY,
-} from './modal.token';
+import { LU_MODAL_CONFIG, LU_MODAL_TRANSLATIONS, LU_MODAL_REF_FACTORY } from './modal.token';
 import { luDefaultModalConfig } from './modal-config.default';
-import {
-	LuModalPanelComponent,
-	LuModalPanelComponentDefaultCD,
-} from './modal-panel.component';
+import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { LuModalRefFactory } from './modal-ref.factory';

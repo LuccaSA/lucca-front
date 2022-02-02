@@ -1,10 +1,6 @@
 import { LuUserDisplayPipe } from './user-display.pipe';
 import { ILuUser } from '../user.model';
-import {
-	LuDisplayFullname,
-	LuDisplayHybrid,
-	LuDisplayInitials,
-} from './display-format.model';
+import { LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 
 describe('UserNamePipe', () => {
 	let user: ILuUser;
@@ -24,9 +20,7 @@ describe('UserNamePipe', () => {
 
 	it("should return the right value with 'Lf' format", () => {
 		const pipe = new LuUserDisplayPipe();
-		expect(pipe.transform(user, LuDisplayHybrid.lastIfirstFull)).toBe(
-			'D. John',
-		);
+		expect(pipe.transform(user, LuDisplayHybrid.lastIfirstFull)).toBe('D. John');
 	});
 
 	it("should return the right value with 'LF' format", () => {
@@ -66,9 +60,7 @@ describe('UserNamePipe', () => {
 
 	it("should return the right value with 'fL' format", () => {
 		const pipe = new LuUserDisplayPipe();
-		expect(pipe.transform(user, LuDisplayHybrid.firstFulllastI)).toBe(
-			'John D.',
-		);
+		expect(pipe.transform(user, LuDisplayHybrid.firstFulllastI)).toBe('John D.');
 	});
 
 	it("should return the right value with 'f' format", () => {

@@ -1,13 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	EventEmitter,
-	HostBinding,
-	Output,
-	TemplateRef,
-	ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ALuPopoverPanel, ILuPopoverPanel } from '@lucca-front/ng/popover';
 import { luTransformTooltip } from '../animation/index';
 
@@ -18,10 +9,7 @@ import { luTransformTooltip } from '../animation/index';
 	animations: [luTransformTooltip],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuTooltipPanelComponent
-	extends ALuPopoverPanel
-	implements ILuPopoverPanel
-{
+export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel {
 	@HostBinding('@transformTooltip') animationState = 'enter';
 
 	private _content: string;

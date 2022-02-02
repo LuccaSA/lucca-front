@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-	DayItem,
-	MonthItem,
-	YearItem,
-	DecadeItem,
-} from './calendar-item.class';
 import { ALuDateAdapter } from '@lucca-front/ng/core';
+import { DayItem, DecadeItem, MonthItem, YearItem } from './calendar-item.class';
 
 @Injectable()
 export class LuCalendarItemFactory<D> {
@@ -17,7 +12,6 @@ export class LuCalendarItemFactory<D> {
 	forgeMonth(d: D, format = 'MMM'): MonthItem<D> {
 		const year = this._adapter.getYear(d);
 		const month = this._adapter.getMonth(d);
-		const date = this._adapter.getDate(d);
 		const monthStart = this._adapter.forge(year, month, 1);
 		return new MonthItem(monthStart, this._adapter.format(monthStart, format));
 	}
@@ -30,10 +24,7 @@ export class LuCalendarItemFactory<D> {
 		const year = this._adapter.getYear(d);
 		const decadeStart = this._adapter.forge(10 * Math.floor(year / 10), 1, 1);
 		const decadeEnd = this._adapter.forge(10 * Math.floor(year / 10) + 9, 1, 1);
-		const label = `${this._adapter.format(
-			decadeStart,
-			format,
-		)} - ${this._adapter.format(decadeEnd, format)}`;
+		const label = `${this._adapter.format(decadeStart, format)} - ${this._adapter.format(decadeEnd, format)}`;
 		return new DecadeItem(decadeStart, label);
 	}
 }

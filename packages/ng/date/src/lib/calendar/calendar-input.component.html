@@ -4,18 +4,14 @@
 			<span aria-hidden="true" class="lucca-icon">arrow_west</span>
 			<span class="u-mask">Previous</span>
 		</button>
-		<button class="calendar-header-date" (click)="increaseGranularity()">
-			{{ header.label }}
-		</button>
+		<button class="calendar-header-date" (click)="increaseGranularity()">{{ header.label }}</button>
 		<button class="calendar-header-nav" (click)="next()">
 			<span aria-hidden="true" class="lucca-icon">arrow_east</span>
 			<span class="u-mask">Next</span>
 		</button>
 	</header>
 	<section class="calendar-labels" [ngClass]="mod">
-		<div class="calendar-labels-item" *ngFor="let label of labels">
-			{{ label }}
-		</div>
+		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
 	</section>
 	<section class="calendar-grid" [ngClass]="mod">
 		<button

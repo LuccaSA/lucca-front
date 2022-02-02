@@ -1,20 +1,13 @@
+import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { ALuDateAdapter } from '../date-adapter.class';
-import { ELuDateGranularity } from '../date-granularity.enum';
 import { ILuDateAdapter } from '../date-adapter.interface';
-import { LOCALE_ID, Inject, Injectable, Optional } from '@angular/core';
-import { getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
-import {
-	ILuNativeDateAdapterOptions,
-	LU_NATIVE_DATE_ADAPTER_OPTIONS,
-	luDefaultNativeDateAdapterOptions,
-} from './native-date.option';
+import { ELuDateGranularity } from '../date-granularity.enum';
+import { ILuNativeDateAdapterOptions, luDefaultNativeDateAdapterOptions, LU_NATIVE_DATE_ADAPTER_OPTIONS } from './native-date.option';
 
 @Injectable()
-export class LuNativeDateAdapter
-	extends ALuDateAdapter<Date>
-	implements ILuDateAdapter<Date>
-{
-	private _regex = /[\/\,\.\-\s]/i;
+export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
+	private _regex = /[/,.\-\s]/i;
 	private _order = {
 		date: 0,
 		month: 1,
@@ -45,10 +38,7 @@ export class LuNativeDateAdapter
 			}
 		});
 	}
-	private extract(
-		text: string,
-		granularity: ELuDateGranularity = ELuDateGranularity.day,
-	): { date: number; month: number; year: number } {
+	private extract(text: string, granularity: ELuDateGranularity = ELuDateGranularity.day): { date: number; month: number; year: number } {
 		const groups = text.split(this._regex);
 		let date = 1,
 			month = 1,
@@ -59,16 +49,13 @@ export class LuNativeDateAdapter
 				break;
 			case ELuDateGranularity.month:
 				month = parseInt(groups[Math.max(this._order.month - 1, 0)], 10);
-				year =
-					parseInt(groups[Math.max(this._order.year - 1, 0)], 10) ||
-					new Date().getFullYear();
+				year = parseInt(groups[Math.max(this._order.year - 1, 0)], 10) || new Date().getFullYear();
 				break;
 			case ELuDateGranularity.day:
 			default:
 				date = parseInt(groups[this._order.date], 10);
 				month = parseInt(groups[this._order.month], 10);
-				year =
-					parseInt(groups[this._order.year], 10) || new Date().getFullYear();
+				year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 		}
 		return { date, month, year };
 	}
@@ -161,13 +148,7 @@ export class LuNativeDateAdapter
 	forgeToday(): Date {
 		if (this._options.useUtc) {
 			const nonUTCToday = new Date();
-			return new Date(
-				Date.UTC(
-					nonUTCToday.getFullYear(),
-					nonUTCToday.getMonth(),
-					nonUTCToday.getDate(),
-				),
-			);
+			return new Date(Date.UTC(nonUTCToday.getFullYear(), nonUTCToday.getMonth(), nonUTCToday.getDate()));
 		} else {
 			const today = new Date();
 			return new Date(today.getFullYear(), today.getMonth(), today.getDate());

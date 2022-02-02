@@ -1,13 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	Input,
-	ViewChild,
-	ElementRef,
-	HostBinding,
-	Inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding, Inject } from '@angular/core';
 import { ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { Observable, combineLatest, merge, of } from 'rxjs';
@@ -32,10 +23,7 @@ import { map } from 'rxjs/operators';
 		},
 	],
 })
-export class LuOptionSearcherComponent<T = any>
-	extends ALuOptionOperator<T>
-	implements ILuOptionOperator<T>, ILuOnOpenSubscriber
-{
+export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
 	empty$: Observable<boolean>;
@@ -44,9 +32,7 @@ export class LuOptionSearcherComponent<T = any>
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest(in$, this.clue$, (options, clue) => {
-			return clue
-				? (options || []).filter((o) => this.searchFn(o, clue))
-				: options || [];
+			return clue ? (options || []).filter((o) => this.searchFn(o, clue)) : options || [];
 		});
 		this.empty$ = this.outOptions$.pipe(map((o) => !o || o.length === 0));
 	}

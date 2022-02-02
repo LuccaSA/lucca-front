@@ -1,15 +1,5 @@
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	Input,
-} from '@angular/core';
-import {
-	LuDisplayFormat,
-	LuDisplayFullname,
-	LuDisplayHybrid,
-	LuDisplayInitials,
-} from '../display/index';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from '../display/index';
 import { ILuUser } from '../user.model';
 
 /**

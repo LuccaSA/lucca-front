@@ -1,17 +1,10 @@
-import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import {
-	Component,
-	ChangeDetectionStrategy,
-	forwardRef,
-	Output,
-	EventEmitter,
-	TemplateRef,
-	ViewChild,
-	Input,
-} from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { ESCAPE, TAB } from '@angular/cdk/keycodes';
+//FIXME
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable @angular-eslint/no-output-native */
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -77,13 +70,13 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 		this._emitCloseEvent();
 	}
 	override _handleKeydown(event: KeyboardEvent) {
-		switch (event.keyCode) {
-			case ESCAPE:
+		switch (event.key) {
+			case 'Escape':
 				this._emitCloseEvent();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case TAB:
+			case 'Tab':
 				this._emitCloseEvent();
 				break;
 		}

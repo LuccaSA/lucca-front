@@ -8,10 +8,7 @@ import { LuTreeOptionPickerAdvancedComponent } from './tree-option-picker-advanc
 
 @NgModule({
 	imports: [CommonModule, OverlayModule, LuScrollModule, A11yModule],
-	declarations: [
-		LuTreeOptionPickerComponent,
-		LuTreeOptionPickerAdvancedComponent,
-	],
+	declarations: [LuTreeOptionPickerComponent, LuTreeOptionPickerAdvancedComponent],
 	exports: [LuTreeOptionPickerComponent, LuTreeOptionPickerAdvancedComponent],
 })
 export class LuTreeOptionPickerModule {}

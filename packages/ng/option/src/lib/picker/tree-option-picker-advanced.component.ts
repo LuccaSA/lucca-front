@@ -1,36 +1,12 @@
 import { DOCUMENT } from '@angular/common';
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ContentChildren,
-	Directive,
-	forwardRef,
-	Inject,
-	QueryList,
-} from '@angular/core';
-import {
-	ALuOnCloseSubscriber,
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-	ILuTree,
-} from '@lucca-front/ng/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuTree } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
 import { first, mapTo, mergeAll, shareReplay, startWith } from 'rxjs/operators';
-import {
-	ALuTreeOptionOperator,
-	ILuTreeOptionOperator,
-} from '../operator/index';
-import {
-	ALuTreeOptionSelector,
-	ILuTreeOptionSelector,
-} from '../selector/index';
+import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../operator/index';
+import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../selector/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
 @Directive()
@@ -50,9 +26,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<
 		this._operatorsQL = ql;
 	}
 	protected _onOpenSubscribers: ILuOnOpenSubscriber[] = [];
-	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(
-		ql: QueryList<ILuOnOpenSubscriber>,
-	) {
+	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(ql: QueryList<ILuOnOpenSubscriber>) {
 		this._onOpenSubscribers = ql.toArray();
 	}
 	protected _onCloseSubscribers: ILuOnCloseSubscriber[] = [];
@@ -73,10 +47,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<
 		this._selectorsQL = ql;
 	}
 
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 	onScrollBottom() {
@@ -114,12 +85,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<
 		});
 		const lastOperator = operators[operators.length - 1];
 		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(
-				first(),
-				mapTo(false),
-				startWith(true),
-				shareReplay(),
-			);
+			this.loading$ = lastOperator.outOptions$.pipe(first(), mapTo(false), startWith(true), shareReplay());
 		}
 	}
 	protected initSelectors() {
@@ -159,10 +125,7 @@ export class LuTreeOptionPickerAdvancedComponent<
 	T,
 	O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>,
 > extends ALuTreeOptionPickerAdvancedComponent<T, O> {
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 }

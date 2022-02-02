@@ -1,32 +1,12 @@
 import { Overlay } from '@angular/cdk/overlay';
-import {
-	AfterViewInit,
-	ComponentFactoryResolver,
-	Directive,
-	ElementRef,
-	EventEmitter,
-	HostBinding,
-	HostListener,
-	Injector,
-	Input,
-	OnDestroy,
-	Output,
-	ViewContainerRef,
-} from '@angular/core';
-import {
-	ALuPopoverTrigger,
-	LuPopoverPosition,
-	LuPopoverTarget,
-} from '@lucca-front/ng/popover';
+import { AfterViewInit, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Injector, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
 	selector: '[luTooltip]',
 })
-export class LuTooltipTriggerDirective
-	extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget>
-	implements AfterViewInit, OnDestroy
-{
+export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
 	@Input('luTooltip') set tooltipContent(c: string) {
 		this.panel.content = c;
 	}
@@ -99,16 +79,13 @@ export class LuTooltipTriggerDirective
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
-		this._triggerId =
-			this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.triggerEvent = 'hover';
 		this.target.position = 'above';
 		this.enterDelay = 300;
 		this.leaveDelay = 100;
 
-		const factory = componentFactoryResolver.resolveComponentFactory(
-			LuTooltipPanelComponent,
-		);
+		const factory = componentFactoryResolver.resolveComponentFactory(LuTooltipPanelComponent);
 		this.panel = factory.create(injector).instance;
 
 		this._handleTabindex = this._shouldHandleTabindex();
@@ -139,17 +116,10 @@ export class LuTooltipTriggerDirective
 		const tag = this._elementRef.nativeElement.tagName?.toLowerCase();
 		// https://allyjs.io/data-tables/focusable.html
 		// i'm choosing to not support area and iframe, dont @ me
-		const nativelyFocusableTags = [
-			'a',
-			'button',
-			'input',
-			'select',
-			'textarea',
-		];
+		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
 		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
 
-		const hasATabIndex =
-			this._elementRef.nativeElement.getAttribute('tabindex') !== null;
+		const hasATabIndex = this._elementRef.nativeElement.getAttribute('tabindex') !== null;
 
 		return !isNatevelyFocusableTag && !hasATabIndex;
 	}

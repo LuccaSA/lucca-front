@@ -8,9 +8,6 @@ import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.token';
 	imports: [],
 	exports: [LuDateInputDirective],
 	declarations: [LuDateInputDirective],
-	providers: [
-		LuDateInputIntl,
-		{ provide: LU_DATE_INPUT_TRANSLATIONS, useValue: luDateInputTranslations },
-	],
+	providers: [LuDateInputIntl, { provide: LU_DATE_INPUT_TRANSLATIONS, useValue: luDateInputTranslations }],
 })
 export class LuDateInputModule {}

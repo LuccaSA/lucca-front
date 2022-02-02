@@ -21,12 +21,7 @@ import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
-import {
-	ALuEstablishmentService,
-	ALuLegalUnitService,
-	LuEstablishmentService,
-	LuLegalUnitService,
-} from '../../service/index';
+import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from '../../service/index';
 import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
 import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
 
@@ -58,8 +53,7 @@ export class LuEstablishmentSelectInputComponent<
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit
 {
-	byId: LuOptionComparer<D> = (option1: D, option2: D) =>
-		option1 && option2 && option1.id === option2.id;
+	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	@Input() filters: string[];
 	@Input() appInstanceId: number;
@@ -96,29 +90,15 @@ export class LuEstablishmentSelectInputComponent<
 		@Inject(LuEstablishmentSelectInputIntl)
 		public intl: ILuEstablishmentSelectInputLabel,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
-		this._establishmentService = (hostEstablishmentService ||
-			selfEstablishmentService) as LuEstablishmentService;
-		this._legalUnitService = (hostLuService ||
-			selfLuService) as LuLegalUnitService;
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
+		this._establishmentService = (hostEstablishmentService || selfEstablishmentService) as LuEstablishmentService;
+		this._legalUnitService = (hostLuService || selfLuService) as LuLegalUnitService;
 	}
 
 	ngOnInit() {
 		this._subs.add(
-			combineLatest([
-				this._legalUnitService.count(),
-				this._establishmentService.count(),
-			]).subscribe(([luCount, establishmentCount]) => {
-				this.groupByLu =
-					luCount > 1 &&
-					establishmentCount > 1 &&
-					luCount !== establishmentCount;
+			combineLatest([this._legalUnitService.count(), this._establishmentService.count()]).subscribe(([luCount, establishmentCount]) => {
+				this.groupByLu = luCount > 1 && establishmentCount > 1 && luCount !== establishmentCount;
 			}),
 		);
 	}

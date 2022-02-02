@@ -8,12 +8,7 @@
 		(mouseleave)="onMouseLeave()"
 		(mousedown)="onMouseDown($event)"
 	>
-		<div
-			class="lu-picker-content"
-			[ngClass]="contentClassesMap"
-			cdkTrapFocus="false"
-			cdkTrapFocusAutoCapture="true"
-		>
+		<div class="lu-picker-content" [ngClass]="contentClassesMap" cdkTrapFocus="false" cdkTrapFocusAutoCapture="true">
 			<label class="textfield lu-picker-textfield">
 				<input
 					luDateInput

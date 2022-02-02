@@ -19,7 +19,4 @@ export enum LuDisplayHybrid {
 	lastFullfirstI = 'lF',
 }
 
-export type LuDisplayFormat =
-	| LuDisplayFullname
-	| LuDisplayInitials
-	| LuDisplayHybrid;
+export type LuDisplayFormat = LuDisplayFullname | LuDisplayInitials | LuDisplayHybrid;

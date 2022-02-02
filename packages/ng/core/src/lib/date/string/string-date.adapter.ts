@@ -6,10 +6,7 @@ import { ILuDateAdapter } from '../date-adapter.interface';
 
 /** bind to a string with iso 26001 format YYYY-MM-DD */
 @Injectable()
-export class LuStringDateAdapter
-	extends ALuDateAdapter<string>
-	implements ILuDateAdapter<string>
-{
+export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDateAdapter<string> {
 	// i'm going to implement this by doing some inheritance by composition
 	// i'll just use the native date adapter and just parse/format to interface it with a string
 
@@ -38,11 +35,7 @@ export class LuStringDateAdapter
 		return this._nativeAdapter.isValid(this.stringToDate(d));
 	}
 
-	override compare(
-		a: string,
-		b: string,
-		granularity: ELuDateGranularity,
-	): number {
+	override compare(a: string, b: string, granularity: ELuDateGranularity): number {
 		const da = this.stringToDate(a);
 		const db = this.stringToDate(b);
 
@@ -82,9 +75,7 @@ export class LuStringDateAdapter
 	}
 
 	add(d: string, count: number, granularity: ELuDateGranularity): string {
-		return this.dateToString(
-			this._nativeAdapter.add(this.stringToDate(d), count, granularity),
-		);
+		return this.dateToString(this._nativeAdapter.add(this.stringToDate(d), count, granularity));
 	}
 
 	protected stringToDate(s: string): Date {

@@ -8,18 +8,10 @@ import { ALuSidepanelRef, ILuSidepanelRef } from './sidepanel-ref.model';
 import { ILuSidepanelContent } from './sidepanel.model';
 import { LU_SIDEPANEL_DATA } from './sidepanel.token';
 
-class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = any, R = any>
-	extends ALuSidepanelRef<T, D, R>
-	implements ILuSidepanelRef<T, D, R>
-{
+class LuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = any, R = any> extends ALuSidepanelRef<T, D, R> implements ILuSidepanelRef<T, D, R> {
 	protected _containerRef: ComponentRef<LuSidepanelPanelComponent>;
 	protected _containerOutlet: PortalOutlet;
-	constructor(
-		protected override _overlay: Overlay,
-		protected override _injector: Injector,
-		protected override _component: ComponentType<T>,
-		protected override _config: ILuSidepanelConfig,
-	) {
+	constructor(protected override _overlay: Overlay, protected override _injector: Injector, protected override _component: ComponentType<T>, protected override _config: ILuSidepanelConfig) {
 		super(_overlay, _injector, _component, _config);
 	}
 	protected override _openPopup(data?: D) {

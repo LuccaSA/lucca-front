@@ -8,9 +8,7 @@ import { ALuApiService } from './api-service.model';
 const MAGIC_PAGE_SIZE = 20;
 
 @Injectable()
-export class LuApiV3Service<
-	T extends ILuApiItem = ILuApiItem,
-> extends ALuApiService<T> {
+export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
 	protected _api: string;
 	set api(api: string) {
 		this._api = api;
@@ -35,9 +33,7 @@ export class LuApiV3Service<
 	}
 
 	get url() {
-		return `${this._api}?${[...this._filters, this._orderBy, this._fields]
-			.filter((f) => !!f)
-			.join('&')}`;
+		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter((f) => !!f).join('&')}`;
 	}
 
 	constructor(protected _http: HttpClient) {
@@ -62,25 +58,17 @@ export class LuApiV3Service<
 		return this._get(url);
 	}
 
-	searchPaged(
-		clue: string,
-		page: number,
-		filters: string[] = [],
-	): Observable<T[]> {
+	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
 		if (!clue) {
 			return this.getPaged(page, filters);
 		}
 		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
-		const url = [this.url, this._clueFilter(clue), paging, ...filters].join(
-			'&',
-		);
+		const url = [this.url, this._clueFilter(clue), paging, ...filters].join('&');
 		return this._get(url);
 	}
 
 	protected _get(url: string): Observable<T[]> {
-		return this._http
-			.get<ILuApiCollectionResponse<T>>(url)
-			.pipe(map((response) => response.data.items));
+		return this._http.get<ILuApiCollectionResponse<T>>(url).pipe(map((response) => response.data.items));
 	}
 	protected _clueFilter(clue: string) {
 		const urlSafeClue = encodeURIComponent(clue);

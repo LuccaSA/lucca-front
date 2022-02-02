@@ -1,30 +1,11 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	forwardRef,
-	Inject,
-	Input,
-	OnInit,
-	Optional,
-	Self,
-	SkipSelf,
-	ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-	ALuOnCloseSubscriber,
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber
-} from '@lucca-front/ng/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
-import {
-	ALuApiOptionPagedSearcher,
-	ALuApiOptionSearcher
-} from './api-searcher.model';
+import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.model';
 
 @Component({
 	selector: 'lu-api-searcher',
@@ -48,12 +29,7 @@ import {
 		},
 	],
 })
-export class LuApiSearcherComponent<
-		T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem,
-	>
-	extends ALuApiOptionSearcher<T, LuApiHybridService<T>>
-	implements OnInit
-{
+export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef;
 
@@ -89,9 +65,7 @@ export class LuApiSearcherComponent<
 	}
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
-		this.clue$ = this.clueControl.valueChanges.pipe(
-			debounceTime(this.debounceTime),
-		) as Observable<string>;
+		this.clue$ = this.clueControl.valueChanges.pipe(debounceTime(this.debounceTime)) as Observable<string>;
 		super.init();
 	}
 
@@ -136,9 +110,7 @@ export class LuApiSearcherComponent<
 		},
 	],
 })
-export class LuApiPagedSearcherComponent<
-		T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem,
-	>
+export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem>
 	extends ALuApiOptionPagedSearcher<T, LuApiHybridService<T>>
 	implements OnInit
 {
@@ -162,17 +134,12 @@ export class LuApiPagedSearcherComponent<
 	@Input() debounceTime = 250;
 
 	clueControl: FormControl;
-	constructor(
-		@Inject(ALuApiService) @Optional() @SkipSelf() hostService: ALuApiService,
-		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
-	) {
+	constructor(@Inject(ALuApiService) @Optional() @SkipSelf() hostService: ALuApiService, @Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>) {
 		super((hostService || selfService) as LuApiHybridService<T>);
 	}
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
-		this.clue$ = this.clueControl.valueChanges.pipe(
-			debounceTime(this.debounceTime),
-		) as Observable<string>;
+		this.clue$ = this.clueControl.valueChanges.pipe(debounceTime(this.debounceTime)) as Observable<string>;
 		super.init();
 	}
 

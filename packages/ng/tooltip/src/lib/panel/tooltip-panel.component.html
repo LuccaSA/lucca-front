@@ -10,10 +10,6 @@
 		[attr.id]="panelId"
 		[@transformTooltip]="'enter'"
 	>
-		<div
-			class="lu-tooltip-content"
-			[ngClass]="contentClassesMap"
-			[innerHtml]="content | luSafeContent: 'html'"
-		></div>
+		<div class="lu-tooltip-content" [ngClass]="contentClassesMap" [innerHtml]="content | luSafeContent: 'html'"></div>
 	</div>
 </ng-template>

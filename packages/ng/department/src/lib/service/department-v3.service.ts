@@ -13,10 +13,7 @@ export interface IApiDepartment {
 }
 
 @Injectable()
-export class LuDepartmentV3Service
-	extends LuApiV3Service<ILuDepartment>
-	implements ILuDepartmentService<ILuDepartment>
-{
+export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
 	protected override _api = `/api/v3/departments`;
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) {
@@ -34,25 +31,15 @@ export class LuDepartmentV3Service
 	getTrees() {
 		let call: Observable<ILuApiResponse<IApiDepartment>>;
 		if (this._appInstanceId && this._operations?.length) {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(
-				`/api/v3/departments/scopedtree?fields=id,name&appInstanceId=${
-					this._appInstanceId
-				}&operations=${this._operations.join(',')}`,
-			);
+			call = this._http.get<ILuApiResponse<IApiDepartment>>(`/api/v3/departments/scopedtree?fields=id,name&appInstanceId=${this._appInstanceId}&operations=${this._operations.join(',')}`);
 		} else {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(
-				'/api/v3/departments/tree?fields=id,name',
-			);
+			call = this._http.get<ILuApiResponse<IApiDepartment>>('/api/v3/departments/tree?fields=id,name');
 		}
 		return call.pipe(
-			map(
-				(
-					response: ILuApiResponse<IApiDepartment>,
-				): ILuTree<ILuDepartment>[] => {
-					const tree = response.data;
-					return tree.children.map((c) => this.format(c));
-				},
-			),
+			map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
+				const tree = response.data;
+				return tree.children.map((c) => this.format(c));
+			}),
 		);
 	}
 	private format(t: IApiDepartment): ILuTree<ILuDepartment> {

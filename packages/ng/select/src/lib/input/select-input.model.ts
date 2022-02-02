@@ -6,10 +6,7 @@ import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { Subscription } from 'rxjs';
 
-export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
-	extends ALuPopoverTrigger<TPicker>
-	implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput
-{
+export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuPopoverTrigger<TPicker> implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 	protected _subs = new Subscription();
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,

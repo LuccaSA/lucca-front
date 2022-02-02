@@ -1,4 +1,4 @@
-export interface ILuGroup<TItem = any, TKey = any> {
+export interface ILuGroup<TItem, TKey> {
 	key: TKey;
 	items: TItem[];
 }

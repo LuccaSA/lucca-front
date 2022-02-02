@@ -5,10 +5,7 @@ import { ILuQualificationSelectInputLabel } from './qualification-select-input.t
 
 @Injectable()
 export class LuQualificationSelectInputIntl extends ALuIntl<ILuQualificationSelectInputLabel> {
-	constructor(
-		@Inject(LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS) translations,
-		@Inject(LOCALE_ID) locale,
-	) {
+	constructor(@Inject(LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS) translations, @Inject(LOCALE_ID) locale) {
 		super(translations, locale);
 	}
 }

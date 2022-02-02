@@ -2,7 +2,4 @@
 	<input #searchInput class="textfield-input" [formControl]="searchControl" />
 </div>
 
-<lu-option-placeholder
-	*ngIf="empty$ | async"
-	(onClear)="resetClue()"
-></lu-option-placeholder>
+<lu-option-placeholder *ngIf="empty$ | async" (onClear)="resetClue()"></lu-option-placeholder>

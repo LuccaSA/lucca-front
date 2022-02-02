@@ -14,17 +14,12 @@ export interface ILuUserHomonymsService<U extends ILuUser = ILuUser> {
 	enrichHomonyms(homonyms: U[]): Observable<U[]>;
 }
 
-export abstract class ALuUserHomonymsService<U extends ILuUser = ILuUser>
-	implements ILuUserHomonymsService<U>
-{
+export abstract class ALuUserHomonymsService<U extends ILuUser = ILuUser> implements ILuUserHomonymsService<U> {
 	abstract extractHomonyms(users: U[]): U[];
 	abstract enrichHomonyms(homonyms: U[]): Observable<U[]>;
 }
 @Injectable()
-export class LuUserHomonymsService<U extends ILuUser = ILuUser>
-	extends ALuUserHomonymsService<U>
-	implements ILuUserHomonymsService<U>
-{
+export class LuUserHomonymsService<U extends ILuUser = ILuUser> extends ALuUserHomonymsService<U> implements ILuUserHomonymsService<U> {
 	private _format = LuDisplayFullname.lastfirst;
 	extractHomonyms(users: U[]): U[] {
 		const usersByName = {} as { [key: string]: U[] };
@@ -33,9 +28,7 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser>
 			usersByName[name] = [...(usersByName[name] || []), user];
 		});
 
-		const nonUniqNames = Object.keys(usersByName).filter(
-			(key) => usersByName[key].length > 1,
-		);
+		const nonUniqNames = Object.keys(usersByName).filter((key) => usersByName[key].length > 1);
 
 		const homonyms = [] as U[];
 		nonUniqNames.forEach((name) => homonyms.push(...usersByName[name]));
@@ -47,28 +40,20 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser>
 			return of([]) as Observable<U[]>;
 		}
 		return this._http
-			.get<IV3CollectionResponse<{ id: number; department: { name: string } }>>(
-				`/api/v3/users`,
-				{
-					params: {
-						id: homonyms.map((u) => u.id).join(','),
-						fields: 'id,department.name',
-					},
+			.get<IV3CollectionResponse<{ id: number; department: { name: string } }>>(`/api/v3/users`, {
+				params: {
+					id: homonyms.map((u) => u.id).join(','),
+					fields: 'id,department.name',
 				},
-			)
+			})
 			.pipe(
-				map(
-					(res) =>
-						res.data.items as { id: number; department?: { name: string } }[],
-				),
+				map((res) => res.data.items as { id: number; department?: { name: string } }[]),
 				map((infos) =>
 					infos.map((info) => {
 						const homonym = homonyms.find((h) => h.id === info.id);
 						return {
 							...homonym,
-							additionalInformation: info.department
-								? info.department.name
-								: '',
+							additionalInformation: info.department ? info.department.name : '',
 						} as U;
 					}),
 				),

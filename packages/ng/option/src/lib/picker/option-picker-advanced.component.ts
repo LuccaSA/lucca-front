@@ -1,23 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ContentChildren,
-	Directive,
-	forwardRef,
-	Inject,
-	QueryList,
-} from '@angular/core';
-import {
-	ALuOnCloseSubscriber,
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-} from '@lucca-front/ng/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
@@ -27,10 +10,7 @@ import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 
 @Directive()
-export abstract class ALuOptionPickerAdvancedComponent<
-		T,
-		O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>,
-	>
+export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 	extends ALuOptionPickerComponent<T, O>
 	implements AfterViewInit
 {
@@ -38,15 +18,11 @@ export abstract class ALuOptionPickerAdvancedComponent<
 
 	protected _operators: ILuOptionOperator[] = [];
 	protected _operatorsQL: QueryList<ILuOptionOperator<T>>;
-	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(
-		ql: QueryList<ILuOptionOperator<T>>,
-	) {
+	@ContentChildren(ALuOptionOperator, { descendants: true }) set operatorsQL(ql: QueryList<ILuOptionOperator<T>>) {
 		this._operatorsQL = ql;
 	}
 	protected _onOpenSubscribers: ILuOnOpenSubscriber[] = [];
-	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(
-		ql: QueryList<ILuOnOpenSubscriber>,
-	) {
+	@ContentChildren(ALuOnOpenSubscriber, { descendants: true }) set onOpenSubsQL(ql: QueryList<ILuOnOpenSubscriber>) {
 		this._onOpenSubscribers = ql.toArray();
 	}
 	protected _onCloseSubscribers: ILuOnCloseSubscriber[] = [];
@@ -61,27 +37,20 @@ export abstract class ALuOptionPickerAdvancedComponent<
 	}
 	protected _selectors: ILuOptionSelector<T>[] = [];
 	protected _selectorsQL: QueryList<ILuOptionSelector<T>>;
-	@ContentChildren(ALuOptionSelector, { descendants: true }) set selectorsQL(
-		ql: QueryList<ILuOptionSelector<T>>,
-	) {
+	@ContentChildren(ALuOptionSelector, { descendants: true }) set selectorsQL(ql: QueryList<ILuOptionSelector<T>>) {
 		this._selectorsQL = ql;
 	}
 
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 	onScrollBottom() {
-		this._onScrollBottomSubscribers.forEach(
-			(o: ILuOnScrollBottomSubscriber) => {
-				if (!o.onScrollBottom) {
-					return;
-				}
-				o.onScrollBottom();
-			},
-		);
+		this._onScrollBottomSubscribers.forEach((o: ILuOnScrollBottomSubscriber) => {
+			if (!o.onScrollBottom) {
+				return;
+			}
+			o.onScrollBottom();
+		});
 	}
 	override onOpen() {
 		this._onOpenSubscribers.forEach((o: ILuOnOpenSubscriber) => {
@@ -90,12 +59,7 @@ export abstract class ALuOptionPickerAdvancedComponent<
 		const operators = this._operators || [];
 		const lastOperator = operators[operators.length - 1];
 		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(
-				first(),
-				mapTo(false),
-				startWith(true),
-				shareReplay(),
-			);
+			this.loading$ = lastOperator.outOptions$.pipe(first(), mapTo(false), startWith(true), shareReplay());
 		}
 		super.onOpen();
 	}
@@ -121,8 +85,7 @@ export abstract class ALuOptionPickerAdvancedComponent<
 	protected initSelectors() {
 		// TODO : FIX changes type
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		const selectors$: Observable<ILuOptionSelector<T>[]> =
-			this._selectorsQL.changes.pipe(startWith(this._selectorsQL.toArray()));
+		const selectors$: Observable<ILuOptionSelector<T>[]> = this._selectorsQL.changes.pipe(startWith(this._selectorsQL.toArray()));
 		this._subs.add(
 			selectors$.subscribe((selectors) => {
 				this._selectors = selectors;
@@ -163,10 +126,7 @@ export class LuOptionPickerAdvancedComponent<
 	T,
 	O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>,
 > extends ALuOptionPickerAdvancedComponent<T, O> {
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 }

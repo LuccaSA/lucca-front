@@ -1,16 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	forwardRef,
-	Inject,
-	Input,
-	Renderer2,
-	ViewContainerRef,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -35,9 +24,7 @@ import { ILuUserSelectInputLabel } from './user-select-input.translate';
 		},
 	],
 })
-export class LuUserSelectInputComponent<
-		U extends import('../../user.model').ILuUser = import('../../user.model').ILuUser,
-	>
+export class LuUserSelectInputComponent<U extends import('../../user.model').ILuUser = import('../../user.model').ILuUser>
 	extends ALuSelectInputComponent<U>
 	implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit
 {
@@ -56,8 +43,7 @@ export class LuUserSelectInputComponent<
 
 	clue = '';
 
-	byId: LuOptionComparer<U> = (option1: U, option2: U) =>
-		option1 && option2 && option1.id === option2.id;
+	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
@@ -67,12 +53,6 @@ export class LuUserSelectInputComponent<
 		protected override _renderer: Renderer2,
 		@Inject(LuUserSelectInputIntl) public intl: ILuUserSelectInputLabel,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 }

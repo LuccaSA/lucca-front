@@ -1,22 +1,10 @@
-import {
-	ChangeDetectorRef,
-	Directive,
-	forwardRef,
-	Input,
-	OnDestroy,
-	TemplateRef,
-	ViewContainerRef,
-} from '@angular/core';
+import { ChangeDetectorRef, Directive, forwardRef, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 import { Observable, Subscription } from 'rxjs';
 import { ILuGroup } from '@lucca-front/ng/core';
 
 export class LuForGroupContext<T> {
-	public constructor(
-		public $implicit: T,
-		public index: number,
-		public count: number,
-	) {}
+	public constructor(public $implicit: T, public index: number, public count: number) {}
 
 	public get first(): boolean {
 		return this.index === 0;
@@ -45,9 +33,7 @@ export class LuForGroupContext<T> {
 		},
 	],
 })
-export class LuForGroupsDirective<TItem = any, TKey = any>
-	implements ILuOptionOperator<TItem>, OnDestroy
-{
+export class LuForGroupsDirective<TItem = any, TKey = any> implements ILuOptionOperator<TItem>, OnDestroy {
 	outOptions$?: Observable<TItem[]>;
 
 	private _groupByFn: (item: TItem) => TKey;
@@ -62,13 +48,7 @@ export class LuForGroupsDirective<TItem = any, TKey = any>
 		this.outOptions$ = options$;
 	}
 
-	public constructor(
-		protected _vcr: ViewContainerRef,
-		protected _cdr: ChangeDetectorRef,
-		protected _templateRef: TemplateRef<
-			LuForGroupContext<ILuGroup<TItem, TKey>>
-		>,
-	) {}
+	public constructor(protected _vcr: ViewContainerRef, protected _cdr: ChangeDetectorRef, protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>) {}
 
 	public ngOnDestroy(): void {
 		this._subs.unsubscribe();
@@ -79,10 +59,7 @@ export class LuForGroupsDirective<TItem = any, TKey = any>
 		const count = options.length;
 		const groups = this.groupBy(options);
 		groups.forEach((group, index) => {
-			const view = this._vcr.createEmbeddedView(
-				this._templateRef,
-				new LuForGroupContext<ILuGroup<TItem, TKey>>(group, index, count),
-			);
+			const view = this._vcr.createEmbeddedView(this._templateRef, new LuForGroupContext<ILuGroup<TItem, TKey>>(group, index, count));
 		});
 		this._cdr.markForCheck();
 	}

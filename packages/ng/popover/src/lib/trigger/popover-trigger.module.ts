@@ -6,12 +6,7 @@ import { LuPopoverPanelModule } from '../panel/index';
 import { LuPopoverTargetModule } from '../target/index';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		OverlayModule,
-		LuPopoverPanelModule,
-		LuPopoverTargetModule,
-	],
+	imports: [CommonModule, OverlayModule, LuPopoverPanelModule, LuPopoverTargetModule],
 	declarations: [LuPopoverTriggerDirective],
 	exports: [LuPopoverTriggerDirective],
 })

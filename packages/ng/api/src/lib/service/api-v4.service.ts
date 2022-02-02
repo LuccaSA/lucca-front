@@ -6,9 +6,7 @@ import { ILuApiItem } from '../api.model';
 import { ALuApiService } from './api-service.model';
 
 @Injectable()
-export class LuApiV4Service<
-	T extends ILuApiItem = ILuApiItem,
-> extends ALuApiService<T> {
+export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
 	protected _api: string;
 	set api(api: string) {
 		this._api = api;
@@ -37,12 +35,7 @@ export class LuApiV4Service<
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
 	getPaged(page = 0, filters: string[] = []): Observable<T[]> {
-		const query = [
-			`page=${page + 1}`,
-			...this.filters,
-			...filters,
-			this._sort,
-		].filter((f) => !!f);
+		const query = [`page=${page + 1}`, ...this.filters, ...filters, this._sort].filter((f) => !!f);
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
@@ -54,12 +47,7 @@ export class LuApiV4Service<
 			.split(' ')
 			.map((c) => encodeURIComponent(c))
 			.join(',');
-		const query = [
-			`search=${urlSafeClues}`,
-			...this.filters,
-			...filters,
-			this._sort,
-		].filter((f) => !!f);
+		const query = [`search=${urlSafeClues}`, ...this.filters, ...filters, this._sort].filter((f) => !!f);
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
@@ -71,20 +59,12 @@ export class LuApiV4Service<
 			.split(' ')
 			.map((c) => encodeURIComponent(c))
 			.join(',');
-		const query = [
-			`search=${urlSafeClues}`,
-			`page=${page + 1}`,
-			...this.filters,
-			...filters,
-			this._sort,
-		].filter((f) => !!f);
+		const query = [`search=${urlSafeClues}`, `page=${page + 1}`, ...this.filters, ...filters, this._sort].filter((f) => !!f);
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
 	count(): Observable<number> {
-		const query = [...this.filters, 'fields.root=count', 'limit=0'].filter(
-			(f) => !!f,
-		);
+		const query = [...this.filters, 'fields.root=count', 'limit=0'].filter((f) => !!f);
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ count: number }>(url).pipe(map((res) => res.count));
 	}

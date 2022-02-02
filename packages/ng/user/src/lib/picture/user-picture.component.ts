@@ -1,15 +1,6 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	Input,
-	ChangeDetectorRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ChangeDetectorRef } from '@angular/core';
 import { ILuUser } from '../user.model';
-import {
-	LuUserDisplayPipe,
-	LuDisplayInitials,
-	LuDisplayFullname,
-} from '../display/index';
+import { LuUserDisplayPipe, LuDisplayInitials, LuDisplayFullname } from '../display/index';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -64,10 +55,7 @@ export class LuUserPictureComponent {
 
 	style;
 
-	constructor(
-		private displayPipe: LuUserDisplayPipe,
-		private _changeDetector: ChangeDetectorRef,
-	) {}
+	constructor(private displayPipe: LuUserDisplayPipe, private _changeDetector: ChangeDetectorRef) {}
 
 	private getNameHue(): number {
 		// we sum the chars in user's firstname + lastname

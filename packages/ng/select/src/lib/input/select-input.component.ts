@@ -25,10 +25,7 @@ import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
 @Directive()
-export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
-	extends ALuSelectInput<T, TPicker>
-	implements ControlValueAccessor, AfterViewInit, OnDestroy
-{
+export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	@ViewChild('display', { read: ViewContainerRef, static: true })
 	protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;

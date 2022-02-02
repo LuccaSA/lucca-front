@@ -1,24 +1,9 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	Input,
-	Inject,
-	Optional,
-	SkipSelf,
-	Self,
-	OnInit,
-} from '@angular/core';
-import {
-	ILuOnScrollBottomSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ILuOnOpenSubscriber,
-	ALuOnOpenSubscriber,
-} from '@lucca-front/ng/core';
-import { ILuOptionOperator, ALuOptionOperator } from '@lucca-front/ng/option';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, Input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ILuApiItem } from '../../api.model';
-import { ALuApiOptionPager } from './api-pager.model';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
+import { ALuApiOptionPager } from './api-pager.model';
 
 @Component({
 	selector: 'lu-api-pager',
@@ -49,11 +34,7 @@ import { ALuApiService, LuApiHybridService } from '../../service/index';
 })
 export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
 	extends ALuApiOptionPager<T, LuApiHybridService<T>>
-	implements
-		ILuOptionOperator<T>,
-		OnInit,
-		ILuOnScrollBottomSubscriber,
-		ILuOnOpenSubscriber
+	implements ILuOptionOperator<T>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenSubscriber
 {
 	constructor(
 		@Inject(ALuApiService)

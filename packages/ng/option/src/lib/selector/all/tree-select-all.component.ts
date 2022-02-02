@@ -1,18 +1,9 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	HostBinding,
-	Inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } from '@angular/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/index';
-import {
-	ALuTreeOptionSelector,
-	ILuTreeOptionSelector,
-} from '../tree-option-selector.model';
+import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
 import { LuOptionSelectAllIntl } from './select-all.intl';
 import { ILuOptionSelectAllLabel } from './select-all.translate';
 @Component({
@@ -33,10 +24,7 @@ import { ILuOptionSelectAllLabel } from './select-all.translate';
 		},
 	],
 })
-export class LuTreeOptionSelectAllComponent<T>
-	extends ALuTreeOptionOperator<T>
-	implements ILuTreeOptionSelector<T>
-{
+export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> implements ILuTreeOptionSelector<T> {
 	multiple = true;
 	onSelectValue = new Subject<T | T[]>();
 	private _values: T[];
@@ -45,14 +33,10 @@ export class LuTreeOptionSelectAllComponent<T>
 	flatOptions: T[];
 	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
-		this.outOptions$ = in$.pipe(
-			tap((options) => (this.flatOptions = this.flattenTree(options))),
-		);
+		this.outOptions$ = in$.pipe(tap((options) => (this.flatOptions = this.flattenTree(options))));
 	}
 
-	constructor(
-		@Inject(LuOptionSelectAllIntl) public intl: ILuOptionSelectAllLabel,
-	) {
+	constructor(@Inject(LuOptionSelectAllIntl) public intl: ILuOptionSelectAllLabel) {
 		super();
 	}
 
@@ -67,8 +51,6 @@ export class LuTreeOptionSelectAllComponent<T>
 	}
 
 	private flattenTree(tree: ILuTree<T>[] = []): T[] {
-		return tree
-			.map((t) => [t.value, ...this.flattenTree(t.children)])
-			.reduce((agg, cur) => [...agg, ...cur], []);
+		return tree.map((t) => [t.value, ...this.flattenTree(t.children)]).reduce((agg, cur) => [...agg, ...cur], []);
 	}
 }

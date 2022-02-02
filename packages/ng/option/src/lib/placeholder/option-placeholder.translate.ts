@@ -4,9 +4,7 @@ export interface ILuOptionPlaceholderLabel {
 	placeholderDescription: string;
 	placeholderAction: string;
 }
-export abstract class ALuOptionPlaceholderLabel
-	implements ILuOptionPlaceholderLabel
-{
+export abstract class ALuOptionPlaceholderLabel implements ILuOptionPlaceholderLabel {
 	placeholderDescription: string;
 	placeholderAction: string;
 }

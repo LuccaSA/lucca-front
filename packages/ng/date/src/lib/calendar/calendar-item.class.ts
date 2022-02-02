@@ -29,10 +29,7 @@ export class YearItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 		super();
 	}
 }
-export class DecadeItem<D>
-	extends ACalendarItem<D>
-	implements ICalendarItem<D>
-{
+export class DecadeItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	override readonly granularity = ELuDateGranularity.decade;
 	constructor(public override date: D, public override label: string) {
 		super();

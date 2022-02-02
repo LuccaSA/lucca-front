@@ -8,18 +8,8 @@ import { LuOptionPickerAdvancedComponent } from './option-picker-advanced.compon
 import { LuOptionPickerComponent } from './option-picker.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		OverlayModule,
-		LuOptionItemModule,
-		LuScrollModule,
-		A11yModule,
-	],
+	imports: [CommonModule, OverlayModule, LuOptionItemModule, LuScrollModule, A11yModule],
 	declarations: [LuOptionPickerComponent, LuOptionPickerAdvancedComponent],
-	exports: [
-		LuOptionPickerComponent,
-		LuOptionPickerAdvancedComponent,
-		LuOptionItemModule,
-	],
+	exports: [LuOptionPickerComponent, LuOptionPickerAdvancedComponent, LuOptionItemModule],
 })
 export class LuOptionPickerModule {}

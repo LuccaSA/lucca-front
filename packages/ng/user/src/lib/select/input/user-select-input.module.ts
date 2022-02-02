@@ -1,13 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-	LuInputClearerModule,
-	LuInputDisplayerModule,
-} from '@lucca-front/ng/input';
-import {
-	LuOptionOperatorModule,
-	LuOptionPickerModule,
-} from '@lucca-front/ng/option';
+import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuOptionOperatorModule, LuOptionPickerModule } from '@lucca-front/ng/option';
 import { LuUserDisplayModule } from '../../display/index';
 import { LuUserHomonymsModule } from '../homonyms/index';
 import { LuUserMeOptionModule } from '../me/index';
