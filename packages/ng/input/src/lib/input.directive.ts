@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 /**
@@ -28,7 +28,7 @@ export class LuInputDirective implements OnInit {
 	}
 	ngOnInit() {
 		this._ngControl.valueChanges.subscribe((v) => this.applyClasses(v));
-		const val = this._ngControl.value;
+		const val: unknown = this._ngControl.value;
 		this.applyClasses(val);
 	}
 }

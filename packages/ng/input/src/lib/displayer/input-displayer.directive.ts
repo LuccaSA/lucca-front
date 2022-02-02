@@ -1,13 +1,11 @@
 import {
 	Directive,
-	TemplateRef,
 	forwardRef,
-	ElementRef,
-	ViewRef,
-	EmbeddedViewRef,
 	Input,
+	TemplateRef,
+	ViewRef,
 } from '@angular/core';
-import { ILuInputDisplayer, ALuInputDisplayer } from './input-displayer.model';
+import { ALuInputDisplayer, ILuInputDisplayer } from './input-displayer.model';
 
 @Directive({
 	selector: '[luDisplayer]',
@@ -19,7 +17,7 @@ import { ILuInputDisplayer, ALuInputDisplayer } from './input-displayer.model';
 		},
 	],
 })
-export class LuInputDisplayerDirective<T = any>
+export class LuInputDisplayerDirective<T>
 	extends ALuInputDisplayer<T>
 	implements ILuInputDisplayer<T>
 {
@@ -43,6 +41,6 @@ export class LuInputDisplayerDirective<T = any>
 	}
 }
 
-export class LuInputDisplayerContext<T = any> {
+export class LuInputDisplayerContext<T> {
 	constructor(public $implicit: T | T[]) {}
 }

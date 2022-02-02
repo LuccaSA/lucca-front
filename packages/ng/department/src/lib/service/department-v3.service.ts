@@ -1,11 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ILuDepartmentService } from './department-service.model';
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ILuApiResponse, LuApiV3Service } from '@lucca-front/ng/api';
 import { ILuTree } from '@lucca-front/ng/core';
-import { ILuDepartment } from '../department.model';
-import { LuApiV3Service } from '@lucca-front/ng/api';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ILuDepartment } from '../department.model';
+import { ILuDepartmentService } from './department-service.model';
+
+export interface IApiDepartment {
+	node: ILuDepartment;
+	children: IApiDepartment[];
+}
 
 @Injectable()
 export class LuDepartmentV3Service
@@ -27,24 +32,30 @@ export class LuDepartmentV3Service
 	}
 
 	getTrees() {
-		let call: Observable<any>;
+		let call: Observable<ILuApiResponse<IApiDepartment>>;
 		if (this._appInstanceId && this._operations?.length) {
-			call = this._http.get(
+			call = this._http.get<ILuApiResponse<IApiDepartment>>(
 				`/api/v3/departments/scopedtree?fields=id,name&appInstanceId=${
 					this._appInstanceId
 				}&operations=${this._operations.join(',')}`,
 			);
 		} else {
-			call = this._http.get('/api/v3/departments/tree?fields=id,name');
+			call = this._http.get<ILuApiResponse<IApiDepartment>>(
+				'/api/v3/departments/tree?fields=id,name',
+			);
 		}
 		return call.pipe(
-			map((response: any): ILuTree<ILuDepartment>[] => {
-				const tree = response.data;
-				return tree.children.map((c) => this.format(c));
-			}),
+			map(
+				(
+					response: ILuApiResponse<IApiDepartment>,
+				): ILuTree<ILuDepartment>[] => {
+					const tree = response.data;
+					return tree.children.map((c) => this.format(c));
+				},
+			),
 		);
 	}
-	private format(t): ILuTree<ILuDepartment> {
+	private format(t: IApiDepartment): ILuTree<ILuDepartment> {
 		return { value: t.node, children: t.children.map((c) => this.format(c)) };
 	}
 }

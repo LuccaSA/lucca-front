@@ -65,7 +65,7 @@ export class LuDepartmentSelectInputComponent<
 		);
 	}
 
-	searchFn(o, c) {
+	searchFn(o: D, c: string): boolean {
 		return o.name.toLowerCase().includes(c.toLowerCase());
 	}
 }

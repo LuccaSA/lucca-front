@@ -1,33 +1,31 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
+	ContentChildren,
 	EventEmitter,
 	Input,
 	OnDestroy,
 	Output,
+	QueryList,
 	TemplateRef,
 	ViewChild,
-	ChangeDetectionStrategy,
-	QueryList,
-	ContentChildren,
-	HostListener,
 } from '@angular/core';
-
 import {
-	ILuPopoverPanel,
 	ALuPopoverPanel,
+	ILuPopoverPanel,
 	luTransformPopover,
 } from '@lucca-front/ng/popover';
-import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 // import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
-import { merge, of, Subscription, Observable } from 'rxjs';
+import { merge, Observable, Subscription } from 'rxjs';
 import {
-	map,
-	startWith,
-	delay,
-	share,
-	switchMap,
 	debounceTime,
+	delay,
+	map,
+	share,
+	startWith,
+	switchMap,
 } from 'rxjs/operators';
+import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 
 @Component({
 	selector: 'lu-dropdown',
@@ -62,12 +60,14 @@ export class LuDropdownPanelComponent
 	}
 
 	/** Event emitted when the popover is closed. */
+	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override close = new EventEmitter<void>();
+	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override open = new EventEmitter<void>();
 	@Output() override hovered = new EventEmitter<boolean>();
 
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<unknown>) {
 		this.templateRef = tr;
 	}
 
@@ -105,9 +105,7 @@ export class LuDropdownPanelComponent
 			debounceTime(1),
 		);
 
-		const itemSelectSub = singleFlow$.subscribe((shouldClose) =>
-			this.close.emit(),
-		);
+		const itemSelectSub = singleFlow$.subscribe(() => this.close.emit());
 		this._subs.add(itemSelectSub);
 	}
 	ngAfterViewInit() {

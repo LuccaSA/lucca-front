@@ -1,26 +1,26 @@
+import { CdkPortalOutlet, Portal, PortalOutlet } from '@angular/cdk/portal';
 import {
-	Component,
-	ViewChild,
-	ComponentRef,
-	OnDestroy,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
-	Inject,
+	Component,
+	ComponentRef,
 	Directive,
+	HostBinding,
+	Inject,
+	OnDestroy,
+	ViewChild,
 } from '@angular/core';
-import { PortalOutlet, CdkPortalOutlet, Portal } from '@angular/cdk/portal';
-import { ILuModalContent } from './modal.model';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
-import { ILuModalLabel } from './modal.translate';
-import { Subject, timer, Observable, Subscription } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
+import { ILuModalContent } from './modal.model';
 import { LU_MODAL_TRANSLATIONS } from './modal.token';
+import { ILuModalLabel } from './modal.translate';
 
 @Directive()
-export abstract class ALuModalPanelComponent<
-	T extends ILuModalContent = ILuModalContent,
-> implements PortalOutlet, OnDestroy
+export abstract class ALuModalPanelComponent<T extends ILuModalContent<U>, U>
+	implements PortalOutlet, OnDestroy
 {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true })
 	protected _outlet: PortalOutlet;
@@ -56,7 +56,7 @@ export abstract class ALuModalPanelComponent<
 	private _subs = new Subscription();
 
 	constructor(
-		protected _ref: ALuModalRef<LuModalPanelComponent>,
+		protected _ref: ALuModalRef<LuModalPanelComponent<T, U>>,
 		protected _cdr: ChangeDetectorRef,
 		@Inject(LU_MODAL_TRANSLATIONS) public intl: ILuModalLabel,
 	) {}
@@ -66,7 +66,7 @@ export abstract class ALuModalPanelComponent<
 		return ref;
 	}
 	detach() {
-		return this._outlet.detach();
+		this._outlet.detach();
 	}
 	dispose() {
 		return this._outlet.dispose();
@@ -120,14 +120,15 @@ export abstract class ALuModalPanelComponent<
 	selector: 'lu-modal-panel',
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
-	host: { class: 'lu-modal-panel' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuModalPanelComponent<
-	T extends ILuModalContent = ILuModalContent,
-> extends ALuModalPanelComponent<T> {
+	T extends ILuModalContent<U>,
+	U,
+> extends ALuModalPanelComponent<T, U> {
+	@HostBinding('class.lu-modal-panel') class = true;
 	constructor(
-		_ref: ALuModalRef<LuModalPanelComponent>,
+		_ref: ALuModalRef<LuModalPanelComponent<T, U>>,
 		_cdr: ChangeDetectorRef,
 		@Inject(LuModalIntl) intl: ILuModalLabel,
 	) {
@@ -138,14 +139,16 @@ export class LuModalPanelComponent<
 	selector: 'lu-modal-panel-default',
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
-	host: { class: 'lu-modal-panel' },
 	changeDetection: ChangeDetectionStrategy.Default,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuModalPanelComponentDefaultCD<
-	T extends ILuModalContent = ILuModalContent,
-> extends ALuModalPanelComponent<T> {
+	T extends ILuModalContent<U>,
+	U,
+> extends ALuModalPanelComponent<T, U> {
+	@HostBinding('class.lu-modal-panel') class = true;
 	constructor(
-		_ref: ALuModalRef<LuModalPanelComponent>,
+		_ref: ALuModalRef<LuModalPanelComponent<T, U>>,
 		_cdr: ChangeDetectorRef,
 		@Inject(LuModalIntl) intl: ILuModalLabel,
 	) {
