@@ -1,55 +1,58 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	forwardRef,
-	Input,
-	ViewChild,
 	ElementRef,
-	SkipSelf,
-	Self,
-	Optional,
-	Inject,
+	forwardRef,
 	HostBinding,
-	OnInit,
+	Inject,
+	Input,
 	OnDestroy,
+	OnInit,
+	Optional,
 	Output,
+	Self,
+	SkipSelf,
+	ViewChild,
 } from '@angular/core';
-import {
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ALuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-} from '@lucca-front/ng/core';
-
-import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
-	debounceTime,
-	switchMap,
+	ALuOnCloseSubscriber,
+	ALuOnOpenSubscriber,
+	ALuOnScrollBottomSubscriber,
+	ILuOnCloseSubscriber,
+	ILuOnOpenSubscriber,
+	ILuOnScrollBottomSubscriber,
+} from '@lucca-front/ng/core';
+import { ALuOptionOperator } from '@lucca-front/ng/option';
+import {
+	BehaviorSubject,
+	combineLatest,
+	merge,
+	Observable,
+	of,
+	Subject,
+	Subscription,
+} from 'rxjs';
+import {
 	catchError,
+	debounceTime,
+	filter,
+	map,
+	mapTo,
+	scan,
 	share,
 	startWith,
-	mapTo,
-	map,
-	scan,
-	filter,
-	distinctUntilChanged,
+	switchMap,
 } from 'rxjs/operators';
-import { ILuUser } from '../../user.model';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
-import {
-	Subject,
-	Observable,
-	Subscription,
-	combineLatest,
-	of,
-	merge,
-	BehaviorSubject,
-} from 'rxjs';
+import { ILuUser } from '../../user.model';
 import { LuUserSearcherIntl } from './user-searcher.intl';
 import { ILuUserSearcherLabel } from './user-searcher.translate';
+
+interface UserPagedSearcherForm {
+	clue: string;
+	formerEmployees: boolean;
+}
 
 @Component({
 	selector: 'lu-user-paged-searcher',
@@ -96,7 +99,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef;
+	searchInput: ElementRef<HTMLInputElement>;
 
 	@Input() set fields(fields: string) {
 		this._service.fields = fields;
@@ -135,18 +138,20 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	) {
 		this._service = (hostService || selfService) as LuUserV3Service<U>;
 
-		const clue = new FormControl('');
+		const clue: FormControl = new FormControl('');
 
 		this.form = new FormGroup({
 			clue,
 			formerEmployees: new FormControl(false),
 		});
 
-		this.clueChange = clue.valueChanges;
+		this.clueChange = clue.valueChanges as Observable<string>;
 	}
 
 	ngOnInit() {
-		const formValue$ = this.form.valueChanges.pipe(startWith(this.form.value));
+		const formValue$ = this.form.valueChanges.pipe(
+			startWith(this.form.value),
+		) as Observable<UserPagedSearcherForm>;
 
 		const pager$ = this._page$.pipe(
 			scan((acc) => acc + 1, 0),
@@ -158,13 +163,17 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 			this._isOpened$,
 		]).pipe(
 			filter(([, isOpened]) => isOpened),
-			switchMap(([val]) => pager$.pipe(map((page) => [val, page]))),
+			switchMap(([val]) =>
+				pager$.pipe(
+					map((page) => [val, page] as [UserPagedSearcherForm, number]),
+				),
+			),
 			share(),
 		);
 
 		const results$ = query$.pipe(
 			switchMap(([val, page]) => {
-				const filters = [];
+				const filters: string[] = [];
 				if (val.formerEmployees) {
 					filters.push(`formerEmployees=true`);
 				}
