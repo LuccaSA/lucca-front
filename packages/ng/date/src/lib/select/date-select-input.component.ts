@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, ChangeDetectorRef, forwardRef, ViewContainerRef, ElementRef, ViewChild, Input, Renderer2, AfterViewInit, Inject } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker, ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
-import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
-import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
-import { ILuDateSelectInputLabel } from './date-select-input.translate';
+import { ILuInputWithPicker } from '@lucca-front/ng/picker';
+import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDateSelectInputIntl } from './date-select-input.intl';
+import { ILuDateSelectInputLabel } from './date-select-input.translate';
 
 @Component({
 	selector: 'lu-date-select',
@@ -61,7 +60,7 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 	}
 
 	validate(control: AbstractControl): ValidationErrors | null {
-		const d = control.value;
+		const d = control.value as D;
 		if (!d) {
 			return null;
 		}
