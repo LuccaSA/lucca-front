@@ -1,14 +1,14 @@
-import { ILuUser } from '../user.model';
-import { ILuUserService } from './user-service.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import {
-	LuApiV3Service,
 	ILuApiResponse,
 	ILuApiSuggestion,
+	LuApiV3Service,
 } from '@lucca-front/ng/api';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { ILuUser } from '../user.model';
+import { ILuUserService } from './user-service.model';
 
 @Injectable()
 export class LuUserV3Service<U extends ILuUser = ILuUser>
@@ -58,16 +58,19 @@ export class LuUserV3Service<U extends ILuUser = ILuUser>
 		}
 	}
 
+	// FIXME typing
 	protected override _get(url) {
-		return ((<any>super._get(url)) as Observable<ILuApiSuggestion<U>[]>).pipe(
-			map((suggestions) => suggestions.map((s) => s.item)),
+		return (
+			super._get(url) as unknown as Observable<ILuApiSuggestion<U>[]>
+		).pipe(
+			map((suggestions) => suggestions.map((s: ILuApiSuggestion<U>) => s.item)),
 		);
 	}
 
-	protected override _clueFilter(clue) {
+	protected override _clueFilter(clue: string) {
 		const urlSafeClue = clue
 			.split(' ')
-			.map((c) => encodeURIComponent(c))
+			.map((c: string) => encodeURIComponent(c))
 			.join(',');
 		return `clue=${urlSafeClue}`;
 	}
