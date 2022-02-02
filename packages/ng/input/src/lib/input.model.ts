@@ -3,19 +3,13 @@ import { ControlValueAccessor } from '@angular/forms';
 
 export type ILuInput = ControlValueAccessor;
 
-export abstract class ALuInput<T, U extends HTMLElement = HTMLElement>
-	implements ILuInput
-{
+export abstract class ALuInput<T, U extends HTMLElement = HTMLElement> implements ILuInput {
 	protected _placeholder: string;
 	get placeholder() {
 		return this._placeholder;
 	}
 	protected _value: T;
-	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _elementRef: ElementRef<U>,
-		protected _renderer: Renderer2,
-	) {}
+	constructor(protected _changeDetectorRef: ChangeDetectorRef, protected _elementRef: ElementRef<U>, protected _renderer: Renderer2) {}
 	setValue(value: T) {
 		this.value = value;
 		this._cvaOnChange(value);

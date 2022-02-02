@@ -11,9 +11,7 @@ export class LuOptionPlaceholderComponent {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onClear = new EventEmitter();
 
-	constructor(
-		@Inject(LuOptionPlaceholderIntl) public intl: ILuOptionPlaceholderLabel,
-	) {}
+	constructor(@Inject(LuOptionPlaceholderIntl) public intl: ILuOptionPlaceholderLabel) {}
 
 	clear() {
 		this.onClear.emit();

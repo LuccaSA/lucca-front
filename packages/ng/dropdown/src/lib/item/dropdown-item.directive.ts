@@ -1,12 +1,4 @@
-import {
-	Directive,
-	ElementRef,
-	EventEmitter,
-	forwardRef,
-	HostListener,
-	OnDestroy,
-	Output,
-} from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, OnDestroy, Output } from '@angular/core';
 import { ALuDropdownItem } from './dropdown-item.model';
 
 @Directive({
@@ -20,10 +12,7 @@ import { ALuDropdownItem } from './dropdown-item.model';
 		},
 	],
 })
-export class LuDropdownItemDirective
-	extends ALuDropdownItem
-	implements OnDestroy
-{
+export class LuDropdownItemDirective extends ALuDropdownItem implements OnDestroy {
 	// arreter les ONxxxx
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelect = new EventEmitter<boolean>();

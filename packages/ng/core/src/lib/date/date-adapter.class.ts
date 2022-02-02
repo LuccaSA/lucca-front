@@ -8,9 +8,7 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 	abstract isValid(d: D): boolean;
 	compare(a: D, b: D, granularity: ELuDateGranularity): number {
 		if (!a || !b || !this.isValid(a) || !this.isValid(b)) {
-			throw new Error(
-				'you must provide valid and not null dates to be compared',
-			);
+			throw new Error('you must provide valid and not null dates to be compared');
 		}
 		const aDecade = Math.floor(this.getYear(a) / 10);
 		const bDecade = Math.floor(this.getYear(b) / 10);

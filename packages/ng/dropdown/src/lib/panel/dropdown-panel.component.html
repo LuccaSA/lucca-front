@@ -11,10 +11,7 @@
 		[attr.aria-labelledby]="triggerId"
 		[@transformPopover]="'enter'"
 	>
-		<div
-			class="lu-popover-content lu-dropdown-content"
-			[ngClass]="contentClassesMap"
-		>
+		<div class="lu-popover-content lu-dropdown-content" [ngClass]="contentClassesMap">
 			<ul class="lu-dropdown-options">
 				<ng-content></ng-content>
 			</ul>

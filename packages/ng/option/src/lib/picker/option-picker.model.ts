@@ -7,13 +7,7 @@ export type ILuOptionPickerPanel<T> = ILuPickerPanel<T>;
 
 export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 
-export abstract class ALuOptionPicker<
-		T,
-		O extends ILuOptionItem<T> = ILuOptionItem<T>,
-	>
-	extends ALuPickerPanel<T>
-	implements ILuOptionPickerPanel<T>
-{
+export abstract class ALuOptionPicker<T, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	protected _subs = new Subscription();
 	override onSelectValue: Observable<T | T[]>;
 	protected _value: T | T[];
@@ -35,13 +29,10 @@ export abstract class ALuOptionPicker<
 			}),
 		);
 		// subscribe to any option.onSelect
-		const singleFlow$ = options$.pipe(
-			switchMap((items) => merge(...items.map((i) => i.onSelect))),
-		);
+		const singleFlow$ = options$.pipe(switchMap((items) => merge(...items.map((i) => i.onSelect))));
 		this._subs.add(singleFlow$.subscribe((option) => this._toggle(option)));
 	}
-	protected optionComparer: LuOptionComparer<T> = (option1: T, option2: T) =>
-		JSON.stringify(option1) === JSON.stringify(option2);
+	protected optionComparer: LuOptionComparer<T> = (option1: T, option2: T) => JSON.stringify(option1) === JSON.stringify(option2);
 	protected _toggle(option: O) {
 		const value = option.value;
 		if (!this.multiple) {

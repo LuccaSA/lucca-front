@@ -7,9 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class LuApiHybridService<
-	T extends ILuApiItem = ILuApiItem,
-> extends ALuApiService<T> {
+export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
 	private _v3Service: LuApiV3Service<T>;
 	private _v4Service: LuApiV4Service<T>;
 
@@ -69,11 +67,7 @@ export class LuApiHybridService<
 		return this._service.searchAll(clue, filters);
 	}
 
-	searchPaged(
-		clue: string,
-		page: number,
-		filters: string[] = [],
-	): Observable<T[]> {
+	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
 		return this._service.searchPaged(clue, page, filters);
 	}
 }

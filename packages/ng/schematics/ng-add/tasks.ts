@@ -17,13 +17,7 @@ export function updateAngularJson(tree: Tree) {
 	const angularJson = JSON.parse(tree.read('angular.json')?.toString() ?? '{}');
 	const { defaultProject, projects } = angularJson;
 	projects[defaultProject].architect.build.options.stylePreprocessorOptions = {
-		includePaths: [
-			'src/scss/overrides',
-			'src/scss',
-			'node_modules/@lucca-front/ng/style/overrides',
-			'node_modules/@lucca-front/scss/src/overrides',
-			'node_modules/@lucca-front/ng/style',
-		],
+		includePaths: ['src/scss/overrides', 'src/scss', 'node_modules/@lucca-front/ng/style/overrides', 'node_modules/@lucca-front/scss/src/overrides', 'node_modules/@lucca-front/ng/style'],
 	};
 
 	tree.overwrite('angular.json', JSON.stringify(angularJson, undefined, '  ') + '\n');

@@ -1,19 +1,7 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	Input,
-	ViewChild,
-	ElementRef,
-	HostBinding,
-	Inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding, Inject } from '@angular/core';
 import { Observable, combineLatest, merge, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import {
-	ALuTreeOptionOperator,
-	ILuTreeOptionOperator,
-} from '../tree-option-operator.model';
+import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { tap, map } from 'rxjs/operators';
@@ -36,10 +24,7 @@ import { tap, map } from 'rxjs/operators';
 		},
 	],
 })
-export class LuTreeOptionSearcherComponent<T = any>
-	extends ALuTreeOptionOperator<T>
-	implements ILuTreeOptionOperator<T>, ILuOnOpenSubscriber
-{
+export class LuTreeOptionSearcherComponent<T = any> extends ALuTreeOptionOperator<T> implements ILuTreeOptionOperator<T>, ILuOnOpenSubscriber {
 	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges);
 	empty$: Observable<boolean>;
@@ -67,9 +52,7 @@ export class LuTreeOptionSearcherComponent<T = any>
 				if (this.searchFn(option.value, clue)) {
 					return { ...option };
 				}
-				const trimmedChildren = option.children
-					? this.trim(option.children, clue)
-					: [];
+				const trimmedChildren = option.children ? this.trim(option.children, clue) : [];
 				if (trimmedChildren.length) {
 					return { ...option, children: trimmedChildren };
 				}

@@ -1,30 +1,8 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ContentChildren,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	Output,
-	QueryList,
-	TemplateRef,
-	ViewChild,
-} from '@angular/core';
-import {
-	ALuPopoverPanel,
-	ILuPopoverPanel,
-	luTransformPopover,
-} from '@lucca-front/ng/popover';
+import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 // import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 import { merge, Observable, Subscription } from 'rxjs';
-import {
-	debounceTime,
-	delay,
-	map,
-	share,
-	startWith,
-	switchMap,
-} from 'rxjs/operators';
+import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 
 @Component({
@@ -34,10 +12,7 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
 })
-export class LuDropdownPanelComponent
-	extends ALuPopoverPanel
-	implements ILuPopoverPanel, OnDestroy
-{
+export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -79,9 +54,7 @@ export class LuDropdownPanelComponent
 	// }
 	protected _items: ILuDropdownItem[] = [];
 	protected _itemsQL: QueryList<ILuDropdownItem>;
-	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(
-		ql: QueryList<ILuDropdownItem>,
-	) {
+	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(ql: QueryList<ILuDropdownItem>) {
 		this._itemsQL = ql;
 	}
 

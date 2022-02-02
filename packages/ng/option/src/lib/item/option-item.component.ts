@@ -1,14 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	Output,
-	Input,
-	EventEmitter,
-	forwardRef,
-	ElementRef,
-	ChangeDetectorRef,
-	ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
 @Component({
@@ -24,10 +14,7 @@ import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 		},
 	],
 })
-export class LuOptionItemComponent<T = any>
-	extends ALuOptionItem<T>
-	implements ILuOptionItem<T>
-{
+export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements ILuOptionItem<T> {
 	protected _selected = false;
 	get selected() {
 		return this._selected;

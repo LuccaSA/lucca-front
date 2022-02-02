@@ -1,21 +1,8 @@
-import {
-	Directive,
-	forwardRef,
-	HostListener,
-	Inject,
-	Input,
-	OnDestroy,
-	Optional,
-	Self,
-	SkipSelf,
-} from '@angular/core';
+import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
 import { ALuOptionSelector, ILuOptionSelector } from '@lucca-front/ng/option';
 import { Subject, Subscription } from 'rxjs';
 import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
-import {
-	ALuEstablishmentService,
-	LuEstablishmentService,
-} from '../../service/index';
+import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
 @Directive({
 	selector: '[luLegalUnitSelector]',
@@ -31,9 +18,7 @@ import {
 		},
 	],
 })
-export class LuLegalUnitSelectorDirective
-	implements ILuOptionSelector<ILuEstablishment>, OnDestroy
-{
+export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstablishment>, OnDestroy {
 	multiple = true;
 	onSelectValue = new Subject<ILuEstablishment[]>();
 	private _values: ILuEstablishment[];
@@ -64,30 +49,15 @@ export class LuLegalUnitSelectorDirective
 
 	@HostListener('click')
 	onClick(): void {
-		const sub = this._service
-			.getAll([`legalUnitId=${this.legalUnit.id}`])
-			.subscribe((establishments) => {
-				if (this.shouldAdd(establishments)) {
-					const selectedEstablishmentIds = new Set<number>(
-						(this._values ?? []).map((ets) => ets.id),
-					);
-					this.onSelectValue.next(
-						Array.from([
-							...(this._values ?? []),
-							...establishments.filter(
-								(ets) => !selectedEstablishmentIds.has(ets.id),
-							),
-						]),
-					);
-				} else {
-					const establishmentIds = new Set<number>(
-						establishments.map((ets) => ets.id),
-					);
-					this.onSelectValue.next(
-						(this._values ?? []).filter((ets) => !establishmentIds.has(ets.id)),
-					);
-				}
-			});
+		const sub = this._service.getAll([`legalUnitId=${this.legalUnit.id}`]).subscribe((establishments) => {
+			if (this.shouldAdd(establishments)) {
+				const selectedEstablishmentIds = new Set<number>((this._values ?? []).map((ets) => ets.id));
+				this.onSelectValue.next(Array.from([...(this._values ?? []), ...establishments.filter((ets) => !selectedEstablishmentIds.has(ets.id))]));
+			} else {
+				const establishmentIds = new Set<number>(establishments.map((ets) => ets.id));
+				this.onSelectValue.next((this._values ?? []).filter((ets) => !establishmentIds.has(ets.id)));
+			}
+		});
 		this._subs.add(sub);
 	}
 
@@ -100,9 +70,7 @@ export class LuLegalUnitSelectorDirective
 	}
 
 	private shouldAdd(establishments: ILuEstablishment[]): boolean {
-		const selectedCount = (this._values ?? []).filter(
-			(ets) => ets.legalUnitId === this.legalUnit.id,
-		).length;
+		const selectedCount = (this._values ?? []).filter((ets) => ets.legalUnitId === this.legalUnit.id).length;
 		return establishments.length > selectedCount;
 	}
 }

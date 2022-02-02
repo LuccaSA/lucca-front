@@ -9,13 +9,7 @@
 		(mouseleave)="onMouseLeave()"
 		(mousedown)="onMouseDown($event)"
 	>
-		<div
-			class="lu-picker-content"
-			[ngClass]="contentClassesMap"
-			[cdkTrapFocus]="trapFocus"
-			luScroll
-			(onScrollBottom)="onScrollBottom()"
-		>
+		<div class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus" luScroll (onScrollBottom)="onScrollBottom()">
 			<ng-content [class.is-loading]="loading$ | async"></ng-content>
 		</div>
 	</div>

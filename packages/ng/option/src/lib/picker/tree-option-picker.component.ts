@@ -1,17 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ContentChildren,
-	Directive,
-	forwardRef,
-	Inject,
-	OnDestroy,
-	QueryList,
-	ViewContainerRef,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, OnDestroy, QueryList, ViewContainerRef } from '@angular/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
@@ -27,10 +15,7 @@ enum ToggleMode {
 }
 
 @Directive()
-export abstract class ALuTreeOptionPickerComponent<
-		T,
-		O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>,
-	>
+export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
 	extends ALuOptionPickerComponent<T, O>
 	implements ILuTreeOptionPickerPanel<T>, OnDestroy, AfterViewInit
 {
@@ -47,36 +32,15 @@ export abstract class ALuTreeOptionPickerComponent<
 		// reapply selected when the options change
 		this._subs.add(optionItems$.subscribe(() => this._applySelected()));
 		// subscribe to any option.onSelect
-		const singleFlowSelect$ = optionItems$.pipe(
-			switchMap((items) => merge(...items.map((i) => i.onSelect))),
-		);
-		const singleFlowSelectSelf$ = optionItems$.pipe(
-			switchMap((items) => merge(...items.map((i) => i.onSelectSelf))),
-		);
-		const singleFlowSelectChildren$ = optionItems$.pipe(
-			switchMap((items) => merge(...items.map((i) => i.onSelectChildren))),
-		);
+		const singleFlowSelect$ = optionItems$.pipe(switchMap((items) => merge(...items.map((i) => i.onSelect))));
+		const singleFlowSelectSelf$ = optionItems$.pipe(switchMap((items) => merge(...items.map((i) => i.onSelectSelf))));
+		const singleFlowSelectChildren$ = optionItems$.pipe(switchMap((items) => merge(...items.map((i) => i.onSelectChildren))));
 
-		this._subs.add(
-			singleFlowSelect$.subscribe((option) =>
-				this._toggle(option, ToggleMode.all),
-			),
-		);
-		this._subs.add(
-			singleFlowSelectSelf$.subscribe((option) =>
-				this._toggle(option, ToggleMode.self),
-			),
-		);
-		this._subs.add(
-			singleFlowSelectChildren$.subscribe((option) =>
-				this._toggle(option, ToggleMode.children),
-			),
-		);
+		this._subs.add(singleFlowSelect$.subscribe((option) => this._toggle(option, ToggleMode.all)));
+		this._subs.add(singleFlowSelectSelf$.subscribe((option) => this._toggle(option, ToggleMode.self)));
+		this._subs.add(singleFlowSelectChildren$.subscribe((option) => this._toggle(option, ToggleMode.children)));
 	}
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 	protected override _toggle(option: O, mod = ToggleMode.all) {
@@ -99,9 +63,7 @@ export abstract class ALuTreeOptionPickerComponent<
 		const values = <T[]>this._value || [];
 		let newValues: T[];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
-		const allChildrenSelected = allChildren.every((child) =>
-			values.some((v) => this.optionComparer(v, child)),
-		);
+		const allChildrenSelected = allChildren.every((child) => values.some((v) => this.optionComparer(v, child)));
 		if (selfSelected && allChildrenSelected) {
 			// remove option and its children
 			newValues = this._remove(values, [value, ...allChildren]);
@@ -120,9 +82,7 @@ export abstract class ALuTreeOptionPickerComponent<
 		const allChildren = option.allChildren.map((i) => i.value);
 		const values = <T[]>this._value || [];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
-		const someChildSelected = allChildren.some((child) =>
-			values.some((v) => this.optionComparer(v, child)),
-		);
+		const someChildSelected = allChildren.some((child) => values.some((v) => this.optionComparer(v, child)));
 
 		let newValues = this._remove(values, [...allChildren]);
 		if (selfSelected && !someChildSelected) {
@@ -144,9 +104,7 @@ export abstract class ALuTreeOptionPickerComponent<
 		const values = <T[]>this._value || [];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
 		let newValues = this._remove(values, [value]);
-		const allChildrenSelected = allChildren.every((child) =>
-			values.some((v) => this.optionComparer(v, child)),
-		);
+		const allChildrenSelected = allChildren.every((child) => values.some((v) => this.optionComparer(v, child)));
 		if (allChildrenSelected && !selfSelected) {
 			newValues = this._remove(newValues, allChildren);
 		} else {
@@ -155,15 +113,11 @@ export abstract class ALuTreeOptionPickerComponent<
 		this._select(newValues);
 	}
 	protected _add(values: T[], entries: T[]): T[] {
-		const newEntries = entries.filter(
-			(entry) => !values.some((v) => this.optionComparer(v, entry)),
-		);
+		const newEntries = entries.filter((entry) => !values.some((v) => this.optionComparer(v, entry)));
 		return [...values, ...newEntries];
 	}
 	protected _remove(values: T[], entries: T[]): T[] {
-		const entriesToKeep = values.filter(
-			(value) => !entries.some((e) => this.optionComparer(e, value)),
-		);
+		const entriesToKeep = values.filter((value) => !entries.some((e) => this.optionComparer(e, value)));
 		return [...entriesToKeep];
 	}
 
@@ -171,11 +125,7 @@ export abstract class ALuTreeOptionPickerComponent<
 		const items$ = this._optionsQL.changes.pipe(
 			startWith(this._optionsQL),
 			map<QueryList<O>, O[]>((q) => q.toArray()),
-			map((roots) =>
-				roots
-					.map((r) => [r, ...r.allChildren])
-					.reduce((agg, val) => [...agg, ...val], []),
-			),
+			map((roots) => roots.map((r) => [r, ...r.allChildren]).reduce((agg, val) => [...agg, ...val], [])),
 			delay(0),
 		);
 		this._subs.add(items$.subscribe((o) => (this._options = o || [])));
@@ -205,10 +155,7 @@ export class LuTreeOptionPickerComponent<
 	T,
 	O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>,
 > extends ALuTreeOptionPickerComponent<T, O> {
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 }

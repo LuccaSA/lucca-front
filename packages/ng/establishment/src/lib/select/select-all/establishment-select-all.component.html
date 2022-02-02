@@ -1,14 +1,2 @@
-<button
-	(click)="selectAll()"
-	[disabled]="loading"
-	class="link selectAll-button"
->
-	{{ intl.select }}
-</button>
-<button
-	(click)="deselectAll()"
-	[disabled]="loading"
-	class="link selectAll-button u-marginLeftSmaller"
->
-	{{ intl.deselect }}
-</button>
+<button (click)="selectAll()" [disabled]="loading" class="link selectAll-button">{{ intl.select }}</button>
+<button (click)="deselectAll()" [disabled]="loading" class="link selectAll-button u-marginLeftSmaller">{{ intl.deselect }}</button>

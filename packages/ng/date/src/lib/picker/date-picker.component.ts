@@ -1,14 +1,5 @@
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import {
-	Component,
-	ChangeDetectionStrategy,
-	forwardRef,
-	Output,
-	EventEmitter,
-	TemplateRef,
-	ViewChild,
-	Input,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { ESCAPE, TAB } from '@angular/cdk/keycodes';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';

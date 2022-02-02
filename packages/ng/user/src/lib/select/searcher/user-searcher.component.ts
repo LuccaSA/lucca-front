@@ -1,49 +1,9 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	forwardRef,
-	HostBinding,
-	Inject,
-	Input,
-	OnDestroy,
-	OnInit,
-	Optional,
-	Output,
-	Self,
-	SkipSelf,
-	ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-	ALuOnCloseSubscriber,
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-} from '@lucca-front/ng/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
-import {
-	BehaviorSubject,
-	combineLatest,
-	merge,
-	Observable,
-	of,
-	Subject,
-	Subscription,
-} from 'rxjs';
-import {
-	catchError,
-	debounceTime,
-	filter,
-	map,
-	mapTo,
-	scan,
-	share,
-	startWith,
-	switchMap,
-} from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { catchError, debounceTime, filter, map, mapTo, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
 import { ILuUser } from '../../user.model';
 import { LuUserSearcherIntl } from './user-searcher.intl';
@@ -86,14 +46,7 @@ interface UserPagedSearcherForm {
 		},
 	],
 })
-export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
-	implements
-		OnInit,
-		OnDestroy,
-		ILuOnOpenSubscriber,
-		ILuOnScrollBottomSubscriber,
-		ILuOnCloseSubscriber
-{
+export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber {
 	private _service: LuUserV3Service<U>;
 	private _subs = new Subscription();
 
@@ -149,25 +102,16 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	}
 
 	ngOnInit() {
-		const formValue$ = this.form.valueChanges.pipe(
-			startWith(this.form.value),
-		) as Observable<UserPagedSearcherForm>;
+		const formValue$ = this.form.valueChanges.pipe(startWith(this.form.value)) as Observable<UserPagedSearcherForm>;
 
 		const pager$ = this._page$.pipe(
 			scan((acc) => acc + 1, 0),
 			startWith(0),
 		);
 
-		const query$ = combineLatest([
-			formValue$.pipe(debounceTime(250)),
-			this._isOpened$,
-		]).pipe(
+		const query$ = combineLatest([formValue$.pipe(debounceTime(250)), this._isOpened$]).pipe(
 			filter(([, isOpened]) => isOpened),
-			switchMap(([val]) =>
-				pager$.pipe(
-					map((page) => [val, page] as [UserPagedSearcherForm, number]),
-				),
-			),
+			switchMap(([val]) => pager$.pipe(map((page) => [val, page] as [UserPagedSearcherForm, number]))),
 			share(),
 		);
 
@@ -196,10 +140,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 		});
 		this._subs.add(resultsSub);
 
-		this.loading$ = merge(
-			query$.pipe(mapTo(true)),
-			results$.pipe(mapTo(false)),
-		);
+		this.loading$ = merge(query$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
 		const loadingSub = this.loading$.subscribe((l) => (this._loading = l));
 		this._subs.add(loadingSub);
 

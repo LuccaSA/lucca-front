@@ -1,10 +1,4 @@
-import {
-	Directive,
-	forwardRef,
-	Input,
-	TemplateRef,
-	ViewRef,
-} from '@angular/core';
+import { Directive, forwardRef, Input, TemplateRef, ViewRef } from '@angular/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from './input-displayer.model';
 
 @Directive({
@@ -17,10 +11,7 @@ import { ALuInputDisplayer, ILuInputDisplayer } from './input-displayer.model';
 		},
 	],
 })
-export class LuInputDisplayerDirective<T>
-	extends ALuInputDisplayer<T>
-	implements ILuInputDisplayer<T>
-{
+export class LuInputDisplayerDirective<T> extends ALuInputDisplayer<T> implements ILuInputDisplayer<T> {
 	@Input('luDisplayerMultiple') set argMultiple(m: boolean) {
 		this.multiple = !!m;
 	}

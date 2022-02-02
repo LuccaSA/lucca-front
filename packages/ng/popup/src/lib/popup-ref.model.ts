@@ -8,11 +8,7 @@ import { ILuPopupConfig } from './popup-config.model';
 import { ILuPopupContent } from './popup.model';
 import { LU_POPUP_DATA } from './popup.token';
 
-export interface ILuPopupRef<
-	T extends ILuPopupContent = ILuPopupContent,
-	D = any,
-	R = any,
-> {
+export interface ILuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	onDismiss: Observable<void>;
@@ -20,22 +16,11 @@ export interface ILuPopupRef<
 	close(result: R): void;
 	dismiss(): void;
 }
-export interface ILuPopupRefFactory<
-	TComponent = any,
-	TConfig extends ILuPopupConfig = ILuPopupConfig,
-> {
-	forge<T extends TComponent, C extends TConfig>(
-		component: ComponentType<T>,
-		config: C,
-	): ILuPopupRef<T>;
+export interface ILuPopupRefFactory<TComponent = any, TConfig extends ILuPopupConfig = ILuPopupConfig> {
+	forge<T extends TComponent, C extends TConfig>(component: ComponentType<T>, config: C): ILuPopupRef<T>;
 }
 
-export abstract class ALuPopupRef<
-	T extends ILuPopupContent = ILuPopupContent,
-	D = any,
-	R = any,
-> implements ILuPopupRef<T, D, R>
-{
+export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 	onDismiss = new Subject<void>();
@@ -45,12 +30,7 @@ export abstract class ALuPopupRef<
 
 	protected _subs = new Subscription();
 
-	constructor(
-		protected _overlay: Overlay,
-		protected _injector: Injector,
-		protected _component: ComponentType<T>,
-		protected _config: ILuPopupConfig,
-	) {}
+	constructor(protected _overlay: Overlay, protected _injector: Injector, protected _component: ComponentType<T>, protected _config: ILuPopupConfig) {}
 
 	open(data?: D) {
 		this._createOverlay();
@@ -87,41 +67,21 @@ export abstract class ALuPopupRef<
 		const overlayConfig = new OverlayConfig();
 		switch (this._config.position) {
 			case 'top':
-				overlayConfig.positionStrategy = this._overlay
-					.position()
-					.global()
-					.centerHorizontally()
-					.top('0');
+				overlayConfig.positionStrategy = this._overlay.position().global().centerHorizontally().top('0');
 				break;
 			case 'bottom':
-				overlayConfig.positionStrategy = this._overlay
-					.position()
-					.global()
-					.centerHorizontally()
-					.bottom('0');
+				overlayConfig.positionStrategy = this._overlay.position().global().centerHorizontally().bottom('0');
 				break;
 			case 'left':
-				overlayConfig.positionStrategy = this._overlay
-					.position()
-					.global()
-					.centerVertically()
-					.left('0');
+				overlayConfig.positionStrategy = this._overlay.position().global().centerVertically().left('0');
 				break;
 			case 'right':
-				overlayConfig.positionStrategy = this._overlay
-					.position()
-					.global()
-					.centerVertically()
-					.right('0');
+				overlayConfig.positionStrategy = this._overlay.position().global().centerVertically().right('0');
 				break;
 
 			case 'center':
 			default:
-				overlayConfig.positionStrategy = this._overlay
-					.position()
-					.global()
-					.centerHorizontally()
-					.centerVertically();
+				overlayConfig.positionStrategy = this._overlay.position().global().centerHorizontally().centerVertically();
 				break;
 		}
 		overlayConfig.hasBackdrop = !this._config.noBackdrop;
@@ -171,9 +131,7 @@ export abstract class ALuPopupRef<
 	protected _subToCloseEvents() {
 		if (!this._config.undismissable) {
 			const bdClicked$ = this._overlayRef.backdropClick();
-			const escPressed$ = this._overlayRef
-				.keydownEvents()
-				.pipe(filter((evt) => evt.keyCode === ESCAPE));
+			const escPressed$ = this._overlayRef.keydownEvents().pipe(filter((evt) => evt.keyCode === ESCAPE));
 			const sub = merge(bdClicked$, escPressed$)
 				.pipe(first())
 				.subscribe((e) => this.dismiss());

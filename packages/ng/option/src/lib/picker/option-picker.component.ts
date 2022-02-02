@@ -22,17 +22,10 @@ import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
 import { delay, map, share } from 'rxjs/operators';
 import { ALuOptionItem } from '../item/option-item.model';
-import {
-	ALuOptionPicker,
-	ILuOptionPickerPanel,
-	LuOptionComparer,
-} from './option-picker.model';
+import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
 @Directive()
-export abstract class ALuOptionPickerComponent<
-		T,
-		O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>,
-	>
+export abstract class ALuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 	extends ALuOptionPicker<T, O>
 	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit
 {
@@ -77,16 +70,11 @@ export abstract class ALuOptionPickerComponent<
 
 	protected _options: O[] = [];
 	protected _optionsQL: QueryList<O>;
-	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(
-		ql: QueryList<O>,
-	) {
+	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 	}
 
-	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) protected document: Document,
-	) {
+	constructor(protected _changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) protected document: Document) {
 		super();
 		this._isOptionItemsInitialized = false;
 		this.overlayPaneClass = this._defaultOverlayPaneClasses;
@@ -151,10 +139,7 @@ export abstract class ALuOptionPickerComponent<
 		this._subs.add(
 			this._options$.subscribe((options) => {
 				const optionCount = options.length;
-				const newHighlight = Math.max(
-					Math.min(this.highlightIndex, optionCount - 1),
-					-1,
-				);
+				const newHighlight = Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
 				if (newHighlight !== this.highlightIndex) {
 					this.highlightIndex = newHighlight;
 				}
@@ -166,10 +151,7 @@ export abstract class ALuOptionPickerComponent<
 	}
 	protected _incrHighlight() {
 		const optionCount = this._options.length;
-		this.highlightIndex = Math.max(
-			Math.min(this.highlightIndex + 1, optionCount - 1),
-			-1,
-		);
+		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, optionCount - 1), -1);
 	}
 	protected _decrHighlight() {
 		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
@@ -199,18 +181,13 @@ export abstract class ALuOptionPickerComponent<
 		if (!targetElt) {
 			return;
 		}
-		const contentElt =
-			this.document.querySelector<HTMLElement>('.lu-picker-content');
+		const contentElt = this.document.querySelector<HTMLElement>('.lu-picker-content');
 		if (!contentElt) {
 			return;
 		}
-		const headerElt = this.document.querySelector<HTMLElement>(
-			'.lu-picker-content .lu-picker-header',
-		);
+		const headerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-header');
 		const headerHeight = headerElt ? headerElt.offsetHeight : 0;
-		const footerElt = this.document.querySelector<HTMLElement>(
-			'.lu-picker-content .lu-picker-footer',
-		);
+		const footerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-footer');
 		const footerHeight = footerElt ? footerElt.offsetHeight : 0;
 		// highlighted option is too high
 		if (contentElt.scrollTop + headerHeight > targetElt.offsetTop) {
@@ -219,15 +196,8 @@ export abstract class ALuOptionPickerComponent<
 		}
 		// highlight option is too low
 		const offsetHeight = contentElt.offsetHeight;
-		if (
-			contentElt.scrollTop + offsetHeight - footerHeight <
-			targetElt.offsetTop + targetElt.offsetHeight
-		) {
-			contentElt.scrollTop =
-				targetElt.offsetTop +
-				targetElt.offsetHeight -
-				offsetHeight +
-				footerHeight;
+		if (contentElt.scrollTop + offsetHeight - footerHeight < targetElt.offsetTop + targetElt.offsetHeight) {
+			contentElt.scrollTop = targetElt.offsetTop + targetElt.offsetHeight - offsetHeight + footerHeight;
 			return;
 		}
 	}
@@ -258,9 +228,7 @@ export abstract class ALuOptionPickerComponent<
 		// add `is-selected` to all selected indexes
 		const selectedIndexes: number[] = [];
 		if (!this.multiple) {
-			const selectedIndex = this._options.findIndex((o) =>
-				this.optionComparer(o.value, this._value as T),
-			);
+			const selectedIndex = this._options.findIndex((o) => this.optionComparer(o.value, this._value as T));
 			if (selectedIndex !== -1) {
 				selectedIndexes.push(selectedIndex);
 			}
@@ -319,14 +287,8 @@ export abstract class ALuOptionPickerComponent<
 		},
 	],
 })
-export class LuOptionPickerComponent<
-	T,
-	O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>,
-> extends ALuOptionPickerComponent<T, O> {
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		@Inject(DOCUMENT) document: Document,
-	) {
+export class LuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
 }

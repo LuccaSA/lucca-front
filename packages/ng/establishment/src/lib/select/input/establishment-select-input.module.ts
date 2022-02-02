@@ -13,16 +13,7 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 import { luEstablishmentSelectInputTranslations } from './establishment-select-input.translate';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		OverlayModule,
-		LuInputModule,
-		LuOptionModule,
-		LuEstablishmentSearcherModule,
-		LuEstablishmentSelectAllModule,
-		LuForLegalUnitsModule,
-		LuLegalUnitSelectorModule,
-	],
+	imports: [CommonModule, OverlayModule, LuInputModule, LuOptionModule, LuEstablishmentSearcherModule, LuEstablishmentSelectAllModule, LuForLegalUnitsModule, LuLegalUnitSelectorModule],
 	declarations: [LuEstablishmentSelectInputComponent],
 	exports: [LuEstablishmentSelectInputComponent],
 	providers: [

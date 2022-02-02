@@ -1,9 +1,5 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import {
-	ALuPopoverTarget,
-	LuPopoverPosition,
-	LuPopoverAlignment,
-} from './popover-target.model';
+import { ALuPopoverTarget, LuPopoverPosition, LuPopoverAlignment } from './popover-target.model';
 
 @Directive({
 	selector: '[luPopoverTarget]',

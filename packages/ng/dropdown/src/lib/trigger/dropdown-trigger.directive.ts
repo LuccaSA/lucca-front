@@ -1,24 +1,6 @@
 import { ILuDropdownPanel } from '../panel/index';
-import {
-	AfterViewInit,
-	OnDestroy,
-	Input,
-	HostBinding,
-	ElementRef,
-	ViewContainerRef,
-	HostListener,
-	Directive,
-	Output,
-	EventEmitter,
-} from '@angular/core';
-import {
-	ALuPopoverTrigger,
-	ILuPopoverTarget,
-	ILuPopoverTrigger,
-	LuPopoverTarget,
-	LuPopoverPosition,
-	LuPopoverAlignment,
-} from '@lucca-front/ng/popover';
+import { AfterViewInit, OnDestroy, Input, HostBinding, ElementRef, ViewContainerRef, HostListener, Directive, Output, EventEmitter } from '@angular/core';
+import { ALuPopoverTrigger, ILuPopoverTarget, ILuPopoverTrigger, LuPopoverTarget, LuPopoverPosition, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { Overlay } from '@angular/cdk/overlay';
 
 /**
@@ -29,14 +11,9 @@ import { Overlay } from '@angular/cdk/overlay';
 	selector: '[luDropdown]',
 	exportAs: 'LuDropdownTrigger',
 })
-export class LuDropdownTriggerDirective<
-		TPanel extends ILuDropdownPanel = ILuDropdownPanel,
-	>
+export class LuDropdownTriggerDirective<TPanel extends ILuDropdownPanel = ILuDropdownPanel>
 	extends ALuPopoverTrigger<TPanel, ILuPopoverTarget>
-	implements
-		ILuPopoverTrigger<TPanel, ILuPopoverTarget>,
-		AfterViewInit,
-		OnDestroy
+	implements ILuPopoverTrigger<TPanel, ILuPopoverTarget>, AfterViewInit, OnDestroy
 {
 	/** References the popover instance that the trigger is associated with. */
 	@Input('luDropdown') set inputPanel(p: TPanel) {
@@ -78,16 +55,11 @@ export class LuDropdownTriggerDirective<
 		return this._panelId;
 	}
 
-	constructor(
-		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
-		protected override _viewContainerRef: ViewContainerRef,
-	) {
+	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef, protected override _viewContainerRef: ViewContainerRef) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget;
 		this.target.elementRef = this._elementRef;
-		this._triggerId =
-			this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
+		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.triggerEvent = 'click';
 		this.target.position = 'below';
 		this.target.alignment = 'right';

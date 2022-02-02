@@ -32,10 +32,7 @@ import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 		},
 	],
 })
-export class LuTreeOptionItemComponent<T = any>
-	extends ALuTreeOptionItem<T>
-	implements ILuTreeOptionItem<T>
-{
+export class LuTreeOptionItemComponent<T = any> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
 	protected _children = [];
 	protected _tree: ILuTree<T>;
 	protected _displayer: ILuInputDisplayer<T>;
@@ -97,17 +94,11 @@ export class LuTreeOptionItemComponent<T = any>
 		}
 	}
 
-	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(
-		displayer: ILuInputDisplayer<T>,
-	) {
+	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this._displayer = displayer;
 	}
 
-	constructor(
-		private _componentFactoryResolver: ComponentFactoryResolver,
-		@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel,
-		private _cdr: ChangeDetectorRef,
-	) {
+	constructor(private _componentFactoryResolver: ComponentFactoryResolver, @Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
 		super();
 	}
 
@@ -117,9 +108,7 @@ export class LuTreeOptionItemComponent<T = any>
 		this._valueVCR.insert(evr);
 	}
 	private _renderChildren(children: ILuTree<T>[] = []) {
-		const factory = this._componentFactoryResolver.resolveComponentFactory(
-			LuTreeOptionItemComponent,
-		);
+		const factory = this._componentFactoryResolver.resolveComponentFactory(LuTreeOptionItemComponent);
 		this._childrenVCR.clear();
 		this.children = children.map((c) => {
 			const ref = this._childrenVCR.createComponent(factory);

@@ -1,29 +1,14 @@
 import { Observable, Subject, merge, of } from 'rxjs';
-import {
-	mapTo,
-	share,
-	switchMap,
-	catchError,
-	map,
-	scan,
-	startWith,
-} from 'rxjs/operators';
+import { mapTo, share, switchMap, catchError, map, scan, startWith } from 'rxjs/operators';
 
 import { ILuApiOptionFeeder } from '../feeder/index';
-import {
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-} from '@lucca-front/ng/core';
+import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ILuApiService } from '../../service/index';
 
-export type ILuApiOptionSearcher<
-	T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem,
-> = ILuApiOptionFeeder<T>;
+export type ILuApiOptionSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> = ILuApiOptionFeeder<T>;
 
-export abstract class ALuApiOptionSearcher<
-	T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem,
-	S extends ILuApiService<T> = ILuApiService<T>,
-> implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber
+export abstract class ALuApiOptionSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
+	implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber
 {
 	outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
@@ -54,10 +39,7 @@ export abstract class ALuApiOptionSearcher<
 		);
 
 		results$.subscribe((items) => this.outOptions$.next(items));
-		this.loading$ = merge(
-			this._clue$.pipe(mapTo(true)),
-			results$.pipe(mapTo(false)),
-		);
+		this.loading$ = merge(this._clue$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
 		this.empty$ = results$.pipe(map((o) => o.length === 0));
 	}
 	abstract resetClue();
@@ -66,14 +48,9 @@ export abstract class ALuApiOptionSearcher<
 	}
 }
 
-export type ILuApiOptionPagedSearcher<
-	T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem,
-> = ILuApiOptionSearcher<T>;
+export type ILuApiOptionPagedSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> = ILuApiOptionSearcher<T>;
 
-export abstract class ALuApiOptionPagedSearcher<
-		T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem,
-		S extends ILuApiService<T> = ILuApiService<T>,
-	>
+export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 	extends ALuApiOptionSearcher<T, S>
 	implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber
 {
@@ -102,9 +79,7 @@ export abstract class ALuApiOptionPagedSearcher<
 			startWith(0),
 		);
 		const query$ = this._clue$.pipe(
-			switchMap((clue) =>
-				pager$.pipe(map((page) => [page, clue] as [number, string])),
-			),
+			switchMap((clue) => pager$.pipe(map((page) => [page, clue] as [number, string]))),
 			share(),
 		);
 
@@ -127,10 +102,7 @@ export abstract class ALuApiOptionPagedSearcher<
 			this._isLastPage = !items.length;
 			this.outOptions$.next([...this._options]);
 		});
-		this.loading$ = merge(
-			query$.pipe(mapTo(true)),
-			results$.pipe(mapTo(false)),
-		);
+		this.loading$ = merge(query$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
 		this.loading$.subscribe((l) => (this._loading = l));
 		this.empty$ = this.outOptions$.pipe(map((o) => o.length === 0));
 	}

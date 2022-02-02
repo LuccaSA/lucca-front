@@ -1,19 +1,6 @@
-import {
-	Component,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	Output,
-	TemplateRef,
-	ViewChild,
-	ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
-import {
-	ILuPopoverPanel,
-	LuPopoverScrollStrategy,
-	ALuPopoverPanel,
-} from './popover-panel.model';
+import { ILuPopoverPanel, LuPopoverScrollStrategy, ALuPopoverPanel } from './popover-panel.model';
 import { luTransformPopover } from '../animation/index';
 
 // import { standardPopoverTemplate } from './popover.template';
@@ -25,10 +12,7 @@ import { luTransformPopover } from '../animation/index';
 	animations: [luTransformPopover],
 	exportAs: 'LuPopoverPanel',
 })
-export class LuPopoverPanelComponent
-	extends ALuPopoverPanel
-	implements ILuPopoverPanel, OnDestroy
-{
+export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
 	protected _template: TemplateRef<any>;
 	protected _templateContext: any;
 

@@ -5,10 +5,7 @@ import { ALuIntl } from '@lucca-front/ng/core';
 
 @Injectable()
 export class LuDateInputIntl extends ALuIntl<ILuDateInputLabel> {
-	constructor(
-		@Inject(LU_DATE_INPUT_TRANSLATIONS) translations,
-		@Inject(LOCALE_ID) locale,
-	) {
+	constructor(@Inject(LU_DATE_INPUT_TRANSLATIONS) translations, @Inject(LOCALE_ID) locale) {
 		super(translations, locale);
 	}
 }

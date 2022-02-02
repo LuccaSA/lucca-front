@@ -1,36 +1,8 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ChangeDetectorRef,
-	forwardRef,
-	ViewContainerRef,
-	ElementRef,
-	ViewChild,
-	Input,
-	Renderer2,
-	AfterViewInit,
-	Inject,
-} from '@angular/core';
-import {
-	NG_VALUE_ACCESSOR,
-	ControlValueAccessor,
-	NG_VALIDATORS,
-	Validator,
-	AbstractControl,
-	ValidationErrors,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ChangeDetectorRef, forwardRef, ViewContainerRef, ElementRef, ViewChild, Input, Renderer2, AfterViewInit, Inject } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import {
-	ILuInputWithPicker,
-	ALuPickerPanel,
-	ILuPickerPanel,
-} from '@lucca-front/ng/picker';
-import {
-	ALuClearer,
-	ILuClearer,
-	ILuInputDisplayer,
-	ALuInputDisplayer,
-} from '@lucca-front/ng/input';
+import { ILuInputWithPicker, ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
+import { ALuClearer, ILuClearer, ILuInputDisplayer, ALuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { ILuDateSelectInputLabel } from './date-select-input.translate';
@@ -54,14 +26,7 @@ import { LuDateSelectInputIntl } from './date-select-input.intl';
 		},
 	],
 })
-export class LuDateSelectInputComponent<D>
-	extends ALuSelectInputComponent<D>
-	implements
-		ControlValueAccessor,
-		ILuInputWithPicker<D>,
-		AfterViewInit,
-		Validator
-{
+export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
 	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
@@ -91,13 +56,7 @@ export class LuDateSelectInputComponent<D>
 		private _adapter: ALuDateAdapter<D>,
 		@Inject(LuDateSelectInputIntl) private _intl: ILuDateSelectInputLabel,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 		this.overlapInput = true;
 	}
 
@@ -109,18 +68,10 @@ export class LuDateSelectInputComponent<D>
 		if (!this._adapter.isValid(d)) {
 			return { date: true };
 		}
-		if (
-			!!this.min &&
-			this._adapter.isValid(this.min) &&
-			this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0
-		) {
+		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
 			return { min: true };
 		}
-		if (
-			!!this.max &&
-			this._adapter.isValid(this.max) &&
-			this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0
-		) {
+		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
 			return { max: true };
 		}
 		return null;

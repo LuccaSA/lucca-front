@@ -9,11 +9,7 @@
 		(mouseleave)="onMouseLeave()"
 		(mousedown)="onMouseDown($event)"
 	>
-		<div
-			class="lu-picker-content"
-			[ngClass]="contentClassesMap"
-			[cdkTrapFocus]="trapFocus"
-		>
+		<div class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
 			<ng-content></ng-content>
 		</div>
 	</div>

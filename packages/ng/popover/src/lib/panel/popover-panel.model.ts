@@ -1,10 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import {
-	HorizontalConnectionPos,
-	VerticalConnectionPos,
-} from '@angular/cdk/overlay';
+import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
@@ -28,10 +25,7 @@ export declare interface ILuPopoverPanel {
 
 	keydownEvents$: Observable<KeyboardEvent>;
 
-	setPositionClasses: (
-		posX: HorizontalConnectionPos,
-		posY: VerticalConnectionPos,
-	) => void;
+	setPositionClasses: (posX: HorizontalConnectionPos, posY: VerticalConnectionPos) => void;
 
 	/** method called by the trigger when it opens the popover */
 	onOpen(): void;
@@ -110,12 +104,10 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		this._contentClasses = cl;
 	}
 	get contentClassesMap() {
-		return this._contentClasses
-			.split(' ')
-			.reduce((obj: any, className: string) => {
-				obj[className] = true;
-				return obj;
-			}, {});
+		return this._contentClasses.split(' ').reduce((obj: any, className: string) => {
+			obj[className] = true;
+			return obj;
+		}, {});
 	}
 
 	/** Classes to be passed into the popover's overlay */
@@ -143,10 +135,7 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 	abstract _emitOpenEvent(): void;
 	abstract _emitHoveredEvent(hovered: boolean): void;
 
-	setPositionClasses(
-		posX: HorizontalConnectionPos,
-		posY: VerticalConnectionPos,
-	): void {
+	setPositionClasses(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
 		this._positionClassesMap['is-before'] = posX === 'end';
 		this._positionClassesMap['is-after'] = posX === 'start';
 		this._positionClassesMap['is-above'] = posY === 'bottom';

@@ -5,10 +5,7 @@ import { LU_SIDEPANEL_TRANSLATIONS } from './sidepanel.token';
 
 @Injectable()
 export class LuSidepanelIntl extends ALuIntl<ILuSidepanelLabel> {
-	constructor(
-		@Inject(LU_SIDEPANEL_TRANSLATIONS) translations,
-		@Inject(LOCALE_ID) locale,
-	) {
+	constructor(@Inject(LU_SIDEPANEL_TRANSLATIONS) translations, @Inject(LOCALE_ID) locale) {
 		super(translations, locale);
 	}
 }

@@ -8,11 +8,7 @@ import { NgControl } from '@angular/forms';
 	selector: '[luInput]',
 })
 export class LuInputDirective implements OnInit {
-	constructor(
-		protected _elementRef: ElementRef,
-		protected _renderer: Renderer2,
-		protected _ngControl: NgControl,
-	) {}
+	constructor(protected _elementRef: ElementRef, protected _renderer: Renderer2, protected _ngControl: NgControl) {}
 	protected isEmpty(value) {
 		if (typeof value === 'string') {
 			return value === '';

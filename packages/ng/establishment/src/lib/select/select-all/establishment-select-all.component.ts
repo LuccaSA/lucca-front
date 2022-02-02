@@ -1,22 +1,5 @@
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	forwardRef,
-	Inject,
-	Input,
-	OnDestroy,
-	Optional,
-	Self,
-	SkipSelf,
-} from '@angular/core';
-import {
-	ALuOptionOperator,
-	ALuOptionSelector,
-	ILuOptionSelectAllLabel,
-	LuOptionSelectAllComponent,
-	LuOptionSelectAllIntl,
-} from '@lucca-front/ng/option';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
+import { ALuOptionOperator, ALuOptionSelector, ILuOptionSelectAllLabel, LuOptionSelectAllComponent, LuOptionSelectAllIntl } from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';

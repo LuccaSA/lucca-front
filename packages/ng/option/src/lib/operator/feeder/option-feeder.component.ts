@@ -1,9 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { BehaviorSubject } from 'rxjs';
 

@@ -17,20 +17,14 @@ import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget } from '../target/index';
-import {
-	throwLuPopoverMissingPanelError,
-	throwLuPopoverMissingTargetError,
-} from './popover-trigger.error';
+import { throwLuPopoverMissingPanelError, throwLuPopoverMissingTargetError } from './popover-trigger.error';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
 /**
  * component that will decide when to show the popover and attach it to the target
  */
-export declare interface ILuPopoverTrigger<
-	TPanel extends ILuPopoverPanel = ILuPopoverPanel,
-	TTarget extends ILuPopoverTarget = ILuPopoverTarget,
-> {
+export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> {
 	/** the popover panel to display */
 	panel: TPanel;
 	/** the popover target to attach the panel */
@@ -57,11 +51,7 @@ export declare interface ILuPopoverTrigger<
 }
 
 // tslint:disable-next-line: max-line-length
-export abstract class ALuPopoverTrigger<
-	TPanel extends ILuPopoverPanel = ILuPopoverPanel,
-	TTarget extends ILuPopoverTarget = ILuPopoverTarget,
-> implements ILuPopoverTrigger<TPanel, TTarget>
-{
+export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> implements ILuPopoverTrigger<TPanel, TTarget> {
 	protected _portal: TemplatePortal<any> | ComponentPortal<any>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
@@ -107,13 +97,7 @@ export abstract class ALuPopoverTrigger<
 			if (this._hoveredSubscription) {
 				this._hoveredSubscription.unsubscribe();
 			}
-			this._hoveredSubscription = this._hovered$
-				.pipe(
-					debounce((h) =>
-						h ? timer(this.enterDelay) : timer(this.leaveDelay),
-					),
-				)
-				.subscribe((h) => (h ? this.openPopover() : this.closePopover()));
+			this._hoveredSubscription = this._hovered$.pipe(debounce((h) => (h ? timer(this.enterDelay) : timer(this.leaveDelay)))).subscribe((h) => (h ? this.openPopover() : this.closePopover()));
 		}
 	}
 	protected _enterDelay = 50;
@@ -150,11 +134,7 @@ export abstract class ALuPopoverTrigger<
 	protected abstract _emitOpen(): void;
 	protected abstract _emitClose(): void;
 
-	constructor(
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-	) {
+	constructor(protected _overlay: Overlay, protected _elementRef: ElementRef, protected _viewContainerRef: ViewContainerRef) {
 		this._triggerId = `popoverTrigger_${generateId()}`;
 		this._panelId = `popoverPanel_${generateId()}`;
 	}
@@ -291,11 +271,9 @@ export abstract class ALuPopoverTrigger<
 	 */
 	protected _subscribeToBackdrop(): void {
 		if (this._overlayRef) {
-			this._backdropSubscription = this._overlayRef
-				.backdropClick()
-				.subscribe(() => {
-					this.closePopover();
-				});
+			this._backdropSubscription = this._overlayRef.backdropClick().subscribe(() => {
+				this.closePopover();
+			});
 		}
 	}
 
@@ -354,14 +332,9 @@ export abstract class ALuPopoverTrigger<
 	 */
 	protected _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
-			this._portal = new TemplatePortal(
-				this.panel.templateRef,
-				this._viewContainerRef,
-			);
+			this._portal = new TemplatePortal(this.panel.templateRef, this._viewContainerRef);
 			const config = this._getOverlayConfig();
-			this._subscribeToPositions(
-				config.positionStrategy as FlexibleConnectedPositionStrategy,
-			);
+			this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
 			this._overlayRef = this._overlay.create(config);
 		}
 
@@ -393,8 +366,7 @@ export abstract class ALuPopoverTrigger<
 				break;
 
 			default:
-				overlayState.scrollStrategy =
-					this._overlay.scrollStrategies.reposition();
+				overlayState.scrollStrategy = this._overlay.scrollStrategies.reposition();
 				break;
 		}
 		return overlayState;
@@ -405,19 +377,14 @@ export abstract class ALuPopoverTrigger<
 	 * on the popover based on the new position. This ensures the animation origin is always
 	 * correct, even if a fallback position is used for the overlay.
 	 */
-	protected _subscribeToPositions(
-		position: FlexibleConnectedPositionStrategy,
-	): void {
+	protected _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
 		this._positionSubscription = position.positionChanges
 			.pipe(
 				map((c) => c.connectionPair),
 				distinctUntilChanged(),
 			)
 			.subscribe((connectionPair) => {
-				this.panel.setPositionClasses(
-					connectionPair.overlayX,
-					connectionPair.overlayY,
-				);
+				this.panel.setPositionClasses(connectionPair.overlayX, connectionPair.overlayY);
 			});
 	}
 
