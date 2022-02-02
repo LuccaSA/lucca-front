@@ -1,14 +1,13 @@
-import { ESCAPE } from '@angular/cdk/keycodes';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { ComponentRef, Injector } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { ILuPopupConfig } from './popup-config.model';
-import { ILuPopupContent } from './popup.model';
 import { LU_POPUP_DATA } from './popup.token';
 
-export interface ILuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface ILuPopupRef<T = unknown, D = unknown, R = unknown> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	onDismiss: Observable<void>;
@@ -16,11 +15,11 @@ export interface ILuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = an
 	close(result: R): void;
 	dismiss(): void;
 }
-export interface ILuPopupRefFactory<TComponent = any, TConfig extends ILuPopupConfig = ILuPopupConfig> {
-	forge<T extends TComponent, C extends TConfig>(component: ComponentType<T>, config: C): ILuPopupRef<T>;
+export interface ILuPopupRefFactory<TComponent = unknown, TConfig extends ILuPopupConfig = ILuPopupConfig> {
+	forge<T extends TComponent, C extends TConfig, D = unknown, R = unknown>(component: ComponentType<T>, config: C): ILuPopupRef<T, D, R>;
 }
 
-export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D = any, R = any> implements ILuPopupRef<T, D, R> {
+export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 	onDismiss = new Subject<void>();
@@ -131,10 +130,10 @@ export abstract class ALuPopupRef<T extends ILuPopupContent = ILuPopupContent, D
 	protected _subToCloseEvents() {
 		if (!this._config.undismissable) {
 			const bdClicked$ = this._overlayRef.backdropClick();
-			const escPressed$ = this._overlayRef.keydownEvents().pipe(filter((evt) => evt.keyCode === ESCAPE));
+			const escPressed$ = this._overlayRef.keydownEvents().pipe(filter((evt) => evt.key === 'Escape'));
 			const sub = merge(bdClicked$, escPressed$)
 				.pipe(first())
-				.subscribe((e) => this.dismiss());
+				.subscribe((_e) => this.dismiss());
 			this._subs.add(sub);
 		}
 	}
