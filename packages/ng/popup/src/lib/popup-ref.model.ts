@@ -16,7 +16,7 @@ export interface ILuPopupRef<T = unknown, D = unknown, R = unknown> {
 	dismiss(): void;
 }
 export interface ILuPopupRefFactory<TComponent = unknown, TConfig extends ILuPopupConfig = ILuPopupConfig> {
-	forge<T extends TComponent, C extends TConfig, D = unknown, R = unknown>(component: ComponentType<T>, config: C): ILuPopupRef<T, D, R>;
+	forge<T extends TComponent, C extends TConfig>(component: ComponentType<T>, config: C): ILuPopupRef<T>;
 }
 
 export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> implements ILuPopupRef<T, D, R> {

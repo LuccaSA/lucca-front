@@ -4,12 +4,12 @@ import { Observable, Subscription } from 'rxjs';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
-export declare interface ILuPopoverPanel {
+export declare interface ILuPopoverPanel<T = unknown> {
 	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
 	panelId?: string;
 	triggerId?: string;
-	templateRef?: TemplateRef<any>;
+	templateRef?: TemplateRef<T>;
 
 	/** will emit when the panel wants to close */
 	close: Observable<void>;
@@ -34,7 +34,7 @@ export declare interface ILuPopoverPanel {
 /**
  * abstract class for basic implementation of a popover panel
  */
-export abstract class ALuPopoverPanel implements ILuPopoverPanel {
+export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T> {
 	panelId: string;
 	triggerId: string;
 
@@ -67,11 +67,11 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		this._scrollStrategy = ss;
 	}
 
-	protected _templateRef: TemplateRef<any>;
+	protected _templateRef: TemplateRef<T>;
 	get templateRef() {
 		return this._templateRef;
 	}
-	set templateRef(tr: TemplateRef<any>) {
+	set templateRef(tr: TemplateRef<T>) {
 		this._templateRef = tr;
 	}
 

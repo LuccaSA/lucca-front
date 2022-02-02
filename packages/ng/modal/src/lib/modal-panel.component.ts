@@ -9,7 +9,7 @@ import { LU_MODAL_TRANSLATIONS } from './modal.token';
 import { ILuModalLabel } from './modal.translate';
 
 @Directive()
-export abstract class ALuModalPanelComponent<T extends ILuModalContent<U>, U> implements PortalOutlet, OnDestroy {
+export abstract class ALuModalPanelComponent<T extends ILuModalContent> implements PortalOutlet, OnDestroy {
 	@ViewChild('outlet', { read: CdkPortalOutlet, static: true })
 	protected _outlet: PortalOutlet;
 	protected _componentInstance: T;
@@ -43,7 +43,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent<U>, U> im
 
 	private _subs = new Subscription();
 
-	constructor(protected _ref: ALuModalRef<LuModalPanelComponent<T, U>>, protected _cdr: ChangeDetectorRef, @Inject(LU_MODAL_TRANSLATIONS) public intl: ILuModalLabel) {}
+	constructor(protected _ref: ALuModalRef<LuModalPanelComponent<T>>, protected _cdr: ChangeDetectorRef, @Inject(LU_MODAL_TRANSLATIONS) public intl: ILuModalLabel) {}
 	attach<U extends T = T>(portal: Portal<U>) {
 		const ref = this._outlet.attach(portal) as ComponentRef<U>;
 		this._componentInstance = ref.instance;
@@ -106,9 +106,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent<U>, U> im
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuModalPanelComponent<T extends ILuModalContent<U>, U> extends ALuModalPanelComponent<T, U> {
+export class LuModalPanelComponent<T extends ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<LuModalPanelComponent<T, U>>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
+	constructor(_ref: ALuModalRef<LuModalPanelComponent<T>>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
 		super(_ref, _cdr, intl);
 	}
 }
@@ -119,9 +119,9 @@ export class LuModalPanelComponent<T extends ILuModalContent<U>, U> extends ALuM
 	changeDetection: ChangeDetectionStrategy.Default,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LuModalPanelComponentDefaultCD<T extends ILuModalContent<U>, U> extends ALuModalPanelComponent<T, U> {
+export class LuModalPanelComponentDefaultCD<T extends ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<LuModalPanelComponent<T, U>>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
+	constructor(_ref: ALuModalRef<LuModalPanelComponent<T>>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
 		super(_ref, _cdr, intl);
 	}
 }

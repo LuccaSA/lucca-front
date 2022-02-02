@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, ViewContainerRef, ElementRef, Renderer2, ViewRef } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '@lucca-front/ng/popover';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { ChangeDetectorRef, ElementRef, Renderer2, ViewContainerRef, ViewRef } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
+import { ALuPopoverTrigger, ILuPopoverTarget, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { Subscription } from 'rxjs';
 
 export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuPopoverTrigger<TPicker> implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
@@ -11,7 +11,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLInputElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
 	) {

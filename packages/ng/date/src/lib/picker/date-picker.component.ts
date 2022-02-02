@@ -33,7 +33,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	@Output() override onSelectValue = new EventEmitter<D>();
 
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<unknown>) {
 		this.templateRef = tr;
 	}
 
@@ -46,7 +46,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
-	_emitHoveredEvent(h): void {
+	_emitHoveredEvent(h: boolean): void {
 		this.hovered.emit(h);
 	}
 	_emitSelectValue(val: D) {
