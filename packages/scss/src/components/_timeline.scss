@@ -234,6 +234,22 @@
 		}
 	}
 
+	&:not(.mod-step, .mod-checkedPastStep) {
+		.timeline-step {
+			&::after {
+				background-color: _color('grey', 200);
+			}
+		}
+		.timeline-step-title {
+			color: _color('grey', 900);
+
+			&::before {
+				background-color: _color('primary', 700);
+				color: _color('white');
+			}
+		}
+	}
+
 	&.mod-number {
 		counter-reset: timeline;
 
