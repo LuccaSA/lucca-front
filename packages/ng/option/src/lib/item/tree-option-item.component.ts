@@ -1,19 +1,5 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ComponentFactoryResolver,
-	ContentChild,
-	ElementRef,
-	EventEmitter,
-	forwardRef,
-	Inject,
-	Input,
-	Output,
-	ViewChild,
-	ViewContainerRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Inject, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { LuTreeOptionItemIntl } from './tree-option-item.intl';
@@ -34,7 +20,7 @@ import { ILuTreeOptionItemLabel } from './tree-option-item.translate';
 	],
 })
 export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
-	protected _children = [];
+	protected _children: this[] = [];
 	protected _tree: ILuTree<T>;
 	protected _displayer: ILuInputDisplayer<T>;
 	@ViewChild('value', { static: true, read: ViewContainerRef })
@@ -99,7 +85,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	constructor(private _componentFactoryResolver: ComponentFactoryResolver, @Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
+	constructor(@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
 		super();
 	}
 
@@ -109,13 +95,12 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._valueVCR.insert(evr);
 	}
 	private _renderChildren(children: ILuTree<T>[] = []) {
-		const factory = this._componentFactoryResolver.resolveComponentFactory(LuTreeOptionItemComponent);
 		this._childrenVCR.clear();
 		this.children = children.map((c) => {
-			const ref = this._childrenVCR.createComponent(factory);
+			const ref = this._childrenVCR.createComponent(LuTreeOptionItemComponent);
 			ref.instance._displayer = this._displayer;
 			ref.instance.tree = c;
-			return ref.instance;
+			return ref.instance as this; //yolo
 		});
 	}
 }
