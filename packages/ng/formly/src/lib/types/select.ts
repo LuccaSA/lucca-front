@@ -11,7 +11,7 @@ import { FieldType } from '@ngx-formly/core';
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldSelect extends FieldType {
 	get _options() {
-		return (this.to.options || []) as { value: unknown; label: unknown }[];
+		return (this.to.options || []) as { value: unknown; label: unknown; name: string }[];
 	}
 	override readonly formControl: FormControl;
 	focus() {
