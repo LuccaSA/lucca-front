@@ -260,13 +260,15 @@
 	&.mod-number {
 		counter-reset: timeline;
 
-		.timeline-step-title {
-			counter-increment: timeline;
+		.timeline-step:not(.timeline-stepAddBetweenStep) {
+			.timeline-step-title {
+				counter-increment: timeline;
 
-			&::before {
-				content: counter(timeline);
-				font-size: _theme('sizes.smaller.font-size');
-				line-height: 1;
+				&::before {
+					content: counter(timeline);
+					font-size: _theme('sizes.smaller.font-size');
+					line-height: 1;
+				}
 			}
 		}
 
@@ -279,7 +281,7 @@
 
 	&.mod-checkedPastStep {
 		.timeline-step:not([aria-current='step']):not([aria-current='step']
-				~ .timeline-step) {
+				~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 			.timeline-step-title {
 				.timeline-step-title-icon::before {
 					@include makeIcon('tick');
@@ -330,6 +332,9 @@
 
 			&:last-child {
 				.timeline-step-title {
+					&:before {
+						display: none;
+					}
 					.timeline-step-title-icon::before {
 						@include makeIcon('plus');
 						display: flex;
@@ -382,6 +387,9 @@
 		.timeline-stepAddBetweenStep {
 			.timeline-step-title {
 				padding-left: 0;
+				&:before {
+					display: none;
+				}
 			}
 		}
 		.timeline-stepAddBetweenStep-title {
@@ -400,7 +408,7 @@
 			.timeline-step-title-icon::before {
 			@include makeIcon('plus');
 			display: flex;
-			transition: box-shadow _theme("commons.animations.durations.standard");
+			transition: box-shadow _theme('commons.animations.durations.standard');
 		}
 
 		&.mod-vertical:not(.mod-big) {
@@ -408,6 +416,16 @@
 					~ .timeline-step)
 				.timeline-step-title-icon::before {
 				left: 0;
+			}
+		}
+
+		&.mod-big {
+			.timeline-step:not([aria-current='step']):not([aria-current='step']
+					~ .timeline-step)
+				.timeline-step-title-icon::before {
+				width: 1.5rem;
+				height: 1.5rem;
+				left: _theme('spacings.smallest');
 			}
 		}
 	}
