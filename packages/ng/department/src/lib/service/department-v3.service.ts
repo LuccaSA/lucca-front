@@ -38,7 +38,7 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 		return call.pipe(
 			map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
 				const tree = response.data;
-				return tree.children.map((c) => this.format(c));
+				return tree?.children.map((c) => this.format(c)) ?? [];
 			}),
 		);
 	}
