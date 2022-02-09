@@ -78,12 +78,12 @@ export class LuEstablishmentSelectInputComponent<
 		@Inject(ALuLegalUnitService)
 		@Optional()
 		@SkipSelf()
-		hostLuService: ALuLegalUnitService,
+		hostLuService: LuLegalUnitService,
 		@Inject(ALuLegalUnitService) @Self() selfLuService: LuLegalUnitService,
 		@Inject(ALuEstablishmentService)
 		@Optional()
 		@SkipSelf()
-		hostEstablishmentService: ALuEstablishmentService,
+		hostEstablishmentService: LuEstablishmentService,
 		@Inject(ALuEstablishmentService)
 		@Self()
 		selfEstablishmentService: LuEstablishmentService,
@@ -91,8 +91,8 @@ export class LuEstablishmentSelectInputComponent<
 		public intl: ILuEstablishmentSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
-		this._establishmentService = (hostEstablishmentService || selfEstablishmentService) as LuEstablishmentService;
-		this._legalUnitService = (hostLuService || selfLuService) as LuLegalUnitService;
+		this._establishmentService = hostEstablishmentService || selfEstablishmentService;
+		this._legalUnitService = hostLuService || selfLuService;
 	}
 
 	ngOnInit() {

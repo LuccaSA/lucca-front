@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ElementRef, Renderer2, ViewContainerRef, ViewRef } f
 import { ControlValueAccessor } from '@angular/forms';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
-import { ALuPopoverTrigger, ILuPopoverTarget, LuPopoverTarget } from '@lucca-front/ng/popover';
+import { ALuPopoverTrigger, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { Subscription } from 'rxjs';
 
 export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuPopoverTrigger<TPicker> implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
@@ -16,7 +16,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		protected _renderer: Renderer2,
 	) {
 		super(_overlay, _elementRef, _viewContainerRef);
-		this.target = new LuPopoverTarget() as ILuPopoverTarget;
+		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
 		this.target.position = 'below';
 		this.target.alignment = 'left';

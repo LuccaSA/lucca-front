@@ -9,7 +9,7 @@ export abstract class ALuModalLabel {
 	cancel: string;
 }
 
-export const luModalTranslations = {
+export const luModalTranslations: ILuTranslation<ILuModalLabel> = {
 	en: {
 		submit: 'Ok',
 		cancel: 'Cancel',
@@ -22,4 +22,4 @@ export const luModalTranslations = {
 		submit: 'Ok',
 		cancel: 'Cancelar',
 	},
-} as ILuTranslation<ILuModalLabel>;
+};

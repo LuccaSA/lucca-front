@@ -30,7 +30,7 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser> extends ALuUserH
 
 		const nonUniqNames = Object.keys(usersByName).filter((key) => usersByName[key].length > 1);
 
-		const homonyms = [] as U[];
+		const homonyms: U[] = [];
 		nonUniqNames.forEach((name) => homonyms.push(...usersByName[name]));
 		return homonyms;
 	}
@@ -47,7 +47,7 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser> extends ALuUserH
 				},
 			})
 			.pipe(
-				map((res) => res.data.items as { id: number; department?: { name: string } }[]),
+				map((res) => res.data.items),
 				map((infos) =>
 					infos.map((info) => {
 						const homonym = homonyms.find((h) => h.id === info.id);

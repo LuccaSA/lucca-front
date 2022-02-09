@@ -9,7 +9,7 @@ export abstract class ALuOptionSelectAllLabel {
 	deselect: string;
 }
 
-export const luOptionSelectAllTranslations = {
+export const luOptionSelectAllTranslations: ILuTranslation<ILuOptionSelectAllLabel> = {
 	en: {
 		select: 'Select all',
 		deselect: 'Deselect all',
@@ -30,4 +30,4 @@ export const luOptionSelectAllTranslations = {
 		select: 'Seleccionar todo',
 		deselect: 'Desmarcar todo',
 	},
-} as ILuTranslation<ILuOptionSelectAllLabel>;
+};

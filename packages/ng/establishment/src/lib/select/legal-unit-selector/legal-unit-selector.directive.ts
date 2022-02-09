@@ -39,12 +39,12 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 		@Inject(ALuEstablishmentService)
 		@Optional()
 		@SkipSelf()
-		hostService: ALuEstablishmentService,
+		hostService: LuEstablishmentService,
 		@Inject(ALuEstablishmentService)
 		@Self()
 		selfService: LuEstablishmentService,
 	) {
-		this._service = (hostService || selfService) as LuEstablishmentService;
+		this._service = hostService || selfService;
 	}
 
 	@HostListener('click')

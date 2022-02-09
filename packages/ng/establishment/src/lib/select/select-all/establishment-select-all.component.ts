@@ -48,13 +48,13 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 		@Inject(ALuEstablishmentService)
 		@Optional()
 		@SkipSelf()
-		hostService: ALuEstablishmentService,
+		hostService: LuEstablishmentService,
 		@Inject(ALuEstablishmentService)
 		@Self()
 		selfService: LuEstablishmentService,
 	) {
 		super(intl);
-		this._service = (hostService || selfService) as LuEstablishmentService;
+		this._service = hostService || selfService;
 	}
 
 	override selectAll() {

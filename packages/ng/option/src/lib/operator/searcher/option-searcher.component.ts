@@ -28,7 +28,7 @@ export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implement
 	clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
 	empty$: Observable<boolean>;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef;
+	searchInput: ElementRef<HTMLElement>;
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest([in$, this.clue$]).pipe(
@@ -41,7 +41,7 @@ export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implement
 	@Input() searchFn: (option: T, clue: string) => boolean = () => true;
 
 	onOpen() {
-		(this.searchInput.nativeElement as HTMLElement).focus();
+		this.searchInput.nativeElement.focus();
 		this.searchControl.setValue('');
 	}
 	resetClue() {

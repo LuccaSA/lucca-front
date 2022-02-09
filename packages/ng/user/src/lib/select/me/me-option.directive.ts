@@ -1,10 +1,10 @@
-import { Directive, forwardRef, Inject, Optional, SkipSelf, Self, ViewContainerRef, TemplateRef, Input, EmbeddedViewRef } from '@angular/core';
-import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
+import { Directive, EmbeddedViewRef, forwardRef, Inject, Input, Optional, Self, SkipSelf, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ALuOnOpenSubscriber } from '@lucca-front/ng/core';
-import { ILuUser } from '../../user.model';
-import { ALuUserService, LuUserV3Service } from '../../service/index';
+import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ALuUserService, LuUserV3Service } from '../../service/index';
+import { ILuUser } from '../../user.model';
 
 @Directive({
 	selector: '[luUserMeOption]',
@@ -55,12 +55,12 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	private _viewRef: EmbeddedViewRef<{ $implicit: ILuUser }>;
 
 	constructor(
-		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
-		@Inject(ALuUserService) @Self() selfService: ALuUserService,
+		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
+		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
 		private _vcr: ViewContainerRef,
 		private _templateRef: TemplateRef<{ $implicit: U }>,
 	) {
-		this._service = (hostService || selfService) as LuUserV3Service<U>;
+		this._service = hostService || selfService;
 	}
 
 	me: ILuUser = undefined;

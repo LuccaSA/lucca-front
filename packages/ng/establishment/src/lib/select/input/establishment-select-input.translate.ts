@@ -7,7 +7,7 @@ export abstract class ALuEstablishmentSelectInputLabel {
 	establishments: string;
 }
 
-export const luEstablishmentSelectInputTranslations = {
+export const luEstablishmentSelectInputTranslations: ILuTranslation<ILuEstablishmentSelectInputLabel> = {
 	en: {
 		establishments: 'establishments',
 	},
@@ -17,4 +17,4 @@ export const luEstablishmentSelectInputTranslations = {
 	es: {
 		establishments: 'establecimiento',
 	},
-} as ILuTranslation<ILuEstablishmentSelectInputLabel>;
+};

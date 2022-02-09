@@ -1,7 +1,7 @@
 import { ILuTranslation } from '@lucca-front/ng/core';
 import { ILuOptionSelectAllLabel } from '@lucca-front/ng/option';
 
-export const luEstablishmentSelectAllTranslations = {
+export const luEstablishmentSelectAllTranslations: ILuTranslation<ILuOptionSelectAllLabel> = {
 	en: {
 		select: 'Select all',
 		deselect: 'Deselect all',
@@ -22,4 +22,4 @@ export const luEstablishmentSelectAllTranslations = {
 		select: 'Seleccionar todo',
 		deselect: 'Desmarcar todo',
 	},
-} as ILuTranslation<ILuOptionSelectAllLabel>;
+};

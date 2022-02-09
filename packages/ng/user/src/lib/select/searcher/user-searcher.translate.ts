@@ -7,7 +7,7 @@ export abstract class ALuUserSearcherLabel {
 	includeFormerEmployees: string;
 }
 
-export const luUserSearcherTranslations = {
+export const luUserSearcherTranslations: ILuTranslation<ILuUserSearcherLabel> = {
 	en: {
 		includeFormerEmployees: 'Include former employees',
 	},
@@ -17,4 +17,4 @@ export const luUserSearcherTranslations = {
 	es: {
 		includeFormerEmployees: 'Incluir a los antiguos empleados',
 	},
-} as ILuTranslation<ILuUserSearcherLabel>;
+};

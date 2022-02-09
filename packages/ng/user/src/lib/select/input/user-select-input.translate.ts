@@ -9,7 +9,7 @@ export abstract class ALuUserSelectInputLabel {
 	me: string;
 }
 
-export const luUserSelectInputTranslations = {
+export const luUserSelectInputTranslations: ILuTranslation<ILuUserSelectInputLabel> = {
 	en: {
 		users: 'users',
 		me: 'Me:',
@@ -22,4 +22,4 @@ export const luUserSelectInputTranslations = {
 		users: 'empleados',
 		me: 'Yo :',
 	},
-} as ILuTranslation<ILuUserSelectInputLabel>;
+};

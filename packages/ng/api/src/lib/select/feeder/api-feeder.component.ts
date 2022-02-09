@@ -33,10 +33,10 @@ export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem> extends ALu
 		@Inject(ALuApiService)
 		@Optional()
 		@SkipSelf()
-		hostService: ALuApiService<T>,
+		hostService: LuApiHybridService<T>,
 		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
-		super((hostService || selfService) as LuApiHybridService<T>);
+		super(hostService || selfService);
 	}
 
 	@Input() set standard(standard: string) {

@@ -31,7 +31,7 @@ import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.
 })
 export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef;
+	searchInput: ElementRef<HTMLElement>;
 
 	@Input() set standard(standard: string) {
 		this._service.standard = standard;
@@ -58,10 +58,10 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 		@Inject(ALuApiService)
 		@Optional()
 		@SkipSelf()
-		hostService: ALuApiService<T>,
+		hostService: LuApiHybridService<T>,
 		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
-		super((hostService || selfService) as LuApiHybridService<T>);
+		super(hostService || selfService);
 	}
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
@@ -70,7 +70,7 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 	}
 
 	override onOpen() {
-		(this.searchInput.nativeElement as HTMLElement).focus();
+		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}
 	resetClue() {
@@ -115,7 +115,7 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 	implements OnInit
 {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef;
+	searchInput: ElementRef<HTMLElement>;
 	@Input() set standard(standard: string) {
 		this._service.standard = standard;
 	}
@@ -134,8 +134,8 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 	@Input() debounceTime = 250;
 
 	clueControl: FormControl;
-	constructor(@Inject(ALuApiService) @Optional() @SkipSelf() hostService: ALuApiService, @Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>) {
-		super((hostService || selfService) as LuApiHybridService<T>);
+	constructor(@Inject(ALuApiService) @Optional() @SkipSelf() hostService: LuApiHybridService<T>, @Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>) {
+		super(hostService || selfService);
 	}
 	ngOnInit() {
 		this.clueControl = new FormControl(undefined);
@@ -144,7 +144,7 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 	}
 
 	override onOpen() {
-		(this.searchInput.nativeElement as HTMLElement).focus();
+		this.searchInput.nativeElement.focus();
 		super.onOpen();
 	}
 	resetClue() {

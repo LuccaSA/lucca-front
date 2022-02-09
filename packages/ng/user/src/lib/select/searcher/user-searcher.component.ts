@@ -85,11 +85,11 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	private _options: U[] = [];
 
 	constructor(
-		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
+		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
 		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
 		@Inject(LuUserSearcherIntl) public intl: ILuUserSearcherLabel,
 	) {
-		this._service = (hostService || selfService) as LuUserV3Service<U>;
+		this._service = hostService || selfService;
 
 		const clue: FormControl = new FormControl('');
 
@@ -111,7 +111,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 		const query$ = combineLatest([formValue$.pipe(debounceTime(250)), this._isOpened$]).pipe(
 			filter(([, isOpened]) => isOpened),
-			switchMap(([val]) => pager$.pipe(map((page) => [val, page] as [UserPagedSearcherForm, number]))),
+			switchMap(([val]) => pager$.pipe(map<number, [UserPagedSearcherForm, number]>((page) => [val, page]))),
 			share(),
 		);
 
@@ -123,7 +123,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 				}
 				return this._service.searchPaged(val.clue, page, filters).pipe(
 					catchError(() => of([])),
-					map((items) => [items, page] as [U[], number]),
+					map<U[], [U[], number]>((items) => [items, page]),
 				);
 			}),
 			share(),

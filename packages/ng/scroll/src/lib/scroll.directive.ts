@@ -43,8 +43,8 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 			}
 			const scrollWidth = target.scrollWidth;
 			const scrollHeight = target.scrollHeight;
-			const eltHeight = (this._elementRef.nativeElement as HTMLElement).clientHeight;
-			const eltWidth = (this._elementRef.nativeElement as HTMLElement).clientWidth;
+			const eltHeight = this._elementRef.nativeElement.clientHeight;
+			const eltWidth = this._elementRef.nativeElement.clientWidth;
 			if (scrollWidth - scrollLeft - eltWidth < 10) {
 				this.onScrollRight.emit($event);
 			}
@@ -53,5 +53,5 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 			}
 		}
 	}
-	constructor(protected _elementRef: ElementRef) {}
+	constructor(protected _elementRef: ElementRef<HTMLElement>) {}
 }

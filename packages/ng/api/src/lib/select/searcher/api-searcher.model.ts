@@ -1,9 +1,8 @@
-import { Observable, Subject, merge, of } from 'rxjs';
-import { mapTo, share, switchMap, catchError, map, scan, startWith } from 'rxjs/operators';
-
-import { ILuApiOptionFeeder } from '../feeder/index';
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { merge, Observable, of, Subject } from 'rxjs';
+import { catchError, map, mapTo, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ILuApiService } from '../../service/index';
+import { ILuApiOptionFeeder } from '../feeder/index';
 
 export type ILuApiOptionSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> = ILuApiOptionFeeder<T>;
 
@@ -79,7 +78,7 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 			startWith(0),
 		);
 		const query$ = this._clue$.pipe(
-			switchMap((clue) => pager$.pipe(map((page) => [page, clue] as [number, string]))),
+			switchMap((clue) => pager$.pipe(map<number, [number, string]>((page) => [page, clue]))),
 			share(),
 		);
 
@@ -87,7 +86,7 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 			switchMap(([page, clue]) =>
 				this._service.searchPaged(clue, page).pipe(
 					catchError(() => of([])),
-					map((items) => [items, page] as [T[], number]),
+					map<T[], [T[], number]>((items) => [items, page]),
 				),
 			),
 			share(),

@@ -59,7 +59,7 @@ export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuO
 
 	@HostBinding('class.position-fixed') fixed = true;
 	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef;
+	searchInput: ElementRef<HTMLElement>;
 
 	@Output()
 	isSearching = new EventEmitter<boolean>();
@@ -78,12 +78,12 @@ export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuO
 		@Inject(ALuEstablishmentService)
 		@Optional()
 		@SkipSelf()
-		hostService: ALuEstablishmentService,
+		hostService: LuEstablishmentService,
 		@Inject(ALuEstablishmentService)
 		@Self()
 		selfService: LuEstablishmentService,
 	) {
-		this._service = (hostService || selfService) as LuEstablishmentService;
+		this._service = hostService || selfService;
 	}
 
 	ngOnInit() {
@@ -136,7 +136,7 @@ export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuO
 	}
 
 	onOpen() {
-		(this.searchInput.nativeElement as HTMLElement).focus();
+		this.searchInput.nativeElement.focus();
 		this.reset();
 	}
 
