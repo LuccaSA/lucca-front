@@ -15,7 +15,7 @@ import { ILuSidepanelLabel } from './sidepanel.translate';
 export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepanelContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-sidepanel-panel') public class = true;
 
-	constructor(_ref: ALuSidepanelRef<LuSidepanelPanelComponent>, _cdr: ChangeDetectorRef, @Inject(LuSidepanelIntl) intl: ILuSidepanelLabel) {
+	constructor(_ref: ALuSidepanelRef<LuSidepanelPanelComponent<T>>, _cdr: ChangeDetectorRef, @Inject(LuSidepanelIntl) intl: ILuSidepanelLabel) {
 		super(_ref, _cdr, intl);
 	}
 }
@@ -29,7 +29,7 @@ export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepa
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuSidepanelPanelComponentDefaultCD<T extends ILuSidepanelContent = ILuSidepanelContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-sidepanel-panel') public class = true;
-	constructor(_ref: ALuSidepanelRef<LuSidepanelPanelComponent>, _cdr: ChangeDetectorRef, @Inject(LuSidepanelIntl) intl: ILuSidepanelLabel) {
+	constructor(_ref: ALuSidepanelRef<LuSidepanelPanelComponent<T>>, _cdr: ChangeDetectorRef, @Inject(LuSidepanelIntl) intl: ILuSidepanelLabel) {
 		super(_ref, _cdr, intl);
 	}
 }

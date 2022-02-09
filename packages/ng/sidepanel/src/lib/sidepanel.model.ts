@@ -1,3 +1,3 @@
 import { ILuModalContent } from '@lucca-front/ng/modal';
 
-export type ILuSidepanelContent = ILuModalContent;
+export type ILuSidepanelContent<T = unknown> = ILuModalContent<T>;

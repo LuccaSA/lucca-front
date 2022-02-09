@@ -42,7 +42,7 @@ class LuSidepanelRef<T extends ILuSidepanelContent<unknown> = ILuSidepanelConten
 @Injectable()
 export class LuSidepanelRefFactory implements ILuPopupRefFactory<ILuSidepanelContent<unknown>, ILuSidepanelConfig> {
 	constructor(protected _overlay: Overlay, protected _injector: Injector) {}
-	forge<T extends ILuSidepanelContent<unknown>, C extends ILuSidepanelConfig>(component: ComponentType<T>, config: C) {
-		return new LuSidepanelRef(this._overlay, this._injector, component, config);
+	forge<T extends ILuSidepanelContent<unknown>, C extends ILuSidepanelConfig, D, R>(component: ComponentType<T>, config: C) {
+		return new LuSidepanelRef<T, D, R>(this._overlay, this._injector, component, config);
 	}
 }
