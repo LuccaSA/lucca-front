@@ -125,7 +125,6 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 
 	private _setTabindex(i: number = null): void {
-		// TODO check if this works
 		this._elementRef.nativeElement.setAttribute('tabindex', `${i}`);
 	}
 }
