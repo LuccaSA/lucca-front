@@ -70,7 +70,8 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 			delay(0),
 			share(),
 		);
-		items$.subscribe((i) => (this._items = i || []));
+		const itemsSub = items$.subscribe((i) => (this._items = i || []));
+		this._subs.add(itemsSub);
 		// this.highlightIndex = -1;
 
 		const singleFlow$: Observable<boolean> = items$.pipe(
@@ -81,6 +82,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		const itemSelectSub = singleFlow$.subscribe(() => this.close.emit());
 		this._subs.add(itemSelectSub);
 	}
+
 	ngAfterViewInit() {
 		this.initItems();
 	}
@@ -90,6 +92,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.close.complete();
 		this._subs.unsubscribe();
 	}
+
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
@@ -97,6 +100,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	_emitOpenEvent(): void {
 		this.open.emit();
 	}
+
 	_emitHoveredEvent(hovered: boolean): void {
 		this.hovered.emit(hovered);
 	}
@@ -104,6 +108,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	override onOpen() {
 		this.focusFirstItem();
 	}
+
 	private focusFirstItem() {
 		const firstItem = this._items[0];
 		if (firstItem) {
