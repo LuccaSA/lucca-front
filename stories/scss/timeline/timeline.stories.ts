@@ -2,19 +2,22 @@ import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
-
 @Component({
 	selector: 'timeline-stories',
 	templateUrl: './timeline.stories.html',
-}) class TimelineStory {
+})
+class TimelineStory {
 	@Input() isVertical: boolean;
 	@Input() isStep: boolean;
 	@Input() isAddStep: boolean;
 	@Input() isAddBetweenStep: boolean;
-	@Input() isProgress: boolean;
+	@Input() isNumber: boolean;
+	@Input() isCheckedPastStep: boolean;
 
-	@Input() order: string;
+	@Input() stepProgress: number;
+
 	@Input() size: string;
+	@Input() hx: string;
 }
 
 export default {
@@ -24,22 +27,30 @@ export default {
 		size: {
 			control: {
 				type: 'radio',
-				options: ['', 'mod-small', 'mod-big']
-			}
+				options: ['', 'mod-small', 'mod-big'],
+			},
 		},
-		order: {
+		hx: {
 			control: {
 				type: 'radio',
-				options: ['', 'mod-number', 'mod-checkedPastStep']
-			}
+				options: ['', 'u-h1', 'u-h2'],
+			},
+		},
+		stepProgress: {
+			control: {
+				type: 'range',
+				min: 0,
+				max: 100,
+				step: 5,
+			},
 		},
 	},
 	decorators: [
 		moduleMetadata({
 			entryComponents: [TimelineStory],
 			imports: [BrowserModule],
-		})
-	]
+		}),
+	],
 } as Meta;
 
 const template: Story<TimelineStory> = (args: TimelineStory) => ({
@@ -47,6 +58,14 @@ const template: Story<TimelineStory> = (args: TimelineStory) => ({
 });
 
 export const def = template.bind({});
-def.args = { isVertical: false, size: '', isStep: false, order: '', isAddStep: false, isAddBetweenStep: false };
-
-
+def.args = {
+	isVertical: false,
+	size: '',
+	isStep: false,
+	isAddStep: false,
+	hx: '',
+	stepProgress: 0,
+	isAddBetweenStep: false,
+	isNumber: false,
+	isCheckedPastStep: false,
+};

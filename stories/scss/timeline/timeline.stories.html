@@ -1,7 +1,7 @@
-<ol class="timeline {{size}} {{order}}" [class.mod-vertical]="isVertical" [class.mod-addStep]="isAddStep" [class.mod-addBetweenStep]="isAddBetweenStep">
+<ol class="timeline {{size}}" [class.mod-number]="isNumber" [class.mod-checkedPastStep]="isCheckedPastStep" [class.mod-vertical]="isVertical" [class.mod-addStep]="isAddStep" [class.mod-addBetweenStep]="isAddBetweenStep" [class.mod-progress]="stepProgress > 0">
     <li class="timeline-step">
         <span class="timeline-step-title">
-            <span class="timeline-step-title-icon" aria-hidden="true" *ngIf="order === 'mod-checkedPastStep'"></span>
+            <span class="timeline-step-title-icon" aria-hidden="true" *ngIf="isCheckedPastStep"></span>
             <a href="#" class="timeline-step-title-action">Previous step</a>
         </span>
         <div class="timeline-step-description" *ngIf="isVertical">
@@ -15,7 +15,7 @@
     </li>
     <li class="timeline-step timeline-stepAddBetweenStep" *ngIf="isAddBetweenStep">	
         <div class="timeline-step-title">
-            <button type="button" class="timeline-stepAddBetweenStep-title">
+            <button type="button" class="timeline-stepAddBetweenStep-title" onClick="alert('ajout d‘étape')">
                 <span class="timeline-step-title-icon" aria-hidden="true"></span>
                 <span class="u-mask">
                     Ajouter une étape intermédiaire entre l’étape 1 et l’étape 2
@@ -23,8 +23,8 @@
             </button>
         </div>
     </li>
-    <li class="timeline-step" [attr.aria-current]="isStep ? 'step' : null">
-        <span class="timeline-step-title">
+    <li class="timeline-step" [attr.aria-current]="isStep ? 'step' : null" [attr.style]="'--progress:' + stepProgress + '%'">
+        <span class="timeline-step-title {{hx}}">
             Current step
         </span>
         <div class="timeline-step-description" *ngIf="isVertical">
@@ -46,8 +46,8 @@
     </li>
     <li class="timeline-step" *ngIf="isAddStep">
         <div class="timeline-step-title">
-            <span class="timeline-step-title-icon" aria-hidden="true"></span>
-            <button class="button palette-grey mod-small">
+            <button type="button" class="button palette-grey mod-small u-positionStatic" onClick="alert('ajout d‘étape')">
+                <span class="timeline-step-title-icon" aria-hidden="true"></span>
                 Add step
             </button>
         </div>
