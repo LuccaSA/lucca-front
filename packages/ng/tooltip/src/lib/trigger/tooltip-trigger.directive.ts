@@ -124,7 +124,8 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		return !isNatevelyFocusableTag && !hasATabIndex;
 	}
 
-	private _setTabindex(i: 0 | null): void {
-		i !== null ? this._elementRef.nativeElement.setAttribute('tabindex', `${i}`) : this._elementRef.nativeElement.removeAttribute('tabindex');
+	private _setTabindex(i: number = null): void {
+		// TODO check if this works
+		this._elementRef.nativeElement.setAttribute('tabindex', `${i}`);
 	}
 }
