@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"ignorePatterns": ["src/**/*"],
+	"ignorePatterns": ["src/**/*", "**/*.stories.ts"],
 	"overrides": [
 		{
 			"files": ["*.ts"],
