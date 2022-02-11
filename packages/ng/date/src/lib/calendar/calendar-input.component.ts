@@ -97,7 +97,7 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 			const offset = (this._adapter.getDay(start) - getLocaleFirstDayOfWeek(this._locale) + 7) % 7;
 			index = -1 * offset;
 		}
-		// TODO AU SECOURS
+		// TODO
 		let isFDOW = false;
 		let isNextMonth = false;
 		do {

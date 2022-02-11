@@ -4,9 +4,6 @@ import { ILuPopupConfig } from './popup-config.model';
 import { ILuPopupRef, ILuPopupRefFactory } from './popup-ref.model';
 import { LU_POPUP_CONFIG, LU_POPUP_REF_FACTORY } from './popup.token';
 
-// TODO WHAT THE HELL IS HAPPENING WITH THIS GENERICS MADNESS
-// Send help
-
 @Injectable()
 export class LuPopup<C extends ILuPopupConfig = ILuPopupConfig> {
 	constructor(@Inject(LU_POPUP_REF_FACTORY) protected _factory: ILuPopupRefFactory, @Inject(LU_POPUP_CONFIG) protected _config: ILuPopupConfig) {}
