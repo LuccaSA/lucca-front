@@ -1,3 +1,16 @@
-<label class="textfield">
-	<lu-api-select class="textfield-input" api="/api/v3/axisSections"></lu-api-select>
-</label>
+<section class="section">
+	<label class="textfield">
+		<lu-api-select class="textfield-input" api="/api/v3/axisSections"></lu-api-select>
+		<span class="textfield-label">Api V3 Select</span>
+	</label>
+
+	<label class="textfield u-marginTopStandard">
+		<lu-api-select class="textfield-input"
+									 standard="v4"
+									 api="/organization/structure/api/job-qualifications"
+									 sort="job.name,level.position">
+		</lu-api-select>
+		<span class="textfield-label">Api V4 Select</span>
+	</label>
+
+</section>
