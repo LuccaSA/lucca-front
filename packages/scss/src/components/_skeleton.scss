@@ -1,0 +1,135 @@
+@use "sass:math";
+
+// Mixins
+
+@mixin skeletonShapeSizing($spacing) {
+	height: _theme("spacings.#{$spacing}");
+	width: _theme("spacings.#{$spacing}");
+}
+
+@mixin skeletonTextSizing($size) {
+	background-size: 150% math.div(_theme("sizes.#{$size}.font-size"), 2);
+	height: _theme("sizes.#{$size}.line-height");
+	&::before {
+		height: math.div(_theme("sizes.#{$size}.font-size"), 2);
+		top: calc(50% - math.div(_theme("sizes.#{$size}.font-size"), 4));
+	}
+}
+
+// Skeleton component styles
+
+.skeleton {
+	.skeleton-item {
+		animation: skeletonFade _theme("commons.animations.durations.fast")
+			ease-in 1 forwards;
+	}
+}
+
+.skeleton.is-loading {
+	
+	// Adds a pulse effet to skeleton container
+	&.has-pulse {
+		animation: skeletonPulse 1.5s infinite ease-in-out;
+	}
+	
+	// Default skeleton item
+	.skeleton-item {
+		animation: skeletonBackground 1.5s infinite linear;
+		background: linear-gradient(
+			90deg,
+			_color("grey", 50),
+			_color("grey", 200),
+			_color("grey", 50)
+		);
+		border-radius: _theme("commons.border.radius");
+		background-size: 150% 100%;
+		background-repeat: repeat-x;
+		display: block;
+		height: 100%;
+		opacity: 0;
+		width: var(--skltn-width, 100%);
+
+		// Shapes
+		&.mod-square,
+		&.mod-circle {
+			height: _theme("spacings.standard");
+			width: _theme("spacings.standard");
+
+			// Size modifiers
+			@each $name, $spacing in _getMap("spacings") {
+				&.mod-#{$name} {
+					@include skeletonShapeSizing($name);
+				}
+			}
+		}
+
+		&.mod-circle {
+			border-radius: 50%;
+		}
+
+		// Text
+		&.mod-text {
+			background-size: 150% _theme("spacings.smaller");
+			clip-path: polygon(0 0, var(--skltn-width, 100%) 0, var(--skltn-width, 100%) 100%, 0 100%);
+			height: _theme("sizes.standard.line-height");
+			position: relative;
+
+			&::before {
+				border-radius: _theme("commons.border.radius");
+				box-shadow: 0 0 0 _theme("commons.border.radius") var(--skltn-background-color, _color("white"));
+				content: "";
+				display: block;
+				height: math.div(_theme("sizes.standard.font-size"), 2);
+				position: absolute;
+				top: calc(50% - math.div(_theme("sizes.standard.font-size"), 4));
+				width: var(--skltn-width, 100%);
+			}
+
+			// Size modifiers
+			@each $name, $size in _getMap("sizes") {
+				&.mod-#{$name} {
+					@include skeletonTextSizing($name);
+				}
+			}
+		}
+
+	}
+}
+
+// Fades content in
+
+@keyframes skeletonFade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+// Background gradient animation
+
+@keyframes skeletonBackground {
+	0% {
+		background-position: 150% 50%;
+		opacity: 0.85;
+	}
+	100% {
+		background-position: -150% 50%;
+		opacity: 0.85;
+	}
+}
+
+// Pulse animation
+
+@keyframes skeletonPulse {
+	0% {
+		opacity: 0.9;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.9;
+	}
+}
