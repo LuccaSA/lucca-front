@@ -9,7 +9,7 @@ export abstract class ALuOptionPlaceholderLabel implements ILuOptionPlaceholderL
 	placeholderAction: string;
 }
 
-export const luOptionPlaceholderTranslations = {
+export const luOptionPlaceholderTranslations: ILuTranslation<ILuOptionPlaceholderLabel> = {
 	en: {
 		placeholderDescription: 'No results match your search criteria.',
 		placeholderAction: 'Clear search',
@@ -22,4 +22,4 @@ export const luOptionPlaceholderTranslations = {
 		placeholderDescription: 'No se han encontrado resultados para su búsqueda',
 		placeholderAction: 'Eliminar búsqueda',
 	},
-} as ILuTranslation<ILuOptionPlaceholderLabel>;
+};

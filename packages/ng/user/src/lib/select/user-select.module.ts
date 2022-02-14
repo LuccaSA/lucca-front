@@ -5,17 +5,7 @@ import { LuUserHomonymsModule } from './homonyms/index';
 import { LuUserMeOptionModule } from './me/index';
 
 @NgModule({
-	imports: [
-		LuUserSelectInputModule,
-		LuUserSearcherModule,
-		LuUserHomonymsModule,
-		LuUserMeOptionModule,
-	],
-	exports: [
-		LuUserSelectInputModule,
-		LuUserSearcherModule,
-		LuUserHomonymsModule,
-		LuUserMeOptionModule,
-	],
+	imports: [LuUserSelectInputModule, LuUserSearcherModule, LuUserHomonymsModule, LuUserMeOptionModule],
+	exports: [LuUserSelectInputModule, LuUserSearcherModule, LuUserHomonymsModule, LuUserMeOptionModule],
 })
 export class LuUserSelectModule {}

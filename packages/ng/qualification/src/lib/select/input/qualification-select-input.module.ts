@@ -10,23 +10,15 @@ import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-sele
 import { luQualificationSelectInputTranslations } from './qualification-select-input.translate';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuInputModule,
-		LuOptionModule,
-		LuSelectInputModule,
-		LuForGroupsModule,
-		LuApiSearcherModule
-	],
-	declarations: [
-		LuQualificationSelectInputComponent
-	],
-	exports: [
-		LuQualificationSelectInputComponent,
-	],
+	imports: [CommonModule, LuInputModule, LuOptionModule, LuSelectInputModule, LuForGroupsModule, LuApiSearcherModule],
+	declarations: [LuQualificationSelectInputComponent],
+	exports: [LuQualificationSelectInputComponent],
 	providers: [
-		{ provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS, useValue: luQualificationSelectInputTranslations },
+		{
+			provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS,
+			useValue: luQualificationSelectInputTranslations,
+		},
 		LuQualificationSelectInputIntl,
 	],
 })
-export class LuQualificationSelectInputModule { }
+export class LuQualificationSelectInputModule {}

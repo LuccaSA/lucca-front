@@ -6,16 +6,8 @@ import { CommonModule } from '@angular/common';
 import { LuOptionPlaceholderModule } from '../../placeholder/index';
 
 @NgModule({
-	imports: [
-		ReactiveFormsModule,
-		CommonModule,
-		LuOptionPlaceholderModule,
-	],
-	declarations: [
-		LuOptionSearcherComponent,
-	],
-	exports: [
-		LuOptionSearcherComponent,
-	],
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderModule],
+	declarations: [LuOptionSearcherComponent],
+	exports: [LuOptionSearcherComponent],
 })
 export class LuOptionSearcherModule {}

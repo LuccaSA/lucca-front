@@ -4,15 +4,8 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		OverlayModule,
-	],
-	declarations: [
-		LuSelectInputComponent,
-	],
-	exports: [
-		LuSelectInputComponent,
-	],
+	imports: [CommonModule, OverlayModule],
+	declarations: [LuSelectInputComponent],
+	exports: [LuSelectInputComponent],
 })
 export class LuSelectInputModule {}

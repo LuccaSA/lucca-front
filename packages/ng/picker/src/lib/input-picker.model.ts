@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
-import { ILuPopoverPanel, ALuPopoverPanel, ILuPopoverTrigger } from '@lucca-front/ng/popover';
 import { ILuInput } from '@lucca-front/ng/input';
+import { ALuPopoverPanel, ILuPopoverPanel, ILuPopoverTrigger } from '@lucca-front/ng/popover';
+import { Observable } from 'rxjs';
 
-export declare interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
+export declare interface ILuPickerPanel<T> extends ILuPopoverPanel {
 	/**
 	 * self explainatory
 	 */
@@ -17,11 +17,10 @@ export declare interface ILuPickerPanel<T = any> extends ILuPopoverPanel {
 	 */
 	setValue(value: T | T[]): void;
 }
-export abstract class ALuPickerPanel<T = any> extends ALuPopoverPanel implements ILuPickerPanel<T> {
+export abstract class ALuPickerPanel<T> extends ALuPopoverPanel implements ILuPickerPanel<T> {
 	multiple: boolean;
 	onSelectValue: Observable<T | T[]>;
 	abstract setValue(value: T | T[]): void;
 }
 
-export declare interface ILuInputWithPicker<TValue = any>
-extends ILuInput, ILuPopoverTrigger<ILuPickerPanel<TValue>> {}
+export declare interface ILuInputWithPicker<TValue> extends ILuInput, ILuPopoverTrigger<ILuPickerPanel<TValue>> {}

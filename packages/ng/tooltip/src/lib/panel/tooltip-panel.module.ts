@@ -4,18 +4,9 @@ import { LuTooltipPanelComponent } from './tooltip-panel.component';
 import { LuSafeContentModule } from '@lucca-front/ng/safe-content';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuSafeContentModule,
-	],
-	declarations: [
-		LuTooltipPanelComponent,
-	],
-	exports: [
-		LuTooltipPanelComponent,
-	],
-	entryComponents: [
-		LuTooltipPanelComponent,
-	]
+	imports: [CommonModule, LuSafeContentModule],
+	declarations: [LuTooltipPanelComponent],
+	exports: [LuTooltipPanelComponent],
+	entryComponents: [LuTooltipPanelComponent],
 })
-export class LuTooltipPanelModule { }
+export class LuTooltipPanelModule {}

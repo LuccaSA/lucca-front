@@ -1,8 +1,10 @@
-import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { Component, ChangeDetectionStrategy, forwardRef, Output, EventEmitter, TemplateRef, ViewChild, Input } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { ESCAPE, TAB } from '@angular/cdk/keycodes';
+//FIXME
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+/* eslint-disable @angular-eslint/no-output-native */
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuPickerPanel } from '@lucca-front/ng/picker';
+import { luTransformPopover } from '@lucca-front/ng/popover';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -15,9 +17,8 @@ import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 			provide: ALuPickerPanel,
 			useExisting: forwardRef(() => LuDatePickerComponent),
 		},
-	]
+	],
 })
-
 export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_value: D;
 
@@ -32,13 +33,11 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	@Output() override onSelectValue = new EventEmitter<D>();
 
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<unknown>) {
 		this.templateRef = tr;
 	}
-	
-	constructor(
-		private _adapter: ALuDateAdapter<D>,
-	) {
+
+	constructor(private _adapter: ALuDateAdapter<D>) {
 		super();
 	}
 	_emitOpenEvent(): void {
@@ -47,7 +46,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
-	_emitHoveredEvent(h): void {
+	_emitHoveredEvent(h: boolean): void {
 		this.hovered.emit(h);
 	}
 	_emitSelectValue(val: D) {
@@ -60,7 +59,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 		this._value = val;
 		this._emitSelectValue(val);
 		// if (!this.multiple) {
-			this._emitCloseEvent();
+		this._emitCloseEvent();
 		// }
 	}
 	_onInput(val: D) {
@@ -71,13 +70,13 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 		this._emitCloseEvent();
 	}
 	override _handleKeydown(event: KeyboardEvent) {
-		switch (event.keyCode) {
-			case ESCAPE:
+		switch (event.key) {
+			case 'Escape':
 				this._emitCloseEvent();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case TAB:
+			case 'Tab':
 				this._emitCloseEvent();
 				break;
 		}

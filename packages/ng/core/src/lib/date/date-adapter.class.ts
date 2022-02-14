@@ -12,27 +12,51 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 		}
 		const aDecade = Math.floor(this.getYear(a) / 10);
 		const bDecade = Math.floor(this.getYear(b) / 10);
-		if (aDecade < bDecade) { return -1; }
-		if (aDecade > bDecade) { return 1; }
-		if (granularity === ELuDateGranularity.decade) { return 0; }
+		if (aDecade < bDecade) {
+			return -1;
+		}
+		if (aDecade > bDecade) {
+			return 1;
+		}
+		if (granularity === ELuDateGranularity.decade) {
+			return 0;
+		}
 
 		const aYear = this.getYear(a);
 		const bYear = this.getYear(b);
-		if (aYear < bYear) { return -1; }
-		if (aYear > bYear) { return 1; }
-		if (granularity === ELuDateGranularity.year) { return 0; }
+		if (aYear < bYear) {
+			return -1;
+		}
+		if (aYear > bYear) {
+			return 1;
+		}
+		if (granularity === ELuDateGranularity.year) {
+			return 0;
+		}
 
 		const aMonth = this.getMonth(a);
 		const bMonth = this.getMonth(b);
-		if (aMonth < bMonth) { return -1; }
-		if (aMonth > bMonth) { return 1; }
-		if (granularity === ELuDateGranularity.month) { return 0; }
+		if (aMonth < bMonth) {
+			return -1;
+		}
+		if (aMonth > bMonth) {
+			return 1;
+		}
+		if (granularity === ELuDateGranularity.month) {
+			return 0;
+		}
 
 		const aDate = this.getDate(a);
 		const bDate = this.getDate(b);
-		if (aDate < bDate) { return -1; }
-		if (aDate > bDate) { return 1; }
-		if (granularity === ELuDateGranularity.day) { return 0; }
+		if (aDate < bDate) {
+			return -1;
+		}
+		if (aDate > bDate) {
+			return 1;
+		}
+		if (granularity === ELuDateGranularity.day) {
+			return 0;
+		}
 
 		return 0;
 	}

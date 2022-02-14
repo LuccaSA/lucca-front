@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
-export interface ILuClearer<T = any> {
+export interface ILuClearer<T> {
 	onClear: Observable<T>;
 }
-export abstract class ALuClearer<T = any> implements ILuClearer<T> {
+export abstract class ALuClearer<T> implements ILuClearer<T> {
 	onClear: Observable<T>;
 }

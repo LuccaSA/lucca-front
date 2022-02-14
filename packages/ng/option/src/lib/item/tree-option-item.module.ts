@@ -7,22 +7,16 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.token';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-	declarations: [
-		LuTreeOptionItemComponent,
-	],
-	exports: [
-		LuTreeOptionItemComponent,
-	],
-	entryComponents: [
-		LuTreeOptionItemComponent,
-	],
-	imports: [
-		CommonModule,
-		LuTooltipModule,
-	],
+	declarations: [LuTreeOptionItemComponent],
+	exports: [LuTreeOptionItemComponent],
+	entryComponents: [LuTreeOptionItemComponent],
+	imports: [CommonModule, LuTooltipModule],
 	providers: [
 		LuTreeOptionItemIntl,
-		{ provide: LU_TREE_OPTION_ITEM_TRANSLATIONS, useValue: luTreeOptionItemTranslations },
+		{
+			provide: LU_TREE_OPTION_ITEM_TRANSLATIONS,
+			useValue: luTreeOptionItemTranslations,
+		},
 	],
 })
 export class LuTreeOptionItemModule {}

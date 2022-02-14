@@ -1,4 +1,4 @@
-<div class="lu-select-placeholder">{{placeholder}}</div>
+<div class="lu-select-placeholder">{{ placeholder }}</div>
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
 		<ng-container #display></ng-container>
@@ -9,9 +9,10 @@
 </div>
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else: singleView"><span
-			class="chip mod-unkillable">{{values.length}}</span> {{intl.establishments}}</span>
-	<ng-template #singleView>{{(values[0] || values).name}}</ng-template>
+	<span *ngIf="multiple && values?.length > 1; else singleView"
+		><span class="chip mod-unkillable">{{ values.length }}</span> {{ intl.establishments }}</span
+	>
+	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
 </ng-template>
 
 <lu-option-picker-advanced [option-comparer]="byId">
@@ -20,7 +21,7 @@
 			[filters]="filters"
 			[appInstanceId]="appInstanceId"
 			[operations]="operations"
-			[sort]="sort" 
+			[sort]="sort"
 			(isSearching)="onIsSearchingChanged($event)"
 		></lu-establishment-searcher>
 		<lu-establishment-select-all
@@ -44,23 +45,20 @@
 					[luLegalUnitSelectorAppInstanceId]="appInstanceId"
 					[luLegalUnitSelectorOperations]="operations"
 				>
-					{{group.key.name}}
+					{{ group.key.name }}
 				</button>
 				<ng-template #singleViewGroup>
-					<h5 class="optionGroupName mod-readonly u-marginReset">
-						{{group.key.name}}
-					</h5>
+					<h5 class="optionGroupName mod-readonly u-marginReset">{{ group.key.name }}</h5>
 				</ng-template>
 			</ng-container>
 
-			<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment"
-				class="establishmentOption">
+			<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment" class="establishmentOption">
 				<ng-container *ngIf="isSearching; else emptySearch">
-					<span class="u-displayBlock">{{establishment.name}}</span>
+					<span class="u-displayBlock">{{ establishment.name }}</span>
 					<span *ngIf="groupByLu" class="u-displayBlock u-textLight u-textSmall">{{ group.key.name }}</span>
 				</ng-container>
 				<ng-template #emptySearch>
-					<span>{{establishment.name}}</span>
+					<span>{{ establishment.name }}</span>
 				</ng-template>
 			</lu-option>
 		</div>

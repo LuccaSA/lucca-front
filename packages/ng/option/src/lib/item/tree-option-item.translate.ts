@@ -9,7 +9,7 @@ export abstract class ALuTreeOptionItemLabel {
 	childrenOnly: string;
 }
 
-export const luTreeOptionItemTranslations = {
+export const luTreeOptionItemTranslations: ILuTranslation<ILuTreeOptionItemLabel> = {
 	en: {
 		parentOnly: 'Parent only',
 		childrenOnly: 'Children only',
@@ -18,4 +18,4 @@ export const luTreeOptionItemTranslations = {
 		parentOnly: 'Seulement le parent',
 		childrenOnly: 'Seulement les enfants',
 	},
-} as ILuTranslation<ILuTreeOptionItemLabel>;
+};

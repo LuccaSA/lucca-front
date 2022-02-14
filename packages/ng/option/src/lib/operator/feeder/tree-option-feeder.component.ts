@@ -16,7 +16,7 @@ import { ILuTree } from '@lucca-front/ng/core';
 		},
 	],
 })
-export class LuTreeOptionFeederComponent<T = any> implements ILuTreeOptionOperator<T> {
+export class LuTreeOptionFeederComponent<T> implements ILuTreeOptionOperator<T> {
 	outOptions$ = new BehaviorSubject<ILuTree<T>[]>([]);
 	@Input() set options(options: ILuTree<T>[]) {
 		this.outOptions$.next(options);

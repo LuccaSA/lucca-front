@@ -8,6 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './textarea.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldTextarea extends FieldType {
 	override readonly formControl: FormControl;
 	focus() {

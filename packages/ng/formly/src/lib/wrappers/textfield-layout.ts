@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import {
-	FieldWrapper,
-	FormlyFieldConfig,
-	FormlyConfig,
-	FieldType,
-} from '@ngx-formly/core';
+import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -13,18 +8,17 @@ import {
 	templateUrl: './textfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return this.to['mod'] || '';
+		return (this.to['mod'] || '') as string;
 	}
 
 	get modMultiline() {
-		return !!this.field && this.field.type === 'textarea'
-			? 'mod-multiline'
-			: '';
+		return !!this.field && this.field.type === 'textarea' ? 'mod-multiline' : '';
 	}
 
 	get modWithSuffix() {
@@ -44,8 +38,6 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	}
 
 	get isError() {
-		return this.formControl.invalid && this.formControl.touched
-			? 'is-error'
-			: '';
+		return this.formControl.invalid && this.formControl.touched ? 'is-error' : '';
 	}
 }

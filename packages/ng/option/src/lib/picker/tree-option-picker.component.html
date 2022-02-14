@@ -1,6 +1,14 @@
 <ng-template>
-	<div class="lu-picker-panel lu-tree-option-picker-panel" role="dialog" [ngClass]="panelClassesMap" [class.mod-multiple]="multiple"
-	 (click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)">
+	<div
+		class="lu-picker-panel lu-tree-option-picker-panel"
+		role="dialog"
+		[ngClass]="panelClassesMap"
+		[class.mod-multiple]="multiple"
+		(click)="onClick()"
+		(mouseover)="onMouseOver()"
+		(mouseleave)="onMouseLeave()"
+		(mousedown)="onMouseDown()"
+	>
 		<div class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
 			<ng-content></ng-content>
 		</div>

@@ -5,18 +5,9 @@ import { CommonModule } from '@angular/common';
 import { LuCalendarItemFactory } from './calendar-item.factory';
 
 @NgModule({
-	imports: [
-		FormsModule,
-		CommonModule,
-	],
-	exports: [
-		LuCalendarInputComponent,
-	],
-	declarations: [
-		LuCalendarInputComponent,
-	],
-	providers: [
-		LuCalendarItemFactory,
-	]
+	imports: [FormsModule, CommonModule],
+	exports: [LuCalendarInputComponent],
+	declarations: [LuCalendarInputComponent],
+	providers: [LuCalendarItemFactory],
 })
 export class LuCalendarInputModule {}

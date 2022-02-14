@@ -7,7 +7,7 @@ import { ALuDateAdapter } from '@lucca-front/ng/core';
 })
 export class LuDateAdapterPipe<D> implements PipeTransform {
 	constructor(private _adapter: ALuDateAdapter<D>) {}
-	transform(d: D, format: string = 'mediumDate'): string {
+	transform(d: D, format = 'mediumDate'): string {
 		if (d && this._adapter.isValid(d)) {
 			return this._adapter.format(d, format);
 		}

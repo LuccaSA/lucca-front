@@ -9,21 +9,15 @@ import { LU_USER_SEARCHER_TRANSLATIONS } from './user-searcher.token';
 import { luUserSearcherTranslations } from './user-searcher.translate';
 
 @NgModule({
-	imports: [
-		HttpClientModule,
-		ReactiveFormsModule,
-		CommonModule,
-		LuOptionPlaceholderModule,
-	],
-	declarations: [
-		LuUserPagedSearcherComponent,
-	],
-	exports: [
-		LuUserPagedSearcherComponent,
-	],
+	imports: [HttpClientModule, ReactiveFormsModule, CommonModule, LuOptionPlaceholderModule],
+	declarations: [LuUserPagedSearcherComponent],
+	exports: [LuUserPagedSearcherComponent],
 	providers: [
 		LuUserSearcherIntl,
-		{ provide: LU_USER_SEARCHER_TRANSLATIONS, useValue: luUserSearcherTranslations },
+		{
+			provide: LU_USER_SEARCHER_TRANSLATIONS,
+			useValue: luUserSearcherTranslations,
+		},
 	],
 })
 export class LuUserSearcherModule {}

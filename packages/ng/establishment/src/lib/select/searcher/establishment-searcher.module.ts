@@ -6,17 +6,8 @@ import { CommonModule } from '@angular/common';
 import { LuOptionModule } from '@lucca-front/ng/option';
 
 @NgModule({
-	imports: [
-		HttpClientModule,
-		ReactiveFormsModule,
-		CommonModule,
-		LuOptionModule,
-	],
-	declarations: [
-		LuEstablishmentSearcherComponent,
-	],
-	exports: [
-		LuEstablishmentSearcherComponent,
-	],
+	imports: [HttpClientModule, ReactiveFormsModule, CommonModule, LuOptionModule],
+	declarations: [LuEstablishmentSearcherComponent],
+	exports: [LuEstablishmentSearcherComponent],
 })
 export class LuEstablishmentSearcherModule {}

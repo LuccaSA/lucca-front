@@ -1,11 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ILuUser } from '../user.model';
-import {
-	LuDisplayFullname,
-	LuDisplayHybrid,
-	LuDisplayInitials,
-	LuDisplayFormat,
-} from './display-format.model';
+import { LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuDisplayFormat } from './display-format.model';
 /**
  * Displays a user name according to specified format. Supported formats: f for first name,
  * F for first initial, l for last name, L for last initial.

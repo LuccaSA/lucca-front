@@ -1,8 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import {
-	AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input,
-	Renderer2, ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ILuOptionItem, LuOptionComparer, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
@@ -22,8 +19,8 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 })
 export class LuApiSelectInputComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem>
 	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
-	implements ControlValueAccessor, AfterViewInit {
-
+	implements ControlValueAccessor, AfterViewInit
+{
 	@Input() standard: string;
 	@Input() api: string;
 	@Input() fields: string;
@@ -34,16 +31,10 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 }

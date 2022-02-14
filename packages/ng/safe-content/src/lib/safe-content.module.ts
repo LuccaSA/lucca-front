@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LuSafeContentPipe } from './safe-content.pipe';
 
 @NgModule({
-	imports: [ CommonModule ],
+	imports: [CommonModule],
 	declarations: [LuSafeContentPipe],
 	exports: [LuSafeContentPipe],
 	providers: [],

@@ -6,19 +6,7 @@ import { LuOptionSelectorModule } from './selector/index';
 import { LuOptionPlaceholderModule } from './placeholder/index';
 
 @NgModule({
-	imports: [
-		LuOptionItemModule,
-		LuOptionPickerModule,
-		LuOptionOperatorModule,
-		LuOptionSelectorModule,
-		LuOptionPlaceholderModule,
-	],
-	exports: [
-		LuOptionItemModule,
-		LuOptionPickerModule,
-		LuOptionOperatorModule,
-		LuOptionSelectorModule,
-		LuOptionPlaceholderModule,
-	],
+	imports: [LuOptionItemModule, LuOptionPickerModule, LuOptionOperatorModule, LuOptionSelectorModule, LuOptionPlaceholderModule],
+	exports: [LuOptionItemModule, LuOptionPickerModule, LuOptionOperatorModule, LuOptionSelectorModule, LuOptionPlaceholderModule],
 })
 export class LuOptionModule {}

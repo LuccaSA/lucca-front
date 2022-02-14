@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, HostBinding, Inject } from '@angular/core';
-import { ILuOnOpenSubscriber, ALuOnOpenSubscriber } from '@lucca-front/ng/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
-import { Observable, combineLatest, merge, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
+import { combineLatest, merge, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Component({
 	selector: 'lu-option-searcher',
@@ -23,23 +23,20 @@ import { map } from 'rxjs/operators';
 		},
 	],
 })
-export class LuOptionSearcherComponent<T = any> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
+export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	searchControl = new FormControl();
-	clue$ = merge(of(''), this.searchControl.valueChanges);
+	clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
 	empty$: Observable<boolean>;
-	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true })
+	searchInput: ElementRef<HTMLElement>;
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
-		this.outOptions$ = combineLatest(
-			in$,
-			this.clue$,
-			(options, clue) => {
-				return !!clue ? (options || []).filter(o => this.searchFn(o, clue)) : options || [];
-			}
+		this.outOptions$ = combineLatest([in$, this.clue$]).pipe(
+			map(([options, clue]) => {
+				return clue ? (options || []).filter((o) => this.searchFn(o, clue)) : options || [];
+			}),
 		);
-		this.empty$ = this.outOptions$.pipe(
-			map(o => !o || o.length === 0),
-		);
+		this.empty$ = this.outOptions$.pipe(map((o) => !o || o.length === 0));
 	}
 	@Input() searchFn: (option: T, clue: string) => boolean = () => true;
 

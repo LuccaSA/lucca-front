@@ -1,7 +1,8 @@
-import { Directive, Output, HostListener, EventEmitter, ElementRef, OnInit, Input } from '@angular/core';
-import { ILuScrollable } from './scroll.model';
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { ILuScrollable } from './scroll.model';
 
 /**
  * emits on scroll events
@@ -25,7 +26,7 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	}
 
 	ngOnInit(): void {
-		this.scroll$.subscribe(scrollEvent => this.emitScrollEvents(scrollEvent));
+		this.scroll$.subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);
@@ -52,6 +53,5 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 			}
 		}
 	}
-	constructor(protected _elementRef: ElementRef) {
-	}
+	constructor(protected _elementRef: ElementRef<HTMLElement>) {}
 }
