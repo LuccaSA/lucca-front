@@ -1,5 +1,4 @@
 import { ElementRef } from '@angular/core';
-import { throwLuPopoverInvalidAlignement, throwLuPopoverInvalidPosition } from './popover-target.error';
 
 export type LuPopoverPosition = 'above' | 'below' | 'before' | 'after';
 export type LuPopoverAlignment = 'top' | 'bottom' | 'left' | 'right' | 'center';
@@ -36,9 +35,10 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 	get position(): LuPopoverPosition {
 		return this._position;
 	}
-	set position(position: LuPopoverPosition) {
+	set position(position: LuPopoverPosition | string) {
 		if (position !== 'above' && position !== 'below' && position !== 'after' && position !== 'before') {
-			throwLuPopoverInvalidPosition();
+			throw Error(`LuPopoverPosition value must be 'above', 'below', 'before' or 'after'. Got "${position}".
+      Example: <lu-popover [position]="'before'" #popover="LuPopover"></lu-popover>`);
 		}
 		this._position = position;
 		// this.setPositionClasses(this._position, this._alignment);
@@ -49,9 +49,10 @@ export abstract class ALuPopoverTarget implements ILuPopoverTarget {
 	get alignment(): LuPopoverAlignment {
 		return this._alignment;
 	}
-	set alignment(alignment: LuPopoverAlignment) {
+	set alignment(alignment: LuPopoverAlignment | string) {
 		if (alignment !== 'center' && alignment !== 'top' && alignment !== 'bottom' && alignment !== 'right' && alignment !== 'left') {
-			throwLuPopoverInvalidAlignement();
+			throw Error(`LuPopoverAlignment value must be 'top', 'bottom', 'right' or 'left'. Got "${alignment}".
+      Example: <lu-popover [position]="above" [alignment]="left" #popover="LuPopover"></lu-popover>`);
 		}
 		this._alignment = alignment;
 		// this.setPositionClasses(this._position, this._alignment);

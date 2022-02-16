@@ -17,7 +17,6 @@ import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
 import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget } from '../target/index';
-import { throwLuPopoverMissingPanelError, throwLuPopoverMissingTargetError } from './popover-trigger.error';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
 
@@ -317,12 +316,15 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	 */
 	protected _checkPanel() {
 		if (!this.panel) {
-			throwLuPopoverMissingPanelError();
+			throw Error(`lu-popover-trigger: must pass in a lu-popover instance.
+      Example:
+      <lu-popover #popover="LuPopover"></lu-popover>
+      <button [luPopover]="popover"></button>`);
 		}
 	}
 	protected _checkTarget() {
 		if (!this.target) {
-			throwLuPopoverMissingTargetError();
+			throw Error(`lu-popover-trigger: must pass in a popover target instance.`);
 		}
 	}
 

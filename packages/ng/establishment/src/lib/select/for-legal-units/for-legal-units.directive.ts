@@ -14,10 +14,6 @@ import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 	],
 })
 export class LuForLegalUnitsDirective extends LuForGroupsDirective<ILuEstablishment, ILuLegalUnit> {
-	public override set attrGroupBy(fn: (item: ILuEstablishment) => ILuLegalUnit) {
-		throw new Error('Unsupported');
-	}
-
 	public constructor(
 		protected override _vcr: ViewContainerRef,
 		protected override _cdr: ChangeDetectorRef,
