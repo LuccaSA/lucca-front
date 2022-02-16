@@ -1,6 +1,6 @@
 .pageHeader {
 	@include elevate(1);
-	padding: 2.5rem 2.5rem _theme('spacings.standard');
+	padding: _theme('spacings.big') 2.5rem _theme('spacings.standard');
 	background-color: _color('white');
 
 	&.mod-withMenu {
