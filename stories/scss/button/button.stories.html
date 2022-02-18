@@ -1,9 +1,21 @@
-<ul class="{{group}} {{palette}}">
-    <li class="button-group-item"><button class="button {{mod}} {{size}} {{state}} {{palette}}">{{label}}</button></li>
-    <li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
-    <li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
-</ul>
+<div class="u-paddingSmall" [attr.style]="mod === 'mod-link mod-invert' ? 'background-color: black; color: white' : null">
+	<ul class="content {{palette}}" [class.button-group]="group" [class.u-flexWrapNowrap]="noFlexWrap">
+		<li class="button-group-item">
+			<button class="button {{mod}} {{size}} {{state}} {{group ? null : palette}}" [attr.disabled]="disabled ? 'disabled' : null">
+				{{label}}
+			</button>
+		</li>
+		<li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
+		<li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
+		<li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
+	</ul>
 
-<div class="u-marginStandard" [attr.style]="mod === 'mod-link mod-invert' ? 'background-color: black' : null">
-    <button class="button {{mod}} {{state}} {{palette}} {{size}}" [attr.disabled]="disabled ? 'disabled' : null">{{label}}</button>
+	<p class="u-marginTopStandard u-marginBottomSmaller">Legacy (without list and without responsive):</p>
+
+	<div class="content {{palette}}" [class.button-group]="group">
+		<button class="button {{mod}} {{size}} {{state}} {{palette}}" [attr.disabled]="disabled ? 'disabled' : null">{{label}}</button>
+		<button class="button {{mod}} {{size}}">{{label}}</button>
+		<button class="button {{mod}} {{size}}">{{label}}</button>
+		<button class="button {{mod}} {{size}}">{{label}}</button>
+	</div>
 </div>
