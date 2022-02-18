@@ -47,13 +47,33 @@
 			</p>
 		</section>
 		<nav *ngIf="withMenu" class="menu">
-			<a class="menu-link is-active"> tab </a>
-			<a class="menu-link"> tab </a>
-			<a class="menu-link"> tab </a>
-			<a class="menu-link"> tab </a>
-			<a class="menu-link"> tab </a>
-			<a class="menu-link"> tab </a>
-			<a class="menu-link"> tab </a>
+			<ul class="menu-list">
+				<li class="menu-list-item">
+					<a
+						class="menu-list-item-action"
+						href="#"
+						aria-current="page"
+					>
+						active link
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a
+						class="menu-list-item-action"
+						href="#"
+					>
+						menu link
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a
+						class="menu-list-item-action"
+						href="#"
+					>
+						menu link
+					</a>
+				</li>
+			</ul>
 		</nav>
 	</header>
 </section>

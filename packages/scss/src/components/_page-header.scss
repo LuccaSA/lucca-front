@@ -16,6 +16,8 @@
 	}
 
 	.menu {
+		margin-top: _theme('spacings.smaller');
+		
 		&::after {
 			display: none;
 		}

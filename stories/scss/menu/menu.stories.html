@@ -1,4 +1,4 @@
-<nav class="menu {{mod}} {{palette}}">
+<nav class="menu {{mod}} {{palette}}" [class.mod-noBorder]="border === false">
 	<div class="container u-paddingTopReset u-paddingBottomReset" *ngIf="withContainer; else menuList">
 		<ng-container [ngTemplateOutlet]="menuList"></ng-container>
 	</div>
@@ -9,10 +9,16 @@
 					class="menu-list-item-action"
 					href="#"
 					[attr.aria-current]="link.isActive ? 'page' : null"
+					[aria-disabled]="link.isDisabled"
+					[class.is-disabled]="link.isDisabled"
 					(click)="toggle(link, $event)"
 				>
 					{{ link.label }}
-					<span class="menu-list-item-action-placeholder" aria-hidden="true" [attr.data-content-after]="link.label"></span>
+					<span *ngIf="isNumber" 
+						[ngClass]="{'size-smaller': mod === 'mod-small', 'size-small': mod != 'mod-small'}" 
+						class="label palette-grey mod-number">
+						2
+					</span>
 				</a>
 			</li>
 		</ul>
