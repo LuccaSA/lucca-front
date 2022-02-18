@@ -1,7 +1,27 @@
 {
-	"printWidth": 80,
-	"useTabs": true,
 	"singleQuote": true,
 	"trailingComma": "all",
-	"bracketSpacing": true
+	"printWidth": 140,
+	"endOfLine": "auto",
+	"overrides": [
+		{
+			"files": [".component.html", ".page.html"],
+			"options": {
+				"parser": "angular"
+			}
+		},
+		{
+			"files": ["*.html"],
+			"options": {
+				"parser": "html"
+			}
+		},
+		{
+			"files": ["*.ts"],
+			"options": {
+				"parser": "typescript",
+				"printWidth": 200
+			}
+		}
+	]
 }

@@ -6,19 +6,7 @@ import { LuForOptionsModule } from './for-options/index';
 import { LuForGroupsModule } from './for-groups/index';
 
 @NgModule({
-	imports: [
-		LuOptionPagerModule,
-		LuOptionFeederModule,
-		LuOptionSearcherModule,
-		LuForOptionsModule,
-		LuForGroupsModule,
-	],
-	exports: [
-		LuOptionPagerModule,
-		LuOptionFeederModule,
-		LuOptionSearcherModule,
-		LuForOptionsModule,
-		LuForGroupsModule,
-	],
+	imports: [LuOptionPagerModule, LuOptionFeederModule, LuOptionSearcherModule, LuForOptionsModule, LuForGroupsModule],
+	exports: [LuOptionPagerModule, LuOptionFeederModule, LuOptionSearcherModule, LuForOptionsModule, LuForGroupsModule],
 })
 export class LuOptionOperatorModule {}

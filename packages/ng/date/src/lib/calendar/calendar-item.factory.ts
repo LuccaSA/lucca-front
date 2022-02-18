@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { DayItem, MonthItem, YearItem, DecadeItem } from './calendar-item.class';
 import { ALuDateAdapter } from '@lucca-front/ng/core';
+import { DayItem, DecadeItem, MonthItem, YearItem } from './calendar-item.class';
 
 @Injectable()
 export class LuCalendarItemFactory<D> {
-	constructor(
-		private _adapter: ALuDateAdapter<D>,
-	) {}
+	constructor(private _adapter: ALuDateAdapter<D>) {}
 	forgeDay(d: D, format = 'd'): DayItem<D> {
 		const date = this._adapter.clone(d);
 		return new DayItem(date, this._adapter.format(date, format));
@@ -14,7 +12,6 @@ export class LuCalendarItemFactory<D> {
 	forgeMonth(d: D, format = 'MMM'): MonthItem<D> {
 		const year = this._adapter.getYear(d);
 		const month = this._adapter.getMonth(d);
-		const date = this._adapter.getDate(d);
 		const monthStart = this._adapter.forge(year, month, 1);
 		return new MonthItem(monthStart, this._adapter.format(monthStart, format));
 	}

@@ -9,7 +9,7 @@ export abstract class ALuSidepanelLabel {
 	cancel: string;
 }
 
-export const luSidepanelTranslations = {
+export const luSidepanelTranslations: ILuTranslation<ILuSidepanelLabel> = {
 	en: {
 		submit: 'Ok',
 		cancel: 'Cancel',
@@ -21,5 +21,5 @@ export const luSidepanelTranslations = {
 	es: {
 		submit: 'Ok',
 		cancel: 'Cancelar',
-	}
-} as ILuTranslation<ILuSidepanelLabel>;
+	},
+};

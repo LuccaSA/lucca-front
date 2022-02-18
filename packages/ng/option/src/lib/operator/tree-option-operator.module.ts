@@ -5,17 +5,7 @@ import { LuTreeOptionSearcherModule } from './searcher/index';
 import { LuTreeOptionPagerModule } from './pager/index';
 
 @NgModule({
-	imports: [
-		LuTreeOptionFeederModule,
-		LuForTreeOptionsModule,
-		LuTreeOptionPagerModule,
-		LuTreeOptionSearcherModule,
-	],
-	exports: [
-		LuTreeOptionFeederModule,
-		LuForTreeOptionsModule,
-		LuTreeOptionPagerModule,
-		LuTreeOptionSearcherModule,
-	],
+	imports: [LuTreeOptionFeederModule, LuForTreeOptionsModule, LuTreeOptionPagerModule, LuTreeOptionSearcherModule],
+	exports: [LuTreeOptionFeederModule, LuForTreeOptionsModule, LuTreeOptionPagerModule, LuTreeOptionSearcherModule],
 })
 export class LuTreeOptionOperatorModule {}

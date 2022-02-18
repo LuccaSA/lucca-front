@@ -5,13 +5,17 @@ import { ILuLegalUnit } from '../establishment.model';
 
 @Injectable()
 export class LuLegalUnitService extends LuApiV4Service<ILuLegalUnit> {
-	protected _api = `/organization/structure/api/legal-units`;
+	protected override _api = `/organization/structure/api/legal-units`;
 
 	protected _appInstanceId: number = null;
-	set appInstanceId(id: number) { this._appInstanceId = id; }
+	set appInstanceId(id: number) {
+		this._appInstanceId = id;
+	}
 	protected _operations: number[] = [];
-	set operations(ops: number[]) { this._operations = ops || []; }
-	get filters(): string[] {
+	set operations(ops: number[]) {
+		this._operations = ops || [];
+	}
+	override get filters(): string[] {
 		const isScopeFiltered = this._appInstanceId && this._operations.length;
 
 		if (isScopeFiltered) {
@@ -23,9 +27,11 @@ export class LuLegalUnitService extends LuApiV4Service<ILuLegalUnit> {
 
 		return this._filters;
 	}
-	set filters(filters: string[]) {
+	override set filters(filters: string[]) {
 		this._filters = filters || [];
 	}
 
-	constructor(protected _http: HttpClient) { super(_http); }
+	constructor(protected override _http: HttpClient) {
+		super(_http);
+	}
 }

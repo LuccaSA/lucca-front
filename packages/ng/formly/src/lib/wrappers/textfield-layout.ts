@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import {
-	FieldWrapper,
-	FormlyFieldConfig,
-	FormlyConfig,
-	FieldType,
-} from '@ngx-formly/core';
+import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -13,22 +8,21 @@ import {
 	templateUrl: './textfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return this.to.mod || '';
+		return (this.to['mod'] || '') as string;
 	}
 
 	get modMultiline() {
-		return !!this.field && this.field.type === 'textarea'
-			? 'mod-multiline'
-			: '';
+		return !!this.field && this.field.type === 'textarea' ? 'mod-multiline' : '';
 	}
 
 	get modWithSuffix() {
-		return !!this.to && !!this.to.suffix ? 'mod-withSuffix' : '';
+		return !!this.to && !!this.to['suffix'] ? 'mod-withSuffix' : '';
 	}
 
 	get isRequired() {
@@ -40,12 +34,10 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	}
 
 	get isFocused() {
-		return !!this.to && this.to._isFocused ? 'is-focused' : '';
+		return !!this.to && this.to['_isFocused'] ? 'is-focused' : '';
 	}
 
 	get isError() {
-		return this.formControl.invalid && this.formControl.touched
-			? 'is-error'
-			: '';
+		return this.formControl.invalid && this.formControl.touched ? 'is-error' : '';
 	}
 }

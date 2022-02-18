@@ -1,104 +1,35 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "paths": {
-      "@lucca-front/ng": [
-        "./packages/ng/root/src/index"
-      ],
-      "@lucca-front/ng/core": [
-        "./packages/ng/core/src/index"
-      ],
-      "@lucca-front/ng/animations": [
-        "./packages/ng/animations/src/index"
-      ],
-      "@lucca-front/ng/input": [
-        "./packages/ng/input/src/index"
-      ],
-      "@lucca-front/ng/scroll": [
-        "./packages/ng/scroll/src/index"
-      ],
-      "@lucca-front/ng/safe-content": [
-        "./packages/ng/safe-content/src/index"
-      ],
-      "@lucca-front/ng/number": [
-        "./packages/ng/number/src/index"
-      ],
-      "@lucca-front/ng/popover": [
-        "./packages/ng/popover/src/index"
-      ],
-      "@lucca-front/ng/popup": [
-        "./packages/ng/popup/src/index"
-      ],
-      "@lucca-front/ng/tooltip": [
-        "./packages/ng/tooltip/src/index"
-      ],
-      "@lucca-front/ng/dropdown": [
-        "./packages/ng/dropdown/src/index"
-      ],
-      "@lucca-front/ng/picker": [
-        "./packages/ng/picker/src/index"
-      ],
-      "@lucca-front/ng/modal": [
-        "./packages/ng/modal/src/index"
-      ],
-      "@lucca-front/ng/select": [
-        "./packages/ng/select/src/index"
-      ],
-      "@lucca-front/ng/sidepanel": [
-        "./packages/ng/sidepanel/src/index"
-      ],
-      "@lucca-front/ng/option": [
-        "./packages/ng/option/src/index"
-      ],
-      "@lucca-front/ng/date": [
-        "./packages/ng/date/src/index"
-      ],
-      "@lucca-front/ng/api": [
-        "./packages/ng/api/src/index"
-      ],
-      "@lucca-front/ng/department": [
-        "./packages/ng/department/src/index"
-      ],
-      "@lucca-front/ng/establishment": [
-        "./packages/ng/establishment/src/index"
-      ],
-      "@lucca-front/ng/qualification": [
-        "./packages/ng/qualification/src/index"
-      ],
-      "@lucca-front/ng/user": [
-        "./packages/ng/user/src/index"
-      ],
-      "@lucca-front/ng/material": [
-        "./packages/ng/material/src/index"
-      ],
-      "@lucca-front/ng/formly": [
-        "./packages/ng/formly/src/index"
-      ]
-    },
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"forceConsistentCasingInFileNames": true,
+		"strict": false,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"rootDirs": ["./"],
+		"paths": {
+			"@lucca-front/ng/*": ["packages/ng/*/src/public-api.ts"],
+		},
+		// "emitDecoratorMetadata": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2017",
+		"module": "es2020",
+		"lib": ["es2020", "dom"]
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	}
 }

@@ -1,10 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	Output,
-	forwardRef,
-	EventEmitter,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Output } from '@angular/core';
 import { ALuClearer, ILuClearer } from './clearer.model';
 
 @Component({
@@ -18,10 +12,11 @@ import { ALuClearer, ILuClearer } from './clearer.model';
 			provide: ALuClearer,
 			useExisting: forwardRef(() => LuInputClearerComponent),
 		},
-	]
+	],
 })
-export class LuInputClearerComponent<T = any> extends ALuClearer<T>implements ILuClearer<T> {
-	@Output() onClear = new EventEmitter<T>();
+export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClearer<T> {
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
+	@Output() override onClear = new EventEmitter<T>();
 	onClick($event: Event) {
 		this.onClear.emit(undefined);
 		$event.stopPropagation();

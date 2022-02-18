@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import {
-	FieldWrapper
-} from '@ngx-formly/core';
+import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -10,12 +8,13 @@ import {
 	templateUrl: './radiosfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return this.to.mod || '';
+		return (this.to['mod'] || '') as string;
 	}
 
 	get isRequired() {
@@ -23,12 +22,10 @@ export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {
 	}
 
 	get isFocused() {
-		return !!this.to && this.to._isFocused ? 'is-focused' : '';
+		return !!this.to && this.to['_isFocused'] ? 'is-focused' : '';
 	}
 
 	get isError() {
-		return this.formControl.invalid && this.formControl.touched
-			? 'is-error'
-			: '';
+		return this.formControl.invalid && this.formControl.touched ? 'is-error' : '';
 	}
 }

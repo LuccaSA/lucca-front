@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import {
-	FieldWrapper,
-	FormlyFieldConfig,
-	FormlyConfig,
-	FieldType,
-} from '@ngx-formly/core';
+import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -13,9 +8,10 @@ import {
 	templateUrl: './icon.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperIcon extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper
 export class TemplateIcon {
@@ -29,9 +25,10 @@ export class TemplateIcon {
 			// 	field.templateOptions.icon = 'search';
 			// 	return 'icon';
 			// }
-			if (field && field.templateOptions && field.templateOptions.icon) {
+			if (field && field.templateOptions && field.templateOptions['icon']) {
 				return 'icon';
 			}
+			return '';
 		});
 	}
 }

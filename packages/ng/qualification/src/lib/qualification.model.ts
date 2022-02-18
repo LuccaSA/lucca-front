@@ -1,8 +1,8 @@
 import { ILuApiItem } from '@lucca-front/ng/api';
 
-export interface ILuJob extends ILuApiItem { }
+export type ILuJob = ILuApiItem;
 
-export interface ILuJobLevel extends ILuApiItem { }
+export type ILuJobLevel = ILuApiItem;
 
 export interface ILuQualification extends ILuApiItem {
 	job: ILuJob;

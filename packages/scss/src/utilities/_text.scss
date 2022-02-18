@@ -62,6 +62,18 @@ $suffix: "!important";
 	color: _color("text.placeholder") #{$suffix};
 }
 
+.u-textGrey900 {
+	color: _color("grey", "900");
+}
+
+.u-textGrey700 {
+	color: _color("grey", "700");
+}
+
+.u-textGrey600 {
+	color: _color("grey", "600");
+}
+
 // palette
 @each $name, $palette in _getMap("palettes") {
 	.u-text#{str-capitalize($name)} {

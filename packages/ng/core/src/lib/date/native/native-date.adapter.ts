@@ -1,14 +1,13 @@
+import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { ALuDateAdapter } from '../date-adapter.class';
-import { ELuDateGranularity } from '../date-granularity.enum';
 import { ILuDateAdapter } from '../date-adapter.interface';
-import { LOCALE_ID, Inject, Injectable, Optional } from '@angular/core';
-import { getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
-import { ILuNativeDateAdapterOptions, LU_NATIVE_DATE_ADAPTER_OPTIONS, luDefaultNativeDateAdapterOptions } from './native-date.option';
+import { ELuDateGranularity } from '../date-granularity.enum';
+import { ILuNativeDateAdapterOptions, luDefaultNativeDateAdapterOptions, LU_NATIVE_DATE_ADAPTER_OPTIONS } from './native-date.option';
 
 @Injectable()
 export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
-
-	private _regex = /[\/\,\.\-\s]/i;
+	private _regex = /[/,.\-\s]/i;
 	private _order = {
 		date: 0,
 		month: 1,
@@ -16,7 +15,9 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 	};
 	constructor(
 		@Inject(LOCALE_ID) private _locale: string,
-		@Inject(LU_NATIVE_DATE_ADAPTER_OPTIONS) @Optional() private _options: ILuNativeDateAdapterOptions,
+		@Inject(LU_NATIVE_DATE_ADAPTER_OPTIONS)
+		@Optional()
+		private _options: ILuNativeDateAdapterOptions,
 	) {
 		super();
 		this._options = this._options || luDefaultNativeDateAdapterOptions;
@@ -26,15 +27,23 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		const format = getLocaleDateFormat(this._locale, FormatWidth.Short);
 		const groups = format.split(this._regex);
 		groups.forEach((g, i) => {
-			if (g.indexOf('d') !== -1) { return this._order.date = i; }
-			if (g.indexOf('M') !== -1) { return this._order.month = i; }
-			if (g.indexOf('y') !== -1) { return this._order.year = i; }
+			if (g.indexOf('d') !== -1) {
+				this._order.date = i;
+			}
+			if (g.indexOf('M') !== -1) {
+				this._order.month = i;
+			}
+			if (g.indexOf('y') !== -1) {
+				this._order.year = i;
+			}
 		});
 	}
-	private extract(text: string, granularity: ELuDateGranularity = ELuDateGranularity.day): { date: number, month: number, year: number } {
+	private extract(text: string, granularity: ELuDateGranularity = ELuDateGranularity.day): { date: number; month: number; year: number } {
 		const groups = text.split(this._regex);
-		let date = 1, month = 1, year = 1;
-		switch(granularity) {
+		let date = 1,
+			month = 1,
+			year = 1;
+		switch (granularity) {
 			case ELuDateGranularity.year:
 				year = parseInt(groups[Math.max(this._order.year - 2, 0)], 10);
 				break;
@@ -51,14 +60,22 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		return { date, month, year };
 	}
 	isParsable(text: string, granularity = ELuDateGranularity.day): boolean {
-		if (!text) { return false; }
+		if (!text) {
+			return false;
+		}
 		const groups = text.split(this._regex);
-		if (groups.length !== 3 && groups.length !== 2) { return false; }
+		if (groups.length !== 3 && groups.length !== 2) {
+			return false;
+		}
 		try {
-
 			const { date, month, year } = this.extract(text, granularity);
 
-			let d : Date;
+			// When year is greater than 10_000 ISO string goes from 2000-01-01 to +010000-01-01 which is not supported by backends
+			if (year > 10_000) {
+				return false;
+			}
+
+			let d: Date;
 			if (this._options.useUtc) {
 				d = new Date(Date.UTC(year, month - 1, date));
 			} else {
@@ -66,19 +83,35 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			}
 			// checking if its a valid date
 			// https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
-			if (!(d instanceof Date)) { return false; }
-			if (isNaN(d.getTime())) { return false; }
+			if (!(d instanceof Date)) {
+				return false;
+			}
+			if (isNaN(d.getTime())) {
+				return false;
+			}
 			// d is a valid date, but
 			// as i can write new Date(1234, 56, 78) and mr javascript accepts it
 			// i check now that the generated date has the same year/month/date as what i entered
 			if (this._options.useUtc) {
-				if (d.getUTCFullYear() % 100 !== year) { return false; }
-				if (d.getUTCMonth() !== month - 1) { return false; }
-				if (d.getUTCDate() !== date) { return false; }
+				if (d.getUTCFullYear() !== year) {
+					return false;
+				}
+				if (d.getUTCMonth() !== month - 1) {
+					return false;
+				}
+				if (d.getUTCDate() !== date) {
+					return false;
+				}
 			} else {
-				if (d.getFullYear() % 100 !== year) { return false; }
-				if (d.getMonth() !== month - 1) { return false; }
-				if (d.getDate() !== date) { return false; }
+				if (d.getFullYear() !== year) {
+					return false;
+				}
+				if (d.getMonth() !== month - 1) {
+					return false;
+				}
+				if (d.getDate() !== date) {
+					return false;
+				}
 			}
 
 			return true;
@@ -87,9 +120,11 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		}
 	}
 	parse(text: string, granularity = ELuDateGranularity.day): Date {
-		if (!text) { return undefined; }
+		if (!text) {
+			return undefined;
+		}
 		if (!this.isParsable(text)) {
-			this.forgeInvalid();
+			return this.forgeInvalid();
 		}
 
 		const { date, month, year } = this.extract(text, granularity);
@@ -123,8 +158,12 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		return new Date('Invalid Date');
 	}
 	isValid(d: Date): boolean {
-		if (!(d instanceof Date)) { return false; }
-		if (isNaN(d.getTime())) { return false; }
+		if (!(d instanceof Date)) {
+			return false;
+		}
+		if (isNaN(d.getTime())) {
+			return false;
+		}
 		return true;
 	}
 
@@ -181,5 +220,4 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		}
 		return this.forge(year, month, date);
 	}
-
 }

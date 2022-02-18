@@ -1,2 +1,11 @@
-<textarea class="textfield-input" [name]="to.name" [formControl]="formControl" [formlyAttributes]="field" luInput (focus)="focus()" (blur)="blur()" [placeholder]="to.placeholder"></textarea>
+<textarea
+	class="textfield-input"
+	[name]="to['name']"
+	[formControl]="formControl"
+	[formlyAttributes]="field"
+	luInput
+	(focus)="focus()"
+	(blur)="blur()"
+	[placeholder]="to.placeholder"
+></textarea>
 <span class="textfield-label">{{ to.label }}</span>

@@ -4,15 +4,8 @@ import { LuUserHomonymsComponent } from './user-homonyms.component';
 import { LuUserDisplayModule } from '../../display/index';
 
 @NgModule({
-	imports: [
-		HttpClientModule,
-		LuUserDisplayModule,
-	],
-	declarations: [
-		LuUserHomonymsComponent,
-	],
-	exports: [
-		LuUserHomonymsComponent,
-	],
+	imports: [HttpClientModule, LuUserDisplayModule],
+	declarations: [LuUserHomonymsComponent],
+	exports: [LuUserHomonymsComponent],
 })
 export class LuUserHomonymsModule {}

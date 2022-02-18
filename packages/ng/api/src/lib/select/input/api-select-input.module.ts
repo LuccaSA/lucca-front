@@ -1,25 +1,13 @@
-import { NgModule } from '@angular/core';
-import { LuApiSelectInputComponent } from './api-select-input.component';
 import { CommonModule } from '@angular/common';
-import { LuOptionOperatorModule, LuOptionItemModule, LuOptionPickerModule } from '@lucca-front/ng/option';
+import { NgModule } from '@angular/core';
+import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuForOptionsModule, LuOptionPickerModule } from '@lucca-front/ng/option';
 import { LuApiSearcherModule } from '../searcher/index';
-import { LuInputDisplayerModule, LuInputClearerModule } from '@lucca-front/ng/input';
+import { LuApiSelectInputComponent } from './api-select-input.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuOptionItemModule,
-		LuOptionOperatorModule,
-		LuApiSearcherModule,
-		LuOptionPickerModule,
-		LuInputClearerModule,
-		LuInputDisplayerModule,
-	],
-	declarations: [
-		LuApiSelectInputComponent,
-	],
-	exports: [
-		LuApiSelectInputComponent,
-	],
+	imports: [CommonModule, LuOptionPickerModule, LuForOptionsModule, LuApiSearcherModule, LuInputClearerModule, LuInputDisplayerModule],
+	declarations: [LuApiSelectInputComponent],
+	exports: [LuApiSelectInputComponent],
 })
 export class LuApiSelectInputModule {}

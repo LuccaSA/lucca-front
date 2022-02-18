@@ -25,6 +25,10 @@
 	flex-wrap: wrap;
 }
 
+.menu-link { // legacy syntax
+	margin-right: 2.5rem; // magic number
+}
+
 .menu-link, // legacy syntax
 .menu-list-item-action {
 	border-radius: _theme("commons.border.radius");

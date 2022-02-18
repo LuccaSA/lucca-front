@@ -1,10 +1,6 @@
-import { Component, Input, ViewChild, ViewContainerRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-	FormlyFieldConfig,
-	FieldWrapper,
-	FormlyConfig,
-} from '@ngx-formly/core';
+import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
 
 // wrapper
 @Component({
@@ -13,11 +9,12 @@ import {
 	templateUrl: './error.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperError extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 
 	get validationId() {
 		return this.field.id + '-message';
@@ -27,25 +24,22 @@ export class LuFormlyWrapperError extends FieldWrapper {
 // component that display the right error message
 @Component({
 	selector: 'lu-formly-error-message',
-	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">{{ message }}</div>`,
+	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">
+		{{ message }}
+	</div>`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyErrorMessage {
 	@Input() fieldForm: FormControl;
 	@Input() field: FormlyFieldConfig;
 
-	constructor() {}
-
 	get errorMessages(): string[] {
-		const messages = [];
-		if (!!this.fieldForm.errors) {
-			Object.keys(this.fieldForm.errors).forEach(key => {
-				if (
-					this.field.validation &&
-					this.field.validation.messages &&
-					this.field.validation.messages[key]
-				) {
-					messages.push(this.field.validation.messages[key]);
+		const messages: string[] = [];
+		if (this.fieldForm.errors) {
+			Object.keys(this.fieldForm.errors).forEach((key) => {
+				if (this.field.validation?.messages?.[key]) {
+					messages.push(this.field.validation.messages[key] as string);
 				}
 			});
 		}
@@ -60,6 +54,7 @@ export class TemplateError {
 			if (field && field.validation) {
 				return 'error';
 			}
+			return '';
 		});
 	}
 }

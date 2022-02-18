@@ -1,42 +1,33 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ChangeDetectorRef,
-	forwardRef,
-	ViewContainerRef,
-	ElementRef,
-	ContentChild,
-	HostListener,
-	ViewChild,
-	Renderer2,
-	Input,
-	HostBinding,
-	OnDestroy,
-	AfterViewInit,
-	Output,
-	EventEmitter,
-	Directive,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
 import {
-	ILuInputWithPicker,
-	ILuPickerPanel,
-	ALuPickerPanel,
-} from '@lucca-front/ng/picker';
-import {
-	ALuClearer,
-	ILuClearer,
-	ILuInputDisplayer,
-	ALuInputDisplayer,
-} from '@lucca-front/ng/input';
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ContentChild,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	forwardRef,
+	HostBinding,
+	HostListener,
+	Input,
+	OnDestroy,
+	Output,
+	Renderer2,
+	ViewChild,
+	ViewContainerRef,
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ALuClearer, ALuInputDisplayer, ILuClearer, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
 
 @Directive()
-export abstract class ALuSelectInputComponent<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
-extends ALuSelectInput<T, TPicker>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy {
-	@ViewChild('display', { read: ViewContainerRef, static: true }) protected set _vcDisplayContainer(vcr: ViewContainerRef) {
+export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
+	@ViewChild('display', { read: ViewContainerRef, static: true })
+	protected set _vcDisplayContainer(vcr: ViewContainerRef) {
 		this.displayContainer = vcr;
 	}
 
@@ -46,7 +37,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 		this.target.overlap = o;
 	}
 
-	@Input('placeholder') set inputPlaceholder(p: string) { this._placeholder = p; }
+	@Input('placeholder') set inputPlaceholder(p: string) {
+		this._placeholder = p;
+	}
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
 			// allows to have multiple = true when writing
@@ -62,59 +55,63 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 	@Output() onClose = new EventEmitter<void>();
 
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef<HTMLElement>,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 	@HostBinding('class.is-disabled')
-	get isDisabled() { return this.disabled; }
+	get isDisabled() {
+		return this.disabled;
+	}
 	@HostBinding('class.is-focused')
-	get isFocused() { return this._popoverOpen && !this.target.overlap; }
+	get isFocused() {
+		return this._popoverOpen && !this.target.overlap;
+	}
 	@HostBinding('class.mod-multiple')
-	get modMultiple() { return this._multiple; }
+	get modMultiple() {
+		return this._multiple;
+	}
 
 	@HostBinding('class.is-clearable')
-	get isClearable() { return !!this._clearer; }
+	get isClearable() {
+		return !!this._clearer;
+	}
 	/**
 	 * popover trigger class extension
 	 */
 	@ContentChild(ALuPickerPanel, { static: true }) ccPicker: TPicker;
 	@ViewChild(ALuPickerPanel, { static: true }) vcPicker: TPicker;
 
-	@ContentChild(ALuInputDisplayer, { static: true }) ccDisplayer: ILuInputDisplayer<T>;
-	@ViewChild(ALuInputDisplayer, { static: true }) vcDisplayer: ILuInputDisplayer<T>;
+	@ContentChild(ALuInputDisplayer, { static: true })
+	ccDisplayer: ILuInputDisplayer<T>;
+	@ViewChild(ALuInputDisplayer, { static: true })
+	vcDisplayer: ILuInputDisplayer<T>;
 
 	@ContentChild(ALuClearer, { static: true }) ccClearer: ILuClearer<T>;
 	@ViewChild(ALuClearer, { static: true }) vcClearer: ILuClearer<T>;
 
 	@HostListener('click')
-	onClick() {
+	override onClick() {
 		super.onClick();
 	}
 	@HostListener('mouseenter')
-	onMouseEnter() {
+	override onMouseEnter() {
 		super.onMouseEnter();
 	}
 	@HostListener('mouseleave')
-	onMouseLeave() {
+	override onMouseLeave() {
 		super.onMouseLeave();
 	}
 	@HostListener('focus')
-	onFocus() {
+	override onFocus() {
 		super.onFocus();
 	}
 	@HostListener('blur')
-	onBlur() {
+	override onBlur() {
 		super.onBlur();
 	}
 	@HostListener('keydown.space', ['$event'])
@@ -132,15 +129,15 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 
 		// init picker and displayer and clearer
 		const picker = this.ccPicker || this.vcPicker;
-		if (!!picker) {
+		if (picker) {
 			this._picker = picker;
 		}
 		const displayer = this.ccDisplayer || this.vcDisplayer;
-		if (!!displayer) {
+		if (displayer) {
 			this._displayer = displayer;
 		}
 		const clearer = this.ccClearer || this.vcClearer;
-		if (!!clearer) {
+		if (clearer) {
 			this._clearer = clearer;
 		}
 
@@ -172,8 +169,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 }
 
 /**
-* select input
-*/
+ * select input
+ */
 @Component({
 	selector: 'lu-select',
 	templateUrl: './select-input.component.html',
@@ -187,34 +184,32 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit, OnDestroy
 		},
 	],
 })
-export class LuSelectInputComponent<T = any> extends ALuSelectInputComponent<T> {
+export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implements AfterViewInit {
 	@HostBinding('class.mod-multipleView')
-	get modMultipleView() { return this.useMultipleViews(); }
+	get modMultipleView() {
+		return this.useMultipleViews();
+	}
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef<HTMLElement>,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 	// display clearer
-	@ContentChild(ALuClearer, { read: ElementRef, static: false }) clearerEltRef: ElementRef;
-	@ViewChild('suffix', { read: ElementRef, static: true }) suffixEltRef: ElementRef;
+	@ContentChild(ALuClearer, { read: ElementRef, static: false })
+	clearerEltRef: ElementRef<HTMLElement>;
+	@ViewChild('suffix', { read: ElementRef, static: true })
+	suffixEltRef: ElementRef<HTMLElement>;
 	displayClearer() {
-		if (!!this.clearerEltRef) {
+		if (this.clearerEltRef) {
 			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);
 		}
 	}
 
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		super.ngAfterViewInit();
 		this.displayClearer(); // dont keep
 	}

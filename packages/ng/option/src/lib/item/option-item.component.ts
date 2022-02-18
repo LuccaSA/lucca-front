@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter, forwardRef, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 
@@ -14,9 +15,11 @@ import { ILuOptionItem, ALuOptionItem } from './option-item.model';
 		},
 	],
 })
-export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements ILuOptionItem<T> {
+export class LuOptionItemComponent<T> extends ALuOptionItem<T> implements ILuOptionItem<T> {
 	protected _selected = false;
-	get selected() { return this._selected; }
+	get selected() {
+		return this._selected;
+	}
 	@Input() set selected(s: boolean) {
 		if (s !== this._selected) {
 			this._selected = s;
@@ -24,7 +27,9 @@ export class LuOptionItemComponent<T = any> extends ALuOptionItem<T> implements 
 		}
 	}
 	protected _highlighted = false;
-	get highlighted() { return this._highlighted; }
+	get highlighted() {
+		return this._highlighted;
+	}
 	@Input() set highlighted(h: boolean) {
 		if (h !== this._highlighted) {
 			this._highlighted = h;

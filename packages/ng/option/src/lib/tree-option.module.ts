@@ -5,17 +5,7 @@ import { LuTreeOptionOperatorModule } from './operator/index';
 import { LuTreeOptionSelectorModule } from './selector/index';
 
 @NgModule({
-	imports: [
-		LuTreeOptionItemModule,
-		LuTreeOptionPickerModule,
-		LuTreeOptionOperatorModule,
-		LuTreeOptionSelectorModule,
-	],
-	exports: [
-		LuTreeOptionItemModule,
-		LuTreeOptionPickerModule,
-		LuTreeOptionOperatorModule,
-		LuTreeOptionSelectorModule,
-	],
+	imports: [LuTreeOptionItemModule, LuTreeOptionPickerModule, LuTreeOptionOperatorModule, LuTreeOptionSelectorModule],
+	exports: [LuTreeOptionItemModule, LuTreeOptionPickerModule, LuTreeOptionOperatorModule, LuTreeOptionSelectorModule],
 })
 export class LuTreeOptionModule {}

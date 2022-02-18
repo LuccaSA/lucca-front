@@ -1,31 +1,34 @@
+/* eslint-disable @angular-eslint/no-output-native */
+import { DOCUMENT } from '@angular/common';
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ContentChildren,
-	QueryList,
-	Output,
-	EventEmitter,
-	OnDestroy,
-	forwardRef,
-	ViewChild,
-	TemplateRef,
-	ChangeDetectorRef,
-	AfterViewInit,
-	Input,
 	Directive,
+	EventEmitter,
+	forwardRef,
+	Inject,
+	Input,
+	OnDestroy,
+	Output,
+	QueryList,
+	TemplateRef,
+	ViewChild,
 } from '@angular/core';
-import { luTransformPopover } from '@lucca-front/ng/popover';
-import { ILuOptionItem, ALuOptionItem } from '../item/index';
-import { ILuOptionPickerPanel, ALuOptionPicker, LuOptionComparer } from './option-picker.model';
-import { merge, of } from 'rxjs';
-import { map, delay, share } from 'rxjs/operators';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
-import { UP_ARROW, DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import { luTransformPopover } from '@lucca-front/ng/popover';
+import { merge, of } from 'rxjs';
+import { delay, map, share } from 'rxjs/operators';
+import { ALuOptionItem } from '../item/option-item.model';
+import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
 @Directive()
-export abstract class ALuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>>
-extends ALuOptionPicker<T, O>
-implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
+export abstract class ALuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
+	extends ALuOptionPicker<T, O>
+	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit
+{
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -56,11 +59,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this.optionComparer = comparer;
 	}
 
-
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
-	@Output() onSelectValue = new EventEmitter<T>();
+	@Output() override close = new EventEmitter<void>();
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
+	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
+	@Output() override onSelectValue = new EventEmitter<T>();
 
 	protected _isOptionItemsInitialized: boolean;
 	protected _defaultOverlayPaneClasses = ['mod-optionPicker'];
@@ -71,9 +74,7 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this._optionsQL = ql;
 	}
 
-	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-	) {
+	constructor(protected _changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) protected document: Document) {
 		super();
 		this._isOptionItemsInitialized = false;
 		this.overlayPaneClass = this._defaultOverlayPaneClasses;
@@ -91,35 +92,35 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
-	_emitHoveredEvent(h): void {
+	_emitHoveredEvent(h: boolean): void {
 		this.hovered.emit(h);
 	}
-	onOpen() {
+	override onOpen() {
 		super.onOpen();
 		this.highlightIndex = 0;
 		// this._initObserver();
 		this._applySelected();
 	}
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<HTMLElement>) {
 		this.templateRef = tr;
 	}
 
 	// keydown
-	_handleKeydown(event: KeyboardEvent) {
+	override _handleKeydown(event: KeyboardEvent) {
 		super._handleKeydown(event);
-		switch (event.keyCode) {
-			case ENTER:
+		switch (event.key) {
+			case 'Enter':
 				this._selectHighlighted();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case UP_ARROW:
+			case 'ArrowUp':
 				this._decrHighlight();
 				event.preventDefault();
 				event.stopPropagation();
 				break;
-			case DOWN_ARROW:
+			case 'ArrowDown':
 				this._incrHighlight();
 				event.preventDefault();
 				event.stopPropagation();
@@ -127,19 +128,23 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		}
 	}
 	protected _highlightIndex = -1;
-	get highlightIndex() { return this._highlightIndex; }
+	get highlightIndex() {
+		return this._highlightIndex;
+	}
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
 		this._applyHighlight(true);
 	}
 	protected _initHighlight() {
-		this._subs.add(this._options$.subscribe(options => {
-			const optionCount = options.length;
-			const newHighlight =  Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
-			if (newHighlight !== this.highlightIndex) {
-				this.highlightIndex = newHighlight;
-			}
-		}));
+		this._subs.add(
+			this._options$.subscribe((options) => {
+				const optionCount = options.length;
+				const newHighlight = Math.max(Math.min(this.highlightIndex, optionCount - 1), -1);
+				if (newHighlight !== this.highlightIndex) {
+					this.highlightIndex = newHighlight;
+				}
+			}),
+		);
 		setTimeout(() => {
 			this.highlightIndex = -1;
 		}, 1);
@@ -152,14 +157,16 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
 	}
 	protected _applyHighlight(reScroll = false) {
-		if (!this.isOpen) { return; }
+		if (!this.isOpen) {
+			return;
+		}
 		// const highlightClass = 'is-highlighted';
 		const options = this._options;
 		// remove `is-highlighted` class from all other options
-		options.forEach(option => option.highlighted = false);
+		options.forEach((option) => (option.highlighted = false));
 		// apply `is-highlighted` to current highlight
 		const highlightedOption = options[this.highlightIndex];
-		if (!!highlightedOption) {
+		if (highlightedOption) {
 			highlightedOption.highlighted = true;
 			// scroll to let the highlighted option visible
 			if (reScroll) {
@@ -171,12 +178,16 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 		this._changeDetectorRef.markForCheck();
 	}
 	protected _scrollToHighlight(targetElt: HTMLElement) {
-		if (!targetElt) { return; }
-		const contentElt = document.querySelector('.lu-picker-content') as HTMLElement;
-		if (!contentElt) { return; }
-		const headerElt = document.querySelector('.lu-picker-content .lu-picker-header') as HTMLElement;
+		if (!targetElt) {
+			return;
+		}
+		const contentElt = this.document.querySelector<HTMLElement>('.lu-picker-content');
+		if (!contentElt) {
+			return;
+		}
+		const headerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-header');
 		const headerHeight = headerElt ? headerElt.offsetHeight : 0;
-		const footerElt = document.querySelector('.lu-picker-content .lu-picker-footer') as HTMLElement;
+		const footerElt = this.document.querySelector<HTMLElement>('.lu-picker-content .lu-picker-footer');
 		const footerHeight = footerElt ? footerElt.offsetHeight : 0;
 		// highlighted option is too high
 		if (contentElt.scrollTop + headerHeight > targetElt.offsetTop) {
@@ -193,35 +204,43 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	protected _selectHighlighted() {
 		const options = this._options ? this._options : [];
 		const highlightedOption = options[this.highlightIndex];
-		if (!!highlightedOption) {
+		if (highlightedOption) {
 			this._toggle(highlightedOption);
 		}
 	}
 	protected _initSelected() {
-		this._subs.add(this._options$.subscribe(() => {
-			this._applySelected();
-		}));
+		this._subs.add(
+			this._options$.subscribe(() => {
+				this._applySelected();
+			}),
+		);
 	}
 	protected _applySelected() {
-		if (!this._options) { return; }
+		if (!this._options) {
+			return;
+		}
 		// const selectedClass = 'is-selected';
 
 		const options = this._options;
 		// remove `is-selected` class from all other options
-		options.forEach(option => option.selected = false);
+		options.forEach((option) => (option.selected = false));
 
 		// add `is-selected` to all selected indexes
 		const selectedIndexes: number[] = [];
 		if (!this.multiple) {
-			const selectedIndex = this._options.findIndex(o => this.optionComparer(o.value, this._value as T));
-			if (selectedIndex !== -1) { selectedIndexes.push(selectedIndex); }
-			if (selectedIndex !== -1 && this.highlightIndex === -1) { this.highlightIndex = selectedIndex; }
+			const selectedIndex = this._options.findIndex((o) => this.optionComparer(o.value, this._value as T));
+			if (selectedIndex !== -1) {
+				selectedIndexes.push(selectedIndex);
+			}
+			if (selectedIndex !== -1 && this.highlightIndex === -1) {
+				this.highlightIndex = selectedIndex;
+			}
 		} else {
-			const values = <T[]> this._value || [];
-			const matchingIndexes = this._options.map(
-				o => values.some(v => this.optionComparer(o.value, v)),
-			).map((f, i) => f ? i : null)
-			.filter(i => i !== null);
+			const values = <T[]>this._value || [];
+			const matchingIndexes = this._options
+				.map((o) => values.some((v) => this.optionComparer(o.value, v)))
+				.map((f, i) => (f ? i : null))
+				.filter((i) => i !== null);
 			selectedIndexes.push(...matchingIndexes);
 			// selectedIndexes.push(
 			// 	...values
@@ -229,23 +248,21 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 			// 	.filter(i => i !== -1)
 			// );
 		}
-		selectedIndexes.forEach(i => {
+		selectedIndexes.forEach((i) => {
 			const option = options[i];
-			if (!!option) {
+			if (option) {
 				option.selected = true;
 			}
 		});
 	}
 
 	protected initItems() {
-
-		const items$ = merge(of(this._optionsQL), this._optionsQL.changes)
-			.pipe(
-				map<QueryList<O>, O[]>(q => q.toArray()),
-				delay(0),
-				share(),
-			);
-		items$.subscribe(o => this._options = o || []);
+		const items$ = merge(of(this._optionsQL), this._optionsQL.changes).pipe(
+			map<QueryList<O>, O[]>((q) => q.toArray()),
+			delay(0),
+			share(),
+		);
+		items$.subscribe((o) => (this._options = o || []));
 		this._options$ = items$;
 		this._initHighlight();
 		this._initSelected();
@@ -255,12 +272,11 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 	}
 }
 /**
-* basic option picker panel
-*/
+ * basic option picker panel
+ */
 @Component({
 	selector: 'lu-option-picker',
 	templateUrl: './option-picker.component.html',
-	styleUrls: ['./option-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
@@ -269,12 +285,10 @@ implements ILuOptionPickerPanel<T, O>, OnDestroy, AfterViewInit {
 			provide: ALuPickerPanel,
 			useExisting: forwardRef(() => LuOptionPickerComponent),
 		},
-	]
+	],
 })
-export class LuOptionPickerComponent<T = any, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-	) {
-		super(_changeDetectorRef);
+export class LuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>> extends ALuOptionPickerComponent<T, O> {
+	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
+		super(_changeDetectorRef, document);
 	}
 }

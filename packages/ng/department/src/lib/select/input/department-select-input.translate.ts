@@ -7,11 +7,14 @@ export abstract class ALuDepartmentSelectInputLabel {
 	departments: string;
 }
 
-export const luDepartmentSelectInputTranslations = {
+export const luDepartmentSelectInputTranslations: ILuTranslation<ILuDepartmentSelectInputLabel> = {
 	en: {
 		departments: 'departments',
 	},
 	fr: {
 		departments: 'départements',
 	},
-} as ILuTranslation<ILuDepartmentSelectInputLabel>;
+	es: {
+		departments: 'departamentos',
+	},
+};

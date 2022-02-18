@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormlyForm, FormlyModule } from '@ngx-formly/core';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
 @Component({
@@ -11,6 +12,7 @@ export default {
   component: FramedStory,
 	decorators: [
 		moduleMetadata({
+			imports: [FormlyModule],
 			entryComponents: [FramedStory]
 		})
 	]

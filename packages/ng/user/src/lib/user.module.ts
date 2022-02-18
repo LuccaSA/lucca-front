@@ -5,17 +5,7 @@ import { LuUserTileModule } from './tile/index';
 import { LuUserSelectModule } from './select/index';
 
 @NgModule({
-	imports: [
-		LuUserDisplayModule,
-		LuUserPictureModule,
-		LuUserTileModule,
-		LuUserSelectModule,
-	],
-	exports: [
-		LuUserDisplayModule,
-		LuUserPictureModule,
-		LuUserTileModule,
-		LuUserSelectModule,
-	],
+	imports: [LuUserDisplayModule, LuUserPictureModule, LuUserTileModule, LuUserSelectModule],
+	exports: [LuUserDisplayModule, LuUserPictureModule, LuUserTileModule, LuUserSelectModule],
 })
 export class LuUserModule {}

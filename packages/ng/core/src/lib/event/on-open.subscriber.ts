@@ -4,4 +4,3 @@ export interface ILuOnOpenSubscriber {
 export abstract class ALuOnOpenSubscriber implements ILuOnOpenSubscriber {
 	abstract onOpen(): void;
 }
-

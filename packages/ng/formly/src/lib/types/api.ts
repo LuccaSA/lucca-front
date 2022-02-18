@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
@@ -8,24 +8,25 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './api.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldApi extends FieldType {
 	get _api() {
-		return this.to.api;
+		return this.to['api'] as string;
 	}
 	get _filters() {
-		return this.to.filters || [];
+		return (this.to['filters'] || []) as string[];
 	}
 	get _orderBy() {
-		return this.to.orderBy;
+		return this.to['orderBy'] as string;
 	}
 	get _standard() {
-		return this.to.standard || 'v3';
+		return (this.to['standard'] || 'v3') as string;
 	}
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }

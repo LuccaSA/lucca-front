@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
@@ -8,12 +8,13 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './department.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldDepartment extends FieldType {
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }

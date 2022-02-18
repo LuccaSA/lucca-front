@@ -1,7 +1,6 @@
-import { ILuPopupContent } from '@lucca-front/ng/popup';
 import { Observable } from 'rxjs';
 
-export interface ILuModalContent<T = any> extends ILuPopupContent {
+export interface ILuModalContent<T = unknown> {
 	title: string;
 	submitAction?: () => T | Observable<T>;
 	submitLabel?: string;

@@ -1,11 +1,11 @@
-import { Injectable, LOCALE_ID, Inject } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { ALuIntl, ILuTranslation } from '@lucca-front/ng/core';
 import { LU_MODAL_TRANSLATIONS } from './modal.token';
 import { ILuModalLabel } from './modal.translate';
-import { ALuIntl } from '@lucca-front/ng/core';
 
 @Injectable()
 export class LuModalIntl extends ALuIntl<ILuModalLabel> {
-	constructor(@Inject(LU_MODAL_TRANSLATIONS) translations, @Inject(LOCALE_ID) locale) {
+	constructor(@Inject(LU_MODAL_TRANSLATIONS) translations: ILuTranslation<ILuModalLabel>, @Inject(LOCALE_ID) locale: string) {
 		super(translations, locale);
 	}
 }

@@ -1,5 +1,20 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Renderer2, Self, SkipSelf, ViewContainerRef } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	forwardRef,
+	Inject,
+	Input,
+	OnInit,
+	Optional,
+	Renderer2,
+	Self,
+	SkipSelf,
+	ViewContainerRef,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -23,18 +38,21 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 		},
 		{
 			provide: ALuEstablishmentService,
-			useClass: LuEstablishmentService
+			useClass: LuEstablishmentService,
 		},
 		{
 			provide: ALuLegalUnitService,
-			useClass: LuLegalUnitService
-		}
+			useClass: LuLegalUnitService,
+		},
 	],
 })
-export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = ILuEstablishment, P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>>
+export class LuEstablishmentSelectInputComponent<
+		D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
+		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
+	>
 	extends ALuSelectInputComponent<D, P>
-	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit {
-
+	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit
+{
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	@Input() filters: string[];
@@ -52,40 +70,36 @@ export class LuEstablishmentSelectInputComponent<D extends ILuEstablishment = IL
 	}
 
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
-		@Inject(ALuLegalUnitService) @Optional() @SkipSelf() hostLuService: ALuLegalUnitService,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef<HTMLElement>,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
+		@Inject(ALuLegalUnitService)
+		@Optional()
+		@SkipSelf()
+		hostLuService: LuLegalUnitService,
 		@Inject(ALuLegalUnitService) @Self() selfLuService: LuLegalUnitService,
-		@Inject(ALuEstablishmentService) @Optional() @SkipSelf() hostEstablishmentService: ALuEstablishmentService,
-		@Inject(ALuEstablishmentService) @Self() selfEstablishmentService: LuEstablishmentService,
-		@Inject(LuEstablishmentSelectInputIntl) public intl: ILuEstablishmentSelectInputLabel
+		@Inject(ALuEstablishmentService)
+		@Optional()
+		@SkipSelf()
+		hostEstablishmentService: LuEstablishmentService,
+		@Inject(ALuEstablishmentService)
+		@Self()
+		selfEstablishmentService: LuEstablishmentService,
+		@Inject(LuEstablishmentSelectInputIntl)
+		public intl: ILuEstablishmentSelectInputLabel,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
-		this._establishmentService = (hostEstablishmentService || selfEstablishmentService) as LuEstablishmentService;
-		this._legalUnitService = (hostLuService || selfLuService) as LuLegalUnitService;
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
+		this._establishmentService = hostEstablishmentService || selfEstablishmentService;
+		this._legalUnitService = hostLuService || selfLuService;
 	}
 
 	ngOnInit() {
 		this._subs.add(
-			combineLatest([
-				this._legalUnitService.count(),
-				this._establishmentService.count()
-			])
-				.subscribe(([luCount, establishmentCount]) => {
-					this.groupByLu =
-						luCount > 1 &&
-						establishmentCount > 1 &&
-						luCount !== establishmentCount;
-				})
+			combineLatest([this._legalUnitService.count(), this._establishmentService.count()]).subscribe(([luCount, establishmentCount]) => {
+				this.groupByLu = luCount > 1 && establishmentCount > 1 && luCount !== establishmentCount;
+			}),
 		);
 	}
 

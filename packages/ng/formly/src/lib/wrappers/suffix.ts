@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import {
-	FieldWrapper,
-	FormlyFieldConfig,
-	FormlyConfig,
-	FieldType,
-} from '@ngx-formly/core';
+import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
 
 // wrapper component
 @Component({
@@ -13,22 +8,19 @@ import {
 	templateUrl: './suffix.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperSuffix extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	fieldComponent: ViewContainerRef;
+	override fieldComponent: ViewContainerRef;
 }
 // run to know when to add said wrapper
 export class TemplateSuffix {
 	run(fc: FormlyConfig) {
 		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (
-				field &&
-				field.templateOptions &&
-				field.templateOptions.suffix &&
-				!field.templateOptions.icon
-			) {
+			if (field?.templateOptions?.['suffix'] && !field?.templateOptions?.['icon']) {
 				return 'suffix';
 			}
+			return '';
 		});
 	}
 }

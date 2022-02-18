@@ -5,6 +5,6 @@ import { LuLegalUnitSelectorDirective } from './legal-unit-selector.directive';
 @NgModule({
 	imports: [HttpClientModule],
 	declarations: [LuLegalUnitSelectorDirective],
-	exports: [LuLegalUnitSelectorDirective]
+	exports: [LuLegalUnitSelectorDirective],
 })
-export class LuLegalUnitSelectorModule { }
+export class LuLegalUnitSelectorModule {}

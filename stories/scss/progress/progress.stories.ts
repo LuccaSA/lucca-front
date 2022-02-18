@@ -16,15 +16,15 @@ export default {
 	component: ProgressStory,
 	argTypes: {
 		mod: {
+			options: ['', ' mod-indeterminate'],
 			control: {
 				type: 'radio',
-				options: ['', ' mod-indeterminate']
 			}
 		},
 		state: {
+			options: ['', 'is-error', 'is-success'],
 			control: {
 				type: 'radio',
-				options: ['', 'is-error', 'is-success']
 			}
 		},
 	},

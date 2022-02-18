@@ -2,12 +2,11 @@
 	class="textfield-input"
 	[formControl]="formControl"
 	[formlyAttributes]="field"
-	[multiple]="to.multiple"
+	[multiple]="to['multiple']"
 	(focus)="focus()"
 	(blur)="blur()"
 	[placeholder]="to.placeholder"
-	[filters]="to.filters"
+	[filters]="to['filters']"
 >
-</lu-qualification-select> 
+</lu-qualification-select>
 <span class="textfield-label">{{ to.label }}</span>
-

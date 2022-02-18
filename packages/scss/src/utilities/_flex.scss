@@ -162,3 +162,19 @@ $suffix: "!important" !default;
 .#{$prefix}minWidth0 {
 	min-width: 0 #{$suffix};
 }
+
+// gap
+
+@each $name, $value in $spacings {
+	.#{$prefix}gap#{str-capitalize($name)} {
+		gap: _theme("spacings." + $name) #{$suffix};
+	}
+
+	.#{$prefix}columnGap#{str-capitalize($name)} {
+		column-gap: _theme("spacings." + $name) #{$suffix};
+	}
+
+	.#{$prefix}rowGap#{str-capitalize($name)} {
+		row-gap: _theme("spacings." + $name) #{$suffix};
+	}
+}

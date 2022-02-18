@@ -1,16 +1,25 @@
 <ng-template>
-	<div class="lu-picker-panel lu-date-picker-panel" role="dialog" [ngClass]="panelClassesMap"
-	(click)="onClick()" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (mousedown)="onMouseDown($event)">
+	<div
+		class="lu-picker-panel lu-date-picker-panel"
+		role="dialog"
+		[ngClass]="panelClassesMap"
+		(click)="onClick()"
+		(mouseover)="onMouseOver()"
+		(mouseleave)="onMouseLeave()"
+		(mousedown)="onMouseDown()"
+	>
 		<div class="lu-picker-content" [ngClass]="contentClassesMap" cdkTrapFocus="false" cdkTrapFocusAutoCapture="true">
 			<label class="textfield lu-picker-textfield">
-				<input luDateInput class="textfield-input"
+				<input
+					luDateInput
+					class="textfield-input"
 					[ngModel]="_value"
 					(ngModelChange)="_onInput($event)"
 					(keydown.enter)="_onEnter()"
 					[min]="min"
 					[max]="max"
 					[granularity]="granularity"
-				>
+				/>
 			</label>
 			<lu-calendar
 				[ngModel]="_value"

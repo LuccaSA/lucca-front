@@ -3,14 +3,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LuTooltipTriggerDirective } from './tooltip-trigger.directive';
 
 @NgModule({
-	imports: [
-		OverlayModule,
-	],
-	declarations: [
-		LuTooltipTriggerDirective,
-	],
-	exports: [
-		LuTooltipTriggerDirective,
-	]
+	imports: [OverlayModule],
+	declarations: [LuTooltipTriggerDirective],
+	exports: [LuTooltipTriggerDirective],
 })
-export class LuTooltipTriggerModule { }
+export class LuTooltipTriggerModule {}

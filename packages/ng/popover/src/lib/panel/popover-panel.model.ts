@@ -1,16 +1,15 @@
+import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ESCAPE } from '@angular/cdk/keycodes';
-import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 export type LuPopoverScrollStrategy = 'reposition' | 'block' | 'close';
 
-export declare interface ILuPopoverPanel {
+export declare interface ILuPopoverPanel<T = unknown> {
 	scrollStrategy: LuPopoverScrollStrategy;
 	closeOnClick: boolean;
 	panelId?: string;
 	triggerId?: string;
-	templateRef?: TemplateRef<any>;
+	templateRef?: TemplateRef<T>;
 
 	/** will emit when the panel wants to close */
 	close: Observable<void>;
@@ -35,74 +34,96 @@ export declare interface ILuPopoverPanel {
 /**
  * abstract class for basic implementation of a popover panel
  */
-export abstract class ALuPopoverPanel implements ILuPopoverPanel {
+export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T> {
 	panelId: string;
 	triggerId: string;
 
 	protected _isOpen: boolean;
-	get isOpen() { return this._isOpen; }
-
+	get isOpen() {
+		return this._isOpen;
+	}
 
 	protected _closeOnClick = false;
-	get closeOnClick() { return this._closeOnClick; }
-	set closeOnClick(coc: boolean) { this._closeOnClick = coc; }
+	get closeOnClick() {
+		return this._closeOnClick;
+	}
+	set closeOnClick(coc: boolean) {
+		this._closeOnClick = coc;
+	}
 
 	protected _trapFocus = false;
-	get trapFocus() { return this._trapFocus; }
-	set trapFocus(tf: boolean) { this._trapFocus = tf; }
+	get trapFocus() {
+		return this._trapFocus;
+	}
+	set trapFocus(tf: boolean) {
+		this._trapFocus = tf;
+	}
 
 	protected _scrollStrategy: LuPopoverScrollStrategy = 'reposition';
-	get scrollStrategy() { return this._scrollStrategy; }
-	set scrollStrategy(ss: LuPopoverScrollStrategy) { this._scrollStrategy = ss; }
+	get scrollStrategy() {
+		return this._scrollStrategy;
+	}
+	set scrollStrategy(ss: LuPopoverScrollStrategy) {
+		this._scrollStrategy = ss;
+	}
 
-	protected _templateRef: TemplateRef<any>;
-	get templateRef() { return this._templateRef; }
-	set templateRef(tr: TemplateRef<any>) { this._templateRef = tr; }
+	protected _templateRef: TemplateRef<T>;
+	get templateRef() {
+		return this._templateRef;
+	}
+	set templateRef(tr: TemplateRef<T>) {
+		this._templateRef = tr;
+	}
 
-	protected _positionClassesMap: any = {};
+	protected _positionClassesMap: Record<string, boolean> = {};
 	protected _panelClasses = '';
-	get panelClasses() { return this._panelClasses; }
+	get panelClasses() {
+		return this._panelClasses;
+	}
 	set panelClasses(cl: string) {
 		this._panelClasses = cl;
 	}
-	get panelClassesMap() {
-		const map = this._panelClasses
+	get panelClassesMap(): Record<string, boolean> {
+		const map: Record<string, boolean> = this._panelClasses
 			.split(' ')
-			.filter(c => !!c)
-			.reduce((obj: any, className: string) => {
+			.filter((c) => !!c)
+			.reduce((obj: Record<string, boolean>, className: string) => {
 				obj[className] = true;
 				return obj;
 			}, {});
-		// also add positiopn classes
+		// also add position classes
 		return { ...map, ...this._positionClassesMap };
 	}
 
 	protected _contentClasses = '';
-	get contentClasses() { return this._contentClasses; }
+	get contentClasses() {
+		return this._contentClasses;
+	}
 	set contentClasses(cl: string) {
 		this._contentClasses = cl;
 	}
 	get contentClassesMap() {
-		return this._contentClasses
-			.split(' ')
-			.reduce((obj: any, className: string) => {
-				obj[className] = true;
-				return obj;
-			}, {});
+		return this._contentClasses.split(' ').reduce((obj: Record<string, boolean>, className: string) => {
+			obj[className] = true;
+			return obj;
+		}, {});
 	}
-
 
 	/** Classes to be passed into the popover's overlay */
 	protected _overlayPaneClass: string | string[];
-	public get overlayPaneClass() { return this._overlayPaneClass; }
-	public set overlayPaneClass(opc) { this._overlayPaneClass = opc; }
+	public get overlayPaneClass() {
+		return this._overlayPaneClass;
+	}
+	public set overlayPaneClass(opc) {
+		this._overlayPaneClass = opc;
+	}
 
 	// /** Config object to be passed into the popover's content ngStyle */
 
 	protected _keydownEventsSub: Subscription;
 	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
 		if (!this._keydownEventsSub) {
-			this._keydownEventsSub = evt$.subscribe(e => this._handleKeydown(e));
+			this._keydownEventsSub = evt$.subscribe((e) => this._handleKeydown(e));
 		}
 	}
 
@@ -145,11 +166,12 @@ export abstract class ALuPopoverPanel implements ILuPopoverPanel {
 		this._emitHoveredEvent(false);
 	}
 	/** does nothing but must be overridable */
-	onMouseDown($event) {}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	onMouseDown() {}
 
 	_handleKeydown(event: KeyboardEvent) {
-		switch (event.keyCode) {
-			case ESCAPE:
+		switch (event.key) {
+			case 'Escape':
 				this._emitCloseEvent();
 				return;
 		}

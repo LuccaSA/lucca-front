@@ -1,26 +1,9 @@
-import {
-	Component,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	Output,
-	TemplateRef,
-	ViewChild,
-	ChangeDetectionStrategy,
-	QueryList,
-	ContentChildren,
-	HostListener,
-} from '@angular/core';
-
-import {
-	ILuPopoverPanel,
-	ALuPopoverPanel,
-	luTransformPopover,
-} from '@lucca-front/ng/popover';
-import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 // import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
-import { merge, of, Subscription, Observable } from 'rxjs';
-import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/operators';
+import { merge, Observable, Subscription } from 'rxjs';
+import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
+import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 
 @Component({
 	selector: 'lu-dropdown',
@@ -29,9 +12,7 @@ import { map, startWith, delay, share, switchMap, debounceTime } from 'rxjs/oper
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
 })
-export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy {
-
-
+export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy, AfterViewInit {
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -54,12 +35,14 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	}
 
 	/** Event emitted when the popover is closed. */
-	@Output() close = new EventEmitter<void>();
-	@Output() open = new EventEmitter<void>();
-	@Output() hovered = new EventEmitter<boolean>();
+	// eslint-disable-next-line @angular-eslint/no-output-native
+	@Output() override close = new EventEmitter<void>();
+	// eslint-disable-next-line @angular-eslint/no-output-native
+	@Output() override open = new EventEmitter<void>();
+	@Output() override hovered = new EventEmitter<boolean>();
 
 	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<any>) {
+	set vcTemplateRef(tr: TemplateRef<unknown>) {
 		this.templateRef = tr;
 	}
 
@@ -81,25 +64,25 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		super();
 	}
 	protected initItems() {
-
-		const items$ = this._itemsQL.changes
-			.pipe(
-				startWith(this._itemsQL),
-				map<QueryList<ILuDropdownItem>, ILuDropdownItem[]>(ql => ql.toArray()),
-				delay(0),
-				share(),
-			);
-		items$.subscribe(i => this._items = i || []);
+		const items$ = this._itemsQL.changes.pipe(
+			startWith(this._itemsQL),
+			map<QueryList<ILuDropdownItem>, ILuDropdownItem[]>((ql) => ql.toArray()),
+			delay(0),
+			share(),
+		);
+		const itemsSub = items$.subscribe((i) => (this._items = i || []));
+		this._subs.add(itemsSub);
 		// this.highlightIndex = -1;
 
 		const singleFlow$: Observable<boolean> = items$.pipe(
-			switchMap(items => merge(...items.map(i => i.onSelect))),
+			switchMap((items) => merge(...items.map((i) => i.onSelect))),
 			debounceTime(1),
 		);
 
-		const itemSelectSub = singleFlow$.subscribe(shouldClose => this.close.emit());
+		const itemSelectSub = singleFlow$.subscribe(() => this.close.emit());
 		this._subs.add(itemSelectSub);
 	}
+
 	ngAfterViewInit() {
 		this.initItems();
 	}
@@ -109,6 +92,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.close.complete();
 		this._subs.unsubscribe();
 	}
+
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
@@ -116,50 +100,52 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	_emitOpenEvent(): void {
 		this.open.emit();
 	}
+
 	_emitHoveredEvent(hovered: boolean): void {
 		this.hovered.emit(hovered);
 	}
 
-	onOpen() {
+	override onOpen() {
 		this.focusFirstItem();
 	}
+
 	private focusFirstItem() {
 		const firstItem = this._items[0];
 		if (firstItem) {
-			firstItem.focus()
+			firstItem.focus();
 		}
 	}
 
 	// keydown
 	// _handleKeydown(event: KeyboardEvent) {
 	// 	super._handleKeydown(event);
-		// switch (event.keyCode) {
-		// 	case UP_ARROW:
-		// 		this._decrHighlight();
-		// 		if (!this._highlightOutOfBounds()) {
-		// 			event.preventDefault();
-		// 			event.stopPropagation();
-		// 		}
-		// 		break;
-		// 	case DOWN_ARROW:
-		// 		this._incrHighlight();
-		// 		if (!this._highlightOutOfBounds()) {
-		// 			event.preventDefault();
-		// 			event.stopPropagation();
-		// 		}
-		// 		break;
-		// 	case TAB:
-		// 		if (event.shiftKey) {
-		// 			this._decrHighlight();
-		// 		} else {
-		// 			this._incrHighlight();
-		// 		}
-		// 		if (!this._highlightOutOfBounds()) {
-		// 			event.preventDefault();
-		// 			event.stopPropagation();
-		// 		}
-		// 		break;
-		// }
+	// switch (event.keyCode) {
+	// 	case UP_ARROW:
+	// 		this._decrHighlight();
+	// 		if (!this._highlightOutOfBounds()) {
+	// 			event.preventDefault();
+	// 			event.stopPropagation();
+	// 		}
+	// 		break;
+	// 	case DOWN_ARROW:
+	// 		this._incrHighlight();
+	// 		if (!this._highlightOutOfBounds()) {
+	// 			event.preventDefault();
+	// 			event.stopPropagation();
+	// 		}
+	// 		break;
+	// 	case TAB:
+	// 		if (event.shiftKey) {
+	// 			this._decrHighlight();
+	// 		} else {
+	// 			this._incrHighlight();
+	// 		}
+	// 		if (!this._highlightOutOfBounds()) {
+	// 			event.preventDefault();
+	// 			event.stopPropagation();
+	// 		}
+	// 		break;
+	// }
 	// }
 	// protected _incrHighlight() {
 	// 	this.highlightIndex++;

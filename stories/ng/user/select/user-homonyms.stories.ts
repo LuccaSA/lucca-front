@@ -18,13 +18,12 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 					<lu-option-picker-advanced>
 						<lu-api-paged-searcher
-							[api]="'/timmi-project/api/projectusers/search'"
-							[filters]="[
-								'currentOrganizationId=1',
-								'fields=id,firstName,lastName',
-								'orderBy=lastname,asc,firstname,asc'
-							]"
-							standard="v3">
+							api="/timmi-project/api/projectusers/search"
+							fields="id,firstName,lastName"
+							orderBy="lastname,asc,firstname,asc"
+							[filters]="['currentOrganizationId=1']"
+							standard="v3"
+						>
 						</lu-api-paged-searcher>
 
 						<lu-option *luForOptions="let user" [value]="user">
@@ -41,13 +40,12 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 					<lu-option-picker-advanced>
 						<lu-api-paged-searcher
-							[api]="'/timmi-project/api/projectusers/search'"
-							[filters]="[
-								'currentOrganizationId=1',
-								'fields=id,firstName,lastName',
-								'orderBy=lastname,asc,firstname,asc'
-							]"
-							standard="v3">
+							api="/timmi-project/api/projectusers/search"
+							fields="id,firstName,lastName"
+							orderBy="lastname,asc,firstname,asc"
+							[filters]="['currentOrganizationId=1']"
+							standard="v3"
+						>
 						</lu-api-paged-searcher>
 
 						<!-- Il suffit d'ajouter cette ligne qui va ajouter une propriété additionalInformation aux homonymes -->
@@ -57,16 +55,13 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 							{{ user | luUserDisplay }}
 
 							<!-- On peut maintenant afficher cette information -->
-							<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textSmall">
-								({{user.additionalInformation}})
-							</div>
+							<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textSmall">({{ user.additionalInformation }})</div>
 						</lu-option>
 					</lu-option-picker-advanced>
 				</lu-select>
 				<span class="textfield-label">Avec gestion des homonymes :</span>
 			</label>
 		</section>
-
 	`,
 })
 class UserHomonymsStory {}
@@ -77,18 +72,9 @@ export default {
 	decorators: [
 		moduleMetadata({
 			entryComponents: [UserHomonymsStory],
-			imports: [
-				LuUserModule,
-				LuSelectModule,
-				LuApiModule,
-				LuOptionModule,
-				LuUserHomonymsModule,
-				LuInputDisplayerModule,
-				BrowserAnimationsModule,
-				FormsModule,
-			],
-		})
-	]
+			imports: [LuUserModule, LuSelectModule, LuApiModule, LuOptionModule, LuUserHomonymsModule, LuInputDisplayerModule, BrowserAnimationsModule, FormsModule],
+		}),
+	],
 } as Meta;
 
 const template: Story<UserHomonymsStory> = (args: UserHomonymsStory) => ({
@@ -96,4 +82,4 @@ const template: Story<UserHomonymsStory> = (args: UserHomonymsStory) => ({
 });
 
 export const basic = template.bind({});
-basic.args = {}
+basic.args = {};

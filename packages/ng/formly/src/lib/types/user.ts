@@ -8,13 +8,14 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './user.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldUser extends FieldType {
-	readonly formControl: FormControl;
+	override readonly formControl: FormControl;
 
 	focus() {
-		this.to._isFocused = true;
+		this.to['_isFocused'] = true;
 	}
 	blur() {
-		this.to._isFocused = false;
+		this.to['_isFocused'] = false;
 	}
 }

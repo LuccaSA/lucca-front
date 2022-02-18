@@ -6,19 +6,8 @@ import { CommonModule } from '@angular/common';
 import { LuOptionPlaceholderModule } from '@lucca-front/ng/option';
 
 @NgModule({
-	imports: [
-		HttpClientModule,
-		ReactiveFormsModule,
-		CommonModule,
-		LuOptionPlaceholderModule,
-	],
-	declarations: [
-		LuApiSearcherComponent,
-		LuApiPagedSearcherComponent,
-	],
-	exports: [
-		LuApiSearcherComponent,
-		LuApiPagedSearcherComponent,
-	],
+	imports: [HttpClientModule, ReactiveFormsModule, CommonModule, LuOptionPlaceholderModule],
+	declarations: [LuApiSearcherComponent, LuApiPagedSearcherComponent],
+	exports: [LuApiSearcherComponent, LuApiPagedSearcherComponent],
 })
 export class LuApiSearcherModule {}

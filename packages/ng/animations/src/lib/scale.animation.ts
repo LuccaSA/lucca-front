@@ -1,15 +1,6 @@
-import {
-	state,
-	style,
-	animate,
-	transition,
-	AnimationMetadata,
-} from '@angular/animations';
+import { animate, AnimationMetadata, style, transition } from '@angular/animations';
 
-export function luScalingAnimation(
-	inTiming: string,
-	outTiming: string,
-): AnimationMetadata[] {
+export function luScalingAnimation(inTiming: string, outTiming: string): AnimationMetadata[] {
 	return [
 		transition('void => left', [
 			// ---> entering --->

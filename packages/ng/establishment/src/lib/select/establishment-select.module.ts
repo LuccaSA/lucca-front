@@ -6,19 +6,7 @@ import { LuLegalUnitSelectorModule } from './legal-unit-selector/index';
 import { LuEstablishmentSelectAllModule } from './select-all/index';
 
 @NgModule({
-	imports: [
-		LuEstablishmentSelectInputModule,
-		LuEstablishmentSearcherModule,
-		LuForLegalUnitsModule,
-		LuLegalUnitSelectorModule,
-		LuEstablishmentSelectAllModule,
-	],
-	exports: [
-		LuEstablishmentSelectInputModule,
-		LuEstablishmentSearcherModule,
-		LuForLegalUnitsModule,
-		LuLegalUnitSelectorModule,
-		LuEstablishmentSelectAllModule,
-	],
+	imports: [LuEstablishmentSelectInputModule, LuEstablishmentSearcherModule, LuForLegalUnitsModule, LuLegalUnitSelectorModule, LuEstablishmentSelectAllModule],
+	exports: [LuEstablishmentSelectInputModule, LuEstablishmentSearcherModule, LuForLegalUnitsModule, LuLegalUnitSelectorModule, LuEstablishmentSelectAllModule],
 })
-export class LuEstablishmentSelectModule { }
+export class LuEstablishmentSelectModule {}

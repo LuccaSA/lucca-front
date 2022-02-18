@@ -14,7 +14,6 @@ dist
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.vscode/
 
 # demo
 demo/icons
@@ -27,3 +26,5 @@ storybook-static
 
 # packages stuff
 packages/*/package-lock.json
+
+/.angular/cache

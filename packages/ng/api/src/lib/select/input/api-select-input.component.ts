@@ -1,25 +1,8 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ChangeDetectorRef,
-	forwardRef,
-	ViewContainerRef,
-	ElementRef,
-	Input,
-	Renderer2,
-	AfterViewInit,
-	Inject,
-	Optional,
-	SkipSelf,
-	Self
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Overlay } from '@angular/cdk/overlay';
-import { ILuInputWithPicker } from '@lucca-front/ng/picker';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ILuOptionItem, LuOptionComparer, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { ILuApiItem } from '../../api.model';
-import { LuOptionComparer } from '@lucca-front/ng/option';
-import { ALuApiService, LuApiHybridService } from '../../service/index';
 
 @Component({
 	selector: 'lu-api-select',
@@ -34,10 +17,10 @@ import { ALuApiService, LuApiHybridService } from '../../service/index';
 		},
 	],
 })
-export class LuApiSelectInputComponent<T extends ILuApiItem = ILuApiItem>
-extends ALuSelectInputComponent<T>
-implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
-
+export class LuApiSelectInputComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem>
+	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
+	implements ControlValueAccessor, AfterViewInit
+{
 	@Input() standard: string;
 	@Input() api: string;
 	@Input() fields: string;
@@ -46,18 +29,12 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, AfterViewInit {
 
 	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _overlay: Overlay,
-		protected _elementRef: ElementRef,
-		protected _viewContainerRef: ViewContainerRef,
-		protected _renderer: Renderer2,
+		protected override _changeDetectorRef: ChangeDetectorRef,
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef<HTMLElement>,
+		protected override _viewContainerRef: ViewContainerRef,
+		protected override _renderer: Renderer2,
 	) {
-		super(
-			_changeDetectorRef,
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-			_renderer,
-		);
+		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
 }

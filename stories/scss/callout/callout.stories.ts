@@ -24,15 +24,15 @@ export default {
 	component: CalloutStory,
 	argTypes: {
 		mod: {
+			options: ['mod-small', 'mod-icon'],
 			control: {
 				type: 'inline-check',
-				options: ['mod-small', 'mod-icon']
 			}
 		},
 		palette: {
+			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
-				options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error']
 			}
 		},
 	},
