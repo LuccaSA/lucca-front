@@ -11,6 +11,5 @@
 - Replace folder "lucca-front/packages/icons/font" and lucca-front/packages/icons/selection.json by new ones in the download zip
 - Upload new front on cdn
 - Update font mapping : "lucca-front/packages/icons/src/_mapping.scss"
-- Update font mapping : "lucca-front/packages/icons/src/_mapping.js"
-- Update demo in sass package : "lucca-front/packages/scss/demo/demo.js"
+- Update font mapping : "lucca-front/packages/icons/icons-list.js"
 - Push it!
