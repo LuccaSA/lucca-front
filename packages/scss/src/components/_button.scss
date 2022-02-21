@@ -423,8 +423,11 @@ ul.button-group {
 		background-color: _color('grey', 400);
 		box-shadow: 0 0 0 1px _color('grey', 400);
 
-		.button.mod-outlined {
-			box-shadow: none;
+		.button {
+			&.mod-outline,
+			&.mod-outlined {
+				box-shadow: none;
+			}
 		}
 
 		&:focus-within {
