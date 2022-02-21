@@ -1,6 +1,6 @@
 <section class="contentSection">
 	<h1>Header</h1>
-	<header class="pageHeader" [ngClass]="{'mod-withBreadcrumbs': withBreadcrumbs, 'mod-withMenu': withMenu}">
+	<header class="pageHeader" [ngClass]="{'mod-withBreadcrumbs': withBreadcrumbs, 'mod-withMenu': withMenu, 'mod-noShadow': withoutShadow}">
 		<nav *ngIf="withBreadcrumbs" class="breadcrumbs" aria-describedby="breadcrumbs-title">
 			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
 			<ul class="breadcrumbs-list">
@@ -42,7 +42,7 @@
 		</div>
 		<section class="pageHeader-description">
 			<p class="u-marginBottomReset">
-				{{ pageHeaderDescription }} 
+				{{ pageHeaderDescription }}
 				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside size-smaller u-marginLeftSmallest"></span></a>.
 			</p>
 		</section>
