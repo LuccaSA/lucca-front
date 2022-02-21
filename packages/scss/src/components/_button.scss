@@ -7,32 +7,32 @@
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
-			background-color: _color($palette, '600');
+			background-color: _color($palette, 600);
 			box-shadow: _theme('commons.box-shadow.xs');
 		}
 
 		&:focus {
-			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, '200');
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 200);
 			outline: none;
-			background-color: _color($palette, '600');
+			background-color: _color($palette, 600);
 		}
 
 		&:active {
-			background-color: _color($palette, '800');
-			box-shadow: 0 0 0 4px _color($palette, '300');
+			background-color: _color($palette, 800);
+			box-shadow: 0 0 0 4px _color($palette, 300);
 		}
 	}
 
 	.button-counter {
-		background-color: _color($palette, '500');
+		background-color: _color($palette, 500);
 	}
 }
 
 @mixin buttonLinkColoring($palette) {
 	&:not([disabled], .is-disabled) {
 		&:focus {
-			box-shadow: 0 0 0 4px _color($palette, '100'), inset 0 0 0 1px _color($palette, '300');
-			background: _color($palette, '100');
+			box-shadow: 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 300);
+			background: _color($palette, 100);
 		}
 	}
 }
@@ -40,30 +40,30 @@
 @mixin buttonOutlineColoring($palette) {
 	&:not([disabled], .is-disabled) {
 		color: _color($palette);
-		box-shadow: inset 0 0 0 1px _color($palette, '400');
+		box-shadow: inset 0 0 0 1px _color($palette, 400);
 
 		&:hover {
-			background-color: _color($palette, '100');
+			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, '400');
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
 		}
 
 		&:focus {
-			background-color: _color($palette, '100');
+			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, '100'), inset 0 0 0 1px _color($palette, '400');
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
 			outline: none;
 		}
 
 		&:active {
-			background-color: _color($palette, '200');
+			background-color: _color($palette, 200);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, '200'), inset 0 0 0 1px _color($palette, '500');
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
 		}
 	}
 
 	.button-counter {
-		background-color: _color($palette, '300');
+		background-color: _color($palette, 300);
 		color: _color($palette);
 	}
 }
@@ -179,7 +179,7 @@
 
 		&:hover {
 			box-shadow: none;
-			background-color: _color('primary', '50');
+			background-color: _color('primary', 50);
 			color: _color('primary');
 		}
 
@@ -221,34 +221,34 @@
 	&.mod-outlined,
 	&.mod-outline {
 		background-color: _color('white');
-		box-shadow: inset 0 0 0 1px _color('grey', '400');
+		box-shadow: inset 0 0 0 1px _color('grey', 400);
 		color: _color('text.default');
 
 		&:not([disabled], .is-disabled) {
 			&:hover {
-				background-color: _color('grey', '100');
+				background-color: _color('grey', 100);
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color('grey', '400');
+				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color('grey', 400);
 			}
 
 			&:focus {
-				background-color: _color('grey', '100');
+				background-color: _color('grey', 100);
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', '100'), inset 0 0 0 1px _color('primary', '400');
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 100), inset 0 0 0 1px _color('primary', 400);
 				outline: none;
 			}
 
 			&:active {
-				background-color: _color('grey', '200');
+				background-color: _color('grey', 200);
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', '200'), inset 0 0 0 1px _color('primary', '500');
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 200), inset 0 0 0 1px _color('primary', 500);
 			}
 		}
 
 		// TODO delete this class ?
 		&.mod-white {
 			background-color: _color('white');
-			color: _color('grey', '700');
+			color: _color('grey', 700);
 		}
 
 		// palette colors
@@ -259,7 +259,7 @@
 		}
 
 		.button-counter {
-			background-color: _color('grey', '300');
+			background-color: _color('grey', 300);
 			color: _color('text.default');
 		}
 	}
@@ -412,12 +412,24 @@ ul.button-group {
 	padding: 0;
 	margin: 0;
 	gap: _theme('commons.divider.width');
-	border-radius: var(--commons-border-radius);
+	border-radius: _component('button.border.radius');
 	overflow: hidden;
 
 	&:focus-within {
-		box-shadow: 0 0 0 4px _color('primary', '200');
-		border-radius: _component('button.border.radius');
+		box-shadow: 0 0 0 4px _color('primary', 200);
+	}
+
+	&.mod-outlined {
+		background-color: _color('grey', 400);
+		box-shadow: 0 0 0 1px _color('grey', 400);
+
+		.button.mod-outlined {
+			box-shadow: none;
+		}
+
+		&:focus-within {
+			box-shadow: 0 0 0 1px _color('grey', 400), 0 0 0 4px _color('primary', 200);
+		}
 	}
 
 	.button {
@@ -452,7 +464,7 @@ ul.button-group {
 			}
 
 			&:focus {
-				background-color: _color('primary', '600');
+				background-color: _color('primary', 600);
 				box-shadow: none;
 			}
 		}
@@ -471,8 +483,7 @@ ul.button-group {
 	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
 			&:focus-within {
-				box-shadow: 0 0 0 4px _color($name, '200');
-				border-radius: _component('button.border.radius');
+				box-shadow: 0 0 0 4px _color($name, 200);
 			}
 
 			.button {
@@ -480,7 +491,7 @@ ul.button-group {
 					@include buttonColoring($name);
 
 					&:focus {
-						background-color: _color($name, '600');
+						background-color: _color($name, 600);
 						box-shadow: none;
 					}
 				}

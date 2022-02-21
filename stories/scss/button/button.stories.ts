@@ -18,8 +18,6 @@ class ButtonStory {
 	@Input() noFlexWrap: boolean = false;
 	// todo
 	// @Input() more: boolean = false;
-	// todo
-	// outlined + grouped (avec :has dans le futur ?)
 }
 
 export default {
@@ -27,7 +25,7 @@ export default {
 	component: ButtonStory,
 	argTypes: {
 		mod: {
-			options: ['', ' mod-outlined', 'mod-link', 'mod-link mod-invert'],
+			options: ['', 'mod-outlined', 'mod-link', 'mod-link mod-invert'],
 			control: {
 				type: 'radio',
 			},

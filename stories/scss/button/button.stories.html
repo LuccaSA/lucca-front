@@ -1,5 +1,10 @@
 <div class="u-paddingSmall" [attr.style]="mod === 'mod-link mod-invert' ? 'background-color: black; color: white' : null">
-	<ul class="content {{palette}}" [class.button-group]="group" [class.u-flexWrapNowrap]="noFlexWrap">
+	<ul
+		class="content {{palette}}"
+		[class.mod-outlined]="mod === 'mod-outlined'"
+		[class.button-group]="group"
+		[class.u-flexWrapNowrap]="noFlexWrap"
+	>
 		<li class="button-group-item">
 			<button class="button {{mod}} {{size}} {{state}} {{group ? null : palette}}" [attr.disabled]="disabled ? 'disabled' : null">
 				{{label}}
