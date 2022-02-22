@@ -9,8 +9,6 @@
 			@include makeIcon("arrow_south");
 			bottom: #{_component("select.input.padding-vertical", true)};
 			bottom: _component("select.input.padding-vertical");
-			color: _color("primary", 700, true);
-			color: _color("primary");
 			font-size: 1.2rem;
 			line-height: 1.4rem;
 			pointer-events: none;
@@ -34,11 +32,6 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-	}
-
-	.lu-select-placeholder {
-		color: _component("select.input.placeholder", true);
-		color: _component("select.input.placeholder");
 	}
 
 	.lu-select-value {
