@@ -1,4 +1,5 @@
 $select: (
+	default-palette: _getMap("palettes.primary"),
 	chip: (
 		background: _color("primary", 700, true),
 		text: _color("primary", "text", true)

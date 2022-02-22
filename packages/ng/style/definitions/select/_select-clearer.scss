@@ -9,18 +9,10 @@
 	}
 
 	.actionIcon {
-		color: _color("primary", "color", true);
-		color: _color("primary");
+		@include selectColoringClearer("select.default-palette");
 		height: 1rem;
 		padding: 0;
 		width: 1rem;
-
-		&:hover {
-			background: _color("primary", 50, true);
-			background: _color("primary", 50);
-			color: _color("primary", 800, true);
-			color: _color("primary", 800);
-		}
 	}
 
 	.lucca-icon {
@@ -63,4 +55,24 @@
 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
 		display: none;
 	}
+
+	// PALETTES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	@each $name, $palette in _getMap("palettes") {
+		:host-context(.palette-#{$name}) {
+			.actionIcon {
+				@include selectColoringClearer($name);
+			}
+		}
+	}
+}
+
+@mixin selectColoringClearer($palette) {
+		color: _color($palette, 700);
+
+		&:hover {
+			background:  _color($palette, 50);
+			color: _color($palette, 800);
+		}
 }

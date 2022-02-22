@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 @Component({
 	selector: 'date-select-stories',
 	template: `
-<label class="textfield">
-	<lu-date-select class="textfield-input" [ngModel]="model" (ngModelChange)="modelChange($event)"></lu-date-select>
+<label class="textfield palette-secondary">
+	<lu-date-select class="textfield-input" placeholder="oijzeoifj" [ngModel]="model" (ngModelChange)="modelChange($event)"></lu-date-select>
 </label>
 `,
 }) class DateSelectStory {
