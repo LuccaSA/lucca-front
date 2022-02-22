@@ -1,5 +1,5 @@
 <div class="lu-sidepanel-panel-inner" cdkTrapFocus="true" cdkTrapFocusAutoCapture="true" role="dialog" aria-modal="true">
-	<div class="lu-modal-header">
+	<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
 		<h3 class="lu-modal-header-title">{{ title }}</h3>
 		<button class="lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
 			<span aria-hidden="true" class="lucca-icon icon-cross"></span>
