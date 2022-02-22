@@ -5,8 +5,7 @@ $select: (
 	),
 	input: (
 		padding-horizontal: _theme("spacings.smaller", true),
-		padding-vertical: _theme("spacings.smaller", true),
-		placeholder: desaturate(lighten(_color("primary", 700, true), 20%), 25%)
+		padding-vertical: _theme("spacings.smaller", true)
 	),
 	// legacy
 	framed: (

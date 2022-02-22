@@ -106,7 +106,7 @@
 			vertical-align: top;
 			white-space: nowrap;
 		}
-	} 
+	}
 
 
 	// MODS
@@ -302,4 +302,28 @@
 			color: _theme("commons.disabled.placeholder");
 		}
 	}
+
+	// PALETTES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	@each $name, $palette in _getMap("palettes") {
+		:host-context(.palette-#{$name}) {
+			.lu-select-placeholder {
+				@include selectColoringPlaceholer($name);
+			}
+
+			&::after {
+				@include selectColoringIcons($name);
+			}
+		}
+	}
+}
+
+
+@mixin selectColoringPlaceholer($palette) {
+		color: _color($palette, 400);
+}
+
+@mixin selectColoringIcons($palette) {
+		color: _color($palette, 700);
 }
