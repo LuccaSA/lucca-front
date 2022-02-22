@@ -16,8 +16,6 @@ class ButtonStory {
 	@Input() group: boolean = false;
 	@Input() disabled: boolean = false;
 	@Input() noFlexWrap: boolean = false;
-	// todo
-	// @Input() more: boolean = false;
 }
 
 export default {
@@ -43,7 +41,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'mod-smaller', 'mod-small'],
+			options: ['', 'mod-small', 'mod-smaller'],
 			control: {
 				type: 'radio',
 			},

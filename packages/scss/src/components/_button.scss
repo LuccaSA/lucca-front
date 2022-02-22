@@ -203,7 +203,7 @@
 	&.mod-more {
 		padding: 0 !important;
 		text-align: center;
-		width: 2rem;
+		min-width: _theme('spacings.big');
 
 		&::before {
 			@include makeIcon('arrow_south');
@@ -404,6 +404,14 @@
 
 ul.button-group {
 	flex-wrap: wrap;
+
+	.button.mod-more {
+		height: 100%;
+
+		&::before {
+			content: none;
+		}
+	}
 }
 
 .button-group {

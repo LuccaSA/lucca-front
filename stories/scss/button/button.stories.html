@@ -6,21 +6,34 @@
 		[class.u-flexWrapNowrap]="noFlexWrap"
 	>
 		<li class="button-group-item">
-			<button class="button {{mod}} {{size}} {{state}} {{group ? null : palette}}" [attr.disabled]="disabled ? 'disabled' : null">
+			<button
+				type="button"
+				class="button {{mod}} {{size}} {{state}} {{group ? null : palette}}"
+				[attr.disabled]="disabled ? 'disabled' : null"
+			>
 				{{label}}
 			</button>
 		</li>
-		<li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
-		<li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
-		<li class="button-group-item"><button class="button {{mod}} {{size}}">{{label}}</button></li>
+		<li class="button-group-item"><button type="button" class="button {{mod}} {{size}}">{{label}}</button></li>
+		<li class="button-group-item"><button type="button" class="button {{mod}} {{size}}">{{label}}</button></li>
+		<li class="button-group-item"><button type="button" class="button {{mod}} {{size}}">{{label}}</button></li>
+		<li class="button-group-item">
+			<button type="button" class="button {{mod}} {{size}} mod-more">
+				<span class="lucca-icon icon-chevronSouth" aria-hidden="true"></span>
+				<span class="u-mask">More actions</span>
+			</button>
+		</li>
 	</ul>
 
 	<p class="u-marginTopStandard u-marginBottomSmaller">Legacy (without list and without responsive):</p>
 
 	<div class="content {{palette}}" [class.button-group]="group">
-		<button class="button {{mod}} {{size}} {{state}} {{palette}}" [attr.disabled]="disabled ? 'disabled' : null">{{label}}</button>
-		<button class="button {{mod}} {{size}}">{{label}}</button>
-		<button class="button {{mod}} {{size}}">{{label}}</button>
-		<button class="button {{mod}} {{size}}">{{label}}</button>
+		<button type="button" class="button {{mod}} {{size}} {{state}} {{palette}}" [attr.disabled]="disabled ? 'disabled' : null">
+			{{label}}
+		</button>
+		<button type="button" class="button {{mod}} {{size}}">{{label}}</button>
+		<button type="button" class="button {{mod}} {{size}}">{{label}}</button>
+		<button type="button" class="button {{mod}} {{size}}">{{label}}</button>
+		<button type="button" class="button {{mod}} {{size}} mod-more"><span class="u-mask">More actions</span></button>
 	</div>
 </div>
