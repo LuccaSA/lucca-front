@@ -11,6 +11,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 }) class RadioStory {
 	@Input() disabled: boolean = false;
 	@Input() checked: boolean = false;
+	@Input() isRequired: boolean = false;
 }
 
 export default {
@@ -42,4 +43,4 @@ const template: Story<RadioStory> = (args: RadioStory) => ({
 });
 
 export const basic = template.bind({});
-basic.args = { checked: false, palette: '', disabled: false };
+basic.args = { checked: false, palette: '', disabled: false, isRequired: false };

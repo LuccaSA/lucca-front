@@ -9,6 +9,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 }) class FramedStory {
 	@Input() state: string = '';
 	@Input() disabled: boolean = false;
+	@Input() isRequired: boolean = false;
 }
 
 export default {
@@ -35,4 +36,4 @@ const template: Story<FramedStory> = (args: FramedStory) => ({
 });
 
 export const basic = template.bind({});
-basic.args = { state: '', disabled: false };
+basic.args = { state: '', disabled: false, isRequired: false };

@@ -3,8 +3,24 @@
 	position: relative;
 
 	&.is-required {
-		&::after {
-			@extend %isRequired;
+		.checkbox-label {
+			&:not(:empty) {
+				&::after {
+					@extend %isRequired;
+				}
+			}
+		}
+	}
+
+	.checkbox-input {
+		&[aria-required] {
+			~ .checkbox-label {
+				&:not(:empty) {
+					&::after {
+						@extend %isRequired;
+					}
+				}
+			}
 		}
 	}
 }

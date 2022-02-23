@@ -10,6 +10,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	@Input() state: string = '';
 	@Input() palette: string = '';
 	@Input() disabled: boolean = false;
+	@Input() isRequiredLegacy: boolean = false;
+	@Input() isRequired: boolean = false;
 }
 
 export default {
@@ -54,4 +56,4 @@ const template: Story<TextfieldStory> = (args: TextfieldStory) => ({
 });
 
 export const basic = template.bind({});
-basic.args = { state: '', palette: '', disabled: false };
+basic.args = { state: '', palette: '', disabled: false, isRequiredLegacy: false, isRequired: false };

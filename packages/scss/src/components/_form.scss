@@ -206,3 +206,15 @@
 		}
 	}
 }
+
+.radiosfield-label,
+.checkboxesfield-label,
+.textfield-label {
+	&.is-required {
+		&:not(:empty) {
+			&::after {
+				@extend %isRequired;
+			}
+		}
+	}
+}

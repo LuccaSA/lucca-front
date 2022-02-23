@@ -1,7 +1,8 @@
-<label class="radio {{ palette }}">
+<label [class.is-required]="isRequired" class="radio {{ palette }}">
 	<input class="radio-input" 
 		type="radio"
 		[attr.aria-hidden]="isAriaHidden"
+		[attr.aria-required]="isRequired ? true : null"
 		[checked]="checked"
 		[disabled]="disabled"/>
 	<span class="radio-label">Radio input</span>
