@@ -16,6 +16,7 @@ class ButtonStory {
 	@Input() group: boolean = false;
 	@Input() disabled: boolean = false;
 	@Input() noFlexWrap: boolean = false;
+	@Input() more: boolean = false;
 }
 
 export default {
@@ -60,4 +61,4 @@ const template: Story<ButtonStory> = (args: ButtonStory) => ({
 });
 
 export const def = template.bind({});
-def.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false, group: false, noFlexWrap: false };
+def.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false, group: false, noFlexWrap: false, more: false };

@@ -17,7 +17,7 @@
 		<li class="button-group-item"><button type="button" class="button {{mod}} {{size}}">{{label}}</button></li>
 		<li class="button-group-item"><button type="button" class="button {{mod}} {{size}}">{{label}}</button></li>
 		<li class="button-group-item"><button type="button" class="button {{mod}} {{size}}">{{label}}</button></li>
-		<li class="button-group-item">
+		<li class="button-group-item" *ngIf="more">
 			<button type="button" class="button {{mod}} {{size}} mod-more">
 				<span class="lucca-icon icon-chevronSouth" aria-hidden="true"></span>
 				<span class="u-mask">More actions</span>
@@ -34,6 +34,6 @@
 		<button type="button" class="button {{mod}} {{size}}">{{label}}</button>
 		<button type="button" class="button {{mod}} {{size}}">{{label}}</button>
 		<button type="button" class="button {{mod}} {{size}}">{{label}}</button>
-		<button type="button" class="button {{mod}} {{size}} mod-more"><span class="u-mask">More actions</span></button>
+		<button *ngIf="more" type="button" class="button {{mod}} {{size}} mod-more"><span class="u-mask">More actions</span></button>
 	</div>
 </div>
