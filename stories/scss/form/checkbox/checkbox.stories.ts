@@ -10,6 +10,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	templateUrl: './checkbox.stories.html',
 }) class CheckboxStory {
 	@Input() disabled: boolean = false;
+	@Input() isRequiredLegacy: boolean = false;
+	@Input() isRequired: boolean = false;
 	@Input() checked: string = 'unchecked';
 	get isMixed(): boolean { return this.checked === 'mixed'; }
 	get isChecked(): boolean { return this.checked === 'checked' || this.checked === 'mixed'; }
@@ -60,4 +62,4 @@ const template: Story<CheckboxStory> = (args: CheckboxStory) => ({
 });
 
 export const basic = template.bind({});
-basic.args = { checked: 'unchecked', palette: '', disabled: false };
+basic.args = { checked: 'unchecked', palette: '', disabled: false, isRequiredLegacy: false, isRequired: false };

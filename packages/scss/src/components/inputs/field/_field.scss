@@ -120,6 +120,18 @@
 			}
 		}
 
+		.#{$fieldname}-input {
+			&[aria-required] {
+				~ .#{$fieldname}-label {
+					&:not(:empty) {
+						&::after {
+							@extend %isRequired;
+						}
+					}
+				}
+			}
+		}
+
 		// Inline validation
 		&.is-loading {
 			@include loading(1rem);

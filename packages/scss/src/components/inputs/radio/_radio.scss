@@ -5,8 +5,11 @@
 	&.is-required {
 		&::after {
 			@extend %isRequired;
-		}
+		}			
 	}
+
+	// we can't use the ::after like on checkboxes because
+	// the pseudo element is already used to skin the radio buttons
 }
 
 .radio-input {
