@@ -43,8 +43,8 @@
 			color: _color("error");
 
 			&:hover {
-				background: _color("error", 50, true);
-				background: _color("error", 50);
+				background-color: _color("error", 50, true);
+				background-color: _color("error", 50);
 				color: _color("error", 800, true);
 				color: _color("error", 800);
 			}
@@ -72,7 +72,7 @@
 		color: _color($palette, 700);
 
 		&:hover {
-			background:  _color($palette, 50);
+			background-color: _color($palette, 50);
 			color: _color($palette, 800);
 		}
 }
