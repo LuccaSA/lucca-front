@@ -1,0 +1,10 @@
+.content {
+	&:not(.button-group) {
+		display: contents;
+		list-style-type: none;
+
+		> *:not(:first-child) {
+			display: none;
+		}
+	}
+}
