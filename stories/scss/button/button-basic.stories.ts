@@ -62,7 +62,6 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	styles: [`
 		:host {
 			display: block;
-			padding: var(--spacings-smallest);
 		}
 		.button:first-of-type {
 			display: block;
@@ -71,11 +70,11 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 			margin-top: var(--spacings-standard)
 		}`,
 		args.mod === 'mod-link mod-invert'
-			? ':host { background-color: black; }'
+			? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }'
 			: ''
 	],
 });
 
 export const Basic = Template.bind({});
 Basic.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false };
-
+Basic.parameters = { backgrounds: {default: 'dark'}};
