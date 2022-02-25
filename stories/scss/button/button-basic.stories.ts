@@ -13,7 +13,7 @@ export default {
 	title: 'SCSS/Button/Basic',
 	argTypes: {
 		mod: {
-			options: ['', ' mod-outline', 'mod-link', 'mod-link mod-invert'],
+			options: ['', 'mod-outline', 'mod-link', 'mod-link mod-invert'],
 			control: {
 				type: 'radio',
 			}
@@ -49,9 +49,9 @@ function getTemplate(args: ButtonBasicStory): string {
 
 	<div class="button-group">
 		<button class="button ${classes}" ${attributes}>${args.label}</button>
-			<button class="button ${classes}" ${attributes}>${args.label}</button>
-			<button class="button ${classes}" ${attributes}>${args.label}</button>
-			<button class="button mod-more ${classes}" ${attributes}></button>
+		<button class="button ${classes}" ${attributes}>${args.label}</button>
+		<button class="button ${classes}" ${attributes}>${args.label}</button>
+		<button class="button mod-more ${classes}" ${attributes}></button>
 	</div>
 	`
 }
@@ -60,12 +60,19 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`
+		:host {
+			display: block;
+			padding: var(--spacings-smallest);
+		}
 		.button:first-of-type {
 			display: block;
 		}
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
+		args.mod === 'mod-link mod-invert'
+			? ':host { background-color: black; }'
+			: ''
 	],
 });
 
