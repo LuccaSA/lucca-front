@@ -256,7 +256,9 @@ var icons = [
 	'weather_storm',
 	'weather_sun',
 	'weight',
-	'divide',
+	'divide',	
+	'crown',
+	'unarchive',
 
 ];
 
