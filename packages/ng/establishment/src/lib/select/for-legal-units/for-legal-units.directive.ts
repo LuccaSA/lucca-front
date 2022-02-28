@@ -11,14 +11,9 @@ import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 			useExisting: forwardRef(() => LuForLegalUnitsDirective),
 			multi: true,
 		},
-	]
+	],
 })
 export class LuForLegalUnitsDirective extends LuForGroupsDirective<ILuEstablishment, ILuLegalUnit> {
-
-	public override set attrGroupBy(fn: (item: ILuEstablishment) => ILuLegalUnit) {
-		throw new Error('Unsupported');
-	}
-
 	public constructor(
 		protected override _vcr: ViewContainerRef,
 		protected override _cdr: ChangeDetectorRef,
@@ -31,7 +26,7 @@ export class LuForLegalUnitsDirective extends LuForGroupsDirective<ILuEstablishm
 		const groups: ILuGroup<ILuEstablishment, ILuLegalUnit>[] = [];
 		items.forEach((item) => {
 			const legalUnit = item?.legalUnit;
-			let group = groups.find(g => g.key.id === legalUnit.id);
+			let group = groups.find((g) => g.key.id === legalUnit.id);
 			if (!group) {
 				group = { key: legalUnit, items: [] };
 				groups.push(group);

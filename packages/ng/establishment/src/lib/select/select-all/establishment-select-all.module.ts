@@ -6,19 +6,14 @@ import { LuEstablishmentSelectAllComponent } from './establishment-select-all.co
 import { luEstablishmentSelectAllTranslations } from './establishment-select-all.translate';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuInputModule,
-		LuOptionModule,
-	],
-	declarations: [
-		LuEstablishmentSelectAllComponent
-	],
-	exports: [
-		LuEstablishmentSelectAllComponent,
-	],
+	imports: [CommonModule, LuInputModule, LuOptionModule],
+	declarations: [LuEstablishmentSelectAllComponent],
+	exports: [LuEstablishmentSelectAllComponent],
 	providers: [
-		{ provide: LU_OPTION_SELECT_ALL_TRANSLATIONS, useValue: luEstablishmentSelectAllTranslations }
+		{
+			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
+			useValue: luEstablishmentSelectAllTranslations,
+		},
 	],
 })
-export class LuEstablishmentSelectAllModule { }
+export class LuEstablishmentSelectAllModule {}

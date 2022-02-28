@@ -1,9 +1,20 @@
-# Code is owned by ux team
-* @LuccaSA/ux-devs
+# Code is owned by dev team
+*                     @LuccaSA/guilde-front
 
 # dependencies are handled by admins
-**/package.json @LuccaSA/ux-admins
-**/package-lock.json @LuccaSA/ux-admins
+**/package.json       @LuccaSA/ux-admins
+**/package-lock.json  @LuccaSA/ux-admins
 
 # CI is handled by admins
-Jenkinsfile @LuccaSA/ux-admins
+Jenkinsfile           @LuccaSA/ux-admins
+.cd                   @LuccaSA/ux-admins
+
+#
+packages/ng           @LuccaSA/guilde-front
+packages/icons        @LuccaSA/ux-devs
+packages/scss         @LuccaSA/ux-devs
+
+# Storybook
+stories/ng            @LuccaSA/guilde-front
+stories/qa            @LuccaSA/ux-devs
+stories/scss          @LuccaSA/ux-devs

@@ -1,4 +1,4 @@
-<div class="lu-select-placeholder">{{placeholder}}</div>
+<div class="lu-select-placeholder">{{ placeholder }}</div>
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
 		<ng-container #display></ng-container>
@@ -7,7 +7,7 @@
 <div class="lu-select-suffix">
 	<lu-input-clearer></lu-input-clearer>
 </div>
-<span [class.chip]="multiple" *luDisplayer="let option">{{option.name}}</span>
+<span [class.chip]="multiple" *luDisplayer="let option">{{ option.name }}</span>
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
 		<lu-api-paged-searcher
@@ -19,5 +19,5 @@
 			[sort]="sort"
 		></lu-api-paged-searcher>
 	</header>
-	<lu-option *luForOptions="let option" [value]="option">{{option.name}}</lu-option>
+	<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 </lu-option-picker-advanced>

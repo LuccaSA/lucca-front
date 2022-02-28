@@ -8,19 +8,8 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { LuDateInputModule } from '../input/index';
 
 @NgModule({
-	imports: [
-		FormsModule,
-		CommonModule,
-		LuCalendarInputModule,
-		LuDateInputModule,
-		OverlayModule,
-		A11yModule,
-	],
-	exports: [
-		LuDatePickerComponent,
-	],
-	declarations: [
-		LuDatePickerComponent,
-	],
+	imports: [FormsModule, CommonModule, LuCalendarInputModule, LuDateInputModule, OverlayModule, A11yModule],
+	exports: [LuDatePickerComponent],
+	declarations: [LuDatePickerComponent],
 })
 export class LuDatePickerModule {}

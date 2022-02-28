@@ -9,25 +9,25 @@ export abstract class ALuOptionSelectAllLabel {
 	deselect: string;
 }
 
-export const luOptionSelectAllTranslations = {
+export const luOptionSelectAllTranslations: ILuTranslation<ILuOptionSelectAllLabel> = {
 	en: {
 		select: 'Select all',
 		deselect: 'Deselect all',
 	},
 	fr: {
 		select: 'Tout sélectionner',
-		deselect: 'Tout Déselectionner'
+		deselect: 'Tout Déselectionner',
 	},
 	de: {
 		select: 'Alle auswählen',
-		deselect: 'Alle abwählen'
+		deselect: 'Alle abwählen',
 	},
 	pt: {
 		select: 'Selecionar tudo',
-		deselect: 'Desselecionar tudo'
+		deselect: 'Desselecionar tudo',
 	},
 	es: {
 		select: 'Seleccionar todo',
-		deselect: 'Desmarcar todo'
+		deselect: 'Desmarcar todo',
 	},
-} as ILuTranslation<ILuOptionSelectAllLabel>;
+};

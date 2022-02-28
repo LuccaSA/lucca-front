@@ -15,7 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 		},
 	],
 })
-export class LuOptionFeederComponent<T = any> implements ILuOptionOperator<T> {
+export class LuOptionFeederComponent<T> implements ILuOptionOperator<T> {
 	outOptions$ = new BehaviorSubject<T[]>([]);
 	@Input() set options(options: T[]) {
 		this.outOptions$.next(options);

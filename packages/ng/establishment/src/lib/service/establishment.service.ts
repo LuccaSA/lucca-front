@@ -8,9 +8,13 @@ export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
 	protected override _api = `/organization/structure/api/establishments`;
 
 	protected _appInstanceId: number = null;
-	set appInstanceId(id: number) { this._appInstanceId = id; }
+	set appInstanceId(id: number) {
+		this._appInstanceId = id;
+	}
 	protected _operations: number[] = [];
-	set operations(ops: number[]) { this._operations = ops || []; } 
+	set operations(ops: number[]) {
+		this._operations = ops || [];
+	}
 	override get filters(): string[] {
 		const isScopeFiltered = this._appInstanceId && this._operations.length;
 
@@ -27,5 +31,7 @@ export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
 		this._filters = filters || [];
 	}
 
-	constructor(protected override _http: HttpClient) { super(_http); }
+	constructor(protected override _http: HttpClient) {
+		super(_http);
+	}
 }

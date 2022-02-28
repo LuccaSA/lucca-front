@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
@@ -8,9 +8,10 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './select.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldSelect extends FieldType {
 	get _options() {
-		return <any[]>this.to.options || [];
+		return (this.to.options || []) as { value: unknown; label: unknown; name: string }[];
 	}
 	override readonly formControl: FormControl;
 	focus() {

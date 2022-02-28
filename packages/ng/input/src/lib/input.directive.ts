@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 /**
@@ -8,11 +8,7 @@ import { NgControl } from '@angular/forms';
 	selector: '[luInput]',
 })
 export class LuInputDirective implements OnInit {
-	constructor(
-		protected _elementRef: ElementRef,
-		protected _renderer: Renderer2,
-		protected _ngControl: NgControl,
-	) {}
+	constructor(protected _elementRef: ElementRef, protected _renderer: Renderer2, protected _ngControl: NgControl) {}
 	protected isEmpty(value) {
 		if (typeof value === 'string') {
 			return value === '';
@@ -27,8 +23,8 @@ export class LuInputDirective implements OnInit {
 		}
 	}
 	ngOnInit() {
-		this._ngControl.valueChanges.subscribe(v => this.applyClasses(v));
-		const val = this._ngControl.value;
+		this._ngControl.valueChanges.subscribe((v) => this.applyClasses(v));
+		const val: unknown = this._ngControl.value;
 		this.applyClasses(val);
 	}
 }

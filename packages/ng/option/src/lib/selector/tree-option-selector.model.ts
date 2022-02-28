@@ -1,4 +1,4 @@
-import { ILuOptionSelector, ALuOptionSelector } from './option-selector.model';
+import { ALuOptionSelector, ILuOptionSelector } from './option-selector.model';
 
-export interface ILuTreeOptionSelector<T = any> extends ILuOptionSelector {}
-export abstract class ALuTreeOptionSelector<T = any> extends ALuOptionSelector implements ILuTreeOptionSelector<T> {}
+export type ILuTreeOptionSelector<T> = ILuOptionSelector<T>;
+export abstract class ALuTreeOptionSelector<T> extends ALuOptionSelector<T> implements ILuTreeOptionSelector<T> {}

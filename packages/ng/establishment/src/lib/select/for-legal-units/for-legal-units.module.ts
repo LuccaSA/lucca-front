@@ -3,6 +3,6 @@ import { LuForLegalUnitsDirective } from './for-legal-units.directive';
 
 @NgModule({
 	declarations: [LuForLegalUnitsDirective],
-	exports: [LuForLegalUnitsDirective]
+	exports: [LuForLegalUnitsDirective],
 })
-export class LuForLegalUnitsModule { }
+export class LuForLegalUnitsModule {}

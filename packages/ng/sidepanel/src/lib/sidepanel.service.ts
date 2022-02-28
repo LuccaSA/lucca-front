@@ -7,7 +7,8 @@ import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
 @Injectable()
 export class LuSidepanel<C extends ILuSidepanelConfig = ILuSidepanelConfig> extends LuModal<C> {
 	constructor(
-		@Inject(LU_SIDEPANEL_REF_FACTORY) protected override _factory: ILuPopupRefFactory,
+		@Inject(LU_SIDEPANEL_REF_FACTORY)
+		protected override _factory: ILuPopupRefFactory,
 		@Inject(LU_SIDEPANEL_CONFIG) protected override _config: ILuSidepanelConfig,
 	) {
 		super(_factory, _config);

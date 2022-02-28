@@ -1,4 +1,3 @@
-
 import { Directive, forwardRef, OnDestroy } from '@angular/core';
 
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';

@@ -6,19 +6,8 @@ import { LuApiSearcherModule } from '../searcher/index';
 import { LuApiSelectInputComponent } from './api-select-input.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		LuOptionPickerModule,
-		LuForOptionsModule,
-		LuApiSearcherModule,
-		LuInputClearerModule,
-		LuInputDisplayerModule,
-	],
-	declarations: [
-		LuApiSelectInputComponent,
-	],
-	exports: [
-		LuApiSelectInputComponent,
-	],
+	imports: [CommonModule, LuOptionPickerModule, LuForOptionsModule, LuApiSearcherModule, LuInputClearerModule, LuInputDisplayerModule],
+	declarations: [LuApiSelectInputComponent],
+	exports: [LuApiSelectInputComponent],
 })
-export class LuApiSelectInputModule { }
+export class LuApiSelectInputModule {}

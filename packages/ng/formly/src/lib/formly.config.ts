@@ -1,32 +1,35 @@
 import { ConfigOption } from '@ngx-formly/core';
 // inputs
 import {
-	LuFormlyFieldInput,
-	LuFormlyFieldDate,
-	LuFormlyFieldTextarea,
-	LuFormlyFieldSelect,
-	LuFormlyFieldUser,
 	LuFormlyFieldApi,
+	LuFormlyFieldCheckbox,
+	LuFormlyFieldDate,
 	LuFormlyFieldDepartment,
 	LuFormlyFieldEstablishment,
-	LuFormlyFieldCheckbox,
+	LuFormlyFieldInput,
+	LuFormlyFieldQualification,
 	LuFormlyFieldRadios,
-	LuFormlyFieldQualification
+	LuFormlyFieldSelect,
+	LuFormlyFieldTextarea,
+	LuFormlyFieldUser,
 } from './types/index';
 // wrappers
 import {
-	LuFormlyWrapperHelper, TemplateHelper,
-	LuFormlyWrapperTextfieldLayout,
-	LuFormlyWrapperSuffix, TemplateSuffix,
-	LuFormlyWrapperIcon, TemplateIcon,
+	LuFormlyWrapperCheckboxLayout,
 	LuFormlyWrapperError,
-	TemplateError,
+	LuFormlyWrapperHelper,
+	LuFormlyWrapperIcon,
 	// LuFormlyErrorMessage,
 	LuFormlyWrapperRadiosfieldLayout,
-	LuFormlyWrapperCheckboxLayout,
+	LuFormlyWrapperSuffix,
+	LuFormlyWrapperTextfieldLayout,
+	TemplateError,
+	TemplateHelper,
+	TemplateIcon,
+	TemplateSuffix,
 } from './wrappers/index';
 
-export const LU_FORMLY_CONFIG = {
+export const LU_FORMLY_CONFIG: ConfigOption = {
 	types: [
 		{
 			name: 'input',
@@ -76,13 +79,13 @@ export const LU_FORMLY_CONFIG = {
 		{
 			name: 'establishment',
 			component: LuFormlyFieldEstablishment,
-			wrappers: ['textfield-layout']
+			wrappers: ['textfield-layout'],
 		},
 		{
 			name: 'qualification',
 			component: LuFormlyFieldQualification,
-			wrappers: ['textfield-layout']
-		}
+			wrappers: ['textfield-layout'],
+		},
 	],
 	wrappers: [
 		{ name: 'helper', component: LuFormlyWrapperHelper },
@@ -94,10 +97,9 @@ export const LU_FORMLY_CONFIG = {
 		{ name: 'error', component: LuFormlyWrapperError },
 	],
 	manipulators: [
-
 		{ class: TemplateError, method: 'run' }, // fifth
 		{ class: TemplateHelper, method: 'run' }, // fourth
 		{ class: TemplateSuffix, method: 'run' }, // third
 		{ class: TemplateIcon, method: 'run' }, // second
 	],
-} as ConfigOption;
+};

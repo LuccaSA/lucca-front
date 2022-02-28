@@ -23,15 +23,14 @@ import { luUserSelectInputTranslations } from './user-select-input.translate';
 		LuUserHomonymsModule,
 		LuUserMeOptionModule,
 	],
-	declarations: [
-		LuUserSelectInputComponent,
-	],
-	exports: [
-		LuUserSelectInputComponent,
-	],
+	declarations: [LuUserSelectInputComponent],
+	exports: [LuUserSelectInputComponent],
 	providers: [
-		{ provide: LU_USER_SELECT_INPUT_TRANSLATIONS, useValue: luUserSelectInputTranslations },
+		{
+			provide: LU_USER_SELECT_INPUT_TRANSLATIONS,
+			useValue: luUserSelectInputTranslations,
+		},
 		LuUserSelectInputIntl,
-	]
+	],
 })
-export class LuUserSelectInputModule { }
+export class LuUserSelectInputModule {}

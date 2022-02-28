@@ -1,28 +1,44 @@
-import { Injectable } from '@angular/core';
-import { ILuApiItem, ILuApiCollectionResponse } from '../api.model';
-import { ALuApiService } from './api-service.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ILuApiCollectionResponse, ILuApiItem } from '../api.model';
+import { ALuApiService } from './api-service.model';
 
 const MAGIC_PAGE_SIZE = 20;
 
 @Injectable()
 export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
 	protected _api: string;
-	set api(api: string) { this._api = api; }
+	set api(api: string) {
+		this._api = api;
+	}
 	protected _fields = 'fields=id,name';
-	set fields(fields: string) { if (fields) { this._fields = `fields=${fields}`; } }
+	set fields(fields: string) {
+		if (fields) {
+			this._fields = `fields=${fields}`;
+		}
+	}
 	protected _filters: string[] = [];
-	set filters(filters: string[]) { if (filters) { this._filters = filters || []; } }
+	set filters(filters: string[]) {
+		if (filters) {
+			this._filters = filters || [];
+		}
+	}
 	protected _orderBy = 'orderBy=name,asc';
-	set orderBy(orderBy: string) { if (orderBy) { this._orderBy = `orderBy=${orderBy}`; } }
-
-	get url() {
-		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter(f => !!f).join('&')}`;
+	set orderBy(orderBy: string) {
+		if (orderBy) {
+			this._orderBy = `orderBy=${orderBy}`;
+		}
 	}
 
-	constructor(protected _http: HttpClient) { super(); }
+	get url() {
+		return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter((f) => !!f).join('&')}`;
+	}
+
+	constructor(protected _http: HttpClient) {
+		super();
+	}
 
 	getAll(filters: string[] = []): Observable<T[]> {
 		return this._get([this.url, ...filters].join('&'));
@@ -51,13 +67,10 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		return this._get(url);
 	}
 
-	protected _get(url): Observable<T[]> {
-		return this._http.get<ILuApiCollectionResponse<any>>(url)
-		.pipe(
-			map(response => response.data.items)
-		);
+	protected _get(url: string): Observable<T[]> {
+		return this._http.get<ILuApiCollectionResponse<T>>(url).pipe(map((response) => response.data.items));
 	}
-	protected _clueFilter(clue) {
+	protected _clueFilter(clue: string) {
 		const urlSafeClue = encodeURIComponent(clue);
 		return `name=like,${urlSafeClue}`;
 	}

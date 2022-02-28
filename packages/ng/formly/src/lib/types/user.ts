@@ -8,6 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './user.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldUser extends FieldType {
 	override readonly formControl: FormControl;
 

@@ -5,8 +5,9 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
 	selector: 'lu-formly-field-qualification',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
-	templateUrl: './qualification.html'
+	templateUrl: './qualification.html',
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldQualification extends FieldType {
 	override readonly formControl: FormControl;
 	focus() {

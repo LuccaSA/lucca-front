@@ -1,41 +1,34 @@
-import {
-	ChangeDetectorRef,
-	ViewContainerRef,
-	ElementRef,
-	Renderer2,
-} from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import { ALuPopoverTrigger, LuPopoverTarget, ILuPopoverTarget } from '@lucca-front/ng/popover';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { ChangeDetectorRef, ElementRef, Renderer2, ViewContainerRef, ViewRef } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 import { ILuClearer, ILuInput, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ILuInputWithPicker, ILuPickerPanel } from '@lucca-front/ng/picker';
+import { ALuPopoverTrigger, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { Subscription } from 'rxjs';
 
-export abstract class ALuSelectInput<T = any, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>>
-extends ALuPopoverTrigger<TPicker>
-implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
+export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuPopoverTrigger<TPicker> implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 	protected _subs = new Subscription();
 	constructor(
 		protected _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef,
+		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected _renderer: Renderer2,
 	) {
-		super(
-			_overlay,
-			_elementRef,
-			_viewContainerRef,
-		);
-		this.target = new LuPopoverTarget() as ILuPopoverTarget;
+		super(_overlay, _elementRef, _viewContainerRef);
+		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
 		this.target.position = 'below';
 		this.target.alignment = 'left';
 	}
 	protected _isContentInitialized = false;
 	protected _placeholder: string;
-	get placeholder() { return this._placeholder; }
-	set placeholder(p: string) { this._placeholder = p; }
+	get placeholder() {
+		return this._placeholder;
+	}
+	set placeholder(p: string) {
+		this._placeholder = p;
+	}
 	/**
 	 * contriol value accessor interface implementation
 	 */
@@ -55,7 +48,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		this._value = value;
 		this.render();
 		this.applyClasses();
-		if (!!this._picker) {
+		if (this._picker) {
 			this._picker.setValue(value);
 		}
 		this._changeDetectorRef.markForCheck();
@@ -65,17 +58,21 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T | T[]) => { };
-	registerOnChange(fn: any) {
+	protected _cvaOnChange = (v: T | T[]) => void v;
+	registerOnChange(fn: (v: T | T[]) => unknown) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	protected _onTouched = () => { };
-	registerOnTouched(fn: any) {
+	protected _onTouched = () => void {};
+	registerOnTouched(fn: () => unknown) {
 		this._onTouched = fn;
 	}
-	override set disabled(d) { this._disabled = d; }
-	override get disabled() { return this._disabled; }
+	override set disabled(d) {
+		this._disabled = d;
+	}
+	override get disabled() {
+		return this._disabled;
+	}
 	setDisabledState(disabled: boolean) {
 		this.disabled = disabled;
 		this._changeDetectorRef.markForCheck();
@@ -99,15 +96,17 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		picker.multiple = this._multiple;
 		this.subToPickerEvts();
 	}
-	protected get _picker() { return this.panel; }
+	protected get _picker() {
+		return this.panel;
+	}
 	protected set _clearer(clearer: ILuClearer<T>) {
 		if (!!clearer && !!clearer.onClear) {
 			this._subs.add(clearer.onClear.subscribe(() => this.setValue(this._multiple ? [] : undefined)));
 		}
 	}
 	protected subToPickerEvts() {
-		if (!!this.panel) {
-			this._subs.add(this.panel.onSelectValue.subscribe(value => this.setValue(value)));
+		if (this.panel) {
+			this._subs.add(this.panel.onSelectValue.subscribe((value) => this.setValue(value)));
 		}
 	}
 
@@ -143,7 +142,9 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		this._displayContainer = vcr;
 	}
 	protected render() {
-		if (!this._displayer || !this._isContentInitialized) { return; }
+		if (!this._displayer || !this._isContentInitialized) {
+			return;
+		}
 		if (this.useMultipleViews()) {
 			this.renderMultipleViews();
 		} else {
@@ -165,13 +166,13 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 		this._displayContainer.clear();
 	}
 	protected getView(value: T | T[]) {
-		if (!!this._displayer) {
+		if (this._displayer) {
 			return this._displayer.getViewRef(value);
 		}
 		return undefined;
 	}
-	protected displayView(view) {
-		if (!!view) {
+	protected displayView(view: ViewRef) {
+		if (view) {
 			this._displayContainer.insert(view);
 		}
 	}
@@ -179,8 +180,8 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 	protected renderMultipleViews() {
 		this.clearDisplay();
 		const values = <T[]>this.value || [];
-		const views = values.map(value => this.getView(value));
-		views.forEach(view => this.displayView(view));
+		const views = values.map((value) => this.getView(value));
+		views.forEach((view) => this.displayView(view));
 	}
 	// multiple
 	protected _multiple = false;
@@ -190,5 +191,7 @@ implements ControlValueAccessor, ILuInputWithPicker<T>, ILuInput {
 			this._picker.multiple = m;
 		}
 	}
-	get multiple() { return this._multiple; }
+	get multiple() {
+		return this._multiple;
+	}
 }

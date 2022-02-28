@@ -1,21 +1,18 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ElementRef, SkipSelf, Self, Optional, Inject, HostBinding, OnInit, OnDestroy, Output } from '@angular/core';
-import {
-	ALuOnOpenSubscriber,
-	ALuOnScrollBottomSubscriber,
-	ALuOnCloseSubscriber,
-	ILuOnOpenSubscriber,
-	ILuOnScrollBottomSubscriber,
-	ILuOnCloseSubscriber,
-} from '@lucca-front/ng/core';
-
-import { ALuOptionOperator } from '@lucca-front/ng/option';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, switchMap, catchError, share, startWith, mapTo, map, scan, filter, distinctUntilChanged } from 'rxjs/operators';
-import { ILuUser } from '../../user.model';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOptionOperator } from '@lucca-front/ng/option';
+import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { catchError, debounceTime, filter, map, mapTo, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
-import { Subject, Observable, Subscription, combineLatest, of, merge, BehaviorSubject } from 'rxjs';
+import { ILuUser } from '../../user.model';
 import { LuUserSearcherIntl } from './user-searcher.intl';
 import { ILuUserSearcherLabel } from './user-searcher.translate';
+
+interface UserPagedSearcherForm {
+	clue: string;
+	formerEmployees: boolean;
+}
 
 @Component({
 	selector: 'lu-user-paged-searcher',
@@ -49,21 +46,29 @@ import { ILuUserSearcherLabel } from './user-searcher.translate';
 		},
 	],
 })
-export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
-	implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber
-{
-
+export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implements OnInit, OnDestroy, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber {
 	private _service: LuUserV3Service<U>;
 	private _subs = new Subscription();
 
 	@HostBinding('class.position-fixed') fixed = true;
-	@ViewChild('searchInput', { read: ElementRef, static: true }) searchInput: ElementRef;
+	@ViewChild('searchInput', { read: ElementRef, static: true })
+	searchInput: ElementRef<HTMLInputElement>;
 
-	@Input() set fields(fields: string) { this._service.fields = fields; }
-	@Input() set filters(filters: string[]) { this._service.filters = filters; }
-	@Input() set orderBy(orderBy: string) { this._service.orderBy = orderBy; }
-	@Input() set appInstanceId(appInstanceId: number | string) { this._service.appInstanceId = appInstanceId; }
-	@Input() set operations(operations: number[]) { this._service.operations = operations; }
+	@Input() set fields(fields: string) {
+		this._service.fields = fields;
+	}
+	@Input() set filters(filters: string[]) {
+		this._service.filters = filters;
+	}
+	@Input() set orderBy(orderBy: string) {
+		this._service.orderBy = orderBy;
+	}
+	@Input() set appInstanceId(appInstanceId: number | string) {
+		this._service.appInstanceId = appInstanceId;
+	}
+	@Input() set operations(operations: number[]) {
+		this._service.operations = operations;
+	}
 	@Input() enableFormerEmployees = false;
 
 	@Output() clueChange: Observable<string>;
@@ -80,58 +85,51 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 	private _options: U[] = [];
 
 	constructor(
-		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: ALuUserService,
+		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
 		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
 		@Inject(LuUserSearcherIntl) public intl: ILuUserSearcherLabel,
-
 	) {
-		this._service = (hostService || selfService) as LuUserV3Service<U>;
+		this._service = hostService || selfService;
 
-		const clue = new FormControl('');
+		const clue: FormControl = new FormControl('');
 
 		this.form = new FormGroup({
 			clue,
 			formerEmployees: new FormControl(false),
 		});
 
-		this.clueChange = clue.valueChanges;
+		this.clueChange = clue.valueChanges as Observable<string>;
 	}
 
 	ngOnInit() {
-		const formValue$ = this.form.valueChanges.pipe(
-			startWith(this.form.value),
-		);
+		const formValue$ = this.form.valueChanges.pipe(startWith(this.form.value)) as Observable<UserPagedSearcherForm>;
 
 		const pager$ = this._page$.pipe(
-			scan(acc => acc + 1, 0),
+			scan((acc) => acc + 1, 0),
 			startWith(0),
 		);
 
-		const query$ = combineLatest([
-			formValue$.pipe(debounceTime(250)),
-			this._isOpened$,
-		]).pipe(
+		const query$ = combineLatest([formValue$.pipe(debounceTime(250)), this._isOpened$]).pipe(
 			filter(([, isOpened]) => isOpened),
-			switchMap(([val]) => pager$.pipe(map(page => [val, page]))),
+			switchMap(([val]) => pager$.pipe(map<number, [UserPagedSearcherForm, number]>((page) => [val, page]))),
 			share(),
 		);
 
 		const results$ = query$.pipe(
 			switchMap(([val, page]) => {
-				const filters = [];
+				const filters: string[] = [];
 				if (val.formerEmployees) {
 					filters.push(`formerEmployees=true`);
 				}
 				return this._service.searchPaged(val.clue, page, filters).pipe(
 					catchError(() => of([])),
-					map(items => [items, page] as [U[], number]),
-				)
+					map<U[], [U[], number]>((items) => [items, page]),
+				);
 			}),
 			share(),
 		);
 
-		const resultsSub = results$
-		.subscribe(([items, page]) => {
+		const resultsSub = results$.subscribe(([items, page]) => {
 			if (page === 0) {
 				this._options = [...items];
 			} else {
@@ -142,16 +140,11 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser>
 		});
 		this._subs.add(resultsSub);
 
-		this.loading$ = merge(
-			query$.pipe(mapTo(true)),
-			results$.pipe(mapTo(false)),
-		);
-		const loadingSub = this.loading$.subscribe(l => this._loading = l);
+		this.loading$ = merge(query$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
+		const loadingSub = this.loading$.subscribe((l) => (this._loading = l));
 		this._subs.add(loadingSub);
 
-		this.empty$ = this.outOptions$.pipe(
-			map(o => o.length === 0),
-		);
+		this.empty$ = this.outOptions$.pipe(map((o) => o.length === 0));
 	}
 	ngOnDestroy() {
 		this._subs.unsubscribe();

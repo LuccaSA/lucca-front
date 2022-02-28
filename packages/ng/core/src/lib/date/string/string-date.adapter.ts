@@ -7,25 +7,24 @@ import { ILuDateAdapter } from '../date-adapter.interface';
 /** bind to a string with iso 26001 format YYYY-MM-DD */
 @Injectable()
 export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDateAdapter<string> {
-
 	// i'm going to implement this by doing some inheritance by composition
 	// i'll just use the native date adapter and just parse/format to interface it with a string
 
 	private _nativeAdapter: LuNativeDateAdapter;
 
-	constructor(
-		@Inject(LOCALE_ID) private _locale: string,
-	) {
+	constructor(@Inject(LOCALE_ID) private _locale: string) {
 		super();
-		this._nativeAdapter = new LuNativeDateAdapter(this._locale, { useUtc: true });
+		this._nativeAdapter = new LuNativeDateAdapter(this._locale, {
+			useUtc: true,
+		});
 	}
 
 	forge(year: number, month: number, date: number): string {
-		return this.dateToString(this._nativeAdapter.forge(year, month, date))
+		return this.dateToString(this._nativeAdapter.forge(year, month, date));
 	}
 
 	forgeToday(): string {
-		return this.dateToString(this._nativeAdapter.forgeToday())
+		return this.dateToString(this._nativeAdapter.forgeToday());
 	}
 
 	forgeInvalid(): string {

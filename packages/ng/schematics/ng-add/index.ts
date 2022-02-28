@@ -3,7 +3,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { createPalettesOverrideScss, createShameScss, updateAngularJson, updateStylesScss } from './tasks';
 
 export function ngAdd(): Rule {
-	return async (tree: Tree, context: SchematicContext) => {
+	return (tree: Tree, context: SchematicContext) => {
 		context.addTask(new NodePackageInstallTask({ packageName: '@lucca-front/icons' }));
 		context.addTask(new NodePackageInstallTask({ packageName: '@lucca-front/scss' }));
 

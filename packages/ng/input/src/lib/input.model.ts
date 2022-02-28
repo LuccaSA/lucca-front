@@ -1,18 +1,16 @@
 import { ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
-export declare interface ILuInput extends ControlValueAccessor {}
+export type ILuInput = ControlValueAccessor;
 
-export abstract class ALuInput<T = any> implements ILuInput {
+export abstract class ALuInput<T, U extends HTMLElement = HTMLElement> implements ILuInput {
 	protected _placeholder: string;
-	get placeholder() { return this._placeholder; }
+	get placeholder() {
+		return this._placeholder;
+	}
 	protected _value: T;
-	constructor(
-		protected _changeDetectorRef: ChangeDetectorRef,
-		protected _elementRef: ElementRef,
-		protected _renderer: Renderer2,
-	) {}
-	setValue(value) {
+	constructor(protected _changeDetectorRef: ChangeDetectorRef, protected _elementRef: ElementRef<U>, protected _renderer: Renderer2) {}
+	setValue(value: T) {
 		this.value = value;
 		this._cvaOnChange(value);
 		this._onTouched();
@@ -31,13 +29,17 @@ export abstract class ALuInput<T = any> implements ILuInput {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T) => {};
-	registerOnChange(fn: any) {
+	protected _cvaOnChange: (value: T) => void = () => {
+		return;
+	};
+	registerOnChange(fn: (value: T) => void) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
-	protected _onTouched = () => {};
-	registerOnTouched(fn: any) {
+	protected _onTouched: () => void = () => {
+		return;
+	};
+	registerOnTouched(fn: () => void) {
 		this._onTouched = fn;
 	}
 	protected isEmpty() {

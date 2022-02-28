@@ -9,23 +9,15 @@ import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.token';
 import { luDateSelectInputTranslations } from './date-select-input.translate';
 
 @NgModule({
-	imports: [
-		LuDateAdapterModule,
-		LuDatePickerModule,
-		LuInputModule,
-		OverlayModule,
-		LuInputClearerModule,
-		LuInputDisplayerModule,
-	],
-	exports: [
-		LuDateSelectInputComponent,
-	],
-	declarations: [
-		LuDateSelectInputComponent,
-	],
+	imports: [LuDateAdapterModule, LuDatePickerModule, LuInputModule, OverlayModule, LuInputClearerModule, LuInputDisplayerModule],
+	exports: [LuDateSelectInputComponent],
+	declarations: [LuDateSelectInputComponent],
 	providers: [
 		LuDateSelectInputIntl,
-		{ provide: LU_DATE_SELECT_INPUT_TRANSLATIONS, useValue: luDateSelectInputTranslations },
-	]
+		{
+			provide: LU_DATE_SELECT_INPUT_TRANSLATIONS,
+			useValue: luDateSelectInputTranslations,
+		},
+	],
 })
 export class LuDateSelectInputModule {}

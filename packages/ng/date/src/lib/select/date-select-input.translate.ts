@@ -17,7 +17,7 @@ export abstract class ALuDateSelectInputLabel {
 	formatYear: string;
 }
 
-export const luDateSelectInputTranslations = {
+export const luDateSelectInputTranslations: ILuTranslation<ILuDateSelectInputLabel> = {
 	en: {
 		placeholderDay: 'dd/mm/yyyy',
 		placeholderMonth: 'mm/yyyy',
@@ -35,7 +35,6 @@ export const luDateSelectInputTranslations = {
 		formatYear: 'y',
 	},
 	fr: {
-		placeholder: 'jj/mm/aaaa',
 		placeholderDay: 'jj/mm/aaaa',
 		placeholderMonth: 'mm/aaaa',
 		placeholderYear: 'aaaa',
@@ -43,4 +42,4 @@ export const luDateSelectInputTranslations = {
 		formatMonth: 'MM/y',
 		formatYear: 'y',
 	},
-} as ILuTranslation<ILuDateSelectInputLabel>;
+};

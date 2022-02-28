@@ -13,12 +13,28 @@ import { LuUserModule } from '@lucca-front/ng/user';
 import { FormlyModule } from '@ngx-formly/core';
 import { LU_FORMLY_CONFIG } from './formly.config';
 import {
-	LuFormlyFieldApi, LuFormlyFieldCheckbox, LuFormlyFieldDate, LuFormlyFieldDepartment, LuFormlyFieldEstablishment, LuFormlyFieldInput, LuFormlyFieldRadios, LuFormlyFieldSelect, LuFormlyFieldTextarea, LuFormlyFieldUser, LuFormlyFieldQualification
+	LuFormlyFieldApi,
+	LuFormlyFieldCheckbox,
+	LuFormlyFieldDate,
+	LuFormlyFieldDepartment,
+	LuFormlyFieldEstablishment,
+	LuFormlyFieldInput,
+	LuFormlyFieldRadios,
+	LuFormlyFieldSelect,
+	LuFormlyFieldTextarea,
+	LuFormlyFieldUser,
+	LuFormlyFieldQualification,
 } from './types/index';
 import {
-	LuFormlyErrorMessage, LuFormlyWrapperCheckboxLayout, LuFormlyWrapperError, LuFormlyWrapperHelper, LuFormlyWrapperIcon, LuFormlyWrapperRadiosfieldLayout, LuFormlyWrapperSuffix, LuFormlyWrapperTextfieldLayout
+	LuFormlyErrorMessage,
+	LuFormlyWrapperCheckboxLayout,
+	LuFormlyWrapperError,
+	LuFormlyWrapperHelper,
+	LuFormlyWrapperIcon,
+	LuFormlyWrapperRadiosfieldLayout,
+	LuFormlyWrapperSuffix,
+	LuFormlyWrapperTextfieldLayout,
 } from './wrappers/index';
-
 
 /** HACK to avoid a 'Function calls are not supported in decorators' error */
 export const LuFormlyChild = FormlyModule.forChild(LU_FORMLY_CONFIG);
@@ -65,4 +81,4 @@ export const LuFormlyChild = FormlyModule.forChild(LU_FORMLY_CONFIG);
 		LuFormlyChild,
 	],
 })
-export class LuFormlyModule { }
+export class LuFormlyModule {}

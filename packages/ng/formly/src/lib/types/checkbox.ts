@@ -8,6 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 	templateUrl: './checkbox.html',
 	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldCheckbox extends FieldType {
 	override readonly formControl: FormControl;
 	focus() {
