@@ -1,12 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 
 @Component({
 	selector: 'navSideLegacy-stories',
 	templateUrl: './navSideLegacy.stories.html',
+	styles: [
+		`.navSide {
+			position: relative;
+			height: 40rem;
+		}`
+	]
 }) class NavSideLegacyStory {
 	@Input() withBanner: boolean = false;
 	@Input() compact: boolean = false;
@@ -23,7 +29,7 @@ export default {
 	title: 'SCSS/NavSideLegacy',
 	component: NavSideLegacyStory,
 	argTypes: {
-		
+
 	},
 	decorators: [
 		moduleMetadata({
@@ -39,7 +45,7 @@ const template: Story<NavSideLegacyStory> = (args: NavSideLegacyStory) => ({
 
 export const basic = template.bind({});
 
-basic.args = {	
+basic.args = {
 	firstSubMenuOpened: false,
 	secondSubMenuOpened: true,
 	withBanner: false,

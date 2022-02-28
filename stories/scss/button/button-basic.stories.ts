@@ -1,27 +1,19 @@
-import { Component, Input } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
-
-@Component({
-	selector: 'button-basic-stories',
-	templateUrl: './button-basic.stories.html',
-}) class ButtonBasicStory {
-	@Input() label: string;
-	@Input() mod: string = '';
-	@Input() palette: string = '';
-	@Input() state: string = '';
-	@Input() size: string = '';
-	@Input() disabled: boolean = false;
-	// @Input() more: boolean = false; // lucca-icons needed
+interface ButtonBasicStory {
+	label: string;
+	mod: string;
+	palette: string;
+	state: string;
+	size: string;
+	disabled: boolean;
 }
 
 export default {
 	title: 'SCSS/Button/Basic',
-	component: ButtonBasicStory,
 	argTypes: {
 		mod: {
-			options: ['', ' mod-outline', 'mod-link', 'mod-link mod-invert'],
+			options: ['', 'mod-outline', 'mod-link', 'mod-link mod-invert'],
 			control: {
 				type: 'radio',
 			}
@@ -44,20 +36,45 @@ export default {
 				type: 'radio',
 			}
 		},
-		
+
 	},
-	decorators: [
-		moduleMetadata({
-			entryComponents: [ButtonBasicStory],
-			imports: [BrowserModule],
-		})
-	]
 } as Meta;
 
-const template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
+function getTemplate(args: ButtonBasicStory): string {
+	const classes = [args.mod, args.state, args.palette, args.size].filter(Boolean).join(' ');
+	const attributes = args.disabled ? `disabled="disabled"` : '';
+
+	return `
+	<button class="button ${classes}" ${attributes}>${args.label}</button>
+
+	<div class="button-group">
+		<button class="button ${classes}" ${attributes}>${args.label}</button>
+		<button class="button ${classes}" ${attributes}>${args.label}</button>
+		<button class="button ${classes}" ${attributes}>${args.label}</button>
+		<button class="button mod-more ${classes}" ${attributes}></button>
+	</div>
+	`
+}
+
+const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
+	template: getTemplate(args),
+	styles: [`
+		:host {
+			display: block;
+		}
+		.button:first-of-type {
+			display: block;
+		}
+		.button-group {
+			margin-top: var(--spacings-standard)
+		}`,
+		args.mod === 'mod-link mod-invert'
+			? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }'
+			: ''
+	],
 });
 
-export const def = template.bind({});
-def.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false };
-
+export const Basic = Template.bind({});
+Basic.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false };
+Basic.parameters = { backgrounds: {default: 'dark'}};

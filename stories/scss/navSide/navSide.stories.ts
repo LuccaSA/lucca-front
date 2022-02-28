@@ -1,11 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'navSide-stories',
 	templateUrl: './navSide.stories.html',
+	styles: [
+		`.navSide {
+			position: relative;
+			height: 40rem;
+		}`
+	]
 }) class NavSideStory {
 	@Input() withBanner: boolean = false;
 	@Input() compact: boolean = false;
@@ -23,14 +29,14 @@ export default {
 	title: 'SCSS/NavSide',
 	component: NavSideStory,
 	argTypes: {
-		
+
 	},
 	decorators: [
 		moduleMetadata({
 			entryComponents: [NavSideStory],
 			imports: [BrowserModule, CommonModule],
 		})
-	]
+	],
 } as Meta;
 
 const template: Story<NavSideStory> = (args: NavSideStory) => ({
