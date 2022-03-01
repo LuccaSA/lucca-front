@@ -77,4 +77,3 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 
 export const Basic = Template.bind({});
 Basic.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false };
-Basic.parameters = { backgrounds: {default: 'dark'}};
