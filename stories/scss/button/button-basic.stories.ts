@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface ButtonBasicStory {
-	label: string;
 	mod: string;
 	palette: string;
 	state: string;
@@ -45,12 +44,12 @@ function getTemplate(args: ButtonBasicStory): string {
 	const attributes = args.disabled ? `disabled="disabled"` : '';
 
 	return `
-	<button class="button ${classes}" ${attributes}>${args.label}</button>
+	<button class="button ${classes}" ${attributes}>Bouton</button>
 
 	<div class="button-group">
-		<button class="button ${classes}" ${attributes}>${args.label}</button>
-		<button class="button ${classes}" ${attributes}>${args.label}</button>
-		<button class="button ${classes}" ${attributes}>${args.label}</button>
+		<button class="button ${classes}" ${attributes}>Bouton</button>
+		<button class="button ${classes}" ${attributes}>Bouton</button>
+		<button class="button ${classes}" ${attributes}>Bouton</button>
 		<button class="button mod-more ${classes}" ${attributes}></button>
 	</div>
 	`
@@ -76,4 +75,4 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { label: 'label', mod: '', size: '', state: '', palette: '', disabled: false };
+Basic.args = { mod: '', size: '', state: '', palette: '', disabled: false };
