@@ -22,6 +22,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	get cancelLabel() {
 		return this._componentInstance.cancelLabel || this.intl.cancel;
 	}
+	get closeLabel() {
+		return this.intl.close;
+	}
 	get isSubmitDisabled() {
 		return this._componentInstance.submitDisabled;
 	}
