@@ -32,7 +32,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ActionBasicStory): string {
-	const classes = [args.mod, args.state, args.palette, args.size].filter(Boolean).join(' ');
+	const classes = [args.mod, args.state, args.palette].filter(Boolean).join(' ');
 	const attributes = args.disabled ? `disabled="disabled"` : '';
 
 	return `
