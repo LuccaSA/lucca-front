@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface ActionBasicStory {
 	mod: string;
 	palette: string;
-	state: string;
+	loading: boolean;
 	disabled: boolean;
 }
 
@@ -22,21 +22,21 @@ export default {
 				type: 'radio',
 			}
 		},
-		state: {
-			options: ['', 'is-loading'],
+		loading: {
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			}
 		},
 	},
 } as Meta;
 
 function getTemplate(args: ActionBasicStory): string {
-	const classes = [args.mod, args.state, args.palette].filter(Boolean).join(' ');
+	const classes = [args.mod, args.palette].filter(Boolean).join(' ');
 	const attributes = args.disabled ? `disabled="disabled"` : '';
+	const loading = args.loading ? `is-loading` : '';
 
 	return `
-	<button type="button" class="actionIcon ${classes}" luTooltip="Modifier" ${attributes}>
+	<button type="button" class="actionIcon ${classes} ${loading}" luTooltip="Modifier" ${attributes}>
 		<span aria-hidden="true" class="lucca-icon icon-edit"></span>
 		<span class="u-mask">Modifier</span>
 	</button>
@@ -57,4 +57,4 @@ const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '', state: '', palette: '', disabled: false };
+Basic.args = { mod: '', loading: false, palette: '', disabled: false };
