@@ -1,44 +1,33 @@
-import { Component, Input } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
-
-@Component({
-	selector: 'label-basic-stories',
-	templateUrl: './label-basic.stories.html',
-}) class LabelBasicStory {
-	@Input() label: string;
-	@Input() palette: string = '';
-	@Input() isNumber: boolean = false;
+interface LabelBasicStory {
+	palette: string;
 }
 
 export default {
-	title: 'SCSS/Label',
-	component: LabelBasicStory,
+	title: 'SCSS/Label/Basic',
 	argTypes: {
-		isNumber: {
-			control: {
-				type: 'boolean',
-			},
-		},
 		palette: {
-			options: ['palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
 			}
 		},
 	},
-	decorators: [
-		moduleMetadata({
-			entryComponents: [LabelBasicStory],
-			imports: [BrowserModule],
-		})
-	]
 } as Meta;
 
-const template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
+function getTemplate(args: LabelBasicStory): string {
+	const classes = [args.palette].filter(Boolean).join(' ');
+	return `
+		<span class="label ${classes}">Label</span>
+		<span class="label ${classes} mod-number">7</span>
+	`
+}
+
+const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
 	props: args,
+	template: getTemplate(args),
 });
 
-export const basic = template.bind({});
-basic.args = { label: 'label', isNumber: false, palette: 'palette-primary' };
+export const Basic = Template.bind({});
+Basic.args = { palette: '' };

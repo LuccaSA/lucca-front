@@ -1,47 +1,39 @@
-import { Component, Input } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
-
-@Component({
-	selector: 'tags-stories',
-	templateUrl: './tags.stories.html',
-}) class TagsStory {
-	@Input() label: string;
-	@Input() mod: string = '';
-	@Input() palette: string = '';
+interface TagsBasicStory {
+	palette: string;
+	clickable: boolean;
 }
 
 export default {
-	title: 'SCSS/Tags',
-	component: TagsStory,
+	title: 'SCSS/Tags/Basic',
 	argTypes: {
-		mod: {
-			options: ['', ' mod-clickable'],
-			control: {
-				type: 'radio',
-			}
-		},
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
 			}
 		},
+		clickable: {
+			control: {
+				type: 'boolean',
+			}
+		},
 	},
-	decorators: [
-		moduleMetadata({
-			entryComponents: [TagsStory],
-			imports: [BrowserModule],
-		})
-	]
 } as Meta;
 
-const template: Story<TagsStory> = (args: TagsStory) => ({
+function getTemplate(args: TagsBasicStory): string {
+	const classes = [args.palette].filter(Boolean).join(' ');
+	const clickable = args.clickable ? `mod-clickable` : '';
+	return `
+		<span class="tag ${classes} ${clickable}">Tag</span>
+	`
+}
+
+const Template: Story<TagsBasicStory> = (args: TagsBasicStory) => ({
 	props: args,
+	template: getTemplate(args),
 });
 
-export const def = template.bind({});
-def.args = { label: 'label', mod: '', palette: '' };
-
-
+export const Basic = Template.bind({});
+Basic.args = { palette: '', clickable: false };
