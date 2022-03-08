@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface LabelBasicStory {
+interface CalloutKillableStory {
 	palette: string;
 }
 
 export default {
-	title: 'SCSS/Label/Basic',
+	title: 'SCSS/Callout/Killable',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
@@ -16,18 +16,20 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: LabelBasicStory): string {
+function getTemplate(args: CalloutKillableStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
 	return `
-		<span class="label ${classes}">Label</span>
-		<span class="label ${classes} mod-number">7</span>
+	<div class="callout ${classes}">
+		<button class="callout-kill"></button>
+		Je suis un callout supprimable
+	</div>
 	`
 }
 
-const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
+const Template: Story<CalloutKillableStory> = (args: CalloutKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { palette: '' };
+export const Killable = Template.bind({});
+Killable.args = { palette: '' };
