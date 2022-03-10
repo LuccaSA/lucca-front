@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TableActionsStory {
-	palette: string;
 }
 
 export default {

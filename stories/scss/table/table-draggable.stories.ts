@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TableDraggableStory {
-	palette: string;
 }
 
 export default {

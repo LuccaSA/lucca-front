@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TableSortableStory {
-	palette: string;
 }
 
 export default {

@@ -69,4 +69,4 @@ const Template: Story<TimelinesBasicStory> = (args: TimelinesBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { state: '', number: false; };
+Basic.args = { state: '', number: false };
