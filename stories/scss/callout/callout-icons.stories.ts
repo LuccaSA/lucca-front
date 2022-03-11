@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: CalloutIconStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<div class="callout mod-icon">
 		<div class="callout-icon">
