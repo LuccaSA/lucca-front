@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableSortableStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<table class="table">
 		<thead class="table-head">

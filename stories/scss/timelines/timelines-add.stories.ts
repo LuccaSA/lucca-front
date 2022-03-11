@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TimelinesAddStepStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<ol class="timeline mod-smallNumber mod-vertical mod-add">
 		<li class="timeline-step">

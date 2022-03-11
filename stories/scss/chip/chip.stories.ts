@@ -8,7 +8,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<div class="chip">
 		Ned Stark

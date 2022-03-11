@@ -48,7 +48,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableBasicStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	const clickable = args.clickable ? `mod-clickable` : '';
 	const zebra = args.zebra ? `mod-zebra` : '';
 	const alignTop = args.alignTop ? `mod-alignTop` : '';

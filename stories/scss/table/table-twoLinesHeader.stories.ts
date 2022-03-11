@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableTwoLinesHeaderStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<table class="table">
 		<thead class="table-head">

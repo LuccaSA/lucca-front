@@ -8,7 +8,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: BreadcrumbsCompactStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
 		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>

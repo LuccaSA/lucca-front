@@ -16,7 +16,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TimelinesVerticalStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	const number = args.number ? `mod-number mod-smallNumber` : '';
 	return `
 	<section class="timeline mod-vertical ${number}">

@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableStickyColumnsStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<div class="demo-wrapper">
 		<table class="table mod-layoutFixed mod-stickyColumn">

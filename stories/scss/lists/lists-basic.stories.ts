@@ -16,7 +16,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: ListBasicStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	const clickable = args.clickable ? `mod-clickable` : '';
 	return `
 	<ul class="list">

@@ -11,7 +11,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableCardStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<div class="card">
 		<table class="table mod-card">

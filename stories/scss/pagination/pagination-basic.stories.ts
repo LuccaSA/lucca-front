@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: PaginationBasicStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<nav class="pagination" role="navigation" aria-labelledby="pagination-count">
 		<div id="pagination-count" class="pagination-count">

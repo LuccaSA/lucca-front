@@ -10,7 +10,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: ListDraggableStory): string {
-	const classes = [].filter(Boolean).join(' ');
 	return `
 	<ul class="list">
 		<li class="list-item mod-draggable">
