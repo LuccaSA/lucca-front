@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/angular';
 
 interface GaugeBasicStory {
 	palette: string;
+	thin: boolean;
 }
 
 export default {
@@ -11,6 +12,11 @@ export default {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
+			}
+		},
+		thin: {
+			control: {
+				type: 'boolean',
 			}
 		},
 	},
