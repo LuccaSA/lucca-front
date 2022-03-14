@@ -9,7 +9,7 @@ export default {
 	title: 'SCSS/Timelines/Basic',
 	argTypes: {
 		state: {
-			options: ['', 'u-textWarning', 'u-textSuccess'],
+			options: ['', 'success', 'warning'],
 			control: {
 				type: 'radio',
 			}
@@ -23,15 +23,24 @@ export default {
 } as Meta;
 
 function getTemplate(args: TimelinesBasicStory): string {
-	const classes = [args.state].filter(Boolean).join(' ');
+	let stateGauge = '';
+	let stateTxt = '';
+	if (args.state === 'warning') {
+		stateGauge = 'palette-warning';
+		stateTxt = 'u-textWarning';
+	}
+	else if (args.state === 'success') {
+		stateGauge = 'palette-success';
+		stateTxt = 'u-textSuccess';
+	}
 	const number = args.number ? `mod-number` : '';
 	return `
-	<ol class="timeline ${classes} ${number}">
+	<ol class="timeline ${stateTxt} ${number}">
 		<li class="timeline-step">
 			<span class="timeline-step-title">
 				<a href="#" class="timeline-step-title-action">Previous step</a>
 			</span>
-			<div class="gauge mod-thin">
+			<div class="gauge mod-thin ${stateGauge}">
 				<div class="gauge-bar"></div>
 			</div>
 		</li>
@@ -39,7 +48,7 @@ function getTemplate(args: TimelinesBasicStory): string {
 			<span class="timeline-step-title">
 				Current step
 			</span>
-			<div class="gauge mod-thin">
+			<div class="gauge mod-thin ${stateGauge}">
 				<div class="gauge-bar" style="width: 50%"></div>
 			</div>
 		</li>
