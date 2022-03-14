@@ -2,6 +2,9 @@ import { Meta, Story } from '@storybook/angular';
 
 interface LoadingsBasicStory {
 	label: boolean;
+	block: boolean;
+	big: boolean;
+	invert: boolean;
 }
 
 export default {
