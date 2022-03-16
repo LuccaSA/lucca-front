@@ -336,11 +336,6 @@
 		> *:not(.is-loading) {
 			opacity: 0;
 		}
-
-		> *:focus,
-		> *:focus-within {
-			opacity: 1;
-		}
 	}
 
 	&.mod-alignRight {
@@ -377,7 +372,8 @@
 
 .table-head-row,
 .table-body-row {
-	&:hover {
+	&:hover,
+	&:focus-within {
 		.table-body-row-cell,
 		.table-head-row-cell {
 			&.mod-actions {
