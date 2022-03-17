@@ -3,7 +3,8 @@
 <!-- Basics -->
 <section class="contentSection">
 	<p>Toasts allow you to show callback on a corner of your app.</p>
-	<lu-toasts [sources]="[toastError$]"></lu-toasts>
+	<lu-toasts [sources]="[toastError$]" [bottom]="isBottom"></lu-toasts>
+
 	<h4>Generate them thanks to a button</h4>
 	<button type="button" class="button palette-warning" (click)="createToast('Warning')">
 		Warning toast with default auto kill ({{ defaultToastDuration }}ms)
@@ -14,5 +15,12 @@
 	<h4 class="u-marginTopStandard">Generate them thanks to observable creations</h4>
 	<button type="button" class="button palette-primary" (click)="notifyError()">Notify error</button>
 	The notified error is "{{ error$ | async}}"
+
+	<h4 class="u-marginTopStandard">Change the toast position (bottom or top by default)</h4>
+	<label class="checkbox">
+		<input class="checkbox-input" type="checkbox" name="checkboxList1" [(ngModel)]="isBottom" #ctrl="ngModel">
+		<span class="checkbox-label">Bottom position</span>
+	</label>
+
 
 </section>

@@ -1,4 +1,4 @@
-<div class="toasts" aria-live="polite">
+<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom">
 
 	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast"
 			 class="toasts-item"

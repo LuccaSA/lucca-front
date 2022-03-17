@@ -12,6 +12,7 @@ import { ILuToastLabel } from "./toasts.translate";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuToastsComponent implements OnDestroy {
+	@Input() public bottom = false;
 	@Input() public set sources(sources: Array<Observable<LuToastInput>>) {
 		merge(...sources)
 			.pipe(takeUntil(this.destroy$))

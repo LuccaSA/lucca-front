@@ -109,6 +109,11 @@
 			top: _theme("spacings.smaller");
 		}
 	}
+
+	&.mod-bottom {
+		top: auto;
+		bottom: _theme('spacings.standard');
+	}
 }
 
 .toasts-item-kill {

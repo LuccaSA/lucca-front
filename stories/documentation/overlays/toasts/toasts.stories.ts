@@ -3,12 +3,15 @@ import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, Lu
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from "rxjs";
 import { map } from "rxjs/operators";
+import { FormsModule } from "@angular/forms";
 
 @Component({
 	selector: 'toasts-stories',
 	templateUrl: './toasts.stories.html',
 })
 class ToastsStory implements OnInit, OnDestroy {
+
+	public isBottom = false;
 
 	public defaultToastDuration = defaultToastDuration;
 	public toastError$: Observable<LuToastInput>;
@@ -56,7 +59,7 @@ export default {
 	component: ToastsStory,
 	decorators: [
 		moduleMetadata({
-			imports: [LuToastsModule],
+			imports: [LuToastsModule, FormsModule],
 			declarations: [ToastsStory]
 		})
 	]
