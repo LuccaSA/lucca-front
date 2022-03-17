@@ -3,7 +3,7 @@ import { BehaviorSubject, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { defaultToastDuration, LuToast, LuToastInput } from './toasts.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LuToastsService {
 	public toasts$ = new BehaviorSubject<LuToast[]>([]);
 
@@ -22,7 +22,7 @@ export class LuToastsService {
 	}
 
 	public removeToast(toast: LuToast): void {
-		const updatedToasts = this.toasts$.value.filter(t => t.id !== toast.id);
+		const updatedToasts = this.toasts$.value.filter((t) => t.id !== toast.id);
 		this.toasts$.next(updatedToasts);
 	}
 
@@ -32,11 +32,9 @@ export class LuToastsService {
 
 	private getToast(toastInput: LuToastInput): LuToast {
 		const id = this.generateId();
-		const duration = this.isOnlyDismissibleManually(toastInput)
-			? toastInput.duration
-			: toastInput.duration ?? defaultToastDuration;
+		const duration = this.isOnlyDismissibleManually(toastInput) ? toastInput.duration : toastInput.duration ?? defaultToastDuration;
 
-		return {...toastInput, id, duration};
+		return { ...toastInput, id, duration };
 	}
 
 	private generateId(): string {

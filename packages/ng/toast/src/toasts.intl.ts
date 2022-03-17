@@ -1,7 +1,7 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { ALuIntl, ILuTranslation } from '@lucca-front/ng/core';
 import { ILuToastLabel } from './toasts.translate';
-import { LU_TOAST_TRANSLATIONS } from "./toasts.token";
+import { LU_TOAST_TRANSLATIONS } from './toasts.token';
 
 @Injectable()
 export class LuToastIntl extends ALuIntl<ILuToastLabel> {
