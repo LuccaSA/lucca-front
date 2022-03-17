@@ -11,7 +11,16 @@
 
 		<span [innerHtml]="toast.message"> </span>
 
-		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)"></button>
+		<button type="button" class="toasts-item-kill mod-withCircularGauge" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
+			<span class="lucca-icon icon-cross size-smaller" aria-hidden="true"></span>
+			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
+				<svg viewBox="0 0 32 32">
+					<circle r="16" cx="16" cy="16" [style.animation-duration]="toast.duration + 'ms'" />
+				</svg>
+			</div>
+			<span class="u-mask">Fermer</span>
+		</button>
+
 	</div>
 
 </div>

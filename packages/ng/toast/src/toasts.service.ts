@@ -27,7 +27,7 @@ export class LuToastsService {
 		toast.onClose?.();
 	}
 
-	private isOnlyDismissibleManually(toast: LuToastInput): boolean {
+	public isOnlyDismissibleManually(toast: LuToastInput): boolean {
 		return toast.duration === null;
 	}
 

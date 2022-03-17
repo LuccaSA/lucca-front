@@ -33,4 +33,8 @@ export class LuToastsComponent {
 	public trackToast(_index: number, toast: LuToast): string {
 		return toast.id;
 	}
+
+	public isOnlyDismissibleManually(toast: LuToast): boolean {
+		return this.toastsService.isOnlyDismissibleManually(toast);
+	}
 }
