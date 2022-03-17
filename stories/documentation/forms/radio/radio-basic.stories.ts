@@ -33,9 +33,9 @@ function getTemplate(args: RadiosBasicStory): string {
 	const row = args.row ? `mod-row` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	return `
-	<fieldset class="radiosfield">
-		<legend class="radiosfield-label">Liste de radios</legend>
-		<div class="radiosfield-input ${row}">
+	<fieldset class="checkboxesfield">
+		<legend class="checkboxesfield-label">Liste de radios</legend>
+		<div class="checkboxesfield-input ${row}">
 			<div>
 				<label class="radio ${classes}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled} checked>
