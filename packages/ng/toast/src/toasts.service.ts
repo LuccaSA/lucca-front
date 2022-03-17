@@ -24,7 +24,6 @@ export class LuToastsService {
 	public removeToast(toast: LuToast): void {
 		const updatedToasts = this.toasts$.value.filter(t => t.id !== toast.id);
 		this.toasts$.next(updatedToasts);
-		toast.onClose?.();
 	}
 
 	public isOnlyDismissibleManually(toast: LuToastInput): boolean {

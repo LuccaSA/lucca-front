@@ -10,7 +10,6 @@ export interface LuToastInput {
 	 * Null means manual dismiss only
 	 */
 	duration?: number | null;
-	onClose?: () => void;
 }
 
 export interface LuToast extends LuToastInput {
