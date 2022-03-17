@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy } from '@angular/core';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
 import { merge, Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { LuToastIntl } from "./toasts.intl";
+import { ILuToastLabel } from "./toasts.translate";
 
 @Component({
 	selector: 'lu-toasts',
@@ -20,7 +22,10 @@ export class LuToastsComponent implements OnDestroy {
 
 	private destroy$ = new Subject<void>()
 
-	constructor(private toastsService: LuToastsService) {}
+	constructor(
+		@Inject(LuToastIntl) public intl: ILuToastLabel,
+		private toastsService: LuToastsService
+	) {}
 
 	public ngOnDestroy(): void {
 		this.destroy$.next();
