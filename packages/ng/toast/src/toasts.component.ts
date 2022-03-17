@@ -1,16 +1,31 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LuToast, LuToastType } from './toasts.model';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
+import { merge, Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuToastsComponent {
+export class LuToastsComponent implements OnDestroy {
+	@Input() public set sources(sources: Array<Observable<LuToastInput>>) {
+		merge(...sources)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(toast => this.toastsService.addToast(toast));
+	}
+
 	public toasts$ = this.toastsService.toasts$;
 
+	private destroy$ = new Subject<void>()
+
 	constructor(private toastsService: LuToastsService) {}
+
+	public ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 
 	public iconClassByToastType: Record<LuToastType, string> = {
 		Info: 'icon-info',

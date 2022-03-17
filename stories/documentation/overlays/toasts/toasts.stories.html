@@ -3,8 +3,9 @@
 <!-- Basics -->
 <section class="contentSection">
 	<p>Toasts allow you to show callback on a corner of your app.</p>
-	<lu-toasts></lu-toasts>
-	<button type="button" class="button palette-primary" (click)="toast('Warning')">Generate warning toast with default auto kill</button>
-	<button type="button" class="button palette-primary" (click)="toast('Success', 2000)">Generate success toast with auto kill</button>
-	<button type="button" class="button palette-primary" (click)="toast('Error', null)">Generate error toast without auto kill</button>
+	<lu-toasts [sources]="[toastError$]"></lu-toasts>
+	<button type="button" class="button palette-primary" (click)="createToast('Warning')">Generate warning toast with default auto kill</button>
+	<button type="button" class="button palette-primary" (click)="createToast('Success', 2000)">Generate success toast with auto kill</button>
+	<button type="button" class="button palette-primary" (click)="createToast('Info', null)">Generate info toast without auto kill</button>
+	<button type="button" class="button palette-primary" (click)="createToastSource()">Generate error toast with observable source</button>
 </section>
