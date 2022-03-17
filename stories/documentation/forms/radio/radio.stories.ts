@@ -1,45 +1,62 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
-
-@Component({
-	selector: 'radio-stories',
-	templateUrl: './radio.stories.html',
-}) class RadioStory {
-	@Input() disabled: boolean = false;
-	@Input() checked: boolean = false;
+interface RadiosBasicStory {
+	row: boolean;
+	disabled: boolean;
+	palette: string;
 }
 
 export default {
-	title: 'Documentation/Forms/Radios',
-	component: RadioStory,
+	title: 'Documentation/Forms/Radios/Basic',
 	argTypes: {
 		palette: {
-			options: [
-				'',
-				'palette-success',
-				'palette-warning',
-				'palette-error'
-			],
+			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
 			}
 		},
+		row: {
+			control: {
+				type: 'boolean',
+			}
+		},
+		disabled: {
+			control: {
+				type: 'boolean',
+			}
+		},
 	},
-	decorators: [
-		moduleMetadata({
-			entryComponents: [RadioStory],
-			imports: [BrowserModule, FormsModule, CommonModule],
-		})
-	]
 } as Meta;
 
-const template: Story<RadioStory> = (args: RadioStory) => ({
+function getTemplate(args: RadiosBasicStory): string {
+	const classes = [args.palette].filter(Boolean).join(' ');
+	const row = args.row ? `mod-row` : '';
+	const disabled = args.disabled ? `disabled` : '';
+	return `
+	<fieldset class="radiosfield">
+		<legend class="radiosfield-label">Liste de radios</legend>
+		<div class="radiosfield-input ${row}">
+			<div>
+				<label class="radio ${classes}">
+					<input class="radio-input" type="radio" name="radioList1" ${disabled} checked>
+					<span class="radio-label">Radio</span>
+				</label>
+			</div>
+			<div>
+				<label class="radio ${classes}">
+					<input class="radio-input" type="radio" name="radioList1" ${disabled}>
+					<span class="radio-label">Radio</span>
+				</label>
+			</div>
+		</div>
+	</fieldset>
+	`
+}
+
+const Template: Story<RadiosBasicStory> = (args: RadiosBasicStory) => ({
 	props: args,
+	template: getTemplate(args),
 });
 
-export const basic = template.bind({});
-basic.args = { checked: false, palette: '', disabled: false };
+export const Basic = Template.bind({});
+Basic.args = { palette: '', row: false, disabled: false };
