@@ -22,6 +22,12 @@
 	padding: _component("toasts.padding");
 	position: relative;
 	transform-origin: top;
+
+	@each $name, $palette in _getMap("palettes") {
+		&.palette-#{$name} {
+			background-color: _safeGet($palette,"800");
+		}
+	}
 }
 
 .toasts-item-kill {
@@ -52,7 +58,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .toasts {
-
 	&.mod-commInApp {
 		top: inherit;
 		left: _component("toasts.left");

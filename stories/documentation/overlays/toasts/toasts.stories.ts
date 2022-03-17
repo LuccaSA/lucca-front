@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
+import { LuToastsModule, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'toasts-stories',
 	templateUrl: './toasts.stories.html',
 }) class ToastsStory {
-	toast() {
-		var toastsBox = document.getElementById("toastsBox");
-		var toast = document.createElement("div");
-		var toastsValues = [
+
+	constructor(private toastsService: LuToastsService) {}
+
+	public toast(type: LuToastType, duration?: number | null): void {
+		const toastsValues = [
 			'Oh yeah! Something good happened :)',
 			'Oops, something looks wrong :(',
 			'Marked as done',
 			'Please check <a href="#">this thing</a>',
 			'Here <ins>is</ins> <em>some</em> <strong>HTML</strong>'
 		];
-		var r = Math.floor(Math.random() * Math.floor(toastsValues.length));
-		toast.className = "toasts-item";
-		toast.innerHTML = toastsValues[r];
-		var close = document.createElement('button');
-		close.className = "toasts-item-kill";
-		close.addEventListener('click', function () {
-			this.parentElement.remove();
-		}, false);
-		toast.appendChild(close);
-		toastsBox.appendChild(toast);
+
+		const random = Math.floor(Math.random() * toastsValues.length);
+
+		this.toastsService.addToast({
+			type,
+			message: toastsValues[random],
+			duration,
+		});
 	}
 }
 
@@ -33,7 +33,8 @@ export default {
 	component: ToastsStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [ToastsStory]
+			imports: [LuToastsModule],
+			declarations: [ToastsStory]
 		})
 	]
 } as Meta;
