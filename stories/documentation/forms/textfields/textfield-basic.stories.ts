@@ -4,8 +4,11 @@ interface TextifeldBasicStory {
 	palette: string;
 	display: string;
 	style: string;
+	size: string;
 	disabled: boolean;
+	error: boolean;
 	required: boolean;
+	invert: boolean;
 }
 
 export default {
