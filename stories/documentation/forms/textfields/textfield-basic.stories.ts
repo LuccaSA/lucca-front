@@ -64,12 +64,12 @@ export default {
 function getTemplate(args: TextifeldBasicStory): string {
 	const classes = [args.palette, args.display, args.style, args.size].filter(Boolean).join(' ');
 	const disabled = args.disabled ? `disabled` : '';
-	const required = args.required ? `required` : '';
+	const required = args.required ? `aria-required="true"` : '';
 	const invert = args.invert ? `mod-invert` : '';
 	const error = args.error ? `is-error` : '';
 	return `
-		<label class="textfield ${classes} ${invert} ${required}">
-			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${disabled}>
+		<label class="textfield ${classes} ${invert}">
+			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
 			<span class="textfield-label">Label textfield</span>
 		</label>
 	`

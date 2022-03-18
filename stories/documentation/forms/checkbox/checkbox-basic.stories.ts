@@ -73,4 +73,4 @@ const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', row: false, disabled: false, required: false, size: '' };
+Basic.args = { palette: '', size: '', row: false, disabled: false, required: false };

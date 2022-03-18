@@ -32,7 +32,7 @@ function getTemplate(args: RadiosBasicStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
 	const row = args.row ? `mod-row` : '';
 	const disabled = args.disabled ? `disabled` : '';
-	return ` 
+	return `
 	<fieldset class="radiosfield">
 		<legend class="radiosfield-label">Liste de radios</legend>
 		<div class="radiosfield-input ${row}">
