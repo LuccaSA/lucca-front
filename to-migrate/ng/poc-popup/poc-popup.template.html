@@ -1,14 +1,12 @@
 <div class="lu-modal-header">
 	<h1 class="lu-modal-header-title">title {{data}}</h1>
-	<button class="lu-modal-header-close">
+	<button type="button" class="lu-modal-header-close">
 		<span aria-hidden="true" class="lucca-icon">cross</span>
 		<span class="u-mask">Close</span>
 	</button>
 </div>
-<div class="lu-modal-content">
-	The almighty content
-</div>
+<div class="lu-modal-content">The almighty content</div>
 <div class="lu-modal-footer">
-	<button class="button palette-primary" (click)="openSecondary()">open other popup</button>
-	<button class="button mod-link" (click)="closePopup()">close</button>
+	<button type="button" class="button palette-primary" (click)="openSecondary()">open other popup</button>
+	<button type="button" class="button mod-link" (click)="closePopup()">close</button>
 </div>

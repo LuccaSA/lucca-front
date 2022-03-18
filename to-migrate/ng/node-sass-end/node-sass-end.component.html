@@ -1,6 +1,6 @@
 <h2>Mat-datepicker</h2>
 <div class="textfield mod-withSuffix">
-	<input [matDatepicker]="myDatepicker" class="textfield-input" #input (click)="togglePicker(myDatepicker)">
+	<input [matDatepicker]="myDatepicker" class="textfield-input" #input (click)="togglePicker(myDatepicker)" />
 	<label class="textfield-label" for="">Pick a date</label>
 	<div class="textfield-suffix">
 		<span aria-hidden="true" class="lucca-icon icon-calendar"></span>
@@ -9,8 +9,8 @@
 </div>
 
 <h2>Mat-menu</h2>
-<button class="button" [matMenuTriggerFor]="appMenu">Menu</button>
+<button type="button" class="button" [matMenuTriggerFor]="appMenu">Menu</button>
 <mat-menu #appMenu="matMenu">
-	<button mat-menu-item>Settings</button>
-	<button mat-menu-item>Help</button>
+	<button type="button" mat-menu-item>Settings</button>
+	<button type="button" mat-menu-item>Help</button>
 </mat-menu>

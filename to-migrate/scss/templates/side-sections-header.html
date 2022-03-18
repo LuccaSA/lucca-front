@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Lucca Front | Aside + sections + header template</title>
-		<link rel="icon" type="image/png" href="../lucca.png">
-		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
-		<link rel="stylesheet" href="../lucca-front.css">
-		<link rel="stylesheet" href="../demo.css">
+		<link rel="icon" type="image/png" href="../lucca.png" />
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet" />
+		<link rel="stylesheet" href="../lucca-front.css" />
+		<link rel="stylesheet" href="../demo.css" />
 	</head>
 	<body>
 		<main class="main">
@@ -61,78 +61,38 @@
 				<div class="header mod-sticky">
 					<div class="header-contentLeft">
 						<div class="textfield mod-search">
-							<input class="textfield-input" type="text" placeholder="Search...">
+							<input class="textfield-input" type="text" placeholder="Search..." />
 						</div>
 					</div>
 					<div class="header-contentRight">
-						<button class="button">button</button>
-						<button class="button palette-primary">button</button>
+						<button type="button" class="button">button</button>
+						<button type="button" class="button palette-primary">button</button>
 					</div>
 				</div>
 				<section class="section">
 					<h1>Side with sections & header</h1>
-<code class="code mod-block">&lt;main class="main"&gt;
-	&lt;aside class="navSide mod-compact"&gt;
-		&lt;div class="navSide-mainSection"&gt;
-			&lt;nav class="navSide-scrollWrapper"&gt;
-				&lt;div class="navSide-item-placeholder"&gt;&lt;/div&gt;
-				&lt;div class=&quot;navSide-item mod-mobileToggle&quot;&gt;
-					&lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt;
-						&lt;span class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt;
-						&lt;span aria-hidden="true" class=&quot;navSide-item-arrow lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt;
-					&lt;/a&gt;
-				&lt;/div&gt;
-				&lt;div class="navSide-item is-active"&gt;
-					&lt;a href="#" class="navSide-item-link is-active"&gt;
-						&lt;span aria-hidden="true" class="lucca-icon icon-tilesNine"&gt;&lt;/span&gt;
-						&lt;span class="navSide-item-link-title"&gt;Section 1&lt;/span&gt;
-					&lt;/a&gt;
-				&lt;/div&gt;
-				&lt;div class="navSide-item"&gt;
-					&lt;a href="#" class="navSide-item-link"&gt;
-						&lt;span aria-hidden="true" class="lucca-icon icon-user"&gt;&lt;/span&gt;
-						&lt;span class="navSide-item-link-title"&gt;Section 2&lt;/span&gt;
-					&lt;/a&gt;
-				&lt;/div&gt;
-				...
-			&lt;/nav&gt;
-		&lt;/div&gt;
-		&lt;div class="navSide-bottomSection"&gt;
-			&lt;div class="navSide-item"&gt;
-				&lt;a href="#" class="navSide-item-link" onclick="setActive(event, true)"&gt;
-					&lt;span aria-hidden="true" class="lucca-icon icon-analytics"&gt;&lt;/span&gt;
-					&lt;span class="navSide-item-link-title"&gt;Bottom section&lt;/span&gt;
-				&lt;/a&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/aside&gt;
-	&lt;section class="main-content mod-withStickyHeader"&gt;
-		&lt;div class="header mod-sticky"&gt;
-			&lt;div class="header-contentLeft"&gt;
-				&lt;div class="textfield mod-search"&gt;
-					&lt;input class="textfield-input" type="text" placeholder="Search..."&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-			&lt;div class="header-contentRight"&gt;
-				&lt;button class="button"&gt;button&lt;/button&gt;
-				&lt;button class="button palette-primary"&gt;button&lt;/button&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-		&lt;section class="section"&gt;
-			...
-		&lt;/section&gt;
-		&lt;section class="section mod-grey"&gt;
-			...
-		&lt;/section&gt;
-	&lt;/section&gt;
-&lt;/main&gt;</code>
+					<code class="code mod-block"
+						>&lt;main class="main"&gt; &lt;aside class="navSide mod-compact"&gt; &lt;div class="navSide-mainSection"&gt; &lt;nav
+						class="navSide-scrollWrapper"&gt; &lt;div class="navSide-item-placeholder"&gt;&lt;/div&gt; &lt;div class=&quot;navSide-item
+						mod-mobileToggle&quot;&gt; &lt;a href=&quot;#&quot; class=&quot;navSide-item-link&quot;&gt; &lt;span
+						class=&quot;navSide-item-link-title&quot;&gt;Menu&lt;/span&gt; &lt;span aria-hidden="true" class=&quot;navSide-item-arrow
+						lucca-icon icon-arrowEast&quot;&gt;&lt;/span&gt; &lt;/a&gt; &lt;/div&gt; &lt;div class="navSide-item is-active"&gt; &lt;a
+						href="#" class="navSide-item-link is-active"&gt; &lt;span aria-hidden="true" class="lucca-icon icon-tilesNine"&gt;&lt;/span&gt;
+						&lt;span class="navSide-item-link-title"&gt;Section 1&lt;/span&gt; &lt;/a&gt; &lt;/div&gt; &lt;div class="navSide-item"&gt;
+						&lt;a href="#" class="navSide-item-link"&gt; &lt;span aria-hidden="true" class="lucca-icon icon-user"&gt;&lt;/span&gt; &lt;span
+						class="navSide-item-link-title"&gt;Section 2&lt;/span&gt; &lt;/a&gt; &lt;/div&gt; ... &lt;/nav&gt; &lt;/div&gt; &lt;div
+						class="navSide-bottomSection"&gt; &lt;div class="navSide-item"&gt; &lt;a href="#" class="navSide-item-link"
+						onclick="setActive(event, true)"&gt; &lt;span aria-hidden="true" class="lucca-icon icon-analytics"&gt;&lt;/span&gt; &lt;span
+						class="navSide-item-link-title"&gt;Bottom section&lt;/span&gt; &lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/aside&gt; &lt;section
+						class="main-content mod-withStickyHeader"&gt; &lt;div class="header mod-sticky"&gt; &lt;div class="header-contentLeft"&gt;
+						&lt;div class="textfield mod-search"&gt; &lt;input class="textfield-input" type="text" placeholder="Search..."&gt; &lt;/div&gt;
+						&lt;/div&gt; &lt;div class="header-contentRight"&gt; &lt;button class="button"&gt;button&lt;/button&gt; &lt;button class="button
+						palette-primary"&gt;button&lt;/button&gt; &lt;/div&gt; &lt;/div&gt; &lt;section class="section"&gt; ... &lt;/section&gt;
+						&lt;section class="section mod-grey"&gt; ... &lt;/section&gt; &lt;/section&gt; &lt;/main&gt;</code
+					>
 				</section>
-				<section class="section mod-grey">
-					...
-				</section>
-				<section class="section">
-					...
-				</section>
+				<section class="section mod-grey">...</section>
+				<section class="section">...</section>
 			</section>
 		</main>
 		<script src="https://www.w3schools.com/lib/w3.js"></script>
