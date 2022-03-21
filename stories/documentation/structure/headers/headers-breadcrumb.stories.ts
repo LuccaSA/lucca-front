@@ -1,22 +1,23 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersBasicStory {
-	noShadow: boolean;
+interface HeadersBreadcrumbStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Headers/Basic',
-	noShadow: {
-		control: {
-			type: 'boolean',
-		}
-	},
+	title: 'Documentation/Structure/Headers/Breadcrumb',
 } as Meta;
 
-function getTemplate(args: HeadersBasicStory): string {
-	const noShadow = args.noShadow ? `mod-noShadow` : '';
+function getTemplate(args: HeadersBreadcrumbStory): string {
 	return `
-	<header class="pageHeader ${noShadow}">
+	<header class="pageHeader mod-withBreadcrumbs">
+		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
+			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">You</a></li>
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Are</a></li>
+				<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Here</span></li>
+			</ul>
+		</nav>
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="u-marginReset u-marginRightStandard">H1. Page title</h1>
@@ -57,10 +58,10 @@ function getTemplate(args: HeadersBasicStory): string {
 	`
 }
 
-const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({
+const Template: Story<HeadersBreadcrumbStory> = (args: HeadersBreadcrumbStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { noShadow: false };
+export const Breadcrumb = Template.bind({});
+Breadcrumb.args = {};

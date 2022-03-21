@@ -1,22 +1,15 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersBasicStory {
-	noShadow: boolean;
+interface HeadersMenuStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Headers/Basic',
-	noShadow: {
-		control: {
-			type: 'boolean',
-		}
-	},
+	title: 'Documentation/Structure/Headers/Menu',
 } as Meta;
 
-function getTemplate(args: HeadersBasicStory): string {
-	const noShadow = args.noShadow ? `mod-noShadow` : '';
+function getTemplate(args: HeadersMenuStory): string {
 	return `
-	<header class="pageHeader ${noShadow}">
+	<header class="pageHeader mod-withMenu">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="u-marginReset u-marginRightStandard">H1. Page title</h1>
@@ -53,14 +46,33 @@ function getTemplate(args: HeadersBasicStory): string {
 				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside size-smaller u-marginLeftSmallest"></span></a>.
 			</p>
 		</section>
+		<nav class="menu">
+			<ul class="menu-list">
+				<li class="menu-list-item">
+					<a class="menu-list-item-action" href="#"	aria-current="page"	>
+						active link
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a class="menu-list-item-action" href="#">
+						menu link
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a class="menu-list-item-action" href="#">
+						menu link
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</header>
 	`
 }
 
-const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({
+const Template: Story<HeadersMenuStory> = (args: HeadersMenuStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { noShadow: false };
+export const Menu = Template.bind({});
+Menu.args = {};
