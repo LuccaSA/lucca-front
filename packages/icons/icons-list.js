@@ -64,6 +64,7 @@ var icons = [
 	'planning',
 	'calendar_checked',
 	'camera',
+	'cancel',
 	'car',
 	'certif_ok',
 	'certif_ko',
@@ -256,7 +257,7 @@ var icons = [
 	'weather_storm',
 	'weather_sun',
 	'weight',
-	'divide',	
+	'divide',
 	'crown',
 	'unarchive',
 
