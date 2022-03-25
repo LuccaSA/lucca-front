@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, interval } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { defaultToastDuration, LuToast, LuToastInput } from './toasts.model';
 
 @Injectable({ providedIn: 'root' })
@@ -11,12 +10,6 @@ export class LuToastsService {
 		const toast = this.getToast(toastInput);
 
 		this.toasts$.next([...this.toasts$.value, toast]);
-
-		if (!this.isOnlyDismissibleManually(toast)) {
-			interval(toast.duration)
-				.pipe(take(1))
-				.subscribe(() => this.removeToast(toast));
-		}
 
 		return toast;
 	}
