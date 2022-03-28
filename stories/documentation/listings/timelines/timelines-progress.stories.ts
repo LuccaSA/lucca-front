@@ -7,8 +7,6 @@ export default {
 } as Meta;
 
 function getTemplate(args: TimelinesProgressStory): string {
-	const classes = [args.size].filter(Boolean).join(' ');
-	const number = args.number ? `mod-number` : '';
 	return `
 	<ol class="timeline mod-progress">
 		<li class="timeline-step">
