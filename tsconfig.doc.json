@@ -1,13 +1,19 @@
 {
-	"extends": "../tsconfig.json",
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true
+	},
 	"include": [
 		"packages/ng/**/*.ts",
 		"packages/ng/**/*.html",
-		"packages/ng/**/*.scss",
-		"stories/**/*.ts",
+		"packages/ng/**/*.scss"
 	],
 	"exclude": [
 		"**/test.ts",
 		"**/*.spec.ts",
+		"./setup-jest.ts",
+		".storybook",
+		"to-migrate"
 	]
 }

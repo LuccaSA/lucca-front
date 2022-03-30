@@ -14,37 +14,75 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-stories',
-	templateUrl: './modal.stories.html',
+	template: `<button class="button" (click)="openModal()">Open modal</button>`,
 }) class ModalStories {
 	constructor(
-		private modalFactory: LuModal
+		private modal: LuModal
 	) { }
 
 	public openModal() {
-		this.modalFactory.open(ModalContentComponent).onClose.subscribe();
+		this.modal.open(ModalContentComponent);
 	}
 }
 
 export default {
-  title: 'Documentation/Overlays/Modal',
-  component: ModalStories,
+	title: 'Documentation/Overlays/Modal',
+	component: ModalStories,
 	decorators: [
 		moduleMetadata({
 			declarations: [
 				ModalContentComponent
 			],
-			entryComponents: [ModalStories],
 			imports: [
 				LuModalModule,
 				BrowserAnimationsModule,
 			]
 		})
-	]
+	],
 } as Meta;
 
-const template: Story<ModalStories> = (args: ModalStories) => ({
+const Template: Story<ModalStories> = (args: ModalStories) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = {}
+export const Basic = Template.bind({});
+Basic.args = {}
+Basic.parameters = {
+	docs: {
+		source: {
+			language: 'ts',
+			code: `
+/* 1. Importer LuModalModule */
+import { LuModalModule } from '@lucca-front/ng/modal';
+
+@NgModule({
+	imports: [LuModalModule]
+})
+class ModalStoriesModule {}
+
+/* 2. Créer le composant qui sera inclus dans la modale */
+@Component({
+	selector: 'modal-content',
+	template: '<p>General Kenobi</p>'
+})
+class ModalContentComponent implements ILuModalContent {
+	title = 'Hello there';
+	submitAction = () => {};
+}
+
+/* 3. Se faire injecter LuModal dans le composant qui déclenche l'ouverture de la modale puis appeler la méthode open() */
+@Component({
+	selector: 'modal-stories',
+	template: \`<button class="button" (click)="openModal()">Open modal</button>\`,
+}) class ModalStories {
+	constructor(
+		private modal: LuModal
+	) { }
+
+	public openModal() {
+		this.modal.open(ModalContentComponent);
+	}
+}`
+		}
+	}
+};
