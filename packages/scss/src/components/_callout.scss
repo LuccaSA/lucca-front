@@ -5,6 +5,7 @@
 	margin: _component('callout.margin');
 	padding: _component('callout.padding');
 	position: relative;
+	color: _color('grey', 800);
 
 	a {
 		color: _color('grey', 800);
@@ -91,7 +92,6 @@
 
 @mixin calloutDefaultPalette($palette) {
 	background-color: _color($palette, 100);
-	color: _color('grey', 800);
 	border: _theme('commons.divider.width') solid _color($palette, 200);
 }
 .callout {
