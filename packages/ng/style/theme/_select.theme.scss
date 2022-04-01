@@ -1,12 +1,12 @@
 $select: (
+	default-palette: _getMap("palettes.primary"),
 	chip: (
 		background: _color("primary", 700, true),
 		text: _color("primary", "text", true)
 	),
 	input: (
 		padding-horizontal: _theme("spacings.smaller", true),
-		padding-vertical: _theme("spacings.smaller", true),
-		placeholder: desaturate(lighten(_color("primary", 700, true), 20%), 25%)
+		padding-vertical: _theme("spacings.smaller", true)
 	),
 	// legacy
 	framed: (

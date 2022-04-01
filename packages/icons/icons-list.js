@@ -180,6 +180,7 @@ var icons = [
 	'paste',
 	'clipboard',
 	'piggy_bank',
+	'pause',
 	'pay_period',
 	'pin',
 	'plane',
@@ -211,6 +212,7 @@ var icons = [
 	'sort',
 	'reorder',
 	'star',
+	'stop',
 	'subway',
 	'success',
 	'sync',
@@ -254,6 +256,9 @@ var icons = [
 	'weather_storm',
 	'weather_sun',
 	'weight',
+	'divide',	
+	'crown',
+	'unarchive',
 
 ];
 

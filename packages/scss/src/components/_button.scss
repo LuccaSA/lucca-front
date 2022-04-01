@@ -1,39 +1,38 @@
 // MIXINS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-@mixin buttonColoring($palette) {
-	background-color: _color($palette);
-	color: _color($palette, "text");
+@mixin buttonColoring($palette, $suffix: '') {
+	background-color: _color($palette) #{$suffix};
+	color: _color($palette, 'text') #{$suffix};
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
-			background-color: _color($palette, "600");
+			background-color: _color($palette, 600);
 			box-shadow: _theme('commons.box-shadow.xs');
 		}
 
 		&:focus {
-			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, "200");
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 200);
 			outline: none;
-			background-color: _color($palette, "600");
+			background-color: _color($palette, 600);
 		}
 
 		&:active {
-			background-color: _color($palette, "800");
-			box-shadow: 0 0 0 4px _color($palette, "300");
+			background-color: _color($palette, 800);
+			box-shadow: 0 0 0 4px _color($palette, 300);
 		}
 	}
 
-
 	.button-counter {
-		background-color: _color($palette, "500");
+		background-color: _color($palette, 500);
 	}
 }
 
 @mixin buttonLinkColoring($palette) {
 	&:not([disabled], .is-disabled) {
 		&:focus {
-			box-shadow: 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "300");
-			background: _color($palette, "100");
+			box-shadow: 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 300);
+			background: _color($palette, 100);
 		}
 	}
 }
@@ -41,30 +40,30 @@
 @mixin buttonOutlineColoring($palette) {
 	&:not([disabled], .is-disabled) {
 		color: _color($palette);
-		box-shadow: inset 0 0 0 1px _color($palette, "400");
+		box-shadow: inset 0 0 0 1px _color($palette, 400);
 
 		&:hover {
-			background-color: _color($palette, "100");
+			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, "400");
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
 		}
 
 		&:focus {
-			background-color: _color($palette, "100");
+			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, "100"), inset 0 0 0 1px _color($palette, "400");
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
 			outline: none;
 		}
 
 		&:active {
-			background-color: _color($palette, "200");
+			background-color: _color($palette, 200);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, "200"), inset 0 0 0 1px _color($palette, "500");
+			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
 		}
 	}
 
 	.button-counter {
-		background-color: _color($palette, "300");
+		background-color: _color($palette, 300);
 		color: _color($palette);
 	}
 }
@@ -72,21 +71,20 @@
 // CLASSES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-
 .button {
 	cursor: pointer;
 	border: 0;
-	border-radius: _component("button.border.radius");
+	border-radius: _component('button.border.radius');
 	display: inline-block;
-	font-family: unquote(_component("button.font.family"));
-	font-size: _component("button.font-size");
-	font-weight: _component("button.font-weight"); /* stylelint-disable-line font-weight-notation */
-	line-height: _component("button.line-height");
-	margin: _component("button.margin");
-	padding: _component("button.padding");
+	font-family: unquote(_component('button.font.family'));
+	font-size: _component('button.font-size');
+	font-weight: _component('button.font-weight'); /* stylelint-disable-line font-weight-notation */
+	line-height: _component('button.line-height');
+	margin: _component('button.margin');
+	padding: _component('button.padding');
 	position: relative;
 	text-decoration: none;
-	transition: unquote(_component("button.transition"));
+	transition: unquote(_component('button.transition'));
 	vertical-align: baseline;
 	white-space: nowrap;
 
@@ -107,12 +105,12 @@
 .button-counter {
 	border-radius: 1rem;
 	display: inline-block;
-	font-size: _theme("sizes.smaller.font-size");
+	font-size: _theme('sizes.smaller.font-size');
 	font-weight: 600;
 	height: 1.5rem;
 	min-width: 1.5rem;
-	margin-left: _theme("spacings.smaller");
-	padding: 0 _theme("spacings.smallest");
+	margin-left: _theme('spacings.smaller');
+	padding: 0 _theme('spacings.smallest');
 	vertical-align: bottom;
 }
 
@@ -120,7 +118,7 @@
 	height: 1.5rem;
 	line-height: 1.5rem;
 	font-size: 1.5rem;
-	transform: translateX(-.2rem);
+	transform: translateX(-0.2rem);
 	vertical-align: bottom;
 }
 
@@ -129,25 +127,24 @@
 
 .button {
 	// default color
-	@include buttonColoring("button.default-palette");
+	@include buttonColoring('button.default-palette');
 
 	// palette colors
-	@each $name, $palette in _getMap("palettes") {
+	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
 			@include buttonColoring($name);
 		}
 	}
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .button {
 	&.mod-small {
-		font-size: _component("button.small.font-size");
-		line-height: _component("button.small.line-height");
-		padding: _component("button.small.padding");
+		font-size: _component('button.small.font-size');
+		line-height: _component('button.small.line-height');
+		padding: _component('button.small.padding');
 
 		.lucca-icon {
 			line-height: 1;
@@ -156,25 +153,25 @@
 	}
 
 	&.mod-smaller {
-		font-size: _component("button.smaller.font-size");
-		line-height: _component("button.smaller.line-height");
-		padding: _component("button.smaller.padding");
+		font-size: _component('button.smaller.font-size');
+		line-height: _component('button.smaller.line-height');
+		padding: _component('button.smaller.padding');
 
 		.lucca-icon {
 			line-height: 1;
-			font-size: .875rem;
+			font-size: 0.875rem;
 		}
 	}
 
 	&.mod-link {
 		background-color: transparent;
-		color: _color("text.default");
+		color: _color('text.default');
 
 		// default color
-		@include buttonLinkColoring("button.default-palette");
+		@include buttonLinkColoring('button.default-palette');
 
 		// palette colors
-		@each $name, $palette in _getMap("palettes") {
+		@each $name, $palette in _getMap('palettes') {
 			&.palette-#{$name} {
 				@include buttonLinkColoring($name);
 			}
@@ -182,21 +179,22 @@
 
 		&:hover {
 			box-shadow: none;
-			background-color: _color("primary", "50");
-			color: _color("primary");
+			background-color: _color('primary', 50);
+			color: _color('primary');
 		}
 
 		&.mod-invert {
 			color: _color('white');
 
 			&:not([disabled], .is-disabled) {
-				&:hover, &:focus {
-					background-color: rgba(255, 255, 255, .1);
+				&:hover,
+				&:focus {
+					background-color: rgba(255, 255, 255, 0.1);
 					color: _color('white');
 				}
 
 				&:focus {
-					box-shadow: 0 0 0 4px rgba(0, 0, 0, .1);
+					box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 				}
 			}
 		}
@@ -205,10 +203,10 @@
 	&.mod-more {
 		padding: 0 !important;
 		text-align: center;
-		width: 2rem;
+		min-width: 2rem;
 
 		&::before {
-			@include makeIcon("arrow_south");
+			@include makeIcon('arrow_south');
 			height: 0;
 			vertical-align: text-top;
 		}
@@ -218,59 +216,60 @@
 		}
 	}
 
+	// legacy: mod-outline
+	// new: mod-outlined
 	&.mod-outlined,
-	&.mod-outline { // legacy
-		background-color: _color("white");
-		box-shadow: inset 0 0 0 1px _color("grey", "400");
-		color: _color("text.default");
+	&.mod-outline {
+		background-color: _color('white');
+		box-shadow: inset 0 0 0 1px _color('grey', 400);
+		color: _color('text.default');
 
 		&:not([disabled], .is-disabled) {
 			&:hover {
-				background-color: _color("grey", "100");
-				color: _color("text.default");
-				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color("grey", "400");
+				background-color: _color('grey', 100);
+				color: _color('text.default');
+				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color('grey', 400);
 			}
 
 			&:focus {
-				background-color: _color("grey", "100");
-				color: _color("text.default");
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color("primary", "100"), inset 0 0 0 1px _color("primary", "400");
+				background-color: _color('grey', 100);
+				color: _color('text.default');
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 100), inset 0 0 0 1px _color('primary', 400);
 				outline: none;
 			}
 
 			&:active {
-				background-color: _color("grey", "200");
-				color: _color("text.default");
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color("primary", "200"), inset 0 0 0 1px _color("primary", "500");
+				background-color: _color('grey', 200);
+				color: _color('text.default');
+				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 200), inset 0 0 0 1px _color('primary', 500);
 			}
 		}
 
-
-
 		// TODO delete this class ?
 		&.mod-white {
-			background-color: _color("white");
-			color: _color("grey", "700");
+			background-color: _color('white');
+			color: _color('grey', 700);
 		}
 
 		// palette colors
-		@each $name, $palette in _getMap("palettes") {
+		@each $name, $palette in _getMap('palettes') {
 			&.palette-#{$name} {
 				@include buttonOutlineColoring($name);
 			}
 		}
 
 		.button-counter {
-			background-color: _color("grey", "300");
-			color: _color("text.default");
+			background-color: _color('grey', 300);
+			color: _color('text.default');
 		}
 	}
 
 	&.mod-counter {
-		padding-left: _theme("spacings.small");
-		padding-right: _theme("spacings.small");
+		padding-left: _theme('spacings.small');
+		padding-right: _theme('spacings.small');
 
-		&.mod-small, &.mod-smaller {
+		&.mod-small,
+		&.mod-smaller {
 			.button-counter {
 				height: 1rem;
 				min-width: 1rem;
@@ -282,14 +281,14 @@
 		align-items: center;
 		display: inline-flex;
 		gap: _theme('spacings.smaller');
-		padding-left: _theme("spacings.small");
-		padding-right: _theme("spacings.small");
+		padding-left: _theme('spacings.small');
+		padding-right: _theme('spacings.small');
 
 		&.mod-small {
 			.button-icon {
-				font-size: _component("button.small.font-size");
-				height: _component("button.small.line-height");
-				line-height: _component("button.small.line-height");
+				font-size: _component('button.small.font-size');
+				height: _component('button.small.line-height');
+				line-height: _component('button.small.line-height');
 			}
 		}
 
@@ -297,9 +296,9 @@
 			gap: _theme('spacings.smallest');
 
 			.button-icon {
-				font-size: _component("button.smaller.font-size");
-				height: _component("button.smaller.line-height");
-				line-height: _component("button.smaller.line-height");
+				font-size: _component('button.smaller.font-size');
+				height: _component('button.smaller.line-height');
+				line-height: _component('button.smaller.line-height');
 			}
 		}
 	}
@@ -308,7 +307,6 @@
 		width: 100%;
 	}
 }
-
 
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -324,7 +322,8 @@
 		cursor: default;
 
 		&.mod-outlined,
-		&.mod-outline { // legacy
+		&.mod-outline {
+			// legacy
 			background-color: _color('white');
 			border-color: _color('grey', 200);
 		}
@@ -336,47 +335,46 @@
 	}
 
 	/* Loading */
-
 	&.is-loading {
-		@include loading(_component("button.font-size"));
-		color: transparent;
-		opacity: _theme("commons.disabled.opacity");
+		@include loading(_component('button.font-size'));
+
+		color: transparent !important;
+		opacity: _theme('commons.disabled.opacity');
 		pointer-events: none;
 		user-select: none;
-		@include loading(_component("button.font-size"));
 
 		&.mod-small {
-			@include loading(_component("button.small.font-size"));
+			@include loading(_component('button.small.font-size'));
 		}
 	}
 
 	/* States */
-
 	&.is-success {
-		@include buttonColoring("success");
+		@include buttonColoring('success', '!important');
 
 		&::after {
-			@include makeIcon("tick");
+			@include makeIcon('tick');
 		}
 	}
 
 	&.is-error {
-		@include buttonColoring("error");
+		@include buttonColoring('error', '!important');
 
 		&::after {
-			@include makeIcon("cross");
+			@include makeIcon('cross');
 		}
 	}
 
-	&.is-success, &.is-error {
-		color: transparent;
+	&.is-success,
+	&.is-error {
+		color: transparent !important;
 		pointer-events: none;
 		user-select: none;
 
 		&::after {
 			color: white;
-			font-size: calc(1.5 * #{_component("button.font-size")});
-			height: _component("button.line-height");
+			font-size: calc(1.5 * #{_component('button.font-size')});
+			height: _component('button.line-height');
 			left: 0;
 			bottom: 0;
 			margin: auto;
@@ -388,101 +386,16 @@
 
 		&.mod-small {
 			&::after {
-				font-size: calc(1.5 * #{_component("button.small.font-size")});
-				height: _component("button.small.font-size");
-			}
-		}
-	}
-}
-
-// WRAPPER
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.button-group {
-	display: inline-flex;
-
-	&:focus-within {
-		box-shadow: 0 0 0 4px _color("primary", "200");
-		border-radius: _component("button.border.radius");
-	}
-
-	.button {
-		// @include buttonColoring("button.default-palette");
-
-		border-radius: 0;
-		display: block;
-		margin: 0;
-		padding-left: _theme("spacings.small");
-		padding-right: _theme("spacings.small");
-		position: relative;
-
-		&:not(.mod-outline, .mod-outlined) {
-			border-right: _theme('commons.divider.width') solid rgba(0, 0, 0, .1);
-		}
-
-		&:first-child {
-			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
-		}
-
-		&:last-child {
-			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
-			border-right: 0;
-		}
-
-		&:not(:first-child) {
-			&.mod-outline,
-			&.mod-outlined {
-				margin-left: -1px;
+				font-size: calc(1.5 * #{_component('button.small.font-size')});
+				height: _component('button.small.line-height');
 			}
 		}
 
-		&:not([disabled], .is-disabled) {
-			&:hover, &:focus {
-				z-index: 1;
+		&.mod-smaller {
+			&::after {
+				font-size: calc(1.5 * #{_component('button.smaller.font-size')});
+				height: _component('button.smaller.line-height');
 			}
-
-			&:focus {
-				background-color: _color("primary", "600");
-				box-shadow: none;
-			}
-		}
-	}
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			&:focus-within {
-				box-shadow: 0 0 0 4px _color($name, "200");
-				border-radius: _component("button.border.radius");
-			}
-
-			.button {
-				@include buttonColoring($name);
-
-				&:focus {
-					background-color: _color($name, "600");
-					box-shadow: none;
-				}
-			}
-		}
-	}
-}
-
-.button-group .button-group-item { // 2 classes needed to override button-group's "last-of-type"
-	.button {
-		border-right: 1px solid rgba(0, 0, 0, .1);
-	}
-
-	&:first-child {
-		.button {
-			border-radius: _component("button.border.radius") 0 0 _component("button.border.radius");
-		}
-	}
-
-	&:last-child {
-		.button {
-			border: 0;
-			border-radius: 0 _component("button.border.radius") _component("button.border.radius") 0;
 		}
 	}
 }

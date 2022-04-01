@@ -21,11 +21,11 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .u-nowrap {
-	white-space: nowrap;
+	white-space: nowrap !important;
 }
 
 .u-wrap {
-	white-space: normal;
+	white-space: normal !important;
 }
 
 // ICONS

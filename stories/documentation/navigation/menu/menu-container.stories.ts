@@ -17,19 +17,16 @@ function getTemplate(args: MenuContainerStory): string {
 				<li class="menu-list-item">
 					<a href="#" class="menu-list-item-action" aria-current="page">
 						Menu 1
-						<span class="menu-list-item-action-placeholder" aria-hidden="true" data-content-after="Menu 1"></span>
 					</a>
 				</li>
 				<li class="menu-list-item">
 					<a href="#" class="menu-list-item-action">
 						Menu 2
-						<span class="menu-list-item-action-placeholder" aria-hidden="true" data-content-after="Menu 2"></span>
 					</a>
 				</li>
 				<li class="menu-list-item">
 					<a href="#" class="menu-list-item-action">
 						Menu 3
-						<span class="menu-list-item-action-placeholder" aria-hidden="true" data-content-after="Menu 3"></span>
 					</a>
 				</li>
 			</ul>

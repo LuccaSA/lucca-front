@@ -7,10 +7,9 @@
 
 		&::after {
 			@include makeIcon("arrow_south");
+			@include selectColoringIcons("select.default-palette");
 			bottom: #{_component("select.input.padding-vertical", true)};
 			bottom: _component("select.input.padding-vertical");
-			color: _color("primary", 700, true);
-			color: _color("primary");
 			font-size: 1.2rem;
 			line-height: 1.4rem;
 			pointer-events: none;
@@ -36,11 +35,6 @@
 		white-space: nowrap;
 	}
 
-	.lu-select-placeholder {
-		color: _component("select.input.placeholder", true);
-		color: _component("select.input.placeholder");
-	}
-
 	.lu-select-value {
 		line-height: _theme("sizes.standard.line-height", true);
 		line-height: _theme("sizes.standard.line-height");
@@ -58,6 +52,7 @@
 	}
 
 	.lu-select-placeholder {
+		@include selectColoringPlaceholer("select.default-palette");
 		line-height: _theme("sizes.standard.line-height", true);
 		line-height: _theme("sizes.standard.line-height");
 		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
@@ -106,7 +101,7 @@
 			vertical-align: top;
 			white-space: nowrap;
 		}
-	} 
+	}
 
 
 	// MODS
@@ -302,4 +297,27 @@
 			color: _theme("commons.disabled.placeholder");
 		}
 	}
+
+	// PALETTES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	@each $name, $palette in _getMap("palettes") {
+		:host-context(.palette-#{$name}) {
+			.lu-select-placeholder {
+				@include selectColoringPlaceholer($name);
+			}
+
+			&::after {
+				@include selectColoringIcons($name);
+			}
+		}
+	}
+}
+
+@mixin selectColoringPlaceholer($palette) {
+		color: _color($palette, 400);
+}
+
+@mixin selectColoringIcons($palette) {
+		color: _color($palette, 700);
 }

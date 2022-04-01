@@ -101,7 +101,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	}
 	protected set _clearer(clearer: ILuClearer<T>) {
 		if (!!clearer && !!clearer.onClear) {
-			this._subs.add(clearer.onClear.subscribe((value) => this.setValue(value)));
+			this._subs.add(clearer.onClear.subscribe(() => this.setValue(this._multiple ? [] : undefined)));
 		}
 	}
 	protected subToPickerEvts() {

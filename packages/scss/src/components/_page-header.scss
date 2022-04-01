@@ -1,6 +1,6 @@
 .pageHeader {
 	@include elevate(1);
-	padding: 2.5rem 2.5rem _theme('spacings.standard');
+	padding: _theme('spacings.big') 2.5rem _theme('spacings.standard');
 	background-color: _color('white');
 
 	&.mod-withMenu {
@@ -15,7 +15,13 @@
 		}
 	}
 
+	&.mod-noShadow {
+		box-shadow: none;
+	}
+
 	.menu {
+		margin-top: _theme('spacings.smaller');
+		
 		&::after {
 			display: none;
 		}
@@ -37,7 +43,7 @@
 }
 
 .pageHeader-content-actions {
-	& > *:not(:last-child){
+	& > *:not(:last-child) {
 		margin-right: _theme('spacings.small');
 	}
 }

@@ -1,7 +1,16 @@
-<section class="contentSection">
-	<h1>Header</h1>
-	<header class="pageHeader" [ngClass]="{'mod-withBreadcrumbs': withBreadcrumbs, 'mod-withMenu': withMenu, 'mod-noShadow': withoutShadow}">
-		<nav *ngIf="withBreadcrumbs" class="breadcrumbs" aria-describedby="breadcrumbs-title">
+import { Meta, Story } from '@storybook/angular';
+
+interface HeadersBreadcrumbStory {
+}
+
+export default {
+	title: 'Documentation/Structure/Headers/Breadcrumb',
+} as Meta;
+
+function getTemplate(args: HeadersBreadcrumbStory): string {
+	return `
+	<header class="pageHeader mod-withBreadcrumbs">
+		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
 			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
 			<ul class="breadcrumbs-list">
 				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">You</a></li>
@@ -11,7 +20,7 @@
 		</nav>
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="u-marginReset u-marginRightStandard">{{ pageHeaderTitle }}</h1>
+				<h1 class="u-marginReset u-marginRightStandard">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-edit"></span>
@@ -41,39 +50,18 @@
 			</div>
 		</div>
 		<section class="pageHeader-description">
-			<p class="u-marginBottomReset">
-				{{ pageHeaderDescription }}
-				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside size-smaller u-marginLeftSmallest"></span></a>.
+			<p class="u-marginBottomReset">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside size-smaller u-marginLeftSmallest"></span></a>.
 			</p>
 		</section>
-		<nav *ngIf="withMenu" class="menu">
-			<ul class="menu-list">
-				<li class="menu-list-item">
-					<a
-						class="menu-list-item-action"
-						href="#"
-						aria-current="page"
-					>
-						active link
-					</a>
-				</li>
-				<li class="menu-list-item">
-					<a
-						class="menu-list-item-action"
-						href="#"
-					>
-						menu link
-					</a>
-				</li>
-				<li class="menu-list-item">
-					<a
-						class="menu-list-item-action"
-						href="#"
-					>
-						menu link
-					</a>
-				</li>
-			</ul>
-		</nav>
 	</header>
-</section>
+	`
+}
+
+const Template: Story<HeadersBreadcrumbStory> = (args: HeadersBreadcrumbStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const Breadcrumb = Template.bind({});
+Breadcrumb.args = {};

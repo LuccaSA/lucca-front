@@ -182,7 +182,14 @@
 
 %isRequired {
 	color: _color("error");
-	content: "*";
 	display: inline-block;
 	margin-left: .2em;
+
+	@supports (content: "*" / "") {
+		content: "*" / "";
+	}
+
+	@supports not (content: "*" / "") {
+		content: "*";
+	}
 }

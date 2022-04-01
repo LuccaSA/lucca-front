@@ -50,8 +50,9 @@
 		color: _color("text.default");
 	}
 
-	&:hover {
-		background-color: _component("button.default-palette.lighter");
+	&:hover,
+	&:focus {
+		background-color: _component("button.default-palette.100");
 	}
 }
 

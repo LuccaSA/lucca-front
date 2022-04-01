@@ -11,6 +11,7 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 	@Input() pageHeaderDescription: string = '';
 	@Input() withBreadcrumbs: boolean = false;
 	@Input() withMenu: boolean = false;
+	@Input() withoutShadow: boolean = false;
 }
 
 export default {
@@ -23,6 +24,11 @@ export default {
 			}
 		},
 		withMenu: {
+			control: {
+				type: 'boolean',
+			}
+		},
+		withoutShadow: {
 			control: {
 				type: 'boolean',
 			}
@@ -46,4 +52,5 @@ basic.args = {
 	pageHeaderDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo. Nullam condimentum nulla et neque ultricies bibendum',
 	withBreadcrumbs: false,
 	withMenu: false,
+	withoutShadow: false
 };

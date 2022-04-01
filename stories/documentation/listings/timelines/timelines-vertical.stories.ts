@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/angular';
 
 interface TimelinesVerticalStory {
 	number: boolean;
+	size: string;
 }
 
 export default {
@@ -12,50 +13,54 @@ export default {
 				type: 'boolean',
 			}
 		},
+		size: {
+			options: ['', 'mod-small', 'mod-big'],
+			control: {
+				type: 'radio',
+			}
+		},
 	},
 } as Meta;
 
 function getTemplate(args: TimelinesVerticalStory): string {
-	const number = args.number ? `mod-number mod-smallNumber` : '';
+	const classes = [args.size].filter(Boolean).join(' ');
+	const number = args.number ? `mod-number` : '';
 	return `
-	<section class="timeline mod-vertical ${number}">
-		<div class="timeline-step">
-			<h2 class="timeline-step-title">
-				<a href="#" class="timeline-step-title-action">Previous step</a>
-			</h2>
-			<div class="gauge mod-vertical mod-thin">
-				<div class="gauge-bar"></div>
-			</div>
-			…
-		</div>
-		<div class="timeline-step" aria-current="step">
-			<h2 class="timeline-step-title">
-				Current step
-			</h2>
-			<div class="gauge mod-vertical mod-thin">
-				<div class="gauge-bar" style="height: 50%"></div>
-			</div>
-			…
-		</div>
-		<div class="timeline-step">
-			<h2 class="timeline-step-title">
-				Next step
-			</h2>
-			<div class="gauge mod-vertical mod-thin">
-				<div class="gauge-bar"></div>
-			</div>
-			…
-		</div>
-		<div class="timeline-step">
-			<h2 class="timeline-step-title">
-				Last step
-			</h2>
-			<div class="gauge mod-vertical mod-thin">
-				<div class="gauge-bar"></div>
-			</div>
-			…
-		</div>
-	</section>
+		<ol class="timeline mod-vertical ${classes} ${number}">
+			<li class="timeline-step">
+				<div class="timeline-step-title">
+					<a href="#" class="timeline-step-title-action">Previous step</a>
+				</div>
+				<div class="timeline-step-description">
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+				</div>
+			</li>
+			<li class="timeline-step" aria-current="step">
+				<div class="timeline-step-title">
+					Current step
+				</div>
+				<div class="timeline-step-description">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure porro atque, laboriosam at vitae expedita ab recusandae voluptas obcaecati commodi deleniti enim doloremque? Consequuntur quisquam natus obcaecati recusandae officia dicta.
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+				</div>
+			</li>
+			<li class="timeline-step">
+				<div class="timeline-step-title">
+					Next step
+				</div>
+				<div class="timeline-step-description">
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+				</div>
+			</li>
+			<li class="timeline-step">
+				<div class="timeline-step-title">
+					Last step
+				</div>
+				<div class="timeline-step-description">
+					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi voluptas sit facere ipsum, veniam rerum aliquam ut delectus aperiam deserunt cum nulla magnam et laborum sequi natus dolorem repudiandae.
+				</div>
+			</li>
+		</ol>
 	`
 }
 
@@ -65,4 +70,4 @@ const Template: Story<TimelinesVerticalStory> = (args: TimelinesVerticalStory) =
 });
 
 export const Vertical = Template.bind({});
-Vertical.args = {number: false};
+Vertical.args = { number: false, size: '' };

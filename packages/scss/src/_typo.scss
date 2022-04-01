@@ -52,16 +52,22 @@ p {
 .mod-body1 {
 	font-size: _theme("sizes.standard.font-size");
 	line-height: _theme("sizes.standard.line-height");
+	padding-top: _theme("sizes.standard.vertical-padding");
+	padding-bottom: _theme("sizes.standard.vertical-padding");
 }
 
 .mod-body2 {
 	font-size: _theme("sizes.small.font-size");
 	line-height: _theme("sizes.small.line-height");
+	padding-top: _theme("sizes.small.vertical-padding");
+	padding-bottom: _theme("sizes.small.vertical-padding");
 }
 
 .mod-body3 {
 	font-size: _theme("sizes.smaller.font-size");
 	line-height: _theme("sizes.smaller.line-height");
+	padding-top: _theme("sizes.smaller.vertical-padding");
+	padding-bottom: _theme("sizes.smaller.vertical-padding");
 }
 
 .mod-caption {

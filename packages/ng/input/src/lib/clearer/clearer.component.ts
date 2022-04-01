@@ -18,7 +18,7 @@ export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClea
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();
 	onClick($event: Event) {
-		this.onClear.emit(undefined);
+		this.onClear.emit();
 		$event.stopPropagation();
 	}
 }

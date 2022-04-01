@@ -26,6 +26,7 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	@Input() fields: string;
 	@Input() filters: string[];
 	@Input() orderBy: string;
+	@Input() sort: string;
 
 	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 	constructor(
