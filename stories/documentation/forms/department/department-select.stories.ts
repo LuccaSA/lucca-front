@@ -9,6 +9,7 @@ import { Meta, moduleMetadata, Story } from "@storybook/angular";
 }) class DepartmentStory {
 	@Input() appInstanceId: number = null;
 	@Input() operations: number[] = [];
+	@Input() filters: string[] = [];
 }
 
 export default {
@@ -35,4 +36,5 @@ export const scoped = template.bind({});
 scoped.args = {
 	appInstanceId: 15,
 	operations: [1],
+	filters: ['isactive=false']
 }

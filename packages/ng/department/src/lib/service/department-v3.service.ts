@@ -17,7 +17,9 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 	protected override _api = `/api/v3/departments`;
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) {
-		this._appInstanceId = appInstanceId;
+		if (appInstanceId) {
+			this._appInstanceId = appInstanceId;
+		}
 	}
 	protected _operations: number[] = [];
 	set operations(operations: number[]) {
@@ -31,9 +33,11 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 	getTrees() {
 		let call: Observable<ILuApiResponse<IApiDepartment>>;
 		if (this._appInstanceId && this._operations?.length) {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(`/api/v3/departments/scopedtree?fields=id,name&appInstanceId=${this._appInstanceId}&operations=${this._operations.join(',')}`);
+			call = this._http.get<ILuApiResponse<IApiDepartment>>(
+				`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this.appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`,
+			);
 		} else {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>('/api/v3/departments/tree?fields=id,name');
+			call = this._http.get<ILuApiResponse<IApiDepartment>>(`/api/v3/departments/tree?fields=id,name&${this._filters.join(',')}`);
 		}
 		return call.pipe(
 			map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
