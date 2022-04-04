@@ -31,6 +31,7 @@ export class LuDepartmentSelectInputComponent<
 
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
+	@Input() filters: string[];
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
