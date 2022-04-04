@@ -1,13 +1,9 @@
 .link, a[href] {
-	background-color: transparent;
-	border: 0;
-	cursor: pointer;
+	@include buttonReset;
 	color: _color("primary","700");
 	display: inline;
-	font-family: _theme("commons.font.family");
-	margin: 0;
-	padding: 0;
 	text-decoration: underline;
+	width: auto;
 
 	&:hover, &:focus {
 		color: _color("primary", "600");
