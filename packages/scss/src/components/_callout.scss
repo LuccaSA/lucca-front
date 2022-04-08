@@ -1,24 +1,25 @@
 .callout {
-	background-color: _component("callout.background");
-	border-radius: _theme("commons.border.radius");
-	border: _theme("commons.divider.width") solid _color("grey", 200, true);
-	margin: _component("callout.margin");
-	padding: _component("callout.padding");
+	background-color: _component('callout.background');
+	border-radius: _theme('commons.border.radius');
+	border: _theme('commons.divider.width') solid _color('grey', 200, true);
+	margin: _component('callout.margin');
+	padding: _component('callout.padding');
 	position: relative;
+	color: _color('grey', 800);
 
 	a {
-		color: inherit;
+		color: _color('grey', 800);
 
 		&:hover {
 			color: inherit;
-			opacity: .8;
+			opacity: 0.8;
 		}
 	}
 }
 
 .callout-title {
 	font-weight: 600;
-	margin-bottom: _theme("spacings.smallest");
+	margin-bottom: _theme('spacings.smallest');
 }
 
 .callout-kill {
@@ -29,13 +30,13 @@
 	height: 1.5rem;
 	padding: 0;
 	position: absolute;
-	right: _theme("spacings.small");
-	top: .5rem;
+	right: _theme('spacings.small');
+	top: 0.5rem;
 	transition: 150ms background-color ease;
 	width: 1rem;
 
 	&::before {
-		@include makeIcon("cross");
+		@include makeIcon('cross');
 	}
 
 	&:hover {
@@ -45,8 +46,8 @@
 
 .callout-icon {
 	position: absolute;
-	top: .4rem;
-	left: .75rem;
+	top: 0.4rem;
+	left: 0.75rem;
 	width: 2rem;
 	margin: auto;
 	border-radius: 50%;
@@ -68,14 +69,14 @@
 	}
 
 	&.mod-small {
-		font-size: _theme("sizes.small.font-size");
-		line-height: _theme("sizes.small.line-height");
+		font-size: _theme('sizes.small.font-size');
+		line-height: _theme('sizes.small.line-height');
 
 		&.mod-icon {
 			padding-left: 2.8rem;
 
 			.callout-icon {
-				top: .4rem;
+				top: 0.4rem;
 
 				.lucca-icon {
 					font-size: 1rem;
@@ -91,11 +92,10 @@
 
 @mixin calloutDefaultPalette($palette) {
 	background-color: _color($palette, 100);
-	color: _color($palette, 800);
-	border: _theme("commons.divider.width") solid _color($palette, 200);
+	border: _theme('commons.divider.width') solid _color($palette, 200);
 }
 .callout {
-	@each $name, $palette in _getMap("palettes") {
+	@each $name, $palette in _getMap('palettes') {
 		&.palette-#{$name} {
 			@include calloutDefaultPalette($name);
 		}
