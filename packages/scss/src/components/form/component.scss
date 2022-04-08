@@ -1,0 +1,92 @@
+@use '../commons/utils/form';
+
+@mixin component(
+	$form: '.form',
+	$line: '.form-group-line',
+	$col: '.form-group-line-col',
+	$legend: '.form-group-legend',
+	$title: '.form-group-title',
+	$actions: '.form-actions',
+	$label: '.form-group-label',
+	$labels: '.radiosfield-label, .checkboxesfield-label, .textfield-label',
+	$fields: '.textfield, .radiosfield, .checkboxesfield, .checkbox.mod-field'
+) {
+	padding: 0;
+	border: 0;
+	margin: 0 0 var(--components-form-group-margin-bottom);
+	position: relative;
+
+	@at-root {
+		#{$label},
+		#{$legend},
+		#{$title} {
+			display: block;
+			font-weight: 600;
+			font-size: var(--components-form-label-font-size);
+			margin: 0;
+			padding: 0 0 var(--components-form-label-margin-bottom);
+			width: 100%;
+			text-align: left;
+		}
+
+		#{$legend},
+		#{$title} {
+			font-size: var(--components-field-framed-title-font-size);
+			line-height: var(--components-field-framed-title-line-height);
+			padding-bottom: var(--spacings-smallest);
+		}
+
+		#{$title} {
+			margin-bottom: var(--spacings-small);
+		}
+
+		#{$actions} {
+			text-align: right;
+		}
+
+		#{$form} {
+			&:not(.mod-framed) {
+				#{$fields} {
+					margin-bottom: var(--components-form-field-margin-bottom);
+				}
+			}
+		}
+
+		#{$line} {
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+		}
+
+		#{$col} {
+			flex-basis: 0;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+
+			> * {
+				flex-grow: 1;
+			}
+		}
+
+		#{$label} {
+			&.is-required {
+				&:not(:empty) {
+					&::after {
+						@include form.required;
+					}
+				}
+			}
+		}
+
+		#{$labels} {
+			&.is-required {
+				&:not(:empty) {
+					&::after {
+						@include form.required;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+@mixin header {
+  padding: 0 2.5rem;
+}
+
+@mixin small($link: '.menu-link', $action: '.menu-list-item-action', $label: '.label') {
+  // legacy syntax
+  #{$link},
+  #{$action} {
+    font-size: var(--sizes-small-font-size);
+    line-height: var(--sizes-smaller-line-height);
+    padding: 0.75rem 0;
+  }
+
+  #{$label} {
+    font-size: var(--sizes-smaller-font-size);
+  }
+
+  // legacy syntax
+  #{$link} {
+    margin-right: var(--spacings-standard);
+  }
+}

@@ -1,13 +1,2 @@
-$noCssVar: true;
-
-@import
-
-	"theming",
-	"mixins",
-	"mixins/cssvars",
-	"normalize",
-	"typo",
-	"utilities",
-	"icons",
-	"components",
-	"shame"; // Shame - Put here the bad code, weirdo
+@use 'commons';
+@use 'components'; // chargement de tout les composants

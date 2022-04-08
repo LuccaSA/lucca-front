@@ -1,0 +1,96 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'config';
+@use 'core';
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 200 900;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+  src: url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf.woff2') format('woff2'),
+    url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf.woff') format('woff'),
+    url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf') format('truetype');
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+html {
+  @include core.cssvars('commons-border-radius', config.$borderRadius);
+  @include core.cssvars('commons-box-shadow', config.$boxShadows);
+  @include core.cssvars('commons-animations', config.$animations);
+  @include core.cssvars('commons-disabled', config.$disabled);
+  @include core.cssvars('commons-loading', config.$disabled);
+
+  @include core.cssvars('palettes-primary', config.$primary);
+  @include core.cssvars('palettes-secondary', config.$secondary);
+  @include core.cssvars('palettes-grey', config.$grey);
+  @include core.cssvars('palettes-success', config.$success);
+  @include core.cssvars('palettes-warning', config.$warning);
+  @include core.cssvars('palettes-error', config.$error);
+
+  @include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
+  @include core.cssvars('spacings', config.$spacings);
+
+  @each $key, $map in config.$sizes {
+    @include core.cssvars('sizes-#{$key}', $map);
+  }
+
+  @each $key, $value in config.$boxShadows {
+    --commons-elevations-elevation-#{list.index((config.$boxShadows), ($key $value))}: var(--commons-box-shadow-#{$key});
+  }
+
+  --colors-white-color: #ffffff;
+  --commons-background-base: #f5f5f5;
+
+  --layout-navSide-width: 15rem;
+  --layout-navSide-compact-width: 7.5rem;
+
+  --commons-banner-height: 50px;
+
+  --commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
+
+  --palettes-grey-900-rbg: 19, 29, 53;
+
+  font-family: 'Source Sans Pro', Tahoma, sans-serif;
+  height: -webkit-fill-available;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  @supports (-webkit-touch-callout: none) {
+    min-height: -webkit-fill-available;
+  }
+}
+
+.palette-primary {
+  @include core.cssvars('palettes', config.$primary);
+}
+
+.palette-secondary {
+  @include core.cssvars('palettes', config.$secondary);
+}
+
+.palette-grey {
+  @include core.cssvars('palettes', config.$grey);
+}
+
+.palette-success {
+  @include core.cssvars('palettes', config.$success);
+}
+
+.palette-warning {
+  @include core.cssvars('palettes', config.$warning);
+}
+
+.palette-error {
+  @include core.cssvars('palettes', config.$error);
+}

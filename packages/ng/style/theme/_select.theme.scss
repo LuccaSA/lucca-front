@@ -1,24 +1,24 @@
-$select: (
-	default-palette: _getMap("palettes.primary"),
-	chip: (
-		background: _color("primary", 700, true),
-		text: _color("primary", "text", true)
-	),
-	input: (
-		padding-horizontal: _theme("spacings.smaller", true),
-		padding-vertical: _theme("spacings.smaller", true)
-	),
-	// legacy
-	framed: (
-		color: _color("text.light", "color", true),
-		"color50": _color("grey", "50", true),
-		see-through: _color("grey", "50", true),
-		text: _color("text.default", "color", true),
-		placeholder: #CCCCCC,
-		side-padding: _theme("spacings.small"),
-		top-padding: _theme("spacings.big"),
-		bottom-padding: _theme("spacings.small"),
-		label-top-offset: _theme("spacings.smaller"),
-	)
-);
-$theme: _set($theme, 'components.select', $select);
+// $select: (
+// 	default-palette: _getMap("palettes.primary"),
+// 	chip: (
+// 		background: _color("primary", 700, true),
+// 		text: _color("primary", "text", true)
+// 	),
+// 	input: (
+// 		padding-horizontal: _theme("spacings.smaller", true),
+// 		padding-vertical: _theme("spacings.smaller", true)
+// 	),
+// 	// legacy
+// 	framed: (
+// 		color: _color("text.light", "color", true),
+// 		"color50": _color("grey", "50", true),
+// 		see-through: _color("grey", "50", true),
+// 		text: _color("text.default", "color", true),
+// 		placeholder: #CCCCCC,
+// 		side-padding: _theme("spacings.small"),
+// 		top-padding: _theme("spacings.big"),
+// 		bottom-padding: _theme("spacings.small"),
+// 		label-top-offset: _theme("spacings.smaller"),
+// 	)
+// );
+// $theme: _set($theme, 'components.select', $select);

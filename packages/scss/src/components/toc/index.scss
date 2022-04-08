@@ -1,0 +1,20 @@
+@use 'exports' as *;
+
+.tableOfContent {
+  @include vars;
+  @include component;
+
+  &.mod-grey {
+    @include grey;
+  }
+}
+
+.tableOfContent-item {
+  &:is(:hover) {
+    @include hover;
+  }
+
+  &:is(.is-active) {
+    @include active;
+  }
+}

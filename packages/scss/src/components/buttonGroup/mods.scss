@@ -1,0 +1,15 @@
+@mixin outlined($button: '.button') {
+  background-color: var(--palettes-grey-400);
+  box-shadow: 0 0 0 1px var(--palettes-grey-400);
+
+  #{$button} {
+    &.mod-outline,
+    &.mod-outlined {
+      box-shadow: none;
+    }
+  }
+
+  &:focus-within {
+    box-shadow: 0 0 0 1px var(--palettes-grey-400), 0 0 0 4px var(--palettes-primary-200);
+  }
+}

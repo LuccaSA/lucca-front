@@ -1,0 +1,67 @@
+@mixin component(
+  $section: '.errorPage-section',
+  $info: '.errorPage-section-info',
+  $title: '.errorPage-section-info-title',
+  $text: '.errorPage-section-info-text',
+  $image: '.errorPage-section-image'
+) {
+  background-color: var(--components-errorPage-background);
+  height: 100vh;
+  width: 100vw;
+  line-height: 1.2;
+  overflow: hidden;
+
+  #{$section} {
+    height: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    width: 100vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #{$info} {
+    margin-top: 10vh;
+    max-width: 90vw;
+    width: 450px;
+    padding-right: 2rem;
+  }
+
+  #{$title} {
+    color: var(--components-errorPage-header-color);
+    font-size: 2.5rem;
+  }
+
+  #{$text} {
+    font-size: 1.5rem;
+  }
+
+  #{$image} {
+    margin-top: 10vh;
+    width: 50%;
+    max-width: 580px;
+    min-width: 350px;
+  }
+}
+
+@mixin compact($section: '.errorPage-section', $info: '.errorPage-section-info', $image: '.errorPage-section-image') {
+  overflow-y: auto;
+
+  #{$section} {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #{$info} {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    order: 1;
+    padding: 0;
+  }
+  #{$image} {
+    margin-top: 2rem;
+    order: 0;
+  }
+}

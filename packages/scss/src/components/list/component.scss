@@ -1,0 +1,70 @@
+@use '../commons/utils/a11y';
+
+@mixin component(
+	$item: '.list-item',
+	$actions: '.list-item-actions',
+	$content: '.list-item-content',
+	$title: '.list-item-content-title',
+	$description: '.list-item-content-description',
+	$actionIcon: '.actionIcon'
+) {
+	background-color: var(--colors-white-color);
+	box-shadow: var(--commons-elevations-elevation-1);
+	margin-bottom: var(--components-list-margin-bottom);
+	list-style: none;
+	padding: 0;
+
+	@at-root {
+		#{$item} {
+			border-bottom-width: var(--commons-divider-width);
+			border-bottom-color: var(--commons-divider-color);
+			color: _color('text.default');
+			border-bottom-style: solid;
+			align-items: center;
+			display: flex;
+			position: relative;
+			text-decoration: none;
+
+			&:last-child {
+				border: 0;
+			}
+
+			// if no hover on list item
+			&:not(:hover) {
+				#{$actionIcon} {
+					// and no focus on action icon
+					&:not(:focus) {
+						// then mask
+						@include a11y.mask;
+
+						opacity: 0;
+					}
+				}
+			}
+		}
+
+		#{$content} {
+			padding: var(--components-list-padding);
+			color: _color('text.default');
+			text-decoration: none;
+			width: 100%;
+		}
+
+		#{$title} {
+			margin: 0;
+		}
+
+		#{$description} {
+			margin: 0;
+		}
+
+		#{$actions} {
+			padding: var(--components-list-padding);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: all;
+			margin-left: auto;
+			white-space: nowrap;
+			padding-left: 0;
+		}
+	}
+}

@@ -1,323 +1,323 @@
-@import "~@lucca-front/icons/src/_mixins";
-@mixin selectInputStyle {
-	:host {
-		cursor: pointer;
-		outline: none;
-		padding: 0;
+// @import "~@lucca-front/icons/src/_mixins";
+// @mixin selectInputStyle {
+// 	:host {
+// 		cursor: pointer;
+// 		outline: none;
+// 		padding: 0;
 
-		&::after {
-			@include makeIcon("arrow_south");
-			@include selectColoringIcons("select.default-palette");
-			bottom: #{_component("select.input.padding-vertical", true)};
-			bottom: _component("select.input.padding-vertical");
-			font-size: 1.2rem;
-			line-height: 1.4rem;
-			pointer-events: none;
-			position: absolute;
-			right: #{_component("select.input.padding-horizontal", true)};
-			right: _component("select.input.padding-horizontal");
-		}
+// 		&::after {
+// 			@include makeIcon("arrow_south");
+// 			@include selectColoringIcons("select.default-palette");
+// 			bottom: #{_component("select.input.padding-vertical", true)};
+// 			bottom: _component("select.input.padding-vertical");
+// 			font-size: 1.2rem;
+// 			line-height: 1.4rem;
+// 			pointer-events: none;
+// 			position: absolute;
+// 			right: #{_component("select.input.padding-horizontal", true)};
+// 			right: _component("select.input.padding-horizontal");
+// 		}
 
-		&[disabled] {
-			cursor: not-allowed;
-			pointer-events: all;
-		}
+// 		&[disabled] {
+// 			cursor: not-allowed;
+// 			pointer-events: all;
+// 		}
 
-		&.is-disabled {
-			cursor: not-allowed;
-			pointer-events: all;
-		}
-	}
+// 		&.is-disabled {
+// 			cursor: not-allowed;
+// 			pointer-events: all;
+// 		}
+// 	}
 
-	.lu-select-display-wrapper {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
+// 	.lu-select-display-wrapper {
+// 		overflow: hidden;
+// 		text-overflow: ellipsis;
+// 		white-space: nowrap;
+// 	}
 
-	.lu-select-value {
-		line-height: _theme("sizes.standard.line-height", true);
-		line-height: _theme("sizes.standard.line-height");
-		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
-		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
-		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
-			#{_component("select.input.padding-vertical", true)}
-			#{_component("select.input.padding-horizontal", true)};
-		padding: _component("select.input.padding-vertical") 2.5rem
-			_component("select.input.padding-vertical")
-			_component("select.input.padding-horizontal");
-		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
-		transition: all _theme("commons.animations.durations.standard") ease;
-		display: none;
-	}
+// 	.lu-select-value {
+// 		line-height: _theme("sizes.standard.line-height", true);
+// 		line-height: _theme("sizes.standard.line-height");
+// 		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
+// 		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
+// 		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
+// 			#{_component("select.input.padding-vertical", true)}
+// 			#{_component("select.input.padding-horizontal", true)};
+// 		padding: _component("select.input.padding-vertical") 2.5rem
+// 			_component("select.input.padding-vertical")
+// 			_component("select.input.padding-horizontal");
+// 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
+// 		transition: all _theme("commons.animations.durations.standard") ease;
+// 		display: none;
+// 	}
 
-	.lu-select-placeholder {
-		@include selectColoringPlaceholer("select.default-palette");
-		line-height: _theme("sizes.standard.line-height", true);
-		line-height: _theme("sizes.standard.line-height");
-		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
-		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
-		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
-			#{_component("select.input.padding-vertical", true)}
-			#{_component("select.input.padding-horizontal", true)};
-		padding: _component("select.input.padding-vertical") 2.5rem
-			_component("select.input.padding-vertical")
-			_component("select.input.padding-horizontal");
-		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
-		transition: all _theme("commons.animations.durations.standard") ease;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
+// 	.lu-select-placeholder {
+// 		@include selectColoringPlaceholer("select.default-palette");
+// 		line-height: _theme("sizes.standard.line-height", true);
+// 		line-height: _theme("sizes.standard.line-height");
+// 		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
+// 		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
+// 		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
+// 			#{_component("select.input.padding-vertical", true)}
+// 			#{_component("select.input.padding-horizontal", true)};
+// 		padding: _component("select.input.padding-vertical") 2.5rem
+// 			_component("select.input.padding-vertical")
+// 			_component("select.input.padding-horizontal");
+// 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
+// 		transition: all _theme("commons.animations.durations.standard") ease;
+// 		overflow: hidden;
+// 		text-overflow: ellipsis;
+// 		white-space: nowrap;
+// 	}
 
-	.lu-select-suffix {
-		position: absolute;
-		bottom: .5rem;
-		right: 1.6rem;
-	}
+// 	.lu-select-suffix {
+// 		position: absolute;
+// 		bottom: .5rem;
+// 		right: 1.6rem;
+// 	}
 
-	::ng-deep .lu-select-value {
-		.label {
-			padding: _theme("spacings.smallest", true) .25rem .5rem _theme("spacings.smaller", true);
-			padding: _theme("spacings.smallest") _theme("spacings.smaller");
-			margin-left: 0;
-		}
-		.chip {
-			background: _component("select.chip.background", true);
-			background: _component("select.chip.background");
-			color: _component("select.chip.text", true);
-			color: _component("select.chip.text");
-			vertical-align: baseline;
-			max-width: 100%;
-			height: _theme("sizes.standard.line-height", true);
-			height: _theme("sizes.standard.line-height");
-			line-height: _theme("sizes.standard.line-height", true);
-			line-height: _theme("sizes.standard.line-height");
-			padding: 0 _theme("spacings.smaller", true);
-			padding: 0 _theme("spacings.smaller");
-			margin: 0 .25rem .25rem 0;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			vertical-align: top;
-			white-space: nowrap;
-		}
-	}
-
-
-	// MODS
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-	// Small
-	:host-context(.textfield.mod-small) {
-		.lu-select-value, .lu-select-placeholder {
-			font-size: _theme("sizes.small.font-size", true);
-			font-size: _theme("sizes.small.font-size");
-			line-height: _theme("sizes.small.line-height", true);
-			line-height: _theme("sizes.small.line-height");
-			min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.small.line-height", true)});
-			min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.small.line-height")});
-		}
-
-		&::after {
-			line-height: _theme("sizes.small.line-height", true);
-			line-height: _theme("sizes.small.line-height");
-		}
-
-		::ng-deep .lu-select-value {
-			.label {
-				font-size: _theme("sizes.small.font-size", true);
-				font-size: _theme("sizes.small.font-size");
-				line-height: _theme("sizes.small.line-height", true);
-				line-height: _theme("sizes.small.line-height");
-				font-weight: 600;
-				margin: 0;
-				padding: 0;
-				background: transparent;
-			}
-
-			.chip {
-				height: _theme("sizes.small.line-height", true);
-				height: _theme("sizes.small.line-height");
-				line-height: _theme("sizes.small.line-height", true);
-				line-height: _theme("sizes.small.line-height");
-			}
-		}
-	}
-
-	// Framed
-	:host-context(.textfield.mod-framed),
-	:host-context(.form.mod-framed) {
-		&.textfield-input {
-			padding: #{_component("select.framed.top-padding", true)} 0 0;
-			padding: _component("select.framed.top-padding") 0 0;
-
-			&::after {
-				color: _color("text.light", "color", true);
-				color: _color("text.light");
-				bottom: _component("select.framed.bottom-padding", true);
-				bottom: _component("select.framed.bottom-padding");
-				right: _theme("spacings.smaller", true);
-				right: _theme("spacings.smaller");
-			}
-
-			.lu-select-value, .lu-select-placeholder {
-				padding: 0 calc(#{_component("select.framed.side-padding", true)} * 3)
-					#{_component("select.framed.bottom-padding", true)}
-					#{_component("select.framed.side-padding", true)};
-				padding: 0 calc(#{_component("select.framed.side-padding")} * 3)
-					_component("select.framed.bottom-padding")
-					_component("select.framed.side-padding");
-			}
-
-			.lu-select-suffix {
-				bottom: _component("select.framed.bottom-padding", true);
-				bottom: _component("select.framed.bottom-padding");
-				right: 1.7rem;
-			}
-		}
-	}
-
-	// Filter
-	:host-context(.textfield.mod-filter) {
-		.lu-select-value, .lu-select-placeholder {
-			padding: 0;
-			height: auto;
-			padding-top: 1rem;
-			color: _color("text.default", "color", true);
-			color: _color("text.default");
-		}
-
-		.lu-select-suffix {
-			bottom: .4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
-		}
-	}
-
-	// Material
-	:host-context(.textfield.mod-material) {
-		&::after {
-			color: _color("text.light", "color", true);
-			color: _color("text.light");
-			bottom: 0.6rem;
-			right: 0;
-		}
-
-		.lu-select-value, .lu-select-placeholder {
-			padding-left: 0;
-			padding-right: 0.8rem;
-		}
-
-		.lu-select-suffix {
-			right: calc(2 * #{_component("select.input.padding-horizontal", true)});
-			right: calc(2 * #{_component("select.input.padding-horizontal")});
-		}
+// 	::ng-deep .lu-select-value {
+// 		.label {
+// 			padding: _theme("spacings.smallest", true) .25rem .5rem _theme("spacings.smaller", true);
+// 			padding: _theme("spacings.smallest") _theme("spacings.smaller");
+// 			margin-left: 0;
+// 		}
+// 		.chip {
+// 			background: _component("select.chip.background", true);
+// 			background: _component("select.chip.background");
+// 			color: _component("select.chip.text", true);
+// 			color: _component("select.chip.text");
+// 			vertical-align: baseline;
+// 			max-width: 100%;
+// 			height: _theme("sizes.standard.line-height", true);
+// 			height: _theme("sizes.standard.line-height");
+// 			line-height: _theme("sizes.standard.line-height", true);
+// 			line-height: _theme("sizes.standard.line-height");
+// 			padding: 0 _theme("spacings.smaller", true);
+// 			padding: 0 _theme("spacings.smaller");
+// 			margin: 0 .25rem .25rem 0;
+// 			text-overflow: ellipsis;
+// 			overflow: hidden;
+// 			vertical-align: top;
+// 			white-space: nowrap;
+// 		}
+// 	}
 
 
-		&.is-select {
-			.lu-select-placeholder {
-				display: none;
-			}
-		}
+// 	// MODS
+// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-		&.mod-search {
-			&::after {
-				bottom: 0;
-			}
-			.lu-select-suffix {
-				right: calc(2.75 * #{_component("select.input.padding-horizontal", true)});
-				right: calc(2.75 * #{_component("select.input.padding-horizontal")});
-			}
-		}
-	}
+// 	// Small
+// 	:host-context(.textfield.mod-small) {
+// 		.lu-select-value, .lu-select-placeholder {
+// 			font-size: _theme("sizes.small.font-size", true);
+// 			font-size: _theme("sizes.small.font-size");
+// 			line-height: _theme("sizes.small.line-height", true);
+// 			line-height: _theme("sizes.small.line-height");
+// 			min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.small.line-height", true)});
+// 			min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.small.line-height")});
+// 		}
 
-	:host-context(.textfield.mod-material .textfield-input.is-focused) {
-		.lu-select-placeholder {
-			display: none;
-		}
-	}
+// 		&::after {
+// 			line-height: _theme("sizes.small.line-height", true);
+// 			line-height: _theme("sizes.small.line-height");
+// 		}
 
-	// Multiple
-	:host(.mod-multiple) {
-		&.mod-multipleView:not(.mod-singleLine) {
-			.lu-select-value {
-				height: auto;
-				align-items: center;
-			}
+// 		::ng-deep .lu-select-value {
+// 			.label {
+// 				font-size: _theme("sizes.small.font-size", true);
+// 				font-size: _theme("sizes.small.font-size");
+// 				line-height: _theme("sizes.small.line-height", true);
+// 				line-height: _theme("sizes.small.line-height");
+// 				font-weight: 600;
+// 				margin: 0;
+// 				padding: 0;
+// 				background: transparent;
+// 			}
 
-			.lu-select-display-wrapper {
-				overflow: hidden;
-				white-space: normal;
-				margin-bottom: -.25rem;
-			}
-		}
-	}
+// 			.chip {
+// 				height: _theme("sizes.small.line-height", true);
+// 				height: _theme("sizes.small.line-height");
+// 				line-height: _theme("sizes.small.line-height", true);
+// 				line-height: _theme("sizes.small.line-height");
+// 			}
+// 		}
+// 	}
 
-	// STATES
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// 	// Framed
+// 	:host-context(.textfield.mod-framed),
+// 	:host-context(.form.mod-framed) {
+// 		&.textfield-input {
+// 			padding: #{_component("select.framed.top-padding", true)} 0 0;
+// 			padding: _component("select.framed.top-padding") 0 0;
 
-	// Filled
-	:host-context(.textfield-input.is-filled) {
-		.lu-select-placeholder {
-			display: none;
-		}
+// 			&::after {
+// 				color: _color("text.light", "color", true);
+// 				color: _color("text.light");
+// 				bottom: _component("select.framed.bottom-padding", true);
+// 				bottom: _component("select.framed.bottom-padding");
+// 				right: _theme("spacings.smaller", true);
+// 				right: _theme("spacings.smaller");
+// 			}
 
-		.lu-select-value {
-			display: flex;
-		}
-	}
+// 			.lu-select-value, .lu-select-placeholder {
+// 				padding: 0 calc(#{_component("select.framed.side-padding", true)} * 3)
+// 					#{_component("select.framed.bottom-padding", true)}
+// 					#{_component("select.framed.side-padding", true)};
+// 				padding: 0 calc(#{_component("select.framed.side-padding")} * 3)
+// 					_component("select.framed.bottom-padding")
+// 					_component("select.framed.side-padding");
+// 			}
 
-	// Clearable
-	:host-context(.textfield-input.is-clearable) {
-		.lu-select-value {
-			padding-right: 2.5rem;
-		}
-	}
+// 			.lu-select-suffix {
+// 				bottom: _component("select.framed.bottom-padding", true);
+// 				bottom: _component("select.framed.bottom-padding");
+// 				right: 1.7rem;
+// 			}
+// 		}
+// 	}
 
-	// Error
-	:host-context(.textfield-input.is-error) {
-		&::after {
-			color: _color("error", 700, true);
-			color: _color("error");
-		}
+// 	// Filter
+// 	:host-context(.textfield.mod-filter) {
+// 		.lu-select-value, .lu-select-placeholder {
+// 			padding: 0;
+// 			height: auto;
+// 			padding-top: 1rem;
+// 			color: _color("text.default", "color", true);
+// 			color: _color("text.default");
+// 		}
 
-		.lu-select-placeholder {
-			color: _color("error", 200, true);
-			color: _color("error", 200);
-		}
-	}
+// 		.lu-select-suffix {
+// 			bottom: .4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
+// 		}
+// 	}
 
-	// Disabled
-	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-		&::after {
-			color: _theme("commons.disabled.color", true);
-			color: _theme("commons.disabled.color");
-		}
+// 	// Material
+// 	:host-context(.textfield.mod-material) {
+// 		&::after {
+// 			color: _color("text.light", "color", true);
+// 			color: _color("text.light");
+// 			bottom: 0.6rem;
+// 			right: 0;
+// 		}
 
-		.lu-select-placeholder {
-			color: _theme("commons.disabled.placeholder", true);
-			color: _theme("commons.disabled.placeholder");
-		}
-	}
+// 		.lu-select-value, .lu-select-placeholder {
+// 			padding-left: 0;
+// 			padding-right: 0.8rem;
+// 		}
 
-	// PALETTES
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// 		.lu-select-suffix {
+// 			right: calc(2 * #{_component("select.input.padding-horizontal", true)});
+// 			right: calc(2 * #{_component("select.input.padding-horizontal")});
+// 		}
 
-	@each $name, $palette in _getMap("palettes") {
-		:host-context(.palette-#{$name}) {
-			.lu-select-placeholder {
-				@include selectColoringPlaceholer($name);
-			}
 
-			&::after {
-				@include selectColoringIcons($name);
-			}
-		}
-	}
-}
+// 		&.is-select {
+// 			.lu-select-placeholder {
+// 				display: none;
+// 			}
+// 		}
 
-@mixin selectColoringPlaceholer($palette) {
-		color: _color($palette, 400);
-}
+// 		&.mod-search {
+// 			&::after {
+// 				bottom: 0;
+// 			}
+// 			.lu-select-suffix {
+// 				right: calc(2.75 * #{_component("select.input.padding-horizontal", true)});
+// 				right: calc(2.75 * #{_component("select.input.padding-horizontal")});
+// 			}
+// 		}
+// 	}
 
-@mixin selectColoringIcons($palette) {
-		color: _color($palette, 700);
-}
+// 	:host-context(.textfield.mod-material .textfield-input.is-focused) {
+// 		.lu-select-placeholder {
+// 			display: none;
+// 		}
+// 	}
+
+// 	// Multiple
+// 	:host(.mod-multiple) {
+// 		&.mod-multipleView:not(.mod-singleLine) {
+// 			.lu-select-value {
+// 				height: auto;
+// 				align-items: center;
+// 			}
+
+// 			.lu-select-display-wrapper {
+// 				overflow: hidden;
+// 				white-space: normal;
+// 				margin-bottom: -.25rem;
+// 			}
+// 		}
+// 	}
+
+// 	// STATES
+// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// 	// Filled
+// 	:host-context(.textfield-input.is-filled) {
+// 		.lu-select-placeholder {
+// 			display: none;
+// 		}
+
+// 		.lu-select-value {
+// 			display: flex;
+// 		}
+// 	}
+
+// 	// Clearable
+// 	:host-context(.textfield-input.is-clearable) {
+// 		.lu-select-value {
+// 			padding-right: 2.5rem;
+// 		}
+// 	}
+
+// 	// Error
+// 	:host-context(.textfield-input.is-error) {
+// 		&::after {
+// 			color: _color("error", 700, true);
+// 			color: _color("error");
+// 		}
+
+// 		.lu-select-placeholder {
+// 			color: _color("error", 200, true);
+// 			color: _color("error", 200);
+// 		}
+// 	}
+
+// 	// Disabled
+// 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+// 		&::after {
+// 			color: _theme("commons.disabled.color", true);
+// 			color: _theme("commons.disabled.color");
+// 		}
+
+// 		.lu-select-placeholder {
+// 			color: _theme("commons.disabled.placeholder", true);
+// 			color: _theme("commons.disabled.placeholder");
+// 		}
+// 	}
+
+// 	// PALETTES
+// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// 	@each $name, $palette in _getMap("palettes") {
+// 		:host-context(.palette-#{$name}) {
+// 			.lu-select-placeholder {
+// 				@include selectColoringPlaceholer($name);
+// 			}
+
+// 			&::after {
+// 				@include selectColoringIcons($name);
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectColoringPlaceholer($palette) {
+// 		color: _color($palette, 400);
+// }
+
+// @mixin selectColoringIcons($palette) {
+// 		color: _color($palette, 700);
+// }

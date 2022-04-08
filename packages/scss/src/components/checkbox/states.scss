@@ -1,0 +1,53 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+@use '../commons/utils/form';
+
+@mixin disabled($label: '.checkbox-label') {
+	~ #{$label} {
+		color: var(--palettes-grey-500);
+		cursor: default;
+
+		&::before {
+			border-color: var(--palettes-grey-500);
+			border-style: solid;
+			border-width: 2px;
+		}
+	}
+
+	&:checked ~ #{$label} {
+		&::before {
+			color: var(--palettes-grey-500);
+			background-color: var(--palettes-grey-200);
+			border-color: var(--palettes-grey-200);
+			border-style: solid;
+			border-width: 2px;
+		}
+	}
+}
+
+@mixin incomplete($label: '.checkbox-label', $mixed: '.checkbox-mixed') {
+	~ #{$mixed} ~ #{$label},
+	~ #{$label} {
+		&::before {
+			@include icon.makeIcon('partial');
+		}
+	}
+}
+
+@mixin required($label: '.checkbox-label') {
+	~ #{$label},
+	#{$label} {
+		&:not(:empty) {
+			&::after {
+				@include form.required;
+			}
+		}
+	}
+}
+
+@mixin state($state, $label: '.checkbox-label') {
+	#{$label} {
+		&::before {
+			border-color: var(--palettes-#{$state}-600);
+		}
+	}
+}

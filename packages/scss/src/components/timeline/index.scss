@@ -1,0 +1,20 @@
+@use 'exports' as *;
+
+.timeline {
+  @include vars;
+  @include component;
+
+  &.mod-number {
+    @include number;
+  }
+
+  &.mod-small {
+    @include small;
+  }
+}
+
+.timeline-step {
+  &:is([aria-current='step']) {
+    @include current;
+  }
+}

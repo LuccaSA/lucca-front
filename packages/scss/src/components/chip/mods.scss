@@ -1,0 +1,21 @@
+@mixin unkillable {
+  padding: 0.15rem 0.75rem;
+
+  .chip-kill {
+    display: none;
+  }
+}
+
+@mixin clickable {
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: var(--palettes-primary-600);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--palettes-primary-200);
+  }
+}

@@ -1,0 +1,84 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+@use '../commons/utils/a11y';
+
+@mixin component($input: '.checkbox-input', $label: '.checkbox-label') {
+	display: block;
+	position: relative;
+
+	@at-root {
+		#{$label} {
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: color;
+			display: inline-flex;
+			align-items: flex-start;
+			cursor: pointer;
+
+			&::before {
+				@include icon.makeIcon('tick');
+
+				background-color: var(--colors-white-color);
+				width: var(--components-checkbox-input-size);
+				height: var(--components-checkbox-input-size);
+				margin-right: var(--components-checkbox-input-margin-right);
+				margin-top: var(--components-checkbox-input-margin-top);
+				border-radius: var(--components-checkbox-input-border-radius);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: all;
+				border-color: var(--components-checkbox-input-border-color);
+				border-width: 2px;
+				line-height: 1;
+				font-size: 0.8rem;
+				flex-grow: 0;
+				flex-shrink: 0;
+				flex-basis: auto;
+				border-style: solid;
+				color: transparent;
+				display: block;
+				text-align: center;
+			}
+
+			&:hover {
+				color: var(--palettes-grey-500);
+
+				&::before {
+					border-color: var(--components-checkbox-input-border-hover);
+				}
+			}
+		}
+
+		#{$input} {
+			@include a11y.mask;
+
+			&:checked {
+				~ #{$label} {
+					&::before {
+						color: var(--colors-white-color);
+						background-color: var(--palettes-700, var(--components-checkbox-default-palette-700));
+						border-color: var(--palettes-700, var(--components-checkbox-default-palette-700));
+					}
+				}
+			}
+
+			&:not(:disabled) {
+				&:checked {
+					~ #{$label} {
+						&:hover {
+							&::before {
+								background-color: var(--palettes-600, var(--components-checkbox-default-palette-600));
+								border-color: var(--palettes-600, var(--components-checkbox-default-palette-600));
+							}
+						}
+					}
+				}
+			}
+
+			&:focus {
+				~ #{$label} {
+					&::before {
+						box-shadow: 0 0 0 4px var(--palettes-200, var(--components-checkbox-default-palette-200));
+					}
+				}
+			}
+		}
+	}
+}

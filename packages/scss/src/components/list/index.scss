@@ -1,0 +1,16 @@
+@use 'exports' as *;
+
+.list {
+  @include vars;
+  @include component;
+}
+
+.list-item {
+  &.mod-clickable {
+    @include clickable;
+  }
+
+  &.mod-draggable {
+    @include draggable;
+  }
+}

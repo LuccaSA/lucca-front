@@ -1,0 +1,12 @@
+@mixin mask($suffix: '') {
+  border: 0 #{$suffix};
+  clip: rect(1px, 1px, 1px, 1px) #{$suffix};
+  height: 1px #{$suffix};
+  margin: -1px #{$suffix};
+  overflow: hidden #{$suffix};
+  padding: 0 #{$suffix};
+  position: absolute #{$suffix};
+  width: 1px #{$suffix};
+  white-space: nowrap #{$suffix};
+  contain: paint #{$suffix};
+}

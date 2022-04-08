@@ -1,0 +1,84 @@
+@use '../commons/utils/a11y';
+
+@mixin component($input: '.radio-input', $label: '.radio-label') {
+	position: relative;
+	display: block;
+
+	#{$input} {
+		@include a11y.mask;
+
+		&:checked ~ #{$label} {
+			&::after {
+				transform: scale(0.55);
+				background-color: var(--palettes-700, var(--components-radio-default-palette-700));
+			}
+		}
+
+		&:not(:disabled) {
+			~ #{$label} {
+				&:hover {
+					&::before {
+						border-color: var(--palettes-600, var(--components-radio-default-palette-600));
+					}
+				}
+			}
+
+			&:checked {
+				~ #{$label} {
+					&:hover {
+						&::after {
+							background-color: var(--palettes-600, var(--components-radio-default-palette-600));
+						}
+					}
+				}
+			}
+		}
+
+		&:focus {
+			~ #{$label} {
+				&::before {
+					box-shadow: 0 0 0 4px var(--palettes-200, var(--components-radio-default-palette-200));
+					border-color: var(--palettes-600, var(--components-radio-default-palette-600));
+				}
+
+				&::after {
+					background-color: var(--palettes-600, var(--components-radio-default-palette-600));
+				}
+			}
+		}
+	}
+
+	#{$label} {
+		line-height: var(--components-radio-label-line-height);
+		padding: var(--components-radio-label-padding);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: color;
+		display: inline-block;
+		cursor: pointer;
+
+		&::before,
+		&::after {
+			top: var(--components-radio-input-top);
+			height: var(--components-radio-input-size);
+			width: var(--components-radio-input-size);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: color, transform;
+			position: absolute;
+			border-radius: 50%;
+			left: 0;
+			content: '';
+		}
+
+		&::before {
+			background-color: var(--colors-white-color);
+			border-color: var(--palettes-700, var(--components-radio-default-palette-700));
+			border-width: 2px;
+			border-style: solid;
+		}
+
+		&::after {
+			color: transparent;
+			transform: scale(0);
+		}
+	}
+}

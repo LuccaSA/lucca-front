@@ -1,48 +1,48 @@
-@mixin optionSearcherStyle {
-	// :host {
-	// 	position: sticky;
-	// 	top: 0;
-	// 	left: 0;
-	// 	right: 0;
-	// 	display: block;
-	// 	z-index: 1;
-	// }
-	.textfield.mod-search {
-		width: 100%;
-	}
+// @mixin optionSearcherStyle {
+// 	// :host {
+// 	// 	position: sticky;
+// 	// 	top: 0;
+// 	// 	left: 0;
+// 	// 	right: 0;
+// 	// 	display: block;
+// 	// 	z-index: 1;
+// 	// }
+// 	.textfield.mod-search {
+// 		width: 100%;
+// 	}
 
-	.textfield-input {
-		border-radius: 0;
-		box-shadow: none;
-		background: #FFFFFF;
-		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
-		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
-		&:hover {
-			background-color: _color("grey", "50", true);
-			background-color: _color("grey", "50");
-		}
-		&:focus {
-			background-color: #FFFFFF;
-			border-bottom-color: _color("primary", "600", true);
-			border-bottom-color: _color("primary", "600");
-		}
-	}
+// 	.textfield-input {
+// 		border-radius: 0;
+// 		box-shadow: none;
+// 		background: #FFFFFF;
+// 		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
+// 		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+// 		&:hover {
+// 			background-color: _color("grey", "50", true);
+// 			background-color: _color("grey", "50");
+// 		}
+// 		&:focus {
+// 			background-color: #FFFFFF;
+// 			border-bottom-color: _color("primary", "600", true);
+// 			border-bottom-color: _color("primary", "600");
+// 		}
+// 	}
 
-	.checkbox.mod-formerEmployee {
-		padding: _theme("spacings.smallest", true) _component("options.item.padding-horizontal", true);
-		padding: _theme("spacings.smallest") _component("options.item.padding-horizontal");
-		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
-		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
-		background-color: _color("grey", 50, true);
-		background-color: _color("grey", 50);
-		font-style: italic;
-	}
-	// .optionPlaceholder {
-	// 	display: block;
-	// 	padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true);
-	// 	padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal");
-	// 	font-style: italic;
-	// 	color: _color("text.light", "color", true);
-	// 	color: _color("text.light");
-	// }
-}
+// 	.checkbox.mod-formerEmployee {
+// 		padding: _theme("spacings.smallest", true) _component("options.item.padding-horizontal", true);
+// 		padding: _theme("spacings.smallest") _component("options.item.padding-horizontal");
+// 		border-bottom: #{_theme('commons.divider.width', true)} solid #{_theme('commons.divider.color', true)};
+// 		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+// 		background-color: _color("grey", 50, true);
+// 		background-color: _color("grey", 50);
+// 		font-style: italic;
+// 	}
+// 	// .optionPlaceholder {
+// 	// 	display: block;
+// 	// 	padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true);
+// 	// 	padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal");
+// 	// 	font-style: italic;
+// 	// 	color: _color("text.light", "color", true);
+// 	// 	color: _color("text.light");
+// 	// }
+// }

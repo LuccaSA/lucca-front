@@ -1,0 +1,104 @@
+@use 'config';
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:list';
+
+$contents: '0';
+$boxModel: 'margin', 'padding', 'border';
+$boxDirection: 'top', 'bottom', 'left', 'right', '';
+$gaps: 'column-gap', 'row-gap', 'gap';
+$displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
+$direction: 'column', 'column-reverse', 'row', 'row-reverse';
+$wrap: 'wrap', 'nowrap', 'wrap-reverse';
+$justify: 'flex-start', 'flex-end', 'space-around', 'space-between', 'space-evenly', 'center';
+$align: 'flex-start', 'flex-end', 'baseline', 'stretch', 'center';
+$flex: '0', '1', 'auto';
+$basis: '0', 'auto';
+$order: '-1', '1';
+$textAlign: 'left', 'center', 'right';
+$visibility: 'visible', 'hidden', 'collapse';
+
+$palettes: 'primary', 'secondary', 'grey', 'success', 'warning', 'error';
+$states: 'error,' 'warning', 'success';
+
+@function capitalize($string) {
+  @return to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
+}
+
+@function camelize($string) {
+  $progress: $string;
+  $result: '';
+  $exclude: ' ', '-', '–', '—', '_', ',', ';', ':', '.';
+
+  @while string.length($progress) > 0 {
+    $char: string.slice($progress, 1, 1);
+
+    @if not not list.index($exclude, $char) {
+      $progress: capitalize(string.slice($progress, 2, 2)) + string.slice($progress, 3);
+    } @else {
+      $result: $result + $char;
+      $progress: string.slice($progress, 2);
+    }
+  }
+
+  @return $result;
+}
+
+@mixin cssvars($name, $properties, $after: '') {
+  @each $key, $value in $properties {
+    --#{$name}#{if($key == '', '', '-')}#{$key}#{$after}: #{$value};
+  }
+}
+
+@mixin classes($name, $properties, $suffix: '!important', $prefix: config.$prefix) {
+  @each $property in $properties {
+    .#{$prefix}#{camelize($name)}#{capitalize(camelize($property))} {
+      #{$name}: #{$property} #{$suffix};
+    }
+  }
+}
+
+@mixin spacing($boxModel, $boxDirection, $key, $value, $prefix: config.$prefix, $suffix: '!important') {
+  .#{$prefix}#{camelize($boxModel)}#{capitalize($boxDirection)}#{capitalize($key)} {
+    #{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
+  }
+}
+
+@mixin spacings {
+  @each $boxModel in $boxModel {
+    @each $boxDirection in $boxDirection {
+      @each $key, $value in config.$spacings {
+        @if ($boxModel != 'border' or $value == 0) {
+          @include spacing($boxModel, $boxDirection, $key, $value);
+        }
+      }
+
+      @if ($boxModel == 'margin') {
+        @include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto);
+      }
+    }
+  }
+
+  @each $gap in $gaps {
+    @each $key, $value in config.$spacings {
+      @include spacing($gap, $boxDirection: '', $key: $key, $value: $value);
+    }
+  }
+}
+
+@mixin sizes($suffix: '!important') {
+  @each $key, $value in config.$sizes {
+    .#{config.$prefix}text#{capitalize($key)} {
+      font-size: var(--sizes-#{$key}-font-size) !important;
+      line-height: var(--sizes-#{$key}-line-height) !important;
+    }
+  }
+}
+
+@mixin palettes($suffix: '!important') {
+  @each $palette in $palettes {
+    .#{config.$prefix}text#{capitalize($palette)} {
+      color: var(--palettes-#{$palette}-700) !important;
+    }
+  }
+}

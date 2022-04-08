@@ -1,0 +1,89 @@
+@use 'exports' as *;
+
+.button {
+  @include vars;
+  @include component;
+
+  &.mod-outline,
+  &.mod-outlined {
+    @include outlined;
+
+    &.mod-white {
+      @include outlinedWhite;
+    }
+  }
+
+  &.mod-link {
+    @include link;
+  }
+
+  &.mod-block {
+    @include block;
+  }
+
+  &.mod-small {
+    @include small;
+  }
+
+  &.mod-smaller {
+    @include smaller;
+  }
+
+  &.mod-counter {
+    @include counter;
+
+    &.mod-small,
+    &.mod-smaller {
+      @include counterSmall;
+    }
+  }
+
+  &.mod-icon {
+    @include icon;
+
+    &.mod-small {
+      @include iconSmall;
+    }
+
+    &.mod-smaller {
+      @include iconSmaller;
+    }
+  }
+
+  &.mod-invert {
+    @include invert;
+  }
+
+  &.mod-more {
+    @include more;
+  }
+
+  &:is(.loading) {
+    @include loading;
+
+    &.mod-small {
+      @include loadingSmall;
+    }
+  }
+
+  &:is(.is-error) {
+    @include error;
+  }
+
+  &:is(.is-success) {
+    @include success;
+  }
+
+  &:is(.is-disabled, [disabled]) {
+    @include disabled;
+
+    &.mod-outlined,
+    &.mod-outline {
+      @include disabledOutlined;
+    }
+
+    &.link {
+      @include disabledLink;
+    }
+  }
+}

@@ -1,8 +1,8 @@
-@import '_definitions';
-@include selectInputStyle;
+// @import '_definitions';
+// @include selectInputStyle;
 
-:host {
-	&::after {
-		@include makeIcon('calendar');
-	}
-}
+// :host {
+// 	&::after {
+// 		@include makeIcon('calendar');
+// 	}
+// }

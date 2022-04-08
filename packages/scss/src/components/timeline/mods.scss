@@ -1,0 +1,26 @@
+@mixin number($step: '.timeline-step', $title: '.timeline-step-title', $between: '.timeline-stepAddBetweenStep') {
+  counter-reset: timeline;
+
+  #{$step}:not(#{$between}) {
+    #{$title} {
+      counter-increment: timeline;
+
+      &::before {
+        content: counter(timeline);
+        font-size: var(--sizes-smaller-font-size);
+        line-height: 1;
+      }
+    }
+  }
+}
+
+@mixin small($title: '.timeline-step-title') {
+  #{$title} {
+    padding-left: 1.25rem;
+
+    &::before {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+}

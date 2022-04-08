@@ -1,0 +1,107 @@
+@use '../commons/utils/reset';
+
+@mixin component(
+	$label: '.label',
+	$list: '.menu-list',
+	$link: '.menu-link',
+	$placeholder: '.menu-link-placeholder, .menu-list-item-action-placeholder',
+	$action: '.menu-list-item-action',
+	$modBorder: '.mod-noBorder'
+) {
+	background-color: var(--components-menu-background);
+	gap: var(--spacings-big);
+	align-items: center;
+	display: flex;
+	position: relative;
+	flex-wrap: wrap;
+
+	&:not(#{$modBorder}) {
+		&::after {
+			border-bottom-width: var(--commons-divider-width);
+			border-bottom-color: var(--commons-divider-color);
+			border-bottom-style: solid;
+			position: absolute;
+			height: 1px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			content: '';
+		}
+	}
+
+	#{$label} {
+		margin-right: 0;
+	}
+
+	@at-root {
+		#{$list} {
+			@include reset.list;
+
+			gap: var(--spacings-big);
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		// legacy syntax
+		#{$link} {
+			margin-right: var(--spacings-big);
+		}
+
+		#{$link}, // legacy syntax
+    #{$action} {
+			padding: var(--components-menu-padding);
+			border-radius: var(--commons-border-radius);
+			color: var(--palettes-grey-700);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: color;
+			position: relative;
+			text-decoration: none;
+			text-align: center;
+			display: block;
+
+			&::after {
+				background-color: var(--palettes-primary-700);
+				border-radius: var(--commons-border-radius) var(--commons-border-radius) 0 0;
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: transform;
+				display: block;
+				position: absolute;
+				bottom: 0;
+				height: 2px;
+				left: 0;
+				right: 0;
+				transform: scale(0, 1);
+				z-index: 1;
+				content: '';
+			}
+
+			&:focus-visible,
+			&:hover {
+				&:not(.is-disabled) {
+					&:not(.is-active, [aria-current='page']) {
+						color: var(--palettes-grey-900);
+					}
+
+					&::after {
+						transform: scale(0.75);
+					}
+				}
+			}
+
+			&:focus-visible {
+				outline: none;
+			}
+		}
+
+		#{$placeholder} {
+			&::after {
+				content: attr(data-content-after);
+
+				display: block;
+				height: 0;
+				overflow: hidden;
+				font-weight: 600;
+			}
+		}
+	}
+}

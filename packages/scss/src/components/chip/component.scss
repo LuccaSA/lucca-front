@@ -1,0 +1,49 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+
+@mixin component($kill: '.chip-kill') {
+  background-color: var(--palettes-primary-700);
+  border-radius: var(--components-button-border-radius);
+  color: var(--colors-white-color);
+
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 0.2rem 0.3rem 0;
+  padding: 0.15rem 1.8rem 0.15rem 0.75rem;
+
+  @at-root {
+    #{$kill} {
+      background-color: var(--colors-white-color);
+      color: var(--palettes-primary-700);
+      border: 0;
+      border-radius: 50%;
+      bottom: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      height: 1rem;
+      padding: 0.05rem 0 0;
+      right: 0.5rem;
+      top: 0;
+      width: 1rem;
+      transition-duration: 150ms;
+      transition-property: background-color;
+      margin: auto;
+      position: absolute;
+      cursor: pointer;
+
+      &::before {
+        @include icon.makeIcon('cross');
+      }
+
+      &:hover {
+        background-color: var(--components-chip-kill-hover);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 2px var(--components-chip-kill-hover);
+      }
+    }
+  }
+}

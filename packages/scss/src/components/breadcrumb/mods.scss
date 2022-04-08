@@ -1,0 +1,26 @@
+@use '../commons/utils/a11y';
+@use '@lucca-front/icons/src/mixins' as icon;
+
+@mixin compact($item: '.breadcrumbs-list-item', $action: '.breadcrumbs-list-item-action') {
+	#{$item} {
+		&:nth-last-child(2):first-child,
+		&:nth-last-child(2):first-child + #{$item} {
+			&:last-child {
+				@include a11y.mask;
+			}
+
+			&:first-child {
+				#{$action} {
+					display: flex;
+					align-items: center;
+
+					&::before {
+						@include icon.makeIcon('format_undo');
+
+						padding-right: var(--spacings-smallest);
+					}
+				}
+			}
+		}
+	}
+}

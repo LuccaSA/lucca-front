@@ -1,0 +1,21 @@
+@mixin inline {
+  display: inline-block;
+  margin-right: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin small($label: '.radio-label') {
+  #{$label} {
+    line-height: var(--sizes-small-line-height);
+    font-size: var(--sizes-small-font-size);
+    padding: var(--components-radio-label-small-padding);
+
+    &::before,
+    &::after {
+      height: var(--sizes-small-font-size);
+      width: var(--sizes-small-font-size);
+      top: var(--components-radio-input-small-top);
+    }
+  }
+}

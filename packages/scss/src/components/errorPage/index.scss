@@ -1,0 +1,11 @@
+@use 'exports' as *;
+@use '../commons/utils/media';
+
+.errorPage {
+	@include vars;
+	@include component;
+
+	@include media.smallerThan('s') {
+		@include compact;
+	}
+}

@@ -1,0 +1,19 @@
+@use '../commons/utils/media';
+@use 'exports' as *;
+
+.section {
+	@include vars;
+	@include component;
+
+	&.mod-grey {
+		@include grey;
+	}
+
+	@include media.smallerThan('s') {
+		@include small;
+	}
+
+	@include media.smallerThan('xs') {
+		@include smaller;
+	}
+}

@@ -1,0 +1,90 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+
+@mixin checked($label: '.switch-label') {
+  ~ #{$label} {
+    &::before {
+      @include icon.makeIcon('tick');
+
+      display: flex;
+      align-items: center;
+      background-color: var(--palettes-secondary-700);
+      color: var(--palettes-secondary-900);
+      font-size: var(--sizes-small-font-size);
+      line-height: var(--sizes-small-line-height);
+      padding-left: var(--components-switch-icon-left);
+      padding-top: var(--components-switch-icon-top);
+    }
+
+    &::after {
+      left: calc(1rem - 2px);
+    }
+  }
+}
+
+@mixin checkedActive($label: '.switch-label') {
+  &:not([disabled], [readonly]) {
+    ~ #{$label} {
+      &::before {
+        background-color: var(--palettes-secondary-800);
+        box-shadow: 0 0 0 4px var(--palettes-secondary-300);
+      }
+    }
+  }
+}
+
+@mixin checkedSmall($label: '.switch-label') {
+  ~ #{$label} {
+    &::before {
+      font-size: var(--sizes-smaller-font-size);
+    }
+
+    &::after {
+      left: calc(var(--sizes-small-font-size) - 2px);
+    }
+  }
+}
+
+@mixin hover($label: '.switch-label') {
+  ~ #{$label} {
+    &::before {
+      background-color: var(--palettes-secondary-600);
+    }
+  }
+}
+
+@mixin focus($label: '.switch-label') {
+  ~ #{$label} {
+    &::before {
+      background-color: var(--palettes-secondary-600);
+      box-shadow: 0 0 0 4px var(--palettes-secondary-200);
+    }
+  }
+}
+
+@mixin disabled($label: '.switch-label') {
+  ~ #{$label} {
+    color: var(--palettes-grey-500);
+    cursor: default;
+
+    &::before {
+      background-color: var(--palettes-grey-200);
+    }
+
+    &::after {
+      background-color: var(--palettes-grey-500);
+    }
+  }
+}
+
+@mixin disabledChecked($label: '.switch-label') {
+  ~ #{$label} {
+    &::before {
+      color: var(--palettes-grey-500);
+      background-color: var(--palettes-grey-200);
+    }
+
+    &::after {
+      background-color: var(--palettes-grey-500);
+    }
+  }
+}

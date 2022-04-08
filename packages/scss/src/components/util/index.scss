@@ -1,0 +1,100 @@
+@use '../commons/config';
+@use '../commons/core';
+@use '../commons/utils/a11y';
+@use '../commons/utils/reset';
+@use '../title/exports' as title;
+
+@include core.classes('min-width', core.$contents);
+@include core.classes('display', core.$displays);
+@include core.classes('flex-direction', core.$direction);
+@include core.classes('flex-wrap', core.$wrap);
+@include core.classes('justify-content', core.$justify);
+@include core.classes('align-items', core.$align);
+@include core.classes('flex-grow', core.$flex);
+@include core.classes('flex-shrink', core.$flex);
+@include core.classes('flex-basis', core.$basis);
+@include core.classes('flex-order', core.$order);
+@include core.classes('align-self', core.$align);
+@include core.classes('text-align', core.$textAlign);
+@include core.classes('visibility', core.$visibility);
+
+@include core.spacings;
+@include core.sizes;
+@include core.palettes;
+
+.#{config.$prefix}textLeft {
+	text-align: left !important;
+}
+
+.#{config.$prefix}textRight {
+	text-align: right !important;
+}
+
+.#{config.$prefix}textCenter {
+	text-align: center !important;
+}
+
+.#{config.$prefix}mask {
+	@include a11y.mask('!important');
+}
+
+.#{config.$prefix}listReset {
+	@include reset.list('!important');
+}
+
+.#{config.$prefix}descriptionListReset {
+	@include reset.list($list: 'dl', $suffix: '!important');
+}
+
+.#{config.$prefix}buttonReset {
+	@include reset.button('!important');
+}
+
+[data-content-before] {
+	&::before {
+		content: attr(data-content-before);
+	}
+}
+
+[data-content-after] {
+	&::after {
+		content: attr(data-content-after);
+	}
+}
+
+.#{config.$prefix}h1,
+.#{config.$prefix}h2,
+.#{config.$prefix}h3,
+.#{config.$prefix}h4,
+.#{config.$prefix}h5,
+.#{config.$prefix}h6 {
+	@include title.component;
+}
+
+.#{config.$prefix}h1 {
+	@include title.h1;
+
+	&.mod-headline {
+		@include title.headline;
+	}
+}
+
+.#{config.$prefix}h2 {
+	@include title.h2;
+}
+
+.#{config.$prefix}h3 {
+	@include title.h3;
+}
+
+.#{config.$prefix}h4 {
+	@include title.h4;
+}
+
+.#{config.$prefix}h5 {
+	@include title.h5;
+}
+
+.#{config.$prefix}h6 {
+	@include title.h6;
+}

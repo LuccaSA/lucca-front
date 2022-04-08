@@ -1,0 +1,22 @@
+@use '../loading/exports' as loading;
+
+@mixin disabled {
+	color: var(--palettes-grey-500);
+	pointer-events: none;
+	cursor: default;
+}
+
+@mixin loading {
+	pointer-events: none;
+	color: transparent;
+	position: relative;
+	cursor: default;
+
+	@include loading.vars;
+	@include loading.component;
+
+	&::before,
+	&::after {
+		margin: auto;
+	}
+}

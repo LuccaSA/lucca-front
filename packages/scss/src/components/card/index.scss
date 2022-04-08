@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.card {
+  @include vars;
+  @include component;
+
+  &.mod-grey {
+    @include grey;
+  }
+
+  &.mod-clickable {
+    @include clickable;
+  }
+
+  &.mod-elevated {
+    @include elevated;
+
+    &.mod-clickable {
+      @include clickableElevated;
+    }
+  }
+}

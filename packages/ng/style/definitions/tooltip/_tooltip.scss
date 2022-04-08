@@ -1,38 +1,38 @@
-@mixin tooltipStyle {
-	.lu-tooltip-panel {
-		display: block;
-		background: _component("tooltip.background-color", true);
-		background: _component("tooltip.background-color");
-		border-radius: _theme("commons.border.radius", true);
-		border-radius: _theme("commons.border.radius");
-		color: _component("tooltip.color", true);
-		color: _component("tooltip.color");
-		font-size: _theme("sizes.small.font-size");
-		font-size: _theme("sizes.small.font-size", true);
-		font-weight: 600;
-		line-height: 1rem;
-		max-width: _component("tooltip.max-width", true);
-		max-width: _component("tooltip.max-width");
-		padding: _component("tooltip.padding", true);
-		padding: _component("tooltip.padding");
+// @mixin tooltipStyle {
+// 	.lu-tooltip-panel {
+// 		display: block;
+// 		background: _component("tooltip.background-color", true);
+// 		background: _component("tooltip.background-color");
+// 		border-radius: _theme("commons.border.radius", true);
+// 		border-radius: _theme("commons.border.radius");
+// 		color: _component("tooltip.color", true);
+// 		color: _component("tooltip.color");
+// 		font-size: _theme("sizes.small.font-size");
+// 		font-size: _theme("sizes.small.font-size", true);
+// 		font-weight: 600;
+// 		line-height: 1rem;
+// 		max-width: _component("tooltip.max-width", true);
+// 		max-width: _component("tooltip.max-width");
+// 		padding: _component("tooltip.padding", true);
+// 		padding: _component("tooltip.padding");
 
-		&.is-above {
-			transform-origin: bottom center;
-		}
+// 		&.is-above {
+// 			transform-origin: bottom center;
+// 		}
 
-		&.is-below {
-			transform-origin: top center;
-			margin-top: 2px;
-		}
+// 		&.is-below {
+// 			transform-origin: top center;
+// 			margin-top: 2px;
+// 		}
 
-		&.is-before {
-			transform-origin: center right;
-			margin-right: 5px;
-		}
+// 		&.is-before {
+// 			transform-origin: center right;
+// 			margin-right: 5px;
+// 		}
 
-		&.is-after {
-			transform-origin: center left;
-			margin-left: 5px;
-		}
-	}
-}
+// 		&.is-after {
+// 			transform-origin: center left;
+// 			margin-left: 5px;
+// 		}
+// 	}
+// }

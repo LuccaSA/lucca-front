@@ -1,0 +1,45 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+
+@mixin component($list: '.breadcrumbs-list', $item: '.breadcrumbs-list-item', $action: '.breadcrumbs-list-item-action') {
+  @at-root {
+    #{$list} {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #{$item} {
+      font-size: var(--sizes-small-font-size);
+      line-height: var(--sizes-small-line-height);
+      align-items: center;
+      display: flex;
+
+      &:not(:first-child) {
+        &::before {
+          @include icon.makeIcon('chevron_east');
+
+          padding: 0 var(--spacings-smallest);
+        }
+      }
+    }
+
+    #{$action} {
+      color: var(--palettes-grey-600);
+      transition-duration: var(--commons-animations-durations-fast);
+      transition-property: color;
+      text-decoration: none;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+
+      &:focus,
+      &:hover {
+        color: var(--palettes-grey-800);
+      }
+    }
+  }
+}

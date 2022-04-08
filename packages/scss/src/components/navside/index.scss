@@ -1,0 +1,24 @@
+@use '../commons/utils/media';
+@use 'exports' as *;
+
+.navSide {
+	@include vars;
+	@include component;
+
+	&.mod-compact {
+		@include media.largerThan('s') {
+			@include compact;
+		}
+	}
+
+	.navSide-item-link,
+	.navSide-item-subMenu-link {
+		&:is(.is-active) {
+			@include active;
+		}
+
+		&:is([aria-expanded='true']) {
+			@include expanded;
+		}
+	}
+}

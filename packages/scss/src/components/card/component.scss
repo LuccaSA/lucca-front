@@ -1,0 +1,32 @@
+@mixin component($content: '.card-content', $footer: '.card-footer', $right: '.card-footer-right') {
+  background-color: var(--colors-white-color);
+  border-radius: var(--commons-border-radius);
+  border-color: var(--commons-divider-color);
+  border-width: 1px;
+  margin-bottom: 1rem;
+  border-style: solid;
+  display: block;
+  position: relative;
+  transition-duration: var(--commons-animations-durations-fast);
+  transition-property: background-color, box-shadow, color;
+
+  @at-root {
+    #{$content} {
+      padding: var(--components-card-content-padding);
+    }
+
+    #{$footer} {
+      padding: var(--components-card-footer-padding);
+      border-top-color: var(--components-card-border-color);
+      border-top-width: 1px;
+      border-top-style: solid;
+      align-items: center;
+      display: flex;
+      min-height: 3rem;
+    }
+
+    #{$right} {
+      margin-left: auto;
+    }
+  }
+}

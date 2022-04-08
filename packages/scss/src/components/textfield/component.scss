@@ -1,0 +1,72 @@
+@mixin component($input: '.textfield-input', $label: '.textfield-label') {
+  vertical-align: middle;
+  width: var(--components-field-sizes-default);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+
+  #{$input} {
+    font-family: var(--commons-font-family);
+    font-size: var(--components-field-font-size);
+    color: var(--components-field-input-color);
+    outline: none;
+    position: relative;
+    width: 100%;
+
+    min-width: 0;
+    border: 0;
+    line-height: 1.5rem;
+    -webkit-appearance: none;
+
+    background-color: var(--components-textfield-background);
+    border-radius: var(--components-textfield-border-radius);
+    padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
+    transition-property: box-shadow, background-color, color;
+    transition-duration: var(--commons-animations-durations-fast);
+
+    &::placeholder {
+      color: var(--components-textfield-input-placeholder);
+      transition-property: color;
+      transition-duration: var(--commons-animations-durations-fast);
+      opacity: 1;
+    }
+
+    &:hover {
+      &::placeholder {
+        // color: _component("field.input.color", "light");
+      }
+    }
+
+    &,
+    &:focus {
+      &::placeholder {
+        // color: _component("field.input.color", "lighter");
+      }
+    }
+
+    &:hover {
+      background-color: var(--components-textfield-hover-background);
+
+      &::placeholder {
+        color: var(--components-textfield-hover-placeholder);
+      }
+    }
+  }
+
+  #{$label} {
+    color: var(--components-field-label-color);
+    font-size: var(--components-field-label-font-size);
+    margin-bottom: var(--components-field-label-margin-bottom);
+    order: -1;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    white-space: nowrap;
+    transition: all var(--commons-animations-durations-fast);
+    min-height: var(--spacings-small);
+    line-height: var(--sizes-small-line-height);
+  }
+}

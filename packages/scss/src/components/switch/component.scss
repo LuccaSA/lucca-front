@@ -1,0 +1,52 @@
+@use '../commons/utils/a11y';
+
+@mixin component($input: '.switch-input', $label: '.switch-label') {
+	display: block;
+	position: relative;
+
+	@at-root {
+		#{$input} {
+			@include a11y.mask;
+		}
+
+		#{$label} {
+			padding: 0;
+			padding-left: calc(2rem - 4px + var(--spacings-smaller));
+			color: var(--palettes-grey-800);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: color;
+			display: inline-block;
+			line-height: 1.5rem;
+			cursor: pointer;
+
+			&::before,
+			&::after {
+				position: absolute;
+				transition-property: all;
+				transition-duration: var(--commons-animations-durations-fast);
+				margin-top: var(--components-switch-top);
+				content: '';
+			}
+
+			&::before {
+				top: var(--spacings-smallest);
+				background-color: var(--palettes-grey-700);
+				border-radius: 0.5rem;
+				height: 1rem;
+				left: 0;
+				width: calc(2rem - 4px);
+			}
+
+			&::after {
+				box-shadow: var(--commons-box-shadow-hard);
+				margin-top: var(--components-switch-top);
+				top: calc(var(--spacings-smallest) + 2px);
+				background-color: var(--colors-white-color);
+				border-radius: 50%;
+				height: calc(1rem - 4px);
+				left: 2px;
+				width: calc(1rem - 4px);
+			}
+		}
+	}
+}

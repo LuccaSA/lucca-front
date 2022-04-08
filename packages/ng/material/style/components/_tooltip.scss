@@ -1,21 +1,21 @@
-.mat-tooltip {
-	border-radius: _theme("commons.border.radius");
-	background-color: _component("tooltip.background-color");
-	color: _component("tooltip.color");
-	font-size: _theme("sizes.smaller.font-size") !important;
-	margin: 0.5em !important;
-	padding: .25rem .5rem !important;
-	line-height: 1rem;
+// .mat-tooltip {
+// 	border-radius: _theme("commons.border.radius");
+// 	background-color: _component("tooltip.background-color");
+// 	color: _component("tooltip.color");
+// 	font-size: _theme("sizes.smaller.font-size") !important;
+// 	margin: 0.5em !important;
+// 	padding: .25rem .5rem !important;
+// 	line-height: 1rem;
 
-	@mixin tooltipColoring($palette) {
-		background: _color($palette);
-		color: _color($palette, "text");
-	}
+// 	@mixin tooltipColoring($palette) {
+// 		background: _color($palette);
+// 		color: _color($palette, "text");
+// 	}
 
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include tooltipColoring($name);
-		}
-	}
-}
+// 	// palette colors
+// 	@each $name, $palette in _getMap("palettes") {
+// 		&.palette-#{$name} {
+// 			@include tooltipColoring($name);
+// 		}
+// 	}
+// }

@@ -1,5 +1,0 @@
-@mixin elevate($z: 1) {
-	@if $z > 6 { $z: 6; }
-	@if $z < 1 { $z: 1; }
-	box-shadow: unquote(_theme("commons.elevations.elevation-"+$z));
-}

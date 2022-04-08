@@ -1,0 +1,71 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+@use 'sass:color';
+@use '../commons/utils/reset';
+
+@mixin sortable {
+	cursor: pointer;
+
+	&::after {
+		@include icon.makeIcon('arrow_full_north');
+
+		opacity: 0;
+		margin: 0;
+		margin-left: var(--spacings-smallest);
+		transform: translateY(var(--spacings-smallest));
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: opacity, transform;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover,
+	&:focus-visible {
+		&::after {
+			outline: none;
+			transform: translateY(0);
+			opacity: 0.5;
+		}
+	}
+
+	&:is(button) {
+		@include reset.button;
+	}
+}
+
+@mixin sortableSmall {
+	&::after {
+		margin-top: 0;
+	}
+}
+
+@mixin sortableAlignRight {
+	&::after {
+		content: none;
+	}
+
+	&::before {
+		@include icon.makeIcon('arrow_full_north');
+
+		opacity: 0;
+		margin: 0;
+		margin-right: var(--spacings-smallest);
+		transform: translateY(var(--spacings-smallest));
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: opacity, transform;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover,
+	&:focus-visible {
+		&::after {
+			outline: none;
+			transform: translateY(0);
+			opacity: 0.5;
+		}
+	}
+}

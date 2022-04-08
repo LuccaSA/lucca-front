@@ -1,0 +1,162 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+
+@mixin sortedLegacy {
+  color: _color('text.dark'); // todo
+
+  &::after {
+    @include icon.makeIcon('arrow_full_north');
+
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin sortedLegacyAlignRight {
+  &::before {
+    @include icon.makeIcon('arrow_full_north');
+
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &::after {
+    content: none;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin descendingLegacy {
+  @include sortedLegacy;
+
+  &::after {
+    @include icon.makeIcon('arrow_full_south');
+  }
+}
+
+@mixin ascendingLegacy {
+  @include sortedLegacy;
+
+  &::after {
+    @include icon.makeIcon('arrow_full_north');
+  }
+}
+
+@mixin descendingLegacyAlignRight {
+  @include sortedLegacyAlignRight;
+
+  &::after {
+    @include icon.makeIcon('arrow_full_south');
+  }
+}
+
+@mixin ascendingLegacyAlignRight {
+  @include sortedLegacyAlignRight;
+
+  &::after {
+    @include icon.makeIcon('arrow_full_north');
+  }
+}
+
+@mixin sorted($button) {
+  padding: 0;
+
+  #{$button} {
+    color: _color('text.dark'); // todo
+    padding: var(--spacings-small);
+
+    &::after {
+      @include icon.makeIcon('arrow_full_north');
+
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      outline: none;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@mixin sortedAlignRight($button) {
+  #{$button} {
+    text-align: right;
+
+    &::before {
+      @include icon.makeIcon('arrow_full_north');
+
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &::after {
+      content: none;
+    }
+
+    &:hover,
+    &:focus {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@mixin descending($button: '.table-head-row-cell-sortableButton') {
+  @include sorted($button);
+
+  #{$button} {
+    &::after {
+      @include icon.makeIcon('arrow_full_south');
+    }
+  }
+}
+
+@mixin ascending($button: '.table-head-row-cell-sortableButton') {
+  @include sorted($button);
+
+  #{$button} {
+    &::after {
+      @include icon.makeIcon('arrow_full_north');
+    }
+  }
+}
+
+@mixin descendingAlignRight($button: '.table-head-row-cell-sortableButton') {
+  @include sortedAlignRight($button);
+
+  #{$button} {
+    &::before {
+      @include icon.makeIcon('arrow_full_south');
+    }
+  }
+}
+
+@mixin ascendingAlignRight($button: '.table-head-row-cell-sortableButton') {
+  @include sortedAlignRight($button);
+
+  #{$button} {
+    &::before {
+      @include icon.makeIcon('arrow_full_north');
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@use '../commons/utils/form';
+
+@mixin required {
+	&:not(:empty) {
+		&::after {
+			@include form.required;
+		}
+	}
+}

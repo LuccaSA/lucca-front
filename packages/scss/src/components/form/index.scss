@@ -1,0 +1,35 @@
+@use '../commons/config';
+
+@use 'exports' as *;
+
+.form-group {
+	@include vars;
+	@include component;
+}
+
+.form-group-line-col {
+	&[class*='mod-overlay'] {
+		@include overlay;
+	}
+
+	&.mod-overlay-top {
+		@include overlayTop;
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@for $i from 1 through 12 {
+			&.mod-#{$breakpoint}#{$i} {
+				@include breakpoint($breakpoint, $i);
+			}
+		}
+	}
+}
+
+.form-group-label,
+.radiosfield-label,
+.checkboxesfield-label,
+.textfield-label {
+	&:is(.is-required) {
+		@include required;
+	}
+}

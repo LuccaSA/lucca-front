@@ -1,27 +1,27 @@
-$popup: (
-	padding: (
-		horizontal: 2rem,
-		vertical: 1rem,
-	),
-	backdrop: (
-		opacity: .4,
-	),
-	panel: (
-		background-color: #fff,
-	),
-	sizes: (
-		small: 32rem,
-		medium: 42rem,
-		large: 60rem,
-	)
-);
+// $popup: (
+// 	padding: (
+// 		horizontal: 2rem,
+// 		vertical: 1rem,
+// 	),
+// 	backdrop: (
+// 		opacity: .4,
+// 	),
+// 	panel: (
+// 		background-color: #fff,
+// 	),
+// 	sizes: (
+// 		small: 32rem,
+// 		medium: 42rem,
+// 		large: 60rem,
+// 	)
+// );
 
-$sidePanel: (
-	sizes: (
-		small: 40rem,
-		medium: 55rem,
-		large: 70rem,
-	)
-);
-$theme: _set($theme, 'components.popup', $popup);
-$theme: _set($theme, 'components.sidepanel', $sidePanel);
+// $sidePanel: (
+// 	sizes: (
+// 		small: 40rem,
+// 		medium: 55rem,
+// 		large: 70rem,
+// 	)
+// );
+// $theme: _set($theme, 'components.popup', $popup);
+// $theme: _set($theme, 'components.sidepanel', $sidePanel);

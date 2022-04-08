@@ -1,0 +1,13 @@
+@mixin grey {
+  background-color: var(--commons-background-base);
+}
+
+@mixin small {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@mixin smaller {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

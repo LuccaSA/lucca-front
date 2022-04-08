@@ -1,0 +1,72 @@
+@mixin disabled($button: '.file-button', $formats: '.file-formats', $or: '.file-or', $title: '.file-title', $content: '.file-content') {
+  cursor: not-allowed;
+
+  ~ #{$content} {
+    #{$title},
+    #{$or},
+    #{$formats},
+    #{$button} {
+      color: var(--commons-disabled-color);
+    }
+  }
+}
+
+@mixin droppable($content: '.file-content') {
+  ~ #{$content} {
+    &::before {
+      background-color: var(--commons-background-base);
+    }
+  }
+}
+
+@mixin uploaded($icon: '.file-icon', $title: '.file-title', $success: '.icon-success', $content: '.file-content') {
+  ~ #{$content} {
+    #{$title} {
+      color: var(--palettes-success-700);
+    }
+
+    #{$icon}#{$success} {
+      display: block;
+    }
+  }
+}
+
+@mixin invalid($icon: '.file-icon', $title: '.file-title', $error: '.icon-error', $content: '.file-content') {
+  ~ #{$content} {
+    #{$title} {
+      color: var(--palettes-error-700);
+    }
+
+    #{$icon}#{$error} {
+      display: block;
+    }
+  }
+}
+
+@mixin legacyDroppable($icon: '.file-icon') {
+  background-color: var(--commons-background-base);
+
+  #{$icon} {
+    color: var(--palettes-primary-500);
+  }
+}
+
+@mixin legacyDisabled($button: '.button', $title: '.file-title', $or: '.file-or', $formats: '.file-formats') {
+  #{$title},
+  #{$or},
+  #{$formats},
+  #{$button} {
+    color: var(--commons-disabled-color);
+  }
+
+  #{$button} {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: not-allowed;
+      box-shadow: 0 0 0 1px inset;
+      background-color: transparent;
+    }
+  }
+}

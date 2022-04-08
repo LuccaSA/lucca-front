@@ -1,0 +1,34 @@
+@use 'exports' as *;
+
+.container {
+  @include vars;
+  @include component;
+
+  &.mod-center {
+    @include center;
+  }
+
+  &.mod-small {
+    @include small;
+  }
+
+  &.mod-maxM {
+    @include maxM;
+  }
+
+  &.mod-maxL {
+    @include maxL;
+  }
+
+  &.mod-maxXL {
+    @include maxXL;
+  }
+
+  &.mod-maxXXL {
+    @include maxXXL;
+  }
+
+  &.mod-maxXXXL {
+    @include maxXXXL;
+  }
+}

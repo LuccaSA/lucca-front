@@ -1,0 +1,32 @@
+@mixin inline($label: '.switch-label') {
+  display: inline-block;
+  margin-right: 1.5rem;
+
+  #{$label} {
+    &::before,
+    &::after {
+      margin-top: 0;
+    }
+  }
+}
+
+@mixin small($label: '.switch-label') {
+  #{$label} {
+    font-size: var(--sizes-small-font-size);
+    line-height: var(--sizes-small-line-height);
+    padding: 0;
+    padding-left: calc(1.75rem - 4px + var(--spacings-smaller));
+
+    &::before {
+      margin-top: var(--components-switch-small-top);
+      height: var(--sizes-small-font-size);
+      width: calc(1.75rem - 4px);
+    }
+
+    &::after {
+      margin-top: var(--components-switch-small-top);
+      height: calc(var(--sizes-small-font-size) - 4px);
+      width: calc(var(--sizes-small-font-size) - 4px);
+    }
+  }
+}

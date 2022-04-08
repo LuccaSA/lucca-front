@@ -1,37 +1,37 @@
-.lu-popup-panel {
-	&.mod-sidepanel {
-		position: fixed !important;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: _component("sidepanel.sizes.small");
-		max-width: 100%;
-		max-height: 100vh;
-		border-radius: 0;
-		animation-name: sidepanelAnimation;
-		transform-origin: center center;
+// .lu-popup-panel {
+// 	&.mod-sidepanel {
+// 		position: fixed !important;
+// 		top: 0;
+// 		right: 0;
+// 		bottom: 0;
+// 		width: _component("sidepanel.sizes.small");
+// 		max-width: 100%;
+// 		max-height: 100vh;
+// 		border-radius: 0;
+// 		animation-name: sidepanelAnimation;
+// 		transform-origin: center center;
 
-		@each $panel-size, $size-obj in _getMap("components.sidepanel.sizes") {
-			&.mod-#{$panel-size}, &.size-#{$panel-size} {
-				width: _component("sidepanel.sizes."+$panel-size);
-			}
-		}
-	}
-}
+// 		@each $panel-size, $size-obj in _getMap("components.sidepanel.sizes") {
+// 			&.mod-#{$panel-size}, &.size-#{$panel-size} {
+// 				width: _component("sidepanel.sizes."+$panel-size);
+// 			}
+// 		}
+// 	}
+// }
 
-.lu-sidepanel-panel-inner {
-	display: flex;
-	overflow: auto;
-	height: 100%;
-	flex-flow: column;
-}
+// .lu-sidepanel-panel-inner {
+// 	display: flex;
+// 	overflow: auto;
+// 	height: 100%;
+// 	flex-flow: column;
+// }
 
-@keyframes sidepanelAnimation {
-	from {
-		transform: translate(_theme("commons.animations.translate"), 0);
-	}
+// @keyframes sidepanelAnimation {
+// 	from {
+// 		transform: translate(_theme("commons.animations.translate"), 0);
+// 	}
 
-	to {
-		transform: translate(0, 0);
-	}
-}
+// 	to {
+// 		transform: translate(0, 0);
+// 	}
+// }

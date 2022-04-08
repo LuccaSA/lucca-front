@@ -1,83 +1,83 @@
-@mixin selectClearerStyle {
-	:host {
-		display: none;
-		vertical-align: text-bottom;
-	}
+// @mixin selectClearerStyle {
+// 	:host {
+// 		display: none;
+// 		vertical-align: text-bottom;
+// 	}
 
-	:host-context(.textfield-input.is-filled) {
-		display: inline-block;
-	}
+// 	:host-context(.textfield-input.is-filled) {
+// 		display: inline-block;
+// 	}
 
-	.actionIcon {
-		@include selectColoringClearer("select.default-palette");
-		height: 1rem;
-		padding: 0;
-		width: 1rem;
-	}
+// 	.actionIcon {
+// 		@include selectColoringClearer("select.default-palette");
+// 		height: 1rem;
+// 		padding: 0;
+// 		width: 1rem;
+// 	}
 
-	.lucca-icon {
-		display: block;
-		font-size: 1rem;
-	}
+// 	.lucca-icon {
+// 		display: block;
+// 		font-size: 1rem;
+// 	}
 
-	// Material
-	:host-context(.textfield.mod-material) {
-		.actionIcon {
-			color: _color("text.light", "color", true);
-			color: _color("text.light");
-		}
-	}
+// 	// Material
+// 	:host-context(.textfield.mod-material) {
+// 		.actionIcon {
+// 			color: _color("text.light", "color", true);
+// 			color: _color("text.light");
+// 		}
+// 	}
 
-	// Framed
-	:host-context(.textfield.mod-framed) {
-		.actionIcon {
-			color: _color("text.light", "color", true);
-			color: _color("text.light");
-		}
-	}
+// 	// Framed
+// 	:host-context(.textfield.mod-framed) {
+// 		.actionIcon {
+// 			color: _color("text.light", "color", true);
+// 			color: _color("text.light");
+// 		}
+// 	}
 
-	// Error
-	:host-context(.textfield-input.is-error) {
-		.actionIcon {
-			color: _color("error", "color", true);
-			color: _color("error");
+// 	// Error
+// 	:host-context(.textfield-input.is-error) {
+// 		.actionIcon {
+// 			color: _color("error", "color", true);
+// 			color: _color("error");
 
-			&:hover {
-				background-color: _color("error", 50, true);
-				background-color: _color("error", 50);
-				color: _color("error", 800, true);
-				color: _color("error", 800);
-			}
-		}
-	}
+// 			&:hover {
+// 				background-color: _color("error", 50, true);
+// 				background-color: _color("error", 50);
+// 				color: _color("error", 800, true);
+// 				color: _color("error", 800);
+// 			}
+// 		}
+// 	}
 
-	// Disabled
-	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-		display: none;
-	}
+// 	// Disabled
+// 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+// 		display: none;
+// 	}
 
-	// PALETTES
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// 	// PALETTES
+// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-	@each $name, $palette in _getMap("palettes") {
-		:host-context(.palette-#{$name}) {
-			.actionIcon {
-				@include selectColoringClearer($name);
-			}
-		}
-	}
-}
+// 	@each $name, $palette in _getMap("palettes") {
+// 		:host-context(.palette-#{$name}) {
+// 			.actionIcon {
+// 				@include selectColoringClearer($name);
+// 			}
+// 		}
+// 	}
+// }
 
-@mixin selectColoringClearer($palette) {
-		color: _color($palette, 700);
+// @mixin selectColoringClearer($palette) {
+// 		color: _color($palette, 700);
 
-		&:hover {
-			background-color: _color($palette, 50);
-			color: _color($palette, 800);
-		}
+// 		&:hover {
+// 			background-color: _color($palette, 50);
+// 			color: _color($palette, 800);
+// 		}
 
-		&:focus {
-			background-color: _color($palette, 50);
-			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
-		}
-}
+// 		&:focus {
+// 			background-color: _color($palette, 50);
+// 			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
+// 		}
+// }

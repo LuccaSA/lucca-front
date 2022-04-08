@@ -1,0 +1,74 @@
+@use 'sass:math';
+
+@use '../commons/utils/form';
+@use '../commons/utils/media';
+
+@mixin overlay {
+	&:focus-within {
+		.textfield-input {
+			box-shadow: form.fakeBorderOverlay(_component('field.framed.color')), 0 0 0 4px _component('field.framed.color50');
+			z-index: 4;
+		}
+
+		.is-error {
+			.textfield-input {
+				background-color: var(--colors-white-color) !important;
+			}
+		}
+
+		.is-warning {
+			.textfield-input {
+				background-color: #444242;
+				box-shadow: form.fakeBorderOverlay(_color('warning')), 0 0 0 4px _color('warning', '50');
+			}
+		}
+
+		.is-valid,
+		.is-success {
+			.textfield-input {
+				background-color: var(--colors-white-color);
+				box-shadow: form.fakeBorderOverlay(_color('success')), 0 0 0 4px _color('success', '50');
+			}
+		}
+	}
+
+	.textfield,
+	.checkbox,
+	.radio,
+	.select {
+		+ .textfield,
+		+ .checkbox,
+		+ .radio,
+		+ .select {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			z-index: 10;
+			padding: _component('field.framed.label-top-offset') _component('field.framed.side-padding') _component('field.framed.bottom-padding');
+		}
+	}
+}
+
+@mixin overlayTop {
+	.textfield,
+	.checkbox,
+	.radio,
+	.select {
+		+ .textfield,
+		+ .checkbox,
+		+ .radio,
+		+ .select {
+			top: 0;
+			bottom: auto;
+		}
+	}
+}
+
+@mixin breakpoint($breakpoint, $i) {
+	flex-basis: 100%;
+	flex-grow: 0;
+
+	@include media.largerThan($breakpoint) {
+		flex-basis: (math.div(100%, 12) * $i);
+	}
+}

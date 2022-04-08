@@ -1,0 +1,27 @@
+@mixin component($action: 'a', $title: '.callout-title') {
+  border-radius: var(--commons-border-radius);
+  background-color: var(--palettes-100, var(--components-callout-background));
+  color: var(--palettes-800);
+  margin: var(--components-callout-margin);
+  padding: var(--components-callout-padding);
+  border-color: var(--palettes-200, var(--palettes-grey-200));
+  border-width: var(--commons-divider-width);
+  border-style: solid;
+  position: relative;
+
+  #{$action} {
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+      opacity: 0.8;
+    }
+  }
+
+  @at-root {
+    #{$title} {
+      font-weight: 600;
+      margin-bottom: var(--spacings-smallest);
+    }
+  }
+}

@@ -1,0 +1,117 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+@use '../commons/utils/form';
+
+@mixin hover {
+	&::placeholder {
+		color: _component('field.input.color', 'light');
+	}
+}
+
+@mixin focus {
+	&::placeholder {
+		color: _component('field.input.color', 'lighter');
+	}
+}
+
+@mixin required($label: '.field-label') {
+	#{$label},
+	~ #{$label} {
+		&:not(:empty) {
+			&::after {
+				@include form.required;
+			}
+		}
+	}
+}
+
+@mixin disabled {
+	color: _color('text.light');
+	cursor: not-allowed;
+}
+
+@mixin loading($input: '.field-input') {
+	// @include loading(1rem);
+
+	&::before,
+	&::after {
+		content: '' !important;
+		right: 0.5rem !important;
+		bottom: 0.7rem !important;
+		z-index: 2 !important;
+		left: inherit !important;
+		top: inherit !important;
+		position: absolute !important;
+	}
+
+	#{$input} {
+		padding-right: 2rem;
+	}
+}
+
+@mixin success($input: '.field-input') {
+	&::before {
+		@include icon.makeIcon('tick_bold');
+
+		// todo isValid
+		animation: isValid 3s forwards;
+		border-radius: 50%;
+		bottom: 0.85rem;
+		color: _color('success');
+		font-size: 1.2rem;
+		height: 1rem;
+		position: absolute;
+		right: 0.4rem;
+		z-index: 1;
+	}
+
+	#{$input} {
+		padding-right: 2rem;
+	}
+}
+
+@mixin error($label: '.field-label', $input: '.field-input') {
+	#{$label} {
+		color: var(--palettes-error-700);
+	}
+
+	#{$input} {
+		@include state('error', $label, $input);
+	}
+}
+
+@mixin state($state, $label: '.field-label', $input: '.field-input', $suffix: '.field-suffix') {
+	&:not(:disabled, .is-disabled) {
+		background-color: var(--palettes-#{$state}-50);
+
+		~ #{$label},
+		~ #{$suffix} {
+			color: var(--palettes-#{$state}-700);
+		}
+
+		&::placeholder {
+			color: var(--palettes-#{$state}-400);
+		}
+
+		&:focus {
+			&::placeholder {
+				color: var(--palettes-#{$state}-300);
+			}
+		}
+
+		&:focus,
+		&.is-focused {
+			~ #{$label} {
+				color: var(--palettes-#{$state}-700);
+			}
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
+			background-color: var(--colors-white-color);
+		}
+
+		@if ($state == 'error') {
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
+		}
+	}
+}

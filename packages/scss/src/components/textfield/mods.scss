@@ -1,0 +1,137 @@
+@use '../commons/utils/form';
+
+@mixin block {
+	width: 100%;
+}
+
+@mixin multiline($input: '.textfield-input') {
+	#{$input} {
+		height: 5rem;
+		line-height: var(--sizes-standard-line-height);
+		font-size: var(--sizes-standard-font-size);
+		resize: vertical;
+	}
+}
+
+@mixin framed(
+	$input: '.textfield-input',
+	$label: '.textfield-label',
+	$messages: '.textfield-messages',
+	$error: '.textfield-messages-error',
+	$warning: '.textfield-messages-warning',
+	$success: '.textfield-messages-valid, .textfield-messages-success',
+	$helper: '.textfield-messages-helper',
+	$suffix: '.textfield-suffix'
+) {
+	width: 100%;
+	margin-bottom: 0 !important;
+
+	#{$messages} {
+		position: absolute;
+		bottom: 0;
+		left: -1px;
+		right: 0;
+		text-align: center;
+		transform: translateY(0);
+		transition: transform _theme('commons.animations.durations.standard');
+		z-index: 4;
+
+		> * {
+			display: block;
+		}
+	}
+
+	#{$error} {
+		background-color: _color('error');
+		color: _theme('palettes.error.text');
+	}
+
+	#{$warning} {
+		background-color: _color('warning');
+		color: _theme('palettes.warning.text');
+	}
+
+	#{$success} {
+		background-color: _color('success');
+		color: _theme('palettes.success.text');
+	}
+
+	#{$helper} {
+		background-color: _color('text.light');
+		color: var(--colors-white-color);
+	}
+
+	#{$input} {
+		width: 100%;
+		border-radius: 0;
+		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-border));
+		padding: var(--components-field-framed-top-padding) var(--components-field-framed-side-padding)
+			var(--components-field-framed-bottom-padding);
+		line-height: var(--sizes-standard-line-height);
+
+		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
+			background-color: var(--colors-white-color);
+
+			&:focus,
+			&:hover {
+				position: relative;
+				z-index: 1;
+				background-color: var(--colors-white-color);
+				box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color));
+
+				~ .textfield-messages {
+					transform: translateY(100%);
+				}
+			}
+
+			&:focus {
+				z-index: 4;
+				box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+			}
+		}
+	}
+
+	#{$label} {
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding);
+		z-index: 10;
+		line-height: 1.5rem;
+		pointer-events: none;
+	}
+
+	#{$suffix} {
+		top: auto;
+		z-index: 10;
+		right: 0;
+		bottom: 0;
+		padding: var(--components-field-framed-side-padding);
+
+		// &:is(.is-error) {
+		//   @include fieldFramedState('error');
+		// }
+
+		// &:is(.is-warning) {
+		//   @include fieldFramedState('warning');
+		// }
+
+		// &:is(.is-valid),
+		// &:is(.is-success) {
+		//   @include fieldFramedState('success');
+		// }
+
+		~ #{$input} {
+			padding-right: var(--components-field-framed-suffix-padding-right);
+		}
+	}
+
+	// &:is(.is-loading) {
+	//   &::before,
+	//   &::after {
+	//     bottom: auto !important;
+	//     right: _component('field.framed.side-padding') !important;
+	//     top: _component('field.framed.side-padding') !important;
+	//   }
+	// }
+}

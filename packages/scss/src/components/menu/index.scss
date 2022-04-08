@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.menu {
+  @include vars;
+  @include component;
+
+  &.mod-header {
+    @include header;
+  }
+
+  &.mod-small {
+    @include small;
+  }
+}
+
+// legacy syntax
+.menu-link,
+.menu-list-item-action {
+  &:is(.is-active, [aria-current='page']) {
+    @include active;
+  }
+
+  &:is(.is-disabled) {
+    @include disabled;
+  }
+}

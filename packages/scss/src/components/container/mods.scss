@@ -1,0 +1,33 @@
+@use 'sass:math';
+@use 'sass:map';
+
+@use '../commons/config';
+
+@mixin center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin small {
+	--container-padding: var(--spacings-small);
+}
+
+@mixin maxM {
+	max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
+}
+
+@mixin maxL {
+	max-width: math.div(map.get(config.$breakpoints, 'l'), 16px) * 1rem;
+}
+
+@mixin maxXL {
+	max-width: math.div(map.get(config.$breakpoints, 'xl'), 16px) * 1rem;
+}
+
+@mixin maxXXL {
+	max-width: math.div(map.get(config.$breakpoints, 'xxl'), 16px) * 1rem;
+}
+
+@mixin maxXXXL {
+	max-width: math.div(map.get(config.$breakpoints, 'xxxl'), 16px) * 1rem;
+}

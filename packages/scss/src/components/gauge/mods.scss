@@ -1,0 +1,28 @@
+@mixin thin($bar: '.gauge-bar') {
+  height: var(--components-gauge-thin-height);
+
+  #{$bar} {
+    border-bottom-width: var(--components-gauge-thin-height);
+  }
+}
+
+@mixin vertical($bar: '.gauge-bar') {
+  width: var(--components-gauge-height);
+  height: auto;
+
+  #{$bar} {
+    border-left-width: var(--components-gauge-height);
+    border-bottom-width: 0;
+    border-left-style: solid;
+  }
+}
+
+@mixin verticalThin($bar: '.gauge-bar') {
+  @include vertical;
+
+  width: var(--components-gauge-thin-height);
+
+  #{$bar} {
+    border-left-width: var(--components-gauge-thin-height);
+  }
+}

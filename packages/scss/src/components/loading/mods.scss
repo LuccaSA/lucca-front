@@ -1,0 +1,14 @@
+@mixin big {
+  height: 5rem;
+  padding: 5.5rem 0 0;
+  text-align: center;
+  width: 100%;
+
+  &::before,
+  &::after {
+    margin: 0 auto;
+    height: 5rem;
+    width: 5rem;
+    border-width: 3px;
+  }
+}

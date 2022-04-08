@@ -1,0 +1,65 @@
+@use '../commons/config';
+@use '../commons/utils/media';
+@use 'exports' as *;
+
+.table {
+	&.mod-stickyColumn {
+		@include stickyColumn;
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.largerThan($breakpoint) {
+			&.mod-layoutFixed-#{$breakpoint} {
+				@include fixed;
+			}
+
+			&.mod-stickyColumn-#{$breakpoint} {
+				@include stickyColumn;
+			}
+		}
+	}
+
+	&.mod-stickyColumn-shadow {
+		@include shadow;
+	}
+
+	&[class*='mod-stickyColumn'] {
+		@for $i from 0 through 50 {
+			&.mod-stickyColumn-leftOffset#{$i} {
+				@include leftOffset($i);
+			}
+
+			&.mod-stickyColumn-rightOffset#{$i} {
+				@include rightOffset($i);
+			}
+		}
+	}
+
+	[class*='sticky'][class*='shadow-wrapper'] {
+		@include wrapper;
+	}
+
+	&[class*='mod-stickyHeader'] {
+		@include stickyHeaderCommon;
+
+		@each $breakpoint, $value in config.$breakpoints {
+			@include media.largerThan($breakpoint) {
+				&.mod-stickyColumn-#{$breakpoint} {
+					@include stickyColumnBreakpoint;
+				}
+			}
+		}
+	}
+
+	&.mod-stickyHeader-shadow {
+		@include stickyHeaderShadow;
+	}
+
+	&.mod-stickyHeader {
+		@include stickyHeader;
+	}
+
+	&.mod-stickyHeader-withBanner {
+		@include stickyHeaderBanner;
+	}
+}

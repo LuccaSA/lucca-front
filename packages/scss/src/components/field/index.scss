@@ -1,0 +1,72 @@
+// @use '../commons/config';
+@use 'exports' as *;
+
+$fields: 'checkboxesfield', 'radiosfield', 'textfield';
+
+@each $field in $fields {
+	.#{$field} {
+		@include vars;
+		@include component($input: '.#{$field}-input', $label: '.#{$field}-label', $messages: '.#{$field}-messages');
+
+		&.mod-inline {
+			@include inline;
+		}
+
+		&.mod-block {
+			@include block;
+		}
+
+		&:is(.is-required) {
+			@include required($label: '.#{$field}-label');
+		}
+
+		&:is(.is-loading) {
+			@include loading($input: '.#{$field}-input');
+		}
+
+		&:is(.is-success, .is-valid) {
+			@include success($input: '.#{$field}-input');
+		}
+
+		&:is(.is-error, .is-invalid) {
+			@include error($label: '.#{$field}-label', $input: '.#{$field}-input');
+		}
+	}
+
+	.#{$field}-input {
+		&:is(:hover) {
+			@include hover;
+		}
+
+		&:is(:focus) {
+			@include focus;
+		}
+
+		// .checkboxesfield
+		/*
+    &.mod-row {
+      @include row;
+    }
+    */
+
+		&:is([aria-required]) {
+			@include required($label: '.#{$field}-label');
+		}
+
+		&:is([disabled], [readonly]) {
+			@include disabled;
+		}
+
+		&:is(.is-valid, .is-success) {
+			@include state('success', $label: '.#{$field}-label', $input: '.#{$field}-input', $suffix: '.#{$field}-suffix');
+		}
+
+		&:is(.is-warning) {
+			@include state('warning', $label: '.#{$field}-label', $input: '.#{$field}-input', $suffix: '.#{$field}-suffix');
+		}
+
+		&:is(.is-invalid, .is-error) {
+			@include state('error', $label: '.#{$field}-label', $input: '.#{$field}-input', $suffix: '.#{$field}-suffix');
+		}
+	}
+}

@@ -1,42 +1,42 @@
-mat-select {
-	@extend .textfield;
-}
+// mat-select {
+// 	@extend .textfield;
+// }
 
-.textfield.mod-framed mat-select {
-	padding: 0 !important;
-	.mat-select-trigger {
-		font-size: 1rem;
-		margin: 2.2rem 1rem 0.7rem;
-		&::after {
-			bottom: -0.7rem;
-			content: '';
-			display: block;
-			left: -1rem;
-			position: absolute;
-			right: -1rem;
-			top: -2.2rem;
-		}
-	}
-}
+// .textfield.mod-framed mat-select {
+// 	padding: 0 !important;
+// 	.mat-select-trigger {
+// 		font-size: 1rem;
+// 		margin: 2.2rem 1rem 0.7rem;
+// 		&::after {
+// 			bottom: -0.7rem;
+// 			content: '';
+// 			display: block;
+// 			left: -1rem;
+// 			position: absolute;
+// 			right: -1rem;
+// 			top: -2.2rem;
+// 		}
+// 	}
+// }
 
-.textfield:not(.mod-compact) mat-select {
-	padding-top: 0 !important;
-}
+// .textfield:not(.mod-compact) mat-select {
+// 	padding-top: 0 !important;
+// }
 
-.mat-select-trigger {
-	height: 1.1rem !important;
-	min-width: 0 !important;
-	text-overflow: ellipsis;
-}
+// .mat-select-trigger {
+// 	height: 1.1rem !important;
+// 	min-width: 0 !important;
+// 	text-overflow: ellipsis;
+// }
 
-.mat-select-placeholder {
-	width: auto !important;
-}
-.mat-select-panel {
-	@extend .textfield-options;
+// .mat-select-placeholder {
+// 	width: auto !important;
+// }
+// .mat-select-panel {
+// 	@extend .textfield-options;
 
-	position: relative;
-	top: auto;
-	transform: none;
-	opacity: 1;
-}
+// 	position: relative;
+// 	top: auto;
+// 	transform: none;
+// 	opacity: 1;
+// }

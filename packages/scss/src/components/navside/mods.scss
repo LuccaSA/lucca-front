@@ -1,0 +1,38 @@
+@mixin compact($content: '.main-content') {
+  // background-color: var(--components-navSide-compact-palette-bg-color);
+  text-align: center;
+  width: var(--layout-navSide-compact-width);
+
+  // .navSide-mainSection,
+  // .navSide-scrollWrapper {
+  //   width: var(--layout-navSide-compact-width);
+  // }
+
+  .navSide-item-link {
+    // color: _component('navSide.compact-palette.text');
+    // font-size: _component('navSide.compact.font-size');
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em 0.5em;
+    position: relative;
+    text-align: center;
+
+    .navSide-item-link-title {
+      margin: 0.8em 0 0;
+    }
+  }
+
+  .navSide-item-arrow,
+  .navSide-item-subMenu {
+    display: none;
+  }
+
+  // .mod-withMenuCompact #{$content},
+  ~ #{$content} {
+    margin-left: var(--layout-navSide-compact-width);
+  }
+}
+
+@mixin withBanner {
+  top: var(--commons-banner-height);
+}

@@ -1,0 +1,5 @@
+@mixin vars {
+  --components-callout-margin: 0 0 var(--spacings-small);
+  --components-callout-padding: var(--spacings-smaller) var(--spacings-small);
+  --components-callout-background: var(--commons-background-base);
+}

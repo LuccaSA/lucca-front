@@ -1,0 +1,20 @@
+@use '../commons/config';
+@use '../commons/utils/media';
+@use 'exports' as *;
+
+.table-head-row-cell,
+.table-body-row-cell {
+	@for $i from 2 through 20 {
+		&.mod-layoutFixed-#{$i} {
+			@include layoutFixed($i);
+		}
+
+		@each $breakpoint, $value in config.$breakpoints {
+			@include media.largerThan($breakpoint) {
+				&.mod-layoutFixed-#{$breakpoint}#{$i} {
+					@include layoutFixed($i);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,79 @@
+@use '@lucca-front/icons/src/mixins' as icon;
+
+@mixin component(
+  $left: '.header-contentLeft',
+  $right: '.header-contentRight',
+  $nav: '.header-nav',
+  $back: '.header-nav-back',
+  $category: '.header-nav-category',
+  $title: '.header-nav-title'
+) {
+  box-shadow: var(--commons-elevations-elevation-1);
+  background-color: var(--components-header-background);
+  min-height: var(--components-header-height);
+  padding: var(--components-header-padding);
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+
+  @at-root {
+    #{$left} {
+      display: flex;
+    }
+
+    #{$right} {
+      display: flex;
+      margin-left: auto;
+    }
+
+    #{$nav} {
+      height: var(--components-header-height);
+      padding-left: calc(var(--components-header-height) + 1rem);
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    #{$back} {
+      transition-duration: var(--commons-animations-durations-fast);
+      transition-property: all;
+      border-right-color: var(--commons-divider-color);
+      border-right-width: var(--commons-divider-width);
+      border-right-style: solid;
+      color: var(--palettes-grey-500);
+      height: var(--components-header-height);
+      width: var(--components-header-height);
+      line-height: var(--components-header-height);
+      font-size: 1.3rem;
+      left: 0;
+      top: 0;
+      position: absolute;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+
+      &:hover {
+        background-color: var(--commons-background-base);
+        color: var(--palettes-grey-800);
+      }
+
+      &::before {
+        @include icon.makeIcon('arrow_full_west');
+      }
+    }
+
+    #{$category} {
+      color: var(--palettes-grey-500);
+      font-size: var(--sizes-small-font-size);
+    }
+
+    #{$title} {
+      color: var(--palettes-primary-700);
+      line-height: 1rem;
+      margin: 0;
+    }
+  }
+}

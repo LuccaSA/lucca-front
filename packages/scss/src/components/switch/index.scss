@@ -1,0 +1,44 @@
+@use 'exports' as *;
+
+.switch {
+  @include vars;
+  @include component;
+
+  &.mod-inline {
+    @include inline;
+  }
+
+  &.mod-small {
+    @include small;
+  }
+}
+
+.switch-input {
+  &:is(:checked) {
+    @include checked;
+
+    .switch.mod-small & {
+      @include checkedSmall;
+    }
+
+    &:active {
+      @include checkedActive;
+    }
+  }
+
+  &:is(:hover) {
+    @include hover;
+  }
+
+  &:is(:focus-within) {
+    @include focus;
+  }
+
+  &:is([disabled], [readonly]) {
+    @include disabled;
+
+    &:is(:checked) {
+      @include disabledChecked;
+    }
+  }
+}

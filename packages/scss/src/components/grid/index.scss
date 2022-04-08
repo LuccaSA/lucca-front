@@ -1,0 +1,90 @@
+@use '../commons/config';
+@use '../commons/utils/media';
+@use 'exports' as *;
+
+.grid {
+	@include vars;
+	@include component;
+
+	&.mod-reverse {
+		@include reverse;
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.largerThan($breakpoint) {
+			&.mod-#{$breakpoint}Start {
+				@include start;
+			}
+
+			&.mod-#{$breakpoint}Center {
+				@include center;
+			}
+
+			&.mod-#{$breakpoint}End {
+				@include end;
+			}
+
+			&.mod-#{$breakpoint}Top {
+				@include top;
+			}
+
+			&.mod-#{$breakpoint}Middle {
+				@include middle;
+			}
+
+			&.mod-#{$breakpoint}Bottom {
+				@include bottom;
+			}
+
+			&.mod-#{$breakpoint}Around {
+				@include around;
+			}
+
+			&.mod-#{$breakpoint}Between {
+				@include between;
+			}
+		}
+	}
+}
+
+@each $breakpoint, $value in config.$breakpoints {
+	.grid-#{$breakpoint} {
+		@include column;
+	}
+
+	@include media.largerThan($breakpoint) {
+		.grid-#{$breakpoint} {
+			@include grow;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.grid-#{$breakpoint}#{$i} {
+			@include column;
+		}
+
+		@include media.largerThan($breakpoint) {
+			.grid-#{$breakpoint}#{$i} {
+				@include basis($i);
+			}
+
+			.grid-#{$breakpoint}Offset#{$i} {
+				@include offset($i);
+			}
+		}
+	}
+}
+
+.grid {
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.largerThan($breakpoint) {
+			.#{config.$prefix}#{$breakpoint}First {
+				@include first;
+			}
+
+			.#{config.$prefix}#{$breakpoint}Last {
+				@include last;
+			}
+		}
+	}
+}

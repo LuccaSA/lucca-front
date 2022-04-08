@@ -1,0 +1,109 @@
+@use '../commons/utils/media';
+
+@mixin navsideWithoutScrollbar($navside: '.layout-navside') {
+	#{$navside} {
+		max-height: auto;
+		overflow: visible;
+	}
+}
+
+@mixin contentHeaderStatic($header: '.layout-content-headers-header') {
+	#{$header} {
+		position: static;
+	}
+}
+
+@mixin contentSubheaderStatic($subheader: '.layout-content-headers-subheader') {
+	#{$subheader} {
+		position: static;
+	}
+}
+
+@mixin navsideFooterStatic($navsideFooter: '.layout-navside-footer') {
+	#{$navsideFooter} {
+		position: static;
+	}
+}
+
+@mixin asideFooterStatic($asideFooter: '.layout-aside-footer') {
+	#{$asideFooter} {
+		position: static;
+	}
+}
+
+@mixin contentFooterStatic($contentFooter: '.layout-content-footer') {
+	#{$contentFooter} {
+		position: static;
+	}
+}
+
+@mixin asideBefore {
+	&:not(.mod-asideRemoved) {
+		@include media.largerThan('l') {
+			grid-template-columns: var(--layout-navSide-width) var(--components-aside-width) 1fr;
+			grid-template-areas:
+				'banner	banner banner'
+				'navside aside	content';
+
+			&.mod-navsideLarge {
+				grid-template-columns: var(--layout-navSide-width) var(--components-aside-width) 1fr;
+			}
+		}
+	}
+}
+
+@mixin headerRemoved($header: '.layout-content-headers-header') {
+	#{$header} {
+		display: none;
+	}
+}
+
+@mixin subheaderRemoved($subheader: '.layout-content-headers-subheader') {
+	#{$subheader} {
+		display: none;
+	}
+}
+
+@mixin asideRemoved {
+	grid-template-columns: var(--layout-navSide-compact-width) 1fr;
+
+	.layout-aside {
+		display: none;
+	}
+
+	&.mod-navsideLarge {
+		grid-template-columns: var(--layout-navSide-width) 1fr;
+	}
+}
+
+@mixin asideFooterRemoved {
+	.layout-aside-footer {
+		display: none;
+	}
+}
+
+@mixin contentFooterRemoved {
+	.layout-footer {
+		display: none;
+	}
+}
+
+@mixin navsideFooterRemoved {
+	.layout-navside-footer {
+		display: none;
+	}
+}
+
+@mixin navsideLarge {
+	@include media.largerThan('l') {
+		grid-template-columns: var(--layout-navSide-width) 1fr var(--components-aside-width);
+	}
+
+	@include media.smallerThan('l') {
+		grid-template-columns: var(--layout-navSide-width) 1fr;
+	}
+
+	@include media.smallerThan('s') {
+		grid-template-columns: 1fr;
+	}
+}
