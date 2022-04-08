@@ -10,6 +10,7 @@
 	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,
+	"prettier.tabWidth": 4,
 	"[html]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
