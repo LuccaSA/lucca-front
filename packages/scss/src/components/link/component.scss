@@ -1,0 +1,11 @@
+@mixin component {
+	background-color: transparent;
+	border: 0;
+	color: var(--commons-text-link-color);
+	cursor: pointer;
+	display: inline;
+	font-family: var(--commons-font-family);
+	margin: 0;
+	padding: 0;
+	text-decoration: underline;
+}
