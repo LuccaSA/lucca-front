@@ -77,7 +77,7 @@ gulp.task(
  -------------------------------*/
 
  const SCSS_SRC_DIR = './packages/scss/src';
- const SCSS_SRC_MAIN = './packages/scss/src/main.dist.scss';
+ const SCSS_SRC_MAIN = './packages/scss/src/main.scss';
  const SCSS_OUT_DIR = './dist/scss';
 
  gulp.task('scss:clean', () => {
