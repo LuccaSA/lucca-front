@@ -1,0 +1,5 @@
+@mixin ellipsis($suffix: '') {
+	overflow: hidden #{$suffix};
+	text-overflow: ellipsis #{$suffix};
+	white-space: nowrap #{$suffix};
+}
