@@ -1,0 +1,8 @@
+@use '../../commons/utils/media';
+
+@mixin notScrollable {
+	@include media.smallerThan('s') {
+		height: 100vh;
+		overflow: hidden;
+	}
+}
