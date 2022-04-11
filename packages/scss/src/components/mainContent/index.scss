@@ -29,6 +29,6 @@
 }
 
 // State to be added to .main when the menu is toggled
-.main.is-notScrollable {
+.main:is(.is-notScrollable) {
 	@include notScrollable;
 }
