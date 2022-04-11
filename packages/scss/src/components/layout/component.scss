@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'sass:math';
-@use '../commons/utils/media';
-@use '../commons/config';
+@use '../../commons/utils/media';
+@use '../../commons/config';
 
 @mixin component(
 	$banner: '.layout-banner',

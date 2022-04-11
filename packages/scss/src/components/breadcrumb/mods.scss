@@ -1,5 +1,5 @@
-@use '../commons/utils/a11y';
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '../../commons/utils/a11y';
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin compact($item: '.breadcrumbs-list-item', $action: '.breadcrumbs-list-item-action') {
 	#{$item} {
