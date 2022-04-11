@@ -1,5 +1,5 @@
-@use '@lucca-front/icons/src/mixins' as icon;
-@use '../commons/utils/reset';
+@use '../../../../icons/src/mixins' as icon;
+@use '../../commons/utils/reset';
 @use 'sass:color';
 
 @mixin small {

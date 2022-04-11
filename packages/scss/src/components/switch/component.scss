@@ -1,4 +1,4 @@
-@use '../commons/utils/a11y';
+@use '../../commons/utils/a11y';
 
 @mixin component($input: '.switch-input', $label: '.switch-label') {
 	display: block;
