@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.pageHeader {
+	@include vars;
+	@include component;
+
+	&.mod-withMenu {
+		@include withMenu;
+	}
+
+	&.mod-withBreadcrumbs {
+		@include withBreadcrumbs;
+	}
+
+	&.mod-noShadow {
+		@include noShadow;
+	}
+}
