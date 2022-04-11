@@ -3,6 +3,11 @@ import { setCompodocJson } from "@storybook/addon-docs/angular";
 import { componentWrapperDecorator } from '@storybook/angular';
 import docJson from "./documentation.json";
 
+for (const cmp of docJson.components) {
+	cmp.propertiesClass = [];
+	cmp.methodsClass = [];
+}
+
 setCompodocJson(docJson);
 
 export const parameters = {
