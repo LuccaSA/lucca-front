@@ -1,33 +1,33 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin component($title: '.collapse-title') {
-  display: block;
+	display: block;
 
-  @at-root {
-    #{$title} {
-      margin-bottom: _theme('spacings.smallest');
-      display: inline-flex;
-      overflow: hidden;
-      cursor: pointer;
+	@at-root {
+		#{$title} {
+			margin-bottom: _theme('spacings.smallest');
+			display: inline-flex;
+			overflow: hidden;
+			cursor: pointer;
 
-      &::-webkit-details-marker {
-        display: none;
-      }
+			&::-webkit-details-marker {
+				display: none;
+			}
 
-      &:focus-within,
-      &:hover {
-        color: _color('text.dark');
-      }
+			&:focus-within,
+			&:hover {
+				color: _color('text.dark');
+			}
 
-      &::before {
-        @include icon.makeIcon('chevron_east');
+			&::before {
+				@include icon.makeIcon('chevron_east');
 
-        font-size: _theme('sizes.smaller.font-size');
-        margin-right: _theme('spacings.smallest');
-        transition-duration: _theme('commons.animations.durations.fast');
-        vertical-align: middle;
-        transition-property: transform;
-      }
-    }
-  }
+				font-size: _theme('sizes.smaller.font-size');
+				margin-right: _theme('spacings.smallest');
+				transition-duration: _theme('commons.animations.durations.fast');
+				vertical-align: middle;
+				transition-property: transform;
+			}
+		}
+	}
 }

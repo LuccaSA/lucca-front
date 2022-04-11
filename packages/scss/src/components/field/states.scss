@@ -1,5 +1,5 @@
-@use '@lucca-front/icons/src/mixins' as icon;
-@use '../commons/utils/form';
+@use '../../../../icons/src/mixins' as icon;
+@use '../../commons/utils/form';
 
 @mixin hover {
 	&::placeholder {

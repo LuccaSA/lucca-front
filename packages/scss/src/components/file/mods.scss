@@ -1,4 +1,4 @@
-@use '../commons/utils/a11y';
+@use '../../commons/utils/a11y';
 
 @mixin icon {
 	padding: var(--spacings-smaller) var(--spacings-standard) var(--spacings-smaller) var(--spacings-bigger);

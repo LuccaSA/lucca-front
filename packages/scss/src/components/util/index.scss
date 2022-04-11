@@ -2,6 +2,7 @@
 @use '../commons/core';
 @use '../commons/utils/a11y';
 @use '../commons/utils/reset';
+@use '../commons/utils/text';
 @use '../title/exports' as title;
 
 @include core.classes('min-width', core.$contents);
@@ -21,6 +22,7 @@
 @include core.spacings;
 @include core.sizes;
 @include core.palettes;
+@include core.borderRadius;
 
 .#{config.$prefix}textLeft {
 	text-align: left !important;
@@ -48,6 +50,15 @@
 
 .#{config.$prefix}buttonReset {
 	@include reset.button('!important');
+}
+
+.#{config.$prefix}clearfix,
+.#{config.$prefix}clear {
+	@include reset.clearfix('!important');
+}
+
+.#{config.$prefix}ellipsis {
+	@include text.ellipsis('!important');
 }
 
 [data-content-before] {
