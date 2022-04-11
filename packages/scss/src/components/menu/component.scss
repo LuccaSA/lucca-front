@@ -1,4 +1,4 @@
-@use '../commons/utils/reset';
+@use '../../commons/utils/reset';
 
 @mixin component(
 	$label: '.label',

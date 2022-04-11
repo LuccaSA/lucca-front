@@ -1,5 +1,5 @@
-@use '@lucca-front/icons/src/mixins' as icon;
-@use '../commons/utils/a11y';
+@use '../../../../icons/src/mixins' as icon;
+@use '../../commons/utils/a11y';
 
 @mixin component($input: '.checkbox-input', $label: '.checkbox-label') {
 	display: block;

@@ -1,4 +1,4 @@
-@use '../commons/utils/a11y';
+@use '../../commons/utils/a11y';
 
 @mixin component(
 	$item: '.list-item',

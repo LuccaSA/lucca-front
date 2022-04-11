@@ -1,5 +1,5 @@
 @use 'exports' as *;
-@use '../commons/utils/media';
+@use '../../commons/utils/media';
 
 .errorPage {
 	@include vars;
