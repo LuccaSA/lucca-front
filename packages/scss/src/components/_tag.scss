@@ -20,6 +20,12 @@
 	@mixin tagColoring($palette) {
 		background-color: _color($palette, 100);
 		color: _color($palette, 900);
+
+		&.mod-clickable {
+			&:hover {
+				color: _color($palette, 900);
+			}
+		}
 	}
 
 	@include tagColoring("tag.default-palette");
@@ -40,11 +46,11 @@
 	&.mod-clickable {
 		cursor: pointer;
 
-		&:hover {
+		&:hover, &:focus {
 			text-decoration: underline;
 		}
 	}
-	
+
 	&.mod-outlined {
 		color: _color("grey","600");
 		border: _theme("commons.divider.width") solid _color("grey","300");
