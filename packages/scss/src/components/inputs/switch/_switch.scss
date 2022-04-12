@@ -18,13 +18,20 @@
 	transition: color _theme("commons.animations.durations.fast") ease;
 
 	&::before {
-		background-color: _color("grey", "700");
+		@include makeIcon("cross");
+
+		align-items: center;
+		background-color: _color("grey", "500");
 		border-radius: .5rem;
-		content: "";
-		display: block;
+		color: _color("white");
+		display: flex;
+		font-size: _theme("sizes.smaller.font-size");
 		height: 1rem;
 		left: 0;
+		line-height: _theme("sizes.small.line-height");
 		margin-top: _component("switch.top");
+		padding-left: _component("switch.icon-right");
+		padding-top: _component("switch.icon-top");
 		position: absolute;
 		top: _theme("spacings.smallest");
 		transition: all _theme("commons.animations.durations.fast") ease;
@@ -48,7 +55,7 @@
 
 	&:hover {
 		&::before {
-			background-color: _color("grey", "600");
+			background-color: _color("grey", "400");
 		}
 	}
 }
@@ -61,15 +68,6 @@
 	&.mod-inline {
 		display: inline-block;
 		margin-right: 1.5rem;
-
-		.switch-label {
-			&::before {
-				margin-top: 0;
-			}
-			&::after {
-				margin-top: 0;
-			}
-		}
 	}
 
 	&.mod-small {
@@ -81,6 +79,7 @@
 			&::before {
 				margin-top: _component("switch.small-top");
 				height: _theme("sizes.small.font-size");
+				padding-left: _component("switch.small-icon-right");
 				width: calc(1.75rem - 4px);
 			}
 			&::after {
@@ -91,7 +90,7 @@
 		}
 		.switch-input:checked ~ .switch-label {
 			&::before {
-				font-size: _theme("sizes.smaller.font-size");
+				padding-left: _component("switch.small-icon-left");
 			}
 
 			&::after {
@@ -115,39 +114,33 @@
 		~ .switch-label {
 			&::before {
 				@include makeIcon("tick");
-
-				align-items: center;
-				background-color: _color("secondary", "700");
-				color: _color("secondary", "900");
 				display: flex;
-				font-size: _theme("sizes.small.font-size");
-				line-height: _theme("sizes.small.line-height");
+				background-color: _component("switch.default-palette.700");
 				padding-left: _component("switch.icon-left");
-				padding-top: _component("switch.icon-top");
 			}
-			
+
 			&::after {
 				left: calc(1rem - 2px);
 			}
-		} 
+		}
 
 		&:hover ~ .switch-label {
 			&::before {
-				background-color: _color("secondary", "600");
+				background-color: _component("switch.default-palette.600");
 			}
 		}
 
 		&:focus ~ .switch-label {
 			&::before {
-				background-color: _color("secondary", "600");
-				box-shadow: 0 0 0 4px _color("secondary", "200");
+				background-color: _component("switch.default-palette.600");
+				box-shadow: 0 0 0 4px _component("switch.default-palette.200");
 			}
 		}
 
 		&:active:not([disabled], [readonly]) ~ .switch-label {
 			&::before {
-				background-color: _color("secondary", "800");
-				box-shadow: 0 0 0 4px _color("secondary", "300");
+				background-color: _component("switch.default-palette.800");
+				box-shadow: 0 0 0 4px _component("switch.default-palette.300");
 			}
 		}
 	}
@@ -163,21 +156,20 @@
 
 			&::before {
 				background-color: _color("grey", "200");
-			}
-
-			&::after {
-				background-color: _color("grey", "500");
-			}
-		}
-
-		&:checked ~ .switch-label {
-			&::before {
-				background-color: _color("grey", "200");
 				color: _color("grey", "500");
 			}
 
 			&::after {
 				background-color: _color("grey", "500");
+				box-shadow: none;
+			}
+		}
+
+		&:checked {
+			~ .switch-label {
+				&::before {
+					background-color: _color("grey", "200");
+				}
 			}
 		}
 	}
@@ -198,8 +190,8 @@
 
 	&:active:not([disabled], [readonly]) ~ .switch-label {
 		&::before {
-			background-color: _color("grey", "800");
+			background-color: _color("grey", "600");
 			box-shadow: 0 0 0 4px _color("grey", "300");
 		}
-	} 
+	}
 }

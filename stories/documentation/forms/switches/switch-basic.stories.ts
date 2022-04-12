@@ -33,7 +33,7 @@ function getTemplate(args: SwitchBasicStory): string {
 	const inline = args.inline ? `mod-inline` : '';
 	return `
 		<label class="switch ${small} ${inline}">
-			<input class="switch-input" type="checkbox" name="switchList1" ${disabled} checked>
+			<input class="switch-input" type="checkbox" name="switchList1" ${disabled}>
 			<span class="switch-label">switch</span>
 		</label>
 		<label class="switch ${small} ${inline}">
