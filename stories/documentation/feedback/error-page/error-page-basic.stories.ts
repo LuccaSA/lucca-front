@@ -25,6 +25,11 @@ function getTemplate(args: ErrorBasicStory): string {
 const Template: Story<ErrorBasicStory> = (args: ErrorBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [`
+		.errorPage {
+			height: 30rem;
+		}`,
+	],
 });
 
 export const Basic = Template.bind({});
