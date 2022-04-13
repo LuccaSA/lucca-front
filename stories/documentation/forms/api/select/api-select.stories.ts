@@ -21,7 +21,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from "@storybo
 		</label>
 	`
 })
-class ApiSelectModalStory {
+class ApiSelectStory {
 	apiV3 = '/api/v3/axisSections'
 	apiV4 = '/organization/structure/api/job-qualifications'
 }
@@ -30,9 +30,9 @@ export default {
 	title: 'Documentation/Forms/Api/Select',
 	component: LuApiSelectInputComponent,
 	decorators: [
-		componentWrapperDecorator(ApiSelectModalStory),
+		componentWrapperDecorator(ApiSelectStory),
 		moduleMetadata({
-			declarations: [ApiSelectModalStory],
+			declarations: [ApiSelectStory],
 			imports: [
 				LuApiModule,
 				BrowserAnimationsModule,
@@ -41,12 +41,7 @@ export default {
 	],
 } as Meta;
 
-const Template: Story = props => ({
-	props: {
-		...props,
-		api: '/api/v3/axisSections'
-	}
-});
+const Template: Story<ApiSelectStory> = props => ({ props });
 
 export const Basic = Template.bind({});
 Basic.parameters = {
@@ -60,9 +55,9 @@ Basic.parameters = {
 import { LuApiSelectInputModule } from '@lucca-front/ng/api';
 
 @NgModule({
-	imports: [LuModalModule]
+	imports: [LuApiSelectInputModule]
 })
-class ModalStoriesModule {}
+class ApiSelectStoriesModule {}
 
 /* 2. Use it */
 @Component({
@@ -83,7 +78,7 @@ class ModalStoriesModule {}
 		</label>
 	\`
 })
-class ApiSelectModalStory {
+class ApiSelectStory {
 	apiV3 = '/api/v3/axisSections'
 	apiV4 = '/organization/structure/api/job-qualifications'
 }`
