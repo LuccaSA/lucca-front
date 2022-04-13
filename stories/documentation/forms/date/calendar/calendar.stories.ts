@@ -1,19 +1,23 @@
 import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { ALuDateAdapter, LuNativeDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
-import { LuDateModule } from '@lucca-front/ng/date';
+import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
+import { LuCalendarInputComponent, LuDateModule } from '@lucca-front/ng/date';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'date-calendar-stories',
-	templateUrl: './calendar.stories.html'
+	template: `
+		<lu-calendar [(ngModel)]="date"></lu-calendar>
+
+		<button class="button" (click)="random()">random</button>
+
+		{{ date | luDate: 'full' }}
+	`,
 })
 class CalendarStories implements OnInit {
 	date = new Date();
-	ngOnInit() {
-		// this.date.setFullYear(2016);
-	}
+	ngOnInit() {}
 	random() {
 		this.date = new Date(this.date);
 		this.date.setDate(Math.ceil(Math.random() * 30));
@@ -22,29 +26,53 @@ class CalendarStories implements OnInit {
 
 export default {
 	title: 'Documentation/Forms/Date/Calendar',
-	component: CalendarStories,
+	component: LuCalendarInputComponent,
 	decorators: [
+		componentWrapperDecorator(CalendarStories),
 		moduleMetadata({
-			entryComponents: [CalendarStories],
-			imports: [
-				LuDateModule,
-				BrowserAnimationsModule,
-				FormsModule,
-			],
+			declarations: [CalendarStories],
+			imports: [LuDateModule, BrowserAnimationsModule, FormsModule],
 			providers: [
 				{ provide: LOCALE_ID, useValue: 'en-US' },
-				// { provide: LOCALE_ID, useValue: 'fr-FR' },
 				{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },
-			]
-		})
-	]
+			],
+		}),
+	],
 } as Meta;
 
 const template: Story<CalendarStories> = (args: CalendarStories) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = {
-	model: new Date(),
-}
+export const Basic = template.bind({});
+Basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code: `
+/*
+	1. Importer LuDateModule et BrowserAnimationsModule,
+	   provider un ALuDateAdapter
+*/
+import { LuDateModule } from '@lucca-front/ng/date';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
+
+@NgModule({
+	imports: [LuDateModule, BrowserAnimationsModule],
+	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
+})
+class CalendarStoriesModule {}
+
+/* 2. Use it */
+@Component({
+	selector: 'calendar-story',
+	template: \`
+	<lu-calendar [(ngModel)]="date"></lu-calendar>
+	\`
+})`,
+		},
+	},
+};

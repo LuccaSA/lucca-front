@@ -1,19 +1,20 @@
 import { Component, Input } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
-import { LuDateModule } from '@lucca-front/ng/date';
-import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
+import { LuDateModule, LuDateSelectInputComponent } from '@lucca-front/ng/date';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'date-select-stories',
 	template: `
-<label class="textfield">
-	<lu-date-select class="textfield-input" [ngModel]="model" (ngModelChange)="modelChange($event)"></lu-date-select>
-</label>
-`,
-}) class DateSelectStory {
-	@Input() model: string;
+		<label class="textfield">
+			<lu-date-select class="textfield-input" [ngModel]="model" (ngModelChange)="modelChange($event)"></lu-date-select>
+		</label>
+	`,
+})
+class DateSelectStory {
+	@Input() model: string = '2021-05-06';
 
 	modelChange(value: string) {
 		// debugger;
@@ -22,28 +23,60 @@ import { FormsModule } from '@angular/forms';
 }
 
 export default {
-	title: 'Documentation/Forms/Date/select',
-	component: DateSelectStory,
+	title: 'Documentation/Forms/Date/Select',
+	component: LuDateSelectInputComponent,
 	decorators: [
+		componentWrapperDecorator(DateSelectStory),
 		moduleMetadata({
-			entryComponents: [DateSelectStory],
-			imports: [
-				LuDateModule,
-				BrowserAnimationsModule,
-				FormsModule,
-			],
-			providers: [
-				{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }
-			]
-		})
-	]
+			declarations: [DateSelectStory],
+			imports: [LuDateModule, BrowserAnimationsModule, FormsModule],
+			providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
+		}),
+	],
 } as Meta;
 
-const template: Story<DateSelectStory> = (args: DateSelectStory) => ({
-	props: args,
-});
+const template: Story<DateSelectStory> = (props: DateSelectStory) => ({});
 
-export const basic = template.bind({});
-basic.args = {
-	model: "2021-05-06",
-}
+export const Basic = template.bind({});
+Basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code: `
+/*
+	1. Importer LuDateSelectInputModule et BrowserAnimationsModule
+	   provider un ALuDateAdapter
+*/
+import { LuDateSelectInputModule } from '@lucca-front/ng/date';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
+
+@NgModule({
+	imports: [LuDateSelectInputModule, BrowserAnimationsModule],
+	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
+})
+class DateSelectStoriesModule {}
+
+/* 2. Use it */
+@Component({
+	selector: 'date-select-story',
+	template: \`
+	<label class="textfield">
+		<lu-date-select
+			class="textfield-input"
+			[ngModel]="date"
+			[min]="minDate"
+			[max]="maxDate"
+			[hideClearer]="true"
+			(ngModelChange)="doSomething($event)"
+		>
+		</lu-date-select>
+		<span class="textfield-label u-mask" translate="KEY_FOR_ACCESSIBILITY"></span>
+	</label>
+	\`
+})`,
+		},
+	},
+};
