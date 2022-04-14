@@ -4,25 +4,22 @@ import { LuQualificationSelectInputComponent, LuQualificationSelectModule } from
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
-	selector: 'qualification-picker-stories',
+	selector: 'qualification-stories',
 	template: `
-	<section class="section">
-		<label class="textfield">
+		<label class="textfield mod-inline u-marginRightSmall">
 			<lu-qualification-select placeholder="Select a qualification" class="textfield-input" ></lu-qualification-select>
-			<span class="textfield-label">Qualification</span>
+			<span class="textfield-label">Simple</span>
 		</label>
-		<br/>
-		<label class="textfield">
+		<label class="textfield mod-inline">
 			<lu-qualification-select placeholder="Select a qualification" [multiple]="true" class="textfield-input" ></lu-qualification-select>
-			<span class="textfield-label">Qualifications</span>
+			<span class="textfield-label">Multiple</span>
 		</label>
-	</section>
 `,
 })
 class QualificationSelectStory { }
 
 export default {
-	title: 'Documentation/Forms/QualificationPicker',
+	title: 'Documentation/Forms/Qualification',
 	component: LuQualificationSelectInputComponent,
 	decorators: [
 		componentWrapperDecorator(QualificationSelectStory),
@@ -40,8 +37,8 @@ const template: Story<QualificationSelectStory> = props => ({
 	props,
 });
 
-export const Basic = template.bind({});
-Basic.parameters = {
+export const Select = template.bind({});
+Select.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },
 	docs: {
@@ -60,17 +57,14 @@ class QualificationSelectStoriesModule {}
 @Component({
 	selector: 'qualification-select-story',
 	template: \`
-		<section class="section">
-			<label class="textfield">
-				<lu-qualification-select placeholder="Select a qualification" class="textfield-input" ></lu-qualification-select>
-				<span class="textfield-label">Qualification</span>
-			</label>
-			<br/>
-			<label class="textfield">
-				<lu-qualification-select placeholder="Select a qualification" [multiple]="true" class="textfield-input" ></lu-qualification-select>
-				<span class="textfield-label">Qualifications</span>
-			</label>
-		</section>
+		<label class="textfield">
+			<lu-qualification-select placeholder="Select a qualification" class="textfield-input" ></lu-qualification-select>
+			<span class="textfield-label">Simple</span>
+		</label>
+		<label class="textfield">
+			<lu-qualification-select placeholder="Select a qualification" [multiple]="true" class="textfield-input" ></lu-qualification-select>
+			<span class="textfield-label">Multiple</span>
+		</label>
 	\`
 })
 class QualificationSelectStory { }`

@@ -10,7 +10,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	template: `
 		<lu-calendar [(ngModel)]="date"></lu-calendar>
 
-		<button class="button" (click)="random()">random</button>
+		<button class="button mod-outlined u-marginRightSmall" (click)="random()">Random</button>
 
 		{{ date | luDate: 'full' }}
 	`,
@@ -44,8 +44,8 @@ const template: Story<CalendarStories> = (args: CalendarStories) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
-Basic.parameters = {
+export const Calendar = template.bind({});
+Calendar.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },
 	docs: {

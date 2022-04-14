@@ -37,8 +37,8 @@ export default {
 
 const template: Story<DateSelectStory> = (props: DateSelectStory) => ({});
 
-export const Basic = template.bind({});
-Basic.parameters = {
+export const Select = template.bind({});
+Select.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },
 	docs: {

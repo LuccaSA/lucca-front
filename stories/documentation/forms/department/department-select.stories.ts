@@ -29,13 +29,13 @@ const template: Story<DepartmentStory> = (args: DepartmentStory) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-// basic.args = {
+export const Select = template.bind({});
+// Select.args = {
 // 	appInstanceId: 15,
 // 	operations: [1],
 // 	filters: ['isactive=false'],
 // };
-basic.parameters = {
+Select.parameters = {
 	// controls: { include: ['appInstanceId', 'operations', 'filters'] },
 	controls: { include: [] },
 	docs: {
