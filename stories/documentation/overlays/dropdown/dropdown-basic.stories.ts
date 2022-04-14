@@ -7,29 +7,19 @@ import {
 	LuDropdownTriggerDirective,
 } from '../../../../packages/ng/dropdown/src';
 
-
-@Component({
-	selector: 'dropdown-mock-stories',
-	templateUrl: './dropdown.stories.html',
-}) class DropdownMockStories extends LuDropdownTriggerDirective {
-}
-
-
-
 @Component({
 	selector: 'dropdown-stories',
-	templateUrl: './dropdown.stories.html',
-}) class DropdownStories {
+	templateUrl: './dropdown-basic.stories.html',
+}) class DropdownBasicStories {
 	constructor() { }
 }
 
 export default {
-	title: 'Documentation/Overlays/Dropdown',
-	component: DropdownMockStories,
+	title: 'Documentation/Overlays/Dropdown/Basic',
+	component: DropdownBasicStories,
 	decorators: [
-		componentWrapperDecorator(DropdownStories),
 		moduleMetadata({
-			declarations: [DropdownStories],
+			declarations: [DropdownBasicStories],
 			imports: [
 				BrowserAnimationsModule,
 				LuDropdownModule,
@@ -38,14 +28,14 @@ export default {
 	],
 } as Meta;
 
-const Template: Story<DropdownStories> = (args: DropdownStories) => ({
+const Template: Story<DropdownBasicStories> = (args: DropdownBasicStories) => ({
 	props: args,
 });
 
 export const Basic = Template.bind({});
 Basic.args = {}
 Basic.parameters = {
-	controls: [],
+	controls: { include: [] },
 	docs: {
 		source: {
 			language: 'ts',
