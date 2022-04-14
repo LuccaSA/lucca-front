@@ -4,6 +4,7 @@ interface RadiosBasicStory {
 	row: boolean;
 	disabled: boolean;
 	small: boolean;
+	grey: boolean;
 }
 
 export default {
