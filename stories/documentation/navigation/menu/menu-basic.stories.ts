@@ -19,7 +19,7 @@ export default {
 				type: 'boolean',
 			}
 		},
-		header: {
+		small: {
 			control: {
 				type: 'boolean',
 			}
