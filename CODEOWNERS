@@ -15,6 +15,4 @@ packages/icons        @LuccaSA/ux-devs
 packages/scss         @LuccaSA/ux-devs
 
 # Storybook
-stories/ng            @LuccaSA/guilde-front
-stories/qa            @LuccaSA/ux-devs
-stories/scss          @LuccaSA/ux-devs
+stories          @LuccaSA/ux-devs
