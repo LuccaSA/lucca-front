@@ -38,7 +38,7 @@
 		height: _theme("sizes.standard.line-height");
 		min-width: _theme("sizes.standard.line-height");
 		line-height: _theme("sizes.standard.line-height");
-		font-weight: 600;
+		font-size: _theme("sizes.smaller.font-size");
 
 		&.size-small {
 			height: 1.25rem;
@@ -69,7 +69,7 @@
 				margin-right: 0;
 				margin-left: .25rem;
 			}
-			
+
 			&:only-child {
 				margin: 0;
 			}
