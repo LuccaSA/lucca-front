@@ -8,7 +8,7 @@
 	color: _component("actionIcon.color");
 	height: 2.5rem;
 	width: 2.5rem;
-	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, opacity _theme("commons.animations.durations.fast") ease;
+	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease;
 	vertical-align: middle;
 	text-decoration: none;
 	display: inline-flex;
