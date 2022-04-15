@@ -96,6 +96,20 @@
 			background-color: _color("error", 200);
 			color: _color("error", 800);
 		}
+
+		&.mod-outlined {
+			&:hover {
+				box-shadow: 0 0 0 1px _color("error", 400);
+			}
+
+			&:focus {
+				box-shadow: 0 0 0 1px _color("error", 400), 0 0 0 4px _color("error", 100);
+			}
+
+			&:active {
+				box-shadow: 0 0 0 1px _color("error", 400), 0 0 0 4px _color("error", 100);
+			}
+		}
 	}
 
 	&.mod-small {
