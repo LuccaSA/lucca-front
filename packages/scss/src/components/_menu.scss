@@ -87,16 +87,6 @@
 	}
 }
 
-.menu-link-placeholder { // legacy syntax
-	&::after {
-		content: attr(data-content-after);
-		display: block;
-		height: 0;
-		overflow: hidden;
-		font-weight: 600;
-	}
-}
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
