@@ -1,35 +1,25 @@
 import { Component } from '@angular/core';
 import { LuModal } from '@lucca-front/ng/modal';
 import { LuSidepanel } from '@lucca-front/ng/sidepanel';
-const MAGIC_POSITIONS = [
-	'center',
-	'top',
-	'right',
-	'bottom',
-	'left',
-];
-const MAGIC_SIZES = [
-	'small',
-	'medium',
-	'large',
-];
+const MAGIC_POSITIONS = ['center', 'top', 'right', 'bottom', 'left'];
+const MAGIC_SIZES = ['small', 'medium', 'large'];
 @Component({
 	selector: 'lu-modal-content',
 	template: `
-	<p>content of the modal component</p>
-	<button class="button" (click)="openModal()">more modals</button>
-	<button class="button" (click)="incr()">incr</button>
-	`
+		<p>content of the modal component</p>
+		<button type="button" class="button" (click)="openModal()">more modals</button>
+		<button type="button" class="button" (click)="incr()">incr</button>
+	`,
 })
 export class BasicModalContent {
 	title = 'title';
 	submitAction = () => true;
 	// submitPalette = 'warning';
 	submitCounter = 0;
-	get submitDisabled() { return this.submitCounter % 2; } 
-	constructor(
-		private _modal: LuModal,
-	) {}
+	get submitDisabled() {
+		return this.submitCounter % 2;
+	}
+	constructor(private _modal: LuModal) {}
 	openModal() {
 		const randPosition = Math.floor(Math.random() * 5);
 		const randSize = Math.floor(Math.random() * 3);
@@ -45,13 +35,10 @@ export class BasicModalContent {
 }
 @Component({
 	selector: 'sand-modal-a11y',
-	templateUrl: './modal-a11y.component.html'
+	templateUrl: './modal-a11y.component.html',
 })
 export class ModalA11yComponent {
-	constructor(
-		private _modal: LuModal,
-		private _sidepanel: LuSidepanel,
-	) {}
+	constructor(private _modal: LuModal, private _sidepanel: LuSidepanel) {}
 	openModal() {
 		this._modal.open(BasicModalContent);
 	}
@@ -59,4 +46,3 @@ export class ModalA11yComponent {
 		this._sidepanel.open(BasicModalContent);
 	}
 }
-

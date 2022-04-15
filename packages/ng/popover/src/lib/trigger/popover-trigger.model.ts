@@ -319,7 +319,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			throw Error(`lu-popover-trigger: must pass in a lu-popover instance.
       Example:
       <lu-popover #popover="LuPopover"></lu-popover>
-      <button [luPopover]="popover"></button>`);
+      <button type="button" [luPopover]="popover"></button>`);
 		}
 	}
 	protected _checkTarget() {

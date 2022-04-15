@@ -30,7 +30,7 @@
 		</tbody>
 	</table>
 
-<em><b>Tip:</b> You can align cells on top with a <code class="code">mod-alignTop</code> class on <code class="code">table</code>.</em>
+	<em><b>Tip:</b> You can align cells on top with a <code class="code">mod-alignTop</code> class on <code class="code">table</code>.</em>
 </section>
 
 <!-- Parents -->
@@ -81,7 +81,7 @@
 			<tr class="table-head-row mod-selectable">
 				<th class="table-head-row-cell">
 					<div class="checkbox mod-noLabel">
-						<input class="checkbox-input" type="checkbox" id="rowAll">
+						<input class="checkbox-input" type="checkbox" id="rowAll" />
 						<label class="checkbox-label" for="rowAll"></label>
 					</div>
 				</th>
@@ -94,7 +94,7 @@
 			<tr class="table-body-row mod-selectable">
 				<td class="table-body-row-cell">
 					<div class="checkbox mod-noLabel">
-						<input class="checkbox-input" type="checkbox" id="row0" checked>
+						<input class="checkbox-input" type="checkbox" id="row0" checked />
 						<label class="checkbox-label" for="row0"></label>
 					</div>
 				</td>
@@ -105,7 +105,7 @@
 			<tr class="table-body-row mod-selectable">
 				<td class="table-body-row-cell">
 					<div class="checkbox mod-noLabel">
-						<input class="checkbox-input" type="checkbox" id="row1" checked>
+						<input class="checkbox-input" type="checkbox" id="row1" checked />
 						<label class="checkbox-label" for="row1"></label>
 					</div>
 				</td>
@@ -116,7 +116,7 @@
 			<tr class="table-body-row mod-selectable">
 				<td class="table-body-row-cell">
 					<div class="checkbox mod-noLabel">
-						<input class="checkbox-input" type="checkbox" id="row2">
+						<input class="checkbox-input" type="checkbox" id="row2" />
 						<label class="checkbox-label" for="row2"></label>
 					</div>
 				</td>
@@ -126,9 +126,7 @@
 			</tr>
 		</tbody>
 	</table>
-
 </section>
-
 
 <!-- Zebra -->
 <section class="contentSection">
@@ -164,48 +162,40 @@
 <!-- Clickable lines -->
 <section class="contentSection">
 	<h2>Clickable lines</h2>
-<table class="table mod-clickable">
-	<thead class="table-head">
-		<tr class="table-head-row">
-			<td class="table-head-row-cell">Head cell</td>
-			<td class="table-head-row-cell">Head cell</td>
-			<td class="table-head-row-cell">Head cell</td>
-		</tr>
-	</thead>
-	<tbody class="table-body">
-		<tr class="table-body-row">
-			<td class="table-body-row-cell">
-				<a href="#" class="table-body-row-cell-action">
-					Body cell
-				</a>
-			</td>
-			<td class="table-body-row-cell">Body cell</td>
-			<td class="table-body-row-cell">Body cell</td>
-		</tr>
-		<tr class="table-body-row">
-			<td class="table-body-row-cell">
-				<a href="#" class="table-body-row-cell-action">
-					Body cell
-				</a>
-			</td>
-			<td class="table-body-row-cell">Body cell</td>
-			<td class="table-body-row-cell">Body cell</td>
-		</tr>
-		<tr class="table-body-row">
-			<td class="table-body-row-cell">
-				<a href="#" class="table-body-row-cell-action">
-					Body cell
-				</a>
-			</td>
-			<td class="table-body-row-cell">
-				<a href="#" class="table-body-row-cell-action">
-					Body cell
-				</a>
-			</td>
-			<td class="table-body-row-cell">Body cell</td>
-		</tr>
-	</tbody>
-</table>
+	<table class="table mod-clickable">
+		<thead class="table-head">
+			<tr class="table-head-row">
+				<td class="table-head-row-cell">Head cell</td>
+				<td class="table-head-row-cell">Head cell</td>
+				<td class="table-head-row-cell">Head cell</td>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action"> Body cell </a>
+				</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action"> Body cell </a>
+				</td>
+				<td class="table-body-row-cell">Body cell</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action"> Body cell </a>
+				</td>
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action"> Body cell </a>
+				</td>
+				<td class="table-body-row-cell">Body cell</td>
+			</tr>
+		</tbody>
+	</table>
 </section>
 
 <!-- Sortable -->
@@ -215,13 +205,13 @@
 		<thead class="table-head">
 			<tr class="table-head-row">
 				<th class="table-head-row-cell" aria-sort="descending">
-					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Sortable column</button>
 				</th>
 				<th class="table-head-row-cell" aria-sort="none">
-					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Sortable column</button>
 				</th>
 				<th class="table-head-row-cell" aria-sort="none">
-					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Sortable column</button>
 				</th>
 			</tr>
 		</thead>
@@ -247,13 +237,13 @@
 		<thead class="table-head">
 			<tr class="table-head-row">
 				<th class="table-head-row-cell mod-alignRight" aria-sort="ascending">
-					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Sortable column</button>
 				</th>
 				<th class="table-head-row-cell mod-alignRight" aria-sort="none">
-					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Sortable column</button>
 				</th>
 				<th class="table-head-row-cell mod-alignRight" aria-sort="none">
-					<button class="table-head-row-cell-sortableButton">Sortable column</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Sortable column</button>
 				</th>
 			</tr>
 		</thead>
@@ -270,7 +260,6 @@
 			</tr>
 		</tbody>
 	</table>
-
 </section>
 
 <!-- Two lines header -->
@@ -347,24 +336,36 @@
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell mod-actions">
-					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
-					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+					<button type="button" class="actionIcon">
+						<span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span>
+					</button>
+					<button type="button" class="actionIcon">
+						<span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span>
+					</button>
 				</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell mod-actions">
-					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
-					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+					<button type="button" class="actionIcon">
+						<span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span>
+					</button>
+					<button type="button" class="actionIcon">
+						<span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span>
+					</button>
 				</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell">Table cell</td>
 				<td class="table-body-row-cell mod-actions">
-					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span></button>
-					<button class="actionIcon"><span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span></button>
+					<button type="button" class="actionIcon">
+						<span aria-hidden="true" class="lucca-icon">edit</span><span class="u-mask">Edit</span>
+					</button>
+					<button type="button" class="actionIcon">
+						<span aria-hidden="true" class="lucca-icon">trash</span><span class="u-mask">Delete</span>
+					</button>
 				</td>
 			</tr>
 		</tbody>
@@ -414,7 +415,10 @@
 <!-- Table in cards -->
 <section class="contentSection">
 	<h2>Table in card</h2>
-	<p>You can use a table inside a card. To do it, put it outside <code class="code">card-content</code> and add a <code class="code">mod-card</code> to it.</p>
+	<p>
+		You can use a table inside a card. To do it, put it outside <code class="code">card-content</code> and add a
+		<code class="code">mod-card</code> to it.
+	</p>
 	<div class="card">
 		<table class="table mod-card">
 			<thead class="table-head">
@@ -450,18 +454,21 @@
 				<th class="table-head-row-cell">
 					Head cell
 					<div class="textfield mod-search mod-block mod-small u-marginTopSmaller">
-					<input class="textfield-input" type="text" placeholder="Search">
-				</div></th>
+						<input class="textfield-input" type="text" placeholder="Search" />
+					</div>
+				</th>
 				<th class="table-head-row-cell">
 					Head cell
 					<div class="textfield mod-search mod-block mod-small u-marginTopSmaller">
-					<input class="textfield-input" type="text" placeholder="Search">
-				</div></th>
+						<input class="textfield-input" type="text" placeholder="Search" />
+					</div>
+				</th>
 				<th class="table-head-row-cell">
 					Head cell
 					<div class="textfield mod-search mod-block mod-small u-marginTopSmaller">
-					<input class="textfield-input" type="text" placeholder="Search">
-				</div></th>
+						<input class="textfield-input" type="text" placeholder="Search" />
+					</div>
+				</th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
@@ -498,7 +505,6 @@
 		</tbody>
 	</table>
 </section>
-
 
 <!-- Borderless -->
 <section class="contentSection">
@@ -583,7 +589,10 @@
 			</tr>
 		</tbody>
 	</table>
-	<em><b>Tip:</b> You can align on top with a <code class="code">mod-stickyHeader</code> class or <code class="code">mod-stickyHeader-withBanner</code>.</em>
+	<em
+		><b>Tip:</b> You can align on top with a <code class="code">mod-stickyHeader</code> class or
+		<code class="code">mod-stickyHeader-withBanner</code>.</em
+	>
 	<h2>Sticky Header with shadow on scroll</h2>
 	<table class="table mod-stickyHeader">
 		<thead class="table-head">
@@ -594,7 +603,7 @@
 			</tr>
 		</thead>
 		<tbody class="table-body">
-			<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 49px;">
+			<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 49px">
 				<td class="table-body-row-cell" colspan="3" role="presentation">
 					<div class="stickyHeader-shadow-wrapper"></div>
 				</td>
@@ -646,7 +655,10 @@
 			</tr>
 		</tbody>
 	</table>
-	<em><b>Tip: </b>The value of <code class="code">--sticky-header-shadow-offset-top</code> on <code class="code">.table-body-row.mod-stickyHeader-shadow</code> must be equal to the table header height</em>
+	<em
+		><b>Tip: </b>The value of <code class="code">--sticky-header-shadow-offset-top</code> on
+		<code class="code">.table-body-row.mod-stickyHeader-shadow</code> must be equal to the table header height</em
+	>
 </section>
 <!-- Fixed columns width -->
 <section class="contentSection">
@@ -704,7 +716,10 @@
 			</tr>
 		</tbody>
 	</table>
-	<em><b>Tip:</b> the numeric value used in the class will be calculated in rem. Ex <code class="code">.mod-layoutFixed-<strong>8</strong></code> means a cell width of <strong>8</strong> rem</em>
+	<em
+		><b>Tip:</b> the numeric value used in the class will be calculated in rem. Ex
+		<code class="code">.mod-layoutFixed-<strong>8</strong></code> means a cell width of <strong>8</strong> rem</em
+	>
 </section>
 <!-- Sticky columns -->
 <section class="contentSection">
@@ -818,7 +833,11 @@
 			</tr>
 		</tbody>
 	</table>
-	<em><b>Tip:</b> each cell must have a class <code class="code">.mod-stickyColumn-leftOffset<strong>X</strong></code> or <code class="code">.mod-stickyColumn-righOffset<strong>X</strong></code> with <strong>X</strong> equal to the cumulative size of previous cells in the specified axis (from left or from right)</em>
+	<em
+		><b>Tip:</b> each cell must have a class <code class="code">.mod-stickyColumn-leftOffset<strong>X</strong></code> or
+		<code class="code">.mod-stickyColumn-righOffset<strong>X</strong></code> with <strong>X</strong> equal to the cumulative size of
+		previous cells in the specified axis (from left or from right)</em
+	>
 </section>
 
 <!-- Sticky columns with shadow-->
@@ -1005,7 +1024,7 @@
 		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row mod-stickyHeader-shadow">
-				<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 65px;" colspan="12" role="presentation">
+				<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 65px" colspan="12" role="presentation">
 					<div class="stickyHeader-shadow-wrapper"></div>
 				</td>
 			</tr>
@@ -1089,7 +1108,7 @@
 		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row mod-stickyHeader-shadow">
-				<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 65px;" colspan="12" role="presentation">
+				<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 65px" colspan="12" role="presentation">
 					<div class="stickyHeader-shadow-wrapper"></div>
 				</td>
 			</tr>
