@@ -1,22 +1,3 @@
-// MIXINS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-@mixin actionIconColoring($palette) {
-	color: _color($palette, 500);
-
-	&:hover {
-		&:not([disabled]) {
-			background-color: _color($palette, "50");
-			color: _color($palette);
-		}
-	}
-
-	&:focus {
-		color: _color($palette);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "50");
-	}
-}
-
 // CLASSES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -25,8 +6,8 @@
 	border: 0;
 	border-radius: _component("commons.border.radius");
 	color: _component("actionIcon.color");
-	height: _theme("spacings.big");
-	width: _theme("spacings.big");
+	height: 2.5rem;
+	width: 2.5rem;
 	transition: background-color _theme("commons.animations.durations.fast") ease, color _theme("commons.animations.durations.fast") ease, opacity _theme("commons.animations.durations.fast") ease;
 	vertical-align: middle;
 	text-decoration: none;
@@ -36,19 +17,25 @@
 	cursor: pointer;
 
 	& + & {
-		margin-left: .1rem;
+		margin-left: 2px;
 	}
 
-	&:hover {
-		&:not([disabled]) {
+	&:not([disabled]) {
+		&:hover {
 			background-color: _component("actionIcon.hover.background");
 			color: _component("actionIcon.hover.color");
 		}
-	}
 
-	&:focus {
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color("button.default-palette", "200");
-		outline: none;
+		&:focus {
+			background-color: _component("actionIcon.focus.background");
+			color: _component("actionIcon.focus.color");
+			outline: none;
+		}
+
+		&:active {
+			background-color: _component("actionIcon.default-palette.100");
+			color: _component("actionIcon.default-palette.800");
+		}
 	}
 
 	.lucca-icon, .#{_theme("icons.prefix", true)} {
@@ -64,23 +51,56 @@
 	&.mod-invert {
 		color: _component("actionIcon.invert.color");
 
-		&:hover, &:focus {
-			&:not([disabled]) {
+		&:not([disabled]) {
+			&:hover, &:focus {
 				background-color: rgba(255, 255, 255, .1);
 				color: _component("actionIcon.invert.color");
 			}
-		}
 
-		&:focus {
-			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px rgba(0, 0, 0, .1);
+			&:active {
+				background-color: rgba(255, 255, 255, .2);
+			}
 		}
 	}
 
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include actionIconColoring($name);
+	&.mod-outlined {
+		box-shadow: 0 0 0 1px _color("grey", 400);
+
+		& + & {
+			margin-left: 6px;
 		}
+
+		&:focus {
+			box-shadow: 0 0 0 1px _component("actionIcon.default-palette.400"), 0 0 0 4px _component("actionIcon.default-palette.100");
+		}
+
+		&:active {
+			background-color: _color("grey", 200);
+			color: _color("grey", 800);
+			box-shadow: 0 0 0 1px _component("actionIcon.default-palette.500"), 0 0 0 4px _component("actionIcon.default-palette.200");
+		}
+	}
+
+	&.mod-delete {
+		&:hover {
+			background-color: _color("error", 50);
+			color: _color("error", 800);
+		}
+
+		&:focus {
+			background-color: _color("error", 100);
+			color: _color("error", 800);
+		}
+
+		&:active {
+			background-color: _color("error", 200);
+			color: _color("error", 800);
+		}
+	}
+
+	&.mod-small {
+		height: 2rem;
+		width: 2rem;
 	}
 }
 
@@ -93,6 +113,10 @@
 		color: _color("grey", 500);
 		pointer-events: none;
 		cursor: default;
+
+		&.mod-outlined {
+			box-shadow: 0 0 0 1px _color("grey", 200);
+		}
 	}
 
 	&.is-loading {

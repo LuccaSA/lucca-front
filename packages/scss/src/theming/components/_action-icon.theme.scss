@@ -1,10 +1,15 @@
 $actionIcon: (
+  default-palette: _getMap("palettes.primary"),
   color: (
-    _color("text.default")
+    _color("grey", 700)
   ),
   hover: (
-    background: _color("primary", 50),
-    color: _color("text.dark")
+    background: _color("grey", 50),
+    color: _color("grey", 800)
+  ),
+  focus: (
+    background: _color("grey", 100),
+    color: _color("grey", 800)
   ),
   invert: (
     color: white
