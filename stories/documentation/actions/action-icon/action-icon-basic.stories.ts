@@ -47,7 +47,7 @@ function getTemplate(args: ActionBasicStory): string {
 	}
 
 	return `
-	<button type="button" class="actionIcon mod-delete ${classes} ${small} ${loading}" luTooltip="Modifier" ${attributes}>
+	<button type="button" class="actionIcon is-error ${classes} ${small} ${loading}" luTooltip="Modifier" ${attributes}>
 		<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
 		<span class="u-mask">Modifier</span>
 	</button>
