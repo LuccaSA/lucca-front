@@ -1,38 +1,38 @@
 @use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin clickable {
-  transition-duration: var(--commons-animations-durations-fast);
-  transition-property: background-color;
-  text-decoration: none;
-  cursor: pointer;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-property: background-color;
+	text-decoration: none;
+	cursor: pointer;
 
-  &:focus {
-    outline: none;
-  }
+	&:focus {
+		outline: none;
+	}
 
-  &:focus-visible,
-  &:hover {
-    outline: none;
-    background-color: var(--components-list-hover-background);
-  }
+	&:focus-visible,
+	&:hover {
+		outline: none;
+		background-color: var(--components-list-hover-background);
+	}
 }
 
 @mixin draggable($handler: '.list-item-handler') {
-  padding-left: 1rem;
+	padding-left: 1rem;
 
-  #{$handler} {
-    color: _color('text.placeholder'); // todo
-    font-size: 1.3rem;
-    left: 0;
-    width: 2.4rem;
-    text-align: center;
-    position: absolute;
-    cursor: move;
+	#{$handler} {
+		color: _color('text.placeholder'); // todo
+		font-size: 1.3rem;
+		left: 0;
+		width: 2.4rem;
+		text-align: center;
+		position: absolute;
+		cursor: move;
 
-    &::before {
-      @include icon.makeIcon('drag');
+		&::before {
+			@include icon.makeIcon('drag');
 
-      vertical-align: middle;
-    }
-  }
+			vertical-align: middle;
+		}
+	}
 }

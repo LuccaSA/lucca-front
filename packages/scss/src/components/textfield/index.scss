@@ -1,32 +1,32 @@
 @use 'exports' as *;
 
 .textfield {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-block {
-    @include block;
-  }
+	&.mod-block {
+		@include block;
+	}
 
-  &.mod-multiline {
-    @include multiline;
-  }
+	&.mod-multiline {
+		@include multiline;
+	}
 
-  &.mod-framed {
-    @include framed;
-  }
+	&.mod-framed {
+		@include framed;
+	}
 
-  .textfield-input {
-    &:is(:focus, .is-focused) {
-      @include focused;
-    }
-  }
+	.textfield-input {
+		&:is(:focus, .is-focused) {
+			@include focused;
+		}
+	}
 }
 
 .form {
-  &.mod-framed {
-    .textfield {
-      @include framed;
-    }
-  }
+	&.mod-framed {
+		.textfield {
+			@include framed;
+		}
+	}
 }

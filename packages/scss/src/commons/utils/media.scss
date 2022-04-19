@@ -4,31 +4,31 @@
 @use '../config';
 
 @mixin largerThan($breakpoint, $reversed: false) {
-  $reverse: '';
+	$reverse: '';
 
-  @if $reversed {
-    $reverse: string.unquote('not all and');
-  } @else {
-    $reverse: string.unquote('');
-  }
+	@if $reversed {
+		$reverse: string.unquote('not all and');
+	} @else {
+		$reverse: string.unquote('');
+	}
 
-  $breakpointInPx: map.get(config.$breakpoints, $breakpoint);
+	$breakpointInPx: map.get(config.$breakpoints, $breakpoint);
 
-  @if $breakpointInPx {
-    $breakpointInEm: math.div($breakpointInPx, 16px) * 1em;
+	@if $breakpointInPx {
+		$breakpointInEm: math.div($breakpointInPx, 16px) * 1em;
 
-    @media #{$reverse '(min-width:' $breakpointInEm ')'} {
-      @content;
-    }
-  } @else {
-    @media #{$reverse '(min-width:' $breakpoint')'} {
-      @content;
-    }
-  }
+		@media #{$reverse '(min-width:' $breakpointInEm ')'} {
+			@content;
+		}
+	} @else {
+		@media #{$reverse '(min-width:' $breakpoint')'} {
+			@content;
+		}
+	}
 }
 
 @mixin smallerThan($breakpoint) {
-  @include largerThan($breakpoint, true) {
-    @content;
-  }
+	@include largerThan($breakpoint, true) {
+		@content;
+	}
 }

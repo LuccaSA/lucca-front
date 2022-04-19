@@ -1,52 +1,52 @@
 @use 'exports' as *;
 
 .checkbox {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-inline {
-    @include inline;
-  }
+	&.mod-inline {
+		@include inline;
+	}
 
-  &.mod-big {
-    @include big;
-  }
+	&.mod-big {
+		@include big;
+	}
 
-  &.mod-small {
-    @include small;
-  }
+	&.mod-small {
+		@include small;
+	}
 
-  &.mod-noLabel {
-    @include noLabel;
-  }
+	&.mod-noLabel {
+		@include noLabel;
+	}
 
-  &:is(.is-required) {
-    @include required;
-  }
+	&:is(.is-required) {
+		@include required;
+	}
 
-  &:is(.is-error) {
-    @include state('error');
-  }
+	&:is(.is-error) {
+		@include state('error');
+	}
 
-  &:is(.is-warning) {
-    @include state('warning');
-  }
+	&:is(.is-warning) {
+		@include state('warning');
+	}
 
-  &:is(.is-success) {
-    @include state('success');
-  }
+	&:is(.is-success) {
+		@include state('success');
+	}
 
-  .checkbox-input {
-    &:is(.is-incomplete) {
-      @include incomplete;
-    }
+	.checkbox-input {
+		&:is(.is-incomplete) {
+			@include incomplete;
+		}
 
-    &:is([disabled], [read-only]) {
-      @include disabled;
-    }
+		&:is([disabled], [read-only]) {
+			@include disabled;
+		}
 
-    &:is([aria-required]) {
-      @include required;
-    }
-  }
+		&:is([aria-required]) {
+			@include required;
+		}
+	}
 }

@@ -1,162 +1,162 @@
 @use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin sortedLegacy {
-  color: _color('text.dark'); // todo
+	color: _color('text.dark'); // todo
 
-  &::after {
-    @include icon.makeIcon('arrow_full_north');
+	&::after {
+		@include icon.makeIcon('arrow_full_north');
 
-    opacity: 1;
-    transform: translateY(0);
-  }
+		opacity: 1;
+		transform: translateY(0);
+	}
 
-  &:hover {
-    &::after {
-      opacity: 1;
-    }
-  }
+	&:hover {
+		&::after {
+			opacity: 1;
+		}
+	}
 }
 
 @mixin sortedLegacyAlignRight {
-  &::before {
-    @include icon.makeIcon('arrow_full_north');
+	&::before {
+		@include icon.makeIcon('arrow_full_north');
 
-    opacity: 1;
-    transform: translateY(0);
-  }
+		opacity: 1;
+		transform: translateY(0);
+	}
 
-  &::after {
-    content: none;
-  }
+	&::after {
+		content: none;
+	}
 
-  &:hover {
-    &::before {
-      opacity: 1;
-    }
-  }
+	&:hover {
+		&::before {
+			opacity: 1;
+		}
+	}
 }
 
 @mixin descendingLegacy {
-  @include sortedLegacy;
+	@include sortedLegacy;
 
-  &::after {
-    @include icon.makeIcon('arrow_full_south');
-  }
+	&::after {
+		@include icon.makeIcon('arrow_full_south');
+	}
 }
 
 @mixin ascendingLegacy {
-  @include sortedLegacy;
+	@include sortedLegacy;
 
-  &::after {
-    @include icon.makeIcon('arrow_full_north');
-  }
+	&::after {
+		@include icon.makeIcon('arrow_full_north');
+	}
 }
 
 @mixin descendingLegacyAlignRight {
-  @include sortedLegacyAlignRight;
+	@include sortedLegacyAlignRight;
 
-  &::after {
-    @include icon.makeIcon('arrow_full_south');
-  }
+	&::after {
+		@include icon.makeIcon('arrow_full_south');
+	}
 }
 
 @mixin ascendingLegacyAlignRight {
-  @include sortedLegacyAlignRight;
+	@include sortedLegacyAlignRight;
 
-  &::after {
-    @include icon.makeIcon('arrow_full_north');
-  }
+	&::after {
+		@include icon.makeIcon('arrow_full_north');
+	}
 }
 
 @mixin sorted($button) {
-  padding: 0;
+	padding: 0;
 
-  #{$button} {
-    color: _color('text.dark'); // todo
-    padding: var(--spacings-small);
+	#{$button} {
+		color: _color('text.dark'); // todo
+		padding: var(--spacings-small);
 
-    &::after {
-      @include icon.makeIcon('arrow_full_north');
+		&::after {
+			@include icon.makeIcon('arrow_full_north');
 
-      opacity: 1;
-      transform: translateY(0);
-    }
+			opacity: 1;
+			transform: translateY(0);
+		}
 
-    &:focus {
-      outline: none;
-    }
+		&:focus {
+			outline: none;
+		}
 
-    &:hover,
-    &:focus-visible {
-      outline: none;
+		&:hover,
+		&:focus-visible {
+			outline: none;
 
-      &::after {
-        opacity: 1;
-      }
-    }
-  }
+			&::after {
+				opacity: 1;
+			}
+		}
+	}
 }
 
 @mixin sortedAlignRight($button) {
-  #{$button} {
-    text-align: right;
+	#{$button} {
+		text-align: right;
 
-    &::before {
-      @include icon.makeIcon('arrow_full_north');
+		&::before {
+			@include icon.makeIcon('arrow_full_north');
 
-      opacity: 1;
-      transform: translateY(0);
-    }
+			opacity: 1;
+			transform: translateY(0);
+		}
 
-    &::after {
-      content: none;
-    }
+		&::after {
+			content: none;
+		}
 
-    &:hover,
-    &:focus {
-      &::before {
-        opacity: 1;
-      }
-    }
-  }
+		&:hover,
+		&:focus {
+			&::before {
+				opacity: 1;
+			}
+		}
+	}
 }
 
 @mixin descending($button: '.table-head-row-cell-sortableButton') {
-  @include sorted($button);
+	@include sorted($button);
 
-  #{$button} {
-    &::after {
-      @include icon.makeIcon('arrow_full_south');
-    }
-  }
+	#{$button} {
+		&::after {
+			@include icon.makeIcon('arrow_full_south');
+		}
+	}
 }
 
 @mixin ascending($button: '.table-head-row-cell-sortableButton') {
-  @include sorted($button);
+	@include sorted($button);
 
-  #{$button} {
-    &::after {
-      @include icon.makeIcon('arrow_full_north');
-    }
-  }
+	#{$button} {
+		&::after {
+			@include icon.makeIcon('arrow_full_north');
+		}
+	}
 }
 
 @mixin descendingAlignRight($button: '.table-head-row-cell-sortableButton') {
-  @include sortedAlignRight($button);
+	@include sortedAlignRight($button);
 
-  #{$button} {
-    &::before {
-      @include icon.makeIcon('arrow_full_south');
-    }
-  }
+	#{$button} {
+		&::before {
+			@include icon.makeIcon('arrow_full_south');
+		}
+	}
 }
 
 @mixin ascendingAlignRight($button: '.table-head-row-cell-sortableButton') {
-  @include sortedAlignRight($button);
+	@include sortedAlignRight($button);
 
-  #{$button} {
-    &::before {
-      @include icon.makeIcon('arrow_full_north');
-    }
-  }
+	#{$button} {
+		&::before {
+			@include icon.makeIcon('arrow_full_north');
+		}
+	}
 }

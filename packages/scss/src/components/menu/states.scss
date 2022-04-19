@@ -1,16 +1,16 @@
 @mixin active {
-  color: var(--palettes-primary-700);
+	color: var(--palettes-primary-700);
 
-  &::after {
-    background-color: var(--palettes-primary-700);
-    transform: scale(1);
-  }
+	&::after {
+		background-color: var(--palettes-primary-700);
+		transform: scale(1);
+	}
 }
 
 @mixin disabled {
-  &,
-  .label {
-    color: var(--palettes-grey-500);
-    pointer-events: none;
-  }
+	&,
+	.label {
+		color: var(--palettes-grey-500);
+		pointer-events: none;
+	}
 }

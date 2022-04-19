@@ -1,15 +1,15 @@
 @mixin invert {
-  color: var(--components-actionIcon-invert-color);
+	color: var(--components-actionIcon-invert-color);
 
-  &:hover,
-  &:focus {
-    &:not([disabled]) {
-      color: var(--components-actionIcon-invert-color);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
+	&:hover,
+	&:focus {
+		&:not([disabled]) {
+			color: var(--components-actionIcon-invert-color);
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+	}
 
-  &:focus {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(0, 0, 0, 0.1);
-  }
+	&:focus {
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(0, 0, 0, 0.1);
+	}
 }

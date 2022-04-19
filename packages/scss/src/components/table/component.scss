@@ -1,73 +1,73 @@
 @use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin component(
-  $head: '.table-head',
-  $headRow: '.table-head-row',
-  $headCell: '.table-head-row-cell',
-  $body: '.table-body',
-  $row: '.table-body-row',
-  $cell: '.table-head-body-row-cell'
+	$head: '.table-head',
+	$headRow: '.table-head-row',
+	$headCell: '.table-head-row-cell',
+	$body: '.table-body',
+	$row: '.table-body-row',
+	$cell: '.table-head-body-row-cell'
 ) {
-  font-size: var(--components-table-font-size);
-  line-height: var(--components-table-line-height);
-  border-spacing: 0;
-  display: table;
-  text-align: left;
-  width: 100%;
+	font-size: var(--components-table-font-size);
+	line-height: var(--components-table-line-height);
+	border-spacing: 0;
+	display: table;
+	text-align: left;
+	width: 100%;
 
-  @at-root {
-    #{$head} {
-      display: table-header-group;
-      vertical-align: bottom;
-    }
+	@at-root {
+		#{$head} {
+			display: table-header-group;
+			vertical-align: bottom;
+		}
 
-    #{$headRow} {
-      display: table-row;
-    }
+		#{$headRow} {
+			display: table-row;
+		}
 
-    #{$headCell} {
-      color: _color('text.light'); // todo
-      font-size: var(--sizes-small-font-size);
-      line-height: var(--sizes-small-line-height);
-      padding: var(--spacings-small);
-      border-bottom-width: var(--commons-divider-width);
-      border-bottom-color: var(--commons-divider-color);
-      border-bottom-style: solid;
-      display: table-cell;
-      text-align: left;
-      font-weight: 600;
-    }
+		#{$headCell} {
+			color: _color('text.light'); // todo
+			font-size: var(--sizes-small-font-size);
+			line-height: var(--sizes-small-line-height);
+			padding: var(--spacings-small);
+			border-bottom-width: var(--commons-divider-width);
+			border-bottom-color: var(--commons-divider-color);
+			border-bottom-style: solid;
+			display: table-cell;
+			text-align: left;
+			font-weight: 600;
+		}
 
-    #{$body} {
-      display: table-row-group;
-    }
+		#{$body} {
+			display: table-row-group;
+		}
 
-    #{$row} {
-      background-color: var(--colors-white-color);
-      display: table-row;
+		#{$row} {
+			background-color: var(--colors-white-color);
+			display: table-row;
 
-      &:first-child {
-        #{$cell} {
-          border-top: none;
-        }
-      }
+			&:first-child {
+				#{$cell} {
+					border-top: none;
+				}
+			}
 
-      &:last-child {
-        #{$cell} {
-          border-bottom-width: var(--commons-divider-width);
-          border-bottom-color: var(--commons-divider-color);
-          border-bottom-style: solid;
-        }
-      }
-    }
+			&:last-child {
+				#{$cell} {
+					border-bottom-width: var(--commons-divider-width);
+					border-bottom-color: var(--commons-divider-color);
+					border-bottom-style: solid;
+				}
+			}
+		}
 
-    #{$cell} {
-      padding: var(--components-table-padding);
-      border-top-width: var(--commons-divider-width);
-      border-top-color: var(--commons-divider-color);
-      border-top-style: solid;
-      display: table-cell;
-      vertical-align: middle;
-    }
-  }
+		#{$cell} {
+			padding: var(--components-table-padding);
+			border-top-width: var(--commons-divider-width);
+			border-top-color: var(--commons-divider-color);
+			border-top-style: solid;
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
 }

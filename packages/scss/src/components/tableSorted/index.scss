@@ -1,51 +1,51 @@
 @use 'exports' as *;
 
 .table-head-row-cell {
-  &.mod-sortable,
-  .table-head-row-cell-sortableButton {
-    @include sortable;
+	&.mod-sortable,
+	.table-head-row-cell-sortableButton {
+		@include sortable;
 
-    .table.mod-small & {
-      @include sortableSmall;
-    }
-  }
+		.table.mod-small & {
+			@include sortableSmall;
+		}
+	}
 
-  &:is(.is-sorted-descending) {
-    @include descendingLegacy;
-  }
+	&:is(.is-sorted-descending) {
+		@include descendingLegacy;
+	}
 
-  &:is(.is-sorted-ascending) {
-    @include ascendingLegacy;
-  }
+	&:is(.is-sorted-ascending) {
+		@include ascendingLegacy;
+	}
 
-  &:is([aria-sort='descending']) {
-    @include descending;
-  }
+	&:is([aria-sort='descending']) {
+		@include descending;
+	}
 
-  &:is([aria-sort='ascending']) {
-    @include ascending;
-  }
+	&:is([aria-sort='ascending']) {
+		@include ascending;
+	}
 
-  &.mod-alignRight {
-    &.mod-sortable,
-    .table-head-row-cell-sortableButton {
-      @include sortableAlignRight;
-    }
+	&.mod-alignRight {
+		&.mod-sortable,
+		.table-head-row-cell-sortableButton {
+			@include sortableAlignRight;
+		}
 
-    &:is(.is-sorted-descending) {
-      @include descendingLegacyAlignRight;
-    }
+		&:is(.is-sorted-descending) {
+			@include descendingLegacyAlignRight;
+		}
 
-    &:is(.is-sorted-ascending) {
-      @include ascendingLegacyAlignRight;
-    }
+		&:is(.is-sorted-ascending) {
+			@include ascendingLegacyAlignRight;
+		}
 
-    &:is([aria-sort='descending']) {
-      @include descendingAlignRight;
-    }
+		&:is([aria-sort='descending']) {
+			@include descendingAlignRight;
+		}
 
-    &:is([aria-sort='ascending']) {
-      @include ascendingAlignRight;
-    }
-  }
+		&:is([aria-sort='ascending']) {
+			@include ascendingAlignRight;
+		}
+	}
 }

@@ -1,25 +1,25 @@
 @mixin state($bar: '.progress-bar') {
-  #{$bar} {
-    width: 100% !important;
+	#{$bar} {
+		width: 100% !important;
 
-    &::after {
-      display: none;
-    }
-  }
+		&::after {
+			display: none;
+		}
+	}
 }
 
 @mixin success($bar: '.progress-bar') {
-  @include state($bar);
+	@include state($bar);
 
-  #{$bar} {
-    background-color: var(--palettes-success-700);
-  }
+	#{$bar} {
+		background-color: var(--palettes-success-700);
+	}
 }
 
 @mixin error($bar: '.progress-bar') {
-  @include state($bar);
+	@include state($bar);
 
-  #{$bar} {
-    background-color: var(--palettes-error-700);
-  }
+	#{$bar} {
+		background-color: var(--palettes-error-700);
+	}
 }

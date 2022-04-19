@@ -1,7 +1,7 @@
 @mixin grey($item: '.tableOfContent-item') {
-  #{$item} {
-    &:hover {
-      background-color: var(--commons-background-base);
-    }
-  }
+	#{$item} {
+		&:hover {
+			background-color: var(--commons-background-base);
+		}
+	}
 }

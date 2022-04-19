@@ -1,20 +1,20 @@
 @use 'exports' as *;
 
 .timeline {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-number {
-    @include number;
-  }
+	&.mod-number {
+		@include number;
+	}
 
-  &.mod-small {
-    @include small;
-  }
+	&.mod-small {
+		@include small;
+	}
 }
 
 .timeline-step {
-  &:is([aria-current='step']) {
-    @include current;
-  }
+	&:is([aria-current='step']) {
+		@include current;
+	}
 }

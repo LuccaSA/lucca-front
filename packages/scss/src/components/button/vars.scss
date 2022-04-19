@@ -1,17 +1,17 @@
 @mixin vars {
-  --components-button-margin: 0 0.5rem 0 0;
-  --components-button-font-weight: 600;
-  --components-button-font-size: 1rem;
-  --components-button-line-height: 1.5rem;
-  --components-button-padding: 0.5rem 1.5rem;
-  --components-button-small-font-size: 0.875rem;
-  --components-button-small-line-height: 1rem;
-  --components-button-small-padding: 0.5rem 1rem;
-  --components-button-smaller-font-size: 0.75rem;
-  --components-button-smaller-line-height: 1rem;
-  --components-button-smaller-padding: 0.25rem 0.5rem;
+	--components-button-margin: 0 0.5rem 0 0;
+	--components-button-font-weight: 600;
+	--components-button-font-size: 1rem;
+	--components-button-line-height: 1.5rem;
+	--components-button-padding: 0.5rem 1.5rem;
+	--components-button-small-font-size: 0.875rem;
+	--components-button-small-line-height: 1rem;
+	--components-button-small-padding: 0.5rem 1rem;
+	--components-button-smaller-font-size: 0.75rem;
+	--components-button-smaller-line-height: 1rem;
+	--components-button-smaller-padding: 0.25rem 0.5rem;
 
-  --components-button-border-radius: var(--commons-border-radius);
-  --components-button-font-family: var(--commons-font-family);
-  --components-button-transition: var(--commons-transition);
+	--components-button-border-radius: var(--commons-border-radius);
+	--components-button-font-family: var(--commons-font-family);
+	--components-button-transition: var(--commons-transition);
 }

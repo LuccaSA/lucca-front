@@ -1,44 +1,44 @@
 @use 'exports' as *;
 
 .switch {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-inline {
-    @include inline;
-  }
+	&.mod-inline {
+		@include inline;
+	}
 
-  &.mod-small {
-    @include small;
-  }
+	&.mod-small {
+		@include small;
+	}
 }
 
 .switch-input {
-  &:is(:checked) {
-    @include checked;
+	&:is(:checked) {
+		@include checked;
 
-    .switch.mod-small & {
-      @include checkedSmall;
-    }
+		.switch.mod-small & {
+			@include checkedSmall;
+		}
 
-    &:active {
-      @include checkedActive;
-    }
-  }
+		&:active {
+			@include checkedActive;
+		}
+	}
 
-  &:is(:hover) {
-    @include hover;
-  }
+	&:is(:hover) {
+		@include hover;
+	}
 
-  &:is(:focus-within) {
-    @include focus;
-  }
+	&:is(:focus-within) {
+		@include focus;
+	}
 
-  &:is([disabled], [readonly]) {
-    @include disabled;
+	&:is([disabled], [readonly]) {
+		@include disabled;
 
-    &:is(:checked) {
-      @include disabledChecked;
-    }
-  }
+		&:is(:checked) {
+			@include disabledChecked;
+		}
+	}
 }

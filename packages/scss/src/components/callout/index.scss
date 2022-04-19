@@ -1,18 +1,18 @@
 @use 'exports' as *;
 
 .callout {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-icon {
-    @include icon;
-  }
+	&.mod-icon {
+		@include icon;
+	}
 
-  &.mod-small {
-    @include small;
-  }
+	&.mod-small {
+		@include small;
+	}
 
-  &.mod-killable {
-    @include killable;
-  }
+	&.mod-killable {
+		@include killable;
+	}
 }

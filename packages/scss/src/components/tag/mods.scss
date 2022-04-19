@@ -1,23 +1,23 @@
 @mixin clickable {
-  cursor: pointer;
-  text-decoration: none;
+	cursor: pointer;
+	text-decoration: none;
 
-  &:focus {
-    outline: none;
-  }
+	&:focus {
+		outline: none;
+	}
 
-  &:focus-visible,
-  &:hover {
-    outline: none;
-    color: var(--palettes-900);
-    text-decoration: underline;
-  }
+	&:focus-visible,
+	&:hover {
+		outline: none;
+		color: var(--palettes-900);
+		text-decoration: underline;
+	}
 }
 
 @mixin outlined {
-  color: var(--palettes-grey-600);
-  background-color: var(--colors-white-color);
-  border-color: var(--palettes-grey-300);
-  border-width: var(--commons-divider-width);
-  border-style: solid;
+	color: var(--palettes-grey-600);
+	background-color: var(--colors-white-color);
+	border-color: var(--palettes-grey-300);
+	border-width: var(--commons-divider-width);
+	border-style: solid;
 }

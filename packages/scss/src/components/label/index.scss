@@ -1,22 +1,22 @@
 @use 'exports' as *;
 
 .label {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-number {
-    @include number;
+	&.mod-number {
+		@include number;
 
-    &.size-small {
-      @include numberSmall;
-    }
+		&.size-small {
+			@include numberSmall;
+		}
 
-    &.size-smaller {
-      @include numberSmaller;
-    }
-  }
+		&.size-smaller {
+			@include numberSmaller;
+		}
+	}
 
-  &.mod-icon {
-    @include icon;
-  }
+	&.mod-icon {
+		@include icon;
+	}
 }

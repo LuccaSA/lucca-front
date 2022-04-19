@@ -1,8 +1,8 @@
 @mixin focused {
-  background-color: var(--colors-white-color);
-  box-shadow: 0 0 0 4px var(--components-textfield-focus-shadow-color), inset 0 0 0 1px var(--components-textfield-focus-border-color);
+	background-color: var(--colors-white-color);
+	box-shadow: 0 0 0 4px var(--components-textfield-focus-shadow-color), inset 0 0 0 1px var(--components-textfield-focus-border-color);
 
-  &::placeholder {
-    color: var(--components-textfield-focus-placeholder);
-  }
+	&::placeholder {
+		color: var(--components-textfield-focus-placeholder);
+	}
 }

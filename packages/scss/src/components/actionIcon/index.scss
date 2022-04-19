@@ -1,18 +1,18 @@
 @use 'exports' as *;
 
 .actionIcon {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-invert {
-    @include invert;
-  }
+	&.mod-invert {
+		@include invert;
+	}
 
-  &:is(.is-disabled, [disabled]) {
-    @include disabled;
-  }
+	&:is(.is-disabled, [disabled]) {
+		@include disabled;
+	}
 
-  &:is(.is-loading) {
-    @include loading;
-  }
+	&:is(.is-loading) {
+		@include loading;
+	}
 }

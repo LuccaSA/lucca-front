@@ -1,68 +1,68 @@
 @use 'exports' as *;
 
 .layout {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-navsideWithoutScrollbar {
-    @include navsideWithoutScrollbar;
-  }
+	&.mod-navsideWithoutScrollbar {
+		@include navsideWithoutScrollbar;
+	}
 
-  &.mod-contentHeaderStatic {
-    @include contentHeaderStatic;
-  }
+	&.mod-contentHeaderStatic {
+		@include contentHeaderStatic;
+	}
 
-  &.mod-contentSubheaderStatic {
-    @include contentSubheaderStatic;
-  }
+	&.mod-contentSubheaderStatic {
+		@include contentSubheaderStatic;
+	}
 
-  &.mod-navsideFooterStatic {
-    @include navsideFooterStatic;
-  }
+	&.mod-navsideFooterStatic {
+		@include navsideFooterStatic;
+	}
 
-  &.mod-asideFooterStatic {
-    @include asideFooterStatic;
-  }
+	&.mod-asideFooterStatic {
+		@include asideFooterStatic;
+	}
 
-  &.mod-contentFooterStatic {
-    @include contentFooterStatic;
-  }
+	&.mod-contentFooterStatic {
+		@include contentFooterStatic;
+	}
 
-  &.mod-asideBefore {
-    @include asideBefore;
-  }
+	&.mod-asideBefore {
+		@include asideBefore;
+	}
 
-  &.mod-headerRemoved {
-    @include headerRemoved;
-  }
+	&.mod-headerRemoved {
+		@include headerRemoved;
+	}
 
-  &.mod-subheaderRemoved {
-    @include subheaderRemoved;
-  }
+	&.mod-subheaderRemoved {
+		@include subheaderRemoved;
+	}
 
-  &.mod-asideRemoved {
-    @include asideRemoved;
-  }
+	&.mod-asideRemoved {
+		@include asideRemoved;
+	}
 
-  &.mod-asideFooterRemoved {
-    @include asideFooterRemoved;
-  }
+	&.mod-asideFooterRemoved {
+		@include asideFooterRemoved;
+	}
 
-  &.mod-contentFooterRemoved {
-    @include contentFooterRemoved;
-  }
+	&.mod-contentFooterRemoved {
+		@include contentFooterRemoved;
+	}
 
-  &.mod-navsideFooterRemoved {
-    @include navsideFooterRemoved;
-  }
+	&.mod-navsideFooterRemoved {
+		@include navsideFooterRemoved;
+	}
 
-  &.mod-navsideLarge {
-    @include navsideLarge;
-  }
+	&.mod-navsideLarge {
+		@include navsideLarge;
+	}
 }
 
 html {
-  &:is(.has-overlay) {
-    @include overlay;
-  }
+	&:is(.has-overlay) {
+		@include overlay;
+	}
 }

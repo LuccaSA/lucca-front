@@ -1,60 +1,60 @@
 @mixin spinner($size: 1rem) {
-  @keyframes rotating {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+	@keyframes rotating {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
 
-  &::before,
-  &::after {
-    width: $size;
-    height: $size;
-    border-radius: 50%;
-    line-height: 0.8rem;
-    border-width: 2px;
-    inset: 0;
-    margin: auto;
-    position: absolute;
-    border-style: solid;
-    content: '';
-  }
+	&::before,
+	&::after {
+		width: $size;
+		height: $size;
+		border-radius: 50%;
+		line-height: 0.8rem;
+		border-width: 2px;
+		inset: 0;
+		margin: auto;
+		position: absolute;
+		border-style: solid;
+		content: '';
+	}
 
-  &::before {
-    border-color: var(--commons-loading-background);
-  }
+	&::before {
+		border-color: var(--commons-loading-background);
+	}
 
-  &::after {
-    animation-name: rotating;
-    animation-duration: var(--commons-loading-speed);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+	&::after {
+		animation-name: rotating;
+		animation-duration: var(--commons-loading-speed);
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
 
-    border-color: transparent;
-    border-top-color: var(--commons-loading-frontground);
-  }
+		border-color: transparent;
+		border-top-color: var(--commons-loading-frontground);
+	}
 }
 
 @mixin gradient {
-  @keyframes loadingGradient {
-    0% {
-      background-position: 100% 0%;
-    }
-    100% {
-      background-position: -100% 0%;
-    }
-  }
+	@keyframes loadingGradient {
+		0% {
+			background-position: 100% 0%;
+		}
+		100% {
+			background-position: -100% 0%;
+		}
+	}
 
-  animation-name: loadingGradient;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
-  background-color: currentColor;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(315deg, transparent 40%, currentColor 50%, transparent 100%);
-  background-size: 400% 100%;
-  color: rgba(0, 0, 0, 0.1);
+	animation-name: loadingGradient;
+	animation-duration: 2s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-fill-mode: forwards;
+	background-color: currentColor;
+	background-repeat: no-repeat;
+	background-image: linear-gradient(315deg, transparent 40%, currentColor 50%, transparent 100%);
+	background-size: 400% 100%;
+	color: rgba(0, 0, 0, 0.1);
 }
