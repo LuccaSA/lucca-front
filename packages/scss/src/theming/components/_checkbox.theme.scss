@@ -12,8 +12,7 @@ $checkbox: (
     size: 1rem,
     border-radius: _theme("commons.border.radius"),
     border: (
-      color: _color("grey" ,"700"),
-      hover: _color("primary", "600")
+      color: _color("grey" ,"700")
     )
   )
 );
