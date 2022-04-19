@@ -1,0 +1,44 @@
+@mixin component(
+	$count: '.pagination-count',
+	$navigation: '.pagination-navigation',
+	$scrolling: '.pagination-scrolling',
+	$separator: '.pagination-count-separator',
+	$item: '.pagination-navigation-item'
+) {
+	display: flex;
+	flex-wrap: wrap;
+	margin: var(--spacings-small) 0;
+
+	> *:not(:last-child) {
+		margin-right: var(--spacings-smaller);
+	}
+
+	@at-root {
+		#{$count},
+		#{$navigation},
+		#{$scrolling} {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		#{$separator} {
+			margin: 0 var(--spacings-smallest);
+		}
+
+		#{$navigation} {
+			list-style: none;
+			padding: 0;
+			margin-top: 0;
+			margin-bottom: 0;
+
+			> *:not(:last-child) {
+				margin-right: var(--spacings-smallest);
+			}
+		}
+
+		#{$item} {
+			margin-right: var(--spacings-smallest);
+		}
+	}
+}
