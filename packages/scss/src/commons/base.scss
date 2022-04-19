@@ -26,6 +26,7 @@ html {
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$disabled);
+	@include core.cssvars('commmons-text-link', config.$textLink);
 
 	@include core.cssvars('palettes-primary', config.$primary);
 	@include core.cssvars('palettes-secondary', config.$secondary);
@@ -68,6 +69,15 @@ body {
 
 	@supports (-webkit-touch-callout: none) {
 		min-height: -webkit-fill-available;
+	}
+}
+
+a {
+	color: var(--commons-text-link-color);
+
+	// TODO manage focus
+	&:hover {
+		color: var(--commons-text-link-hover);
 	}
 }
 

@@ -1,4 +1,4 @@
-@use '../commons/utils/form';
+@use '../../commons/utils/form';
 
 @mixin component(
 	$form: '.form',

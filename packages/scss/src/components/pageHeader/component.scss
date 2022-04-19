@@ -1,0 +1,45 @@
+@mixin component(
+	$menu: '.menu',
+	$content: '.pageHeader-content',
+	$title: '.pageHeader-content-title',
+	$actions: '.pageHeader-content-actions',
+	$description: '.pageHeader-description'
+) {
+	box-shadow: var(--commons-box-shadow-xs);
+	padding: var(--spacings-big) 2.5rem var(--spacings-standard);
+	background-color: var(--colors-white-color);
+
+	#{$menu} {
+		margin-top: var(--spacings-smaller);
+
+		&::after {
+			display: none;
+		}
+	}
+
+	#{$content} {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		flex-wrap: wrap;
+	}
+
+	#{$title},
+	#{$actions} {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	#{$actions} {
+		& > *:not(:last-child) {
+			margin-right: var(--spacings-small);
+		}
+	}
+
+	#{$description} {
+		max-width: var(--components-pageHeader-description-max-width);
+		margin-top: var(--spacings-smaller);
+		color: var(--palettes-grey-600);
+	}
+}

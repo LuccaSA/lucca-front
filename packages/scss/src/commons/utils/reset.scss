@@ -24,3 +24,15 @@
 	font: inherit #{$suffix};
 	cursor: pointer #{$suffix};
 }
+
+@mixin clearfix($suffix: '') {
+	&::before,
+	&::after {
+		content: ' ';
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}

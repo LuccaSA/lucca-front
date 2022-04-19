@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin clickable {
 	transition-duration: var(--commons-animations-durations-fast);

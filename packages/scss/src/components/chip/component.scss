@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin component($kill: '.chip-kill') {
 	background-color: var(--palettes-primary-700);

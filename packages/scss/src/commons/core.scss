@@ -6,6 +6,7 @@
 $contents: '0';
 $boxModel: 'margin', 'padding', 'border';
 $boxDirection: 'top', 'bottom', 'left', 'right', '';
+$corners: 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', '';
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
@@ -99,6 +100,16 @@ $states: 'error,' 'warning', 'success';
 	@each $palette in $palettes {
 		.#{config.$prefix}text#{capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) !important;
+		}
+	}
+}
+
+@mixin borderRadius($suffix: '!important') {
+	@each $corner in $corners {
+		@each $key, $value in config.$borderRadius {
+			.u-border#{capitalize(camelize($corner))}Radius#{capitalize($key)} {
+				border-#{$corner}radius: $value;
+			}
 		}
 	}
 }

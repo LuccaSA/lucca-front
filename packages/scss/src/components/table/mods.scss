@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin small {
 	font-size: var(--sizes-small-font-size);
