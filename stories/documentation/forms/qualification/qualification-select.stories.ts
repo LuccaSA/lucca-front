@@ -46,7 +46,7 @@ Select.parameters = {
 			language: 'ts',
 			code: `
 /* 1. Importer LuQualificationSelectModule */
-import { LuQualificationSelectModule } from '@lucca-front/ng/api';
+import { LuQualificationSelectModule } from '@lucca-front/ng/qualification';
 
 @NgModule({
 	imports: [LuQualificationSelectModule]
