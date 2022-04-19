@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
 	LuPopoverAlignment,
-	LuPopoverModule, LuPopoverPanelComponent,
+	LuPopoverModule,
 	LuPopoverPosition,
 	LuPopoverTriggerDirective,
-	LuPopoverTriggerEvent,
+	LuPopoverTriggerEvent
 } from '@lucca-front/ng/popover';
-import { Story, Meta, moduleMetadata, componentWrapperDecorator } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-mock-directive-story',
@@ -21,12 +21,12 @@ import { Story, Meta, moduleMetadata, componentWrapperDecorator } from '@storybo
 	selector: 'popover-story',
 	template: `
 		<button class="button"
-		[luPopover]="popover"
-		[luPopoverPosition]="position"
-		[luPopoverAlignment]="alignment"
-		[luPopoverTrigger]="trigger"
-		>{{trigger}} me</button>
-		<lu-popover #popover="LuPopoverPanel">{{popoverContent}}</lu-popover>
+			[luPopover]="popover"
+			[luPopoverPosition]="position"
+			[luPopoverAlignment]="alignment"
+			[luPopoverTrigger]="trigger"
+			>{{trigger}} me</button>
+		<lu-popover #popover>{{popoverContent}}</lu-popover>
 `,
 }) class PopoverStory {
 	@Input() popoverContent: string = '🎉 popover content 🏖️';
@@ -58,6 +58,28 @@ export const basic = template.bind({});
 basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
 	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code: `
+/* 1. Importer LuPopoverModule */
+import { LuPopoverModule } from '@lucca-front/ng/popover';
 
+@NgModule({
+	imports: [LuPopoverModule]
+})
+class PopoverStoriesModule {}
+
+/* 2. Use it */
+@Component({
+	selector: 'popover-story',
+	template: \`
+		<button class="button" [luPopover]="popover">Click me</button>
+		<lu-popover #popover>🎉 popover content 🏖️</lu-popover>
+	\`
+})
+class PopoverStory { }`
+		}
+	}
 }
 

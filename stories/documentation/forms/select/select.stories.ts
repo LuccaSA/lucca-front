@@ -69,5 +69,71 @@ const template: Story<SelectStory> = (args: SelectStory) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = {};
+export const Basic = template.bind({});
+Basic.args = {};
+Basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code: `
+/* 1. Importer LuSelectModule, LuOptionModule, LuInputModule */
+import { LuSelectModule } from '@lucca-front/ng/api';
+import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
+
+@NgModule({
+	imports: [
+		LuSelectModule,
+		LuOptionModule,
+		LuInputModule,
+	]
+})
+class SelectStoriesModule {}
+
+/* 2. Use it */
+@Component({
+	selector: 'select-story',
+	template: \`
+		<section class="section">
+			<label class="textfield">
+				<lu-select class="textfield-input" placeholder="Select an item">
+					<span *luDisplayer="let value">{{ value }}</span>
+					<lu-option-picker>
+						<lu-option [value]="1">1</lu-option>
+						<lu-option [value]="2">2</lu-option>
+						<lu-option [value]="3">3</lu-option>
+					</lu-option-picker>
+				</lu-select>
+			</label>
+			<label class="textfield">
+				<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
+					<span *luDisplayer="let value">{{ value }}</span>
+					<lu-option-picker>
+						<lu-option [value]="1">1</lu-option>
+						<lu-option [value]="2">2</lu-option>
+						<lu-option [value]="3">3</lu-option>
+					</lu-option-picker>
+				</lu-select>
+			</label>
+		</section>
+		<section class="section">
+			<label class="textfield">
+				<lu-select class="textfield-input">
+					<h4 class="u-marginReset" *luDisplayer="let value">{{ value.id }} - {{ value.name }}</h4>
+					<lu-option-picker>
+						<lu-option [value]="green">{{ green.name }}</lu-option>
+						<lu-option [value]="red">{{ red.name }}</lu-option>
+						<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
+						<lu-option [value]="blue">{{ blue.name }}</lu-option>
+					</lu-option-picker>
+				</lu-select>
+			</label>
+		</section>
+	\`
+})
+class SelectStory { }`
+		}
+	}
+}
