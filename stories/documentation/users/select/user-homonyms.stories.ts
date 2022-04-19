@@ -5,74 +5,32 @@ import { LuApiModule } from '@lucca-front/ng/api';
 import { LuInputDisplayerModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectModule } from '@lucca-front/ng/select';
-import { LuUserHomonymsModule, LuUserModule } from '@lucca-front/ng/user';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { LuUserHomonymsComponent, LuUserHomonymsModule, LuUserModule } from '@lucca-front/ng/user';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'user-select-stories',
-	template: `
-		<section class="section">
-			<label class="textfield mod-block">
-				<lu-select class="textfield-input">
-					<span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
-
-					<lu-option-picker-advanced>
-						<lu-api-paged-searcher
-							api="/timmi-project/api/projectusers/search"
-							fields="id,firstName,lastName"
-							orderBy="lastname,asc,firstname,asc"
-							[filters]="['currentOrganizationId=1']"
-							standard="v3"
-						>
-						</lu-api-paged-searcher>
-
-						<lu-option *luForOptions="let user" [value]="user">
-							{{ user | luUserDisplay }}
-						</lu-option>
-					</lu-option-picker-advanced>
-				</lu-select>
-				<span class="textfield-label">Pas de gestion des homonymes :</span>
-			</label>
-
-			<label class="textfield mod-block u-marginTopBig">
-				<lu-select class="textfield-input">
-					<span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
-
-					<lu-option-picker-advanced>
-						<lu-api-paged-searcher
-							api="/timmi-project/api/projectusers/search"
-							fields="id,firstName,lastName"
-							orderBy="lastname,asc,firstname,asc"
-							[filters]="['currentOrganizationId=1']"
-							standard="v3"
-						>
-						</lu-api-paged-searcher>
-
-						<!-- Il suffit d'ajouter cette ligne qui va ajouter une propriété additionalInformation aux homonymes -->
-						<lu-user-homonyms></lu-user-homonyms>
-
-						<lu-option *luForOptions="let user" [value]="user">
-							{{ user | luUserDisplay }}
-
-							<!-- On peut maintenant afficher cette information -->
-							<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textSmall">({{ user.additionalInformation }})</div>
-						</lu-option>
-					</lu-option-picker-advanced>
-				</lu-select>
-				<span class="textfield-label">Avec gestion des homonymes :</span>
-			</label>
-		</section>
-	`,
+	templateUrl: './user-homonyms.stories.html',
 })
 class UserHomonymsStory {}
 
 export default {
-	title: 'Documentation/Users/homonyms',
-	component: UserHomonymsStory,
+	title: 'Documentation/Users/Select',
+	component: LuUserHomonymsComponent,
 	decorators: [
+		componentWrapperDecorator(UserHomonymsStory),
 		moduleMetadata({
-			entryComponents: [UserHomonymsStory],
-			imports: [LuUserModule, LuSelectModule, LuApiModule, LuOptionModule, LuUserHomonymsModule, LuInputDisplayerModule, BrowserAnimationsModule, FormsModule],
+			declarations: [UserHomonymsStory],
+			imports: [
+				LuUserModule,
+				LuSelectModule,
+				LuApiModule,
+				LuOptionModule,
+				LuUserHomonymsModule,
+				LuInputDisplayerModule,
+				BrowserAnimationsModule,
+				FormsModule,
+			],
 		}),
 	],
 } as Meta;
@@ -81,5 +39,49 @@ const template: Story<UserHomonymsStory> = (args: UserHomonymsStory) => ({
 	props: args,
 });
 
-export const basic = template.bind({});
-basic.args = {};
+const code = () => `
+/* Afin de créer une sélection d'utilisateur custom avec gestion des homonymes */
+/* Ajouter un lu-select ainsi qu'un lu-option-picker-advanced */
+<label class="textfield mod-block u-marginTopBig">
+  <lu-select class="textfield-input">
+    <span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
+
+    <lu-option-picker-advanced>
+      <lu-api-paged-searcher
+        api="/timmi-project/api/projectusers/search"
+        fields="id,firstName,lastName" orderBy="lastname,asc,firstname,asc"
+        [filters]="['currentOrganizationId=1']" standard="v3">
+      </lu-api-paged-searcher>
+
+      /* Ajouter cette ligne dans un lu-option-picker-advanced afin de gérer les homonymes entre utilisateurs*/
+      /* Cette ligne permet d'ajouter la propriété 'additionalInformation' aux utilisateurs comportant un homonyme */
+      <lu-user-homonyms></lu-user-homonyms>
+
+      <lu-option *luForOptions="let user" [value]="user">
+        {{ user | luUserDisplay }}
+
+        /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
+        /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
+        <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textSmall">
+          ({{ user.additionalInformation }})
+        </div>
+      </lu-option>
+    </lu-option-picker-advanced>
+  </lu-select>
+  <span class="textfield-label">Avec gestion des homonymes :</span>
+</label>
+`
+
+
+export const homonyms = template.bind({});
+homonyms.args = {};
+
+homonyms.parameters = {
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code: code()
+		}
+	}
+}
