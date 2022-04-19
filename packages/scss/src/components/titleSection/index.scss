@@ -1,0 +1,24 @@
+@use 'exports' as *;
+
+.titleSection {
+	@include vars;
+	@include component;
+}
+
+.titleSection-sub {
+	:is(h1, h1.mod-headline) ~ & {
+		@include headline;
+	}
+
+	:is(.u-h1, .u-h1.mod-headline) ~ & {
+		@include headline('!important');
+	}
+
+	:is(h2, h3, h4, h5, h6) ~ & {
+		@include title;
+	}
+
+	:is(.u-h2, .u-h3, .u-h4, .u-h5, .u-h6) ~ & {
+		@include title('!important');
+	}
+}
