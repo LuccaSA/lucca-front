@@ -1,25 +1,25 @@
 {
-  "name": "@lucca-front/scss",
-  "version": "0.0.0",
-  "description": "a scss-framework based on trello's css naming",
-  "main": "src/main.scss",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LuccaSA/lucca-front.git"
-  },
-  "keywords": [
-    "lucca",
-    "scss"
-  ],
-  "public": true,
-  "author": "jeremie biron <jbiron@lucca.fr>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/LuccaSA/lucca-front/issues"
-  },
-  "homepage": "https://github.com/LuccaSA/lucca-front#readme",
-  "peerDependencies": {
-    "@lucca-front/icons": ">=8.0.0 <9.0.0"
-  }
+	"name": "@lucca-front/scss",
+	"version": "0.0.0",
+	"description": "a scss-framework based on trello's css naming",
+	"main": "src/main.scss",
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LuccaSA/lucca-front.git"
+	},
+	"keywords": [
+		"lucca",
+		"scss"
+	],
+	"public": true,
+	"author": "jeremie biron <jbiron@lucca.fr>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/LuccaSA/lucca-front/issues"
+	},
+	"homepage": "https://github.com/LuccaSA/lucca-front#readme",
+	"peerDependencies": {
+		"@lucca-front/icons": ">=8.0.0 <9.0.0"
+	}
 }

@@ -1,53 +1,53 @@
 @mixin component($icon: '.lucca-icon') {
-  border-radius: var(--components-button-border-radius);
-  font-family: var(--components-button-font-family);
-  font-size: var(--components-button-font-size);
-  font-weight: var(--components-button-font-weight);
-  line-height: var(--components-button-line-height);
-  margin: var(--components-button-margin);
-  padding: var(--components-button-padding);
-  transition: var(--components-button-transition);
+	border-radius: var(--components-button-border-radius);
+	font-family: var(--components-button-font-family);
+	font-size: var(--components-button-font-size);
+	font-weight: var(--components-button-font-weight);
+	line-height: var(--components-button-line-height);
+	margin: var(--components-button-margin);
+	padding: var(--components-button-padding);
+	transition: var(--components-button-transition);
 
-  border: 0;
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  vertical-align: baseline;
-  white-space: nowrap;
-  text-align: center;
-  background-color: var(--palettes-700, var(--palettes-primary-700));
-  color: var(--palettes-text, var(--palettes-primary-text));
-  cursor: pointer;
+	border: 0;
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-align: center;
+	background-color: var(--palettes-700, var(--palettes-primary-700));
+	color: var(--palettes-text, var(--palettes-primary-text));
+	cursor: pointer;
 
-  #{$icon} {
-    font-size: 1.25rem;
-    line-height: 1;
-  }
+	#{$icon} {
+		font-size: 1.25rem;
+		line-height: 1;
+	}
 
-  &:first-of-type {
-    margin-left: 0;
-  }
+	&:first-of-type {
+		margin-left: 0;
+	}
 
-  &:last-of-type {
-    margin-right: 0;
-  }
+	&:last-of-type {
+		margin-right: 0;
+	}
 
-  &:not([disabled], .is-disabled) {
-    &:hover {
-      background-color: var(--palettes-600, var(--palettes-primary-600));
-      box-shadow: var(--commons-box-shadow-xs);
-    }
+	&:not([disabled], .is-disabled) {
+		&:hover {
+			background-color: var(--palettes-600, var(--palettes-primary-600));
+			box-shadow: var(--commons-box-shadow-xs);
+		}
 
-    &:focus {
-      box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
-      outline: none;
-      background-color: var(--palettes-600, var(--palettes-primary-600));
-    }
+		&:focus {
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
+			outline: none;
+			background-color: var(--palettes-600, var(--palettes-primary-600));
+		}
 
-    &:active {
-      background-color: var(--palettes-800, var(--palettes-primary-800));
-      box-shadow: 0 0 0 4px var(--palettes-300, var(--palettes-primary-300));
-      // color: var(--colors-white-color);
-    }
-  }
+		&:active {
+			background-color: var(--palettes-800, var(--palettes-primary-800));
+			box-shadow: 0 0 0 4px var(--palettes-300, var(--palettes-primary-300));
+			// color: var(--colors-white-color);
+		}
+	}
 }

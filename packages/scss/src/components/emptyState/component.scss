@@ -1,16 +1,16 @@
 @mixin component($title: '.emptyState-title', $description: '.emptyState-description') {
-  margin: 6rem auto 4rem;
-  text-align: center;
-  max-width: 30rem;
+	margin: 6rem auto 4rem;
+	text-align: center;
+	max-width: 30rem;
 
-  @at-root {
-    #{$title} {
-      color: var(--palettes-grey-500);
-    }
+	@at-root {
+		#{$title} {
+			color: var(--palettes-grey-500);
+		}
 
-    #{$description} {
-      color: var(--palettes-grey-500);
-      margin-bottom: 2rem;
-    }
-  }
+		#{$description} {
+			color: var(--palettes-grey-500);
+			margin-bottom: 2rem;
+		}
+	}
 }

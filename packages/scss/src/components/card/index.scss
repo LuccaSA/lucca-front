@@ -1,22 +1,22 @@
 @use 'exports' as *;
 
 .card {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-grey {
-    @include grey;
-  }
+	&.mod-grey {
+		@include grey;
+	}
 
-  &.mod-clickable {
-    @include clickable;
-  }
+	&.mod-clickable {
+		@include clickable;
+	}
 
-  &.mod-elevated {
-    @include elevated;
+	&.mod-elevated {
+		@include elevated;
 
-    &.mod-clickable {
-      @include clickableElevated;
-    }
-  }
+		&.mod-clickable {
+			@include clickableElevated;
+		}
+	}
 }

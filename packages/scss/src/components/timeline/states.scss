@@ -1,30 +1,30 @@
 @mixin current($step: '.timeline-step', $title: '.timeline-step-title') {
-  &::after {
-    background-color: var(--palettes-grey-200);
-  }
+	&::after {
+		background-color: var(--palettes-grey-200);
+	}
 
-  #{$title} {
-    color: var(--palettes-primary-700);
+	#{$title} {
+		color: var(--palettes-primary-700);
 
-    &::before {
-      background-color: var(--palettes-primary-700);
-      box-shadow: 0 0 0 var(--spacings-smallest) var(--palettes-primary-200);
-      color: var(--colors-white-color);
-    }
-  }
+		&::before {
+			background-color: var(--palettes-primary-700);
+			box-shadow: 0 0 0 var(--spacings-smallest) var(--palettes-primary-200);
+			color: var(--colors-white-color);
+		}
+	}
 
-  ~ #{$step} {
-    &::after {
-      background-color: var(--palettes-grey-200);
-    }
+	~ #{$step} {
+		&::after {
+			background-color: var(--palettes-grey-200);
+		}
 
-    #{$title} {
-      color: var(--palettes-grey-600);
+		#{$title} {
+			color: var(--palettes-grey-600);
 
-      &::before {
-        background-color: var(--palettes-grey-200);
-        color: var(--palettes-grey-600);
-      }
-    }
-  }
+			&::before {
+				background-color: var(--palettes-grey-200);
+				color: var(--palettes-grey-600);
+			}
+		}
+	}
 }

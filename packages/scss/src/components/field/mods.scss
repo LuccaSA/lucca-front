@@ -1,19 +1,19 @@
 @mixin row($checkbox: '.checkbox') {
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 
-  #{$checkbox} {
-    margin-right: _component('field.horizontal-spacing');
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+	#{$checkbox} {
+		margin-right: _component('field.horizontal-spacing');
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 }
 
 @mixin inline {
-  margin-right: var(--components-field-input-inline-margin);
-  display: inline-flex;
+	margin-right: var(--components-field-input-inline-margin);
+	display: inline-flex;
 }
 
 @mixin block {
-  width: 100%;
+	width: 100%;
 }

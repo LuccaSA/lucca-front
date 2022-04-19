@@ -1,16 +1,16 @@
 @use 'exports' as *;
 
 .breadcrumb {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 }
 
 .breadcrumbs-list-item-action {
-  &.mod-compact {
-    @include compact;
-  }
+	&.mod-compact {
+		@include compact;
+	}
 
-  &:is(.is-active, [aria-current='page']) {
-    @include active;
-  }
+	&:is(.is-active, [aria-current='page']) {
+		@include active;
+	}
 }

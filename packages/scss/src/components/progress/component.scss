@@ -1,40 +1,40 @@
 @mixin component($bar: '.progress-bar') {
-  @keyframes progress {
-    from {
-      transform: scale(0, 1);
-      opacity: 1;
-    }
+	@keyframes progress {
+		from {
+			transform: scale(0, 1);
+			opacity: 1;
+		}
 
-    to {
-      transform: scale(1, 1);
-      opacity: 0.3;
-    }
-  }
+		to {
+			transform: scale(1, 1);
+			opacity: 0.3;
+		}
+	}
 
-  background-color: var(--commons-background-base);
-  height: var(--components-progress-height);
-  margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
-  position: relative;
-  overflow: hidden;
+	background-color: var(--commons-background-base);
+	height: var(--components-progress-height);
+	margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
+	position: relative;
+	overflow: hidden;
 
-  @at-root {
-    #{$bar} {
-      background-color: var(--components-progress-bar-background);
-      transition-duration: var(--commons-animations-durations-fast);
-      transition-property: background-color, width;
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      top: 0;
+	@at-root {
+		#{$bar} {
+			background-color: var(--components-progress-bar-background);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: background-color, width;
+			bottom: 0;
+			left: 0;
+			position: absolute;
+			top: 0;
 
-      &::after {
-        animation: progress var(--components-progress-duration) infinite;
-        background-image: var(--components-progress-bar-gradient);
-        transform-origin: left;
-        position: absolute;
-        inset: 0;
-        content: '';
-      }
-    }
-  }
+			&::after {
+				animation: progress var(--components-progress-duration) infinite;
+				background-image: var(--components-progress-bar-gradient);
+				transform-origin: left;
+				position: absolute;
+				inset: 0;
+				content: '';
+			}
+		}
+	}
 }

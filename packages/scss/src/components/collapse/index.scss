@@ -1,14 +1,14 @@
 @use 'exports' as *;
 
 .collapse {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &:not([open], .is-open) {
-    @include close;
-  }
+	&:not([open], .is-open) {
+		@include close;
+	}
 
-  &:is(.is-open, [open]) {
-    @include open;
-  }
+	&:is(.is-open, [open]) {
+		@include open;
+	}
 }

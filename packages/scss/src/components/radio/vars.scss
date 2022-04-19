@@ -1,31 +1,31 @@
 @mixin vars {
-  // --components-radio-default-palette-darker: #2d354d;
-  // --components-radio-default-palette-dark: #4c5775;
-  // --components-radio-default-palette-color: #9299b0;
-  // --components-radio-default-palette-light: #ccd1e0;
-  // --components-radio-default-palette-lighter: #e8eaf3;
-  // --components-radio-default-palette-lightest: #f7f9fd;
-  // --components-radio-default-palette-text: var(--colors-white-color);
-  // --components-radio-default-palette-see-through: rgba(146, 153, 176, 0.15);
+	// --components-radio-default-palette-darker: #2d354d;
+	// --components-radio-default-palette-dark: #4c5775;
+	// --components-radio-default-palette-color: #9299b0;
+	// --components-radio-default-palette-light: #ccd1e0;
+	// --components-radio-default-palette-lighter: #e8eaf3;
+	// --components-radio-default-palette-lightest: #f7f9fd;
+	// --components-radio-default-palette-text: var(--colors-white-color);
+	// --components-radio-default-palette-see-through: rgba(146, 153, 176, 0.15);
 
-  --components-radio-default-palette-50: #f7f8fd;
-  --components-radio-default-palette-100: #f3f5fc;
-  --components-radio-default-palette-200: #eceff8;
-  --components-radio-default-palette-300: #dcdfef;
-  --components-radio-default-palette-400: #cbcfe2;
-  --components-radio-default-palette-500: #b7bbd1;
-  --components-radio-default-palette-600: #898fae;
-  --components-radio-default-palette-700: #485075;
-  --components-radio-default-palette-800: #31395e;
-  --components-radio-default-palette-900: #1e233e;
+	--components-radio-default-palette-50: #f7f8fd;
+	--components-radio-default-palette-100: #f3f5fc;
+	--components-radio-default-palette-200: #eceff8;
+	--components-radio-default-palette-300: #dcdfef;
+	--components-radio-default-palette-400: #cbcfe2;
+	--components-radio-default-palette-500: #b7bbd1;
+	--components-radio-default-palette-600: #898fae;
+	--components-radio-default-palette-700: #485075;
+	--components-radio-default-palette-800: #31395e;
+	--components-radio-default-palette-900: #1e233e;
 
-  --components-radio-label-line-height: 1.5rem;
-  --components-radio-label-padding: 0 0 0 1.5rem;
-  --components-radio-label-small-padding: 0 0 0 1.25rem;
+	--components-radio-label-line-height: 1.5rem;
+	--components-radio-label-padding: 0 0 0 1.5rem;
+	--components-radio-label-small-padding: 0 0 0 1.25rem;
 
-  --components-radio-input-top: var(--spacings-smallest);
-  --components-radio-input-small-top: 6px;
-  --components-radio-input-size: 1rem;
-  --components-radio-input-border-color: var(--palettes-grey-700);
-  --components-radio-input-border-hover: var(--palettes-primary-200);
+	--components-radio-input-top: var(--spacings-smallest);
+	--components-radio-input-small-top: 6px;
+	--components-radio-input-size: 1rem;
+	--components-radio-input-border-color: var(--palettes-grey-700);
+	--components-radio-input-border-hover: var(--palettes-primary-200);
 }

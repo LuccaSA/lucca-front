@@ -1,5 +1,5 @@
 @mixin vars {
-  --components-tableOfContent-default-palette-color: var(--palettes-primary-color);
-  --components-tableOfContent-item-padding: var(--spacings-smaller) var(--spacings-small);
-  --components-tableOfContent-item-border-width: 2px;
+	--components-tableOfContent-default-palette-color: var(--palettes-primary-color);
+	--components-tableOfContent-item-padding: var(--spacings-smaller) var(--spacings-small);
+	--components-tableOfContent-item-border-width: 2px;
 }

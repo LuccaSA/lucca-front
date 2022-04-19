@@ -1,11 +1,11 @@
 @mixin active {
-  background-color: var(--components-navSide-fullwidth-palette-selected-bg);
-  color: var(--components-navSide-fullwidth-palette-selected-text);
-  opacity: 1;
+	background-color: var(--components-navSide-fullwidth-palette-selected-bg);
+	color: var(--components-navSide-fullwidth-palette-selected-text);
+	opacity: 1;
 }
 
 @mixin expanded($arrow: '.navSide-item-arrow') {
-  #{$arrow} {
-    transform: rotate(-0.25turn);
-  }
+	#{$arrow} {
+		transform: rotate(-0.25turn);
+	}
 }

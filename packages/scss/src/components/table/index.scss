@@ -1,82 +1,82 @@
 @use 'exports' as *;
 
 .table {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-zebra {
-    @include zebra;
-  }
+	&.mod-zebra {
+		@include zebra;
+	}
 
-  &.mod-alignTop {
-    @include alignTop;
-  }
+	&.mod-alignTop {
+		@include alignTop;
+	}
 
-  &.mod-clickable {
-    @include clickable;
-  }
+	&.mod-clickable {
+		@include clickable;
+	}
 
-  &.mod-card {
-    @include card;
-  }
+	&.mod-card {
+		@include card;
+	}
 
-  &.mod-small {
-    @include small;
-  }
+	&.mod-small {
+		@include small;
+	}
 
-  &.mod-fixed {
-    @include fixed;
-  }
+	&.mod-fixed {
+		@include fixed;
+	}
 }
 
 .table-body-row {
-  &.mod-header {
-    @include header;
-  }
+	&.mod-header {
+		@include header;
+	}
 
-  &.mod-child {
-    @include child;
-  }
+	&.mod-child {
+		@include child;
+	}
 
-  &.mod-parent {
-    @include parent;
+	&.mod-parent {
+		@include parent;
 
-    &.mod-collapsable {
-      @include collapsable;
-    }
-  }
+		&.mod-collapsable {
+			@include collapsable;
+		}
+	}
 }
 
 .table-body-row,
 .table-head-row {
-  &.mod-selectable {
-    @include selectable;
-  }
+	&.mod-selectable {
+		@include selectable;
+	}
 
-  &.mod-draggable {
-    @include draggable;
-  }
+	&.mod-draggable {
+		@include draggable;
+	}
 }
 
 .table-head-row {
-  &.mod-twoLines {
-    @include twoLines;
-  }
+	&.mod-twoLines {
+		@include twoLines;
+	}
 }
 
 .table-body-row-cell {
-  &.mod-avatar {
-    @include avatar;
-  }
+	&.mod-avatar {
+		@include avatar;
+	}
 }
 
 .table-head-row-cell,
 .table-body-row-cell {
-  &.mod-actions {
-    @include actions;
-  }
+	&.mod-actions {
+		@include actions;
+	}
 
-  &.mod-alignRight {
-    @include alignRight;
-  }
+	&.mod-alignRight {
+		@include alignRight;
+	}
 }

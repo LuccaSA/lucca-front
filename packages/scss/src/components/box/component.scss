@@ -1,8 +1,8 @@
 @mixin component {
-  border-radius: var(--components-box-border-radius);
-  margin: var(--components-box-margin);
-  padding: var(--components-box-padding);
-  background-color: var(--colors-white-color);
-  display: block;
-  position: relative;
+	border-radius: var(--components-box-border-radius);
+	margin: var(--components-box-margin);
+	padding: var(--components-box-padding);
+	background-color: var(--colors-white-color);
+	display: block;
+	position: relative;
 }

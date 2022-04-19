@@ -1,13 +1,13 @@
 @mixin hover {
-  background-color: var(--colors-white-color);
-  color: var(--palettes-700, var(--components-tableOfContent-default-palette-color));
+	background-color: var(--colors-white-color);
+	color: var(--palettes-700, var(--components-tableOfContent-default-palette-color));
 }
 
 @mixin active {
-  color: var(--palettes-700, --components-tableOfContent-default-palette-color);
+	color: var(--palettes-700, --components-tableOfContent-default-palette-color);
 
-  &::before {
-    opacity: 1;
-    transform: scaleY(1);
-  }
+	&::before {
+		opacity: 1;
+		transform: scaleY(1);
+	}
 }

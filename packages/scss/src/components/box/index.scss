@@ -1,14 +1,14 @@
 @use 'exports' as *;
 
 .box {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-grey {
-    @include grey;
-  }
+	&.mod-grey {
+		@include grey;
+	}
 
-  &.mod-toggle {
-    @include toggle;
-  }
+	&.mod-toggle {
+		@include toggle;
+	}
 }

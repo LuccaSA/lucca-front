@@ -1,14 +1,14 @@
 @use 'exports' as *;
 
 .chip {
-  @include vars;
-  @include component;
+	@include vars;
+	@include component;
 
-  &.mod-unkillable {
-    @include unkillable;
-  }
+	&.mod-unkillable {
+		@include unkillable;
+	}
 
-  &.mod-clickable {
-    @include clickable;
-  }
+	&.mod-clickable {
+		@include clickable;
+	}
 }

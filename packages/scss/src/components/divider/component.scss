@@ -1,8 +1,8 @@
 @mixin component {
-  border: 0;
-  border-top-color: var(--commons-divider-color);
-  border-top-width: var(--commons-divider-width);
-  border-top-style: solid;
-  margin-top: var(--spacings-standard);
-  margin-bottom: var(--spacings-standard);
+	border: 0;
+	border-top-color: var(--commons-divider-color);
+	border-top-width: var(--commons-divider-width);
+	border-top-style: solid;
+	margin-top: var(--spacings-standard);
+	margin-bottom: var(--spacings-standard);
 }
