@@ -1,0 +1,26 @@
+@mixin component($left: '.filters-sectionLeft', $right: '.filters-sectionRight') {
+	box-shadow: var(--commons-elevations-elevation-1);
+	background-color: var(--components-filters-background);
+	min-height: var(--components-filters-height);
+	align-items: center;
+	display: flex;
+	position: relative;
+	z-index: 99;
+
+	@at-root {
+		#{$left} {
+			align-items: center;
+			display: flex;
+			padding-right: 2rem;
+		}
+
+		#{$right} {
+			align-items: center;
+			display: flex;
+			margin-left: auto;
+			padding-left: 2rem;
+		}
+	}
+}
+
+// todo : childs components
