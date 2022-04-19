@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.link {
+	@include vars;
+	@include component;
+
+	&:is(:hover, :focus) {
+		@include hover;
+	}
+}
