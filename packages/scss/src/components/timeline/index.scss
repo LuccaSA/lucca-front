@@ -11,6 +11,30 @@
 	&.mod-small {
 		@include small;
 	}
+
+	&.mod-big {
+		@include big;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+	}
+
+	&.mod-addStep {
+		@include addstep;
+	}
+
+	&.mod-checkedPastStep {
+		@include checkedPastStep;
+	}
+
+	&.mod-addBetweenStep {
+		@include addBetweenStep;
+	}
+
+	&.mod-progress {
+		@include progress;
+	}
 }
 
 .timeline-step {

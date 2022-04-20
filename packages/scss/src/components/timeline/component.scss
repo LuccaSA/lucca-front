@@ -1,10 +1,7 @@
-@mixin component(
-	$step: '.timeline-step',
-	$title: '.timeline-step-title',
-	$icon: '.timeline-step-title-icon',
-	$action: '.timeline-step-title-action'
-) {
-	list-style-type: none;
+@use 'structure' as s;
+
+@mixin component($step: s.$step, $title: s.$title, $icon: s.$icon, $action: s.$action) {
+	list-style-type: none; 
 	padding: 0;
 	margin: var(--spacings-small) 0;
 	display: flex;
@@ -41,13 +38,12 @@
 			font-weight: 400;
 			margin: 0;
 			font-size: var(--sizes-standard-font-size);
-			line-height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-big-line-height);
 			min-width: var(--spacings-standard);
 		}
 
 		#{$title},
-		#{$step}:not([aria-current='step'], [aria-current='step'] ~ .timeline-step) #{$icon} {
-			// .timeline.mod-addStep .timeline-step-title-icon
+		#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) #{$icon} {
 			&::before {
 				content: '';
 				color: var(--palettes-primary-800);
@@ -73,6 +69,22 @@
 			&:focus {
 				color: currentColor;
 				text-decoration: underline;
+			}
+		}
+	}
+	
+	&:not(.mod-checkedPastStep) {
+		#{$step} {
+			&::after {
+				background-color: var(--palettes-grey-200);
+			}
+		}
+		#{$title} {
+			color: var(--palettes-grey-900);
+
+			&::before {
+				background-color: var(--palettes-primary-700);
+				color: var(--colors-white-color);
 			}
 		}
 	}
