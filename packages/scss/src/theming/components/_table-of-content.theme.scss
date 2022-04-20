@@ -1,10 +1,5 @@
 $tableOfContent: (
-	default-palette: (
-		color: _theme("palettes.primary.color")
-	),
-	item: (
-		padding: _theme("spacings.smaller") _theme("spacings.small"),
-		border-width: 2px
-	),
+	default-palette: _getMap("palettes.primary"),
+	padding: _theme("spacings.smaller") _theme("spacings.small"),
 );
 $theme: _set($theme, "components.tableOfContent", $tableOfContent);

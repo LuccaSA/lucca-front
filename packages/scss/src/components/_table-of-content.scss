@@ -7,75 +7,31 @@
 
 .tableOfContent-item {
 	border-radius: _theme("commons.border.radius");
-	color: _color("text.light");
+	color: _color("grey", 700);
 	cursor: pointer;
 	display: block;
 	outline: none;
-	padding: _component("tableOfContent.item.padding");
+	padding: _component("tableOfContent.padding");
 	position: relative;
 	transition: all _theme("commons.animations.durations.standard") ease;
 	text-decoration: none;
 
-	&:hover {
-		background-color: white;
-		color: _component("tableOfContent.default-palette.color");
-	}
-
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		width: _component("tableOfContent.item.border-width");
-		background-color: _component("tableOfContent.default-palette.color");
-		transform: scaleY(0);
-		opacity: 0;
-		transition: all _theme("commons.animations.durations.fast") ease;
-	}
-}
-
-
-// MODS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.tableOfContent {
-	&.mod-grey {
-		.tableOfContent-item {
-			&:hover {
-				background-color: _theme("commons.background.base");
-			}
-		}
-	}
-}
-
-
-// PALETTES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-@mixin tableOfContentColoring($palette) {
-	.tableOfContent-item {
+	&:not(.is-disabled, [disabled]) {
 		&:hover {
-			color: _color($palette);
+			background-color: _color("grey", 50);
+			color: _color("grey", 700);
 		}
 
-		&::before {
-			background-color: _color($palette);
+		&:focus {
+			background-color: _color("grey", 50);
+			color: _color("grey", 700);
+			box-shadow: 0 0 0 4px _component("tableOfContent.default-palette.100"), inset 0 0 0 1px _component("tableOfContent.default-palette.300");
 		}
-		&.is-active {
-			color: _color($palette);
-		}
-	}
-}
 
-.tableOfContent {
-	// default color
-	@include tableOfContentColoring("tableOfContent.default-palette");
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include tableOfContentColoring($name);
+		&:active {
+			background-color: _color("grey", 100);
+			color: _color("grey", 700);
+			box-shadow: 0 0 0 4px _component("tableOfContent.default-palette.200"), inset 0 0 0 1px _component("tableOfContent.default-palette.400");
 		}
 	}
 }
@@ -85,12 +41,30 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .tableOfContent-item {
-	&.is-active {
-		color: _component("tableOfContent.default-palette.color");
+	&:not(.is-disabled, [disabled]) {
+		&.is-active {
+			background-color: _component("tableOfContent.default-palette.50");
+			color: _component("tableOfContent.default-palette.700");
 
-		&::before {
-			opacity: 1;
-			transform: scaleY(1);
+			&:hover {
+				background-color: _component("tableOfContent.default-palette.100");
+			}
+
+			&:focus {
+				background-color: _component("tableOfContent.default-palette.100");
+				box-shadow: 0 0 0 4px _component("tableOfContent.default-palette.200"), inset 0 0 0 1px _component("tableOfContent.default-palette.400");
+			}
+
+			&:active {
+				background-color: _component("tableOfContent.default-palette.200");
+				box-shadow: 0 0 0 4px _component("tableOfContent.default-palette.300"), inset 0 0 0 1px _component("tableOfContent.default-palette.500");
+				color: _color("grey", 700);
+			}
 		}
+	}
+
+	&:is(.is-disabled, [disabled]) {
+		color: _color("grey", 500);
+		pointer-events: none;
 	}
 }
