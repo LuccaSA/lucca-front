@@ -11,17 +11,17 @@ function getTemplate(args: TableOfContentBasicStory): string {
 	return `
 	<nav class="tableOfContent">
 		<ul class="tableOfContent-list">
-			<li>
-				<a href="#" class="tableOfContent-list-item is-active">Section 1</a>
+			<li class="tableOfContent-list-item">
+				<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>
 			</li>
-			<li>
-				<a href="#" class="tableOfContent-list-item">Section 2</a>
+			<li class="tableOfContent-list-item">
+				<a href="#" class="tableOfContent-list-item-action">Section 2</a>
 			</li>
-			<li>
-				<a href="#" class="tableOfContent-list-item">Section 3</a>
+			<li class="tableOfContent-list-item">
+				<a href="#" class="tableOfContent-list-item-action">Section 3</a>
 			</li>
-			<li>
-				<a href="#" class="tableOfContent-list-item">Section 4</a>
+			<li class="tableOfContent-list-item">
+				<a href="#" class="tableOfContent-list-item-action">Section 4</a>
 			</li>
 		</ul>
 	</nav>

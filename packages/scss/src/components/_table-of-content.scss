@@ -9,7 +9,7 @@
 	@include listReset;
 }
 
-.tableOfContent-list-item {
+.tableOfContent-list-item-action {
 	@include buttonReset;
 	border-radius: _theme("commons.border.radius");
 	color: _color("grey", 700);
@@ -46,7 +46,7 @@
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-.tableOfContent-list-item {
+.tableOfContent-list-item-action {
 	&:not(.is-disabled, [disabled]) {
 		&.is-active {
 			background-color: _component("tableOfContent.default-palette.50");
