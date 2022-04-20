@@ -1,55 +1,47 @@
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuPopoverModule } from '@lucca-front/ng/popover';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import {
+	LuPopoverAlignment,
+	LuPopoverModule,
+	LuPopoverPosition,
+	LuPopoverTriggerDirective,
+	LuPopoverTriggerEvent
+} from '@lucca-front/ng/popover';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+
+@Component({
+	selector: 'popover-mock-directive-story',
+	template: `
+`,
+}) class PopoverMockDirectiveStory extends LuPopoverTriggerDirective {
+}
 
 
 @Component({
-	selector: 'popover-stories',
+	selector: 'popover-story',
 	template: `
-<button class="button mod-outline">don't click me</button>
-<button class="button"
-	[luPopover]="popover"
-	[luPopoverPosition]="position"
-	[luPopoverAlignment]="alignement"
-	[luPopoverTrigger]="trigger"
->{{trigger}} me</button>
-<button class="button mod-outline">don't click me either</button>
-<lu-popover #popover>{{popoverContent}}</lu-popover>
+		<button class="button"
+			[luPopover]="popover"
+			[luPopoverPosition]="position"
+			[luPopoverAlignment]="alignment"
+			[luPopoverTrigger]="trigger"
+			>{{trigger}} me</button>
+		<lu-popover #popover>{{popoverContent}}</lu-popover>
 `,
 }) class PopoverStory {
-	@Input() popoverContent: string;
-	@Input() position: string;
-	@Input() alignment: string;
-	@Input() trigger: string;
+	@Input() popoverContent: string = '🎉 popover content 🏖️';
+	@Input() position: LuPopoverPosition = 'above';
+	@Input() alignment: LuPopoverAlignment = 'top';
+	@Input() trigger: LuPopoverTriggerEvent = 'click';
 }
 
 export default {
   title: 'Documentation/Overlays/Popover',
-  component: PopoverStory,
-	argTypes: {
-		position: {
-			options: ['above', 'below', 'before', 'after'],
-			control: {
-				type: 'radio',
-			}
-		},
-		alignment: {
-			options: ['top', 'bottom', 'left', 'right', 'center'],
-			control: {
-				type: 'radio',
-			}
-		},
-		trigger: {
-			options: ['none', 'hover', 'focus', 'click'],
-			control: {
-				type: 'radio',
-			}
-		},
-	},
+  component: PopoverMockDirectiveStory,
 	decorators: [
+		componentWrapperDecorator(PopoverStory),
 		moduleMetadata({
-			entryComponents: [PopoverStory],
+			declarations: [PopoverStory, PopoverMockDirectiveStory],
 			imports: [
 				LuPopoverModule,
 				BrowserAnimationsModule,
@@ -62,26 +54,34 @@ const template: Story<PopoverStory> = (args: PopoverStory) => ({
   props: args,
 });
 
+const code = `
+/* 1. Importer LuPopoverModule */
+import { LuPopoverModule } from '@lucca-front/ng/popover';
+
+@NgModule({
+	imports: [LuPopoverModule]
+})
+class PopoverStoriesModule {}
+
+/* 2. Utiliser lu-popover */
+@Component({
+	selector: 'popover-story',
+	template: \`
+		<button class="button" [luPopover]="popover">Click me</button>
+		<lu-popover #popover>🎉 popover content 🏖️</lu-popover>
+	\`
+})
+class PopoverStory { }`
+
 export const basic = template.bind({});
-basic.args = {
-	popoverContent: 'popover content',
-	position: 'below',
-	alignment: 'center',
-	trigger: 'click',
+basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
+		}
+	}
 }
 
-export const hover = template.bind({});
-hover.args = {
-	popoverContent: 'popover content',
-	position: 'below',
-	alignment: 'center',
-	trigger: 'hover',
-}
-
-export const focus = template.bind({});
-focus.args = {
-	popoverContent: 'popover content',
-	position: 'below',
-	alignment: 'center',
-	trigger: 'focus',
-}

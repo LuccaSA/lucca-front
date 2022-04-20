@@ -7,7 +7,8 @@
 	"include": [
 		"packages/ng/**/*.ts",
 		"packages/ng/**/*.html",
-		"packages/ng/**/*.scss"
+		"packages/ng/**/*.scss",
+		"stories/**/*.ts"
 	],
 	"exclude": [
 		"**/test.ts",

@@ -28,3 +28,6 @@ storybook-static
 packages/*/package-lock.json
 
 /.angular/cache
+
+# IDE - Jetbrains
+.idea/*
