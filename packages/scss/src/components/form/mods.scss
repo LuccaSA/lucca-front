@@ -6,7 +6,7 @@
 @mixin overlay {
 	&:focus-within {
 		.textfield-input {
-			box-shadow: form.fakeBorderOverlay(_component('field.framed.color')), 0 0 0 4px _component('field.framed.color50');
+			box-shadow: form.fakeBorderOverlay(_component('field.framed.color')), 0 0 0 4px _component('field.framed.color50'); // todo: replace with CSS var
 			z-index: 4;
 		}
 
@@ -19,7 +19,7 @@
 		.is-warning {
 			.textfield-input {
 				background-color: #444242;
-				box-shadow: form.fakeBorderOverlay(_color('warning')), 0 0 0 4px _color('warning', '50');
+				box-shadow: form.fakeBorderOverlay(_color('warning')), 0 0 0 4px _color('warning', '50'); // todo: replace with CSS var
 			}
 		}
 
@@ -27,7 +27,7 @@
 		.is-success {
 			.textfield-input {
 				background-color: var(--colors-white-color);
-				box-shadow: form.fakeBorderOverlay(_color('success')), 0 0 0 4px _color('success', '50');
+				box-shadow: form.fakeBorderOverlay(_color('success')), 0 0 0 4px _color('success', '50'); // todo: replace with CSS var
 			}
 		}
 	}
@@ -44,7 +44,7 @@
 			bottom: 0;
 			right: 0;
 			z-index: 10;
-			padding: _component('field.framed.label-top-offset') _component('field.framed.side-padding') _component('field.framed.bottom-padding');
+			padding: _component('field.framed.label-top-offset') _component('field.framed.side-padding') _component('field.framed.bottom-padding'); // todo: replace with CSS var
 		}
 	}
 }

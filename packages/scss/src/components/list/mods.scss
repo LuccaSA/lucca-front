@@ -21,7 +21,7 @@
 	padding-left: 1rem;
 
 	#{$handler} {
-		color: _color('text.placeholder'); // todo
+		color: var(--palettes-grey-400);
 		font-size: 1.3rem;
 		left: 0;
 		width: 2.4rem;

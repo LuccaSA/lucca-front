@@ -35,14 +35,14 @@
 
 		&:hover {
 			&::placeholder {
-				// color: _component("field.input.color", "light");
+				// color: _component("field.input.color", "light"); // todo: replace with CSS var
 			}
 		}
 
 		&,
 		&:focus {
 			&::placeholder {
-				// color: _component("field.input.color", "lighter");
+				// color: _component("field.input.color", "lighter"); // todo: replace with CSS var
 			}
 		}
 

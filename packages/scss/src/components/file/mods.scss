@@ -20,7 +20,7 @@
 	min-height: 4rem;
 
 	#{$input} {
-		// todo
+		// todo: extract state
 		&:not(.is-uploading) {
 			~ #{$content} {
 				display: flex;

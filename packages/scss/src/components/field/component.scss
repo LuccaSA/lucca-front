@@ -19,7 +19,7 @@
 			width: 100%;
 
 			&::placeholder {
-				// color: _component('field.input.color', 'lighter');
+				// color: _component('field.input.color', 'lighter'); // todo: replace with CSS var
 			}
 		}
 
@@ -50,20 +50,20 @@
 		}
 
 		.field-messages-error {
-			// color: _color('error');
+			// color: _color('error'); // todo: replace with CSS var
 		}
 
 		.field-messages-warning {
-			// color: _color('warning');
+			// color: _color('warning'); // todo: replace with CSS var
 		}
 
 		.field-messages-valid,
 		.field-messages-success {
-			// color: _color('success');
+			// color: _color('success'); // todo: replace with CSS var
 		}
 
 		.field-messages-helper {
-			// color: _color('text.light');
+			// color: _color('text.light'); // todo: replace with CSS var
 		}
 	}
 }

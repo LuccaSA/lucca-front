@@ -30,5 +30,5 @@
 @mixin leftCompact {
 	@include left;
 
-	left: var(--components-navSide-compact-width);
+	left: var(--commons-navSide-compact-width);
 }

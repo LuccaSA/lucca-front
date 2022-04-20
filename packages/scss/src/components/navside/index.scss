@@ -5,20 +5,94 @@
 	@include vars;
 	@include component;
 
+	&.mod-withBanner {
+		@include banner;
+	}
+
 	&.mod-compact {
 		@include media.largerThan('s') {
 			@include compact;
+
+			.navSide-item-link {
+				&:hover {
+					@include compactHover;
+				}
+
+				&:is(.is-active) {
+					@include compactActive;
+				}
+			}
 		}
 	}
 
-	.navSide-item-link,
-	.navSide-item-subMenu-link {
-		&:is(.is-active) {
-			@include active;
+	@include media.smallerThan('s') {
+		@include mobile;
+
+		&.mod-withBanner {
+			.navSide-item {
+				&.mod-mobileToggle {
+					@include banner;
+				}
+			}
 		}
 
-		&:is([aria-expanded='true']) {
-			@include expanded;
+		&:is(.is-open) {
+			@include mobileOpen;
+
+			&.mod-withBanner {
+				@include mobileOpenBanner;
+			}
+		}
+
+		&:not(.is-open) {
+			.navSide-item {
+				&:not(.mod-mobileToggle) {
+					@include mobileHidden;
+				}
+			}
+		}
+	}
+}
+
+.navSide-item {
+	&.mod-mobileToggle {
+		@include mobileToggle;
+	}
+
+	&:is(.is-open) {
+		@include expanded;
+
+		.navSide-item-subMenu-link {
+			&:is(:hover) {
+				@include sublinkHover;
+			}
+
+			&:is(.is-active) {
+				@include sublinkActive;
+			}
+		}
+	}
+
+	&:not(.is-open) {
+		@include notOpen;
+	}
+}
+
+.navSide-item-subMenu-link,
+.navSide-item-link {
+	&:is(.is-active) {
+		@include active;
+	}
+
+	&:is([aria-expanded='true']) {
+		@include expanded;
+	}
+}
+
+html {
+	&:is(.hasMenu) {
+		@include media.smallerThan('s') {
+			@include overlay;
 		}
 	}
 }

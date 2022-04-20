@@ -1,24 +1,24 @@
 @use '../../commons/utils/media';
 
-@mixin withVerticalNavigation {
-	margin-left: var(--components-navSide-width);
+@mixin menu {
+	margin-left: var(--commons-navSide-width);
 }
 
-@mixin withCompactVerticalNavigation {
-	margin-left: var(--components-navSide-compact-width);
+@mixin menuCompact {
+	margin-left: var(--commons-navSide-compact-width);
 }
 
-@mixin withBanner {
+@mixin banner {
 	height: calc(100vh - var(--commons-banner-height));
-	overflow-y: auto;
 	margin-top: var(--commons-banner-height);
+	overflow-y: auto;
 
 	@include media.smallerThan('s') {
-		height: calc(100vh - var(--commons-banner-height) - var(--components-navSide-mobile-toggle-height));
-		margin-top: calc(var(--commons-banner-height) + var(--components-navSide-mobile-toggle-height));
+		height: calc(100vh - var(--commons-banner-height) - var(--commons-navSide-mobile-toggle-height));
+		margin-top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	}
 }
 
-@mixin withStickyHeader {
+@mixin stickyHeader {
 	padding-top: var(--components-header-height);
 }

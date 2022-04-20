@@ -5,11 +5,11 @@
 	@include component;
 
 	&.mod-withMenu {
-		@include withMenu;
+		@include menu;
 	}
 
 	&.mod-withBreadcrumbs {
-		@include withBreadcrumbs;
+		@include breadcrumbs;
 	}
 
 	&.mod-noShadow {

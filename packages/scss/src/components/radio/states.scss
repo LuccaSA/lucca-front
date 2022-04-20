@@ -1,6 +1,6 @@
 @mixin disabled($label: '.radio-label') {
 	~ #{$label} {
-		color: _color('grey', '500');
+		color: var(--palettes-grey-500);
 		cursor: default;
 
 		&::before {
