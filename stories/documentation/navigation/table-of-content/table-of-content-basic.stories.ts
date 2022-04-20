@@ -10,10 +10,20 @@ export default {
 function getTemplate(args: TableOfContentBasicStory): string {
 	return `
 	<nav class="tableOfContent">
-		<a href="#" class="tableOfContent-item is-active">Section 1</a>
-		<a href="#" class="tableOfContent-item">Section 2</a>
-		<a href="#" class="tableOfContent-item">Section 3</a>
-		<a href="#" class="tableOfContent-item">Section 4</a>
+		<ul class="tableOfContent-list">
+			<li>
+				<a href="#" class="tableOfContent-list-item is-active">Section 1</a>
+			</li>
+			<li>
+				<a href="#" class="tableOfContent-list-item">Section 2</a>
+			</li>
+			<li>
+				<a href="#" class="tableOfContent-list-item">Section 3</a>
+			</li>
+			<li>
+				<a href="#" class="tableOfContent-list-item">Section 4</a>
+			</li>
+		</ul>
 	</nav>
 	`
 }
