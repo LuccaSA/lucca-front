@@ -13,7 +13,7 @@ function getTemplate(args: TableOfContentBasicStory): string {
 		<a href="#" class="tableOfContent-item is-active">Section 1</a>
 		<a href="#" class="tableOfContent-item">Section 2</a>
 		<a href="#" class="tableOfContent-item">Section 3</a>
-		<a href="#" class="tableOfContent-item is-disabled">Section 4</a>
+		<a href="#" class="tableOfContent-item">Section 4</a>
 	</nav>
 	`
 }

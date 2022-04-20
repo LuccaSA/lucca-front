@@ -6,6 +6,7 @@
 }
 
 .tableOfContent-item {
+	@include buttonReset;
 	border-radius: _theme("commons.border.radius");
 	color: _color("grey", 700);
 	cursor: pointer;
@@ -15,6 +16,7 @@
 	position: relative;
 	transition: all _theme("commons.animations.durations.standard") ease;
 	text-decoration: none;
+	width: auto;
 
 	&:not(.is-disabled, [disabled]) {
 		&:hover {
