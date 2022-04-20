@@ -35,19 +35,19 @@ function getTemplate(args: MenuBasicStory): string {
 	<nav class="menu ${small} ${noBorder} ${header}">
 		<ul class="menu-list">
 			<li class="menu-list-item">
-				<button class="menu-list-item-action" aria-current="page">
+				<a href="#" class="menu-list-item-action" aria-current="page">
 					Menu 1
-				</button>
+				</a>
 			</li>
 			<li class="menu-list-item">
-				<button class="menu-list-item-action">
+				<a href="#" class="menu-list-item-action">
 					Menu 2
-				</button>
+				</a>
 			</li>
 			<li class="menu-list-item">
-				<button class="menu-list-item-action">
+				<a href="#" class="menu-list-item-action">
 					Menu 3
-				</button>
+				</a>
 			</li>
 		</ul>
 	</nav>
