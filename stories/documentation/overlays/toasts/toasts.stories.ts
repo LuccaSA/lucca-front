@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from "rxjs";
 import { map } from "rxjs/operators";
-import { FormsModule } from "@angular/forms";
+import { LuToastsComponent } from '../../../../packages/ng/toast/src/toasts.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @Component({
 	selector: 'toasts-stories',
@@ -56,15 +58,56 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
-	component: ToastsStory,
+	component: LuToastsComponent,
 	decorators: [
+		componentWrapperDecorator(ToastsStory),
 		moduleMetadata({
-			imports: [LuToastsModule, FormsModule],
+			imports: [LuToastsModule, FormsModule, BrowserAnimationsModule],
 			declarations: [ToastsStory]
 		})
 	]
 } as Meta;
 
-const template: Story<ToastsStory> = () => ({});
+const template: Story<ToastsStory> = (args: ToastsStory) => ({
+	props: args,
+});
+
+const code = () => `
+/* Ajouter l'encre <lu-toasts></lu-toasts> dans le app.component.html */
+<lu-toasts [bottom]="true" [sources]="[]"></lu-toasts>
+
+/* Ajouter un toast avec la méthode addToast(..) du LuToastsService */
+@Component({
+  selector: 'toasts-stories',
+  templateUrl: './toasts.stories.html',
+})
+class ToastsStory implements OnInit, OnDestroy {
+
+  /* Par défaut la durée de vie d'un toast est de 5000ms */
+  public defaultToastDuration = defaultToastDuration;
+
+  constructor(private toastsService: LuToastsService) {}
+
+  public createToast(type: LuToastType, duration?: number | null): void {
+    const message = 'random-message';
+    this.toastsService.addToast({
+    	type, /* LuToastType peut être : 'Info' | 'Error' | 'Success' | 'Warning' */
+    	message,
+    	duration /* Pour activer la suppression manuel du toast, il faut setter la durée à null (et pas undefined) */
+    });
+  }
+}
+
+`
 
 export const basic = template.bind({});
+basic.args = {}
+basic.parameters = {
+	docs: {
+		source: {
+			language: 'ts',
+			code: code(),
+		}
+	},
+	controls: { include: [] },
+};
