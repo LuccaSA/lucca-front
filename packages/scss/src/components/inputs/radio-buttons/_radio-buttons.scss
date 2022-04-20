@@ -23,7 +23,7 @@
 .radioButtons-item-input {
 	@include mask;
 
-	&:checked ~ .radioButtons-item-label, 
+	&:checked ~ .radioButtons-item-label,
 	&:focus ~ .radioButtons-item-label {
 		z-index: 2;
 	}
@@ -39,81 +39,40 @@
 	transition: all _theme("commons.animations.durations.fast") ease;
 }
 
-
-// PALETTES
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-@mixin radioLabelColoring($palette) {
-	color: _color($palette, 700);
-	box-shadow: inset 0 0 0 1px _color($palette, 200);
-
-	&:hover {
-		background-color: _color($palette, 50);
-		box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 200);
-	}
+.radioButtons-item-label {
+	color: _component("radioButtons.default-palette.700");
+	box-shadow: inset 0 0 0 1px _component("radioButtons.default-palette.200");
 }
 
-@mixin radioInputColoring($palette) {
+.radioButtons-item-input:not(:disabled, .is-disabled) {
+	~ .radioButtons-item-label {
+		&:hover {
+			background-color: _component("radioButtons.default-palette.50");
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _component("radioButtons.default-palette.200");
+		}
+	}
 
 	&:checked ~ .radioButtons-item-label {
-		background-color: _color($palette, 50);
-		box-shadow: inset 0 0 0 1px _color($palette, 400);
-		color: _color($palette, 700);
+		background-color: _component("radioButtons.default-palette.50");
+		box-shadow: inset 0 0 0 1px _component("radioButtons.default-palette.400");
+		color: _component("radioButtons.default-palette.700");
 
 		&:hover {
-			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _component("radioButtons.default-palette.400");
 		}
 	}
 
 	&:focus ~ .radioButtons-item-label {
-		box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 400);
+		box-shadow: 0 0 0 4px _component("radioButtons.hover-palette.200"), inset 0 0 0 1px _component("radioButtons.hover-palette.400");
 	}
 
 	&:focus:checked ~ .radioButtons-item-label {
-		background-color: _color($palette, 100);
-		box-shadow: 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 600);
+		background-color: _component("radioButtons.default-palette.100");
+		box-shadow: 0 0 0 4px _component("radioButtons.hover-palette.200"), inset 0 0 0 1px _component("radioButtons.hover-palette.500");
 	}
 
 	&:focus:not(:checked) ~ .radioButtons-item-label {
 		background-color: _color("grey", 50);
-	}
-}
-
-.radioButtons {
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-
-			.radioButtons-item-input:not(:disabled, .is-disabled) {
-				@include radioInputColoring($name);
-				
-				~ .radioButtons-item-label {
-					@include radioLabelColoring($name);
-				}
-			}
-		}
-	}
-}
-
-.radioButtons-item-label {
-	// default color
-	@include radioLabelColoring("grey");
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include radioLabelColoring($name);
-		}
-	}
-}
-
-.radioButtons-item-input:not(:disabled, .is-disabled) {
-	// default color
-	@include radioInputColoring("radioButtons.default-palette");
-
-	// palette colors
-	@each $name, $palette in _getMap("palettes") {
-		&.palette-#{$name} {
-			@include radioInputColoring($name);
-		}
 	}
 }
 
@@ -138,7 +97,6 @@
 		box-shadow: inset 0 0 0 1px _color("grey", 200);
 		color: _color("grey", 500);
 		cursor: default;
-		z-index: -1;
 	}
 
 	&:checked:disabled ~ .radioButtons-item-label,

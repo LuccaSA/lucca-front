@@ -17,7 +17,7 @@
 
 <lu-tree-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header" [class.mod-multiple]="multiple">
-		<lu-department-feeder [appInstanceId]="appInstanceId" [operations]="operations"></lu-department-feeder>
+		<lu-department-feeder [appInstanceId]="appInstanceId" [operations]="operations" [filters]="filters"></lu-department-feeder>
 		<lu-tree-option-searcher [searchFn]="searchFn"></lu-tree-option-searcher>
 		<lu-tree-option-select-all class="option-selector"></lu-tree-option-select-all>
 	</header>
