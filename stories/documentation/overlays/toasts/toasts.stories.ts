@@ -106,7 +106,7 @@ basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
-			code: code(),
+			code,
 		}
 	},
 	controls: { include: [] },
