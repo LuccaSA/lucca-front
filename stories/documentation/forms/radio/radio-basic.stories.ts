@@ -3,18 +3,13 @@ import { Meta, Story } from '@storybook/angular';
 interface RadiosBasicStory {
 	row: boolean;
 	disabled: boolean;
-	palette: string;
+	small: boolean;
+	grey: boolean;
 }
 
 export default {
 	title: 'Documentation/Forms/Radios/Basic',
 	argTypes: {
-		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
-			control: {
-				type: 'radio',
-			}
-		},
 		row: {
 			control: {
 				type: 'boolean',
@@ -25,25 +20,36 @@ export default {
 				type: 'boolean',
 			}
 		},
+		small: {
+			control: {
+				type: 'boolean',
+			}
+		},
+		grey: {
+			control: {
+				type: 'boolean',
+			}
+		},
 	},
 } as Meta;
 
 function getTemplate(args: RadiosBasicStory): string {
-	const classes = [args.palette].filter(Boolean).join(' ');
 	const row = args.row ? `mod-row` : '';
 	const disabled = args.disabled ? `disabled` : '';
+	const small = args.small ? `mod-small` : '';
+	const grey = args.grey ? `mod-grey` : '';
 	return `
 	<fieldset class="radiosfield">
 		<legend class="radiosfield-label">Liste de radios</legend>
 		<div class="radiosfield-input ${row}">
 			<div>
-				<label class="radio ${classes}">
+				<label class="radio ${small} ${grey}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled} checked>
 					<span class="radio-label">Radio</span>
 				</label>
 			</div>
 			<div>
-				<label class="radio ${classes}">
+				<label class="radio ${small} ${grey}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled}>
 					<span class="radio-label">Radio</span>
 				</label>
@@ -59,4 +65,4 @@ const Template: Story<RadiosBasicStory> = (args: RadiosBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', row: false, disabled: false };
+Basic.args = { row: false, disabled: false, small: false, grey: false, };
