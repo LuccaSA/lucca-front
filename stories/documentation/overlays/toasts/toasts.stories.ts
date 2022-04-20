@@ -72,7 +72,7 @@ const template: Story<ToastsStory> = (args: ToastsStory) => ({
 	props: args,
 });
 
-const code = () => `
+const code = `
 /* Ajouter l'encre <lu-toasts></lu-toasts> dans le app.component.html */
 <lu-toasts [bottom]="true" [sources]="[]"></lu-toasts>
 
