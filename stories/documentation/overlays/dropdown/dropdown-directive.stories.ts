@@ -29,7 +29,7 @@ const Template: Story<DropdownDirectiveStories> = (args: DropdownDirectiveStorie
 	props: args,
 });
 
-const getCodeExample = () => `
+const code = `
   <button class="button"
     [luDropdown]="dropdown"
     luDropdownAlignment="top" /* top | bottom | left | right | center */
@@ -48,7 +48,7 @@ Directive.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
-			code: getCodeExample(),
+			code,
 		}
 	},
 	controls: { include: [] },

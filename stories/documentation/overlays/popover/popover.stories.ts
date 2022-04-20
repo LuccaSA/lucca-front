@@ -54,14 +54,7 @@ const template: Story<PopoverStory> = (args: PopoverStory) => ({
   props: args,
 });
 
-export const basic = template.bind({});
-basic.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
+const code = `
 /* 1. Importer LuPopoverModule */
 import { LuPopoverModule } from '@lucca-front/ng/popover';
 
@@ -70,7 +63,7 @@ import { LuPopoverModule } from '@lucca-front/ng/popover';
 })
 class PopoverStoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-popover */
 @Component({
 	selector: 'popover-story',
 	template: \`
@@ -79,6 +72,15 @@ class PopoverStoriesModule {}
 	\`
 })
 class PopoverStory { }`
+
+export const basic = template.bind({});
+basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
 		}
 	}
 }

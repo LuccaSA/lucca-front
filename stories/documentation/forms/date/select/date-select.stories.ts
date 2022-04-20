@@ -37,14 +37,7 @@ export default {
 
 const template: Story<DateSelectStory> = (props: DateSelectStory) => ({});
 
-export const Select = template.bind({});
-Select.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
+const code = `
 /*
 	1. Importer LuDateSelectInputModule et BrowserAnimationsModule
 	   provider un ALuDateAdapter
@@ -59,7 +52,7 @@ import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 })
 class DateSelectStoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-date-select */
 @Component({
 	selector: 'date-select-story',
 	template: \`
@@ -76,7 +69,16 @@ class DateSelectStoriesModule {}
 		<span class="textfield-label u-mask" translate="KEY_FOR_ACCESSIBILITY"></span>
 	</label>
 	\`
-})`,
+})`;
+
+export const Select = template.bind({});
+Select.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
 		},
 	},
 };

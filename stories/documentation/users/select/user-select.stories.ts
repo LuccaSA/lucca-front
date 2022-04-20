@@ -36,7 +36,7 @@ const template: Story<UserSelectStory> = (args: UserSelectStory) => ({
 	props: args,
 });
 
-const code = () => `
+const code = `
 <label class="textfield">
   <lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
   <span class="textfield-label">Utilisateurs</span>
@@ -52,7 +52,7 @@ basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
-			code: code()
+			code,
 		}
 	}
 }

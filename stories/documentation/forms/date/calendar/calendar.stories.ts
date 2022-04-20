@@ -44,15 +44,7 @@ const template: Story<CalendarStories> = (args: CalendarStories) => ({
 	props: args,
 });
 
-export const Calendar = template.bind({});
-Calendar.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
-/*
+const code = `/*
 	1. Importer LuDateModule et BrowserAnimationsModule,
 	   provider un ALuDateAdapter
 */
@@ -66,13 +58,22 @@ import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 })
 class CalendarStoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-calendar  */
 @Component({
 	selector: 'calendar-story',
 	template: \`
 	<lu-calendar [(ngModel)]="date"></lu-calendar>
 	\`
-})`,
+})`;
+
+export const Calendar = template.bind({});
+Calendar.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
 		},
 	},
 };

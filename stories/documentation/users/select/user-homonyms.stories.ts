@@ -39,7 +39,7 @@ const template: Story<UserHomonymsStory> = (args: UserHomonymsStory) => ({
 	props: args,
 });
 
-const code = () => `
+const code = `
 /* Afin de créer une sélection d'utilisateur custom avec gestion des homonymes */
 /* Ajouter un lu-select ainsi qu'un lu-option-picker-advanced */
 <label class="textfield mod-block u-marginTopBig">
@@ -81,7 +81,7 @@ homonyms.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
-			code: code()
+			code,
 		}
 	}
 }

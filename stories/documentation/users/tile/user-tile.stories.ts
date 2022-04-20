@@ -37,7 +37,20 @@ const template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
 	props: args,
 });
 
-const code = () => `<lu-user-tile [user]="bob"></lu-user-tile>`
+const code = `
+/* 1. Importer LuUserTileComponent */
+import { LuUserTileComponent } from '@lucca-front/ng/user';
+
+<lu-user-tile [user]="bob"></lu-user-tile>
+
+/* 2. Utiliser lu-user-tile */
+@Component({
+	selector: 'user-tile-stories',
+	template: '<lu-user-tile [user]="bob"></lu-user-tile>',
+}) class UserTileStory {
+	public bob = bob;
+}
+`
 
 export const basic = template.bind({});
 basic.args = {}
@@ -47,7 +60,7 @@ basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
-			code: code()
+			code,
 		}
 	}
 }

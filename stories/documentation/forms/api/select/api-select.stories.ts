@@ -43,14 +43,7 @@ export default {
 
 const Template: Story<ApiSelectStory> = props => ({ props });
 
-export const Basic = Template.bind({});
-Basic.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
+const code = `
 /* 1. Importer LuApiSelectInputModule */
 import { LuApiSelectInputModule } from '@lucca-front/ng/api';
 
@@ -59,7 +52,7 @@ import { LuApiSelectInputModule } from '@lucca-front/ng/api';
 })
 class ApiSelectStoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-api-select */
 @Component({
 	selector: 'api-select-story',
 	template: \`
@@ -81,7 +74,16 @@ class ApiSelectStoriesModule {}
 class ApiSelectStory {
 	apiV3 = '/api/v3/axisSections'
 	apiV4 = '/organization/structure/api/job-qualifications'
-}`
+}`;
+
+export const Basic = Template.bind({});
+Basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
 		}
 	}
 };

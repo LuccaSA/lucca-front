@@ -29,7 +29,7 @@ const Template: Story<DropdownComponentStories> = (args: DropdownComponentStorie
 	props: args,
 });
 
-const getCodeExample = () => `
+const code = `
 <lu-dropdown #dropdown>
 
   /* Ajouter la directive luDropdownItem pour lié le parent luDropdown à ses enfants */
@@ -57,7 +57,7 @@ Component.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
-			code: getCodeExample(),
+			code,
 		}
 	}
 };

@@ -38,13 +38,8 @@ const template: Story<QualificationSelectStory> = props => ({
 });
 
 export const Select = template.bind({});
-Select.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
+
+const code = `
 /* 1. Importer LuQualificationSelectModule */
 import { LuQualificationSelectModule } from '@lucca-front/ng/qualification';
 
@@ -53,7 +48,7 @@ import { LuQualificationSelectModule } from '@lucca-front/ng/qualification';
 })
 class QualificationSelectStoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-qualification-select */
 @Component({
 	selector: 'qualification-select-story',
 	template: \`
@@ -68,6 +63,14 @@ class QualificationSelectStoriesModule {}
 	\`
 })
 class QualificationSelectStory { }`
+
+Select.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code
 		}
 	}
 }

@@ -30,18 +30,8 @@ const template: Story<DepartmentStory> = (args: DepartmentStory) => ({
 });
 
 export const Select = template.bind({});
-// Select.args = {
-// 	appInstanceId: 15,
-// 	operations: [1],
-// 	filters: ['isactive=false'],
-// };
-Select.parameters = {
-	// controls: { include: ['appInstanceId', 'operations', 'filters'] },
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
+
+const code = `
 /* 1. Importer LuApiSelectInputModule */
 import { LuDepartmentModule } from '@lucca-front/ng/department';
 
@@ -50,7 +40,7 @@ import { LuDepartmentModule } from '@lucca-front/ng/department';
 })
 class StoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-department-select */
 @Component({
 	selector: 'department-select-story',
 	template: \`
@@ -68,7 +58,19 @@ class DepartmentStory {
 	@Input() appInstanceId: number = null;
 	@Input() operations: number[] = [];
 	@Input() filters: string[] = [];
-}`,
+}`
+// Select.args = {
+// 	appInstanceId: 15,
+// 	operations: [1],
+// 	filters: ['isactive=false'],
+// };
+Select.parameters = {
+	// controls: { include: ['appInstanceId', 'operations', 'filters'] },
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
 		},
 	},
 };

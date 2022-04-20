@@ -69,15 +69,7 @@ const template: Story<SelectStory> = (args: SelectStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
-Basic.args = {};
-Basic.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			code: `
+const code = `
 /* 1. Importer LuSelectModule, LuOptionModule, LuInputModule */
 import { LuSelectModule } from '@lucca-front/ng/api';
 import { LuOptionModule } from '@lucca-front/ng/option';
@@ -92,7 +84,7 @@ import { LuInputModule } from '@lucca-front/ng/input';
 })
 class SelectStoriesModule {}
 
-/* 2. Use it */
+/* 2. Utiliser lu-select */
 @Component({
 	selector: 'select-story',
 	template: \`
@@ -134,6 +126,16 @@ class SelectStoriesModule {}
 	\`
 })
 class SelectStory { }`
+
+export const Basic = template.bind({});
+Basic.args = {};
+Basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code
 		}
 	}
 }
