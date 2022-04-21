@@ -1,8 +1,9 @@
-@use '../commons/config';
-@use '../commons/core';
-@use '../commons/utils/a11y';
-@use '../commons/utils/reset';
-@use '../commons/utils/text';
+@use '../../commons/config';
+@use '../../commons/core';
+@use '../../commons/utils/a11y';
+@use '../../commons/utils/reset';
+@use '../../commons/utils/text';
+
 @use '../title/exports' as title;
 
 @include core.classes('min-width', core.$contents);
