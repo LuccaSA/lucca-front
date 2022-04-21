@@ -19,6 +19,7 @@
 @include core.classes('align-self', core.$align);
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('visibility', core.$visibility);
+@include core.classes('font-weight', core.$fontWeight);
 
 @include core.spacings;
 @include core.sizes;
