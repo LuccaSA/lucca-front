@@ -17,7 +17,8 @@
 		padding: var(--components-toasts-padding);
 		margin-bottom: var(--components-toasts-margin-bottom);
 		background-color: var(--components-toasts-background);
-		animation: toast var(--commons-animations-durations-standard) 1;
+		animation-duration: var(--commons-animations-durations-standard);
+		animation-iteration-count: 1;
 		border-radius: var(--commons-border-radius);
 		margin-left: auto;
 		overflow: hidden;

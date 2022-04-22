@@ -26,7 +26,7 @@
 		}
 
 		#{$headCell} {
-			color: _color('text.light'); // todo
+			color: var(--palettes-grey-500);
 			font-size: var(--sizes-small-font-size);
 			line-height: var(--sizes-small-line-height);
 			padding: var(--spacings-small);

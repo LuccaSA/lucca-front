@@ -1,8 +1,8 @@
-@mixin withMenu {
+@mixin menu {
 	padding-bottom: 0;
 }
 
-@mixin withBreadcrumbs($breadcrumbs: '.breadcrumbs') {
+@mixin breadcrumbs($breadcrumbs: '.breadcrumbs') {
 	padding-top: var(--spacings-small);
 
 	#{$breadcrumbs} {

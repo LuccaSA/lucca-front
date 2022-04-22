@@ -18,7 +18,7 @@
 		#{$item} {
 			border-bottom-width: var(--commons-divider-width);
 			border-bottom-color: var(--commons-divider-color);
-			color: _color('text.default');
+			color: var(--palettes-grey-800);
 			border-bottom-style: solid;
 			align-items: center;
 			display: flex;
@@ -45,7 +45,7 @@
 
 		#{$content} {
 			padding: var(--components-list-padding);
-			color: _color('text.default');
+			color: var(--palettes-grey-800);
 			text-decoration: none;
 			width: 100%;
 		}

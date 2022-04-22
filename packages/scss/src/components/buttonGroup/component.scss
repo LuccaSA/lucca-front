@@ -21,8 +21,8 @@
 		border-radius: 0;
 		display: block;
 		margin: 0;
-		padding-left: _theme('spacings.small');
-		padding-right: _theme('spacings.small');
+		padding-left: var(--spacings-small);
+		padding-right: var(--spacings-small);
 		position: relative;
 		flex-grow: 1;
 		white-space: normal;

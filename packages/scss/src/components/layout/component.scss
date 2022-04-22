@@ -26,7 +26,7 @@
 	display: grid;
 
 	@include media.largerThan('l') {
-		grid-template-columns: var(--layout-navSide-compact-width) 1fr var(--components-aside-width);
+		grid-template-columns: var(--commons-navSide-compact-width) 1fr var(--components-aside-width);
 		grid-template-rows: var(--commons-banner-height) 1fr;
 		grid-template-areas:
 			'banner banner banner'
@@ -34,7 +34,7 @@
 	}
 
 	@include media.smallerThan('l') {
-		grid-template-columns: var(--layout-navSide-compact-width) 1fr;
+		grid-template-columns: var(--commons-navSide-compact-width) 1fr;
 		grid-template-rows: var(--commons-banner-height) 1fr auto;
 		grid-template-areas:
 			'banner banner'
@@ -136,19 +136,6 @@
 			grid-area: navside;
 			z-index: 2;
 			overflow: auto;
-
-			// todo
-			&.is-active {
-				@include media.smallerThan('s') {
-					top: var(--commons-banner-height);
-					height: calc(100vh - var(--commons-banner-height));
-					background-color: var(--colors-white-color);
-					position: fixed;
-					overflow: auto;
-					left: 0;
-					right: 0;
-				}
-			}
 		}
 
 		#{$navsideContentInner},

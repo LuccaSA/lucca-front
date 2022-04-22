@@ -5,30 +5,28 @@
 	@include component;
 
 	&.mod-withStickyHeader {
-		@include withStickyHeader;
+		@include stickyHeader;
+	}
+
+	&.mod-withBanner,
+	.navSide.mod-withBanner ~ &,
+	.mod-withBanner & {
+		@include banner;
+	}
+
+	.navSide ~ &,
+	.mod-withMenu & {
+		@include menu;
+	}
+
+	.navSide.mod-compact ~ &,
+	.mod-withMenuCompact & {
+		@include menuCompact;
 	}
 }
 
-// with vertical navigation
-.navSide ~ .main-content,
-.mod-withMenu .main-content {
-	@include withVerticalNavigation;
-}
-
-// with compact vertical navigation
-.navSide.mod-compact ~ .main-content,
-.mod-withMenuCompact .main-content {
-	@include withCompactVerticalNavigation;
-}
-
-// with banner
-.navSide.mod-withBanner ~ .main-content,
-.mod-withBanner .main-content,
-.main-content.mod-withBanner {
-	@include withBanner;
-}
-
-// State to be added to .main when the menu is toggled
-.main:is(.is-notScrollable) {
-	@include notScrollable;
+.main {
+	&:is(.is-notScrollable) {
+		@include notScrollable;
+	}
 }

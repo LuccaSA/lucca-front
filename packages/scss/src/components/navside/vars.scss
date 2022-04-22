@@ -1,4 +1,12 @@
 @mixin vars {
+	@at-root {
+		html {
+			--commons-navSide-width: 15rem;
+			--commons-navSide-compact-width: 7.5rem;
+			--commons-navSide-mobile-toggle-height: 3.5rem;
+		}
+	}
+
 	--components-navSide-width: 15rem;
 	--components-navSide-offset-top: 0;
 	--components-navSide-padding-top: 0;

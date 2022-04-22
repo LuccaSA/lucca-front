@@ -1,7 +1,7 @@
 @use '../../../../icons/src/mixins' as icon;
 
 @mixin sortedLegacy {
-	color: _color('text.dark'); // todo
+	color: var(--palettes-grey-900);
 
 	&::after {
 		@include icon.makeIcon('arrow_full_north');
@@ -72,7 +72,7 @@
 	padding: 0;
 
 	#{$button} {
-		color: _color('text.dark'); // todo
+		color: var(--palettes-grey-900);
 		padding: var(--spacings-small);
 
 		&::after {

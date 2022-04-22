@@ -40,13 +40,13 @@
 @mixin asideBefore {
 	&:not(.mod-asideRemoved) {
 		@include media.largerThan('l') {
-			grid-template-columns: var(--layout-navSide-width) var(--components-aside-width) 1fr;
+			grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;
 			grid-template-areas:
 				'banner	banner banner'
 				'navside aside	content';
 
 			&.mod-navsideLarge {
-				grid-template-columns: var(--layout-navSide-width) var(--components-aside-width) 1fr;
+				grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;
 			}
 		}
 	}
@@ -65,14 +65,14 @@
 }
 
 @mixin asideRemoved {
-	grid-template-columns: var(--layout-navSide-compact-width) 1fr;
+	grid-template-columns: var(--commons-navSide-compact-width) 1fr;
 
 	.layout-aside {
 		display: none;
 	}
 
 	&.mod-navsideLarge {
-		grid-template-columns: var(--layout-navSide-width) 1fr;
+		grid-template-columns: var(--commons-navSide-width) 1fr;
 	}
 }
 
@@ -96,11 +96,11 @@
 
 @mixin navsideLarge {
 	@include media.largerThan('l') {
-		grid-template-columns: var(--layout-navSide-width) 1fr var(--components-aside-width);
+		grid-template-columns: var(--commons-navSide-width) 1fr var(--components-aside-width);
 	}
 
 	@include media.smallerThan('l') {
-		grid-template-columns: var(--layout-navSide-width) 1fr;
+		grid-template-columns: var(--commons-navSide-width) 1fr;
 	}
 
 	@include media.smallerThan('s') {

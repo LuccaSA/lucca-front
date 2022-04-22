@@ -16,15 +16,15 @@
 
 			&:focus-within,
 			&:hover {
-				color: _color('text.dark');
+				color: var(--palettes-grey-900);
 			}
 
 			&::before {
 				@include icon.makeIcon('chevron_east');
 
-				font-size: _theme('sizes.smaller.font-size');
-				margin-right: _theme('spacings.smallest');
-				transition-duration: _theme('commons.animations.durations.fast');
+				font-size: var(--sizes-smaller-font-size);
+				margin-right: var(--spacings-smallest);
+				transition-duration: var(--commons-animations-durations-fast);
 				vertical-align: middle;
 				transition-property: transform;
 			}

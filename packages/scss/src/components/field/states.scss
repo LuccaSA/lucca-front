@@ -3,13 +3,13 @@
 
 @mixin hover {
 	&::placeholder {
-		color: _component('field.input.color', 'light');
+		color: _component('field.input.color', 'light'); // todo: replace with CSS var
 	}
 }
 
 @mixin focus {
 	&::placeholder {
-		color: _component('field.input.color', 'lighter');
+		color: _component('field.input.color', 'lighter'); // todo: replace with CSS var
 	}
 }
 
@@ -25,7 +25,7 @@
 }
 
 @mixin disabled {
-	color: _color('text.light');
+	color: _color('text.light'); // todo: replace with CSS var
 	cursor: not-allowed;
 }
 
@@ -52,11 +52,11 @@
 	&::before {
 		@include icon.makeIcon('tick_bold');
 
-		// todo isValid
+		// todo: isValid animation
 		animation: isValid 3s forwards;
 		border-radius: 50%;
 		bottom: 0.85rem;
-		color: _color('success');
+		color: var(--palettes-success-700);
 		font-size: 1.2rem;
 		height: 1rem;
 		position: absolute;

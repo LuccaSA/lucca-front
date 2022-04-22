@@ -3,7 +3,7 @@
 	flex-wrap: wrap;
 
 	#{$checkbox} {
-		margin-right: _component('field.horizontal-spacing');
+		margin-right: var(--components-field-horizontal-spacing);
 		margin-top: 0;
 		margin-bottom: 0;
 	}

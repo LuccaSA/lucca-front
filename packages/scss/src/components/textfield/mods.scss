@@ -27,14 +27,15 @@
 	margin-bottom: 0 !important;
 
 	#{$messages} {
+		transition-duration: var(--commons-animations-durations-standard);
+		transition-property: transform;
 		position: absolute;
+		text-align: center;
 		bottom: 0;
 		left: -1px;
 		right: 0;
-		text-align: center;
-		transform: translateY(0);
-		transition: transform _theme('commons.animations.durations.standard');
 		z-index: 4;
+		transform: translateY(0);
 
 		> * {
 			display: block;
@@ -42,22 +43,22 @@
 	}
 
 	#{$error} {
-		background-color: _color('error');
-		color: _theme('palettes.error.text');
+		background-color: var(--palettes-error-700);
+		color: var(--colors-white-color);
 	}
 
 	#{$warning} {
-		background-color: _color('warning');
-		color: _theme('palettes.warning.text');
+		background-color: var(--palettes-warning-700);
+		color: var(--colors-white-color);
 	}
 
 	#{$success} {
-		background-color: _color('success');
-		color: _theme('palettes.success.text');
+		background-color: var(--palettes-success-700);
+		color: var(--colors-white-color);
 	}
 
 	#{$helper} {
-		background-color: _color('text.light');
+		background-color: var(--palettes-grey-500);
 		color: var(--colors-white-color);
 	}
 
@@ -130,8 +131,8 @@
 	//   &::before,
 	//   &::after {
 	//     bottom: auto !important;
-	//     right: _component('field.framed.side-padding') !important;
-	//     top: _component('field.framed.side-padding') !important;
+	//     right: _component('field.framed.side-padding') !important; // todo: replace with CSS var
+	//     top: _component('field.framed.side-padding') !important; // todo: replace with CSS var
 	//   }
 	// }
 }

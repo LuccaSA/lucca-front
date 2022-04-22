@@ -13,9 +13,9 @@
 }
 
 @mixin stickyNavSide {
-	left: var(--layout-navSide-width);
+	left: var(--commons-navSide-width);
 }
 
 @mixin stickyNavSideCompact {
-	left: var(--layout-navSide-compact-width);
+	left: var(--commons-navSide-compact-width);
 }
