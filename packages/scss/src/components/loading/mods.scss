@@ -7,8 +7,84 @@
 	&::before,
 	&::after {
 		margin: 0 auto;
-		height: 5rem;
 		width: 5rem;
+		height: 5rem;
 		border-width: 3px;
+	}
+}
+
+@mixin block {
+	display: block;
+	margin-bottom: 2rem;
+	padding: 3rem 0 0;
+	text-align: center;
+	width: 100%;
+
+	&::after,
+	&::before {
+		margin: auto;
+	}
+}
+
+@mixin fullPage {
+	display: block;
+	margin: 0 auto;
+	transform: translateY(30vh);
+
+	&::before,
+	&::after {
+		margin: 0 auto;
+		width: 5rem;
+		height: 5rem;
+		border-width: 3px;
+	}
+}
+
+@mixin dialog {
+	display: block;
+	text-align: center;
+	position: relative;
+	padding: 8rem 0 0;
+	margin: 0 2rem 2rem;
+
+	&::before,
+	&::after {
+		margin: auto;
+		width: 5rem;
+		height: 5rem;
+		left: 0;
+		right: 0;
+		border-width: 3px;
+	}
+}
+
+@mixin sidePanel {
+	display: block;
+	text-align: center;
+	position: relative;
+	padding: 8rem 0 0;
+	margin: 0 2rem 2rem;
+	top: 35vh;
+
+	&::before,
+	&::after {
+		margin: auto;
+		width: 5rem;
+		height: 5rem;
+		left: 0;
+		right: 0;
+		border-width: 3px;
+	}
+}
+
+@mixin invert {
+	color: var(--colors-white-color);
+
+	&::before {
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	&::after {
+		border-color: rgba(255, 255, 255, 0.66) transparent transparent transparent;
 	}
 }
