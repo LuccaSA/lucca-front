@@ -94,8 +94,11 @@
 }
 
 .timeline-step-title-action {
+	@include buttonReset;
 	color: currentColor;
+	display: inline-block;
 	text-decoration: none;
+	width: auto;
 
 	&:hover,
 	&:focus {
