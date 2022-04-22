@@ -3,7 +3,6 @@
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	gap: _theme('commons.divider.width');
 	border-radius: _component('button.border.radius');
 	overflow: hidden;
 
@@ -94,6 +93,26 @@
 			width: 100%;
 			border-radius: 0;
 		}
+
+		&:not(:first-child) {
+			.button {
+				border-left: _theme('commons.divider.width') solid _color('primary', 900);
+
+				&.mod-link, &.mod-text {
+					border-left: none;
+				}
+				
+				&:not(.is-disabled, [disabled]) {
+					&.mod-outlined {
+						border-color: _color('grey', 500);
+					}
+				}
+
+				&:is(.is-disabled, [disabled]) {
+					border-color: _color('grey', 500);
+				}
+			}
+		}
 	}
 
 	// palette colors
@@ -110,6 +129,16 @@
 					&:focus {
 						background-color: _color($name, 600);
 						box-shadow: none;
+					}
+				}
+			}
+
+			.button-group-item {
+				&:not(:first-child) {
+					.button {
+						&:not(.is-disabled, [disabled]) {
+							border-left: _theme('commons.divider.width') solid _color($name, 900);
+						}
 					}
 				}
 			}
