@@ -1,17 +1,12 @@
-@mixin component(
-	$step: '.timeline-step',
-	$title: '.timeline-step-title',
-	$icon: '.timeline-step-title-icon',
-	$action: '.timeline-step-title-action'
-) {
-	list-style-type: none;
+@mixin component {
+	list-style-type: none; 
 	padding: 0;
 	margin: var(--spacings-small) 0;
 	display: flex;
 	align-items: center;
 
 	@at-root {
-		#{$step} {
+		.timeline-step {
 			flex-grow: 1;
 			display: flex;
 			align-items: center;
@@ -33,7 +28,7 @@
 			}
 		}
 
-		#{$title} {
+		.timeline-step-title {
 			padding-left: 1.75rem;
 			position: relative;
 			display: block;
@@ -41,13 +36,12 @@
 			font-weight: 400;
 			margin: 0;
 			font-size: var(--sizes-standard-font-size);
-			line-height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-big-line-height);
 			min-width: var(--spacings-standard);
 		}
 
-		#{$title},
-		#{$step}:not([aria-current='step'], [aria-current='step'] ~ .timeline-step) #{$icon} {
-			// .timeline.mod-addStep .timeline-step-title-icon
+		.timeline-step-title,
+		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 			&::before {
 				content: '';
 				color: var(--palettes-primary-800);
@@ -65,7 +59,7 @@
 			}
 		}
 
-		#{$action} {
+		.timeline-step-title-action {
 			color: currentColor;
 			text-decoration: none;
 
@@ -76,4 +70,5 @@
 			}
 		}
 	}
+	
 }

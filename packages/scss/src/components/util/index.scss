@@ -26,6 +26,10 @@
 @include core.palettes;
 @include core.borderRadius;
 
+.#{config.$prefix}positionStatic {
+	position: static !important;
+}
+
 .#{config.$prefix}textLeft {
 	text-align: left !important;
 }

@@ -6,10 +6,77 @@
 
 	&.mod-number {
 		@include number;
+		&.mod-big {
+			@include numberBig;
+		}
 	}
 
 	&.mod-small {
 		@include small;
+	}
+
+	&.mod-big {
+		@include big;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+		&:not(.mod-small):not(.mod-big) {
+			@include verticalNotSmallNotBig();
+		}
+		&.mod-small {
+			@include verticalSmall;
+		}
+		&.mod-big {
+			@include verticalBig;
+		}
+		&.mod-progress {
+			@include verticalProgress;
+		}
+	}
+
+	&.mod-addStep {
+		@include addStep;
+		&.mod-big {
+			@include addStepBig;
+		}
+		&.mod-vertical {
+			@include addStepVertical;
+			&:not(.mod-big) {
+				@include addStepVerticalNotBig;
+			}
+			&.mod-big {
+				@include addStepVerticalBig;
+			}
+		}
+	}
+
+	&.mod-checkedPastStep {
+		@include checkedPastStep;
+		&.mod-vertical:not(.mod-big) {
+			@include checkedPastStepVerticalNotBig;
+		}
+		&.mod-vertical.mod-big {
+			@include checkedPastStepVerticalBig;
+		}
+	}
+
+	&.mod-addBetweenStep {
+		@include addBetweenStep;
+		&.mod-vertical:not(.mod-big) {
+			@include addBetweenStepVerticalNotBig()
+		}
+		&.mod-big {
+			@include addBetweenStepBig;
+		}
+	}
+
+	&.mod-progress {
+		@include progress;
+	}
+
+	&:not(.mod-checkedPastStep) {
+		@include notPastChecked;
 	}
 }
 
