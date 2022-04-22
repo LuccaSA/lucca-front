@@ -1,6 +1,4 @@
-@use 'structure' as s;
-
-@mixin component($step: s.$step, $title: s.$title, $icon: s.$icon, $action: s.$action) {
+@mixin component {
 	list-style-type: none; 
 	padding: 0;
 	margin: var(--spacings-small) 0;
@@ -8,7 +6,7 @@
 	align-items: center;
 
 	@at-root {
-		#{$step} {
+		.timeline-step {
 			flex-grow: 1;
 			display: flex;
 			align-items: center;
@@ -30,7 +28,7 @@
 			}
 		}
 
-		#{$title} {
+		.timeline-step-title {
 			padding-left: 1.75rem;
 			position: relative;
 			display: block;
@@ -42,8 +40,8 @@
 			min-width: var(--spacings-standard);
 		}
 
-		#{$title},
-		#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) #{$icon} {
+		.timeline-step-title,
+		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 			&::before {
 				content: '';
 				color: var(--palettes-primary-800);
@@ -61,7 +59,7 @@
 			}
 		}
 
-		#{$action} {
+		.timeline-step-title-action {
 			color: currentColor;
 			text-decoration: none;
 
@@ -73,19 +71,4 @@
 		}
 	}
 	
-	&:not(.mod-checkedPastStep) {
-		#{$step} {
-			&::after {
-				background-color: var(--palettes-grey-200);
-			}
-		}
-		#{$title} {
-			color: var(--palettes-grey-900);
-
-			&::before {
-				background-color: var(--palettes-primary-700);
-				color: var(--colors-white-color);
-			}
-		}
-	}
 }

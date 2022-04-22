@@ -1,9 +1,8 @@
-@use 'structure' as s;
-@use '../../commons/utils/reset';
-@use '../../../../icons/src/mixins' as icon;
+@use './../commons/utils/reset';
+@use './../../../icons/src/mixins' as icon;
 
-@mixin small($title: s.$title) { 
-	#{$title} {
+@mixin small { 
+	.timeline-step-title {
 		padding-left: 1.25rem;
 
 		&::before {
@@ -13,8 +12,8 @@
 	}
 }
 
-@mixin big($step: s.$step, $title: s.$title, $icon: s.$icon) {
-	#{$title} {
+@mixin big {
+	.timeline-step-title {
 		padding-left: 2.25rem;
 		min-width: var(--spacings-big);
 
@@ -24,19 +23,26 @@
 		}
 	}
 
-	#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) #{$icon},
-	&.mod-addStep #{$icon} {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 		&::before {
 			left: var(--spacings-smaller);
 		}
 	}
 }
 
-@mixin vertical($step: s.$step, $title: s.$title, $icon: s.$icon, $description: s.$description, $between: s.$between) {
+@mixin addStepBig {
+	.timeline-step-title-icon {
+		&::before {
+			left: var(--spacings-smaller);
+		}
+	}
+}
+
+@mixin vertical {
 	align-items: flex-start;
 	flex-direction: column;
 	
-	#{$step} {
+	.timeline-step {
 		margin-top: var(--spacings-smaller);
 		display: block;
 		position: relative;
@@ -61,84 +67,84 @@
 		}
 	}
 
-	#{$title} {
+	.timeline-step-title {
 		margin: var(--spacings-smaller) 0;
 		min-height: var(--spacings-standard);
 		min-width: 0;
 	}
 
-	&:not(.mod-small):not(.mod-big) {
-		#{$title} {
-			&:before {
-				left: 0;
-			}
-		}
-	}
-
-	#{$description} {
+	.timeline-step-description {
 		padding-left: var(--spacings-big);
 	}
 
-	&.mod-small {
-		#{$step} {
-			&::after {
-				bottom: calc(#{var(--spacings-small)} * -1);
-				left: 0.45rem; // magic number
-				top: var(--spacings-big);
-			}
-
-			&[aria-current='step'] {
-				&::after {
-					top: var(--spacings-big);
-				}
-			}
-		}
-		#{$description} {
-			padding-left: var(--spacings-standard);
-		}
-	}
-
-	&.mod-big {
-		#{$step} {
-			&::after {
-				bottom: calc(#{var(--spacings-smaller)} * -1);
-				left: 0.95rem; // magic number
-				top: 2.5rem;
-			}
-
-			&[aria-current='step'] {
-				&::after {
-					top: 2.5rem;
-				}
-			}
-		}
-		#{$description} {
-			padding-left: 2.5rem;
-			min-height: var(--spacings-big);
-		}
-	}
-	
-	#{$between} {
+	.timeline-stepAddBetweenStep {
 		min-height: 3rem;
 	}
+}
 
-	&.mod-progress {
-		#{$step}[aria-current='step'] {
-			&::after {
-				background: linear-gradient(
-					180deg,
-					var(--palettes-primary-700) var(--progress),
-					var(--palettes-grey-200) var(--progress)
-				);
-			}
+@mixin verticalNotSmallNotBig {
+	.timeline-step-title {
+		&:before {
+			left: 0;
 		}
 	}
 }
 
-@mixin number($step: s.$step, $title: s.$title, $between: s.$between) {
+@mixin verticalSmall {
+	.timeline-step {
+		&::after {
+			bottom: calc(var(--spacings-small) * -1);
+			left: 0.45rem; // magic number
+			top: var(--spacings-big);
+		}
+
+		&[aria-current='step'] {
+			&::after {
+				top: var(--spacings-big);
+			}
+		}
+	}
+	.timeline-step-description {
+		padding-left: var(--spacings-standard);
+	}
+}
+
+@mixin verticalBig {
+	.timeline-step {
+		&::after {
+			bottom: calc(var(--spacings-smaller) * -1);
+			left: 0.95rem; // magic number
+			top: 2.5rem;
+		}
+
+		&[aria-current='step'] {
+			&::after {
+				top: 2.5rem;
+			}
+		}
+	}
+	.timeline-step-description {
+		padding-left: 2.5rem;
+		min-height: var(--spacings-big);
+	}
+}
+
+@mixin verticalProgress {
+	.timeline-step[aria-current='step'] {
+		&::after {
+			background: linear-gradient(
+				180deg,
+				var(--palettes-primary-700) var(--progress),
+				var(--palettes-grey-200) var(--progress)
+			);
+		}
+	}
+}
+
+@mixin number {
 	counter-reset: timeline;
-	#{$step}:not(#{$between}) {
-		#{$title} {
+	.timeline-step:not(.timeline-stepAddBetweenStep) {
+		.timeline-step-title {
 			counter-increment: timeline;
 
 			&::before {
@@ -148,47 +154,48 @@
 			}
 		}
 	}
-	&.mod-big {
-		#{$title}::after {
-			font-size: var(--sizes-small-font-size);
-		}
+}
+
+@mixin numberBig {
+	.timeline-step-title::after {
+		font-size: var(--sizes-small-font-size);
 	}
 }
 
-@mixin checkedPastStep($step: s.$step, $title: s.$title, $between: s.$between, $icon: s.$icon) {
-	#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}):not(#{$between}) {
-		#{$title} {
-			#{$icon}::before {
+@mixin checkedPastStep {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
 				@include icon.makeIcon('tick');
 				display: flex;
 			}
 		}
 	}
+}
 
-	&.mod-vertical:not(.mod-big) {
-		#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) {
-			#{$title} {
-				#{$icon}::before {
-					left: 0;
-				}
+@mixin checkedPastStepVerticalNotBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: 0;
 			}
 		}
 	}
+}
 
-	&.mod-vertical.mod-big {
-		#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) {
-			#{$title} {
-				#{$icon}::before {
-					left: var(--sizes-smaller-font-size);
-				}
+@mixin checkedPastStepVerticalBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: var(--sizes-smaller-font-size);
 			}
 		}
 	}
 }
 
 
-@mixin addstep($step: s.$step, $title: s.$title, $between: s.$between, $icon: s.$icon) { 
-	#{$step} {
+@mixin addStep { 
+	.timeline-step {
 		&:nth-last-child(2)::after {
 			background-color: transparent;
 			background-image: linear-gradient(
@@ -205,11 +212,11 @@
 		}
 
 		&:last-child {
-			#{$title} {
+			.timeline-step-title {
 				&:before {
 					display: none;
 				}
-				#{$icon}::before {
+				.timeline-step-title-icon::before {
 					@include icon.makeIcon('plus');
 					display: flex;
 				}
@@ -217,46 +224,7 @@
 		}
 	}
 
-	&.mod-vertical {
-		#{$step} {
-			&:nth-last-child(2)::after {
-				background-color: transparent;
-				background-image: linear-gradient(
-					0deg,
-					transparent 25%,
-					var(--palettes-grey-200) 25%,
-					var(--palettes-grey-200) 50%,
-					transparent 50%,
-					transparent 75%,
-					var(--palettes-grey-200) 75%,
-					var(--palettes-grey-200) 100%
-				);
-				background-size: var(--spacings-smaller) var(--spacings-smaller);
-			}
-		}
-
-		&:not(.mod-big) {
-			#{$step}:last-child {
-				#{$title} {
-					#{$icon}::before {
-						left: 0;
-					}
-				}
-			}
-		}
-
-		&.mod-big {
-			#{$step}:last-child {
-				#{$title} {
-					#{$icon}::before {
-						left: var(--spacings-smaller);
-					}
-				}
-			}
-		}
-	}
-
-	#{$icon} {
+	.timeline-step-title-icon {
 		content: '';
 		color: var(--palettes-primary-800);
 		width: 1rem;
@@ -273,55 +241,110 @@
 	}
 }
 
-@mixin addBetweenStep($step: s.$step, $title: s.$title, $between: s.$between, $betweenTitle: s.$betweenTitle, $icon: s.$icon) {
-	#{$between} {
-		#{$title} {
+@mixin addStepVertical {
+	.timeline-step {
+		&:nth-last-child(2)::after {
+			background-color: transparent;
+			background-image: linear-gradient(
+				0deg,
+				transparent 25%,
+				var(--palettes-grey-200) 25%,
+				var(--palettes-grey-200) 50%,
+				transparent 50%,
+				transparent 75%,
+				var(--palettes-grey-200) 75%,
+				var(--palettes-grey-200) 100%
+			);
+			background-size: var(--spacings-smaller) var(--spacings-smaller);
+		}
+	}	
+}
+
+@mixin addStepVerticalNotBig {
+	.timeline-step:last-child {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: 0;
+			}
+		}
+	}
+}
+
+@mixin addStepVerticalBig {
+	.timeline-step:last-child {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: var(--spacings-smaller);
+			}
+		}
+	}
+}
+
+@mixin addBetweenStep {
+	.timeline-stepAddBetweenStep {
+		.timeline-step-title {
 			padding-left: 0;
 			&:before {
 				display: none;
 			}
 		}
 	}
-	#{$betweenTitle} {
+	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
 		width: auto;
 
 		&:focus,
 		&:hover {
-			#{$icon}::before {
+			.timeline-step-title-icon::before {
 				box-shadow: 0 0 0 0.25rem var(--palettes-primary-500);
 			}
 		}
 	}
-	#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) #{$icon}::before {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		@include icon.makeIcon('plus');
 		display: flex;
 		transition: box-shadow var(--commons-animations-durations-standard);
-	}
+	}	
+}
 
-	&.mod-vertical:not(.mod-big) {
-		#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) #{$icon}::before {
-			left: 0;
-		}
-	}
-
-	&.mod-big {
-		#{$step}:not([aria-current='step']):not([aria-current='step'] ~ #{$step}) #{$icon}::before {
-			width: 1.5rem;
-			height: 1.5rem;
-			left: var(--spacings-smallest);
-		}
+@mixin addBetweenStepVerticalNotBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
+		left: 0;
 	}
 }
 
-@mixin progress($step: s.$step, $title: s.$title, $between: s.$between, $icon: s.$icon) {
-	#{$step}[aria-current='step'] {
+@mixin addBetweenStepBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
+		width: 1.5rem;
+		height: 1.5rem;
+		left: var(--spacings-smallest);
+	}
+}
+
+@mixin progress {
+	.timeline-step[aria-current='step'] {
 		&::after {
 			background: linear-gradient(
 				90deg,
 				var(--palettes-primary-700) var(--progress),
 				var(--palettes-grey-200) var(--progress)
 			);
+		}
+	}
+}
+
+@mixin notPastChecked {
+	.timeline-step {
+		&::after {
+			background-color: var(--palettes-grey-200);
+		}
+	}
+	.timeline-step-title {
+		color: var(--palettes-grey-900);
+
+		&::before {
+			background-color: var(--palettes-primary-700);
+			color: var(--colors-white-color);
 		}
 	}
 }
