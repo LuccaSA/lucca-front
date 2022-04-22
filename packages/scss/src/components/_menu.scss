@@ -29,11 +29,6 @@
 	flex-wrap: wrap;
 }
 
-.menu-link {
-	// legacy syntax
-	margin-right: _theme('spacings.big'); // magic number
-}
-
 .menu-link, // legacy syntax
 .menu-list-item-action {
 	border-radius: _theme('commons.border.radius');
@@ -67,7 +62,7 @@
 			&:not(.is-active, [aria-current='page']) {
 				color: _color("grey", "900");
 			}
-	
+
 			&::after {
 				transform: scale(0.75);
 			}
@@ -79,7 +74,7 @@
 	}
 }
 
-.menu-link-placeholder { // legacy syntax 
+.menu-link-placeholder { // legacy syntax
 	&::after {
 		content: attr(data-content-after);
 		display: block;
