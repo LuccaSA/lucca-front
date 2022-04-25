@@ -1,10 +1,4 @@
-@mixin component(
-	$count: '.pagination-count',
-	$navigation: '.pagination-navigation',
-	$scrolling: '.pagination-scrolling',
-	$separator: '.pagination-count-separator',
-	$item: '.pagination-navigation-item'
-) {
+@mixin component {
 	display: flex;
 	flex-wrap: wrap;
 	margin: var(--spacings-small) 0;
