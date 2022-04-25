@@ -1,5 +1,5 @@
 @mixin disabled {
-	.radio-label {
+	~ .radio-label {
 		color: var(--palettes-grey-500);
 		cursor: default;
 

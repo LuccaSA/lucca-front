@@ -179,7 +179,7 @@
 		}
 	}
 
-	.table-body-row-cell {
+	[class~='-row-cell'] {
 		&:first-child {
 			padding-left: 2rem;
 			position: relative;

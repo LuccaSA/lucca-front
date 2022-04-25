@@ -83,7 +83,7 @@
 	&:not(:disabled, .is-disabled) {
 		background-color: var(--palettes-#{$state}-50);
 
-		.field-label,
+		~ .field-label,
 		~ .field-suffix {
 			color: var(--palettes-#{$state}-700);
 		}
