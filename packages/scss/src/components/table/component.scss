@@ -40,13 +40,13 @@
 			display: table-row;
 
 			&:first-child {
-				.table-head-body-row-cell {
+				.table-body-row-cell {
 					border-top: none;
 				}
 			}
 
 			&:last-child {
-				.table-head-body-row-cell {
+				.table-body-row-cell {
 					border-bottom-width: var(--commons-divider-width);
 					border-bottom-color: var(--commons-divider-color);
 					border-bottom-style: solid;
@@ -54,7 +54,7 @@
 			}
 		}
 
-		.table-head-body-row-cell {
+		.table-body-row-cell {
 			padding: var(--components-table-padding);
 			border-top-width: var(--commons-divider-width);
 			border-top-color: var(--commons-divider-color);
