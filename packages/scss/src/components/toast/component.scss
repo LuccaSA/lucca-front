@@ -27,7 +27,7 @@
 		color: var(--components-toasts-color);
 		padding: var(--components-toasts-padding);
 		margin-bottom: var(--components-toasts-margin-bottom);
-		background-color: var(--components-toasts-background);
+		background-color: var(--palettes-800, var(--components-toasts-background));
 		animation-name: toast;
 		animation-duration: var(--commons-animations-durations-standard);
 		animation-iteration-count: 1;
