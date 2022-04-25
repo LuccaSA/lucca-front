@@ -3,41 +3,33 @@
 	bottom: var(--spacings-standard);
 }
 
-@mixin commInApp(
-	$item: '.toasts-item',
-	$kill: '.toasts-item-kill',
-	$visual: '.toasts-visual',
-	$blob: '.toasts-blob',
-	$illustration: '.toasts-illustration',
-	$content: '.toasts-content',
-	$title: '.toasts-content-title'
-) {
+@mixin commInApp {
 	left: var(--components-toasts-left);
 	bottom: var(--components-toasts-bottom);
 	width: var(--components-toasts-big);
 	top: inherit;
 
-	#{$item} {
+	.toasts-item {
 		background-color: var(--palettes-primary-700);
 		margin-left: inherit;
 		display: flex;
 		padding: 0;
 	}
 
-	#{$visual} {
+	.toasts-visual {
 		inset: 0;
 		width: 5rem;
 		position: absolute;
 	}
 
-	#{$blob} {
+	.toasts-blob {
 		fill: var(--palettes-primary-600);
 		height: 100%;
 		width: 100%;
 		position: absolute;
 	}
 
-	#{$illustration} {
+	.toasts-illustration {
 		left: var(--spacings-small);
 		top: calc(var(--spacings-smaller) * -1);
 		height: 100%;
@@ -45,23 +37,23 @@
 		position: absolute;
 	}
 
-	#{$content} {
+	.toasts-content {
 		padding: var(--spacings-small) 0;
 		margin-left: calc(var(--spacings-small) + 5rem);
 		margin-right: var(--spacings-small);
 	}
 
-	#{$title} {
+	.toasts-content-title {
 		margin-bottom: var(--spacings-smaller);
 	}
 
-	#{$kill} {
+	.toasts-item-kill {
 		top: var(--spacings-smaller);
 		bottom: inherit;
 	}
 }
 
-@mixin circularGauge($gauge: '.circularGauge', $kill: '.toasts-item-kill', $icon: '.lucca-icon') {
+@mixin circularGauge {
 	@keyframes stroke {
 		from {
 			stroke-dashoffset: 100.5;
@@ -73,19 +65,19 @@
 
 	&:hover,
 	&:focus-within {
-		#{$gauge} {
+		.circularGauge {
 			circle {
 				animation-play-state: paused;
 			}
 		}
 	}
 
-	#{$kill} {
+	.toasts-item-kill {
 		transition: transform 100ms, opacity 100ms;
 		top: 0.625rem;
 		bottom: auto;
 
-		#{$icon} {
+		.lucca-icon {
 			position: absolute;
 			inset: 0;
 			display: flex;
@@ -104,7 +96,7 @@
 			opacity: 0.66;
 		}
 
-		#{$gauge} {
+		.circularGauge {
 			color: transparent;
 			height: 1.25rem;
 			pointer-events: none;

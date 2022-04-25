@@ -1,4 +1,4 @@
-@mixin component($bar: '.gauge-bar') {
+@mixin component {
 	border-radius: var(--commons-border-radius);
 	height: var(--components-gauge-height);
 	overflow: hidden;
@@ -6,7 +6,7 @@
 	background-color: rgba(0, 0, 0, 0.05);
 
 	@at-root {
-		#{$bar} {
+		.gauge-bar {
 			color: var(--palettes-700, var(--components-gauge-default-palette-700));
 			border-bottom-width: var(--components-gauge-height);
 			transition-duration: var(--commons-animations-durations-standard);

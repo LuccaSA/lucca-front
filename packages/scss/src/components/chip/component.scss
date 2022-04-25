@@ -1,6 +1,6 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin component($kill: '.chip-kill') {
+@mixin component {
 	background-color: var(--palettes-primary-700);
 	border-radius: var(--components-button-border-radius);
 	color: var(--colors-white-color);
@@ -12,7 +12,7 @@
 	padding: 0.15rem 1.8rem 0.15rem 0.75rem;
 
 	@at-root {
-		#{$kill} {
+		.chip-kill {
 			background-color: var(--colors-white-color);
 			color: var(--palettes-primary-700);
 			border: 0;

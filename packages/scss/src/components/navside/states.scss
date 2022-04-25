@@ -1,22 +1,22 @@
-@mixin active($alert: '.navSide-item-alert') {
+@mixin active {
 	background-color: var(--components-navSide-fullwidth-palette-selected-bg);
 	color: var(--components-navSide-fullwidth-palette-selected-text);
 	opacity: 1;
 
-	#{$alert} {
+	.navSide-item-alert {
 		background-color: var(--components-navSide-fullwidth-palette-selected-alert-text);
 		color: var(--components-navSide-fullwidth-palette-selected-alert-color);
 	}
 }
 
-@mixin expanded($arrow: '.navSide-item-arrow', $sublink: '.navSide-item-subMenu-link') {
-	#{$arrow} {
+@mixin expanded {
+	.navSide-item-arrow {
 		transform: rotate(-0.25turn);
 	}
 }
 
-@mixin notOpen($submenu: '.navSide-item-subMenu') {
-	#{$submenu} {
+@mixin notOpen {
+	.navSide-item-subMenu {
 		display: none;
 	}
 }
@@ -31,12 +31,12 @@
 	color: var(--components-navSide-fullwidth-palette-selected-text);
 }
 
-@mixin mobileOpen($scroll: '.navSide-scrollWrapper') {
+@mixin mobileOpen {
 	height: 100vh;
 	overflow-x: hidden;
 	overflow-y: auto;
 
-	#{$scroll} {
+	.navSide-scrollWrapper {
 		padding: 0.5em;
 	}
 }

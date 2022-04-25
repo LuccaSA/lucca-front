@@ -1,7 +1,7 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin checked($label: '.switch-label') {
-	~ #{$label} {
+@mixin checked {
+	~ .switch-label {
 		&::before {
 			@include icon.makeIcon('tick');
 
@@ -21,9 +21,9 @@
 	}
 }
 
-@mixin checkedActive($label: '.switch-label') {
+@mixin checkedActive {
 	&:not([disabled], [readonly]) {
-		~ #{$label} {
+		~ .switch-label {
 			&::before {
 				background-color: var(--palettes-secondary-800);
 				box-shadow: 0 0 0 4px var(--palettes-secondary-300);
@@ -32,8 +32,8 @@
 	}
 }
 
-@mixin checkedSmall($label: '.switch-label') {
-	~ #{$label} {
+@mixin checkedSmall {
+	~ .switch-label {
 		&::before {
 			font-size: var(--sizes-smaller-font-size);
 		}
@@ -44,16 +44,16 @@
 	}
 }
 
-@mixin hover($label: '.switch-label') {
-	~ #{$label} {
+@mixin hover {
+	~ .switch-label {
 		&::before {
 			background-color: var(--palettes-secondary-600);
 		}
 	}
 }
 
-@mixin focus($label: '.switch-label') {
-	~ #{$label} {
+@mixin focus {
+	~ .switch-label {
 		&::before {
 			background-color: var(--palettes-secondary-600);
 			box-shadow: 0 0 0 4px var(--palettes-secondary-200);
@@ -61,8 +61,8 @@
 	}
 }
 
-@mixin disabled($label: '.switch-label') {
-	~ #{$label} {
+@mixin disabled {
+	~ .switch-label {
 		color: var(--palettes-grey-500);
 		cursor: default;
 
@@ -76,8 +76,8 @@
 	}
 }
 
-@mixin disabledChecked($label: '.switch-label') {
-	~ #{$label} {
+@mixin disabledChecked {
+	~ .switch-label {
 		&::before {
 			color: var(--palettes-grey-500);
 			background-color: var(--palettes-grey-200);

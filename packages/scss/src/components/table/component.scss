@@ -1,13 +1,6 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin component(
-	$head: '.table-head',
-	$headRow: '.table-head-row',
-	$headCell: '.table-head-row-cell',
-	$body: '.table-body',
-	$row: '.table-body-row',
-	$cell: '.table-head-body-row-cell'
-) {
+@mixin component {
 	font-size: var(--components-table-font-size);
 	line-height: var(--components-table-line-height);
 	border-spacing: 0;
@@ -16,16 +9,16 @@
 	width: 100%;
 
 	@at-root {
-		#{$head} {
+		.table-head {
 			display: table-header-group;
 			vertical-align: bottom;
 		}
 
-		#{$headRow} {
+		.table-head-row {
 			display: table-row;
 		}
 
-		#{$headCell} {
+		.table-head-row-cell {
 			color: var(--palettes-grey-500);
 			font-size: var(--sizes-small-font-size);
 			line-height: var(--sizes-small-line-height);
@@ -38,22 +31,22 @@
 			font-weight: 600;
 		}
 
-		#{$body} {
+		.table-body {
 			display: table-row-group;
 		}
 
-		#{$row} {
+		.table-body-row {
 			background-color: var(--colors-white-color);
 			display: table-row;
 
 			&:first-child {
-				#{$cell} {
+				.table-head-body-row-cell {
 					border-top: none;
 				}
 			}
 
 			&:last-child {
-				#{$cell} {
+				.table-head-body-row-cell {
 					border-bottom-width: var(--commons-divider-width);
 					border-bottom-color: var(--commons-divider-color);
 					border-bottom-style: solid;
@@ -61,7 +54,7 @@
 			}
 		}
 
-		#{$cell} {
+		.table-head-body-row-cell {
 			padding: var(--components-table-padding);
 			border-top-width: var(--commons-divider-width);
 			border-top-color: var(--commons-divider-color);

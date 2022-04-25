@@ -17,10 +17,10 @@
 	}
 }
 
-@mixin draggable($handler: '.list-item-handler') {
+@mixin draggable {
 	padding-left: 1rem;
 
-	#{$handler} {
+	.list-item-handler {
 		color: var(--palettes-grey-400);
 		font-size: 1.3rem;
 		left: 0;

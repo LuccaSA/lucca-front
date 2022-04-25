@@ -1,13 +1,6 @@
 @use '../../commons/utils/reset';
 
-@mixin component(
-	$label: '.label',
-	$list: '.menu-list',
-	$link: '.menu-link',
-	$placeholder: '.menu-link-placeholder, .menu-list-item-action-placeholder',
-	$action: '.menu-list-item-action',
-	$modBorder: '.mod-noBorder'
-) {
+@mixin component {
 	background-color: var(--components-menu-background);
 	gap: var(--spacings-big);
 	align-items: center;
@@ -15,7 +8,7 @@
 	position: relative;
 	flex-wrap: wrap;
 
-	&:not(#{$modBorder}) {
+	&:not(.mod-noBorder) {
 		&::after {
 			border-bottom-width: var(--commons-divider-width);
 			border-bottom-color: var(--commons-divider-color);
@@ -29,12 +22,12 @@
 		}
 	}
 
-	#{$label} {
+	.label {
 		margin-right: 0;
 	}
 
 	@at-root {
-		#{$list} {
+		.menu-list {
 			@include reset.list;
 
 			gap: var(--spacings-big);
@@ -43,12 +36,12 @@
 		}
 
 		// legacy syntax
-		#{$link} {
+		.menu-link {
 			margin-right: var(--spacings-big);
 		}
 
-		#{$link}, // legacy syntax
-    #{$action} {
+		.menu-link, // legacy syntax
+    	.menu-list-item-action {
 			padding: var(--components-menu-padding);
 			border-radius: var(--commons-border-radius);
 			color: var(--palettes-grey-700);
@@ -93,7 +86,8 @@
 			}
 		}
 
-		#{$placeholder} {
+		.menu-link-placeholder,
+		.menu-list-item-action-placeholder {
 			&::after {
 				content: attr(data-content-after);
 

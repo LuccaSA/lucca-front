@@ -1,20 +1,6 @@
 @use '../../commons/utils/loading';
 
-@mixin component(
-	$wrapper: '.navSide-wrapper',
-	$main: '.navSide-mainSection',
-	$scroll: '.navSide-scrollWrapper',
-	$item: '.navSide-item',
-	$link: '.navSide-item-link',
-	$title: '.navSide-item-link-title',
-	$submenu: '.navSide-item-subMenu',
-	$subitem: '.navSide-item-subMenu-item',
-	$sublink: '.navSide-item-subMenu-link',
-	$alert: '.navSide-item-alert',
-	$arrow: '.navSide-item-arrow',
-	$bottom: '.navSide-bottomSection',
-	$placeholder: '.navSide-item-placeholder'
-) {
+@mixin component {
 	bottom: 0;
 	left: 0;
 	top: 0;
@@ -27,14 +13,14 @@
 	width: var(--commons-navSide-width);
 
 	@at-root {
-		#{$wrapper} {
+		.navSide-wrapper {
 			display: flex;
 			flex-direction: column;
 			flex-grow: 1;
 			min-height: 0;
 		}
 
-		#{$main} {
+		.navSide-mainSection {
 			flex-grow: 1;
 			display: block;
 			height: 100%;
@@ -62,27 +48,27 @@
 			}
 		}
 
-		#{$scroll} {
+		.navSide-scrollWrapper {
 			width: var(--commons-navSide-width);
 			padding: 0.5em;
 			margin: 0;
 			list-style-type: none;
 		}
 
-		#{$item},
-		#{$subitem},
-		#{$sublink} {
+		.navSide-item,
+		.navSide-item-subMenu-item,
+		.navSide-item-subMenu-link {
 			&:not(.mod-mobileToggle) {
-				+ #{$item},
-				+ #{$subitem},
-				+ #{$sublink} {
+				+ .navSide-item,
+				+ .navSide-item-subMenu-item,
+				+ .navSide-item-subMenu-link {
 					margin-top: 0.125em;
 				}
 			}
 		}
 
-		#{$link},
-		#{$sublink} {
+		.navSide-item-link,
+		.navSide-item-subMenu-link {
 			cursor: pointer;
 			background-color: transparent;
 			border: 0;
@@ -108,7 +94,7 @@
 			}
 		}
 
-		#{$link} {
+		.navSide-item-link {
 			font-size: var(--components-navSide-main-font-size);
 			padding: var(--spacings-small);
 			font-weight: 600;
@@ -121,7 +107,7 @@
 			}
 		}
 
-		#{$title} {
+		.navSide-item-link-title {
 			line-height: 1.2;
 			margin-left: 1em;
 			margin-right: 0.625em;
@@ -129,7 +115,7 @@
 			width: 100%;
 		}
 
-		#{$alert} {
+		.navSide-item-alert {
 			font-size: var(--sizes-smaller-font-size);
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
 			color: var(--components-navSide-fullwidth-palette-alert-text);
@@ -143,7 +129,7 @@
 			padding: 0 0.666em;
 		}
 
-		#{$arrow} {
+		.navSide-item-arrow {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			transition-timing-function: ease-out;
@@ -158,7 +144,7 @@
 			transform-origin: 50% 50%;
 		}
 
-		#{$submenu} {
+		.navSide-item-subMenu {
 			font-size: var(--components-navSide-sub-font-size);
 			margin: 0;
 			padding: 0;
@@ -166,26 +152,26 @@
 			overflow: visible;
 		}
 
-		#{$sublink} {
+		.navSide-item-subMenu-link {
 			font-weight: 400;
 			line-height: 1.4;
 			padding: 0.5em 1em 0.5em 3.2em;
 			vertical-align: middle;
 		}
 
-		#{$bottom} {
+		.navSide-bottomSection {
 			height: var(--components-navSide-bottom-section-height);
 			width: var(--components-navSide-width);
 			z-index: 1;
 
-			#{$item},
-			#{$link} {
+			.navSide-item,
+			.navSide-item-link {
 				height: 100%;
 				background-color: transparent;
 				padding: 0.5em;
 			}
 
-			#{$link} {
+			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);
 				padding: 1em;
@@ -198,13 +184,13 @@
 				}
 			}
 
-			#{$alert} {
+			.navSide-item-alert {
 				background-color: var(--components-navSide-bottom-section-palette-alert-color);
 				color: var(--components-navSide-bottom-section-palette-alert-text);
 			}
 		}
 
-		#{$placeholder} {
+		.navSide-item-placeholder {
 			align-items: center;
 			display: flex;
 			padding: 1em;

@@ -5,8 +5,8 @@
 	margin-bottom: 0;
 }
 
-@mixin small($label: '.radio-label') {
-	#{$label} {
+@mixin small {
+	.radio-label {
 		line-height: var(--sizes-small-line-height);
 		font-size: var(--sizes-small-font-size);
 		padding: var(--components-radio-label-small-padding);

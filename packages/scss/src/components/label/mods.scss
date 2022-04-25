@@ -21,13 +21,13 @@
 	padding: 0 0.1rem;
 }
 
-@mixin icon($icon: '.label-icon') {
+@mixin icon {
 	display: inline-flex;
 	align-items: center;
 	padding-left: 0.6rem;
 	padding-right: 0.6rem;
 
-	#{$icon} {
+	.label-icon {
 		font-size: var(--sizes-standard-font-size);
 		margin-right: 0.25rem;
 

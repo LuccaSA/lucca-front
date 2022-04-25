@@ -1,8 +1,8 @@
-@mixin row($checkbox: '.checkbox') {
+@mixin row($checkbox) {
 	display: flex;
 	flex-wrap: wrap;
 
-	#{$checkbox} {
+	.checkbox {
 		margin-right: var(--components-field-horizontal-spacing);
 		margin-top: 0;
 		margin-bottom: 0;

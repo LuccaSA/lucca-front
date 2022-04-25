@@ -1,4 +1,4 @@
-@mixin indeterminate($bar: '.progress-bar') {
+@mixin indeterminate {
 	@keyframes progressIndetereminate {
 		0% {
 			left: -35%;
@@ -11,7 +11,7 @@
 		}
 	}
 
-	#{$bar} {
+	.progress-bar {
 		animation: progressIndetereminate var(--components-progress-duration) infinite;
 		width: 30%;
 		animation-timing-function: linear;

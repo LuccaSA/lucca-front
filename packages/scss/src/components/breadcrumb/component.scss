@@ -1,8 +1,8 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin component($list: '.breadcrumbs-list', $item: '.breadcrumbs-list-item', $action: '.breadcrumbs-list-item-action') {
+@mixin component {
 	@at-root {
-		#{$list} {
+		.breadcrumbs-list {
 			display: flex;
 			flex-wrap: wrap;
 			list-style-type: none;
@@ -10,7 +10,7 @@
 			padding: 0;
 		}
 
-		#{$item} {
+		.breadcrumbs-list-item {
 			font-size: var(--sizes-small-font-size);
 			line-height: var(--sizes-small-line-height);
 			align-items: center;
@@ -25,7 +25,7 @@
 			}
 		}
 
-		#{$action} {
+		.breadcrumbs-list-item-action {
 			color: var(--palettes-grey-600);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;

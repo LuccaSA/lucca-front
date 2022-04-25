@@ -1,4 +1,4 @@
-@mixin component($content: '.card-content', $footer: '.card-footer', $right: '.card-footer-right') {
+@mixin component {
 	background-color: var(--colors-white-color);
 	border-radius: var(--commons-border-radius);
 	border-color: var(--commons-divider-color);
@@ -11,11 +11,11 @@
 	transition-property: background-color, box-shadow, color;
 
 	@at-root {
-		#{$content} {
+		.card-content {
 			padding: var(--components-card-content-padding);
 		}
 
-		#{$footer} {
+		.card-footer {
 			padding: var(--components-card-footer-padding);
 			border-top-color: var(--components-card-border-color);
 			border-top-width: 1px;
@@ -25,7 +25,7 @@
 			min-height: 3rem;
 		}
 
-		#{$right} {
+		.card-footer {
 			margin-left: auto;
 		}
 	}

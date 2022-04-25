@@ -1,5 +1,5 @@
-@mixin disabled($label: '.radio-label') {
-	~ #{$label} {
+@mixin disabled {
+	.radio-label {
 		color: var(--palettes-grey-500);
 		cursor: default;
 
@@ -11,8 +11,8 @@
 	}
 }
 
-@mixin disabledChecked($label: '.radio-label') {
-	~ #{$label} {
+@mixin disabledChecked {
+	~ .radio-label {
 		&::before {
 			border-color: var(--palettes-grey-500);
 			border-width: 2px;

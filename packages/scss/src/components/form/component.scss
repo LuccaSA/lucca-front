@@ -1,25 +1,15 @@
 @use '../../commons/utils/form';
 
-@mixin component(
-	$form: '.form',
-	$line: '.form-group-line',
-	$col: '.form-group-line-col',
-	$legend: '.form-group-legend',
-	$title: '.form-group-title',
-	$actions: '.form-actions',
-	$label: '.form-group-label',
-	$labels: '.radiosfield-label, .checkboxesfield-label, .textfield-label',
-	$fields: '.textfield, .radiosfield, .checkboxesfield, .checkbox.mod-field'
-) {
+@mixin component {
 	padding: 0;
 	border: 0;
 	margin: 0 0 var(--components-form-group-margin-bottom);
 	position: relative;
 
 	@at-root {
-		#{$label},
-		#{$legend},
-		#{$title} {
+		.form-group-label,
+		.form-group-legend,
+		.form-group-title {
 			display: block;
 			font-weight: 600;
 			font-size: var(--components-form-label-font-size);
@@ -29,36 +19,39 @@
 			text-align: left;
 		}
 
-		#{$legend},
-		#{$title} {
+		.form-group-legend,
+		.form-group-title {
 			font-size: var(--components-field-framed-title-font-size);
 			line-height: var(--components-field-framed-title-line-height);
 			padding-bottom: var(--spacings-smallest);
 		}
 
-		#{$title} {
+		.form-group-title {
 			margin-bottom: var(--spacings-small);
 		}
 
-		#{$actions} {
+		.form-actions {
 			text-align: right;
 		}
 
-		#{$form} {
+		.form {
 			&:not(.mod-framed) {
-				#{$fields} {
+				.textfield,
+				.radiosfield,
+				.checkboxesfield,
+				.checkbox.mod-field {
 					margin-bottom: var(--components-form-field-margin-bottom);
 				}
 			}
 		}
 
-		#{$line} {
+		.form-group-line {
 			display: flex;
 			flex-wrap: wrap;
 			position: relative;
 		}
 
-		#{$col} {
+		.form-group-line-col {
 			flex-basis: 0;
 			flex-grow: 1;
 			display: flex;
@@ -69,7 +62,7 @@
 			}
 		}
 
-		#{$label} {
+		.form-group-label {
 			&.is-required {
 				&:not(:empty) {
 					&::after {
@@ -79,7 +72,9 @@
 			}
 		}
 
-		#{$labels} {
+		.radiosfield-label,
+		.checkboxesfield-label,
+		.textfield-label {
 			&.is-required {
 				&:not(:empty) {
 					&::after {

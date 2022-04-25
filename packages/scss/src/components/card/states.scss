@@ -1,8 +1,19 @@
-@mixin disabled($title: 'h1, h2, h3, h4, h5, h6, .u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6') {
+@mixin disabled {
 	color: var(--commons-disabled-color);
 	background-color: var(--commons-disabled-background);
 
-	#{$title} {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	.u-h1,
+	.u-h2,
+	.u-h3,
+	.u-h4,
+	.u-h5,
+	.u-h6 {
 		color: var(--commons-disabled-color) !important;
 	}
 }

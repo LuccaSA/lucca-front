@@ -1,38 +1,38 @@
 @use '../../commons/utils/media';
 
-@mixin navsideWithoutScrollbar($navside: '.layout-navside') {
-	#{$navside} {
+@mixin navsideWithoutScrollbar {
+	.layout-navside {
 		max-height: auto;
 		overflow: visible;
 	}
 }
 
-@mixin contentHeaderStatic($header: '.layout-content-headers-header') {
-	#{$header} {
+@mixin contentHeaderStatic {
+	.layout-content-headers-header {
 		position: static;
 	}
 }
 
-@mixin contentSubheaderStatic($subheader: '.layout-content-headers-subheader') {
-	#{$subheader} {
+@mixin contentSubheaderStatic {
+	.layout-content-headers-subheader {
 		position: static;
 	}
 }
 
-@mixin navsideFooterStatic($navsideFooter: '.layout-navside-footer') {
-	#{$navsideFooter} {
+@mixin navsideFooterStatic {
+	.layout-navside-footer {
 		position: static;
 	}
 }
 
-@mixin asideFooterStatic($asideFooter: '.layout-aside-footer') {
-	#{$asideFooter} {
+@mixin asideFooterStatic {
+	.layout-aside-footer {
 		position: static;
 	}
 }
 
-@mixin contentFooterStatic($contentFooter: '.layout-content-footer') {
-	#{$contentFooter} {
+@mixin contentFooterStatic {
+	.layout-content-footer {
 		position: static;
 	}
 }
@@ -52,14 +52,14 @@
 	}
 }
 
-@mixin headerRemoved($header: '.layout-content-headers-header') {
-	#{$header} {
+@mixin headerRemoved {
+	.layout-content-headers-header {
 		display: none;
 	}
 }
 
-@mixin subheaderRemoved($subheader: '.layout-content-headers-subheader') {
-	#{$subheader} {
+@mixin subheaderRemoved {
+	.layout-content-headers-subheader {
 		display: none;
 	}
 }

@@ -1,9 +1,9 @@
-@mixin current($step: '.timeline-step', $title: '.timeline-step-title') {
+@mixin current {
 	&::after {
 		background-color: var(--palettes-grey-200);
 	}
 
-	#{$title} {
+	.timeline-step-title {
 		color: var(--palettes-primary-700);
 
 		&::before {
@@ -13,12 +13,12 @@
 		}
 	}
 
-	~ #{$step} {
+	~ .timeline-step {
 		&::after {
 			background-color: var(--palettes-grey-200);
 		}
 
-		#{$title} {
+		.timeline-step-title {
 			color: var(--palettes-grey-600);
 
 			&::before {
