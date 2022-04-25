@@ -1,14 +1,25 @@
 @use '../../../../icons/src/mixins' as icon;
 
 @mixin component($item: '.toasts-item', $kill: '.toasts-item-kill') {
+	@keyframes toast {
+		from {
+			transform: translateY(1rem);
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
 	right: var(--components-toasts-right);
 	top: var(--components-toasts-top);
 	width: var(--components-toasts-width);
+	font-size: var(--sizes-small-font-size);
+	line-height: var(--sizes-small-line-height);
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-	font-size: var(--sizes-small-font-size);
-	line-height: var(--sizes-small-line-height);
 	position: fixed;
 	z-index: 9999;
 
@@ -16,7 +27,8 @@
 		color: var(--components-toasts-color);
 		padding: var(--components-toasts-padding);
 		margin-bottom: var(--components-toasts-margin-bottom);
-		background-color: var(--components-toasts-background);
+		background-color: var(--palettes-800, var(--components-toasts-background));
+		animation-name: toast;
 		animation-duration: var(--commons-animations-durations-standard);
 		animation-iteration-count: 1;
 		border-radius: var(--commons-border-radius);
@@ -27,19 +39,19 @@
 	}
 
 	#{$kill} {
-		background-color: transparent;
-		border: 0;
-		bottom: 0;
 		color: var(--colors-white-color);
-		height: 1.25rem;
-		margin: auto;
-		padding: 0;
-		position: absolute;
-		right: 0.5rem;
-		top: 0;
 		transition-property: opacity;
 		transition-duration: var(--commons-animations-durations-fast);
+		background-color: transparent;
+		right: 0.5rem;
+		bottom: 0;
+		top: 0;
+		border: 0;
+		padding: 0;
+		height: 1.25rem;
 		width: 1.25rem;
+		position: absolute;
+		margin: auto;
 		cursor: pointer;
 
 		&:hover {
