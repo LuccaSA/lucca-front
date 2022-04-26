@@ -5,27 +5,27 @@
 	line-height: var(--sizes-small-line-height);
 }
 
-@mixin zebra($body: '.table-body') {
-	#{$body} {
+@mixin zebra {
+	.table-body {
 		tr:nth-child(odd) {
 			background-color: var(--components-table-zebra-background);
 		}
 	}
 }
 
-@mixin alignTop($cell: '.table-body-row-cell') {
-	#{$cell} {
+@mixin alignTop {
+	.table-body-row-cell {
 		vertical-align: top;
 	}
 }
 
-@mixin clickable($cell: '.table-body-row-cell', $action: '.table-body-row-cell-action', $row: '.table-body-row') {
-	#{$cell} {
+@mixin clickable {
+	.table-body-row-cell {
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: background-color;
 	}
 
-	#{$action} {
+	.table-body-row-cell-action {
 		color: var(--palettes-grey-800);
 		text-decoration: none;
 
@@ -35,33 +35,33 @@
 		}
 	}
 
-	#{$row} {
+	.table-body-row {
 		cursor: pointer;
 
 		&:hover,
 		&:focus-within {
-			#{$cell} {
+			.table-body-row-cell {
 				background-color: var(--components-table-hover-background);
 			}
 		}
 	}
 }
 
-@mixin card($row: '.table-body-row', $cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
+@mixin card {
 	border-top: 0;
 
-	#{$row} {
+	.table-body-row {
 		background-color: transparent;
 
 		&:last-child {
-			#{$cell} {
+			.table-body-row-cell {
 				border-bottom: none;
 			}
 		}
 	}
 
-	#{$headCell},
-	#{$cell} {
+	.table-head-row-cell,
+	.table-body-row-cell {
 		&:first-child {
 			padding-left: var(--components-table-card-padding);
 		}
@@ -72,20 +72,20 @@
 	}
 }
 
-@mixin borderless($cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
+@mixin borderless {
 	@include noOffset($cell, $headCell);
 
 	border: none;
 
-	#{$cell},
-	#{$headCell} {
+	.table-body-row-cell,
+	.table-head-row-cell {
 		border-top: none;
 	}
 }
 
-@mixin noOffset($cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
-	#{$cell},
-	#{$headCell} {
+@mixin noOffset {
+	.table-body-row-cell,
+	.table-head-row-cell {
 		&:first-child {
 			padding-left: 0;
 		}
@@ -100,8 +100,8 @@
 	vertical-align: bottom;
 }
 
-@mixin parent($cell: '.table-body-row-cell') {
-	#{$cell} {
+@mixin parent {
+	.table-body-row-cell {
 		color: var(--palettes-grey-800);
 		background-color: var(--palettes-grey-100);
 		font-size: var(--sizes-small-font-size);
@@ -110,8 +110,8 @@
 	}
 }
 
-@mixin collapsable($cell: '.table-body-row-cell', $collasped: '.is-collapsed') {
-	#{$cell} {
+@mixin collapsable {
+	.table-body-row-cell {
 		cursor: pointer;
 		text-decoration: none;
 
@@ -135,8 +135,8 @@
 		}
 	}
 
-	&#{$collasped} {
-		#{$cell} {
+	&.is-collapsed {
+		.table-body-row-cell {
 			&::before {
 				transform: rotate(-90deg);
 			}
@@ -144,16 +144,16 @@
 	}
 }
 
-@mixin child($cell: '.table-body-row-cell') {
-	#{$cell} {
+@mixin child {
+	.table-body-row-cell {
 		&:first-child {
 			padding-left: var(--spacings-bigger);
 		}
 	}
 }
 
-@mixin draggable($cell: '[class~="-row-cell"]', $handler: '.table-body-row-cell-handler') {
-	#{$handler} {
+@mixin draggable {
+	.table-body-row-cell-handler {
 		top: 0;
 		bottom: 0;
 		left: 0;
@@ -179,7 +179,7 @@
 		}
 	}
 
-	#{$cell} {
+	[class~='-row-cell'] {
 		&:first-child {
 			padding-left: 2rem;
 			position: relative;
@@ -187,9 +187,9 @@
 	}
 }
 
-@mixin selectable($cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
-	#{$cell},
-	#{$headCell} {
+@mixin selectable {
+	.table-body-row-cell,
+	.table-head-row-cell {
 		&:first-child {
 			padding-right: var(--spacings-smaller);
 			width: 1rem;
@@ -203,24 +203,24 @@
 	$wrapper: '.table-head-row-cell-wrapper'
 ) {
 	@at-root {
-		#{$secondLine} {
+		.table-head-row-cell-secondLine {
 			margin-top: var(--spacings-smallest);
 			display: block;
 			font-weight: 400;
 		}
 	}
 
-	#{$headCell} {
+	.table-head-row-cell {
 		vertical-align: top;
 	}
 
-	#{$wrapper} {
+	.table-head-row-cell-wrapper {
 		max-width: calc(100% - var(--spacings-big));
 		display: inline-block;
 		vertical-align: top;
 	}
 
-	#{$secondLine} {
+	.table-head-row-cell-secondLine {
 		margin-top: var(--spacings-smallest);
 		display: block;
 		font-weight: 400;
@@ -232,7 +232,7 @@
 	width: 2rem;
 }
 
-@mixin actions($loading: '.is-loading') {
+@mixin actions {
 	padding: 0.3rem;
 	padding-right: var(--spacings-smaller);
 	padding-left: 0;
@@ -242,7 +242,7 @@
 	white-space: nowrap;
 
 	> * {
-		&:not(#{$loading}) {
+		&:not(.is-loading) {
 			opacity: 0;
 		}
 	}

@@ -1,18 +1,18 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin size($icon) {
+@mixin size {
 	font-size: var(--components-button-font-size);
 	line-height: var(--components-button-line-height);
 	padding: var(--components-button-padding);
 
-	#{$icon} {
+	.lucca-icon {
 		font-size: var(--components-button-icon-font-size);
 		line-height: var(--components-button-icon-line-height);
 	}
 }
 
-@mixin small($icon: '.lucca-icon') {
-	@include size($icon);
+@mixin small {
+	@include size;
 
 	--components-button-font-size: var(--components-button-small-font-size);
 	--components-button-line-height: var(--components-button-small-line-height);
@@ -21,8 +21,8 @@
 	--components-button-icon-line-height: 1;
 }
 
-@mixin smaller($icon: '.lucca-icon') {
-	@include size($icon);
+@mixin smaller {
+	@include size;
 
 	--components-button-font-size: var(--components-button-smaller-font-size);
 	--components-button-line-height: var(--components-button-smaller-line-height);
@@ -89,7 +89,7 @@
 	width: 100%;
 }
 
-@mixin icon($icon: '.button-icon') {
+@mixin icon {
 	align-items: center;
 	display: inline-flex;
 	gap: var(--spacings-smaller);
@@ -98,7 +98,7 @@
 	justify-content: center;
 
 	@at-root {
-		#{$icon} {
+		.button-icon {
 			height: 1.5rem;
 			line-height: 1.5rem;
 			font-size: 1.5rem;
@@ -108,18 +108,18 @@
 	}
 }
 
-@mixin iconSmall($icon: '.button-icon') {
-	#{$icon} {
+@mixin iconSmall {
+	.button-icon {
 		font-size: var(--components-button-small-font-size);
 		height: var(--components-button-small-line-height);
 		line-height: var(--components-button-small-line-height);
 	}
 }
 
-@mixin iconSmaller($icon: '.button-icon') {
+@mixin iconSmaller {
 	gap: var(--spacings-smallest);
 
-	#{$icon} {
+	.button-icon {
 		font-size: var(--components-button-smaller-font-size);
 		height: var(--components-button-smaller-line-height);
 		line-height: var(--components-button-smaller-line-height);
@@ -164,8 +164,8 @@
 	padding-right: var(--spacings-small);
 }
 
-@mixin counterSmall($counter: '.button-counter') {
-	#{$counter} {
+@mixin counterSmall {
+	.button-counter {
 		height: 1rem;
 		min-width: 1rem;
 	}

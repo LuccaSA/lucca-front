@@ -4,8 +4,8 @@
 	margin-right: 1.5rem;
 }
 
-@mixin big($label: '.checkbox-label') {
-	#{$label} {
+@mixin big {
+	.checkbox-label {
 		line-height: 1.75rem;
 
 		&::before {
@@ -17,8 +17,8 @@
 	}
 }
 
-@mixin small($label: '.checkbox-label') {
-	#{$label} {
+@mixin small {
+	.checkbox-label {
 		font-size: var(--sizes-small-font-size);
 		line-height: var(--sizes-small-line-height);
 
@@ -31,10 +31,10 @@
 	}
 }
 
-@mixin noLabel($label: '.checkbox-label') {
+@mixin noLabel {
 	height: 1rem;
 
-	#{$label} {
+	.checkbox-label {
 		vertical-align: top;
 
 		&::before {

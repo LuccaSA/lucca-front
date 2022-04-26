@@ -4,41 +4,31 @@
 	padding: var(--spacings-smaller) var(--spacings-standard) var(--spacings-smaller) var(--spacings-bigger);
 }
 
-@mixin small(
-	$input: '.file-input',
-	$content: '.file-content',
-	$name: '.file-name',
-	$or: '.file-or',
-	$formats: '.file-formats',
-	$button: '.file-button',
-	$icon: '.file-icon',
-	$title: '.file-title',
-	$progress: '.file-progress'
-) {
+@mixin small {
 	padding: var(--spacings-smaller) var(--spacings-standard);
 	text-align: left;
 	min-height: 4rem;
 
-	#{$input} {
+	.file-input {
 		// todo: extract state
 		&:not(.is-uploading) {
-			~ #{$content} {
+			~ .file-content {
 				display: flex;
 				align-items: center;
 			}
 		}
 	}
 
-	#{$name} {
+	.file-name {
 		margin-bottom: 0;
 	}
 
-	#{$or},
-	#{$formats} {
+	.file-or,
+	.file-formats {
 		@include a11y.mask;
 	}
 
-	#{$button} {
+	.file-button {
 		margin-left: auto;
 
 		&::first-letter {
@@ -46,19 +36,19 @@
 		}
 	}
 
-	#{$icon} {
+	.file-icon {
 		font-size: var(--sizes-standard-font-size);
 		line-height: var(--sizes-standard-line-height);
 		margin-bottom: var(--spacings-standard);
 	}
 
-	#{$title} {
+	.file-title {
 		font-size: var(--sizes-standard-font-size);
 		padding-right: var(--spacings-smaller);
 		margin: 0;
 	}
 
-	#{$progress} {
+	.file-progress {
 		margin: var(--spacings-smaller) 0;
 	}
 }

@@ -1,11 +1,11 @@
-@mixin component($item: '.tableOfContent-item') {
+@mixin component {
 	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
 	position: sticky;
 
 	@at-root {
-		#{$item} {
+		.tableOfContent-item {
 			color: var(--palettes-grey-500);
 			padding: var(--components-tableOfContent-item-padding);
 			border-radius: var(--commons-border-radius);

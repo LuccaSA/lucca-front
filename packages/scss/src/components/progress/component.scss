@@ -1,4 +1,4 @@
-@mixin component($bar: '.progress-bar') {
+@mixin component {
 	@keyframes progress {
 		from {
 			transform: scale(0, 1);
@@ -18,7 +18,7 @@
 	overflow: hidden;
 
 	@at-root {
-		#{$bar} {
+		.progress-bar {
 			background-color: var(--components-progress-bar-background);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, width;

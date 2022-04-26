@@ -1,4 +1,4 @@
-@mixin component($input: '.textfield-input', $label: '.textfield-label') {
+@mixin component {
 	vertical-align: middle;
 	width: var(--components-field-sizes-default);
 
@@ -7,7 +7,7 @@
 	align-items: flex-start;
 	position: relative;
 
-	#{$input} {
+	.textfield-input {
 		font-family: var(--commons-font-family);
 		font-size: var(--components-field-font-size);
 		color: var(--components-field-input-color);
@@ -55,7 +55,7 @@
 		}
 	}
 
-	#{$label} {
+	.textfield-label {
 		color: var(--components-field-label-color);
 		font-size: var(--components-field-label-font-size);
 		margin-bottom: var(--components-field-label-margin-bottom);

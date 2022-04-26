@@ -13,9 +13,9 @@
 	}
 }
 
-@mixin required($label: '.field-label') {
-	#{$label},
-	~ #{$label} {
+@mixin required {
+	.field-label,
+	~ .field-label {
 		&:not(:empty) {
 			&::after {
 				@include form.required;
@@ -29,7 +29,7 @@
 	cursor: not-allowed;
 }
 
-@mixin loading($input: '.field-input') {
+@mixin loading {
 	// @include loading(1rem);
 
 	&::before,
@@ -43,12 +43,12 @@
 		position: absolute !important;
 	}
 
-	#{$input} {
+	.field-input {
 		padding-right: 2rem;
 	}
 }
 
-@mixin success($input: '.field-input') {
+@mixin success {
 	&::before {
 		@include icon.makeIcon('tick_bold');
 
@@ -64,27 +64,27 @@
 		z-index: 1;
 	}
 
-	#{$input} {
+	.field-input {
 		padding-right: 2rem;
 	}
 }
 
-@mixin error($label: '.field-label', $input: '.field-input') {
-	#{$label} {
+@mixin error {
+	.field-label {
 		color: var(--palettes-error-700);
 	}
 
-	#{$input} {
-		@include state('error', $label, $input);
+	.field-input {
+		@include state('error', $label);
 	}
 }
 
-@mixin state($state, $label: '.field-label', $input: '.field-input', $suffix: '.field-suffix') {
+@mixin state {
 	&:not(:disabled, .is-disabled) {
 		background-color: var(--palettes-#{$state}-50);
 
-		~ #{$label},
-		~ #{$suffix} {
+		~ .field-label,
+		~ .field-suffix {
 			color: var(--palettes-#{$state}-700);
 		}
 
@@ -100,7 +100,7 @@
 
 		&:focus,
 		&.is-focused {
-			~ #{$label} {
+			~ .field-label {
 				color: var(--palettes-#{$state}-700);
 			}
 		}

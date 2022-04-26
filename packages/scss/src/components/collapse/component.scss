@@ -1,10 +1,10 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin component($title: '.collapse-title') {
+@mixin component {
 	display: block;
 
 	@at-root {
-		#{$title} {
+		.collapse-title {
 			margin-bottom: _theme('spacings.smallest');
 			display: inline-flex;
 			overflow: hidden;

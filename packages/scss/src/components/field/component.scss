@@ -1,4 +1,4 @@
-@mixin component($input: '.field-input', $label: '.field-label', $messages: '.field-messages') {
+@mixin component {
 	// .checkboxesfield
 	// border: 0;
 	// padding: 0;
@@ -9,7 +9,7 @@
 	position: relative;
 
 	@at-root {
-		#{$input} {
+		.field-input {
 			font-family: var(--commons-font-family);
 			font-size: var(--components-field-font-size);
 			color: var(--components-field-input-color);
@@ -23,7 +23,7 @@
 			}
 		}
 
-		#{$label} {
+		.field-label {
 			color: var(--components-field-label-color);
 			font-size: var(--components-field-label-font-size);
 			line-height: var(--sizes-small-line-height);
@@ -39,7 +39,7 @@
 			white-space: nowrap;
 		}
 
-		#{$messages} {
+		.field-messages {
 			font-size: var(--components-field-message-font-size);
 			margin-top: var(--components-field-message-margin-top);
 			line-height: 1.3;

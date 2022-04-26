@@ -1,4 +1,4 @@
-@mixin component($icon: '.lucca-icon') {
+@mixin component {
 	border-radius: var(--components-button-border-radius);
 	font-family: var(--components-button-font-family);
 	font-size: var(--components-button-font-size);
@@ -19,7 +19,7 @@
 	color: var(--palettes-text, var(--palettes-primary-text));
 	cursor: pointer;
 
-	#{$icon} {
+	.lucca-icon {
 		font-size: 1.25rem;
 		line-height: 1;
 	}

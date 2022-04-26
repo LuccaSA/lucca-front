@@ -1,13 +1,6 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin component(
-	$left: '.header-contentLeft',
-	$right: '.header-contentRight',
-	$nav: '.header-nav',
-	$back: '.header-nav-back',
-	$category: '.header-nav-category',
-	$title: '.header-nav-title'
-) {
+@mixin component {
 	box-shadow: var(--commons-elevations-elevation-1);
 	background-color: var(--components-header-background);
 	min-height: var(--components-header-height);
@@ -18,16 +11,16 @@
 	z-index: 99;
 
 	@at-root {
-		#{$left} {
+		.header-contentLeft {
 			display: flex;
 		}
 
-		#{$right} {
+		.header-contentRight {
 			display: flex;
 			margin-left: auto;
 		}
 
-		#{$nav} {
+		.header-nav {
 			height: var(--components-header-height);
 			padding-left: calc(var(--components-header-height) + 1rem);
 			align-items: flex-start;
@@ -37,7 +30,7 @@
 			position: relative;
 		}
 
-		#{$back} {
+		.header-nav-back {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
 			border-right-color: var(--commons-divider-color);
@@ -65,12 +58,12 @@
 			}
 		}
 
-		#{$category} {
+		.header-nav-category {
 			color: var(--palettes-grey-500);
 			font-size: var(--sizes-small-font-size);
 		}
 
-		#{$title} {
+		.header-nav-title {
 			color: var(--palettes-primary-700);
 			line-height: 1rem;
 			margin: 0;

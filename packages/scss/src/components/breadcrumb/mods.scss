@@ -1,16 +1,16 @@
 @use '../../commons/utils/a11y';
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin compact($item: '.breadcrumbs-list-item', $action: '.breadcrumbs-list-item-action') {
-	#{$item} {
+@mixin compact {
+	.breadcrumbs-list-item {
 		&:nth-last-child(2):first-child,
-		&:nth-last-child(2):first-child + #{$item} {
+		&:nth-last-child(2):first-child + .breadcrumbs-list-item {
 			&:last-child {
 				@include a11y.mask;
 			}
 
 			&:first-child {
-				#{$action} {
+				.breadcrumbs-list-item-action {
 					display: flex;
 					align-items: center;
 

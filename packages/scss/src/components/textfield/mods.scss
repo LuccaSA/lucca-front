@@ -4,8 +4,8 @@
 	width: 100%;
 }
 
-@mixin multiline($input: '.textfield-input') {
-	#{$input} {
+@mixin multiline {
+	.textfield-input {
 		height: 5rem;
 		line-height: var(--sizes-standard-line-height);
 		font-size: var(--sizes-standard-font-size);
@@ -13,20 +13,11 @@
 	}
 }
 
-@mixin framed(
-	$input: '.textfield-input',
-	$label: '.textfield-label',
-	$messages: '.textfield-messages',
-	$error: '.textfield-messages-error',
-	$warning: '.textfield-messages-warning',
-	$success: '.textfield-messages-valid, .textfield-messages-success',
-	$helper: '.textfield-messages-helper',
-	$suffix: '.textfield-suffix'
-) {
+@mixin framed {
 	width: 100%;
 	margin-bottom: 0 !important;
 
-	#{$messages} {
+	.textfield-messages {
 		transition-duration: var(--commons-animations-durations-standard);
 		transition-property: transform;
 		position: absolute;
@@ -42,27 +33,28 @@
 		}
 	}
 
-	#{$error} {
+	.textfield-messages-error {
 		background-color: var(--palettes-error-700);
 		color: var(--colors-white-color);
 	}
 
-	#{$warning} {
+	.textfield-messages-warning {
 		background-color: var(--palettes-warning-700);
 		color: var(--colors-white-color);
 	}
 
-	#{$success} {
+	.textfield-messages-valid,
+	.textfield-messages-success {
 		background-color: var(--palettes-success-700);
 		color: var(--colors-white-color);
 	}
 
-	#{$helper} {
+	.textfield-messages-helper {
 		background-color: var(--palettes-grey-500);
 		color: var(--colors-white-color);
 	}
 
-	#{$input} {
+	.textfield-input {
 		width: 100%;
 		border-radius: 0;
 		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-border));
@@ -92,7 +84,7 @@
 		}
 	}
 
-	#{$label} {
+	.textfield-label {
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -102,7 +94,7 @@
 		pointer-events: none;
 	}
 
-	#{$suffix} {
+	.textfield-suffix {
 		top: auto;
 		z-index: 10;
 		right: 0;
@@ -122,7 +114,7 @@
 		//   @include fieldFramedState('success');
 		// }
 
-		~ #{$input} {
+		~ .textfield-input {
 			padding-right: var(--components-field-framed-suffix-padding-right);
 		}
 	}

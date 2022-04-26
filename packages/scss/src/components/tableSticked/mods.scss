@@ -7,27 +7,27 @@
 	line-height: var(--sizes-small-line-height);
 }
 
-@mixin zebra($body: '.table-body') {
-	#{$body} {
+@mixin zebra {
+	.table-body {
 		tr:nth-child(odd) {
 			background-color: var(--components-table-zebra-background);
 		}
 	}
 }
 
-@mixin alignTop($cell: '.table-body-row-cell') {
-	#{$cell} {
+@mixin alignTop {
+	.table-body-row-cell {
 		vertical-align: top;
 	}
 }
 
-@mixin clickable($cell: '.table-body-row-cell', $action: '.table-body-row-cell-action', $row: '.table-body-row') {
-	#{$cell} {
+@mixin clickable {
+	.table-body-row-cell {
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: background-color;
 	}
 
-	#{$action} {
+	.table-body-row-cell-action {
 		color: var(--palettes-grey-800);
 		text-decoration: none;
 
@@ -37,7 +37,7 @@
 		}
 	}
 
-	#{$row} {
+	.table-body-row {
 		cursor: pointer;
 
 		&:hover,
@@ -49,21 +49,21 @@
 	}
 }
 
-@mixin card($row: '.table-body-row', $cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
+@mixin card {
 	border-top: 0;
 
-	#{$row} {
+	.table-body-row {
 		background-color: transparent;
 
 		&:last-child {
-			#{$cell} {
+			.table-body-row-cell {
 				border-bottom: none;
 			}
 		}
 	}
 
-	#{$headCell},
-	#{$cell} {
+	.table-head-row-cell,
+	.table-body-row-cell {
 		&:first-child {
 			padding-left: var(--components-table-card-padding);
 		}
@@ -74,20 +74,20 @@
 	}
 }
 
-@mixin borderless($cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
+@mixin borderless {
 	@include noOffset($cell, $headCell);
 
 	border: none;
 
-	#{$cell},
-	#{$headCell} {
+	.table-head-row-cell,
+	.table-body-row-cell {
 		border-top: none;
 	}
 }
 
-@mixin noOffset($cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
-	#{$cell},
-	#{$headCell} {
+@mixin noOffset {
+	.table-head-row-cell,
+	.table-body-row-cell {
 		&:first-child {
 			padding-left: 0;
 		}
@@ -102,8 +102,8 @@
 	vertical-align: bottom;
 }
 
-@mixin parent($cell: '.table-body-row-cell') {
-	#{$cell} {
+@mixin parent {
+	.table-body-row-cell {
 		color: var(--palettes-grey-800);
 		background-color: var(--palettes-grey-100);
 		font-size: var(--sizes-small-font-size);
@@ -112,8 +112,8 @@
 	}
 }
 
-@mixin collapsable($cell: '.table-body-row-cell', $collasped: '.is-collapsed') {
-	#{$cell} {
+@mixin collapsable {
+	.table-body-row-cell {
 		cursor: pointer;
 		text-decoration: none;
 
@@ -137,8 +137,8 @@
 		}
 	}
 
-	&#{$collasped} {
-		#{$cell} {
+	&.is-collapsed {
+		.table-body-row-cell {
 			&::before {
 				transform: rotate(-90deg);
 			}
@@ -146,16 +146,16 @@
 	}
 }
 
-@mixin child($cell: '.table-body-row-cell') {
-	#{$cell} {
+@mixin child {
+	.table-body-row-cell {
 		&:first-child {
 			padding-left: var(--spacings-bigger);
 		}
 	}
 }
 
-@mixin draggable($cell: '[class~="-row-cell"]', $handler: '.table-body-row-cell-handler') {
-	#{$handler} {
+@mixin draggable {
+	.table-body-row-cell-handler {
 		top: 0;
 		bottom: 0;
 		left: 0;
@@ -181,7 +181,7 @@
 		}
 	}
 
-	#{$cell} {
+	[class~='-row-cell'] {
 		&:first-child {
 			padding-left: 2rem;
 			position: relative;
@@ -189,9 +189,9 @@
 	}
 }
 
-@mixin selectable($cell: '.table-body-row-cell', $headCell: '.table-head-row-cell') {
-	#{$cell},
-	#{$headCell} {
+@mixin selectable {
+	.table-body-row-cell-handler,
+	.table-head-row-cell {
 		&:first-child {
 			padding-right: var(--spacings-smaller);
 			width: 1rem;
@@ -199,30 +199,26 @@
 	}
 }
 
-@mixin twoLines(
-	$headCell: '.table-head-row-cell',
-	$secondLine: '.table-head-row-cell-secondLine',
-	$wrapper: '.table-head-row-cell-wrapper'
-) {
+@mixin twoLines {
 	@at-root {
-		#{$secondLine} {
+		.table-head-row-cell-secondLine {
 			margin-top: var(--spacings-smallest);
 			display: block;
 			font-weight: 400;
 		}
 	}
 
-	#{$headCell} {
+	.table-head-row-cell {
 		vertical-align: top;
 	}
 
-	#{$wrapper} {
+	.table-head-row-cell-wrapper {
 		max-width: calc(100% - var(--spacings-big));
 		display: inline-block;
 		vertical-align: top;
 	}
 
-	#{$secondLine} {
+	.table-head-row-cell-secondLine {
 		margin-top: var(--spacings-smallest);
 		display: block;
 		font-weight: 400;
@@ -302,7 +298,7 @@
 	}
 }
 
-@mixin actions($loading: '.is-loading') {
+@mixin actions {
 	padding: 0.3rem;
 	padding-right: var(--spacings-smaller);
 	padding-left: 0;
@@ -312,7 +308,7 @@
 	white-space: nowrap;
 
 	> * {
-		&:not(#{$loading}) {
+		&:not(.is-loading) {
 			opacity: 0;
 		}
 	}
@@ -341,31 +337,20 @@
 	width: $i * 1rem;
 }
 
-@mixin stickyColumn(
-	$shadowColor: #2a3551,
-	$cell: '.table-body-row-cell',
-	$headCell: '.table-head-row-cell',
-	$wrapper: '.stickyColumn-shadow-wrapper',
-	$mask: '.mod-columnSticky-shadowMask',
-	$shadow: '.mod-stickyColumn-shadow',
-	$column: '[class*="mod-stickyColumn"]',
-	$header: '[class*="mod-stickyHeader"]',
-	$left: '[class*="mod-stickyColumn-left"]',
-	$right: '[class*="mod-stickyColumn-right"]'
-) {
+@mixin stickyColumn($shadowColor: #2a3551) {
 	width: auto;
 	min-width: 100%;
 	background-color: var(--colors-white-color);
 
-	#{$cell},
-	#{$headCell} {
+	.table-body-row-cell,
+	.table-head-row-cell {
 		&[class*='mod-stickyColumn-'] {
 			position: sticky;
 			background-color: var(--colors-white-color);
 			z-index: 3;
 		}
 
-		&#{$shadow} {
+		.mod-stickyColumn-shadow {
 			z-index: 1;
 			min-width: var(--components-table-fixed-column-sticky-shadow-width);
 			max-width: var(--components-table-fixed-column-sticky-shadow-width);
@@ -374,13 +359,13 @@
 			background: transparent;
 		}
 
-		#{$wrapper} {
+		.stickyColumn-shadow-wrapper {
 			display: flex;
 		}
 	}
 
-	#{$left} {
-		#{$wrapper} {
+	[class*='mod-stickyColumn-left'] {
+		.stickyColumn-shadow-wrapper {
 			left: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
 
 			&::after {
@@ -389,8 +374,8 @@
 		}
 	}
 
-	#{$right} {
-		#{$wrapper} {
+	[class*='mod-stickyColumn-right'] {
+		.stickyColumn-shadow-wrapper {
 			right: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
 
 			&::after {
@@ -399,17 +384,18 @@
 		}
 	}
 
-	&#{$header} {
-		&#{$column} {
-			#{$headCell} {
-				&#{$column} {
+	&[class*='mod-stickyHeader'] {
+		&[class*='mod-stickyColumn'] {
+			.table-head-row-cell {
+				&[class*='mod-stickyColumn'] {
 					z-index: 6;
-					&:not(#{$shadow}) {
+
+					&:not(.mod-stickyColumn-shadow) {
 						z-index: 7;
 					}
 				}
 
-				&#{$mask} {
+				&.mod-columnSticky-shadowMask {
 					&::before {
 						width: var(--components-table-fixed-column-sticky-shadow-width);
 						left: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
@@ -422,9 +408,9 @@
 					}
 				}
 
-				&:not(#{$mask}) {
-					&:not(#{$column}) {
-						+ #{$mask} {
+				&:not(.mod-columnSticky-shadowMask) {
+					&:not(.mod-stickyColumn-shadow) {
+						+ .mod-columnSticky-shadowMask {
 							&::before {
 								left: auto;
 								right: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
@@ -442,20 +428,20 @@
 	position: static;
 }
 
-@mixin leftOffset($i, $shadow: '.mod-stickyColumn-shadow', $wrapperAfter: '.stickyColumn-shadow-wrapper::after') {
+@mixin leftOffset($i) {
 	left: $i * 1rem;
 
-	&#{$shadow},
-	#{$wrapperAfter} {
+	&.mod-stickyColumn-shadow,
+	.stickyColumn-shadow-wrapper::after {
 		left: calc(#{$i} * 1rem + var(--components-table-fixed-column-sticky-shadow-width));
 	}
 }
 
-@mixin rightOffset($i, $shadow: '.mod-stickyColumn-shadow', $wrapperAfter: '.stickyColumn-shadow-wrapper::after') {
+@mixin rightOffset($i) {
 	right: $i * 1rem;
 
-	&#{$shadow},
-	#{$wrapperAfter} {
+	&.mod-stickyColumn-shadow,
+	.stickyColumn-shadow-wrapper::after {
 		right: calc(#{$i} * 1rem + var(--components-table-fixed-column-sticky-shadow-width));
 	}
 }
@@ -480,23 +466,23 @@
 	}
 }
 
-@mixin stickyHeaderCommon($headCell: '.table-head-row-cell') {
-	#{$headCell} {
+@mixin stickyHeaderCommon {
+	.table-head-row-cell {
 		background-color: var(--colors-white-color);
 		position: sticky;
 		z-index: 5;
 	}
 }
 
-@mixin stickyColumnBreakpoint($headCell: '.table-head-row-cell') {
-	#{$headCell} {
+@mixin stickyColumnBreakpoint {
+	.table-head-row-cell {
 		left: auto !important;
 		right: auto !important;
 	}
 }
 
-@mixin stickyHeaderShadow($shadowColor: #2a3551, $cell: '.table-body-row-cell', $wrapper: '.stickyHeader-shadow-wrapper') {
-	#{$cell} {
+@mixin stickyHeaderShadow($shadowColor: #2a3551) {
+	.table-body-row-cell {
 		top: calc(var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width));
 		z-index: 4;
 		height: 0;
@@ -506,7 +492,7 @@
 		background: transparent;
 	}
 
-	#{$wrapper} {
+	.stickyHeader-shadow-wrapper {
 		top: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
 		width: 100%;
 		height: 0;
@@ -526,28 +512,23 @@
 	}
 }
 
-@mixin stickyHeader($headCell: '.table-head-row-cell') {
-	#{$headCell} {
+@mixin stickyHeader {
+	.table-head-row-cell {
 		top: 0;
 	}
 }
 
-@mixin stickyHeaderBanner(
-	$headCell: '.table-head-row-cell',
-	$cell: '.table-body-row-cell',
-	$shadow: '.mod-stickyHeader-shadow',
-	$wrapper: '.stickyHeader-shadow-wrapper'
-) {
-	#{$headCell} {
+@mixin stickyHeaderBanner {
+	.table-head-row-cell {
 		top: var(commons-banner-height);
 	}
-	#{$shadow} {
-		#{$cell} {
+	.mod-stickyHeader-shadow {
+		.table-body-row-cell {
 			top: calc(
 				var(commons-banner-height) + var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width)
 			);
 
-			#{$wrapper} {
+			.stickyHeader-shadow-wrapper {
 				&::after {
 					top: calc(
 						var(commons-banner-height) + var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width)

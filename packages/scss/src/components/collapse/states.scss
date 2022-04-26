@@ -1,11 +1,11 @@
-@mixin close($content: '.collapse-content') {
-	> #{$content} {
+@mixin close {
+	> .collapse-content {
 		display: none;
 	}
 }
 
-@mixin open($title: '.collapse-title') {
-	> #{$title} {
+@mixin open {
+	> .collapse-title {
 		&::before {
 			transform: rotate(90deg);
 		}

@@ -2,10 +2,10 @@
 	padding-bottom: 0;
 }
 
-@mixin breadcrumbs($breadcrumbs: '.breadcrumbs') {
+@mixin breadcrumbs {
 	padding-top: var(--spacings-small);
 
-	#{$breadcrumbs} {
+	.breadcrumbs {
 		margin-bottom: 0;
 	}
 }

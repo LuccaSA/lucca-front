@@ -1,5 +1,5 @@
-@mixin state($bar: '.progress-bar') {
-	#{$bar} {
+@mixin state {
+	.progress-bar {
 		width: 100% !important;
 
 		&::after {
@@ -8,18 +8,18 @@
 	}
 }
 
-@mixin success($bar: '.progress-bar') {
-	@include state($bar);
+@mixin success {
+	@include state;
 
-	#{$bar} {
+	.progress-bar {
 		background-color: var(--palettes-success-700);
 	}
 }
 
-@mixin error($bar: '.progress-bar') {
-	@include state($bar);
+@mixin error {
+	@include state;
 
-	#{$bar} {
+	.progress-bar {
 		background-color: var(--palettes-error-700);
 	}
 }

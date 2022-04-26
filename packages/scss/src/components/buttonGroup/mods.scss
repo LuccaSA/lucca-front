@@ -1,8 +1,8 @@
-@mixin outlined($button: '.button') {
+@mixin outlined {
 	background-color: var(--palettes-grey-400);
 	box-shadow: 0 0 0 1px var(--palettes-grey-400);
 
-	#{$button} {
+	.button {
 		&.mod-outline,
 		&.mod-outlined {
 			box-shadow: none;

@@ -68,10 +68,10 @@
 	}
 }
 
-@mixin sorted($button) {
+@mixin sorted {
 	padding: 0;
 
-	#{$button} {
+	.table-head-row-cell-sortableButton {
 		color: var(--palettes-grey-900);
 		padding: var(--spacings-small);
 
@@ -97,8 +97,8 @@
 	}
 }
 
-@mixin sortedAlignRight($button) {
-	#{$button} {
+@mixin sortedAlignRight {
+	.table-head-row-cell-sortableButton {
 		text-align: right;
 
 		&::before {
@@ -121,40 +121,40 @@
 	}
 }
 
-@mixin descending($button: '.table-head-row-cell-sortableButton') {
-	@include sorted($button);
+@mixin descending {
+	@include sorted;
 
-	#{$button} {
+	.table-head-row-cell-sortableButton {
 		&::after {
 			@include icon.makeIcon('arrow_full_south');
 		}
 	}
 }
 
-@mixin ascending($button: '.table-head-row-cell-sortableButton') {
-	@include sorted($button);
+@mixin ascending {
+	@include sorted;
 
-	#{$button} {
+	.table-head-row-cell-sortableButton {
 		&::after {
 			@include icon.makeIcon('arrow_full_north');
 		}
 	}
 }
 
-@mixin descendingAlignRight($button: '.table-head-row-cell-sortableButton') {
-	@include sortedAlignRight($button);
+@mixin descendingAlignRight {
+	@include sortedAlignRight;
 
-	#{$button} {
+	.table-head-row-cell-sortableButton {
 		&::before {
 			@include icon.makeIcon('arrow_full_south');
 		}
 	}
 }
 
-@mixin ascendingAlignRight($button: '.table-head-row-cell-sortableButton') {
-	@include sortedAlignRight($button);
+@mixin ascendingAlignRight {
+	@include sortedAlignRight;
 
-	#{$button} {
+	.table-head-row-cell-sortableButton {
 		&::before {
 			@include icon.makeIcon('arrow_full_north');
 		}

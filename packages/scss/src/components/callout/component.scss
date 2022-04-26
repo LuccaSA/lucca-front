@@ -1,4 +1,4 @@
-@mixin component($action: 'a', $title: '.callout-title') {
+@mixin component {
 	border-radius: var(--commons-border-radius);
 	background-color: var(--palettes-100, var(--components-callout-background));
 	color: var(--palettes-800);
@@ -9,7 +9,7 @@
 	border-style: solid;
 	position: relative;
 
-	#{$action} {
+	a {
 		color: inherit;
 
 		&:hover {
@@ -19,7 +19,7 @@
 	}
 
 	@at-root {
-		#{$title} {
+		.callout-title {
 			font-weight: 600;
 			margin-bottom: var(--spacings-smallest);
 		}

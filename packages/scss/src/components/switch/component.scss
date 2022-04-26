@@ -1,15 +1,15 @@
 @use '../../commons/utils/a11y';
 
-@mixin component($input: '.switch-input', $label: '.switch-label') {
+@mixin component {
 	display: block;
 	position: relative;
 
 	@at-root {
-		#{$input} {
+		.switch-input {
 			@include a11y.mask;
 		}
 
-		#{$label} {
+		.switch-label {
 			padding: 0;
 			padding-left: calc(2rem - 4px + var(--spacings-smaller));
 			color: var(--palettes-grey-800);

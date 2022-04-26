@@ -1,8 +1,8 @@
-@mixin inline($label: '.switch-label') {
+@mixin inline {
 	display: inline-block;
 	margin-right: 1.5rem;
 
-	#{$label} {
+	.switch-label {
 		&::before,
 		&::after {
 			margin-top: 0;
@@ -10,8 +10,8 @@
 	}
 }
 
-@mixin small($label: '.switch-label') {
-	#{$label} {
+@mixin small {
+	.switch-label {
 		font-size: var(--sizes-small-font-size);
 		line-height: var(--sizes-small-line-height);
 		padding: 0;

@@ -1,6 +1,6 @@
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin component($item: '.toasts-item', $kill: '.toasts-item-kill') {
+@mixin component {
 	@keyframes toast {
 		from {
 			transform: translateY(1rem);
@@ -23,7 +23,7 @@
 	position: fixed;
 	z-index: 9999;
 
-	#{$item} {
+	.toasts-item {
 		color: var(--components-toasts-color);
 		padding: var(--components-toasts-padding);
 		margin-bottom: var(--components-toasts-margin-bottom);
@@ -38,7 +38,7 @@
 		transform-origin: top;
 	}
 
-	#{$kill} {
+	.toasts-item-kill {
 		color: var(--colors-white-color);
 		transition-property: opacity;
 		transition-duration: var(--commons-animations-durations-fast);

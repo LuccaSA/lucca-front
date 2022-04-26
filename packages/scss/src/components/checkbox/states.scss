@@ -1,8 +1,8 @@
 @use '../../../../icons/src/mixins' as icon;
 @use '../../commons/utils/form';
 
-@mixin disabled($label: '.checkbox-label') {
-	~ #{$label} {
+@mixin disabled {
+	~ .checkbox-label {
 		color: var(--palettes-grey-500);
 		cursor: default;
 
@@ -13,7 +13,7 @@
 		}
 	}
 
-	&:checked ~ #{$label} {
+	&:checked ~ .checkbox-label {
 		&::before {
 			color: var(--palettes-grey-500);
 			background-color: var(--palettes-grey-200);
@@ -24,18 +24,18 @@
 	}
 }
 
-@mixin incomplete($label: '.checkbox-label', $mixed: '.checkbox-mixed') {
-	~ #{$mixed} ~ #{$label},
-	~ #{$label} {
+@mixin incomplete {
+	~ .checkbox-mixed ~ .checkbox-label,
+	~ .checkbox-label {
 		&::before {
 			@include icon.makeIcon('partial');
 		}
 	}
 }
 
-@mixin required($label: '.checkbox-label') {
-	~ #{$label},
-	#{$label} {
+@mixin required {
+	~ .checkbox-label,
+	.checkbox-label {
 		&:not(:empty) {
 			&::after {
 				@include form.required;
@@ -44,8 +44,8 @@
 	}
 }
 
-@mixin state($state, $label: '.checkbox-label') {
-	#{$label} {
+@mixin state($state) {
+	.checkbox-label {
 		&::before {
 			border-color: var(--palettes-#{$state}-600);
 		}

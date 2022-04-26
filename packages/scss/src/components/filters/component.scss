@@ -1,4 +1,4 @@
-@mixin component($left: '.filters-sectionLeft', $right: '.filters-sectionRight') {
+@mixin component {
 	box-shadow: var(--commons-elevations-elevation-1);
 	background-color: var(--components-filters-background);
 	min-height: var(--components-filters-height);
@@ -8,13 +8,13 @@
 	z-index: 99;
 
 	@at-root {
-		#{$left} {
+		.filters-sectionLeft {
 			align-items: center;
 			display: flex;
 			padding-right: 2rem;
 		}
 
-		#{$right} {
+		.filters-sectionRight {
 			align-items: center;
 			display: flex;
 			margin-left: auto;

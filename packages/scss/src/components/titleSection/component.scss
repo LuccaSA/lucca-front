@@ -1,20 +1,27 @@
-@mixin component(
-	$title: '.titleSection-title, h1, h2, h3, h4, h5, h6',
-	$classTitle: '.u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6',
-	$sub: '.titleSection-sub'
-) {
+@mixin component {
 	margin-bottom: 1.2rem;
 
-	#{$title} {
+	.titleSection-title,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		margin-bottom: 0;
 	}
 
-	#{$classTitle} {
+	.u-h1,
+	.u-h2,
+	.u-h3,
+	.u-h4,
+	.u-h5,
+	.u-h6 {
 		margin-bottom: 0 !important;
 	}
 
 	@at-root {
-		#{$sub} {
+		.titleSection-sub {
 			color: var(--colors-grey-500);
 			font-size: var(--sizes-standard-font-size);
 			line-height: var(--sizes-standard-line-height);

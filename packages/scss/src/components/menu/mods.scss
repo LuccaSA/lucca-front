@@ -2,21 +2,21 @@
 	padding: 0 2.5rem;
 }
 
-@mixin small($link: '.menu-link', $action: '.menu-list-item-action', $label: '.label') {
+@mixin small {
 	// legacy syntax
-	#{$link},
-	#{$action} {
+	.menu-link,
+	.menu-list-item-action {
 		font-size: var(--sizes-small-font-size);
 		line-height: var(--sizes-smaller-line-height);
 		padding: 0.75rem 0;
 	}
 
-	#{$label} {
+	.label {
 		font-size: var(--sizes-smaller-font-size);
 	}
 
 	// legacy syntax
-	#{$link} {
+	.menu-link {
 		margin-right: var(--spacings-standard);
 	}
 }
