@@ -8,10 +8,10 @@ import {
 	OverlayConfig,
 	OverlayConnectionPosition,
 	OverlayRef,
-	VerticalConnectionPos,
+	VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { ElementRef, ViewContainerRef } from '@angular/core';
+import { ElementRef, Input, ViewContainerRef } from '@angular/core';
 import { generateId } from '@lucca-front/ng/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
@@ -118,6 +118,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get disabled() {
 		return this._disabled;
 	}
+	@Input()
 	set disabled(d: boolean) {
 		this._disabled = d;
 	}
@@ -139,7 +140,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	}
 
 	onClick() {
-		if (this.triggerEvent === 'click') {
+		if (this.triggerEvent === 'click' && !this.disabled) {
 			this.togglePopover();
 		}
 	}
