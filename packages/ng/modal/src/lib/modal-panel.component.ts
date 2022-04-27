@@ -81,11 +81,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 						tap(() => this._cdr.markForCheck()),
 						delay(500),
 					)
-					.subscribe(
-						(result) => {
-							this._ref.close(result);
-						},
-						(err) => {
+					.subscribe({
+						next: (result) => this._ref.close(result),
+						error: (err) => {
 							this.submitClass$.next('is-error');
 							this.error$.next(err);
 							this._cdr.markForCheck();
@@ -94,7 +92,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 								this._cdr.markForCheck();
 							});
 						},
-					),
+					}),
 			);
 		} else {
 			const result = result$;
