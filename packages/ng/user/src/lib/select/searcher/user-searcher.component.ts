@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
-import { catchError, debounceTime, filter, map, mapTo, scan, share, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
 import { ILuUser } from '../../user.model';
 import { LuUserSearcherIntl } from './user-searcher.intl';
@@ -140,7 +140,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 		});
 		this._subs.add(resultsSub);
 
-		this.loading$ = merge(query$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
+		this.loading$ = merge(query$.pipe(map(() => true)), results$.pipe(map(() => false)));
 		const loadingSub = this.loading$.subscribe((l) => (this._loading = l));
 		this._subs.add(loadingSub);
 
