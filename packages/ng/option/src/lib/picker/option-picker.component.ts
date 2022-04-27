@@ -97,11 +97,8 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	}
 	override onOpen() {
 		super.onOpen();
-
-		//TODO: check if item 0 is disabled or not
 		this.highlightIndex = -1;
 		this._incrHighlight();
-		// this._initObserver();
 		this._applySelected();
 	}
 	@ViewChild(TemplateRef, { static: true })
@@ -169,7 +166,6 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		}
 
 		if(nextIndex > -1) {
-			console.log(nextIndex);
 			this.highlightIndex = nextIndex;
 			return;
 		}
