@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
@@ -118,6 +119,7 @@ class SelectStory {
 	orange = { id: 6, name: 'orange' };
 	cyan = { id: 7, name: 'cyan' };
 	grey = { id: 8, name: 'grey' };
+	item = this.red;
 }
 
 export default {
@@ -127,7 +129,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(SelectStory),
 		moduleMetadata({
-			imports: [LuSelectModule, LuOptionModule, LuInputModule, BrowserAnimationsModule],
+			imports: [FormsModule, LuSelectModule, LuOptionModule, LuInputModule, BrowserAnimationsModule],
 			declarations: [SelectStory],
 		}),
 	],
