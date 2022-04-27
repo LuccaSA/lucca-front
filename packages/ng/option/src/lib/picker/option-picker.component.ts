@@ -15,7 +15,7 @@ import {
 	Output,
 	QueryList,
 	TemplateRef,
-	ViewChild,
+	ViewChild
 } from '@angular/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
@@ -97,7 +97,10 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	}
 	override onOpen() {
 		super.onOpen();
-		this.highlightIndex = 0;
+
+		//TODO: check if item 0 is disabled or not
+		this.highlightIndex = -1;
+		this._incrHighlight();
 		// this._initObserver();
 		this._applySelected();
 	}
@@ -150,22 +153,47 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		}, 1);
 	}
 	protected _incrHighlight() {
-		const optionCount = this._options.length;
-		this.highlightIndex = Math.max(Math.min(this.highlightIndex + 1, optionCount - 1), -1);
+		const nextIndex = this._options.findIndex((item, index) => index > this.highlightIndex && !item.disabled);
+		this.highlightIndex = nextIndex > -1 ? 
+			nextIndex :
+			this._options.findIndex(item => !item.disabled);
 	}
 	protected _decrHighlight() {
-		this.highlightIndex = Math.max(this.highlightIndex - 1, -1);
+		//NB: findLastIndex would be better but is not available on this project
+		let nextIndex = -1;
+		for(let i = this.highlightIndex -1; i >= 0; --i) {
+			if(!this._options[i].disabled) {
+				nextIndex = i;
+				break;
+			}
+		}
+
+		if(nextIndex > -1) {
+			console.log(nextIndex);
+			this.highlightIndex = nextIndex;
+			return;
+		}
+
+		const optionsLength = this._options.length - 1
+		for(let i = optionsLength; i >= 0; --i) {
+			if(!this._options[i].disabled) {
+				nextIndex = i;
+				break;
+			}
+		}
+		this.highlightIndex = nextIndex;
 	}
 	protected _applyHighlight(reScroll = false) {
 		if (!this.isOpen) {
 			return;
 		}
-		// const highlightClass = 'is-highlighted';
+
 		const options = this._options;
 		// remove `is-highlighted` class from all other options
 		options.forEach((option) => (option.highlighted = false));
 		// apply `is-highlighted` to current highlight
 		const highlightedOption = options[this.highlightIndex];
+
 		if (highlightedOption) {
 			highlightedOption.highlighted = true;
 			// scroll to let the highlighted option visible

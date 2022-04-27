@@ -1,2 +1,11 @@
 @import '_definitions';
 @include optionItemStyle;
+
+//TODO: int
+.is-disabled {
+	user-select: none;
+	opacity: .7;
+	&:hover {
+		background: inherit;
+	}
+}
