@@ -39,7 +39,7 @@ export class LuOptionItemComponent<T> extends ALuOptionItem<T> implements ILuOpt
 	@Input() value: T;
 	@Output() onSelect = new EventEmitter<this>();
 	select() {
-		if(!this.disabled) {
+		if (!this.disabled) {
 			this.onSelect.emit(this);
 		}
 	}
@@ -48,8 +48,7 @@ export class LuOptionItemComponent<T> extends ALuOptionItem<T> implements ILuOpt
 	get disabled() {
 		return this._disabled;
 	}
-	@Input()
-	set disabled(d: boolean) {
+	@Input() set disabled(d: boolean) {
 		this._disabled = d;
 	}
 

@@ -17,7 +17,7 @@ import {
 	Output,
 	Renderer2,
 	ViewChild,
-	ViewContainerRef
+	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ALuClearer, ALuInputDisplayer, ILuClearer, ILuInputDisplayer } from '@lucca-front/ng/input';
@@ -67,8 +67,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	get isDisabled() {
 		return this.disabled;
 	}
-	@Input()
-	override set disabled(d: boolean) {
+	@Input('disabled') set inputDisabled(d: boolean) {
 		this._disabled = d;
 	}
 	@HostBinding('class.is-focused')
