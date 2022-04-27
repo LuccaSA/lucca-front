@@ -1,0 +1,13 @@
+@mixin disabled {
+	~ .radioButtons-item-label {
+		box-shadow: inset 0 0 0 1px _color('grey', 200);
+		color: _color('grey', 500);
+		cursor: default;
+	}
+
+	&:checked {
+		~ .radioButtons-item-label {
+			background-color: _color('grey', 100);
+		}
+	}
+}
