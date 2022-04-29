@@ -16,7 +16,7 @@ function getTemplate(args: CardsFooterStory): string {
 		<footer class="card-footer">
 			<div class="card-footer-right">
 				<button class="button palette-primary">Confirmer</button>
-				<button class="button mod-link">Annuler</button>
+				<button class="button mod-text">Annuler</button>
 			</div>
 		</footer>
 	</div>

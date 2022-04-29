@@ -37,18 +37,17 @@
 			box-shadow: none;
 		}
 
-		&:focus,
-		&:active {
-			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($activeShadowPalette, 100), inset 0 0 0 1px _color($activeShadowPalette, 400);
-		}
-
 		&:focus {
 			background-color: _color($palette, 50);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($activeShadowPalette, 100),
+				inset 0 0 0 1px _color($activeShadowPalette, 400);
 			outline: none;
 		}
 
 		&:active {
 			background-color: _color($palette, 100);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($activeShadowPalette, 200),
+				inset 0 0 0 1px _color($activeShadowPalette, 500);
 		}
 	}
 }
@@ -61,20 +60,20 @@
 		&:hover {
 			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.box-shadow.xs'), inset 0 0 0 1px _color($palette, 400);
 		}
 
 		&:focus {
 			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
 			outline: none;
 		}
 
 		&:active {
 			background-color: _color($palette, 200);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
 		}
 	}
 
@@ -183,7 +182,6 @@
 	&.mod-text {
 		background-color: transparent;
 		box-shadow: none;
-		color: _color('text.default');
 		padding: _component('button.mod-text.padding');
 
 		// default color
@@ -196,24 +194,16 @@
 			}
 		}
 
-		&:not([disabled]) {
-			&:hover {
-				box-shadow: none;
-			}
-		}
-
 		&.mod-invert {
 			color: _color('white');
 
 			&:hover,
 			&:focus {
+				box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+
 				&:not([disabled]) {
 					background-color: rgba(_color('white'), 0.1);
 					color: _color('white');
-				}
-
-				&:focus {
-					box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 				}
 			}
 		}
@@ -253,14 +243,16 @@
 			&:focus {
 				background-color: _color('grey', 100);
 				color: _color('text.default');
-				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', 100), inset 0 0 0 1px _color('primary', '400');
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', 100),
+					inset 0 0 0 1px _color('primary', '400');
 				outline: none;
 			}
 
 			&:active {
 				background-color: _color('grey', 200);
 				color: _color('text.default');
-				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', '200'), inset 0 0 0 1px _color('primary', '500');
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', '200'),
+					inset 0 0 0 1px _color('primary', '500');
 			}
 		}
 
@@ -347,7 +339,8 @@
 			border-color: _color('grey', 200);
 		}
 
-		&.mod-link {
+		&.mod-link,
+		&.mod-text {
 			color: _color('grey', 500);
 			background-color: transparent;
 		}
