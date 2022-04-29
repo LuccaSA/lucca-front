@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface MenuBasicStory {
+interface MenuCountStory {
 	noBorder: boolean;
 	header: boolean;
 	small: boolean;
 }
 
 export default {
-	title: 'Documentation/Navigation/Menu/Basic',
+	title: 'Documentation/Navigation/Menu/Count',
 	argTypes: {
 		noBorder: {
 			control: {
@@ -27,7 +27,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: MenuBasicStory): string {
+function getTemplate(args: MenuCountStory): string {
 	const noBorder = args.noBorder ? `mod-noBorder` : '';
 	const header = args.header ? `mod-header` : '';
 	const small = args.small ? `mod-small` : '';
@@ -36,17 +36,20 @@ function getTemplate(args: MenuBasicStory): string {
 		<ul class="menu-list">
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" aria-current="page">
-					Menu 1
+					Menu
+					<span class="label mod-number">2</span>
 				</a>
 			</li>
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action">
-					Menu 2
+					Menu
+					<span class="label mod-number">2</span>
 				</a>
 			</li>
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action">
-					Menu 3
+					Menu
+					<span class="label mod-number">2</span>
 				</a>
 			</li>
 		</ul>
@@ -55,10 +58,10 @@ function getTemplate(args: MenuBasicStory): string {
 
 }
 
-const Template: Story<MenuBasicStory> = (args: MenuBasicStory) => ({
+const Template: Story<MenuCountStory> = (args: MenuCountStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { noBorder: false, header: false, small: false, };
+export const Count = Template.bind({});
+Count.args = { noBorder: false, header: false, small: false, };

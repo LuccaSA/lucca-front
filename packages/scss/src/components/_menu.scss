@@ -17,7 +17,9 @@
 	}
 
 	.label {
-		margin-right: 0
+		margin-right: 0;
+		background-color: _color('grey', 100);
+		color: _color('grey', 700);
 	}
 }
 
@@ -36,8 +38,9 @@
 
 .menu-link, // legacy syntax
 .menu-list-item-action {
+	@include buttonReset;
 	border-radius: _theme('commons.border.radius');
-	color: _color('grey', '700');
+	color: _color('grey', 700);
 	padding: _component('menu.padding');
 	position: relative;
 	text-decoration: none;
@@ -46,7 +49,7 @@
 	display: block;
 
 	&::after {
-		background-color: _color('primary', '700');
+		background-color: _component('menu.default-palette.700');
 		border-radius: _theme('commons.border.radius')
 			_theme('commons.border.radius') 0 0;
 		bottom: 0;
@@ -61,13 +64,18 @@
 		z-index: 1;
 	}
 
-	&:not(.is-disabled) {
+	&:not(.is-disabled, [disabled]) {
 		&:focus-visible,
 		&:hover {
 			&:not(.is-active, [aria-current='page']) {
 				color: _color("grey", "900");
 			}
-	
+
+			.label {
+				background-color: _component('menu.default-palette.100');
+				color: _component('menu.default-palette.700');
+			}
+
 			&::after {
 				transform: scale(0.75);
 			}
@@ -79,7 +87,7 @@
 	}
 }
 
-.menu-link-placeholder { // legacy syntax 
+.menu-link-placeholder { // legacy syntax
 	&::after {
 		content: attr(data-content-after);
 		display: block;
@@ -106,7 +114,10 @@
 		}
 
 		.label {
-			font-size: _theme('sizes.smaller.font-size');
+			height: _theme("sizes.small.line-height");
+			min-width: _theme("sizes.small.line-height");
+			line-height: _theme("sizes.small.line-height");
+			padding: 0;
 		}
 
 		.menu-link {
@@ -123,18 +134,23 @@
 .menu-list-item-action {
 	&.is-active,  // legacy syntax
 	&[aria-current="page"] {
-		color: _color('primary', '700');
+		color: _component('menu.default-palette.700');
+
+		.label {
+			background-color: _component('menu.default-palette.100');
+			color: _component('menu.default-palette.700');
+		}
 
 		&::after {
-			background-color: _color('primary', '700');
+			background-color: _component('menu.default-palette.700');
 			transform: scale(1);
 		}
 	}
 
-	&.is-disabled {
+	&.is-disabled, &[disabled] {
 		&,
 		.label {
-			color: _color('grey', '500');
+			color: _color('grey', 500);
 			pointer-events: none;
 		}
 	}
