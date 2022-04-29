@@ -64,7 +64,7 @@
 		z-index: 1;
 	}
 
-	&:not(.is-disabled) {
+	&:not(.is-disabled, [disabled]) {
 		&:focus-visible,
 		&:hover {
 			&:not(.is-active, [aria-current='page']) {
@@ -147,7 +147,7 @@
 		}
 	}
 
-	&.is-disabled {
+	&.is-disabled, &[disabled] {
 		&,
 		.label {
 			color: _color('grey', 500);
