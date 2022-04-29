@@ -13,7 +13,7 @@ export default {
 	title: 'Documentation/Actions/Button/Basic',
 	argTypes: {
 		mod: {
-			options: ['', 'mod-outlined', 'mod-link', 'mod-link mod-invert'],
+			options: ['', 'mod-outlined', 'mod-text', 'mod-text mod-invert'],
 			control: {
 				type: 'radio',
 			},
@@ -80,7 +80,7 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
-		args.mod === 'mod-link mod-invert' ? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }' : '',
+		args.mod === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }' : '',
 	],
 });
 

@@ -15,5 +15,8 @@ $button: (
 		line-height: _theme('sizes.smaller.line-height'),
 		padding: _theme('spacings.smallest') _theme('spacings.smaller'),
 	),
+	mod-text: (
+		padding: _theme('spacings.smaller'),
+	),
 );
 $theme: _set($theme, 'components.button', $button);
