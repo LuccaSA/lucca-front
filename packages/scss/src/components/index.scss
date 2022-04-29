@@ -1,3 +1,5 @@
+@forward 'icon'; // 16 Ko
+@forward 'box'; // 1 Ko
 @forward 'toc'; // 1 Ko
 @forward 'tag'; // 1 Ko
 @forward 'code'; // 1 Ko
@@ -43,8 +45,9 @@
 @forward 'textfield'; // 13 Ko
 @forward 'util'; // 14 Ko
 @forward 'navside'; // 15 Ko
-@forward 'icon'; // 16 Ko
 @forward 'form'; // 25 Ko
 @forward 'tableFixed'; // 33 Ko
 @forward 'grid'; // 40 Ko
 @forward 'tableSticked'; // 67 Ko
+
+@forward 'communicationBanner'; //

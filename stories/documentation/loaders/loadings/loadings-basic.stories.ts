@@ -13,23 +13,23 @@ export default {
 		label: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		block: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
-		 big: {
+		big: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		invert: {
-		 control: {
-			 type: 'boolean',
-		 }
-	 },
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
@@ -40,20 +40,21 @@ function getTemplate(args: LoadingsBasicStory): string {
 	const invert = args.invert ? `mod-invert` : '';
 	return `
 	<div class="loading ${block} ${big} ${invert}">${label}</div>
-	`
+	`;
 }
 
 const Template: Story<LoadingsBasicStory> = (args: LoadingsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
 			min-height: 100px;
+			margin: -1rem;
+			padding: 1rem;
 		}`,
-		args.invert === true
-			? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }'
-			: ''
+		args.invert === true ? ':host { background-color: #333333 }' : '',
 	],
 });
 

@@ -7,10 +7,6 @@
 	&.mod-outline,
 	&.mod-outlined {
 		@include outlined;
-
-		&.mod-white {
-			@include outlinedWhite;
-		}
 	}
 
 	&.mod-link {
@@ -58,7 +54,7 @@
 		@include more;
 	}
 
-	&:is(.loading) {
+	&:is(.loading, .is-loading) {
 		@include loading;
 
 		&.mod-small {

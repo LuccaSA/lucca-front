@@ -13,7 +13,7 @@ export default {
 	title: 'Documentation/Actions/Button/Basic',
 	argTypes: {
 		mod: {
-			options: ['', 'mod-outlined', 'mod-link', 'mod-link mod-invert'],
+			options: ['', 'mod-outlined', 'mod-link', 'mod-link mod-invert', 'mod-icon'],
 			control: {
 				type: 'radio',
 			},
@@ -50,7 +50,10 @@ function getTemplate(args: ButtonBasicStory): string {
 	const noFlexWrap = args.noFlexWrap ? `u-flexWrapNowrap` : '';
 
 	return `
-	<button class="button ${classes}" ${attributes}>Bouton</button>
+	<button type="button" class="button ${classes}" ${attributes}>
+		<span *ngIf="mod === 'mod-icon'" class="lucca-icon icon-star button-icon" aria-hidden="true"></span>
+		Bouton
+	</button>
 
 	<ul class="button-group ${classes} ${noFlexWrap}">
 		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
@@ -70,9 +73,10 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
-		`
-		:host {
+		`:host {
 			display: block;
+			margin: -1rem;
+			padding: 1rem;
 		}
 		.button:first-of-type {
 			display: block;
@@ -80,7 +84,7 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
-		args.mod === 'mod-link mod-invert' ? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }' : '',
+		args.mod === 'mod-link mod-invert' ? ':host { background-color: #333333 }' : '',
 	],
 });
 

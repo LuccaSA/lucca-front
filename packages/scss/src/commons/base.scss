@@ -54,7 +54,6 @@ html {
 
 	--palettes-grey-900-rbg: 19, 29, 53;
 
-	font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	height: -webkit-fill-available;
 }
 
@@ -62,6 +61,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	background-color: var(--commons-background-base);
+	color: var(--colors-text-default-color);
+	font-family: var(--commons-font-family);
+	font-size: var(--sizes-standard-font-size);
+	line-height: var(--sizes-standard-line-height);
 
 	@supports (-webkit-touch-callout: none) {
 		min-height: -webkit-fill-available;

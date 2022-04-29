@@ -11,7 +11,7 @@ export default {
 			options: ['', 'mod-grey'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -29,19 +29,20 @@ function getTemplate(args: BoxKillableStory): string {
 	    </div>
 	    Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
 	</div>
-	`
+	`;
 }
 
 const Template: Story<BoxKillableStory> = (args: BoxKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
+			margin: -1rem;
+			padding: 1rem;
 		}`,
-		args.mod === ''
-			? ':host { background-color: #F3F5FC; margin: -30px -20px; padding: 30px 20px; }'
-			: ''
+		args.mod === '' ? ':host { background-color: #F3F5FC }' : '',
 	],
 });
 
