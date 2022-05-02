@@ -7,7 +7,6 @@
 @use '../title/exports' as title;
 
 @include core.classes('min-width', core.$contents);
-@include core.classes('display', core.$displays);
 @include core.classes('flex-direction', core.$direction);
 @include core.classes('flex-wrap', core.$wrap);
 @include core.classes('justify-content', core.$justify);
@@ -20,6 +19,28 @@
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);
+@include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('white-space', core.$whiteSpace);
+@include core.classes('vertical-align', core.$verticalAlign);
+@include core.classes('float', core.$float);
+@include core.classes('position', core.$position);
+@include core.classes('display', core.$displays);
+
+@media only print {
+	@include core.classes('display', core.$displays, $prefix: config.$prefix + 'onlyPrint');
+}
+
+@each $display in core.$displays {
+	@if $display != 'none' {
+		.#{config.$prefix}onlyPrintDisplay#{core.capitalize($display)} {
+			display: none;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@include core.classes('scroll-behavior', core.$scrollBehavior);
+}
 
 @include core.spacings;
 @include core.sizes;
@@ -114,4 +135,34 @@
 
 .#{config.$prefix}h6 {
 	@include title.h6;
+}
+
+.#{config.$prefix}ellipsis {
+	@include text.ellipsis;
+}
+
+.#{config.$prefix}unit {
+	font-size: 0.66em !important;
+}
+
+.#{config.$prefix}comma {
+	&:not(:last-child) {
+		&::after {
+			content: ', ' !important;
+		}
+	}
+}
+
+@each $direction in core.$boxDirection {
+	@if $direction == '' {
+		.#{config.$prefix}insetReset,
+		.#{config.$prefix}inset0 {
+			inset: 0 !important;
+		}
+	} @else {
+		.#{config.$prefix}#{$direction}Reset,
+		.#{config.$prefix}#{$direction}0 {
+			#{$direction}: 0 !important;
+		}
+	}
 }
