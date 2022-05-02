@@ -30,7 +30,7 @@
 
 	&:checked ~ .checkbox-label {
 		&::before {
-			color: white;
+			color: _color('white');
 			background-color: _component('checkbox.default-palette.700');
 			border: 2px solid _component('checkbox.default-palette.700');
 		}
@@ -150,7 +150,7 @@
 		.checkbox-input {
 			&:checked ~ .checkbox-label {
 				&::before {
-					color: white;
+					color: _color('white');
 					background-color: _color('grey', 700);
 					border: 2px solid _color('grey', 700);
 				}
