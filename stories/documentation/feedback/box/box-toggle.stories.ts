@@ -11,7 +11,7 @@ export default {
 			options: ['', 'mod-grey'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -24,22 +24,23 @@ function getTemplate(args: BoxToggleStory): string {
 	    <input class="switch-input" type="checkbox" id="boxSwitch" checked disabled>
 	    <label class="switch-label" for="boxSwitch">Switch</label>
 	</div>
-	<div class="box ${classes}">
+	<div class="box mod-toggle ${classes}">
 	    Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
 	</div>
-	`
+	`;
 }
 
 const Template: Story<BoxToggleStory> = (args: BoxToggleStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
+			margin: -1rem;
+			padding: 1rem;
 		}`,
-		args.mod === ''
-			? ':host { background-color: #F3F5FC; margin: -30px -20px; padding: 30px 20px; }'
-			: ''
+		args.mod === '' ? ':host { background-color: #F3F5FC }' : '',
 	],
 });
 

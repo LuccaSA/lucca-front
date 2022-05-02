@@ -1,15 +1,15 @@
 @use 'exports' as *;
 
-.breadcrumb {
+.breadcrumbs {
 	@include vars;
 	@include component;
-}
 
-.breadcrumbs-list-item-action {
 	&.mod-compact {
 		@include compact;
 	}
+}
 
+.breadcrumbs-list-item-action {
 	&:is(.is-active, [aria-current='page']) {
 		@include active;
 	}

@@ -21,16 +21,21 @@
 }
 
 @mixin loading {
-	@include loading.spinner(var(--components-button-font-size));
-
 	opacity: var(--commons-disabled-opacity);
-	color: transparent !important;
-	pointer-events: none;
-	user-select: none;
+
+	&:not(.mod-more) {
+		@include loading.spinner(var(--components-button-font-size));
+
+		color: transparent !important;
+		pointer-events: none;
+		user-select: none;
+	}
 }
 
 @mixin loadingSmall {
-	@include loading.spinner(var(--components-button-small-font-size));
+	&:not(.mod-more) {
+		@include loading.spinner(var(--components-button-small-font-size));
+	}
 }
 
 @mixin state {
@@ -75,18 +80,24 @@
 
 @mixin success {
 	@include core.cssvars('palettes', config.$success);
-	@include state;
 
-	&::after {
-		@include icon.makeIcon('tick');
+	&:not(.mod-more) {
+		@include state;
+
+		&::after {
+			@include icon.makeIcon('tick');
+		}
 	}
 }
 
 @mixin error {
 	@include core.cssvars('palettes', config.$error);
-	@include state;
 
-	&::after {
-		@include icon.makeIcon('cross');
+	&:not(.mod-more) {
+		@include state;
+
+		&::after {
+			@include icon.makeIcon('cross');
+		}
 	}
 }

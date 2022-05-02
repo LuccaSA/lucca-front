@@ -8,9 +8,12 @@
 
 @mixin clickable {
 	cursor: pointer;
+	display: inline-block;
+	text-decoration: none;
 
 	&:hover,
 	&:focus {
+		color: var(--colors-white-color);
 		background-color: var(--palettes-primary-600);
 	}
 

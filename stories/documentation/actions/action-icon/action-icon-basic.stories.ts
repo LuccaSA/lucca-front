@@ -14,18 +14,18 @@ export default {
 			options: ['', 'mod-invert'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 		loading: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -40,19 +40,20 @@ function getTemplate(args: ActionBasicStory): string {
 		<span aria-hidden="true" class="lucca-icon icon-edit"></span>
 		<span class="u-mask">Modifier</span>
 	</button>
-	`
+	`;
 }
 
 const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
+			margin: -1rem;
+			padding: 1rem;
 		}`,
-		args.mod === 'mod-invert'
-			? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }'
-			: ''
+		args.mod === 'mod-invert' ? ':host { background-color: #333333 }' : '',
 	],
 });
 

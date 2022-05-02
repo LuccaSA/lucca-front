@@ -11,7 +11,7 @@ export default {
 			options: ['', 'mod-grey'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -25,19 +25,20 @@ function getTemplate(args: TableOfContentBasicStory): string {
 		<a class="tableOfContent-item">Section 3</a>
 		<a class="tableOfContent-item">Section 4</a>
 	</nav>
-	`
+	`;
 }
 
 const Template: Story<TableOfContentBasicStory> = (args: TableOfContentBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
+			margin: -1rem;
+			padding: 1rem;
 		}`,
-		args.mod === ''
-			? ':host { background-color: #F3F5FC; margin: -30px -20px; padding: 30px 20px; }'
-			: ''
+		args.mod === '' ? ':host { background-color: #F3F5FC }' : '',
 	],
 });
 

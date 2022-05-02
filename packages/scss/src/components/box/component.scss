@@ -5,4 +5,14 @@
 	background-color: var(--colors-white-color);
 	display: block;
 	position: relative;
+
+	@at-root {
+		.box-close {
+			position: absolute;
+			font-size: 1rem;
+			right: 0.25rem;
+			top: 0.25rem;
+			z-index: 1;
+		}
+	}
 }

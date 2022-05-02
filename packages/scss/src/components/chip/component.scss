@@ -27,6 +27,9 @@
 			width: 1rem;
 			transition-duration: 150ms;
 			transition-property: background-color;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			margin: auto;
 			position: absolute;
 			cursor: pointer;
