@@ -93,6 +93,7 @@
 	&:active {
 		&::before {
 			border-color: _component('checkbox.default-palette.800');
+			box-shadow: 0 0 0 4px _component('checkbox.default-palette.300');
 		}
 	}
 }
@@ -168,6 +169,7 @@
 					&::before {
 						background-color: _color('grey', 800);
 						border-color: _color('grey', 800);
+						box-shadow: 0 0 0 4px _color('grey', 300);
 					}
 				}
 			}
@@ -189,6 +191,7 @@
 			&:active {
 				&::before {
 					border-color: _color('grey', 800);
+					box-shadow: 0 0 0 4px _color('grey', 300);
 				}
 			}
 		}
@@ -207,6 +210,7 @@
 
 			&::before {
 				border: 2px solid _color('grey', 500);
+				box-shadow: none;
 			}
 		}
 
