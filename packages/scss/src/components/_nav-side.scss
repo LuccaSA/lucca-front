@@ -116,8 +116,12 @@
 	background-color: transparent;
 	cursor: pointer;
 
-	&:focus-visible,
 	&:hover {
+		background-color: _component("navSide.fullwidth-palette.hovered-bg");
+		color: _component("navSide.fullwidth-palette.hovered-text");
+	}
+
+	&:focus-visible {
 		background-color: _component("navSide.fullwidth-palette.hovered-bg");
 		color: _component("navSide.fullwidth-palette.hovered-text");
 	}
@@ -240,7 +244,7 @@
 	color: _component("navSide.fullwidth-palette.selected-text");
 	opacity: 1;
 
-	
+
 }
 
 .navSide-item-subMenu-link.is-active,
@@ -399,12 +403,12 @@
 		width: 100%;
 		bottom: auto;
 
-		
+
 		.navSide-mainSection, .navSide-scrollWrapper {
 			width: 100%;
 			height: auto;
 		}
-		
+
 
 		&:not(.is-open) {
 			.navSide-item {
@@ -432,7 +436,7 @@
 
 		.navSide-item-link {
 			border-radius: 0;
-	
+
 			&:focus-visible {
 				box-shadow: 0 0 0 2px _component("navSide.fullwidth-palette.selected-text") inset;
 			}

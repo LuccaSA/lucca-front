@@ -4,7 +4,7 @@ import { LuPopoverModule } from '@lucca-front/ng/popover';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
-	selector: 'popover-stories',
+	selector: 'popover-story',
 	template: `
 		<button type="button" class="button mod-outline">don't click me</button>
 		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position" [luPopoverAlignment]="alignement" [luPopoverTrigger]="trigger">{{ trigger }} me</button>
@@ -43,6 +43,7 @@ export default {
 		},
 	},
 	decorators: [
+		componentWrapperDecorator(PopoverStory),
 		moduleMetadata({
 			entryComponents: [PopoverStory],
 			imports: [LuPopoverModule, BrowserAnimationsModule],

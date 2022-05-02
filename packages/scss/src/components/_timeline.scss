@@ -94,13 +94,20 @@
 }
 
 .timeline-step-title-action {
+	@include buttonReset;
 	color: currentColor;
+	cursor: default;
+	display: inline-block;
 	text-decoration: none;
+	width: auto;
 
-	&:hover,
-	&:focus {
-		color: currentColor;
-		text-decoration: underline;
+	&:not([disabled]) {
+		&:hover,
+		&:focus {
+			color: currentColor;
+			cursor: pointer;
+			text-decoration: underline;
+		}
 	}
 }
 

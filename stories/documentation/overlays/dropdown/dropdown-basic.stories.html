@@ -1,0 +1,15 @@
+<button class="button" [luDropdown]="dropdown">Open dropdown</button>
+<lu-dropdown #dropdown>
+	<li class="lu-dropdown-options-item">
+		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action is-disabled" luDropdownItem>Link 1</a>
+	</li>
+	<li class="lu-dropdown-options-item">
+		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>Link 2</a>
+	</li>
+	<li class="lu-dropdown-options-item">
+		<a routerLink="." fragment="link3" class="lu-dropdown-options-item-action" luDropdownItem>Link 3</a>
+	</li>
+	<li class="lu-dropdown-options-item">
+		<button class="lu-dropdown-options-item-action" luDropdownItem>Button 4</button>
+	</li>
+</lu-dropdown>

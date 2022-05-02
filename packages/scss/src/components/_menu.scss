@@ -31,11 +31,6 @@
 	flex-wrap: wrap;
 }
 
-.menu-link {
-	// legacy syntax
-	margin-right: _theme('spacings.big'); // magic number
-}
-
 .menu-link, // legacy syntax
 .menu-list-item-action {
 	@include buttonReset;

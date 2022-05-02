@@ -22,7 +22,9 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 
 	protected _sort: string;
 	set sort(sort: string) {
-		this._sort = `sort=${sort}`;
+		if (sort) {
+			this._sort = `sort=${sort}`;
+		}
 	}
 
 	constructor(protected _http: HttpClient) {
