@@ -153,6 +153,7 @@
 			margin-top: _theme('spacings.smaller');
 			display: block;
 			position: relative;
+			width: 100%;
 
 			//line
 			&:not(:last-child)::after {
