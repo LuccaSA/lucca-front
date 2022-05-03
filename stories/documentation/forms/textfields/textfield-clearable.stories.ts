@@ -1,30 +1,32 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldClearableStory {}
+interface TextfieldClearableStory {}
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Clearable',
+	title: 'Documentation/Forms/Textfield/Clearable',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextifeldClearableStory): string {
+function getTemplate(args: TextfieldClearableStory): string {
 	return `
 	<label class="textfield mod-clearable">
 		<input class="textfield-input" type="text" placeholder="placeholder">
 		<span class="textfield-label">Label textfield</span>
 		<a href="#" role="button" class="actionIcon textfield-actionClear"><span aria-hidden="true" class="lucca-icon icon-cross"></span></a>
 	</label>
-	`
+	`;
 }
 
-const Template: Story<TextifeldClearableStory> = (args: TextifeldClearableStory) => ({
+const Template: Story<TextfieldClearableStory> = (args: TextfieldClearableStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const Clearable = Template.bind({});
