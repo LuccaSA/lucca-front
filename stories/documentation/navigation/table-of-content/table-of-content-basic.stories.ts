@@ -36,7 +36,7 @@ const Template: Story<TableOfContentBasicStory> = (args: TableOfContentBasicStor
 			display: block;
 		}`,
 		args.mod === ''
-			? ':host { background-color: #F3F5FC; margin: -30px -20px; padding: 30px 20px; }'
+			? ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }'
 			: ''
 	],
 });
