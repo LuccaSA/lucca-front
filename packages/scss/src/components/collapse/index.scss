@@ -8,7 +8,7 @@
 		@include close;
 	}
 
-	&:is(.is-open, [open]) {
+	&:is(.is-open, .open, [open]) {
 		@include open;
 	}
 }

@@ -26,7 +26,7 @@
 }
 
 .main {
-	&:is(.is-notScrollable) {
+	&:is(.is-notScrollable, .notScrollable) {
 		@include notScrollable;
 	}
 }

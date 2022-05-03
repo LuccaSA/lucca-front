@@ -16,11 +16,11 @@
 // legacy syntax
 .menu-link,
 .menu-list-item-action {
-	&:is(.is-active, [aria-current='page']) {
+	&:is(.is-active, .active, [aria-current='page']) {
 		@include active;
 	}
 
-	&:is(.is-disabled) {
+	&:is(.is-disabled, .disabled) {
 		@include disabled;
 	}
 }

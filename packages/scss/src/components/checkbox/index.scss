@@ -20,24 +20,24 @@
 		@include noLabel;
 	}
 
-	&:is(.is-required) {
+	&:is(.is-required, .required) {
 		@include required;
 	}
 
-	&:is(.is-error) {
+	&:is(.is-error, .error) {
 		@include state('error');
 	}
 
-	&:is(.is-warning) {
+	&:is(.is-warning, .warning) {
 		@include state('warning');
 	}
 
-	&:is(.is-success) {
+	&:is(.is-success, .success) {
 		@include state('success');
 	}
 
 	.checkbox-input {
-		&:is(.is-incomplete) {
+		&:is(.is-incomplete, .incomplete) {
 			@include incomplete;
 		}
 

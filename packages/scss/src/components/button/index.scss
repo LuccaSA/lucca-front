@@ -62,15 +62,15 @@
 		}
 	}
 
-	&:is(.is-error) {
+	&:is(.is-error, .error) {
 		@include error;
 	}
 
-	&:is(.is-success) {
+	&:is(.is-success, .success) {
 		@include success;
 	}
 
-	&:is(.is-disabled, [disabled]) {
+	&:is(.is-disabled, .disabled, [disabled]) {
 		@include disabled;
 
 		&.mod-outlined,

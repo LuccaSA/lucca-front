@@ -29,7 +29,7 @@
 .radiosfield-label,
 .checkboxesfield-label,
 .textfield-label {
-	&:is(.is-required) {
+	&:is(.is-required, .required) {
 		@include required;
 	}
 }
