@@ -6,7 +6,6 @@ interface ButtonBasicStory {
 	state: string;
 	size: string;
 	disabled: boolean;
-	noFlexWrap: boolean;
 }
 
 export default {
@@ -21,7 +20,7 @@ export default {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		state: {
@@ -36,33 +35,15 @@ export default {
 				type: 'radio',
 			},
 		},
-		noFlexWrap: {
-			control: {
-				type: 'boolean',
-			},
-		},
 	},
 } as Meta;
 
 function getTemplate(args: ButtonBasicStory): string {
 	const classes = [args.mod, args.state, args.palette, args.size].filter(Boolean).join(' ');
 	const attributes = args.disabled ? `disabled="disabled"` : '';
-	const noFlexWrap = args.noFlexWrap ? `u-flexWrapNowrap` : '';
 
 	return `
 	<button class="button ${classes}" ${attributes}>Bouton</button>
-
-	<ul class="button-group ${classes} ${noFlexWrap}">
-		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
-		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
-		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
-		<li class="button-group-item">
-			<button type="button" class="button ${classes} mod-more" ${attributes}>
-				<span class="lucca-icon icon-chevronSouth" aria-hidden="true"></span>
-				<span class="u-mask">Plus d'actions</span>
-			</button>
-		</li>
-	</ul>
 	`;
 }
 
@@ -80,9 +61,9 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
-		args.mod === 'mod-link mod-invert' ? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }' : '',
+		args.mod === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '', size: '', state: '', palette: '', disabled: false, noFlexWrap: false };
+Basic.args = { mod: '', size: '', state: '', palette: '', disabled: false };

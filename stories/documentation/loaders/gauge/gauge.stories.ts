@@ -11,7 +11,7 @@ export default {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			}
 		},
 		thin: {

@@ -51,7 +51,7 @@ const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 			display: block;
 		}`,
 		args.mod === 'mod-invert'
-			? ':host { background-color: #333333; margin: -30px -20px; padding: 30px 20px; }'
+			? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }'
 			: ''
 	],
 });
