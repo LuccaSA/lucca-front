@@ -19,6 +19,12 @@ $order: '-1', '1';
 $textAlign: 'left', 'center', 'right';
 $visibility: 'visible', 'hidden', 'collapse';
 $fontWeight: '400', '600';
+$pointerEvents: 'none', 'auto';
+$scrollBehavior: 'auto', 'smooth';
+$whiteSpace: 'normal', 'nowrap';
+$float: 'left', 'right';
+$verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
+$position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 
 $palettes: 'primary', 'secondary', 'grey', 'success', 'warning', 'error';
 $states: 'error,' 'warning', 'success';
@@ -54,8 +60,14 @@ $states: 'error,' 'warning', 'success';
 
 @mixin classes($name, $properties, $suffix: '!important', $prefix: config.$prefix) {
 	@each $property in $properties {
-		.#{$prefix}#{camelize($name)}#{capitalize(camelize($property))} {
-			#{$name}: #{$property} #{$suffix};
+		@if $prefix == config.$prefix {
+			.#{$prefix}#{camelize($name)}#{capitalize(camelize($property))} {
+				#{$name}: #{$property} #{$suffix};
+			}
+		} @else {
+			.#{$prefix}#{capitalize(camelize($name))}#{capitalize(camelize($property))} {
+				#{$name}: #{$property} #{$suffix};
+			}
 		}
 	}
 }
@@ -108,7 +120,7 @@ $states: 'error,' 'warning', 'success';
 @mixin borderRadius($suffix: '!important') {
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
-			.u-border#{capitalize(camelize($corner))}Radius#{capitalize($key)} {
+			.#{config.$prefix}border#{capitalize(camelize($corner))}Radius#{capitalize($key)} {
 				border-#{$corner}radius: $value;
 			}
 		}
