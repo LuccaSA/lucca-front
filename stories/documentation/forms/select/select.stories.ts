@@ -9,7 +9,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'select-stories',
 	template: `
-		<label class="textfield">
+	<div class="u-displayFlex">
+		<label class="textfield u-marginRightSmall">
 			<lu-select class="textfield-input" placeholder="Select an item">
 				<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 				<lu-option-picker>
@@ -20,7 +21,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 			</lu-select>
 			<span class="textfield-label">Select</span>
 		</label>
-		<label class="textfield">
+		<label class="textfield u-marginRightSmall">
 			<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
 				<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 				<lu-option-picker>
@@ -31,7 +32,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 			</lu-select>
 			<span class="textfield-label">Multiple Select</span>
 		</label>
-		<label class="textfield">
+		<label class="textfield u-marginRightSmall">
 			<lu-select [(ngModel)]="item" class="textfield-input">
 				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 				<lu-option-picker>
@@ -59,6 +60,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 			</lu-select>
 			<span class="textfield-label">Disabled field</span>
 		</label>
+	</div>
 	`,
 })
 class SelectStory {
