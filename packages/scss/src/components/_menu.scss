@@ -42,6 +42,7 @@
 	transition: color _component('menu.animations.durations.fast') ease;
 	text-align: center;
 	display: block;
+	width: auto;
 
 	&::after {
 		background-color: _component('menu.default-palette.700');
