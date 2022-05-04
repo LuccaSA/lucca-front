@@ -6,6 +6,7 @@ import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 
 export type PageTitle = { title: string; params: { [param: string]: string } };
+export const TitleSeparator = ' – ';
 
 @Injectable()
 export class TitleService {
@@ -23,7 +24,7 @@ export class TitleService {
 				map((event: ActivationEnd) => getPageTitleParts(event.snapshot)),
 				map((titleParts) => uniqTitle(titleParts)),
 				map((titleParts) => titleParts.filter(({ title }) => title !== '').map(({ title, params }) => this.translateService.translate(title, params))),
-				map((titles: Array<string>) => [...titles, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x).join(' – ')),
+				map((titles: Array<string>) => [...titles, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x).join(TitleSeparator)),
 				distinctUntilChanged(),
 				tap((title) => this.titleSubject.next(title)),
 			)
@@ -33,7 +34,7 @@ export class TitleService {
 	}
 
 	prependTitle(title: string) {
-		this.titleSubject.next(`${title} – ${this.titleSubject.value}`);
+		this.titleSubject.next(`${title}${TitleSeparator}${this.titleSubject.value}`);
 	}
 }
 

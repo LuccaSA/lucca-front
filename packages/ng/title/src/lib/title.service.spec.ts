@@ -4,15 +4,13 @@ import { Title } from '@angular/platform-browser';
 import { createRoutingFactory, mockProvider, SpectatorRouting } from '@ngneat/spectator/jest';
 import { skip } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
-import { TitleService } from './title.service';
+import { TitleSeparator, TitleService } from './title.service';
 
 class TranslateService implements ILuTitleTranslateService {
 	translate(key: string, _args?: { [arg: string]: unknown }): string {
 		return key;
 	}
 }
-
-const translationKey = 'Home';
 
 @Component({
 	selector: 'lu-app',
@@ -101,11 +99,11 @@ describe('TitleService', () => {
 
 		spectator.click('.link-2');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual('Stub – BU – Lucca');
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stubs' child – Stub – BU – Lucca`);
+		expect(resultTitle).toEqual(`Stubs' child${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('prepend', async () => {
@@ -118,6 +116,6 @@ describe('TitleService', () => {
 
 		spectator.click('.link-4');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overridden title – Stubs' child – Stub – BU – Lucca`);
+		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 });
