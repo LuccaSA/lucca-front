@@ -3,18 +3,12 @@ import { ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator/jest';
 import { of } from 'rxjs';
-import { ILuTitleTranslateService } from './title-translate.service';
-import { TitleService, TITLE_TRANSLATE_SERVICE } from './title.service';
+import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
+import { TitleService } from './title.service';
 
 class TranslateService implements ILuTitleTranslateService {
-	translate(key: string, args?: { [arg: string]: unknown }): string {
+	translate(key: string, _args?: { [arg: string]: unknown }): string {
 		return key;
-	}
-	getAvailableLangs(): string[] {
-		return [];
-	}
-	setActiveLang(lang: string): void {
-		return;
 	}
 }
 
@@ -35,7 +29,7 @@ describe('TitleService', () => {
 			}),
 			mockProvider(Title),
 			{
-				provide: TITLE_TRANSLATE_SERVICE,
+				provide: LU_TITLE_TRANSLATE_SERVICE,
 				useClass: TranslateService,
 			},
 		],
