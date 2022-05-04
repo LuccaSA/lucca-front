@@ -93,6 +93,10 @@
 @mixin calloutDefaultPalette($palette) {
 	background-color: _color($palette, 100);
 	border: _theme('commons.divider.width') solid _color($palette, 200);
+
+	.callout-icon {
+		color: _color($palette, 700)
+	}
 }
 .callout {
 	@each $name, $palette in _getMap('palettes') {
