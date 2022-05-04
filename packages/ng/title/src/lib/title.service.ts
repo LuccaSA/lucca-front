@@ -1,20 +1,18 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { ILuTitleTranslateService } from './title-translate.service';
+import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 
 export type PageTitle = { title: string; params: { [param: string]: string } };
-
-export const TITLE_TRANSLATE_SERVICE = new InjectionToken<ILuTitleTranslateService>('TITLE_TRANSLATE_SERVICE');
 
 @Injectable()
 export class TitleService {
 	private titleSubject = new BehaviorSubject<string>('');
 	title$ = this.titleSubject.asObservable();
 
-	constructor(private router: Router, private title: Title, @Inject(TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
+	constructor(private router: Router, private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
 
 	init(applicationNameTranslationKey: string) {
 		this.router.events
