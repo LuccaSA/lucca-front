@@ -9,105 +9,56 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'select-stories',
 	template: `
-		<section class="section">
-			<label class="textfield">
-				<lu-select class="textfield-input" placeholder="Select an item">
-					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
-					<lu-option-picker>
-						<lu-option [value]="1">1</lu-option>
-						<lu-option [value]="2">2</lu-option>
-						<lu-option [value]="3">3</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">normal</span>
-			</label>
-			<label class="textfield">
-				<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
-					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
-					<lu-option-picker>
-						<lu-option [value]="1">1</lu-option>
-						<lu-option [value]="2">2</lu-option>
-						<lu-option [value]="3">3</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">multiple</span>
-			</label>
-		</section>
-
-		<section class="section">
-			<label class="textfield">
-				<lu-select [(ngModel)]="item" class="textfield-input">
-					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
-					<lu-option-picker>
-						<lu-option [value]="green">{{ green.name }}</lu-option>
-						<lu-option [value]="red">{{ red.name }}</lu-option>
-						<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
-						<lu-option [value]="blue">{{ blue.name }}</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">normal</span>
-			</label>
-
-			<label class="textfield">
-				<lu-select [(ngModel)]="item" class="textfield-input">
-					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
-					<lu-option-picker>
-						<lu-option [disabled]="true" [value]="green">{{ green.name }}</lu-option>
-						<lu-option [disabled]="true" [value]="red">{{ red.name }}</lu-option>
-						<lu-option [disabled]="true" [value]="yellow">{{ yellow.name }}</lu-option>
-						<lu-option [disabled]="true" [value]="blue">{{ blue.name }}</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">every option disabled</span>
-			</label>
-
-			<label class="textfield">
-				<lu-select [(ngModel)]="item" class="textfield-input">
-					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
-					<lu-option-picker>
-						<lu-option [value]="green" [disabled]="true">{{ green.name }}</lu-option>
-						<lu-option [value]="red">{{ red.name }}</lu-option>
-						<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
-						<lu-option [value]="blue">{{ blue.name }}</lu-option>
-						<lu-option [value]="purple">{{ purple.name }}</lu-option>
-						<lu-option [value]="orange">{{ orange.name }}</lu-option>
-						<lu-option [value]="cyan">{{ cyan.name }}</lu-option>
-						<lu-option [value]="grey" [disabled]="true">{{ grey.name }}</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">first & last options disabled</span>
-			</label>
-
-			<label class="textfield">
-				<lu-select [(ngModel)]="item" class="textfield-input">
-					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
-					<lu-option-picker>
-						<lu-option [value]="green">{{ green.name }}</lu-option>
-						<lu-option [value]="red">{{ red.name }}</lu-option>
-						<lu-option [value]="yellow" [disabled]="true">{{ yellow.name }}</lu-option>
-						<lu-option [value]="blue" [disabled]="true">{{ blue.name }}</lu-option>
-						<lu-option [value]="purple">{{ purple.name }}</lu-option>
-						<lu-option [value]="orange">{{ orange.name }}</lu-option>
-						<lu-option [value]="cyan" [disabled]="true">{{ cyan.name }}</lu-option>
-						<lu-option [value]="grey">{{ grey.name }}</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">random options disabled</span>
-			</label>
-
-			<label class="textfield">
-				<lu-select [(ngModel)]="item" class="textfield-input" [disabled]="true">
-					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
-					<lu-option-picker>
-						<lu-option [value]="green">{{ green.name }}</lu-option>
-						<lu-option [value]="red">{{ red.name }}</lu-option>
-						<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
-						<lu-option [value]="blue">{{ blue.name }}</lu-option>
-					</lu-option-picker>
-				</lu-select>
-				<span class="textfield-label">select disabled</span>
-			</label>
-		</section>
+		<label class="textfield">
+			<lu-select class="textfield-input" placeholder="Select an item">
+				<ng-container *luDisplayer="let value">{{ value }}</ng-container>
+				<lu-option-picker>
+					<lu-option [value]="1">1</lu-option>
+					<lu-option [value]="2">2</lu-option>
+					<lu-option [value]="3">3</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<span class="textfield-label">Select</span>
+		</label>
+		<label class="textfield">
+			<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
+				<ng-container *luDisplayer="let value">{{ value }}</ng-container>
+				<lu-option-picker>
+					<lu-option [value]="1">1</lu-option>
+					<lu-option [value]="2">2</lu-option>
+					<lu-option [value]="3">3</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<span class="textfield-label">Multiple Select</span>
+		</label>
+		<label class="textfield">
+			<lu-select [(ngModel)]="item" class="textfield-input">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+				<lu-option-picker>
+					<lu-option [value]="green">{{ green.name }}</lu-option>
+					<lu-option [value]="red">{{ red.name }}</lu-option>
+					<lu-option [value]="yellow" [disabled]="true">{{ yellow.name }}</lu-option>
+					<lu-option [value]="blue" [disabled]="true">{{ blue.name }}</lu-option>
+					<lu-option [value]="purple">{{ purple.name }}</lu-option>
+					<lu-option [value]="orange">{{ orange.name }}</lu-option>
+					<lu-option [value]="cyan" [disabled]="true">{{ cyan.name }}</lu-option>
+					<lu-option [value]="grey">{{ grey.name }}</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<span class="textfield-label">Disabled options</span>
+		</label>
+		<label class="textfield">
+			<lu-select [(ngModel)]="item" class="textfield-input" [disabled]="true">
+				<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+				<lu-option-picker>
+					<lu-option [value]="green">{{ green.name }}</lu-option>
+					<lu-option [value]="red">{{ red.name }}</lu-option>
+					<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
+					<lu-option [value]="blue">{{ blue.name }}</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<span class="textfield-label">Disabled field</span>
+		</label>
 	`,
 })
 class SelectStory {
@@ -158,41 +109,37 @@ class SelectStoriesModule {}
 @Component({
 	selector: 'select-story',
 	template: \`
-		<section class="section">
-			<label class="textfield">
-				<lu-select class="textfield-input" placeholder="Select an item">
-					<span *luDisplayer="let value">{{ value }}</span>
-					<lu-option-picker>
-						<lu-option [value]="1">1</lu-option>
-						<lu-option [value]="2">2</lu-option>
-						<lu-option [value]="3">3</lu-option>
-					</lu-option-picker>
-				</lu-select>
-			</label>
-			<label class="textfield">
-				<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
-					<span *luDisplayer="let value">{{ value }}</span>
-					<lu-option-picker>
-						<lu-option [value]="1">1</lu-option>
-						<lu-option [value]="2">2</lu-option>
-						<lu-option [value]="3">3</lu-option>
-					</lu-option-picker>
-				</lu-select>
-			</label>
-		</section>
-		<section class="section">
-			<label class="textfield">
-				<lu-select class="textfield-input">
-					<h4 class="u-marginReset" *luDisplayer="let value">{{ value.id }} - {{ value.name }}</h4>
-					<lu-option-picker>
-						<lu-option [value]="green">{{ green.name }}</lu-option>
-						<lu-option [value]="red">{{ red.name }}</lu-option>
-						<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
-						<lu-option [value]="blue">{{ blue.name }}</lu-option>
-					</lu-option-picker>
-				</lu-select>
-			</label>
-		</section>
+		<label class="textfield">
+			<lu-select class="textfield-input" placeholder="Select an item">
+				<span *luDisplayer="let value">{{ value }}</span>
+				<lu-option-picker>
+					<lu-option [value]="1">1</lu-option>
+					<lu-option [value]="2">2</lu-option>
+					<lu-option [value]="3">3</lu-option>
+				</lu-option-picker>
+			</lu-select>
+		</label>
+		<label class="textfield">
+			<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
+				<span *luDisplayer="let value">{{ value }}</span>
+				<lu-option-picker>
+					<lu-option [value]="1">1</lu-option>
+					<lu-option [value]="2">2</lu-option>
+					<lu-option [value]="3">3</lu-option>
+				</lu-option-picker>
+			</lu-select>
+		</label>
+		<label class="textfield">
+			<lu-select class="textfield-input">
+				<h4 class="u-marginReset" *luDisplayer="let value">{{ value.id }} - {{ value.name }}</h4>
+				<lu-option-picker>
+					<lu-option [value]="green">{{ green.name }}</lu-option>
+					<lu-option [value]="red">{{ red.name }}</lu-option>
+					<lu-option [value]="yellow">{{ yellow.name }}</lu-option>
+					<lu-option [value]="blue">{{ blue.name }}</lu-option>
+				</lu-option-picker>
+			</lu-select>
+		</label>
 	\`
 })
 class SelectStory { }`;
