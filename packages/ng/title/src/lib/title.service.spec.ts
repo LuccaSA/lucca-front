@@ -70,7 +70,6 @@ describe('TitleService', () => {
 				children: [
 					{
 						path: 'first',
-						data: { title: `` },
 						component: StubComponent,
 						children: [
 							{
@@ -98,20 +97,30 @@ describe('TitleService', () => {
 		let resultTitle = '';
 		spectator.inject(TitleService).title$.subscribe((title) => (resultTitle = title));
 
-		// wait for promises to resolve...
 		await spectator.fixture.whenStable();
 		expect(spectator.inject(Location).path()).toBe('/');
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+	});
+
+	it('should ignore empty or absent titles', async () => {
+		let resultTitle = '';
+		spectator.inject(TitleService).title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-2');
 		await spectator.fixture.whenStable();
 		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+	});
+
+	it('should include named params in title', async () => {
+		let resultTitle = '';
+		spectator.inject(TitleService).title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
 		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
-	it('prepend', async () => {
+	it('should prepend title when a component forces its own title', async () => {
 		let resultTitle = '';
 		spectator
 			.inject(TitleService)
