@@ -9,7 +9,7 @@ export type PageTitle = { title: string; params: { [param: string]: string } };
 
 @Injectable()
 export class TitleService {
-	private titleSubject = new BehaviorSubject<string>('');
+	private titleSubject = new BehaviorSubject<string>('Lucca');
 	title$ = this.titleSubject.asObservable();
 
 	constructor(private router: Router, private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
@@ -22,13 +22,18 @@ export class TitleService {
 				}),
 				map((event: ActivationEnd) => getPageTitleParts(event.snapshot)),
 				map((titleParts) => uniqTitle(titleParts)),
-				map((titleParts) => titleParts.map(({ title, params }) => this.translateService.translate(title, params))),
+				map((titleParts) => titleParts.filter(({ title }) => title !== '').map(({ title, params }) => this.translateService.translate(title, params))),
 				map((titles: Array<string>) => [...titles, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x).join(' – ')),
 				distinctUntilChanged(),
-				tap((title) => this.title.setTitle(title)),
 				tap((title) => this.titleSubject.next(title)),
 			)
 			.subscribe();
+
+		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
+	}
+
+	preprendTitle(title: string) {
+		this.titleSubject.next(`${title} – ${this.titleSubject.value}`);
 	}
 }
 
