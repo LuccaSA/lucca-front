@@ -7,7 +7,12 @@ import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-tr
 import { TitleSeparator, TitleService } from './title.service';
 
 class TranslateService implements ILuTitleTranslateService {
-	translate(key: string, _args?: { [arg: string]: unknown }): string {
+	translate(key: string, args: Record<string, unknown> = null): string {
+		if (args !== null) {
+			Object.entries(args).forEach(([argKey, value]) => {
+				key = key.replace(`{{${argKey}}}`, value as string);
+			});
+		}
 		return key;
 	}
 }
@@ -70,7 +75,7 @@ describe('TitleService', () => {
 						children: [
 							{
 								path: ':id',
-								data: { title: `Stubs' child` },
+								data: { title: `Stubs' child {{id}}` },
 								component: StubComponent,
 								children: [
 									{
@@ -103,7 +108,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stubs' child${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
 	it('prepend', async () => {
@@ -116,6 +121,6 @@ describe('TitleService', () => {
 
 		spectator.click('.link-4');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 });
