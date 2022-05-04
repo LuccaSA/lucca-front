@@ -15,7 +15,7 @@ import {
 	Output,
 	QueryList,
 	TemplateRef,
-	ViewChild
+	ViewChild,
 } from '@angular/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
@@ -151,28 +151,26 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	}
 	protected _incrHighlight() {
 		const nextIndex = this._options.findIndex((item, index) => index > this.highlightIndex && !item.disabled);
-		this.highlightIndex = nextIndex > -1 ? 
-			nextIndex :
-			this._options.findIndex(item => !item.disabled);
+		this.highlightIndex = nextIndex > -1 ? nextIndex : this._options.findIndex((item) => !item.disabled);
 	}
 	protected _decrHighlight() {
 		//NB: findLastIndex would be better but is not available on this project
 		let nextIndex = -1;
-		for(let i = this.highlightIndex -1; i >= 0; --i) {
-			if(!this._options[i].disabled) {
+		for (let i = this.highlightIndex - 1; i >= 0; --i) {
+			if (!this._options[i].disabled) {
 				nextIndex = i;
 				break;
 			}
 		}
 
-		if(nextIndex > -1) {
+		if (nextIndex > -1) {
 			this.highlightIndex = nextIndex;
 			return;
 		}
 
-		const optionsLength = this._options.length - 1
-		for(let i = optionsLength; i >= 0; --i) {
-			if(!this._options[i].disabled) {
+		const optionsLength = this._options.length - 1;
+		for (let i = optionsLength; i >= 0; --i) {
+			if (!this._options[i].disabled) {
 				nextIndex = i;
 				break;
 			}

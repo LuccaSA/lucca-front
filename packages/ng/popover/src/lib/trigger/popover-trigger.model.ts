@@ -8,7 +8,7 @@ import {
 	OverlayConfig,
 	OverlayConnectionPosition,
 	OverlayRef,
-	VerticalConnectionPos
+	VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { ElementRef, ViewContainerRef } from '@angular/core';
