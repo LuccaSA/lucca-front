@@ -32,7 +32,7 @@ export class TitleService {
 		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
 	}
 
-	preprendTitle(title: string) {
+	prependTitle(title: string) {
 		this.titleSubject.next(`${title} – ${this.titleSubject.value}`);
 	}
 }
