@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { createRoutingFactory, mockProvider, SpectatorRouting } from '@ngneat/spectator/jest';
 import { skip } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
-import { TitleSeparator, TitleService } from './title.service';
+import { LuTitleService, TitleSeparator } from './title.service';
 
 class TranslateService implements ILuTitleTranslateService {
 	translate(key: string, args: Record<string, unknown> = null): string {
@@ -25,7 +25,7 @@ class TranslateService implements ILuTitleTranslateService {
 		<a class="link-4" [routerLink]="['/first/1/last']">Stub</a> `,
 })
 export class AppComponent {
-	constructor(private titleService: TitleService) {
+	constructor(private titleService: LuTitleService) {
 		this.titleService.init('BU');
 	}
 }
@@ -41,7 +41,7 @@ export class StubComponent {}
 	template: `<div></div>`,
 })
 export class OverrideTitleComponent implements OnInit {
-	constructor(private titleService: TitleService) {}
+	constructor(private titleService: LuTitleService) {}
 	ngOnInit() {
 		this.titleService.prependTitle('Overridden title');
 	}
@@ -53,7 +53,7 @@ describe('TitleService', () => {
 	const createComponent = createRoutingFactory({
 		component: AppComponent,
 		providers: [
-			TitleService,
+			LuTitleService,
 			mockProvider(Title),
 			{
 				provide: LU_TITLE_TRANSLATE_SERVICE,
@@ -95,7 +95,7 @@ describe('TitleService', () => {
 
 	it('should set title', async () => {
 		let resultTitle = '';
-		spectator.inject(TitleService).title$.subscribe((title) => (resultTitle = title));
+		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
 		await spectator.fixture.whenStable();
 		expect(spectator.inject(Location).path()).toBe('/');
@@ -104,7 +104,7 @@ describe('TitleService', () => {
 
 	it('should ignore empty or absent titles', async () => {
 		let resultTitle = '';
-		spectator.inject(TitleService).title$.subscribe((title) => (resultTitle = title));
+		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-2');
 		await spectator.fixture.whenStable();
@@ -113,7 +113,7 @@ describe('TitleService', () => {
 
 	it('should include named params in title', async () => {
 		let resultTitle = '';
-		spectator.inject(TitleService).title$.subscribe((title) => (resultTitle = title));
+		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
@@ -123,7 +123,7 @@ describe('TitleService', () => {
 	it('should prepend title when a component forces its own title', async () => {
 		let resultTitle = '';
 		spectator
-			.inject(TitleService)
+			.inject(LuTitleService)
 			// We need to skip first value because the title is overridden by the component's ngOnInit
 			.title$.pipe(skip(1))
 			.subscribe((title) => (resultTitle = title));

@@ -9,7 +9,7 @@ export type PageTitle = { title: string; params: { [param: string]: string } };
 export const TitleSeparator = ' – ';
 
 @Injectable()
-export class TitleService {
+export class LuTitleService {
 	private titleSubject = new BehaviorSubject<string>('Lucca');
 	title$ = this.titleSubject.asObservable();
 

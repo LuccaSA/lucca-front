@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TitleService } from './title.service';
+import { LuTitleService } from './title.service';
 
 @NgModule({
 	imports: [RouterModule],
-	providers: [TitleService],
+	providers: [LuTitleService],
 })
 export class LuTitleModule {}
