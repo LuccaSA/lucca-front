@@ -1,4 +1,5 @@
 # Page titles
+
 ## Usage
 
 Add `title` properties in your routes config:
@@ -8,45 +9,46 @@ const routes: Routes = [
 	{
 		path: '',
 		data: {
-			title: 'Parent title'
+			title: 'Parent title',
 		},
 		children: [
 			{
 				path: ':requestId',
 				data: {
-					title: 'Sub route title'
+					title: 'Sub route title',
 				},
-			}
-		]
-	}
-]
+			},
+		],
+	},
+];
 ```
 
-The service should now be able to collect all `title` properties defined for the current url. Each time a new `title` is found for a child, il will be translated and prepended, ending with `YourAppName - Lucca`.
+The service should now be able to collect all `title` properties defined for the current url. Each time a new `title` is found for a child, it will be translated and prepended, ending with `YourAppName - Lucca`.
 
 ex: `Sub route title - Parent title - YourAppName - Lucca`
 
-For dynamic titles, the `prependTitle` method from `TitleService` enables you to add a custom title. 
-In a component you could do the following:
+For dynamic titles, the `prependTitle` method from `LuTitleService` enables you to add a custom title.
+In a component, you could do the following:
 
 ```typescript
 const userName: string = this.userService.getCurrentUser();
-this.titleService.prependTitle(userName);
+this.luTitleService.prependTitle(userName);
 ```
 
 ## Quickstart
 
-You will need to :
-* `@lucca-front/ng` > 8.5.0
-* Create a service (`YourAppNameTranslateService`) that implements the `ILuTitleTranslateService`
-* Provide this service in the `app.module.ts` and import `LuTitleModule`
-* Init the `TitleService` in your `app.component.ts`
+You will need to:
 
-### Let's start by creating the service:
+- Install `@lucca-front/ng`
+- Create a service (`YourAppNameTranslateService`) that implements the `ILuTitleTranslateService`
+- Provide this service in the `app.module.ts` and import `LuTitleModule`
+- Init the `LuTitleService` in your `app.component.ts`
+
+### Let's start by creating the service
 
 `YourAppNameTranslateService` be used in combination with the token `LU_TITLE_TRANSLATE_SERVICE`.
 
-This service should implements the `ILuTitleTranslateService` interface that allows you to use any translation service (`ngx-translate`, `transloco`, ...etc).
+This service should implement the `ILuTitleTranslateService` interface. It allows you to use any translation service (`ngx-translate`, `transloco`, ...etc).
 
 You should end up with the following if you are using `ngx-translate`:
 
@@ -72,25 +74,27 @@ export class CoreRhTranslateService implements ILuTitleTranslateService {
 }
 ```
 
-### Adapt `app.module.ts` config:
+### Adapt `app.module.ts` config
 
 Import the `LuTitleModule` and provide the service you just created to the token `LU_TITLE_TRANSLATE_SERVICE` in the `app.module.ts` :
+
 ```typescript
 @NgModule({
-	imports: [
-		LuTitleModule
-	],
-	provide: [
-		{
-			provide: LU_TITLE_TRANSLATE_SERVICE,
-			useExisting: YourAppNameTranslateService
-		}
-	]
+ imports: [
+  LuTitleModule
+ ],
+ provide: [
+  {
+   provide: LU_TITLE_TRANSLATE_SERVICE,
+   useExisting: YourAppNameTranslateService
+  }
+ ]
 ```
 
-### Init the `titleService`:
+### Init the `LuTitleService`
 
-In the the `app.component.ts`, init the titleService by passing the name of you app:
+In the the `app.component.ts`, init the LuTitleService by passing the name of you app:
+
 ```typescript
-this.titleService.init('**YourAppName**');
+this.luTitleService.init('**YourAppName**');
 ```
