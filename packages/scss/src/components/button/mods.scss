@@ -53,30 +53,30 @@
 
 @mixin outlined {
 	&:not([disabled], .is-disabled) {
-		color: var(--palettes-700, var(--palettes-primary-700));
-		box-shadow: inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+		color: var(--palettes-700, var(--palettes-grey-700));
+		box-shadow: inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
 		background-color: var(--colors-white-color);
-		border-color: var(--palettes-grey-200, var(--palettes-primary-200));
+		border-color: var(--palettes-grey-200, var(--palettes-grey-200));
 
 		&:hover {
-			color: var(--palettes-700, var(--palettes-primary-700));
-			background-color: var(--palettes-100, var(--palettes-primary-100));
-			box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+			color: var(--palettes-700, var(--palettes-grey-700));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
+			box-shadow: var(--commons-box-shadow-xs), inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
 		}
 
 		&:focus {
-			color: var(--palettes-700, var(--palettes-primary-700));
-			background-color: var(--palettes-100, var(--palettes-primary-100));
-			box-shadow: var(--commons-elevations-elevation-1), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
-				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+			color: var(--palettes-700, var(--palettes-grey-700));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-grey-100)),
+				inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
 			outline: none;
 		}
 
 		&:active {
-			color: var(--palettes-700, var(--palettes-primary-700));
-			background-color: var(--palettes-200, var(--palettes-primary-200));
-			box-shadow: var(--commons-elevations-elevation-1), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
-				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
+			color: var(--palettes-700, var(--palettes-grey-700));
+			background-color: var(--palettes-200, var(--palettes-grey-200));
+			box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-grey-200)),
+				inset 0 0 0 1px var(--palettes-500, var(--palettes-grey-500));
 		}
 	}
 }
