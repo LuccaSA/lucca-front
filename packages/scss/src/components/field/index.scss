@@ -5,7 +5,7 @@ $fields: 'checkboxesfield', 'radiosfield', 'textfield';
 
 .textfield,
 .radiosfield,
-.checkboxes {
+.checkboxesfield {
 	@include vars;
 	@include component;
 
