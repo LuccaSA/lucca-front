@@ -2,9 +2,8 @@
 
 <!-- Basics -->
 <section class="contentSection">
-
 	<h2>Banner Comm In App</h2>
-	
+
 	<div class="communicationBanner">
 		<div class="communicationBanner-visual">
 			<svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg">
@@ -16,13 +15,13 @@
 		</div>
 		<span class="communicationBanner-title">The module has a new look, a new display is available.</span>
 		<div class="communicationBanner-buttons">
-			<button class="button mod-outline mod-white mod-smaller">Try now</button>
-			<button class="button mod-link mod-invert mod-smaller">Don't display anymore</button>		
+			<button type="button" class="button mod-outline mod-white mod-smaller">Try now</button>
+			<button type="button" class="button mod-text mod-invert mod-smaller">Don't display anymore</button>
 		</div>
 	</div>
-	
+
 	<h2>Light</h2>
-    
+
 	<div class="communicationBanner mod-light">
 		<div class="communicationBanner-visual">
 			<svg class="communicationBanner-blob" xmlns="http://www.w3.org/2000/svg">
@@ -34,12 +33,10 @@
 		</div>
 		<span class="communicationBanner-title">
 			The module has a new look, a new display is available.
-			<a class="u-textSmall">
-				Find out more <span aria-hidden="true" class="lucca-icon size-smaller">outside</span>
-			</a>
+			<a class="u-textSmall"> Find out more <span aria-hidden="true" class="lucca-icon size-smaller">outside</span> </a>
 		</span>
 		<div class="communicationBanner-buttons">
-			<button class="button mod-link mod-smaller">Go back to the previous version</button>
+			<button type="button" class="button mod-text mod-smaller">Go back to the previous version</button>
 		</div>
 	</div>
 </section>
@@ -50,7 +47,7 @@
 	<p>Toasts Comm In App allow you to show information about new module, on a corner (bottom left) of your app.</p>
 	<p><span aria-hidden="true" class="lucca-icon u-textWarning">warning</span><span class="u-mask">Warning:</span> You have to manually create and kill your toasts for now, they will be added in the NG package in the future.
         <div class="toasts mod-commInApp" id="toastsCommInAppBox"></div>
-        <button class="button palette-primary u-marginBottomStandard" id="toastGenerate" onclick="toastCommInApp()">Generate toast Comm in App</button>
+        <button type="button" class="button palette-primary u-marginBottomStandard" id="toastGenerate" onclick="toastCommInApp()">Generate toast Comm in App</button>
     <p>You have to use the same code as toast, BUT you need to add the mod-commInApp class to the div.toasts </p>
     <code class="code mod-block">&lt;div class="toasts mod-commInApp"&gt;
         &lt;div class="toasts-item"&gt;
@@ -72,12 +69,12 @@
         &lt;svg class="toasts-illustration" xmlns="http://www.w3.org/2000/svg"&gt;
             &lt;use&gt; href="../images/commInApp.svg#comminapp-illu"&gt;&lt;/use&gt;
         &lt;/svg&gt;
-        &lt;/div&gt;	
+        &lt;/div&gt;
         &lt;div class="toasts-content"&gt;
         &lt;div class="toasts-content-title"&gt;&lt;strong&gt;The module has a new look !&lt;/strong&gt;&lt;/div&gt;
         &lt;p&gt;Carentibus et vates arduos quam gloriae honeste ob primo.&lt;/p&gt;
         &lt;button class="button mod-outline mod-white mod-smaller"&gt;Try now&lt;/button&gt;
-        &lt;button class="button mod-link mod-invert mod-smaller"&gt;Later&lt;/button&gt;
+        &lt;button class="button mod-text mod-invert mod-smaller"&gt;Later&lt;/button&gt;
         &lt;/div&gt;
     </code>
 </section> -->

@@ -12,7 +12,7 @@ export default {
 	title: 'Documentation/Actions/Button/Basic',
 	argTypes: {
 		mod: {
-			options: ['', 'mod-outlined', 'mod-link', 'mod-link mod-invert'],
+			options: ['', 'mod-outlined', 'mod-text', 'mod-text mod-invert'],
 			control: {
 				type: 'radio',
 			},

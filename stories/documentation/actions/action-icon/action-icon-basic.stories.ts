@@ -2,27 +2,31 @@ import { Meta, Story } from '@storybook/angular';
 
 interface ActionBasicStory {
 	mod: string;
-	palette: string;
 	loading: boolean;
 	disabled: boolean;
+	small: boolean;
 }
 
 export default {
 	title: 'Documentation/Actions/Action Icon/Basic',
 	argTypes: {
 		mod: {
-			options: ['', 'mod-invert'],
+			options: ['', 'mod-delete', 'mod-outlined', 'mod-invert'],
 			control: {
 				type: 'radio',
 			}
 		},
-		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+		loading: {
 			control: {
-				type: 'select',
+				type: 'boolean',
 			}
 		},
-		loading: {
+		disabled: {
+			control: {
+				type: 'boolean',
+			}
+		},
+		small: {
 			control: {
 				type: 'boolean',
 			}
@@ -31,15 +35,23 @@ export default {
 } as Meta;
 
 function getTemplate(args: ActionBasicStory): string {
-	const classes = [args.mod, args.palette].filter(Boolean).join(' ');
+	const classes = [args.mod].filter(Boolean).join(' ');
 	const attributes = args.disabled ? `disabled="disabled"` : '';
 	const loading = args.loading ? `is-loading` : '';
+	const small = args.small ? `mod-small` : '';
+	let icon = "edit";
+	let tooltip = "Modifier";
+	if (args.mod === 'mod-delete') {
+		icon = "trash";
+		tooltip = "Supprimer";
+	}
 
 	return `
-	<button type="button" class="actionIcon ${classes} ${loading}" luTooltip="Modifier" ${attributes}>
-		<span aria-hidden="true" class="lucca-icon icon-edit"></span>
+	<button type="button" class="actionIcon ${classes} ${small} ${loading}" luTooltip="Modifier" ${attributes}>
+		<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
 		<span class="u-mask">Modifier</span>
 	</button>
+
 	`
 }
 
@@ -57,4 +69,4 @@ const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '', loading: false, palette: '', disabled: false };
+Basic.args = { mod: '', loading: false, small: '', disabled: false };

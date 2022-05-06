@@ -32,7 +32,7 @@
 	width: 296px;
 
 	.mat-button {
-		@extend .button, .mod-link;
+		@extend .button, .mod-text;
 		font-size: 1em;
 		text-decoration: none;
 	}
@@ -42,7 +42,7 @@
 	}
 
 	.mat-icon-button {
-		@extend .button, .mod-link;
+		@extend .button, .mod-text;
 		border-radius: 3px;
 	}
 

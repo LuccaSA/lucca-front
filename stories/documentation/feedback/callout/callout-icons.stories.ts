@@ -19,7 +19,7 @@ function getTemplate(args: CalloutIconStory): string {
 	</div>
 	<div class="callout mod-icon palette-success">
 		<div class="callout-icon">
-			<span aria-hidden="true" class="lucca-icon icon-tick"></span>
+			<span aria-hidden="true" class="lucca-icon icon-success"></span>
 		</div>
 		<strong class="callout-title">Cool!</strong> Je suis un callout de succès :)
 	</div>

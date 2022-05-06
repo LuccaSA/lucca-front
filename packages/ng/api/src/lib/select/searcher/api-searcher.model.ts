@@ -1,6 +1,6 @@
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { merge, Observable, of, Subject } from 'rxjs';
-import { catchError, map, mapTo, scan, share, startWith, switchMap } from 'rxjs/operators';
+import { catchError, map, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ILuApiService } from '../../service/index';
 import { ILuApiOptionFeeder } from '../feeder/index';
 
@@ -38,7 +38,7 @@ export abstract class ALuApiOptionSearcher<T extends import('../../api.model').I
 		);
 
 		results$.subscribe((items) => this.outOptions$.next(items));
-		this.loading$ = merge(this._clue$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
+		this.loading$ = merge(this._clue$.pipe(map(() => true)), results$.pipe(map(() => false)));
 		this.empty$ = results$.pipe(map((o) => o.length === 0));
 	}
 	abstract resetClue();
@@ -101,7 +101,7 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 			this._isLastPage = !items.length;
 			this.outOptions$.next([...this._options]);
 		});
-		this.loading$ = merge(query$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
+		this.loading$ = merge(query$.pipe(map(() => true)), results$.pipe(map(() => false)));
 		this.loading$.subscribe((l) => (this._loading = l));
 		this.empty$ = this.outOptions$.pipe(map((o) => o.length === 0));
 	}

@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, mapTo, share, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, map, share, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
@@ -124,7 +124,7 @@ export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuO
 		});
 		this._subs.add(resultsSub);
 
-		this.loading$ = merge(formValue$.pipe(mapTo(true)), results$.pipe(mapTo(false)));
+		this.loading$ = merge(formValue$.pipe(map(() => true)), results$.pipe(map(() => false)));
 		const loadingSub = this.loading$.subscribe((l) => (this._loading = l));
 		this._subs.add(loadingSub);
 

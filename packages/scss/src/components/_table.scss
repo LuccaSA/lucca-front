@@ -1,8 +1,8 @@
 .table {
 	border-spacing: 0;
 	display: table;
-	font-size: _component("table.font-size");
-	line-height: _component("table.line-height");
+	font-size: _component('table.font-size');
+	line-height: _component('table.line-height');
 	text-align: left;
 	width: 100%;
 }
@@ -17,13 +17,13 @@
 }
 
 .table-head-row-cell {
-	border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
-	color: _color("text.light");
+	border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
+	color: _color('text.light');
 	display: table-cell;
 	font-weight: 600;
-	font-size: _theme("sizes.small.font-size");
-	line-height: _theme("sizes.small.line-height");
-	padding: _theme("spacings.small");
+	font-size: _theme('sizes.small.font-size');
+	line-height: _theme('sizes.small.line-height');
+	padding: _theme('spacings.small');
 	text-align: left;
 }
 
@@ -37,9 +37,9 @@
 }
 
 .table-body-row-cell {
-	border-top: _theme("commons.divider.width") solid _theme("commons.divider.color");
+	border-top: _theme('commons.divider.width') solid _theme('commons.divider.color');
 	display: table-cell;
-	padding: _component("table.padding");
+	padding: _component('table.padding');
 	vertical-align: middle;
 }
 
@@ -51,7 +51,7 @@
 
 .table-body-row:last-child {
 	.table-body-row-cell {
-		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
 	}
 }
 
@@ -65,13 +65,13 @@
 
 	&:hover {
 		&::after {
-			color: _color("text.light");
+			color: _color('text.light');
 		}
 	}
 
 	&::after {
-		@include makeIcon("drag");
-		color: _color("text.placeholder");
+		@include makeIcon('drag');
+		color: _color('text.placeholder');
 		margin: auto;
 		height: 100%;
 		display: flex;
@@ -79,14 +79,13 @@
 	}
 }
 
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .table {
 	&.mod-small {
-		font-size: _theme("sizes.small.font-size");
-		line-height: _theme("sizes.small.line-height");
+		font-size: _theme('sizes.small.font-size');
+		line-height: _theme('sizes.small.line-height');
 
 		.table-head-row-cell {
 			&.mod-sortable, // legacy
@@ -101,18 +100,18 @@
 	&.mod-zebra {
 		.table-body {
 			tr:nth-child(odd) {
-				background-color: _component("table.zebra.background");
+				background-color: _component('table.zebra.background');
 			}
 		}
 	}
 
 	&.mod-clickable {
 		.table-body-row-cell {
-			transition: background-color _theme("commons.animations.durations.fast");
+			transition: background-color _theme('commons.animations.durations.fast');
 		}
 
 		.table-body-row-cell-action {
-			color: _color("text.default");
+			color: _color('text.default');
 			text-decoration: none;
 
 			&:hover,
@@ -127,7 +126,7 @@
 			&:hover,
 			&:focus-within {
 				.table-body-row-cell {
-					background-color: _component("table.hover.background");
+					background-color: _component('table.hover.background');
 				}
 			}
 		}
@@ -144,10 +143,10 @@
 
 		.table-head-row-cell {
 			&:first-child {
-				padding-left: _component("table.card.padding");
+				padding-left: _component('table.card.padding');
 			}
 			&:last-child {
-				padding-right: _component("table.card.padding");
+				padding-right: _component('table.card.padding');
 			}
 		}
 		.table-body-row {
@@ -160,10 +159,10 @@
 		}
 		.table-body-row-cell {
 			&:first-child {
-				padding-left: _component("table.card.padding");
+				padding-left: _component('table.card.padding');
 			}
 			&:last-child {
-				padding-right: _component("table.card.padding");
+				padding-right: _component('table.card.padding');
 			}
 		}
 	}
@@ -171,7 +170,8 @@
 	&.mod-borderless {
 		border: none;
 
-		.table-body-row-cell, .table-head-row-cell {
+		.table-body-row-cell,
+		.table-head-row-cell {
 			border-top: none;
 
 			&:first-child {
@@ -185,7 +185,8 @@
 	}
 
 	&.mod-noOffset {
-		.table-head-row-cell, .table-body-row-cell {
+		.table-head-row-cell,
+		.table-body-row-cell {
 			&:first-child {
 				padding-left: 0;
 			}
@@ -204,11 +205,11 @@
 
 	&.mod-parent {
 		.table-body-row-cell {
-			background-color: _color("grey", 100);
-			color: _color("grey", 800);
-			font-size: _theme("sizes.small.font-size");
+			background-color: _color('grey', 100);
+			color: _color('grey', 800);
+			font-size: _theme('sizes.small.font-size');
 			font-weight: 600;
-			line-height: _theme("sizes.small.line-height");
+			line-height: _theme('sizes.small.line-height');
 		}
 
 		&.mod-collapsable {
@@ -220,10 +221,10 @@
 				}
 
 				&::before {
-					@include makeIcon("arrow_south");
+					@include makeIcon('arrow_south');
 					vertical-align: middle;
-					margin-right: _theme("spacings.smaller");
-					transition: transform _theme("commons.animations.durations.fast") ease;
+					margin-right: _theme('spacings.smaller');
+					transition: transform _theme('commons.animations.durations.fast') ease;
 				}
 			}
 
@@ -240,7 +241,7 @@
 	&.mod-child {
 		.table-body-row-cell {
 			&:first-child {
-				padding-left: _theme("spacings.bigger");
+				padding-left: _theme('spacings.bigger');
 			}
 		}
 	}
@@ -253,11 +254,13 @@
 	}
 }
 
-.table-body-row, .table-head-row {
+.table-body-row,
+.table-head-row {
 	&.mod-selectable {
-		.table-body-row-cell, .table-head-row-cell {
+		.table-body-row-cell,
+		.table-head-row-cell {
 			&:first-child {
-				padding-right: _theme("spacings.smaller");
+				padding-right: _theme('spacings.smaller');
 				width: 1rem;
 			}
 		}
@@ -279,7 +282,7 @@
 		.table-head-row-cell-wrapper {
 			display: inline-block;
 			vertical-align: top;
-			max-width: calc(100% - #{_theme("spacings.big")});
+			max-width: calc(100% - #{_theme('spacings.big')});
 		}
 
 		.table-head-row-cell-secondLine {
@@ -295,17 +298,18 @@
 		cursor: pointer;
 
 		&::after {
-			@include makeIcon("arrow_full_north");
-			margin: 0 0 0 _theme("spacings.smallest");
+			@include makeIcon('arrow_full_north');
+			margin: 0 0 0 _theme('spacings.smallest');
 			opacity: 0;
-			transform: translateY(#{_theme("spacings.smallest")});
-			transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
+			transform: translateY(#{_theme('spacings.smallest')});
+			transition: opacity _theme('commons.animations.durations.fast') ease, transform _theme('commons.animations.durations.fast') ease;
 		}
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			&::after {
 				transform: translateY(0);
-				opacity: .5;
+				opacity: 0.5;
 			}
 		}
 	}
@@ -317,16 +321,16 @@
 
 .table-head-row-cell-secondLine {
 	display: block;
-	margin-top: _theme("spacings.smallest");
+	margin-top: _theme('spacings.smallest');
 	font-weight: 400;
 }
 
-.table-body-row-cell, .table-head-row-cell {
-
+.table-body-row-cell,
+.table-head-row-cell {
 	&.mod-actions {
-		padding: .3rem _theme("spacings.smaller") .3rem 0;
+		padding: 0.3rem _theme('spacings.smaller') 0.3rem 0;
 		text-align: right;
-		transition: opacity _theme("commons.animations.durations.fast") ease;
+		transition: opacity _theme('commons.animations.durations.fast') ease;
 		white-space: nowrap;
 
 		> *:not(.is-loading) {
@@ -348,26 +352,30 @@
 			}
 
 			&::before {
-				@include makeIcon("arrow_full_north");
-				margin: 0 _theme("spacings.smallest") 0 0;
+				@include makeIcon('arrow_full_north');
+				margin: 0 _theme('spacings.smallest') 0 0;
 				opacity: 0;
-				transform: translateY(#{_theme("spacings.smallest")});
-				transition: opacity _theme("commons.animations.durations.fast") ease, transform _theme("commons.animations.durations.fast") ease;
+				transform: translateY(#{_theme('spacings.smallest')});
+				transition: opacity _theme('commons.animations.durations.fast') ease, transform _theme('commons.animations.durations.fast') ease;
 			}
 
-			&:hover, &:focus {
+			&:hover,
+			&:focus {
 				&::before {
 					transform: translateY(0);
-					opacity: .5;
+					opacity: 0.5;
 				}
 			}
 		}
 	}
 }
 
-.table-head-row, .table-body-row {
-	&:hover {
-		.table-body-row-cell, .table-head-row-cell {
+.table-head-row,
+.table-body-row {
+	&:hover,
+	&:focus-within {
+		.table-body-row-cell,
+		.table-head-row-cell {
 			&.mod-actions {
 				> * {
 					opacity: 1;
@@ -384,17 +392,17 @@
 	}
 }
 
-
 // STATES
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 .table-head-row-cell {
 	// legacy
-	&.is-sorted-descending, &.is-sorted-ascending {
-		color: _color("text.dark");
+	&.is-sorted-descending,
+	&.is-sorted-ascending {
+		color: _color('text.dark');
 
 		&::after {
-			@include makeIcon("arrow_full_north");
+			@include makeIcon('arrow_full_north');
 			opacity: 1;
 			transform: translateY(0);
 		}
@@ -410,21 +418,23 @@
 		padding: 0;
 
 		.table-head-row-cell-sortableButton {
-			padding: _theme("spacings.small");
+			padding: _theme('spacings.small');
 		}
 	}
 
-	&[aria-sort="descending"], &[aria-sort="ascending"] {
+	&[aria-sort='descending'],
+	&[aria-sort='ascending'] {
 		.table-head-row-cell-sortableButton {
-			color: _color("text.dark");
+			color: _color('text.dark');
 
 			&::after {
-				@include makeIcon("arrow_full_north");
+				@include makeIcon('arrow_full_north');
 				opacity: 1;
 				transform: translateY(0);
 			}
 
-			&:hover, &:focus {
+			&:hover,
+			&:focus {
 				&::after {
 					opacity: 1;
 				}
@@ -434,9 +444,10 @@
 
 	&.mod-alignRight {
 		// legacy
-		&.is-sorted-descending, &.is-sorted-ascending {
+		&.is-sorted-descending,
+		&.is-sorted-ascending {
 			&::before {
-				@include makeIcon("arrow_full_north");
+				@include makeIcon('arrow_full_north');
 				opacity: 1;
 				transform: translateY(0);
 			}
@@ -456,10 +467,11 @@
 			text-align: right;
 		}
 
-		&[aria-sort="descending"], &[aria-sort="ascending"] {
+		&[aria-sort='descending'],
+		&[aria-sort='ascending'] {
 			.table-head-row-cell-sortableButton {
 				&::before {
-					@include makeIcon("arrow_full_north");
+					@include makeIcon('arrow_full_north');
 					opacity: 1;
 					transform: translateY(0);
 				}
@@ -468,7 +480,8 @@
 					content: none;
 				}
 
-				&:hover, &:focus {
+				&:hover,
+				&:focus {
 					&::before {
 						opacity: 1;
 					}
@@ -477,33 +490,33 @@
 		}
 	}
 
-	&[aria-sort="ascending"] {
+	&[aria-sort='ascending'] {
 		.table-head-row-cell-sortableButton {
 			&::after {
-				@include makeIcon("arrow_full_north");
+				@include makeIcon('arrow_full_north');
 			}
 		}
 
 		&.mod-alignRight {
 			.table-head-row-cell-sortableButton {
 				&::before {
-					@include makeIcon("arrow_full_north");
+					@include makeIcon('arrow_full_north');
 				}
 			}
 		}
 	}
 
-	&[aria-sort="descending"] {
+	&[aria-sort='descending'] {
 		.table-head-row-cell-sortableButton {
 			&::after {
-				@include makeIcon("arrow_full_south");
+				@include makeIcon('arrow_full_south');
 			}
 		}
 
 		&.mod-alignRight {
 			.table-head-row-cell-sortableButton {
 				&::before {
-					@include makeIcon("arrow_full_south");
+					@include makeIcon('arrow_full_south');
 				}
 			}
 		}
@@ -512,7 +525,7 @@
 	// legacy
 	&.is-sorted-ascending {
 		&::after {
-			@include makeIcon("arrow_full_north");
+			@include makeIcon('arrow_full_north');
 		}
 	}
 
@@ -520,7 +533,7 @@
 	&.is-sorted-ascending {
 		.mod-alignRight {
 			&::before {
-				@include makeIcon("arrow_full_north");
+				@include makeIcon('arrow_full_north');
 			}
 		}
 	}
@@ -528,7 +541,7 @@
 	// legacy
 	&.is-sorted-descending {
 		&::after {
-			@include makeIcon("arrow_full_south");
+			@include makeIcon('arrow_full_south');
 		}
 	}
 
@@ -536,19 +549,18 @@
 	&.is-sorted-descending {
 		.mod-alignRight {
 			&::before {
-				@include makeIcon("arrow_full_south");
+				@include makeIcon('arrow_full_south');
 			}
 		}
 	}
 }
-
 
 // Fixed columns width
 .table {
 	&.mod-layoutFixed {
 		table-layout: fixed;
 	}
-	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+	@each $bp-name, $bp-obj in _getMap('breakpoints') {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
 			&.mod-layoutFixed-#{$bp-name} {
 				table-layout: fixed;
@@ -559,16 +571,16 @@
 
 .table-head-row-cell,
 .table-body-row-cell {
-	@for $i from  _component("table.fixed-column.min-col-width", true) through _component("table.fixed-column.max-col-width", true) {
+	@for $i from _component('table.fixed-column.min-col-width', true) through _component('table.fixed-column.max-col-width', true) {
 		&.mod-layoutFixed-#{$i} {
 			min-width: $i * 1rem;
 			width: $i * 1rem;
 			max-width: $i * 1rem;
 		}
 	}
-	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+	@each $bp-name, $bp-obj in _getMap('breakpoints') {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
-			@for $i from _component("table.fixed-column.min-col-width", true) through _component("table.fixed-column.max-col-width", true) {
+			@for $i from _component('table.fixed-column.min-col-width', true) through _component('table.fixed-column.max-col-width', true) {
 				&.mod-layoutFixed-#{$bp-name}#{$i} {
 					min-width: $i * 1rem;
 					width: $i * 1rem;
@@ -587,20 +599,20 @@
 	@mixin stickyColumnCommons {
 		width: auto;
 		min-width: 100%;
-		background-color: _color("white");
+		background-color: _color('white');
 		.table-head-row-cell,
 		.table-body-row-cell {
-			&[class*="mod-stickyColumn-"] {
+			&[class*='mod-stickyColumn-'] {
 				position: sticky;
-				background-color: _color("white");
+				background-color: _color('white');
 				z-index: 3;
 			}
 			//columns sticky css drop shadow on scroll
 			&.mod-stickyColumn-shadow {
 				z-index: 1;
-				width: _component("table.fixed-column.sticky-shadow.width");
-				min-width: _component("table.fixed-column.sticky-shadow.width");
-				max-width: _component("table.fixed-column.sticky-shadow.width");
+				width: _component('table.fixed-column.sticky-shadow.width');
+				min-width: _component('table.fixed-column.sticky-shadow.width');
+				max-width: _component('table.fixed-column.sticky-shadow.width');
 				padding: 0;
 				background: transparent;
 			}
@@ -608,26 +620,34 @@
 				display: flex;
 			}
 		}
-	
-		[class*="mod-stickyColumn-left"] .stickyColumn-shadow-wrapper {
-			left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+
+		[class*='mod-stickyColumn-left'] .stickyColumn-shadow-wrapper {
+			left: calc(#{_component('table.fixed-column.sticky-shadow.width')} * -1);
 			&::after {
-				background-image: linear-gradient(to right, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-			}
-		}
-	
-		[class*="mod-stickyColumn-right"] .stickyColumn-shadow-wrapper {
-			right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
-			&::after {
-				background-image: linear-gradient(to left, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
+				background-image: linear-gradient(
+					to right,
+					transparentize(_component('table.fixed-column.sticky-shadow.color', true), 0.75),
+					transparentize(_component('table.fixed-column.sticky-shadow.color', true), 1)
+				);
 			}
 		}
 
-		&[class*="mod-stickyHeader"] {
+		[class*='mod-stickyColumn-right'] .stickyColumn-shadow-wrapper {
+			right: calc(#{_component('table.fixed-column.sticky-shadow.width')} * -1);
+			&::after {
+				background-image: linear-gradient(
+					to left,
+					transparentize(_component('table.fixed-column.sticky-shadow.color', true), 0.75),
+					transparentize(_component('table.fixed-column.sticky-shadow.color', true), 1)
+				);
+			}
+		}
+
+		&[class*='mod-stickyHeader'] {
 			//Sticky Header + sticky column
-			&[class*="mod-stickyColumn"] {
-				.table-head-row-cell {	
-					&[class*="mod-stickyColumn"] {
+			&[class*='mod-stickyColumn'] {
+				.table-head-row-cell {
+					&[class*='mod-stickyColumn'] {
 						z-index: 6;
 						&:not(.mod-stickyColumn-shadow) {
 							z-index: 7;
@@ -635,20 +655,19 @@
 					}
 					//shadowMask to fill void in header due to stickyColumn drop shadow tech
 					&.mod-columnSticky-shadowMask::before {
-						content: "";
+						content: '';
 						position: absolute;
-						left: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+						left: calc(#{_component('table.fixed-column.sticky-shadow.width')} * -1);
 						top: 0;
 						bottom: 0;
 						z-index: 4;
-						width: _component("table.fixed-column.sticky-shadow.width");
-						background: _color("white");
+						width: _component('table.fixed-column.sticky-shadow.width');
+						background: _color('white');
 					}
-					&:not(.mod-columnSticky-shadowMask):not([class*="mod-stickyColumn"]) + .mod-columnSticky-shadowMask::before {
+					&:not(.mod-columnSticky-shadowMask):not([class*='mod-stickyColumn']) + .mod-columnSticky-shadowMask::before {
 						left: auto;
-						right: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+						right: calc(#{_component('table.fixed-column.sticky-shadow.width')} * -1);
 					}
-					
 				}
 			}
 		}
@@ -659,7 +678,7 @@
 		@include stickyColumnCommons;
 	}
 
-	@each $bp-name, $bp-obj in _getMap("breakpoints") {
+	@each $bp-name, $bp-obj in _getMap('breakpoints') {
 		@media only screen and (min-width: map-get($bp-obj, breakAt)) {
 			&.mod-stickyColumn-#{$bp-name} {
 				@include stickyColumnCommons;
@@ -668,41 +687,41 @@
 	}
 
 	//Sticky column offset
-	&[class*="mod-stickyColumn"] {
+	&[class*='mod-stickyColumn'] {
 		.table-head-row-cell,
 		.table-body-row-cell {
-			@for $i from 0 through _component("table.sticky-column.max-offset", true) {
+			@for $i from 0 through _component('table.sticky-column.max-offset', true) {
 				&.mod-stickyColumn-leftOffset#{$i} {
 					left: $i * 1rem;
 					&.mod-stickyColumn-shadow,
 					.stickyColumn-shadow-wrapper::after {
-						left: calc(#{$i} * 1rem + #{_component("table.fixed-column.sticky-shadow.width")});
+						left: calc(#{$i} * 1rem + #{_component('table.fixed-column.sticky-shadow.width')});
 					}
 				}
 				&.mod-stickyColumn-rightOffset#{$i} {
 					right: $i * 1rem;
 					&.mod-stickyColumn-shadow,
 					.stickyColumn-shadow-wrapper::after {
-						right: calc(#{$i} * 1rem + #{_component("table.fixed-column.sticky-shadow.width")});
+						right: calc(#{$i} * 1rem + #{_component('table.fixed-column.sticky-shadow.width')});
 					}
 				}
 			}
 		}
 	}
-	
+
 	//Sticky drop shadow
-	[class*="sticky"][class*="shadow-wrapper"] {
+	[class*='sticky'][class*='shadow-wrapper'] {
 		position: absolute;
 		top: 0;
-		bottom: calc(#{_theme("commons.divider.width")} * -1);
+		bottom: calc(#{_theme('commons.divider.width')} * -1);
 		display: flex;
-		width: _component("table.fixed-column.sticky-shadow.width");
-		border-bottom: _theme("commons.divider.width") solid _theme("commons.divider.color");
+		width: _component('table.fixed-column.sticky-shadow.width');
+		border-bottom: _theme('commons.divider.width') solid _theme('commons.divider.color');
 		&::after {
-			content: "";
+			content: '';
 			position: sticky;
 			display: block;
-			width:  _component("table.fixed-column.sticky-shadow.width");
+			width: _component('table.fixed-column.sticky-shadow.width');
 			height: 100%;
 			background-color: transparent;
 		}
@@ -714,14 +733,14 @@
 	}
 
 	//Sticky Header
-	&[class*="mod-stickyHeader"] {
+	&[class*='mod-stickyHeader'] {
 		.table-head-row-cell {
-			background-color: _color("white");
+			background-color: _color('white');
 			position: sticky;
 			z-index: 5;
 		}
 		//Sticky header + sticky column at breakpoint
-		@each $bp-name, $bp-obj in _getMap("breakpoints") {
+		@each $bp-name, $bp-obj in _getMap('breakpoints') {
 			@media only screen and (max-width: map-get($bp-obj, breakAt)) {
 				&.mod-stickyColumn-#{$bp-name} .table-head-row-cell {
 					left: auto !important;
@@ -735,7 +754,7 @@
 	.mod-stickyHeader-shadow {
 		.table-body-row-cell {
 			position: sticky;
-			top: calc(var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+			top: calc(var(--sticky-header-shadow-offset-top) + #{_component('table.fixed-column.sticky-shadow.width')});
 			z-index: 4;
 			height: 0;
 			padding: 0;
@@ -743,19 +762,23 @@
 			background: transparent;
 		}
 		.stickyHeader-shadow-wrapper {
-			top: calc(#{_component("table.fixed-column.sticky-shadow.width")} * -1);
+			top: calc(#{_component('table.fixed-column.sticky-shadow.width')} * -1);
 			width: 100%;
 			height: 0;
 			border: 0;
 			&::after {
-				top: calc(var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+				top: calc(var(--sticky-header-shadow-offset-top) + #{_component('table.fixed-column.sticky-shadow.width')});
 				width: 100%;
-				height: _component("table.fixed-column.sticky-shadow.width");
-				background-image: linear-gradient(to bottom, transparentize(_component("table.fixed-column.sticky-shadow.color", true), .75), transparentize(_component("table.fixed-column.sticky-shadow.color", true), 1));
-				opacity: .5;
+				height: _component('table.fixed-column.sticky-shadow.width');
+				background-image: linear-gradient(
+					to bottom,
+					transparentize(_component('table.fixed-column.sticky-shadow.color', true), 0.75),
+					transparentize(_component('table.fixed-column.sticky-shadow.color', true), 1)
+				);
+				opacity: 0.5;
 			}
 		}
-		
+
 		+ .table-body-row .table-body-row-cell {
 			border-top: 0;
 		}
@@ -769,12 +792,20 @@
 
 	&.mod-stickyHeader-withBanner {
 		.table-head-row-cell {
-			top: _theme("commons.banner-height");
+			top: _theme('commons.banner-height');
 		}
 		.mod-stickyHeader-shadow .table-body-row-cell {
-			top: calc(#{_theme("commons.banner-height")} + var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+			top: calc(
+				#{_theme('commons.banner-height')} + var(--sticky-header-shadow-offset-top) + #{_component(
+						'table.fixed-column.sticky-shadow.width'
+					)}
+			);
 			.stickyHeader-shadow-wrapper::after {
-				top: calc(#{_theme("commons.banner-height")} + var(--sticky-header-shadow-offset-top) + #{_component("table.fixed-column.sticky-shadow.width")});
+				top: calc(
+					#{_theme('commons.banner-height')} + var(--sticky-header-shadow-offset-top) + #{_component(
+							'table.fixed-column.sticky-shadow.width'
+						)}
+				);
 			}
 		}
 	}

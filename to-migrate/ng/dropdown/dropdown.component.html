@@ -1,30 +1,28 @@
 <div class="button-group">
-	<button class="button">Main action</button>
-	<button class="button mod-more" [luDropdown]="dropdown">
-		<span class="cdk-visually-hidden">
-			More actions
-		</span>
+	<button type="button" class="button">Main action</button>
+	<button type="button" class="button mod-more" [luDropdown]="dropdown">
+		<span class="cdk-visually-hidden"> More actions </span>
 	</button>
 </div>
-<button class="button">other buttons</button>
+<button type="button" class="button">other buttons</button>
 <div class="textfield">
-	<input type="text" class="textfield-input">
+	<input type="text" class="textfield-input" />
 	<label for="" class="textfield-label">and inputs</label>
 </div>
-<button class="button">to check if the focus</button>
+<button type="button" class="button">to check if the focus</button>
 <div class="textfield">
-	<input type="text" class="textfield-input">
+	<input type="text" class="textfield-input" />
 	<label for="" class="textfield-label">handles properly</label>
 </div>
 <lu-dropdown #dropdown>
-	<li class="lu-dropdown-options-item" >
+	<li class="lu-dropdown-options-item">
 		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action" luDropdownItem>Link 1</a>
 	</li>
 	<li class="lu-dropdown-options-item">
 		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>Link 2</a>
 	</li>
-	<!-- <li class="lu-dropdown-options-item mod-withChildren" [attr.aria-hidden]="isToggleOpen">	
-		<button (click)="toggle()" class="lu-dropdown-options-item-toggle">
+	<!-- <li class="lu-dropdown-options-item mod-withChildren" [attr.aria-hidden]="isToggleOpen">
+		<button   type="button" (click)="toggle()" class="lu-dropdown-options-item-toggle">
 			Toggle
 			<span aria-hidden="true" class="lucca-icon expand">expand</span>
 			<span aria-hidden="true" class="lucca-icon collapse">collapse</span>
@@ -34,17 +32,18 @@
 				<a href="#" class="lu-dropdown-options-item-children-item-action">Toggle link 1</a>
 			</li>
 			<li class="lu-dropdown-options-item-children-item">
-				<button class="lu-dropdown-options-item-children-item-action">Toggle button 2</button>
+				<button  type="button" class="lu-dropdown-options-item-children-item-action">Toggle button 2</button>
 			</li>
 		</ul>
 	</li> -->
-	<li class="lu-dropdown-options-item" >
-		<a routerLink="." fragment="link3"  class="lu-dropdown-options-item-action" luDropdownItem>Link 3</a>
+	<li class="lu-dropdown-options-item">
+		<a routerLink="." fragment="link3" class="lu-dropdown-options-item-action" luDropdownItem>Link 3</a>
 	</li>
-	<li class="lu-dropdown-options-item" >
-		<button class="lu-dropdown-options-item-action" luDropdownItem (click)="debug(4)">Button 4</button>
+	<li class="lu-dropdown-options-item">
+		<button type="button" class="lu-dropdown-options-item-action" luDropdownItem (click)="debug(4)">Button 4</button>
 	</li>
-	<li class="lu-dropdown-options-item" >
-		<div role="button" tabindex="0" class="lu-dropdown-options-item-action" (click)="debug(5)" luDropdownItem>Div 5</div> <!-- this doesnt work with divs-->
+	<li class="lu-dropdown-options-item">
+		<div role="button" tabindex="0" class="lu-dropdown-options-item-action" (click)="debug(5)" luDropdownItem>Div 5</div>
+		<!-- this doesnt work with divs-->
 	</li>
 </lu-dropdown>

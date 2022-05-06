@@ -28,11 +28,26 @@
 	}
 }
 
-@mixin buttonLinkColoring($palette) {
+@mixin buttonLinkColoring($palette, $activeShadowPalette) {
+	color: _color($palette, 700);
+
 	&:not([disabled], .is-disabled) {
+		&:hover {
+			background-color: _color($palette, 50);
+			box-shadow: none;
+		}
+
 		&:focus {
-			box-shadow: 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 300);
-			background: _color($palette, 100);
+			background-color: _color($palette, 50);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($activeShadowPalette, 100),
+				inset 0 0 0 1px _color($activeShadowPalette, 400);
+			outline: none;
+		}
+
+		&:active {
+			background-color: _color($palette, 100);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($activeShadowPalette, 200),
+				inset 0 0 0 1px _color($activeShadowPalette, 500);
 		}
 	}
 }
@@ -45,20 +60,20 @@
 		&:hover {
 			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.box-shadow.xs'), inset 0 0 0 1px _color($palette, 400);
 		}
 
 		&:focus {
 			background-color: _color($palette, 100);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 100), inset 0 0 0 1px _color($palette, 400);
 			outline: none;
 		}
 
 		&:active {
 			background-color: _color($palette, 200);
 			color: _color($palette);
-			box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
+			box-shadow: _theme('commons.box-shadow.xs'), 0 0 0 4px _color($palette, 200), inset 0 0 0 1px _color($palette, 500);
 		}
 	}
 
@@ -163,38 +178,32 @@
 		}
 	}
 
-	&.mod-link {
+	&.mod-link, // legacy class
+	&.mod-text {
 		background-color: transparent;
-		color: _color('text.default');
+		box-shadow: none;
+		padding: _component('button.mod-text.padding');
 
 		// default color
-		@include buttonLinkColoring('button.default-palette');
+		@include buttonLinkColoring('grey', 'button.default-palette');
 
 		// palette colors
 		@each $name, $palette in _getMap('palettes') {
 			&.palette-#{$name} {
-				@include buttonLinkColoring($name);
+				@include buttonLinkColoring($name, $name);
 			}
-		}
-
-		&:hover {
-			box-shadow: none;
-			background-color: _color('primary', 50);
-			color: _color('primary');
 		}
 
 		&.mod-invert {
 			color: _color('white');
 
-			&:not([disabled], .is-disabled) {
-				&:hover,
-				&:focus {
-					background-color: rgba(255, 255, 255, 0.1);
-					color: _color('white');
-				}
+			&:hover,
+			&:focus {
+				box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 
-				&:focus {
-					box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+				&:not([disabled]) {
+					background-color: rgba(_color('white'), 0.1);
+					color: _color('white');
 				}
 			}
 		}
@@ -228,20 +237,22 @@
 			&:hover {
 				background-color: _color('grey', 100);
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), inset 0 0 0 1px _color('grey', 400);
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), inset 0 0 0 1px _color('grey', '400');
 			}
 
 			&:focus {
 				background-color: _color('grey', 100);
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 100), inset 0 0 0 1px _color('primary', 400);
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', 100),
+					inset 0 0 0 1px _color('primary', '400');
 				outline: none;
 			}
 
 			&:active {
 				background-color: _color('grey', 200);
 				color: _color('text.default');
-				box-shadow: _theme('commons.elevations.elevation-1'), 0 0 0 4px _color('primary', 200), inset 0 0 0 1px _color('primary', 500);
+				box-shadow: 0 2px 8px rgba(19, 29, 53, 0.04), 0 1px 2px rgba(19, 29, 53, 0.06), 0 0 0 4px _color('primary', '200'),
+					inset 0 0 0 1px _color('primary', '500');
 			}
 		}
 
@@ -328,7 +339,8 @@
 			border-color: _color('grey', 200);
 		}
 
-		&.mod-link {
+		&.mod-link,
+		&.mod-text {
 			color: _color('grey', 500);
 			background-color: transparent;
 		}

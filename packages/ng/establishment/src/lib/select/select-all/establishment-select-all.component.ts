@@ -59,16 +59,16 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 
 	override selectAll() {
 		this.loading = true;
-		const sub = this._service.getAll().subscribe(
-			(establishments) => {
+		const sub = this._service.getAll().subscribe({
+			next: (establishments) => {
 				this.onSelectValue.next([...establishments]);
 			},
-			() => void {},
-			() => {
+			complete: () => {
 				this.loading = false;
 				this._changeDetectorRef.detectChanges();
 			},
-		);
+		});
+
 		this._subs.add(sub);
 	}
 

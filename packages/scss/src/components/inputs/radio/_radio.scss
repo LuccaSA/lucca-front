@@ -5,7 +5,7 @@
 	&.is-required {
 		&::after {
 			@extend %isRequired;
-		}			
+		}
 	}
 
 	// we can't use the ::after like on checkboxes because
@@ -15,9 +15,45 @@
 .radio-input {
 	@include mask;
 
+	&:not(:disabled) ~ .radio-label {
+		&:hover {
+			&::before {
+				border-color: _component("radio.default-palette.600");
+			}
+		}
+	}
+
 	&:checked ~ .radio-label {
+		&::before {
+			border-color: _component("radio.default-palette.700");
+		}
+
 		&::after {
+			background-color: _component("radio.default-palette.700");
 			transform: scale(0.55);
+		}
+	}
+
+	&:not(:disabled):checked ~ .radio-label {
+		&:hover {
+			&::before {
+				border-color: _component("radio.default-palette.600");
+			}
+
+			&::after {
+				background-color: _component("radio.default-palette.600");
+			}
+		}
+	}
+
+	&:focus ~ .radio-label {
+		&::before {
+			box-shadow: 0 0 0 4px _component("radio.default-palette.200");
+			border-color: _component("radio.default-palette.600");
+		}
+
+		&::after {
+			background-color: _component("radio.default-palette.600");
 		}
 	}
 }
@@ -31,6 +67,7 @@
 
 	&::before {
 		background-color: _color("white");
+		border: 2px solid _color("grey", 700);
 		border-radius: 50%;
 		content: '';
 		display: block;
@@ -57,70 +94,6 @@
 	}
 }
 
-// PALETTE
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.radio {
-	@mixin radioColoring($palette) {
-
-		.radio-label {
-			&::before {
-				border: 2px solid _color($palette, 700);
-			}
-		}
-
-		.radio-input:checked ~ .radio-label {
-			&::after {
-				background-color: _color($palette, 700);
-			}
-		}
-
-		.radio-input:not(:disabled):checked ~ .radio-label {
-			&:hover {
-				&::before {
-					border-color: _color($palette, 600);
-				}
-
-				&::after {
-					background-color: _color($palette, '600');
-				}
-			}
-		}
-		
-		.radio-input:not(:disabled) ~ .radio-label {
-			&:hover {
-				&::before {
-					border-color: _color($palette, 600);
-				}
-			}
-		}
-
-
-		.radio-input {
-			&:focus ~ .radio-label {
-				&::before {
-					box-shadow: 0 0 0 4px _color($palette, '200');
-					border-color: _color($palette, '600');
-				}
-
-				&::after {
-					background-color: _color($palette, '600');
-				}
-			}
-		}
-	}
-
-	// default color
-	@include radioColoring('radio.default-palette');
-
-	// palette colors
-	@each $name, $palette in _getMap('palettes') {
-		&.palette-#{$name} {
-			@include radioColoring($name);
-		}
-	}
-}
-
 // MODS
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
@@ -144,6 +117,52 @@
 			top: _component('radio.input.small-top');
 		}
 	}
+
+	&.mod-grey {
+		.radio-input {
+			&:not(:disabled) ~ .radio-label {
+				&:hover {
+					&::before {
+						border-color: _color("grey", 600);
+					}
+				}
+			}
+
+			&:checked ~ .radio-label {
+				&::before {
+					border-color: _color("grey", 700);
+				}
+
+				&::after {
+					background-color: _color("grey", 700);
+					transform: scale(0.55);
+				}
+			}
+
+			&:not(:disabled):checked ~ .radio-label {
+				&:hover {
+					&::before {
+						border-color: _color("grey", 600);
+					}
+
+					&::after {
+						background-color: _color("grey", 600);
+					}
+				}
+			}
+
+			&:focus ~ .radio-label {
+				&::before {
+					box-shadow: 0 0 0 4px _color("grey", 200);
+					border-color: _color("grey", 600);
+				}
+
+				&::after {
+					background-color: _color("grey", 600);
+				}
+			}
+		}
+	}
 }
 
 // STATES
@@ -153,21 +172,21 @@
 	&[disabled],
 	&[read-only] {
 		~ .radio-label {
-			color: _color('grey', '500');
+			color: _color('grey', 500);
 			cursor: default;
 
 			&::before {
-				border: 2px solid _color('grey', '500');
+				border: 2px solid _color('grey', 500);
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				border: 2px solid _color('grey', '500');
+				border: 2px solid _color('grey', 500);
 			}
 
 			&::after {
-				background-color: _color('grey', '500');
+				background-color: _color('grey', 500);
 			}
 		}
 	}

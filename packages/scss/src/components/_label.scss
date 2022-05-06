@@ -17,8 +17,8 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 .label {
 	@mixin labelColoring($palette) {
-		background-color: _color($palette, 200);
-		color: _color($palette, 800);
+		background-color: _color($palette, 100);
+		color: _color($palette, 900);
 	}
 
 	@include labelColoring("label.default-palette");
@@ -38,32 +38,38 @@
 		height: _theme("sizes.standard.line-height");
 		min-width: _theme("sizes.standard.line-height");
 		line-height: _theme("sizes.standard.line-height");
-		font-weight: 600;
-		&.size-small {
+		font-size: _theme("sizes.smaller.font-size");
+
+		&.mod-small {
 			height: 1.25rem;
 			min-width: 1.25rem;
 			padding: 0 .25rem;
 			line-height: 1.25rem;
 		}
-		&.size-smaller {
+
+		&.mod-smaller {
 			height: 1rem;
 			min-width: 1rem;
 			padding: 0 .1rem;
 			line-height: 1rem;
 		}
 	}
+
 	&.mod-icon {
 		display: inline-flex;
 		align-items: center;
 		padding-left: .6rem;
 		padding-right: .6rem;
+
 		.label-icon {
 			font-size: _theme("sizes.standard.font-size");
 			margin-right: .25rem;
+
 			&:last-child {
 				margin-right: 0;
 				margin-left: .25rem;
 			}
+
 			&:only-child {
 				margin: 0;
 			}

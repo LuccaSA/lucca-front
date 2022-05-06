@@ -3,18 +3,11 @@ import { Meta, Story } from '@storybook/angular';
 interface RadiosButtonsBasicStory {
 	small: boolean;
 	disabled: boolean;
-	palette: string;
 }
 
 export default {
 	title: 'Documentation/Forms/Radio Buttons/Basic',
 	argTypes: {
-		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
-			control: {
-				type: 'select',
-			}
-		},
 		small: {
 			control: {
 				type: 'boolean',
@@ -29,17 +22,16 @@ export default {
 } as Meta;
 
 function getTemplate(args: RadiosButtonsBasicStory): string {
-	const classes = [args.palette].filter(Boolean).join(' ');
 	const small = args.small ? `mod-small` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	return `
-	<div class="radioButtons ${classes} ${small}">
+	<div class="radioButtons ${small}">
 		<label class="radioButtons-item">
-			<input type="radio" name="radioButtonsID" class="radioButtons-item-input" checked>
+			<input type="radio" name="radioButtonsID" class="radioButtons-item-input" ${disabled} checked>
 			<span class="radioButtons-item-label">Bouton 1</span>
 		</label>
 		<label class="radioButtons-item">
-			<input type="radio" name="radioButtonsID" class="radioButtons-item-input">
+			<input type="radio" name="radioButtonsID" class="radioButtons-item-input" ${disabled}>
 			<span class="radioButtons-item-label">Bouton 2</span>
 		</label>
 		<label class="radioButtons-item">
@@ -56,4 +48,4 @@ const Template: Story<RadiosButtonsBasicStory> = (args: RadiosButtonsBasicStory)
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', small: false, disabled: false };
+Basic.args = { small: false, disabled: false };

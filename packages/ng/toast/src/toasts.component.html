@@ -1,0 +1,21 @@
+<div class="toasts mod-withCircularGauge" aria-live="polite" [class.mod-bottom]="bottom">
+	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast" class="toasts-item" [ngClass]="paletteClassByToastType[toast.type]">
+		<span
+			*ngIf="toast.type"
+			class="lucca-icon size-small u-marginRightSmaller"
+			aria-hidden="true"
+			[ngClass]="iconClassByToastType[toast.type]"
+		>
+		</span>
+		<span [innerHtml]="toast.message"> </span>
+		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
+			<span class="lucca-icon icon-cross size-smaller" aria-hidden="true"></span>
+			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
+				<svg viewBox="0 0 32 32">
+					<circle r="16" cx="16" cy="16" [style.animation-duration]="toast.duration + 'ms'" />
+				</svg>
+			</div>
+			<span class="u-mask">{{ intl.close }}</span>
+		</button>
+	</div>
+</div>

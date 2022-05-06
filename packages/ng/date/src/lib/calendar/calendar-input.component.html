@@ -1,11 +1,11 @@
 <section class="calendar">
 	<header class="calendar-header">
-		<button class="calendar-header-nav" (click)="previous()">
+		<button type="button" class="calendar-header-nav" (click)="previous()">
 			<span aria-hidden="true" class="lucca-icon">arrow_west</span>
 			<span class="u-mask">Previous</span>
 		</button>
-		<button class="calendar-header-date" (click)="increaseGranularity()">{{ header.label }}</button>
-		<button class="calendar-header-nav" (click)="next()">
+		<button type="button" class="calendar-header-date" (click)="increaseGranularity()">{{ header.label }}</button>
+		<button type="button" class="calendar-header-nav" (click)="next()">
 			<span aria-hidden="true" class="lucca-icon">arrow_east</span>
 			<span class="u-mask">Next</span>
 		</button>
@@ -15,6 +15,7 @@
 	</section>
 	<section class="calendar-grid" [ngClass]="mod">
 		<button
+			type="button"
 			*ngFor="let item of items; trackBy: trackBy"
 			class="calendar-grid-item"
 			[ngClass]="item.mods"

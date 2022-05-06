@@ -27,6 +27,23 @@ export const parameters = {
 			state: "open",
 		}
 	},
+	backgrounds: {
+    default: 'white',
+    values: [
+      {
+        name: 'white',
+        value: '#fff',
+      },
+			{
+        name: 'light',
+        value: '#F3F5FC',
+      },
+			{
+        name: 'dark',
+        value: '#333333',
+      },
+    ],
+  },
 }
 
 export const decorators = [

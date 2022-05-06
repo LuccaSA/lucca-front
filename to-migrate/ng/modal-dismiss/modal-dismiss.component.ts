@@ -1,25 +1,22 @@
 import { Component, Inject } from '@angular/core';
-import { LuPopup, ALuPopupRef, ILuPopupRef } from '@lucca-front/ng/popup';
 import { LuModal } from '@lucca-front/ng/modal';
+import { ALuPopupRef, ILuPopupRef, LuPopup } from '@lucca-front/ng/popup';
 import { LuSidepanel } from '@lucca-front/ng/sidepanel';
 import { Subject, Subscription } from 'rxjs';
 
 /*tslint:disable*/
 @Component({
 	selector: 'lu-modal-dismiss',
-	templateUrl: './modal-dismiss.component.html'
+	templateUrl: './modal-dismiss.component.html',
 })
 export class ModalDismissComponent {
-	constructor(
-		private _popup: LuPopup,
-		private _modal: LuModal,
-		private _sidepanel: LuSidepanel,
-	) {}
+	constructor(private _popup: LuPopup, private _modal: LuModal, private _sidepanel: LuSidepanel) {}
 
 	event$ = new Subject();
 	subs = new Subscription();
-	get activeSubscriptions() { return this.subs['_subscriptions'] ? this.subs['_subscriptions'].length : 0; }
-
+	get activeSubscriptions() {
+		return this.subs['_subscriptions'] ? this.subs['_subscriptions'].length : 0;
+	}
 
 	openPopup(data?) {
 		const ref = this._popup.open(BasicPopupContent, data);
@@ -39,25 +36,20 @@ export class ModalDismissComponent {
 }
 @Component({
 	selector: 'lu-modal-content',
-	template: `content of the modal component
-	`
+	template: `content of the modal component `,
 })
 export class BasicModalContent {
 	title = 'title';
 	submitAction = () => true;
-
 }
 @Component({
 	selector: 'lu-popup-content',
 	template: `popup <br />
-		<button class="button" (click)="close()">close</button>
-		<button class="button" (click)="dismiss()">dismiss</button>
-	`
+		<button type="button" class="button" (click)="close()">close</button>
+		<button type="button" class="button" (click)="dismiss()">dismiss</button> `,
 })
 export class BasicPopupContent {
-	constructor(
-		@Inject(ALuPopupRef) private _ref: ILuPopupRef,
-	) {}
+	constructor(@Inject(ALuPopupRef) private _ref: ILuPopupRef) {}
 	close() {
 		this._ref.close(true);
 	}
