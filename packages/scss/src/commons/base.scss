@@ -25,7 +25,6 @@ html {
 	@include core.cssvars('commons-box-shadow', config.$boxShadows);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-disabled', config.$disabled);
-	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
 	@include core.cssvars('palettes-primary', config.$primary);
@@ -52,9 +51,6 @@ html {
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-transition: all 150ms ease;
-	--commons-loading-background: lime;
-	--commons-loading-frontground: blue;
-	--commons-loading-speed: 600ms;
 
 	--palettes-grey-900-rbg: 19, 29, 53;
 
