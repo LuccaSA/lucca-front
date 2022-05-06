@@ -40,14 +40,14 @@
 		line-height: _theme("sizes.standard.line-height");
 		font-size: _theme("sizes.smaller.font-size");
 
-		&.size-small {
+		&.mod-small {
 			height: 1.25rem;
 			min-width: 1.25rem;
 			padding: 0 .25rem;
 			line-height: 1.25rem;
 		}
 
-		&.size-smaller {
+		&.mod-smaller {
 			height: 1rem;
 			min-width: 1rem;
 			padding: 0 .1rem;
