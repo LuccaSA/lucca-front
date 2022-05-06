@@ -33,7 +33,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-standard', 'mod-long', 'mod-longer', 'mod-longest'],
+			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-default', 'mod-long', 'mod-longer', 'mod-longest'],
 			control: {
 				type: 'radio',
 			},
