@@ -3,70 +3,78 @@
 
 $fields: 'checkboxesfield', 'radiosfield', 'textfield';
 
-@each $field in $fields {
-	.#{$field} {
-		@include vars;
-		@include component($input: '.#{$field}-input', $label: '.#{$field}-label', $messages: '.#{$field}-messages');
+.textfield,
+.radiosfield,
+.checkboxes {
+	@include vars;
+	@include component;
 
-		&.mod-inline {
-			@include inline;
-		}
+	&.mod-inline {
+		@include inline;
+	}
+
+	&.mod-block {
+		@include block;
+	}
+
+	&:is(.is-required, .required) {
+		@include required;
+	}
+
+	&:is(.is-loading, .loading) {
+		@include loading;
+	}
+
+	&:is(.is-success, .success, .is-valid, .valid) {
+		@include success;
+	}
+
+	&:is(.is-error, .error, .is-invalid, .invalid) {
+		@include error;
+	}
+
+	&.mod-compact {
+		@include compact;
 
 		&.mod-block {
-			@include block;
-		}
-
-		&:is(.is-required) {
-			@include required($label: '.#{$field}-label');
-		}
-
-		&:is(.is-loading) {
-			@include loading($input: '.#{$field}-input');
-		}
-
-		&:is(.is-success, .is-valid) {
-			@include success($input: '.#{$field}-input');
-		}
-
-		&:is(.is-error, .is-invalid) {
-			@include error($label: '.#{$field}-label', $input: '.#{$field}-input');
+			@include compactBlock;
 		}
 	}
 
-	.#{$field}-input {
-		&:is(:hover) {
-			@include hover;
+	&.mod-framed {
+		@include framed;
+
+		&:is(.is-loading, .loading) {
+			@include framedLoading;
 		}
+	}
 
-		&:is(:focus) {
-			@include focus;
-		}
-
-		// .checkboxesfield
-		/*
-    &.mod-row {
-      @include row;
-    }
-    */
-
-		&:is([aria-required]) {
-			@include required($label: '.#{$field}-label');
-		}
-
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxes-input {
 		&:is([disabled], [readonly]) {
-			@include disabled;
+			@include inputDisabled;
 		}
 
-		&:is(.is-valid, .is-success) {
-			@include state('success', $label: '.#{$field}-label', $input: '.#{$field}-input', $suffix: '.#{$field}-suffix');
+		&:is(.is-valid, .valid, .is-success, .success) {
+			@include inputState('success');
 		}
 
-		&:is(.is-warning) {
-			@include state('warning', $label: '.#{$field}-label', $input: '.#{$field}-input', $suffix: '.#{$field}-suffix');
+		&:is(.is-warning, .warning) {
+			@include inputState('warning');
 		}
 
-		&:is(.is-invalid, .is-error) {
-			@include state('error', $label: '.#{$field}-label', $input: '.#{$field}-input', $suffix: '.#{$field}-suffix');
+		&:is(.is-invalid, .invalid, .is-error, .error) {
+			@include inputState('error');
 		}
+	}
+}
+
+.textfield-input,
+.radiosfield-input,
+.checkboxes-input {
+	&:is([required]),
+	&:is([aria-required='true']) {
+		@include required;
 	}
 }

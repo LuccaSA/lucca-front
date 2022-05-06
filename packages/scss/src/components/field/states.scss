@@ -1,21 +1,26 @@
 @use '../../../../icons/src/mixins' as icon;
 @use '../../commons/utils/form';
+@use '../../commons/utils/loading';
 
 @mixin hover {
 	&::placeholder {
-		color: _component('field.input.color', 'light'); // todo: replace with CSS var
+		color: var(--palettes-grey-500);
 	}
 }
 
 @mixin focus {
 	&::placeholder {
-		color: _component('field.input.color', 'lighter'); // todo: replace with CSS var
+		color: var(--palettes-grey-200);
 	}
 }
 
 @mixin required {
-	.field-label,
-	~ .field-label {
+	.textfield-label,
+	.radiosfield-label,
+	.checkboxes-label,
+	~ .textfield-label,
+	~ .radiosfield-label,
+	~ .checkboxes-label {
 		&:not(:empty) {
 			&::after {
 				@include form.required;
@@ -24,13 +29,54 @@
 	}
 }
 
-@mixin disabled {
-	color: _color('text.light'); // todo: replace with CSS var
+@mixin inputDisabled {
+	color: var(--palettes-grey-500);
 	cursor: not-allowed;
 }
 
+@mixin inputState($state) {
+	&:not(:disabled, .is-disabled) {
+		background-color: var(--palettes-#{$state}-50);
+
+		~ .textfield-label,
+		~ .checkboxesfield-label,
+		~ .radiosfield-label,
+		~ .textfield-suffix,
+		~ .checkboxesfield-suffix,
+		~ .radiosfield-suffix {
+			color: var(--palettes-#{$state}-700);
+		}
+
+		&::placeholder {
+			color: var(--palettes-#{$state}-400);
+		}
+
+		&:focus,
+		&.is-focused {
+			~ .textfield-label,
+			~ .checkboxesfield-label,
+			~ .radiosfield-label {
+				color: var(--palettes-#{$state}-700);
+			}
+		}
+
+		&:focus {
+			background-color: white;
+			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
+
+			&::placeholder {
+				color: var(--palettes-#{$state}-300);
+			}
+		}
+
+		@if ($state == 'error') {
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
+		}
+	}
+}
+
 @mixin loading {
-	// @include loading(1rem);
+	@include loading.spinner(1rem);
 
 	&::before,
 	&::after {
@@ -43,48 +89,93 @@
 		position: absolute !important;
 	}
 
-	.field-input {
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxes-input {
 		padding-right: 2rem;
 	}
 }
 
 @mixin success {
+	@keyframes isValid {
+		from {
+			opacity: 0;
+			transform: scale(0);
+		}
+
+		5% {
+			opacity: 1;
+			transform: scale(1.2);
+		}
+
+		7% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		93% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		95% {
+			opacity: 1;
+			transform: scale(1.2);
+		}
+
+		to {
+			opacity: 0;
+			transform: scale(0);
+		}
+	}
+
 	&::before {
 		@include icon.makeIcon('tick_bold');
 
-		// todo: isValid animation
-		animation: isValid 3s forwards;
+		color: var(--palettes-success-700);
+		position: absolute;
+		animation-fill-mode: forwards;
+		animation-name: isValid;
+		animation-duration: 3s;
 		border-radius: 50%;
 		bottom: 0.85rem;
-		color: var(--palettes-success-700);
 		font-size: 1.2rem;
 		height: 1rem;
-		position: absolute;
 		right: 0.4rem;
 		z-index: 1;
 	}
 
-	.field-input {
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxes-input {
 		padding-right: 2rem;
 	}
 }
 
 @mixin error {
-	.field-label {
+	.textfield-label,
+	.radiosfield-label,
+	.checkboxes-label {
 		color: var(--palettes-error-700);
 	}
 
-	.field-input {
-		@include state('error', $label);
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxes-input {
+		@include state('error');
 	}
 }
 
-@mixin state {
+@mixin state($state) {
 	&:not(:disabled, .is-disabled) {
 		background-color: var(--palettes-#{$state}-50);
 
-		~ .field-label,
-		~ .field-suffix {
+		.textfield-label,
+		.radiosfield-label,
+		.checkboxes-label,
+		~ .textfield-suffix,
+		~ .radiosfield-suffix,
+		~ .checkboxes-suffix {
 			color: var(--palettes-#{$state}-700);
 		}
 
@@ -100,7 +191,9 @@
 
 		&:focus,
 		&.is-focused {
-			~ .field-label {
+			~ .textfield-label,
+			~ .radiosfield-label,
+			~ .checkboxes-label {
 				color: var(--palettes-#{$state}-700);
 			}
 		}
@@ -110,7 +203,7 @@
 			background-color: var(--colors-white-color);
 		}
 
-		@if ($state == 'error') {
+		@if $state == 'error' {
 			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
 		}
 	}

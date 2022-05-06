@@ -75,7 +75,6 @@ body {
 a {
 	color: var(--commons-text-link-color);
 
-	// todo: manage focus
 	&:hover {
 		color: var(--commons-text-link-hover);
 	}
