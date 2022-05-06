@@ -17,10 +17,10 @@
 @mixin required {
 	.textfield-label,
 	.radiosfield-label,
-	.checkboxes-label,
+	.checkboxesfield-label,
 	~ .textfield-label,
 	~ .radiosfield-label,
-	~ .checkboxes-label {
+	~ .checkboxesfield-label {
 		&:not(:empty) {
 			&::after {
 				@include form.required;
@@ -91,7 +91,7 @@
 
 	.textfield-input,
 	.radiosfield-input,
-	.checkboxes-input {
+	.checkboxesfield-input {
 		padding-right: 2rem;
 	}
 }
@@ -147,7 +147,7 @@
 
 	.textfield-input,
 	.radiosfield-input,
-	.checkboxes-input {
+	.checkboxesfield-input {
 		padding-right: 2rem;
 	}
 }
@@ -155,13 +155,13 @@
 @mixin error {
 	.textfield-label,
 	.radiosfield-label,
-	.checkboxes-label {
+	.checkboxesfield-label {
 		color: var(--palettes-error-700);
 	}
 
 	.textfield-input,
 	.radiosfield-input,
-	.checkboxes-input {
+	.checkboxesfield-input {
 		@include state('error');
 	}
 }
@@ -172,10 +172,10 @@
 
 		.textfield-label,
 		.radiosfield-label,
-		.checkboxes-label,
+		.checkboxesfield-label,
 		~ .textfield-suffix,
 		~ .radiosfield-suffix,
-		~ .checkboxes-suffix {
+		~ .checkboxesfield-suffix {
 			color: var(--palettes-#{$state}-700);
 		}
 
@@ -193,7 +193,7 @@
 		&.is-focused {
 			~ .textfield-label,
 			~ .radiosfield-label,
-			~ .checkboxes-label {
+			~ .checkboxesfield-label {
 				color: var(--palettes-#{$state}-700);
 			}
 		}

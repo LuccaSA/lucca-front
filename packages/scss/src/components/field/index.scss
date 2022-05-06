@@ -51,7 +51,7 @@ $fields: 'checkboxesfield', 'radiosfield', 'textfield';
 
 	.textfield-input,
 	.radiosfield-input,
-	.checkboxes-input {
+	.checkboxesfield-input {
 		&:is([disabled], [readonly]) {
 			@include inputDisabled;
 		}
@@ -72,7 +72,7 @@ $fields: 'checkboxesfield', 'radiosfield', 'textfield';
 
 .textfield-input,
 .radiosfield-input,
-.checkboxes-input {
+.checkboxesfield-input {
 	&:is([required]),
 	&:is([aria-required='true']) {
 		@include required;

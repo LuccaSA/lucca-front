@@ -25,7 +25,7 @@ html {
 	@include core.cssvars('commons-box-shadow', config.$boxShadows);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-disabled', config.$disabled);
-	@include core.cssvars('commons-loading', config.$disabled);
+	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commmons-text-link', config.$textLink);
 
 	@include core.cssvars('palettes-primary', config.$primary);

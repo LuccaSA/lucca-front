@@ -20,7 +20,7 @@
 
 	.textfield-label,
 	.radiosfield-label,
-	.checkboxes-label {
+	.checkboxesfield-label {
 		color: var(--components-field-compact-label-color);
 		margin-right: var(--components-field-compact-label-right-margin);
 		width: var(--components-field-compact-label-sizes-default);
@@ -31,7 +31,7 @@
 
 	.textfield-messages,
 	.radiosfield-messages,
-	.checkboxes-messages {
+	.checkboxesfield-messages {
 		max-width: var(--components-field-compact-label-sizes-default);
 		align-items: center;
 		display: inline-flex;
@@ -61,7 +61,7 @@
 @mixin framed {
 	.textfield-messages,
 	.radiosfield-messages,
-	.checkboxes-messages {
+	.checkboxesfield-messages {
 		transition-duration: var(--commons-animations-durations-standard);
 		transition-property: transform;
 		position: absolute;
@@ -79,38 +79,38 @@
 
 	.textfield-messages-error,
 	.radiosfield-messages-error,
-	.checkboxes-messages-error {
+	.checkboxesfield-messages-error {
 		background-color: var(--palettes-error-700);
 		color: var(--colors-white-color);
 	}
 
 	.textfield-messages-warning,
 	.radiosfield-messages-warning,
-	.checkboxes-messages-warning {
+	.checkboxesfield-messages-warning {
 		background-color: var(--palettes-warning-700);
 		color: var(--colors-white-color);
 	}
 
 	.textfield-messages-valid,
 	.radiosfield-messages-valid,
-	.checkboxes-messages-valid,
+	.checkboxesfield-messages-valid,
 	.textfield-messages-success,
 	.radiosfield-messages-success,
-	.checkboxes-messages-success {
+	.checkboxesfield-messages-success {
 		background-color: var(--palettes-success-700);
 		color: var(--colors-white-color);
 	}
 
 	.textfield-messages-helper,
 	.radiosfield-messages-helper,
-	.checkboxes-messages-helper {
+	.checkboxesfield-messages-helper {
 		background-color: var(--palettes-grey-500);
 		color: var(--colors-white-color);
 	}
 
 	.textfield-input,
 	.radiosfield-input,
-	.checkboxes-input {
+	.checkboxesfield-input {
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: var(--colors-white-color);
 
@@ -123,7 +123,7 @@
 
 				~ .textfield-messages,
 				~ .radiosfield-messages,
-				~ .checkboxes-messages {
+				~ .checkboxesfield-messages {
 					transform: translateY(100%);
 				}
 			}
@@ -137,7 +137,7 @@
 
 	.textfield-suffix,
 	.radiosfield-suffix,
-	.checkboxes-suffix {
+	.checkboxesfield-suffix {
 		padding: var(--components-field-framed-side-padding);
 		top: auto;
 		z-index: 10;
