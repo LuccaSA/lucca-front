@@ -126,7 +126,7 @@
 			circle {
 				stroke-width: 20%;
 				stroke-dasharray: 100.5, 100.5;
-				stroke: white;
+				stroke: var(--colors-white-color);
 				fill: currentColor;
 				animation-name: stroke;
 				animation-timing-function: linear;

@@ -1,8 +1,262 @@
-@mixin focused {
+@use '../../commons/utils/form';
+
+@mixin inputHover {
+	background-color: var(--palettes-50, --components-textfield-hover-background);
+
+	&::placeholder {
+		color: var(--palettes-400, --palettes-grey-400);
+	}
+}
+
+@mixin inputFocus {
 	background-color: var(--colors-white-color);
 	box-shadow: 0 0 0 4px var(--components-textfield-focus-shadow-color), inset 0 0 0 1px var(--components-textfield-focus-border-color);
 
 	&::placeholder {
 		color: var(--components-textfield-focus-placeholder);
 	}
+}
+
+@mixin inputDisabled {
+	background-color: var(--components-textfield-disabled-background);
+	color: var(--components-textfield-disabled-color);
+	box-shadow: none;
+	cursor: default;
+
+	&::placeholder {
+		color: var(--components-textfield-disabled-color);
+	}
+}
+
+@mixin whiteInputFocus {
+	box-shadow: 0 0 0 4px var(--palettes-primary-200), 0 0 0 1px var(--palettes-primary-500) inset;
+
+	&::placeholder {
+		color: var(--components-textfield-focus-placeholder);
+	}
+}
+
+@mixin invertInputFocus {
+	box-shadow: 0 0 0 4px var(--palettes-primary-700), 0 0 0 1px var(--palettes-primary-500) inset;
+
+	&::placeholder {
+		color: var(--components-textfield-focus-placeholder);
+	}
+}
+
+@mixin filterHover {
+	background-color: var(--commons-background-base);
+}
+
+@mixin open {
+	z-index: 999 !important;
+
+	.textfield-options {
+		opacity: 1;
+		transform: scaleY(1);
+	}
+}
+
+@mixin framedInputHover {
+	&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
+		position: relative;
+		z-index: 1;
+		background-color: var(--colors-white-color);
+		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color));
+	}
+}
+
+@mixin framedInputFocus {
+	&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
+		position: relative;
+		z-index: 4;
+		background-color: var(--colors-white-color);
+		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+	}
+}
+
+@mixin framedInputInvalid {
+	~ .textfield-label {
+		color: var(--palettes-primary-700);
+	}
+}
+
+@mixin framedState($state) {
+	@if $state == 'error' {
+		z-index: 3;
+		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700));
+		background-color: var(--palettes-#{$state}-50);
+	}
+
+	// todo: déplacer dans field
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
+		color: var(--palettes-#{$state}-700);
+	}
+
+	.textfield-input {
+		&::placeholder {
+			color: var(--palettes-#{$state}-300);
+		}
+
+		@if $state == 'error' {
+			background-color: var(--palettes-#{$state}-50) !important;
+			box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)) !important;
+		}
+	}
+}
+
+@mixin framedStateInputHover($state) {
+	background-color: var(--palettes-#{$state}-50) !important;
+
+	@if $state == 'error' {
+		background-color: var(--palettes-#{$state}-100) !important;
+	}
+}
+
+@mixin framedStateInputFocus($state) {
+	background-color: var(--colors-white-color) !important;
+	box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
+
+	@if $state == 'error' {
+		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
+		background-color: var(--colors-white-color) !important;
+	}
+}
+
+@mixin framedErrorHover {
+	z-index: 4;
+}
+
+@mixin framedStateSearch($state) {
+	&::after {
+		color: var(--palettes-#{$state}-700);
+	}
+}
+
+@mixin framedStateHover($state) {
+	background-color: var(--palettes-#{$state}-50);
+
+	// todo: déplacer dans field
+	.textfield-messages,
+	.radiosfield-messages,
+	.checkboxesfield-messages {
+		transform: translateY(100%);
+	}
+}
+
+@mixin framedStateFocus($state) {
+	background-color: var(--colors-white-color);
+	box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50);
+
+	// todo: déplacer dans field
+	.textfield-messages,
+	.radiosfield-messages,
+	.checkboxesfield-messages {
+		transform: translateY(100%);
+	}
+}
+
+@mixin passwordActionPressed {
+	.icon-watch {
+		display: none;
+	}
+}
+
+@mixin passwordActionNotPressed {
+	.icon-unwatch {
+		display: none;
+	}
+}
+
+@mixin materialInputFocus {
+	&::placeholder {
+		opacity: 1;
+	}
+
+	.textfield-label,
+	~ .textfield-label {
+		font-size: var(--sizes-small-font-size);
+		color: var(--palettes-700, var(--components-textfield-material-default-palette-color));
+		top: 0;
+	}
+}
+
+@mixin materialLoading {
+	&::before,
+	&::after {
+		bottom: 0.4rem !important;
+		right: 0 !important;
+	}
+}
+
+@mixin materialInputFilled {
+	~ .textfield-label {
+		font-size: var(--sizes-small-font-size);
+		top: 0;
+	}
+}
+
+@mixin materialInputDisabled {
+	background-image: linear-gradient(to right, var(--components-textfield-material-border-color) 33%, rgba(255, 255, 255, 0) 0%);
+	background-size: 3px 1px;
+	background-color: transparent;
+	background-position: bottom;
+	background-repeat: repeat-x;
+	box-shadow: none;
+}
+
+@mixin materialInputState($state) {
+	@if $state == 'error' {
+		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
+	}
+
+	&:focus {
+		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
+	}
+
+	~ .textfield-label {
+		color: var(--palettes-#{$state}-700);
+	}
+
+	&:focus {
+		~ .textfield-label {
+			color: var(--palettes-#{$state}-700);
+		}
+	}
+}
+
+@mixin outlinedInputDisabled {
+	background-color: var(--components-textfield-disabled-background);
+	color: var(--components-textfield-disabled-color);
+	box-shadow: none;
+	cursor: default;
+}
+
+@mixin outlinedError {
+	.textfield-input {
+		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-200);
+	}
+}
+
+@mixin outlinedHover {
+	.textfield-input {
+		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
+			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-200, var(--palettes-primary-200));
+			background-color: var(--palettes-50, var(--palettes-primary-50));
+		}
+	}
+}
+
+@mixin outlinedFocus {
+	&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
+		background-color: var(--colors-white-color);
+		box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+			inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-600, var(--palettes-primary-600));
+	}
+}
+
+@mixin entryHover {
+	background-color: var(--palettes-primary-50);
 }

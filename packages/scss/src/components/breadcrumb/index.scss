@@ -10,7 +10,7 @@
 }
 
 .breadcrumbs-list-item-action {
-	&:is(.is-active, [aria-current='page']) {
+	&:is(.is-active, .active, [aria-current='page']) {
 		@include active;
 	}
 }

@@ -22,7 +22,7 @@
 		@include nav;
 	}
 
-	&:is(.is-loading) {
+	&:is(.is-loading, .loading) {
 		@include loading;
 	}
 }

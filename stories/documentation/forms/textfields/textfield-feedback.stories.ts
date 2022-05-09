@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldFeedbackStory {}
+interface TextfieldFeedbackStory {}
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Feedback',
+	title: 'Documentation/Forms/Textfield/Feedback',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextifeldFeedbackStory): string {
+function getTemplate(args: TextfieldFeedbackStory): string {
 	return `
 	<label class="textfield is-loading">
 		<input class="textfield-input" type="text">
@@ -21,17 +21,19 @@ function getTemplate(args: TextifeldFeedbackStory): string {
 		<input class="textfield-input" type="text">
 		<span class="textfield-label">Invalid</span>
 	</label>
-	`
+	`;
 }
 
-const Template: Story<TextifeldFeedbackStory> = (args: TextifeldFeedbackStory) => ({
+const Template: Story<TextfieldFeedbackStory> = (args: TextfieldFeedbackStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const Feedback = Template.bind({});

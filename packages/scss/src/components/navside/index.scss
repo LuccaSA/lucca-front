@@ -18,7 +18,7 @@
 					@include compactHover;
 				}
 
-				&:is(.is-active) {
+				&:is(.is-active, .active) {
 					@include compactActive;
 				}
 			}
@@ -36,7 +36,7 @@
 			}
 		}
 
-		&:is(.is-open) {
+		&:is(.is-open, .open) {
 			@include mobileOpen;
 
 			&.mod-withBanner {
@@ -44,7 +44,7 @@
 			}
 		}
 
-		&:not(.is-open) {
+		&:not(.is-open, .open) {
 			.navSide-item {
 				&:not(.mod-mobileToggle) {
 					@include mobileHidden;
@@ -59,7 +59,7 @@
 		@include mobileToggle;
 	}
 
-	&:is(.is-open) {
+	&:is(.is-open, .open) {
 		@include expanded;
 
 		.navSide-item-subMenu-link {
@@ -67,7 +67,7 @@
 				@include sublinkHover;
 			}
 
-			&:is(.is-active) {
+			&:is(.is-active, .active) {
 				@include sublinkActive;
 			}
 		}
@@ -80,7 +80,7 @@
 
 .navSide-item-subMenu-link,
 .navSide-item-link {
-	&:is(.is-active) {
+	&:is(.is-active, .active) {
 		@include active;
 	}
 
@@ -90,7 +90,7 @@
 }
 
 html {
-	&:is(.hasMenu) {
+	&:is(.hasMenu, .withMenu) {
 		@include media.smallerThan('s') {
 			@include overlay;
 		}

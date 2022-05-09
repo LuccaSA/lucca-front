@@ -10,11 +10,11 @@
 		}
 	}
 
-	&:is(.is-sorted-descending) {
+	&:is(.is-sorted-descending, .sortedDescending) {
 		@include descendingLegacy;
 	}
 
-	&:is(.is-sorted-ascending) {
+	&:is(.is-sorted-ascending, .sortedAscending) {
 		@include ascendingLegacy;
 	}
 
@@ -32,11 +32,11 @@
 			@include sortableAlignRight;
 		}
 
-		&:is(.is-sorted-descending) {
+		&:is(.is-sorted-descending, .sortedDescending) {
 			@include descendingLegacyAlignRight;
 		}
 
-		&:is(.is-sorted-ascending) {
+		&:is(.is-sorted-ascending, .sortedAscending) {
 			@include ascendingLegacyAlignRight;
 		}
 

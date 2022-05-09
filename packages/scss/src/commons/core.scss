@@ -82,12 +82,12 @@ $states: 'error,' 'warning', 'success';
 	@each $boxModel in $boxModel {
 		@each $boxDirection in $boxDirection {
 			@each $key, $value in config.$spacings {
-				@if ($boxModel != 'border' or $value == 0) {
+				@if $boxModel != 'border' or $value == 0 {
 					@include spacing($boxModel, $boxDirection, $key, $value);
 				}
 			}
 
-			@if ($boxModel == 'margin') {
+			@if $boxModel == 'margin' {
 				@include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto);
 			}
 		}

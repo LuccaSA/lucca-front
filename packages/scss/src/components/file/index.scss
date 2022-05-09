@@ -12,11 +12,11 @@
 		@include icon;
 	}
 
-	&:is(.is-droppable) {
+	&:is(.is-droppable, .droppable) {
 		@include legacyDroppable;
 	}
 
-	&:is(.is_disabled, .is-disabled) {
+	&:is(.is_disabled, .is-disabled, .disabled) {
 		@include legacyDisabled;
 	}
 }
@@ -26,11 +26,11 @@
 		@include disabled;
 	}
 
-	&:is(.is-droppable) {
+	&:is(.is-droppable, .droppable) {
 		@include droppable;
 	}
 
-	&:is(.is-uploaded) {
+	&:is(.is-uploaded, .uploaded) {
 		@include uploaded;
 	}
 

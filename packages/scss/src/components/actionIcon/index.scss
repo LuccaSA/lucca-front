@@ -8,11 +8,11 @@
 		@include invert;
 	}
 
-	&:is(.is-disabled, [disabled]) {
+	&:is(.is-disabled, .disabled, [disabled]) {
 		@include disabled;
 	}
 
-	&:is(.is-loading) {
+	&:is(.is-loading, .loading) {
 		@include loading;
 	}
 }

@@ -5,7 +5,7 @@
 
 	@at-root {
 		.collapse-title {
-			margin-bottom: _theme('spacings.smallest');
+			margin-bottom: var(--spacings-smallest);
 			display: inline-flex;
 			overflow: hidden;
 			cursor: pointer;
