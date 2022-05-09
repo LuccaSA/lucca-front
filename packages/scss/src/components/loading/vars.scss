@@ -1,9 +1,2 @@
 @mixin vars {
-	@at-root {
-		html {
-			--commons-loading-background: var(--palettes-primary-200);
-			--commons-loading-frontground: var(--palettes-primary-700);
-			--commons-loading-speed: 600ms;
-		}
-	}
 }
