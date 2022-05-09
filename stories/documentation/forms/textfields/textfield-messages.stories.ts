@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldMessagesStory {}
+interface TextfieldMessagesStory {}
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Messages',
+	title: 'Documentation/Forms/Textfield/Messages',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextifeldMessagesStory): string {
+function getTemplate(args: TextfieldMessagesStory): string {
 	return `
 		<label class="textfield">
 			<input class="textfield-input" type="text">
@@ -30,17 +30,19 @@ function getTemplate(args: TextifeldMessagesStory): string {
 				<span class="textfield-messages-error">Oops, il y a une erreur !</span>
 			</span>
 		</label>
-	`
+	`;
 }
 
-const Template: Story<TextifeldMessagesStory> = (args: TextifeldMessagesStory) => ({
+const Template: Story<TextfieldMessagesStory> = (args: TextfieldMessagesStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const Messages = Template.bind({});

@@ -8,11 +8,11 @@
 		@include indeterminate;
 	}
 
-	&:is(.is-success) {
+	&:is(.is-success, .success) {
 		@include success;
 	}
 
-	&:is(.is-error) {
+	&:is(.is-error, .error) {
 		@include error;
 	}
 }

@@ -62,7 +62,7 @@
 }
 
 html {
-	&:is(.has-overlay) {
+	&:is(.has-overlay, .withOverlay) {
 		@include overlay;
 	}
 }

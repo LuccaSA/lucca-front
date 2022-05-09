@@ -27,6 +27,6 @@
 @mixin clickableElevated {
 	&:focus-visible,
 	&:hover {
-		box-shadow: var(var(--commons-elevations-elevation-3));
+		box-shadow: var(--commons-elevations-elevation-3);
 	}
 }

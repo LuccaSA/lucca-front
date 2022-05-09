@@ -27,7 +27,6 @@ html {
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
-
 	@include core.cssvars('palettes-primary', config.$primary);
 	@include core.cssvars('palettes-secondary', config.$secondary);
 	@include core.cssvars('palettes-grey', config.$grey);
@@ -63,7 +62,7 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	background-color: var(--commons-background-base);
-	color: var(--colors-text-default-color);
+	color: var(--palettes-grey-800);
 	font-family: var(--commons-font-family);
 	font-size: var(--sizes-standard-font-size);
 	line-height: var(--sizes-standard-line-height);
@@ -76,7 +75,6 @@ body {
 a {
 	color: var(--commons-text-link-color);
 
-	// todo: manage focus
 	&:hover {
 		color: var(--commons-text-link-hover);
 	}

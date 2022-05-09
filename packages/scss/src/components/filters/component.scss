@@ -7,6 +7,8 @@
 	position: relative;
 	z-index: 99;
 
+	outline: 2px dashed greenyellow !important;
+
 	@at-root {
 		.filters-sectionLeft {
 			align-items: center;

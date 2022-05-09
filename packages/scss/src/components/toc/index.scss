@@ -14,7 +14,7 @@
 		@include hover;
 	}
 
-	&:is(.is-active) {
+	&:is(.is-active, .active) {
 		@include active;
 	}
 }

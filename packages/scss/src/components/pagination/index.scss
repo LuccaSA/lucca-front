@@ -6,7 +6,7 @@
 }
 
 .pagination-item {
-	&:is(.is-ellipsis) {
+	&:is(.is-ellipsis, .ellipsis) {
 		@include ellipsis;
 	}
 }
