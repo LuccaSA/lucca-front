@@ -33,7 +33,7 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef<HTMLElement>;
 
-	@Input() set standard(standard: string) {
+	@Input() set standard(standard: 'v3' | 'v4') {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {
@@ -116,7 +116,7 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 {
 	@ViewChild('searchInput', { read: ElementRef, static: true })
 	searchInput: ElementRef<HTMLElement>;
-	@Input() set standard(standard: string) {
+	@Input() set standard(standard: 'v3' | 'v4') {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {
