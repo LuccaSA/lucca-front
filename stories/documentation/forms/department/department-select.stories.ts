@@ -14,7 +14,7 @@ class DepartmentStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Department/Select',
+	title: 'Documentation/Forms/DepartmentSelect',
 	component: LuDepartmentSelectInputComponent,
 	decorators: [
 		componentWrapperDecorator(DepartmentStory),
@@ -58,7 +58,7 @@ class DepartmentStory {
 	@Input() appInstanceId: number = null;
 	@Input() operations: number[] = [];
 	@Input() filters: string[] = [];
-}`
+}`;
 // Select.args = {
 // 	appInstanceId: 15,
 // 	operations: [1],

@@ -1,0 +1,22 @@
+import { Meta, Story } from '@storybook/angular';
+
+interface ButtonCounterStory {
+}
+
+export default {
+	title: 'Documentation/Actions/Button/Counter',
+} as Meta;
+
+function getTemplate(args: ButtonCounterStory): string {
+	return `
+	<button type="button" class="button mod-counter">Bouton<span class="button-counter">7</span></button>
+	`;
+}
+
+const Template: Story<ButtonCounterStory> = (args: ButtonCounterStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const Counter = Template.bind({});
+Counter.args = { };

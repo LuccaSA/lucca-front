@@ -5,6 +5,7 @@ interface ButtonBasicStory {
 	palette: string;
 	state: string;
 	size: string;
+	block: boolean;
 	disabled: boolean;
 }
 
@@ -35,15 +36,21 @@ export default {
 				type: 'radio',
 			},
 		},
+		block: {
+			control: {
+				type: 'boolean',
+			}
+		},
 	},
 } as Meta;
 
 function getTemplate(args: ButtonBasicStory): string {
 	const classes = [args.mod, args.state, args.palette, args.size].filter(Boolean).join(' ');
-	const attributes = args.disabled ? `disabled="disabled"` : '';
+	const attributes = args.disabled ? `disabled` : '';
+	const block = args.block ? `mod-block` : '';
 
 	return `
-	<button class="button ${classes}" ${attributes}>Bouton</button>
+	<button class="button ${classes} ${block}" ${attributes}>Bouton</button>
 	`;
 }
 
@@ -66,4 +73,4 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '', size: '', state: '', palette: '', disabled: false };
+Basic.args = { mod: '', size: '', state: '', palette: '', block: '', disabled: false };
