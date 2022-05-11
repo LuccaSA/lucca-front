@@ -46,7 +46,7 @@ export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
 		super(hostService || selfService);
 	}
 
-	@Input() set standard(standard: string) {
+	@Input() set standard(standard: 'v3' | 'v4') {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {

@@ -1,18 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ILuApiItem } from '../api.model';
 import { ALuApiService } from './api-service.model';
 import { LuApiV3Service } from './api-v3.service';
 import { LuApiV4Service } from './api-v4.service';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuApiService<T> {
 	private _v3Service: LuApiV3Service<T>;
 	private _v4Service: LuApiV4Service<T>;
 
-	private _standard = 'v3';
-	set standard(std: string) {
+	private _standard: 'v3' | 'v4' = 'v3';
+	set standard(std: 'v3' | 'v4') {
 		this._standard = std;
 	}
 

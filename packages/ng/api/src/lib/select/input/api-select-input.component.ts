@@ -21,11 +21,20 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
 	implements ControlValueAccessor, AfterViewInit
 {
-	@Input() standard: string;
+	@Input() standard: 'v3' | 'v4' = 'v3';
 	@Input() api: string;
+	/**
+	 * only works with standard="v3"
+	 */
 	@Input() fields: string;
 	@Input() filters: string[];
+	/**
+	 * only works with standard="v3", otherwise use sort
+	 */
 	@Input() orderBy: string;
+	/**
+	 * only works with standard="v4", otherwise use orderBy
+	 */
 	@Input() sort: string;
 
 	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;

@@ -39,7 +39,7 @@ export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem> extends ALu
 		super(hostService || selfService);
 	}
 
-	@Input() set standard(standard: string) {
+	@Input() set standard(standard: 'v3' | 'v4') {
 		this._service.standard = standard;
 	}
 	@Input() set api(api: string) {
