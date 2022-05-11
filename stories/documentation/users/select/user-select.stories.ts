@@ -6,14 +6,9 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
 	selector: 'user-select-stories',
-	template: `
-<label class="textfield">
-	<lu-user-select class="textfield-input" [ngModel]="model" [filters]="['id=notequal,6,7,8,9']"></lu-user-select>
-	<span class="textfield-label">Utilisateurs</span>
-</label>
-`,
+	templateUrl: './user-select.stories.html',
 }) class UserSelectStory {
-	@Input() model;
+	@Input() public model;
 }
 
 export default {
@@ -36,10 +31,34 @@ const template: Story<UserSelectStory> = (args: UserSelectStory) => ({
 	props: args,
 });
 
-const code = `
+const code =
+`
+/* 1. Importer le LuUserModule */
+import { LuUserModule } from '@lucca-front/ng/user';
+
+@NgModule({
+  imports: [LuUserModule]
+})
+class UserSelectStoriesModule {}
+
+
+/* 2. (Exemple n° 1) Utiliser le lu-user-select */
 <label class="textfield">
   <lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
   <span class="textfield-label">Utilisateurs</span>
+</label>
+
+/* 3. (Exemple n° 2) Utiliser le lu-user-select avec <code class="code">enableFormerEmployees</code> */
+<label class="textfield u-marginTopStandard">
+  <lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true"></lu-user-select>
+  <span class="textfield-label">Utilisateurs avec <code class="code">enableFormerEmployees</code></span>
+</label>
+
+/* 4. (Exemple n° 3) Utiliser le lu-user-select avec filtre sur son appInstanceId et ses opérations */
+<label class="textfield u-marginTopStandard">
+  <lu-user-select class="textfield-input" [ngModel]="model" appInstanceId="6" [operations]="[1]">
+  </lu-user-select>
+  <span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
 </label>
 `
 

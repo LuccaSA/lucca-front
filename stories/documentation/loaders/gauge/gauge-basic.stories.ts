@@ -12,12 +12,12 @@ export default {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 		thin: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -29,7 +29,7 @@ function getTemplate(args: GaugeBasicStory): string {
 	<div class="gauge ${classes} ${thin}">
 		<div class="gauge-bar" style="width:33%"></div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<GaugeBasicStory> = (args: GaugeBasicStory) => ({

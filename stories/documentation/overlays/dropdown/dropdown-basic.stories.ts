@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-import {
-	LuDropdownModule,
-	LuDropdownPanelComponent,
-	LuDropdownTriggerDirective,
-} from '../../../../packages/ng/dropdown/src';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { LuDropdownModule } from '../../../../packages/ng/dropdown/src';
 
 @Component({
 	selector: 'dropdown-stories',
 	templateUrl: './dropdown-basic.stories.html',
-}) class DropdownBasicStories {
-	constructor() { }
+})
+class DropdownBasicStories {
+	constructor() {}
 }
 
 export default {
@@ -20,11 +17,8 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [DropdownBasicStories],
-			imports: [
-				BrowserAnimationsModule,
-				LuDropdownModule,
-			]
-		})
+			imports: [BrowserAnimationsModule, LuDropdownModule],
+		}),
 	],
 } as Meta;
 
@@ -59,16 +53,16 @@ class DropdownStoriesModule {}
 		<button class="lu-dropdown-options-item-action" luDropdownItem>Button 4</button>
 	</li>
 </lu-dropdown>
-`
+`;
 
 export const Basic = Template.bind({});
-Basic.args = {}
+Basic.args = {};
 Basic.parameters = {
 	controls: { include: [] },
 	docs: {
 		source: {
 			language: 'ts',
 			code,
-		}
-	}
+		},
+	},
 };
