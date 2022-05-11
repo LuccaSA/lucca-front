@@ -24,6 +24,8 @@ demo/ng
 .storybook/documentation.json
 storybook-static
 
+# compodoc
+compodoc-static
 
 /.angular/cache
 
