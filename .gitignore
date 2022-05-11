@@ -24,8 +24,6 @@ demo/ng
 .storybook/documentation.json
 storybook-static
 
-# packages stuff
-packages/*/package-lock.json
 
 /.angular/cache
 
