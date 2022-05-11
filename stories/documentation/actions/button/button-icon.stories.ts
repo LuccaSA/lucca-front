@@ -22,7 +22,6 @@ const Template: Story<ButtonIconStory> = (args: ButtonIconStory) => ({
 		.button {
 			vertical-align: top;
 		}`,
-		args.mod === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
