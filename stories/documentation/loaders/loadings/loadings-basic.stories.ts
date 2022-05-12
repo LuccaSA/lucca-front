@@ -73,7 +73,7 @@ const Template: Story<LoadingsBasicStory> = (args: LoadingsBasicStory) => ({
 			display: block;
 			min-height: 100px;
 		}`,
-		args.invert === true ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.invert === true ? ':host { background-color: #333333; min-height: 130px; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
