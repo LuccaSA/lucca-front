@@ -28,14 +28,8 @@ html {
 	@include core.cssvars('commons-loading', config.$loading);
   @include core.cssvars('commons-text-link', config.$textLink);
 
-	@each $shade in map.keys(config.$primary) {
-		--palettes-primary-#{$shade}: var(--palettes-primaryProduct-#{$shade}, #{map.get(config.$primary, $shade)});
-	}
-
-	@each $shade in map.keys(config.$secondary) {
-		--palettes-secondary-#{$shade}: var(--palettes-secondaryProduct-#{$shade}, #{map.get(config.$secondary, $shade)});
-	}
-
+	@include core.cssvars('palettes-primary', config.$primary);
+	@include core.cssvars('palettes-secondary', config.$secondary);
 	@include core.cssvars('palettes-grey', config.$grey);
 	@include core.cssvars('palettes-success', config.$success);
 	@include core.cssvars('palettes-warning', config.$warning);
