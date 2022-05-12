@@ -1,5 +1,5 @@
-@use './../commons/utils/reset';
-@use './../../../icons/src/mixins' as icon;
+@use '../../commons/utils/reset';
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin small { 
 	.timeline-step-title {
