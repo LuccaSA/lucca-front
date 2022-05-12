@@ -1,0 +1,17 @@
+<div class="u-displayFlex u-flexDirectionColumn">
+	<label class="textfield">
+		<lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
+		<span class="textfield-label">Utilisateurs basiques</span>
+	</label>
+
+	<label class="textfield u-marginTopStandard">
+		<lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true"></lu-user-select>
+		<span class="textfield-label">Utilisateurs avec <code class="code">enableFormerEmployees</code></span>
+	</label>
+
+	<label class="textfield u-marginTopStandard">
+		<lu-user-select class="textfield-input" [ngModel]="model" appInstanceId="6" [operations]="[1]">
+		</lu-user-select>
+		<span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
+	</label>
+</div>

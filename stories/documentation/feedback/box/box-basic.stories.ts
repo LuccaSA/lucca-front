@@ -1,26 +1,25 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface BoxBasicStory {
-	mod: string;
+	grey: boolean;
 }
 
 export default {
 	title: 'Documentation/Feedback/Box/Basic',
 	argTypes: {
-		mod: {
-			options: ['', 'mod-grey'],
+		grey: {
 			control: {
-				type: 'radio',
-			}
+				type: 'boolean',
+			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: BoxBasicStory): string {
-	const classes = [args.mod].filter(Boolean).join(' ');
+	const grey = args.grey ? `mod-grey` : '';
 
 	return `
-	<div class="box ${classes}">
+	<div class="box ${grey}">
 	    Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
 	</div>
 	`
@@ -33,11 +32,11 @@ const Template: Story<BoxBasicStory> = (args: BoxBasicStory) => ({
 		:host {
 			display: block;
 		}`,
-		args.mod === ''
+		args.grey === false
 			? ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }'
 			: ''
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '' };
+Basic.args = { grey: false };

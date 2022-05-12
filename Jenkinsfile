@@ -57,8 +57,11 @@ node(label: CI.getSelectedNode(script:this)) {
 					echo "deploying ${branchName}"
 					bat "npm run compodoc"
 					bat "npm run build-storybook"
-					powershell "Remove-Item \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} -Recurse"
-					powershell "Copy-Item storybook-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName} -Recurse"
+					bat "npm run build-compodoc"
+					powershell "Remove-Item \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\storybook -Recurse"
+					powershell "Remove-Item \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\compodoc -Recurse"
+					powershell "Copy-Item storybook-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\storybook -Recurse"
+					powershell "Copy-Item compodoc-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\compodoc -Recurse"
 				}
 
 				if (isPR) {

@@ -8,6 +8,7 @@ export default {
 	title: 'Documentation/Actions/Button/Group',
 	argTypes: {
 		noFlexWrap: {
+			description: 'Désactive la réorganisation des butons en cas de manque de place.',
 			control: {
 				type: 'boolean',
 			},

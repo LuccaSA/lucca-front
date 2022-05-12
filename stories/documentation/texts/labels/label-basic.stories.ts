@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/angular';
 
 interface LabelBasicStory {
 	palette: string;
+	size: string;
 }
 
 export default {
@@ -11,17 +12,24 @@ export default {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
-			}
+			},
+		},
+		size: {
+			options: ['', 'mod-small', 'mod-smaller'],
+			control: {
+				type: 'radio',
+			},
+			description: "Ne fonctionne qu'avec le mod-number",
 		},
 	},
 } as Meta;
 
 function getTemplate(args: LabelBasicStory): string {
-	const classes = [args.palette].filter(Boolean).join(' ');
+	const classes = [args.palette, args.size].filter(Boolean).join(' ');
 	return `
 		<span class="label ${classes}">Label</span>
 		<span class="label ${classes} mod-number">7</span>
-	`
+	`;
 }
 
 const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
@@ -30,4 +38,4 @@ const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '' };
+Basic.args = { palette: '', size: '' };

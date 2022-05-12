@@ -18,6 +18,7 @@ export default {
 			}
 		},
 		row: {
+			description: "En dehors d'un <code>.checkboxesfield-input</code>, <code>.mod-inline</code> peut être ajouté sur <code>.checkbox</code> pour obtenir un affichage horizontal.",
 			control: {
 				type: 'boolean',
 			}
