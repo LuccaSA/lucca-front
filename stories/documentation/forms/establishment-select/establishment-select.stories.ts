@@ -5,17 +5,14 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'establishment-select-stories',
 	template: `
-		<section class="section">
-			<label class="textfield">
-				<lu-establishment-select class="textfield-input" placeholder="Select an establishment"></lu-establishment-select>
-				<span class="textfield-label">Establishment Select</span>
-			</label>
-			<div class="divider"></div>
-			<label class="textfield">
-				<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple"></lu-establishment-select>
-				<span class="textfield-label">Establishment Multiple Select</span>
-			</label>
-		</section>
+		<label class="textfield mod-inline u-marginRightSmall">
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment"></lu-establishment-select>
+			<span class="textfield-label">Establishment Select</span>
+		</label>
+		<label class="textfield mod-inline">
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple"></lu-establishment-select>
+			<span class="textfield-label">Establishment Multiple Select</span>
+		</label>
 	`,
 })
 class EstablishmentSelectStory {
