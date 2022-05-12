@@ -1,26 +1,25 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface BoxKillableStory {
-	mod: string;
+	grey: boolean;
 }
 
 export default {
 	title: 'Documentation/Feedback/Box/Killable',
 	argTypes: {
-		mod: {
-			options: ['', 'mod-grey'],
+		grey: {
 			control: {
-				type: 'radio',
-			}
+				type: 'boolean',
+			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: BoxKillableStory): string {
-	const classes = [args.mod].filter(Boolean).join(' ');
+	const grey = args.grey ? `mod-grey` : '';
 
 	return `
-	<div class="box ${classes}">
+	<div class="box ${grey}">
 	    <div class="box-close">
 	        <button class="actionIcon">
 	            <span aria-hidden="true" class="lucca-icon">cross</span>
@@ -39,11 +38,11 @@ const Template: Story<BoxKillableStory> = (args: BoxKillableStory) => ({
 		:host {
 			display: block;
 		}`,
-		args.mod === ''
+		args.grey === false
 			? ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }'
 			: ''
 	],
 });
 
 export const Killable = Template.bind({});
-Killable.args = { mod: '' };
+Killable.args = { grey: false };
