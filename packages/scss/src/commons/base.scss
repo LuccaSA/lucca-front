@@ -80,26 +80,10 @@ a {
 	}
 }
 
-.palette-primary {
-	@include core.cssvars('palettes', config.$primary);
-}
-
-.palette-secondary {
-	@include core.cssvars('palettes', config.$secondary);
-}
-
-.palette-grey {
-	@include core.cssvars('palettes', config.$grey);
-}
-
-.palette-success {
-	@include core.cssvars('palettes', config.$success);
-}
-
-.palette-warning {
-	@include core.cssvars('palettes', config.$warning);
-}
-
-.palette-error {
-	@include core.cssvars('palettes', config.$error);
+@each $palette in core.$palettes {
+	.palette-#{$palette} {
+		@each $shade in map.keys(config.$primary) {
+			--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
+		}
+	}
 }
