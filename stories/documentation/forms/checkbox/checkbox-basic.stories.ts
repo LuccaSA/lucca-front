@@ -52,13 +52,13 @@ function getTemplate(args: CheckboxBasicStory): string {
 		<legend class="checkboxesfield-label">Liste de checkboxes</legend>
 		<div class="checkboxesfield-input ${row}">
 			<div>
-				<label class="checkbox mod-noLabel ${classes} ${grey}">
+				<label class="checkbox ${classes} ${grey}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required} checked>
 					<span class="checkbox-label">checkbox</span>
 				</label>
 			</div>
 			<div>
-				<label class="checkbox mod-noLabel ${classes} ${grey}">
+				<label class="checkbox ${classes} ${grey}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required}>
 					<span class="checkbox-label">checkbox</span>
 				</label>
