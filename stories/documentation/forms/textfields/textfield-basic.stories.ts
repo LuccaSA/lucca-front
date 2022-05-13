@@ -1,18 +1,21 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldBasicStory {
+interface TextfieldBasicStory {
 	palette: string;
 	display: string;
 	style: string;
 	size: string;
+	small: boolean;
+	noLabel: boolean;
 	disabled: boolean;
 	error: boolean;
 	required: boolean;
 	invert: boolean;
+	white: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Basic',
+	title: 'Documentation/Forms/Textfield/Basic',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
@@ -29,13 +32,24 @@ export default {
 		style: {
 			options: ['', 'mod-compact', 'mod-material', 'mod-framed'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			}
 		},
 		size: {
 			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-standard', 'mod-long', 'mod-longer', 'mod-longest'],
 			control: {
-				type: 'radio',
+				type: 'select',
+			}
+		},
+		small: {
+			control: {
+				type: 'boolean',
+			}
+		},
+		noLabel: {
+			description: "Une fois combiné à <code>.mod-material</code>, permet d'intégrer un champs de saisie dans une phrase.",
+			control: {
+				type: 'boolean',
 			}
 		},
 		disabled: {
@@ -58,24 +72,32 @@ export default {
 				type: 'boolean',
 			}
 		},
+		white: {
+			control: {
+				type: 'boolean',
+			}
+		},
 	},
 } as Meta;
 
-function getTemplate(args: TextifeldBasicStory): string {
+function getTemplate(args: TextfieldBasicStory): string {
 	const classes = [args.palette, args.display, args.style, args.size].filter(Boolean).join(' ');
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
 	const invert = args.invert ? `mod-invert` : '';
+	const small = args.small ? `mod-small` : '';
+	const noLabel = args.noLabel ? `mod-noLabel` : '';
+	const white = args.white ? `mod-white` : '';
 	const error = args.error ? `is-error` : '';
 	return `
-		<label class="textfield ${classes} ${invert}">
+		<label class="textfield ${classes} ${small} ${noLabel} ${invert} ${white}">
 			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
 			<span class="textfield-label">Label textfield</span>
 		</label>
 	`
 }
 
-const Template: Story<TextifeldBasicStory> = (args: TextifeldBasicStory) => ({
+const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`
@@ -89,4 +111,4 @@ const Template: Story<TextifeldBasicStory> = (args: TextifeldBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', display: '', style: '', size: '', disabled: false, error: false, required: false, invert: false };
+Basic.args = { palette: '', display: '', style: '', noLabel: false, size: '', small: '', disabled: false, error: false, required: false, invert: false, white: false, };
