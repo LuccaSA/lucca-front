@@ -1,15 +1,15 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldPasswordStory {
+interface TextfieldPasswordStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Password',
+	title: 'Documentation/Forms/Textfield/Password',
 	argTypes: {
 	},
 } as Meta;
 
-function getTemplate(args: TextifeldPasswordStory): string {
+function getTemplate(args: TextfieldPasswordStory): string {
 	return `
 	<label class="textfield mod-password">
 		<input class="textfield-input" type="password" placeholder="placeholder" value="azerty12345#@!%;" />
@@ -31,7 +31,7 @@ function getTemplate(args: TextifeldPasswordStory): string {
 	`
 }
 
-const Template: Story<TextifeldPasswordStory> = (args: TextifeldPasswordStory) => ({
+const Template: Story<TextfieldPasswordStory> = (args: TextfieldPasswordStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

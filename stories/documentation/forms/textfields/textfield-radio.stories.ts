@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldRadioStory {}
+interface TextfieldRadioStory {}
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Radio',
+	title: 'Documentation/Forms/Textfield/Radio',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextifeldRadioStory): string {
+function getTemplate(args: TextfieldRadioStory): string {
 	return `
 		<label class="radio">
 			<input class="radio-input" type="radio" name="radioListID">
@@ -26,7 +26,7 @@ function getTemplate(args: TextifeldRadioStory): string {
 	`
 }
 
-const Template: Story<TextifeldRadioStory> = (args: TextifeldRadioStory) => ({
+const Template: Story<TextfieldRadioStory> = (args: TextfieldRadioStory) => ({
 	props: args,
 	template: getTemplate(args)
 });
