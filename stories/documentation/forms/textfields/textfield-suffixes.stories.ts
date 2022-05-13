@@ -1,27 +1,27 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextfieldSuffixesStory {}
+interface TextfieldSearchAndSuffixStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Suffixes',
+	title: 'Documentation/Forms/Textfield/Search And Suffix',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextfieldSuffixesStory): string {
+function getTemplate(args: TextfieldSearchAndSuffixStory): string {
 	return `
+		<label class="textfield mod-search">
+			<input class="textfield-input" type="text" placeholder="ex : Mon précieux">
+			<span class="textfield-label">Rechercher</span>
+		</label>
 		<label class="textfield mod-withSuffix">
 			<input class="textfield-input" type="text">
 			<span class="textfield-label">Label textfield</span>
 			<span class="textfield-suffix">€</span>
 		</label>
-		<label class="textfield mod-search">
-			<input class="textfield-input" type="text" placeholder="ex : Mon précieux">
-			<span class="textfield-label">Rechercher</span>
-		</label>
 	`
 }
 
-const Template: Story<TextfieldSuffixesStory> = (args: TextfieldSuffixesStory) => ({
+const Template: Story<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAndSuffixStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`
@@ -31,5 +31,5 @@ const Template: Story<TextfieldSuffixesStory> = (args: TextfieldSuffixesStory) =
 		}`]
 });
 
-export const Suffixes = Template.bind({});
-Suffixes.args = {};
+export const SearchAndSuffix = Template.bind({});
+SearchAndSuffix.args = {};
