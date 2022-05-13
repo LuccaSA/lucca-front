@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldBasicStory {
+interface TextfieldBasicStory {
 	palette: string;
 	display: string;
 	style: string;
@@ -12,7 +12,7 @@ interface TextifeldBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Basic',
+	title: 'Documentation/Forms/Textfield/Basic',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
@@ -61,7 +61,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: TextifeldBasicStory): string {
+function getTemplate(args: TextfieldBasicStory): string {
 	const classes = [args.palette, args.display, args.style, args.size].filter(Boolean).join(' ');
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
@@ -71,11 +71,11 @@ function getTemplate(args: TextifeldBasicStory): string {
 		<label class="textfield ${classes} ${invert}">
 			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
 			<span class="textfield-label">Label textfield</span>
-		</label>
+		</label>g
 	`
 }
 
-const Template: Story<TextifeldBasicStory> = (args: TextifeldBasicStory) => ({
+const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`

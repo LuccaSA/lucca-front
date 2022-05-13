@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldSuffixesStory {}
+interface TextfieldSuffixesStory {}
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Suffixes',
+	title: 'Documentation/Forms/Textfield/Suffixes',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextifeldSuffixesStory): string {
+function getTemplate(args: TextfieldSuffixesStory): string {
 	return `
 		<label class="textfield mod-withSuffix">
 			<input class="textfield-input" type="text">
@@ -21,7 +21,7 @@ function getTemplate(args: TextifeldSuffixesStory): string {
 	`
 }
 
-const Template: Story<TextifeldSuffixesStory> = (args: TextifeldSuffixesStory) => ({
+const Template: Story<TextfieldSuffixesStory> = (args: TextfieldSuffixesStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`
