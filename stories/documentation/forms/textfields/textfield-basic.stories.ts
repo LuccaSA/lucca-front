@@ -30,7 +30,7 @@ export default {
 			}
 		},
 		style: {
-			description: '<code>mod-outlined</code> & <code>mod-compact</code> can be combined.'
+			description: '<code>mod-outlined</code> & <code>mod-compact</code> can be combined.',
 			options: ['', 'mod-compact', 'mod-material', 'mod-framed', 'mod-outlined'],
 			control: {
 				type: 'select',
