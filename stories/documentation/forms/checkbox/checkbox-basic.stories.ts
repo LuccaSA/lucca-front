@@ -34,6 +34,7 @@ export default {
 			}
 		},
 		grey: {
+			description: 'Legacy 🦕',
 			control: {
 				type: 'boolean',
 			}
