@@ -30,7 +30,8 @@ export default {
 			}
 		},
 		style: {
-			options: ['', 'mod-compact', 'mod-material', 'mod-framed'],
+			description: '<code>mod-outlined</code> & <code>mod-compact</code> can be combined.'
+			options: ['', 'mod-compact', 'mod-material', 'mod-framed', 'mod-outlined'],
 			control: {
 				type: 'select',
 			}
@@ -47,7 +48,7 @@ export default {
 			}
 		},
 		noLabel: {
-			description: "Une fois combiné à <code>.mod-material</code>, permet d'intégrer un champs de saisie dans une phrase.",
+			description: "Une fois combiné à <code>mod-material</code>, permet d'intégrer un champs de saisie dans une phrase.",
 			control: {
 				type: 'boolean',
 			}

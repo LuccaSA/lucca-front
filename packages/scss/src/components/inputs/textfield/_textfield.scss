@@ -183,7 +183,7 @@
 		&.mod-small {
 			.textfield-input {
 				height: 4rem;
-				line-height: _theme("sizes.small.line-height");
+				line-height: _theme("sizes.smaller.line-height");
 				font-size: _theme("sizes.small.font-size");
 			}
 		}
@@ -326,16 +326,16 @@
 	/* Size */
 	&.mod-small {
 		.textfield-input {
-			line-height: _theme("sizes.small.line-height");
+			line-height: _theme("sizes.smaller.line-height");
 			font-size: _theme("sizes.small.font-size");
 		}
 
 		.textfield-suffix {
-			line-height: _theme("sizes.small.line-height");
+			line-height: _theme("sizes.smaller.line-height");
 			font-size: _theme("sizes.small.font-size");
 
 			&.mod-icon {
-				line-height: _theme("sizes.small.line-height");
+				line-height: _theme("sizes.smaller.line-height");
 				font-size: _theme("sizes.small.font-size");
 			}
 		}
