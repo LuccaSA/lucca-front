@@ -12,5 +12,5 @@
   "moduleNameMapper": {
     "^@lucca-front/ng/(.*)": "packages/ng/$1/src/public-api.ts"
   },
-  "roots": ["<rootDir>/packages/ng"]
+  "roots": ["<rootDir>/packages/ng", "<rootDir>/stories/documentation"]
 }

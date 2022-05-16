@@ -39,7 +39,7 @@ export default {
 		block: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -54,7 +54,7 @@ function getTemplate(args: ButtonBasicStory): string {
 	`;
 }
 
-const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
+export const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -73,4 +73,4 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '', size: '', state: '', palette: '', block: '', disabled: false };
+Basic.args = { mod: '', size: '', state: '', palette: '', block: false, disabled: false };
