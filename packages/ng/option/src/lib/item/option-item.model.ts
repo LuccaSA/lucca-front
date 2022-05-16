@@ -7,6 +7,7 @@ export interface ILuOptionItem<T> {
 	element: ElementRef<HTMLElement>;
 	selected: boolean;
 	highlighted: boolean;
+	disabled: boolean;
 }
 export abstract class ALuOptionItem<T> implements ILuOptionItem<T> {
 	abstract value: T;
@@ -14,4 +15,5 @@ export abstract class ALuOptionItem<T> implements ILuOptionItem<T> {
 	abstract element: ElementRef;
 	abstract selected: boolean;
 	abstract highlighted: boolean;
+	abstract disabled: boolean;
 }

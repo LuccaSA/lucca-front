@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextifeldMultilineStory {}
+interface TextfieldMultilineStory {}
 
 export default {
-	title: 'Documentation/Forms/Textifeld/Multiline',
+	title: 'Documentation/Forms/Textfield/Multiline',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextifeldMultilineStory): string {
+function getTemplate(args: TextfieldMultilineStory): string {
 	return `
 		<label class="textfield mod-multiline">
 			<textarea class="textfield-input"></textarea>
@@ -16,7 +16,7 @@ function getTemplate(args: TextifeldMultilineStory): string {
 	`
 }
 
-const Template: Story<TextifeldMultilineStory> = (args: TextifeldMultilineStory) => ({
+const Template: Story<TextfieldMultilineStory> = (args: TextfieldMultilineStory) => ({
 	props: args,
 	template: getTemplate(args)
 });
