@@ -35,12 +35,6 @@
 		}
 
 		.form {
-			&.mod-compact {
-				.checkboxesfield
-					align-items: flex-start;
-				}
-			}
-
 			&:not(.mod-framed) {
 				.textfield,
 				.radiosfield,

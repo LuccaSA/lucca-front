@@ -24,14 +24,12 @@
 				border-radius: var(--components-checkbox-input-border-radius);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: all;
-				border-color: var(--components-checkbox-input-border-color);
-				border-width: 2px;
+				border: 2px solid var(--components-checkbox-input-border-color);
 				line-height: 1;
 				font-size: 0.8rem;
 				flex-grow: 0;
 				flex-shrink: 0;
 				flex-basis: auto;
-				border-style: solid;
 				color: transparent;
 				display: block;
 				text-align: center;
