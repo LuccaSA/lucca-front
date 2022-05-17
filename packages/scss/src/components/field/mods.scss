@@ -184,12 +184,9 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	.checkbox {
+	.checkbox, .radio {
 		margin-top: 0;
 		margin-bottom: 0;
-	}
-
-	.checkbox {
 		margin-right: var(--components-field-horizontal-spacing);
 	}
 }

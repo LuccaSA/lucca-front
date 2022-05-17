@@ -8,6 +8,10 @@
 		@include a11y.mask;
 
 		&:checked ~ .radio-label {
+			&::before {
+				border-color: var(--palettes-600, var(--components-radio-default-palette-600));
+			}
+
 			&::after {
 				transform: scale(0.55);
 				background-color: var(--palettes-700, var(--components-radio-default-palette-700));
@@ -71,7 +75,7 @@
 
 		&::before {
 			background-color: var(--colors-white-color);
-			border-color: var(--palettes-700, var(--components-radio-default-palette-700));
+			border-color: var(--components-checkbox-input-border-color);
 			border-width: 2px;
 			border-style: solid;
 		}
