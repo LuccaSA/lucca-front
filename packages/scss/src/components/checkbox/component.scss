@@ -39,7 +39,7 @@
 				color: var(--palettes-grey-500);
 
 				&::before {
-					border-color: var(--components-checkbox-input-border-hover);
+					border-color: var(--palettes-700, var(--components-checkbox-input-border-hover));
 				}
 			}
 		}
