@@ -94,7 +94,7 @@ const template: Story<SelectStory> = (args: SelectStory) => ({
 
 const code = `
 /* 1. Importer LuSelectModule, LuOptionModule, LuInputModule */
-import { LuSelectModule } from '@lucca-front/ng/api';
+import { LuSelectModule } from '@lucca-front/ng/select';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuInputModule } from '@lucca-front/ng/input';
 
