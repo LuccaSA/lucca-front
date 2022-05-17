@@ -5,15 +5,15 @@ interface ButtonBasicStory {
 	palette: string;
 	state: string;
 	size: string;
+	block: boolean;
 	disabled: boolean;
-	noFlexWrap: boolean;
 }
 
 export default {
 	title: 'Documentation/Actions/Button/Basic',
 	argTypes: {
 		mod: {
-			options: ['', 'mod-outlined', 'mod-link', 'mod-link mod-invert', 'mod-icon'],
+			options: ['', 'mod-outlined', 'mod-text', 'mod-text mod-invert'],
 			control: {
 				type: 'radio',
 			},
@@ -21,7 +21,7 @@ export default {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		state: {
@@ -36,7 +36,7 @@ export default {
 				type: 'radio',
 			},
 		},
-		noFlexWrap: {
+		block: {
 			control: {
 				type: 'boolean',
 			},
@@ -46,26 +46,11 @@ export default {
 
 function getTemplate(args: ButtonBasicStory): string {
 	const classes = [args.mod, args.state, args.palette, args.size].filter(Boolean).join(' ');
-	const attributes = args.disabled ? `disabled="disabled"` : '';
-	const noFlexWrap = args.noFlexWrap ? `u-flexWrapNowrap` : '';
+	const attributes = args.disabled ? `disabled` : '';
+	const block = args.block ? `mod-block` : '';
 
 	return `
-	<button type="button" class="button ${classes}" ${attributes}>
-		<span *ngIf="mod === 'mod-icon'" class="lucca-icon icon-star button-icon" aria-hidden="true"></span>
-		Bouton
-	</button>
-
-	<ul class="button-group ${classes} ${noFlexWrap}" ${attributes}>
-		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
-		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
-		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
-		<li class="button-group-item">
-			<button type="button" class="button ${classes} mod-more" ${attributes}>
-				<span class="lucca-icon icon-chevronSouth" aria-hidden="true"></span>
-				<span class="u-mask">Plus d'actions</span>
-			</button>
-		</li>
-	</ul>
+	<button class="button ${classes} ${block}" ${attributes}>Bouton</button>
 	`;
 }
 
@@ -73,10 +58,9 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
-		`:host {
+		`
+		:host {
 			display: block;
-			margin: -1rem;
-			padding: 1rem;
 		}
 		.button:first-of-type {
 			display: block;
@@ -84,9 +68,9 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
-		args.mod === 'mod-link mod-invert' ? ':host { background-color: #333333 }' : '',
+		args.mod === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '', size: '', state: '', palette: '', disabled: false, noFlexWrap: false };
+Basic.args = { mod: '', size: '', state: '', palette: '', block: '', disabled: false };

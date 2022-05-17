@@ -1,38 +1,69 @@
-import { Story, Meta } from '@storybook/angular';
+import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
 
-import { LuUserTileComponent, LuUserPictureModule, LuUserDisplayModule } from '@lucca-front/ng/user';
+import { LuUserTileComponent, LuUserPictureModule, LuUserDisplayModule, LuUserTileModule } from '@lucca-front/ng/user';
 import { moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { bob, patrick, squidwards } from '../user.mocks';
+import { Component } from '@angular/core';
+import { bob } from '../user.mocks';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@Component({
+	selector: 'user-tile-stories',
+	templateUrl: './user-tile.stories.html',
+}) class UserTileStory {
+	public bob = bob;
+}
 
 export default {
-	title: 'Documentation/Users/Tile',
+	title: 'Documentation/Users/Tile/Basic',
 	component: LuUserTileComponent,
 	decorators: [
+		componentWrapperDecorator(UserTileStory),
 		moduleMetadata({
-			declarations: [],
+			declarations: [UserTileStory],
 			imports: [
+				LuUserTileModule,
 				LuUserPictureModule,
 				LuUserDisplayModule,
+				BrowserAnimationsModule,
 				CommonModule,
 			]
 		}),
 	],
 } as Meta;
 
-const Template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
+const template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
 	props: args,
 });
 
-export const Bob = Template.bind({});
-Bob.args = {
-	user: bob,
-};
-export const Patrick = Template.bind({});
-Patrick.args = {
-	user: patrick,
-};
-export const Squidwards = Template.bind({});
-Squidwards.args = {
-	user: squidwards,
-};
+const code =
+`
+/* 1. Importer LuUserTileModule */
+import { LuUserTileModule } from '@lucca-front/ng/user';
+
+@NgModule({
+	imports: [LuUserTileModule]
+})
+class UserTileStoriesModule {}
+
+/* 2. (exemple n°1) Utiliser lu-user-tile */
+/*    Vous devez simplement lui donner un ILuUser (ex: bob). */
+<lu-user-tile [user]="bob"></lu-user-tile>
+
+/* 3. (exemple n°2) Vous pouvez ajouter en option un displayFormat (cf: rubrique format), ou forcer un rôle */
+/* La propriété jobTitle du ILuUser est automatiquement prise si aucun rôle n'est renseigné  */
+<lu-user-tile [user]="bob" displayformat="LF" role="Administrateur"></lu-user-tile>
+`
+
+export const basic = template.bind({});
+basic.args = {}
+
+basic.parameters = {
+	controls: { include: [] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
+		}
+	}
+}

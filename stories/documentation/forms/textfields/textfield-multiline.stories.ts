@@ -13,12 +13,12 @@ function getTemplate(args: TextfieldMultilineStory): string {
 			<textarea class="textfield-input"></textarea>
 			<span class="textfield-label">Label Textarea</span>
 		</label>
-	`;
+	`
 }
 
 const Template: Story<TextfieldMultilineStory> = (args: TextfieldMultilineStory) => ({
 	props: args,
-	template: getTemplate(args),
+	template: getTemplate(args)
 });
 
 export const Multiline = Template.bind({});

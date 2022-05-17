@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface MenuBasicStory {
 	noBorder: boolean;
 	header: boolean;
-	palette: string;
+	small: boolean;
 }
 
 export default {
@@ -19,21 +19,20 @@ export default {
 				type: 'boolean',
 			}
 		},
-		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+		small: {
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			}
 		},
 	},
 } as Meta;
 
 function getTemplate(args: MenuBasicStory): string {
-	const classes = [args.palette].filter(Boolean).join(' ');
 	const noBorder = args.noBorder ? `mod-noBorder` : '';
 	const header = args.header ? `mod-header` : '';
+	const small = args.small ? `mod-small` : '';
 	return `
-	<nav class="menu ${classes} ${noBorder} ${header}">
+	<nav class="menu ${small} ${noBorder} ${header}">
 		<ul class="menu-list">
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" aria-current="page">
@@ -62,4 +61,4 @@ const Template: Story<MenuBasicStory> = (args: MenuBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { noBorder: false, header: false, palette: '', };
+Basic.args = { noBorder: false, header: false, small: false, };

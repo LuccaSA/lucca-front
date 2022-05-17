@@ -5,10 +5,13 @@ interface TextfieldBasicStory {
 	display: string;
 	style: string;
 	size: string;
+	small: boolean;
+	noLabel: boolean;
 	disabled: boolean;
 	error: boolean;
 	required: boolean;
 	invert: boolean;
+	white: boolean;
 }
 
 export default {
@@ -17,46 +20,63 @@ export default {
 		palette: {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
-				type: 'radio',
-			},
+				type: 'select',
+			}
 		},
 		display: {
 			options: ['', 'mod-block', 'mod-inline'],
 			control: {
 				type: 'radio',
-			},
+			}
 		},
 		style: {
-			options: ['', 'mod-compact', 'mod-material', 'mod-framed'],
+			description: '<code>mod-outlined</code> & <code>mod-compact</code> can be combined.',
+			options: ['', 'mod-compact', 'mod-material', 'mod-framed', 'mod-outlined'],
 			control: {
-				type: 'radio',
-			},
+				type: 'select',
+			}
 		},
 		size: {
-			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-default', 'mod-long', 'mod-longer', 'mod-longest'],
+			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-standard', 'mod-long', 'mod-longer', 'mod-longest'],
 			control: {
-				type: 'radio',
-			},
+				type: 'select',
+			}
+		},
+		small: {
+			control: {
+				type: 'boolean',
+			}
+		},
+		noLabel: {
+			description: "Une fois combiné à <code>mod-material</code>, permet d'intégrer un champs de saisie dans une phrase.",
+			control: {
+				type: 'boolean',
+			}
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			},
+			}
 		},
 		error: {
 			control: {
 				type: 'boolean',
-			},
+			}
 		},
 		required: {
 			control: {
 				type: 'boolean',
-			},
+			}
 		},
 		invert: {
 			control: {
 				type: 'boolean',
-			},
+			}
+		},
+		white: {
+			control: {
+				type: 'boolean',
+			}
 		},
 	},
 } as Meta;
@@ -66,28 +86,30 @@ function getTemplate(args: TextfieldBasicStory): string {
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
 	const invert = args.invert ? `mod-invert` : '';
+	const small = args.small ? `mod-small` : '';
+	const noLabel = args.noLabel ? `mod-noLabel` : '';
+	const white = args.white ? `mod-white` : '';
 	const error = args.error ? `is-error` : '';
 	return `
-		<label class="textfield ${classes} ${invert}">
+		<label class="textfield ${classes} ${small} ${noLabel} ${invert} ${white}">
 			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
 			<span class="textfield-label">Label textfield</span>
 		</label>
-	`;
+	`
 }
 
 const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
+	styles: [`
 		:host {
 			display: block;
-			margin: -1rem;
-			padding: 1rem;
 		}`,
-		args.invert === true ? ':host { background-color: #333333 }' : '',
+		args.invert === true
+			? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }'
+		: ''
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', display: '', style: '', size: '', disabled: false, error: false, required: false, invert: false };
+Basic.args = { palette: '', display: '', style: '', noLabel: false, size: '', small: '', disabled: false, error: false, required: false, invert: false, white: false, };

@@ -10,7 +10,7 @@ export default {
 		compact: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -88,12 +88,23 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 			</div>
 		</nav>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<MenuSecondaryBasicStory> = (args: MenuSecondaryBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.navSide {
+			position: relative;
+			max-height: 30rem;
+			padding-top: 0;
+		}
+		.navSide-item.mod-mobileToggle {
+			position: relative;
+		}`,
+	],
 });
 
 export const Basic = Template.bind({});
