@@ -175,3 +175,21 @@
 		bottom: auto !important;
 	}
 }
+
+@mixin inputRow {
+	@include field-row;
+}
+
+@mixin field-row {
+	display: flex;
+	flex-wrap: wrap;
+
+	.checkbox {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.checkbox {
+		margin-right: var(--components-field-horizontal-spacing);
+	}
+}
