@@ -9,7 +9,7 @@
 	&:focus-visible,
 	&:hover {
 		outline: none;
-		color: var(--palettes-900);
+		color: var(--palettes-900, var(--components-tag-default-palette-900));
 		text-decoration: underline;
 	}
 }

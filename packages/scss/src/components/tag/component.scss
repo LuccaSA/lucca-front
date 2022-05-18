@@ -1,7 +1,6 @@
 @mixin component {
-	background-color: var(--palettes-200, var(--components-tag-default-palette-200));
-	color: var(--palettes-800, var(--components-tag-default-palette-800));
-
+	background-color: var(--palettes-100, var(--components-tag-default-palette-100));
+	color: var(--palettes-900, var(--components-tag-default-palette-900));
 	border-radius: var(--commons-border-radius);
 	font-size: var(--sizes-smaller-font-size);
 	margin-right: var(--spacings-smallest);
