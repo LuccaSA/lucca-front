@@ -55,7 +55,7 @@ function getTemplate(args: ButtonBasicStory): string {
 		Bouton
 	</button>
 
-	<ul class="button-group ${classes} ${noFlexWrap}">
+	<ul class="button-group ${classes} ${noFlexWrap}" ${attributes}>
 		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
 		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>
 		<li class="button-group-item"><button type="button" class="button ${classes}" ${attributes}>Bouton</button></li>

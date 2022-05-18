@@ -7,8 +7,10 @@
 	padding: 0;
 	margin: 0;
 
-	&:focus-within {
-		box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
+	&:not([disabled], .is-disabled) {
+		&:focus-within {
+			box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
+		}
 	}
 
 	.button {

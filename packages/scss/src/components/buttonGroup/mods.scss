@@ -1,15 +1,47 @@
 @mixin outlined {
-	background-color: var(--palettes-400, var(--palettes-primary-400));
-	box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+	background-color: var(--palettes-400, var(--palettes-grey-400));
+	box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+
+	&:is([disabled], .is-disabled) {
+		box-shadow: 0 0 0 1px var(--palettes-grey-200);
+	}
 
 	.button {
 		&.mod-outline,
 		&.mod-outlined {
 			box-shadow: none;
+
+			&:hover {
+				box-shadow: none;
+			}
+
+			&:focus-within {
+				box-shadow: none;
+			}
+
+			&:is([disabled], .is-disabled) {
+				box-shadow: 0 0 0 1px var(--palettes-grey-200);
+			}
 		}
 	}
 
 	&:focus-within {
-		box-shadow: 0 0 0 1px var(--palettes-primary-400), 0 0 0 4px var(--palettes-primary-200);
+		box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400)), 0 0 0 4px var(--palettes-200, var(--palettes-grey-200));
+	}
+}
+
+@mixin link {
+	.button {
+		&.mod-link {
+			box-shadow: none;
+
+			&:hover {
+				box-shadow: none;
+			}
+
+			&:focus-within {
+				box-shadow: none;
+			}
+		}
 	}
 }
