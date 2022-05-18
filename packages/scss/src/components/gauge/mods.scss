@@ -8,7 +8,7 @@
 
 @mixin vertical {
 	width: var(--components-gauge-height);
-	height: auto;
+	height: 100%;
 
 	.gauge-bar {
 		border-left-width: var(--components-gauge-height);

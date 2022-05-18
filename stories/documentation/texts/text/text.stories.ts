@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextBasicStory {
-}
+interface TextBasicStory {}
 
 export default {
 	title: 'Documentation/Texts/Text/Basic',
@@ -14,7 +13,7 @@ function getTemplate(args: TextBasicStory): string {
 		<h2>Titre h2</h2>
 		<h3>Titre h3</h3>
 		<h4>Titre h4</h4>
-	`
+	`;
 }
 
 const Template: Story<TextBasicStory> = (args: TextBasicStory) => ({
