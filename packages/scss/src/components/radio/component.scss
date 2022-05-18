@@ -9,7 +9,7 @@
 
 		&:checked ~ .radio-label {
 			&::before {
-				border-color: var(--palettes-600, var(--components-radio-default-palette-600));
+				border-color: var(--palettes-600, var(--components-radio-input-border-hover));
 			}
 
 			&::after {
@@ -22,7 +22,7 @@
 			~ .radio-label {
 				&:hover {
 					&::before {
-						border-color: var(--palettes-600, var(--components-radio-default-palette-600));
+						border-color: var(--palettes-600, var(--components-radio-input-border-hover));
 					}
 				}
 			}
@@ -31,7 +31,7 @@
 				~ .radio-label {
 					&:hover {
 						&::after {
-							background-color: var(--palettes-600, var(--components-radio-default-palette-600));
+							background-color: var(--palettes-600, var(--components-radio-input-border-hover));
 						}
 					}
 				}
@@ -42,11 +42,11 @@
 			~ .radio-label {
 				&::before {
 					box-shadow: 0 0 0 4px var(--palettes-200, var(--components-radio-default-palette-200));
-					border-color: var(--palettes-600, var(--components-radio-default-palette-600));
+					border-color: var(--palettes-600, var(--components-radio-input-border-hover));
 				}
 
 				&::after {
-					background-color: var(--palettes-600, var(--components-radio-default-palette-600));
+					background-color: var(--palettes-600, var(--components-radio-input-border-hover));
 				}
 			}
 		}
