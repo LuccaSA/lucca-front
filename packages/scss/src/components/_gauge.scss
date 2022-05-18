@@ -30,7 +30,7 @@
 	}
 
 	&.mod-vertical {
-		height: auto;
+		height: 100%;
 		width: _component("gauge.height");
 
 		.gauge-bar {
