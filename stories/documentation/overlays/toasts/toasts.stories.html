@@ -1,9 +1,19 @@
-<h1>Toasts</h1>
 
-<!-- Basics -->
 <section class="contentSection">
-	<p>Toasts allow you to show callback on a corner of your app.</p>
-	<p><span aria-hidden="true" class="lucca-icon u-textWarning">warning</span><span class="u-mask">Warning:</span> You have to manually create and kill your toasts for now, they will be added in the NG package in the future.
-	<div class="toasts" id="toastsBox"></div>
-	<button type="button" class="button palette-primary" id="toastGenerate" (click)="toast()">Generate toast</button>
+	<lu-toasts [sources]="[toastError$]" [bottom]="isBottom"></lu-toasts>
+
+	<button type="button" class="button" (click)="createToast()">Toast</button>
+	<button type="button" class="button mod-outlined" (click)="createToast('Info', null)">Info, sans auto kill</button>
+	<button type="button" class="button mod-outlined palette-warning" (click)="createToast('Warning')">Toast warning</button>
+	<button type="button" class="button mod-outlined palette-success" (click)="createToast('Success', 2000)">Toast succès, 2000ms</button>
+
+
+	<h4 class="u-marginTopStandard">Toast d'erreur généré grace à la création d'un observable</h4>
+	<button type="button" class="button mod-outlined palette-error" (click)="notifyError()">Toast erreur</button>
+
+	<h4 class="u-marginTopStandard">Positionnement</h4>
+	<label class="switch">
+		<input class="switch-input" type="checkbox" name="switchList1" [(ngModel)]="isBottom" #ctrl="ngModel">
+		<span class="switch-label">En bas</span>
+	</label>
 </section>

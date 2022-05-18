@@ -38,6 +38,12 @@ function getTemplate(args: MenuSecondaryPlaceholderStory): string {
 const Template: Story<MenuSecondaryPlaceholderStory> = (args: MenuSecondaryPlaceholderStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [`
+		.navSide {
+			position: relative;
+			max-height: 30rem;
+		}`,
+	],
 });
 
 export const Placeholder = Template.bind({});

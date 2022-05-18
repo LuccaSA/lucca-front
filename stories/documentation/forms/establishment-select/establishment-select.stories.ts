@@ -1,39 +1,72 @@
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
-
+import { LuEstablishmentSelectInputComponent, LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 @Component({
 	selector: 'establishment-select-stories',
 	template: `
-<section class="section">
-	<lu-establishment-select placeholder="Select an establishment"></lu-establishment-select>
-	<lu-establishment-select placeholder="Select an establishment" [multiple]="true"></lu-establishment-select>
-</section>
-`,
-}) class EstablishmentSelectStory {
+		<label class="textfield mod-inline u-marginRightSmall">
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment"></lu-establishment-select>
+			<span class="textfield-label">Establishment Select</span>
+		</label>
+		<label class="textfield mod-inline">
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple"></lu-establishment-select>
+			<span class="textfield-label">Establishment Multiple Select</span>
+		</label>
+	`,
+})
+class EstablishmentSelectStory {
+	@Input() multiple: boolean = true;
 }
 
 export default {
-  title: 'Documentation/Forms/EstablishmentSelect',
-  component: EstablishmentSelectStory,
-	argTypes: {
-	},
+	title: 'Documentation/Forms/EstablishmentSelect',
+	component: LuEstablishmentSelectInputComponent,
 	decorators: [
+		componentWrapperDecorator(EstablishmentSelectStory),
 		moduleMetadata({
-			entryComponents: [EstablishmentSelectStory],
-			imports: [
-				LuEstablishmentSelectModule,
-				BrowserAnimationsModule,
-			]
-		})
-	]
+			imports: [LuEstablishmentSelectModule, BrowserAnimationsModule],
+			declarations: [EstablishmentSelectStory],
+		}),
+	],
 } as Meta;
 
 const template: Story<EstablishmentSelectStory> = (args: EstablishmentSelectStory) => ({
-  props: args,
+	props: args,
 });
 
 export const basic = template.bind({});
-basic.args = {
-}
+basic.args = {};
+
+const code = `
+/* 1. Importer LuEstablishmentSelectModule */
+import { LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
+
+@NgModule({
+	imports: [LuEstablishmentSelectModule]
+})
+class StoriesModule {}
+
+/* 2. Utiliser lu-establishment-select */
+@Component({
+	selector: 'establishment-select-stories',
+	template: \`
+	<label class="textfield">
+		<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple"></lu-establishment-select>
+		<span class="textfield-label">Establishment Multiple Select</span>
+	</label>
+	\`,
+})
+class EstablishmentSelectStory {
+	@Input() multiple: boolean;
+}`;
+
+basic.parameters = {
+	controls: { include: ['multiple'] },
+	docs: {
+		source: {
+			language: 'ts',
+			code,
+		},
+	},
+};

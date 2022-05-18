@@ -14,19 +14,17 @@ function getTemplate(args: TextfieldClearableStory): string {
 		<span class="textfield-label">Label textfield</span>
 		<a href="#" role="button" class="actionIcon textfield-actionClear"><span aria-hidden="true" class="lucca-icon icon-cross"></span></a>
 	</label>
-	`;
+	`
 }
 
 const Template: Story<TextfieldClearableStory> = (args: TextfieldClearableStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
+	styles: [`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`,
-	],
+		}`]
 });
 
 export const Clearable = Template.bind({});

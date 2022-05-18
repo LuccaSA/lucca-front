@@ -1,25 +1,23 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface ChipBasicStory {}
+interface ChipBasicStory {
+	clickable: boolean;
+}
 
 export default {
 	title: 'Documentation/Listings/Chip/Basic',
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
+	const clickable = args.clickable ? `mod-clickable` : '';
 	return `
-	<div class="chip">
+	<div class="chip ${clickable}">
 		Ned Stark
-		<button type="button" class="chip-kill">
-			<span class="u-mask">Supprimer</span>
-		</button>
+		<button class="chip-kill"></button>
 	</div>
-	<div class="chip mod-unkillable">
+	<div class="chip mod-unkillable ${clickable}">
 		Connor MacLeod
 	</div>
-	<a href="#" class="chip mod-clickable mod-unkillable">
-		Tywin Lannister
-	</a>
 	`;
 }
 
@@ -29,4 +27,4 @@ const Template: Story<ChipBasicStory> = (args: ChipBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = { clickable: false };

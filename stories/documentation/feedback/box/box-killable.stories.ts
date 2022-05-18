@@ -1,26 +1,25 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface BoxKillableStory {
-	mod: string;
+	grey: boolean;
 }
 
 export default {
 	title: 'Documentation/Feedback/Box/Killable',
 	argTypes: {
-		mod: {
-			options: ['', 'mod-grey'],
+		grey: {
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: BoxKillableStory): string {
-	const classes = [args.mod].filter(Boolean).join(' ');
+	const grey = args.grey ? `mod-grey` : '';
 
 	return `
-	<div class="box ${classes}">
+	<div class="box ${grey}">
 	    <div class="box-close">
 	        <button class="actionIcon">
 	            <span aria-hidden="true" class="lucca-icon">cross</span>
@@ -29,22 +28,21 @@ function getTemplate(args: BoxKillableStory): string {
 	    </div>
 	    Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
 	</div>
-	`;
+	`
 }
 
 const Template: Story<BoxKillableStory> = (args: BoxKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
+	styles: [`
 		:host {
 			display: block;
-			margin: -1rem;
-			padding: 1rem;
 		}`,
-		args.mod === '' ? ':host { background-color: #F3F5FC }' : '',
+		args.grey === false
+			? ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }'
+			: ''
 	],
 });
 
 export const Killable = Template.bind({});
-Killable.args = { mod: '' };
+Killable.args = { grey: false };
