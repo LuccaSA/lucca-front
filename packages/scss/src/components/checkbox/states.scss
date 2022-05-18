@@ -7,9 +7,7 @@
 		cursor: default;
 
 		&::before {
-			border-color: var(--palettes-grey-500);
-			border-style: solid;
-			border-width: 2px;
+			border: 2px solid var(--palettes-grey-500);
 		}
 	}
 
@@ -17,9 +15,7 @@
 		&::before {
 			color: var(--palettes-grey-500);
 			background-color: var(--palettes-grey-200);
-			border-color: var(--palettes-grey-200);
-			border-style: solid;
-			border-width: 2px;
+			border: 2px solid var(--palettes-grey-200);
 		}
 	}
 }

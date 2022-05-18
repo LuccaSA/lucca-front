@@ -1,8 +1,6 @@
 // @use '../../commons/config';
 @use 'exports' as *;
 
-$fields: 'checkboxesfield', 'radiosfield', 'textfield';
-
 .textfield,
 .radiosfield,
 .checkboxesfield {
@@ -66,6 +64,10 @@ $fields: 'checkboxesfield', 'radiosfield', 'textfield';
 
 		&:is(.is-invalid, .invalid, .is-error, .error) {
 			@include inputState('error');
+		}
+
+		&.mod-row {
+			@include inputRow;
 		}
 	}
 }

@@ -3,6 +3,9 @@
 	flex-direction: column;
 	align-items: flex-start;
 	position: relative;
+	border: 0;
+	padding: 0;
+	margin: 0;
 
 	.textfield-input,
 	.radiosfield-input,
@@ -31,7 +34,7 @@
 	.textfield-label,
 	.radiosfield-label,
 	.checkboxesfield-label {
-		color: var(--palettes-700);
+		color: var(--components-field-label-color);
 	}
 
 	@at-root {
