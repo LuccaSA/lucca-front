@@ -1,7 +1,7 @@
 @use '../../commons/utils/reset';
 @use '../../../../icons/src/mixins' as icon;
 
-@mixin small { 
+@mixin small {
 	.timeline-step-title {
 		padding-left: 1.25rem;
 
@@ -41,11 +41,12 @@
 @mixin vertical {
 	align-items: flex-start;
 	flex-direction: column;
-	
+
 	.timeline-step {
 		margin-top: var(--spacings-smaller);
 		display: block;
 		position: relative;
+		width: 100%;
 
 		//line
 		&:not(:last-child)::after {
@@ -194,7 +195,7 @@
 }
 
 
-@mixin addStep { 
+@mixin addStep {
 	.timeline-step {
 		&:nth-last-child(2)::after {
 			background-color: transparent;
@@ -257,7 +258,7 @@
 			);
 			background-size: var(--spacings-smaller) var(--spacings-smaller);
 		}
-	}	
+	}
 }
 
 @mixin addStepVerticalNotBig {
@@ -304,7 +305,7 @@
 		@include icon.makeIcon('plus');
 		display: flex;
 		transition: box-shadow var(--commons-animations-durations-standard);
-	}	
+	}
 }
 
 @mixin addBetweenStepVerticalNotBig {
