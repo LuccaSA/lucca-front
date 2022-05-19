@@ -1,3 +1,15 @@
+@use 'sass:map';
+@use '../../commons/config';
+@use 'exports' as *;
+
 $font-path: '../font/lucca-icons';
 
 @import '../../../../icons/src/main';
+
+.lucca-icon {
+	@each $size in map.keys(config.$sizes) {
+		&.size-#{$size} {
+			@include size($size);
+		}
+	}
+}
