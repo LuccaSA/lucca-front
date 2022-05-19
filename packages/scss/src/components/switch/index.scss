@@ -21,6 +21,14 @@
 			@include checkedSmall;
 		}
 
+		&:hover {
+			@include checkedHover;
+		}
+
+		&:focus {
+			@include checkedFocus
+		}
+
 		&:active {
 			@include checkedActive;
 		}
@@ -32,6 +40,10 @@
 
 	&:is(:focus-within) {
 		@include focus;
+	}
+
+	&:is(:active) {
+		@include active;
 	}
 
 	&:is([disabled], [readonly]) {
