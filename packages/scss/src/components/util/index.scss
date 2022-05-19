@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use '../../commons/config';
 @use '../../commons/core';
 @use '../../commons/utils/a11y';
@@ -164,5 +165,13 @@
 		.#{config.$prefix}#{$direction}0 {
 			#{$direction}: 0 !important;
 		}
+	}
+}
+
+@each $elevation in config.$elevations {
+	$index: list.index(config.$elevations, $elevation);
+
+	.#{config.$prefix}-elevate#{$index} {
+		box-shadow: var(--commons-elevations-elevation-#{$index});
 	}
 }
