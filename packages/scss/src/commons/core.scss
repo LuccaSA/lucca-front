@@ -5,8 +5,8 @@
 
 $contents: '0';
 $boxModel: 'margin', 'padding', 'border';
-$boxDirection: 'top', 'bottom', 'left', 'right', '';
-$corners: 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', '';
+$boxDirection: '', 'top', 'bottom', 'left', 'right';
+$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
