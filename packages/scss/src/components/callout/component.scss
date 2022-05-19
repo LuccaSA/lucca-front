@@ -1,7 +1,7 @@
 @mixin component {
 	border-radius: var(--commons-border-radius);
 	background-color: var(--palettes-100, var(--components-callout-background));
-	color: var(--palettes-800);
+	color: var(--palettes-grey-800);
 	margin: var(--components-callout-margin);
 	padding: var(--components-callout-padding);
 	border-color: var(--palettes-200, var(--palettes-grey-200));
@@ -9,8 +9,8 @@
 	border-style: solid;
 	position: relative;
 
-	a {
-		color: inherit;
+	a, .link {
+		color: var(--palettes-grey-800);
 
 		&:hover {
 			color: inherit;
