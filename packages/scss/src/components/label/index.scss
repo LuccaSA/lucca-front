@@ -7,11 +7,11 @@
 	&.mod-number {
 		@include number;
 
-		&.size-small {
+		&.mod-small {
 			@include numberSmall;
 		}
 
-		&.size-smaller {
+		&.mod-smaller {
 			@include numberSmaller;
 		}
 	}

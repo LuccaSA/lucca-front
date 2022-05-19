@@ -1,8 +1,13 @@
 @mixin active {
-	color: var(--palettes-primary-700);
+	color: var(--palettes-700, var(--palettes-primary-700));
+
+	.label {
+		background-color: var(--palettes-100, var(--palettes-primary-100));
+		color: var(--palettes-700, var(--palettes-primary-700));
+	}
 
 	&::after {
-		background-color: var(--palettes-primary-700);
+		background-color: var(--palettes-700, var(--palettes-primary-700));
 		transform: scale(1);
 	}
 }

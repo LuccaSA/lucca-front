@@ -13,6 +13,10 @@
 
 	.label {
 		font-size: var(--sizes-smaller-font-size);
+		height: var(--sizes-small-line-height);
+		min-width: var(--sizes-small-line-height);
+		line-height: var(--sizes-small-line-height);
+		padding: 0;
 	}
 
 	// legacy syntax
