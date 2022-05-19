@@ -1,3 +1,5 @@
+@use '../../commons/utils/reset';
+
 @mixin component {
 	align-items: flex-start;
 	display: flex;
@@ -5,32 +7,22 @@
 	position: sticky;
 
 	@at-root {
-		.tableOfContent-item {
-			color: var(--palettes-grey-500);
-			padding: var(--components-tableOfContent-item-padding);
-			border-radius: var(--commons-border-radius);
+		.tableOfContent-list {
+			@include reset.list;
+		}
 
-			transition-duration: var(--commons-animations-durations-standard);
-			transition-property: all;
+		.tableOfContent-list-item-action {
+			@include reset.button;
+			border-radius: var(--commons-border-radius);
+			color: var(--palettes-grey-700);
+			cursor: pointer;
 			display: block;
 			outline: none;
+			padding: var(--components-tableOfContent-item-padding);
 			position: relative;
+			transition: all var(--commons-animations-durations-standard);
 			text-decoration: none;
-			cursor: pointer;
-
-			&::before {
-				background-color: var(--palettes-700, var(--components-tableOfContent-default-palette-color));
-				width: var(--components-tableOfContent-item-border-width);
-				transition-duration: var(--commons-animations-durations-fast);
-				transition-property: all;
-				position: absolute;
-				transform: scaleY(0);
-				opacity: 0;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				content: '';
-			}
+			width: auto;
 		}
 	}
 }

@@ -3,18 +3,40 @@
 .tableOfContent {
 	@include vars;
 	@include component;
-
-	&.mod-grey {
-		@include grey;
-	}
 }
 
-.tableOfContent-item {
-	&:is(:hover) {
-		@include hover;
+.tableOfContent-list-item-action {
+	&:not(.disabled, .is-disabled, [disabled]) {
+		&:is(:hover) {
+			@include hover;
+		}
+
+		&:is(:focus) {
+			@include focus;
+		}
+
+		&:is(:active) {
+			@include active;
+		}
+
+		&.is-active {
+			@include isActive;
+
+			&:is(:hover) {
+				@include isActiveHover;
+			}
+
+			&:is(:focus) {
+				@include isActiveFocus;
+			}
+
+			&:is(:active) {
+				@include isActiveActive;
+			}
+		}
 	}
 
-	&:is(.is-active, .active) {
-		@include active;
+	&:is(.disabled, .is-disabled, [disabled]) {
+		@include disabled;
 	}
 }

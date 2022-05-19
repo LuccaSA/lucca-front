@@ -1,5 +1,14 @@
 @mixin vars {
-	--components-tableOfContent-default-palette-color: var(--palettes-primary-color);
+	--components-tableOfContent-default-palette-50: var(--palettes-primary-50);
+	--components-tableOfContent-default-palette-100: var(--palettes-primary-100);
+	--components-tableOfContent-default-palette-200: var(--palettes-primary-200);
+	--components-tableOfContent-default-palette-300: var(--palettes-primary-300);
+	--components-tableOfContent-default-palette-400: var(--palettes-primary-400);
+	--components-tableOfContent-default-palette-500: var(--palettes-primary-500);
+	--components-tableOfContent-default-palette-600: var(--palettes-primary-600);
+	--components-tableOfContent-default-palette-700: var(--palettes-primary-700);
+	--components-tableOfContent-default-palette-800: var(--palettes-primary-800);
+	--components-tableOfContent-default-palette-900: var(--palettes-primary-900);
 	--components-tableOfContent-item-padding: var(--spacings-smaller) var(--spacings-small);
 	--components-tableOfContent-item-border-width: 2px;
 }
