@@ -30,9 +30,9 @@
 	}
 }
 
-@mixin link {
+@mixin text {
 	.button {
-		&.mod-link {
+		&.mod-text, &.mod-link {
 			box-shadow: none;
 
 			&:hover {

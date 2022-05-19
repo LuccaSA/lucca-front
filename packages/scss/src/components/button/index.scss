@@ -9,8 +9,8 @@
 		@include outlined;
 	}
 
-	&.mod-link {
-		@include link;
+	&.mod-text, &.mod-link {
+		@include text;
 	}
 
 	&.mod-block {
@@ -78,8 +78,8 @@
 			@include disabledOutlined;
 		}
 
-		&.mod-link {
-			@include disabledLink;
+		&.mod-text, &.mod-link {
+			@include disabledText;
 		}
 	}
 }
