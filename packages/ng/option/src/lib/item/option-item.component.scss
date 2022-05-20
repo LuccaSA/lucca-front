@@ -1,5 +1,5 @@
 @import '_definitions';
-@include optionItemStyle;
+// @include optionItemStyle;
 
 .is-disabled {
 	color: _color('grey', 500, true);
