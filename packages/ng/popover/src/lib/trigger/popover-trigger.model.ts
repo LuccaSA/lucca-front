@@ -139,7 +139,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	}
 
 	onClick() {
-		if (this.triggerEvent === 'click') {
+		if (this.triggerEvent === 'click' && !this.disabled) {
 			this.togglePopover();
 		}
 	}

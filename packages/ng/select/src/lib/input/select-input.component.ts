@@ -67,6 +67,9 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	get isDisabled() {
 		return this.disabled;
 	}
+	@Input('disabled') set inputDisabled(d: boolean) {
+		this._disabled = d;
+	}
 	@HostBinding('class.is-focused')
 	get isFocused() {
 		return this._popoverOpen && !this.target.overlap;
