@@ -1,38 +1,38 @@
-// @mixin tooltipStyle {
-// 	.lu-tooltip-panel {
-// 		display: block;
-// 		background: _component("tooltip.background-color", true);
-// 		background: _component("tooltip.background-color");
-// 		border-radius: _theme("commons.border.radius", true);
-// 		border-radius: _theme("commons.border.radius");
-// 		color: _component("tooltip.color", true);
-// 		color: _component("tooltip.color");
-// 		font-size: _theme("sizes.small.font-size");
-// 		font-size: _theme("sizes.small.font-size", true);
-// 		font-weight: 600;
-// 		line-height: 1rem;
-// 		max-width: _component("tooltip.max-width", true);
-// 		max-width: _component("tooltip.max-width");
-// 		padding: _component("tooltip.padding", true);
-// 		padding: _component("tooltip.padding");
+@mixin tooltipStyle {
+	.lu-tooltip-panel {
+		--components-tooltip-background-color: var(--palettes-grey-900);
+		--components-tooltip-color: var(--colors-white-color);
+		--components-tooltip-padding: var(--spacings-smallest) var(--spacings-smaller);
+		--components-tooltip-max-width: 15rem;
 
-// 		&.is-above {
-// 			transform-origin: bottom center;
-// 		}
+		background: var(--components-tooltip-background-color);
+		color: var(--components-tooltip-color);
+		padding: var(--components-tooltip-padding);
+		max-width: var(--components-tooltip-max-width);
+		border-radius: var(--commons-border-radius);
+		font-size: var(--sizes-small-font-size);
 
-// 		&.is-below {
-// 			transform-origin: top center;
-// 			margin-top: 2px;
-// 		}
+		font-weight: 600;
+		line-height: 1rem;
+		display: block;
 
-// 		&.is-before {
-// 			transform-origin: center right;
-// 			margin-right: 5px;
-// 		}
+		&.is-above {
+			transform-origin: bottom center;
+		}
 
-// 		&.is-after {
-// 			transform-origin: center left;
-// 			margin-left: 5px;
-// 		}
-// 	}
-// }
+		&.is-below {
+			transform-origin: top center;
+			margin-top: 2px;
+		}
+
+		&.is-before {
+			transform-origin: center right;
+			margin-right: 5px;
+		}
+
+		&.is-after {
+			transform-origin: center left;
+			margin-left: 5px;
+		}
+	}
+}
