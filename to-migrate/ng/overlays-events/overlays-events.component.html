@@ -1,6 +1,6 @@
 <h1>overlays-events</h1>
 <h2>Popover</h2>
-<button class="button" [luPopover]="thePopover" (luPopoverOnOpen)="onOpen()" (luPopoverOnClose)="onClose()">click me</button>
+<button type="button" class="button" [luPopover]="thePopover" (luPopoverOnOpen)="onOpen()" (luPopoverOnClose)="onClose()">click me</button>
 <lu-popover #thePopover>content</lu-popover>
 
 <h2>Tooltip</h2>
@@ -9,8 +9,8 @@
 <h2>Dropdown</h2>
 
 <div class="button-group">
-	<button class="button">Main action</button>
-	<button class="button mod-more" [luDropdown]="dropdown" (luDropdownOnOpen)="onOpen()" (luDropdownOnClose)="onClose()">
+	<button type="button" class="button">Main action</button>
+	<button type="button" class="button mod-more" [luDropdown]="dropdown" (luDropdownOnOpen)="onOpen()" (luDropdownOnClose)="onClose()">
 		<span class="cdk-visually-hidden">
 			More actions
 		</span>
@@ -21,7 +21,7 @@
 		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action" luDropdownItem>Link 1</a>
 	</li>
 	<li class="lu-dropdown-options-item" >
-		<button class="lu-dropdown-options-item-action" luDropdownItem (click)="debug()">Button 2</button>
+		<button type="button" class="lu-dropdown-options-item-action" luDropdownItem (click)="debug()">Button 2</button>
 	</li>
 </lu-dropdown>
 

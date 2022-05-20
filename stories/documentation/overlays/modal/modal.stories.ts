@@ -14,7 +14,7 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-stories',
-	template: `<button class="button" (click)="openModal()">Open modal</button>`,
+	template: `<button type="button" class="button" (click)="openModal()">Open modal</button>`,
 }) class ModalStories {
 	constructor(
 		private modal: LuModal
@@ -73,7 +73,7 @@ class ModalContentComponent implements ILuModalContent {
 /* 3. Se faire injecter LuModal dans le composant qui déclenche l'ouverture de la modale puis appeler la méthode open() */
 @Component({
 	selector: 'modal-stories',
-	template: \`<button class="button" (click)="openModal()">Open modal</button>\`,
+	template: \`<button type="button" class="button" (click)="openModal()">Open modal</button>\`,
 }) class ModalStories {
 	constructor(
 		private modal: LuModal

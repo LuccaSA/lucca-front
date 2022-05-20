@@ -24,11 +24,11 @@ function getTemplate(args: PaginationBasicStory): string {
 			</span>
 		</div>
 		<div class="pagination-scrolling">
-			<button class="actionIcon" disabled>
+			<button type="button" class="actionIcon" disabled>
 				<span aria-hidden="true" class="lucca-icon icon-chevronWest"></span>
 				<span class="u-mask">Précédent</span>
 			</button>
-			<button class="actionIcon">
+			<button type="button" class="actionIcon">
 				<span aria-hidden="true" class="lucca-icon icon-chevronEast"></span>
 				<span class="u-mask">Suivant</span>
 			</button>

@@ -20,7 +20,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'popover-story',
 	template: `
-		<button class="button"
+		<button type="button"
+			class="button"
 			[luPopover]="popover"
 			[luPopoverPosition]="position"
 			[luPopoverAlignment]="alignment"
@@ -67,7 +68,7 @@ class PopoverStoriesModule {}
 @Component({
 	selector: 'popover-story',
 	template: \`
-		<button class="button" [luPopover]="popover">Click me</button>
+		<button type="button" class="button" [luPopover]="popover">Click me</button>
 		<lu-popover #popover>🎉 popover content 🏖️</lu-popover>
 	\`
 })

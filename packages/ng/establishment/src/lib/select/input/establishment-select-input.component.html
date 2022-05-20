@@ -38,6 +38,7 @@
 		<div class="optionGroup">
 			<ng-container *ngIf="groupByLu && !isSearching">
 				<button
+					type="button"
 					*ngIf="multiple; else singleViewGroup"
 					class="optionGroupName button mod-text mod-block"
 					[luLegalUnitSelector]="group.key"

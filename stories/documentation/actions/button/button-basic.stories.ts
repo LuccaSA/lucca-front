@@ -50,7 +50,7 @@ function getTemplate(args: ButtonBasicStory): string {
 	const block = args.block ? `mod-block` : '';
 
 	return `
-	<button class="button ${classes} ${block}" ${attributes}>Bouton</button>
+	<button type="button" class="button ${classes} ${block}" ${attributes}>Bouton</button>
 	`;
 }
 

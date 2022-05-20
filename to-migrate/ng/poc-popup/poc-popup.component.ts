@@ -54,7 +54,7 @@ export class PocPopupInsideComponent {
 	selector: 'lu-poc-popup-secondary',
 	template: `
 	<h1>title {{data}}</h1>
-	<button class="button" (click)="closePopup()">close</button>
+	<button type="button" class="button" (click)="closePopup()">close</button>
 	`,
 })
 export class PocPopupSecondaryComponent {
