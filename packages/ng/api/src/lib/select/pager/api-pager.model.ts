@@ -1,7 +1,7 @@
 import { ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ILuOptionOperator } from '@lucca-front/ng/option';
 import { merge, Observable, of, Subject } from 'rxjs';
-import { catchError, distinctUntilChanged, map, mapTo, switchMap, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ILuApiItem } from '../../api.model';
 import { ILuApiService } from '../../service/index';
 
@@ -70,7 +70,7 @@ export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S ext
 			}),
 		);
 
-		this.loading$ = merge(this._page$.pipe(mapTo(true)), _results$.pipe(mapTo(false)));
+		this.loading$ = merge(this._page$.pipe(map(() => true)), _results$.pipe(map(() => false)));
 		this.loading$.subscribe((l) => (this._loading = l));
 	}
 }
