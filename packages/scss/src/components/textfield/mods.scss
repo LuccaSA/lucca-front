@@ -63,18 +63,18 @@
 
 @mixin small {
 	.textfield-input {
-		line-height: var(--sizes-small-line-height);
+		line-height: var(--sizes-smaller-line-height);
 		font-size: var(--sizes-small-font-size);
 	}
 
 	.textfield-suffix {
-		line-height: var(--sizes-small-line-height);
+		line-height: var(--sizes-smaller-line-height);
 		font-size: var(--sizes-small-font-size);
 	}
 }
 
 @mixin smallInputIcon {
-	line-height: var(--sizes-small-line-height);
+	line-height: var(--sizes-smaller-line-height);
 	font-size: var(--sizes-small-font-size);
 }
 
@@ -93,7 +93,7 @@
 
 @mixin multilineSmall {
 	.textfield-input {
-		line-height: var(--sizes-small-line-height);
+		line-height: var(--sizes-smaller-line-height);
 		font-size: var(--sizes-small-font-size);
 		height: 4rem;
 	}
