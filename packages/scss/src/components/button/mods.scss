@@ -31,22 +31,29 @@
 	--components-button-icon-line-height: 1;
 }
 
-@mixin link {
+@mixin text {
 	background-color: transparent;
+	box-shadow: none;
 	color: var(--palettes-grey-800);
+	padding: var(--components-button-text-padding);
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			box-shadow: none;
-			background-color: var(--palettes-50, var(--palettes-primary-50));
-			color: var(--palettes-700, var(--palettes-primary-700));
+			background-color: var(--palettes-grey-50);
 		}
 
 		&:focus {
-			box-shadow: 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
-				inset 0 0 0 1px var(--palettes-300, var(--palettes-primary-300));
-			background: var(--palettes-100, var(--palettes-primary-100));
-			color: var(--palettes-700, var(--palettes-primary-700));
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+			background: var(--palettes-grey-50);
+			outline: none
+		}
+
+		&:active {
+			background-color: var(--palettes-grey-100);
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
 		}
 	}
 }
@@ -78,6 +85,11 @@
 			box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
 				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
 		}
+	}
+
+	.button-counter {
+		background-color: var(--palettes-grey-300);
+		color: var(--palettes-grey-800);
 	}
 }
 
@@ -158,6 +170,21 @@
 @mixin counter {
 	padding-left: var(--spacings-small);
 	padding-right: var(--spacings-small);
+
+	@at-root {
+		.button-counter {
+			background-color: var(--palettes-500, var(--palettes-primary-500));
+			border-radius: 1rem;
+			display: inline-block;
+			font-size: var(--sizes-smaller-font-size);
+			font-weight: 600;
+			height: 1.5rem;
+			min-width: 1.5rem;
+			margin-left: var(--spacings-smaller);
+			padding: 0 var(--spacings-smallest);
+			vertical-align: bottom;
+		}
+	}
 }
 
 @mixin counterSmall {

@@ -6,13 +6,8 @@
 			@include icon.makeIcon('tick');
 
 			display: flex;
-			align-items: center;
-			background-color: var(--palettes-secondary-700);
-			color: var(--palettes-secondary-900);
-			font-size: var(--sizes-small-font-size);
-			line-height: var(--sizes-small-line-height);
+			background-color: var(--palettes-700, var(--components-switch-default-palette-700));
 			padding-left: var(--components-switch-icon-left);
-			padding-top: var(--components-switch-icon-top);
 		}
 
 		&::after {
@@ -21,12 +16,32 @@
 	}
 }
 
+@mixin checkedHover {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-600, var(--components-switch-default-palette-600));
+			}
+		}
+	}
+}
+@mixin checkedFocus {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-600, var(--components-switch-default-palette-600));
+				box-shadow: 0 0 0 4px var(--palettes-200, var(--components-switch-default-palette-200));
+			}
+		}
+	}
+}
+
 @mixin checkedActive {
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-secondary-800);
-				box-shadow: 0 0 0 4px var(--palettes-secondary-300);
+				background-color: var(--palettes-800, var(--components-switch-default-palette-800));
+				box-shadow: 0 0 0 4px var(--palettes-300, var(--components-switch-default-palette-300));
 			}
 		}
 	}
@@ -47,16 +62,28 @@
 @mixin hover {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-secondary-600);
+			background-color: var(--palettes-grey-400);
+		}
+	}
+}
+
+@mixin active {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-grey-600);
+				box-shadow: 0 0 0 4px var(--palettes-grey-300);
+			}
 		}
 	}
 }
 
 @mixin focus {
-	~ .switch-label {
-		&::before {
-			background-color: var(--palettes-secondary-600);
-			box-shadow: 0 0 0 4px var(--palettes-secondary-200);
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				box-shadow: 0 0 0 4px var(--palettes-grey-200);
+			}
 		}
 	}
 }
@@ -68,10 +95,12 @@
 
 		&::before {
 			background-color: var(--palettes-grey-200);
+			color: var(--palettes-grey-500);
 		}
 
 		&::after {
 			background-color: var(--palettes-grey-500);
+			box-shadow: none;
 		}
 	}
 }
@@ -79,12 +108,7 @@
 @mixin disabledChecked {
 	~ .switch-label {
 		&::before {
-			color: var(--palettes-grey-500);
 			background-color: var(--palettes-grey-200);
-		}
-
-		&::after {
-			background-color: var(--palettes-grey-500);
 		}
 	}
 }

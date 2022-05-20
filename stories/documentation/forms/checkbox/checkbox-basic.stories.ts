@@ -5,7 +5,6 @@ interface CheckboxBasicStory {
 	disabled: boolean;
 	size: string;
 	required: boolean;
-	grey: boolean;
 }
 
 export default {
@@ -33,19 +32,12 @@ export default {
 				type: 'boolean',
 			}
 		},
-		grey: {
-			description: 'Legacy 🦕',
-			control: {
-				type: 'boolean',
-			}
-		},
 	},
 } as Meta;
 
 function getTemplate(args: CheckboxBasicStory): string {
 	const classes = [args.size].filter(Boolean).join(' ');
 	const row = args.row ? `mod-row` : '';
-	const grey = args.grey ? `mod-grey` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
 	return `
@@ -53,13 +45,13 @@ function getTemplate(args: CheckboxBasicStory): string {
 		<legend class="checkboxesfield-label">Liste de checkboxes</legend>
 		<div class="checkboxesfield-input ${row}">
 			<div>
-				<label class="checkbox ${classes} ${grey}">
+				<label class="checkbox ${classes}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required} checked>
 					<span class="checkbox-label">checkbox</span>
 				</label>
 			</div>
 			<div>
-				<label class="checkbox ${classes} ${grey}">
+				<label class="checkbox ${classes}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required}>
 					<span class="checkbox-label">checkbox</span>
 				</label>
@@ -75,4 +67,4 @@ const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { grey: false, size: '', row: false, disabled: false, required: false };
+Basic.args = { size: '', row: false, disabled: false, required: false };

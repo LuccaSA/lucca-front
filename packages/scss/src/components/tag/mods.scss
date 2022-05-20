@@ -1,15 +1,7 @@
 @mixin clickable {
 	cursor: pointer;
-	text-decoration: none;
 
-	&:focus {
-		outline: none;
-	}
-
-	&:focus-visible,
-	&:hover {
-		outline: none;
-		color: var(--palettes-900, var(--components-tag-default-palette-900));
+	&:hover, &:focus {
 		text-decoration: underline;
 	}
 }

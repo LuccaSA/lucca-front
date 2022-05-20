@@ -85,6 +85,7 @@ var icons = [
 	'thin_cross',
 	'cross',
 	'cross_bold',
+	'cancel',
 	'coffee',
 	'breakTime',
 	'collapse',

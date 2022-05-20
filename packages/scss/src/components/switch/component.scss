@@ -1,4 +1,5 @@
 @use '../../commons/utils/a11y';
+@use '../../../../icons/src/mixins' as icon;
 
 @mixin component {
 	display: block;
@@ -13,38 +14,44 @@
 			padding: 0;
 			padding-left: calc(2rem - 4px + var(--spacings-smaller));
 			color: var(--palettes-grey-800);
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: color;
+			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
 			line-height: 1.5rem;
 			cursor: pointer;
 
-			&::before,
-			&::after {
-				position: absolute;
-				transition-property: all;
-				transition-duration: var(--commons-animations-durations-fast);
-				margin-top: var(--components-switch-top);
-				content: '';
-			}
-
 			&::before {
-				top: var(--spacings-smallest);
-				background-color: var(--palettes-grey-700);
-				border-radius: 0.5rem;
+				@include icon.makeIcon('cross');
+
+				align-items: center;
+				background-color: var(--palettes-grey-500);
+				border-radius: .5rem;
+				color: var(--colors-white-color);
+				display: flex;
+				font-size: var(--sizes-smaller-font-size);
 				height: 1rem;
 				left: 0;
+				line-height: var(--sizes-small-line-height);
+				margin-top: var(--components-switch-top);
+				padding-left: var(--components-switch-icon-right);
+				padding-top: var(--components-switch-icon-top);
+				position: absolute;
+				top: var(--spacings-smallest);
+				transition: all var(--commons-animations-durations-fast) ease;
 				width: calc(2rem - 4px);
 			}
 
 			&::after {
+				background-color: white;
 				box-shadow: var(--commons-box-shadow-hard);
-				margin-top: var(--components-switch-top);
-				top: calc(var(--spacings-smallest) + 2px);
-				background-color: var(--colors-white-color);
 				border-radius: 50%;
+				content: "";
+				display: block;
 				height: calc(1rem - 4px);
 				left: 2px;
+				margin-top: var(--components-switch-top);
+				position: absolute;
+				top: calc(var(--spacings-smallest) + 2px);
+				transition: all var(--commons-animations-durations-fast) ease;
 				width: calc(1rem - 4px);
 			}
 		}

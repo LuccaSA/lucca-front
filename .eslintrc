@@ -58,7 +58,7 @@
 				"no-restricted-imports": [
 					"error",
 					{
-						"paths": ["rxjs/Rx"]
+						"paths": ["rxjs/Rx", "@ngneat/spectator"]
 					}
 				],
 				"max-classes-per-file": "off",

@@ -12,7 +12,7 @@
 			position: absolute;
 			margin: auto;
 			text-align: center;
-			color: currentColor;
+			color: var(--palettes-700, var(--palettes-grey-700));
 
 			.lucca-icon {
 				font-size: 1.2rem;
@@ -51,7 +51,7 @@
 			height: 1.5rem;
 			border: 0;
 			padding: 0;
-			top: 0.25rem;
+			top: 0.5rem;
 			transition-duration: 150ms;
 			transition-property: background-color;
 			width: 1rem;
