@@ -4,7 +4,7 @@ import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber,
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
-import { first, mapTo, mergeAll, shareReplay, startWith } from 'rxjs/operators';
+import { first, map, mergeAll, shareReplay, startWith } from 'rxjs/operators';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
@@ -59,7 +59,12 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 		const operators = this._operators || [];
 		const lastOperator = operators[operators.length - 1];
 		if (lastOperator && lastOperator.outOptions$) {
-			this.loading$ = lastOperator.outOptions$.pipe(first(), mapTo(false), startWith(true), shareReplay());
+			this.loading$ = lastOperator.outOptions$.pipe(
+				first(),
+				map(() => false),
+				startWith(true),
+				shareReplay(),
+			);
 		}
 		super.onOpen();
 	}
