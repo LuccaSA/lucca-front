@@ -148,19 +148,24 @@ $borderRadius: (
 	'big': 8px,
 );
 
+$elevations: (
+	'1': '0 1px 2px rgba(0, 0, 0, 0.06), 0px 2px 8px rgba(0, 0, 0, 0.04)',
+	'2': '0 0 0 1px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.05)',
+	'3': '0 0 0 1px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06)',
+	'4': '0 0 0 1px rgba(0, 0, 0, 0.03), 0 3px 6px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.08)',
+	'5': '0 0 0 1px rgba(0, 0, 0, 0.03), 0 4px 8px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08)',
+	'6': '0 0 0 1px rgba(0, 0, 0, 0.03), -2px 2px 8px rgba(0, 0, 0, 0.04), -12px 6px 24px rgba(0, 0, 0, 0.06)',
+);
+
 $boxShadows: (
-	'hard': '0 2px 8px rgba(var(--palettes-grey-900-rbg), .2), 0 1px 2px rgba(var(--palettes-grey-900-rbg), 0.15)',
+	'hard': 'var(--commons-box-shadow-xxs)',
+	'xxs': '0 2px 8px rgba(var(--palettes-grey-900-rbg), .2), 0 1px 2px rgba(var(--palettes-grey-900-rbg), 0.15)',
 	'xs': '0 1px 2px rgba(var(--palettes-grey-900-rbg), 0.06), 0 2px 8px rgba(var(--palettes-grey-900-rbg), 0.04)',
-	's':
-		'0 0 0 1px rgba(var(--palettes-grey-900-rbg), 0.03), 0 1px 2px rgba(var(--palettes-grey-900-rbg), 0.02), 0 2px 6px rgba(var(--palettes-grey-900-rbg), 0.05)',
-	'm':
-		'0 0 0 1px rgba(var(--palettes-grey-900-rbg), 0.03), 0 2px 4px rgba(var(--palettes-grey-900-rbg), 0.02), 0 4px 10px rgba(var(--palettes-grey-900-rbg), 0.06)',
-	'l':
-		'0 0 0 1px rgba(var(--palettes-grey-900-rbg), 0.03), 0 3px 6px rgba(var(--palettes-grey-900-rbg), 0.04), 0 4px 16px rgba(var(--palettes-grey-900-rbg), 0.08)',
-	'xl':
-		'0 0 0 1px rgba(var(--palettes-grey-900-rbg), 0.03), 0 4px 8px rgba(var(--palettes-grey-900-rbg), 0.06), 0 12px 32px rgba(var(--palettes-grey-900-rbg), 0.08)',
-	'xxl':
-		'0 0 0 1px rgba(var(--palettes-grey-900-rbg), 0.03), -2px 2px 8px rgba(var(--palettes-grey-900-rbg), 0.04), -12px 6px 24px rgba(var(--palettes-grey-900-rbg), 0.06)',
+	's': 'var(--commons-elevations-elevation-2)',
+	'm': 'var(--commons-elevations-elevation-3)',
+	'l': 'var(--commons-elevations-elevation-4)',
+	'xl': 'var(--commons-elevations-elevation-5)',
+	'xxl': 'var(--commons-elevations-elevation-6)',
 );
 
 $disabled: (

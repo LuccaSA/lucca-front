@@ -24,7 +24,6 @@
 
 html {
 	@include core.cssvars('commons-border-radius', config.$borderRadius);
-	@include core.cssvars('commons-box-shadow', config.$boxShadows);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$loading);
@@ -40,12 +39,11 @@ html {
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 	@include core.cssvars('spacings', config.$spacings);
 
+	@include core.cssvars('commons-elevations-elevation', config.$elevations);
+	@include core.cssvars('commons-box-shadow', config.$boxShadows);
+
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
-	}
-
-	@each $key, $value in config.$boxShadows {
-		--commons-elevations-elevation-#{list.index((config.$boxShadows), ($key $value))}: var(--commons-box-shadow-#{$key});
 	}
 
 	--colors-white-color: #ffffff;
