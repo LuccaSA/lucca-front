@@ -1,13 +1,13 @@
 <h1>refacto-overlays-reposition</h1>
 <h2>scroll strat</h2>
-<button class="button" [luPopover]="scrollBlock">block scroll</button>
-<button class="button" [luPopover]="scrollClose">close on scroll</button>
-<button class="button" [luPopover]="scrollFollow">follw scroll</button>
+<button type="button" class="button" [luPopover]="scrollBlock">block scroll</button>
+<button type="button" class="button" [luPopover]="scrollClose">close on scroll</button>
+<button type="button" class="button" [luPopover]="scrollFollow">follw scroll</button>
 <lu-popover #scrollBlock scroll-strategy="block">block scroll</lu-popover>
 <lu-popover #scrollClose scroll-strategy="close">close on scroll</lu-popover>
 <lu-popover #scrollFollow scroll-strategy="reposition">follow scroll</lu-popover>
 <p>scroll block doesnt seem to work but i dont know how to do it</p>
 <h2>Repositionning</h2>
-<button class="button" [luPopover]="reposition" luPopoverPosition="before">before</button>
-<button class="button" [luPopover]="reposition" luPopoverPosition="below">below</button>
+<button type="button" class="button" [luPopover]="reposition" luPopoverPosition="before">before</button>
+<button type="button" class="button" [luPopover]="reposition" luPopoverPosition="below">below</button>
 <lu-popover #reposition>reposition</lu-popover>

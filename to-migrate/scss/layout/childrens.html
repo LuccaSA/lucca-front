@@ -19,20 +19,20 @@
 	<body>
 		<div class="layout mod-asideRemoved">
 			<header class="layout-banner">
-				
+
 			</header>
 			<nav class="layout-navside">
-				<button id="navsideToggle" aria-expanded="false" class="layout-navside-toggle">Menu</button>
+				<button type="button" id="navsideToggle" aria-expanded="false" class="layout-navside-toggle">Menu</button>
 				<div class="layout-navside-content">
 					<div class="layout-navside-content-inner">
-						
+
 					</div>
 				</div>
 			</nav>
 			<main class="layout-content">
 				<div class="layout-content-inner">
 					<div class="layout-content-container">
-					
+
 					</div>
 				</div>
 			</main>
@@ -57,8 +57,8 @@
 			$('.layout-navside-content-inner')
 				.add('.layout-content-inner .layout-content-container')
 				.append('<div>' +
-					'<button class="add" aria-label="Add content">+</button>' +
-					'<button class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
+					'<button type="button" class="add" aria-label="Add content">+</button>' +
+					'<button type="button" class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
 				'</div>');
 
 			$('.add').on('click', function(){

@@ -25,8 +25,8 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Description</p>
 			</div>
 			<div class="list-item-actions">
-				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+				<button type="button" class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
+				<button type="button" class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
 			</div>
 		</li>
 		<li class="list-item ${clickable}">
@@ -35,8 +35,8 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Description</p>
 			</div>
 			<div class="list-item-actions">
-				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+				<button type="button" class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
+				<button type="button" class="actionIcon"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
 			</div>
 		</li>
 	</ul>

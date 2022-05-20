@@ -44,7 +44,7 @@ const code = `
 
   /* Vous pouvez également utiliser un <button></button> au lieu d'un <a></a>. */
   <li class="lu-dropdown-options-item">
-    <button luDropdownItem class="lu-dropdown-options-item-action">Button 4</button>
+    <button type="button" luDropdownItem class="lu-dropdown-options-item-action">Button 4</button>
   </li>
 
 </lu-dropdown>

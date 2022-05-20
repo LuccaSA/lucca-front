@@ -15,10 +15,10 @@ function getTemplate(args: TableSortableStory): string {
 		<thead class="table-head">
 			<tr class="table-head-row">
 				<th class="table-head-row-cell" aria-sort="descending">
-					<button class="table-head-row-cell-sortableButton">Triable</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Triable</button>
 				</th>
 				<th class="table-head-row-cell" aria-sort="none">
-					<button class="table-head-row-cell-sortableButton">Triable</button>
+					<button type="button" class="table-head-row-cell-sortableButton">Triable</button>
 				</th>
 				<th class="table-head-row-cell" >
 					Non triable

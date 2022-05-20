@@ -1,14 +1,14 @@
 <h1>refacto overlays</h1>
 
-<button class="button" [luPopover]="basic">click me</button>
+<button type="button" class="button" [luPopover]="basic">click me</button>
 <br />
-<button class="button" [luPopover]="basic" [luPopoverTarget]="target">trigger for my neighbour</button> <span class="label" luPopoverTarget #target="LuPopoverTarget">neighbour</span>
+<button type="button" class="button" [luPopover]="basic" [luPopoverTarget]="target">trigger for my neighbour</button> <span class="label" luPopoverTarget #target="LuPopoverTarget">neighbour</span>
 <br />
 <span class="label" [luPopover]="basic" luPopoverTrigger="hover">on hover</span>
 <br />
-<button class="button" [luPopover]="basic" luPopoverPosition="before">positioned before</button>
+<button type="button" class="button" [luPopover]="basic" luPopoverPosition="before">positioned before</button>
 <br />
-<button class="button" [luPopover]="basic" luPopoverAlignment="right">aligned right</button>
+<button type="button" class="button" [luPopover]="basic" luPopoverAlignment="right">aligned right</button>
 <br />
 <div class="textfield">
 	<input type="text" class="textfield-input" [luPopover]="basic" luPopoverTrigger="focus" placeholder="on focus">
@@ -16,9 +16,9 @@
 <br />
 <span class="label" [luPopover]="basic" luPopoverTrigger="hover" [luPopoverEnterDelay]="2000" [luPopoverLeaveDelay]="1000">on hover with delay</span>
 <br />
-<button class="button" [luPopover]="popoverUsingTemplate">using template</button>
+<button type="button" class="button" [luPopover]="popoverUsingTemplate">using template</button>
 <br />
-<button class="button" [luPopover]="popoverUsingTemplateWithContext">using template with context</button>
+<button type="button" class="button" [luPopover]="popoverUsingTemplateWithContext">using template with context</button>
 <br />
 
 

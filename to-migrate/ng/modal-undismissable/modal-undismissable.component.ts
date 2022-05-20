@@ -35,8 +35,8 @@ export class BasicModalContent {
 @Component({
 	selector: 'lu-popup-content',
 	template: `popup <br />
-		<button class="button" (click)="close()">close</button>
-		<button class="button" (click)="dismiss()">dismiss</button>
+		<button type="button" class="button" (click)="close()">close</button>
+		<button type="button" class="button" (click)="dismiss()">dismiss</button>
 	`
 })
 export class BasicPopupContent {

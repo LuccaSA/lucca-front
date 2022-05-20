@@ -19,16 +19,16 @@
 	<body>
 		<div class="layout mod-navsideLarge mod-navsideWithoutScrollbar mod-asideBefore mod-contentHeaderStatic mod-contentSubheaderStatic mod-contentFooterStatic">
 			<header class="layout-banner">
-				
+
 			</header>
 			<nav class="layout-navside">
-				<button id="navsideToggle" aria-expanded="false" class="layout-navside-toggle">Menu</button>
+				<button type="button" id="navsideToggle" aria-expanded="false" class="layout-navside-toggle">Menu</button>
 				<div class="layout-navside-content">
 					<div class="layout-navside-content-inner">
-						
+
 					</div>
 					<footer class="layout-navside-footer">
-						
+
 					</footer>
 				</div>
 			</nav>
@@ -36,30 +36,30 @@
 				<div class="layout-content-headers">
 					<header class="layout-content-headers-header">
 						<div class="layout-content-container">
-						
+
 						</div>
 					</header>
 					<header class="layout-content-headers-subheader">
 						<div class="layout-content-container">
-						
+
 						</div>
 					</header>
 				</div>
 				<div class="layout-content-inner">
 					<div class="layout-content-container">
-					
+
 					</div>
 				</div>
 				<footer class="layout-content-footer">
 					<div class="layout-content-container">
-					
+
 					</div>
 				</footer>
 			</main>
 			<aside class="layout-aside">
 				<div class="layout-aside-content">
 					<div class="layout-aside-content-inner">
-						
+
 					</div>
 				</div>
 			</aside>
@@ -90,8 +90,8 @@
 				.add('.layout-content-headers-header .layout-content-container')
 				.add('.layout-content-headers-subheader .layout-content-container')
 				.append('<div>' +
-					'<button class="add" aria-label="Add content">+</button>' +
-					'<button class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
+					'<button type="button" class="add" aria-label="Add content">+</button>' +
+					'<button type="button" class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
 				'</div>');
 
 			$('.add').on('click', function(){

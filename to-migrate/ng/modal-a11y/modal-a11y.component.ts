@@ -17,8 +17,8 @@ const MAGIC_SIZES = [
 	selector: 'lu-modal-content',
 	template: `
 	<p>content of the modal component</p>
-	<button class="button" (click)="openModal()">more modals</button>
-	<button class="button" (click)="incr()">incr</button>
+	<button type="button" class="button" (click)="openModal()">more modals</button>
+	<button type="button" class="button" (click)="incr()">incr</button>
 	`
 })
 export class BasicModalContent {
@@ -26,7 +26,7 @@ export class BasicModalContent {
 	submitAction = () => true;
 	// submitPalette = 'warning';
 	submitCounter = 0;
-	get submitDisabled() { return this.submitCounter % 2; } 
+	get submitDisabled() { return this.submitCounter % 2; }
 	constructor(
 		private _modal: LuModal,
 	) {}
@@ -59,4 +59,3 @@ export class ModalA11yComponent {
 		this._sidepanel.open(BasicModalContent);
 	}
 }
-
