@@ -73,7 +73,7 @@
 }
 
 @mixin borderless {
-	@include noOffset($cell, $headCell);
+	@include noOffset;
 
 	border: none;
 
@@ -153,33 +153,35 @@
 }
 
 @mixin draggable {
-	.table-body-row-cell-handler {
-		top: 0;
-		bottom: 0;
-		left: 0;
-		width: 2rem;
-		position: absolute;
-		cursor: move;
+	@at-root {
+		.table-body-row-cell-handler {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 2rem;
+			position: absolute;
+			cursor: move;
 
-		&:focus-visible,
-		&:hover {
-			&::after {
-				color: var(--palettes-grey-500);
+			&:focus-visible,
+			&:hover {
+				&::after {
+					color: var(--palettes-grey-500);
+				}
 			}
-		}
 
-		&::after {
-			@include icon.makeIcon('drag');
+			&::after {
+				@include icon.makeIcon('drag');
 
-			color: var(--palettes-grey-400);
-			height: 100%;
-			margin: auto;
-			display: flex;
-			align-items: center;
+				color: var(--palettes-grey-400);
+				height: 100%;
+				margin: auto;
+				display: flex;
+				align-items: center;
+			}
 		}
 	}
 
-	[class~='-row-cell'] {
+	[class*='-row-cell'] {
 		&:first-child {
 			padding-left: 2rem;
 			position: relative;
@@ -263,4 +265,17 @@
 
 @mixin fixed {
 	table-layout: fixed;
+}
+
+@mixin noOffset {
+	.table-head-row-cell,
+	.table-body-row-cell {
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+	}
 }

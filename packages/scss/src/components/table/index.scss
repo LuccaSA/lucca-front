@@ -27,6 +27,14 @@
 	&.mod-fixed {
 		@include fixed;
 	}
+
+	&.mod-noOffset {
+		@include noOffset;
+	}
+
+	&.mod-borderless {
+		@include borderless;
+	}
 }
 
 .table-body-row {
