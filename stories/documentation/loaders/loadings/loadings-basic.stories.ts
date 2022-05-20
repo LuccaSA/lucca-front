@@ -58,7 +58,7 @@ function getTemplate(args: LoadingsBasicStory): string {
 	const invert = args.invert ? `mod-invert` : '';
 	const fullpage = args.fullpage ? `mod-fullpage` : '';
 	const dialog = args.dialog ? `mod-dialog` : '';
-	const sidepanel = args.sidepanel ? `mod-sidepanel` : '';
+	const sidepanel = args.sidepanel ? `mod-sidePanel` : '';
 	return `
 	<div class="loading ${block} ${big} ${invert} ${fullpage} ${dialog} ${sidepanel}">${label}</div>
 	`;

@@ -5,7 +5,7 @@
 	@include component;
 }
 
-.pagination-item {
+.pagination-navigation-item {
 	&:is(.is-ellipsis, .ellipsis) {
 		@include ellipsis;
 	}
