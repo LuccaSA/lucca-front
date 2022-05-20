@@ -15,17 +15,17 @@ export default {
 		clickable: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		zebra: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		small: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		alignTop: {
 			control: {
@@ -42,7 +42,7 @@ export default {
 		borderless: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -66,22 +66,22 @@ function getTemplate(args: TableBasicStory): string {
 		<tbody class="table-body">
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Contenu</td>
-				<td class="table-body-row-cell">Contenu</td>
+				<td class="table-body-row-cell">Contenu<br />Contenu</td>
 				<td class="table-body-row-cell ${alignRight}">Contenu</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Contenu</td>
-				<td class="table-body-row-cell">Contenu</td>
+				<td class="table-body-row-cell">Contenu<br />Contenu</td>
 				<td class="table-body-row-cell ${alignRight}">Contenu</td>
 			</tr>
 			<tr class="table-body-row">
 				<td class="table-body-row-cell">Contenu</td>
-				<td class="table-body-row-cell">Contenu</td>
+				<td class="table-body-row-cell">Contenu<br />Contenu</td>
 				<td class="table-body-row-cell ${alignRight}">Contenu</td>
 			</tr>
 		</tbody>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
@@ -90,4 +90,4 @@ const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = {clickable: false, zebra: false, alignTop: false, alignRight: false, small: false, borderless: false};
+Basic.args = { clickable: false, zebra: false, alignTop: false, alignRight: false, small: false, borderless: false };

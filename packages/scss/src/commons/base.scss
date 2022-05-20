@@ -92,6 +92,11 @@ a {
 	}
 }
 
+strong,
+b {
+	font-weight: 600;
+}
+
 @each $palette in core.$palettes {
 	.palette-#{$palette} {
 		@each $shade in map.keys(config.$primary) {

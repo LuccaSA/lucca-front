@@ -3,6 +3,8 @@
 @use 'exports' as *;
 
 .table {
+	@include vars;
+
 	&.mod-stickyColumn {
 		@include stickyColumn;
 	}
@@ -24,13 +26,16 @@
 	}
 
 	&[class*='mod-stickyColumn'] {
-		@for $i from 0 through 50 {
-			&.mod-stickyColumn-leftOffset#{$i} {
-				@include leftOffset($i);
-			}
+		.table-head-row-cell,
+		.table-body-row-cell {
+			@for $i from 0 through 50 {
+				&.mod-stickyColumn-leftOffset#{$i} {
+					@include leftOffset($i);
+				}
 
-			&.mod-stickyColumn-rightOffset#{$i} {
-				@include rightOffset($i);
+				&.mod-stickyColumn-rightOffset#{$i} {
+					@include rightOffset($i);
+				}
 			}
 		}
 	}
@@ -43,16 +48,12 @@
 		@include stickyHeaderCommon;
 
 		@each $breakpoint, $value in config.$breakpoints {
-			@include media.largerThan($breakpoint) {
+			@include media.smallerThan($breakpoint) {
 				&.mod-stickyColumn-#{$breakpoint} {
 					@include stickyColumnBreakpoint;
 				}
 			}
 		}
-	}
-
-	&.mod-stickyHeader-shadow {
-		@include stickyHeaderShadow;
 	}
 
 	&.mod-stickyHeader {
@@ -61,5 +62,11 @@
 
 	&.mod-stickyHeader-withBanner {
 		@include stickyHeaderBanner;
+	}
+}
+
+.table-body-row {
+	&.mod-stickyHeader-shadow {
+		@include stickyHeaderShadow;
 	}
 }

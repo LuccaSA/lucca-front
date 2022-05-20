@@ -1,6 +1,6 @@
 @mixin component {
 	background-color: var(--colors-white-color);
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-border-radius-big);
 	border-color: var(--commons-divider-color);
 	border-width: 1px;
 	margin-bottom: 1rem;
