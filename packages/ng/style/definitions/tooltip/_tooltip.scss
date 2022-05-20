@@ -1,11 +1,17 @@
 @mixin tooltipStyle {
 	.lu-tooltip-panel {
-		background: var(--components-tooltip-background-color, var(--palettes-grey-900));
-		color: var(--components-tooltip-color, var(--colors-white-color));
-		padding: var(--components-tooltip-padding, var(--spacings-smallest) var(--spacings-smaller));
-		max-width: var(--components-tooltip-max-width, 15rem);
+		--components-tooltip-background-color: var(--palettes-grey-900);
+		--components-tooltip-color: var(--colors-white-color);
+		--components-tooltip-padding: var(--spacings-smallest) var(--spacings-smaller);
+		--components-tooltip-max-width: 15rem;
+
+		background: var(--components-tooltip-background-color);
+		color: var(--components-tooltip-color);
+		padding: var(--components-tooltip-padding);
+		max-width: var(--components-tooltip-max-width);
 		border-radius: var(--commons-border-radius);
 		font-size: var(--sizes-small-font-size);
+
 		font-weight: 600;
 		line-height: 1rem;
 		display: block;
