@@ -34,7 +34,7 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 		let call: Observable<ILuApiResponse<IApiDepartment>>;
 		if (this._appInstanceId && this._operations?.length) {
 			call = this._http.get<ILuApiResponse<IApiDepartment>>(
-				`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this.appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`,
+				`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`,
 			);
 		} else {
 			call = this._http.get<ILuApiResponse<IApiDepartment>>(`/api/v3/departments/tree?fields=id,name&${this._filters.join(',')}`);
