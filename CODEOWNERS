@@ -11,6 +11,7 @@ Jenkinsfile           @LuccaSA/ux-admins
 
 #
 packages/ng           @LuccaSA/guilde-front
+packages/ng/**/*.scss @LuccaSA/ux-devs
 packages/icons        @LuccaSA/ux-devs
 packages/scss         @LuccaSA/ux-devs
 
