@@ -1,34 +1,34 @@
 @use '../../scss/src/commons/utils/media';
 
 :root {
-  --popup-panel-background-color: #FFFFFF;
-  --popup-size-small: 32rem;
-  --popup-size-medium: 42rem;
-  --popup-size-large: 60rem;
-  --popup-padding-horizontal: 2rem;
-  --popup-padding-vertical: 1rem;
-  --popup-sidepanel-size-small: 40rem;
-  --popup-sidepanel-size-medium: 55rem;
-  --popup-sidepanel-size-large: 70rem;
+  --components-popup-panel-background-color: #FFFFFF;
+  --components-popup-size-small: 32rem;
+  --components-popup-size-medium: 42rem;
+  --components-popup-size-large: 60rem;
+  --components-popup-padding-horizontal: 2rem;
+  --components-popup-padding-vertical: 1rem;
+  --components-popup-sidepanel-size-small: 40rem;
+  --components-popup-sidepanel-size-medium: 55rem;
+  --components-popup-sidepanel-size-large: 70rem;
 }
 
 .lu-popup-panel {
 	box-shadow: var(--commons-elevations-elevation-3);
 	position: relative;
-	background-color: var(--popup-panel-background-color);
+	background-color: var(--components-popup-panel-background-color);
 	border-radius: var(--commons-border-radius);
-	width: var(--popup-size-medium);
+	width: var(--components-popup-size-medium);
 	max-width: 95%;
 	max-height: 90vh;
 	overflow: auto;
 	animation: popupAnimation var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &.mod-small, &.size-small {
-    width: var(--popup-size-small);
+    width: var(--components-popup-size-small);
   }
 
   &.mod-large, &.size-large {
-    width: var(--popup-size-large);
+    width: var(--components-popup-size-large);
   }
 }
 
@@ -39,7 +39,7 @@
 }
 
 .lu-modal-header {
-	padding: var(--popup-padding-vertical) 4rem var(--popup-padding-vertical) var(--popup-padding-horizontal);
+	padding: var(--components-popup-padding-vertical) 4rem var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
 	position: relative;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .lu-modal-content {
-	padding: 0 var(--popup-padding-horizontal);
+	padding: 0 var(--components-popup-padding-horizontal);
 	overflow: auto;
 	height: auto;
 
@@ -81,7 +81,7 @@
 	&:after {
 		content: '';
 		display: block;
-		padding-bottom: var(--popup-padding-vertical);
+		padding-bottom: var(--components-popup-padding-vertical);
 	}
 
 	&.mod-noPadding {
@@ -95,7 +95,7 @@
 
 .lu-modal-footer {
 	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
-	padding: var(--spacings-smaller) var(--spacings-small) var(--spacings-smaller) var(--popup-padding-horizontal);
+	padding: var(--spacings-smaller) var(--spacings-small) var(--spacings-smaller) var(--components-popup-padding-horizontal);
 	display: flex;
 	margin-top: auto;
 	align-items: center;
