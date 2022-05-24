@@ -8,4 +8,8 @@
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;
+
+	&:is(:hover, :focus) {
+		color: var(--commons-text-link-hover);
+	}
 }
