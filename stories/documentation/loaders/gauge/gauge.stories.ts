@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface GaugeBasicStory {
 	palette: string;
 	thin: boolean;
+	vertical: boolean;
 }
 
 export default {
@@ -19,15 +20,21 @@ export default {
 				type: 'boolean',
 			},
 		},
+		vertical: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
 function getTemplate(args: GaugeBasicStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
 	const thin = args.thin ? `mod-thin` : '';
+	const vertical = args.vertical ? `mod-vertical` : '';
 	return `
-	<div class="gauge ${classes} ${thin}">
-		<div class="gauge-bar" style="width:33%"></div>
+	<div class="gauge ${classes} ${thin} ${vertical}">
+		<div class="gauge-bar" style="width:33%; height: 33%"></div>
 	</div>
 	`;
 }
@@ -35,7 +42,14 @@ function getTemplate(args: GaugeBasicStory): string {
 const Template: Story<GaugeBasicStory> = (args: GaugeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+			height: 4rem;
+		}`,
+	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false };
+Basic.args = { palette: '', thin: false, vertical: false };

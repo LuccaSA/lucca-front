@@ -59,7 +59,7 @@
 	.#{$fieldname}-label {
 		color: _component("field.label.color");
 		font-size: _component("field.label.font-size");
-		line-height: _theme("sizes.small.line-height");
+		line-height: _theme("sizes.smaller.line-height");
 		min-height: _theme("spacings.small");
 		margin-bottom: _component("field.label.margin-bottom");
 		order: -1;

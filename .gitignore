@@ -31,3 +31,6 @@ compodoc-static
 
 # IDE - Jetbrains
 .idea/*
+
+# apple stuff
+.DS_Store
