@@ -8,4 +8,20 @@
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;
+
+	&:is(:hover, :focus) {
+		color: var(--commons-text-link-hover);
+	}
+
+	@at-root {
+		a {
+			color: var(--commons-text-link-color);
+			cursor: pointer;
+			text-decoration: underline;
+
+			&:hover {
+				color: var(--commons-text-link-hover);
+			}
+		}
+	}
 }
