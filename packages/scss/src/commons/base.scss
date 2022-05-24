@@ -84,6 +84,8 @@ abbr {
 
 a {
 	color: var(--commons-text-link-color);
+	cursor: pointer;
+	text-decoration: underline;
 
 	&:hover {
 		color: var(--commons-text-link-hover);
