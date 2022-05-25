@@ -5,10 +5,10 @@
 	--components-button-line-height: 1.5rem;
 	--components-button-padding: 0.5rem 1.5rem;
 	--components-button-small-font-size: 0.875rem;
-	--components-button-small-line-height: 1rem;
+	--components-button-small-line-height: var(--sizes-smaller-line-height);
 	--components-button-small-padding: 0.5rem 1rem;
 	--components-button-smaller-font-size: 0.75rem;
-	--components-button-smaller-line-height: 1rem;
+	--components-button-smaller-line-height: var(--sizes-smaller-line-height);
 	--components-button-smaller-padding: 0.25rem 0.5rem;
 
 	--components-button-text-padding: var(--spacings-smaller);

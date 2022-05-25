@@ -14,7 +14,7 @@
 	cursor: pointer;
 
 	& + & {
-		margin-left: 0.1rem;
+		margin-left: 2px;
 	}
 
 	&:not([disabled], .is-disabled) {

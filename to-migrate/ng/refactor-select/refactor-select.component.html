@@ -1,69 +1,68 @@
-<section style="background:white; padding: 3rem;">
+<section style="background: white; padding: 3rem">
+	<h1>refactor-select</h1>
+	<div class="filters u-marginBottomBig">
+		<div class="textfield mod-filter">
+			<lu-select class="textfield-input" [(ngModel)]="item">
+				<span *luDisplayer="let value">{{value}}</span>
+				<lu-input-clearer *ngIf="true"></lu-input-clearer>
+				<lu-option-picker>
+					<lu-option value="1">1</lu-option>
+					<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<label class="textfield-label">Textfield label</label>
+		</div>
+		<div class="textfield mod-filter">
+			<lu-select class="textfield-input" [(ngModel)]="collection" multiple="true">
+				<span *luDisplayer="let values; multiple: true">{{values.length}} items</span>
+				<lu-input-clearer *ngIf="true"></lu-input-clearer>
+				<lu-option-picker>
+					<lu-option value="1">1</lu-option>
+					<lu-option value="2">2</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<label class="textfield-label">Textfield label</label>
+		</div>
+	</div>
 
-<h1>refactor-select</h1>
-<div class="filters u-marginBottomBig">
-	<div class="textfield mod-filter">
-		<lu-select class="textfield-input" [(ngModel)]="item">
-			<span *luDisplayer="let value">{{value}}</span>
-			<lu-input-clearer *ngIf="true"></lu-input-clearer>
-			<lu-option-picker>
-				<lu-option value="1">1</lu-option>
-				<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf</lu-option>
-			</lu-option-picker>
-		</lu-select>
-		<label class="textfield-label">Textfield label</label>
+	<div class="form-group">
+		<div class="textfield">
+			<lu-select class="textfield-input" [(ngModel)]="model">
+				<span *luDisplayer="let value">{{value}}</span>
+				<lu-input-clearer *ngIf="true"></lu-input-clearer>
+				<lu-option-picker>
+					<lu-option value="1">1</lu-option>
+					<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<label class="textfield-label">Textfield label</label>
+		</div>
 	</div>
-	<div class="textfield mod-filter">
-		<lu-select class="textfield-input" [(ngModel)]="collection" multiple="true">
-			<span *luDisplayer="let values; multiple: true">{{values.length}} items</span>
-			<lu-input-clearer *ngIf="true"></lu-input-clearer>
-			<lu-option-picker>
-				<lu-option value="1">1</lu-option>
-				<lu-option value="2">2</lu-option>
-			</lu-option-picker>
-		</lu-select>
-		<label class="textfield-label">Textfield label</label>
+	<div class="form-group">
+		<div class="textfield mod-small">
+			<lu-select class="textfield-input" [(ngModel)]="model">
+				<span *luDisplayer="let value">{{value}}</span>
+				<lu-input-clearer *ngIf="true"></lu-input-clearer>
+				<lu-option-picker>
+					<lu-option value="1">1</lu-option>
+					<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf</lu-option>
+				</lu-option-picker>
+			</lu-select>
+			<label class="textfield-label">Textfield label</label>
+		</div>
 	</div>
-</div>
-
-<div class="form-group">
-	<div class="textfield">
-		<lu-select class="textfield-input" [(ngModel)]="model">
-			<span *luDisplayer="let value">{{value}}</span>
-			<lu-input-clearer *ngIf="true"></lu-input-clearer>
-			<lu-option-picker>
-				<lu-option value="1">1</lu-option>
-				<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf</lu-option>
-			</lu-option-picker>
-		</lu-select>
-		<label class="textfield-label">Textfield label</label>
+	<div class="form-group">
+		<div class="textfield">
+			<input class="textfield-input" type="text" value="Filter" />
+			<label class="textfield-label">Textfield label</label>
+		</div>
 	</div>
-</div>
-<div class="form-group">
-	<div class="textfield mod-small">
-		<lu-select class="textfield-input" [(ngModel)]="model">
-			<span *luDisplayer="let value">{{value}}</span>
-			<lu-input-clearer *ngIf="true"></lu-input-clearer>
-			<lu-option-picker>
-				<lu-option value="1">1</lu-option>
-				<lu-option value="oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf">oezifjoiezjf ezeofijezo fijze fojizefzfzeof ezf</lu-option>
-			</lu-option-picker>
-		</lu-select>
-		<label class="textfield-label">Textfield label</label>
+	<div class="form-group">
+		<div class="textfield mod-small">
+			<input class="textfield-input" type="text" value="Filter" />
+			<label class="textfield-label">Textfield label</label>
+		</div>
 	</div>
-</div>
-<div class="form-group">
-	<div class="textfield">
-		<input class="textfield-input" type="text" value="Filter">
-		<label class="textfield-label">Textfield label</label>
-	</div>
-</div>
-<div class="form-group">
-	<div class="textfield mod-small">
-		<input class="textfield-input" type="text" value="Filter">
-		<label class="textfield-label">Textfield label</label>
-	</div>
-</div>
 </section>
 
 <section>

@@ -46,6 +46,7 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 			}),
 		);
 	}
+
 	private format(t: IApiDepartment): ILuTree<ILuDepartment> {
 		return { value: t.node, children: t.children.map((c) => this.format(c)) };
 	}

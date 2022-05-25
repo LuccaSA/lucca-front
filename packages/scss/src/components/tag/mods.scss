@@ -1,7 +1,8 @@
 @mixin clickable {
 	cursor: pointer;
 
-	&:hover, &:focus {
+	&:hover,
+	&:focus {
 		text-decoration: underline;
 	}
 }

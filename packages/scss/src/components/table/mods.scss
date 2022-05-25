@@ -250,7 +250,12 @@
 	}
 
 	.table-body-row:hover &,
-	.table-head-row:hover &,
+	.table-head-row:hover & {
+		> * {
+			opacity: 1;
+		}
+	}
+
 	.table-head-row:focus-within &,
 	.table-body-row:focus-within & {
 		> * {

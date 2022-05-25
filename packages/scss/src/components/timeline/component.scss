@@ -1,5 +1,7 @@
+@use '../../commons/utils/reset';
+
 @mixin component {
-	list-style-type: none; 
+	list-style-type: none;
 	padding: 0;
 	margin: var(--spacings-small) 0;
 	display: flex;
@@ -60,15 +62,23 @@
 		}
 
 		.timeline-step-title-action {
+			@include reset.button;
+
 			color: currentColor;
 			text-decoration: none;
+			cursor: default;
+			display: inline-block;
+			width: auto;
 
-			&:hover,
-			&:focus {
-				color: currentColor;
-				text-decoration: underline;
+			&:not([disabled]) {
+				&:hover,
+				&:focus {
+					color: currentColor;
+					text-decoration: underline;
+					cursor: pointer;
+				}
 			}
 		}
 	}
-	
+
 }

@@ -19,8 +19,11 @@ export class LuFormlyFieldApi extends FieldType {
 	get _orderBy() {
 		return this.to['orderBy'] as string;
 	}
+	get _sort() {
+		return this.to['sort'] as string;
+	}
 	get _standard() {
-		return (this.to['standard'] || 'v3') as string;
+		return (this.to['standard'] || 'v3') as 'v3' | 'v4';
 	}
 	override readonly formControl: FormControl;
 	focus() {

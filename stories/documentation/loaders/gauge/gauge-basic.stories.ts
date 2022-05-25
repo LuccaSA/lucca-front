@@ -20,6 +20,11 @@ export default {
 				type: 'boolean',
 			},
 		},
+		vertical: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
@@ -28,10 +33,8 @@ function getTemplate(args: GaugeBasicStory): string {
 	const thin = args.thin ? `mod-thin` : '';
 	const vertical = args.vertical ? `mod-vertical` : '';
 	return `
-	<div style="height: 10rem">
-		<div class="gauge ${classes} ${thin} ${vertical}">
-			<div class="gauge-bar" style="width:33%; height: 33%"></div>
-		</div>
+	<div class="gauge ${classes} ${thin} ${vertical}">
+		<div class="gauge-bar" style="width:33%; height: 33%"></div>
 	</div>
 	`;
 }
@@ -39,6 +42,13 @@ function getTemplate(args: GaugeBasicStory): string {
 const Template: Story<GaugeBasicStory> = (args: GaugeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+			height: 4rem;
+		}`,
+	],
 });
 
 export const Basic = Template.bind({});

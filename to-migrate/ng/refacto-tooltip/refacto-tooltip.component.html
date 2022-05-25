@@ -10,9 +10,7 @@
 
 <span class="label" *ngIf="display" luTooltip="ngif">blinking throuh ngif</span>
 <span class="label" [class.u-displayNone]="!display" luTooltip="display-none">blinking throuh display-none</span>
-<p [class.u-displayNone]="!display">
-	lorem ipsum yaddi yaddi yadda - this text block changes the position of the tooltip trigger below it
-</p>
+<p [class.u-displayNone]="!display">lorem ipsum yaddi yaddi yadda - this text block changes the position of the tooltip trigger below it</p>
 <span class="label" luTooltip="moving trigger/target">moving cuz layout changes</span>
 
 <pre>{{ interval$ | async }}</pre>

@@ -176,7 +176,11 @@
 		&::after {
 			top: calc(var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width));
 			height: var(--components-table-fixed-column-sticky-shadow-width);
-			background-image: linear-gradient(to bottom, color.adjust($shadowColor, $alpha: -0.75), color.adjust($shadowColor, $alpha: -1));
+			background-image: linear-gradient(
+				to bottom,
+				color.adjust($shadowColor, $alpha: -0.75),
+				color.adjust($shadowColor, $alpha: -1)
+			);
 			width: 100%;
 			opacity: 0.5;
 		}

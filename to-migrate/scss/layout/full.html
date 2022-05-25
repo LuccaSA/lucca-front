@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 	<head>
 		<meta charset="utf-8" />
@@ -14,7 +14,7 @@
 		<link rel="mask-icon" href="//cdn.lucca.fr/favicon/lucca/safari-pinned-tab.svg" color="#ffb900" />
 		<link rel="shortcut icon" href="//cdn.lucca.fr/favicon/lucca/favicon.ico" />
 		<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" href="../lucca-front.css">
+		<link rel="stylesheet" href="../lucca-front.css" />
 	</head>
 	<body>
 		<div class="layout">
@@ -69,11 +69,11 @@
 		</div>
 
 		<!-- demo -->
-		<link rel="stylesheet" href="../demo.css">
+		<link rel="stylesheet" href="../demo.css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
-			$('.layout-navside-toggle').on('click', function(){
-				if($(this).attr('aria-expanded') === 'true') {
+			$('.layout-navside-toggle').on('click', function () {
+				if ($(this).attr('aria-expanded') === 'true') {
 					$(this).attr('aria-expanded', 'false');
 					$('.layout-navside').removeClass('is-active');
 					$('html').removeClass('has-overlay');
@@ -97,21 +97,25 @@
 					'<button type="button" class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
 				'</div>');
 
-			$('.add').on('click', function(){
-				$(this).parent().append('<div class="layout-more">' +
-					'Lorem ipsum dolor, sit amet consectetur adipisicing elit. ' +
-					'Quia porro, molestias nihil deserunt saepe laborum velit ' +
-					'explicabo voluptas eum maxime sed maiores doloremque ' +
-					'dolor nam ad impedit. A, ullam totam.' +
-				'</div>');
-				if($(this).parent().find('.layout-more').length >= 1) {
+			$('.add').on('click', function () {
+				$(this)
+					.parent()
+					.append(
+						'<div class="layout-more">' +
+							'Lorem ipsum dolor, sit amet consectetur adipisicing elit. ' +
+							'Quia porro, molestias nihil deserunt saepe laborum velit ' +
+							'explicabo voluptas eum maxime sed maiores doloremque ' +
+							'dolor nam ad impedit. A, ullam totam.' +
+							'</div>',
+					);
+				if ($(this).parent().find('.layout-more').length >= 1) {
 					$(this).parent().find('.remove').removeAttr('disabled');
 				}
 			});
 
-			$('.remove').on('click', function(){
+			$('.remove').on('click', function () {
 				$(this).parent().find('.layout-more').filter(':last-child').remove();
-				if($(this).parent().find('.layout-more').length == 0) {
+				if ($(this).parent().find('.layout-more').length == 0) {
 					$(this).parent().find('.remove').attr('disabled', 'disabled');
 				}
 			});

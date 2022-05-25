@@ -30,7 +30,8 @@
 		"start": "ng run storybook:start",
 		"jenkins-test": "jest --no-cache --runInBand",
 		"test": "jest --maxWorkers=4 --isolatedModules=true --detectOpenHandles --watchAll",
-		"compodoc": "compodoc -p ./tsconfig.doc.json -e json -d .storybook",
+		"compodoc": "compodoc -p ./tsconfig.compodoc-json.json -e json -d .storybook",
+		"build-compodoc": "compodoc -p ./tsconfig.compodoc-html.json -d compodoc-static",
 		"build-storybook": "ng run storybook:build",
 		"lint": "ng lint"
 	},

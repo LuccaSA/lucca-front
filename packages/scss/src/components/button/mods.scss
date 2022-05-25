@@ -34,24 +34,24 @@
 @mixin text {
 	background-color: transparent;
 	box-shadow: none;
-	color: var(--palettes-grey-800);
+	color: var(--palettes-700, var(--palettes-grey-700));
 	padding: var(--components-button-text-padding);
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			box-shadow: none;
-			background-color: var(--palettes-grey-50);
+			background-color: var(--palettes-50, var(--palettes-grey-50));
 		}
 
 		&:focus {
 			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
 				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
-			background: var(--palettes-grey-50);
+			background: var(--palettes-50, var(--palettes-grey-50));
 			outline: none
 		}
 
 		&:active {
-			background-color: var(--palettes-grey-100);
+			background-color: var(--palettes-100, var(--palettes-grey-100));
 			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
 				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
 		}

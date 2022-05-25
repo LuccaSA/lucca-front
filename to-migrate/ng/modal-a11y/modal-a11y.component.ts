@@ -1,18 +1,8 @@
 import { Component } from '@angular/core';
 import { LuModal } from '@lucca-front/ng/modal';
 import { LuSidepanel } from '@lucca-front/ng/sidepanel';
-const MAGIC_POSITIONS = [
-	'center',
-	'top',
-	'right',
-	'bottom',
-	'left',
-];
-const MAGIC_SIZES = [
-	'small',
-	'medium',
-	'large',
-];
+const MAGIC_POSITIONS = ['center', 'top', 'right', 'bottom', 'left'];
+const MAGIC_SIZES = ['small', 'medium', 'large'];
 @Component({
 	selector: 'lu-modal-content',
 	template: `
@@ -45,13 +35,10 @@ export class BasicModalContent {
 }
 @Component({
 	selector: 'sand-modal-a11y',
-	templateUrl: './modal-a11y.component.html'
+	templateUrl: './modal-a11y.component.html',
 })
 export class ModalA11yComponent {
-	constructor(
-		private _modal: LuModal,
-		private _sidepanel: LuSidepanel,
-	) {}
+	constructor(private _modal: LuModal, private _sidepanel: LuSidepanel) {}
 	openModal() {
 		this._modal.open(BasicModalContent);
 	}

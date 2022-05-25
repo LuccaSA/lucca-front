@@ -23,7 +23,8 @@ class ToastsStory implements OnInit, OnDestroy {
 	constructor(private toastsService: LuToastsService) {}
 
 	public ngOnInit(): void {
-		this.toastError$ = this.error$.pipe(map((message, index) => ({ type: 'Error', message })));
+		this.toastError$ = this.error$
+			.pipe(map((message, index) => ({ type: 'Error', message })));
 	}
 
 	public ngOnDestroy(): void {

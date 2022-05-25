@@ -39,7 +39,7 @@ export default {
 		block: {
 			control: {
 				type: 'boolean',
-			},
+			}
 		},
 	},
 } as Meta;
@@ -50,7 +50,7 @@ function getTemplate(args: ButtonBasicStory): string {
 	const block = args.block ? `mod-block` : '';
 
 	return `
-	<button type="button" class="button ${classes} ${block}" ${attributes}>Bouton</button>
+	<button class="button ${classes} ${block}" ${attributes}>Bouton</button>
 	`;
 }
 

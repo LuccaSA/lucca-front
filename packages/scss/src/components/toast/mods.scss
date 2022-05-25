@@ -63,7 +63,14 @@
 		}
 	}
 
-	&:hover,
+	&:hover {
+		.circularGauge {
+			circle {
+				animation-play-state: paused;
+			}
+		}
+	}
+
 	&:focus-within {
 		.circularGauge {
 			circle {

@@ -1,7 +1,6 @@
 @mixin component {
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
-	font-size: var(--sizes-small-font-size);
 	display: inline-block;
 	text-align: center;
 	vertical-align: baseline;

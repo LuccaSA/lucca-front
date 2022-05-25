@@ -100,7 +100,11 @@
 			font-weight: 600;
 			line-height: 1rem;
 
-			&:focus-visible,
+			&:focus-visible {
+				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
+				color: var(--components-navSide-fullwidth-palette-hovered-text);
+			}
+
 			&:hover {
 				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
 				color: var(--components-navSide-fullwidth-palette-hovered-text);

@@ -20,7 +20,7 @@
 		@include active;
 	}
 
-	&:is(.is-disabled, .disabled) {
+	&:is(.is-disabled, .disabled, &[disabled]) {
 		@include disabled;
 	}
 }

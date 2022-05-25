@@ -38,7 +38,7 @@
 		}
 
 		.menu-link, // legacy syntax
-    .menu-list-item-action {
+		.menu-list-item-action {
 			@include reset.button;
 			padding: var(--components-menu-padding);
 			border-radius: var(--commons-border-radius);

@@ -1,18 +1,18 @@
 <h1>date-input</h1>
 <h2>no picker</h2>
 <div class="textfield">
-	<input  class="textfield-input" luDateInput [(ngModel)]="date">
+	<input class="textfield-input" luDateInput [(ngModel)]="date" />
 	<label class="textfield-label">date input</label>
 </div>
 <h2>in a form</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
 	<div class="textfield">
-		<input  class="textfield-input" luDateInput formControlName="date" required>
+		<input class="textfield-input" luDateInput formControlName="date" required />
 		<label class="textfield-label">date input</label>
 		<div class="textfield-messages" *ngIf="form.controls.date.invalid">
-				<div class="textfield-messages-error" *ngIf="form.controls.date.errors.date">Invalid date</div>
-				<div class="textfield-messages-error" *ngIf="form.controls.date.errors.required">required</div>
-			</div>
+			<div class="textfield-messages-error" *ngIf="form.controls.date.errors.date">Invalid date</div>
+			<div class="textfield-messages-error" *ngIf="form.controls.date.errors.required">required</div>
+		</div>
 	</div>
 </form>
 <button type="button" class="button" (click)="submit()" [class.is-disabled]="form.invalid">submit</button>

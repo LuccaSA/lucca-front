@@ -26,6 +26,10 @@
 
 	&:is(.is-disabled, .disabled, [disabled]) {
 		@include disabled;
+
+		&.mod-outlined {
+			@include outlinedDisabled;
+		}
 	}
 
 	&:is(.is-loading, .loading) {

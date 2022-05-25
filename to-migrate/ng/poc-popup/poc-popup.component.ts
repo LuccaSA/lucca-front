@@ -1,9 +1,9 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { LuPopup, ALuPopupRef, LU_POPUP_DATA, ILuPopupConfig } from '@lucca-front/ng/popup';
+import { ALuPopupRef, ILuPopupConfig, LuPopup, LU_POPUP_DATA } from '@lucca-front/ng/popup';
 
 @Component({
 	selector: 'lu-poc-popup',
-	templateUrl: './poc-popup.component.html'
+	templateUrl: './poc-popup.component.html',
 })
 export class PocPopupComponent {
 	constructor(private _popup: LuPopup) {}
@@ -32,17 +32,12 @@ export class PocPopupComponent {
 	}
 }
 
-
 @Component({
 	selector: 'lu-poc-popup-inside',
 	templateUrl: './poc-popup.template.html',
 })
 export class PocPopupInsideComponent {
-	constructor(
-		protected _ref: ALuPopupRef<PocPopupInsideComponent>,
-		protected _popup: LuPopup,
-		@Optional() @Inject(LU_POPUP_DATA) public data,
-		) {}
+	constructor(protected _ref: ALuPopupRef<PocPopupInsideComponent>, protected _popup: LuPopup, @Optional() @Inject(LU_POPUP_DATA) public data) {}
 	closePopup() {
 		this._ref.close(8);
 	}
@@ -53,15 +48,12 @@ export class PocPopupInsideComponent {
 @Component({
 	selector: 'lu-poc-popup-secondary',
 	template: `
-	<h1>title {{data}}</h1>
-	<button type="button" class="button" (click)="closePopup()">close</button>
+		<h1>title {{ data }}</h1>
+		<button type="button" class="button" (click)="closePopup()">close</button>
 	`,
 })
 export class PocPopupSecondaryComponent {
-	constructor(
-		protected _ref: ALuPopupRef<PocPopupSecondaryComponent>,
-		@Optional() @Inject(LU_POPUP_DATA) public data,
-	) {}
+	constructor(protected _ref: ALuPopupRef<PocPopupSecondaryComponent>, @Optional() @Inject(LU_POPUP_DATA) public data) {}
 	closePopup() {
 		this._ref.close(8);
 	}
