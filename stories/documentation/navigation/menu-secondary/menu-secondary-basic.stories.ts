@@ -2,6 +2,8 @@ import { Meta, Story } from '@storybook/angular';
 
 interface MenuSecondaryBasicStory {
 	compact: boolean;
+	banner: boolean;
+	open: boolean;
 }
 
 export default {
@@ -12,17 +14,29 @@ export default {
 				type: 'boolean',
 			},
 		},
+		banner: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		open: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
 function getTemplate(args: MenuSecondaryBasicStory): string {
 	const compact = args.compact ? `mod-compact` : '';
+	const banner = args.banner ? `mod-withBanner` : '';
+	const open = args.open ? `is-open` : '';
 	return `
-	<div class="navSide ${compact}">
+	<div class="navSide ${compact} ${banner} ${open}">
 		<nav role="navigation" aria-label="Nom application" class="navSide-wrapper">
 			<div class="navSide-mainSection">
 				<div class="navSide-item mod-mobileToggle">
-					<button type="button" class="navSide-item-link">
+					<button type="button" class="navSide-item-link" [attr.aria-expanded]="open">
 						<span class="navSide-item-link-title">Menu</span>
 						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
 					</button>
@@ -94,18 +108,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 const Template: Story<MenuSecondaryBasicStory> = (args: MenuSecondaryBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		.navSide {
-			position: relative;
-			max-height: 30rem;
-			padding-top: 0;
-		}
-		.navSide-item.mod-mobileToggle {
-			position: relative;
-		}`,
-	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { compact: false };
+Basic.args = { compact: false, banner: false, open: false };

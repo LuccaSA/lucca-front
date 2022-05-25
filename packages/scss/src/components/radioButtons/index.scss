@@ -10,8 +10,7 @@
 }
 
 .radioButtons-item-input {
-	&:disabled,
-	&.is-disabled {
+	&:is(:disabled, .is-disabled, .disabled) {
 		@include disabled;
 	}
 }

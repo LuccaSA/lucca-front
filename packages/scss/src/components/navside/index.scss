@@ -28,6 +28,14 @@
 	@include media.smallerThan('s') {
 		@include mobile;
 
+		&:not(.is-open, .open) {
+			.navSide-item {
+				&:not(.mod-mobileToggle) {
+					@include mobileHidden;
+				}
+			}
+		}
+
 		&.mod-withBanner {
 			.navSide-item {
 				&.mod-mobileToggle {
@@ -43,18 +51,14 @@
 				@include mobileOpenBanner;
 			}
 		}
-
-		&:not(.is-open, .open) {
-			.navSide-item {
-				&:not(.mod-mobileToggle) {
-					@include mobileHidden;
-				}
-			}
-		}
 	}
 }
 
 .navSide-item {
+	&:not(.is-open) {
+		@include notOpen;
+	}
+
 	&.mod-mobileToggle {
 		@include mobileToggle;
 	}
@@ -71,10 +75,6 @@
 				@include sublinkActive;
 			}
 		}
-	}
-
-	&:not(.is-open) {
-		@include notOpen;
 	}
 }
 
