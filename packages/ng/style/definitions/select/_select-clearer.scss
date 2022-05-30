@@ -1,83 +1,65 @@
-// @mixin selectClearerStyle {
-// 	:host {
-// 		display: none;
-// 		vertical-align: text-bottom;
-// 	}
+@mixin selectClearerStyle {
+	:host {
+		display: none;
+		vertical-align: text-bottom;
+	}
 
-// 	:host-context(.textfield-input.is-filled) {
-// 		display: inline-block;
-// 	}
+	:host-context(.textfield-input.is-filled) {
+		display: inline-block;
+	}
 
-// 	.actionIcon {
-// 		@include selectColoringClearer("select.default-palette");
-// 		height: 1rem;
-// 		padding: 0;
-// 		width: 1rem;
-// 	}
+	.actionIcon {
+		height: 1rem;
+		padding: 0;
+		width: 1rem;
 
-// 	.lucca-icon {
-// 		display: block;
-// 		font-size: 1rem;
-// 	}
+		color: var(--palettes-700, var(--components-select-default-palette-700));
 
-// 	// Material
-// 	:host-context(.textfield.mod-material) {
-// 		.actionIcon {
-// 			color: _color("text.light", "color", true);
-// 			color: _color("text.light");
-// 		}
-// 	}
+		&:hover {
+			background-color: var(--palettes-50, var(--components-select-default-palette-50));
+			color: var(--palettes-800, var(--components-select-default-palette-800));
+		}
 
-// 	// Framed
-// 	:host-context(.textfield.mod-framed) {
-// 		.actionIcon {
-// 			color: _color("text.light", "color", true);
-// 			color: _color("text.light");
-// 		}
-// 	}
+		&:focus {
+			background-color: var(--palettes-50, var(--components-select-default-palette-50));
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06),
+				0 0 0 4px var(--palettes-200, var(--components-select-default-palette-200));
+		}
+	}
 
-// 	// Error
-// 	:host-context(.textfield-input.is-error) {
-// 		.actionIcon {
-// 			color: _color("error", "color", true);
-// 			color: _color("error");
+	.lucca-icon {
+		display: block;
+		font-size: 1rem;
+	}
 
-// 			&:hover {
-// 				background-color: _color("error", 50, true);
-// 				background-color: _color("error", 50);
-// 				color: _color("error", 800, true);
-// 				color: _color("error", 800);
-// 			}
-// 		}
-// 	}
+	// Material
+	:host-context(.textfield.mod-material) {
+		.actionIcon {
+			color: var(--palettes-grey-500);
+		}
+	}
 
-// 	// Disabled
-// 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-// 		display: none;
-// 	}
+	// Framed
+	:host-context(.textfield.mod-framed) {
+		.actionIcon {
+			color: var(--palettes-grey-500);
+		}
+	}
 
-// 	// PALETTES
-// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+	// Error
+	:host-context(.textfield-input.is-error) {
+		.actionIcon {
+			color: var(--palettes-error-700);
 
-// 	@each $name, $palette in _getMap("palettes") {
-// 		:host-context(.palette-#{$name}) {
-// 			.actionIcon {
-// 				@include selectColoringClearer($name);
-// 			}
-// 		}
-// 	}
-// }
+			&:hover {
+				background-color: var(--palettes-error-50);
+				color: var(--palettes-error-800);
+			}
+		}
+	}
 
-// @mixin selectColoringClearer($palette) {
-// 		color: _color($palette, 700);
-
-// 		&:hover {
-// 			background-color: _color($palette, 50);
-// 			color: _color($palette, 800);
-// 		}
-
-// 		&:focus {
-// 			background-color: _color($palette, 50);
-// 			box-shadow: 0 2px 8px rgba(0, 0, 0, .04), 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 4px _color($palette, "200");
-// 		}
-// }
+	// Disabled
+	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+		display: none;
+	}
+}

@@ -1,18 +1,16 @@
 @import '_definitions';
-// @include optionItemStyle;
+@include optionItemStyle;
 
 .is-disabled {
-	color: _color('grey', 500, true);
-	color: _color('grey', 500);
-	cursor: default;
+	color: var(--palettes-grey-500);
 	user-select: none;
+	cursor: default;
 
 	&.is-selected {
-		background-color: _color('grey', 100, true);
-		background-color: _color('grey', 100);
+		background-color: var(--palettes-grey-100);
 	}
 
 	&:hover {
-		background: inherit;
+		background-color: inherit;
 	}
 }

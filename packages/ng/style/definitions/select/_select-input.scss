@@ -1,323 +1,284 @@
-// @import "~@lucca-front/icons/src/_mixins";
-// @mixin selectInputStyle {
-// 	:host {
-// 		cursor: pointer;
-// 		outline: none;
-// 		padding: 0;
+@use '@lucca-front/icons/src/_mixins' as icon;
 
-// 		&::after {
-// 			@include makeIcon("arrow_south");
-// 			@include selectColoringIcons("select.default-palette");
-// 			bottom: #{_component("select.input.padding-vertical", true)};
-// 			bottom: _component("select.input.padding-vertical");
-// 			font-size: 1.2rem;
-// 			line-height: 1.4rem;
-// 			pointer-events: none;
-// 			position: absolute;
-// 			right: #{_component("select.input.padding-horizontal", true)};
-// 			right: _component("select.input.padding-horizontal");
-// 		}
+@mixin selectInputStyle {
+	:host {
+		--components-select-default-palette-50: var(--palettes-primary-50);
+		--components-select-default-palette-100: var(--palettes-primary-100);
+		--components-select-default-palette-200: var(--palettes-primary-200);
+		--components-select-default-palette-300: var(--palettes-primary-300);
+		--components-select-default-palette-400: var(--palettes-primary-400);
+		--components-select-default-palette-500: var(--palettes-primary-500);
+		--components-select-default-palette-600: var(--palettes-primary-600);
+		--components-select-default-palette-700: var(--palettes-primary-700);
+		--components-select-default-palette-800: var(--palettes-primary-800);
+		--components-select-default-palette-900: var(--palettes-primary-900);
+		--components-select-chip-background: var(--palettes-primary-700);
 
-// 		&[disabled] {
-// 			cursor: not-allowed;
-// 			pointer-events: all;
-// 		}
+		--components-select-chip-text: var(--colors-white-color);
+		--components-select-input-padding-horizontal: var(--spacings-smaller);
+		--components-select-input-padding-vertical: var(--spacings-smaller);
+		--components-select-framed-color: var(--palettes-grey-500);
+		--components-select-framed-color50: var(--palettes-grey-50);
+		--components-select-framed-see-through: var(--palettes-grey-50);
+		--components-select-framed-text: var(--palettes-grey-800);
+		--components-select-framed-placeholder: #cccccc;
+		--components-select-framed-side-padding: var(--spacings-small);
+		--components-select-framed-top-padding: var(--spacings-big);
+		--components-select-framed-bottom-padding: var(--spacings-small);
+		--components-select-framed-label-top-offset: var(--spacings-smaller);
 
-// 		&.is-disabled {
-// 			cursor: not-allowed;
-// 			pointer-events: all;
-// 		}
-// 	}
+		cursor: pointer;
+		outline: none;
+		padding: 0;
 
-// 	.lu-select-display-wrapper {
-// 		overflow: hidden;
-// 		text-overflow: ellipsis;
-// 		white-space: nowrap;
-// 	}
+		&::after {
+			@include icon.makeIcon('arrow_south');
 
-// 	.lu-select-value {
-// 		line-height: _theme("sizes.standard.line-height", true);
-// 		line-height: _theme("sizes.standard.line-height");
-// 		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
-// 		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
-// 		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
-// 			#{_component("select.input.padding-vertical", true)}
-// 			#{_component("select.input.padding-horizontal", true)};
-// 		padding: _component("select.input.padding-vertical") 2.5rem
-// 			_component("select.input.padding-vertical")
-// 			_component("select.input.padding-horizontal");
-// 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
-// 		transition: all _theme("commons.animations.durations.standard") ease;
-// 		display: none;
-// 	}
+			color: var(--palettes-700, var(--components-select-default-palette-700));
+			bottom: var(--components-select-input-padding-vertical);
+			font-size: 1.2rem;
+			line-height: 1.4rem;
+			pointer-events: none;
+			position: absolute;
+			right: var(--components-select-input-padding-horizontal);
+		}
 
-// 	.lu-select-placeholder {
-// 		@include selectColoringPlaceholer("select.default-palette");
-// 		line-height: _theme("sizes.standard.line-height", true);
-// 		line-height: _theme("sizes.standard.line-height");
-// 		min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.standard.line-height", true)});
-// 		min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.standard.line-height")});
-// 		padding: #{_component("select.input.padding-vertical", true)} 2.5rem
-// 			#{_component("select.input.padding-vertical", true)}
-// 			#{_component("select.input.padding-horizontal", true)};
-// 		padding: _component("select.input.padding-vertical") 2.5rem
-// 			_component("select.input.padding-vertical")
-// 			_component("select.input.padding-horizontal");
-// 		transition: all #{_theme("commons.animations.durations.standard", true)} ease;
-// 		transition: all _theme("commons.animations.durations.standard") ease;
-// 		overflow: hidden;
-// 		text-overflow: ellipsis;
-// 		white-space: nowrap;
-// 	}
+		&[disabled] {
+			cursor: not-allowed;
+			pointer-events: all;
+		}
 
-// 	.lu-select-suffix {
-// 		position: absolute;
-// 		bottom: .5rem;
-// 		right: 1.6rem;
-// 	}
+		&.is-disabled {
+			cursor: not-allowed;
+			pointer-events: all;
+		}
+	}
 
-// 	::ng-deep .lu-select-value {
-// 		.label {
-// 			padding: _theme("spacings.smallest", true) .25rem .5rem _theme("spacings.smaller", true);
-// 			padding: _theme("spacings.smallest") _theme("spacings.smaller");
-// 			margin-left: 0;
-// 		}
-// 		.chip {
-// 			background: _component("select.chip.background", true);
-// 			background: _component("select.chip.background");
-// 			color: _component("select.chip.text", true);
-// 			color: _component("select.chip.text");
-// 			vertical-align: baseline;
-// 			max-width: 100%;
-// 			height: _theme("sizes.standard.line-height", true);
-// 			height: _theme("sizes.standard.line-height");
-// 			line-height: _theme("sizes.standard.line-height", true);
-// 			line-height: _theme("sizes.standard.line-height");
-// 			padding: 0 _theme("spacings.smaller", true);
-// 			padding: 0 _theme("spacings.smaller");
-// 			margin: 0 .25rem .25rem 0;
-// 			text-overflow: ellipsis;
-// 			overflow: hidden;
-// 			vertical-align: top;
-// 			white-space: nowrap;
-// 		}
-// 	}
+	.lu-select-display-wrapper {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 
+	.lu-select-value {
+		line-height: var(--sizes-standard-line-height);
+		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-standard-line-height));
+		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+			var(--components-select-input-padding-horizontal);
+		transition: all var(--commons-animations-durations-standard);
+		display: none;
+	}
 
-// 	// MODS
-// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+	.lu-select-placeholder {
+		color: var(--palettes-400, var(--components-select-default-palette-400));
+		line-height: var(--sizes-standard-line-height);
+		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-standard-line-height));
+		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+			var(--components-select-input-padding-horizontal);
+		transition: all var(--commons-animations-durations-standard);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 
-// 	// Small
-// 	:host-context(.textfield.mod-small) {
-// 		.lu-select-value, .lu-select-placeholder {
-// 			font-size: _theme("sizes.small.font-size", true);
-// 			font-size: _theme("sizes.small.font-size");
-// 			line-height: _theme("sizes.small.line-height", true);
-// 			line-height: _theme("sizes.small.line-height");
-// 			min-height: calc(#{_component("select.framed.bottom-padding", true)} + #{_theme("sizes.small.line-height", true)});
-// 			min-height: calc(#{_component("select.framed.bottom-padding")} + #{_theme("sizes.small.line-height")});
-// 		}
+	.lu-select-suffix {
+		position: absolute;
+		bottom: 0.5rem;
+		right: 1.6rem;
+	}
 
-// 		&::after {
-// 			line-height: _theme("sizes.small.line-height", true);
-// 			line-height: _theme("sizes.small.line-height");
-// 		}
+	::ng-deep .lu-select-value {
+		.label {
+			padding: var(--spacings-smallest) var(--spacings-smaller);
+			margin-left: 0;
+		}
 
-// 		::ng-deep .lu-select-value {
-// 			.label {
-// 				font-size: _theme("sizes.small.font-size", true);
-// 				font-size: _theme("sizes.small.font-size");
-// 				line-height: _theme("sizes.small.line-height", true);
-// 				line-height: _theme("sizes.small.line-height");
-// 				font-weight: 600;
-// 				margin: 0;
-// 				padding: 0;
-// 				background: transparent;
-// 			}
+		.chip {
+			background-color: var(--components-select-chip-background);
+			color: var(--components-select-chip-text);
+			vertical-align: baseline;
+			max-width: 100%;
+			height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-standard-line-height);
+			padding: 0 var(--spacings-smaller);
+			margin: 0 0.25rem 0.25rem 0;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			vertical-align: top;
+			white-space: nowrap;
+		}
+	}
 
-// 			.chip {
-// 				height: _theme("sizes.small.line-height", true);
-// 				height: _theme("sizes.small.line-height");
-// 				line-height: _theme("sizes.small.line-height", true);
-// 				line-height: _theme("sizes.small.line-height");
-// 			}
-// 		}
-// 	}
+	// MODS
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// 	// Framed
-// 	:host-context(.textfield.mod-framed),
-// 	:host-context(.form.mod-framed) {
-// 		&.textfield-input {
-// 			padding: #{_component("select.framed.top-padding", true)} 0 0;
-// 			padding: _component("select.framed.top-padding") 0 0;
+	// Small
+	:host-context(.textfield.mod-small) {
+		.lu-select-value,
+		.lu-select-placeholder {
+			font-size: var(--sizes-small-font-size);
+			line-height: var(--sizes-small-line-height);
+			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-small-line-height));
+		}
 
-// 			&::after {
-// 				color: _color("text.light", "color", true);
-// 				color: _color("text.light");
-// 				bottom: _component("select.framed.bottom-padding", true);
-// 				bottom: _component("select.framed.bottom-padding");
-// 				right: _theme("spacings.smaller", true);
-// 				right: _theme("spacings.smaller");
-// 			}
+		&::after {
+			line-height: var(--sizes-small-line-height);
+		}
 
-// 			.lu-select-value, .lu-select-placeholder {
-// 				padding: 0 calc(#{_component("select.framed.side-padding", true)} * 3)
-// 					#{_component("select.framed.bottom-padding", true)}
-// 					#{_component("select.framed.side-padding", true)};
-// 				padding: 0 calc(#{_component("select.framed.side-padding")} * 3)
-// 					_component("select.framed.bottom-padding")
-// 					_component("select.framed.side-padding");
-// 			}
+		::ng-deep .lu-select-value {
+			.label {
+				font-size: var(--sizes-small-font-size);
+				line-height: var(--sizes-small-line-height);
+				font-weight: 600;
+				margin: 0;
+				padding: 0;
+				background-color: transparent;
+			}
 
-// 			.lu-select-suffix {
-// 				bottom: _component("select.framed.bottom-padding", true);
-// 				bottom: _component("select.framed.bottom-padding");
-// 				right: 1.7rem;
-// 			}
-// 		}
-// 	}
+			.chip {
+				height: var(--sizes-small-line-height);
+				line-height: var(--sizes-small-line-height);
+			}
+		}
+	}
 
-// 	// Filter
-// 	:host-context(.textfield.mod-filter) {
-// 		.lu-select-value, .lu-select-placeholder {
-// 			padding: 0;
-// 			height: auto;
-// 			padding-top: 1rem;
-// 			color: _color("text.default", "color", true);
-// 			color: _color("text.default");
-// 		}
+	// Framed
+	:host-context(.textfield.mod-framed),
+	:host-context(.form.mod-framed) {
+		&.textfield-input {
+			padding: var(--components-select-framed-top-padding) 0 0;
 
-// 		.lu-select-suffix {
-// 			bottom: .4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
-// 		}
-// 	}
+			&::after {
+				color: var(--palettes-grey-500);
+				bottom: var(--components-select-framed-bottom-padding);
+				right: var(--spacings-smaller);
+			}
 
-// 	// Material
-// 	:host-context(.textfield.mod-material) {
-// 		&::after {
-// 			color: _color("text.light", "color", true);
-// 			color: _color("text.light");
-// 			bottom: 0.6rem;
-// 			right: 0;
-// 		}
+			.lu-select-value,
+			.lu-select-placeholder {
+				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
+					var(--components-select-framed-side-padding);
+			}
 
-// 		.lu-select-value, .lu-select-placeholder {
-// 			padding-left: 0;
-// 			padding-right: 0.8rem;
-// 		}
+			.lu-select-suffix {
+				bottom: var(--components-select-framed-bottom-padding);
+				right: 1.7rem;
+			}
+		}
+	}
 
-// 		.lu-select-suffix {
-// 			right: calc(2 * #{_component("select.input.padding-horizontal", true)});
-// 			right: calc(2 * #{_component("select.input.padding-horizontal")});
-// 		}
+	// Filter
+	:host-context(.textfield.mod-filter) {
+		.lu-select-value,
+		.lu-select-placeholder {
+			padding: 0;
+			height: auto;
+			padding-top: 1rem;
+			color: var(--palettes-grey-800);
+		}
 
+		.lu-select-suffix {
+			bottom: 0.4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
+		}
+	}
 
-// 		&.is-select {
-// 			.lu-select-placeholder {
-// 				display: none;
-// 			}
-// 		}
+	// Material
+	:host-context(.textfield.mod-material) {
+		&::after {
+			color: var(--palettes-grey-500);
+			bottom: 0.6rem;
+			right: 0;
+		}
 
-// 		&.mod-search {
-// 			&::after {
-// 				bottom: 0;
-// 			}
-// 			.lu-select-suffix {
-// 				right: calc(2.75 * #{_component("select.input.padding-horizontal", true)});
-// 				right: calc(2.75 * #{_component("select.input.padding-horizontal")});
-// 			}
-// 		}
-// 	}
+		.lu-select-value,
+		.lu-select-placeholder {
+			padding-left: 0;
+			padding-right: 0.8rem;
+		}
 
-// 	:host-context(.textfield.mod-material .textfield-input.is-focused) {
-// 		.lu-select-placeholder {
-// 			display: none;
-// 		}
-// 	}
+		.lu-select-suffix {
+			right: calc(2 * var(--components-select-input-padding-horizontal));
+		}
 
-// 	// Multiple
-// 	:host(.mod-multiple) {
-// 		&.mod-multipleView:not(.mod-singleLine) {
-// 			.lu-select-value {
-// 				height: auto;
-// 				align-items: center;
-// 			}
+		&.is-select {
+			.lu-select-placeholder {
+				display: none;
+			}
+		}
 
-// 			.lu-select-display-wrapper {
-// 				overflow: hidden;
-// 				white-space: normal;
-// 				margin-bottom: -.25rem;
-// 			}
-// 		}
-// 	}
+		&.mod-search {
+			&::after {
+				bottom: 0;
+			}
 
-// 	// STATES
-// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+			.lu-select-suffix {
+				right: calc(2.75 * var(--components-select-input-padding-horizontal));
+			}
+		}
+	}
 
-// 	// Filled
-// 	:host-context(.textfield-input.is-filled) {
-// 		.lu-select-placeholder {
-// 			display: none;
-// 		}
+	:host-context(.textfield.mod-material .textfield-input.is-focused) {
+		.lu-select-placeholder {
+			display: none;
+		}
+	}
 
-// 		.lu-select-value {
-// 			display: flex;
-// 		}
-// 	}
+	// Multiple
+	:host(.mod-multiple) {
+		&.mod-multipleView:not(.mod-singleLine) {
+			.lu-select-value {
+				height: auto;
+				align-items: center;
+			}
 
-// 	// Clearable
-// 	:host-context(.textfield-input.is-clearable) {
-// 		.lu-select-value {
-// 			padding-right: 2.5rem;
-// 		}
-// 	}
+			.lu-select-display-wrapper {
+				overflow: hidden;
+				white-space: normal;
+				margin-bottom: -0.25rem;
+			}
+		}
+	}
 
-// 	// Error
-// 	:host-context(.textfield-input.is-error) {
-// 		&::after {
-// 			color: _color("error", 700, true);
-// 			color: _color("error");
-// 		}
+	// STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// 		.lu-select-placeholder {
-// 			color: _color("error", 200, true);
-// 			color: _color("error", 200);
-// 		}
-// 	}
+	// Filled
+	:host-context(.textfield-input.is-filled) {
+		.lu-select-placeholder {
+			display: none;
+		}
 
-// 	// Disabled
-// 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-// 		&::after {
-// 			color: _theme("commons.disabled.color", true);
-// 			color: _theme("commons.disabled.color");
-// 		}
+		.lu-select-value {
+			display: flex;
+		}
+	}
 
-// 		.lu-select-placeholder {
-// 			color: _theme("commons.disabled.placeholder", true);
-// 			color: _theme("commons.disabled.placeholder");
-// 		}
-// 	}
+	// Clearable
+	:host-context(.textfield-input.is-clearable) {
+		.lu-select-value {
+			padding-right: 2.5rem;
+		}
+	}
 
-// 	// PALETTES
-// 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+	// Error
+	:host-context(.textfield-input.is-error) {
+		&::after {
+			color: var(--palettes-error-700);
+		}
 
-// 	@each $name, $palette in _getMap("palettes") {
-// 		:host-context(.palette-#{$name}) {
-// 			.lu-select-placeholder {
-// 				@include selectColoringPlaceholer($name);
-// 			}
+		.lu-select-placeholder {
+			color: var(--palettes-error-200);
+		}
+	}
 
-// 			&::after {
-// 				@include selectColoringIcons($name);
-// 			}
-// 		}
-// 	}
-// }
+	// Disabled
+	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+		&::after {
+			color: var(--commons-disabled-color);
+		}
 
-// @mixin selectColoringPlaceholer($palette) {
-// 		color: _color($palette, 400);
-// }
-
-// @mixin selectColoringIcons($palette) {
-// 		color: _color($palette, 700);
-// }
+		.lu-select-placeholder {
+			color: var(--commons-disabled-placeholder);
+		}
+	}
+}

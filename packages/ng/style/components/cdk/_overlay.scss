@@ -1,3 +1,7 @@
+:root {
+	--components-cdk-backdrop-opacity: .4;
+}
+
 .cdk-overlay-container {
 	position: fixed;
 	z-index: 1000;
@@ -48,8 +52,8 @@
 }
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
-	opacity: _component('popup.backdrop.opacity');
-	animation: fadeInBackdrop _theme('commons.animations.durations.fast') ease-out;
+	opacity: var(--components-cdk-backdrop-opacity);
+	animation: fadeInBackdrop var(--commons-animations-durations-fast) ease-out;
 }
 
 // MODS

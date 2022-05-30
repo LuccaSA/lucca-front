@@ -1,10 +1,10 @@
 @use '../../commons/utils/form';
 
 @mixin inputHover {
-	background-color: var(--palettes-50, --components-textfield-hover-background);
+	background-color: var(--palettes-50, var(--components-textfield-hover-background));
 
 	&::placeholder {
-		color: var(--palettes-400, --palettes-grey-400);
+		color: var(--palettes-400, var(--palettes-grey-400));
 	}
 }
 
