@@ -38,7 +38,7 @@
 }
 
 %popover-content {
-	background: white;
+	background-color: var(--colors-white-color);
 	box-shadow: var(--commons-elevations-elevation-2);
 }
 
@@ -48,5 +48,6 @@
 
 .lu-popover-content {
 	@extend %popover-content;
+
 	padding: 1em;
 }

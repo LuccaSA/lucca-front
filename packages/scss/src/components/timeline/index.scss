@@ -6,6 +6,7 @@
 
 	&.mod-number {
 		@include number;
+
 		&.mod-big {
 			@include numberBig;
 		}
@@ -64,7 +65,7 @@
 	&.mod-addBetweenStep {
 		@include addBetweenStep;
 		&.mod-vertical:not(.mod-big) {
-			@include addBetweenStepVerticalNotBig()
+			@include addBetweenStepVerticalNotBig();
 		}
 		&.mod-big {
 			@include addBetweenStepBig;

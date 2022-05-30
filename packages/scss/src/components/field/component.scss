@@ -19,7 +19,8 @@
 
 		&:focus {
 			background-color: var(--colors-white-color);
-			box-shadow: 0 0 0 4px var(--palettes-200), 0 0 0 1px var(--palettes-700) inset; // todo: ajouter les couleurs par défaut
+			box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+				0 0 0 1px var(--palettes-600, var(--palettes-primary-600)) inset;
 
 			&::placeholder {
 				color: var(--palettes-300);

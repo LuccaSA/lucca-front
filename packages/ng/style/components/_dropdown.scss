@@ -48,7 +48,8 @@
 		color: var(--palettes-grey-400);
 		pointer-events: none;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			background-color: var(--colors-white-color);
 		}
 	}
