@@ -6,6 +6,9 @@
 @use '../../commons/utils/text';
 
 @use '../title/exports' as title;
+@use '../animation/exports' as animation;
+
+@use 'exports' as *;
 
 @include core.classes('min-width', core.$contents);
 @include core.classes('flex-direction', core.$direction);
@@ -27,6 +30,11 @@
 @include core.classes('position', core.$position);
 @include core.classes('display', core.$displays);
 
+@include core.spacings;
+@include core.sizes;
+@include core.palettes;
+@include core.borderRadius;
+
 @media only print {
 	@include core.classes('display', core.$displays, $prefix: config.$prefix + 'onlyPrint');
 }
@@ -42,11 +50,6 @@
 @media (prefers-reduced-motion: no-preference) {
 	@include core.classes('scroll-behavior', core.$scrollBehavior);
 }
-
-@include core.spacings;
-@include core.sizes;
-@include core.palettes;
-@include core.borderRadius;
 
 .#{config.$prefix}positionStatic {
 	position: static !important;
@@ -171,7 +174,122 @@
 @each $elevation in config.$elevations {
 	$index: list.index(config.$elevations, $elevation);
 
-	.#{config.$prefix}-elevate#{$index} {
+	.#{config.$prefix}elevate#{$index} {
 		box-shadow: var(--commons-elevations-elevation-#{$index});
+	}
+}
+
+.#{config.$prefix}animated {
+	&FadeIn,
+	&FadeOut {
+		@include animation.fadeIn;
+
+		animation-name: fadeIn;
+	}
+
+	&ScaleIn,
+	&ScaleOut {
+		@include animation.scaleIn;
+
+		animation-name: scaleIn;
+	}
+
+	&ScaleInTop,
+	&ScaleOutTop {
+		@include animation.scaleIn;
+
+		animation-name: scaleInTop;
+	}
+
+	&ScaleInRight,
+	&ScaleOutRight {
+		@include animation.scaleInRight;
+
+		animation-name: scaleInRight;
+	}
+
+	&ScaleInBottom,
+	&ScaleOutBottom {
+		@include animation.scaleInBottom;
+
+		animation-name: scaleInBottom;
+	}
+
+	&ScaleInLeft,
+	&ScaleOutLeft {
+		@include animation.scaleInLeft;
+
+		animation-name: scaleInLeft;
+	}
+
+	&SlideIn,
+	&SlideInTop,
+	&SlideOut,
+	&SlideOutTop {
+		@include animation.slideIn;
+
+		animation-name: slideIn;
+	}
+
+	&SlideInRight,
+	&SlideOutRight {
+		@include animation.slideInRight;
+
+		animation-name: slideInRight;
+	}
+
+	&SlideInBottom,
+	&SlideOutBottom {
+		@include animation.slideInBottom;
+
+		animation-name: slideInBottom;
+	}
+
+	&SlideInLeft,
+	&SlideOutLeft {
+		@include animation.slideInLeft;
+
+		animation-name: slideInLeft;
+	}
+
+	&Shake {
+		@include animation.shake;
+
+		animation-name: shake;
+	}
+
+	&Pulse {
+		@include animation.pulse;
+
+		animation-name: pulse;
+		animation-direction: alternate;
+		animation-iteration-count: var(--commons-animations-iteration-count);
+	}
+
+	&FadeOut,
+	&SlideOut,
+	&SlideOutTop,
+	&SlideOutRight,
+	&SlideOutBottom,
+	&SlideOutLeft,
+	&ScaleOut,
+	&ScaleOutTop,
+	&ScaleOutRight,
+	&ScaleOutBottom,
+	&ScaleOutLeft {
+		animation-direction: reverse;
+	}
+}
+
+[class*='#{config.$prefix}animated'] {
+	animation-duration: var(--duration, var(commons-animations-durations-standard));
+	animation-timing-function: var(commons-animations-function);
+
+	&.mod-animation-duration-fast {
+		@include duration('fast');
+	}
+
+	&.mod-animation-duration-slow {
+		@include duration('slow');
 	}
 }

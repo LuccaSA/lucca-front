@@ -179,9 +179,12 @@ $animations: (
 	'translate': 3rem,
 	'function': ease,
 	'iteration-count': 5,
-	'durations-fast': 100ms,
-	'durations-standard': 250ms,
-	'durations-slow': 350ms,
+);
+
+$durations: (
+	'fast': 100ms,
+	'standard': 250ms,
+	'slow': 350ms,
 );
 
 $loading: (

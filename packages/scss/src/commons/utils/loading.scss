@@ -1,13 +1,6 @@
-@mixin spinner($size: 1rem) {
-	@keyframes rotating {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
+@use '../../components/animation/exports' as animation;
 
+@mixin spinner($size: 1rem) {
 	&::before,
 	&::after {
 		width: $size;
@@ -27,6 +20,8 @@
 	}
 
 	&::after {
+		@include animation.rotating;
+
 		animation-name: rotating;
 		animation-duration: var(--commons-loading-speed);
 		animation-timing-function: linear;
@@ -38,14 +33,7 @@
 }
 
 @mixin gradient {
-	@keyframes loadingGradient {
-		0% {
-			background-position: 100% 0%;
-		}
-		100% {
-			background-position: -100% 0%;
-		}
-	}
+	@include animation.loadingGradient;
 
 	animation-name: loadingGradient;
 	animation-duration: 2s;
