@@ -1,73 +1,71 @@
-// @import '~@lucca-front/scss/src/_mixins';
+.lu-picker-panel {
+	@extend %popover-panel;
+}
 
-// .lu-picker-panel {
-// 	@extend %popover-panel;
-// }
+.lu-picker-content {
+	$height: 17.5rem; // magic number
 
-// .lu-picker-content {
-// 	$height: 17.5rem; // magic number
+	@extend %popover-content;
+	padding: 0;
+	max-height: $height;
+	overflow-y: auto;
+	display: block;
+	transform-origin: top left;
+	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
 
-// 	@extend %popover-content;
-// 	padding: 0;
-// 	max-height: $height; 
-// 	overflow-y: auto;
-// 	display: block;
-// 	transform-origin: top left;
-// 	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
+	&.is-loading {
+		height: $height;
+	}
+}
 
-// 	&.is-loading {
-// 		height: $height;
-// 	}
-// }
+.lu-picker-loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
 
-// .lu-picker-loading {
-// 	position: absolute;
-// 	left: 50%;
-// 	top: 50%;
-// 	transform: translateX(-50%) translateY(-50%);
-// }
+.lu-picker-header {
+	background: var(--colors-white-color);
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	z-index: 1;
 
-// .lu-picker-header {
-// 	background: white;
-// 	position: sticky;
-// 	top: 0;
-// 	left: 0;
-// 	right: 0;
-// 	display: block;
-// 	z-index: 1;
-	
-// }
+}
 
-// .lu-picker-textfield {
-// 	border-bottom: 1px solid _theme("commons.divider.color");
-// 	margin-bottom: _theme("spacings.smaller");
-// 	width: 100%;
+.lu-picker-textfield {
+	border-bottom: 1px solid var(--commons-divider-color);
+	margin-bottom: var(--spacings-smaller);
+	width: 100%;
 
-// 	.textfield-input {
-// 		background: white;
-// 		border-radius: 0;
-// 		box-shadow: none;
-// 	}
-// }
+	.textfield-input {
+		background: white;
+		border-radius: 0;
+		box-shadow: none;
+	}
+}
 
-// .lu-picker-footer {
-// 	background: white;
-// 	position: sticky;
-// 	bottom: 0;
-// 	left: 0;
-// 	right: 0;
-// 	display: block;
-// 	z-index: 1;
-// }
+.lu-picker-footer {
+	background: white;
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	z-index: 1;
+}
 
-// .lu-date-picker-panel {
-// 	width: _component("calendar.width", true);
-// 	width: _component("calendar.width");
-// 	.lu-picker-content {
-// 		max-height: none;
-// 	}
-// 	lu-calendar>.calendar {
-// 		width: _component("calendar.width", true);
-// 		width: _component("calendar.width");
-// 	}
-// }
+.lu-date-picker-panel {
+	width: var(--components-calendar-width);
+
+	.lu-picker-content {
+		max-height: none;
+	}
+
+	lu-calendar > .calendar {
+		width: var(--components-calendar-width);
+	}
+}
