@@ -1,54 +1,52 @@
-// @import '~@lucca-front/scss/src/_mixins';
+%popover-panel {
+	display: flex;
+	flex-direction: column;
+	max-height: calc(100vh + 48px);
+	position: relative;
 
-// %popover-panel {
-// 	display: flex;
-// 	flex-direction: column;
-// 	max-height: calc(100vh + 48px);
-// 	position: relative;
-// 	&.is-above {
-// 		transform-origin: bottom center;
-// 	}
+	&.is-above {
+		transform-origin: bottom center;
+	}
 
-// 	&.is-below {
-// 		transform-origin: top center;
-// 	}
+	&.is-below {
+		transform-origin: top center;
+	}
 
-// 	&.is-before {
-// 		transform-origin: center right;
+	&.is-before {
+		transform-origin: center right;
 
-// 		&.is-above {
-// 			transform-origin: bottom right;
-// 		}
+		&.is-above {
+			transform-origin: bottom right;
+		}
 
-// 		&.is-below {
-// 			transform-origin: top right;
-// 		}
-// 	}
+		&.is-below {
+			transform-origin: top right;
+		}
+	}
 
-// 	&.is-after {
-// 		transform-origin: center left;
+	&.is-after {
+		transform-origin: center left;
 
-// 		&.is-above {
-// 			transform-origin: bottom left;
-// 		}
+		&.is-above {
+			transform-origin: bottom left;
+		}
 
-// 		&.is-below {
-// 			transform-origin: top left;
-// 		}
-// 	}
-// }
+		&.is-below {
+			transform-origin: top left;
+		}
+	}
+}
 
-// %popover-content {
-// 	background: white;
-// 	@include elevate(2);
+%popover-content {
+	background: white;
+	box-shadow: var(--commons-elevations-elevation-2);
+}
 
-// }
+.lu-popover-panel {
+	@extend %popover-panel;
+}
 
-// .lu-popover-panel {
-// 	@extend %popover-panel;
-// }
-
-// .lu-popover-content {
-// 	@extend %popover-content;
-// 	padding: 1em;
-// }
+.lu-popover-content {
+	@extend %popover-content;
+	padding: 1em;
+}
