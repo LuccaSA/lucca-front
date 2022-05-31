@@ -1,4 +1,3 @@
-@use 'commons';
-@use 'components'; // chargement de tout les composants
-
-@import '../../ng/style/main';
+@use 'commons'; // Common variables
+@use 'components'; // SCSS components
+//@use '../../ng/style/main'; // NG style
