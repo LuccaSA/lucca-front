@@ -14,7 +14,7 @@
 		}
 
 		&:focus {
-			background-color: #FFFFFF;
+			background-color: var(--colors-white-color);
 			border-bottom-color: var(--palettes-primary-600);
 		}
 	}
