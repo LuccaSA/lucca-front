@@ -35,13 +35,11 @@
 		}
 
 		.form {
-			&:not(.mod-framed) {
-				.textfield,
-				.radiosfield,
-				.checkboxesfield,
-				.checkbox.mod-field {
-					margin-bottom: var(--components-form-field-margin-bottom);
-				}
+			.textfield,
+			.radiosfield,
+			.checkboxesfield,
+			.checkbox.mod-field {
+				margin-bottom: var(--components-form-field-margin-bottom);
 			}
 		}
 
