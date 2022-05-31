@@ -1,7 +1,7 @@
 @import '_definitions';
 
 .calendar {
-	background: white;
+	background-color: var(--colors-white-color);
 	width: var(--components-calendar-width);
 	padding: var(--spacings-smaller);
 }
