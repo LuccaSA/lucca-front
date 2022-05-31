@@ -1,10 +1,18 @@
-@use '../animation/exports' as animation;
-
 @mixin indeterminate {
-	.progress-bar {
-		@include animation.progressIndetereminate;
+	@keyframes indeterminate {
+		0% {
+			left: -35%;
+			right: 100%;
+		}
 
-		animation: progressIndetereminate var(--components-progress-duration) infinite;
+		100% {
+			left: 100%;
+			right: -35%;
+		}
+	}
+
+	.progress-bar {
+		animation: indeterminate var(--components-progress-duration) infinite;
 		width: 30%;
 		animation-timing-function: linear;
 	}

@@ -1,4 +1,4 @@
-@use '../../components/animation/exports' as animation;
+@use '../../components/keyframe/exports' as keyframe;
 
 @mixin spinner($size: 1rem) {
 	&::before,
@@ -20,9 +20,9 @@
 	}
 
 	&::after {
-		@include animation.rotating;
+		@include keyframe.rotate;
 
-		animation-name: rotating;
+		animation-name: rotate;
 		animation-duration: var(--commons-loading-speed);
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
@@ -33,7 +33,14 @@
 }
 
 @mixin gradient {
-	@include animation.loadingGradient;
+	@keyframes loadingGradient {
+		0% {
+			background-position: 100% 0%;
+		}
+		100% {
+			background-position: -100% 0%;
+		}
+	}
 
 	animation-name: loadingGradient;
 	animation-duration: 2s;

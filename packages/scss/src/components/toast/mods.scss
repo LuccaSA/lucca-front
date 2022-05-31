@@ -1,5 +1,3 @@
-@use '../animation/exports' as animation;
-
 @mixin bottom {
 	top: auto;
 	bottom: var(--spacings-standard);
@@ -56,6 +54,16 @@
 }
 
 @mixin circularGauge {
+	@keyframes stroke {
+		0% {
+			stroke-dashoffset: 100.5;
+		}
+
+		100% {
+			stroke-dashoffset: 0;
+		}
+	}
+
 	&:hover {
 		.circularGauge {
 			circle {
@@ -124,8 +132,6 @@
 			}
 
 			circle {
-				@include animation.stroke;
-
 				stroke-width: 20%;
 				stroke-dasharray: 100.5, 100.5;
 				stroke: var(--colors-white-color);

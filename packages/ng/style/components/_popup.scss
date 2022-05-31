@@ -1,5 +1,4 @@
 @use '../../scss/src/commons/utils/media';
-@use '../../scss/src/components/animation/exports' as animation;
 
 :root {
 	--components-popup-panel-background-color: #ffffff;
@@ -11,8 +10,6 @@
 }
 
 .lu-popup-panel {
-	@include animation.popup;
-
 	box-shadow: var(--commons-elevations-elevation-3);
 	position: relative;
 	background-color: var(--components-popup-panel-background-color);
@@ -153,5 +150,15 @@
 		.lu-modal-footer {
 			display: none;
 		}
+	}
+}
+
+@keyframes popup {
+	0% {
+		transform: scale(0.7);
+	}
+
+	100% {
+		transform: none;
 	}
 }

@@ -2,9 +2,9 @@
 @use '../../commons/config';
 @use 'exports' as *;
 
-$font-path: '../font/lucca-icons';
+$font-path: '../font/lucca-icons' !default;
 
-@import '../../../../icons/src/main';
+@import '@lucca-front/icons/src/main';
 
 .lucca-icon {
 	@each $size in map.keys(config.$sizes) {

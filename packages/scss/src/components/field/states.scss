@@ -1,5 +1,4 @@
 @use '../../../../icons/src/mixins' as icon;
-@use '../../components/animation/exports' as animation;
 @use '../../commons/utils/form';
 @use '../../commons/utils/loading';
 
@@ -98,14 +97,45 @@
 }
 
 @mixin success {
+	@keyframes success {
+		0% {
+			opacity: 0;
+			transform: scale(0);
+		}
+
+		5% {
+			opacity: 1;
+			transform: scale(1.2);
+		}
+
+		7% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		93% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		95% {
+			opacity: 1;
+			transform: scale(1.2);
+		}
+
+		100% {
+			opacity: 0;
+			transform: scale(0);
+		}
+	}
+
 	&::before {
-		@include animation.isValid;
 		@include icon.makeIcon('tick_bold');
 
 		color: var(--palettes-success-700);
 		position: absolute;
 		animation-fill-mode: forwards;
-		animation-name: isValid;
+		animation-name: success;
 		animation-duration: 3s;
 		border-radius: 50%;
 		bottom: 0.85rem;

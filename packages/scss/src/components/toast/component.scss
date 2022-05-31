@@ -1,7 +1,17 @@
 @use '../../../../icons/src/mixins' as icon;
-@use '../animation/exports' as animation;
 
 @mixin component {
+	@keyframes toast {
+		0% {
+			transform: translateY(1rem);
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
 	right: var(--components-toasts-right);
 	top: var(--components-toasts-top);
 	width: var(--components-toasts-width);
@@ -14,8 +24,6 @@
 	z-index: 9999;
 
 	.toasts-item {
-		@include animation.toast;
-
 		color: var(--components-toasts-color);
 		padding: var(--components-toasts-padding);
 		margin-bottom: var(--components-toasts-margin-bottom);

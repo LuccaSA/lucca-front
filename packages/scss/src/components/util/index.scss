@@ -6,7 +6,7 @@
 @use '../../commons/utils/text';
 
 @use '../title/exports' as title;
-@use '../animation/exports' as animation;
+@use '../keyframe/exports' as keyframe;
 
 @use 'exports' as *;
 
@@ -182,42 +182,42 @@
 .#{config.$prefix}animated {
 	&FadeIn,
 	&FadeOut {
-		@include animation.fadeIn;
+		@include keyframe.fadeIn;
 
 		animation-name: fadeIn;
 	}
 
 	&ScaleIn,
 	&ScaleOut {
-		@include animation.scaleIn;
+		@include keyframe.scaleIn;
 
 		animation-name: scaleIn;
 	}
 
 	&ScaleInTop,
 	&ScaleOutTop {
-		@include animation.scaleIn;
+		@include keyframe.scaleIn;
 
 		animation-name: scaleInTop;
 	}
 
 	&ScaleInRight,
 	&ScaleOutRight {
-		@include animation.scaleInRight;
+		@include keyframe.scaleInRight;
 
 		animation-name: scaleInRight;
 	}
 
 	&ScaleInBottom,
 	&ScaleOutBottom {
-		@include animation.scaleInBottom;
+		@include keyframe.scaleInBottom;
 
 		animation-name: scaleInBottom;
 	}
 
 	&ScaleInLeft,
 	&ScaleOutLeft {
-		@include animation.scaleInLeft;
+		@include keyframe.scaleInLeft;
 
 		animation-name: scaleInLeft;
 	}
@@ -226,40 +226,40 @@
 	&SlideInTop,
 	&SlideOut,
 	&SlideOutTop {
-		@include animation.slideIn;
+		@include keyframe.slideIn;
 
 		animation-name: slideIn;
 	}
 
 	&SlideInRight,
 	&SlideOutRight {
-		@include animation.slideInRight;
+		@include keyframe.slideInRight;
 
 		animation-name: slideInRight;
 	}
 
 	&SlideInBottom,
 	&SlideOutBottom {
-		@include animation.slideInBottom;
+		@include keyframe.slideInBottom;
 
 		animation-name: slideInBottom;
 	}
 
 	&SlideInLeft,
 	&SlideOutLeft {
-		@include animation.slideInLeft;
+		@include keyframe.slideInLeft;
 
 		animation-name: slideInLeft;
 	}
 
 	&Shake {
-		@include animation.shake;
+		@include keyframe.shake;
 
 		animation-name: shake;
 	}
 
 	&Pulse {
-		@include animation.pulse;
+		@include keyframe.pulse;
 
 		animation-name: pulse;
 		animation-direction: alternate;

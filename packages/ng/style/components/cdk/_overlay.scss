@@ -1,4 +1,4 @@
-@use '../../../scss/src/components/animation/exports' as animation;
+@use '../../../scss/src/components/keyframe/exports' as keyframe;
 
 :root {
 	--components-cdk-backdrop-opacity: 0.4;
@@ -54,7 +54,7 @@
 }
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
-	@include animation.fadeIn;
+	@include keyframe.fadeIn;
 
 	opacity: var(--components-cdk-backdrop-opacity);
 	animation: fadeIn var(--commons-animations-durations-fast) ease-out;
