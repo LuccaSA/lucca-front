@@ -15,7 +15,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 
 			&::placeholder {
-				color: var(--components-textfield-input-placeholder);
+				color: var(--palettes-400, var(--components-textfield-input-placeholder));
 				transition-property: color;
 				transition-duration: var(--commons-animations-durations-fast);
 				opacity: 1;

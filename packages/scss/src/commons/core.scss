@@ -115,6 +115,14 @@ $states: 'error,' 'warning', 'success';
 			color: var(--palettes-#{$palette}-700) !important;
 		}
 	}
+
+	.u-textLight {
+		color: var(--palettes-grey-600) !important;
+	}
+
+	.u-textPlaceholder {
+		color: var(--palettes-grey-400) !important;
+	}
 }
 
 @mixin borderRadius($suffix: '!important') {
