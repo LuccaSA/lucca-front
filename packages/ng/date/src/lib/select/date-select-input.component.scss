@@ -1,8 +1,9 @@
-// @import '_definitions';
-// @include selectInputStyle;
+@use '../../../../../icons/src/mixins' as icon;
+@import '_definitions';
+@include selectInputStyle;
 
-// :host {
-// 	&::after {
-// 		@include makeIcon('calendar');
-// 	}
-// }
+:host {
+	&::after {
+    @include icon.makeIcon('calendar');
+	}
+}
