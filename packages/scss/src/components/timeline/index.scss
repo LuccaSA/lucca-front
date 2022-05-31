@@ -1,5 +1,11 @@
 @use 'exports' as *;
 
+.timeline-step {
+	&:is([aria-current='step']) {
+		@include current;
+	}
+}
+
 .timeline {
 	@include vars;
 	@include component;
@@ -78,11 +84,5 @@
 
 	&:not(.mod-checkedPastStep) {
 		@include notPastChecked;
-	}
-}
-
-.timeline-step {
-	&:is([aria-current='step']) {
-		@include current;
 	}
 }

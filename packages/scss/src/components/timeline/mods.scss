@@ -133,11 +133,7 @@
 @mixin verticalProgress {
 	.timeline-step[aria-current='step'] {
 		&::after {
-			background: linear-gradient(
-				180deg,
-				var(--palettes-primary-700) var(--progress),
-				var(--palettes-grey-200) var(--progress)
-			);
+			background: linear-gradient(180deg, var(--palettes-primary-700) var(--progress), var(--palettes-grey-200) var(--progress));
 		}
 	}
 }
@@ -193,7 +189,6 @@
 		}
 	}
 }
-
 
 @mixin addStep {
 	.timeline-step {
@@ -292,10 +287,13 @@
 	}
 	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
+
 		width: auto;
 
 		&:focus,
 		&:hover {
+			outline: none;
+
 			.timeline-step-title-icon::before {
 				box-shadow: 0 0 0 0.25rem var(--palettes-primary-500);
 			}
@@ -325,11 +323,7 @@
 @mixin progress {
 	.timeline-step[aria-current='step'] {
 		&::after {
-			background: linear-gradient(
-				90deg,
-				var(--palettes-primary-700) var(--progress),
-				var(--palettes-grey-200) var(--progress)
-			);
+			background: linear-gradient(90deg, var(--palettes-primary-700) var(--progress), var(--palettes-grey-200) var(--progress));
 		}
 	}
 }
@@ -340,6 +334,7 @@
 			background-color: var(--palettes-grey-200);
 		}
 	}
+
 	.timeline-step-title {
 		color: var(--palettes-grey-900);
 

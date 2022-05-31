@@ -23,7 +23,7 @@ export default {
 		width: {
 			control: {
 				type: 'range',
-				min: 1,
+				min: 0,
 				max: 100,
 				step: 1,
 			},
