@@ -1,4 +1,6 @@
 @forward 'icon'; // 16 Ko
+
+@forward 'field'; //
 @forward 'box'; // 1 Ko
 @forward 'toc'; // 1 Ko
 @forward 'tag'; // 1 Ko
@@ -31,25 +33,22 @@
 @forward 'header'; // 3 Ko
 @forward 'actionIcon'; // 3 Ko
 @forward 'menu'; // 4 Ko
-
+@forward 'radio'; // 4 Ko
+@forward 'switch'; // 4 Ko
+@forward 'file'; // 5 Ko
 @forward 'toast'; // 5 Ko
 @forward 'layout'; // 5 Ko
+@forward 'radioButtons'; // 5 Ko
 @forward 'table'; // 7 Ko
-
+@forward 'checkbox'; // 7 Ko
+@forward 'keyframe'; // 8 Ko
 @forward 'tableSorted'; // 9 Ko
 @forward 'timeline'; // 10 Ko
 @forward 'button'; // 12 Ko
+@forward 'textfield'; // 13 Ko
 @forward 'util'; // 14 Ko
 @forward 'navside'; // 15 Ko
+@forward 'form'; // 25 Ko
 @forward 'tableFixed'; // 33 Ko
 @forward 'grid'; // 40 Ko
 @forward 'tableSticked'; // 67 Ko
-
-@forward 'form'; // 25 Ko
-@forward 'field';
-@forward 'textfield'; // 13 Ko
-@forward 'radio'; // 4 Ko
-@forward 'radioButtons'; // 5 Ko
-@forward 'checkbox'; // 7 Ko
-@forward 'switch'; // 4 Ko
-@forward 'file'; // 5 Ko

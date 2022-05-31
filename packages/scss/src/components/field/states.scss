@@ -97,8 +97,8 @@
 }
 
 @mixin success {
-	@keyframes isValid {
-		from {
+	@keyframes success {
+		0% {
 			opacity: 0;
 			transform: scale(0);
 		}
@@ -123,7 +123,7 @@
 			transform: scale(1.2);
 		}
 
-		to {
+		100% {
 			opacity: 0;
 			transform: scale(0);
 		}
@@ -135,7 +135,7 @@
 		color: var(--palettes-success-700);
 		position: absolute;
 		animation-fill-mode: forwards;
-		animation-name: isValid;
+		animation-name: success;
 		animation-duration: 3s;
 		border-radius: 50%;
 		bottom: 0.85rem;

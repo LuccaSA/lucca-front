@@ -1,11 +1,13 @@
+@use '../keyframe/exports' as keyframe;
+
 @mixin component {
 	@keyframes progress {
-		from {
+		0% {
 			transform: scale(0, 1);
 			opacity: 1;
 		}
 
-		to {
+		100% {
 			transform: scale(1, 1);
 			opacity: 0.3;
 		}

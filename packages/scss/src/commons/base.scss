@@ -25,6 +25,7 @@
 html {
 	@include core.cssvars('commons-border-radius', config.$borderRadius);
 	@include core.cssvars('commons-animations', config.$animations);
+	@include core.cssvars('commons-animations-durations', config.$durations);
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);

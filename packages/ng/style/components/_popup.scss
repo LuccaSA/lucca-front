@@ -1,12 +1,12 @@
 @use '../../scss/src/commons/utils/media';
 
 :root {
-  --components-popup-panel-background-color: #FFFFFF;
-  --components-popup-size-small: 32rem;
-  --components-popup-size-medium: 42rem;
-  --components-popup-size-large: 60rem;
-  --components-popup-padding-horizontal: 2rem;
-  --components-popup-padding-vertical: 1rem;
+	--components-popup-panel-background-color: #ffffff;
+	--components-popup-size-small: 32rem;
+	--components-popup-size-medium: 42rem;
+	--components-popup-size-large: 60rem;
+	--components-popup-padding-horizontal: 2rem;
+	--components-popup-padding-vertical: 1rem;
 }
 
 .lu-popup-panel {
@@ -18,15 +18,17 @@
 	max-width: 95%;
 	max-height: 90vh;
 	overflow: auto;
-	animation: popupAnimation var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
+	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
 
-  &.mod-small, &.size-small {
-    width: var(--components-popup-size-small);
-  }
+	&.mod-small,
+	&.size-small {
+		width: var(--components-popup-size-small);
+	}
 
-  &.mod-large, &.size-large {
-    width: var(--components-popup-size-large);
-  }
+	&.mod-large,
+	&.size-large {
+		width: var(--components-popup-size-large);
+	}
 }
 
 .lu-modal-panel-inner {
@@ -49,12 +51,12 @@
 	background: transparent;
 	border: none;
 	outline: none;
-	padding: .5rem;
+	padding: 0.5rem;
 	height: 3rem;
 	width: 3rem;
 	position: absolute;
-	right: .6rem;
-	top: .6rem;
+	right: 0.6rem;
+	top: 0.6rem;
 	border-radius: 50%;
 	transition: background var(--commons-animations-durations-fast) ease;
 
@@ -97,23 +99,6 @@
 	margin-top: auto;
 	align-items: center;
 	justify-content: flex-end;
-}
-
-
-@keyframes popupAnimation {
-	from {
-		transform: scale(.7);
-	}
-
-	to {
-		transform: none;
-	}
-}
-
-@keyframes fadeInBackdrop {
-	from {
-		opacity: 0;
-	}
 }
 
 @include media.smallerThan('xxs') {
@@ -165,5 +150,15 @@
 		.lu-modal-footer {
 			display: none;
 		}
+	}
+}
+
+@keyframes popup {
+	0% {
+		transform: scale(0.7);
+	}
+
+	100% {
+		transform: none;
 	}
 }

@@ -1,13 +1,6 @@
-@mixin spinner($size: 1rem) {
-	@keyframes rotating {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
+@use '../../components/keyframe/exports' as keyframe;
 
+@mixin spinner($size: 1rem) {
 	&::before,
 	&::after {
 		width: $size;
@@ -27,7 +20,9 @@
 	}
 
 	&::after {
-		animation-name: rotating;
+		@include keyframe.rotate;
+
+		animation-name: rotate;
 		animation-duration: var(--commons-loading-speed);
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;

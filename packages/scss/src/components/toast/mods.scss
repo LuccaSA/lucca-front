@@ -55,10 +55,11 @@
 
 @mixin circularGauge {
 	@keyframes stroke {
-		from {
+		0% {
 			stroke-dashoffset: 100.5;
 		}
-		to {
+
+		100% {
 			stroke-dashoffset: 0;
 		}
 	}

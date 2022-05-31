@@ -2,12 +2,12 @@
 
 @mixin component {
 	@keyframes toast {
-		from {
+		0% {
 			transform: translateY(1rem);
 			opacity: 0;
 		}
 
-		to {
+		100% {
 			opacity: 1;
 		}
 	}
