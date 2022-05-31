@@ -6,7 +6,7 @@
 	.textfield-input {
 		border-radius: 0;
 		box-shadow: none;
-		background: #FFFFFF;
+		background-color: var(--colors-white-color);
 		border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
 
 		&:hover {
