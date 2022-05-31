@@ -41,7 +41,7 @@
 
 	&:focus, // delete this line when sub-menus are implemented
 	&:hover {
-		background-color: var(--palettes-primary-100);
+		background-color: var(--palettes-grey-50);
 	}
 
 	&.is-disabled {
