@@ -28,13 +28,13 @@
 		cursor: pointer;
 
 		&.is-selected {
-			background-color: var(--palettes-primary-100);
+			background-color: var(--palettes-primary-50);
 		}
 
 		&:hover,
 		&.is-highlighted,
 		&.is-focus {
-			background-color: var(--palettes-primary-50);
+			background-color: var(--palettes-grey-50);
 		}
 	}
 
