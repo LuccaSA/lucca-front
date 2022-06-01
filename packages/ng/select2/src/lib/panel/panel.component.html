@@ -1,0 +1,32 @@
+<div class="lu-picker-panel lu-option-picker-panel" role="dialog">
+	<div class="lu-picker-content" cdkTrapFocus [cdkTrapFocusAutoCapture]="true" *ngIf="options$ | async as options">
+		<ng-container *ngIf="searchable">
+			<div class="textfield mod-search">
+				<input #searchInput class="textfield-input" [(ngModel)]="search" (ngModelChange)="updateClue($event)" />
+			</div>
+
+			<div class="optionPlaceholder" *ngIf="search && !options.length">
+				<p class="optionPlaceholder-content u-marginBottomReset">Aucun résultat pour votre recherche</p>
+				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">Vider la recherche</button>
+			</div>
+		</ng-container>
+
+		<div
+			class="optionItem"
+			*ngFor="let option of options$ | async"
+			(click)="panelRef.emitValue(option)"
+			(keydown.enter)="panelRef.emitValue(option)"
+		>
+			<div
+				class="optionItem-value"
+				tabindex="0"
+				[class.is-selected]="option === selected"
+				[class.is-highlighted]="option === focusedOption"
+				[class.is-disabled]="false"
+				(focus)="focusedOption = option"
+			>
+				<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }"></ng-container>
+			</div>
+		</div>
+	</div>
+</div>
