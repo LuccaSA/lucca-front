@@ -2,7 +2,7 @@
 
 .timeline-step-title {
   &::after {
-    @include icon.makeIcon("tick");
+    @include icon.makeIcon('tick');
     display: flex;
   }
 }

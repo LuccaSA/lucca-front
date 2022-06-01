@@ -10,14 +10,22 @@ describe('Migration', () => {
 	for (const testCase of cases) {
 		it('should handle ' + testCase, () => {
 			// Arrange
-			const input = readFileSync(join(testsRoot, `${testCase}.input.scss`)).toString();
-			const expected = readFileSync(join(testsRoot, `${testCase}.output.scss`)).toString();
+			const input = readFileSync(join(testsRoot, `${testCase}.input.scss`))
+				.toString()
+				.replace(/\r/g, '');
+			const expected = readFileSync(join(testsRoot, `${testCase}.output.scss`))
+				.toString()
+				.replace(/\r/g, '');
 
 			// Act
 			const actual = migrateFile(input);
 
 			//Assert
-			expect(actual).toBe(expected);
+			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
 		});
 	}
 });
+
+function stripLastNewLine(input: string): string {
+	return input.endsWith('\n') ? input.slice(0, -1) : input;
+}
