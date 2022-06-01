@@ -1,3 +1,10 @@
 .test {
   color: var(--colors-white-color);
+  fill: var(--palettes-primary-700);
+  border: 2px solid var(--palettes-grey-900);
+
+  /*Legacy*/
+  color: var(--palettes-grey-700);
+  color: var(--palettes-grey-700);
+  color: lighten(var(--palettes-primary-500), 10%);
 }

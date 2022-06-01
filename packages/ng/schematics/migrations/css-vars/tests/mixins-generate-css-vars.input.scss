@@ -4,6 +4,15 @@ $noCssVar: true;
 
 @import '@lucca-front/scss/src/main.overridable';
 
+a {
+	b {
+		c {
+			@include generateCSSVarsFromTheme($theme);
+		}
+	}
+}
+
 :root {
-	@include generateCSSVarsFromTheme($theme);
+  @include generateCSSVarsFromTheme($theme);
+  border: 1px solid lime;
 }
