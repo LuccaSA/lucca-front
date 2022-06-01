@@ -15,6 +15,7 @@
 
 			&::before {
 				@include icon.makeIcon('tick');
+
 				background-color: var(--colors-white-color);
 				width: var(--components-checkbox-input-size);
 				height: var(--components-checkbox-input-size);
@@ -24,7 +25,7 @@
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: all;
 				border: 2px solid var(--components-checkbox-input-border-color);
-				line-height: .85;
+				line-height: 0.85;
 				font-size: 1rem;
 				flex-grow: 0;
 				flex-shrink: 0;
@@ -32,7 +33,7 @@
 				color: transparent;
 				display: block;
 				text-align: center;
-				text-indent: -.1rem;
+				text-indent: -0.1rem;
 			}
 
 			&:hover {

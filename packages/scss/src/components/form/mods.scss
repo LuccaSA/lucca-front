@@ -77,15 +77,15 @@
 
 @mixin framed {
 	margin-bottom: 0;
-	background-color: _color("white");
+	background-color: _color('white');
 	padding: 0;
-	box-shadow: fakeborderoverlay(var(--palettes-grey-200));
+	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
 	transition: background-color var(--commons-animations-durations-standard);
 	margin-bottom: 0 !important;
 
 	&::before,
 	&::after {
-		content: " ";
+		content: ' ';
 		display: table;
 	}
 
@@ -98,43 +98,45 @@
 		&:focus {
 			position: relative;
 			z-index: 1;
-			background-color: _color("white");
-			box-shadow: fakeborderoverlay(var(--palettes-grey-600));
+			background-color: _color('white');
+			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600));
 		}
 
 		&:focus {
 			z-index: 4;
-			box-shadow: fakeborderoverlay(var(--palettes-grey-600)), 0 0 0 4px var(--palettes-grey-50);
+			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600)), 0 0 0 4px var(--palettes-grey-50);
 		}
 	}
 
-	.radiosfield, 
+	.radiosfield,
 	.checkboxesfield {
 		margin-top: var(--components-field-framed-side-padding);
 		padding: 0 var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
 	}
 
 	&.is-error {
-		@include fieldFramedState("error");
+		@include fieldFramedState('error');
 	}
 
 	&.is-warning {
-		@include fieldFramedState("warning");
+		@include fieldFramedState('warning');
 	}
 
 	&.is-valid,
 	&.is-success {
-		@include fieldFramedState("success");
+		@include fieldFramedState('success');
 	}
 
-	&.is-disabled, &.is-readonly {
+	&.is-disabled,
+	&.is-readonly {
 		background-color: var(--commons-disabled-background);
 	}
 
 	&.is-loading {
 		@include loading.spinner;
 
-		&::before, &::after {
+		&::before,
+		&::after {
 			left: auto !important;
 			bottom: auto !important;
 			right: var(--components-field-framed-side-padding) !important;
@@ -143,13 +145,12 @@
 	}
 }
 
-
 @mixin fieldState($fieldname, $state) {
 	&:not(:disabled, .is-disabled) {
 		background-color: var(--palettes-#{$state}-50);
-		
 
-		~ .#{$fieldname}-label, ~ .#{$fieldname}-suffix {
+		~ .#{$fieldname}-label,
+		~ .#{$fieldname}-suffix {
 			color: var(--palettes-#{$state}-700);
 		}
 
@@ -163,7 +164,8 @@
 			}
 		}
 
-		&:focus ~ .#{$fieldname}-label, &.is-focused ~ .#{$fieldname}-label {
+		&:focus ~ .#{$fieldname}-label,
+		&.is-focused ~ .#{$fieldname}-label {
 			color: var(--palettes-#{$state}-700);
 		}
 
@@ -172,14 +174,14 @@
 			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
 		}
 
-		@if ($state == "error") {
+		@if ($state == 'error') {
 			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
 		}
 	}
 }
 
-@mixin fieldError ($fieldname) {
-	@include fieldState($fieldname, "error");
+@mixin fieldError($fieldname) {
+	@include fieldState($fieldname, 'error');
 }
 
 @mixin fieldMaterialState($fieldname, $state) {
@@ -187,7 +189,7 @@
 		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
 	}
 
-	@if ($state == "error") {
+	@if ($state == 'error') {
 		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
 	}
 
@@ -200,29 +202,33 @@
 	}
 }
 
-@mixin fieldMaterialError ($fieldname) {
-	@include fieldMaterialState($fieldname, "error");
+@mixin fieldMaterialError($fieldname) {
+	@include fieldMaterialState($fieldname, 'error');
 }
 
 @mixin fieldFramedState($state) {
-	@if ($state == "error") {
+	@if ($state == 'error') {
 		z-index: 3;
 		box-shadow: fakeborderoverlay(var(--palettes-#{$state}-700));
 		background-color: var(--palettes-#{$state}-50);
-		
+
 		&:focus-within,
 		&:hover {
 			z-index: 4;
 		}
 	}
 
-	&.mod-search, &.mod-autocomplete, &.mod-select {
+	&.mod-search,
+	&.mod-autocomplete,
+	&.mod-select {
 		&::after {
 			color: var(--palettes-#{$state}-700);
 		}
 	}
 
-	.radiosfield-label, .checkboxesfield-label, .textfield-label {
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
 		color: var(--palettes-#{$state}-700);
 	}
 
@@ -237,10 +243,10 @@
 		}
 
 		&::placeholder {
-			color:  var(--palettes-#{$state}-300);
+			color: var(--palettes-#{$state}-300);
 		}
 
-		@if ($state == "error") {
+		@if ($state == 'error') {
 			background-color: var(--palettes-#{$state}-50) !important;
 			box-shadow: fakeborderoverlay(var(--palettes-#{$state}-700)) !important;
 
@@ -258,7 +264,9 @@
 	&:hover {
 		background-color: var(--palettes-#{$state}-50);
 
-		.textfield-messages, .radiosfield-messages, .checkboxesfield-messages {
+		.textfield-messages,
+		.radiosfield-messages,
+		.checkboxesfield-messages {
 			transform: translateY(100%);
 		}
 	}
@@ -267,25 +275,26 @@
 		background-color: white;
 		box-shadow: fakeborderoverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50);
 
-		.textfield-messages, .radiosfield-messages, .checkboxesfield-messages {
+		.textfield-messages,
+		.radiosfield-messages,
+		.checkboxesfield-messages {
 			transform: translateY(100%);
 		}
 	}
 }
 
 @mixin fieldFramedError($fieldname) {
-
-	@if ($fieldname == "textfield") {
+	@if ($fieldname == 'textfield') {
 		&:not(:disabled) {
 			z-index: 3;
 			box-shadow: fakeborderoverlay(var(--palettes-error-700));
 			background-color: var(--palettes-#{$state}-50);
-			transition: background-color _theme("commons.animations.durations.fast");
+			transition: background-color _theme('commons.animations.durations.fast');
 
 			~ .textfield-label {
 				color: var(--palettes-error-700);
 			}
-			
+
 			&:hover {
 				z-index: 4;
 				background-color: var(--palettes-error-100);
@@ -306,7 +315,7 @@
 		}
 	}
 
-	@if ($fieldname == "radiosfield") {
+	@if ($fieldname == 'radiosfield') {
 		&:not(:disabled) {
 			~ .radio-label,
 			~ .checkbox-label {
@@ -328,13 +337,13 @@
 %isRequired {
 	color: var(--palettes-error-700);
 	display: inline-block;
-	margin-left: .2em;
+	margin-left: 0.2em;
 
-	@supports (content: "*" / "") {
-		content: "*" / "";
+	@supports (content: '*' / '') {
+		content: '*' / '';
 	}
 
-	@supports not (content: "*" / "") {
-		content: "*";
+	@supports not (content: '*' / '') {
+		content: '*';
 	}
 }

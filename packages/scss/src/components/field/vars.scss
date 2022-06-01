@@ -28,9 +28,9 @@
 	--components-field-compact-label-sizes-long: 9rem;
 	--components-field-compact-label-sizes-longer: 11rem;
 
-	--components-field-framed-color50: #fafafa;
+	--components-field-framed-color50: var(--palettes-grey-50);
 	--components-field-framed-color: #9299b0;
-	--components-field-framed-border: #ebebeb;
+	--components-field-framed-border: var(--palettes-grey-200);
 	--components-field-framed-text: #4c5775;
 	--components-field-framed-side-padding: var(--spacings-small);
 	--components-field-framed-top-padding: var(--spacings-big);

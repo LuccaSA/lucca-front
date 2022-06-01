@@ -59,6 +59,11 @@
 }
 
 @mixin framed {
+	fieldset {
+		border: 0;
+		padding: 0;
+	}
+
 	.textfield-messages,
 	.radiosfield-messages,
 	.checkboxesfield-messages {
@@ -111,6 +116,15 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--components-field-horizontal-spacing);
+
+		.checkbox {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: var(--colors-white-color);
 
@@ -184,7 +198,8 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	.checkbox, .radio {
+	.checkbox,
+	.radio {
 		margin-top: 0;
 		margin-bottom: 0;
 		margin-right: var(--components-field-horizontal-spacing);
