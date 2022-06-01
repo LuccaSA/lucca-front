@@ -1,5 +1,5 @@
 import { Root } from 'postcss';
-import valueParser from 'postcss-value-parser';
+import { ValueNode } from '../utils';
 
 // TODO: confirmation @jbiron
 const legacyLevelToLevel: Partial<Record<string, string>> = {
@@ -15,41 +15,36 @@ const legacyLevelToLevel: Partial<Record<string, string>> = {
 
 export function updateColorMixin(root: Root) {
 	root.walkDecls((decl) => {
-		const parsedValue = valueParser(decl.value);
-		parsedValue.walk((funcNode) => {
-			if (funcNode.type !== 'function') {
-				return;
-			}
+		const valueNode = new ValueNode(decl.value);
 
-			if (funcNode.value === '_color') {
-				const [color, legacyLevel] = funcNode.nodes[0].value.split('.');
-				funcNode.value = 'var';
+		valueNode.walkFunction('_color', (funcNode) => {
+			const [color, legacyLevel] = funcNode.nodes[0].value.split('.');
+			funcNode.value = 'var';
 
-				if (color === 'white') {
-					funcNode.nodes = [
-						{
-							type: 'word',
-							value: `--colors-${color}-color`,
-							sourceEndIndex: 0,
-							sourceIndex: 0,
-						},
-					];
-				} else {
-					let level = legacyLevel ?? funcNode.nodes[2]?.value ?? '700';
-					level = legacyLevelToLevel[level] ?? level;
+			if (color === 'white') {
+				funcNode.nodes = [
+					{
+						type: 'word',
+						value: `--colors-${color}-color`,
+						sourceEndIndex: 0,
+						sourceIndex: 0,
+					},
+				];
+			} else {
+				let level = legacyLevel ?? funcNode.nodes[2]?.value ?? '700';
+				level = legacyLevelToLevel[level] ?? level;
 
-					funcNode.nodes = [
-						{
-							type: 'word',
-							value: `--palettes-${color}-${level}`,
-							sourceEndIndex: 0,
-							sourceIndex: 0,
-						},
-					];
-				}
+				funcNode.nodes = [
+					{
+						type: 'word',
+						value: `--palettes-${color}-${level}`,
+						sourceEndIndex: 0,
+						sourceIndex: 0,
+					},
+				];
 			}
 		});
 
-		decl.value = parsedValue.toString();
+		decl.value = valueNode.toString();
 	});
 }
