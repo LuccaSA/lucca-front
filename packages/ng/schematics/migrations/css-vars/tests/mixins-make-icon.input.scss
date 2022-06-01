@@ -1,0 +1,8 @@
+@import '@lucca-front/scss/src/mixins';
+
+.timeline-step-title {
+  &::after {
+    @include makeIcon('tick');
+    display: flex;
+  }
+}

@@ -1,0 +1,18 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.approvals-data {
+  width: 100%;
+  max-width: 70rem;
+  background-color: var(--palettes-grey-50);
+  padding: var(--spacings-big);
+  @include media.largerThan("l") {
+    padding: var(--spacings-bigger) var(--spacings-biggest);
+  }
+  @include media.smallerThan("s") {
+    overflow: auto;
+    padding: var(--spacings-small);
+    &:not(.has-selection) {
+      display: none;
+    }
+  }
+}

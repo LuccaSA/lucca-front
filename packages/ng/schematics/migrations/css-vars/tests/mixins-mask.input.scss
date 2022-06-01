@@ -1,0 +1,7 @@
+@import "scss/theme";
+
+.directoryStepper-step:not([aria-current="step"]) {
+  .directoryStepper-step-title {
+    @include mask();
+  }
+}
