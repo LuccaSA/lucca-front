@@ -1,0 +1,17 @@
+.test {
+  @each $name, $palette in _getMap("palettes") {
+    &.palette-#{$name} {
+        .textfield-input {
+            border-color: _safeGet($palette, "200", true);
+            color: _safeGet($palette, "700", true);
+            &:hover {
+                color: _safeGet($palette, "700", true);
+                background-color: _safeGet($palette, "50", true);
+            }
+        }
+        .lu-select-placeholder {
+            color: _safeGet($palette, "700", true);
+        }
+    }
+  }
+}

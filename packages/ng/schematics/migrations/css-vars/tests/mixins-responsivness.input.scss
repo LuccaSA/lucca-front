@@ -1,0 +1,19 @@
+@import '@lucca-front/scss/src/mixins';
+
+.approvals-data {
+  width: 100%;
+  max-width: 70rem;
+  background-color: _color("grey","50");
+  padding: _theme("spacings.big");
+
+  @include media_larger_than("l") {
+    padding: _theme("spacings.bigger") _theme("spacings.biggest");
+  }
+  @include media_smaller_than("s") {
+    overflow: auto;
+    padding: _theme("spacings.small");
+    &:not(.has-selection) {
+      display: none;
+    }
+  }
+}

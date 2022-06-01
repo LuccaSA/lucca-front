@@ -91,6 +91,8 @@
 		"jest-preset-angular": "^11.1.1",
 		"ng-packagr": "^13.2.1",
 		"postcss": "^8.4.6",
+		"postcss-scss": "^4.0.4",
+		"postcss-value-parser": "^4.2.0",
 		"prettier": "^2.6.2",
 		"sass": "^1.50.0",
 		"stylelint": "^14.6.1",
