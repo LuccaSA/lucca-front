@@ -1,0 +1,27 @@
+@use '@lucca-front/scss/src/components/title';
+
+.u-h1 {
+  @include title.h1;
+}
+
+.u-h2 {
+  @include title.h2();
+}
+
+.u-h3 {
+  @include title.h3(
+    $suffix
+  );
+}
+
+.u-h4 {
+  @include title.h4;
+}
+
+.u-h5 {
+  @include title.h5;
+}
+
+.u-h6 {
+  @include title.h6;
+}

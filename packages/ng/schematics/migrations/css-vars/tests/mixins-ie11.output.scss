@@ -1,0 +1,14 @@
+:host {
+	width: 100%;
+	&:focus {
+		outline: none;
+		.cardItemPreview-title,
+		.cardItemPreview-sub {
+			color: --palettes-primary-600;
+		}
+		.mod-documentPreview,
+		.mod-documentCreation {
+			box-shadow: 0 0 0 2px --palettes-primary-600;
+		}
+	}
+}

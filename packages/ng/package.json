@@ -7,6 +7,14 @@
 		"url": "git+https://github.com/LuccaSA/lucca-front.git"
 	},
 	"schematics": "./schematics/collection.json",
+	"ng-update": {
+		"migrations": "./schematics/migrations.json",
+		"packageGroup": [
+			"@lucca-front/ng",
+			"@lucca-front/scss",
+			"@lucca-front/icons"
+		]
+	},
 	"license": "MIT",
 	"public": true,
 	"keywords": [
