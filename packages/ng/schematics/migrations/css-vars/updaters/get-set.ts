@@ -1,33 +1,22 @@
 import { Root } from 'postcss';
-import valueParser from 'postcss-value-parser';
-import { commentNode } from '../utils';
+import { commentNode, ValueNode } from '../utils';
 
 export function updateGetSetFunctions(root: Root) {
 	root.walkAtRules((atRule) => {
-		const parsedValue = valueParser(atRule.params);
-
-		parsedValue.walk((funcNode) => {
-			if (funcNode.type === 'function' && funcNode.value === '_getMap') {
-				commentNode(atRule, 'Passer directement par des variables CSS.');
-				return false;
-			}
-
-			return undefined;
+		new ValueNode(atRule.params).walkFunction('_getMap', () => {
+			commentNode(atRule, 'Passer directement par des variables CSS.');
+			return false;
 		});
 	});
 
 	root.walkDecls((decl) => {
-		const parsedValue = valueParser(decl.value);
-		parsedValue.walk((funcNode) => {
-			if (funcNode.type !== 'function') {
-				return undefined;
-			}
+		const valueNode = new ValueNode(decl.value);
 
-			if (funcNode.type === 'function' && funcNode.value === '_safeGet') {
-				commentNode(decl, 'Passer directement par des variables CSS.');
-			}
+		valueNode.walkFunction('_safeGet', () => {
+			commentNode(decl, 'Passer directement par des variables CSS.');
+			return false;
 		});
 
-		decl.value = parsedValue.toString();
+		decl.value = valueNode.toString();
 	});
 }
