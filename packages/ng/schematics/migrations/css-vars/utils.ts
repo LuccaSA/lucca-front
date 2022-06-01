@@ -1,5 +1,5 @@
 import { AtRule, Comment, Container, Document, Node, Root } from 'postcss';
-import valueParser from 'postcss-value-parser';
+import valueParser, { FunctionNode, ParsedValue } from 'postcss-value-parser';
 
 export function removeContainerIfEmpty(node: Container | undefined): void {
 	if (!node) {
@@ -16,31 +16,6 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 
 		removeContainerIfEmpty(parent);
 	}
-}
-
-export function replaceMixinUsage(root: Root, mixins: string[] | Record<string, string>, mixinsImport: string, namespace = '') {
-	let mixinUsages = 0;
-
-	const mixinsPrefix = namespace || mixinsImport.split('/').reverse()[0];
-	const mixinsMap = Array.isArray(mixins) ? mixins.reduce((acc, mixin) => ({ ...acc, [mixin]: mixin }), {}) : mixins;
-
-	root.walkAtRules('include', (rule) => {
-		rule.params = valueParser(rule.params)
-			.walk((node) => {
-				const needsUpdate = ['function', 'word'].includes(node.type) && mixinsMap[node.value];
-
-				if (needsUpdate) {
-					mixinUsages++;
-					node.value = `${mixinsPrefix}.${mixinsMap[node.value]}`;
-				}
-			})
-			.toString();
-	});
-
-	if (mixinUsages) {
-		addMixinImport(root, mixinsImport, namespace);
-	}
-	return mixinUsages;
 }
 
 export function addMixinImport(root: Root, mixin: string, namespace = '') {
@@ -114,4 +89,33 @@ export function commentNode(node: Node, comment: string): void {
 	node.before(commentNode);
 	commentNode.after(new Comment({ text: node.toString() }));
 	node.remove();
+}
+
+export class ValueNode {
+	private parsed: ParsedValue;
+
+	constructor(value: string) {
+		this.parsed = valueParser(value);
+	}
+
+	public toString(): string {
+		return this.parsed.toString();
+	}
+
+	public walkFunction(functionFilter: string | RegExp, callback: (funcNode: FunctionNode) => void | boolean): void {
+		this.parsed.walk((node) => {
+			if (node.type !== 'function') {
+				return;
+			}
+			if (!this.matchFilter(node.value, functionFilter)) {
+				return;
+			}
+
+			return callback(node);
+		});
+	}
+
+	private matchFilter(value: string, filter: string | RegExp): boolean {
+		return typeof filter === 'string' ? value === filter : !!value.match(filter);
+	}
 }
