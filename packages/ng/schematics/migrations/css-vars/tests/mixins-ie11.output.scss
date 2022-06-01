@@ -4,11 +4,11 @@
 		outline: none;
 		.cardItemPreview-title,
 		.cardItemPreview-sub {
-			color: --palettes-primary-600;
+			color: var(--palettes-primary-600);
 		}
 		.mod-documentPreview,
 		.mod-documentCreation {
-			box-shadow: 0 0 0 2px --palettes-primary-600;
+			box-shadow: 0 0 0 2px var(--palettes-primary-600);
 		}
 	}
 }

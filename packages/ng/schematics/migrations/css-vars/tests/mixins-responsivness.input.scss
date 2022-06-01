@@ -5,6 +5,8 @@
   max-width: 70rem;
   background-color: _color("grey","50");
   padding: _theme("spacings.big");
+  padding: _theme("spacings.big", true);
+  transition: color _theme("commons.animations.durations.standard") ease-out;
 
   @include media_larger_than("l") {
     padding: _theme("spacings.bigger") _theme("spacings.biggest");
@@ -12,8 +14,12 @@
   @include media_smaller_than("s") {
     overflow: auto;
     padding: _theme("spacings.small");
+    border-radius: _theme("commons.border.radius")
+      _theme("commons.border.radius") 0 0;
+
     &:not(.has-selection) {
       display: none;
     }
+    column-gap: _theme("spacings." + $name) #{$suffix};
   }
 }
