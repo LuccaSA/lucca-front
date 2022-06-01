@@ -124,7 +124,9 @@
 			margin-top: 0;
 			margin-bottom: 0;
 		}
+	}
 
+	.textfield-input {
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: var(--colors-white-color);
 
@@ -158,25 +160,130 @@
 		right: 0;
 		bottom: 0;
 
-		&.is-error {
-			// @include fieldFramedState("error"); // todo:
-			outline: 2px dashed greenyellow !important;
-		}
-
-		&.is-warning {
-			// @include fieldFramedState("warning"); // todo:
-			outline: 2px dashed greenyellow !important;
-		}
-
-		&.is-valid,
-		&.is-success {
-			// @include fieldFramedState("success"); // todo:
-			outline: 2px dashed greenyellow !important;
-		}
-
 		// todo: déplacer dans textfield
 		~ .textfield-input {
 			padding-right: var(--components-field-framed-suffix-padding-right);
+		}
+	}
+}
+
+@mixin fieldFramedState($state) {
+	@if ($state == 'error') {
+		z-index: 3;
+		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)) !important;
+		background-color: var(--palettes-#{$state}-50);
+
+		&:focus-within,
+		&:hover {
+			z-index: 4;
+		}
+	}
+
+	&.mod-search,
+	&.mod-autocomplete,
+	&.mod-select {
+		&::after {
+			color: var(--palettes-#{$state}-700);
+		}
+	}
+
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
+		color: var(--palettes-#{$state}-700);
+	}
+
+	.textfield-input {
+		&:hover {
+			background-color: var(--palettes-#{$state}-50) !important;
+		}
+
+		&:focus {
+			background-color: white !important;
+			box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
+		}
+
+		&::placeholder {
+			color: var(--palettes-#{$state}-300);
+		}
+
+		@if ($state == 'error') {
+			background-color: var(--palettes-#{$state}-50) !important;
+			box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)) !important;
+
+			&:hover {
+				background-color: var(--palettes-#{$state}-100) !important;
+			}
+
+			&:focus {
+				box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
+				background-color: white !important;
+			}
+		}
+	}
+
+	&:hover {
+		background-color: var(--palettes-#{$state}-50);
+
+		.textfield-messages,
+		.radiosfield-messages,
+		.checkboxesfield-messages {
+			transform: translateY(100%);
+		}
+	}
+
+	&:focus-within {
+		background-color: white;
+		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50);
+
+		.textfield-messages,
+		.radiosfield-messages,
+		.checkboxesfield-messages {
+			transform: translateY(100%);
+		}
+	}
+}
+
+@mixin fieldFramedError($fieldname) {
+	@if ($fieldname == 'textfield') {
+		&:not(:disabled) {
+			z-index: 3;
+			box-shadow: form.fakeBorderOverlay(var(--palettes-error-700));
+			background-color: var(--palettes-error-50);
+			transition: background-color var(--commons-animations-durations-fast);
+
+			~ .textfield-label {
+				color: var(--palettes-error-700);
+			}
+
+			&:hover {
+				z-index: 4;
+				background-color: var(--palettes-error-100);
+
+				~ .textfield-messages {
+					transform: translateY(100%);
+				}
+			}
+
+			&:focus {
+				background-color: white;
+				box-shadow: form.fakeBorderOverlay(var(--palettes-error-700)), 0 0 0 4px var(--palettes-error-50);
+
+				~ .textfield-messages {
+					transform: translateY(100%);
+				}
+			}
+		}
+	}
+
+	@if ($fieldname == 'radiosfield') {
+		&:not(:disabled) {
+			~ .radio-label,
+			~ .checkbox-label {
+				&::before {
+					border-color: var(--palettes-error-700);
+				}
+			}
 		}
 	}
 }
