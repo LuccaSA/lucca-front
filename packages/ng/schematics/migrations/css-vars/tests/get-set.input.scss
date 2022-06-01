@@ -1,0 +1,13 @@
+.mod-outlined {
+  background-color: _safeGet($palette, '100');
+  color: _safeGet($palette, '800');
+}
+
+.tag {
+  @each $name, $palette in _getMap('marks') {
+    &.palette-mark#{to-upper-case($name)} {
+      background-color: _safeGet($palette, '800');
+      color: white;
+    }
+  }
+}

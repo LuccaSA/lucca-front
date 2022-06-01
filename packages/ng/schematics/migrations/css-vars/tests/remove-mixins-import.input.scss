@@ -1,0 +1,8 @@
+@import '@lucca-front/scss/src/mixins'
+  , 'keep-this-import';
+
+@import 'keep-this-import', '@lucca-front/scss/src/mixins', 'and-this-import';
+@import 'keep-this-import', '@lucca-front/scss/src/mixins';
+
+@import '@lucca-front/scss/src/mixins';
+@import '../../../../../node_modules/@lucca-front/scss/src/mixins';
