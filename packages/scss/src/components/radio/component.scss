@@ -64,7 +64,7 @@
 			height: var(--components-radio-input-size);
 			width: var(--components-radio-input-size);
 			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: color, transform;
+			transition-property: color, transform, border;
 			position: absolute;
 			border-radius: 50%;
 			left: 0;
