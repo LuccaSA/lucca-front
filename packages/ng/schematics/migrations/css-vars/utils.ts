@@ -1,5 +1,5 @@
 import { AtRule, Comment, Container, Document, Node, Root } from 'postcss';
-import valueParser, { FunctionNode, ParsedValue } from 'postcss-value-parser';
+import valueParser, { FunctionNode, Node as ValueParserNode, ParsedValue } from 'postcss-value-parser';
 
 export function removeContainerIfEmpty(node: Container | undefined): void {
 	if (!node) {
@@ -93,6 +93,10 @@ export function commentNode(node: Node, comment: string): void {
 
 export class ValueNode {
 	private parsed: ParsedValue;
+
+	public get nodes(): ValueParserNode[] {
+		return this.parsed.nodes;
+	}
 
 	constructor(value: string) {
 		this.parsed = valueParser(value);
