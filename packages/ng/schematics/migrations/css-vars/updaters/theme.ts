@@ -13,14 +13,7 @@ export function updateThemeMixin(root: Root) {
 
 			const themeVar = funcNode.nodes[0].value.replace(/\./g, '-');
 			funcNode.value = 'var';
-			funcNode.nodes = [
-				{
-					type: 'word',
-					value: `--${themeVar}`,
-					sourceEndIndex: 0,
-					sourceIndex: 0,
-				},
-			];
+			funcNode.nodes = new ValueNode(`--${themeVar}`).nodes;
 
 			return undefined;
 		});
