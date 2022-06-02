@@ -42,10 +42,6 @@
 	&.mod-framed {
 		@include framed;
 
-		&:is(.is-loading, .loading) {
-			@include framedLoading;
-		}
-
 		&.is-error {
 			@include fieldFramedState("error");
 			@include fieldFramedError("textfield");
@@ -69,11 +65,11 @@
 				@include fieldFramedError("radiosfield");
 				@include fieldFramedError("checkboxesfield");
 			}
-	
+
 			.is-warning {
 				@include fieldFramedState("warning");
 			}
-	
+
 			.is-valid,
 			.is-success {
 				@include fieldFramedState("success");

@@ -337,6 +337,10 @@
 		}
 	}
 
+	&:is(.is-loading, .loading) {
+		@include framedLoading;
+	}
+
 	&:is(.is-warning, .warning) {
 		@include framedState('warning');
 

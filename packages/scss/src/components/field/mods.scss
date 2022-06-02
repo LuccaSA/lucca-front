@@ -288,15 +288,6 @@
 	}
 }
 
-@mixin framedLoading {
-	&::before,
-	&::after {
-		right: var(--components-field-framed-side-padding) !important;
-		top: var(--components-field-framed-side-padding) !important;
-		bottom: auto !important;
-	}
-}
-
 @mixin inputRow {
 	@include field-row;
 }
