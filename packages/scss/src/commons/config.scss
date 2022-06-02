@@ -170,9 +170,9 @@ $boxShadows: (
 
 $disabled: (
 	'opacity': 0.4,
-	'background': #e5e5e5,
-	'color': #999,
-	'placeholder': #bbb,
+	'background': 'var(--palettes-grey-100)',
+	'color': 'var(--palettes-grey-500)',
+	'placeholder': 'var(--palettes-grey-400)',
 );
 
 $animations: (
