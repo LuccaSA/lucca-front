@@ -10,7 +10,8 @@
 
 @mixin inputFocus {
 	background-color: var(--colors-white-color);
-	box-shadow: 0 0 0 4px var(--palettes-200, var(--components-textfield-focus-shadow-color)), inset 0 0 0 1px var(--palettes-600, var(--components-textfield-focus-border-color));
+	box-shadow: 0 0 0 4px var(--palettes-200, var(--components-textfield-focus-shadow-color)),
+		inset 0 0 0 1px var(--palettes-600, var(--components-textfield-focus-border-color));
 
 	&::placeholder {
 		color: var(--palettes-300, var(--components-textfield-focus-placeholder));
@@ -84,8 +85,8 @@
 @mixin framedState($state) {
 	@if $state == 'error' {
 		z-index: 3;
-		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700));
-		background-color: var(--palettes-#{$state}-50);
+		box-shadow: form.fakeBorderOverlay(var(--palettes-error-700));
+		background-color: var(--palettes-error-50);
 	}
 
 	// todo: déplacer dans field
@@ -101,8 +102,8 @@
 		}
 
 		@if $state == 'error' {
-			background-color: var(--palettes-#{$state}-50) !important;
-			box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)) !important;
+			background-color: var(--palettes-error-50) !important;
+			box-shadow: form.fakeBorderOverlay(var(--palettes-error-700)) !important;
 		}
 	}
 }

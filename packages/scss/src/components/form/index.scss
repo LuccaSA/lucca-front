@@ -33,3 +33,38 @@
 		@include required;
 	}
 }
+
+.checkboxesfield.mod-framed,
+.radiosfield.mod-framed,
+.form.mod-framed .fieldsetWrapper {
+	@include framed;
+}
+
+.checkboxesfield.mod-framed,
+.radiosfield.mod-framed {
+	margin-top: 0;
+	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding)
+		var(--components-field-framed-bottom-padding);
+}
+
+.form-group-label {
+	&.is-required {
+		&:not(:empty) {
+			&::after {
+				@extend %isRequired;
+			}
+		}
+	}
+}
+
+.radiosfield-label,
+.checkboxesfield-label,
+.textfield-label {
+	&.is-required {
+		&:not(:empty) {
+			&::after {
+				@extend %isRequired;
+			}
+		}
+	}
+}

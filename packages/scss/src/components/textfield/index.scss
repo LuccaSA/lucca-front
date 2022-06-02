@@ -171,120 +171,6 @@
 		}
 	}
 
-	&.mod-framed {
-		@include framed;
-
-		&.mod-multiline {
-			@include framedMultiline;
-
-			&.mod-small {
-				@include framedMultilineSmall;
-			}
-		}
-
-		&:is(.is-error, .error) {
-			@include framedState('error');
-
-			&:is(:focus-within, :hover) {
-				@include framedErrorHover;
-			}
-
-			&:is(:hover) {
-				@include framedStateHover('error');
-			}
-
-			&:is(:focus-within) {
-				@include framedStateFocus('error');
-			}
-
-			.textfield-input {
-				&:hover {
-					@include framedStateInputHover('error');
-				}
-
-				&:focus {
-					@include framedStateInputFocus('error');
-				}
-			}
-
-			&.mod-search,
-			&.mod-autocomplete,
-			&.mod-select {
-				@include framedStateSearch('error');
-			}
-		}
-
-		&:is(.is-warning, .warning) {
-			@include framedState('warning');
-
-			&:is(:hover) {
-				@include framedStateHover('warning');
-			}
-
-			&:is(:focus-within) {
-				@include framedStateFocus('warning');
-			}
-
-			.textfield-input {
-				&:hover {
-					@include framedStateInputHover('warning');
-				}
-
-				&:focus {
-					@include framedStateInputFocus('warning');
-				}
-			}
-
-			&.mod-search,
-			&.mod-autocomplete,
-			&.mod-select {
-				@include framedStateSearch('warning');
-			}
-		}
-
-		&:is(.is-success, .is-valid, .valid, .success) {
-			@include framedState('success');
-
-			&:is(:hover) {
-				@include framedStateHover('success');
-			}
-
-			&:is(:focus-within) {
-				@include framedStateFocus('success');
-			}
-
-			.textfield-input {
-				&:hover {
-					@include framedStateInputHover('success');
-				}
-
-				&:focus {
-					@include framedStateInputFocus('success');
-				}
-			}
-
-			&.mod-search,
-			&.mod-autocomplete,
-			&.mod-select {
-				@include framedStateSearch('success');
-			}
-		}
-
-		.textfield-input {
-			&:is(:hover) {
-				@include framedInputHover;
-			}
-
-			&:is(:focus) {
-				@include framedInputFocus;
-			}
-
-			&:is(:invalid) {
-				@include framedInputInvalid;
-			}
-		}
-	}
-
 	&.mod-material {
 		@include material;
 
@@ -404,5 +290,123 @@
 .textfield-options-entry {
 	&:is(:hover, .is-focus, .focus) {
 		@include entryHover;
+	}
+}
+
+.textfield.mod-framed,
+.form.mod-framed .textfield {
+	@include framed;
+
+	&.mod-multiline {
+		@include framedMultiline;
+
+		&.mod-small {
+			@include framedMultilineSmall;
+		}
+	}
+
+	&:is(.is-error, .error) {
+		@include framedState('error');
+
+		&:is(:focus-within, :hover) {
+			@include framedErrorHover;
+		}
+
+		&:is(:hover) {
+			@include framedStateHover('error');
+		}
+
+		&:is(:focus-within) {
+			@include framedStateFocus('error');
+		}
+
+		.textfield-input {
+			&:hover {
+				@include framedStateInputHover('error');
+			}
+
+			&:focus {
+				@include framedStateInputFocus('error');
+			}
+		}
+
+		&.mod-search,
+		&.mod-autocomplete,
+		&.mod-select {
+			@include framedStateSearch('error');
+		}
+	}
+
+	&:is(.is-warning, .warning) {
+		@include framedState('warning');
+
+		&:is(:hover) {
+			@include framedStateHover('warning');
+		}
+
+		&:is(:focus-within) {
+			@include framedStateFocus('warning');
+		}
+
+		.textfield-input {
+			&:hover {
+				@include framedStateInputHover('warning');
+			}
+
+			&:focus {
+				@include framedStateInputFocus('warning');
+			}
+		}
+
+		&.mod-search,
+		&.mod-autocomplete,
+		&.mod-select {
+			@include framedStateSearch('warning');
+		}
+	}
+
+	&:is(.is-success, .is-valid, .valid, .success) {
+		@include framedState('success');
+
+		&:is(:hover) {
+			@include framedStateHover('success');
+		}
+
+		&:is(:focus-within) {
+			@include framedStateFocus('success');
+		}
+
+		.textfield-input {
+			&:hover {
+				@include framedStateInputHover('success');
+			}
+
+			&:focus {
+				@include framedStateInputFocus('success');
+			}
+		}
+
+		&.mod-search,
+		&.mod-autocomplete,
+		&.mod-select {
+			@include framedStateSearch('success');
+		}
+	}
+
+	.textfield-input {
+		&:is(:hover) {
+			@include framedInputHover;
+		}
+
+		&:is(:focus) {
+			@include framedInputFocus;
+		}
+
+		&:is(:invalid, .is-invalid, .invalid) {
+			@include framedInputInvalid;
+		}
+
+		&:is(.is-error, .invalid) {
+		}
 	}
 }
