@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { combineLatest, merge, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,7 +24,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	],
 })
 export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
-	searchControl = new UntypedFormControl();
+	searchControl = new FormControl();
 	clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
 	empty$: Observable<boolean>;
 	@ViewChild('searchInput', { read: ElementRef, static: true })

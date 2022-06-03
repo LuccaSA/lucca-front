@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { FieldType } from '@ngx-formly/core';
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldUser extends FieldType {
-	override readonly formControl: UntypedFormControl;
+	override readonly formControl: FormControl;
 
 	focus() {
 		this.to['_isFocused'] = true;

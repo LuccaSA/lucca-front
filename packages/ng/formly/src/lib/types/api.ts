@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -25,7 +25,7 @@ export class LuFormlyFieldApi extends FieldType {
 	get _standard() {
 		return (this.to['standard'] || 'v3') as 'v3' | 'v4';
 	}
-	override readonly formControl: UntypedFormControl;
+	override readonly formControl: FormControl;
 	focus() {
 		this.to['_isFocused'] = true;
 	}
