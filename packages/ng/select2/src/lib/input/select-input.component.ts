@@ -1,31 +1,95 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayContainer, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, Component, ComponentRef, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Injector, Input, OnDestroy, Output, TemplateRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ComponentRef,
+	ElementRef,
+	EventEmitter,
+	forwardRef,
+	HostBinding,
+	HostListener,
+	Inject,
+	Injectable,
+	Injector,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	TemplateRef,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { LuSelectPanelComponent, LuSelectPanelRef } from '../panel/index';
+import { ILuSelectPanelData, SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID, SELECT_PANEL_DATA } from '../select.model';
+
+let selectId = 0;
+
+function selectIdFactory(): number {
+	return selectId++;
+}
+
+function selectLabelFactory(elementRef: ElementRef<HTMLElement>): HTMLLabelElement | undefined {
+	function getLabel(node: HTMLElement): HTMLLabelElement | undefined {
+		if (node instanceof HTMLLabelElement) {
+			return node;
+		}
+
+		if (!node.parentElement) {
+			return undefined;
+		}
+
+		return getLabel(node.parentElement);
+	}
+
+	return getLabel(elementRef.nativeElement);
+}
+
+function selectLabelIdFactory(label: HTMLLabelElement | undefined, selectId: number): string {
+	return label?.id || `lu-select-label-${selectId}`;
+}
+
+@Injectable()
+class LuSelectOverlayContainer extends OverlayContainer {
+	constructor(@Inject(DOCUMENT) document: any, platform: Platform, @Inject(SELECT_LABEL_ID) private selectLabelId: string, @Inject(SELECT_ID) private selectId: number) {
+		super(document, platform);
+	}
+	protected override _createContainer(): void {
+		super._createContainer();
+		this._containerElement.setAttribute('aria-labelledby', this.selectLabelId);
+		this._containerElement.setAttribute('role', 'listbox');
+		this._containerElement.id = `lu-select-overlay-container-${this.selectId}`;
+	}
+}
+
+@Injectable()
+class LuSelectOverlay extends Overlay {}
 
 class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	instance: LuSelectPanelComponent<T>;
 	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
-	private overlayRef: OverlayRef;
+	private portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
 
-	constructor(overlayConfig: OverlayConfig, overlay: Overlay, parentInjector: Injector) {
+	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuSelectPanelData<T>) {
 		super();
 
-		this.overlayRef = overlay.create(overlayConfig);
-
 		const injector = Injector.create({
-			providers: [{ provide: LuSelectPanelRef, useValue: this }],
+			providers: [
+				{ provide: LuSelectPanelRef, useValue: this },
+				{ provide: SELECT_PANEL_DATA, useValue: panelData },
+			],
 			parent: parentInjector,
 		});
 
-		const portal = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, injector);
-		this.panelRef = this.overlayRef.attach(portal);
+		this.portalRef = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, injector);
+		this.panelRef = overlayRef.attach(this.portalRef);
 		this.instance = this.panelRef.instance;
 
-		this.overlayRef
+		overlayRef
 			.backdropClick()
 			.pipe(takeUntil(this.closed))
 			.subscribe(() => this.close());
@@ -54,9 +118,17 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 			useExisting: forwardRef(() => LuSelectInput2Component),
 			multi: true,
 		},
+		{
+			provide: OverlayContainer,
+			useClass: LuSelectOverlayContainer,
+		},
+		LuSelectOverlay,
+		{ provide: SELECT_ID, useFactory: selectIdFactory },
+		{ provide: SELECT_LABEL, useFactory: selectLabelFactory, deps: [ElementRef] },
+		{ provide: SELECT_LABEL_ID, useFactory: selectLabelIdFactory, deps: [SELECT_LABEL, SELECT_ID] },
 	],
 })
-export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestroy {
+export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestroy, OnInit {
 	@HostBinding('tabindex') tabindex = 0;
 
 	@Input() placeholder = '';
@@ -83,7 +155,19 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 	}
 
 	@HostBinding('class.is-focused')
+	@HostBinding('attr.aria-expanded')
 	public isPanelOpen = false;
+
+	@HostBinding('attr.role')
+	public role = 'combobox';
+
+	@HostBinding('attr.aria-activedescendant')
+	public activeDescendant: string | undefined;
+
+	@HostBinding('attr.aria-controls')
+	get ariaControls(): string {
+		return this.overlayContainerRef.id;
+	}
 
 	@Input()
 	overlayConfig?: OverlayConfig = {
@@ -109,6 +193,7 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 	protected onTouched?: () => void;
 
 	protected panelRef?: SelectPanelRef<T>;
+	protected overlayContainerRef: HTMLElement;
 	protected destroyed$ = new Subject<void>();
 
 	@HostListener('keydown.space', ['$event'])
@@ -127,8 +212,14 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 		protected scrollStrategies: ScrollStrategyOptions,
 		protected elementRef: ElementRef<HTMLElement>,
 		protected injector: Injector,
-		protected overlay: Overlay,
-	) {}
+		protected overlay: LuSelectOverlay,
+		protected changeDetectorRef: ChangeDetectorRef,
+		overlayContainer: OverlayContainer,
+		@Inject(SELECT_LABEL) protected label: HTMLElement | undefined,
+		@Inject(SELECT_LABEL_ID) protected labelId: string,
+	) {
+		this.overlayContainerRef = overlayContainer.getContainerElement();
+	}
 
 	registerOnChange(onChange: (value: T) => void): void {
 		this.onChange = onChange;
@@ -147,6 +238,12 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 		this.destroyed$.complete();
 	}
 
+	ngOnInit(): void {
+		if (this.label) {
+			this.label.id = this.labelId;
+		}
+	}
+
 	clearValue(event: MouseEvent): void {
 		event.stopPropagation();
 		this.onChange?.(null);
@@ -158,26 +255,50 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 			return;
 		}
 
-		this.isPanelOpen = true;
 		const overlayConfig: OverlayConfig = this.overlayConfig || {};
 		overlayConfig.positionStrategy = this.positionBuilder.flexibleConnectedTo(this.elementRef).withPositions([
 			{
-				originX: 'center',
+				originX: 'start',
 				originY: 'bottom',
-				overlayX: 'center',
+				overlayX: 'start',
 				overlayY: 'top',
+			},
+			{
+				originX: 'end',
+				originY: 'bottom',
+				overlayX: 'end',
+				overlayY: 'top',
+			},
+			{
+				originX: 'start',
+				originY: 'top',
+				overlayX: 'start',
+				overlayY: 'bottom',
+			},
+			{
+				originX: 'end',
+				originY: 'top',
+				overlayX: 'end',
+				overlayY: 'bottom',
 			},
 		]);
 		overlayConfig.scrollStrategy = this.scrollStrategies.reposition();
-		overlayConfig.width = this.elementRef.nativeElement.clientWidth;
+		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
+		overlayConfig.maxHeight = '100vh';
+		overlayConfig.maxWidth = '100vw';
 
-		this.panelRef = new SelectPanelRef(overlayConfig, this.overlay, this.injector);
-		this.panelRef.instance.options$ = this.options$;
-		this.panelRef.instance.selected = this.options?.find((o) => this.optionComparer(o, this.value));
-		this.panelRef.instance.optionTpl = this.optionTpl;
+		const overlayRef = this.overlay.create(overlayConfig);
 
-		this.panelRef.instance.searchable = this.searchable;
-		this.panelRef.valueChanged.pipe(takeUntil(this.destroyed$)).subscribe((value) => {
+		this.isPanelOpen = true;
+		this.panelRef = new SelectPanelRef(overlayRef, this.injector, {
+			initialValue: this.value,
+			optionComparer: this.optionComparer,
+			options$: this.options$,
+			searchable: this.searchable,
+			optionTpl: this.optionTpl,
+		});
+
+		this.panelRef.valueChanged.subscribe((value) => {
 			this.onChange?.(value);
 			this.value = value;
 		});
@@ -185,16 +306,16 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 			this.clueChange.emit(clue);
 			this.clue = clue;
 		});
+		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
+			this.activeDescendant = optionId;
+			this.changeDetectorRef.markForCheck();
+		});
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
 	public closePanel(): void {
 		if (!this.isPanelOpen) {
 			return;
-		}
-		if (this.clue !== null) {
-			this.clue = null;
-			this.clueChange.emit(null);
 		}
 		this.isPanelOpen = false;
 		this.panelRef.close();
