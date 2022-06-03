@@ -3,14 +3,13 @@ import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrat
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, ComponentRef, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Injector, Input, OnDestroy, Output, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ReplaySubject, Subject, Subscription, takeUntil } from 'rxjs';
+import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { LuSelectPanelComponent, LuSelectPanelRef } from '../panel/index';
 
 class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	instance: LuSelectPanelComponent<T>;
 	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
 	private overlayRef: OverlayRef;
-	private subscription: Subscription;
 
 	constructor(overlayConfig: OverlayConfig, overlay: Overlay, parentInjector: Injector) {
 		super();
@@ -26,7 +25,10 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 		this.panelRef = this.overlayRef.attach(portal);
 		this.instance = this.panelRef.instance;
 
-		this.subscription = this.overlayRef.backdropClick().subscribe(() => this.close());
+		this.overlayRef
+			.backdropClick()
+			.pipe(takeUntil(this.closed))
+			.subscribe(() => this.close());
 	}
 
 	emitValue(value: T): void {
@@ -34,11 +36,10 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 		this.close();
 	}
 
-	close(): void {
+	override close(): void {
+		super.close();
 		this.panelRef.destroy();
 		this.overlayRef.detach();
-		this.subscription.unsubscribe();
-		this.closed.emit();
 	}
 }
 
@@ -68,8 +69,9 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 	@HostBinding('class.is-clearable')
 	clearable = false;
 
-	@Input()
-	searchable = false;
+	get searchable(): boolean {
+		return this.clueChange.observed;
+	}
 
 	@Input()
 	@HostBinding('class.is-disabled')
@@ -101,6 +103,7 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 
 	value?: T;
 	options$ = new ReplaySubject<T[]>(1);
+	clue: string | null = null;
 
 	protected onChange?: (value: T | null) => void;
 	protected onTouched?: () => void;
@@ -178,13 +181,20 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 			this.onChange?.(value);
 			this.value = value;
 		});
-		this.panelRef.clueChanged.pipe(takeUntil(this.destroyed$)).subscribe(this.clueChange);
-		this.panelRef.closed.pipe(takeUntil(this.destroyed$)).subscribe(() => this.closePanel());
+		this.panelRef.clueChanged.subscribe((clue) => {
+			this.clueChange.emit(clue);
+			this.clue = clue;
+		});
+		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
 	public closePanel(): void {
 		if (!this.isPanelOpen) {
 			return;
+		}
+		if (this.clue !== null) {
+			this.clue = null;
+			this.clueChange.emit(null);
 		}
 		this.isPanelOpen = false;
 		this.panelRef.close();

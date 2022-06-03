@@ -8,7 +8,12 @@ export abstract class LuSelectPanelRef<T> {
 	options$: Observable<T>;
 
 	abstract emitValue(value: T): void;
-	abstract close(): void;
+	close(): void {
+		this.closed.next();
+		this.closed.complete();
+		this.valueChanged.complete();
+		this.clueChanged.complete();
+	}
 }
 
 @Component({
