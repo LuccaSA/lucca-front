@@ -1,10 +1,14 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, TemplateRef } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Inject, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { asyncScheduler, map, Observable, observeOn, take, takeUntil } from 'rxjs';
+import { LuOptionComponent } from '../option/index';
+import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
 
 export abstract class LuSelectPanelRef<T> {
 	closed = new EventEmitter<void>();
 	valueChanged = new EventEmitter<T>();
 	clueChanged = new EventEmitter<string>();
+	activeOptionIdChanged = new EventEmitter<string>();
 	options$: Observable<T>;
 
 	abstract emitValue(value: T): void;
@@ -12,7 +16,10 @@ export abstract class LuSelectPanelRef<T> {
 		this.closed.next();
 		this.closed.complete();
 		this.valueChanged.complete();
+		this.clueChanged.emit(null);
 		this.clueChanged.complete();
+		this.activeOptionIdChanged.emit(undefined);
+		this.activeOptionIdChanged.complete();
 	}
 }
 
@@ -20,29 +27,84 @@ export abstract class LuSelectPanelRef<T> {
 	selector: 'lu-select-panel',
 	templateUrl: './panel.component.html',
 	styleUrls: ['./panel.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
-	@Input() selected?: T;
-	@Input() options$?: Observable<T[]>;
-	@Input() optionTpl?: TemplateRef<{ $implicit: T }>;
-	@Input() searchable = false;
+	options$: Observable<T[]>;
+	optionComparer: (option1: T, option2: T) => boolean;
+	initialValue?: T;
+	optionTpl: TemplateRef<{ $implicit: T }>;
+	searchable: boolean;
 
-	focusedOption?: T;
-	search: string | null = null;
+	@ViewChild('searchInput')
+	public set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
+		if (!input) {
+			return;
+		}
 
-	constructor(private elementRef: ElementRef<HTMLElement>, public panelRef: LuSelectPanelRef<T>) {}
-
-	ngAfterViewInit(): void {
-		this.elementRef.nativeElement.focus();
+		setTimeout(() => input.nativeElement.focus());
 	}
 
-	@HostListener('keydown.escape')
-	close(): void {
-		this.panelRef.close();
+	@ViewChildren(LuOptionComponent) optionsQL: QueryList<LuOptionComponent<T>>;
+	private keyManager: ActiveDescendantKeyManager<LuOptionComponent<T>>;
+
+	search: string | null = null;
+
+	public get selected(): T | undefined {
+		return this.keyManager?.activeItem?.option;
+	}
+
+	constructor(public panelRef: LuSelectPanelRef<T>, @Inject(SELECT_ID) public selectId: number, @Inject(SELECT_PANEL_DATA) private data: ILuSelectPanelData<T>) {
+		this.options$ = data.options$;
+		this.optionComparer = data.optionComparer;
+		this.initialValue = data.initialValue;
+		this.optionTpl = data.optionTpl;
+		this.searchable = data.searchable;
+	}
+
+	ngAfterViewInit(): void {
+		if (!this.optionsQL) {
+			return;
+		}
+
+		this.keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
+
+		if (this.initialValue) {
+			this.options$
+				?.pipe(
+					take(1),
+					observeOn(asyncScheduler),
+					map((options) => options.findIndex((o) => this.optionComparer(o, this.initialValue))),
+					takeUntil(this.panelRef.closed),
+				)
+				.subscribe((selectedIndex) => this.keyManager.setActiveItem(selectedIndex));
+		}
+
+		this.keyManager.change
+			.pipe(
+				map(() => this.keyManager.activeItem?.id),
+				takeUntil(this.panelRef.closed),
+			)
+			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
+	}
+
+	@HostListener('keydown', ['$event'])
+	onKeyDown($event: KeyboardEvent): void {
+		switch ($event.key) {
+			case 'Escape':
+			case 'Tab':
+				return this.panelRef.close();
+			case 'Enter':
+				return this.panelRef.emitValue(this.selected);
+			default:
+				this.keyManager?.onKeydown($event);
+		}
 	}
 
 	updateClue(clue: string | null): void {
 		this.search = clue;
 		this.panelRef.clueChanged.emit(clue);
+
+		setTimeout(() => this.keyManager.setFirstItemActive());
 	}
 }
