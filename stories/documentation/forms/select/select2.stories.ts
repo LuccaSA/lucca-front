@@ -43,62 +43,61 @@ const allLegumes = [
 	{ index: 30, name: 'Chou romanesco'}
 ];
 
+const template = `
+<label class="textfield">
+	<lu-select2 #select1 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
+		<ng-container *luOption="let legume; select: select1">{{ legume.name }}</ng-container>
+		<ng-container *luDisplayer="let legume; select: select1">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Avec displayer</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2 #select2 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
+		<ng-container *luOption="let legume; select: select2">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Sans displayer</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2 #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
+		<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Avec clearer</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2
+		#select4
+		class="textfield-input"
+		placeholder="Placeholder..."
+		[(ngModel)]="value"
+		[options]="legumes"
+		(clueChange)="updateLegumes($event)"
+	>
+		<ng-container *luOption="let legume; select: select4">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Avec searcher</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2 #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
+		<ng-container *luOption="let legume; select: select5">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Disabled</span>
+</label>
+
+<div class="u-marginTopStandard">
+	<div>
+		Value:
+		<pre>{{ value | json }}</pre>
+	</div>
+</div>
+`;
+
 @Component({
 	selector: 'select2-story',
-	template: `
-		<label class="textfield">
-			<lu-select2 #select1
-				class="textfield-input"
-				placeholder="Placeholder..."
-				[(ngModel)]="value"
-				[options]="legumes"
-				[searchable]="true"
-				(clueChange)="updateLegumes($event)">
-				<ng-container *luOption="let legume; select: select1">Un texte vraiment très long {{ legume.name }}</ng-container>
-				<ng-container *luDisplayer="let legume; select: select1">{{ legume.name }}</ng-container>
-			</lu-select2>
-			<span class="textfield-label">Avec displayer</span>
-		</label>
-
-		<label class="textfield u-marginTopStandard">
-			<lu-select2 #select2
-				class="textfield-input"
-				placeholder="Placeholder..."
-				[(ngModel)]="value"
-				[options]="legumes">
-				<ng-container *luOption="let legume; select: select2">{{ legume.name }}</ng-container>
-			</lu-select2>
-			<span class="textfield-label">Sans displayer</span>
-		</label>
-
-		<label class="textfield u-marginTopStandard">
-			<lu-select2 #select3
-				class="textfield-input"
-				placeholder="Placeholder..."
-				[(ngModel)]="value"
-				[options]="legumes"
-				[clearable]="true">
-				<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
-			</lu-select2>
-			<span class="textfield-label">Avec clearer</span>
-		</label>
-
-		<label class="textfield u-marginTopStandard">
-			<lu-select2 #select4
-				class="textfield-input"
-				placeholder="Placeholder..."
-				[(ngModel)]="value"
-				[options]="legumes"
-				[disabled]="true">
-				<ng-container *luOption="let legume; select: select4">{{ legume.name }}</ng-container>
-			</lu-select2>
-			<span class="textfield-label">Disabled</span>
-		</label>
-
-		<div class="u-marginTopStandard">
-			<div>Value: <pre>{{ value | json }}</pre></div>
-		</div>
-	`,
+	template
 })
 class Select2Story {
 	public legumes: ILegume[] = allLegumes
@@ -111,7 +110,7 @@ class Select2Story {
 	}
 
 	private sanitizeString(str: string): string {
-		return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 	}
 }
 
@@ -133,8 +132,17 @@ export default {
 	],
 } as Meta;
 
-const template: Story<Select2Story> = (args: Select2Story) => ({
+const Template: Story<Select2Story> = (args: Select2Story) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
+export const Basic = Template.bind({});
+
+Basic.parameters = {
+	docs: {
+		source: {
+			language: 'ts',
+			code: template,
+		}
+	}
+}
