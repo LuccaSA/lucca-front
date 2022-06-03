@@ -2,4 +2,4 @@
  * Public API Surface of core
  */
 
-export * from './index';
+export * from './lib/index';

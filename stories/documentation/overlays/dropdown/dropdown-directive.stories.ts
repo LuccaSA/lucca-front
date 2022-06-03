@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-import { LuDropdownModule, LuDropdownTriggerDirective } from '../../../../packages/ng/dropdown/src';
 
 @Component({
 	selector: 'dropdown-directive-stories',

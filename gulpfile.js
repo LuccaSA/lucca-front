@@ -4,8 +4,6 @@ const sass = require('gulp-dart-sass');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
-const styleLint = require('gulp-stylelint');
-const run = require('gulp-run');
 
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
@@ -104,15 +102,6 @@ gulp.task('scss:src', () => {
 	.pipe(gulp.dest(`${SCSS_OUT_DIR}/src`));
 });
 
-gulp.task('scss:lint', () => {
-	return gulp.src([`${SCSS_SRC_DIR}/**/*.scss`])
-	.pipe(styleLint({
-		reporters: [
-			{formatter:'string', console: true}
-		]
-	}));
-});
-
 gulp.task(
 	'scss',
 	gulp.series(
@@ -127,7 +116,11 @@ gulp.task(
  * NG *
  -------------------------------*/
 
-gulp.task('ng:schematics:build', () => run('tsc --project packages/ng/schematics').exec());
+gulp.task('ng:schematics:build', () => {
+	const childProcess = require('child_process').exec('tsc --project packages/ng/schematics');
+	childProcess.stdout.pipe(process.stdout);
+	return childProcess;
+});
 gulp.task('ng:schematics:collection', () => {
 	return gulp.src([`packages/ng/schematics/collection.json`])
 	.pipe(gulp.dest(`dist/ng/schematics`));

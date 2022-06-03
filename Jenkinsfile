@@ -66,7 +66,7 @@ node(label: CI.getSelectedNode(script:this)) {
 
 				if (isPR) {
 					// post PR comment
-					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+					def deployUrl = "http://lucca-front.lucca.local/${branchName}/storybook"
 					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 						powershell """
 							[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12

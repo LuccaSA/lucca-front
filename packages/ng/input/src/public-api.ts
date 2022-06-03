@@ -2,4 +2,4 @@
  * Public API Surface of input
  */
 
-export * from './index';
+export * from './lib/index';
