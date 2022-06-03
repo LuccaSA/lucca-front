@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { Observable } from 'rxjs';
@@ -53,7 +53,7 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 	}
 	@Input() debounceTime = 250;
 
-	clueControl: FormControl;
+	clueControl: UntypedFormControl;
 	constructor(
 		@Inject(ALuApiService)
 		@Optional()
@@ -64,7 +64,7 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 		super(hostService || selfService);
 	}
 	ngOnInit() {
-		this.clueControl = new FormControl(undefined);
+		this.clueControl = new UntypedFormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges.pipe(debounceTime(this.debounceTime)) as Observable<string>;
 		super.init();
 	}
@@ -136,12 +136,12 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 	}
 	@Input() debounceTime = 250;
 
-	clueControl: FormControl;
+	clueControl: UntypedFormControl;
 	constructor(@Inject(ALuApiService) @Optional() @SkipSelf() hostService: LuApiHybridService<T>, @Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>) {
 		super(hostService || selfService);
 	}
 	ngOnInit() {
-		this.clueControl = new FormControl(undefined);
+		this.clueControl = new UntypedFormControl(undefined);
 		this.clue$ = this.clueControl.valueChanges.pipe(debounceTime(this.debounceTime)) as Observable<string>;
 		super.init();
 	}

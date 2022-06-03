@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
@@ -73,7 +73,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 	@Output() clueChange: Observable<string>;
 
-	form: FormGroup;
+	form: UntypedFormGroup;
 	// page$: Subject<number>;
 	outOptions$ = new Subject<U[]>();
 	loading$: Observable<boolean>;
@@ -91,11 +91,11 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	) {
 		this._service = hostService || selfService;
 
-		const clue: FormControl = new FormControl('');
+		const clue: UntypedFormControl = new UntypedFormControl('');
 
-		this.form = new FormGroup({
+		this.form = new UntypedFormGroup({
 			clue,
-			formerEmployees: new FormControl(false),
+			formerEmployees: new UntypedFormControl(false),
 		});
 
 		this.clueChange = clue.valueChanges as Observable<string>;

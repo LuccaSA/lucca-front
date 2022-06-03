@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class LuFormlyFieldSelect extends FieldType {
 	get _options() {
 		return (this.to.options || []) as { value: unknown; label: unknown; name: string }[];
 	}
-	override readonly formControl: FormControl;
+	override readonly formControl: UntypedFormControl;
 	focus() {
 		this.to['_isFocused'] = true;
 	}

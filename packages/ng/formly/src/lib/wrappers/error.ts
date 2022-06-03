@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
 
 // wrapper
@@ -14,7 +14,7 @@ export class LuFormlyWrapperError extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
 
-	override readonly formControl: FormControl;
+	override readonly formControl: UntypedFormControl;
 
 	get validationId() {
 		return this.field.id + '-message';
@@ -31,7 +31,7 @@ export class LuFormlyWrapperError extends FieldWrapper {
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyErrorMessage {
-	@Input() fieldForm: FormControl;
+	@Input() fieldForm: UntypedFormControl;
 	@Input() field: FormlyFieldConfig;
 
 	get errorMessages(): string[] {

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
@@ -65,7 +65,7 @@ export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuO
 	isSearching = new EventEmitter<boolean>();
 	private _isSearching = false;
 
-	form: FormGroup;
+	form: UntypedFormGroup;
 	outOptions$ = new Subject<ILuEstablishment[]>();
 	loading$: Observable<boolean>;
 	empty$: Observable<boolean>;
@@ -87,8 +87,8 @@ export class LuEstablishmentSearcherComponent implements OnInit, OnDestroy, ILuO
 	}
 
 	ngOnInit() {
-		this.form = new FormGroup({
-			clue: new FormControl(''),
+		this.form = new UntypedFormGroup({
+			clue: new UntypedFormControl(''),
 		});
 		const formValue$ = this.form.valueChanges.pipe(startWith(this.form.value)) as Observable<{ clue: string }>;
 		this._page$ = new Subject<number>();
