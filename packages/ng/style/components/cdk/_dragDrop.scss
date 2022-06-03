@@ -1,4 +1,4 @@
-@use '../../../scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/form';
 
 .cdk-drag-placeholder {
 	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
