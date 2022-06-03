@@ -3,7 +3,7 @@
 
 .textfield {
 	.textfield-input.ng-invalid.ng-touched {
-		//@include form.fieldError('textfield');
+		@include field.inputState('error');
 	}
 
 	&.mod-material .textfield-input.ng-invalid.ng-touched {
