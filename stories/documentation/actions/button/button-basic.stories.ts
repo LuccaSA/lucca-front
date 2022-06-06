@@ -54,7 +54,7 @@ function getTemplate(args: ButtonBasicStory): string {
 	`;
 }
 
-export const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
+const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
