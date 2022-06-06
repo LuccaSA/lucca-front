@@ -110,7 +110,9 @@
 
 	.radiosfield,
 	.checkboxesfield {
+		display: block;
 		margin-top: var(--components-field-framed-side-padding);
+		margin-bottom: 0;
 		padding: 0 var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
 	}
 
