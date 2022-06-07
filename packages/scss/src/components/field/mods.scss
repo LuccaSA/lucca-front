@@ -60,7 +60,7 @@
 
 @mixin framed {
 	display: block;
-	
+
 	fieldset {
 		border: 0;
 		padding: 0;
@@ -243,6 +243,23 @@
 		.checkboxesfield-messages {
 			transform: translateY(100%);
 		}
+	}
+}
+
+@mixin framedSearch {
+	&::after {
+		padding: var(--components-field-framed-side-padding);
+		bottom: 0;
+		right: 0;
+		z-index: 4;
+	}
+
+	.textfield {
+		width: 100%;
+	}
+
+	.textfield-input {
+		padding-right: var(--components-field-framed-suffix-padding-right);
 	}
 }
 

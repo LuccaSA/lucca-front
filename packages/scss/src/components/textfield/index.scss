@@ -305,6 +305,10 @@
 		}
 	}
 
+	&.mod-search {
+		@include framedSearch;
+	}
+
 	&:is(.is-error, .error) {
 		@include framedState('error');
 
