@@ -1,24 +1,24 @@
-// .mat-option {
-// 	@extend .textfield-options-entry;
+.mat-option {
+	@extend .textfield-options-entry;
 
-// 	display: block;
-// 	line-height: unset !important;
-// 	outline: none;
-// 	&.mat-selected,
-// 	&.mat-active {
-// 		@extend .textfield-options-entry, .is-focus;
-// 	}
+	display: block;
+	line-height: unset !important;
+	outline: none;
+	&.mat-selected,
+	&.mat-active {
+		@extend .textfield-options-entry, .is-focus;
+	}
 
-// 	.mat-option-ripple {
-// 		bottom: 0;
-// 		left: 0;
-// 		pointer-events: none;
-// 		position: absolute;
-// 		right: 0;
-// 		top: 0;
-// 	}
+	.mat-option-ripple {
+		bottom: 0;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
 
-// 	.mat-ripple {
-// 		overflow: hidden;
-// 	}
-// }
+	.mat-ripple {
+		overflow: hidden;
+	}
+}

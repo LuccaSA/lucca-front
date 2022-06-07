@@ -1,8 +1,8 @@
-// @mixin box-shadow-override($hasHover: false) {
-// 	box-shadow: unquote(_theme('commons.elevations.elevation-1')) !important;
-// 	@if $hasHover {
-// 		&:hover {
-// 			box-shadow: unquote(_theme('commons.elevations.elevation-3')) !important;
-// 		}
-// 	}
-// }
+@mixin box-shadow-override($hasHover: false) {
+	box-shadow: var(--commons-elevations-elevation-1) !important;
+	@if $hasHover {
+		&:hover {
+			box-shadow: var(--commons-elevations-elevation-3) !important;
+		}
+	}
+}
