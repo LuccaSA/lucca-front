@@ -1,11 +1,11 @@
-// @use '@angular/material' as mat;
+@use '@angular/material' as mat;
 
-// @import 'theming';
-// @import 'components';
+@import 'theming';
+@import 'components';
 
-// // CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
-// $lucca-front-mat-typography: mat.define-typography-config(
-//   $font-family: _theme('commons.font.family', true),
-// );
+// CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
+$lucca-front-mat-typography: mat.define-typography-config(
+  $font-family: var(--commons-font-family),
+);
 
-// @include mat.all-component-typographies($lucca-front-mat-typography);
+@include mat.all-component-typographies($lucca-front-mat-typography);

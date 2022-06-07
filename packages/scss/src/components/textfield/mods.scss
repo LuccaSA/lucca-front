@@ -386,6 +386,7 @@
 
 @mixin material {
 	padding-top: var(--components-textfield-material-padding-top);
+	vertical-align: baseline;
 
 	.textfield-input {
 		box-shadow: 0 1px 0 0 var(--components-textfield-material-border-color);
