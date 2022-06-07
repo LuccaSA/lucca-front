@@ -59,6 +59,8 @@
 }
 
 @mixin framed {
+	display: block;
+
 	fieldset {
 		border: 0;
 		padding: 0;
@@ -244,6 +246,23 @@
 	}
 }
 
+@mixin framedSearch {
+	&::after {
+		padding: var(--components-field-framed-side-padding);
+		bottom: 0;
+		right: 0;
+		z-index: 4;
+	}
+
+	.textfield {
+		width: 100%;
+	}
+
+	.textfield-input {
+		padding-right: var(--components-field-framed-suffix-padding-right);
+	}
+}
+
 @mixin fieldFramedError($fieldname) {
 	@if ($fieldname == 'textfield') {
 		&:not(:disabled) {
@@ -285,15 +304,6 @@
 				}
 			}
 		}
-	}
-}
-
-@mixin framedLoading {
-	&::before,
-	&::after {
-		right: var(--components-field-framed-side-padding) !important;
-		top: var(--components-field-framed-side-padding) !important;
-		bottom: auto !important;
 	}
 }
 

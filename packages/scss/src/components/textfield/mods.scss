@@ -249,6 +249,10 @@
 	width: 100%;
 	margin-bottom: 0 !important;
 
+	.textfield.mod-search {
+		@include framedSearch;
+	}
+
 	.textfield-options {
 		width: auto;
 		margin-top: -2px;

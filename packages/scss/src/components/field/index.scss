@@ -1,6 +1,14 @@
 // @use '../../commons/config';
 @use 'exports' as *;
 
+.form.mod-framed {
+	.textfield,
+	.radiosfield,
+	.checkboxesfield {
+		@include framed;
+	}
+}
+
 .textfield,
 .radiosfield,
 .checkboxesfield {
@@ -42,8 +50,8 @@
 	&.mod-framed {
 		@include framed;
 
-		&:is(.is-loading, .loading) {
-			@include framedLoading;
+		&.mod-search {
+			@include framedSearch;
 		}
 
 		&.is-error {
@@ -63,20 +71,22 @@
 		}
 
 		@at-root {
-			.is-error {
-				@include fieldFramedState("error");
-				@include fieldFramedError("textfield");
-				@include fieldFramedError("radiosfield");
-				@include fieldFramedError("checkboxesfield");
-			}
-	
-			.is-warning {
-				@include fieldFramedState("warning");
-			}
-	
-			.is-valid,
-			.is-success {
-				@include fieldFramedState("success");
+			.form.mod-framed {
+				.is-error {
+					@include fieldFramedState("error");
+					@include fieldFramedError("textfield");
+					@include fieldFramedError("radiosfield");
+					@include fieldFramedError("checkboxesfield");
+				}
+
+				.is-warning {
+					@include fieldFramedState("warning");
+				}
+
+				.is-valid,
+				.is-success {
+					@include fieldFramedState("success");
+				}
 			}
 		}
 	}

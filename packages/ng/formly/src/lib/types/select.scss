@@ -1,17 +1,17 @@
-// :host-context(.mod-framed) {
-// 	lu-select {
-// 		display: block;
-// 	}
-// 	lu-api-select {
-// 		display: block;
-// 	}
-// 	lu-user-select {
-// 		display: block;
-// 	}
-// 	lu-date-select {
-// 		display: block;
-// 	}
-// 	lu-department-select {
-// 		display: block;
-// 	}
-// }
+:host-context(.mod-framed) {
+	lu-select {
+		display: block;
+	}
+	lu-api-select {
+		display: block;
+	}
+	lu-user-select {
+		display: block;
+	}
+	lu-date-select {
+		display: block;
+	}
+	lu-department-select {
+		display: block;
+	}
+}

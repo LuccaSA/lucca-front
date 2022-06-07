@@ -305,6 +305,10 @@
 		}
 	}
 
+	&.mod-search {
+		@include framedSearch;
+	}
+
 	&:is(.is-error, .error) {
 		@include framedState('error');
 
@@ -335,6 +339,10 @@
 		&.mod-select {
 			@include framedStateSearch('error');
 		}
+	}
+
+	&:is(.is-loading, .loading) {
+		@include framedLoading;
 	}
 
 	&:is(.is-warning, .warning) {
