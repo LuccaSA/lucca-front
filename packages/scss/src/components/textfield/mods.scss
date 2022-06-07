@@ -336,6 +336,21 @@
 		background-color: var(--palettes-grey-500);
 		color: var(--colors-white-color);
 	}
+
+	.textfield-suffix,
+	.radiosfield-suffix,
+	.checkboxesfield-suffix {
+		padding: var(--components-field-framed-side-padding);
+		top: auto;
+		z-index: 10;
+		right: 0;
+		bottom: 0;
+
+		// todo: déplacer dans textfield
+		~ .textfield-input {
+			padding-right: var(--components-field-framed-suffix-padding-right);
+		}
+	}
 }
 
 @mixin framedMultiline {
