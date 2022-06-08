@@ -12,7 +12,7 @@ export const TitleSeparator = ' – ';
 export class LuTitleService {
 	private titlesSubject = new BehaviorSubject<string[]>(['Lucca']);
 	titles$ = this.titlesSubject.asObservable();
-	title$ = this.titles$.pipe(map((titles: Array<string>) => titles.join(TitleSeparator)))
+	title$ = this.titles$.pipe(map((titles: Array<string>) => titles.join(TitleSeparator)));
 
 	constructor(private router: Router, private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
 
@@ -34,7 +34,7 @@ export class LuTitleService {
 		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
 	}
 
-	prependTitle(title: string, replaceFirstPrefix: boolean = false) {
+	prependTitle(title: string, replaceFirstPrefix = false) {
 		const titles = this.titlesSubject.value.slice(replaceFirstPrefix ? 1 : 0);
 		this.titlesSubject.next([title, ...titles]);
 	}
