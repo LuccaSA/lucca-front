@@ -5,6 +5,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { composeStory, createMountableStoryComponent } from '@storybook/testing-angular';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
+import userEvent from '@testing-library/user-event';
 import { of } from 'rxjs';
 import Meta, { Basic } from '../../../../../stories/documentation/forms/api/select/api-select.stories';
 import { ALuApiService, LuApiV3Service } from './service';
@@ -23,7 +24,7 @@ describe('button', () => {
 
 		const luSelectElement = screen.getByTestId('lu-select');
 		expect(luSelectElement).not.toBeNull();
-		luSelectElement.click();
+		await userEvent.click(luSelectElement);
 		const dial = screen.getByRole('dialog');
 		expect(dial).not.toBeNull();
 	});
@@ -41,9 +42,9 @@ describe('button', () => {
 			],
 		});
 
-		const buttonElement = screen.getByTestId('lu-select');
+		const buttonElement = await screen.findByTestId('lu-select');
 		expect(buttonElement).not.toBeNull();
-		buttonElement.click();
+		fireEvent.click(buttonElement);
 		tick(250); // debouncetime du composant
 		expect(mock.searchPaged).toHaveBeenCalledWith('', 0);
 		const input: HTMLInputElement = await screen.findByRole('textbox');
