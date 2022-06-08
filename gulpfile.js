@@ -102,7 +102,10 @@ gulp.task('scss', gulp.series('scss:clean', 'scss:build', 'scss:pck', 'scss:src'
 
 gulp.task('ng:schematics:build', () => run('tsc --project packages/ng/schematics').exec());
 gulp.task('ng:schematics:collection', () => {
-	return gulp.src([`packages/ng/schematics/collection.json`]).pipe(gulp.dest(`dist/ng/schematics`));
+	return gulp.src([
+		`packages/ng/schematics/collection.json`,
+		`packages/ng/schematics/migrations.json`,
+	]).pipe(gulp.dest(`dist/ng/schematics`));
 });
 
 gulp.task('ng:schematics', gulp.series('ng:schematics:build', 'ng:schematics:collection'));

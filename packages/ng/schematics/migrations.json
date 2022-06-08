@@ -2,8 +2,8 @@
 	"$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
 	"schematics": {
 		"migration-v9-css-vars": {
-			"version": "9.0.0-alpha.1",
-			"description": "Remove LF < 8 theming system and import to use new scss syntax and CSS Vars everywhere",
+			"version": "9.0.0-alpha",
+			"description": "Remove LF <= 8 theming system and import to use new scss syntax and CSS Vars everywhere",
 			"factory": "./migrations/css-vars/index"
 		}
 	}
