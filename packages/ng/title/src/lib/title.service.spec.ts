@@ -49,13 +49,13 @@ export class OverrideTitleComponent implements OnInit {
 }
 
 @Component({
-	selector: 'lu-replace-prefix-title',
+	selector: 'lu-override-title-part',
 	template: `<div></div>`,
 })
-export class ReplacePrefixTitleComponent implements OnInit {
+export class OverrideTitlePartComponent implements OnInit {
 	constructor(private titleService: LuTitleService) {}
 	ngOnInit() {
-		this.titleService.prependTitle('Overriding prefix', true);
+		this.titleService.overrideFirstTitlePart('New title part');
 	}
 }
 
@@ -96,8 +96,8 @@ describe('TitleService', () => {
 									},
 									{
 										path: 'end',
-										data: { title: `Overridden prefix` },
-										component: ReplacePrefixTitleComponent,
+										data: { title: `Old title part` },
+										component: OverrideTitlePartComponent,
 									},
 								],
 							},
@@ -150,7 +150,7 @@ describe('TitleService', () => {
 		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 
-	it('should replace prefix title when a component forces its own title', async () => {
+	it('should override title part when a component forces its own title part', async () => {
 		let resultTitle = '';
 		spectator
 			.inject(LuTitleService)
@@ -160,6 +160,6 @@ describe('TitleService', () => {
 
 		spectator.click('.link-5');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overriding prefix${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 });
