@@ -29,7 +29,7 @@ describe('button', () => {
 		expect(dial).toBeInTheDocument();
 	});
 
-	it('renders primary button with default args', fakeAsync(async () => {
+	it('should trigger search when clue is typed in', fakeAsync(async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
 		await render(component, {
@@ -42,9 +42,9 @@ describe('button', () => {
 			],
 		});
 
-		const buttonElement = await screen.findByTestId('lu-select');
-		expect(buttonElement).toBeInTheDocument();
-		fireEvent.click(buttonElement);
+		const luSelectElement = await screen.findByTestId('lu-select');
+		expect(luSelectElement).toBeInTheDocument();
+		fireEvent.click(luSelectElement);
 		tick(250); // debouncetime du composant
 		expect(mock.searchPaged).toHaveBeenCalledWith('', 0);
 		const input: HTMLInputElement = await screen.findByRole('textbox');
