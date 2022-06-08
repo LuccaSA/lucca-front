@@ -67,11 +67,11 @@ export function removeImportNode(atRule: AtRule, name: string): boolean {
 		parsed.nodes = parsed.nodes.filter((n) => n.type !== 'string' || !n.value.includes(name));
 
 		// Remove first node if divider
-		if (parsed.nodes[0].type === 'div') {
+		if (parsed.nodes[0]?.type === 'div') {
 			parsed.nodes = parsed.nodes.slice(1);
 		}
 		// Remove last node if divider
-		if (parsed.nodes[parsed.nodes.length - 1].type === 'div') {
+		if (parsed.nodes[parsed.nodes.length - 1]?.type === 'div') {
 			parsed.nodes = parsed.nodes.slice(0, -1);
 		}
 

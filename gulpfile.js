@@ -103,7 +103,10 @@ gulp.task('ng:schematics:build', () => {
 	return childProcess;
 });
 gulp.task('ng:schematics:collection', () => {
-	return gulp.src([`packages/ng/schematics/collection.json`]).pipe(gulp.dest(`dist/ng/schematics`));
+	return gulp.src([
+		`packages/ng/schematics/collection.json`,
+		`packages/ng/schematics/migrations.json`,
+	]).pipe(gulp.dest(`dist/ng/schematics`));
 });
 
 gulp.task('ng:schematics', gulp.series('ng:schematics:build', 'ng:schematics:collection'));
