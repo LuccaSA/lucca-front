@@ -27,7 +27,7 @@ export class LuTitleService {
 				map((titleParts) => titleParts.filter(({ title }) => title !== '').map(({ title, params }) => this.translateService.translate(title, params))),
 				map((titleParts: Array<string>) => [...titleParts, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x)),
 				distinctUntilChanged(),
-				tap((titles) => this.titlePartsSubject.next(titles)),
+				tap((titleParts) => this.titlePartsSubject.next(titleParts)),
 			)
 			.subscribe();
 
