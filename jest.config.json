@@ -10,7 +10,8 @@
   ],
   "modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
   "moduleNameMapper": {
-    "^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/src"
+    "^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/src",
+    "^@/stories/(.*)$": "<rootDir>/stories/documentation/$1"
   },
   "roots": ["<rootDir>/packages/ng", "<rootDir>/stories/documentation"]
 }

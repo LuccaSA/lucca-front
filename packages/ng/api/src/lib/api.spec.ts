@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import Meta, { Basic } from '@/stories/forms/api/select/api-select.stories';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { composeStory, createMountableStoryComponent } from '@storybook/testing-angular';
 import { fireEvent, render, screen } from '@testing-library/angular';
@@ -8,7 +9,6 @@ import { createMock } from '@testing-library/angular/jest-utils';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
-import Meta, { Basic } from '../../../../../stories/documentation/forms/api/select/api-select.stories';
 import { ALuApiService, LuApiV3Service } from './service';
 
 const Primary = composeStory(Basic, Meta);
