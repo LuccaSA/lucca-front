@@ -23,10 +23,9 @@ describe('button', () => {
 		});
 
 		const luSelectElement = screen.getByTestId('lu-select');
-		expect(luSelectElement).not.toBeNull();
 		await userEvent.click(luSelectElement);
 		const dial = screen.getByRole('dialog');
-		expect(dial).not.toBeNull();
+		expect(dial).toBeInTheDocument();
 	});
 
 	it('renders primary button with default args', fakeAsync(async () => {
@@ -43,7 +42,7 @@ describe('button', () => {
 		});
 
 		const buttonElement = await screen.findByTestId('lu-select');
-		expect(buttonElement).not.toBeNull();
+		expect(buttonElement).toBeInTheDocument();
 		fireEvent.click(buttonElement);
 		tick(250); // debouncetime du composant
 		expect(mock.searchPaged).toHaveBeenCalledWith('', 0);
