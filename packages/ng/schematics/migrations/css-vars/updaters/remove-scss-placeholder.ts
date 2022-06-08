@@ -10,7 +10,7 @@ export function removeScssPlaceholders(root: Root) {
 		const valueNode = new ValueNode(decl.value);
 		valueNode.walkFunction(/.*/, (func) => {
 			func.value = func.value.replace(/#\{/g, '');
-			func.nodes = func.nodes.filter((child) => child.type !== 'word' || child.value !== '}');
+			func.nodes = func.nodes.filter((child) => child.type !== 'word' || child.value !== '}').map((child) => ({ ...child, value: child.value.replace(/\}/g, '') }));
 		});
 		decl.value = valueNode.toString();
 	});

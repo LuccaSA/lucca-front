@@ -3,4 +3,5 @@
   flex-flow: column nowrap;
   height: calc(100vh - var(--commons-banner-height) - 3.5rem);
   background-color: var(--palettes-grey-50);
+  top: calc(var(--spacings-smallest) * -1);
 }
