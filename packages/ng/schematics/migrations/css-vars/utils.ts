@@ -19,9 +19,6 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 }
 
 export function addMixinImport(root: Root, mixin: string, namespace = '') {
-	/**
-	 * @type {AtRule}
-	 */
 	let lastImportRule: AtRule | undefined;
 
 	root.walkAtRules(/(import|use)/, (rule) => {
@@ -36,12 +33,16 @@ export function addMixinImport(root: Root, mixin: string, namespace = '') {
 
 	const newImportRule = new AtRule({ name: 'use', params: importStr });
 
-	if (lastImportRule) {
-		newImportRule.raws.before = '\n';
-		lastImportRule.after(newImportRule);
+	addImport(root, newImportRule, lastImportRule);
+}
+
+export function addImport(root: Root, atRule: AtRule, afterNode?: Node) {
+	if (afterNode) {
+		atRule.raws.before = '\n';
+		afterNode.after(atRule);
 	} else {
 		const firstNode = root.first;
-		root.first?.before(newImportRule);
+		root.first?.before(atRule);
 
 		if (firstNode) {
 			firstNode.raws.before = '\n\n';
