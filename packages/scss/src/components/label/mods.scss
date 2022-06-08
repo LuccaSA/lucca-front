@@ -1,5 +1,6 @@
 @mixin number {
 	height: var(--sizes-standard-line-height);
+	font-size: var(--sizes-smaller-font-size);
 	min-width: var(--sizes-standard-line-height);
 	line-height: var(--sizes-standard-line-height);
 	padding: 0 var(--spacings-smaller);

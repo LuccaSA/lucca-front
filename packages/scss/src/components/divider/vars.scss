@@ -2,7 +2,7 @@
 	@at-root {
 		html {
 			--commons-divider-width: 1px;
-			--commons-divider-color: #d6d6d6;
+			--commons-divider-color: var(--palettes-grey-200);
 		}
 	}
 }

@@ -34,7 +34,7 @@ $grey: (
 	300: #becbe4,
 	400: #acbbd7,
 	500: #96a6c5,
-	600: #667799,
+	600: #6C7C9D,
 	700: #445473,
 	800: #2a3551,
 	900: #131d35,
@@ -171,7 +171,7 @@ $boxShadows: (
 $disabled: (
 	'opacity': 0.4,
 	'background': 'var(--palettes-grey-100)',
-	'color': 'var(--palettes-grey-500)',
+	'color': 'var(--palettes-grey-600)',
 	'placeholder': 'var(--palettes-grey-400)',
 );
 
