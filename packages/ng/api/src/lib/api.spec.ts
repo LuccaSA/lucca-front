@@ -6,6 +6,7 @@ import { composeStory, createMountableStoryComponent } from '@storybook/testing-
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 import { of } from 'rxjs';
 import Meta, { Basic } from '../../../../../stories/documentation/forms/api/select/api-select.stories';
 import { ALuApiService, LuApiV3Service } from './service';
@@ -51,4 +52,15 @@ describe('button', () => {
 		tick(250); // debouncetime du composant
 		expect(mock.searchPaged).toHaveBeenCalledWith('Test', 0);
 	}));
+
+	it('should check a11y', async () => {
+		const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
+		await render(component, {
+			imports: [ngModule],
+		});
+		const luSelectElement = screen.getByTestId('lu-select');
+
+		const results = await axe(luSelectElement);
+		expect(results).toHaveNoViolations(); // off course not
+	});
 });
