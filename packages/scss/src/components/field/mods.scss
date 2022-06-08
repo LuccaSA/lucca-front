@@ -52,6 +52,17 @@
 			right: 0;
 		}
 	}
+
+	.radiosfield-input,
+	.checkboxesfield-input {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.radio,
+	.checkbox {
+		margin-right: var(--spacings-standard);
+	}
 }
 
 @mixin compactBlock {
