@@ -10,8 +10,9 @@ export const TitleSeparator = ' – ';
 
 @Injectable()
 export class LuTitleService {
-	private titleSubject = new BehaviorSubject<string>('Lucca');
-	title$ = this.titleSubject.asObservable();
+	private titlesSubject = new BehaviorSubject<string[]>(['Lucca']);
+	titles$ = this.titlesSubject.asObservable();
+	title$ = this.titles$.pipe(map((titles: Array<string>) => titles.join(TitleSeparator)))
 
 	constructor(private router: Router, private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
 
@@ -24,17 +25,18 @@ export class LuTitleService {
 				map((event: ActivationEnd) => getPageTitleParts(event.snapshot)),
 				map((titleParts) => uniqTitle(titleParts)),
 				map((titleParts) => titleParts.filter(({ title }) => title !== '').map(({ title, params }) => this.translateService.translate(title, params))),
-				map((titles: Array<string>) => [...titles, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x).join(TitleSeparator)),
+				map((titles: Array<string>) => [...titles, this.translateService.translate(applicationNameTranslationKey, {}), 'Lucca'].filter((x) => !!x)),
 				distinctUntilChanged(),
-				tap((title) => this.titleSubject.next(title)),
+				tap((titles) => this.titlesSubject.next(titles)),
 			)
 			.subscribe();
 
 		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
 	}
 
-	prependTitle(title: string) {
-		this.titleSubject.next(`${title}${TitleSeparator}${this.titleSubject.value}`);
+	prependTitle(title: string, replaceFirstPrefix: boolean = false) {
+		const titles = this.titlesSubject.value.slice(replaceFirstPrefix ? 1 : 0);
+		this.titlesSubject.next([title, ...titles]);
 	}
 }
 
