@@ -183,3 +183,16 @@ $breakpoints: (
 
 $theme: _set($theme, "breakpoints", $breakpoints);
 ```
+
+TODO
+* problème de semi-colons supprimé avant :root
+* virer les include paths avec node_modules/@lucca-front
+* commenter les _set
+* revoir si on peut garder les //
+* virer les @import '@lucca-front/scss/src/icons';
+* commenter les var à l'intérieur des functions type color
+* gérer les -_theme() `calc(var() * -1))`
+* gérer les functions dans les déclarations
+* comme pour elevation, on vire iconSizing pour une prop
+* detection des components utilisés dans templateUrl et template
+* remplacer u-fontWeightBold u-fontWeight600
