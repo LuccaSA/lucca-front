@@ -36,6 +36,7 @@
 		&:hover {
 			background-color: var(--palettes-600, var(--palettes-primary-600));
 			box-shadow: var(--commons-box-shadow-xs);
+			color: var(--palettes-text, var(--palettes-primary-text));
 		}
 
 		&:focus {
@@ -47,7 +48,6 @@
 		&:active {
 			background-color: var(--palettes-800, var(--palettes-primary-800));
 			box-shadow: 0 0 0 4px var(--palettes-300, var(--palettes-primary-300));
-			// color: var(--colors-white-color);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 @mixin component($suffix: '') {
 	// no suffix here
 	margin-top: 0;
-	color: var(--palettes-grey-800);
+	color: var(--palettes-grey-900);
 	margin-bottom: var(--spacings-small);
 
 	// suffix here
