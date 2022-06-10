@@ -1,9 +1,6 @@
-<div class="textfield mod-clearable mod-search u-marginBottomStandard">
-	<span class="textfield-label">Rechercher</span>
+<div class="textfield mod-outlined mod-search u-marginBottomStandard">
+	<span class="textfield-label">Rechercher une icône</span>
 	<input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
-	<a href="#" role="button" class="actionIcon textfield-actionClear">
-		<span aria-hidden="true" class="lucca-icon icon-cross"></span>
-	</a>
 </div>
 
 <div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon)">
