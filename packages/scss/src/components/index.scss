@@ -1,10 +1,9 @@
 @forward 'icon'; // 16 Ko
 @forward 'field'; //
 @forward 'box'; // 1 Ko
-@forward 'toc'; // 1 Ko
 @forward 'tag'; // 1 Ko
+@forward 'main'; // 1 Ko
 @forward 'code'; // 1 Ko
-@forward 'link'; // 1 Ko
 @forward 'link'; // 1 Ko
 @forward 'chip'; // 1 Ko
 @forward 'title'; // 1 Ko
@@ -18,9 +17,9 @@
 @forward 'emptyState'; // 1 Ko
 @forward 'pageHeader'; // 1 Ko
 @forward 'pagination'; // 1 Ko
-@forward 'mainContent'; // 1 Ko
 @forward 'titleSection'; // 1 Ko
 @forward 'contentSection'; // 1 Ko
+@forward 'tableOfContent'; // 1 Ko
 @forward 'list'; // 2 Ko
 @forward 'card'; // 2 Ko
 @forward 'gauge'; // 2 Ko
@@ -46,7 +45,7 @@
 @forward 'button'; // 12 Ko
 @forward 'textfield'; // 13 Ko
 @forward 'util'; // 14 Ko
-@forward 'navside'; // 15 Ko
+@forward 'navSide'; // 15 Ko
 @forward 'form'; // 25 Ko
 @forward 'tableFixed'; // 33 Ko
 @forward 'grid'; // 40 Ko
