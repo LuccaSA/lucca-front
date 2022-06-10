@@ -1,0 +1,15 @@
+<div class="demo-icon" *ngFor="let icon of icons">
+	<span aria-hidden="true" class="lucca-icon icon-{{camelize(icon)}}"></span>
+	<code class="code">icon-{{camelize(icon)}}</code>
+</div>
+
+<style>
+	:host {
+		width: 802px;
+		display: block;
+	}
+	.demo-icon {
+		width: 33%;
+		float: left;
+	}
+</style>
