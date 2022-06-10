@@ -48,13 +48,12 @@ html {
 	}
 
 	@include core.cssvars('colors', config.$colors, '-color');
+	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
 	--commons-background-base: #f5f5f5;
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-transition: all 150ms ease;
-
-	--palettes-grey-900-rbg: 19, 29, 53;
 
 	height: -webkit-fill-available;
 }
