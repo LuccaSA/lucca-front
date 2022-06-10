@@ -26,20 +26,6 @@ $secondary: (
 	900: #083691,
 );
 
-$grey: (
-	text: #ffffff,
-	50: #ebf0fa,
-	100: #e0e7f6,
-	200: #d2dcef,
-	300: #becbe4,
-	400: #acbbd7,
-	500: #96a6c5,
-	600: #6C7C9D,
-	700: #445473,
-	800: #2a3551,
-	900: #131d35,
-);
-
 $success: (
 	text: #ffffff,
 	50: #f7fef6,
@@ -80,6 +66,25 @@ $error: (
 	700: #e51a3b,
 	800: #af0e29,
 	900: #91081f,
+);
+
+$grey: (
+	text: #ffffff,
+	50: #ebf0fa,
+	100: #e0e7f6,
+	200: #d2dcef,
+	300: #becbe4,
+	400: #acbbd7,
+	500: #96a6c5,
+	600: #6c7c9d,
+	700: #445473,
+	800: #2a3551,
+	900: #131d35,
+);
+
+$colors: (
+	'white': #ffffff,
+	'black': #121212,
 );
 
 $breakpoints: (

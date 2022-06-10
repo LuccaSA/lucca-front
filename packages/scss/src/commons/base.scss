@@ -47,8 +47,7 @@ html {
 		@include core.cssvars('sizes-#{$key}', $map);
 	}
 
-	--colors-white-color: #ffffff;
-	--colors-black-color: #121212;
+	@include core.cssvars('colors', config.$colors, '-color');
 
 	--commons-background-base: #f5f5f5;
 	--commons-banner-height: 50px;

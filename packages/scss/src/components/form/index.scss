@@ -2,6 +2,9 @@
 
 @use 'exports' as *;
 
+.form {
+}
+
 .form-group {
 	@include vars;
 	@include component;
