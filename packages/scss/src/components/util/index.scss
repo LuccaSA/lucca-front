@@ -1,12 +1,12 @@
 @use 'sass:list';
-@use '../../commons/config';
-@use '../../commons/core';
-@use '../../commons/utils/a11y';
-@use '../../commons/utils/reset';
-@use '../../commons/utils/text';
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/text';
 
-@use '../title/exports' as title;
-@use '../keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 
 @use 'exports' as *;
 

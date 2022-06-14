@@ -1,5 +1,5 @@
-@use '../../commons/utils/a11y';
-@use '../../../../icons/src/mixins' as icon;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin component {
 	display: block;
@@ -24,7 +24,7 @@
 
 				align-items: center;
 				background-color: var(--palettes-grey-500);
-				border-radius: .5rem;
+				border-radius: 0.5rem;
 				color: var(--colors-white-color);
 				display: flex;
 				font-size: var(--sizes-smaller-font-size);
@@ -44,7 +44,7 @@
 				background-color: white;
 				box-shadow: var(--commons-box-shadow-hard);
 				border-radius: 50%;
-				content: "";
+				content: '';
 				display: block;
 				height: calc(1rem - 4px);
 				left: 2px;

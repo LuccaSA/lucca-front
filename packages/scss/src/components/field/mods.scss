@@ -1,4 +1,4 @@
-@use '../../commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/form';
 
 @mixin inline {
 	margin-right: calc(var(--components-field-input-inline-margin) * 2);

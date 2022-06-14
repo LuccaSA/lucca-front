@@ -1,6 +1,6 @@
 @mixin vars {
 	@at-root {
-		html {
+		:root {
 			--commons-divider-width: 1px;
 			--commons-divider-color: var(--palettes-grey-200);
 		}

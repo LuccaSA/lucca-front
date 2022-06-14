@@ -1,4 +1,4 @@
-@use '../../commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin sticky {
 	top: var(--commons-banner-height);

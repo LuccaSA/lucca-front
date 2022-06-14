@@ -1,4 +1,4 @@
-@use '../../commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component {
 	list-style-type: none;
@@ -80,5 +80,4 @@
 			}
 		}
 	}
-
 }

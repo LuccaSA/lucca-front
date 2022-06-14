@@ -1,5 +1,5 @@
-@use '../../../../icons/src/mixins' as icon;
-@use '../../commons/utils/form';
+@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/scss/src/commons/utils/form';
 
 @mixin disabled {
 	~ .checkbox-label {

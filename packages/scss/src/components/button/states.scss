@@ -1,7 +1,7 @@
-@use '../../../../icons/src/mixins' as icon;
-@use '../../commons/utils/loading';
-@use '../../commons/config';
-@use '../../commons/core';
+@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/core';
 
 @mixin disabled {
 	outline: none;
