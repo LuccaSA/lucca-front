@@ -1,15 +1,25 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface GridsBasicStory {
+	reverse: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/Grids/Basic',
+	argTypes: {
+		reverse: {
+			control: {
+				type: 'boolean',
+			},
+			description: "Inverse l'ordre des éléments.",
+		},
+	},
 } as Meta;
 
 function getTemplate(args: GridsBasicStory): string {
+	const reverse = args.reverse ? `mod-reverse` : '';
 	return `
-	<div class="grid">
+	<div class="grid ${reverse}">
 		<div class="grid-xs6">
 			<div class="grid-demo">grid-xs6</div>
 		</div>
@@ -18,7 +28,7 @@ function getTemplate(args: GridsBasicStory): string {
 		</div>
 	</div>
 
-	<div class="grid">
+	<div class="grid ${reverse}">
 		<div class="grid-s4">
 			<div class="grid-demo">grid-s4</div>
 		</div>
@@ -27,7 +37,7 @@ function getTemplate(args: GridsBasicStory): string {
 		</div>
 	</div>
 
-	<div class="grid">
+	<div class="grid ${reverse}">
 		<div class="grid-m7">
 			<div class="grid-demo">grid-m7</div>
 		</div>
@@ -36,7 +46,7 @@ function getTemplate(args: GridsBasicStory): string {
 		</div>
 	</div>
 
-	<div class="grid">
+	<div class="grid ${reverse}">
 		<div class="grid-l3 grid-m6">
 			<div class="grid-demo">grid-l3 grid-m6</div>
 		</div>
@@ -67,4 +77,4 @@ const Template: Story<GridsBasicStory> = (args: GridsBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = { reverse: false };
