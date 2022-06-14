@@ -1,4 +1,4 @@
-@import "mappings";
+@import 'mappings';
 
 @function str-explode($string, $dem) {
 	$list: ();
@@ -7,14 +7,14 @@
 	@for $i from 1 through $sum {
 		$str: str-index($string, $dem);
 		@if str-length($string) >= 1 and $str == null {
-			$list: append($list,$string);
+			$list: append($list, $string);
 			$string: '';
 		}
 
 		@if type-of($str) == number {
-			$each: str-slice($string,0,($str - 1));
+			$each: str-slice($string, 0, ($str - 1));
 			$list: append($list, $each);
-			$string: str-slice($string,($str + 1), $sum);
+			$string: str-slice($string, ($str + 1), $sum);
 		}
 	}
 
@@ -22,9 +22,9 @@
 }
 
 @function str-camelcase($value) {
-	$words: str-explode($value, "_");
+	$words: str-explode($value, '_');
 	$list: ();
-	$return: "";
+	$return: '';
 	@for $i from 1 through length($words) {
 		$word: nth($words, $i);
 		@if $i > 1 {
@@ -38,8 +38,19 @@
 @mixin buildIconClasses {
 	@each $ligature, $char in $mappings {
 		$class: str-camelcase($ligature);
+
 		&.icon-#{$class}::before {
-			content: "#{$char}";
+			@supports (content: '*' / '') {
+				content: '#{$char}'/'';
+			}
+
+			@supports not (content: '*' / '') {
+				content: '#{$char}';
+			}
 		}
 	}
+}
+
+@mixin size($size) {
+	font-size: calc(var(--sizes-#{$size}-font-size) * 1.25);
 }

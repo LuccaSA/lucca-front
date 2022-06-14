@@ -1,5 +1,6 @@
-$font-name: "Lucca icons" !default;
-@import "mappings";
+$font-name: 'Lucca icons' !default;
+
+@import 'mappings';
 
 @mixin makeIcon($ligature) {
 	@if map-has-key($mappings, $ligature) {

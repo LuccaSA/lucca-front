@@ -1,4 +1,28 @@
 .lucca-icon {
 	@extend %lucca-icon;
 	@include buildIconClasses;
+
+	&.size-smaller {
+		@include size('smaller');
+	}
+
+	&.size-small {
+		@include size('small');
+	}
+
+	&.size-standard {
+		@include size('standard');
+	}
+
+	&.size-big {
+		@include size('big');
+	}
+
+	&.size-bigger {
+		@include size('bigger');
+	}
+
+	&.size-biggest {
+		@include size('biggest');
+	}
 }
