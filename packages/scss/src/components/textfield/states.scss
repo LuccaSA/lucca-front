@@ -1,4 +1,4 @@
-@use '../../commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/form';
 
 @mixin inputHover {
 	background-color: var(--palettes-100, var(--components-textfield-hover-background));

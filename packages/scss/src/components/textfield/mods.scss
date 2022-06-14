@@ -1,5 +1,5 @@
-@use '../../commons/utils/form';
-@use '../../../../icons/src/mixins' as icon;
+@use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin password {
 	.textfield-suffix {

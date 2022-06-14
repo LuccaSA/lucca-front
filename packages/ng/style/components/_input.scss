@@ -1,5 +1,5 @@
-@use '../../../scss/src/components/field/exports' as field;
-@use '../../../scss/src/components/form/exports' as form;
+@use '@lucca-front/scss/src/components/field/exports' as field;
+@use '@lucca-front/scss/src/components/form/exports' as form;
 
 .textfield {
 	.textfield-input.ng-invalid.ng-touched {

@@ -1,6 +1,6 @@
-@use '../../../../icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/mixins' as icon;
 @use 'sass:color';
-@use '../../commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin sortable {
 	cursor: pointer;

@@ -9,7 +9,7 @@ $font-name: 'Lucca icons' !default;
 		src: url('#{$font-path}.eot');
 		src: url('#{$font-path}.eot'), url('#{$font-path}.svg'), url('#{$font-path}.woff'), url('#{$font-path}.ttf');
 
-		/* Enable Ligatures ================ */
+		// Enable Ligatures
 		letter-spacing: normal;
 		-webkit-font-feature-settings: 'liga';
 		-moz-font-feature-settings: 'liga=1';

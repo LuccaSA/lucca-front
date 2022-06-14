@@ -1,4 +1,4 @@
-@use '../keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 
 @mixin component {
 	@keyframes progress {

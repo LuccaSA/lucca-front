@@ -1,5 +1,5 @@
-@use '../../commons/utils/media';
-@use '../keyframe';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 @use 'exports' as *;
 
 .navSide {

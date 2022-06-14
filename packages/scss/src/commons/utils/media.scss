@@ -1,7 +1,7 @@
 @use 'sass:string';
 @use 'sass:map';
 @use 'sass:math';
-@use '../config';
+@use '@lucca-front/scss/src/commons/config';
 
 @mixin largerThan($breakpoint, $reversed: false) {
 	$reverse: '';

@@ -1,4 +1,4 @@
-@use '../../../../icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin size {
 	font-size: var(--components-button-font-size);
@@ -47,7 +47,7 @@
 			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
 				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
 			background: var(--palettes-50, var(--palettes-grey-50));
-			outline: none
+			outline: none;
 		}
 
 		&:active {

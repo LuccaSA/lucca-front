@@ -1,5 +1,5 @@
-@use '../../commons/utils/reset';
-@use '../../../../icons/src/mixins' as icon;
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/mixins' as icon;
 
 @mixin small {
 	.timeline-step-title {
@@ -48,7 +48,7 @@
 		position: relative;
 		width: 100%;
 
-		//line
+		// line
 		&:not(:last-child)::after {
 			content: '';
 			display: block;

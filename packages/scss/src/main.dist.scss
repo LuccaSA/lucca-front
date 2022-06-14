@@ -1,2 +1,2 @@
-@use 'commons'; // Common variables
-@use 'components'; // SCSS components
+@forward 'commons'; // Common variables
+@forward 'components'; // SCSS components

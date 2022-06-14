@@ -22,7 +22,7 @@
 	box-sizing: border-box;
 }
 
-html {
+:root {
 	@include core.cssvars('commons-border-radius', config.$borderRadius);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-animations-durations', config.$durations);
@@ -54,7 +54,9 @@ html {
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-transition: all 150ms ease;
+}
 
+html {
 	height: -webkit-fill-available;
 }
 

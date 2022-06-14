@@ -1,5 +1,5 @@
-@use '../../../../icons/src/mixins' as icon;
-@use '../../commons/utils/a11y';
+@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component {
 	display: block;
