@@ -19,7 +19,7 @@
     &:not(.has-selection) {
       display: none;
     }
-    /* [LF NEXT] Utilisation de _theme non gérée par la migration automatique */
-    /* column-gap: _theme("spacings." + $name) #{$suffix} */
+    // [LF NEXT] Utilisation de _theme non gérée par la migration automatique
+    // column-gap: _theme("spacings." + $name) #{$suffix}
   }
 }

@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+// You can add global styles to this file, and also import other style files
 
 $noCssVar: true;
 
@@ -42,7 +42,7 @@ $noCssVar: true;
 	'components/workspaceSelection',
 	'scss/shame';
 
-//Beamer
+// Beamer
 @import "@lucca/beamer/dist/lucca-beamer.min.css";
 
 :root {

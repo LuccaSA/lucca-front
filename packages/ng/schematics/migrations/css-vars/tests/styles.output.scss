@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+// You can add global styles to this file, and also import other style files
 @forward '@lucca-front/scss/src/commons';
 @forward '@lucca-front/scss/src/components';
 @forward '@lucca-front/ng/style/main';
@@ -41,7 +41,7 @@
 	'components/workspaceSelection',
 	'scss/shame';
 
-/*Beamer*/
+// Beamer
 @import "@lucca/beamer/dist/lucca-beamer.min.css";
 
 #lucca-banner {

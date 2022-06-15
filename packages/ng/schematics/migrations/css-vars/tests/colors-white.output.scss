@@ -3,9 +3,9 @@
   fill: var(--palettes-primary-700);
   border: 2px solid var(--palettes-grey-900);
 
-  /*Legacy*/
+  // Legacy
   color: var(--palettes-grey-700);
   color: var(--palettes-grey-700);
-  /*[LF NEXT] Fonctions de couleur + variables scss ne sont pas gérées.*/
-  /*color: lighten(var(--palettes-primary-200), 10%)*/
+  // [LF NEXT] Fonctions de couleur + variables scss ne sont pas gérées.
+  // color: lighten(var(--palettes-primary-200), 10%)
 }

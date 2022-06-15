@@ -1,0 +1,5 @@
+@import '@lucca-front/scss/src/icons';
+
+.cleemy-icon {
+	@include iconSizing('bigger');
+}

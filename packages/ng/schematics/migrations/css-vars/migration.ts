@@ -1,8 +1,9 @@
-import { parse } from 'postcss-scss';
+import { parse, stringify } from 'postcss-scss';
 import { mixinRegistry } from './mixin-registry';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color';
 import { updateElevation } from './updaters/elevation';
 import { updateGetSetFunctions } from './updaters/get-set';
+import { updateIconSizing } from './updaters/icon-sizing';
 import { removeIE11ThemeSupport } from './updaters/ie11';
 import { updateMainImport } from './updaters/main-import';
 import { replaceIncludedMixin, replaceFuncMixinsWithoutInclude } from './updaters/mixins';
@@ -19,6 +20,7 @@ export function migrateFile(content: string): string {
 
 	removeScssPlaceholders(root);
 	removeIE11ThemeSupport(root);
+	updateIconSizing(root);
 	updateColorMixin(root);
 	updateThemeMixin(root);
 	updateGetSetFunctions(root);
@@ -47,7 +49,7 @@ export function migrateFile(content: string): string {
 	replaceIncludedMixin(root, mixinRegistry);
 	replaceFuncMixinsWithoutInclude(root, mixinRegistry);
 
-	return root.toResult().css;
+	return root.toResult({ syntax: { stringify } }).css;
 }
 
 interface AngularJsonFile {

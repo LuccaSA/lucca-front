@@ -14,7 +14,7 @@ export function updateThemeMixin(root: Root) {
 			}),
 		);
 
-		// -_theme("spacings.smallest") => calc(var(--spacings-smallest) * -1)
+		// -_theme("spacings.smallest") => calc(var(--spacings-smallest)  -1)
 		valueNode.walkFunction('-_theme', (funcNode) =>
 			updateThemeNode(funcNode, decl, (themeVar) => {
 				funcNode.value = 'calc';

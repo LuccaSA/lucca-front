@@ -1,4 +1,4 @@
-import { AtRule, Comment, Container, Document, Node, Root } from 'postcss';
+import { AtRule, Comment, Container, Declaration, Document, Node, Root } from 'postcss';
 import valueParser, { FunctionNode, Node as ValueParserNode, ParsedValue } from 'postcss-value-parser';
 
 export function removeContainerIfEmpty(node: Container | undefined): void {
@@ -97,11 +97,26 @@ export function removeImportNode(atRule: AtRule, name: string): boolean {
 	return false;
 }
 
-export function commentNode(node: Node, comment: string): void {
-	const commentNode = new Comment({ text: `[LF NEXT] ${comment}` });
-	node.before(commentNode);
-	commentNode.after(new Comment({ text: node.toString() }));
-	node.remove();
+export function commentNode(node: AtRule | Declaration, comment: string): void {
+	const commentNode = new Comment({ text: `[LF NEXT] ${comment}`, raws: { inline: true, right: '' } });
+
+	const leadingSpaceOrigin = node.raws.before?.match(/ +/)?.[0].length ?? 0;
+
+	const commentCodeNodes = node
+		.toString()
+		.split('\n')
+		.map((text) => {
+			const leadingSpaces = (text.match(/^ +/)?.[0] || '').slice(leadingSpaceOrigin) + ' ';
+			return new Comment({ text: text.trim(), raws: { inline: true, right: '', left: leadingSpaces } });
+		});
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const originalBefore = node.raws.before;
+
+	node.replaceWith(commentNode, ...commentCodeNodes);
+
+	commentNode.raws.before = originalBefore;
+	commentCodeNodes[0].raws.before = commentCodeNodes[0].raws.before?.replace(/\n+/, '\n');
 }
 
 export class ValueNode {

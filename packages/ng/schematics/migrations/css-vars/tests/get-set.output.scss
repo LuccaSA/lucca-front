@@ -1,21 +1,21 @@
 .mod-outlined {
-  /* [LF NEXT] Passer directement par des variables CSS. */
-  /* background-color: _safeGet($palette, '100') */
-  /* [LF NEXT] Passer directement par des variables CSS. */
-  /* color: _safeGet($palette, '800') */
+  // [LF NEXT] Passer directement par des variables CSS.
+  // background-color: _safeGet($palette, '100')
+  // [LF NEXT] Passer directement par des variables CSS.
+  // color: _safeGet($palette, '800')
 }
 
 .tag {
-  /* [LF NEXT] Passer directement par des variables CSS. */
-  /* @each $name, $palette in _getMap('marks') {
-    &.palette-mark#{to-upper-case($name)} {
-      background-color: _safeGet($palette, '800');
-      color: white;
-    }
-  } */
+  // [LF NEXT] Passer directement par des variables CSS.
+  // @each $name, $palette in _getMap('marks') {
+  //   &.palette-mark#{to-upper-case($name)} {
+  //     background-color: _safeGet($palette, '800');
+  //     color: white;
+  //   }
+  // }
 }
 
-/* [LF NEXT] Créer directement des variables CSS. */
-/* $theme: _set($theme, "palettes", $palettes) */
-/* [LF NEXT] Créer directement des variables CSS. */
-/* $theme: _set($theme, "colors", $colors) */
+// [LF NEXT] Créer directement des variables CSS.
+// $theme: _set($theme, "palettes", $palettes)
+// [LF NEXT] Créer directement des variables CSS.
+// $theme: _set($theme, "colors", $colors)
