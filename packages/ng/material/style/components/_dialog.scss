@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 .mat-dialog-container {
 	@extend .card;

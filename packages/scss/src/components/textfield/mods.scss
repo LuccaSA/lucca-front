@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/form';
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin password {
 	.textfield-suffix {
@@ -132,7 +132,7 @@
 
 @mixin search {
 	&::after {
-		@include icon.makeIcon('search');
+		@include icon.generate('search');
 
 		color: var(--palettes-primary-500);
 		position: absolute;

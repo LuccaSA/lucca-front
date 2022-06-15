@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	display: block;
@@ -20,7 +20,7 @@
 			}
 
 			&::before {
-				@include icon.makeIcon('chevron_east');
+				@include icon.generate('chevron_east');
 
 				font-size: var(--sizes-smaller-font-size);
 				margin-right: var(--spacings-smallest);

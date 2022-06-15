@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	display: block;
@@ -20,7 +20,7 @@
 			cursor: pointer;
 
 			&::before {
-				@include icon.makeIcon('cross');
+				@include icon.generate('cross');
 
 				align-items: center;
 				background-color: var(--palettes-grey-500);

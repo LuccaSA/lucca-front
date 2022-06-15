@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin clickable {
 	transition-duration: var(--commons-animations-durations-fast);
@@ -30,7 +30,7 @@
 		cursor: move;
 
 		&::before {
-			@include icon.makeIcon('drag');
+			@include icon.generate('drag');
 
 			vertical-align: middle;
 		}

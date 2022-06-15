@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	box-shadow: var(--commons-elevations-elevation-1);
@@ -54,7 +54,7 @@
 			}
 
 			&::before {
-				@include icon.makeIcon('arrow_full_west');
+				@include icon.generate('arrow_full_west');
 			}
 		}
 

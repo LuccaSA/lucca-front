@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	@at-root {
@@ -18,7 +18,7 @@
 
 			&:not(:first-child) {
 				&::before {
-					@include icon.makeIcon('chevron_east');
+					@include icon.generate('chevron_east');
 
 					padding: 0 var(--spacings-smallest);
 				}

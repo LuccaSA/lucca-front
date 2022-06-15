@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	@keyframes toast {
@@ -59,7 +59,7 @@
 		}
 
 		&::after {
-			@include icon.makeIcon('cross');
+			@include icon.generate('cross');
 		}
 	}
 }

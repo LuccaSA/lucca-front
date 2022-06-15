@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin selectInputStyle {
 	:host {
@@ -32,7 +32,7 @@
 		padding: 0;
 
 		&::after {
-			@include icon.makeIcon('arrow_south');
+			@include icon.generate('arrow_south');
 
 			color: var(--palettes-700, var(--components-select-default-palette-700));
 			bottom: var(--components-select-input-padding-vertical);

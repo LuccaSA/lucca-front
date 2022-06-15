@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin small {
 	font-size: var(--sizes-small-font-size);
@@ -126,7 +126,7 @@
 		}
 
 		&::before {
-			@include icon.makeIcon('arrow_south');
+			@include icon.generate('arrow_south');
 
 			margin-right: var(--spacings-smaller);
 			transition-duration: var(--commons-animations-durations-fast);
@@ -170,7 +170,7 @@
 			}
 
 			&::after {
-				@include icon.makeIcon('drag');
+				@include icon.generate('drag');
 
 				color: var(--palettes-grey-400);
 				height: 100%;

@@ -1,4 +1,2 @@
-@import 'font';
-@import 'partials';
-@import 'classes';
-@import 'icons';
+@forward 'commons';
+@forward 'icon';

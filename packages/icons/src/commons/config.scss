@@ -1,4 +1,7 @@
-$mappings: (
+$font-path: '//cdn.lucca.fr/lucca-front/icons/next/lucca-icons' !default;
+$font-name: 'Lucca icons' !default;
+
+$icons: (
 	'moneybag': '\e900',
 	'save': '\e901',
 	'establishment': '\e903',
@@ -266,4 +269,4 @@ $mappings: (
 	'priority_medium': '\e974',
 	'globe': '\e97a',
 	'confirm': '\e97d',
-);
+) !default;

@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin compact {
 	.breadcrumbs-list-item {
@@ -15,7 +15,7 @@
 					align-items: center;
 
 					&::before {
-						@include icon.makeIcon('format_undo');
+						@include icon.generate('format_undo');
 
 						padding-right: var(--spacings-smallest);
 					}

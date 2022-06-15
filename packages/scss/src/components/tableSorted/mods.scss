@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 @use 'sass:color';
 @use '@lucca-front/scss/src/commons/utils/reset';
 
@@ -6,7 +6,7 @@
 	cursor: pointer;
 
 	&::after {
-		@include icon.makeIcon('arrow_full_north');
+		@include icon.generate('arrow_full_north');
 
 		opacity: 0;
 		margin: 0;
@@ -48,7 +48,7 @@
 	}
 
 	&::before {
-		@include icon.makeIcon('arrow_full_north');
+		@include icon.generate('arrow_full_north');
 
 		opacity: 0;
 		margin: 0;

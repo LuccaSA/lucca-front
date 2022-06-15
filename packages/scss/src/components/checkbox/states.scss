@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 
 @mixin disabled {
@@ -25,7 +25,7 @@
 	~ .checkbox-mixed ~ .checkbox-label,
 	~ .checkbox-label {
 		&::before {
-			@include icon.makeIcon('partial');
+			@include icon.generate('partial');
 		}
 	}
 }

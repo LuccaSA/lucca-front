@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	background-color: var(--palettes-primary-700);
@@ -32,7 +32,7 @@
 			cursor: pointer;
 
 			&::before {
-				@include icon.makeIcon('cross');
+				@include icon.generate('cross');
 			}
 
 			&:hover {
