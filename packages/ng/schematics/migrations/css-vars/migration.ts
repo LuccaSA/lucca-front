@@ -47,3 +47,49 @@ export function migrateFile(content: string): string {
 
 	return root.toResult().css;
 }
+
+interface AngularJsonFile {
+	projects: {
+		[projectKey: string]: {
+			architect: {
+				[architectKey: string]: {
+					options?: {
+						stylePreprocessorOptions?: {
+							includePaths?: string[];
+						};
+					};
+				};
+			};
+		};
+	};
+}
+
+export function migrateAngularJsonFile(content: string): string {
+	const root = JSON.parse(content) as AngularJsonFile;
+	const projectNodes = root?.projects ? Object.keys(root.projects) : [];
+
+	if (!projectNodes?.length) {
+		console.error('no projects were found');
+		return '';
+	}
+
+	for (const projectNode of projectNodes) {
+		const project = root.projects[projectNode];
+		const architectNodes = project?.architect ? Object.keys(project.architect) : [];
+
+		if (!architectNodes?.length) {
+			console.error(`no projects > ${projectNode} > architect were found`);
+			return '';
+		}
+
+		for (const architectNode of architectNodes) {
+			const architect = project.architect[architectNode];
+
+			if (architect?.options?.stylePreprocessorOptions?.includePaths) {
+				delete architect.options.stylePreprocessorOptions;
+			}
+		}
+	}
+
+	return JSON.stringify(root, undefined, '\t');
+}

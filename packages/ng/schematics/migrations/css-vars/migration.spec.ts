@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import * as fs from 'fs';
 import * as path from 'path';
-import { migrateFile } from './migration';
+import { migrateAngularJsonFile, migrateFile } from './migration';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', '../migrations.json'));
 
@@ -32,6 +32,26 @@ describe('Migration', () => {
 			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
 		});
 	}
+});
+
+describe('Migration Angular JSON file', () => {
+	it('should handle angular json file', () => {
+		// Arrange
+		const input = fs
+			.readFileSync(path.join(testsRoot, `angular.input.json`))
+			.toString()
+			.replace(/\r/g, '');
+		const expected = fs
+			.readFileSync(path.join(testsRoot, `angular.output.json`))
+			.toString()
+			.replace(/\r/g, '');
+
+		// Act
+		const actual = migrateAngularJsonFile(input);
+
+		//Assert
+		expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
+	});
 });
 
 describe('CSS Vars Migration', () => {
