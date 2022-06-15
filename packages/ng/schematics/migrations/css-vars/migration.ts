@@ -5,7 +5,7 @@ import { updateElevation } from './updaters/elevation';
 import { updateGetSetFunctions } from './updaters/get-set';
 import { removeIE11ThemeSupport } from './updaters/ie11';
 import { updateMainImport } from './updaters/main-import';
-import { replaceMixin } from './updaters/mixins';
+import { replaceIncludedMixin, replaceFuncMixinsWithoutInclude } from './updaters/mixins';
 import { removeScssPlaceholders } from './updaters/remove-scss-placeholder';
 import { updateThemeMixin } from './updaters/theme';
 import { removeContainerIfEmpty, removeImportNode } from './utils';
@@ -44,7 +44,8 @@ export function migrateFile(content: string): string {
 		}
 	});
 
-	replaceMixin(root, mixinRegistry);
+	replaceIncludedMixin(root, mixinRegistry);
+	replaceFuncMixinsWithoutInclude(root, mixinRegistry);
 
 	return root.toResult().css;
 }

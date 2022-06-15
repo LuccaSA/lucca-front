@@ -44,6 +44,7 @@ mixinRegistry
 		},
 		'@lucca-front/scss/src/commons/utils/reset',
 	)
-	.registerMixin(['mask'], '@lucca-front/scss/src/commons/utils/a11y');
+	.registerMixin(['mask'], '@lucca-front/scss/src/commons/utils/a11y')
+	.registerMixin(['fakeBorderOverlay'], '@lucca-front/scss/src/commons/utils/form');
 
 export { mixinRegistry };

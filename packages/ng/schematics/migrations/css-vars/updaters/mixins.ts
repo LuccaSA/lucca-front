@@ -1,13 +1,48 @@
 import { Root } from 'postcss';
-import alueParser from 'postcss-value-parser';
+import valueParser from 'postcss-value-parser';
 import { MixinRegistry } from '../mixin-registry';
 import { addMixinImport, commentNode } from '../utils';
 
-export function replaceMixin(root: Root, registry: MixinRegistry) {
+interface IFuncMixinWithoutInclude {
+	legacy: string;
+	register: string;
+}
+
+const funcMixins: IFuncMixinWithoutInclude[] = [
+	{
+		legacy: 'fakeborderoverlay',
+		register: 'fakeBorderOverlay',
+	},
+];
+
+export function replaceFuncMixinsWithoutInclude(root: Root, registry: MixinRegistry) {
+	const neededNamespaceByImport: Record<string, string | undefined> = {};
+
+	root.walkDecls((decl) => {
+		for (const specialMixin of funcMixins) {
+			if (!decl.value.includes(specialMixin.legacy)) {
+				continue;
+			}
+
+			const mixin = registry.getByName(specialMixin.register);
+			if (mixin) {
+				neededNamespaceByImport[mixin.import] = mixin.namespace;
+				decl.value = decl.value.replace(specialMixin.legacy, `${mixin.prefix}.${mixin.newName}`);
+				continue;
+			}
+
+			commentNode(decl, 'Mixins avec fonction non gérée par la migration auto.');
+		}
+	});
+
+	updateMixinImport(root, neededNamespaceByImport);
+}
+
+export function replaceIncludedMixin(root: Root, registry: MixinRegistry) {
 	const neededNamespaceByImport: Record<string, string | undefined> = {};
 
 	root.walkAtRules('include', (rule) => {
-		rule.params = alueParser(rule.params)
+		rule.params = valueParser(rule.params)
 			.walk((node) => {
 				if (!['function', 'word'].includes(node.type)) {
 					return undefined;
@@ -27,6 +62,10 @@ export function replaceMixin(root: Root, registry: MixinRegistry) {
 			.toString();
 	});
 
+	updateMixinImport(root, neededNamespaceByImport);
+}
+
+function updateMixinImport(root: Root, neededNamespaceByImport: Record<string, string | undefined> = {}): void {
 	for (const [neededImport, namespace] of Object.entries(neededNamespaceByImport)) {
 		addMixinImport(root, neededImport, namespace);
 	}
