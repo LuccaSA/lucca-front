@@ -6,5 +6,6 @@
   /*Legacy*/
   color: var(--palettes-grey-700);
   color: var(--palettes-grey-700);
-  color: lighten(var(--palettes-primary-200), 10%);
+  /*[LF NEXT] Fonctions de couleur + variables scss ne sont pas gérées.*/
+  /*color: lighten(var(--palettes-primary-200), 10%)*/
 }

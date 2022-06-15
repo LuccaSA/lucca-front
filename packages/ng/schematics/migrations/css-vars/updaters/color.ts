@@ -1,5 +1,5 @@
 import { Root } from 'postcss';
-import { ValueNode } from '../utils';
+import { commentNode, ValueNode } from '../utils';
 
 const legacyLevelToLevel: Partial<Record<string, string>> = {
 	'see-through': '50',
@@ -30,5 +30,50 @@ export function updateColorMixin(root: Root) {
 		});
 
 		decl.value = valueNode.toString();
+	});
+}
+
+export function commentSassFuncWithVar(root: Root) {
+	const blackListSassFuncs = [
+		'adjust-hue',
+		'alpha',
+		'opacity',
+		'red',
+		'green',
+		'blue',
+		'hue',
+		'saturation',
+		'lightness',
+		'blackness',
+		'whiteness',
+		'change',
+		'adjust',
+		'scale',
+		'complement',
+		'darken',
+		'lighten',
+		'desaturate',
+		'saturate',
+		'grayscale',
+		'hwb',
+		'ie-hex-str',
+		'invert',
+		'mix',
+		'opacity',
+		'fade-in',
+		'fade-out',
+		'transparentize',
+	];
+
+	root.walkDecls((decl) => {
+		for (const blackListSassFunc of blackListSassFuncs) {
+			const isMatching = decl.value.includes(`${blackListSassFunc}(var`);
+
+			if (!isMatching) {
+				continue;
+			}
+
+			commentNode(decl, 'Fonctions de couleur + variables scss ne sont pas gérées.');
+		}
 	});
 }

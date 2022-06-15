@@ -1,6 +1,6 @@
 import { parse } from 'postcss-scss';
 import { mixinRegistry } from './mixin-registry';
-import { updateColorMixin } from './updaters/color';
+import { commentSassFuncWithVar, updateColorMixin } from './updaters/color';
 import { updateElevation } from './updaters/elevation';
 import { updateGetSetFunctions } from './updaters/get-set';
 import { removeIE11ThemeSupport } from './updaters/ie11';
@@ -24,6 +24,7 @@ export function migrateFile(content: string): string {
 	updateGetSetFunctions(root);
 	updateElevation(root);
 	updateMainImport(root);
+	commentSassFuncWithVar(root);
 
 	root.walkAtRules('include', (atRule) => {
 		if (atRule.params === 'ie11') {
