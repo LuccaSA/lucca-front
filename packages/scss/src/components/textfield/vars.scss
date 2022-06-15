@@ -22,9 +22,9 @@
 	--components-textfield-sizes-longest: 28rem;
 
 	--components-textfield-material-padding-top: 1rem;
-	--components-textfield-material-default-palette-color: #9299b0;
+	--components-textfield-material-default-palette-color: var(--palettes-grey-600);
 	--components-textfield-material-border-color: #ccc;
-	--components-textfield-material-label-color: #a6a6a6;
+	--components-textfield-material-label-color: var(--palettes-grey-600);
 	--components-textfield-material-label-font-size: 1rem;
 	--components-textfield-material-suffix-padding-right: 1rem;
 
