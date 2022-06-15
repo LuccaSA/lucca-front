@@ -17,6 +17,11 @@ export function updateGetSetFunctions(root: Root) {
 			return false;
 		});
 
+		valueNode.walkFunction('_set', () => {
+			commentNode(decl, 'Créer directement des variables CSS.');
+			return false;
+		});
+
 		decl.value = valueNode.toString();
 	});
 }

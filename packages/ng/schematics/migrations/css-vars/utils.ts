@@ -8,7 +8,19 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 
 	if (!node.nodes.length) {
 		const { parent } = node;
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+		const semicolon = node.raws.semicolon;
+
+		const nextOrParentNode = node.next() || node.parent;
 		node.remove();
+
+		if (semicolon) {
+			if (nextOrParentNode) {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+				nextOrParentNode.raws.semicolon = semicolon;
+			}
+		}
 
 		if (parent instanceof Document) {
 			return;

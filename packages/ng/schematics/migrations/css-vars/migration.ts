@@ -14,7 +14,7 @@ export function migrateFile(content: string): string {
 	const root = parse(content);
 
 	root.walkAtRules('import', (rule) => {
-		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', 'theming', 'theme'].some((name) => removeImportNode(rule, name));
+		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) => removeImportNode(rule, name));
 	});
 
 	removeScssPlaceholders(root);
