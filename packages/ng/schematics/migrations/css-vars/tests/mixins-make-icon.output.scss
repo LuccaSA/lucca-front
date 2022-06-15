@@ -1,8 +1,8 @@
-@use '@lucca-front/icons/src/_mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 .timeline-step-title {
   &::after {
-    @include icon.makeIcon('tick');
+    @include icon.generate('tick');
     display: flex;
   }
 }

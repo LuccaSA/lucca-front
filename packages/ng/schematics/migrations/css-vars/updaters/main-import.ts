@@ -1,5 +1,5 @@
 import { AtRule, Node, Root } from 'postcss';
-import { addImport, removeImportNode } from '../utils';
+import { addImport, removeImportNode } from '../lib/scss-ast';
 
 export function updateMainImport(root: Root) {
 	let hasMainScss = false;

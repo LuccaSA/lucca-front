@@ -1,5 +1,5 @@
 import { Root } from 'postcss';
-import { ValueNode } from '../utils';
+import { ScssValueAst } from '../lib/scss-value-ast';
 
 /**
  * Replace: calc(100vh - #{_theme(\"commons.banner-height\")} - 3.5rem)
@@ -7,10 +7,16 @@ import { ValueNode } from '../utils';
  */
 export function removeScssPlaceholders(root: Root) {
 	root.walkDecls((decl) => {
-		const valueNode = new ValueNode(decl.value);
+		const valueNode = new ScssValueAst(decl.value);
 		valueNode.walkFunction(/.*/, (func) => {
 			func.value = func.value.replace(/#\{/g, '');
-			func.nodes = func.nodes.filter((child) => child.type !== 'word' || child.value !== '}').map((child) => ({ ...child, value: child.value.replace(/\}/g, '') }));
+			func.nodes = func.nodes
+				.filter((child) => child.type !== 'word' || child.value !== '}')
+				.map((child) =>
+					child.value.startsWith('#{') && child.value.endsWith('}')
+						? child // Blocks like "#{$publicHoliday-background-color}" should be kept intact as they do not use functions inside
+						: { ...child, value: child.value.replace(/\}/g, '') },
+				);
 		});
 		decl.value = valueNode.toString();
 	});

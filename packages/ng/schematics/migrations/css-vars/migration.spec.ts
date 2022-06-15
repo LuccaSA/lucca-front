@@ -2,17 +2,17 @@ import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import * as fs from 'fs';
 import * as path from 'path';
-import { migrateAngularJsonFile, migrateFile } from './migration';
+import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile } from './migration';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', '../migrations.json'));
 
 const testsRoot = path.join(__dirname, 'tests');
 const files = fs.readdirSync(testsRoot);
-const inputFiles = files.filter((f) => f.endsWith('.input.scss'));
-const outputFiles = files.filter((f) => f.endsWith('.output.scss'));
-const cases = inputFiles.map((f) => f.replace('.input.scss', ''));
 
-describe('Migration', () => {
+describe('SCSS Migration', () => {
+	const inputScssFiles = files.filter((f) => f.endsWith('.input.scss'));
+	const cases = inputScssFiles.map((f) => f.replace('.input.scss', ''));
+
 	for (const testCase of cases) {
 		it('should handle ' + testCase, () => {
 			// Arrange
@@ -26,7 +26,32 @@ describe('Migration', () => {
 				.replace(/\r/g, '');
 
 			// Act
-			const actual = migrateFile(input);
+			const actual = migrateScssFile(input);
+
+			//Assert
+			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
+		});
+	}
+});
+
+describe('HTML Migration', () => {
+	const inputHtmlFiles = files.filter((f) => f.endsWith('.input.html'));
+	const cases = inputHtmlFiles.map((f) => f.replace('.input.html', ''));
+
+	for (const testCase of cases) {
+		it('should handle ' + testCase, () => {
+			// Arrange
+			const input = fs
+				.readFileSync(path.join(testsRoot, `${testCase}.input.html`))
+				.toString()
+				.replace(/\r/g, '');
+			const expected = fs
+				.readFileSync(path.join(testsRoot, `${testCase}.output.html`))
+				.toString()
+				.replace(/\r/g, '');
+
+			// Act
+			const actual = migrateHTMLFile(input);
 
 			//Assert
 			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
@@ -37,14 +62,8 @@ describe('Migration', () => {
 describe('Migration Angular JSON file', () => {
 	it('should handle angular json file', () => {
 		// Arrange
-		const input = fs
-			.readFileSync(path.join(testsRoot, `angular.input.json`))
-			.toString()
-			.replace(/\r/g, '');
-		const expected = fs
-			.readFileSync(path.join(testsRoot, `angular.output.json`))
-			.toString()
-			.replace(/\r/g, '');
+		const input = fs.readFileSync(path.join(testsRoot, `angular.input.json`)).toString().replace(/\r/g, '');
+		const expected = fs.readFileSync(path.join(testsRoot, `angular.output.json`)).toString().replace(/\r/g, '');
 
 		// Act
 		const actual = migrateAngularJsonFile(input);
@@ -57,8 +76,10 @@ describe('Migration Angular JSON file', () => {
 describe('CSS Vars Migration', () => {
 	it('should update style files', async () => {
 		const tree = new UnitTestTree(Tree.empty());
+		const inputs = files.filter((f) => f.includes('.input.'));
+		const outputs = files.filter((f) => f.includes('.output.'));
 
-		for (const file of inputFiles) {
+		for (const file of inputs) {
 			tree.create(file.replace('.input.', '.'), fs.readFileSync(path.join(testsRoot, file)).toString().replace(/\r/g, ''));
 		}
 
@@ -66,9 +87,9 @@ describe('CSS Vars Migration', () => {
 		// migration-v9-css-vars is the name of the migration, which is defined in the migration.json file
 		await schematicRunner.runSchematicAsync('migration-v9-css-vars', {}, tree).toPromise();
 
-		expect(tree.files.length).toBe(inputFiles.length);
+		expect(tree.files.length).toBe(inputs.length);
 
-		for (const file of outputFiles) {
+		for (const file of outputs) {
 			const filePath = file.replace('.output.', '.');
 			expect(tree.exists(filePath)).toBe(true);
 

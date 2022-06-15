@@ -1,5 +1,5 @@
 import { AtRule, Comment, Container, Declaration, Document, Node, Root } from 'postcss';
-import valueParser, { FunctionNode, Node as ValueParserNode, ParsedValue } from 'postcss-value-parser';
+import { ScssValueAst } from './scss-value-ast';
 
 export function removeContainerIfEmpty(node: Container | undefined): void {
 	if (!node) {
@@ -67,7 +67,7 @@ export function addImport(root: Root, atRule: AtRule, afterNode?: Node) {
  */
 export function removeImportNode(atRule: AtRule, name: string): boolean {
 	if (atRule.params.includes(name)) {
-		const parsed = valueParser(atRule.params);
+		const parsed = new ScssValueAst(atRule.params);
 		const imports = parsed.nodes.filter((n) => n.type === 'string');
 
 		if (imports.length === 1) {
@@ -117,37 +117,4 @@ export function commentNode(node: AtRule | Declaration, comment: string): void {
 
 	commentNode.raws.before = originalBefore;
 	commentCodeNodes[0].raws.before = commentCodeNodes[0].raws.before?.replace(/\n+/, '\n');
-}
-
-export class ValueNode {
-	private parsed: ParsedValue;
-
-	public get nodes(): ValueParserNode[] {
-		return this.parsed.nodes;
-	}
-
-	constructor(value: string) {
-		this.parsed = valueParser(value);
-	}
-
-	public toString(): string {
-		return this.parsed.toString();
-	}
-
-	public walkFunction(functionFilter: string | RegExp, callback: (funcNode: FunctionNode) => void | boolean): void {
-		this.parsed.walk((node) => {
-			if (node.type !== 'function') {
-				return;
-			}
-			if (!this.matchFilter(node.value, functionFilter)) {
-				return;
-			}
-
-			return callback(node);
-		});
-	}
-
-	private matchFilter(value: string, filter: string | RegExp): boolean {
-		return typeof filter === 'string' ? value === filter : !!value.match(filter);
-	}
 }

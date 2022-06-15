@@ -1,5 +1,6 @@
 import { Root } from 'postcss';
-import { commentNode, ValueNode } from '../utils';
+import { commentNode } from '../lib/scss-ast';
+import { ScssValueAst } from '../lib/scss-value-ast';
 
 const legacyLevelToLevel: Partial<Record<string, string>> = {
 	'see-through': '50',
@@ -14,18 +15,18 @@ const legacyLevelToLevel: Partial<Record<string, string>> = {
 
 export function updateColorMixin(root: Root) {
 	root.walkDecls((decl) => {
-		const valueNode = new ValueNode(decl.value);
+		const valueNode = new ScssValueAst(decl.value);
 
 		valueNode.walkFunction('_color', (funcNode) => {
 			const [color, legacyLevel] = funcNode.nodes[0].value.split('.');
 			funcNode.value = 'var';
 
 			if (color === 'white') {
-				funcNode.nodes = new ValueNode(`--colors-${color}-color`).nodes;
+				funcNode.nodes = new ScssValueAst(`--colors-${color}-color`).nodes;
 			} else {
 				let level = legacyLevel ?? funcNode.nodes[2]?.value ?? '700';
 				level = legacyLevelToLevel[level] ?? level;
-				funcNode.nodes = new ValueNode(`--palettes-${color}-${level}`).nodes;
+				funcNode.nodes = new ScssValueAst(`--palettes-${color}-${level}`).nodes;
 			}
 		});
 

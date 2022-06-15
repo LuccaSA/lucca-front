@@ -3,6 +3,7 @@
   // background-color: _safeGet($palette, '100')
   // [LF NEXT] Passer directement par des variables CSS.
   // color: _safeGet($palette, '800')
+  left: calc(var(--components-navSide-width) * -1);
 }
 
 .tag {
@@ -13,6 +14,8 @@
   //     color: white;
   //   }
   // }
+
+  left: var(--components-navSide-width);
 }
 
 // [LF NEXT] Créer directement des variables CSS.

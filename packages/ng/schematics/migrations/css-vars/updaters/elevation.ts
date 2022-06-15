@@ -1,9 +1,9 @@
 import { Declaration, Root } from 'postcss';
-import { ValueNode } from '../utils';
+import { ScssValueAst } from '../lib/scss-value-ast';
 
 export function updateElevation(root: Root) {
 	root.walkAtRules('include', (atRule) => {
-		const valueNode = new ValueNode(atRule.params);
+		const valueNode = new ScssValueAst(atRule.params);
 
 		valueNode.walkFunction('elevate', (funcNode) => {
 			const level = funcNode.nodes[0].value;

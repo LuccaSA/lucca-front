@@ -1,4 +1,6 @@
 import { parse, stringify } from 'postcss-scss';
+import { updateCssClassNames } from './lib/html-ast';
+import { removeContainerIfEmpty, removeImportNode } from './lib/scss-ast';
 import { mixinRegistry } from './mixin-registry';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color';
 import { updateElevation } from './updaters/elevation';
@@ -6,12 +8,11 @@ import { updateGetSetFunctions } from './updaters/get-set';
 import { updateIconSizing } from './updaters/icon-sizing';
 import { removeIE11ThemeSupport } from './updaters/ie11';
 import { updateMainImport } from './updaters/main-import';
-import { replaceIncludedMixin, replaceFuncMixinsWithoutInclude } from './updaters/mixins';
+import { replaceFuncMixinsWithoutInclude, replaceIncludedMixin } from './updaters/mixins';
 import { removeScssPlaceholders } from './updaters/remove-scss-placeholder';
 import { updateThemeMixin } from './updaters/theme';
-import { removeContainerIfEmpty, removeImportNode } from './utils';
 
-export function migrateFile(content: string): string {
+export function migrateScssFile(content: string): string {
 	const root = parse(content);
 
 	root.walkAtRules('import', (rule) => {
@@ -50,6 +51,14 @@ export function migrateFile(content: string): string {
 	replaceFuncMixinsWithoutInclude(root, mixinRegistry);
 
 	return root.toResult({ syntax: { stringify } }).css;
+}
+
+export function migrateHTMLFile(content: string): string {
+	return updateCssClassNames(content, {
+		'u-fontWeightBold': 'u-fontWeight600',
+		'u-order1': 'u-flexOrder1',
+		'u-order-1': 'u-flexOrderMinus1',
+	});
 }
 
 interface AngularJsonFile {

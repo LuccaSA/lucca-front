@@ -28,7 +28,7 @@ const mixinRegistry = new MixinRegistry();
 mixinRegistry
 	.registerMixin(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], '@lucca-front/scss/src/components/title')
 	.registerMixin({ loading: 'spinner' }, '@lucca-front/scss/src/commons/utils/loading')
-	.registerMixin(['makeIcon'], '@lucca-front/icons/src/_mixins', 'icon')
+	.registerMixin({ makeIcon: 'generate' }, '@lucca-front/icons/src/commons/utils/icon')
 	.registerMixin(
 		{
 			media_larger_than: 'largerThan',
@@ -48,3 +48,4 @@ mixinRegistry
 	.registerMixin(['fakeBorderOverlay'], '@lucca-front/scss/src/commons/utils/form');
 
 export { mixinRegistry };
+

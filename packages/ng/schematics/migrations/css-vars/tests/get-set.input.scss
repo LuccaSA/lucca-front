@@ -1,6 +1,7 @@
 .mod-outlined {
   background-color: _safeGet($palette, '100');
   color: _safeGet($palette, '800');
+  left: -_component('navSide.width');
 }
 
 .tag {
@@ -10,6 +11,8 @@
       color: white;
     }
   }
+
+  left: _component('navSide.width');
 }
 
 $theme: _set($theme, "palettes", $palettes);

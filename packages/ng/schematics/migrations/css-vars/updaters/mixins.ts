@@ -1,7 +1,7 @@
 import { Root } from 'postcss';
 import valueParser from 'postcss-value-parser';
+import { addMixinImport, commentNode } from '../lib/scss-ast';
 import { MixinRegistry } from '../mixin-registry';
-import { addMixinImport, commentNode } from '../utils';
 
 interface IFuncMixinWithoutInclude {
 	legacy: string;
