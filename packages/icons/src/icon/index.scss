@@ -1,6 +1,15 @@
+@use '@lucca-front/icons/src/commons/config';
+@use '@lucca-front/icons/src/commons/core';
+@use 'exports' as *;
+
 .lucca-icon {
-	@extend %lucca-icon;
-	@include buildIconClasses;
+	@include component;
+
+	@each $name, $content in config.$icons {
+		&.icon-#{core.camelize($name)} {
+			@include subComponent($content);
+		}
+	}
 
 	&.size-smaller {
 		@include size('smaller');

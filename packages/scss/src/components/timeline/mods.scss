@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin small {
 	.timeline-step-title {
@@ -163,7 +163,7 @@
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				@include icon.makeIcon('tick');
+				@include icon.generate('tick');
 				display: flex;
 			}
 		}
@@ -213,7 +213,7 @@
 					display: none;
 				}
 				.timeline-step-title-icon::before {
-					@include icon.makeIcon('plus');
+					@include icon.generate('plus');
 					display: flex;
 				}
 			}
@@ -300,7 +300,7 @@
 		}
 	}
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
-		@include icon.makeIcon('plus');
+		@include icon.generate('plus');
 		display: flex;
 		transition: box-shadow var(--commons-animations-durations-standard);
 	}

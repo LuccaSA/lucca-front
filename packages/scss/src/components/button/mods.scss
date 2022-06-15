@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin size {
 	font-size: var(--components-button-font-size);
@@ -156,7 +156,7 @@
 	min-width: 2rem;
 
 	&::before {
-		@include icon.makeIcon('arrow_south');
+		@include icon.generate('arrow_south');
 
 		height: 0;
 		vertical-align: text-top;

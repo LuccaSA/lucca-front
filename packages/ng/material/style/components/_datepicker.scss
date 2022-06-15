@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 
 .mat-datepicker-content {
@@ -20,7 +20,7 @@
 		width: auto;
 
 		&::after {
-      @include icon.makeIcon('calendar');
+      @include icon.generate('calendar');
 		}
 
 		mat-icon {

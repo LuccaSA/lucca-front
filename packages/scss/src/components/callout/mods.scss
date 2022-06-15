@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin icon {
 	padding-left: 3rem;
@@ -58,7 +58,7 @@
 			cursor: pointer;
 
 			&::before {
-				@include icon.makeIcon('cross');
+				@include icon.generate('cross');
 			}
 
 			&:hover {

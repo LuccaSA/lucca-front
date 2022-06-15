@@ -1,9 +1,9 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin checked {
 	~ .switch-label {
 		&::before {
-			@include icon.makeIcon('tick');
+			@include icon.generate('tick');
 
 			display: flex;
 			background-color: var(--palettes-700, var(--components-switch-default-palette-700));

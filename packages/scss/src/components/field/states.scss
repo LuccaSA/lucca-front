@@ -1,4 +1,4 @@
-@use '@lucca-front/icons/src/mixins' as icon;
+@use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/commons/utils/loading';
 
@@ -130,7 +130,7 @@
 	}
 
 	&::before {
-		@include icon.makeIcon('tick_bold');
+		@include icon.generate('tick_bold');
 
 		color: var(--palettes-success-700);
 		position: absolute;
