@@ -53,7 +53,7 @@
 
 	--components-navSide-scrollbar-width: 0.5rem;
 	--components-navSide-scrollbar-border-radius: 10px;
-	--components-navSide-scrollbar-bg-color: #31395e;
-	--components-navSide-scrollbar-thumb-color: #9299b0;
+	--components-navSide-scrollbar-bg-color: var(--palettes-primary-800);
+	--components-navSide-scrollbar-thumb-color: var(--palettes-primary-700);
 	--components-navSide-scrollbar-arrow-color: var(--colors-white-color);
 }
