@@ -33,8 +33,16 @@
 
 @include core.spacings;
 @include core.sizes;
-@include core.palettes;
 @include core.borderRadius;
+@include core.palettes;
+
+.#{config.$prefix}textLight {
+	color: var(--palettes-grey-600) !important;
+}
+
+.#{config.$prefix}textPlaceholder {
+	color: var(--palettes-grey-400) !important;
+}
 
 @media only print {
 	@include core.classes('display', core.$displays, $prefix: config.$prefix + 'onlyPrint');
