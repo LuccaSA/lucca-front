@@ -8,7 +8,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
 	sourceMapEmbed: false,
-	includePaths: ['packages/scss/src/overrides/'],
 };
 const AUTOPREFIXER_OPTIONS = {
 	cascade: false,

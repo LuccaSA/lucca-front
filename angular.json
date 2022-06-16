@@ -38,8 +38,6 @@
             "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "packages/scss/src/overrides",
-                "packages/ng/src/overrides",
                 "packages/ng/src"
               ]
             },
@@ -54,8 +52,6 @@
             "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "packages/scss/src/overrides",
-                "packages/ng/src/overrides",
                 "packages/ng/src"
               ]
             },
