@@ -9,7 +9,8 @@
 		@include outlined;
 	}
 
-	&.mod-text, &.mod-link {
+	&.mod-text,
+	&.mod-link {
 		@include text;
 	}
 
@@ -78,7 +79,8 @@
 			@include disabledOutlined;
 		}
 
-		&.mod-text, &.mod-link {
+		&.mod-text,
+		&.mod-link {
 			@include disabledText;
 		}
 	}
