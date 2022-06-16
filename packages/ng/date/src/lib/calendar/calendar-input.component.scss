@@ -26,7 +26,7 @@
 	cursor: pointer;
 
 	.lucca-icon {
-		font-size: .9rem;
+		font-size: 0.9rem;
 		color: var(--palettes-grey-900);
 	}
 }
@@ -49,11 +49,11 @@
 		align-items: stretch;
 		flex-wrap: wrap;
 		text-align: center;
-		font-size:var(--sizes-small-font-size);
+		font-size: var(--sizes-small-font-size);
 		color: var(--palettes-primary-700);
 		margin-bottom: var(--spacings-smaller);
 
-    .calendar-labels-item {
+		.calendar-labels-item {
 			width: calc(99% / 7);
 		}
 	}
@@ -88,7 +88,9 @@
 	padding: 0;
 	outline: none;
 
-	&.is-previousMonth, &.is-nextMonth, &.is-disabled {
+	&.is-previousMonth,
+	&.is-nextMonth,
+	&.is-disabled {
 		color: var(--palettes-grey-500);
 	}
 
@@ -96,7 +98,7 @@
 		color: var(--palettes-grey-800);
 
 		&:before {
-			content: "";
+			content: '';
 			z-index: 2;
 			box-shadow: inset 0 0 0 2px var(--palettes-primary-300);
 			position: absolute;
@@ -123,7 +125,7 @@
 		&.is-today {
 			.calendar-grid-item-content {
 				&:after {
-					content: "";
+					content: '';
 					z-index: 1;
 					color: var(--palettes-primary-700);
 					box-shadow: inset 0 0 0 4px white;

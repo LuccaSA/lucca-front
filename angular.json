@@ -39,8 +39,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "packages/scss/src/overrides",
-                "packages/ng/style/overrides",
-                "packages/ng/style"
+                "packages/ng/src/overrides",
+                "packages/ng/src"
               ]
             },
             "compodoc": false,
@@ -55,8 +55,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "packages/scss/src/overrides",
-                "packages/ng/style/overrides",
-                "packages/ng/style"
+                "packages/ng/src/overrides",
+                "packages/ng/src"
               ]
             },
             "compodoc": false

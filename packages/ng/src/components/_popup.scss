@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 :root {
-	--components-popup-panel-background-color: #ffffff;
+	--components-popup-panel-background-color: var(--colors-white-color);
 	--components-popup-size-small: 32rem;
 	--components-popup-size-medium: 42rem;
 	--components-popup-size-large: 60rem;

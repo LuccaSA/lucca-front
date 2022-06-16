@@ -1,4 +1,4 @@
-@import "_definitions";
+@import '_definitions';
 @include selectInputStyle;
 
 .lu-select-value {
@@ -33,7 +33,9 @@
 		text-decoration: underline;
 		margin: 0;
 
-		&:active, &:focus, &:hover {
+		&:active,
+		&:focus,
+		&:hover {
 			box-shadow: none;
 			background-color: transparent;
 

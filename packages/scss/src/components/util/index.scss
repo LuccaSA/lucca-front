@@ -27,6 +27,7 @@
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);
+@include core.classes('font-style', core.$fontStyle);
 @include core.classes('pointer-events', core.$pointerEvents);
 @include core.classes('white-space', core.$whiteSpace);
 @include core.classes('vertical-align', core.$verticalAlign);
