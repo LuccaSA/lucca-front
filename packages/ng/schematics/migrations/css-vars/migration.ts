@@ -1,6 +1,6 @@
-import { parse, stringify } from 'postcss-scss';
-import { updateCssClassNames } from './lib/html-ast';
-import { removeContainerIfEmpty, removeImportNode } from './lib/scss-ast';
+import type { ValueParser } from 'postcss-value-parser';
+import { updateCssClassNames } from '../../lib/html-ast';
+import { PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast';
 import { mixinRegistry } from './mixin-registry';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color';
 import { updateElevation } from './updaters/elevation';
@@ -12,22 +12,22 @@ import { replaceFuncMixinsWithoutInclude, replaceIncludedMixin } from './updater
 import { removeScssPlaceholders } from './updaters/remove-scss-placeholder';
 import { updateThemeMixin } from './updaters/theme';
 
-export function migrateScssFile(content: string): string {
-	const root = parse(content);
+export function migrateScssFile(content: string, postCss: PostCssLib, postCssScss: PostCssScssLib, postcssValueParser: ValueParser): string {
+	const root = postCssScss.parse(content);
 
 	root.walkAtRules('import', (rule) => {
-		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) => removeImportNode(rule, name));
+		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) => removeImportNode(rule, name, postcssValueParser));
 	});
 
-	removeScssPlaceholders(root);
-	removeIE11ThemeSupport(root);
-	updateIconSizing(root);
-	updateColorMixin(root);
-	updateThemeMixin(root);
-	updateGetSetFunctions(root);
-	updateElevation(root);
-	updateMainImport(root);
-	commentSassFuncWithVar(root);
+	removeScssPlaceholders(root, postcssValueParser);
+	removeIE11ThemeSupport(root, postcssValueParser);
+	updateIconSizing(root, postCss, postcssValueParser);
+	updateColorMixin(root, postcssValueParser);
+	updateThemeMixin(root, postCss, postcssValueParser);
+	updateGetSetFunctions(root, postCss, postcssValueParser);
+	updateElevation(root, postCss, postcssValueParser);
+	updateMainImport(root, postCss, postcssValueParser);
+	commentSassFuncWithVar(root, postCss);
 
 	root.walkAtRules('include', (atRule) => {
 		if (atRule.params === 'ie11') {
@@ -47,10 +47,10 @@ export function migrateScssFile(content: string): string {
 		}
 	});
 
-	replaceIncludedMixin(root, mixinRegistry);
-	replaceFuncMixinsWithoutInclude(root, mixinRegistry);
+	replaceIncludedMixin(root, mixinRegistry, postCss, postcssValueParser);
+	replaceFuncMixinsWithoutInclude(root, mixinRegistry, postCss);
 
-	return root.toResult({ syntax: { stringify } }).css;
+	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
 
 export function migrateHTMLFile(content: string): string {

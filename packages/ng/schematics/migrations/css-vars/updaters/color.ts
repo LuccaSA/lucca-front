@@ -1,6 +1,7 @@
-import { Root } from 'postcss';
-import { commentNode } from '../lib/scss-ast';
-import { ScssValueAst } from '../lib/scss-value-ast';
+import type { Root } from 'postcss';
+import type { ValueParser } from 'postcss-value-parser';
+import { commentNode, PostCssLib } from '../../../lib/scss-ast';
+import { ScssValueAst } from '../../../lib/scss-value-ast';
 
 const legacyLevelToLevel: Partial<Record<string, string>> = {
 	'see-through': '50',
@@ -13,20 +14,20 @@ const legacyLevelToLevel: Partial<Record<string, string>> = {
 	default: '700',
 };
 
-export function updateColorMixin(root: Root) {
+export function updateColorMixin(root: Root, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {
-		const valueNode = new ScssValueAst(decl.value);
+		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
 
 		valueNode.walkFunction('_color', (funcNode) => {
 			const [color, legacyLevel] = funcNode.nodes[0].value.split('.');
 			funcNode.value = 'var';
 
 			if (color === 'white') {
-				funcNode.nodes = new ScssValueAst(`--colors-${color}-color`).nodes;
+				funcNode.nodes = new ScssValueAst(`--colors-${color}-color`, postcssValueParser).nodes;
 			} else {
 				let level = legacyLevel ?? funcNode.nodes[2]?.value ?? '700';
 				level = legacyLevelToLevel[level] ?? level;
-				funcNode.nodes = new ScssValueAst(`--palettes-${color}-${level}`).nodes;
+				funcNode.nodes = new ScssValueAst(`--palettes-${color}-${level}`, postcssValueParser).nodes;
 			}
 		});
 
@@ -34,7 +35,7 @@ export function updateColorMixin(root: Root) {
 	});
 }
 
-export function commentSassFuncWithVar(root: Root) {
+export function commentSassFuncWithVar(root: Root, postCss: PostCssLib) {
 	const blackListSassFuncs = [
 		'adjust-hue',
 		'alpha',
@@ -74,7 +75,7 @@ export function commentSassFuncWithVar(root: Root) {
 				continue;
 			}
 
-			commentNode(decl, 'Fonctions de couleur + variables scss ne sont pas gérées.');
+			commentNode(decl, 'Fonctions de couleur + variables scss ne sont pas gérées.', postCss);
 		}
 	});
 }

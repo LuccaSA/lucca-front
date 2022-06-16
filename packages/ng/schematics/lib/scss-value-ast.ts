@@ -1,4 +1,4 @@
-import postcssValueParser, { FunctionNode, Node, ParsedValue } from 'postcss-value-parser';
+import type { FunctionNode, Node, ParsedValue, ValueParser } from 'postcss-value-parser';
 
 export class ScssValueAst {
 	private parsed: ParsedValue;
@@ -10,7 +10,7 @@ export class ScssValueAst {
 		this.parsed.nodes = nodes;
 	}
 
-	constructor(value: string) {
+	constructor(value: string, postcssValueParser: ValueParser) {
 		this.parsed = postcssValueParser(value);
 	}
 

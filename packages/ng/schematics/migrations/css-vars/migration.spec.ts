@@ -2,6 +2,9 @@ import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import * as fs from 'fs';
 import * as path from 'path';
+import { postCss } from '../../lib/local-deps/postcss';
+import * as postCssScss from '../../lib/local-deps/postcss-scss';
+import { postcssValueParser } from '../../lib/local-deps/postcss-value-parser';
 import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile } from './migration';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', '../migrations.json'));
@@ -26,7 +29,7 @@ describe('SCSS Migration', () => {
 				.replace(/\r/g, '');
 
 			// Act
-			const actual = migrateScssFile(input);
+			const actual = migrateScssFile(input, postCss, postCssScss, postcssValueParser);
 
 			//Assert
 			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
@@ -85,7 +88,7 @@ describe('CSS Vars Migration', () => {
 
 		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
 		// migration-v9-css-vars is the name of the migration, which is defined in the migration.json file
-		await schematicRunner.runSchematicAsync('migration-v9-css-vars', {}, tree).toPromise();
+		await schematicRunner.runSchematicAsync('migration-v9-css-vars', { skipInstallation: true }, tree).toPromise();
 
 		expect(tree.files.length).toBe(inputs.length);
 

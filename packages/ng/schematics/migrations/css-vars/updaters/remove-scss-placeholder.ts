@@ -1,13 +1,14 @@
-import { Root } from 'postcss';
-import { ScssValueAst } from '../lib/scss-value-ast';
+import type { Root } from 'postcss';
+import type { ValueParser } from 'postcss-value-parser';
+import { ScssValueAst } from '../../../lib/scss-value-ast';
 
 /**
  * Replace: calc(100vh - #{_theme(\"commons.banner-height\")} - 3.5rem)
  * With:    calc(100vh - _theme(\"commons.banner-height\") - 3.5rem)
  */
-export function removeScssPlaceholders(root: Root) {
+export function removeScssPlaceholders(root: Root, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {
-		const valueNode = new ScssValueAst(decl.value);
+		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
 		valueNode.walkFunction(/.*/, (func) => {
 			func.value = func.value.replace(/#\{/g, '');
 			func.nodes = func.nodes

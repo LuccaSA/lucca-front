@@ -1,5 +1,9 @@
-import { AtRule, Comment, Container, Declaration, Document, Node, Root } from 'postcss';
+import type { AtRule, Container, Declaration, Node, Root } from 'postcss';
+import type { ValueParser } from 'postcss-value-parser';
 import { ScssValueAst } from './scss-value-ast';
+
+export type PostCssLib = typeof import('./local-deps/postcss').postCss;
+export type PostCssScssLib = typeof import('./local-deps/postcss-scss');
 
 export function removeContainerIfEmpty(node: Container | undefined): void {
 	if (!node) {
@@ -22,15 +26,15 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 			}
 		}
 
-		if (parent instanceof Document) {
+		if (!parent || parent.type === 'docment') {
 			return;
 		}
 
-		removeContainerIfEmpty(parent);
+		removeContainerIfEmpty(parent as Container);
 	}
 }
 
-export function addMixinImport(root: Root, mixin: string, namespace = '') {
+export function addMixinImport(root: Root, mixin: string, postCss: PostCssLib, namespace = ''): void {
 	let lastImportRule: AtRule | undefined;
 
 	root.walkAtRules(/(import|use)/, (rule) => {
@@ -43,7 +47,7 @@ export function addMixinImport(root: Root, mixin: string, namespace = '') {
 		importStr += ` as ${namespace}`;
 	}
 
-	const newImportRule = new AtRule({ name: 'use', params: importStr });
+	const newImportRule = new postCss.AtRule({ name: 'use', params: importStr });
 
 	addImport(root, newImportRule, lastImportRule);
 }
@@ -65,9 +69,9 @@ export function addImport(root: Root, atRule: AtRule, afterNode?: Node) {
 /**
  * @returns {boolean} returns true if whole node is deleted
  */
-export function removeImportNode(atRule: AtRule, name: string): boolean {
+export function removeImportNode(atRule: AtRule, name: string, postcssValueParser: ValueParser): boolean {
 	if (atRule.params.includes(name)) {
-		const parsed = new ScssValueAst(atRule.params);
+		const parsed = new ScssValueAst(atRule.params, postcssValueParser);
 		const imports = parsed.nodes.filter((n) => n.type === 'string');
 
 		if (imports.length === 1) {
@@ -97,8 +101,8 @@ export function removeImportNode(atRule: AtRule, name: string): boolean {
 	return false;
 }
 
-export function commentNode(node: AtRule | Declaration, comment: string): void {
-	const commentNode = new Comment({ text: `[LF NEXT] ${comment}`, raws: { inline: true, right: '' } });
+export function commentNode(node: AtRule | Declaration, comment: string, postCss: PostCssLib): void {
+	const commentNode = new postCss.Comment({ text: `[LF NEXT] ${comment}`, raws: { inline: true, right: '' } });
 
 	const leadingSpaceOrigin = node.raws.before?.match(/ +/)?.[0].length ?? 0;
 
@@ -107,7 +111,7 @@ export function commentNode(node: AtRule | Declaration, comment: string): void {
 		.split('\n')
 		.map((text) => {
 			const leadingSpaces = (text.match(/^ +/)?.[0] || '').slice(leadingSpaceOrigin) + ' ';
-			return new Comment({ text: text.trim(), raws: { inline: true, right: '', left: leadingSpaces } });
+			return new postCss.Comment({ text: text.trim(), raws: { inline: true, right: '', left: leadingSpaces } });
 		});
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

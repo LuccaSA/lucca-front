@@ -48,4 +48,3 @@ mixinRegistry
 	.registerMixin(['fakeBorderOverlay'], '@lucca-front/scss/src/commons/utils/form');
 
 export { mixinRegistry };
-

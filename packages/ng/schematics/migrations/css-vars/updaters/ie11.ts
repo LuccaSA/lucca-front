@@ -1,10 +1,11 @@
-import { Root } from 'postcss';
-import { removeContainerIfEmpty } from '../lib/scss-ast';
-import { ScssValueAst } from '../lib/scss-value-ast';
+import type { Root } from 'postcss';
+import type { ValueParser } from 'postcss-value-parser';
+import { removeContainerIfEmpty } from '../../../lib/scss-ast';
+import { ScssValueAst } from '../../../lib/scss-value-ast';
 
-export function removeIE11ThemeSupport(root: Root) {
+export function removeIE11ThemeSupport(root: Root, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {
-		const valueNode = new ScssValueAst(decl.value);
+		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
 
 		valueNode.walkFunction(/(_theme|_color|_safeGet)/, (funcNode) => {
 			const hasModeIE = funcNode.nodes[funcNode.nodes.length - 1]?.value === 'true';

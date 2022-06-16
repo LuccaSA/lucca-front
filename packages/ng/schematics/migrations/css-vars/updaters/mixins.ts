@@ -1,6 +1,6 @@
-import { Root } from 'postcss';
-import valueParser from 'postcss-value-parser';
-import { addMixinImport, commentNode } from '../lib/scss-ast';
+import type { Root } from 'postcss';
+import type { ValueParser } from 'postcss-value-parser';
+import { addMixinImport, commentNode, PostCssLib } from '../../../lib/scss-ast';
 import { MixinRegistry } from '../mixin-registry';
 
 interface IFuncMixinWithoutInclude {
@@ -15,7 +15,7 @@ const funcMixins: IFuncMixinWithoutInclude[] = [
 	},
 ];
 
-export function replaceFuncMixinsWithoutInclude(root: Root, registry: MixinRegistry) {
+export function replaceFuncMixinsWithoutInclude(root: Root, registry: MixinRegistry, postCss: PostCssLib) {
 	const neededNamespaceByImport: Record<string, string | undefined> = {};
 
 	root.walkDecls((decl) => {
@@ -31,18 +31,18 @@ export function replaceFuncMixinsWithoutInclude(root: Root, registry: MixinRegis
 				continue;
 			}
 
-			commentNode(decl, 'Mixins avec fonction non gérée par la migration auto.');
+			commentNode(decl, 'Mixins avec fonction non gérée par la migration auto.', postCss);
 		}
 	});
 
-	updateMixinImport(root, neededNamespaceByImport);
+	updateMixinImport(root, postCss, neededNamespaceByImport);
 }
 
-export function replaceIncludedMixin(root: Root, registry: MixinRegistry) {
+export function replaceIncludedMixin(root: Root, registry: MixinRegistry, postCss: PostCssLib, postcssValueParser: ValueParser) {
 	const neededNamespaceByImport: Record<string, string | undefined> = {};
 
 	root.walkAtRules('include', (rule) => {
-		rule.params = valueParser(rule.params)
+		rule.params = postcssValueParser(rule.params)
 			.walk((node) => {
 				if (!['function', 'word'].includes(node.type)) {
 					return undefined;
@@ -56,17 +56,17 @@ export function replaceIncludedMixin(root: Root, registry: MixinRegistry) {
 					return false;
 				}
 
-				commentNode(rule, 'Mixins non gérée par la migration auto.');
+				commentNode(rule, 'Mixins non gérée par la migration auto.', postCss);
 				return false;
 			})
 			.toString();
 	});
 
-	updateMixinImport(root, neededNamespaceByImport);
+	updateMixinImport(root, postCss, neededNamespaceByImport);
 }
 
-function updateMixinImport(root: Root, neededNamespaceByImport: Record<string, string | undefined> = {}): void {
+function updateMixinImport(root: Root, postCss: PostCssLib, neededNamespaceByImport: Record<string, string | undefined> = {}): void {
 	for (const [neededImport, namespace] of Object.entries(neededNamespaceByImport)) {
-		addMixinImport(root, neededImport, namespace);
+		addMixinImport(root, neededImport, postCss, namespace);
 	}
 }
