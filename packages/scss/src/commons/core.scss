@@ -61,11 +61,11 @@ $states: 'error,' 'warning', 'success';
 @mixin classes($name, $properties, $suffix: '!important', $prefix: config.$prefix) {
 	@each $property in $properties {
 		@if $prefix == config.$prefix {
-			.#{$prefix}#{camelize($name)}#{capitalize(camelize($property))} {
+			.#{$prefix}#{camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{capitalize(camelize($property))} {
 				#{$name}: #{$property} #{$suffix};
 			}
 		} @else {
-			.#{$prefix}#{capitalize(camelize($name))}#{capitalize(camelize($property))} {
+			.#{$prefix}#{capitalize(camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{capitalize(camelize($property))} {
 				#{$name}: #{$property} #{$suffix};
 			}
 		}
@@ -103,8 +103,8 @@ $states: 'error,' 'warning', 'success';
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {
 		.#{config.$prefix}text#{capitalize($key)} {
-			font-size: var(--sizes-#{$key}-font-size) !important;
-			line-height: var(--sizes-#{$key}-line-height) !important;
+			font-size: var(--sizes-#{$key}-font-size) #{$suffix};
+			line-height: var(--sizes-#{$key}-line-height) #{$suffix};
 		}
 	}
 }
@@ -112,16 +112,8 @@ $states: 'error,' 'warning', 'success';
 @mixin palettes($suffix: '!important') {
 	@each $palette in $palettes {
 		.#{config.$prefix}text#{capitalize($palette)} {
-			color: var(--palettes-#{$palette}-700) !important;
+			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
-	}
-
-	.u-textLight {
-		color: var(--palettes-grey-600) !important;
-	}
-
-	.u-textPlaceholder {
-		color: var(--palettes-grey-400) !important;
 	}
 }
 
