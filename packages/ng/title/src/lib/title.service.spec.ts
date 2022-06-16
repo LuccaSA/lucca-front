@@ -22,7 +22,8 @@ class TranslateService implements ILuTitleTranslateService {
 	template: `<router-outlet></router-outlet>
 		<a class="link-2" [routerLink]="['/first']">Stub</a>
 		<a class="link-3" [routerLink]="['/first/1']">Stub</a>
-		<a class="link-4" [routerLink]="['/first/1/last']">Stub</a> `,
+		<a class="link-4" [routerLink]="['/first/1/last']">Stub</a>
+		<a class="link-5" [routerLink]="['/first/1/end']">Stub</a> `,
 })
 export class AppComponent {
 	constructor(private titleService: LuTitleService) {
@@ -44,6 +45,17 @@ export class OverrideTitleComponent implements OnInit {
 	constructor(private titleService: LuTitleService) {}
 	ngOnInit() {
 		this.titleService.prependTitle('Overridden title');
+	}
+}
+
+@Component({
+	selector: 'lu-override-title-part',
+	template: `<div></div>`,
+})
+export class OverrideTitlePartComponent implements OnInit {
+	constructor(private titleService: LuTitleService) {}
+	ngOnInit() {
+		this.titleService.overrideFirstTitlePart('New title part');
 	}
 }
 
@@ -81,6 +93,11 @@ describe('TitleService', () => {
 										path: 'last',
 										data: { title: `` },
 										component: OverrideTitleComponent,
+									},
+									{
+										path: 'end',
+										data: { title: `Old title part` },
+										component: OverrideTitlePartComponent,
 									},
 								],
 							},
@@ -131,5 +148,18 @@ describe('TitleService', () => {
 		spectator.click('.link-4');
 		await spectator.fixture.whenStable();
 		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+	});
+
+	it('should override title part when a component forces its own title part', async () => {
+		let resultTitle = '';
+		spectator
+			.inject(LuTitleService)
+			// We need to skip first value because the title is overridden by the component's ngOnInit
+			.title$.pipe(skip(1))
+			.subscribe((title) => (resultTitle = title));
+
+		spectator.click('.link-5');
+		await spectator.fixture.whenStable();
+		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
 	});
 });
