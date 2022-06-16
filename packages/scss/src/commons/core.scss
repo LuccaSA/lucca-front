@@ -103,8 +103,8 @@ $states: 'error,' 'warning', 'success';
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {
 		.#{config.$prefix}text#{capitalize($key)} {
-			font-size: var(--sizes-#{$key}-font-size) !important;
-			line-height: var(--sizes-#{$key}-line-height) !important;
+			font-size: var(--sizes-#{$key}-font-size) #{$suffix};
+			line-height: var(--sizes-#{$key}-line-height) #{$suffix};
 		}
 	}
 }
@@ -112,7 +112,7 @@ $states: 'error,' 'warning', 'success';
 @mixin palettes($suffix: '!important') {
 	@each $palette in $palettes {
 		.#{config.$prefix}text#{capitalize($palette)} {
-			color: var(--palettes-#{$palette}-700) !important;
+			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
 	}
 }

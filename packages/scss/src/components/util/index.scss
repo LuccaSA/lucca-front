@@ -36,14 +36,6 @@
 @include core.borderRadius;
 @include core.palettes;
 
-.#{config.$prefix}textLight {
-	color: var(--palettes-grey-600) !important;
-}
-
-.#{config.$prefix}textPlaceholder {
-	color: var(--palettes-grey-400) !important;
-}
-
 @media only print {
 	@include core.classes('display', core.$displays, $prefix: config.$prefix + 'onlyPrint');
 }
@@ -58,6 +50,14 @@
 
 @media (prefers-reduced-motion: no-preference) {
 	@include core.classes('scroll-behavior', core.$scrollBehavior);
+}
+
+.#{config.$prefix}textLight {
+	color: var(--palettes-grey-600) !important;
+}
+
+.#{config.$prefix}textPlaceholder {
+	color: var(--palettes-grey-400) !important;
 }
 
 .#{config.$prefix}positionStatic {
