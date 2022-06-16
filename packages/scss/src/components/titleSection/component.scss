@@ -1,3 +1,5 @@
+@use '@lucca-front/icons/src/commons/config';
+
 @mixin component {
 	margin-bottom: 1.2rem;
 
@@ -11,12 +13,12 @@
 		margin-bottom: 0;
 	}
 
-	.u-h1,
-	.u-h2,
-	.u-h3,
-	.u-h4,
-	.u-h5,
-	.u-h6 {
+	.#{config.$prefix}h1,
+	.#{config.$prefix}h2,
+	.#{config.$prefix}h3,
+	.#{config.$prefix}h4,
+	.#{config.$prefix}h5,
+	.#{config.$prefix}h6 {
 		margin-bottom: 0 !important;
 	}
 
