@@ -19,6 +19,7 @@
 @include core.classes('flex-shrink', core.$flex);
 @include core.classes('flex-basis', core.$basis);
 @include core.classes('flex-order', core.$order);
+@include core.classes('order', core.$order);
 @include core.classes('align-self', core.$align);
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('visibility', core.$visibility);

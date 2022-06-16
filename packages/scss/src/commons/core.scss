@@ -61,11 +61,11 @@ $states: 'error,' 'warning', 'success';
 @mixin classes($name, $properties, $suffix: '!important', $prefix: config.$prefix) {
 	@each $property in $properties {
 		@if $prefix == config.$prefix {
-			.#{$prefix}#{camelize($name)}#{capitalize(camelize($property))} {
+			.#{$prefix}#{camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{capitalize(camelize($property))} {
 				#{$name}: #{$property} #{$suffix};
 			}
 		} @else {
-			.#{$prefix}#{capitalize(camelize($name))}#{capitalize(camelize($property))} {
+			.#{$prefix}#{capitalize(camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{capitalize(camelize($property))} {
 				#{$name}: #{$property} #{$suffix};
 			}
 		}
