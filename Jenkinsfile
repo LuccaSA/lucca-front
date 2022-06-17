@@ -66,7 +66,7 @@ node(label: CI.getSelectedNode(script:this)) {
 
 				if (isPR) {
 					// post PR comment
-					def deployUrl = "http://lucca-front.lucca.local/${branchName}"
+					def deployUrl = "http://lucca-front.lucca.local/${branchName}/storybook"
 					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
 						powershell """
 							[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -76,10 +76,22 @@ node(label: CI.getSelectedNode(script:this)) {
 				}
 			}
 
-			loggableStage('Publish') {
-				publishNpmOnReleaseTag(publishFolder: 'dist/icons')
-				publishNpmOnReleaseTag(publishFolder: 'dist/scss')
-				publishNpmOnReleaseTag(publishFolder: 'dist/ng')
+			if (!isPR) {
+				loggableStage('Publish') {
+					def version = env.BRANCH_NAME
+
+					def iconsPackageJson = readFile(file: 'dist/icons/package.json');
+					def scssPackageJson = readFile(file: 'dist/scss/package.json');
+					def ngPackageJson = readFile(file: 'dist/ng/package.json');
+
+					writeFile(file: 'dist/icons/package.json', text: iconsPackageJson.replaceAll('"\\*"', "\"${version}\""));
+					writeFile(file: 'dist/scss/package.json', text: scssPackageJson.replaceAll('"\\*"', "\"${version}\""));
+					writeFile(file: 'dist/ng/package.json', text: ngPackageJson.replaceAll('"\\*"', "\"${version}\""));
+
+					publishNpmOnReleaseTag(publishFolder: 'dist/icons')
+					publishNpmOnReleaseTag(publishFolder: 'dist/scss')
+					publishNpmOnReleaseTag(publishFolder: 'dist/ng')
+				}
 			}
 		}
 	} catch(err) {

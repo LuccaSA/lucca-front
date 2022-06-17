@@ -2,4 +2,4 @@
  * Public API Surface of animations
  */
 
-export * from './index';
+export * from './lib/index';

@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
 	declarations: [LuTreeOptionItemComponent],
 	exports: [LuTreeOptionItemComponent],
-	entryComponents: [LuTreeOptionItemComponent],
 	imports: [CommonModule, LuTooltipModule],
 	providers: [
 		LuTreeOptionItemIntl,

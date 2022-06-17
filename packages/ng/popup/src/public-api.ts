@@ -2,4 +2,4 @@
  * Public API Surface of safe-content
  */
 
-export * from './index';
+export * from './lib/index';

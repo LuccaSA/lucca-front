@@ -1,5 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Injector, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Injector, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
 import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
@@ -69,13 +69,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		return this._panelId;
 	}
 
-	constructor(
-		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef<HTMLElement>,
-		protected override _viewContainerRef: ViewContainerRef,
-		componentFactoryResolver: ComponentFactoryResolver,
-		injector: Injector,
-	) {
+	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef, injector: Injector) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
@@ -85,8 +79,8 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this.enterDelay = 300;
 		this.leaveDelay = 100;
 
-		const factory = componentFactoryResolver.resolveComponentFactory(LuTooltipPanelComponent);
-		this.panel = factory.create(injector).instance;
+		const componentRef = this._viewContainerRef.createComponent(LuTooltipPanelComponent, { injector });
+		this.panel = componentRef.instance;
 
 		this._handleTabindex = this._shouldHandleTabindex();
 
