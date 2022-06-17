@@ -51,5 +51,5 @@
 	background-repeat: no-repeat;
 	background-image: linear-gradient(315deg, transparent 40%, currentColor 50%, transparent 100%);
 	background-size: 400% 100%;
-	color: rgba(0, 0, 0, 0.1);
+	color: rgba(var(--colors-grey-900-rgb), 0.1);
 }
