@@ -76,20 +76,22 @@ node(label: CI.getSelectedNode(script:this)) {
 				}
 			}
 
-			loggableStage('Publish') {
-				def version = env.BRANCH_NAME
+			if (!isPR) {
+				loggableStage('Publish') {
+					def version = env.BRANCH_NAME
 
-				def iconsPackageJson = readFile(file: 'dist/icons/package.json');
-				def scssPackageJson = readFile(file: 'dist/scss/package.json');
-				def ngPackageJson = readFile(file: 'dist/ng/package.json');
+					def iconsPackageJson = readFile(file: 'dist/icons/package.json');
+					def scssPackageJson = readFile(file: 'dist/scss/package.json');
+					def ngPackageJson = readFile(file: 'dist/ng/package.json');
 
-				writeFile(file: 'dist/icons/package.json', text: iconsPackageJson.replaceAll('"*"', "\"${version}\""));
-				writeFile(file: 'dist/scss/package.json', text: scssPackageJson.replaceAll('"*"', "\"${version}\""));
-				writeFile(file: 'dist/ng/package.json', text: ngPackageJson.replaceAll('"*"', "\"${version}\""));
+					writeFile(file: 'dist/icons/package.json', text: iconsPackageJson.replaceAll('"\\*"', "\"${version}\""));
+					writeFile(file: 'dist/scss/package.json', text: scssPackageJson.replaceAll('"\\*"', "\"${version}\""));
+					writeFile(file: 'dist/ng/package.json', text: ngPackageJson.replaceAll('"\\*"', "\"${version}\""));
 
-				publishNpmOnReleaseTag(publishFolder: 'dist/icons')
-				publishNpmOnReleaseTag(publishFolder: 'dist/scss')
-				publishNpmOnReleaseTag(publishFolder: 'dist/ng')
+					publishNpmOnReleaseTag(publishFolder: 'dist/icons')
+					publishNpmOnReleaseTag(publishFolder: 'dist/scss')
+					publishNpmOnReleaseTag(publishFolder: 'dist/ng')
+				}
 			}
 		}
 	} catch(err) {
