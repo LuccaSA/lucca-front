@@ -1,8 +1,8 @@
-@use 'config';
 @use 'sass:string';
 @use 'sass:map';
 @use 'sass:list';
 
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 
 $contents: '0';
@@ -27,9 +27,6 @@ $whiteSpace: 'normal', 'nowrap';
 $float: 'left', 'right';
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
-
-$palettes: 'primary', 'secondary', 'grey', 'success', 'warning', 'error';
-$states: 'error,' 'warning', 'success';
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
@@ -89,7 +86,7 @@ $states: 'error,' 'warning', 'success';
 }
 
 @mixin palettes($suffix: '!important') {
-	@each $palette in $palettes {
+	@each $palette in list.join(config.$palettes, config.$states) {
 		.#{config.$prefix}text#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}

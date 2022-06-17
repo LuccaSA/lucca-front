@@ -1,6 +1,7 @@
 @use 'sass:string';
 @use 'sass:map';
 @use 'sass:math';
+
 @use '@lucca-front/scss/src/commons/config';
 
 @mixin largerThan($breakpoint, $reversed: false) {
@@ -28,7 +29,7 @@
 }
 
 @mixin smallerThan($breakpoint) {
-	@include largerThan($breakpoint, true) {
+	@include largerThan($breakpoint, $reversed: true) {
 		@content;
 	}
 }

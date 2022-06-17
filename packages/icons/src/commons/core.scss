@@ -1,9 +1,10 @@
-@use 'config';
 @use 'sass:string';
 @use 'sass:list';
 
+@use '@lucca-front/scss/src/commons/config';
+
 @function capitalize($string) {
-	@return to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
+	@return string.to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
 }
 
 @function camelize($string) {

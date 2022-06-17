@@ -1,7 +1,8 @@
 @use 'sass:map';
 @use 'sass:list';
-@use 'config';
-@use 'core';
+
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/core';
 
 @import url('//fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
 
@@ -98,7 +99,7 @@ b {
 	font-weight: 600;
 }
 
-@each $palette in core.$palettes {
+@each $palette in list.join(config.$palettes, config.$states) {
 	.palette-#{$palette} {
 		@each $shade in map.keys(config.$primary) {
 			--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
