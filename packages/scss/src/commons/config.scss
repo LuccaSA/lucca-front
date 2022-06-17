@@ -1,3 +1,7 @@
+$prefix: 'u-' !default;
+$states: 'error', 'warning', 'success' !default;
+$palettes: 'primary', 'secondary', 'grey' !default;
+
 $primary: (
 	text: #ffffff,
 	50: #ffede0,
@@ -10,7 +14,7 @@ $primary: (
 	700: #ff6600,
 	800: #cc3d00,
 	900: #a82d00,
-);
+) !default;
 
 $secondary: (
 	text: #ffffff,
@@ -24,7 +28,7 @@ $secondary: (
 	700: #2067f3,
 	800: #0a48c2,
 	900: #083691,
-);
+) !default;
 
 $success: (
 	text: #ffffff,
@@ -208,5 +212,3 @@ $textLink: (
 	color: #00b2ed,
 	hover: #16c5fe,
 );
-
-$prefix: 'u-';
