@@ -1,4 +1,7 @@
 @use 'sass:list';
+
+@use '@lucca-front/icons/src/commons/core' as transform;
+
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/a11y';
@@ -42,7 +45,7 @@
 
 @each $display in core.$displays {
 	@if $display != 'none' {
-		.#{config.$prefix}onlyPrintDisplay#{core.capitalize($display)} {
+		.#{config.$prefix}onlyPrintDisplay#{transform.capitalize($display)} {
 			display: none;
 		}
 	}

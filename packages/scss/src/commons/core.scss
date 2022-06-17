@@ -3,6 +3,8 @@
 @use 'sass:map';
 @use 'sass:list';
 
+@use '@lucca-front/icons/src/commons/core' as transform;
+
 $contents: '0';
 $boxModel: 'margin', 'padding', 'border';
 $boxDirection: '', 'top', 'bottom', 'left', 'right';
@@ -29,29 +31,6 @@ $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $palettes: 'primary', 'secondary', 'grey', 'success', 'warning', 'error';
 $states: 'error,' 'warning', 'success';
 
-@function capitalize($string) {
-	@return to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
-}
-
-@function camelize($string) {
-	$progress: $string;
-	$result: '';
-	$exclude: ' ', '-', '–', '—', '_', ',', ';', ':', '.';
-
-	@while string.length($progress) > 0 {
-		$char: string.slice($progress, 1, 1);
-
-		@if not not list.index($exclude, $char) {
-			$progress: capitalize(string.slice($progress, 2, 2)) + string.slice($progress, 3);
-		} @else {
-			$result: $result + $char;
-			$progress: string.slice($progress, 2);
-		}
-	}
-
-	@return $result;
-}
-
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
 		--#{$name}#{if($key == '', '', '-')}#{$key}#{$after}: #{$value};
@@ -61,11 +40,11 @@ $states: 'error,' 'warning', 'success';
 @mixin classes($name, $properties, $suffix: '!important', $prefix: config.$prefix) {
 	@each $property in $properties {
 		@if $prefix == config.$prefix {
-			.#{$prefix}#{camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{capitalize(camelize($property))} {
+			.#{$prefix}#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{$property} #{$suffix};
 			}
 		} @else {
-			.#{$prefix}#{capitalize(camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{capitalize(camelize($property))} {
+			.#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{$property} #{$suffix};
 			}
 		}
@@ -73,7 +52,7 @@ $states: 'error,' 'warning', 'success';
 }
 
 @mixin spacing($boxModel, $boxDirection, $key, $value, $prefix: config.$prefix, $suffix: '!important') {
-	.#{$prefix}#{camelize($boxModel)}#{capitalize($boxDirection)}#{capitalize($key)} {
+	.#{$prefix}#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
 		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
 	}
 }
@@ -102,7 +81,7 @@ $states: 'error,' 'warning', 'success';
 
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {
-		.#{config.$prefix}text#{capitalize($key)} {
+		.#{config.$prefix}text#{transform.capitalize($key)} {
 			font-size: var(--sizes-#{$key}-font-size) #{$suffix};
 			line-height: var(--sizes-#{$key}-line-height) #{$suffix};
 		}
@@ -111,7 +90,7 @@ $states: 'error,' 'warning', 'success';
 
 @mixin palettes($suffix: '!important') {
 	@each $palette in $palettes {
-		.#{config.$prefix}text#{capitalize($palette)} {
+		.#{config.$prefix}text#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
 	}
@@ -120,7 +99,7 @@ $states: 'error,' 'warning', 'success';
 @mixin borderRadius($suffix: '!important') {
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
-			.#{config.$prefix}border#{capitalize(camelize($corner))}Radius#{capitalize($key)} {
+			.#{config.$prefix}border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
 				border-#{$corner}radius: $value;
 			}
 		}
