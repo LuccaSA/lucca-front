@@ -41,6 +41,7 @@
 		&:hover {
 			box-shadow: none;
 			background-color: var(--palettes-50, var(--palettes-grey-50));
+			color: var(--palettes-700, var(--palettes-grey-700));
 		}
 
 		&:focus {
