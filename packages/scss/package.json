@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "peerDependencies": {
-    "@lucca-front/icons": ">9.0.0-alpha"
+    "@lucca-front/icons": "*"
   }
 }

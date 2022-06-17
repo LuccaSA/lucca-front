@@ -21,8 +21,8 @@
 		"@angular/common": "^14.0.0",
 		"@angular/core": "^14.0.0",
 		"@angular/cdk": "^14.0.0",
-		"@lucca-front/icons": ">9.0.0-alpha",
-		"@lucca-front/scss": ">9.0.0-alpha",
+		"@lucca-front/icons": "*",
+		"@lucca-front/scss": "*",
 		"rxjs": "^6.0.0 || ^7.0.0"
 	},
 	"bugs": {
