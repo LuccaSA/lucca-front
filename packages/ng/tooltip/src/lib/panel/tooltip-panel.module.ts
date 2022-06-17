@@ -7,6 +7,5 @@ import { LuSafeContentModule } from '@lucca-front/ng/safe-content';
 	imports: [CommonModule, LuSafeContentModule],
 	declarations: [LuTooltipPanelComponent],
 	exports: [LuTooltipPanelComponent],
-	entryComponents: [LuTooltipPanelComponent],
 })
 export class LuTooltipPanelModule {}

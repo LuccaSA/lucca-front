@@ -15,7 +15,6 @@ import { luModalTranslations } from './modal.translate';
 @NgModule({
 	imports: [OverlayModule, PortalModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
-	entryComponents: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
 	exports: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
 	providers: [
 		LuModal,

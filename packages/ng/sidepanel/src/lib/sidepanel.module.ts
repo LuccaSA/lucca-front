@@ -15,7 +15,6 @@ import { luSidepanelTranslations } from './sidepanel.translate';
 @NgModule({
 	imports: [OverlayModule, PortalModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
-	entryComponents: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
 	exports: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
 	providers: [
 		LuSidepanel,

@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, LuToastType, ɵɵLuToatsComponent } from '@lucca-front/ng/toast';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from "rxjs";
 import { map } from "rxjs/operators";
-import { LuToastsComponent } from '../../../../packages/ng/toast/src/toasts.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 
 @Component({
 	selector: 'toasts-stories',
@@ -58,7 +57,7 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
-	component: LuToastsComponent,
+	component: ɵɵLuToatsComponent,
 	decorators: [
 		componentWrapperDecorator(ToastsStory),
 		moduleMetadata({

@@ -18,11 +18,11 @@
 		"Sandy Goldscheider <sgoldscheider@lucca.fr>"
 	],
 	"peerDependencies": {
-		"@angular/common": "^13.0.0 || ^12.0.0",
-		"@angular/core": "^13.0.0 || ^12.0.0",
-		"@angular/cdk": "^13.0.0 || ^12.0.0",
-		"@lucca-front/icons": ">=8.0.0 <9.0.0",
-		"@lucca-front/scss": ">=8.0.0 <9.0.0",
+		"@angular/common": "^14.0.0",
+		"@angular/core": "^14.0.0",
+		"@angular/cdk": "^14.0.0",
+		"@lucca-front/icons": "*",
+		"@lucca-front/scss": "*",
 		"rxjs": "^6.0.0 || ^7.0.0"
 	},
 	"bugs": {
