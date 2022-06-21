@@ -21,7 +21,7 @@
 
 		&:focus {
 			background-color: var(--palettes-50, var(--components-select-default-palette-50));
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06),
+			box-shadow: 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06),
 				0 0 0 4px var(--palettes-200, var(--components-select-default-palette-200));
 		}
 	}

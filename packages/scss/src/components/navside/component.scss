@@ -206,7 +206,7 @@
 			}
 
 			&::before {
-				background-color: rgba(0, 0, 0, 0.15);
+				background-color: rgba(var(--colors-grey-900-rgb), 0.15);
 				border-radius: 1em;
 				height: 1em;
 				width: 1em;

@@ -3,7 +3,7 @@
 	height: var(--components-gauge-height);
 	overflow: hidden;
 	position: relative;
-	background-color: rgba(0, 0, 0, 0.05);
+	background-color: rgba(var(--colors-grey-900-rgb), 0.05);
 
 	@at-root {
 		.gauge-bar {
