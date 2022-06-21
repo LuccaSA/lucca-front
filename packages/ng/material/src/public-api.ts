@@ -2,4 +2,4 @@
  * Public API Surface of material
  */
 
-export * from './index';
+export * from './lib/index';

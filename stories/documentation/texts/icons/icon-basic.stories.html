@@ -1,0 +1,17 @@
+<div class="textfield mod-outlined mod-search u-marginBottomStandard">
+	<span class="textfield-label">Rechercher une icône</span>
+	<input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
+</div>
+
+<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon)">
+	<span aria-hidden="true" class="lucca-icon icon-{{camelize(icon)}}"></span>
+	<code class="code">icon-{{camelize(icon)}}</code>
+</div>
+
+<style>
+	.demo-icon {
+		width: 33%;
+		float: left;
+		cursor: pointer;
+	}
+</style>

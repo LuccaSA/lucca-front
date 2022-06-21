@@ -1,7 +1,7 @@
 import { Component as AngularComponent } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuDropdownModule, LuDropdownPanelComponent } from '@lucca-front/ng/dropdown';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-import { LuDropdownModule, LuDropdownPanelComponent } from '../../../../packages/ng/dropdown/src';
 
 @AngularComponent({
 	selector: 'dropdown-component-stories',

@@ -1,13 +1,22 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TableOfContentBasicStory {
+	disabled: boolean;
 }
 
 export default {
 	title: 'Documentation/Navigation/TableOfContent/Basic',
+	argTypes: {
+		disabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 } as Meta;
 
 function getTemplate(args: TableOfContentBasicStory): string {
+	const disabled = args.disabled ? `disabled` : '';
 	return `
 	<nav class="tableOfContent ">
 		<ul class="tableOfContent-list">
@@ -15,13 +24,13 @@ function getTemplate(args: TableOfContentBasicStory): string {
 				<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>
 			</li>
 			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action">Section 2</a>
+				<a href="#" class="tableOfContent-list-item-action" ${disabled}>Section 2</a>
 			</li>
 			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action">Section 3</a>
+				<a href="#" class="tableOfContent-list-item-action" ${disabled}>Section 3</a>
 			</li>
 			<li class="tableOfContent-list-item">
-				<a href="#" class="tableOfContent-list-item-action">Section 4</a>
+				<a href="#" class="tableOfContent-list-item-action" ${disabled}>Section 4</a>
 			</li>
 		</ul>
 	</nav>
@@ -34,4 +43,4 @@ const Template: Story<TableOfContentBasicStory> = (args: TableOfContentBasicStor
 });
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {disabled: false};
