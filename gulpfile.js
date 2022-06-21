@@ -92,8 +92,8 @@ gulp.task(
 		'scss:clean',
 		'scss:build',
 		'scss:pck',
-		'scss:src',
-	),
+		'scss:src'
+	)
 );
 
 /* -----------------------------
@@ -108,8 +108,15 @@ gulp.task('ng:schematics:build', () => {
 gulp.task('ng:schematics:collection', () => {
 	return gulp.src([
 		`packages/ng/schematics/collection.json`,
-		`packages/ng/schematics/migrations.json`,
+		`packages/ng/schematics/migrations.json`
 	]).pipe(gulp.dest(`dist/ng/schematics`));
 });
 
-gulp.task('ng:schematics', gulp.series('ng:schematics:build', 'ng:schematics:collection'));
+gulp.task('ng:schematics:local-deps', () => {
+	return gulp.src([
+		`packages/ng/schematics/lib/local-deps/package.json`,
+		`packages/ng/schematics/lib/local-deps/package-lock.json`
+	]).pipe(gulp.dest(`dist/ng/schematics/lib/local-deps`));
+});
+
+gulp.task('ng:schematics', gulp.series('ng:schematics:build', 'ng:schematics:collection', 'ng:schematics:local-deps'));
