@@ -39,12 +39,6 @@ In angular-cli.json, add this to your stylePreprocessorOptions includePaths:
 	"styles": [
 		"styles.scss"
 	],
-	"stylePreprocessorOptions": {
-		"includePaths": [
-			"path_to_node_modules/@lucca-front/scss/src/overrides",
-			"path_to_node_modules/@lucca-front/ng/style/overrides" // if you use the ng package
-		]
-	},
 	...
 ],
 ```
@@ -59,21 +53,6 @@ If you are using our default font (Source Sans Pro), don't forget to add your fo
 
 ## Theming
 ### Setup
-
-You can override many variables to tailor Lucca-Front style to your needs.
-To do so, you must create a folder and reference it in your angular-cli.json as a stylePreprocessorOptions includePaths
-```
-"apps": [
-	...
-	"stylePreprocessorOptions": {
-		"includePaths": [
-			"path to your override folder" // must be first
-			"path_to_node_modules/@lucca-front/scss/src/overrides",
-		]
-	},
-	...
-],
-```
 
 In your override folder, you can create different files for different needs :
 * [breakpoints.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_breakpoints.scss)
