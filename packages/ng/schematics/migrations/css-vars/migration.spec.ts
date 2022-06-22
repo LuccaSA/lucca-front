@@ -2,10 +2,10 @@ import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import * as fs from 'fs';
 import * as path from 'path';
-import { postCss } from '../../lib/local-deps/postcss';
-import * as postCssScss from '../../lib/local-deps/postcss-scss';
-import { postcssValueParser } from '../../lib/local-deps/postcss-value-parser';
-import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile } from './migration';
+import * as postCssScss from '../../lib/local-deps/postcss-scss.js';
+import { postcssValueParser } from '../../lib/local-deps/postcss-value-parser.js';
+import { postCss } from '../../lib/local-deps/postcss.js';
+import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile } from './migration.js';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', '../migrations.json'));
 
@@ -42,7 +42,7 @@ describe('HTML Migration', () => {
 	const cases = inputHtmlFiles.map((f) => f.replace('.input.html', ''));
 
 	for (const testCase of cases) {
-		it('should handle ' + testCase, () => {
+		it('should handle ' + testCase, async () => {
 			// Arrange
 			const input = fs
 				.readFileSync(path.join(testsRoot, `${testCase}.input.html`))
@@ -54,7 +54,7 @@ describe('HTML Migration', () => {
 				.replace(/\r/g, '');
 
 			// Act
-			const actual = migrateHTMLFile(input);
+			const actual = migrateHTMLFile(input, await import('@angular/compiler'));
 
 			//Assert
 			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
@@ -87,8 +87,8 @@ describe('CSS Vars Migration', () => {
 		}
 
 		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
-		// migration-v9-css-vars is the name of the migration, which is defined in the migration.json file
-		await schematicRunner.runSchematicAsync('migration-v9-css-vars', { skipInstallation: true }, tree).toPromise();
+		// migration-v10-css-vars is the name of the migration, which is defined in the migration.json file
+		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true }, tree).toPromise();
 
 		expect(tree.files.length).toBe(inputs.length);
 

@@ -14,31 +14,46 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 				spawnSync('npm', ['ci'], {
 					cwd: path.join(__dirname, '../../lib/local-deps'),
 				});
+				context.logger.info('Installing dependencies... Done!');
 			} catch (e) {
 				// eslint-disable-next-line
 				context.logger.error('Failed to install dependencies', (e as any).toString())
 			}
 		}
 
-		const { postCss } = await import('../../lib/local-deps/postcss');
-		const postCssScss = await import('../../lib/local-deps/postcss-scss');
-		const { postcssValueParser } = await import('../../lib/local-deps/postcss-value-parser');
+		const { postCss } = await import('../../lib/local-deps/postcss.js');
+		const postCssScss = await import('../../lib/local-deps/postcss-scss.js');
+		const angularCompiler = await import('@angular/compiler');
+		const { postcssValueParser } = await import('../../lib/local-deps/postcss-value-parser.js');
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
 				return;
 			}
 
+			function migrateFile(updater: (content: string) => string): void {
+				if (!entry) {
+					return;
+				}
+
+				const content = entry.content.toString();
+				const newContent = updater(content);
+
+				if (content !== newContent) {
+					tree.overwrite(path, newContent);
+				}
+			}
+
 			if (path.endsWith('angular.json')) {
-				tree.overwrite(path, migrateAngularJsonFile(entry.content.toString()));
+				migrateFile((content) => migrateAngularJsonFile(content));
 			}
 
 			if (path.endsWith('.scss')) {
-				tree.overwrite(path, migrateScssFile(entry.content.toString(), postCss, postCssScss, postcssValueParser));
+				migrateFile((content) => migrateScssFile(content, postCss, postCssScss, postcssValueParser));
 			}
 
 			if (path.endsWith('.html')) {
-				tree.overwrite(path, migrateHTMLFile(entry.content.toString()));
+				migrateFile((content) => migrateHTMLFile(content, angularCompiler));
 			}
 		});
 	};

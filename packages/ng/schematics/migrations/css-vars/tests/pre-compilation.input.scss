@@ -9,4 +9,6 @@
 		transparent 64.29%,
 		transparent 100%
 	);
+
+	top: calc(#{$homeHeaderOffset * -1} + #{_theme('commons.banner-height')});
 }

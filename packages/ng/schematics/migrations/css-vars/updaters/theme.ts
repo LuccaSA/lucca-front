@@ -1,7 +1,7 @@
 import type { Declaration, Root } from 'postcss';
 import type { FunctionNode, ValueParser } from 'postcss-value-parser';
-import { commentNode, PostCssLib } from '../../../lib/scss-ast';
-import { ScssValueAst } from '../../../lib/scss-value-ast';
+import { commentNode, PostCssLib } from '../../../lib/scss-ast.js';
+import { ScssValueAst } from '../../../lib/scss-value-ast.js';
 
 export function updateThemeMixin(root: Root, postCss: PostCssLib, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {

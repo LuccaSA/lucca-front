@@ -1,7 +1,7 @@
 import type { Root } from 'postcss';
 import type { ValueParser } from 'postcss-value-parser';
-import { removeContainerIfEmpty } from '../../../lib/scss-ast';
-import { ScssValueAst } from '../../../lib/scss-value-ast';
+import { removeContainerIfEmpty } from '../../../lib/scss-ast.js';
+import { ScssValueAst } from '../../../lib/scss-value-ast.js';
 
 export function removeIE11ThemeSupport(root: Root, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {

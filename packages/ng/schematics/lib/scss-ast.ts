@@ -1,9 +1,9 @@
 import type { AtRule, Container, Declaration, Node, Root } from 'postcss';
 import type { ValueParser } from 'postcss-value-parser';
-import { ScssValueAst } from './scss-value-ast';
+import { ScssValueAst } from './scss-value-ast.js';
 
-export type PostCssLib = typeof import('./local-deps/postcss').postCss;
-export type PostCssScssLib = typeof import('./local-deps/postcss-scss');
+export type PostCssLib = typeof import('./local-deps/postcss.js').postCss;
+export type PostCssScssLib = typeof import('./local-deps/postcss-scss.js');
 
 export function removeContainerIfEmpty(node: Container | undefined): void {
 	if (!node) {

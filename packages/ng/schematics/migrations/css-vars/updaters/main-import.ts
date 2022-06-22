@@ -1,6 +1,6 @@
 import type { AtRule, Node, Root } from 'postcss';
 import type { ValueParser } from 'postcss-value-parser';
-import { addImport, PostCssLib, removeImportNode } from '../../../lib/scss-ast';
+import { addImport, PostCssLib, removeImportNode } from '../../../lib/scss-ast.js';
 
 export function updateMainImport(root: Root, postCss: PostCssLib, postCssValueParser: ValueParser) {
 	let hasMainScss = false;
@@ -18,6 +18,17 @@ export function updateMainImport(root: Root, postCss: PostCssLib, postCssValuePa
 			removeImportNode(atRule, 'ng/style/main.overridable', postCssValueParser);
 			hasMainNg = true;
 		}
+		if (atRule.params.includes('scss/src/theming')) {
+			removeImportNode(atRule, 'scss/src/theming', postCssValueParser);
+		}
+		if (atRule.params.includes('scss/src/main')) {
+			removeImportNode(atRule, 'scss/src/main', postCssValueParser);
+			hasMainScss = true;
+		}
+		if (atRule.params.includes('ng/style/main')) {
+			removeImportNode(atRule, 'ng/style/main', postCssValueParser);
+			hasMainNg = true;
+		}
 	});
 
 	if (hasMainScss) {
@@ -25,7 +36,7 @@ export function updateMainImport(root: Root, postCss: PostCssLib, postCssValuePa
 		addForwardRule(root, '@lucca-front/scss/src/components', postCss);
 	}
 	if (hasMainNg) {
-		addForwardRule(root, '@lucca-front/ng/style/main', postCss);
+		addForwardRule(root, '@lucca-front/ng/src/main', postCss);
 	}
 }
 

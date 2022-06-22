@@ -1,16 +1,16 @@
 import type { ValueParser } from 'postcss-value-parser';
-import { updateCssClassNames } from '../../lib/html-ast';
-import { PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast';
-import { mixinRegistry } from './mixin-registry';
-import { commentSassFuncWithVar, updateColorMixin } from './updaters/color';
-import { updateElevation } from './updaters/elevation';
-import { updateGetSetFunctions } from './updaters/get-set';
-import { updateIconSizing } from './updaters/icon-sizing';
-import { removeIE11ThemeSupport } from './updaters/ie11';
-import { updateMainImport } from './updaters/main-import';
-import { replaceFuncMixinsWithoutInclude, replaceIncludedMixin } from './updaters/mixins';
-import { removeScssPlaceholders } from './updaters/remove-scss-placeholder';
-import { updateThemeMixin } from './updaters/theme';
+import { AngularCompilerLib, updateCssClassNames } from '../../lib/html-ast.js';
+import { PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
+import { mixinRegistry } from './mixin-registry.js';
+import { commentSassFuncWithVar, updateColorMixin } from './updaters/color.js';
+import { updateElevation } from './updaters/elevation.js';
+import { updateGetSetFunctions } from './updaters/get-set.js';
+import { updateIconSizing } from './updaters/icon-sizing.js';
+import { removeIE11ThemeSupport } from './updaters/ie11.js';
+import { updateMainImport } from './updaters/main-import.js';
+import { replaceFuncMixinsWithoutInclude, replaceIncludedMixin } from './updaters/mixins.js';
+import { removeScssPlaceholders } from './updaters/remove-scss-placeholder.js';
+import { updateThemeMixin } from './updaters/theme.js';
 
 export function migrateScssFile(content: string, postCss: PostCssLib, postCssScss: PostCssScssLib, postcssValueParser: ValueParser): string {
 	const root = postCssScss.parse(content);
@@ -53,12 +53,16 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
 
-export function migrateHTMLFile(content: string): string {
-	return updateCssClassNames(content, {
-		'u-fontWeightBold': 'u-fontWeight600',
-		'u-order1': 'u-flexOrder1',
-		'u-order-1': 'u-flexOrderMinus1',
-	});
+export function migrateHTMLFile(content: string, angularCompiler: AngularCompilerLib): string {
+	return updateCssClassNames(
+		content,
+		{
+			'u-fontWeightBold': 'u-fontWeight600',
+			'u-order1': 'u-flexOrder1',
+			'u-order-1': 'u-flexOrderMinus1',
+		},
+		angularCompiler,
+	);
 }
 
 interface AngularJsonFile {
@@ -97,9 +101,14 @@ export function migrateAngularJsonFile(content: string): string {
 
 		for (const architectNode of architectNodes) {
 			const architect = project.architect[architectNode];
+			const options = architect?.options?.stylePreprocessorOptions;
 
-			if (architect?.options?.stylePreprocessorOptions?.includePaths) {
-				delete architect.options.stylePreprocessorOptions;
+			if (options?.includePaths) {
+				options.includePaths = options.includePaths.filter((p) => !p.startsWith('@lucca-front/'));
+
+				if (!options.includePaths.length) {
+					delete architect.options?.stylePreprocessorOptions;
+				}
 			}
 		}
 	}

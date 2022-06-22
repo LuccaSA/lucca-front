@@ -41,6 +41,11 @@
 						"styles": [
 							".storybook/src/styles.scss"
 						],
+						"stylePreprocessorOptions": {
+							"includePaths": [
+								"node_modules"
+							]
+						},
 						"compodoc": false,
 						"port": 6006
 					}
