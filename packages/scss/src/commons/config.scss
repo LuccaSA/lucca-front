@@ -1,6 +1,7 @@
 $prefix: 'u-' !default;
 $states: 'error', 'warning', 'success' !default;
 $palettes: 'primary', 'secondary', 'grey' !default;
+$fontVariable: false !default;
 
 $primary: (
 	text: #ffffff,
