@@ -78,11 +78,11 @@
 .grid {
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.largerThan($breakpoint) {
-			.#{config.$prefix}#{$breakpoint}First {
+			.u-#{$breakpoint}First {
 				@include first;
 			}
 
-			.#{config.$prefix}#{$breakpoint}Last {
+			.u-#{$breakpoint}Last {
 				@include last;
 			}
 		}

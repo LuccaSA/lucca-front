@@ -41,13 +41,17 @@
 @include core.palettes;
 
 @media only print {
-	@include core.classes('display', core.$displays, $prefix: config.$prefix + 'onlyPrint');
+	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
+}
+
+%displayNone {
+	display: none;
 }
 
 @each $display in core.$displays {
 	@if $display != 'none' {
-		.#{config.$prefix}onlyPrintDisplay#{transform.capitalize($display)} {
-			display: none;
+		.u-onlyPrintDisplay#{transform.capitalize($display)} {
+			@extend %displayNone;
 		}
 	}
 }
@@ -56,52 +60,52 @@
 	@include core.classes('scroll-behavior', core.$scrollBehavior);
 }
 
-.#{config.$prefix}textLight {
+.u-textLight {
 	color: var(--palettes-grey-600) !important;
 }
 
-.#{config.$prefix}textPlaceholder {
+.u-textPlaceholder {
 	color: var(--palettes-grey-400) !important;
 }
 
-.#{config.$prefix}positionStatic {
+.u-positionStatic {
 	position: static !important;
 }
 
-.#{config.$prefix}textLeft {
+.u-textLeft {
 	text-align: left !important;
 }
 
-.#{config.$prefix}textRight {
+.u-textRight {
 	text-align: right !important;
 }
 
-.#{config.$prefix}textCenter {
+.u-textCenter {
 	text-align: center !important;
 }
 
-.#{config.$prefix}mask {
+.u-mask {
 	@include a11y.mask('!important');
 }
 
-.#{config.$prefix}listReset {
+.u-listReset {
 	@include reset.list('!important');
 }
 
-.#{config.$prefix}descriptionListReset {
+.u-descriptionListReset {
 	@include reset.list($list: 'dl', $suffix: '!important');
 }
 
-.#{config.$prefix}buttonReset {
+.u-buttonReset {
 	@include reset.button('!important');
 }
 
-.#{config.$prefix}clearfix,
-.#{config.$prefix}clear {
+.u-clearfix,
+.u-clear {
 	@include reset.clearfix('!important');
 }
 
-.#{config.$prefix}ellipsis {
+.u-ellipsis {
 	@include text.ellipsis('!important');
 }
 
@@ -117,16 +121,16 @@
 	}
 }
 
-.#{config.$prefix}h1,
-.#{config.$prefix}h2,
-.#{config.$prefix}h3,
-.#{config.$prefix}h4,
-.#{config.$prefix}h5,
-.#{config.$prefix}h6 {
+.u-h1,
+.u-h2,
+.u-h3,
+.u-h4,
+.u-h5,
+.u-h6 {
 	@include title.component;
 }
 
-.#{config.$prefix}h1 {
+.u-h1 {
 	@include title.h1;
 
 	&.mod-headline {
@@ -134,35 +138,35 @@
 	}
 }
 
-.#{config.$prefix}h2 {
+.u-h2 {
 	@include title.h2;
 }
 
-.#{config.$prefix}h3 {
+.u-h3 {
 	@include title.h3;
 }
 
-.#{config.$prefix}h4 {
+.u-h4 {
 	@include title.h4;
 }
 
-.#{config.$prefix}h5 {
+.u-h5 {
 	@include title.h5;
 }
 
-.#{config.$prefix}h6 {
+.u-h6 {
 	@include title.h6;
 }
 
-.#{config.$prefix}ellipsis {
+.u-ellipsis {
 	@include text.ellipsis;
 }
 
-.#{config.$prefix}unit {
+.u-unit {
 	font-size: 0.66em !important;
 }
 
-.#{config.$prefix}comma {
+.u-comma {
 	&:not(:last-child) {
 		&::after {
 			content: ', ' !important;
@@ -172,13 +176,13 @@
 
 @each $direction in core.$boxDirection {
 	@if $direction == '' {
-		.#{config.$prefix}insetReset,
-		.#{config.$prefix}inset0 {
+		.u-insetReset,
+		.u-inset0 {
 			inset: 0 !important;
 		}
 	} @else {
-		.#{config.$prefix}#{$direction}Reset,
-		.#{config.$prefix}#{$direction}0 {
+		.u-#{$direction}Reset,
+		.u-#{$direction}0 {
 			#{$direction}: 0 !important;
 		}
 	}
@@ -187,12 +191,12 @@
 @each $elevation in config.$elevations {
 	$index: list.index(config.$elevations, $elevation);
 
-	.#{config.$prefix}elevate#{$index} {
+	.u-elevate#{$index} {
 		box-shadow: var(--commons-elevations-elevation-#{$index});
 	}
 }
 
-.#{config.$prefix}animated {
+.u-animated {
 	&FadeIn,
 	&FadeOut {
 		@include keyframe.fadeIn;
@@ -294,7 +298,7 @@
 	}
 }
 
-[class*='#{config.$prefix}animated'] {
+[class*='u-animated'] {
 	animation-duration: var(--duration, var(commons-animations-durations-standard));
 	animation-timing-function: var(commons-animations-function);
 
