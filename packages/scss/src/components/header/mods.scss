@@ -7,7 +7,7 @@
 	right: 0;
 
 	@include media.smallerThan('s') {
-		top: calc(var(--commons-banner-height) + var(--components-navSide-mobile-toggle-height));
+		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 		left: 0 !important;
 	}
 }
@@ -20,10 +20,10 @@
 }
 
 @mixin left {
-	left: var(--components-navSide-width);
+	left: var(--commons-navSide-width);
 
 	@include media.smallerThan('s') {
-		top: var(--components-navSide-mobile-toggle-height);
+		top: var(--commons-navSide-mobile-toggle-height);
 	}
 }
 

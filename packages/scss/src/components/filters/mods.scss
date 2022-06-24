@@ -8,7 +8,7 @@
 
 	@include media.smallerThan('s') {
 		left: 0 !important;
-		top: calc(var(--commons-banner-height) + var(--components-navSide-mobile-toggle-height));
+		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	}
 }
 
