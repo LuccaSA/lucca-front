@@ -7,13 +7,11 @@
 		}
 	}
 
-	--components-navSide-width: 15rem;
 	--components-navSide-offset-top: 0;
 	--components-navSide-padding-top: 0;
 	--components-navSide-main-font-size: 0.875rem;
 	--components-navSide-sub-font-size: 0.875rem;
 	--components-navSide-submenu-max-height: 33rem;
-	--components-navSide-mobile-toggle-height: 3.5rem;
 
 	--components-navSide-fullwidth-palette-bg-color: #2d3368;
 	--components-navSide-fullwidth-palette-text: var(--colors-white-color);
@@ -36,7 +34,6 @@
 	--components-navSide-compact-palette-alert-text: var(--colors-white-color);
 	--components-navSide-compact-palette-selected-alert-color: var(--palettes-secondary-700);
 	--components-navSide-compact-palette-selected-alert-text: var(--colors-white-color);
-	--components-navSide-compact-width: 7.5rem;
 	--components-navSide-compact-font-size: 0.875rem;
 
 	--components-navSide-bottom-section-palette-bg-color: transparent;
