@@ -1,2 +1,4 @@
 @mixin vars {
+  --components-container-max-width: var(--breakpoints-xxl-breakAt);
+  --components-container-padding: 3.5rem;
 }
