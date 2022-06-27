@@ -93,6 +93,7 @@ Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code,
 		}
 	}
