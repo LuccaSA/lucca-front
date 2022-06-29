@@ -1,6 +1,6 @@
 import type { ValueParser } from 'postcss-value-parser';
 import { AngularCompilerLib, updateCssClassNames } from '../../lib/html-ast.js';
-import { addForwardRule, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
+import { addForwardRule, commentNode, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
 import { mixinRegistry } from './mixin-registry.js';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color.js';
 import { updateElevation } from './updaters/elevation.js';
@@ -49,6 +49,12 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 
 	replaceIncludedMixin(root, mixinRegistry, postCss, postcssValueParser);
 	replaceFuncMixinsWithoutInclude(root, mixinRegistry, postCss);
+
+	root.walkAtRules('import', (rule) => {
+		if (rule.params.includes('@lucca-front/ng/style/components')) {
+			commentNode(rule, 'Import non géré par la migration auto.', postCss);
+		}
+	});
 
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
