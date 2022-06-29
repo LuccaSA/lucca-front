@@ -1,5 +1,5 @@
 import type { AtRule, Container, Declaration, Node, Root } from 'postcss';
-import type { ValueParser } from 'postcss-value-parser';
+import type { Node as ValueNode, ValueParser } from 'postcss-value-parser';
 import { ScssValueAst } from './scss-value-ast.js';
 
 export type PostCssLib = typeof import('./local-deps/postcss.js').postCss;
@@ -58,12 +58,30 @@ export function addImport(root: Root, atRule: AtRule, afterNode?: Node) {
 		afterNode.after(atRule);
 	} else {
 		const firstNode = root.first;
-		root.first?.before(atRule);
 
 		if (firstNode) {
+			root.first.before(atRule);
 			firstNode.raws.before = '\n\n';
+		} else {
+			root.append(atRule);
 		}
 	}
+}
+
+export function addForwardRule(root: Root, name: string, postCss: PostCssLib) {
+	let lastForwardRule: AtRule | undefined;
+
+	root.walkAtRules('forward', (rule) => {
+		lastForwardRule = rule;
+	});
+
+	let afterNode: Node | undefined = lastForwardRule;
+
+	if (!afterNode && root.first?.type === 'comment') {
+		afterNode = root.first;
+	}
+
+	addImport(root, new postCss.AtRule({ name: 'forward', params: `'${name}'` }), afterNode);
 }
 
 /**
@@ -121,4 +139,52 @@ export function commentNode(node: AtRule | Declaration, comment: string, postCss
 
 	commentNode.raws.before = originalBefore;
 	commentCodeNodes[0].raws.before = commentCodeNodes[0].raws.before?.replace(/\n+/, '\n');
+}
+
+export function wrapWithCalcFunctionNode(rootValueNode: ScssValueAst, node: ValueNode, postcssValueParser: ValueParser): void {
+	const parent = rootValueNode.getParent(node);
+
+	if (parent?.type === 'function' && parent.value === 'calc') {
+		return;
+	}
+
+	// Split function argument
+	const { chunks, separators } = split(parent?.nodes ?? rootValueNode.nodes, (n) => n.type === 'div');
+
+	const updated = chunks.map((block) => {
+		// Wrap block inside a calc()
+		return block.includes(node) ? new ScssValueAst(`calc(${rootValueNode.stringify(...block)})`, postcssValueParser).nodes : block;
+	});
+
+	const newNodes = join(updated, separators);
+
+	if (parent) {
+		parent.nodes = newNodes;
+	} else {
+		rootValueNode.nodes = newNodes;
+	}
+}
+
+function split<T>(array: T[], predicate: (item: T) => boolean): { chunks: T[][]; separators: T[] } {
+	const chunks: T[][] = [];
+	const separators: T[] = [];
+	let current: T[] = [];
+
+	for (const item of array) {
+		if (predicate(item)) {
+			separators.push(item);
+			chunks.push(current);
+			current = [];
+		} else {
+			current.push(item);
+		}
+	}
+
+	chunks.push(current);
+
+	return { chunks, separators };
+}
+
+function join<T>(array: T[][], separators: T[]): T[] {
+	return array.reduce((acc, chunk, index) => (index === 0 ? chunk : [...acc, separators[index - 1], ...chunk]), []);
 }

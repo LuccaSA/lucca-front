@@ -88,7 +88,7 @@ describe('CSS Vars Migration', () => {
 
 		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
 		// migration-v10-css-vars is the name of the migration, which is defined in the migration.json file
-		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true }, tree).toPromise();
+		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true, skipGlobalImportOptimization: true }, tree).toPromise();
 
 		expect(tree.files.length).toBe(inputs.length);
 
@@ -101,6 +101,26 @@ describe('CSS Vars Migration', () => {
 
 			expect(stripLastNewLine(actualContent)).toBe(stripLastNewLine(expectedContent));
 		}
+	});
+
+	it('should add optimized global imports', async () => {
+		const tree = new UnitTestTree(Tree.empty());
+		tree.create('app.component.html', '<button type="button" class="button">Test</button>');
+		tree.create('table.component.html', '<table class="table" [class.mod-stickyColumn]="true"></table>');
+		tree.create('styles.scss', "@import '@lucca-front/scss/src/main.overridable';");
+
+		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
+		// migration-v10-css-vars is the name of the migration, which is defined in the migration.json file
+		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true }, tree).toPromise();
+
+		const expectedImports = [
+			`@forward '@lucca-front/scss/src/commons';`,
+			`@forward '@lucca-front/scss/src/components/button';`,
+			`@forward '@lucca-front/scss/src/components/table';`,
+			`@forward '@lucca-front/scss/src/components/tableSticked';`,
+		];
+
+		expect(tree.readContent('styles.scss')).toBe(expectedImports.join('\n'));
 	});
 });
 

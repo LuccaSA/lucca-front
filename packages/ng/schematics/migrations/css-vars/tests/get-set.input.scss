@@ -2,6 +2,13 @@
   background-color: _safeGet($palette, '100');
   color: _safeGet($palette, '800');
   left: -_component('navSide.width');
+  margin-bottom: _theme('spacings.smaller') * -1;
+  margin-top: calc(var(--spacings-smaller) * -1);
+  background: linear-gradient(
+    _theme('spacings.smaller') * -1,
+    -1 * _theme('spacings.smaller'),
+    _theme('spacings.smaller')
+  );
 }
 
 .tag {

@@ -1,6 +1,6 @@
 import type { Declaration, Root } from 'postcss';
 import type { FunctionNode, ValueParser } from 'postcss-value-parser';
-import { commentNode, PostCssLib } from '../../../lib/scss-ast.js';
+import { commentNode, PostCssLib, wrapWithCalcFunctionNode } from '../../../lib/scss-ast.js';
 import { ScssValueAst } from '../../../lib/scss-value-ast.js';
 
 export function updateThemeMixin(root: Root, postCss: PostCssLib, postcssValueParser: ValueParser) {
@@ -15,6 +15,11 @@ export function updateThemeMixin(root: Root, postCss: PostCssLib, postcssValuePa
 				(themeVar) => {
 					funcNode.value = 'var';
 					funcNode.nodes = new ScssValueAst(`--${themeVar}`, postcssValueParser).nodes;
+
+					const siblings = valueNode.getSiblings(funcNode);
+					if (siblings.some((s) => s.type === 'word' && s.value === '*')) {
+						wrapWithCalcFunctionNode(valueNode, funcNode, postcssValueParser);
+					}
 				},
 				postCss,
 			),
@@ -28,12 +33,17 @@ export function updateThemeMixin(root: Root, postCss: PostCssLib, postcssValuePa
 				(themeVar) => {
 					funcNode.value = 'var';
 					funcNode.nodes = new ScssValueAst(`--components-${themeVar}`, postcssValueParser).nodes;
+
+					const siblings = valueNode.getSiblings(funcNode);
+					if (siblings.some((s) => s.type === 'word' && s.value === '*')) {
+						wrapWithCalcFunctionNode(valueNode, funcNode, postcssValueParser);
+					}
 				},
 				postCss,
 			),
 		);
 
-		// -_theme("spacings.smallest") => calc(var(--spacings-smallest) -1)
+		// -_theme("spacings.smallest") => calc(var(--spacings-smallest) * -1)
 		valueNode.walkFunction('-_theme', (funcNode) =>
 			updateThemeNode(
 				funcNode,

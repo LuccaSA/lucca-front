@@ -4,6 +4,13 @@
   // [LF NEXT] Passer directement par des variables CSS.
   // color: _safeGet($palette, '800')
   left: calc(var(--components-navSide-width) * -1);
+  margin-bottom: calc(var(--spacings-smaller) * -1);
+  margin-top: calc(var(--spacings-smaller) * -1);
+  background: linear-gradient(
+    calc(var(--spacings-smaller) * -1),
+    calc(-1 * var(--spacings-smaller)),
+    var(--spacings-smaller)
+  );
 }
 
 .tag {

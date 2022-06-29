@@ -1,6 +1,6 @@
-import type { AtRule, Node, Root } from 'postcss';
+import type { Root } from 'postcss';
 import type { ValueParser } from 'postcss-value-parser';
-import { addImport, PostCssLib, removeImportNode } from '../../../lib/scss-ast.js';
+import { addForwardRule, PostCssLib, removeImportNode } from '../../../lib/scss-ast.js';
 
 export function updateMainImport(root: Root, postCss: PostCssLib, postCssValueParser: ValueParser) {
 	let hasMainScss = false;
@@ -38,20 +38,4 @@ export function updateMainImport(root: Root, postCss: PostCssLib, postCssValuePa
 	if (hasMainNg) {
 		addForwardRule(root, '@lucca-front/ng/src/main', postCss);
 	}
-}
-
-function addForwardRule(root: Root, name: string, postCss: PostCssLib) {
-	let lastForwardRule: AtRule | undefined;
-
-	root.walkAtRules('forward', (rule) => {
-		lastForwardRule = rule;
-	});
-
-	let afterNode: Node | undefined = lastForwardRule;
-
-	if (!afterNode && root.first?.type === 'comment') {
-		afterNode = root.first;
-	}
-
-	addImport(root, new postCss.AtRule({ name: 'forward', params: `'${name}'` }), afterNode);
 }

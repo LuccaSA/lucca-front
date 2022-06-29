@@ -1,6 +1,6 @@
 import type { ValueParser } from 'postcss-value-parser';
 import { AngularCompilerLib, updateCssClassNames } from '../../lib/html-ast.js';
-import { PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
+import { addForwardRule, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
 import { mixinRegistry } from './mixin-registry.js';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color.js';
 import { updateElevation } from './updaters/elevation.js';
@@ -49,6 +49,26 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 
 	replaceIncludedMixin(root, mixinRegistry, postCss, postcssValueParser);
 	replaceFuncMixinsWithoutInclude(root, mixinRegistry, postCss);
+
+	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
+}
+
+export function optimizeScssGlobalImport(content: string, cssImports: string[], postCss: PostCssLib, postCssScss: PostCssScssLib, postcssValueParser: ValueParser): string {
+	const root = postCssScss.parse(content);
+	let hasGlobalImport = false;
+
+	root.walkAtRules('forward', (rule) => {
+		if (rule.params.includes('@lucca-front/scss/src/components')) {
+			removeImportNode(rule, '@lucca-front/scss/src/components', postcssValueParser);
+			hasGlobalImport = true;
+		}
+	});
+
+	if (hasGlobalImport) {
+		for (const cssImport of cssImports) {
+			addForwardRule(root, cssImport, postCss);
+		}
+	}
 
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }

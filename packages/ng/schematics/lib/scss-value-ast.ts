@@ -1,4 +1,4 @@
-import type { FunctionNode, Node, ParsedValue, ValueParser } from 'postcss-value-parser';
+import type { FunctionNode, Node, ParsedValue, ValueParser, WalkCallback } from 'postcss-value-parser';
 
 export class ScssValueAst {
 	private parsed: ParsedValue;
@@ -10,12 +10,48 @@ export class ScssValueAst {
 		this.parsed.nodes = nodes;
 	}
 
-	constructor(value: string, postcssValueParser: ValueParser) {
+	constructor(value: string, private postcssValueParser: ValueParser) {
 		this.parsed = postcssValueParser(value);
+	}
+
+	public getParent(node: Node): FunctionNode | null {
+		let parent: FunctionNode | null = null;
+
+		if (this.nodes.includes(node)) {
+			return parent;
+		}
+
+		this.walkFunction(/.*/, (funcNode) => {
+			if (funcNode.nodes.includes(node)) {
+				parent = funcNode;
+				return false;
+			}
+
+			return undefined;
+		});
+
+		return parent;
+	}
+
+	public getSiblings(node: Node): Node[] {
+		const parent = this.getParent(node);
+		const nodes = parent === null ? this.nodes : parent.type === 'function' ? parent.nodes : [];
+
+		return nodes.filter((n) => n !== node);
+	}
+
+	public stringify(...nodes: Node[]): string {
+		const parsed = this.postcssValueParser('');
+		parsed.nodes = nodes;
+		return parsed.toString();
 	}
 
 	public toString(): string {
 		return this.parsed.toString();
+	}
+
+	public walk(callback: WalkCallback, bubble?: boolean): void {
+		this.parsed.walk(callback, bubble);
 	}
 
 	public walkFunction(functionFilter: string | RegExp, callback: (funcNode: FunctionNode) => void | boolean): void {

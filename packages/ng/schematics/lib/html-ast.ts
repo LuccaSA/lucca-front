@@ -102,3 +102,18 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 
 	return applyUpdates(content, updates);
 }
+
+export function extractAllCssClassNames(content: string, lib: AngularCompilerLib): string[] {
+	const allClasses = new Set<string>();
+	const root = new HtmlAst(content, lib);
+
+	root.visitAttribute('class', (classAttr) => allClasses.add(classAttr.value));
+
+	root.visitBoundAttribute(/.*/, (boundAttr) => {
+		if (boundAttr.keySpan.details?.startsWith('class.')) {
+			allClasses.add(boundAttr.name);
+		}
+	});
+
+	return [...allClasses];
+}
