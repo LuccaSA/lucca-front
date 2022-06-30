@@ -60,7 +60,7 @@ gulp.task('icons', gulp.series('icons:clean', 'icons:build', 'icons:copy', 'icon
  -------------------------------*/
 
 const SCSS_SRC_DIR = './packages/scss/src';
-const SCSS_SRC_MAIN = './packages/scss/src/main.dist.scss';
+const SCSS_SRC_MAIN = './packages/scss/src/main-all.scss';
 const SCSS_OUT_DIR = './dist/scss';
 
 gulp.task('scss:clean', () => {
