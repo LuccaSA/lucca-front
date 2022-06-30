@@ -92,7 +92,7 @@ To import all components, simply add the 3 following lines (not recommended as i
 ```
 // Import styles
 @forward '@lucca-front/icons/src/main’;
-@forward '@lucca-front/scss/src/main.dist’;
+@forward '@lucca-front/scss/src/main-all’;
 @forward '@lucca-front/ng/src/main’;
 ```
 
