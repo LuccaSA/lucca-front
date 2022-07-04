@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuEstablishmentSelectInputComponent, LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
@@ -25,7 +26,11 @@ export default {
 	decorators: [
 		componentWrapperDecorator(EstablishmentSelectStory),
 		moduleMetadata({
-			imports: [LuEstablishmentSelectModule, BrowserAnimationsModule],
+			imports: [
+				HttpClientModule,
+				LuEstablishmentSelectModule,
+				BrowserAnimationsModule,
+			],
 			declarations: [EstablishmentSelectStory],
 		}),
 	],

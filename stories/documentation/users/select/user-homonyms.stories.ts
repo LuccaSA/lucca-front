@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +23,7 @@ export default {
 		moduleMetadata({
 			declarations: [UserHomonymsStory],
 			imports: [
+				HttpClientModule,
 				LuUserModule,
 				LuSelectModule,
 				LuApiModule,
