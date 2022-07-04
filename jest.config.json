@@ -10,7 +10,8 @@
   ],
   "modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
   "moduleNameMapper": {
-    "^@lucca-front/ng/(.*)": "packages/ng/$1/src/public-api.ts"
+    "^@lucca-front/ng/(.*)": "packages/ng/$1/src/public-api.ts",
+    "^(\\.{1,2}/.*)\\.js$": "$1"
   },
   "roots": ["<rootDir>/packages/ng"]
 }

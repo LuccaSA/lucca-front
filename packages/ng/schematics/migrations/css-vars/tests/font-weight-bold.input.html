@@ -1,0 +1,6 @@
+<div [class.u-fontWeightBold]="isCurrentUser">
+	<span class="mdr u-fontWeightBold"> {{ 'EXPORT_CARD_TITLE_DATE' | transloco: {createdAt: date | date: 'medium'} }} </span>
+	<span class="u-fontWeightBold"> {{ 'EXPORT_CARD_TITLE_DATE' | transloco: {createdAt: date | date: 'medium'} }} </span>
+</div>
+
+<span [ngClass]="{'u-textDefault u-fontWeightBold': true }"></span>

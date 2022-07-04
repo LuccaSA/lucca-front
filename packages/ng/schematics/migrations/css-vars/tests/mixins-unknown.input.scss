@@ -1,0 +1,5 @@
+@include selectInputStyle;
+
+.test {
+  color: _safeGet($palette, "text");
+}

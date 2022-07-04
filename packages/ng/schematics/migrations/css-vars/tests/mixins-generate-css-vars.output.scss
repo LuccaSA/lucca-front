@@ -1,0 +1,7 @@
+// You can add global styles to this file, and also import other style files
+@forward '@lucca-front/scss/src/commons';
+@forward '@lucca-front/scss/src/components';
+
+:root {
+  border: 1px solid lime;
+}

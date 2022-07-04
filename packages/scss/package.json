@@ -19,6 +19,9 @@
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
+  "dependencies": {
+    "normalize.css": "^8.0.0"
+  },
   "peerDependencies": {
     "@lucca-front/icons": "*"
   }

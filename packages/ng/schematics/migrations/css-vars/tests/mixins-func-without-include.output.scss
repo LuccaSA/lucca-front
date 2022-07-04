@@ -1,0 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/form';
+
+.withMixinFunc {
+	box-shadow: form.fakeBorderOverlay(var(--palettes-error-700));
+}

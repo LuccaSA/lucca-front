@@ -1,0 +1,10 @@
+{
+	"$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+	"schematics": {
+		"migration-v10-css-vars": {
+			"version": "10.0.0-alpha",
+			"description": "Remove LF <= 9 theming system and import to use new scss syntax and CSS Vars everywhere",
+			"factory": "./migrations/css-vars/index"
+		}
+	}
+}
