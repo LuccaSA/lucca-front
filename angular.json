@@ -56,7 +56,8 @@
               "includePaths": [
                 "packages/scss/src/overrides",
                 "packages/ng/style/overrides",
-                "packages/ng/style"
+                "packages/ng/style",
+                "node_modules"
               ]
             },
             "compodoc": false

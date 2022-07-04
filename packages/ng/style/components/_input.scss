@@ -1,12 +1,12 @@
-@import "~@lucca-front/scss/src/mixins/forms";
+@import '@lucca-front/scss/src/mixins/forms';
 
 .textfield {
 	.textfield-input.ng-invalid.ng-touched {
-		@include fieldError("textfield");
+		@include fieldError('textfield');
 	}
 
 	&.mod-material .textfield-input.ng-invalid.ng-touched {
-		@include fieldMaterialError("textfield");
+		@include fieldMaterialError('textfield');
 	}
 
 	&.mod-framed {
@@ -14,7 +14,7 @@
 			&.ng-invalid.ng-touched,
 			&.is-invalid,
 			&.is-error {
-				@include fieldFramedError("textfield");
+				@include fieldFramedError('textfield');
 			}
 		}
 	}
@@ -25,7 +25,7 @@
 		&.is-error,
 		&.is-invalid,
 		&.ng-invalid.ng-touched {
-			@include fieldFramedError("textfield");
+			@include fieldFramedError('textfield');
 		}
 	}
 }
@@ -38,7 +38,7 @@
 			&.ng-invalid.ng-touched,
 			&.is-invalid,
 			&.is-error {
-				@include fieldFramedError("radiosfield");
+				@include fieldFramedError('radiosfield');
 			}
 		}
 	}
@@ -50,7 +50,7 @@
 		&.is-error,
 		&.is-invalid,
 		&.ng-invalid.ng-touched {
-			@include fieldFramedError("radiosfield");
+			@include fieldFramedError('radiosfield');
 		}
 	}
 }
