@@ -19,12 +19,6 @@
 
 @mixin subComponent($content) {
 	&::before {
-		@supports (content: '*' / '') {
-			content: '#{$content}'/'';
-		}
-
-		@supports not (content: '*' / '') {
-			content: '#{$content}';
-		}
+		content: '#{$content}';
 	}
 }

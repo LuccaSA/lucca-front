@@ -8,9 +8,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const SASS_OPTIONS_DIST = {
 	outputStyle: 'compressed',
 	sourceMapEmbed: false,
-	includePaths: [
-		'node_modules'
-	]
+	includePaths: ['node_modules'],
 };
 const AUTOPREFIXER_OPTIONS = {
 	cascade: false,
@@ -52,6 +50,7 @@ gulp.task('icons:copy', () => {
 gulp.task('icons:pck', () => {
 	return gulp.src(['./packages/icons/package.json']).pipe(gulp.dest(ICONS_OUT_DIR));
 });
+
 gulp.task('icons:src', () => {
 	return gulp.src([`${ICONS_SRC_DIR}/**`]).pipe(gulp.dest(`${ICONS_OUT_DIR}/src`));
 });
@@ -63,7 +62,7 @@ gulp.task('icons', gulp.series('icons:clean', 'icons:build', 'icons:copy', 'icon
  -------------------------------*/
 
 const SCSS_SRC_DIR = './packages/scss/src';
-const SCSS_SRC_MAIN = './packages/scss/src/main.dist.scss';
+const SCSS_SRC_MAIN = './packages/scss/src/main-all.scss';
 const SCSS_OUT_DIR = './dist/scss';
 
 gulp.task('scss:clean', () => {
@@ -82,19 +81,12 @@ gulp.task('scss:build', () => {
 gulp.task('scss:pck', () => {
 	return gulp.src(['./packages/scss/package.json']).pipe(gulp.dest(SCSS_OUT_DIR));
 });
+
 gulp.task('scss:src', () => {
 	return gulp.src([`${SCSS_SRC_DIR}/**/*.scss`]).pipe(gulp.dest(`${SCSS_OUT_DIR}/src`));
 });
 
-gulp.task(
-	'scss',
-	gulp.series(
-		'scss:clean',
-		'scss:build',
-		'scss:pck',
-		'scss:src'
-	)
-);
+gulp.task('scss', gulp.series('scss:clean', 'scss:build', 'scss:pck', 'scss:src'));
 
 /* -----------------------------
  * NG *
@@ -105,6 +97,7 @@ gulp.task('ng:schematics:build', () => {
 	childProcess.stdout.pipe(process.stdout);
 	return childProcess;
 });
+
 gulp.task('ng:schematics:collection', () => {
 	return gulp.src([
 		`packages/ng/schematics/collection.json`,
