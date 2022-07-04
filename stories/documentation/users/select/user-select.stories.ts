@@ -1,8 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Story, Meta, moduleMetadata, componentWrapperDecorator } from '@storybook/angular';
-import { LuUserModule, LuUserSelectInputComponent } from '@lucca-front/ng/user';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuUserModule, LuUserSelectInputComponent } from '@lucca-front/ng/user';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'user-select-stories',
@@ -19,6 +20,7 @@ export default {
 		moduleMetadata({
 			declarations: [UserSelectStory],
 			imports: [
+				HttpClientModule,
 				LuUserModule,
 				BrowserAnimationsModule,
 				FormsModule,

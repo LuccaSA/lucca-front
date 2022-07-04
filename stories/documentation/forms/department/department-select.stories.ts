@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuDepartmentModule, LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
@@ -19,7 +20,11 @@ export default {
 	decorators: [
 		componentWrapperDecorator(DepartmentStory),
 		moduleMetadata({
-			imports: [LuDepartmentModule, BrowserAnimationsModule],
+			imports: [
+				HttpClientModule,
+				LuDepartmentModule,
+				BrowserAnimationsModule,
+			],
 			declarations: [DepartmentStory],
 		}),
 	],
