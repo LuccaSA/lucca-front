@@ -15,7 +15,7 @@ const Primary = composeStory(Basic, Meta);
 const mock = createMock(LuApiV3Service);
 mock.searchPaged = jest.fn(() => of([]));
 
-describe('button', () => {
+describe('lu-api-select', () => {
 	it('should display dialog with a click on a lu select ', async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
@@ -61,6 +61,6 @@ describe('button', () => {
 		const luSelectElement = screen.getByTestId('lu-select');
 
 		const results = await axe(luSelectElement);
-		expect(results).toHaveNoViolations(); // off course not
+		expect(results).toHaveNoViolations(); // of course not
 	});
 });
