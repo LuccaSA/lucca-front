@@ -28,7 +28,7 @@ npm install @lucca-front/ng --save
 Import Lucca Front in src/style.scss (or your main scss file):
 
 ```
-@import "~@lucca-front/scss/src/main.overridable.scss";
+@import "@lucca-front/scss/src/main.overridable.scss";
 ```
 
 In angular-cli.json, add this to your stylePreprocessorOptions includePaths:
@@ -140,7 +140,7 @@ $theme: _set($theme, "colors", $colors);
 You can also call your palette colors in your own components:
 
 ```
-@import "~@lucca-front/scss/src/theming.overridable";
+@import "@lucca-front/scss/src/theming.overridable";
 _color("primary")
 _color("primary", "text")
 _color("text.default")
