@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuApiModule, LuApiSelectInputComponent } from '@lucca-front/ng/api';
@@ -34,7 +35,7 @@ export default {
 		componentWrapperDecorator(ApiSelectStory),
 		moduleMetadata({
 			declarations: [ApiSelectStory],
-			imports: [LuApiModule, BrowserAnimationsModule],
+			imports: [HttpClientModule, LuApiModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
