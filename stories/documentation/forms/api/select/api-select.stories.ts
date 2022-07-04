@@ -1,39 +1,31 @@
-import { Component } from "@angular/core";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { LuApiModule, LuApiSelectInputComponent } from "@lucca-front/ng/api";
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from "@storybook/angular";
+import { HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuApiModule, LuApiSelectInputComponent } from '@lucca-front/ng/api';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
 	template: `
 		<label class="textfield">
-			<lu-api-select class="textfield-input" [api]="apiV3"></lu-api-select>
+			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3"></lu-api-select>
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
 		<label class="textfield u-marginTopStandard">
-			<lu-api-select class="textfield-input"
-				standard="v4"
-				[api]="apiV4"
-				sort="job.name,level.position">
-			</lu-api-select>
+			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
 		<label class="textfield u-marginTopStandard">
-			<lu-api-select class="textfield-input"
-				[disabled]="true"
-				standard="v4"
-				[api]="apiV4"
-				sort="job.name,level.position">
-			</lu-api-select>
+			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
-	`
+	`,
 })
 class ApiSelectStory {
-	apiV3 = '/api/v3/axisSections'
-	apiV4 = '/organization/structure/api/job-qualifications'
+	apiV3 = '/api/v3/axisSections';
+	apiV4 = '/organization/structure/api/job-qualifications';
 }
 
 export default {
@@ -43,15 +35,12 @@ export default {
 		componentWrapperDecorator(ApiSelectStory),
 		moduleMetadata({
 			declarations: [ApiSelectStory],
-			imports: [
-				LuApiModule,
-				BrowserAnimationsModule,
-			],
-		})
+			imports: [HttpClientModule, LuApiModule, BrowserAnimationsModule],
+		}),
 	],
 } as Meta;
 
-const Template: Story<ApiSelectStory> = props => ({ props });
+const Template: Story<ApiSelectStory> = (props) => ({ props });
 
 const code = `
 /* 1. Importer LuApiSelectInputModule */
@@ -95,6 +84,6 @@ Basic.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
+		},
+	},
 };
