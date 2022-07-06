@@ -1,0 +1,39 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component {
+	position: fixed;
+	list-style-type: none;
+	justify-content: center;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	z-index: 9010;
+	inset: calc(var(--spacings-smaller) + var(--spacings-smallest));
+	bottom: auto;
+
+	@at-root {
+		.skipLinks-list {
+			@include reset.list;
+
+			display: flex;
+		}
+
+		.skipLinks-list-item-action {
+			@include button.vars;
+			@include button.component;
+			@include button.smaller;
+
+			&:not(:focus) {
+				@include a11y.mask;
+			}
+		}
+
+		.navSide,
+		.main-content {
+			scroll-margin-top: var(--commons-banner-height);
+		}
+	}
+}
