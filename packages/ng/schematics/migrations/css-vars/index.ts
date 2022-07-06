@@ -77,7 +77,7 @@ export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimiza
 				}
 
 				const content = entry.content.toString();
-				const newContent = optimizeScssGlobalImport(content, cssImports, postCss, postCssScss, postcssValueParser);
+				const newContent = optimizeScssGlobalImport(content, cssImports, postCss, postCssScss);
 
 				if (content !== newContent) {
 					tree.overwrite(path, newContent);
