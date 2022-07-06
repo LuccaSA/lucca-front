@@ -1,18 +1,17 @@
-# lucca-front
+# Lucca Front
 
-A modular framework for developing web applications by [lucca](http://www.lucca.fr).
-Uses sub-packages architecture with unified versioning, à la [angular](https://github.com/angular/angular).
+Lucca Front is a modular framework for developing web applications by [lucca](http://www.lucca.fr).
+It uses sub-packages architecture with unified versioning, à la [angular](https://github.com/angular/angular).
 
-## Contains 3 packages
+## Lucca Front contains 3 packages
 
  - a set of icons
- - a scss framework
+ - a SCSS framework
  - a library of useful angular components
 
-Angular package depends on SCSS one which depends itself on Icons.
+Angular package depends on the SCSS one which depends itself on Icons.
 
 ## How to install
-
 ### Add Lucca Front to your npm package
 
 ```
@@ -24,7 +23,6 @@ npm install @lucca-front/ng --save
 ### Import packages styles
 
 In your file styles.scss, add imports files and components you want to import to your project:
-
 
 ```
 // Import styles
@@ -85,9 +83,9 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/toast';
 @forward '@lucca-front/scss/src/components/util';
 ```
-Then comment unused components to reduce LF’s dist size.
+Then comment unused components to reduce LF’s distribution size and compilation time.
 
-To import all components, simply add the 3 following lines (not recommended as it will increase files weight):
+To import all components, replace the previous code by the 3 following lines (not recommended):
 
 ```
 // Import styles
@@ -96,11 +94,11 @@ To import all components, simply add the 3 following lines (not recommended as i
 @forward '@lucca-front/ng/src/main’;
 ```
 
-For custom imports, check our advanced usage documentation. (+lien)
+For custom imports, check our [advanced usage documentation](https://prisme.lucca.io/94310e217/p/950783-chargement-des-composants).
 
-In angular.json, we suggest to add a couple of entries to your paths
+### Include paths
 
-add this to your stylePreprocessorOptions includePaths:
+In angular.json, we suggest to add a couple of entries to your paths:
 
 ```
 "architects": {
@@ -115,17 +113,10 @@ add this to your stylePreprocessorOptions includePaths:
 },
 ```
 
-## Contribution
-### Golden rules
+## Storybook
+In order to work on Lucca Front, we use Storybook to display components.
 
-Use english
-Don't forget to append the changelog of the corresponding sub-package (automatique now?)
-If you're fixing an issue, reference it in your pr and in the changelog like this :
-Fixed issues
-- [issue #193](https://github.com/LuccaSA/lucca-front/issues/193) - short summary of the issue
-
-
-### Storybook
-To work on Lucca Front, we use Storybook to display components.
-(volta ?)
-→ npm start
+- Install [volta.sh](https://docs.volta.sh/guide/getting-started)
+- Install node `volta install node@lts`
+- Build Compodoc to avoid errors (To be fixed) `npm run compodoc`
+- Run storybook `npm start`
