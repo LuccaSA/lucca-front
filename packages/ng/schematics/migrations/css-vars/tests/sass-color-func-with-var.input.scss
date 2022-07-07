@@ -1,11 +1,11 @@
 .with-sassColorLightenFunc {
 	background-color: white;
-	padding: var(--spacings-small);
+	padding: 1rem;
 	color: lighten(var(--palettes-grey-50), 2.5%);
 }
 
 .with-sassColorDarkenFunc {
-	margin: var(--spacings-small);
-	background-color: darken(#ffffff);
+	margin: 1rem;
+	background-color: darken(#FFFFFF);
 	color: darken(var(--palettes-grey-50), 2.5%);
 }
