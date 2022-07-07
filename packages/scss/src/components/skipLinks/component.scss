@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@use '@lucca-front/scss/src/components/button/exports' as button;
-
 @mixin component {
 	position: fixed;
 	list-style-type: none;
@@ -22,12 +20,31 @@
 		}
 
 		.skipLinks-list-item-action {
-			@include button.vars;
-			@include button.component;
-			@include button.smaller;
+			border: 0;
+			margin: 0;
+			font-weight: 600;
+			border-radius: var(--commons-border-radius);
+			font-size: var(--sizes-smaller-font-size);
+			line-height: var(--sizes-smaller-line-height);
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-grey-200);
+			padding: var(--spacings-smallest) var(--spacings-smaller);
+			transition: all var(--commons-animations-durations-fast);
+			background-color: var(--palettes-grey-600);
+			display: inline-block;
+			position: relative;
+			text-decoration: none;
+			vertical-align: baseline;
+			white-space: nowrap;
+			outline: none;
+			cursor: pointer;
 
 			&:not(:focus) {
 				@include a11y.mask;
+			}
+
+			&,
+			&:hover {
+				color: var(--colors-white-color);
 			}
 		}
 
