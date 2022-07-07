@@ -1,12 +1,12 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin icon {
-	padding-left: 3rem;
+	padding-left: var(--spacings-bigger);
 
 	@at-root {
 		.callout-icon {
 			top: 0.4rem;
-			left: 0.75rem;
+			left: calc(var(--spacings-smallest) + var(--spacings-smaller));
 			width: 2rem;
 			border-radius: 50%;
 			position: absolute;
@@ -33,7 +33,7 @@
 			top: 0.4rem;
 
 			.lucca-icon {
-				font-size: 1rem;
+				font-size: var(--sizes-standard-font-size);
 			}
 		}
 	}
@@ -48,13 +48,13 @@
 			background-color: transparent;
 			color: currentColor;
 			position: absolute;
-			height: 1.5rem;
+			height: var(--spacings-standard);
 			border: 0;
 			padding: 0;
-			top: 0.5rem;
+			top: var(--spacings-smaller);
 			transition-duration: 150ms;
 			transition-property: background-color;
-			width: 1rem;
+			width: var(--spacings-small);
 			cursor: pointer;
 
 			&::before {

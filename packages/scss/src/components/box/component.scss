@@ -9,9 +9,9 @@
 	@at-root {
 		.box-close {
 			position: absolute;
-			font-size: 1rem;
-			right: 0.25rem;
-			top: 0.25rem;
+			font-size: var(--sizes-standard-font-size);
+			right: var(--spacings-smallest);
+			top: var(--spacings-smallest);
 			z-index: 1;
 		}
 	}

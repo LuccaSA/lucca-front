@@ -8,7 +8,7 @@
 	.menu-list-item-action {
 		font-size: var(--sizes-small-font-size);
 		line-height: var(--sizes-small-line-height);
-		padding: 0.75rem 0;
+		padding: calc(var(--spacings-smallest) + var(--spacings-smaller)) 0;
 	}
 
 	.label {

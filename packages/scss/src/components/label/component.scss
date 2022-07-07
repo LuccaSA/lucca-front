@@ -5,10 +5,10 @@
 	text-align: center;
 	vertical-align: baseline;
 	white-space: nowrap;
-	border-radius: 1rem;
+	border-radius: 9999px;
 	font-size: var(--sizes-small-font-size);
 	font-weight: 600;
 	line-height: 1.2;
 	margin: 0 0.3rem;
-	padding: 0.25rem 0.8rem;
+	padding: var(--spacings-smallest) 0.8rem;
 }

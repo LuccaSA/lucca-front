@@ -9,9 +9,9 @@
 	}
 
 	.actionIcon {
-		height: 1rem;
+		height: var(--spacings-small);
+		width: var(--spacings-small);
 		padding: 0;
-		width: 1rem;
 		color: var(--palettes-700, var(--components-select-default-palette-700));
 
 		&:hover {
@@ -28,7 +28,7 @@
 
 	.lucca-icon {
 		display: block;
-		font-size: 1rem;
+		font-size: var(--sizes-standard-font-size);
 	}
 
 	// Material

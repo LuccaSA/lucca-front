@@ -9,7 +9,7 @@
 		}
 
 		&:active {
-			background-color: rgba(255, 255, 255, .2);
+			background-color: rgba(255, 255, 255, 0.2);
 		}
 	}
 }
@@ -30,8 +30,8 @@
 	}
 
 	&:active {
-		background-color: _color("grey", 200);
-		color: _color("grey", 800);
+		background-color: _color('grey', 200);
+		color: _color('grey', 800);
 		box-shadow: 0 0 0 1px var(--components-actionIcon-default-palette-500), 0 0 0 4px var(--components-actionIcon-default-palette-200);
 	}
 }
@@ -64,10 +64,10 @@
 
 	&:active {
 		box-shadow: 0 0 0 1px var(--palettes-error-400), 0 0 0 4px var(--palettes-error-100);
-	}	
+	}
 }
 
 @mixin small {
-	height: 2rem;
-	width: 2rem;
+	height: var(--spacings-big);
+	width: var(--spacings-big);
 }

@@ -15,8 +15,8 @@
 
 @mixin block {
 	display: block;
-	margin-bottom: 2rem;
-	padding: 3rem 0 0;
+	margin-bottom: var(--spacings-big);
+	padding: var(--spacings-bigger) 0 0;
 	text-align: center;
 	width: 100%;
 
@@ -45,7 +45,7 @@
 	text-align: center;
 	position: relative;
 	padding: 8rem 0 0;
-	margin: 0 2rem 2rem;
+	margin: 0 var(--spacings-big) var(--spacings-big);
 
 	&::before,
 	&::after {
@@ -63,7 +63,7 @@
 	text-align: center;
 	position: relative;
 	padding: 8rem 0 0;
-	margin: 0 2rem 2rem;
+	margin: 0 var(--spacings-big) var(--spacings-big);
 	top: 35vh;
 
 	&::before,

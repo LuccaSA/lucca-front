@@ -1,10 +1,10 @@
 @import '@lucca-front/scss/src/mixins';
 
 .is-loading {
-  @include loading(1rem);
+	@include loading(1rem);
 }
 
 .is-linear-gradient-loading {
-  // TODO: Voir avec Vincent
-  @include loadingGradientAnimation(rgba(0,0,0, .1), true);
+	// TODO: Voir avec Vincent
+	@include loadingGradientAnimation(rgba(0, 0, 0, 0.1), true);
 }

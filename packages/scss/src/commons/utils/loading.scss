@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 
-@mixin spinner($size: 1rem) {
+@mixin spinner($size: var(--spacings-small)) {
 	&::before,
 	&::after {
 		width: $size;

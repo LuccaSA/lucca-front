@@ -13,7 +13,7 @@
 		font-size: var(--sizes-small-font-size);
 
 		font-weight: 600;
-		line-height: 1rem;
+		line-height: var(--sizes-smaller-line-height);
 		display: block;
 
 		&.is-above {

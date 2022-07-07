@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsHorizontalAlignmentStory {
-}
+interface GridsHorizontalAlignmentStory {}
 
 export default {
 	title: 'Documentation/Structure/Grids/Horizontal Alignment',
@@ -24,17 +23,18 @@ function getTemplate(args: GridsHorizontalAlignmentStory): string {
 			<div class="grid-demo">End</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<GridsHorizontalAlignmentStory> = (args: GridsHorizontalAlignmentStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: 1rem;
-			padding: 1rem;
+			margin-bottom: var(--spacings-small);
+			padding: var(--spacings-small);
 			border-radius: 1rem;
 		}`,
 	],

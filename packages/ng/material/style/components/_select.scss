@@ -4,16 +4,17 @@ mat-select {
 
 .textfield.mod-framed mat-select {
 	padding: 0 !important;
+
 	.mat-select-trigger {
-		font-size: 1rem;
-		margin: 2.2rem 1rem 0.7rem;
+		font-size: var(--sizes-standard-font-size);
+		margin: 2.2rem var(--spacings-small) 0.7rem;
 		&::after {
 			bottom: -0.7rem;
 			content: '';
 			display: block;
-			left: -1rem;
+			left: calc(var(--spacings-small) * -1);
 			position: absolute;
-			right: -1rem;
+			right: calc(var(--spacings-small) * -1);
 			top: -2.2rem;
 		}
 	}
@@ -32,6 +33,7 @@ mat-select {
 .mat-select-placeholder {
 	width: auto !important;
 }
+
 .mat-select-panel {
 	@extend .textfield-options;
 

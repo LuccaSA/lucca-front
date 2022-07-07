@@ -7,7 +7,7 @@
 @mixin small {
 	padding: var(--spacings-smaller) var(--spacings-standard);
 	text-align: left;
-	min-height: 4rem;
+	min-height: var(--spacings-biggest);
 
 	.file-input {
 		// todo: extract state

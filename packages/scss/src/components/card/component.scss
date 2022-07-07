@@ -3,7 +3,7 @@
 	border-radius: var(--commons-border-radius-big);
 	border-color: var(--commons-divider-color);
 	border-width: 1px;
-	margin-bottom: 1rem;
+	margin-bottom: var(--spacings-small);
 	border-style: solid;
 	display: block;
 	position: relative;
@@ -22,7 +22,7 @@
 			border-top-style: solid;
 			align-items: center;
 			display: flex;
-			min-height: 3rem;
+			min-height: var(--spacings-bigger);
 		}
 
 		.card-footer-right {

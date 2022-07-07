@@ -9,7 +9,7 @@
 	position: relative;
 	vertical-align: middle;
 	margin: 0 0.2rem 0.3rem 0;
-	padding: 0.15rem 1.8rem 0.15rem 0.75rem;
+	padding: 0.15rem 1.8rem 0.15rem calc(var(--spacings-smallest) + var(--spacings-smaller));
 
 	@at-root {
 		.chip-kill {
@@ -20,11 +20,11 @@
 			bottom: 0;
 			font-size: 0.8rem;
 			font-weight: 700;
-			height: 1rem;
+			height: var(--spacings-small);
+			width: var(--spacings-small);
 			padding: 0.05rem 0 0;
-			right: 0.5rem;
+			right: var(--spacings-smaller);
 			top: 0;
-			width: 1rem;
 			transition-duration: 150ms;
 			transition-property: background-color;
 			margin: auto;

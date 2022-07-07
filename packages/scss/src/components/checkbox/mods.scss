@@ -1,7 +1,7 @@
 @mixin inline {
 	vertical-align: middle;
 	display: inline-block;
-	margin-right: 1.5rem;
+	margin-right: var(--spacings-standard);
 }
 
 @mixin big {
@@ -32,7 +32,7 @@
 }
 
 @mixin noLabel {
-	height: 1rem;
+	height: var(--spacings-small);
 
 	.checkbox-label {
 		vertical-align: top;

@@ -9,12 +9,12 @@
 	--components-checkbox-default-palette-700: var(--palettes-primary-700);
 	--components-checkbox-default-palette-800: var(--palettes-primary-800);
 	--components-checkbox-default-palette-900: var(--palettes-primary-900);
-	--components-checkbox-label-line-height: 1.5rem;
-	--components-checkbox-label-padding: 0 0 0 1.5rem;
+	--components-checkbox-label-line-height: var(--sizes-standard-line-height);
+	--components-checkbox-label-padding: 0 0 0 var(--spacings-standard);
 	--components-checkbox-input-margin-top: var(--spacings-smallest);
 	--components-checkbox-input-small-top: 1px;
 	--components-checkbox-input-margin-right: var(--spacings-smaller);
-	--components-checkbox-input-size: 1rem;
+	--components-checkbox-input-size: var(--spacings-small);
 	--components-checkbox-input-border-radius: var(--commons-border-radius);
 	--components-checkbox-input-border-color: var(--palettes-grey-700);
 	--components-checkbox-input-border-hover: var(--components-checkbox-default-palette-600);

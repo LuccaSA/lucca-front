@@ -21,12 +21,14 @@ function getTemplate(args: TextStyleStory): string {
 const Template: Story<TextStyleStory> = (args: TextStyleStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		span {
-			padding-right: 1rem;
+			padding-right: var(--spacings-small);
 		}
-		}`],
+		}`,
+	],
 });
 
 export const TextStyle = Template.bind({});
-TextStyle.args = { };
+TextStyle.args = {};

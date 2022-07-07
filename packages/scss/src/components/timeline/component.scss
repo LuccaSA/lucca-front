@@ -47,8 +47,8 @@
 			&::before {
 				content: '';
 				color: var(--palettes-primary-800);
-				width: 1rem;
-				height: 1rem;
+				width: var(--spacings-small);
+				height: var(--spacings-small);
 				display: flex;
 				align-items: center;
 				justify-content: center;
