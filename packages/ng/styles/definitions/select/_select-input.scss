@@ -234,7 +234,7 @@
 			.lu-select-display-wrapper {
 				overflow: hidden;
 				white-space: normal;
-				margin-bottom: var(--spacings-smallest);
+				margin-bottom: calc(var(--spacings-smallest) * -1);
 			}
 		}
 	}
