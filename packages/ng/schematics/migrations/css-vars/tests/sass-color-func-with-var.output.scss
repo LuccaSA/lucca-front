@@ -1,13 +1,13 @@
 .with-sassColorLightenFunc {
 	background-color: white;
-	padding: var(--spacings-small);
+	padding: 1rem;
 	// [LF NEXT] Fonctions de couleur + variables scss ne sont pas gérées.
 	// color: lighten(var(--palettes-grey-50), 2.5%)
 }
 
 .with-sassColorDarkenFunc {
-	margin: var(--spacings-small);
-	background-color: darken(#ffffff);
+	margin: 1rem;
+	background-color: darken(#FFFFFF);
 	// [LF NEXT] Fonctions de couleur + variables scss ne sont pas gérées.
 	// color: darken(var(--palettes-grey-50), 2.5%)
 }
