@@ -1,5 +1,5 @@
 @mixin unkillable {
-	padding: 0.15rem calc(var(--spacings-smallest) + var(--spacings-smaller));
+	padding: 0.15rem 0.75rem;
 
 	.chip-kill {
 		display: none;

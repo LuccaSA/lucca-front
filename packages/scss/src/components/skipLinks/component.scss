@@ -9,7 +9,7 @@
 	margin: 0;
 	padding: 0;
 	z-index: 9010;
-	inset: calc(var(--spacings-smaller) + var(--spacings-smallest));
+	inset: 0.75rem;
 	bottom: auto;
 
 	@at-root {

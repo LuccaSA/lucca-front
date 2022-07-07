@@ -9,7 +9,7 @@
 	position: relative;
 	vertical-align: middle;
 	margin: 0 0.2rem 0.3rem 0;
-	padding: 0.15rem 1.8rem 0.15rem calc(var(--spacings-smallest) + var(--spacings-smaller));
+	padding: 0.15rem 1.8rem 0.15rem 0.75rem;
 
 	@at-root {
 		.chip-kill {
