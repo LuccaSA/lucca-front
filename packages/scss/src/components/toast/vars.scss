@@ -8,6 +8,5 @@
 	--components-toasts-margin-bottom: var(--spacings-smaller);
 	--components-toasts-width: 16rem;
 	--components-toasts-big: 22.5rem;
-	--components-toasts-padding: calc(var(--spacings-smallest) + var(--spacings-smaller)) 2.25rem
-		calc(var(--spacings-smallest) + var(--spacings-smaller)) var(--spacings-small);
+	--components-toasts-padding: 0.75rem 2.25rem 0.75rem var(--spacings-small);
 }
