@@ -51,6 +51,7 @@ Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code: `
 /* 1. Importer LuModalModule */
 import { LuModalModule } from '@lucca-front/ng/modal';
