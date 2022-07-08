@@ -114,7 +114,7 @@ describe('CSS Vars Migration', () => {
 		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true }, tree).toPromise();
 
 		const expectedImports = [
-			`@forward '@lucca-front/scss/src/commons';`,
+			`@forward '@lucca-front/scss/src/main';`,
 			`@forward '@lucca-front/scss/src/components/button';`,
 			`@forward '@lucca-front/scss/src/components/table';`,
 			`@forward '@lucca-front/scss/src/components/tableSticked';`,

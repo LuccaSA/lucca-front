@@ -59,13 +59,12 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
 
-export function optimizeScssGlobalImport(content: string, cssImports: string[], postCss: PostCssLib, postCssScss: PostCssScssLib, postcssValueParser: ValueParser): string {
+export function optimizeScssGlobalImport(content: string, cssImports: string[], postCss: PostCssLib, postCssScss: PostCssScssLib): string {
 	const root = postCssScss.parse(content);
 	let hasGlobalImport = false;
 
 	root.walkAtRules('forward', (rule) => {
-		if (rule.params.includes('@lucca-front/scss/src/components')) {
-			removeImportNode(rule, '@lucca-front/scss/src/components', postcssValueParser);
+		if (rule.params.includes('@lucca-front/scss/src/main')) {
 			hasGlobalImport = true;
 		}
 	});
