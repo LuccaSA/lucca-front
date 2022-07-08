@@ -106,7 +106,8 @@ describe('CSS Vars Migration', () => {
 	it('should add optimized global imports', async () => {
 		const tree = new UnitTestTree(Tree.empty());
 		tree.create('app.component.html', '<button type="button" class="button">Test</button>');
-		tree.create('table.component.html', '<table class="table" [class.mod-stickyColumn]="true"></table>');
+		tree.create('table.component.html', '<table class="table mod-sortable" [class.mod-stickyColumn]="true"></table>');
+		tree.create('util.component.html', '<div class="u-marginTopStandard">LOL</div>');
 		tree.create('styles.scss', "@import '@lucca-front/scss/src/main.overridable';");
 
 		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
@@ -114,10 +115,13 @@ describe('CSS Vars Migration', () => {
 		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true }, tree).toPromise();
 
 		const expectedImports = [
+			`@forward '@lucca-front/icons/src/main';`,
 			`@forward '@lucca-front/scss/src/main';`,
 			`@forward '@lucca-front/scss/src/components/button';`,
 			`@forward '@lucca-front/scss/src/components/table';`,
+			`@forward '@lucca-front/scss/src/components/tableSorted';`,
 			`@forward '@lucca-front/scss/src/components/tableSticked';`,
+			`@forward '@lucca-front/scss/src/components/util';`,
 		];
 
 		expect(tree.readContent('styles.scss')).toBe(expectedImports.join('\n'));

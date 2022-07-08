@@ -41,7 +41,7 @@ const classWithImports = [
 	{ cssClass: 'section', cssImport: '@lucca-front/scss/src/components/section' },
 	{ cssClass: 'switch', cssImport: '@lucca-front/scss/src/components/switch' },
 	{ cssClass: 'table', cssImport: '@lucca-front/scss/src/components/table' },
-	{ cssClass: /^mod-layoutFixed-*/, cssImport: '@lucca-front/scss/src/components/tableFixed' },
+	{ cssClass: /^mod-layoutFixed-.*/, cssImport: '@lucca-front/scss/src/components/tableFixed' },
 	{ cssClass: 'mod-sortable', cssImport: '@lucca-front/scss/src/components/tableSorted' },
 	{ cssClass: 'table-head-row-cell-sortableButton', cssImport: '@lucca-front/scss/src/components/tableSorted' },
 	{ cssClass: 'mod-stickyColumn', cssImport: '@lucca-front/scss/src/components/tableSticked' },
@@ -50,9 +50,9 @@ const classWithImports = [
 	{ cssClass: 'textfield', cssImport: '@lucca-front/scss/src/components/textfield' },
 	{ cssClass: 'timeline', cssImport: '@lucca-front/scss/src/components/timeline' },
 	{ cssClass: 'title', cssImport: '@lucca-front/scss/src/components/title' },
-	{ cssClass: 'toasts', cssImport: '@lucca-front/scss/src/components/toasts' },
+	{ cssClass: 'toasts', cssImport: '@lucca-front/scss/src/components/toast' },
 	{ cssClass: 'tableOfContent', cssImport: '@lucca-front/scss/src/components/tableOfContent' },
-	{ cssClass: /^u-/, cssImport: '@lucca-front/scss/src/components/util' },
+	{ cssClass: /^u-.*/, cssImport: '@lucca-front/scss/src/components/util' },
 ];
 
 export function getCssImports(allVisitedClasses: string[]): string[] {
@@ -71,7 +71,7 @@ export function getCssImports(allVisitedClasses: string[]): string[] {
 	const imports = new Set<string>();
 
 	for (const visitedClass of allVisitedClasses) {
-		const newImport = exactCssClasses[visitedClass] || regexpCssTests.map((test) => test(visitedClass))[0];
+		const newImport = exactCssClasses[visitedClass] || regexpCssTests.map((test) => test(visitedClass)).find(Boolean);
 
 		if (newImport) {
 			imports.add(newImport);
