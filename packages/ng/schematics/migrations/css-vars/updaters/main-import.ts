@@ -32,6 +32,7 @@ export function updateMainImport(root: Root, postCss: PostCssLib, postCssValuePa
 	});
 
 	if (hasMainScss) {
+		addForwardRule(root, '@lucca-front/icons/src/main', postCss);
 		addForwardRule(root, '@lucca-front/scss/src/main', postCss);
 	}
 	if (hasMainNg) {

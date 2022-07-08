@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstTextAttribute } from '@angular/compiler';
+import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
 import { applyUpdates, FileUpdate } from './file-update.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -72,9 +72,17 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 	const updates: FileUpdate[] = [];
 	const root = new HtmlAst(content, lib);
 	const classesToFind = Object.keys(oldClassToNewClass);
+	const visitedAttributes = new Set<TmplAstNode>();
 
 	root.visitAttribute('class', (classAttr) => {
 		const offset = classAttr.valueSpan?.start.offset;
+
+		if (visitedAttributes.has(classAttr)) {
+			return;
+		}
+
+		visitedAttributes.add(classAttr);
+
 		if (classesToFind.some((cl) => classAttr.value.includes(cl)) && offset !== undefined) {
 			updates.push({
 				position: offset,
@@ -86,6 +94,12 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 
 	for (const cl of classesToFind) {
 		root.visitBoundAttribute(cl, (boundAttr) => {
+			if (visitedAttributes.has(boundAttr)) {
+				return;
+			}
+
+			visitedAttributes.add(boundAttr);
+
 			updates.push({
 				position: boundAttr.keySpan.start.offset,
 				oldContent: boundAttr.keySpan.details || '',
@@ -98,6 +112,12 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		if (!(boundAttr.value instanceof lib.ASTWithSource)) {
 			return;
 		}
+
+		if (visitedAttributes.has(boundAttr)) {
+			return;
+		}
+
+		visitedAttributes.add(boundAttr);
 
 		const { source } = boundAttr.value;
 
@@ -117,7 +137,7 @@ export function extractAllCssClassNames(content: string, lib: AngularCompilerLib
 	const allClasses = new Set<string>();
 	const root = new HtmlAst(content, lib);
 
-	root.visitAttribute('class', (classAttr) => allClasses.add(classAttr.value));
+	root.visitAttribute('class', (classAttr) => classAttr.value.split(' ').forEach((cls) => allClasses.add(cls)));
 
 	root.visitBoundAttribute(/.*/, (boundAttr) => {
 		if (boundAttr.keySpan.details?.startsWith('class.')) {
