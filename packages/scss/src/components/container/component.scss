@@ -1,5 +1,5 @@
 @mixin component {
-	padding: var(--container-padding, calc(var(--spacings-bigger) + var(--spacings-smaller)));
+	padding: var(--components-container-padding);
 	position: relative;
-	max-width: var(--components-container-max-width, 100rem);
+	max-width: var(--components-container-max-width);
 }
