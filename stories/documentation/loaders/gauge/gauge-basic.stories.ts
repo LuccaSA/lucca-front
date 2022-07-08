@@ -46,7 +46,7 @@ const Template: Story<GaugeBasicStory> = (args: GaugeBasicStory) => ({
 		`
 		:host {
 			display: block;
-			height: var(--spacings-biggest);
+			height: 4rem;
 		}`,
 	],
 });

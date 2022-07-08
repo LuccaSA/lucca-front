@@ -53,7 +53,7 @@ const Template: Story<TextfieldPasswordStory> = (args: TextfieldPasswordStory) =
 		`
 		.textfield {
 			float: left;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}`,
 	],
 });

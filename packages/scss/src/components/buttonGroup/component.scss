@@ -67,11 +67,11 @@
 			min-height: 2.25rem;
 
 			&.mod-small {
-				min-height: var(--spacings-big);
+				min-height: 2rem;
 			}
 
 			&.mod-smaller {
-				min-height: var(--spacings-standard);
+				min-height: 1.5rem;
 			}
 
 			&::before {

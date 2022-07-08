@@ -40,7 +40,7 @@ const Template: Story<TextfieldMessagesStory> = (args: TextfieldMessagesStory) =
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}`,
 	],
 });

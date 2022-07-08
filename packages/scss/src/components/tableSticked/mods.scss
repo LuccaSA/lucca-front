@@ -8,9 +8,9 @@
 }
 
 @mixin layoutFixed($i) {
-	min-width: calc(#{$i} * var(--spacings-small));
-	max-width: calc(#{$i} * var(--spacings-small));
-	width: calc(#{$i} * var(--spacings-small));
+	min-width: $i * 1rem;
+	max-width: $i * 1rem;
+	width: $i * 1rem;
 }
 
 @mixin stickyColumn($shadowColor: #2a3551) {

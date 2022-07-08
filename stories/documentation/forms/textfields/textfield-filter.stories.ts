@@ -25,7 +25,7 @@ const Template: Story<TextfieldFilterStory> = (args: TextfieldFilterStory) => ({
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}`,
 	],
 });

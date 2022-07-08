@@ -32,7 +32,7 @@
 }
 
 @mixin noLabel {
-	height: var(--spacings-small);
+	height: 1rem;
 
 	.checkbox-label {
 		vertical-align: top;

@@ -28,7 +28,7 @@ const Template: Story<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAnd
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}`,
 	],
 });

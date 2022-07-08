@@ -24,7 +24,7 @@ const Template: Story<SpinStory> = (args: SpinStory) => ({
 		`
 		.textfield {
 			float: left;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}
 		}`,
 	],

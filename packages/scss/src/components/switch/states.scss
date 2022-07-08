@@ -11,7 +11,7 @@
 		}
 
 		&::after {
-			left: calc(var(--spacings-small) - 2px);
+			left: calc(1rem - 2px);
 		}
 	}
 }

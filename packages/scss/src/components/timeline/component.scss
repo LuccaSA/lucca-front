@@ -39,7 +39,7 @@
 			margin: 0;
 			font-size: var(--sizes-standard-font-size);
 			line-height: var(--sizes-big-line-height);
-			min-width: var(--spacings-standard);
+			min-width: 1.5rem;
 		}
 
 		.timeline-step-title,
@@ -47,8 +47,8 @@
 			&::before {
 				content: '';
 				color: var(--palettes-primary-800);
-				width: var(--spacings-small);
-				height: var(--spacings-small);
+				width: 1rem;
+				height: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;

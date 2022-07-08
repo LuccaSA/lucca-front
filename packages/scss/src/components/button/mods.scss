@@ -108,8 +108,8 @@
 
 	@at-root {
 		.button-icon {
-			height: var(--spacings-standard);
-			line-height: var(--sizes-standard-line-height);
+			height: 1.5rem;
+			line-height: 1.5rem;
 			font-size: 1.5rem;
 			transform: translateX(-0.2rem);
 			vertical-align: bottom;
@@ -154,7 +154,7 @@
 @mixin more {
 	padding: 0 !important;
 	text-align: center;
-	min-width: var(--spacings-big);
+	min-width: 2rem;
 
 	&::before {
 		@include icon.generate('arrow_south');
@@ -179,8 +179,8 @@
 			display: inline-block;
 			font-size: var(--sizes-smaller-font-size);
 			font-weight: 600;
-			height: var(--spacings-standard);
-			min-width: var(--spacings-standard);
+			height: 1.5rem;
+			min-width: 1.5rem;
 			margin-left: var(--spacings-smaller);
 			padding: 0 var(--spacings-smallest);
 			vertical-align: bottom;
@@ -190,7 +190,7 @@
 
 @mixin counterSmall {
 	.button-counter {
-		height: var(--spacings-small);
-		min-width: var(--spacings-small);
+		height: 1rem;
+		min-width: 1rem;
 	}
 }

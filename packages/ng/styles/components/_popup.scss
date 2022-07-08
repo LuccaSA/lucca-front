@@ -53,8 +53,8 @@
 	border: none;
 	outline: none;
 	padding: var(--spacings-smaller);
-	height: var(--spacings-bigger);
-	width: var(--spacings-bigger);
+	height: 3rem;
+	width: 3rem;
 	position: absolute;
 	right: 0.6rem;
 	top: 0.6rem;
@@ -62,7 +62,7 @@
 	transition: background var(--commons-animations-durations-fast) ease;
 
 	.lucca-icon {
-		font-size: var(--spacings-standard);
+		font-size: 1.5rem;
 		color: var(--palettes-grey-700);
 	}
 

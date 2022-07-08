@@ -31,7 +31,7 @@ const Template: Story<TextfieldFeedbackStory> = (args: TextfieldFeedbackStory) =
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}`,
 	],
 });

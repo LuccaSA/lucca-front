@@ -24,7 +24,7 @@ const Template: Story<TextfieldClearableStory> = (args: TextfieldClearableStory)
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: var(--spacings-small);
+			margin-right: 1rem;
 		}`,
 	],
 });

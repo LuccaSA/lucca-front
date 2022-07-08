@@ -6,8 +6,8 @@
 		padding-left: 1.25rem;
 
 		&::before {
-			width: var(--spacings-smaller);
-			height: var(--spacings-smaller);
+			width: 0.5rem;
+			height: 0.5rem;
 		}
 	}
 }
@@ -15,11 +15,11 @@
 @mixin big {
 	.timeline-step-title {
 		padding-left: 2.25rem;
-		min-width: var(--spacings-big);
+		min-width: 2rem;
 
 		&::before {
-			width: var(--spacings-standard);
-			height: var(--spacings-standard);
+			width: 1.5rem;
+			height: 1.5rem;
 		}
 	}
 
@@ -79,7 +79,7 @@
 	}
 
 	.timeline-stepAddBetweenStep {
-		min-height: var(--spacings-bigger);
+		min-height: 3rem;
 	}
 }
 
@@ -223,8 +223,8 @@
 	.timeline-step-title-icon {
 		content: '';
 		color: var(--palettes-primary-800);
-		width: var(--spacings-small);
-		height: var(--spacings-small);
+		width: 1rem;
+		height: 1rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -295,7 +295,7 @@
 			outline: none;
 
 			.timeline-step-title-icon::before {
-				box-shadow: 0 0 0 var(--spacings-smallest) var(--palettes-primary-500);
+				box-shadow: 0 0 0 0.25rem var(--palettes-primary-500);
 			}
 		}
 	}
@@ -314,8 +314,8 @@
 
 @mixin addBetweenStepBig {
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
-		width: var(--spacings-standard);
-		height: var(--spacings-standard);
+		width: 1.5rem;
+		height: 1.5rem;
 		left: var(--spacings-smallest);
 	}
 }
