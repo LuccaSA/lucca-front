@@ -1,0 +1,25 @@
+@mixin header {
+	padding: 0 2.5rem;
+}
+
+@mixin small {
+	// legacy syntax
+	.menu-link,
+	.menu-list-item-action {
+		font-size: var(--sizes-small-font-size);
+		line-height: var(--sizes-small-line-height);
+		padding: 0.75rem 0;
+	}
+
+	.label {
+		height: var(--sizes-small-line-height);
+		min-width: var(--sizes-small-line-height);
+		line-height: var(--sizes-small-line-height);
+		padding: 0;
+	}
+
+	// legacy syntax
+	.menu-link {
+		margin-right: var(--spacings-standard);
+	}
+}

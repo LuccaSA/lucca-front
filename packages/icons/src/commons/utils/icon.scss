@@ -1,0 +1,22 @@
+@use 'sass:map';
+
+@use '@lucca-front/icons/src/commons/config';
+
+@mixin generate($name) {
+	@if map.has-key(config.$icons, $name) {
+		display: inline-block;
+		vertical-align: text-bottom;
+		font-style: normal;
+		font-family: config.$font-name;
+
+		@supports (content: '*' / '') {
+			content: '#{map.get(config.$icons, $name)}'/'';
+		}
+
+		@supports not (content: '*' / '') {
+			content: '#{map.get(config.$icons, $name)}';
+		}
+	} @else {
+		@error "“#{$name}” wasn’t found in “@lucca-front/icons config.$icons” map.";
+	}
+}

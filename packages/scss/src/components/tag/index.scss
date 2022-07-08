@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.tag {
+	@include vars;
+	@include component;
+
+	&.mod-clickable {
+		@include clickable;
+	}
+
+	&.mod-outlined {
+		@include outlined;
+	}
+}

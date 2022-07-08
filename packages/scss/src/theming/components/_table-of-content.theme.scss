@@ -1,5 +1,0 @@
-$tableOfContent: (
-	default-palette: _getMap("palettes.primary"),
-	padding: _theme("spacings.smaller") _theme("spacings.small"),
-);
-$theme: _set($theme, "components.tableOfContent", $tableOfContent);

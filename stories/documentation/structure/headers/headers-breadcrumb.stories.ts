@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersBreadcrumbStory {
-}
+interface HeadersBreadcrumbStory {}
 
 export default {
 	title: 'Documentation/Structure/Headers/Breadcrumb',
@@ -22,15 +21,15 @@ function getTemplate(args: HeadersBreadcrumbStory): string {
 			<div class="pageHeader-content-title">
 				<h1 class="u-marginReset u-marginRightStandard">H1. Page title</h1>
 				<div>
-					<button type="button" class="actionIcon" luTooltip="Modifier">
+					<button type="button" class="actionIcon mod-small" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-edit"></span>
 						<span class="u-mask">Modifier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Copier">
+					<button type="button" class="actionIcon mod-small" luTooltip="Copier">
 						<span aria-hidden="true" class="lucca-icon icon-copy"></span>
 						<span class="u-mask">Copier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Supprimer">
+					<button type="button" class="actionIcon mod-small" luTooltip="Supprimer">
 						<span aria-hidden="true" class="lucca-icon icon-trash"></span>
 						<span class="u-mask">Supprimer</span>
 					</button>
@@ -55,7 +54,7 @@ function getTemplate(args: HeadersBreadcrumbStory): string {
 			</p>
 		</section>
 	</header>
-	`
+	`;
 }
 
 const Template: Story<HeadersBreadcrumbStory> = (args: HeadersBreadcrumbStory) => ({

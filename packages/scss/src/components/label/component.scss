@@ -1,0 +1,14 @@
+@mixin component {
+	background-color: var(--palettes-100, var(--components-label-default-palette-100));
+	color: var(--palettes-900, var(--components-label-default-palette-900));
+	display: inline-block;
+	text-align: center;
+	vertical-align: baseline;
+	white-space: nowrap;
+	border-radius: 1rem;
+	font-size: var(--sizes-small-font-size);
+	font-weight: 600;
+	line-height: 1.2;
+	margin: 0 0.3rem;
+	padding: 0.25rem 0.8rem;
+}

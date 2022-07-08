@@ -1,0 +1,29 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin component {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	position: sticky;
+
+	@at-root {
+		.tableOfContent-list {
+			@include reset.list;
+		}
+
+		.tableOfContent-list-item-action {
+			@include reset.button;
+
+			border-radius: var(--commons-border-radius);
+			color: var(--palettes-grey-700);
+			cursor: pointer;
+			display: block;
+			outline: none;
+			padding: var(--components-tableOfContent-item-padding);
+			position: relative;
+			transition: all var(--commons-animations-durations-standard);
+			text-decoration: none;
+			width: auto;
+		}
+	}
+}

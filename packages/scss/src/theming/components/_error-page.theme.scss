@@ -1,7 +1,0 @@
-$errorPage: (
-	background: #FFFFFF,
-	header: (
-		color: #FF7A1A
-	)
-);
-$theme: _set($theme, "components.errorPage", $errorPage);

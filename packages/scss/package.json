@@ -1,7 +1,7 @@
 {
   "name": "@lucca-front/scss",
   "version": "0.0.0",
-  "description": "a scss-framework based on trello's css naming",
+  "description": "A Sass framework for Lucca products.",
   "main": "src/main.scss",
   "scripts": {},
   "repository": {
@@ -13,12 +13,15 @@
     "scss"
   ],
   "public": true,
-  "author": "jeremie biron <jbiron@lucca.fr>",
+  "author": "The product design team <design@lucca.fr>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   },
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
+  "dependencies": {
+    "normalize.css": "^8.0.0"
+  },
   "peerDependencies": {
     "@lucca-front/icons": "*"
   }

@@ -1,0 +1,11 @@
+@use '@lucca-front/scss/src/commons/utils/loading';
+
+.is-loading {
+  @include loading.spinner(1rem);
+}
+
+.is-linear-gradient-loading {
+  // TODO: Voir avec Vincent
+  // [LF NEXT] Mixins non gérée par la migration auto.
+  // @include loadingGradientAnimation(rgba(0,0,0, .1), true)
+}

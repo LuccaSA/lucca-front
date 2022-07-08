@@ -1,0 +1,61 @@
+@mixin component {
+	background-color: var(--components-errorPage-background);
+	height: 100vh;
+	width: 100vw;
+	line-height: 1.2;
+	overflow: hidden;
+
+	.errorPage-section {
+		height: 100%;
+		max-width: 1200px;
+		padding: 0 2rem;
+		width: 100vw;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.errorPage-section-info {
+		margin-top: 10vh;
+		max-width: 90vw;
+		width: 450px;
+		padding-right: 2rem;
+	}
+
+	.errorPage-section-info-title {
+		color: var(--components-errorPage-header-color);
+		font-size: 2.5rem;
+	}
+
+	.errorPage-section-info-text {
+		font-size: 1.5rem;
+	}
+
+	.errorPage-section-image {
+		margin-top: 10vh;
+		width: 50%;
+		max-width: 580px;
+		min-width: 350px;
+	}
+}
+
+@mixin compact {
+	overflow-y: auto;
+
+	.errorPage-section {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.errorPage-section-info {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		order: 1;
+		padding: 0;
+	}
+	.errorPage-section-image {
+		margin-top: 2rem;
+		order: 0;
+	}
+}

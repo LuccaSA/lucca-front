@@ -1,20 +1,17 @@
-[![Build Status](https://travis-ci.org/LuccaSA/lucca-front.svg?branch=master)](https://travis-ci.org/LuccaSA/lucca-front)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=LuccaSA/lucca-front)](https://dependabot.com)
+# Lucca Front
 
-# lucca-front
+Lucca Front is a modular framework for developing web applications by [lucca](http://www.lucca.fr).
+It uses sub-packages architecture with unified versioning, à la [angular](https://github.com/angular/angular).
 
-A modular framework for developing web application by [lucca](http://www.lucca.fr).
-Uses sub-packages architecture with unified versioning, a la [angular](https://github.com/angular/angular).
-
-## Contains
+## Lucca Front contains 3 packages
 
  - a set of icons
- - a scss framework
- - a library of usefull angular components
+ - a SCSS framework
+ - a library of useful angular components
+
+Angular package depends on the SCSS one which depends itself on Icons.
 
 ## How to install
-
 ### Add Lucca Front to your npm package
 
 ```
@@ -23,163 +20,103 @@ npm install @lucca-front/scss --save
 npm install @lucca-front/ng --save
 ```
 
-### Import scss and NG style
+### Import packages styles
 
-Import Lucca Front in src/style.scss (or your main scss file):
-
-```
-@import "@lucca-front/scss/src/main.overridable.scss";
-```
-
-In angular-cli.json, add this to your stylePreprocessorOptions includePaths:
+In your file styles.scss, add imports files and components you want to import to your project:
 
 ```
-"apps": [
-	...
-	"styles": [
-		"styles.scss"
-	],
-	"stylePreprocessorOptions": {
-		"includePaths": [
-			"path_to_node_modules/@lucca-front/scss/src/overrides",
-			"path_to_node_modules/@lucca-front/ng/style/overrides" // if you use the ng package
-		]
-	},
-	...
-],
+// Import styles
+@forward '@lucca-front/icons/src/main’;
+@forward '@lucca-front/scss/src/main’;
+@forward '@lucca-front/ng/src/main’;
+
+// Import SCSS components
+@forward '@lucca-front/scss/src/components/actionIcon';
+@forward '@lucca-front/scss/src/components/box';
+@forward '@lucca-front/scss/src/components/breadcrumb';
+@forward '@lucca-front/scss/src/components/button';
+@forward '@lucca-front/scss/src/components/buttonGroup';
+@forward '@lucca-front/scss/src/components/callout';
+@forward '@lucca-front/scss/src/components/card';
+@forward '@lucca-front/scss/src/components/checkbox';
+@forward '@lucca-front/scss/src/components/chip';
+@forward '@lucca-front/scss/src/components/code';
+@forward '@lucca-front/scss/src/components/collapse';
+@forward '@lucca-front/scss/src/components/container';
+@forward '@lucca-front/scss/src/components/contentSection';
+@forward '@lucca-front/scss/src/components/divider';
+@forward '@lucca-front/scss/src/components/emptyState';
+@forward '@lucca-front/scss/src/components/errorPage';
+@forward '@lucca-front/scss/src/components/field';
+@forward '@lucca-front/scss/src/components/file';
+@forward '@lucca-front/scss/src/components/filters';
+@forward '@lucca-front/scss/src/components/form';
+@forward '@lucca-front/scss/src/components/gauge';
+@forward '@lucca-front/scss/src/components/grid';
+@forward '@lucca-front/scss/src/components/header';
+@forward '@lucca-front/scss/src/components/keyframe';
+@forward '@lucca-front/scss/src/components/label';
+@forward '@lucca-front/scss/src/components/layout';
+@forward '@lucca-front/scss/src/components/link';
+@forward '@lucca-front/scss/src/components/list';
+@forward '@lucca-front/scss/src/components/loading';
+@forward '@lucca-front/scss/src/components/main';
+@forward '@lucca-front/scss/src/components/menu';
+@forward '@lucca-front/scss/src/components/navSide';
+@forward '@lucca-front/scss/src/components/pageHeader';
+@forward '@lucca-front/scss/src/components/pagination';
+@forward '@lucca-front/scss/src/components/progress';
+@forward '@lucca-front/scss/src/components/radio';
+@forward '@lucca-front/scss/src/components/radioButtons';
+@forward '@lucca-front/scss/src/components/section';
+@forward '@lucca-front/scss/src/components/switch';
+@forward '@lucca-front/scss/src/components/table';
+@forward '@lucca-front/scss/src/components/tableFixed';
+@forward '@lucca-front/scss/src/components/tableOfContent';
+@forward '@lucca-front/scss/src/components/tableSorted';
+@forward '@lucca-front/scss/src/components/tableSticked';
+@forward '@lucca-front/scss/src/components/tag';
+@forward '@lucca-front/scss/src/components/textfield';
+@forward '@lucca-front/scss/src/components/timeline';
+@forward '@lucca-front/scss/src/components/title';
+@forward '@lucca-front/scss/src/components/titleSection';
+@forward '@lucca-front/scss/src/components/toast';
+@forward '@lucca-front/scss/src/components/util';
 ```
+Then comment unused components to reduce LF’s distribution size and compilation time.
 
-### Import fonts
-
-If you are using our default font (Source Sans Pro), don't forget to add your fonts in your `<header>`:
-
-```
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
-```
-
-## Theming
-### Setup
-
-You can override many variables to tailor Lucca-Front style to your needs.
-To do so, you must create a folder and reference it in your angular-cli.json as a stylePreprocessorOptions includePaths
-```
-"apps": [
-	...
-	"stylePreprocessorOptions": {
-		"includePaths": [
-			"path to your override folder" // must be first
-			"path_to_node_modules/@lucca-front/scss/src/overrides",
-		]
-	},
-	...
-],
-```
-
-In your override folder, you can create different files for different needs :
-* [breakpoints.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_breakpoints.scss)
-
-   Contains a map of breakpoints values.
-* [commons.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_commons.scss)
-
-   Contains a map of the most common values such as border-radius, font-family, and so on.
-* [components.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_components.scss)
-
-   Can either have directly components maps such as the [button map](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/components/_button.theme.scss).
-	 Or it can just be a file importing every component theme override you have
-* [icons.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_icons.scss)
-
-   Contains a map of with the prefix (class) used for the icons and the path to the icon file (without its extension).
-* [palettes.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_palettes.scss)
-
-   Contains a map of the color themes (palette) used in the framework. Palette must have a `color` key but can be extended to as many keys as you need.
-* [sizes.override.scss](https://github.com/LuccaSA/lucca-front/blob/master/packages/scss/src/theming/_sizes.scss)
-
-  Contains a map of font sizes and spacings (padding & margin).
-
-You only have to write down the variables you wish to modify or add. More details on each variable are available in the [SCSS demo](http://lucca-front.lucca.local/master/).
-
-### Palettes
-
-You can set a custom palette in palettes.override.scss. Your palette will be accessible in some components with `palette-*` classes.
+To import all components, replace the previous code by the 3 following lines (not recommended):
 
 ```
-$palettes: (
-	"primary": (
-		"color": #FFCC00,
-		"text": #666666,
-	),
-	"secondary": (
-		"color": #FF6600,
-		"text": #FFFFFF,
-	),
-	"success": (
-		"color": #9ACD32,
-		"text": #FFFFFF,
-	),
-	"warning": (
-		"color": #FF9900,
-		"text": #FFFFFF,
-	),
-	"error": (
-		"color": #FF3300,
-		"text": #FFFFFF,
-	),
-);
-
-$colors: (
-	text: (
-		"default": #666666,
-		"light": #999999,
-		"placeholder": #CCCCCC,
-	),
-);
-$theme: _set($theme, "palettes", $palettes);
-$theme: _set($theme, "colors", $colors);
+// Import styles
+@forward '@lucca-front/icons/src/main’;
+@forward '@lucca-front/scss/src/main-all’;
+@forward '@lucca-front/ng/src/main’;
 ```
 
-You can also call your palette colors in your own components:
+For custom imports, check our [advanced usage documentation](https://prisme.lucca.io/94310e217/p/950783-chargement-des-composants).
+
+### Include paths
+
+In angular.json, we suggest to add a couple of entries to your paths:
 
 ```
-@import "@lucca-front/scss/src/theming.overridable";
-_color("primary")
-_color("primary", "text")
-_color("text.default")
+"architects": {
+  "build": {
+    "stylePreprocessorOptions": {
+      “includePaths": [
+        "src/scss",
+        "node_modules",
+      ]
+    },
+  },
+},
 ```
 
-### Breakpoints
+## Storybook
+In order to work on Lucca Front, we use Storybook to display components.
 
-You can set up custom breakpoints values in breakpoints.override.scss
-
-```
-$breakpoints: (
-	xxxs: (
-		"breakAt": 320px,
-	),
-	xxs: (
-		"breakAt": 480px,
-	),
-	xs: (
-		"breakAt": 640px,
-	),
-	s: (
-		"breakAt": 800px,
-	),
-	m: (
-		"breakAt": 1024px,
-	),
-	l: (
-		"breakAt": 1280px,
-	),
-	xl: (
-		"breakAt": 1366px,
-	),
-	xxl: (
-		"breakAt": 1600px,
-	),
-	xxxl: (
-		"breakAt": 1920px,
-	)
-);
-
-$theme: _set($theme, "breakpoints", $breakpoints);
-```
+- Install [volta.sh](https://docs.volta.sh/guide/getting-started)
+- Install node `volta install node@lts`
+- Build Compodoc to avoid errors (To be fixed) `npm run compodoc`
+- Run storybook `npm start`

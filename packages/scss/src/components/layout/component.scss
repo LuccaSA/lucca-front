@@ -1,0 +1,172 @@
+@use 'sass:map';
+@use 'sass:math';
+
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/config';
+
+@mixin component {
+	min-height: 100vh;
+	display: grid;
+
+	@include media.largerThan('l') {
+		grid-template-columns: var(--commons-navSide-compact-width) 1fr var(--components-aside-width);
+		grid-template-rows: var(--commons-banner-height) 1fr;
+		grid-template-areas:
+			'banner banner banner'
+			'navside content aside';
+	}
+
+	@include media.smallerThan('l') {
+		grid-template-columns: var(--commons-navSide-compact-width) 1fr;
+		grid-template-rows: var(--commons-banner-height) 1fr auto;
+		grid-template-areas:
+			'banner banner'
+			'navside content'
+			'navside aside';
+	}
+
+	@include media.smallerThan('s') {
+		grid-template-columns: 1fr;
+		grid-template-rows: var(--commons-banner-height) auto 1fr auto;
+		grid-template-areas:
+			'banner'
+			'navside'
+			'content'
+			'aside';
+	}
+
+	@at-root {
+		.layout-content-container {
+			max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
+		}
+
+		.layout-banner {
+			grid-area: banner;
+			height: var(--commons-banner-height);
+			background-color: var(--colors-white-color);
+			position: sticky;
+			top: 0;
+			z-index: 2;
+		}
+
+		.layout-content {
+			top: var(--commons-banner-height);
+			grid-area: content;
+			position: sticky;
+			display: flex;
+			flex-direction: column;
+
+			@include media.smallerThan('s') {
+				position: static;
+			}
+		}
+
+		.layout-content-headers,
+		.layout-content-headers-subheader,
+		.layout-content-headers-header {
+			background-color: var(--colors-white-color);
+			top: var(--commons-banner-height);
+			position: sticky;
+
+			@include media.smallerThan('s') {
+				position: static;
+			}
+		}
+
+		.layout-content-headers-header {
+			z-index: 1;
+		}
+
+		.layout-content-inner {
+			flex-grow: 1;
+		}
+
+		.layout-content-footer {
+			background-color: var(--colors-white-color);
+			position: sticky;
+			bottom: 0;
+
+			@include media.smallerThan('s') {
+				position: static;
+			}
+		}
+
+		.layout-navside,
+		.layout-aside {
+			min-height: calc(100vh - var(--commons-banner-height));
+			top: var(--commons-banner-height);
+			display: flex;
+			position: sticky;
+			flex-direction: column;
+			align-self: self-start;
+
+			@include media.smallerThan('s') {
+				min-height: 0;
+			}
+		}
+
+		.layout-aside {
+			grid-area: aside;
+
+			@include media.smallerThan('l') {
+				min-height: 0;
+				position: static;
+			}
+		}
+
+		.layout-navside {
+			max-height: calc(100vh - var(--commons-banner-height));
+			grid-area: navside;
+			z-index: 2;
+			overflow: auto;
+		}
+
+		.layout-navside-content-inner,
+		.layout-aside-content-inner {
+			flex-grow: 1;
+		}
+
+		.layout-navside-footer,
+		.layout-aside-footer {
+			position: sticky;
+			bottom: 0;
+			background-color: var(--colors-white-color);
+
+			@include media.smallerThan('s') {
+				margin-top: 0;
+				position: static;
+			}
+		}
+
+		.layout-navside-toggle {
+			background-color: var(--colors-white-color);
+			border: 0;
+			margin: 0;
+			padding: 0;
+			top: 0;
+			position: sticky;
+			color: inherit;
+			font: inherit;
+			cursor: pointer;
+
+			@include media.largerThan('s') {
+				display: none;
+			}
+		}
+
+		.layout-aside-content,
+		.layout-navside-content {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.layout-navside-content {
+			@include media.smallerThan('s') {
+				.layout-navside-toggle[aria-expanded='false'] ~ & {
+					display: none;
+				}
+			}
+		}
+	}
+}

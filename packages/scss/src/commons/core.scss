@@ -1,0 +1,105 @@
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:list';
+
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/icons/src/commons/core' as transform;
+
+$contents: '0';
+$boxModel: 'margin', 'padding', 'border';
+$boxDirection: '', 'top', 'bottom', 'left', 'right';
+$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
+$gaps: 'column-gap', 'row-gap', 'gap';
+$displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
+$direction: 'column', 'column-reverse', 'row', 'row-reverse';
+$wrap: 'wrap', 'nowrap', 'wrap-reverse';
+$justify: 'flex-start', 'flex-end', 'space-around', 'space-between', 'space-evenly', 'center';
+$align: 'flex-start', 'flex-end', 'baseline', 'stretch', 'center';
+$flex: '0', '1', 'auto';
+$basis: '0', 'auto';
+$order: '-1', '1';
+$textAlign: 'left', 'center', 'right';
+$visibility: 'visible', 'hidden', 'collapse';
+$fontWeight: '400', '600', 'normal', 'bold';
+$fontStyle: 'normal', 'italic';
+$pointerEvents: 'none', 'auto';
+$scrollBehavior: 'auto', 'smooth';
+$whiteSpace: 'normal', 'nowrap';
+$float: 'left', 'right';
+$verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
+$position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
+
+@mixin cssvars($name, $properties, $after: '') {
+	@each $key, $value in $properties {
+		--#{$name}#{if($key == '', '', '-')}#{$key}#{$after}: #{$value};
+	}
+}
+
+@mixin classes($name, $properties, $suffix: '!important', $prefix: '') {
+	@each $property in $properties {
+		@if $prefix == '' {
+			.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+				#{$name}: #{$property} #{$suffix};
+			}
+		} @else {
+			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+				#{$name}: #{$property} #{$suffix};
+			}
+		}
+	}
+}
+
+@mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
+	.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
+		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
+	}
+}
+
+@mixin spacings {
+	@each $boxModel in $boxModel {
+		@each $boxDirection in $boxDirection {
+			@each $key, $value in config.$spacings {
+				@if $boxModel != 'border' or $value == 0 {
+					@include spacing($boxModel, $boxDirection, $key, $value);
+				}
+			}
+
+			@if $boxModel == 'margin' {
+				@include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto);
+			}
+		}
+	}
+
+	@each $gap in $gaps {
+		@each $key, $value in config.$spacings {
+			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value);
+		}
+	}
+}
+
+@mixin sizes($suffix: '!important') {
+	@each $key, $value in config.$sizes {
+		.u-text#{transform.capitalize($key)} {
+			font-size: var(--sizes-#{$key}-font-size) #{$suffix};
+			line-height: var(--sizes-#{$key}-line-height) #{$suffix};
+		}
+	}
+}
+
+@mixin palettes($suffix: '!important') {
+	@each $palette in list.join(config.$palettes, config.$states) {
+		.u-text#{transform.capitalize($palette)} {
+			color: var(--palettes-#{$palette}-700) #{$suffix};
+		}
+	}
+}
+
+@mixin borderRadius($suffix: '!important') {
+	@each $corner in $corners {
+		@each $key, $value in config.$borderRadius {
+			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+				border-#{$corner}radius: $value;
+			}
+		}
+	}
+}

@@ -1,13 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-// Google Fonts
-// ====
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic');
+@import '../../packages/icons/src/main';
+@import '../../packages/scss/src/main-all';
+@import '../../packages/ng/styles/main';
 
-// LF
-$noCssVar: false;
-@import '../../packages/scss/src/main.scss';
-@import '../../packages/ng/style/main.scss';
-
-:root {
-	@include generateCSSVarsFromTheme($theme);
+.sb-show-main {
+	background-color: white;
 }

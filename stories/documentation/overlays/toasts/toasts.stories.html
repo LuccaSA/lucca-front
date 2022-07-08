@@ -1,4 +1,3 @@
-
 <section class="contentSection">
 	<lu-toasts [sources]="[toastError$]" [bottom]="isBottom"></lu-toasts>
 
@@ -7,13 +6,12 @@
 	<button type="button" class="button mod-outlined palette-warning" (click)="createToast('Warning')">Toast warning</button>
 	<button type="button" class="button mod-outlined palette-success" (click)="createToast('Success', 2000)">Toast succès, 2000ms</button>
 
-
 	<h4 class="u-marginTopStandard">Toast d'erreur généré grace à la création d'un observable</h4>
 	<button type="button" class="button mod-outlined palette-error" (click)="notifyError()">Toast erreur</button>
 
 	<h4 class="u-marginTopStandard">Positionnement</h4>
 	<label class="switch">
-		<input class="switch-input" type="checkbox" name="switchList1" [(ngModel)]="isBottom" #ctrl="ngModel">
+		<input class="switch-input" type="checkbox" name="switchList1" [(ngModel)]="isBottom" #ctrl="ngModel" />
 		<span class="switch-label">En bas</span>
 	</label>
 </section>

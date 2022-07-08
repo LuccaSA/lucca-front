@@ -1,0 +1,32 @@
+@use 'exports' as *;
+
+.main {
+	&:is(.is-notScrollable, .notScrollable) {
+		@include notScrollable;
+	}
+}
+
+.main-content {
+	@include vars;
+	@include component;
+
+	&.mod-withStickyHeader {
+		@include stickyHeader;
+	}
+
+	&.mod-withBanner,
+	.navSide.mod-withBanner ~ &,
+	.mod-withBanner & {
+		@include banner;
+	}
+
+	.navSide ~ &,
+	.mod-withMenu & {
+		@include menu;
+	}
+
+	.navSide.mod-compact ~ &,
+	.mod-withMenuCompact & {
+		@include menuCompact;
+	}
+}

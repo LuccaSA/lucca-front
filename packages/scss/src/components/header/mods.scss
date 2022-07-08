@@ -1,0 +1,34 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin sticky {
+	top: var(--commons-banner-height);
+	position: fixed;
+	left: 0;
+	right: 0;
+
+	@include media.smallerThan('s') {
+		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+		left: 0 !important;
+	}
+}
+
+@mixin nav {
+	align-items: center;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-top: 0;
+}
+
+@mixin left {
+	left: var(--commons-navSide-width);
+
+	@include media.smallerThan('s') {
+		top: var(--commons-navSide-mobile-toggle-height);
+	}
+}
+
+@mixin leftCompact {
+	@include left;
+
+	left: var(--commons-navSide-compact-width);
+}

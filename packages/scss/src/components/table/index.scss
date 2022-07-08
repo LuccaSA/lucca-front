@@ -1,0 +1,90 @@
+@use 'exports' as *;
+
+.table {
+	@include vars;
+	@include component;
+
+	&.mod-zebra {
+		@include zebra;
+	}
+
+	&.mod-alignTop {
+		@include alignTop;
+	}
+
+	&.mod-clickable {
+		@include clickable;
+	}
+
+	&.mod-card {
+		@include card;
+	}
+
+	&.mod-small {
+		@include small;
+	}
+
+	&.mod-fixed {
+		@include fixed;
+	}
+
+	&.mod-noOffset {
+		@include noOffset;
+	}
+
+	&.mod-borderless {
+		@include borderless;
+	}
+}
+
+.table-body-row {
+	&.mod-header {
+		@include header;
+	}
+
+	&.mod-child {
+		@include child;
+	}
+
+	&.mod-parent {
+		@include parent;
+
+		&.mod-collapsable {
+			@include collapsable;
+		}
+	}
+}
+
+.table-body-row,
+.table-head-row {
+	&.mod-selectable {
+		@include selectable;
+	}
+
+	&.mod-draggable {
+		@include draggable;
+	}
+}
+
+.table-head-row {
+	&.mod-twoLines {
+		@include twoLines;
+	}
+}
+
+.table-body-row-cell {
+	&.mod-avatar {
+		@include avatar;
+	}
+}
+
+.table-head-row-cell,
+.table-body-row-cell {
+	&.mod-actions {
+		@include actions;
+	}
+
+	&.mod-alignRight {
+		@include alignRight;
+	}
+}

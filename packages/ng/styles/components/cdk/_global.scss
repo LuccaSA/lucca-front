@@ -1,0 +1,20 @@
+.cdk-global-overlay-wrapper {
+	height: 100%;
+	left: 0;
+	pointer-events: none;
+	top: 0;
+	width: 100%;
+	display: flex;
+	position: absolute;
+	z-index: 1000;
+}
+
+.cdk-global-scrollblock {
+	&,
+	body {
+		touch-action: none;
+		overscroll-behavior: none;
+		-webkit-overflow-scrolling: auto;
+		overflow: hidden;
+	}
+}

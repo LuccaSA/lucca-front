@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.button-group {
+	@include vars;
+	@include component;
+
+	&.mod-outlined {
+		@include outlined;
+	}
+
+	&.mod-text {
+		@include text;
+	}
+}

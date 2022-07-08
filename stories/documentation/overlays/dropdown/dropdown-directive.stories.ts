@@ -30,7 +30,8 @@ const Template: Story<DropdownDirectiveStories> = (args: DropdownDirectiveStorie
 });
 
 const code = `
-  <button class="button"
+  <button type="button"
+		class="button"
     [luDropdown]="dropdown"
     luDropdownAlignment="top" /* top | bottom | left | right | center */
     luDropdownPosition="before" /* above | below | before | after */

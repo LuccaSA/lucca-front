@@ -1,0 +1,68 @@
+@use 'exports' as *;
+
+.layout {
+	@include vars;
+	@include component;
+
+	&.mod-navsideWithoutScrollbar {
+		@include navsideWithoutScrollbar;
+	}
+
+	&.mod-contentHeaderStatic {
+		@include contentHeaderStatic;
+	}
+
+	&.mod-contentSubheaderStatic {
+		@include contentSubheaderStatic;
+	}
+
+	&.mod-navsideFooterStatic {
+		@include navsideFooterStatic;
+	}
+
+	&.mod-asideFooterStatic {
+		@include asideFooterStatic;
+	}
+
+	&.mod-contentFooterStatic {
+		@include contentFooterStatic;
+	}
+
+	&.mod-asideBefore {
+		@include asideBefore;
+	}
+
+	&.mod-headerRemoved {
+		@include headerRemoved;
+	}
+
+	&.mod-subheaderRemoved {
+		@include subheaderRemoved;
+	}
+
+	&.mod-asideRemoved {
+		@include asideRemoved;
+	}
+
+	&.mod-asideFooterRemoved {
+		@include asideFooterRemoved;
+	}
+
+	&.mod-contentFooterRemoved {
+		@include contentFooterRemoved;
+	}
+
+	&.mod-navsideFooterRemoved {
+		@include navsideFooterRemoved;
+	}
+
+	&.mod-navsideLarge {
+		@include navsideLarge;
+	}
+}
+
+html {
+	&:is(.has-overlay, .withOverlay) {
+		@include overlay;
+	}
+}

@@ -18,23 +18,18 @@ export default {
 
 function getTemplate(args: TextCodeStory): string {
 	const classes = [args.mod].filter(Boolean).join(' ');
-	return `Lorem
-<code class="code ${classes}">ipsum
-dolor</code>
-sit amet
+	return `Lorem 
+<code class="code  ${classes}">ipsum
+dolor
+sit
+</code>
+amet
 	`;
 }
 
 const Template: Story<TextCodeStory> = (args: TextCodeStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-			height: 8rem;
-		}`,
-	],
 });
 
 export const Basic = Template.bind({});

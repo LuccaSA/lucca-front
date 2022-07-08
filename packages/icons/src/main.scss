@@ -1,5 +1,2 @@
-@import
-"font",
-"partials",
-"classes",
-"icons";
+@forward 'commons';
+@forward 'icon';

@@ -6,8 +6,12 @@
 		"entryFile": "public_api.ts"
 	},
 	"assets": [
-		"style/**/*.scss",
-		"material/style/**/*.scss",
-		"formly/style/**/*.scss"
+		{
+			"glob": "**/*.scss",
+			"input": "./styles",
+			"output": "src"
+		},
+		"material/src/**/*.scss",
+		"formly/src/**/*.scss"
 	]
 }

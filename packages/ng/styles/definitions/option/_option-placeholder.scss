@@ -1,0 +1,8 @@
+@mixin optionPlaceholderStyle {
+	.optionPlaceholder {
+		display: block;
+		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+		font-style: italic;
+		color: var(--palettes-grey-600);
+	}
+}

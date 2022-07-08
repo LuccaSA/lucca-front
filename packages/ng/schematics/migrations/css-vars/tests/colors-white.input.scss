@@ -1,0 +1,10 @@
+.test {
+  color: _color("white");
+  fill: _color("primary");
+  border: 2px solid _color("grey", "900");
+
+  // Legacy
+  color: _color("grey", "default");
+  color: _color("grey.default");
+  color: lighten(_color("primary", "lighter"), 10%);
+}

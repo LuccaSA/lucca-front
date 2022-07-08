@@ -18,7 +18,7 @@ export default {
 function getTemplate(args: TableOfContentBasicStory): string {
 	const disabled = args.disabled ? `disabled` : '';
 	return `
-	<nav class="tableOfContent">
+	<nav class="tableOfContent ">
 		<ul class="tableOfContent-list">
 			<li class="tableOfContent-list-item">
 				<a href="#" class="tableOfContent-list-item-action is-active">Section 1</a>

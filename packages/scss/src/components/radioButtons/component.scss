@@ -1,0 +1,91 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component {
+	display: flex;
+
+	@at-root {
+		.radioButtons-item {
+			margin-left: -1px;
+
+			&:first-child {
+				margin-left: 0;
+
+				.radioButtons-item-label {
+					border-radius: var(--commons-border-radius) 0 0 var(--commons-border-radius);
+				}
+			}
+
+			&:last-child {
+				.radioButtons-item-label {
+					border-radius: 0 var(--commons-border-radius) var(--commons-border-radius) 0;
+				}
+			}
+		}
+
+		.radioButtons-item-input {
+			@include a11y.mask;
+
+			&:checked,
+			&:focus {
+				~ .radioButtons-item-label {
+					z-index: 2;
+				}
+			}
+		}
+
+		.radioButtons-item-label {
+			background-color: var(--colors-white-color);
+			padding: var(--components-radioButtons-padding);
+			color: var(--components-radioButtons-default-palette-700);
+			box-shadow: inset 0 0 0 1px var(--components-radioButtons-default-palette-200);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: all;
+			display: block;
+			overflow: hidden;
+			position: relative;
+			cursor: pointer;
+		}
+
+		.radioButtons-item-input {
+			&:not(:disabled, .is-disabled) {
+				~ .radioButtons-item-label {
+					&:hover {
+						background-color: var(--components-radioButtons-default-palette-50);
+						box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--components-radioButtons-default-palette-200);
+					}
+				}
+
+				&:checked {
+					~ .radioButtons-item-label {
+						background-color: var(--components-radioButtons-default-palette-50);
+						box-shadow: inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
+						color: var(--components-radioButtons-default-palette-700);
+
+						&:hover {
+							box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
+						}
+					}
+				}
+
+				&:focus {
+					~ .radioButtons-item-label {
+						box-shadow: 0 0 0 4px var(--components-radioButtons-hover-200), inset 0 0 0 1px var(--components-radioButtons-hover-400);
+					}
+
+					&:checked {
+						~ .radioButtons-item-label {
+							background-color: var(--components-radioButtons-default-palette-100);
+							box-shadow: 0 0 0 4px var(--components-radioButtons-hover-200), inset 0 0 0 1px var(--components-radioButtons-hover-500);
+						}
+					}
+
+					&:not(:checked) {
+						~ .radioButtons-item-label {
+							background-color: var(--palettes-grey-50);
+						}
+					}
+				}
+			}
+		}
+	}
+}

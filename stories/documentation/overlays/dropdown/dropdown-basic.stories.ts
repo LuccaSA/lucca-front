@@ -36,7 +36,7 @@ import { LuDropdownModule } from '@lucca-front/ng/dropdown';
 class DropdownStoriesModule {}
 
 /* 2. Ajouter un bouton détenant la directive [luDropdown]="dropdown" */
-<button class="button" [luDropdown]="dropdown">Open dropdown</button>
+<button type="button" class="button" [luDropdown]="dropdown">Open dropdown</button>
 
 /* 3. Ajouter le composant <lu-dropdown #dropdown></lu-dropdown> avec la référence de la directive */
 <lu-dropdown #dropdown>
@@ -50,7 +50,7 @@ class DropdownStoriesModule {}
 		<a routerLink="." fragment="link3" class="lu-dropdown-options-item-action" luDropdownItem>Link 3</a>
 	</li>
 	<li class="lu-dropdown-options-item">
-		<button class="lu-dropdown-options-item-action" luDropdownItem>Button 4</button>
+		<button type="button" class="lu-dropdown-options-item-action" luDropdownItem>Button 4</button>
 	</li>
 </lu-dropdown>
 `;

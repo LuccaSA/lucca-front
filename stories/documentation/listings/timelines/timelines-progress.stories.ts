@@ -1,9 +1,21 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TimelinesProgressStory {}
+interface TimelinesProgressStory {
+	width: number;
+}
 
 export default {
 	title: 'Documentation/Listings/Timelines/Progress',
+	argTypes: {
+		progress: {
+			control: {
+				type: 'range',
+				min: 0,
+				max: 100,
+				step: 1,
+			},
+		},
+	},
 } as Meta;
 
 function getTemplate(args: TimelinesProgressStory): string {
@@ -14,7 +26,7 @@ function getTemplate(args: TimelinesProgressStory): string {
 				First step
 			</div>
 		</li>
-		<li class="timeline-step" aria-current="step" style="--progress: 70%">
+		<li class="timeline-step" aria-current="step" [attr.style]="'--progress:' + progress + '%'">
 			<div class="timeline-step-title">
 				Current step
 			</div>
@@ -25,7 +37,7 @@ function getTemplate(args: TimelinesProgressStory): string {
 			</div>
 		</li>
 	</ol>
-	`
+	`;
 }
 
 const Template: Story<TimelinesProgressStory> = (args: TimelinesProgressStory) => ({
@@ -34,4 +46,4 @@ const Template: Story<TimelinesProgressStory> = (args: TimelinesProgressStory) =
 });
 
 export const Progress = Template.bind({});
-Progress.args = {};
+Progress.args = { progress: 50 };

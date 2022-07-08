@@ -1,0 +1,284 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin selectInputStyle {
+	:host {
+		--components-select-default-palette-50: var(--palettes-primary-50);
+		--components-select-default-palette-100: var(--palettes-primary-100);
+		--components-select-default-palette-200: var(--palettes-primary-200);
+		--components-select-default-palette-300: var(--palettes-primary-300);
+		--components-select-default-palette-400: var(--palettes-primary-400);
+		--components-select-default-palette-500: var(--palettes-primary-500);
+		--components-select-default-palette-600: var(--palettes-primary-600);
+		--components-select-default-palette-700: var(--palettes-primary-700);
+		--components-select-default-palette-800: var(--palettes-primary-800);
+		--components-select-default-palette-900: var(--palettes-primary-900);
+		--components-select-chip-background: var(--palettes-primary-700);
+
+		--components-select-chip-text: var(--colors-white-color);
+		--components-select-input-padding-horizontal: var(--spacings-smaller);
+		--components-select-input-padding-vertical: var(--spacings-smaller);
+		--components-select-framed-color: var(--palettes-grey-500);
+		--components-select-framed-color50: var(--palettes-grey-50);
+		--components-select-framed-see-through: var(--palettes-grey-50);
+		--components-select-framed-text: var(--palettes-grey-800);
+		--components-select-framed-placeholder: #cccccc;
+		--components-select-framed-side-padding: var(--spacings-small);
+		--components-select-framed-top-padding: var(--spacings-big);
+		--components-select-framed-bottom-padding: var(--spacings-small);
+		--components-select-framed-label-top-offset: var(--spacings-smaller);
+
+		cursor: pointer;
+		outline: none;
+		padding: 0;
+
+		&::after {
+			@include icon.generate('arrow_south');
+
+			color: var(--palettes-700, var(--components-select-default-palette-700));
+			bottom: var(--components-select-input-padding-vertical);
+			font-size: 1.2rem;
+			line-height: 1.4rem;
+			pointer-events: none;
+			position: absolute;
+			right: var(--components-select-input-padding-horizontal);
+		}
+
+		&[disabled] {
+			cursor: not-allowed;
+			pointer-events: all;
+		}
+
+		&.is-disabled {
+			cursor: not-allowed;
+			pointer-events: all;
+		}
+	}
+
+	.lu-select-display-wrapper {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.lu-select-value {
+		line-height: var(--sizes-standard-line-height);
+		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-standard-line-height));
+		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+			var(--components-select-input-padding-horizontal);
+		transition: all var(--commons-animations-durations-standard);
+		display: none;
+	}
+
+	.lu-select-placeholder {
+		color: var(--palettes-400, var(--components-select-default-palette-400));
+		line-height: var(--sizes-standard-line-height);
+		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-standard-line-height));
+		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+			var(--components-select-input-padding-horizontal);
+		transition: all var(--commons-animations-durations-standard);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.lu-select-suffix {
+		position: absolute;
+		bottom: 0.5rem;
+		right: 1.6rem;
+	}
+
+	::ng-deep .lu-select-value {
+		.label {
+			padding: var(--spacings-smallest) var(--spacings-smaller);
+			margin-left: 0;
+		}
+
+		.chip {
+			background-color: var(--components-select-chip-background);
+			color: var(--components-select-chip-text);
+			vertical-align: baseline;
+			max-width: 100%;
+			height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-standard-line-height);
+			padding: 0 var(--spacings-smaller);
+			margin: 0 0.25rem 0.25rem 0;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			vertical-align: top;
+			white-space: nowrap;
+		}
+	}
+
+	// MODS
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	// Small
+	:host-context(.textfield.mod-small) {
+		.lu-select-value,
+		.lu-select-placeholder {
+			font-size: var(--sizes-small-font-size);
+			line-height: var(--sizes-small-line-height);
+			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-small-line-height));
+		}
+
+		&::after {
+			line-height: var(--sizes-small-line-height);
+		}
+
+		::ng-deep .lu-select-value {
+			.label {
+				font-size: var(--sizes-small-font-size);
+				line-height: var(--sizes-small-line-height);
+				font-weight: 600;
+				margin: 0;
+				padding: 0;
+				background-color: transparent;
+			}
+
+			.chip {
+				height: var(--sizes-small-line-height);
+				line-height: var(--sizes-small-line-height);
+			}
+		}
+	}
+
+	// Framed
+	:host-context(.textfield.mod-framed),
+	:host-context(.form.mod-framed) {
+		&.textfield-input {
+			padding: var(--components-select-framed-top-padding) 0 0;
+
+			&::after {
+				color: var(--palettes-grey-500);
+				bottom: var(--components-select-framed-bottom-padding);
+				right: var(--spacings-smaller);
+			}
+
+			.lu-select-value,
+			.lu-select-placeholder {
+				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
+					var(--components-select-framed-side-padding);
+			}
+
+			.lu-select-suffix {
+				bottom: var(--components-select-framed-bottom-padding);
+				right: 1.7rem;
+			}
+		}
+	}
+
+	// Filter
+	:host-context(.textfield.mod-filter) {
+		.lu-select-value,
+		.lu-select-placeholder {
+			padding: 0;
+			height: auto;
+			padding-top: 1rem;
+			color: var(--palettes-grey-800);
+		}
+
+		.lu-select-suffix {
+			bottom: 0.4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
+		}
+	}
+
+	// Material
+	:host-context(.textfield.mod-material) {
+		&::after {
+			color: var(--palettes-grey-500);
+			bottom: 0.6rem;
+			right: 0;
+		}
+
+		.lu-select-value,
+		.lu-select-placeholder {
+			padding-left: 0;
+			padding-right: 0.8rem;
+		}
+
+		.lu-select-suffix {
+			right: calc(2 * var(--components-select-input-padding-horizontal));
+		}
+
+		&.is-select {
+			.lu-select-placeholder {
+				display: none;
+			}
+		}
+
+		&.mod-search {
+			&::after {
+				bottom: 0;
+			}
+
+			.lu-select-suffix {
+				right: calc(2.75 * var(--components-select-input-padding-horizontal));
+			}
+		}
+	}
+
+	:host-context(.textfield.mod-material .textfield-input.is-focused) {
+		.lu-select-placeholder {
+			display: none;
+		}
+	}
+
+	// Multiple
+	:host(.mod-multiple) {
+		&.mod-multipleView:not(.mod-singleLine) {
+			.lu-select-value {
+				height: auto;
+				align-items: center;
+			}
+
+			.lu-select-display-wrapper {
+				overflow: hidden;
+				white-space: normal;
+				margin-bottom: -0.25rem;
+			}
+		}
+	}
+
+	// STATES
+	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+	// Filled
+	:host-context(.textfield-input.is-filled) {
+		.lu-select-placeholder {
+			display: none;
+		}
+
+		.lu-select-value {
+			display: flex;
+		}
+	}
+
+	// Clearable
+	:host-context(.textfield-input.is-clearable) {
+		.lu-select-value {
+			padding-right: 2.5rem;
+		}
+	}
+
+	// Error
+	:host-context(.textfield-input.is-error) {
+		&::after {
+			color: var(--palettes-error-700);
+		}
+
+		.lu-select-placeholder {
+			color: var(--palettes-error-200);
+		}
+	}
+
+	// Disabled
+	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
+		&::after {
+			color: var(--commons-disabled-color);
+		}
+
+		.lu-select-placeholder {
+			color: var(--commons-disabled-placeholder);
+		}
+	}
+}

@@ -1,0 +1,312 @@
+@use 'sass:list';
+
+@use '@lucca-front/icons/src/commons/core' as transform;
+
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+
+@use 'exports' as *;
+
+@include core.classes('min-width', core.$contents);
+@include core.classes('flex-direction', core.$direction);
+@include core.classes('flex-wrap', core.$wrap);
+@include core.classes('justify-content', core.$justify);
+@include core.classes('align-items', core.$align);
+@include core.classes('flex-grow', core.$flex);
+@include core.classes('flex-shrink', core.$flex);
+@include core.classes('flex-basis', core.$basis);
+@include core.classes('flex-order', core.$order);
+@include core.classes('order', core.$order);
+@include core.classes('align-self', core.$align);
+@include core.classes('text-align', core.$textAlign);
+@include core.classes('visibility', core.$visibility);
+@include core.classes('font-weight', core.$fontWeight);
+@include core.classes('font-style', core.$fontStyle);
+@include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('white-space', core.$whiteSpace);
+@include core.classes('vertical-align', core.$verticalAlign);
+@include core.classes('float', core.$float);
+@include core.classes('position', core.$position);
+@include core.classes('display', core.$displays);
+
+@include core.spacings;
+@include core.sizes;
+@include core.borderRadius;
+@include core.palettes;
+
+@media only print {
+	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
+}
+
+%displayNone {
+	display: none;
+}
+
+@each $display in core.$displays {
+	@if $display != 'none' {
+		.u-onlyPrintDisplay#{transform.capitalize($display)} {
+			@extend %displayNone;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@include core.classes('scroll-behavior', core.$scrollBehavior);
+}
+
+.u-textLight {
+	color: var(--palettes-grey-600) !important;
+}
+
+.u-textPlaceholder {
+	color: var(--palettes-grey-400) !important;
+}
+
+.u-positionStatic {
+	position: static !important;
+}
+
+.u-textLeft {
+	text-align: left !important;
+}
+
+.u-textRight {
+	text-align: right !important;
+}
+
+.u-textCenter {
+	text-align: center !important;
+}
+
+.u-mask {
+	@include a11y.mask('!important');
+}
+
+.u-listReset {
+	@include reset.list('!important');
+}
+
+.u-descriptionListReset {
+	@include reset.list($list: 'dl', $suffix: '!important');
+}
+
+.u-buttonReset {
+	@include reset.button('!important');
+}
+
+.u-clearfix,
+.u-clear {
+	@include reset.clearfix('!important');
+}
+
+.u-ellipsis {
+	@include text.ellipsis('!important');
+}
+
+[data-content-before] {
+	&::before {
+		content: attr(data-content-before);
+	}
+}
+
+[data-content-after] {
+	&::after {
+		content: attr(data-content-after);
+	}
+}
+
+.u-h1,
+.u-h2,
+.u-h3,
+.u-h4,
+.u-h5,
+.u-h6 {
+	@include title.component;
+}
+
+.u-h1 {
+	@include title.h1;
+
+	&.mod-headline {
+		@include title.headline;
+	}
+}
+
+.u-h2 {
+	@include title.h2;
+}
+
+.u-h3 {
+	@include title.h3;
+}
+
+.u-h4 {
+	@include title.h4;
+}
+
+.u-h5 {
+	@include title.h5;
+}
+
+.u-h6 {
+	@include title.h6;
+}
+
+.u-ellipsis {
+	@include text.ellipsis;
+}
+
+.u-unit {
+	font-size: 0.66em !important;
+}
+
+.u-comma {
+	&:not(:last-child) {
+		&::after {
+			content: ', ' !important;
+		}
+	}
+}
+
+@each $direction in core.$boxDirection {
+	@if $direction == '' {
+		.u-insetReset,
+		.u-inset0 {
+			inset: 0 !important;
+		}
+	} @else {
+		.u-#{$direction}Reset,
+		.u-#{$direction}0 {
+			#{$direction}: 0 !important;
+		}
+	}
+}
+
+@each $elevation in config.$elevations {
+	$index: list.index(config.$elevations, $elevation);
+
+	.u-elevate#{$index} {
+		box-shadow: var(--commons-elevations-elevation-#{$index});
+	}
+}
+
+.u-animated {
+	&FadeIn,
+	&FadeOut {
+		@include keyframe.fadeIn;
+
+		animation-name: fadeIn;
+	}
+
+	&ScaleIn,
+	&ScaleOut {
+		@include keyframe.scaleIn;
+
+		animation-name: scaleIn;
+	}
+
+	&ScaleInTop,
+	&ScaleOutTop {
+		@include keyframe.scaleIn;
+
+		animation-name: scaleInTop;
+	}
+
+	&ScaleInRight,
+	&ScaleOutRight {
+		@include keyframe.scaleInRight;
+
+		animation-name: scaleInRight;
+	}
+
+	&ScaleInBottom,
+	&ScaleOutBottom {
+		@include keyframe.scaleInBottom;
+
+		animation-name: scaleInBottom;
+	}
+
+	&ScaleInLeft,
+	&ScaleOutLeft {
+		@include keyframe.scaleInLeft;
+
+		animation-name: scaleInLeft;
+	}
+
+	&SlideIn,
+	&SlideInTop,
+	&SlideOut,
+	&SlideOutTop {
+		@include keyframe.slideIn;
+
+		animation-name: slideIn;
+	}
+
+	&SlideInRight,
+	&SlideOutRight {
+		@include keyframe.slideInRight;
+
+		animation-name: slideInRight;
+	}
+
+	&SlideInBottom,
+	&SlideOutBottom {
+		@include keyframe.slideInBottom;
+
+		animation-name: slideInBottom;
+	}
+
+	&SlideInLeft,
+	&SlideOutLeft {
+		@include keyframe.slideInLeft;
+
+		animation-name: slideInLeft;
+	}
+
+	&Shake {
+		@include keyframe.shake;
+
+		animation-name: shake;
+	}
+
+	&Pulse {
+		@include keyframe.pulse;
+
+		animation-name: pulse;
+		animation-direction: alternate;
+		animation-iteration-count: var(--commons-animations-iteration-count);
+	}
+
+	&FadeOut,
+	&SlideOut,
+	&SlideOutTop,
+	&SlideOutRight,
+	&SlideOutBottom,
+	&SlideOutLeft,
+	&ScaleOut,
+	&ScaleOutTop,
+	&ScaleOutRight,
+	&ScaleOutBottom,
+	&ScaleOutLeft {
+		animation-direction: reverse;
+	}
+}
+
+[class*='u-animated'] {
+	animation-duration: var(--duration, var(commons-animations-durations-standard));
+	animation-timing-function: var(commons-animations-function);
+
+	&.mod-animation-duration-fast {
+		@include duration('fast');
+	}
+
+	&.mod-animation-duration-slow {
+		@include duration('slow');
+	}
+}

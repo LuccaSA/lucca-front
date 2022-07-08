@@ -1,0 +1,32 @@
+@mixin grey {
+	background-color: var(--components-card-mod-grey);
+}
+
+@mixin clickable {
+	color: var(--palettes-grey-800);
+	text-decoration: none;
+	cursor: pointer;
+
+	&:focus  {
+		outline: none;
+	}
+
+	&:focus-visible,
+	&:hover {
+		border-color: var(--components-card-hover-border);
+		background-color: var(--components-card-hover-background);
+		outline: none;
+	}
+}
+
+@mixin elevated {
+	box-shadow: var(--commons-elevations-elevation-1);
+	border: 0;
+}
+
+@mixin clickableElevated {
+	&:focus-visible,
+	&:hover {
+		box-shadow: var(--commons-elevations-elevation-3);
+	}
+}

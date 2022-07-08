@@ -1,0 +1,16 @@
+@use '@lucca-front/scss/src/commons/utils/loading';
+
+@mixin component {
+	@include loading.spinner;
+
+	min-width: 1.7rem;
+	min-height: 1.7rem;
+	padding-left: 2rem;
+	display: inline-block;
+	position: relative;
+
+	&::after,
+	&::before {
+		margin: 0.35rem;
+	}
+}

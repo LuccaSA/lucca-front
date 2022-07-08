@@ -1,0 +1,56 @@
+@mixin vars {
+	@at-root {
+		:root {
+			--commons-navSide-width: 15rem;
+			--commons-navSide-compact-width: 7.5rem;
+			--commons-navSide-mobile-toggle-height: 3.5rem;
+		}
+	}
+
+	--components-navSide-offset-top: 0;
+	--components-navSide-padding-top: 0;
+	--components-navSide-main-font-size: 0.875rem;
+	--components-navSide-sub-font-size: 0.875rem;
+	--components-navSide-submenu-max-height: 33rem;
+
+	--components-navSide-fullwidth-palette-bg-color: #2d3368;
+	--components-navSide-fullwidth-palette-text: var(--colors-white-color);
+	--components-navSide-fullwidth-palette-selected-bg: var(--palettes-primary-700);
+	--components-navSide-fullwidth-palette-selected-text: var(--colors-white-color);
+	--components-navSide-fullwidth-palette-hovered-bg: var(--palettes-primary-800);
+	--components-navSide-fullwidth-palette-hovered-text: var(--colors-white-color);
+	--components-navSide-fullwidth-palette-alert-color: var(--palettes-secondary-700);
+	--components-navSide-fullwidth-palette-alert-text: var(--colors-white-color);
+	--components-navSide-fullwidth-palette-selected-alert-color: var(--palettes-secondary-700);
+	--components-navSide-fullwidth-palette-selected-alert-text: var(--colors-white-color);
+
+	--components-navSide-compact-palette-bg-color: #2d3368;
+	--components-navSide-compact-palette-text: var(--colors-white-color);
+	--components-navSide-compact-palette-selected-bg: var(--palettes-primary-700);
+	--components-navSide-compact-palette-selected-text: var(--colors-white-color);
+	--components-navSide-compact-palette-hovered-bg: var(--palettes-primary-800);
+	--components-navSide-compact-palette-hovered-text: var(--colors-white-color);
+	--components-navSide-compact-palette-alert-color: var(--palettes-secondary-700);
+	--components-navSide-compact-palette-alert-text: var(--colors-white-color);
+	--components-navSide-compact-palette-selected-alert-color: var(--palettes-secondary-700);
+	--components-navSide-compact-palette-selected-alert-text: var(--colors-white-color);
+	--components-navSide-compact-font-size: 0.875rem;
+
+	--components-navSide-bottom-section-palette-bg-color: transparent;
+	--components-navSide-bottom-section-palette-text: var(--colors-white-color);
+	--components-navSide-bottom-section-palette-selected-bg: #9299b0;
+	--components-navSide-bottom-section-palette-selected-text: var(--colors-white-color);
+	--components-navSide-bottom-section-palette-hovered-bg: #31395e;
+	--components-navSide-bottom-section-palette-hovered-text: var(--colors-white-color);
+	--components-navSide-bottom-section-palette-alert-color: #9299b0;
+	--components-navSide-bottom-section-palette-alert-text: var(--colors-white-color);
+	--components-navSide-bottom-section-palette-selected-alert-color: #9299b0;
+	--components-navSide-bottom-section-palette-selected-alert-text: var(--colors-white-color);
+	--components-navSide-bottom-section-height: 3.1rem;
+
+	--components-navSide-scrollbar-width: 0.5rem;
+	--components-navSide-scrollbar-border-radius: 10px;
+	--components-navSide-scrollbar-bg-color: var(--palettes-primary-800);
+	--components-navSide-scrollbar-thumb-color: var(--palettes-primary-700);
+	--components-navSide-scrollbar-arrow-color: var(--colors-white-color);
+}

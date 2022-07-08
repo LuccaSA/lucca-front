@@ -1,0 +1,39 @@
+@use 'exports' as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@include vars;
+	@include component;
+}
+
+h1 {
+	@include h1;
+
+	&.mod-headline {
+		@include headline;
+	}
+}
+
+h2 {
+	@include h2;
+}
+
+h3 {
+	@include h3;
+}
+
+h4 {
+	@include h4;
+}
+
+h5 {
+	@include h5;
+}
+
+h6 {
+	@include h6;
+}

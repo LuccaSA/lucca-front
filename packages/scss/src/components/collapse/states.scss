@@ -1,0 +1,13 @@
+@mixin close {
+	> .collapse-content {
+		display: none;
+	}
+}
+
+@mixin open {
+	> .collapse-title {
+		&::before {
+			transform: rotate(90deg);
+		}
+	}
+}

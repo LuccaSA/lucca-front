@@ -1,0 +1,5 @@
+@mixin vars {
+	--components-list-margin-bottom: 1rem;
+	--components-list-padding: 1rem 1.5rem;
+	--components-list-hover-background: var(--palettes-primary-50);
+}

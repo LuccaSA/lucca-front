@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface DividerBasicStory {
-}
+interface DividerBasicStory {}
 
 export default {
 	title: 'Documentation/Structure/Divider/Basic',

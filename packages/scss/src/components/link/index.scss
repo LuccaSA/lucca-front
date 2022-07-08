@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.link {
+	@include vars;
+	@include component;
+}

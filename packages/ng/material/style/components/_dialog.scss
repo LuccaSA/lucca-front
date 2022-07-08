@@ -1,3 +1,6 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/icons/src/commons/utils/icon';
+
 .mat-dialog-container {
 	@extend .card;
 
@@ -10,15 +13,15 @@
 .cdk-overlay-pane {
 	&.mod-sidePanel {
 		position: fixed !important;
-		top: _theme('commons.banner-height');
+		top: var(--commons-banner-height);
 		right: 0;
 		bottom: 0;
 		width: 60%;
 		max-width: 800px;
-		@include media_smaller_than("s") {
+		@include media.smallerThan('s') {
 			width: 80%;
 		}
-		@include media_smaller_than("xs") {
+		@include media.smallerThan('xs') {
 			width: 100%;
 		}
 

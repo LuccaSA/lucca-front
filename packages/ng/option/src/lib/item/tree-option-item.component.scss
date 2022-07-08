@@ -1,198 +1,192 @@
-@import "_definitions";
+@import '_definitions';
 @include optionItemStyle;
 
 .optionItem {
-  &:hover {
-    .optionItem-value {
-      background: _theme('commons.highlight',true);
-			background: _theme('commons.highlight');
-    }
+	&:hover {
+		.optionItem-value {
+			background: var(--palettes-grey-50);
+		}
 
-    .optionItem-icons {
-      opacity: 1;
-    }
-  }
+		.optionItem-icons {
+			opacity: 1;
+		}
+	}
 }
 
 .optionItem-value {
-  padding: _component("options.item.padding-vertical", true) _component("options.item.padding-horizontal", true) _component("options.item.padding-vertical", true) .5rem;
-  padding: _component("options.item.padding-vertical") _component("options.item.padding-horizontal") _component("options.item.padding-vertical") .5rem;
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
 }
 
 .optionItem-icons {
-  display: none;
-  position: absolute;
-  top: .5rem;
-  right: .5rem;
-  opacity: 0;
-  transition: all _theme("commons.animations.durations.fast", true) ease;
-  transition: all _theme("commons.animations.durations.fast") ease;
+	display: none;
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	opacity: 0;
+	transition: all var(--commons-animations-durations-fast) ease;
 }
 
 .optionItem-icon {
-  cursor: pointer;
-  opacity: .66;
-  margin-left: .5rem;
-  transition: all _theme("commons.animations.durations.fast", true) ease;
-  transition: all _theme("commons.animations.durations.fast") ease;
+	cursor: pointer;
+	opacity: 0.66;
+	margin-left: 0.5rem;
+	transition: all var(--commons-animations-durations-fast) ease;
 
-  &:hover {
-    opacity: 1;
-  }
+	&:hover {
+		opacity: 1;
+	}
 }
 
 .optionItem-icon-shape {
-  fill: _component("options.item.icon.color");
-  width: 1.4rem;
-  height: 1.4rem;
+	fill: var(--components-options-item-icon-color);
+	width: 1.4rem;
+	height: 1.4rem;
 }
 
 :host-context(.lu-picker-panel) {
-  padding: 0;
+	padding: 0;
 
-  .optionItem-value {
-    &::before {
-      top: 1.3rem;
-      left: .5rem;
-      pointer-events: none;
-    }
+	.optionItem-value {
+		&::before {
+			top: 1.3rem;
+			left: 0.5rem;
+			pointer-events: none;
+		}
 
-    &::after {
-      top: 1.3rem;
-      left: .5rem;
-      pointer-events: none;
-    }
-  }
+		&::after {
+			top: 1.3rem;
+			left: 0.5rem;
+			pointer-events: none;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple) {
-  .optionItem-icons {
-    display: block;
-  }
+	.optionItem-icons {
+		display: block;
+	}
 
-  .optionItem-value {
-    padding-right: 4rem;
-  }
+	.optionItem-value {
+		padding-right: 4rem;
+	}
 }
 
-/* clean-css ignore:start */
 :host-context(.lu-picker-panel lu-tree-option) {
-  .optionItem-value {
-    padding-left: 1.5rem;
+	.optionItem-value {
+		padding-left: 1.5rem;
 
-    &::before {
-      left: 1.5rem;
-    }
+		&::before {
+			left: 1.5rem;
+		}
 
-    &::after {
-      left: 1.5rem;
-    }
-  }
+		&::after {
+			left: 1.5rem;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
-  .optionItem-value {
-    padding-left: 3rem;
-  }
+	.optionItem-value {
+		padding-left: 3rem;
+	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 2.5rem;
+	.optionItem-value {
+		padding-left: 2.5rem;
 
-    &::before {
-      left: 2.5rem;
-    }
+		&::before {
+			left: 2.5rem;
+		}
 
-    &::after {
-      left: 2.5rem;
-    }
-  }
+		&::after {
+			left: 2.5rem;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 4rem;
-  }
+	.optionItem-value {
+		padding-left: 4rem;
+	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 3.5rem;
+	.optionItem-value {
+		padding-left: 3.5rem;
 
-    &::before {
-      left: 3.5rem;
-    }
+		&::before {
+			left: 3.5rem;
+		}
 
-    &::after {
-      left: 3.5rem;
-    }
-  }
+		&::after {
+			left: 3.5rem;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 5rem;
-  }
+	.optionItem-value {
+		padding-left: 5rem;
+	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 4.5rem;
+	.optionItem-value {
+		padding-left: 4.5rem;
 
-    &::before {
-      left: 4.5rem;
-    }
+		&::before {
+			left: 4.5rem;
+		}
 
-    &::after {
-      left: 4.5rem;
-    }
-  }
+		&::after {
+			left: 4.5rem;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 6rem;
-  }
+	.optionItem-value {
+		padding-left: 6rem;
+	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 5.5rem;
+	.optionItem-value {
+		padding-left: 5.5rem;
 
-    &::before {
-      left: 5.5rem;
-    }
+		&::before {
+			left: 5.5rem;
+		}
 
-    &::after {
-      left: 5.5rem;
-    }
-  }
+		&::after {
+			left: 5.5rem;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 7rem;
-  }
+	.optionItem-value {
+		padding-left: 7rem;
+	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 6.5rem;
+	.optionItem-value {
+		padding-left: 6.5rem;
 
-    &::before {
-      left: 6.5rem;
-    }
+		&::before {
+			left: 6.5rem;
+		}
 
-    &::after {
-      left: 6.5rem;
-    }
-  }
+		&::after {
+			left: 6.5rem;
+		}
+	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-  .optionItem-value {
-    padding-left: 8rem;
-  }
+	.optionItem-value {
+		padding-left: 8rem;
+	}
 }
-/* clean-css ignore:end */

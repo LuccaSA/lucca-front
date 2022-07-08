@@ -1,0 +1,38 @@
+@mixin tooltipStyle {
+	.lu-tooltip-panel {
+		--components-tooltip-background-color: var(--palettes-grey-900);
+		--components-tooltip-color: var(--colors-white-color);
+		--components-tooltip-padding: var(--spacings-smallest) var(--spacings-smaller);
+		--components-tooltip-max-width: 15rem;
+
+		background: var(--components-tooltip-background-color);
+		color: var(--components-tooltip-color);
+		padding: var(--components-tooltip-padding);
+		max-width: var(--components-tooltip-max-width);
+		border-radius: var(--commons-border-radius);
+		font-size: var(--sizes-small-font-size);
+
+		font-weight: 600;
+		line-height: 1rem;
+		display: block;
+
+		&.is-above {
+			transform-origin: bottom center;
+		}
+
+		&.is-below {
+			transform-origin: top center;
+			margin-top: 2px;
+		}
+
+		&.is-before {
+			transform-origin: center right;
+			margin-right: 5px;
+		}
+
+		&.is-after {
+			transform-origin: center left;
+			margin-left: 5px;
+		}
+	}
+}

@@ -1,0 +1,99 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use 'exports' as *;
+
+.navSide {
+	@include vars;
+	@include component;
+
+	&.mod-withBanner {
+		@include banner;
+	}
+
+	&.mod-compact {
+		@include media.largerThan('s') {
+			@include compact;
+
+			.navSide-item-link {
+				&:hover {
+					@include compactHover;
+				}
+
+				&:is(.is-active, .active) {
+					@include compactActive;
+				}
+			}
+		}
+	}
+
+	@include media.smallerThan('s') {
+		@include mobile;
+
+		&:not(.is-open, .open) {
+			.navSide-item {
+				&:not(.mod-mobileToggle) {
+					@include mobileHidden;
+				}
+			}
+		}
+
+		&.mod-withBanner {
+			.navSide-item {
+				&.mod-mobileToggle {
+					@include banner;
+				}
+			}
+		}
+
+		&:is(.is-open, .open) {
+			@include mobileOpen;
+
+			&.mod-withBanner {
+				@include mobileOpenBanner;
+			}
+		}
+	}
+}
+
+.navSide-item {
+	&:not(.is-open) {
+		@include notOpen;
+	}
+
+	&.mod-mobileToggle {
+		@include mobileToggle;
+	}
+
+	&:is(.is-open, .open) {
+		@include expanded;
+
+		.navSide-item-subMenu-link {
+			&:is(:hover) {
+				@include sublinkHover;
+			}
+
+			&:is(.is-active, .active) {
+				@include sublinkActive;
+			}
+		}
+	}
+}
+
+.navSide-item-subMenu-link,
+.navSide-item-link {
+	&:is(.is-active, .active) {
+		@include active;
+	}
+
+	&:is([aria-expanded='true']) {
+		@include expanded;
+	}
+}
+
+html {
+	&:is(.hasMenu, .withMenu) {
+		@include media.smallerThan('s') {
+			@include overlay;
+		}
+	}
+}

@@ -1,0 +1,63 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component {
+	background-color: var(--colors-white-color);
+	box-shadow: var(--commons-elevations-elevation-1);
+	margin-bottom: var(--components-list-margin-bottom);
+	list-style: none;
+	padding: 0;
+
+	@at-root {
+		.list-item {
+			border-bottom-width: var(--commons-divider-width);
+			border-bottom-color: var(--commons-divider-color);
+			color: var(--palettes-grey-800);
+			border-bottom-style: solid;
+			align-items: center;
+			display: flex;
+			position: relative;
+			text-decoration: none;
+
+			&:last-child {
+				border: 0;
+			}
+
+			// if no hover on list item
+			&:not(:hover) {
+				.actionIcon {
+					// and no focus on action icon
+					&:not(:focus) {
+						// then mask
+						@include a11y.mask;
+
+						opacity: 0;
+					}
+				}
+			}
+		}
+
+		.list-item-content {
+			padding: var(--components-list-padding);
+			color: var(--palettes-grey-800);
+			text-decoration: none;
+			width: 100%;
+		}
+
+		.list-item-content-title {
+			margin: 0;
+		}
+
+		.list-item-content-description {
+			margin: 0;
+		}
+
+		.list-item-actions {
+			padding: var(--components-list-padding);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: all;
+			margin-left: auto;
+			white-space: nowrap;
+			padding-left: 0;
+		}
+	}
+}

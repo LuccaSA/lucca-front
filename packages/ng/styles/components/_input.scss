@@ -1,0 +1,57 @@
+@use '@lucca-front/scss/src/components/field/exports' as field;
+@use '@lucca-front/scss/src/components/form/exports' as form;
+
+.textfield {
+	.textfield-input.ng-invalid.ng-touched {
+		@include field.inputState('error');
+	}
+
+	&.mod-material .textfield-input.ng-invalid.ng-touched {
+		@include form.fieldMaterialError('textfield');
+	}
+
+	&.mod-framed {
+		.textfield-input {
+			&.ng-invalid.ng-touched,
+			&.is-invalid,
+			&.is-error {
+				@include field.fieldFramedError('textfield');
+			}
+		}
+	}
+}
+
+.form.mod-framed {
+	.textfield-input {
+		&.is-error,
+		&.is-invalid,
+		&.ng-invalid.ng-touched {
+			@include field.fieldFramedError('textfield');
+		}
+	}
+}
+
+.radiosfield,
+.checkboxesfield {
+	&.mod-framed {
+		.checkbox-input,
+		.radio-input {
+			&.ng-invalid.ng-touched,
+			&.is-invalid,
+			&.is-error {
+				@include field.fieldFramedError('radiosfield');
+			}
+		}
+	}
+}
+
+.form.mod-framed {
+	.checkbox,
+	.radio {
+		&.is-error,
+		&.is-invalid,
+		&.ng-invalid.ng-touched {
+			@include field.fieldFramedError('radiosfield');
+		}
+	}
+}

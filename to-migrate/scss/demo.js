@@ -46,7 +46,7 @@ function toastCommInApp() {
 		</div>\
 		<div class="toasts-content"><div class="toasts-content-title"><strong>The module has a new look !</strong></div>\
 		<p>Carentibus et vates arduos quam gloriae honeste ob primo.</p>\
-		<button type="button" class="button mod-outline mod-white mod-smaller">Try now</button><button type="button" class="button mod-text mod-invert mod-smaller">Later</button></div>',
+		<button type="button" class="button mod-outline mod-white mod-smaller">Try now</button><button class="button mod-text mod-invert mod-smaller">Later</button></div>',
 	];
 	var r = Math.floor(Math.random() * Math.floor(toastsCommInAppValues.length));
 	toastCommInApp.className = 'toasts-item';

@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.toasts {
+	@include vars;
+	@include component;
+
+	&.mod-bottom {
+		@include bottom;
+	}
+
+	&.mod-commInApp {
+		@include commInApp;
+	}
+
+	&.mod-withCircularGauge {
+		@include circularGauge;
+	}
+}

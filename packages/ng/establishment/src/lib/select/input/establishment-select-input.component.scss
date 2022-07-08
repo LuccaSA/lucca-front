@@ -1,4 +1,4 @@
-@import "_definitions";
+@import '_definitions';
 @include selectInputStyle;
 
 .lu-select-value {
@@ -12,40 +12,36 @@
 	&.mod-multiple {
 		.option-selector {
 			display: inherit;
-			padding: _theme("spacings.smaller", true);
-			padding: _theme("spacings.smaller");
+			padding: var(--spacings-smaller);
 		}
 	}
 }
 
 .optionGroupName {
-	padding: #{_component("options.item.padding-vertical", true)} #{_component("options.item.padding-horizontal", true)};
-	padding: #{_component("options.item.padding-vertical")} #{_component("options.item.padding-horizontal")};
-	border-top: 1px solid _theme("commons.divider.color", true);
-	border-top: 1px solid _theme("commons.divider.color");
-	font-size: _theme("sizes.small.font-size", true);
-	font-size: _theme("sizes.small.font-size");
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
+	font-size: var(--sizes-small-font-size);
 	width: 100%;
 	text-align: left;
-	
+
 	&.mod-readonly {
-		color: _color("grey", 600, true);
-		color: _color("grey", 600);
+		color: var(--palettes-grey-600);
 		font-weight: 400;
 	}
 
 	&.button {
 		text-decoration: underline;
 		margin: 0;
-		
-		&:active, &:focus, &:hover {
+
+		&:active,
+		&:focus,
+		&:hover {
 			box-shadow: none;
 			background-color: transparent;
-			
+
 			~ lu-option {
-				background-color: _theme('commons.highlight',true);
-				background-color: _theme('commons.highlight');
-			} 
+				background-color: var(--palettes-primary-50);
+			}
 		}
 	}
 }

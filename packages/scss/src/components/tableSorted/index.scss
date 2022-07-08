@@ -1,0 +1,51 @@
+@use 'exports' as *;
+
+.table-head-row-cell {
+	&.mod-sortable,
+	.table-head-row-cell-sortableButton {
+		@include sortable;
+
+		.table.mod-small & {
+			@include sortableSmall;
+		}
+	}
+
+	&:is(.is-sorted-descending, .sortedDescending) {
+		@include descendingLegacy;
+	}
+
+	&:is(.is-sorted-ascending, .sortedAscending) {
+		@include ascendingLegacy;
+	}
+
+	&:is([aria-sort='descending']) {
+		@include descending;
+	}
+
+	&:is([aria-sort='ascending']) {
+		@include ascending;
+	}
+
+	&.mod-alignRight {
+		&.mod-sortable,
+		.table-head-row-cell-sortableButton {
+			@include sortableAlignRight;
+		}
+
+		&:is(.is-sorted-descending, .sortedDescending) {
+			@include descendingLegacyAlignRight;
+		}
+
+		&:is(.is-sorted-ascending, .sortedAscending) {
+			@include ascendingLegacyAlignRight;
+		}
+
+		&:is([aria-sort='descending']) {
+			@include descendingAlignRight;
+		}
+
+		&:is([aria-sort='ascending']) {
+			@include ascendingAlignRight;
+		}
+	}
+}

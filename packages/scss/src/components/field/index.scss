@@ -1,0 +1,125 @@
+@use 'exports' as *;
+
+.form.mod-framed {
+	.textfield,
+	.radiosfield,
+	.checkboxesfield {
+		@include framed;
+	}
+}
+
+.textfield,
+.radiosfield,
+.checkboxesfield {
+	@include vars;
+	@include component;
+
+	&.mod-inline {
+		@include inline;
+	}
+
+	&.mod-block {
+		@include block;
+	}
+
+	&:is(.is-required, .required) {
+		@include required;
+	}
+
+	&:is(.is-loading, .loading) {
+		@include loading;
+	}
+
+	&:is(.is-success, .success, .is-valid, .valid) {
+		@include success;
+	}
+
+	&:is(.is-error, .error, .is-invalid, .invalid) {
+		@include error;
+	}
+
+	&.mod-compact {
+		@include compact;
+
+		&.mod-block {
+			@include compactBlock;
+		}
+	}
+
+	&.mod-framed {
+		@include framed;
+
+		&.mod-search {
+			@include framedSearch;
+		}
+
+		&.is-error {
+			@include fieldFramedState('error');
+			@include fieldFramedError('textfield');
+			@include fieldFramedError('radiosfield');
+			@include fieldFramedError('checkboxesfield');
+		}
+
+		&.is-warning {
+			@include fieldFramedState('warning');
+		}
+
+		&.is-valid,
+		&.is-success {
+			@include fieldFramedState('success');
+		}
+
+		@at-root {
+			.form.mod-framed {
+				.is-error {
+					@include fieldFramedState('error');
+					@include fieldFramedError('textfield');
+					@include fieldFramedError('radiosfield');
+					@include fieldFramedError('checkboxesfield');
+				}
+
+				.is-warning {
+					@include fieldFramedState('warning');
+				}
+
+				.is-valid,
+				.is-success {
+					@include fieldFramedState('success');
+				}
+			}
+		}
+	}
+
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxesfield-input {
+		&:is([disabled], [readonly]) {
+			@include inputDisabled;
+		}
+
+		&:is(.is-valid, .valid, .is-success, .success) {
+			@include inputState('success');
+		}
+
+		&:is(.is-warning, .warning) {
+			@include inputState('warning');
+		}
+
+		&:is(.is-invalid, .invalid, .is-error, .error) {
+			@include inputState('error');
+		}
+
+		&.mod-row {
+			@include inputRow;
+		}
+	}
+}
+
+.textfield-input,
+.radiosfield-input,
+.checkboxesfield-input {
+	&:is([required]),
+	&:is([aria-required='true']) {
+		@include required;
+	}
+}

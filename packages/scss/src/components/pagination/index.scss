@@ -1,0 +1,12 @@
+@use 'exports' as *;
+
+.pagination {
+	@include vars;
+	@include component;
+}
+
+.pagination-navigation-item {
+	&:is(.is-ellipsis, .ellipsis) {
+		@include ellipsis;
+	}
+}

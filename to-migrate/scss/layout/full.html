@@ -18,34 +18,52 @@
 	</head>
 	<body>
 		<div class="layout">
-			<header class="layout-banner"></header>
+			<header class="layout-banner">
+
+			</header>
 			<nav class="layout-navside">
 				<button type="button" id="navsideToggle" aria-expanded="false" class="layout-navside-toggle">Menu</button>
 				<div class="layout-navside-content">
-					<div class="layout-navside-content-inner"></div>
-					<footer class="layout-navside-footer"></footer>
+					<div class="layout-navside-content-inner">
+
+					</div>
+					<footer class="layout-navside-footer">
+
+					</footer>
 				</div>
 			</nav>
 			<main class="layout-content">
 				<div class="layout-content-headers">
 					<header class="layout-content-headers-header">
-						<div class="layout-content-container"></div>
+						<div class="layout-content-container">
+
+						</div>
 					</header>
 					<header class="layout-content-headers-subheader">
-						<div class="layout-content-container"></div>
+						<div class="layout-content-container">
+
+						</div>
 					</header>
 				</div>
 				<div class="layout-content-inner">
-					<div class="layout-content-container"></div>
+					<div class="layout-content-container">
+
+					</div>
 				</div>
 				<footer class="layout-content-footer">
-					<div class="layout-content-container"></div>
+					<div class="layout-content-container">
+
+					</div>
 				</footer>
 			</main>
 			<aside class="layout-aside">
 				<div class="layout-aside-content">
-					<div class="layout-aside-content-inner"></div>
-					<footer class="layout-aside-footer"></footer>
+					<div class="layout-aside-content-inner">
+
+					</div>
+					<footer class="layout-aside-footer">
+
+					</footer>
 				</div>
 			</aside>
 		</div>
@@ -74,12 +92,10 @@
 				.add('.layout-navside-footer')
 				.add('.layout-content-headers-header .layout-content-container')
 				.add('.layout-content-headers-subheader .layout-content-container')
-				.append(
-					'<div>' +
-						'<button  type="button" class="add" aria-label="Add content">+</button>' +
-						'<button type="button" class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
-						'</div>',
-				);
+				.append('<div>' +
+					'<button type="button" class="add" aria-label="Add content">+</button>' +
+					'<button type="button" class="remove" disabled="disabled" aria-label="Remove content">−</button>' +
+				'</div>');
 
 			$('.add').on('click', function () {
 				$(this)

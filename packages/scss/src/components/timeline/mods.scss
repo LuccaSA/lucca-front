@@ -1,0 +1,346 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin small {
+	.timeline-step-title {
+		padding-left: 1.25rem;
+
+		&::before {
+			width: 0.5rem;
+			height: 0.5rem;
+		}
+	}
+}
+
+@mixin big {
+	.timeline-step-title {
+		padding-left: 2.25rem;
+		min-width: var(--spacings-big);
+
+		&::before {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+	}
+
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
+		&::before {
+			left: var(--spacings-smaller);
+		}
+	}
+}
+
+@mixin addStepBig {
+	.timeline-step-title-icon {
+		&::before {
+			left: var(--spacings-smaller);
+		}
+	}
+}
+
+@mixin vertical {
+	align-items: flex-start;
+	flex-direction: column;
+
+	.timeline-step {
+		margin-top: var(--spacings-smaller);
+		display: block;
+		position: relative;
+		width: 100%;
+
+		// line
+		&:not(:last-child)::after {
+			content: '';
+			display: block;
+			height: auto;
+			width: 2px;
+			position: absolute;
+			top: calc(var(--spacings-big) + var(--spacings-smallest));
+			bottom: -0.75rem;
+			left: 0.45rem; // magic number
+			margin: 0;
+		}
+
+		&:not(:last-child)[aria-current='step'] {
+			&::after {
+				top: calc(var(--spacings-big) + var(--spacings-smallest));
+			}
+		}
+	}
+
+	.timeline-step-title {
+		margin: var(--spacings-smaller) 0;
+		min-height: var(--spacings-standard);
+		min-width: 0;
+	}
+
+	.timeline-step-description {
+		padding-left: var(--spacings-big);
+	}
+
+	.timeline-stepAddBetweenStep {
+		min-height: 3rem;
+	}
+}
+
+@mixin verticalNotSmallNotBig {
+	.timeline-step-title {
+		&:before {
+			left: 0;
+		}
+	}
+}
+
+@mixin verticalSmall {
+	.timeline-step {
+		&::after {
+			bottom: calc(var(--spacings-small) * -1);
+			left: 0.45rem; // magic number
+			top: var(--spacings-big);
+		}
+
+		&[aria-current='step'] {
+			&::after {
+				top: var(--spacings-big);
+			}
+		}
+	}
+	.timeline-step-description {
+		padding-left: var(--spacings-standard);
+	}
+}
+
+@mixin verticalBig {
+	.timeline-step {
+		&::after {
+			bottom: calc(var(--spacings-smaller) * -1);
+			left: 0.95rem; // magic number
+			top: 2.5rem;
+		}
+
+		&[aria-current='step'] {
+			&::after {
+				top: 2.5rem;
+			}
+		}
+	}
+	.timeline-step-description {
+		padding-left: 2.5rem;
+		min-height: var(--spacings-big);
+	}
+}
+
+@mixin verticalProgress {
+	.timeline-step[aria-current='step'] {
+		&::after {
+			background: linear-gradient(180deg, var(--palettes-primary-700) var(--progress), var(--palettes-grey-200) var(--progress));
+		}
+	}
+}
+
+@mixin number {
+	counter-reset: timeline;
+	.timeline-step:not(.timeline-stepAddBetweenStep) {
+		.timeline-step-title {
+			counter-increment: timeline;
+
+			&::before {
+				content: counter(timeline);
+				font-size: var(--sizes-smaller-font-size);
+				line-height: 1;
+			}
+		}
+	}
+}
+
+@mixin numberBig {
+	.timeline-step-title::after {
+		font-size: var(--sizes-small-font-size);
+	}
+}
+
+@mixin checkedPastStep {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				@include icon.generate('tick');
+				display: flex;
+			}
+		}
+	}
+}
+
+@mixin checkedPastStepVerticalNotBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: 0;
+			}
+		}
+	}
+}
+
+@mixin checkedPastStepVerticalBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: var(--sizes-smaller-font-size);
+			}
+		}
+	}
+}
+
+@mixin addStep {
+	.timeline-step {
+		&:nth-last-child(2)::after {
+			background-color: transparent;
+			background-image: linear-gradient(
+				90deg,
+				transparent 25%,
+				var(--palettes-grey-200) 25%,
+				var(--palettes-grey-200) 50%,
+				transparent 50%,
+				transparent 75%,
+				var(--palettes-grey-200) 75%,
+				var(--palettes-grey-200) 100%
+			);
+			background-size: var(--spacings-smaller) var(--spacings-smaller);
+		}
+
+		&:last-child {
+			.timeline-step-title {
+				&:before {
+					display: none;
+				}
+				.timeline-step-title-icon::before {
+					@include icon.generate('plus');
+					display: flex;
+				}
+			}
+		}
+	}
+
+	.timeline-step-title-icon {
+		content: '';
+		color: var(--palettes-primary-800);
+		width: 1rem;
+		height: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background-color: var(--palettes-primary-300);
+		position: absolute;
+		left: var(--spacings-smallest);
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+@mixin addStepVertical {
+	.timeline-step {
+		&:nth-last-child(2)::after {
+			background-color: transparent;
+			background-image: linear-gradient(
+				0deg,
+				transparent 25%,
+				var(--palettes-grey-200) 25%,
+				var(--palettes-grey-200) 50%,
+				transparent 50%,
+				transparent 75%,
+				var(--palettes-grey-200) 75%,
+				var(--palettes-grey-200) 100%
+			);
+			background-size: var(--spacings-smaller) var(--spacings-smaller);
+		}
+	}
+}
+
+@mixin addStepVerticalNotBig {
+	.timeline-step:last-child {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: 0;
+			}
+		}
+	}
+}
+
+@mixin addStepVerticalBig {
+	.timeline-step:last-child {
+		.timeline-step-title {
+			.timeline-step-title-icon::before {
+				left: var(--spacings-smaller);
+			}
+		}
+	}
+}
+
+@mixin addBetweenStep {
+	.timeline-stepAddBetweenStep {
+		.timeline-step-title {
+			padding-left: 0;
+			&:before {
+				display: none;
+			}
+		}
+	}
+	.timeline-stepAddBetweenStep-title {
+		@include reset.button;
+
+		width: auto;
+
+		&:focus,
+		&:hover {
+			outline: none;
+
+			.timeline-step-title-icon::before {
+				box-shadow: 0 0 0 0.25rem var(--palettes-primary-500);
+			}
+		}
+	}
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
+		@include icon.generate('plus');
+		display: flex;
+		transition: box-shadow var(--commons-animations-durations-standard);
+	}
+}
+
+@mixin addBetweenStepVerticalNotBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
+		left: 0;
+	}
+}
+
+@mixin addBetweenStepBig {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
+		width: 1.5rem;
+		height: 1.5rem;
+		left: var(--spacings-smallest);
+	}
+}
+
+@mixin progress {
+	.timeline-step[aria-current='step'] {
+		&::after {
+			background: linear-gradient(90deg, var(--palettes-primary-700) var(--progress), var(--palettes-grey-200) var(--progress));
+		}
+	}
+}
+
+@mixin notPastChecked {
+	.timeline-step {
+		&::after {
+			background-color: var(--palettes-grey-200);
+		}
+	}
+
+	.timeline-step-title {
+		color: var(--palettes-grey-900);
+
+		&::before {
+			background-color: var(--palettes-primary-700);
+			color: var(--colors-white-color);
+		}
+	}
+}

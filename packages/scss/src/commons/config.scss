@@ -1,0 +1,218 @@
+$states: 'error', 'warning', 'success' !default;
+$palettes: 'primary', 'secondary', 'grey' !default;
+$fontVariable: false !default;
+
+$primary: (
+	text: #ffffff,
+	50: #ffede0,
+	100: #ffe1cc,
+	200: #ffd3b3,
+	300: #ffc79e,
+	400: #ffb685,
+	500: #ff9d5c,
+	600: #ff7e29,
+	700: #ff6600,
+	800: #cc3d00,
+	900: #a82d00,
+) !default;
+
+$secondary: (
+	text: #ffffff,
+	50: #e2ebfd,
+	100: #ccddff,
+	200: #b3ccff,
+	300: #9ebeff,
+	400: #85aeff,
+	500: #6699ff,
+	600: #4280fa,
+	700: #2067f3,
+	800: #0a48c2,
+	900: #083691,
+) !default;
+
+$success: (
+	text: #ffffff,
+	50: #f7fef6,
+	100: #e7fae5,
+	200: #d7f7d4,
+	300: #c2f4be,
+	400: #aceca7,
+	500: #8cdb85,
+	600: #49b540,
+	700: #3c9933,
+	800: #1b7d12,
+	900: #0e6b06,
+);
+
+$warning: (
+	text: #ffffff,
+	50: #fef5f0,
+	100: #ffeee5,
+	200: #ffe4d6,
+	300: #ffcfb8,
+	400: #fcbc9c,
+	500: #f79c6e,
+	600: #f46a25,
+	700: #e55006,
+	800: #cc3d00,
+	900: #b23000,
+);
+
+$error: (
+	text: #ffffff,
+	50: #fff5f7,
+	100: #ffecef,
+	200: #ffe0e6,
+	300: #fcc5ce,
+	400: #fba7b5,
+	500: #ef8f9f,
+	600: #ef3957,
+	700: #e51a3b,
+	800: #af0e29,
+	900: #91081f,
+);
+
+$grey: (
+	text: #ffffff,
+	50: #ebf0fa,
+	100: #e0e7f6,
+	200: #d2dcef,
+	300: #becbe4,
+	400: #acbbd7,
+	500: #96a6c5,
+	600: #6c7c9d,
+	700: #445473,
+	800: #2a3551,
+	900: #131d35,
+);
+
+$colors: (
+	'white': #ffffff,
+	'black': #121212,
+);
+
+$colorsRgb: (
+	'white': '255, 255, 255',
+	'grey-900': '19, 29, 53',
+);
+
+$breakpoints: (
+	xxxs: 320px,
+	xxs: 480px,
+	xs: 640px,
+	s: 800px,
+	m: 1024px,
+	l: 1280px,
+	xl: 1366px,
+	xxl: 1600px,
+	xxxl: 1920px,
+);
+
+$spacings: (
+	reset: 0,
+	smallest: 0.25rem,
+	smaller: 0.5rem,
+	small: 1rem,
+	standard: 1.5rem,
+	big: 2rem,
+	bigger: 3rem,
+	biggest: 4rem,
+);
+
+$sizes: (
+	smaller: (
+		font-size: 0.75rem,
+		line-height: 1rem,
+		vertical-padding: 0,
+	),
+	small: (
+		font-size: 0.875rem,
+		line-height: 1.25rem,
+		vertical-padding: 0.125rem,
+	),
+	standard: (
+		font-size: 1rem,
+		line-height: 1.5rem,
+		vertical-padding: 0.125rem,
+	),
+	big: (
+		font-size: 1.125rem,
+		line-height: 1.5rem,
+		vertical-padding: 0.25rem,
+	),
+	bigger: (
+		font-size: 1.375rem,
+		line-height: 1.75rem,
+		vertical-padding: 0.5rem,
+	),
+	biggest: (
+		font-size: 1.75rem,
+		line-height: 2rem,
+		vertical-padding: 0.25rem,
+	),
+	headline: (
+		font-size: 2.25rem,
+		line-height: 2.5rem,
+		vertical-padding: 0.5rem,
+	),
+);
+
+$borderRadius: (
+	'': 4px,
+	'big': 8px,
+);
+
+$elevations: (
+	'1': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
+	'2':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.05)',
+	'3':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-grey-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-grey-900-rgb), 0.06)',
+	'4':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-grey-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-grey-900-rgb), 0.08)',
+	'5':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
+	'6':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
+);
+
+$boxShadows: (
+	'hard': 'var(--commons-box-shadow-xxs)',
+	'xxs': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
+	'xs': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
+	's': 'var(--commons-elevations-elevation-2)',
+	'm': 'var(--commons-elevations-elevation-3)',
+	'l': 'var(--commons-elevations-elevation-4)',
+	'xl': 'var(--commons-elevations-elevation-5)',
+	'xxl': 'var(--commons-elevations-elevation-6)',
+);
+
+$disabled: (
+	'opacity': 0.4,
+	'background': 'var(--palettes-grey-100)',
+	'color': 'var(--palettes-grey-600)',
+	'placeholder': 'var(--palettes-grey-400)',
+);
+
+$animations: (
+	'translate': 3rem,
+	'function': ease,
+	'iteration-count': 5,
+);
+
+$durations: (
+	'fast': 100ms,
+	'standard': 250ms,
+	'slow': 350ms,
+);
+
+$loading: (
+	'background': var(--palettes-primary-200),
+	'frontground': var(--palettes-primary-700),
+	'speed': 600ms,
+);
+
+$textLink: (
+	color: #00b2ed,
+	hover: #16c5fe,
+);

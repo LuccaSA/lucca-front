@@ -1,0 +1,25 @@
+@mixin state {
+	.progress-bar {
+		width: 100% !important;
+
+		&::after {
+			display: none;
+		}
+	}
+}
+
+@mixin success {
+	@include state;
+
+	.progress-bar {
+		background-color: var(--palettes-success-700);
+	}
+}
+
+@mixin error {
+	@include state;
+
+	.progress-bar {
+		background-color: var(--palettes-error-700);
+	}
+}

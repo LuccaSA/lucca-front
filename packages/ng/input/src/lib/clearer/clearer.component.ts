@@ -19,6 +19,7 @@ export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClea
 	@Output() override onClear = new EventEmitter<T>();
 	onClick($event: Event) {
 		this.onClear.emit();
+		$event.preventDefault();
 		$event.stopPropagation();
 	}
 }

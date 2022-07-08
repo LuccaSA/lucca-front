@@ -1,0 +1,478 @@
+@use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin password {
+	.textfield-suffix {
+		pointer-events: auto;
+	}
+
+	.textfield-input {
+		padding-right: var(--spacings-bigger) !important;
+
+		&::-ms-reveal {
+			display: none;
+		}
+	}
+
+	.textfield-suffix-action {
+		text-decoration: none;
+		color: currentColor;
+		display: block;
+	}
+}
+
+@mixin clearable {
+	.textfield-input {
+		padding-right: 3rem;
+	}
+
+	.textfield-actionClear {
+		text-align: center;
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.5rem;
+		width: 1rem;
+		height: 1rem;
+		padding: 0;
+		line-height: 0;
+
+		.lucca-icon {
+			font-size: 1rem;
+		}
+	}
+}
+
+@mixin clearableSmall {
+	.textfield-actionClear {
+		bottom: 0.5rem;
+		right: 1.4rem;
+	}
+}
+
+@mixin suffix {
+	.textfield-input {
+		padding-right: var(--components-textfield-suffix-padding-right);
+	}
+}
+
+@mixin noLabel {
+	.textfield-suffix {
+		top: var(--components-textfield-input-padding-vertical);
+	}
+}
+
+@mixin small {
+	.textfield-input {
+		line-height: var(--sizes-smaller-line-height);
+		font-size: var(--sizes-small-font-size);
+	}
+
+	.textfield-suffix {
+		line-height: var(--sizes-smaller-line-height);
+		font-size: var(--sizes-small-font-size);
+	}
+}
+
+@mixin smallInputIcon {
+	line-height: var(--sizes-smaller-line-height);
+	font-size: var(--sizes-small-font-size);
+}
+
+@mixin size($size) {
+	width: var(--components-field-sizes-#{$size});
+}
+
+@mixin multiline {
+	.textfield-input {
+		line-height: var(--sizes-standard-line-height);
+		font-size: var(--sizes-standard-font-size);
+		resize: vertical;
+		height: 5rem;
+	}
+}
+
+@mixin multilineSmall {
+	.textfield-input {
+		line-height: var(--sizes-smaller-line-height);
+		font-size: var(--sizes-small-font-size);
+		height: 4rem;
+	}
+}
+
+@mixin white {
+	.textfield-input {
+		background-color: var(--colors-white-color);
+		box-shadow: 0 0 0 1px var(--palettes-primary-500) inset;
+
+		&::placeholder {
+			color: var(--components-textfield-focus-placeholder);
+		}
+	}
+}
+
+@mixin invert {
+	.textfield-input {
+		background-color: var(--colors-white-color);
+
+		&::placeholder {
+			color: var(--components-textfield-focus-placeholder);
+		}
+	}
+
+	.textfield-label {
+		color: var(--colors-white-color);
+	}
+}
+
+@mixin materialSearchBlockClearableInput {
+	.textfield-input {
+		padding-right: 3rem;
+	}
+}
+
+@mixin search {
+	&::after {
+		@include icon.generate('search');
+
+		color: var(--palettes-primary-500);
+		position: absolute;
+		pointer-events: none;
+		font-size: 1.2rem;
+		line-height: 1.4rem;
+		bottom: 0.5rem;
+		right: 0.33rem;
+	}
+
+	.textfield-input {
+		padding-right: 2rem;
+	}
+}
+
+@mixin searchClearable {
+	.textfield-input {
+		padding-right: 3rem;
+	}
+
+	.textfield-actionClear {
+		right: 1.8rem;
+	}
+}
+
+@mixin searchSmall {
+	&::after {
+		line-height: 1rem;
+		font-size: 1rem;
+	}
+}
+
+@mixin radio {
+	display: inline-block;
+	margin-left: 0.25rem;
+
+	.textfield-input {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}
+
+@mixin filter {
+	width: var(--components-textfield-filter-width);
+	height: var(--components-filters-height);
+	border-right-color: var(--commons-divider-color);
+	border-right-width: 1px;
+	border-right-style: solid;
+	transition-duration: var(--commons-animations-durations-standard);
+	transition-property: background-color;
+	display: block;
+	position: relative;
+
+	.textfield-label {
+		color: var(--palettes-grey-600);
+		font-weight: 400;
+		left: 1rem;
+		pointer-events: none;
+		position: absolute;
+		top: 0.5rem;
+	}
+
+	.textfield-input {
+		background-color: transparent;
+		padding: 1rem 2.5rem 0 1rem;
+		font-weight: 600;
+		// todo: déplacer dans filters ?
+		height: var(--components-filters-height);
+		border-radius: 0;
+
+		&::after {
+			bottom: 0.5rem;
+			color: var(--palettes-primary-500);
+			font-weight: 400;
+		}
+	}
+}
+
+@mixin suffixIcon {
+	color: var(--palettes-primary-500);
+	line-height: 1.5rem;
+}
+
+@mixin compact {
+	.textfield-options {
+		width: calc(100% - var(--components-textfield-compact-label-right-margin) - var(--components-textfield-compact-label-sizes-default));
+		left: auto;
+		right: 0;
+	}
+
+	.textfield-suffix {
+		top: var(--components-textfield-compact-padding);
+		right: var(--components-textfield-compact-padding);
+	}
+}
+
+@mixin compactMultiline {
+	align-items: flex-start;
+}
+
+@mixin compactSize($size) {
+	width: calc(
+		var(--components-field-sizes-#{$size}) + var(--components-field-compact-label-right-margin) +
+			var(--components-field-compact-label-sizes-default)
+	);
+
+	.textfield-options {
+		// width: $input-width; // todo: récupérer la bonne taille
+		outline: 2px dashed greenyellow !important;
+	}
+}
+
+@mixin framed {
+	width: 100%;
+	margin-bottom: 0 !important;
+
+	.textfield.mod-search {
+		@include framedSearch;
+	}
+
+	.textfield-options {
+		width: auto;
+		margin-top: -2px;
+		right: 1px;
+
+		mark {
+			background-color: transparent;
+			text-decoration: underline;
+			color: inherit;
+		}
+	}
+
+	.textfield-input {
+		width: 100%;
+		border-radius: 0;
+		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-border));
+		padding: var(--components-field-framed-top-padding) var(--components-field-framed-side-padding)
+			var(--components-field-framed-bottom-padding);
+		line-height: var(--sizes-standard-line-height);
+
+		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
+			background-color: var(--colors-white-color);
+		}
+	}
+
+	.textfield-label {
+		padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding);
+		position: absolute;
+		pointer-events: none;
+		left: 0;
+		top: 0;
+		z-index: 10;
+		line-height: 1.5rem;
+	}
+
+	.textfield-messages,
+	.radiosfield-messages,
+	.checkboxesfield-messages {
+		transition-duration: var(--commons-animations-durations-standard);
+		transition-property: transform;
+		position: absolute;
+		text-align: center;
+		bottom: 0;
+		left: -1px;
+		right: 0;
+		transform: translateY(0);
+		z-index: 4;
+
+		> * {
+			display: block;
+		}
+	}
+
+	.textfield-messages-error,
+	.radiosfield-messages-error,
+	.checkboxesfield-messages-error {
+		background-color: var(--palettes-error-700);
+		color: var(--colors-white-color);
+	}
+
+	.textfield-messages-warning,
+	.radiosfield-messages-warning,
+	.checkboxesfield-messages-warning {
+		background-color: var(--palettes-warning-700);
+		color: var(--colors-white-color);
+	}
+
+	.textfield-messages-valid,
+	.radiosfield-messages-valid,
+	.checkboxesfield-messages-valid,
+	.textfield-messages-success,
+	.radiosfield-messages-success,
+	.checkboxesfield-messages-success {
+		background-color: var(--palettes-success-700);
+		color: var(--colors-white-color);
+	}
+
+	.textfield-messages-helper,
+	.radiosfield-messages-helper,
+	.checkboxesfield-messages-helper {
+		background-color: var(--palettes-grey-500);
+		color: var(--colors-white-color);
+	}
+}
+
+@mixin framedMultiline {
+	.textfield-input {
+		height: var(--components-field-framed-textarea-height);
+		min-height: var(--components-field-framed-textarea-min-height);
+		max-height: var(--components-field-framed-textarea-max-height);
+	}
+}
+
+@mixin framedMultilineSmall {
+	.textfield-input {
+		height: auto;
+	}
+}
+
+@mixin framedSearch {
+	&::after {
+		padding: var(--components-field-framed-side-padding);
+		bottom: 0;
+		right: 0;
+		z-index: 4;
+	}
+
+	.textfield {
+		width: 100%;
+	}
+
+	.textfield-input {
+		padding-right: var(--components-field-framed-suffix-padding-right);
+	}
+}
+
+@mixin material {
+	padding-top: var(--components-textfield-material-padding-top);
+	vertical-align: baseline;
+
+	.textfield-input {
+		box-shadow: 0 1px 0 0 var(--components-textfield-material-border-color);
+		background-color: transparent;
+		border-radius: 0;
+		padding-left: 0;
+		padding-right: 0;
+
+		&::placeholder {
+			opacity: 0;
+		}
+	}
+
+	.textfield-label {
+		color: var(--components-textfield-material-label-color);
+		font-size: var(--components-textfield-material-label-font-size);
+		position: absolute;
+		pointer-events: none;
+		font-weight: 400;
+		line-height: 1.5rem;
+		width: 100%;
+		top: 1.5rem;
+		left: 0;
+	}
+
+	.textfield-suffix {
+		top: calc(var(--components-textfield-material-padding-top) + var(--components-textfield-input-padding-vertical));
+		position: absolute;
+		right: 0;
+	}
+}
+
+@mixin materialSmall {
+	.textfield-label {
+		line-height: var(--sizes-small-line-height);
+		font-size: var(--sizes-small-font-size);
+	}
+}
+
+@mixin materialSuffix {
+	.textfield-input {
+		padding-right: var(--components-textfield-material-suffix-padding-right);
+	}
+}
+
+@mixin materialNoLabel {
+	padding-top: 0;
+
+	.textfield-input {
+		&::placeholder {
+			opacity: 1;
+		}
+	}
+
+	.textfield-label {
+		display: none;
+	}
+
+	.textfield-suffix {
+		top: var(--components-textfield-input-padding-vertical);
+	}
+}
+
+@mixin materialSearch {
+	&::after {
+		color: var(--palettes-grey-500);
+		bottom: 0.5rem;
+		right: 0;
+	}
+
+	.textfield-input {
+		padding-right: 1.75rem;
+	}
+
+	.textfield-label {
+		padding-right: 0;
+	}
+}
+
+@mixin materialRadio {
+	padding-top: 0;
+}
+
+@mixin materialValid {
+	&::before {
+		bottom: 0.7rem !important;
+		right: 0 !important;
+	}
+
+	.textfield-label {
+		padding-right: 1.5rem;
+	}
+
+	.textfield-input {
+		padding-right: 1.5rem;
+	}
+}
+
+@mixin outlined {
+	.textfield-input {
+		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--components-textfield-outlined-border-default-color);
+		background-color: var(--colors-white-color);
+	}
+}

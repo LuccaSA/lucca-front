@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface SectionsBasicStory {
-}
+interface SectionsBasicStory {}
 
 export default {
 	title: 'Documentation/Structure/Sections/Basic',
@@ -45,7 +44,7 @@ function getTemplate(args: SectionsBasicStory): string {
 			Marzipan cheesecake lemon drops. Lollipop marzipan sweet roll powder macaroon danish. Bonbon chocolate gingerbread pastry. Cake oat cake carrot cake donut wafer. Jelly beans oat cake sugar plum candy.
 		</div>
 	</section>
-	`
+	`;
 }
 
 const Template: Story<SectionsBasicStory> = (args: SectionsBasicStory) => ({

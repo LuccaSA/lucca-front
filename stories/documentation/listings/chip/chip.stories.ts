@@ -13,7 +13,7 @@ function getTemplate(args: ChipBasicStory): string {
 	return `
 	<div class="chip ${clickable}">
 		Ned Stark
-		<button class="chip-kill"></button>
+		<button type="button" class="chip-kill"></button>
 	</div>
 	<div class="chip mod-unkillable ${clickable}">
 		Connor MacLeod

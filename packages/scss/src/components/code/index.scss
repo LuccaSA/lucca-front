@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.code {
+	@include vars;
+	@include component;
+
+	&.mod-block {
+		@include block;
+	}
+}

@@ -1,0 +1,109 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin navsideWithoutScrollbar {
+	.layout-navside {
+		max-height: auto;
+		overflow: visible;
+	}
+}
+
+@mixin contentHeaderStatic {
+	.layout-content-headers-header {
+		position: static;
+	}
+}
+
+@mixin contentSubheaderStatic {
+	.layout-content-headers-subheader {
+		position: static;
+	}
+}
+
+@mixin navsideFooterStatic {
+	.layout-navside-footer {
+		position: static;
+	}
+}
+
+@mixin asideFooterStatic {
+	.layout-aside-footer {
+		position: static;
+	}
+}
+
+@mixin contentFooterStatic {
+	.layout-content-footer {
+		position: static;
+	}
+}
+
+@mixin asideBefore {
+	&:not(.mod-asideRemoved) {
+		@include media.largerThan('l') {
+			grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;
+			grid-template-areas:
+				'banner	banner banner'
+				'navside aside	content';
+
+			&.mod-navsideLarge {
+				grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;
+			}
+		}
+	}
+}
+
+@mixin headerRemoved {
+	.layout-content-headers-header {
+		display: none;
+	}
+}
+
+@mixin subheaderRemoved {
+	.layout-content-headers-subheader {
+		display: none;
+	}
+}
+
+@mixin asideRemoved {
+	grid-template-columns: var(--commons-navSide-compact-width) 1fr;
+
+	.layout-aside {
+		display: none;
+	}
+
+	&.mod-navsideLarge {
+		grid-template-columns: var(--commons-navSide-width) 1fr;
+	}
+}
+
+@mixin asideFooterRemoved {
+	.layout-aside-footer {
+		display: none;
+	}
+}
+
+@mixin contentFooterRemoved {
+	.layout-footer {
+		display: none;
+	}
+}
+
+@mixin navsideFooterRemoved {
+	.layout-navside-footer {
+		display: none;
+	}
+}
+
+@mixin navsideLarge {
+	@include media.largerThan('l') {
+		grid-template-columns: var(--commons-navSide-width) 1fr var(--components-aside-width);
+	}
+
+	@include media.smallerThan('l') {
+		grid-template-columns: var(--commons-navSide-width) 1fr;
+	}
+
+	@include media.smallerThan('s') {
+		grid-template-columns: 1fr;
+	}
+}

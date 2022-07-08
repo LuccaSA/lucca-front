@@ -1,7 +1,0 @@
-$menu: (
-  default-palette: _getMap("palettes.primary"),
-  background: #FFFFFF,
-  padding: _theme("spacings.small") 0,
-);
-
-$theme: _set($theme, "components.menu", $menu);

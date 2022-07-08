@@ -1,0 +1,40 @@
+@use 'exports' as *;
+
+.file {
+	@include vars;
+	@include component;
+
+	&.mod-small {
+		@include small;
+	}
+
+	&.mod-icon {
+		@include icon;
+	}
+
+	&:is(.is-droppable, .droppable) {
+		@include legacyDroppable;
+	}
+
+	&:is(.is_disabled, .is-disabled, .disabled) {
+		@include legacyDisabled;
+	}
+}
+
+.file-input {
+	&:is(:disabled) {
+		@include disabled;
+	}
+
+	&:is(.is-droppable, .droppable) {
+		@include droppable;
+	}
+
+	&:is(.is-uploaded, .uploaded) {
+		@include uploaded;
+	}
+
+	&:is([aria-invalid='true']) {
+		@include invalid;
+	}
+}

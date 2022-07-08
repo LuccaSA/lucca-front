@@ -1,0 +1,27 @@
+@use 'sass:string';
+@use 'sass:list';
+
+@use '@lucca-front/scss/src/commons/config';
+
+@function capitalize($string) {
+	@return string.to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
+}
+
+@function camelize($string) {
+	$progress: $string;
+	$result: '';
+	$exclude: ' ', '-', '–', '—', '_', ',', ';', ':', '.';
+
+	@while string.length($progress) > 0 {
+		$char: string.slice($progress, 1, 1);
+
+		@if not not list.index($exclude, $char) {
+			$progress: capitalize(string.slice($progress, 2, 2)) + string.slice($progress, 3);
+		} @else {
+			$result: $result + $char;
+			$progress: string.slice($progress, 2);
+		}
+	}
+
+	@return $result;
+}

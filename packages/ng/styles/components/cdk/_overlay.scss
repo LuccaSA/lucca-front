@@ -1,0 +1,73 @@
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+
+:root {
+	--components-cdk-backdrop-opacity: 0.4;
+}
+
+.cdk-overlay-container {
+	position: fixed;
+	z-index: 1000;
+	height: 100%;
+	left: 0;
+	pointer-events: none;
+	top: 0;
+	width: 100%;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+	position: absolute;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	min-width: 1px;
+	min-height: 1px;
+}
+
+.cdk-overlay-pane {
+	box-sizing: border-box;
+	position: absolute;
+	pointer-events: auto;
+	z-index: 1000;
+}
+
+.cdk-overlay-backdrop {
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	pointer-events: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: opacity 0.2 ease-in-out;
+	z-index: 1000;
+
+	&.cdk-overlay-backdrop-showing {
+		opacity: 0.4;
+	}
+
+	&.cdk-overlay-dark-backdrop {
+		background-color: rgba(var(--colors-grey-900-rgb), 0.6);
+	}
+	&.cdk-overlay-transparent-backdrop {
+		background: 0 0;
+	}
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
+	@include keyframe.fadeIn;
+
+	opacity: var(--components-cdk-backdrop-opacity);
+	animation: fadeIn var(--commons-animations-durations-fast) ease-out;
+}
+
+// MODS
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+.cdk-overlay-pane {
+	// Option picker
+
+	&.mod-optionPicker {
+		min-width: 13rem;
+		max-width: 30rem;
+	}
+}

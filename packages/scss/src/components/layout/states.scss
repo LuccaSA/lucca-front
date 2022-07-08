@@ -1,0 +1,26 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin overlay {
+	&,
+	body {
+		touch-action: none;
+		overscroll-behavior: none;
+		-webkit-overflow-scrolling: auto;
+	}
+
+	body {
+		overflow: hidden !important;
+	}
+}
+
+@mixin active {
+	@include media.smallerThan('s') {
+		top: var(--commons-banner-height);
+		height: calc(100vh - var(--commons-banner-height));
+		background-color: var(--colors-white-color);
+		position: fixed;
+		overflow: auto;
+		left: 0;
+		right: 0;
+	}
+}
