@@ -1,5 +1,6 @@
 import type { ValueParser } from 'postcss-value-parser';
-import { AngularCompilerLib, updateCssClassNames } from '../../lib/html-ast.js';
+import { applyUpdates, FileUpdate } from '../../lib/file-update.js';
+import { AngularCompilerLib, HtmlAst, updateCssClassNames } from '../../lib/html-ast.js';
 import { addForwardRule, commentNode, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
 import { mixinRegistry } from './mixin-registry.js';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color.js';
@@ -78,16 +79,42 @@ export function optimizeScssGlobalImport(content: string, cssImports: string[], 
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
 
-export function migrateHTMLFile(content: string, angularCompiler: AngularCompilerLib): string {
-	return updateCssClassNames(
-		content,
-		{
-			'u-fontWeightBold': 'u-fontWeight600',
-			'u-order1': 'u-flexOrder1',
-			'u-order-1': 'u-flexOrderMinus1',
-		},
-		angularCompiler,
-	);
+export function migrateHTMLFile(path: string, content: string, angularCompiler: AngularCompilerLib): string {
+	return path.endsWith('index.html')
+		? migrateIndexHTMLFile(content, angularCompiler)
+		: updateCssClassNames(
+				content,
+				{
+					'u-fontWeightBold': 'u-fontWeight600',
+					'u-order1': 'u-flexOrder1',
+					'u-order-1': 'u-flexOrderMinus1',
+				},
+				angularCompiler,
+		  );
+}
+
+export function migrateIndexHTMLFile(content: string, angularCompiler: AngularCompilerLib): string {
+	const root = new HtmlAst(content, angularCompiler);
+	const updates: FileUpdate[] = [];
+
+	root.visitElements('link', (element) => {
+		if (element.attributes.some((attr) => attr.name === 'href' && attr.value.includes('Source+Sans+Pro'))) {
+			let startOffset = element.sourceSpan.start.offset;
+
+			// Remove all leading tabs/spaces/new-lines
+			while (content.slice(startOffset - 1, startOffset).match(/\s/)) {
+				startOffset--;
+			}
+
+			updates.push({
+				position: element.sourceSpan.start.offset,
+				oldContent: content.slice(startOffset, element.sourceSpan.end.offset),
+				newContent: '',
+			});
+		}
+	});
+
+	return applyUpdates(content, updates);
 }
 
 interface AngularJsonFile {

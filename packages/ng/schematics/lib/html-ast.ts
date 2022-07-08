@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstTextAttribute } from '@angular/compiler';
+import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstTextAttribute } from '@angular/compiler';
 import { applyUpdates, FileUpdate } from './file-update.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -13,6 +13,16 @@ export class HtmlAst {
 
 	public constructor(content: string, private lib: AngularCompilerLib) {
 		this.parsed = lib.parseTemplate(content, 'migration.html', { preserveWhitespaces: true });
+	}
+
+	public visitElements(elementFilter: string | RegExp, cb: (attr: TmplAstElement) => void): void {
+		this.visitNodes((node) => {
+			if (node instanceof this.lib.TmplAstElement) {
+				if (this.matchFilter(node.name, elementFilter)) {
+					cb(node);
+				}
+			}
+		});
 	}
 
 	public visitAttribute(attributeFilter: string | RegExp, cb: (attr: TmplAstTextAttribute) => void): void {

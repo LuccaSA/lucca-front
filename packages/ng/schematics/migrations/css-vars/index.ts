@@ -63,7 +63,7 @@ export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimiza
 						extractAllCssClassNames(content, angularCompiler).forEach((c) => allCssClasses.add(c));
 					}
 
-					return migrateHTMLFile(content, angularCompiler);
+					return migrateHTMLFile(path, content, angularCompiler);
 				});
 			}
 		});

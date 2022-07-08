@@ -54,7 +54,7 @@ describe('HTML Migration', () => {
 				.replace(/\r/g, '');
 
 			// Act
-			const actual = migrateHTMLFile(input, await import('@angular/compiler'));
+			const actual = migrateHTMLFile(`${testCase}.html`, input, await import('@angular/compiler'));
 
 			//Assert
 			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
