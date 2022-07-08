@@ -52,7 +52,7 @@
             "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "packages/ng/style",
+                "packages/ng/styles",
                 "node_modules"
               ]
             },
