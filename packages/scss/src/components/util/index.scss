@@ -13,32 +13,21 @@
 
 @use 'exports' as *;
 
-.u-textLight {
-	color: var(--palettes-grey-600) !important;
-}
+@each $elevation in config.$elevations {
+	$index: list.index(config.$elevations, $elevation);
 
-.u-textPlaceholder {
-	color: var(--palettes-grey-400) !important;
-}
-
-.u-positionStatic {
-	position: static !important;
-}
-
-.u-textLeft {
-	text-align: left !important;
-}
-
-.u-textRight {
-	text-align: right !important;
-}
-
-.u-textCenter {
-	text-align: center !important;
+	.u-elevate#{$index} {
+		box-shadow: var(--commons-elevations-elevation-#{$index});
+	}
 }
 
 .u-mask {
 	@include a11y.mask('!important');
+}
+
+.u-clearfix,
+.u-clear {
+	@include reset.clearfix('!important');
 }
 
 .u-listReset {
@@ -53,9 +42,100 @@
 	@include reset.button('!important');
 }
 
-.u-clearfix,
-.u-clear {
-	@include reset.clearfix('!important');
+@include core.classes('float', core.$float);
+@include core.classes('vertical-align', core.$verticalAlign);
+@include core.classes('white-space', core.$whiteSpace);
+@include core.classes('display', core.$displays);
+@include core.classes('flex-direction', core.$direction);
+@include core.classes('flex-wrap', core.$wrap);
+@include core.classes('justify-content', core.$justify);
+@include core.classes('align-items', core.$align);
+@include core.classes('flex-grow', core.$flex);
+@include core.classes('flex-shrink', core.$flex);
+@include core.classes('flex-basis', core.$basis);
+@include core.classes('order', core.$order);
+@include core.classes('align-self', core.$align);
+@include core.classes('position', core.$position);
+@include core.classes('min-width', core.$contents);
+@include core.classes('visibility', core.$visibility);
+@include core.classes('font-weight', core.$fontWeight);
+@include core.classes('font-style', core.$fontStyle);
+@include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('text-align', core.$textAlign);
+
+@media (prefers-reduced-motion: no-preference) {
+	@include core.classes('scroll-behavior', core.$scrollBehavior);
+}
+
+@media only print {
+	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
+}
+
+%displayNone {
+	display: none;
+}
+
+@each $display in core.$displays {
+	@if $display != 'none' {
+		.u-onlyPrintDisplay#{transform.capitalize($display)} {
+			@extend %displayNone;
+		}
+	}
+}
+
+@each $direction in core.$boxDirection {
+	@if $direction == '' {
+		.u-insetReset,
+		.u-inset0 {
+			inset: 0 !important;
+		}
+	} @else {
+		.u-#{$direction}Reset,
+		.u-#{$direction}0 {
+			#{$direction}: 0 !important;
+		}
+	}
+}
+
+@include core.spacings;
+@include core.sizes;
+@include core.borderRadius;
+@include core.palettes;
+
+.u-textLeft {
+	text-align: left !important;
+}
+
+.u-textRight {
+	text-align: right !important;
+}
+
+.u-textCenter {
+	text-align: center !important;
+}
+
+.u-textLight {
+	color: var(--palettes-grey-600) !important;
+}
+
+.u-textPlaceholder {
+	color: var(--palettes-grey-400) !important;
+}
+
+.u-ellipsis {
+	@include text.ellipsis;
+}
+
+.u-unit {
+	font-size: 0.66em !important;
+}
+
+.u-comma {
+	&:not(:last-child) {
+		&::after {
+			content: ', ' !important;
+		}
+	}
 }
 
 .u-ellipsis {
@@ -109,44 +189,6 @@
 
 .u-h6 {
 	@include title.h6;
-}
-
-.u-ellipsis {
-	@include text.ellipsis;
-}
-
-.u-unit {
-	font-size: 0.66em !important;
-}
-
-.u-comma {
-	&:not(:last-child) {
-		&::after {
-			content: ', ' !important;
-		}
-	}
-}
-
-@each $direction in core.$boxDirection {
-	@if $direction == '' {
-		.u-insetReset,
-		.u-inset0 {
-			inset: 0 !important;
-		}
-	} @else {
-		.u-#{$direction}Reset,
-		.u-#{$direction}0 {
-			#{$direction}: 0 !important;
-		}
-	}
-}
-
-@each $elevation in config.$elevations {
-	$index: list.index(config.$elevations, $elevation);
-
-	.u-elevate#{$index} {
-		box-shadow: var(--commons-elevations-elevation-#{$index});
-	}
 }
 
 .u-animated {
@@ -262,51 +304,4 @@
 	&.mod-animation-duration-slow {
 		@include duration('slow');
 	}
-}
-
-@include core.classes('min-width', core.$contents);
-@include core.classes('flex-direction', core.$direction);
-@include core.classes('flex-wrap', core.$wrap);
-@include core.classes('justify-content', core.$justify);
-@include core.classes('align-items', core.$align);
-@include core.classes('flex-grow', core.$flex);
-@include core.classes('flex-shrink', core.$flex);
-@include core.classes('flex-basis', core.$basis);
-@include core.classes('flex-order', core.$order);
-@include core.classes('order', core.$order);
-@include core.classes('align-self', core.$align);
-@include core.classes('text-align', core.$textAlign);
-@include core.classes('visibility', core.$visibility);
-@include core.classes('font-weight', core.$fontWeight);
-@include core.classes('font-style', core.$fontStyle);
-@include core.classes('pointer-events', core.$pointerEvents);
-@include core.classes('white-space', core.$whiteSpace);
-@include core.classes('vertical-align', core.$verticalAlign);
-@include core.classes('float', core.$float);
-@include core.classes('position', core.$position);
-@include core.classes('display', core.$displays);
-
-@include core.spacings;
-@include core.sizes;
-@include core.borderRadius;
-@include core.palettes;
-
-@media only print {
-	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
-}
-
-%displayNone {
-	display: none;
-}
-
-@each $display in core.$displays {
-	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize($display)} {
-			@extend %displayNone;
-		}
-	}
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	@include core.classes('scroll-behavior', core.$scrollBehavior);
 }
