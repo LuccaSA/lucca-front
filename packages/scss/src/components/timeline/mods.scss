@@ -221,19 +221,21 @@
 	}
 
 	.timeline-step-title-icon {
-		content: '';
-		color: var(--palettes-primary-800);
-		width: 1rem;
-		height: 1rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		background-color: var(--palettes-primary-300);
-		position: absolute;
-		left: var(--spacings-smallest);
-		top: 50%;
-		transform: translateY(-50%);
+		&::before {
+			content: '';
+			color: var(--palettes-primary-800);
+			width: 1rem;
+			height: 1rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			background-color: var(--palettes-primary-300);
+			position: absolute;
+			left: var(--spacings-smallest);
+			top: 50%;
+			transform: translateY(-50%);
+		}
 	}
 }
 
