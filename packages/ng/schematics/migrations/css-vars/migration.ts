@@ -1,4 +1,5 @@
 import type { ValueParser } from 'postcss-value-parser';
+import { AngularTemplate } from '../../lib/angular-template';
 import { applyUpdates, FileUpdate } from '../../lib/file-update.js';
 import { AngularCompilerLib, HtmlAst, updateCssClassNames } from '../../lib/html-ast.js';
 import { addForwardRule, commentNode, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
@@ -17,7 +18,9 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 	const root = postCssScss.parse(content);
 
 	root.walkAtRules('import', (rule) => {
-		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) => removeImportNode(rule, name, postcssValueParser));
+		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/_mixins', '@lucca-front/icons/src/_mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) =>
+			removeImportNode(rule, name, postcssValueParser),
+		);
 	});
 
 	removeScssPlaceholders(root, postcssValueParser);
@@ -79,18 +82,28 @@ export function optimizeScssGlobalImport(content: string, cssImports: string[], 
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
 
+const classMigrationMap = {
+	'u-fontWeightBold': 'u-fontWeight600',
+	'u-order1': 'u-flexOrder1',
+	'u-order-1': 'u-flexOrderMinus1',
+};
+
 export function migrateHTMLFile(path: string, content: string, angularCompiler: AngularCompilerLib): string {
-	return path.endsWith('index.html')
-		? migrateIndexHTMLFile(content, angularCompiler)
-		: updateCssClassNames(
-				content,
-				{
-					'u-fontWeightBold': 'u-fontWeight600',
-					'u-order1': 'u-flexOrder1',
-					'u-order-1': 'u-flexOrderMinus1',
-				},
-				angularCompiler,
-		  );
+	return path.endsWith('index.html') ? migrateIndexHTMLFile(content, angularCompiler) : updateCssClassNames(content, classMigrationMap, angularCompiler);
+}
+
+export function migrateTsFile(content: string, templates: AngularTemplate[], angularCompiler: AngularCompilerLib): string {
+	if (!templates.length) {
+		return content;
+	}
+
+	const updates: FileUpdate[] = templates.map((tpl) => ({
+		position: tpl.offsetStart,
+		oldContent: tpl.content,
+		newContent: updateCssClassNames(tpl.content, classMigrationMap, angularCompiler),
+	}));
+
+	return applyUpdates(content, updates);
 }
 
 export function migrateIndexHTMLFile(content: string, angularCompiler: AngularCompilerLib): string {
@@ -156,7 +169,7 @@ export function migrateAngularJsonFile(content: string): string {
 			const options = architect?.options?.stylePreprocessorOptions;
 
 			if (options?.includePaths) {
-				options.includePaths = options.includePaths.filter((p) => !p.startsWith('@lucca-front/'));
+				options.includePaths = options.includePaths.filter((p) => !p.includes('@lucca-front/'));
 
 				if (!options.includePaths.length) {
 					delete architect.options?.stylePreprocessorOptions;

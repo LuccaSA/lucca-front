@@ -77,7 +77,7 @@ describe('Migration Angular JSON file', () => {
 });
 
 describe('CSS Vars Migration', () => {
-	it('should update style files', async () => {
+	it('should update files', async () => {
 		const tree = new UnitTestTree(Tree.empty());
 		const inputs = files.filter((f) => f.includes('.input.'));
 		const outputs = files.filter((f) => f.includes('.output.'));
@@ -105,6 +105,26 @@ describe('CSS Vars Migration', () => {
 
 	it('should add optimized global imports', async () => {
 		const tree = new UnitTestTree(Tree.empty());
+		tree.create(
+			'app.component.ts',
+			`
+			@Component({
+				selector: 'clp-root',
+				template: \`
+					<clp-accessibility-nav></clp-accessibility-nav>
+					<lucca-sitemap id="navSide" class="mod-withBanner"></lucca-sitemap>
+					<main role="main" class="main-content" id="main-content">
+						<router-outlet></router-outlet>
+					</main>
+					<clf-feature-toggle feature="inbox">
+						<clp-documents-satellite enabled></clp-documents-satellite>
+					</clf-feature-toggle>
+					<clf-toast [sources]="[message$, toastError$]"></clf-toast>
+				\`,
+			})
+			export class AppComponent {}
+		`,
+		);
 		tree.create('app.component.html', '<button type="button" class="button">Test</button>');
 		tree.create('table.component.html', '<table class="table mod-sortable" [class.mod-stickyColumn]="true"></table>');
 		tree.create('util.component.html', '<div class="u-marginTopStandard">LOL</div>');
@@ -118,6 +138,8 @@ describe('CSS Vars Migration', () => {
 			`@forward '@lucca-front/icons/src/main';`,
 			`@forward '@lucca-front/scss/src/main';`,
 			`@forward '@lucca-front/scss/src/components/button';`,
+			`@forward '@lucca-front/scss/src/components/main';`,
+			`@forward '@lucca-front/scss/src/components/navside';`,
 			`@forward '@lucca-front/scss/src/components/table';`,
 			`@forward '@lucca-front/scss/src/components/tableSorted';`,
 			`@forward '@lucca-front/scss/src/components/tableSticked';`,

@@ -12,7 +12,7 @@ export function updateElevation(root: Root, postCss: PostCssLib, postCssValuePar
 			atRule.before(
 				new postCss.Declaration({
 					prop: 'box-shadow',
-					value: `var(--commons-elevation-elevation-${level})`,
+					value: `var(--commons-elevations-elevation-${level})`,
 				}),
 			);
 			atRule.remove();

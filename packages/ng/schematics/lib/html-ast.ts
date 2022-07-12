@@ -147,3 +147,12 @@ export function extractAllCssClassNames(content: string, lib: AngularCompilerLib
 
 	return [...allClasses];
 }
+
+export function extractAllHtmlElementNames(content: string, lib: AngularCompilerLib): string[] {
+	const allElements = new Set<string>();
+	const root = new HtmlAst(content, lib);
+
+	root.visitElements(/.*/, (element) => allElements.add(element.name));
+
+	return [...allElements];
+}
