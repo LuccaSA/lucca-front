@@ -1,9 +1,10 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { spawnSync } from 'child_process';
 import * as path from 'path';
+import { extractNgTemplates } from '../../lib/angular-template';
 import { extractAllCssClassNames, extractAllHtmlElementNames } from '../../lib/html-ast';
 import { getCssImports } from './css-class-registry';
-import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile, optimizeScssGlobalImport } from './migration';
+import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile, migrateTsFile, optimizeScssGlobalImport } from './migration';
 
 export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimization: boolean }): Rule => {
 	const skipInstallation = options?.skipInstallation ?? false;
@@ -66,6 +67,18 @@ export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimiza
 					}
 
 					return migrateHTMLFile(path, content, angularCompiler);
+				});
+			}
+			if (path.endsWith('.ts')) {
+				migrateFile((content) => {
+					const ngTemplates = extractNgTemplates(path, content);
+
+					if (!skipGlobalImportOptimization) {
+						ngTemplates.flatMap((tpl) => extractAllCssClassNames(tpl.content, angularCompiler)).forEach((c) => allCssClasses.add(c));
+						ngTemplates.flatMap((tpl) => extractAllHtmlElementNames(tpl.content, angularCompiler)).forEach((c) => allHtmlElements.add(c));
+					}
+
+					return migrateTsFile(content, ngTemplates, angularCompiler);
 				});
 			}
 		});
