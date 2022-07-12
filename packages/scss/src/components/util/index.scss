@@ -13,53 +13,6 @@
 
 @use 'exports' as *;
 
-@include core.classes('min-width', core.$contents);
-@include core.classes('flex-direction', core.$direction);
-@include core.classes('flex-wrap', core.$wrap);
-@include core.classes('justify-content', core.$justify);
-@include core.classes('align-items', core.$align);
-@include core.classes('flex-grow', core.$flex);
-@include core.classes('flex-shrink', core.$flex);
-@include core.classes('flex-basis', core.$basis);
-@include core.classes('flex-order', core.$order);
-@include core.classes('order', core.$order);
-@include core.classes('align-self', core.$align);
-@include core.classes('text-align', core.$textAlign);
-@include core.classes('visibility', core.$visibility);
-@include core.classes('font-weight', core.$fontWeight);
-@include core.classes('font-style', core.$fontStyle);
-@include core.classes('pointer-events', core.$pointerEvents);
-@include core.classes('white-space', core.$whiteSpace);
-@include core.classes('vertical-align', core.$verticalAlign);
-@include core.classes('float', core.$float);
-@include core.classes('position', core.$position);
-@include core.classes('display', core.$displays);
-
-@include core.spacings;
-@include core.sizes;
-@include core.borderRadius;
-@include core.palettes;
-
-@media only print {
-	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
-}
-
-%displayNone {
-	display: none;
-}
-
-@each $display in core.$displays {
-	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize($display)} {
-			@extend %displayNone;
-		}
-	}
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	@include core.classes('scroll-behavior', core.$scrollBehavior);
-}
-
 .u-textLight {
 	color: var(--palettes-grey-600) !important;
 }
@@ -309,4 +262,51 @@
 	&.mod-animation-duration-slow {
 		@include duration('slow');
 	}
+}
+
+@include core.classes('min-width', core.$contents);
+@include core.classes('flex-direction', core.$direction);
+@include core.classes('flex-wrap', core.$wrap);
+@include core.classes('justify-content', core.$justify);
+@include core.classes('align-items', core.$align);
+@include core.classes('flex-grow', core.$flex);
+@include core.classes('flex-shrink', core.$flex);
+@include core.classes('flex-basis', core.$basis);
+@include core.classes('flex-order', core.$order);
+@include core.classes('order', core.$order);
+@include core.classes('align-self', core.$align);
+@include core.classes('text-align', core.$textAlign);
+@include core.classes('visibility', core.$visibility);
+@include core.classes('font-weight', core.$fontWeight);
+@include core.classes('font-style', core.$fontStyle);
+@include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('white-space', core.$whiteSpace);
+@include core.classes('vertical-align', core.$verticalAlign);
+@include core.classes('float', core.$float);
+@include core.classes('position', core.$position);
+@include core.classes('display', core.$displays);
+
+@include core.spacings;
+@include core.sizes;
+@include core.borderRadius;
+@include core.palettes;
+
+@media only print {
+	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
+}
+
+%displayNone {
+	display: none;
+}
+
+@each $display in core.$displays {
+	@if $display != 'none' {
+		.u-onlyPrintDisplay#{transform.capitalize($display)} {
+			@extend %displayNone;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@include core.classes('scroll-behavior', core.$scrollBehavior);
 }
