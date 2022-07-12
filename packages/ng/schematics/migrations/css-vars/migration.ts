@@ -17,7 +17,9 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 	const root = postCssScss.parse(content);
 
 	root.walkAtRules('import', (rule) => {
-		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) => removeImportNode(rule, name, postcssValueParser));
+		['@lucca-front/scss/src/mixins', '@lucca-front/icons/src/mixins', '@lucca-front/scss/src/_mixins', '@lucca-front/icons/src/_mixins', '@lucca-front/scss/src/icons', 'theming'].some((name) =>
+			removeImportNode(rule, name, postcssValueParser),
+		);
 	});
 
 	removeScssPlaceholders(root, postcssValueParser);
