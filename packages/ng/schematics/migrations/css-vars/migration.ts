@@ -156,7 +156,7 @@ export function migrateAngularJsonFile(content: string): string {
 			const options = architect?.options?.stylePreprocessorOptions;
 
 			if (options?.includePaths) {
-				options.includePaths = options.includePaths.filter((p) => !p.startsWith('@lucca-front/'));
+				options.includePaths = options.includePaths.filter((p) => !p.includes('@lucca-front/'));
 
 				if (!options.includePaths.length) {
 					delete architect.options?.stylePreprocessorOptions;
