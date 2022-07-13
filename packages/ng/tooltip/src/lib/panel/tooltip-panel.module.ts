@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { LuTooltipPanelComponent } from './tooltip-panel.component';
-import { LuSafeContentModule } from '@lucca-front/ng/safe-content';
 
 @NgModule({
-	imports: [CommonModule, LuSafeContentModule],
+	imports: [CommonModule],
 	declarations: [LuTooltipPanelComponent],
 	exports: [LuTooltipPanelComponent],
 })

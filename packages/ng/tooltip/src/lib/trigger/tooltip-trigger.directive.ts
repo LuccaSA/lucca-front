@@ -1,6 +1,7 @@
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverScrollStrategy, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
@@ -8,7 +9,7 @@ import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 	selector: '[luTooltip]',
 })
 export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-	@Input('luTooltip') set tooltipContent(c: string) {
+	@Input('luTooltip') set tooltipContent(c: string | SafeHtml) {
 		if (this.panel) {
 			this.panel.content = c;
 		}
@@ -75,7 +76,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 
 	protected override _portal: ComponentPortal<LuTooltipPanelComponent>;
-	protected _tooltipContent = '';
+	protected _tooltipContent: string | SafeHtml = '';
 
 	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
 		super(_overlay, _elementRef, _viewContainerRef);
