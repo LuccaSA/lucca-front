@@ -23,6 +23,8 @@
 		"@angular/cdk": "^14.0.0",
 		"@lucca-front/icons": "*",
 		"@lucca-front/scss": "*",
+		"@types/dompurify": "^2.3.0",
+		"dompurify": "^2.3.0",
 		"rxjs": "^6.0.0 || ^7.0.0"
 	},
 	"bugs": {
