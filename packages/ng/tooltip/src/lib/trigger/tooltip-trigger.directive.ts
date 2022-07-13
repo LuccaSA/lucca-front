@@ -1,5 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { AfterViewInit, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Injector, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
@@ -7,7 +8,7 @@ import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 	selector: '[luTooltip]',
 })
 export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-	@Input('luTooltip') set tooltipContent(c: string) {
+	@Input('luTooltip') set tooltipContent(c: string | SafeHtml) {
 		this.panel.content = c;
 	}
 	/** when trigger = hover, delay before the popover panel appears, default 300ms */
