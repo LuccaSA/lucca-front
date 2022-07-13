@@ -62,6 +62,7 @@
 @include core.classes('font-style', core.$fontStyle);
 @include core.classes('pointer-events', core.$pointerEvents);
 @include core.classes('text-align', core.$textAlign);
+@include core.classes('text-decoration', core.$decoration);
 
 @media (prefers-reduced-motion: no-preference) {
 	@include core.classes('scroll-behavior', core.$scrollBehavior);
@@ -120,6 +121,10 @@
 
 .u-textPlaceholder {
 	color: var(--palettes-grey-400) !important;
+}
+
+.u-textDefault {
+	color: var(--palettes-grey-700) !important;
 }
 
 .u-ellipsis {
