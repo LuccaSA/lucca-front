@@ -22,6 +22,7 @@ import { ICalendarItem } from './calendar-item.interface';
 			useExisting: LuCalendarInputComponent,
 			multi: true,
 		},
+		LuCalendarItemFactory,
 	],
 })
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {

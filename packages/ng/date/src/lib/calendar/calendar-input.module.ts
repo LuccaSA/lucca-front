@@ -1,13 +1,11 @@
-import { NgModule } from '@angular/core';
-import { LuCalendarInputComponent } from './calendar-input.component';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LuCalendarItemFactory } from './calendar-item.factory';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { LuCalendarInputComponent } from './calendar-input.component';
 
 @NgModule({
 	imports: [FormsModule, CommonModule],
 	exports: [LuCalendarInputComponent],
 	declarations: [LuCalendarInputComponent],
-	providers: [LuCalendarItemFactory],
 })
 export class LuCalendarInputModule {}
