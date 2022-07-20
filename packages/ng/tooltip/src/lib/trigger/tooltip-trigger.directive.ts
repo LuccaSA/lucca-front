@@ -35,6 +35,10 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this.target.position = pos;
 	}
 
+	@Input('luTooltipWhenEllipsis') public set inputWhenEllipsis(we: boolean) {
+		this.whenEllipsis = we;
+	}
+
 	// FIXME output native
 	/** Event emitted when the associated popover is opened. */
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix

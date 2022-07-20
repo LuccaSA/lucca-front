@@ -122,6 +122,14 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		this._disabled = d;
 	}
 
+	protected _whenEllipsis = false;
+	get whenEllipsis() {
+		return this._whenEllipsis;
+	}
+	set whenEllipsis(we: boolean) {
+		this._whenEllipsis = we;
+	}
+
 	protected _triggerId: string;
 	protected _panelId: string;
 
@@ -173,7 +181,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 
 	/** Opens the popover. */
 	openPopover(): void {
-		if (!this._popoverOpen && !this._disabled) {
+		if (!this._popoverOpen && !this._disabled && (!this._whenEllipsis || this._hasEllipsis())) {
 			this._createOverlay();
 			this._attachPortalToOverlay();
 
@@ -534,5 +542,18 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		if (this._panelEventsSubscriptions) {
 			this._panelEventsSubscriptions.unsubscribe();
 		}
+	}
+
+	protected _hasEllipsis(): boolean {
+		if (!(this._elementRef.nativeElement instanceof HTMLElement)) {
+			return false;
+		}
+
+		const { scrollWidth, scrollHeight, clientWidth, clientHeight } = this._elementRef.nativeElement;
+
+		const textClampedByWidth = scrollWidth > clientWidth;
+		const textClampedByHeight = scrollHeight > clientHeight;
+
+		return textClampedByWidth || textClampedByHeight;
 	}
 }
