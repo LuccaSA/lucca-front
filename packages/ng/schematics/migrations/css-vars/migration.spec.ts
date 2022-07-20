@@ -128,7 +128,7 @@ describe('CSS Vars Migration', () => {
 		tree.create('app.component.html', '<button type="button" class="button">Test</button>');
 		tree.create('table.component.html', '<table class="table mod-sortable" [class.mod-stickyColumn]="true"></table>');
 		tree.create('util.component.html', '<div class="u-marginTopStandard">LOL</div>');
-		tree.create('styles.scss', "@import '@lucca-front/scss/src/main.overridable';");
+		tree.create('styles.scss', "@import '@lucca-front/scss/src/main.overridable';\n@import '@lucca-front/ng/style/main.overridable';");
 
 		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
 		// migration-v10-css-vars is the name of the migration, which is defined in the migration.json file
@@ -144,6 +144,7 @@ describe('CSS Vars Migration', () => {
 			`@forward '@lucca-front/scss/src/components/tableSorted';`,
 			`@forward '@lucca-front/scss/src/components/tableSticked';`,
 			`@forward '@lucca-front/scss/src/components/util';`,
+			`@forward '@lucca-front/ng/src/main';`,
 		];
 
 		expect(tree.readContent('styles.scss')).toBe(expectedImports.join('\n'));
