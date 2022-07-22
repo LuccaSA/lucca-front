@@ -12,3 +12,12 @@ export class LuSafeHtmlPipe implements PipeTransform {
 		return this.sanitizer.bypassSecurityTrustHtml(sanitize(value, config));
 	}
 }
+
+@Pipe({ name: 'luSafeUrl' })
+export class LuSafeUrlPipe implements PipeTransform {
+	constructor(protected sanitizer: DomSanitizer) {}
+
+	public transform(value: string, config?: SanitizerConfig): SafeHtml {
+		return this.sanitizer.bypassSecurityTrustResourceUrl(sanitize(value, config));
+	}
+}
