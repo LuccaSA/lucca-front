@@ -1,60 +1,59 @@
 const classWithImports = [
-	{ cssClass: ['actionIcon'], cssImport: ['@lucca-front/scss/src/components/actionIcon'] },
-	{ cssClass: ['box'], cssImport: ['@lucca-front/scss/src/components/box'] },
-	{ cssClass: ['breadcrumbs'], cssImport: ['@lucca-front/scss/src/components/breadcrumbs'] },
-	{ cssClass: ['button'], cssImport: ['@lucca-front/scss/src/components/button'] },
-	{ cssClass: ['button-group'], cssImport: ['@lucca-front/scss/src/components/buttonGroup'] },
-	{ cssClass: ['callout'], cssImport: ['@lucca-front/scss/src/components/callout'] },
-	{ cssClass: ['card'], cssImport: ['@lucca-front/scss/src/components/card'] },
-	{ cssClass: ['checkbox'], cssImport: ['@lucca-front/scss/src/components/checkbox'] },
-	{ cssClass: ['chip'], cssImport: ['@lucca-front/scss/src/components/chip'] },
-	{ cssClass: ['code'], cssImport: ['@lucca-front/scss/src/components/code'] },
-	{ cssClass: ['collapse'], cssImport: ['@lucca-front/scss/src/components/collapse'] },
-	{ cssClass: ['container'], cssImport: ['@lucca-front/scss/src/components/container'] },
-	{ cssClass: ['contentSection'], cssImport: ['@lucca-front/scss/src/components/contentSection'] },
-	{ cssClass: ['titleSection'], cssImport: ['@lucca-front/scss/src/components/titleSection'] },
-	{ cssClass: ['divider'], cssImport: ['@lucca-front/scss/src/components/divider'] },
-	{ cssClass: ['emptyState'], cssImport: ['@lucca-front/scss/src/components/emptyState'] },
-	{ cssClass: ['errorPage'], cssImport: ['@lucca-front/scss/src/components/errorPage'] },
-	{ cssClass: ['textfield'], cssImport: ['@lucca-front/scss/src/components/field', '@lucca-front/scss/src/components/textfield'] },
-	{ cssClass: ['radiosfield'], cssImport: ['@lucca-front/scss/src/components/field', '@lucca-front/scss/src/components/radio'] },
-	{ cssClass: ['checkboxesfield'], cssImport: ['@lucca-front/scss/src/components/field', '@lucca-front/scss/src/components/checkbox'] },
-	{ cssClass: ['file'], cssImport: ['@lucca-front/scss/src/components/file'] },
-	{ cssClass: ['filters'], cssImport: ['@lucca-front/scss/src/components/filters'] },
-	{ cssClass: ['form-group'], cssImport: ['@lucca-front/scss/src/components/form'] },
-	{ cssClass: ['gauge'], cssImport: ['@lucca-front/scss/src/components/gauge'] },
-	{ cssClass: ['grid'], cssImport: ['@lucca-front/scss/src/components/grid'] },
-	{ cssClass: ['header'], cssImport: ['@lucca-front/scss/src/components/header'] },
-	{ cssClass: ['label'], cssImport: ['@lucca-front/scss/src/components/label'] },
-	{ cssClass: ['layout'], cssImport: ['@lucca-front/scss/src/components/layout'] },
-	{ cssClass: ['link'], cssImport: ['@lucca-front/scss/src/components/link'] },
-	{ cssClass: ['list'], cssImport: ['@lucca-front/scss/src/components/list'] },
-	{ cssClass: ['loading'], cssImport: ['@lucca-front/scss/src/components/loading'] },
-	{ cssClass: ['main-content'], cssImport: ['@lucca-front/scss/src/components/main'] },
-	{ cssClass: ['menu'], cssImport: ['@lucca-front/scss/src/components/menu'] },
-	{ cssClass: ['navSide'], cssImport: ['@lucca-front/scss/src/components/navside'], elements: ['lucca-sitemap'] },
-	{ cssClass: ['pageHeader'], cssImport: ['@lucca-front/scss/src/components/pageHeader'] },
-	{ cssClass: ['pagination'], cssImport: ['@lucca-front/scss/src/components/pagination'] },
-	{ cssClass: ['progress'], cssImport: ['@lucca-front/scss/src/components/progress'] },
-	{ cssClass: ['radio'], cssImport: ['@lucca-front/scss/src/components/radio'] },
-	{ cssClass: ['radioButtons'], cssImport: ['@lucca-front/scss/src/components/radioButtons'] },
-	{ cssClass: ['section'], cssImport: ['@lucca-front/scss/src/components/section'] },
-	{ cssClass: ['switch'], cssImport: ['@lucca-front/scss/src/components/switch'] },
-	{ cssClass: ['table'], cssImport: ['@lucca-front/scss/src/components/table'] },
-	{ cssClass: [/^mod-layoutFixed-.*/], cssImport: ['@lucca-front/scss/src/components/tableFixed'] },
-	{ cssClass: ['mod-sortable', 'table-head-row-cell-sortableButton'], cssImport: ['@lucca-front/scss/src/components/tableSorted'] },
-	{ cssClass: ['mod-stickyColumn', 'mod-stickyHeader'], cssImport: ['@lucca-front/scss/src/components/tableSticked'] },
-	{ cssClass: ['tag'], cssImport: ['@lucca-front/scss/src/components/tag'] },
-	{ cssClass: ['textfield'], cssImport: ['@lucca-front/scss/src/components/textfield'] },
-	{ cssClass: ['timeline'], cssImport: ['@lucca-front/scss/src/components/timeline'] },
 	{
-		cssClass: ['u-h1', 'u-h2', 'u-h3', 'u-h4', 'u-h5', 'u-h6'],
-		cssImport: ['@lucca-front/scss/src/components/title'],
+		cssClasses: ['u-h1', 'u-h2', 'u-h3', 'u-h4', 'u-h5', 'u-h6'],
+		cssImports: ['@lucca-front/scss/src/components/title'],
 		elements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 	},
-	{ cssClass: ['toasts'], cssImport: ['@lucca-front/scss/src/components/toast'] },
-	{ cssClass: ['tableOfContent'], cssImport: ['@lucca-front/scss/src/components/tableOfContent'] },
-	{ cssClass: [/^u-.*/], cssImport: ['@lucca-front/scss/src/components/util'] },
+	{ cssClasses: ['actionIcon'], cssImports: ['@lucca-front/scss/src/components/actionIcon'] },
+	{ cssClasses: ['box'], cssImports: ['@lucca-front/scss/src/components/box'] },
+	{ cssClasses: ['breadcrumbs'], cssImports: ['@lucca-front/scss/src/components/breadcrumbs'] },
+	{ cssClasses: ['button-group'], cssImports: ['@lucca-front/scss/src/components/buttonGroup'] },
+	{ cssClasses: ['button'], cssImports: ['@lucca-front/scss/src/components/button'] },
+	{ cssClasses: ['callout'], cssImports: ['@lucca-front/scss/src/components/callout'] },
+	{ cssClasses: ['card'], cssImports: ['@lucca-front/scss/src/components/card'] },
+	{ cssClasses: ['checkbox'], cssImports: ['@lucca-front/scss/src/components/checkbox'] },
+	{ cssClasses: ['checkboxesfield'], cssImports: ['@lucca-front/scss/src/components/field', '@lucca-front/scss/src/components/checkbox'] },
+	{ cssClasses: ['chip'], cssImports: ['@lucca-front/scss/src/components/chip'] },
+	{ cssClasses: ['code'], cssImports: ['@lucca-front/scss/src/components/code'] },
+	{ cssClasses: ['collapse'], cssImports: ['@lucca-front/scss/src/components/collapse'] },
+	{ cssClasses: ['container'], cssImports: ['@lucca-front/scss/src/components/container'] },
+	{ cssClasses: ['contentSection'], cssImports: ['@lucca-front/scss/src/components/contentSection'] },
+	{ cssClasses: ['divider'], cssImports: ['@lucca-front/scss/src/components/divider'], elements: ['hr'] },
+	{ cssClasses: ['emptyState'], cssImports: ['@lucca-front/scss/src/components/emptyState'] },
+	{ cssClasses: ['errorPage'], cssImports: ['@lucca-front/scss/src/components/errorPage'] },
+	{ cssClasses: ['file'], cssImports: ['@lucca-front/scss/src/components/file'] },
+	{ cssClasses: ['filters'], cssImports: ['@lucca-front/scss/src/components/filters'] },
+	{ cssClasses: ['form-group'], cssImports: ['@lucca-front/scss/src/components/form'] },
+	{ cssClasses: ['gauge'], cssImports: ['@lucca-front/scss/src/components/gauge'] },
+	{ cssClasses: ['grid'], cssImports: ['@lucca-front/scss/src/components/grid'] },
+	{ cssClasses: ['header'], cssImports: ['@lucca-front/scss/src/components/header'] },
+	{ cssClasses: ['label'], cssImports: ['@lucca-front/scss/src/components/label'] },
+	{ cssClasses: ['layout'], cssImports: ['@lucca-front/scss/src/components/layout'] },
+	{ cssClasses: ['link'], cssImports: ['@lucca-front/scss/src/components/link'] },
+	{ cssClasses: ['list'], cssImports: ['@lucca-front/scss/src/components/list'] },
+	{ cssClasses: ['loading'], cssImports: ['@lucca-front/scss/src/components/loading'] },
+	{ cssClasses: ['main-content'], cssImports: ['@lucca-front/scss/src/components/main'] },
+	{ cssClasses: ['menu'], cssImports: ['@lucca-front/scss/src/components/menu'] },
+	{ cssClasses: ['mod-sortable', 'table-head-row-cell-sortableButton'], cssImports: ['@lucca-front/scss/src/components/tableSorted'] },
+	{ cssClasses: ['mod-stickyColumn', 'mod-stickyHeader'], cssImports: ['@lucca-front/scss/src/components/tableSticked'] },
+	{ cssClasses: ['navSide'], cssImports: ['@lucca-front/scss/src/components/navside'], elements: ['lucca-sitemap'] },
+	{ cssClasses: ['pageHeader'], cssImports: ['@lucca-front/scss/src/components/pageHeader'] },
+	{ cssClasses: ['pagination'], cssImports: ['@lucca-front/scss/src/components/pagination'] },
+	{ cssClasses: ['progress'], cssImports: ['@lucca-front/scss/src/components/progress'] },
+	{ cssClasses: ['radio'], cssImports: ['@lucca-front/scss/src/components/radio'] },
+	{ cssClasses: ['radioButtons'], cssImports: ['@lucca-front/scss/src/components/radioButtons'] },
+	{ cssClasses: ['radiosfield'], cssImports: ['@lucca-front/scss/src/components/field', '@lucca-front/scss/src/components/radio'] },
+	{ cssClasses: ['section'], cssImports: ['@lucca-front/scss/src/components/section'] },
+	{ cssClasses: ['switch'], cssImports: ['@lucca-front/scss/src/components/switch'] },
+	{ cssClasses: ['table'], cssImports: ['@lucca-front/scss/src/components/table'] },
+	{ cssClasses: ['tableOfContent'], cssImports: ['@lucca-front/scss/src/components/tableOfContent'] },
+	{ cssClasses: ['tag'], cssImports: ['@lucca-front/scss/src/components/tag'] },
+	{ cssClasses: ['textfield'], cssImports: ['@lucca-front/scss/src/components/field', '@lucca-front/scss/src/components/textfield'] },
+	{ cssClasses: ['timeline'], cssImports: ['@lucca-front/scss/src/components/timeline'] },
+	{ cssClasses: ['titleSection'], cssImports: ['@lucca-front/scss/src/components/titleSection'] },
+	{ cssClasses: ['toasts'], cssImports: ['@lucca-front/scss/src/components/toast'] },
+	{ cssClasses: [/^mod-layoutFixed-.*/], cssImports: ['@lucca-front/scss/src/components/tableFixed'] },
+	{ cssClasses: [/^u-.*/], cssImports: ['@lucca-front/scss/src/components/util'] },
 ];
 
 export function getCssImports(allVisitedClasses: string[], allVisitedElements: string[]): string[] {
@@ -64,16 +63,16 @@ export function getCssImports(allVisitedClasses: string[], allVisitedElements: s
 
 	// Pre-compute classWithImports for performance optimization
 	for (const classWithImport of classWithImports) {
-		for (const cssClass of classWithImport.cssClass) {
+		for (const cssClass of classWithImport.cssClasses) {
 			if (typeof cssClass === 'string') {
-				exactCssClasses[cssClass] = classWithImport.cssImport;
+				exactCssClasses[cssClass] = classWithImport.cssImports;
 			} else {
-				regexpCssTests.push((css) => (css.match(cssClass) ? classWithImport.cssImport : null));
+				regexpCssTests.push((css) => (css.match(cssClass) ? classWithImport.cssImports : null));
 			}
 		}
 
 		for (const element of classWithImport.elements || []) {
-			exactCssElements[element] = classWithImport.cssImport;
+			exactCssElements[element] = classWithImport.cssImports;
 		}
 	}
 

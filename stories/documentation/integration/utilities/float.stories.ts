@@ -8,8 +8,8 @@ export default {
 
 function getTemplate(args: FloatStory): string {
 	return `
-		<div class="u-left"><code class="code">u-left</code></div>
-		<div class="u-right"><code class="code">u-right</code></div>
+		<div class="u-floatLeft"><code class="code">u-floatLeft</code></div>
+		<div class="u-floatRight"><code class="code">u-floatRight</code></div>
 	`;
 }
 

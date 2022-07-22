@@ -1,3 +1,4 @@
+import { Node } from 'postcss';
 import type { ValueParser } from 'postcss-value-parser';
 import { AngularTemplate } from '../../lib/angular-template';
 import { applyUpdates, FileUpdate } from '../../lib/file-update.js';
@@ -65,17 +66,17 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 
 export function optimizeScssGlobalImport(content: string, cssImports: string[], postCss: PostCssLib, postCssScss: PostCssScssLib): string {
 	const root = postCssScss.parse(content);
-	let hasGlobalImport = false;
+	let startImport: Node | null = null;
 
 	root.walkAtRules('forward', (rule) => {
 		if (rule.params.includes('@lucca-front/scss/src/main')) {
-			hasGlobalImport = true;
+			startImport = rule;
 		}
 	});
 
-	if (hasGlobalImport) {
+	if (startImport) {
 		for (const cssImport of cssImports) {
-			addForwardRule(root, cssImport, postCss);
+			startImport = addForwardRule(root, cssImport, postCss, startImport);
 		}
 	}
 
@@ -86,6 +87,8 @@ const classMigrationMap = {
 	'u-fontWeightBold': 'u-fontWeight600',
 	'u-order1': 'u-flexOrder1',
 	'u-order-1': 'u-flexOrderMinus1',
+	'u-right': 'u-floatRight',
+	'u-left': 'u-floatLeft',
 };
 
 export function migrateHTMLFile(path: string, content: string, angularCompiler: AngularCompilerLib): string {
