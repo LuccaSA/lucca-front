@@ -1,10 +1,2 @@
 @mixin vars {
-	@at-root {
-		:root {
-			--commons-divider-width: 1px;
-			--commons-divider-color: var(--palettes-grey-200);
-			--commons-divider-style: solid;
-			--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
-		}
-	}
 }
