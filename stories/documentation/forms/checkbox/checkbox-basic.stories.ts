@@ -14,23 +14,23 @@ export default {
 			options: ['', 'mod-small', 'mod-big'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 		row: {
 			description: "En dehors d'un <code>.checkboxesfield-input</code>, <code>.mod-inline</code> peut être ajouté sur <code>.checkbox</code> pour obtenir un affichage horizontal.",
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		required: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -58,7 +58,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 			</div>
 		</div>
 	</fieldset>
-	`
+	`;
 }
 
 const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({

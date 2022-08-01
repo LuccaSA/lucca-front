@@ -32,7 +32,7 @@ const Template: Story<TextCodeStory> = (args: TextCodeStory) => ({
 		:host {
 			display: block;
 			min-height: 145px;
-		}`
+		}`,
 	],
 });
 
