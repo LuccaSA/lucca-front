@@ -113,7 +113,7 @@ const Template: Story<MenuSecondaryBasicStory> = (args: MenuSecondaryBasicStory)
 		.navSide {
 			position: relative;
 		}
-	`,
+	`],
 });
 
 export const Basic = Template.bind({});
