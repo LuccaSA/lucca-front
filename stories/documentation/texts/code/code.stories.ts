@@ -1,28 +1,25 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TextCodeStory {
-	mod: string;
+	block: boolean;
 }
 
 export default {
 	title: 'Documentation/Texts/Code/Basic',
 	argTypes: {
-		mod: {
-			options: ['', 'mod-block'],
+		block: {
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: TextCodeStory): string {
-	const classes = [args.mod].filter(Boolean).join(' ');
-	return `Lorem 
-<code class="code  ${classes}">ipsum
-dolor
-sit
-</code>
+	const block = args.block ? `mod-block` : '';
+	return `Lorem
+<code class="code ${block}">ipsum
+dolor sit</code>
 amet
 	`;
 }
@@ -30,7 +27,14 @@ amet
 const Template: Story<TextCodeStory> = (args: TextCodeStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+			min-height: 145px;
+		}`
+	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { mod: '' };
+Basic.args = { block: false };
