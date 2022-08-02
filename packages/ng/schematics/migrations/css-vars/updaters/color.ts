@@ -14,6 +14,13 @@ const legacyLevelToLevel: Partial<Record<string, string>> = {
 	default: '700',
 };
 
+const textLevelToLevel: Partial<Record<string, string>> = {
+	dark: '900',
+	default: '800',
+	light: '600',
+	placeholder: '400',
+};
+
 export function updateColorMixin(root: Root, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {
 		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
@@ -24,6 +31,9 @@ export function updateColorMixin(root: Root, postcssValueParser: ValueParser) {
 
 			if (color === 'white') {
 				funcNode.nodes = new ScssValueAst(`--colors-${color}-color`, postcssValueParser).nodes;
+			} else if (color === 'text') {
+				const level = textLevelToLevel[legacyLevel] ?? textLevelToLevel['default'];
+				funcNode.nodes = new ScssValueAst(`--palettes-grey-${level}`, postcssValueParser).nodes;
 			} else {
 				let level = legacyLevel ?? funcNode.nodes[2]?.value ?? '700';
 				level = legacyLevelToLevel[level] ?? level;
