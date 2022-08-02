@@ -46,7 +46,7 @@ export class LuTitleService {
 function getPageTitleParts(snapshot: ActivatedRouteSnapshot): Array<PageTitle> {
 	const pageTitle: PageTitle = {
 		title: (snapshot.data?.['title'] || '') as string,
-		params: snapshot.params,
+		params: { ...snapshot.params, ...snapshot.data },
 	};
 	return snapshot.parent ? [pageTitle, ...getPageTitleParts(snapshot.parent)] : [pageTitle];
 }
