@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, ObservableInput, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 
 export type PageTitle = { title: string; params: { [param: string]: string } };
@@ -10,9 +10,12 @@ export const TitleSeparator = ' – ';
 
 @Injectable()
 export class LuTitleService {
-	private titlePartsSubject = new BehaviorSubject<string[]>(['Lucca']);
+	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>(['Lucca']);
 	titleParts$ = this.titlePartsSubject.asObservable();
-	title$ = this.titleParts$.pipe(map((titleParts: Array<string>) => titleParts.join(TitleSeparator)));
+	title$ = this.titleParts$.pipe(
+		switchMap((titleParts) => combineLatest(titleParts.map((part) => (typeof part === 'string' ? of(part) : part)))),
+		map((parts) => parts.join(TitleSeparator)),
+	);
 
 	constructor(private router: Router, private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
 
@@ -34,11 +37,11 @@ export class LuTitleService {
 		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
 	}
 
-	prependTitle(title: string) {
+	prependTitle(title: string | ObservableInput<string>) {
 		this.titlePartsSubject.next([title, ...this.titlePartsSubject.value]);
 	}
 
-	overrideFirstTitlePart(title: string) {
+	overrideFirstTitlePart(title: string | ObservableInput<string>) {
 		this.titlePartsSubject.next([title, ...this.titlePartsSubject.value.slice(1)]);
 	}
 }
