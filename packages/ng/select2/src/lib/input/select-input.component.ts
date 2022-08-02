@@ -20,7 +20,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	TemplateRef,
+	TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
@@ -184,6 +184,8 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 	@Input() valueTpl?: TemplateRef<{ $implicit: T }>;
 
 	@Output() clueChange = new EventEmitter<string>();
+	@Output() nextPage = new EventEmitter<void>();
+	@Output() previousPage = new EventEmitter<void>();
 
 	value?: T;
 	options$ = new ReplaySubject<T[]>(1);
@@ -302,6 +304,8 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 			this.onChange?.(value);
 			this.value = value;
 		});
+		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
+		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
 		this.panelRef.clueChanged.subscribe((clue) => {
 			this.clueChange.emit(clue);
 			this.clue = clue;
