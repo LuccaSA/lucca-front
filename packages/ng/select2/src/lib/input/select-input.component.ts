@@ -20,10 +20,10 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	TemplateRef,
+	TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, finalize, isObservable, map, Observable, of, ReplaySubject, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSelectPanelComponent, LuSelectPanelRef } from '../panel/index';
 import { ILuSelectPanelData, SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID, SELECT_PANEL_DATA } from '../select.model';
 
@@ -107,6 +107,72 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	}
 }
 
+export type OptionsReturnType<T> = T[] | Observable<T[]>;
+export type OptionsProviderData<TCursor extends string | number> = { clue: string | null; page: TCursor | null };
+export type CursorOptionsProvider<TData, TCursor extends string | number = number> = (
+	param: OptionsProviderData<TCursor>,
+) => OptionsReturnType<TData> | { data: TData[]; next: TCursor | null } | Observable<{ data: TData[]; next: TCursor | null }>;
+export type OptionsProvider<TData, TCursor extends string | number = number> = OptionsReturnType<TData> | CursorOptionsProvider<TData, TCursor>;
+
+export class LuSelectDataSource<T, TCursor extends string | number = number> {
+	public loading$: Observable<boolean>;
+	public options$: Observable<T[]>;
+
+	protected _params$ = new BehaviorSubject<OptionsProviderData<TCursor>>({ page: null, clue: null });
+	protected _loading$ = new BehaviorSubject<boolean>(false);
+	protected _nextCursor: TCursor | null = null;
+
+	public constructor(public options: OptionsProvider<T, TCursor>) {
+		this.options$ =
+			typeof options === 'function'
+				? this._params$.pipe(
+						tap(() => this._loading$.next(true)),
+						switchMap((param) => {
+							const options$ = options(param);
+							return (isObservable(options$) ? options$ : of(options$)).pipe(finalize(() => this._loading$.next(false)));
+						}),
+						tap((res) => {
+							if (!Array.isArray(res)) {
+								this._nextCursor = res.next;
+							}
+						}),
+						map((res) => (Array.isArray(res) ? res : res.data)),
+				  )
+				: Array.isArray(options)
+				? of(options)
+				: options;
+
+		this.loading$ = this._loading$.asObservable();
+	}
+
+	public updateClue(clue: string | null): void {
+		this._params$.next({ ...this._params$.value, clue, page: null });
+	}
+
+	public updatePage(page: TCursor | null): void {
+		this._params$.next({ ...this._params$.value, page });
+	}
+
+	public nextPage(): void {
+		if (this._nextCursor) {
+			this.updatePage(this._nextCursor);
+		}
+	}
+}
+
+interface IEntity {
+	id: number;
+	name: string;
+}
+
+const staticSource = new LuSelectDataSource([{ id: 12, name: 'TOTO' }]);
+const observableSource = new LuSelectDataSource(of([{ id: 12, name: 'TOTO' }]));
+const factorySource = new LuSelectDataSource((param) => [{ id: 12, name: param.clue }]);
+const factoryWithNumberCursorSource = new LuSelectDataSource((param) => ({ data: [{ id: 12, name: `${param.clue} ${param.page}` }], next: 12 }));
+const factoryObservableWithNumberCursorSource = new LuSelectDataSource((param) => of({ data: [{ id: 12, name: `${param.clue} ${param.page}` }], next: 12 }));
+const factoryWithNextCursorSource = new LuSelectDataSource<IEntity, string>((param) => ({ data: [{ id: 12, name: `${param.clue} ${param.page}` }], next: 'nextCursor' }));
+const factoryObservableWithNextCursorSource = new LuSelectDataSource<IEntity, string>((param) => of({ data: [{ id: 12, name: `${param.clue} ${param.page}` }], next: 'nextCursor' }));
+
 @Component({
 	selector: 'lu-select2',
 	templateUrl: './select-input.component.html',
@@ -184,6 +250,8 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 	@Input() valueTpl?: TemplateRef<{ $implicit: T }>;
 
 	@Output() clueChange = new EventEmitter<string>();
+	@Output() nextPage = new EventEmitter<void>();
+	@Output() previousPage = new EventEmitter<void>();
 
 	value?: T;
 	options$ = new ReplaySubject<T[]>(1);
@@ -302,6 +370,8 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 			this.onChange?.(value);
 			this.value = value;
 		});
+		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
+		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
 		this.panelRef.clueChanged.subscribe((clue) => {
 			this.clueChange.emit(clue);
 			this.clue = clue;

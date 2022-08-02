@@ -6,6 +6,8 @@ import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.mode
 
 export abstract class LuSelectPanelRef<T> {
 	closed = new EventEmitter<void>();
+	previousPage = new EventEmitter<void>();
+	nextPage = new EventEmitter<void>();
 	valueChanged = new EventEmitter<T>();
 	clueChanged = new EventEmitter<string>();
 	activeOptionIdChanged = new EventEmitter<string>();
@@ -15,6 +17,10 @@ export abstract class LuSelectPanelRef<T> {
 	close(): void {
 		this.closed.next();
 		this.closed.complete();
+		this.nextPage.next();
+		this.nextPage.complete();
+		this.previousPage.next();
+		this.previousPage.complete();
 		this.valueChanged.complete();
 		this.clueChanged.emit(null);
 		this.clueChanged.complete();
@@ -60,6 +66,20 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		this.initialValue = data.initialValue;
 		this.optionTpl = data.optionTpl;
 		this.searchable = data.searchable;
+	}
+
+	onScroll(evt: Event): void {
+		if (!(evt.target instanceof HTMLElement)) {
+			return;
+		}
+
+		if (evt.target.scrollTop === 0) {
+			this.panelRef.previousPage.emit();
+		}
+
+		if (evt.target.scrollHeight === evt.target.scrollTop + evt.target.clientHeight) {
+			this.panelRef.nextPage.emit();
+		}
 	}
 
 	ngAfterViewInit(): void {

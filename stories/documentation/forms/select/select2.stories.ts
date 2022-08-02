@@ -10,42 +10,49 @@ interface ILegume {
 }
 
 const allLegumes = [
-	{ index: 0, name: 'Artichaut'} ,
-	{ index: 1, name: 'Poivron'} ,
-	{ index: 2, name: 'Avocat' },
-	{ index: 3, name: 'Asperge' },
-	{ index: 4, name: 'Aubergine' },
-	{ index: 5, name: 'Betterave' },
-	{ index: 6, name: 'Radis' },
-	{ index: 7, name: 'Navet' },
-	{ index: 8, name: 'Carotte' },
-	{ index: 9, name: 'Laitue' },
-	{ index: 10, name: 'Céléri' },
-	{ index: 11, name: 'Concombre' },
-	{ index: 12, name: 'Brocoli' },
-	{ index: 13, name: 'Chou chinois' },
-	{ index: 14, name: 'Chou fleur' },
-	{ index: 15, name: 'Courgette' },
-	{ index: 16, name: 'Chou kalé' },
-	{ index: 17, name: 'Endive' },
-	{ index: 18, name: 'Épinard' },
-	{ index: 19, name: 'Haricots verts' },
-	{ index: 20, name: 'Petits pois' },
-	{ index: 21, name: 'Tomate' },
-	{ index: 22, name: 'Pomme de terre' },
-	{ index: 23, name: 'Blette' },
-	{ index: 24, name: 'Champignon' },
-	{ index: 25, name: 'Maïs' },
-	{ index: 26, name: 'Potimarron' },
-	{ index: 27, name: 'Citrouille' },
-	{ index: 28, name: 'Panais' },
-	{ index: 29, name: 'Topinambour' },
-	{ index: 30, name: 'Chou romanesco'}
+	{ name: 'Artichaut', index: 1} ,
+	{ name: 'Asperge', index: 2 },
+	{ name: 'Aubergine', index: 3 },
+	{ name: 'Avocat', index: 4 },
+	{ name: 'Betterave', index: 5 },
+	{ name: 'Blette', index: 6 },
+	{ name: 'Brocoli', index: 7 },
+	{ name: 'Carotte', index: 8 },
+	{ name: 'Céléri', index: 9 },
+	{ name: 'Champignon', index: 10 },
+	{ name: 'Chou chinois', index: 11 },
+	{ name: 'Chou fleur', index: 12 },
+	{ name: 'Chou kalé', index: 13 },
+	{ name: 'Chou romanesco', index: 14 }
+	{ name: 'Citrouille', index: 15 },
+	{ name: 'Concombre', index: 16 },
+	{ name: 'Courgette', index: 17 },
+	{ name: 'Endive', index: 18 },
+	{ name: 'Épinard', index: 19 },
+	{ name: 'Haricots verts', index: 20 },
+	{ name: 'Laitue', index: 21 },
+	{ name: 'Maïs', index: 22 },
+	{ name: 'Navet', index: 23 },
+	{ name: 'Panais', index: 24 },
+	{ name: 'Petits pois', index: 25 },
+	{ name: 'Poivron', index: 26 } ,
+	{ name: 'Pomme de terre', index: 27 },
+	{ name: 'Potimarron', index: 28 },
+	{ name: 'Radis', index: 29 },
+	{ name: 'Tomate', index: 30 },
+	{ name: 'Topinambour', index: 31 },
 ];
 
 const template = `
 <label class="textfield">
-	<lu-select2 #select1 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
+	<lu-select2
+		#select1
+		class="textfield-input"
+		placeholder="Placeholder..."
+		[(ngModel)]="value"
+		[options]="legumes.slice(0, page * 10)"
+		(nextPage)="page = page + 1"
+	>
 		<ng-container *luOption="let legume; select: select1">{{ legume.name }}</ng-container>
 		<ng-container *luDisplayer="let legume; select: select1">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
 	</lu-select2>
@@ -100,6 +107,7 @@ const template = `
 	template
 })
 class Select2Story {
+	public page = 1;
 	public legumes: ILegume[] = allLegumes
 
 	public value: ILegume | null = { index: 1, name: "Poivron" };
