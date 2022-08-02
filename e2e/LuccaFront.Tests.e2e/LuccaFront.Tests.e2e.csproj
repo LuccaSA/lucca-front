@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Lucca.Tests.E2e.Abstractions" Version="2.4.2-qa-uidiff-multip0001" />
+        <PackageReference Include="Lucca.Tests.E2e.Playwright" Version="2.4.2-qa-uidiff-multip0001" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.20.2" />
+        <PackageReference Include="NUnit" Version="3.13.3" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+        <PackageReference Include="SpecFlow" Version="3.9.52" />
+        <PackageReference Include="SpecFlow.NUnit" Version="3.9.52" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="testSettings.json" />
+      <Content Include="testSettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Definitions\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Features\DateSelect.feature.cs">
+        <DependentUpon>DateSelect.feature</DependentUpon>
+      </Compile>
+      <Compile Update="Features\button.feature.cs">
+        <DependentUpon>Button.feature</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <SpecFlowFeatureFiles Update="Features\DateSelect.feature">
+        <Visible>$(UsingMicrosoftNETSdk)</Visible>
+        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+      </SpecFlowFeatureFiles>
+    </ItemGroup>
+
+</Project>

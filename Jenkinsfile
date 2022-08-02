@@ -64,6 +64,11 @@ node(label: CI.getSelectedNode(script:this)) {
 					powershell "Copy-Item compodoc-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\compodoc -Recurse"
 				}
 
+				loggableStage('e2e') {
+					publishE2e(loggableStageName: 'e2e', slnFilepath: 'e2e\\LuccaFront.e2e.sln', framework: "net6.0")
+            		archiveElements(e2e: true)
+				}
+
 				if (isPR) {
 					// post PR comment
 					def deployUrl = "http://lucca-front.lucca.local/${branchName}/storybook"
