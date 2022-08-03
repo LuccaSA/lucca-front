@@ -22,7 +22,7 @@ public class ModSteps
     [When(@"select size (.*)")]
     public async Task WhenSelectSizeAsync(string size)
     {
-        await ClickOnRadioControlAsync(size, "size", "mod");
+        await ClickOnElementControlAsync(size, "size", "mod");
     }
 
     [When(@"select state (.*)")]
@@ -48,7 +48,7 @@ public class ModSteps
     {
         await ClickOnSwitchControlAsync(disabled, "disabled");
     }
-
+    
     [When(@"select grey (true|false)")]
     public async Task WhenSelectGreyAsync(string grey)
     {
@@ -61,6 +61,18 @@ public class ModSteps
         await ClickOnSwitchControlAsync(inline, "inline");
     }
 
+    [When(@"select required (true|false)")]
+    public async Task WhenSelectRequiredAsync(string required)
+    {
+        await ClickOnSwitchControlAsync(required, "required");
+    }
+
+    [When(@"select row (true|false)")]
+    public async Task WhenSelectRowAsync(string row)
+    {
+        await ClickOnSwitchControlAsync(row, "row");
+    }
+    
     [When(@"select small (true|false)")]
     public async Task WhenSelectSmallAsync(string small)
     {
@@ -73,9 +85,67 @@ public class ModSteps
         await ClickOnSelectControlAsync(icon, "icon", "icon");
     }
 
-    private async Task ClickOnRadioControlAsync(string value, string controlPrefix, string valuePrefix)
+    [When(@"select display (.*)")]
+    public async Task WhenSelectDisplayAsync(string display)
     {
-        var selector = $"[for*='control-{controlPrefix}-']";
+        await ClickOnRadioControlAsync(display, "display", "mod");
+    }
+
+    [When(@"select style (.*)")]
+    public async Task WhenSelectStyleAsync(string style)
+    {
+        await ClickOnSelectControlAsync(style, "style", "mod");
+    }
+
+    [When(@"select noLabel (true|false)")]
+    public async Task WhenSelectNoLabelAsync(string noLabel)
+    {
+        await ClickOnSwitchControlAsync(noLabel, "noLabel");
+    }
+
+    [When(@"select error (true|false)")]
+    public async Task WhenSelectErrorAsync(string error)
+    {
+        await ClickOnSwitchControlAsync(error, "error");
+    }
+
+    [When(@"select invert (true|false)")]
+    public async Task WhenSelectInvertAsync(string invert)
+    {
+        await ClickOnSwitchControlAsync(invert, "invert");
+    }
+
+    [When(@"select white (true|false)")]
+    public async Task WhenSelectWhiteAsync(string white)
+    {
+        await ClickOnSwitchControlAsync(white, "white");
+    }
+
+    private async Task ClickOnElementControlAsync(string value, string controlName, string valuePrefix)
+    {
+        if (await _navigation.Page.IsVisibleAsync(GetSelectControlSelector(controlName)))
+        {
+            await ClickOnSelectControlAsync(value, controlName, valuePrefix);
+            return;
+        }
+
+        if (await _navigation.Page.IsVisibleAsync(GetRadioControlSelector(controlName)))
+        {
+            await ClickOnRadioControlAsync(value, controlName, valuePrefix);
+            return;
+        }
+
+        if (await _navigation.Page.IsVisibleAsync(GetSwitchControlSelector(controlName)))
+        {
+            await ClickOnSwitchControlAsync(value, controlName);
+            return;
+        }
+
+    }
+
+    private async Task ClickOnRadioControlAsync(string value, string controlName, string valuePrefix)
+    {
+        var selector = GetRadioControlSelector(controlName);
         if (string.IsNullOrEmpty(value))
         {
             await _navigation.Page.Locator(selector).Nth(0).ClickAsync();
@@ -88,7 +158,7 @@ public class ModSteps
 
     private async Task ClickOnSelectControlAsync(string value, string controlName, string valuePrefix)
     {
-        var selector = $"#control-{controlName}";
+        var selector = GetSelectControlSelector(controlName);
 
         if (string.IsNullOrEmpty(value))
         {
@@ -102,7 +172,23 @@ public class ModSteps
 
     private async Task ClickOnSwitchControlAsync(string value, string controlName)
     {
-        var selector = $"#control-{controlName}";
+        var selector = GetSwitchControlSelector(controlName);
         await _navigation.Page.SetCheckedAsync(selector, value == "true");
+    }
+
+
+    private static string GetRadioControlSelector(string controlPrefix)
+    {
+        return $"label[for*='control-{controlPrefix}-']";
+    }
+
+    private static string GetSelectControlSelector(string controlName)
+    {
+        return $"select#control-{controlName}";
+    }
+
+    private static string GetSwitchControlSelector(string controlName)
+    {
+        return $"input[type='checkbox']#control-{controlName}";
     }
 }
