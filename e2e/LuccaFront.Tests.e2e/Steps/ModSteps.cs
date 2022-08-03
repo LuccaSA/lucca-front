@@ -54,6 +54,12 @@ public class ModSteps
     {
         await ClickOnSwitchControlAsync(grey, "grey");
     }
+    
+    [When(@"select inline (true|false)")]
+    public async Task WhenSelectInlineAsync(string inline)
+    {
+        await ClickOnSwitchControlAsync(inline, "inline");
+    }
 
     [When(@"select small (true|false)")]
     public async Task WhenSelectSmallAsync(string small)
