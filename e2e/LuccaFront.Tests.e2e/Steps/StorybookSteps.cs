@@ -24,7 +24,7 @@ public class StorybookSteps
             new PageAddStyleTagOptions
             {
                 Content = @".innerZoomElementWrapper > div > div > div > * { display: inline-block; padding: 10px; } " +
-                          @".docs-story + div, .os-content { visibility: hidden; } "
+                          @".docs-story + div, .os-content, .docblock-code-toggle { visibility: hidden; } "
             }
         );
     }
