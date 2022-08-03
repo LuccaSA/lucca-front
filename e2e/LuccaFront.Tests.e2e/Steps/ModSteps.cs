@@ -48,7 +48,7 @@ public class ModSteps
     {
         await ClickOnSwitchControlAsync(disabled, "disabled");
     }
-
+    
     [When(@"select grey (true|false)")]
     public async Task WhenSelectGreyAsync(string grey)
     {
@@ -59,6 +59,18 @@ public class ModSteps
     public async Task WhenSelectInlineAsync(string inline)
     {
         await ClickOnSwitchControlAsync(inline, "inline");
+    }
+
+    [When(@"select required (true|false)")]
+    public async Task WhenSelectRequiredAsync(string required)
+    {
+        await ClickOnSwitchControlAsync(required, "required");
+    }
+
+    [When(@"select row (true|false)")]
+    public async Task WhenSelectRowAsync(string row)
+    {
+        await ClickOnSwitchControlAsync(row, "row");
     }
 
     [When(@"select small (true|false)")]
