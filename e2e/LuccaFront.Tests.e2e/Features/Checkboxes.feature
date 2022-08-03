@@ -1,5 +1,6 @@
 ﻿@ui-diff
 Feature: Checkboxes
+
     Scenario: Checkboxes-01: I can display checkboxes
         Given storybook forms checkboxes basic
         Then take screenshot
@@ -28,7 +29,7 @@ Feature: Checkboxes
         When select row <row>
         Then take screenshot
         Examples:
-          | row |
+          | row   |
           | true  |
           | false |
 
@@ -38,8 +39,8 @@ Feature: Checkboxes
         Then take screenshot
         Examples:
           | disabled |
-          | true  |
-          | false |
+          | true     |
+          | false    |
 
     Scenario: Checkboxes-07: I can display <required> checkbox
         Given storybook forms checkboxes basic
@@ -47,8 +48,8 @@ Feature: Checkboxes
         Then take screenshot
         Examples:
           | required |
-          | true  |
-          | false |
+          | true     |
+          | false    |
 
     Scenario: Checkboxes-08: I can display incomplete checkbox
         Given storybook forms checkboxes incomplete
