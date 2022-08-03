@@ -13,16 +13,6 @@
 		display: block;
 		background-color: var(--palettes-50, var(--components-textfield-background));
 
-		&::placeholder {
-			// color: var(--palettes-400);
-		}
-
-		&:focus {
-			&::placeholder {
-				// color: var(--palettes-300);
-			}
-		}
-
 		&.palette-error {
 			box-shadow: 0 0 0 1px var(--palettes-700);
 		}
