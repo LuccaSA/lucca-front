@@ -49,16 +49,22 @@ public class ModSteps
         await ClickOnSwitchControlAsync(disabled, "disabled");
     }
 
-    [When(@"select grey (true|false)")]
-    public async Task WhenSelectGreyAsync(string grey)
+    [When(@"select inline (true|false)")]
+    public async Task WhenSelectInlineAsync(string inline)
     {
-        await ClickOnSwitchControlAsync(grey, "grey");
+        await ClickOnSwitchControlAsync(inline, "inline");
     }
 
     [When(@"select small (true|false)")]
     public async Task WhenSelectSmallAsync(string small)
     {
         await ClickOnSwitchControlAsync(small, "small");
+    }
+
+    [When(@"select grey (true|false)")]
+    public async Task WhenSelectGreyAsync(string grey)
+    {
+        await ClickOnSwitchControlAsync(grey, "grey");
     }
 
     [When(@"select icon (.*)")]
