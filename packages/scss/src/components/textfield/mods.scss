@@ -354,6 +354,7 @@
 
 @mixin framedSearch {
 	&::after {
+		color: var(--palettes-grey-600);
 		padding: var(--components-field-framed-side-padding);
 		bottom: 0;
 		right: 0;
