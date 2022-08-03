@@ -5,7 +5,8 @@
 		"**/.hg": true,
 		"**/CVS": true,
 		"**/.DS_Store": true,
-		"node_modules": false
+		"node_modules": true,
+		"e2e": true
 	},
 	"css.validate": false,
 	"less.validate": false,
@@ -39,6 +40,5 @@
 		"editor.codeActionsOnSave": {
 			"source.fixAll.markdownlint": true
 		}
-	},
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	}
 }
