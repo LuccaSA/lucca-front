@@ -49,6 +49,24 @@ public class ModSteps
         await ClickOnSwitchControlAsync(disabled, "disabled");
     }
 
+    [When(@"select grey (true|false)")]
+    public async Task WhenSelectGreyAsync(string grey)
+    {
+        await ClickOnSwitchControlAsync(grey, "grey");
+    }
+
+    [When(@"select small (true|false)")]
+    public async Task WhenSelectSmallAsync(string small)
+    {
+        await ClickOnSwitchControlAsync(small, "small");
+    }
+
+    [When(@"select icon (.*)")]
+    public async Task WhenSelectIconAsync(string icon)
+    {
+        await ClickOnSelectControlAsync(icon, "icon", "icon");
+    }
+
     private async Task ClickOnRadioControlAsync(string value, string controlPrefix, string valuePrefix)
     {
         var selector = $"[for*='control-{controlPrefix}-']";
@@ -56,7 +74,10 @@ public class ModSteps
         {
             await _navigation.Page.Locator(selector).Nth(0).ClickAsync();
         }
-        await _navigation.Page.ClickAsync($"{selector}:has-text('{valuePrefix}-{value}')");
+        else
+        {
+            await _navigation.Page.ClickAsync($"{selector}:has-text('{valuePrefix}-{value}')");
+        }
     }
 
     private async Task ClickOnSelectControlAsync(string value, string controlName, string valuePrefix)
@@ -67,7 +88,10 @@ public class ModSteps
         {
             await _navigation.Page.SelectOptionAsync(selector, string.Empty);
         }
-        await _navigation.Page.SelectOptionAsync(selector, $"{valuePrefix}-{value}");
+        else
+        {
+            await _navigation.Page.SelectOptionAsync(selector, $"{valuePrefix}-{value}");
+        }
     }
 
     private async Task ClickOnSwitchControlAsync(string value, string controlName)
