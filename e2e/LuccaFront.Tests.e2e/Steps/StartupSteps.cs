@@ -12,21 +12,16 @@ public class StartupSteps
     }
     
     [BeforeFeature]
-    public static void BeforeFeature(FeatureContext featureContext)
+    public static async Task BeforeFeatureAsync(FeatureContext featureContext)
     {
         featureContext.FeatureContainer.RegisterInstanceAs<INavigation>(
             featureContext.FeatureContainer.Resolve<LuccaFrontPlaywright>());
+        await featureContext.FeatureContainer.Resolve<LuccaFrontPlaywright>().SetupAsync();
     }
-    
-    [BeforeScenario]
-    public async Task BeforeScenarioAsync(ScenarioContext scenarioContext)
+
+    [AfterFeature]
+    public static async Task AfterFeatureAsync(FeatureContext featureContext)
     {
-        await _featureContext.FeatureContainer.Resolve<LuccaFrontPlaywright>().SetupAsync();
-    }
-    
-    [AfterScenario]
-    public async Task AfterScenarioAsync(ScenarioContext scenarioContext)
-    {
-        await _featureContext.FeatureContainer.Resolve<LuccaFrontPlaywright>().TeardownAsync();
+        await featureContext.FeatureContainer.Resolve<LuccaFrontPlaywright>().TeardownAsync();
     }
 }
