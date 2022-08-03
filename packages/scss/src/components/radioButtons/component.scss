@@ -36,8 +36,8 @@
 		.radioButtons-item-label {
 			background-color: var(--colors-white-color);
 			padding: var(--components-radioButtons-padding);
-			color: var(--components-radioButtons-default-palette-700);
-			box-shadow: inset 0 0 0 1px var(--components-radioButtons-default-palette-200);
+			color: var(--palettes-grey-700);
+			box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
 			display: block;
@@ -50,8 +50,8 @@
 			&:not(:disabled, .is-disabled) {
 				~ .radioButtons-item-label {
 					&:hover {
-						background-color: var(--components-radioButtons-default-palette-50);
-						box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--components-radioButtons-default-palette-200);
+						background-color: var(--palettes-grey-50);
+						box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--palettes-grey-200);
 					}
 				}
 
@@ -69,13 +69,13 @@
 
 				&:focus {
 					~ .radioButtons-item-label {
-						box-shadow: 0 0 0 4px var(--components-radioButtons-hover-200), inset 0 0 0 1px var(--components-radioButtons-hover-400);
+						box-shadow: 0 0 0 4px var(--components-radioButtons-default-palette-200), inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
 					}
 
 					&:checked {
 						~ .radioButtons-item-label {
 							background-color: var(--components-radioButtons-default-palette-100);
-							box-shadow: 0 0 0 4px var(--components-radioButtons-hover-200), inset 0 0 0 1px var(--components-radioButtons-hover-500);
+							box-shadow: 0 0 0 4px var(--components-radioButtons-default-palette-200), inset 0 0 0 1px var(--components-radioButtons-default-palette-500);
 						}
 					}
 
