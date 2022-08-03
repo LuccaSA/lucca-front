@@ -79,7 +79,7 @@
 }
 
 @mixin size($size) {
-	width: var(--components-field-sizes-#{$size});
+	width: var(--components-textfield-sizes-#{$size});
 }
 
 @mixin multiline {
@@ -235,8 +235,8 @@
 
 @mixin compactSize($size) {
 	width: calc(
-		var(--components-field-sizes-#{$size}) + var(--components-field-compact-label-right-margin) +
-			var(--components-field-compact-label-sizes-default)
+		var(--components-textfield-sizes-#{$size}) + var(--components-textfield-compact-label-right-margin) +
+			var(--components-textfield-compact-label-sizes-default)
 	);
 
 	.textfield-options {
