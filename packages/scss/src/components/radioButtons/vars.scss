@@ -1,43 +1,15 @@
 @mixin vars {
-	--components-radioButtons-default-palette-darker: #2d354d;
-	--components-radioButtons-default-palette-dark: #4c5775;
-	--components-radioButtons-default-palette-color: #9299b0;
-	--components-radioButtons-default-palette-light: #ccd1e0;
-	--components-radioButtons-default-palette-lighter: #e8eaf3;
-	--components-radioButtons-default-palette-lightest: #f7f9fd;
-	--components-radioButtons-default-palette-text: #fff;
-	--components-radioButtons-default-palette-see-through: rgba(146, 153, 176, 0.15);
-
-	--components-radioButtons-default-palette-50: var(--palettes-grey-50);
-	--components-radioButtons-default-palette-100: var(--palettes-grey-100);
-	--components-radioButtons-default-palette-200: var(--palettes-grey-200);
-	--components-radioButtons-default-palette-300: var(--palettes-grey-300);
-	--components-radioButtons-default-palette-400: var(--palettes-grey-400);
-	--components-radioButtons-default-palette-500: var(--palettes-grey-500);
-	--components-radioButtons-default-palette-600: var(--palettes-grey-600);
-	--components-radioButtons-default-palette-700: var(--palettes-grey-700);
-	--components-radioButtons-default-palette-800: var(--palettes-grey-800);
-	--components-radioButtons-default-palette-900: var(--palettes-grey-900);
-
-	--components-radioButtons-hover-darker: #2d354d;
-	--components-radioButtons-hover-dark: #4c5775;
-	--components-radioButtons-hover-color: #9299b0;
-	--components-radioButtons-hover-light: #ccd1e0;
-	--components-radioButtons-hover-lighter: #e8eaf3;
-	--components-radioButtons-hover-lightest: #f7f9fd;
-	--components-radioButtons-hover-text: #fff;
-	--components-radioButtons-hover-see-through: rgba(146, 153, 176, 0.15);
-
-	--components-radioButtons-hover-50: var(--palettes-primary-50);
-	--components-radioButtons-hover-100: var(--palettes-primary-100);
-	--components-radioButtons-hover-200: var(--palettes-primary-200);
-	--components-radioButtons-hover-300: var(--palettes-primary-300);
-	--components-radioButtons-hover-400: var(--palettes-primary-400);
-	--components-radioButtons-hover-500: var(--palettes-primary-500);
-	--components-radioButtons-hover-600: var(--palettes-primary-600);
-	--components-radioButtons-hover-700: var(--palettes-primary-700);
-	--components-radioButtons-hover-800: var(--palettes-primary-800);
-	--components-radioButtons-hover-900: var(--palettes-primary-900);
+	--components-radioButtons-default-palette-text: var(--palettes-primary-text);
+	--components-radioButtons-default-palette-50: var(--palettes-primary-50);
+	--components-radioButtons-default-palette-100: var(--palettes-primary-100);
+	--components-radioButtons-default-palette-200: var(--palettes-primary-200);
+	--components-radioButtons-default-palette-300: var(--palettes-primary-300);
+	--components-radioButtons-default-palette-400: var(--palettes-primary-400);
+	--components-radioButtons-default-palette-500: var(--palettes-primary-500);
+	--components-radioButtons-default-palette-600: var(--palettes-primary-600);
+	--components-radioButtons-default-palette-700: var(--palettes-primary-700);
+	--components-radioButtons-default-palette-800: var(--palettes-primary-800);
+	--components-radioButtons-default-palette-900: var(--palettes-primary-900);
 
 	--components-radioButtons-active: var(--palettes-grey-800);
 	--components-radioButtons-padding: var(--spacings-smaller) var(--spacings-small);
