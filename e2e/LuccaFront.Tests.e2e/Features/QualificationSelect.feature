@@ -4,5 +4,5 @@ Feature: QualificationSelect
     Background: Specify storybook actions on qualification select
         Given storybook forms qualification
 
-    Scenario: QualificationSelect01: I can display basic qualificationSelect
+    Scenario: QualificationSelect-01: I can display basic qualificationSelect
         Then take screenshot

@@ -49,6 +49,18 @@ public class ModSteps
         await ClickOnSwitchControlAsync(disabled, "disabled");
     }
 
+    [When(@"select inline (true|false)")]
+    public async Task WhenSelectInlineAsync(string inline)
+    {
+        await ClickOnSwitchControlAsync(inline, "inline");
+    }
+
+    [When(@"select small (true|false)")]
+    public async Task WhenSelectSmallAsync(string small)
+    {
+        await ClickOnSwitchControlAsync(small, "small");
+    }
+
     private async Task ClickOnRadioControlAsync(string value, string controlPrefix, string valuePrefix)
     {
         var selector = $"[for*='control-{controlPrefix}-']";
