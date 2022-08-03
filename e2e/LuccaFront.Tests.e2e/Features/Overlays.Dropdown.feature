@@ -1,12 +1,19 @@
 @ui-diff
-Feature: Oberlays/Dropdown
+Feature: Oberlays
 
-    Background: Specify storybook overlays dropdown basic
-        Given storybook overlays dropdown basic
+    Rule: Dropdown
 
-    Scenario: Dropdown-01: I can display overlay button
-		Then take screenshot
+        Scenario: Dropdown-01: I can display overlay button
+            Given storybook overlays dropdown basic
+            Then take screenshot
 
-    Scenario: Dropdown-02: I can open Dropdown on click
-        When open Dropdown on click
-		Then take screenshot
+        Scenario: Dropdown-02: I can open Dropdown on click
+            Given storybook overlays dropdown basic
+            When open Dropdown on click
+            Then take screenshot
+
+    Rule: Modal
+
+        Scenario: Modal-01: I can display modal button
+            Given storybook overlays modal
+            Then take screenshot
