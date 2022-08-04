@@ -154,8 +154,13 @@
 				right: var(--spacings-smaller);
 			}
 
-			.lu-select-value,
+			.lu-select-value {
+				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
+					var(--components-select-framed-side-padding);
+			}
+
 			.lu-select-placeholder {
+				color: var(--palettes-grey-400);
 				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
 					var(--components-select-framed-side-padding);
 			}

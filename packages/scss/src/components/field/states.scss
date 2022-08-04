@@ -65,7 +65,7 @@
 			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
 
 			&::placeholder {
-				color: var(--palettes-#{$state}-300);
+				color: var(--palettes-#{$state}-400);
 			}
 		}
 
