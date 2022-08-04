@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Lucca.Tests.E2e.Abstractions" Version="2.4.2-qa-uidiff-multip0001" />
-        <PackageReference Include="Lucca.Tests.E2e.Playwright" Version="2.4.2-qa-uidiff-multip0001" />
+        <PackageReference Include="Lucca.Tests.E2e.Abstractions" Version="2.4.1" />
+        <PackageReference Include="Lucca.Tests.E2e.Playwright" Version="2.4.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
         <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.20.2" />

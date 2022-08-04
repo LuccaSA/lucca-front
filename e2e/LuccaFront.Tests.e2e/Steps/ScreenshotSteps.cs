@@ -25,14 +25,14 @@ public class ScreenshotSteps
         if (await _navigation.Page.IsVisibleAsync(".cdk-overlay-pane"))
         {
             await _navigation.Page.Locator(".cdk-overlay-pane")
-                .TakeScreenshotLocatorForUiDiffAsync(
+                .TakeScreenshotForUiDiffAsync(
                 _screenshotContext.NextScreenshotId.ToString()
             );
         }
         else
         {
             await _navigation.Page.Locator(".innerZoomElementWrapper > div > div > div > *")
-                .TakeScreenshotLocatorForUiDiffAsync(
+                .TakeScreenshotForUiDiffAsync(
                 _screenshotContext.NextScreenshotId.ToString()
             );
         }
