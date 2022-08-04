@@ -14,10 +14,18 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 			class="textfield-input"
 			placeholder="Select advanced"
 			[(ngModel)]="model"
+			multiple
 		>
-			<ng-container *luDisplayer="let value">
-				{{ value.name }}
-			</ng-container>
+			<ng-template luDisplayer let-colors [luDisplayerMultiple]="true">
+				<ng-container [ngPlural]="colors.length">
+					<ng-template ngPluralCase="0"></ng-template>
+					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
+					<ng-template ngPluralCase="other">
+						<span class="chip mod-unkillable">{{colors.length}}</span>
+						couleurs
+					</ng-template>
+				</ng-container>
+			</ng-template>
 			<lu-option-picker-advanced>
 				<lu-option-feeder [options]="options"></lu-option-feeder>
 				<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
@@ -44,17 +52,11 @@ class SelectAdvancedStory {
 		{ id: 8, name: 'grey' }
 	];
 
-	model = this.options[0];
+	model = [this.options[0]];
 
 	public searchFn({ name }: { name: string }, clue: string): boolean {
-    return this.localeContains(name, clue);
+    return name.toLocaleLowerCase().includes(clue.toLocaleLowerCase());
   }
-
-	private localeContains(needle: string, haystack: string): boolean {
-		return haystack.split('').reduce((acc, _, i) => {
-			return acc || haystack.substr(i, needle.length).localeCompare(needle, undefined, { sensitivity: 'base' }) === 0;
-		}, false);
-	}
 }
 
 export default {
@@ -100,10 +102,18 @@ class SelectAdvancedStoriesModule {}
 			class="textfield-input"
 			placeholder="Select advanced"
 			[(ngModel)]="model"
+			multiple
 		>
-			<ng-container *luDisplayer="let value">
-				{{ value.name }}
-			</ng-container>
+			<ng-template luDisplayer let-colors [luDisplayerMultiple]="true">
+				<ng-container [ngPlural]="colors.length">
+					<ng-template ngPluralCase="0"></ng-template>
+					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
+					<ng-template ngPluralCase="other">
+						<span class="chip mod-unkillable">{{colors.length}}</span>
+						couleurs
+					</ng-template>
+				</ng-container>
+			</ng-template>
 			<lu-option-picker-advanced>
 				<lu-option-feeder [options]="options"></lu-option-feeder>
 				<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
