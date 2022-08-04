@@ -18,4 +18,10 @@ public class OverlaysDropdownSteps
     {
         await _navigation.Page.ClickAsync("button.button");
     }
+
+    [When(@"open tooltip (.*)")]
+    public async Task OpenTooltipOnClickAsync(string tooltip)
+    {
+        await _navigation.Page.ClickAsync($"[data-tooltip={tooltip}]");
+    }
 }
