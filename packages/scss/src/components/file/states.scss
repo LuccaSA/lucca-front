@@ -6,7 +6,7 @@
 		.file-or,
 		.file-formats,
 		.file-button {
-			color: var(--commons-disabled-color);
+			color: var(--palettes-grey-500);
 		}
 	}
 }
@@ -14,7 +14,8 @@
 @mixin droppable {
 	~ .file-content {
 		&::before {
-			background-color: var(--commons-background-base);
+			background-color: var(--palettes-primary-50);
+			border: 1px dashed var(--palettes-primary-400);
 		}
 	}
 }
