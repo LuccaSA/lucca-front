@@ -83,6 +83,23 @@ export function addForwardRule(root: Root, name: string, postCss: PostCssLib, af
 	return addImport(root, new postCss.AtRule({ name: 'forward', params: `'${name}'` }), afterNode);
 }
 
+export function updateDeprecatedVariable(root: Root, mappingOldToNew: Record<string, string>, postcssValueParser: ValueParser) {
+	root.walkDecls((decl) => {
+		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
+
+		valueNode.walkFunction('var', (funcNode) => {
+			const varName = funcNode.nodes[0]?.value ?? '';
+			const newVarName = varName && mappingOldToNew[varName];
+
+			if (newVarName) {
+				funcNode.nodes = new ScssValueAst(newVarName, postcssValueParser).nodes;
+			}
+		});
+
+		decl.value = valueNode.toString();
+	});
+}
+
 /**
  * @returns {boolean} returns true if whole node is deleted
  */

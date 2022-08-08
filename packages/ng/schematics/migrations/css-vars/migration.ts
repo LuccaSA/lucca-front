@@ -3,7 +3,7 @@ import type { ValueParser } from 'postcss-value-parser';
 import { AngularTemplate } from '../../lib/angular-template';
 import { applyUpdates, FileUpdate } from '../../lib/file-update.js';
 import { AngularCompilerLib, HtmlAst, updateCssClassNames } from '../../lib/html-ast.js';
-import { addForwardRule, commentNode, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode } from '../../lib/scss-ast.js';
+import { addForwardRule, commentNode, PostCssLib, PostCssScssLib, removeContainerIfEmpty, removeImportNode, updateDeprecatedVariable } from '../../lib/scss-ast.js';
 import { mixinRegistry } from './mixin-registry.js';
 import { commentSassFuncWithVar, updateColorMixin } from './updaters/color.js';
 import { updateElevation } from './updaters/elevation.js';
@@ -14,6 +14,7 @@ import { updateMainImport } from './updaters/main-import.js';
 import { replaceFuncMixinsWithoutInclude, replaceIncludedMixin } from './updaters/mixins.js';
 import { removeScssPlaceholders } from './updaters/remove-scss-placeholder.js';
 import { updateThemeMixin } from './updaters/theme.js';
+import { addWarnings } from './updaters/warning.js';
 
 export function migrateScssFile(content: string, postCss: PostCssLib, postCssScss: PostCssScssLib, postcssValueParser: ValueParser): string {
 	const root = postCssScss.parse(content);
@@ -60,6 +61,18 @@ export function migrateScssFile(content: string, postCss: PostCssLib, postCssScs
 			commentNode(rule, 'Import non géré par la migration auto.', postCss);
 		}
 	});
+
+	addWarnings(root);
+
+	updateDeprecatedVariable(
+		root,
+		{
+			'--commons-background-dark': '--commons-background-base',
+			'--commons-background-darker': '--commons-background-base',
+			'--commons-background-darkest': '--commons-background-base',
+		},
+		postcssValueParser,
+	);
 
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
