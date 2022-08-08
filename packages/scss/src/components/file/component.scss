@@ -31,6 +31,7 @@
 		display: block;
 		position: relative;
 		color: var(--palettes-grey-600);
+
 		&:not(:empty) {
 			margin-bottom: var(--spacings-smaller);
 		}
@@ -61,6 +62,7 @@
 
 	.file-button {
 		margin-right: 0;
+
 		&:empty {
 			display: none;
 		}
@@ -92,6 +94,7 @@
 					&::before {
 						border: 1px dashed var(--palettes-primary-400);
 					}
+
 					.file-button {
 						background-color: var(--palettes-grey-50);
 						color: var(--palettes-grey-700);
