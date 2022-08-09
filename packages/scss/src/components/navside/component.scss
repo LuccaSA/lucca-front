@@ -141,7 +141,7 @@
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
-			font-size: 0.8em;
+			font-size: var(--sizes-big-font-size);
 			flex-shrink: 0;
 			width: 1em;
 			height: 1em;
