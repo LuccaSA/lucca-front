@@ -10,4 +10,13 @@
 
   color: _color('text');
   color: _color('text.dark');
+  color: _theme('palette.secondary.color');
+  color: _theme('palette.grey.light');
+  color: _color('primary', 'darkest');
+  color: _color('text.grossRemuneration');
+  color: _color('text.grossRemuneration', 'light');
+  color: _color('text.grossRemuneration.light');
+  color: _theme('commons.background.dark');
+  color: _theme('commons.background.darker');
+  color: _theme('commons.background.darkest');
 }
