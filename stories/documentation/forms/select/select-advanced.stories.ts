@@ -27,10 +27,12 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 				</ng-container>
 			</ng-template>
 			<lu-option-picker-advanced>
-				<lu-option-feeder [options]="options"></lu-option-feeder>
-				<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-				<lu-option-select-all></lu-option-select-all>
-				<lu-option-pager></lu-option-pager>
+				<header class="lu-picker-header">
+					<lu-option-feeder [options]="options"></lu-option-feeder>
+					<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
+					<lu-option-select-all class="u-displayBlock u-marginSmaller"></lu-option-select-all>
+					<lu-option-pager></lu-option-pager>
+				</header>
 				<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 			</lu-option-picker-advanced>
 			<lu-input-clearer></lu-input-clearer>
@@ -115,10 +117,12 @@ class SelectAdvancedStoriesModule {}
 				</ng-container>
 			</ng-template>
 			<lu-option-picker-advanced>
-				<lu-option-feeder [options]="options"></lu-option-feeder>
-				<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-				<lu-option-select-all></lu-option-select-all>
-				<lu-option-pager></lu-option-pager>
+				<header class="lu-picker-header">
+					<lu-option-feeder [options]="options"></lu-option-feeder>
+					<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
+					<lu-option-select-all></lu-option-select-all>
+					<lu-option-pager></lu-option-pager>
+				</header>
 				<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 			</lu-option-picker-advanced>
 			<lu-input-clearer></lu-input-clearer>
