@@ -80,7 +80,7 @@
 // TABLE
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
-		box-shadow: form.fakeborderoverlay(var(--commons-divider-color));
+		box-shadow: form.fakeBorderOverlay(var(--commons-divider-color));
 		border: none;
 		border-radius: 0;
 		color: var(--palettes-grey-600);
