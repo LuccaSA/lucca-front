@@ -48,13 +48,13 @@ public class ModSteps
     {
         await ClickOnSwitchControlAsync(disabled, "disabled");
     }
-    
+
     [When(@"select grey (true|false)")]
     public async Task WhenSelectGreyAsync(string grey)
     {
         await ClickOnSwitchControlAsync(grey, "grey");
     }
-    
+
     [When(@"select inline (true|false)")]
     public async Task WhenSelectInlineAsync(string inline)
     {
@@ -72,7 +72,7 @@ public class ModSteps
     {
         await ClickOnSwitchControlAsync(row, "row");
     }
-    
+
     [When(@"select small (true|false)")]
     public async Task WhenSelectSmallAsync(string small)
     {
@@ -119,6 +119,31 @@ public class ModSteps
     public async Task WhenSelectWhiteAsync(string white)
     {
         await ClickOnSwitchControlAsync(white, "white");
+    }
+
+    [When (@"select center (true|false)")]
+    public async Task WhenSelectCenterAsync(string center) {
+        await ClickOnSwitchControlAsync(center, "center");
+    }
+
+    [When (@"select clickable (true|false)")]
+    public async Task WhenSelectClickableAsync(string clickable) {
+        await ClickOnSwitchControlAsync(clickable, "clickable");
+    }
+
+    [When (@"select elevated (true|false)")]
+    public async Task WhenSelectElevatedAsync(string elevated) {
+        await ClickOnSwitchControlAsync(elevated, "elevated");
+    }
+
+    [When (@"select reverse (true|false)")]
+    public async Task WhenSelectReverseAsync(string reverse) {
+        await ClickOnSwitchControlAsync(reverse, "reverse");
+    }
+
+    [When (@"select noShadow (true|false)")]
+    public async Task WhenSelectNoShadowAsync(string noShadow) {
+        await ClickOnSwitchControlAsync(noShadow, "noShadow");
     }
 
     private async Task ClickOnElementControlAsync(string value, string controlName, string valuePrefix)

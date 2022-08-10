@@ -1,7 +1,7 @@
 @ui-diff
 Feature: Cards Basic
 
-    Background: Specify sotrybook structure cards basic
+    Background: Specify storybook structure cards basic
         Given storybook structure cards basic
 
     Scenario: Cards-Basic-01: I can display basic cards

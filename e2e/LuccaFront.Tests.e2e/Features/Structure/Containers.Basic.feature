@@ -2,7 +2,7 @@
 Feature: Containers Basic
 
     Background: Specify storybook structure containers basic
-        Given sotrybook structure containers basic
+        Given storybook structure containers basic
 
     Scenario: Containers-Basic-01: I can display basic containers
         Then take screenshot
