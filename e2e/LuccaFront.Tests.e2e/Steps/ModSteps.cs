@@ -127,6 +127,31 @@ public class ModSteps
         await ClickOnSwitchControlAsync(white, "white");
     }
 
+    [When (@"select center (true|false)")]
+    public async Task WhenSelectCenterAsync(string center) {
+        await ClickOnSwitchControlAsync(center, "center");
+    }
+
+    [When (@"select clickable (true|false)")]
+    public async Task WhenSelectClickableAsync(string clickable) {
+        await ClickOnSwitchControlAsync(clickable, "clickable");
+    }
+
+    [When (@"select elevated (true|false)")]
+    public async Task WhenSelectElevatedAsync(string elevated) {
+        await ClickOnSwitchControlAsync(elevated, "elevated");
+    }
+
+    [When (@"select reverse (true|false)")]
+    public async Task WhenSelectReverseAsync(string reverse) {
+        await ClickOnSwitchControlAsync(reverse, "reverse");
+    }
+
+    [When (@"select noShadow (true|false)")]
+    public async Task WhenSelectNoShadowAsync(string noShadow) {
+        await ClickOnSwitchControlAsync(noShadow, "noShadow");
+    }
+
     private async Task ClickOnElementControlAsync(string value, string controlName, string valuePrefix)
     {
         if (await _navigation.Page.IsVisibleAsync(GetSelectControlSelector(controlName)))

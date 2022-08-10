@@ -1,7 +1,7 @@
 @ui-diff
 Feature: Grids Basic
 
-    Background: Specify sotrybook structure grids basic
+    Background: Specify storybook structure grids basic
         Given storybook structure grids basic
 
     Scenario: Grids-Basic-01: I can display basic grids
