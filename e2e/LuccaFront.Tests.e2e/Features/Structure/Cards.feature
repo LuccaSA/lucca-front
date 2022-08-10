@@ -1,13 +1,12 @@
 @ui-diff
-Feature: Cards Basic
+Feature: Cards
 
-    Background: Specify storybook structure cards basic
+    Scenario: Cards-01: I can display basic cards
         Given storybook structure cards basic
-
-    Scenario: Cards-Basic-01: I can display basic cards
         Then take screenshot
 
-    Scenario: Cards-Basic-02: I can display <clickable> cards
+    Scenario: Cards-02: I can display <clickable> cards
+        Given storybook structure cards basic
         When select clickable <clickable>
         Then take screenshot
         Examples:
@@ -15,7 +14,8 @@ Feature: Cards Basic
         | true      |
         | false     |
 
-    Scenario: Cards-Basic-03: I can display <grey> cards
+    Scenario: Cards-03: I can display <grey> cards
+        Given storybook structure cards basic
         When select grey <grey>
         Then take screenshot
         Examples:
@@ -23,7 +23,8 @@ Feature: Cards Basic
         | true  |
         | false |
 
-    Scenario: Cards-Basic-04: I can display <disabled> cards
+    Scenario: Cards-04: I can display <disabled> cards
+        Given storybook structure cards basic
         When select disabled <disabled>
         Then take screenshot
         Examples:
@@ -31,7 +32,8 @@ Feature: Cards Basic
         | true     |
         | false    |
 
-    Scenario: Cards-Basic-05: I can display <elevated> cards
+    Scenario: Cards-05: I can display <elevated> cards
+        Given storybook structure cards basic
         When select elevated <elevated>
         Then take screenshot
         Examples:
@@ -39,7 +41,8 @@ Feature: Cards Basic
         | true     |
         | false    |
 
-    Scenario: Cards-Basic-06: I can display <clickable> and <grey> and <disabled> and <elevated> cards
+    Scenario: Cards-06: I can display <clickable> and <grey> and <disabled> and <elevated> cards
+        Given storybook structure cards basic
         When select clickable <clickable>
         And select grey <grey>
         And select disabled <disabled>
@@ -55,3 +58,7 @@ Feature: Cards Basic
         | true      | true  | false    | false    |
         | false     | true  | true     | false    |
         | false     | true  | false    | true     |
+
+    Scenario: Cards-07: I can display cards footer
+        Given storybook structure cards footer
+        Then take screenshot
