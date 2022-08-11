@@ -146,6 +146,21 @@ public class ModSteps
         await ClickOnSwitchControlAsync(noShadow, "noShadow");
     }
 
+    [When (@"select withoutShadow (true|false)")]
+    public async Task WhenSelectWithoutShadowAsync(string withoutShadow) {
+        await ClickOnSwitchControlAsync(withoutShadow, "withoutShadow");
+    }
+
+    [When (@"select withMenu (true|false)")]
+    public async Task WhenSelectWithMenuAsync(string withMenu) {
+        await ClickOnSwitchControlAsync(withMenu, "withMenu");
+    }
+
+    [When (@"select withBreadcrumbs (true|false)")]
+    public async Task WhenSelectWithBreadcrumbsAsync(string withBreadcrumbs) {
+        await ClickOnSwitchControlAsync(withBreadcrumbs, "withBreadcrumbs");
+    }
+
     private async Task ClickOnElementControlAsync(string value, string controlName, string valuePrefix)
     {
         if (await _navigation.Page.IsVisibleAsync(GetSelectControlSelector(controlName)))
