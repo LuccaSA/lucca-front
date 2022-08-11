@@ -36,8 +36,8 @@ function getTemplate(args: ButtonGroupStory): string {
 
 const Template: Story<ButtonGroupStory> = (args: ButtonGroupStory) => ({
 	props: args,
-	template: getTemplate(args)
+	template: getTemplate(args),
 });
 
-export const Group = Template.bind({});
-Group.args = { noFlexWrap: false };
+export const GroupButton = Template.bind({});
+GroupButton.args = { noFlexWrap: false };
