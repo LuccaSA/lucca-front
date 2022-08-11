@@ -90,7 +90,8 @@
 			}
 		}
 
-		.menu-link-placeholder {
+		.menu-link-placeholder, // legacy syntax
+		.menu-list-item-action-placeholder {
 			&::after {
 				content: attr(data-content-after);
 
