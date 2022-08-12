@@ -117,12 +117,12 @@
 		.lu-select-value,
 		.lu-select-placeholder {
 			font-size: var(--sizes-small-font-size);
-			line-height: var(--sizes-small-line-height);
-			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-small-line-height));
+			line-height: var(--sizes-smaller-line-height);
+			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-smaller-line-height));
 		}
 
 		&::after {
-			line-height: var(--sizes-small-line-height);
+			line-height: var(--sizes-smaller-line-height);
 		}
 
 		::ng-deep .lu-select-value {
@@ -136,8 +136,9 @@
 			}
 
 			.chip {
-				height: var(--sizes-small-line-height);
-				line-height: var(--sizes-small-line-height);
+				height: var(--sizes-smaller-line-height);
+				line-height: var(--sizes-smaller-line-height);
+				font-size: var(--sizes-smaller-font-size);
 			}
 		}
 	}
@@ -230,7 +231,6 @@
 
 	// Multiple
 	:host(.mod-multiple) {
-		&.mod-multipleView:not(.mod-singleLine) {
 			.lu-select-value {
 				height: auto;
 				align-items: center;
@@ -241,7 +241,6 @@
 				white-space: normal;
 				margin-bottom: -0.25rem;
 			}
-		}
 	}
 
 	// STATES
@@ -255,6 +254,7 @@
 
 		.lu-select-value {
 			display: flex;
+			align-items: start;
 		}
 	}
 
