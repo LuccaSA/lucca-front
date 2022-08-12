@@ -35,6 +35,20 @@ const userName: string = this.userService.getCurrentUser();
 this.luTitleService.prependTitle(userName);
 ```
 
+You can also replace the first fragment using:
+
+```typescript
+const userName: string = this.userService.getOtherUser();
+this.luTitleService.overrideFirstTitlePart(userName);
+```
+
+Both `prependTitle` and `overrideFirstTitlePart` can also be called using `Observable<string>` :
+
+```typescript
+const selectedUser$ = this.userStore.selected$;
+this.luTitleService.prependTitle(selectedUser$);
+```
+
 ## Quickstart
 
 You will need to:

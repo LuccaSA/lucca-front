@@ -29,3 +29,10 @@
 // $theme: _set($theme, "palettes", $palettes)
 // [LF NEXT] Créer directement des variables CSS.
 // $theme: _set($theme, "colors", $colors)
+
+// [LF NEXT] Vérifier le contenu de la boucle.
+@each $style in $styles {
+  .toast-#{$style} {
+    background-color: var(--palettes-$style-700);
+  }
+}
