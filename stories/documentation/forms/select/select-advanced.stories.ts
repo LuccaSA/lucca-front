@@ -9,7 +9,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'select-advanced-stories',
 	template: `
-	<label class="textfield mod-small">
+	<label class="textfield">
 		<lu-select
 			class="textfield-input"
 			placeholder="Select advanced"
