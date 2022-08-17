@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional } from '@angular/core';
+import { LuDisplayFullname, LuDisplayInitials, LuUserDisplayPipe } from '../display/index';
 import { ILuUser } from '../user.model';
-import { LuUserDisplayPipe, LuDisplayInitials, LuDisplayFullname } from '../display/index';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -18,6 +18,7 @@ export class LuUserPictureComponent {
 	 * It is set to 'LF' by default
 	 */
 	@Input()
+	@Optional()
 	set displayFormat(displayFormat: LuDisplayInitials) {
 		this._displayFormat = displayFormat;
 		this._changeDetector.markForCheck();
