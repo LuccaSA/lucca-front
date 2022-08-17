@@ -5,7 +5,7 @@ import { bob, squidwards } from '../user.mocks';
 
 @Component({
 	selector: 'user-picture-stories',
-	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat"></lu-user-picture>`,
+	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture"></lu-user-picture>`,
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
