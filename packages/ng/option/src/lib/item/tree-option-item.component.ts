@@ -1,5 +1,19 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Inject, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ComponentFactoryResolver,
+	ContentChild,
+	ElementRef,
+	EventEmitter,
+	forwardRef,
+	Inject,
+	Input,
+	Output,
+	ViewChild,
+	ViewContainerRef,
+} from '@angular/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { LuTreeOptionItemIntl } from './tree-option-item.intl';
@@ -95,7 +109,8 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	constructor(@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
+	// eslint-disable-next-line @delagen/deprecation/deprecation
+	constructor(@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef, private _componentFactoryResolver: ComponentFactoryResolver) {
 		super();
 	}
 
@@ -105,9 +120,11 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._valueVCR.insert(evr);
 	}
 	private _renderChildren(children: ILuTree<T>[] = []) {
+		const factory = this._componentFactoryResolver.resolveComponentFactory(LuTreeOptionItemComponent);
 		this._childrenVCR.clear();
 		this.children = children.map((c) => {
-			const ref = this._childrenVCR.createComponent(LuTreeOptionItemComponent);
+			// eslint-disable-next-line @delagen/deprecation/deprecation
+			const ref = this._childrenVCR.createComponent(factory);
 			ref.instance._displayer = this._displayer;
 			ref.instance.tree = c;
 			return ref.instance as this; //yolo
