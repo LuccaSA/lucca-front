@@ -77,7 +77,7 @@
 
 @mixin framed {
 	margin-bottom: 0;
-	background-color: _color('white');
+	background-color: var(--colors-white-color);
 	padding: 0;
 	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
 	transition: background-color var(--commons-animations-durations-standard);
@@ -98,7 +98,7 @@
 		&:focus {
 			position: relative;
 			z-index: 1;
-			background-color: _color('white');
+			background-color: var(--colors-white-color);
 			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600));
 		}
 

@@ -30,8 +30,8 @@
 	}
 
 	&:active {
-		background-color: _color('grey', 200);
-		color: _color('grey', 800);
+		background-color: var(--palettes-grey-200);
+		color: var(--palettes-grey-800);
 		box-shadow: 0 0 0 1px var(--components-actionIcon-default-palette-500), 0 0 0 4px var(--components-actionIcon-default-palette-200);
 	}
 }
