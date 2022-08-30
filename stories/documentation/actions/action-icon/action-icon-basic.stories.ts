@@ -14,22 +14,22 @@ export default {
 			options: ['', 'mod-delete', 'mod-outlined', 'mod-invert'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 		loading: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		small: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -39,11 +39,11 @@ function getTemplate(args: ActionBasicStory): string {
 	const attributes = args.disabled ? `disabled="disabled"` : '';
 	const loading = args.loading ? `is-loading` : '';
 	const small = args.small ? `mod-small` : '';
-	let icon = "edit";
-	let tooltip = "Modifier";
+	let icon = 'edit';
+	let tooltip = 'Modifier';
 	if (args.mod === 'mod-delete') {
-		icon = "trash";
-		tooltip = "Supprimer";
+		icon = 'trash';
+		tooltip = 'Supprimer';
 	}
 
 	return `
@@ -52,21 +52,20 @@ function getTemplate(args: ActionBasicStory): string {
 		<span class="u-mask">Modifier</span>
 	</button>
 
-	`
+	`;
 }
 
 const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
 		}`,
-		args.mod === 'mod-invert'
-			? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }'
-			: ''
+		args.mod === 'mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { mod: '', loading: false, small: '', disabled: false };
+export const BasicAction = Template.bind({});
+BasicAction.args = { mod: '', loading: false, small: '', disabled: false };

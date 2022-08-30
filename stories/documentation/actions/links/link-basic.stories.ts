@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface LinkBasicStory {
-}
+interface LinkBasicStory {}
 
 export default {
 	title: 'Documentation/Actions/Link/Basic',
@@ -10,18 +9,19 @@ export default {
 function getTemplate(args: LinkBasicStory): string {
 	return `
 	<a href="#" class="link">Lien</a>
-	`
+	`;
 }
 
 const Template: Story<LinkBasicStory> = (args: LinkBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
 		}`,
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const BasicLink = Template.bind({});
+BasicLink.args = {};
