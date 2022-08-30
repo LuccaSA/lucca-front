@@ -7,6 +7,14 @@
 		"url": "git+https://github.com/LuccaSA/lucca-front.git"
 	},
 	"schematics": "./schematics/collection.json",
+	"ng-update": {
+		"migrations": "./schematics/migrations.json",
+		"packageGroup": [
+			"@lucca-front/ng",
+			"@lucca-front/scss",
+			"@lucca-front/icons"
+		]
+	},
 	"license": "MIT",
 	"public": true,
 	"keywords": [
@@ -18,11 +26,13 @@
 		"Sandy Goldscheider <sgoldscheider@lucca.fr>"
 	],
 	"peerDependencies": {
-		"@angular/common": "^13.0.0 || ^12.0.0",
-		"@angular/core": "^13.0.0 || ^12.0.0",
-		"@angular/cdk": "^13.0.0 || ^12.0.0",
-		"@lucca-front/icons": ">=8.0.0 <9.0.0",
-		"@lucca-front/scss": ">=8.0.0 <9.0.0",
+		"@angular/common": "^14.0.0",
+		"@angular/core": "^14.0.0",
+		"@angular/cdk": "^14.0.0",
+		"@lucca-front/icons": "*",
+		"@lucca-front/scss": "*",
+		"@types/dompurify": "^2.3.0",
+		"dompurify": "^2.3.0",
 		"rxjs": "^6.0.0 || ^7.0.0"
 	},
 	"bugs": {

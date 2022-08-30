@@ -1,0 +1,41 @@
+@mixin hover {
+	background-color: var(--palettes-grey-50);
+	color: var(--palettes-grey-700);
+}
+
+@mixin focus {
+	background-color: var(--palettes-grey-50);
+	color: var(--palettes-grey-700);
+	box-shadow: 0 0 0 4px var(--palettes-100, var(--components-tableOfContent-default-palette-100)), inset 0 0 0 1px var(--palettes-300, var(--components-tableOfContent-default-palette-300));
+}
+
+@mixin active {
+	background-color: var(--palettes-grey-100);
+	color: var(--palettes-grey-700);
+	box-shadow: 0 0 0 4px var(--palettes-200, var(--components-tableOfContent-default-palette-200)), inset 0 0 0 1px var(--palettes-400, var(--components-tableOfContent-default-palette-400));
+}
+
+@mixin isActive {
+	background-color: var(--palettes-50, var(--components-tableOfContent-default-palette-50));
+	color: var(--palettes-700, var(--components-tableOfContent-default-palette-700));
+}
+
+@mixin isActiveHover {
+	background-color: var(--palettes-100, var(--components-tableOfContent-default-palette-100));
+}
+
+@mixin isActiveFocus {
+	background-color: var(--palettes-100, var(--components-tableOfContent-default-palette-100));
+	box-shadow: 0 0 0 4px var(--palettes-200, var(--components-tableOfContent-default-palette-200)), inset 0 0 0 1px var(--palettes-400, var(--components-tableOfContent-default-palette-400));
+}
+
+@mixin isActiveActive {
+	background-color: var(--palettes-200, var(--components-tableOfContent-default-palette-200));
+	box-shadow: 0 0 0 4px var(--palettes-300, var(--components-tableOfContent-default-palette-300)), inset 0 0 0 1px var(--palettes-500, var(--components-tableOfContent-default-palette-500));
+	color: var(--palettes-grey-700);
+}
+
+@mixin disabled {
+	color: var(--palettes-grey-500);
+	pointer-events: none;
+}

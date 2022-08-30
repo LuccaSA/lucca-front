@@ -21,7 +21,7 @@ function getTemplate(args: BoxKillableStory): string {
 	return `
 	<div class="box ${grey}">
 	    <div class="box-close">
-	        <button class="actionIcon">
+	        <button type="button" class="actionIcon">
 	            <span aria-hidden="true" class="lucca-icon">cross</span>
 	            <span class="u-mask">Close</span>
 	        </button>

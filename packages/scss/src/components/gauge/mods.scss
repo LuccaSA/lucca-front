@@ -1,0 +1,28 @@
+@mixin thin {
+	height: var(--components-gauge-thin-height);
+
+	.gauge-bar {
+		border-bottom-width: var(--components-gauge-thin-height);
+	}
+}
+
+@mixin vertical {
+	width: var(--components-gauge-height);
+	height: 100%;
+
+	.gauge-bar {
+		border-left-width: var(--components-gauge-height);
+		border-bottom-width: 0;
+		border-left-style: solid;
+	}
+}
+
+@mixin verticalThin {
+	@include vertical;
+
+	width: var(--components-gauge-thin-height);
+
+	.gauge-bar {
+		border-left-width: var(--components-gauge-thin-height);
+	}
+}

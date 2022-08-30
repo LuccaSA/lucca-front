@@ -1,7 +1,7 @@
 import { Component as AngularComponent } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuDropdownModule, LuDropdownPanelComponent } from '@lucca-front/ng/dropdown';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-import { LuDropdownModule, LuDropdownPanelComponent } from '../../../../packages/ng/dropdown/src';
 
 @AngularComponent({
 	selector: 'dropdown-component-stories',
@@ -44,7 +44,7 @@ const code = `
 
   /* Vous pouvez également utiliser un <button></button> au lieu d'un <a></a>. */
   <li class="lu-dropdown-options-item">
-    <button luDropdownItem class="lu-dropdown-options-item-action">Button 4</button>
+    <button type="button" luDropdownItem class="lu-dropdown-options-item-action">Button 4</button>
   </li>
 
 </lu-dropdown>
@@ -57,6 +57,7 @@ Component.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code,
 		}
 	}

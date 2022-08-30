@@ -1,0 +1,19 @@
+@mixin required {
+	color: var(--palettes-error-700);
+	display: inline-block;
+	margin-left: 0.2em;
+
+	@supports (content: '*' / '') {
+		content: '*' / '';
+	}
+
+	@supports not (content: '*' / '') {
+		content: '*';
+	}
+}
+
+@function fakeBorderOverlay($fakeBorderOverlayColor: currentColor, $fakeBorderOverlayWidth: 1px) {
+	@return ($fakeBorderOverlayWidth * -1) 0 $fakeBorderOverlayColor, 0 ($fakeBorderOverlayWidth * -1) $fakeBorderOverlayColor,
+		($fakeBorderOverlayWidth * -1) ($fakeBorderOverlayWidth * -1) $fakeBorderOverlayColor,
+		($fakeBorderOverlayWidth * -1) ($fakeBorderOverlayWidth * -1) $fakeBorderOverlayColor inset;
+}

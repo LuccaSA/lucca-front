@@ -1,0 +1,50 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/form';
+
+@mixin disabled {
+	~ .checkbox-label {
+		color: var(--palettes-grey-500);
+		cursor: default;
+
+		&::before {
+			border: 2px solid var(--palettes-grey-500);
+			box-shadow: none;
+		}
+	}
+
+	&:checked ~ .checkbox-label {
+		&::before {
+			color: var(--palettes-grey-500);
+			background-color: var(--palettes-grey-200);
+			border: 2px solid var(--palettes-grey-200);
+		}
+	}
+}
+
+@mixin incomplete {
+	~ .checkbox-mixed ~ .checkbox-label,
+	~ .checkbox-label {
+		&::before {
+			@include icon.generate('partial');
+		}
+	}
+}
+
+@mixin required {
+	~ .checkbox-label,
+	.checkbox-label {
+		&:not(:empty) {
+			&::after {
+				@include form.required;
+			}
+		}
+	}
+}
+
+@mixin state($state) {
+	.checkbox-label {
+		&::before {
+			border-color: var(--palettes-#{$state}-600);
+		}
+	}
+}

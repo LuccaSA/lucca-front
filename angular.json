@@ -38,9 +38,7 @@
             "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "packages/scss/src/overrides",
-                "packages/ng/style/overrides",
-                "packages/ng/style"
+                "packages/ng/styles"
               ]
             },
             "compodoc": false,
@@ -54,9 +52,8 @@
             "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "packages/scss/src/overrides",
-                "packages/ng/style/overrides",
-                "packages/ng/style"
+                "packages/ng/styles",
+                "node_modules"
               ]
             },
             "compodoc": false
@@ -64,6 +61,5 @@
         }
       }
     }
-  },
-  "defaultProject": "storybook"
+  }
 }

@@ -1,0 +1,19 @@
+@mixin indeterminate {
+	@keyframes indeterminate {
+		0% {
+			left: -35%;
+			right: 100%;
+		}
+
+		100% {
+			left: 100%;
+			right: -35%;
+		}
+	}
+
+	.progress-bar {
+		animation: indeterminate var(--components-progress-duration) infinite;
+		width: 30%;
+		animation-timing-function: linear;
+	}
+}

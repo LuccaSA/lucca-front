@@ -1,0 +1,129 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+:root {
+	--components-options-item-padding-vertical: 0.5rem;
+	--components-options-item-padding-horizontal: 0.5rem;
+	--components-options-item-multiple-padding: 2rem;
+	--components-options-item-icon-color: var(--palettes-grey-800);
+
+	--components-options-checkbox-left: 0.5rem;
+	--components-options-checkbox-size: 1rem;
+	--components-options-checkbox-color: var(--palettes-primary-700);
+	--components-options-checkbox-border-radius: var(--commons-border-radius);
+	--components-options-checkbox-border-color: var(--palettes-grey-700);
+	--components-options-establishment-multiple-padding: var(--spacings-standard);
+}
+
+@mixin optionItemStyle {
+	:host {
+		display: block;
+	}
+
+	.optionItem {
+		position: relative;
+	}
+
+	.optionItem-value {
+		display: block;
+		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+		transition: background-color 50ms;
+		cursor: pointer;
+
+		&.is-selected {
+			background-color: var(--palettes-primary-50);
+		}
+
+		&:hover,
+		&.is-highlighted,
+		&.is-focus {
+			background-color: var(--palettes-grey-50);
+		}
+	}
+
+	:host-context(.lu-select-value) {
+		.optionItem-value {
+			padding: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			&:hover,
+			&.is-focus,
+			&.is-highlighted {
+				background-color: inherit;
+			}
+		}
+	}
+
+	:host-context(.mod-multiple) {
+		.optionItem-value {
+			position: relative;
+			padding-left: var(--components-options-item-multiple-padding);
+
+			&::after,
+			&::before {
+				display: block;
+				position: absolute;
+				left: var(--components-options-checkbox-left);
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			&::before {
+				content: '';
+				border-radius: var(--components-options-checkbox-border-radius);
+				box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
+				display: block;
+				height: var(--components-options-checkbox-size);
+				transition: all 100ms;
+				width: var(--components-options-checkbox-size);
+			}
+
+			&::after {
+				@include icon.generate('tick');
+
+				color: transparent;
+				font-size: 1rem;
+				line-height: var(--components-options-checkbox-size);
+				padding-top: 0.05rem;
+				position: absolute;
+				text-align: center;
+				transform: translateY(-50%) scale(0);
+				transition: all 100ms;
+				width: var(--components-options-checkbox-size);
+			}
+
+			&.is-selected {
+				&::before {
+					background-color: var(--components-options-checkbox-color);
+					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
+				}
+
+				&::after {
+					color: var(--colors-white-color);
+					transform: translateY(-50%) scale(1);
+				}
+			}
+
+			&:hover {
+				&::before {
+					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
+				}
+			}
+		}
+
+		&.establishmentOption {
+			.optionItem-value {
+				position: relative;
+				padding-left: calc(
+					2 * var(--components-options-item-padding-horizontal) + var(--components-options-checkbox-size) + var(--spacings-smaller)
+				);
+			}
+			.optionItem-value {
+				&::before,
+				&::after {
+					left: calc(2 * var(--components-options-item-padding-horizontal));
+				}
+			}
+		}
+	}
+}

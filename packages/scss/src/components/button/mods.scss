@@ -1,0 +1,196 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin size {
+	font-size: var(--components-button-font-size);
+	line-height: var(--components-button-line-height);
+	padding: var(--components-button-padding);
+
+	.lucca-icon {
+		font-size: var(--components-button-icon-font-size);
+		line-height: var(--components-button-icon-line-height);
+	}
+}
+
+@mixin small {
+	@include size;
+
+	--components-button-font-size: var(--components-button-small-font-size);
+	--components-button-line-height: var(--components-button-small-line-height);
+	--components-button-padding: var(--components-button-small-padding);
+	--components-button-icon-font-size: 1rem;
+	--components-button-icon-line-height: 1;
+}
+
+@mixin smaller {
+	@include size;
+
+	--components-button-font-size: var(--components-button-smaller-font-size);
+	--components-button-line-height: var(--components-button-smaller-line-height);
+	--components-button-padding: var(--components-button-smaller-padding);
+	--components-button-icon-font-size: 0.875rem;
+	--components-button-icon-line-height: 1;
+}
+
+@mixin text {
+	background-color: transparent;
+	box-shadow: none;
+	color: var(--palettes-700, var(--palettes-grey-700));
+	padding: var(--components-button-text-padding);
+
+	&:not([disabled], .is-disabled) {
+		&:hover {
+			box-shadow: none;
+			background-color: var(--palettes-50, var(--palettes-grey-50));
+			color: var(--palettes-700, var(--palettes-grey-700));
+		}
+
+		&:focus {
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+			background: var(--palettes-50, var(--palettes-grey-50));
+			outline: none;
+		}
+
+		&:active {
+			background-color: var(--palettes-100, var(--palettes-grey-100));
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
+		}
+	}
+}
+
+@mixin outlined {
+	&:not([disabled], .is-disabled) {
+		color: var(--palettes-700, var(--palettes-grey-700));
+		box-shadow: inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+		background-color: var(--colors-white-color);
+		border-color: var(--palettes-200, var(--palettes-grey-200));
+
+		&:hover {
+			color: var(--palettes-700, var(--palettes-grey-700));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
+			box-shadow: var(--commons-box-shadow-xs), inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+		}
+
+		&:focus {
+			color: var(--palettes-700, var(--palettes-grey-700));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
+			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
+			outline: none;
+		}
+
+		&:active {
+			color: var(--palettes-700, var(--palettes-grey-700));
+			background-color: var(--palettes-200, var(--palettes-grey-200));
+			box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
+		}
+	}
+
+	.button-counter {
+		background-color: var(--palettes-grey-300);
+		color: var(--palettes-grey-800);
+	}
+}
+
+@mixin block {
+	width: 100%;
+}
+
+@mixin icon {
+	align-items: center;
+	display: inline-flex;
+	gap: var(--spacings-smaller);
+	padding-left: var(--spacings-small);
+	padding-right: var(--spacings-small);
+	justify-content: center;
+
+	@at-root {
+		.button-icon {
+			height: 1.5rem;
+			line-height: 1.5rem;
+			font-size: 1.5rem;
+			transform: translateX(-0.2rem);
+			vertical-align: bottom;
+		}
+	}
+}
+
+@mixin iconSmall {
+	.button-icon {
+		font-size: var(--components-button-small-font-size);
+		height: var(--components-button-small-line-height);
+		line-height: var(--components-button-small-line-height);
+	}
+}
+
+@mixin iconSmaller {
+	gap: var(--spacings-smallest);
+
+	.button-icon {
+		font-size: var(--components-button-smaller-font-size);
+		height: var(--components-button-smaller-line-height);
+		line-height: var(--components-button-smaller-line-height);
+	}
+}
+
+@mixin invert {
+	color: var(--colors-white-color);
+
+	&:not([disabled], .is-disabled) {
+		&:hover,
+		&:focus {
+			background-color: rgba(255, 255, 255, 0.1);
+			color: var(--colors-white-color);
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 4px rgba(var(--colors-grey-900-rgb), 0.1);
+		}
+	}
+}
+
+@mixin more {
+	padding: 0 !important;
+	text-align: center;
+	min-width: 2rem;
+
+	&::before {
+		@include icon.generate('arrow_south');
+
+		height: 0;
+		vertical-align: text-top;
+	}
+
+	.mod-small {
+		width: 1.75rem;
+	}
+}
+
+@mixin counter {
+	padding-left: var(--spacings-small);
+	padding-right: var(--spacings-small);
+
+	@at-root {
+		.button-counter {
+			background-color: var(--palettes-500, var(--palettes-primary-500));
+			border-radius: 1rem;
+			display: inline-block;
+			font-size: var(--sizes-smaller-font-size);
+			font-weight: 600;
+			height: 1.5rem;
+			min-width: 1.5rem;
+			margin-left: var(--spacings-smaller);
+			padding: 0 var(--spacings-smallest);
+			vertical-align: bottom;
+		}
+	}
+}
+
+@mixin counterSmall {
+	.button-counter {
+		height: 1rem;
+		min-width: 1rem;
+	}
+}

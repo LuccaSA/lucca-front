@@ -1,8 +1,0 @@
-$gauge: (
-  default-palette: _getMap("palettes.primary"),
-  height: 10px,
-  thin: (
-    height: 4px
-  )
-);
-$theme: _set($theme, "components.gauge", $gauge);

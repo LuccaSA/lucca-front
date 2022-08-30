@@ -1,0 +1,16 @@
+@mixin clickable {
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+@mixin outlined {
+	color: var(--palettes-grey-600);
+	background-color: var(--colors-white-color);
+	border-color: var(--palettes-grey-300);
+	border-width: var(--commons-divider-width);
+	border-style: solid;
+}

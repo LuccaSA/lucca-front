@@ -1,0 +1,164 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+:root {
+	--components-popup-panel-background-color: var(--colors-white-color);
+	--components-popup-size-small: 32rem;
+	--components-popup-size-medium: 42rem;
+	--components-popup-size-large: 60rem;
+	--components-popup-padding-horizontal: 2rem;
+	--components-popup-padding-vertical: 1rem;
+}
+
+.lu-popup-panel {
+	box-shadow: var(--commons-elevations-elevation-3);
+	position: relative;
+	background-color: var(--components-popup-panel-background-color);
+	border-radius: var(--commons-border-radius);
+	width: var(--components-popup-size-medium);
+	max-width: 95%;
+	max-height: 90vh;
+	overflow: auto;
+	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
+
+	&.mod-small,
+	&.size-small {
+		width: var(--components-popup-size-small);
+	}
+
+	&.mod-large,
+	&.size-large {
+		width: var(--components-popup-size-large);
+	}
+}
+
+.lu-modal-panel-inner {
+	display: flex;
+	flex-flow: column;
+	max-height: 90vh;
+}
+
+.lu-modal-header {
+	padding: var(--components-popup-padding-vertical) 4rem var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
+	position: relative;
+}
+
+.lu-modal-header-title {
+	margin: 0;
+}
+
+.lu-modal-header-close {
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	padding: 0.5rem;
+	height: 3rem;
+	width: 3rem;
+	position: absolute;
+	right: 0.6rem;
+	top: 0.6rem;
+	border-radius: 50%;
+	transition: background var(--commons-animations-durations-fast) ease;
+
+	.lucca-icon {
+		font-size: 1.5rem;
+		color: var(--palettes-grey-700);
+	}
+
+	&:hover,
+	&:focus {
+		background-color: var(--palettes-primary-100);
+	}
+}
+
+.lu-modal-content {
+	padding: 0 var(--components-popup-padding-horizontal);
+	overflow: auto;
+	height: auto;
+
+	// Trick to force Firefox to have a bottom padding
+	&:after {
+		content: '';
+		display: block;
+		padding-bottom: var(--components-popup-padding-vertical);
+	}
+
+	&.mod-noPadding {
+		padding: 0;
+
+		&:after {
+			padding-bottom: 0;
+		}
+	}
+}
+
+.lu-modal-footer {
+	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
+	padding: var(--spacings-smaller) var(--spacings-small) var(--spacings-smaller) var(--components-popup-padding-horizontal);
+	display: flex;
+	margin-top: auto;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+@include media.smallerThan('xxs') {
+	.lu-popup-panel {
+		border-radius: 0;
+		max-width: none;
+		max-height: 100vh;
+		width: 100%;
+		width: stretch;
+		height: 100vh;
+		height: stretch;
+	}
+
+	.lu-modal-panel-inner {
+		max-height: 100vh;
+		max-height: stretch;
+		height: 100vh;
+		height: stretch;
+	}
+}
+
+.lu-popup-panel {
+	&.mod-commInApp {
+		width: 30rem;
+
+		.lu-modal-content {
+			text-align: center;
+
+			&::after {
+				content: none;
+			}
+		}
+		.lu-modal-content-title {
+			color: var(--palettes-grey-800);
+			font-size: var(--sizes-bigger-font-size);
+			margin-top: 2.5rem;
+		}
+		.button {
+			margin-bottom: 2.5rem;
+		}
+		.modal-visual {
+			margin: 4.5rem -2rem 0 -2rem;
+		}
+
+		.modal-visual-illustration {
+			vertical-align: bottom;
+		}
+
+		.lu-modal-footer {
+			display: none;
+		}
+	}
+}
+
+@keyframes popup {
+	0% {
+		transform: scale(0.7);
+	}
+
+	100% {
+		transform: none;
+	}
+}

@@ -1,0 +1,16 @@
+@use 'exports' as *;
+
+.breadcrumbs {
+	@include vars;
+	@include component;
+
+	&.mod-compact {
+		@include compact;
+	}
+}
+
+.breadcrumbs-list-item-action {
+	&:is(.is-active, .active, [aria-current='page']) {
+		@include active;
+	}
+}

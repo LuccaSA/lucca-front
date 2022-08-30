@@ -1,0 +1,184 @@
+@mixin fadeIn {
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+}
+
+@mixin scaleIn {
+	@keyframes scaleIn {
+		0% {
+			transform: scale(0);
+		}
+
+		100% {
+			transform: scale(1);
+		}
+	}
+}
+
+@mixin scaleInTop {
+	@keyframes scaleInTop {
+		0% {
+			transform-origin: top center;
+			transform: scale(1, 0);
+		}
+
+		100% {
+			transform-origin: top center;
+			transform: scale(1, 1);
+		}
+	}
+}
+
+@mixin scaleInRight {
+	@keyframes scaleInRight {
+		0% {
+			transform-origin: right center;
+			transform: scale(0, 1);
+		}
+
+		100% {
+			transform-origin: right center;
+			transform: scale(1, 1);
+		}
+	}
+}
+
+@mixin scaleInBottom {
+	@keyframes scaleInBottom {
+		0% {
+			transform-origin: bottom center;
+			transform: scale(1, 0);
+		}
+
+		100% {
+			transform-origin: bottom center;
+			transform: scale(1, 1);
+		}
+	}
+}
+
+@mixin scaleInLeft {
+	@keyframes scaleInLeft {
+		0% {
+			transform-origin: left center;
+			transform: scale(0, 1);
+		}
+
+		100% {
+			transform-origin: left center;
+			transform: scale(1, 1);
+		}
+	}
+}
+
+@mixin slideIn {
+	@keyframes slideIn {
+		0% {
+			opacity: 0;
+			transform: translate(0, calc(-1 * var(--commons-animations-translate)));
+		}
+
+		100% {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+	}
+}
+
+@mixin slideInRight {
+	@keyframes slideInRight {
+		0% {
+			transform: translate(var(--commons-animations-translate), 0);
+			opacity: 0;
+		}
+
+		100% {
+			transform: translate(0, 0);
+			opacity: 1;
+		}
+	}
+}
+
+@mixin slideInBottom {
+	@keyframes slideInBottom {
+		0% {
+			transform: translate(0, var(--commons-animations-translate));
+			opacity: 0;
+		}
+
+		100% {
+			transform: translate(0, 0);
+			opacity: 1;
+		}
+	}
+}
+
+@mixin slideInLeft {
+	@keyframes slideInLeft {
+		0% {
+			transform: translate(calc(-1 * var(--commons-animations-translate)), 0);
+			opacity: 0;
+		}
+
+		100% {
+			transform: translate(0, 0);
+			opacity: 1;
+		}
+	}
+}
+
+@mixin pulse {
+	@keyframes pulse {
+		0% {
+			transform: scale(1);
+			opacity: 1;
+		}
+
+		50% {
+			transform: scale(1.1);
+			opacity: 0.8;
+		}
+
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+}
+
+@mixin shake {
+	@keyframes shake {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 0);
+		}
+
+		20%,
+		60% {
+			transform: translate3d(-10px, 0, 0);
+		}
+
+		40%,
+		80% {
+			transform: translate3d(10px, 0, 0);
+		}
+	}
+}
+
+@mixin rotate {
+	@keyframes rotate {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}

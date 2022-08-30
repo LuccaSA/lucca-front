@@ -2,11 +2,10 @@
 @include selectInputStyle;
 
 .optionItem-groupKey {
-	padding: #{_component("options.item.padding-vertical", true)} #{_component("options.item.padding-horizontal", true)};
-	padding: #{_component("options.item.padding-vertical")} #{_component("options.item.padding-horizontal")};
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
 	margin: 0;
-	border-top: 1px solid _theme("commons.divider.color");
-	font-size: _theme("sizes.small.font-size");
+	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
+	font-size: var(--sizes-small-font-size);
 	width: 100%;
 	text-align: left;
 	text-decoration: underline;

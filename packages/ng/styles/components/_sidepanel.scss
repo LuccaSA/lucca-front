@@ -1,0 +1,48 @@
+:root {
+	--components-sidepanel-size-small: 40rem;
+	--components-sidepanel-size-medium: 55rem;
+	--components-sidepanel-size-large: 70rem;
+	--components-sidepanel-translate: 3rem;
+}
+
+.lu-popup-panel {
+	&.mod-sidepanel {
+		position: fixed !important;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: var(--components-sidepanel-size-small);
+		max-width: 100%;
+		max-height: 100vh;
+		border-radius: 0;
+		animation-name: sidepanel;
+		transform-origin: center center;
+
+		&.mod-medium,
+		&.size-medium {
+			width: var(--components-sidepanel-size-medium);
+		}
+
+		&.mod-large,
+		&.size-large {
+			width: var(--components-sidepanel-size-large);
+		}
+	}
+}
+
+.lu-sidepanel-panel-inner {
+	display: flex;
+	overflow: auto;
+	height: 100%;
+	flex-flow: column;
+}
+
+@keyframes sidepanel {
+	0% {
+		transform: translate(var(--components-sidepanel-translate), 0);
+	}
+
+	100% {
+		transform: translate(0, 0);
+	}
+}

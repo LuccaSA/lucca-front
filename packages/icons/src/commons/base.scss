@@ -1,0 +1,25 @@
+@use '@lucca-front/icons/src/commons/config';
+
+body {
+	-moz-osx-font-smoothing: grayscale;
+
+	@at-root {
+		@font-face {
+			font-family: config.$font-name;
+			font-style: normal;
+			font-weight: 400;
+			src: url('#{config.$font-path}.eot');
+			src: url('#{config.$font-path}.eot'), url('#{config.$font-path}.svg'), url('#{config.$font-path}.woff'),
+				url('#{config.$font-path}.ttf');
+
+			letter-spacing: normal;
+			-webkit-font-feature-settings: 'liga';
+			-moz-font-feature-settings: 'liga=1';
+			-moz-font-feature-settings: 'liga';
+			-ms-font-feature-settings: 'liga' 1;
+			font-feature-settings: 'liga';
+			-webkit-font-variant-ligatures: discretionary-ligatures;
+			font-variant-ligatures: discretionary-ligatures;
+		}
+	}
+}

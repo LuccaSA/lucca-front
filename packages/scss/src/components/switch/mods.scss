@@ -1,0 +1,36 @@
+@mixin inline {
+	display: inline-block;
+	margin-right: 1.5rem;
+}
+
+@mixin small {
+	.switch-label {
+		font-size: var(--sizes-small-font-size);
+		line-height: var(--sizes-small-line-height);
+		padding: 0;
+		padding-left: calc(1.75rem - 4px + var(--spacings-smaller));
+
+		&::before {
+			margin-top: var(--components-switch-small-top);
+			height: var(--sizes-small-font-size);
+			padding-left: var(--components-switch-small-icon-right);
+			width: calc(1.75rem - 4px);
+		}
+
+		&::after {
+			margin-top: var(--components-switch-small-top);
+			height: calc(var(--sizes-small-font-size) - 4px);
+			width: calc(var(--sizes-small-font-size) - 4px);
+		}
+	}
+
+	.switch-input:checked ~ .switch-label {
+		&::before {
+			padding-left: var(--components-switch-small-icon-left);
+		}
+
+		&::after {
+			left: calc(var(--sizes-small-font-size) - 2px);
+		}
+	}
+}

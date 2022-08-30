@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.label {
+	@include vars;
+	@include component;
+
+	&.mod-number {
+		@include number;
+
+		&.mod-small {
+			@include numberSmall;
+		}
+
+		&.mod-smaller {
+			@include numberSmaller;
+		}
+	}
+
+	&.mod-icon {
+		@include icon;
+	}
+}

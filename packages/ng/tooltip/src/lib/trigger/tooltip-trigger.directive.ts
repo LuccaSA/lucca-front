@@ -1,14 +1,20 @@
-import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Injector, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
-import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverTarget } from '@lucca-front/ng/popover';
+import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
+import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverScrollStrategy, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
 	selector: '[luTooltip]',
 })
 export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-	@Input('luTooltip') set tooltipContent(c: string) {
-		this.panel.content = c;
+	@Input('luTooltip') set tooltipContent(c: string | SafeHtml) {
+		if (this.panel) {
+			this.panel.content = c;
+		}
+
+		this._tooltipContent = c;
 	}
 	/** when trigger = hover, delay before the popover panel appears, default 300ms */
 	@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) {
@@ -28,6 +34,10 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 
 	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) {
 		this.target.position = pos;
+	}
+
+	@Input('luTooltipWhenEllipsis') public set inputWhenEllipsis(we: boolean) {
+		this.whenEllipsis = we;
 	}
 
 	// FIXME output native
@@ -69,13 +79,10 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		return this._panelId;
 	}
 
-	constructor(
-		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef<HTMLElement>,
-		protected override _viewContainerRef: ViewContainerRef,
-		componentFactoryResolver: ComponentFactoryResolver,
-		injector: Injector,
-	) {
+	protected override _portal: ComponentPortal<LuTooltipPanelComponent>;
+	protected _tooltipContent: string | SafeHtml = '';
+
+	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
@@ -84,9 +91,6 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this.target.position = 'above';
 		this.enterDelay = 300;
 		this.leaveDelay = 100;
-
-		const factory = componentFactoryResolver.resolveComponentFactory(LuTooltipPanelComponent);
-		this.panel = factory.create(injector).instance;
 
 		this._handleTabindex = this._shouldHandleTabindex();
 
@@ -110,6 +114,27 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 	}
 	protected _emitClose(): void {
 		this.onClose.emit();
+	}
+
+	protected override _createOverlay(): OverlayRef {
+		if (!this._overlayRef) {
+			this._portal = new ComponentPortal(LuTooltipPanelComponent, this._viewContainerRef);
+			const config = this._getOverlayConfig();
+			this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
+			this._overlayRef = this._overlay.create(config);
+		}
+
+		return this._overlayRef;
+	}
+
+	protected override _attachPortalToOverlay(): void {
+		const componentRef = this._overlayRef.attach(this._portal);
+		this._panel = componentRef.instance;
+		this._panel.content = this._tooltipContent;
+	}
+
+	protected override _getPanelScrollStrategy(): LuPopoverScrollStrategy {
+		return 'close';
 	}
 
 	private _shouldHandleTabindex(): boolean {

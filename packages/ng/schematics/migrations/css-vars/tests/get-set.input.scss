@@ -1,0 +1,32 @@
+.mod-outlined {
+  background-color: _safeGet($palette, '100');
+  color: _safeGet($palette, '800');
+  left: -_component('navSide.width');
+  margin-bottom: _theme('spacings.smaller') * -1;
+  margin-top: calc(var(--spacings-smaller) * -1);
+  background: linear-gradient(
+    _theme('spacings.smaller') * -1,
+    -1 * _theme('spacings.smaller'),
+    _theme('spacings.smaller')
+  );
+}
+
+.tag {
+  @each $name, $palette in _getMap('marks') {
+    &.palette-mark#{to-upper-case($name)} {
+      background-color: _safeGet($palette, '800');
+      color: white;
+    }
+  }
+
+  left: _component('navSide.width');
+}
+
+$theme: _set($theme, "palettes", $palettes);
+$theme: _set($theme, "colors", $colors);
+
+@each $style in $styles {
+  .toast-#{$style} {
+    background-color: _color($style);
+  }
+}

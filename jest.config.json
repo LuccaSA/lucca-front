@@ -1,16 +1,15 @@
 {
-  "preset": "jest-preset-angular",
-  "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
-  "collectCoverage": false,
-  "testPathIgnorePatterns": [
-    "/node_modules/"
-  ],
-  "watchPathIgnorePatterns": [
-    "/node_modules/"
-  ],
-  "modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
-  "moduleNameMapper": {
-    "^@lucca-front/ng/(.*)": "packages/ng/$1/src/public-api.ts"
-  },
-  "roots": ["<rootDir>/packages/ng"]
+	"preset": "jest-preset-angular",
+	"setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
+	"globalSetup": "jest-preset-angular/global-setup",
+	"collectCoverage": false,
+	"testPathIgnorePatterns": ["<rootDir>/node_modules/"],
+	"watchPathIgnorePatterns": ["/node_modules/"],
+	"modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
+	"moduleNameMapper": {
+		"^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/src/public-api.ts",
+		"^@/stories/(.*)$": "<rootDir>/stories/documentation/$1",
+		"^(\\.{1,2}/.*)\\.js$": "$1"
+	},
+	"roots": ["<rootDir>/packages/ng", "<rootDir>/stories/documentation"]
 }

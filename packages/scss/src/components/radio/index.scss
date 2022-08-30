@@ -1,0 +1,25 @@
+@use 'exports' as *;
+
+.radio {
+	@include vars;
+	@include component;
+
+	&.mod-inline {
+		@include inline;
+	}
+
+	&.mod-small {
+		@include small;
+	}
+}
+
+.radio-input {
+	&[disabled],
+	&[read-only] {
+		@include disabled;
+
+		&:checked {
+			@include disabledChecked;
+		}
+	}
+}

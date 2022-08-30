@@ -11,12 +11,12 @@ export default {
 		small: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -39,7 +39,7 @@ function getTemplate(args: RadiosButtonsBasicStory): string {
 			<span class="radioButtons-item-label">Bouton 3</span>
 		</label>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<RadiosButtonsBasicStory> = (args: RadiosButtonsBasicStory) => ({

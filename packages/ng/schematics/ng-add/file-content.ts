@@ -2,7 +2,7 @@ export const stylesScss = `
 $noCssVar: true;
 
 @import '~@lucca-front/scss/src/main.overridable'
-	, '~@lucca-front/ng/style/main.overridable.scss'
+	, '~@lucca-front/ng/src/main.overridable.scss'
 	, 'scss/shame';
 
 :root {

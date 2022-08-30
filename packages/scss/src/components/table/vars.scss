@@ -1,0 +1,8 @@
+@mixin vars {
+	--components-table-padding: 0.5rem 1rem;
+	--components-table-font-size: 1rem;
+	--components-table-line-height: 1.5rem;
+	--components-table-zebra-background: #f5f5f5;
+	--components-table-hover-background: var(--palettes-primary-50);
+	--components-table-card-padding: 1.5rem;
+}

@@ -1,0 +1,210 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/loading';
+
+@mixin hover {
+	&::placeholder {
+		color: var(--palettes-grey-500);
+	}
+}
+
+@mixin focus {
+	&::placeholder {
+		color: var(--palettes-grey-200);
+	}
+}
+
+@mixin required {
+	.textfield-label,
+	.radiosfield-label,
+	.checkboxesfield-label,
+	~ .textfield-label,
+	~ .radiosfield-label,
+	~ .checkboxesfield-label {
+		&:not(:empty) {
+			&::after {
+				@include form.required;
+			}
+		}
+	}
+}
+
+@mixin inputDisabled {
+	color: var(--palettes-grey-500);
+	cursor: not-allowed;
+}
+
+@mixin inputState($state) {
+	&:not(:disabled, .is-disabled) {
+		background-color: var(--palettes-#{$state}-50);
+
+		~ .textfield-label,
+		~ .checkboxesfield-label,
+		~ .radiosfield-label,
+		~ .textfield-suffix,
+		~ .checkboxesfield-suffix,
+		~ .radiosfield-suffix {
+			color: var(--palettes-#{$state}-700);
+		}
+
+		&::placeholder {
+			color: var(--palettes-#{$state}-400);
+		}
+
+		&:focus,
+		&.is-focused {
+			~ .textfield-label,
+			~ .checkboxesfield-label,
+			~ .radiosfield-label {
+				color: var(--palettes-#{$state}-700);
+			}
+		}
+
+		&:focus {
+			background-color: white;
+			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
+
+			&::placeholder {
+				color: var(--palettes-#{$state}-400);
+			}
+		}
+
+		@if ($state == 'error') {
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
+		}
+	}
+}
+
+@mixin loading {
+	@include loading.spinner(1rem);
+
+	&::before,
+	&::after {
+		content: '' !important;
+		right: 0.5rem !important;
+		bottom: 0.7rem !important;
+		z-index: 2 !important;
+		left: inherit !important;
+		top: inherit !important;
+		position: absolute !important;
+	}
+
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxesfield-input {
+		padding-right: 2rem;
+	}
+}
+
+@mixin success {
+	@keyframes success {
+		0% {
+			opacity: 0;
+			transform: scale(0);
+		}
+
+		5% {
+			opacity: 1;
+			transform: scale(1.2);
+		}
+
+		7% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		93% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		95% {
+			opacity: 1;
+			transform: scale(1.2);
+		}
+
+		100% {
+			opacity: 0;
+			transform: scale(0);
+		}
+	}
+
+	&::before {
+		@include icon.generate('tick_bold');
+
+		color: var(--palettes-success-700);
+		position: absolute;
+		animation-fill-mode: forwards;
+		animation-name: success;
+		animation-duration: 3s;
+		border-radius: 50%;
+		bottom: 0.85rem;
+		font-size: 1.2rem;
+		height: 1rem;
+		right: 0.4rem;
+		z-index: 1;
+	}
+
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxesfield-input {
+		padding-right: 2rem;
+	}
+}
+
+@mixin error {
+	.textfield-label,
+	.radiosfield-label,
+	.checkboxesfield-label {
+		color: var(--palettes-error-700);
+	}
+
+	.textfield-input,
+	.radiosfield-input,
+	.checkboxesfield-input {
+		@include state('error');
+	}
+}
+
+@mixin state($state) {
+	&:not(:disabled, .is-disabled) {
+		background-color: var(--palettes-#{$state}-50);
+
+		.textfield-label,
+		.radiosfield-label,
+		.checkboxesfield-label,
+		~ .textfield-suffix,
+		~ .radiosfield-suffix,
+		~ .checkboxesfield-suffix {
+			color: var(--palettes-#{$state}-700);
+		}
+
+		&::placeholder {
+			color: var(--palettes-#{$state}-400);
+		}
+
+		&:focus {
+			&::placeholder {
+				color: var(--palettes-#{$state}-300);
+			}
+		}
+
+		&:focus,
+		&.is-focused {
+			~ .textfield-label,
+			~ .radiosfield-label,
+			~ .checkboxesfield-label {
+				color: var(--palettes-#{$state}-700);
+			}
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
+			background-color: var(--colors-white-color);
+		}
+
+		@if $state == 'error' {
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
+		}
+	}
+}

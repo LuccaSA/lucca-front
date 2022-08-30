@@ -1,0 +1,41 @@
+@mixin component {
+	background-color: transparent;
+	border: 0;
+	border-radius: var(--commons-border-radius);
+	color: var(--palettes-700, var(--components-actionIcon-color));
+	height: 2.5rem;
+	width: 2.5rem;
+	transition: background-color var(--commons-animations-durations-fast) ease, color var(--commons-animations-durations-fast) ease;
+	vertical-align: middle;
+	text-decoration: none;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	& + & {
+		margin-left: 2px;
+	}
+
+	&:not([disabled], .is-disabled) {
+		&:hover {
+			background-color: var(--components-actionIcon-hover-background);
+			color: var(--components-actionIcon-hover-color);
+		}
+
+		&:focus {
+			background-color: var(--components-actionIcon-focus-background);
+			color: var(--components-actionIcon-focus-color);
+			outline: none;
+		}
+
+		&:active {
+			background-color: var(--components-actionIcon-default-palette-100);
+			color: var(--components-actionIcon-default-palette-800);
+		}
+	}
+
+	.lucca-icon {
+		font-size: 1.2rem;
+	}
+}

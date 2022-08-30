@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.gauge {
+	@include vars;
+	@include component;
+
+	&.mod-thin {
+		@include thin;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+
+		&.mod-thin {
+			@include verticalThin;
+		}
+	}
+}

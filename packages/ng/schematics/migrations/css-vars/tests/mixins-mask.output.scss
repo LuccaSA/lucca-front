@@ -1,0 +1,7 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+.directoryStepper-step:not([aria-current="step"]) {
+  .directoryStepper-step-title {
+    @include a11y.mask();
+  }
+}

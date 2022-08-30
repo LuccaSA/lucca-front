@@ -1,0 +1,27 @@
+@mixin component {
+	border-radius: var(--commons-border-radius);
+	background-color: var(--palettes-100, var(--components-callout-background));
+	color: var(--palettes-grey-800);
+	margin: var(--components-callout-margin);
+	padding: var(--components-callout-padding);
+	border-color: var(--palettes-200, var(--palettes-grey-200));
+	border-width: var(--commons-divider-width);
+	border-style: solid;
+	position: relative;
+
+	a, .link {
+		color: var(--palettes-grey-800);
+
+		&:hover {
+			color: inherit;
+			opacity: 0.8;
+		}
+	}
+
+	@at-root {
+		.callout-title {
+			font-weight: 600;
+			margin-bottom: var(--spacings-smallest);
+		}
+	}
+}

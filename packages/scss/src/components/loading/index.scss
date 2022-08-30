@@ -1,0 +1,30 @@
+@use 'exports' as *;
+
+.loading {
+	@include vars;
+	@include component;
+
+	&.mod-big {
+		@include big;
+	}
+
+	&.mod-block {
+		@include block;
+	}
+
+	&.mod-fullPage {
+		@include fullPage;
+	}
+
+	&.mod-sidePanel {
+		@include sidePanel;
+	}
+
+	&.mod-dialog {
+		@include dialog;
+	}
+
+	&.mod-invert {
+		@include invert;
+	}
+}

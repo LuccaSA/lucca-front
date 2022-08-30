@@ -1,3 +1,6 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/form';
+
 .mat-datepicker-content {
 	@include box-shadow-override();
 	@extend .card;
@@ -17,7 +20,7 @@
 		width: auto;
 
 		&::after {
-			@include makeIcon('calendar');
+			@include icon.generate('calendar');
 		}
 
 		mat-icon {
@@ -25,7 +28,6 @@
 		}
 	}
 }
-
 
 // CALENDAR
 .mat-calendar {
@@ -35,6 +37,10 @@
 		@extend .button, .mod-text;
 		font-size: 1em;
 		text-decoration: none;
+	}
+
+	.mat-calendar-arrow {
+		display: none;
 	}
 
 	.mat-calendar-arrow {
@@ -55,7 +61,7 @@
 .mat-calendar-controls {
 	margin-top: 0 !important;
 	.mat-icon-button[disabled] {
-		opacity: .4
+		opacity: 0.4;
 	}
 	.mat-calendar-period-button {
 		flex: 1;
@@ -74,10 +80,10 @@
 // TABLE
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
-		box-shadow: fakeborderoverlay(_theme('commons.divider.color'));
+		box-shadow: form.fakeBorderOverlay(var(--commons-divider-color));
 		border: none;
 		border-radius: 0;
-		color: _color("text.light");
+		color: var(--palettes-grey-600);
 		height: 100%;
 		left: 0;
 		top: 0;
@@ -85,8 +91,8 @@
 
 		&:hover,
 		&.mat-calendar-body-selected {
-			background-color: _color('primary');
-			color: _color('primary', 'text');
+			background-color: var(--palette-primary-700);
+			color: var(--palette-primary-text);
 		}
 	}
 
@@ -100,7 +106,7 @@
 md-month-view,
 mat-month-view {
 	.mat-calendar-table-header th {
-		color: _color("text.light");
+		color: var(--palettes-grey-600);
 		font-size: 0.9em;
 		padding-bottom: 0.4em;
 	}

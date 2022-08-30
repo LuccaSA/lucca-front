@@ -1,0 +1,38 @@
+@mixin component {
+	box-shadow: var(--commons-elevations-elevation-1);
+	background-color: var(--components-filters-background);
+	min-height: var(--components-filters-height);
+	align-items: center;
+	display: flex;
+	position: relative;
+	z-index: 99;
+
+	@at-root {
+		.filters-sectionLeft {
+			align-items: center;
+			display: flex;
+			padding-right: 2rem;
+		}
+
+		.filters-sectionRight {
+			align-items: center;
+			display: flex;
+			margin-left: auto;
+			padding-left: 2rem;
+
+			.textfield.mod-framed {
+				border-left: var(--commons-divider-width) solid var(--commons-divider-color);
+				border-right: 0 !important;
+			}
+		}
+	}
+
+	.textfield.mod-framed {
+		border-right: var(--commons-divider-width) solid var(--commons-divider-color);
+		max-width: 16rem;
+
+		.textfield-input {
+			box-shadow: none !important;
+		}
+	}
+}

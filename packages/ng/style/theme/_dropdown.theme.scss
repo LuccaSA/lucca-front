@@ -1,8 +1,0 @@
-$dropdown: (
-	width: 14rem,
-	max-width: 90vw,
-	max-height: 60vh,
-);
-
-
-$theme: _set($theme, 'components.dropdown', $dropdown);

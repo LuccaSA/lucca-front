@@ -1,0 +1,39 @@
+@mixin list($suffix: '', $list: 'ul') {
+	margin: 0 #{$suffix};
+
+	@if $list == ('ul' or 'ol') {
+		padding: 0 #{$suffix};
+		list-style-type: none #{$suffix};
+	}
+
+	@if $list == 'dl' {
+		> dd,
+		> div > dd {
+			margin: 0 #{$suffix};
+		}
+	}
+}
+
+@mixin button($suffix: '') {
+	padding: 0 #{$suffix};
+	border: 0 #{$suffix};
+	width: 100% #{$suffix};
+	background-color: transparent #{$suffix};
+	color: inherit #{$suffix};
+	text-align: left #{$suffix};
+	display: block #{$suffix};
+	font: inherit #{$suffix};
+	cursor: pointer #{$suffix};
+}
+
+@mixin clearfix($suffix: '') {
+	&::before,
+	&::after {
+		content: ' ';
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}

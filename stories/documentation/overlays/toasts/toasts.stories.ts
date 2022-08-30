@@ -1,18 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-import { Observable, ReplaySubject, Subject } from "rxjs";
-import { map } from "rxjs/operators";
-import { LuToastsComponent } from '../../../../packages/ng/toast/src/toasts.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, LuToastType, ɵɵLuToatsComponent } from '@lucca-front/ng/toast';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'toasts-stories',
 	templateUrl: './toasts.stories.html',
 })
 class ToastsStory implements OnInit, OnDestroy {
-
 	public isBottom = false;
 
 	public defaultToastDuration = defaultToastDuration;
@@ -35,7 +33,7 @@ class ToastsStory implements OnInit, OnDestroy {
 
 	public createToast(type: LuToastType, duration?: number | null): void {
 		const message = this.getRandomMessage();
-		this.toastsService.addToast({type, message, duration});
+		this.toastsService.addToast({ type, message, duration });
 	}
 
 	public notifyError(): void {
@@ -44,11 +42,10 @@ class ToastsStory implements OnInit, OnDestroy {
 
 	private getRandomMessage(): string {
 		const toastsValues = [
-			'Oh yeah! Something good happened :)',
-			'Oops, something looks wrong :(',
-			'Marked as done',
-			'Please check <a href="#">this thing</a>',
-			'Here <ins>is</ins> <em>some</em> <strong>HTML</strong>'
+			'Lorem ipsum',
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+			'Lorem <a href="#">ipsum</a> dolor',
+			'<ins>Lorem</ins> <em>ipsum</em> <strong>dolor</strong>',
 		];
 
 		const random = Math.floor(Math.random() * toastsValues.length);
@@ -58,14 +55,14 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
-	component: LuToastsComponent,
+	component: ɵɵLuToatsComponent,
 	decorators: [
 		componentWrapperDecorator(ToastsStory),
 		moduleMetadata({
 			imports: [LuToastsModule, FormsModule, BrowserAnimationsModule],
-			declarations: [ToastsStory]
-		})
-	]
+			declarations: [ToastsStory],
+		}),
+	],
 } as Meta;
 
 const template: Story<ToastsStory> = (args: ToastsStory) => ({
@@ -98,16 +95,17 @@ class ToastsStory implements OnInit, OnDestroy {
   }
 }
 
-`
+`;
 
 export const basic = template.bind({});
-basic.args = {}
+basic.args = {};
 basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code,
-		}
+		},
 	},
 	controls: { include: [] },
 };

@@ -1,0 +1,53 @@
+// You can add global styles to this file, and also import other style files
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main';
+@forward '@lucca-front/ng/src/main';
+
+@import 'scss/functions',
+	'scss/decorations',
+	'components/lucca-front/avatar',
+	'components/lucca-front/button',
+	'components/lucca-front/card',
+	'components/lucca-front/container',
+	'components/lucca-front/dropdown',
+	'components/lucca-front/emptyState',
+	'components/lucca-front/grid',
+	'components/lucca-front/icon',
+	'components/lucca-front/list',
+	'components/lucca-front/menu',
+	'components/lucca-front/popover',
+	'components/lucca-front/radioButton',
+	'components/lucca-front/sidepanel',
+	'components/lucca-front/table',
+	'components/lucca-front/textfield',
+	'components/lucca-front/table',
+	'components/lucca-front/userTile',
+	'components/colorLabel',
+	'components/dataGrid',
+	'components/decoratedCard',
+	'components/dashboardChart',
+	'components/fixedFooter',
+	'components/infoBanner',
+	'components/donutChart',
+	'components/gridCards',
+	'components/link',
+	'components/locationPicker',
+	'components/locationPickerButton',
+	'components/mainContent',
+	'components/subtitle',
+	'components/userLocation',
+	'components/userLocationPopover',
+	'components/verticalList',
+	'components/workspaceSelection',
+	'scss/shame';
+
+// Beamer
+@import "@lucca/beamer/dist/lucca-beamer.min.css";
+
+#lucca-banner {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 200;
+}

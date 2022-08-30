@@ -1,0 +1,56 @@
+:root {
+	--components-dropdown-width: 14rem;
+	--components-dropdown-max-width: 90vw;
+	--components-dropdown-max-height: 60vh;
+}
+
+.lu-dropdown-content {
+	margin: calc(var(--spacings-smaller) * -1);
+	padding: 0;
+	border-radius: var(--commons-border-radius);
+	width: var(--components-dropdown-width);
+	max-width: var(--components-dropdown-max-width);
+	max-height: var(--components-dropdown-max-height);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.lu-dropdown-options {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.lu-dropdown-options-item-action {
+	display: block;
+	background-color: transparent;
+	border: 0;
+	padding: var(--spacings-smaller) var(--spacings-small);
+	margin: var(--spacings-smallest) 0;
+	cursor: pointer;
+	width: 100%;
+	text-align: left;
+	transition: background-color var(--commons-animations-durations-standard);
+	text-decoration: none;
+
+	&,
+	&:hover,
+	&:focus {
+		color: currentColor;
+	}
+
+	&:focus, // delete this line when sub-menus are implemented
+	&:hover {
+		background-color: var(--palettes-grey-50);
+	}
+
+	&.is-disabled {
+		color: var(--palettes-grey-400);
+		pointer-events: none;
+
+		&:hover,
+		&:focus {
+			background-color: var(--colors-white-color);
+		}
+	}
+}

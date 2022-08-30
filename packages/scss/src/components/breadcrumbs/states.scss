@@ -1,0 +1,16 @@
+@mixin active {
+	font-weight: 600;
+	text-decoration: none;
+	cursor: default;
+
+	&:hover {
+		outline: none;
+	}
+
+	&,
+	&:hover,
+	&:focus-visible {
+		outline: none;
+		color: var(--palettes-grey-600);
+	}
+}

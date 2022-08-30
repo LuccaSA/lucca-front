@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TimelinesBasicStory {
-	state: string;
 	number: boolean;
 	size: string;
 }
@@ -9,38 +8,22 @@ interface TimelinesBasicStory {
 export default {
 	title: 'Documentation/Listings/Timelines/Basic',
 	argTypes: {
-		state: {
-			options: ['', 'success', 'warning'],
-			control: {
-				type: 'radio',
-			}
-		},
 		number: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		size: {
 			options: ['', 'mod-small', 'mod-big'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: TimelinesBasicStory): string {
 	const classes = [args.size].filter(Boolean).join(' ');
-	let stateGauge = '';
-	let stateTxt = '';
-	if (args.state === 'warning') {
-		stateGauge = 'palette-warning';
-		stateTxt = 'u-textWarning';
-	}
-	else if (args.state === 'success') {
-		stateGauge = 'palette-success';
-		stateTxt = 'u-textSuccess';
-	}
 	const number = args.number ? `mod-number` : '';
 	return `
 	<ol class="timeline ${classes} ${number}">
@@ -65,7 +48,7 @@ function getTemplate(args: TimelinesBasicStory): string {
 			</span>
 		</li>
 	</ol>
-	`
+	`;
 }
 
 const Template: Story<TimelinesBasicStory> = (args: TimelinesBasicStory) => ({
@@ -74,4 +57,4 @@ const Template: Story<TimelinesBasicStory> = (args: TimelinesBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { state: '', number: false, size: '' };
+Basic.args = { number: false, size: '' };

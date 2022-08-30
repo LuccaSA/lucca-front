@@ -14,7 +14,7 @@ class ModalContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'modal-stories',
-	template: `<button class="button" (click)="openModal()">Open modal</button>`,
+	template: `<button type="button" class="button" (click)="openModal()">Open modal</button>`,
 }) class ModalStories {
 	constructor(
 		private modal: LuModal
@@ -51,6 +51,7 @@ Basic.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code: `
 /* 1. Importer LuModalModule */
 import { LuModalModule } from '@lucca-front/ng/modal';
@@ -73,7 +74,7 @@ class ModalContentComponent implements ILuModalContent {
 /* 3. Se faire injecter LuModal dans le composant qui déclenche l'ouverture de la modale puis appeler la méthode open() */
 @Component({
 	selector: 'modal-stories',
-	template: \`<button class="button" (click)="openModal()">Open modal</button>\`,
+	template: \`<button type="button" class="button" (click)="openModal()">Open modal</button>\`,
 }) class ModalStories {
 	constructor(
 		private modal: LuModal

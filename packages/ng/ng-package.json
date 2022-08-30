@@ -1,13 +1,18 @@
 {
-	"$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-	"dest": "../../dist/ng",
-	"deleteDestPath": true,
-	"lib": {
-		"entryFile": "public_api.ts"
-	},
-	"assets": [
-		"style/**/*.scss",
-		"material/style/**/*.scss",
-		"formly/style/**/*.scss"
-	]
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ng",
+  "deleteDestPath": true,
+  "lib": {
+    "entryFile": "public_api.ts"
+  },
+  "assets": [
+    {
+      "glob": "**/*.scss",
+      "input": "./styles",
+      "output": "src"
+    },
+    "material/style/**/*.scss",
+    "formly/src/**/*.scss",
+    "formly/style/**/*.scss"
+  ]
 }

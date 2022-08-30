@@ -1,0 +1,11 @@
+@mixin optionSelectorStyle {
+	.selectAll-button {
+		color: var(--palettes-grey-600);
+		font-size: var(--sizes-small-font-size);
+		outline: none;
+
+		&:hover {
+			color: var(--palettes-grey-800);
+		}
+	}
+}

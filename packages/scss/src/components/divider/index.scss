@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.divider {
+	@include vars;
+	@include component;
+}

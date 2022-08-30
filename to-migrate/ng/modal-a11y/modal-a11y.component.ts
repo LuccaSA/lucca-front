@@ -6,20 +6,20 @@ const MAGIC_SIZES = ['small', 'medium', 'large'];
 @Component({
 	selector: 'lu-modal-content',
 	template: `
-		<p>content of the modal component</p>
-		<button type="button" class="button" (click)="openModal()">more modals</button>
-		<button type="button" class="button" (click)="incr()">incr</button>
-	`,
+	<p>content of the modal component</p>
+	<button type="button" class="button" (click)="openModal()">more modals</button>
+	<button type="button" class="button" (click)="incr()">incr</button>
+	`
 })
 export class BasicModalContent {
 	title = 'title';
 	submitAction = () => true;
 	// submitPalette = 'warning';
 	submitCounter = 0;
-	get submitDisabled() {
-		return this.submitCounter % 2;
-	}
-	constructor(private _modal: LuModal) {}
+	get submitDisabled() { return this.submitCounter % 2; }
+	constructor(
+		private _modal: LuModal,
+	) {}
 	openModal() {
 		const randPosition = Math.floor(Math.random() * 5);
 		const randSize = Math.floor(Math.random() * 3);

@@ -10,7 +10,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	template: `
 		<lu-calendar [(ngModel)]="date"></lu-calendar>
 
-		<button class="button mod-outlined u-marginRightSmall" (click)="random()">Random</button>
+		<button type="button" class="button mod-outlined u-marginRightSmall" (click)="random()">Random</button>
 
 		{{ date | luDate: 'full' }}
 	`,
@@ -73,6 +73,7 @@ Calendar.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code,
 		},
 	},

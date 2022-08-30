@@ -1,0 +1,9 @@
+// les utilitaires sont forwardés et préfixés afin de conserver leurs contextes
+// https://sass-lang.com/documentation/at-rules/forward#adding-a-prefix
+
+@forward 'media' as media-*; // 0 Ko
+@forward 'a11y' as a11y-*; // 0 Ko
+@forward 'reset' as reset-*; // 0 Ko
+@forward 'form' as form-*; // 0 Ko
+@forward 'loading' as loading-*; // 0 Ko
+@forward 'text' as text-*; // 0 Ko

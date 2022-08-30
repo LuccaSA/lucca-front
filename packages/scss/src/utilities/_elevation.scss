@@ -1,5 +1,0 @@
-@for $z from 1 to 7 {
-	.u-elevate#{$z} {
-		@include elevate($z);
-	}
-}

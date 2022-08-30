@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.progress {
+	@include vars;
+	@include component;
+
+	&.mod-indeterminate {
+		@include indeterminate;
+	}
+
+	&:is(.is-success, .success) {
+		@include success;
+	}
+
+	&:is(.is-error, .error) {
+		@include error;
+	}
+}

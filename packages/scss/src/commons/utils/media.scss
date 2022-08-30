@@ -1,0 +1,35 @@
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:math';
+
+@use '@lucca-front/scss/src/commons/config';
+
+@mixin largerThan($breakpoint, $reversed: false) {
+	$reverse: '';
+
+	@if $reversed {
+		$reverse: string.unquote('not all and');
+	} @else {
+		$reverse: string.unquote('');
+	}
+
+	$breakpointInPx: map.get(config.$breakpoints, $breakpoint);
+
+	@if $breakpointInPx {
+		$breakpointInEm: math.div($breakpointInPx, 16px) * 1em;
+
+		@media #{$reverse '(min-width:' $breakpointInEm ')'} {
+			@content;
+		}
+	} @else {
+		@media #{$reverse '(min-width:' $breakpoint')'} {
+			@content;
+		}
+	}
+}
+
+@mixin smallerThan($breakpoint) {
+	@include largerThan($breakpoint, $reversed: true) {
+		@content;
+	}
+}

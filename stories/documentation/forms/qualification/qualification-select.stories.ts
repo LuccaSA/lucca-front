@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuQualificationSelectInputComponent, LuQualificationSelectModule } from '@lucca-front/ng/qualification';
@@ -26,6 +27,7 @@ export default {
 		moduleMetadata({
 			declarations: [QualificationSelectStory],
 			imports: [
+				HttpClientModule,
 				LuQualificationSelectModule,
 				BrowserAnimationsModule,
 			]
@@ -70,6 +72,7 @@ Select.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code
 		}
 	}

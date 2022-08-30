@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface PaginationBasicStory {
-}
+interface PaginationBasicStory {}
 
 export default {
 	title: 'Documentation/Navigation/Pagination/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: PaginationBasicStory): string {
@@ -24,17 +22,17 @@ function getTemplate(args: PaginationBasicStory): string {
 			</span>
 		</div>
 		<div class="pagination-scrolling">
-			<button class="actionIcon" disabled>
+			<button type="button" class="actionIcon mod-small" disabled>
 				<span aria-hidden="true" class="lucca-icon icon-chevronWest"></span>
 				<span class="u-mask">Précédent</span>
 			</button>
-			<button class="actionIcon">
+			<button type="button" class="actionIcon mod-small">
 				<span aria-hidden="true" class="lucca-icon icon-chevronEast"></span>
 				<span class="u-mask">Suivant</span>
 			</button>
 		</div>
 	</nav>
-	`
+	`;
 }
 
 const Template: Story<PaginationBasicStory> = (args: PaginationBasicStory) => ({
@@ -43,4 +41,4 @@ const Template: Story<PaginationBasicStory> = (args: PaginationBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

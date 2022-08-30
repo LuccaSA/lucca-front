@@ -31,7 +31,8 @@ export class BasicModalContent {
 	selector: 'lu-popup-content',
 	template: `popup <br />
 		<button type="button" class="button" (click)="close()">close</button>
-		<button type="button" class="button" (click)="dismiss()">dismiss</button> `,
+		<button type="button" class="button" (click)="dismiss()">dismiss</button>
+	`
 })
 export class BasicPopupContent {
 	constructor(@Inject(ALuPopupRef) private _ref: ILuPopupRef) {}

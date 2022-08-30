@@ -1,0 +1,16 @@
+@use 'exports' as *;
+
+.radioButtons {
+	@include vars;
+	@include component;
+
+	&.mod-small {
+		@include small;
+	}
+}
+
+.radioButtons-item-input {
+	&:is(:disabled, .is-disabled, .disabled) {
+		@include disabled;
+	}
+}

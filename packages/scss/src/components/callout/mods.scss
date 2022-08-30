@@ -1,0 +1,69 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin icon {
+	padding-left: 3rem;
+
+	@at-root {
+		.callout-icon {
+			top: 0.4rem;
+			left: 0.75rem;
+			width: 2rem;
+			border-radius: 50%;
+			position: absolute;
+			margin: auto;
+			text-align: center;
+			color: var(--palettes-700, var(--palettes-grey-700));
+
+			.lucca-icon {
+				font-size: 1.2rem;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+@mixin small {
+	font-size: var(--sizes-small-font-size);
+	line-height: var(--sizes-small-line-height);
+
+	&.mod-icon {
+		padding-left: 2.8rem;
+
+		.callout-icon {
+			top: 0.4rem;
+
+			.lucca-icon {
+				font-size: 1rem;
+			}
+		}
+	}
+}
+
+@mixin killable {
+	padding-right: 2.5rem;
+
+	@at-root {
+		.callout-kill {
+			right: var(--spacings-small);
+			background-color: transparent;
+			color: currentColor;
+			position: absolute;
+			height: 1.5rem;
+			border: 0;
+			padding: 0;
+			top: 0.5rem;
+			transition-duration: 150ms;
+			transition-property: background-color;
+			width: 1rem;
+			cursor: pointer;
+
+			&::before {
+				@include icon.generate('cross');
+			}
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}

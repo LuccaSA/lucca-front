@@ -1,0 +1,19 @@
+@mixin vars {
+	--components-form-group-margin-bottom: 1.2rem;
+
+	--components-form-field-margin-bottom: 1rem;
+
+	--components-form-label-font-size: 0.875rem;
+	--components-form-label-margin-bottom: 0.25rem;
+
+	--components-field-framed-side-padding: 1rem;
+	--components-field-framed-top-padding: 2rem;
+	--components-field-framed-bottom-padding: 1rem;
+	--components-field-framed-label-top-offset: 0.5rem;
+	--components-field-framed-textarea-height: 8.5rem;
+	--components-field-framed-textarea-min-height: 5.5rem;
+	--components-field-framed-textarea-max-height: 80vh;
+	--components-field-framed-title-font-size: 1.125rem;
+	--components-field-framed-title-line-height: 1.5rem;
+	--components-field-framed-suffix-padding-right: 3rem;
+}

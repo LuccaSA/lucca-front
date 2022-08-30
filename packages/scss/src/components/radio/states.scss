@@ -1,0 +1,26 @@
+@mixin disabled {
+	~ .radio-label {
+		color: var(--palettes-grey-500);
+		cursor: default;
+
+		&::before {
+			border-color: var(--palettes-grey-500);
+			border-width: 2px;
+			border-style: solid;
+		}
+	}
+}
+
+@mixin disabledChecked {
+	~ .radio-label {
+		&::before {
+			border-color: var(--palettes-grey-500);
+			border-width: 2px;
+			border-style: solid;
+		}
+
+		&::after {
+			background-color: var(--palettes-grey-500);
+		}
+	}
+}

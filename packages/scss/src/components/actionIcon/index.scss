@@ -1,0 +1,38 @@
+@use 'exports' as *;
+
+.actionIcon {
+	@include vars;
+	@include component;
+
+	&.mod-invert {
+		@include invert;
+	}
+
+	&.mod-outlined {
+		@include outlined;
+	}
+
+	&.mod-delete {
+		@include delete;
+
+		&.mod-outlined {
+			@include outlinedDelete;
+		}
+	}
+
+	&.mod-small {
+		@include small;
+	}
+
+	&:is(.is-disabled, .disabled, [disabled]) {
+		@include disabled;
+
+		&.mod-outlined {
+			@include outlinedDisabled;
+		}
+	}
+
+	&:is(.is-loading, .loading) {
+		@include loading;
+	}
+}

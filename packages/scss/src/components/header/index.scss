@@ -1,0 +1,28 @@
+@use 'exports' as *;
+
+.header {
+	@include vars;
+	@include component;
+
+	&.mod-sticky {
+		@include sticky;
+
+		.navSide ~ .main-content &,
+		.mod-withMenu .main-content & {
+			@include left;
+		}
+
+		.navSide.mod-compact ~ .main-content &,
+		.mod-withMenuCompact .main-content & {
+			@include leftCompact;
+		}
+	}
+
+	&.mod-nav {
+		@include nav;
+	}
+
+	&:is(.is-loading, .loading) {
+		@include loading;
+	}
+}

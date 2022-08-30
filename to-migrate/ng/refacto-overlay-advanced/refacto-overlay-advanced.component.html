@@ -23,9 +23,7 @@
 <lu-popover #class panel-classes="my-panel" content-classes="my-content">popover with custom class for content and panel</lu-popover>
 <br />
 <button type="button" class="button" [luPopover]="classes" [luPopoverOverlap]="true">2 classes</button>
-<lu-popover #classes panel-classes="my-panel my-panel-again" content-classes="my-content my-content-again"
-	>popover with custom class<b>es</b> for content and panel</lu-popover
->
+<lu-popover #classes panel-classes="my-panel my-panel-again" content-classes="my-content my-content-again">popover with custom class<b>es</b> for content and panel</lu-popover>
 <br />
 
 <br />
@@ -33,20 +31,20 @@
 <button type="button" class="button" [luPopover]="disabled">enabled popover</button>
 <button type="button" class="button" [luPopover]="disabled" [luPopoverDisabled]="true">disabled popover</button>
 <button type="button" class="button" [luPopover]="disabled" disabled="true" luPopoverTrigger="hover">disabled button</button>
-<button type="button" class="button is-disabled" [luPopover]="disabled" luPopoverTrigger="hover">is-disabled button</button>
-<span [luPopover]="disabled" luPopoverTrigger="hover">
+<button type="button" class="button is-disabled" [luPopover]="disabled"  luPopoverTrigger="hover">is-disabled button</button>
+<span [luPopover]="disabled"  luPopoverTrigger="hover">
 	<button type="button" class="button is-disabled">is-disabled button in a span</button>
 </span>
 <lu-popover #disabled>normal popover</lu-popover>
-<p>i cant trigger hover or click if there's no pointer event :'(</p>
-<button type="button" class="button" luTooltip="tooltip enabled" (luTooltipOnClose)="onClose()" (luTooltipOnOpen)="onOpen()">
-	enabled tooltip
-</button>
+<p>
+	i cant trigger hover or click if there's no pointer event :'(
+</p>
+<button type="button" class="button" luTooltip="tooltip enabled" (luTooltipOnClose)="onClose()"  (luTooltipOnOpen)="onOpen()">enabled tooltip</button>
 <button type="button" class="button" luTooltip="ttooltip disabled" [luTooltipDisabled]="true">disabled tooltip</button>
 <button type="button" class="button" luTooltip="disabled button" disabled="disabled">disabled button</button>
 <br />
 <h2>focus trap</h2>
-<button type="button" class="button" [luPopover]="trapped" (luPopoverOnClose)="onClose()" (luPopoverOnOpen)="onOpen()">click me</button>
+<button type="button" class="button" [luPopover]="trapped" (luPopoverOnClose)="onClose()"  (luPopoverOnOpen)="onOpen()">click me</button>
 <lu-popover #trapped [trap-focus]="true">
 	<div class="textfiled">
 		<input type="text" class="textfield-input" />

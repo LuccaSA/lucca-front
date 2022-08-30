@@ -1,8 +1,0 @@
-$list: (
-  margin-bottom: 1rem,
-  padding: 1rem 1.5rem,
-  hover: (
-    background: _theme("commons.highlight")
-  )
-);
-$theme: _set($theme, "components.list", $list);

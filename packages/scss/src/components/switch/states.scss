@@ -1,0 +1,114 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin checked {
+	~ .switch-label {
+		&::before {
+			@include icon.generate('tick');
+
+			display: flex;
+			background-color: var(--palettes-700, var(--components-switch-default-palette-700));
+			padding-left: var(--components-switch-icon-left);
+		}
+
+		&::after {
+			left: calc(1rem - 2px);
+		}
+	}
+}
+
+@mixin checkedHover {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-600, var(--components-switch-default-palette-600));
+			}
+		}
+	}
+}
+@mixin checkedFocus {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-600, var(--components-switch-default-palette-600));
+				box-shadow: 0 0 0 4px var(--palettes-200, var(--components-switch-default-palette-200));
+			}
+		}
+	}
+}
+
+@mixin checkedActive {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-800, var(--components-switch-default-palette-800));
+				box-shadow: 0 0 0 4px var(--palettes-300, var(--components-switch-default-palette-300));
+			}
+		}
+	}
+}
+
+@mixin checkedSmall {
+	~ .switch-label {
+		&::before {
+			font-size: var(--sizes-smaller-font-size);
+		}
+
+		&::after {
+			left: calc(var(--sizes-small-font-size) - 2px);
+		}
+	}
+}
+
+@mixin hover {
+	~ .switch-label {
+		&::before {
+			background-color: var(--palettes-grey-400);
+		}
+	}
+}
+
+@mixin active {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				background-color: var(--palettes-grey-600);
+				box-shadow: 0 0 0 4px var(--palettes-grey-300);
+			}
+		}
+	}
+}
+
+@mixin focus {
+	&:not([disabled], [readonly]) {
+		~ .switch-label {
+			&::before {
+				box-shadow: 0 0 0 4px var(--palettes-grey-200);
+			}
+		}
+	}
+}
+
+@mixin disabled {
+	~ .switch-label {
+		color: var(--palettes-grey-500);
+		cursor: default;
+
+		&::before {
+			background-color: var(--palettes-grey-200);
+			color: var(--palettes-grey-500);
+		}
+
+		&::after {
+			background-color: var(--palettes-grey-500);
+			box-shadow: none;
+		}
+	}
+}
+
+@mixin disabledChecked {
+	~ .switch-label {
+		&::before {
+			background-color: var(--palettes-grey-200);
+		}
+	}
+}

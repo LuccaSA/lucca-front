@@ -1,0 +1,178 @@
+@use 'sass:math';
+
+@use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/loading';
+
+@mixin overlay {
+	&:focus-within {
+		.textfield-input {
+			box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+			z-index: 4;
+		}
+
+		.is-error {
+			.textfield-input {
+				background-color: var(--colors-white-color) !important;
+			}
+		}
+
+		.is-warning {
+			.textfield-input {
+				background-color: #444242;
+				box-shadow: form.fakeBorderOverlay(var(--palettes-warning-700)), 0 0 0 4px var(--palettes-warning-50);
+			}
+		}
+
+		.is-valid,
+		.is-success {
+			.textfield-input {
+				background-color: var(--colors-white-color);
+				box-shadow: form.fakeBorderOverlay(var(--palettes-success-700)), 0 0 0 4px var(--palettes-success-50);
+			}
+		}
+	}
+
+	.textfield,
+	.checkbox,
+	.radio,
+	.select {
+		+ .textfield,
+		+ .checkbox,
+		+ .radio,
+		+ .select {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			z-index: 10;
+			padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding)
+				var(--components-field-framed-bottom-padding);
+		}
+	}
+}
+
+@mixin overlayTop {
+	.textfield,
+	.checkbox,
+	.radio,
+	.select {
+		+ .textfield,
+		+ .checkbox,
+		+ .radio,
+		+ .select {
+			top: 0;
+			bottom: auto;
+		}
+	}
+}
+
+@mixin breakpoint($breakpoint, $i) {
+	flex-basis: 100%;
+	flex-grow: 0;
+
+	@include media.largerThan($breakpoint) {
+		flex-basis: (math.div(100%, 12) * $i);
+	}
+}
+
+@mixin framed {
+	margin-bottom: 0;
+	background-color: _color('white');
+	padding: 0;
+	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
+	transition: background-color var(--commons-animations-durations-standard);
+	margin-bottom: 0 !important;
+
+	&::before,
+	&::after {
+		content: ' ';
+		display: table;
+	}
+
+	&::after {
+		clear: both;
+	}
+
+	&:not(.is-disabled, :disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
+		&:hover,
+		&:focus {
+			position: relative;
+			z-index: 1;
+			background-color: _color('white');
+			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600));
+		}
+
+		&:focus {
+			z-index: 4;
+			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600)), 0 0 0 4px var(--palettes-grey-50);
+		}
+	}
+
+	.radiosfield,
+	.checkboxesfield {
+		display: block;
+		margin-top: var(--components-field-framed-side-padding);
+		margin-bottom: 0;
+		padding: 0 var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+	}
+
+	&.is-disabled,
+	&.is-readonly {
+		background-color: var(--commons-disabled-background);
+	}
+
+	&.is-loading {
+		@include loading.spinner;
+
+		&::before,
+		&::after {
+			left: auto !important;
+			bottom: auto !important;
+			right: var(--components-field-framed-side-padding) !important;
+			top: var(--components-field-framed-side-padding) !important;
+		}
+	}
+}
+
+@mixin fieldMaterialState($fieldname, $state) {
+	&:focus {
+		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
+	}
+
+	@if ($state == 'error') {
+		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
+	}
+
+	~ .#{$fieldname}-label {
+		color: var(--palettes-#{$state}-700);
+	}
+
+	&:focus ~ .#{$fieldname}-label {
+		color: var(--palettes-#{$state}-700);
+	}
+}
+
+@mixin fieldMaterialError($fieldname) {
+	@include fieldMaterialState($fieldname, 'error');
+}
+
+@mixin fieldMaterialFilled($fieldname) {
+	~ .#{$fieldname}-label {
+		font-size: --var(--sizes-small-font-size);
+		top: 0;
+	}
+}
+
+%isRequired {
+	color: var(--palettes-error-700);
+	display: inline-block;
+	margin-left: 0.2em;
+
+	@supports (content: '*' / '') {
+		content: '*' / '';
+	}
+
+	@supports not (content: '*' / '') {
+		content: '*';
+	}
+}

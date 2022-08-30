@@ -1,8 +1,10 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
 @import '_definitions';
 @include selectInputStyle;
 
 :host {
 	&::after {
-		@include makeIcon('calendar');
+		@include icon.generate('calendar');
 	}
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-import { LuDropdownModule, LuDropdownTriggerDirective } from '../../../../packages/ng/dropdown/src';
 
 @Component({
 	selector: 'dropdown-directive-stories',
@@ -30,7 +30,8 @@ const Template: Story<DropdownDirectiveStories> = (args: DropdownDirectiveStorie
 });
 
 const code = `
-  <button class="button"
+  <button type="button"
+		class="button"
     [luDropdown]="dropdown"
     luDropdownAlignment="top" /* top | bottom | left | right | center */
     luDropdownPosition="before" /* above | below | before | after */
@@ -48,6 +49,7 @@ Directive.parameters = {
 	docs: {
 		source: {
 			language: 'ts',
+			type: 'code',
 			code,
 		}
 	},

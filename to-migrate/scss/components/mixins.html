@@ -3,7 +3,7 @@
 	<h2>Theming Functions</h2>
 	<p>
 		These are functions you can use to access variables from the theme. 
-		They are available by adding <code class="code"~@lucca-front/scss/src/theming.overridable>@import "~@lucca-front/scss/src/theming.overridable"</code> in your file.
+		They are available by adding <code class="code"~@lucca-front/scss/src/theming.overridable>@import "@lucca-front/scss/src/theming.overridable"</code> in your file.
 		They return variables from maps. They use the dot notation <code class="code">parent.child.[...]</code>.
 	</p>
 	<h3>Color/Palettes</h3>
@@ -24,7 +24,7 @@ _color("palette_name", "key") // return the palette.key value
 </section>
 <section class="contentSection">
 	<h2>Mixins</h2>
-	<p>These mixins are available by adding <code class="code">@import "~@lucca-front/scss/src/mixins";</code> in your file</p>
+	<p>These mixins are available by adding <code class="code">@import "@lucca-front/scss/src/mixins";</code> in your file</p>
 	<h3>Elevated</h3>
 	<p>You can add shadow to your own component by using elevated(1-5) mixin</p>
 <code class="code mod-block">@include elevate(1);</code>

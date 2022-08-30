@@ -1,0 +1,114 @@
+@use 'sass:map';
+@use 'sass:list';
+
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/core';
+
+@if config.$fontVariable {
+	@font-face {
+		font-family: 'Source Sans Pro';
+		font-weight: 200 900;
+		font-style: normal;
+		font-stretch: normal;
+		font-display: swap;
+		src: url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf.woff2') format('woff2'),
+			url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf.woff') format('woff'),
+			url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf') format('truetype');
+	}
+} @else {
+	@import url('//fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+}
+
+*,
+::after,
+::before {
+	box-sizing: border-box;
+}
+
+:root {
+	@include core.cssvars('commons-border-radius', config.$borderRadius);
+	@include core.cssvars('commons-animations', config.$animations);
+	@include core.cssvars('commons-animations-durations', config.$durations);
+	@include core.cssvars('commons-disabled', config.$disabled);
+	@include core.cssvars('commons-loading', config.$loading);
+	@include core.cssvars('commons-text-link', config.$textLink);
+
+	@include core.cssvars('palettes-primary', config.$primary);
+	@include core.cssvars('palettes-secondary', config.$secondary);
+	@include core.cssvars('palettes-grey', config.$grey);
+	@include core.cssvars('palettes-success', config.$success);
+	@include core.cssvars('palettes-warning', config.$warning);
+	@include core.cssvars('palettes-error', config.$error);
+
+	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
+	@include core.cssvars('spacings', config.$spacings);
+
+	@include core.cssvars('commons-elevations-elevation', config.$elevations);
+	@include core.cssvars('commons-box-shadow', config.$boxShadows);
+
+	@each $key, $map in config.$sizes {
+		@include core.cssvars('sizes-#{$key}', $map);
+	}
+
+	@include core.cssvars('colors', config.$colors, '-color');
+	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
+
+	--commons-background-base: #f5f5f5;
+	--commons-banner-height: 50px;
+	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
+	--commons-transition: all 150ms ease;
+	--commons-divider-width: 1px;
+	--commons-divider-color: var(--palettes-grey-200);
+	--commons-divider-style: solid;
+	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
+}
+
+html {
+	height: -webkit-fill-available;
+}
+
+body {
+	background-color: var(--commons-background-base);
+	color: var(--palettes-grey-800);
+	font-family: var(--commons-font-family);
+	font-size: var(--sizes-standard-font-size);
+	line-height: var(--sizes-standard-line-height);
+
+	@supports (-webkit-touch-callout: none) {
+		min-height: -webkit-fill-available;
+	}
+}
+
+p {
+	margin: 0 0 1rem;
+}
+
+abbr {
+	&[title] {
+		border: none;
+		text-decoration: none;
+	}
+}
+
+a {
+	color: var(--commons-text-link-color);
+	cursor: pointer;
+	text-decoration: underline;
+
+	&:hover {
+		color: var(--commons-text-link-hover);
+	}
+}
+
+strong,
+b {
+	font-weight: 600;
+}
+
+@each $palette in list.join(config.$palettes, config.$states) {
+	.palette-#{$palette} {
+		@each $shade in map.keys(config.$primary) {
+			--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
+		}
+	}
+}

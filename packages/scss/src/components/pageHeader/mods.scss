@@ -1,0 +1,15 @@
+@mixin menu {
+	padding-bottom: 0;
+}
+
+@mixin breadcrumbs {
+	padding-top: var(--spacings-small);
+
+	.breadcrumbs {
+		margin-bottom: 0;
+	}
+}
+
+@mixin noShadow {
+	box-shadow: none;
+}

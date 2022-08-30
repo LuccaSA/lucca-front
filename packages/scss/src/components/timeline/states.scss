@@ -1,0 +1,30 @@
+@mixin current {
+	&::after {
+		background-color: var(--palettes-grey-200);
+	}
+
+	.timeline-step-title {
+		color: var(--palettes-primary-700);
+
+		&::before {
+			background-color: var(--palettes-primary-700);
+			box-shadow: 0 0 0 var(--spacings-smallest) var(--palettes-primary-200);
+			color: var(--colors-white-color);
+		}
+	}
+
+	~ .timeline-step {
+		&::after {
+			background-color: var(--palettes-grey-200);
+		}
+
+		.timeline-step-title {
+			color: var(--palettes-grey-600);
+
+			&::before {
+				background-color: var(--palettes-grey-200);
+				color: var(--palettes-grey-600);
+			}
+		}
+	}
+}

@@ -9,5 +9,5 @@ formly-field {
 formly-form .checkboxesfield:not(fieldset),
 formly-form .radiosfield:not(fieldset) {
 	margin-top: 0 !important;
-	padding: _component("field.framed.side-padding") _component("field.framed.side-padding") _component("field.framed.bottom-padding") !important;
+	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding) !important;
 }

@@ -1,0 +1,73 @@
+@mixin disabled {
+	cursor: not-allowed;
+
+	~ .file-content {
+		.file-title,
+		.file-or,
+		.file-formats,
+		.file-button {
+			color: var(--palettes-grey-500);
+		}
+	}
+}
+
+@mixin droppable {
+	~ .file-content {
+		&::before {
+			background-color: var(--palettes-primary-50);
+			border: 1px dashed var(--palettes-primary-400);
+		}
+	}
+}
+
+@mixin uploaded {
+	~ .file-content {
+		.file-title {
+			color: var(--palettes-success-700);
+		}
+
+		.file-icon.icon-success {
+			display: block;
+		}
+	}
+}
+
+@mixin invalid {
+	~ .file-content {
+		.file-title {
+			color: var(--palettes-error-700);
+		}
+
+		.file-icon.icon-error {
+			display: block;
+		}
+	}
+}
+
+@mixin legacyDroppable {
+	background-color: var(--commons-background-base);
+
+	.file-icon {
+		color: var(--palettes-primary-500);
+	}
+}
+
+@mixin legacyDisabled {
+	.file-title,
+	.file-or,
+	.file-formats,
+	.button {
+		color: var(--commons-disabled-color);
+	}
+
+	.button {
+		&,
+		&:hover,
+		&:focus,
+		&:active {
+			cursor: not-allowed;
+			box-shadow: 0 0 0 1px inset;
+			background-color: transparent;
+		}
+	}
+}

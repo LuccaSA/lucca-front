@@ -1,0 +1,60 @@
+@use '@lucca-front/scss/src/commons/utils/form';
+
+.cdk-drag-placeholder {
+	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
+	background-color: var(--palettes-grey-100);
+	* {
+		opacity: 0;
+	}
+}
+
+.cdk-drag-handle,
+.cdk-drag-placeholder {
+	cursor: move;
+}
+
+.dragDrop-card {
+	z-index: 1;
+}
+
+.dragDrop-list {
+	border-radius: var(--commons-border-radius);
+}
+
+.dragDrop-item {
+	cursor: grab;
+	&:not(.cdk-drag-placeholder) {
+		&:first-of-type {
+			border-top-left-radius: var(--commons-border-radius);
+			border-top-right-radius: var(--commons-border-radius);
+		}
+		&:last-of-type {
+			border-bottom-left-radius: var(--commons-border-radius);
+			border-bottom-right-radius: var(--commons-border-radius);
+		}
+	}
+	&:active {
+		cursor: grabbing;
+	}
+}
+.dragDrop-item-content {
+	padding: var(--spacings-smaller);
+}
+
+.cdk-drag-preview {
+	z-index: 9999 !important;
+	box-sizing: border-box;
+	box-shadow: form.fakeBorderOverlay(var(--palettes-secondary-200));
+	background-color: var(--palettes-secondary-50);
+	border-radius: var(--commons-border-radius);
+	cursor: grabbing;
+}
+
+.cdk-drop-list-dragging {
+	.dragDrop-item {
+		cursor: grabbing;
+	}
+	.cdk-drag:not(.cdk-drag-placeholder) {
+		transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+	}
+}

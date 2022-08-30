@@ -1,0 +1,37 @@
+@use '@lucca-front/icons/src/commons/config';
+@use '@lucca-front/icons/src/commons/core';
+@use 'exports' as *;
+
+.lucca-icon {
+	@include component;
+
+	@each $name, $content in config.$icons {
+		&.icon-#{core.camelize($name)} {
+			@include subComponent($content);
+		}
+	}
+
+	&.size-smaller {
+		@include size('smaller');
+	}
+
+	&.size-small {
+		@include size('small');
+	}
+
+	&.size-standard {
+		@include size('standard');
+	}
+
+	&.size-big {
+		@include size('big');
+	}
+
+	&.size-bigger {
+		@include size('bigger');
+	}
+
+	&.size-biggest {
+		@include size('biggest');
+	}
+}

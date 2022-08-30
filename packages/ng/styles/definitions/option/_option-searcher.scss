@@ -1,0 +1,28 @@
+@mixin optionSearcherStyle {
+	.textfield.mod-search {
+		width: 100%;
+	}
+
+	.textfield-input {
+		border-radius: 0;
+		box-shadow: none;
+		background-color: var(--colors-white-color);
+		border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
+
+		&:hover {
+			background-color: var(--palettes-grey-50);
+		}
+
+		&:focus {
+			background-color: var(--colors-white-color);
+			border-bottom-color: var(--palettes-primary-600);
+		}
+	}
+
+	.checkbox.mod-formerEmployee {
+		padding: var(--spacings-smallest) var(--components-options-item-padding-horizontal);
+		border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
+		background-color: var(--palettes-grey-50);
+		font-style: italic;
+	}
+}

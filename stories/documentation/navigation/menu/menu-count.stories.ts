@@ -4,6 +4,7 @@ interface MenuCountStory {
 	noBorder: boolean;
 	header: boolean;
 	small: boolean;
+	disabled: boolean;
 }
 
 export default {
@@ -24,6 +25,11 @@ export default {
 				type: 'boolean',
 			}
 		},
+		disabled: {
+			control: {
+				type: 'boolean',
+			}
+		},
 	},
 } as Meta;
 
@@ -31,23 +37,24 @@ function getTemplate(args: MenuCountStory): string {
 	const noBorder = args.noBorder ? `mod-noBorder` : '';
 	const header = args.header ? `mod-header` : '';
 	const small = args.small ? `mod-small` : '';
+	const disabled = args.disabled ? `disabled` : '';
 	return `
 	<nav class="menu ${small} ${noBorder} ${header}">
 		<ul class="menu-list">
 			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action" aria-current="page">
+				<a href="#" class="menu-list-item-action" ${disabled} aria-current="page">
 					Menu
 					<span class="label mod-number">2</span>
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action">
+				<a href="#" class="menu-list-item-action" ${disabled}>
 					Menu
 					<span class="label mod-number">2</span>
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action">
+				<a href="#" class="menu-list-item-action" ${disabled}>
 					Menu
 					<span class="label mod-number">2</span>
 				</a>
@@ -64,4 +71,4 @@ const Template: Story<MenuCountStory> = (args: MenuCountStory) => ({
 });
 
 export const Count = Template.bind({});
-Count.args = { noBorder: false, header: false, small: false, };
+Count.args = { noBorder: false, header: false, small: false, disabled: false };

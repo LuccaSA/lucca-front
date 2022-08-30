@@ -1,0 +1,75 @@
+:root {
+  --components-user-picture-sizes-smallest-font-size: 0.5em;
+  --components-user-picture-sizes-smallest-image-size: 2.5em;
+  --components-user-picture-sizes-smaller-font-size: 0.65em;
+  --components-user-picture-sizes-smaller-image-size: 2.5em;
+  --components-user-picture-sizes-small-font-size: 0.8em;
+  --components-user-picture-sizes-small-image-size: 2.5em;
+  --components-user-picture-sizes-standard-font-size: 1em;
+  --components-user-picture-sizes-standard-image-size: 2.5em;
+  --components-user-picture-sizes-large-font-size: 1.35em;
+  --components-user-picture-sizes-large-image-size: 2.5em;
+  --components-user-picture-sizes-larger-font-size: 1.8em;
+  --components-user-picture-sizes-larger-image-size: 2.5em;
+  --components-user-picture-sizes-largest-font-size: 3em;
+  --components-user-picture-sizes-largest-image-size: 2.5em;
+}
+
+@mixin userPictureStyle {
+	:host {
+		.picture {
+			border-radius: 100%;
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			color: white;
+			font-size: var(--components-user-picture-sizes-standard-font-size);
+			position: relative;
+			height: var(--components-user-picture-sizes-standard-image-size);
+			width: var(--components-user-picture-sizes-standard-image-size);
+
+			> span {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+
+    &.mod-smallest .picture {
+      font-size: var(--components-user-picture-sizes-smallest-font-size);
+      height: var(--components-user-picture-sizes-smallest-image-size);
+      width: var(--components-user-picture-sizes-smallest-image-size);
+    }
+
+    &.mod-smaller .picture {
+      font-size: var(--components-user-picture-sizes-smaller-font-size);
+      height: var(--components-user-picture-sizes-smaller-image-size);
+      width: var(--components-user-picture-sizes-smaller-image-size);
+    }
+
+    &.mod-small .picture {
+      font-size: var(--components-user-picture-sizes-small-font-size);
+      height: var(--components-user-picture-sizes-small-image-size);
+      width: var(--components-user-picture-sizes-small-image-size);
+    }
+
+    &.mod-large .picture {
+      font-size: var(--components-user-picture-sizes-large-font-size);
+      height: var(--components-user-picture-sizes-large-image-size);
+      width: var(--components-user-picture-sizes-large-image-size);
+    }
+
+    &.mod-larger .picture {
+      font-size: var(--components-user-picture-sizes-larger-font-size);
+      height: var(--components-user-picture-sizes-larger-image-size);
+      width: var(--components-user-picture-sizes-larger-image-size);
+    }
+
+    &.mod-largest .picture {
+      font-size: var(--components-user-picture-sizes-largest-font-size);
+      height: var(--components-user-picture-sizes-largest-image-size);
+      width: var(--components-user-picture-sizes-largest-image-size);
+    }
+	}
+}
