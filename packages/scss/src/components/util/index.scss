@@ -299,8 +299,8 @@
 }
 
 [class*='u-animated'] {
-	animation-duration: var(--duration, var(commons-animations-durations-standard));
-	animation-timing-function: var(commons-animations-function);
+	animation-duration: var(--duration, var(--commons-animations-durations-standard));
+	animation-timing-function: var(--commons-animations-function);
 
 	&.mod-animation-duration-fast {
 		@include duration('fast');
