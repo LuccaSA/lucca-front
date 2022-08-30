@@ -81,8 +81,8 @@
 			&::after {
 				@include icon.generate('tick');
 
-				color: white;
-				font-size: 0.8rem;
+				color: transparent;
+				font-size: 1rem;
 				line-height: var(--components-options-checkbox-size);
 				padding-top: 0.05rem;
 				position: absolute;
@@ -99,6 +99,7 @@
 				}
 
 				&::after {
+					color: var(--colors-white-color);
 					transform: translateY(-50%) scale(1);
 				}
 			}

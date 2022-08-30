@@ -1,7 +1,7 @@
 <form [formGroup]="form">
-	<div class="textfield mod-search" [class.is-loading]="loading$ | async">
+	<div class="textfield mod-search" [class.is-loading]="loading">
 		<input #searchInput class="textfield-input" formControlName="clue" />
 	</div>
 </form>
 
-<lu-option-placeholder *ngIf="(empty$ | async) && (loading$ | async) === false" (onClear)="reset()"></lu-option-placeholder>
+<lu-option-placeholder *ngIf="displayPlaceholder$ | async" (onClear)="reset()"></lu-option-placeholder>

@@ -5,7 +5,7 @@
 }
 
 @mixin small {
-	padding: var(--spacings-smaller) var(--spacings-standard);
+	padding: var(--spacings-small) var(--spacings-standard);
 	text-align: left;
 	min-height: 4rem;
 
@@ -39,7 +39,7 @@
 	.file-icon {
 		font-size: var(--sizes-standard-font-size);
 		line-height: var(--sizes-standard-line-height);
-		margin-bottom: var(--spacings-standard);
+		margin: 0 var(--spacings-smaller) var(--spacings-small) 0;
 	}
 
 	.file-title {

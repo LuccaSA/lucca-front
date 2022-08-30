@@ -143,6 +143,10 @@
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: var(--colors-white-color);
 
+			&::placeholder {
+				color: var(--palettes-grey-400);
+			}
+
 			&:focus,
 			&:hover {
 				position: relative;
@@ -217,12 +221,16 @@
 		}
 
 		&::placeholder {
-			color: var(--palettes-#{$state}-300);
+			color: var(--palettes-grey-400);
 		}
 
 		@if ($state == 'error') {
 			background-color: var(--palettes-#{$state}-50) !important;
 			box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)) !important;
+
+			&::placeholder {
+				color: var(--palettes-#{$state}-400);
+			}
 
 			&:hover {
 				background-color: var(--palettes-#{$state}-100) !important;
@@ -259,6 +267,7 @@
 
 @mixin framedSearch {
 	&::after {
+		color: var(--palettes-grey-600);
 		padding: var(--components-field-framed-side-padding);
 		bottom: 0;
 		right: 0;

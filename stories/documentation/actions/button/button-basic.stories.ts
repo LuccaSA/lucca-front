@@ -39,7 +39,7 @@ export default {
 		block: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -72,5 +72,5 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	],
 });
 
-export const Basic = Template.bind({});
-Basic.args = { mod: '', size: '', state: '', palette: '', block: '', disabled: false };
+export const BasicButton = Template.bind({});
+BasicButton.args = { mod: '', size: '', state: '', palette: '', block: false, disabled: false };

@@ -108,6 +108,12 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 const Template: Story<MenuSecondaryBasicStory> = (args: MenuSecondaryBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.navSide {
+			position: relative;
+		}
+	`],
 });
 
 export const Basic = Template.bind({});

@@ -1,15 +1,11 @@
-<!-- <div [ngClass]="panelClassesMap" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" [innerHtml]="content | luSafeContent: 'html'">
-</div> -->
-<ng-template>
-	<div
-		class="lu-tooltip-panel"
-		role="tooltip"
-		[ngClass]="panelClassesMap"
-		(mouseover)="onMouseOver()"
-		(mouseleave)="onMouseLeave()"
-		[attr.id]="panelId"
-		[@transformTooltip]="'enter'"
-	>
-		<div class="lu-tooltip-content" [ngClass]="contentClassesMap" [innerHtml]="content | luSafeContent: 'html'"></div>
-	</div>
-</ng-template>
+<div
+	class="lu-tooltip-panel"
+	role="tooltip"
+	[ngClass]="panelClassesMap"
+	(mouseover)="onMouseOver()"
+	(mouseleave)="onMouseLeave()"
+	[attr.id]="panelId"
+	[@transformTooltip]="'enter'"
+>
+	<div class="lu-tooltip-content" [ngClass]="contentClassesMap" [innerHtml]="content"></div>
+</div>

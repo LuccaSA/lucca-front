@@ -2,6 +2,7 @@ import type { Declaration, Root } from 'postcss';
 import type { FunctionNode, ValueParser } from 'postcss-value-parser';
 import { commentNode, PostCssLib, wrapWithCalcFunctionNode } from '../../../lib/scss-ast.js';
 import { ScssValueAst } from '../../../lib/scss-value-ast.js';
+import { getPaletteNodes } from './color.js';
 
 export function updateThemeMixin(root: Root, postCss: PostCssLib, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {
@@ -14,11 +15,16 @@ export function updateThemeMixin(root: Root, postCss: PostCssLib, postcssValuePa
 				decl,
 				(themeVar) => {
 					funcNode.value = 'var';
-					funcNode.nodes = new ScssValueAst(`--${themeVar}`, postcssValueParser).nodes;
 
-					const siblings = valueNode.getSiblings(funcNode);
-					if (siblings.some((s) => s.type === 'word' && s.value === '*')) {
-						wrapWithCalcFunctionNode(valueNode, funcNode, postcssValueParser);
+					if (funcNode.nodes[0]?.value.startsWith('palette.')) {
+						funcNode.nodes = getPaletteNodes(funcNode.nodes[0].value.replace('palette.', ''), undefined, postcssValueParser);
+					} else {
+						funcNode.nodes = new ScssValueAst(`--${themeVar}`, postcssValueParser).nodes;
+
+						const siblings = valueNode.getSiblings(funcNode);
+						if (siblings.some((s) => s.type === 'word' && s.value === '*')) {
+							wrapWithCalcFunctionNode(valueNode, funcNode, postcssValueParser);
+						}
 					}
 				},
 				postCss,
@@ -80,8 +86,11 @@ function updateThemeNode(funcNode: FunctionNode, declaration: Declaration, updat
 		return false;
 	}
 
-	const themeVar = funcNode.nodes[0].value.replace(/\./g, '-');
-	updater(themeVar);
+	updater(getVariableFromThemeArg(funcNode.nodes[0].value));
 
 	return undefined;
+}
+
+export function getVariableFromThemeArg(arg: string | undefined): string {
+	return arg?.replace?.(/\./g, '-') || '';
 }

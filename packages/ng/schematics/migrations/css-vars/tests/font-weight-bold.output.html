@@ -4,3 +4,10 @@
 </div>
 
 <span [ngClass]="{'u-textDefault u-fontWeight600': true }"></span>
+
+<p
+	class="u-marginBottomReset u-flexShrink1 u-displayFlex u-flexWrapWrap u-textSmall u-marginRightSmallest u-fontWeight600 u-marginBottomSmaller"
+	*ngIf="!!workLocation.office.floors.length"
+>
+	<span class="u-textGrey800">{{ floorsDisplayNames$ | async }}</span>
+</p>

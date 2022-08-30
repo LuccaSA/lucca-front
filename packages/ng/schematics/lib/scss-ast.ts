@@ -26,7 +26,7 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 			}
 		}
 
-		if (!parent || parent.type === 'docment') {
+		if (!parent || parent.type === 'document') {
 			return;
 		}
 
@@ -34,7 +34,7 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 	}
 }
 
-export function addMixinImport(root: Root, mixin: string, postCss: PostCssLib, namespace = ''): void {
+export function addMixinImport(root: Root, mixin: string, postCss: PostCssLib, namespace = ''): AtRule {
 	let lastImportRule: AtRule | undefined;
 
 	root.walkAtRules(/(import|use)/, (rule) => {
@@ -49,10 +49,10 @@ export function addMixinImport(root: Root, mixin: string, postCss: PostCssLib, n
 
 	const newImportRule = new postCss.AtRule({ name: 'use', params: importStr });
 
-	addImport(root, newImportRule, lastImportRule);
+	return addImport(root, newImportRule, lastImportRule);
 }
 
-export function addImport(root: Root, atRule: AtRule, afterNode?: Node) {
+export function addImport(root: Root, atRule: AtRule, afterNode?: Node): AtRule {
 	if (afterNode) {
 		atRule.raws.before = '\n';
 		afterNode.after(atRule);
@@ -66,22 +66,38 @@ export function addImport(root: Root, atRule: AtRule, afterNode?: Node) {
 			root.append(atRule);
 		}
 	}
+	return atRule;
 }
 
-export function addForwardRule(root: Root, name: string, postCss: PostCssLib) {
-	let lastForwardRule: AtRule | undefined;
-
-	root.walkAtRules('forward', (rule) => {
-		lastForwardRule = rule;
-	});
-
-	let afterNode: Node | undefined = lastForwardRule;
+export function addForwardRule(root: Root, name: string, postCss: PostCssLib, afterNode?: Node): AtRule {
+	if (!afterNode) {
+		root.walkAtRules('forward', (rule) => {
+			afterNode = rule;
+		});
+	}
 
 	if (!afterNode && root.first?.type === 'comment') {
 		afterNode = root.first;
 	}
 
-	addImport(root, new postCss.AtRule({ name: 'forward', params: `'${name}'` }), afterNode);
+	return addImport(root, new postCss.AtRule({ name: 'forward', params: `'${name}'` }), afterNode);
+}
+
+export function updateDeprecatedVariable(root: Root, mappingOldToNew: Record<string, string>, postcssValueParser: ValueParser) {
+	root.walkDecls((decl) => {
+		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
+
+		valueNode.walkFunction('var', (funcNode) => {
+			const varName = funcNode.nodes[0]?.value ?? '';
+			const newVarName = varName && mappingOldToNew[varName];
+
+			if (newVarName) {
+				funcNode.nodes = new ScssValueAst(newVarName, postcssValueParser).nodes;
+			}
+		});
+
+		decl.value = valueNode.toString();
+	});
 }
 
 /**

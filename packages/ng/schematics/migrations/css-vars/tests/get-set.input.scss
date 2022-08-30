@@ -24,3 +24,9 @@
 
 $theme: _set($theme, "palettes", $palettes);
 $theme: _set($theme, "colors", $colors);
+
+@each $style in $styles {
+  .toast-#{$style} {
+    background-color: _color($style);
+  }
+}

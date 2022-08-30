@@ -20,7 +20,7 @@ $basis: '0', 'auto';
 $order: '-1', '1';
 $textAlign: 'left', 'center', 'right';
 $visibility: 'visible', 'hidden', 'collapse';
-$fontWeight: '400', '600', 'normal', 'bold';
+$fontWeight: '200', '300', '400', '500', '600', '700', '800', '900', 'normal', 'bold';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
@@ -28,6 +28,7 @@ $whiteSpace: 'normal', 'nowrap';
 $float: 'left', 'right';
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
+$decoration: 'underline', 'none';
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {

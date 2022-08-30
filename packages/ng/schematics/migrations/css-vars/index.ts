@@ -1,9 +1,10 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { spawnSync } from 'child_process';
 import * as path from 'path';
-import { extractAllCssClassNames } from '../../lib/html-ast';
+import { extractNgTemplates } from '../../lib/angular-template';
+import { extractAllCssClassNames, extractAllHtmlElementNames } from '../../lib/html-ast';
 import { getCssImports } from './css-class-registry';
-import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile, optimizeScssGlobalImport } from './migration';
+import { migrateAngularJsonFile, migrateHTMLFile, migrateScssFile, migrateTsFile, optimizeScssGlobalImport } from './migration';
 
 export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimization: boolean }): Rule => {
 	const skipInstallation = options?.skipInstallation ?? false;
@@ -30,6 +31,7 @@ export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimiza
 		const { postcssValueParser } = await import('../../lib/local-deps/postcss-value-parser.js');
 
 		const allCssClasses = new Set<string>();
+		const allHtmlElements = new Set<string>();
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
@@ -61,15 +63,28 @@ export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimiza
 				migrateFile((content) => {
 					if (!skipGlobalImportOptimization) {
 						extractAllCssClassNames(content, angularCompiler).forEach((c) => allCssClasses.add(c));
+						extractAllHtmlElementNames(content, angularCompiler).forEach((c) => allHtmlElements.add(c));
 					}
 
-					return migrateHTMLFile(content, angularCompiler);
+					return migrateHTMLFile(path, content, angularCompiler);
+				});
+			}
+			if (path.endsWith('.ts')) {
+				migrateFile((content) => {
+					const ngTemplates = extractNgTemplates(path, content);
+
+					if (!skipGlobalImportOptimization) {
+						ngTemplates.flatMap((tpl) => extractAllCssClassNames(tpl.content, angularCompiler)).forEach((c) => allCssClasses.add(c));
+						ngTemplates.flatMap((tpl) => extractAllHtmlElementNames(tpl.content, angularCompiler)).forEach((c) => allHtmlElements.add(c));
+					}
+
+					return migrateTsFile(content, ngTemplates, angularCompiler);
 				});
 			}
 		});
 
 		if (!skipGlobalImportOptimization) {
-			const cssImports = getCssImports([...allCssClasses]);
+			const cssImports = getCssImports([...allCssClasses], [...allHtmlElements]);
 
 			tree.visit((path, entry) => {
 				if (path.includes('node_modules') || !entry || !path.endsWith('.scss')) {
@@ -77,7 +92,7 @@ export default (options?: { skipInstallation?: boolean; skipGlobalImportOptimiza
 				}
 
 				const content = entry.content.toString();
-				const newContent = optimizeScssGlobalImport(content, cssImports, postCss, postCssScss, postcssValueParser);
+				const newContent = optimizeScssGlobalImport(content, cssImports, postCss, postCssScss);
 
 				if (content !== newContent) {
 					tree.overwrite(path, newContent);

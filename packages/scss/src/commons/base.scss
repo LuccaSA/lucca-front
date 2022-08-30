@@ -5,8 +5,6 @@
 @use '@lucca-front/scss/src/commons/core';
 
 @if config.$fontVariable {
-	@import url('//fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
-} @else {
 	@font-face {
 		font-family: 'Source Sans Pro';
 		font-weight: 200 900;
@@ -17,6 +15,8 @@
 			url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf.woff') format('woff'),
 			url('//cdn.lucca.fr/fonts/SourceSans/SourceSans3VF-Roman.ttf') format('truetype');
 	}
+} @else {
+	@import url('//fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
 }
 
 *,
@@ -57,6 +57,10 @@
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-transition: all 150ms ease;
+	--commons-divider-width: 1px;
+	--commons-divider-color: var(--palettes-grey-200);
+	--commons-divider-style: solid;
+	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 }
 
 html {

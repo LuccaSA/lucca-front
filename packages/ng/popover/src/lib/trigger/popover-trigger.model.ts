@@ -15,7 +15,7 @@ import { ElementRef, ViewContainerRef } from '@angular/core';
 import { generateId } from '@lucca-front/ng/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map } from 'rxjs/operators';
-import { ILuPopoverPanel } from '../panel/index';
+import { ILuPopoverPanel, LuPopoverScrollStrategy } from '../panel/index';
 import { ILuPopoverTarget } from '../target/index';
 
 export type LuPopoverTriggerEvent = 'click' | 'hover' | 'none' | 'focus';
@@ -51,7 +51,7 @@ export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuP
 
 // tslint:disable-next-line: max-line-length
 export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget> implements ILuPopoverTrigger<TPanel, TTarget> {
-	protected _portal: TemplatePortal<unknown> | ComponentPortal<unknown>;
+	protected _portal: TemplatePortal<unknown> | ComponentPortal<TPanel>;
 	protected _overlayRef: OverlayRef | null = null;
 	protected _popoverOpen = false;
 	// protected _halt = false;
@@ -122,6 +122,14 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		this._disabled = d;
 	}
 
+	protected _whenEllipsis = false;
+	get whenEllipsis() {
+		return this._whenEllipsis;
+	}
+	set whenEllipsis(we: boolean) {
+		this._whenEllipsis = we;
+	}
+
 	protected _triggerId: string;
 	protected _panelId: string;
 
@@ -173,9 +181,9 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 
 	/** Opens the popover. */
 	openPopover(): void {
-		if (!this._popoverOpen && !this._disabled) {
+		if (!this._popoverOpen && !this._disabled && (!this._whenEllipsis || this._hasEllipsis())) {
 			this._createOverlay();
-			this._overlayRef.attach(this._portal);
+			this._attachPortalToOverlay();
 
 			/** Only subscribe to backdrop if trigger event is click */
 			if (this.triggerEvent === 'click') {
@@ -235,6 +243,14 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get isVerticallyPositionned(): boolean {
 		const position = this.target.position;
 		return position === 'below' || position === 'above';
+	}
+
+	protected _attachPortalToOverlay(): void {
+		this._overlayRef.attach(this._portal);
+	}
+
+	protected _getPanelScrollStrategy(): LuPopoverScrollStrategy {
+		return this.panel.scrollStrategy;
 	}
 
 	/**
@@ -357,7 +373,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		}
 
 		overlayState.direction = this.dir;
-		const scrollStrategy = this.panel.scrollStrategy;
+		const scrollStrategy = this._getPanelScrollStrategy();
 		switch (scrollStrategy) {
 			case 'block':
 				overlayState.scrollStrategy = this._overlay.scrollStrategies.block();
@@ -526,5 +542,18 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		if (this._panelEventsSubscriptions) {
 			this._panelEventsSubscriptions.unsubscribe();
 		}
+	}
+
+	protected _hasEllipsis(): boolean {
+		if (!(this._elementRef.nativeElement instanceof HTMLElement)) {
+			return false;
+		}
+
+		const { scrollWidth, scrollHeight, clientWidth, clientHeight } = this._elementRef.nativeElement;
+
+		const textClampedByWidth = scrollWidth > clientWidth;
+		const textClampedByHeight = scrollHeight > clientHeight;
+
+		return textClampedByWidth || textClampedByHeight;
 	}
 }

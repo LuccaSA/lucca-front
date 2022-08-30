@@ -20,7 +20,7 @@
 		width: auto;
 
 		&::after {
-      @include icon.generate('calendar');
+			@include icon.generate('calendar');
 		}
 
 		mat-icon {
@@ -28,7 +28,6 @@
 		}
 	}
 }
-
 
 // CALENDAR
 .mat-calendar {
@@ -44,7 +43,6 @@
 		display: none;
 	}
 
-
 	.mat-calendar-arrow {
 		display: none;
 	}
@@ -59,80 +57,11 @@
 	}
 }
 
-CALENDAR HEADER
-.mat-calendar-controls {
-	margin-top: 0 !important;
-	.mat-icon-button[disabled] {
-		opacity: .4
-	}
-	.mat-calendar-period-button {
-		flex: 1;
-		order: 1;
-	}
-
-	.mat-calendar-next-button {
-		order: 2;
-	}
-
-	.mat-calendar-spacer {
-		display: none;
-	}
-}
-
-TABLE
-.mat-calendar-body-cell {
-	.mat-calendar-body-cell-content {
-		box-shadow: form.fakeborderoverlay(var(--commons-divider-color));
-		border: none;
-		border-radius: 0;
-		color: var(--palettes-grey-600);
-		height: 100%;
-		left: 0;
-		top: 0;
-		width: 100%;
-
-		&:hover,
-		&.mat-calendar-body-selected {
-			background-color: var(--palette-primary-700);
-			color: var(--palette-primary-text);
-		}
-	}
-
-	&.mat-calendar-body-disabled {
-		opacity: 0.5;
-		pointer-events: none;
-	}
-}
-
-SPECIFIC MONTH-VIEW
-md-month-view,
-mat-month-view {
-	.mat-calendar-table-header th {
-		color: var(--palettes-grey-600);
-		font-size: 0.9em;
-		padding-bottom: 0.4em;
-	}
-
-	.mat-calendar-body-label {
-		overflow: hidden;
-		text-indent: -9999px;
-
-		&[colspan='7'] {
-			display: none; // REMOVE MONTH LABEL ABOVE NUMBERS IF FULL WIDTH
-		}
-	}
-}
-
-	.mat-calendar-content {
-		padding: 0 0.5em 0.5em 0.5em;
-	}
-}
-
 // CALENDAR HEADER
 .mat-calendar-controls {
 	margin-top: 0 !important;
 	.mat-icon-button[disabled] {
-		opacity: .4
+		opacity: 0.4;
 	}
 	.mat-calendar-period-button {
 		flex: 1;
@@ -151,7 +80,7 @@ mat-month-view {
 // TABLE
 .mat-calendar-body-cell {
 	.mat-calendar-body-cell-content {
-		box-shadow: form.fakeborderoverlay(var(--commons-divider-color));
+		box-shadow: form.fakeBorderOverlay(var(--commons-divider-color));
 		border: none;
 		border-radius: 0;
 		color: var(--palettes-grey-600);

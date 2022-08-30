@@ -52,7 +52,8 @@
             "styles": [".storybook/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "packages/ng/styles"
+                "packages/ng/styles",
+                "node_modules"
               ]
             },
             "compodoc": false

@@ -54,7 +54,7 @@ describe('HTML Migration', () => {
 				.replace(/\r/g, '');
 
 			// Act
-			const actual = migrateHTMLFile(input, await import('@angular/compiler'));
+			const actual = migrateHTMLFile(`${testCase}.html`, input, await import('@angular/compiler'));
 
 			//Assert
 			expect(stripLastNewLine(actual)).toBe(stripLastNewLine(expected));
@@ -77,7 +77,7 @@ describe('Migration Angular JSON file', () => {
 });
 
 describe('CSS Vars Migration', () => {
-	it('should update style files', async () => {
+	it('should update files', async () => {
 		const tree = new UnitTestTree(Tree.empty());
 		const inputs = files.filter((f) => f.includes('.input.'));
 		const outputs = files.filter((f) => f.includes('.output.'));
@@ -105,19 +105,46 @@ describe('CSS Vars Migration', () => {
 
 	it('should add optimized global imports', async () => {
 		const tree = new UnitTestTree(Tree.empty());
+		tree.create(
+			'app.component.ts',
+			`
+			@Component({
+				selector: 'clp-root',
+				template: \`
+					<clp-accessibility-nav></clp-accessibility-nav>
+					<lucca-sitemap id="navSide" class="mod-withBanner"></lucca-sitemap>
+					<main role="main" class="main-content" id="main-content">
+						<router-outlet></router-outlet>
+					</main>
+					<clf-feature-toggle feature="inbox">
+						<clp-documents-satellite enabled></clp-documents-satellite>
+					</clf-feature-toggle>
+					<clf-toast [sources]="[message$, toastError$]"></clf-toast>
+				\`,
+			})
+			export class AppComponent {}
+		`,
+		);
 		tree.create('app.component.html', '<button type="button" class="button">Test</button>');
-		tree.create('table.component.html', '<table class="table" [class.mod-stickyColumn]="true"></table>');
-		tree.create('styles.scss', "@import '@lucca-front/scss/src/main.overridable';");
+		tree.create('table.component.html', '<table class="table mod-sortable" [class.mod-stickyColumn]="true"></table>');
+		tree.create('util.component.html', '<div class="u-marginTopStandard">LOL</div>');
+		tree.create('styles.scss', "@import '@lucca-front/scss/src/main.overridable';\n@import '@lucca-front/ng/style/main.overridable';");
 
 		const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
 		// migration-v10-css-vars is the name of the migration, which is defined in the migration.json file
 		await schematicRunner.runSchematicAsync('migration-v10-css-vars', { skipInstallation: true }, tree).toPromise();
 
 		const expectedImports = [
-			`@forward '@lucca-front/scss/src/commons';`,
+			`@forward '@lucca-front/icons/src/main';`,
+			`@forward '@lucca-front/scss/src/main';`,
 			`@forward '@lucca-front/scss/src/components/button';`,
+			`@forward '@lucca-front/scss/src/components/main';`,
+			`@forward '@lucca-front/scss/src/components/navside';`,
 			`@forward '@lucca-front/scss/src/components/table';`,
+			`@forward '@lucca-front/scss/src/components/tableSorted';`,
 			`@forward '@lucca-front/scss/src/components/tableSticked';`,
+			`@forward '@lucca-front/scss/src/components/util';`,
+			`@forward '@lucca-front/ng/src/main';`,
 		];
 
 		expect(tree.readContent('styles.scss')).toBe(expectedImports.join('\n'));

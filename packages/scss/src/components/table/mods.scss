@@ -181,7 +181,8 @@
 		}
 	}
 
-	[class*='-row-cell'] {
+	.table-body-row-cell,
+	.table-head-row-cell {
 		&:first-child {
 			padding-left: var(--spacings-big);
 			position: relative;
