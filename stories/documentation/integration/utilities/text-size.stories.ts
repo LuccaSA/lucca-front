@@ -20,12 +20,14 @@ function getTemplate(args: TextSizeStory): string {
 const Template: Story<TextSizeStory> = (args: TextSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		span {
-			padding-right: 1rem;
+			padding-right: var(--spacings-small);
 		}
-		}`],
+		}`,
+	],
 });
 
 export const TextSize = Template.bind({});
-TextSize.args = { };
+TextSize.args = {};

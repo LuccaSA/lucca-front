@@ -15,7 +15,7 @@
 @mixin big {
 	.timeline-step-title {
 		padding-left: 2.25rem;
-		min-width: var(--spacings-big);
+		min-width: 2rem;
 
 		&::before {
 			width: 1.5rem;

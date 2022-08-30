@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsAutoWidthStory {
-}
+interface GridsAutoWidthStory {}
 
 export default {
 	title: 'Documentation/Structure/Grids/Auto Width',
@@ -26,17 +25,18 @@ function getTemplate(args: GridsAutoWidthStory): string {
 			<div class="grid-demo">grid-m</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<GridsAutoWidthStory> = (args: GridsAutoWidthStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: 1rem;
-			padding: 1rem;
+			margin-bottom: var(--spacings-small);
+			padding: var(--spacings-small);
 			border-radius: 1rem;
 		}`,
 	],

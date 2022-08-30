@@ -21,10 +21,10 @@
 			font-size: 0.8rem;
 			font-weight: 700;
 			height: 1rem;
-			padding: 0.05rem 0 0;
-			right: 0.5rem;
-			top: 0;
 			width: 1rem;
+			padding: 0.05rem 0 0;
+			right: var(--spacings-smaller);
+			top: 0;
 			transition-duration: 150ms;
 			transition-property: background-color;
 			margin: auto;

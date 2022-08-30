@@ -1,6 +1,6 @@
 @mixin vars {
 	--components-field-font-size: var(--sizes-standard-font-size);
-	--components-field-horizontal-spacing: 1.5rem;
+	--components-field-horizontal-spacing: var(--spacings-standard);
 	--components-field-input-color: var(--palettes-grey-800);
 	--components-field-input-inline-margin: 0.15rem;
 	--components-field-label-color: var(--palettes-grey-600);
@@ -11,7 +11,7 @@
 
 	--components-field-sizes-default: 13rem;
 
-	--components-field-compact-padding: 0.5rem;
+	--components-field-compact-padding: var(--spacings-smaller);
 	--components-field-compact-label-color: var(--palettes-grey-600);
 	--components-field-compact-label-font-size: var(--sizes-standard-font-size);
 	--components-field-compact-label-right-margin: 0.3rem;

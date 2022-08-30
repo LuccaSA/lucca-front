@@ -20,8 +20,8 @@
 .optionItem-icons {
 	display: none;
 	position: absolute;
-	top: 0.5rem;
-	right: 0.5rem;
+	top: var(--spacings-smaller);
+	right: var(--spacings-smaller);
 	opacity: 0;
 	transition: all var(--commons-animations-durations-fast) ease;
 }
@@ -29,7 +29,7 @@
 .optionItem-icon {
 	cursor: pointer;
 	opacity: 0.66;
-	margin-left: 0.5rem;
+	margin-left: var(--spacings-smaller);
 	transition: all var(--commons-animations-durations-fast) ease;
 
 	&:hover {
@@ -49,13 +49,13 @@
 	.optionItem-value {
 		&::before {
 			top: 1.3rem;
-			left: 0.5rem;
+			left: var(--spacings-smaller);
 			pointer-events: none;
 		}
 
 		&::after {
 			top: 1.3rem;
-			left: 0.5rem;
+			left: var(--spacings-smaller);
 			pointer-events: none;
 		}
 	}
@@ -67,27 +67,27 @@
 	}
 
 	.optionItem-value {
-		padding-right: 4rem;
+		padding-right: var(--spacings-biggest);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option) {
 	.optionItem-value {
-		padding-left: 1.5rem;
+		padding-left: var(--spacings-standard);
 
 		&::before {
-			left: 1.5rem;
+			left: var(--spacings-standard);
 		}
 
 		&::after {
-			left: 1.5rem;
+			left: var(--spacings-standard);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
 	.optionItem-value {
-		padding-left: 3rem;
+		padding-left: var(--spacings-bigger);
 	}
 }
 
@@ -107,7 +107,7 @@
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 4rem;
+		padding-left: var(--spacings-biggest);
 	}
 }
 

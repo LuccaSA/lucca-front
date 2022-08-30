@@ -22,12 +22,14 @@ function getTemplate(args: TextColorStory): string {
 const Template: Story<TextColorStory> = (args: TextColorStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		span {
-			padding-right: 1rem;
+			padding-right: var(--spacings-small);
 		}
-		}`],
+		}`,
+	],
 });
 
 export const TextColor = Template.bind({});
-TextColor.args = { };
+TextColor.args = {};

@@ -20,13 +20,15 @@ function getTemplate(args: SpinStory): string {
 const Template: Story<SpinStory> = (args: SpinStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		.textfield {
 			float: left;
 			margin-right: 1rem;
 		}
-		}`],
+		}`,
+	],
 });
 
 export const Spin = Template.bind({});
-Spin.args = { };
+Spin.args = {};

@@ -5,8 +5,8 @@
 	--components-popup-size-small: 32rem;
 	--components-popup-size-medium: 42rem;
 	--components-popup-size-large: 60rem;
-	--components-popup-padding-horizontal: 2rem;
-	--components-popup-padding-vertical: 1rem;
+	--components-popup-padding-horizontal: var(--spacings-big);
+	--components-popup-padding-vertical: var(--spacings-small);
 }
 
 .lu-popup-panel {
@@ -38,7 +38,8 @@
 }
 
 .lu-modal-header {
-	padding: var(--components-popup-padding-vertical) 4rem var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
+	padding: var(--components-popup-padding-vertical) var(--spacings-biggest) var(--components-popup-padding-vertical)
+		var(--components-popup-padding-horizontal);
 	position: relative;
 }
 
@@ -51,7 +52,7 @@
 	background: transparent;
 	border: none;
 	outline: none;
-	padding: 0.5rem;
+	padding: var(--spacings-smaller);
 	height: 3rem;
 	width: 3rem;
 	position: absolute;
@@ -140,7 +141,7 @@
 			margin-bottom: 2.5rem;
 		}
 		.modal-visual {
-			margin: 4.5rem -2rem 0 -2rem;
+			margin: 4.5rem calc(var(--spacings-big) * -1) 0 calc(var(--spacings-big) * -1);
 		}
 
 		.modal-visual-illustration {

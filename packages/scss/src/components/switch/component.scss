@@ -12,11 +12,11 @@
 
 		.switch-label {
 			padding: 0;
-			padding-left: calc(2rem - 4px + var(--spacings-smaller));
+			padding-left: calc(var(--spacings-big) - 4px + var(--spacings-smaller));
 			color: var(--palettes-grey-800);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
-			line-height: 1.5rem;
+			line-height: var(--sizes-standard-line-height);
 			cursor: pointer;
 
 			&::before {
@@ -24,7 +24,7 @@
 
 				align-items: center;
 				background-color: var(--palettes-grey-500);
-				border-radius: 0.5rem;
+				border-radius: 9999px;
 				color: var(--colors-white-color);
 				display: flex;
 				font-size: var(--sizes-smaller-font-size);

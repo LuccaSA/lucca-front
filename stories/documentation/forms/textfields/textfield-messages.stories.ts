@@ -30,17 +30,19 @@ function getTemplate(args: TextfieldMessagesStory): string {
 				<span class="textfield-messages-error">Oops, il y a une erreur !</span>
 			</span>
 		</label>
-	`
+	`;
 }
 
 const Template: Story<TextfieldMessagesStory> = (args: TextfieldMessagesStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const Messages = Template.bind({});

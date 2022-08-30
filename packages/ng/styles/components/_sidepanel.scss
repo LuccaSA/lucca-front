@@ -2,7 +2,7 @@
 	--components-sidepanel-size-small: 40rem;
 	--components-sidepanel-size-medium: 55rem;
 	--components-sidepanel-size-large: 70rem;
-	--components-sidepanel-translate: 3rem;
+	--components-sidepanel-translate: var(--spacings-bigger);
 }
 
 .lu-popup-panel {

@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin icon {
-	padding-left: 3rem;
+	padding-left: var(--spacings-bigger);
 
 	@at-root {
 		.callout-icon {
@@ -33,7 +33,7 @@
 			top: 0.4rem;
 
 			.lucca-icon {
-				font-size: 1rem;
+				font-size: var(--sizes-standard-font-size);
 			}
 		}
 	}
@@ -51,7 +51,7 @@
 			height: 1.5rem;
 			border: 0;
 			padding: 0;
-			top: 0.5rem;
+			top: var(--spacings-smaller);
 			transition-duration: 150ms;
 			transition-property: background-color;
 			width: 1rem;

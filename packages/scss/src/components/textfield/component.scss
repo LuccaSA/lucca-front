@@ -6,7 +6,7 @@
 		.textfield-input {
 			min-width: 0;
 			border: 0;
-			line-height: 1.5rem;
+			line-height: var(--sizes-standard-line-height);
 			-webkit-appearance: none;
 			background-color: var(--components-textfield-background);
 			border-radius: var(--components-textfield-border-radius);
@@ -27,7 +27,7 @@
 			right: var(--components-textfield-input-padding-horizontal);
 			position: absolute;
 			pointer-events: none;
-			line-height: 1.5rem;
+			line-height: var(--sizes-standard-line-height);
 			z-index: 1;
 		}
 
@@ -61,7 +61,7 @@
 		.textfield-options-entry {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			padding: 0.5rem 1rem;
+			padding: var(--spacings-smaller) var(--spacings-small);
 			cursor: pointer;
 		}
 	}

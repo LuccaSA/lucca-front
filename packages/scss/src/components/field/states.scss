@@ -76,12 +76,12 @@
 }
 
 @mixin loading {
-	@include loading.spinner(1rem);
+	@include loading.spinner;
 
 	&::before,
 	&::after {
 		content: '' !important;
-		right: 0.5rem !important;
+		right: var(--spacings-smaller) !important;
 		bottom: 0.7rem !important;
 		z-index: 2 !important;
 		left: inherit !important;
@@ -92,7 +92,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: 2rem;
+		padding-right: var(--spacings-big);
 	}
 }
 
@@ -148,7 +148,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: 2rem;
+		padding-right: var(--spacings-big);
 	}
 }
 

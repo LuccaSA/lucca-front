@@ -83,7 +83,7 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: 0.5rem;
+		bottom: var(--spacings-smaller);
 		right: 1.6rem;
 	}
 
@@ -101,7 +101,7 @@
 			height: var(--sizes-standard-line-height);
 			line-height: var(--sizes-standard-line-height);
 			padding: 0 var(--spacings-smaller);
-			margin: 0 0.25rem 0.25rem 0;
+			margin: 0 var(--spacings-smallest) var(--spacings-smallest) 0;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			vertical-align: top;
@@ -179,7 +179,7 @@
 		.lu-select-placeholder {
 			padding: 0;
 			height: auto;
-			padding-top: 1rem;
+			padding-top: var(--spacings-small);
 			color: var(--palettes-grey-800);
 		}
 
@@ -239,7 +239,7 @@
 			.lu-select-display-wrapper {
 				overflow: hidden;
 				white-space: normal;
-				margin-bottom: -0.25rem;
+				margin-bottom: calc(var(--spacings-smallest) * -1);
 			}
 	}
 
