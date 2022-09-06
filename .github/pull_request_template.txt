@@ -1,0 +1,11 @@
+## Description
+
+Description fonctionnelle pour le changelog.
+Gardez une ligne vide sous votre texte, ainsi que les 5 traits qui la suivent.
+
+-----
+
+Optionnellement, description technique ou plus en profondeur à destination des relecteurs.
+Gardez une ligne vide sous votre texte, ainsi que les 5 traits qui la suivent.
+
+-----

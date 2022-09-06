@@ -1,0 +1,27 @@
+check-wip:
+  enabled: true
+check-rebuild-asked:
+  enabled: true
+  validatingSentences:
+    - "rebuild"
+  buildPipeline: "ux/job/lucca-front"
+check-functional-description:
+  enabled: true
+  protectedBranches:
+    - "master"
+    - "rc"
+  uncheckTypes: true
+check-labels:
+  enabled: true
+release-drafter:
+  enabled: true
+  releasedBranches:
+    - "master"
+  flavor: "condensed"
+auto-labels:
+  enabled: true
+  properties:
+    - label: ":hammer: Technical"
+      path: "(^Jenkinsfile$|^.github/*|^.cd/*)"
+    - label: ":book: Documentation changes"
+      path: "(^stories/*)"
