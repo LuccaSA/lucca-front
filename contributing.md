@@ -26,11 +26,11 @@ Follow our [tutorial on Notion](https://www.notion.so/Mise-jour-de-la-font-36363
 
 Follow our [tutorial on Prisme](https://prisme.lucca.io/94310e217/p/929c63-intgration) (🇫🇷)
 
-:work_in_progress: ecriture la structure des dossiers
+:wip: ecriture la structure des dossiers
 
 ### For package Ng 
 
-:work_in_progress: Mettre en place avec la guilde
+:wip: Mettre en place avec la guilde
 
 
 ## <a name="submit"></a> Submission Guidelines
@@ -44,7 +44,7 @@ When a component, an icon or a class scss is added or modified, verify all this 
 
 - Add or modify Stories. Check the documentation in the stories and update if necessary
 - For the ng components, add or modify unit test
-- :work_in_progress: UiDiff
+- :wip: UiDiff
 
 Add a label "Technical", "Feature"  or "Issue"
 Add a label "Documentation changes" when a stories is added or modified
