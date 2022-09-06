@@ -15,10 +15,8 @@
 		"rootDirs": ["./"],
 		"paths": {
 			"@lucca-front/ng/*": ["packages/ng/*/src/public-api.ts"],
-			// for testing purpose
-			"@/stories/*": ["stories/documentation/*"],
+			"@/stories/*": ["stories/documentation/*"]
 		},
-		// "emitDecoratorMetadata": true,
 		"declaration": false,
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
