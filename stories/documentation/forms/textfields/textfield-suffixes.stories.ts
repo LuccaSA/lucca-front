@@ -18,17 +18,19 @@ function getTemplate(args: TextfieldSearchAndSuffixStory): string {
 			<span class="textfield-label">Label textfield</span>
 			<span class="textfield-suffix">€</span>
 		</label>
-	`
+	`;
 }
 
 const Template: Story<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAndSuffixStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const SearchAndSuffix = Template.bind({});

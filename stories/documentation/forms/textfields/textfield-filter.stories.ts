@@ -15,17 +15,19 @@ function getTemplate(args: TextfieldFilterStory): string {
 	  	<span class="textfield-label">Label textfield</span>
 	  </label>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<TextfieldFilterStory> = (args: TextfieldFilterStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const Filter = Template.bind({});

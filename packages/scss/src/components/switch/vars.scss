@@ -10,11 +10,11 @@
 	--components-switch-default-palette-800: var(--palettes-primary-800);
 	--components-switch-default-palette-900: var(--palettes-primary-900);
 
-  --components-switch-top: 1px;
-  --components-switch-icon-top: 1px;
-  --components-switch-icon-left: 2px;
-  --components-switch-icon-right: calc(2px + .75rem);
-  --components-switch-small-top: 2px;
-  --components-switch-small-icon-left: 1px;
-	--components-switch-small-icon-right: calc(3px + .5rem);
+	--components-switch-top: 1px;
+	--components-switch-icon-top: 1px;
+	--components-switch-icon-left: 2px;
+	--components-switch-icon-right: calc(2px + 0.75rem);
+	--components-switch-small-top: 2px;
+	--components-switch-small-icon-left: 1px;
+	--components-switch-small-icon-right: calc(3px + 0.5rem);
 }

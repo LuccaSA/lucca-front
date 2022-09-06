@@ -24,8 +24,8 @@
 		@include small;
 	}
 
-	&.mod-fixed {
-		@include fixed;
+	&.mod-layoutFixed {
+		@include layoutFixed;
 	}
 
 	&.mod-noOffset {

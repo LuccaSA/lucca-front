@@ -21,17 +21,19 @@ function getTemplate(args: TextfieldFeedbackStory): string {
 		<input class="textfield-input" type="text">
 		<span class="textfield-label">Invalid</span>
 	</label>
-	`
+	`;
 }
 
 const Template: Story<TextfieldFeedbackStory> = (args: TextfieldFeedbackStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			display: inline-flex;
 			margin-right: 1rem;
-		}`]
+		}`,
+	],
 });
 
 export const Feedback = Template.bind({});

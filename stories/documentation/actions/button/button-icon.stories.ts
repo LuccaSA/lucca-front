@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface ButtonIconStory {
-}
+interface ButtonIconStory {}
 
 export default {
 	title: 'Documentation/Actions/Button/Icon',
@@ -25,5 +24,5 @@ const Template: Story<ButtonIconStory> = (args: ButtonIconStory) => ({
 	],
 });
 
-export const Icon = Template.bind({});
-Icon.args = { };
+export const IconButton = Template.bind({});
+IconButton.args = {};

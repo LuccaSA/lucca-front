@@ -1,9 +1,9 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 :root {
-	--components-options-item-padding-vertical: 0.5rem;
-	--components-options-item-padding-horizontal: 0.5rem;
-	--components-options-item-multiple-padding: 2rem;
+	--components-options-item-padding-vertical: var(--spacings-smaller);
+	--components-options-item-padding-horizontal: var(--spacings-smaller);
+	--components-options-item-multiple-padding: var(--spacings-big);
 	--components-options-item-icon-color: var(--palettes-grey-800);
 
 	--components-options-checkbox-left: 0.5rem;
@@ -81,8 +81,8 @@
 			&::after {
 				@include icon.generate('tick');
 
-				color: white;
-				font-size: 0.8rem;
+				color: transparent;
+				font-size: 1rem;
 				line-height: var(--components-options-checkbox-size);
 				padding-top: 0.05rem;
 				position: absolute;
@@ -99,6 +99,7 @@
 				}
 
 				&::after {
+					color: var(--colors-white-color);
 					transform: translateY(-50%) scale(1);
 				}
 			}

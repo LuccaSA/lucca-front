@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsSortStory {
-}
+interface GridsSortStory {}
 
 export default {
 	title: 'Documentation/Structure/Grids/Sort',
@@ -38,17 +37,18 @@ function getTemplate(args: GridsSortStory): string {
 		</div>
 	</div>
 
-	`
+	`;
 }
 
 const Template: Story<GridsSortStory> = (args: GridsSortStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: 1rem;
-			padding: 1rem;
+			margin-bottom: var(--spacings-small);
+			padding: var(--spacings-small);
 			border-radius: 1rem;
 		}`,
 	],

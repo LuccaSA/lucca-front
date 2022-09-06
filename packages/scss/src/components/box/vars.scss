@@ -1,8 +1,8 @@
 @mixin vars {
 	--components-box-background: #f3f5fc;
 	--components-box-border-radius: 8px;
-	--components-box-margin: 0 0 1rem;
-	--components-box-padding: 1.5rem;
+	--components-box-margin: 0 0 var(--spacings-small);
+	--components-box-padding: var(--spacings-standard);
 	--components-box-toggle-arrow-size: 0.8rem;
 	--components-box-toggle-arrow-left: 2.5rem;
 }

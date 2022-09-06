@@ -15,12 +15,14 @@ function getTemplate(args: EllipsisStory): string {
 const Template: Story<EllipsisStory> = (args: EllipsisStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		span {
-			padding-right: 1rem;
+			padding-right: var(--spacings-small);
 		}
-		}`],
+		}`,
+	],
 });
 
 export const Ellipsis = Template.bind({});
-Ellipsis.args = { };
+Ellipsis.args = {};

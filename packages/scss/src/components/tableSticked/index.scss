@@ -11,9 +11,6 @@
 
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.largerThan($breakpoint) {
-			&.mod-layoutFixed-#{$breakpoint} {
-				@include fixed;
-			}
 
 			&.mod-stickyColumn-#{$breakpoint} {
 				@include stickyColumn;

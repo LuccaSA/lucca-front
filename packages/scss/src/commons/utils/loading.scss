@@ -32,7 +32,7 @@
 	}
 }
 
-@mixin gradient {
+@mixin gradient($backgroundColor: transparent, $color: rgba(var(--colors-grey-900-rgb), 0.1)) {
 	@keyframes loadingGradient {
 		0% {
 			background-position: 100% 0%;
@@ -47,9 +47,8 @@
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
 	animation-fill-mode: forwards;
-	background-color: currentColor;
+	background-color: $backgroundColor;
 	background-repeat: no-repeat;
-	background-image: linear-gradient(315deg, transparent 40%, currentColor 50%, transparent 100%);
+	background-image: linear-gradient(315deg, $backgroundColor 40%, $color 50%, $backgroundColor 100%);
 	background-size: 400% 100%;
-	color: rgba(var(--colors-grey-900-rgb), 0.1);
 }

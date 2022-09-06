@@ -98,7 +98,7 @@
 			font-size: var(--components-navSide-main-font-size);
 			padding: var(--spacings-small);
 			font-weight: 600;
-			line-height: 1rem;
+			line-height: var(--sizes-smaller-line-height);
 
 			&:focus-visible {
 				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
@@ -141,7 +141,7 @@
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
-			font-size: 0.8em;
+			font-size: var(--sizes-big-font-size);
 			flex-shrink: 0;
 			width: 1em;
 			height: 1em;

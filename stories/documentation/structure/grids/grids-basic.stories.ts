@@ -60,17 +60,18 @@ function getTemplate(args: GridsBasicStory): string {
 			<div class="grid-demo">grid-l3 grid-m6</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<GridsBasicStory> = (args: GridsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: 1rem;
-			padding: 1rem;
+			margin-bottom: var(--spacings-small);
+			padding: var(--spacings-small);
 			border-radius: 1rem;
 		}`,
 	],

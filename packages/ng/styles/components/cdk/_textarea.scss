@@ -1,5 +1,5 @@
 :root {
-	--components-cdk-textarea-input-padding-horizontal: 0.5rem;
+	--components-cdk-textarea-input-padding-horizontal: var(--spacings-smaller);
 }
 
 .cdk-textarea-autosize {

@@ -1,9 +1,9 @@
 .mat-tooltip {
 	border-radius: var(--commons-border-radius);
-  background: var(--components-tooltip-background-color);
-  color: var(--components-tooltip-color);
+	background: var(--components-tooltip-background-color);
+	color: var(--components-tooltip-color);
 	font-size: var(--sizes-smaller-line-height) !important;
-	margin: 0.5em !important;
-	padding: .25rem .5rem !important;
-	line-height: 1rem;
+	margin: var(--spacings-smaller) !important;
+	padding: var(--spacings-smallest) var(--spacings-smaller) !important;
+	line-height: var(--sizes-smaller-line-height);
 }

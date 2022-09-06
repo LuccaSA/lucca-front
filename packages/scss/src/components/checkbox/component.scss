@@ -26,7 +26,7 @@
 				transition-property: all;
 				border: 2px solid var(--components-checkbox-input-border-color);
 				line-height: 0.85;
-				font-size: 1rem;
+				font-size: var(--sizes-standard-font-size);
 				flex-grow: 0;
 				flex-shrink: 0;
 				flex-basis: auto;

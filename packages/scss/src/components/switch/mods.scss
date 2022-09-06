@@ -1,6 +1,6 @@
 @mixin inline {
 	display: inline-block;
-	margin-right: 1.5rem;
+	margin-right: var(--spacings-standard);
 }
 
 @mixin small {

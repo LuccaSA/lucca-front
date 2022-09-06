@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TextfieldPasswordStory {
-}
+interface TextfieldPasswordStory {}
 
 export default {
 	title: 'Documentation/Forms/Textfield/Password',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextfieldPasswordStory): string {
@@ -45,19 +43,20 @@ function getTemplate(args: TextfieldPasswordStory): string {
 				</a>
 			  </span>
 		</label>
-	`
+	`;
 }
 
 const Template: Story<TextfieldPasswordStory> = (args: TextfieldPasswordStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.textfield {
 			float: left;
 			margin-right: 1rem;
 		}`,
-	]
+	],
 });
 
 export const Password = Template.bind({});
-Password.args = { };
+Password.args = {};

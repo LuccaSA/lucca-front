@@ -3,7 +3,7 @@
 @mixin component {
 	@keyframes toast {
 		0% {
-			transform: translateY(1rem);
+			transform: translateY(var(--spacings-small));
 			opacity: 0;
 		}
 
@@ -44,7 +44,7 @@
 			transition-property: opacity;
 			transition-duration: var(--commons-animations-durations-fast);
 			background-color: transparent;
-			right: 0.5rem;
+			right: var(--spacings-smaller);
 			bottom: 0;
 			top: 0;
 			border: 0;

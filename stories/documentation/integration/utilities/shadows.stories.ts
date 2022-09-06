@@ -20,14 +20,16 @@ function getTemplate(args: ShadowsStory): string {
 const Template: Story<ShadowsStory> = (args: ShadowsStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		div {
-			margin-bottom: 1rem;
-			padding: .5rem;
+			margin-bottom: var(--spacings-small);
+			padding: var(--spacings-smaller);
 			width: 20rem;
 		}
-		}`],
+		}`,
+	],
 });
 
 export const Shadows = Template.bind({});
-Shadows.args = { };
+Shadows.args = {};

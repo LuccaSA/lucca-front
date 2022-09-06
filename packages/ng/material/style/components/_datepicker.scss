@@ -113,7 +113,7 @@ mat-month-view {
 
 	.mat-calendar-body-label {
 		overflow: hidden;
-		text-indent: -999px;
+		text-indent: -9999px;
 
 		&[colspan='7'] {
 			display: none; // REMOVE MONTH LABEL ABOVE NUMBERS IF FULL WIDTH

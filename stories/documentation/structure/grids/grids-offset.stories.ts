@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsOffsetStory {
-}
+interface GridsOffsetStory {}
 
 export default {
 	title: 'Documentation/Structure/Grids/Offset',
@@ -22,17 +21,18 @@ function getTemplate(args: GridsOffsetStory): string {
 			<div class="grid-demo">grid-xs3</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<GridsOffsetStory> = (args: GridsOffsetStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: 1rem;
-			padding: 1rem;
+			margin-bottom: var(--spacings-small);
+			padding: var(--spacings-small);
 			border-radius: 1rem;
 		}`,
 	],

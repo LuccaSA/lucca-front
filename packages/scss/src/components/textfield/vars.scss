@@ -1,8 +1,8 @@
 @mixin vars {
 	--components-textfield-background: var(--palettes-primary-50);
 	--components-textfield-border-radius: 4px;
-	--components-textfield-input-padding-horizontal: 0.5rem;
-	--components-textfield-input-padding-vertical: 0.5rem;
+	--components-textfield-input-padding-horizontal: var(--spacings-smaller);
+	--components-textfield-input-padding-vertical: var(--spacings-smaller);
 	--components-textfield-input-placeholder: var(--palettes-primary-400);
 	--components-textfield-hover-background: var(--palettes-primary-100);
 	--components-textfield-hover-placeholder: var(--palettes-primary-400);
@@ -11,8 +11,8 @@
 	--components-textfield-focus-border-color: var(--palettes-primary-600);
 	--components-textfield-disabled-background: var(--commons-disabled-background);
 	--components-textfield-disabled-color: var(--commons-disabled-color);
-	--components-textfield-suffix-top: 2rem;
-	--components-textfield-suffix-padding-right: 1.5rem;
+	--components-textfield-suffix-top: var(--spacings-big);
+	--components-textfield-suffix-padding-right: var(--spacings-standard);
 	--components-textfield-sizes-shortest: 3rem;
 	--components-textfield-sizes-shorter: 6rem;
 	--components-textfield-sizes-short: 9rem;
@@ -21,16 +21,16 @@
 	--components-textfield-sizes-longer: 22rem;
 	--components-textfield-sizes-longest: 28rem;
 
-	--components-textfield-material-padding-top: 1rem;
+	--components-textfield-material-padding-top: var(--spacings-small);
 	--components-textfield-material-default-palette-color: var(--palettes-grey-600);
 	--components-textfield-material-border-color: #ccc;
 	--components-textfield-material-label-color: var(--palettes-grey-600);
-	--components-textfield-material-label-font-size: 1rem;
-	--components-textfield-material-suffix-padding-right: 1rem;
+	--components-textfield-material-label-font-size: var(--sizes-standard-font-size);
+	--components-textfield-material-suffix-padding-right: var(--spacings-small);
 
-	--components-textfield-compact-padding: 0.5rem;
+	--components-textfield-compact-padding: var(--spacings-smaller);
 	--components-textfield-compact-label-color: #96a6c5;
-	--components-textfield-compact-label-font-size: 1rem;
+	--components-textfield-compact-label-font-size: var(--sizes-standard-font-size);
 	--components-textfield-compact-label-right-margin: 0.3rem;
 	--components-textfield-compact-label-sizes-shorter: 3rem;
 	--components-textfield-compact-label-sizes-short: 5rem;

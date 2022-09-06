@@ -3,16 +3,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin fixed {
-	table-layout: fixed;
-}
-
-@mixin layoutFixed($i) {
-	min-width: $i * 1rem;
-	max-width: $i * 1rem;
-	width: $i * 1rem;
-}
-
 @mixin stickyColumn($shadowColor: #2a3551) {
 	width: auto;
 	min-width: 100%;
@@ -105,20 +95,20 @@
 }
 
 @mixin leftOffset($i) {
-	left: $i * 1rem;
+	left: calc(#{$i} * var(--spacings-small));
 
 	&.mod-stickyColumn-shadow,
 	.stickyColumn-shadow-wrapper::after {
-		left: calc(#{$i} * 1rem + var(--components-table-fixed-column-sticky-shadow-width));
+		left: calc(#{$i} * var(--spacings-small) + var(--components-table-fixed-column-sticky-shadow-width));
 	}
 }
 
 @mixin rightOffset($i) {
-	right: $i * 1rem;
+	right: calc(#{$i} * var(--spacings-small));
 
 	&.mod-stickyColumn-shadow,
 	.stickyColumn-shadow-wrapper::after {
-		right: calc(#{$i} * 1rem + var(--components-table-fixed-column-sticky-shadow-width));
+		right: calc(#{$i} * var(--spacings-small) + var(--components-table-fixed-column-sticky-shadow-width));
 	}
 }
 
