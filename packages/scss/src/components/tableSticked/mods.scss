@@ -3,16 +3,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin fixed {
-	table-layout: fixed;
-}
-
-@mixin layoutFixed($i) {
-	min-width: $i * 1rem;
-	max-width: $i * 1rem;
-	width: $i * 1rem;
-}
-
 @mixin stickyColumn($shadowColor: #2a3551) {
 	width: auto;
 	min-width: 100%;
