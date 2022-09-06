@@ -79,12 +79,6 @@ public class ModSteps
         await ClickOnSwitchControlAsync(small, "small");
     }
 
-    [When(@"select grey (true|false)")]
-    public async Task WhenSelectGreyAsync(string grey)
-    {
-        await ClickOnSwitchControlAsync(grey, "grey");
-    }
-
     [When(@"select icon (.*)")]
     public async Task WhenSelectIconAsync(string icon)
     {
@@ -128,42 +122,50 @@ public class ModSteps
     }
 
     [When (@"select center (true|false)")]
-    public async Task WhenSelectCenterAsync(string center) {
+    public async Task WhenSelectCenterAsync(string center)
+    {
         await ClickOnSwitchControlAsync(center, "center");
     }
 
     [When (@"select clickable (true|false)")]
-    public async Task WhenSelectClickableAsync(string clickable) {
+    public async Task WhenSelectClickableAsync(string clickable)
+    {
         await ClickOnSwitchControlAsync(clickable, "clickable");
     }
 
     [When (@"select elevated (true|false)")]
-    public async Task WhenSelectElevatedAsync(string elevated) {
+    public async Task WhenSelectElevatedAsync(string elevated)
+    {
         await ClickOnSwitchControlAsync(elevated, "elevated");
     }
 
     [When (@"select reverse (true|false)")]
-    public async Task WhenSelectReverseAsync(string reverse) {
+    public async Task WhenSelectReverseAsync(string reverse)
+    {
         await ClickOnSwitchControlAsync(reverse, "reverse");
     }
 
     [When (@"select noShadow (true|false)")]
-    public async Task WhenSelectNoShadowAsync(string noShadow) {
+    public async Task WhenSelectNoShadowAsync(string noShadow)
+    {
         await ClickOnSwitchControlAsync(noShadow, "noShadow");
     }
 
     [When (@"select withoutShadow (true|false)")]
-    public async Task WhenSelectWithoutShadowAsync(string withoutShadow) {
+    public async Task WhenSelectWithoutShadowAsync(string withoutShadow)
+    {
         await ClickOnSwitchControlAsync(withoutShadow, "withoutShadow");
     }
 
     [When (@"select withMenu (true|false)")]
-    public async Task WhenSelectWithMenuAsync(string withMenu) {
+    public async Task WhenSelectWithMenuAsync(string withMenu)
+    {
         await ClickOnSwitchControlAsync(withMenu, "withMenu");
     }
 
     [When (@"select withBreadcrumbs (true|false)")]
-    public async Task WhenSelectWithBreadcrumbsAsync(string withBreadcrumbs) {
+    public async Task WhenSelectWithBreadcrumbsAsync(string withBreadcrumbs)
+    {
         await ClickOnSwitchControlAsync(withBreadcrumbs, "withBreadcrumbs");
     }
 
