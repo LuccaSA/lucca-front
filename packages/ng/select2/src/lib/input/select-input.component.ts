@@ -20,7 +20,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	TemplateRef
+	TemplateRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
