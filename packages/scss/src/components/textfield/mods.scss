@@ -145,6 +145,12 @@
 
 	.textfield-input {
 		padding-right: var(--spacings-big);
+
+		&[type="search"]:is(:hover, :focus) {
+			&::-webkit-search-cancel-button {
+				 display: none;
+			 }
+		}
 	}
 }
 

@@ -113,18 +113,12 @@
 					<input class="textfield-input" type="password" placeholder="placeholder" value="azerty12345#@!%;" />
 					<span class="textfield-label">Password label</span>
 					<span class="textfield-suffix">
-						<a
-							href="#"
-							onClick="event.preventDefault()"
-							role="button"
-							aria-pressed="false"
-							class="textfield-suffix-action"
-						>
-						  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
-						  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
-						  <span class="u-mask">Show password</span>
+						<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="false" class="textfield-suffix-action">
+							<span aria-hidden="true" class="lucca-icon icon-watch"></span>
+							<span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
+							<span class="u-mask">Show password</span>
 						</a>
-					  </span>
+					</span>
 				</label>
 			</div>
 		</div>
@@ -134,25 +128,22 @@
 					<input class="textfield-input" type="text" placeholder="placeholder" value="azerty12345#@!%;" />
 					<span class="textfield-label">Password label</span>
 					<span class="textfield-suffix">
-						<a
-						  href="#"
-						  onClick="event.preventDefault()"
-						  role="button"
-						  aria-pressed="true"
-						  class="textfield-suffix-action"
-						>
-						  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
-						  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
-						  <span class="u-mask">Show password</span>
+						<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="true" class="textfield-suffix-action">
+							<span aria-hidden="true" class="lucca-icon icon-watch"></span>
+							<span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
+							<span class="u-mask">Show password</span>
 						</a>
-					  </span>
+					</span>
 				</label>
 			</div>
 		</div>
 	</div>
 
-	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width input.</em><br>
-	<em><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em><br>
+	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width input.</em><br />
+	<em
+		><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the label on the upper state
+		with <code class="code">mod-material</code>.</em
+	><br />
 	<em><strong>Tip:</strong> You can use <code class="code">placeholder="…"</code> on <code class="code">textfield-input</code>.</em>
 </section>
 
@@ -204,7 +195,7 @@
 					</span>
 				</label>
 			</div>
-<!-- <code class="code mod-block">&lt;label class="textfield"&gt;
+			<!-- <code class="code mod-block">&lt;label class="textfield"&gt;
 	&lt;input class="textfield-input is-success" type="text" placeholder="placeholder" /&gt;
 	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
 	&lt;span class="textfield-messages"&gt;
@@ -376,7 +367,10 @@
 </section>
 
 <h2>Inline validation</h2>
-<p>You can add a <code class="code">is-loading</code> and a <code class="code">is-valid</code> or <code class="code">is-invalid</code> class on <code class="code">&lt;label class="textfield"&gt;</code> for your inline validation.</p>
+<p>
+	You can add a <code class="code">is-loading</code> and a <code class="code">is-valid</code> or <code class="code">is-invalid</code> class
+	on <code class="code">&lt;label class="textfield"&gt;</code> for your inline validation.
+</p>
 
 <!-- Inline validation -->
 <section class="contentSection">
@@ -404,7 +398,7 @@
 		<div class="grid-s4">
 			<div class="form-group">
 				<label class="textfield mod-block mod-withSuffix">
-					<input class="textfield-input" type="text">
+					<input class="textfield-input" type="text" />
 					<span class="textfield-label">Textfield label</span>
 					<span class="textfield-suffix">€</span>
 				</label>
@@ -413,7 +407,7 @@
 		<div class="grid-s4">
 			<div class="form-group">
 				<label class="textfield mod-block mod-withSuffix mod-material">
-					<input class="textfield-input" type="text">
+					<input class="textfield-input" type="text" />
 					<span class="textfield-label">Textfield label</span>
 					<span class="textfield-suffix">€</span>
 				</label>
@@ -422,19 +416,22 @@
 		<div class="grid-s4">
 			<div class="form-group">
 				<label class="textfield mod-block mod-withSuffix mod-compact">
-					<input class="textfield-input" type="text">
+					<input class="textfield-input" type="text" />
 					<span class="textfield-label">Textfield label</span>
 					<span class="textfield-suffix">€</span>
 				</label>
 			</div>
 		</div>
 	</div>
-<!-- <code class="code mod-block">&lt;label class="textfield mod-withSuffix"&gt;
+	<!-- <code class="code mod-block">&lt;label class="textfield mod-withSuffix"&gt;
 	&lt;input class="textfield-input" type="text" /&gt;
 	&lt;span class="textfield-label"&gt;Textfield label&lt;/span&gt;
 	&lt;span class="textfield-suffix"&gt;€&lt;/span&gt;
 &lt;/label&gt;</code> -->
-	<em><strong>Tip:</strong> If you are using a classic textfield without label, you'll need to add a <code class="code">mod-noLabel</code> class.</em>
+	<em
+		><strong>Tip:</strong> If you are using a classic textfield without label, you'll need to add a
+		<code class="code">mod-noLabel</code> class.</em
+	>
 </section>
 
 <!-- Inline inputs -->
@@ -470,7 +467,6 @@
 		<span class="textfield-label">Textfield label</span>
 	</label>
 
-
 	<!-- <code class="code mod-block">&lt;label class="textfield mod-inline"&gt;
 	&lt;input class="textfield-input" type="text" /&gt;
 	&lt;span class="textfield-label"&gt;…&lt;/span&gt;
@@ -479,7 +475,11 @@
 </section>
 
 <section class="contentSection">
-	<em><strong>Tip:</strong> You can change the input lenght with <code class="code">mod-longest</code>,<code class="code">mod-longer</code>,<code class="code">mod-long</code>, <code class="code">mod-short</code>,<code class="code">mod-shorter</code> or <code class="code">mod-shortest</code>.</em><br>
+	<em
+		><strong>Tip:</strong> You can change the input lenght with <code class="code">mod-longest</code>,<code class="code">mod-longer</code
+		>,<code class="code">mod-long</code>, <code class="code">mod-short</code>,<code class="code">mod-shorter</code> or
+		<code class="code">mod-shortest</code>.</em
+	><br />
 	<em><strong>Tip:</strong> You can use inline input inside standard text:</em>
 	<div>
 		Hello I’m
@@ -495,31 +495,33 @@
 	</div>
 </section>
 
-
 <!-- Search inputs -->
 <section class="contentSection">
 	<h2>Search</h2>
 	<div class="grid mod-xsBottom">
 		<div class="grid-xs4">
 			<label class="textfield mod-search mod-block">
-				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent" />
+				<input class="textfield-input" type="search" placeholder="e.g. Clark Kent" />
 				<span class="textfield-label">Search</span>
 			</label>
 		</div>
 		<div class="grid-xs4">
 			<label class="textfield mod-material mod-search mod-block">
-				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent" />
+				<input class="textfield-input" type="search" placeholder="e.g. Clark Kent" />
 				<span class="textfield-label">Search</span>
 			</label>
 		</div>
 		<div class="grid-xs4">
 			<label class="textfield mod-compact mod-search mod-block u-marginReset">
-				<input class="textfield-input" type="text" placeholder="e.g. Clark Kent" />
+				<input class="textfield-input" type="search" placeholder="e.g. Clark Kent" />
 				<span class="textfield-label">Search</span>
 			</label>
 		</div>
 	</div>
-<em><strong>Tip:</strong> You can change the input style using <code class="code">mod-material</code> & <code class="code">mod-compact</code></em>
+	<em
+		><strong>Tip:</strong> You can change the input style using <code class="code">mod-material</code> &
+		<code class="code">mod-compact</code></em
+	>
 </section>
 
 <section class="contentSection">
@@ -615,7 +617,9 @@
 			<div class="grid-xs6">
 				<div class="form-group">
 					<label class="textfield mod-multiline mod-block">
-						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
+						<textarea class="textfield-input is-filled" disabled>
+Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea
+						>
 						<span class="textfield-label">Textarea label</span>
 					</label>
 				</div>
@@ -633,7 +637,9 @@
 			<div class="grid-xs6">
 				<div class="form-group">
 					<label class="textfield mod-material mod-multiline mod-block">
-						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
+						<textarea class="textfield-input is-filled" disabled>
+Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea
+						>
 						<span class="textfield-label">Textarea label</span>
 					</label>
 				</div>
@@ -651,17 +657,21 @@
 			<div class="grid-xs6">
 				<div class="form-group">
 					<label class="textfield mod-multiline mod-compact mod-block">
-						<textarea class="textfield-input is-filled" disabled>Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
+						<textarea class="textfield-input is-filled" disabled>
+Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea
+						>
 						<span class="textfield-label">Textarea label</span>
 					</label>
 				</div>
 			</div>
 		</div>
 	</div>
-	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br>
-	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield-input is-filled"&gt;</code> to let the label on the upper state with <code class="code">mod-material</code>.</em>
+	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br />
+	<em
+		><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield-input is-filled"&gt;</code> to let the label on the upper state
+		with <code class="code">mod-material</code>.</em
+	>
 </section>
-
 
 <h2>Radio label</h2>
 
