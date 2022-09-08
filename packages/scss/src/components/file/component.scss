@@ -76,6 +76,7 @@
 		height: 100%;
 		opacity: 0.001;
 		z-index: 1;
+		cursor: pointer;
 
 		~ .file-content {
 			&::before {
