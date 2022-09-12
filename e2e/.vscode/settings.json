@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "**/*.feature.cs": true,
+    "**/obj": true,
+    "**/bin": true
+  }
+}

@@ -16,6 +16,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 		[luTooltipDisabled]="luTooltipDisabled"
 		[luTooltipWhenEllipsis]="luTooltipWhenEllipsis"
 		[class.u-ellipsis]="luTooltipWhenEllipsis"
+		[tabindex]="tabindex"
+		[attr.data-tooltip]="getDataTooltip()"
 	>
 		Come over here
 	</button>`,
@@ -33,6 +35,20 @@ class TooltipStory {
 	@Input() luTooltipDisabled: boolean;
 	@Input() luTooltipPosition: LuPopoverPosition;
 	@Input() luTooltipWhenEllipsis: boolean;
+	@Input() tabindex: number | null;
+
+	getDataTooltip() {
+		if (this.luTooltipDisabled && this.tabindex !== null) {
+			return 'hardcoded-disabled';
+		}
+		if (this.luTooltipDisabled) {
+			return 'disabled';
+		}
+		if (this.tabindex !== null) {
+			return 'hardcoded';
+		}
+		return 'basic';
+	}
 }
 
 export default {
@@ -55,6 +71,9 @@ export default {
 		luTooltipWhenEllipsis: {
 			control: { type: 'boolean' },
 		},
+		tabindex: {
+			control: { type: 'number' },
+		},
 	},
 	decorators: [
 		componentWrapperDecorator(TooltipStory, (props: TooltipStory) => ({
@@ -63,6 +82,7 @@ export default {
 			luTooltipDisabled: props.luTooltipDisabled,
 			luTooltipPosition: props.luTooltipPosition,
 			luTooltipWhenEllipsis: props.luTooltipWhenEllipsis,
+			tabindex: props.tabindex,
 		})),
 		moduleMetadata({
 			imports: [LuTooltipModule, BrowserAnimationsModule],
@@ -82,6 +102,7 @@ Basic.args = {
 	luTooltipDisabled: false,
 	luTooltipPosition: 'below',
 	luTooltipWhenEllipsis: false,
+	tabindex: null,
 };
 
 const code = `
@@ -117,7 +138,7 @@ class TooltipStory {
 
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: ['luTooltipEnterDelay', 'luTooltipLeaveDelay', 'luTooltipDisabled', 'luTooltipPosition', 'luTooltipWhenEllipsis'] },
+	controls: { include: ['luTooltipEnterDelay', 'luTooltipLeaveDelay', 'luTooltipDisabled', 'luTooltipPosition', 'luTooltipWhenEllipsis', 'tabindex'] },
 	docs: {
 		source: {
 			language: 'ts',
