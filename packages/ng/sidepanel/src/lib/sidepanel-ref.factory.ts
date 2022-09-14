@@ -1,5 +1,5 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalOutlet } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, ComponentRef, Injectable, Injector } from '@angular/core';
 import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { ILuSidepanelConfig } from './sidepanel-config.model';
@@ -9,8 +9,7 @@ import { ILuSidepanelContent } from './sidepanel.model';
 import { LU_SIDEPANEL_DATA } from './sidepanel.token';
 
 class LuSidepanelRef<T extends ILuSidepanelContent<unknown> = ILuSidepanelContent<unknown>, D = unknown, R = unknown> extends ALuSidepanelRef<T, D, R> implements ILuSidepanelRef<T, D, R> {
-	protected _containerRef: ComponentRef<LuSidepanelPanelComponent>;
-	protected _containerOutlet: PortalOutlet;
+	protected _containerRef: ComponentRef<LuSidepanelPanelComponent<T>>;
 	constructor(protected override _overlay: Overlay, protected override _injector: Injector, protected override _component: ComponentType<T>, protected override _config: ILuSidepanelConfig) {
 		super(_overlay, _injector, _component, _config);
 	}
@@ -23,15 +22,14 @@ class LuSidepanelRef<T extends ILuSidepanelContent<unknown> = ILuSidepanelConten
 			parent: this._injector,
 		});
 		if (this._config.changeDetection === ChangeDetectionStrategy.OnPush) {
-			const containerPortal = new ComponentPortal(LuSidepanelPanelComponent, undefined, injector);
-			this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
+			const containerPortal = new ComponentPortal<LuSidepanelPanelComponent<T>>(LuSidepanelPanelComponent, undefined, injector);
+			this._containerRef = this._overlayRef.attach(containerPortal);
 		} else {
-			const containerPortal = new ComponentPortal(LuSidepanelPanelComponentDefaultCD, undefined, injector);
-			this._containerRef = this._overlayRef.attach<LuSidepanelPanelComponent>(containerPortal);
+			const containerPortal = new ComponentPortal<LuSidepanelPanelComponentDefaultCD<T>>(LuSidepanelPanelComponentDefaultCD, undefined, injector);
+			this._containerRef = this._overlayRef.attach(containerPortal);
 		}
-		this._containerOutlet = this._containerRef.instance as unknown as PortalOutlet;
-		const portal = new ComponentPortal(this._component, undefined, injector);
-		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;
+		const panel = this._containerRef.instance;
+		this._componentRef = panel.attachInnerComponent(this._component, injector);
 	}
 	protected override _closePopup() {
 		this._componentRef.destroy();

@@ -1,6 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -13,7 +12,7 @@ import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY, LU_MODAL_TRANSLATIONS } from './
 import { luModalTranslations } from './modal.translate';
 
 @NgModule({
-	imports: [OverlayModule, PortalModule, CommonModule, A11yModule, LuTooltipModule],
+	imports: [OverlayModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
 	exports: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
 	providers: [

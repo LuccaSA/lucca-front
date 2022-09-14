@@ -2,19 +2,39 @@ import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { map, share, timer } from 'rxjs';
 
 @Component({
 	selector: 'modal-content',
+	standalone: true,
 	template: '<p>General Kenobi</p>'
 })
 class ModalContentComponent implements ILuModalContent {
-	title = 'Hello there';
+	title = 'Hello there'
+	submitAction = () => {};
+}
+
+@Component({
+	selector: 'modal-content',
+	standalone: true,
+	template: '<p>General Kenobi</p>'
+})
+class ModalDynamicContentComponent implements ILuModalContent {
+	counter$ = timer(0, 1000).pipe(share())
+
+	title = this.counter$.pipe(map(n => `Title #${n}`));
+	submitLabel = this.counter$.pipe(map(n => `Submit #${n}`));
+	cancelLabel = this.counter$.pipe(map(n => `Cancel #${n}`));
+
 	submitAction = () => {};
 }
 
 @Component({
 	selector: 'modal-stories',
-	template: `<button type="button" class="button" (click)="openModal()">Open modal</button>`,
+	template: `
+		<button type="button" class="button" (click)="openModal()">Open modal</button>
+		<button type="button" class="button" (click)="openDynamicContentModal()">Open dynamic modal</button>
+	`,
 }) class ModalStories {
 	constructor(
 		private modal: LuModal
@@ -23,6 +43,10 @@ class ModalContentComponent implements ILuModalContent {
 	public openModal() {
 		this.modal.open(ModalContentComponent);
 	}
+
+	public openDynamicContentModal() {
+		this.modal.open(ModalDynamicContentComponent);
+	}
 }
 
 export default {
@@ -30,9 +54,6 @@ export default {
 	component: ModalStories,
 	decorators: [
 		moduleMetadata({
-			declarations: [
-				ModalContentComponent
-			],
 			imports: [
 				LuModalModule,
 				BrowserAnimationsModule,
