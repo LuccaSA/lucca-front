@@ -199,8 +199,10 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 
 	/** Closes the popover. */
 	closePopover(): void {
-		if (this._overlayRef && this._overlayRef.hasAttached()) {
-			this._overlayRef.detach();
+		if (this._overlayRef) {
+			if (this._overlayRef.hasAttached()) {
+				this._overlayRef.detach();
+			}
 
 			/** unsubscribe to backdrop click if it was defined */
 			if (this._backdropSubscription) {
