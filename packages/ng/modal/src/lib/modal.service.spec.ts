@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Component, Type } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
 import { LuModalModule } from 'dist/ng/modal';
 import { BehaviorSubject } from 'rxjs';
 import { ILuModalContent } from './modal.model';
@@ -25,40 +24,36 @@ export class ModalOpenerComponent {
 }
 
 describe('LuModal', () => {
-	let opener: ModalOpenerComponent;
-	let fixture: ComponentFixture<ModalOpenerComponent>;
+	let spectator: Spectator<ModalOpenerComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [ModalOpenerComponent],
-			imports: [LuModalModule],
-		}).compileComponents();
+	const createComponent = createComponentFactory<ModalOpenerComponent>({
+		component: ModalOpenerComponent,
+		imports: [LuModalModule],
+	});
 
-		fixture = TestBed.createComponent(ModalOpenerComponent);
-		opener = fixture.componentInstance;
-		fixture.detectChanges();
+	beforeEach(() => {
+		spectator = createComponent();
 	});
 
 	function openModal<T>(type: Type<T>): T {
-		opener.modal.open(type);
-		return fixture.debugElement.parent.query(By.directive(type)).componentInstance as T;
+		spectator.component.modal.open(type);
+		return spectator.debugElement.parent.query(By.directive(type)).componentInstance as T;
 	}
 
 	function getModalTitle(): string {
-		const titleElement = fixture.debugElement.parent.query(By.css('.lu-modal-header-title')).nativeElement as HTMLElement;
-		return titleElement.innerHTML;
+		return spectator.query('.lu-modal-header-title', { root: true }).innerHTML;
 	}
 
 	it("should update modal title when ILuModalContent's title emits a new value", () => {
 		// Arrange
 		const contentComponent = openModal(ModalContentComponent);
-		fixture.detectChanges();
+		spectator.detectChanges();
 
 		// Act
 		const beforeTitle = getModalTitle();
 
 		contentComponent.title.next('UpdatedTitle');
-		fixture.detectChanges();
+		spectator.detectChanges();
 
 		const afterTitle = getModalTitle();
 
