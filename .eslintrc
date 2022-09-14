@@ -5,7 +5,7 @@
 		{
 			"files": ["*.ts"],
 			"parserOptions": {
-				"project": ["tsconfig.json", "packages/ng/tsconfig.lib.json"],
+				"project": ["tsconfig.json", "packages/ng/tsconfig.json"],
 				"createDefaultProgram": true
 			},
 			"extends": [
