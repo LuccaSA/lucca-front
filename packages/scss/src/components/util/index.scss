@@ -127,10 +127,6 @@
 	color: var(--palettes-grey-700) !important;
 }
 
-.u-ellipsis {
-	@include text.ellipsis;
-}
-
 .u-unit {
 	font-size: 0.66em !important;
 }
@@ -145,6 +141,14 @@
 
 .u-ellipsis {
 	@include text.ellipsis('!important');
+}
+
+.u-fontWeightRegular {
+	font-weight: 400 !important;
+}
+
+.u-fontWeightSemiBold {
+	font-weight: 600 !important;
 }
 
 [data-content-before] {
