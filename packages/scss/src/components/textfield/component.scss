@@ -20,6 +20,13 @@
 				transition-duration: var(--commons-animations-durations-fast);
 				opacity: 1;
 			}
+			
+			&[type="search] {
+				&::-webkit-search-cancel-button,
+				&::-webkit-search-decoration {
+					appearance: none;
+				}
+			}
 		}
 
 		.textfield-suffix {
