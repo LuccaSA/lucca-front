@@ -62,6 +62,7 @@
 
 	.file-button {
 		margin-right: 0;
+		cursor: pointer;
 
 		&:empty {
 			display: none;
