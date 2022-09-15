@@ -3,7 +3,8 @@
 @use 'exports' as *;
 
 .table-head-row-cell,
-.table-body-row-cell {
+.table-body-row-cell,
+.table-foot-row-cell {
 	@for $i from 2 through 20 {
 		&.mod-layoutFixed-#{$i} {
 			@include layoutFixed($i);

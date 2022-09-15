@@ -8,8 +8,9 @@
 	min-width: 100%;
 	background-color: var(--colors-white-color);
 
+	.table-head-row-cell,
 	.table-body-row-cell,
-	.table-head-row-cell {
+	.table-foot-row-cell {
 		&[class*='mod-stickyColumn-'] {
 			position: sticky;
 			background-color: var(--colors-white-color);
@@ -148,7 +149,8 @@
 }
 
 @mixin stickyHeaderShadow($shadowColor: #2a3551) {
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		top: calc(var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width));
 		z-index: 4;
 		height: 0;
@@ -173,8 +175,12 @@
 		}
 	}
 
-	+ .table-body-row .table-body-row-cell {
-		border-top: 0;
+	+ .table-body-row,
+	+ .table-foot-row {
+		.table-body-row-cell,
+		.table-foot-row-cell {
+			border-top: 0;
+		}
 	}
 }
 
@@ -189,7 +195,8 @@
 		top: var(commons-banner-height);
 	}
 
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		top: calc(
 			var(commons-banner-height) + var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width)
 		);
