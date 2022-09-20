@@ -32,11 +32,8 @@
 				}
 			}
 
-			aspect-ratio: 1;
+			inset: 0;
 			position: absolute;
-			top: 0;
-			left: 0;
-			width: var(--spacings-smaller);
 			border-radius: 50%;
 			animation: status 2s infinite;
 			background-color: currentColor;
