@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuInputClearerComponent, LuInputDisplayerModule } from '@lucca-front/ng/input';
 import { LuOptionOperatorModule, LuOptionPickerModule } from '@lucca-front/ng/option';
 import { LuUserDisplayModule } from '../../display/index';
 import { LuUserHomonymsModule } from '../homonyms/index';
@@ -17,7 +17,7 @@ import { luUserSelectInputTranslations } from './user-select-input.translate';
 		LuUserDisplayModule,
 		LuOptionOperatorModule,
 		LuOptionPickerModule,
-		LuInputClearerModule,
+		LuInputClearerComponent,
 		LuUserSearcherModule,
 		LuInputDisplayerModule,
 		LuUserHomonymsModule,

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
+import { LuInputClearerComponent } from './clearer/index';
 import { LuInputDisplayerModule } from './displayer/index';
 import { LuInputDirective } from './input.directive';
-import { LuInputClearerModule } from './clearer/index';
 
 @NgModule({
 	declarations: [LuInputDirective],
-	imports: [LuInputDisplayerModule, LuInputClearerModule],
-	exports: [LuInputDisplayerModule, LuInputClearerModule, LuInputDirective],
+	imports: [LuInputDisplayerModule, LuInputClearerComponent],
+	exports: [LuInputDisplayerModule, LuInputClearerComponent, LuInputDirective],
 })
 export class LuInputModule {}
