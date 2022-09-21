@@ -1,11 +1,11 @@
 ## Description
 
-Description fonctionnelle pour le changelog.
-Gardez une ligne vide sous votre texte, ainsi que les 5 traits qui la suivent.
+Functional description for the changelog.
+Keep an empty line under your text, as well as the 5 lines that follow it.
 
 -----
 
-Optionnellement, description technique ou plus en profondeur à destination des relecteurs.
-Gardez une ligne vide sous votre texte, ainsi que les 5 traits qui la suivent.
+Optionally, technical or more in-depth description for reviewers.
+Keep an empty line under your text, as well as the 5 lines that follow it.
 
 -----
