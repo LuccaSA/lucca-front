@@ -1,13 +1,13 @@
 # Contributing to Lucca Front
 
-use english
+Use english
 
  - [Questions or Problem](#qop)
  - [Issues and Bugs](#issue)
  - [Coding Rules](#rules)
  - [Submission Guidelines](#submit)
 
-## <a name="qop"></a> Questions or Problem ?
+## <a name="qop"></a> Questions or Problems ?
 
 Post a message on [slack] https://lucca.slack.com/archives/C3W78FWUU
 
@@ -26,11 +26,11 @@ Follow our [tutorial on Notion](https://www.notion.so/Mise-jour-de-la-font-36363
 
 Follow our [tutorial on Prisme](https://prisme.lucca.io/94310e217/p/929c63-intgration) (🇫🇷)
 
-:wip: ecriture la structure des dossiers
+:wip: TODO directory structure
 
 ### For package Ng 
 
-:wip: Mettre en place avec la guilde
+:wip: TODO with the frontend guild
 
 
 ## <a name="submit"></a> Submission Guidelines
