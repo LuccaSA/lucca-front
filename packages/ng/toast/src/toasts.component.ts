@@ -1,15 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy } from '@angular/core';
-import { LuToast, LuToastInput, LuToastType } from './toasts.model';
-import { LuToastsService } from './toasts.service';
 import { merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LuToastIntl } from './toasts.intl';
-import { ILuToastLabel } from './toasts.translate';
+import { LuToast, LuToastInput, LuToastType } from './toasts.model';
+import { LuToastsService } from './toasts.service';
+import { LU_TOAST_TRANSLATIONS } from './toasts.token';
+import { ILuToastLabel, luToastTranslations } from './toasts.translate';
 
 @Component({
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule],
+	providers: [
+		LuToastIntl,
+		{
+			provide: LU_TOAST_TRANSLATIONS,
+			useValue: luToastTranslations,
+		},
+	],
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;
