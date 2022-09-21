@@ -1,7 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LuInputClearerModule, LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuInputClearerComponent, LuInputDisplayerModule } from '@lucca-front/ng/input';
 import { LuTreeOptionItemModule, LuTreeOptionOperatorModule, LuTreeOptionPickerModule, LuTreeOptionSelectorModule } from '@lucca-front/ng/option';
 import { LuDepartmentFeederModule } from '../feeder/index';
 import { LuDepartmentSelectInputComponent } from './department-select-input.component';
@@ -13,7 +13,7 @@ import { luDepartmentSelectInputTranslations } from './department-select-input.t
 	imports: [
 		CommonModule,
 		OverlayModule,
-		LuInputClearerModule,
+		LuInputClearerComponent,
 		LuInputDisplayerModule,
 		LuDepartmentFeederModule,
 		LuTreeOptionPickerModule,
