@@ -43,6 +43,10 @@
 	}
 }
 
+@mixin sortableAlignCenter {
+	text-align: center;
+}
+
 @mixin sortableAlignRight {
 	&::after {
 		content: none;

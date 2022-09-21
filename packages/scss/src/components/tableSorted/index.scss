@@ -26,6 +26,13 @@
 		@include ascending;
 	}
 
+	&.mod-alignCenter {
+		&.mod-sortable,
+		.table-head-row-cell-sortableButton {
+			@include sortableAlignCenter;
+		}
+	}
+
 	&.mod-alignRight {
 		&.mod-sortable,
 		.table-head-row-cell-sortableButton {

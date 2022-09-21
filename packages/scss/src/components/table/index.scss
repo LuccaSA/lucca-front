@@ -88,6 +88,10 @@
 		@include actions;
 	}
 
+	&.mod-alignCenter {
+		@include alignCenter;
+	}
+
 	&.mod-alignRight {
 		@include alignRight;
 	}
