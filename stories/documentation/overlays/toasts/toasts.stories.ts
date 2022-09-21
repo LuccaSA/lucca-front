@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { defaultToastDuration, LuToastInput, LuToastsModule, LuToastsService, LuToastType, ɵɵLuToatsComponent } from '@lucca-front/ng/toast';
+import { defaultToastDuration, LuToastInput, LuToastsService, LuToastType, ɵɵLuToatsComponent } from '@lucca-front/ng/toast';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,8 +22,7 @@ class ToastsStory implements OnInit, OnDestroy {
 	constructor(private toastsService: LuToastsService) {}
 
 	public ngOnInit(): void {
-		this.toastError$ = this.error$
-			.pipe(map((message, index) => ({ type: 'Error', message })));
+		this.toastError$ = this.error$.pipe(map((message, index) => ({ type: 'Error', message })));
 	}
 
 	public ngOnDestroy(): void {
@@ -59,7 +58,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(ToastsStory),
 		moduleMetadata({
-			imports: [LuToastsModule, FormsModule, BrowserAnimationsModule],
+			imports: [FormsModule, BrowserAnimationsModule],
 			declarations: [ToastsStory],
 		}),
 	],
