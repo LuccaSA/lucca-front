@@ -1,7 +1,6 @@
-import { CdkPortalOutlet, Portal, PortalOutlet } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, Directive, HostBinding, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, HostBinding, Inject, Injector, OnDestroy, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
+import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
 import { ILuModalContent } from './modal.model';
@@ -9,22 +8,18 @@ import { LU_MODAL_TRANSLATIONS } from './modal.token';
 import { ILuModalLabel } from './modal.translate';
 
 @Directive()
-export abstract class ALuModalPanelComponent<T extends ILuModalContent> implements PortalOutlet, OnDestroy {
-	@ViewChild('outlet', { read: CdkPortalOutlet, static: true })
-	protected _outlet: PortalOutlet;
-	protected _componentInstance: T;
-	get title() {
-		return this._componentInstance.title;
-	}
-	get submitLabel() {
-		return this._componentInstance.submitLabel || this.intl.submit;
-	}
-	get cancelLabel() {
-		return this._componentInstance.cancelLabel || this.intl.cancel;
-	}
-	get closeLabel() {
-		return this.intl.close;
-	}
+export abstract class ALuModalPanelComponent<T extends ILuModalContent> implements OnDestroy, DoCheck {
+	@ViewChild('container', { read: ViewContainerRef, static: true })
+	protected _containerRef: ViewContainerRef;
+	protected _componentInstance: ILuModalContent;
+	protected doCheck$ = new ReplaySubject<void>(1);
+
+	protected title$ = this.listenComponentValue(() => this._componentInstance.title);
+	protected submitLabel$ = this.listenComponentValue(() => this._componentInstance.submitLabel || this.intl.submit);
+	protected cancelLabel$ = this.listenComponentValue(() => this._componentInstance.cancelLabel || this.intl.cancel);
+
+	protected closeLabel = this.intl.close;
+
 	get isSubmitDisabled() {
 		return this._componentInstance.submitDisabled;
 	}
@@ -46,25 +41,18 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 
 	private _subs = new Subscription();
 
-	constructor(protected _ref: ALuModalRef<LuModalPanelComponent<T>>, protected _cdr: ChangeDetectorRef, @Inject(LU_MODAL_TRANSLATIONS) public intl: ILuModalLabel) {}
-	attach<U extends T = T>(portal: Portal<U>) {
-		const ref = this._outlet.attach(portal) as ComponentRef<U>;
+	constructor(protected _ref: ALuModalRef<T>, protected _cdr: ChangeDetectorRef, @Inject(LU_MODAL_TRANSLATIONS) public intl: ILuModalLabel) {}
+	ngDoCheck(): void {
+		this.doCheck$.next();
+	}
+	attachInnerComponent(componentType: Type<T>, injector: Injector) {
+		const ref = this._containerRef.createComponent(componentType, { injector });
 		this._componentInstance = ref.instance;
 		return ref;
 	}
-	detach() {
-		this._outlet.detach();
-	}
-	dispose() {
-		return this._outlet.dispose();
-	}
-	hasAttached() {
-		return this._outlet.hasAttached();
-	}
 	ngOnDestroy() {
+		this.doCheck$.complete();
 		this._subs.unsubscribe();
-		this.detach();
-		this.dispose();
 	}
 	dismiss() {
 		this._ref.dismiss();
@@ -99,6 +87,14 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 			this._ref.close(result);
 		}
 	}
+
+	private listenComponentValue(selector: () => string | Observable<string>): Observable<string> {
+		return this.doCheck$.pipe(
+			map(selector),
+			distinctUntilChanged(),
+			switchMap((value) => (typeof value === 'string' ? of(value) : value)),
+		);
+	}
 }
 
 @Component({
@@ -107,9 +103,9 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuModalPanelComponent<T extends ILuModalContent> extends ALuModalPanelComponent<T> {
+export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<LuModalPanelComponent<T>>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
+	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
 		super(_ref, _cdr, intl);
 	}
 }
@@ -120,9 +116,9 @@ export class LuModalPanelComponent<T extends ILuModalContent> extends ALuModalPa
 	changeDetection: ChangeDetectionStrategy.Default,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LuModalPanelComponentDefaultCD<T extends ILuModalContent> extends ALuModalPanelComponent<T> {
+export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<LuModalPanelComponent<T>>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
+	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef, @Inject(LuModalIntl) intl: ILuModalLabel) {
 		super(_ref, _cdr, intl);
 	}
 }

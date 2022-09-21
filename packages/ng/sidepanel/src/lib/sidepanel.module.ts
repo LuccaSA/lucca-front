@@ -1,6 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -13,7 +12,7 @@ import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY, LU_SIDEPANEL_TRANSLATION
 import { luSidepanelTranslations } from './sidepanel.translate';
 
 @NgModule({
-	imports: [OverlayModule, PortalModule, CommonModule, A11yModule, LuTooltipModule],
+	imports: [OverlayModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
 	exports: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
 	providers: [
