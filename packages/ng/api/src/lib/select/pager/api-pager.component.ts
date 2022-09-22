@@ -9,6 +9,7 @@ import { ALuApiOptionPager } from './api-pager.model';
 	selector: 'lu-api-pager',
 	template: '',
 	styleUrls: [],
+	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
