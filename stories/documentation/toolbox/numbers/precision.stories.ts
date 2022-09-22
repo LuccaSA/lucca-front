@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LuNumberModule } from '@lucca-front/ng/number';
+import { LuNumberPipe } from '@lucca-front/ng/number';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
@@ -20,7 +20,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [LuNumberModule],
+			imports: [LuNumberPipe],
 			declarations: [PrecisionStory],
 		}),
 	],
@@ -31,11 +31,11 @@ const template: Story<PrecisionStory> = (args: PrecisionStory) => ({
 });
 
 const code = `
-/* 1. Importer LuNumberModule */
-import { LuNumberModule } from '@lucca-front/ng/number';
+/* 1. Importer LuNumberPipe */
+import { LuNumberPipe } from '@lucca-front/ng/number';
 
 @NgModule({
-	imports: [LuNumberModule]
+	imports: [LuNumberPipe]
 })
 class StoriesModule {}
 
@@ -52,7 +52,7 @@ class PrecisionStory {
 export const Precision = template.bind({});
 Precision.args = {
 	value: Math.PI,
-	precision: 2
+	precision: 2,
 };
 
 Precision.parameters = {
