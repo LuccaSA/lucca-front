@@ -1,16 +1,18 @@
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { tap } from 'rxjs/operators';
 import { ALuOptionOperator } from '../../operator/option-operator.model';
-import { ILuOptionSelectAllLabel } from './select-all.translate';
+import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { LuOptionSelectAllIntl } from './select-all.intl';
+import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.token';
+import { ILuOptionSelectAllLabel, luOptionSelectAllTranslations } from './select-all.translate';
 
 @Component({
 	selector: 'lu-option-select-all',
 	templateUrl: './select-all.component.html',
 	styleUrls: ['select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -22,6 +24,11 @@ import { LuOptionSelectAllIntl } from './select-all.intl';
 			useExisting: forwardRef(() => LuOptionSelectAllComponent),
 			multi: true,
 		},
+		{
+			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
+			useValue: luOptionSelectAllTranslations,
+		},
+		LuOptionSelectAllIntl,
 	],
 })
 export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implements ILuOptionSelector<T> {

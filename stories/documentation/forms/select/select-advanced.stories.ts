@@ -76,7 +76,7 @@ const template: Story<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
 const code = `
 /* 1. Importer les modules */
 import { LuInputDisplayerModule, LuInputModule } from '@lucca-front/ng/input';
-import { LuOptionFeederModule, LuOptionModule } from '@lucca-front/ng/option';
+import { LuOptionFeederComponent, LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 @NgModule({
@@ -84,7 +84,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 		LuSelectInputComponent,
 		LuOptionModule,
 		LuInputModule,
-		LuOptionFeederModule,
+		LuOptionFeederComponent,
 		LuInputDisplayerModule
 	]
 })
