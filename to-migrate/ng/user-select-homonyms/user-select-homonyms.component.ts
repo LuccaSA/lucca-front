@@ -3,7 +3,7 @@ import { ILuUser } from '@lucca-front/ng/user';
 
 @Component({
 	selector: 'lu-user-select-homonyms',
-	templateUrl: './user-select-homonyms.component.html'
+	templateUrl: './user-select-homonyms.component.html',
 })
 export class UserSelectHomonymsComponent {
 	item;
@@ -12,7 +12,7 @@ export class UserSelectHomonymsComponent {
 		firstName: 'SpongeBob',
 		lastName: 'SquarePants',
 		pictureHref: 'https://nickelodeonuniverse.com/wp-content/uploads/Spongebob.png',
-		jobTitle: 'Cook @KrustyKrab'
+		jobTitle: 'Cook @KrustyKrab',
 	};
 	patrick: ILuUser = {
 		id: 13,
@@ -21,12 +21,12 @@ export class UserSelectHomonymsComponent {
 		picture: {
 			href: 'https://nickelodeonuniverse.com/wp-content/uploads/Patrick.png',
 		},
-		jobTitle: 'Happiness Guru'
+		jobTitle: 'Happiness Guru',
 	};
 	squidwards: ILuUser = {
 		id: 14,
 		firstName: 'Squidwards',
 		lastName: 'Tentacles',
-		jobTitle: 'Cashier @KrustyKrab'
-	}
+		jobTitle: 'Cashier @KrustyKrab',
+	};
 }

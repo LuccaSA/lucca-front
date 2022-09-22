@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
-import { ILuOptionItem, LuForOptionsModule, LuOptionComparer, LuOptionPickerAdvancedComponent, LuOptionPickerModule } from '@lucca-front/ng/option';
+import { ILuOptionItem, LuForOptionsDirective, LuOptionComparer, LuOptionPickerAdvancedComponent, LuOptionPickerModule } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuApiSearcherModule } from '../searcher';
 
@@ -13,7 +13,7 @@ import { LuApiSearcherModule } from '../searcher';
 	styleUrls: ['./api-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, LuOptionPickerModule, LuForOptionsModule, LuApiSearcherModule, LuInputClearerComponent, LuInputDisplayerDirective],
+	imports: [CommonModule, LuOptionPickerModule, LuForOptionsDirective, LuApiSearcherModule, LuInputClearerComponent, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
