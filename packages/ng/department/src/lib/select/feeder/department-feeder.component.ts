@@ -10,6 +10,7 @@ import { ALuDepartmentService, LuDepartmentV3Service } from '../../service/index
 	template: '',
 	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,
