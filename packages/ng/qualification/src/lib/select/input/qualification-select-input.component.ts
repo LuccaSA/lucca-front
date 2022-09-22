@@ -1,24 +1,35 @@
 import { Overlay } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import { LuApiSearcherModule } from '@lucca-front/ng/api';
+import { LuInputModule } from '@lucca-front/ng/input';
+import { ILuOptionPickerPanel, LuForGroupsModule, LuOptionComparer, LuOptionModule } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
-import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { ALuSelectInputComponent, LuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuQualification } from '../../qualification.model';
 import { LuQualificationSelectInputIntl } from './qualification-select-input.intl';
-import { ILuQualificationSelectInputLabel } from './qualification-select-input.translate';
+import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-select-input.token';
+import { ILuQualificationSelectInputLabel, luQualificationSelectInputTranslations } from './qualification-select-input.translate';
 
 @Component({
 	selector: 'lu-qualification-select',
 	templateUrl: './qualification-select-input.component.html',
 	styleUrls: ['./qualification-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, LuInputModule, LuOptionModule, LuSelectInputComponent, LuForGroupsModule, LuApiSearcherModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuQualificationSelectInputComponent),
 			multi: true,
 		},
+		{
+			provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS,
+			useValue: luQualificationSelectInputTranslations,
+		},
+		LuQualificationSelectInputIntl,
 	],
 })
 export class LuQualificationSelectInputComponent<
