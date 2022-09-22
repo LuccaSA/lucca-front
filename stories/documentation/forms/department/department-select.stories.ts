@@ -20,11 +20,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(DepartmentStory),
 		moduleMetadata({
-			imports: [
-				HttpClientModule,
-				LuDepartmentModule,
-				BrowserAnimationsModule,
-			],
+			imports: [HttpClientModule, LuDepartmentModule, BrowserAnimationsModule],
 			declarations: [DepartmentStory],
 		}),
 	],
@@ -37,7 +33,7 @@ const template: Story<DepartmentStory> = (args: DepartmentStory) => ({
 export const Select = template.bind({});
 
 const code = `
-/* 1. Importer LuApiSelectInputModule */
+/* 1. Importer LuDepartmentModule */
 import { LuDepartmentModule } from '@lucca-front/ng/department';
 
 @NgModule({
