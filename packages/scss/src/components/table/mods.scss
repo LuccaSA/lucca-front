@@ -282,6 +282,10 @@
 	}
 }
 
+@mixin alignCenter {
+	text-align: center;
+}
+
 @mixin alignRight {
 	text-align: right;
 }

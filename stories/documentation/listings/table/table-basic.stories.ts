@@ -4,7 +4,7 @@ interface TableBasicStory {
 	clickable: boolean;
 	zebra: boolean;
 	alignTop: boolean;
-	alignRight: boolean;
+	horizontalAlign: string;
 	small: boolean;
 	borderless: boolean;
 	noOffset: boolean;
@@ -36,11 +36,12 @@ export default {
 			},
 			description: 'Aligne le contenu des cellules vers le haut.',
 		},
-		alignRight: {
+		horizontalAlign: {
+			options: ['', 'mod-alignCenter', 'mod-alignRight'],
 			control: {
-				type: 'boolean',
+				type: 'select',
 			},
-			description: 'Aligne le contenu des cellules à droite.',
+			description: 'Change l\'alignement horizontal d\'une cellule',
 		},
 		borderless: {
 			control: {
@@ -71,7 +72,7 @@ function getTemplate(args: TableBasicStory): string {
 	const clickable = args.clickable ? `mod-clickable` : '';
 	const zebra = args.zebra ? `mod-zebra` : '';
 	const alignTop = args.alignTop ? `mod-alignTop` : '';
-	const alignRight = args.alignRight ? `mod-alignRight` : '';
+	const horizontalAlign = args.horizontalAlign;
 	const small = args.small ? `mod-small` : '';
 	const borderless = args.borderless ? `mod-borderless` : '';
 	const noOffset = args.noOffset ? `mod-noOffset` : '';
@@ -84,29 +85,30 @@ function getTemplate(args: TableBasicStory): string {
 			<tr class="table-head-row">
 				<th class="table-head-row-cell">Label</th>
 				<th class="table-head-row-cell">Label</th>
-				<th class="table-head-row-cell ${alignRight}">Label</th>
+				<th class="table-head-row-cell ${horizontalAlign}">Label</th>
 			</tr>
 		</thead>
 		<tbody class="table-body">
 			<tr class="table-body-row ${parent} ${collapsable}">
 				<td class="table-body-row-cell">Contenu</td>
 				<td class="table-body-row-cell">Contenu<br />Contenu</td>
-				<td class="table-body-row-cell ${alignRight}">Contenu</td>
+				<td class="table-body-row-cell ${horizontalAlign}">Contenu</td>
 			</tr>
 			<tr class="table-body-row ${child}">
 				<td class="table-body-row-cell">Contenu</td>
 				<td class="table-body-row-cell">Contenu<br />Contenu</td>
-				<td class="table-body-row-cell ${alignRight}">Contenu</td>
+				<td class="table-body-row-cell ${horizontalAlign}">Contenu</td>
 			</tr>
 			<tr class="table-body-row ${child}">
 				<td class="table-body-row-cell">Contenu</td>
 				<td class="table-body-row-cell">Contenu<br />Contenu</td>
-				<td class="table-body-row-cell ${alignRight}">Contenu</td>
+				<td class="table-body-row-cell ${horizontalAlign}">Contenu</td>
 			</tr>
 		</tbody>
 	</table>
 	`;
 }
+
 
 const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
 	props: args,
@@ -114,4 +116,4 @@ const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { clickable: false, zebra: false, alignTop: false, alignRight: false, small: false, borderless: false, noOffset: false, parentChild: false, collapsable: false };
+Basic.args = { clickable: false, zebra: false, alignTop: false, horizontalAlign: '', small: false, borderless: false, noOffset: false, parentChild: false, collapsable: false };
