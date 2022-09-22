@@ -39,15 +39,15 @@ const template: Story<DateSelectStory> = (props: DateSelectStory) => ({});
 
 const code = `
 /*
-	1. Importer LuDateSelectInputModule et BrowserAnimationsModule
+	1. Importer LuDateSelectInputComponent et BrowserAnimationsModule
 	   provider un ALuDateAdapter
 */
-import { LuDateSelectInputModule } from '@lucca-front/ng/date';
+import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 
 @NgModule({
-	imports: [LuDateSelectInputModule, BrowserAnimationsModule],
+	imports: [LuDateSelectInputComponent, BrowserAnimationsModule],
 	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
 })
 class DateSelectStoriesModule {}

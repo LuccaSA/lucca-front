@@ -3,10 +3,10 @@ import { LuDateAdapterModule } from './adapter/index';
 import { LuCalendarInputComponent } from './calendar/index';
 import { LuDateInputModule } from './input/index';
 import { LuDatePickerModule } from './picker/index';
-import { LuDateSelectInputModule } from './select/index';
+import { LuDateSelectInputComponent } from './select/index';
 
 @NgModule({
-	imports: [LuCalendarInputComponent, LuDatePickerModule, LuDateInputModule, LuDateAdapterModule, LuDateSelectInputModule],
-	exports: [LuCalendarInputComponent, LuDatePickerModule, LuDateInputModule, LuDateAdapterModule, LuDateSelectInputModule],
+	imports: [LuCalendarInputComponent, LuDatePickerModule, LuDateInputModule, LuDateAdapterModule, LuDateSelectInputComponent],
+	exports: [LuCalendarInputComponent, LuDatePickerModule, LuDateInputModule, LuDateAdapterModule, LuDateSelectInputComponent],
 })
 export class LuDateModule {}
