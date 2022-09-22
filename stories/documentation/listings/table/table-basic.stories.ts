@@ -109,6 +109,7 @@ function getTemplate(args: TableBasicStory): string {
 	`;
 }
 
+
 const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
