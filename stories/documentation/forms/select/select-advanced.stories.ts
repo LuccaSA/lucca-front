@@ -1,44 +1,39 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuInputDisplayerModule, LuInputModule } from '@lucca-front/ng/input';
-import { LuOptionFeederModule, LuOptionModule } from '@lucca-front/ng/option';
-import { LuSelectInputComponent, LuSelectModule } from '@lucca-front/ng/select';
+import { LuInputModule } from '@lucca-front/ng/input';
+import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
 	template: `
-	<label class="textfield">
-		<lu-select
-			class="textfield-input"
-			placeholder="Select advanced"
-			[(ngModel)]="model"
-			multiple
-		>
-			<ng-template luDisplayer let-colors [luDisplayerMultiple]="true">
-				<ng-container [ngPlural]="colors.length">
-					<ng-template ngPluralCase="0"></ng-template>
-					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
-					<ng-template ngPluralCase="other">
-						<span class="chip mod-unkillable">{{colors.length}}</span>
-						couleurs
-					</ng-template>
-				</ng-container>
-			</ng-template>
-			<lu-option-picker-advanced>
-				<header class="lu-picker-header">
-					<lu-option-feeder [options]="options"></lu-option-feeder>
-					<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-					<lu-option-select-all class="u-displayBlock u-marginSmaller"></lu-option-select-all>
-					<lu-option-pager></lu-option-pager>
-				</header>
-				<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
-			</lu-option-picker-advanced>
-			<lu-input-clearer></lu-input-clearer>
-		</lu-select>
-		<span class="textfield-label">Choisissez une couleur</span>
-	</label>
+		<label class="textfield">
+			<lu-select class="textfield-input" placeholder="Select advanced" [(ngModel)]="model" multiple>
+				<ng-template luDisplayer let-colors [luDisplayerMultiple]="true">
+					<ng-container [ngPlural]="colors.length">
+						<ng-template ngPluralCase="0"></ng-template>
+						<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
+						<ng-template ngPluralCase="other">
+							<span class="chip mod-unkillable">{{ colors.length }}</span>
+							couleurs
+						</ng-template>
+					</ng-container>
+				</ng-template>
+				<lu-option-picker-advanced>
+					<header class="lu-picker-header">
+						<lu-option-feeder [options]="options"></lu-option-feeder>
+						<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
+						<lu-option-select-all class="u-displayBlock u-marginSmaller"></lu-option-select-all>
+						<lu-option-pager></lu-option-pager>
+					</header>
+					<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+				</lu-option-picker-advanced>
+				<lu-input-clearer></lu-input-clearer>
+			</lu-select>
+			<span class="textfield-label">Choisissez une couleur</span>
+		</label>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -51,14 +46,14 @@ class SelectAdvancedStory {
 		{ id: 5, name: 'purple' },
 		{ id: 6, name: 'orange' },
 		{ id: 7, name: 'cyan' },
-		{ id: 8, name: 'grey' }
+		{ id: 8, name: 'grey' },
 	];
 
 	model = [this.options[0]];
 
 	public searchFn({ name }: { name: string }, clue: string): boolean {
-    return name.toLocaleLowerCase().includes(clue.toLocaleLowerCase());
-  }
+		return name.toLocaleLowerCase().includes(clue.toLocaleLowerCase());
+	}
 }
 
 export default {
@@ -68,7 +63,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(SelectAdvancedStory),
 		moduleMetadata({
-			imports: [FormsModule, LuSelectModule, LuOptionModule, LuInputModule, BrowserAnimationsModule, LuOptionFeederModule, LuInputDisplayerModule],
+			imports: [FormsModule, LuOptionModule, LuInputModule, BrowserAnimationsModule],
 			declarations: [SelectAdvancedStory],
 		}),
 	],
@@ -82,11 +77,11 @@ const code = `
 /* 1. Importer les modules */
 import { LuInputDisplayerModule, LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionFeederModule, LuOptionModule } from '@lucca-front/ng/option';
-import { LuSelectInputComponent, LuSelectModule } from '@lucca-front/ng/select';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 @NgModule({
 	imports: [
-		LuSelectModule,
+		LuSelectInputComponent,
 		LuOptionModule,
 		LuInputModule,
 		LuOptionFeederModule,
