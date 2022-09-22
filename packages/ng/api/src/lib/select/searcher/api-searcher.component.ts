@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
-import { ALuOptionOperator } from '@lucca-front/ng/option';
+import { ALuOptionOperator, LuOptionPlaceholderModule } from '@lucca-front/ng/option';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
@@ -12,6 +13,8 @@ import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.
 	templateUrl: 'api-searcher.component.html',
 	styleUrls: ['api-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderModule],
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -83,6 +86,8 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 	templateUrl: 'api-searcher.component.html',
 	styleUrls: ['api-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderModule],
 	providers: [
 		{
 			provide: ALuOptionOperator,
