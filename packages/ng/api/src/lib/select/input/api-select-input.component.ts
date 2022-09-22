@@ -1,14 +1,19 @@
 import { Overlay } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ILuOptionItem, LuOptionComparer, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { ILuOptionItem, LuForOptionsModule, LuOptionComparer, LuOptionPickerAdvancedComponent, LuOptionPickerModule } from '@lucca-front/ng/option';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuApiSearcherModule } from '../searcher';
 
 @Component({
 	selector: 'lu-api-select',
 	templateUrl: './api-select-input.component.html',
 	styleUrls: ['./api-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, LuOptionPickerModule, LuForOptionsModule, LuApiSearcherModule, LuInputClearerComponent, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
