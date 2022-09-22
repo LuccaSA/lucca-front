@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuApiModule } from '@lucca-front/ng/api';
-import { LuInputDisplayerModule } from '@lucca-front/ng/input';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
-import { LuSelectModule } from '@lucca-front/ng/select';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserHomonymsComponent, LuUserHomonymsModule, LuUserModule } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
@@ -22,17 +22,7 @@ export default {
 		componentWrapperDecorator(UserHomonymsStory),
 		moduleMetadata({
 			declarations: [UserHomonymsStory],
-			imports: [
-				HttpClientModule,
-				LuUserModule,
-				LuSelectModule,
-				LuApiModule,
-				LuOptionModule,
-				LuUserHomonymsModule,
-				LuInputDisplayerModule,
-				BrowserAnimationsModule,
-				FormsModule,
-			],
+			imports: [HttpClientModule, LuUserModule, LuSelectInputComponent, LuApiModule, LuOptionModule, LuUserHomonymsModule, LuInputDisplayerDirective, BrowserAnimationsModule, FormsModule],
 		}),
 	],
 } as Meta;
@@ -72,8 +62,7 @@ const code = `
   </lu-select>
   <span class="textfield-label">Avec gestion des homonymes :</span>
 </label>
-`
-
+`;
 
 export const homonyms = template.bind({});
 homonyms.args = {};
@@ -85,6 +74,6 @@ homonyms.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
-}
+		},
+	},
+};
