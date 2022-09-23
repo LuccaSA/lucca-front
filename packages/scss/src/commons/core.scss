@@ -105,10 +105,9 @@ $decoration: 'underline', 'none';
 	}
 }
 
-$scope: '' !default;
 @mixin scoped {
-	@if $scope != '' {
-		#{$scope} {
+	@if config.$scope != '' {
+		#{config.$scope} {
 			@content;
 		}
 	} @else {
