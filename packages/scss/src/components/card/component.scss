@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/core' as core;
+
 @mixin component {
 	background-color: var(--colors-white-color);
 	border-radius: var(--commons-border-radius-big);
@@ -11,22 +13,24 @@
 	transition-property: background-color, box-shadow, color;
 
 	@at-root {
-		.card-content {
-			padding: var(--components-card-content-padding);
-		}
+		@include core.scoped {
+			.card-content {
+				padding: var(--components-card-content-padding);
+			}
 
-		.card-footer {
-			padding: var(--components-card-footer-padding);
-			border-top-color: var(--components-card-border-color);
-			border-top-width: 1px;
-			border-top-style: solid;
-			align-items: center;
-			display: flex;
-			min-height: 3rem;
-		}
+			.card-footer {
+				padding: var(--components-card-footer-padding);
+				border-top-color: var(--components-card-border-color);
+				border-top-width: 1px;
+				border-top-style: solid;
+				align-items: center;
+				display: flex;
+				min-height: 3rem;
+			}
 
-		.card-footer-right {
-			margin-left: auto;
+			.card-footer-right {
+				margin-left: auto;
+			}
 		}
 	}
 }

@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component {
@@ -29,75 +30,77 @@
 	}
 
 	@at-root {
-		.menu-list {
-			@include reset.list;
+		@include core.scoped {
+			.menu-list {
+				@include reset.list;
 
-			gap: var(--spacings-big);
-			display: flex;
-			flex-wrap: wrap;
-		}
-
-		.menu-link, // legacy syntax
-		.menu-list-item-action {
-			@include reset.button;
-			padding: var(--components-menu-padding);
-			border-radius: var(--commons-border-radius);
-			color: var(--palettes-grey-700);
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: color;
-			position: relative;
-			text-decoration: none;
-			text-align: center;
-			display: block;
-			width: auto;
-
-			&::after {
-				background-color: var(--palettes-700, var(--palettes-primary-700));
-				border-radius: var(--commons-border-radius) var(--commons-border-radius) 0 0;
-				transition-duration: var(--commons-animations-durations-fast);
-				transition-property: transform;
-				display: block;
-				position: absolute;
-				bottom: 0;
-				height: 2px;
-				left: 0;
-				right: 0;
-				transform: scale(0, 1);
-				z-index: 1;
-				content: '';
+				gap: var(--spacings-big);
+				display: flex;
+				flex-wrap: wrap;
 			}
 
-			&:not(.is-disabled, [disabled]) {
-				&:focus-visible,
-				&:hover {
-					&:not(.is-active, [aria-current='page']) {
-						color: var(--palettes-grey-900);
-					}
+			.menu-link, // legacy syntax
+			.menu-list-item-action {
+				@include reset.button;
+				padding: var(--components-menu-padding);
+				border-radius: var(--commons-border-radius);
+				color: var(--palettes-grey-700);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: color;
+				position: relative;
+				text-decoration: none;
+				text-align: center;
+				display: block;
+				width: auto;
 
-					.label {
-						background-color: var(--palettes-100, var(--palettes-primary-100));
-						color: var(--palettes-700, var(--palettes-primary-700));
-					}
+				&::after {
+					background-color: var(--palettes-700, var(--palettes-primary-700));
+					border-radius: var(--commons-border-radius) var(--commons-border-radius) 0 0;
+					transition-duration: var(--commons-animations-durations-fast);
+					transition-property: transform;
+					display: block;
+					position: absolute;
+					bottom: 0;
+					height: 2px;
+					left: 0;
+					right: 0;
+					transform: scale(0, 1);
+					z-index: 1;
+					content: '';
+				}
 
-					&::after {
-						transform: scale(0.75);
+				&:not(.is-disabled, [disabled]) {
+					&:focus-visible,
+					&:hover {
+						&:not(.is-active, [aria-current='page']) {
+							color: var(--palettes-grey-900);
+						}
+
+						.label {
+							background-color: var(--palettes-100, var(--palettes-primary-100));
+							color: var(--palettes-700, var(--palettes-primary-700));
+						}
+
+						&::after {
+							transform: scale(0.75);
+						}
 					}
+				}
+
+				&:focus-visible {
+					outline: none;
 				}
 			}
 
-			&:focus-visible {
-				outline: none;
-			}
-		}
+			.menu-link-placeholder {
+				&::after {
+					content: attr(data-content-after);
 
-		.menu-link-placeholder {
-			&::after {
-				content: attr(data-content-after);
-
-				display: block;
-				height: 0;
-				overflow: hidden;
-				font-weight: 600;
+					display: block;
+					height: 0;
+					overflow: hidden;
+					font-weight: 600;
+				}
 			}
 		}
 	}

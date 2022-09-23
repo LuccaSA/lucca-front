@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/core' as core;
+
 @mixin component {
 	display: flex;
 	flex-wrap: wrap;
@@ -8,31 +10,33 @@
 	}
 
 	@at-root {
-		.pagination-count,
-		.pagination-navigation,
-		.pagination-scrolling {
-			display: flex;
-			align-items: center;
-			flex-wrap: wrap;
-		}
+		@include core.scoped {
+			.pagination-count,
+			.pagination-navigation,
+			.pagination-scrolling {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+			}
 
-		.pagination-count-separator {
-			margin: 0 var(--spacings-smallest);
-		}
+			.pagination-count-separator {
+				margin: 0 var(--spacings-smallest);
+			}
 
-		.pagination-navigation {
-			list-style: none;
-			padding: 0;
-			margin-top: 0;
-			margin-bottom: 0;
+			.pagination-navigation {
+				list-style: none;
+				padding: 0;
+				margin-top: 0;
+				margin-bottom: 0;
 
-			> *:not(:last-child) {
+				> *:not(:last-child) {
+					margin-right: var(--spacings-smallest);
+				}
+			}
+
+			.pagination-navigation-item {
 				margin-right: var(--spacings-smallest);
 			}
-		}
-
-		.pagination-navigation-item {
-			margin-right: var(--spacings-smallest);
 		}
 	}
 }

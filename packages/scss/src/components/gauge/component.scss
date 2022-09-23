@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/core' as core;
+
 @mixin component {
 	border-radius: var(--commons-border-radius);
 	height: var(--components-gauge-height);
@@ -6,16 +8,18 @@
 	background-color: rgba(var(--colors-grey-900-rgb), 0.05);
 
 	@at-root {
-		.gauge-bar {
-			color: var(--palettes-700, var(--palettes-primary-700));
-			border-bottom-width: var(--components-gauge-height);
-			transition-duration: var(--commons-animations-durations-standard);
-			transition-property: border-color, width, height;
-			top: 0;
-			left: 0;
-			position: absolute;
-			border-bottom-style: solid;
-			border-color: currentColor;
+		@include core.scoped {
+			.gauge-bar {
+				color: var(--palettes-700, var(--palettes-primary-700));
+				border-bottom-width: var(--components-gauge-height);
+				transition-duration: var(--commons-animations-durations-standard);
+				transition-property: border-color, width, height;
+				top: 0;
+				left: 0;
+				position: absolute;
+				border-bottom-style: solid;
+				border-color: currentColor;
+			}
 		}
 	}
 }

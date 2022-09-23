@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
@@ -11,62 +12,64 @@
 	z-index: 99;
 
 	@at-root {
-		.header-contentLeft {
-			display: flex;
-		}
-
-		.header-contentRight {
-			display: flex;
-			margin-left: auto;
-		}
-
-		.header-nav {
-			height: var(--components-header-height);
-			padding-left: calc(var(--components-header-height) + var(--spacings-small));
-			align-items: flex-start;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			position: relative;
-		}
-
-		.header-nav-back {
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: all;
-			border-right-color: var(--commons-divider-color);
-			border-right-width: var(--commons-divider-width);
-			border-right-style: solid;
-			color: var(--palettes-grey-500);
-			height: var(--components-header-height);
-			width: var(--components-header-height);
-			line-height: var(--components-header-height);
-			font-size: 1.3rem;
-			left: 0;
-			top: 0;
-			position: absolute;
-			display: block;
-			text-align: center;
-			text-decoration: none;
-
-			&:hover {
-				background-color: var(--commons-background-base);
-				color: var(--palettes-grey-800);
+		@include core.scoped {
+			.header-contentLeft {
+				display: flex;
 			}
 
-			&::before {
-				@include icon.generate('arrow_full_west');
+			.header-contentRight {
+				display: flex;
+				margin-left: auto;
 			}
-		}
 
-		.header-nav-category {
-			color: var(--palettes-grey-500);
-			font-size: var(--sizes-small-font-size);
-		}
+			.header-nav {
+				height: var(--components-header-height);
+				padding-left: calc(var(--components-header-height) + var(--spacings-small));
+				align-items: flex-start;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				position: relative;
+			}
 
-		.header-nav-title {
-			color: var(--palettes-primary-700);
-			line-height: var(--sizes-smaller-line-height);
-			margin: 0;
+			.header-nav-back {
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: all;
+				border-right-color: var(--commons-divider-color);
+				border-right-width: var(--commons-divider-width);
+				border-right-style: solid;
+				color: var(--palettes-grey-500);
+				height: var(--components-header-height);
+				width: var(--components-header-height);
+				line-height: var(--components-header-height);
+				font-size: 1.3rem;
+				left: 0;
+				top: 0;
+				position: absolute;
+				display: block;
+				text-align: center;
+				text-decoration: none;
+
+				&:hover {
+					background-color: var(--commons-background-base);
+					color: var(--palettes-grey-800);
+				}
+
+				&::before {
+					@include icon.generate('arrow_full_west');
+				}
+			}
+
+			.header-nav-category {
+				color: var(--palettes-grey-500);
+				font-size: var(--sizes-small-font-size);
+			}
+
+			.header-nav-title {
+				color: var(--palettes-primary-700);
+				line-height: var(--sizes-smaller-line-height);
+				margin: 0;
+			}
 		}
 	}
 }

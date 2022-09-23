@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component {
@@ -8,74 +9,76 @@
 	align-items: center;
 
 	@at-root {
-		.timeline-step {
-			flex-grow: 1;
-			display: flex;
-			align-items: center;
+		@include core.scoped {
+			.timeline-step {
+				flex-grow: 1;
+				display: flex;
+				align-items: center;
 
-			&:not(:last-child) {
-				&::after {
-					content: '';
-					display: flex;
-					flex-grow: 1;
-					height: 2px;
-					margin: var(--spacings-smaller);
-					background-color: var(--palettes-primary-200);
-					border-radius: 2px;
+				&:not(:last-child) {
+					&::after {
+						content: '';
+						display: flex;
+						flex-grow: 1;
+						height: 2px;
+						margin: var(--spacings-smaller);
+						background-color: var(--palettes-primary-200);
+						border-radius: 2px;
+					}
+				}
+
+				&:last-child {
+					flex-grow: 0;
 				}
 			}
 
-			&:last-child {
-				flex-grow: 0;
+			.timeline-step-title {
+				padding-left: 1.75rem;
+				position: relative;
+				display: block;
+				color: var(--palettes-primary-600);
+				font-weight: 400;
+				margin: 0;
+				font-size: var(--sizes-standard-font-size);
+				line-height: var(--sizes-big-line-height);
+				min-width: 1.5rem;
 			}
-		}
 
-		.timeline-step-title {
-			padding-left: 1.75rem;
-			position: relative;
-			display: block;
-			color: var(--palettes-primary-600);
-			font-weight: 400;
-			margin: 0;
-			font-size: var(--sizes-standard-font-size);
-			line-height: var(--sizes-big-line-height);
-			min-width: 1.5rem;
-		}
-
-		.timeline-step-title,
-		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
-			&::before {
-				content: '';
-				color: var(--palettes-primary-800);
-				width: 1rem;
-				height: 1rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				border-radius: 50%;
-				background-color: var(--palettes-primary-300);
-				position: absolute;
-				left: var(--spacings-smallest);
-				top: 50%;
-				transform: translateY(-50%);
+			.timeline-step-title,
+			.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
+				&::before {
+					content: '';
+					color: var(--palettes-primary-800);
+					width: 1rem;
+					height: 1rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border-radius: 50%;
+					background-color: var(--palettes-primary-300);
+					position: absolute;
+					left: var(--spacings-smallest);
+					top: 50%;
+					transform: translateY(-50%);
+				}
 			}
-		}
 
-		.timeline-step-title-action {
-			@include reset.button;
+			.timeline-step-title-action {
+				@include reset.button;
 
-			color: currentColor;
-			text-decoration: none;
-			cursor: default;
-			display: inline-block;
-			width: auto;
+				color: currentColor;
+				text-decoration: none;
+				cursor: default;
+				display: inline-block;
+				width: auto;
 
-			&:not([disabled]) {
-				&:hover,
-				&:focus {
-					color: currentColor;
-					text-decoration: underline;
-					cursor: pointer;
+				&:not([disabled]) {
+					&:hover,
+					&:focus {
+						color: currentColor;
+						text-decoration: underline;
+						cursor: pointer;
+					}
 				}
 			}
 		}

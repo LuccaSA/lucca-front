@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/commons/utils/icon';
 
@@ -6,53 +7,55 @@
 	position: relative;
 
 	@at-root {
-		.switch-input {
-			@include a11y.mask;
-		}
-
-		.switch-label {
-			padding: 0;
-			padding-left: calc(var(--spacings-big) - 4px + var(--spacings-smaller));
-			color: var(--palettes-grey-800);
-			transition: color var(--commons-animations-durations-fast);
-			display: inline-block;
-			line-height: var(--sizes-standard-line-height);
-			cursor: pointer;
-
-			&::before {
-				@include icon.generate('cross');
-
-				align-items: center;
-				background-color: var(--palettes-grey-500);
-				border-radius: 9999px;
-				color: var(--colors-white-color);
-				display: flex;
-				font-size: var(--sizes-smaller-font-size);
-				height: 1rem;
-				left: 0;
-				line-height: var(--sizes-small-line-height);
-				margin-top: var(--components-switch-top);
-				padding-left: var(--components-switch-icon-right);
-				padding-top: var(--components-switch-icon-top);
-				position: absolute;
-				top: var(--spacings-smallest);
-				transition: all var(--commons-animations-durations-fast) ease;
-				width: calc(2rem - 4px);
+		@include core.scoped {
+			.switch-input {
+				@include a11y.mask;
 			}
 
-			&::after {
-				background-color: white;
-				box-shadow: var(--commons-box-shadow-hard);
-				border-radius: 50%;
-				content: '';
-				display: block;
-				height: calc(1rem - 4px);
-				left: 2px;
-				margin-top: var(--components-switch-top);
-				position: absolute;
-				top: calc(var(--spacings-smallest) + 2px);
-				transition: all var(--commons-animations-durations-fast) ease;
-				width: calc(1rem - 4px);
+			.switch-label {
+				padding: 0;
+				padding-left: calc(var(--spacings-big) - 4px + var(--spacings-smaller));
+				color: var(--palettes-grey-800);
+				transition: color var(--commons-animations-durations-fast);
+				display: inline-block;
+				line-height: var(--sizes-standard-line-height);
+				cursor: pointer;
+
+				&::before {
+					@include icon.generate('cross');
+
+					align-items: center;
+					background-color: var(--palettes-grey-500);
+					border-radius: 9999px;
+					color: var(--colors-white-color);
+					display: flex;
+					font-size: var(--sizes-smaller-font-size);
+					height: 1rem;
+					left: 0;
+					line-height: var(--sizes-small-line-height);
+					margin-top: var(--components-switch-top);
+					padding-left: var(--components-switch-icon-right);
+					padding-top: var(--components-switch-icon-top);
+					position: absolute;
+					top: var(--spacings-smallest);
+					transition: all var(--commons-animations-durations-fast) ease;
+					width: calc(2rem - 4px);
+				}
+
+				&::after {
+					background-color: white;
+					box-shadow: var(--commons-box-shadow-hard);
+					border-radius: 50%;
+					content: '';
+					display: block;
+					height: calc(1rem - 4px);
+					left: 2px;
+					margin-top: var(--components-switch-top);
+					position: absolute;
+					top: calc(var(--spacings-smallest) + 2px);
+					transition: all var(--commons-animations-durations-fast) ease;
+					width: calc(1rem - 4px);
+				}
 			}
 		}
 	}

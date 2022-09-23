@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 
 @mixin component {
@@ -20,22 +21,24 @@
 	overflow: hidden;
 
 	@at-root {
-		.progress-bar {
-			background-color: var(--components-progress-bar-background);
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: background-color, width;
-			bottom: 0;
-			left: 0;
-			position: absolute;
-			top: 0;
-
-			&::after {
-				animation: progress var(--components-progress-duration) infinite;
-				background-image: var(--components-progress-bar-gradient);
-				transform-origin: left;
+		@include core.scoped {
+			.progress-bar {
+				background-color: var(--components-progress-bar-background);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: background-color, width;
+				bottom: 0;
+				left: 0;
 				position: absolute;
-				inset: 0;
-				content: '';
+				top: 0;
+
+				&::after {
+					animation: progress var(--components-progress-duration) infinite;
+					background-image: var(--components-progress-bar-gradient);
+					transform-origin: left;
+					position: absolute;
+					inset: 0;
+					content: '';
+				}
 			}
 		}
 	}

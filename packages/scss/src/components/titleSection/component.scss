@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/config';
 
 @mixin component {
@@ -23,12 +24,14 @@
 	}
 
 	@at-root {
-		.titleSection-sub {
-			color: var(--palettes-grey-600);
-			font-size: var(--sizes-standard-font-size);
-			line-height: var(--sizes-standard-line-height);
-			font-weight: 400;
-			margin: 0;
+		@include core.scoped {
+			.titleSection-sub {
+				color: var(--palettes-grey-600);
+				font-size: var(--sizes-standard-font-size);
+				line-height: var(--sizes-standard-line-height);
+				font-weight: 400;
+				margin: 0;
+			}
 		}
 	}
 }

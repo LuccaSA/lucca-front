@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin small {
@@ -166,30 +167,32 @@
 
 @mixin draggable {
 	@at-root {
-		.table-body-row-cell-handler,
-		.table-foot-row-cell-handler {
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: var(--spacings-big);
-			position: absolute;
-			cursor: move;
+		@include core.scoped {
+			.table-body-row-cell-handler,
+			.table-foot-row-cell-handler {
+				top: 0;
+				bottom: 0;
+				left: 0;
+				width: var(--spacings-big);
+				position: absolute;
+				cursor: move;
 
-			&:focus-visible,
-			&:hover {
-				&::after {
-					color: var(--palettes-grey-500);
+				&:focus-visible,
+				&:hover {
+					&::after {
+						color: var(--palettes-grey-500);
+					}
 				}
-			}
 
-			&::after {
-				@include icon.generate('drag');
+				&::after {
+					@include icon.generate('drag');
 
-				color: var(--palettes-grey-400);
-				height: 100%;
-				margin: auto;
-				display: flex;
-				align-items: center;
+					color: var(--palettes-grey-400);
+					height: 100%;
+					margin: auto;
+					display: flex;
+					align-items: center;
+				}
 			}
 		}
 	}
@@ -221,10 +224,12 @@
 	$wrapper: '.table-head-row-cell-wrapper'
 ) {
 	@at-root {
-		.table-head-row-cell-secondLine {
-			margin-top: var(--spacings-smallest);
-			display: block;
-			font-weight: 400;
+		@include core.scoped {
+			.table-head-row-cell-secondLine {
+				margin-top: var(--spacings-smallest);
+				display: block;
+				font-weight: 400;
+			}
 		}
 	}
 

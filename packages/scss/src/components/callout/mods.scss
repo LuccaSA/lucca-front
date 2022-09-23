@@ -1,22 +1,25 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin icon {
 	padding-left: var(--spacings-bigger);
 
 	@at-root {
-		.callout-icon {
-			top: 0.4rem;
-			left: 0.75rem;
-			width: 2rem;
-			border-radius: 50%;
-			position: absolute;
-			margin: auto;
-			text-align: center;
-			color: var(--palettes-700, var(--palettes-grey-700));
+		@include core.scoped {
+			.callout-icon {
+				top: 0.4rem;
+				left: 0.75rem;
+				width: 2rem;
+				border-radius: 50%;
+				position: absolute;
+				margin: auto;
+				text-align: center;
+				color: var(--palettes-700, var(--palettes-grey-700));
 
-			.lucca-icon {
-				font-size: 1.2rem;
-				vertical-align: middle;
+				.lucca-icon {
+					font-size: 1.2rem;
+					vertical-align: middle;
+				}
 			}
 		}
 	}
@@ -43,26 +46,28 @@
 	padding-right: 2.5rem;
 
 	@at-root {
-		.callout-kill {
-			right: var(--spacings-small);
-			background-color: transparent;
-			color: currentColor;
-			position: absolute;
-			height: 1.5rem;
-			border: 0;
-			padding: 0;
-			top: var(--spacings-smaller);
-			transition-duration: 150ms;
-			transition-property: background-color;
-			width: 1rem;
-			cursor: pointer;
+		@include core.scoped {
+			.callout-kill {
+				right: var(--spacings-small);
+				background-color: transparent;
+				color: currentColor;
+				position: absolute;
+				height: 1.5rem;
+				border: 0;
+				padding: 0;
+				top: var(--spacings-smaller);
+				transition-duration: 150ms;
+				transition-property: background-color;
+				width: 1rem;
+				cursor: pointer;
 
-			&::before {
-				@include icon.generate('cross');
-			}
+				&::before {
+					@include icon.generate('cross');
+				}
 
-			&:hover {
-				opacity: 1;
+				&:hover {
+					opacity: 1;
+				}
 			}
 		}
 	}

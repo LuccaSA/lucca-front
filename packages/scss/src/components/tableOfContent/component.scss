@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component {
@@ -7,23 +8,25 @@
 	position: sticky;
 
 	@at-root {
-		.tableOfContent-list {
-			@include reset.list;
-		}
+		@include core.scoped {
+			.tableOfContent-list {
+				@include reset.list;
+			}
 
-		.tableOfContent-list-item-action {
-			@include reset.button;
+			.tableOfContent-list-item-action {
+				@include reset.button;
 
-			border-radius: var(--commons-border-radius);
-			color: var(--palettes-grey-700);
-			cursor: pointer;
-			display: block;
-			outline: none;
-			padding: var(--components-tableOfContent-item-padding);
-			position: relative;
-			transition: all var(--commons-animations-durations-standard);
-			text-decoration: none;
-			width: auto;
+				border-radius: var(--commons-border-radius);
+				color: var(--palettes-grey-700);
+				cursor: pointer;
+				display: block;
+				outline: none;
+				padding: var(--components-tableOfContent-item-padding);
+				position: relative;
+				transition: all var(--commons-animations-durations-standard);
+				text-decoration: none;
+				width: auto;
+			}
 		}
 	}
 }

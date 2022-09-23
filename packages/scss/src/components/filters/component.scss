@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/core' as core;
+
 @mixin component {
 	box-shadow: var(--commons-elevations-elevation-1);
 	background-color: var(--components-filters-background);
@@ -8,21 +10,23 @@
 	z-index: 99;
 
 	@at-root {
-		.filters-sectionLeft {
-			align-items: center;
-			display: flex;
-			padding-right: var(--spacings-big);
-		}
+		@include core.scoped {
+			.filters-sectionLeft {
+				align-items: center;
+				display: flex;
+				padding-right: var(--spacings-big);
+			}
 
-		.filters-sectionRight {
-			align-items: center;
-			display: flex;
-			margin-left: auto;
-			padding-left: var(--spacings-big);
+			.filters-sectionRight {
+				align-items: center;
+				display: flex;
+				margin-left: auto;
+				padding-left: var(--spacings-big);
 
-			.textfield.mod-framed {
-				border-left: var(--commons-divider-width) solid var(--commons-divider-color);
-				border-right: 0 !important;
+				.textfield.mod-framed {
+					border-left: var(--commons-divider-width) solid var(--commons-divider-color);
+					border-right: 0 !important;
+				}
 			}
 		}
 	}

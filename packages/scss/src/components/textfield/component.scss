@@ -1,68 +1,71 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @mixin component {
 	vertical-align: middle;
 	width: var(--components-textfield-sizes-default);
 
 	@at-root {
-		.textfield-input {
-			min-width: 0;
-			border: 0;
-			line-height: var(--sizes-standard-line-height);
-			-webkit-appearance: none;
-			background-color: var(--components-textfield-background);
-			border-radius: var(--components-textfield-border-radius);
-			padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
-			transition-property: box-shadow, background-color, color;
-			transition-duration: var(--commons-animations-durations-fast);
-
-			&::placeholder {
-				color: var(--palettes-400, var(--components-textfield-input-placeholder));
-				transition-property: color;
+		@include core.scoped {
+			.textfield-input {
+				min-width: 0;
+				border: 0;
+				line-height: var(--sizes-standard-line-height);
+				-webkit-appearance: none;
+				background-color: var(--components-textfield-background);
+				border-radius: var(--components-textfield-border-radius);
+				padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
+				transition-property: box-shadow, background-color, color;
 				transition-duration: var(--commons-animations-durations-fast);
-				opacity: 1;
+
+				&::placeholder {
+					color: var(--palettes-400, var(--components-textfield-input-placeholder));
+					transition-property: color;
+					transition-duration: var(--commons-animations-durations-fast);
+					opacity: 1;
+				}
 			}
-		}
 
-		.textfield-suffix {
-			top: var(--components-textfield-suffix-top);
-			right: var(--components-textfield-input-padding-horizontal);
-			position: absolute;
-			pointer-events: none;
-			line-height: var(--sizes-standard-line-height);
-			z-index: 1;
-		}
+			.textfield-suffix {
+				top: var(--components-textfield-suffix-top);
+				right: var(--components-textfield-input-padding-horizontal);
+				position: absolute;
+				pointer-events: none;
+				line-height: var(--sizes-standard-line-height);
+				z-index: 1;
+			}
 
-		.textfield-options {
-			box-shadow: var(--commons-elevations-elevation-3);
-			background-color: var(--colors-white-color);
-			border-radius: var(--commons-border-radius);
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: all;
-			list-style: none;
-			overflow: auto;
-			position: absolute;
-			transform-origin: right top;
-			transform: scaleY(0);
-			margin: 3px 0 0;
-			max-height: 15rem;
-			opacity: 0;
-			padding: 0;
-			left: 0;
-			top: 100%;
-			z-index: 999;
-			width: 100%;
-		}
+			.textfield-options {
+				box-shadow: var(--commons-elevations-elevation-3);
+				background-color: var(--colors-white-color);
+				border-radius: var(--commons-border-radius);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: all;
+				list-style: none;
+				overflow: auto;
+				position: absolute;
+				transform-origin: right top;
+				transform: scaleY(0);
+				margin: 3px 0 0;
+				max-height: 15rem;
+				opacity: 0;
+				padding: 0;
+				left: 0;
+				top: 100%;
+				z-index: 999;
+				width: 100%;
+			}
 
-		.textfield-options-mark {
-			background-color: transparent;
-			text-decoration: underline;
-			color: inherit;
-		}
+			.textfield-options-mark {
+				background-color: transparent;
+				text-decoration: underline;
+				color: inherit;
+			}
 
-		.textfield-options-entry {
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: background-color;
-			padding: var(--spacings-smaller) var(--spacings-small);
-			cursor: pointer;
+			.textfield-options-entry {
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: background-color;
+				padding: var(--spacings-smaller) var(--spacings-small);
+				cursor: pointer;
+			}
 		}
 	}
 }

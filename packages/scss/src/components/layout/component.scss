@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:math';
 
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/config';
 
@@ -36,135 +37,137 @@
 	}
 
 	@at-root {
-		.layout-content-container {
-			max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
-		}
-
-		.layout-banner {
-			grid-area: banner;
-			height: var(--commons-banner-height);
-			background-color: var(--colors-white-color);
-			position: sticky;
-			top: 0;
-			z-index: 2;
-		}
-
-		.layout-content {
-			top: var(--commons-banner-height);
-			grid-area: content;
-			position: sticky;
-			display: flex;
-			flex-direction: column;
-
-			@include media.smallerThan('s') {
-				position: static;
+		@include core.scoped {
+			.layout-content-container {
+				max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
 			}
-		}
 
-		.layout-content-headers,
-		.layout-content-headers-subheader,
-		.layout-content-headers-header {
-			background-color: var(--colors-white-color);
-			top: var(--commons-banner-height);
-			position: sticky;
-
-			@include media.smallerThan('s') {
-				position: static;
+			.layout-banner {
+				grid-area: banner;
+				height: var(--commons-banner-height);
+				background-color: var(--colors-white-color);
+				position: sticky;
+				top: 0;
+				z-index: 2;
 			}
-		}
 
-		.layout-content-headers-header {
-			z-index: 1;
-		}
+			.layout-content {
+				top: var(--commons-banner-height);
+				grid-area: content;
+				position: sticky;
+				display: flex;
+				flex-direction: column;
 
-		.layout-content-inner {
-			flex-grow: 1;
-		}
-
-		.layout-content-footer {
-			background-color: var(--colors-white-color);
-			position: sticky;
-			bottom: 0;
-
-			@include media.smallerThan('s') {
-				position: static;
+				@include media.smallerThan('s') {
+					position: static;
+				}
 			}
-		}
 
-		.layout-navside,
-		.layout-aside {
-			min-height: calc(100vh - var(--commons-banner-height));
-			top: var(--commons-banner-height);
-			display: flex;
-			position: sticky;
-			flex-direction: column;
-			align-self: self-start;
+			.layout-content-headers,
+			.layout-content-headers-subheader,
+			.layout-content-headers-header {
+				background-color: var(--colors-white-color);
+				top: var(--commons-banner-height);
+				position: sticky;
 
-			@include media.smallerThan('s') {
-				min-height: 0;
+				@include media.smallerThan('s') {
+					position: static;
+				}
 			}
-		}
 
-		.layout-aside {
-			grid-area: aside;
-
-			@include media.smallerThan('l') {
-				min-height: 0;
-				position: static;
+			.layout-content-headers-header {
+				z-index: 1;
 			}
-		}
 
-		.layout-navside {
-			max-height: calc(100vh - var(--commons-banner-height));
-			grid-area: navside;
-			z-index: 2;
-			overflow: auto;
-		}
-
-		.layout-navside-content-inner,
-		.layout-aside-content-inner {
-			flex-grow: 1;
-		}
-
-		.layout-navside-footer,
-		.layout-aside-footer {
-			position: sticky;
-			bottom: 0;
-			background-color: var(--colors-white-color);
-
-			@include media.smallerThan('s') {
-				margin-top: 0;
-				position: static;
+			.layout-content-inner {
+				flex-grow: 1;
 			}
-		}
 
-		.layout-navside-toggle {
-			background-color: var(--colors-white-color);
-			border: 0;
-			margin: 0;
-			padding: 0;
-			top: 0;
-			position: sticky;
-			color: inherit;
-			font: inherit;
-			cursor: pointer;
+			.layout-content-footer {
+				background-color: var(--colors-white-color);
+				position: sticky;
+				bottom: 0;
 
-			@include media.largerThan('s') {
-				display: none;
+				@include media.smallerThan('s') {
+					position: static;
+				}
 			}
-		}
 
-		.layout-aside-content,
-		.layout-navside-content {
-			flex-grow: 1;
-			display: flex;
-			flex-direction: column;
-		}
+			.layout-navside,
+			.layout-aside {
+				min-height: calc(100vh - var(--commons-banner-height));
+				top: var(--commons-banner-height);
+				display: flex;
+				position: sticky;
+				flex-direction: column;
+				align-self: self-start;
 
-		.layout-navside-content {
-			@include media.smallerThan('s') {
-				.layout-navside-toggle[aria-expanded='false'] ~ & {
+				@include media.smallerThan('s') {
+					min-height: 0;
+				}
+			}
+
+			.layout-aside {
+				grid-area: aside;
+
+				@include media.smallerThan('l') {
+					min-height: 0;
+					position: static;
+				}
+			}
+
+			.layout-navside {
+				max-height: calc(100vh - var(--commons-banner-height));
+				grid-area: navside;
+				z-index: 2;
+				overflow: auto;
+			}
+
+			.layout-navside-content-inner,
+			.layout-aside-content-inner {
+				flex-grow: 1;
+			}
+
+			.layout-navside-footer,
+			.layout-aside-footer {
+				position: sticky;
+				bottom: 0;
+				background-color: var(--colors-white-color);
+
+				@include media.smallerThan('s') {
+					margin-top: 0;
+					position: static;
+				}
+			}
+
+			.layout-navside-toggle {
+				background-color: var(--colors-white-color);
+				border: 0;
+				margin: 0;
+				padding: 0;
+				top: 0;
+				position: sticky;
+				color: inherit;
+				font: inherit;
+				cursor: pointer;
+
+				@include media.largerThan('s') {
 					display: none;
+				}
+			}
+
+			.layout-aside-content,
+			.layout-navside-content {
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.layout-navside-content {
+				@include media.smallerThan('s') {
+					.layout-navside-toggle[aria-expanded='false'] ~ & {
+						display: none;
+					}
 				}
 			}
 		}

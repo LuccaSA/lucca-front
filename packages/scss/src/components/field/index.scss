@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use 'exports' as *;
 
 .form.mod-framed {
@@ -70,21 +71,23 @@
 		}
 
 		@at-root {
-			.form.mod-framed {
-				.is-error {
-					@include fieldFramedState('error');
-					@include fieldFramedError('textfield');
-					@include fieldFramedError('radiosfield');
-					@include fieldFramedError('checkboxesfield');
-				}
+			@include core.scoped {
+				.form.mod-framed {
+					.is-error {
+						@include fieldFramedState('error');
+						@include fieldFramedError('textfield');
+						@include fieldFramedError('radiosfield');
+						@include fieldFramedError('checkboxesfield');
+					}
 
-				.is-warning {
-					@include fieldFramedState('warning');
-				}
+					.is-warning {
+						@include fieldFramedState('warning');
+					}
 
-				.is-valid,
-				.is-success {
-					@include fieldFramedState('success');
+					.is-valid,
+					.is-success {
+						@include fieldFramedState('success');
+					}
 				}
 			}
 		}

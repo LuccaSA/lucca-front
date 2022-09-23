@@ -1,32 +1,35 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
 	display: block;
 
 	@at-root {
-		.collapse-title {
-			margin-bottom: var(--spacings-smallest);
-			display: inline-flex;
-			overflow: hidden;
-			cursor: pointer;
+		@include core.scoped {
+			.collapse-title {
+				margin-bottom: var(--spacings-smallest);
+				display: inline-flex;
+				overflow: hidden;
+				cursor: pointer;
 
-			&::-webkit-details-marker {
-				display: none;
-			}
+				&::-webkit-details-marker {
+					display: none;
+				}
 
-			&:focus-within,
-			&:hover {
-				color: var(--palettes-grey-900);
-			}
+				&:focus-within,
+				&:hover {
+					color: var(--palettes-grey-900);
+				}
 
-			&::before {
-				@include icon.generate('chevron_east');
+				&::before {
+					@include icon.generate('chevron_east');
 
-				font-size: var(--sizes-smaller-font-size);
-				margin-right: var(--spacings-smallest);
-				transition-duration: var(--commons-animations-durations-fast);
-				transition-property: transform;
-				vertical-align: middle;
+					font-size: var(--sizes-smaller-font-size);
+					margin-right: var(--spacings-smallest);
+					transition-duration: var(--commons-animations-durations-fast);
+					transition-property: transform;
+					vertical-align: middle;
+				}
 			}
 		}
 	}

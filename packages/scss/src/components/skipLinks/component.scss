@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
@@ -13,44 +14,46 @@
 	bottom: auto;
 
 	@at-root {
-		.skipLinks-list {
-			@include reset.list;
+		@include core.scoped {
+			.skipLinks-list {
+				@include reset.list;
 
-			display: flex;
-		}
-
-		.skipLinks-list-item-action {
-			border: 0;
-			margin: 0;
-			font-weight: 600;
-			border-radius: var(--commons-border-radius);
-			font-size: var(--sizes-smaller-font-size);
-			line-height: var(--sizes-smaller-line-height);
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-grey-200);
-			padding: var(--spacings-smallest) var(--spacings-smaller);
-			transition: all var(--commons-animations-durations-fast);
-			background-color: var(--palettes-grey-600);
-			display: inline-block;
-			position: relative;
-			text-decoration: none;
-			vertical-align: baseline;
-			white-space: nowrap;
-			outline: none;
-			cursor: pointer;
-
-			&:not(:focus) {
-				@include a11y.mask;
+				display: flex;
 			}
 
-			&,
-			&:hover {
-				color: var(--colors-white-color);
-			}
-		}
+			.skipLinks-list-item-action {
+				border: 0;
+				margin: 0;
+				font-weight: 600;
+				border-radius: var(--commons-border-radius);
+				font-size: var(--sizes-smaller-font-size);
+				line-height: var(--sizes-smaller-line-height);
+				box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-grey-200);
+				padding: var(--spacings-smallest) var(--spacings-smaller);
+				transition: all var(--commons-animations-durations-fast);
+				background-color: var(--palettes-grey-600);
+				display: inline-block;
+				position: relative;
+				text-decoration: none;
+				vertical-align: baseline;
+				white-space: nowrap;
+				outline: none;
+				cursor: pointer;
 
-		.navSide,
-		.main-content {
-			scroll-margin-top: var(--commons-banner-height);
+				&:not(:focus) {
+					@include a11y.mask;
+				}
+
+				&,
+				&:hover {
+					color: var(--colors-white-color);
+				}
+			}
+
+			.navSide,
+			.main-content {
+				scroll-margin-top: var(--commons-banner-height);
+			}
 		}
 	}
 }

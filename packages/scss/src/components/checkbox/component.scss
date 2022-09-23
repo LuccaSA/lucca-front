@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
@@ -6,80 +7,82 @@
 	position: relative;
 
 	@at-root {
-		.checkbox-label {
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: color;
-			display: inline-flex;
-			align-items: flex-start;
-			cursor: pointer;
-
-			&::before {
-				@include icon.generate('tick');
-
-				background-color: var(--colors-white-color);
-				width: var(--components-checkbox-input-size);
-				height: var(--components-checkbox-input-size);
-				margin-right: var(--components-checkbox-input-margin-right);
-				margin-top: var(--components-checkbox-input-margin-top);
-				border-radius: var(--components-checkbox-input-border-radius);
+		@include core.scoped {
+			.checkbox-label {
 				transition-duration: var(--commons-animations-durations-fast);
-				transition-property: all;
-				border: 2px solid var(--components-checkbox-input-border-color);
-				line-height: 0.85;
-				font-size: var(--sizes-standard-font-size);
-				flex-grow: 0;
-				flex-shrink: 0;
-				flex-basis: auto;
-				color: transparent;
-				display: block;
-				text-align: center;
-				text-indent: -0.1rem;
-			}
+				transition-property: color;
+				display: inline-flex;
+				align-items: flex-start;
+				cursor: pointer;
 
-			&:hover {
 				&::before {
-					border-color: var(--palettes-600, var(--components-checkbox-input-border-hover));
+					@include icon.generate('tick');
+
+					background-color: var(--colors-white-color);
+					width: var(--components-checkbox-input-size);
+					height: var(--components-checkbox-input-size);
+					margin-right: var(--components-checkbox-input-margin-right);
+					margin-top: var(--components-checkbox-input-margin-top);
+					border-radius: var(--components-checkbox-input-border-radius);
+					transition-duration: var(--commons-animations-durations-fast);
+					transition-property: all;
+					border: 2px solid var(--components-checkbox-input-border-color);
+					line-height: 0.85;
+					font-size: var(--sizes-standard-font-size);
+					flex-grow: 0;
+					flex-shrink: 0;
+					flex-basis: auto;
+					color: transparent;
+					display: block;
+					text-align: center;
+					text-indent: -0.1rem;
 				}
-			}
 
-			&:active {
-				&::before {
-					border-color: var(--palettes-800, var(--components-checkbox-default-palette-800));
-					box-shadow: 0 0 0 4px var(--palettes-300, var(--components-checkbox-default-palette-300));
-				}
-			}
-		}
-
-		.checkbox-input {
-			@include a11y.mask;
-
-			&:checked ~ .checkbox-label {
-				&::before {
-					color: var(--colors-white-color);
-					background-color: var(--palettes-700, var(--components-checkbox-default-palette-700));
-					border-color: var(--palettes-700, var(--components-checkbox-default-palette-700));
-				}
-			}
-
-			&:not(:disabled):checked ~ .checkbox-label {
 				&:hover {
 					&::before {
-						background-color: var(--palettes-600, var(--components-checkbox-default-palette-600));
-						border-color: var(--palettes-600, var(--components-checkbox-default-palette-600));
+						border-color: var(--palettes-600, var(--components-checkbox-input-border-hover));
 					}
 				}
 
 				&:active {
 					&::before {
-						background-color: var(--palettes-800, var(--components-checkbox-default-palette-800));
 						border-color: var(--palettes-800, var(--components-checkbox-default-palette-800));
+						box-shadow: 0 0 0 4px var(--palettes-300, var(--components-checkbox-default-palette-300));
 					}
 				}
 			}
 
-			&:focus ~ .checkbox-label {
-				&::before {
-					box-shadow: 0 0 0 4px var(--palettes-200, var(--components-checkbox-default-palette-200));
+			.checkbox-input {
+				@include a11y.mask;
+
+				&:checked ~ .checkbox-label {
+					&::before {
+						color: var(--colors-white-color);
+						background-color: var(--palettes-700, var(--components-checkbox-default-palette-700));
+						border-color: var(--palettes-700, var(--components-checkbox-default-palette-700));
+					}
+				}
+
+				&:not(:disabled):checked ~ .checkbox-label {
+					&:hover {
+						&::before {
+							background-color: var(--palettes-600, var(--components-checkbox-default-palette-600));
+							border-color: var(--palettes-600, var(--components-checkbox-default-palette-600));
+						}
+					}
+
+					&:active {
+						&::before {
+							background-color: var(--palettes-800, var(--components-checkbox-default-palette-800));
+							border-color: var(--palettes-800, var(--components-checkbox-default-palette-800));
+						}
+					}
+				}
+
+				&:focus ~ .checkbox-label {
+					&::before {
+						box-shadow: 0 0 0 4px var(--palettes-200, var(--components-checkbox-default-palette-200));
+					}
 				}
 			}
 		}

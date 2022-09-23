@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component {
@@ -24,43 +25,45 @@
 	z-index: 9999;
 
 	@at-root {
-		.toasts-item {
-			color: var(--components-toasts-color);
-			padding: var(--components-toasts-padding);
-			margin-bottom: var(--components-toasts-margin-bottom);
-			background-color: var(--palettes-800, var(--components-toasts-background));
-			animation-name: toast;
-			animation-duration: var(--commons-animations-durations-standard);
-			animation-iteration-count: 1;
-			border-radius: var(--commons-border-radius);
-			margin-left: auto;
-			overflow: hidden;
-			position: relative;
-			transform-origin: top;
-		}
-
-		.toasts-item-kill {
-			color: var(--colors-white-color);
-			transition-property: opacity;
-			transition-duration: var(--commons-animations-durations-fast);
-			background-color: transparent;
-			right: var(--spacings-smaller);
-			bottom: 0;
-			top: 0;
-			border: 0;
-			padding: 0;
-			height: 1.25rem;
-			width: 1.25rem;
-			position: absolute;
-			margin: auto;
-			cursor: pointer;
-
-			&:hover {
-				opacity: 0.66;
+		@include core.scoped {
+			.toasts-item {
+				color: var(--components-toasts-color);
+				padding: var(--components-toasts-padding);
+				margin-bottom: var(--components-toasts-margin-bottom);
+				background-color: var(--palettes-800, var(--components-toasts-background));
+				animation-name: toast;
+				animation-duration: var(--commons-animations-durations-standard);
+				animation-iteration-count: 1;
+				border-radius: var(--commons-border-radius);
+				margin-left: auto;
+				overflow: hidden;
+				position: relative;
+				transform-origin: top;
 			}
 
-			&::after {
-				@include icon.generate('cross');
+			.toasts-item-kill {
+				color: var(--colors-white-color);
+				transition-property: opacity;
+				transition-duration: var(--commons-animations-durations-fast);
+				background-color: transparent;
+				right: var(--spacings-smaller);
+				bottom: 0;
+				top: 0;
+				border: 0;
+				padding: 0;
+				height: 1.25rem;
+				width: 1.25rem;
+				position: absolute;
+				margin: auto;
+				cursor: pointer;
+
+				&:hover {
+					opacity: 0.66;
+				}
+
+				&::after {
+					@include icon.generate('cross');
+				}
 			}
 		}
 	}

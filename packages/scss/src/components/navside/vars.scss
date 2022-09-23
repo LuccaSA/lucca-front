@@ -1,9 +1,13 @@
+@use '@lucca-front/scss/src/commons/core' as core;
+
 @mixin vars {
 	@at-root {
 		:root {
-			--commons-navSide-width: 15rem;
-			--commons-navSide-compact-width: 7.5rem;
-			--commons-navSide-mobile-toggle-height: 3.5rem;
+			@include core.scoped {
+				--commons-navSide-width: 15rem;
+				--commons-navSide-compact-width: 7.5rem;
+				--commons-navSide-mobile-toggle-height: 3.5rem;
+			}
 		}
 	}
 

@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core' as core;
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin size {
@@ -107,12 +108,14 @@
 	justify-content: center;
 
 	@at-root {
-		.button-icon {
-			height: 1.5rem;
-			line-height: 1.5rem;
-			font-size: 1.5rem;
-			transform: translateX(-0.2rem);
-			vertical-align: bottom;
+		@include core.scoped {
+			.button-icon {
+				height: 1.5rem;
+				line-height: 1.5rem;
+				font-size: 1.5rem;
+				transform: translateX(-0.2rem);
+				vertical-align: bottom;
+			}
 		}
 	}
 }
@@ -173,17 +176,19 @@
 	padding-right: var(--spacings-small);
 
 	@at-root {
-		.button-counter {
-			background-color: var(--palettes-500, var(--palettes-primary-500));
-			border-radius: 1rem;
-			display: inline-block;
-			font-size: var(--sizes-smaller-font-size);
-			font-weight: 600;
-			height: 1.5rem;
-			min-width: 1.5rem;
-			margin-left: var(--spacings-smaller);
-			padding: 0 var(--spacings-smallest);
-			vertical-align: bottom;
+		@include core.scoped {
+			.button-counter {
+				background-color: var(--palettes-500, var(--palettes-primary-500));
+				border-radius: 1rem;
+				display: inline-block;
+				font-size: var(--sizes-smaller-font-size);
+				font-weight: 600;
+				height: 1.5rem;
+				min-width: 1.5rem;
+				margin-left: var(--spacings-smaller);
+				padding: 0 var(--spacings-smallest);
+				vertical-align: bottom;
+			}
 		}
 	}
 }
