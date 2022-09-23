@@ -104,3 +104,14 @@ $decoration: 'underline', 'none';
 		}
 	}
 }
+
+$scope: '' !default;
+@mixin scoped {
+	@if $scope != '' {
+		#{$scope} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}

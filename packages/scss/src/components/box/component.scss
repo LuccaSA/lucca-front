@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/core' as core;
+
 @mixin component {
 	border-radius: var(--components-box-border-radius);
 	margin: var(--components-box-margin);
@@ -7,12 +9,14 @@
 	position: relative;
 
 	@at-root {
-		.box-close {
-			position: absolute;
-			font-size: var(--sizes-standard-font-size);
-			right: var(--spacings-smallest);
-			top: var(--spacings-smallest);
-			z-index: 1;
+		@include core.scoped {
+			.box-close {
+				position: absolute;
+				font-size: var(--sizes-standard-font-size);
+				right: var(--spacings-smallest);
+				top: var(--spacings-smallest);
+				z-index: 1;
+			}
 		}
 	}
 }
