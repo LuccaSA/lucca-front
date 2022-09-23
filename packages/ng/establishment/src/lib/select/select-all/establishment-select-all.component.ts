@@ -1,14 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { ALuOptionOperator, ALuOptionSelector, ILuOptionSelectAllLabel, LuOptionSelectAllComponent, LuOptionSelectAllIntl } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
+import {
+	ALuOptionOperator,
+	ALuOptionSelector,
+	ILuOptionSelectAllLabel,
+	LuOptionModule,
+	LuOptionSelectAllComponent,
+	LuOptionSelectAllIntl,
+	LU_OPTION_SELECT_ALL_TRANSLATIONS,
+} from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
+import { luEstablishmentSelectAllTranslations } from './establishment-select-all.translate';
 
 @Component({
 	selector: 'lu-establishment-select-all',
 	templateUrl: './establishment-select-all.component.html',
 	styleUrls: ['establishment-select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, LuInputModule, LuOptionModule],
+
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -23,6 +37,10 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 		{
 			provide: ALuEstablishmentService,
 			useClass: LuEstablishmentService,
+		},
+		{
+			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
+			useValue: luEstablishmentSelectAllTranslations,
 		},
 	],
 })

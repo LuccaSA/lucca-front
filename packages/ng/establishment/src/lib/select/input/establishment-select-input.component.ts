@@ -1,4 +1,5 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
@@ -16,20 +17,28 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
+import { ILuOptionPickerPanel, LuOptionComparer, LuOptionModule } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from '../../service/index';
+import { LuForLegalUnitsDirective } from '../for-legal-units';
+import { LuLegalUnitSelectorDirective } from '../legal-unit-selector';
+import { LuEstablishmentSearcherComponent } from '../searcher';
+import { LuEstablishmentSelectAllComponent } from '../select-all';
 import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
-import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
+import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.token';
+import { ILuEstablishmentSelectInputLabel, luEstablishmentSelectInputTranslations } from './establishment-select-input.translate';
 
 @Component({
 	selector: 'lu-establishment-select',
 	templateUrl: './establishment-select-input.component.html',
 	styleUrls: ['./establishment-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, OverlayModule, LuInputModule, LuOptionModule, LuEstablishmentSearcherComponent, LuEstablishmentSelectAllComponent, LuForLegalUnitsDirective, LuLegalUnitSelectorDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -44,6 +53,11 @@ import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.t
 			provide: ALuLegalUnitService,
 			useClass: LuLegalUnitService,
 		},
+		{
+			provide: LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS,
+			useValue: luEstablishmentSelectInputTranslations,
+		},
+		LuEstablishmentSelectInputIntl,
 	],
 })
 export class LuEstablishmentSelectInputComponent<
