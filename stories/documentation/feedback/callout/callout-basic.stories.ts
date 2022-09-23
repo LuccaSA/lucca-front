@@ -27,11 +27,8 @@ function getTemplate(args: CalloutBasicStory): string {
 	const small = args.small ? `mod-small` : '';
 	return `
 	<div class="callout ${classes} ${small}">
+		<strong class="callout-title">Je suis Mr Meeseeks !</strong>
 		Je suis un callout basique <a href="#">En savoir plus</a>
-	</div>
-
-	<div class="callout ${classes} ${small}">
-		<strong class="callout-title">Je suis Mr Meeseeks !</strong> Regardez-moi !
 	</div>
 	`
 }

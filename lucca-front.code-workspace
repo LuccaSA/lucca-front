@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "./e2e"
+		},
+		{
+			"path": "./e2e/LuccaFront.Tests.e2e/bin/Debug/net6.0/artifacts",
+			"name": "e2e screenshots"
+		},
+		{
+			"path": "./e2e/LuccaFront.Tests.e2e/bin/Debug/net6.0/recordings",
+			"name": "e2e recordings"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "node_modules\\typescript\\lib",
+		"dotnet-test-explorer.enableTelemetry": false
+	}
+}

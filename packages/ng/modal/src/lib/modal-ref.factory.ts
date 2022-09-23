@@ -1,5 +1,5 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalOutlet } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, ComponentRef, Injectable, Injector } from '@angular/core';
 import { ALuPopupRef, ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { ILuModalConfig } from './modal-config.model';
@@ -10,7 +10,6 @@ import { LU_MODAL_DATA } from './modal.token';
 
 class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown> extends ALuPopupRef<T, D, R> implements ILuModalRef<T, D, R> {
 	protected _containerRef: ComponentRef<ALuModalPanelComponent<T>>;
-	protected _containerOutlet: PortalOutlet;
 	constructor(protected override _overlay: Overlay, protected override _injector: Injector, protected override _component: ComponentType<T>, protected override _config: ILuModalConfig) {
 		super(_overlay, _injector, _component, _config);
 	}
@@ -29,9 +28,8 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = u
 			const containerPortal = new ComponentPortal<ALuModalPanelComponent<T>>(LuModalPanelComponentDefaultCD, undefined, injector);
 			this._containerRef = this._overlayRef.attach<ALuModalPanelComponent<T>>(containerPortal);
 		}
-		this._containerOutlet = this._containerRef.instance;
-		const portal = new ComponentPortal(this._component, undefined, injector);
-		this._componentRef = this._containerOutlet.attach(portal) as ComponentRef<T>;
+		const panel = this._containerRef.instance;
+		this._componentRef = panel.attachInnerComponent(this._component, injector);
 	}
 	protected override _closePopup() {
 		this._componentRef.destroy();

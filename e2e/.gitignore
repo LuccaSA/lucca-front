@@ -1,0 +1,36 @@
+**/bin/
+**/obj/
+**/Version.json
+*.csproj.user
+*.feature.cs
+
+**/.idea/
+**/.vs
+
+**/Properties/launchSettings.json
+**/Properties/PublishProfiles/
+
+*.log
+
+LuccaFront.e2e.sln.DotSettings.user
+/.vs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUNIT
+*.VisualState.xml
+TestResult.xml
