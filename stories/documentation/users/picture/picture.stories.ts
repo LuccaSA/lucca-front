@@ -9,7 +9,7 @@ import { bob, squidwards } from '../user.mocks';
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
-	@Input() sizes: string;
+	@Input() @Optional() sizes: string;
 	@Input() @Optional() displayFormat: LuDisplayInitials;
 }
 
@@ -25,14 +25,18 @@ export default {
 			},
 		},
 		sizes: {
-			options: ['mod-smallest', 'mod-smaller', 'mod-small', 'mod-large', 'mod-larger', 'mod-largest'],
+			options: ['mod-smallest', 'mod-smaller', 'mod-small', '', 'mod-large', 'mod-larger', 'mod-largest'],
 			control: {
 				type: 'select',
 			},
 		},
 	},
 	decorators: [
-		componentWrapperDecorator(UserPictureStory, (props: UserPictureStory) => ({ user: props.user, displayFormat: props.displayFormat })),
+		componentWrapperDecorator(UserPictureStory, (props: UserPictureStory) => ({
+			user: props.user,
+			displayFormat: props.displayFormat,
+			sizes: props.sizes,
+		})),
 		moduleMetadata({
 			imports: [LuUserPictureModule],
 			declarations: [UserPictureStory],
@@ -47,7 +51,7 @@ const template: Story<UserPictureStory> = (args: UserPictureStory) => ({
 export const Basic = template.bind({});
 Basic.args = {
 	user: bob,
-	sizes: 'mod-larger',
+	sizes: '',
 	displayFormat: LuDisplayInitials.firstlast,
 };
 
@@ -67,7 +71,7 @@ class StoriesModule {}
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
-	@Input() sizes: string;
+	@Input() @Optional() sizes: string;
 	@Input() @Optional() displayFormat: LuDisplayInitials;
 }`;
 

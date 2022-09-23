@@ -1,7 +1,62 @@
 @mixin userPictureStyle {
+	::ng-deep {
+		.picture-wrapper {
+			@keyframes top {
+				50% {
+					transform: translateX(var(--offset));
+				}
+				100% {
+					position: relative;
+				}
+			}
+
+			display: inline-flex;
+
+			&.mod-border {
+				> * {
+					box-shadow: 0 0 0 2px var(--colors-white-color);
+				}
+			}
+
+			&:not(.mod-stacked) {
+				gap: var(--spacings-smallest);
+			}
+
+			&.mod-stacked {
+				> * {
+					border-radius: 50%;
+
+					&:not(:last-of-type) {
+						--offset: calc(var(--components-user-picture-image-size) / -3);
+
+						margin-right: var(--offset);
+
+						&:focus,
+						&:hover {
+							@media (prefers-reduced-motion: no-preference) {
+								animation: top 0.5s forwards;
+							}
+
+							@media (prefers-reduced-motion: reduce) {
+								position: relative;
+							}
+						}
+
+						&:focus:not(:focus-visible) {
+							outline: none;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	:host {
 		--components-user-picture-image-size: 2.5rem;
 		--components-user-picture-font-size: 1.125rem;
+
+		display: inline-block;
+		vertical-align: middle;
 
 		.picture {
 			align-items: center;
@@ -13,6 +68,7 @@
 			color: var(--colors-white-color);
 			display: flex;
 			font-size: var(--components-user-picture-font-size);
+			line-height: 1;
 			justify-content: center;
 			width: var(--components-user-picture-image-size);
 		}
@@ -45,6 +101,10 @@
 		&.mod-largest {
 			--components-user-picture-image-size: 7.5rem;
 			--components-user-picture-font-size: 3rem;
+		}
+
+		&.mod-border {
+			box-shadow: 0 0 0 2px var(--colors-white-color);
 		}
 	}
 }
