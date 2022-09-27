@@ -2,11 +2,11 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LuInputClearerComponent, LuInputDisplayerModule } from '@lucca-front/ng/input';
-import { ILuTreeOptionPickerPanel, LuOptionComparer, LuTreeOptionItemModule, LuTreeOptionOperatorModule, LuTreeOptionPickerModule, LuTreeOptionSelectorModule } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { ILuTreeOptionPickerPanel, LuOptionComparer, LuTreeOptionItemComponent, LuTreeOptionOperatorModule, LuTreeOptionPickerModule, LuTreeOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDepartmentFeederModule } from '../feeder';
+import { LuDepartmentFeederComponent } from '../feeder';
 import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
 import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.token';
 import { ILuDepartmentSelectInputLabel, luDepartmentSelectInputTranslations } from './department-select-input.translate';
@@ -21,12 +21,12 @@ import { ILuDepartmentSelectInputLabel, luDepartmentSelectInputTranslations } fr
 		CommonModule,
 		OverlayModule,
 		LuInputClearerComponent,
-		LuInputDisplayerModule,
-		LuDepartmentFeederModule,
+		LuInputDisplayerDirective,
+		LuDepartmentFeederComponent,
 		LuTreeOptionPickerModule,
-		LuTreeOptionItemModule,
+		LuTreeOptionItemComponent,
 		LuTreeOptionOperatorModule,
-		LuTreeOptionSelectorModule,
+		LuTreeOptionSelectAllComponent,
 	],
 	providers: [
 		{
