@@ -42,6 +42,7 @@ import { luEstablishmentSelectAllTranslations } from './establishment-select-all
 			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
 			useValue: luEstablishmentSelectAllTranslations,
 		},
+		LuOptionSelectAllIntl,
 	],
 })
 export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponent<ILuEstablishment> implements OnDestroy {
