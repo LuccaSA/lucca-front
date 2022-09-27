@@ -6,6 +6,9 @@ import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operator
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 import { PageTitle, TitleSeparator } from './title.model';
 
+/**
+ * @deprecated use Title strategy instead
+ */
 @Injectable()
 export class LuTitleService {
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>(['Lucca']);
