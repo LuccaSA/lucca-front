@@ -50,17 +50,13 @@ describe('establishment select', () => {
 	<span class="textfield-label">Establishment Select</span>
 </label>
 <label class="textfield mod-inline">
-	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple" data-testid="lu-select-multiple"></lu-establishment-select>
+	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="true" data-testid="lu-select-multiple"></lu-establishment-select>
 	<span class="textfield-label">Establishment Multiple Select</span>
 </label>`;
 
 	describe('Basic', () => {
 		it('should display dialog with a click on a lu select ', async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			// const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			// await render(component, {
-			// 	imports: [ngModule],
-			// });
 
 			await render(testingStoryTemplate, {
 				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
