@@ -30,9 +30,9 @@ describe('department select', () => {
 	const departmentStoryTemplate = `<label class="textfield">
 	<lu-department-select
 		class="textfield-input"
-		[appInstanceId]="appInstanceId"
-		[operations]="operations"
-		[filters]="filters"
+		[appInstanceId]="15"
+		[operations]="[1]"
+		[filters]="['isactive=false']"
 		data-testid="lu-select"
 	></lu-department-select>
 </label>`;

@@ -5,12 +5,14 @@ import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/index';
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
 import { LuOptionSelectAllIntl } from './select-all.intl';
-import { ILuOptionSelectAllLabel } from './select-all.translate';
+import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.token';
+import { ILuOptionSelectAllLabel, luOptionSelectAllTranslations } from './select-all.translate';
 @Component({
 	selector: 'lu-tree-option-select-all',
 	templateUrl: './select-all.component.html',
 	styleUrls: ['select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,
@@ -22,6 +24,11 @@ import { ILuOptionSelectAllLabel } from './select-all.translate';
 			useExisting: forwardRef(() => LuTreeOptionSelectAllComponent),
 			multi: true,
 		},
+		{
+			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
+			useValue: luOptionSelectAllTranslations,
+		},
+		LuOptionSelectAllIntl,
 	],
 })
 export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> implements ILuTreeOptionSelector<T> {
