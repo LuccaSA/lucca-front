@@ -1,9 +1,9 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
-import { LuSelectInput2Component } from '../input';
+import { LuSimpleSelectInputComponent } from '../input';
 
 @Directive({ selector: '[luOption]' })
 export class LuOptionDirective<T> {
-	@Input('luOptionSelect') set select(select: LuSelectInput2Component<T>) {
+	@Input('luOptionSelect') set select(select: LuSimpleSelectInputComponent<T>) {
 		select.optionTpl = this.templateRef;
 	}
 

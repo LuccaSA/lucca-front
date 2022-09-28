@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuSelect2Module } from '@lucca-front/ng/select2';
+import { LuSimpleSelectInputComponent, LuSimpleSelectModule } from '@lucca-front/ng/simple-select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 interface ILegume {
@@ -45,7 +45,7 @@ const allLegumes = [
 
 const template = `
 <label class="textfield">
-	<lu-select2
+	<lu-simple-select
 		#select1
 		class="textfield-input"
 		placeholder="Placeholder..."
@@ -55,26 +55,26 @@ const template = `
 	>
 		<ng-container *luOption="let legume; select: select1">{{ legume.name }}</ng-container>
 		<ng-container *luDisplayer="let legume; select: select1">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Avec displayer</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2 #select2 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
-		<ng-container *luOption="let legume; select: select2">{{ legume.name }}</ng-container>
-	</lu-select2>
+	<lu-simple-select #simpleSelect class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
+		<ng-container *luOption="let legume; select: simpleSelect">{{ legume.name }}</ng-container>
+	</lu-simple-select>
 	<span class="textfield-label">Sans displayer</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2 #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
+	<lu-simple-select #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
 		<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Avec clearer</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2
+	<lu-simple-select
 		#select4
 		class="textfield-input"
 		placeholder="Placeholder..."
@@ -83,14 +83,14 @@ const template = `
 		(clueChange)="updateLegumes($event)"
 	>
 		<ng-container *luOption="let legume; select: select4">{{ legume.name }}</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Avec searcher</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2 #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
+	<lu-simple-select #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
 		<ng-container *luOption="let legume; select: select5">{{ legume.name }}</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Disabled</span>
 </label>
 
@@ -103,10 +103,10 @@ const template = `
 `;
 
 @Component({
-	selector: 'select2-story',
+	selector: 'simple-select-story',
 	template
 })
-class Select2Story {
+class SimpleSelectStory {
 	public page = 1;
 	public legumes: ILegume[] = allLegumes
 
@@ -123,41 +123,42 @@ class Select2Story {
 }
 
 @NgModule({
-	imports: [CommonModule, FormsModule, LuSelect2Module],
-	declarations: [Select2Story],
-	exports: [Select2Story],
+	imports: [CommonModule, FormsModule, LuSimpleSelectModule],
+	declarations: [SimpleSelectStory],
+	exports: [SimpleSelectStory],
 })
 class StoryModule {}
 
 export default {
-	title: 'Documentation/Forms/Select2',
+	title: 'Documentation/Forms/SimpleSelect',
 	argTypes: {},
+	component: LuSimpleSelectInputComponent,
 	decorators: [
-		componentWrapperDecorator(Select2Story),
+		componentWrapperDecorator(SimpleSelectStory),
 		moduleMetadata({
 			imports: [StoryModule],
 		}),
 	],
 } as Meta;
 
-const Template: Story<Select2Story> = (args: Select2Story) => ({
+const Template: Story<SimpleSelectStory> = (args: SimpleSelectStory) => ({
 	props: args,
 });
 
 export const Basic = Template.bind({});
 
 const code = `
-/* 1. Importer LuSelectInput2Module */
+/* 1. Importer LuSelectInputSimpleModule */
 @NgModule({
 	imports: [
-		LuSelectInput2Module
+		LuSelectInputSimpleModule
 	],
 })
-export class Select2StoriesModule {}
+export class SimpleSelectStoriesModule {}
 
-/* 2. Utiliser lu-select2 */
+/* 2. Utiliser lu-simple-select */
 <label class="textfield">
-	<lu-select2
+	<lu-simple-select
 		#select1
 		class="textfield-input"
 		placeholder="Placeholder..."
@@ -167,26 +168,26 @@ export class Select2StoriesModule {}
 	>
 		<ng-container *luOption="let legume; select: select1">{{ legume.name }}</ng-container>
 		<ng-container *luDisplayer="let legume; select: select1">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Avec displayer</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2 #select2 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
-		<ng-container *luOption="let legume; select: select2">{{ legume.name }}</ng-container>
-	</lu-select2>
+	<lu-simple-select #simpleSelect class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
+		<ng-container *luOption="let legume; select: simpleSelect">{{ legume.name }}</ng-container>
+	</lu-simple-select>
 	<span class="textfield-label">Sans displayer</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2 #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
+	<lu-simple-select #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
 		<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Avec clearer</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2
+	<lu-simple-select
 		#select4
 		class="textfield-input"
 		placeholder="Placeholder..."
@@ -195,14 +196,14 @@ export class Select2StoriesModule {}
 		(clueChange)="updateLegumes($event)"
 	>
 		<ng-container *luOption="let legume; select: select4">{{ legume.name }}</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Avec searcher</span>
 </label>
 
 <label class="textfield u-marginTopStandard">
-	<lu-select2 #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
+	<lu-simple-select #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
 		<ng-container *luOption="let legume; select: select5">{{ legume.name }}</ng-container>
-	</lu-select2>
+	</lu-simple-select>
 	<span class="textfield-label">Disabled</span>
 </label>
 
