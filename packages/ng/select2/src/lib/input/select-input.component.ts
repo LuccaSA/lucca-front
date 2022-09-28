@@ -20,7 +20,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	TemplateRef
+	TemplateRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, finalize, isObservable, map, Observable, of, ReplaySubject, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -266,6 +266,7 @@ export class LuSelectInput2Component<T> implements ControlValueAccessor, OnDestr
 
 	@HostListener('keydown.space', ['$event'])
 	@HostListener('keydown.enter', ['$event'])
+	@HostListener('keydown.arrowDown', ['$event'])
 	@HostListener('click', ['$event'])
 	onKeydown($event: KeyboardEvent) {
 		if (!this.isPanelOpen) {
