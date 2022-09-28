@@ -63,6 +63,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	protected _hovered$ = new Subject();
 	protected _hoveredSubscription: Subscription;
 	protected _panelEventsSubscriptions: Subscription;
+	protected _overlayDetachmentsSubscription: Subscription;
 
 	// tracking input type is necessary so it's possible to only auto-focus
 	// the first item of the list when the popover is opened via the keyboard
@@ -96,7 +97,12 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			if (this._hoveredSubscription) {
 				this._hoveredSubscription.unsubscribe();
 			}
-			this._hoveredSubscription = this._hovered$.pipe(debounce((h) => (h ? timer(this.enterDelay) : timer(this.leaveDelay)))).subscribe((h) => (h ? this.openPopover() : this.closePopover()));
+			this._hoveredSubscription = this._hovered$
+				.pipe(
+					distinctUntilChanged(),
+					debounce((h) => (h ? timer(this.enterDelay) : timer(this.leaveDelay))),
+				)
+				.subscribe((h) => (h ? this.openPopover() : this.closePopover()));
 		}
 	}
 	protected _enterDelay = 50;
@@ -185,6 +191,11 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			this._createOverlay();
 			this._attachPortalToOverlay();
 
+			/** Only subscribe to overlay detachments if trigger event is hover or focus */
+			if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
+				this._subscribeToOverlayDetachments();
+			}
+
 			/** Only subscribe to backdrop if trigger event is click */
 			if (this.triggerEvent === 'click') {
 				this._subscribeToBackdrop();
@@ -200,6 +211,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	/** Closes the popover. */
 	closePopover(): void {
 		if (this._overlayRef) {
+			/** Overlay can still be attached if close has been triggered by mouse leave. */
 			if (this._overlayRef.hasAttached()) {
 				this._overlayRef.detach();
 			}
@@ -280,6 +292,19 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			);
 		}
 	}
+
+	/**
+	 * This method ensures that the popover closes when the overlay has been detached
+	 * Detach can occur if we scroll while popover is opened
+	 */
+	protected _subscribeToOverlayDetachments(): void {
+		if (this._overlayRef) {
+			this._overlayDetachmentsSubscription = this._overlayRef.detachments().subscribe(() => {
+				this._hovered$.next(false);
+			});
+		}
+	}
+
 	/**
 	 * This method ensures that the popover closes when the overlay backdrop is clicked.
 	 * We do not use first() here because doing so would not catch clicks from within
@@ -543,6 +568,9 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 		}
 		if (this._panelEventsSubscriptions) {
 			this._panelEventsSubscriptions.unsubscribe();
+		}
+		if (this._overlayDetachmentsSubscription) {
+			this._overlayDetachmentsSubscription.unsubscribe();
 		}
 	}
 
