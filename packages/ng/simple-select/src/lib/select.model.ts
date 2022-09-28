@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 
 export interface ILuSelectPanelData<T> {
 	options$: Observable<T[]>;
+	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue: T | undefined;
 	optionTpl: TemplateRef<{ $implicit: T }>;

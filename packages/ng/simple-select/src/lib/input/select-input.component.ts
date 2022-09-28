@@ -177,6 +177,10 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 		backdropClass: 'cdk-overlay-transparent-backdrop',
 	};
 
+	@Input() set loading(value: boolean) {
+		this.loading$.next(value);
+	}
+
 	@Input() set options(options: T[]) {
 		this.options$.next(options);
 	}
@@ -191,6 +195,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 
 	value?: T;
 	options$ = new ReplaySubject<T[]>(1);
+	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
 
 	protected onChange?: (value: T | null) => void;
@@ -299,6 +304,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 			initialValue: this.value,
 			optionComparer: this.optionComparer,
 			options$: this.options$,
+			loading$: this.loading$,
 			searchable: this.searchable,
 			optionTpl: this.optionTpl,
 		});

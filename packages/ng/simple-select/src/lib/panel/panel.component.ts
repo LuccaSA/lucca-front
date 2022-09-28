@@ -41,6 +41,7 @@ export abstract class LuSelectPanelRef<T> {
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	options$: Observable<T[]>;
+	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue?: T;
 	optionTpl: TemplateRef<{ $implicit: T }>;
@@ -64,8 +65,9 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		return this.keyManager?.activeItem?.option;
 	}
 
-	constructor(public panelRef: LuSelectPanelRef<T>, @Inject(SELECT_ID) public selectId: number, @Inject(SELECT_PANEL_DATA) private data: ILuSelectPanelData<T>) {
+	constructor(public panelRef: LuSelectPanelRef<T>, @Inject(SELECT_ID) public selectId: number, @Inject(SELECT_PANEL_DATA) data: ILuSelectPanelData<T>) {
 		this.options$ = data.options$;
+		this.loading$ = data.loading$;
 		this.optionComparer = data.optionComparer;
 		this.initialValue = data.initialValue;
 		this.optionTpl = data.optionTpl;

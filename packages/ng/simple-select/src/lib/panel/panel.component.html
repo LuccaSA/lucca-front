@@ -5,7 +5,7 @@
 	*ngIf="{ options: options$ | async } as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
-	<div class="lu-picker-content" tabindex="0" (scroll)="onScroll($event)">
+	<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
 		<ng-container *ngIf="searchable">
 			<div class="textfield mod-search">
 				<input #searchInput class="textfield-input" [(ngModel)]="search" (ngModelChange)="updateClue($event)" />
@@ -27,5 +27,6 @@
 		>
 			<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }"></ng-container>
 		</lu-select-option>
+		<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
 	</div>
 </div>
