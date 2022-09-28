@@ -1,8 +1,8 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Overlay, OverlayConfig, OverlayContainer, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayContainer, OverlayModule, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
@@ -112,6 +112,8 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, OverlayModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

@@ -1,4 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Inject, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SELECT_ID } from '../select.model';
@@ -8,6 +9,8 @@ import { SELECT_ID } from '../select.model';
 	templateUrl: './option.component.html',
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule],
 })
 export class LuOptionComponent<T> implements Highlightable {
 	@HostBinding('class.optionItem')

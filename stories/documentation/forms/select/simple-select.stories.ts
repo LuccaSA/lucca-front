@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuSimpleSelectInputComponent, LuSimpleSelectModule } from '@lucca-front/ng/simple-select';
+import { LuSimpleSelectInputComponent, LU_SIMPLE_SELECT_COMPONENTS } from '@lucca-front/ng/simple-select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 interface ILegume {
@@ -123,7 +123,7 @@ class SimpleSelectStory {
 }
 
 @NgModule({
-	imports: [CommonModule, FormsModule, LuSimpleSelectModule],
+	imports: [CommonModule, FormsModule, ...LU_SIMPLE_SELECT_COMPONENTS],
 	declarations: [SimpleSelectStory],
 	exports: [SimpleSelectStory],
 })
@@ -148,10 +148,10 @@ const Template: Story<SimpleSelectStory> = (args: SimpleSelectStory) => ({
 export const Basic = Template.bind({});
 
 const code = `
-/* 1. Importer LuSelectInputSimpleModule */
+/* 1. Importer la liste de composants via LU_SIMPLE_SELECT_COMPONENTS */
 @NgModule({
 	imports: [
-		LuSelectInputSimpleModule
+		...LU_SIMPLE_SELECT_COMPONENTS,
 	],
 })
 export class SimpleSelectStoriesModule {}

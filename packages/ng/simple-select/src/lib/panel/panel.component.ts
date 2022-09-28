@@ -1,5 +1,7 @@
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Inject, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { asyncScheduler, map, Observable, observeOn, take, takeUntil } from 'rxjs';
 import { LuOptionComponent } from '../option/index';
 import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
@@ -34,6 +36,8 @@ export abstract class LuSelectPanelRef<T> {
 	templateUrl: './panel.component.html',
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, FormsModule, A11yModule, LuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	options$: Observable<T[]>;
