@@ -23,7 +23,7 @@ const allLegumes = [
 	{ name: 'Chou chinois', index: 11 },
 	{ name: 'Chou fleur', index: 12 },
 	{ name: 'Chou kalé', index: 13 },
-	{ name: 'Chou romanesco', index: 14 }
+	{ name: 'Chou romanesco', index: 14 },
 	{ name: 'Citrouille', index: 15 },
 	{ name: 'Concombre', index: 16 },
 	{ name: 'Courgette', index: 17 },
@@ -146,11 +146,82 @@ const Template: Story<Select2Story> = (args: Select2Story) => ({
 
 export const Basic = Template.bind({});
 
+const code = `
+/* 1. Importer LuSelectInput2Module */
+@NgModule({
+	imports: [
+		LuSelectInput2Module
+	],
+})
+export class Select2StoriesModule {}
+
+/* 2. Utiliser lu-select2 */
+<label class="textfield">
+	<lu-select2
+		#select1
+		class="textfield-input"
+		placeholder="Placeholder..."
+		[(ngModel)]="value"
+		[options]="legumes.slice(0, page * 10)"
+		(nextPage)="page = page + 1"
+	>
+		<ng-container *luOption="let legume; select: select1">{{ legume.name }}</ng-container>
+		<ng-container *luDisplayer="let legume; select: select1">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Avec displayer</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2 #select2 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
+		<ng-container *luOption="let legume; select: select2">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Sans displayer</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2 #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
+		<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Avec clearer</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2
+		#select4
+		class="textfield-input"
+		placeholder="Placeholder..."
+		[(ngModel)]="value"
+		[options]="legumes"
+		(clueChange)="updateLegumes($event)"
+	>
+		<ng-container *luOption="let legume; select: select4">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Avec searcher</span>
+</label>
+
+<label class="textfield u-marginTopStandard">
+	<lu-select2 #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
+		<ng-container *luOption="let legume; select: select5">{{ legume.name }}</ng-container>
+	</lu-select2>
+	<span class="textfield-label">Disabled</span>
+</label>
+
+<div class="u-marginTopStandard">
+	<div>
+		Value:
+		<pre>{{ value | json }}</pre>
+	</div>
+</div>
+`;
+
 Basic.parameters = {
+	// Disable controls as they are not modifiable because of ComponentWrapper
+	controls: { include: [] },
 	docs: {
 		source: {
 			language: 'ts',
-			code: template,
-		}
-	}
-}
+			type: 'code',
+			code,
+		},
+	},
+};
