@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
+import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
@@ -65,8 +66,8 @@ describe('establishment select', () => {
 			const luSelectElement = screen.getByTestId('lu-select');
 			await userEvent.click(luSelectElement);
 			const dial = screen.getByRole('dialog');
-			// FIXME not working, don't know why :(
-			expect(dial).toBeDefined();
+
+			expect(dial).toBeInTheDocument();
 		});
 
 		it('should trigger search when clue is typed in', fakeAsync(async () => {
@@ -87,9 +88,8 @@ describe('establishment select', () => {
 				],
 			});
 			const luSelectElement = await screen.findByTestId('lu-select');
-			// FIXME not working, don't know why :(
-			// expect(luSelectElement).toBeInTheDocument();
-			expect(luSelectElement).toBeDefined();
+
+			expect(luSelectElement).toBeInTheDocument();
 			fireEvent.click(luSelectElement);
 			tick(100); // debouncetime du composant
 			expect(mockEstablishment.searchPaged).toHaveBeenCalledWith(null, 0);
@@ -120,9 +120,7 @@ describe('establishment select', () => {
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			await userEvent.click(luSelectElement);
 			const dial = screen.getByRole('dialog');
-			// FIXME not working, don't know why :(
-			// expect(dial).toBeInTheDocument();
-			expect(dial).toBeDefined();
+			expect(dial).toBeInTheDocument();
 		});
 
 		it('should select all establishment', fakeAsync(async () => {
@@ -142,7 +140,7 @@ describe('establishment select', () => {
 			});
 
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
-			expect(luSelectElement).toBeDefined();
+			expect(luSelectElement).toBeInTheDocument();
 
 			fireEvent.click(luSelectElement);
 			tick(100); // debouncetime du composant
