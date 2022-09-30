@@ -1,0 +1,11 @@
+## Description
+
+Functional description for the changelog.
+Keep an empty line under your text, as well as the 5 lines that follow it.
+
+-----
+
+Optionally, technical or more in-depth description for reviewers.
+Keep an empty line under your text, as well as the 5 lines that follow it.
+
+-----
