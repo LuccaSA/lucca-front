@@ -80,6 +80,10 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 								this._cdr.markForCheck();
 							});
 						},
+						complete: () => {
+							this.submitClass$.next('');
+							this._cdr.markForCheck();
+						},
 					}),
 			);
 		} else {
