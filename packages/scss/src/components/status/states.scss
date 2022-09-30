@@ -1,0 +1,17 @@
+@mixin success {
+	.status-dot {
+		color: var(--palettes-success-700);
+	}
+}
+
+@mixin error {
+	.status-dot {
+		color: var(--palettes-error-700);
+	}
+}
+
+@mixin warning {
+	.status-dot {
+		color: var(--palettes-warning-700);
+	}
+}
