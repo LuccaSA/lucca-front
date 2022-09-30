@@ -4,8 +4,8 @@ interface TextfieldBasicStory {
 	palette: string;
 	display: string;
 	style: string;
+	width: string;
 	size: string;
-	small: boolean;
 	noLabel: boolean;
 	disabled: boolean;
 	error: boolean;
@@ -36,15 +36,16 @@ export default {
 				type: 'select',
 			}
 		},
-		size: {
+		width: {
 			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-standard', 'mod-long', 'mod-longer', 'mod-longest'],
 			control: {
 				type: 'select',
 			}
 		},
-		small: {
+		size: {
+			options: ['', 'mod-small', 'mod-smaller'],
 			control: {
-				type: 'boolean',
+				type: 'select',
 			}
 		},
 		noLabel: {
@@ -82,16 +83,16 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldBasicStory): string {
-	const classes = [args.palette, args.display, args.style, args.size].filter(Boolean).join(' ');
+	const classes = [args.palette, args.display, args.style, args.width].filter(Boolean).join(' ');
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
 	const invert = args.invert ? `mod-invert` : '';
-	const small = args.small ? `mod-small` : '';
+	const size = args.size;
 	const noLabel = args.noLabel ? `mod-noLabel` : '';
 	const white = args.white ? `mod-white` : '';
 	const error = args.error ? `is-error` : '';
 	return `
-		<label class="textfield ${classes} ${small} ${noLabel} ${invert} ${white}">
+		<label class="textfield ${classes} ${size} ${noLabel} ${invert} ${white}">
 			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
 			<span class="textfield-label">Label textfield</span>
 		</label>
@@ -112,4 +113,4 @@ const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', display: '', style: '', noLabel: false, size: '', small: '', disabled: false, error: false, required: false, invert: false, white: false, };
+Basic.args = { palette: '', display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false, white: false, };

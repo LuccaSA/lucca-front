@@ -23,7 +23,7 @@
 		}
 
 		.textfield-suffix {
-			top: var(--components-textfield-suffix-top);
+			top: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
 			right: var(--components-textfield-input-padding-horizontal);
 			position: absolute;
 			pointer-events: none;
