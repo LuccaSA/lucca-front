@@ -81,4 +81,4 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 });
 
 export const BasicButton = Template.bind({});
-BasicButton.args = { mod: '', size: '', state: '', palette: '', block: false, disabled: false, type: '' };
+BasicButton.args = { mod: '', size: '', state: '', palette: '', block: false, disabled: false, type: 'button' };
