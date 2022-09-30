@@ -1,13 +1,14 @@
 import { Location } from '@angular/common';
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, TitleStrategy } from '@angular/router';
 import { createRoutingFactory, mockProvider, SpectatorRouting } from '@ngneat/spectator/jest';
 import { Observable, of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 import { TitleSeparator } from './title.model';
 import { LuTitleService } from './title.service';
+import { APP_TITLE, LuTitleStrategy } from './title.strategy';
 
 class TranslateService implements ILuTitleTranslateService {
 	translate(key: string, args: Record<string, unknown> = null): string {
@@ -30,11 +31,7 @@ class TranslateService implements ILuTitleTranslateService {
 		<a class="link-6" [routerLink]="['/first/1/delayed']">Stub</a>
 		<a class="link-7" [routerLink]="['/second/1']">Stub</a> `,
 })
-export class AppComponent {
-	constructor(private titleService: LuTitleService) {
-		this.titleService.init('BU');
-	}
-}
+export class AppComponent {}
 
 @Injectable({ providedIn: 'root' })
 export class TestNameResolver implements Resolve<string> {
@@ -54,7 +51,7 @@ export class StubComponent {}
 	template: `<div></div>`,
 })
 export class OverrideTitleComponent implements OnInit {
-	constructor(private titleService: LuTitleService) {}
+	constructor(@Inject(TitleStrategy) private titleService: LuTitleStrategy) {}
 	ngOnInit() {
 		this.titleService.prependTitle('Overridden title');
 	}
@@ -65,7 +62,7 @@ export class OverrideTitleComponent implements OnInit {
 	template: `<router-outlet></router-outlet>`,
 })
 export class DelayedOverrideTitleComponent implements OnInit {
-	constructor(private titleService: LuTitleService) {}
+	constructor(@Inject(TitleStrategy) private titleService: LuTitleStrategy) {}
 	ngOnInit() {
 		this.titleService.prependTitle(timer(100).pipe(map(() => 'Delayed part')));
 	}
@@ -76,7 +73,7 @@ export class DelayedOverrideTitleComponent implements OnInit {
 	template: `<div></div>`,
 })
 export class OverrideTitlePartComponent implements OnInit {
-	constructor(private titleService: LuTitleService) {}
+	constructor(@Inject(TitleStrategy) private titleService: LuTitleStrategy) {}
 	ngOnInit() {
 		this.titleService.overrideFirstTitlePart('New title part');
 	}
@@ -84,6 +81,7 @@ export class OverrideTitlePartComponent implements OnInit {
 
 describe('TitleService', () => {
 	let spectator: SpectatorRouting<AppComponent>;
+	let pageTitleService: LuTitleStrategy;
 
 	const createComponent = createRoutingFactory({
 		component: AppComponent,
@@ -94,13 +92,21 @@ describe('TitleService', () => {
 				provide: LU_TITLE_TRANSLATE_SERVICE,
 				useClass: TranslateService,
 			},
+			{
+				provide: TitleStrategy,
+				useClass: LuTitleStrategy,
+			},
+			{
+				provide: APP_TITLE,
+				useValue: 'BU',
+			},
 		],
 		declarations: [StubComponent, OverrideTitleComponent, OverrideTitlePartComponent, DelayedOverrideTitleComponent],
 		stubsEnabled: false,
 		routes: [
 			{
 				path: '',
-				data: { title: 'Stub' },
+				title: 'Stub',
 				component: StubComponent,
 				children: [
 					{
@@ -109,22 +115,22 @@ describe('TitleService', () => {
 						children: [
 							{
 								path: ':id',
-								data: { title: `Stubs' child {{id}}` },
+								title: `Stubs' child {{id}}`,
 								component: StubComponent,
 								children: [
 									{
 										path: 'last',
-										data: { title: `` },
+										title: ``,
 										component: OverrideTitleComponent,
 									},
 									{
 										path: 'end',
-										data: { title: `Old title part` },
+										title: `Old title part`,
 										component: OverrideTitlePartComponent,
 									},
 									{
 										path: 'delayed',
-										data: { title: `` },
+										title: ``,
 										component: DelayedOverrideTitleComponent,
 										children: [
 											{
@@ -143,8 +149,8 @@ describe('TitleService', () => {
 						children: [
 							{
 								path: ':id',
+								title: `Stubs' child {{name}}`,
 								resolve: { name: TestNameResolver },
-								data: { title: `Stubs' child {{name}}` },
 								component: StubComponent,
 							},
 						],
@@ -154,11 +160,14 @@ describe('TitleService', () => {
 		],
 	});
 
-	beforeEach(() => (spectator = createComponent()));
+	beforeEach(() => {
+		spectator = createComponent();
+		pageTitleService = spectator.inject(TitleStrategy) as unknown as LuTitleStrategy;
+	});
 
 	it('should set title', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
 
 		await spectator.fixture.whenStable();
 		expect(spectator.inject(Location).path()).toBe('/');
@@ -167,7 +176,7 @@ describe('TitleService', () => {
 
 	it('should ignore empty or absent titles', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-2');
 		await spectator.fixture.whenStable();
@@ -176,7 +185,7 @@ describe('TitleService', () => {
 
 	it('should include named params in title', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
@@ -185,11 +194,9 @@ describe('TitleService', () => {
 
 	it('should prepend title when a component forces its own title', async () => {
 		let resultTitle = '';
-		spectator
-			.inject(LuTitleService)
-			// We need to skip first value because the title is overridden by the component's ngOnInit
-			.title$.pipe(skip(1))
-			.subscribe((title) => (resultTitle = title));
+
+		// We need to skip first value because the title is overridden by the component's ngOnInit
+		pageTitleService.title$.pipe(skip(1)).subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-4');
 		await spectator.fixture.whenStable();
@@ -198,11 +205,8 @@ describe('TitleService', () => {
 
 	it('should override title part when a component forces its own title part', async () => {
 		let resultTitle = '';
-		spectator
-			.inject(LuTitleService)
-			// We need to skip first value because the title is overridden by the component's ngOnInit
-			.title$.pipe(skip(1))
-			.subscribe((title) => (resultTitle = title));
+		// We need to skip first value because the title is overridden by the component's ngOnInit
+		pageTitleService.title$.pipe(skip(1)).subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-5');
 		await spectator.fixture.whenStable();
@@ -211,11 +215,8 @@ describe('TitleService', () => {
 
 	it('should handle observable inputs', async () => {
 		let resultTitle = '';
-		spectator
-			.inject(LuTitleService)
-			// We need to skip first value because the title is overridden by the component's ngOnInit
-			.title$.pipe(skip(1))
-			.subscribe((title) => (resultTitle = title));
+		// We need to skip first value because the title is overridden by the component's ngOnInit
+		pageTitleService.title$.pipe(skip(1)).subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-6');
 		await spectator.fixture.whenStable();
@@ -224,7 +225,7 @@ describe('TitleService', () => {
 
 	it('should include named params in title', async () => {
 		let resultTitle = '';
-		spectator.inject(LuTitleService).title$.subscribe((title) => (resultTitle = title));
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
 
 		spectator.click('.link-7');
 		await spectator.fixture.whenStable();
