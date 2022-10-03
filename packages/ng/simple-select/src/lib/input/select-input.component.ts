@@ -20,7 +20,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	TemplateRef
+	TemplateRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
@@ -55,7 +55,7 @@ function selectLabelIdFactory(label: HTMLLabelElement | undefined, selectId: num
 
 @Injectable()
 class LuSelectOverlayContainer extends OverlayContainer {
-	constructor(@Inject(DOCUMENT) document: any, platform: Platform, @Inject(SELECT_LABEL_ID) private selectLabelId: string, @Inject(SELECT_ID) private selectId: number) {
+	constructor(@Inject(DOCUMENT) document: Document, platform: Platform, @Inject(SELECT_LABEL_ID) private selectLabelId: string, @Inject(SELECT_ID) private selectId: number) {
 		super(document, platform);
 	}
 	protected override _createContainer(): void {
