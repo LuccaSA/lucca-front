@@ -1,0 +1,47 @@
+@mixin component {
+	display: inline-flex;
+	align-items: center;
+	white-space: nowrap;
+
+	@at-root {
+		.status-dot {
+			aspect-ratio: 1;
+			width: var(--spacings-smaller);
+			border-radius: 50%;
+			background-color: currentColor;
+			margin: calc(var(--spacings-smallest) / 2);
+			margin-right: var(--spacings-smaller);
+			position: relative;
+			z-index: 1;
+			display: inline-flex;
+		}
+
+		.status-dot-important {
+			@keyframes status {
+				0% {
+					transform: scale(1);
+					opacity: 0.25;
+				}
+				70% {
+					transform: scale(2);
+					opacity: 0.25;
+				}
+				100% {
+					transform: scale(2);
+					opacity: 0;
+				}
+			}
+
+			inset: 0;
+			position: absolute;
+			border-radius: 50%;
+			animation: status 2s infinite;
+			background-color: currentColor;
+		}
+
+		.status-label {
+			font-size: var(--sizes-small-font-size);
+			color: var(--palettes-grey-800);
+		}
+	}
+}

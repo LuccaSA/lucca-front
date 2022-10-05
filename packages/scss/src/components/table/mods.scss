@@ -20,12 +20,14 @@
 }
 
 @mixin clickable {
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: background-color;
 	}
 
-	.table-body-row-cell-action {
+	.table-body-row-cell-action,
+	.table-foot-row-cell-action {
 		color: var(--palettes-grey-800);
 		text-decoration: none;
 
@@ -35,7 +37,8 @@
 		}
 	}
 
-	.table-body-row {
+	.table-body-row,
+	.table-foot-row {
 		cursor: pointer;
 
 		&:hover,
@@ -50,18 +53,21 @@
 @mixin card {
 	border-top: 0;
 
-	.table-body-row {
+	.table-body-row,
+	.table-foot-row {
 		background-color: transparent;
 
 		&:last-child {
-			.table-body-row-cell {
+			.table-body-row-cell,
+			.table-foot-row-cell {
 				border-bottom: none;
 			}
 		}
 	}
 
 	.table-head-row-cell,
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		&:first-child {
 			padding-left: var(--components-table-card-padding);
 		}
@@ -77,15 +83,17 @@
 
 	border: none;
 
+	.table-head-row-cell,
 	.table-body-row-cell,
-	.table-head-row-cell {
+	.table-foot-row-cell {
 		border-top: none;
 	}
 }
 
 @mixin noOffset {
+	.table-head-row-cell,
 	.table-body-row-cell,
-	.table-head-row-cell {
+	.table-foot-row-cell {
 		&:first-child {
 			padding-left: 0;
 		}
@@ -101,7 +109,8 @@
 }
 
 @mixin parent {
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		color: var(--palettes-grey-800);
 		background-color: var(--palettes-grey-100);
 		font-size: var(--sizes-small-font-size);
@@ -111,7 +120,8 @@
 }
 
 @mixin collapsable {
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		cursor: pointer;
 		text-decoration: none;
 
@@ -136,7 +146,8 @@
 	}
 
 	&.is-collapsed {
-		.table-body-row-cell {
+		.table-body-row-cell,
+		.table-foot-row-cell {
 			&::before {
 				transform: rotate(-90deg);
 			}
@@ -145,7 +156,8 @@
 }
 
 @mixin child {
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		&:first-child {
 			padding-left: var(--spacings-bigger);
 		}
@@ -154,7 +166,8 @@
 
 @mixin draggable {
 	@at-root {
-		.table-body-row-cell-handler {
+		.table-body-row-cell-handler,
+		.table-foot-row-cell-handler {
 			top: 0;
 			bottom: 0;
 			left: 0;
@@ -181,8 +194,9 @@
 		}
 	}
 
+	.table-head-row-cell,
 	.table-body-row-cell,
-	.table-head-row-cell {
+	.table-foot-row-cell {
 		&:first-child {
 			padding-left: var(--spacings-big);
 			position: relative;
@@ -191,8 +205,9 @@
 }
 
 @mixin selectable {
+	.table-head-row-cell,
 	.table-body-row-cell,
-	.table-head-row-cell {
+	.table-foot-row-cell {
 		&:first-child {
 			padding-right: var(--spacings-smaller);
 			width: var(--spacings-small);
@@ -250,19 +265,25 @@
 		}
 	}
 
+	.table-head-row:hover &,
 	.table-body-row:hover &,
-	.table-head-row:hover & {
+	.table-foot-row:hover & {
 		> * {
 			opacity: 1;
 		}
 	}
 
 	.table-head-row:focus-within &,
-	.table-body-row:focus-within & {
+	.table-body-row:focus-within &,
+	.table-foot-row:focus-within & {
 		> * {
 			opacity: 1;
 		}
 	}
+}
+
+@mixin alignCenter {
+	text-align: center;
 }
 
 @mixin alignRight {
@@ -275,7 +296,8 @@
 
 @mixin noOffset {
 	.table-head-row-cell,
-	.table-body-row-cell {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		&:first-child {
 			padding-left: 0;
 		}

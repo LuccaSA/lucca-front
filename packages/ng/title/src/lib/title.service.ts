@@ -4,10 +4,11 @@ import { ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, ObservableInput, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
+import { PageTitle, TitleSeparator } from './title.model';
 
-export type PageTitle = { title: string; params: { [param: string]: string } };
-export const TitleSeparator = ' – ';
-
+/**
+ * @deprecated use Title strategy instead
+ */
 @Injectable()
 export class LuTitleService {
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>(['Lucca']);

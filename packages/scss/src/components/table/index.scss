@@ -37,7 +37,8 @@
 	}
 }
 
-.table-body-row {
+.table-body-row,
+.table-foot-row {
 	&.mod-header {
 		@include header;
 	}
@@ -55,8 +56,9 @@
 	}
 }
 
+.table-head-row,
 .table-body-row,
-.table-head-row {
+.table-foot-row {
 	&.mod-selectable {
 		@include selectable;
 	}
@@ -72,16 +74,22 @@
 	}
 }
 
-.table-body-row-cell {
+.table-body-row-cell,
+.table-foot-row-cell {
 	&.mod-avatar {
 		@include avatar;
 	}
 }
 
 .table-head-row-cell,
-.table-body-row-cell {
+.table-body-row-cell,
+.table-foot-row-cell {
 	&.mod-actions {
 		@include actions;
+	}
+
+	&.mod-alignCenter {
+		@include alignCenter;
 	}
 
 	&.mod-alignRight {

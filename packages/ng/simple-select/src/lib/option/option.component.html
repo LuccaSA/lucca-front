@@ -1,0 +1,8 @@
+<div
+	class="optionItem-value"
+	[class.is-selected]="isSelected"
+	[class.is-highlighted]="isHighlighted$ | async"
+	[class.is-disabled]="disabled"
+>
+	<ng-content></ng-content>
+</div>

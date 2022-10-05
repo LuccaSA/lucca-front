@@ -28,11 +28,32 @@
 		}
 	}
 
+	&.mod-search,
+	&.mod-autocomplete {
+		@include search;
+
+		&.mod-clearable {
+			@include searchClearable;
+		}
+
+		&.mod-small {
+			@include searchSmall;
+		}
+
+		&.mod-smaller {
+			@include searchSmaller;
+		}
+	}
+
 	&.mod-clearable {
 		@include clearable;
 
 		&.mod-small {
 			@include clearableSmall;
+		}
+
+		&.mod-smaller {
+			@include clearableSmaller;
 		}
 	}
 
@@ -42,6 +63,10 @@
 
 	&.mod-noLabel {
 		@include noLabel;
+
+		&.mod-smaller {
+			@include noLabelSmaller;
+		}
 	}
 
 	&.mod-multiline {
@@ -72,19 +97,6 @@
 		}
 	}
 
-	&.mod-search,
-	&.mod-autocomplete {
-		@include search;
-
-		&.mod-clearable {
-			@include searchClearable;
-		}
-
-		&.mod-small {
-			@include searchSmall;
-		}
-	}
-
 	&.mod-radio {
 		@include radio;
 	}
@@ -103,6 +115,16 @@
 		&.textfield-input {
 			&.mod-icon {
 				@include smallInputIcon;
+			}
+		}
+	}
+
+	&.mod-smaller {
+		@include smaller;
+
+		&.textfield-input {
+			&.mod-icon {
+				@include smallerInputIcon;
 			}
 		}
 	}
