@@ -105,6 +105,13 @@ function getTemplate(args: TableBasicStory): string {
 				<td class="table-body-row-cell ${horizontalAlign}">Contenu</td>
 			</tr>
 		</tbody>
+		<tfoot class="table-foot">
+			<tr class="table-foot-row ${child}">
+				<td class="table-foot-row-cell">Footer</td>
+				<td class="table-foot-row-cell">Footer</td>
+				<td class="table-foot-row-cell ${horizontalAlign}">Footer</td>
+			</tr>
+		</tfoot>
 	</table>
 	`;
 }
