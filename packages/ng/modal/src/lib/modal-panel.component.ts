@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, HostBinding, Inject, Injector, OnDestroy, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
+import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ALuModalRef } from './modal-ref.model';
 import { LuModalIntl } from './modal.intl';
@@ -17,23 +17,17 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	protected title$ = this.listenComponentValue(() => this._componentInstance.title);
 	protected submitLabel$ = this.listenComponentValue(() => this._componentInstance.submitLabel || this.intl.submit);
 	protected cancelLabel$ = this.listenComponentValue(() => this._componentInstance.cancelLabel || this.intl.cancel);
+	protected submitCounter$ = this.listenComponentValue(() => this._componentInstance.submitCounter);
+	protected submitDisabled$ = this.listenComponentValue(() => this._componentInstance.submitDisabled);
+	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
 
 	protected closeLabel = this.intl.close;
 
-	get isSubmitDisabled() {
-		return this._componentInstance.submitDisabled;
-	}
 	get isSubmitHidden() {
 		return !this._componentInstance.submitAction;
 	}
 	get submitPalette() {
 		return this._componentInstance.submitPalette || 'primary';
-	}
-	get hasSubmitCounter() {
-		return !!this._componentInstance.submitCounter;
-	}
-	get submitCounter() {
-		return this._componentInstance.submitCounter || 0;
 	}
 
 	submitClass$ = new Subject();
@@ -92,11 +86,11 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 		}
 	}
 
-	private listenComponentValue(selector: () => string | Observable<string>): Observable<string> {
+	private listenComponentValue<TValue>(selector: () => TValue | Observable<TValue>): Observable<TValue> {
 		return this.doCheck$.pipe(
 			map(selector),
 			distinctUntilChanged(),
-			switchMap((value) => (typeof value === 'string' ? of(value) : value)),
+			switchMap((value) => (isObservable(value) ? value : of(value))),
 		);
 	}
 }
