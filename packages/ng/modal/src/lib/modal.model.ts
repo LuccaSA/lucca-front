@@ -5,7 +5,7 @@ export interface ILuModalContent<T = unknown> {
 	submitAction?: () => T | Observable<T>;
 	submitLabel?: string | Observable<string>;
 	submitPalette?: string;
-	submitDisabled?: boolean;
-	submitCounter?: number;
+	submitDisabled?: boolean | Observable<boolean>;
+	submitCounter?: number | Observable<number>;
 	cancelLabel?: string | Observable<string>;
 }
