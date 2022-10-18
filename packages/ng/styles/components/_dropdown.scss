@@ -22,16 +22,21 @@
 }
 
 .lu-dropdown-options-item-action {
-	display: block;
+	display: flex;
 	background-color: transparent;
 	border: 0;
 	padding: var(--spacings-smaller) var(--spacings-small);
-	margin: var(--spacings-smallest) 0;
 	cursor: pointer;
+	line-height: var(--sizes-standard-line-height);
 	width: 100%;
 	text-align: left;
 	transition: background-color var(--commons-animations-durations-standard);
 	text-decoration: none;
+
+	.lucca-icon {
+		font-size: 1rem;
+		margin: var(--spacings-smallest) var(--spacings-smaller) 0 0;
+	}
 
 	&,
 	&:hover,
@@ -51,6 +56,15 @@
 		&:hover,
 		&:focus {
 			background-color: var(--colors-white-color);
+		}
+	}
+
+	&.mod-delete {
+		color: var(--palettes-error-800);
+
+		&:focus,
+		&:hover {
+			background-color: var(--palettes-error-50);
 		}
 	}
 }
