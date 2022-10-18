@@ -258,7 +258,9 @@
 	transition-property: opacity;
 	text-align: right;
 	white-space: nowrap;
+}
 
+@mixin actionsHidden {
 	> * {
 		&:not(.is-loading) {
 			opacity: 0;
