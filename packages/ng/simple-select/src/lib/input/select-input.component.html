@@ -1,9 +1,17 @@
-<div class="lu-select-placeholder">{{ placeholder }}</div>
-<div class="lu-select-value">
-	<div class="lu-select-display-wrapper">
-		<ng-container *ngIf="isFilled">
-			<ng-container *ngTemplateOutlet="valueTpl || optionTpl; context: { $implicit: value }"></ng-container>
-		</ng-container>
+<div
+	tabindex="0"
+	(click)="onKeydown($event)"
+	(keydown.space)="onKeydown($event)"
+	(keydown.enter)="onKeydown($event)"
+	(keydown.arrowDown)="onKeydown($event)"
+>
+	<div class="lu-select-placeholder">{{ placeholder }}</div>
+	<div class="lu-select-value">
+		<div class="lu-select-display-wrapper">
+			<ng-container *ngIf="isFilled">
+				<ng-container *ngTemplateOutlet="valueTpl || optionTpl; context: { $implicit: value }"></ng-container>
+			</ng-container>
+		</div>
 	</div>
 </div>
 <div class="lu-select-suffix">
@@ -12,3 +20,11 @@
 		<span class="u-mask">Clear</span>
 	</a>
 </div>
+
+<div
+	#optionPickerContainer
+	class="cdk-overlay-container"
+	role="listbox"
+	[id]="'lu-select-overlay-container-' + selectId"
+	[attr.aria-labelledby]="labelId"
+></div>

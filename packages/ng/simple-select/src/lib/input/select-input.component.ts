@@ -1,8 +1,7 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay, OverlayConfig, OverlayContainer, OverlayModule, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
@@ -12,7 +11,6 @@ import {
 	EventEmitter,
 	forwardRef,
 	HostBinding,
-	HostListener,
 	Inject,
 	Injectable,
 	Injector,
@@ -21,6 +19,7 @@ import {
 	OnInit,
 	Output,
 	TemplateRef,
+	ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
@@ -55,14 +54,8 @@ function selectLabelIdFactory(label: HTMLLabelElement | undefined, selectId: num
 
 @Injectable()
 class LuSelectOverlayContainer extends OverlayContainer {
-	constructor(@Inject(DOCUMENT) document: Document, platform: Platform, @Inject(SELECT_LABEL_ID) private selectLabelId: string, @Inject(SELECT_ID) private selectId: number) {
-		super(document, platform);
-	}
-	protected override _createContainer(): void {
-		super._createContainer();
-		this._containerElement.setAttribute('aria-labelledby', this.selectLabelId);
-		this._containerElement.setAttribute('role', 'listbox');
-		this._containerElement.id = `lu-select-overlay-container-${this.selectId}`;
+	public setContainer(container: HTMLElement): void {
+		this._containerElement = container;
 	}
 }
 
@@ -120,9 +113,10 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 			multi: true,
 		},
+		LuSelectOverlayContainer,
 		{
 			provide: OverlayContainer,
-			useClass: LuSelectOverlayContainer,
+			useExisting: LuSelectOverlayContainer,
 		},
 		LuSelectOverlay,
 		{ provide: SELECT_ID, useFactory: selectIdFactory },
@@ -131,8 +125,6 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	],
 })
 export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, OnDestroy, OnInit {
-	@HostBinding('tabindex') tabindex = 0;
-
 	@Input() placeholder = '';
 
 	@Input()
@@ -193,6 +185,8 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	@Output() nextPage = new EventEmitter<void>();
 	@Output() previousPage = new EventEmitter<void>();
 
+	@ViewChild('optionPickerContainer', { static: true }) public _optionPickerContainerRef: ElementRef<HTMLElement>;
+
 	value?: T;
 	options$ = new ReplaySubject<T[]>(1);
 	loading$ = new ReplaySubject<boolean>(1);
@@ -205,11 +199,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	protected overlayContainerRef: HTMLElement;
 	protected destroyed$ = new Subject<void>();
 
-	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.enter', ['$event'])
-	@HostListener('keydown.arrowDown', ['$event'])
-	@HostListener('click', ['$event'])
-	onKeydown($event: KeyboardEvent) {
+	onKeydown($event: Event) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
 			$event.stopPropagation();
@@ -224,12 +214,11 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 		protected injector: Injector,
 		protected overlay: LuSelectOverlay,
 		protected changeDetectorRef: ChangeDetectorRef,
-		overlayContainer: OverlayContainer,
+		protected overlayContainer: LuSelectOverlayContainer,
+		@Inject(SELECT_ID) protected selectId: number,
 		@Inject(SELECT_LABEL) protected label: HTMLElement | undefined,
 		@Inject(SELECT_LABEL_ID) protected labelId: string,
-	) {
-		this.overlayContainerRef = overlayContainer.getContainerElement();
-	}
+	) {}
 
 	registerOnChange(onChange: (value: T) => void): void {
 		this.onChange = onChange;
@@ -252,6 +241,9 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 		if (this.label) {
 			this.label.id = this.labelId;
 		}
+
+		this.overlayContainerRef = this._optionPickerContainerRef.nativeElement;
+		this.overlayContainer.setContainer(this.overlayContainerRef);
 	}
 
 	clearValue(event: MouseEvent): void {
