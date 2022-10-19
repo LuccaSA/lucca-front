@@ -43,6 +43,10 @@
 		&.mod-smaller {
 			@include searchSmaller;
 		}
+
+		&.mod-outlined {
+			@include outlinedSearch;
+		}
 	}
 
 	&.mod-clearable {

@@ -175,7 +175,7 @@
 	&::after {
 		@include icon.generate('search');
 
-		color: var(--palettes-primary-500);
+		color: var(--palettes-primary-600);
 		position: absolute;
 		pointer-events: none;
 		font-size: 1.2rem;
@@ -187,11 +187,17 @@
 	.textfield-input {
 		padding-right: var(--spacings-big);
 
-		&[type="search"]:is(:hover, :focus) {
+		&[type='search']:is(:hover, :focus) {
 			&::-webkit-search-cancel-button {
-				 display: none;
-			 }
+				display: none;
+			}
 		}
+	}
+}
+
+@mixin outlinedSearch {
+	&::after {
+		color: var(--palettes-grey-600);
 	}
 }
 
@@ -531,5 +537,9 @@
 	.textfield-input {
 		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--components-textfield-outlined-border-default-color);
 		background-color: var(--colors-white-color);
+
+		&::placeholder {
+			color: var(--palettes-grey-400);
+		}
 	}
 }
