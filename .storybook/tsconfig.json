@@ -7,7 +7,7 @@
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["../node_modules/**/*", "../dist/**/*", "../packages/**/*.spec.ts", "../stories/**/*.spec.ts"],
-  "include": ["../packages/**/*", "../stories/**/*"],
+  "include": ["../packages/**/*", "../stories/**/*", "./msw/**/*"],
   "files": [
     "./typings.d.ts"
   ]
