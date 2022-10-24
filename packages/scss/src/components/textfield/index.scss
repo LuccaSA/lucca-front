@@ -293,6 +293,14 @@
 
 		&:is(.is-error, .error, .palette-error) {
 			@include outlinedError;
+
+			&:hover {
+				@include outlinedErrorHover;
+			}
+
+			&:is(:focus-within) {
+				@include outlinedErrorFocus;
+			}
 		}
 	}
 }

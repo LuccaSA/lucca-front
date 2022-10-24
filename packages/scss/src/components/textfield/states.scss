@@ -237,24 +237,10 @@
 	}
 }
 
-@mixin outlinedInputDisabled {
-	background-color: var(--components-textfield-disabled-background);
-	color: var(--components-textfield-disabled-color);
-	box-shadow: none;
-	cursor: default;
-}
-
-@mixin outlinedError {
-	.textfield-input {
-		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-200);
-	}
-}
-
 @mixin outlinedHover {
 	.textfield-input {
 		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-200, var(--palettes-primary-200));
-			background-color: var(--palettes-50, var(--palettes-primary-50));
+			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-400, var(--palettes-grey-400));
 		}
 	}
 }
@@ -265,6 +251,43 @@
 		box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
 			inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-600, var(--palettes-primary-600));
 	}
+}
+
+@mixin outlinedError {
+	.textfield-input {
+		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
+			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-200);
+		}
+	}
+}
+
+@mixin outlinedErrorHover {
+	.textfield-input {
+		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
+			background-color: var(--palettes-error-100);
+			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-600);
+		}
+	}
+}
+
+@mixin outlinedErrorFocus {
+	.textfield-input {
+		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
+			background-color: var(--colors-white-color);
+			box-shadow: 0 0 0 4px var(--palettes-error-300), inset 0 0 0 1px var(--palettes-error-700);
+
+			&::placeholder {
+				color: var(--palettes-error-300);
+			}
+		}
+	}
+}
+
+@mixin outlinedInputDisabled {
+	background-color: var(--components-textfield-disabled-background);
+	color: var(--components-textfield-disabled-color);
+	box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--components-textfield-outlined-border-default-color);
+	cursor: default;
 }
 
 @mixin entryHover {
