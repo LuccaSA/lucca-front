@@ -231,16 +231,29 @@
 
 	// Multiple
 	:host(.mod-multiple) {
-			.lu-select-value {
-				height: auto;
-				align-items: center;
+		.lu-select-value {
+			height: auto;
+			align-items: center;
+		}
+
+		.lu-select-display-wrapper {
+			overflow: hidden;
+			white-space: normal;
+			margin-bottom: calc(var(--spacings-smallest) * -1);
+		}
+	}
+
+	// Outlined
+	:host-context(.textfield.mod-outlined) {
+		&.textfield-input {
+			&::after {
+				color: var(--palettes-grey-600);
 			}
 
-			.lu-select-display-wrapper {
-				overflow: hidden;
-				white-space: normal;
-				margin-bottom: calc(var(--spacings-smallest) * -1);
+			.lu-select-placeholder {
+				color: var(--palettes-grey-400);
 			}
+		}
 	}
 
 	// STATES

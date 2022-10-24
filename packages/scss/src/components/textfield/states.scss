@@ -250,6 +250,10 @@
 		background-color: var(--colors-white-color);
 		box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
 			inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-600, var(--palettes-primary-600));
+
+		&::placeholder {
+			color: var(--palettes-grey-300);
+		}
 	}
 }
 

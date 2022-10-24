@@ -269,12 +269,6 @@
 
 		&:hover {
 			@include outlinedHover;
-
-			.textfield-input {
-				&:is(.is-disabled, .disabled, [disabled], .is-readonly, .readonly, [readonly]) {
-					@include outlinedInputDisabled;
-				}
-			}
 		}
 
 		&:is(.is-focused, .focused) .textfield-input,
