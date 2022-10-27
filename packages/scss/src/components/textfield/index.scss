@@ -283,17 +283,17 @@
 					@include outlinedInputDisabled;
 				}
 			}
-		}
 
-		&:is(.is-error, .error, .palette-error) {
-			@include outlinedError;
+			&:is(.is-error, .error, .palette-error) {
+				@include outlinedError;
 
-			&:hover {
-				@include outlinedErrorHover;
-			}
+				&:hover {
+					@include outlinedErrorHover;
+				}
 
-			&:is(:focus-within) {
-				@include outlinedErrorFocus;
+				&:is(:focus-within) {
+					@include outlinedErrorFocus;
+				}
 			}
 		}
 	}

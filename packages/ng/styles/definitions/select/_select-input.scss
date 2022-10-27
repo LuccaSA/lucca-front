@@ -254,6 +254,16 @@
 				color: var(--palettes-grey-400);
 			}
 		}
+		// Error
+		:host-context(.textfield-input.is-error) {
+			&::after {
+				color: var(--palettes-error-600);
+			}
+
+			.lu-select-placeholder {
+				color: var(--palettes-error-400);
+			}
+		}
 	}
 
 	// STATES
@@ -285,7 +295,7 @@
 		}
 
 		.lu-select-placeholder {
-			color: var(--palettes-error-200);
+			color: var(--palettes-error-400);
 		}
 	}
 
