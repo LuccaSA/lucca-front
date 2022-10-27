@@ -25,7 +25,7 @@
 	cursor: default;
 
 	&::placeholder {
-		color: var(--components-textfield-placeholder-disabled-color);
+		color: var(--commons-disabled-placeholder);
 	}
 }
 
@@ -260,7 +260,7 @@
 @mixin outlinedError {
 	.textfield-input {
 		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-200);
+			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-600);
 		}
 	}
 }
@@ -278,7 +278,7 @@
 	.textfield-input {
 		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
 			background-color: var(--colors-white-color);
-			box-shadow: 0 0 0 4px var(--palettes-error-300), inset 0 0 0 1px var(--palettes-error-700);
+			box-shadow: 0 0 0 4px var(--palettes-error-200), inset 0 0 0 1px var(--palettes-error-700);
 
 			&::placeholder {
 				color: var(--palettes-error-300);
