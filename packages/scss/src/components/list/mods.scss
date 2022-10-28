@@ -40,14 +40,13 @@
 
 @mixin actionsHidden {
 	// if no hover on list item
-	&:not(:hover) {
-		.actionIcon {
-			// and no focus on action icon
-			&:not(:focus) {
-				// then mask
-				@include a11y.mask;
-
-				opacity: 0;
+	@media (hover: hover) {
+		&:not(:hover) {
+			.actionIcon {
+				&:not(:focus) {
+					@include a11y.mask;
+					opacity: 0;
+				}
 			}
 		}
 	}
