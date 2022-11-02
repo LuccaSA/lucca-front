@@ -2,10 +2,10 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
-import { LuInputClearerComponent, LuInputDisplayerModule, LuInputModule } from '@lucca-front/ng/input';
+import { LuInputClearerComponent, LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDateAdapterModule } from '../adapter';
+import { LuDateAdapterPipe } from '../adapter';
 import { LuDatePickerComponent } from '../picker';
 import { LuDateSelectInputIntl } from './date-select-input.intl';
 import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.token';
@@ -17,7 +17,7 @@ import { ILuDateSelectInputLabel, luDateSelectInputTranslations } from './date-s
 	styleUrls: ['./date-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [LuDateAdapterModule, LuDatePickerComponent, LuInputModule, OverlayModule, LuInputClearerComponent, LuInputDisplayerModule],
+	imports: [LuDateAdapterPipe, LuDatePickerComponent, LuInputDirective, OverlayModule, LuInputClearerComponent, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
