@@ -1,6 +1,5 @@
-
-import { setCompodocJson } from "@storybook/addon-docs/angular";
-import docJson from "./documentation.json";
+import { setCompodocJson } from '@storybook/addon-docs/angular';
+import docJson from './documentation.json';
 
 const docToCleanup = [...docJson.components, ...docJson.directives, ...docJson.pipes];
 
@@ -12,7 +11,7 @@ for (const doc of docToCleanup) {
 setCompodocJson(docJson);
 
 export const parameters = {
-	actions: { argTypesRegex: "^on[A-Z].*" },
+	actions: { argTypesRegex: '^on[A-Z].*' },
 	controls: {
 		matchers: {
 			color: /(background|color)$/i,
@@ -23,8 +22,8 @@ export const parameters = {
 		// When stories are rendered inside an iframe, controls no longer affect displayed story
 		inlineStories: true,
 		source: {
-			state: "open",
-		}
+			state: 'open',
+		},
 	},
 	backgrounds: {
 		default: 'white',
@@ -43,4 +42,17 @@ export const parameters = {
 			},
 		],
 	},
+};
+
+// ---------------------- MSW ----------------------
+
+// Storybook executes this module in both bootstap phase (Node)
+// and a story's runtime (browser). However, we cannot call `setupWorker`
+// in Node environment, so need to check if we're in a browser.
+if (typeof global.process === 'undefined') {
+	const { worker } = require('./msw/browser');
+	// Start the mocking when each story is loaded.
+	// Repetitive calls to the `.start()` method do not register a new worker,
+	// but check whether there's an existing once, reusing it, if so.
+	worker.start();
 }
