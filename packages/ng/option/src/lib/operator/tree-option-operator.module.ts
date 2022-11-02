@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { LuTreeOptionFeederModule } from './feeder/index';
-import { LuForTreeOptionsModule } from './for-options/index';
+import { LuTreeOptionFeederComponent } from './feeder/index';
+import { LuForTreeOptionsDirective } from './for-options/index';
+import { LuTreeOptionPagerComponent } from './pager/index';
 import { LuTreeOptionSearcherModule } from './searcher/index';
-import { LuTreeOptionPagerModule } from './pager/index';
 
 @NgModule({
-	imports: [LuTreeOptionFeederModule, LuForTreeOptionsModule, LuTreeOptionPagerModule, LuTreeOptionSearcherModule],
-	exports: [LuTreeOptionFeederModule, LuForTreeOptionsModule, LuTreeOptionPagerModule, LuTreeOptionSearcherModule],
+	imports: [LuTreeOptionFeederComponent, LuForTreeOptionsDirective, LuTreeOptionPagerComponent, LuTreeOptionSearcherModule],
+	exports: [LuTreeOptionFeederComponent, LuForTreeOptionsDirective, LuTreeOptionPagerComponent, LuTreeOptionSearcherModule],
 })
 export class LuTreeOptionOperatorModule {}
