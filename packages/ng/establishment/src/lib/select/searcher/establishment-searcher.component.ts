@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
-import { ALuOptionOperator, ILuOptionOperator, LuOptionModule } from '@lucca-front/ng/option';
+import { ALuOptionOperator, ILuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, scan, share, switchMap, tap } from 'rxjs/operators';
 import { ILuEstablishment } from '../../establishment.model';
@@ -15,7 +15,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 	styleUrls: ['establishment-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule, LuOptionModule],
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,
