@@ -13,4 +13,8 @@
 	&.mod-draggable {
 		@include draggable;
 	}
+
+	&.mod-actionsHidden {
+		@include actionsHidden; // Legacy
+	}
 }

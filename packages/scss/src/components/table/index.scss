@@ -86,6 +86,10 @@
 .table-foot-row-cell {
 	&.mod-actions {
 		@include actions;
+
+		&.mod-actionsHidden { // Legacy
+			@include actionsHidden;
+		}
 	}
 
 	&.mod-alignCenter {
