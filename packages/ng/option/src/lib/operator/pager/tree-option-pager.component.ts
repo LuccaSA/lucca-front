@@ -8,6 +8,7 @@ const MAGIC_STEP = 10;
 	selector: 'lu-tree-option-pager',
 	template: '',
 	styleUrls: [],
+	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
