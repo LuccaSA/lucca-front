@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Inject, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.token';
@@ -15,7 +15,7 @@ import { ILuTreeOptionItemLabel, luTreeOptionItemTranslations } from './tree-opt
 	styleUrls: ['./tree-option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, LuTooltipModule],
+	imports: [CommonModule, LuTooltipTriggerDirective, LuTooltipPanelComponent],
 	providers: [
 		{
 			provide: ALuTreeOptionItem,
