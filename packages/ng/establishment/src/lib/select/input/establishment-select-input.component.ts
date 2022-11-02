@@ -17,8 +17,8 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LuInputModule } from '@lucca-front/ng/input';
-import { ILuOptionPickerPanel, LuOptionComparer, LuOptionModule } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
@@ -38,7 +38,18 @@ import { ILuEstablishmentSelectInputLabel, luEstablishmentSelectInputTranslation
 	styleUrls: ['./establishment-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, OverlayModule, LuInputModule, LuOptionModule, LuEstablishmentSearcherComponent, LuEstablishmentSelectAllComponent, LuForLegalUnitsDirective, LuLegalUnitSelectorDirective],
+	imports: [
+		CommonModule,
+		OverlayModule,
+		LuInputClearerComponent,
+		LuOptionPickerAdvancedComponent,
+		LuEstablishmentSearcherComponent,
+		LuEstablishmentSelectAllComponent,
+		LuLegalUnitSelectorDirective,
+		LuOptionItemComponent,
+		LuForLegalUnitsDirective,
+		LuInputDisplayerDirective,
+	],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
