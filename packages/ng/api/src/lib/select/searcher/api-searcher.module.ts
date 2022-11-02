@@ -3,6 +3,6 @@ import { LuApiPagedSearcherComponent, LuApiSearcherComponent } from './api-searc
 
 @NgModule({
 	imports: [LuApiPagedSearcherComponent, LuApiSearcherComponent],
-	exports: [LuApiSearcherComponent, LuApiPagedSearcherComponent],
+	exports: [LuApiPagedSearcherComponent, LuApiSearcherComponent],
 })
 export class LuApiSearcherModule {}
