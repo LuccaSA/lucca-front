@@ -2,11 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuApiModule } from '@lucca-front/ng/api';
+import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
-import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuUserHomonymsComponent, LuUserHomonymsModule, LuUserModule } from '@lucca-front/ng/user';
+import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
@@ -22,7 +22,21 @@ export default {
 		componentWrapperDecorator(UserHomonymsStory),
 		moduleMetadata({
 			declarations: [UserHomonymsStory],
-			imports: [HttpClientModule, LuUserModule, LuSelectInputComponent, LuApiModule, LuOptionModule, LuUserHomonymsModule, LuInputDisplayerDirective, BrowserAnimationsModule, FormsModule],
+			imports: [
+				HttpClientModule,
+				LuUserHomonymsComponent,
+				LuSelectInputComponent,
+				LuOptionPickerComponent,
+				LuApiPagedSearcherComponent,
+				LuInputDisplayerDirective,
+				LuOptionPickerAdvancedComponent,
+				LuOptionItemComponent,
+				LuUserDisplayPipe,
+				LuUserMeOptionDirective,
+				BrowserAnimationsModule,
+				FormsModule,
+				LuForOptionsDirective,
+			],
 		}),
 	],
 } as Meta;

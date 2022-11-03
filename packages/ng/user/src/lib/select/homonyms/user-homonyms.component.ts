@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional, Self,
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { merge, Observable } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { LuUserDisplayPipe } from '../../display';
 import { ILuUser } from '../../user.model';
 import { ALuUserHomonymsService, ILuUserHomonymsService, LuUserHomonymsService } from './user-homonyms.service';
 
@@ -11,6 +12,7 @@ import { ALuUserHomonymsService, ILuUserHomonymsService, LuUserHomonymsService }
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	providers: [
+		LuUserDisplayPipe,
 		{
 			provide: ALuOptionOperator,
 			useExisting: forwardRef(() => LuUserHomonymsComponent),
