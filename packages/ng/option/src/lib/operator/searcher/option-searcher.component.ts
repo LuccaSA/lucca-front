@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { combineLatest, merge, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LuOptionPlaceholderModule } from '../../placeholder';
+import { LuOptionPlaceholderComponent } from '../../placeholder';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Component({
@@ -13,7 +13,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	styleUrls: ['option-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderModule],
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,
