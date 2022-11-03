@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuInputModule } from '@lucca-front/ng/input';
-import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
@@ -82,7 +82,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(SelectStory),
 		moduleMetadata({
-			imports: [FormsModule, LuOptionModule, LuInputModule, BrowserAnimationsModule],
+			imports: [FormsModule, LuOptionPickerComponent, LuOptionItemComponent, LuInputDisplayerDirective, BrowserAnimationsModule],
 			declarations: [SelectStory],
 		}),
 	],
@@ -93,16 +93,17 @@ const template: Story<SelectStory> = (args: SelectStory) => ({
 });
 
 const code = `
-/* 1. Importer LuSelectInputComponent, LuOptionModule, LuInputModule */
+/* 1. Importer LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective */
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuOptionModule } from '@lucca-front/ng/option';
-import { LuInputModule } from '@lucca-front/ng/input';
+import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 
 @NgModule({
 	imports: [
 		LuSelectInputComponent,
-		LuOptionModule,
-		LuInputModule,
+		LuOptionItemComponent,
+		LuOptionPickerComponent,
+		LuInputDisplayerDirective,
 	]
 })
 class SelectStoriesModule {}
