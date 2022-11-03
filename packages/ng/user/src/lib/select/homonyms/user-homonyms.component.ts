@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SkipSelf, Self, Optional, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional, Self, SkipSelf } from '@angular/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
-import { ILuUser } from '../../user.model';
-import { map, withLatestFrom, switchMap } from 'rxjs/operators';
-import { ALuUserHomonymsService, LuUserHomonymsService, ILuUserHomonymsService } from './user-homonyms.service';
 import { merge, Observable } from 'rxjs';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { ILuUser } from '../../user.model';
+import { ALuUserHomonymsService, ILuUserHomonymsService, LuUserHomonymsService } from './user-homonyms.service';
 
 @Component({
 	selector: 'lu-user-homonyms',
 	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,
