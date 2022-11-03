@@ -11,6 +11,7 @@ import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './p
 @Directive({
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',
+	standalone: true,
 })
 export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 	extends ALuPopoverTrigger<TPanel, TTarget>

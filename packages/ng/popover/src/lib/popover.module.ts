@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
 import { LuPopoverPanelComponent } from './panel/index';
-import { LuPopoverTargetModule } from './target/index';
-import { LuPopoverTriggerModule } from './trigger/index';
+import { LuPopoverTargetDirective } from './target/index';
+import { LuPopoverTriggerDirective } from './trigger/index';
 
 @NgModule({
-	imports: [LuPopoverPanelComponent, LuPopoverTargetModule, LuPopoverTriggerModule],
-	exports: [LuPopoverPanelComponent, LuPopoverTargetModule, LuPopoverTriggerModule],
+	imports: [LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDirective],
+	exports: [LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDirective],
 })
 export class LuPopoverModule {}
