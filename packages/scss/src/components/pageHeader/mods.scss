@@ -21,23 +21,10 @@
 	position: sticky;
 	left: 0;
 	right: 0;
+	z-index: 99;
 
 	@include media.smallerThan('s') {
 		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 		left: 0 !important;
 	}
-}
-
-@mixin left {
-	left: var(--commons-navSide-width);
-
-	@include media.smallerThan('s') {
-		top: var(--commons-navSide-mobile-toggle-height);
-	}
-}
-
-@mixin leftCompact {
-	@include left;
-
-	left: var(--commons-navSide-compact-width);
 }
