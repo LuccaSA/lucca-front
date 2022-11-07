@@ -3,10 +3,10 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-		"schematicCollections": [
-			"@angular-eslint/schematics"
-		],
-		"analytics": false
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": false
   },
   "newProjectRoot": "packages/ng",
   "projects": {
@@ -26,41 +26,34 @@
           "options": {
             "lintFilePatterns": ["packages/**/*.ts", "packages/**/*.html"]
           }
-        }
-      }
-    },
-    "storybook": {
-      "projectType": "library",
-      "root": ".storybook",
-      "sourceRoot": ".storybook/src",
-      "prefix": "app",
-      "architect": {
-        "start": {
+        },
+        "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
-            "tsConfig": ".storybook/tsconfig.json",
-            "styles": [".storybook/src/styles.scss"],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/ng/styles"
-              ]
-            },
+            "browserTarget": "ng:build",
             "compodoc": false,
-            "port": 6006
-          }
-        },
-        "build": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "tsConfig": ".storybook/tsconfig.json",
-            "styles": [".storybook/src/styles.scss"],
+            "port": 6006,
+            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "packages/ng/styles",
                 "node_modules"
               ]
-            },
-            "compodoc": false
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "browserTarget": "ng:build",
+            "compodoc": false,
+            "styles": [".storybook/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "packages/ng/styles",
+                "node_modules"
+              ]
+            }
           }
         }
       }
