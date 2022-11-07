@@ -10,7 +10,7 @@
 	--components-textfield-focus-shadow-color: var(--palettes-primary-200);
 	--components-textfield-focus-border-color: var(--palettes-primary-600);
 	--components-textfield-disabled-background: var(--commons-disabled-background);
-	--components-textfield-disabled-color: var(--commons-disabled-color);
+	--components-textfield-disabled-color: var(--palettes-grey-600);
 	--components-textfield-suffix-top: 1.5rem;
 	--components-textfield-suffix-padding-right: var(--spacings-standard);
 	--components-textfield-sizes-shortest: 3rem;
@@ -39,7 +39,7 @@
 	--components-textfield-compact-label-sizes-longer: 11rem;
 
 	--components-textfield-outlined-border-width: 1px;
-	--components-textfield-outlined-border-default-color: #d2dcef;
+	--components-textfield-outlined-border-default-color: var(--palettes-grey-200);
 
 	--components-textfield-filter-width: 18rem;
 }

@@ -2,21 +2,32 @@ import { Meta, Story } from '@storybook/angular';
 
 interface HeadersBasicStory {
 	noShadow: boolean;
+	sticky: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/Headers/Basic',
-	noShadow: {
-		control: {
-			type: 'boolean',
-		}
+	argTypes: {
+		noShadow: {
+			description: "Supprime l'ombre portée du header",
+			control: {
+				type: 'boolean',
+			},
+		},
+		sticky: {
+			description: "Rend le header toujours visible au scroll en s'adaptant à la position du menu principal et secondaire.",
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
 function getTemplate(args: HeadersBasicStory): string {
 	const noShadow = args.noShadow ? `mod-noShadow` : '';
+	const sticky = args.sticky ? `mod-sticky` : '';
 	return `
-	<header class="pageHeader ${noShadow}">
+	<header class="pageHeader ${noShadow} ${sticky}">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="u-marginReset u-marginRightStandard">H1. Page title</h1>
@@ -63,4 +74,4 @@ const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { noShadow: false };
+Basic.args = { noShadow: false, sticky: false };

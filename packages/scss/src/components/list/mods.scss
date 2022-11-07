@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin clickable {
 	transition-duration: var(--commons-animations-durations-fast);
@@ -33,6 +34,20 @@
 			@include icon.generate('drag');
 
 			vertical-align: middle;
+		}
+	}
+}
+
+@mixin actionsHidden {
+	// if no hover on list item
+	@media (hover: hover) {
+		&:not(:hover) {
+			.actionIcon {
+				&:not(:focus) {
+					@include a11y.mask;
+					opacity: 0;
+				}
+			}
 		}
 	}
 }
