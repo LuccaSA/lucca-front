@@ -46,6 +46,100 @@ export const mockEstablishments = [
 		isArchived: false,
 	},
 ];
+export const mockJobQualifications = [
+	{
+		id: 19,
+		name: 'Sales manager',
+		usersCount: 0,
+		job: {
+			id: 8,
+			name: 'Technical sales engineer',
+			jobSectorId: 2,
+			isActive: true,
+		},
+		level: {
+			id: 3,
+			position: 3,
+			name: 'Grade 3',
+			isActive: true,
+			author: {
+				id: 0,
+				firstName: 'Lucca',
+				lastName: 'Admin',
+				fullName: 'Lucca Admin',
+			},
+			lastModifier: {
+				id: 0,
+				firstName: 'Lucca',
+				lastName: 'Admin',
+				fullName: 'Lucca Admin',
+			},
+			lastModifiedAt: '2021-12-10T10:16:54.2166667',
+			createdAt: '2021-12-10T10:16:54.2166667',
+		},
+		isActive: true,
+		author: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+		},
+		lastModifier: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+		},
+		lastModifiedAt: '2021-12-10T10:16:54.2166667',
+		createdAt: '2021-12-10T10:16:54.2166667',
+	},
+	{
+		id: 20,
+		name: 'Junior business developer',
+		usersCount: 0,
+		job: {
+			id: 9,
+			name: 'Business developer',
+			jobSectorId: 2,
+			isActive: true,
+		},
+		level: {
+			id: 2,
+			position: 2,
+			name: 'Grade 2',
+			isActive: true,
+			author: {
+				id: 0,
+				firstName: 'Lucca',
+				lastName: 'Admin',
+				fullName: 'Lucca Admin',
+			},
+			lastModifier: {
+				id: 0,
+				firstName: 'Lucca',
+				lastName: 'Admin',
+				fullName: 'Lucca Admin',
+			},
+			lastModifiedAt: '2021-12-10T10:16:54.2166667',
+			createdAt: '2021-12-10T10:16:54.2166667',
+		},
+		isActive: true,
+		author: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+		},
+		lastModifier: {
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			fullName: 'Lucca Admin',
+		},
+		lastModifiedAt: '2021-12-10T10:16:54.2166667',
+		createdAt: '2021-12-10T10:16:54.2166667',
+	},
+];
 export const mockDepartmentsTree = [
 	{
 		node: { id: 17, name: 'Lucca France' },

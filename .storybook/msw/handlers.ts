@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockGenericCount, mockMe, mockProjectUsers, mockUsers } from './mocks';
+import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockGenericCount, mockJobQualifications, mockMe, mockProjectUsers, mockUsers } from './mocks';
 
 export const handlers = [
 	rest.get('/organization/structure/api/legal-units', (_, res, ctx) => res(ctx.delay(300), ctx.json(mockGenericCount))),
@@ -15,6 +15,17 @@ export const handlers = [
 			ctx.delay(300),
 			ctx.json({
 				items: search ? [mockEstablishments[0]] : mockEstablishments,
+			}),
+		);
+	}),
+
+	rest.get('/organization/structure/api/job-qualifications', (req, res, ctx) => {
+		const search = req.url.searchParams.get('search');
+
+		return res(
+			ctx.delay(300),
+			ctx.json({
+				items: search ? [mockJobQualifications[0]] : mockJobQualifications,
 			}),
 		);
 	}),
