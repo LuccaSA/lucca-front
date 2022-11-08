@@ -1,6 +1,6 @@
 module.exports = {
 	stories: ['../stories/**/*.stories.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
-	staticDirs: ['./public'],
+	staticDirs: ['public'],
 	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
 	core: {
 		builder: 'webpack5',

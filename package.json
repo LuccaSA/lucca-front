@@ -109,6 +109,6 @@
     "node": "18.12.1"
   },
   "msw": {
-    "workerDirectory": ".storybook/msw"
+    "workerDirectory": ".storybook/public"
   }
 }
