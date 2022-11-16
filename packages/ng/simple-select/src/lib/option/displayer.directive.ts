@@ -10,7 +10,5 @@ export class LuDisplayerDirective<T> {
 		select.valueTpl = this.templateRef;
 	}
 
-	@Input('luDisplayer') value: T;
-
 	public constructor(private templateRef: TemplateRef<{ $implicit: T }>) {}
 }

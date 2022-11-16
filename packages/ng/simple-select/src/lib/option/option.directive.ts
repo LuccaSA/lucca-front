@@ -10,7 +10,5 @@ export class LuOptionDirective<T> {
 		select.optionTpl = this.templateRef;
 	}
 
-	@Input('luOption') value: T;
-
 	public constructor(private templateRef: TemplateRef<{ $implicit: T }>) {}
 }
