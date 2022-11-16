@@ -25,7 +25,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { LuSelectPanelComponent, LuSelectPanelRef } from '../panel/index';
-import { ILuSelectPanelData, SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID, SELECT_PANEL_DATA } from '../select.model';
+import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID, SELECT_PANEL_DATA } from '../select.model';
 
 let selectId = 0;
 
@@ -186,8 +186,8 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	}
 
 	@Input() optionComparer: (option1: T, option2: T) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
-	@Input() optionTpl?: TemplateRef<{ $implicit: T }>;
-	@Input() valueTpl?: TemplateRef<{ $implicit: T }>;
+	@Input() optionTpl?: TemplateRef<LuOptionContext<T>>;
+	@Input() valueTpl?: TemplateRef<LuOptionContext<T>>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
