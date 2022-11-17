@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Output, TemplateRef, ViewChild } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
@@ -10,7 +11,7 @@ import { luTransformTooltip } from '../animation/index';
 	styleUrls: ['./tooltip-panel.component.scss'],
 	animations: [luTransformTooltip],
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, OverlayModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel {
