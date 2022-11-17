@@ -258,26 +258,30 @@
 	transition-property: opacity;
 	text-align: right;
 	white-space: nowrap;
+}
 
-	> * {
-		&:not(.is-loading) {
-			opacity: 0;
-		}
-	}
-
-	.table-head-row:hover &,
-	.table-body-row:hover &,
-	.table-foot-row:hover & {
+@mixin actionsHidden {
+	@media (hover: hover) {
 		> * {
-			opacity: 1;
+			&:not(.is-loading) {
+				opacity: 0;
+			}
 		}
-	}
 
-	.table-head-row:focus-within &,
-	.table-body-row:focus-within &,
-	.table-foot-row:focus-within & {
-		> * {
-			opacity: 1;
+		.table-head-row:hover &,
+		.table-body-row:hover &,
+		.table-foot-row:hover & {
+			> * {
+				opacity: 1;
+			}
+		}
+
+		.table-head-row:focus-within &,
+		.table-body-row:focus-within &,
+		.table-foot-row:focus-within & {
+			> * {
+				opacity: 1;
+			}
 		}
 	}
 }

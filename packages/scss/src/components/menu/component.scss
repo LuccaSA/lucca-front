@@ -2,7 +2,7 @@
 
 @mixin component {
 	background-color: var(--components-menu-background);
-	gap: var(--spacings-big);
+	column-gap: var(--spacings-big);
 	align-items: center;
 	display: flex;
 	position: relative;
@@ -32,7 +32,7 @@
 		.menu-list {
 			@include reset.list;
 
-			gap: var(--spacings-big);
+			column-gap: var(--spacings-big);
 			display: flex;
 			flex-wrap: wrap;
 		}

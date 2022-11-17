@@ -4,7 +4,7 @@ export const bob: ILuUser = {
 	id: 12,
 	firstName: 'SpongeBob',
 	lastName: 'SquarePants',
-	pictureHref: 'https://nickelodeonuniverse.com/wp-content/uploads/Spongebob.png',
+	pictureHref: 'https://cdn.lucca.fr/lucca-front/avatars/finn.png',
 	jobTitle: 'Cook @KrustyKrab',
 };
 export const patrick: ILuUser = {
@@ -12,7 +12,7 @@ export const patrick: ILuUser = {
 	firstName: 'Patrick',
 	lastName: 'Starfish',
 	picture: {
-		href: 'https://nickelodeonuniverse.com/wp-content/uploads/Patrick.png',
+		href: 'https://cdn.lucca.fr/lucca-front/avatars/marceline.jpg',
 	},
 	jobTitle: 'Happiness Guru',
 };

@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/a11y';
-
 @mixin component {
 	background-color: var(--colors-white-color);
 	box-shadow: var(--commons-elevations-elevation-1);
@@ -20,19 +18,6 @@
 
 			&:last-child {
 				border: 0;
-			}
-
-			// if no hover on list item
-			&:not(:hover) {
-				.actionIcon {
-					// and no focus on action icon
-					&:not(:focus) {
-						// then mask
-						@include a11y.mask;
-
-						opacity: 0;
-					}
-				}
 			}
 		}
 

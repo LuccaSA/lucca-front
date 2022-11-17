@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.status {
+	@include vars;
+	@include component;
+
+	&:is(.success, .is-success) {
+		@include success;
+	}
+
+	&:is(.warning, .is-warning) {
+		@include warning;
+	}
+
+	&:is(.error, .is-error) {
+		@include error;
+	}
+}

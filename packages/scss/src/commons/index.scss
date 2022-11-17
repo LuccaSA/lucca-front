@@ -1,2 +1,6 @@
-@forward 'normalize.css/normalize'; // 6 Ko
-@forward 'base'; // 8 Ko
+@use 'exports' as *;
+
+:root {
+	@include vars;
+	@include base;
+}

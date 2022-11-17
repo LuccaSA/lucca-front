@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { map, share, timer } from 'rxjs';
+import { map, shareReplay, timer } from 'rxjs';
 
 @Component({
 	selector: 'sidepanel-content',
@@ -20,11 +20,13 @@ class SidepanelContentComponent implements ILuSidepanelContent {
 	template: '<p>General Kenobi</p>'
 })
 class SidepanelDynamicContentComponent implements ILuSidepanelContent {
-	counter$ = timer(0, 1000).pipe(share())
+	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }))
 
 	title = this.counter$.pipe(map(n => `Title #${n}`));
 	submitLabel = this.counter$.pipe(map(n => `Submit #${n}`));
 	cancelLabel = this.counter$.pipe(map(n => `Cancel #${n}`));
+	submitCounter = this.counter$;
+	submitDisabled = this.counter$.pipe(map(n => n % 2 === 0));
 
 	submitAction = () => {};
 }

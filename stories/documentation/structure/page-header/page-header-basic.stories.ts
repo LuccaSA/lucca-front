@@ -1,17 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
-
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'page-header-basic-stories',
 	templateUrl: './page-header-basic.stories.html',
-}) class PageHeaderBasicStory {
+})
+class PageHeaderBasicStory {
 	@Input() pageHeaderTitle: string = '';
 	@Input() pageHeaderDescription: string = '';
 	@Input() withBreadcrumbs: boolean = false;
 	@Input() withMenu: boolean = false;
 	@Input() withoutShadow: boolean = false;
+	@Input() sticky: boolean = false;
 }
 
 export default {
@@ -21,25 +22,30 @@ export default {
 		withBreadcrumbs: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		withMenu: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		withoutShadow: {
 			control: {
 				type: 'boolean',
-			}
+			},
+		},
+		sticky: {
+			control: {
+				type: 'boolean',
+			},
 		},
 	},
 	decorators: [
 		moduleMetadata({
 			entryComponents: [PageHeaderBasicStory],
 			imports: [BrowserModule],
-		})
-	]
+		}),
+	],
 } as Meta;
 
 const template: Story<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({
@@ -52,5 +58,6 @@ basic.args = {
 	pageHeaderDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo. Nullam condimentum nulla et neque ultricies bibendum',
 	withBreadcrumbs: false,
 	withMenu: false,
-	withoutShadow: false
+	withoutShadow: false,
+	sticky: false,
 };

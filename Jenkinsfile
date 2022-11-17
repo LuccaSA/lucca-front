@@ -58,10 +58,10 @@ node(label: CI.getSelectedNode(script:this)) {
 					bat "npm run compodoc"
 					bat "npm run build-storybook"
 					bat "npm run build-compodoc"
-					powershell "Remove-Item \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\storybook -Recurse"
-					powershell "Remove-Item \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\compodoc -Recurse"
-					powershell "Copy-Item storybook-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\storybook -Recurse"
-					powershell "Copy-Item compodoc-static \\\\labs2.lucca.local\\c\$\\d\\sites\\lucca-front\\${branchName}\\compodoc -Recurse"
+					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${branchName}\\storybook -Recurse"
+					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${branchName}\\compodoc -Recurse"
+					powershell "Copy-Item storybook-static \\\\RBX1-SH1-TECH\\lucca-front\\${branchName}\\storybook -Recurse"
+					powershell "Copy-Item compodoc-static \\\\RBX1-SH1-TECH\\lucca-front\\${branchName}\\compodoc -Recurse"
 				}
 
 				loggableStage('e2e') {

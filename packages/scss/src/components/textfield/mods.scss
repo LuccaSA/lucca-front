@@ -49,6 +49,13 @@
 	}
 }
 
+@mixin clearableSmaller {
+	.textfield-actionClear {
+		bottom: var(--spacings-smallest);
+		right: 1.25rem;
+	}
+}
+
 @mixin suffix {
 	.textfield-input {
 		padding-right: var(--components-textfield-suffix-padding-right);
@@ -68,12 +75,46 @@
 	}
 
 	.textfield-suffix {
-		line-height: var(--sizes-smaller-line-height);
+		line-height: calc(var(--sizes-small-font-size) * 1.25);
 		font-size: var(--sizes-small-font-size);
+
+		.lucca-icon {
+			font-size: calc(var(--sizes-small-font-size) * 1.25);
+		}
+	}
+}
+
+@mixin smaller {
+	.textfield-input {
+		line-height: var(--sizes-smaller-line-height);
+		font-size: var(--sizes-smaller-font-size);
+		padding-bottom: var(--spacings-smallest);
+		padding-top: var(--spacings-smallest);
+	}
+
+	.textfield-suffix {
+		line-height: calc(var(--sizes-smaller-font-size) * 1.25);
+		font-size: var(--sizes-smaller-font-size);
+		top: calc(var(--components-textfield-suffix-top) + var(--spacings-smallest));
+
+		.lucca-icon {
+			font-size: calc(var(--sizes-smaller-font-size) * 1.25);
+		}
+	}
+}
+
+@mixin noLabelSmaller {
+	.textfield-suffix {
+		top: var(--spacings-smallest);
 	}
 }
 
 @mixin smallInputIcon {
+	line-height: var(--sizes-smaller-line-height);
+	font-size: var(--sizes-small-font-size);
+}
+
+@mixin smallerInputIcon {
 	line-height: var(--sizes-smaller-line-height);
 	font-size: var(--sizes-small-font-size);
 }
@@ -134,7 +175,7 @@
 	&::after {
 		@include icon.generate('search');
 
-		color: var(--palettes-primary-500);
+		color: var(--palettes-primary-600);
 		position: absolute;
 		pointer-events: none;
 		font-size: 1.2rem;
@@ -145,6 +186,18 @@
 
 	.textfield-input {
 		padding-right: var(--spacings-big);
+
+		&[type='search']:is(:hover, :focus) {
+			&::-webkit-search-cancel-button {
+				display: none;
+			}
+		}
+	}
+}
+
+@mixin outlinedSearch {
+	&::after {
+		color: var(--palettes-grey-600);
 	}
 }
 
@@ -162,6 +215,14 @@
 	&::after {
 		line-height: var(--sizes-smaller-line-height);
 		font-size: var(--sizes-standard-font-size);
+	}
+}
+
+@mixin searchSmaller {
+	&::after {
+		line-height: var(--sizes-smaller-line-height);
+		font-size: var(--sizes-small-font-size);
+		bottom: var(--spacings-smallest);
 	}
 }
 
@@ -476,5 +537,9 @@
 	.textfield-input {
 		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--components-textfield-outlined-border-default-color);
 		background-color: var(--colors-white-color);
+
+		&::placeholder {
+			color: var(--palettes-grey-400);
+		}
 	}
 }

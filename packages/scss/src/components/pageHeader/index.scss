@@ -15,4 +15,8 @@
 	&.mod-noShadow {
 		@include noShadow;
 	}
+
+	&.mod-sticky {
+		@include sticky;
+	}
 }
