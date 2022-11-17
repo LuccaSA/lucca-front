@@ -1,5 +1,6 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 import { LuSimpleSelectInputComponent } from '../input';
+import { LuOptionContext } from '../select.model';
 
 @Directive({
 	selector: '[luOption]',
@@ -10,7 +11,9 @@ export class LuOptionDirective<T> {
 		select.optionTpl = this.templateRef;
 	}
 
-	@Input('luOption') value: T;
+	public constructor(private templateRef: TemplateRef<LuOptionContext<T>>) {}
 
-	public constructor(private templateRef: TemplateRef<{ $implicit: T }>) {}
+	public static ngTemplateContextGuard<T>(_dir: LuOptionDirective<T>, ctx: unknown): ctx is LuOptionContext<T> {
+		return true;
+	}
 }
