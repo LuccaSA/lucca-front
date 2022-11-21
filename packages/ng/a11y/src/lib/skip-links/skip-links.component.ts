@@ -11,8 +11,7 @@ export class LuSkipLinksComponent {
 	constructor(@Inject(DOCUMENT) protected document: Document) {}
 
 	anchor(hash: string, e: Event) {
-		this.document.location.hash = ''; // FIXME avoids a bug but kinda ugly
-		this.document.location.hash = hash;
 		e.preventDefault();
+		this.document.location.hash = hash;
 	}
 }

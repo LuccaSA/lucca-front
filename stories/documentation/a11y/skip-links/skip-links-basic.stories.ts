@@ -8,17 +8,28 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	imports: [LuSkipLinksComponent],
 	template: `
 		<lu-skip-links></lu-skip-links>
-		<div id="navSide" tabindex="0">
-			<p>Je suis la navside</p>
-			<button type="button" class="button">Bouton skippé</button>
+		<div id="lucca-banner-solutions-container" class="u-displayFlex u-gapSmaller u-marginBottomSmall">
+			banner
+			<button type="button" class="button u-marginReset">Banner</button>
+			<button type="button" class="button u-marginReset">Banner</button>
+			<button type="button" class="button u-marginReset">Banner</button>
+			<button type="button" class="button u-marginReset">Banner</button>
 		</div>
-		<div id="lucca-banner-solutions-container" tabindex="0">
-			<p>Je suis le banner</p>
-			<button type="button" class="button">Bouton skippé aussi</button>
-		</div>
-		<div id="main-content" tabindex="0">
-			<p>Je suis le main-content wesh</p>
-			<button type="button" class="button">Skip me</button>
+		<div class="u-displayFlex u-gapSmall">
+			<div id="navSide" class="u-displayFlex u-flexDirectionColumn u-gapSmaller">
+				navside
+				<button type="button" class="button u-marginReset">Navside</button>
+				<button type="button" class="button u-marginReset">Navside</button>
+				<button type="button" class="button u-marginReset">Navside</button>
+				<button type="button" class="button u-marginReset">Navside</button>
+			</div>
+			<div id="main-content" class="u-displayFlex u-flexDirectionColumn u-gapSmaller">
+				main content
+				<button type="button" class="button u-marginReset">Main content</button>
+				<button type="button" class="button u-marginReset">Main content</button>
+				<button type="button" class="button u-marginReset">Main content</button>
+				<button type="button" class="button u-marginReset">Main content</button>
+			</div>
 		</div>
 	`,
 })
