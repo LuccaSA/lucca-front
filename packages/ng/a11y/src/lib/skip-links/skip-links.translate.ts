@@ -1,19 +1,19 @@
 import { ILuTranslation } from '@lucca-front/ng/core';
 
-export interface ILuModalLabel {
+export interface ILuSkipLinksLabel {
 	Goto: string;
 	Goto_Nav_Banner: string;
 	Goto_Nav_Navside: string;
 	Goto_Content: string;
 }
-export abstract class ALuModalLabel {
+export abstract class ALuSkipLinksLabel {
 	Goto: string;
 	Goto_Nav_Banner: string;
 	Goto_Nav_Navside: string;
 	Goto_Content: string;
 }
 
-export const luSkipLinksTranslations: ILuTranslation<ILuModalLabel> = {
+export const luSkipLinksTranslations: ILuTranslation<ILuSkipLinksLabel> = {
 	en: {
 		Goto: 'Quick access',
 		Goto_Nav_Banner: 'Go to main navigation',
