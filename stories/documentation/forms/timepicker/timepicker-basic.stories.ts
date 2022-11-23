@@ -37,22 +37,22 @@ function getTemplate(args: timepickerBasicStory): string {
 	<legend class="u-mask">Durée</legend>
 	<div class="timepicker-field">
 		<span class="u-mask">heures</span>
-		<input class="timepicker-input" type="number" min="0" max="23" step="1" value="1" tabindex="1">
-		<button class="timepicker-increment" type="button" tabindex="-1" aria-hidden="true">
+		<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="1" tabindex="1">
+		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-northArrow"></span>
 		</button>
-		<button class="timepicker-increment" type="button" tabindex="-1" aria-hidden="true">
+		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-southArrow"></span>
 		</button>
 	</div>
 	<div class="timepicker-separator" aria-hidden="true">:</div>
 	<div class="timepicker-field">
 		<span class="u-mask">minutes</span>
-		<input class="timepicker-input" type="number" min="00" max="45" step="15" value="15" tabindex="1">
-		<button class="timepicker-increment" type="button" tabindex="-1" aria-hidden="true">
+		<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="15" tabindex="1">
+		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-northArrow"></span>
 		</button>
-		<button class="timepicker-increment" type="button" tabindex="-1" aria-hidden="true">
+		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-southArrow"></span>
 		</button>
 	</div>

@@ -13,7 +13,12 @@
 	}
 
 	@at-root {
-		.timepicker-input {
+		.timepicker-field {
+	    position: relative;
+	    display: inline-block;
+		}
+
+		.timepicker-field-input {
 			background-color: transparent;
 			border-radius: var(--commons-border-radius);
 			text-align: center;
@@ -34,18 +39,7 @@
 			}
 		}
 
-		.timepicker-separator {
-			margin: 0 var(--spacings-smallest);
-			text-align: center;
-			width: .5rem;
-		}
-
-		.timepicker-field {
-	    position: relative;
-	    display: inline-block;
-		}
-
-		.timepicker-increment {
+		.timepicker-field-increment {
 			cursor: pointer;
 			position: absolute;
 			bottom: calc(100% + .5rem);
@@ -78,6 +72,12 @@
 			.lucca-icon {
 				font-size: 1rem;
 			}
+		}
+
+		.timepicker-separator {
+			margin: 0 var(--spacings-smallest);
+			text-align: center;
+			width: .5rem;
 		}
 	}
 }
