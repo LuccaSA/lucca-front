@@ -1,0 +1,83 @@
+@mixin component {
+	margin: var(--spacings-smaller);
+	padding: var(--spacings-smallest) var(--spacings-smaller);
+	border: 0;
+	border-radius: var(--commons-border-radius);
+	display: inline-flex;
+	background-color: var(--palettes-50, var(--palettes-primary-50));
+	transition: box-shadow var(--commons-animations-durations-fast);
+
+	&:focus-within {
+		box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)), 0 0 0 1px var(--palettes-500, var(--palettes-primary-500)) inset;
+		background-color: transparent;
+	}
+
+	@at-root {
+		.timepicker-input {
+			background-color: transparent;
+			border-radius: var(--commons-border-radius);
+			text-align: center;
+			color: var(--palettes-grey-800);
+			width: 1.25rem;
+			height: 1.5rem;
+			border: 0;
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
+			&:hover, &:focus, &:focus-visible {
+				background-color: var(--palettes-100, var(--palettes-primary-100));
+				outline: none;
+			}
+		}
+
+		.timepicker-separator {
+			margin: 0 var(--spacings-smallest);
+			text-align: center;
+			width: .5rem;
+		}
+
+		.timepicker-field {
+	    position: relative;
+	    display: inline-block;
+		}
+
+		.timepicker-increment {
+			cursor: pointer;
+			position: absolute;
+			bottom: calc(100% + .5rem);
+			left: 0;
+			right: 0;
+			border: 0;
+			height: 1.25rem;
+			background-color: transparent;
+			color: var(--palettes-grey-600);
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: var(--commons-border-radius);
+
+			&:last-child {
+				top: calc(100% + .5rem);
+				bottom: auto;
+			}
+
+			&:hover {
+				background-color: var(--palettes-grey-50);
+				color: var(--palettes-grey-800);
+			}
+
+			&:focus {
+				background-color: var(--palettes-grey-100);
+				color: var(--palettes-grey-800);
+			}
+
+			.lucca-icon {
+				font-size: 1rem;
+			}
+		}
+	}
+}

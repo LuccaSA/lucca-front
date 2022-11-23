@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.timepicker {
+	@include vars;
+	@include component;
+
+	&.mod-outlined {
+		@include outlined;
+	}
+
+	&:is(.is-disabled, .disabled, [disabled]) {
+		@include disabled;
+	}
+}
