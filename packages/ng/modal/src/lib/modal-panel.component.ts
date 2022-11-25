@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoChe
 import { getIntl } from '@lucca-front/ng/core';
 import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { LuModalClasses } from './modal-config.model';
 import { ALuModalRef } from './modal-ref.model';
 import { ILuModalContent } from './modal.model';
 import { LU_MODAL_TRANSLATIONS } from './modal.translate';
