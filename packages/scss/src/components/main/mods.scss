@@ -9,12 +9,9 @@
 }
 
 @mixin banner {
-	height: calc(100vh - var(--commons-banner-height));
 	margin-top: var(--commons-banner-height);
-	overflow-y: auto;
 
 	@include media.smallerThan('s') {
-		height: calc(100vh - var(--commons-banner-height) - var(--commons-navSide-mobile-toggle-height));
 		margin-top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	}
 }
