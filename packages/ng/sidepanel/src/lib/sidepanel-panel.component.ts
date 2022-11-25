@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, Renderer2 } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuModalPanelComponent } from '@lucca-front/ng/modal';
 import { ALuSidepanelRef } from './sidepanel-ref.model';
@@ -16,8 +16,8 @@ export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepa
 	@HostBinding('class.lu-sidepanel-panel') public class = true;
 	public override intl = getIntl(LU_SIDEPANEL_TRANSLATIONS);
 
-	constructor(_ref: ALuSidepanelRef<T>, _cdr: ChangeDetectorRef) {
-		super(_ref, _cdr);
+	constructor(_ref: ALuSidepanelRef<T>, _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _cdr, _elementRef, _renderer);
 	}
 }
 
@@ -31,7 +31,7 @@ export class LuSidepanelPanelComponent<T extends ILuSidepanelContent = ILuSidepa
 export class LuSidepanelPanelComponentDefaultCD<T extends ILuSidepanelContent = ILuSidepanelContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-sidepanel-panel') public class = true;
 	public override intl = getIntl(LU_SIDEPANEL_TRANSLATIONS);
-	constructor(_ref: ALuSidepanelRef<T>, _cdr: ChangeDetectorRef) {
-		super(_ref, _cdr);
+	constructor(_ref: ALuSidepanelRef<T>, _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _cdr, _elementRef, _renderer);
 	}
 }

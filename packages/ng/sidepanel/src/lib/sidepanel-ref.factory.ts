@@ -3,7 +3,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ApplicationRef, ChangeDetectionStrategy, ComponentRef, inject, Injectable, Injector } from '@angular/core';
 import { setAriaHiddenOnApplicationRoot } from '@lucca-front/ng/modal';
 import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
-import { ILuSidepanelConfig } from './sidepanel-config.model';
+import { LuSidepanelConfig } from './sidepanel-config.model';
 import { LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD } from './sidepanel-panel.component';
 import { ALuSidepanelRef, ILuSidepanelRef } from './sidepanel-ref.model';
 import { ILuSidepanelContent } from './sidepanel.model';
@@ -15,7 +15,7 @@ class LuSidepanelRef<T extends ILuSidepanelContent<unknown> = ILuSidepanelConten
 		protected override _overlay: Overlay,
 		protected override _injector: Injector,
 		protected override _component: ComponentType<T>,
-		protected override _config: ILuSidepanelConfig,
+		protected override _config: LuSidepanelConfig,
 		protected _applicationRef: ApplicationRef,
 	) {
 		super(_overlay, _injector, _component, _config);
@@ -48,7 +48,7 @@ class LuSidepanelRef<T extends ILuSidepanelContent<unknown> = ILuSidepanelConten
 }
 
 @Injectable()
-export class LuSidepanelRefFactory implements ILuPopupRefFactory<ILuSidepanelContent<unknown>, ILuSidepanelConfig> {
+export class LuSidepanelRefFactory implements ILuPopupRefFactory<ILuSidepanelContent<unknown>, LuSidepanelConfig> {
 	protected _applicationRef = inject(ApplicationRef);
 
 	constructor(protected _overlay: Overlay, protected _injector: Injector) {}

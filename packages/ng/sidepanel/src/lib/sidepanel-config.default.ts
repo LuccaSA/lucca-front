@@ -1,8 +1,9 @@
-import { ILuSidepanelConfig } from './sidepanel-config.model';
+import { LuSidepanelConfig } from './sidepanel-config.model';
 import { ChangeDetectionStrategy } from '@angular/core';
 
-export const luDefaultSidepanelConfig: ILuSidepanelConfig = {
+export const luDefaultSidepanelConfig: LuSidepanelConfig = {
 	position: 'right',
+	mode: 'sidepanel',
 	noBackdrop: false,
 	undismissable: false,
 	backdropClass: ['cdk-overlay-dark-backdrop', 'lu-popup-backdrop'],

@@ -38,8 +38,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	public readonly modalId = modalId++;
 
 	private _subs = new Subscription();
+	public modalClasses: LuModalClasses;
 
-	constructor(protected _ref: ALuModalRef<T>, protected _cdr: ChangeDetectorRef) {}
+	constructor(protected _ref: ALuModalRef<T>, protected _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		this.modalClasses = _ref.modalClasses;
+		_renderer.addClass(_elementRef.nativeElement, this.modalClasses.panel);
+	}
 	ngDoCheck(): void {
 		this.doCheck$.next();
 	}
@@ -64,7 +68,6 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 				result$
 					.pipe(
 						tap((_) => this.submitClass$.next('is-success')),
-						tap(() => this._cdr.markForCheck()),
 						delay(500),
 					)
 					.subscribe({
@@ -72,15 +75,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 						error: (err) => {
 							this.submitClass$.next('is-error');
 							this.error$.next(err);
-							this._cdr.markForCheck();
 							timer(2000).subscribe((_) => {
 								this.submitClass$.next('');
-								this._cdr.markForCheck();
 							});
 						},
 						complete: () => {
 							this.submitClass$.next('');
-							this._cdr.markForCheck();
 						},
 					}),
 			);

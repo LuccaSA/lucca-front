@@ -19,7 +19,7 @@ export interface ILuPopupRefFactory<TComponent = unknown, TConfig extends ILuPop
 	forge<T extends TComponent, C extends TConfig, D, R>(component: ComponentType<T>, config: C): ILuPopupRef<T, D, R>;
 }
 
-export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> implements ILuPopupRef<T, D, R> {
+export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C extends ILuPopupConfig = ILuPopupConfig> implements ILuPopupRef<T, D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 	onDismiss = new Subject<void>();
@@ -29,7 +29,7 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> impleme
 
 	protected _subs = new Subscription();
 
-	constructor(protected _overlay: Overlay, protected _injector: Injector, protected _component: ComponentType<T>, protected _config: ILuPopupConfig) {}
+	constructor(protected _overlay: Overlay, protected _injector: Injector, protected _component: ComponentType<T>, protected _config: C) {}
 
 	open(data?: D) {
 		this._createOverlay();
@@ -77,7 +77,6 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> impleme
 			case 'right':
 				overlayConfig.positionStrategy = this._overlay.position().global().centerVertically().right('0');
 				break;
-
 			case 'center':
 			default:
 				overlayConfig.positionStrategy = this._overlay.position().global().centerHorizontally().centerVertically();
@@ -85,14 +84,7 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> impleme
 		}
 		overlayConfig.hasBackdrop = !this._config.noBackdrop;
 		overlayConfig.backdropClass = this._config.backdropClass;
-		const panelClasses = [];
-		if (Array.isArray(this._config.panelClass)) {
-			panelClasses.push(...this._config.panelClass);
-		} else {
-			panelClasses.push(this._config.panelClass);
-		}
-		panelClasses.push(`size-${this._config.size}`);
-		overlayConfig.panelClass = panelClasses;
+		overlayConfig.panelClass = this._getOverlayPanelClasses();
 		overlayConfig.scrollStrategy = this._overlay.scrollStrategies.block();
 		return overlayConfig;
 	}
@@ -106,6 +98,17 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown> impleme
 		});
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._overlayRef.attach<T>(portal);
+	}
+
+	protected _getOverlayPanelClasses(): string[] {
+		const panelClasses: string[] = [];
+		if (Array.isArray(this._config.panelClass)) {
+			panelClasses.push(...this._config.panelClass);
+		} else {
+			panelClasses.push(this._config.panelClass);
+		}
+		panelClasses.push(`size-${this._config.size}`);
+		return panelClasses;
 	}
 
 	protected _destroy() {

@@ -1,10 +1,10 @@
 <div
-	class="lu-modal-panel-inner"
 	cdkTrapFocus="true"
 	cdkTrapFocusAutoCapture="true"
 	role="dialog"
 	aria-modal="true"
 	[attr.aria-labelledby]="'luModalTitle' + modalId"
+	[ngClass]="modalClasses.panelInner"
 >
 	<div class="lu-modal-container" role="document">
 		<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
