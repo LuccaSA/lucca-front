@@ -9,6 +9,9 @@ import { LuSidepanelRefFactory } from './sidepanel-ref.factory';
 import { LuSidepanel } from './sidepanel.service';
 import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token';
 
+/**
+ * @deprecated Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
+ */
 @NgModule({
 	imports: [OverlayModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
