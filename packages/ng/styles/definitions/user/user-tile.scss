@@ -53,40 +53,34 @@
 			}
 		}
 
-    &.mod-smallest lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-smallest-font-size);
-      height: var(--components-user-picture-sizes-smallest-image-size);
-      width: var(--components-user-picture-sizes-smallest-image-size);
+    &.mod-smallest {
+			--components-user-picture-image-size: var(--components-user-picture-image-size-smallest);
+			--components-user-picture-font-size: var(--components-user-picture-font-size-smallest);
     }
 
-    &.mod-smaller lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-smaller-font-size);
-      height: var(--components-user-picture-sizes-smaller-image-size);
-      width: var(--components-user-picture-sizes-smaller-image-size);
+    &.mod-smaller {
+			--components-user-picture-image-size: var(--components-user-picture-image-size-smaller);
+			--components-user-picture-font-size: var(--components-user-picture-font-size-smaller);
     }
 
-    &.mod-small lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-small-font-size);
-      height: var(--components-user-picture-sizes-small-image-size);
-      width: var(--components-user-picture-sizes-small-image-size);
+    &.mod-small {
+			--components-user-picture-image-size: var(--components-user-picture-image-size-small);
+			--components-user-picture-font-size: var(--components-user-picture-font-size-small);
     }
 
-    &.mod-large lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-large-font-size);
-      height: var(--components-user-picture-sizes-large-image-size);
-      width: var(--components-user-picture-sizes-large-image-size);
+    &.mod-large {
+			--components-user-picture-image-size: var(--components-user-picture-image-size-large);
+			--components-user-picture-font-size: var(--components-user-picture-font-size-large);
     }
 
-    &.mod-larger lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-larger-font-size);
-      height: var(--components-user-picture-sizes-larger-image-size);
-      width: var(--components-user-picture-sizes-larger-image-size);
+    &.mod-larger {
+			--components-user-picture-image-size: var(--components-user-picture-image-size-larger);
+			--components-user-picture-font-size: var(--components-user-picture-font-size-larger);
     }
 
-    &.mod-largest lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-largest-font-size);
-      height: var(--components-user-picture-sizes-largest-image-size);
-      width: var(--components-user-picture-sizes-largest-image-size);
+    &.mod-largest {
+			--components-user-picture-image-size: var(--components-user-picture-image-size-largest);
+			--components-user-picture-font-size: var(--components-user-picture-font-size-largest);
     }
 	}
 }
