@@ -1,86 +1,84 @@
 @mixin userTileStyle {
-	:host {
-		display: flex;
-		align-items: center;
-		padding: 0.5em;
+	display: flex;
+	align-items: center;
+	padding: 0.5em;
+
+	lu-user-picture {
+		margin-right: 0.5em;
+	}
+
+	.user-tile-title {
+		font-size: 0.9em;
+		font-weight: 600;
+		line-height: 1.3;
+		margin: 0;
+	}
+
+	.user-tile-label {
+		display: block;
+    font-size: var(--sizes-small-font-size);
+		line-height: 1.1;
+    color: var(--palettes-grey-600);
+	}
+
+	.user-tile-footnote {
+		display: block;
+		font-size: var(--sizes-small-font-size);
+		line-height: var(--sizes-small-line-height);
+	}
+
+	.user-info {
+		margin: auto 0;
+		word-break: break-all;
+	}
+
+	&.mod-nameOnly {
+		.user-tile-label,
+		.user-tile-footnote {
+			display: none;
+		}
+	}
+
+	&.mod-vertical {
+		flex-direction: column;
 
 		lu-user-picture {
-			margin-right: 0.5em;
-		}
-
-		.user-tile-title {
-			font-size: 0.9em;
-			font-weight: 600;
-			line-height: 1.3;
-			margin: 0;
-		}
-
-		.user-tile-label {
-			display: block;
-      font-size: var(--sizes-small-font-size);
-			line-height: 1.1;
-      color: var(--palettes-grey-600);
-		}
-
-		.user-tile-footnote {
-			display: block;
-			font-size: var(--sizes-small-font-size);
-			line-height: var(--sizes-small-line-height);
+			margin-right: 0;
+			margin-bottom: 0.8em;
 		}
 
 		.user-info {
-			margin: auto 0;
-			word-break: break-all;
+			text-align: center;
 		}
-
-		&.mod-nameOnly {
-			.user-tile-label,
-			.user-tile-footnote {
-				display: none;
-			}
-		}
-
-		&.mod-vertical {
-			flex-direction: column;
-
-			lu-user-picture {
-				margin-right: 0;
-				margin-bottom: 0.8em;
-			}
-
-			.user-info {
-				text-align: center;
-			}
-		}
-
-    &.mod-smallest {
-			--components-user-picture-image-size: var(--components-user-picture-image-size-smallest);
-			--components-user-picture-font-size: var(--components-user-picture-font-size-smallest);
-    }
-
-    &.mod-smaller {
-			--components-user-picture-image-size: var(--components-user-picture-image-size-smaller);
-			--components-user-picture-font-size: var(--components-user-picture-font-size-smaller);
-    }
-
-    &.mod-small {
-			--components-user-picture-image-size: var(--components-user-picture-image-size-small);
-			--components-user-picture-font-size: var(--components-user-picture-font-size-small);
-    }
-
-    &.mod-large {
-			--components-user-picture-image-size: var(--components-user-picture-image-size-large);
-			--components-user-picture-font-size: var(--components-user-picture-font-size-large);
-    }
-
-    &.mod-larger {
-			--components-user-picture-image-size: var(--components-user-picture-image-size-larger);
-			--components-user-picture-font-size: var(--components-user-picture-font-size-larger);
-    }
-
-    &.mod-largest {
-			--components-user-picture-image-size: var(--components-user-picture-image-size-largest);
-			--components-user-picture-font-size: var(--components-user-picture-font-size-largest);
-    }
 	}
+
+  &.mod-smallest {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-smallest);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-smallest);
+  }
+
+  &.mod-smaller {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-smaller);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-smaller);
+  }
+
+  &.mod-small {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-small);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-small);
+  }
+
+  &.mod-large {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-large);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-large);
+  }
+
+  &.mod-larger {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-larger);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-larger);
+  }
+
+  &.mod-largest {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-largest);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-largest);
+  }
 }
