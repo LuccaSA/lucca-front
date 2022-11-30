@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, Inject, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, getIntl } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
-import { LuDateInputIntl } from './date-input.intl';
-import { ILuDateInputLabel } from './date-input.translate';
+import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
 @Directive({
 	selector: 'input[luDateInput]',
@@ -29,13 +28,8 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	@Input() override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		_elementRef: ElementRef<HTMLInputElement>,
-		_renderer: Renderer2,
-		private _adapter: ALuDateAdapter<D>,
-		@Inject(LuDateInputIntl) private _intl: ILuDateInputLabel,
-	) {
+	private _intl = getIntl(LU_DATE_INPUT_TRANSLATIONS);
+	constructor(_changeDetectorRef: ChangeDetectorRef, _elementRef: ElementRef<HTMLInputElement>, _renderer: Renderer2, private _adapter: ALuDateAdapter<D>) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	ngOnInit() {

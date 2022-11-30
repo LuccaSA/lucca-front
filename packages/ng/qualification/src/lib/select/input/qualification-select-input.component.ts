@@ -1,12 +1,12 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuQualification } from '../../qualification.model';
-import { LuQualificationSelectInputIntl } from './qualification-select-input.intl';
-import { ILuQualificationSelectInputLabel } from './qualification-select-input.translate';
+import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-select-input.translate';
 
 @Component({
 	selector: 'lu-qualification-select',
@@ -34,14 +34,14 @@ export class LuQualificationSelectInputComponent<
 
 	isSearching = false;
 
+	public intl = getIntl(LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS);
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
 		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
-		@Inject(LuQualificationSelectInputIntl)
-		public intl: ILuQualificationSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}

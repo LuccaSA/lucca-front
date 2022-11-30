@@ -1,14 +1,11 @@
+import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
 
+export const LU_DATE_INPUT_TRANSLATIONS = new InjectionToken('LuDateInputtranslations', {
+	factory: () => luDateInputTranslations,
+});
+
 export interface ILuDateInputLabel {
-	placeholderDay: string;
-	placeholderMonth: string;
-	placeholderYear: string;
-	formatDay: string;
-	formatMonth: string;
-	formatYear: string;
-}
-export abstract class ALuDateInputLabel {
 	placeholderDay: string;
 	placeholderMonth: string;
 	placeholderYear: string;

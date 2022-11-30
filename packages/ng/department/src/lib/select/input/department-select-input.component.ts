@@ -1,11 +1,11 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { ILuTreeOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDepartmentSelectInputIntl } from './department-select-input.intl';
-import { ILuDepartmentSelectInputLabel } from './department-select-input.translate';
+import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.translate';
 
 @Component({
 	selector: 'lu-department-select',
@@ -33,14 +33,14 @@ export class LuDepartmentSelectInputComponent<
 	@Input() operations: number[];
 	@Input() filters: string[];
 
+	public intl = getIntl(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS);
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
 		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
-		@Inject(LuDepartmentSelectInputIntl)
-		public intl: ILuDepartmentSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}

@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
-import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { tap } from 'rxjs/operators';
 import { ALuOptionOperator } from '../../operator/option-operator.model';
-import { ILuOptionSelectAllLabel } from './select-all.translate';
-import { LuOptionSelectAllIntl } from './select-all.intl';
+import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
+import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 
 @Component({
 	selector: 'lu-option-select-all',
@@ -36,9 +36,7 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 		this.outOptions$ = in$.pipe(tap((options) => (this.options = options)));
 	}
 
-	constructor(@Inject(LuOptionSelectAllIntl) public intl: ILuOptionSelectAllLabel) {
-		super();
-	}
+	public intl = getIntl(LU_OPTION_SELECT_ALL_TRANSLATIONS);
 
 	selectAll() {
 		this.onSelectValue.next([...this.options]);

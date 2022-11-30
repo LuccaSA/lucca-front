@@ -1,10 +1,11 @@
+import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
 
+export const LU_TREE_OPTION_ITEM_TRANSLATIONS = new InjectionToken('LuTreeOptionItemTranslations', {
+	factory: () => luTreeOptionItemTranslations,
+});
+
 export interface ILuTreeOptionItemLabel {
-	parentOnly: string;
-	childrenOnly: string;
-}
-export abstract class ALuTreeOptionItemLabel {
 	parentOnly: string;
 	childrenOnly: string;
 }

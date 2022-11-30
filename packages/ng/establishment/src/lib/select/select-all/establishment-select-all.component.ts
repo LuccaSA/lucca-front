@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { ALuOptionOperator, ALuOptionSelector, ILuOptionSelectAllLabel, LuOptionSelectAllComponent, LuOptionSelectAllIntl } from '@lucca-front/ng/option';
+import { ALuOptionOperator, ALuOptionSelector, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
@@ -43,8 +43,6 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 
 	constructor(
 		private readonly _changeDetectorRef: ChangeDetectorRef,
-		@Inject(LuOptionSelectAllIntl)
-		public override intl: ILuOptionSelectAllLabel,
 		@Inject(ALuEstablishmentService)
 		@Optional()
 		@SkipSelf()
@@ -53,7 +51,7 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 		@Self()
 		selfService: LuEstablishmentService,
 	) {
-		super(intl);
+		super();
 		this._service = hostService || selfService;
 	}
 

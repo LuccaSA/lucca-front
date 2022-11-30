@@ -1,11 +1,10 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, getIntl } from '@lucca-front/ng/core';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDateSelectInputIntl } from './date-select-input.intl';
-import { ILuDateSelectInputLabel } from './date-select-input.translate';
+import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate';
 
 @Component({
 	selector: 'lu-date-select',
@@ -46,6 +45,7 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 				return this._intl.formatDay;
 		}
 	}
+	private _intl = getIntl(LU_DATE_SELECT_INPUT_TRANSLATIONS);
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
@@ -53,7 +53,6 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
 		private _adapter: ALuDateAdapter<D>,
-		@Inject(LuDateSelectInputIntl) private _intl: ILuDateSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 		this.overlapInput = true;

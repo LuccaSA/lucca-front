@@ -16,14 +16,14 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from '../../service/index';
-import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
-import { ILuEstablishmentSelectInputLabel } from './establishment-select-input.translate';
+import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
 @Component({
 	selector: 'lu-establishment-select',
@@ -69,6 +69,8 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
+	public intl = getIntl(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS);
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
@@ -87,8 +89,6 @@ export class LuEstablishmentSelectInputComponent<
 		@Inject(ALuEstablishmentService)
 		@Self()
 		selfEstablishmentService: LuEstablishmentService,
-		@Inject(LuEstablishmentSelectInputIntl)
-		public intl: ILuEstablishmentSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 		this._establishmentService = hostEstablishmentService || selfEstablishmentService;
