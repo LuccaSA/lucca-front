@@ -7,6 +7,8 @@ import { ILuModalContent } from './modal.model';
 import { LU_MODAL_TRANSLATIONS } from './modal.token';
 import { ILuModalLabel } from './modal.translate';
 
+let modalId = 0;
+
 @Directive()
 export abstract class ALuModalPanelComponent<T extends ILuModalContent> implements OnDestroy, DoCheck {
 	@ViewChild('container', { read: ViewContainerRef, static: true })
@@ -32,6 +34,8 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 
 	submitClass$ = new Subject();
 	error$ = new Subject();
+
+	public readonly modalId = modalId++;
 
 	private _subs = new Subscription();
 

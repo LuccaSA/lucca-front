@@ -4,7 +4,7 @@
 	cdkTrapFocusAutoCapture="true"
 	role="dialog"
 	aria-modal="true"
-	[attr.aria-labelledby]="titleModal"
+	[attr.aria-labelledby]="'luModalTitle' + modalId"
 >
 	<div role="document">
 		<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
@@ -12,7 +12,7 @@
 				<span aria-hidden="true" class="lucca-icon icon-cross"></span>
 				<span class="u-mask">{{ closeLabel }}</span>
 			</button>
-			<h1 id="titleModal" class="lu-modal-header-title">{{ title$ | async }}</h1>
+			<h1 [attr.id]="'luModalTitle' + modalId" class="lu-modal-header-title">{{ title$ | async }}</h1>
 		</div>
 		<div class="lu-modal-content">
 			<ng-container #container></ng-container>
