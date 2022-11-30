@@ -1,23 +1,20 @@
 @mixin userTileStyle {
 	display: flex;
 	align-items: center;
-	padding: 0.5em;
-
-	lu-user-picture {
-		margin-right: 0.5em;
-	}
+	padding: var(--spacings-smaller);
+	gap: var(--spacings-smaller);
 
 	.user-tile-title {
-		font-size: 0.9em;
+		font-size: var(--sizes-standard-font-size);
+		line-height: var(--sizes-standard-line-height);
 		font-weight: 600;
-		line-height: 1.3;
 		margin: 0;
 	}
 
 	.user-tile-label {
 		display: block;
     font-size: var(--sizes-small-font-size);
-		line-height: 1.1;
+		line-height: var(--sizes-smaller-line-height);
     color: var(--palettes-grey-600);
 	}
 
