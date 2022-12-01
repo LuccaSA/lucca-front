@@ -14,7 +14,7 @@
 		"skipLibCheck": true,
 		"types": [],
 		"paths": {
-			"@lucca-front/ng/*": ["packages/ng/*/src/public-api.ts"]
+			"@lucca-front/ng/*": ["*/src/public-api.ts"]
 		}
 	},
 	"angularCompilerOptions": {
