@@ -36,8 +36,10 @@ function getTemplate(args: timepickerBasicStory): string {
 <fieldset class="timepicker ${classes}" ${disabled}>
 	<legend class="u-mask">Durée</legend>
 	<div class="timepicker-field">
-		<span class="u-mask">heures</span>
-		<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="1" tabindex="1">
+		<label>
+			<span class="u-mask">heures</span>
+			<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="1" tabindex="1">
+		</label>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-northArrow"></span>
 		</button>
@@ -47,8 +49,10 @@ function getTemplate(args: timepickerBasicStory): string {
 	</div>
 	<div class="timepicker-separator" aria-hidden="true">:</div>
 	<div class="timepicker-field">
-		<span class="u-mask">minutes</span>
-		<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="15" tabindex="1">
+		<label>
+			<span class="u-mask">minutes</span>
+			<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="15" tabindex="1">
+		</label>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-northArrow"></span>
 		</button>
