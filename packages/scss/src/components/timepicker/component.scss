@@ -23,9 +23,10 @@
 			border-radius: var(--commons-border-radius);
 			text-align: center;
 			color: var(--palettes-grey-800);
-			width: 1.25rem;
+			width: var(--components-timepicker-input-width);
 			height: 1.5rem;
 			border: 0;
+			-moz-appearance: textfield;
 
 			&::-webkit-outer-spin-button,
 			&::-webkit-inner-spin-button {
@@ -44,7 +45,6 @@
 			position: absolute;
 			bottom: calc(100% + .5rem);
 			left: 0;
-			right: 0;
 			border: 0;
 			height: 1.25rem;
 			background-color: transparent;
@@ -53,6 +53,7 @@
 			justify-content: center;
 			align-items: center;
 			border-radius: var(--commons-border-radius);
+			width: var(--components-timepicker-input-width);
 
 			&:last-child {
 				top: calc(100% + .5rem);
