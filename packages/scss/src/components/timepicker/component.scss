@@ -27,7 +27,6 @@
 			height: 1.5rem;
 			border: 0;
 			padding: 0;
-			background: lime !important;
 			-moz-appearance: textfield;
 
 			&::-webkit-outer-spin-button,
@@ -56,6 +55,7 @@
 			align-items: center;
 			border-radius: var(--commons-border-radius);
 			width: var(--components-timepicker-input-width);
+			padding: 0;
 
 			&:last-child {
 				top: calc(100% + .5rem);
