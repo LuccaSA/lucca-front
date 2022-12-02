@@ -1,13 +1,13 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ApplicationRef, ChangeDetectionStrategy, ComponentRef, inject, Injectable, Injector } from '@angular/core';
-import { setAriaHiddenOnApplicationRoot } from '@lucca-front/ng/modal';
 import { ALuPopupRef, ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { ILuModalConfig } from './modal-config.model';
 import { ALuModalPanelComponent, LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
 import { ALuModalRef, ILuModalRef } from './modal-ref.model';
 import { ILuModalContent } from './modal.model';
 import { LU_MODAL_DATA } from './modal.token';
+import { setAriaHiddenOnApplicationRoot } from './modal.utils';
 
 class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown> extends ALuPopupRef<T, D, R> implements ILuModalRef<T, D, R> {
 	protected _containerRef: ComponentRef<ALuModalPanelComponent<T>>;
