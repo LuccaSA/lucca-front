@@ -78,7 +78,7 @@
 
 @mixin framedInputInvalid {
 	~ .textfield-label {
-		color: var(--palettes-primary-700);
+		color: var(--palettes-error-700);
 	}
 }
 
