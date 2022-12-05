@@ -1,10 +1,14 @@
-import { DOCUMENT } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, QueryList } from '@angular/core';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
+import { LuScrollDirective } from '@lucca-front/ng/scroll';
 import { merge, Observable } from 'rxjs';
 import { first, map, mergeAll, shareReplay, startWith } from 'rxjs/operators';
+import { LuOptionItemComponent } from '../item';
 import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
@@ -120,6 +124,8 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPickerAdvanced',
+	standalone: true,
+	imports: [CommonModule, OverlayModule, LuOptionItemComponent, LuScrollDirective, A11yModule],
 	providers: [
 		{
 			provide: ALuPickerPanel,

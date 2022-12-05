@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { LuOptionPagerModule } from './pager/index';
-import { LuOptionFeederModule } from './feeder/index';
-import { LuOptionSearcherModule } from './searcher/index';
-import { LuForOptionsModule } from './for-options/index';
-import { LuForGroupsModule } from './for-groups/index';
+import { LuOptionFeederComponent } from './feeder';
+import { LuForGroupsDirective } from './for-groups/index';
+import { LuForOptionsDirective } from './for-options/index';
+import { LuOptionPagerComponent } from './pager';
+import { LuOptionSearcherComponent } from './searcher/index';
 
 @NgModule({
-	imports: [LuOptionPagerModule, LuOptionFeederModule, LuOptionSearcherModule, LuForOptionsModule, LuForGroupsModule],
-	exports: [LuOptionPagerModule, LuOptionFeederModule, LuOptionSearcherModule, LuForOptionsModule, LuForGroupsModule],
+	imports: [LuOptionPagerComponent, LuOptionFeederComponent, LuOptionSearcherComponent, LuForOptionsDirective, LuForGroupsDirective],
+	exports: [LuOptionPagerComponent, LuOptionFeederComponent, LuOptionSearcherComponent, LuForOptionsDirective, LuForGroupsDirective],
 })
 export class LuOptionOperatorModule {}

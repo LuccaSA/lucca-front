@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LuNumberModule } from '@lucca-front/ng/number';
+import { LuNumberPipe } from '@lucca-front/ng/number';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
@@ -18,7 +18,7 @@ export default {
 	component: NumbersStory,
 	decorators: [
 		moduleMetadata({
-			imports: [LuNumberModule],
+			imports: [LuNumberPipe],
 			declarations: [NumbersStory],
 		}),
 	],
@@ -29,11 +29,11 @@ const template: Story<NumbersStory> = (args: NumbersStory) => ({
 });
 
 const code = `
-/* 1. Importer LuNumberModule */
-import { LuNumberModule } from '@lucca-front/ng/number';
+/* 1. Importer LuNumberPipe */
+import { LuNumberPipe } from '@lucca-front/ng/number';
 
 @NgModule({
-	imports: [LuNumberModule]
+	imports: [LuNumberPipe]
 })
 class StoriesModule {}
 

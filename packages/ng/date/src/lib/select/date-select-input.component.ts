@@ -1,17 +1,23 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { LuInputClearerComponent, LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuDateAdapterPipe } from '../adapter';
+import { LuDatePickerComponent } from '../picker';
 import { LuDateSelectInputIntl } from './date-select-input.intl';
-import { ILuDateSelectInputLabel } from './date-select-input.translate';
+import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.token';
+import { ILuDateSelectInputLabel, luDateSelectInputTranslations } from './date-select-input.translate';
 
 @Component({
 	selector: 'lu-date-select',
 	templateUrl: './date-select-input.component.html',
 	styleUrls: ['./date-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [LuDateAdapterPipe, LuDatePickerComponent, LuInputDirective, OverlayModule, LuInputClearerComponent, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -23,6 +29,11 @@ import { ILuDateSelectInputLabel } from './date-select-input.translate';
 			useExisting: LuDateSelectInputComponent,
 			multi: true,
 		},
+		{
+			provide: LU_DATE_SELECT_INPUT_TRANSLATIONS,
+			useValue: luDateSelectInputTranslations,
+		},
+		LuDateSelectInputIntl,
 	],
 })
 export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {

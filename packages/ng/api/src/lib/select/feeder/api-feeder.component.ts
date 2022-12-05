@@ -10,6 +10,7 @@ import { ALuApiOptionFeeder } from './api-feeder.model';
 	template: '',
 	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

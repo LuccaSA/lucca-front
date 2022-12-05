@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Output } from '@angular/core';
 import { ALuClearer, ILuClearer } from './clearer.model';
 
@@ -7,6 +8,8 @@ import { ALuClearer, ILuClearer } from './clearer.model';
 	styleUrls: ['./clearer.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luClearer',
+	standalone: true,
+	imports: [CommonModule],
 	providers: [
 		{
 			provide: ALuClearer,

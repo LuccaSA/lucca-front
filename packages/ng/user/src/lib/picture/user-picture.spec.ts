@@ -4,6 +4,7 @@
 import Meta, { Basic } from '@/stories/users/picture/picture.stories';
 import { composeStory, createMountableStoryComponent } from '@storybook/testing-angular';
 import { render, screen } from '@testing-library/angular';
+import '@testing-library/jest-dom';
 
 const Primary = composeStory(Basic, Meta);
 
@@ -16,6 +17,6 @@ describe('User picture', () => {
 		});
 
 		const userPictureStory = screen.getByTestId('lu-user-picture');
-		expect(userPictureStory).toBeDefined();
+		expect(userPictureStory).toBeInTheDocument();
 	});
 });

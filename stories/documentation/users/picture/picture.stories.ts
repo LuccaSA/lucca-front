@@ -1,5 +1,5 @@
 import { Component, Input, Optional } from '@angular/core';
-import { ILuUser, LuDisplayInitials, LuUserPictureComponent, LuUserPictureModule } from '@lucca-front/ng/user';
+import { ILuUser, LuDisplayInitials, LuUserDisplayPipe, LuUserPictureComponent, LuUserPictureModule } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 import { bob, squidwards } from '../user.mocks';
 
@@ -39,6 +39,7 @@ export default {
 		})),
 		moduleMetadata({
 			imports: [LuUserPictureModule],
+			providers: [LuUserDisplayPipe],
 			declarations: [UserPictureStory],
 		}),
 	],

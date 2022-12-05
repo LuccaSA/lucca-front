@@ -1,13 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
-import { ALuOptionOperator } from '@lucca-front/ng/option';
+import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
 import { ILuUser } from '../../user.model';
 import { LuUserSearcherIntl } from './user-searcher.intl';
-import { ILuUserSearcherLabel } from './user-searcher.translate';
+import { LU_USER_SEARCHER_TRANSLATIONS } from './user-searcher.token';
+import { ILuUserSearcherLabel, luUserSearcherTranslations } from './user-searcher.translate';
 
 interface UserPagedSearcherForm {
 	clue: string;
@@ -19,6 +21,8 @@ interface UserPagedSearcherForm {
 	templateUrl: 'user-searcher.component.html',
 	styleUrls: ['user-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,
@@ -43,6 +47,11 @@ interface UserPagedSearcherForm {
 		{
 			provide: ALuUserService,
 			useClass: LuUserV3Service,
+		},
+		LuUserSearcherIntl,
+		{
+			provide: LU_USER_SEARCHER_TRANSLATIONS,
+			useValue: luUserSearcherTranslations,
 		},
 	],
 })

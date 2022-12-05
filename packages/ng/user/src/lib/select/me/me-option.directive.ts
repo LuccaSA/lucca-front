@@ -8,6 +8,7 @@ import { ILuUser } from '../../user.model';
 
 @Directive({
 	selector: '[luUserMeOption]',
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

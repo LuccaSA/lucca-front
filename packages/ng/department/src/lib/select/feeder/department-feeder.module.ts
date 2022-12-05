@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuDepartmentFeederComponent } from './department-feeder.component';
 
 @NgModule({
-	declarations: [LuDepartmentFeederComponent],
+	imports: [LuDepartmentFeederComponent],
 	exports: [LuDepartmentFeederComponent],
 })
 export class LuDepartmentFeederModule {}

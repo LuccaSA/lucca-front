@@ -4,6 +4,7 @@ import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 @Pipe({
 	name: 'luNumber',
 	pure: true,
+	standalone: true,
 })
 export class LuNumberPipe implements PipeTransform {
 	constructor(@Inject(LOCALE_ID) protected locale: string) {}

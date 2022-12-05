@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
-import { ILuOptionOperator, ALuOptionOperator } from '../option-operator.model';
 import { BehaviorSubject } from 'rxjs';
+import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Component({
 	selector: 'lu-option-feeder',
 	template: '',
 	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

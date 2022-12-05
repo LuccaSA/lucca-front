@@ -5,6 +5,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Directive({
 	selector: '[luForOptions]',
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

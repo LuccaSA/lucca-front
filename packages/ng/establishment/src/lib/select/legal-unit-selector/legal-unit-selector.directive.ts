@@ -6,6 +6,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 
 @Directive({
 	selector: '[luLegalUnitSelector]',
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionSelector,
