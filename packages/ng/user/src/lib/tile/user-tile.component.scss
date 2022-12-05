@@ -1,2 +1,6 @@
 @import '_definitions';
-@include userTileStyle;
+
+:host {
+  @include userPictureVars;
+  @include userTileStyle;
+}
