@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuSimpleSelectInputComponent, LU_SIMPLE_SELECT_COMPONENTS } from '@lucca-front/ng/simple-select';
+import { LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 interface ILegume {
@@ -10,7 +10,7 @@ interface ILegume {
 }
 
 const allLegumes = [
-	{ name: 'Artichaut', index: 1} ,
+	{ name: 'Artichaut', index: 1 },
 	{ name: 'Asperge', index: 2 },
 	{ name: 'Aubergine', index: 3 },
 	{ name: 'Avocat', index: 4 },
@@ -35,7 +35,7 @@ const allLegumes = [
 	{ name: 'Navet', index: 23 },
 	{ name: 'Panais', index: 24 },
 	{ name: 'Petits pois', index: 25 },
-	{ name: 'Poivron', index: 26 } ,
+	{ name: 'Poivron', index: 26 },
 	{ name: 'Pomme de terre', index: 27 },
 	{ name: 'Potimarron', index: 28 },
 	{ name: 'Radis', index: 29 },
@@ -123,7 +123,7 @@ class SimpleSelectStory {
 }
 
 @NgModule({
-	imports: [CommonModule, FormsModule, ...LU_SIMPLE_SELECT_COMPONENTS],
+	imports: [CommonModule, FormsModule, LuSimpleSelectInputComponent, LuOptionDirective, LuDisplayerDirective],
 	declarations: [SimpleSelectStory],
 	exports: [SimpleSelectStory],
 })

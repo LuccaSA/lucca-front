@@ -4,7 +4,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmi
 import { FormsModule } from '@angular/forms';
 import { asyncScheduler, map, Observable, observeOn, take, takeUntil } from 'rxjs';
 import { LuOptionComponent } from '../option/index';
-import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
+import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
 
 export abstract class LuSelectPanelRef<T> {
 	closed = new EventEmitter<void>();
@@ -44,7 +44,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue?: T;
-	optionTpl: TemplateRef<{ $implicit: T }>;
+	optionTpl: TemplateRef<LuOptionContext<T>>;
 	searchable: boolean;
 
 	@ViewChild('searchInput')

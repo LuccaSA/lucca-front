@@ -6,8 +6,12 @@ export interface ILuSelectPanelData<T> {
 	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue: T | undefined;
-	optionTpl: TemplateRef<{ $implicit: T }>;
+	optionTpl: TemplateRef<LuOptionContext<T>>;
 	searchable: boolean;
+}
+
+export interface LuOptionContext<T> {
+	$implicit: T;
 }
 
 export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
