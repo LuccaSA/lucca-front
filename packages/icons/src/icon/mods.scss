@@ -1,3 +1,0 @@
-@mixin size($size, $ratio: 1.25) {
-	font-size: calc(var(--sizes-#{$size}-font-size) * $ratio);
-}
