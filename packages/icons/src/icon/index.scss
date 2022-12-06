@@ -4,6 +4,7 @@
 
 .lucca-icon {
 	@include component;
+	@include vars;
 
 	@each $name, $content in config.$icons {
 		&.icon-#{core.camelize($name)} {
@@ -12,26 +13,26 @@
 	}
 
 	&.size-smaller {
-		@include size('smaller');
+		--icon-size:  calc(var(--sizes-smaller-font-size) * 1.25);
 	}
 
 	&.size-small {
-		@include size('small');
+		--icon-size:  calc(var(--sizes-small-font-size) * 1.25);
 	}
 
 	&.size-standard {
-		@include size('standard');
+		--icon-size:  calc(var(--sizes-standard-font-size) * 1.25);
 	}
 
 	&.size-big {
-		@include size('big');
+		--icon-size:  calc(var(--sizes-big-font-size) * 1.25);
 	}
 
 	&.size-bigger {
-		@include size('bigger');
+		--icon-size:  calc(var(--sizes-bigger-font-size) * 1.25);
 	}
 
 	&.size-biggest {
-		@include size('biggest');
+		--icon-size:  calc(var(--sizes-biggest-font-size) * 1.25);
 	}
 }
