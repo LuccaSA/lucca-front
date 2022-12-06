@@ -1,7 +1,5 @@
 @mixin small {
-	.radioButtons-item-label {
-		font-size: var(--components-radioButtons-small-font-size);
-		line-height: var(--components-radioButtons-small-line-height);
-		padding: var(--components-radioButtons-small-padding);
-	}
+	--components-radioButtons-font-size: var(--sizes-small-font-size);
+	--components-radioButtons-line-height: var(--sizes-smaller-line-height);
+	--components-radioButtons-padding: var(--spacings-smaller) var(--spacings-small);
 }
