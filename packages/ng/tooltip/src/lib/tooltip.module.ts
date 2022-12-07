@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { LuTooltipTriggerModule } from './trigger/index';
 import { LuTooltipPanelModule } from './panel/index';
+import { LuTooltipTriggerModule } from './trigger/index';
 
 @NgModule({
 	imports: [LuTooltipTriggerModule, LuTooltipPanelModule],

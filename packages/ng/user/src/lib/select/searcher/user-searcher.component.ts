@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, getIntl, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
-import { ALuOptionOperator } from '@lucca-front/ng/option';
+import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
@@ -18,6 +19,8 @@ interface UserPagedSearcherForm {
 	templateUrl: 'user-searcher.component.html',
 	styleUrls: ['user-searcher.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
 			provide: ALuOptionOperator,

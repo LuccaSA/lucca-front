@@ -5,11 +5,13 @@ import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/index';
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
 import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
+
 @Component({
 	selector: 'lu-tree-option-select-all',
 	templateUrl: './select-all.component.html',
 	styleUrls: ['select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

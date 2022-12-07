@@ -1,27 +1,36 @@
-<div class="lu-sidepanel-panel-inner" cdkTrapFocus="true" cdkTrapFocusAutoCapture="true" role="dialog" aria-modal="true">
-	<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
-		<h3 class="lu-modal-header-title">{{ title$ | async }}</h3>
-		<button type="button" class="lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
-			<span aria-hidden="true" class="lucca-icon icon-cross"></span>
-			<span class="u-mask">{{ closeLabel }}</span>
-		</button>
-	</div>
-	<div class="lu-modal-content">
-		<ng-container #container></ng-container>
-	</div>
-	<div class="lu-modal-footer">
-		<button
-			type="button"
-			*ngIf="!isSubmitHidden"
-			class="button palette-{{ submitPalette }}"
-			[disabled]="submitDisabled$ | async"
-			[class.mod-counter]="hasSubmitCounter$ | async"
-			[ngClass]="submitClass$ | async"
-			(click)="submit()"
-		>
-			{{ submitLabel$ | async }}
-			<label class="button-counter" *ngIf="hasSubmitCounter$ | async">{{ submitCounter$ | async }}</label>
-		</button>
-		<button type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
+<div
+	class="lu-sidepanel-panel-inner"
+	cdkTrapFocus="true"
+	cdkTrapFocusAutoCapture="true"
+	role="dialog"
+	aria-modal="true"
+	[attr.aria-labelledby]="'luSidepanelTitle' + modalId"
+>
+	<div role="document">
+		<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
+			<button type="button" class="lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
+				<span aria-hidden="true" class="lucca-icon icon-cross"></span>
+				<span class="u-mask">{{ closeLabel }}</span>
+			</button>
+			<h1 [attr.id]="'luSidepanelTitle' + modalId" class="lu-modal-header-title">{{ title$ | async }}</h1>
+		</div>
+		<div class="lu-modal-content">
+			<ng-container #container></ng-container>
+		</div>
+		<div class="lu-modal-footer">
+			<button
+				type="button"
+				*ngIf="!isSubmitHidden"
+				class="button palette-{{ submitPalette }}"
+				[disabled]="submitDisabled$ | async"
+				[class.mod-counter]="hasSubmitCounter$ | async"
+				[ngClass]="submitClass$ | async"
+				(click)="submit()"
+			>
+				{{ submitLabel$ | async }}
+				<label class="button-counter" *ngIf="hasSubmitCounter$ | async">{{ submitCounter$ | async }}</label>
+			</button>
+			<button type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
+		</div>
 	</div>
 </div>

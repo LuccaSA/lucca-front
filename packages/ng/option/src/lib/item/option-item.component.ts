@@ -1,4 +1,5 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 
@@ -7,6 +8,8 @@ import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 	templateUrl: './option-item.component.html',
 	styleUrls: ['./option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [CommonModule],
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionItem,

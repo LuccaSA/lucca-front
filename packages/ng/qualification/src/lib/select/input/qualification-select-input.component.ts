@@ -1,8 +1,11 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
 import { getIntl } from '@lucca-front/ng/core';
-import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { ILuOptionPickerPanel, LuForGroupsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuQualification } from '../../qualification.model';
@@ -13,6 +16,8 @@ import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-sele
 	templateUrl: './qualification-select-input.component.html',
 	styleUrls: ['./qualification-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, OverlayModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForGroupsDirective, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

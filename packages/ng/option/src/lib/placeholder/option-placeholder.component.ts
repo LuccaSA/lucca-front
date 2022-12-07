@@ -6,6 +6,7 @@ import { LU_OPTION_PLACEHOLDER_TRANSLATIONS } from './option-placeholder.transla
 	selector: 'lu-option-placeholder',
 	templateUrl: './option-placeholder.component.html',
 	styleUrls: ['./option-placeholder.component.scss'],
+	standalone: true,
 })
 export class LuOptionPlaceholderComponent {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix

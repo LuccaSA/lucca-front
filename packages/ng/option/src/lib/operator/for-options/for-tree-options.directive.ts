@@ -1,11 +1,12 @@
 import { Directive, forwardRef, OnDestroy } from '@angular/core';
 
-import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { ILuTree } from '@lucca-front/ng/core';
+import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { LuForOptionsDirective } from './for-options.directive';
 
 @Directive({
 	selector: '[luForTreeOptions]',
+	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

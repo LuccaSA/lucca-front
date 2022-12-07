@@ -1,9 +1,12 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity, getIntl } from '@lucca-front/ng/core';
+import { LuInputClearerComponent, LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuDateAdapterPipe } from '../adapter';
+import { LuDatePickerComponent } from '../picker';
 import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate';
 
 @Component({
@@ -11,6 +14,8 @@ import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate
 	templateUrl: './date-select-input.component.html',
 	styleUrls: ['./date-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [LuDateAdapterPipe, LuDatePickerComponent, LuInputDirective, OverlayModule, LuInputClearerComponent, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

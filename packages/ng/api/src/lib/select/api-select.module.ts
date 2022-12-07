@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { LuApiFeederModule } from './feeder/index';
-import { LuApiSelectInputModule } from './input/index';
-import { LuApiPagerModule } from './pager/index';
-import { LuApiSearcherModule } from './searcher/index';
+import { LuApiFeederComponent } from './feeder/index';
+import { LuApiSelectInputComponent } from './input/index';
+import { LuApiPagerComponent } from './pager/index';
+import { LuApiPagedSearcherComponent, LuApiSearcherComponent } from './searcher/index';
 
 @NgModule({
-	imports: [LuApiFeederModule, LuApiSearcherModule, LuApiPagerModule, LuApiSelectInputModule],
-	exports: [LuApiFeederModule, LuApiSearcherModule, LuApiPagerModule, LuApiSelectInputModule],
+	imports: [LuApiFeederComponent, LuApiPagedSearcherComponent, LuApiSearcherComponent, LuApiPagerComponent, LuApiSelectInputComponent],
+	exports: [LuApiFeederComponent, LuApiPagedSearcherComponent, LuApiSearcherComponent, LuApiPagerComponent, LuApiSelectInputComponent],
 })
 export class LuApiSelectModule {}

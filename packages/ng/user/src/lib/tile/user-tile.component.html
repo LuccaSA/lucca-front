@@ -1,6 +1,6 @@
 <lu-user-picture [user]="user" [displayFormat]="displayPictureFormat"></lu-user-picture>
 <div class="user-info">
-	<span class="user-tile-label">{{ role ? role : user?.jobTitle }}</span>
-	<h5 class="user-tile-title">{{ user | luUserDisplay: displayFormat }}</h5>
-	<span class="user-tile-footnote"><ng-content></ng-content></span>
+	<div class="user-tile-label">{{ role ? role : user?.jobTitle }}</div>
+	<div class="user-tile-title">{{ user | luUserDisplay: displayFormat }}</div>
+	<div class="user-tile-footnote"><ng-content></ng-content></div>
 </div>

@@ -11,6 +11,7 @@ import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 	templateUrl: './select-all.component.html',
 	styleUrls: ['select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuDateInputDirective } from './date-input.directive';
 
 @NgModule({
-	imports: [],
+	imports: [LuDateInputDirective],
 	exports: [LuDateInputDirective],
-	declarations: [LuDateInputDirective],
 })
 export class LuDateInputModule {}

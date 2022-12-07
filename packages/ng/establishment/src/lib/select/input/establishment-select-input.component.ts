@@ -1,4 +1,5 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
@@ -17,12 +18,17 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from '../../service/index';
+import { LuForLegalUnitsDirective } from '../for-legal-units';
+import { LuLegalUnitSelectorDirective } from '../legal-unit-selector';
+import { LuEstablishmentSearcherComponent } from '../searcher';
+import { LuEstablishmentSelectAllComponent } from '../select-all';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
 @Component({
@@ -30,6 +36,19 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	templateUrl: './establishment-select-input.component.html',
 	styleUrls: ['./establishment-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [
+		CommonModule,
+		OverlayModule,
+		LuInputClearerComponent,
+		LuOptionPickerAdvancedComponent,
+		LuEstablishmentSearcherComponent,
+		LuEstablishmentSelectAllComponent,
+		LuLegalUnitSelectorDirective,
+		LuOptionItemComponent,
+		LuForLegalUnitsDirective,
+		LuInputDisplayerDirective,
+	],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

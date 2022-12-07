@@ -1,92 +1,82 @@
 @mixin userTileStyle {
-	:host {
-		display: flex;
-		align-items: center;
-		padding: 0.5em;
+	display: flex;
+	align-items: center;
+	padding: var(--spacings-smaller);
+	gap: var(--spacings-smaller);
+
+	.user-tile-title {
+		font-size: var(--sizes-standard-font-size);
+		line-height: var(--sizes-standard-line-height);
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.user-tile-label {
+    font-size: var(--sizes-small-font-size);
+		line-height: var(--sizes-smaller-line-height);
+    color: var(--palettes-grey-600);
+	}
+
+	.user-tile-footnote {
+		font-size: var(--sizes-small-font-size);
+		line-height: var(--sizes-small-line-height);
+	}
+
+	.user-info {
+		margin: auto 0;
+	}
+
+	&.mod-wordBreak {
+		word-break: break-all;
+	}
+
+	&.mod-nameOnly {
+		.user-tile-label,
+		.user-tile-footnote {
+			display: none;
+		}
+	}
+
+	&.mod-vertical {
+		flex-direction: column;
 
 		lu-user-picture {
-			margin-right: 0.5em;
-		}
-
-		.user-tile-title {
-			font-size: 0.9em;
-			font-weight: 600;
-			line-height: 1.3;
-			margin: 0;
-		}
-
-		.user-tile-label {
-			display: block;
-      font-size: var(--sizes-small-font-size);
-			line-height: 1.1;
-      color: var(--palettes-grey-600);
-		}
-
-		.user-tile-footnote {
-			display: block;
-			font-size: var(--sizes-small-font-size);
-			line-height: var(--sizes-small-line-height);
+			margin-right: 0;
+			margin-bottom: 0.8em;
 		}
 
 		.user-info {
-			margin: auto 0;
-			word-break: break-all;
+			text-align: center;
 		}
-
-		&.mod-nameOnly {
-			.user-tile-label,
-			.user-tile-footnote {
-				display: none;
-			}
-		}
-
-		&.mod-vertical {
-			flex-direction: column;
-
-			lu-user-picture {
-				margin-right: 0;
-				margin-bottom: 0.8em;
-			}
-
-			.user-info {
-				text-align: center;
-			}
-		}
-
-    &.mod-smallest lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-smallest-font-size);
-      height: var(--components-user-picture-sizes-smallest-image-size);
-      width: var(--components-user-picture-sizes-smallest-image-size);
-    }
-
-    &.mod-smaller lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-smaller-font-size);
-      height: var(--components-user-picture-sizes-smaller-image-size);
-      width: var(--components-user-picture-sizes-smaller-image-size);
-    }
-
-    &.mod-small lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-small-font-size);
-      height: var(--components-user-picture-sizes-small-image-size);
-      width: var(--components-user-picture-sizes-small-image-size);
-    }
-
-    &.mod-large lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-large-font-size);
-      height: var(--components-user-picture-sizes-large-image-size);
-      width: var(--components-user-picture-sizes-large-image-size);
-    }
-
-    &.mod-larger lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-larger-font-size);
-      height: var(--components-user-picture-sizes-larger-image-size);
-      width: var(--components-user-picture-sizes-larger-image-size);
-    }
-
-    &.mod-largest lu-user-picture::ng-deep .picture {
-      font-size: var(--components-user-picture-sizes-largest-font-size);
-      height: var(--components-user-picture-sizes-largest-image-size);
-      width: var(--components-user-picture-sizes-largest-image-size);
-    }
 	}
+
+  &.mod-smallest {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-smallest);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-smallest);
+  }
+
+  &.mod-smaller {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-smaller);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-smaller);
+  }
+
+  &.mod-small {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-small);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-small);
+  }
+
+  &.mod-large {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-large);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-large);
+  }
+
+  &.mod-larger {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-larger);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-larger);
+  }
+
+  &.mod-largest {
+		--components-user-picture-image-size: var(--components-user-picture-image-size-largest);
+		--components-user-picture-font-size: var(--components-user-picture-font-size-largest);
+  }
 }

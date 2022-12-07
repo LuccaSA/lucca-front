@@ -1,7 +1,9 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl, ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 
@@ -10,6 +12,8 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 	templateUrl: './tree-option-item.component.html',
 	styleUrls: ['./tree-option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, LuTooltipTriggerDirective],
 	providers: [
 		{
 			provide: ALuTreeOptionItem,

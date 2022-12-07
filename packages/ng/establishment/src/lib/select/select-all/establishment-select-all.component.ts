@@ -9,6 +9,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 	templateUrl: './establishment-select-all.component.html',
 	styleUrls: ['establishment-select-all.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

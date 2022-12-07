@@ -33,7 +33,7 @@
 	box-shadow: 0 0 0 4px var(--palettes-primary-200), 0 0 0 1px var(--palettes-primary-500) inset;
 
 	&::placeholder {
-		color: var(--components-textfield-focus-placeholder);
+		color: var(--palettes-300, var(--components-textfield-focus-placeholder));
 	}
 }
 
@@ -41,7 +41,7 @@
 	box-shadow: 0 0 0 4px var(--palettes-primary-700), 0 0 0 1px var(--palettes-primary-500) inset;
 
 	&::placeholder {
-		color: var(--components-textfield-focus-placeholder);
+		color: var(--palettes-300, var(--components-textfield-focus-placeholder));
 	}
 }
 
@@ -78,7 +78,7 @@
 
 @mixin framedInputInvalid {
 	~ .textfield-label {
-		color: var(--palettes-primary-700);
+		color: var(--palettes-error-700);
 	}
 }
 

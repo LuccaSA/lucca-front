@@ -143,10 +143,10 @@
 @mixin white {
 	.textfield-input {
 		background-color: var(--colors-white-color);
-		box-shadow: 0 0 0 1px var(--palettes-primary-500) inset;
+		box-shadow: 0 0 0 1px var(--palettes-500, var(--palettes-primary-500)) inset;
 
 		&::placeholder {
-			color: var(--components-textfield-focus-placeholder);
+			color: var(--palettes-300, var(--components-textfield-focus-placeholder));
 		}
 	}
 }
@@ -156,7 +156,7 @@
 		background-color: var(--colors-white-color);
 
 		&::placeholder {
-			color: var(--components-textfield-focus-placeholder);
+			color: var(--palettes-300, var(--components-textfield-focus-placeholder));
 		}
 	}
 

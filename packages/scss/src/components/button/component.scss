@@ -20,8 +20,7 @@
 	cursor: pointer;
 
 	.lucca-icon {
-		font-size: 1.25rem;
-		line-height: 1;
+		font-size: var(--icon-size, 1.25rem);
 	}
 
 	&:first-of-type {

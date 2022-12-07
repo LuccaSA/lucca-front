@@ -1,11 +1,16 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuOptionComparer } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDisplayFullname } from '../../display/index';
+import { LuDisplayFullname, LuUserDisplayPipe } from '../../display/index';
+import { LuUserHomonymsComponent } from '../homonyms';
+import { LuUserMeOptionDirective } from '../me';
+import { LuUserPagedSearcherComponent } from '../searcher';
 import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate';
 
 /**
@@ -16,7 +21,23 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 	templateUrl: './user-select-input.component.html',
 	styleUrls: ['./user-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [
+		CommonModule,
+		OverlayModule,
+		LuInputClearerComponent,
+		LuInputDisplayerDirective,
+		LuOptionPickerAdvancedComponent,
+		LuUserPagedSearcherComponent,
+		LuUserHomonymsComponent,
+		LuOptionItemComponent,
+		LuOptionPickerAdvancedComponent,
+		LuUserMeOptionDirective,
+		LuForOptionsDirective,
+		LuUserDisplayPipe,
+	],
 	providers: [
+		LuUserDisplayPipe,
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuUserSelectInputComponent),

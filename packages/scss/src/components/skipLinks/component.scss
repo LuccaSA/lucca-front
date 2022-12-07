@@ -13,13 +13,7 @@
 	bottom: auto;
 
 	@at-root {
-		.skipLinks-list {
-			@include reset.list;
-
-			display: flex;
-		}
-
-		.skipLinks-list-item-action {
+		.skipLinks-action {
 			border: 0;
 			margin: 0;
 			font-weight: 600;

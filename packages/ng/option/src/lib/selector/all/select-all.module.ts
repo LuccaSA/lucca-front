@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuOptionSelectAllComponent } from './select-all.component';
 
 @NgModule({
-	declarations: [LuOptionSelectAllComponent],
+	imports: [LuOptionSelectAllComponent],
 	exports: [LuOptionSelectAllComponent],
 })
 export class LuOptionSelectAllModule {}

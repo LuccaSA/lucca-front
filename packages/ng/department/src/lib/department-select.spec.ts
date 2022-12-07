@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import Meta, { Select } from '@/stories/forms/department/department-select.stories';
+import { HttpClientModule } from '@angular/common/http';
 import { ILuTree } from '@lucca-front/ng/core';
-import { composeStory, createMountableStoryComponent } from '@storybook/testing-angular';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
+import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
 import { ILuDepartment } from './department.model';
+import { LuDepartmentSelectInputComponent } from './select';
 import { ALuDepartmentService, LuDepartmentV3Service } from './service';
 
 const deptMock: ILuTree<ILuDepartment>[] = [
@@ -23,31 +24,37 @@ const deptMock: ILuTree<ILuDepartment>[] = [
 	{ value: { id: 2, name: 'Lucca UK' }, children: [{ value: { id: 21, name: 'Support' }, children: [] }] },
 ];
 
-const Primary = composeStory(Select, Meta);
 const mock = createMock(LuDepartmentV3Service);
 mock.getTrees = jest.fn(() => of(deptMock));
 
 describe('department select', () => {
+	const departmentStoryTemplate = `<label class="textfield">
+	<lu-department-select
+		class="textfield-input"
+		[appInstanceId]="15"
+		[operations]="[1]"
+		[filters]="['isactive=false']"
+		data-testid="lu-select"
+	></lu-department-select>
+</label>`;
+
 	it('should display dialog with a click on a lu select ', async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-		await render(component, {
-			imports: [ngModule],
+		await render(departmentStoryTemplate, {
+			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
 		});
 
 		const luSelectElement = screen.getByTestId('lu-select');
 		await userEvent.click(luSelectElement);
 		const dial = screen.getByRole('dialog');
-		// FIXME not working, don't know why :(
-		// expect(dial).toBeInTheDocument();
-		expect(dial).toBeDefined();
+
+		expect(dial).toBeInTheDocument();
 	});
 
 	it('should filters results when clue is typed in', async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-		await render(component, {
-			imports: [ngModule],
+		await render(departmentStoryTemplate, {
+			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
 			componentProviders: [
 				{
 					provide: ALuDepartmentService,
@@ -57,9 +64,8 @@ describe('department select', () => {
 		});
 
 		const luSelectElement = await screen.findByTestId('lu-select');
-		// FIXME not working, don't know why :(
-		// expect(luSelectElement).toBeInTheDocument();
-		expect(luSelectElement).toBeDefined();
+
+		expect(luSelectElement).toBeInTheDocument();
 		fireEvent.click(luSelectElement);
 		expect(mock.getTrees).toHaveBeenCalled();
 		const items = screen.getByRole('dialog').getElementsByClassName('optionItem');
@@ -71,9 +77,8 @@ describe('department select', () => {
 	});
 
 	it('should check a11y', async () => {
-		const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-		await render(component, {
-			imports: [ngModule],
+		await render(departmentStoryTemplate, {
+			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
 		});
 		const luSelectElement = screen.getByTestId('lu-select');
 

@@ -1,34 +1,17 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin size {
-	font-size: var(--components-button-font-size);
-	line-height: var(--components-button-line-height);
-	padding: var(--components-button-padding);
-
-	.lucca-icon {
-		font-size: var(--components-button-icon-font-size);
-		line-height: var(--components-button-icon-line-height);
-	}
-}
-
 @mixin small {
-	@include size;
-
 	--components-button-font-size: var(--components-button-small-font-size);
 	--components-button-line-height: var(--components-button-small-line-height);
 	--components-button-padding: var(--components-button-small-padding);
-	--components-button-icon-font-size: var(--sizes-standard-font-size);
-	--components-button-icon-line-height: 1;
+	--icon-size: var(--sizes-standard-font-size);
 }
 
 @mixin smaller {
-	@include size;
-
 	--components-button-font-size: var(--components-button-smaller-font-size);
 	--components-button-line-height: var(--components-button-smaller-line-height);
 	--components-button-padding: var(--components-button-smaller-padding);
-	--components-button-icon-font-size: 0.875rem;
-	--components-button-icon-line-height: 1;
+	--icon-size: 0.875rem;
 }
 
 @mixin text {

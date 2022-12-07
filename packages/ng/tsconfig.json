@@ -1,29 +1,17 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"declaration": true,
-		"module": "es2020",
-		"target": "es2017",
-		"baseUrl": "./",
 		"stripInternal": true,
 		"emitDecoratorMetadata": false,
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
 		"outDir": "../build",
 		"rootDirs": ["."],
-		"lib": ["es2020", "dom"],
-		"skipLibCheck": true,
-		"types": [],
-		"paths": {
-			"@lucca-front/ng/*": ["*/src/public-api.ts"]
-		}
+		"skipLibCheck": true
 	},
 	"angularCompilerOptions": {
 		"preserveSymlinks": true,
 		"annotateForClosureCompiler": false,
 		"strictMetadataEmit": true,
-		"skipTemplateCodegen": true,
-		"enableI18nLegacyMessageIdFormat": false,
-		"strictInjectionParameters": true,
-		"strictTemplates": true
+		"skipTemplateCodegen": true
 	}
 }

@@ -7,6 +7,7 @@ import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
 
 @Directive({
 	selector: '[luTooltip]',
+	standalone: true,
 })
 export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
 	@Input('luTooltip') set tooltipContent(c: string | SafeHtml) {

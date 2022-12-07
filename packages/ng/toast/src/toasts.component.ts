@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { merge, Observable, Subject } from 'rxjs';
@@ -10,6 +11,8 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule],
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;

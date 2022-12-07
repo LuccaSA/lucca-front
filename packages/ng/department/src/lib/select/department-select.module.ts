@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { LuDepartmentFeederModule } from './feeder/index';
-import { LuDepartmentSelectInputModule } from './input/index';
+import { LuDepartmentFeederComponent } from './feeder';
+import { LuDepartmentSelectInputComponent } from './input';
 
 @NgModule({
-	imports: [LuDepartmentFeederModule, LuDepartmentSelectInputModule],
-	exports: [LuDepartmentFeederModule, LuDepartmentSelectInputModule],
+	imports: [LuDepartmentFeederComponent, LuDepartmentSelectInputComponent],
+	exports: [LuDepartmentFeederComponent, LuDepartmentSelectInputComponent],
 })
 export class LuDepartmentSelectModule {}
