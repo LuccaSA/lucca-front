@@ -1,10 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LuTooltipPanelComponent } from './tooltip-panel.component';
 
 @NgModule({
-	imports: [CommonModule],
-	declarations: [LuTooltipPanelComponent],
+	imports: [LuTooltipPanelComponent],
 	exports: [LuTooltipPanelComponent],
 })
 export class LuTooltipPanelModule {}

@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuDepartmentModule, LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
+import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
@@ -20,11 +20,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(DepartmentStory),
 		moduleMetadata({
-			imports: [
-				HttpClientModule,
-				LuDepartmentModule,
-				BrowserAnimationsModule,
-			],
+			imports: [HttpClientModule, LuDepartmentSelectInputComponent, BrowserAnimationsModule],
 			declarations: [DepartmentStory],
 		}),
 	],
@@ -37,11 +33,11 @@ const template: Story<DepartmentStory> = (args: DepartmentStory) => ({
 export const Select = template.bind({});
 
 const code = `
-/* 1. Importer LuApiSelectInputModule */
-import { LuDepartmentModule } from '@lucca-front/ng/department';
+/* 1. Importer LuDepartmentSelectInputComponent */
+import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 @NgModule({
-	imports: [LuDepartmentModule]
+	imports: [LuDepartmentSelectInputComponent]
 })
 class StoriesModule {}
 

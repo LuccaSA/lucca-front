@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Directive, forwardRef, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
-import { Observable, Subscription } from 'rxjs';
 import { ILuGroup } from '@lucca-front/ng/core';
+import { Observable, Subscription } from 'rxjs';
+import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 export class LuForGroupContext<T> {
 	public constructor(public $implicit: T, public index: number, public count: number) {}
@@ -25,6 +25,7 @@ export class LuForGroupContext<T> {
 
 @Directive({
 	selector: '[luForGroups]',
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

@@ -1,0 +1,4 @@
+@mixin outlined {
+  box-shadow: 0 0 0 1px var(--palettes-grey-200);
+  background-color: transparent;
+}

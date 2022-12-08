@@ -1,5 +1,7 @@
 /* eslint-disable @angular-eslint/no-output-native */
-import { DOCUMENT } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
@@ -21,6 +23,7 @@ import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
 import { delay, map, share } from 'rxjs/operators';
+import { LuOptionItemComponent } from '../item';
 import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
@@ -302,6 +305,8 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
+	standalone: true,
+	imports: [CommonModule, OverlayModule, LuOptionItemComponent, A11yModule],
 	providers: [
 		{
 			provide: ALuPickerPanel,

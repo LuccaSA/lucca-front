@@ -3,10 +3,12 @@ import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Va
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LuDateInputIntl } from './date-input.intl';
-import { ILuDateInputLabel } from './date-input.translate';
+import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.token';
+import { ILuDateInputLabel, luDateInputTranslations } from './date-input.translate';
 
 @Directive({
 	selector: 'input[luDateInput]',
+	standalone: true,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -18,6 +20,8 @@ import { ILuDateInputLabel } from './date-input.translate';
 			useExisting: LuDateInputDirective,
 			multi: true,
 		},
+		{ provide: LU_DATE_INPUT_TRANSLATIONS, useValue: luDateInputTranslations },
+		LuDateInputIntl,
 	],
 })
 export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> implements Validator, OnInit {

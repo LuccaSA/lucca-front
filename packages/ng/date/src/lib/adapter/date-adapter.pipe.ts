@@ -4,6 +4,7 @@ import { ALuDateAdapter } from '@lucca-front/ng/core';
 @Pipe({
 	name: 'luDate',
 	pure: true,
+	standalone: true,
 })
 export class LuDateAdapterPipe<D> implements PipeTransform {
 	constructor(private _adapter: ALuDateAdapter<D>) {}

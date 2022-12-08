@@ -35,7 +35,9 @@
 
 		.radioButtons-item-label {
 			background-color: var(--colors-white-color);
-			padding: var(--components-radioButtons-padding);
+			padding: var(--spacings-smaller) var(--spacings-small);
+			font-size: var(--components-radioButtons-font-size, var(--sizes-standard-font-size));
+			line-height: var(--components-radioButtons-line-height, var(--sizes-standard-line-height));
 			color: var(--palettes-grey-700);
 			box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
 			transition-duration: var(--commons-animations-durations-fast);

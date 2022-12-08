@@ -1,12 +1,18 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LuOptionComparer } from '@lucca-front/ng/option';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDisplayFullname } from '../../display/index';
+import { LuDisplayFullname, LuUserDisplayPipe } from '../../display/index';
+import { LuUserHomonymsComponent } from '../homonyms';
+import { LuUserMeOptionDirective } from '../me';
+import { LuUserPagedSearcherComponent } from '../searcher';
 import { LuUserSelectInputIntl } from './user-select-input.intl';
-import { ILuUserSelectInputLabel } from './user-select-input.translate';
+import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.token';
+import { ILuUserSelectInputLabel, luUserSelectInputTranslations } from './user-select-input.translate';
 
 /**
  * Displays user'picture or a placeholder with his/her initials and random bg color'
@@ -16,7 +22,28 @@ import { ILuUserSelectInputLabel } from './user-select-input.translate';
 	templateUrl: './user-select-input.component.html',
 	styleUrls: ['./user-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [
+		CommonModule,
+		OverlayModule,
+		LuInputClearerComponent,
+		LuInputDisplayerDirective,
+		LuOptionPickerAdvancedComponent,
+		LuUserPagedSearcherComponent,
+		LuUserHomonymsComponent,
+		LuOptionItemComponent,
+		LuOptionPickerAdvancedComponent,
+		LuUserMeOptionDirective,
+		LuForOptionsDirective,
+		LuUserDisplayPipe,
+	],
 	providers: [
+		LuUserDisplayPipe,
+		{
+			provide: LU_USER_SELECT_INPUT_TRANSLATIONS,
+			useValue: luUserSelectInputTranslations,
+		},
+		LuUserSelectInputIntl,
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuUserSelectInputComponent),

@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuUserMeOptionDirective } from './me-option.directive';
 
 @NgModule({
-	imports: [],
-	declarations: [LuUserMeOptionDirective],
+	imports: [LuUserMeOptionDirective],
 	exports: [LuUserMeOptionDirective],
-	providers: [],
 })
 export class LuUserMeOptionModule {}

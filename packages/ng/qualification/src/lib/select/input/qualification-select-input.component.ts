@@ -1,24 +1,35 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ILuOptionPickerPanel, LuOptionComparer } from '@lucca-front/ng/option';
+import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
+import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { ILuOptionPickerPanel, LuForGroupsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuQualification } from '../../qualification.model';
 import { LuQualificationSelectInputIntl } from './qualification-select-input.intl';
-import { ILuQualificationSelectInputLabel } from './qualification-select-input.translate';
+import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-select-input.token';
+import { ILuQualificationSelectInputLabel, luQualificationSelectInputTranslations } from './qualification-select-input.translate';
 
 @Component({
 	selector: 'lu-qualification-select',
 	templateUrl: './qualification-select-input.component.html',
 	styleUrls: ['./qualification-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, OverlayModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForGroupsDirective, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuQualificationSelectInputComponent),
 			multi: true,
 		},
+		{
+			provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS,
+			useValue: luQualificationSelectInputTranslations,
+		},
+		LuQualificationSelectInputIntl,
 	],
 })
 export class LuQualificationSelectInputComponent<

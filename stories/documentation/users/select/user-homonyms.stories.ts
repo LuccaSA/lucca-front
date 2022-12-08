@@ -2,11 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuApiModule } from '@lucca-front/ng/api';
-import { LuInputDisplayerModule } from '@lucca-front/ng/input';
-import { LuOptionModule } from '@lucca-front/ng/option';
-import { LuSelectModule } from '@lucca-front/ng/select';
-import { LuUserHomonymsComponent, LuUserHomonymsModule, LuUserModule } from '@lucca-front/ng/user';
+import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
@@ -24,14 +24,18 @@ export default {
 			declarations: [UserHomonymsStory],
 			imports: [
 				HttpClientModule,
-				LuUserModule,
-				LuSelectModule,
-				LuApiModule,
-				LuOptionModule,
-				LuUserHomonymsModule,
-				LuInputDisplayerModule,
+				LuUserHomonymsComponent,
+				LuSelectInputComponent,
+				LuOptionPickerComponent,
+				LuApiPagedSearcherComponent,
+				LuInputDisplayerDirective,
+				LuOptionPickerAdvancedComponent,
+				LuOptionItemComponent,
+				LuUserDisplayPipe,
+				LuUserMeOptionDirective,
 				BrowserAnimationsModule,
 				FormsModule,
+				LuForOptionsDirective,
 			],
 		}),
 	],
@@ -72,8 +76,7 @@ const code = `
   </lu-select>
   <span class="textfield-label">Avec gestion des homonymes :</span>
 </label>
-`
-
+`;
 
 export const homonyms = template.bind({});
 homonyms.args = {};
@@ -85,6 +88,6 @@ homonyms.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
-}
+		},
+	},
+};

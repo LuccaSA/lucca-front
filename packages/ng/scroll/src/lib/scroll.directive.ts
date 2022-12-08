@@ -10,6 +10,7 @@ import { ILuScrollable } from './scroll.model';
 @Directive({
 	selector: '[luScroll]',
 	exportAs: 'luScroll',
+	standalone: true,
 })
 export class LuScrollDirective implements ILuScrollable, OnInit {
 	@Input() debounceTime = 100;

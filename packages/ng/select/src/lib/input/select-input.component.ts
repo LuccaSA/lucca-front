@@ -179,6 +179,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

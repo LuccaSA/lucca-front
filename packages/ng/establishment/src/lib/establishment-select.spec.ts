@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import Meta, { Basic } from '@/stories/forms/establishment-select/establishment-select.stories';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { composeStory, createMountableStoryComponent } from '@storybook/testing-angular';
+import { HttpClientModule } from '@angular/common/http';
+import { discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
+import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
 import { ILuEstablishment } from './establishment.model';
+import { LuEstablishmentSelectInputComponent } from './select';
 import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from './service';
 
 const estMock: ILuEstablishment[] = [
@@ -36,7 +37,6 @@ const estMock: ILuEstablishment[] = [
 	},
 ];
 
-const Primary = composeStory(Basic, Meta);
 const mockEstablishment = createMock(LuEstablishmentService);
 mockEstablishment.searchPaged = jest.fn(() => of(estMock));
 mockEstablishment.getAll = jest.fn(() => of(estMock));
@@ -46,27 +46,36 @@ mockLegalUnit.getAll = jest.fn(() => of([]));
 mockLegalUnit.count = jest.fn(() => of(0));
 
 describe('establishment select', () => {
+	const testingStoryTemplate = `<label class="textfield mod-inline u-marginRightSmall">
+	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
+	<span class="textfield-label">Establishment Select</span>
+</label>
+<label class="textfield mod-inline">
+	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="true" data-testid="lu-select-multiple"></lu-establishment-select>
+	<span class="textfield-label">Establishment Multiple Select</span>
+</label>`;
+
 	describe('Basic', () => {
 		it('should display dialog with a click on a lu select ', async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 			});
 
 			const luSelectElement = screen.getByTestId('lu-select');
 			await userEvent.click(luSelectElement);
 			const dial = screen.getByRole('dialog');
-			// FIXME not working, don't know why :(
-			// expect(dial).toBeInTheDocument();
-			expect(dial).toBeDefined();
+
+			expect(dial).toBeInTheDocument();
 		});
 
 		it('should trigger search when clue is typed in', fakeAsync(async () => {
+			discardPeriodicTasks();
+
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 				componentProviders: [
 					{
 						provide: ALuEstablishmentService,
@@ -78,11 +87,9 @@ describe('establishment select', () => {
 					},
 				],
 			});
-
 			const luSelectElement = await screen.findByTestId('lu-select');
-			// FIXME not working, don't know why :(
-			// expect(luSelectElement).toBeInTheDocument();
-			expect(luSelectElement).toBeDefined();
+
+			expect(luSelectElement).toBeInTheDocument();
 			fireEvent.click(luSelectElement);
 			tick(100); // debouncetime du composant
 			expect(mockEstablishment.searchPaged).toHaveBeenCalledWith(null, 0);
@@ -94,9 +101,8 @@ describe('establishment select', () => {
 		}));
 
 		it('should check a11y', async () => {
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 			});
 			const luSelectElement = screen.getByTestId('lu-select');
 
@@ -108,24 +114,19 @@ describe('establishment select', () => {
 	describe('multiple', () => {
 		it('should display dialog with a click on a lu select ', async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 			});
-
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			await userEvent.click(luSelectElement);
 			const dial = screen.getByRole('dialog');
-			// FIXME not working, don't know why :(
-			// expect(dial).toBeInTheDocument();
-			expect(dial).toBeDefined();
+			expect(dial).toBeInTheDocument();
 		});
 
 		it('should select all establishment', fakeAsync(async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 				componentProviders: [
 					{
 						provide: ALuEstablishmentService,
@@ -139,20 +140,21 @@ describe('establishment select', () => {
 			});
 
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
+			expect(luSelectElement).toBeInTheDocument();
+
 			fireEvent.click(luSelectElement);
 			tick(100); // debouncetime du composant
 			const button: HTMLButtonElement = await screen.findByRole('button', { name: 'Select all' });
 			fireEvent.click(button);
-			// FIXME could not query by role checkbox
+			// // FIXME could not query by role checkbox
 			const selectedValues = screen.getByRole('dialog').querySelectorAll('.optionItem-value.is-selected');
 			expect(selectedValues).toHaveLength(3);
 		}));
 
 		it('should deselect all establishment', fakeAsync(async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 				componentProviders: [
 					{
 						provide: ALuEstablishmentService,
@@ -164,7 +166,6 @@ describe('establishment select', () => {
 					},
 				],
 			});
-
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
 			fireEvent.click(luSelectElement);
 			tick(300); // debouncetime du composant
@@ -172,7 +173,6 @@ describe('establishment select', () => {
 			fireEvent.click(t);
 			let selectedValues = screen.getByRole('dialog').querySelectorAll('.optionItem-value.is-selected');
 			expect(selectedValues).toHaveLength(3);
-
 			const button: HTMLButtonElement = screen.getByRole('button', { name: 'Deselect all' });
 			fireEvent.click(button);
 			// FIXME could not query by role checkbox
@@ -181,12 +181,10 @@ describe('establishment select', () => {
 		}));
 
 		it('should check a11y', async () => {
-			const { component, ngModule } = createMountableStoryComponent(Primary({}, {} as any));
-			await render(component, {
-				imports: [ngModule],
+			await render(testingStoryTemplate, {
+				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
 			});
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
-
 			const results = await axe(luSelectElement);
 			expect(results).toHaveNoViolations(); // of course not
 		});

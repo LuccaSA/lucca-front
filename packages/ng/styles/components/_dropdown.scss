@@ -1,6 +1,6 @@
 :root {
-	--components-dropdown-width: 14rem;
-	--components-dropdown-max-width: 90vw;
+	--components-dropdown-min-width: 10rem;
+	--components-dropdown-max-width: 30rem;
 	--components-dropdown-max-height: 60vh;
 }
 
@@ -8,8 +8,7 @@
 	margin: calc(var(--spacings-smaller) * -1);
 	padding: 0;
 	border-radius: var(--commons-border-radius);
-	width: var(--components-dropdown-width);
-	max-width: var(--components-dropdown-max-width);
+	max-width: 90vw;
 	max-height: var(--components-dropdown-max-height);
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -19,6 +18,8 @@
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	min-width: var(--components-dropdown-min-width);
+	max-width: var(--components-dropdown-max-width);
 }
 
 .lu-dropdown-options-item-action {

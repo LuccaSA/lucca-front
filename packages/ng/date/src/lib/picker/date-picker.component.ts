@@ -1,10 +1,15 @@
 //FIXME
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 /* eslint-disable @angular-eslint/no-output-native */
+import { A11yModule } from '@angular/cdk/a11y';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
+import { LuCalendarInputComponent } from '../calendar';
+import { LuDateInputDirective } from '../input';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -12,6 +17,8 @@ import { luTransformPopover } from '@lucca-front/ng/popover';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'LuDatePicker',
 	animations: [luTransformPopover],
+	standalone: true,
+	imports: [FormsModule, CommonModule, LuCalendarInputComponent, LuDateInputDirective, A11yModule],
 	providers: [
 		{
 			provide: ALuPickerPanel,

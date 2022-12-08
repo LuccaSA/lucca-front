@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LuForLegalUnitsDirective } from './for-legal-units.directive';
 
 @NgModule({
-	declarations: [LuForLegalUnitsDirective],
+	imports: [LuForLegalUnitsDirective],
 	exports: [LuForLegalUnitsDirective],
 })
 export class LuForLegalUnitsModule {}

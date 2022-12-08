@@ -5,6 +5,7 @@ import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 
 @Directive({
 	selector: '[luForLegalUnits]',
+	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionOperator,

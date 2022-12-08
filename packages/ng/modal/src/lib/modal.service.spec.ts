@@ -1,9 +1,9 @@
 import { Component, Type } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
-import { LuModalModule } from 'dist/ng/modal';
 import { BehaviorSubject } from 'rxjs';
 import { ILuModalContent } from './modal.model';
+import { LuModalModule } from './modal.module';
 import { LuModal } from './modal.service';
 
 @Component({

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { LuCalendarInputModule } from './calendar/index';
-import { LuDatePickerModule } from './picker/index';
-import { LuDateInputModule } from './input/index';
-import { LuDateAdapterModule } from './adapter/index';
-import { LuDateSelectInputModule } from './select/index';
+import { LuDateAdapterPipe } from './adapter/index';
+import { LuCalendarInputComponent } from './calendar/index';
+import { LuDateInputDirective } from './input/index';
+import { LuDatePickerComponent } from './picker/index';
+import { LuDateSelectInputComponent } from './select/index';
 
 @NgModule({
-	imports: [LuCalendarInputModule, LuDatePickerModule, LuDateInputModule, LuDateAdapterModule, LuDateSelectInputModule],
-	exports: [LuCalendarInputModule, LuDatePickerModule, LuDateInputModule, LuDateAdapterModule, LuDateSelectInputModule],
+	imports: [LuCalendarInputComponent, LuDatePickerComponent, LuDateInputDirective, LuDateAdapterPipe, LuDateSelectInputComponent],
+	exports: [LuCalendarInputComponent, LuDatePickerComponent, LuDateInputDirective, LuDateAdapterPipe, LuDateSelectInputComponent],
 })
 export class LuDateModule {}
