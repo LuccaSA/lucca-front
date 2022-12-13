@@ -7,31 +7,40 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	standalone: true,
 	imports: [LuSkipLinksComponent],
 	template: `
+		<button autofocus class="u-mask"></button> <!-- Only for documentation: set focus inside iframe  -->
 		<lu-skip-links></lu-skip-links>
-		<div id="lucca-banner-solutions-container" class="u-displayFlex u-gapSmaller u-marginBottomSmall">
-			banner
-			<button type="button" class="button u-marginReset">Banner</button>
-			<button type="button" class="button u-marginReset">Banner</button>
-			<button type="button" class="button u-marginReset">Banner</button>
-			<button type="button" class="button u-marginReset">Banner</button>
+		<div id="lucca-banner-solutions-container">
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-apps"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-userGroup"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-rocket"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-info"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-notification"></span></button>
 		</div>
-		<div class="u-displayFlex u-gapSmall">
-			<div id="navSide" class="u-displayFlex u-flexDirectionColumn u-gapSmaller">
-				navside
-				<button type="button" class="button u-marginReset">Navside</button>
-				<button type="button" class="button u-marginReset">Navside</button>
-				<button type="button" class="button u-marginReset">Navside</button>
-				<button type="button" class="button u-marginReset">Navside</button>
-			</div>
-			<div id="main-content" class="u-displayFlex u-flexDirectionColumn u-gapSmaller">
-				main content
-				<button type="button" class="button u-marginReset">Main content</button>
-				<button type="button" class="button u-marginReset">Main content</button>
-				<button type="button" class="button u-marginReset">Main content</button>
-				<button type="button" class="button u-marginReset">Main content</button>
-			</div>
+		<div id="navSide">
+			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-send"></span>Internal navigation</button>
+			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-clock"></span>Internal navigation</button>
+			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-watch"></span>Internal navigation</button>
+		</div>
+		<div id="main-content">
+			<a href="#" class="link">Content link</a>
+			<a href="#" class="link">Content link</a>
+			<a href="#" class="link">Content link</a>
+			<a href="#" class="link">Content link</a>
 		</div>
 	`,
+	styles: [`
+		#navSide {
+			margin-top: var(--spacings-smaller);
+		}
+
+		#main-content {
+			margin-top: var(--spacings-smaller);
+		}
+
+		.link {
+			margin-right: var(--spacings-smaller);
+		}
+	`]
 })
 class SkipLinksStory {}
 
@@ -70,4 +79,7 @@ Basic.parameters = {
 			code,
 		},
 	},
+	styles: [`
+		.button {opacity: .4;}`,
+	],
 };
