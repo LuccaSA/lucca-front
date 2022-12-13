@@ -7,7 +7,6 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	standalone: true,
 	imports: [LuSkipLinksComponent],
 	template: `
-		<button autofocus class="u-mask"></button> <!-- Only for documentation: set focus inside iframe  -->
 		<lu-skip-links></lu-skip-links>
 		<div id="lucca-banner-solutions-container">
 			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-apps"></span></button>
