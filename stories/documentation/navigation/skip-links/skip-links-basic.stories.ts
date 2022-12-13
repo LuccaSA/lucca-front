@@ -36,7 +36,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 class SkipLinksStory {}
 
 export default {
-	title: 'Documentation/A11y/SkipLinks/Basic',
+	title: 'Documentation/Navigation/SkipLinks/Basic',
 	component: LuSkipLinksComponent,
 	decorators: [
 		componentWrapperDecorator(SkipLinksStory),
