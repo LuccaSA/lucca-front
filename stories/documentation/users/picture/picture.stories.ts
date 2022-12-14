@@ -1,6 +1,8 @@
 import { Component, Input, Optional } from '@angular/core';
 import { ILuUser, LuDisplayInitials, LuUserDisplayPipe, LuUserPictureComponent, LuUserPictureModule } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { expect } from '@storybook/jest';
+import { within } from '@storybook/testing-library';
 import { bob, squidwards } from '../user.mocks';
 
 @Component({
@@ -86,4 +88,9 @@ Basic.parameters = {
 			code,
 		},
 	},
+};
+
+Basic.play = async ({ canvasElement }) => {
+	const canvas = within(canvasElement);
+	await expect(canvas).toBeInTheDocument();
 };
