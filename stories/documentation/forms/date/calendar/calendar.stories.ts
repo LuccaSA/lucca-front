@@ -1,9 +1,13 @@
+import { registerLocaleData } from '@angular/common';
+import localesFr from '@angular/common/locales/fr';
 import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateModule } from '@lucca-front/ng/date';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+
+registerLocaleData(localesFr);
 
 @Component({
 	selector: 'date-calendar-stories',
