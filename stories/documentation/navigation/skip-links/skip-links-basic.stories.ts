@@ -78,7 +78,4 @@ Basic.parameters = {
 			code,
 		},
 	},
-	styles: [`
-		.button {opacity: .4;}`,
-	],
 };
