@@ -1,4 +1,5 @@
 @mixin component {
+	display: inline;
 	background-color: transparent;
 	border: 0;
 	color: var(--commons-text-link-color);
@@ -7,6 +8,7 @@
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;
+<<<<<<< HEAD
 
 	&:not(.is-disabled) {
 		&:hover,
@@ -14,4 +16,6 @@
 			color: var(--commons-text-link-hover);
 		}
 	}
+=======
+>>>>>>> 595397968 (1752 - color + size + icon)
 }
