@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-toasts-background: #323232;
+	--components-toasts-background: var(--palettes-grey-800);
 	--components-toasts-color: var(--colors-white-color);
 	--components-toasts-top: var(--spacings-standard);
 	--components-toasts-right: var(--spacings-standard);

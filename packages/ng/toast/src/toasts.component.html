@@ -7,7 +7,8 @@
 			[ngClass]="iconClassByToastType[toast.type]"
 		>
 		</span>
-		<span [innerHtml]="toast.message"> </span>
+		<strong [innerHtml]="toast.message"> </strong>
+		<div [innerHtml]="toast.message"></div>
 		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
 			<span class="lucca-icon icon-cross size-smaller" aria-hidden="true"></span>
 			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
