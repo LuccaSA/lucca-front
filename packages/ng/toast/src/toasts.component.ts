@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { LuToastIntl } from './toasts.intl';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
-import { LU_TOAST_TRANSLATIONS } from './toasts.token';
-import { ILuToastLabel, luToastTranslations } from './toasts.translate';
+import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 
 @Component({
 	selector: 'lu-toasts',
@@ -14,13 +13,6 @@ import { ILuToastLabel, luToastTranslations } from './toasts.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [CommonModule],
-	providers: [
-		LuToastIntl,
-		{
-			provide: LU_TOAST_TRANSLATIONS,
-			useValue: luToastTranslations,
-		},
-	],
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;
@@ -34,7 +26,9 @@ export class LuToastsComponent implements OnDestroy {
 
 	private destroy$ = new Subject<void>();
 
-	constructor(@Inject(LuToastIntl) public intl: ILuToastLabel, private toastsService: LuToastsService) {}
+	public intl = getIntl(LU_TOAST_TRANSLATIONS);
+
+	constructor(private toastsService: LuToastsService) {}
 
 	public ngOnDestroy(): void {
 		this.destroy$.next();

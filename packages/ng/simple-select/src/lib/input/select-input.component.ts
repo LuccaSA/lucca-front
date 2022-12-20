@@ -66,9 +66,6 @@ class LuSelectOverlayContainer extends OverlayContainer {
 	}
 }
 
-@Injectable()
-class LuSelectOverlay extends Overlay {}
-
 class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	instance: LuSelectPanelComponent<T>;
 	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
@@ -124,7 +121,6 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 			provide: OverlayContainer,
 			useClass: LuSelectOverlayContainer,
 		},
-		LuSelectOverlay,
 		{ provide: SELECT_ID, useFactory: selectIdFactory },
 		{ provide: SELECT_LABEL, useFactory: selectLabelFactory, deps: [ElementRef] },
 		{ provide: SELECT_LABEL_ID, useFactory: selectLabelIdFactory, deps: [SELECT_LABEL, SELECT_ID] },
@@ -222,7 +218,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 		protected scrollStrategies: ScrollStrategyOptions,
 		protected elementRef: ElementRef<HTMLElement>,
 		protected injector: Injector,
-		protected overlay: LuSelectOverlay,
+		protected overlay: Overlay,
 		protected changeDetectorRef: ChangeDetectorRef,
 		overlayContainer: OverlayContainer,
 		@Inject(SELECT_LABEL) protected label: HTMLElement | undefined,

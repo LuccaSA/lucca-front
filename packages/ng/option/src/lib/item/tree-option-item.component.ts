@@ -1,13 +1,11 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Inject, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { ILuTree } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { getIntl, ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { LuTreeOptionItemIntl } from './tree-option-item.intl';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
-import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.token';
-import { ILuTreeOptionItemLabel, luTreeOptionItemTranslations } from './tree-option-item.translate';
+import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 
 @Component({
 	selector: 'lu-tree-option',
@@ -22,11 +20,6 @@ import { ILuTreeOptionItemLabel, luTreeOptionItemTranslations } from './tree-opt
 			useExisting: forwardRef(() => LuTreeOptionItemComponent),
 			multi: true,
 		},
-		{
-			provide: LU_TREE_OPTION_ITEM_TRANSLATIONS,
-			useValue: luTreeOptionItemTranslations,
-		},
-		LuTreeOptionItemIntl,
 	],
 })
 export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
@@ -105,7 +98,9 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	constructor(@Inject(LuTreeOptionItemIntl) public intl: ILuTreeOptionItemLabel, private _cdr: ChangeDetectorRef) {
+	public intl = getIntl(LU_TREE_OPTION_ITEM_TRANSLATIONS);
+
+	constructor(private _cdr: ChangeDetectorRef) {
 		super();
 	}
 

@@ -1,11 +1,11 @@
+import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
 
+export const LU_MODAL_TRANSLATIONS = new InjectionToken('LuModalTranslations', {
+	factory: () => luModalTranslations,
+});
+
 export interface ILuModalLabel {
-	submit: string;
-	cancel: string;
-	close: string;
-}
-export abstract class ALuModalLabel {
 	submit: string;
 	cancel: string;
 	close: string;

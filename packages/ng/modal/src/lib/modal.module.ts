@@ -6,21 +6,13 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { luDefaultModalConfig } from './modal-config.default';
 import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
 import { LuModalRefFactory } from './modal-ref.factory';
-import { LuModalIntl } from './modal.intl';
 import { LuModal } from './modal.service';
-import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY, LU_MODAL_TRANSLATIONS } from './modal.token';
-import { luModalTranslations } from './modal.translate';
+import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY } from './modal.token';
 
 @NgModule({
 	imports: [OverlayModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
 	exports: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
-	providers: [
-		LuModal,
-		LuModalIntl,
-		{ provide: LU_MODAL_CONFIG, useValue: luDefaultModalConfig },
-		{ provide: LU_MODAL_REF_FACTORY, useClass: LuModalRefFactory },
-		{ provide: LU_MODAL_TRANSLATIONS, useValue: luModalTranslations },
-	],
+	providers: [LuModal, { provide: LU_MODAL_CONFIG, useValue: luDefaultModalConfig }, { provide: LU_MODAL_REF_FACTORY, useClass: LuModalRefFactory }],
 })
 export class LuModalModule {}

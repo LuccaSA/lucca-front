@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Inject, Input, OnDestroy, OnInit, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, getIntl, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, filter, map, scan, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuUserService, LuUserV3Service } from '../../service/index';
 import { ILuUser } from '../../user.model';
-import { LuUserSearcherIntl } from './user-searcher.intl';
-import { LU_USER_SEARCHER_TRANSLATIONS } from './user-searcher.token';
-import { ILuUserSearcherLabel, luUserSearcherTranslations } from './user-searcher.translate';
+import { LU_USER_SEARCHER_TRANSLATIONS } from './user-searcher.translate';
 
 interface UserPagedSearcherForm {
 	clue: string;
@@ -47,11 +45,6 @@ interface UserPagedSearcherForm {
 		{
 			provide: ALuUserService,
 			useClass: LuUserV3Service,
-		},
-		LuUserSearcherIntl,
-		{
-			provide: LU_USER_SEARCHER_TRANSLATIONS,
-			useValue: luUserSearcherTranslations,
 		},
 	],
 })
@@ -93,11 +86,9 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 	private _isLastPage: boolean;
 	private _options: U[] = [];
 
-	constructor(
-		@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>,
-		@Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>,
-		@Inject(LuUserSearcherIntl) public intl: ILuUserSearcherLabel,
-	) {
+	public intl = getIntl(LU_USER_SEARCHER_TRANSLATIONS);
+
+	constructor(@Inject(ALuUserService) @Optional() @SkipSelf() hostService: LuUserV3Service<U>, @Inject(ALuUserService) @Self() selfService: LuUserV3Service<U>) {
 		this._service = hostService || selfService;
 
 		const clue: FormControl = new FormControl('');

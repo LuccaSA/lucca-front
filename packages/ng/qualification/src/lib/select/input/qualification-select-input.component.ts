@@ -1,16 +1,15 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
+import { getIntl } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuForGroupsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuQualification } from '../../qualification.model';
-import { LuQualificationSelectInputIntl } from './qualification-select-input.intl';
-import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-select-input.token';
-import { ILuQualificationSelectInputLabel, luQualificationSelectInputTranslations } from './qualification-select-input.translate';
+import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-select-input.translate';
 
 @Component({
 	selector: 'lu-qualification-select',
@@ -25,11 +24,6 @@ import { ILuQualificationSelectInputLabel, luQualificationSelectInputTranslation
 			useExisting: forwardRef(() => LuQualificationSelectInputComponent),
 			multi: true,
 		},
-		{
-			provide: LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS,
-			useValue: luQualificationSelectInputTranslations,
-		},
-		LuQualificationSelectInputIntl,
 	],
 })
 export class LuQualificationSelectInputComponent<
@@ -45,14 +39,14 @@ export class LuQualificationSelectInputComponent<
 
 	isSearching = false;
 
+	public intl = getIntl(LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS);
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
 		protected override _elementRef: ElementRef<HTMLElement>,
 		protected override _viewContainerRef: ViewContainerRef,
 		protected override _renderer: Renderer2,
-		@Inject(LuQualificationSelectInputIntl)
-		public intl: ILuQualificationSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
