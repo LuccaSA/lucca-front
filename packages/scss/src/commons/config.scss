@@ -213,6 +213,7 @@ $loading: (
 );
 
 $textLink: (
-	color: #00b2ed,
-	hover: #16c5fe,
+	color: var(--palettes-primary-700),
+	hover: var(--palettes-primary-600),
+	disabled: var(--palettes-grey-500),
 );

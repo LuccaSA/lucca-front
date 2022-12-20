@@ -1,0 +1,24 @@
+@mixin small {
+	font-size: var(--sizes-small-font-size);
+	line-height: var(--sizes-smaller-line-height);
+}
+
+@mixin icon {
+	@at-root {
+		.lucca-icon {
+			text-decoration: none;
+			margin-left: var(--spacings-smallest);
+			font-size: var(--sizes-standard-font-size);
+			line-height: var(--sizes-smaller-line-height);
+		}
+	}
+}
+
+@mixin iconSmall {
+	@at-root {
+		.lucca-icon {
+			font-size: var(--sizes-small-font-size);
+			line-height: 0.875rem;
+		}
+	}
+}

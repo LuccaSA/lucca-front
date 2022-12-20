@@ -3,4 +3,20 @@
 .link {
 	@include vars;
 	@include component;
+
+	&.mod-small {
+		@include small;
+	}
+
+	&.mod-icon {
+		@include icon;
+
+		&.mod-small {
+			@include iconSmall;
+		}
+	}
+
+	&:is(.is-disabled) {
+		@include disabled;
+	}
 }
