@@ -39,20 +39,6 @@
 	}
 }
 
-.lu-popup-panel {
-	&.mod-XS,
-	&.mod-S {
-		.lu-modal-panel-inner {
-			.lu-modal-header {
-				border-bottom-width: 0;
-			}
-			.lu-modal-content {
-				padding-top: 0;
-			}
-		}
-	}
-}
-
 .lu-modal-panel-inner {
 	display: flex;
 	flex-flow: column;
@@ -84,7 +70,7 @@
 .lu-modal-header-close {
 	position: absolute;
 	right: 1.25rem;
-	top: 1.25rem;
+	top: 0.75rem;
 	transition: background var(--commons-animations-durations-fast) ease;
 }
 
