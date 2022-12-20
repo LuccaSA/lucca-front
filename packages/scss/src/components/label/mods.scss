@@ -1,42 +1,29 @@
 @mixin number {
 	height: var(--sizes-standard-line-height);
 	font-size: var(--sizes-smaller-font-size);
-	min-width: var(--sizes-standard-line-height);
-	line-height: var(--sizes-standard-line-height);
-	padding: 0 var(--spacings-smaller);
+	width: var(--sizes-standard-line-height);
+	line-height: var(--sizes-small-line-height);
 	border-radius: 9999px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 
 @mixin numberSmall {
 	height: var(--sizes-small-line-height);
-	min-width: var(--sizes-small-line-height);
-	line-height: var(--sizes-small-line-height);
-	padding: 0 var(--spacings-smallest);
+	width: var(--sizes-small-line-height);
 }
 
 @mixin numberSmaller {
 	height: var(--sizes-smaller-line-height);
-	min-width: var(--sizes-smaller-line-height);
-	line-height: var(--sizes-smaller-line-height);
-	padding: 0 0.1rem;
+	width: var(--sizes-smaller-line-height);
 }
 
 @mixin icon {
-	display: inline-flex;
-	align-items: center;
-	padding-left: 0.6rem;
-	padding-right: 0.6rem;
+	gap: 0 var(--spacings-smallest);
 
 	.label-icon {
 		font-size: var(--sizes-standard-font-size);
-		margin-right: var(--spacings-smallest);
-
-		&:last-child {
-			margin-right: 0;
-			margin-left: var(--spacings-smallest);
-		}
-		&:only-child {
-			margin: 0;
-		}
+		margin: 0;
 	}
 }
