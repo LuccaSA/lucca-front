@@ -1,12 +1,3 @@
-@mixin state {
-	&:not(.is-disabled) {
-		&:hover,
-		&:focus {
-			color: var(--commons-text-link-hover);
-		}
-	}
-}
-
 @mixin disabled {
 	color: var(--commons-text-link-disabled);
 	cursor: not-allowed;

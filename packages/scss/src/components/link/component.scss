@@ -8,4 +8,11 @@
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;
+
+	&:not(.is-disabled) {
+		&:hover,
+		&:focus {
+			color: var(--commons-text-link-hover);
+		}
+	}
 }
