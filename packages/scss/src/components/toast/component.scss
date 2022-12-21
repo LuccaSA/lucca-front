@@ -37,6 +37,13 @@
 			overflow: hidden;
 			position: relative;
 			transform-origin: top;
+			display: flex;
+			flex-direction: column;
+			gap: var(--spacings-smaller) 0;
+		}
+
+		.toasts-item-title {
+			font-weight: 600;
 		}
 
 		.toasts-item-kill {

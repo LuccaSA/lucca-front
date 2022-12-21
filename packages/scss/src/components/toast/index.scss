@@ -15,4 +15,10 @@
 	&.mod-withCircularGauge {
 		@include circularGauge;
 	}
+
+	.toasts-item {
+		&.mod-icon {
+			@include icon;
+		}
+	}
 }

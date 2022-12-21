@@ -82,7 +82,8 @@
 
 	.toasts-item-kill {
 		transition: transform 100ms, opacity 100ms;
-		top: 0.625rem;
+		top: 0.5rem;
+		right: 1rem;
 		bottom: auto;
 
 		.lucca-icon {
@@ -141,5 +142,15 @@
 				animation-fill-mode: forwards;
 			}
 		}
+	}
+}
+
+@mixin icon {
+	padding-left: 3rem;
+
+	.toasts-item-icon {
+		position: absolute;
+		top: 0.5rem;
+		left: 1rem;
 	}
 }
