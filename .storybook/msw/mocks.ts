@@ -1,4 +1,5 @@
 export const mockGenericCount = { items: [], count: 3 };
+export const mockEstablishmentsCount = { items: [], count: 4 };
 export const mockEstablishments = [
 	{
 		id: 3,
@@ -17,8 +18,23 @@ export const mockEstablishments = [
 	},
 	{
 		id: 1,
-		name: 'Lucca FR',
-		code: 'Lucca FR',
+		name: 'Lucca Paris FR',
+		code: 'Lucca Paris FR',
+		legalUnitId: 1,
+		legalUnit: { id: 1, name: 'Lucca FR', code: 'Lucca FR' },
+		legalIdentificationNumber: null,
+		activityCode: null,
+		calendarId: 52,
+		address: null,
+		timeZoneId: 'Europe/Paris',
+		usersCount: 40,
+		createdAt: '2020-08-13T22:23:09.59',
+		isArchived: false,
+	},
+	{
+		id: 4,
+		name: 'Lucca Nantes FR',
+		code: 'Lucca Nantes FR',
 		legalUnitId: 1,
 		legalUnit: { id: 1, name: 'Lucca FR', code: 'Lucca FR' },
 		legalIdentificationNumber: null,

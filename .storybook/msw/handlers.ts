@@ -1,20 +1,45 @@
 import { rest } from 'msw';
-import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockGenericCount, mockJobQualifications, mockMe, mockProjectUsers, mockUsers } from './mocks';
+import {
+	mockAxisSectionsV3,
+	mockDepartmentsTree,
+	mockEstablishments,
+	mockEstablishmentsCount,
+	mockGenericCount,
+	mockJobQualifications,
+	mockMe,
+	mockProjectUsers,
+	mockUsers,
+} from './mocks';
 
 export const handlers = [
 	rest.get('/organization/structure/api/legal-units', (_, res, ctx) => res(ctx.delay(300), ctx.json(mockGenericCount))),
 
 	rest.get('/organization/structure/api/establishments', (req, res, ctx) => {
 		if (req.url.searchParams.get('fields.root') === 'count') {
-			return res(ctx.delay(300), ctx.json(mockGenericCount));
+			return res(ctx.delay(300), ctx.json(mockEstablishmentsCount));
 		}
 
+		const page = req.url.searchParams.get('page');
+		const legalUnitId = req.url.searchParams.get('legalUnitId');
 		const search = req.url.searchParams.get('search');
+
+		let items = [];
+		if(!page || page === '1') {
+			if(search) {
+				items = [mockEstablishments[0]];
+			}
+			else if(legalUnitId) {
+				items = mockEstablishments.filter(e => e.legalUnitId === +legalUnitId) ?? []
+			}
+			else {
+				items = mockEstablishments;
+			}
+		}
 
 		return res(
 			ctx.delay(300),
 			ctx.json({
-				items: search ? [mockEstablishments[0]] : mockEstablishments,
+				items,
 			}),
 		);
 	}),

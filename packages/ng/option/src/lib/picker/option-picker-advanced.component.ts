@@ -98,6 +98,7 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 		this._subs.add(
 			selectors$.subscribe((selectors) => {
 				this._selectors = selectors;
+				this._selectors.forEach((s) => s.setValue(this._value));
 				this._subs.add(
 					merge(this._selectors.map((s) => s.onSelectValue))
 						.pipe(mergeAll())
