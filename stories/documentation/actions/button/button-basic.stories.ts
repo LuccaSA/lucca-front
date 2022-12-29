@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface ButtonBasicStory {
-	mod: string;
+	style: string;
 	palette: string;
 	state: string;
 	size: string;
@@ -13,10 +13,10 @@ interface ButtonBasicStory {
 export default {
 	title: 'Documentation/Actions/Button/Basic',
 	argTypes: {
-		mod: {
+		style: {
 			options: ['', 'mod-outlined', 'mod-text', 'mod-text mod-invert'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		palette: {
@@ -28,13 +28,13 @@ export default {
 		state: {
 			options: ['', 'is-loading', 'is-error', 'is-success', 'is-disabled'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		size: {
 			options: ['', 'mod-small', 'mod-smaller'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		block: {
@@ -43,7 +43,7 @@ export default {
 			},
 		},
 		type: {
-			options: ['', 'button', 'menu', 'reset', 'submit'],
+			options: ['button', 'reset', 'submit'],
 			control: {
 				type: 'select',
 			},
@@ -81,4 +81,4 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 });
 
 export const BasicButton = Template.bind({});
-BasicButton.args = { mod: '', size: '', state: '', palette: '', block: false, disabled: false, type: 'button' };
+BasicButton.args = { style: '', size: '', state: '', palette: '', block: false, disabled: false, type: 'button' };
