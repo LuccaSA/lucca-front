@@ -3,9 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ],
+    "schematicCollections": ["@angular-eslint/schematics"],
     "analytics": false
   },
   "newProjectRoot": "packages/ng",
@@ -17,8 +15,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-              "project": "packages/ng/ng-package.json",
-              "tsConfig": "packages/ng/tsconfig.lib.prod.json"
+            "project": "packages/ng/ng-package.json",
+            "tsConfig": "packages/ng/tsconfig.lib.prod.json"
           }
         },
         "lint": {
@@ -31,14 +29,12 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "browserTarget": "ng:build",
-            "compodoc": false,
+            "compodoc": true,
+            "compodocArgs": ["-p", "./tsconfig.compodoc-json.json", "-e", "json", "-d", ".storybook"],
             "port": 6006,
             "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/ng/styles",
-                "node_modules"
-              ]
+              "includePaths": ["packages/ng/styles", "node_modules"]
             }
           }
         },
@@ -46,13 +42,11 @@
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "browserTarget": "ng:build",
-            "compodoc": false,
+            "compodoc": true,
+            "compodocArgs": ["-p", "./tsconfig.compodoc-json.json", "-e", "json", "-d", ".storybook"],
             "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/ng/styles",
-                "node_modules"
-              ]
+              "includePaths": ["packages/ng/styles", "node_modules"]
             }
           }
         }
