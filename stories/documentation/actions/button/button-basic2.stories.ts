@@ -1,12 +1,9 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface ButtonBasic2Story {
-	style: string;
 	palette: string;
 	state: string;
-	size: string;
 	block: boolean;
-	disabled: boolean;
 	type: string;
 }
 
