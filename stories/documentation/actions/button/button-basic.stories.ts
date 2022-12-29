@@ -52,7 +52,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonBasicStory): string {
-	const classes = [args.mod, args.state, args.palette, args.size].filter(Boolean).join(' ');
+	const classes = [args.style, args.state, args.palette, args.size].filter(Boolean).join(' ');
 	const type = args.type !== '' ? 'type=' + args.type : '';
 	const attributes = args.disabled ? `disabled` : '';
 	const block = args.block ? `mod-block` : '';
@@ -76,7 +76,7 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
-		args.mod === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.style === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
