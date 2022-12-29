@@ -39,11 +39,10 @@ export default {
 function getTemplate(args: ButtonBasic2Story): string {
 	const classes = [args.state, args.palette].filter(Boolean).join(' ');
 	const type = args.type !== '' ? 'type=' + args.type : '';
-	const attributes = args.disabled ? `disabled` : '';
 	const block = args.block ? `mod-block` : '';
 
 	return `
-	<button ${type} class="button ${classes} ${block}" ${attributes}>Bouton</button>
+	<button ${type} class="button ${classes} ${block}">Bouton</button>
 	`;
 }
 
@@ -61,9 +60,8 @@ const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
 		.button-group {
 			margin-top: var(--spacings-standard)
 		}`,
-		args.mod === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
 export const Basic2Button = Template.bind({});
-Basic2Button.args = {state: '', palette: '', block: false, type: 'button' };
+Basic2Button.args = { state: '', palette: '', block: false, type: 'button' };
