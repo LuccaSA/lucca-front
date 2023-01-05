@@ -2,7 +2,8 @@ import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Inject, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { asyncScheduler, map, Observable, observeOn, take, takeUntil } from 'rxjs';
+import { asyncScheduler, Observable } from 'rxjs';
+import { map, observeOn, take, takeUntil } from 'rxjs/operators';
 import { LuOptionComponent } from '../option/index';
 import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
 

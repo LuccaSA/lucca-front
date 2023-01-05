@@ -23,7 +23,8 @@ import {
 	TemplateRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { LuSelectPanelComponent, LuSelectPanelRef } from '../panel/index';
 import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID, SELECT_PANEL_DATA } from '../select.model';
 
