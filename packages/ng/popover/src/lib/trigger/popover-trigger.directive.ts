@@ -12,6 +12,7 @@ import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './p
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',
 	standalone: true,
+	providers: [Overlay],
 })
 export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopoverPanel, TTarget extends ILuPopoverTarget = ILuPopoverTarget>
 	extends ALuPopoverTrigger<TPanel, TTarget>
