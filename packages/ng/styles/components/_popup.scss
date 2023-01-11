@@ -37,6 +37,12 @@
 	max-height: 90vh;
 }
 
+.lu-modal-container {
+	display: flex;
+	flex-flow: column;
+	flex-grow: 1;
+}
+
 .lu-modal-header {
 	padding: var(--components-popup-padding-vertical) var(--spacings-biggest) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);

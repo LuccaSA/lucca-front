@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { ALuOptionOperator, ALuOptionSelector, ILuOptionSelectAllLabel, LuOptionSelectAllComponent, LuOptionSelectAllIntl, LU_OPTION_SELECT_ALL_TRANSLATIONS } from '@lucca-front/ng/option';
+import { ALuOptionOperator, ALuOptionSelector, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
-import { luEstablishmentSelectAllTranslations } from './establishment-select-all.translate';
 
 @Component({
 	selector: 'lu-establishment-select-all',
@@ -26,11 +25,6 @@ import { luEstablishmentSelectAllTranslations } from './establishment-select-all
 			provide: ALuEstablishmentService,
 			useClass: LuEstablishmentService,
 		},
-		{
-			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
-			useValue: luEstablishmentSelectAllTranslations,
-		},
-		LuOptionSelectAllIntl,
 	],
 })
 export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponent<ILuEstablishment> implements OnDestroy {
@@ -50,8 +44,6 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 
 	constructor(
 		private readonly _changeDetectorRef: ChangeDetectorRef,
-		@Inject(LuOptionSelectAllIntl)
-		public override intl: ILuOptionSelectAllLabel,
 		@Inject(ALuEstablishmentService)
 		@Optional()
 		@SkipSelf()
@@ -60,7 +52,7 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 		@Self()
 		selfService: LuEstablishmentService,
 	) {
-		super(intl);
+		super();
 		this._service = hostService || selfService;
 	}
 

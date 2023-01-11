@@ -3,7 +3,6 @@ export * from './modal-config.model';
 export * from './modal-panel.component';
 export * from './modal-ref.factory';
 export * from './modal-ref.model';
-export * from './modal.intl';
 export * from './modal.model';
 export * from './modal.module';
 export * from './modal.service';

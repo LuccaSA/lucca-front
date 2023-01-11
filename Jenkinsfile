@@ -55,7 +55,6 @@ node(label: CI.getSelectedNode(script:this)) {
 			if (isPR || isRc || isMaster) {
 				loggableStage('Deploy') {
 					echo "deploying ${branchName}"
-					bat "npm run compodoc"
 					bat "npm run build-storybook"
 					bat "npm run build-compodoc"
 					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${branchName}\\storybook -Recurse"

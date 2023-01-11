@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Inject } from '@angular/core';
-import { ILuTree } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding } from '@angular/core';
+import { getIntl, ILuTree } from '@lucca-front/ng/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ALuTreeOptionOperator } from '../../operator/index';
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
-import { LuOptionSelectAllIntl } from './select-all.intl';
-import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.token';
-import { ILuOptionSelectAllLabel, luOptionSelectAllTranslations } from './select-all.translate';
+import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
+
 @Component({
 	selector: 'lu-tree-option-select-all',
 	templateUrl: './select-all.component.html',
@@ -24,11 +23,6 @@ import { ILuOptionSelectAllLabel, luOptionSelectAllTranslations } from './select
 			useExisting: forwardRef(() => LuTreeOptionSelectAllComponent),
 			multi: true,
 		},
-		{
-			provide: LU_OPTION_SELECT_ALL_TRANSLATIONS,
-			useValue: luOptionSelectAllTranslations,
-		},
-		LuOptionSelectAllIntl,
 	],
 })
 export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> implements ILuTreeOptionSelector<T> {
@@ -43,9 +37,7 @@ export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> 
 		this.outOptions$ = in$.pipe(tap((options) => (this.flatOptions = this.flattenTree(options))));
 	}
 
-	constructor(@Inject(LuOptionSelectAllIntl) public intl: ILuOptionSelectAllLabel) {
-		super();
-	}
+	public intl = getIntl(LU_OPTION_SELECT_ALL_TRANSLATIONS);
 
 	selectAll() {
 		this.onSelectValue.next([...this.flatOptions]);

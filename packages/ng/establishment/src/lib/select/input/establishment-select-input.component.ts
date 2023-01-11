@@ -17,6 +17,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -28,9 +29,7 @@ import { LuForLegalUnitsDirective } from '../for-legal-units';
 import { LuLegalUnitSelectorDirective } from '../legal-unit-selector';
 import { LuEstablishmentSearcherComponent } from '../searcher';
 import { LuEstablishmentSelectAllComponent } from '../select-all';
-import { LuEstablishmentSelectInputIntl } from './establishment-select-input.intl';
-import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.token';
-import { ILuEstablishmentSelectInputLabel, luEstablishmentSelectInputTranslations } from './establishment-select-input.translate';
+import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
 @Component({
 	selector: 'lu-establishment-select',
@@ -64,11 +63,6 @@ import { ILuEstablishmentSelectInputLabel, luEstablishmentSelectInputTranslation
 			provide: ALuLegalUnitService,
 			useClass: LuLegalUnitService,
 		},
-		{
-			provide: LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS,
-			useValue: luEstablishmentSelectInputTranslations,
-		},
-		LuEstablishmentSelectInputIntl,
 	],
 })
 export class LuEstablishmentSelectInputComponent<
@@ -94,6 +88,8 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
+	public intl = getIntl(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS);
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
@@ -112,8 +108,6 @@ export class LuEstablishmentSelectInputComponent<
 		@Inject(ALuEstablishmentService)
 		@Self()
 		selfEstablishmentService: LuEstablishmentService,
-		@Inject(LuEstablishmentSelectInputIntl)
-		public intl: ILuEstablishmentSelectInputLabel,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 		this._establishmentService = hostEstablishmentService || selfEstablishmentService;
