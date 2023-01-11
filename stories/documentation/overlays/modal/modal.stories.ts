@@ -1,32 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 
+import { Injectable } from '@angular/core';
+import { expect } from '@storybook/jest';
+import { getByText, userEvent, within } from '@storybook/testing-library';
+
+@Injectable({ providedIn: 'root' })
+export class ServiceNameService {
+	title = 'Hello there';
+	constructor() {}
+}
+
 @Component({
 	selector: 'modal-content',
 	standalone: true,
-	template: '<p>General Kenobi</p>'
+	template: '<p>General Kenobi</p>',
 })
 class ModalContentComponent implements ILuModalContent {
-	title = 'Hello there'
+	title = inject(ServiceNameService).title;
 	submitAction = () => {};
 }
 
 @Component({
 	selector: 'modal-content',
 	standalone: true,
-	template: '<p>General Kenobi</p>'
+	template: '<p>General Kenobi</p>',
 })
 class ModalDynamicContentComponent implements ILuModalContent {
-	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }))
+	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
-	title = this.counter$.pipe(map(n => `Title #${n}`));
-	submitLabel = this.counter$.pipe(map(n => `Submit #${n}`));
-	cancelLabel = this.counter$.pipe(map(n => `Cancel #${n}`));
+	title = this.counter$.pipe(map((n) => `Title #${n}`));
+	submitLabel = this.counter$.pipe(map((n) => `Submit #${n}`));
+	cancelLabel = this.counter$.pipe(map((n) => `Cancel #${n}`));
 	submitCounter = this.counter$;
-	submitDisabled = this.counter$.pipe(map(n => n % 2 === 0));
+	submitDisabled = this.counter$.pipe(map((n) => n % 2 === 0));
 
 	submitAction = () => {};
 }
@@ -37,10 +47,9 @@ class ModalDynamicContentComponent implements ILuModalContent {
 		<button type="button" class="button" (click)="openModal()">Open modal</button>
 		<button type="button" class="button" (click)="openDynamicContentModal()">Open dynamic modal</button>
 	`,
-}) class ModalStories {
-	constructor(
-		private modal: LuModal
-	) { }
+})
+class ModalStories {
+	constructor(private modal: LuModal) {}
 
 	public openModal() {
 		this.modal.open(ModalContentComponent);
@@ -56,11 +65,8 @@ export default {
 	component: ModalStories,
 	decorators: [
 		moduleMetadata({
-			imports: [
-				LuModalModule,
-				BrowserAnimationsModule,
-			]
-		})
+			imports: [LuModalModule, BrowserAnimationsModule],
+		}),
 	],
 } as Meta;
 
@@ -69,7 +75,7 @@ const Template: Story<ModalStories> = (args: ModalStories) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = {}
+Basic.args = {};
 Basic.parameters = {
 	docs: {
 		source: {
@@ -106,7 +112,17 @@ class ModalContentComponent implements ILuModalContent {
 	public openModal() {
 		this.modal.open(ModalContentComponent);
 	}
-}`
-		}
-	}
+}`,
+		},
+	},
+};
+
+Basic.play = async ({ canvasElement, ...rest }) => {
+	console.log(rest);
+	const canvas = within(canvasElement);
+
+	await userEvent.click(canvas.getAllByRole('button')[0]);
+
+	// 👇 Assert DOM structure
+	await expect(getByText(document.body, 'Hello there')).toBeInTheDocument();
 };

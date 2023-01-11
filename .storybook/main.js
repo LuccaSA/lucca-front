@@ -8,5 +8,8 @@ module.exports = {
 	},
 	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
 	staticDirs: ['./public'],
-	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
+	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y', '@storybook/addon-interactions'],
+	features: {
+		interactionsDebugger: true, // 👈 Enable playback controls
+	},
 };
