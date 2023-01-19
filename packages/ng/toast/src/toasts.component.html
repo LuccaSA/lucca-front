@@ -5,9 +5,9 @@
 			class="lucca-icon size-small u-marginRightSmaller"
 			aria-hidden="true"
 			[ngClass]="iconClassByToastType[toast.type]"
-		>
-		</span>
-		<span [innerHtml]="toast.message"> </span>
+		></span>
+		<span *ngIf="toast.title" class="u-fontWeightBold u-marginBottomStandard">{{ toast.title }}</span>
+		<span [innerHtml]="toast.message"></span>
 		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
 			<span class="lucca-icon icon-cross size-smaller" aria-hidden="true"></span>
 			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
