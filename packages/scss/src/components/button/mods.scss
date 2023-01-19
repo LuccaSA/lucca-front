@@ -82,7 +82,7 @@
 	width: 100%;
 }
 
-@mixin icon {
+@mixin icon($atRoot: 'without: rule') { {
 	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest));
 }
 
@@ -123,10 +123,10 @@
 	min-width: 1.75rem;
 }
 
-@mixin counter {
+@mixin counter($atRoot: 'without: rule') { {
 	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest)) var(--spacings-smaller) var(--spacings-small);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.button-counter {
 			background-color: var(--palettes-500, var(--palettes-primary-500));
 			border-radius: 1rem;

@@ -1,13 +1,13 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	list-style-type: none;
 	padding: 0;
 	margin: var(--spacings-small) 0;
 	display: flex;
 	align-items: center;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.timeline-step {
 			flex-grow: 1;
 			display: flex;

@@ -1,5 +1,5 @@
-@mixin vars {
-	@at-root {
+@mixin vars($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		:root {
 			--commons-navSide-width: 15rem;
 			--commons-navSide-compact-width: 7.5rem;

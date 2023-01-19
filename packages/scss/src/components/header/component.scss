@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	box-shadow: var(--commons-elevations-elevation-1);
 	background-color: var(--components-header-background);
 	min-height: var(--components-header-height);
@@ -10,7 +10,7 @@
 	align-items: center;
 	z-index: 99;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.header-contentLeft {
 			display: flex;
 		}

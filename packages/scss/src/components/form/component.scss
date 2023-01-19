@@ -1,12 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	padding: 0;
 	border: 0;
 	margin: 0 0 var(--components-form-group-margin-bottom);
 	position: relative;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.form-group-label,
 		.form-group-legend,
 		.form-group-title {

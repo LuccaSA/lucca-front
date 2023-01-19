@@ -1,9 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: flex;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.radioButtons-item {
 			margin-left: -1px;
 
@@ -65,8 +65,7 @@
 						color: var(--components-radioButtons-default-palette-700);
 
 						&:hover {
-							box-shadow: var(--commons-elevations-elevation-1),
-								inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
+							box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
 						}
 					}
 				}

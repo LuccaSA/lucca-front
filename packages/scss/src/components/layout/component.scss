@@ -4,7 +4,7 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	min-height: 100vh;
 	display: grid;
 
@@ -35,7 +35,7 @@
 			'aside';
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.layout-content-container {
 			max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
 		}
