@@ -123,7 +123,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		if (!text) {
 			return undefined;
 		}
-		if (!this.isParsable(text)) {
+		if (!this.isParsable(text, granularity)) {
 			return this.forgeInvalid();
 		}
 
