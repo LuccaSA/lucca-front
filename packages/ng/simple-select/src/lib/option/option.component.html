@@ -3,6 +3,7 @@
 	[class.is-selected]="isSelected"
 	[class.is-highlighted]="isHighlighted$ | async"
 	[class.is-disabled]="disabled"
+	(click)="selectOption($event)"
 >
-	<ng-content></ng-content>
+	<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }; injector: injector"></ng-container>
 </div>

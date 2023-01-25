@@ -1,8 +1,9 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Inject, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { SELECT_ID } from '../select.model';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, inject, Injector, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { asyncScheduler, BehaviorSubject, observeOn, Subscription } from 'rxjs';
+import { LuOptionContext, SELECT_ID } from '../select.model';
+import { LU_OPTION_CONTEXT, optionContextFactory } from './option.token';
 
 @Component({
 	selector: 'lu-select-option',
@@ -11,10 +12,14 @@ import { SELECT_ID } from '../select.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [CommonModule],
+	providers: [{ provide: LU_OPTION_CONTEXT, useFactory: optionContextFactory }],
 })
-export class LuOptionComponent<T> implements Highlightable {
+export class LuOptionComponent<T> implements Highlightable, OnInit, OnDestroy {
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;
+
+	@Input()
+	public optionTpl?: TemplateRef<LuOptionContext<T>>;
 
 	@Input()
 	@HostBinding('attr.aria-selected')
@@ -28,8 +33,14 @@ export class LuOptionComponent<T> implements Highlightable {
 
 	isHighlighted$ = new BehaviorSubject(false);
 
-	@Input()
+	/**
+	 * Whether option is disabled. Used by ListKeyManager.
+	 */
 	disabled = false;
+
+	private optionContext = inject(LU_OPTION_CONTEXT);
+	private cdr = inject(ChangeDetectorRef);
+	private subscription?: Subscription;
 
 	@HostBinding('attr.role')
 	public role = 'option';
@@ -39,7 +50,18 @@ export class LuOptionComponent<T> implements Highlightable {
 		return `lu-select-${this.selectId}-option-${this.optionIndex}`;
 	}
 
-	constructor(protected elementRef: ElementRef<HTMLElement>, @Inject(SELECT_ID) protected selectId: number) {}
+	constructor(protected elementRef: ElementRef<HTMLElement>, @Inject(SELECT_ID) protected selectId: number, public injector: Injector) {}
+
+	ngOnDestroy(): void {
+		this.subscription?.unsubscribe();
+	}
+
+	ngOnInit(): void {
+		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
+			this.disabled = isDisabled;
+			this.cdr.markForCheck();
+		});
+	}
 
 	setActiveStyles(): void {
 		this.isHighlighted$.next(true);
@@ -48,5 +70,11 @@ export class LuOptionComponent<T> implements Highlightable {
 
 	setInactiveStyles(): void {
 		this.isHighlighted$.next(false);
+	}
+
+	selectOption($event: Event): void {
+		if (this.disabled) {
+			$event.stopPropagation();
+		}
 	}
 }

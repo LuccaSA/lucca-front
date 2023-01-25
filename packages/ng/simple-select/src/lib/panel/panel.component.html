@@ -20,13 +20,12 @@
 		<lu-select-option
 			*ngFor="let option of ctx.options; let index = index"
 			[option]="option"
+			[optionTpl]="optionTpl"
 			[optionIndex]="index"
 			[isSelected]="option === selected"
-			[disabled]="false"
 			(click)="panelRef.emitValue(option)"
-		>
-			<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }"></ng-container>
-		</lu-select-option>
+		></lu-select-option>
+
 		<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
 	</div>
 </div>

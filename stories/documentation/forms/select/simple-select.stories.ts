@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { scan, timer } from 'rxjs';
 
 interface ILegume {
 	index: number;
@@ -94,7 +95,21 @@ const template = `
 	<span class="textfield-label">Disabled</span>
 </label>
 
-<div class="u-marginTopM">
+<label class="textfield u-marginTopM">
+	<lu-simple-select
+		#select6
+		class="textfield-input"
+		placeholder="Placeholder..."
+		[(ngModel)]="value"
+		[options]="legumes"
+	>
+		<ng-container *luOption="let legume; select: select6" [luDisabledOption]="legume.index % 2 === (zeroOne$ | async)">{{ legume.name }}</ng-container>
+		<ng-container *luDisplayer="let legume; select: select6">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
+	</lu-simple-select>
+	<span class="textfield-label">Avec options désactivées</span>
+</label>
+
+<div class="u-marginTopStandard">
 	<div>
 		Value:
 		<pre>{{ value | json }}</pre>
@@ -104,26 +119,29 @@ const template = `
 
 @Component({
 	selector: 'simple-select-story',
-	template
+	template,
 })
 class SimpleSelectStory {
 	public page = 1;
-	public legumes: ILegume[] = allLegumes
+	public legumes: ILegume[] = allLegumes;
 
-	public value: ILegume | null = { index: 1, name: "Poivron" };
+	public zeroOne$ = timer(0, 1000).pipe(scan((acc) => (acc === 1 ? 0 : 1), 0));
+
+	public value: ILegume | null = { index: 1, name: 'Poivron' };
 	public updateLegumes(clue: string): void {
-		this.legumes = clue
-			? allLegumes.filter(l => this.sanitizeString(l.name).includes(this.sanitizeString(clue)))
-			: allLegumes;
+		this.legumes = clue ? allLegumes.filter((l) => this.sanitizeString(l.name).includes(this.sanitizeString(clue))) : allLegumes;
 	}
 
 	private sanitizeString(str: string): string {
-		return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+		return str
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase();
 	}
 }
 
 @NgModule({
-	imports: [CommonModule, FormsModule, LuSimpleSelectInputComponent, LuOptionDirective, LuDisplayerDirective],
+	imports: [CommonModule, FormsModule, LuSimpleSelectInputComponent, LuOptionDirective, LuDisplayerDirective, LuDisabledOptionDirective],
 	declarations: [SimpleSelectStory],
 	exports: [SimpleSelectStory],
 })

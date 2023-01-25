@@ -2,9 +2,8 @@ import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Inject, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { asyncScheduler, Observable } from 'rxjs';
-import { map, observeOn, take, takeUntil } from 'rxjs/operators';
-import { LuOptionComponent } from '../option/index';
+import { asyncScheduler, map, Observable, observeOn, take, takeUntil } from 'rxjs';
+import { ɵLuOptionComponent } from '../option/index';
 import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
 
 export abstract class LuSelectPanelRef<T> {
@@ -38,7 +37,7 @@ export abstract class LuSelectPanelRef<T> {
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, FormsModule, A11yModule, LuOptionComponent],
+	imports: [CommonModule, FormsModule, A11yModule, ɵLuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	options$: Observable<T[]>;
@@ -57,8 +56,8 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		setTimeout(() => input.nativeElement.focus());
 	}
 
-	@ViewChildren(LuOptionComponent) optionsQL: QueryList<LuOptionComponent<T>>;
-	private keyManager: ActiveDescendantKeyManager<LuOptionComponent<T>>;
+	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	private keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
 
 	search: string | null = null;
 
