@@ -30,11 +30,16 @@
 	}
 }
 
-.lu-sidepanel-panel-inner {
+.lu-sidepanel-panel-inner,
+.lu-sidepanel-container {
 	display: flex;
-	overflow: auto;
-	height: 100%;
 	flex-flow: column;
+	flex-grow: 1;
+	height: 100%;
+}
+
+.lu-sidepanel-container {
+	overflow: auto;
 }
 
 @keyframes sidepanel {
