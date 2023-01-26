@@ -1,6 +1,6 @@
-<form [formGroup]="form">
+<form>
 	<div class="textfield mod-search" [class.is-loading]="loading">
-		<input #searchInput class="textfield-input" formControlName="clue" />
+		<input #searchInput class="textfield-input" [formControl]="clueControl" />
 	</div>
 </form>
 
