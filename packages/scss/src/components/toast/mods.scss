@@ -46,11 +46,6 @@
 	.toasts-content-title {
 		margin-bottom: var(--spacings-smaller);
 	}
-
-	.toasts-item-kill {
-		top: var(--spacings-smaller);
-		bottom: inherit;
-	}
 }
 
 @mixin circularGauge {
@@ -82,8 +77,6 @@
 
 	.toasts-item-kill {
 		transition: transform 100ms, opacity 100ms;
-		top: 0.625rem;
-		bottom: auto;
 
 		.lucca-icon {
 			position: absolute;
@@ -108,7 +101,9 @@
 			color: transparent;
 			height: 1.25rem;
 			pointer-events: none;
-			position: relative;
+			position: absolute;
+			top: 0;
+			left: 0;
 			width: 1.25rem;
 
 			&::after {

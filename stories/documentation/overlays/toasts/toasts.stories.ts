@@ -55,7 +55,7 @@ class ToastsStory implements OnInit, OnDestroy {
 	private getRandomTitle(): string {
 		const toastsValues = [
 			'Titre du toast',
-			'Titre du toast long, très très très très très très looooooooooooooooooooooooooong',
+			'Titre du toast long, très très très très très très long',
 			undefined
 		];
 
