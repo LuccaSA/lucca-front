@@ -3,10 +3,13 @@ export type LuToastType = 'Info' | 'Error' | 'Success' | 'Warning';
 export const defaultToastDuration = 5000;
 
 export interface LuToastInput {
+	/**
+	 * InnerHTML supported.
+	 */
 	message: string;
 	/**
 	 * Bold title.
-	 * InnerHTML not allowed.
+	 * InnerHTML not supported.
 	 */
 	title?: string;
 	type?: LuToastType;
