@@ -3,50 +3,6 @@
 	bottom: var(--spacings-standard);
 }
 
-@mixin commInApp {
-	left: var(--components-toasts-left);
-	bottom: var(--components-toasts-bottom);
-	top: inherit;
-
-	.toasts-item {
-		background-color: var(--palettes-primary-700);
-		margin-left: inherit;
-		display: flex;
-		padding: 0;
-	}
-
-	.toasts-visual {
-		inset: 0;
-		width: 5rem;
-		position: absolute;
-	}
-
-	.toasts-blob {
-		fill: var(--palettes-primary-600);
-		height: 100%;
-		width: 100%;
-		position: absolute;
-	}
-
-	.toasts-illustration {
-		left: var(--spacings-small);
-		top: calc(var(--spacings-smaller) * -1);
-		height: 100%;
-		width: 2.5rem;
-		position: absolute;
-	}
-
-	.toasts-content {
-		padding: var(--spacings-small) 0;
-		margin-left: calc(var(--spacings-small) + 5rem);
-		margin-right: var(--spacings-small);
-	}
-
-	.toasts-content-title {
-		margin-bottom: var(--spacings-smaller);
-	}
-}
-
 @mixin circularGauge {
 	@keyframes stroke {
 		0% {

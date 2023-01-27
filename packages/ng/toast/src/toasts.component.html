@@ -7,7 +7,7 @@
 			[ngClass]="iconClassByToastType[toast.type]"
 		></span>
 		<div class="toast-item-content">
-			<div *ngIf="toast.title" class="u-marginBottomSmaller"><strong>{{ toast.title }}</strong></div>
+			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
 			<div [innerHtml]="toast.message"></div>
 		</div>
 		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
