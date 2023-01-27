@@ -14,10 +14,10 @@
 
 	right: var(--components-toasts-right);
 	top: var(--components-toasts-top);
-	width: var(--components-toasts-width);
+	max-width: var(--components-toasts-maxwidth);
 	display: flex;
 	flex-direction: column;
-	flex-wrap: wrap;
+	align-items: flex-end;
 	position: fixed;
 	z-index: 9999;
 

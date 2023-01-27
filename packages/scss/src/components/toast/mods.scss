@@ -6,7 +6,6 @@
 @mixin commInApp {
 	left: var(--components-toasts-left);
 	bottom: var(--components-toasts-bottom);
-	width: var(--components-toasts-big);
 	top: inherit;
 
 	.toasts-item {
