@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
-import { BehaviorSubject, combineLatest, merge, of, Subject } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, scan, share, switchMap, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, debounceTime, map, scan, share, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
 
@@ -67,33 +67,42 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 	isSearching = new EventEmitter<boolean>();
 	private _isSearching = false;
 
-	form: FormGroup<{ clue: FormControl<string> }> = new FormGroup({
-		clue: new FormControl<string>(''),
-	});
+	clueControl = new FormControl<string>('');
 
 	loading = false;
 
-	private _page$ = new BehaviorSubject<number>(0);
-	private _resetOutOptions = new Subject<null>();
+	private _nextPage$ = new Subject<void>();
+	private _page$: Observable<number> = this._nextPage$.pipe(
+		scan((acc) => acc + 1, 0),
+		startWith(0),
+	);
+	private _resetOutOptions = new Subject<void>();
 
-	outOptions$ = merge(
-		combineLatest([this._page$.pipe(distinctUntilChanged()), this.form.valueChanges]).pipe(
-			debounceTime(100),
-			tap(() => (this.loading = true)),
-			tap(([_, val]) => {
-				// FIXME refactor, add some spec anywhere
-				const isSearching = val?.clue != null && val?.clue !== '';
-				if (this._isSearching !== isSearching) {
-					this._isSearching = isSearching;
-					this.isSearching.emit(this._isSearching);
-				}
-			}),
-			switchMap(([page, val]) => this._service.searchPaged(val.clue, page).pipe(catchError(() => of([] as ILuEstablishment[])))),
-			scan((acc, next) => (this._page$.value === 0 ? next : [...acc, ...next])),
-			tap(() => (this.loading = false)),
-			share(),
+	outOptions$ = this._resetOutOptions.pipe(
+		startWith(undefined),
+		switchMap(() =>
+			this.clueControl.valueChanges.pipe(
+				debounceTime(100),
+				switchMap((clue) =>
+					this._page$.pipe(
+						tap(() => (this.loading = true)),
+						tap(() => {
+							// FIXME refactor, add some spec anywhere
+							const isSearching = clue != null && clue !== '';
+							if (this._isSearching !== isSearching) {
+								this._isSearching = isSearching;
+								this.isSearching.emit(this._isSearching);
+							}
+						}),
+						switchMap((page) => this._service.searchPaged(clue, page).pipe(catchError(() => of([] as ILuEstablishment[])))),
+						takeWhile((loadedItems) => !!loadedItems.length),
+						scan((acc, next) => [...acc, ...next]),
+					),
+				),
+				tap(() => (this.loading = false)),
+			),
 		),
-		this._resetOutOptions.pipe(map(() => [] as ILuEstablishment[])),
+		share(),
 	);
 
 	displayPlaceholder$ = this.outOptions$.pipe(map((o) => o?.length === 0 && this._isSearching));
@@ -117,16 +126,15 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 
 	onScrollBottom() {
 		if (!this.loading) {
-			this._page$.next(this._page$.value + 1);
+			this._nextPage$.next();
 		}
 	}
 
 	onClose() {
-		this._resetOutOptions.next(null);
+		this._resetOutOptions.next();
 	}
 
 	reset() {
-		this.form.reset();
-		this._page$.next(0);
+		this.clueControl.reset();
 	}
 }
