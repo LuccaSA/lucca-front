@@ -1,0 +1,82 @@
+@mixin component {
+	position: relative;
+	width: 100%;
+	min-height: var(--component-notchedbox-box-min-height);
+	padding: var(--component-notchedbox-box-padding-top, var(--component-notchedbox-box-padding))
+		var(--component-notchedbox-box-padding-right, var(--component-notchedbox-box-padding))
+		var(--component-notchedbox-box-padding-bottom, var(--component-notchedbox-box-padding))
+		var(--component-notchedbox-box-padding-left, var(--component-notchedbox-box-padding));
+	border-radius: var(--component-notchedbox-box-radius);
+	background: linear-gradient(
+				var(--component-notchedbox-box-background-color),
+				var(--component-notchedbox-box-background-color)
+			)
+			var(--component-notchedbox-notch-gradient1-anchor) / var(--component-notchedbox-notch-gradient1-ref1)
+			var(--component-notchedbox-notch-gradient1-ref2),
+		linear-gradient(
+				var(--component-notchedbox-box-background-color),
+				var(--component-notchedbox-box-background-color)
+			)
+			var(--component-notchedbox-notch-gradient2-anchor) / var(--component-notchedbox-notch-gradient2-ref1)
+			var(--component-notchedbox-notch-gradient2-ref2),
+		linear-gradient(
+				var(--component-notchedbox-box-background-color),
+				var(--component-notchedbox-box-background-color)
+			)
+			var(--component-notchedbox-notch-gradient3-anchor) / var(--component-notchedbox-notch-gradient3-ref1)
+			var(--component-notchedbox-notch-gradient3-ref2),
+		radial-gradient(
+			circle at var(--component-notchedbox-notch-gradient4-x) var(--component-notchedbox-notch-gradient4-y),
+			var(--component-notchedbox-box-background-color) var(--component-notchedbox-notch-radius-outer),
+			transparent calc(var(--component-notchedbox-notch-radius-outer) + var(--smooth))
+		),
+		radial-gradient(
+			circle at var(--component-notchedbox-notch-gradient5-x) var(--component-notchedbox-notch-gradient5-y),
+			var(--component-notchedbox-box-background-color) var(--component-notchedbox-notch-radius-outer),
+			transparent calc(var(--component-notchedbox-notch-radius-outer) + var(--smooth))
+		),
+		linear-gradient(
+				var(--component-notchedbox-box-background-color),
+				var(--component-notchedbox-box-background-color)
+			)
+			var(--component-notchedbox-notch-gradient6-anchor) / var(--component-notchedbox-notch-gradient6-ref1)
+			var(--component-notchedbox-notch-gradient6-ref2),
+		linear-gradient(
+				var(--component-notchedbox-box-background-color),
+				var(--component-notchedbox-box-background-color)
+			)
+			var(--component-notchedbox-notch-gradient7-anchor) / var(--component-notchedbox-notch-gradient7-ref1)
+			var(--component-notchedbox-notch-gradient7-ref2),
+		radial-gradient(
+				var(--component-notchedbox-notch-radius-inner) var(--component-notchedbox-notch-radius-inner) at
+					var(--component-notchedbox-notch-gradient8-anchor),
+				transparent calc(var(--component-notchedbox-notch-radius-inner) - var(--smooth) * 2),
+				var(--component-notchedbox-box-background-color) var(--component-notchedbox-notch-radius-inner)
+			)
+			var(--component-notchedbox-notch-gradient8-x) var(--component-notchedbox-notch-gradient8-y) /
+			var(--component-notchedbox-notch-radius-inner)
+			calc(var(--component-notchedbox-notch-radius-inner) + var(--smooth)),
+		radial-gradient(
+				var(--component-notchedbox-notch-radius-inner) var(--component-notchedbox-notch-radius-inner) at
+					var(--component-notchedbox-notch-gradient9-anchor),
+				transparent calc(var(--component-notchedbox-notch-radius-inner) - var(--smooth) * 2),
+				var(--component-notchedbox-box-background-color) var(--component-notchedbox-notch-radius-inner)
+			)
+			var(--component-notchedbox-notch-gradient9-x) var(--component-notchedbox-notch-gradient9-y) /
+			var(--component-notchedbox-notch-radius-inner)
+			calc(var(--component-notchedbox-notch-radius-inner) + var(--smooth));
+	background-repeat: no-repeat;
+	filter: drop-shadow(var(--component-notchedbox-box-shadow));
+
+	.notchedBox-badge {
+		position: absolute;
+		top: var(--component-notchedbox-badge-top, auto);
+		bottom: var(--component-notchedbox-badge-bottom, auto);
+		left: var(--component-notchedbox-badge-left, auto);
+		right: var(--component-notchedbox-badge-right, auto);
+		width: var(--component-notchedbox-badge-actualWidth);
+		height: var(--component-notchedbox-badge-actualHeight);
+		border-radius: var(--component-notchedbox-badge-radius);
+		background-color: var(--component-notchedbox-badge-background-color);
+	}
+}

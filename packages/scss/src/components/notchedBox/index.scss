@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.notchedBox {
+	@include vars;
+	@include component;
+
+	&.mod-top {
+		@include top;
+	}
+
+	&.mod-bottom {
+		@include bottom;
+	}
+
+	&.mod-left {
+		@include left;
+	}
+
+	&.mod-right {
+		@include right;
+	}
+}
