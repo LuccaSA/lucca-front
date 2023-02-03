@@ -8,9 +8,9 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	selector: 'story-fade-animation',
 	template: ` <div class="grid">
 		<div class="grid-md3 ng-demo-block">
-			<h3 class="u-marginReset">
+			<h3 class="u-margin0">
 				Fade
-				<button class="button size-small" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
+				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 			</h3>
 			<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
 		</div>
@@ -55,9 +55,9 @@ class AppModule {}
 	template: \`
 		<div class="grid">
 			<div class="grid-md3 ng-demo-block">
-				<h3 class="u-marginReset">
+				<h3 class="u-margin0">
 					Fade
-					<button class="button size-small" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
+					<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
 			</div>

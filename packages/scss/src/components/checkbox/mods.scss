@@ -1,10 +1,10 @@
 @mixin inline {
 	vertical-align: middle;
 	display: inline-block;
-	margin-right: var(--spacings-standard);
+	margin-right: var(--spacings-M);
 }
 
-@mixin big {
+@mixin L {
 	.checkbox-label {
 		line-height: 1.75rem;
 
@@ -17,16 +17,16 @@
 	}
 }
 
-@mixin small {
+@mixin S {
 	.checkbox-label {
-		font-size: var(--sizes-small-font-size);
-		line-height: var(--sizes-small-line-height);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 
 		&::before {
-			width: var(--sizes-small-font-size);
-			height: var(--sizes-small-font-size);
-			font-size: var(--sizes-smaller-font-size);
-			margin-top: var(--components-checkbox-input-small-top);
+			width: var(--sizes-S-fontSize);
+			height: var(--sizes-S-fontSize);
+			font-size: var(--sizes-XS-fontSize);
+			margin-top: var(--components-checkbox-S-input-top);
 		}
 	}
 }

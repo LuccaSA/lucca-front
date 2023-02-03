@@ -1,11 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin icon {
-	padding: var(--spacings-smaller) var(--spacings-standard) var(--spacings-smaller) var(--spacings-bigger);
+	padding: var(--spacings-XS) var(--spacings-M) var(--spacings-XS) var(--spacings-XL);
 }
 
-@mixin small {
-	padding: var(--spacings-small) var(--spacings-standard);
+@mixin S {
+	padding: var(--spacings-S) var(--spacings-M);
 	text-align: left;
 	min-height: 4rem;
 
@@ -37,18 +37,18 @@
 	}
 
 	.file-icon {
-		font-size: var(--sizes-standard-font-size);
-		line-height: var(--sizes-standard-line-height);
-		margin: 0 var(--spacings-smaller) var(--spacings-small) 0;
+		font-size: var(--sizes-M-fontSize);
+		line-height: var(--sizes-M-lineHeight);
+		margin: 0 var(--spacings-XS) var(--spacings-S) 0;
 	}
 
 	.file-title {
-		font-size: var(--sizes-standard-font-size);
-		padding-right: var(--spacings-smaller);
+		font-size: var(--sizes-M-fontSize);
+		padding-right: var(--spacings-XS);
 		margin: 0;
 	}
 
 	.file-progress {
-		margin: var(--spacings-smaller) 0;
+		margin: var(--spacings-XS) 0;
 	}
 }

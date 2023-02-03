@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface LoadingsBasicStory {
 	label: boolean;
 	block: boolean;
-	big: boolean;
+	l: boolean;
 	invert: boolean;
 	fullpage: boolean;
 	dialog: boolean;
@@ -23,7 +23,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		big: {
+		l: {
 			control: {
 				type: 'boolean',
 			},
@@ -54,13 +54,13 @@ export default {
 function getTemplate(args: LoadingsBasicStory): string {
 	const label = args.label ? `Loading…` : '';
 	const block = args.block ? `mod-block` : '';
-	const big = args.big ? `mod-big` : '';
+	const l = args.l ? `mod-L` : '';
 	const invert = args.invert ? `mod-invert` : '';
 	const fullpage = args.fullpage ? `mod-fullpage` : '';
 	const dialog = args.dialog ? `mod-dialog` : '';
 	const sidepanel = args.sidepanel ? `mod-sidePanel` : '';
 	return `
-	<div class="loading ${block} ${big} ${invert} ${fullpage} ${dialog} ${sidepanel}">${label}</div>
+	<div class="loading ${block} ${l} ${invert} ${fullpage} ${dialog} ${sidepanel}">${label}</div>
 	`;
 }
 
@@ -78,4 +78,4 @@ const Template: Story<LoadingsBasicStory> = (args: LoadingsBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { label: false, block: false, big: false, invert: false, fullpage: false, dialog: false, sidepanel: false };
+Basic.args = { label: false, block: false, l: false, invert: false, fullpage: false, dialog: false, sidepanel: false };

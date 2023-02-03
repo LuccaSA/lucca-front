@@ -5,8 +5,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	selector: 'forms-textfields-stories',
 	templateUrl: './textfields.stories.html',
 	styles: [
-		'.demo-white { background: #F5F5F5; display: inline-block; padding: var(--spacings-smaller) var(--spacings-small); border-radius: 3px;}',
-		'.demo-invert { background: #444; display: inline-block; padding: var(--spacings-smaller) var(--spacings-small); margin: 0 var(--spacings-smaller); border-radius: 3px; }',
+		'.demo-white { background: #F5F5F5; display: inline-block; padding: var(--spacings-XS) var(--spacings-S); border-radius: 3px;}',
+		'.demo-invert { background: #444; display: inline-block; padding: var(--spacings-XS) var(--spacings-S); margin: 0 var(--spacings-XS); border-radius: 3px; }',
 	],
 })
 class TextfieldsStory {}

@@ -4,7 +4,7 @@ interface ActionBasicStory {
 	mod: string;
 	loading: boolean;
 	disabled: boolean;
-	small: boolean;
+	s: boolean;
 }
 
 export default {
@@ -26,7 +26,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			},
@@ -38,7 +38,7 @@ function getTemplate(args: ActionBasicStory): string {
 	const classes = [args.mod].filter(Boolean).join(' ');
 	const attributes = args.disabled ? `disabled="disabled"` : '';
 	const loading = args.loading ? `is-loading` : '';
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	let icon = 'edit';
 	let tooltip = 'Modifier';
 	if (args.mod === 'mod-delete') {
@@ -47,7 +47,7 @@ function getTemplate(args: ActionBasicStory): string {
 	}
 
 	return `
-	<button type="button" class="actionIcon ${classes} ${small} ${loading}" luTooltip="Modifier" ${attributes}>
+	<button type="button" class="actionIcon ${classes} ${s} ${loading}" luTooltip="Modifier" ${attributes}>
 		<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
 		<span class="u-mask">Modifier</span>
 	</button>
@@ -68,4 +68,4 @@ const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 });
 
 export const BasicAction = Template.bind({});
-BasicAction.args = { mod: '', loading: false, small: '', disabled: false };
+BasicAction.args = { mod: '', loading: false, s: '', disabled: false };

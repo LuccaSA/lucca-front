@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface CalloutIconStory {
-	small: boolean;
+	s: boolean;
 	palette: string;
 	icon: string;
 }
@@ -9,7 +9,7 @@ interface CalloutIconStory {
 export default {
 	title: 'Documentation/Feedback/Callout/Icon',
 	argTypes: {
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			},
@@ -30,7 +30,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: CalloutIconStory): string {
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	const palette = args.palette;
 	const icon = args.icon;
 	let text: {title: string, description: string};
@@ -49,7 +49,7 @@ function getTemplate(args: CalloutIconStory): string {
 			break;
   };
 	return `
-	<div class="callout mod-icon ${small} ${palette}">
+	<div class="callout mod-icon ${s} ${palette}">
 		<div class="callout-icon">
 			<span aria-hidden="true" class="lucca-icon ${icon}"></span>
 		</div>
@@ -64,5 +64,4 @@ const Template: Story<CalloutIconStory> = (args: CalloutIconStory) => ({
 });
 
 export const Icon = Template.bind({});
-Icon.args = { small: false, icon: 'icon-help', palette: '' };
-
+Icon.args = { s: false, icon: 'icon-help', palette: '' };

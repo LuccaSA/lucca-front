@@ -11,7 +11,7 @@ export default {
 	title: 'Documentation/Forms/Checkboxes/Basic',
 	argTypes: {
 		size: {
-			options: ['', 'mod-small', 'mod-big'],
+			options: ['', 'mod-S', 'mod-L'],
 			control: {
 				type: 'radio',
 			},

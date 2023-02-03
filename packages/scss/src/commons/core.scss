@@ -81,8 +81,8 @@ $decoration: 'underline', 'line-trough', 'none';
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {
 		.u-text#{transform.capitalize($key)} {
-			font-size: var(--sizes-#{$key}-font-size) #{$suffix};
-			line-height: var(--sizes-#{$key}-line-height) #{$suffix};
+			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
+			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
 		}
 	}
 }

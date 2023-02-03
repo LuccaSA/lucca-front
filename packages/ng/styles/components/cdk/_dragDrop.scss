@@ -18,19 +18,19 @@
 }
 
 .dragDrop-list {
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 }
 
 .dragDrop-item {
 	cursor: grab;
 	&:not(.cdk-drag-placeholder) {
 		&:first-of-type {
-			border-top-left-radius: var(--commons-border-radius);
-			border-top-right-radius: var(--commons-border-radius);
+			border-top-left-radius: var(--commons-borderRadius);
+			border-top-right-radius: var(--commons-borderRadius);
 		}
 		&:last-of-type {
-			border-bottom-left-radius: var(--commons-border-radius);
-			border-bottom-right-radius: var(--commons-border-radius);
+			border-bottom-left-radius: var(--commons-borderRadius);
+			border-bottom-right-radius: var(--commons-borderRadius);
 		}
 	}
 	&:active {
@@ -38,7 +38,7 @@
 	}
 }
 .dragDrop-item-content {
-	padding: var(--spacings-smaller);
+	padding: var(--spacings-XS);
 }
 
 .cdk-drag-preview {
@@ -46,7 +46,7 @@
 	box-sizing: border-box;
 	box-shadow: form.fakeBorderOverlay(var(--palettes-secondary-200));
 	background-color: var(--palettes-secondary-50);
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 	cursor: grabbing;
 }
 

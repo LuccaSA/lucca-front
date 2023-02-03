@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface MenuCountStory {
 	noBorder: boolean;
 	header: boolean;
-	small: boolean;
+	s: boolean;
 	disabled: boolean;
 }
 
@@ -20,7 +20,7 @@ export default {
 				type: 'boolean',
 			}
 		},
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			}
@@ -36,10 +36,10 @@ export default {
 function getTemplate(args: MenuCountStory): string {
 	const noBorder = args.noBorder ? `mod-noBorder` : '';
 	const header = args.header ? `mod-header` : '';
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	return `
-	<nav class="menu ${small} ${noBorder} ${header}">
+	<nav class="menu ${s} ${noBorder} ${header}">
 		<ul class="menu-list">
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled} aria-current="page">
@@ -71,4 +71,4 @@ const Template: Story<MenuCountStory> = (args: MenuCountStory) => ({
 });
 
 export const Count = Template.bind({});
-Count.args = { noBorder: false, header: false, small: false, disabled: false };
+Count.args = { noBorder: false, header: false, s: false, disabled: false };

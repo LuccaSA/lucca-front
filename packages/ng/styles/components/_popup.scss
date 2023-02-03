@@ -2,32 +2,30 @@
 
 :root {
 	--components-popup-panel-background-color: var(--colors-white-color);
-	--components-popup-size-small: 32rem;
-	--components-popup-size-medium: 42rem;
-	--components-popup-size-large: 60rem;
-	--components-popup-padding-horizontal: var(--spacings-big);
-	--components-popup-padding-vertical: var(--spacings-small);
+	--components-popup-S: 32rem;
+	--components-popup-M: 42rem;
+	--components-popup-L: 60rem;
+	--components-popup-padding-horizontal: var(--spacings-L);
+	--components-popup-padding-vertical: var(--spacings-S);
 }
 
 .lu-popup-panel {
 	box-shadow: var(--commons-elevations-elevation-3);
 	position: relative;
 	background-color: var(--components-popup-panel-background-color);
-	border-radius: var(--commons-border-radius);
-	width: var(--components-popup-size-medium);
+	border-radius: var(--commons-borderRadius);
+	width: var(--components-popup-M);
 	max-width: 95%;
 	max-height: 90vh;
 	overflow: auto;
 	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
 
-	&.mod-small,
-	&.size-small {
-		width: var(--components-popup-size-small);
+	&.mod-S {
+		width: var(--components-popup-S);
 	}
 
-	&.mod-large,
-	&.size-large {
-		width: var(--components-popup-size-large);
+	&.mod-L {
+		width: var(--components-popup-L);
 	}
 }
 
@@ -44,14 +42,14 @@
 }
 
 .lu-modal-header {
-	padding: var(--components-popup-padding-vertical) var(--spacings-biggest) var(--components-popup-padding-vertical)
+	padding: var(--components-popup-padding-vertical) var(--spacings-XXL) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);
 	position: relative;
 }
 
 .lu-modal-header-title {
-	font-size: var(--sizes-big-font-size);
-	line-height: var(--sizes-big-line-height);
+	font-size: var(--sizes-L-fontSize);
+	line-height: var(--sizes-L-lineHeight);
 	margin: 0;
 }
 
@@ -60,7 +58,7 @@
 	background: transparent;
 	border: none;
 	outline: none;
-	padding: var(--spacings-smaller);
+	padding: var(--spacings-XS);
 	height: 3rem;
 	width: 3rem;
 	position: absolute;
@@ -103,14 +101,14 @@
 
 .lu-modal-footer {
 	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
-	padding: var(--spacings-smaller) var(--spacings-small) var(--spacings-smaller) var(--components-popup-padding-horizontal);
+	padding: var(--spacings-XS) var(--spacings-S) var(--spacings-XS) var(--components-popup-padding-horizontal);
 	display: flex;
 	margin-top: auto;
 	align-items: center;
 	justify-content: flex-end;
 }
 
-@include media.smallerThan('xxs') {
+@include media.max('XXS') {
 	.lu-popup-panel {
 		border-radius: 0;
 		max-width: none;
@@ -142,14 +140,14 @@
 		}
 		.lu-modal-content-title {
 			color: var(--palettes-grey-800);
-			font-size: var(--sizes-bigger-font-size);
+			font-size: var(--sizes-XL-fontSize);
 			margin-top: 2.5rem;
 		}
 		.button {
 			margin-bottom: 2.5rem;
 		}
 		.modal-visual {
-			margin: 4.5rem calc(var(--spacings-big) * -1) 0 calc(var(--spacings-big) * -1);
+			margin: 4.5rem calc(var(--spacings-L) * -1) 0 calc(var(--spacings-L) * -1);
 		}
 
 		.modal-visual-illustration {

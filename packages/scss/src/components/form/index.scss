@@ -21,7 +21,7 @@
 
 	@each $breakpoint, $value in config.$breakpoints {
 		@for $i from 1 through 12 {
-			&.mod-#{$breakpoint}#{$i} {
+			&.mod-#{$i}\@mediaMin#{$breakpoint} {
 				@include breakpoint($breakpoint, $i);
 			}
 		}

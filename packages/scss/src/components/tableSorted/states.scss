@@ -73,7 +73,7 @@
 
 	.table-head-row-cell-sortableButton {
 		color: var(--palettes-grey-900);
-		padding: var(--spacings-small);
+		padding: var(--spacings-S);
 
 		&::after {
 			@include icon.generate('arrow_full_north');

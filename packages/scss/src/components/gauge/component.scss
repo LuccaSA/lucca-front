@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 	height: var(--components-gauge-height);
 	overflow: hidden;
 	position: relative;

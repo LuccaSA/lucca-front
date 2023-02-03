@@ -1,41 +1,41 @@
 @mixin headline {
-	--sizes-vertical-padding: var(--sizes-headline-vertical-padding);
-	--sizes-font-size: var(--sizes-headline-font-size);
-	--sizes-line-height: var(--sizes-headline-line-height);
+	--sizes-verticalPadding: var(--sizes-headline-verticalPadding);
+	--sizes-fontSize: var(--sizes-headline-fontSize);
+	--sizes-lineHeight: var(--sizes-headline-lineHeight);
 }
 
 @mixin h1 {
-	--sizes-vertical-padding: var(--sizes-biggest-vertical-padding);
-	--sizes-font-size: var(--sizes-biggest-font-size);
-	--sizes-line-height: var(--sizes-biggest-line-height);
+	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding);
+	--sizes-fontSize: var(--sizes-XXL-fontSize);
+	--sizes-lineHeight: var(--sizes-XXL-lineHeight);
 }
 
 @mixin h2 {
-	--sizes-vertical-padding: var(--sizes-bigger-vertical-padding);
-	--sizes-font-size: var(--sizes-bigger-font-size);
-	--sizes-line-height: var(--sizes-bigger-line-height);
+	--sizes-verticalPadding: var(--sizes-XL-verticalPadding);
+	--sizes-fontSize: var(--sizes-XL-fontSize);
+	--sizes-lineHeight: var(--sizes-XL-lineHeight);
 }
 
 @mixin h3 {
-	--sizes-vertical-padding: var(--sizes-big-vertical-padding);
-	--sizes-font-size: var(--sizes-big-font-size);
-	--sizes-line-height: var(--sizes-big-line-height);
+	--sizes-verticalPadding: var(--sizes-L-verticalPadding);
+	--sizes-fontSize: var(--sizes-L-fontSize);
+	--sizes-lineHeight: var(--sizes-L-lineHeight);
 }
 
 @mixin h4 {
-	--sizes-vertical-padding: var(--sizes-standard-vertical-padding);
-	--sizes-font-size: var(--sizes-standard-font-size);
-	--sizes-line-height: var(--sizes-standard-line-height);
+	--sizes-verticalPadding: var(--sizes-M-verticalPadding);
+	--sizes-fontSize: var(--sizes-M-fontSize);
+	--sizes-lineHeight: var(--sizes-M-lineHeight);
 }
 
 @mixin h5 {
-	--sizes-vertical-padding: var(--sizes-small-vertical-padding);
-	--sizes-font-size: var(--sizes-small-font-size);
-	--sizes-line-height: var(--sizes-small-line-height);
+	--sizes-verticalPadding: var(--sizes-S-verticalPadding);
+	--sizes-fontSize: var(--sizes-S-fontSize);
+	--sizes-lineHeight: var(--sizes-S-lineHeight);
 }
 
 @mixin h6 {
-	--sizes-vertical-padding: var(--sizes-smaller-vertical-padding);
-	--sizes-font-size: var(--sizes-smaller-font-size);
-	--sizes-line-height: var(--sizes-smaller-line-height);
+	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
+	--sizes-fontSize: var(--sizes-XS-fontSize);
+	--sizes-lineHeight: var(--sizes-XS-lineHeight);
 }

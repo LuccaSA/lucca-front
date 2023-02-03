@@ -15,7 +15,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'mod-small', 'mod-smaller'],
+			options: ['', 'mod-S', 'mod-XS'],
 			control: {
 				type: 'radio',
 			},

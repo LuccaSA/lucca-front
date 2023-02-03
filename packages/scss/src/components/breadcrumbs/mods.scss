@@ -17,7 +17,7 @@
 					&::before {
 						@include icon.generate('format_undo');
 
-						padding-right: var(--spacings-smallest);
+						padding-right: var(--spacings-XXS);
 					}
 				}
 			}

@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 	background-color: var(--palettes-100, var(--components-callout-background));
 	color: var(--palettes-grey-800);
 	margin: var(--components-callout-margin);
@@ -22,7 +22,7 @@
 	@at-root ($atRoot) {
 		.callout-title {
 			font-weight: 600;
-			margin-bottom: var(--spacings-smallest);
+			margin-bottom: var(--spacings-XXS);
 		}
 	}
 }

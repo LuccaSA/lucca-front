@@ -1,9 +1,9 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--colors-white-color);
-	border-radius: var(--commons-border-radius-big);
+	border-radius: var(--commons-borderRadius-L);
 	border-color: var(--commons-divider-color);
 	border-width: 1px;
-	margin-bottom: var(--spacings-small);
+	margin-bottom: var(--spacings-S);
 	border-style: solid;
 	display: block;
 	position: relative;

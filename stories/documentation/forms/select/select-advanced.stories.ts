@@ -25,7 +25,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 					<header class="lu-picker-header">
 						<lu-option-feeder [options]="options"></lu-option-feeder>
 						<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-						<lu-option-select-all class="u-displayBlock u-marginSmaller"></lu-option-select-all>
+						<lu-option-select-all class="u-displayBlock u-marginXS"></lu-option-select-all>
 						<lu-option-pager></lu-option-pager>
 					</header>
 					<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>

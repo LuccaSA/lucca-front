@@ -12,7 +12,7 @@ function getTemplate(args: HeadersMenuStory): string {
 	<header class="pageHeader mod-withMenu">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="u-marginReset u-marginRightStandard">H1. Page title</h1>
+				<h1 class="u-margin0 u-marginRightM">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-edit"></span>
@@ -42,8 +42,8 @@ function getTemplate(args: HeadersMenuStory): string {
 			</div>
 		</div>
 		<section class="pageHeader-description">
-			<p class="u-marginBottomReset">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside size-smaller u-marginLeftSmallest"></span></a>.
+			<p class="u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside mod-XS u-marginLeftXXS"></span></a>.
 			</p>
 		</section>
 		<nav class="menu">

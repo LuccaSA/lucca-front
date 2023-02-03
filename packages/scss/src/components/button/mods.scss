@@ -1,25 +1,25 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin small {
-	--components-button-font-size: var(--sizes-small-font-size);
-	--components-button-line-height: var(--sizes-smaller-line-height);
-	--components-button-padding: var(--spacings-smaller) var(--spacings-small);
-	--icon-size: var(--sizes-standard-font-size);
+@mixin S {
+	--components-button-font-size: var(--sizes-S-fontSize);
+	--components-button-line-height: var(--sizes-XS-lineHeight);
+	--components-button-padding: var(--spacings-XS) var(--spacings-S);
+	--icon-size: var(--sizes-M-fontSize);
 }
 
-@mixin smaller {
-	--components-button-font-size: var(--sizes-smaller-font-size);
-	--components-button-line-height: var(--sizes-smaller-line-height);
-	--components-button-padding: var(--spacings-smallest) var(--spacings-smaller);
-	--icon-size: var(--sizes-small-font-size);
-	--components-button-gap: var(--spacings-smallest);
+@mixin XS {
+	--components-button-font-size: var(--sizes-XS-fontSize);
+	--components-button-line-height: var(--sizes-XS-lineHeight);
+	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
+	--icon-size: var(--sizes-S-fontSize);
+	--components-button-gap: var(--spacings-XXS);
 }
 
 @mixin text {
 	background-color: transparent;
 	box-shadow: none;
 	color: var(--palettes-700, var(--palettes-grey-700));
-	padding: var(--spacings-smaller);
+	padding: var(--spacings-XS);
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
@@ -29,7 +29,7 @@
 		}
 
 		&:focus {
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
 				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
 			background: var(--palettes-50, var(--palettes-grey-50));
 			outline: none;
@@ -37,7 +37,7 @@
 
 		&:active {
 			background-color: var(--palettes-100, var(--palettes-grey-100));
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
 				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
 		}
 	}
@@ -53,13 +53,13 @@
 		&:hover {
 			color: var(--palettes-700, var(--palettes-grey-700));
 			background-color: var(--palettes-100, var(--palettes-grey-100));
-			box-shadow: var(--commons-box-shadow-xs), inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+			box-shadow: var(--commons-boxShadow-XS), inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
 		}
 
 		&:focus {
 			color: var(--palettes-700, var(--palettes-grey-700));
 			background-color: var(--palettes-100, var(--palettes-grey-100));
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
 				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
 			outline: none;
 		}
@@ -83,11 +83,11 @@
 }
 
 @mixin icon($atRoot: 'without: rule') {
-	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest));
+	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
 @mixin iconSmaller {
-	--components-button-padding: var(--spacings-smallest) var(--spacings-smaller);
+	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 
 @mixin invert {
@@ -119,19 +119,19 @@
 	}
 }
 
-@mixin moreSmall {
+@mixin moreS {
 	min-width: 1.75rem;
 }
 
 @mixin counter($atRoot: 'without: rule') {
-	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest)) var(--spacings-smaller) var(--spacings-small);
+	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
 
 	@at-root ($atRoot) {
 		.button-counter {
 			background-color: var(--palettes-500, var(--palettes-primary-500));
 			border-radius: 1rem;
 			display: flex;
-			font-size: var(--sizes-smaller-font-size);
+			font-size: var(--sizes-XS-fontSize);
 			height: 1.5rem;
 			min-width: 1.5rem;
 			align-items: center;
@@ -140,8 +140,8 @@
 	}
 }
 
-@mixin counterSmall {
-	--components-button-padding: .375rem calc(var(--spacings-smaller) + var(--spacings-smallest)) .375rem var(--spacings-small);
+@mixin counterS {
+	--components-button-padding: .375rem calc(var(--spacings-XS) + var(--spacings-XXS)) .375rem var(--spacings-S);
 
 	.button-counter {
 		height: 1.25rem;
@@ -149,8 +149,8 @@
 	}
 }
 
-@mixin counterSmaller {
-	--components-button-padding: var(--spacings-smallest) var(--spacings-smaller) var(--spacings-smallest) calc(var(--spacings-smaller) + var(--spacings-smallest));
+@mixin counterXS {
+	--components-button-padding: var(--spacings-XXS) var(--spacings-XS) var(--spacings-XXS) calc(var(--spacings-XS) + var(--spacings-XXS));
 
 	.button-counter {
 		height: 1rem;

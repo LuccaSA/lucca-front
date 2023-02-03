@@ -1,8 +1,8 @@
 @mixin component($atRoot: 'without: rule') {
-	margin: var(--spacings-smaller);
-	padding: var(--spacings-smallest) var(--spacings-smaller);
+	margin: var(--spacings-XS);
+	padding: var(--spacings-XXS) var(--spacings-XS);
 	border: 0;
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 	display: inline-flex;
 	background-color: var(--palettes-50, var(--palettes-primary-50));
 	transition: box-shadow var(--commons-animations-durations-fast);
@@ -20,7 +20,7 @@
 
 		.timepicker-field-input {
 			background-color: transparent;
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius);
 			text-align: center;
 			color: var(--palettes-grey-800);
 			width: var(--components-timepicker-input-width);
@@ -55,7 +55,7 @@
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius);
 			width: var(--components-timepicker-input-width);
 			padding: 0;
 
@@ -80,7 +80,7 @@
 		}
 
 		.timepicker-separator {
-			margin: 0 var(--spacings-smallest);
+			margin: 0 var(--spacings-XXS);
 			text-align: center;
 			width: 0.5rem;
 		}

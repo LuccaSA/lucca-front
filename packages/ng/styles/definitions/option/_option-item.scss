@@ -1,17 +1,17 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 :root {
-	--components-options-item-padding-vertical: var(--spacings-smaller);
-	--components-options-item-padding-horizontal: var(--spacings-smaller);
-	--components-options-item-multiple-padding: var(--spacings-big);
+	--components-options-item-padding-vertical: var(--spacings-XS);
+	--components-options-item-padding-horizontal: var(--spacings-XS);
+	--components-options-item-multiple-padding: var(--spacings-L);
 	--components-options-item-icon-color: var(--palettes-grey-800);
 
 	--components-options-checkbox-left: 0.5rem;
 	--components-options-checkbox-size: 1rem;
 	--components-options-checkbox-color: var(--palettes-primary-700);
-	--components-options-checkbox-border-radius: var(--commons-border-radius);
+	--components-options-checkbox-border-radius: var(--commons-borderRadius);
 	--components-options-checkbox-border-color: var(--palettes-grey-700);
-	--components-options-establishment-multiple-padding: var(--spacings-standard);
+	--components-options-establishment-multiple-padding: var(--spacings-M);
 }
 
 @mixin optionItemStyle {
@@ -115,7 +115,7 @@
 			.optionItem-value {
 				position: relative;
 				padding-left: calc(
-					2 * var(--components-options-item-padding-horizontal) + var(--components-options-checkbox-size) + var(--spacings-smaller)
+					2 * var(--components-options-item-padding-horizontal) + var(--components-options-checkbox-size) + var(--spacings-XS)
 				);
 			}
 			.optionItem-value {

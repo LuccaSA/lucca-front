@@ -10,7 +10,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	selector: 'select-stories',
 	template: `
 		<div class="u-displayFlex">
-			<label class="textfield u-marginRightSmall">
+			<label class="textfield u-marginRightS">
 				<lu-select class="textfield-input" placeholder="Select an item">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 					<lu-option-picker>
@@ -21,7 +21,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 				</lu-select>
 				<span class="textfield-label">Select</span>
 			</label>
-			<label class="textfield u-marginRightSmall">
+			<label class="textfield u-marginRightS">
 				<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 					<lu-option-picker>
@@ -32,7 +32,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 				</lu-select>
 				<span class="textfield-label">Multiple Select</span>
 			</label>
-			<label class="textfield u-marginRightSmall">
+			<label class="textfield u-marginRightS">
 				<lu-select [(ngModel)]="item" class="textfield-input">
 					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 					<lu-option-picker>
@@ -134,7 +134,7 @@ class SelectStoriesModule {}
 		</label>
 		<label class="textfield">
 			<lu-select class="textfield-input">
-				<h4 class="u-marginReset" *luDisplayer="let value">{{ value.id }} - {{ value.name }}</h4>
+				<h4 class="u-margin0" *luDisplayer="let value">{{ value.id }} - {{ value.name }}</h4>
 				<lu-option-picker>
 					<lu-option [value]="green">{{ green.name }}</lu-option>
 					<lu-option [value]="red">{{ red.name }}</lu-option>

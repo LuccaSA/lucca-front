@@ -6,7 +6,7 @@
 	left: 0;
 	right: 0;
 
-	@include media.smallerThan('s') {
+	@include media.max('S') {
 		left: 0 !important;
 		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	}

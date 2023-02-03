@@ -5,7 +5,7 @@ interface TableBasicStory {
 	zebra: boolean;
 	alignTop: boolean;
 	horizontalAlign: string;
-	small: boolean;
+	s: boolean;
 	borderless: boolean;
 	noOffset: boolean;
 	parentChild: boolean;
@@ -25,7 +25,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			},
@@ -73,14 +73,14 @@ function getTemplate(args: TableBasicStory): string {
 	const zebra = args.zebra ? `mod-zebra` : '';
 	const alignTop = args.alignTop ? `mod-alignTop` : '';
 	const horizontalAlign = args.horizontalAlign;
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	const borderless = args.borderless ? `mod-borderless` : '';
 	const noOffset = args.noOffset ? `mod-noOffset` : '';
 	const parent = args.parentChild ? `mod-parent` : '';
 	const child = args.parentChild ? `mod-child` : '';
 	const collapsable = args.collapsable ? `mod-collapsable` : '';
 	return `
-	<table class="table ${clickable} ${zebra} ${alignTop} ${small} ${borderless} ${noOffset}">
+	<table class="table ${clickable} ${zebra} ${alignTop} ${s} ${borderless} ${noOffset}">
 		<thead class="table-head">
 			<tr class="table-head-row">
 				<th class="table-head-row-cell">Label</th>
@@ -123,4 +123,4 @@ const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { clickable: false, zebra: false, alignTop: false, horizontalAlign: '', small: false, borderless: false, noOffset: false, parentChild: false, collapsable: false };
+Basic.args = { clickable: false, zebra: false, alignTop: false, horizontalAlign: '', s: false, borderless: false, noOffset: false, parentChild: false, collapsable: false };

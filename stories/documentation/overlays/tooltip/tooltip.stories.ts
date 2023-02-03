@@ -8,7 +8,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	selector: 'tooltip-stories',
 	template: `<button
 		type="button"
-		class="button u-marginBig"
+		class="button u-marginL"
 		luTooltip="so you can see me"
 		[luTooltipEnterDelay]="luTooltipEnterDelay"
 		[luTooltipLeaveDelay]="luTooltipLeaveDelay"

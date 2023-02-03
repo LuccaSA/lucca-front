@@ -8,8 +8,8 @@
 		@include inline;
 	}
 
-	&.mod-small {
-		@include small;
+	&.mod-S {
+		@include S;
 	}
 }
 
@@ -17,8 +17,8 @@
 	&:is(:checked) {
 		@include checked;
 
-		.switch.mod-small & {
-			@include checkedSmall;
+		.switch.mod-S & {
+			@include checkedS;
 		}
 
 		&:hover {

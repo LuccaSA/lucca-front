@@ -1,18 +1,18 @@
 @mixin userPictureVars {
-	--components-user-picture-image-size-default: 2.5rem;
-	--components-user-picture-font-size-default: 1.125rem;
-	--components-user-picture-image-size-smallest: 1rem;
-	--components-user-picture-font-size-smallest: 0.5625rem;
-	--components-user-picture-image-size-smaller: 1.5rem;
-	--components-user-picture-font-size-smaller: 0.75rem;
-	--components-user-picture-image-size-small: 2rem;
-	--components-user-picture-font-size-small: 0.875rem;
-	--components-user-picture-image-size-large: 3rem;
-	--components-user-picture-font-size-large: 1.375rem;
-	--components-user-picture-image-size-larger: 4.5rem;
-	--components-user-picture-font-size-larger: 1.8rem;
-	--components-user-picture-image-size-largest: 7.5rem;
-	--components-user-picture-font-size-largest: 3rem;
+	--components-userPicture-XXS-image: 1rem;
+	--components-userPicture-XXS-fontSize: 0.5625rem;
+	--components-userPicture-XS-image: 1.5rem;
+	--components-userPicture-XS-fontSize: 0.75rem;
+	--components-userPicture-S-image: 2rem;
+	--components-userPicture-S-fontSize: 0.875rem;
+	--components-userPicture-M-image: 2.5rem;
+	--components-userPicture-M-fontSize: 1.125rem;
+	--components-userPicture-L-image: 3rem;
+	--components-userPicture-L-fontSize: 1.375rem;
+	--components-userPicture-XL-image: 4.5rem;
+	--components-userPicture-XL-fontSize: 1.8rem;
+	--components-userPicture-XXL-image: 7.5rem;
+	--components-userPicture-XXL-fontSize: 3rem;
 }
 
 @mixin userPictureStyle {
@@ -29,40 +29,40 @@
 		background-repeat: no-repeat;
 		color: var(--colors-white-color);
 		display: flex;
-		font-size: var(--components-user-picture-font-size, var(--components-user-picture-font-size-default));
+		font-size: var(--components-user-picture-font-size, var(--components-userPicture-M-fontSize));
 		line-height: 1;
 		justify-content: center;
-		width: var(--components-user-picture-image-size, var(--components-user-picture-image-size-default));
+		width: var(--components-user-picture-image-size, var(--components-userPicture-M-image));
 	}
 
-	&.mod-smallest {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-smallest);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-smallest);
+	&.mod-XXS {
+		--components-user-picture-image-size: var(--components-userPicture-XXS-image);
+		--components-user-picture-font-size: var(--components-userPicture-XXS-fontSize);
 	}
 
-	&.mod-smaller {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-smaller);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-smaller);
+	&.mod-XS {
+		--components-user-picture-image-size: var(--components-userPicture-XS-image);
+		--components-user-picture-font-size: var(--components-userPicture-XS-fontSize);
 	}
 
-	&.mod-small {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-small);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-small);
+	&.mod-S {
+		--components-user-picture-image-size: var(--components-userPicture-S-image);
+		--components-user-picture-font-size: var(--components-userPicture-S-fontSize);
 	}
 
-	&.mod-large {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-large);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-large);
+	&.mod-L {
+		--components-user-picture-image-size: var(--components-userPicture-L-image);
+		--components-user-picture-font-size: var(--components-userPicture-L-fontSize);
 	}
 
-	&.mod-larger {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-larger);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-larger);
+	&.mod-XL {
+		--components-user-picture-image-size: var(--components-userPicture-XL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XL-fontSize);
 	}
 
-	&.mod-largest {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-largest);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-largest);
+	&.mod-XXL {
+		--components-user-picture-image-size: var(--components-userPicture-XXL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XXL-fontSize);
 	}
 
 	&.mod-border {

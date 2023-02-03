@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: GridsVerticalAlignmentStory): string {
 	return `
-	<div class="grid mod-xsTop">
+	<div class="grid mod-XSTop">
 		<div class="grid-xs6">
 			<div class="grid-demo" style="height:100px"></div>
 		</div>
@@ -16,7 +16,7 @@ function getTemplate(args: GridsVerticalAlignmentStory): string {
 			<div class="grid-demo">Top</div>
 		</div>
 	</div>
-	<div class="grid mod-xsMiddle">
+	<div class="grid mod-XSMiddle">
 		<div class="grid-xs6">
 			<div class="grid-demo" style="height:100px"></div>
 		</div>
@@ -24,7 +24,7 @@ function getTemplate(args: GridsVerticalAlignmentStory): string {
 			<div class="grid-demo">Middle</div>
 		</div>
 	</div>
-	<div class="grid mod-xsBottom">
+	<div class="grid mod-XSBottom">
 		<div class="grid-xs6">
 			<div class="grid-demo" style="height:100px"></div>
 		</div>
@@ -42,8 +42,8 @@ const Template: Story<GridsVerticalAlignmentStory> = (args: GridsVerticalAlignme
 		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: var(--spacings-small);
-			padding: var(--spacings-small);
+			margin-bottom: var(--spacings-S);
+			padding: var(--spacings-S);
 			border-radius: 1rem;
 		}`,
 	],

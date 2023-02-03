@@ -1,5 +1,5 @@
 @mixin component {
-	padding: var(--spacings-standard);
+	padding: var(--spacings-M);
 	max-width: 30rem;
 	min-height: 16rem;
 	display: flex;
@@ -10,13 +10,13 @@
 
 	.file-icon {
 		font-size: 1.5rem;
-		margin: 0 var(--spacings-smallest);
+		margin: 0 var(--spacings-XXS);
 		display: none;
 	}
 
 	.file-title {
-		font-size: var(--sizes-standard-font-size);
-		line-height: var(--sizes-standard-line-height);
+		font-size: var(--sizes-M-fontSize);
+		line-height: var(--sizes-M-lineHeight);
 		margin-bottom: 0;
 		font-weight: 600;
 		display: block;
@@ -25,36 +25,36 @@
 	}
 
 	.file-or {
-		font-size: var(--sizes-small-font-size);
-		line-height: var(--sizes-smaller-line-height);
-		margin-bottom: var(--spacings-smallest);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
+		margin-bottom: var(--spacings-XXS);
 		display: block;
 		position: relative;
 		color: var(--palettes-grey-600);
 
 		&:not(:empty) {
-			margin-bottom: var(--spacings-smaller);
+			margin-bottom: var(--spacings-XS);
 		}
 	}
 
 	.file-progress {
-		margin: var(--spacings-small) 0 var(--spacings-smaller);
+		margin: var(--spacings-S) 0 var(--spacings-XS);
 		display: block;
 	}
 
 	.file-name {
 		&:not(:empty) {
-			font-size: var(--sizes-small-font-size);
-			line-height: var(--sizes-smaller-line-height);
-			margin-bottom: var(--spacings-small);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			margin-bottom: var(--spacings-S);
 			color: var(--palettes-grey-600);
 			display: block;
 		}
 	}
 
 	.file-formats {
-		font-size: var(--sizes-smaller-font-size);
-		line-height: var(--sizes-smaller-line-height);
+		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
 		color: var(--palettes-grey-600);
 		position: relative;
 		display: block;
@@ -81,7 +81,7 @@
 		~ .file-content {
 			&::before {
 				border: 1px dashed var(--palettes-grey-400);
-				border-radius: var(--commons-border-radius);
+				border-radius: var(--commons-borderRadius);
 				position: absolute;
 				inset: 0;
 				content: '';
@@ -99,7 +99,7 @@
 					.file-button {
 						background-color: var(--palettes-grey-50);
 						color: var(--palettes-grey-700);
-						box-shadow: var(--commons-box-shadow-xs), 0 1px 2px rgba(black, 0.06), 0 0 0 1px var(--palettes-grey-500) inset;
+						box-shadow: var(--commons-boxShadow-XS), 0 1px 2px rgba(black, 0.06), 0 0 0 1px var(--palettes-grey-500) inset;
 					}
 				}
 			}

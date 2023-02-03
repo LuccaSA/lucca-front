@@ -25,7 +25,7 @@ export default {
 			},
 		},
 		sizes: {
-			options: ['mod-smallest', 'mod-smaller', 'mod-small', '', 'mod-large', 'mod-larger', 'mod-largest'],
+			options: ['mod-XXS', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-XXL'],
 			control: {
 				type: 'select',
 			},

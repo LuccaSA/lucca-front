@@ -1,25 +1,25 @@
 @mixin userTileStyle {
 	display: flex;
 	align-items: center;
-	padding: var(--spacings-smaller);
-	gap: var(--spacings-smaller);
+	padding: var(--spacings-XS);
+	gap: var(--spacings-XS);
 
 	.user-tile-title {
-		font-size: var(--sizes-standard-font-size);
-		line-height: var(--sizes-standard-line-height);
+		font-size: var(--sizes-M-fontSize);
+		line-height: var(--sizes-M-lineHeight);
 		font-weight: 600;
 		margin: 0;
 	}
 
 	.user-tile-label {
-    font-size: var(--sizes-small-font-size);
-		line-height: var(--sizes-smaller-line-height);
+    font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
     color: var(--palettes-grey-600);
 	}
 
 	.user-tile-footnote {
-		font-size: var(--sizes-small-font-size);
-		line-height: var(--sizes-small-line-height);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 	}
 
 	.user-info {
@@ -50,33 +50,33 @@
 		}
 	}
 
-  &.mod-smallest {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-smallest);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-smallest);
+  &.mod-XXS {
+		--components-user-picture-image-size: var(--components-userPicture-XXS-image);
+		--components-user-picture-font-size: var(--components-userPicture-XXS-fontSize);
   }
 
-  &.mod-smaller {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-smaller);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-smaller);
+  &.mod-XS {
+		--components-user-picture-image-size: var(--components-userPicture-XS-image);
+		--components-user-picture-font-size: var(--components-userPicture-XS-fontSize);
   }
 
-  &.mod-small {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-small);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-small);
+  &.mod-S {
+		--components-user-picture-image-size: var(--components-userPicture-S-image);
+		--components-user-picture-font-size: var(--components-userPicture-S-fontSize);
   }
 
-  &.mod-large {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-large);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-large);
+  &.mod-L {
+		--components-user-picture-image-size: var(--components-userPicture-XL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XL-fontSize);
   }
 
-  &.mod-larger {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-larger);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-larger);
+  &.mod-XL {
+		--components-user-picture-image-size: var(--components-userPicture-XL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XL-fontSize);
   }
 
-  &.mod-largest {
-		--components-user-picture-image-size: var(--components-user-picture-image-size-largest);
-		--components-user-picture-font-size: var(--components-user-picture-font-size-largest);
+  &.mod-XXL {
+		--components-user-picture-image-size: var(--components-userPicture-XXL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XXL-fontSize);
   }
 }

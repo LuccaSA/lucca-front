@@ -22,7 +22,7 @@
 
 		.header-nav {
 			height: var(--components-header-height);
-			padding-left: calc(var(--components-header-height) + var(--spacings-small));
+			padding-left: calc(var(--components-header-height) + var(--spacings-S));
 			align-items: flex-start;
 			display: flex;
 			flex-direction: column;
@@ -60,12 +60,12 @@
 
 		.header-nav-category {
 			color: var(--palettes-grey-500);
-			font-size: var(--sizes-small-font-size);
+			font-size: var(--sizes-S-fontSize);
 		}
 
 		.header-nav-title {
 			color: var(--palettes-primary-700);
-			line-height: var(--sizes-smaller-line-height);
+			line-height: var(--sizes-XS-lineHeight);
 			margin: 0;
 		}
 	}

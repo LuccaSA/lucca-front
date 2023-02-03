@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: GridsJustifyStory): string {
 	return `
-	<div class="grid mod-xsBetween">
+	<div class="grid mod-XSBetween">
 		<div class="grid-xs3">
 			<div class="grid-demo">grid-xs3</div>
 		</div>
@@ -19,7 +19,7 @@ function getTemplate(args: GridsJustifyStory): string {
 			<div class="grid-demo">grid-xs3</div>
 		</div>
 	</div>
-	<div class="grid mod-xsAround">
+	<div class="grid mod-XSAround">
 		<div class="grid-xs3">
 			<div class="grid-demo">grid-xs3</div>
 		</div>
@@ -40,8 +40,8 @@ const Template: Story<GridsJustifyStory> = (args: GridsJustifyStory) => ({
 		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: var(--spacings-small);
-			padding: var(--spacings-small);
+			margin-bottom: var(--spacings-S);
+			padding: var(--spacings-S);
 			border-radius: 1rem;
 		}`,
 	],

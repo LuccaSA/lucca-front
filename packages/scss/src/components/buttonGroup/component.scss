@@ -1,6 +1,6 @@
 @mixin component {
 	gap: var(--commons-divider-width);
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 	display: inline-flex;
 	list-style-type: none;
 	overflow: hidden;
@@ -17,8 +17,8 @@
 		border-radius: 0;
 		display: block;
 		margin: 0;
-		padding-left: var(--spacings-small);
-		padding-right: var(--spacings-small);
+		padding-left: var(--spacings-S);
+		padding-right: var(--spacings-S);
 		position: relative;
 		flex-grow: 1;
 		white-space: normal;
@@ -66,11 +66,11 @@
 			height: 100%;
 			min-height: 2.25rem;
 
-			&.mod-small {
+			&.mod-S {
 				min-height: 2rem;
 			}
 
-			&.mod-smaller {
+			&.mod-XS {
 				min-height: 1.5rem;
 			}
 

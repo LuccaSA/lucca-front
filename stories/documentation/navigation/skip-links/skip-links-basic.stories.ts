@@ -29,15 +29,15 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	`,
 	styles: [`
 		#navSide {
-			margin-top: var(--spacings-smaller);
+			margin-top: var(--spacings-XS);
 		}
 
 		#main-content {
-			margin-top: var(--spacings-smaller);
+			margin-top: var(--spacings-XS);
 		}
 
 		.link {
-			margin-right: var(--spacings-smaller);
+			margin-right: var(--spacings-XS);
 		}
 	`]
 })

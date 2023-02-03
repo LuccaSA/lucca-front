@@ -2,7 +2,7 @@
 
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-menu-background);
-	column-gap: var(--spacings-big);
+	column-gap: var(--spacings-L);
 	align-items: center;
 	display: flex;
 	position: relative;
@@ -32,7 +32,7 @@
 		.menu-list {
 			@include reset.list;
 
-			column-gap: var(--spacings-big);
+			column-gap: var(--spacings-L);
 			display: flex;
 			flex-wrap: wrap;
 		}
@@ -41,7 +41,7 @@
 		.menu-list-item-action {
 			@include reset.button;
 			padding: var(--components-menu-padding);
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius);
 			color: var(--palettes-grey-700);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
@@ -53,7 +53,7 @@
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-primary-700));
-				border-radius: var(--commons-border-radius) var(--commons-border-radius) 0 0;
+				border-radius: var(--commons-borderRadius) var(--commons-borderRadius) 0 0;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;
 				display: block;

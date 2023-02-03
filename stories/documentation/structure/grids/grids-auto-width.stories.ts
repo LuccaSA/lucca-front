@@ -35,8 +35,8 @@ const Template: Story<GridsAutoWidthStory> = (args: GridsAutoWidthStory) => ({
 		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: var(--spacings-small);
-			padding: var(--spacings-small);
+			margin-bottom: var(--spacings-S);
+			padding: var(--spacings-S);
 			border-radius: 1rem;
 		}`,
 	],
