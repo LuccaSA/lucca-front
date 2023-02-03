@@ -9,10 +9,10 @@ export default {
 function getTemplate(args: BorderStory): string {
 	return `
 		<div class="u-border0"><code class="code">u-border0</code></div>
-		<div class="u-borderBottomReset"><code class="code">u-borderBottomReset</code></div>
-		<div class="u-borderTopReset"><code class="code">u-borderTopReset</code></div>
-		<div class="u-borderRightReset"><code class="code">u-borderRightReset</code></div>
-		<div class="u-borderLeftReset"><code class="code">u-borderLeftReset</code></div>
+		<div class="u-borderBottom0"><code class="code">u-borderBottom0</code></div>
+		<div class="u-borderTop0"><code class="code">u-borderTop0</code></div>
+		<div class="u-borderRight0"><code class="code">u-borderRight0</code></div>
+		<div class="u-borderLeft0"><code class="code">u-borderLeft0</code></div>
 	`;
 }
 
