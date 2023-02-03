@@ -36,7 +36,7 @@
 				@include bottom;
 			}
 
-			&.mod-arround\@mediaMin#{$breakpoint} {
+			&.mod-around\@mediaMin#{$breakpoint} {
 				@include around;
 			}
 

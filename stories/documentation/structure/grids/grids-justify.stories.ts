@@ -8,26 +8,26 @@ export default {
 
 function getTemplate(args: GridsJustifyStory): string {
 	return `
-	<div class="grid mod-XSBetween">
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+	<div class="grid mod-between@mediaMinXS">
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
 	</div>
-	<div class="grid mod-XSAround">
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+	<div class="grid mod-around@mediaMinXS">
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
 	</div>
 	`;

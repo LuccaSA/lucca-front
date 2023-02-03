@@ -9,16 +9,16 @@ export default {
 function getTemplate(args: GridsOffsetStory): string {
 	return `
 	<div class="grid">
-		<div class="grid-xs8 grid-xsOffset4">
-			<div class="grid-demo">grid-xs8 grid-xsOffset4</div>
+		<div class="grid-8@mediaMinXS grid-offset4@mediaMinXS">
+			<div class="grid-demo">grid-8@mediaMinXS grid-offset4@mediaMinXS</div>
 		</div>
 	</div>
 	<div class="grid">
-		<div class="grid-xs6 grid-xsOffset3">
-			<div class="grid-demo">grid-xs6 grid-xsOffset3</div>
+		<div class="grid-6@mediaMinXS grid-offset3@mediaMinXS">
+			<div class="grid-demo">grid-6@mediaMinXS grid-offset3@mediaMinXS</div>
 		</div>
-		<div class="grid-xs3">
-			<div class="grid-demo">grid-xs3</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3@mediaMinXS</div>
 		</div>
 	</div>
 	`;

@@ -9,20 +9,20 @@ export default {
 function getTemplate(args: GridsAutoWidthStory): string {
 	return `
 	<div class="grid">
-		<div class="grid-m">
-			<div class="grid-demo">grid-m</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid@mediaMinM</div>
 		</div>
-		<div class="grid-m">
-			<div class="grid-demo">grid-m</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid@mediaMinM</div>
 		</div>
-		<div class="grid-m">
-			<div class="grid-demo">grid-m</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid@mediaMinM</div>
 		</div>
-		<div class="grid-m">
-			<div class="grid-demo">grid-m</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid@mediaMinM</div>
 		</div>
-		<div class="grid-m">
-			<div class="grid-demo">grid-m</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid@mediaMinM</div>
 		</div>
 	</div>
 	`;
