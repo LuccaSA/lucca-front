@@ -106,7 +106,7 @@
 <script>
 	const isInsideStorybook = window.frameElement?.getAttribute('data-is-storybook') === 'true';
 
-	if (isInsideStorybook) {
+	if (!isInsideStorybook) {
 		const template = document.getElementById('outsideStorybookStyle');
 		document.head.appendChild(template.content.cloneNode(true));
 	}
