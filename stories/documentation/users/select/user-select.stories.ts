@@ -13,7 +13,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 }
 
 export default {
-	title: 'Documentation/Users/select',
+	title: 'Documentation/Users/Select/Basique',
 	component: LuUserSelectInputComponent,
 	decorators: [
 		componentWrapperDecorator(UserSelectStory),
