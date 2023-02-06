@@ -5,7 +5,7 @@
 		"**/.hg": true,
 		"**/CVS": true,
 		"**/.DS_Store": true,
-		"node_modules": true,
+		"node_modules": false,
 		"e2e": true
 	},
 	"css.validate": false,

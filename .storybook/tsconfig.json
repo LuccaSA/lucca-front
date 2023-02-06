@@ -1,10 +1,15 @@
 {
-	"extends": "../tsconfig.json",
-	"compilerOptions": {
-		"types": ["node"],
-		"allowSyntheticDefaultImports": true
-	},
-	"exclude": ["../packages/**/*.spec.ts", "../stories/**/*.spec.ts"],
-	"include": ["../packages/**/*", "../stories/**/*", "./msw/**/*"],
-	"files": ["./typings.d.ts"]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node",
+			"@testing-library/jest-dom"
+    ],
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["../node_modules/**/*", "../dist/**/*", "../packages/**/*.spec.ts", "../stories/**/*.spec.ts"],
+  "include": ["../packages/**/*", "../stories/**/*", "./msw/**/*"],
+  "files": [
+    "./typings.d.ts"
+  ]
 }
