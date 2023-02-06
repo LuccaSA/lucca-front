@@ -12,7 +12,7 @@ const ICONS = path.join(ROOT, 'packages', 'icons');
 const SCSS = path.join(ROOT, 'packages', 'scss');
 const SCHEMATICS = path.join(ROOT, 'packages', 'ng', 'schematics');
 
-const OUTPUT = path.join(ROOT, 'dist2');
+const OUTPUT = path.join(ROOT, 'dist');
 const OUTPUT_SCSS = path.join(OUTPUT, 'scss');
 const OUTPUT_ICONS = path.join(OUTPUT, 'icons');
 const OUTPUT_SCHEMATICS = path.join(OUTPUT, 'ng', 'schematics');
