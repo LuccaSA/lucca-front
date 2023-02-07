@@ -26,7 +26,6 @@ const Template: Story<ShadowsStory> = (args: ShadowsStory) => ({
 			margin-bottom: var(--spacings-small);
 			padding: var(--spacings-smaller);
 			width: 20rem;
-		}
 		}`,
 	],
 });
