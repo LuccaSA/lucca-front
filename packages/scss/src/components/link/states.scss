@@ -1,20 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-@mixin state {
-	&:not(.is-disabled) {
-		&:hover,
-		&:focus {
-			color: var(--commons-text-link-hover);
-		}
-	}
-}
-
->>>>>>> 595397968 (1752 - color + size + icon)
-=======
->>>>>>> b38920c51 (1752 - hover links)
 @mixin disabled {
 	color: var(--commons-text-link-disabled);
 	cursor: not-allowed;
-	pointer-events: all;
 }
