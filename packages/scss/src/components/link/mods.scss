@@ -1,0 +1,10 @@
+@mixin icon {
+	@at-root {
+		.lucca-icon {
+			text-decoration: none;
+			margin-left: var(--spacings-smallest);
+			font-size: var(--sizes-standard-font-size);
+			line-height: var(--sizes-smaller-line-height);
+		}
+	}
+}

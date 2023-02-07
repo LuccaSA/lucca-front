@@ -1,0 +1,4 @@
+@mixin disabled {
+	color: var(--commons-text-link-disabled);
+	cursor: not-allowed;
+}
