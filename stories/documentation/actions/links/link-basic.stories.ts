@@ -8,7 +8,8 @@ export default {
 
 function getTemplate(args: LinkBasicStory): string {
 	return `
-	<a href="#" class="link">Lien</a>
+<a href="#" class="link">Lien</a>
+<a class="link mod-icon" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-outside"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>
 	`;
 }
 
@@ -19,6 +20,9 @@ const Template: Story<LinkBasicStory> = (args: LinkBasicStory) => ({
 		`
 		:host {
 			display: block;
+		}
+		a {
+			margin-right: 1rem;
 		}`,
 	],
 });
