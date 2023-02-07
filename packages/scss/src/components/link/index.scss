@@ -4,19 +4,11 @@
 	@include vars;
 	@include component;
 
-	&.mod-small {
-		@include small;
-	}
-
 	&.mod-icon {
 		@include icon;
-
-		&.mod-small {
-			@include iconSmall;
-		}
 	}
 
-	&:is(.is-disabled) {
+	&:is(:disabled, .is-disabled) {
 		@include disabled;
 	}
 }

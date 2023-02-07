@@ -8,7 +8,7 @@
 	padding: 0;
 	text-decoration: underline;
 
-	&:not(.is-disabled) {
+	&:not(:disabled, .is-disabled) {
 		&:hover,
 		&:focus {
 			color: var(--commons-text-link-hover);
