@@ -16,7 +16,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 class UserHomonymsStory {}
 
 export default {
-	title: 'Documentation/Users/Select',
+	title: 'Documentation/Users/Select/Homonymes',
 	component: LuUserHomonymsComponent,
 	decorators: [
 		componentWrapperDecorator(UserHomonymsStory),

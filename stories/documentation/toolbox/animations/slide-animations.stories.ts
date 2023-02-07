@@ -48,7 +48,7 @@ class SlideAnimationStory {
 }
 
 export default {
-	title: 'Documentation/Toolbox/Animations',
+	title: 'Documentation/Toolbox/Animations/Slide',
 	component: SlideAnimationStory,
 	decorators: [
 		moduleMetadata({

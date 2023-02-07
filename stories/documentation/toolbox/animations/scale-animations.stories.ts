@@ -56,7 +56,7 @@ class ScaleAnimationStory {
 }
 
 export default {
-	title: 'Documentation/Toolbox/Animations',
+	title: 'Documentation/Toolbox/Animations/Scale',
 	component: ScaleAnimationStory,
 	decorators: [
 		moduleMetadata({

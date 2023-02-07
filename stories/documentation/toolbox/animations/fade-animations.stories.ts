@@ -23,7 +23,7 @@ class FadeAnimationStory {
 }
 
 export default {
-	title: 'Documentation/Toolbox/Animations',
+	title: 'Documentation/Toolbox/Animations/Fade',
 	component: FadeAnimationStory,
 	decorators: [
 		moduleMetadata({
