@@ -1,8 +1,8 @@
 @mixin number {
-	height: var(--sizes-standard-line-height);
 	font-size: var(--sizes-smaller-font-size);
-	min-width: var(--sizes-standard-line-height);
 	padding: var(--spacings-smallest);
+	height: var(--sizes-standard-line-height);
+	min-width: var(--sizes-standard-line-height);
 }
 
 @mixin numberSmall {
@@ -13,13 +13,4 @@
 @mixin numberSmaller {
 	height: var(--sizes-smaller-line-height);
 	min-width: var(--sizes-smaller-line-height);
-}
-
-@mixin icon {
-	gap: 0 var(--spacings-smallest);
-
-	.label-icon {
-		font-size: var(--sizes-standard-font-size);
-		margin: 0;
-	}
 }
