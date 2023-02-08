@@ -1,4 +1,10 @@
 {
 	"$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
-	"schematics": {}
+	"schematics": {
+		"migration-v15-tshirt-size": {
+			"version": "15.1.0-alpha",
+			"description": "Change small/standard/large sizes to xs/s/m/l",
+			"factory": "./migrations/tshirt-size/index"
+		}
+	}
 }
