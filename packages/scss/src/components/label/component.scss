@@ -2,7 +2,7 @@
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
 	display: inline-flex;
-	text-align: center;
+	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
 	border-radius: 9999px;
