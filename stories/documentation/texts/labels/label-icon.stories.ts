@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: LabelIconStory): string {
 	return `
-		<span class="label mod-icon"><span aria-hidden="true" class="lucca-icon icon-info label-icon"></span><span class="label-text">Label</span></span>
+		<span class="label mod-icon"><span aria-hidden="true" class="lucca-icon icon-info label-icon"></span>Label</span>
 	`;
 }
 
