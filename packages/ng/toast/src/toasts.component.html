@@ -1,25 +1,12 @@
 <div class="toasts mod-withCircularGauge" aria-live="polite" [class.mod-bottom]="bottom">
 	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast" class="toasts-item" [ngClass]="paletteClassByToastType[toast.type]">
-<<<<<<< HEAD
 		<span *ngIf="toast.type" class="toast-item-icon lucca-icon" aria-hidden="true" [ngClass]="iconClassByToastType[toast.type]"></span>
 		<div class="toast-item-content">
 			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
 			<div [innerHtml]="toast.message"></div>
 		</div>
 		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
-			<span class="lucca-icon icon-cross size-small" aria-hidden="true"></span>
-=======
-		<span
-			*ngIf="toast.type"
-			class="lucca-icon mod-S u-marginRightXS"
-			aria-hidden="true"
-			[ngClass]="iconClassByToastType[toast.type]"
-		>
-		</span>
-		<span [innerHtml]="toast.message"> </span>
-		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
 			<span class="lucca-icon icon-cross mod-XS" aria-hidden="true"></span>
->>>>>>> 0a53bf310 (figma/lf harmonize sizes)
 			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
 				<svg viewBox="0 0 32 32">
 					<circle r="16" cx="16" cy="16" [style.animation-duration]="toast.duration + 'ms'" />
