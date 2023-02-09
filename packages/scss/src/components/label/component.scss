@@ -1,14 +1,19 @@
 @mixin component {
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
-	display: inline-block;
-	text-align: center;
-	vertical-align: baseline;
+	display: inline-flex;
+	gap: 0 var(--spacings-smallest);
+	justify-content: center;
+	align-items: center;
 	white-space: nowrap;
 	border-radius: 9999px;
 	font-size: var(--sizes-small-font-size);
+	line-height: var(--sizes-smaller-line-height);
 	font-weight: 600;
-	line-height: 1.2;
 	margin: 0 0.3rem;
-	padding: var(--spacings-smallest) 0.8rem;
+	padding: var(--spacings-smallest) var(--spacings-smaller);
+
+	.label-icon {
+		margin: 0;
+	}
 }
