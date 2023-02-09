@@ -2,7 +2,7 @@
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
 	display: inline-flex;
-	gap: 0 var(--spacings-smallest);
+	gap: 0 var(--spacings-XXS);
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
@@ -15,5 +15,6 @@
 
 	.label-icon {
 		margin: 0;
+		font-size: var(--sizes-M-fontSize);
 	}
 }
