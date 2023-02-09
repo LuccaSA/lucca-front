@@ -158,7 +158,7 @@
 
 @mixin fieldMaterialFilled($fieldname) {
 	~ .#{$fieldname}-label {
-		font-size: --var(--sizes-S-fontSize);
+		font-size: var(--sizes-S-fontSize);
 		top: 0;
 	}
 }
