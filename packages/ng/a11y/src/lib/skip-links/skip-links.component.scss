@@ -1,0 +1,48 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+.skipLinks {
+	position: fixed;
+	list-style-type: none;
+	justify-content: center;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	z-index: 9010;
+	inset: calc(var(--spacings-smaller) + var(--spacings-smallest));
+	bottom: auto;
+}
+
+.skipLinks-action {
+	border: 0;
+	margin: 0;
+	font-weight: 600;
+	border-radius: var(--commons-border-radius);
+	font-size: var(--sizes-smaller-font-size);
+	line-height: var(--sizes-smaller-line-height);
+	padding: var(--spacings-smallest) var(--spacings-smaller);
+	transition: all var(--commons-animations-durations-fast);
+	background-color: var(--palettes-grey-600);
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
+	vertical-align: baseline;
+	white-space: nowrap;
+	color: var(--colors-white-color);
+	cursor: pointer;
+
+	&:focus-visible {
+		outline-offset: 2px;
+		outline: 2px solid var(--palettes-primary-700);
+	}
+
+	&:not(:focus, :focus-visible) {
+		@include a11y.mask;
+	}
+}
+
+::ng-deep {
+	.navSide,
+	.main-content {
+		scroll-margin-top: var(--commons-banner-height);
+	}
+}
