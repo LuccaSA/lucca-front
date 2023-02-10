@@ -1,24 +1,25 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin small {
-	--components-button-font-size: var(--components-button-small-font-size);
-	--components-button-line-height: var(--components-button-small-line-height);
-	--components-button-padding: var(--components-button-small-padding);
+	--components-button-font-size: var(--sizes-small-font-size);
+	--components-button-line-height: var(--sizes-smaller-line-height);
+	--components-button-padding: var(--spacings-smaller) var(--spacings-small);
 	--icon-size: var(--sizes-standard-font-size);
 }
 
 @mixin smaller {
-	--components-button-font-size: var(--components-button-smaller-font-size);
-	--components-button-line-height: var(--components-button-smaller-line-height);
-	--components-button-padding: var(--components-button-smaller-padding);
-	--icon-size: 0.875rem;
+	--components-button-font-size: var(--sizes-smaller-font-size);
+	--components-button-line-height: var(--sizes-smaller-line-height);
+	--components-button-padding: var(--spacings-smallest) var(--spacings-smaller);
+	--icon-size: var(--sizes-small-font-size);
+	--components-button-gap: var(--spacings-smallest);
 }
 
 @mixin text {
 	background-color: transparent;
 	box-shadow: none;
 	color: var(--palettes-700, var(--palettes-grey-700));
-	padding: var(--components-button-text-padding);
+	padding: var(--spacings-smaller);
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
@@ -72,8 +73,8 @@
 	}
 
 	.button-counter {
-		background-color: var(--palettes-grey-300);
-		color: var(--palettes-grey-800);
+		background-color: var(--palettes-300, var(--palettes-grey-300));
+		color: var(--palettes-800, var(--palettes-grey-800));
 	}
 }
 
@@ -82,40 +83,11 @@
 }
 
 @mixin icon {
-	align-items: center;
-	display: inline-flex;
-	gap: var(--spacings-smaller);
-	padding-left: var(--spacings-small);
-	padding-right: var(--spacings-small);
-	justify-content: center;
-
-	@at-root {
-		.button-icon {
-			height: 1.5rem;
-			line-height: 1.5rem;
-			font-size: 1.5rem;
-			transform: translateX(-0.2rem);
-			vertical-align: bottom;
-		}
-	}
-}
-
-@mixin iconSmall {
-	.button-icon {
-		font-size: var(--components-button-small-font-size);
-		height: var(--components-button-small-line-height);
-		line-height: var(--components-button-small-line-height);
-	}
+	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest));
 }
 
 @mixin iconSmaller {
-	gap: var(--spacings-smallest);
-
-	.button-icon {
-		font-size: var(--components-button-smaller-font-size);
-		height: var(--components-button-smaller-line-height);
-		line-height: var(--components-button-smaller-line-height);
-	}
+	--components-button-padding: var(--spacings-smallest) var(--spacings-smaller);
 }
 
 @mixin invert {
@@ -145,33 +117,41 @@
 		height: 0;
 		vertical-align: text-top;
 	}
+}
 
-	.mod-small {
-		width: 1.75rem;
-	}
+@mixin moreSmall {
+	min-width: 1.75rem;
 }
 
 @mixin counter {
-	padding-left: var(--spacings-small);
-	padding-right: var(--spacings-small);
+	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest)) var(--spacings-smaller) var(--spacings-small);
 
 	@at-root {
 		.button-counter {
 			background-color: var(--palettes-500, var(--palettes-primary-500));
 			border-radius: 1rem;
-			display: inline-block;
+			display: flex;
 			font-size: var(--sizes-smaller-font-size);
-			font-weight: 600;
 			height: 1.5rem;
 			min-width: 1.5rem;
-			margin-left: var(--spacings-smaller);
-			padding: 0 var(--spacings-smallest);
-			vertical-align: bottom;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 }
 
 @mixin counterSmall {
+	--components-button-padding: .375rem calc(var(--spacings-smaller) + var(--spacings-smallest)) .375rem var(--spacings-small);
+
+	.button-counter {
+		height: 1.25rem;
+		min-width: 1.25rem;
+	}
+}
+
+@mixin counterSmaller {
+	--components-button-padding: var(--spacings-smallest) var(--spacings-smaller) var(--spacings-smallest) calc(var(--spacings-smaller) + var(--spacings-smallest));
+
 	.button-counter {
 		height: 1rem;
 		min-width: 1rem;
