@@ -3,7 +3,7 @@
 @mixin component($atRoot: 'without: rule') {
 	@keyframes toast {
 		0% {
-			transform: translateY(var(--spacings-small));
+			transform: translateY(var(--spacings-S));
 			opacity: 0;
 		}
 
@@ -32,7 +32,7 @@
 			animation-name: toast;
 			animation-duration: var(--commons-animations-durations-standard);
 			animation-iteration-count: 1;
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius-M);
 			overflow: hidden;
 			position: relative;
 			transform-origin: top;
@@ -46,7 +46,7 @@
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
-			gap: var(--spacings-smaller);
+			gap: var(--spacings-XS);
 		}
 
 		.toasts-item-kill {

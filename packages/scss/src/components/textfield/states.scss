@@ -187,7 +187,7 @@
 
 	.textfield-label,
 	~ .textfield-label {
-		font-size: var(--sizes-small-font-size);
+		font-size: var(--sizes-S-fontSize);
 		color: var(--palettes-700, var(--components-textfield-material-default-palette-color));
 		top: 0;
 	}
@@ -203,7 +203,7 @@
 
 @mixin materialInputFilled {
 	~ .textfield-label {
-		font-size: var(--sizes-small-font-size);
+		font-size: var(--sizes-S-fontSize);
 		top: 0;
 	}
 }

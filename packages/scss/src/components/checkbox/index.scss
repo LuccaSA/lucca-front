@@ -8,11 +8,11 @@
 		@include inline;
 	}
 
-	&.mod-big {
+	&.mod-L {
 		@include big;
 	}
 
-	&.mod-small {
+	&.mod-S {
 		@include small;
 	}
 

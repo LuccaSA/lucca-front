@@ -36,11 +36,11 @@
 			@include searchClearable;
 		}
 
-		&.mod-small {
+		&.mod-S {
 			@include searchSmall;
 		}
 
-		&.mod-smaller {
+		&.mod-XS {
 			@include searchSmaller;
 		}
 
@@ -52,11 +52,11 @@
 	&.mod-clearable {
 		@include clearable;
 
-		&.mod-small {
+		&.mod-S {
 			@include clearableSmall;
 		}
 
-		&.mod-smaller {
+		&.mod-XS {
 			@include clearableSmaller;
 		}
 	}
@@ -68,7 +68,7 @@
 	&.mod-noLabel {
 		@include noLabel;
 
-		&.mod-smaller {
+		&.mod-XS {
 			@include noLabelSmaller;
 		}
 	}
@@ -76,7 +76,7 @@
 	&.mod-multiline {
 		@include multiline;
 
-		&.mod-small {
+		&.mod-S {
 			@include multilineSmall;
 		}
 	}
@@ -113,7 +113,7 @@
 		}
 	}
 
-	&.mod-small {
+	&.mod-S {
 		@include small;
 
 		&.textfield-input {
@@ -123,7 +123,7 @@
 		}
 	}
 
-	&.mod-smaller {
+	&.mod-XS {
 		@include smaller;
 
 		&.textfield-input {
@@ -145,7 +145,7 @@
 		@include size('short');
 	}
 
-	&.mod-default {
+	&.mod-M {
 		@include size('default');
 	}
 
@@ -180,7 +180,7 @@
 			@include compactSize('short');
 		}
 
-		&.mod-default {
+		&.mod-M {
 			@include compactSize('default');
 		}
 
@@ -234,7 +234,7 @@
 			}
 		}
 
-		&.mod-small {
+		&.mod-S {
 			@include materialSmall;
 		}
 
@@ -328,7 +328,7 @@
 	&.mod-multiline {
 		@include framedMultiline;
 
-		&.mod-small {
+		&.mod-S {
 			@include framedMultilineSmall;
 		}
 	}

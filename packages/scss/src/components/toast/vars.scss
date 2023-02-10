@@ -1,11 +1,11 @@
 @mixin vars {
 	--components-toasts-background: #323232;
 	--components-toasts-color: var(--colors-white-color);
-	--components-toasts-top: var(--spacings-standard);
-	--components-toasts-right: var(--spacings-standard);
-	--components-toasts-left: var(--spacings-standard);
-	--components-toasts-bottom: var(--spacings-standard);
-	--components-toasts-margin-bottom: var(--spacings-smaller);
+	--components-toasts-top: var(--spacings-M);
+	--components-toasts-right: var(--spacings-M);
+	--components-toasts-left: var(--spacings-M);
+	--components-toasts-bottom: var(--spacings-M);
+	--components-toasts-margin-bottom: var(--spacings-XS);
 	--components-toasts-maxwidth: 22.5rem;
-	--components-toasts-padding: var(--spacings-smaller) var(--spacings-small);
+	--components-toasts-padding: var(--spacings-XS) var(--spacings-S);
 }

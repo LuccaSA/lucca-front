@@ -5,7 +5,7 @@
 	.table-head-row-cell-sortableButton {
 		@include sortable;
 
-		.table.mod-small & {
+		.table.mod-S & {
 			@include sortableSmall;
 		}
 	}

@@ -1,10 +1,10 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-wrap: wrap;
-	margin: var(--spacings-small) 0;
+	margin: var(--spacings-S) 0;
 
 	> *:not(:last-child) {
-		margin-right: var(--spacings-smaller);
+		margin-right: var(--spacings-XS);
 	}
 
 	@at-root ($atRoot) {
@@ -17,7 +17,7 @@
 		}
 
 		.pagination-count-separator {
-			margin: 0 var(--spacings-smallest);
+			margin: 0 var(--spacings-XXS);
 		}
 
 		.pagination-navigation {
@@ -27,12 +27,12 @@
 			margin-bottom: 0;
 
 			> *:not(:last-child) {
-				margin-right: var(--spacings-smallest);
+				margin-right: var(--spacings-XXS);
 			}
 		}
 
 		.pagination-navigation-item {
-			margin-right: var(--spacings-smallest);
+			margin-right: var(--spacings-XXS);
 		}
 	}
 }

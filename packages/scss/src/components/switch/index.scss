@@ -8,7 +8,7 @@
 		@include inline;
 	}
 
-	&.mod-small {
+	&.mod-S {
 		@include small;
 	}
 }
@@ -17,7 +17,7 @@
 	&:is(:checked) {
 		@include checked;
 
-		.switch.mod-small & {
+		.switch.mod-S & {
 			@include checkedSmall;
 		}
 

@@ -1,7 +1,7 @@
 @mixin vars {
-	--components-button-margin: 0 var(--spacings-smaller) 0 0;
-	--components-button-font-size: var(--sizes-standard-font-size);
-	--components-button-line-height: var(--sizes-standard-line-height);
-	--components-button-padding: var(--spacings-smaller) var(--spacings-standard);
-	--components-button-gap: var(--spacings-smaller);
+	--components-button-margin: 0 var(--spacings-XS) 0 0;
+	--components-button-font-size: var(--sizes-M-fontSize);
+	--components-button-line-height: var(--sizes-M-lineHeight);
+	--components-button-padding: var(--spacings-XS) var(--spacings-M);
+	--components-button-gap: var(--spacings-XS);
 }

@@ -11,7 +11,7 @@
 @mixin banner {
 	margin-top: var(--commons-banner-height);
 
-	@include media.smallerThan('s') {
+	@include media.max('S') {
 		margin-top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	}
 }

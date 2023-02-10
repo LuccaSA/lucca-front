@@ -9,11 +9,11 @@
 		@include grey;
 	}
 
-	@include media.smallerThan('s') {
+	@include media.max('S') {
 		@include small;
 	}
 
-	@include media.smallerThan('xs') {
+	@include media.max('XS') {
 		@include smaller;
 	}
 }

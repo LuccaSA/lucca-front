@@ -46,8 +46,8 @@
 		.checkboxesfield-label {
 			color: var(--components-field-label-color);
 			font-size: var(--components-field-label-font-size);
-			line-height: var(--sizes-smaller-line-height);
-			min-height: var(--spacings-small);
+			line-height: var(--sizes-XS-lineHeight);
+			min-height: var(--spacings-S);
 			margin-bottom: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;

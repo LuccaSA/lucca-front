@@ -3,7 +3,7 @@
 .calendar {
 	background-color: var(--colors-white-color);
 	width: var(--components-calendar-width);
-	padding: var(--spacings-smaller);
+	padding: var(--spacings-XS);
 }
 
 :host-context(.mod-block) {
@@ -17,7 +17,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: var(--spacings-standard);
+	margin-bottom: var(--spacings-M);
 }
 
 .calendar-header-nav {
@@ -34,7 +34,7 @@
 .calendar-header-date {
 	font-weight: 600;
 	color: var(--palettes-grey-900);
-	font-size: var(--sizes-big-font-size);
+	font-size: var(--sizes-L-fontSize);
 	padding: 0;
 	background: transparent;
 	border: none;
@@ -49,9 +49,9 @@
 		align-items: stretch;
 		flex-wrap: wrap;
 		text-align: center;
-		font-size: var(--sizes-small-font-size);
+		font-size: var(--sizes-S-fontSize);
 		color: var(--palettes-primary-700);
-		margin-bottom: var(--spacings-smaller);
+		margin-bottom: var(--spacings-XS);
 
 		.calendar-labels-item {
 			width: calc(99% / 7);

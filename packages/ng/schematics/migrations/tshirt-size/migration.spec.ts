@@ -21,7 +21,7 @@ describe('TShirt Migration', () => {
 	});
 
 	// Use this to migrate @lucca-front/* packages
-	it.skip('should migrate @lucca-front/*', async () => {
+	it.only('should migrate @lucca-front/*', async () => {
 		// Arrange
 		const lfRoot = path.normalize(path.join(__dirname, '..', '..', '..', '..'));
 		const lfFiles = [

@@ -50,8 +50,8 @@
 			background-color: var(--commons-background-base);
 			color: var(--palettes-grey-800);
 			font-family: var(--commons-font-family);
-			font-size: var(--sizes-standard-font-size);
-			line-height: var(--sizes-standard-line-height);
+			font-size: var(--sizes-M-fontSize);
+			line-height: var(--sizes-M-lineHeight);
 			scrollbar-gutter: stable;
 
 			@supports (-webkit-touch-callout: none) {
@@ -60,7 +60,7 @@
 		}
 
 		p {
-			margin: 0 0 var(--spacings-small);
+			margin: 0 0 var(--spacings-S);
 		}
 
 		abbr {

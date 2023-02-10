@@ -2,18 +2,18 @@
 	.lu-tooltip-panel {
 		--components-tooltip-background-color: var(--palettes-grey-900);
 		--components-tooltip-color: var(--colors-white-color);
-		--components-tooltip-padding: var(--spacings-smallest) var(--spacings-smaller);
+		--components-tooltip-padding: var(--spacings-XXS) var(--spacings-XS);
 		--components-tooltip-max-width: 15rem;
 
 		background: var(--components-tooltip-background-color);
 		color: var(--components-tooltip-color);
 		padding: var(--components-tooltip-padding);
 		max-width: var(--components-tooltip-max-width);
-		border-radius: var(--commons-border-radius);
-		font-size: var(--sizes-small-font-size);
+		border-radius: var(--commons-borderRadius-M);
+		font-size: var(--sizes-S-fontSize);
 
 		font-weight: 600;
-		line-height: var(--sizes-smaller-line-height);
+		line-height: var(--sizes-XS-lineHeight);
 		display: block;
 
 		&.is-above {

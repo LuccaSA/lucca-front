@@ -3,7 +3,7 @@
 @mixin component($atRoot: 'without: rule') {
 	list-style-type: none;
 	padding: 0;
-	margin: var(--spacings-small) 0;
+	margin: var(--spacings-S) 0;
 	display: flex;
 	align-items: center;
 
@@ -19,7 +19,7 @@
 					display: flex;
 					flex-grow: 1;
 					height: 2px;
-					margin: var(--spacings-smaller);
+					margin: var(--spacings-XS);
 					background-color: var(--palettes-primary-200);
 					border-radius: 2px;
 				}
@@ -37,8 +37,8 @@
 			color: var(--palettes-primary-600);
 			font-weight: 400;
 			margin: 0;
-			font-size: var(--sizes-standard-font-size);
-			line-height: var(--sizes-big-line-height);
+			font-size: var(--sizes-M-fontSize);
+			line-height: var(--sizes-L-lineHeight);
 			min-width: 1.5rem;
 		}
 
@@ -55,7 +55,7 @@
 				border-radius: 50%;
 				background-color: var(--palettes-primary-300);
 				position: absolute;
-				left: var(--spacings-smallest);
+				left: var(--spacings-XXS);
 				top: 50%;
 				transform: translateY(-50%);
 			}

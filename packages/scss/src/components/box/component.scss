@@ -9,9 +9,9 @@
 	@at-root ($atRoot) {
 		.box-close {
 			position: absolute;
-			font-size: var(--sizes-standard-font-size);
-			right: var(--spacings-smallest);
-			top: var(--spacings-smallest);
+			font-size: var(--sizes-M-fontSize);
+			right: var(--spacings-XXS);
+			top: var(--spacings-XXS);
 			z-index: 1;
 		}
 	}

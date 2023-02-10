@@ -12,7 +12,7 @@
 	&.mod-multiple {
 		.option-selector {
 			display: inherit;
-			padding: var(--spacings-smaller);
+			padding: var(--spacings-XS);
 		}
 	}
 }
@@ -20,7 +20,7 @@
 .optionGroupName {
 	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
 	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
-	font-size: var(--sizes-small-font-size);
+	font-size: var(--sizes-S-fontSize);
 	width: 100%;
 	text-align: left;
 

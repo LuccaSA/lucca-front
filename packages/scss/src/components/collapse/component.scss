@@ -5,7 +5,7 @@
 
 	@at-root ($atRoot) {
 		.collapse-title {
-			margin-bottom: var(--spacings-smallest);
+			margin-bottom: var(--spacings-XXS);
 			display: inline-flex;
 			overflow: hidden;
 			cursor: pointer;
@@ -22,8 +22,8 @@
 			&::before {
 				@include icon.generate('chevron_east');
 
-				font-size: var(--sizes-smaller-font-size);
-				margin-right: var(--spacings-smallest);
+				font-size: var(--sizes-XS-fontSize);
+				margin-right: var(--spacings-XXS);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;
 				vertical-align: middle;

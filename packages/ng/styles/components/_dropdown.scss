@@ -5,9 +5,9 @@
 }
 
 .lu-dropdown-content {
-	margin: calc(var(--spacings-smaller) * -1);
+	margin: calc(var(--spacings-XS) * -1);
 	padding: 0;
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius-M);
 	max-width: 90vw;
 	max-height: var(--components-dropdown-max-height);
 	overflow-x: hidden;
@@ -26,9 +26,9 @@
 	display: flex;
 	background-color: transparent;
 	border: 0;
-	padding: var(--spacings-smaller) var(--spacings-small);
+	padding: var(--spacings-XS) var(--spacings-S);
 	cursor: pointer;
-	line-height: var(--sizes-standard-line-height);
+	line-height: var(--sizes-M-lineHeight);
 	width: 100%;
 	text-align: left;
 	transition: background-color var(--commons-animations-durations-standard);
@@ -36,7 +36,7 @@
 
 	.lucca-icon {
 		font-size: 1rem;
-		margin: var(--spacings-smallest) var(--spacings-smaller) 0 0;
+		margin: var(--spacings-XXS) var(--spacings-XS) 0 0;
 	}
 
 	&,

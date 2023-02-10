@@ -17,11 +17,11 @@
 			border: 0;
 			margin: 0;
 			font-weight: 600;
-			border-radius: var(--commons-border-radius);
-			font-size: var(--sizes-smaller-font-size);
-			line-height: var(--sizes-smaller-line-height);
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-grey-200);
-			padding: var(--spacings-smallest) var(--spacings-smaller);
+			border-radius: var(--commons-borderRadius-M);
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-grey-200);
+			padding: var(--spacings-XXS) var(--spacings-XS);
 			transition: all var(--commons-animations-durations-fast);
 			background-color: var(--palettes-grey-600);
 			display: inline-block;

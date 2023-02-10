@@ -3,11 +3,11 @@
 }
 
 @mixin small {
-	padding-left: var(--spacings-big);
-	padding-right: var(--spacings-big);
+	padding-left: var(--spacings-L);
+	padding-right: var(--spacings-L);
 }
 
 @mixin smaller {
-	padding-left: var(--spacings-small);
-	padding-right: var(--spacings-small);
+	padding-left: var(--spacings-S);
+	padding-right: var(--spacings-S);
 }

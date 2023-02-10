@@ -2,12 +2,12 @@
 	// no suffix here
 	margin-top: 0;
 	color: var(--palettes-grey-900);
-	margin-bottom: var(--spacings-small);
+	margin-bottom: var(--spacings-S);
 
 	// suffix here
 	font-weight: 600 #{$suffix};
-	font-size: var(--sizes-font-size) #{$suffix};
-	line-height: var(--sizes-line-height) #{$suffix};
-	padding-top: var(--sizes-vertical-padding) #{$suffix};
-	padding-bottom: var(--sizes-vertical-padding) #{$suffix};
+	font-size: var(--sizes-fontSize) #{$suffix};
+	line-height: var(--sizes-lineHeight) #{$suffix};
+	padding-top: var(--sizes-verticalPadding) #{$suffix};
+	padding-bottom: var(--sizes-verticalPadding) #{$suffix};
 }

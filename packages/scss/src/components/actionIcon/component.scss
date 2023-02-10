@@ -1,7 +1,7 @@
 @mixin component {
 	background-color: transparent;
 	border: 0;
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius-M);
 	color: var(--palettes-700, var(--components-actionIcon-color));
 	height: 2.5rem;
 	width: 2.5rem;

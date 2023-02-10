@@ -1,10 +1,10 @@
 @mixin headline($suffix: '') {
-	font-size: calc(var(--sizes-standard-font-size) * 1.3) #{$suffix};
-	line-height: calc(var(--sizes-standard-line-height) * 1.3) #{$suffix};
+	font-size: calc(var(--sizes-M-fontSize) * 1.3) #{$suffix};
+	line-height: calc(var(--sizes-M-lineHeight) * 1.3) #{$suffix};
 	margin: 0.2rem 0 0 #{$suffix};
 }
 
 @mixin title($suffix: '') {
-	font-size: var(--sizes-small-font-size) #{$suffix};
-	line-height: var(--sizes-small-line-height) #{$suffix};
+	font-size: var(--sizes-S-fontSize) #{$suffix};
+	line-height: var(--sizes-S-lineHeight) #{$suffix};
 }

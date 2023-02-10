@@ -11,8 +11,8 @@
 		}
 
 		.breadcrumbs-list-item {
-			font-size: var(--sizes-small-font-size);
-			line-height: var(--sizes-small-line-height);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
 			align-items: center;
 			display: flex;
 
@@ -20,7 +20,7 @@
 				&::before {
 					@include icon.generate('chevron_east');
 
-					padding: 0 var(--spacings-smallest);
+					padding: 0 var(--spacings-XXS);
 				}
 			}
 		}
