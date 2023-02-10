@@ -1,11 +1,11 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	background-color: var(--colors-white-color);
 	box-shadow: var(--commons-elevations-elevation-1);
 	margin-bottom: var(--components-list-margin-bottom);
 	list-style: none;
 	padding: 0;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.list-item {
 			border-bottom-width: var(--commons-divider-width);
 			border-bottom-color: var(--commons-divider-color);

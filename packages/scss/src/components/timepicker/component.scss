@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	margin: var(--spacings-smaller);
 	padding: var(--spacings-smallest) var(--spacings-smaller);
 	border: 0;
@@ -12,10 +12,10 @@
 		background-color: transparent;
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.timepicker-field {
-	    position: relative;
-	    display: inline-block;
+			position: relative;
+			display: inline-block;
 		}
 
 		.timepicker-field-input {
@@ -35,7 +35,9 @@
 				margin: 0;
 			}
 
-			&:hover, &:focus, &:focus-visible {
+			&:hover,
+			&:focus,
+			&:focus-visible {
 				background-color: var(--palettes-100, var(--palettes-primary-100));
 				outline: none;
 			}
@@ -44,7 +46,7 @@
 		.timepicker-field-increment {
 			cursor: pointer;
 			position: absolute;
-			bottom: calc(100% + .5rem);
+			bottom: calc(100% + 0.5rem);
 			left: 0;
 			border: 0;
 			height: 1.25rem;
@@ -58,7 +60,7 @@
 			padding: 0;
 
 			&:last-child {
-				top: calc(100% + .5rem);
+				top: calc(100% + 0.5rem);
 				bottom: auto;
 			}
 
@@ -80,7 +82,7 @@
 		.timepicker-separator {
 			margin: 0 var(--spacings-smallest);
 			text-align: center;
-			width: .5rem;
+			width: 0.5rem;
 		}
 	}
 }

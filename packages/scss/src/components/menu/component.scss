@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-menu-background);
 	column-gap: var(--spacings-big);
 	align-items: center;
@@ -28,7 +28,7 @@
 		color: var(--palettes-grey-700);
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.menu-list {
 			@include reset.list;
 

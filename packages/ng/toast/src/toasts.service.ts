@@ -15,12 +15,12 @@ export class LuToastsService {
 	}
 
 	public removeToast(toast: LuToast): void {
-		const updatedToasts = this.toasts$.value.filter((t) => t.id !== toast.id);
+		const updatedToasts = this.toasts$.value.filter(({ id }) => id !== toast.id);
 		this.toasts$.next(updatedToasts);
 	}
 
-	public isOnlyDismissibleManually(toast: LuToastInput): boolean {
-		return toast.duration === null;
+	public isOnlyDismissibleManually({ duration }: LuToastInput): boolean {
+		return duration === null;
 	}
 
 	private getToast(toastInput: LuToastInput): LuToast {

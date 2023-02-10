@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	background-color: var(--colors-white-color);
 	border-radius: var(--commons-border-radius-big);
 	border-color: var(--commons-divider-color);
@@ -10,7 +10,7 @@
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
 		}

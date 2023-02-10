@@ -7,11 +7,7 @@
 	&.mod-bottom {
 		@include bottom;
 	}
-
-	&.mod-commInApp {
-		@include commInApp;
-	}
-
+	
 	&.mod-withCircularGauge {
 		@include circularGauge;
 	}

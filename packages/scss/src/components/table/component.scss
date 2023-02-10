@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	font-size: var(--components-table-font-size);
 	line-height: var(--components-table-line-height);
 	border-spacing: 0;
@@ -8,7 +8,7 @@
 	text-align: left;
 	width: 100%;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.table-head {
 			display: table-header-group;
 			vertical-align: bottom;

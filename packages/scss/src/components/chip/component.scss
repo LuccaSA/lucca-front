@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	background-color: var(--palettes-primary-700);
 	border-radius: var(--commons-border-radius);
 	color: var(--colors-white-color);
@@ -11,7 +11,7 @@
 	margin: 0 0.2rem 0.3rem 0;
 	padding: 0.15rem 1.8rem 0.15rem 0.75rem;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.chip-kill {
 			background-color: var(--colors-white-color);
 			color: var(--palettes-primary-700);

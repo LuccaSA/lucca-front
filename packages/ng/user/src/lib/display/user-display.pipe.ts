@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { ILuUser } from '../user.model';
-import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
+import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LU_DEFAULT_DISPLAY_POLICY } from './display-format.model';
 
 /**
  * Displays a user name according to specified format. Supported formats: f for first name,
@@ -59,7 +59,9 @@ export function luUserDisplay(user: ILuUser, format: LuDisplayFormat = LuDisplay
  */
 @Pipe({ name: 'luUserDisplay', standalone: true })
 export class LuUserDisplayPipe implements PipeTransform {
-	transform(user: ILuUser, format: LuDisplayFormat = LuDisplayFullname.lastfirst): string {
+	private readonly defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
+
+	public transform(user: ILuUser, format: LuDisplayFormat = this.defaultFormat): string {
 		return luUserDisplay(user, format);
 	}
 }

@@ -3,8 +3,8 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin base {
-	@at-root {
+@mixin base($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		@if config.$fontVariable {
 			@font-face {
 				font-family: 'Source Sans Pro';

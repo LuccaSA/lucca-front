@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	border-radius: var(--commons-border-radius);
 	background-color: var(--palettes-100, var(--components-callout-background));
 	color: var(--palettes-grey-800);
@@ -9,7 +9,8 @@
 	border-style: solid;
 	position: relative;
 
-	a, .link {
+	a,
+	.link {
 		color: var(--palettes-grey-800);
 
 		&:hover {
@@ -18,7 +19,7 @@
 		}
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.callout-title {
 			font-weight: 600;
 			margin-bottom: var(--spacings-smallest);

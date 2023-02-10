@@ -1,9 +1,9 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin icon {
+@mixin icon($atRoot: 'without: rule') {
 	padding-left: var(--spacings-bigger);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.callout-icon {
 			top: 0.4rem;
 			left: 0.75rem;
@@ -39,10 +39,10 @@
 	}
 }
 
-@mixin killable {
+@mixin killable($atRoot: 'without: rule') {
 	padding-right: 2.5rem;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.callout-kill {
 			right: var(--spacings-small);
 			background-color: transparent;

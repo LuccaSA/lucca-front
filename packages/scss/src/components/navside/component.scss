@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	bottom: 0;
 	left: 0;
 	top: 0;
@@ -12,7 +12,7 @@
 	padding-top: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.navSide-wrapper {
 			display: flex;
 			flex-direction: column;

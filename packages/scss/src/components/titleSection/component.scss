@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	margin-bottom: 1.2rem;
 
 	.titleSection-title,
@@ -22,7 +22,7 @@
 		margin-bottom: 0 !important;
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.titleSection-sub {
 			color: var(--palettes-grey-600);
 			font-size: var(--sizes-standard-font-size);

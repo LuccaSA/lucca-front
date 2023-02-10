@@ -164,8 +164,8 @@
 	}
 }
 
-@mixin draggable {
-	@at-root {
+@mixin draggable($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		.table-body-row-cell-handler,
 		.table-foot-row-cell-handler {
 			top: 0;
@@ -215,12 +215,8 @@
 	}
 }
 
-@mixin twoLines(
-	$headCell: '.table-head-row-cell',
-	$secondLine: '.table-head-row-cell-secondLine',
-	$wrapper: '.table-head-row-cell-wrapper'
-) {
-	@at-root {
+@mixin twoLines($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		.table-head-row-cell-secondLine {
 			margin-top: var(--spacings-smallest);
 			display: block;
