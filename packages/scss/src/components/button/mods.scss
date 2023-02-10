@@ -86,7 +86,7 @@
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
-@mixin iconSmaller {
+@mixin iconXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 

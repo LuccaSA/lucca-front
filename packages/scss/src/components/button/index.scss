@@ -33,7 +33,7 @@
 			@include counterS;
 		}
 
-		&.mod-smaller {
+		&.mod-XS {
 			@include counterXS;
 		}
 	}
@@ -53,7 +53,7 @@
 	&.mod-more {
 		@include more;
 
-		&.mod-small {
+		&.mod-S {
 			@include moreS;
 		}
 	}
