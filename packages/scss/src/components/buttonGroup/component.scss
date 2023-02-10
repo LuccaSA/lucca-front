@@ -24,11 +24,11 @@
 		white-space: normal;
 
 		&:first-child {
-			border-radius: var(--commons-border-radius) 0 0 var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius) 0 0 var(--commons-borderRadius);
 		}
 
 		&:last-child {
-			border-radius: 0 var(--commons-border-radius) var(--commons-border-radius) 0;
+			border-radius: 0 var(--commons-borderRadius) var(--commons-borderRadius) 0;
 		}
 
 		&:not(:first-child) {

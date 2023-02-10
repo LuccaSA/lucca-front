@@ -1,5 +1,5 @@
 @mixin component {
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius);
 	font-family: var(--commons-font-family);
 	font-size: var(--components-button-font-size);
 	font-weight: 600;
@@ -7,7 +7,7 @@
 	margin: var(--components-button-margin);
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
-	transition-duration: var(--commons-duration-fast);
+	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
 	border: 0;
 	display: inline-flex;
