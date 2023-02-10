@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: TextBasicStory): string {
 	return `
-		<h1 class="mod-headline">Headline</h1>
+		<h1 class="mod-XXXL">Headline</h1>
 		<h1>Titre h1</h1>
 		<h2>Titre h2</h2>
 		<h3>Titre h3</h3>

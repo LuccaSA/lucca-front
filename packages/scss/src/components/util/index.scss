@@ -175,8 +175,8 @@
 .u-h1 {
 	@include title.h1;
 
-	&.mod-headline {
-		@include title.headline;
+	&.mod-XXXL {
+		@include title.XXXL;
 	}
 }
 

@@ -13,8 +13,8 @@ h6 {
 h1 {
 	@include h1;
 
-	&.mod-headline {
-		@include headline;
+	&.mod-XXXL {
+		@include XXXL;
 	}
 }
 

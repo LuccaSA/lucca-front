@@ -1,4 +1,4 @@
-@mixin headline($suffix: '') {
+@mixin XXXL($suffix: '') {
 	font-size: calc(var(--sizes-M-fontSize) * 1.3) #{$suffix};
 	line-height: calc(var(--sizes-M-lineHeight) * 1.3) #{$suffix};
 	margin: 0.2rem 0 0 #{$suffix};

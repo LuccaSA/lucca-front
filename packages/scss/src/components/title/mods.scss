@@ -1,7 +1,7 @@
-@mixin headline {
-	--sizes-verticalPadding: var(--sizes-headline-verticalPadding);
-	--sizes-fontSize: var(--sizes-headline-fontSize);
-	--sizes-lineHeight: var(--sizes-headline-lineHeight);
+@mixin XXXL {
+	--sizes-verticalPadding: var(--sizes-XXXL-verticalPadding);
+	--sizes-fontSize: var(--sizes-XXXL-fontSize);
+	--sizes-lineHeight: var(--sizes-XXXL-lineHeight);
 }
 
 @mixin h1 {
