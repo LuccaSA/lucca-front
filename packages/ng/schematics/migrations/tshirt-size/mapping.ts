@@ -18,7 +18,6 @@ const mappings = {
 		standard: 'M',
 		medium: 'M',
 		default: 'M',
-		// m: 'M', TODO: Useless?
 		large: 'L',
 		larger: 'XL',
 		largest: 'XXL',
@@ -92,9 +91,9 @@ export const cssVariableMapping = expand({
 	'--sizes-vertical-padding': '--sizes-verticalPadding',
 	'--sizes-font-size': '--sizes-fontSize',
 	'--sizes-line-height': '--sizes-lineHeight',
-	'--sizes-headline-vertical-padding': '--sizes-headline-verticalPadding',
-	'--sizes-headline-font-size': '--sizes-headline-fontSize',
-	'--sizes-headline-line-height': '--sizes-headline-lineHeight',
+	'--sizes-headline-vertical-padding': '--sizes-XXL-verticalPadding',
+	'--sizes-headline-font-size': '--sizes-XXL-fontSize',
+	'--sizes-headline-line-height': '--sizes-XXL-lineHeight',
 	'--commons-border-radius': '--commons-borderRadius-M',
 	'--commons-border-radius-{size}': '--commons-borderRadius-{size}',
 	'--commons-box-shadow-{breakpoint}': '--commons-boxShadow-{breakpoint}',
@@ -146,6 +145,7 @@ export const cssClassMapping = expand({
 	// Classes
 	'mod-{tshirtName}': 'mod-{tshirtName}',
 	'mod-{size}': 'mod-{size}',
+	'mod-headline': 'mod-XXL',
 	'size-{size}': 'mod-{size}',
 	'size-{tshirtName}': 'mod-{tshirtName}',
 	'grid-{tshirtSize}': 'grid-{tshirtSize}',
