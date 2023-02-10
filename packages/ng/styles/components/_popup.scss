@@ -58,7 +58,7 @@
 	background-color: var(--colors-white-color);
 	padding: var(--components-popup-padding-vertical) var(--spacings-XXL) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);
-	border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
+	border-bottom: var(--commons-divider-border);
 }
 
 .lu-modal-header-title {
@@ -71,7 +71,6 @@
 	position: absolute;
 	right: 1.25rem;
 	top: 0.75rem;
-	transition: background var(--commons-animations-durations-fast) ease;
 }
 
 .lu-modal-content {
