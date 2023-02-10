@@ -14,7 +14,7 @@
 		.tableOfContent-list-item-action {
 			@include reset.button;
 
-			border-radius: var(--commons-borderRadius);
+			border-radius: var(--commons-borderRadius-M);
 			color: var(--palettes-grey-700);
 			cursor: pointer;
 			display: block;

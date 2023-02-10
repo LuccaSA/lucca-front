@@ -1,6 +1,6 @@
 @mixin component {
 	gap: var(--commons-divider-width);
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 	display: inline-flex;
 	list-style-type: none;
 	overflow: hidden;
@@ -24,11 +24,11 @@
 		white-space: normal;
 
 		&:first-child {
-			border-radius: var(--commons-borderRadius) 0 0 var(--commons-borderRadius);
+			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
 		}
 
 		&:last-child {
-			border-radius: 0 var(--commons-borderRadius) var(--commons-borderRadius) 0;
+			border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
 		}
 
 		&:not(:first-child) {

@@ -18,19 +18,19 @@
 }
 
 .dragDrop-list {
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 }
 
 .dragDrop-item {
 	cursor: grab;
 	&:not(.cdk-drag-placeholder) {
 		&:first-of-type {
-			border-top-left-radius: var(--commons-borderRadius);
-			border-top-right-radius: var(--commons-borderRadius);
+			border-top-left-radius: var(--commons-borderRadius-M);
+			border-top-right-radius: var(--commons-borderRadius-M);
 		}
 		&:last-of-type {
-			border-bottom-left-radius: var(--commons-borderRadius);
-			border-bottom-right-radius: var(--commons-borderRadius);
+			border-bottom-left-radius: var(--commons-borderRadius-M);
+			border-bottom-right-radius: var(--commons-borderRadius-M);
 		}
 	}
 	&:active {
@@ -46,7 +46,7 @@
 	box-sizing: border-box;
 	box-shadow: form.fakeBorderOverlay(var(--palettes-secondary-200));
 	background-color: var(--palettes-secondary-50);
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 	cursor: grabbing;
 }
 

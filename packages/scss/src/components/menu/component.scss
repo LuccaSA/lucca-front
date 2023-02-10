@@ -41,7 +41,7 @@
 		.menu-list-item-action {
 			@include reset.button;
 			padding: var(--components-menu-padding);
-			border-radius: var(--commons-borderRadius);
+			border-radius: var(--commons-borderRadius-M);
 			color: var(--palettes-grey-700);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
@@ -53,7 +53,7 @@
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-primary-700));
-				border-radius: var(--commons-borderRadius) var(--commons-borderRadius) 0 0;
+				border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0 0;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;
 				display: block;

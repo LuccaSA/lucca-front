@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--palettes-100, var(--components-callout-background));
 	color: var(--palettes-grey-800);
 	margin: var(--components-callout-margin);

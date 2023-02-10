@@ -2,7 +2,7 @@
 	margin: var(--spacings-XS);
 	padding: var(--spacings-XXS) var(--spacings-XS);
 	border: 0;
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 	display: inline-flex;
 	background-color: var(--palettes-50, var(--palettes-primary-50));
 	transition: box-shadow var(--commons-animations-durations-fast);
@@ -20,7 +20,7 @@
 
 		.timepicker-field-input {
 			background-color: transparent;
-			border-radius: var(--commons-borderRadius);
+			border-radius: var(--commons-borderRadius-M);
 			text-align: center;
 			color: var(--palettes-grey-800);
 			width: var(--components-timepicker-input-width);
@@ -55,7 +55,7 @@
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
-			border-radius: var(--commons-borderRadius);
+			border-radius: var(--commons-borderRadius-M);
 			width: var(--components-timepicker-input-width);
 			padding: 0;
 

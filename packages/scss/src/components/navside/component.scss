@@ -82,7 +82,7 @@
 			color: var(--components-navSide-fullwidth-palette-text);
 			transition-property: all;
 			transition-duration: var(--commons-animations-durations-fast);
-			border-radius: var(--commons-borderRadius);
+			border-radius: var(--commons-borderRadius-M);
 
 			&:focus-visible {
 				outline: none;
@@ -215,7 +215,7 @@
 			&::after {
 				@include loading.gradient;
 
-				border-radius: var(--commons-borderRadius);
+				border-radius: var(--commons-borderRadius-M);
 				flex: 1 1 auto;
 				height: 0.9em;
 				margin-left: 1em;

@@ -81,7 +81,7 @@
 		~ .file-content {
 			&::before {
 				border: 1px dashed var(--palettes-grey-400);
-				border-radius: var(--commons-borderRadius);
+				border-radius: var(--commons-borderRadius-M);
 				position: absolute;
 				inset: 0;
 				content: '';

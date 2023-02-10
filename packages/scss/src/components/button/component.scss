@@ -1,5 +1,5 @@
 @mixin component {
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 	font-family: var(--commons-font-family);
 	font-size: var(--components-button-font-size);
 	font-weight: 600;

@@ -2,7 +2,7 @@
 
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--palettes-primary-700);
-	border-radius: var(--commons-borderRadius);
+	border-radius: var(--commons-borderRadius-M);
 	color: var(--colors-white-color);
 
 	display: inline-block;
