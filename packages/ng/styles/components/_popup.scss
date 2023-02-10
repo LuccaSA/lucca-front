@@ -22,12 +22,12 @@
 	overflow: auto;
 	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
 
-	&.mod-XS{
+	&.mod-XS {
 		width: var(--components-popup-XS);
 	}
 
 	&.mod-S {
-		width: var(--components-popup-XS);
+		width: var(--components-popup-S);
 	}
 
 	&.mod-L {
