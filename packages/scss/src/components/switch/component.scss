@@ -1,11 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: block;
 	position: relative;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.switch-input {
 			@include a11y.mask;
 		}

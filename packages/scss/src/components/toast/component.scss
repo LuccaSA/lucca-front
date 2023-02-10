@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	@keyframes toast {
 		0% {
 			transform: translateY(var(--spacings-small));
@@ -21,7 +21,7 @@
 	position: fixed;
 	z-index: 9999;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.toasts-item {
 			display: flex;
 			gap: .75rem;

@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-wrap: wrap;
 	margin: var(--spacings-small) 0;
@@ -7,7 +7,7 @@
 		margin-right: var(--spacings-smaller);
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.pagination-count,
 		.pagination-navigation,
 		.pagination-scrolling {

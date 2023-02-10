@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	box-shadow: var(--commons-box-shadow-xs);
 	padding: var(--spacings-big) 2.5rem var(--spacings-standard);
 	background-color: var(--colors-white-color);
@@ -11,7 +11,7 @@
 		}
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.pageHeader-content {
 			display: flex;
 			justify-content: space-between;

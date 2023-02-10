@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	box-shadow: var(--commons-elevations-elevation-1);
 	background-color: var(--components-filters-background);
 	min-height: var(--components-filters-height);
@@ -7,7 +7,7 @@
 	position: relative;
 	z-index: 99;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.filters-sectionLeft {
 			align-items: center;
 			display: flex;
