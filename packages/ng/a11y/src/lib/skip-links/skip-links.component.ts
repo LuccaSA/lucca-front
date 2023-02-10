@@ -6,6 +6,7 @@ import { LU_SKIP_LINKS_TRANSLATIONS } from './skip-links.translate';
 @Component({
 	selector: 'lu-skip-links',
 	templateUrl: './skip-links.component.html',
+	styleUrls: ['./skip-links.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 })
@@ -16,6 +17,7 @@ export class LuSkipLinksComponent {
 
 	anchor(hash: string, e: Event) {
 		e.preventDefault();
+		this.document.location.hash = '';
 		this.document.location.hash = hash;
 	}
 }
