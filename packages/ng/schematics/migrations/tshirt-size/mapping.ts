@@ -95,7 +95,7 @@ export const cssVariableMapping = expand({
 	'--sizes-headline-vertical-padding': '--sizes-headline-verticalPadding',
 	'--sizes-headline-font-size': '--sizes-headline-fontSize',
 	'--sizes-headline-line-height': '--sizes-headline-lineHeight',
-	'--commons-border-radius': '--commons-borderRadius',
+	'--commons-border-radius': '--commons-borderRadius-M',
 	'--commons-border-radius-{size}': '--commons-borderRadius-{size}',
 	'--commons-box-shadow-{breakpoint}': '--commons-boxShadow-{breakpoint}',
 	'--components-popup-size-{tshirtName}': '--components-popup-{tshirtName}',
