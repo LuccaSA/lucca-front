@@ -82,7 +82,7 @@
 	width: 100%;
 }
 
-@mixin icon($atRoot: 'without: rule') { {
+@mixin icon($atRoot: 'without: rule') {
 	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest));
 }
 
@@ -123,7 +123,7 @@
 	min-width: 1.75rem;
 }
 
-@mixin counter($atRoot: 'without: rule') { {
+@mixin counter($atRoot: 'without: rule') {
 	--components-button-padding: var(--spacings-smaller) calc(var(--spacings-smaller) + var(--spacings-smallest)) var(--spacings-smaller) var(--spacings-small);
 
 	@at-root ($atRoot) {
