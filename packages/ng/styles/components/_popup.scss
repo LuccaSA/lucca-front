@@ -23,11 +23,11 @@
 	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
 
 	&.mod-XS{
-		width: var(--components-popup-size-smaller);
+		width: var(--components-popup-XS);
 	}
 
 	&.mod-S {
-		width: var(--components-popup-size-small);
+		width: var(--components-popup-XS);
 	}
 
 	&.mod-L {
@@ -35,7 +35,7 @@
 	}
 
 	&.mod-XL {
-		width: var(--components-popup-size-larger);
+		width: var(--components-popup-XL);
 	}
 }
 
@@ -105,7 +105,7 @@
 	background-color: var(--colors-white-color);
 	box-shadow: var(--commons-elevations-elevation-4);
 	margin-top: auto;
-	padding: var(--spacings-small) var(--components-popup-padding-vertical);
+	padding: var(--spacings-S) var(--components-popup-padding-vertical);
 }
 
 @include media.max('XXS') {
