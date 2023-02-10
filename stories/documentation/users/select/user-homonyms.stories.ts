@@ -48,7 +48,7 @@ const template: Story<UserHomonymsStory> = (args: UserHomonymsStory) => ({
 const code = `
 /* Afin de créer une sélection d'utilisateur custom avec gestion des homonymes */
 /* Ajouter un lu-select ainsi qu'un lu-option-picker-advanced */
-<label class="textfield mod-block u-marginTopBig">
+<label class="textfield mod-block u-marginTopL">
   <lu-select class="textfield-input">
     <span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
 
@@ -68,7 +68,7 @@ const code = `
 
         /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
         /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
-        <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textSmall">
+        <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">
           ({{ user.additionalInformation }})
         </div>
       </lu-option>

@@ -7,12 +7,12 @@
 }
 
 .titleSection-sub {
-	:is(h1, h1.mod-headline) ~ & {
-		@include headline;
+	:is(h1, h1.mod-XXXL) ~ & {
+		@include XXXL;
 	}
 
-	:is(.u-h1, .u-h1.mod-headline) ~ & {
-		@include headline('!important');
+	:is(.u-h1, .u-h1.mod-XXXL) ~ & {
+		@include XXXL('!important');
 	}
 
 	:is(h2, h3, h4, h5, h6) ~ & {

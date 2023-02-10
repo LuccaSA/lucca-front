@@ -1,5 +1,5 @@
 @mixin component {
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius-M);
 	font-family: var(--commons-font-family);
 	font-size: var(--components-button-font-size);
 	font-weight: 600;
@@ -7,7 +7,7 @@
 	margin: var(--components-button-margin);
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
-	transition-duration: var(--commons-duration-fast);
+	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
 	border: 0;
 	display: inline-flex;
@@ -34,12 +34,12 @@
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: var(--palettes-600, var(--palettes-primary-600));
-			box-shadow: var(--commons-box-shadow-xs);
+			box-shadow: var(--commons-boxShadow-XS);
 			color: var(--palettes-text, var(--palettes-primary-text));
 		}
 
 		&:focus {
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
 			outline: none;
 			background-color: var(--palettes-600, var(--palettes-primary-600));
 		}

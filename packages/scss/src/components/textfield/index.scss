@@ -36,12 +36,12 @@
 			@include searchClearable;
 		}
 
-		&.mod-small {
-			@include searchSmall;
+		&.mod-S {
+			@include searchS;
 		}
 
-		&.mod-smaller {
-			@include searchSmaller;
+		&.mod-XS {
+			@include searchXS;
 		}
 
 		&.mod-outlined {
@@ -52,12 +52,12 @@
 	&.mod-clearable {
 		@include clearable;
 
-		&.mod-small {
-			@include clearableSmall;
+		&.mod-S {
+			@include clearableS;
 		}
 
-		&.mod-smaller {
-			@include clearableSmaller;
+		&.mod-XS {
+			@include clearableXS;
 		}
 	}
 
@@ -68,16 +68,16 @@
 	&.mod-noLabel {
 		@include noLabel;
 
-		&.mod-smaller {
-			@include noLabelSmaller;
+		&.mod-XS {
+			@include noLabelXS;
 		}
 	}
 
 	&.mod-multiline {
 		@include multiline;
 
-		&.mod-small {
-			@include multilineSmall;
+		&.mod-S {
+			@include multilineS;
 		}
 	}
 
@@ -113,22 +113,22 @@
 		}
 	}
 
-	&.mod-small {
-		@include small;
+	&.mod-S {
+		@include S;
 
 		&.textfield-input {
 			&.mod-icon {
-				@include smallInputIcon;
+				@include SInputIcon;
 			}
 		}
 	}
 
-	&.mod-smaller {
-		@include smaller;
+	&.mod-XS {
+		@include XS;
 
 		&.textfield-input {
 			&.mod-icon {
-				@include smallerInputIcon;
+				@include XSInputIcon;
 			}
 		}
 	}
@@ -234,8 +234,8 @@
 			}
 		}
 
-		&.mod-small {
-			@include materialSmall;
+		&.mod-S {
+			@include materialS;
 		}
 
 		&.mod-withSuffix {
@@ -328,8 +328,8 @@
 	&.mod-multiline {
 		@include framedMultiline;
 
-		&.mod-small {
-			@include framedMultilineSmall;
+		&.mod-S {
+			@include framedMultilineS;
 		}
 	}
 

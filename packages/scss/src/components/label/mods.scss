@@ -1,16 +1,16 @@
 @mixin number {
-	font-size: var(--sizes-smaller-font-size);
-	padding: var(--spacings-smallest);
-	height: var(--sizes-standard-line-height);
-	min-width: var(--sizes-standard-line-height);
+	font-size: var(--sizes-XS-fontSize);
+	padding: var(--spacings-XXS);
+	height: var(--sizes-M-lineHeight);
+	min-width: var(--sizes-M-lineHeight);
 }
 
-@mixin numberSmall {
-	height: var(--sizes-small-line-height);
-	min-width: var(--sizes-small-line-height);
+@mixin numberS {
+	height: var(--sizes-S-lineHeight);
+	min-width: var(--sizes-S-lineHeight);
 }
 
-@mixin numberSmaller {
-	height: var(--sizes-smaller-line-height);
-	min-width: var(--sizes-smaller-line-height);
+@mixin numberXS {
+	height: var(--sizes-XS-lineHeight);
+	min-width: var(--sizes-XS-lineHeight);
 }

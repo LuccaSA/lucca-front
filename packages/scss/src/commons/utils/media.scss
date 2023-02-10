@@ -4,7 +4,7 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin largerThan($breakpoint, $reversed: false) {
+@mixin min($breakpoint, $reversed: false) {
 	$reverse: '';
 
 	@if $reversed {
@@ -28,8 +28,8 @@
 	}
 }
 
-@mixin smallerThan($breakpoint) {
-	@include largerThan($breakpoint, $reversed: true) {
+@mixin max($breakpoint) {
+	@include min($breakpoint, $reversed: true) {
 		@content;
 	}
 }

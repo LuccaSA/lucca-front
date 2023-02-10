@@ -11,9 +11,9 @@ export default {
 
 function getTemplate(args: ButtonSizeStory): string {
 	return `
-	<button type="button" class="button">Confirmer</button>
-	<button type="button" class="button mod-outlined">Enregistrer</button>
-	<button type="button" class="button mod-text">Annuler</button>
+	<button type="button" class="button">Bouton</button>
+	<button type="button" class="button mod-S">Bouton</button>
+	<button type="button" class="button mod-XS">Bouton</button>
 	`;
 }
 

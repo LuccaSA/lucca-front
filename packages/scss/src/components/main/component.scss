@@ -3,7 +3,7 @@
 @mixin component {
 	position: relative;
 
-	@include media.smallerThan('s') {
+	@include media.max('S') {
 		margin-left: 0 !important;
 	}
 }

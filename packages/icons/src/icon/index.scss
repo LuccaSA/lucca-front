@@ -12,27 +12,27 @@
 		}
 	}
 
-	&.size-smaller {
-		--icon-size:  calc(var(--sizes-smaller-font-size) * 1.25);
+	&.mod-XS {
+		--icon-size:  calc(var(--sizes-XS-fontSize) * 1.25);
 	}
 
-	&.size-small {
-		--icon-size:  calc(var(--sizes-small-font-size) * 1.25);
+	&.mod-S {
+		--icon-size:  calc(var(--sizes-S-fontSize) * 1.25);
 	}
 
-	&.size-standard {
-		--icon-size:  calc(var(--sizes-standard-font-size) * 1.25);
+	&.mod-M {
+		--icon-size:  calc(var(--sizes-M-fontSize) * 1.25);
 	}
 
-	&.size-big {
-		--icon-size:  calc(var(--sizes-big-font-size) * 1.25);
+	&.mod-L {
+		--icon-size:  calc(var(--sizes-L-fontSize) * 1.25);
 	}
 
-	&.size-bigger {
-		--icon-size:  calc(var(--sizes-bigger-font-size) * 1.25);
+	&.mod-XL {
+		--icon-size:  calc(var(--sizes-XL-fontSize) * 1.25);
 	}
 
-	&.size-biggest {
-		--icon-size:  calc(var(--sizes-biggest-font-size) * 1.25);
+	&.mod-XXL {
+		--icon-size:  calc(var(--sizes-XXL-fontSize) * 1.25);
 	}
 }

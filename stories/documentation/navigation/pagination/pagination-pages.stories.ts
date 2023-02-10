@@ -19,11 +19,11 @@ function getTemplate(args: PaginationPagesStory): string {
 			<li class="pagination-navigation-item"><a href="#">50</a></li>
 		</ul>
 		<div class="pagination-scrolling">
-			<button type="button" class="actionIcon mod-small" disabled>
+			<button type="button" class="actionIcon mod-S" disabled>
 				<span aria-hidden="true" class="lucca-icon icon-chevronWest"></span>
 				<span class="u-mask">Précédent</span>
 			</button>
-			<button type="button" class="actionIcon mod-small">
+			<button type="button" class="actionIcon mod-S">
 				<span aria-hidden="true" class="lucca-icon icon-chevronEast"></span>
 				<span class="u-mask">Suivant</span>
 			</button>

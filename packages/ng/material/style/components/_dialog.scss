@@ -18,10 +18,10 @@
 		bottom: 0;
 		width: 60%;
 		max-width: 800px;
-		@include media.smallerThan('s') {
+		@include media.max('S') {
 			width: 80%;
 		}
-		@include media.smallerThan('xs') {
+		@include media.max('XS') {
 			width: 100%;
 		}
 

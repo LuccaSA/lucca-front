@@ -1,7 +1,7 @@
 @mixin optionSelectorStyle {
 	.selectAll-button {
 		color: var(--palettes-grey-600);
-		font-size: var(--sizes-small-font-size);
+		font-size: var(--sizes-S-fontSize);
 		outline: none;
 
 		&:hover {

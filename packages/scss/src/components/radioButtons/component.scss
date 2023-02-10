@@ -11,13 +11,13 @@
 				margin-left: 0;
 
 				.radioButtons-item-label {
-					border-radius: var(--commons-border-radius) 0 0 var(--commons-border-radius);
+					border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
 				}
 			}
 
 			&:last-child {
 				.radioButtons-item-label {
-					border-radius: 0 var(--commons-border-radius) var(--commons-border-radius) 0;
+					border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
 				}
 			}
 		}
@@ -35,9 +35,9 @@
 
 		.radioButtons-item-label {
 			background-color: var(--colors-white-color);
-			padding: var(--spacings-smaller) var(--spacings-small);
-			font-size: var(--components-radioButtons-font-size, var(--sizes-standard-font-size));
-			line-height: var(--components-radioButtons-line-height, var(--sizes-standard-line-height));
+			padding: var(--spacings-XS) var(--spacings-S);
+			font-size: var(--components-radioButtons-font-size, var(--sizes-M-fontSize));
+			line-height: var(--components-radioButtons-line-height, var(--sizes-M-lineHeight));
 			color: var(--palettes-grey-700);
 			box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
 			transition-duration: var(--commons-animations-durations-fast);

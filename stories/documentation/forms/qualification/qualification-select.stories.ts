@@ -7,7 +7,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'qualification-stories',
 	template: `
-		<label class="textfield mod-inline u-marginRightSmall">
+		<label class="textfield mod-inline u-marginRightS">
 			<lu-qualification-select placeholder="Select a qualification" class="textfield-input"></lu-qualification-select>
 			<span class="textfield-label">Simple</span>
 		</label>

@@ -58,7 +58,7 @@ const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
 			display: block;
 		}
 		.button-group {
-			margin-top: var(--spacings-standard)
+			margin-top: var(--spacings-M)
 		}`,
 	],
 });

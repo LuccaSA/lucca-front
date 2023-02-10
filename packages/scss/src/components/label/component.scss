@@ -2,18 +2,19 @@
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
 	display: inline-flex;
-	gap: 0 var(--spacings-smallest);
+	gap: 0 var(--spacings-XXS);
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
 	border-radius: 9999px;
-	font-size: var(--sizes-small-font-size);
-	line-height: var(--sizes-smaller-line-height);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-XS-lineHeight);
 	font-weight: 600;
 	margin: 0 0.3rem;
-	padding: var(--spacings-smallest) var(--spacings-smaller);
+	padding: var(--spacings-XXS) var(--spacings-XS);
 
 	.label-icon {
 		margin: 0;
+		font-size: var(--sizes-M-fontSize);
 	}
 }

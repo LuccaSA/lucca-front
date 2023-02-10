@@ -47,14 +47,14 @@
 	}
 }
 
-@mixin checkedSmall {
+@mixin checkedS {
 	~ .switch-label {
 		&::before {
-			font-size: var(--sizes-smaller-font-size);
+			font-size: var(--sizes-XS-fontSize);
 		}
 
 		&::after {
-			left: calc(var(--sizes-small-font-size) - 2px);
+			left: calc(var(--sizes-S-fontSize) - 2px);
 		}
 	}
 }

@@ -1,36 +1,36 @@
 @mixin inline {
 	display: inline-block;
-	margin-right: var(--spacings-standard);
+	margin-right: var(--spacings-M);
 }
 
-@mixin small {
+@mixin S {
 	.switch-label {
-		font-size: var(--sizes-small-font-size);
-		line-height: var(--sizes-small-line-height);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 		padding: 0;
-		padding-left: calc(1.75rem - 4px + var(--spacings-smaller));
+		padding-left: calc(1.75rem - 4px + var(--spacings-XS));
 
 		&::before {
-			margin-top: var(--components-switch-small-top);
-			height: var(--sizes-small-font-size);
-			padding-left: var(--components-switch-small-icon-right);
+			margin-top: var(--components-switch-S-top);
+			height: var(--sizes-S-fontSize);
+			padding-left: var(--components-switch-S-icon-right);
 			width: calc(1.75rem - 4px);
 		}
 
 		&::after {
-			margin-top: var(--components-switch-small-top);
-			height: calc(var(--sizes-small-font-size) - 4px);
-			width: calc(var(--sizes-small-font-size) - 4px);
+			margin-top: var(--components-switch-S-top);
+			height: calc(var(--sizes-S-fontSize) - 4px);
+			width: calc(var(--sizes-S-fontSize) - 4px);
 		}
 	}
 
 	.switch-input:checked ~ .switch-label {
 		&::before {
-			padding-left: var(--components-switch-small-icon-left);
+			padding-left: var(--components-switch-S-icon-left);
 		}
 
 		&::after {
-			left: calc(var(--sizes-small-font-size) - 2px);
+			left: calc(var(--sizes-S-fontSize) - 2px);
 		}
 	}
 }

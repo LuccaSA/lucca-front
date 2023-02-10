@@ -13,29 +13,29 @@
 	&.mod-number {
 		@include number;
 
-		&.mod-big {
-			@include numberBig;
+		&.mod-L {
+			@include numberL;
 		}
 	}
 
-	&.mod-small {
-		@include small;
+	&.mod-S {
+		@include S;
 	}
 
-	&.mod-big {
-		@include big;
+	&.mod-L {
+		@include L;
 	}
 
 	&.mod-vertical {
 		@include vertical;
-		&:not(.mod-small):not(.mod-big) {
-			@include verticalNotSmallNotBig();
+		&:not(.mod-S):not(.mod-L) {
+			@include verticalNotSNotL();
 		}
-		&.mod-small {
-			@include verticalSmall;
+		&.mod-S {
+			@include verticalS;
 		}
-		&.mod-big {
-			@include verticalBig;
+		&.mod-L {
+			@include verticalL;
 		}
 		&.mod-progress {
 			@include verticalProgress;
@@ -44,37 +44,37 @@
 
 	&.mod-addStep {
 		@include addStep;
-		&.mod-big {
-			@include addStepBig;
+		&.mod-L {
+			@include addStepL;
 		}
 		&.mod-vertical {
 			@include addStepVertical;
-			&:not(.mod-big) {
-				@include addStepVerticalNotBig;
+			&:not(.mod-L) {
+				@include addStepVerticalNotL;
 			}
-			&.mod-big {
-				@include addStepVerticalBig;
+			&.mod-L {
+				@include addStepVerticalL;
 			}
 		}
 	}
 
 	&.mod-checkedPastStep {
 		@include checkedPastStep;
-		&.mod-vertical:not(.mod-big) {
-			@include checkedPastStepVerticalNotBig;
+		&.mod-vertical:not(.mod-L) {
+			@include checkedPastStepVerticalNotL;
 		}
-		&.mod-vertical.mod-big {
-			@include checkedPastStepVerticalBig;
+		&.mod-vertical.mod-L {
+			@include checkedPastStepVerticalL;
 		}
 	}
 
 	&.mod-addBetweenStep {
 		@include addBetweenStep;
-		&.mod-vertical:not(.mod-big) {
-			@include addBetweenStepVerticalNotBig();
+		&.mod-vertical:not(.mod-L) {
+			@include addBetweenStepVerticalNotL();
 		}
-		&.mod-big {
-			@include addBetweenStepBig;
+		&.mod-L {
+			@include addBetweenStepL;
 		}
 	}
 

@@ -115,7 +115,7 @@ function getTemplate(args: FramedBasicStory): string {
 				</div>
 			</div>
 			<div class="form-group-line">
-				<div class="form-group-line-col mod-xs6">
+				<div class="form-group-line-col mod-XS6">
 					<label id="autocomplete-framed-select2" class="textfield mod-select">
 						<input class="textfield-input" type="text" />
 						<span class="textfield-label">Utilisateur</span>
@@ -129,7 +129,7 @@ function getTemplate(args: FramedBasicStory): string {
 						</ul>
 					</label>
 				</div>
-				<div class="form-group-line-col mod-xs6">
+				<div class="form-group-line-col mod-XS6">
 					<label class="textfield is-required">
 						<input class="textfield-input is-error" type="text" placeholder="placeholder" aria-required="true" />
 						<span class="textfield-label">Label textfield</span>
@@ -150,7 +150,7 @@ function getTemplate(args: FramedBasicStory): string {
 				</div>
 			</div>
 			<div class="form-group-line">
-				<div class="form-group-line-col mod-xs8 mod-selection">
+				<div class="form-group-line-col mod-XS8 mod-selection">
 					<fieldset class="radiosfield">
 						<legend class="radiosfield-label">Radios textfield</legend>
 						<div class="radiosfield-input">

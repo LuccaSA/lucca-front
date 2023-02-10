@@ -4,8 +4,8 @@
 	@include vars;
 	@include component;
 
-	&.mod-big {
-		@include big;
+	&.mod-L {
+		@include L;
 	}
 
 	&.mod-block {

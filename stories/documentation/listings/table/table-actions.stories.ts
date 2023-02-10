@@ -26,10 +26,10 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="actionIcon mod-small">
+				<button type="button" class="actionIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-edit"></span>
 				</button>
-				<button type="button" class="actionIcon mod-small">
+				<button type="button" class="actionIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-trash"></span>
 				</button>
 			</td>
@@ -39,8 +39,8 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="actionIcon mod-small"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button type="button" class="actionIcon mod-small"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
+				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
 			</td>
 		</tr>
 		<tr class="table-body-row">
@@ -48,8 +48,8 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="actionIcon mod-small"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button type="button" class="actionIcon mod-small"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
+				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
 			</td>
 		</tr>
 	</tbody>

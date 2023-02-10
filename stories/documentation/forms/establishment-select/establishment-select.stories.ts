@@ -6,7 +6,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @Component({
 	selector: 'establishment-select-stories',
 	template: `
-		<label class="textfield mod-inline u-marginRightSmall">
+		<label class="textfield mod-inline u-marginRightS">
 			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
 			<span class="textfield-label">Establishment Select</span>
 		</label>

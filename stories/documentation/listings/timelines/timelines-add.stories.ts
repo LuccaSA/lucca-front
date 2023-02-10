@@ -29,7 +29,7 @@ function getTemplate(args: TimelinesAddStepStory): string {
 		</li>
 		<li class="timeline-step">
 			<div class="timeline-step-title">
-				<button type="button" class="button palette-grey mod-small u-positionStatic">
+				<button type="button" class="button palette-grey mod-S u-positionStatic">
 					<span class="timeline-step-title-icon" aria-hidden="true"></span>
 					Add step
 				</button>

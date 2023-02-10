@@ -19,7 +19,7 @@
 		<span class="textfield-label">Pas de gestion des homonymes :</span>
 	</label>
 
-	<label class="textfield u-marginLeftBig">
+	<label class="textfield u-marginLeftL">
 		<lu-select class="textfield-input">
 			<span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
 
@@ -38,7 +38,7 @@
 				<lu-option *luForOptions="let user" [value]="user">
 					{{ user | luUserDisplay }}
 
-					<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textSmall">({{ user.additionalInformation }})</div>
+					<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">({{ user.additionalInformation }})</div>
 				</lu-option>
 			</lu-option-picker-advanced>
 		</lu-select>

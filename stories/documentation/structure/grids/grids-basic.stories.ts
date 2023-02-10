@@ -20,44 +20,44 @@ function getTemplate(args: GridsBasicStory): string {
 	const reverse = args.reverse ? `mod-reverse` : '';
 	return `
 	<div class="grid ${reverse}">
-		<div class="grid-xs6">
-			<div class="grid-demo">grid-xs6</div>
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">grid-6@mediaMinXS</div>
 		</div>
-		<div class="grid-xs6">
-			<div class="grid-demo">grid-xs6</div>
-		</div>
-	</div>
-
-	<div class="grid ${reverse}">
-		<div class="grid-s4">
-			<div class="grid-demo">grid-s4</div>
-		</div>
-		<div class="grid-s8">
-			<div class="grid-demo">grid-s8</div>
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">grid-6@mediaMinXS</div>
 		</div>
 	</div>
 
 	<div class="grid ${reverse}">
-		<div class="grid-m7">
-			<div class="grid-demo">grid-m7</div>
+		<div class="grid-4@mediaMinS">
+			<div class="grid-demo">grid-4@mediaMinS</div>
 		</div>
-		<div class="grid-m5">
-			<div class="grid-demo">grid-m5</div>
+		<div class="grid-8@mediaMinS">
+			<div class="grid-demo">grid-8@mediaMinS</div>
 		</div>
 	</div>
 
 	<div class="grid ${reverse}">
-		<div class="grid-l3 grid-m6">
-			<div class="grid-demo">grid-l3 grid-m6</div>
+		<div class="grid-7@mediaMinM">
+			<div class="grid-demo">grid-7@mediaMinM</div>
 		</div>
-		<div class="grid-l3 grid-m6">
-			<div class="grid-demo">grid-l3 grid-m6</div>
+		<div class="grid-5@mediaMinM">
+			<div class="grid-demo">grid-5@mediaMinM</div>
 		</div>
-		<div class="grid-l3 grid-m6">
-			<div class="grid-demo">grid-l3 grid-m6</div>
+	</div>
+
+	<div class="grid ${reverse}">
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
 		</div>
-		<div class="grid-l3 grid-m6">
-			<div class="grid-demo">grid-l3 grid-m6</div>
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+		</div>
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+		</div>
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
 		</div>
 	</div>
 	`;
@@ -70,8 +70,8 @@ const Template: Story<GridsBasicStory> = (args: GridsBasicStory) => ({
 		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: var(--spacings-small);
-			padding: var(--spacings-small);
+			margin-bottom: var(--spacings-S);
+			padding: var(--spacings-S);
 			border-radius: 1rem;
 		}`,
 	],

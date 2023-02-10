@@ -12,10 +12,10 @@ function getTemplate(args: BorderRadiusStory): string {
 	<div class="u-borderTopRightRadius"><code class="code">.u-borderTopRightRadius</code></div>
 	<div class="u-borderBottomLeftRadius"><code class="code">.u-borderBottomLeftRadius</code></div>
 	<div class="u-borderBottomRightRadius"><code class="code">.u-borderBottomRightRadius</code></div>
-	<div class="u-borderTopLeftRadiusBig"><code class="code">.u-borderTopLeftRadiusBig</code></div>
-	<div class="u-borderTopRightRadiusBig"><code class="code">.u-borderTopRightRadiusBig</code></div>
-	<div class="u-borderBottomLeftRadiusBig"><code class="code">.u-borderBottomLeftRadiusBig</code></div>
-	<div class="u-borderBottomRightRadiusBig"><code class="code">.u-borderBottomRightRadiusBig</code></div>
+	<div class="u-borderTopLeftRadiusL"><code class="code">.u-borderTopLeftRadiusL</code></div>
+	<div class="u-borderTopRightRadiusL"><code class="code">.u-borderTopRightRadiusL</code></div>
+	<div class="u-borderBottomLeftRadiusL"><code class="code">.u-borderBottomLeftRadiusL</code></div>
+	<div class="u-borderBottomRightRadiusL"><code class="code">.u-borderBottomRightRadiusL</code></div>
 	`;
 }
 
@@ -27,9 +27,9 @@ const Template: Story<BorderRadiusStory> = (args: BorderRadiusStory) => ({
 		div {
 			float: left;
       text-align: center;
-      padding: var(--spacings-small);
+      padding: var(--spacings-S);
       border: 1px solid #D6D6D6;
-      margin: 0 var(--spacings-small) var(--spacings-small) 0;
+      margin: 0 var(--spacings-S) var(--spacings-S) 0;
 		}`,
 	],
 });

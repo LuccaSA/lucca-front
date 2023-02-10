@@ -97,69 +97,69 @@ $colorsRgb: (
 ) !default;
 
 $breakpoints: (
-	xxxs: 320px,
-	xxs: 480px,
-	xs: 640px,
-	s: 800px,
-	m: 1024px,
-	l: 1280px,
-	xl: 1366px,
-	xxl: 1600px,
-	xxxl: 1920px,
+	XXXS: 320px,
+	XXS: 480px,
+	XS: 640px,
+	S: 800px,
+	M: 1024px,
+	L: 1280px,
+	XL: 1366px,
+	XXL: 1600px,
+	XXXL: 1920px,
 );
 
 $spacings: (
-	reset: 0,
-	smallest: 0.25rem,
-	smaller: 0.5rem,
-	small: 1rem,
-	standard: 1.5rem,
-	big: 2rem,
-	bigger: 3rem,
-	biggest: 4rem,
+	'0': 0,
+	XXS: 0.25rem,
+	XS: 0.5rem,
+	S: 1rem,
+	M: 1.5rem,
+	L: 2rem,
+	XL: 3rem,
+	XXL: 4rem,
 );
 
 $sizes: (
-	smaller: (
-		font-size: 0.75rem,
-		line-height: 1rem,
-		vertical-padding: 0,
+	XS: (
+		fontSize: 0.75rem,
+		lineHeight: 1rem,
+		verticalPadding: 0,
 	),
-	small: (
-		font-size: 0.875rem,
-		line-height: 1.25rem,
-		vertical-padding: 0.125rem,
+	S: (
+		fontSize: 0.875rem,
+		lineHeight: 1.25rem,
+		verticalPadding: 0.125rem,
 	),
-	standard: (
-		font-size: 1rem,
-		line-height: 1.5rem,
-		vertical-padding: 0.125rem,
+	M: (
+		fontSize: 1rem,
+		lineHeight: 1.5rem,
+		verticalPadding: 0.125rem,
 	),
-	big: (
-		font-size: 1.125rem,
-		line-height: 1.5rem,
-		vertical-padding: 0.25rem,
+	L: (
+		fontSize: 1.125rem,
+		lineHeight: 1.5rem,
+		verticalPadding: 0.25rem,
 	),
-	bigger: (
-		font-size: 1.375rem,
-		line-height: 1.75rem,
-		vertical-padding: 0.5rem,
+	XL: (
+		fontSize: 1.375rem,
+		lineHeight: 1.75rem,
+		verticalPadding: 0.5rem,
 	),
-	biggest: (
-		font-size: 1.75rem,
-		line-height: 2rem,
-		vertical-padding: 0.25rem,
+	XXL: (
+		fontSize: 1.75rem,
+		lineHeight: 2rem,
+		verticalPadding: 0.25rem,
 	),
-	headline: (
-		font-size: 2.25rem,
-		line-height: 2.5rem,
-		vertical-padding: 0.5rem,
+	XXXL: (
+		fontSize: 2.25rem,
+		lineHeight: 2.5rem,
+		verticalPadding: 0.5rem,
 	),
 );
 
 $borderRadius: (
-	'': 4px,
-	'big': 8px,
+	'M': 4px,
+	'L': 8px,
 );
 
 $elevations: (
@@ -177,14 +177,13 @@ $elevations: (
 );
 
 $boxShadows: (
-	'hard': 'var(--commons-box-shadow-xxs)',
-	'xxs': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
-	'xs': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
-	's': 'var(--commons-elevations-elevation-2)',
-	'm': 'var(--commons-elevations-elevation-3)',
-	'l': 'var(--commons-elevations-elevation-4)',
-	'xl': 'var(--commons-elevations-elevation-5)',
-	'xxl': 'var(--commons-elevations-elevation-6)',
+	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
+	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
+	'S': 'var(--commons-elevations-elevation-2)',
+	'M': 'var(--commons-elevations-elevation-3)',
+	'L': 'var(--commons-elevations-elevation-4)',
+	'XL': 'var(--commons-elevations-elevation-5)',
+	'XXL': 'var(--commons-elevations-elevation-6)',
 );
 
 $disabled: (

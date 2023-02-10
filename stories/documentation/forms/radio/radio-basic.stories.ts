@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface RadiosBasicStory {
 	row: boolean;
 	disabled: boolean;
-	small: boolean;
+	s: boolean;
 }
 
 export default {
@@ -19,7 +19,7 @@ export default {
 				type: 'boolean',
 			}
 		},
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			}
@@ -30,19 +30,19 @@ export default {
 function getTemplate(args: RadiosBasicStory): string {
 	const row = args.row ? `mod-row` : '';
 	const disabled = args.disabled ? `disabled` : '';
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	return `
 	<fieldset class="radiosfield">
 		<legend class="radiosfield-label">Liste de radios</legend>
 		<div class="radiosfield-input ${row}">
 			<div>
-				<label class="radio ${small}">
+				<label class="radio ${s}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled} checked>
 					<span class="radio-label">Radio</span>
 				</label>
 			</div>
 			<div>
-				<label class="radio ${small}">
+				<label class="radio ${s}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled}>
 					<span class="radio-label">Radio</span>
 				</label>
@@ -58,4 +58,4 @@ const Template: Story<RadiosBasicStory> = (args: RadiosBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { row: false, disabled: false, small: false };
+Basic.args = { row: false, disabled: false, s: false };
