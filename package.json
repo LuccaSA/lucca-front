@@ -89,6 +89,7 @@
     "ng-packagr": "^15.1.1",
     "postcss": "^8.4.21",
     "postcss-scss": "^4.0.6",
+    "postcss-selector-parser": "^6.0.11",
     "postcss-value-parser": "^4.2.0",
     "prettier": "^2.8.0",
     "sass": "^1.58.0",

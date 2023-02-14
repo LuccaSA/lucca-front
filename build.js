@@ -79,7 +79,7 @@ runTask('Lucca Front compilation', async () => {
 	await runTask('Schematics TS compilation', () => compileTypescript(SCHEMATICS, OUTPUT_SCHEMATICS));
 	await runTask('Schematics copy', () => {
 		copyFiles({
-			patterns: ['collection.json', 'migrations.json', 'lib/local-deps/package.json'],
+			patterns: ['collection.json', 'migrations.json', 'lib/local-deps/package.json', 'lib/local-deps/package-lock.json'],
 			context: SCHEMATICS,
 			output: OUTPUT_SCHEMATICS,
 		});
