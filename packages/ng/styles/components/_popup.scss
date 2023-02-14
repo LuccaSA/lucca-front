@@ -7,7 +7,7 @@
 	--components-popup-M: 40rem;
 	--components-popup-L: 50rem;
 	--components-popup-XL: 60rem;
-	--components-popup-padding-horizontal: var(--spacings-L);
+	--components-popup-padding-horizontal: var(--spacings-M);
 	--components-popup-padding-vertical: var(--spacings-S);
 }
 
@@ -104,7 +104,7 @@
 	background-color: var(--colors-white-color);
 	box-shadow: var(--commons-elevations-elevation-4);
 	margin-top: auto;
-	padding: var(--spacings-S) var(--components-popup-padding-vertical);
+	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
 }
 
 @include media.max('XXS') {
