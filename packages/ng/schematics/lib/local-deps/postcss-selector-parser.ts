@@ -1,4 +1,4 @@
-import postcssSelectorParser from 'postcss-selector-parser';
+import postcssSelectorParser = require('postcss-selector-parser');
 
 export type PostCssSelectorParserLib = typeof postcssSelectorParser;
 

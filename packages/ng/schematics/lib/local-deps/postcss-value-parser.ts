@@ -1,2 +1,2 @@
-import postcssValueParser from 'postcss-value-parser';
+import postcssValueParser = require('postcss-value-parser');
 export { postcssValueParser };
