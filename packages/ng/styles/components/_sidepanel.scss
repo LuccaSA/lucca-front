@@ -42,7 +42,7 @@
 
 @keyframes sidepanel {
 	0% {
-		transform: translate(var(--components-sidepanel-translate), 0);
+		transform: translate(100%, 0);
 	}
 
 	100% {
