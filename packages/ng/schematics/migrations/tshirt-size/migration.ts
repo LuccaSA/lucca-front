@@ -2,7 +2,7 @@ import type { ValueParser } from 'postcss-value-parser';
 import { AngularTemplate } from '../../lib/angular-template';
 import { applyUpdates, FileUpdate } from '../../lib/file-update.js';
 import { AngularCompilerLib, updateCssClassNames } from '../../lib/html-ast.js';
-import { PostCssScssLib, PostCssSelectorParserLib, updateCSSClassNamesInRules, updateCSSVariableNames, updateMixinNames } from '../../lib/scss-ast.js';
+import { PostCssScssLib, PostCssSelectorParserLib, removeImportNode, updateCSSClassNamesInRules, updateCSSVariableNames, updateMixinNames } from '../../lib/scss-ast.js';
 import { cssClassMapping, cssVariableMapping, mixinMapping } from './mapping';
 
 export function migrateScssFile(content: string, postCssScss: PostCssScssLib, postcssValueParser: ValueParser, postcssSelectorParser: PostCssSelectorParserLib): string {
@@ -11,6 +11,10 @@ export function migrateScssFile(content: string, postCssScss: PostCssScssLib, po
 	updateMixinNames(root, mixinMapping);
 	updateCSSVariableNames(root, cssVariableMapping, postcssValueParser);
 	updateCSSClassNamesInRules(root, cssClassMapping, postcssSelectorParser);
+
+	root.walkAtRules(/(import|use|forward)/, (rule) => {
+		removeImportNode(rule, '@lucca-front/scss/src/components/skipLinks', postcssValueParser);
+	});
 
 	return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 }
