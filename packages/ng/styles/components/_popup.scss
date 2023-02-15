@@ -20,7 +20,7 @@
 	max-width: 95%;
 	max-height: 90vh;
 	overflow: auto;
-	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
+	animation: popup var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
 
 	&.mod-XS {
 		width: var(--components-popup-XS);

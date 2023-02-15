@@ -2,7 +2,6 @@
 	--components-sidepanel-S: 40rem;
 	--components-sidepanel-M: 55rem;
 	--components-sidepanel-L: 70rem;
-	--components-sidepanel-translate: var(--spacings-XL);
 }
 
 .lu-popup-panel {
@@ -42,7 +41,7 @@
 
 @keyframes sidepanel {
 	0% {
-		transform: translate(var(--components-sidepanel-translate), 0);
+		transform: translate(100%, 0);
 	}
 
 	100% {
