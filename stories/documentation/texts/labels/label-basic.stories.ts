@@ -35,6 +35,12 @@ function getTemplate(args: LabelBasicStory): string {
 const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.label {
+			margin-right: var(--spacings-XXS);
+		}`,
+	],
 });
 
 export const Basic = Template.bind({});
