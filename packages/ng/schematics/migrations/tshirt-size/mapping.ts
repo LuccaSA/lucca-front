@@ -114,6 +114,8 @@ export const cssVariableMapping = expand({
 	'--components-user-picture-font-size-{tshirtName}': '--components-userPicture-{tshirtName}-fontSize',
 });
 
+export const cssVarsToUpdate = new Set(Object.keys(cssVariableMapping));
+
 export const cssClassMapping = expand({
 	// Utilities
 	'u-margin{Size}': 'u-margin{size}',
@@ -163,6 +165,8 @@ export const cssClassMapping = expand({
 	'mod-{tshirtSize}{gridSize}': 'mod-{gridSize}@mediaMin{tshirtSize}',
 	'mod-layoutFixed-{tshirtSize}{layoutFixedSize}': 'mod-layoutFixed-{layoutFixedSize}@mediaMin{tshirtSize}',
 });
+
+export const cssClassesToUpdate = new Set(Object.keys(cssClassMapping));
 
 export const mixinMapping = expand({
 	"media.smallerThan('{breakpoint}')": "media.max('{breakpoint}')",
