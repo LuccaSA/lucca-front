@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.notchBox {
+	@include vars;
+	@include component;
+
+	&.mod-notchTop {
+		@include notchTop;
+	}
+
+	&.mod-notchLeft {
+		@include notchLeft;
+	}
+}
