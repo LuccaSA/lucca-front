@@ -126,7 +126,10 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		const { source } = boundAttr.value;
 
 		const oldContent = boundAttr.value.source || '';
-		const newContent = (source || '').replace(/(["']?)([\w\-_]*?)(["']?):/g, (_fullMatch, before: string, middle: string, after: string) => `${before + oldClassToNewClass[middle] + after}:`);
+		const newContent = (source || '').replace(
+			/(["']?)([\w\-_]*?)(["']?):/g,
+			(_fullMatch, before: string, middle: string, after: string) => `${before + (oldClassToNewClass[middle] || middle) + after}:`,
+		);
 
 		if (oldContent !== newContent) {
 			updates.push({

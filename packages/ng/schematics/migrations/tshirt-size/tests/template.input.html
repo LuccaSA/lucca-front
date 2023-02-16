@@ -9,3 +9,11 @@
 
 <div [class.u-paddingRightBigger]="true"></div>
 <div [ngClass]="{ 'u-paddingRightBigger': true }"></div>
+
+<!-- Should remain untouched -->
+<div [ngClass]="{
+	'u-textSuccess': state === saveStateEnum.Saved,
+	'icon-tickBold': state === saveStateEnum.Saved,
+	'u-textError': state === saveStateEnum.OnError,
+	'icon-crossBold': state === saveStateEnum.OnError
+}"></div>
