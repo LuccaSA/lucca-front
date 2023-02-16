@@ -92,6 +92,20 @@ export function updateMixinNames(root: Root, mappingOldToNew: Record<string, str
 
 export function updateCSSClassNamesInRules(root: Root, mappingOldToNew: Record<string, string>, postScssSelectorParser: PostCssSelectorParserLib) {
 	root.walkRules((rule) => {
+		if (rule.selector.endsWith(':')) {
+			/**
+			 * In sass we can do such a thing:
+			 * .foo {
+			 * 		padding: {
+			 * 			top: 10px;
+			 * 			bottom: 10px;
+			 * 		}
+			 * }
+			 * "padding:" is considered as a rule but its selector cannot be parsed using postScssSelectorParser
+			 */
+			return;
+		}
+
 		const selector = postScssSelectorParser().astSync(rule.selector);
 		selector.walkClasses((classNode) => {
 			// Exclude interpolation and function calls
