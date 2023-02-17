@@ -1,13 +1,13 @@
 @mixin vars {
 	/** notch */
-	--component-notchbox-notch-radius: var(--commons-border-radius);
+	--component-notchbox-notch-radius: var(--commons-borderRadius-M);
 	--component-notchbox-notch-radius-inner: 18px;
 	--component-notchbox-notch-width: 56px;
 	--component-notchbox-notch-height: 24px;
 
 	/** box */
 	--component-notchbox-box-radius: 16px;
-	--component-notchbox-box-padding: var(--spacings-small);
+	--component-notchbox-box-padding: var(--spacings-S);
 	--component-notchbox-box-background-color: var(--colors-white-color);
 	--component-notchbox-box-shadow: 0 0 4px var(--palettes-grey-200);
 
