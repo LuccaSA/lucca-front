@@ -5,6 +5,10 @@ export type FileUpdate = {
 };
 
 export function applyUpdates(content: string, updates: FileUpdate[]): string {
+	if (!updates.length) {
+		return content;
+	}
+
 	const sortedUpdated = [...updates].sort((u1, u2) => u1.position - u2.position);
 	let updatedOffset = 0;
 

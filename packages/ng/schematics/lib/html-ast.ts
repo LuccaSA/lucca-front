@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
+import { cssClassesToUpdate } from '../migrations/tshirt-size/mapping.js';
 import { applyUpdates, FileUpdate } from './file-update.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -71,7 +72,6 @@ export class HtmlAst {
 export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>, lib: AngularCompilerLib): string {
 	const updates: FileUpdate[] = [];
 	const root = new HtmlAst(content, lib);
-	const classesToFind = new Set(Object.keys(oldClassToNewClass));
 	const visitedAttributes = new Set<TmplAstNode>();
 
 	root.visitAttribute('class', (classAttr) => {
@@ -84,7 +84,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		visitedAttributes.add(classAttr);
 		const classes: string[] = classAttr.value.split(' ');
 
-		if (classes.some((cl) => classesToFind.has(cl)) && offset !== undefined) {
+		if (classes.some((cl) => cssClassesToUpdate.has(cl)) && offset !== undefined) {
 			updates.push({
 				position: offset,
 				oldContent: classAttr.value,
@@ -99,7 +99,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		}
 
 		const cl = boundAttr.name;
-		if (!classesToFind.has(cl)) {
+		if (!cssClassesToUpdate.has(cl)) {
 			return;
 		}
 
@@ -126,7 +126,10 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		const { source } = boundAttr.value;
 
 		const oldContent = boundAttr.value.source || '';
-		const newContent = (source || '').replace(/(["']?)([\w\-_]*?)(["']?):/g, (_fullMatch, before: string, middle: string, after: string) => `${before + oldClassToNewClass[middle] + after}:`);
+		const newContent = (source || '').replace(
+			/(["']?)([\w\-_]*?)(["']?):/g,
+			(_fullMatch, before: string, middle: string, after: string) => `${before + (oldClassToNewClass[middle] || middle) + after}:`,
+		);
 
 		if (oldContent !== newContent) {
 			updates.push({

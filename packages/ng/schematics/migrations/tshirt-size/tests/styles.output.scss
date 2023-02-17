@@ -2,4 +2,9 @@
 	display: block;
 	box-sizing: border-box;
 	padding: var(--spacings-M) var(--spacings-M) var(--spacings-XXS) var(--spacings-M);
+
+	padding: {
+		top: var(--spacings-XS);
+		bottom: var(--spacings-XS);
+	}
 }
