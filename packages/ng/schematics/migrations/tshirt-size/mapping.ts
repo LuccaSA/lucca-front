@@ -10,6 +10,10 @@ const mappings = {
 		xl: 'XL',
 		xxl: 'XXL',
 		xxxl: 'XXXL',
+		// Ultra legacy sizes
+		sm: 'S',
+		md: 'M',
+		lg: 'L',
 	},
 	tshirtName: {
 		smallest: 'XXS',
@@ -28,10 +32,14 @@ const mappings = {
 		xs: 'XS',
 		s: 'S',
 		m: 'M',
-		lg: 'L',
+		l: 'L',
 		xl: 'XL',
 		xxl: 'XXL',
 		xxxl: 'XXXL',
+		// Ultra legacy sizes
+		sm: 'S',
+		md: 'M',
+		lg: 'L',
 	},
 	size: {
 		reset: '0',
@@ -150,7 +158,7 @@ export const cssClassMapping = expand({
 	'mod-headline': 'mod-XXL',
 	'size-{size}': 'mod-{size}',
 	'size-{tshirtName}': 'mod-{tshirtName}',
-	'grid-{tshirtSize}': 'grid-{tshirtSize}',
+	'grid-{tshirtSize}': 'grid@mediaMin{tshirtSize}',
 	'grid-{tshirtSize}{gridSize}': 'grid-{gridSize}@mediaMin{tshirtSize}',
 	'grid-{tshirtSize}Offset{gridSize}': 'grid-offset{gridSize}@mediaMin{tshirtSize}',
 	'mod-{tshirtSize}Start': 'mod-start@mediaMin{tshirtSize}',
