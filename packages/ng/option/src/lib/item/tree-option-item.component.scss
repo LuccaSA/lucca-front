@@ -20,8 +20,8 @@
 .optionItem-icons {
 	display: none;
 	position: absolute;
-	top: var(--spacings-smaller);
-	right: var(--spacings-smaller);
+	top: var(--spacings-XS);
+	right: var(--spacings-XS);
 	opacity: 0;
 	transition: all var(--commons-animations-durations-fast) ease;
 }
@@ -29,7 +29,7 @@
 .optionItem-icon {
 	cursor: pointer;
 	opacity: 0.66;
-	margin-left: var(--spacings-smaller);
+	margin-left: var(--spacings-XS);
 	transition: all var(--commons-animations-durations-fast) ease;
 
 	&:hover {
@@ -49,13 +49,13 @@
 	.optionItem-value {
 		&::before {
 			top: 1.3rem;
-			left: var(--spacings-smaller);
+			left: var(--spacings-XS);
 			pointer-events: none;
 		}
 
 		&::after {
 			top: 1.3rem;
-			left: var(--spacings-smaller);
+			left: var(--spacings-XS);
 			pointer-events: none;
 		}
 	}
@@ -67,27 +67,27 @@
 	}
 
 	.optionItem-value {
-		padding-right: var(--spacings-biggest);
+		padding-right: var(--spacings-XXL);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-standard);
+		padding-left: var(--spacings-M);
 
 		&::before {
-			left: var(--spacings-standard);
+			left: var(--spacings-M);
 		}
 
 		&::after {
-			left: var(--spacings-standard);
+			left: var(--spacings-M);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-bigger);
+		padding-left: var(--spacings-XL);
 	}
 }
 
@@ -107,7 +107,7 @@
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-biggest);
+		padding-left: var(--spacings-XXL);
 	}
 }
 

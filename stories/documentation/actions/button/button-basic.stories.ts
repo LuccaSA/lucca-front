@@ -32,7 +32,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'mod-small', 'mod-smaller'],
+			options: ['', 'mod-S', 'mod-XS'],
 			control: {
 				type: 'select',
 			},
@@ -74,7 +74,7 @@ const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 			display: block;
 		}
 		.button-group {
-			margin-top: var(--spacings-standard)
+			margin-top: var(--spacings-M)
 		}`,
 		args.style === 'mod-text mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],

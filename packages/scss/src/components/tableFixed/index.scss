@@ -11,8 +11,8 @@
 		}
 
 		@each $breakpoint, $value in config.$breakpoints {
-			@include media.largerThan($breakpoint) {
-				&.mod-layoutFixed-#{$breakpoint}#{$i} {
+			@include media.min($breakpoint) {
+				&.mod-layoutFixed-#{$i}\@mediaMin#{$breakpoint} {
 					@include layoutFixed($i);
 				}
 			}

@@ -12,16 +12,16 @@ export default {
 function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): string {
 	return `
 	<div class="demo-wrapper">
-		<table class="table mod-layoutFixed-xs mod-stickyColumn-xs mod-stickyHeader">
+		<table class="table mod-layoutFixed@mediaMinXS mod-stickyColumn@mediaMinXS mod-stickyHeader">
 			<thead class="table-head">
 				<tr class="table-head-row">
-					<th class=" table-head-row-cell mod-layoutFixed-xs8 mod-stickyColumn-leftOffset0 " >
+					<th class=" table-head-row-cell mod-layoutFixed-8@mediaMinXS mod-stickyColumn-leftOffset0 " >
 						Head cell
 					</th>
-					<th class=" table-head-row-cell mod-layoutFixed-xs7 mod-stickyColumn-leftOffset8 " >
+					<th class=" table-head-row-cell mod-layoutFixed-7@mediaMinXS mod-stickyColumn-leftOffset8 " >
 						Head cell
 					</th>
-					<th class=" table-head-row-cell mod-layoutFixed-xs5 mod-stickyColumn-leftOffset15 " >
+					<th class=" table-head-row-cell mod-layoutFixed-5@mediaMinXS mod-stickyColumn-leftOffset15 " >
 						Head cell
 					</th>
 					<th class=" table-head-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
@@ -40,7 +40,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<th class=" table-head-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
-					<th class=" table-head-row-cell mod-layoutFixed-xs5 mod-stickyColumn-rightOffset0 " >
+					<th class=" table-head-row-cell mod-layoutFixed-5@mediaMinXS mod-stickyColumn-rightOffset0 " >
 						Head cell
 					</th>
 				</tr>

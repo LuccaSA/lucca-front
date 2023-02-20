@@ -8,12 +8,12 @@
 		@include inline;
 	}
 
-	&.mod-big {
-		@include big;
+	&.mod-L {
+		@include L;
 	}
 
-	&.mod-small {
-		@include small;
+	&.mod-S {
+		@include S;
 	}
 
 	&.mod-noLabel {

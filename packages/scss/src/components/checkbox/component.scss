@@ -1,11 +1,11 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: block;
 	position: relative;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.checkbox-label {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
@@ -26,7 +26,7 @@
 				transition-property: all;
 				border: 2px solid var(--components-checkbox-input-border-color);
 				line-height: 0.85;
-				font-size: var(--sizes-standard-font-size);
+				font-size: var(--sizes-M-fontSize);
 				flex-grow: 0;
 				flex-shrink: 0;
 				flex-basis: auto;

@@ -1,5 +1,5 @@
-@mixin component {
-	border-radius: var(--commons-border-radius);
+@mixin component($atRoot: 'without: rule') {
+	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--palettes-100, var(--components-callout-background));
 	color: var(--palettes-grey-800);
 	margin: var(--components-callout-margin);
@@ -9,7 +9,8 @@
 	border-style: solid;
 	position: relative;
 
-	a, .link {
+	a,
+	.link {
 		color: var(--palettes-grey-800);
 
 		&:hover {
@@ -18,10 +19,10 @@
 		}
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.callout-title {
 			font-weight: 600;
-			margin-bottom: var(--spacings-smallest);
+			margin-bottom: var(--spacings-XXS);
 		}
 	}
 }

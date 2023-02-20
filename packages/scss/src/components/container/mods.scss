@@ -8,26 +8,26 @@
 	margin-right: auto;
 }
 
-@mixin small {
-	--container-padding: var(--spacings-small);
+@mixin S {
+	--container-padding: var(--spacings-S);
 }
 
 @mixin maxM {
-	max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
+	max-width: math.div(map.get(config.$breakpoints, 'M'), 16px) * 1rem;
 }
 
 @mixin maxL {
-	max-width: math.div(map.get(config.$breakpoints, 'l'), 16px) * 1rem;
+	max-width: math.div(map.get(config.$breakpoints, 'L'), 16px) * 1rem;
 }
 
 @mixin maxXL {
-	max-width: math.div(map.get(config.$breakpoints, 'xl'), 16px) * 1rem;
+	max-width: math.div(map.get(config.$breakpoints, 'XL'), 16px) * 1rem;
 }
 
 @mixin maxXXL {
-	max-width: math.div(map.get(config.$breakpoints, 'xxl'), 16px) * 1rem;
+	max-width: math.div(map.get(config.$breakpoints, 'XXL'), 16px) * 1rem;
 }
 
 @mixin maxXXXL {
-	max-width: math.div(map.get(config.$breakpoints, 'xxxl'), 16px) * 1rem;
+	max-width: math.div(map.get(config.$breakpoints, 'XXXL'), 16px) * 1rem;
 }

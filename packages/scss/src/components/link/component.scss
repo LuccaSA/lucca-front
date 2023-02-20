@@ -3,13 +3,15 @@
 	border: 0;
 	color: var(--commons-text-link-color);
 	cursor: pointer;
-	display: inline;
 	font-family: var(--commons-font-family);
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;
 
-	&:is(:hover, :focus) {
-		color: var(--commons-text-link-hover);
+	&:not(:disabled, .is-disabled) {
+		&:hover,
+		&:focus {
+			color: var(--commons-text-link-hover);
+		}
 	}
 }

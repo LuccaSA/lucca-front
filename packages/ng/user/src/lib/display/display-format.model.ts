@@ -1,3 +1,5 @@
+import { InjectionToken } from '@angular/core';
+
 export enum LuDisplayFullname {
 	firstlast = 'fl',
 	lastfirst = 'lf',
@@ -20,3 +22,6 @@ export enum LuDisplayHybrid {
 }
 
 export type LuDisplayFormat = LuDisplayFullname | LuDisplayInitials | LuDisplayHybrid;
+
+/** Injection token that can be used to change the default displayed user format. */
+export const LU_DEFAULT_DISPLAY_POLICY = new InjectionToken<LuDisplayFormat>('LuDisplayFormat', { factory: () => LuDisplayFullname.lastfirst });

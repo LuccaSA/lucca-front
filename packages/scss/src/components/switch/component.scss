@@ -1,22 +1,22 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: block;
 	position: relative;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.switch-input {
 			@include a11y.mask;
 		}
 
 		.switch-label {
 			padding: 0;
-			padding-left: calc(var(--spacings-big) - 4px + var(--spacings-smaller));
+			padding-left: calc(var(--spacings-L) - 4px + var(--spacings-XS));
 			color: var(--palettes-grey-800);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
-			line-height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-M-lineHeight);
 			cursor: pointer;
 
 			&::before {
@@ -27,22 +27,22 @@
 				border-radius: 9999px;
 				color: var(--colors-white-color);
 				display: flex;
-				font-size: var(--sizes-smaller-font-size);
+				font-size: var(--sizes-XS-fontSize);
 				height: 1rem;
 				left: 0;
-				line-height: var(--sizes-small-line-height);
+				line-height: var(--sizes-S-lineHeight);
 				margin-top: var(--components-switch-top);
 				padding-left: var(--components-switch-icon-right);
 				padding-top: var(--components-switch-icon-top);
 				position: absolute;
-				top: var(--spacings-smallest);
+				top: var(--spacings-XXS);
 				transition: all var(--commons-animations-durations-fast) ease;
 				width: calc(2rem - 4px);
 			}
 
 			&::after {
 				background-color: white;
-				box-shadow: var(--commons-box-shadow-hard);
+				box-shadow: var(--commons-boxShadow-XXS);
 				border-radius: 50%;
 				content: '';
 				display: block;
@@ -50,7 +50,7 @@
 				left: 2px;
 				margin-top: var(--components-switch-top);
 				position: absolute;
-				top: calc(var(--spacings-smallest) + 2px);
+				top: calc(var(--spacings-XXS) + 2px);
 				transition: all var(--commons-animations-durations-fast) ease;
 				width: calc(1rem - 4px);
 			}

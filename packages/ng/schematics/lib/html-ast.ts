@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
+import { cssClassesToUpdate } from '../migrations/tshirt-size/mapping.js';
 import { applyUpdates, FileUpdate } from './file-update.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -71,7 +72,6 @@ export class HtmlAst {
 export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>, lib: AngularCompilerLib): string {
 	const updates: FileUpdate[] = [];
 	const root = new HtmlAst(content, lib);
-	const classesToFind = Object.keys(oldClassToNewClass);
 	const visitedAttributes = new Set<TmplAstNode>();
 
 	root.visitAttribute('class', (classAttr) => {
@@ -82,31 +82,35 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		}
 
 		visitedAttributes.add(classAttr);
+		const classes: string[] = classAttr.value.split(' ');
 
-		if (classesToFind.some((cl) => classAttr.value.includes(cl)) && offset !== undefined) {
+		if (classes.some((cl) => cssClassesToUpdate.has(cl)) && offset !== undefined) {
 			updates.push({
 				position: offset,
 				oldContent: classAttr.value,
-				newContent: classesToFind.reduce((acc, cl) => acc.replace(cl, oldClassToNewClass[cl]), classAttr.value),
+				newContent: classes.map((cl) => oldClassToNewClass[cl] || cl).join(' '),
 			});
 		}
 	});
 
-	for (const cl of classesToFind) {
-		root.visitBoundAttribute(cl, (boundAttr) => {
-			if (visitedAttributes.has(boundAttr)) {
-				return;
-			}
+	root.visitBoundAttribute(/.*/, (boundAttr) => {
+		if (visitedAttributes.has(boundAttr)) {
+			return;
+		}
 
-			visitedAttributes.add(boundAttr);
+		const cl = boundAttr.name;
+		if (!cssClassesToUpdate.has(cl)) {
+			return;
+		}
 
-			updates.push({
-				position: boundAttr.keySpan.start.offset,
-				oldContent: boundAttr.keySpan.details || '',
-				newContent: boundAttr.keySpan.details?.replace(cl, oldClassToNewClass[cl]) || '',
-			});
+		visitedAttributes.add(boundAttr);
+
+		updates.push({
+			position: boundAttr.keySpan.start.offset,
+			oldContent: boundAttr.keySpan.details || '',
+			newContent: boundAttr.keySpan.details?.replace(`class.${cl}`, `class.${oldClassToNewClass[cl]}`) || '',
 		});
-	}
+	});
 
 	root.visitBoundAttribute('ngClass', (boundAttr) => {
 		if (!(boundAttr.value instanceof lib.ASTWithSource)) {
@@ -121,11 +125,17 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 
 		const { source } = boundAttr.value;
 
-		if (classesToFind.some((cl) => source?.includes(cl))) {
+		const oldContent = boundAttr.value.source || '';
+		const newContent = (source || '').replace(
+			/(["']?)([\w\-_]*?)(["']?):/g,
+			(_fullMatch, before: string, middle: string, after: string) => `${before + (oldClassToNewClass[middle] || middle) + after}:`,
+		);
+
+		if (oldContent !== newContent) {
 			updates.push({
 				position: boundAttr.value.sourceSpan.start,
-				oldContent: boundAttr.value.source || '',
-				newContent: classesToFind.reduce((acc, cl) => acc.replace(cl, oldClassToNewClass[cl]), source || ''),
+				oldContent,
+				newContent,
 			});
 		}
 	});

@@ -39,7 +39,7 @@
 
 @mixin asideBefore {
 	&:not(.mod-asideRemoved) {
-		@include media.largerThan('l') {
+		@include media.min('L') {
 			grid-template-columns: var(--commons-navSide-width) var(--components-aside-width) 1fr;
 			grid-template-areas:
 				'banner	banner banner'
@@ -95,15 +95,15 @@
 }
 
 @mixin navsideLarge {
-	@include media.largerThan('l') {
+	@include media.min('L') {
 		grid-template-columns: var(--commons-navSide-width) 1fr var(--components-aside-width);
 	}
 
-	@include media.smallerThan('l') {
+	@include media.max('L') {
 		grid-template-columns: var(--commons-navSide-width) 1fr;
 	}
 
-	@include media.smallerThan('s') {
+	@include media.max('S') {
 		grid-template-columns: 1fr;
 	}
 }

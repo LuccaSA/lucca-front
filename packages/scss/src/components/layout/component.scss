@@ -4,11 +4,11 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	min-height: 100vh;
 	display: grid;
 
-	@include media.largerThan('l') {
+	@include media.min('L') {
 		grid-template-columns: var(--commons-navSide-compact-width) 1fr var(--components-aside-width);
 		grid-template-rows: var(--commons-banner-height) 1fr;
 		grid-template-areas:
@@ -16,7 +16,7 @@
 			'navside content aside';
 	}
 
-	@include media.smallerThan('l') {
+	@include media.max('L') {
 		grid-template-columns: var(--commons-navSide-compact-width) 1fr;
 		grid-template-rows: var(--commons-banner-height) 1fr auto;
 		grid-template-areas:
@@ -25,7 +25,7 @@
 			'navside aside';
 	}
 
-	@include media.smallerThan('s') {
+	@include media.max('S') {
 		grid-template-columns: 1fr;
 		grid-template-rows: var(--commons-banner-height) auto 1fr auto;
 		grid-template-areas:
@@ -35,9 +35,9 @@
 			'aside';
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.layout-content-container {
-			max-width: math.div(map.get(config.$breakpoints, 'm'), 16px) * 1rem;
+			max-width: math.div(map.get(config.$breakpoints, 'M'), 16px) * 1rem;
 		}
 
 		.layout-banner {
@@ -56,7 +56,7 @@
 			display: flex;
 			flex-direction: column;
 
-			@include media.smallerThan('s') {
+			@include media.max('S') {
 				position: static;
 			}
 		}
@@ -68,7 +68,7 @@
 			top: var(--commons-banner-height);
 			position: sticky;
 
-			@include media.smallerThan('s') {
+			@include media.max('S') {
 				position: static;
 			}
 		}
@@ -86,7 +86,7 @@
 			position: sticky;
 			bottom: 0;
 
-			@include media.smallerThan('s') {
+			@include media.max('S') {
 				position: static;
 			}
 		}
@@ -100,7 +100,7 @@
 			flex-direction: column;
 			align-self: self-start;
 
-			@include media.smallerThan('s') {
+			@include media.max('S') {
 				min-height: 0;
 			}
 		}
@@ -108,7 +108,7 @@
 		.layout-aside {
 			grid-area: aside;
 
-			@include media.smallerThan('l') {
+			@include media.max('L') {
 				min-height: 0;
 				position: static;
 			}
@@ -132,7 +132,7 @@
 			bottom: 0;
 			background-color: var(--colors-white-color);
 
-			@include media.smallerThan('s') {
+			@include media.max('S') {
 				margin-top: 0;
 				position: static;
 			}
@@ -149,7 +149,7 @@
 			font: inherit;
 			cursor: pointer;
 
-			@include media.largerThan('s') {
+			@include media.min('S') {
 				display: none;
 			}
 		}
@@ -162,7 +162,7 @@
 		}
 
 		.layout-navside-content {
-			@include media.smallerThan('s') {
+			@include media.max('S') {
 				.layout-navside-toggle[aria-expanded='false'] ~ & {
 					display: none;
 				}

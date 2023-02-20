@@ -8,12 +8,12 @@ export default {
 
 function getTemplate(args: IconsSizesStory): string {
 	return `
-		<span aria-hidden="true" class="lucca-icon icon-heart size-smaller"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart size-small"></span>
+		<span aria-hidden="true" class="lucca-icon icon-heart mod-XS"></span>
+		<span aria-hidden="true" class="lucca-icon icon-heart mod-S"></span>
 		<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart size-big"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart size-bigger"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart size-biggest"></span>
+		<span aria-hidden="true" class="lucca-icon icon-heart mod-L"></span>
+		<span aria-hidden="true" class="lucca-icon icon-heart mod-XL"></span>
+		<span aria-hidden="true" class="lucca-icon icon-heart mod-XXL"></span>
 	`;
 }
 

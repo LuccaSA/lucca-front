@@ -1,12 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
 	position: sticky;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.tableOfContent-list {
 			@include reset.list;
 		}
@@ -14,7 +14,7 @@
 		.tableOfContent-list-item-action {
 			@include reset.button;
 
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius-M);
 			color: var(--palettes-grey-700);
 			cursor: pointer;
 			display: block;

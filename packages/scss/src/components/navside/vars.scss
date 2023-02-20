@@ -1,5 +1,5 @@
-@mixin vars {
-	@at-root {
+@mixin vars($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		:root {
 			--commons-navSide-width: 15rem;
 			--commons-navSide-compact-width: 7.5rem;
@@ -48,7 +48,7 @@
 	--components-navSide-bottom-section-palette-selected-alert-text: var(--colors-white-color);
 	--components-navSide-bottom-section-height: 3.1rem;
 
-	--components-navSide-scrollbar-width: var(--spacings-smaller);
+	--components-navSide-scrollbar-width: var(--spacings-XS);
 	--components-navSide-scrollbar-border-radius: 10px;
 	--components-navSide-scrollbar-bg-color: var(--palettes-primary-800);
 	--components-navSide-scrollbar-thumb-color: var(--palettes-primary-700);

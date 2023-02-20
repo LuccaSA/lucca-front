@@ -3,4 +3,12 @@
 .link {
 	@include vars;
 	@include component;
+
+	&.mod-icon {
+		@include icon;
+	}
+
+	&:is(:disabled, .is-disabled) {
+		@include disabled;
+	}
 }

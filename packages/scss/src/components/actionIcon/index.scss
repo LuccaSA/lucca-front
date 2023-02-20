@@ -20,8 +20,8 @@
 		}
 	}
 
-	&.mod-small {
-		@include small;
+	&.mod-S {
+		@include S;
 	}
 
 	&:is(.is-disabled, .disabled, [disabled]) {

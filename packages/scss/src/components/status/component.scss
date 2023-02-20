@@ -1,16 +1,16 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: inline-flex;
 	align-items: center;
 	white-space: nowrap;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.status-dot {
 			aspect-ratio: 1;
-			width: var(--spacings-smaller);
+			width: var(--spacings-XS);
 			border-radius: 50%;
 			background-color: currentColor;
-			margin: calc(var(--spacings-smallest) / 2);
-			margin-right: var(--spacings-smaller);
+			margin: calc(var(--spacings-XXS) / 2);
+			margin-right: var(--spacings-XS);
 			position: relative;
 			z-index: 1;
 			display: inline-flex;
@@ -40,7 +40,7 @@
 		}
 
 		.status-label {
-			font-size: var(--sizes-small-font-size);
+			font-size: var(--sizes-S-fontSize);
 			color: var(--palettes-grey-800);
 		}
 	}

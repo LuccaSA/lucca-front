@@ -18,32 +18,31 @@
 		@include block;
 	}
 
-	&.mod-small {
-		@include small;
+	&.mod-S {
+		@include S;
 	}
 
-	&.mod-smaller {
-		@include smaller;
+	&.mod-XS {
+		@include XS;
 	}
 
 	&.mod-counter {
 		@include counter;
 
-		&.mod-small,
-		&.mod-smaller {
-			@include counterSmall;
+		&.mod-S {
+			@include counterS;
+		}
+
+		&.mod-XS {
+			@include counterXS;
 		}
 	}
 
 	&.mod-icon {
 		@include icon;
 
-		&.mod-small {
-			@include iconSmall;
-		}
-
-		&.mod-smaller {
-			@include iconSmaller;
+		&.mod-XS {
+			@include iconXS;
 		}
 	}
 
@@ -53,13 +52,17 @@
 
 	&.mod-more {
 		@include more;
+
+		&.mod-S {
+			@include moreS;
+		}
 	}
 
 	&:is(.loading, .is-loading) {
 		@include loading;
 
-		&.mod-small {
-			@include loadingSmall;
+		&.mod-S {
+			@include loadingS;
 		}
 	}
 

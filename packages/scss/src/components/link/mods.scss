@@ -1,0 +1,8 @@
+@mixin icon {
+	.lucca-icon {
+		text-decoration: none;
+		margin-left: var(--spacings-XXS);
+		font-size: var(--sizes-M-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
+	}
+}

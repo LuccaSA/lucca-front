@@ -8,18 +8,18 @@ export default {
 
 function getTemplate(args: GridsHorizontalAlignmentStory): string {
 	return `
-	<div class="grid mod-xsStart">
-		<div class="grid-xs6">
+	<div class="grid mod-start@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo">Start</div>
 		</div>
 	</div>
-	<div class="grid mod-xsCenter">
-		<div class="grid-xs6">
+	<div class="grid mod-center@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo">Center</div>
 		</div>
 	</div>
-	<div class="grid mod-xsEnd">
-		<div class="grid-xs6">
+	<div class="grid mod-end@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo">End</div>
 		</div>
 	</div>
@@ -33,8 +33,8 @@ const Template: Story<GridsHorizontalAlignmentStory> = (args: GridsHorizontalAli
 		`
 		.grid-demo {
 			background: #F3F5FC;
-			margin-bottom: var(--spacings-small);
-			padding: var(--spacings-small);
+			margin-bottom: var(--spacings-S);
+			padding: var(--spacings-S);
 			border-radius: 1rem;
 		}`,
 	],

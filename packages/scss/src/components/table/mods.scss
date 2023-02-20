@@ -1,8 +1,8 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin small {
-	font-size: var(--sizes-small-font-size);
-	line-height: var(--sizes-small-line-height);
+@mixin S {
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
 }
 
 @mixin zebra {
@@ -113,8 +113,8 @@
 	.table-foot-row-cell {
 		color: var(--palettes-grey-800);
 		background-color: var(--palettes-grey-100);
-		font-size: var(--sizes-small-font-size);
-		line-height: var(--sizes-small-line-height);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 		font-weight: 600;
 	}
 }
@@ -138,7 +138,7 @@
 		&::before {
 			@include icon.generate('arrow_south');
 
-			margin-right: var(--spacings-smaller);
+			margin-right: var(--spacings-XS);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			vertical-align: middle;
@@ -159,19 +159,19 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--spacings-bigger);
+			padding-left: var(--spacings-XL);
 		}
 	}
 }
 
-@mixin draggable {
-	@at-root {
+@mixin draggable($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		.table-body-row-cell-handler,
 		.table-foot-row-cell-handler {
 			top: 0;
 			bottom: 0;
 			left: 0;
-			width: var(--spacings-big);
+			width: var(--spacings-L);
 			position: absolute;
 			cursor: move;
 
@@ -198,7 +198,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--spacings-big);
+			padding-left: var(--spacings-L);
 			position: relative;
 		}
 	}
@@ -209,20 +209,16 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-right: var(--spacings-smaller);
-			width: var(--spacings-small);
+			padding-right: var(--spacings-XS);
+			width: var(--spacings-S);
 		}
 	}
 }
 
-@mixin twoLines(
-	$headCell: '.table-head-row-cell',
-	$secondLine: '.table-head-row-cell-secondLine',
-	$wrapper: '.table-head-row-cell-wrapper'
-) {
-	@at-root {
+@mixin twoLines($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
 		.table-head-row-cell-secondLine {
-			margin-top: var(--spacings-smallest);
+			margin-top: var(--spacings-XXS);
 			display: block;
 			font-weight: 400;
 		}
@@ -233,13 +229,13 @@
 	}
 
 	.table-head-row-cell-wrapper {
-		max-width: calc(100% - var(--spacings-big));
+		max-width: calc(100% - var(--spacings-L));
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	.table-head-row-cell-secondLine {
-		margin-top: var(--spacings-smallest);
+		margin-top: var(--spacings-XXS);
 		display: block;
 		font-weight: 400;
 	}
@@ -247,12 +243,12 @@
 
 @mixin avatar {
 	padding-right: 0;
-	width: var(--spacings-big);
+	width: var(--spacings-L);
 }
 
 @mixin actions {
 	padding: 0.3rem;
-	padding-right: var(--spacings-smaller);
+	padding-right: var(--spacings-XS);
 	padding-left: 0;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: opacity;

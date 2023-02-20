@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	bottom: 0;
 	left: 0;
 	top: 0;
@@ -12,7 +12,7 @@
 	padding-top: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.navSide-wrapper {
 			display: flex;
 			flex-direction: column;
@@ -82,7 +82,7 @@
 			color: var(--components-navSide-fullwidth-palette-text);
 			transition-property: all;
 			transition-duration: var(--commons-animations-durations-fast);
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius-M);
 
 			&:focus-visible {
 				outline: none;
@@ -96,9 +96,9 @@
 
 		.navSide-item-link {
 			font-size: var(--components-navSide-main-font-size);
-			padding: var(--spacings-small);
+			padding: var(--spacings-S);
 			font-weight: 600;
-			line-height: var(--sizes-smaller-line-height);
+			line-height: var(--sizes-XS-lineHeight);
 
 			&:focus-visible {
 				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
@@ -120,7 +120,7 @@
 		}
 
 		.navSide-item-alert {
-			font-size: var(--sizes-smaller-font-size);
+			font-size: var(--sizes-XS-fontSize);
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
 			color: var(--components-navSide-fullwidth-palette-alert-text);
 			transition-duration: var(--commons-animations-durations-standard);
@@ -141,7 +141,7 @@
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
-			font-size: var(--sizes-big-font-size);
+			font-size: var(--sizes-L-fontSize);
 			flex-shrink: 0;
 			width: 1em;
 			height: 1em;
@@ -215,7 +215,7 @@
 			&::after {
 				@include loading.gradient;
 
-				border-radius: var(--commons-border-radius);
+				border-radius: var(--commons-borderRadius-M);
 				flex: 1 1 auto;
 				height: 0.9em;
 				margin-left: 1em;

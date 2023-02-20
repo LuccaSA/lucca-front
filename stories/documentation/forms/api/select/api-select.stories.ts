@@ -12,12 +12,12 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield u-marginTopStandard">
+		<label class="textfield u-marginTopM">
 			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
-		<label class="textfield u-marginTopStandard">
+		<label class="textfield u-marginTopM">
 			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
@@ -60,7 +60,7 @@ class ApiSelectStoriesModule {}
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield u-marginTopStandard">
+		<label class="textfield u-marginTopM">
 			<lu-api-select class="textfield-input"
 				standard="v4"
 				[api]="apiV4"

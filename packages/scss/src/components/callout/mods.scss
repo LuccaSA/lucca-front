@@ -1,9 +1,9 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin icon {
-	padding-left: var(--spacings-bigger);
+@mixin icon($atRoot: 'without: rule') {
+	padding-left: var(--spacings-XL);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.callout-icon {
 			top: 0.4rem;
 			left: 0.75rem;
@@ -22,9 +22,9 @@
 	}
 }
 
-@mixin small {
-	font-size: var(--sizes-small-font-size);
-	line-height: var(--sizes-small-line-height);
+@mixin S {
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
 
 	&.mod-icon {
 		padding-left: 2.8rem;
@@ -33,25 +33,25 @@
 			top: 0.4rem;
 
 			.lucca-icon {
-				font-size: var(--sizes-standard-font-size);
+				font-size: var(--sizes-M-fontSize);
 			}
 		}
 	}
 }
 
-@mixin killable {
+@mixin killable($atRoot: 'without: rule') {
 	padding-right: 2.5rem;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.callout-kill {
-			right: var(--spacings-small);
+			right: var(--spacings-S);
 			background-color: transparent;
 			color: currentColor;
 			position: absolute;
 			height: 1.5rem;
 			border: 0;
 			padding: 0;
-			top: var(--spacings-smaller);
+			top: var(--spacings-XS);
 			transition-duration: 150ms;
 			transition-property: background-color;
 			width: 1rem;

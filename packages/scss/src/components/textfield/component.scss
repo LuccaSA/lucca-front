@@ -1,12 +1,12 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	vertical-align: middle;
 	width: var(--components-textfield-sizes-default);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.textfield-input {
 			min-width: 0;
 			border: 0;
-			line-height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-M-lineHeight);
 			-webkit-appearance: none;
 			background-color: var(--components-textfield-background);
 			border-radius: var(--components-textfield-border-radius);
@@ -20,8 +20,8 @@
 				transition-duration: var(--commons-animations-durations-fast);
 				opacity: 1;
 			}
-			
-			&[type="search"] {
+
+			&[type='search'] {
 				&::-webkit-search-cancel-button,
 				&::-webkit-search-decoration {
 					appearance: none;
@@ -34,14 +34,14 @@
 			right: var(--components-textfield-input-padding-horizontal);
 			position: absolute;
 			pointer-events: none;
-			line-height: var(--sizes-standard-line-height);
+			line-height: var(--sizes-M-lineHeight);
 			z-index: 1;
 		}
 
 		.textfield-options {
 			box-shadow: var(--commons-elevations-elevation-3);
 			background-color: var(--colors-white-color);
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius-M);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
 			list-style: none;
@@ -68,7 +68,7 @@
 		.textfield-options-entry {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			padding: var(--spacings-smaller) var(--spacings-small);
+			padding: var(--spacings-XS) var(--spacings-S);
 			cursor: pointer;
 		}
 	}

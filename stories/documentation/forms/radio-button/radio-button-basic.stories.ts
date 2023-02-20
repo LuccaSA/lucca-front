@@ -1,14 +1,14 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface RadiosButtonsBasicStory {
-	small: boolean;
+	s: boolean;
 	disabled: boolean;
 }
 
 export default {
 	title: 'Documentation/Forms/Radio Buttons/Basic',
 	argTypes: {
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			},
@@ -22,10 +22,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: RadiosButtonsBasicStory): string {
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	return `
-	<div class="radioButtons ${small}">
+	<div class="radioButtons ${s}">
 		<label class="radioButtons-item">
 			<input type="radio" name="radioButtonsID" class="radioButtons-item-input" ${disabled} checked>
 			<span class="radioButtons-item-label">Bouton 1</span>
@@ -48,4 +48,4 @@ const Template: Story<RadiosButtonsBasicStory> = (args: RadiosButtonsBasicStory)
 });
 
 export const Basic = Template.bind({});
-Basic.args = { small: false, disabled: false };
+Basic.args = { s: false, disabled: false };

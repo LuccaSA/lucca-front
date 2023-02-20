@@ -1,11 +1,11 @@
-@mixin component {
-	border-radius: var(--commons-border-radius);
+@mixin component($atRoot: 'without: rule') {
+	border-radius: var(--commons-borderRadius-M);
 	height: var(--components-gauge-height);
 	overflow: hidden;
 	position: relative;
 	background-color: rgba(var(--colors-grey-900-rgb), 0.05);
 
-	@at-root {
+	@at-root ($atRoot) {
 		.gauge-bar {
 			color: var(--palettes-700, var(--palettes-primary-700));
 			border-bottom-width: var(--components-gauge-height);

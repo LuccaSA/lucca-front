@@ -31,8 +31,9 @@ class ToastsStory implements OnInit, OnDestroy {
 	}
 
 	public createToast(type: LuToastType, duration?: number | null): void {
+		const title = this.getRandomTitle();
 		const message = this.getRandomMessage();
-		this.toastsService.addToast({ type, message, duration });
+		this.toastsService.addToast({ type, title, message, duration });
 	}
 
 	public notifyError(): void {
@@ -45,6 +46,17 @@ class ToastsStory implements OnInit, OnDestroy {
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 			'Lorem <a href="#">ipsum</a> dolor',
 			'<ins>Lorem</ins> <em>ipsum</em> <strong>dolor</strong>',
+		];
+
+		const random = Math.floor(Math.random() * toastsValues.length);
+		return toastsValues[random];
+	}
+
+	private getRandomTitle(): string {
+		const toastsValues = [
+			'Titre du toast',
+			'Titre du toast long, très très très très très très long',
+			undefined
 		];
 
 		const random = Math.floor(Math.random() * toastsValues.length);
@@ -88,6 +100,7 @@ class ToastsStory implements OnInit, OnDestroy {
     const message = 'random-message';
     this.toastsService.addToast({
     	type, /* LuToastType peut être : 'Info' | 'Error' | 'Success' | 'Warning' */
+    	title, /* Pour rajouter un titre au toast */
     	message,
     	duration /* Pour activer la suppression manuel du toast, il faut setter la durée à null (et pas undefined) */
     });

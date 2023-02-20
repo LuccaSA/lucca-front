@@ -1,8 +1,0 @@
-:host {
-  display: flex;
-  flex-flow: column nowrap;
-  height: calc(100vh - #{_theme("commons.banner-height")} - 3.5rem);
-  background-color: var(--palettes-grey-50);
-  top: calc(#{_theme("spacings.smallest") * -1});
-  left: -_theme("spacings.smallest");
-}

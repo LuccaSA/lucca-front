@@ -10,8 +10,8 @@
 	}
 
 	@each $breakpoint, $value in config.$breakpoints {
-		@include media.largerThan($breakpoint) {
-			&.mod-stickyColumn-#{$breakpoint} {
+		@include media.min($breakpoint) {
+			&.mod-stickyColumn\@mediaMin#{$breakpoint} {
 				@include stickyColumn;
 			}
 		}
@@ -45,8 +45,8 @@
 		@include stickyHeaderCommon;
 
 		@each $breakpoint, $value in config.$breakpoints {
-			@include media.smallerThan($breakpoint) {
-				&.mod-stickyColumn-#{$breakpoint} {
+			@include media.max($breakpoint) {
+				&.mod-stickyColumn\@mediaMin#{$breakpoint} {
 					@include stickyColumnBreakpoint;
 				}
 			}

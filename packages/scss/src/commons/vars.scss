@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/core';
 
 @mixin vars {
-	@include core.cssvars('commons-border-radius', config.$borderRadius);
+	@include core.cssvars('commons-borderRadius', config.$borderRadius);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-animations-durations', config.$durations);
 	@include core.cssvars('commons-disabled', config.$disabled);
@@ -20,7 +20,7 @@
 	@include core.cssvars('spacings', config.$spacings);
 
 	@include core.cssvars('commons-elevations-elevation', config.$elevations);
-	@include core.cssvars('commons-box-shadow', config.$boxShadows);
+	@include core.cssvars('commons-boxShadow', config.$boxShadows);
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
@@ -32,7 +32,6 @@
 	--commons-background-base: #f5f5f5;
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
-	--commons-transition: all 150ms ease;
 	--commons-divider-width: 1px;
 	--commons-divider-color: var(--palettes-grey-200);
 	--commons-divider-style: solid;

@@ -11,36 +11,36 @@
 	}
 
 	@each $breakpoint, $value in config.$breakpoints {
-		@include media.largerThan($breakpoint) {
-			&.mod-#{$breakpoint}Start {
+		@include media.min($breakpoint) {
+			&.mod-start\@mediaMin#{$breakpoint} {
 				@include start;
 			}
 
-			&.mod-#{$breakpoint}Center {
+			&.mod-center\@mediaMin#{$breakpoint} {
 				@include center;
 			}
 
-			&.mod-#{$breakpoint}End {
+			&.mod-end\@mediaMin#{$breakpoint} {
 				@include end;
 			}
 
-			&.mod-#{$breakpoint}Top {
+			&.mod-top\@mediaMin#{$breakpoint} {
 				@include top;
 			}
 
-			&.mod-#{$breakpoint}Middle {
+			&.mod-middle\@mediaMin#{$breakpoint} {
 				@include middle;
 			}
 
-			&.mod-#{$breakpoint}Bottom {
+			&.mod-bottom\@mediaMin#{$breakpoint} {
 				@include bottom;
 			}
 
-			&.mod-#{$breakpoint}Around {
+			&.mod-around\@mediaMin#{$breakpoint} {
 				@include around;
 			}
 
-			&.mod-#{$breakpoint}Between {
+			&.mod-between\@mediaMin#{$breakpoint} {
 				@include between;
 			}
 		}
@@ -48,27 +48,31 @@
 }
 
 @each $breakpoint, $value in config.$breakpoints {
-	.grid-#{$breakpoint} {
+	.grid\@mediaMin#{$breakpoint} {
 		@include column;
 	}
 
-	@include media.largerThan($breakpoint) {
-		.grid-#{$breakpoint} {
+	@include media.min($breakpoint) {
+		.grid\@mediaMin#{$breakpoint} {
 			@include grow;
 		}
 	}
 
 	@for $i from 1 through 12 {
-		.grid-#{$breakpoint}#{$i} {
+		.grid-#{$i}\@mediaMin#{$breakpoint} {
 			@include column;
 		}
+	}
+}
 
-		@include media.largerThan($breakpoint) {
-			.grid-#{$breakpoint}#{$i} {
+@each $breakpoint, $value in config.$breakpoints {
+	@for $i from 1 through 12 {
+		@include media.min($breakpoint) {
+			.grid-#{$i}\@mediaMin#{$breakpoint} {
 				@include basis($i);
 			}
 
-			.grid-#{$breakpoint}Offset#{$i} {
+			.grid-offset#{$i}\@mediaMin#{$breakpoint} {
 				@include offset($i);
 			}
 		}
@@ -77,12 +81,12 @@
 
 .grid {
 	@each $breakpoint, $value in config.$breakpoints {
-		@include media.largerThan($breakpoint) {
-			.u-#{$breakpoint}First {
+		@include media.min($breakpoint) {
+			.u-first\@mediaMin#{$breakpoint} {
 				@include first;
 			}
 
-			.u-#{$breakpoint}Last {
+			.u-last\@mediaMin#{$breakpoint} {
 				@include last;
 			}
 		}

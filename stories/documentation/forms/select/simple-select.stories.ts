@@ -59,21 +59,21 @@ const template = `
 	<span class="textfield-label">Avec displayer</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select #simpleSelect class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
 		<ng-container *luOption="let legume; select: simpleSelect">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Sans displayer</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
 		<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Avec clearer</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select
 		#select4
 		class="textfield-input"
@@ -87,14 +87,14 @@ const template = `
 	<span class="textfield-label">Avec searcher</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
 		<ng-container *luOption="let legume; select: select5">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Disabled</span>
 </label>
 
-<div class="u-marginTopStandard">
+<div class="u-marginTopM">
 	<div>
 		Value:
 		<pre>{{ value | json }}</pre>
@@ -172,21 +172,21 @@ export class SimpleSelectStoriesModule {}
 	<span class="textfield-label">Avec displayer</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select #simpleSelect class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes">
 		<ng-container *luOption="let legume; select: simpleSelect">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Sans displayer</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select #select3 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [clearable]="true">
 		<ng-container *luOption="let legume; select: select3">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Avec clearer</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select
 		#select4
 		class="textfield-input"
@@ -200,14 +200,14 @@ export class SimpleSelectStoriesModule {}
 	<span class="textfield-label">Avec searcher</span>
 </label>
 
-<label class="textfield u-marginTopStandard">
+<label class="textfield u-marginTopM">
 	<lu-simple-select #select5 class="textfield-input" placeholder="Placeholder..." [(ngModel)]="value" [options]="legumes" [disabled]="true">
 		<ng-container *luOption="let legume; select: select5">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Disabled</span>
 </label>
 
-<div class="u-marginTopStandard">
+<div class="u-marginTopM">
 	<div>
 		Value:
 		<pre>{{ value | json }}</pre>

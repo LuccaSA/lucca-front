@@ -24,7 +24,7 @@ const Template: Story<TextStyleStory> = (args: TextStyleStory) => ({
 	styles: [
 		`
 		span {
-			padding-right: var(--spacings-small);
+			padding-right: var(--spacings-S);
 		}
 		}`,
 	],

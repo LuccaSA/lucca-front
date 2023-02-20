@@ -8,12 +8,12 @@ export default {
 
 function getTemplate(args: TextSizeStory): string {
 	return `
-		<span class="u-textSmaller">Smaller</span>
-		<span class="u-textSmall">Small</span>
-		<span class="u-textStandard">Standard</span>
-		<span class="u-textBig">Big</span>
-		<span class="u-textBigger">Bigger</span>
-		<span class="u-textBiggest">Biggest</span>
+		<span class="u-textXS">XS</span>
+		<span class="u-textS">S</span>
+		<span class="u-textM">M</span>
+		<span class="u-textL">L</span>
+		<span class="u-textXL">XL</span>
+		<span class="u-textXXL">XXL</span>
 	`;
 }
 
@@ -23,7 +23,7 @@ const Template: Story<TextSizeStory> = (args: TextSizeStory) => ({
 	styles: [
 		`
 		span {
-			padding-right: var(--spacings-small);
+			padding-right: var(--spacings-S);
 		}
 		}`,
 	],

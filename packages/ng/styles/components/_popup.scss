@@ -2,32 +2,40 @@
 
 :root {
 	--components-popup-panel-background-color: var(--colors-white-color);
-	--components-popup-size-small: 32rem;
-	--components-popup-size-medium: 42rem;
-	--components-popup-size-large: 60rem;
-	--components-popup-padding-horizontal: var(--spacings-big);
-	--components-popup-padding-vertical: var(--spacings-small);
+	--components-popup-XS: 25rem;
+	--components-popup-S: 30rem;
+	--components-popup-M: 40rem;
+	--components-popup-L: 50rem;
+	--components-popup-XL: 60rem;
+	--components-popup-padding-horizontal: var(--spacings-M);
+	--components-popup-padding-vertical: var(--spacings-S);
 }
 
 .lu-popup-panel {
 	box-shadow: var(--commons-elevations-elevation-3);
 	position: relative;
 	background-color: var(--components-popup-panel-background-color);
-	border-radius: var(--commons-border-radius);
-	width: var(--components-popup-size-medium);
+	border-radius: var(--commons-borderRadius-M);
+	width: var(--components-popup-M);
 	max-width: 95%;
 	max-height: 90vh;
 	overflow: auto;
-	animation: popup var(--commons-animations-durations-fast) cubic-bezier(0.25, 0.8, 0.25, 1);
+	animation: popup var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
 
-	&.mod-small,
-	&.size-small {
-		width: var(--components-popup-size-small);
+	&.mod-XS {
+		width: var(--components-popup-XS);
 	}
 
-	&.mod-large,
-	&.size-large {
-		width: var(--components-popup-size-large);
+	&.mod-S {
+		width: var(--components-popup-S);
+	}
+
+	&.mod-L {
+		width: var(--components-popup-L);
+	}
+
+	&.mod-XL {
+		width: var(--components-popup-XL);
 	}
 }
 
@@ -44,44 +52,29 @@
 }
 
 .lu-modal-header {
-	padding: var(--components-popup-padding-vertical) var(--spacings-biggest) var(--components-popup-padding-vertical)
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	background-color: var(--colors-white-color);
+	padding: var(--components-popup-padding-vertical) var(--spacings-XXL) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);
-	position: relative;
+	border-bottom: var(--commons-divider-border);
 }
 
 .lu-modal-header-title {
-	font-size: var(--sizes-big-font-size);
-	line-height: var(--sizes-big-line-height);
+	font-size: var(--sizes-L-fontSize);
+	line-height: var(--sizes-L-lineHeight);
 	margin: 0;
 }
 
 .lu-modal-header-close {
-	cursor: pointer;
-	background: transparent;
-	border: none;
-	outline: none;
-	padding: var(--spacings-smaller);
-	height: 3rem;
-	width: 3rem;
 	position: absolute;
-	right: 0.6rem;
-	top: 0.6rem;
-	border-radius: 50%;
-	transition: background var(--commons-animations-durations-fast) ease;
-
-	.lucca-icon {
-		font-size: 1.5rem;
-		color: var(--palettes-grey-700);
-	}
-
-	&:hover,
-	&:focus {
-		background-color: var(--palettes-primary-100);
-	}
+	right: 1.25rem;
+	top: 0.75rem;
 }
 
 .lu-modal-content {
-	padding: 0 var(--components-popup-padding-horizontal);
+	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal) 0 var(--components-popup-padding-horizontal);
 	overflow: auto;
 	height: auto;
 
@@ -102,15 +95,19 @@
 }
 
 .lu-modal-footer {
-	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
-	padding: var(--spacings-smaller) var(--spacings-small) var(--spacings-smaller) var(--components-popup-padding-horizontal);
+	position: sticky;
+	bottom: 0;
+	z-index: 5;
 	display: flex;
-	margin-top: auto;
 	align-items: center;
 	justify-content: flex-end;
+	background-color: var(--colors-white-color);
+	box-shadow: var(--commons-elevations-elevation-4);
+	margin-top: auto;
+	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
 }
 
-@include media.smallerThan('xxs') {
+@include media.max('XXS') {
 	.lu-popup-panel {
 		border-radius: 0;
 		max-width: none;
@@ -142,14 +139,14 @@
 		}
 		.lu-modal-content-title {
 			color: var(--palettes-grey-800);
-			font-size: var(--sizes-bigger-font-size);
+			font-size: var(--sizes-XL-fontSize);
 			margin-top: 2.5rem;
 		}
 		.button {
 			margin-bottom: 2.5rem;
 		}
 		.modal-visual {
-			margin: 4.5rem calc(var(--spacings-big) * -1) 0 calc(var(--spacings-big) * -1);
+			margin: 4.5rem calc(var(--spacings-L) * -1) 0 calc(var(--spacings-L) * -1);
 		}
 
 		.modal-visual-illustration {

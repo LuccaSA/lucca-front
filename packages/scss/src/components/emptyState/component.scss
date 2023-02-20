@@ -1,16 +1,16 @@
-@mixin component {
-	margin: 6rem auto var(--spacings-biggest);
+@mixin component($atRoot: 'without: rule') {
+	margin: 6rem auto var(--spacings-XXL);
 	text-align: center;
 	max-width: 30rem;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.emptyState-title {
 			color: var(--palettes-grey-600);
 		}
 
 		.emptyState-description {
 			color: var(--palettes-grey-600);
-			margin-bottom: var(--spacings-big);
+			margin-bottom: var(--spacings-L);
 		}
 	}
 }

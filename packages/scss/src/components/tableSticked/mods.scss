@@ -96,20 +96,20 @@
 }
 
 @mixin leftOffset($i) {
-	left: calc(#{$i} * var(--spacings-small));
+	left: calc(#{$i} * var(--spacings-S));
 
 	&.mod-stickyColumn-shadow,
 	.stickyColumn-shadow-wrapper::after {
-		left: calc(#{$i} * var(--spacings-small) + var(--components-table-fixed-column-sticky-shadow-width));
+		left: calc(#{$i} * var(--spacings-S) + var(--components-table-fixed-column-sticky-shadow-width));
 	}
 }
 
 @mixin rightOffset($i) {
-	right: calc(#{$i} * var(--spacings-small));
+	right: calc(#{$i} * var(--spacings-S));
 
 	&.mod-stickyColumn-shadow,
 	.stickyColumn-shadow-wrapper::after {
-		right: calc(#{$i} * var(--spacings-small) + var(--components-table-fixed-column-sticky-shadow-width));
+		right: calc(#{$i} * var(--spacings-S) + var(--components-table-fixed-column-sticky-shadow-width));
 	}
 }
 

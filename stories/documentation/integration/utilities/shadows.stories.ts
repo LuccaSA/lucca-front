@@ -23,8 +23,8 @@ const Template: Story<ShadowsStory> = (args: ShadowsStory) => ({
 	styles: [
 		`
 		div {
-			margin-bottom: var(--spacings-small);
-			padding: var(--spacings-smaller);
+			margin-bottom: var(--spacings-S);
+			padding: var(--spacings-XS);
 			width: 20rem;
 		}`,
 	],

@@ -1,42 +1,16 @@
 @mixin number {
-	height: var(--sizes-standard-line-height);
-	font-size: var(--sizes-smaller-font-size);
-	min-width: var(--sizes-standard-line-height);
-	line-height: var(--sizes-standard-line-height);
-	padding: 0 var(--spacings-smaller);
-	border-radius: 9999px;
+	font-size: var(--sizes-XS-fontSize);
+	padding: var(--spacings-XXS);
+	height: var(--sizes-M-lineHeight);
+	min-width: var(--sizes-M-lineHeight);
 }
 
-@mixin numberSmall {
-	height: var(--sizes-small-line-height);
-	min-width: var(--sizes-small-line-height);
-	line-height: var(--sizes-small-line-height);
-	padding: 0 var(--spacings-smallest);
+@mixin numberS {
+	height: var(--sizes-S-lineHeight);
+	min-width: var(--sizes-S-lineHeight);
 }
 
-@mixin numberSmaller {
-	height: var(--sizes-smaller-line-height);
-	min-width: var(--sizes-smaller-line-height);
-	line-height: var(--sizes-smaller-line-height);
-	padding: 0 0.1rem;
-}
-
-@mixin icon {
-	display: inline-flex;
-	align-items: center;
-	padding-left: 0.6rem;
-	padding-right: 0.6rem;
-
-	.label-icon {
-		font-size: var(--sizes-standard-font-size);
-		margin-right: var(--spacings-smallest);
-
-		&:last-child {
-			margin-right: 0;
-			margin-left: var(--spacings-smallest);
-		}
-		&:only-child {
-			margin: 0;
-		}
-	}
+@mixin numberXS {
+	height: var(--sizes-XS-lineHeight);
+	min-width: var(--sizes-XS-lineHeight);
 }

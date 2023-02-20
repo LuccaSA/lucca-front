@@ -1,8 +1,8 @@
-@mixin component {
-	margin: var(--spacings-smaller);
-	padding: var(--spacings-smallest) var(--spacings-smaller);
+@mixin component($atRoot: 'without: rule') {
+	margin: var(--spacings-XS);
+	padding: var(--spacings-XXS) var(--spacings-XS);
 	border: 0;
-	border-radius: var(--commons-border-radius);
+	border-radius: var(--commons-borderRadius-M);
 	display: inline-flex;
 	background-color: var(--palettes-50, var(--palettes-primary-50));
 	transition: box-shadow var(--commons-animations-durations-fast);
@@ -12,15 +12,15 @@
 		background-color: transparent;
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.timepicker-field {
-	    position: relative;
-	    display: inline-block;
+			position: relative;
+			display: inline-block;
 		}
 
 		.timepicker-field-input {
 			background-color: transparent;
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius-M);
 			text-align: center;
 			color: var(--palettes-grey-800);
 			width: var(--components-timepicker-input-width);
@@ -35,7 +35,9 @@
 				margin: 0;
 			}
 
-			&:hover, &:focus, &:focus-visible {
+			&:hover,
+			&:focus,
+			&:focus-visible {
 				background-color: var(--palettes-100, var(--palettes-primary-100));
 				outline: none;
 			}
@@ -44,7 +46,7 @@
 		.timepicker-field-increment {
 			cursor: pointer;
 			position: absolute;
-			bottom: calc(100% + .5rem);
+			bottom: calc(100% + 0.5rem);
 			left: 0;
 			border: 0;
 			height: 1.25rem;
@@ -53,12 +55,12 @@
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
-			border-radius: var(--commons-border-radius);
+			border-radius: var(--commons-borderRadius-M);
 			width: var(--components-timepicker-input-width);
 			padding: 0;
 
 			&:last-child {
-				top: calc(100% + .5rem);
+				top: calc(100% + 0.5rem);
 				bottom: auto;
 			}
 
@@ -78,9 +80,9 @@
 		}
 
 		.timepicker-separator {
-			margin: 0 var(--spacings-smallest);
+			margin: 0 var(--spacings-XXS);
 			text-align: center;
-			width: .5rem;
+			width: 0.5rem;
 		}
 	}
 }

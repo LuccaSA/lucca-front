@@ -1,7 +1,8 @@
-import type { AtRule, Container, Declaration, Node, Root } from 'postcss';
+import { AtRule, Container, Declaration, Node, Root } from 'postcss';
 import type { Node as ValueNode, ValueParser } from 'postcss-value-parser';
 import { ScssValueAst } from './scss-value-ast.js';
 
+export type PostCssSelectorParserLib = typeof import('./local-deps/postcss-selector-parser.js').postcssSelectorParser;
 export type PostCssLib = typeof import('./local-deps/postcss.js').postCss;
 export type PostCssScssLib = typeof import('./local-deps/postcss-scss.js');
 
@@ -83,8 +84,46 @@ export function addForwardRule(root: Root, name: string, postCss: PostCssLib, af
 	return addImport(root, new postCss.AtRule({ name: 'forward', params: `'${name}'` }), afterNode);
 }
 
-export function updateDeprecatedVariable(root: Root, mappingOldToNew: Record<string, string>, postcssValueParser: ValueParser) {
+export function updateMixinNames(root: Root, mappingOldToNew: Record<string, string>) {
+	root.walkAtRules('include', (rule) => {
+		rule.params = mappingOldToNew[rule.params] || rule.params;
+	});
+}
+
+export function updateCSSClassNamesInRules(root: Root, mappingOldToNew: Record<string, string>, postScssSelectorParser: PostCssSelectorParserLib) {
+	root.walkRules((rule) => {
+		if (rule.selector.endsWith(':')) {
+			/**
+			 * In sass we can do such a thing:
+			 * .foo {
+			 * 		padding: {
+			 * 			top: 10px;
+			 * 			bottom: 10px;
+			 * 		}
+			 * }
+			 * "padding:" is considered as a rule but its selector cannot be parsed using postScssSelectorParser
+			 */
+			return;
+		}
+
+		const selector = postScssSelectorParser().astSync(rule.selector);
+		selector.walkClasses((classNode) => {
+			// Exclude interpolation and function calls
+			if (classNode.value.includes('#{') || classNode.value.includes('(')) {
+				return;
+			}
+			classNode.value = mappingOldToNew[classNode.value] || classNode.value;
+		});
+		rule.selector = selector.toString();
+	});
+}
+
+export function updateCSSVariableNames(root: Root, mappingOldToNew: Record<string, string>, postcssValueParser: ValueParser) {
 	root.walkDecls((decl) => {
+		if (decl.prop.startsWith('--')) {
+			decl.prop = mappingOldToNew[decl.prop] || decl.prop;
+		}
+
 		const valueNode = new ScssValueAst(decl.value, postcssValueParser);
 
 		valueNode.walkFunction('var', (funcNode) => {
@@ -97,6 +136,19 @@ export function updateDeprecatedVariable(root: Root, mappingOldToNew: Record<str
 		});
 
 		decl.value = valueNode.toString();
+	});
+
+	root.walkAtRules((decl) => {
+		const paramsNode = new ScssValueAst(decl.params, postcssValueParser);
+		paramsNode.walkFunction('var', (funcNode) => {
+			const varName = funcNode.nodes[0]?.value ?? '';
+			const newVarName = varName && mappingOldToNew[varName];
+
+			if (newVarName) {
+				funcNode.nodes = new ScssValueAst(newVarName, postcssValueParser).nodes;
+			}
+		});
+		decl.params = paramsNode.toString();
 	});
 }
 

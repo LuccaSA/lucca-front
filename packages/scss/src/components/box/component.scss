@@ -1,4 +1,4 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	border-radius: var(--components-box-border-radius);
 	margin: var(--components-box-margin);
 	padding: var(--components-box-padding);
@@ -6,12 +6,12 @@
 	display: block;
 	position: relative;
 
-	@at-root {
+	@at-root ($atRoot) {
 		.box-close {
 			position: absolute;
-			font-size: var(--sizes-standard-font-size);
-			right: var(--spacings-smallest);
-			top: var(--spacings-smallest);
+			font-size: var(--sizes-M-fontSize);
+			right: var(--spacings-XXS);
+			top: var(--spacings-XXS);
 			z-index: 1;
 		}
 	}

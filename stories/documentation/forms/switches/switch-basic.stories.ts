@@ -3,13 +3,13 @@ import { Meta, Story } from '@storybook/angular';
 interface SwitchBasicStory {
 	disabled: boolean;
 	inline: boolean;
-	small: boolean;
+	s: boolean;
 }
 
 export default {
 	title: 'Documentation/Forms/Switches/Basic',
 	argTypes: {
-		small: {
+		s: {
 			control: {
 				type: 'boolean',
 			}
@@ -29,14 +29,14 @@ export default {
 
 function getTemplate(args: SwitchBasicStory): string {
 	const disabled = args.disabled ? `disabled` : '';
-	const small = args.small ? `mod-small` : '';
+	const s = args.s ? `mod-S` : '';
 	const inline = args.inline ? `mod-inline` : '';
 	return `
-		<label class="switch ${small} ${inline}">
+		<label class="switch ${s} ${inline}">
 			<input class="switch-input" type="checkbox" name="switchList1" ${disabled}>
 			<span class="switch-label">switch</span>
 		</label>
-		<label class="switch ${small} ${inline}">
+		<label class="switch ${s} ${inline}">
 			<input class="switch-input" type="checkbox" name="switchList1" ${disabled} checked>
 			<span class="switch-label">switch</span>
 		</label>
@@ -49,4 +49,4 @@ const Template: Story<SwitchBasicStory> = (args: SwitchBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { inline: false, disabled: false, small: false };
+Basic.args = { inline: false, disabled: false, s: false };

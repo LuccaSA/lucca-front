@@ -1,24 +1,25 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
-@mixin small {
-	--components-button-font-size: var(--components-button-small-font-size);
-	--components-button-line-height: var(--components-button-small-line-height);
-	--components-button-padding: var(--components-button-small-padding);
-	--icon-size: var(--sizes-standard-font-size);
+@mixin S {
+	--components-button-font-size: var(--sizes-S-fontSize);
+	--components-button-line-height: var(--sizes-XS-lineHeight);
+	--components-button-padding: var(--spacings-XS) var(--spacings-S);
+	--icon-size: var(--sizes-M-fontSize);
 }
 
-@mixin smaller {
-	--components-button-font-size: var(--components-button-smaller-font-size);
-	--components-button-line-height: var(--components-button-smaller-line-height);
-	--components-button-padding: var(--components-button-smaller-padding);
-	--icon-size: 0.875rem;
+@mixin XS {
+	--components-button-font-size: var(--sizes-XS-fontSize);
+	--components-button-line-height: var(--sizes-XS-lineHeight);
+	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
+	--icon-size: var(--sizes-S-fontSize);
+	--components-button-gap: var(--spacings-XXS);
 }
 
 @mixin text {
 	background-color: transparent;
 	box-shadow: none;
 	color: var(--palettes-700, var(--palettes-grey-700));
-	padding: var(--components-button-text-padding);
+	padding: var(--spacings-XS);
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
@@ -28,7 +29,7 @@
 		}
 
 		&:focus {
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
 				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
 			background: var(--palettes-50, var(--palettes-grey-50));
 			outline: none;
@@ -36,7 +37,7 @@
 
 		&:active {
 			background-color: var(--palettes-100, var(--palettes-grey-100));
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
 				inset 0 0 0 1px var(--palettes-500, var(--palettes-primary-500));
 		}
 	}
@@ -52,13 +53,13 @@
 		&:hover {
 			color: var(--palettes-700, var(--palettes-grey-700));
 			background-color: var(--palettes-100, var(--palettes-grey-100));
-			box-shadow: var(--commons-box-shadow-xs), inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+			box-shadow: var(--commons-boxShadow-XS), inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
 		}
 
 		&:focus {
 			color: var(--palettes-700, var(--palettes-grey-700));
 			background-color: var(--palettes-100, var(--palettes-grey-100));
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-100, var(--palettes-primary-100)),
 				inset 0 0 0 1px var(--palettes-400, var(--palettes-primary-400));
 			outline: none;
 		}
@@ -72,8 +73,8 @@
 	}
 
 	.button-counter {
-		background-color: var(--palettes-grey-300);
-		color: var(--palettes-grey-800);
+		background-color: var(--palettes-300, var(--palettes-grey-300));
+		color: var(--palettes-800, var(--palettes-grey-800));
 	}
 }
 
@@ -81,41 +82,12 @@
 	width: 100%;
 }
 
-@mixin icon {
-	align-items: center;
-	display: inline-flex;
-	gap: var(--spacings-smaller);
-	padding-left: var(--spacings-small);
-	padding-right: var(--spacings-small);
-	justify-content: center;
-
-	@at-root {
-		.button-icon {
-			height: 1.5rem;
-			line-height: 1.5rem;
-			font-size: 1.5rem;
-			transform: translateX(-0.2rem);
-			vertical-align: bottom;
-		}
-	}
+@mixin icon($atRoot: 'without: rule') {
+	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
-@mixin iconSmall {
-	.button-icon {
-		font-size: var(--components-button-small-font-size);
-		height: var(--components-button-small-line-height);
-		line-height: var(--components-button-small-line-height);
-	}
-}
-
-@mixin iconSmaller {
-	gap: var(--spacings-smallest);
-
-	.button-icon {
-		font-size: var(--components-button-smaller-font-size);
-		height: var(--components-button-smaller-line-height);
-		line-height: var(--components-button-smaller-line-height);
-	}
+@mixin iconXS {
+	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 
 @mixin invert {
@@ -145,33 +117,41 @@
 		height: 0;
 		vertical-align: text-top;
 	}
-
-	.mod-small {
-		width: 1.75rem;
-	}
 }
 
-@mixin counter {
-	padding-left: var(--spacings-small);
-	padding-right: var(--spacings-small);
+@mixin moreS {
+	min-width: 1.75rem;
+}
 
-	@at-root {
+@mixin counter($atRoot: 'without: rule') {
+	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
+
+	@at-root ($atRoot) {
 		.button-counter {
 			background-color: var(--palettes-500, var(--palettes-primary-500));
 			border-radius: 1rem;
-			display: inline-block;
-			font-size: var(--sizes-smaller-font-size);
-			font-weight: 600;
+			display: flex;
+			font-size: var(--sizes-XS-fontSize);
 			height: 1.5rem;
 			min-width: 1.5rem;
-			margin-left: var(--spacings-smaller);
-			padding: 0 var(--spacings-smallest);
-			vertical-align: bottom;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 }
 
-@mixin counterSmall {
+@mixin counterS {
+	--components-button-padding: .375rem calc(var(--spacings-XS) + var(--spacings-XXS)) .375rem var(--spacings-S);
+
+	.button-counter {
+		height: 1.25rem;
+		min-width: 1.25rem;
+	}
+}
+
+@mixin counterXS {
+	--components-button-padding: var(--spacings-XXS) var(--spacings-XS) var(--spacings-XXS) calc(var(--spacings-XS) + var(--spacings-XXS));
+
 	.button-counter {
 		height: 1rem;
 		min-width: 1rem;

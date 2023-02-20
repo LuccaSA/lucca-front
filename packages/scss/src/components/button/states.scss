@@ -4,10 +4,8 @@
 @use '@lucca-front/scss/src/commons/core';
 
 @mixin disabled {
-	outline: none;
-	background-color: var(--palettes-grey-100);
-	color: var(--palettes-grey-500);
-	cursor: default;
+	background-color: var(--commons-disabled-background);
+	color: var(--commons-disabled-color);
 }
 
 @mixin disabledOutlined {
@@ -16,7 +14,7 @@
 }
 
 @mixin disabledText {
-	color: var(--palettes-grey-500);
+	color: var(--commons-disabled-color);
 	background-color: transparent;
 }
 
@@ -32,13 +30,14 @@
 	}
 }
 
-@mixin loadingSmall {
+@mixin loadingS {
 	&:not(.mod-more) {
-		@include loading.spinner(var(--components-button-small-font-size));
+		@include loading.spinner(var(--sizes-S-fontSize));
 	}
 }
 
 @mixin state {
+	background-color: var(--palettes-700) !important;
 	color: transparent !important;
 	pointer-events: none;
 	user-select: none;
@@ -47,26 +46,19 @@
 		color: var(--colors-white-color);
 		font-size: calc(1.5 * var(--components-button-font-size));
 		height: var(--components-button-line-height);
-		left: 0;
-		bottom: 0;
+		inset: 0;
 		margin: auto;
 		position: absolute;
-		right: 0;
-		top: 0;
-		vertical-align: middle;
 	}
-
-	background-color: var(--palettes-700) !important;
-	// color: var(--palettes-text) !important;
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: var(--palettes-600);
-			box-shadow: var(--commons-box-shadow-xs);
+			box-shadow: var(--commons-boxShadow-XS);
 		}
 
 		&:focus {
-			box-shadow: var(--commons-box-shadow-xs), 0 0 0 4px var(--palettes-200);
+			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-200);
 			outline: none;
 			background-color: var(--palettes-600);
 		}

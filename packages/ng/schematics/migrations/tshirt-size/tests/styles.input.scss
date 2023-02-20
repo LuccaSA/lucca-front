@@ -1,0 +1,12 @@
+@forward '@lucca-front/scss/src/components/skipLinks';
+
+:host {
+	display: block;
+	box-sizing: border-box;
+	padding: var(--spacings-standard) var(--spacings-standard) var(--spacings-smallest) var(--spacings-standard);
+
+	padding: {
+		top: var(--spacings-smaller);
+		bottom: var(--spacings-smaller);
+	}
+}

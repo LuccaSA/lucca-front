@@ -7,16 +7,12 @@
 	&.mod-number {
 		@include number;
 
-		&.mod-small {
-			@include numberSmall;
+		&.mod-S {
+			@include numberS;
 		}
 
-		&.mod-smaller {
-			@include numberSmaller;
+		&.mod-XS {
+			@include numberXS;
 		}
-	}
-
-	&.mod-icon {
-		@include icon;
 	}
 }

@@ -4,7 +4,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 @Component({
 	selector: 'loadings-stories',
 	templateUrl: './loadings.stories.html',
-	styles: ['.demo-invert { background: #444; display: inline-block; padding: var(--spacings-smaller) var(--spacings-small); margin: 0 var(--spacings-smaller); border-radius: 3px; }'],
+	styles: ['.demo-invert { background: #444; display: inline-block; padding: var(--spacings-XS) var(--spacings-S); margin: 0 var(--spacings-XS); border-radius: 3px; }'],
 })
 class LoadingsStory {}
 
