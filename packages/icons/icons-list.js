@@ -269,6 +269,8 @@ var icons = [
 	'divide',
 	'crown',
 	'unarchive',
+	'home-filled',
+	'home-starred',
 
 ];
 
