@@ -19,7 +19,7 @@ function getTemplate(args: FramedBasicStory): string {
 						<span class="textfield-label">Label textfield</span>
 					</label>
 				</div>
-				<div class="form-group-line-col mod-lg4">
+				<div class="form-group-line-col">
 					<label class="textfield">
 						<input class="textfield-input" type="text" placeholder="placeholder" value="Test disabled" disabled="disabled" />
 						<span class="textfield-label">Label textfield</span>
