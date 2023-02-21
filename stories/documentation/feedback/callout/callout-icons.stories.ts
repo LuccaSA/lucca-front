@@ -13,6 +13,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Taille : Small",
 		},
 		palette: {
 			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
