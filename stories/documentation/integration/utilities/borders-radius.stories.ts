@@ -8,10 +8,12 @@ export default {
 
 function getTemplate(args: BorderRadiusStory): string {
 	return `
-	<div class="u-borderTopLeftRadius"><code class="code">.u-borderTopLeftRadius</code></div>
-	<div class="u-borderTopRightRadius"><code class="code">.u-borderTopRightRadius</code></div>
-	<div class="u-borderBottomLeftRadius"><code class="code">.u-borderBottomLeftRadius</code></div>
-	<div class="u-borderBottomRightRadius"><code class="code">.u-borderBottomRightRadius</code></div>
+	<div class="u-borderRadiusM"><code class="code">.u-borderRadiusM</code></div>
+	<div class="u-borderTopLeftRadiusM"><code class="code">.u-borderTopLeftRadiusM</code></div>
+	<div class="u-borderTopRightRadiusM"><code class="code">.u-borderTopRightRadiusM</code></div>
+	<div class="u-borderBottomLeftRadiusM"><code class="code">.u-borderBottomLeftRadiusM</code></div>
+	<div class="u-borderBottomRightRadiusM"><code class="code">.u-borderBottomRightRadiusM</code></div>
+	<div class="u-borderRadiusL"><code class="code">.u-borderRadiusL</code></div>
 	<div class="u-borderTopLeftRadiusL"><code class="code">.u-borderTopLeftRadiusL</code></div>
 	<div class="u-borderTopRightRadiusL"><code class="code">.u-borderTopRightRadiusL</code></div>
 	<div class="u-borderBottomLeftRadiusL"><code class="code">.u-borderBottomLeftRadiusL</code></div>

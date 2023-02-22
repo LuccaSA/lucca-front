@@ -23,7 +23,8 @@ export default {
 		s: {
 			control: {
 				type: 'boolean',
-			}
+			},
+			description: "Taille : Small",
 		},
 		disabled: {
 			control: {

@@ -18,6 +18,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Taille : Small",
 		},
 	},
 } as Meta;
