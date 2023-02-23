@@ -53,7 +53,7 @@ export function extractNgTemplates(fileNameOrSourceFile: string | SourceFile, co
 					.map((initializer) => ({
 						offsetStart: initializer.getStart(sourcefile) + initializer.getLeadingTriviaWidth(sourcefile),
 						offsetEnd: initializer.getEnd(),
-						content: initializer.text,
+						content: 'rawText' in initializer && initializer.rawText ? initializer.rawText : initializer.text,
 					})),
 			);
 		}),
