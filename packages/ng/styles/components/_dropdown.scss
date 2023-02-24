@@ -23,20 +23,21 @@
 }
 
 .lu-dropdown-options-item-action {
-	display: flex;
+	align-items: center;
 	background-color: transparent;
 	border: 0;
-	padding: var(--spacings-XS) var(--spacings-S);
 	cursor: pointer;
+	display: flex;
+	gap: var(--spacings-XS);
 	line-height: var(--sizes-M-lineHeight);
-	width: 100%;
+	padding: var(--spacings-XS) var(--spacings-S);
 	text-align: left;
 	transition: background-color var(--commons-animations-durations-standard);
 	text-decoration: none;
+	width: 100%;
 
 	.lucca-icon {
 		font-size: 1rem;
-		margin: var(--spacings-XXS) var(--spacings-XS) 0 0;
 	}
 
 	&,
