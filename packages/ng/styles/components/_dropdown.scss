@@ -23,7 +23,7 @@
 }
 
 .lu-dropdown-options-item-action {
-	align-items: center;
+	align-items: flex-start;
 	background-color: transparent;
 	border: 0;
 	cursor: pointer;
@@ -38,6 +38,7 @@
 
 	.lucca-icon {
 		font-size: 1rem;
+		line-height: var(--sizes-M-lineHeight);
 	}
 
 	&,
