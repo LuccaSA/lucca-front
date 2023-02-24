@@ -54,7 +54,9 @@ function getTemplate(args: CalloutIconStory): string {
 		<div class="callout-icon">
 			<span aria-hidden="true" class="lucca-icon ${icon}"></span>
 		</div>
-		<strong class="callout-title">${text.title} </strong> ${text.description}
+		<div class="callout-content">
+			<strong class="callout-content-title">${text.title} </strong> ${text.description}
+		</div>
 	</div>
 	`
 }

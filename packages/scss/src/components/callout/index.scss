@@ -4,15 +4,7 @@
 	@include vars;
 	@include component;
 
-	&.mod-icon {
-		@include icon;
-	}
-
 	&.mod-S {
 		@include S;
-	}
-
-	&.mod-killable {
-		@include killable;
 	}
 }
