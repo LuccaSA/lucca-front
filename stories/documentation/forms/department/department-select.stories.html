@@ -1,9 +1,24 @@
-<label class="textfield">
+<label class="textfield mod-inline">
 	<lu-department-select
 		class="textfield-input"
 		[appInstanceId]="appInstanceId"
 		[operations]="operations"
 		[filters]="filters"
+		placeholder="Select a departement"
 		data-testid="lu-select"
 	></lu-department-select>
+	<div class="textfield-label">Departement</div>
+</label>
+
+<label class="textfield mod-inline">
+	<lu-department-select
+		class="textfield-input"
+		[appInstanceId]="appInstanceId"
+		[operations]="operations"
+		[filters]="filters"
+		placeholder="Select a departement"
+		multiple="true"
+		data-testid="lu-select"
+	></lu-department-select>
+	<div class="textfield-label">Departement multiple</div>
 </label>
