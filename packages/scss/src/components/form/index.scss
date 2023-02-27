@@ -3,6 +3,7 @@
 @use 'exports' as *;
 
 .form {
+	@include vars;
 }
 
 .form-group {
