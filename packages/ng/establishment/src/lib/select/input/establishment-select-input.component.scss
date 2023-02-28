@@ -22,7 +22,7 @@
 	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
 	font-size: var(--sizes-S-fontSize);
 	width: 100%;
-	text-align: left;
+	justify-content: flex-start;
 
 	&.mod-readonly {
 		color: var(--palettes-grey-600);
