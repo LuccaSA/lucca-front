@@ -9,6 +9,7 @@ export default {
 		autodocs: true, // see below for alternatives
 	},
 	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
 	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
 	webpackFinal: (config) => ({
