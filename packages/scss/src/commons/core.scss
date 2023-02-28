@@ -28,7 +28,7 @@ $whiteSpace: 'normal', 'nowrap';
 $float: 'left', 'right';
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
-$decoration: 'underline', 'line-trough', 'none';
+$decoration: 'underline', 'line-through', 'none';
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
