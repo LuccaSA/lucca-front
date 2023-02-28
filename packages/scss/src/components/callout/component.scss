@@ -1,12 +1,17 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
 @mixin component($atRoot: 'without: rule') {
+	align-items: flex-start;
 	border-radius: var(--commons-borderRadius-M);
-	background-color: var(--palettes-100, var(--components-callout-background));
+	background-color: var(--palettes-100, var(--palettes-grey-100));
 	color: var(--palettes-grey-800);
-	margin: var(--components-callout-margin);
-	padding: var(--components-callout-padding);
+	display: flex;
 	border-color: var(--palettes-200, var(--palettes-grey-200));
-	border-width: var(--commons-divider-width);
 	border-style: solid;
+	border-width: var(--commons-divider-width);
+	gap: .75rem;
+	padding: var(--spacings-XS) var(--spacings-S);
 	position: relative;
 
 	a,
@@ -20,9 +25,38 @@
 	}
 
 	@at-root ($atRoot) {
-		.callout-title {
+		.callout-content {
+			flex: 1;
+		}
+		
+		.callout-content-title {
+			display: block;
 			font-weight: 600;
-			margin-bottom: var(--spacings-XXS);
+			margin-bottom: var(--spacings-XS);
+		}
+
+		.callout-icon {
+			color: var(--palettes-700, var(--palettes-grey-700));
+
+			.lucca-icon {
+				font-size: 1.25rem;
+			}
+		}
+
+		.callout-kill {
+			@include reset.button;
+			color: currentColor;
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: background-color;
+			width: auto;
+
+			&::before {
+				@include icon.generate('cross');
+			}
+
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 }
