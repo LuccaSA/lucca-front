@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuSimpleSelectDisplayerDirective, LuSimpleSelectInputComponent, LuSimpleSelectOptionDirective } from '@lucca-front/ng/simple-select';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 interface ILegume {
@@ -123,7 +123,7 @@ class SimpleSelectStory {
 }
 
 @NgModule({
-	imports: [CommonModule, FormsModule, LuSimpleSelectInputComponent, LuOptionDirective, LuDisplayerDirective],
+	imports: [CommonModule, FormsModule, LuSimpleSelectInputComponent, LuSimpleSelectOptionDirective, LuSimpleSelectDisplayerDirective],
 	declarations: [SimpleSelectStory],
 	exports: [SimpleSelectStory],
 })
