@@ -172,6 +172,7 @@ export const cssClassMapping = expand({
 	'mod-stickyColumn-{tshirtSize}': 'mod-stickyColumn@mediaMin{tshirtSize}',
 	'mod-{tshirtSize}{gridSize}': 'mod-{gridSize}@mediaMin{tshirtSize}',
 	'mod-layoutFixed-{tshirtSize}{layoutFixedSize}': 'mod-layoutFixed-{layoutFixedSize}@mediaMin{tshirtSize}',
+	'lu-modal-header-close': 'lu-modal-header-close actionIcon',
 });
 
 export const cssClassesToUpdate = new Set(Object.keys(cssClassMapping));
