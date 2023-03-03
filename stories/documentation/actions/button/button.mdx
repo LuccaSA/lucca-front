@@ -1,0 +1,56 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs';
+import * as ButtonBasicStories from './button-basic.stories';
+import * as ButtonCounterStories from './button-counter.stories';
+import * as ButtonDisabledStories from './button-disabled.stories';
+import * as ButtonGroupStories from './button-group.stories';
+import * as ButtonIconStories from './button-icon.stories';
+import * as ButtonSizeStories from './button-size.stories';
+import * as ButtonStyleStories from './button-style.stories';
+
+<Meta title="Documentation/Actions/Button" />
+
+<Canvas of={ButtonBasicStories.BasicButton} />
+<Controls of={ButtonBasicStories.BasicButton} />
+
+# Import
+
+`@forward '@lucca-front/scss/src/components/button';`
+
+# Options
+
+## Style
+
+<Canvas of={ButtonStyleStories.StyleButton} />
+
+## State
+
+<Canvas of={ButtonDisabledStories.DisabledButton} />
+
+## Size
+
+<Canvas of={ButtonSizeStories.SizeButton} />
+
+## Icon
+
+<Canvas of={ButtonIconStories.IconButton} />
+
+## Counter
+
+<Canvas of={ButtonCounterStories.CounterButton} />
+
+## Group
+
+<Canvas of={ButtonGroupStories.GroupButton} />
+<Controls of={ButtonGroupStories.GroupButton} />
+
+# Thème
+
+```css
+.button {
+	--components-button-margin: 0 var(--spacings-XS) 0 0;
+	--components-button-font-size: var(--sizes-M-fontSize);
+	--components-button-line-height: var(--sizes-M-lineHeight);
+	--components-button-padding: var(--spacings-XS) var(--spacings-M);
+	--components-button-gap: var(--spacings-XS);
+}
+```

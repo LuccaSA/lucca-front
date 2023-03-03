@@ -8,7 +8,7 @@ export default {
 	docs: {
 		autodocs: true, // see below for alternatives
 	},
-	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)', '../stories/**/*.mdx'],
 	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
 	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
