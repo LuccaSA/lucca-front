@@ -2,15 +2,13 @@ import { ComponentType } from '@angular/cdk/overlay';
 import { inject, Injectable } from '@angular/core';
 import { LuModal } from '@lucca-front/ng/modal';
 import { ILuPopupRef } from '@lucca-front/ng/popup';
-import { LuSidepanelConfig } from './sidepanel-config.model';
-import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token';
+import { LuSidepanelConfig, LU_SIDEPANEL_CONFIG } from './sidepanel.model';
 
 /**
  * @deprecated Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
  */
 @Injectable()
 export class LuSidepanel<C extends LuSidepanelConfig = LuSidepanelConfig> extends LuModal<C> {
-	protected override _factory = inject(LU_SIDEPANEL_REF_FACTORY);
 	protected override _config = inject<C>(LU_SIDEPANEL_CONFIG);
 
 	/**
