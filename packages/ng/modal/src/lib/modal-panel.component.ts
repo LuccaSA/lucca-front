@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, HostBinding, Injector, OnDestroy, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
@@ -108,8 +108,8 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef) {
-		super(_ref, _cdr);
+	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _cdr, _elementRef, _renderer);
 	}
 }
 @Component({
@@ -121,7 +121,7 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef) {
-		super(_ref, _cdr);
+	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _cdr, _elementRef, _renderer);
 	}
 }

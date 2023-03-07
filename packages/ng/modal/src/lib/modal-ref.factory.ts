@@ -1,7 +1,7 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ApplicationRef, ChangeDetectionStrategy, ComponentRef, inject, Injectable, Injector } from '@angular/core';
-import { ALuPopupRef, ILuPopupRefFactory } from '@lucca-front/ng/popup';
+import { ILuPopupRefFactory } from '@lucca-front/ng/popup';
 import { LuModalConfig } from './modal-config.model';
 import { ALuModalPanelComponent, LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
 import { ALuModalRef, ILuModalRef } from './modal-ref.model';
@@ -15,7 +15,7 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = u
 		protected override _overlay: Overlay,
 		protected override _injector: Injector,
 		protected override _component: ComponentType<T>,
-		protected override _config: LuModalConfig,
+		protected override _config: C,
 		protected _applicationRef: ApplicationRef,
 	) {
 		super(_overlay, _injector, _component, _config);
@@ -28,13 +28,13 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = u
 			],
 			parent: this._injector,
 		});
-		if (this._config.changeDetection === ChangeDetectionStrategy.OnPush) {
-			const containerPortal = new ComponentPortal<ALuModalPanelComponent<T>>(LuModalPanelComponent, undefined, injector);
-			this._containerRef = this._overlayRef.attach<ALuModalPanelComponent<T>>(containerPortal);
-		} else {
-			const containerPortal = new ComponentPortal<ALuModalPanelComponent<T>>(LuModalPanelComponentDefaultCD, undefined, injector);
-			this._containerRef = this._overlayRef.attach<ALuModalPanelComponent<T>>(containerPortal);
-		}
+
+		const containerPortal = new ComponentPortal<ALuModalPanelComponent<T>>(
+			this._config.changeDetection === ChangeDetectionStrategy.OnPush ? LuModalPanelComponent : LuModalPanelComponentDefaultCD,
+			undefined,
+			injector,
+		);
+		this._containerRef = this._overlayRef.attach<ALuModalPanelComponent<T>>(containerPortal);
 		const panel = this._containerRef.instance;
 		this._componentRef = panel.attachInnerComponent(this._component, injector);
 		setAriaHiddenOnApplicationRoot(this._applicationRef, true);
@@ -61,7 +61,7 @@ export class LuModalRefFactory implements ILuPopupRefFactory<ILuModalContent, Lu
 	protected _applicationRef = inject(ApplicationRef);
 
 	constructor(protected _overlay: Overlay, protected _injector: Injector) {}
-	forge<T extends LuModalContent, C extends ILuModalConfig, D, R>(component: ComponentType<T>, config: C) {
+	forge<T extends ILuModalContent, C extends LuModalConfig, D, R>(component: ComponentType<T>, config: C) {
 		return new LuModalRef<T, D, R>(this._overlay, this._injector, component, config, this._applicationRef);
 	}
 }

@@ -3,11 +3,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { luDefaultSidepanelConfig } from './sidepanel-config.default';
 import { LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD } from './sidepanel-panel.component';
 import { LuSidepanelRefFactory } from './sidepanel-ref.factory';
 import { LuSidepanel } from './sidepanel.service';
-import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token';
+import { LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token';
 
 /**
  * @deprecated Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
@@ -16,6 +15,6 @@ import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token
 	imports: [OverlayModule, CommonModule, A11yModule, LuTooltipModule],
 	declarations: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
 	exports: [LuSidepanelPanelComponent, LuSidepanelPanelComponentDefaultCD],
-	providers: [LuSidepanel, { provide: LU_SIDEPANEL_CONFIG, useValue: luDefaultSidepanelConfig }, { provide: LU_SIDEPANEL_REF_FACTORY, useClass: LuSidepanelRefFactory }],
+	providers: [LuSidepanel, { provide: LU_SIDEPANEL_REF_FACTORY, useClass: LuSidepanelRefFactory }],
 })
 export class LuSidepanelModule {}

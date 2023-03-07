@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { LuModal } from '@lucca-front/ng/modal';
-import { ILuPopupRef, ILuPopupRefFactory } from '@lucca-front/ng/popup';
+import { ILuPopupRef } from '@lucca-front/ng/popup';
 import { LuSidepanelConfig } from './sidepanel-config.model';
 import { LU_SIDEPANEL_CONFIG, LU_SIDEPANEL_REF_FACTORY } from './sidepanel.token';
 
