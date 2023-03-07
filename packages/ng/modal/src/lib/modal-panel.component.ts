@@ -1,5 +1,8 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { LuModalClasses } from './modal-config.model';
@@ -100,8 +103,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	}
 }
 
+const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass, NgIf];
+
 @Component({
 	selector: 'lu-modal-panel',
+	standalone: true,
+	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -114,6 +121,8 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 }
 @Component({
 	selector: 'lu-modal-panel-default',
+	standalone: true,
+	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.Default,
