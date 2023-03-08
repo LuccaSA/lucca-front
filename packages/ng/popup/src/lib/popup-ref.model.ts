@@ -107,7 +107,7 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 		} else {
 			panelClasses.push(this._config.panelClass);
 		}
-		panelClasses.push(`size-${this._config.size}`);
+		panelClasses.push(`mod-${this._config.size}`);
 		return panelClasses;
 	}
 
