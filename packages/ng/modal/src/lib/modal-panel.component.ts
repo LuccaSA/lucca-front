@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgClass, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
@@ -44,7 +44,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	private _subs = new Subscription();
 	public modalClasses: LuModalClasses;
 
-	constructor(protected _ref: ALuModalRef<T>, protected _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+	constructor(protected _ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
 		this.modalClasses = _ref.modalClasses;
 		_renderer.addClass(_elementRef.nativeElement, this.modalClasses.panel);
 	}
@@ -115,8 +115,8 @@ const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass, NgIf];
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
-		super(_ref, _cdr, _elementRef, _renderer);
+	constructor(_ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _elementRef, _renderer);
 	}
 }
 @Component({
@@ -130,7 +130,7 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
-		super(_ref, _cdr, _elementRef, _renderer);
+	constructor(_ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _elementRef, _renderer);
 	}
 }
