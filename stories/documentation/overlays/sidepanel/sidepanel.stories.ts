@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
@@ -8,16 +9,18 @@ import { map, shareReplay, timer } from 'rxjs';
 	selector: 'sidepanel-content',
 	standalone: true,
 	template: '<p>General Kenobi</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelContentComponent implements ILuSidepanelContent {
 	title = 'Hello there';
-	submitAction = () => {};
+	submitAction = () => timer(500);
 }
 
 @Component({
 	selector: 'sidepanel-content',
 	standalone: true,
 	template: '<p>General Kenobi</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
@@ -28,7 +31,7 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	submitCounter = this.counter$;
 	submitDisabled = this.counter$.pipe(map((n) => n % 2 === 0));
 
-	submitAction = () => {};
+	submitAction = () => timer(500);
 }
 
 @Component({
@@ -36,16 +39,27 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	template: `
 		<button type="button" class="button" (click)="openSidepanel()">Open sidepanel</button>
 		<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open dynamic sidepanel</button>
+		<button type="button" class="button" (click)="openLegacySidepanel()">Open Legacy sidepanel</button>
+		<button type="button" class="button" (click)="openLegacyDynamicContentSidepanel()">Open Legacy dynamic sidepanel</button>
 	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelStories {
-	constructor(private sidepanel: LuSidepanel) {}
+	constructor(private sidepanel: LuSidepanel, private modal: LuModal) {}
 
 	public openSidepanel() {
-		this.sidepanel.open(SidepanelContentComponent);
+		this.modal.open(SidepanelContentComponent, undefined, { mode: 'sidepanel' });
 	}
 
 	public openDynamicContentSidepanel() {
+		this.modal.open(SidepanelDynamicContentComponent, undefined, { mode: 'sidepanel' });
+	}
+
+	public openLegacySidepanel() {
+		this.sidepanel.open(SidepanelContentComponent);
+	}
+
+	public openLegacyDynamicContentSidepanel() {
 		this.sidepanel.open(SidepanelDynamicContentComponent);
 	}
 }
@@ -55,7 +69,7 @@ export default {
 	component: SidepanelStories,
 	decorators: [
 		moduleMetadata({
-			imports: [LuSidepanelModule, BrowserAnimationsModule],
+			imports: [LuModalModule, LuSidepanelModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

@@ -1,18 +1,19 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { luDefaultModalConfig } from './modal-config.default';
-import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from './modal-panel.component';
+import { NgModule, Provider } from '@angular/core';
 import { LuModalRefFactory } from './modal-ref.factory';
 import { LuModal } from './modal.service';
-import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY } from './modal.token';
+import { LU_MODAL_REF_FACTORY } from './modal.token';
+
+/**
+ * Provide LuModal.
+ * Note that OverlayModule should be imported in one of the EnvironmentInjectors (AppModule, lazy-loaded route) using `providers: [importProvidersFrom(OverlayModule)]`.
+ */
+export function provideLuModal(): Provider[] {
+	return [LuModal, { provide: LU_MODAL_REF_FACTORY, useClass: LuModalRefFactory }];
+}
 
 @NgModule({
-	imports: [OverlayModule, CommonModule, A11yModule, LuTooltipModule],
-	declarations: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
-	exports: [LuModalPanelComponent, LuModalPanelComponentDefaultCD],
-	providers: [LuModal, { provide: LU_MODAL_CONFIG, useValue: luDefaultModalConfig }, { provide: LU_MODAL_REF_FACTORY, useClass: LuModalRefFactory }],
+	imports: [OverlayModule],
+	providers: [provideLuModal()],
 })
 export class LuModalModule {}

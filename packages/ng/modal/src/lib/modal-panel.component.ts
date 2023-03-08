@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, DoCheck, HostBinding, Injector, OnDestroy, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { LuModalClasses } from './modal-config.model';
 import { ALuModalRef } from './modal-ref.model';
 import { ILuModalContent } from './modal.model';
 import { LU_MODAL_TRANSLATIONS } from './modal.translate';
@@ -38,8 +42,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	public readonly modalId = modalId++;
 
 	private _subs = new Subscription();
+	public modalClasses: LuModalClasses;
 
-	constructor(protected _ref: ALuModalRef<T>, protected _cdr: ChangeDetectorRef) {}
+	constructor(protected _ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		this.modalClasses = _ref.modalClasses;
+		_renderer.addClass(_elementRef.nativeElement, this.modalClasses.panel);
+	}
 	ngDoCheck(): void {
 		this.doCheck$.next();
 	}
@@ -64,7 +72,6 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 				result$
 					.pipe(
 						tap((_) => this.submitClass$.next('is-success')),
-						tap(() => this._cdr.markForCheck()),
 						delay(500),
 					)
 					.subscribe({
@@ -72,15 +79,12 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 						error: (err) => {
 							this.submitClass$.next('is-error');
 							this.error$.next(err);
-							this._cdr.markForCheck();
 							timer(2000).subscribe((_) => {
 								this.submitClass$.next('');
-								this._cdr.markForCheck();
 							});
 						},
 						complete: () => {
 							this.submitClass$.next('');
-							this._cdr.markForCheck();
 						},
 					}),
 			);
@@ -99,20 +103,26 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	}
 }
 
+const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass, NgIf];
+
 @Component({
 	selector: 'lu-modal-panel',
+	standalone: true,
+	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef) {
-		super(_ref, _cdr);
+	constructor(_ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _elementRef, _renderer);
 	}
 }
 @Component({
 	selector: 'lu-modal-panel-default',
+	standalone: true,
+	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.Default,
@@ -120,7 +130,7 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
-	constructor(_ref: ALuModalRef<T>, _cdr: ChangeDetectorRef) {
-		super(_ref, _cdr);
+	constructor(_ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+		super(_ref, _elementRef, _renderer);
 	}
 }

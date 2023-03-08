@@ -1,7 +1,8 @@
-import { ILuModalConfig } from './modal-config.model';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { LuModalConfig } from './modal-config.model';
 
-export const luDefaultModalConfig: ILuModalConfig = {
+export const luDefaultModalConfig: LuModalConfig = {
+	mode: 'modal',
 	position: 'center',
 	noBackdrop: false,
 	undismissable: false,
