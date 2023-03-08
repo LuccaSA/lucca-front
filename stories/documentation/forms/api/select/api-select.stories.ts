@@ -2,10 +2,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
+	standalone: true,
+	imports: [LuApiSelectInputComponent],
 	template: `
 		<label class="textfield">
 			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3"></lu-api-select>
@@ -30,17 +32,17 @@ class ApiSelectStory {
 
 export default {
 	title: 'Documentation/Forms/Api/Select',
-	component: LuApiSelectInputComponent,
+	component: ApiSelectStory,
 	decorators: [
-		componentWrapperDecorator(ApiSelectStory),
 		moduleMetadata({
-			declarations: [ApiSelectStory],
 			imports: [HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const Template: Story<ApiSelectStory> = (props) => ({ props });
+const Template: Story<ApiSelectStory> = (args: ApiSelectStory) => ({
+	props: args,
+});
 
 const code = `
 /* 1. Importer LuApiSelectInputComponent */

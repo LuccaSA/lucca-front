@@ -8,6 +8,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 
 @Component({
 	selector: 'select-stories',
+	standalone: true,
+	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective, FormsModule],
 	template: `
 		<div class="u-displayFlex">
 			<label class="textfield u-marginRightS">
@@ -77,13 +79,12 @@ class SelectStory {
 
 export default {
 	title: 'Documentation/Forms/Select',
-	component: LuSelectInputComponent,
+	component: SelectStory,
 	argTypes: {},
 	decorators: [
 		componentWrapperDecorator(SelectStory),
 		moduleMetadata({
-			imports: [FormsModule, LuOptionPickerComponent, LuOptionItemComponent, LuInputDisplayerDirective, BrowserAnimationsModule],
-			declarations: [SelectStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

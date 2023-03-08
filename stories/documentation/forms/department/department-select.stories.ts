@@ -2,11 +2,38 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
-	templateUrl: './department-select.stories.html',
+	standalone: true,
+	imports: [LuDepartmentSelectInputComponent],
+	template: `
+		<label class="textfield mod-inline">
+			<lu-department-select
+				class="textfield-input"
+				[appInstanceId]="appInstanceId"
+				[operations]="operations"
+				[filters]="filters"
+				placeholder="Select a departement"
+				data-testid="lu-select"
+			></lu-department-select>
+			<div class="textfield-label">Departement</div>
+		</label>
+
+		<label class="textfield mod-inline">
+			<lu-department-select
+				class="textfield-input"
+				[appInstanceId]="appInstanceId"
+				[operations]="operations"
+				[filters]="filters"
+				placeholder="Select a departement"
+				multiple="true"
+				data-testid="lu-select"
+			></lu-department-select>
+			<div class="textfield-label">Departement multiple</div>
+		</label>
+	`,
 })
 class DepartmentStory {
 	@Input() appInstanceId: number = null;
@@ -16,12 +43,10 @@ class DepartmentStory {
 
 export default {
 	title: 'Documentation/Forms/DepartmentSelect',
-	component: LuDepartmentSelectInputComponent,
+	component: DepartmentStory,
 	decorators: [
-		componentWrapperDecorator(DepartmentStory),
 		moduleMetadata({
-			imports: [HttpClientModule, LuDepartmentSelectInputComponent, BrowserAnimationsModule],
-			declarations: [DepartmentStory],
+			imports: [HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

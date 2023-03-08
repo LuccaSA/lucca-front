@@ -1,13 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
+	standalone: true,
+	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, CommonModule, FormsModule],
 	template: `
 		<label class="textfield">
 			<lu-select class="textfield-input" placeholder="Select advanced" [(ngModel)]="model" multiple>
@@ -58,13 +61,11 @@ class SelectAdvancedStory {
 
 export default {
 	title: 'Documentation/Forms/SelectAdvanced',
-	component: LuSelectInputComponent,
+	component: SelectAdvancedStory,
 	argTypes: {},
 	decorators: [
-		componentWrapperDecorator(SelectAdvancedStory),
 		moduleMetadata({
-			imports: [FormsModule, LuOptionModule, LuInputModule, BrowserAnimationsModule],
-			declarations: [SelectAdvancedStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

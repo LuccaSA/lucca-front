@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface ErrorBasicStory {
-}
+interface ErrorBasicStory {}
 
 export default {
 	title: 'Documentation/Feedback/Error/Basic',
@@ -19,13 +18,14 @@ function getTemplate(args: ErrorBasicStory): string {
 			<img src="https://cdn.lucca.fr/errors/svg/404-lucca.svg" alt="Erreur 403" class="errorPage-section-image">
 		</section>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<ErrorBasicStory> = (args: ErrorBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.errorPage {
 			height: 30rem;
 		}`,

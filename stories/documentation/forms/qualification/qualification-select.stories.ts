@@ -2,10 +2,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'qualification-stories',
+	standalone: true,
+	imports: [LuQualificationSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline u-marginRightS">
 			<lu-qualification-select placeholder="Select a qualification" class="textfield-input"></lu-qualification-select>
@@ -21,18 +23,16 @@ class QualificationSelectStory {}
 
 export default {
 	title: 'Documentation/Forms/Qualification',
-	component: LuQualificationSelectInputComponent,
+	component: QualificationSelectStory,
 	decorators: [
-		componentWrapperDecorator(QualificationSelectStory),
 		moduleMetadata({
-			declarations: [QualificationSelectStory],
 			imports: [HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const template: Story<QualificationSelectStory> = (props) => ({
-	props,
+const template: Story<QualificationSelectStory> = (args: QualificationSelectStory) => ({
+	props: args,
 });
 
 export const Select = template.bind({});

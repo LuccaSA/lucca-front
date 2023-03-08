@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
-
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
+	standalone: true,
 	templateUrl: './framed.stories.html',
-}) class FramedStory {
+})
+class FramedStory {
 	@Input() state: string = '';
 	@Input() disabled: boolean = false;
 	@Input() isRequired: boolean = false;
@@ -19,16 +20,15 @@ export default {
 		state: {
 			control: {
 				type: 'radio',
-				options: ['', 'is-error', 'is-warning', 'is-success']
-			}
-		}
+				options: ['', 'is-error', 'is-warning', 'is-success'],
+			},
+		},
 	},
 	decorators: [
 		moduleMetadata({
-			entryComponents: [FramedStory],
 			imports: [BrowserModule],
-		})
-	]
+		}),
+	],
 } as Meta;
 
 const template: Story<FramedStory> = (args: FramedStory) => ({

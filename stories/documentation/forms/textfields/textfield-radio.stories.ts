@@ -23,12 +23,12 @@ function getTemplate(args: TextfieldRadioStory): string {
 				<input class="textfield-input" type="text">
 			</label>
 		</span>
-	`
+	`;
 }
 
 const Template: Story<TextfieldRadioStory> = (args: TextfieldRadioStory) => ({
 	props: args,
-	template: getTemplate(args)
+	template: getTemplate(args),
 });
 
 export const Radio = Template.bind({});
