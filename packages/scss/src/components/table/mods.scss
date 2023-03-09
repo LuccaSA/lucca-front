@@ -53,16 +53,18 @@
 @mixin card {
 	border-top: 0;
 
-	.table-body-row,
-	.table-foot-row {
-		background-color: transparent;
-
+	.table-body, .table-foot {
 		&:last-child {
 			.table-body-row-cell,
 			.table-foot-row-cell {
 				border-bottom: none;
 			}
 		}
+	}
+
+	.table-body-row,
+	.table-foot-row {
+		background-color: transparent;
 	}
 
 	.table-head-row-cell,
