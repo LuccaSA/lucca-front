@@ -12,22 +12,22 @@ export default {
 	clickable: {
 		control: {
 			type: 'boolean',
-		}
+		},
 	},
 	grey: {
 		control: {
 			type: 'boolean',
-		}
+		},
 	},
 	disabled: {
 		control: {
 			type: 'boolean',
-		}
+		},
 	},
 	elevated: {
 		control: {
 			type: 'boolean',
-		}
+		},
 	},
 } as Meta;
 
@@ -43,7 +43,7 @@ function getTemplate(args: CardsBasicStory): string {
 			<p>Contenu de la carte</p>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CardsBasicStory> = (args: CardsBasicStory) => ({
