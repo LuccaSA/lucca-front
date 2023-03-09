@@ -181,24 +181,17 @@ export const mockDepartmentsTree = [
 		],
 	},
 ];
-export const mockAxisSectionsV3 = {
-	data: {
-		items: [
-			{
-				id: 19,
-				name: 'Cleemy - Deezer',
-			},
-			{
-				id: 36,
-				name: 'Cleemy - LVMH',
-			},
-			{
-				id: 27,
-				name: 'Cleemy - Mazars',
-			},
-		],
-	},
-};
+
+const softs = ['Cleemy', 'Timmi', 'Pagga', 'Poplee', 'Talent', 'Engagement'];
+const clients = ['Deezer', 'LVMH', 'Mazars', 'Orange', 'SFR', 'Sodexo', 'Vinci', 'Vivendi', 'Walmart', 'Wavestone', 'Wipro', 'Xerox', 'Zalando', 'Zara', 'Zurich'];
+
+export const mockAxisSectionsV3 = softs
+	.flatMap((soft) => clients.map((client) => `${soft} - ${client}`))
+	.map((name, index) => ({
+		id: index,
+		name,
+	}));
+
 export const mockAxisSectionsV4 = {
 	items: [
 		{

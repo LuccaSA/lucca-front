@@ -4,7 +4,7 @@ import { AsyncPipe, NgComponentOutlet, NgIf, NgTemplateOutlet } from '@angular/c
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Output, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { ILuOptionContext, LU_OPTION_CONTEXT, optionContextFactory } from '../option/option.token';
 import { LuSelectPanelRef } from '../panel';
@@ -63,7 +63,10 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 
 	@HostBinding('class.is-focused')
 	@HostBinding('attr.aria-expanded')
-	public isPanelOpen = false;
+	public get isPanelOpen(): boolean {
+		return this.isPanelOpen$.value;
+	}
+	public isPanelOpen$ = new BehaviorSubject(false);
 
 	@HostBinding('attr.role')
 	public role = 'combobox';
@@ -178,7 +181,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 			return;
 		}
 
-		this.isPanelOpen = true;
+		this.isPanelOpen$.next(true);
 		this.panelRef = this.panelRefFactory.buildPanelRef(
 			{
 				initialValue: this.value,
@@ -212,7 +215,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 		if (!this.isPanelOpen) {
 			return;
 		}
-		this.isPanelOpen = false;
+		this.isPanelOpen$.next(false);
 		this.panelRef.close();
 		this.panelRef = undefined;
 	}
