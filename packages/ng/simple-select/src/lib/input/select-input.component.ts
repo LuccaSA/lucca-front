@@ -41,10 +41,6 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	@Input() placeholder = '';
 
 	@Input()
-	@HostBinding('class.mod-multiple')
-	multiple = false;
-
-	@Input()
 	@HostBinding('class.is-clearable')
 	clearable = false;
 
