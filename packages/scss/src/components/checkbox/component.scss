@@ -4,14 +4,16 @@
 @mixin component($atRoot: 'without: rule') {
 	display: block;
 	position: relative;
+	line-height: var(--sizes-M-lineHeight);
 
 	@at-root ($atRoot) {
 		.checkbox-label {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
 			display: inline-flex;
-			align-items: flex-start;
+			align-items: center;
 			cursor: pointer;
+			gap: var(--spacings-XS);
 
 			&::before {
 				@include icon.generate('tick');
@@ -19,13 +21,11 @@
 				background-color: var(--colors-white-color);
 				width: var(--components-checkbox-input-size);
 				height: var(--components-checkbox-input-size);
-				margin-right: var(--components-checkbox-input-margin-right);
-				margin-top: var(--components-checkbox-input-margin-top);
 				border-radius: var(--components-checkbox-input-border-radius);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: all;
 				border: 2px solid var(--components-checkbox-input-border-color);
-				line-height: 0.85;
+				line-height: .75rem;
 				font-size: var(--sizes-M-fontSize);
 				flex-grow: 0;
 				flex-shrink: 0;
