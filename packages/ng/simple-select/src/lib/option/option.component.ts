@@ -1,9 +1,9 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, inject, Injector, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { AsyncPipe, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, inject, Injector, Input, OnDestroy, OnInit, TemplateRef, Type } from '@angular/core';
 import { asyncScheduler, BehaviorSubject, observeOn, Subscription } from 'rxjs';
 import { LuOptionContext, SELECT_ID } from '../select.model';
-import { LU_OPTION_CONTEXT, optionContextFactory } from './option.token';
+import { ILuOptionContext, LU_OPTION_CONTEXT, optionContextFactory } from './option.token';
 
 @Component({
 	selector: 'lu-select-option',
@@ -11,7 +11,7 @@ import { LU_OPTION_CONTEXT, optionContextFactory } from './option.token';
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule],
+	imports: [AsyncPipe, NgComponentOutlet, NgTemplateOutlet],
 	providers: [{ provide: LU_OPTION_CONTEXT, useFactory: optionContextFactory }],
 })
 export class LuOptionComponent<T> implements Highlightable, OnInit, OnDestroy {
@@ -19,14 +19,25 @@ export class LuOptionComponent<T> implements Highlightable, OnInit, OnDestroy {
 	public hasOptionItemClass = true;
 
 	@Input()
+	public set optionTplOrType(tplOrType: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined) {
+		this.optionTpl = tplOrType && (tplOrType instanceof TemplateRef ? tplOrType : undefined);
+		this.optionType = tplOrType && (tplOrType instanceof TemplateRef ? undefined : tplOrType);
+	}
+
 	public optionTpl?: TemplateRef<LuOptionContext<T>>;
+	public optionType?: Type<unknown>;
 
 	@Input()
 	@HostBinding('attr.aria-selected')
 	isSelected = false;
+	public get option(): T {
+		return this.optionContext.option$.value;
+	}
 
 	@Input()
-	option?: T;
+	public set option(value: T) {
+		this.optionContext.option$.next(value);
+	}
 
 	@Input()
 	public optionIndex = 0;
@@ -38,7 +49,7 @@ export class LuOptionComponent<T> implements Highlightable, OnInit, OnDestroy {
 	 */
 	disabled = false;
 
-	private optionContext = inject(LU_OPTION_CONTEXT);
+	private optionContext = inject<ILuOptionContext<T>>(LU_OPTION_CONTEXT);
 	private cdr = inject(ChangeDetectorRef);
 	private subscription?: Subscription;
 

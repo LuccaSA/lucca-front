@@ -2,7 +2,8 @@
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
 		<ng-container *ngIf="isFilled">
-			<ng-container *ngTemplateOutlet="valueTpl || optionTpl; context: { $implicit: value }"></ng-container>
+			<ng-container *ngTemplateOutlet="displayerTpl; context: { $implicit: displayerContext.option$ | async }"></ng-container>
+			<ng-container *ngComponentOutlet="displayerComponent"></ng-container>
 		</ng-container>
 	</div>
 </div>

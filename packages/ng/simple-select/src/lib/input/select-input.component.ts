@@ -1,9 +1,11 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
+import { AsyncPipe, NgComponentOutlet, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Output, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
+import { LuSimpleSelectDefaultOptionComponent } from '../option';
+import { ILuOptionContext, LU_OPTION_CONTEXT, optionContextFactory } from '../option/option.token';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
@@ -15,7 +17,7 @@ import { provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer } from './
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, OverlayModule],
+	imports: [AsyncPipe, NgComponentOutlet, NgIf, NgTemplateOutlet, OverlayModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -25,6 +27,10 @@ import { provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer } from './
 		provideLuSelectOverlayContainer(),
 		provideLuSelectLabelsAndIds(),
 		LuSimpleSelectPanelRefFactory,
+		{
+			provide: LU_OPTION_CONTEXT,
+			useFactory: optionContextFactory,
+		},
 	],
 })
 export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, OnDestroy, OnInit {
@@ -83,17 +89,32 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	}
 
 	@Input() optionComparer: (option1: T, option2: T) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
-	@Input() optionTpl?: TemplateRef<LuOptionContext<T>>;
-	@Input() valueTpl?: TemplateRef<LuOptionContext<T>>;
+	@Input() optionTpl?: TemplateRef<LuOptionContext<T>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
+	@Input() valueTpl?: TemplateRef<LuOptionContext<T>> | Type<unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
 	@Output() previousPage = new EventEmitter<void>();
 
-	value?: T;
+	public get value(): T {
+		return this.displayerContext.option$.value;
+	}
 	options$ = new ReplaySubject<T[]>(1);
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
+	displayerContext = inject<ILuOptionContext<T>>(LU_OPTION_CONTEXT);
+
+	protected get displayerTplOrComponent(): TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined {
+		return this.valueTpl || this.optionTpl;
+	}
+
+	protected get displayerTpl(): TemplateRef<LuOptionContext<T>> | undefined {
+		return this.displayerTplOrComponent instanceof TemplateRef ? this.displayerTplOrComponent : undefined;
+	}
+
+	protected get displayerComponent(): Type<unknown> | undefined {
+		return this.displayerTplOrComponent instanceof TemplateRef ? undefined : this.displayerTplOrComponent;
+	}
 
 	protected onChange?: (value: T | null) => void;
 	protected onTouched?: () => void;
@@ -146,7 +167,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	clearValue(event: MouseEvent): void {
 		event.stopPropagation();
 		this.onChange?.(null);
-		this.value = null;
+		this.displayerContext.option$.next(null);
 	}
 
 	openPanel(): void {
@@ -162,14 +183,14 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 				options$: this.options$,
 				loading$: this.loading$,
 				searchable: this.searchable,
-				optionTpl: this.optionTpl,
+				optionTplOrType: this.optionTpl,
 			},
 			this.overlayConfig,
 		);
 
 		this.panelRef.valueChanged.subscribe((value) => {
 			this.onChange?.(value);
-			this.value = value;
+			this.displayerContext.option$.next(value);
 		});
 		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
 		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
@@ -194,6 +215,6 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	}
 
 	public writeValue(value: T): void {
-		this.value = value;
+		this.displayerContext.option$.next(value);
 	}
 }

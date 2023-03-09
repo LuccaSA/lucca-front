@@ -6,4 +6,5 @@
 	(click)="selectOption($event)"
 >
 	<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }; injector: injector"></ng-container>
+	<ng-container *ngComponentOutlet="optionType; injector: injector"></ng-container>
 </div>

@@ -1,4 +1,4 @@
-import { InjectionToken, TemplateRef } from '@angular/core';
+import { InjectionToken, TemplateRef, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface ILuSelectPanelData<T> {
@@ -6,7 +6,7 @@ export interface ILuSelectPanelData<T> {
 	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue: T | undefined;
-	optionTpl: TemplateRef<LuOptionContext<T>>;
+	optionTplOrType: TemplateRef<LuOptionContext<T>> | Type<unknown>;
 	searchable: boolean;
 }
 

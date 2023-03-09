@@ -1,5 +1,5 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { asyncScheduler, map, observeOn, take, takeUntil } from 'rxjs';
@@ -13,7 +13,7 @@ import { LuSelectPanelRef } from './panel.models';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, FormsModule, A11yModule, ɵLuOptionComponent],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, ɵLuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	protected panelData = inject<ILuSelectPanelData<T>>(SELECT_PANEL_DATA);
@@ -24,7 +24,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	loading$ = this.panelData.loading$;
 	optionComparer = this.panelData.optionComparer;
 	initialValue: T | undefined = this.panelData.initialValue;
-	optionTpl = this.panelData.optionTpl;
+	optionTplOrType = this.panelData.optionTplOrType;
 	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')

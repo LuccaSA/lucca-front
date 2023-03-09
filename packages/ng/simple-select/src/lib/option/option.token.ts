@@ -1,10 +1,16 @@
 import { InjectionToken } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
-export interface ILuOptionContext {
-	isDisabled$: Subject<boolean>;
+export interface ILuOptionContext<T> {
+	isDisabled$: BehaviorSubject<boolean>;
+	option$: BehaviorSubject<T | undefined>;
 }
 
-export const LU_OPTION_CONTEXT = new InjectionToken<ILuOptionContext>('LuOptionContext');
+export const LU_OPTION_CONTEXT = new InjectionToken<ILuOptionContext<unknown>>('LuOptionContext');
 
-export const optionContextFactory = (): ILuOptionContext => ({ isDisabled$: new BehaviorSubject(false) });
+export function optionContextFactory<T>(): ILuOptionContext<T> {
+	return {
+		isDisabled$: new BehaviorSubject(false),
+		option$: new BehaviorSubject<T | undefined>(undefined),
+	};
+}
