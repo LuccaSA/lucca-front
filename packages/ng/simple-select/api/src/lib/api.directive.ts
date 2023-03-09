@@ -20,12 +20,24 @@ export abstract class ALuSimpleSelectApiDirective<TOption, TParams = Record<stri
 
 	protected clue$ = this.select.clueChange.pipe(startWith(''), debounceTime(this.debounceDuration));
 
+	/**
+	 * Create an object that will be used as params for the api call
+	 */
 	protected abstract params$: Observable<TParams>;
+
+	/**
+	 * Compare two options to know if they are the same. For example, compare by id or by JSON
+	 */
+	protected abstract optionComparer: (a: TOption, b: TOption) => boolean;
+
+	/**
+	 * Return the options for the given params and page
+	 */
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
 	protected loading$ = new BehaviorSubject(false);
-
 	public ngOnInit(): void {
+		this.select.optionComparer = this.optionComparer;
 		this.buildOptions().pipe(takeUntil(this.destroy$)).subscribe(this.select.options$);
 		this.loading$.pipe(debounceTime(0), takeUntil(this.destroy$)).subscribe(this.select.loading$);
 	}

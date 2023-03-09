@@ -52,4 +52,6 @@ export class LuSimpleSelectApiV3Directive<T extends ILuApiItem> extends ALuSimpl
 			map((res) => res.data.items),
 		);
 	}
+
+	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 }

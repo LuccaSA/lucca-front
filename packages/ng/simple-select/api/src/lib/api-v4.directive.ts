@@ -45,4 +45,6 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 			map((res) => (Array.isArray(res) ? res : res?.items) ?? []),
 		);
 	}
+
+	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 }
