@@ -63,7 +63,7 @@
 	.lu-select-value {
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
@@ -73,7 +73,7 @@
 		color: var(--palettes-400, var(--components-select-default-palette-400));
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
@@ -284,7 +284,7 @@
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
-			padding-right: 2.5rem;
+			padding-right: 3rem;
 		}
 	}
 

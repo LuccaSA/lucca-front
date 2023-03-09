@@ -27,6 +27,11 @@
 	&::placeholder {
 		color: var(--commons-disabled-placeholder);
 	}
+
+	~ .textfield-actionClear {
+		color: var(--palettes-grey-500) !important;
+		pointer-events: none;
+	}
 }
 
 @mixin whiteInputFocus {
