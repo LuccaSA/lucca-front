@@ -12,8 +12,8 @@
 			</div>
 
 			<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
-				<p class="optionPlaceholder-content u-marginBottom0">Aucun résultat pour votre recherche</p>
-				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">Vider la recherche</button>
+				<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
+				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
 			</div>
 		</ng-container>
 

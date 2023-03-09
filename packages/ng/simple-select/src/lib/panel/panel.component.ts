@@ -2,9 +2,11 @@ import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { asyncScheduler, map, observeOn, take, takeUntil } from 'rxjs';
 import { ɵLuOptionComponent } from '../option/index';
 import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
+import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSelectPanelRef } from './panel.models';
 
 @Component({
@@ -19,6 +21,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	protected panelData = inject<ILuSelectPanelData<T>>(SELECT_PANEL_DATA);
 	public panelRef = inject<LuSelectPanelRef<T>>(LuSelectPanelRef);
 	public selectId = inject(SELECT_ID);
+	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
 	options$ = this.panelData.options$;
 	loading$ = this.panelData.loading$;

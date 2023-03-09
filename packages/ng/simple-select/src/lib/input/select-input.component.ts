@@ -3,11 +3,13 @@ import { OverlayConfig, OverlayContainer, OverlayModule } from '@angular/cdk/ove
 import { AsyncPipe, NgComponentOutlet, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Output, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { ReplaySubject, Subject } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { ILuOptionContext, LU_OPTION_CONTEXT, optionContextFactory } from '../option/option.token';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 import { provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer } from './select-input.models';
 
@@ -103,6 +105,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
 	displayerContext = inject<ILuOptionContext<T>>(LU_OPTION_CONTEXT);
+	intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
 	protected get displayerTplOrComponent(): TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined {
 		return this.valueTpl || this.optionTpl;
