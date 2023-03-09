@@ -26,9 +26,11 @@ function getTemplate(args: ResetStory): string {
 const Template: Story<ResetStory> = (args: ResetStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
-		}`],
+	styles: [
+		`
+		}`,
+	],
 });
 
 export const Reset = Template.bind({});
-Reset.args = { };
+Reset.args = {};

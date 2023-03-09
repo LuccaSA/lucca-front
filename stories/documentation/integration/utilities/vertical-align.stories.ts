@@ -17,9 +17,11 @@ function getTemplate(args: VerticalAlignStory): string {
 const Template: Story<VerticalAlignStory> = (args: VerticalAlignStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
-		}`],
+	styles: [
+		`
+		}`,
+	],
 });
 
 export const VerticalAlign = Template.bind({});
-VerticalAlign.args = { };
+VerticalAlign.args = {};

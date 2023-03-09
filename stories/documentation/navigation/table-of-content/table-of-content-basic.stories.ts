@@ -34,7 +34,7 @@ function getTemplate(args: TableOfContentBasicStory): string {
 			</li>
 		</ul>
 	</nav>
-	`
+	`;
 }
 
 const Template: Story<TableOfContentBasicStory> = (args: TableOfContentBasicStory) => ({
@@ -43,4 +43,4 @@ const Template: Story<TableOfContentBasicStory> = (args: TableOfContentBasicStor
 });
 
 export const Basic = Template.bind({});
-Basic.args = {disabled: false};
+Basic.args = { disabled: false };

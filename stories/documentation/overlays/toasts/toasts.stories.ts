@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'toasts-stories',
+	standalone: true,
+	imports: [FormsModule, LuToastsComponent],
 	templateUrl: './toasts.stories.html',
 })
 class ToastsStory implements OnInit, OnDestroy {
@@ -53,11 +55,7 @@ class ToastsStory implements OnInit, OnDestroy {
 	}
 
 	private getRandomTitle(): string {
-		const toastsValues = [
-			'Titre du toast',
-			'Titre du toast long, très très très très très très long',
-			undefined
-		];
+		const toastsValues = ['Titre du toast', 'Titre du toast long, très très très très très très long', undefined];
 
 		const random = Math.floor(Math.random() * toastsValues.length);
 		return toastsValues[random];
@@ -66,12 +64,11 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
-	component: LuToastsComponent,
+	component: ToastsStory,
 	decorators: [
 		componentWrapperDecorator(ToastsStory),
 		moduleMetadata({
-			imports: [FormsModule, BrowserAnimationsModule],
-			declarations: [ToastsStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

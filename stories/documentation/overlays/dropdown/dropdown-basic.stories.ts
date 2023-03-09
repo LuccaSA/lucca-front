@@ -5,24 +5,25 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'dropdown-stories',
+	standalone: true,
+	imports: [LuDropdownModule],
 	templateUrl: './dropdown-basic.stories.html',
 })
-class DropdownBasicStories {
+class DropdownBasicStory {
 	constructor() {}
 }
 
 export default {
 	title: 'Documentation/Overlays/Dropdown/Basic',
-	component: DropdownBasicStories,
+	component: DropdownBasicStory,
 	decorators: [
 		moduleMetadata({
-			declarations: [DropdownBasicStories],
-			imports: [BrowserAnimationsModule, LuDropdownModule],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const Template: Story<DropdownBasicStories> = (args: DropdownBasicStories) => ({
+const Template: Story<DropdownBasicStory> = (args: DropdownBasicStory) => ({
 	props: args,
 });
 

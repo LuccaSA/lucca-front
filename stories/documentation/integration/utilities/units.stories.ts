@@ -17,13 +17,15 @@ function getTemplate(args: UnitsStory): string {
 const Template: Story<UnitsStory> = (args: UnitsStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
+	styles: [
+		`
 		* {
 			margin: 0;
 			padding: 0;
 		}
-		}`],
+		}`,
+	],
 });
 
 export const Units = Template.bind({});
-Units.args = { };
+Units.args = {};

@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableTwoLinesHeaderStory {
-}
+interface TableTwoLinesHeaderStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Two Lines Header',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableTwoLinesHeaderStory): string {
@@ -30,7 +28,7 @@ function getTemplate(args: TableTwoLinesHeaderStory): string {
 			</tr>
 		</thead>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableTwoLinesHeaderStory> = (args: TableTwoLinesHeaderStory) => ({

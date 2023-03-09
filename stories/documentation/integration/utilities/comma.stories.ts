@@ -15,9 +15,11 @@ function getTemplate(args: CommaStory): string {
 const Template: Story<CommaStory> = (args: CommaStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
-		}`],
+	styles: [
+		`
+		}`,
+	],
 });
 
 export const Comma = Template.bind({});
-Comma.args = { };
+Comma.args = {};

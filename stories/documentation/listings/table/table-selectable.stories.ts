@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableSelectableStory {
-}
+interface TableSelectableStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Selectable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableSelectableStory): string {
@@ -50,7 +48,7 @@ function getTemplate(args: TableSelectableStory): string {
 	    </tr>
 	  </tbody>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableSelectableStory> = (args: TableSelectableStory) => ({
