@@ -5,7 +5,8 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { BehaviorSubject, first, ReplaySubject } from 'rxjs';
-import { LuSimpleSelectApiV3Directive, MAGIC_DEBOUNCE_TIME, MAGIC_PAGE_SIZE } from './api-v3.directive';
+import { LuSimpleSelectApiV3Directive } from './api-v3.directive';
+import { MAGIC_DEBOUNCE_DURATION, MAGIC_PAGE_SIZE } from './api.directive';
 
 const itemsMocks = Array.from({ length: MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 
@@ -38,7 +39,7 @@ describe('SimpleSelectApiV3Directive', () => {
 	it('should not call http.get on init', fakeAsync(() => {
 		// Act
 		directive.ngOnInit();
-		tick(MAGIC_DEBOUNCE_TIME);
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Assert
 		httpTestingController.verify();
@@ -48,11 +49,11 @@ describe('SimpleSelectApiV3Directive', () => {
 		// Arrange
 		directive.apiV3 = '/api/v3/axisSections';
 		directive.ngOnInit();
-		tick(MAGIC_DEBOUNCE_TIME);
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Act
 		selectMock.isPanelOpen$.next(true);
-		tick(MAGIC_DEBOUNCE_TIME);
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20');
@@ -62,7 +63,7 @@ describe('SimpleSelectApiV3Directive', () => {
 		// Arrange
 		directive.apiV3 = '/api/v3/axisSections';
 		directive.ngOnInit();
-		tick(MAGIC_DEBOUNCE_TIME);
+		tick(MAGIC_DEBOUNCE_DURATION);
 		selectMock.isPanelOpen$.next(true);
 		tick();
 
@@ -89,7 +90,7 @@ describe('SimpleSelectApiV3Directive', () => {
 		// Arrange
 		directive.apiV3 = '/api/v3/axisSections';
 		directive.ngOnInit();
-		tick(MAGIC_DEBOUNCE_TIME);
+		tick(MAGIC_DEBOUNCE_DURATION);
 		selectMock.isPanelOpen$.next(true);
 		tick();
 
@@ -105,7 +106,7 @@ describe('SimpleSelectApiV3Directive', () => {
 
 		// Act
 		selectMock.clueChange.emit('bob');
-		tick(MAGIC_DEBOUNCE_TIME);
+		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&name=like,bob&paging=0,20').flush({

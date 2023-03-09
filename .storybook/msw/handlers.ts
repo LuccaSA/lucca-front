@@ -9,20 +9,22 @@ export const handlers = [
 			return res(ctx.delay(300), ctx.json(mockEstablishmentsCount));
 		}
 
-		const page = req.url.searchParams.get('page');
+		const pageParam = req.url.searchParams.get('page');
+		const page = pageParam ? parseInt(pageParam) : 1;
+		const limitParam = req.url.searchParams.get('limit');
+		const limit = limitParam ? parseInt(limitParam) : 10;
 		const legalUnitId = req.url.searchParams.get('legalUnitId');
 		const search = req.url.searchParams.get('search');
 
-		let items = [];
-		if (!page || page === '1') {
-			if (search) {
-				items = [mockEstablishments[0]];
-			} else if (legalUnitId) {
-				items = mockEstablishments.filter((e) => e.legalUnitId === +legalUnitId) ?? [];
-			} else {
-				items = mockEstablishments;
-			}
+		let items = mockEstablishments;
+		if (search) {
+			items = mockEstablishments.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()));
 		}
+		if (legalUnitId) {
+			items = mockEstablishments.filter((e) => e.legalUnitId === +legalUnitId) ?? [];
+		}
+
+		items = items.slice((page - 1) * limit, page * limit);
 
 		return res(
 			ctx.delay(300),

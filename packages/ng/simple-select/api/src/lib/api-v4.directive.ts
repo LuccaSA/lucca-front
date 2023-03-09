@@ -1,0 +1,48 @@
+import { HttpClient } from '@angular/common/http';
+import { Directive, inject, Input } from '@angular/core';
+import { ILuApiItem } from '@lucca-front/ng/api';
+import { BehaviorSubject, combineLatest, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
+import { ALuSimpleSelectApiDirective } from './api.directive';
+
+@Directive({
+	selector: 'lu-simple-select[apiV4]',
+	standalone: true,
+})
+export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpleSelectApiDirective<T> {
+	@Input()
+	public set apiV4(value: string) {
+		this.url$.next(value);
+	}
+
+	@Input()
+	public set sort(value: string) {
+		this.sort$.next(value);
+	}
+
+	@Input()
+	public set filters(value: Record<string, string | number | boolean>) {
+		this.filters$.next(value);
+	}
+
+	protected url$ = new ReplaySubject<string>(1);
+	protected sort$ = new BehaviorSubject<string>('name,asc');
+	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
+
+	protected httpClient = inject(HttpClient);
+
+	protected override params$ = combineLatest([this.filters$, this.sort$, this.clue$]).pipe(
+		map(([filters, sort, clue]) => ({
+			...filters,
+			sort,
+			...(clue ? { search: encodeURIComponent(clue) } : {}),
+		})),
+	);
+
+	protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
+		return this.url$.pipe(
+			take(1),
+			switchMap((url) => this.httpClient.get<T[] | { items: T[] }>(url, { params: { ...params, page: page + 1, limit: this.pageSize } })),
+			map((res) => (Array.isArray(res) ? res : res?.items) ?? []),
+		);
+	}
+}
