@@ -3,7 +3,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { asyncScheduler, map, observeOn, take, takeUntil } from 'rxjs';
+import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { ɵLuOptionComponent } from '../option/index';
 import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -72,9 +72,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		if (this.initialValue) {
 			this.options$
 				?.pipe(
-					take(1),
 					observeOn(asyncScheduler),
 					map((options) => options.findIndex((o) => this.optionComparer(o, this.initialValue))),
+					filter((index) => index !== -1),
+					take(1),
 					takeUntil(this.panelRef.closed),
 				)
 				.subscribe((selectedIndex) => this.keyManager.setActiveItem(selectedIndex));
