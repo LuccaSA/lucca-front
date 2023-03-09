@@ -1,35 +1,11 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Inject, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { asyncScheduler, map, Observable, observeOn, take, takeUntil } from 'rxjs';
+import { asyncScheduler, map, observeOn, take, takeUntil } from 'rxjs';
 import { ɵLuOptionComponent } from '../option/index';
-import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
-
-export abstract class LuSelectPanelRef<T> {
-	closed = new EventEmitter<void>();
-	previousPage = new EventEmitter<void>();
-	nextPage = new EventEmitter<void>();
-	valueChanged = new EventEmitter<T>();
-	clueChanged = new EventEmitter<string>();
-	activeOptionIdChanged = new EventEmitter<string>();
-	options$: Observable<T>;
-
-	abstract emitValue(value: T): void;
-	close(): void {
-		this.closed.next();
-		this.closed.complete();
-		this.nextPage.next();
-		this.nextPage.complete();
-		this.previousPage.next();
-		this.previousPage.complete();
-		this.valueChanged.complete();
-		this.clueChanged.emit(null);
-		this.clueChanged.complete();
-		this.activeOptionIdChanged.emit(undefined);
-		this.activeOptionIdChanged.complete();
-	}
-}
+import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
+import { LuSelectPanelRef } from './panel.models';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -40,12 +16,16 @@ export abstract class LuSelectPanelRef<T> {
 	imports: [CommonModule, FormsModule, A11yModule, ɵLuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
-	options$: Observable<T[]>;
-	loading$: Observable<boolean>;
-	optionComparer: (option1: T, option2: T) => boolean;
-	initialValue?: T;
-	optionTpl: TemplateRef<LuOptionContext<T>>;
-	searchable: boolean;
+	protected panelData = inject<ILuSelectPanelData<T>>(SELECT_PANEL_DATA);
+	public panelRef = inject<LuSelectPanelRef<T>>(LuSelectPanelRef);
+	public selectId = inject(SELECT_ID);
+
+	options$ = this.panelData.options$;
+	loading$ = this.panelData.loading$;
+	optionComparer = this.panelData.optionComparer;
+	initialValue: T | undefined = this.panelData.initialValue;
+	optionTpl = this.panelData.optionTpl;
+	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')
 	public set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
@@ -63,15 +43,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 
 	public get selected(): T | undefined {
 		return this.keyManager?.activeItem?.option;
-	}
-
-	constructor(public panelRef: LuSelectPanelRef<T>, @Inject(SELECT_ID) public selectId: number, @Inject(SELECT_PANEL_DATA) data: ILuSelectPanelData<T>) {
-		this.options$ = data.options$;
-		this.loading$ = data.loading$;
-		this.optionComparer = data.optionComparer;
-		this.initialValue = data.initialValue;
-		this.optionTpl = data.optionTpl;
-		this.searchable = data.searchable;
 	}
 
 	onScroll(evt: Event): void {

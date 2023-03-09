@@ -15,6 +15,6 @@ export interface LuOptionContext<T> {
 }
 
 export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
-export const SELECT_PANEL_DATA = new InjectionToken<number>('LuSelectId');
+export const SELECT_PANEL_DATA = new InjectionToken<unknown>('LuSelectId');
 export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
 export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');
