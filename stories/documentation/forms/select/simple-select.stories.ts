@@ -2,9 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { LuSimpleSelectApiV3Directive } from 'packages/ng/simple-select/api/src/lib/api-v3.directive';
-import { LuSimpleSelectApiV4Directive } from 'packages/ng/simple-select/api/src/lib/api-v4.directive';
 
 interface ILegume {
 	index: number;
