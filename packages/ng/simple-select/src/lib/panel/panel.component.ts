@@ -57,7 +57,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			this.panelRef.previousPage.emit();
 		}
 
-		if (evt.target.scrollHeight === evt.target.scrollTop + evt.target.clientHeight) {
+		if (evt.target.scrollHeight - evt.target.scrollTop - evt.target.clientHeight < 1) {
 			this.panelRef.nextPage.emit();
 		}
 	}
