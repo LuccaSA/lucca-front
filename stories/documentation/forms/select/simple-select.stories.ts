@@ -10,7 +10,7 @@ interface ILegume {
 	name: string;
 }
 
-type StoryComponent = LuSimpleSelectInputComponent<ILegume> & { legumes: ILegume[]; clue: string };
+type StoryComponent = LuSimpleSelectInputComponent<ILegume> & { legumes: ILegume[]; clue: string; page: number };
 
 const allLegumes = [
 	{ name: 'Artichaut', index: 1 },
@@ -333,6 +333,7 @@ const meta: Meta<StoryComponent> = {
 		clearable: false,
 		disabled: false,
 		loading: false,
+		page: 1,
 	},
 	argTypes: {
 		options: { control: false },
