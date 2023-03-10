@@ -18,8 +18,8 @@ describe('SimpleSelectApiV3Directive', () => {
 	beforeEach(() => {
 		selectMock = {
 			isPanelOpen$: new BehaviorSubject(false),
-			nextPage: new EventEmitter(),
-			clueChange: new EventEmitter(),
+			nextPage: new EventEmitter<void>(),
+			clueChange: new EventEmitter<string>(),
 			options$: new ReplaySubject(1),
 			loading$: new ReplaySubject(1),
 		} as LuSimpleSelectInputComponent<ILuApiItem>;
@@ -28,7 +28,7 @@ describe('SimpleSelectApiV3Directive', () => {
 			providers: [LuSimpleSelectApiV3Directive, { provide: LuSimpleSelectInputComponent, useValue: selectMock }, provideHttpClient(), provideHttpClientTesting()],
 		});
 
-		directive = TestBed.inject(LuSimpleSelectApiV3Directive);
+		directive = TestBed.inject<LuSimpleSelectApiV3Directive<ILuApiItem>>(LuSimpleSelectApiV3Directive);
 		httpTestingController = TestBed.inject(HttpTestingController);
 	});
 

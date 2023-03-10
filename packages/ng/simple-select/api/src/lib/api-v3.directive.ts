@@ -5,6 +5,8 @@ import { BehaviorSubject, combineLatest, map, Observable, ReplaySubject, switchM
 import { ALuSimpleSelectApiDirective } from './api.directive';
 
 @Directive({
+	// The attribute is already prefixed with "lu-simple-select"
+	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[apiV3]',
 	standalone: true,
 })

@@ -50,14 +50,14 @@ export abstract class ALuSimpleSelectApiDirective<TOption, TParams = Record<stri
 							concatMap((page) => {
 								this.loading$.next(true);
 								return this.getOptions(params, page).pipe(
-									catchError(() => of([])),
+									catchError(() => of([] as TOption[])),
 									tap(() => this.loading$.next(false)),
 								);
 							}),
 							takeWhile((items) => items.length === this.pageSize, true),
 							scan((acc, items) => [...acc, ...items], [] as TOption[]),
 					  )
-					: of([]),
+					: of([] as TOption[]),
 			),
 		);
 	}

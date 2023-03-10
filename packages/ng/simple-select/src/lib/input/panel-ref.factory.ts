@@ -46,19 +46,19 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 @Injectable()
 export class LuSimpleSelectPanelRefFactory {
 	protected overlay = inject(Overlay);
-	protected elementRef = inject(ElementRef);
+	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 	protected positionBuilder = inject(OverlayPositionBuilder);
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
 
-	buildPanelRef(panelData: ILuSelectPanelData<unknown>, overlayConfigOverride: OverlayConfig | {}): LuSelectPanelRef<any> {
+	buildPanelRef<T>(panelData: ILuSelectPanelData<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T> {
 		const overlayConfig = this.buildOverlayConfig(overlayConfigOverride);
 		const overlayRef = this.overlay.create(overlayConfig);
 
 		return new SelectPanelRef(overlayRef, this.parentInjector, panelData);
 	}
 
-	protected buildOverlayConfig(overlayConfigOverride: OverlayConfig | {}): OverlayConfig {
+	protected buildOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
 		const overlayConfig: OverlayConfig = overlayConfigOverride || {};
 		overlayConfig.positionStrategy = this.positionBuilder.flexibleConnectedTo(this.elementRef).withPositions([
 			{
