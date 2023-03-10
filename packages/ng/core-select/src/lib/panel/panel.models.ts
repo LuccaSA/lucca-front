@@ -1,23 +1,23 @@
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export abstract class LuSelectPanelRef<T> {
+export abstract class LuSelectPanelRef<TOption, TValue> {
 	closed = new EventEmitter<void>();
 	previousPage = new EventEmitter<void>();
 	nextPage = new EventEmitter<void>();
-	valueChanged = new EventEmitter<T>();
+	valueChanged = new EventEmitter<TValue>();
 	clueChanged = new EventEmitter<string>();
 	activeOptionIdChanged = new EventEmitter<string>();
-	options$: Observable<T>;
+	options$: Observable<TOption>;
 
-	abstract emitValue(value: T): void;
+	abstract emitValue(value: TValue): void;
 	close(): void {
 		this.closed.next();
 		this.closed.complete();
 		this.nextPage.complete();
 		this.previousPage.complete();
 		this.valueChanged.complete();
-		this.clueChanged.emit(null);
+		this.clueChanged.emit('');
 		this.clueChanged.complete();
 		this.activeOptionIdChanged.emit(undefined);
 		this.activeOptionIdChanged.complete();

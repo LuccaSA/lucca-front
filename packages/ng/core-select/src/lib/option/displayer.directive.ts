@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
-import { LuSimpleSelectInputComponent } from '../input';
+import { ALuSelectInputComponent } from '../input';
 import { LuOptionContext } from '../select.model';
 
 @Directive({
@@ -7,7 +7,7 @@ import { LuOptionContext } from '../select.model';
 	standalone: true,
 })
 export class LuDisplayerDirective<T> {
-	@Input('luDisplayerSelect') set select(select: LuSimpleSelectInputComponent<T>) {
+	@Input('luDisplayerSelect') set select(select: ALuSelectInputComponent<T, unknown>) {
 		select.valueTpl = this.templateRef;
 	}
 
