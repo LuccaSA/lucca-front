@@ -1,3 +1,8 @@
 @import "_definitions";
 @include optionSearcherStyle;
 @include optionPlaceholderStyle;
+
+.panel-search {
+  position: sticky;
+  top: 0;
+}

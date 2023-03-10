@@ -7,7 +7,7 @@
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
 		<ng-container *ngIf="searchable">
-			<div class="textfield mod-search">
+			<div class="panel-search textfield mod-search">
 				<input #searchInput class="textfield-input" [(ngModel)]="search" (ngModelChange)="updateClue($event)" />
 			</div>
 
