@@ -11,7 +11,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
 			display: inline-flex;
-			align-items: center;
+			align-items: flex-start;
 			cursor: pointer;
 			gap: var(--spacings-XS);
 
@@ -34,6 +34,7 @@
 				display: block;
 				text-align: center;
 				text-indent: -0.1rem;
+				margin-top: var(--spacings-XXS);
 			}
 
 			&:hover {
