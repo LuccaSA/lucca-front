@@ -1,7 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
@@ -148,7 +149,8 @@ export const WithDisplayer = generateStory(
 </label>
 `,
 	{
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective', 'LuDisplayerDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisplayerDirective'],
+		'@lucca-front/ng/simple-select': ['LuOptionDirective', 'LuDisplayerDirective'],
 	},
 	{
 		value: allLegumes[4],
@@ -174,7 +176,8 @@ export const WithClearer = generateStory(
 </label>
 `,
 	{
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 	{
 		value: allLegumes[4],
@@ -200,7 +203,8 @@ export const WithClue = generateStory(
 </label>
 `,
 	{
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 );
 
@@ -223,7 +227,8 @@ export const WithPagination = generateStory(
 </label>
 `,
 	{
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 );
 
@@ -246,7 +251,8 @@ export const Disabled = generateStory(
 </label>
 `,
 	{
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 );
 
@@ -268,7 +274,8 @@ export const WithDisabledOptions = generateStory(
 </label>
 `,
 	{
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective', 'LuDisabledOptionDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 );
 

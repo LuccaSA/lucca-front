@@ -1,4 +1,5 @@
 import { InjectionToken, TemplateRef, Type } from '@angular/core';
+import { LuOptionContext } from '@lucca-front/ng/core-select';
 import { Observable } from 'rxjs';
 
 export interface ILuSelectPanelData<T> {
@@ -10,11 +11,4 @@ export interface ILuSelectPanelData<T> {
 	searchable: boolean;
 }
 
-export interface LuOptionContext<T> {
-	$implicit: T;
-}
-
-export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
-export const SELECT_PANEL_DATA = new InjectionToken<unknown>('LuSelectId');
-export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
-export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');
+export const SELECT_PANEL_DATA = new InjectionToken<ILuSelectPanelData<unknown>>('LuSelectId');
