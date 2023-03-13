@@ -4,85 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-
-interface ILegume {
-	index: number;
-	name: string;
-}
-
-type StoryComponent = LuSimpleSelectInputComponent<ILegume> & { legumes: ILegume[]; clue: string; page: number };
-
-const allLegumes = [
-	{ name: 'Artichaut', index: 1 },
-	{ name: 'Asperge', index: 2 },
-	{ name: 'Aubergine', index: 3 },
-	{ name: 'Avocat', index: 4 },
-	{ name: 'Betterave', index: 5 },
-	{ name: 'Blette', index: 6 },
-	{ name: 'Brocoli', index: 7 },
-	{ name: 'Carotte', index: 8 },
-	{ name: 'Céléri', index: 9 },
-	{ name: 'Champignon', index: 10 },
-	{ name: 'Chou chinois', index: 11 },
-	{ name: 'Chou fleur', index: 12 },
-	{ name: 'Chou kalé', index: 13 },
-	{ name: 'Chou romanesco', index: 14 },
-	{ name: 'Citrouille', index: 15 },
-	{ name: 'Concombre', index: 16 },
-	{ name: 'Courgette', index: 17 },
-	{ name: 'Endive', index: 18 },
-	{ name: 'Épinard', index: 19 },
-	{ name: 'Haricots verts', index: 20 },
-	{ name: 'Laitue', index: 21 },
-	{ name: 'Maïs', index: 22 },
-	{ name: 'Navet', index: 23 },
-	{ name: 'Panais', index: 24 },
-	{ name: 'Petits pois', index: 25 },
-	{ name: 'Poivron', index: 26 },
-	{ name: 'Pomme de terre', index: 27 },
-	{ name: 'Potimarron', index: 28 },
-	{ name: 'Radis', index: 29 },
-	{ name: 'Tomate', index: 30 },
-	{ name: 'Topinambour', index: 31 },
-];
-
-function generateStory(name: string, description: string, template: string, neededImports: { [key: string]: string[] }, args: StoryObj<StoryComponent>['args'] = {}): StoryObj<StoryComponent> {
-	return {
-		name,
-		args,
-		argTypes: {
-			clearable: { control: false },
-			disabled: { control: false },
-			loading: { control: false },
-			placeholder: { control: false },
-		},
-		render: (args) => ({
-			props: args,
-			template,
-		}),
-		parameters: {
-			docs: {
-				source: {
-					language: 'html',
-					type: 'code',
-					code: template,
-				},
-				description: {
-					story: `
-${description}
-
-**Imports nécessaires** :
-
-${Object.entries(neededImports)
-	.map(([module, imports]) => `\`import { ${imports.join(', ')} } from '${module}';\``)
-	.join('\n')}
-`,
-				},
-			},
-		},
-	};
-}
+import { Meta, moduleMetadata } from '@storybook/angular';
+import { allLegumes, generateStory, ILegume, LuSelectInputStoryComponent } from './select.utils';
 
 export const Basic = generateStory(
 	'Basic',
@@ -97,7 +20,7 @@ export const Basic = generateStory(
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLegume"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-simple-select>
@@ -120,7 +43,7 @@ export const Minimal = generateStory(
 		class="textfield-input"
 		placeholder="Placeholder..."
 		[options]="legumes"
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 	></lu-simple-select>
 	<span class="textfield-label">Label</span>
 </label>
@@ -139,7 +62,7 @@ export const WithDisplayer = generateStory(
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 		[options]="legumes"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
@@ -153,7 +76,7 @@ export const WithDisplayer = generateStory(
 		'@lucca-front/ng/simple-select': ['LuOptionDirective', 'LuDisplayerDirective'],
 	},
 	{
-		value: allLegumes[4],
+		selectedLegume: allLegumes[4],
 	},
 );
 
@@ -166,7 +89,7 @@ export const WithClearer = generateStory(
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 		[options]="legumes"
 		[clearable]="true"
 	>
@@ -180,7 +103,7 @@ export const WithClearer = generateStory(
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 	{
-		value: allLegumes[4],
+		selectedLegume: allLegumes[4],
 	},
 );
 
@@ -193,7 +116,7 @@ export const WithClue = generateStory(
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 	>
@@ -217,7 +140,7 @@ export const WithPagination = generateStory(
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 		[options]="legumes.slice(0, page * 10)"
 		(nextPage)="page = page + 1"
 	>
@@ -241,7 +164,7 @@ export const Disabled = generateStory(
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 		[options]="legumes"
 		[disabled]="true"
 	>
@@ -265,7 +188,7 @@ export const WithDisabledOptions = generateStory(
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="value"
+		[(ngModel)]="selectedLeg"
 		[options]="legumes"
 	>
 		<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
@@ -326,7 +249,7 @@ class FilterLegumesPipe implements PipeTransform {
 	}
 }
 
-const meta: Meta<StoryComponent> = {
+const meta: Meta<LuSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,
 	decorators: [
@@ -340,6 +263,8 @@ const meta: Meta<StoryComponent> = {
 		clearable: false,
 		disabled: false,
 		loading: false,
+		selectedLegume: null,
+		selectedLegumes: [],
 		page: 1,
 	},
 	argTypes: {
@@ -352,6 +277,8 @@ const meta: Meta<StoryComponent> = {
 		nextPage: { control: false },
 		previousPage: { control: false },
 		legumes: { control: false },
+		selectedLegume: { control: false },
+		selectedLegumes: { control: false },
 	},
 	parameters: {
 		docs: {
