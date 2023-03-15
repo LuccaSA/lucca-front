@@ -2,12 +2,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuUserModule, LuUserSelectInputComponent } from '@lucca-front/ng/user';
+import { LuUserSelectInputComponent, LuUserSelectModule } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
+	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
+	imports: [LuUserSelectModule, FormsModule],
 }) class UserSelectStory {
 	@Input() public model;
 }
@@ -18,13 +20,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(UserSelectStory),
 		moduleMetadata({
-			declarations: [UserSelectStory],
-			imports: [
-				HttpClientModule,
-				LuUserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-			],
+			imports: [UserSelectStory, HttpClientModule, BrowserAnimationsModule],
 		})
 	]
 } as Meta;

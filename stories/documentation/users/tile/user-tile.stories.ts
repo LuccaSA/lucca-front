@@ -1,15 +1,15 @@
 import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
-
 import { LuUserTileComponent, LuUserPictureModule, LuUserDisplayModule, LuUserTileModule } from '@lucca-front/ng/user';
 import { moduleMetadata } from '@storybook/angular';
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { bob } from '../user.mocks';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
+	standalone: true,
 	selector: 'user-tile-stories',
 	templateUrl: './user-tile.stories.html',
+	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],
 }) class UserTileStory {
 	public bob = bob;
 }
@@ -20,14 +20,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(UserTileStory),
 		moduleMetadata({
-			declarations: [UserTileStory],
-			imports: [
-				LuUserTileModule,
-				LuUserPictureModule,
-				LuUserDisplayModule,
-				BrowserAnimationsModule,
-				CommonModule,
-			]
+			imports: [UserTileStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

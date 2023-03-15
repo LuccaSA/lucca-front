@@ -1,15 +1,15 @@
 import { Story, Meta } from '@storybook/angular';
-
 import { LuUserTileComponent, LuUserPictureModule, LuUserDisplayModule, LuUserTileModule } from '@lucca-front/ng/user';
 import { moduleMetadata } from '@storybook/angular';
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { bob, patrick, squidwards } from '../user.mocks';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
+	standalone: true,
 	selector: 'user-tile-format-stories',
 	templateUrl: './user-tile-format.stories.html',
+	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],
 }) class UserTileFormatStory {
 	public bob = bob;
 	public patrick = patrick;
@@ -21,13 +21,7 @@ export default {
 	component: UserTileFormatStory,
 	decorators: [
 		moduleMetadata({
-			imports: [
-				LuUserTileModule,
-				LuUserPictureModule,
-				LuUserDisplayModule,
-				BrowserAnimationsModule,
-				CommonModule,
-			]
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
