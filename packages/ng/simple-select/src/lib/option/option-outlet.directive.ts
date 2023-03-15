@@ -19,7 +19,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['luOptionOutlet'] || !this.luOptionOutletValue) {
-			this.viewContainerRef.clear();
+			this.clearContainer();
 		}
 
 		const hasRef = this.embeddedViewRef || this.componentRef;
@@ -33,6 +33,14 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.optionContext.destroy();
+	}
+
+	private clearContainer(): void {
+		this.viewContainerRef.clear();
+		this.embeddedViewRef?.destroy();
+		this.componentRef?.destroy();
+		this.embeddedViewRef = undefined;
+		this.componentRef = undefined;
 	}
 
 	private createComponent(): void {
@@ -55,7 +63,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 		if (this.embeddedViewRef) {
 			this.embeddedViewRef.context = { $implicit: this.luOptionOutletValue };
 		} else if (this.componentRef) {
-			this.optionContext?.option$.next(this.luOptionOutletValue);
+			this.optionContext.option$.next(this.luOptionOutletValue);
 		}
 	}
 }

@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="lu-select-suffix">
-	<a *ngIf="clearable && hasValue" role="button" class="actionIcon" (click)="clearValue($event)">
+	<a *ngIf="clearable && isFilled" role="button" class="actionIcon" (click)="clearValue($event)">
 		<span aria-hidden="true" class="lucca-icon icon-thinCross"></span>
 		<span class="u-mask">{{ intl.clear }}</span>
 	</a>
