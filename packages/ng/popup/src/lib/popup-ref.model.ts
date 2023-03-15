@@ -1,8 +1,8 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { ComponentRef, Injector } from '@angular/core';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { filter, first } from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { ILuPopupConfig } from './popup-config.model';
 import { LU_POPUP_DATA } from './popup.token';
 
@@ -11,6 +11,7 @@ export interface ILuPopupRef<T = unknown, D = unknown, R = unknown> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	onDismiss: Observable<void>;
+	onBackdropClick: Observable<void>;
 	open(data: D): void;
 	close(result: R): void;
 	dismiss(): void;
@@ -23,6 +24,7 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 	onDismiss = new Subject<void>();
+	onBackdropClick = new Subject<void>();
 
 	protected _overlayRef: OverlayRef;
 	protected _componentRef: ComponentRef<T>;
@@ -99,7 +101,6 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 		const portal = new ComponentPortal(this._component, undefined, injector);
 		this._componentRef = this._overlayRef.attach<T>(portal);
 	}
-
 	protected _getOverlayPanelClasses(): string[] {
 		const panelClasses: string[] = [];
 		if (Array.isArray(this._config.panelClass)) {
@@ -110,19 +111,18 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 		panelClasses.push(`mod-${this._config.size}`);
 		return panelClasses;
 	}
-
 	protected _destroy() {
 		this._cleanSubscription();
 		this._closePopup();
 		this._destroyOverlay();
 		this._completeSubjects();
 	}
-	_completeSubjects() {
+	protected _completeSubjects() {
 		this.onClose.complete();
 		this.onOpen.complete();
 		this.onDismiss.complete();
+		this.onBackdropClick.complete();
 	}
-
 	protected _destroyOverlay() {
 		this._overlayRef.detachBackdrop();
 		this._overlayRef.detach();
@@ -132,13 +132,23 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 	}
 	protected _subToCloseEvents() {
 		if (!this._config.undismissable) {
-			const bdClicked$ = this._overlayRef.backdropClick();
-			const escPressed$ = this._overlayRef.keydownEvents().pipe(filter((evt) => evt.key === 'Escape'));
-			const sub = merge(bdClicked$, escPressed$)
-				.pipe(first())
-				.subscribe((_e) => this.dismiss());
-			this._subs.add(sub);
+			this._subToEscapeKeydownEvent();
 		}
+		this._subToBackdropClickEvent();
+	}
+	protected _subToEscapeKeydownEvent() {
+		const escPressed$ = this._overlayRef.keydownEvents().pipe(filter(({ key }) => key === 'Escape'));
+		this._subs.add(escPressed$.subscribe((_e) => this.dismiss()));
+	}
+	protected _subToBackdropClickEvent() {
+		const bdClicked$ = this._overlayRef.backdropClick();
+		const bdClickedSub = bdClicked$.subscribe((_e) => {
+			this.onBackdropClick.next();
+			if (!this._config.undismissable) {
+				this.dismiss();
+			}
+		});
+		this._subs.add(bdClickedSub);
 	}
 	protected _cleanSubscription() {
 		this._subs.unsubscribe();
