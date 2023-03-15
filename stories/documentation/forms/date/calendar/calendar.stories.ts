@@ -4,8 +4,8 @@ import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
-import { LuDateModule } from '@lucca-front/ng/date';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { LuCalendarInputComponent, LuDateModule } from '@lucca-front/ng/date';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 registerLocaleData(localesFr);
 
@@ -32,10 +32,11 @@ class CalendarStory implements OnInit {
 
 export default {
 	title: 'Documentation/Forms/Date/Calendar',
-	component: CalendarStory,
+	component: LuCalendarInputComponent,
 	decorators: [
+		componentWrapperDecorator(CalendarStory),
 		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+			imports: [CalendarStory, BrowserAnimationsModule],
 			providers: [
 				{ provide: LOCALE_ID, useValue: 'en-US' },
 				{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter },

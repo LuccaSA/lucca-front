@@ -15,6 +15,7 @@ class UserPictureStory {
 	@Input() @Optional() displayFormat: LuDisplayInitials;
 }
 
+// TODO PB import here
 export default {
 	title: 'Documentation/Users/Picture/Basic',
 	component: UserPictureStory,

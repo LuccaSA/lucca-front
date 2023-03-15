@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
@@ -32,10 +32,11 @@ class ApiSelectStory {
 
 export default {
 	title: 'Documentation/Forms/Api/Select',
-	component: ApiSelectStory,
+	component: LuApiSelectInputComponent,
 	decorators: [
+		componentWrapperDecorator(ApiSelectStory),
 		moduleMetadata({
-			imports: [HttpClientModule, BrowserAnimationsModule],
+			imports: [ApiSelectStory, HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { LuEstablishmentSelectInputComponent, LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 @Component({
 	selector: 'establishment-select-stories',
 	standalone: true,
@@ -24,10 +24,11 @@ class EstablishmentSelectStory {
 
 export default {
 	title: 'Documentation/Forms/EstablishmentSelect',
-	component: EstablishmentSelectStory,
+	component: LuEstablishmentSelectInputComponent,
 	decorators: [
+		componentWrapperDecorator(EstablishmentSelectStory),
 		moduleMetadata({
-			imports: [HttpClientModule, BrowserAnimationsModule],
+			imports: [EstablishmentSelectStory, HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

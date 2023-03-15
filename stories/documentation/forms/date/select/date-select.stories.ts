@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
-import { LuDateModule } from '@lucca-front/ng/date';
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { LuDateModule, LuDateSelectInputComponent } from '@lucca-front/ng/date';
+import { Meta, Story, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'date-select-stories',
@@ -26,10 +26,11 @@ class DateSelectStory {
 
 export default {
 	title: 'Documentation/Forms/Date/Select',
-	component: DateSelectStory,
+	component: LuDateSelectInputComponent,
 	decorators: [
+		componentWrapperDecorator(DateSelectStory),
 		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+			imports: [DateSelectStory, BrowserAnimationsModule],
 			providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
 		}),
 	],

@@ -64,11 +64,11 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
-	component: ToastsStory,
+	component: LuToastsComponent,
 	decorators: [
 		componentWrapperDecorator(ToastsStory),
 		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+			imports: [ToastsStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

@@ -79,12 +79,12 @@ class SelectStory {
 
 export default {
 	title: 'Documentation/Forms/Select',
-	component: SelectStory,
+	component: LuSelectInputComponent,
 	argTypes: {},
 	decorators: [
 		componentWrapperDecorator(SelectStory),
 		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+			imports: [SelectStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

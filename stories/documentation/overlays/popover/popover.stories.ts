@@ -28,11 +28,11 @@ class PopoverStory {
 
 export default {
 	title: 'Documentation/Overlays/Popover',
-	component: PopoverStory,
+	component: PopoverMockDirectiveStory,
 	decorators: [
 		componentWrapperDecorator(PopoverStory),
 		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+			imports: [PopoverStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
