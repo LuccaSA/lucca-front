@@ -10,7 +10,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
 	imports: [LuUserSelectModule, FormsModule],
-}) class UserSelectStory {
+})
+class UserSelectStory {
 	@Input() public model;
 }
 
@@ -21,16 +22,15 @@ export default {
 		componentWrapperDecorator(UserSelectStory),
 		moduleMetadata({
 			imports: [UserSelectStory, HttpClientModule, BrowserAnimationsModule],
-		})
-	]
+		}),
+	],
 } as Meta;
 
 const template: Story<UserSelectStory> = (args: UserSelectStory) => ({
 	props: args,
 });
 
-const code =
-`
+const code = `
 /* 1. Importer le LuUserModule */
 import { LuUserModule } from '@lucca-front/ng/user';
 
@@ -58,11 +58,10 @@ class UserSelectStoriesModule {}
   </lu-user-select>
   <span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
 </label>
-`
+`;
 
 export const basic = template.bind({});
-basic.args = {
-}
+basic.args = {};
 
 basic.parameters = {
 	controls: { include: [] },
@@ -71,6 +70,6 @@ basic.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
-}
+		},
+	},
+};

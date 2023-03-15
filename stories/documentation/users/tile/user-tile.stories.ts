@@ -1,16 +1,16 @@
-import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
-import { LuUserTileComponent, LuUserPictureModule, LuUserDisplayModule, LuUserTileModule } from '@lucca-front/ng/user';
-import { moduleMetadata } from '@storybook/angular';
 import { Component } from '@angular/core';
-import { bob } from '../user.mocks';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { bob } from '../user.mocks';
 
 @Component({
 	standalone: true,
 	selector: 'user-tile-stories',
 	templateUrl: './user-tile.stories.html',
 	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],
-}) class UserTileStory {
+})
+class UserTileStory {
 	public bob = bob;
 }
 
@@ -29,8 +29,7 @@ const template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
 	props: args,
 });
 
-const code =
-`
+const code = `
 /* 1. Importer LuUserTileModule */
 import { LuUserTileModule } from '@lucca-front/ng/user';
 
@@ -46,10 +45,10 @@ class UserTileStoriesModule {}
 /* 3. (exemple n°2) Vous pouvez ajouter en option un displayFormat (cf: rubrique format), ou forcer un rôle */
 /* La propriété jobTitle du ILuUser est automatiquement prise si aucun rôle n'est renseigné  */
 <lu-user-tile [user]="bob" displayformat="LF" role="Administrateur"></lu-user-tile>
-`
+`;
 
 export const basic = template.bind({});
-basic.args = {}
+basic.args = {};
 
 basic.parameters = {
 	controls: { include: [] },
@@ -58,6 +57,6 @@ basic.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
-}
+		},
+	},
+};

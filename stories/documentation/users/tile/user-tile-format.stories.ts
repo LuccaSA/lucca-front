@@ -1,16 +1,16 @@
-import { Story, Meta } from '@storybook/angular';
-import { LuUserTileComponent, LuUserPictureModule, LuUserDisplayModule, LuUserTileModule } from '@lucca-front/ng/user';
-import { moduleMetadata } from '@storybook/angular';
 import { Component } from '@angular/core';
-import { bob, patrick, squidwards } from '../user.mocks';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { bob, patrick, squidwards } from '../user.mocks';
 
 @Component({
 	standalone: true,
 	selector: 'user-tile-format-stories',
 	templateUrl: './user-tile-format.stories.html',
 	imports: [LuUserTileModule, LuUserPictureModule, LuUserDisplayModule],
-}) class UserTileFormatStory {
+})
+class UserTileFormatStory {
 	public bob = bob;
 	public patrick = patrick;
 	public squidwards = squidwards;
@@ -30,9 +30,8 @@ const template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
 	props: args,
 });
 
-
 export const format = template.bind({});
-format.args = {}
+format.args = {};
 
 format.parameters = {
 	controls: { include: [] },
@@ -41,6 +40,6 @@ format.parameters = {
 			language: 'ts',
 			type: 'code',
 			code: '',
-		}
-	}
-}
+		},
+	},
+};
