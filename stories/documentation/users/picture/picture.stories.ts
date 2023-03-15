@@ -1,6 +1,6 @@
 import { Component, Input, Optional } from '@angular/core';
-import { ILuUser, LuDisplayInitials, LuUserPictureModule } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, Story } from '@storybook/angular';
+import { ILuUser, LuDisplayInitials, LuUserPictureComponent, LuUserPictureModule } from '@lucca-front/ng/user';
+import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 import { bob, squidwards } from '../user.mocks';
 
 @Component({
@@ -18,7 +18,7 @@ class UserPictureStory {
 // TODO PB import here
 export default {
 	title: 'Documentation/Users/Picture/Basic',
-	component: UserPictureStory,
+	component: LuUserPictureComponent,
 	argTypes: {
 		user: {
 			options: ['Avec image', 'Sans image'],
@@ -40,6 +40,9 @@ export default {
 			displayFormat: props.displayFormat,
 			sizes: props.sizes,
 		})),
+		moduleMetadata({
+			imports: [UserPictureStory],
+		}),
 	],
 } as Meta;
 
