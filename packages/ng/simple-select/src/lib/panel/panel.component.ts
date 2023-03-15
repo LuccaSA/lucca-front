@@ -27,7 +27,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	loading$ = this.panelData.loading$;
 	optionComparer = this.panelData.optionComparer;
 	initialValue: T | undefined = this.panelData.initialValue;
-	optionTplOrType = this.panelData.optionTplOrType;
+	optionTpl = this.panelData.optionTpl;
 	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')

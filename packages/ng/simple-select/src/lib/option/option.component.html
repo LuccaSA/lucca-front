@@ -5,6 +5,5 @@
 	[class.is-disabled]="disabled"
 	(click)="selectOption($event)"
 >
-	<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }; injector: injector"></ng-container>
-	<ng-container *ngComponentOutlet="optionType; injector: injector"></ng-container>
+	<ng-container *luOptionOutlet="optionTpl; value: option"></ng-container>
 </div>

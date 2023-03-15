@@ -20,7 +20,7 @@
 		<lu-select-option
 			*ngFor="let option of ctx.options; let index = index"
 			[option]="option"
-			[optionTplOrType]="optionTplOrType"
+			[optionTpl]="optionTpl"
 			[optionIndex]="index"
 			[isSelected]="option === selected"
 			(click)="panelRef.emitValue(option)"

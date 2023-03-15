@@ -14,9 +14,7 @@ export abstract class LuSelectPanelRef<T> {
 	close(): void {
 		this.closed.next();
 		this.closed.complete();
-		this.nextPage.next();
 		this.nextPage.complete();
-		this.previousPage.next();
 		this.previousPage.complete();
 		this.valueChanged.complete();
 		this.clueChanged.emit(null);

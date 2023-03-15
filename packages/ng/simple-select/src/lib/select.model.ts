@@ -6,7 +6,7 @@ export interface ILuSelectPanelData<T> {
 	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue: T | undefined;
-	optionTplOrType: TemplateRef<LuOptionContext<T>> | Type<unknown>;
+	optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown>;
 	searchable: boolean;
 }
 

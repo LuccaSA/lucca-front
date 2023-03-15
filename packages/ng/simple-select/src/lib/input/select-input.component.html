@@ -1,14 +1,11 @@
 <div class="lu-select-placeholder">{{ placeholder }}</div>
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
-		<ng-container *ngIf="isFilled">
-			<ng-container *ngTemplateOutlet="displayerTpl; context: { $implicit: displayerContext.option$ | async }"></ng-container>
-			<ng-container *ngComponentOutlet="displayerComponent"></ng-container>
-		</ng-container>
+		<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 	</div>
 </div>
 <div class="lu-select-suffix">
-	<a *ngIf="clearable && isFilled" role="button" class="actionIcon" (click)="clearValue($event)">
+	<a *ngIf="clearable && hasValue" role="button" class="actionIcon" (click)="clearValue($event)">
 		<span aria-hidden="true" class="lucca-icon icon-thinCross"></span>
 		<span class="u-mask">{{ intl.clear }}</span>
 	</a>
