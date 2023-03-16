@@ -89,8 +89,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 					}),
 			);
 		} else {
-			const result = result$;
-			this._ref.close(result);
+			this._ref.close(result$);
 		}
 	}
 

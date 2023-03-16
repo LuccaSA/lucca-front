@@ -4,6 +4,7 @@ import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
+import { LuToastsService, LuToastsModule } from '@lucca-front/ng/toast';
 
 @Component({
 	selector: 'sidepanel-content',
@@ -37,15 +38,17 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 @Component({
 	selector: 'sidepanel-stories',
 	template: `
+		<lu-toasts [sources]="[]"></lu-toasts>
 		<button type="button" class="button" (click)="openSidepanel()">Open sidepanel</button>
 		<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open dynamic sidepanel</button>
+		<button type="button" class="button" (click)="openUndismissableSidepanel()">Open undismissable sidepanel</button>
 		<button type="button" class="button" (click)="openLegacySidepanel()">Open Legacy sidepanel</button>
 		<button type="button" class="button" (click)="openLegacyDynamicContentSidepanel()">Open Legacy dynamic sidepanel</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelStories {
-	constructor(private sidepanel: LuSidepanel, private modal: LuModal) {}
+	constructor(private sidepanel: LuSidepanel, private modal: LuModal, private toastsService: LuToastsService) {}
 
 	public openSidepanel() {
 		this.modal.open(SidepanelContentComponent, undefined, { mode: 'sidepanel' });
@@ -62,6 +65,14 @@ class SidepanelStories {
 	public openLegacyDynamicContentSidepanel() {
 		this.sidepanel.open(SidepanelDynamicContentComponent);
 	}
+
+	public openUndismissableSidepanel() {
+		this.sidepanel.open(SidepanelContentComponent, undefined, { undismissable: true }).onBackdropClick.subscribe(() => {
+			this.toastsService.addToast({
+				message: 'BACKDROP CLICKED',
+			});
+		});
+	}
 }
 
 export default {
@@ -69,7 +80,7 @@ export default {
 	component: SidepanelStories,
 	decorators: [
 		moduleMetadata({
-			imports: [LuModalModule, LuSidepanelModule, BrowserAnimationsModule],
+			imports: [LuModalModule, LuSidepanelModule, BrowserAnimationsModule, LuToastsModule],
 		}),
 	],
 } as Meta;
