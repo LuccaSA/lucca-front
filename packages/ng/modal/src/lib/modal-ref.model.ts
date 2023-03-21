@@ -1,5 +1,5 @@
 import { ALuPopupRef, ILuPopupRef } from '@lucca-front/ng/popup';
-import { LuModalMode, LuModalConfig, LuModalClasses, luModalClasses } from './modal-config.model';
+import { LuModalClasses, luModalClasses, LuModalConfig, LuModalMode } from './modal-config.model';
 import { ILuModalContent } from './modal.model';
 
 export interface ILuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown> extends ILuPopupRef<T, D, R> {
@@ -11,10 +11,10 @@ export abstract class ALuModalRef<T extends ILuModalContent = ILuModalContent, D
 	implements ILuModalRef<T, D, R>
 {
 	public get mode(): LuModalMode {
-		return this._config.mode;
+		return this._config.mode || 'modal';
 	}
 
 	public get modalClasses(): LuModalClasses {
-		return luModalClasses[this._config.mode];
+		return luModalClasses[this.mode];
 	}
 }
