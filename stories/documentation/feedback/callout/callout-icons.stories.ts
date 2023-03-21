@@ -58,7 +58,6 @@ function getTemplate(args: CalloutIconStory): string {
 			<strong class="callout-content-title">${text.title} </strong>
 			<div class="callout-content-description">${text.description}</div>
 		</div>
-		<button type="button" class="callout-kill"></button>
 	</div>
 	`
 }
