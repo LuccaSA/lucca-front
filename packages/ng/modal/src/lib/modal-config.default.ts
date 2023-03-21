@@ -11,3 +11,9 @@ export const luDefaultModalConfig: LuModalConfig = {
 	size: 'standard',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 };
+
+export const luDefaultSidepanelConfig: LuModalConfig = {
+	...luDefaultModalConfig,
+	mode: 'sidepanel',
+	position: 'right',
+};
