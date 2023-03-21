@@ -7,6 +7,19 @@
 		display: inline-block;
 	}
 
+	:host-context(.textfield.mod-outlined) {
+		--palettes-50: var(--palettes-grey-50);
+		--palettes-100: var(--palettes-grey-100);
+		--palettes-200: var(--palettes-grey-200);
+		--palettes-300: var(--palettes-grey-300);
+		--palettes-400: var(--palettes-grey-400);
+		--palettes-500: var(--palettes-grey-500);
+		--palettes-600: var(--palettes-grey-600);
+		--palettes-700: var(--palettes-grey-700);
+		--palettes-800: var(--palettes-grey-800);
+		--palettes-900: var(--palettes-grey-900);
+	}
+
 	.actionIcon {
 		height: 1.5rem;
 		width: 1.5rem;
