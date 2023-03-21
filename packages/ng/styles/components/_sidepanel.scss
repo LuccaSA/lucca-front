@@ -1,7 +1,8 @@
 :root {
-	--components-sidepanel-S: 40rem;
-	--components-sidepanel-M: 55rem;
-	--components-sidepanel-L: 70rem;
+	--components-sidepanel-S: 30rem;
+	--components-sidepanel-M: 40rem;
+	--components-sidepanel-L: 50rem;
+	--components-sidepanel-XL: 60rem;
 }
 
 .lu-popup-panel {
@@ -10,19 +11,23 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
-		width: var(--components-sidepanel-S);
+		width: var(--components-sidepanel-M);
 		max-width: 100%;
 		max-height: 100vh;
 		border-radius: 0;
 		animation-name: sidepanel;
 		transform-origin: center center;
 
-		&.mod-M {
-			width: var(--components-sidepanel-M);
+		&.mod-S {
+			width: var(--components-sidepanel-S);
 		}
 
 		&.mod-L {
 			width: var(--components-sidepanel-L);
+		}
+
+		&.mod-XL {
+			width: var(--components-sidepanel-XL);
 		}
 	}
 }
