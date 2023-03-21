@@ -1,4 +1,5 @@
 :root {
+	--components-sidepanel-XS: 25rem;
 	--components-sidepanel-S: 30rem;
 	--components-sidepanel-M: 40rem;
 	--components-sidepanel-L: 50rem;
@@ -17,6 +18,10 @@
 		border-radius: 0;
 		animation-name: sidepanel;
 		transform-origin: center center;
+
+		&.mod-XS {
+			width: var(--components-sidepanel-XS);
+		}
 
 		&.mod-S {
 			width: var(--components-sidepanel-S);
