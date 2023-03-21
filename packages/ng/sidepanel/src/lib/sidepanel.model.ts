@@ -42,6 +42,11 @@ export const luSidepanelTranslations: ILuTranslation<ILuSidepanelLabel> = luModa
 export type LuSidepanelConfig = LuModalConfig;
 
 /**
+ * @deprecated Use LuModalConfig from @lucca-front/ng/modal instead.
+ */
+export type ILuSidepanelConfig = LuModalConfig;
+
+/**
  * @deprecated Use ILuModalContent from @lucca-front/ng/modal instead.
  */
 export type ILuSidepanelContent<T = unknown> = ILuModalContent<T>;
