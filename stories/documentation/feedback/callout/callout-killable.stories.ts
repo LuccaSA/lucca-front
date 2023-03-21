@@ -21,7 +21,7 @@ function getTemplate(args: CalloutKillableStory): string {
 	return `
 	<div class="callout ${classes}">
 		<div class="callout-content">
-			Je suis un callout supprimable
+			<div class="callout-content-description">Je suis un callout supprimable</div>
 		</div>
 		<button type="button" class="callout-kill"></button>
 	</div>
