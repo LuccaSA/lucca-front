@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
-import { ILuModalContent, ILuModalLabel, ILuModalRef, luDefaultModalConfig, LuModalConfig, luModalTranslations, LU_MODAL_DATA } from '@lucca-front/ng/modal';
+import { ILuModalContent, ILuModalLabel, ILuModalRef, luDefaultSidepanelConfig, LuModalConfig, luModalTranslations, LU_MODAL_DATA } from '@lucca-front/ng/modal';
 
 /**
  * For backward compatibility, we re-export modal tokens as sidepanel tokens.
@@ -11,11 +11,7 @@ import { ILuModalContent, ILuModalLabel, ILuModalRef, luDefaultModalConfig, LuMo
  * @deprecated Use LU_MODAL_CONFIG from @lucca-front/ng/modal instead.
  */
 export const LU_SIDEPANEL_CONFIG = new InjectionToken<LuSidepanelConfig>('LuSidepanelDefaultConfig', {
-	factory: () => ({
-		...luDefaultModalConfig,
-		mode: 'sidepanel',
-		position: 'right',
-	}),
+	factory: () => luDefaultSidepanelConfig,
 });
 
 /**
@@ -44,6 +40,11 @@ export const luSidepanelTranslations: ILuTranslation<ILuSidepanelLabel> = luModa
  * @deprecated Use LuModalConfig from @lucca-front/ng/modal instead.
  */
 export type LuSidepanelConfig = LuModalConfig;
+
+/**
+ * @deprecated Use LuModalConfig from @lucca-front/ng/modal instead.
+ */
+export type ILuSidepanelConfig = LuModalConfig;
 
 /**
  * @deprecated Use ILuModalContent from @lucca-front/ng/modal instead.

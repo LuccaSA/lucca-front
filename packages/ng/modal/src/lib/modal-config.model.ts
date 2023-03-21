@@ -15,9 +15,14 @@ export const luModalClasses: Record<LuModalMode, LuModalClasses> = {
 	sidepanel: { panel: 'lu-sidepanel-panel', panelInner: 'lu-sidepanel-panel-inner', overlayPane: 'mod-sidepanel', panelContainer: 'lu-sidepanel-container' },
 };
 
-type LuModalModeWithPosition = { mode: 'modal'; position: undefined | 'center' } | { mode: 'sidepanel'; position: 'left' | 'right' };
+type LuModalModeWithPosition = { mode?: 'modal'; position: undefined | 'center' } | { mode: 'sidepanel'; position: 'left' | 'right' };
 
 export type LuModalConfig = ILuPopupConfig &
 	LuModalModeWithPosition & {
 		changeDetection: ChangeDetectionStrategy;
 	};
+
+/**
+ * @deprecated Use LuModalConfig instead.
+ */
+export type ILuModalConfig = LuModalConfig;
