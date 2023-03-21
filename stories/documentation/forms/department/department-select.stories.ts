@@ -59,17 +59,12 @@ const template: Story<DepartmentStory> = (args: DepartmentStory) => ({
 export const Select = template.bind({});
 
 const code = `
-/* 1. Importer LuDepartmentSelectInputComponent */
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
-@NgModule({
-	imports: [LuDepartmentSelectInputComponent]
-})
-class StoriesModule {}
-
-/* 2. Utiliser lu-department-select */
 @Component({
 	selector: 'department-select-story',
+	standalone: true,
+	imports: [LuDepartmentSelectInputComponent],
 	template: \`
 	<label class="textfield">
 		<lu-department-select

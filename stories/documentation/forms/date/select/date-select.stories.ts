@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
-import { LuDateModule, LuDateSelectInputComponent } from '@lucca-front/ng/date';
+import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { Meta, Story, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'date-select-stories',
 	standalone: true,
-	imports: [LuDateModule, FormsModule],
+	imports: [LuDateSelectInputComponent, FormsModule],
+	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
 	template: `
 		<label class="textfield">
 			<lu-date-select class="textfield-input" [ngModel]="model" (ngModelChange)="modelChange($event)"></lu-date-select>
@@ -31,7 +32,6 @@ export default {
 		componentWrapperDecorator(DateSelectStory),
 		moduleMetadata({
 			imports: [DateSelectStory, BrowserAnimationsModule],
-			providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
 		}),
 	],
 } as Meta;
@@ -40,22 +40,23 @@ const template: Story<DateSelectStory> = (props: DateSelectStory) => ({});
 
 const code = `
 /*
-	1. Importer LuDateSelectInputComponent et BrowserAnimationsModule
-	   provider un ALuDateAdapter
+	1. Importer BrowserAnimationsModule
 */
-import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 
 @NgModule({
-	imports: [LuDateSelectInputComponent, BrowserAnimationsModule],
-	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
+	imports: [BrowserAnimationsModule],
 })
-class DateSelectStoriesModule {}
+class AppModule {}
 
 /* 2. Utiliser lu-date-select */
+import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
+import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 @Component({
 	selector: 'date-select-story',
+	standalone: true,
+	imports: [LuDateSelectInputComponent, FormsModule],
+	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
 	template: \`
 	<label class="textfield">
 		<lu-date-select
