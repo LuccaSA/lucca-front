@@ -9,7 +9,7 @@ import { ILuModalContent } from './modal.model';
 import { LU_MODAL_DATA } from './modal.token';
 import { setAriaHiddenOnApplicationRoot } from './modal.utils';
 
-class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown, C extends LuModalConfig = LuModalConfig> extends ALuModalRef<T, D, R, C> implements ILuModalRef<T, D, R> {
+class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown, C extends LuModalConfig = LuModalConfig> extends ALuModalRef<T, D, R, C> implements ILuModalRef<D, R> {
 	protected _containerRef: ComponentRef<ALuModalPanelComponent<T>>;
 	constructor(
 		protected override _overlay: Overlay,

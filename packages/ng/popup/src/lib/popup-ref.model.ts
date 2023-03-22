@@ -6,8 +6,7 @@ import { filter } from 'rxjs/operators';
 import { ILuPopupConfig } from './popup-config.model';
 import { LU_POPUP_DATA } from './popup.token';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface ILuPopupRef<T = unknown, D = unknown, R = unknown> {
+export interface ILuPopupRef<D = unknown, R = unknown> {
 	onOpen: Observable<D>;
 	onClose: Observable<R>;
 	onDismiss: Observable<void>;
@@ -17,10 +16,10 @@ export interface ILuPopupRef<T = unknown, D = unknown, R = unknown> {
 	dismiss(): void;
 }
 export interface ILuPopupRefFactory<TComponent = unknown, TConfig extends ILuPopupConfig = ILuPopupConfig> {
-	forge<T extends TComponent, C extends TConfig, D, R>(component: ComponentType<T>, config: C): ILuPopupRef<T, D, R>;
+	forge<T extends TComponent, C extends TConfig, D, R>(component: ComponentType<T>, config: C): ILuPopupRef<D, R>;
 }
 
-export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C extends ILuPopupConfig = ILuPopupConfig> implements ILuPopupRef<T, D, R> {
+export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C extends ILuPopupConfig = ILuPopupConfig> implements ILuPopupRef<D, R> {
 	onOpen = new Subject<D>();
 	onClose = new Subject<R>();
 	onDismiss = new Subject<void>();
