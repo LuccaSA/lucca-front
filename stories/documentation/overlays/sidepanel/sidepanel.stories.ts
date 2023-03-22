@@ -39,11 +39,15 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	selector: 'sidepanel-stories',
 	template: `
 		<lu-toasts [sources]="[]"></lu-toasts>
-		<button type="button" class="button" (click)="openSidepanel()">Open sidepanel</button>
-		<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open dynamic sidepanel</button>
-		<button type="button" class="button" (click)="openUndismissableSidepanel()">Open undismissable sidepanel</button>
-		<button type="button" class="button" (click)="openLegacySidepanel()">Open Legacy sidepanel</button>
-		<button type="button" class="button" (click)="openLegacyDynamicContentSidepanel()">Open Legacy dynamic sidepanel</button>
+		<div class="u-marginBottomS">
+			<button type="button" class="button" (click)="openSidepanel()">Open</button>
+			<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open (Dynamic)</button>
+			<button type="button" class="button" (click)="openUndismissableSidepanel()">Open (Backdrop event)</button>
+		</div>
+		<div>
+			<button type="button" class="button mod-outlined" (click)="openLegacySidepanel()">Open (Legacy)</button>
+			<button type="button" class="button mod-outlined" (click)="openLegacyDynamicContentSidepanel()">Open (Legacy & dynamic)</button>
+		</div>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -69,7 +73,7 @@ class SidepanelStories {
 	public openUndismissableSidepanel() {
 		this.sidepanel.open(SidepanelContentComponent, undefined, { undismissable: true }).onBackdropClick.subscribe(() => {
 			this.toastsService.addToast({
-				message: 'BACKDROP CLICKED',
+				message: 'Backdrop clicked',
 			});
 		});
 	}
