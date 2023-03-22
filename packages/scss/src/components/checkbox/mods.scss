@@ -5,28 +5,31 @@
 }
 
 @mixin L {
-	.checkbox-label {
-		line-height: 1.75rem;
+	line-height: var(--sizes-L-lineHeight);
 
+	.checkbox-label {
 		&::before {
-			font-size: 1.1rem;
 			height: 1.25rem;
 			width: 1.25rem;
-			margin-top: 1px;
+			font-size: 1.25rem;
+			line-height: 1rem;
+			margin-top: .125rem;
 		}
 	}
 }
 
 @mixin S {
+	line-height: var(--sizes-S-lineHeight);
+
 	.checkbox-label {
 		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
 
 		&::before {
-			width: var(--sizes-S-fontSize);
-			height: var(--sizes-S-fontSize);
-			font-size: var(--sizes-XS-fontSize);
-			margin-top: var(--components-checkbox-S-input-top);
+			width: .875rem;
+			height: .875rem;
+			font-size: .875rem;
+			line-height: .65rem;
+			margin-top: .125rem;
 		}
 	}
 }

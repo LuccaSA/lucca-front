@@ -1,12 +1,19 @@
-import { ILuModalConfig } from './modal-config.model';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { LuModalConfig } from './modal-config.model';
 
-export const luDefaultModalConfig: ILuModalConfig = {
+export const luDefaultModalConfig: LuModalConfig = {
+	mode: 'modal',
 	position: 'center',
 	noBackdrop: false,
 	undismissable: false,
 	backdropClass: ['cdk-overlay-dark-backdrop', 'lu-popup-backdrop'],
 	panelClass: 'lu-popup-panel',
-	size: 'standard',
+	size: 'M',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+};
+
+export const luDefaultSidepanelConfig: LuModalConfig = {
+	...luDefaultModalConfig,
+	mode: 'sidepanel',
+	position: 'right',
 };

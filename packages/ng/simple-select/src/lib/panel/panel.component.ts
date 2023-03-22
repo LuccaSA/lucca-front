@@ -1,36 +1,13 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Inject, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { asyncScheduler, Observable } from 'rxjs';
-import { map, observeOn, take, takeUntil } from 'rxjs/operators';
-import { LuOptionComponent } from '../option/index';
-import { ILuSelectPanelData, LuOptionContext, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
-
-export abstract class LuSelectPanelRef<T> {
-	closed = new EventEmitter<void>();
-	previousPage = new EventEmitter<void>();
-	nextPage = new EventEmitter<void>();
-	valueChanged = new EventEmitter<T>();
-	clueChanged = new EventEmitter<string>();
-	activeOptionIdChanged = new EventEmitter<string>();
-	options$: Observable<T>;
-
-	abstract emitValue(value: T): void;
-	close(): void {
-		this.closed.next();
-		this.closed.complete();
-		this.nextPage.next();
-		this.nextPage.complete();
-		this.previousPage.next();
-		this.previousPage.complete();
-		this.valueChanged.complete();
-		this.clueChanged.emit(null);
-		this.clueChanged.complete();
-		this.activeOptionIdChanged.emit(undefined);
-		this.activeOptionIdChanged.complete();
-	}
-}
+import { getIntl } from '@lucca-front/ng/core';
+import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { ɵLuOptionComponent } from '../option/index';
+import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
+import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuSelectPanelRef } from './panel.models';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -38,15 +15,20 @@ export abstract class LuSelectPanelRef<T> {
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, FormsModule, A11yModule, LuOptionComponent],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, ɵLuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
-	options$: Observable<T[]>;
-	loading$: Observable<boolean>;
-	optionComparer: (option1: T, option2: T) => boolean;
-	initialValue?: T;
-	optionTpl: TemplateRef<LuOptionContext<T>>;
-	searchable: boolean;
+	protected panelData = inject<ILuSelectPanelData<T>>(SELECT_PANEL_DATA);
+	public panelRef = inject<LuSelectPanelRef<T>>(LuSelectPanelRef);
+	public selectId = inject(SELECT_ID);
+	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
+
+	options$ = this.panelData.options$;
+	loading$ = this.panelData.loading$;
+	optionComparer = this.panelData.optionComparer;
+	initialValue: T | undefined = this.panelData.initialValue;
+	optionTpl = this.panelData.optionTpl;
+	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')
 	public set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
@@ -57,22 +39,13 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		setTimeout(() => input.nativeElement.focus());
 	}
 
-	@ViewChildren(LuOptionComponent) optionsQL: QueryList<LuOptionComponent<T>>;
-	private keyManager: ActiveDescendantKeyManager<LuOptionComponent<T>>;
+	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	private keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
 
 	search: string | null = null;
 
 	public get selected(): T | undefined {
 		return this.keyManager?.activeItem?.option;
-	}
-
-	constructor(public panelRef: LuSelectPanelRef<T>, @Inject(SELECT_ID) public selectId: number, @Inject(SELECT_PANEL_DATA) data: ILuSelectPanelData<T>) {
-		this.options$ = data.options$;
-		this.loading$ = data.loading$;
-		this.optionComparer = data.optionComparer;
-		this.initialValue = data.initialValue;
-		this.optionTpl = data.optionTpl;
-		this.searchable = data.searchable;
 	}
 
 	onScroll(evt: Event): void {
@@ -84,7 +57,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			this.panelRef.previousPage.emit();
 		}
 
-		if (evt.target.scrollHeight === evt.target.scrollTop + evt.target.clientHeight) {
+		if (evt.target.scrollHeight - evt.target.scrollTop - evt.target.clientHeight < 1) {
 			this.panelRef.nextPage.emit();
 		}
 	}
@@ -99,9 +72,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		if (this.initialValue) {
 			this.options$
 				?.pipe(
-					take(1),
 					observeOn(asyncScheduler),
 					map((options) => options.findIndex((o) => this.optionComparer(o, this.initialValue))),
+					filter((index) => index !== -1),
+					take(1),
 					takeUntil(this.panelRef.closed),
 				)
 				.subscribe((selectedIndex) => this.keyManager.setActiveItem(selectedIndex));

@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
+import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 
 @Component({
 	selector: 'modal-content',
@@ -34,12 +35,14 @@ class ModalDynamicContentComponent implements ILuModalContent {
 @Component({
 	selector: 'modal-stories',
 	template: `
+		<lu-toasts [sources]="[]"></lu-toasts>
 		<button type="button" class="button" (click)="openModal()">Open modal</button>
 		<button type="button" class="button" (click)="openDynamicContentModal()">Open dynamic modal</button>
+		<button type="button" class="button" (click)="openUndismissableModal()">Open undismissable modal</button>
 	`,
 })
 class ModalStories {
-	constructor(private modal: LuModal) {}
+	constructor(private modal: LuModal, private toastsService: LuToastsService) {}
 
 	public openModal() {
 		this.modal.open(ModalContentComponent);
@@ -48,6 +51,14 @@ class ModalStories {
 	public openDynamicContentModal() {
 		this.modal.open(ModalDynamicContentComponent);
 	}
+
+	public openUndismissableModal() {
+		this.modal.open(ModalContentComponent, undefined, { undismissable: true }).onBackdropClick.subscribe(() => {
+			this.toastsService.addToast({
+				message: 'BACKDROP CLICKED',
+			});
+		});
+	}
 }
 
 export default {
@@ -55,7 +66,7 @@ export default {
 	component: ModalStories,
 	decorators: [
 		moduleMetadata({
-			imports: [LuModalModule, BrowserAnimationsModule],
+			imports: [LuModalModule, BrowserAnimationsModule, LuToastsModule],
 		}),
 	],
 } as Meta;

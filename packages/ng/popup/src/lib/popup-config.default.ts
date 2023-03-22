@@ -6,5 +6,5 @@ export const luDefaultPopupConfig: ILuPopupConfig = {
 	undismissable: false,
 	backdropClass: ['cdk-overlay-dark-backdrop', 'lu-popup-backdrop'],
 	panelClass: 'lu-popup-panel',
-	size: 'standard',
+	size: 'M',
 };

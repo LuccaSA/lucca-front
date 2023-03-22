@@ -19,6 +19,7 @@ export default {
 			alias: {
 				...config.resolve.alias,
 				'@storybook/blocks': fileURLToPath(new URL('../node_modules/@storybook/blocks', import.meta.url)),
+				'@storybook/docs-tools': fileURLToPath(new URL('../node_modules/@storybook/docs-tools', import.meta.url)),
 			},
 		},
 	}),
