@@ -1,7 +1,7 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, HostListener, inject, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { debounceTime, distinctUntilChanged, map, merge, ReplaySubject, startWith, throttleTime } from 'rxjs';
+import { combineLatest, debounceTime, defer, distinctUntilChanged, map, merge, Observable, ReplaySubject, startWith, Subject, takeUntil, throttleTime, withLatestFrom } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
 
 @Component({
@@ -21,9 +21,12 @@ import { LuMultiSelectInputComponent } from '../input';
 	`,
 	styleUrls: ['./default-displayer.component.scss'],
 })
-export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit {
+export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit, OnInit, OnDestroy {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	cdr = inject(ChangeDetectorRef);
+
+	destroyed$ = new Subject<void>();
 
 	get disabled() {
 		return this.select.disabled;
@@ -31,6 +34,13 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit 
 
 	@ViewChildren('chip')
 	chipsQL: QueryList<ElementRef<HTMLElement>>;
+
+	chips$: Observable<HTMLElement[]> = defer(() =>
+		this.chipsQL.changes.pipe(
+			startWith(undefined),
+			map(() => this.chipsQL.toArray().map((chip) => chip.nativeElement)),
+		),
+	);
 
 	@ViewChild('overflow')
 	overflowCountContainer: ElementRef<HTMLElement>;
@@ -40,9 +50,36 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit 
 	maxElementsWidth$ = new ReplaySubject<number>(1);
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
+	private throttledResize$ = this.resize$.pipe(throttleTime(50), startWith(undefined));
+	private counterWidth$ = merge(this.hiddenElementsCount$, this.throttledResize$).pipe(
+		debounceTime(0),
+		map(() => this.overflowCountContainer.nativeElement.offsetWidth),
+		distinctUntilChanged(),
+	);
+
+	private lastVisibleChip$ = combineLatest([this.hiddenElementsCount$, this.chips$]).pipe(map(([hiddenElementsCount, chips]) => chips[chips.length - hiddenElementsCount - 1]));
+
+	@HostBinding('style.--hidden-option-count-width.px')
+	public hiddenOptionCountWidthCssVar = 0;
+
+	@HostBinding('style.--hidden-option-count-offset-left.px')
+	public hiddenOptionCountOffsetLeftCssVar = 0;
+
 	@HostListener('window:resize')
 	protected onResize() {
 		this.resize$.next();
+	}
+
+	ngOnInit(): void {
+		this.counterWidth$.pipe(takeUntil(this.destroyed$)).subscribe((counterWidth) => {
+			this.hiddenOptionCountWidthCssVar = counterWidth;
+			this.cdr.markForCheck();
+		});
+	}
+
+	ngOnDestroy(): void {
+		this.destroyed$.next();
+		this.destroyed$.complete();
 	}
 
 	unselectOption(option: T, $event: Event): void {
@@ -52,24 +89,28 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit 
 	}
 
 	ngAfterViewInit() {
-		const resize$ = this.resize$.pipe(throttleTime(50), startWith(undefined));
-
-		const counterWidth$ = merge(this.hiddenElementsCount$, resize$).pipe(
-			debounceTime(0),
-			map(() => this.overflowCountContainer.nativeElement.offsetWidth),
-			distinctUntilChanged(),
-		);
-
-		merge(this.chipsQL.changes, resize$, counterWidth$)
+		merge(this.chips$, this.throttledResize$, this.counterWidth$)
 			.pipe(
 				debounceTime(0),
-				map(() => this.chipsQL.toArray().map((el) => el.nativeElement)),
-				map((chips) => {
+				withLatestFrom(this.chips$),
+				map(([, chips]) => {
 					const baseOffsetTop = this.elementRef.nativeElement.offsetTop;
 					return chips.filter((chip) => chip.offsetTop > baseOffsetTop).length;
 				}),
 				distinctUntilChanged(),
+				takeUntil(this.destroyed$),
 			)
 			.subscribe(this.hiddenElementsCount$);
+
+		this.lastVisibleChip$
+			.pipe(
+				map((chip) => (chip ? chip.offsetLeft + chip.offsetWidth : 0)),
+				distinctUntilChanged(),
+				takeUntil(this.destroyed$),
+			)
+			.subscribe((offset) => {
+				this.hiddenOptionCountOffsetLeftCssVar = offset;
+				this.cdr.markForCheck();
+			});
 	}
 }

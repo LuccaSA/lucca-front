@@ -25,7 +25,4 @@ Choses qui marchent pour Simple et Multiple :
 
 ## Todo
 
-`--hidden-option-count-offset-left`
-`--hidden-option-count-width` (vérifier qu'il n'y a pas de twerk)
 Repositionner le panel par dessus l'input si mode expand
-Bouton "Sélectionner tout"
