@@ -1,0 +1,15 @@
+@import '_definitions';
+@include selectInputStyle;
+@include selectClearerStyle;
+
+// TODO: Why ?
+:host {
+	&.is-disabled {
+		display: inline-block !important;
+	}
+}
+
+// TODO Voir avec Jérémie
+::ng-deep .lu-select-value .chip:not(.mod-unkillable) {
+	padding: 0 var(--spacings-L) 0 var(--spacings-XS);
+}

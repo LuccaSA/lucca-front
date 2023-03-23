@@ -1,7 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, inject, Injectable, Provider } from '@angular/core';
+import { ElementRef, inject, Injectable, InjectionToken, Provider } from '@angular/core';
 import { SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
 let selectId = 0;
@@ -40,10 +40,13 @@ export function provideLuSelectLabelsAndIds(): Provider[] {
 	];
 }
 
+const OVERLAY_CONTAINER_ATTRIBUTES = new InjectionToken<Record<string, string>>('OverlayContainerAttributes');
+
 @Injectable()
 class LuSelectOverlayContainer extends OverlayContainer {
 	private selectLabelId = inject(SELECT_LABEL_ID);
 	private selectId = inject(SELECT_ID);
+	private attributes = inject(OVERLAY_CONTAINER_ATTRIBUTES);
 
 	constructor() {
 		super(inject(DOCUMENT), inject(Platform));
@@ -54,11 +57,19 @@ class LuSelectOverlayContainer extends OverlayContainer {
 		this._containerElement.setAttribute('aria-labelledby', this.selectLabelId);
 		this._containerElement.setAttribute('role', 'listbox');
 		this._containerElement.id = `lu-select-overlay-container-${this.selectId}`;
+
+		for (const [key, value] of Object.entries(this.attributes)) {
+			this._containerElement.setAttribute(key, value);
+		}
 	}
 }
 
-export function provideLuSelectOverlayContainer(): Provider[] {
+export function provideLuSelectOverlayContainer(attributes: Record<string, string> = {}): Provider[] {
 	return [
+		{
+			provide: OVERLAY_CONTAINER_ATTRIBUTES,
+			useValue: attributes,
+		},
 		{
 			provide: OverlayContainer,
 			useClass: LuSelectOverlayContainer,

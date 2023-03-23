@@ -25,9 +25,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	disabled = false;
 
 	@HostBinding('class.is-filled')
-	get isFilled(): boolean {
-		return this.value !== null && this.value !== undefined;
+	protected get isFilledClass(): boolean {
+		return this.hasValue;
 	}
+
+	protected abstract readonly hasValue: boolean;
 
 	@HostBinding('class.is-focused')
 	@HostBinding('attr.aria-expanded')
@@ -84,18 +86,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
 
-	protected get displayerTplOrComponent(): TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined {
-		return this.valueTpl || this.optionTpl;
-	}
-
-	protected get displayerTpl(): TemplateRef<LuOptionContext<TOption>> | undefined {
-		return this.displayerTplOrComponent instanceof TemplateRef ? this.displayerTplOrComponent : undefined;
-	}
-
-	protected get displayerComponent(): Type<unknown> | undefined {
-		return this.displayerTplOrComponent instanceof TemplateRef ? undefined : this.displayerTplOrComponent;
-	}
-
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
 
@@ -133,6 +123,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	ngOnDestroy(): void {
+		this.closePanel();
 		this.destroyed$.next();
 		this.destroyed$.complete();
 	}

@@ -1,3 +1,4 @@
+import { Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { StoryObj } from '@storybook/angular';
 
@@ -89,4 +90,11 @@ ${Object.entries(neededImports)
 			},
 		},
 	};
+}
+
+@Pipe({ name: 'filterLegumes', standalone: true })
+export class FilterLegumesPipe implements PipeTransform {
+	transform(legumes: ILegume[], clue: string): ILegume[] {
+		return clue ? legumes.filter((legume) => legume.name.toLowerCase().includes(clue.toLowerCase())) : legumes;
+	}
 }
