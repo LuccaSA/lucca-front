@@ -1,8 +1,15 @@
 :host {
 	display: flex;
 	height: var(--sizes-M-lineHeight);
+	position: relative;
 }
 
 :host-context(lu-multi-select.is-disabled) {
 	--components-select-chip-background: var(--palettes-grey-500);
+}
+
+.overflow-count-container {
+	position: absolute;
+	top: 0;
+	left: calc(var(--hidden-option-count-offset-left) + var(--spacings-XXS));
 }
