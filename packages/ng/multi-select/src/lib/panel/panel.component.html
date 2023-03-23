@@ -1,0 +1,56 @@
+<div
+	class="lu-picker-panel lu-option-picker-panel mod-multiple"
+	role="dialog"
+	cdkTrapFocus
+	*ngIf="{ options: options$ | async } as ctx"
+	[cdkTrapFocusAutoCapture]="true"
+>
+	<div class="grid">
+		<div [class.grid-6@mediaMinXS]="isExpanded" [class.grid-12@mediaMinXS]="!isExpanded">
+			<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
+				<ng-container *ngIf="searchable">
+					<div class="panel-search textfield mod-search">
+						<input #searchInput class="textfield-input" [(ngModel)]="search" (ngModelChange)="updateClue($event)" />
+					</div>
+				</ng-container>
+
+				<button class="button mod-text mod-icon" (click)="isExpanded = !isExpanded">
+					<span aria-hidden="true" class="lucca-icon" [class.icon-fullscreen]="!isExpanded" [class.icon-fullscreenExit]="isExpanded"></span>
+					{{ isExpanded ? intl.reduce : intl.expand }}
+				</button>
+
+				<ng-container *ngIf="searchable">
+					<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
+						<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
+						<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
+					</div>
+				</ng-container>
+
+				<lu-select-option
+					*ngFor="let option of ctx.options; let index = index"
+					[option]="option"
+					[optionTpl]="optionTpl"
+					[optionIndex]="index"
+					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
+					(click)="toggleOption(option)"
+				></lu-select-option>
+
+				<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
+			</div>
+		</div>
+		<div class="grid-6@mediaMinXS" *ngIf="isExpanded">
+			<div class="lu-picker-content">
+				<div *ngFor="let option of selectedOptions">
+					<div class="chip">
+						<ng-container *luOptionOutlet="optionTpl; value: option"></ng-container>
+						<button type="button" class="chip-kill" (click)="toggleOption(option, $event)"></button>
+					</div>
+				</div>
+			</div>
+			<button *ngIf="selectedOptions.length" class="button mod-text mod-icon" (click)="clear()">
+				<span aria-hidden="true" class="lucca-icon icon-trash"></span>
+				{{ intl.clear }}
+			</button>
+		</div>
+	</div>
+</div>

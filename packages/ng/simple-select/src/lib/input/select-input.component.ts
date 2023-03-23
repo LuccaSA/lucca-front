@@ -3,7 +3,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { ALuSelectInputComponent, LuOptionOutletDirective, LuSelectPanelRef, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 
@@ -13,12 +13,16 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, LuOptionOutletDirective, NgIf, OverlayModule],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 			multi: true,
+		},
+		{
+			provide: ALuSelectInputComponent,
+			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 		},
 		LuSimpleSelectPanelRefFactory,
 		provideLuSelectOverlayContainer(),
@@ -42,5 +46,9 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 			},
 			this.overlayConfig,
 		);
+	}
+
+	protected get hasValue(): boolean {
+		return this.value !== null && this.value !== undefined;
 	}
 }

@@ -1,12 +1,22 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, Pipe, PipeTransform, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
+import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
-import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
+import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
+import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+
+@Pipe({
+	name: 'luIsOptionSelected',
+	standalone: true,
+})
+class LuIsOptionSelectedPipe implements PipeTransform {
+	transform<T>(option: T, comparer: (option1: T, option2: T) => boolean, selectedOptions: T[]): boolean {
+		return selectedOptions.some((selectedOption) => comparer(option, selectedOption));
+	}
+}
 
 @Component({
 	selector: 'lu-select-panel',
@@ -14,23 +24,24 @@ import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, ɵLuOptionComponent],
+	imports: [A11yModule, AsyncPipe, FormsModule, LuIsOptionSelectedPipe, NgIf, NgFor, ɵLuOptionComponent, ɵLuOptionOutletDirective],
 })
-export class LuSelectPanelComponent<T> implements AfterViewInit {
-	protected panelData = inject<ILuSimpleSelectPanelData<T>>(SIMPLE_SELECT_PANEL_DATA);
-	public panelRef = inject<LuSelectPanelRef<T, T>>(LuSelectPanelRef);
-	public selectId = inject(SELECT_ID);
-	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
+export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
+	protected panelData = inject<ILuMultiSelectPanelData<T>>(MULTI_SELECT_PANEL_DATA);
+	panelRef = inject<LuSelectPanelRef<T, T[]>>(LuSelectPanelRef);
+	selectId = inject(SELECT_ID);
+	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
+	isExpanded = false;
 
 	options$ = this.panelData.options$;
 	loading$ = this.panelData.loading$;
 	optionComparer = this.panelData.optionComparer;
-	initialValue: T | undefined = this.panelData.initialValue;
+	selectedOptions: T[] = this.panelData.initialValue || [];
 	optionTpl = this.panelData.optionTpl;
 	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')
-	public set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
+	set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
 		if (!input) {
 			return;
 		}
@@ -42,10 +53,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	private keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
 
 	search: string | null = null;
-
-	public get selected(): T | undefined {
-		return this.keyManager?.activeItem?.option;
-	}
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
@@ -68,11 +75,11 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 
 		this.keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
 
-		if (this.initialValue) {
+		if (this.selectedOptions) {
 			this.options$
 				?.pipe(
 					observeOn(asyncScheduler),
-					map((options) => options.findIndex((o) => this.optionComparer(o, this.initialValue))),
+					map((options) => (this.selectedOptions.length ? options.findIndex((o) => this.optionComparer(o, this.selectedOptions[0])) : -1)),
 					filter((index) => index !== -1),
 					take(1),
 					takeUntil(this.panelRef.closed),
@@ -95,7 +102,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			case 'Tab':
 				return this.panelRef.close();
 			case 'Enter':
-				return this.panelRef.emitValue(this.selected);
+				return this.toggleOption(this.keyManager?.activeItem?.option);
 			default:
 				this.keyManager?.onKeydown($event);
 		}
@@ -106,5 +113,17 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		this.panelRef.clueChanged.emit(clue);
 
 		setTimeout(() => this.keyManager.setFirstItemActive());
+	}
+
+	toggleOption(option: T): void {
+		const selectedOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
+		this.selectedOptions = selectedOption ? this.selectedOptions.filter((o) => o !== selectedOption) : [...this.selectedOptions, option];
+		this.panelRef.emitValue(this.selectedOptions);
+		this.keyManager?.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
+	}
+
+	clear(): void {
+		this.selectedOptions = [];
+		this.panelRef.emitValue(this.selectedOptions);
 	}
 }

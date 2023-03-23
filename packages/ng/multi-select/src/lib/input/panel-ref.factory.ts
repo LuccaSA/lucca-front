@@ -3,26 +3,26 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, ElementRef, inject, Injectable, Injector } from '@angular/core';
 import { LuSelectPanelRef } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
-import { LuSelectPanelComponent } from '../panel';
-import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
+import { LuMultiSelectPanelComponent } from '../panel';
+import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
 
-class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
-	instance: LuSelectPanelComponent<T>;
-	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
-	private portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
+class SelectPanelRef<T> extends LuSelectPanelRef<T, T[]> {
+	instance: LuMultiSelectPanelComponent<T>;
+	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
+	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
-	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuSimpleSelectPanelData<T>) {
+	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuMultiSelectPanelData<T>) {
 		super();
 
 		const injector = Injector.create({
 			providers: [
 				{ provide: LuSelectPanelRef, useValue: this },
-				{ provide: SIMPLE_SELECT_PANEL_DATA, useValue: panelData },
+				{ provide: MULTI_SELECT_PANEL_DATA, useValue: panelData },
 			],
 			parent: parentInjector,
 		});
 
-		this.portalRef = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, injector);
+		this.portalRef = new ComponentPortal<LuMultiSelectPanelComponent<T>>(LuMultiSelectPanelComponent, undefined, injector);
 		this.panelRef = overlayRef.attach(this.portalRef);
 		this.instance = this.panelRef.instance;
 
@@ -32,9 +32,8 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 			.subscribe(() => this.close());
 	}
 
-	emitValue(value: T): void {
+	emitValue(value: T[]): void {
 		this.valueChanged.emit(value);
-		this.close();
 	}
 
 	override close(): void {
@@ -45,14 +44,14 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 }
 
 @Injectable()
-export class LuSimpleSelectPanelRefFactory {
+export class LuMultiSelectPanelRefFactory {
 	protected overlay = inject(Overlay);
 	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 	protected positionBuilder = inject(OverlayPositionBuilder);
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
 
-	buildPanelRef<T>(panelData: ILuSimpleSelectPanelData<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T, T> {
+	buildPanelRef<T>(panelData: ILuMultiSelectPanelData<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T, T[]> {
 		const overlayConfig = this.buildOverlayConfig(overlayConfigOverride);
 		const overlayRef = this.overlay.create(overlayConfig);
 
