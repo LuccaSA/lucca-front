@@ -35,7 +35,7 @@ describe('LuModal', () => {
 		spectator = createComponent();
 	});
 
-	function openModal<T>(type: Type<T>): T {
+	function openModal<T extends ILuModalContent>(type: Type<T>): T {
 		spectator.component.modal.open(type);
 		return spectator.debugElement.parent.query(By.directive(type)).componentInstance as T;
 	}
