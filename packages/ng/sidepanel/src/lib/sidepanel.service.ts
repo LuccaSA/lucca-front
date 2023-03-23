@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { inject, Injectable } from '@angular/core';
-import { ILuModalContent, LuModal } from '@lucca-front/ng/modal';
+import { ILuModalContent, LuModal, LuModalContentResult } from '@lucca-front/ng/modal';
 import { ILuSidepanelRef, LuSidepanelConfig, LU_SIDEPANEL_CONFIG } from './sidepanel.model';
 
 /**
@@ -13,7 +13,7 @@ export class LuSidepanel extends LuModal {
 	/**
 	 * @deprecated Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
 	 */
-	override open<T extends ILuModalContent<R>, D, R>(component: ComponentType<T>, data: D = undefined, config: Partial<LuSidepanelConfig> = {}): ILuSidepanelRef<T, D, R> {
+	override open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D = undefined, config: Partial<LuSidepanelConfig> = {}): ILuSidepanelRef<D, LuModalContentResult<T>> {
 		return super.open(component, data, config);
 	}
 }

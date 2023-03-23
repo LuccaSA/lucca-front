@@ -54,4 +54,4 @@ export type ILuSidepanelContent<T = unknown> = ILuModalContent<T>;
 /**
  * @deprecated Use ILuModalRef from @lucca-front/ng/modal instead.
  */
-export type ILuSidepanelRef<T extends ILuSidepanelContent = ILuSidepanelContent, D = unknown, R = unknown> = ILuModalRef<T, D, R>;
+export type ILuSidepanelRef<D = unknown, R = unknown> = ILuModalRef<D, R>;
