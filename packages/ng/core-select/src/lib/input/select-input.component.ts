@@ -89,7 +89,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
 
-	protected panelRef?: LuSelectPanelRef<TOption, TValue>;
+	public get panelRef(): LuSelectPanelRef<TOption, TValue> | undefined {
+		return this._panelRef;
+	}
+
+	protected _panelRef?: LuSelectPanelRef<TOption, TValue>;
+
 	protected destroyed$ = new Subject<void>();
 
 	@HostListener('keydown.space', ['$event'])
@@ -145,7 +150,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.isPanelOpen$.next(true);
-		this.panelRef = this.buildPanelRef();
+		this._panelRef = this.buildPanelRef();
+		this.bindInputToPanelRefEvents();
+	}
+
+	protected abstract buildPanelRef(): this['panelRef'];
+
+	protected bindInputToPanelRefEvents(): void {
+		if (!this.panelRef) {
+			return;
+		}
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
 		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
@@ -161,15 +175,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
-	protected abstract buildPanelRef(): LuSelectPanelRef<TOption, TValue>;
-
 	public closePanel(): void {
 		if (!this.isPanelOpen) {
 			return;
 		}
 		this.isPanelOpen$.next(false);
 		this.panelRef.close();
-		this.panelRef = undefined;
+		this._panelRef = undefined;
 	}
 
 	public writeValue(value: TValue): void {

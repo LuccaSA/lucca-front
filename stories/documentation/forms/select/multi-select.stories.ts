@@ -147,6 +147,31 @@ export const WithClue = generateStory(
 	},
 );
 
+export const WithSelectAll = generateStory(
+	'SelectAll',
+	"Il est possible d'afficher un bouton pour sélectionner tout en écoutant l'évènement `(selectAll)`.",
+	`
+<label class="textfield">
+	<lu-multi-select
+		#selectRef
+		class="textfield-input"
+		placeholder="Placeholder..."
+		[(ngModel)]="selectedLegumes"
+		[options]="legumes"
+		(selectAll)="selectedLegumes = legumes"
+		[areAllOptionsSelected]="selectedLegumes.length === legumes.length"
+	>
+		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+	</lu-multi-select>
+	<span class="textfield-label">Label</span>
+</label>
+`,
+	{
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+);
+
 export const WithPagination = generateStory(
 	'Pagination',
 	"Il est possible de charger les options au fur et à mesure en écouteant l'évènement `(nextPage)`.",
