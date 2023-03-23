@@ -30,6 +30,9 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 	@Input()
 	public optionIndex = 0;
 
+	@Input()
+	scrollIntoViewOptions: ScrollIntoViewOptions = {};
+
 	isHighlighted$ = new BehaviorSubject(false);
 
 	/**
@@ -67,7 +70,7 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 
 	setActiveStyles(): void {
 		this.isHighlighted$.next(true);
-		this.elementRef.nativeElement.scrollIntoView({ block: 'center' });
+		this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
 	}
 
 	setInactiveStyles(): void {

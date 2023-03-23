@@ -45,6 +45,7 @@
 					[option]="option"
 					[optionTpl]="optionTpl"
 					[optionIndex]="index"
+					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
 					(click)="toggleOption(option)"
 				></lu-select-option>
