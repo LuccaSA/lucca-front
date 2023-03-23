@@ -9,6 +9,8 @@ export interface ILuMultiSelectPanelData<T> {
 	initialValue: T[] | undefined;
 	optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown>;
 	searchable: boolean;
+	canSelectAll: boolean;
+	areAllOptionsSelected$: Observable<boolean | undefined>;
 }
 
 export const MULTI_SELECT_PANEL_DATA = new InjectionToken<ILuMultiSelectPanelData<unknown>>('MultiSelectPanelData');

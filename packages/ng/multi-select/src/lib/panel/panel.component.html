@@ -22,8 +22,22 @@
 				<ng-container *ngIf="searchable">
 					<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
 						<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
-						<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
+						<button type="button" class="link" (click)="updateClue(null); searchInput.nativeElement.focus()">{{ intl.clearSearch }}</button>
 					</div>
+				</ng-container>
+
+				<ng-container *ngIf="canSelectAll">
+					<label class="checkbox" [for]="selectId + '-select-all'">
+						<input
+							class="checkbox-input"
+							type="checkbox"
+							[class.is-incomplete]="(areAllOptionsSelected$ | async) !== true && selectedOptions.length"
+							[id]="selectId + '-select-all'"
+							[ngModel]="(areAllOptionsSelected$ | async) === true || !!selectedOptions.length"
+							(ngModelChange)="toggleAll($event)"
+						/>
+						<span class="checkbox-label">{{ intl.selectAll }}</span>
+					</label>
 				</ng-container>
 
 				<lu-select-option
@@ -43,7 +57,7 @@
 				<div *ngFor="let option of selectedOptions">
 					<div class="chip">
 						<ng-container *luOptionOutlet="optionTpl; value: option"></ng-container>
-						<button type="button" class="chip-kill" (click)="toggleOption(option, $event)"></button>
+						<button type="button" class="chip-kill" (click)="toggleOption(option)"></button>
 					</div>
 				</div>
 			</div>

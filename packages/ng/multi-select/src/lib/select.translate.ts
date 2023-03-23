@@ -12,6 +12,7 @@ export interface ILuMultiSelectLabel {
 	emptyResults: string;
 	expand: string;
 	reduce: string;
+	selectAll: string;
 }
 
 export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
@@ -22,6 +23,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		emptyResults: 'No results',
 		expand: 'Expand',
 		reduce: 'Reduce',
+		selectAll: 'Select all',
 	},
 	fr: {
 		placeholder: 'Sélectionnez une option',
@@ -30,6 +32,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		emptyResults: 'Aucun résultat pour votre recherche',
 		expand: 'Étendre',
 		reduce: 'Réduire',
+		selectAll: 'Tout sélectionner',
 	},
 	de: {
 		placeholder: 'Wählen Sie eine Option',
@@ -38,6 +41,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		emptyResults: 'Keine Ergebnisse für Ihre Suche',
 		expand: 'Erweitern',
 		reduce: 'Reduzieren',
+		selectAll: 'Alles auswählen',
 	},
 	es: {
 		placeholder: 'Seleccione una opción',
@@ -46,6 +50,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		emptyResults: 'No hay resultados para su búsqueda',
 		expand: 'Expandir',
 		reduce: 'Reducir',
+		selectAll: 'Seleccionar todo',
 	},
 	pt: {
 		placeholder: 'Selecione uma opção',
@@ -54,5 +59,6 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		emptyResults: 'Nenhum resultado para sua pesquisa',
 		expand: 'Expandir',
 		reduce: 'Reduzir',
+		selectAll: 'Selecionar tudo',
 	},
 };

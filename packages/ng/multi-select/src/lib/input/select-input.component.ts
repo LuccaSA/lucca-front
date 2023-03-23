@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, Input, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostBinding, inject, Input, Output, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { ALuSelectInputComponent, LuOptionContext, LuSelectPanelRef, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { ReplaySubject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
+import { LuMultiSelectPanelRef } from './panel.model';
 
 @Component({
 	selector: 'lu-multi-select',
@@ -39,11 +41,28 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input() valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
 
+	@Input() set areAllOptionsSelected(selected: boolean | undefined) {
+		this.areAllOptionsSelected$.next(selected);
+	}
 
+	@Output() selectAll = new EventEmitter<void>();
+
+	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
+		return this._panelRef;
+	}
+
+	protected areAllOptionsSelected$ = new ReplaySubject<boolean | undefined>(1);
+
+	protected override _panelRef?: LuMultiSelectPanelRef<T>;
 
 	protected panelRefFactory = inject(LuMultiSelectPanelRefFactory);
 
-	protected buildPanelRef(): LuSelectPanelRef<T, T[]> {
+	public override writeValue(value: T[]): void {
+		super.writeValue(value);
+		this.panelRef?.updateSelectedOptions(value);
+	}
+
+	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
 		return this.panelRefFactory.buildPanelRef(
 			{
 				initialValue: this.value,
@@ -52,9 +71,20 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				loading$: this.loading$,
 				searchable: this.searchable,
 				optionTpl: this.optionTpl,
+				canSelectAll: this.selectAll.observed,
+				areAllOptionsSelected$: this.areAllOptionsSelected$,
 			},
 			this.overlayConfig,
 		);
+	}
+
+	protected override bindInputToPanelRefEvents(): void {
+		if (!this.panelRef) {
+			return;
+		}
+
+		super.bindInputToPanelRefEvents();
+		this.panelRef.selectAll.subscribe(() => this.selectAll.emit());
 	}
 
 	protected override get hasValue(): boolean {

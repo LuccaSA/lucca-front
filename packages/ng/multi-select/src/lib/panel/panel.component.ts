@@ -1,22 +1,14 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, Pipe, PipeTransform, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
-
-@Pipe({
-	name: 'luIsOptionSelected',
-	standalone: true,
-})
-class LuIsOptionSelectedPipe implements PipeTransform {
-	transform<T>(option: T, comparer: (option1: T, option2: T) => boolean, selectedOptions: T[]): boolean {
-		return selectedOptions.some((selectedOption) => comparer(option, selectedOption));
-	}
-}
+import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -28,13 +20,15 @@ class LuIsOptionSelectedPipe implements PipeTransform {
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	protected panelData = inject<ILuMultiSelectPanelData<T>>(MULTI_SELECT_PANEL_DATA);
-	panelRef = inject<LuSelectPanelRef<T, T[]>>(LuSelectPanelRef);
+	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 	isExpanded = false;
 
 	options$ = this.panelData.options$;
 	loading$ = this.panelData.loading$;
+	areAllOptionsSelected$ = this.panelData.areAllOptionsSelected$;
+	canSelectAll = this.panelData.canSelectAll;
 	optionComparer = this.panelData.optionComparer;
 	selectedOptions: T[] = this.panelData.initialValue || [];
 	optionTpl = this.panelData.optionTpl;
@@ -105,6 +99,14 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 				return this.toggleOption(this.keyManager?.activeItem?.option);
 			default:
 				this.keyManager?.onKeydown($event);
+		}
+	}
+
+	toggleAll(shouldSelectAll: boolean): void {
+		if (shouldSelectAll) {
+			this.panelRef.selectAll.emit();
+		} else {
+			this.clear();
 		}
 	}
 
