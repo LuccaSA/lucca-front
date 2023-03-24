@@ -9,8 +9,8 @@ import { LuMultiSelectInputComponent } from '../input';
 	standalone: true,
 	imports: [AsyncPipe, NgIf, NgFor, ɵLuOptionOutletDirective],
 	template: `
-		<div class="chips-container">
-			<div #chip *ngFor="let option of context.option$ | async" class="chip" [class.mod-unkillable]="disabled" [class]>
+		<div class="chips-container" *ngIf="{ options: context.option$ | async, hiddenAfterIndex: hiddenAfterIndex$ | async } as vm">
+			<div #chip *ngFor="let option of vm.options; let index = index" class="chip" [class.mod-unkillable]="disabled" [attr.tabindex]="index > vm.hiddenAfterIndex ? -1 : undefined">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
 				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></button>
 			</div>
@@ -50,6 +50,8 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit,
 	maxElementsWidth$ = new ReplaySubject<number>(1);
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
+	hiddenAfterIndex$ = combineLatest([this.hiddenElementsCount$, this.chips$]).pipe(map(([hiddenElementsCount, chips]) => chips.length - hiddenElementsCount - 1));
+
 	private throttledResize$ = this.resize$.pipe(throttleTime(50), startWith(undefined));
 	private counterWidth$ = merge(this.hiddenElementsCount$, this.throttledResize$).pipe(
 		debounceTime(0),
@@ -57,7 +59,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit,
 		distinctUntilChanged(),
 	);
 
-	private lastVisibleChip$ = combineLatest([this.hiddenElementsCount$, this.chips$]).pipe(map(([hiddenElementsCount, chips]) => chips[chips.length - hiddenElementsCount - 1]));
+	private lastVisibleChip$ = combineLatest([this.hiddenAfterIndex$, this.chips$]).pipe(map(([hiddenAfterIndex, chips]) => chips[hiddenAfterIndex]));
 
 	@HostBinding('style.--hidden-option-count-width.px')
 	public hiddenOptionCountWidthCssVar = 0;
