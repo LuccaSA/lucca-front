@@ -10,9 +10,9 @@ import { LuMultiSelectInputComponent } from '../input';
 	imports: [AsyncPipe, NgIf, NgFor, ɵLuOptionOutletDirective],
 	template: `
 		<div class="chips-container" *ngIf="{ options: context.option$ | async, hiddenAfterIndex: hiddenAfterIndex$ | async } as vm">
-			<div #chip *ngFor="let option of vm.options; let index = index" class="chip" [class.mod-unkillable]="disabled" [attr.tabindex]="index > vm.hiddenAfterIndex ? -1 : undefined">
+			<div #chip *ngFor="let option of vm.options; let index = index" class="chip" [class.mod-unkillable]="disabled">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
-				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></button>
+				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)" [attr.tabindex]="index > vm.hiddenAfterIndex ? -1 : undefined"></button>
 			</div>
 		</div>
 		<div class="overflow-count-container" #overflow>

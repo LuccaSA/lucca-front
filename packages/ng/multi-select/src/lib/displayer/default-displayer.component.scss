@@ -2,6 +2,7 @@
 	display: flex;
 	height: var(--sizes-M-lineHeight);
 	position: relative;
+	padding-right: var(--hidden-option-count-width);
 }
 
 :host-context(lu-multi-select.is-disabled) {
