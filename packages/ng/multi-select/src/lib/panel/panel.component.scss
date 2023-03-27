@@ -2,13 +2,70 @@
 @include optionSearcherStyle;
 @include optionPlaceholderStyle;
 
-.panel-search {
-  position: sticky;
-  top: 0;
+//** surcharge chips
+::ng-deep {
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacings-XXS);
+    padding: 0 var(--spacings-XS);
+  }
+  .chip-kill {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 85%;
+  }
+}
+//*
+
+.lu-multiselect-panel {
+  padding: var(--spacings-XS);
 }
 
-.panel-loading {
-  &:after {
-    box-shadow: 0 0 0 .25rem var(--colors-white-color), inset 0 0 0 .5rem var(--colors-white-color);
+.lu-multiselect-panel-columns {
+  display: flex;
+  gap: var(--spacings-XS);
+  width: 100%;
+  &.is-expanded {
+    width: min(40rem, 80vw);
   }
+}
+
+[class*="lu-multiselect-panel-columns-col"] {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  border-radius: var(--commons-borderRadius-M);
+}
+
+.lu-multiselect-panel-columns-col1 {
+  border: var(--commons-divider-border);
+}
+
+.lu-multiselect-panel-columns-col2 {
+  align-items: flex-start;
+  height: var(--components-picker-max-height);
+  background-color: var(--palettes-grey-25);
+}
+
+.lu-multiselect-chips {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--spacings-XS);
+}
+
+.lu-multiselect-clear {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  margin-top: auto;
+}
+
+.lu-multiselect-panel-form {
+  display: flex;
+  gap: var(--spacings-XS);
 }
