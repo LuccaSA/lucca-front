@@ -192,6 +192,7 @@
 		pointer-events: none;
 		bottom: var(--spacings-XS);
 		font-size: var(--sizes-S-lineHeight);
+		line-height: var(--sizes-M-lineHeight);
 		right: 0.33rem;
 	}
 
@@ -225,7 +226,7 @@
 @mixin searchS {
 	&::after {
 		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-S-lineHeight);
+		font-size: var(--sizes-XS-lineHeight);
 	}
 }
 
