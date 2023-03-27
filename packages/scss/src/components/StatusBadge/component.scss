@@ -1,7 +1,7 @@
 @mixin component($atRoot: 'without: rule') {
 	align-items: center;
 	background-color: var(--palettes-50, var(--palettes-primary-50));
-	border-radius: 1rem;
+	border-radius: .625rem;
 	display: inline-flex;
 	font-size: var(--sizes-S-fontSize);
 	gap: var(--spacings-XXS);
