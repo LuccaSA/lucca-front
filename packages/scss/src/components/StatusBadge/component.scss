@@ -1,0 +1,22 @@
+@mixin component($atRoot: 'without: rule') {
+	align-items: center;
+	background-color: var(--palettes-50, var(--palettes-primary-50));
+	border-radius: 1rem;
+	display: inline-flex;
+	font-size: var(--sizes-S-fontSize);
+	gap: var(--spacings-XXS);
+	line-height: var(--sizes-S-lineHeight);
+	padding: 0 var(--spacings-XS) 0 .375rem;
+
+	&::before {
+		background-color: var(--palettes-700, var(--palettes-primary-700));
+		border-radius: 50%;
+		content: '';
+		display: block;
+		height: .5rem;
+		width: .5rem;
+	}
+
+	@at-root ($atRoot) {
+	}
+}
