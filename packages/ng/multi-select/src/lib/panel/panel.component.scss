@@ -1,36 +1,37 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @import "_definitions";
-@include optionSearcherStyle;
 @include optionPlaceholderStyle;
 
-//** surcharge chips
-::ng-deep {
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacings-XXS);
-    padding: 0 var(--spacings-XS);
-  }
-  .chip-kill {
-    position: static;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-size: 85%;
+.lu-multiselect-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: var(--commons-borderRadius-M);
+  background-color: var(--colors-white-color);
+  box-shadow: var(--commons-elevations-elevation-2);
+  margin-top: var(--spacings-XS);
+  transition-property: width, min-width;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in;
+  &.is-expanded {
+    width: min(40rem, 80vw);
+    min-width: 100%;
   }
 }
-//*
 
-.lu-multiselect-panel {
+.lu-multiselect-panel-form {
   padding: var(--spacings-XS);
+  box-shadow: var(--commons-elevations-elevation-1);
 }
 
 .lu-multiselect-panel-columns {
   display: flex;
   gap: var(--spacings-XS);
+  padding: 0;
   width: 100%;
-  &.is-expanded {
-    width: min(40rem, 80vw);
+  transition: padding 0.15s ease-in;
+  .is-expanded & {
+    padding: var(--spacings-XS);
   }
 }
 
@@ -38,11 +39,12 @@
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
-  border-radius: var(--commons-borderRadius-M);
+  .is-expanded & {
+    border-radius: var(--commons-borderRadius-M);
+  }
 }
 
 .lu-multiselect-panel-columns-col1 {
-  border: var(--commons-divider-border);
 }
 
 .lu-multiselect-panel-columns-col2 {
@@ -51,10 +53,41 @@
   background-color: var(--palettes-grey-25);
 }
 
+.lu-multiselect-panel-columns-col1-content {
+  .is-expanded & {
+    border: var(--commons-divider-width) solid var(--palettes-grey-100);
+  }
+}
+
+.lu-multiselect-panel-columns-col1-content,
 .lu-multiselect-chips {
+  scroll-snap-type: y proximity;
+  & > * {
+    scroll-snap-align: center;
+  }
+}
+
+.lu-multiselect-search {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.lu-multiselect-selectall {
+  padding: var(--spacings-XS);
+  box-shadow: var(--commons-elevations-elevation-2);
+  font-weight: 600;
+  &:hover,
+  &:focus-within {
+    background-color: var(--palettes-grey-25);
+  }
+}
+
+.lu-multiselect-chips {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-self: stretch;
   padding: var(--spacings-XS);
 }
 
@@ -62,10 +95,23 @@
   display: flex;
   align-items: center;
   align-self: stretch;
+  justify-content: flex-start;
+  border-radius: 0;
+  border-top: var(--commons-divider-border);
   margin-top: auto;
 }
 
 .lu-multiselect-panel-form {
   display: flex;
   gap: var(--spacings-XS);
+}
+
+.lu-multiselect-expandbutton {
+  @include media.max("S") {
+    display: none;
+  }
+}
+
+.lu-multiselect-emptystate {
+  margin: auto;
 }
