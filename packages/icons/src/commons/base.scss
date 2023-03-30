@@ -9,8 +9,8 @@ body {
 			font-style: normal;
 			font-weight: 400;
 			src: url('#{config.$font-path}.eot');
-			src: url('#{config.$font-path}.eot'), url('#{config.$font-path}.svg'), url('#{config.$font-path}.woff'),
-				url('#{config.$font-path}.ttf');
+			src: url('#{config.$font-path}.eot'), url('#{config.$font-path}.svg') format('svg'), url('#{config.$font-path}.woff') format('woff'),
+				url('#{config.$font-path}.ttf') format('truetype');
 
 			letter-spacing: normal;
 			-webkit-font-feature-settings: 'liga';
