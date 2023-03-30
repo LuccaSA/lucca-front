@@ -271,7 +271,10 @@ var icons = [
 	'unarchive',
 	'home_filled',
 	'home_starred',
-
+	'swap',
+	'donut_chart',
+	'horizontal_bar_chart',
+	'bank',
 ];
 
 export default icons;
