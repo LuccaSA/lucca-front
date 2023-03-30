@@ -10,13 +10,13 @@ import { LuMultiSelectInputComponent } from '../input';
 	imports: [AsyncPipe, NgIf, NgFor, ɵLuOptionOutletDirective],
 	template: `
 		<div class="chips-container" *ngIf="{ options: context.option$ | async, hiddenAfterIndex: hiddenAfterIndex$ | async } as vm">
-			<div #chip *ngFor="let option of vm.options; let index = index" class="chip" [class.mod-unkillable]="disabled">
+			<div #chip *ngFor="let option of vm.options; let index = index" class="chip lu-multiselect-chip" [class.mod-unkillable]="disabled">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
-				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)" [attr.tabindex]="index > vm.hiddenAfterIndex ? -1 : undefined"></button>
+				<button *ngIf="!disabled" type="button" class="chip-kill lu-multiselect-chip-kill" (click)="unselectOption(option, $event)" [attr.tabindex]="index > vm.hiddenAfterIndex ? -1 : undefined"></button>
 			</div>
 		</div>
-		<div class="overflow-count-container" #overflow>
-			<div class="chip mod-unkillable" *ngIf="hiddenElementsCount$ | async as count">+ {{ count }}</div>
+		<div class="lu-multiselect-counter" #overflow>
+			<div class="chip mod-unkillable lu-multiselect-counter-chip" *ngIf="hiddenElementsCount$ | async as count">+ {{ count }}</div>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],

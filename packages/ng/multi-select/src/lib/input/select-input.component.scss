@@ -10,17 +10,23 @@ A SUPPRIMER
 }
 /***/
 ::ng-deep {
-	.chip {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--spacings-XXS);
+	.chip.lu-multiselect-chip {
+		padding-right: calc(var(--spacings-M) + var(--spacings-XS));
+		background-color: var(--palettes-grey-200);
+		color: var(--palettes-grey-700);
 	}
-	.chip-kill {
-		position: static;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0;
-		font-size: 85%;
+
+	.chip-kill.lu-multiselect-chip-kill {
+		background-color: var(--palettes-grey-700);
+		color: var(--colors-white-color);
+	}
+
+	.lu-multiselect-counter-chip {
+		--components-select-chip-background: var(--palettes-grey-100);
+		--components-select-chip-text: var(--palettes-grey-900);
+		border-radius: var(--spacings-S);
+		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--sizes-XS-fontSize);
+		font-weight: 600;
 	}
 }
