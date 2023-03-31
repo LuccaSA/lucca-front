@@ -21,6 +21,8 @@ var icons = [
 	'alarm',
 	'analytics',
 	'charts',
+	'donut_chart',
+	'horizontal_bar_chart',
 	'apps',
 	'nine_tiles',
 	'archive',
@@ -56,6 +58,7 @@ var icons = [
 	'answer',
 	'api_sync',
 	'attach',
+	'bank',
 	'banking_card',
 	'bill',
 	'birthday',
@@ -206,6 +209,7 @@ var icons = [
 	'print',
 	'refresh',
 	'update',
+	'swap',
 	'reply',
 	'restaurant',
 	'user_roles',
@@ -271,7 +275,6 @@ var icons = [
 	'unarchive',
 	'home_filled',
 	'home_starred',
-
 ];
 
 export default icons;
