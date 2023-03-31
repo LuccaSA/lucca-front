@@ -48,14 +48,14 @@
 		</div>
 		<div class="lu-multiselect-panel-columns-col2" *ngIf="isExpanded">
 			<div class="lu-multiselect-emptystate" *ngIf="!selectedOptions.length">%%empty</div>
-			<div class="lu-multiselect-chips">
-				<div class="chip lu-multiselect-chip" *ngFor="let option of selectedOptions">
+			<div class="lu-multiselect-chips" role="list">
+				<div role="listitem" class="chip lu-multiselect-chip" *ngFor="let option of selectedOptions">
 					<ng-container *luOptionOutlet="optionTpl; value: option"></ng-container>
 					<button type="button" class="chip-kill lu-multiselect-chip-kill"
 						(click)="toggleOption(option)"></button>
 				</div>
 			</div>
-			<button *ngIf="selectedOptions.length" class="lu-multiselect-clear button mod-text mod-icon"
+			<button *ngIf="selectedOptions.length" class="lu-multiselect-clear button mod-text mod-icon" type="button"
 				(click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-trash"></span>
 				{{ intl.clear }}
