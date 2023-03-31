@@ -9,7 +9,8 @@
 				<span class="u-mask textfield-label">%%Rechercher </span>
 			</label>
 		</ng-container>
-		<button class="button mod-text mod-icon lu-multiselect-expandbutton" (click)="isExpanded = !isExpanded">
+		<button class="button mod-text mod-icon lu-multiselect-expandbutton" type="button"
+			(click)="isExpanded = !isExpanded">
 			<span aria-hidden="true" class="lucca-icon" [class.icon-fullscreen]="!isExpanded"
 				[class.icon-fullscreenExit]="isExpanded"></span>
 			{{ isExpanded ? intl.reduce : intl.expand }}
