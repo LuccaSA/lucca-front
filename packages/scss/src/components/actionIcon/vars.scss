@@ -1,19 +1,2 @@
 @mixin vars {
-	--components-actionIcon-default-palette-50: var(--palettes-primary-50);
-	--components-actionIcon-default-palette-100: var(--palettes-primary-100);
-	--components-actionIcon-default-palette-200: var(--palettes-primary-200);
-	--components-actionIcon-default-palette-300: var(--palettes-primary-300);
-	--components-actionIcon-default-palette-400: var(--palettes-primary-400);
-	--components-actionIcon-default-palette-500: var(--palettes-primary-500);
-	--components-actionIcon-default-palette-600: var(--palettes-primary-600);
-	--components-actionIcon-default-palette-700: var(--palettes-primary-700);
-	--components-actionIcon-default-palette-800: var(--palettes-primary-800);
-	--components-actionIcon-default-palette-900: var(--palettes-primary-900);
-
-	--components-actionIcon-color: var(--palettes-grey-700);
-	--components-actionIcon-hover-color: var(--palettes-grey-800);
-	--components-actionIcon-hover-background: var(--palettes-grey-50);
-	--components-actionIcon-focus-color: var(--palettes-grey-800);
-	--components-actionIcon-focus-background: var(--palettes-grey-100);
-	--components-actionIcon-invert-color: var(--colors-white-color);
 }
