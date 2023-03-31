@@ -114,6 +114,10 @@
 			line-height: var(--sizes-XS-lineHeight);
 		}
 
+		.lu-select-suffix {
+			bottom: var(--spacings-XXS);
+		}
+
 		::ng-deep .lu-select-value {
 			.label {
 				font-size: var(--sizes-S-fontSize);
