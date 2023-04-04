@@ -207,8 +207,18 @@
 	@include top;
 }
 
+@mixin notchBottom {
+	@include bottom;
+}
+
 @mixin notchLeft {
 	@include left;
+	--component-notchbox-badge-offset: 17px;
+	--component-notchbox-notch-height: 24px;
+}
+
+@mixin notchRight {
+	@include right;
 	--component-notchbox-badge-offset: 17px;
 	--component-notchbox-notch-height: 24px;
 }

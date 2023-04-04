@@ -11,4 +11,12 @@
 	&.mod-notchLeft {
 		@include notchLeft;
 	}
+
+	&.mod-notchRight {
+		@include notchRight;
+	}
+
+	&.mod-notchBottom {
+		@include notchBottom;
+	}
 }
