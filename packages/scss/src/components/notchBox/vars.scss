@@ -1,0 +1,22 @@
+@mixin vars {
+	/** notch */
+	--component-notchbox-notch-radius: var(--commons-borderRadius-M);
+	--component-notchbox-notch-radius-inner: 18px;
+	--component-notchbox-notch-width: 56px;
+	--component-notchbox-notch-height: 24px;
+	--component-notchbox-notch-position: 50%;
+	--component-notchbox-notch-percent: 0.5;
+
+	/** box */
+	--component-notchbox-box-radius: 16px;
+	--component-notchbox-box-padding: var(--spacings-S);
+	--component-notchbox-box-background-color: var(--colors-white-color);
+	--component-notchbox-box-shadow: 0 0 4px var(--palettes-grey-200);
+
+	/** badge */
+	--component-notchbox-badge-offset: 17px;
+	--component-notchbox-badge-height: 48px;
+	--component-notchbox-badge-width: 48px;
+	--component-notchbox-badge-radius: 14px;
+	--component-notchbox-badge-background-color: var(--palettes-700, var(--palettes-primary-700));
+}
