@@ -36,9 +36,9 @@ class ModalDynamicContentComponent implements ILuModalContent {
 	selector: 'modal-stories',
 	template: `
 		<lu-toasts [sources]="[]"></lu-toasts>
-		<button type="button" class="button" (click)="openModal()">Open modal</button>
-		<button type="button" class="button" (click)="openDynamicContentModal()">Open dynamic modal</button>
-		<button type="button" class="button" (click)="openUndismissableModal()">Open undismissable modal</button>
+		<button type="button" class="button" (click)="openModal()">Open</button>
+		<button type="button" class="button" (click)="openDynamicContentModal()">Open (Dynamic)</button>
+		<button type="button" class="button" (click)="openUndismissableModal()">Open (Backdrop event)</button>
 	`,
 })
 class ModalStories {
@@ -55,7 +55,7 @@ class ModalStories {
 	public openUndismissableModal() {
 		this.modal.open(ModalContentComponent, undefined, { undismissable: true }).onBackdropClick.subscribe(() => {
 			this.toastsService.addToast({
-				message: 'BACKDROP CLICKED',
+				message: 'Backdrop clicked',
 			});
 		});
 	}
@@ -104,7 +104,7 @@ class ModalContentComponent implements ILuModalContent {
 /* 3. Se faire injecter LuModal dans le composant qui déclenche l'ouverture de la modale puis appeler la méthode open() */
 @Component({
 	selector: 'modal-stories',
-	template: \`<button type="button" class="button" (click)="openModal()">Open modal</button>\`,
+	template: \`<button type="button" class="button" (click)="openModal()">Open</button>\`,
 }) class ModalStories {
 	constructor(
 		private modal: LuModal
