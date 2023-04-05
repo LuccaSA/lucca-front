@@ -1,0 +1,26 @@
+@mixin component($atRoot: 'without: rule') {
+	align-items: flex-start;
+	background-color: var(--palettes-50, var(--palettes-primary-50));
+	border-radius: .625rem;
+	display: inline-flex;
+	font-size: var(--sizes-S-fontSize);
+	gap: var(--spacings-XXS);
+	line-height: var(--sizes-XS-lineHeight);
+	padding: calc(var(--spacings-XXS) / 2) var(--spacings-XS) calc(var(--spacings-XXS) / 2) .375rem;
+	white-space: nowrap;
+
+	&::before {
+		background-color: var(--palettes-700, var(--palettes-primary-700));
+		border-radius: 50%;
+		content: '';
+		display: block;
+		height: .5rem;
+		flex-shrink: 0;
+		width: .5rem;
+		top: var(--spacings-XXS);
+		position: relative;
+	}
+
+	@at-root ($atRoot) {
+	}
+}
