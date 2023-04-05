@@ -18,66 +18,66 @@ export default {
 	title: 'Documentation/Forms/Textfield/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 		display: {
 			options: ['', 'mod-block', 'mod-inline'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 		style: {
 			description: '<code>mod-outlined</code> & <code>mod-compact</code> can be combined.',
 			options: ['', 'mod-compact', 'mod-material', 'mod-framed', 'mod-outlined'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 		width: {
 			options: ['', 'mod-shortest', 'mod-shorter', 'mod-short', 'mod-standard', 'mod-long', 'mod-longer', 'mod-longest'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 		size: {
 			options: ['', 'mod-S', 'mod-XS'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 		noLabel: {
 			description: "Une fois combiné à <code>mod-material</code>, permet d'intégrer un champs de saisie dans une phrase.",
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		error: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		required: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		invert: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		white: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -96,21 +96,20 @@ function getTemplate(args: TextfieldBasicStory): string {
 			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
 			<span class="textfield-label">Label textfield</span>
 		</label>
-	`
+	`;
 }
 
 const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		:host {
 			display: block;
 		}`,
-		args.invert === true
-			? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }'
-		: ''
+		args.invert === true ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false, white: false, };
+Basic.args = { palette: '', display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false, white: false };

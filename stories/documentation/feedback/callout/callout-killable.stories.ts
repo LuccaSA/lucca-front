@@ -8,10 +8,10 @@ export default {
 	title: 'Documentation/Feedback/Callout/Killable',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -25,7 +25,7 @@ function getTemplate(args: CalloutKillableStory): string {
 		</div>
 		<button type="button" class="callout-kill"></button>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CalloutKillableStory> = (args: CalloutKillableStory) => ({
