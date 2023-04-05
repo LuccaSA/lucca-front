@@ -1,10 +1,10 @@
 @mixin invert {
-	color: var(--components-actionIcon-invert-color);
+	color: var(--colors-white-color);
 
 	&:not([disabled], .is-disabled) {
 		&:hover,
 		&:focus {
-			color: var(--components-actionIcon-invert-color);
+			color: var(--colors-white-color);
 			background-color: rgba(255, 255, 255, 0.1);
 		}
 
@@ -26,13 +26,13 @@
 	}
 
 	&:focus {
-		box-shadow: 0 0 0 1px var(--components-actionIcon-default-palette-400), 0 0 0 4px var(--components-actionIcon-default-palette-100);
+		box-shadow: 0 0 0 1px var(--palettes-primary-400), 0 0 0 4px var(--palettes-primary-100);
 	}
 
 	&:active {
 		background-color: var(--palettes-grey-200);
 		color: var(--palettes-grey-800);
-		box-shadow: 0 0 0 1px var(--components-actionIcon-default-palette-500), 0 0 0 4px var(--components-actionIcon-default-palette-200);
+		box-shadow: 0 0 0 1px var(--palettes-primary-500), 0 0 0 4px var(--palettes-primary-200);
 	}
 }
 
