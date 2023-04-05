@@ -1,5 +1,5 @@
 @mixin grey {
-	background-color: var(--components-card-mod-grey);
+	--components-card-background: var(--palettes-grey-50);
 }
 
 @mixin clickable {

@@ -9,3 +9,5 @@ export interface ILuModalContent<T = unknown> {
 	submitCounter?: number | Observable<number>;
 	cancelLabel?: string | Observable<string>;
 }
+
+export type LuModalContentResult<T extends ILuModalContent> = T extends ILuModalContent<infer R> ? R : never;

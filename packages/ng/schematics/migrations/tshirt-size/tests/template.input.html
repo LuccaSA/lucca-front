@@ -9,3 +9,19 @@
 
 <div [class.u-paddingRightBigger]="true"></div>
 <div [ngClass]="{ 'u-paddingRightBigger': true }"></div>
+
+<!-- Should remain untouched -->
+<div [ngClass]="{
+	'u-textSuccess': state === saveStateEnum.Saved,
+	'icon-tickBold': state === saveStateEnum.Saved,
+	'u-textError': state === saveStateEnum.OnError,
+	'icon-crossBold': state === saveStateEnum.OnError
+}"></div>
+
+<div class="grid-l4 grid-m12"></div>
+<div class="grid-m"></div>
+
+<button class="lu-modal-header-close" (click)="dismiss()">
+	<span aria-hidden="true" class="lucca-icon icon-cross"></span>
+	<span class="u-mask">{{ t('timeTypeSettings.TIME_TYPE_SETTINGS_MODAL_CLOSE_A11Y') }}</span>
+</button>

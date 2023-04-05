@@ -19,13 +19,15 @@ export interface AngularTemplate {
 	content: string;
 }
 
-export function extractNgTemplates(fileName: string, content: string): AngularTemplate[] {
-	const sourcefile = createSourceFile(fileName, content, ScriptTarget.ESNext);
+export function extractNgTemplates(sourcefile: SourceFile): AngularTemplate[];
+export function extractNgTemplates(fileName: string, content: string): AngularTemplate[];
+export function extractNgTemplates(fileNameOrSourceFile: string | SourceFile, content?: string): AngularTemplate[] {
+	const sourcefile = typeof fileNameOrSourceFile === 'string' ? createSourceFile(fileNameOrSourceFile, content || '', ScriptTarget.ESNext) : fileNameOrSourceFile;
 	const templates: AngularTemplate[] = [];
 
 	forEachChild(
 		sourcefile,
-		createVisitor(sourcefile, isDecorator, (decorator) => {
+		createVisitor(isDecorator, (decorator) => {
 			if (!isCallExpression(decorator.expression)) {
 				return;
 			}
@@ -51,7 +53,7 @@ export function extractNgTemplates(fileName: string, content: string): AngularTe
 					.map((initializer) => ({
 						offsetStart: initializer.getStart(sourcefile) + initializer.getLeadingTriviaWidth(sourcefile),
 						offsetEnd: initializer.getEnd(),
-						content: initializer.text,
+						content: 'rawText' in initializer && initializer.rawText ? initializer.rawText : initializer.text,
 					})),
 			);
 		}),
@@ -60,7 +62,7 @@ export function extractNgTemplates(fileName: string, content: string): AngularTe
 	return templates;
 }
 
-function createVisitor<TNode extends TsNode>(sourcefile: SourceFile, predicate: (node: TsNode) => node is TNode, callback: (n: TNode) => void): (node: TsNode) => void {
+export function createVisitor<TNode extends TsNode>(predicate: (node: TsNode) => node is TNode, callback: (n: TNode) => void): (node: TsNode) => void {
 	return function visit(node: TsNode): void {
 		if (predicate(node)) {
 			callback(node);

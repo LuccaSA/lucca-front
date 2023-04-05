@@ -10,6 +10,10 @@ const mappings = {
 		xl: 'XL',
 		xxl: 'XXL',
 		xxxl: 'XXXL',
+		// Ultra legacy sizes
+		sm: 'S',
+		md: 'M',
+		lg: 'L',
 	},
 	tshirtName: {
 		smallest: 'XXS',
@@ -28,10 +32,14 @@ const mappings = {
 		xs: 'XS',
 		s: 'S',
 		m: 'M',
-		lg: 'L',
+		l: 'L',
 		xl: 'XL',
 		xxl: 'XXL',
 		xxxl: 'XXXL',
+		// Ultra legacy sizes
+		sm: 'S',
+		md: 'M',
+		lg: 'L',
 	},
 	size: {
 		reset: '0',
@@ -114,6 +122,8 @@ export const cssVariableMapping = expand({
 	'--components-user-picture-font-size-{tshirtName}': '--components-userPicture-{tshirtName}-fontSize',
 });
 
+export const cssVarsToUpdate = new Set(Object.keys(cssVariableMapping));
+
 export const cssClassMapping = expand({
 	// Utilities
 	'u-margin{Size}': 'u-margin{size}',
@@ -148,7 +158,7 @@ export const cssClassMapping = expand({
 	'mod-headline': 'mod-XXL',
 	'size-{size}': 'mod-{size}',
 	'size-{tshirtName}': 'mod-{tshirtName}',
-	'grid-{tshirtSize}': 'grid-{tshirtSize}',
+	'grid-{tshirtSize}': 'grid@mediaMin{tshirtSize}',
 	'grid-{tshirtSize}{gridSize}': 'grid-{gridSize}@mediaMin{tshirtSize}',
 	'grid-{tshirtSize}Offset{gridSize}': 'grid-offset{gridSize}@mediaMin{tshirtSize}',
 	'mod-{tshirtSize}Start': 'mod-start@mediaMin{tshirtSize}',
@@ -162,13 +172,67 @@ export const cssClassMapping = expand({
 	'mod-stickyColumn-{tshirtSize}': 'mod-stickyColumn@mediaMin{tshirtSize}',
 	'mod-{tshirtSize}{gridSize}': 'mod-{gridSize}@mediaMin{tshirtSize}',
 	'mod-layoutFixed-{tshirtSize}{layoutFixedSize}': 'mod-layoutFixed-{layoutFixedSize}@mediaMin{tshirtSize}',
+	'lu-modal-header-close': 'lu-modal-header-close actionIcon',
 });
+
+export const cssClassesToUpdate = new Set(Object.keys(cssClassMapping));
 
 export const mixinMapping = expand({
 	"media.smallerThan('{breakpoint}')": "media.max('{breakpoint}')",
 	'media.smallerThan("{breakpoint}")': 'media.max("{breakpoint}")',
 	"media.largerThan('{breakpoint}')": "media.min('{breakpoint}')",
 	'media.largerThan("{breakpoint}")': 'media.min("{breakpoint}")',
+	'actionIcon.small': 'actionIcon.S',
+	'button.small': 'button.S',
+	'button.smaller': 'button.XS',
+	'button.counterSmall': 'button.counterS',
+	'button.counterSmaller': 'button.counterXS',
+	'button.iconSmall': 'button.iconS',
+	'button.iconSmaller': 'button.iconXS',
+	'button.loadingSmall': 'button.loadingS',
+	'callout.smaller': 'callout.S',
+	'checkbox.small': 'checkbox.S',
+	'checkbox.big': 'checkbox.L',
+	'container.small': 'container.S',
+	'file.small': 'file.S',
+	'label.numberSmall': 'label.numberS',
+	'label.numberSmaller': 'label.numberXS',
+	'loading.big': 'loading.L',
+	'menu.small': 'menu.S',
+	'radio.small': 'radio.S',
+	'radioButton.small': 'radioButton.S',
+	'section.small': 'section.S',
+	'section.smaller': 'section.XS',
+	'switch.small': 'switch.S',
+	'table.small': 'table.S',
+	'tableSorted.sortableSmall': 'tableSorted.sortableS',
+	'textfield.searchSmall': 'textfield.searchS',
+	'textfield.searchSmaller': 'textfield.searchXS',
+	'textfield.clearSmall': 'textfield.clearS',
+	'textfield.clearSmaller': 'textfield.clearXS',
+	'textfield.noLabelSmaller': 'textfield.noLabelXS',
+	'textfield.multilineSmall': 'textfield.multilineS',
+	'textfield.small': 'textfield.S',
+	'textfield.smaller': 'textfield.XS',
+	'textfield.smallInputIcon': 'textfield.SInputIcon',
+	'textfield.smallerInputIcon': 'textfield.XSInputIcon',
+	'textfield.materialSmall': 'textfield.materialS',
+	'textfield.framedMultilineSmall': 'textfield.framedMultilineS',
+	'timeline.small': 'timeline.S',
+	'timeline.big': 'timeline.L',
+	'timeline.numberBig': 'timeline.numberL',
+	'timeline.verticalSmall': 'timeline.verticalS',
+	'timeline.verticalBig': 'timeline.verticalL',
+	'timeline.verticalNotSmallNotBig': 'timeline.verticalNotSNotL',
+	'timeline.addStepBig': 'timeline.addStepL',
+	'timeline.addStepVerticalNotBig': 'timeline.addStepVerticalNotL',
+	'timeline.addStepVerticalBig': 'timeline.addStepVerticalL',
+	'timeline.checkedPastStepVerticalNotBig': 'timeline.checkedPastStepVerticalNotL',
+	'timeline.checkedPastStepVerticalBig': 'timeline.checkedPastStepVerticalL',
+	'timeline.addBetweenStepVerticalNotBig': 'timeline.addBetweenStepVerticalNotL',
+	'timeline.addBetweenStepBig': 'timeline.addBetweenStepL',
+	'title.headline': 'title.XXXL',
+	'titleSection.headline': 'titleSection.XXXL',
 });
 
 function camelize(str: string): string {

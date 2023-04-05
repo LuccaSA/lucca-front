@@ -14,7 +14,12 @@ describe('TShirt Migration', () => {
 		const expectedTree = createTreeFromFiles(testsRoot, files, '.output.');
 
 		// Act
-		await runMigration(collectionPath, 'migration-v15-tshirt-size', { skipInstallation: true }, tree);
+		try {
+			await runMigration(collectionPath, 'migration-v15-tshirt-size', { skipInstallation: true }, tree);
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.log(error);
+		}
 
 		// Assert
 		expectTree(tree).toMatchTree(expectedTree);

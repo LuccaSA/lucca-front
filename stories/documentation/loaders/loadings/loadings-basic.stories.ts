@@ -27,6 +27,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Taille : Large",
 		},
 		invert: {
 			control: {

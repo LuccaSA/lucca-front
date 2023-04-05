@@ -8,29 +8,29 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	selector: 'story-slide-animation',
 	template: `
 		<div class="grid">
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
+					Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'left'" *ngIf="!slidingLeft">Slide from left</div>
 			</div>
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Right
+					Right
 					<button class="button mod-S" (click)="slidingRight = !slidingRight">{{ slidingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'right'" *ngIf="!slidingRight">Slide from right</div>
 			</div>
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Top
+					Top
 					<button class="button mod-S" (click)="slidingTop = !slidingTop">{{ slidingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'top'" *ngIf="!slidingTop">Slide from top</div>
 			</div>
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Bottom
+					Bottom
 					<button class="button mod-S" (click)="slidingBottom = !slidingBottom">{{ slidingBottom ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'bottom'" *ngIf="!slidingBottom">Slide from bottom</div>
@@ -79,29 +79,29 @@ class AppModule {}
 	selector: 'story-slide-animation',
 	template: \`
 		<div class="grid">
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
+					Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'left'" *ngIf="!slidingLeft">Slide from left</div>
 			</div>
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Right
+					Right
 					<button class="button mod-S" (click)="slidingRight = !slidingRight">{{ slidingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'right'" *ngIf="!slidingRight">Slide from right</div>
 			</div>
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Top
+					Top
 					<button class="button mod-S" (click)="slidingTop = !slidingTop">{{ slidingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'top'" *ngIf="!slidingTop">Slide from top</div>
 			</div>
-			<div class="grid-3@mediaMinM ng-demo-block">
+			<div class="grid@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
-					Slide Bottom
+					Bottom
 					<button class="button mod-S" (click)="slidingBottom = !slidingBottom">{{ slidingBottom ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@slideAnimation]="'bottom'" *ngIf="!slidingBottom">Slide from bottom</div>

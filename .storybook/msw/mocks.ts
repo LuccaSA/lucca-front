@@ -1,12 +1,31 @@
 export const mockGenericCount = { items: [], count: 3 };
 export const mockEstablishmentsCount = { items: [], count: 4 };
+
+const usCities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia', 'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
+const frCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille'];
+
 export const mockEstablishments = [
-	{
-		id: 3,
-		name: 'Lucca USA',
-		code: 'LUCCA_USA',
+	...frCities.map((city, index) => ({
+		id: index + 1,
+		name: `Lucca ${city}`,
+		code: `LUCCA_${city.toUpperCase()}`,
+		legalUnitId: 1,
+		legalUnit: { id: 1, name: 'Lucca FR', code: 'LUCCA_FR' },
+		legalIdentificationNumber: null,
+		activityCode: null,
+		calendarId: 52,
+		address: null,
+		timeZoneId: 'Europe/Paris',
+		usersCount: 40,
+		createdAt: '2020-08-13T22:23:09.59',
+		isArchived: false,
+	})),
+	...usCities.map((city, index) => ({
+		id: index + frCities.length + 1,
+		name: `Lucca ${city}`,
+		code: `LUCCA_${city.toUpperCase()}`,
 		legalUnitId: 3,
-		legalUnit: { id: 3, name: 'Demo Ux1 - US', code: 'DEMO_UX1_US' },
+		legalUnit: { id: 2, name: 'Lucca US', code: 'LUCCA_US' },
 		legalIdentificationNumber: null,
 		activityCode: null,
 		calendarId: null,
@@ -15,52 +34,7 @@ export const mockEstablishments = [
 		usersCount: 0,
 		createdAt: '2020-08-13T22:23:09.59',
 		isArchived: false,
-	},
-	{
-		id: 1,
-		name: 'Lucca Paris FR',
-		code: 'Lucca Paris FR',
-		legalUnitId: 1,
-		legalUnit: { id: 1, name: 'Lucca FR', code: 'Lucca FR' },
-		legalIdentificationNumber: null,
-		activityCode: null,
-		calendarId: 52,
-		address: null,
-		timeZoneId: 'Europe/Paris',
-		usersCount: 40,
-		createdAt: '2020-08-13T22:23:09.59',
-		isArchived: false,
-	},
-	{
-		id: 4,
-		name: 'Lucca Nantes FR',
-		code: 'Lucca Nantes FR',
-		legalUnitId: 1,
-		legalUnit: { id: 1, name: 'Lucca FR', code: 'Lucca FR' },
-		legalIdentificationNumber: null,
-		activityCode: null,
-		calendarId: 52,
-		address: null,
-		timeZoneId: 'Europe/Paris',
-		usersCount: 40,
-		createdAt: '2020-08-13T22:23:09.59',
-		isArchived: false,
-	},
-	{
-		id: 2,
-		name: 'Lucca UK',
-		code: 'LUCCA_UK',
-		legalUnitId: 2,
-		legalUnit: { id: 2, name: 'Lucca UK', code: 'LUCCA_UK' },
-		legalIdentificationNumber: null,
-		activityCode: null,
-		calendarId: 13,
-		address: null,
-		timeZoneId: 'Europe/London',
-		usersCount: 11,
-		createdAt: '2020-08-13T22:23:09.59',
-		isArchived: false,
-	},
+	})),
 ];
 export const mockJobQualifications = [
 	{
@@ -181,24 +155,17 @@ export const mockDepartmentsTree = [
 		],
 	},
 ];
-export const mockAxisSectionsV3 = {
-	data: {
-		items: [
-			{
-				id: 19,
-				name: 'Cleemy - Deezer',
-			},
-			{
-				id: 36,
-				name: 'Cleemy - LVMH',
-			},
-			{
-				id: 27,
-				name: 'Cleemy - Mazars',
-			},
-		],
-	},
-};
+
+const softs = ['Cleemy', 'Timmi', 'Pagga', 'Poplee', 'Talent', 'Engagement'];
+const clients = ['Deezer', 'LVMH', 'Mazars', 'Orange', 'SFR', 'Sodexo', 'Vinci', 'Vivendi', 'Walmart', 'Wavestone', 'Wipro', 'Xerox', 'Zalando', 'Zara', 'Zurich'];
+
+export const mockAxisSectionsV3 = softs
+	.flatMap((soft) => clients.map((client) => `${soft} - ${client}`))
+	.map((name, index) => ({
+		id: index,
+		name,
+	}));
+
 export const mockAxisSectionsV4 = {
 	items: [
 		{

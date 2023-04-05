@@ -29,6 +29,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Taille : Small",
 		},
 		alignTop: {
 			control: {

@@ -67,126 +67,126 @@
 	}
 
 	.optionItem-value {
-		padding-right: var(--spacings-XXL);
+		padding-right: 4rem;
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-M);
+		padding-left: var(--spacings-S);
 
 		&::before {
-			left: var(--spacings-M);
+			left: var(--spacings-S);
 		}
 
 		&::after {
-			left: var(--spacings-M);
+			left: var(--spacings-S);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-XL);
+		padding-left: calc(var(--spacings-S) + 1.5rem);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 2.5rem;
+		padding-left: calc(var(--spacings-S) * 2);
 
 		&::before {
-			left: 2.5rem;
+			left: calc(var(--spacings-S) * 2);
 		}
 
 		&::after {
-			left: 2.5rem;
+			left: calc(var(--spacings-S) * 2);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-XXL);
+		padding-left: calc(var(--spacings-S) * 2 + 1.5rem);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 3.5rem;
+		padding-left: calc(var(--spacings-S) * 3);
 
 		&::before {
-			left: 3.5rem;
+			left: calc(var(--spacings-S) * 3);
 		}
 
 		&::after {
-			left: 3.5rem;
+			left: calc(var(--spacings-S) * 3);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 5rem;
+		padding-left: calc(var(--spacings-S) * 3 + 1.5rem);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 4.5rem;
+		padding-left: calc(var(--spacings-S) * 4);
 
 		&::before {
-			left: 4.5rem;
+			left: calc(var(--spacings-S) * 4);
 		}
 
 		&::after {
-			left: 4.5rem;
+			left: calc(var(--spacings-S) * 4);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 6rem;
+		padding-left: calc(var(--spacings-S) * 4 + 1.5rem);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 5.5rem;
+		padding-left: calc(var(--spacings-S) * 5);
 
 		&::before {
-			left: 5.5rem;
+			left: calc(var(--spacings-S) * 5);
 		}
 
 		&::after {
-			left: 5.5rem;
+			left: calc(var(--spacings-S) * 5);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 7rem;
+		padding-left: calc(var(--spacings-S) * 5 + 1.5rem);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 6.5rem;
+		padding-left: calc(var(--spacings-S) * 6);
 
 		&::before {
-			left: 6.5rem;
+			left: calc(var(--spacings-S) * 6);
 		}
 
 		&::after {
-			left: 6.5rem;
+			left: calc(var(--spacings-S) * 6);
 		}
 	}
 }
 
 :host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: 8rem;
+		padding-left: calc(var(--spacings-S) * 6 + 1.5rem);
 	}
 }

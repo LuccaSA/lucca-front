@@ -13,6 +13,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Taille : Small",
 		},
 		palette: {
 			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
@@ -49,11 +50,14 @@ function getTemplate(args: CalloutIconStory): string {
 			break;
   };
 	return `
-	<div class="callout mod-icon ${s} ${palette}">
+	<div class="callout${s} ${palette}">
 		<div class="callout-icon">
 			<span aria-hidden="true" class="lucca-icon ${icon}"></span>
 		</div>
-		<strong class="callout-title">${text.title} </strong> ${text.description}
+		<div class="callout-content">
+			<strong class="callout-content-title">${text.title} </strong>
+			<div class="callout-content-description">${text.description}</div>
+		</div>
 	</div>
 	`
 }

@@ -1,7 +1,6 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { spawnSync } from 'child_process';
 import * as path from 'path';
-import { extractNgTemplates } from '../../lib/angular-template.js';
 import { migrateFile } from '../../lib/schematics.js';
 import { migrateHTMLFile, migrateScssFile, migrateTsFile } from './migration.js';
 
@@ -39,7 +38,7 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 				migrateFile(path, entry, tree, (content) => migrateHTMLFile(content, angularCompiler));
 			}
 			if (path.endsWith('.ts')) {
-				migrateFile(path, entry, tree, (content) => migrateTsFile(content, extractNgTemplates(path, content), angularCompiler));
+				migrateFile(path, entry, tree, (content) => migrateTsFile(path, content, angularCompiler));
 			}
 		});
 	};

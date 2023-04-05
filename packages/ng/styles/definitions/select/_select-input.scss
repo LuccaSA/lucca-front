@@ -2,18 +2,7 @@
 
 @mixin selectInputStyle {
 	:host {
-		--components-select-default-palette-50: var(--palettes-primary-50);
-		--components-select-default-palette-100: var(--palettes-primary-100);
-		--components-select-default-palette-200: var(--palettes-primary-200);
-		--components-select-default-palette-300: var(--palettes-primary-300);
-		--components-select-default-palette-400: var(--palettes-primary-400);
-		--components-select-default-palette-500: var(--palettes-primary-500);
-		--components-select-default-palette-600: var(--palettes-primary-600);
-		--components-select-default-palette-700: var(--palettes-primary-700);
-		--components-select-default-palette-800: var(--palettes-primary-800);
-		--components-select-default-palette-900: var(--palettes-primary-900);
 		--components-select-chip-background: var(--palettes-primary-700);
-
 		--components-select-chip-text: var(--colors-white-color);
 		--components-select-input-padding-horizontal: var(--spacings-XS);
 		--components-select-input-padding-vertical: var(--spacings-XS);
@@ -34,7 +23,7 @@
 		&::after {
 			@include icon.generate('arrow_south');
 
-			color: var(--palettes-700, var(--components-select-default-palette-700));
+			color: var(--palettes-700, var(--palettes-primary-700));
 			bottom: var(--components-select-input-padding-vertical);
 			font-size: 1.2rem;
 			line-height: 1.4rem;
@@ -63,17 +52,17 @@
 	.lu-select-value {
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
 	}
 
 	.lu-select-placeholder {
-		color: var(--palettes-400, var(--components-select-default-palette-400));
+		color: var(--palettes-400, var(--palettes-primary-400));
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 2.5rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
@@ -123,6 +112,10 @@
 
 		&::after {
 			line-height: var(--sizes-XS-lineHeight);
+		}
+
+		.lu-select-suffix {
+			bottom: var(--spacings-XXS);
 		}
 
 		::ng-deep .lu-select-value {
@@ -284,7 +277,7 @@
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
-			padding-right: 2.5rem;
+			padding-right: 3rem;
 		}
 	}
 

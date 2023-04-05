@@ -20,8 +20,10 @@ function getTemplate(args: CalloutKillableStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
 	return `
 	<div class="callout ${classes}">
+		<div class="callout-content">
+			<div class="callout-content-description">Je suis un callout supprimable</div>
+		</div>
 		<button type="button" class="callout-kill"></button>
-		Je suis un callout supprimable
 	</div>
 	`
 }

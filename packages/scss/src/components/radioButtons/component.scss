@@ -34,6 +34,9 @@
 		}
 
 		.radioButtons-item-label {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--spacings-XS);
 			background-color: var(--colors-white-color);
 			padding: var(--spacings-XS) var(--spacings-S);
 			font-size: var(--components-radioButtons-font-size, var(--sizes-M-fontSize));
@@ -42,7 +45,6 @@
 			box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
-			display: block;
 			overflow: hidden;
 			position: relative;
 			height: 100%;

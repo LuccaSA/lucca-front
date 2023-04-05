@@ -38,10 +38,18 @@
 
 		&.mod-S {
 			@include searchS;
+
+			&.mod-clearable {
+				@include searchClearableS;
+			}
 		}
 
 		&.mod-XS {
 			@include searchXS;
+
+			&.mod-clearable {
+				@include searchClearableXS;
+			}
 		}
 
 		&.mod-outlined {

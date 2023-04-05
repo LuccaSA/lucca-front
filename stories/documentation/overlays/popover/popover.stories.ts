@@ -1,35 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-	LuPopoverAlignment,
-	LuPopoverModule,
-	LuPopoverPosition,
-	LuPopoverTriggerDirective,
-	LuPopoverTriggerEvent
-} from '@lucca-front/ng/popover';
+import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerDirective, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-mock-directive-story',
-	template: `
-`,
-}) class PopoverMockDirectiveStory extends LuPopoverTriggerDirective {
-}
-
+	standalone: true,
+	template: ``,
+})
+class PopoverMockDirectiveStory extends LuPopoverTriggerDirective {}
 
 @Component({
 	selector: 'popover-story',
 	template: `
-		<button type="button"
-			class="button"
-			[luPopover]="popover"
-			[luPopoverPosition]="position"
-			[luPopoverAlignment]="alignment"
-			[luPopoverTrigger]="trigger"
-			>{{trigger}} me</button>
-		<lu-popover #popover>{{popoverContent}}</lu-popover>
-`,
-}) class PopoverStory {
+		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position" [luPopoverAlignment]="alignment" [luPopoverTrigger]="trigger">{{ trigger }} me</button>
+		<lu-popover #popover>{{ popoverContent }}</lu-popover>
+	`,
+})
+class PopoverStory {
 	@Input() popoverContent: string = '🎉 popover content 🏖️';
 	@Input() position: LuPopoverPosition = 'above';
 	@Input() alignment: LuPopoverAlignment = 'top';
@@ -37,22 +25,19 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 }
 
 export default {
-  title: 'Documentation/Overlays/Popover',
-  component: PopoverMockDirectiveStory,
+	title: 'Documentation/Overlays/Popover',
+	component: PopoverMockDirectiveStory,
 	decorators: [
 		componentWrapperDecorator(PopoverStory),
 		moduleMetadata({
-			declarations: [PopoverStory, PopoverMockDirectiveStory],
-			imports: [
-				LuPopoverModule,
-				BrowserAnimationsModule,
-			]
-		})
-	]
+			declarations: [PopoverStory],
+			imports: [LuPopoverModule, BrowserAnimationsModule, PopoverMockDirectiveStory],
+		}),
+	],
 } as Meta;
 
 const template: Story<PopoverStory> = (args: PopoverStory) => ({
-  props: args,
+	props: args,
 });
 
 const code = `
@@ -72,7 +57,7 @@ class PopoverStoriesModule {}
 		<lu-popover #popover>🎉 popover content 🏖️</lu-popover>
 	\`
 })
-class PopoverStory { }`
+class PopoverStory { }`;
 
 export const basic = template.bind({});
 basic.parameters = {
@@ -83,6 +68,6 @@ basic.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
-}
+		},
+	},
+};

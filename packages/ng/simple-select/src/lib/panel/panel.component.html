@@ -7,26 +7,25 @@
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
 		<ng-container *ngIf="searchable">
-			<div class="textfield mod-search">
-				<input #searchInput class="textfield-input" [(ngModel)]="search" (ngModelChange)="updateClue($event)" />
+			<div class="panel-search textfield mod-search">
+				<input #searchInput class="textfield-input" [ngModel]="search" (ngModelChange)="updateClue($event)" />
 			</div>
 
 			<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
-				<p class="optionPlaceholder-content u-marginBottom0">Aucun résultat pour votre recherche</p>
-				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">Vider la recherche</button>
+				<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
+				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
 			</div>
 		</ng-container>
 
 		<lu-select-option
 			*ngFor="let option of ctx.options; let index = index"
 			[option]="option"
+			[optionTpl]="optionTpl"
 			[optionIndex]="index"
 			[isSelected]="option === selected"
-			[disabled]="false"
 			(click)="panelRef.emitValue(option)"
-		>
-			<ng-container *ngTemplateOutlet="optionTpl; context: { $implicit: option }"></ng-container>
-		</lu-select-option>
-		<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
+		></lu-select-option>
+
+		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
 	</div>
 </div>

@@ -12,6 +12,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Taille : Small",
 		},
 		disabled: {
 			control: {
