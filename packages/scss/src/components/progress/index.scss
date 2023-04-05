@@ -12,7 +12,7 @@
 		@include success;
 	}
 
-	&:is(.is-error, .error .palette-error) {
+	&:is(.is-error, .error, .palette-error) {
 		@include error;
 	}
 }
