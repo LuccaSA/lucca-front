@@ -1,6 +1,6 @@
 import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { LuMultiSelectPanelComponent } from '../panel';
 import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';

@@ -27,9 +27,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 			provide: ALuSelectInputComponent,
 			useExisting: forwardRef(() => LuMultiSelectInputComponent),
 		},
-		provideLuSelectOverlayContainer({
-			'aria-multiselectable': 'true',
-		}),
+		provideLuSelectOverlayContainer(),
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
 	],
