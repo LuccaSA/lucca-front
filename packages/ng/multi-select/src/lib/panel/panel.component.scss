@@ -44,9 +44,6 @@
   }
 }
 
-.lu-multiselect-panel-columns-col1 {
-}
-
 .lu-multiselect-panel-columns-col2 {
   align-items: flex-start;
   height: var(--components-picker-max-height);
@@ -62,8 +59,13 @@
 .lu-multiselect-panel-columns-col1-content,
 .lu-multiselect-chips {
   scroll-snap-type: y proximity;
+  outline: none;
   & > * {
     scroll-snap-align: center;
+  }
+  &:focus {
+    box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400)), var(--commons-boxShadow-XS),
+      0 0 0 4px var(--palettes-100, var(--palettes-primary-100));
   }
 }
 
@@ -85,10 +87,13 @@
 .lu-multiselect-chips {
   overflow-y: auto;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
   padding: var(--spacings-XS);
+  border-top-left-radius: var(--commons-borderRadius-M);
+  border-top-right-radius: var(--commons-borderRadius-M);
 }
 
 .lu-multiselect-clear {

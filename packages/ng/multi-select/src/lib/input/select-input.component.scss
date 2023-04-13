@@ -19,6 +19,11 @@ A SUPPRIMER
 	.chip-kill.lu-multiselect-chip-kill {
 		background-color: var(--palettes-grey-700);
 		color: var(--colors-white-color);
+		&:focus,
+		&:hover {
+			--components-chip-kill-hover: var(--palettes-error-400);
+			background-color: var(--palettes-error-700);
+		}
 	}
 
 	.lu-multiselect-counter-chip {
