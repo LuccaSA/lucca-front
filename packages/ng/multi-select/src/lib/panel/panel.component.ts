@@ -110,6 +110,16 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		}
 	}
 
+	toggleExpansion(): void {
+		this.isExpanded = !this.isExpanded;
+
+		if (this.isExpanded) {
+			this.panelRef.useExpandedPosition();
+		} else {
+			this.panelRef.useDefaultPosition();
+		}
+	}
+
 	updateClue(clue: string | null): void {
 		this.search = clue;
 		this.panelRef.clueChanged.emit(clue);

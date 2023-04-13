@@ -1,5 +1,6 @@
+import { PositionStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostBinding, inject, Input, Output, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, TemplateRef, Type, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -43,6 +44,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		this.areAllOptionsSelected$.next(selected);
 	}
 
+	@Input()
+	expandedPositionStrategy?: PositionStrategy;
+
 	@Output() selectAll = new EventEmitter<void>();
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
@@ -73,6 +77,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				areAllOptionsSelected$: this.areAllOptionsSelected$,
 			},
 			this.overlayConfig,
+			this.expandedPositionStrategy,
 		);
 	}
 

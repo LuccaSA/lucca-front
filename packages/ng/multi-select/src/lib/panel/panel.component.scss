@@ -10,12 +10,14 @@
   background-color: var(--colors-white-color);
   box-shadow: var(--commons-elevations-elevation-2);
   margin-top: var(--spacings-XS);
-  transition-property: width, min-width;
-  transition-duration: 0.15s;
+  transition-property: width, min-width, margin-top, margin-left;
+  transition-duration: var(--commons-animations-durations-fast);
   transition-timing-function: ease-in;
   &.is-expanded {
     width: min(40rem, 80vw);
     min-width: 100%;
+    margin-top: calc(var(--spacings-XS) * -1);
+    margin-left: calc(var(--spacings-XS) * -1);
   }
 }
 

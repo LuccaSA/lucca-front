@@ -13,4 +13,8 @@ export abstract class LuMultiSelectPanelRef<T> extends LuSelectPanelRef<T, T[]> 
 	}
 
 	abstract updateSelectedOptions(selectedOptions: T[]): void;
+
+	abstract useExpandedPosition(): void;
+
+	abstract useDefaultPosition(): void;
 }
