@@ -36,13 +36,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')
-	set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
-		if (!input) {
-			return;
-		}
-
-		setTimeout(() => input.nativeElement.focus());
-	}
+	searchInput: ElementRef<HTMLInputElement> | undefined;
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
 	private leftColumnKeyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
@@ -73,6 +67,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 		this.initLeftColumnKeyManager();
 		this.initRightColumnKeyManager();
+
+		if (this.searchInput) {
+			setTimeout(() => this.searchInput.nativeElement.focus());
+		}
 	}
 
 	@HostListener('keydown', ['$event'])
