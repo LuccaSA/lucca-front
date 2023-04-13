@@ -91,29 +91,36 @@ export class LuMultiSelectPanelRefFactory {
 				originY: 'bottom',
 				overlayX: 'start',
 				overlayY: 'top',
+				panelClass: ['mod-below', 'mod-after'],
 			},
 			{
 				originX: 'end',
 				originY: 'bottom',
 				overlayX: 'end',
 				overlayY: 'top',
+				panelClass: ['mod-below', 'mod-before'],
 			},
 			{
 				originX: 'start',
 				originY: 'top',
 				overlayX: 'start',
 				overlayY: 'bottom',
+				panelClass: ['mod-above', 'mod-after'],
 			},
 			{
 				originX: 'end',
 				originY: 'top',
 				overlayX: 'end',
 				overlayY: 'bottom',
+				panelClass: ['mod-above', 'mod-before'],
 			},
 		]);
 		overlayConfig.scrollStrategy = this.scrollStrategies.reposition();
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
-		overlayConfig.maxHeight = '100vh';
+
+		// WIP Comment réserver l'espace pour le panel sans l'étirer ?
+		overlayConfig.width = 'min(40rem, 80vw)';
+		overlayConfig.height = 'var(--components-dropdown-max-height)';
 		overlayConfig.maxWidth = '100vw';
 
 		return overlayConfig;
@@ -125,24 +132,28 @@ export class LuMultiSelectPanelRefFactory {
 				originY: 'top',
 				overlayX: 'start',
 				overlayY: 'top',
+				panelClass: ['mod-below', 'mod-after'],
 			},
 			{
 				originX: 'end',
 				originY: 'top',
 				overlayX: 'end',
 				overlayY: 'top',
+				panelClass: ['mod-below', 'mod-before'],
 			},
 			{
 				originX: 'start',
 				originY: 'bottom',
 				overlayX: 'start',
 				overlayY: 'bottom',
+				panelClass: ['mod-above', 'mod-after'],
 			},
 			{
 				originX: 'end',
 				originY: 'bottom',
 				overlayX: 'end',
 				overlayY: 'bottom',
+				panelClass: ['mod-above', 'mod-before'],
 			},
 		]);
 	}

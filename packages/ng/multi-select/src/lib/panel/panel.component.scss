@@ -1,124 +1,143 @@
 @use '@lucca-front/scss/src/commons/utils/media';
-@import "_definitions";
+@import '_definitions';
 @include optionPlaceholderStyle;
 
 .lu-multiselect-panel {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-radius: var(--commons-borderRadius-M);
-  background-color: var(--colors-white-color);
-  box-shadow: var(--commons-elevations-elevation-2);
-  margin-top: var(--spacings-XS);
-  transition-property: width, min-width, margin-top, margin-left;
-  transition-duration: var(--commons-animations-durations-fast);
-  transition-timing-function: ease-in;
-  &.is-expanded {
-    width: min(40rem, 80vw);
-    min-width: 100%;
-    margin-top: calc(var(--spacings-XS) * -1);
-    margin-left: calc(var(--spacings-XS) * -1);
-  }
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	border-radius: var(--commons-borderRadius-M);
+	background-color: var(--colors-white-color);
+	box-shadow: var(--commons-elevations-elevation-2);
+	transition-property: width, min-width, margin-top, margin-left;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-timing-function: ease-in;
+
+	&.is-expanded {
+		width: min(40rem, 80vw);
+		min-width: 100%;
+	}
+}
+
+:host-context(.mod-above) .lu-multiselect-panel {
+	margin-top: calc(var(--spacings-XS) * -1);
+
+	&.is-expanded {
+		margin-top: calc(var(--spacings-XXS) * -1);
+	}
+}
+:host-context(.mod-below) .lu-multiselect-panel {
+	margin-top: var(--spacings-XS);
+
+	&.is-expanded {
+		margin-top: calc(var(--spacings-XXS) * -1);
+	}
+}
+:host-context(.mod-after) .lu-multiselect-panel.is-expanded {
+	margin-left: calc(var(--spacings-XXS) * -1);
+}
+:host-context(.mod-before) .lu-multiselect-panel.is-expanded {
+	margin-left: var(--spacings-XXS);
 }
 
 .lu-multiselect-panel-form {
-  padding: var(--spacings-XS);
-  box-shadow: var(--commons-elevations-elevation-1);
+	padding: var(--spacings-XS);
+	box-shadow: var(--commons-elevations-elevation-1);
 }
 
 .lu-multiselect-panel-columns {
-  display: flex;
-  gap: var(--spacings-XS);
-  padding: 0;
-  width: 100%;
-  transition: padding 0.15s ease-in;
-  .is-expanded & {
-    padding: var(--spacings-XS);
-  }
+	display: flex;
+	gap: var(--spacings-XS);
+	padding: 0;
+	width: 100%;
+	transition: padding 0.15s ease-in;
+	.is-expanded & {
+		padding: var(--spacings-XS);
+	}
 }
 
-[class*="lu-multiselect-panel-columns-col"] {
-  display: flex;
-  flex-basis: 100%;
-  flex-direction: column;
-  .is-expanded & {
-    border-radius: var(--commons-borderRadius-M);
-  }
+[class*='lu-multiselect-panel-columns-col'] {
+	display: flex;
+	flex-basis: 100%;
+	flex-direction: column;
+	.is-expanded & {
+		border-radius: var(--commons-borderRadius-M);
+	}
 }
 
 .lu-multiselect-panel-columns-col2 {
-  align-items: flex-start;
-  height: var(--components-picker-max-height);
-  background-color: var(--palettes-grey-25);
+	align-items: flex-start;
+	height: var(--components-picker-max-height);
+	background-color: var(--palettes-grey-25);
 }
 
 .lu-multiselect-panel-columns-col1-content {
-  .is-expanded & {
-    border: var(--commons-divider-width) solid var(--palettes-grey-100);
-  }
+	.is-expanded & {
+		border: var(--commons-divider-width) solid var(--palettes-grey-100);
+	}
 }
 
 .lu-multiselect-panel-columns-col1-content,
 .lu-multiselect-chips {
-  scroll-snap-type: y proximity;
-  outline: none;
-  & > * {
-    scroll-snap-align: center;
-  }
-  &:focus {
-    box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400)), var(--commons-boxShadow-XS),
-      0 0 0 4px var(--palettes-100, var(--palettes-primary-100));
-  }
+	scroll-snap-type: y proximity;
+	outline: none;
+	& > * {
+		scroll-snap-align: center;
+	}
+	&:focus {
+		box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400)), var(--commons-boxShadow-XS),
+			0 0 0 4px var(--palettes-100, var(--palettes-primary-100));
+	}
 }
 
 .lu-multiselect-search {
-  flex-grow: 1;
-  margin: 0;
+	flex-grow: 1;
+	margin: 0;
 }
 
 .lu-multiselect-selectall {
-  padding: var(--spacings-XS);
-  box-shadow: var(--commons-elevations-elevation-2);
-  font-weight: 600;
-  &:hover,
-  &:focus-within {
-    background-color: var(--palettes-grey-25);
-  }
+	padding: var(--spacings-XS);
+	box-shadow: var(--commons-elevations-elevation-2);
+	font-weight: 600;
+	&:hover,
+	&:focus-within {
+		background-color: var(--palettes-grey-25);
+	}
 }
 
 .lu-multiselect-chips {
-  overflow-y: auto;
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
-  padding: var(--spacings-XS);
-  border-top-left-radius: var(--commons-borderRadius-M);
-  border-top-right-radius: var(--commons-borderRadius-M);
+	overflow-y: auto;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	align-items: flex-start;
+	align-self: stretch;
+	padding: var(--spacings-XS);
+	border-top-left-radius: var(--commons-borderRadius-M);
+	border-top-right-radius: var(--commons-borderRadius-M);
 }
 
 .lu-multiselect-clear {
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  justify-content: flex-start;
-  border-radius: 0;
-  border-top: var(--commons-divider-border);
-  margin-top: auto;
+	display: flex;
+	align-items: center;
+	align-self: stretch;
+	justify-content: flex-start;
+	border-radius: 0;
+	border-top: var(--commons-divider-border);
+	margin-top: auto;
 }
 
 .lu-multiselect-panel-form {
-  display: flex;
-  gap: var(--spacings-XS);
+	display: flex;
+	gap: var(--spacings-XS);
 }
 
 .lu-multiselect-expandbutton {
-  @include media.max("S") {
-    display: none;
-  }
+	@include media.max('S') {
+		display: none;
+	}
 }
 
 .lu-multiselect-emptystate {
-  margin: auto;
+	margin: auto;
 }

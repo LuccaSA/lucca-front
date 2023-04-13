@@ -6,7 +6,7 @@ import { LuMultiDisplayerDirective, LuMultiSelectInputComponent } from '@lucca-f
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { allLegumes, FilterLegumesPipe, generateStory, LuSelectInputStoryComponent } from './select.utils';
+import { FilterLegumesPipe, LuSelectInputStoryComponent, allLegumes, generateStory } from './select.utils';
 
 export const Basic = generateStory(
 	'Basic',
@@ -279,6 +279,67 @@ export const ApiV4 = generateStory(
 	></lu-multi-select>
 	<span class="textfield-label">Label</span>
 </label>
+	`,
+	{
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
+	},
+);
+
+export const Responsive = generateStory(
+	'Responsive',
+	"Le panel s'ouvre en dessous du select quand il a assez de place, sinon il s'ouvre au dessus.",
+	`
+<div class="grid" style="height: 100vh;">
+	<div class="grid-6@mediaMinXS" style="height: 75vh;">
+		<label class="textfield">
+			<lu-multi-select
+				class="textfield-input"
+				[placeholder]="placeholder"
+				[options]="legumes"
+				[(ngModel)]="selectedLegumes"
+			>
+			</lu-multi-select>
+			<span class="textfield-label">Label</span>
+		</label>
+	</div>
+	<div class="grid-6@mediaMinXS" style="height: 75vh;">
+		<label class="textfield">
+			<lu-multi-select
+				class="textfield-input"
+				[placeholder]="placeholder"
+				[options]="legumes"
+				[(ngModel)]="selectedLegumes"
+			>
+			</lu-multi-select>
+			<span class="textfield-label">Label</span>
+		</label>
+	</div>
+	<div class="grid-6@mediaMinXS" style="height: 25vh;">
+		<label class="textfield">
+			<lu-multi-select
+				class="textfield-input"
+				[placeholder]="placeholder"
+				[options]="legumes"
+				[(ngModel)]="selectedLegumes"
+			>
+			</lu-multi-select>
+			<span class="textfield-label">Label</span>
+		</label>
+	</div>
+	<div class="grid-6@mediaMinXS" style="height: 25vh;">
+		<label class="textfield">
+			<lu-multi-select
+				class="textfield-input"
+				[placeholder]="placeholder"
+				[options]="legumes"
+				[(ngModel)]="selectedLegumes"
+			>
+			</lu-multi-select>
+			<span class="textfield-label">Label</span>
+		</label>
+	</div>
+</div>
 	`,
 	{
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],

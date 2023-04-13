@@ -1,14 +1,7 @@
-@import "_definitions";
+@import '_definitions';
 @include selectInputStyle;
 @include selectClearerStyle;
 
-/****
-A SUPPRIMER
-*/
-:host {
-	width: 450px;
-}
-/***/
 ::ng-deep {
 	.chip.lu-multiselect-chip {
 		padding-right: calc(var(--spacings-M) + var(--spacings-XS));
