@@ -191,6 +191,8 @@
 		position: absolute;
 		pointer-events: none;
 		bottom: var(--spacings-XS);
+		font-size: var(--sizes-S-lineHeight);
+		line-height: var(--sizes-M-lineHeight);
 		right: 0.33rem;
 	}
 
@@ -224,7 +226,7 @@
 @mixin searchS {
 	&::after {
 		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-M-fontSize);
+		font-size: var(--sizes-XS-lineHeight);
 	}
 }
 
@@ -237,7 +239,7 @@
 @mixin searchXS {
 	&::after {
 		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		font-size: var(--sizes-XS-lineHeight);
 		bottom: var(--spacings-XXS);
 	}
 }

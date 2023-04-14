@@ -1,20 +1,20 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { ALuPopupRef, ILuPopupRef } from '@lucca-front/ng/popup';
 import { LuModalClasses, luModalClasses, LuModalConfig, LuModalMode } from './modal-config.model';
-import { ILuModalContent } from './modal.model';
+import { ILuModalContent, LuModalContentResult } from './modal.model';
 
-export interface ILuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown> extends ILuPopupRef<T, D, R> {
+export interface ILuModalRef<D = unknown, R = unknown> extends ILuPopupRef<D, R> {
 	mode: LuModalMode;
 	modalClasses: LuModalClasses;
 }
 
-export interface IModalRefFactory<TComponent extends ILuModalContent = ILuModalContent, TConfig extends LuModalConfig = LuModalConfig> {
-	forge<T extends TComponent, C extends TConfig, D, R>(component: ComponentType<T>, config: C): ILuModalRef<T, D, R>;
+export interface IModalRefFactory {
+	forge<T extends ILuModalContent, C extends LuModalConfig, D>(component: ComponentType<T>, config: C): ILuModalRef<D, LuModalContentResult<T>>;
 }
 
 export abstract class ALuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = unknown, C extends LuModalConfig = LuModalConfig>
 	extends ALuPopupRef<T, D, R, C>
-	implements ILuModalRef<T, D, R>
+	implements ILuModalRef<D, R>
 {
 	public get mode(): LuModalMode {
 		return this._config.mode || 'modal';

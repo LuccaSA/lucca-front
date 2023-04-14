@@ -1,0 +1,224 @@
+%commons {
+	--smooth: 1px;
+	--component-notchbox-notch-radius-outer: var(--component-notchbox-notch-radius);
+	--component-notchbox-notch-padding: calc(
+		var(--component-notchbox-notch-height) + var(--component-notchbox-box-padding)
+	);
+	--component-notchbox-notch-percent-offset: var(--component-notchbox-notch-percent, 0) *
+		var(--component-notchbox-notch-radius-inner);
+	--component-notchbox-notch-percent-offset2: (1 - var(--component-notchbox-notch-percent, 0)) *
+		var(--component-notchbox-notch-radius-inner);
+	--component-notchbox-badge-anchor: calc(
+		var(--component-notchbox-badge-offset) * -1 +
+			(var(--component-notchbox-notch-height) - var(--component-notchbox-badge-height)) / 2
+	);
+}
+
+%mod-vertical {
+	@extend %commons;
+	--component-notchbox-box-min-height: calc(
+		var(--component-notchbox-notch-height) + var(--component-notchbox-box-padding) * 2
+	);
+	--component-notchbox-notch-gradient1-ref1: 100%;
+	--component-notchbox-notch-gradient1-ref2: calc(100% - var(--component-notchbox-notch-height));
+
+	--component-notchbox-notch-gradient2-anchor: left;
+	--component-notchbox-notch-gradient2-ref1: calc(
+		var(--component-notchbox-notch-position) - (var(--component-notchbox-notch-width)) / 2 -
+			var(--component-notchbox-notch-radius-outer) - var(--smooth) * 2
+	);
+	--component-notchbox-notch-gradient2-ref2: 100%;
+
+	--component-notchbox-notch-gradient3-anchor: right;
+	--component-notchbox-notch-gradient3-ref1: calc(
+		100% -
+			(
+				var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 +
+					var(--component-notchbox-notch-radius-outer) + var(--smooth) * 2
+			)
+	);
+	--component-notchbox-notch-gradient3-ref2: 100%;
+
+	--component-notchbox-notch-gradient4-x: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2 -
+			var(--component-notchbox-notch-radius-outer) - var(--smooth)
+	);
+
+	--component-notchbox-notch-gradient5-x: calc(
+		var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 +
+			var(--component-notchbox-notch-radius-outer) + var(--smooth)
+	);
+	--component-notchbox-notch-gradient5-y: var(--component-notchbox-notch-gradient4-y);
+
+	--component-notchbox-notch-gradient6-anchor: var(--component-notchbox-notch-gradient2-anchor);
+	--component-notchbox-notch-gradient6-ref1: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2
+	);
+	--component-notchbox-notch-gradient6-ref2: calc(100% - var(--component-notchbox-notch-radius-outer) * 2);
+
+	--component-notchbox-notch-gradient7-anchor: var(--component-notchbox-notch-gradient3-anchor);
+	--component-notchbox-notch-gradient7-ref1: calc(
+		100% - (var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2)
+	);
+	--component-notchbox-notch-gradient7-ref2: calc(100% - var(--component-notchbox-notch-radius-outer) * 2);
+
+	--component-notchbox-notch-gradient8-x: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2 +
+			var(--component-notchbox-notch-percent-offset) - var(--smooth) * 2
+	);
+
+	--component-notchbox-notch-gradient9-x: calc(
+		var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 -
+			var(--component-notchbox-notch-percent-offset2) + var(--smooth) * 2
+	);
+	--component-notchbox-notch-gradient9-y: var(--component-notchbox-notch-gradient8-y);
+
+	/** badge */
+	--component-notchbox-badge-actualWidth: var(--component-notchbox-badge-width);
+	--component-notchbox-badge-actualHeight: var(--component-notchbox-badge-height);
+	--component-notchbox-badge-left: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-badge-width) / 2
+	);
+}
+
+%mod-horizontal {
+	@extend %commons;
+	--component-notchbox-box-min-height: calc(
+		var(--component-notchbox-notch-width) + var(--component-notchbox-box-padding) * 2
+	);
+	--component-notchbox-notch-gradient1-ref1: calc(100% - var(--component-notchbox-notch-height));
+	--component-notchbox-notch-gradient1-ref2: 100%;
+
+	--component-notchbox-notch-gradient2-anchor: top;
+	--component-notchbox-notch-gradient2-ref1: 100%;
+	--component-notchbox-notch-gradient2-ref2: calc(
+		var(--component-notchbox-notch-position) -
+			(var(--component-notchbox-notch-width) / 2 + var(--component-notchbox-notch-radius-outer))
+	);
+
+	--component-notchbox-notch-gradient3-anchor: bottom;
+	--component-notchbox-notch-gradient3-ref1: 100%;
+	--component-notchbox-notch-gradient3-ref2: calc(
+		100% -
+			(
+				var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 +
+					var(--component-notchbox-notch-radius-outer) + var(--smooth) * 2
+			)
+	);
+
+	--component-notchbox-notch-gradient4-y: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2 -
+			var(--component-notchbox-notch-radius-outer) - var(--smooth)
+	);
+
+	--component-notchbox-notch-gradient5-x: var(--component-notchbox-notch-gradient4-x);
+	--component-notchbox-notch-gradient5-y: calc(
+		var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 +
+			var(--component-notchbox-notch-radius-outer) + var(--smooth)
+	);
+
+	--component-notchbox-notch-gradient6-anchor: var(--component-notchbox-notch-gradient2-anchor);
+	--component-notchbox-notch-gradient6-ref1: calc(100% - var(--component-notchbox-notch-radius-outer) * 2);
+	--component-notchbox-notch-gradient6-ref2: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2
+	);
+
+	--component-notchbox-notch-gradient7-anchor: var(--component-notchbox-notch-gradient3-anchor);
+	--component-notchbox-notch-gradient7-ref1: calc(100% - var(--component-notchbox-notch-radius-outer) * 2);
+	--component-notchbox-notch-gradient7-ref2: calc(
+		100% - (var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2)
+	);
+
+	--component-notchbox-notch-gradient8-y: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2 +
+			var(--component-notchbox-notch-percent-offset) - var(--smooth) * 2
+	);
+
+	--component-notchbox-notch-gradient9-x: var(--component-notchbox-notch-gradient8-x);
+	--component-notchbox-notch-gradient9-y: calc(
+		var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 -
+			var(--component-notchbox-notch-percent-offset2) + var(--smooth) * 2
+	);
+	/** badge */
+	--component-notchbox-badge-actualWidth: var(--component-notchbox-badge-height);
+	--component-notchbox-badge-actualHeight: var(--component-notchbox-badge-width);
+	--component-notchbox-badge-top: calc(
+		var(--component-notchbox-notch-position) - var(--component-notchbox-badge-width) / 2
+	);
+}
+
+@mixin top {
+	@extend %mod-vertical;
+	--component-notchbox-notch-gradient1-anchor: bottom;
+	--component-notchbox-notch-gradient4-y: calc(var(--component-notchbox-notch-radius-outer) + var(--smooth));
+
+	--component-notchbox-notch-gradient8-anchor: 100% 0%;
+	--component-notchbox-notch-gradient8-y: calc(
+		var(--component-notchbox-notch-height) - var(--component-notchbox-notch-radius-inner) + var(--smooth)
+	);
+	--component-notchbox-notch-gradient9-anchor: 0 0;
+	--component-notchbox-badge-top: var(--component-notchbox-badge-anchor);
+	--component-notchbox-box-padding-top: var(--component-notchbox-notch-padding);
+}
+
+@mixin bottom {
+	@extend %mod-vertical;
+	--component-notchbox-notch-gradient1-anchor: top;
+	--component-notchbox-notch-gradient4-y: calc(100% - (var(--component-notchbox-notch-radius-outer) + var(--smooth)));
+
+	--component-notchbox-notch-gradient8-anchor: 100% 100%;
+	--component-notchbox-notch-gradient8-y: calc(
+		100% - var(--component-notchbox-notch-height) + var(--component-notchbox-notch-radius-inner) - var(--smooth)
+	);
+	--component-notchbox-notch-gradient9-anchor: 0 100%;
+	--component-notchbox-badge-bottom: var(--component-notchbox-badge-anchor);
+	--component-notchbox-box-padding-bottom: var(--component-notchbox-notch-padding);
+}
+
+@mixin left {
+	@extend %mod-horizontal;
+	--component-notchbox-notch-gradient1-anchor: right;
+	--component-notchbox-notch-gradient4-x: calc(var(--component-notchbox-notch-radius-outer) + var(--smooth));
+	--component-notchbox-notch-gradient8-anchor: 0 100%;
+	--component-notchbox-notch-gradient8-x: calc(
+		var(--component-notchbox-notch-height) - var(--component-notchbox-notch-radius-inner) + var(--smooth)
+	);
+	--component-notchbox-notch-gradient9-anchor: 0 0;
+	--component-notchbox-badge-left: var(--component-notchbox-badge-anchor);
+	--component-notchbox-box-padding-left: var(--component-notchbox-notch-padding);
+}
+
+@mixin right {
+	@extend %mod-horizontal;
+	--component-notchbox-notch-gradient1-anchor: left;
+	--component-notchbox-notch-gradient4-x: calc(100% - (var(--component-notchbox-notch-radius-outer) + var(--smooth)));
+	--component-notchbox-notch-gradient8-anchor: 100% 100%;
+	--component-notchbox-notch-gradient8-x: calc(
+		100% - var(--component-notchbox-notch-height) + var(--component-notchbox-notch-radius-inner) - var(--smooth)
+	);
+	--component-notchbox-notch-gradient9-anchor: 100% 0;
+
+	--component-notchbox-badge-right: var(--component-notchbox-badge-anchor);
+	--component-notchbox-box-padding-right: var(--component-notchbox-notch-padding);
+}
+
+/** pre configured with DS parameters **/
+@mixin notchTop {
+	@include top;
+}
+
+@mixin notchBottom {
+	@include bottom;
+}
+
+@mixin notchLeft {
+	@include left;
+	--component-notchbox-badge-offset: 17px;
+	--component-notchbox-notch-height: 24px;
+}
+
+@mixin notchRight {
+	@include right;
+	--component-notchbox-badge-offset: 17px;
+	--component-notchbox-notch-height: 24px;
+}
