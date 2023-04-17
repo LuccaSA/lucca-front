@@ -113,6 +113,20 @@ In angular.json, we suggest to add a couple of entries to your paths:
 },
 ```
 
+## How to update
+
+In order to activate schematics when they are available, we recommend to update Lucca Front using this command line:
+
+```
+lucca angular update
+```
+
+To check available options:
+
+```
+lucca angular update --help
+```
+
 ## Storybook
 In order to work on Lucca Front, we use Storybook to display components.
 
