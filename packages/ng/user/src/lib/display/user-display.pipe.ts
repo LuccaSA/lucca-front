@@ -1,57 +1,45 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
 import { ILuUser } from '../user.model';
-import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LU_DEFAULT_DISPLAY_POLICY } from './display-format.model';
+import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
+
+function getFirstCharacter([firstCharacter]: string): string {
+	return firstCharacter ?? '';
+}
+
+const formatUser: Record<LuDisplayFormat, (user: ILuUser) => string> = {
+	[LuDisplayFullname.lastfirst]: ({ firstName, lastName }) => `${lastName} ${firstName}`,
+	[LuDisplayFullname.firstlast]: ({ firstName, lastName }) => `${firstName} ${lastName}`,
+	[LuDisplayFullname.first]: ({ firstName }) => firstName,
+	[LuDisplayFullname.last]: ({ lastName }) => lastName,
+	[LuDisplayInitials.lastfirst]: ({ firstName, lastName }) => `${getFirstCharacter(lastName)}${getFirstCharacter(firstName)}`,
+	[LuDisplayInitials.firstlast]: ({ firstName, lastName }) => `${getFirstCharacter(firstName)}${getFirstCharacter(lastName)}`,
+	[LuDisplayInitials.first]: ({ firstName }) => getFirstCharacter(firstName),
+	[LuDisplayInitials.last]: ({ lastName }) => getFirstCharacter(lastName),
+	[LuDisplayHybrid.lastIfirstFull]: ({ firstName, lastName }) => `${getFirstCharacter(lastName)}. ${firstName}`,
+	[LuDisplayHybrid.firstIlastFull]: ({ firstName, lastName }) => `${getFirstCharacter(firstName)}. ${lastName}`,
+	[LuDisplayHybrid.lastFullfirstI]: ({ firstName, lastName }) => `${lastName} ${getFirstCharacter(firstName)}.`,
+	[LuDisplayHybrid.firstFulllastI]: ({ firstName, lastName }) => `${firstName} ${getFirstCharacter(lastName)}.`,
+};
 
 /**
  * Displays a user name according to specified format. Supported formats: f for first name,
  * F for first initial, l for last name, L for last initial.
  */
 export function luUserDisplay(user: ILuUser, format: LuDisplayFormat = LuDisplayFullname.lastfirst): string {
-	let result = '';
-	if (!!user && !!user.firstName && !!user.lastName) {
-		switch (format) {
-			case LuDisplayFullname.lastfirst:
-				result = user.lastName + ' ' + user.firstName;
-				break;
-			case LuDisplayFullname.firstlast:
-				result = user.firstName + ' ' + user.lastName;
-				break;
-			case LuDisplayFullname.first:
-				result = user.firstName;
-				break;
-			case LuDisplayFullname.last:
-				result = user.lastName;
-				break;
-			case LuDisplayInitials.lastfirst:
-				result = user.lastName.charAt(0) + user.firstName.charAt(0);
-				break;
-			case LuDisplayInitials.firstlast:
-				result = user.firstName.charAt(0) + user.lastName.charAt(0);
-				break;
-			case LuDisplayInitials.first:
-				result = user.firstName.charAt(0);
-				break;
-			case LuDisplayInitials.last:
-				result = user.lastName.charAt(0);
-				break;
-			case LuDisplayHybrid.firstIlastFull:
-				result = user.firstName.charAt(0) + '. ' + user.lastName;
-				break;
-			case LuDisplayHybrid.lastIfirstFull:
-				result = user.lastName.charAt(0) + '. ' + user.firstName;
-				break;
-			case LuDisplayHybrid.lastFullfirstI:
-				result = user.lastName + ' ' + user.firstName.charAt(0) + '.';
-				break;
-			case LuDisplayHybrid.firstFulllastI:
-				result = user.firstName + ' ' + user.lastName.charAt(0) + '.';
-				break;
-			default:
-				break;
-		}
-	}
-	return result;
+	return formatUser[format](user);
 }
+
+/**
+ * Displays a user name according to specified format. Supported formats: f for first name,
+ * F for first initial, l for last name, L for last initial.
+ */
+export function luUsersDisplay(users: ILuUser[], { format, separator }: LuUserDisplayMultipleOptions): string {
+	return users.map((u) => luUserDisplay(u, format)).join(separator);
+}
+
+export type LuUserDisplaySingleOptions = LuDisplayFormat | { format: LuDisplayFormat };
+
+export type LuUserDisplayMultipleOptions = { format: LuDisplayFormat; separator: string };
 
 /**
  * Displays a user name according to specified format. Supported formats: f for first name,
@@ -61,7 +49,22 @@ export function luUserDisplay(user: ILuUser, format: LuDisplayFormat = LuDisplay
 export class LuUserDisplayPipe implements PipeTransform {
 	private readonly defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
 
-	public transform(user: ILuUser, format: LuDisplayFormat = this.defaultFormat): string {
-		return luUserDisplay(user, format);
+	public transform<T extends ILuUser>(user: T, options?: Partial<LuUserDisplaySingleOptions>): string;
+	public transform<T extends ILuUser>(users: T[], options?: Partial<LuUserDisplayMultipleOptions>): string;
+	public transform<T extends ILuUser>(userOrUsers: T | T[], options?: Partial<LuUserDisplaySingleOptions> | Partial<LuUserDisplayMultipleOptions>): string {
+		if (userOrUsers == null) {
+			throw new Error("Parameter 'userOrUsers' must be a user or a user array");
+		}
+
+		options = typeof options === 'string' ? { format: options } : options || {};
+
+		const format = options.format ?? this.defaultFormat;
+
+		if (Array.isArray(userOrUsers)) {
+			const separator = ('separator' in options ? options.separator : undefined) ?? ', ';
+			return luUsersDisplay(userOrUsers, { format, separator });
+		}
+
+		return luUserDisplay(userOrUsers, format);
 	}
 }
