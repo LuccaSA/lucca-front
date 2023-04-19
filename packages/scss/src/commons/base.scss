@@ -34,6 +34,24 @@
 				font-style: normal;
 				font-display: swap;
 			}
+
+			@font-face {
+				font-family: 'Source Sans Pro';
+				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-bold.woff2') format('woff2'),
+					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-bold.woff') format('woff');
+				font-weight: 700;
+				font-style: normal;
+				font-display: swap;
+			}
+
+			@font-face {
+				font-family: 'Source Sans Pro';
+				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-black.woff2') format('woff2'),
+					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-black.woff') format('woff');
+				font-weight: 900;
+				font-style: normal;
+				font-display: swap;
+			}
 		}
 
 		*,
