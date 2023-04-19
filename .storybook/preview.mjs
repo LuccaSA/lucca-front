@@ -30,8 +30,8 @@ export const parameters = {
 		// When stories are rendered inside an iframe, controls no longer affect displayed story
 		inlineStories: true,
 		page: DocumentationTemplate,
-		source: {
-			state: 'open',
+		canvas: {
+			sourceState: 'shown',
 		},
 	},
 	backgrounds: {

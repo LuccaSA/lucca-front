@@ -23,11 +23,6 @@ export class GlobalStoryWrapperComponent implements AfterContentInit, OnDestroy 
 		const isLastStory = lastStory && lastStory.contains(this.elementRef.nativeElement);
 
 		if (isLastStory) {
-			setTimeout(() => {
-				// Hack while docs.source.state: 'open' works again
-				document.querySelectorAll('.docblock-code-toggle:not(.docblock-code-toggle--expanded)').forEach((el) => (el instanceof HTMLButtonElement ? el.click() : undefined));
-			}, 0);
-
 			this.subscription = this.isLoaded$.subscribe(() => {
 				if (window.parent?.location?.hash) {
 					location.hash = window.parent.location.hash;
