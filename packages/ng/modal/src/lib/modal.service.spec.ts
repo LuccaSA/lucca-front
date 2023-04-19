@@ -1,7 +1,7 @@
 import { Component, Type } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
-import { BehaviorSubject } from 'rxjs';
+import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ILuModalContent } from './modal.model';
 import { LuModalModule } from './modal.module';
 import { LuModal } from './modal.service';
@@ -16,12 +16,30 @@ export class ModalContentComponent implements ILuModalContent {
 }
 
 @Component({
+	selector: 'lu-test-modal',
+	standalone: true,
+	template: `Content`,
+})
+export class ModalContentWithSubmitActionComponent implements ILuModalContent {
+	title = 'OriginalTitle';
+
+	submitAction() {
+		return of(42);
+	}
+}
+
+@Component({
 	selector: 'lu-test-opener',
 	template: `Content`,
 })
 export class ModalOpenerComponent {
 	constructor(public modal: LuModal) {}
 }
+
+/**
+ * Compiles when _input is of type T. Otherwise, throws a compile error.
+ */
+function assertOfType<T>(_input: T): void {}
 
 describe('LuModal', () => {
 	let spectator: Spectator<ModalOpenerComponent>;
@@ -60,5 +78,19 @@ describe('LuModal', () => {
 		// Assert
 		expect(beforeTitle).toBe('OriginalTitle');
 		expect(afterTitle).toBe('UpdatedTitle');
+	});
+
+	it('should infer correct return type when submitAction exists', () => {
+		const modal = spectator.inject(LuModal);
+		const result$ = modal.open(ModalContentWithSubmitActionComponent).onClose;
+
+		assertOfType<Observable<number>>(result$);
+	});
+
+	it('should infer correct return type when no submitAction', () => {
+		const modal = spectator.inject(LuModal);
+		const result$ = modal.open(ModalContentComponent).onClose;
+
+		assertOfType<Observable<never>>(result$);
 	});
 });
