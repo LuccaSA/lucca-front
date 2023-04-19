@@ -1,0 +1,9 @@
+<section class="contentSection">
+	<h4>Un utilisateur</h4>
+	<div>{{ users[0] | luUserDisplay : displayFormat }}</div>
+</section>
+
+<section class="contentSection u-marginTopM">
+	<h4>Plusieurs utilisateurs</h4>
+	<div>{{ users | luUserDisplay : { format: displayformat, separator } }}</div>
+</section>
