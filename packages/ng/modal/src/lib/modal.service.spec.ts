@@ -39,7 +39,9 @@ export class ModalOpenerComponent {
 /**
  * Compiles when _input is of type T. Otherwise, throws a compile error.
  */
-function assertOfType<T>(_input: T): void {}
+function assertOfType<T>(_input: T): void {
+	return;
+}
 
 describe('LuModal', () => {
 	let spectator: Spectator<ModalOpenerComponent>;
