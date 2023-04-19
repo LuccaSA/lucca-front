@@ -1,8 +1,6 @@
 import { setCompodocJson } from '@storybook/addon-docs/angular';
-import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 import docJson from './documentation.json';
 import DocumentationTemplate from './DocumentationTemplate.mdx';
-import { GlobalStoryWrapperComponent } from './wrapper.component';
 
 const docToCleanup = [...docJson.components, ...docJson.directives, ...docJson.pipes];
 
@@ -12,11 +10,6 @@ for (const doc of docToCleanup) {
 }
 
 setCompodocJson(docJson);
-
-export const decorators = [
-	moduleMetadata({ imports: [GlobalStoryWrapperComponent] }),
-	componentWrapperDecorator(GlobalStoryWrapperComponent),
-];
 
 export const parameters = {
 	actions: { argTypesRegex: '^on[A-Z].*' },
