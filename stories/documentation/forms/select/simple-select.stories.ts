@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
+import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 
 interface ILegume {
 	index: number;
@@ -46,42 +47,14 @@ const allLegumes = [
 	{ name: 'Topinambour', index: 31 },
 ];
 
-function generateStory(name: string, description: string, template: string, neededImports: { [key: string]: string[] }, args: StoryObj<StoryComponent>['args'] = {}): StoryObj<StoryComponent> {
-	return {
-		name,
-		args,
-		argTypes: {
-			clearable: { control: false },
-			disabled: { control: false },
-			loading: { control: false },
-			placeholder: { control: false },
-		},
-		render: (args) => ({
-			props: args,
-			template,
-		}),
-		parameters: {
-			docs: {
-				source: {
-					language: 'html',
-					type: 'code',
-					code: template,
-				},
-				description: {
-					story: `
-${description}
-
-**Imports nécessaires** :
-
-${Object.entries(neededImports)
-	.map(([module, imports]) => `\`import { ${imports.join(', ')} } from '${module}';\``)
-	.join('\n')}
-`,
-				},
-			},
-		},
-	};
-}
+const generateStory = getStoryGenerator<StoryComponent>({
+	argTypes: {
+		clearable: { control: false },
+		disabled: { control: false },
+		loading: { control: false },
+		placeholder: { control: false },
+	},
+});
 
 export const Basic = generateStory(
 	'Basic',
@@ -151,7 +124,9 @@ export const WithDisplayer = generateStory(
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective', 'LuDisplayerDirective'],
 	},
 	{
-		value: allLegumes[4],
+		args: {
+			value: allLegumes[4],
+		},
 	},
 );
 
@@ -177,7 +152,9 @@ export const WithClearer = generateStory(
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
 	},
 	{
-		value: allLegumes[4],
+		args: {
+			value: allLegumes[4],
+		},
 	},
 );
 
@@ -347,11 +324,7 @@ const meta: Meta<StoryComponent> = {
 		legumes: { control: false },
 	},
 	parameters: {
-		docs: {
-			description: {
-				component: Basic.parameters['docs'].description.story,
-			},
-		},
+		docs: useDocumentationStory(Basic),
 	},
 };
 
