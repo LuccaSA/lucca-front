@@ -54,18 +54,10 @@
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: var(--palettes-600);
-			box-shadow: var(--commons-boxShadow-XS);
-		}
-
-		&:focus {
-			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-200);
-			outline: none;
-			background-color: var(--palettes-600);
 		}
 
 		&:active {
 			background-color: var(--palettes-800);
-			box-shadow: 0 0 0 4px var(--palettes-300);
 		}
 	}
 }

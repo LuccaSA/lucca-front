@@ -10,3 +10,8 @@
 	white-space: nowrap #{$suffix};
 	contain: paint #{$suffix};
 }
+
+@mixin focus {
+	outline: 2px solid var(--palettes-primary-700);
+	outline-offset: 2px;
+}
