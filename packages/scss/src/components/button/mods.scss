@@ -18,16 +18,16 @@
 
 @mixin text {
 	background-color: transparent;
-	color: var(--palettes-700, var(--palettes-primary-700));
+	color: var(--palettes-700, var(--palettes-grey-700));
 	padding: var(--spacings-XS);
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
-			background-color: var(--palettes-50, var(--palettes-primary-50));
+			background-color: var(--palettes-50, var(--palettes-grey-50));
 		}
 
 		&:active {
-			background-color: var(--palettes-100, var(--palettes-primary-100));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
 		}
 	}
 }
