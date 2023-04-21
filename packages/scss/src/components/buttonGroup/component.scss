@@ -1,17 +1,12 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component {
 	gap: var(--commons-divider-width);
 	border-radius: var(--commons-borderRadius-M);
 	display: inline-flex;
 	list-style-type: none;
-	overflow: hidden;
 	padding: 0;
 	margin: 0;
-
-	&:not([disabled], .is-disabled) {
-		&:focus-within {
-			box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
-		}
-	}
 
 	.button {
 		border-radius: 0;
@@ -39,13 +34,12 @@
 
 		&:not([disabled], .is-disabled) {
 			&:hover,
-			&:focus {
+			&:focus-visible {
 				z-index: 1;
 			}
 
-			&:focus {
-				background-color: var(--palettes-600, var(--palettes-primary-600));
-				box-shadow: none;
+			&:focus-visible {
+				@include a11y.focus;
 			}
 		}
 	}
