@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin invert {
 	color: var(--colors-white-color);
 
@@ -17,39 +19,20 @@
 @mixin outlined {
 	box-shadow: 0 0 0 1px var(--palettes-grey-400);
 
-	& + & {
-		margin-left: 6px;
-	}
-
-	&:hover {
-		box-shadow: 0 0 0 1px var(--palettes-grey-400), var(--commons-boxShadow-XS);
-	}
-
-	&:focus {
-		box-shadow: 0 0 0 1px var(--palettes-primary-400), 0 0 0 4px var(--palettes-primary-100);
-	}
-
-	&:active {
-		background-color: var(--palettes-grey-200);
-		color: var(--palettes-grey-800);
-		box-shadow: 0 0 0 1px var(--palettes-primary-500), 0 0 0 4px var(--palettes-primary-200);
+	&:focus-visible {
+		@include a11y.focusVisible(3px);
 	}
 }
 
 @mixin delete {
 	&:hover {
 		background-color: var(--palettes-error-50);
-		color: var(--palettes-error-800);
-	}
-
-	&:focus {
-		background-color: var(--palettes-error-100);
-		color: var(--palettes-error-800);
+		color: var(--palettes-error-700);
 	}
 
 	&:active {
-		background-color: var(--palettes-error-200);
-		color: var(--palettes-error-800);
+		background-color: var(--palettes-error-100);
+		color: var(--palettes-error-700);
 	}
 }
 
@@ -58,16 +41,32 @@
 		box-shadow: 0 0 0 1px var(--palettes-error-400), var(--commons-boxShadow-XS);
 	}
 
-	&:focus {
-		box-shadow: 0 0 0 1px var(--palettes-error-400), 0 0 0 4px var(--palettes-error-100);
+	&:focus-visible {
+		background-color: var(--palettes-error-50);
+		box-shadow: 0 0 0 1px var(--palettes-error-400), var(--commons-boxShadow-XS);
+		color: var(--palettes-error-700);
 	}
 
 	&:active {
-		box-shadow: 0 0 0 1px var(--palettes-error-400), 0 0 0 4px var(--palettes-error-100);
+		background-color: var(--palettes-error-100);
+		color: var(--palettes-error-700);
 	}
 }
 
 @mixin S {
 	height: 2rem;
 	width: 2rem;
+
+	.lucca-icon {
+		font-size: var(--sizes-S-lineHeight);
+	}
+}
+
+@mixin XS {
+	height: 1.5rem;
+	width: 1.5rem;
+
+	.lucca-icon {
+		font-size: var(--sizes-XS-lineHeight);
+	}
 }
