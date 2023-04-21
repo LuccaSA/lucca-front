@@ -30,6 +30,10 @@
 			background-color: var(--palettes-100, var(--palettes-grey-100));
 		}
 	}
+
+	&:focus-visible {
+		background-color: var(--palettes-50, var(--palettes-grey-50));
+	}
 }
 
 @mixin textXS {
@@ -78,6 +82,7 @@
 		}
 
 		&:focus-visible {
+			background-color: rgba(255, 255, 255, 0.2);
 			color: var(--colors-white-color);
 		}
 	}

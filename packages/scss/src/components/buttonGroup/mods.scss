@@ -24,10 +24,6 @@
 			}
 		}
 	}
-
-	&:focus-within {
-		box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400)), 0 0 0 4px var(--palettes-200, var(--palettes-grey-200));
-	}
 }
 
 @mixin text {
