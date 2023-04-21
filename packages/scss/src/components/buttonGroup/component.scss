@@ -39,7 +39,7 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focus;
+				@include a11y.focusVisible;
 			}
 		}
 	}
