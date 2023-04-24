@@ -34,7 +34,7 @@
 		}
 
 		.radioButtons-item-label {
-			display: inline-flex;
+			display: flex;
 			align-items: center;
 			gap: var(--spacings-XS);
 			background-color: var(--colors-white-color);
