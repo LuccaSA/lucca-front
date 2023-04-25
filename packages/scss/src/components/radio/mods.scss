@@ -13,9 +13,15 @@
 
 		&::before,
 		&::after {
-			height: var(--sizes-S-fontSize);
-			width: var(--sizes-S-fontSize);
+			height: var(--components-radio-S-input-size);
+			width: var(--components-radio-S-input-size);
 			top: var(--components-radio-S-input-top);
+		}
+	}
+
+	.radio-input:checked ~ .radio-label {
+		&::after {
+			transform: scale(.5);
 		}
 	}
 }

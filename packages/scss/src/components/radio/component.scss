@@ -9,49 +9,50 @@
 
 		&:not(:disabled) ~ .radio-label {
 			&:hover {
+
 				&::before {
-					border-color: var(--palettes-600, var(--components-radio-input-border-hover));
+					border-color: var(--palettes-grey-600);
+				}
+			}
+
+			&:active {
+				&::before {
+					border-color: var(--palettes-grey-800);
 				}
 			}
 		}
 
 		&:checked ~ .radio-label {
 			&::before {
-				border-color: var(--palettes-700, var(--components-radio-default-palette-700));
+				border-color: var(--palettes-700, var(--palettes-primary-700));
 			}
 
 			&::after {
-				transform: scale(0.55);
-				background-color: var(--palettes-700, var(--components-radio-default-palette-700));
+				transform: scale(.6);
+				background-color: var(--palettes-700, var(--palettes-primary-700));
 			}
 		}
 
 		&:not(:disabled):checked ~ .radio-label {
 			&:hover {
 				&::before {
-					border-color: var(--palettes-600, var(--components-radio-input-border-hover));
+					border-color: var(--palettes-700, var(--palettes-primary-700));
 				}
 
 				&::after {
-					background-color: var(--palettes-600, var(--components-radio-input-border-hover));
+					background-color: var(--palettes-700, var(--palettes-primary-700));
 				}
 			}
 		}
 
-		&:focus ~ .radio-label {
-			&::before {
-				box-shadow: 0 0 0 4px var(--palettes-200, var(--components-radio-default-palette-200));
-				border-color: var(--palettes-600, var(--components-radio-input-border-hover));
-			}
-
-			&::after {
-				background-color: var(--palettes-600, var(--components-radio-input-border-hover));
-			}
+		&:focus-visible ~ .radio-label:before {
+			@include a11y.focusVisible;
 		}
 	}
 
 	.radio-label {
-		line-height: var(--components-radio-label-line-height);
+		color: var(--palettes-grey-800);
+		line-height: var(--sizes-M-lineHeight);
 		padding: var(--components-radio-label-padding);
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: color;
@@ -64,7 +65,7 @@
 			height: var(--components-radio-input-size);
 			width: var(--components-radio-input-size);
 			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: color, transform, border;
+			transition-property: background-color, color, transform, border;
 			position: absolute;
 			border-radius: 50%;
 			left: 0;
@@ -73,7 +74,7 @@
 
 		&::before {
 			background-color: var(--colors-white-color);
-			border-color: var(--components-checkbox-input-border-color);
+			border-color: var(--palettes-grey-700);
 			border-width: 2px;
 			border-style: solid;
 		}
