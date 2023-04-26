@@ -15,8 +15,12 @@
 		&::after {
 			height: var(--components-radio-S-input-size);
 			width: var(--components-radio-S-input-size);
-			top: var(--components-radio-S-input-top);
 		}
+	}
+
+	.radio-label-helper {
+		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--sizes-XS-fontSize);
 	}
 
 	.radio-input:checked ~ .radio-label {

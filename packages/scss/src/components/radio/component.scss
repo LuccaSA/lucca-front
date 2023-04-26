@@ -56,7 +56,7 @@
 		padding: var(--components-radio-label-padding);
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: color;
-		display: inline-block;
+		display: block;
 		cursor: pointer;
 
 		&::before,
@@ -83,5 +83,11 @@
 			color: transparent;
 			transform: scale(0);
 		}
+	}
+
+	.radio-label-helper {
+		color: var(--palettes-grey-700);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 	}
 }
