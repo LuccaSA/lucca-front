@@ -42,7 +42,7 @@
 			font-size: var(--components-radioButtons-font-size);
 			line-height: var(--components-radioButtons-line-height);
 			color: var(--palettes-grey-700);
-			box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
+			box-shadow: inset 0 0 0 var(--commons-divider-width) var(--palettes-grey-200);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, color, box-shadow;
 			overflow: hidden;
