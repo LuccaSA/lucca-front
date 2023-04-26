@@ -14,7 +14,7 @@
 			align-items: flex-start;
 			cursor: pointer;
 			gap: var(--spacings-XS);
-
+			vertical-align: top;
 
 			&::before {
 				@include icon.generate('confirm');
@@ -35,7 +35,7 @@
 				display: block;
 				text-align: center;
 				margin-top: 2px;
-				transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0); // Fix box-shadow artifacts
 			}
 
 			&:hover {
@@ -49,6 +49,12 @@
 					box-shadow: inset 0 0 0 2px var(--palettes-grey-800);
 				}
 			}
+		}
+
+		.checkbox-label-helper {
+			color: var(--palettes-grey-600);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
 		}
 
 		.checkbox-input {
@@ -80,7 +86,7 @@
 
 			&:focus ~ .checkbox-label {
 				&::before {
-
+					@include a11y.focusVisible;
 				}
 			}
 		}
