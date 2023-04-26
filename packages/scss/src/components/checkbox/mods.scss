@@ -4,20 +4,6 @@
 	margin-right: var(--spacings-M);
 }
 
-@mixin L {
-	line-height: var(--sizes-L-lineHeight);
-
-	.checkbox-label {
-		&::before {
-			height: 1.25rem;
-			width: 1.25rem;
-			font-size: 1.25rem;
-			line-height: 1rem;
-			margin-top: .125rem;
-		}
-	}
-}
-
 @mixin S {
 	line-height: var(--sizes-S-lineHeight);
 
