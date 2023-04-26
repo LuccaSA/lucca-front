@@ -17,7 +17,7 @@
 }
 
 @mixin outlined {
-	box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
 	background-color: var(--colors-white-color);
 
 	&:focus-visible {
@@ -39,12 +39,12 @@
 
 @mixin outlinedDelete {
 	&:hover {
-		box-shadow: 0 0 0 1px var(--palettes-error-400), var(--commons-boxShadow-XS);
+		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
 	}
 
 	&:focus-visible {
 		background-color: var(--palettes-error-50);
-		box-shadow: 0 0 0 1px var(--palettes-error-400), var(--commons-boxShadow-XS);
+		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
 		color: var(--palettes-error-700);
 	}
 
