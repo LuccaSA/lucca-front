@@ -8,8 +8,12 @@
 		@include icon;
 	}
 
-	&.mod-noUnderline {
-		@include noUnderline;
+	&.mod-decorationNone {
+		@include decorationNone;
+	}
+
+	&.mod-decorationHover {
+		@include decorationHover;
 	}
 
 	&:is(:disabled, .is-disabled) {
