@@ -84,7 +84,7 @@
 				}
 			}
 
-			&:focus ~ .checkbox-label {
+			&:focus-visible ~ .checkbox-label {
 				&::before {
 					@include a11y.focusVisible;
 				}
