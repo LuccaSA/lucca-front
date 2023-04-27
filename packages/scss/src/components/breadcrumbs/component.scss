@@ -20,7 +20,8 @@
 			&:not(:first-child) {
 				&::before {
 					@include icon.generate('chevron_east');
-
+					color: var(--palettes-grey-600);
+					font-size: var(--sizes-XS-lineHeight);
 					padding: 0 var(--spacings-XXS);
 				}
 			}
@@ -38,7 +39,8 @@
 			cursor: pointer;
 
 			&:hover {
-				color: var(--palettes-grey-800);
+				color: var(--palettes-grey-600);
+				text-decoration: underline;
 			}
 
 			&:focus-visible {
