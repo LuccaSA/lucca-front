@@ -14,5 +14,8 @@
 @mixin focusVisible($offset: 2px, $borderRadius: 0) {
 	outline: 2px solid var(--palettes-primary-700);
 	outline-offset: $offset;
-	border-radius: $borderRadius;
+
+	@if $borderRadius != false {
+	  border-radius: $borderRadius;
+	}
 }
