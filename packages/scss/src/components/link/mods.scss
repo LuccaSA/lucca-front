@@ -6,3 +6,15 @@
 		line-height: var(--sizes-XS-lineHeight);
 	}
 }
+
+@mixin decorationNone {
+	text-decoration: none;
+}
+
+@mixin decorationHover {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
