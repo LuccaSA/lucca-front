@@ -11,7 +11,7 @@
 	contain: paint #{$suffix};
 }
 
-@mixin focusVisible($offset: 2px, $borderRadius: 0) {
+@mixin focusVisible($offset: 2px, $borderRadius: false) {
 	outline: 2px solid var(--palettes-primary-700);
 	outline-offset: $offset;
 
