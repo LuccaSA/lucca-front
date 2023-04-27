@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/angular';
 
 interface LinkBasicStory {
 		disabled: boolean;
+		noUnderline: boolean;
 }
 
 export default {
@@ -13,14 +14,21 @@ export default {
 				type: 'boolean',
 			},
 		},
+		noUnderline: {
+			options: ['', 'mod-noUnderline'],
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
 function getTemplate(args: LinkBasicStory): string {
 	const disabled = args.disabled ? `is-disabled` : '';
+	const noUnderline = args.noUnderline ? `mod-noUnderline` : '';
 	return `
-<a href="#" class="link ${disabled}">Lien</a>
-<a class="link mod-icon ${disabled}" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-outside"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>
+<a href="#" class="link ${disabled} ${noUnderline}">Lien</a>
+<a class="link mod-icon ${noUnderline} ${disabled}" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-outside"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>
 	`;
 }
 
@@ -39,4 +47,4 @@ const Template: Story<LinkBasicStory> = (args: LinkBasicStory) => ({
 });
 
 export const BasicLink = Template.bind({});
-BasicLink.args = { disabled: false };
+BasicLink.args = { disabled: false, noUnderline: false };

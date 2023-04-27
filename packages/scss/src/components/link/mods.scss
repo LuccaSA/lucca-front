@@ -6,3 +6,7 @@
 		line-height: var(--sizes-XS-lineHeight);
 	}
 }
+
+@mixin noUnderline {
+	text-decoration: none;
+}

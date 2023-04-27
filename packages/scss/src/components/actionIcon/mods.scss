@@ -21,7 +21,7 @@
 	background-color: var(--colors-white-color);
 
 	&:focus-visible {
-		@include a11y.focusVisible(3px);
+		@include a11y.focusVisible($offset: 3px);
 	}
 }
 

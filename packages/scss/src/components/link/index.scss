@@ -8,6 +8,10 @@
 		@include icon;
 	}
 
+	&.mod-noUnderline {
+		@include noUnderline;
+	}
+
 	&:is(:disabled, .is-disabled) {
 		@include disabled;
 	}
