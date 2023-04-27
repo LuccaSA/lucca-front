@@ -36,10 +36,10 @@ class MyModule {}
 )}
 `;
 
-export const Select = generateStory(
-	'Select',
+export const Select = generateStory({
+	name: 'Select',
 	description,
-	`
+	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input"
 		[(ngModel)]="selectedDate"
@@ -55,29 +55,29 @@ export const Select = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
 	},
-);
+});
 
-export const Minimal = generateStory(
-	'Minimal',
-	'',
-	`
+export const Minimal = generateStory({
+	name: 'Minimal',
+	description: '',
+	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate"></lu-date-select>
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
 	},
-);
+});
 
-export const SelectWithDisplayer = generateStory(
-	'SelectWithDisplayer',
-	"Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
-	`
+export const SelectWithDisplayer = generateStory({
+	name: 'SelectWithDisplayer',
+	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate">
 		<ng-container *luDisplayer="let value">Birthday: {{ value | date : 'LL' }}</ng-container>
@@ -85,16 +85,16 @@ export const SelectWithDisplayer = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/input': ['LuInputDisplayerDirective'],
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
 	},
-);
+});
 
-export const SelectMonthWithDisplayer = generateStory(
-	'SelectMonthWithDisplayer',
-	"Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
-	`
+export const SelectMonthWithDisplayer = generateStory({
+	name: 'SelectMonthWithDisplayer',
+	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" [granularity]="granularity">
 		<ng-container *luDisplayer="let value">start of {{ value | date : 'MM/YYYY' }}</ng-container>
@@ -102,16 +102,16 @@ export const SelectMonthWithDisplayer = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/input': ['LuInputDisplayerDirective'],
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
 	},
-	{
+	storyPartial: {
 		args: {
 			granularity: ELuDateGranularity.month,
 		},
 	},
-);
+});
 
 const today = new LuStringDateAdapter('en').forgeToday();
 
