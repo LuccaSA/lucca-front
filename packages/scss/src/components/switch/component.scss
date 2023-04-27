@@ -57,5 +57,11 @@
 				width: var(--components-switch-slider-size);
 			}
 		}
+
+		.switch-label-helper {
+			color: var(--palettes-grey-600);
+			font-size: var(--components-switch-helper-fontSize);
+			line-height: var(--components-switch-helper-lineHeight);
+		}
 	}
 }
