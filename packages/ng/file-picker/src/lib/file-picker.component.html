@@ -1,0 +1,66 @@
+<label class="file" [class.mod-S]="modSmall">
+	<input
+		aria-describedby="filePickerError"
+		required="required"
+		class="file-input"
+		[class.is-uploading]="uploadState === 'Loading'"
+		[class.is-uploaded]="uploadState === 'Success'"
+		[attr.aria-invalid]="uploadState === 'Error'"
+		luClassOnDragOver
+		type="file"
+		[accept]="accept"
+		(change)="onFileSelected($event)"
+	/>
+	<span role="text" class="file-content">
+		<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
+		<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+
+		<ng-container [ngSwitch]="uploadState">
+			<ng-container *ngSwitchCase="'Idle'">
+				<span class="file-titleName">
+					<span class="file-title u-marginBottom0"> {{ intl.FILE_PICKER_TITLE_DRAG_AND_DROP }} </span>
+					<span class="file-name">''</span>
+				</span>
+				<span class="file-or">{{ intl.FILE_PICKER_OR }}</span>
+				<span class="file-button button mod-outline"> {{ intl.FILE_PICKER_BUTTON_SELECT_FILE }} </span>
+				<span class="file-formats u-marginTopXS" [innerHTML]="authorizedFormatsText"></span>
+				<span class="file-formats u-marginTopXS" [innerHTML]="authorizedMaxSizeText"></span>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'Loading'">
+				<span class="file-titleName">
+					<span class="file-title u-marginBottom0"> {{ intl.FILE_PICKER_TITLE_UPLOADING }} </span>
+					<span class="file-name">{{form.value?.name}}</span>
+				</span>
+				<span class="file-progress progress">
+					<span class="progress-bar" [style.width.%]="progress"></span>
+				</span>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'Success'">
+				<span class="file-titleName">
+					<span class="file-title u-marginBottom0"> {{ intl.FILE_PICKER_TITLE_UPLOADED }} </span>
+					<span class="file-name">{{form.value?.name}}</span>
+				</span>
+				<span class="file-or">{{ intl.FILE_PICKER_OR }}</span>
+				<span class="file-button button mod-outline"> {{ intl.FILE_PICKER_BUTTON_RESELECT_FILE }} </span>
+
+				<span class="u-mask">–</span>
+				<span class="file-formats u-marginTopXS" [innerHTML]="authorizedFormatsText"></span>
+				<span class="file-formats u-marginTopXS" [innerHTML]="authorizedMaxSizeText"></span>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'Error'">
+				<span class="file-titleName">
+					<span class="file-title u-marginBottom0"> {{ errorMessage }} </span>
+					<span class="file-name">{{form.value?.name}}</span>
+				</span>
+				<span class="file-or">{{ intl.FILE_PICKER_OR_OTHER_FILE }}</span>
+				<span class="file-button button mod-outline"> {{ intl.FILE_PICKER_BUTTON_RESELECT_FILE }} </span>
+				<span class="u-mask">–</span>
+				<span class="file-formats u-marginTopXS" [innerHTML]="authorizedFormatsText"></span>
+				<span class="file-formats u-marginTopXS" [innerHTML]="authorizedMaxSizeText"></span>
+			</ng-container>
+		</ng-container>
+	</span>
+</label>
