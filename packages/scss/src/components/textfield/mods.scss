@@ -383,6 +383,7 @@
 		padding: var(--components-field-framed-top-padding) var(--components-field-framed-side-padding)
 			var(--components-field-framed-bottom-padding);
 		line-height: var(--sizes-M-lineHeight);
+		outline: none;
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: var(--colors-white-color);
@@ -397,6 +398,8 @@
 		top: 0;
 		z-index: 10;
 		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--sizes-S-fontSize);
+		color: var(--palettes-grey-600);
 	}
 
 	.textfield-messages,
