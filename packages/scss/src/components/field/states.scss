@@ -37,7 +37,7 @@
 @mixin inputState($state) {
 	&:not(:disabled, .is-disabled) {
 			background-color: var(--palettes-#{$state}-50);
-			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-600);
 
 		~ .textfield-label,
 		~ .checkboxesfield-label,
