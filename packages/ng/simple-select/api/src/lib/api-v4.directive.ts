@@ -17,7 +17,7 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 	}
 
 	@Input()
-	public set sort(value: string) {
+	public set sort(value: string | null) {
 		this.sort$.next(value);
 	}
 
@@ -27,7 +27,7 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 	}
 
 	protected url$ = new ReplaySubject<string>(1);
-	protected sort$ = new BehaviorSubject<string>('name,asc');
+	protected sort$ = new BehaviorSubject<string | null>('name,asc');
 	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
 
 	protected httpClient = inject(HttpClient);
@@ -35,7 +35,7 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 	protected override params$ = combineLatest([this.filters$, this.sort$, this.clue$]).pipe(
 		map(([filters, sort, clue]) => ({
 			...filters,
-			sort,
+			...(sort ? { sort } : {}),
 			...(clue ? { search: encodeURIComponent(clue) } : {}),
 		})),
 	);

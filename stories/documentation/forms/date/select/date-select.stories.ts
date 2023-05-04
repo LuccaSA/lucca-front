@@ -1,85 +1,137 @@
-import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
-import { LuDateModule, LuDateSelectInputComponent } from '@lucca-front/ng/date';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
-
-@Component({
-	selector: 'date-select-stories',
-	template: `
-		<label class="textfield">
-			<lu-date-select class="textfield-input" [ngModel]="model" (ngModelChange)="modelChange($event)"></lu-date-select>
-		</label>
-	`,
-})
-class DateSelectStory {
-	@Input() model: string = '2021-05-06';
-
-	modelChange(value: string) {
-		// debugger;
-		console.log('LuDateSelect', { value });
-	}
-}
-
-export default {
-	title: 'Documentation/Forms/Date/Select',
-	component: LuDateSelectInputComponent,
-	decorators: [
-		componentWrapperDecorator(DateSelectStory),
-		moduleMetadata({
-			declarations: [DateSelectStory],
-			imports: [LuDateModule, BrowserAnimationsModule, FormsModule],
-			providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
-		}),
-	],
-} as Meta;
-
-const template: Story<DateSelectStory> = (props: DateSelectStory) => ({});
-
-const code = `
-/*
-	1. Importer LuDateSelectInputComponent et BrowserAnimationsModule
-	   provider un ALuDateAdapter
-*/
+import { ALuDateAdapter, ELuDateGranularity, LuStringDateAdapter } from '@lucca-front/ng/core';
 import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
+import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
+import { Meta, moduleMetadata } from '@storybook/angular';
+import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+
+type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string };
+
+const generateStory = getStoryGenerator<StoryComponent>({
+	argTypes: {
+		selectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' } } },
+		startOn: { control: { type: 'text' } },
+		min: { control: { type: 'text' } },
+		max: { control: { type: 'text' } },
+		multiple: { control: false },
+	},
+});
+
+const description = `Avant d'utiliser ce composant, il faut fournir un \`ALuDateAdapter\` parmis ceux fournis (\`LuNativeDateAdapter\`, \`LuStringDateAdapter\`).
+De plus, \`BrowserAnimationsModule\` est également requis.
+
+${generateMarkdownCodeBlock(
+	'ts',
+	`
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 
 @NgModule({
-	imports: [LuDateSelectInputComponent, BrowserAnimationsModule],
+	imports: [BrowserAnimationsModule],
 	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
 })
-class DateSelectStoriesModule {}
+class MyModule {}
+`,
+)}
+`;
 
-/* 2. Utiliser lu-date-select */
-@Component({
-	selector: 'date-select-story',
-	template: \`
-	<label class="textfield">
-		<lu-date-select
-			class="textfield-input"
-			[ngModel]="date"
-			[min]="minDate"
-			[max]="maxDate"
-			[hideClearer]="true"
-			(ngModelChange)="doSomething($event)"
-		>
-		</lu-date-select>
-		<span class="textfield-label u-mask" translate="KEY_FOR_ACCESSIBILITY"></span>
-	</label>
-	\`
-})`;
+export const Select = generateStory({
+	name: 'Select',
+	description,
+	template: `
+<label class="textfield">
+	<lu-date-select class="textfield-input"
+		[(ngModel)]="selectedDate"
+		[granularity]="granularity"
+		[min]="min"
+		[max]="max"
+		[placeholder]="placeholder"
+		[startOn]="startOn"
+		[disabled]="disabled"
+		[hideClearer]="hideClearer"
+		[pickerOverlap]="pickerOverlap"
+	></lu-date-select>
+	<span class="textfield-label">Label</span>
+</label>
+	`,
+	neededImports: {
+		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+});
 
-export const Select = template.bind({});
-Select.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
-	docs: {
-		source: {
-			language: 'ts',
-			type: 'code',
-			code,
+export const Minimal = generateStory({
+	name: 'Minimal',
+	description: '',
+	template: `
+<label class="textfield">
+	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate"></lu-date-select>
+	<span class="textfield-label">Label</span>
+</label>
+	`,
+	neededImports: {
+		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+});
+
+export const SelectWithDisplayer = generateStory({
+	name: 'SelectWithDisplayer',
+	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	template: `
+<label class="textfield">
+	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate">
+		<ng-container *luDisplayer="let value">Birthday: {{ value | date : 'LL' }}</ng-container>
+	</lu-date-select>
+	<span class="textfield-label">Label</span>
+</label>
+	`,
+	neededImports: {
+		'@lucca-front/ng/input': ['LuInputDisplayerDirective'],
+		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+});
+
+export const SelectMonthWithDisplayer = generateStory({
+	name: 'SelectMonthWithDisplayer',
+	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	template: `
+<label class="textfield">
+	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" [granularity]="granularity">
+		<ng-container *luDisplayer="let value">start of {{ value | date : 'MM/YYYY' }}</ng-container>
+	</lu-date-select>
+	<span class="textfield-label">Label</span>
+</label>
+	`,
+	neededImports: {
+		'@lucca-front/ng/input': ['LuInputDisplayerDirective'],
+		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			granularity: ELuDateGranularity.month,
 		},
 	},
+});
+
+const today = new LuStringDateAdapter('en').forgeToday();
+
+const meta: Meta<StoryComponent> = {
+	title: 'Documentation/Forms/Date/Select',
+	component: LuDateSelectInputComponent,
+	decorators: [
+		moduleMetadata({
+			imports: [LuDateSelectInputComponent, BrowserAnimationsModule, FormsModule, LuInputDisplayerDirective],
+			providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
+		}),
+	],
+	args: {
+		granularity: ELuDateGranularity.day,
+		selectedDate: today,
+		startOn: today,
+	},
+	parameters: {
+		docs: useDocumentationStory(Select),
+	},
 };
+
+export default meta;
