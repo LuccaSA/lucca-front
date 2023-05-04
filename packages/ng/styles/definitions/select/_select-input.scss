@@ -5,7 +5,7 @@
 	:host {
 		--components-select-chip-background: var(--palettes-primary-700);
 		--components-select-chip-text: var(--colors-white-color);
-		--components-select-input-padding-horizontal: .75rem;
+		--components-select-input-padding-horizontal: var(--spacings-XS);
 		--components-select-input-padding-vertical: var(--spacings-XS);
 		--components-select-framed-color: var(--palettes-grey-500);
 		--components-select-framed-color50: var(--palettes-grey-50);
@@ -73,7 +73,7 @@
 
 	.lu-select-suffix {
     position: absolute;
-    bottom: var(--spacings-XS);
+    bottom: .75rem;
     right: 2.25rem;
 	}
 
