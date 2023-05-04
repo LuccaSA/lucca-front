@@ -19,7 +19,7 @@
 
 		cursor: pointer;
 		outline: none;
-		padding: 0;
+		padding: 0 !important;
 
 		&::after {
 			@include icon.generate('arrow_south');
@@ -135,10 +135,12 @@
 
 		&::after {
 			line-height: var(--sizes-XS-lineHeight);
+			font-size:var(--sizes-S-lineHeight);
 		}
 
 		.lu-select-suffix {
-			bottom: var(--spacings-XXS);
+			bottom: .625rem;
+			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {

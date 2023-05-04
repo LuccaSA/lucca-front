@@ -24,10 +24,6 @@
 		&:hover {
 			background-color: var(--palettes-grey-600);
 		}
-
-		&:focus {
-
-		}
 	}
 
 	.lucca-icon {
@@ -37,5 +33,16 @@
 	// Disabled
 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
 		display: none;
+	}
+
+	:host-context(.textfield.mod-S) {
+		.clearer {
+			width: .75rem;
+			height: .75rem;
+
+			.lucca-icon {
+				font-size: .75rem;
+			}
+		}
 	}
 }
