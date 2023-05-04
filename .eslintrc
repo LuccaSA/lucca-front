@@ -54,7 +54,7 @@
 					}
 				],
 				"curly": "error",
-				"@delagen/deprecation/deprecation": "warn",
+				"deprecation/deprecation": "warn",
 				"no-restricted-imports": [
 					"error",
 					{
