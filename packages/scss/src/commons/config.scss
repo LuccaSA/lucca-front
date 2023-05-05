@@ -163,7 +163,7 @@ $borderRadius: (
 	'L': 8px,
 );
 
-$elevations: (
+$elevations: ( // deprecated
 	'1': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
 	'2':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.05)',
@@ -178,13 +178,13 @@ $elevations: (
 );
 
 $boxShadows: (
-	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
+	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)', // deprecated
 	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
-	'S': 'var(--commons-elevations-elevation-2)',
-	'M': 'var(--commons-elevations-elevation-3)',
-	'L': 'var(--commons-elevations-elevation-4)',
-	'XL': 'var(--commons-elevations-elevation-5)',
-	'XXL': 'var(--commons-elevations-elevation-6)',
+	'S': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
+	'M': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-grey-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-grey-900-rgb), 0.06)',
+	'L': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-grey-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-grey-900-rgb), 0.08)',
+	'XL': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
+	'XXL': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
 );
 
 $disabled: (
