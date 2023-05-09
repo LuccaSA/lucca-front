@@ -26,13 +26,13 @@
 		"Sandy Goldscheider <sgoldscheider@lucca.fr>"
 	],
 	"peerDependencies": {
-		"@angular/common": "^15.0.0",
-		"@angular/core": "^15.0.0",
-		"@angular/cdk": "^15.0.0",
+		"@angular/common": "^16.0.0",
+		"@angular/core": "^16.0.0",
+		"@angular/cdk": "^16.0.0",
 		"@lucca-front/icons": "*",
 		"@lucca-front/scss": "*",
-		"@types/dompurify": "^2.3.0",
-		"dompurify": "^2.3.0",
+		"@types/dompurify": "^3.0.0",
+		"dompurify": "^3.0.0",
 		"rxjs": "^6.0.0 || ^7.0.0"
 	},
 	"bugs": {
