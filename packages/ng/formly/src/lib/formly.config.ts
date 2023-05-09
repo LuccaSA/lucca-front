@@ -19,14 +19,13 @@ import {
 	LuFormlyWrapperError,
 	LuFormlyWrapperHelper,
 	LuFormlyWrapperIcon,
-	// LuFormlyErrorMessage,
 	LuFormlyWrapperRadiosfieldLayout,
 	LuFormlyWrapperSuffix,
 	LuFormlyWrapperTextfieldLayout,
-	TemplateError,
-	TemplateHelper,
-	TemplateIcon,
-	TemplateSuffix,
+	templateErrorExtension,
+	templateHelperExtension,
+	templateIconExtension,
+	templateSuffixExtension,
 } from './wrappers/index';
 
 export const LU_FORMLY_CONFIG: ConfigOption = {
@@ -96,10 +95,10 @@ export const LU_FORMLY_CONFIG: ConfigOption = {
 		{ name: 'icon', component: LuFormlyWrapperIcon },
 		{ name: 'error', component: LuFormlyWrapperError },
 	],
-	manipulators: [
-		{ class: TemplateError, method: 'run' }, // fifth
-		{ class: TemplateHelper, method: 'run' }, // fourth
-		{ class: TemplateSuffix, method: 'run' }, // third
-		{ class: TemplateIcon, method: 'run' }, // second
+	extensions: [
+		{ name: 'helper', extension: templateHelperExtension }, // fifth
+		{ name: 'error', extension: templateErrorExtension }, // fourth
+		{ name: 'suffix', extension: templateSuffixExtension }, // third
+		{ name: 'icon', extension: templateIconExtension }, // second
 	],
 };

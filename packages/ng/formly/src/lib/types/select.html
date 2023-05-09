@@ -4,15 +4,15 @@
 	[formlyAttributes]="field"
 	(focus)="focus()"
 	(blur)="blur()"
-	[multiple]="to['multiple']"
-	[placeholder]="to.placeholder"
+	[multiple]="props['multiple']"
+	[placeholder]="props.placeholder"
 >
 	<ng-container *luDisplayer="let option">
-		<span [class.chip]="to['multiple']" [class.mod-unkillable]="to['multiple']">{{ option.name }}</span>
+		<span [class.chip]="props['multiple']" [class.mod-unkillable]="props['multiple']">{{ option.name }}</span>
 	</ng-container>
 	<lu-option-picker>
 		<lu-option *ngFor="let option of _options" [value]="option"> {{ option.name }} </lu-option>
 	</lu-option-picker>
-	<lu-input-clearer *ngIf="!to.required && !to['multiple']"></lu-input-clearer>
+	<lu-input-clearer *ngIf="!props.required && !props['multiple']"></lu-input-clearer>
 </lu-select>
-<span class="textfield-label">{{ to.label }}</span>
+<span class="textfield-label">{{ props.label }}</span>

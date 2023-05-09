@@ -1,4 +1,4 @@
 <ng-container #fieldComponent></ng-container>
 <div class="textfield-messages" *ngIf="formControl.touched && formControl.invalid" [id]="validationId">
-	<lu-formly-error-message [fieldForm]="formControl" [field]="field"></lu-formly-error-message>
+	<lu-formly-error-message [formControl]="formControl" [field]="field"></lu-formly-error-message>
 </div>
