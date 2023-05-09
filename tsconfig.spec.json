@@ -7,7 +7,9 @@
 		"types": [
 			"jest",
 			"node"
-		]
+		],
+		/* Angular Zone does not support native async/await we have to stick with ES2016 */
+		"target": "ES2016"
 	},
 	"include": [
 		"**/*.spec.ts",
