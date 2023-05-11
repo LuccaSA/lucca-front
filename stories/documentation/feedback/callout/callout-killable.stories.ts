@@ -18,7 +18,7 @@ function getTemplate(args: CalloutKillableStory): string {
 		</div>
 		<button type="button" class="callout-kill"></button>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CalloutKillableStory> = (args: CalloutKillableStory) => ({
