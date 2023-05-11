@@ -1,22 +1,7 @@
 @mixin vars {
-	--components-radio-default-palette-50: var(--palettes-primary-50);
-	--components-radio-default-palette-100: var(--palettes-primary-100);
-	--components-radio-default-palette-200: var(--palettes-primary-200);
-	--components-radio-default-palette-300: var(--palettes-primary-300);
-	--components-radio-default-palette-400: var(--palettes-primary-400);
-	--components-radio-default-palette-500: var(--palettes-primary-500);
-	--components-radio-default-palette-600: var(--palettes-primary-600);
-	--components-radio-default-palette-700: var(--palettes-primary-700);
-	--components-radio-default-palette-800: var(--palettes-primary-800);
-	--components-radio-default-palette-900: var(--palettes-primary-900);
-
-	--components-radio-label-line-height: var(--sizes-M-lineHeight);
-	--components-radio-label-padding: 0 0 0 var(--spacings-M);
-	--components-radio-S-label-padding: 0 0 0 1.25rem;
-
-	--components-radio-input-top: var(--spacings-XXS);
-	--components-radio-S-input-top: 6px;
-	--components-radio-input-size: 1rem;
-	--components-radio-input-border-color: var(--palettes-grey-700);
-	--components-radio-input-border-hover: var(--components-radio-default-palette-600);
+	--components-radio-label-padding: 0 0 0 1.75rem;
+	--components-radio-input-top: 2px;
+	--components-radio-input-size: 1.25rem;
+	--components-radio-S-label-padding: 0 0 0 1.5rem;
+	--components-radio-S-input-size: 1rem;
 }
