@@ -51,10 +51,6 @@
 				@include searchClearableXS;
 			}
 		}
-
-		&.mod-outlined {
-			@include outlinedSearch;
-		}
 	}
 
 	&.mod-clearable {
@@ -89,24 +85,8 @@
 		}
 	}
 
-	&.mod-white {
-		@include white;
-
-		.textfield-input {
-			&:is(:focus) {
-				@include whiteInputFocus;
-			}
-		}
-	}
-
 	&.mod-invert {
 		@include invert;
-
-		.textfield-input {
-			&:is(:focus) {
-				@include invertInputFocus;
-			}
-		}
 	}
 
 	&.mod-radio {
@@ -271,40 +251,6 @@
 			@include materialValid;
 		}
 	}
-
-	&.mod-outlined {
-		@include outlined;
-
-		&:hover {
-			@include outlinedHover;
-		}
-
-		&:is(.is-focused, .focused) .textfield-input,
-		.textfield-input:is(:focus, .is-focused, .focused) {
-			@include outlinedFocus;
-		}
-
-		.textfield-input {
-			&:is(.is-disabled, .disabled, [disabled], .is-readonly, .readonly, [readonly]) {
-				&,
-				&:is(:focus, .is-focused, .focused) {
-					@include outlinedInputDisabled;
-				}
-			}
-
-			&:is(.is-error, .error, .palette-error) {
-				@include outlinedError;
-
-				&:hover {
-					@include outlinedErrorHover;
-				}
-
-				&:is(:focus-within) {
-					@include outlinedErrorFocus;
-				}
-			}
-		}
-	}
 }
 
 .textfield-input {
@@ -312,7 +258,7 @@
 		@include inputHover;
 	}
 
-	&:is(:focus, .is-focused, .focused) {
+	&:is(:focus-visible, .is-focused, .focused) {
 		@include inputFocus;
 	}
 }

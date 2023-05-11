@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin selectInputStyle {
 	:host {
@@ -18,15 +19,15 @@
 
 		cursor: pointer;
 		outline: none;
-		padding: 0;
+		padding: 0 !important;
 
 		&::after {
 			@include icon.generate('arrow_south');
 
-			color: var(--palettes-700, var(--palettes-primary-700));
+			color: var(--palettes-grey-600);
 			bottom: var(--components-select-input-padding-vertical);
-			font-size: 1.2rem;
-			line-height: 1.4rem;
+			font-size: var(--sizes-M-lineHeight);
+			line-height: var(--sizes-M-lineHeight);
 			pointer-events: none;
 			position: absolute;
 			right: var(--components-select-input-padding-horizontal);
@@ -52,17 +53,17 @@
 	.lu-select-value {
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
 	}
 
 	.lu-select-placeholder {
-		color: var(--palettes-400, var(--palettes-primary-400));
+		color: var(--palettes-grey-400);
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
@@ -71,9 +72,31 @@
 	}
 
 	.lu-select-suffix {
+    position: absolute;
+    bottom: .75rem;
+    right: 2.25rem;
+	}
+
+	.lu-select-clearer {
+		display: block;
 		position: absolute;
-		bottom: var(--spacings-XS);
-		right: 1.6rem;
+		width: 1rem;
+		height: 1rem;
+		background-color: var(--palettes-grey-700);
+		bottom: .75rem;
+		right: 2.25rem;
+		color: var(--colors-white-color);
+		padding: 0;
+		border-radius: 50%;
+		transition: background-color var(--commons-animations-durations-fast) ease;
+
+		.lucca-icon {
+			font-size: var(--sizes-XS-lineHeight);
+		}
+
+		&:hover {
+			background-color: var(--palettes-grey-600);
+		}
 	}
 
 	::ng-deep .lu-select-value {
@@ -112,10 +135,12 @@
 
 		&::after {
 			line-height: var(--sizes-XS-lineHeight);
+			font-size:var(--sizes-S-lineHeight);
 		}
 
 		.lu-select-suffix {
-			bottom: var(--spacings-XXS);
+			bottom: .625rem;
+			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
@@ -206,6 +231,7 @@
 		}
 
 		&.mod-search {
+
 			&::after {
 				bottom: 0;
 			}
@@ -277,7 +303,7 @@
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
-			padding-right: 3rem;
+			padding-right: 3.5rem;
 		}
 	}
 
