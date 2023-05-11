@@ -1,4 +1,5 @@
 @mixin vars {
 	--components-checkbox-label-padding: 0 0 0 var(--spacings-M);
 	--components-checkbox-input-size: 1.25rem;
+	--components-checkbox-input-border-width: 2px;
 }
