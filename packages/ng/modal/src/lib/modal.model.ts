@@ -10,4 +10,4 @@ export interface ILuModalContent<T = unknown> {
 	cancelLabel?: string | Observable<string>;
 }
 
-export type LuModalContentResult<T extends ILuModalContent> = T extends ILuModalContent<infer R> ? R : never;
+export type LuModalContentResult<T extends ILuModalContent> = T extends ILuModalContent<infer R> & { submitAction: unknown } ? R : never;

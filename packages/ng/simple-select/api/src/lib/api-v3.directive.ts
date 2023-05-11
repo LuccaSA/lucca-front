@@ -22,7 +22,7 @@ export class LuSimpleSelectApiV3Directive<T extends ILuApiItem> extends ALuSimpl
 	}
 
 	@Input()
-	public set orderBy(value: string) {
+	public set orderBy(value: string | null) {
 		this.orderBy$.next(value);
 	}
 
@@ -33,7 +33,7 @@ export class LuSimpleSelectApiV3Directive<T extends ILuApiItem> extends ALuSimpl
 
 	protected url$ = new ReplaySubject<string>(1);
 	protected fields$ = new BehaviorSubject<string>('id,name');
-	protected orderBy$ = new BehaviorSubject<string>('name,asc');
+	protected orderBy$ = new BehaviorSubject<string | null>('name,asc');
 	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
 
 	protected httpClient = inject(HttpClient);
@@ -42,7 +42,7 @@ export class LuSimpleSelectApiV3Directive<T extends ILuApiItem> extends ALuSimpl
 		map(([fields, filters, orderBy, clue]) => ({
 			...filters,
 			fields,
-			orderBy,
+			...(orderBy ? { orderBy } : {}),
 			...(clue ? { name: `like,${encodeURIComponent(clue)}` } : {}),
 		})),
 	);

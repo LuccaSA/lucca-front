@@ -29,8 +29,8 @@ function getTemplate(args: CalloutBasicStory): string {
 	return `
 	<div class="callout ${classes} ${s}">
 		<div class="callout-content">
-			<strong class="callout-content-title">Je suis Mr Meeseeks !</strong>
-			<div class="callout-content-description">Je suis un callout basique <a href="#">En savoir plus</a></div>
+			<strong class="callout-content-title">Feedback or informations</strong>
+			<div class="callout-content-description">Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a></div>
 		</div>
 	</div>
 	`;

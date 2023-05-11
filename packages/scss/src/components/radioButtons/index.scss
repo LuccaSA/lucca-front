@@ -7,6 +7,10 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-XS {
+		@include XS;
+	}
 }
 
 .radioButtons-item-input {

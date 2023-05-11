@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["../node_modules/**/*", "../dist/**/*", "../packages/**/*.spec.ts", "../stories/**/*.spec.ts", "../packages/ng/schematics/**/*"],
-  "include": ["./wrapper.component.ts", "../packages/**/*", "../stories/**/*", "./msw/**/*"],
+  "include": ["../packages/**/*", "../stories/**/*", "./msw/**/*"],
   "files": [
     "./typings.d.ts"
   ]

@@ -39,13 +39,13 @@ function getTemplate(args: RadiosBasicStory): string {
 			<div>
 				<label class="radio ${s}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled} checked>
-					<span class="radio-label">Radio</span>
+					<span class="radio-label">Label</span>
 				</label>
 			</div>
 			<div>
 				<label class="radio ${s}">
 					<input class="radio-input" type="radio" name="radioList1" ${disabled}>
-					<span class="radio-label">Radio</span>
+					<span class="radio-label">Label</span>
 				</label>
 			</div>
 		</div>

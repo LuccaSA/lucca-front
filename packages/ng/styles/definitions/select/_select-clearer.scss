@@ -4,41 +4,25 @@
 	}
 
 	:host-context(.textfield-input.is-filled) {
-		display: inline-block;
+		display: block;
 	}
 
-	.actionIcon {
-		height: 1.5rem;
-		width: 1.5rem;
+	.clearer {
+		display: block;
+		width: 1rem;
+		height: 1rem;
+		background-color: var(--palettes-grey-700);
+		color: var(--colors-white-color);
 		padding: 0;
-		color: var(--palettes-700, var(--palettes-primary-700));
+		border-radius: 50%;
+		transition: background-color var(--commons-animations-durations-fast) ease;
+
+		.lucca-icon {
+			font-size: var(--sizes-XS-lineHeight);
+		}
 
 		&:hover {
-			background-color: var(--palettes-50, var(--palettes-primary-50));
-			color: var(--palettes-800, var(--palettes-primary-800));
-		}
-
-		&:focus {
-			background-color: var(--palettes-50, var(--palettes-primary-50));
-			box-shadow: 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06),
-				0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
-		}
-	}
-
-	:host-context(.textfield.mod-outlined) {
-		.actionIcon {
-			color: var(--palettes-grey-700);
-
-			&:hover {
-				background-color: var(--palettes-grey-50);
-				color: var(--palettes-grey-800);
-			}
-
-			&:focus {
-				background-color: var(--palettes-grey-50);
-				box-shadow: 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06),
-					0 0 0 4px var(--palettes-grey-200);
-			}
+			background-color: var(--palettes-grey-600);
 		}
 	}
 
@@ -46,34 +30,19 @@
 		display: block;
 	}
 
-	// Material
-	:host-context(.textfield.mod-material) {
-		.actionIcon {
-			color: var(--palettes-grey-500);
-		}
-	}
-
-	// Framed
-	:host-context(.textfield.mod-framed) {
-		.actionIcon {
-			color: var(--palettes-grey-500);
-		}
-	}
-
-	// Error
-	:host-context(.textfield-input.is-error) {
-		.actionIcon {
-			color: var(--palettes-error-700);
-
-			&:hover {
-				background-color: var(--palettes-error-50);
-				color: var(--palettes-error-800);
-			}
-		}
-	}
-
 	// Disabled
 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
 		display: none;
+	}
+
+	:host-context(.textfield.mod-S) {
+		.clearer {
+			width: .75rem;
+			height: .75rem;
+
+			.lucca-icon {
+				font-size: .75rem;
+			}
+		}
 	}
 }

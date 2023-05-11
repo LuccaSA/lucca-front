@@ -1,9 +1,15 @@
 <div class="optionItem" #element>
-	<div class="optionItem-value" (click)="select()" [class.is-selected]="selected" [class.is-highlighted]="highlighted">
+	<div
+		class="optionItem-value"
+		(click)="select()"
+		[class.is-disabled]="disabled"
+		[class.is-selected]="selected"
+		[class.is-highlighted]="highlighted"
+	>
 		<ng-container #value></ng-container>
 	</div>
 	<div class="optionItem-icons" *ngIf="hasChildren">
-		<span class="optionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
+		<span *ngIf="!_tree.disabled" class="optionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
 			<svg class="optionItem-icon-shape" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				<path
 					opacity="0.2"

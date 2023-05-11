@@ -33,7 +33,9 @@
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-divider-width: 1px;
-	--commons-divider-color: var(--palettes-grey-200);
+	--commons-divider-color: var(--palettes-grey-200); // deprecated
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
+	--commons-border-100: var(--palettes-grey-100);
+	--commons-border-200: var(--palettes-grey-200);
 }

@@ -8,6 +8,14 @@
 		@include icon;
 	}
 
+	&.mod-decorationNone {
+		@include decorationNone;
+	}
+
+	&.mod-decorationHover {
+		@include decorationHover;
+	}
+
 	&:is(:disabled, .is-disabled) {
 		@include disabled;
 	}

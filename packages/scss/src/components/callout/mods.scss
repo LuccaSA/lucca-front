@@ -3,13 +3,19 @@
 @mixin S {
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
-	gap: var(--spacings-XS);
+	gap: .75rem;
 
 	.callout-icon {
-		line-height: var(--sizes-XS-lineHeight);
+		line-height: var(--sizes-S-lineHeight);
 
 		.lucca-icon {
-			font-size: 1rem;
+			font-size: var(--sizes-S-lineHeight);
 		}
 	}
+}
+
+@mixin tiny {
+	display: inline-flex;
+	gap: .375rem;
+	padding: var(--spacings-XS);
 }

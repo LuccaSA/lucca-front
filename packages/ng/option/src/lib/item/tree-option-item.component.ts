@@ -36,9 +36,15 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 	@Output() onSelectSelf = new EventEmitter<this>();
 	@Output() onSelectChildren = new EventEmitter<this>();
 	select() {
+		if (this.disabled) {
+			return;
+		}
 		this.onSelect.emit(this);
 	}
 	selectSelf() {
+		if (this.disabled) {
+			return;
+		}
 		this.onSelectSelf.emit(this);
 	}
 	selectChildren() {
@@ -68,7 +74,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		return this._selected;
 	}
 	@Input() set selected(s: boolean) {
-		if (s !== this._selected) {
+		if (s !== this._selected && !this.disabled) {
 			this._selected = s;
 			this._cdr.markForCheck();
 		}
@@ -83,15 +89,8 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 			this._cdr.markForCheck();
 		}
 	}
-	protected _disabled = false;
 	get disabled() {
-		return this._disabled;
-	}
-	@Input() set disabled(h: boolean) {
-		if (h !== this._disabled) {
-			this._disabled = h;
-			this._cdr.markForCheck();
-		}
+		return this._tree.disabled;
 	}
 
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {

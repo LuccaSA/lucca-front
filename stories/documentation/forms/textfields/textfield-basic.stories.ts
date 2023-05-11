@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface TextfieldBasicStory {
-	palette: string;
 	display: string;
 	style: string;
 	width: string;
@@ -11,18 +10,11 @@ interface TextfieldBasicStory {
 	error: boolean;
 	required: boolean;
 	invert: boolean;
-	white: boolean;
 }
 
 export default {
 	title: 'Documentation/Forms/Textfield/Basic',
 	argTypes: {
-		palette: {
-			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
-			control: {
-				type: 'select',
-			},
-		},
 		display: {
 			options: ['', 'mod-block', 'mod-inline'],
 			control: {
@@ -30,8 +22,7 @@ export default {
 			},
 		},
 		style: {
-			description: '<code>mod-outlined</code> & <code>mod-compact</code> can be combined.',
-			options: ['', 'mod-compact', 'mod-material', 'mod-framed', 'mod-outlined'],
+			options: ['', 'mod-compact', 'mod-material', 'mod-framed'],
 			control: {
 				type: 'select',
 			},
@@ -74,27 +65,21 @@ export default {
 				type: 'boolean',
 			},
 		},
-		white: {
-			control: {
-				type: 'boolean',
-			},
-		},
 	},
 } as Meta;
 
 function getTemplate(args: TextfieldBasicStory): string {
-	const classes = [args.palette, args.display, args.style, args.width].filter(Boolean).join(' ');
+	const classes = [args.display, args.style, args.width].filter(Boolean).join(' ');
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
 	const invert = args.invert ? `mod-invert` : '';
 	const size = args.size;
 	const noLabel = args.noLabel ? `mod-noLabel` : '';
-	const white = args.white ? `mod-white` : '';
 	const error = args.error ? `is-error` : '';
 	return `
-		<label class="textfield ${classes} ${size} ${noLabel} ${invert} ${white}">
-			<input class="textfield-input ${error}" type="text" placeholder="placeholder" ${required} ${disabled}>
-			<span class="textfield-label">Label textfield</span>
+		<label class="textfield ${classes} ${size} ${noLabel} ${invert}">
+			<input class="textfield-input ${error}" type="text" placeholder="Placeholder" ${required} ${disabled}>
+			<span class="textfield-label">Label</span>
 		</label>
 	`;
 }
@@ -112,4 +97,4 @@ const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false, white: false };
+Basic.args = { display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false, };

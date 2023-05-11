@@ -40,10 +40,16 @@
 %popover-content {
 	background-color: var(--colors-white-color);
 	box-shadow: var(--commons-elevations-elevation-2);
+
+	&:focus-within {
+		outline: none;
+	}
 }
 
 .lu-popover-panel {
 	@extend %popover-panel;
+
+
 }
 
 .lu-popover-content {
