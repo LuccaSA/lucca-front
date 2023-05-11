@@ -8,11 +8,11 @@
 
 			display: flex;
 			background-color: var(--palettes-700, var(--palettes-primary-700));
-			padding-left: var(--components-switch-offset);
+			padding-left: var(--components-switch-handler-offset);
 		}
 
 		&::after {
-			left: calc(var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-offset));
+			left: calc(var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset));
 		}
 	}
 }

@@ -34,9 +34,9 @@
 				height: var(--components-switch-height);
 				left: 0;
 				line-height: var(--components-switch-icon-size);
-				padding-left: calc(var(--components-switch-offset) + var(--components-switch-slider-size));
+				padding-left: calc(var(--components-switch-handler-offset) + var(--components-switch-slider-size));
 				position: absolute;
-				top: 2px;
+				top: var(--components-switch-offset-top);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-timing-function: ease;
 				transition-property: background-color, box-shadow, padding;
@@ -50,9 +50,9 @@
 				content: '';
 				display: block;
 				height: var(--components-switch-slider-size);
-				left: var(--components-switch-offset);
+				left: var(--components-switch-handler-offset);
 				position: absolute;
-				top: calc(2px + var(--components-switch-offset));
+				top: calc(var(--components-switch-offset-top) + var(--components-switch-handler-offset));
 				transition: all var(--commons-animations-durations-fast) ease;
 				width: var(--components-switch-slider-size);
 			}
