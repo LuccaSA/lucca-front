@@ -29,7 +29,7 @@
 		.textfield-input,
 		.radiosfield-input,
 		.checkboxesfield-input {
-			font-family: var(--commons-font-family);
+			font-family: inherit;
 			font-size: var(--components-field-font-size);
 			color: var(--components-field-input-color);
 			outline: none;
