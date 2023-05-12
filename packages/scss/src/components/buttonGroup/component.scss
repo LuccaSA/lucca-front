@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component {
-	gap: var(--commons-divider-width);
 	border-radius: var(--commons-borderRadius-M);
+	gap: var(--commons-divider-width);
 	display: inline-flex;
 	list-style-type: none;
 	padding: 0;
@@ -12,8 +12,6 @@
 		border-radius: 0;
 		display: block;
 		margin: 0;
-		padding-left: var(--spacings-S);
-		padding-right: var(--spacings-S);
 		position: relative;
 		flex-grow: 1;
 		white-space: normal;
@@ -50,6 +48,18 @@
 		.button {
 			width: 100%;
 			border-radius: 0;
+		}
+
+		&:first-child {
+			.button {
+				border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+			}
+		}
+
+		&:last-child {
+			.button {
+				border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+			}
 		}
 	}
 
