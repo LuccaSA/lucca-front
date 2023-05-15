@@ -2,7 +2,7 @@
 
 @mixin component {
 	position: relative;
-	display: block;
+	display: flex;
 
 	.radio-input {
 		@include a11y.mask;
