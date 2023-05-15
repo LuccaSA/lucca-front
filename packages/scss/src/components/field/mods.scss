@@ -331,12 +331,7 @@
 
 @mixin field-row {
 	display: flex;
+	flex-direction: row;
 	flex-wrap: wrap;
-
-	.checkbox,
-	.radio {
-		margin-top: 0;
-		margin-bottom: 0;
-		margin-right: var(--components-field-horizontal-spacing);
-	}
+	column-gap: var(--components-field-horizontal-spacing);
 }

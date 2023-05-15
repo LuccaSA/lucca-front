@@ -48,7 +48,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 				<label class="checkbox ${s}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required} checked>
 					<span class="checkbox-label">Label</span>
-				</label>g
+				</label>
 			</div>
 			<div>
 				<label class="checkbox ${s}">
