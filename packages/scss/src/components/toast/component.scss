@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: 'without: rule') {
 	@keyframes toast {
@@ -36,10 +37,28 @@
 			overflow: hidden;
 			position: relative;
 			transform-origin: top;
+
+			@include media.max('S') {
+				border-radius: calc(var(--commons-borderRadius-M) + var(--commons-borderRadius-L));
+				background-color: var(--palettes-grey-900);
+			}
 		}
 
 		.toast-item-icon {
 			margin-top: 2px;
+
+			@include media.max('S') {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+				align-self: flex-start;
+				width: 1.25rem;
+				height: 1.25rem;
+				border-radius: 50%;
+				font-size: var(--sizes-XS-lineHeight);
+				background-color: var(--palettes-700, var(--palettes-primary-700));
+			}
 		}
 
 		.toast-item-content {
@@ -67,6 +86,12 @@
 
 			&::after {
 				@include icon.generate('cross');
+			}
+
+			.lucca-icon {
+				@include media.max('S') {
+					font-size: var(--sizes-L-lineHeight);
+				}
 			}
 		}
 	}

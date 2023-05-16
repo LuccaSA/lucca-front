@@ -36,7 +36,7 @@ export class LuToastsComponent implements OnDestroy {
 	}
 
 	public iconClassByToastType: Record<LuToastType, string> = {
-		Info: 'icon-info',
+		Info: 'icon-lucca',
 		Success: 'icon-success',
 		Error: 'icon-error',
 		Warning: 'icon-warning',
