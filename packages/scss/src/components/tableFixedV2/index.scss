@@ -1,0 +1,25 @@
+@use 'sass:string';
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.table-head-row-cell,
+.table-body-row-cell,
+.table-foot-row-cell {
+	--cell-width: calc(var(--layout-fixed) * 1rem);
+	min-width: var(--cell-width, auto);
+	max-width: var(--cell-width, auto);
+	width: var(--cell-width, auto);
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			$currentBp: to-lower-case(#{$breakpoint});
+			&[style*="layout-fixed-at-media-min-#{$currentBp}"] {
+				--cell-width: calc(var(--layout-fixed-at-media-min-#{$currentBp}) * 1rem);
+				min-width: var(--cell-width, auto);
+				max-width: var(--cell-width, auto);
+				width: var(--cell-width, auto);
+			}
+		}
+	}
+}
