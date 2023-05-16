@@ -4,6 +4,10 @@
 	@include vars;
 	@include component;
 
+	&.mod-S {
+		@include s;
+	}
+
 	&.mod-clickable {
 		@include clickable;
 	}
