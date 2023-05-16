@@ -24,8 +24,14 @@
 		@include S;
 	}
 
-	&.mod-layoutFixed {
+	&.mod-layoutFixed,
+	&.mod-layoutFixedV2 {
 		@include layoutFixed;
+	}
+
+	&[class*="mod-layoutFixed@"],
+	&[class*="mod-layoutFixedV2@"] {
+		@include layoutFixedWithBreakpoint;
 	}
 
 	&.mod-noOffset {
@@ -87,7 +93,8 @@
 	&.mod-actions {
 		@include actions;
 
-		&.mod-actionsHidden { // Legacy
+		&.mod-actionsHidden {
+			// Legacy
 			@include actionsHidden;
 		}
 	}
