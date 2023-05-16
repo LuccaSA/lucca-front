@@ -1,0 +1,182 @@
+// :root {
+//   --textfield-time-size-standard: 1.5rem;
+//   --textfield-time-size-big: 2.5rem;
+// }
+
+// [type='text'] {
+//   -moz-appearance: textfield;
+//   border-radius: var(--commons-border-radius);
+//   text-align: center;
+
+//   &::-webkit-outer-spin-button,
+//   &::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+//     margin: 0;
+//   }
+
+//   width: var(--textfield-time-size-standard);
+//   height: var(--textfield-time-size-standard);
+//   border: 0;
+
+//   &:hover, &:focus, &:focus-visible {
+//     background-color: var(--palettes-primary-100);
+//     outline: none;
+//   }
+// }
+
+// label {
+//   display: block;
+// }
+
+// div {
+//   position: relative;
+//   display: inline-block;
+
+//   button {
+//     position: absolute;
+//     bottom: calc(100% + .5rem);
+//     left: 0;
+//     right: 0;
+//     width: 100%;
+//     border: 0;
+//     padding: 0;
+//     height: 1rem;
+//     background-color: transparent;
+
+//     // style actionIcon
+//     display: inline-flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: var(--commons-border-radius);
+
+//     &:hover {
+//       background-color: var(--palettes-grey-50);
+//       color: var(--palettes-grey-800);
+//     }
+
+//     &:focus {
+//       background-color: var(--palettes-grey-100);
+//       color: var(--palettes-grey-800);
+//       outline: none;
+//     }
+
+//     .lucca-icon {
+//       font-size: 1rem;
+//     }
+
+//     + button {
+//       top: calc(100% + .5rem);
+//       bottom: auto;
+//     }
+//   }
+// }
+
+
+// fieldset {
+//   &.mod-big {
+//     font-size: 2rem;
+//   }
+// }
+
+
+// .timePicker {
+//   --textfield-time-size-standard: 1.5rem;
+//   --textfield-time-size-big: 2.5rem;
+
+//   display: inline-flex;
+
+//   &.is-button {
+//     .timePicker-fieldset {
+//       background-color: transparent;
+//       cursor: pointer;
+
+//       &:focus-visible {
+//         outline: none;
+//       }
+//     }
+//   }
+// }
+
+// .timePicker-fieldset {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: var(--spacings-smallest);
+//   margin: var(--spacings-smaller) 0;
+//   padding: var(--spacings-smallest) var(--spacings-smaller);
+//   border-radius: var(--commons-border-radius);
+//   border: 0;
+//   box-shadow: 0 0 0 1px var(--palettes-grey-200);
+//   font-size: var(--sizes-small-font-size);
+//   line-height: var(--sizes-smaller-line-height);
+
+//   &:hover {
+//     box-shadow: 0 0 0 1px var(--palettes-grey-400), var(--commons-box-shadow-xs);
+//   }
+
+//   &:focus-within {
+//     box-shadow: 0 0 0 4px var(--palettes-primary-200), 0 0 0 1px var(--palettes-primary-500) inset;
+//   }
+// }
+
+// .timePicker-fieldset-suffix {
+//   min-width: .5rem;
+// }
+
+// .timePicker-fieldset-group {
+//   position: relative;
+//   display: inline-block;
+// }
+
+// .timePicker-fieldset-group-textfield {
+//   display: block;
+// }
+
+// .timePicker-fieldset-group-textfield-input {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   border-radius: var(--commons-border-radius);
+//   border: 0;
+//   text-align: center;
+//   height: var(--textfield-time-size-standard);
+//   width: var(--textfield-time-size-standard);
+//   padding: var(--spacings-smallest);
+// }
+
+// .timePicker-fieldset-group-button {
+//   position: absolute;
+//   bottom: calc(100% + .5rem);
+//   left: 0;
+//   right: 0;
+//   width: 100%;
+//   border: 0;
+//   padding: 0;
+//   height: 1rem;
+//   background-color: transparent;
+
+//   // style actionIcon
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: var(--commons-border-radius);
+
+//   &:hover {
+//     background-color: var(--palettes-grey-50);
+//     color: var(--palettes-grey-800);
+//   }
+
+//   &:focus {
+//     background-color: var(--palettes-grey-100);
+//     color: var(--palettes-grey-800);
+//     outline: none;
+//   }
+
+//   .lucca-icon {
+//     font-size: 1rem;
+//   }
+
+//   + .timePicker-fieldset-group-button {
+//     top: calc(100% + .5rem);
+//     bottom: auto;
+//   }
+// }

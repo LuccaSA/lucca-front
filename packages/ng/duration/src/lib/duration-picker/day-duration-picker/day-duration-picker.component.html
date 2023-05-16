@@ -1,0 +1,24 @@
+<div>
+	<label>
+		<input
+			#daysInput
+			type="number"
+			[ngModel]="days | round:3"
+			(ngModelChange)="updateDays($event)"
+			[disabled]="disabled"
+			(blur)="touched.emit()"
+			(focusin)="daysInput.select()"
+			tabindex="1"
+		/>
+		<span class="u-mask">{{ intl.days }}</span>
+	</label>
+	<button type="button" (click)="incrementDays()" *ngIf="!hideButtons" [disabled]="disabled || !canIncrementDays">
+		<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+		<span class="u-mask">{{ intl.increaseDays }}</span>
+	</button>
+	<button type="button" (click)="decrementDays()" *ngIf="!hideButtons" [disabled]="disabled || !canDecrementDays">
+		<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+		<span class="u-mask">{{ intl.decreaseDays }}</span>
+	</button>
+</div>
+<div aria-hidden="true">j</div>
