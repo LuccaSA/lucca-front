@@ -4,11 +4,11 @@
 	@include vars;
 	@include component;
 
-	&.mod-unkillable {
-		@include unkillable;
+	&.palette-primary {
+		@include primary;
 	}
 
-	&.mod-clickable {
-		@include clickable;
+	&.is-disabled {
+		@include disabled;
 	}
 }
