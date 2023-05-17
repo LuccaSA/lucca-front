@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
+interface TableStickyColumnsAndHeaderWithBreakpointsStory { }
 
 export default {
 	title: 'Documentation/Listings/Table/Sticky Columns And Header With Breakpoints',
@@ -45,7 +45,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 			</thead>
 			<tbody class="table-body">
 				<tr class="table-body-row mod-stickyHeader-shadow">
-					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 56px" colspan="16" role="presentation" >
+					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 73px" colspan="16" role="presentation" >
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
 				</tr>

@@ -36,7 +36,11 @@
 			left: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
 
 			&::after {
-				background-image: linear-gradient(to right, color.adjust($shadowColor, $alpha: -0.75), color.adjust($shadowColor, $alpha: -1));
+				background-image: linear-gradient(
+					to right,
+					color.adjust($shadowColor, $alpha: -0.75),
+					color.adjust($shadowColor, $alpha: -1)
+				);
 			}
 		}
 	}
@@ -46,7 +50,11 @@
 			right: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
 
 			&::after {
-				background-image: linear-gradient(to left, color.adjust($shadowColor, $alpha: -0.75), color.adjust($shadowColor, $alpha: -1));
+				background-image: linear-gradient(
+					to left,
+					color.adjust($shadowColor, $alpha: -0.75),
+					color.adjust($shadowColor, $alpha: -1)
+				);
 			}
 		}
 	}
@@ -134,6 +142,7 @@
 }
 
 @mixin stickyHeaderCommon {
+	margin-top: var(--components-table-fixed-column-sticky-shadow-width);
 	.table-head-row-cell {
 		background-color: var(--colors-white-color);
 		position: sticky;
@@ -151,12 +160,12 @@
 @mixin stickyHeaderShadow($shadowColor: #2a3551) {
 	.table-body-row-cell,
 	.table-foot-row-cell {
-		top: calc(var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width));
+		position: sticky;
+		top: var(--sticky-header-shadow-offset-top);
 		z-index: 4;
 		height: 0;
 		padding: 0;
 		border: 0;
-		position: sticky;
 		background: transparent;
 	}
 
@@ -167,9 +176,12 @@
 		border: 0;
 
 		&::after {
-			top: calc(var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width));
 			height: var(--components-table-fixed-column-sticky-shadow-width);
-			background-image: linear-gradient(to bottom, color.adjust($shadowColor, $alpha: -0.75), color.adjust($shadowColor, $alpha: -1));
+			background-image: linear-gradient(
+				to bottom,
+				color.adjust($shadowColor, $alpha: -0.75),
+				color.adjust($shadowColor, $alpha: -1)
+			);
 			width: 100%;
 			opacity: 0.5;
 		}
@@ -186,7 +198,7 @@
 
 @mixin stickyHeader {
 	.table-head-row-cell {
-		top: 0;
+		top: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
 	}
 }
 
@@ -198,13 +210,15 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		top: calc(
-			var(commons-banner-height) + var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width)
+			var(commons-banner-height) + var(--sticky-header-shadow-offset-top) +
+				var(--components-table-fixed-column-sticky-shadow-width)
 		);
 
 		.stickyHeader-shadow-wrapper {
 			&::after {
 				top: calc(
-					var(commons-banner-height) + var(--sticky-header-shadow-offset-top) + var(--components-table-fixed-column-sticky-shadow-width)
+					var(commons-banner-height) + var(--sticky-header-shadow-offset-top) +
+						var(--components-table-fixed-column-sticky-shadow-width)
 				);
 			}
 		}
