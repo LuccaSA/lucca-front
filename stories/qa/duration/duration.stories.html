@@ -1,0 +1,14 @@
+<h1>Duration</h1>
+
+<label class="textfield u-marginBottomM">
+	<lu-duration-picker class="texfield-input" [(ngModel)]="durationInHours" unit="hour"></lu-duration-picker>
+	<span class="textfield-label u-marginBottomM">Hour Duration</span>
+</label>
+
+<label class="textfield u-marginBottomXL">
+	<lu-duration-picker class="texfield-input" [(ngModel)]="durationInDays" unit="day"></lu-duration-picker>
+	<span class="textfield-label u-marginBottomM">Day Duration</span>
+</label>
+
+<div>Duration in hours: {{ durationInHours | json }}</div>
+<div>Duration in days: {{ durationInDays | json }}</div>

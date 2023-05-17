@@ -2,26 +2,26 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
-import { DayDurationPickerComponent } from './day-duration-picker/day-duration-picker.component';
-import { DurationPickerStep } from './duration-picker-step';
+import { LuDayDurationPickerComponent } from './day-duration-picker/day-duration-picker.component';
+import { LuDurationPickerStep } from './duration-picker-step';
 import { LuDurationUnit } from './duration-unit.model';
-import { HourDurationPickerComponent } from './hour-duration-picker/hour-duration-picker.component';
+import { LuHourDurationPickerComponent } from './hour-duration-picker/hour-duration-picker.component';
 
 @Component({
 	selector: 'lu-duration-picker',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styleUrls: ['./duration-picker.component.scss'],
-	imports: [CommonModule, FormsModule, HourDurationPickerComponent, DayDurationPickerComponent],
+	imports: [CommonModule, FormsModule, LuHourDurationPickerComponent, LuDayDurationPickerComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => DurationPickerComponent),
+			useExisting: forwardRef(() => LuDurationPickerComponent),
 			multi: true,
 		},
 		{
 			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => DurationPickerComponent),
+			useExisting: forwardRef(() => LuDurationPickerComponent),
 			multi: true,
 		},
 	],
@@ -53,14 +53,14 @@ import { HourDurationPickerComponent } from './hour-duration-picker/hour-duratio
 		</ng-template>
 	`,
 })
-export class DurationPickerComponent implements ControlValueAccessor, Validator {
+export class LuDurationPickerComponent implements ControlValueAccessor, Validator {
 	@HostBinding('class.timePicker') public timePickerClass = true;
 
 	public value!: string;
 
 	@Input() public unit!: LuDurationUnit;
 
-	@Input() public step!: DurationPickerStep;
+	@Input() public step!: LuDurationPickerStep;
 
 	@Input() public min?: string;
 

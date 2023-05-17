@@ -1,3 +1,3 @@
-export const durationUnits = ['day', 'hour'] as const;
+export const luDurationUnits = ['day', 'hour'] as const;
 
-export type LuDurationUnit = (typeof durationUnits)[number];
+export type LuDurationUnit = (typeof luDurationUnits)[number];

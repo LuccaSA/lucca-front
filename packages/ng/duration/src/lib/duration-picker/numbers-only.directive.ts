@@ -4,7 +4,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angu
 	selector: 'input[luNumbersOnly]',
 	standalone: true,
 })
-export class NumberDirective {
+export class LuNumberOnlyDirective {
 	@Output() public valueChange = new EventEmitter();
 	public constructor(private _el: ElementRef<HTMLInputElement>) {}
 

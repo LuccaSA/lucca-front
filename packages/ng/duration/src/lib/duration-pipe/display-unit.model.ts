@@ -1,3 +1,3 @@
-export const displayUnits = ['h', 'min', 's'] as const;
+export const luDisplayUnits = ['h', 'min', 's'] as const;
 
-export type DisplayUnit = (typeof displayUnits)[number];
+export type LuDisplayUnit = (typeof luDisplayUnits)[number];

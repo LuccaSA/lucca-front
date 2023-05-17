@@ -3,9 +3,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostBindi
 import { FormsModule, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 
-import { isNotNull, isNull, parseDuration, LU_DURATION_PICKER_TRANSLATIONS } from '../../tools';
-import { DurationPickerStep } from '../duration-picker-step';
-import { isDayDurationPickerStep } from '../duration-picker-step';
+import { isNotNull, isNull, LU_DURATION_PICKER_TRANSLATIONS, parseDuration } from '../../tools';
+import { isDayDurationPickerStep, LuDurationPickerStep } from '../duration-picker-step';
 import { RoundPipe } from './round.pipe';
 
 @Component({
@@ -18,15 +17,15 @@ import { RoundPipe } from './round.pipe';
 	providers: [
 		{
 			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => DayDurationPickerComponent),
+			useExisting: forwardRef(() => LuDayDurationPickerComponent),
 			multi: true,
 		},
 	],
 })
-export class DayDurationPickerComponent implements OnChanges, Validator {
+export class LuDayDurationPickerComponent implements OnChanges, Validator {
 	@Input() public value!: string;
 
-	@Input() public step!: DurationPickerStep;
+	@Input() public step!: LuDurationPickerStep;
 
 	@Input() public min?: string;
 

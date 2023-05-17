@@ -3,10 +3,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostBindi
 import { FormsModule, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 
-import { isNotNull, isNull, parseDuration, LU_DURATION_PICKER_TRANSLATIONS } from '../../tools';
-import { DurationPickerStep } from '../duration-picker-step';
-import { isHourDurationPickerStep } from '../duration-picker-step';
-import { NumberDirective } from '../numbers-only.directive';
+import { isNotNull, isNull, LU_DURATION_PICKER_TRANSLATIONS, parseDuration } from '../../tools';
+import { isHourDurationPickerStep, LuDurationPickerStep } from '../duration-picker-step';
+import { LuNumberOnlyDirective } from '../numbers-only.directive';
 
 @Component({
 	selector: 'lu-hour-duration-picker',
@@ -14,20 +13,20 @@ import { NumberDirective } from '../numbers-only.directive';
 	styleUrls: ['./hour-duration-picker.component.scss'],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [CommonModule, FormsModule, NumberDirective],
+	imports: [CommonModule, FormsModule, LuNumberOnlyDirective],
 	providers: [
 		{
 			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => HourDurationPickerComponent),
+			useExisting: forwardRef(() => LuHourDurationPickerComponent),
 			multi: true,
 		},
 	],
 })
-export class HourDurationPickerComponent implements OnChanges, Validator {
+export class LuHourDurationPickerComponent implements OnChanges, Validator {
 	@HostBinding('class.timePicker-fieldset') public timePickerClass = true;
 	@Input() public value!: string;
 
-	@Input() public step!: DurationPickerStep;
+	@Input() public step!: LuDurationPickerStep;
 
 	@Input() public min?: string;
 
