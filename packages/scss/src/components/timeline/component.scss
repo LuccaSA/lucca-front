@@ -31,33 +31,30 @@
 		}
 
 		.timeline-step-title {
-			padding-left: 1.75rem;
-			position: relative;
-			display: block;
+			display: flex;
+			align-items: center;
 			color: var(--palettes-primary-600);
-			font-weight: 400;
+			font-weight: 600;
 			margin: 0;
 			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-L-lineHeight);
-			min-width: 1.5rem;
+			line-height: var(--sizes-M-lineHeight);
+			gap: var(--spacings-XS);
 		}
 
 		.timeline-step-title,
 		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 			&::before {
 				content: '';
-				color: var(--palettes-primary-800);
-				width: 1rem;
-				height: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				color: var(--palettes-primary-800);
+				width: 1.5rem;
+				height: 1.5rem;
 				border-radius: 50%;
+				font-size: var(--sizes-S-fontSize);
+				line-height: var(--sizes-S-lineHeight);
 				background-color: var(--palettes-primary-300);
-				position: absolute;
-				left: var(--spacings-XXS);
-				top: 50%;
-				transform: translateY(-50%);
 			}
 		}
 
