@@ -42,7 +42,7 @@
 			@include reset.button;
 			padding: var(--components-menu-padding);
 			border-radius: var(--commons-borderRadius-M);
-			color: var(--palettes-grey-700);
+			color: var(--palettes-grey-800);
 			display: inline-flex;
 			align-items: center;
 			text-align: center;
@@ -52,6 +52,7 @@
 			position: relative;
 			text-decoration: none;
 			width: auto;
+			z-index: 1;
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-primary-700));
@@ -70,7 +71,6 @@
 			}
 
 			&:not(.is-disabled, [disabled]) {
-				&:focus-visible,
 				&:hover {
 					&:not(.is-active, [aria-current='page']) {
 						color: var(--palettes-grey-900);
@@ -82,13 +82,9 @@
 					}
 
 					&::after {
-						transform: scale(0.75);
+						transform: scale(0.75, 1);
 					}
 				}
-			}
-
-			&:focus-visible {
-				outline: none;
 			}
 		}
 

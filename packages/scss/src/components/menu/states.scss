@@ -10,6 +10,12 @@
 		background-color: var(--palettes-700, var(--palettes-primary-700));
 		transform: scale(1);
 	}
+
+	&:focus-visible {
+		&::after {
+			transform: scale(0.75, 1);
+		}
+	}
 }
 
 @mixin disabled {
