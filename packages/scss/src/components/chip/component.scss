@@ -33,6 +33,10 @@
 
 			&::before {
 				@include icon.generate('cross');
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 
 			&:hover {
