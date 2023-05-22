@@ -8,10 +8,6 @@
 		@include icon;
 	}
 
-	&.mod-decorationNone {
-		@include decorationNone;
-	}
-
 	&.mod-decorationHover {
 		@include decorationHover;
 	}

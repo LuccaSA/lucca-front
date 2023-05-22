@@ -11,8 +11,10 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		display: block;
+		display: flex;
+		flex-direction: column;
 		background-color: var(--colors-white-color);
+		row-gap: var(--spacings-XXS);
 
 		&.palette-error {
 			box-shadow: 0 0 0 1px var(--palettes-700);

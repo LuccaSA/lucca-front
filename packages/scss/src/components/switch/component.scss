@@ -39,7 +39,7 @@
 				top: var(--components-switch-offset-top);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-timing-function: ease;
-				transition-property: background-color, box-shadow, padding;
+				transition-property: background-color, box-shadow;
 				width: var(--components-switch-width);
 			}
 
