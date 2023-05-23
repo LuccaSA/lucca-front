@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-card-content-padding: var(--spacings-M);
+	--components-card-content-padding: .75rem var(--spacings-S);
 	--components-card-footer-padding: 0.33rem var(--spacings-M);
 	--components-card-background: var(--colors-white-color);
 	--components-card-border-radius: var(--commons-borderRadius-L);

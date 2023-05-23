@@ -5,8 +5,25 @@
 	<h2>Basics</h2>
 	<div class="card">
 		<div class="card-content">
-			<h2>Card</h2>
+			<h2 class="card-title">Title</h2>
 			<p>I'm a card of content</p>
+		</div>
+	</div>
+</section>
+
+<!-- Action -->
+<section class="contentSection">
+	<h2>Basics</h2>
+	<div class="card mod-action">
+		<div class="card-content">
+			<h2 class="card-title">Title</h2>
+			<p>I'm a card of content</p>
+		</div>
+		<div class="card-action">
+			<button type="button" class="actionIcon" luTooltip="Modifier">
+			  <span aria-hidden="true" class="lucca-icon icon-arrowFullEast"></span>
+			  <span class="u-mask">Accéder</span>
+			</button>
 		</div>
 	</div>
 </section>
@@ -16,8 +33,8 @@
 	<h2>colors</h2>
 	<div class="card mod-grey">
 		<div class="card-content">
-			<h2>Grey card</h2>
-			<p>I'm a grey card of content</p>
+			<h2 class="card-title">Title</h2>
+			<p>I'm a card of content</p>
 		</div>
 	</div>
 </section>
@@ -25,10 +42,10 @@
 <!-- Footer -->
 <section class="contentSection">
 	<h2>Cards with footer</h2>
-	<div class="card">
+	<div class="card mod-column">
 		<div class="card-content">
-			<h2>Card</h2>
-			<p>Card content</p>
+			<h2 class="card-title">Title</h2>
+			<div>Card content</div>
 		</div>
 		<footer class="card-footer">
 			<div class="card-footer-right">
@@ -41,7 +58,7 @@
 
 <!-- Clickable -->
 <section class="contentSection">
-	<h2>Clickable card</h2>
+	<h2 class="card-title">Title</h2>
 	<a class="card mod-clickable">
 		<div class="card-content">Hover me!</div>
 	</a>
@@ -52,9 +69,17 @@
 
 <!-- Elevated -->
 <section class="contentSection">
-	<h2>Elevated card</h2>
-	<div class="card mod-elevated">
-		<div class="card-content">With elevation</div>
+	<div class="card mod-elevated mod-action">
+		<div class="card-content">
+			<h2 class="card-title">Title</h2>
+			<p>I'm a card of content</p>
+		</div>
+		<div class="card-action">
+			<button type="button" class="actionIcon" luTooltip="Modifier">
+			  <span aria-hidden="true" class="lucca-icon icon-arrowFullEast"></span>
+			  <span class="u-mask">Accéder</span>
+			</button>
+		</div>
 	</div>
 </section>
 

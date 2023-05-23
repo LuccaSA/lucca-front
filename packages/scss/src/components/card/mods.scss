@@ -7,7 +7,7 @@
 	text-decoration: none;
 	cursor: pointer;
 
-	&:focus  {
+	&:focus {
 		outline: none;
 	}
 
@@ -20,13 +20,17 @@
 }
 
 @mixin elevated {
-	box-shadow: var(--commons-elevations-elevation-1);
+	box-shadow: var(--commons-boxShadow-S);
 	border: 0;
 }
 
-@mixin clickableElevated {
-	&:focus-visible,
-	&:hover {
-		box-shadow: var(--commons-elevations-elevation-3);
+@mixin action {
+	display: flex;
+	flex-direction: row;
+	padding: var(--components-card-content-padding);
+
+	.card-content {
+		flex: 1;
+		padding: 0;
 	}
 }
