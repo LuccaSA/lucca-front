@@ -17,28 +17,16 @@
 		}
 	}
 
-	&.mod-stickyColumn-shadow {
-		@include shadow;
-	}
-
 	&[class*='mod-stickyColumn'] {
 		.table-head-row-cell,
 		.table-body-row-cell,
 		.table-foot-row-cell {
 			@for $i from 0 through 50 {
-				&.mod-stickyColumn-leftOffset#{$i} {
-					@include leftOffset($i);
-				}
-
-				&.mod-stickyColumn-rightOffset#{$i} {
-					@include rightOffset($i);
+				&[class*='mod-stickyColumn'][class*='Offset#{$i}'] {
+					@include stickyOffset($i);
 				}
 			}
 		}
-	}
-
-	[class*='sticky'][class*='shadow-wrapper'] {
-		@include wrapper;
 	}
 
 	&[class*='mod-stickyHeader'] {
