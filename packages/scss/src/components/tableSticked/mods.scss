@@ -132,7 +132,6 @@
 
 		&::after {
 			content: '';
-			position: sticky;
 			display: block;
 			height: var(--components-table-fixed-column-sticky-shadow-width);
 			width: 100%;
@@ -161,9 +160,14 @@
 
 @mixin stickyHeaderBanner {
 	[class*='row-cell'] {
-		top: calc(var(commons-banner-height) + var(--sticky-header-shadow-offset-top));
+		top: var(--commons-banner-height);
 	}
-	.stickyHeader-shadow-wrapper {
-		top: calc(var(commons-banner-height) + var(--components-table-fixed-column-sticky-shadow-width) * -1);
+	.mod-stickyHeader-shadow {
+		[class*='row-cell'] {
+			top: calc(
+				var(--table-sticky-header-shadow-offset) + var(--commons-banner-height) +
+					var(--components-table-sticked-column-sticky-shadow-width)
+			);
+		}
 	}
 }
