@@ -11,7 +11,7 @@ function getTemplate(args: HeadersMenuStory): string {
 	<header class="pageHeader mod-withMenu">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="u-margin0 u-marginRightM">H1. Page title</h1>
+				<h1 class="u-margin0">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-edit"></span>

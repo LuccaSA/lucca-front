@@ -1,21 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersBasicStory {
-	noShadow: boolean;
+interface PageHeaderBreadcrumbStory {
 	sticky: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Headers/Basic',
+	title: 'Documentation/Structure/PageHeader/Breadcrumb',
 	argTypes: {
-		noShadow: {
-			description: "Supprime l'ombre portée du header",
-			control: {
-				type: 'boolean',
-			},
-		},
 		sticky: {
-			description: "Rend le header toujours visible au scroll en s'adaptant à la position du menu principal et secondaire.",
 			control: {
 				type: 'boolean',
 			},
@@ -23,11 +15,19 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: HeadersBasicStory): string {
-	const noShadow = args.noShadow ? `mod-noShadow` : '';
+function getTemplate(args: PageHeaderBreadcrumbStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
+
 	return `
-	<header class="pageHeader ${noShadow} ${sticky}">
+	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
+		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
+			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 0</a></li>
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 1</a></li>
+				<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Page 2</span></li>
+			</ul>
+		</nav>
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="u-margin0">H1. Page title</h1>
@@ -53,7 +53,7 @@ function getTemplate(args: HeadersBasicStory): string {
 				</label>
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
-				<button type="button" class="button mod-outline mod-icon">
+				<button type="button" class="actionIcon">
 					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
@@ -68,10 +68,10 @@ function getTemplate(args: HeadersBasicStory): string {
 	`;
 }
 
-const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({
+const Template: Story<PageHeaderBreadcrumbStory> = (args: PageHeaderBreadcrumbStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { noShadow: false, sticky: false };
+export const BreadcrumbPageHeader = Template.bind({});
+BreadcrumbPageHeader.args = { sticky: false };

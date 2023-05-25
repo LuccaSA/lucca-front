@@ -1,14 +1,10 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: var(--commons-boxShadow-XS);
 	padding: var(--spacings-L) 2.5rem var(--spacings-M);
-	background-color: var(--colors-white-color);
 
 	.menu {
 		margin-top: var(--spacings-XS);
-
-		&::after {
-			display: none;
-		}
 	}
 
 	@at-root ($atRoot) {
@@ -17,18 +13,37 @@
 			justify-content: space-between;
 			align-items: flex-start;
 			flex-wrap: wrap;
+			row-gap: var(--spacings-XS);
 		}
 
-		.pageHeader-content-title,
-		.pageHeader-content-actions {
+		.pageHeader-content-title {
 			display: flex;
+			column-gap: var(--spacings-S);
 			align-items: center;
 			flex-wrap: wrap;
 		}
 
 		.pageHeader-content-actions {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			row-gap: var(--spacings-S);
+		}
+
+		.pageHeader-content-actions {
 			& > *:not(:last-child) {
 				margin-right: var(--spacings-S);
+
+				@include media.max('XS') {
+					flex: 1;
+				}
+			}
+
+			.textfield.mod-search {
+				@include media.max('XS') {
+					width: 100%;
+					flex: auto;
+				}
 			}
 		}
 
