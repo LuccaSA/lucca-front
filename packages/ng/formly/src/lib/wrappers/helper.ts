@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
+import { FieldWrapper } from '@ngx-formly/core';
+import { buildAddWrapperExtension } from '../formly.utils';
 
 // wrapper component
 @Component({
@@ -13,14 +14,5 @@ export class LuFormlyWrapperHelper extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
 }
-// run to know when to add said wrapper
-export class TemplateHelper {
-	run(fc: FormlyConfig) {
-		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.templateOptions && field.templateOptions['helper']) {
-				return 'helper';
-			}
-			return '';
-		});
-	}
-}
+
+export const templateHelperExtension = buildAddWrapperExtension('helper', (field) => !!field?.props?.['helper']);

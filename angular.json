@@ -9,7 +9,7 @@
   "newProjectRoot": "packages/ng",
   "projects": {
     "ng": {
-      "root": "src",
+      "root": "./",
       "projectType": "library",
       "architect": {
         "build": {

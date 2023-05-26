@@ -2,13 +2,13 @@
 	<input
 		[type]="type"
 		class="textfield-input"
-		[name]="to['name']"
+		[name]="props['name']"
 		[formControl]="formControl"
 		[formlyAttributes]="field"
 		luInput
 		(focus)="focus()"
 		(blur)="blur()"
-		[placeholder]="to.placeholder"
+		[placeholder]="props.placeholder"
 	/>
 </ng-template>
 <!-- type="number" has to be static in order to have NumberValueAccessor instead of DefaultValueAccessor -->
@@ -16,13 +16,13 @@
 	<input
 		type="number"
 		class="textfield-input"
-		[name]="to['name']"
+		[name]="props['name']"
 		[formControl]="formControl"
 		[formlyAttributes]="field"
 		luInput
 		(focus)="focus()"
 		(blur)="blur()"
-		[placeholder]="to.placeholder"
+		[placeholder]="props.placeholder"
 	/>
 </ng-template>
-<span class="textfield-label">{{ to.label }}</span>
+<span class="textfield-label">{{ props.label }}</span>

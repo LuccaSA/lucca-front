@@ -14,15 +14,15 @@ export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {
 	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return (this.to['mod'] || '') as string;
+		return (this.props['mod'] || '') as string;
 	}
 
 	get isRequired() {
-		return !!this.to && !!this.to.required ? 'is-required' : '';
+		return !!this.props && !!this.props.required ? 'is-required' : '';
 	}
 
 	get isFocused() {
-		return !!this.to && this.to['_isFocused'] ? 'is-focused' : '';
+		return !!this.props && this.props['_isFocused'] ? 'is-focused' : '';
 	}
 
 	get isError() {

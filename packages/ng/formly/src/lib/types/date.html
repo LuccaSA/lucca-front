@@ -4,8 +4,8 @@
 	[formlyAttributes]="field"
 	(focus)="focus()"
 	(blur)="blur()"
-	[placeholder]="to.placeholder"
-	[min]="to.min"
-	[max]="to.max"
+	[placeholder]="props.placeholder"
+	[min]="props.min"
+	[max]="props.max"
 ></lu-date-select>
-<span class="textfield-label">{{ to.label }}</span>
+<span class="textfield-label">{{ props.label }}</span>
