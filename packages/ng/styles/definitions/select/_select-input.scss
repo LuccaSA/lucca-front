@@ -20,6 +20,7 @@
 		cursor: pointer;
 		outline: none;
 		padding: 0 !important;
+		gap: 0 !important;
 
 		&::after {
 			@include icon.generate('arrow_south');
