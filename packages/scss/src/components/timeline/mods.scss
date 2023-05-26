@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin S {
@@ -53,12 +54,12 @@
 			content: '';
 			display: block;
 			height: auto;
-			width: 2px;
 			position: absolute;
 			top: calc(var(--spacings-L) + var(--spacings-XXS));
 			bottom: -0.75rem;
 			left: 0.45rem; // magic number
 			margin: 0;
+			border-left: 2px solid var(--palettes-grey-200);
 		}
 
 		&:not(:last-child)[aria-current='step'] {
@@ -133,6 +134,9 @@
 @mixin verticalProgress {
 	.timeline-step[aria-current='step'] {
 		&::after {
+			height: unset;
+			width: 2px;
+			border: none;
 			background: linear-gradient(180deg, var(--palettes-primary-700) var(--progress), var(--palettes-grey-200) var(--progress));
 		}
 	}
@@ -163,11 +167,21 @@
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				@include icon.generate('tick');
+				@include icon.generate('confirm');
+				font-size: var(--components-timeline-icon-size);
 				display: flex;
 			}
 		}
+
+		&::after {
+			border-color: var(--palettes-primary-200);
+			border-bottom-style: solid;
+		}
 	}
+}
+
+@mixin checkedPastStepL {
+	--components-timeline-icon-size: var(--sizes-S-lineHeight);
 }
 
 @mixin checkedPastStepVerticalNotL {
@@ -237,6 +251,10 @@
 			transform: translateY(-50%);
 		}
 	}
+
+	.button {
+		gap: 0;
+	}
 }
 
 @mixin addStepVertical {
@@ -282,6 +300,7 @@
 	.timeline-stepAddBetweenStep {
 		.timeline-step-title {
 			padding-left: 0;
+
 			&:before {
 				display: none;
 			}
@@ -289,22 +308,24 @@
 	}
 	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
-
 		width: auto;
 
-		&:focus,
 		&:hover {
-			outline: none;
-
 			.timeline-step-title-icon::before {
-				box-shadow: 0 0 0 0.25rem var(--palettes-primary-500);
+				background-color: var(--palettes-primary-600);
+			}
+		}
+
+		&:focus-visible {
+			.timeline-step-title-icon::before {
+				@include a11y.focusVisible;
 			}
 		}
 	}
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		@include icon.generate('plus');
 		display: flex;
-		transition: box-shadow var(--commons-animations-durations-standard);
+		transition: background-color var(--commons-animations-durations-fast);
 	}
 }
 
@@ -325,18 +346,26 @@
 @mixin progress {
 	.timeline-step[aria-current='step'] {
 		&::after {
+			border: none;
+			height: 2px;
 			background: linear-gradient(90deg, var(--palettes-primary-700) var(--progress), var(--palettes-grey-200) var(--progress));
 		}
 	}
 }
 
-@mixin notPastChecked {
-	.timeline-step {
-		&::after {
-			background-color: var(--palettes-grey-200);
-		}
+@mixin dashed {
+	.timeline-step::after {
+		border-bottom-style: dashed;
 	}
+}
 
+@mixin dashedVertical {
+	.timeline-step::after {
+		border-left-style: dashed;
+	}
+}
+
+@mixin notPastChecked {
 	.timeline-step-title {
 		color: var(--palettes-grey-900);
 

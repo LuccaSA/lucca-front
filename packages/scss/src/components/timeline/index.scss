@@ -60,6 +60,11 @@
 
 	&.mod-checkedPastStep {
 		@include checkedPastStep;
+
+		&.mod-L {
+			@include checkedPastStepL;
+		}
+
 		&.mod-vertical:not(.mod-L) {
 			@include checkedPastStepVerticalNotL;
 		}
@@ -80,6 +85,14 @@
 
 	&.mod-progress {
 		@include progress;
+	}
+
+	&.mod-dashed {
+		@include dashed;
+
+		&.mod-vertical {
+			@include dashedVertical;
+		}
 	}
 
 	&:not(.mod-checkedPastStep) {
