@@ -5,6 +5,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'sidepanel-content',
+	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
 class SidepanelContentComponent implements ILuSidepanelContent {
@@ -14,9 +15,15 @@ class SidepanelContentComponent implements ILuSidepanelContent {
 
 @Component({
 	selector: 'sidepanel-stories',
-	templateUrl: './sidepanel.stories.html',
+	standalone: true,
+	imports: [SidepanelContentComponent, LuSidepanelModule],
+	template: `
+		<h1>Sidepanels</h1>
+
+		<button type="button" class="button" (click)="openSidepanel()">Open sidepanel</button>
+	`,
 })
-class SidePanelStories {
+class SidePanelStory {
 	constructor(private sidepanelFactory: LuSidepanel) {}
 
 	public openSidepanel() {
@@ -26,17 +33,16 @@ class SidePanelStories {
 
 export default {
 	title: 'Documentation/Navigation/Sidepanel',
-	component: SidePanelStories,
+	component: SidePanelStory,
 	decorators: [
 		moduleMetadata({
-			declarations: [SidepanelContentComponent],
-			entryComponents: [SidePanelStories],
-			imports: [LuSidepanelModule, BrowserAnimationsModule],
+			entryComponents: [SidePanelStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const template: Story<SidePanelStories> = (args: SidePanelStories) => ({
+const template: Story<SidePanelStory> = (args: SidePanelStory) => ({
 	props: args,
 });
 

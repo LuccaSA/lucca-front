@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface LinkBasicStory {
-		disabled: boolean;
+	disabled: boolean;
 }
 
 export default {

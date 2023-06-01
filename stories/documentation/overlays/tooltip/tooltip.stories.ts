@@ -6,6 +6,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 
 @Component({
 	selector: 'tooltip-stories',
+	standalone: true,
+	imports: [LuTooltipModule],
 	template: `<button
 		type="button"
 		class="button u-marginL"
@@ -85,8 +87,7 @@ export default {
 			tabindex: props.tabindex,
 		})),
 		moduleMetadata({
-			imports: [LuTooltipModule, BrowserAnimationsModule],
-			declarations: [TooltipStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

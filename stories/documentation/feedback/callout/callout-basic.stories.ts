@@ -12,13 +12,13 @@ export default {
 			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
-			}
+			},
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 	},
 } as Meta;
@@ -33,7 +33,7 @@ function getTemplate(args: CalloutBasicStory): string {
 			<div class="callout-content-description">Je suis un callout basique <a href="#">En savoir plus</a></div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CalloutBasicStory> = (args: CalloutBasicStory) => ({

@@ -27,19 +27,21 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 			<a href="#" class="link">Content link</a>
 		</div>
 	`,
-	styles: [`
-		#navSide {
-			margin-top: var(--spacings-XS);
-		}
+	styles: [
+		`
+			#navSide {
+				margin-top: var(--spacings-XS);
+			}
 
-		#main-content {
-			margin-top: var(--spacings-XS);
-		}
+			#main-content {
+				margin-top: var(--spacings-XS);
+			}
 
-		.link {
-			margin-right: var(--spacings-XS);
-		}
-	`]
+			.link {
+				margin-right: var(--spacings-XS);
+			}
+		`,
+	],
 })
 class SkipLinksStory {}
 

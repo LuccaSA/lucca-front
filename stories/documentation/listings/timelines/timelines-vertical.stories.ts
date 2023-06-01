@@ -11,13 +11,13 @@ export default {
 		number: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		size: {
 			options: ['', 'mod-S', 'mod-L'],
 			control: {
 				type: 'radio',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -61,7 +61,7 @@ function getTemplate(args: TimelinesVerticalStory): string {
 				</div>
 			</li>
 		</ol>
-	`
+	`;
 }
 
 const Template: Story<TimelinesVerticalStory> = (args: TimelinesVerticalStory) => ({

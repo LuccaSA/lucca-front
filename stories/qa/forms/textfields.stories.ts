@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
+	standalone: true,
 	selector: 'forms-textfields-stories',
 	templateUrl: './textfields.stories.html',
 	styles: [

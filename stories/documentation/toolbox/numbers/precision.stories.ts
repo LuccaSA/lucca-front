@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'precision-stories',
-	template: `<code [innerHTML]="value | luNumber: precision"></code>`,
+	standalone: true,
+	imports: [LuNumberPipe],
+	template: `<code [innerHTML]="value | luNumber : precision"></code>`,
 })
 class PrecisionStory {
 	@Input() value: number;
@@ -18,12 +20,6 @@ export default {
 		value: { control: { type: 'number' } },
 		precision: { control: { type: 'range', min: 1, max: 15, step: 1 } },
 	},
-	decorators: [
-		moduleMetadata({
-			imports: [LuNumberPipe],
-			declarations: [PrecisionStory],
-		}),
-	],
 } as Meta;
 
 const template: Story<PrecisionStory> = (args: PrecisionStory) => ({

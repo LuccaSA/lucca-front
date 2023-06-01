@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface MenuContainerStory {
-}
+interface MenuContainerStory {}
 
 export default {
 	title: 'Documentation/Navigation/Menu/Container',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: MenuContainerStory): string {
@@ -32,7 +30,7 @@ function getTemplate(args: MenuContainerStory): string {
 			</ul>
 		</div>
 	</nav>
-	`
+	`;
 }
 
 const Template: Story<MenuContainerStory> = (args: MenuContainerStory) => ({
@@ -41,4 +39,4 @@ const Template: Story<MenuContainerStory> = (args: MenuContainerStory) => ({
 });
 
 export const Container = Template.bind({});
-Container.args = { };
+Container.args = {};

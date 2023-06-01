@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
 @Component({
+	standalone: true,
 	selector: 'timelines-stories',
 	templateUrl: './timelines.stories.html',
 }) class TimelinesStory {}

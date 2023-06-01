@@ -6,6 +6,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
+	standalone: true,
+	imports: [CommonModule],
 	template: ` <div class="grid">
 		<div class="grid-3@mediaMinXXS ng-demo-block">
 			<h3 class="u-margin0">
@@ -27,8 +29,7 @@ export default {
 	component: FadeAnimationStory,
 	decorators: [
 		moduleMetadata({
-			imports: [CommonModule, BrowserAnimationsModule],
-			declarations: [FadeAnimationStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

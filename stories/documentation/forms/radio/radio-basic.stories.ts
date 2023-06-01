@@ -12,18 +12,18 @@ export default {
 		row: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 	},
 } as Meta;
@@ -50,7 +50,7 @@ function getTemplate(args: RadiosBasicStory): string {
 			</div>
 		</div>
 	</fieldset>
-	`
+	`;
 }
 
 const Template: Story<RadiosBasicStory> = (args: RadiosBasicStory) => ({

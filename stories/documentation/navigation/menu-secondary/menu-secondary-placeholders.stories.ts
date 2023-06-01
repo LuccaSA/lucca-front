@@ -10,7 +10,7 @@ export default {
 		compact: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -32,13 +32,14 @@ function getTemplate(args: MenuSecondaryPlaceholderStory): string {
 			</div>
 		</nav>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<MenuSecondaryPlaceholderStory> = (args: MenuSecondaryPlaceholderStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.navSide {
 			position: relative;
 			max-height: 30rem;

@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableStickyColumnsAndHeaderWithBreakpointsStory {
-}
+interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Sticky Columns And Header With Breakpoints',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): string {
@@ -144,15 +142,13 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 			</tbody>
 		</table>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`.demo-wrapper {overflow: auto; height: 10rem;}`
-	]
+	styles: [`.demo-wrapper {overflow: auto; height: 10rem;}`],
 });
 
 export const StickyColumnsAndHeaderWithBreakpoints = Template.bind({});

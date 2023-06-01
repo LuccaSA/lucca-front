@@ -10,7 +10,7 @@ export default {
 	title: 'Documentation/Forms/Timepicker/Basic',
 	argTypes: {
 		mod: {
-			options: ['', 'mod-outlined',],
+			options: ['', 'mod-outlined'],
 			control: {
 				type: 'radio',
 			},
@@ -30,8 +30,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: timepickerBasicStory): string {
-		const classes = [args.mod, args.palette].filter(Boolean).join(' ');
-		const disabled = args.disabled ? `disabled` : '';
+	const classes = [args.mod, args.palette].filter(Boolean).join(' ');
+	const disabled = args.disabled ? `disabled` : '';
 	return `
 <fieldset class="timepicker ${classes}" ${disabled}>
 	<legend class="u-mask">Durée</legend>
@@ -61,7 +61,7 @@ function getTemplate(args: timepickerBasicStory): string {
 		</button>
 	</div>
 </fieldset>
-	`
+	`;
 }
 
 const Template: Story<timepickerBasicStory> = (args: timepickerBasicStory) => ({
@@ -70,4 +70,4 @@ const Template: Story<timepickerBasicStory> = (args: timepickerBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', mod: '', disabled: false};
+Basic.args = { palette: '', mod: '', disabled: false };

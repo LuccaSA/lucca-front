@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TimelinesAddBetweenVerticalStory {
-}
+interface TimelinesAddBetweenVerticalStory {}
 
 export default {
 	title: 'Documentation/Listings/Timelines/Add Between Vertical',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TimelinesAddBetweenVerticalStory): string {
@@ -40,7 +38,7 @@ function getTemplate(args: TimelinesAddBetweenVerticalStory): string {
 			</div>
 		</li>
 	</ol>
-	`
+	`;
 }
 
 const Template: Story<TimelinesAddBetweenVerticalStory> = (args: TimelinesAddBetweenVerticalStory) => ({

@@ -10,7 +10,7 @@ export default {
 		clickable: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -40,7 +40,7 @@ function getTemplate(args: ListBasicStory): string {
 			</div>
 		</li>
 	</ul>
-	`
+	`;
 }
 
 const Template: Story<ListBasicStory> = (args: ListBasicStory) => ({
