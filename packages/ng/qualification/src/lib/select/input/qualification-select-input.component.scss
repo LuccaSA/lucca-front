@@ -2,13 +2,13 @@
 @include selectInputStyle;
 
 .optionItem-groupKey {
-	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
-	margin: 0;
-	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal) var(--spacings-XXS);
 	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
 	width: 100%;
 	text-align: left;
-	text-decoration: underline;
+	color: var(--palettes-grey-600);
+	margin: 0;
 
 	&:first-of-type {
 		border-top-color: transparent;

@@ -4,15 +4,15 @@
 :root {
 	--components-options-item-padding-vertical: var(--spacings-XS);
 	--components-options-item-padding-horizontal: var(--spacings-XS);
-	--components-options-item-multiple-padding: var(--spacings-L);
+	--components-options-item-multiple-padding: 2.25rem;
 	--components-options-item-icon-color: var(--palettes-grey-800);
 
 	--components-options-checkbox-left: 0.5rem;
-	--components-options-checkbox-size: 1rem;
+	--components-options-checkbox-size: 1.25rem;
 	--components-options-checkbox-color: var(--palettes-primary-700);
-	--components-options-checkbox-border-radius: var(--commons-borderRadius-M);
+	--components-options-checkbox-border-radius: 6px;
 	--components-options-checkbox-border-color: var(--palettes-grey-700);
-	--components-options-establishment-multiple-padding: var(--spacings-M);
+	--components-options-establishment-multiple-padding: 2rem;
 }
 
 @mixin optionItemStyle {
@@ -25,6 +25,7 @@
 	}
 
 	.optionItem-value {
+		border-radius: var(--commons-borderRadius-M);
 		display: block;
 		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
 		transition: background-color 50ms;
@@ -32,12 +33,27 @@
 
 		&.is-selected {
 			background-color: var(--palettes-primary-50);
+
+			&:hover {
+				background-color: var(--palettes-primary-100);
+			}
+
+			&:active {
+				background-color: var(--palettes-primary-200);
+			}
 		}
 
-		&:hover,
+		&:hover {
+			background-color: var(--palettes-grey-50);
+		}
+
 		&.is-highlighted,
 		&.is-focus {
 			background-color: var(--palettes-grey-50);
+		}
+
+		&:active {
+			background-color: var(--palettes-grey-100);
 		}
 	}
 
@@ -75,17 +91,17 @@
 				box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
 				display: block;
 				height: var(--components-options-checkbox-size);
-				transition: all 100ms;
+				transition-property: background-color, box-shadow;
+				transition-duration: var(--commons-animations-durations-fast);
 				width: var(--components-options-checkbox-size);
 			}
 
 			&::after {
-				@include icon.generate('tick');
+				@include icon.generate('confirm');
 
 				color: transparent;
-				font-size: 1rem;
+				font-size: var(--sizes-S-lineHeight);
 				line-height: var(--components-options-checkbox-size);
-				padding-top: 0.05rem;
 				position: absolute;
 				text-align: center;
 				transform: translateY(-50%) scale(0);
@@ -115,14 +131,13 @@
 		&.establishmentOption {
 			.optionItem-value {
 				position: relative;
-				padding-left: calc(
-					2 * var(--components-options-item-padding-horizontal) + var(--components-options-checkbox-size) + var(--spacings-XS)
-				);
+				padding-left: calc(var(--components-options-checkbox-size) + var(--spacings-XS) * 2);
 			}
+
 			.optionItem-value {
 				&::before,
 				&::after {
-					left: calc(2 * var(--components-options-item-padding-horizontal));
+					left: var(--spacings-XS);
 				}
 			}
 		}
