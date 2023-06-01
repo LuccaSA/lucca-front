@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,8 +11,23 @@ import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } f
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
+	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-homonyms.stories.html',
+	imports: [
+		NgIf,
+		LuUserHomonymsComponent,
+		LuSelectInputComponent,
+		LuOptionPickerComponent,
+		LuApiPagedSearcherComponent,
+		LuInputDisplayerDirective,
+		LuOptionPickerAdvancedComponent,
+		LuOptionItemComponent,
+		LuUserDisplayPipe,
+		LuUserMeOptionDirective,
+		FormsModule,
+		LuForOptionsDirective,
+	],
 })
 class UserHomonymsStory {}
 
@@ -21,22 +37,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(UserHomonymsStory),
 		moduleMetadata({
-			declarations: [UserHomonymsStory],
-			imports: [
-				HttpClientModule,
-				LuUserHomonymsComponent,
-				LuSelectInputComponent,
-				LuOptionPickerComponent,
-				LuApiPagedSearcherComponent,
-				LuInputDisplayerDirective,
-				LuOptionPickerAdvancedComponent,
-				LuOptionItemComponent,
-				LuUserDisplayPipe,
-				LuUserMeOptionDirective,
-				BrowserAnimationsModule,
-				FormsModule,
-				LuForOptionsDirective,
-			],
+			imports: [UserHomonymsStory, HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

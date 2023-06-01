@@ -6,6 +6,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 
 @Component({
 	selector: 'api-select-story',
+	standalone: true,
+	imports: [LuApiSelectInputComponent],
 	template: `
 		<label class="textfield">
 			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3"></lu-api-select>
@@ -30,30 +32,26 @@ class ApiSelectStory {
 
 export default {
 	title: 'Documentation/Forms/Api/Select',
-	component: LuApiSelectInputComponent,
+	component: ApiSelectStory,
 	decorators: [
 		componentWrapperDecorator(ApiSelectStory),
 		moduleMetadata({
-			declarations: [ApiSelectStory],
-			imports: [HttpClientModule, BrowserAnimationsModule],
+			imports: [ApiSelectStory, HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const Template: Story<ApiSelectStory> = (props) => ({ props });
+const Template: Story<ApiSelectStory> = (args: ApiSelectStory) => ({
+	props: args,
+});
 
 const code = `
-/* 1. Importer LuApiSelectInputComponent */
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 
-@NgModule({
-	imports: [LuApiSelectInputComponent]
-})
-class ApiSelectStoriesModule {}
-
-/* 2. Utiliser lu-api-select */
 @Component({
 	selector: 'api-select-story',
+	standalone: true,
+	imports: [LuApiSelectInputComponent],
 	template: \`
 		<label class="textfield">
 			<lu-api-select class="textfield-input" [api]="apiV3"></lu-api-select>

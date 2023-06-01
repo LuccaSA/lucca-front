@@ -6,8 +6,9 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 @AngularComponent({
 	selector: 'dropdown-component-stories',
 	templateUrl: './dropdown-basic.stories.html',
-}) class DropdownComponentStories {
-	constructor() { }
+})
+class DropdownComponentStories {
+	constructor() {}
 }
 
 export default {
@@ -17,11 +18,8 @@ export default {
 		componentWrapperDecorator(DropdownComponentStories),
 		moduleMetadata({
 			declarations: [DropdownComponentStories],
-			imports: [
-				BrowserAnimationsModule,
-				LuDropdownModule,
-			]
-		})
+			imports: [BrowserAnimationsModule, LuDropdownModule],
+		}),
 	],
 } as Meta;
 
@@ -48,10 +46,10 @@ const code = `
   </li>
 
 </lu-dropdown>
-`
+`;
 
 export const Component = Template.bind({});
-Component.args = {}
+Component.args = {};
 Component.parameters = {
 	controls: { include: [] },
 	docs: {
@@ -59,6 +57,6 @@ Component.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
+		},
+	},
 };

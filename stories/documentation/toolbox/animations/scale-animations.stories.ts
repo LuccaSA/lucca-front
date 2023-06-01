@@ -6,6 +6,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'story-scale-animation',
+	standalone: true,
+	imports: [CommonModule],
 	template: `
 		<div class="grid">
 			<div class="grid@mediaMinXXS ng-demo-block">
@@ -60,8 +62,7 @@ export default {
 	component: ScaleAnimationStory,
 	decorators: [
 		moduleMetadata({
-			imports: [CommonModule, BrowserAnimationsModule],
-			declarations: [ScaleAnimationStory],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

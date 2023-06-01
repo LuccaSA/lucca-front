@@ -1,13 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, Resolve, TitleStrategy } from '@angular/router';
-import { createRoutingFactory, mockProvider, SpectatorRouting } from '@ngneat/spectator/jest';
-import { Observable, of, timer } from 'rxjs';
+import { ActivatedRouteSnapshot, TitleStrategy } from '@angular/router';
+import { SpectatorRouting, createRoutingFactory, mockProvider } from '@ngneat/spectator/jest';
+import { of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 import { TitleSeparator } from './title.model';
-import { LuTitleService } from './title.service';
 import { APP_TITLE, LuTitleStrategy } from './title.strategy';
 
 class TranslateService implements ILuTitleTranslateService {
@@ -32,13 +31,6 @@ class TranslateService implements ILuTitleTranslateService {
 		<a class="link-7" [routerLink]="['/second/1']">Stub</a> `,
 })
 export class AppComponent {}
-
-@Injectable({ providedIn: 'root' })
-export class TestNameResolver implements Resolve<string> {
-	resolve(route: ActivatedRouteSnapshot): Observable<string> {
-		return of(`Name ${route.paramMap.get('id')}`);
-	}
-}
 
 @Component({
 	selector: 'lu-stub',
@@ -86,7 +78,6 @@ describe('TitleService', () => {
 	const createComponent = createRoutingFactory({
 		component: AppComponent,
 		providers: [
-			LuTitleService,
 			mockProvider(Title),
 			{
 				provide: LU_TITLE_TRANSLATE_SERVICE,
@@ -150,7 +141,7 @@ describe('TitleService', () => {
 							{
 								path: ':id',
 								title: `Stubs' child {{name}}`,
-								resolve: { name: TestNameResolver },
+								resolve: { name: (route: ActivatedRouteSnapshot) => of(`Name ${route.paramMap.get('id')}`) },
 								component: StubComponent,
 							},
 						],

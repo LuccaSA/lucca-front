@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
+import { FieldTypeConfig, FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
+import { buildAddWrapperExtension } from '../formly.utils';
 
 // wrapper
 @Component({
@@ -10,11 +11,9 @@ import { FieldWrapper, FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core'
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LuFormlyWrapperError extends FieldWrapper {
+export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
-
-	override readonly formControl: FormControl;
 
 	get validationId() {
 		return this.field.id + '-message';
@@ -31,13 +30,13 @@ export class LuFormlyWrapperError extends FieldWrapper {
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyErrorMessage {
-	@Input() fieldForm: FormControl;
+	@Input() formControl?: FormControl;
 	@Input() field: FormlyFieldConfig;
 
 	get errorMessages(): string[] {
 		const messages: string[] = [];
-		if (this.fieldForm.errors) {
-			Object.keys(this.fieldForm.errors).forEach((key) => {
+		if (this.formControl?.errors) {
+			Object.keys(this.formControl.errors).forEach((key) => {
 				if (this.field.validation?.messages?.[key]) {
 					messages.push(this.field.validation.messages[key] as string);
 				}
@@ -47,14 +46,4 @@ export class LuFormlyErrorMessage {
 	}
 }
 
-// run to know when to add said wrapper
-export class TemplateError {
-	run(fc: FormlyConfig) {
-		fc.templateManipulators.postWrapper.push((field: FormlyFieldConfig) => {
-			if (field && field.validation) {
-				return 'error';
-			}
-			return '';
-		});
-	}
-}
+export const templateErrorExtension = buildAddWrapperExtension('error', (field) => !!field.validation);

@@ -20,7 +20,7 @@ function getTemplate(args: CardsFooterStory): string {
 			</div>
 		</footer>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CardsFooterStory> = (args: CardsFooterStory) => ({
@@ -29,4 +29,4 @@ const Template: Story<CardsFooterStory> = (args: CardsFooterStory) => ({
 });
 
 export const Footer = Template.bind({});
-Footer.args = { };
+Footer.args = {};

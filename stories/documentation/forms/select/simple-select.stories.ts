@@ -1,15 +1,17 @@
 import { HttpClientModule } from '@angular/common/http';
+import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { allLegumes, FilterLegumesPipe, generateStory, LuSelectInputStoryComponent } from './select.utils';
+import { useDocumentationStory } from 'stories/helpers/stories';
+import { ILegume, LuSelectInputStoryComponent, allLegumes, generateStory } from './select.utils';
 
-export const Basic = generateStory(
-	'Basic',
-	'',
-	`
+export const Basic = generateStory({
+	name: 'Basic',
+	description: '',
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
@@ -19,49 +21,49 @@ export const Basic = generateStory(
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-simple-select>
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
 	},
-);
+});
 // Override argTypes to display loading/clearable/disabled/placeholder controls
 Basic.argTypes = {};
 
-export const Minimal = generateStory(
-	'Minimal',
-	"Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l'option elle-même.",
-	`
+export const Minimal = generateStory({
+	name: 'Minimal',
+	description: "Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l'option elle-même.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		class="textfield-input"
 		placeholder="Placeholder..."
 		[options]="legumes"
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 	></lu-simple-select>
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-);
+});
 
-export const WithDisplayer = generateStory(
-	'Displayer',
-	"Il est possible de customiser l'affichage de l'option sélectionnée en utilisant `*luDisplayer`.",
-	`
+export const WithDisplayer = generateStory({
+	name: 'Displayer',
+	description: "Il est possible de customiser l'affichage de l'option sélectionnée en utilisant `*luDisplayer`.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 		[options]="legumes"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
@@ -70,25 +72,26 @@ export const WithDisplayer = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
-		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisplayerDirective'],
-		'@lucca-front/ng/simple-select': ['LuOptionDirective', 'LuDisplayerDirective'],
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective', 'LuDisplayerDirective'],
 	},
-	{
-		selectedLegume: allLegumes[4],
+	storyPartial: {
+		args: {
+			value: allLegumes[4],
+		},
 	},
-);
+});
 
-export const WithClearer = generateStory(
-	'Clearer',
-	"Il est possible d'afficher un bouton pour vider la sélection l'attribure `clearable`.",
-	`
+export const WithClearer = generateStory({
+	name: 'Clearer',
+	description: "Il est possible d'afficher un bouton pour vider la sélection l'attribure `clearable`.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 		[options]="legumes"
 		[clearable]="true"
 	>
@@ -97,25 +100,26 @@ export const WithClearer = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
 	},
-	{
-		selectedLegume: allLegumes[4],
+	storyPartial: {
+		args: {
+			value: allLegumes[4],
+		},
 	},
-);
+});
 
-export const WithClue = generateStory(
-	'Clue',
-	"Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
-	`
+export const WithClue = generateStory({
+	name: 'Clue',
+	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 	>
@@ -124,22 +128,21 @@ export const WithClue = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
 	},
-);
+});
 
-export const WithPagination = generateStory(
-	'Pagination',
-	"Il est possible de charger les options au fur et à mesure en écouteant l'évènement `(nextPage)`.",
-	`
+export const WithPagination = generateStory({
+	name: 'Pagination',
+	description: "Il est possible de charger les options au fur et à mesure en écouteant l'évènement `(nextPage)`.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 		[options]="legumes.slice(0, page * 10)"
 		(nextPage)="page = page + 1"
 	>
@@ -148,22 +151,21 @@ export const WithPagination = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
 	},
-);
+});
 
-export const Disabled = generateStory(
-	'Disabled',
-	"Il est possible de désactiver le simple-select en utilisant l'attribut `disabled` ou via un FormControl.",
-	`
+export const Disabled = generateStory({
+	name: 'Disabled',
+	description: "Il est possible de désactiver le simple-select en utilisant l'attribut `disabled` ou via un FormControl.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 		[options]="legumes"
 		[disabled]="true"
 	>
@@ -172,22 +174,21 @@ export const Disabled = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective'],
 	},
-);
+});
 
-export const WithDisabledOptions = generateStory(
-	'Disabled options',
-	"Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
-	`
+export const WithDisabledOptions = generateStory({
+	name: 'Disabled options',
+	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		#selectRef
 		class="textfield-input"
 		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegume"
+		[(ngModel)]="value"
 		[options]="legumes"
 	>
 		<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
@@ -195,16 +196,15 @@ export const WithDisabledOptions = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
-		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuOptionDirective', 'LuDisabledOptionDirective'],
 	},
-);
+});
 
-export const ApiV3 = generateStory(
-	'Api V3',
-	"Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
-	`
+export const ApiV3 = generateStory({
+	name: 'Api V3',
+	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		class="textfield-input"
@@ -215,16 +215,16 @@ export const ApiV3 = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV3Directive'],
 	},
-);
+});
 
-export const ApiV4 = generateStory(
-	'Api V4',
-	"Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
-	`
+export const ApiV4 = generateStory({
+	name: 'Api V4',
+	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
+	template: `
 <label class="textfield">
 	<lu-simple-select
 		class="textfield-input"
@@ -235,11 +235,18 @@ export const ApiV4 = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
 	},
-);
+});
+
+@Pipe({ name: 'filterLegumes', standalone: true })
+class FilterLegumesPipe implements PipeTransform {
+	transform(legumes: ILegume[], clue: string): ILegume[] {
+		return clue ? legumes.filter((legume) => legume.name.toLowerCase().includes(clue.toLowerCase())) : legumes;
+	}
+}
 
 const meta: Meta<LuSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
@@ -255,8 +262,6 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 		clearable: false,
 		disabled: false,
 		loading: false,
-		selectedLegume: null,
-		selectedLegumes: [],
 		page: 1,
 	},
 	argTypes: {
@@ -269,15 +274,9 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 		nextPage: { control: false },
 		previousPage: { control: false },
 		legumes: { control: false },
-		selectedLegume: { control: false },
-		selectedLegumes: { control: false },
 	},
 	parameters: {
-		docs: {
-			description: {
-				component: Basic.parameters['docs'].description.story,
-			},
-		},
+		docs: useDocumentationStory(Basic),
 	},
 };
 

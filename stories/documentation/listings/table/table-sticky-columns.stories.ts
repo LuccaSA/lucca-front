@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableStickyColumnsStory {
-}
+interface TableStickyColumnsStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Sticky Columns',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableStickyColumnsStory): string {
@@ -133,15 +131,13 @@ function getTemplate(args: TableStickyColumnsStory): string {
 			</tbody>
 		</table>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<TableStickyColumnsStory> = (args: TableStickyColumnsStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`.demo-wrapper {overflow: auto;}`
-	]
+	styles: [`.demo-wrapper {overflow: auto;}`],
 });
 
 export const StickyColumns = Template.bind({});

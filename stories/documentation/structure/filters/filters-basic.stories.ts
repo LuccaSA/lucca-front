@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FiltersBasicStory {
-}
+interface FiltersBasicStory {}
 
 export default {
 	title: 'Documentation/Structure/Filters/Basic',
@@ -33,7 +32,7 @@ function getTemplate(args: FiltersBasicStory): string {
 			</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<FiltersBasicStory> = (args: FiltersBasicStory) => ({

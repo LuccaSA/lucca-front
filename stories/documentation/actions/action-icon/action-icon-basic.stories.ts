@@ -30,7 +30,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 	},
 } as Meta;

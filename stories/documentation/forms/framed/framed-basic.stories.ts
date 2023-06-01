@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FramedBasicStory {
-}
+interface FramedBasicStory {}
 
 export default {
 	title: 'Documentation/Forms/Framed/Basic',
@@ -186,7 +185,7 @@ function getTemplate(args: FramedBasicStory): string {
 			</div>
 		</fieldset>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<FramedBasicStory> = (args: FramedBasicStory) => ({
@@ -195,4 +194,4 @@ const Template: Story<FramedBasicStory> = (args: FramedBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

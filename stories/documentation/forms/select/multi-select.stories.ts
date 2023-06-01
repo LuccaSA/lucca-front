@@ -8,10 +8,10 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { FilterLegumesPipe, LuSelectInputStoryComponent, allLegumes, generateStory } from './select.utils';
 
-export const Basic = generateStory(
-	'Basic',
-	'',
-	`
+export const Basic = generateStory({
+	name: 'Basic',
+	description: '',
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -27,20 +27,23 @@ export const Basic = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
-	{
-		selectedLegumes: allLegumes.slice(0, 15),
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 15),
+		},
 	},
-);
+});
 // Override argTypes to display loading/clearable/disabled/placeholder controls
 Basic.argTypes = {};
 
-export const WithMultiDisplayer = generateStory(
-	'With MultiDisplayer',
-	"Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l'ensemble des valeurs sélectionnées.",
-	`
+export const WithMultiDisplayer = generateStory({
+	name: 'With MultiDisplayer',
+	description:
+		"Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l'ensemble des valeurs sélectionnées.",
+	template: `
 <label class="textfield mod-block u-marginTopM">
 	<lu-multi-select
 		#selectRef
@@ -58,18 +61,21 @@ export const WithMultiDisplayer = generateStory(
 	</lu-multi-select>
 	<span class="textfield-label">Label</span>
 </label>`,
-	{
+	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective'],
 	},
-	{
-		selectedLegumes: allLegumes.slice(0, 5),
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 5),
+		},
 	},
-);
+});
 
-export const WithDisplayer = generateStory(
-	'With Displayer',
-	"Il est possible de personnaliser le contenu des *chips* dans l'affichage de la valeur sélectionnée en utilisant la directive `luDisplayer`. Le *template* prend une option parmis les valeurs sélectionnées.",
-	`
+export const WithDisplayer = generateStory({
+	name: 'With Displayer',
+	description:
+		"Il est possible de personnaliser le contenu des *chips* dans l'affichage de la valeur sélectionnée en utilisant la directive `luDisplayer`. Le *template* prend une option parmis les valeurs sélectionnées.",
+	template: `
 <label class="textfield mod-block u-marginTopM">
 	<lu-multi-select
 		#selectRef
@@ -87,19 +93,21 @@ export const WithDisplayer = generateStory(
 	</lu-multi-select>
 	<span class="textfield-label">Label</span>
 </label>`,
-	{
+	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective'],
 		'@lucca-front/ng/core-select': ['LuDisplayerDirective'],
 	},
-	{
-		selectedLegumes: allLegumes.slice(0, 5),
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 5),
+		},
 	},
-);
+});
 
-export const WithClearer = generateStory(
-	'Clearer',
-	"Il est possible d'afficher un bouton pour vider la sélection l'attribure `clearable`.",
-	`
+export const WithClearer = generateStory({
+	name: 'Clearer',
+	description: "Il est possible d'afficher un bouton pour vider la sélection l'attribure `clearable`.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -114,19 +122,21 @@ export const WithClearer = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-	{
-		selectedLegumes: allLegumes.slice(0, 5),
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 5),
+		},
 	},
-);
+});
 
-export const WithClue = generateStory(
-	'Clue',
-	"Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
-	`
+export const WithClue = generateStory({
+	name: 'Clue',
+	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -141,16 +151,16 @@ export const WithClue = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-);
+});
 
-export const WithSelectAll = generateStory(
-	'SelectAll',
-	"Il est possible d'afficher un bouton pour sélectionner tout en écoutant l'évènement `(selectAll)`.",
-	`
+export const WithSelectAll = generateStory({
+	name: 'SelectAll',
+	description: "Il est possible d'afficher un bouton pour sélectionner tout en écoutant l'évènement `(selectAll)`.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -166,16 +176,16 @@ export const WithSelectAll = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-);
+});
 
-export const WithPagination = generateStory(
-	'Pagination',
-	"Il est possible de charger les options au fur et à mesure en écouteant l'évènement `(nextPage)`.",
-	`
+export const WithPagination = generateStory({
+	name: 'Pagination',
+	description: "Il est possible de charger les options au fur et à mesure en écouteant l'évènement `(nextPage)`.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -190,16 +200,16 @@ export const WithPagination = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-);
+});
 
-export const Disabled = generateStory(
-	'Disabled',
-	"Il est possible de désactiver le simple-select en utilisant l'attribut `disabled` ou via un FormControl.",
-	`
+export const Disabled = generateStory({
+	name: 'Disabled',
+	description: "Il est possible de désactiver le simple-select en utilisant l'attribut `disabled` ou via un FormControl.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -214,19 +224,21 @@ export const Disabled = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-	{
-		selectedLegumes: allLegumes.slice(0, 5),
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 5),
+		},
 	},
-);
+});
 
-export const WithDisabledOptions = generateStory(
-	'Disabled options',
-	"Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
-	`
+export const WithDisabledOptions = generateStory({
+	name: 'Disabled options',
+	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		#selectRef
@@ -240,16 +252,16 @@ export const WithDisabledOptions = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 `,
-	{
+	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-);
+});
 
-export const ApiV3 = generateStory(
-	'Api V3',
-	"Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
-	`
+export const ApiV3 = generateStory({
+	name: 'Api V3',
+	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		class="textfield-input"
@@ -260,16 +272,16 @@ export const ApiV3 = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV3Directive'],
 	},
-);
+});
 
-export const ApiV4 = generateStory(
-	'Api V4',
-	"Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
-	`
+export const ApiV4 = generateStory({
+	name: 'Api V4',
+	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
+	template: `
 <label class="textfield">
 	<lu-multi-select
 		class="textfield-input"
@@ -280,16 +292,16 @@ export const ApiV4 = generateStory(
 	<span class="textfield-label">Label</span>
 </label>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
 	},
-);
+});
 
-export const Responsive = generateStory(
-	'Responsive',
-	"Le panel s'ouvre en dessous du select quand il a assez de place, sinon il s'ouvre au dessus.",
-	`
+export const Responsive = generateStory({
+	name: 'Responsive',
+	description: "Le panel s'ouvre en dessous du select quand il a assez de place, sinon il s'ouvre au dessus.",
+	template: `
 <div class="grid" style="height: 100vh;">
 	<div class="grid-6@mediaMinXS" style="height: 75vh;">
 		<label class="textfield">
@@ -341,11 +353,11 @@ export const Responsive = generateStory(
 	</div>
 </div>
 	`,
-	{
+	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
 	},
-);
+});
 
 const meta: Meta<LuSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',

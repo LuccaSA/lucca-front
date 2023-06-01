@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { StoryObj } from '@storybook/angular';
+import { getStoryGenerator } from 'stories/helpers/stories';
 
 export interface ILegume {
 	index: number;
@@ -49,48 +49,14 @@ export const allLegumes = [
 	{ name: 'Topinambour', index: 31 },
 ];
 
-export function generateStory(
-	name: string,
-	description: string,
-	template: string,
-	neededImports: { [key: string]: string[] },
-	args: StoryObj<LuSelectInputStoryComponent>['args'] = {},
-): StoryObj<LuSelectInputStoryComponent> {
-	return {
-		name,
-		args,
-		argTypes: {
-			clearable: { control: false },
-			disabled: { control: false },
-			loading: { control: false },
-			placeholder: { control: false },
-		},
-		render: (args) => ({
-			props: args,
-			template,
-		}),
-		parameters: {
-			docs: {
-				source: {
-					language: 'html',
-					type: 'code',
-					code: template,
-				},
-				description: {
-					story: `
-${description}
-
-**Imports nécessaires** :
-
-${Object.entries(neededImports)
-	.map(([module, imports]) => `\`import { ${imports.join(', ')} } from '${module}';\``)
-	.join('\n')}
-`,
-				},
-			},
-		},
-	};
-}
+export const generateStory = getStoryGenerator<LuSelectInputStoryComponent>({
+	argTypes: {
+		clearable: { control: false },
+		disabled: { control: false },
+		loading: { control: false },
+		placeholder: { control: false },
+	},
+});
 
 @Pipe({ name: 'filterLegumes', standalone: true })
 export class FilterLegumesPipe implements PipeTransform {

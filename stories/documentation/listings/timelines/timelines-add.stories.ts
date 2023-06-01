@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TimelinesAddStepStory {
-}
+interface TimelinesAddStepStory {}
 
 export default {
 	title: 'Documentation/Listings/Timelines/Add Step',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TimelinesAddStepStory): string {
@@ -36,7 +34,7 @@ function getTemplate(args: TimelinesAddStepStory): string {
 			</div>
 		</li>
 	</ol>
-	`
+	`;
 }
 
 const Template: Story<TimelinesAddStepStory> = (args: TimelinesAddStepStory) => ({

@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface ButtonSizeStory {
-}
+interface ButtonSizeStory {}
 
 export default {
 	title: 'Documentation/Actions/Button/Size',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: ButtonSizeStory): string {
@@ -23,4 +21,4 @@ const Template: Story<ButtonSizeStory> = (args: ButtonSizeStory) => ({
 });
 
 export const SizeButton = Template.bind({});
-SizeButton.args = { };
+SizeButton.args = {};

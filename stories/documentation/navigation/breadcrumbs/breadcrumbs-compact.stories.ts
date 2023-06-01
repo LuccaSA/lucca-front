@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface BreadcrumbsCompactStory {
-}
+interface BreadcrumbsCompactStory {}
 
 export default {
 	title: 'Documentation/Navigation/Breadcrumbs/Compact',
@@ -17,7 +16,7 @@ function getTemplate(args: BreadcrumbsCompactStory): string {
 		</ul>
 	</nav>
 	<h2>Current page</h2>
-	`
+	`;
 }
 
 const Template: Story<BreadcrumbsCompactStory> = (args: BreadcrumbsCompactStory) => ({

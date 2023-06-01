@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableDraggableStory {
-}
+interface TableDraggableStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Draggable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableDraggableStory): string {
@@ -46,7 +44,7 @@ function getTemplate(args: TableDraggableStory): string {
 			</tr>
 		</tbody>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableDraggableStory> = (args: TableDraggableStory) => ({

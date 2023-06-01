@@ -11,7 +11,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 	},
 } as Meta;
@@ -37,7 +37,7 @@ function getTemplate(args: FilesSuccessStory): string {
 			</span>
 		</span>
 	</label>
-	`
+	`;
 }
 
 const Template: Story<FilesSuccessStory> = (args: FilesSuccessStory) => ({
