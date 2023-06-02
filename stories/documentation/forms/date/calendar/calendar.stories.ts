@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 registerLocaleData(localesFr);
 
@@ -35,12 +35,9 @@ export default {
 	title: 'Documentation/Forms/Date/Calendar',
 	component: CalendarStory,
 	decorators: [
-		componentWrapperDecorator(CalendarStory),
-		moduleMetadata({
-			imports: [CalendarStory],
-			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
+		applicationConfig({
+			providers: [provideAnimations(), { provide: LOCALE_ID, useValue: 'en-US' }],
 		}),
-		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

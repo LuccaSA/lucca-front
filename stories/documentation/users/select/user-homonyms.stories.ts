@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -8,7 +8,7 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -33,14 +33,8 @@ class UserHomonymsStory {}
 
 export default {
 	title: 'Documentation/Users/Select/Homonymes',
-	component: LuUserHomonymsComponent,
-	decorators: [
-		componentWrapperDecorator(UserHomonymsStory),
-		moduleMetadata({
-			imports: [UserHomonymsStory, HttpClientModule],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	component: UserHomonymsStory,
+	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
 const template: StoryFn<UserHomonymsStory> = (args: UserHomonymsStory) => ({

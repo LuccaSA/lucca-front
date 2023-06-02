@@ -4,7 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'select-stories',
@@ -81,13 +81,7 @@ export default {
 	title: 'Documentation/Forms/Select',
 	component: SelectStory,
 	argTypes: {},
-	decorators: [
-		componentWrapperDecorator(SelectStory),
-		moduleMetadata({
-			imports: [SelectStory],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const template: StoryFn<SelectStory> = (args: SelectStory) => ({

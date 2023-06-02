@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -64,14 +64,8 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
-	component: LuToastsComponent,
-	decorators: [
-		componentWrapperDecorator(ToastsStory),
-		moduleMetadata({
-			imports: [ToastsStory],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	component: ToastsStory,
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const template: StoryFn<ToastsStory> = (args: ToastsStory) => ({

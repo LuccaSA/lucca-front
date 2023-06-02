@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
@@ -77,17 +77,7 @@ export default {
 			control: { type: 'number' },
 		},
 	},
-	decorators: [
-		componentWrapperDecorator(TooltipStory, (props: TooltipStory) => ({
-			luTooltipEnterDelay: props.luTooltipEnterDelay,
-			luTooltipLeaveDelay: props.luTooltipLeaveDelay,
-			luTooltipDisabled: props.luTooltipDisabled,
-			luTooltipPosition: props.luTooltipPosition,
-			luTooltipWhenEllipsis: props.luTooltipWhenEllipsis,
-			tabindex: props.tabindex,
-		})),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const template: StoryFn<TooltipStory> = (args: TooltipStory) => ({

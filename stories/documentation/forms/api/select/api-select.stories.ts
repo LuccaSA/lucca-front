@@ -1,8 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
-import { applicationConfig, componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'api-select-story',
@@ -33,13 +33,7 @@ class ApiSelectStory {
 export default {
 	title: 'Documentation/Forms/Api/Select',
 	component: ApiSelectStory,
-	decorators: [
-		componentWrapperDecorator(ApiSelectStory),
-		moduleMetadata({
-			imports: [ApiSelectStory, HttpClientModule],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
 const Template: StoryFn<ApiSelectStory> = (args: ApiSelectStory) => ({

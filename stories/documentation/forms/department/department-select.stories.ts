@@ -1,8 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
@@ -43,14 +43,8 @@ class DepartmentStory {
 
 export default {
 	title: 'Documentation/Forms/DepartmentSelect',
-	component: LuDepartmentSelectInputComponent,
-	decorators: [
-		componentWrapperDecorator(DepartmentStory),
-		moduleMetadata({
-			imports: [DepartmentStory, HttpClientModule],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	component: DepartmentStory,
+	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
 const template: StoryFn<DepartmentStory> = (args: DepartmentStory) => ({

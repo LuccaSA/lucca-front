@@ -1,19 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerDirective, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
-
-@Component({
-	selector: 'popover-mock-directive-story',
-	standalone: true,
-	template: ``,
-})
-class PopoverMockDirectiveStory extends LuPopoverTriggerDirective {}
+import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-story',
 	standalone: true,
-	imports: [LuPopoverModule, PopoverMockDirectiveStory],
+	imports: [LuPopoverModule],
 	template: `
 		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position" [luPopoverAlignment]="alignment" [luPopoverTrigger]="trigger">{{ trigger }} me</button>
 		<lu-popover #popover>{{ popoverContent }}</lu-popover>
@@ -28,14 +21,8 @@ class PopoverStory {
 
 export default {
 	title: 'Documentation/Overlays/Popover',
-	component: PopoverMockDirectiveStory,
-	decorators: [
-		componentWrapperDecorator(PopoverStory),
-		moduleMetadata({
-			imports: [PopoverStory],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	component: PopoverStory,
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const template: StoryFn<PopoverStory> = (args: PopoverStory) => ({

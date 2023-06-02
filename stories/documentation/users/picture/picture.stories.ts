@@ -1,6 +1,6 @@
 import { Component, Input, Optional } from '@angular/core';
 import { ILuUser, LuDisplayInitials, LuUserPictureModule } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 import { bob, squidwards } from '../user.mocks';
 
 @Component({
@@ -33,13 +33,6 @@ export default {
 			},
 		},
 	},
-	decorators: [
-		componentWrapperDecorator(UserPictureStory, (props: UserPictureStory) => ({
-			user: props.user,
-			displayFormat: props.displayFormat,
-			sizes: props.sizes,
-		})),
-	],
 } as Meta;
 
 const template: StoryFn<UserPictureStory> = (args: UserPictureStory) => ({

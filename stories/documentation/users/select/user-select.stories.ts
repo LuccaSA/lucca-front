@@ -1,9 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserSelectInputComponent, LuUserSelectModule } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
+import { LuUserSelectModule } from '@lucca-front/ng/user';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -17,14 +17,8 @@ class UserSelectStory {
 
 export default {
 	title: 'Documentation/Users/Select/Basique',
-	component: LuUserSelectInputComponent,
-	decorators: [
-		componentWrapperDecorator(UserSelectStory),
-		moduleMetadata({
-			imports: [UserSelectStory, HttpClientModule],
-		}),
-		applicationConfig({ providers: [provideAnimations()] }),
-	],
+	component: UserSelectStory,
+	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
 const template: StoryFn<UserSelectStory> = (args: UserSelectStory) => ({

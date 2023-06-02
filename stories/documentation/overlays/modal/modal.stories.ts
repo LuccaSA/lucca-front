@@ -305,12 +305,13 @@ modalRef.backdropClick.subscribe(() => console.log('backdrop clicked'));`,
 
 const meta: Meta<StoryComponent> = {
 	title: 'Documentation/Overlays/Modal',
+	component: ModalStories,
 	decorators: [
 		applicationConfig({
 			providers: [provideAnimations()],
 		}),
 		moduleMetadata({
-			imports: [LuModalModule, ModalStories],
+			imports: [LuModalModule],
 		}),
 	],
 	args: {},
