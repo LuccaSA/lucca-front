@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'sidepanel-content',
@@ -34,11 +34,7 @@ class SidePanelStory {
 export default {
 	title: 'Documentation/Navigation/Sidepanel',
 	component: SidePanelStory,
-	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-		}),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const template: StoryFn<SidePanelStory> = (args: SidePanelStory) => ({

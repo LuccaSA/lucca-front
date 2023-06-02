@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
@@ -47,8 +47,9 @@ export default {
 	decorators: [
 		componentWrapperDecorator(DepartmentStory),
 		moduleMetadata({
-			imports: [DepartmentStory, HttpClientModule, BrowserAnimationsModule],
+			imports: [DepartmentStory, HttpClientModule],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'select-stories',
@@ -84,8 +84,9 @@ export default {
 	decorators: [
 		componentWrapperDecorator(SelectStory),
 		moduleMetadata({
-			imports: [SelectStory, BrowserAnimationsModule],
+			imports: [SelectStory],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

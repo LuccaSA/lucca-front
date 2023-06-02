@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 
 @Component({
@@ -84,11 +84,7 @@ class SidepanelStory {
 export default {
 	title: 'Documentation/Overlays/Sidepanel',
 	component: SidepanelStory,
-	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-		}),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const Template: StoryFn<SidepanelStory> = (args: SidepanelStory) => ({

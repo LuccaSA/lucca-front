@@ -2,13 +2,13 @@ import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -37,8 +37,9 @@ export default {
 	decorators: [
 		componentWrapperDecorator(UserHomonymsStory),
 		moduleMetadata({
-			imports: [UserHomonymsStory, HttpClientModule, BrowserAnimationsModule],
+			imports: [UserHomonymsStory, HttpClientModule],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

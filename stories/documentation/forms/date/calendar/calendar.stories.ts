@@ -2,10 +2,10 @@ import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
 import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 registerLocaleData(localesFr);
 
@@ -37,9 +37,10 @@ export default {
 	decorators: [
 		componentWrapperDecorator(CalendarStory),
 		moduleMetadata({
-			imports: [CalendarStory, BrowserAnimationsModule],
+			imports: [CalendarStory],
 			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 
@@ -49,12 +50,12 @@ const template: StoryFn<CalendarStory> = (args: CalendarStory) => ({
 
 const code = `
 /*
-	1. Importer BrowserAnimationsModule
+	1. Appeler provideAnimations
 */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
-	imports: [BrowserAnimationsModule],
+	providers: [provideAnimations()],
 })
 class AppModule {}
 

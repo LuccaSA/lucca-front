@@ -1,9 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserSelectInputComponent, LuUserSelectModule } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -21,8 +21,9 @@ export default {
 	decorators: [
 		componentWrapperDecorator(UserSelectStory),
 		moduleMetadata({
-			imports: [UserSelectStory, HttpClientModule, BrowserAnimationsModule],
+			imports: [UserSelectStory, HttpClientModule],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

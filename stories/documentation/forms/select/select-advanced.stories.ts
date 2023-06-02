@@ -1,11 +1,11 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
@@ -66,8 +66,9 @@ export default {
 	decorators: [
 		componentWrapperDecorator(SelectAdvancedStory),
 		moduleMetadata({
-			imports: [SelectAdvancedStory, BrowserAnimationsModule],
+			imports: [SelectAdvancedStory],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'qualification-stories',
@@ -27,8 +27,9 @@ export default {
 	decorators: [
 		componentWrapperDecorator(QualificationSelectStory),
 		moduleMetadata({
-			imports: [QualificationSelectStory, HttpClientModule, BrowserAnimationsModule],
+			imports: [QualificationSelectStory, HttpClientModule],
 		}),
+		applicationConfig({ providers: [provideAnimations()] }),
 	],
 } as Meta;
 

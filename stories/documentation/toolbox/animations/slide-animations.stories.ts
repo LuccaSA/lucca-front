@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { luSlideAnimationFactory } from '@lucca-front/ng/animations';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'story-slide-animation',
@@ -52,11 +52,7 @@ class SlideAnimationStory {
 export default {
 	title: 'Documentation/Toolbox/Animations/Slide',
 	component: SlideAnimationStory,
-	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-		}),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
 const template: StoryFn<SlideAnimationStory> = (args: SlideAnimationStory) => ({
@@ -67,11 +63,11 @@ export const Slide = template.bind({});
 Slide.args = {};
 
 const code = `
-/* 1. Importer BrowserAnimationsModule */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/* 1. Appeler provideAnimations */
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
-	imports: [BrowserAnimationsModule]
+	providers: [provideAnimations()]
 })
 class AppModule {}
 
