@@ -1,4 +1,4 @@
-import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
 import { takeUntil } from 'rxjs';
@@ -85,76 +85,52 @@ export class LuMultiSelectPanelRefFactory {
 
 	protected buildDefaultOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
 		const overlayConfig: OverlayConfig = { ...overlayConfigOverride };
-		overlayConfig.positionStrategy = this.positionBuilder.flexibleConnectedTo(this.elementRef).withPositions([
-			{
-				originX: 'start',
-				originY: 'bottom',
-				overlayX: 'start',
-				overlayY: 'top',
-				panelClass: ['mod-below', 'mod-after'],
-			},
-			{
-				originX: 'end',
-				originY: 'bottom',
-				overlayX: 'end',
-				overlayY: 'top',
-				panelClass: ['mod-below', 'mod-before'],
-			},
-			{
-				originX: 'start',
-				originY: 'top',
-				overlayX: 'start',
-				overlayY: 'bottom',
-				panelClass: ['mod-above', 'mod-after'],
-			},
-			{
-				originX: 'end',
-				originY: 'top',
-				overlayX: 'end',
-				overlayY: 'bottom',
-				panelClass: ['mod-above', 'mod-before'],
-			},
-		]);
+
+		const config = { overlapInput: false, offsetY: 8 };
+		overlayConfig.positionStrategy = this.positionBuilder
+			.flexibleConnectedTo(this.elementRef)
+			.withViewportMargin(10)
+			.withPositions([
+				this.buildPosition('bottom', 'right', config),
+				this.buildPosition('bottom', 'left', config),
+				this.buildPosition('top', 'right', config),
+				this.buildPosition('top', 'left', config),
+			]);
 		overlayConfig.scrollStrategy = this.scrollStrategies.reposition();
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
 
-		// WIP Comment réserver l'espace pour le panel sans l'étirer ?
 		overlayConfig.width = 'min(40rem, 80vw)';
-		overlayConfig.height = 'var(--components-dropdown-max-height)';
 		overlayConfig.maxWidth = '100vw';
 
 		return overlayConfig;
 	}
 	buildExpandedPositionStrategy(): PositionStrategy {
-		return this.positionBuilder.flexibleConnectedTo(this.elementRef).withPositions([
-			{
-				originX: 'start',
-				originY: 'top',
-				overlayX: 'start',
-				overlayY: 'top',
-				panelClass: ['mod-below', 'mod-after'],
-			},
-			{
-				originX: 'end',
-				originY: 'top',
-				overlayX: 'end',
-				overlayY: 'top',
-				panelClass: ['mod-below', 'mod-before'],
-			},
-			{
-				originX: 'start',
-				originY: 'bottom',
-				overlayX: 'start',
-				overlayY: 'bottom',
-				panelClass: ['mod-above', 'mod-after'],
-			},
-			{
-				originX: 'end',
-				originY: 'bottom',
-				overlayX: 'end',
-				overlayY: 'bottom',
-				panelClass: ['mod-above', 'mod-before'],
-			},
-		]);
+		const config = { overlapInput: true, offsetX: -4, offsetY: -4 };
+		return this.positionBuilder
+			.flexibleConnectedTo(this.elementRef)
+			.withViewportMargin(10)
+			.withPositions([
+				this.buildPosition('top', 'right', config),
+				this.buildPosition('top', 'left', config),
+				this.buildPosition('bottom', 'right', config),
+				this.buildPosition('bottom', 'left', config),
+			]);
+	}
+
+	protected buildPosition(yDirection: 'top' | 'bottom', xDirection: 'left' | 'right', config: { offsetX?: number; offsetY?: number; overlapInput: boolean }): ConnectedPosition {
+		const originX = xDirection === 'right' ? 'start' : 'end';
+		const overlayX = originX;
+
+		const oppositeYDirection = yDirection === 'top' ? 'bottom' : 'top';
+		const { originY, overlayY } = config.overlapInput ? ({ originY: oppositeYDirection, overlayY: oppositeYDirection } as const) : ({ originY: yDirection, overlayY: oppositeYDirection } as const);
+
+		return {
+			originX,
+			originY,
+			overlayX,
+			overlayY,
+			...(config.offsetX ? { offsetX: xDirection === 'right' ? config.offsetX : -config.offsetX } : {}),
+			...(config.offsetY ? { offsetY: yDirection === 'bottom' ? config.offsetY : -config.offsetY } : {}),
+		};
 	}
 }

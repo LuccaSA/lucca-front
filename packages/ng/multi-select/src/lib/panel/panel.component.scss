@@ -12,32 +12,6 @@
 	transition-property: width, min-width, margin-top, margin-left;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease-in;
-
-	&.is-expanded {
-		width: min(40rem, 80vw);
-		min-width: 100%;
-	}
-}
-
-:host-context(.mod-above) .lu-multiselect-panel {
-	margin-top: calc(var(--spacings-XS) * -1);
-
-	&.is-expanded {
-		margin-top: calc(var(--spacings-XXS) * -1);
-	}
-}
-:host-context(.mod-below) .lu-multiselect-panel {
-	margin-top: var(--spacings-XS);
-
-	&.is-expanded {
-		margin-top: calc(var(--spacings-XXS) * -1);
-	}
-}
-:host-context(.mod-after) .lu-multiselect-panel.is-expanded {
-	margin-left: calc(var(--spacings-XXS) * -1);
-}
-:host-context(.mod-before) .lu-multiselect-panel.is-expanded {
-	margin-left: var(--spacings-XXS);
 }
 
 .lu-multiselect-panel-form {
