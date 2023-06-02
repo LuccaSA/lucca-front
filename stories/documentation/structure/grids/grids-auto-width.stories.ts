@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsAutoWidthStory {}
 
@@ -28,7 +28,7 @@ function getTemplate(args: GridsAutoWidthStory): string {
 	`;
 }
 
-const Template: Story<GridsAutoWidthStory> = (args: GridsAutoWidthStory) => ({
+const Template: StoryFn<GridsAutoWidthStory> = (args: GridsAutoWidthStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -73,7 +73,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<ToastsStory> = (args: ToastsStory) => ({
+const template: StoryFn<ToastsStory> = (args: ToastsStory) => ({
 	props: args,
 });
 

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsOffsetStory {}
 
@@ -24,7 +24,7 @@ function getTemplate(args: GridsOffsetStory): string {
 	`;
 }
 
-const Template: Story<GridsOffsetStory> = (args: GridsOffsetStory) => ({
+const Template: StoryFn<GridsOffsetStory> = (args: GridsOffsetStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

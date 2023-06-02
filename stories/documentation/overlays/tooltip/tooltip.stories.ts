@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
@@ -92,7 +92,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<TooltipStory> = (args: TooltipStory) => ({
+const template: StoryFn<TooltipStory> = (args: TooltipStory) => ({
 	props: args,
 });
 

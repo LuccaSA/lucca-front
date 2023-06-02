@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'utilities-print-stories',
@@ -20,7 +20,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<UtilitiesPrintStory> = (args: UtilitiesPrintStory) => ({
+const template: StoryFn<UtilitiesPrintStory> = (args: UtilitiesPrintStory) => ({
 	props: args,
 });
 

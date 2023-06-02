@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'qualification-stories',
@@ -32,7 +32,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<QualificationSelectStory> = (args: QualificationSelectStory) => ({
+const template: StoryFn<QualificationSelectStory> = (args: QualificationSelectStory) => ({
 	props: args,
 });
 

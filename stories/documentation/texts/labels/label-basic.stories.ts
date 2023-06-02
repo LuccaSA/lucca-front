@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface LabelBasicStory {
 	palette: string;
@@ -32,7 +32,7 @@ function getTemplate(args: LabelBasicStory): string {
 	`;
 }
 
-const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
+const Template: StoryFn<LabelBasicStory> = (args: LabelBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

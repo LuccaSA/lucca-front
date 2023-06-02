@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface BoxToggleStory {
 	grey: boolean;
@@ -29,7 +29,7 @@ function getTemplate(args: BoxToggleStory): string {
 	`;
 }
 
-const Template: Story<BoxToggleStory> = (args: BoxToggleStory) => ({
+const Template: StoryFn<BoxToggleStory> = (args: BoxToggleStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

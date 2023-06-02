@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface IconsColorStory {}
 
@@ -18,7 +18,7 @@ function getTemplate(args: IconsColorStory): string {
 	`;
 }
 
-const Template: Story<IconsColorStory> = (args: IconsColorStory) => ({
+const Template: StoryFn<IconsColorStory> = (args: IconsColorStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

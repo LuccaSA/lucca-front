@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface LinkBasicStory {
 	disabled: boolean;
@@ -24,7 +24,7 @@ function getTemplate(args: LinkBasicStory): string {
 	`;
 }
 
-const Template: Story<LinkBasicStory> = (args: LinkBasicStory) => ({
+const Template: StoryFn<LinkBasicStory> = (args: LinkBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

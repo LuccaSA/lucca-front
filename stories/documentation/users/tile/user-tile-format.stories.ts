@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../user.mocks';
 
 @Component({
@@ -26,7 +26,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
+const template: StoryFn<LuUserTileComponent> = (args: LuUserTileComponent) => ({
 	props: args,
 });
 

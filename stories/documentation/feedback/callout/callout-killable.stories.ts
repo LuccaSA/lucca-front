@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CalloutKillableStory {
 	palette: string;
@@ -28,7 +28,7 @@ function getTemplate(args: CalloutKillableStory): string {
 	`;
 }
 
-const Template: Story<CalloutKillableStory> = (args: CalloutKillableStory) => ({
+const Template: StoryFn<CalloutKillableStory> = (args: CalloutKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,7 +1,7 @@
 import { CommonModule, NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import * as icons from '@lucca-front/icons';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -29,6 +29,6 @@ export default {
 	]
 } as Meta;
 
-const template: Story<IconStory> = () => ({});
+const template: StoryFn<IconStory> = () => ({});
 
 export const basic = template.bind({});

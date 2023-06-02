@@ -1,13 +1,13 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/Dropdown/Directive',
 	component: LuDropdownTriggerDirective,
 } as Meta;
 
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
 	props: args,
 	moduleMetadata: {
 		imports: [BrowserAnimationsModule, LuDropdownModule],

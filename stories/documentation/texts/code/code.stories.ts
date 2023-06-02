@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TextCodeStory {
 	block: boolean;
@@ -24,7 +24,7 @@ amet
 	`;
 }
 
-const Template: Story<TextCodeStory> = (args: TextCodeStory) => ({
+const Template: StoryFn<TextCodeStory> = (args: TextCodeStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface StatusBadgeBasicStory {
 	state: string;
@@ -22,7 +22,7 @@ function getTemplate(args: StatusBadgeBasicStory): string {
 	`;
 }
 
-const Template: Story<StatusBadgeBasicStory> = (args: StatusBadgeBasicStory) => ({
+const Template: StoryFn<StatusBadgeBasicStory> = (args: StatusBadgeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface LoadingsBasicStory {
 	label: boolean;
@@ -65,7 +65,7 @@ function getTemplate(args: LoadingsBasicStory): string {
 	`;
 }
 
-const Template: Story<LoadingsBasicStory> = (args: LoadingsBasicStory) => ({
+const Template: StoryFn<LoadingsBasicStory> = (args: LoadingsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

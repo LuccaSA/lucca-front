@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ChipBasicStory {
 	clickable: boolean;
@@ -21,7 +21,7 @@ function getTemplate(args: ChipBasicStory): string {
 	`;
 }
 
-const Template: Story<ChipBasicStory> = (args: ChipBasicStory) => ({
+const Template: StoryFn<ChipBasicStory> = (args: ChipBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

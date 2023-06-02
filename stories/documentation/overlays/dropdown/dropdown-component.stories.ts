@@ -1,7 +1,7 @@
 import { Component as AngularComponent } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuDropdownModule, LuDropdownPanelComponent } from '@lucca-front/ng/dropdown';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @AngularComponent({
 	selector: 'dropdown-component-stories',
@@ -23,7 +23,7 @@ export default {
 	],
 } as Meta;
 
-const Template: Story<DropdownComponentStories> = (args: DropdownComponentStories) => ({
+const Template: StoryFn<DropdownComponentStories> = (args: DropdownComponentStories) => ({
 	props: args,
 });
 

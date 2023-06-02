@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface HeadersBasicStory {
 	noShadow: boolean;
@@ -68,7 +68,7 @@ function getTemplate(args: HeadersBasicStory): string {
 	`;
 }
 
-const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({
+const Template: StoryFn<HeadersBasicStory> = (args: HeadersBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TimelinesVerticalStory {
 	number: boolean;
@@ -64,7 +64,7 @@ function getTemplate(args: TimelinesVerticalStory): string {
 	`;
 }
 
-const Template: Story<TimelinesVerticalStory> = (args: TimelinesVerticalStory) => ({
+const Template: StoryFn<TimelinesVerticalStory> = (args: TimelinesVerticalStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

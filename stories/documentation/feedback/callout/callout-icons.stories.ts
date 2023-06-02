@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CalloutIconStory {
 	s: boolean;
@@ -62,7 +62,7 @@ function getTemplate(args: CalloutIconStory): string {
 	`;
 }
 
-const Template: Story<CalloutIconStory> = (args: CalloutIconStory) => ({
+const Template: StoryFn<CalloutIconStory> = (args: CalloutIconStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

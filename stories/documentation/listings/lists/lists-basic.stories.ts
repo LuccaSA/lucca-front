@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ListBasicStory {
 	clickable: boolean;
@@ -43,7 +43,7 @@ function getTemplate(args: ListBasicStory): string {
 	`;
 }
 
-const Template: Story<ListBasicStory> = (args: ListBasicStory) => ({
+const Template: StoryFn<ListBasicStory> = (args: ListBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

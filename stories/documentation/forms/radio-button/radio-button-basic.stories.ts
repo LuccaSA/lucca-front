@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface RadiosButtonsBasicStory {
 	s: boolean;
@@ -43,7 +43,7 @@ function getTemplate(args: RadiosButtonsBasicStory): string {
 	`;
 }
 
-const Template: Story<RadiosButtonsBasicStory> = (args: RadiosButtonsBasicStory) => ({
+const Template: StoryFn<RadiosButtonsBasicStory> = (args: RadiosButtonsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

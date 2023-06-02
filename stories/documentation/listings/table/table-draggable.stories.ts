@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableDraggableStory {}
 
@@ -47,7 +47,7 @@ function getTemplate(args: TableDraggableStory): string {
 	`;
 }
 
-const Template: Story<TableDraggableStory> = (args: TableDraggableStory) => ({
+const Template: StoryFn<TableDraggableStory> = (args: TableDraggableStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

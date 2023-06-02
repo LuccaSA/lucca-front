@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
@@ -71,7 +71,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
+const template: StoryFn<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
 	props: args,
 });
 

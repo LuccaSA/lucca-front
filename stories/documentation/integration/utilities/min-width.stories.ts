@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'utilities-min-width-stories',
@@ -28,7 +28,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<UMinWidthStory> = (args: UMinWidthStory) => ({
+const template: StoryFn<UMinWidthStory> = (args: UMinWidthStory) => ({
 	props: args,
 });
 

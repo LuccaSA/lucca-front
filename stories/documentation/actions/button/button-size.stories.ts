@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonSizeStory {}
 
@@ -15,7 +15,7 @@ function getTemplate(args: ButtonSizeStory): string {
 	`;
 }
 
-const Template: Story<ButtonSizeStory> = (args: ButtonSizeStory) => ({
+const Template: StoryFn<ButtonSizeStory> = (args: ButtonSizeStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

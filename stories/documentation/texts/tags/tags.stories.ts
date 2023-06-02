@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TagsBasicStory {
 	palette: string;
@@ -37,7 +37,7 @@ function getTemplate(args: TagsBasicStory): string {
 	`;
 }
 
-const Template: Story<TagsBasicStory> = (args: TagsBasicStory) => ({
+const Template: StoryFn<TagsBasicStory> = (args: TagsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

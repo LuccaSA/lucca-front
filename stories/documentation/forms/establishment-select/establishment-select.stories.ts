@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 @Component({
 	selector: 'establishment-select-stories',
 	standalone: true,
@@ -33,7 +33,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<EstablishmentSelectStory> = (args: EstablishmentSelectStory) => ({
+const template: StoryFn<EstablishmentSelectStory> = (args: EstablishmentSelectStory) => ({
 	props: args,
 });
 

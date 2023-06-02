@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerDirective, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-mock-directive-story',
@@ -37,7 +37,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<PopoverStory> = (args: PopoverStory) => ({
+const template: StoryFn<PopoverStory> = (args: PopoverStory) => ({
 	props: args,
 });
 

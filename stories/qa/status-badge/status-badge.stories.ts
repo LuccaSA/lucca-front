@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'status-badge-stories',
@@ -16,6 +16,6 @@ export default {
 	]
 } as Meta;
 
-const template: Story<StatusBadgeStory> = () => ({});
+const template: StoryFn<StatusBadgeStory> = () => ({});
 
 export const basic = template.bind({});

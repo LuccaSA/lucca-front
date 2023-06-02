@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
@@ -31,7 +31,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<FramedStory> = (args: FramedStory) => ({
+const template: StoryFn<FramedStory> = (args: FramedStory) => ({
 	props: args,
 });
 

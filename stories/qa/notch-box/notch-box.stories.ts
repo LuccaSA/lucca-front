@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'notchbox-stories',
@@ -16,6 +16,6 @@ export default {
 	]
 } as Meta;
 
-const template: Story<NotchBoxStory> = () => ({});
+const template: StoryFn<NotchBoxStory> = () => ({});
 
 export const basic = template.bind({});

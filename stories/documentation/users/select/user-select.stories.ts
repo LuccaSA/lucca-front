@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuUserSelectInputComponent, LuUserSelectModule } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -26,7 +26,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<UserSelectStory> = (args: UserSelectStory) => ({
+const template: StoryFn<UserSelectStory> = (args: UserSelectStory) => ({
 	props: args,
 });
 

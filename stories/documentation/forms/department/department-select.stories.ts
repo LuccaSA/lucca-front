@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
@@ -52,7 +52,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<DepartmentStory> = (args: DepartmentStory) => ({
+const template: StoryFn<DepartmentStory> = (args: DepartmentStory) => ({
 	props: args,
 });
 

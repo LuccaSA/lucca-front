@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface BoxKillableStory {
 	grey: boolean;
@@ -31,7 +31,7 @@ function getTemplate(args: BoxKillableStory): string {
 	`;
 }
 
-const Template: Story<BoxKillableStory> = (args: BoxKillableStory) => ({
+const Template: StoryFn<BoxKillableStory> = (args: BoxKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

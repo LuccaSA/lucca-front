@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-story',
@@ -56,7 +56,7 @@ export default {
 	],
 } as Meta;
 
-const Template: Story<SkipLinksStory> = (props) => ({ props });
+const Template: StoryFn<SkipLinksStory> = (props) => ({ props });
 
 const code = `
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';

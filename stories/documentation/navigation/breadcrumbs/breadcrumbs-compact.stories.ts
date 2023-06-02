@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface BreadcrumbsCompactStory {}
 
@@ -19,7 +19,7 @@ function getTemplate(args: BreadcrumbsCompactStory): string {
 	`;
 }
 
-const Template: Story<BreadcrumbsCompactStory> = (args: BreadcrumbsCompactStory) => ({
+const Template: StoryFn<BreadcrumbsCompactStory> = (args: BreadcrumbsCompactStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

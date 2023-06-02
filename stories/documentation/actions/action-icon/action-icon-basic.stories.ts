@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ActionBasicStory {
 	mod: string;
@@ -56,7 +56,7 @@ function getTemplate(args: ActionBasicStory): string {
 	`;
 }
 
-const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
+const Template: StoryFn<ActionBasicStory> = (args: ActionBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

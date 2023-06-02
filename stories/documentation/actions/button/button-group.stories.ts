@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonGroupStory {
 	noFlexWrap: boolean;
@@ -34,7 +34,7 @@ function getTemplate(args: ButtonGroupStory): string {
 	`;
 }
 
-const Template: Story<ButtonGroupStory> = (args: ButtonGroupStory) => ({
+const Template: StoryFn<ButtonGroupStory> = (args: ButtonGroupStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

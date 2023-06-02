@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as icons from '@lucca-front/icons';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'icon-basic-stories',
@@ -35,7 +35,7 @@ export default {
 	component: IconStory,
 } as Meta;
 
-const template: Story<IconStory> = (args) => ({ props: args });
+const template: StoryFn<IconStory> = (args) => ({ props: args });
 
 export const basic = template.bind({});
 

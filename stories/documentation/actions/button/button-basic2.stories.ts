@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonBasic2Story {
 	palette: string;
@@ -46,7 +46,7 @@ function getTemplate(args: ButtonBasic2Story): string {
 	`;
 }
 
-const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
+const Template: StoryFn<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

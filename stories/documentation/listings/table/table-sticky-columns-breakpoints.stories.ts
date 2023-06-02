@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
 
@@ -145,7 +145,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 	`;
 }
 
-const Template: Story<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
+const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {overflow: auto; height: 10rem;}`],

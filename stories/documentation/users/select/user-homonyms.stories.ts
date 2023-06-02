@@ -8,7 +8,7 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -42,7 +42,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<UserHomonymsStory> = (args: UserHomonymsStory) => ({
+const template: StoryFn<UserHomonymsStory> = (args: UserHomonymsStory) => ({
 	props: args,
 });
 

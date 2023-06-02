@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TextfieldClearableStory {}
 
@@ -17,7 +17,7 @@ function getTemplate(args: TextfieldClearableStory): string {
 	`;
 }
 
-const Template: Story<TextfieldClearableStory> = (args: TextfieldClearableStory) => ({
+const Template: StoryFn<TextfieldClearableStory> = (args: TextfieldClearableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

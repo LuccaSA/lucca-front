@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormlyModule } from '@ngx-formly/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -19,6 +19,6 @@ export default {
 	]
 } as Meta;
 
-const template: Story<FramedStory> = () => ({});
+const template: StoryFn<FramedStory> = () => ({});
 
 export const basic = template.bind({});

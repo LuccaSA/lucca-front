@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { luScaleAnimationFactory } from '@lucca-front/ng/animations';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'story-scale-animation',
@@ -67,7 +67,7 @@ export default {
 	],
 } as Meta;
 
-const template: Story<ScaleAnimationStory> = (args: ScaleAnimationStory) => ({
+const template: StoryFn<ScaleAnimationStory> = (args: ScaleAnimationStory) => ({
 	props: args,
 });
 

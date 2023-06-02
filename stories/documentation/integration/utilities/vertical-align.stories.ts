@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface VerticalAlignStory {}
 
@@ -14,7 +14,7 @@ function getTemplate(args: VerticalAlignStory): string {
 	`;
 }
 
-const Template: Story<VerticalAlignStory> = (args: VerticalAlignStory) => ({
+const Template: StoryFn<VerticalAlignStory> = (args: VerticalAlignStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

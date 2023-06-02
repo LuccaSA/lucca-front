@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface LabelIconStory {}
 
@@ -13,7 +13,7 @@ function getTemplate(args: LabelIconStory): string {
 	`;
 }
 
-const Template: Story<LabelIconStory> = (args: LabelIconStory) => ({
+const Template: StoryFn<LabelIconStory> = (args: LabelIconStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
