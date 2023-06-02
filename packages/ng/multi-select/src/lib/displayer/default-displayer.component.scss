@@ -14,3 +14,7 @@
 	top: 0;
 	left: calc(var(--hidden-option-count-offset-left) + var(--spacings-XXS));
 }
+
+.lu-multiselect-chip[aria-hidden] {
+	visibility: hidden;
+}

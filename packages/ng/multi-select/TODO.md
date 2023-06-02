@@ -1,7 +1,6 @@
 # RAF
 
-
-Style option disabled multi
+* Style option disabled
 
 ## On cache la lib core-select en réexposant les symboles intéressants dans simple-select/multi-select ?
 
