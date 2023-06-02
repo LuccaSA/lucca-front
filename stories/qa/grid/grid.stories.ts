@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -12,11 +12,6 @@ class GridStory {}
 export default {
 	title: 'QA/Grid',
 	component: GridStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [GridStory],
-		}),
-	],
 } as Meta;
 
 const template: StoryFn<GridStory> = () => ({});

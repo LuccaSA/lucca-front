@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'breadcrumb-stories',
 	templateUrl: './breadcrumb.stories.html',
-}) class BreadcrumbStory {}
+})
+class BreadcrumbStory {}
 
 export default {
-  title: 'QA/Breadcrumb',
-  component: BreadcrumbStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [BreadcrumbStory]
-		})
-	]
+	title: 'QA/Breadcrumb',
+	component: BreadcrumbStory,
 } as Meta;
 
 const template: StoryFn<BreadcrumbStory> = () => ({});

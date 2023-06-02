@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'card-stories',
 	templateUrl: './card.stories.html',
-}) class CardStory {}
+})
+class CardStory {}
 
 export default {
-  title: 'QA/Card',
-  component: CardStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [CardStory]
-		})
-	]
+	title: 'QA/Card',
+	component: CardStory,
 } as Meta;
 
 const template: StoryFn<CardStory> = () => ({});

@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'chip-stories',
 	templateUrl: './chip.stories.html',
-}) class ChipStory {}
+})
+class ChipStory {}
 
 export default {
-  title: 'QA/Chip',
-  component: ChipStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [ChipStory]
-		})
-	]
+	title: 'QA/Chip',
+	component: ChipStory,
 } as Meta;
 
 const template: StoryFn<ChipStory> = () => ({});

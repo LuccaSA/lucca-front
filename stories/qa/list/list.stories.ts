@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'list-stories',
 	templateUrl: './list.stories.html',
-}) class ListStory {}
+})
+class ListStory {}
 
 export default {
-  title: 'QA/List',
-  component: ListStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [ListStory]
-		})
-	]
+	title: 'QA/List',
+	component: ListStory,
 } as Meta;
 
 const template: StoryFn<ListStory> = () => ({});

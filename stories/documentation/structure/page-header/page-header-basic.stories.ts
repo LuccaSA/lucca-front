@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'page-header-basic-stories',
@@ -41,12 +40,6 @@ export default {
 			},
 		},
 	},
-	decorators: [
-		moduleMetadata({
-			entryComponents: [PageHeaderBasicStory],
-			imports: [BrowserModule],
-		}),
-	],
 } as Meta;
 
 const template: StoryFn<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({

@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'status-badge-stories',
 	templateUrl: './status-badge.stories.html',
-}) class StatusBadgeStory {}
+})
+class StatusBadgeStory {}
 
 export default {
-  title: 'QA/StatusBadge',
-  component: StatusBadgeStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [StatusBadgeStory]
-		})
-	]
+	title: 'QA/StatusBadge',
+	component: StatusBadgeStory,
 } as Meta;
 
 const template: StoryFn<StatusBadgeStory> = () => ({});

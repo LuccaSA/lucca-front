@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'menu-stories',
 	templateUrl: './menu.stories.html',
-}) class MenuStory {}
+})
+class MenuStory {}
 
 export default {
-  title: 'QA/Menu',
-  component: MenuStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [MenuStory]
-		})
-	]
+	title: 'QA/Menu',
+	component: MenuStory,
 } as Meta;
 
 const template: StoryFn<MenuStory> = () => ({});

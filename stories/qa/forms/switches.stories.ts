@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'forms-switches-stories',
-	templateUrl: './switches.stories.html'
-}) class SwitchesStory {}
+	templateUrl: './switches.stories.html',
+})
+class SwitchesStory {}
 
 export default {
-  title: 'QA/Forms/Switches',
-  component: SwitchesStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [SwitchesStory]
-		})
-	]
+	title: 'QA/Forms/Switches',
+	component: SwitchesStory,
 } as Meta;
 
 const template: StoryFn<SwitchesStory> = () => ({});

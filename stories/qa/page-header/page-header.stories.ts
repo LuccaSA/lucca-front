@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -11,11 +11,6 @@ class PageHeaderStory {}
 export default {
 	title: 'QA/Page-Header',
 	component: PageHeaderStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [PageHeaderStory],
-		}),
-	],
 } as Meta;
 
 const template: StoryFn<PageHeaderStory> = () => ({});
