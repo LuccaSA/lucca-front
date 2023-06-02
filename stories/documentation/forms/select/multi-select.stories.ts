@@ -1,11 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { LuMultiDisplayerDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { FilterLegumesPipe, LuSelectInputStoryComponent, allLegumes, generateStory } from './select.utils';
 
 export const Basic = generateStory({
@@ -365,7 +365,6 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 	decorators: [
 		moduleMetadata({
 			imports: [
-				BrowserAnimationsModule,
 				FormsModule,
 				FilterLegumesPipe,
 				HttpClientModule,
@@ -378,6 +377,9 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				LuSimpleSelectApiV4Directive,
 				LuDisabledOptionDirective,
 			],
+		}),
+		applicationConfig({
+			providers: [provideAnimations()],
 		}),
 	],
 	args: {
