@@ -32,7 +32,7 @@ function getTemplate(args: ClearBasicStory): string {
 	const primary = args.primary ? `palette-primary` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	return `
-		<button class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-close"></span></button>
+		<a href="#" class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-close"></span></a>
 	`;
 }
 
