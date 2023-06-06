@@ -13,7 +13,7 @@ function getTemplate(args: PaginationBasicStory): string {
 		<div id="pagination-count" class="pagination-count">
 			<span class="pagination-count-current">
 				<span class="u-mask">Résultats de </span>
-				1<span aria-hidden="true"> — </span>
+				1<span aria-hidden="true"> – </span>
 				<span class="u-mask">à </span>10
 			</span>
 			<span class="pagination-count-separator"> de </span>
