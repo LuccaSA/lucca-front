@@ -298,8 +298,10 @@
 
 	.textfield-label {
 		color: var(--palettes-grey-600);
-		font-weight: 400;
 		left: var(--spacings-S);
+		font-size: var(--sizes-S-fontSize);
+		font-weight: 400;
+		line-height: var(--sizes-S-lineHeight);
 		pointer-events: none;
 		position: absolute;
 		top: var(--spacings-XS);
@@ -308,7 +310,6 @@
 	.textfield-input {
 		background-color: transparent;
 		padding: var(--spacings-S) 2.5rem 0 var(--spacings-S);
-		font-weight: 600;
 		// todo: déplacer dans filters ?
 		height: var(--components-filters-height);
 		border-radius: 0;
