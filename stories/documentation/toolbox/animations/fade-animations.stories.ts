@@ -6,8 +6,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
-	template: ` <div class="grid">
-		<div class="grid-3@mediaMinXXS ng-demo-block">
+	template: ` <div class="gridLegacy">
+		<div class="gridLegacy-3@mediaMinXXS ng-demo-block">
 			<h3 class="u-margin0">
 				Fade
 				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
@@ -53,8 +53,8 @@ class AppModule {}
 @Component({
 	selector: 'story-fade-animation',
 	template: \`
-		<div class="grid">
-			<div class="grid-3@mediaMinXXS ng-demo-block">
+		<div class="gridLegacy">
+			<div class="gridLegacy-3@mediaMinXXS ng-demo-block">
 				<h3 class="u-margin0">
 					Fade
 					<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
