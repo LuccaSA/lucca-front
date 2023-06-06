@@ -6,6 +6,7 @@
 @mixin disabled {
 	background-color: var(--commons-disabled-background);
 	color: var(--commons-disabled-color);
+	cursor: default;
 }
 
 @mixin disabledOutlined {
