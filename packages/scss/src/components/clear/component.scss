@@ -1,0 +1,30 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin component {
+  @include reset.button;
+  align-items: center;
+  background-color: var(--palettes-grey-700);
+  border-radius: 50%;
+  color: var(--palettes-grey-text);
+  display: flex;
+  height: var(--components-clear-size);
+  justify-content: center;
+  width: var(--components-clear-size);
+
+  .lucca-icon {
+    font-size: var(--components-clear-icon-size);
+  }
+
+  &:hover {
+    background-color: var(--palettes-grey-600);
+  }
+
+  &:focus-visible {
+    @include a11y.focusVisible();
+  }
+
+  &:active {
+    background-color: var(--palettes-grey-800);
+  }
+}

@@ -1,0 +1,19 @@
+@use 'exports' as *;
+
+.clear {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include s;
+	}
+
+	&.palette-primary:not([disabled]) {
+		@include primary;
+	}
+
+	&[disabled] {
+		@include disabled;
+		cursor: default;
+	}
+}
