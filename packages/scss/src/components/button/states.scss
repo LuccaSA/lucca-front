@@ -12,11 +12,13 @@
 @mixin disabledOutlined {
 	background-color: var(--colors-white-color);
 	box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
+	cursor: default;
 }
 
 @mixin disabledText {
 	color: var(--commons-disabled-color);
 	background-color: transparent;
+	cursor: default;
 }
 
 @mixin loading {
