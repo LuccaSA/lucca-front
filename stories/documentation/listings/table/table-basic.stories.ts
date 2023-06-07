@@ -24,6 +24,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Deprecated 🦕",
 		},
 		s: {
 			control: {
