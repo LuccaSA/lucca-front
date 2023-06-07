@@ -61,6 +61,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
 	@Input() enableFormerEmployees = false;
+	@Input() enableMe = true;
 
 	clue = '';
 

@@ -13,4 +13,9 @@
 		<lu-user-select class="textfield-input" [ngModel]="model" appInstanceId="6" [operations]="[1]"> </lu-user-select>
 		<span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
 	</label>
+
+	<label class="textfield u-marginTopM">
+		<lu-user-select class="textfield-input" [ngModel]="model" [enableMe]="false" [filters]="['id=notequal,6']"> </lu-user-select>
+		<span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
+	</label>
 </div>
