@@ -10,6 +10,8 @@
 			[disabled]="disabled"
 			(blur)="touched.emit()"
 			(focusin)="hoursInput.select()"
+			(keydown.arrowUp)="false"
+			(keydown.arrowDown)="false"
 		/>
 		<span class="u-mask">{{ intl.hours }}</span>
 	</label>
@@ -49,6 +51,8 @@
 			[disabled]="disabled"
 			(blur)="touched.emit()"
 			(focusin)="minutesInput.select()"
+			(keydown.arrowUp)="false"
+			(keydown.arrowDown)="false"
 		/>
 		<span class="u-mask">{{ intl.minutes }}</span>
 	</label>

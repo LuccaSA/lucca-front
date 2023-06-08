@@ -8,6 +8,8 @@
 			[disabled]="disabled"
 			(blur)="touched.emit()"
 			(focusin)="daysInput.select()"
+			(keydown.arrowUp)="false"
+			(keydown.arrowDown)="false"
 			tabindex="1"
 		/>
 		<span class="u-mask">{{ intl.days }}</span>
