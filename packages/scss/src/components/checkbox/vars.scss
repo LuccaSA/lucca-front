@@ -1,5 +1,10 @@
 @mixin vars {
-	--components-checkbox-label-padding: 0 0 0 var(--spacings-M);
-	--components-checkbox-input-size: 1.25rem;
-	--components-checkbox-input-border-width: 2px;
+	--component-checkbox-label-input-size: var(--spacings-S);
+	--component-checkbox-label-input-borderRadius: 6px;
+	--component-checkbox-label-input-icon-fontSize: var(--sizes-XL-fontSize);
+	--component-checkbox-label-fontSize: var(--sizes-M-fontSize);
+	--component-checkbox-label-lineHeight: var(--sizes-M-lineHeight);
+	--component-checkbox-message-fontSize: var(--sizes-S-fontSize);
+	--component-checkbox-message-lineHeight: var(--sizes-M-lineHeight);
+	--component-checkbox-message-icon-top: 0.25rem;
 }
