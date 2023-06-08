@@ -1,0 +1,5 @@
+@mixin vars {
+	--components-checkboxLegacy-label-padding: 0 0 0 var(--spacings-M);
+	--components-checkboxLegacy-input-size: 1.25rem;
+	--components-checkboxLegacy-input-border-width: 2px;
+}
