@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FiltersBasicStory {
-}
+interface FiltersBasicStory {}
 
 export default {
 	title: 'Documentation/Structure/Filters/Basic',
@@ -19,9 +18,9 @@ function getTemplate(args: FiltersBasicStory): string {
 			</div>
 		</div>
 		<div class="filters-sectionLeft">
-			<label class="checkbox mod-inline">
-				<input class="checkbox-input" type="checkbox">
-				<span class="checkbox-label">Option</span>
+			<label class="checkboxLegacy mod-inline">
+				<input class="checkboxLegacy-input" type="checkbox">
+				<span class="checkboxLegacy-label">Option</span>
 			</label>
 		</div>
 		<div class="filters-sectionRight">
@@ -33,7 +32,7 @@ function getTemplate(args: FiltersBasicStory): string {
 			</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<FiltersBasicStory> = (args: FiltersBasicStory) => ({

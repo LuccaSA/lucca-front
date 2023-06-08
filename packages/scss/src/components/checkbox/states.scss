@@ -1,156 +1,53 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 
-@mixin mixed {
+@mixin disabled {
 	~ .checkbox-label {
-		.checkbox-label-input-icon {
-			&::before {
-				content: '\e975';
-			}
-		}
-	}
-}
+		color: var(--palettes-grey-500);
+		cursor: default;
 
-@mixin checked {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-primary-700);
-			border-color: var(--palettes-primary-700);
-			transition-delay: 0s;
+		&::before {
+			box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-500);
 		}
 
-		.checkbox-label-input-icon {
-			transform: scale(1);
-			transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
-		}
-	}
-}
-
-@mixin hover {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			border-color: var(--palettes-grey-600);
-		}
-	}
-}
-
-@mixin checkedHover {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-primary-600);
-			border-color: var(--palettes-primary-600);
-		}
-	}
-}
-
-@mixin checkedActive {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-primary-800);
-			border-color: var(--palettes-primary-800);
-		}
-	}
-}
-
-@mixin checkedDisabled {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-grey-100);
-			border-color: var(--palettes-grey-100);
+		.checkbox-label-helper {
 			color: var(--palettes-grey-500);
 		}
 	}
-}
 
-@mixin checkedHover {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-primary-600);
-			border-color: var(--palettes-primary-600);
+	&:checked ~ .checkbox-label {
+		&::before {
+			color: var(--palettes-grey-500);
+			background-color: var(--palettes-grey-100);
+			box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-100);
 		}
 	}
 }
 
-@mixin checkedInvalid {
+@mixin incomplete {
+	~ .checkbox-mixed ~ .checkbox-label,
 	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-error-700);
+		&::before {
+			@include icon.generate('partial');
 		}
 	}
 }
 
-@mixin active {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			border-color: var(--palettes-grey-800);
-		}
-	}
-}
-
-@mixin disabled {
+@mixin required {
 	~ .checkbox-label,
-	~ .checkbox-message {
-		color: var(--palettes-grey-500);
-	}
-
-	~ .checkbox-label {
-		.checkbox-label-input {
-			border-color: var(--palettes-grey-500);
-		}
-
-		.checkbox-label-text,
-		.checkbox-label-input {
-			cursor: default;
-		}
-	}
-}
-
-@mixin focusVisible {
-	~ .checkbox-label {
-		.checkbox-label-input {
+	.checkbox-label {
+		&:not(:empty) {
 			&::after {
-				outline: 2px solid var(--palettes-primary-700);
+				@include form.required;
 			}
 		}
 	}
 }
 
-@mixin invalid {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			border-color: var(--palettes-error-700);
-		}
-	}
-}
-
-@mixin invalidHover {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			border-color: var(--palettes-error-600);
-		}
-	}
-}
-
-@mixin invalidActive {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			border-color: var(--palettes-error-800);
-		}
-	}
-}
-
-@mixin checkedInvalidHover {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-error-600);
-		}
-	}
-}
-
-@mixin checkedInvalidActive {
-	~ .checkbox-label {
-		.checkbox-label-input {
-			background-color: var(--palettes-error-800);
+@mixin state($state) {
+	.checkbox-label {
+		&::before {
+			border-color: var(--palettes-#{$state}-600);
 		}
 	}
 }

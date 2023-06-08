@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableSelectableStory {
-}
+interface TableSelectableStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Selectable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableSelectableStory): string {
@@ -15,9 +13,9 @@ function getTemplate(args: TableSelectableStory): string {
 	  <thead class="table-head">
 	    <tr class="table-head-row mod-selectable">
 	      <th class="table-head-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
+					<label class="checkboxLegacy">
+						<input class="checkboxLegacy-input" type="checkbox" />
+						<span class="checkboxLegacy-label"></span>
 					</label>
 				</th>
 	      <th class="table-head-row-cell">Label</th>
@@ -28,9 +26,9 @@ function getTemplate(args: TableSelectableStory): string {
 	  <tbody class="table-body">
 	    <tr class="table-body-row mod-selectable">
 	      <td class="table-body-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
+					<label class="checkboxLegacy">
+						<input class="checkboxLegacy-input" type="checkbox" />
+						<span class="checkboxLegacy-label"></span>
 					</label>
 				</td>
 	      <td class="table-body-row-cell">Contenu</td>
@@ -39,9 +37,9 @@ function getTemplate(args: TableSelectableStory): string {
 	    </tr>
 	    <tr class="table-body-row mod-selectable">
 	      <td class="table-body-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
+					<label class="checkboxLegacy">
+						<input class="checkboxLegacy-input" type="checkbox" />
+						<span class="checkboxLegacy-label"></span>
 					</label>
 				</td>
 	      <td class="table-body-row-cell">Contenu</td>
@@ -50,7 +48,7 @@ function getTemplate(args: TableSelectableStory): string {
 	    </tr>
 	  </tbody>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableSelectableStory> = (args: TableSelectableStory) => ({

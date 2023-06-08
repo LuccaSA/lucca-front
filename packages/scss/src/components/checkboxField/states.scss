@@ -1,0 +1,156 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/form';
+
+@mixin mixed {
+	~ .checkboxField-label {
+		.checkboxField-label-input-icon {
+			&::before {
+				content: '\e975';
+			}
+		}
+	}
+}
+
+@mixin checked {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-700);
+			border-color: var(--palettes-primary-700);
+			transition-delay: 0s;
+		}
+
+		.checkboxField-label-input-icon {
+			transform: scale(1);
+			transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+		}
+	}
+}
+
+@mixin hover {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-grey-600);
+		}
+	}
+}
+
+@mixin checkedHover {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-600);
+			border-color: var(--palettes-primary-600);
+		}
+	}
+}
+
+@mixin checkedActive {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-800);
+			border-color: var(--palettes-primary-800);
+		}
+	}
+}
+
+@mixin checkedDisabled {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-grey-100);
+			border-color: var(--palettes-grey-100);
+			color: var(--palettes-grey-500);
+		}
+	}
+}
+
+@mixin checkedHover {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-600);
+			border-color: var(--palettes-primary-600);
+		}
+	}
+}
+
+@mixin checkedInvalid {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-error-700);
+		}
+	}
+}
+
+@mixin active {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-grey-800);
+		}
+	}
+}
+
+@mixin disabled {
+	~ .checkboxField-label,
+	~ .checkboxField-message {
+		color: var(--palettes-grey-500);
+	}
+
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-grey-500);
+		}
+
+		.checkboxField-label-text,
+		.checkboxField-label-input {
+			cursor: default;
+		}
+	}
+}
+
+@mixin focusVisible {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			&::after {
+				outline: 2px solid var(--palettes-primary-700);
+			}
+		}
+	}
+}
+
+@mixin invalid {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-error-700);
+		}
+	}
+}
+
+@mixin invalidHover {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-error-600);
+		}
+	}
+}
+
+@mixin invalidActive {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-error-800);
+		}
+	}
+}
+
+@mixin checkedInvalidHover {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-error-600);
+		}
+	}
+}
+
+@mixin checkedInvalidActive {
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-error-800);
+		}
+	}
+}

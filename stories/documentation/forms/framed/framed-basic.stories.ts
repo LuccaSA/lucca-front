@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FramedBasicStory {
-}
+interface FramedBasicStory {}
 
 export default {
 	title: 'Documentation/Forms/Framed/Basic',
@@ -142,9 +141,9 @@ function getTemplate(args: FramedBasicStory): string {
 			<div class="form-group-line">
 				<div class="form-group-line-col mod-selection">
 					<div class="checkboxesfield">
-						<label class="checkbox mod-field">
-							<input class="checkbox-input" type="checkbox" />
-							<span class="checkbox-label">Checkbox</span>
+						<label class="checkboxLegacy mod-field">
+							<input class="checkboxLegacy-input" type="checkbox" />
+							<span class="checkboxLegacy-label">Checkbox</span>
 						</label>
 					</div>
 				</div>
@@ -177,16 +176,16 @@ function getTemplate(args: FramedBasicStory): string {
 				</div>
 				<div class="form-group-line-col mod-selection">
 					<div class="checkboxesfield">
-						<label class="checkbox mod-field is-offset">
-							<input class="checkbox-input" type="checkbox" />
-							<span class="checkbox-label">Checkbox</span>
+						<label class="checkboxLegacy mod-field is-offset">
+							<input class="checkboxLegacy-input" type="checkbox" />
+							<span class="checkboxLegacy-label">Checkbox</span>
 						</label>
 					</div>
 				</div>
 			</div>
 		</fieldset>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<FramedBasicStory> = (args: FramedBasicStory) => ({
@@ -195,4 +194,4 @@ const Template: Story<FramedBasicStory> = (args: FramedBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

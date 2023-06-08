@@ -1,0 +1,86 @@
+@use 'exports' as *;
+
+.checkboxField {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+}
+
+.checkboxField-message {
+	&.mod-critical {
+		@include critical;
+	}
+
+	&.mod-success {
+		@include success;
+	}
+
+	&.mod-warning {
+		@include warning;
+	}
+}
+
+.checkboxField-input {
+	&[aria-checked='mixed'] {
+		@include mixed;
+	}
+
+	&:focus-visible {
+		@include focusVisible;
+	}
+
+	&:hover {
+		@include hover;
+	}
+
+	&:active {
+		@include active;
+	}
+
+	&:disabled {
+		@include disabled;
+	}
+
+	&[aria-invalid='true'] {
+		@include invalid;
+
+		&:hover {
+			@include invalidHover;
+		}
+
+		&:active {
+			@include invalidActive;
+		}
+	}
+
+	&:checked {
+		@include checked;
+
+		&:hover {
+			@include checkedHover;
+		}
+
+		&:active {
+			@include checkedActive;
+		}
+
+		&:disabled {
+			@include checkedDisabled;
+		}
+
+		&[aria-invalid='true'] {
+			@include checkedInvalid;
+
+			&:hover {
+				@include checkedInvalidHover;
+			}
+
+			&:active {
+				@include checkedInvalidActive;
+			}
+		}
+	}
+}

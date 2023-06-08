@@ -1,0 +1,45 @@
+@mixin S {
+	--component-checkboxField-label-input-size: 0.75rem;
+	--component-checkboxField-label-input-borderRadius: var(--commons-borderRadius-M);
+	--component-checkboxField-label-input-icon-fontSize: var(--sizes-L-fontSize);
+	--component-checkboxField-label-fontSize: var(--sizes-S-fontSize);
+	--component-checkboxField-label-lineHeight: var(--sizes-S-lineHeight);
+	--component-checkboxField-message-fontSize: var(--sizes-XS-fontSize);
+	--component-checkboxField-message-lineHeight: var(--sizes-S-lineHeight);
+	--component-checkboxField-message-icon-top: 0.125rem;
+}
+
+@mixin critical {
+	color: var(--palettes-error-700);
+
+	.checkboxField-message-icon {
+		color: var(--palettes-error-700);
+		margin-right: var(--spacings-XXS);
+
+		&::before {
+			content: '\e92c';
+		}
+	}
+}
+
+@mixin success {
+	.checkboxField-message-icon {
+		color: var(--palettes-success-700);
+		margin-right: var(--spacings-XXS);
+
+		&::before {
+			content: '\e9ed';
+		}
+	}
+}
+
+@mixin warning {
+	.checkboxField-message-icon {
+		color: var(--palettes-warning-700);
+		margin-right: var(--spacings-XXS);
+
+		&::before {
+			content: '\e992';
+		}
+	}
+}
