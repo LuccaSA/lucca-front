@@ -4,45 +4,83 @@
 	@include vars;
 	@include component;
 
-	&.mod-inline {
-		@include inline;
-	}
-
 	&.mod-S {
 		@include S;
 	}
+}
 
-	&.mod-noLabel {
-		@include noLabel;
+.checkbox-message {
+	&.mod-critical {
+		@include critical;
 	}
 
-	&:is(.is-required, .required) {
-		@include required;
+	&.mod-success {
+		@include success;
 	}
 
-	&:is(.is-error, .error) {
-		@include state('error');
+	&.mod-warning {
+		@include warning;
+	}
+}
+
+.checkbox-input {
+	&[aria-checked='mixed'] {
+		@include mixed;
 	}
 
-	&:is(.is-warning, .warning) {
-		@include state('warning');
+	&:focus-visible {
+		@include focusVisible;
 	}
 
-	&:is(.is-success, .success) {
-		@include state('success');
+	&:hover {
+		@include hover;
 	}
 
-	.checkbox-input {
-		&:is(.is-incomplete, .incomplete) {
-			@include incomplete;
+	&:active {
+		@include active;
+	}
+
+	&:disabled {
+		@include disabled;
+	}
+
+	&[aria-invalid='true'] {
+		@include invalid;
+
+		&:hover {
+			@include invalidHover;
 		}
 
-		&:is([disabled], [read-only]) {
-			@include disabled;
+		&:active {
+			@include invalidActive;
+		}
+	}
+
+	&:checked {
+		@include checked;
+
+		&:hover {
+			@include checkedHover;
 		}
 
-		&:is([aria-required]) {
-			@include required;
+		&:active {
+			@include checkedActive;
+		}
+
+		&:disabled {
+			@include checkedDisabled;
+		}
+
+		&[aria-invalid='true'] {
+			@include checkedInvalid;
+
+			&:hover {
+				@include checkedInvalidHover;
+			}
+
+			&:active {
+				@include checkedInvalidActive;
+			}
 		}
 	}
 }
