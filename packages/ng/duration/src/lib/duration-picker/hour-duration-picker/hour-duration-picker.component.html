@@ -1,81 +1,81 @@
-<div class="timePicker-fieldset-group">
-	<label class="timePicker-fieldset-group-textfield">
-		<input
-			class="timePicker-fieldset-group-textfield-input"
-			#hoursInput
-			type="number"
-			luNumbersOnly
-			[ngModel]="hours | number: '2.0'"
-			(ngModelChange)="hoursValueChange($event)"
-			[disabled]="disabled"
-			(blur)="touched.emit()"
-			(focusin)="hoursInput.select()"
-			(keydown.arrowUp)="false"
-			(keydown.arrowDown)="false"
-		/>
-		<span class="u-mask">{{ intl.hours }}</span>
-	</label>
-	<button
-		class="timePicker-fieldset-group-button"
-		type="button"
-		tabindex="-1"
-		(click)="incrementHours()"
-		*ngIf="!hideButtons"
-		[disabled]="disabled || !canIncrementHours"
-	>
-		<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
-		<span class="u-mask">{{ intl.increaseHours }}</span>
-	</button>
-	<button
-		class="timePicker-fieldset-group-button"
-		type="button"
-		tabindex="-1"
-		(click)="decrementHours()"
-		*ngIf="!hideButtons"
-		[disabled]="disabled || !canDecrementHours"
-	>
-		<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
-		<span class="u-mask">{{ intl.decreaseHours }}</span>
-	</button>
-</div>
-<div class="timePicker-fieldset-suffix" aria-hidden="true">{{ intl.hoursShort }}</div>
-<div class="timePicker-fieldset-group">
-	<label class="timePicker-fieldset-group-textfield">
-		<input
-			class="timePicker-fieldset-group-textfield-input"
-			#minutesInput
-			type="number"
-			luNumbersOnly
-			[ngModel]="minutes | number:'2.0'"
-			(ngModelChange)="minutesValueChange($event)"
-			[disabled]="disabled"
-			(blur)="touched.emit()"
-			(focusin)="minutesInput.select()"
-			(keydown.arrowUp)="false"
-			(keydown.arrowDown)="false"
-		/>
-		<span class="u-mask">{{ intl.minutes }}</span>
-	</label>
-	<button
-		class="timePicker-fieldset-group-button"
-		type="button"
-		tabindex="-1"
-		(click)="incrementMinutes()"
-		*ngIf="calculatedStepMinutes && !hideButtons"
-		[disabled]="disabled || !canIncrementMinutes"
-	>
-		<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
-		<span class="u-mask">{{ intl.increaseMinutes }}</span>
-	</button>
-	<button
-		class="timePicker-fieldset-group-button"
-		type="button"
-		tabindex="-1"
-		(click)="decrementMinutes()"
-		*ngIf="calculatedStepMinutes && !hideButtons"
-		[disabled]="disabled || !canDecrementMinutes"
-	>
-		<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
-		<span class="u-mask">{{ intl.decreaseMinutes }}</span>
-	</button>
+<div class="timePicker mod-withArrow">
+	<fieldset class="timePicker-fieldset">
+		<div class="timePicker-fieldset-group">
+			<label class="timePicker-fieldset-group-textfield">
+				<input
+					class="timePicker-fieldset-group-textfield-input"
+					#hoursInput
+					type="number"
+					luNumbersOnly
+					[ngModel]="hours | number: '2.0'"
+					(ngModelChange)="hoursValueChange($event)"
+					[disabled]="disabled"
+					(blur)="touched.emit()"
+					(focusin)="hoursInput.select()"
+				/>
+				<span class="u-mask">{{ intl.hours }}</span>
+			</label>
+			<button
+				class="timePicker-fieldset-group-button"
+				type="button"
+				tabindex="-1"
+				(click)="incrementHours()"
+				*ngIf="!hideButtons"
+				[disabled]="disabled || !canIncrementHours"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+				<span class="u-mask">{{ intl.increaseHours }}</span>
+			</button>
+			<button
+				class="timePicker-fieldset-group-button"
+				type="button"
+				tabindex="-1"
+				(click)="decrementHours()"
+				*ngIf="!hideButtons"
+				[disabled]="disabled || !canDecrementHours"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+				<span class="u-mask">{{ intl.decreaseHours }}</span>
+			</button>
+		</div>
+		<div class="timePicker-fieldset-suffix" aria-hidden="true">{{ intl.hoursShort }}</div>
+		<div class="timePicker-fieldset-group">
+			<label class="timePicker-fieldset-group-textfield">
+				<input
+					class="timePicker-fieldset-group-textfield-input"
+					#minutesInput
+					type="number"
+					luNumbersOnly
+					[ngModel]="minutes | number:'2.0'"
+					(ngModelChange)="minutesValueChange($event)"
+					[disabled]="disabled"
+					(blur)="touched.emit()"
+					(focusin)="minutesInput.select()"
+				/>
+				<span class="u-mask">{{ intl.minutes }}</span>
+			</label>
+			<button
+				class="timePicker-fieldset-group-button"
+				type="button"
+				tabindex="-1"
+				(click)="incrementMinutes()"
+				*ngIf="calculatedStepMinutes && !hideButtons"
+				[disabled]="disabled || !canIncrementMinutes"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+				<span class="u-mask">{{ intl.increaseMinutes }}</span>
+			</button>
+			<button
+				class="timePicker-fieldset-group-button"
+				type="button"
+				tabindex="-1"
+				(click)="decrementMinutes()"
+				*ngIf="calculatedStepMinutes && !hideButtons"
+				[disabled]="disabled || !canDecrementMinutes"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+				<span class="u-mask">{{ intl.decreaseMinutes }}</span>
+			</button>
+		</div>
+	</fieldset>
 </div>

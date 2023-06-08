@@ -5,15 +5,15 @@ import { getIntl } from '@lucca-front/ng/core';
 
 import { isNotNull, isNull, LU_DURATION_PICKER_TRANSLATIONS, parseDuration } from '../../tools';
 import { isDayDurationPickerStep, LuDurationPickerStep } from '../duration-picker-step';
+import { LuNumberOnlyDirective } from '../numbers-only.directive';
 import { RoundPipe } from './round.pipe';
 
 @Component({
 	selector: 'lu-day-duration-picker',
 	templateUrl: './day-duration-picker.component.html',
-	styleUrls: ['./day-duration-picker.component.scss'],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [CommonModule, FormsModule, RoundPipe],
+	imports: [CommonModule, FormsModule, RoundPipe, LuNumberOnlyDirective],
 	providers: [
 		{
 			provide: NG_VALIDATORS,

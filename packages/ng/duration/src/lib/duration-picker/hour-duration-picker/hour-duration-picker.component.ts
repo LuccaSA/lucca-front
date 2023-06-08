@@ -10,7 +10,6 @@ import { LuNumberOnlyDirective } from '../numbers-only.directive';
 @Component({
 	selector: 'lu-hour-duration-picker',
 	templateUrl: './hour-duration-picker.component.html',
-	styleUrls: ['./hour-duration-picker.component.scss'],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [CommonModule, FormsModule, LuNumberOnlyDirective],
@@ -23,7 +22,6 @@ import { LuNumberOnlyDirective } from '../numbers-only.directive';
 	],
 })
 export class LuHourDurationPickerComponent implements OnChanges, Validator {
-	@HostBinding('class.timePicker-fieldset') public timePickerClass = true;
 	@Input() public value!: string;
 
 	@Input() public step!: LuDurationPickerStep;

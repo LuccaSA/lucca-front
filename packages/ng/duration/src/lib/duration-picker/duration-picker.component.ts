@@ -11,8 +11,7 @@ import { LuHourDurationPickerComponent } from './hour-duration-picker/hour-durat
 	selector: 'lu-duration-picker',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	styleUrls: ['./duration-picker.component.scss'],
-	imports: [CommonModule, FormsModule, LuHourDurationPickerComponent, LuDayDurationPickerComponent],
+	imports: [CommonModule, LuHourDurationPickerComponent, LuDayDurationPickerComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
