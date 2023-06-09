@@ -8,6 +8,10 @@
 		@include S;
 	}
 
+	&.mod-days {
+		@include days;
+	}
+
 	&:is(.is-disabled, .disabled, [disabled]) {
 		@include disabled;
 	}

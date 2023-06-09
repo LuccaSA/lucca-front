@@ -8,6 +8,7 @@
 	display: inline-flex;
 	background-color: var(--colors-white-color);
 	transition: box-shadow var(--commons-animations-durations-fast);
+	gap: var(--spacings-XXS);
 
 	&:focus-within {
 		@include a11y.focusVisible($offset: 3px);
@@ -82,7 +83,6 @@
 		}
 
 		.timepicker-separator {
-			margin: 0 var(--spacings-XXS);
 			text-align: center;
 			width: 0.5rem;
 			line-height: var(--components-timepicker-input-height);
