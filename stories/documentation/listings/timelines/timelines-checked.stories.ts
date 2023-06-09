@@ -34,7 +34,7 @@ function getTemplate(args: TimelinesCheckedStory): string {
 				</div>
 			</li>
 		</ol>
-	`
+	`;
 }
 
 const Template: Story<TimelinesCheckedStory> = (args: TimelinesCheckedStory) => ({
@@ -43,4 +43,4 @@ const Template: Story<TimelinesCheckedStory> = (args: TimelinesCheckedStory) => 
 });
 
 export const Checked = Template.bind({});
-Checked.args = { };
+Checked.args = {};

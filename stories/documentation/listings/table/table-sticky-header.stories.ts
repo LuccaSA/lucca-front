@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableStickyHeaderStory {
-}
+interface TableStickyHeaderStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Sticky Header',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableStickyHeaderStory): string {
@@ -54,15 +52,13 @@ function getTemplate(args: TableStickyHeaderStory): string {
 			</tbody>
 		</table>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<TableStickyHeaderStory> = (args: TableStickyHeaderStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`.demo-wrapper {height: 10rem; overflow: auto;}`
-	]
+	styles: [`.demo-wrapper {height: 10rem; overflow: auto;}`],
 });
 
 export const StickyHeader = Template.bind({});

@@ -1,11 +1,13 @@
 import { Component, Input, Optional } from '@angular/core';
-import { ILuUser, LuDisplayInitials, LuUserDisplayPipe, LuUserPictureComponent, LuUserPictureModule } from '@lucca-front/ng/user';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { ILuUser, LuDisplayInitials, LuUserPictureModule } from '@lucca-front/ng/user';
+import { componentWrapperDecorator, Meta, Story } from '@storybook/angular';
 import { bob, squidwards } from '../user.mocks';
 
 @Component({
 	selector: 'user-picture-stories',
-	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [ngClass]="sizes" [class.mod-placeholder]="placeholder"></lu-user-picture>`,
+	standalone: true,
+	imports: [LuUserPictureModule],
+	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [class]="sizes" [class.mod-placeholder]="placeholder"></lu-user-picture>`,
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
@@ -16,7 +18,7 @@ class UserPictureStory {
 
 export default {
 	title: 'Documentation/Users/Picture/Basic',
-	component: LuUserPictureComponent,
+	component: UserPictureStory,
 	argTypes: {
 		user: {
 			options: ['Avec image', 'Sans image'],
@@ -44,11 +46,6 @@ export default {
 			sizes: props.sizes,
 			placeholder: props.placeholder,
 		})),
-		moduleMetadata({
-			imports: [LuUserPictureModule],
-			providers: [LuUserDisplayPipe],
-			declarations: [UserPictureStory],
-		}),
 	],
 } as Meta;
 

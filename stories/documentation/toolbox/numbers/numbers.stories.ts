@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'numbers-stories',
+	standalone: true,
+	imports: [LuNumberPipe],
 	templateUrl: './numbers.stories.html',
 })
 class NumbersStory {
@@ -16,12 +18,6 @@ class NumbersStory {
 export default {
 	title: 'Documentation/Toolbox/Numbers/Basic',
 	component: NumbersStory,
-	decorators: [
-		moduleMetadata({
-			imports: [LuNumberPipe],
-			declarations: [NumbersStory],
-		}),
-	],
 } as Meta;
 
 const template: Story<NumbersStory> = (args: NumbersStory) => ({

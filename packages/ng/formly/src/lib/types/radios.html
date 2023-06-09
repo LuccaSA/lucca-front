@@ -1,10 +1,10 @@
-<legend class="radiosfield-label">{{to.label}}</legend>
+<legend class="radiosfield-label">{{props.label}}</legend>
 <div class="radiosfield-input">
 	<label *ngFor="let option of _options, let i = index" class="radio">
 		<input
 			class="radio-input"
 			type="radio"
-			[name]="to['name']"
+			[name]="props['name']"
 			[value]="option.value"
 			[id]="id + '_'+ i"
 			[formControl]="formControl"

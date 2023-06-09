@@ -19,7 +19,7 @@
 				// "plugin:@angular-eslint/ng-cli-compat",
 				// "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
 			],
-			"plugins": ["@delagen/deprecation"],
+			"plugins": ["deprecation"],
 			"rules": {
 				"prettier/prettier": [
 					"error",
@@ -54,7 +54,7 @@
 					}
 				],
 				"curly": "error",
-				"@delagen/deprecation/deprecation": "warn",
+				"deprecation/deprecation": "warn",
 				"no-restricted-imports": [
 					"error",
 					{

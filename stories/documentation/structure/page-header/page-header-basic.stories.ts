@@ -4,6 +4,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'page-header-basic-stories',
+	standalone: true,
 	templateUrl: './page-header-basic.stories.html',
 })
 class PageHeaderBasicStory {

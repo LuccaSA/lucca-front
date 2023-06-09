@@ -16,9 +16,11 @@ function getTemplate(args: FloatStory): string {
 const Template: Story<FloatStory> = (args: FloatStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
-		}`],
+	styles: [
+		`
+		}`,
+	],
 });
 
 export const Float = Template.bind({});
-Float.args = { };
+Float.args = {};

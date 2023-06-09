@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableSortableStory {
-}
+interface TableSortableStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Sortable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableSortableStory): string {
@@ -38,7 +36,7 @@ function getTemplate(args: TableSortableStory): string {
 			</tr>
 		</tbody>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableSortableStory> = (args: TableSortableStory) => ({

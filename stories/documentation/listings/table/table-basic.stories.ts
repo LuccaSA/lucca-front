@@ -29,7 +29,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		alignTop: {
 			control: {
@@ -42,7 +42,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Change l\'alignement horizontal d\'une cellule',
+			description: "Change l'alignement horizontal d'une cellule",
 		},
 		borderless: {
 			control: {
@@ -52,7 +52,7 @@ export default {
 		noOffset: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		parentChild: {
 			control: {
@@ -64,7 +64,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Associé à <code>.mod-parent</code> permet de rendre un parent repliable. <code>.is-collapsed</code> permet de changer d\'état.',
+			description: "Associé à <code>.mod-parent</code> permet de rendre un parent repliable. <code>.is-collapsed</code> permet de changer d'état.",
 		},
 	},
 } as Meta;
@@ -116,7 +116,6 @@ function getTemplate(args: TableBasicStory): string {
 	</table>
 	`;
 }
-
 
 const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
 	props: args,

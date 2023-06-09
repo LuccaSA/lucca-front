@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
+import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
-import { LuToastsService, LuToastsModule } from '@lucca-front/ng/toast';
 
 @Component({
 	selector: 'sidepanel-content',
@@ -37,6 +37,8 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 
 @Component({
 	selector: 'sidepanel-stories',
+	standalone: true,
+	imports: [LuSidepanelModule, LuModalModule, LuToastsModule],
 	template: `
 		<lu-toasts [sources]="[]"></lu-toasts>
 		<div class="u-marginBottomS">
@@ -51,7 +53,7 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SidepanelStories {
+class SidepanelStory {
 	constructor(private sidepanel: LuSidepanel, private modal: LuModal, private toastsService: LuToastsService) {}
 
 	public openSidepanel() {
@@ -81,15 +83,15 @@ class SidepanelStories {
 
 export default {
 	title: 'Documentation/Overlays/Sidepanel',
-	component: SidepanelStories,
+	component: SidepanelStory,
 	decorators: [
 		moduleMetadata({
-			imports: [LuModalModule, LuSidepanelModule, BrowserAnimationsModule, LuToastsModule],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const Template: Story<SidepanelStories> = (args: SidepanelStories) => ({
+const Template: Story<SidepanelStory> = (args: SidepanelStory) => ({
 	props: args,
 });
 

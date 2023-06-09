@@ -65,7 +65,7 @@ function getTemplate(args: HeadersBasicStory): string {
 			</p>
 		</section>
 	</header>
-	`
+	`;
 }
 
 const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({

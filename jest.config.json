@@ -1,7 +1,6 @@
 {
 	"preset": "jest-preset-angular",
 	"setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
-	"globalSetup": "jest-preset-angular/global-setup",
 	"collectCoverage": false,
 	"testPathIgnorePatterns": ["<rootDir>/node_modules/"],
 	"watchPathIgnorePatterns": ["/node_modules/"],

@@ -1,10 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuEstablishmentSelectInputComponent, LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
+import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 @Component({
 	selector: 'establishment-select-stories',
+	standalone: true,
+	imports: [LuEstablishmentSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline u-marginRightS">
 			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
@@ -26,8 +28,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(EstablishmentSelectStory),
 		moduleMetadata({
-			imports: [HttpClientModule, LuEstablishmentSelectModule, BrowserAnimationsModule],
-			declarations: [EstablishmentSelectStory],
+			imports: [EstablishmentSelectStory, HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
@@ -40,17 +41,12 @@ export const Basic = template.bind({});
 Basic.args = {};
 
 const code = `
-/* 1. Importer LuEstablishmentSelectModule */
-import { LuEstablishmentSelectModule } from '@lucca-front/ng/establishment';
+	import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
 
-@NgModule({
-	imports: [LuEstablishmentSelectModule]
-})
-class StoriesModule {}
-
-/* 2. Utiliser lu-establishment-select */
 @Component({
 	selector: 'establishment-select-stories',
+	standalone: true,
+	imports: [LuEstablishmentSelectInputComponent],
 	template: \`
 	<label class="textfield">
 		<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple"></lu-establishment-select>

@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface BreadcrumbsCompactStory {
-}
+interface BreadcrumbsCompactStory {}
 
 export default {
 	title: 'Documentation/Navigation/Breadcrumbs/Compact',

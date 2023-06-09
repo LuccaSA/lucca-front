@@ -1,22 +1,20 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { FieldType } from '@ngx-formly/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 @Component({
 	selector: 'lu-formly-field-input',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './input.html',
-	// changeDetection: ChangeDetectionStrategy.OnPush,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LuFormlyFieldInput extends FieldType {
+export class LuFormlyFieldInput extends FieldType<FieldTypeConfig> {
 	get type() {
-		return this.to.type || 'text';
+		return this.props.type || 'text';
 	}
-	override readonly formControl: FormControl;
 	focus() {
-		this.to['_isFocused'] = true;
+		this.props['_isFocused'] = true;
 	}
 	blur() {
-		this.to['_isFocused'] = false;
+		this.props['_isFocused'] = false;
 	}
 }

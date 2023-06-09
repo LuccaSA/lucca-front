@@ -30,7 +30,8 @@ export default {
 			options: ['', 'mod-S', 'mod-XS'],
 			control: {
 				type: 'radio',
-			}
+			},
+			description: 'Taille : Small',
 		},
 	},
 } as Meta;

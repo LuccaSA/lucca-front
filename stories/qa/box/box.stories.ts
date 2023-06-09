@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
+	standalone: true,
 	selector: 'box-stories',
 	templateUrl: './box.stories.html',
-}) class BoxStory {}
+})
+class BoxStory {}
 
 export default {
-  title: 'QA/Box',
-  component: BoxStory,
+	title: 'QA/Box',
+	component: BoxStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [BoxStory]
-		})
-	]
+			entryComponents: [BoxStory],
+		}),
+	],
 } as Meta;
 
 const template: Story<BoxStory> = () => ({});
