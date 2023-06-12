@@ -1,5 +1,4 @@
 @mixin vars {
-	--components-textfield-background: var(--palettes-primary-50);
 	--components-textfield-border-radius: 4px;
 	--components-textfield-input-padding-horizontal: var(--spacings-XS);
 	--components-textfield-input-padding-vertical: var(--spacings-XS);
@@ -11,8 +10,8 @@
 	--components-textfield-focus-border-color: var(--palettes-primary-600);
 	--components-textfield-disabled-background: var(--commons-disabled-background);
 	--components-textfield-disabled-color: var(--palettes-grey-600);
-	--components-textfield-suffix-top: 1.5rem;
-	--components-textfield-suffix-padding-right: var(--spacings-M);
+	--components-textfield-suffix-top: 1.75rem;
+	--components-textfield-suffix-padding-right: var(--spacings-L);
 	--components-textfield-sizes-shortest: 3rem;
 	--components-textfield-sizes-shorter: 6rem;
 	--components-textfield-sizes-short: 9rem;
@@ -37,9 +36,6 @@
 	--components-textfield-compact-label-sizes-default: 7rem;
 	--components-textfield-compact-label-sizes-long: 9rem;
 	--components-textfield-compact-label-sizes-longer: 11rem;
-
-	--components-textfield-outlined-border-width: 1px;
-	--components-textfield-outlined-border-default-color: var(--palettes-grey-200);
 
 	--components-textfield-filter-width: 18rem;
 }

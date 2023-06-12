@@ -11,23 +11,23 @@ function getTemplate(args: TextfieldMessagesStory): string {
 	return `
 		<label class="textfield">
 			<input class="textfield-input" type="text">
-			<span class="textfield-label">Avec helper</span>
+			<span class="textfield-label">Label</span>
 			<span class="textfield-messages">
-				<span class="textfield-messages-helper">Indications de saisie</span>
+				<span class="textfield-messages-helper">Helper message</span>
 			</span>
 		</label>
 		<label class="textfield">
 			<input class="textfield-input" type="text">
-			<span class="textfield-label">Avec avertissement</span>
+			<span class="textfield-label">Label</span>
 			<span class="textfield-messages">
-				<span class="textfield-messages-warning">Ceci est un avertissement</span>
+				<span class="textfield-messages-warning">Warning message</span>
 			</span>
 		</label>
 		<label class="textfield">
 			<input class="textfield-input is-error" type="text">
-			<span class="textfield-label">Avec erreur</span>
+			<span class="textfield-label">Label</span>
 			<span class="textfield-messages">
-				<span class="textfield-messages-error">Oops, il y a une erreur !</span>
+				<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-error"></span> Helper message</span>
 			</span>
 		</label>
 	`;

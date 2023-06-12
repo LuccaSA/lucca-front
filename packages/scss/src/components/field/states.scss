@@ -36,7 +36,8 @@
 
 @mixin inputState($state) {
 	&:not(:disabled, .is-disabled) {
-		background-color: var(--palettes-#{$state}-50);
+			background-color: var(--palettes-#{$state}-50);
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-600);
 
 		~ .textfield-label,
 		~ .checkboxesfield-label,
@@ -61,16 +62,9 @@
 		}
 
 		&:focus {
-			background-color: white;
-			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
-
 			&::placeholder {
 				color: var(--palettes-#{$state}-400);
 			}
-		}
-
-		@if ($state == 'error') {
-			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
 		}
 	}
 }
@@ -170,26 +164,11 @@
 	&:not(:disabled, .is-disabled) {
 		background-color: var(--palettes-#{$state}-50);
 
-		.textfield-label,
-		.radiosfield-label,
-		.checkboxesfield-label,
-		~ .textfield-suffix,
-		~ .radiosfield-suffix,
-		~ .checkboxesfield-suffix {
-			color: var(--palettes-#{$state}-700);
-		}
-
 		&::placeholder {
 			color: var(--palettes-#{$state}-400);
 		}
 
-		&:focus {
-			&::placeholder {
-				color: var(--palettes-#{$state}-300);
-			}
-		}
-
-		&:focus,
+		&:focus-visible,
 		&.is-focused {
 			~ .textfield-label,
 			~ .radiosfield-label,
@@ -198,13 +177,8 @@
 			}
 		}
 
-		&:focus {
-			box-shadow: 0 0 0 4px var(--palettes-#{$state}-200), 0 0 0 1px var(--palettes-#{$state}-700) inset;
-			background-color: var(--colors-white-color);
-		}
-
 		@if $state == 'error' {
-			box-shadow: 0 0 0 1px var(--palettes-#{$state}-700);
+			box-shadow: 0 0 0 1px var(--palettes-#{$state}-400);
 		}
 	}
 }

@@ -10,8 +10,8 @@ export default {
 function getTemplate(args: TextfieldClearableStory): string {
 	return `
 	<label class="textfield mod-clearable">
-		<input class="textfield-input" type="text" placeholder="placeholder">
-		<span class="textfield-label">Label textfield</span>
+		<input class="textfield-input" type="text" placeholder="Placeholder">
+		<span class="textfield-label">Label</span>
 		<a href="#" role="button" class="actionIcon textfield-actionClear"><span aria-hidden="true" class="lucca-icon icon-cross"></span></a>
 	</label>
 	`;

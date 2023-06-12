@@ -8,6 +8,7 @@
 		box-shadow: none;
 		background-color: var(--colors-white-color);
 		border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
+		outline: none;
 
 		&:hover {
 			background-color: var(--palettes-grey-50);

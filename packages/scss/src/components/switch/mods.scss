@@ -4,33 +4,12 @@
 }
 
 @mixin S {
-	.switch-label {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
-		padding: 0;
-		padding-left: calc(1.75rem - 4px + var(--spacings-XS));
-
-		&::before {
-			margin-top: var(--components-switch-S-top);
-			height: var(--sizes-S-fontSize);
-			padding-left: var(--components-switch-S-icon-right);
-			width: calc(1.75rem - 4px);
-		}
-
-		&::after {
-			margin-top: var(--components-switch-S-top);
-			height: calc(var(--sizes-S-fontSize) - 4px);
-			width: calc(var(--sizes-S-fontSize) - 4px);
-		}
-	}
-
-	.switch-input:checked ~ .switch-label {
-		&::before {
-			padding-left: var(--components-switch-S-icon-left);
-		}
-
-		&::after {
-			left: calc(var(--sizes-S-fontSize) - 2px);
-		}
-	}
+	--components-switch-height: 1rem;
+	--components-switch-width: 1.75rem;
+	--components-switch-slider-size: .75rem;
+	--components-switch-icon-size: .75rem;
+	--components-switch-lineHeight: var(--sizes-S-lineHeight);
+	--components-switch-fontSize: var(--sizes-S-fontSize);
+	--components-switch-helper-lineHeight: var(--sizes-XS-lineHeight);
+	--components-switch-helper-fontSize: var(--sizes-XS-fontSize);
 }

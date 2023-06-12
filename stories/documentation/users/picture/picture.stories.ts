@@ -7,11 +7,12 @@ import { bob, squidwards } from '../user.mocks';
 	selector: 'user-picture-stories',
 	standalone: true,
 	imports: [LuUserPictureModule],
-	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [class]="sizes"></lu-user-picture>`,
+	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [class]="sizes" [class.mod-placeholder]="placeholder"></lu-user-picture>`,
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
 	@Input() @Optional() sizes: string;
+	@Input() @Optional() placeholder: boolean;
 	@Input() @Optional() displayFormat: LuDisplayInitials;
 }
 
@@ -27,9 +28,14 @@ export default {
 			},
 		},
 		sizes: {
-			options: ['mod-XXS', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-XXL'],
+			options: ['mod-XS', 'mod-S', '', 'mod-L'],
 			control: {
 				type: 'select',
+			},
+		},
+		placeholder: {
+			control: {
+				type: 'boolean',
 			},
 		},
 	},
@@ -38,6 +44,7 @@ export default {
 			user: props.user,
 			displayFormat: props.displayFormat,
 			sizes: props.sizes,
+			placeholder: props.placeholder,
 		})),
 	],
 } as Meta;
@@ -50,6 +57,7 @@ export const Basic = template.bind({});
 Basic.args = {
 	user: bob,
 	sizes: '',
+	placeholder: false,
 	displayFormat: LuDisplayInitials.firstlast,
 };
 
@@ -65,17 +73,18 @@ class StoriesModule {}
 /* 2. Utiliser lu-user-picture */
 @Component({
 	selector: 'user-picture-stories',
-	template: \`<lu-user-picture [user]="user" [displayFormat]="displayFormat" [class]="sizes"></lu-user-picture>\`,
+	template: \`<lu-user-picture [user]="user" [displayFormat]="displayFormat" [class]="sizes" [class.mod-placeholder]="placeholder"></lu-user-picture>\`,
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
 	@Input() @Optional() sizes: string;
+	@Input() @Optional() placeholder: boolean;
 	@Input() @Optional() displayFormat: LuDisplayInitials;
 }`;
 
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: ['user', 'displayFormat', 'sizes'] },
+	controls: { include: ['user', 'displayFormat', 'sizes', 'placeholder'] },
 	docs: {
 		source: {
 			language: 'ts',

@@ -11,8 +11,8 @@ function getTemplate(args: TextfieldFilterStory): string {
 	return `
 	<div class="filters">
 	  <label class="textfield mod-filter">
-	  	<input class="textfield-input" type="text" placeholder="placeholder">
-	  	<span class="textfield-label">Label textfield</span>
+	  	<input class="textfield-input" type="text" placeholder="Placeholder">
+	  	<span class="textfield-label">Label</span>
 	  </label>
 	</div>
 	`;

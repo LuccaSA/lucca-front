@@ -11,12 +11,11 @@ function getTemplate(args: BreadcrumbsCompactStory): string {
 	<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
 		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
 		<ul class="breadcrumbs-list">
-			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">lien</a></li>
-			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">page courante</span></li>
+			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
+			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">current page</span></li>
 		</ul>
 	</nav>
-	<h2>Current page</h2>
-	`;
+	`
 }
 
 const Template: Story<BreadcrumbsCompactStory> = (args: BreadcrumbsCompactStory) => ({

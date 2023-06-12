@@ -2,6 +2,7 @@
 @use 'sass:list';
 
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin base($atRoot: 'without: rule') {
 	@at-root ($atRoot) {
@@ -31,6 +32,24 @@
 				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-semibold.woff2') format('woff2'),
 					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-semibold.woff') format('woff');
 				font-weight: 600;
+				font-style: normal;
+				font-display: swap;
+			}
+
+			@font-face {
+				font-family: 'Source Sans Pro';
+				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-bold.woff2') format('woff2'),
+					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-bold.woff') format('woff');
+				font-weight: 700;
+				font-style: normal;
+				font-display: swap;
+			}
+
+			@font-face {
+				font-family: 'Source Sans Pro';
+				src: url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-black.woff2') format('woff2'),
+					url('//cdn.lucca.fr/fonts/SourceSans/sourcesanspro-black.woff') format('woff');
+				font-weight: 900;
 				font-style: normal;
 				font-display: swap;
 			}
@@ -77,6 +96,10 @@
 
 			&:hover {
 				color: var(--commons-text-link-hover);
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
 			}
 		}
 

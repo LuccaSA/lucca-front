@@ -10,13 +10,13 @@ export default {
 function getTemplate(args: TextfieldSearchAndSuffixStory): string {
 	return `
 		<label class="textfield mod-search">
-			<input class="textfield-input" type="text" placeholder="ex : Mon précieux">
-			<span class="textfield-label">Rechercher</span>
+			<input class="textfield-input" type="text" placeholder="Placeholder">
+			<span class="textfield-label">Label</span>
 		</label>
 		<label class="textfield mod-withSuffix">
-			<input class="textfield-input" type="text">
-			<span class="textfield-label">Label textfield</span>
-			<span class="textfield-suffix">€</span>
+			<input class="textfield-input" type="text" placeholder="Placeholder">
+			<span class="textfield-label">Label</span>
+			<span class="textfield-suffix">€/j</span>
 		</label>
 	`;
 }

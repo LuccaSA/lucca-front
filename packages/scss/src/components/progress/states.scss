@@ -11,15 +11,11 @@
 @mixin success {
 	@include state;
 
-	.progress-bar {
-		background-color: var(--palettes-success-700);
-	}
+	--palettes-700: var(--palettes-success-700);
 }
 
 @mixin error {
 	@include state;
 
-	.progress-bar {
-		background-color: var(--palettes-error-700);
-	}
+	--palettes-700: var(--palettes-error-700);
 }
