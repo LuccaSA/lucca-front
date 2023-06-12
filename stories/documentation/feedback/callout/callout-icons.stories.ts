@@ -13,7 +13,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		palette: {
 			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
@@ -34,21 +34,21 @@ function getTemplate(args: CalloutIconStory): string {
 	const s = args.s ? `mod-S` : '';
 	const palette = args.palette;
 	const icon = args.icon;
-	let text: {title: string, description: string};
+	let text: { title: string; description: string };
 	switch (args.palette) {
 		case 'palette-success':
-				text = {title: 'Cool!', description: 'Je suis un callout de succès :)'};
-				break;
-		case 'palette-warning':
-				text = {title: 'Hmmm...', description: 'Je suis un callout d\'alarme :|'};
-				break;
-		case 'palette-error':
-				text = {title: 'Oops!', description: 'Je suis un callout d\'erreur :('};
-				break;
-		default:
-			text = {title: 'Besoin d\'aide ?', description: 'Je suis un callout standard'};
+			text = { title: 'Cool!', description: 'Je suis un callout de succès :)' };
 			break;
-  };
+		case 'palette-warning':
+			text = { title: 'Hmmm...', description: "Je suis un callout d'alarme :|" };
+			break;
+		case 'palette-error':
+			text = { title: 'Oops!', description: "Je suis un callout d'erreur :(" };
+			break;
+		default:
+			text = { title: "Besoin d'aide ?", description: 'Je suis un callout standard' };
+			break;
+	}
 	return `
 	<div class="callout ${s} ${palette}">
 		<div class="callout-icon">
@@ -59,7 +59,7 @@ function getTemplate(args: CalloutIconStory): string {
 			<div class="callout-content-description">${text.description}</div>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CalloutIconStory> = (args: CalloutIconStory) => ({

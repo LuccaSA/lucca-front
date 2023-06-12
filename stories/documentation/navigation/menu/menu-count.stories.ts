@@ -13,23 +13,23 @@ export default {
 		noBorder: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		header: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -62,8 +62,7 @@ function getTemplate(args: MenuCountStory): string {
 			</li>
 		</ul>
 	</nav>
-	`
-
+	`;
 }
 
 const Template: Story<MenuCountStory> = (args: MenuCountStory) => ({

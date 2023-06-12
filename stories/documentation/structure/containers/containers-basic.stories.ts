@@ -11,9 +11,9 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Centre le contenu sur les écrans larges.'
+			description: 'Centre le contenu sur les écrans larges.',
 		},
-	}
+	},
 } as Meta;
 
 function getTemplate(args: ContainersBasicStory): string {
@@ -22,7 +22,7 @@ function getTemplate(args: ContainersBasicStory): string {
 	<div class="container ${center}">
 		<p>Ce container est responsive et sert à placer le contenu de votre page.</p>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<ContainersBasicStory> = (args: ContainersBasicStory) => ({

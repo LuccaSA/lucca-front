@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface ListDraggableStory {
-}
+interface ListDraggableStory {}
 
 export default {
 	title: 'Documentation/Listings/List/Draggable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: ListDraggableStory): string {
@@ -27,7 +25,7 @@ function getTemplate(args: ListDraggableStory): string {
 			</div>
 		</li>
 	</ul>
-	`
+	`;
 }
 
 const Template: Story<ListDraggableStory> = (args: ListDraggableStory) => ({

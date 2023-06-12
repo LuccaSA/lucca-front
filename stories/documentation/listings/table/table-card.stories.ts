@@ -6,8 +6,7 @@ interface TableCardStory {
 
 export default {
 	title: 'Documentation/Listings/Table/Card',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableCardStory): string {
@@ -36,7 +35,7 @@ function getTemplate(args: TableCardStory): string {
 			</tbody>
 		</table>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<TableCardStory> = (args: TableCardStory) => ({

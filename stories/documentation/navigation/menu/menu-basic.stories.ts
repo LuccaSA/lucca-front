@@ -13,22 +13,22 @@ export default {
 		noBorder: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		header: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		s: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -58,8 +58,7 @@ function getTemplate(args: MenuBasicStory): string {
 			</li>
 		</ul>
 	</nav>
-	`
-
+	`;
 }
 
 const Template: Story<MenuBasicStory> = (args: MenuBasicStory) => ({

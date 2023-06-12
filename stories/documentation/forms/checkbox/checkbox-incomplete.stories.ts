@@ -13,7 +13,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 			<input class="checkbox-input is-incomplete" type="checkbox" name="checkboxList1" checked>
 			<span class="checkbox-label">checkbox</span>
 		</label>
-	`
+	`;
 }
 
 const Template: Story<CheckboxIncompleteStory> = (args: CheckboxIncompleteStory) => ({

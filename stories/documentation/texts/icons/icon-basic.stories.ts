@@ -2,12 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as icons from '@lucca-front/icons';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'icon-basic-stories',
+	standalone: true,
+	imports: [CommonModule, FormsModule],
 	templateUrl: './icon-basic.stories.html',
-}) class IconStory {
+})
+class IconStory {
 	icons: string[] = icons.default;
 	filter = '';
 
@@ -15,26 +18,21 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 		this.icons = filter ? icons.default.filter((icon: string) => icon.toLowerCase().includes(filter.toLowerCase())) : icons.default;
 	}
 
-	public camelize(str): string{
+	public camelize(str): string {
 		let arr = str.split('_');
-		let capital = arr.map((item, index) => index ? item.charAt(0).toUpperCase() + item.slice(1).toLowerCase() : item.toLowerCase());
-		let capitalString = capital.join("");
+		let capital = arr.map((item, index) => (index ? item.charAt(0).toUpperCase() + item.slice(1).toLowerCase() : item.toLowerCase()));
+		let capitalString = capital.join('');
 		return capitalString;
 	}
 
 	public copyIcon(icon: string): void {
-		navigator.clipboard.writeText(`<span aria-hidden="true" class="lucca-icon icon-${this.camelize(icon)}"></span>`)
+		navigator.clipboard.writeText(`<span aria-hidden="true" class="lucca-icon icon-${this.camelize(icon)}"></span>`);
 	}
 }
 
 export default {
 	title: 'Documentation/Texts/Icons/List',
 	component: IconStory,
-	decorators: [
-		moduleMetadata({
-			imports: [CommonModule, FormsModule],
-		})
-	]
 } as Meta;
 
 const template: Story<IconStory> = (args) => ({ props: args });

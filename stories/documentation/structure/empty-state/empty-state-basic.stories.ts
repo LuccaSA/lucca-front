@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface EmptyStateBasicStory {
-}
+interface EmptyStateBasicStory {}
 
 export default {
 	title: 'Documentation/Structure/EmptyState/Basic',
@@ -14,7 +13,7 @@ function getTemplate(args: EmptyStateBasicStory): string {
 		<p class="emptyState-description">Vous pouvez suggérer ici une action à réaliser</p>
 		<button type="button" class="button palette-primary mod-L">Faire une action</button>
 	</section>
-	`
+	`;
 }
 
 const Template: Story<EmptyStateBasicStory> = (args: EmptyStateBasicStory) => ({

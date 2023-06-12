@@ -2,10 +2,10 @@
 	class="textfield-input"
 	[formControl]="formControl"
 	[formlyAttributes]="field"
-	[multiple]="to['multiple']"
+	[multiple]="props['multiple']"
 	(focus)="focus()"
 	(blur)="blur()"
-	[placeholder]="to.placeholder"
+	[placeholder]="props.placeholder"
 >
 </lu-user-select>
-<span class="textfield-label">{{ to.label }}</span>
+<span class="textfield-label">{{ props.label }}</span>

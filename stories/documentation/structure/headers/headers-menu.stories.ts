@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersMenuStory {
-}
+interface HeadersMenuStory {}
 
 export default {
 	title: 'Documentation/Structure/Headers/Menu',
@@ -66,7 +65,7 @@ function getTemplate(args: HeadersMenuStory): string {
 			</ul>
 		</nav>
 	</header>
-	`
+	`;
 }
 
 const Template: Story<HeadersMenuStory> = (args: HeadersMenuStory) => ({

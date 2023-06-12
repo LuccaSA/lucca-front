@@ -38,8 +38,8 @@
 		</div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="grid-column" style="--grid-colspan: 6"&gt;…&lt;/div&gt; &lt;div class="grid-column"
-		style="--grid-colspan: 6"&gt;…&lt;/div&gt;
+		>&lt;div class="grid"&gt; &lt;div class="grid-6@mediaMinXXXS"&gt;...&lt;/div&gt; &lt;div class="grid-6@mediaMinXXXS"&gt;...&lt;/div&gt;
+		&lt;/div&gt;
 	</code>
 </section>
 
@@ -47,18 +47,18 @@
 <section class="contentSection">
 	<h2>Offsets</h2>
 	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 8; --grid-column: 5">
-			<div class="grid-demo">--grid-colspan: 8; --grid-column: 5</div>
+		<div class="grid-8@mediaMinXXXS grid-offset4@mediaMinXXXS">
+			<div class="demo-grid">grid-8@mediaMinXXXS grid-offset4@mediaMinXXXS</div>
 		</div>
 	</div>
 	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 6; --grid-column: 4">
-			<div class="grid-demo">--grid-colspan: 6; --grid-column: 4</div>
+		<div class="grid-6@mediaMinXXXS grid-offset3@mediaMinXXXS">
+			<div class="demo-grid">grid-6@mediaMinXXXS grid-offset3@mediaMinXXXS</div>
 		</div>
-		<div class="grid-column" style="--grid-colspan: 3"><div class="grid-demo">--grid-colspan: 3</div></div>
+		<div class="grid-3@mediaMinXXXS"><div class="demo-grid">grid-3@mediaMinXXXS</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="grid-column" style="--grid-colspan: 8; --grid-column: 5"&gt;…&lt;/div&gt; &lt;/div&gt;
+		>&lt;div class="grid"&gt; &lt;div class="grid-8@mediaMinXXXS grid-offset4@mediaMinXXXS"&gt;...&lt;/div&gt; &lt;/div&gt;
 	</code>
 </section>
 
@@ -73,9 +73,14 @@
 		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid mod-auto"&gt; &lt;div class="grid-column"&gt;…&lt;/div&gt; &lt;div class="grid-column"&gt;…&lt;/div&gt; …
+		>&lt;div class="grid"&gt; &lt;div class="grid@mediaMinS"&gt;...&lt;/div&gt; &lt;div class="grid@mediaMinS"&gt;...&lt;/div&gt; ...
 		&lt;/div&gt;
 	</code>
+	<em
+		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
+		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
+		<code class="code">XXXL</code></em
+	>
 </section>
 <!-- Horizontal alignment -->
 <section class="contentSection">
@@ -90,30 +95,40 @@
 	<div class="grid" style="--grid-columns: 1">
 		<div class="grid-column" style="--grid-justify: end"><div class="grid-demo"></div></div>
 	</div>
-	<code class="code mod-block">&lt;div class="grid-column" style="--grid-justify: start"&gt;…&lt;/div&gt;></code>
-	<code class="code mod-block">&lt;div class="grid-column" style="--grid-justify: center"&gt;…&lt;/div&gt;></code>
-	<code class="code mod-block">&lt;div class="grid-column" style="--grid-justify: end"&gt;…&lt;/div&gt;></code>
+	<code class="code mod-block">&lt;div class="grid mod-start@mediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid mod-center@mediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid mod-end@mediaMinXXXS"&gt; ... </code>
+	<em
+		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
+		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
+		<code class="code">XXXL</code></em
+	>
 </section>
 
 <!-- Vertical alignment -->
 <section class="contentSection">
 	<h2>Vertical alignment</h2>
 	<p>You can align columns verticaly inside the grid:</p>
-	<div class="grid" style="--grid-columns: 2">
-		<div class="grid-column"><div class="grid-demo" style="height: 100px"></div></div>
-		<div class="grid-column" style="--grid-align: start"><div class="grid-demo"></div></div>
+	<div class="grid mod-top@mediaMinXXXS">
+		<div class="grid-6@mediaMinXXXS"><div class="demo-grid" style="height: 100px"></div></div>
+		<div class="grid-6@mediaMinXXXS"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid" style="--grid-columns: 2">
-		<div class="grid-column"><div class="grid-demo" style="height: 100px"></div></div>
-		<div class="grid-column" style="--grid-align: center"><div class="grid-demo"></div></div>
+	<div class="grid mod-middle@mediaMinXXXS">
+		<div class="grid-6@mediaMinXXXS"><div class="demo-grid" style="height: 100px"></div></div>
+		<div class="grid-6@mediaMinXXXS"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid" style="--grid-columns: 2">
-		<div class="grid-column"><div class="grid-demo" style="height: 100px"></div></div>
-		<div class="grid-column" style="--grid-align: end"><div class="grid-demo"></div></div>
+	<div class="grid mod-bottom@mediaMinXXXS">
+		<div class="grid-6@mediaMinXXXS"><div class="demo-grid" style="height: 100px"></div></div>
+		<div class="grid-6@mediaMinXXXS"><div class="demo-grid"></div></div>
 	</div>
-	<code class="code mod-block">&lt;div class="grid-column" style="--grid-align: start"&gt;…&lt;/div&gt;></code>
-	<code class="code mod-block">&lt;div class="grid-column" style="--grid-align: center"&gt;…&lt;/div&gt;></code>
-	<code class="code mod-block">&lt;div class="grid-column" style="--grid-align: end"&gt;…&lt;/div&gt;></code>
+	<code class="code mod-block">&lt;div class="grid mod-top@mediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid mod-middle@mediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid mod-bottom@mediaMinXXXS"&gt; ... </code>
+	<em
+		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
+		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
+		<code class="code">XXXL</code></em
+	>
 </section>
 
 <!-- Reorder -->
@@ -133,10 +148,14 @@
 		<div class="grid-column"><div class="grid-demo">4</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="grid-column" style="--grid-column: 2"&gt;…&lt;/div&gt; &lt;div class="grid-column"
-		style="--grid-column: 1"&gt;…&lt;/div&gt; &lt;/div&gt;
+		>&lt;div class="grid"&gt; &lt;div class="grid-6@mediaMinXXXS u-last@mediaMinXS"&gt;...&lt;/div&gt; &lt;div class="grid-6@mediaMinXXXS
+		u-first@mediaMinXS"&gt;...&lt;/div&gt; &lt;/div&gt;
 	</code>
-	<em><b>Tip:</b> It will also work with suffix <code class="code">AtMediaMin</code>.</em>
+	<em
+		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
+		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
+		<code class="code">XXXL</code></em
+	>
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->

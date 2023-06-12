@@ -19,4 +19,4 @@ const Template: Story<LabelIconStory> = (args: LabelIconStory) => ({
 });
 
 export const Icon = Template.bind({});
-Icon.args = { };
+Icon.args = {};

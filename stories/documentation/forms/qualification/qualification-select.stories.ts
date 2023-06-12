@@ -6,6 +6,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 
 @Component({
 	selector: 'qualification-stories',
+	standalone: true,
+	imports: [LuQualificationSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline u-marginRightS">
 			<lu-qualification-select placeholder="Select a qualification" class="textfield-input"></lu-qualification-select>
@@ -25,30 +27,24 @@ export default {
 	decorators: [
 		componentWrapperDecorator(QualificationSelectStory),
 		moduleMetadata({
-			declarations: [QualificationSelectStory],
-			imports: [HttpClientModule, BrowserAnimationsModule],
+			imports: [QualificationSelectStory, HttpClientModule, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
 
-const template: Story<QualificationSelectStory> = (props) => ({
-	props,
+const template: Story<QualificationSelectStory> = (args: QualificationSelectStory) => ({
+	props: args,
 });
 
 export const Select = template.bind({});
 
 const code = `
-/* 1. Importer LuQualificationSelectModule */
-import { LuQualificationSelectModule } from '@lucca-front/ng/qualification';
+import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
 
-@NgModule({
-	imports: [LuQualificationSelectModule]
-})
-class QualificationSelectStoriesModule {}
-
-/* 2. Utiliser lu-qualification-select */
 @Component({
 	selector: 'qualification-select-story',
+	standalone: true,
+	imports: [LuQualificationSelectInputComponent],
 	template: \`
 		<label class="textfield">
 			<lu-qualification-select placeholder="Select a qualification" class="textfield-input" ></lu-qualification-select>

@@ -14,7 +14,7 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	override fieldComponent: ViewContainerRef;
 
 	get mod() {
-		return (this.to['mod'] || '') as string;
+		return (this.props['mod'] || '') as string;
 	}
 
 	get modMultiline() {
@@ -22,19 +22,19 @@ export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {
 	}
 
 	get modWithSuffix() {
-		return !!this.to && !!this.to['suffix'] ? 'mod-withSuffix' : '';
+		return !!this.props && !!this.props['suffix'] ? 'mod-withSuffix' : '';
 	}
 
 	get isRequired() {
-		return !!this.to && !!this.to.required ? 'is-required' : '';
+		return !!this.props && !!this.props.required ? 'is-required' : '';
 	}
 
 	get isDisabled() {
-		return !!this.to && !!this.to.disabled ? 'is-disabled' : '';
+		return !!this.props && !!this.props.disabled ? 'is-disabled' : '';
 	}
 
 	get isFocused() {
-		return !!this.to && this.to['_isFocused'] ? 'is-focused' : '';
+		return !!this.props && this.props['_isFocused'] ? 'is-focused' : '';
 	}
 
 	get isError() {

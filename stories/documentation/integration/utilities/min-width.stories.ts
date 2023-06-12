@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
-
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'utilities-min-width-stories',
+	standalone: true,
 	templateUrl: './min-width.stories.html',
-	styles: [`.resize {
-		resize: horizontal;
-		overflow: hidden;
-	}`]
-}) class UMinWidthStory {}
+	styles: [
+		`
+			.resize {
+				resize: horizontal;
+				overflow: hidden;
+			}
+		`,
+	],
+})
+class UMinWidthStory {}
 
 export default {
 	title: 'Documentation/Integration/Utilities/MinWidth',
@@ -19,8 +24,8 @@ export default {
 		moduleMetadata({
 			entryComponents: [UMinWidthStory],
 			imports: [BrowserModule],
-		})
-	]
+		}),
+	],
 } as Meta;
 
 const template: Story<UMinWidthStory> = (args: UMinWidthStory) => ({

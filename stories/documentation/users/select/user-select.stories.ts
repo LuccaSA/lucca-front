@@ -2,13 +2,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuUserModule, LuUserSelectInputComponent } from '@lucca-front/ng/user';
+import { LuUserSelectInputComponent, LuUserSelectModule } from '@lucca-front/ng/user';
 import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
+	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-select.stories.html',
-}) class UserSelectStory {
+	imports: [LuUserSelectModule, FormsModule],
+})
+class UserSelectStory {
 	@Input() public model;
 }
 
@@ -18,23 +21,16 @@ export default {
 	decorators: [
 		componentWrapperDecorator(UserSelectStory),
 		moduleMetadata({
-			declarations: [UserSelectStory],
-			imports: [
-				HttpClientModule,
-				LuUserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-			],
-		})
-	]
+			imports: [UserSelectStory, HttpClientModule, BrowserAnimationsModule],
+		}),
+	],
 } as Meta;
 
 const template: Story<UserSelectStory> = (args: UserSelectStory) => ({
 	props: args,
 });
 
-const code =
-`
+const code = `
 /* 1. Importer le LuUserModule */
 import { LuUserModule } from '@lucca-front/ng/user';
 
@@ -62,11 +58,10 @@ class UserSelectStoriesModule {}
   </lu-user-select>
   <span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>
 </label>
-`
+`;
 
 export const basic = template.bind({});
-basic.args = {
-}
+basic.args = {};
 
 basic.parameters = {
 	controls: { include: [] },
@@ -75,6 +70,6 @@ basic.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
-		}
-	}
-}
+		},
+	},
+};

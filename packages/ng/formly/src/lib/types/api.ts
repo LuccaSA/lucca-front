@@ -1,35 +1,33 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { FieldType } from '@ngx-formly/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-api',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './api.html',
-	// changeDetection: ChangeDetectionStrategy.OnPush,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LuFormlyFieldApi extends FieldType {
+export class LuFormlyFieldApi extends FieldType<FieldTypeConfig> {
 	get _api() {
-		return this.to['api'] as string;
+		return this.props['api'] as string;
 	}
 	get _filters() {
-		return (this.to['filters'] || []) as string[];
+		return (this.props['filters'] || []) as string[];
 	}
 	get _orderBy() {
-		return this.to['orderBy'] as string;
+		return this.props['orderBy'] as string;
 	}
 	get _sort() {
-		return this.to['sort'] as string;
+		return this.props['sort'] as string;
 	}
 	get _standard() {
-		return (this.to['standard'] || 'v3') as 'v3' | 'v4';
+		return (this.props['standard'] || 'v3') as 'v3' | 'v4';
 	}
-	override readonly formControl: FormControl;
 	focus() {
-		this.to['_isFocused'] = true;
+		this.props['_isFocused'] = true;
 	}
 	blur() {
-		this.to['_isFocused'] = false;
+		this.props['_isFocused'] = false;
 	}
 }
