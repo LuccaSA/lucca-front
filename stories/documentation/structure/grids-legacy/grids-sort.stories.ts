@@ -8,32 +8,32 @@ export default {
 
 function getTemplate(args: GridsLegacySortStory): string {
 	return `
-	<div class="gridLegacy">
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">1</div>
+	<div class="grid">
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">1</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">2</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">2</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS u-first@mediaMinXS">
-			<div class="gridLegacy-demo">3 u-first@mediaMinXS</div>
+		<div class="grid-3@mediaMinXS u-first@mediaMinXS">
+			<div class="grid-demo">3 u-first@mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">4</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">4</div>
 		</div>
 	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">1</div>
+	<div class="grid">
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">1</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS u-last@mediaMinXS">
-			<div class="gridLegacy-demo">2 u-last@mediaMinXS</div>
+		<div class="grid-3@mediaMinXS u-last@mediaMinXS">
+			<div class="grid-demo">2 u-last@mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">3</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">3</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">4</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">4</div>
 		</div>
 	</div>
 
@@ -45,7 +45,7 @@ const Template: Story<GridsLegacySortStory> = (args: GridsLegacySortStory) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-		.gridLegacy-demo {
+		.grid-demo {
 			background: #F3F5FC;
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);

@@ -3,153 +3,140 @@
 <!-- Basics -->
 <section class="contentSection">
 	<h2>Grid</h2>
-	<div class="gridLegacy">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo">gridLegacy-6@mediaMinXXXS</div></div>
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo">gridLegacy-6@mediaMinXXXS</div></div>
-	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-4@mediaMinXS"><div class="gridLegacy-demo">gridLegacy-4@mediaMinXS</div></div>
-		<div class="gridLegacy-8@mediaMinXS"><div class="gridLegacy-demo">gridLegacy-8@mediaMinXS</div></div>
-	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-7@mediaMinS"><div class="gridLegacy-demo">gridLegacy-7@mediaMinS</div></div>
-		<div class="gridLegacy-5@mediaMinS"><div class="gridLegacy-demo">gridLegacy-5@mediaMinS</div></div>
-	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS">
-			<div class="gridLegacy-demo">gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS</div>
+	<div class="grid">
+		<div class="grid-column" style="--grid-colspan: 6">
+			<div class="grid-demo">--grid-colspan: 6</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS">
-			<div class="gridLegacy-demo">gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS</div>
+		<div class="grid-column" style="--grid-colspan: 6">
+			<div class="grid-demo">--grid-colspan: 6</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS">
-			<div class="gridLegacy-demo">gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS</div>
+	</div>
+	<div class="grid">
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4">
+			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS">
-			<div class="gridLegacy-demo">gridLegacy-3@mediaMinM gridLegacy-6@mediaMinS</div>
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8">
+			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8</div>
+		</div>
+	</div>
+	<div class="grid">
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 7"><div class="grid-demo">grid-7@mediaMinS</div></div>
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 5"><div class="grid-demo">grid-5@mediaMinS</div></div>
+	</div>
+	<div class="grid">
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+		</div>
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+		</div>
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+		</div>
+		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
 		</div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="gridLegacy"&gt; &lt;div class="gridLegacy-6@mediaMinXXXS"&gt;...&lt;/div&gt; &lt;div
-		class="gridLegacy-6@mediaMinXXXS"&gt;...&lt;/div&gt; &lt;/div&gt;
+		>&lt;div class="grid"&gt; &lt;div class="grid-column" style="--grid-colspan: 6"&gt;…&lt;/div&gt; &lt;div class="grid-column"
+		style="--grid-colspan: 6"&gt;…&lt;/div&gt;
 	</code>
 </section>
 
 <!-- Offsets -->
 <section class="contentSection">
 	<h2>Offsets</h2>
-	<div class="gridLegacy">
-		<div class="gridLegacy-8@mediaMinXXXS gridLegacy-offset4@mediaMinXXXS">
-			<div class="gridLegacy-demo">gridLegacy-8@mediaMinXXXS gridLegacy-offset4@mediaMinXXXS</div>
+	<div class="grid">
+		<div class="grid-column" style="--grid-colspan: 8; --grid-column: 5">
+			<div class="grid-demo">--grid-colspan: 8; --grid-column: 5</div>
 		</div>
 	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-6@mediaMinXXXS gridLegacy-offset3@mediaMinXXXS">
-			<div class="gridLegacy-demo">gridLegacy-6@mediaMinXXXS gridLegacy-offset3@mediaMinXXXS</div>
+	<div class="grid">
+		<div class="grid-column" style="--grid-colspan: 6; --grid-column: 4">
+			<div class="grid-demo">--grid-colspan: 6; --grid-column: 4</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">gridLegacy-3@mediaMinXXXS</div></div>
+		<div class="grid-column" style="--grid-colspan: 3"><div class="grid-demo">--grid-colspan: 3</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="gridLegacy"&gt; &lt;div class="gridLegacy-8@mediaMinXXXS gridLegacy-offset4@mediaMinXXXS"&gt;...&lt;/div&gt;
-		&lt;/div&gt;
+		>&lt;div class="grid"&gt; &lt;div class="grid-column" style="--grid-colspan: 8; --grid-column: 5"&gt;…&lt;/div&gt; &lt;/div&gt;
 	</code>
 </section>
 
 <!-- Auto width -->
 <section class="contentSection">
 	<h2>Auto width</h2>
-	<p>You can remove the columns numbers to devide the grid uniformly:</p>
-	<div class="gridLegacy">
-		<div class="gridLegacy@mediaMinS"><div class="gridLegacy-demo">gridLegacy@mediaMinS</div></div>
-		<div class="gridLegacy@mediaMinS"><div class="gridLegacy-demo">gridLegacy@mediaMinS</div></div>
-		<div class="gridLegacy@mediaMinS"><div class="gridLegacy-demo">gridLegacy@mediaMinS</div></div>
-		<div class="gridLegacy@mediaMinS"><div class="gridLegacy-demo">gridLegacy@mediaMinS</div></div>
-		<div class="gridLegacy@mediaMinS"><div class="gridLegacy-demo">gridLegacy@mediaMinS</div></div>
+	<div class="grid mod-auto">
+		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
+		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
+		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
+		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
+		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="gridLegacy"&gt; &lt;div class="gridLegacy@mediaMinS"&gt;...&lt;/div&gt; &lt;div
-		class="gridLegacy@mediaMinS"&gt;...&lt;/div&gt; ... &lt;/div&gt;
+		>&lt;div class="grid mod-auto"&gt; &lt;div class="grid-column"&gt;…&lt;/div&gt; &lt;div class="grid-column"&gt;…&lt;/div&gt; …
+		&lt;/div&gt;
 	</code>
-	<em
-		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
-		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
-		<code class="code">XXXL</code></em
-	>
 </section>
 <!-- Horizontal alignment -->
 <section class="contentSection">
 	<h2>Horizontal alignment</h2>
-	<p>You can align columns horizontaly inside the grid:</p>
-	<div class="gridLegacy mod-start@mediaMinXXXS">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo"></div></div>
+	<p>You can align the content horizontaly inside the column:</p>
+	<div class="grid" style="--grid-columns: 1">
+		<div class="grid-column" style="--grid-justify: start"><div class="grid-demo"></div></div>
 	</div>
-	<div class="gridLegacy mod-center@mediaMinXXXS">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo"></div></div>
+	<div class="grid" style="--grid-columns: 1">
+		<div class="grid-column" style="--grid-justify: center"><div class="grid-demo"></div></div>
 	</div>
-	<div class="gridLegacy mod-end@mediaMinXXXS">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo"></div></div>
+	<div class="grid" style="--grid-columns: 1">
+		<div class="grid-column" style="--grid-justify: end"><div class="grid-demo"></div></div>
 	</div>
-	<code class="code mod-block">&lt;div class="gridLegacy mod-start@mediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="gridLegacy mod-center@mediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="gridLegacy mod-end@mediaMinXXXS"&gt; ... </code>
-	<em
-		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
-		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
-		<code class="code">XXXL</code></em
-	>
+	<code class="code mod-block">&lt;div class="grid-column" style="--grid-justify: start"&gt;…&lt;/div&gt;></code>
+	<code class="code mod-block">&lt;div class="grid-column" style="--grid-justify: center"&gt;…&lt;/div&gt;></code>
+	<code class="code mod-block">&lt;div class="grid-column" style="--grid-justify: end"&gt;…&lt;/div&gt;></code>
 </section>
 
 <!-- Vertical alignment -->
 <section class="contentSection">
 	<h2>Vertical alignment</h2>
 	<p>You can align columns verticaly inside the grid:</p>
-	<div class="gridLegacy mod-top@mediaMinXXXS">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo" style="height: 100px"></div></div>
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo"></div></div>
+	<div class="grid" style="--grid-columns: 2">
+		<div class="grid-column"><div class="grid-demo" style="height: 100px"></div></div>
+		<div class="grid-column" style="--grid-align: start"><div class="grid-demo"></div></div>
 	</div>
-	<div class="grid mod-middle@mediaMinXXXS">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo" style="height: 100px"></div></div>
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo"></div></div>
+	<div class="grid" style="--grid-columns: 2">
+		<div class="grid-column"><div class="grid-demo" style="height: 100px"></div></div>
+		<div class="grid-column" style="--grid-align: center"><div class="grid-demo"></div></div>
 	</div>
-	<div class="gridLegacy mod-bottom@mediaMinXXXS">
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo" style="height: 100px"></div></div>
-		<div class="gridLegacy-6@mediaMinXXXS"><div class="gridLegacy-demo"></div></div>
+	<div class="grid" style="--grid-columns: 2">
+		<div class="grid-column"><div class="grid-demo" style="height: 100px"></div></div>
+		<div class="grid-column" style="--grid-align: end"><div class="grid-demo"></div></div>
 	</div>
-	<code class="code mod-block">&lt;div class="gridLegacy mod-top@mediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="gridLegacy mod-middle@mediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="gridLegacy mod-bottom@mediaMinXXXS"&gt; ... </code>
-	<em
-		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
-		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
-		<code class="code">XXXL</code></em
-	>
+	<code class="code mod-block">&lt;div class="grid-column" style="--grid-align: start"&gt;…&lt;/div&gt;></code>
+	<code class="code mod-block">&lt;div class="grid-column" style="--grid-align: center"&gt;…&lt;/div&gt;></code>
+	<code class="code mod-block">&lt;div class="grid-column" style="--grid-align: end"&gt;…&lt;/div&gt;></code>
 </section>
 
 <!-- Reorder -->
 <section class="contentSection">
 	<h2>Reorder</h2>
 	<p>You can reorder columns with utilities:</p>
-	<div class="gridLegacy">
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">1</div></div>
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">2</div></div>
-		<div class="gridLegacy-3@mediaMinXXXS u-first@mediaMinXS"><div class="gridLegacy-demo">3 u-first@mediaMinXS</div></div>
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">4</div></div>
+	<div class="grid mod-dense" style="--grid-columns: 4">
+		<div class="grid-column" style="--grid-column: 2"><div class="grid-demo">1 --grid-column: 2</div></div>
+		<div class="grid-column" style="--grid-column: 3"><div class="grid-demo">2 --grid-column: 3</div></div>
+		<div class="grid-column" style="--grid-column: 1"><div class="grid-demo">3 --grid-column: 1</div></div>
+		<div class="grid-column"><div class="grid-demo">4</div></div>
 	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">1</div></div>
-		<div class="gridLegacy-3@mediaMinXXXS u-last@mediaMinXS"><div class="gridLegacy-demo">2 u-last@mediaMinXS</div></div>
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">3</div></div>
-		<div class="gridLegacy-3@mediaMinXXXS"><div class="gridLegacy-demo">4</div></div>
+	<div class="grid mod-dense" style="--grid-columns: 4">
+		<div class="grid-column"><div class="grid-demo">1</div></div>
+		<div class="grid-column" style="--grid-columnAtMediaMinM: 4"><div class="grid-demo">2 --grid-columnAtMediaMinM: 4</div></div>
+		<div class="grid-column"><div class="grid-demo">3</div></div>
+		<div class="grid-column"><div class="grid-demo">4</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="gridLegacy"&gt; &lt;div class="gridLegacy-6@mediaMinXXXS u-last@mediaMinXS"&gt;...&lt;/div&gt; &lt;div
-		class="gridLegacy-6@mediaMinXXXS u-first@mediaMinXS"&gt;...&lt;/div&gt; &lt;/div&gt;
+		>&lt;div class="grid"&gt; &lt;div class="grid-column" style="--grid-column: 2"&gt;…&lt;/div&gt; &lt;div class="grid-column"
+		style="--grid-column: 1"&gt;…&lt;/div&gt; &lt;/div&gt;
 	</code>
-	<em
-		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
-		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
-		<code class="code">XXXL</code></em
-	>
+	<em><b>Tip:</b> It will also work with suffix <code class="code">AtMediaMin</code>.</em>
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->

@@ -1,15 +1,15 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsStartStory {
+interface GridsPositionStory {
 	reverse: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Start',
+	title: 'Documentation/Structure/Grids/Position',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: GridsStartStory): string {
+function getTemplate(args: GridsPositionStory): string {
 	return `
 	<div class="grid" style="--grid-columns: 4">
 		<div class="grid-column" style="--grid-column: 2"><div class="demo">column 2</div></div>
@@ -19,24 +19,21 @@ function getTemplate(args: GridsStartStory): string {
 	<div class="grid" style="--grid-columns: 4">
 		<div class="grid-column" style="--grid-column: 2"><div class="demo">column 2</div></div>
 		<div class="grid-column" style="--grid-column: 1"><div class="demo">column 1</div></div>
-		
 	</div>
 
 	<div class="grid" style="--grid-columns: 4">
 		<div class="grid-column" style="--grid-column: 2; --grid-row: 1"><div class="demo">column 2<br />row 1</div></div>
 		<div class="grid-column" style="--grid-column: 1; --grid-row: 1"><div class="demo">column 1<br />row 1</div></div>
-		
 	</div>
 
 	<div class="grid mod-dense" style="--grid-columns: 4">
 		<div class="grid-column" style="--grid-column: 2"><div class="demo">mod-dense<br />column 2</div></div>
 		<div class="grid-column" style="--grid-column: 1"><div class="demo">mod-dense<br />column 1</div></div>
-		
 	</div>
 	`;
 }
 
-const Template: Story<GridsStartStory> = (args: GridsStartStory) => ({
+const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

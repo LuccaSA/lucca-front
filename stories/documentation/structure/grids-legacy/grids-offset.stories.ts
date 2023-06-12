@@ -8,17 +8,17 @@ export default {
 
 function getTemplate(args: GridsLegacyOffsetStory): string {
 	return `
-	<div class="gridLegacy">
-		<div class="gridLegacy-8@mediaMinXS gridLegacy-offset4@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-8 @mediaMinXS gridLegacy-offset4 @mediaMinXS</div>
+	<div class="grid">
+		<div class="grid-8@mediaMinXS grid-offset4@mediaMinXS">
+			<div class="grid-demo">grid-8 @mediaMinXS grid-offset4 @mediaMinXS</div>
 		</div>
 	</div>
-	<div class="gridLegacy">
-		<div class="gridLegacy-6@mediaMinXS gridLegacy-offset3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-6 @mediaMinXS gridLegacy-offset3 @mediaMinXS</div>
+	<div class="grid">
+		<div class="grid-6@mediaMinXS grid-offset3@mediaMinXS">
+			<div class="grid-demo">grid-6 @mediaMinXS grid-offset3 @mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
 	</div>
 	`;
@@ -29,7 +29,7 @@ const Template: Story<GridsLegacyOffsetStory> = (args: GridsLegacyOffsetStory) =
 	template: getTemplate(args),
 	styles: [
 		`
-		.gridLegacy-demo {
+		.grid-demo {
 			background: #F3F5FC;
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);

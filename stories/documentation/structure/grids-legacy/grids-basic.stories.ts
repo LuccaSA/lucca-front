@@ -19,45 +19,45 @@ export default {
 function getTemplate(args: GridsLegacyBasicStory): string {
 	const reverse = args.reverse ? `mod-reverse` : '';
 	return `
-	<div class="gridLegacy ${reverse}">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="demo">gridLegacy-6@mediaMinXS</div>
+	<div class="grid ${reverse}">
+		<div class="grid-6@mediaMinXS">
+			<div class="demo">grid-6@mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="demo">gridLegacy-6@mediaMinXS</div>
-		</div>
-	</div>
-
-	<div class="gridLegacy ${reverse}">
-		<div class="gridLegacy-4@mediaMinS">
-			<div class="demo">gridLegacy-4@mediaMinS</div>
-		</div>
-		<div class="gridLegacy-8@mediaMinS">
-			<div class="demo">gridLegacy-8@mediaMinS</div>
+		<div class="grid-6@mediaMinXS">
+			<div class="demo">grid-6@mediaMinXS</div>
 		</div>
 	</div>
 
-	<div class="gridLegacy ${reverse}">
-		<div class="gridLegacy-7@mediaMinM">
-			<div class="demo">gridLegacy-7@mediaMinM</div>
+	<div class="grid ${reverse}">
+		<div class="grid-4@mediaMinS">
+			<div class="demo">grid-4@mediaMinS</div>
 		</div>
-		<div class="gridLegacy-5@mediaMinM">
-			<div class="demo">gridLegacy-5@mediaMinM</div>
+		<div class="grid-8@mediaMinS">
+			<div class="demo">grid-8@mediaMinS</div>
 		</div>
 	</div>
 
-	<div class="gridLegacy ${reverse}">
-		<div class="gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM">
-			<div class="demo">gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM</div>
+	<div class="grid ${reverse}">
+		<div class="grid-7@mediaMinM">
+			<div class="demo">grid-7@mediaMinM</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM">
-			<div class="demo">gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM</div>
+		<div class="grid-5@mediaMinM">
+			<div class="demo">grid-5@mediaMinM</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM">
-			<div class="demo">gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM</div>
+	</div>
+
+	<div class="grid ${reverse}">
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM">
-			<div class="demo">gridLegacy-3@mediaMinL gridLegacy-6@mediaMinM</div>
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+		</div>
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+		</div>
+		<div class="grid-3@mediaMinL grid-6@mediaMinM">
+			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
 		</div>
 	</div>
 	`;

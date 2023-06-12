@@ -8,28 +8,28 @@ export default {
 
 function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 	return `
-	<div class="gridLegacy mod-top@mediaMinXS">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo" style="height:100px"></div>
+	<div class="grid mod-top@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo" style="height:100px"></div>
 		</div>
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo">Top</div>
-		</div>
-	</div>
-	<div class="gridLegacy mod-middle@mediaMinXS">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo" style="height:100px"></div>
-		</div>
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo">Middle</div>
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">Top</div>
 		</div>
 	</div>
-	<div class="gridLegacy mod-bottom@mediaMinXS">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo" style="height:100px"></div>
+	<div class="grid mod-middle@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo" style="height:100px"></div>
 		</div>
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo">Bottom</div>
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">Middle</div>
+		</div>
+	</div>
+	<div class="grid mod-bottom@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo" style="height:100px"></div>
+		</div>
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">Bottom</div>
 		</div>
 	</div>
 	`;
@@ -40,7 +40,7 @@ const Template: Story<GridsLegacyVerticalAlignmentStory> = (args: GridsLegacyVer
 	template: getTemplate(args),
 	styles: [
 		`
-		.gridLegacy-demo {
+		.grid-demo {
 			background: #F3F5FC;
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);

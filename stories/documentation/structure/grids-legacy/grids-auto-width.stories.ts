@@ -8,21 +8,21 @@ export default {
 
 function getTemplate(args: GridsLegacyAutoWidthStory): string {
 	return `
-	<div class="gridLegacy">
-		<div class="gridLegacy@mediaMinM">
-			<div class="gridLegacy-demo">gridLegacy @mediaMinM</div>
+	<div class="grid">
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
-		<div class="gridLegacy@mediaMinM">
-			<div class="gridLegacy-demo">gridLegacy @mediaMinM</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
-		<div class="gridLegacy@mediaMinM">
-			<div class="gridLegacy-demo">gridLegacy @mediaMinM</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
-		<div class="gridLegacy@mediaMinM">
-			<div class="gridLegacy-demo">gridLegacy @mediaMinM</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
-		<div class="gridLegacy@mediaMinM">
-			<div class="gridLegacy-demo">gridLegacy @mediaMinM</div>
+		<div class="grid@mediaMinM">
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
 	</div>
 	`;
@@ -33,7 +33,7 @@ const Template: Story<GridsLegacyAutoWidthStory> = (args: GridsLegacyAutoWidthSt
 	template: getTemplate(args),
 	styles: [
 		`
-		.gridLegacy-demo {
+		.grid-demo {
 			background: #F3F5FC;
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);

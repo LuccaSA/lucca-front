@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
-.gridLegacy {
+.grid {
 	@include vars;
 	@include component;
 
@@ -48,18 +48,18 @@
 }
 
 @each $breakpoint, $value in config.$breakpoints {
-	.gridLegacy\@mediaMin#{$breakpoint} {
+	.grid\@mediaMin#{$breakpoint} {
 		@include column;
 	}
 
 	@include media.min($breakpoint) {
-		.gridLegacy\@mediaMin#{$breakpoint} {
+		.grid\@mediaMin#{$breakpoint} {
 			@include grow;
 		}
 	}
 
 	@for $i from 1 through 12 {
-		.gridLegacy-#{$i}\@mediaMin#{$breakpoint} {
+		.grid-#{$i}\@mediaMin#{$breakpoint} {
 			@include column;
 		}
 	}
@@ -68,18 +68,18 @@
 @each $breakpoint, $value in config.$breakpoints {
 	@for $i from 1 through 12 {
 		@include media.min($breakpoint) {
-			.gridLegacy-#{$i}\@mediaMin#{$breakpoint} {
+			.grid-#{$i}\@mediaMin#{$breakpoint} {
 				@include basis($i);
 			}
 
-			.gridLegacy-offset#{$i}\@mediaMin#{$breakpoint} {
+			.grid-offset#{$i}\@mediaMin#{$breakpoint} {
 				@include offset($i);
 			}
 		}
 	}
 }
 
-.gridLegacy {
+.grid {
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
 			.u-first\@mediaMin#{$breakpoint} {

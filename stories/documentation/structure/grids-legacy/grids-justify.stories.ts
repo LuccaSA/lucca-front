@@ -8,26 +8,26 @@ export default {
 
 function getTemplate(args: GridsLegacyJustifyStory): string {
 	return `
-	<div class="gridLegacy mod-between@mediaMinXS">
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+	<div class="grid mod-between@mediaMinXS">
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
 	</div>
-	<div class="gridLegacy mod-around@mediaMinXS">
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+	<div class="grid mod-around@mediaMinXS">
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
-		<div class="gridLegacy-3@mediaMinXS">
-			<div class="gridLegacy-demo">gridLegacy-3 @mediaMinXS</div>
+		<div class="grid-3@mediaMinXS">
+			<div class="grid-demo">grid-3 @mediaMinXS</div>
 		</div>
 	</div>
 	`;
@@ -38,7 +38,7 @@ const Template: Story<GridsLegacyJustifyStory> = (args: GridsLegacyJustifyStory)
 	template: getTemplate(args),
 	styles: [
 		`
-		.gridLegacy-demo {
+		.grid-demo {
 			background: #F3F5FC;
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);

@@ -8,19 +8,19 @@ export default {
 
 function getTemplate(args: GridsLegacyHorizontalAlignmentStory): string {
 	return `
-	<div class="gridLegacy mod-start@mediaMinXS">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo">Start</div>
+	<div class="grid mod-start@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">Start</div>
 		</div>
 	</div>
-	<div class="gridLegacy mod-center@mediaMinXS">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo">Center</div>
+	<div class="grid mod-center@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">Center</div>
 		</div>
 	</div>
-	<div class="gridLegacy mod-end@mediaMinXS">
-		<div class="gridLegacy-6@mediaMinXS">
-			<div class="gridLegacy-demo">End</div>
+	<div class="grid mod-end@mediaMinXS">
+		<div class="grid-6@mediaMinXS">
+			<div class="grid-demo">End</div>
 		</div>
 	</div>
 	`;
@@ -31,7 +31,7 @@ const Template: Story<GridsLegacyHorizontalAlignmentStory> = (args: GridsLegacyH
 	template: getTemplate(args),
 	styles: [
 		`
-		.gridLegacy-demo {
+		.grid-demo {
 			background: #F3F5FC;
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
