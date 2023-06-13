@@ -1,19 +1,5 @@
 import { Meta, Story } from '@storybook/angular';
 
-@Component({
-	selector: 'page-header-basic-stories',
-	standalone: true,
-	templateUrl: './page-header-basic.stories.html',
-})
-class PageHeaderBasicStory {
-	@Input() pageHeaderTitle: string = '';
-	@Input() pageHeaderDescription: string = '';
-	@Input() withBreadcrumbs: boolean = false;
-	@Input() withMenu: boolean = false;
-	@Input() withoutShadow: boolean = false;
-	@Input() sticky: boolean = false;
-}
-
 interface PageHeaderBasicStory {
 	sticky: boolean;
 }
@@ -79,5 +65,5 @@ const Template: Story<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({
 	template: getTemplate(args),
 });
 
-export const BasicPageHeader = Template.bind({});
-BasicPageHeader.args = { sticky: false };
+export const BaiscPageHeader = Template.bind({});
+BaiscPageHeader.args = { sticky: false };
