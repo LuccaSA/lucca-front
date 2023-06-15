@@ -53,11 +53,17 @@
 @mixin card {
 	border-top: 0;
 
+	.table-head-row-cell {
+		border-top: 0;
+	}
+
 	.table-body, .table-foot {
 		&:last-child {
-			.table-body-row-cell,
-			.table-foot-row-cell {
-				border-bottom: none;
+			.table-body-row:last-child {
+				.table-body-row-cell,
+				.table-foot-row-cell {
+					border-bottom: none;
+				}
 			}
 		}
 	}
@@ -138,12 +144,14 @@
 		}
 
 		&::before {
-			@include icon.generate('arrow_south');
+			@include icon.generate('collapse');
 
+			font-size: var(--sizes-M-lineHeight);
+			font-weight: 400;
 			margin-right: var(--spacings-XS);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
-			vertical-align: middle;
+			vertical-align: top;
 		}
 	}
 
@@ -151,7 +159,7 @@
 		.table-body-row-cell,
 		.table-foot-row-cell {
 			&::before {
-				transform: rotate(-90deg);
+					@include icon.generate('expand');
 			}
 		}
 	}
