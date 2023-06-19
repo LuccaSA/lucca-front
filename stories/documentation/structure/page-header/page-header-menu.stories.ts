@@ -1,21 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersBasicStory {
-	noShadow: boolean;
+interface PageHeaderMenuStory {
 	sticky: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Headers/Basic',
+	title: 'Documentation/Structure/PageHeader/Menu',
 	argTypes: {
-		noShadow: {
-			description: "Supprime l'ombre portée du header",
-			control: {
-				type: 'boolean',
-			},
-		},
 		sticky: {
-			description: "Rend le header toujours visible au scroll en s'adaptant à la position du menu principal et secondaire.",
 			control: {
 				type: 'boolean',
 			},
@@ -23,14 +15,14 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: HeadersBasicStory): string {
-	const noShadow = args.noShadow ? `mod-noShadow` : '';
+function getTemplate(args: PageHeaderMenuStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
+
 	return `
-	<header class="pageHeader ${noShadow} ${sticky}">
+	<header class="pageHeader mod-withMenu">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="u-margin0 u-marginRightM">H1. Page title</h1>
+				<h1 class="u-margin0">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-edit"></span>
@@ -53,7 +45,7 @@ function getTemplate(args: HeadersBasicStory): string {
 				</label>
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
-				<button type="button" class="button mod-outline mod-icon">
+				<button type="button" class="actionIcon">
 					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
@@ -64,14 +56,43 @@ function getTemplate(args: HeadersBasicStory): string {
 				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside mod-XS u-marginLeftXXS"></span></a>.
 			</p>
 		</section>
+		<nav class="menu">
+			<ul class="menu-list">
+				<li class="menu-list-item">
+					<a
+						class="menu-list-item-action"
+						href="#"
+						aria-current="page"
+					>
+						Tab
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a
+						class="menu-list-item-action"
+						href="#"
+					>
+						Tab
+					</a>
+				</li>
+				<li class="menu-list-item">
+					<a
+						class="menu-list-item-action"
+						href="#"
+					>
+						Tab
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</header>
 	`;
 }
 
-const Template: Story<HeadersBasicStory> = (args: HeadersBasicStory) => ({
+const Template: Story<PageHeaderMenuStory> = (args: PageHeaderMenuStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = { noShadow: false, sticky: false };
+export const MenuPageHeader = Template.bind({});
+MenuPageHeader.args = { sticky: false };

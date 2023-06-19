@@ -43,17 +43,17 @@ function getTemplate(args: MenuBasicStory): string {
 		<ul class="menu-list">
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled} aria-current="page">
-					Menu 1
+					Tab
 				</a>
 			</li>
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled}>
-					Menu 2
+					Tab
 				</a>
 			</li>
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled}>
-					Menu 3
+					Tab
 				</a>
 			</li>
 		</ul>

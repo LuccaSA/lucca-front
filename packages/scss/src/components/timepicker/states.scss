@@ -1,10 +1,10 @@
 @mixin disabled {
   background-color: var(--palettes-grey-100);
-  color: var(--palettes-grey-500);
+  color: var(--palettes-grey-600);
 
   .timepicker-field-input {
     background: transparent;
-    color: var(--palettes-grey-500);
+    color: var(--palettes-grey-600);
   }
 
   .timepicker-field-increment {

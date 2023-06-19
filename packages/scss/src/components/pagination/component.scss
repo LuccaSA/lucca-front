@@ -1,7 +1,9 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-wrap: wrap;
-	margin: var(--spacings-S) 0;
+	padding: var(--spacings-XS) .75rem;
+	border-top: var(--commons-divider-width) solid var(--commons-border-200);
+	justify-content: end;
 
 	> *:not(:last-child) {
 		margin-right: var(--spacings-XS);

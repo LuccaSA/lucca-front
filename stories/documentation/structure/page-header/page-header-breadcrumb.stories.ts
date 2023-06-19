@@ -1,17 +1,36 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersMenuStory {}
+interface PageHeaderBreadcrumbStory {
+	sticky: boolean;
+}
 
 export default {
-	title: 'Documentation/Structure/Headers/Menu',
+	title: 'Documentation/Structure/PageHeader/Breadcrumb',
+	argTypes: {
+		sticky: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 } as Meta;
 
-function getTemplate(args: HeadersMenuStory): string {
+function getTemplate(args: PageHeaderBreadcrumbStory): string {
+	const sticky = args.sticky ? `mod-sticky` : '';
+
 	return `
-	<header class="pageHeader mod-withMenu">
+	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
+		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
+			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 0</a></li>
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 1</a></li>
+				<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Page 2</span></li>
+			</ul>
+		</nav>
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="u-margin0 u-marginRightM">H1. Page title</h1>
+				<h1 class="u-margin0">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-edit"></span>
@@ -34,7 +53,7 @@ function getTemplate(args: HeadersMenuStory): string {
 				</label>
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
-				<button type="button" class="button mod-outline mod-icon">
+				<button type="button" class="actionIcon">
 					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
@@ -45,33 +64,14 @@ function getTemplate(args: HeadersMenuStory): string {
 				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside mod-XS u-marginLeftXXS"></span></a>.
 			</p>
 		</section>
-		<nav class="menu">
-			<ul class="menu-list">
-				<li class="menu-list-item">
-					<a class="menu-list-item-action" href="#"	aria-current="page"	>
-						active link
-					</a>
-				</li>
-				<li class="menu-list-item">
-					<a class="menu-list-item-action" href="#">
-						menu link
-					</a>
-				</li>
-				<li class="menu-list-item">
-					<a class="menu-list-item-action" href="#">
-						menu link
-					</a>
-				</li>
-			</ul>
-		</nav>
 	</header>
 	`;
 }
 
-const Template: Story<HeadersMenuStory> = (args: HeadersMenuStory) => ({
+const Template: Story<PageHeaderBreadcrumbStory> = (args: PageHeaderBreadcrumbStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Menu = Template.bind({});
-Menu.args = {};
+export const BreadcrumbPageHeader = Template.bind({});
+BreadcrumbPageHeader.args = { sticky: false };
