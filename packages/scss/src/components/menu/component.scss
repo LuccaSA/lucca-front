@@ -32,6 +32,7 @@
 		.menu-list {
 			@include reset.list;
 
+			align-items: end;
 			column-gap: var(--spacings-L);
 			display: flex;
 			flex-wrap: wrap;

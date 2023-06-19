@@ -31,7 +31,7 @@ function getTemplate(args: timepickerBasicStory): string {
 	<div class="timepicker-field">
 		<label>
 			<span class="u-mask">heures</span>
-			<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="7" tabindex="1">
+			<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="7">
 		</label>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-northArrow"></span>
@@ -44,7 +44,7 @@ function getTemplate(args: timepickerBasicStory): string {
 	<div class="timepicker-field">
 		<label>
 			<span class="u-mask">minutes</span>
-			<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="00" tabindex="1">
+			<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="00">
 		</label>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
 			<span class="lucca-icon icon-northArrow"></span>
