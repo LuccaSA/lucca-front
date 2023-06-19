@@ -31,8 +31,10 @@
 		}
 
 		.pageHeader-content-actions {
-			& > *:not(:last-child) {
-				margin-right: var(--spacings-S);
+			gap: var(--spacings-S);
+
+			.button {
+				margin: 0;
 
 				@include media.max('XS') {
 					flex: 1;
