@@ -143,8 +143,8 @@ class TooltipStory {
   @Input() luTooltipLeaveDelay: number;
   @Input() luTooltipDisabled: boolean;
   @Input() luTooltipPosition: LuPopoverPosition;
-	@Input() luTooltipWhenEllipsis: boolean;
-	@Input() luTooltipAsHtml: boolean;
+  @Input() luTooltipWhenEllipsis: boolean;
+  @Input() luTooltipAsHtml: boolean;
 }`;
 
 Basic.parameters = {
