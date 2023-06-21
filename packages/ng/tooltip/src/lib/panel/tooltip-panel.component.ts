@@ -26,6 +26,15 @@ export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopov
 		this._changeDetectorRef.markForCheck();
 	}
 
+	private _contentAsHtml: boolean;
+	get contentAsHtml() {
+		return this._contentAsHtml;
+	}
+	set contentAsHtml(c) {
+		this._contentAsHtml = c;
+		this._changeDetectorRef.markForCheck();
+	}
+
 	//FIXME output event
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override close = new EventEmitter<void>();

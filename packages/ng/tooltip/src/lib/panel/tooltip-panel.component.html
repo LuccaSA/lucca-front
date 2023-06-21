@@ -7,5 +7,8 @@
 	[attr.id]="panelId"
 	[@transformTooltip]="'enter'"
 >
-	<div class="lu-tooltip-content" [ngClass]="contentClassesMap" [innerHtml]="content"></div>
+	<div *ngIf="contentAsHtml; else contentAsString" class="lu-tooltip-content" [ngClass]="contentClassesMap" [innerHtml]="content"></div>
+	<ng-template #contentAsString>
+		<div class="lu-tooltip-content" [ngClass]="contentClassesMap">{{ content }}</div>
+	</ng-template>
 </div>

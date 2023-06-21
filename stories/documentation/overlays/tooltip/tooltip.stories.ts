@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
@@ -11,12 +11,13 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	template: `<button
 		type="button"
 		class="button u-marginL"
-		luTooltip="so you can see me"
+		luTooltip="so <em>you</em> can see me"
 		[luTooltipEnterDelay]="luTooltipEnterDelay"
 		[luTooltipLeaveDelay]="luTooltipLeaveDelay"
 		[luTooltipPosition]="luTooltipPosition"
 		[luTooltipDisabled]="luTooltipDisabled"
 		[luTooltipWhenEllipsis]="luTooltipWhenEllipsis"
+		[luTooltipAsHtml]="luTooltipAsHtml"
 		[class.u-ellipsis]="luTooltipWhenEllipsis"
 		[tabindex]="tabindex"
 		[attr.data-tooltip]="getDataTooltip()"
@@ -37,6 +38,7 @@ class TooltipStory {
 	@Input() luTooltipDisabled: boolean;
 	@Input() luTooltipPosition: LuPopoverPosition;
 	@Input() luTooltipWhenEllipsis: boolean;
+	@Input() luTooltipAsHtml: boolean;
 	@Input() tabindex: number | null;
 
 	getDataTooltip() {
@@ -73,6 +75,9 @@ export default {
 		luTooltipWhenEllipsis: {
 			control: { type: 'boolean' },
 		},
+		luTooltipAsHtml: {
+			control: { type: 'boolean' },
+		},
 		tabindex: {
 			control: { type: 'number' },
 		},
@@ -84,6 +89,7 @@ export default {
 			luTooltipDisabled: props.luTooltipDisabled,
 			luTooltipPosition: props.luTooltipPosition,
 			luTooltipWhenEllipsis: props.luTooltipWhenEllipsis,
+			luTooltipAsHtml: props.luTooltipAsHtml,
 			tabindex: props.tabindex,
 		})),
 		moduleMetadata({
@@ -103,6 +109,7 @@ Basic.args = {
 	luTooltipDisabled: false,
 	luTooltipPosition: 'below',
 	luTooltipWhenEllipsis: false,
+	luTooltipAsHtml: true,
 	tabindex: null,
 };
 
@@ -126,6 +133,7 @@ class StoriesModule {}
 	[luTooltipPosition]="luTooltipPosition"
 	[luTooltipDisabled]="luTooltipDisabled"
 	[luTooltipWhenEllipsis]="luTooltipWhenEllipsis"
+	[luTooltipAsHtml]="luTooltipAsHtml"
 	[class.u-ellipsis]="luTooltipWhenEllipsis">
 		Come over here
 	</button>\`,
@@ -135,11 +143,13 @@ class TooltipStory {
   @Input() luTooltipLeaveDelay: number;
   @Input() luTooltipDisabled: boolean;
   @Input() luTooltipPosition: LuPopoverPosition;
+	@Input() luTooltipWhenEllipsis: boolean;
+	@Input() luTooltipAsHtml: boolean;
 }`;
 
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: ['luTooltipEnterDelay', 'luTooltipLeaveDelay', 'luTooltipDisabled', 'luTooltipPosition', 'luTooltipWhenEllipsis', 'tabindex'] },
+	controls: { include: ['luTooltipEnterDelay', 'luTooltipLeaveDelay', 'luTooltipDisabled', 'luTooltipPosition', 'luTooltipWhenEllipsis', 'luTooltipAsHtml', 'tabindex'] },
 	docs: {
 		source: {
 			language: 'ts',

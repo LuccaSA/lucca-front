@@ -41,6 +41,14 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		this.whenEllipsis = we;
 	}
 
+	@Input('luTooltipAsHtml') public set inputAsHtml(asHtml: boolean) {
+		if (this.panel) {
+			this.panel.contentAsHtml = asHtml;
+		}
+
+		this._contentAsHtml = asHtml;
+	}
+
 	// FIXME output native
 	/** Event emitted when the associated popover is opened. */
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -82,6 +90,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 
 	protected override _portal: ComponentPortal<LuTooltipPanelComponent>;
 	protected _tooltipContent: string | SafeHtml = '';
+	protected _contentAsHtml = false;
 
 	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
 		super(_overlay, _elementRef, _viewContainerRef);
@@ -132,6 +141,7 @@ export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelC
 		const componentRef = this._overlayRef.attach(this._portal);
 		this._panel = componentRef.instance;
 		this._panel.content = this._tooltipContent;
+		this._panel.contentAsHtml = this._contentAsHtml;
 	}
 
 	protected override _getPanelScrollStrategy(): LuPopoverScrollStrategy {
