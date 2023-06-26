@@ -6,8 +6,7 @@ interface FilesBasicStory {
 
 export default {
 	title: 'Documentation/Forms/Files/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: FilesBasicStory): string {
@@ -47,7 +46,7 @@ function getTemplate(args: FilesBasicStory): string {
 			</span>
 		</span>
 	</label>
-	`
+	`;
 }
 
 const Template: Story<FilesBasicStory> = (args: FilesBasicStory) => ({

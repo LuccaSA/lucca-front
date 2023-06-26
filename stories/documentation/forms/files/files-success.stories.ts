@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FilesSuccessStory {
-}
+interface FilesSuccessStory {}
 
 export default {
 	title: 'Documentation/Forms/Files/Success',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: FilesSuccessStory): string {
@@ -47,7 +45,7 @@ function getTemplate(args: FilesSuccessStory): string {
 			</span>
 		</span>
 	</label>
-	`
+	`;
 }
 
 const Template: Story<FilesSuccessStory> = (args: FilesSuccessStory) => ({
@@ -61,4 +59,4 @@ const Template: Story<FilesSuccessStory> = (args: FilesSuccessStory) => ({
 });
 
 export const Success = Template.bind({});
-Success.args = { };
+Success.args = {};

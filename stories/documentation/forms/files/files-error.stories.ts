@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FilesErrorStory {
-}
+interface FilesErrorStory {}
 
 export default {
 	title: 'Documentation/Forms/Files/Error',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: FilesErrorStory): string {
@@ -61,4 +59,4 @@ const Template: Story<FilesErrorStory> = (args: FilesErrorStory) => ({
 });
 
 export const Error = Template.bind({});
-Error.args = { };
+Error.args = {};

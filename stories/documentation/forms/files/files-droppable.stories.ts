@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface FilesDroppableStory {
-}
+interface FilesDroppableStory {}
 
 export default {
 	title: 'Documentation/Forms/Files/Droppable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: FilesDroppableStory): string {
@@ -46,7 +44,7 @@ function getTemplate(args: FilesDroppableStory): string {
 			</span>
 		</span>
 	</label>
-	`
+	`;
 }
 
 const Template: Story<FilesDroppableStory> = (args: FilesDroppableStory) => ({
@@ -60,4 +58,4 @@ const Template: Story<FilesDroppableStory> = (args: FilesDroppableStory) => ({
 });
 
 export const Droppable = Template.bind({});
-Droppable.args = { };
+Droppable.args = {};
