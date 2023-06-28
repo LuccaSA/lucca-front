@@ -1,0 +1,28 @@
+<header class="pageHeader" [class.mod-sticky]="sticky" [class.mod-noShadow]="noShadow">
+	<div class="pageHeader-content">
+		<div class="pageHeader-content-title">
+			<h1 class="u-margin0 u-marginRightM">
+				<ng-container *ngTemplateOutlet="stringOrTpl;context:{$implicit: title}"></ng-container>
+			</h1>
+			<div *ngIf="actions">
+				<ng-container *ngTemplateOutlet="actions"></ng-container>
+			</div>
+		</div>
+		<div class="pageHeader-content-actions" *ngIf="extra">
+			<ng-container *ngTemplateOutlet="extra"></ng-container>
+		</div>
+	</div>
+	<section class="pageHeader-description" *ngIf="description">
+		<p class="u-marginBottom0">
+			<ng-container *ngTemplateOutlet="stringOrTpl;context:{$implicit: description}"></ng-container>
+		</p>
+	</section>
+</header>
+
+<!-- This is made as a template for now as it's a PoC but it should be handled by a directive instead in the final core version -->
+<ng-template #stringOrTpl let-input>
+	<ng-container *ngIf="isTemplateRef(input); else stringTpl">
+		<ng-container *ngTemplateOutlet="input"></ng-container>
+	</ng-container>
+	<ng-template #stringTpl>{{input}}</ng-template>
+</ng-template>
