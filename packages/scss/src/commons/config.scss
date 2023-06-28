@@ -1,5 +1,5 @@
 $states: 'error', 'warning', 'success' !default;
-$palettes: 'primary', 'secondary', 'grey' !default;
+$palettes: 'primary', 'secondary', 'grey', 'navigation' !default;
 $fontVariable: false !default;
 
 $primary: (
@@ -85,6 +85,13 @@ $grey: (
 	700: #445473,
 	800: #2a3551,
 	900: #0b1732,
+) !default;
+
+$navigation: (
+	text: #ffffff,
+	700: #313972,
+	800: #192157,
+	900: #12183F,
 ) !default;
 
 $colors: (

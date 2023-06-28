@@ -12,6 +12,7 @@
 	@include core.cssvars('palettes-primary', config.$primary);
 	@include core.cssvars('palettes-secondary', config.$secondary);
 	@include core.cssvars('palettes-grey', config.$grey);
+	@include core.cssvars('palettes-navigation', config.$navigation);
 	@include core.cssvars('palettes-success', config.$success);
 	@include core.cssvars('palettes-warning', config.$warning);
 	@include core.cssvars('palettes-error', config.$error);
