@@ -170,6 +170,11 @@
 				@include icon.generate('confirm');
 				font-size: var(--components-timeline-icon-size);
 				display: flex;
+				background-color: transparent;
+				color: var(--palettes-primary-700);
+			}
+			&::before {
+				background-color: var(--palettes-primary-100);
 			}
 		}
 
