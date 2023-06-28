@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin sortedLegacy {
 	color: var(--palettes-grey-900);
@@ -73,7 +74,7 @@
 
 	.table-head-row-cell-sortableButton {
 		color: var(--palettes-grey-900);
-		padding: var(--spacings-S);
+		padding: var(--components-table-padding);
 
 		&::after {
 			@include icon.generate('arrow_full_north');
@@ -82,16 +83,15 @@
 			transform: translateY(0);
 		}
 
-		&:focus {
-			outline: none;
-		}
-
-		&:hover,
-		&:focus-visible {
-			outline: none;
-
+		&:hover {
 			&::after {
 				opacity: 1;
+			}
+		}
+
+		&:focus-visible {
+			&::after {
+				@include a11y.focusVisible();
 			}
 		}
 	}
@@ -112,10 +112,15 @@
 			content: none;
 		}
 
-		&:hover,
-		&:focus {
+		&:hover {
 			&::before {
 				opacity: 1;
+			}
+		}
+
+		&:focus-visible {
+			&::before {
+				@include a11y.focusVisible();
 			}
 		}
 	}
