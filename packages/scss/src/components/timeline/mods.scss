@@ -372,7 +372,6 @@
 
 @mixin notPastChecked {
 	.timeline-step-title {
-		color: var(--palettes-grey-900);
 
 		&::before {
 			background-color: var(--palettes-primary-700);
