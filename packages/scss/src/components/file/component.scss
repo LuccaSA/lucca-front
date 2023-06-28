@@ -1,7 +1,9 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component {
 	padding: var(--spacings-M);
 	max-width: 30rem;
-	min-height: 16rem;
+	min-height: 17.5rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -9,7 +11,7 @@
 	text-align: center;
 
 	.file-icon {
-		font-size: 1.5rem;
+		font-size: var(--sizes-M-lineHeight);
 		margin: 0 var(--spacings-XXS);
 		display: none;
 	}
@@ -26,7 +28,7 @@
 
 	.file-or {
 		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		line-height: var(--sizes-S-lineHeight);
 		margin-bottom: var(--spacings-XXS);
 		display: block;
 		position: relative;
@@ -34,6 +36,7 @@
 
 		&:not(:empty) {
 			margin-bottom: var(--spacings-XS);
+			color: var(--palettes-grey-800);
 		}
 	}
 
@@ -45,7 +48,7 @@
 	.file-name {
 		&:not(:empty) {
 			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-XS-lineHeight);
+			line-height: var(--sizes-S-lineHeight);
 			margin-bottom: var(--spacings-S);
 			color: var(--palettes-grey-600);
 			display: block;
@@ -53,15 +56,15 @@
 	}
 
 	.file-formats {
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 		color: var(--palettes-grey-600);
 		position: relative;
 		display: block;
 	}
 
 	.file-button {
-		margin-right: 0;
+		margin: 0;
 
 		&:empty {
 			display: none;
@@ -88,45 +91,21 @@
 			}
 		}
 
-		&:hover,
-		&:focus {
+		&:hover {
 			&:not(:disabled) {
 				~ .file-content {
 					&::before {
 						border: 1px dashed var(--palettes-primary-400);
 					}
-
-					.file-button {
-						background-color: var(--palettes-grey-50);
-						color: var(--palettes-grey-700);
-						box-shadow: var(--commons-boxShadow-XS), 0 1px 2px rgba(black, 0.06), 0 0 0 1px var(--palettes-grey-500) inset;
-					}
 				}
 			}
 		}
 
-		&:focus {
+		&:focus-visible {
 			&:not(:disabled) {
 				~ .file-content {
-					&::before {
-						border-color: var(--palettes-primary-500);
-					}
-
-					.file-button {
-						box-shadow: 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06),
-							0 0 0 4px var(--palettes-primary-50), 0 0 0 1px var(--palettes-primary-500) inset;
-					}
-				}
-			}
-		}
-
-		&:active {
-			&:not(:disabled) {
-				~ .file-content {
-					.file-button {
-						background-color: var(--palettes-grey-50);
-						color: var(--palettes-grey-700);
-						box-shadow: inset 0 0 0 1px var(--palettes-primary-800);
+					.button {
+						@include a11y.focusVisible;
 					}
 				}
 			}
