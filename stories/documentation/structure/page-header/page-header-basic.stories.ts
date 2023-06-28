@@ -52,7 +52,7 @@ const template: StoryFn<PageHeaderComponent> = (args: PageHeaderComponent) => ({
 	template: `
 	<lu-page-header
 		[sticky]="sticky"
-		[noShadow]="withoutShadow"
+		[noShadow]="noShadow"
 		[title]="title"
 		[description]="description"
 		[actions]="actions"
