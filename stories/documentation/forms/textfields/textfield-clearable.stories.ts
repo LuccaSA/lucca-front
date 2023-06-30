@@ -12,9 +12,9 @@ function getTemplate(args: TextfieldClearableStory): string {
 	<label class="textfield mod-clearable">
 		<input class="textfield-input" type="text" placeholder="Placeholder">
 		<span class="textfield-label">Label</span>
-		<button class="clear textfield-clear">
+		<div class="clear textfield-clear" type="button" tabindex="0">
 		  <span aria-hidden="true" class="lucca-icon icon-close"></span>
-		</button>
+		</div>
 	</label>
 	`;
 }
