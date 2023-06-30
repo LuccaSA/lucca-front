@@ -2,7 +2,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	padding: var(--spacings-XS) .75rem;
-	border-top: var(--commons-divider-width) solid var(--commons-border-200);
 	justify-content: end;
 
 	> *:not(:last-child) {
