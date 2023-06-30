@@ -2,10 +2,6 @@
 	--components-card-background: var(--palettes-grey-50);
 }
 
-@mixin action {
-	opacity: .5;
-}
-
 @mixin clickable {
 	color: var(--palettes-grey-800);
 	text-decoration: none;
