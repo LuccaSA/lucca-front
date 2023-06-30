@@ -12,21 +12,23 @@
 	&.mod-multiple {
 		.option-selector {
 			display: inherit;
-			padding: var(--spacings-XS);
 		}
 	}
 }
 
 .optionGroupName {
-	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
-	border-top: var(--commons-divider-width) solid var(--commons-divider-color);
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal) var(--spacings-XXS);
+	border-radius: 0;
 	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
 	width: 100%;
 	justify-content: flex-start;
+	font-weight: 600;
+	color: var(--palettes-grey-600);
+	text-decoration: underline;
 
 	&.mod-readonly {
-		color: var(--palettes-grey-600);
-		font-weight: 400;
+		text-decoration: none;
 	}
 
 	&.button {
@@ -39,8 +41,9 @@
 			box-shadow: none;
 			background-color: transparent;
 
-			~ lu-option {
-				background-color: var(--palettes-primary-50);
+			~ .lu-picker-content-option lu-option {
+				background-color: var(--palettes-grey-50);
+				border-radius: var(--commons-borderRadius-M);
 			}
 		}
 	}

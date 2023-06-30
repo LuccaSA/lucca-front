@@ -10,7 +10,9 @@
 		(mousedown)="onMouseDown()"
 	>
 		<div class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus" luScroll (onScrollBottom)="onScrollBottom()">
-			<ng-content [class.is-loading]="loading$ | async"></ng-content>
+			<div class="lu-picker-content-option">
+				<ng-content [class.is-loading]="loading$ | async"></ng-content>
+			</div>
 		</div>
 	</div>
 </ng-template>

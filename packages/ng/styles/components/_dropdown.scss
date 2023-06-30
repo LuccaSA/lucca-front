@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 :root {
 	--components-dropdown-min-width: 10rem;
 	--components-dropdown-max-width: 30rem;
@@ -16,39 +18,43 @@
 
 .lu-dropdown-options {
 	list-style-type: none;
-	padding: 0;
+	padding: var(--spacings-XS) 0;
 	margin: 0;
 	min-width: var(--components-dropdown-min-width);
 	max-width: var(--components-dropdown-max-width);
+}
+
+.lu-dropdown-options-item {
+	padding: 0 var(--spacings-XS);
 }
 
 .lu-dropdown-options-item-action {
 	align-items: flex-start;
 	background-color: transparent;
 	border: 0;
+	border-radius: var(--commons-borderRadius-M);
+	color: currentColor;
 	cursor: pointer;
 	display: flex;
 	gap: var(--spacings-XS);
 	line-height: var(--sizes-M-lineHeight);
-	padding: var(--spacings-XS) var(--spacings-S);
+	padding: var(--spacings-XS) var(--spacings-XS);
 	text-align: left;
 	transition: background-color var(--commons-animations-durations-standard);
 	text-decoration: none;
 	width: 100%;
 
 	.lucca-icon {
-		font-size: 1rem;
-		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--sizes-M-lineHeight);
 	}
 
-	&,
-	&:hover,
-	&:focus {
+	&:hover {
+		background-color: var(--palettes-grey-50);
 		color: currentColor;
 	}
 
-	&:focus, // delete this line when sub-menus are implemented
-	&:hover {
+	&:focus-visible {
+		@include a11y.focusVisible();
 		background-color: var(--palettes-grey-50);
 	}
 
@@ -56,8 +62,7 @@
 		color: var(--palettes-grey-400);
 		pointer-events: none;
 
-		&:hover,
-		&:focus {
+		&:hover {
 			background-color: var(--colors-white-color);
 		}
 	}
@@ -65,7 +70,6 @@
 	&.mod-delete {
 		color: var(--palettes-error-800);
 
-		&:focus,
 		&:hover {
 			background-color: var(--palettes-error-50);
 		}
