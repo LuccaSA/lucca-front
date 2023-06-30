@@ -25,7 +25,7 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Label</p>
 				<p class="list-item-content-helper">Helper message</p>
 			</div>
-			<button class="clear list-clear">
+			<button class="clear list-clear" type="button">
 			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
 			</button>
 		</li>
@@ -35,7 +35,7 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Label</p>
 				<p class="list-item-content-helper">Helper message</p>
 			</div>
-			<button class="clear list-clear">
+			<button class="clear list-clear" type="button">
 			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
 			</button>
 		</li>
@@ -45,7 +45,7 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-description">Label</p>
 				<p class="list-item-content-helper">Helper message</p>
 			</div>
-			<button class="clear list-clear">
+			<button class="clear list-clear" type="button">
 			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
 			</button>
 		</li>
