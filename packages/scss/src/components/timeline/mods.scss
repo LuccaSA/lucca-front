@@ -242,14 +242,14 @@
 	.timeline-step-title-icon {
 		&::before {
 			content: '';
-			color: var(--palettes-primary-800);
+			color: var(--palettes-primary-text);
 			width: 1rem;
 			height: 1rem;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			border-radius: 50%;
-			background-color: var(--palettes-primary-300);
+			background-color: var(--palettes-primary-700);
 			position: absolute;
 			left: var(--spacings-XXS);
 			top: 50%;
