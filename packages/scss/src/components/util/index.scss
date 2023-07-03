@@ -16,7 +16,7 @@
 @each $elevation in config.$elevations {
 	$index: list.index(config.$elevations, $elevation);
 
-	.u-elevate#{$index} {
+	.u-elevate#{$index} { // deprecated
 		box-shadow: var(--commons-elevations-elevation-#{$index});
 	}
 }
