@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.checkboxLegacy {
+.checkbox {
 	@include vars;
 	@include component;
 
@@ -32,7 +32,7 @@
 		@include state('success');
 	}
 
-	.checkboxLegacy-input {
+	.checkbox-input {
 		&:is(.is-incomplete, .incomplete) {
 			@include incomplete;
 		}

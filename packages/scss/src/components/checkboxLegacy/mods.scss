@@ -5,10 +5,10 @@
 }
 
 @mixin S {
-	--components-checkboxLegacy-input-size: 1rem;
+	--components-checkbox-input-size: 1rem;
 	line-height: var(--sizes-S-lineHeight);
 
-	.checkboxLegacy-label {
+	.checkbox-label {
 		font-size: var(--sizes-S-fontSize);
 
 		&::before {
@@ -16,7 +16,7 @@
 		}
 	}
 
-	.checkboxLegacy-label-helper {
+	.checkbox-label-helper {
 		font-size: var(--sizes-XS-fontSize);
 		line-height: var(--sizes-XS-lineHeight);
 	}
@@ -25,7 +25,7 @@
 @mixin noLabel {
 	height: 1rem;
 
-	.checkboxLegacy-label {
+	.checkbox-label {
 		vertical-align: top;
 
 		&::before {

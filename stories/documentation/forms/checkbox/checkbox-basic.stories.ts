@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface CheckboxBasicStory {
+interface CheckboxFieldBasicStory {
 	disabled: boolean;
 	s: boolean;
 	required: boolean;
@@ -14,7 +14,7 @@ interface CheckboxBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Checkboxes/Basic',
+	title: 'Documentation/Forms/CheckboxField/Basic',
 	argTypes: {
 		s: {
 			description: 'Taille : Small',
@@ -71,7 +71,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: CheckboxBasicStory): string {
+function getTemplate(args: CheckboxFieldBasicStory): string {
 	const id = args.id;
 	const label = args.label;
 	const message = args.message;
@@ -84,9 +84,9 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const messageState = 'mod-' + args.messageState;
 
 	return `
-		<div class="checkbox ${s}">
+		<div class="checkboxField ${s}">
 			<input type="checkbox"
-				class="checkbox-input"
+				class="checkboxField-input"
 				id="${id}"
 				aria-labelledby="${id}label"
 				aria-describedby="${id}message"
@@ -96,23 +96,23 @@ function getTemplate(args: CheckboxBasicStory): string {
 				${required}
 				${invalid}
 			/>
-			<label class="checkbox-label" for="${id}">
-				<span class="checkbox-label-input">
-					<span class="checkbox-label-input-icon" aria-hidden="true"></span>
+			<label class="checkboxField-label" for="${id}">
+				<span class="checkboxField-label-input">
+					<span class="checkboxField-label-input-icon" aria-hidden="true"></span>
 				</span>
-				<span class="checkbox-label-text" id="${id}label">
-					${label}<sup *ngIf="required" aria-hidden="true" class="checkbox-label-text-required">*</sup>
+				<span class="checkboxField-label-text" id="${id}label">
+					${label}<sup *ngIf="required" aria-hidden="true" class="checkboxField-label-text-required">*</sup>
 				</span>
 			</label>
-			<div class="checkbox-message ${messageState}" id="${id}message" *ngIf="message">
-				<span class="checkbox-message-icon" aria-hidden="true"></span>
-				<span class="checkbox-message-text">${message}</span>
+			<div class="checkboxField-message ${messageState}" id="${id}message" *ngIf="message">
+				<span class="checkboxField-message-icon" aria-hidden="true"></span>
+				<span class="checkboxField-message-text">${message}</span>
 			</div>
 		</div>
 	`;
 }
 
-const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
+const Template: Story<CheckboxFieldBasicStory> = (args: CheckboxFieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

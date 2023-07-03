@@ -18,9 +18,9 @@ function getTemplate(args: FiltersBasicStory): string {
 			</div>
 		</div>
 		<div class="filters-sectionLeft">
-			<label class="checkboxLegacy mod-inline">
-				<input class="checkboxLegacy-input" type="checkbox">
-				<span class="checkboxLegacy-label">Option</span>
+			<label class="checkbox mod-inline">
+				<input class="checkbox-input" type="checkbox">
+				<span class="checkbox-label">Option</span>
 			</label>
 		</div>
 		<div class="filters-sectionRight">

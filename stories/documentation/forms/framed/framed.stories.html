@@ -29,14 +29,9 @@
 	<div class="form-group-line">
 		<div class="form-group-line-col">
 			<div class="checkboxesfield mod-framed" [class.is-disabled]="disabled">
-				<label class="checkboxLegacy">
-					<input
-						[attr.aria-required]="isRequired ? true : null"
-						type="checkbox"
-						class="checkboxLegacy-input {{ state }}"
-						[disabled]="disabled"
-					/>
-					<span class="checkboxLegacy-label">Checkbox</span>
+				<label class="checkbox">
+					<input [attr.aria-required]="isRequired ? true : null" type="checkbox" class="checkbox-input {{ state }}" [disabled]="disabled" />
+					<span class="checkbox-label">Checkbox</span>
 				</label>
 			</div>
 		</div>
@@ -80,21 +75,21 @@
 				<fieldset>
 					<legend class="checkboxesfield-label" [class.is-required]="isRequired">Checkboxes legend</legend>
 					<div class="checkboxesfield-input">
-						<label class="checkboxLegacy">
-							<input type="checkbox" name="checkboxframedlist" class="checkboxLegacy-input {{ state }}" [disabled]="disabled" />
-							<span class="checkboxLegacy-label">Checkbox</span>
+						<label class="checkbox">
+							<input type="checkbox" name="checkboxframedlist" class="checkbox-input {{ state }}" [disabled]="disabled" />
+							<span class="checkbox-label">Checkbox</span>
 						</label>
-						<label class="checkboxLegacy">
-							<input type="checkbox" name="checkboxframedlist" class="checkboxLegacy-input {{ state }}" [disabled]="disabled" />
-							<span class="checkboxLegacy-label">Checkbox</span>
+						<label class="checkbox">
+							<input type="checkbox" name="checkboxframedlist" class="checkbox-input {{ state }}" [disabled]="disabled" />
+							<span class="checkbox-label">Checkbox</span>
 						</label>
-						<label class="checkboxLegacy">
-							<input type="checkbox" name="checkboxframedlist" class="checkboxLegacy-input {{ state }}" [disabled]="disabled" />
-							<span class="checkboxLegacy-label">Checkbox</span>
+						<label class="checkbox">
+							<input type="checkbox" name="checkboxframedlist" class="checkbox-input {{ state }}" [disabled]="disabled" />
+							<span class="checkbox-label">Checkbox</span>
 						</label>
-						<label class="checkboxLegacy">
-							<input type="checkbox" name="checkboxframedlist" class="checkboxLegacy-input {{ state }}" [disabled]="disabled" />
-							<span class="checkboxLegacy-label">Checkbox</span>
+						<label class="checkbox">
+							<input type="checkbox" name="checkboxframedlist" class="checkbox-input {{ state }}" [disabled]="disabled" />
+							<span class="checkbox-label">Checkbox</span>
 						</label>
 					</div>
 				</fieldset>

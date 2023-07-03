@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface CheckboxLegacyBasicStory {
+interface CheckboxBasicStory {
 	row: boolean;
 	disabled: boolean;
 	s: boolean;
@@ -8,7 +8,7 @@ interface CheckboxLegacyBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Checkboxes/Legacy/Basic',
+	title: 'Documentation/Forms/Checkboxes/Basic',
 	argTypes: {
 		s: {
 			description: 'Taille : Small',
@@ -17,7 +17,7 @@ export default {
 			},
 		},
 		row: {
-			description: "En dehors d'un <code>.checkboxesfield-input</code>, <code>.mod-inline</code> peut être ajouté sur <code>.checkboxLegacy</code> pour obtenir un affichage horizontal.",
+			description: "En dehors d'un <code>.checkboxesfield-input</code>, <code>.mod-inline</code> peut être ajouté sur <code>.Checkbox</code> pour obtenir un affichage horizontal.",
 			control: {
 				type: 'boolean',
 			},
@@ -35,7 +35,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: CheckboxLegacyBasicStory): string {
+function getTemplate(args: CheckboxBasicStory): string {
 	const row = args.row ? `mod-row` : '';
 	const s = args.s ? `mod-S` : '';
 	const disabled = args.disabled ? `disabled` : '';
@@ -45,15 +45,15 @@ function getTemplate(args: CheckboxLegacyBasicStory): string {
 		<legend class="checkboxesfield-label">Liste de checkboxes</legend>
 		<div class="checkboxesfield-input ${row}">
 			<div>
-				<label class="checkboxLegacy ${s}">
-					<input class="checkboxLegacy-input" type="checkbox" name="checkboxList1" ${disabled} ${required} checked>
-					<span class="checkboxLegacy-label">Label</span>
+				<label class="checkbox ${s}">
+					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required} checked>
+					<span class="checkbox-label">Label</span>
 				</label>
 			</div>
 			<div>
-				<label class="checkboxLegacy ${s}">
-					<input class="checkboxLegacy-input" type="checkbox" name="checkboxList1" ${disabled} ${required}>
-					<span class="checkboxLegacy-label">Label</span>
+				<label class="checkbox ${s}">
+					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required}>
+					<span class="checkbox-label">Label</span>
 				</label>
 			</div>
 		</div>
@@ -61,7 +61,7 @@ function getTemplate(args: CheckboxLegacyBasicStory): string {
 	`;
 }
 
-const Template: Story<CheckboxLegacyBasicStory> = (args: CheckboxLegacyBasicStory) => ({
+const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,45 +1,35 @@
+@mixin inline {
+	vertical-align: middle;
+	display: inline-block;
+	margin-right: var(--spacings-M);
+}
+
 @mixin S {
-	--component-checkbox-label-input-size: 0.75rem;
-	--component-checkbox-label-input-borderRadius: var(--commons-borderRadius-M);
-	--component-checkbox-label-input-icon-fontSize: var(--sizes-L-fontSize);
-	--component-checkbox-label-fontSize: var(--sizes-S-fontSize);
-	--component-checkbox-label-lineHeight: var(--sizes-S-lineHeight);
-	--component-checkbox-message-fontSize: var(--sizes-XS-fontSize);
-	--component-checkbox-message-lineHeight: var(--sizes-S-lineHeight);
-	--component-checkbox-message-icon-top: 0.125rem;
-}
+	--components-checkbox-input-size: 1rem;
+	line-height: var(--sizes-S-lineHeight);
 
-@mixin critical {
-	color: var(--palettes-error-700);
-
-	.checkbox-message-icon {
-		color: var(--palettes-error-700);
-		margin-right: var(--spacings-XXS);
+	.checkbox-label {
+		font-size: var(--sizes-S-fontSize);
 
 		&::before {
-			content: '\e92c';
+			border-radius: var(--commons-borderRadius-M);
 		}
+	}
+
+	.checkbox-label-helper {
+		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
 	}
 }
 
-@mixin success {
-	.checkbox-message-icon {
-		color: var(--palettes-success-700);
-		margin-right: var(--spacings-XXS);
+@mixin noLabel {
+	height: 1rem;
+
+	.checkbox-label {
+		vertical-align: top;
 
 		&::before {
-			content: '\e9ed';
-		}
-	}
-}
-
-@mixin warning {
-	.checkbox-message-icon {
-		color: var(--palettes-warning-700);
-		margin-right: var(--spacings-XXS);
-
-		&::before {
-			content: '\e992';
+			margin: 0;
 		}
 	}
 }

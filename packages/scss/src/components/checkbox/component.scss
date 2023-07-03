@@ -2,109 +2,93 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-column-gap: var(--spacings-XS);
+	display: block;
+	position: relative;
+	line-height: var(--sizes-M-lineHeight);
 
 	@at-root ($atRoot) {
 		.checkbox-label {
-			display: contents;
-		}
-
-		.checkbox-label-input {
-			width: var(--component-checkbox-label-input-size);
-			height: var(--component-checkbox-label-input-size);
-			border: 2px solid var(--palettes-grey-700);
-			border-radius: var(--component-checkbox-label-input-borderRadius);
-			position: relative;
-			top: 0.25rem;
-			color: var(--colors-white-color);
-			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			transition-delay: 0s, 0s, var(--commons-animations-durations-fast);
-			background-color: var(--colors-white-color);
+			transition-property: color;
+			display: inline-flex;
+			align-items: flex-start;
 			cursor: pointer;
-
-			@media (prefers-reduced-motion: reduce) {
-				transition-property: none;
-			}
-
-			&::after {
-				content: '';
-				position: absolute;
-				inset: -2px;
-				outline-offset: 2px;
-				border-radius: var(--component-checkbox-label-input-borderRadius);
-			}
-		}
-
-		.checkbox-label-input-icon {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			height: 100%;
-			transform: scale(0);
-			transition-property: transform;
-			transition-duration: var(--commons-animations-durations-standard);
-			transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
-
-			@media (prefers-reduced-motion: reduce) {
-				transition-property: none;
-			}
+			gap: var(--spacings-XS);
+			vertical-align: top;
 
 			&::before {
-				font-weight: 400;
-				font-size: var(--component-checkbox-label-input-icon-fontSize);
-				direction: ltr;
-				font-family: 'Lucca icons';
-				font-feature-settings: 'liga';
-				font-style: normal;
-				letter-spacing: normal;
-				line-height: 1;
-				text-transform: none;
-				white-space: nowrap;
-				word-wrap: normal;
-				content: '\e97d';
+				@include icon.generate('confirm');
+
+				background-color: var(--colors-white-color);
+				width: var(--components-checkbox-input-size);
+				height: var(--components-checkbox-input-size);
+				border-radius: 6px;
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: box-shadow, color, background-color;
+				box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-700);
+				line-height: var(--components-checkbox-input-size);
+				font-size: var(--components-checkbox-input-size);
+				flex-grow: 0;
+				flex-shrink: 0;
+				flex-basis: auto;
+				color: transparent;
+				display: block;
+				text-align: center;
+				margin-top: 2px;
+				transform: translate3d(0, 0, 0); // Fix box-shadow artifacts
+			}
+
+			&:hover {
+				&::before {
+					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-600);
+				}
+			}
+
+			&:active {
+				&::before {
+					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-800);
+				}
 			}
 		}
 
-		.checkbox-label-text {
-			font-size: var(--component-checkbox-label-fontSize);
-			line-height: var(--component-checkbox-label-lineHeight);
-			width: fit-content;
-			cursor: pointer;
-		}
-
-		.checkbox-label-text-required {
-			color: var(--palettes-error-700);
-		}
-
-		.checkbox-message {
-			grid-column: 2;
-			color: var(--palettes-grey-700);
-			font-size: var(--component-checkbox-message-fontSize);
-			line-height: var(--component-checkbox-message-lineHeight);
-			display: flex;
-		}
-
-		.checkbox-message-icon {
-			font-weight: 400;
-			direction: ltr;
-			font-family: 'Lucca icons';
-			font-feature-settings: 'liga';
-			font-style: normal;
-			letter-spacing: normal;
-			line-height: 1;
-			text-transform: none;
-			white-space: nowrap;
-			word-wrap: normal;
-			position: relative;
-			top: var(--component-checkbox-message-icon-top);
+		.checkbox-label-helper {
+			color: var(--palettes-grey-600);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
 		}
 
 		.checkbox-input {
 			@include a11y.mask;
+
+			&:checked ~ .checkbox-label {
+				&::before {
+					color: var(--colors-white-color);
+					background-color: var(--palettes-700, var(--palettes-primary-700));
+					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-700, var(--palettes-primary-700));
+				}
+			}
+
+			&:not(:disabled):checked ~ .checkbox-label {
+				&:hover {
+					&::before {
+						background-color: var(--palettes-600, var(--palettes-primary-600));
+						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-600, var(--palettes-primary-600));
+					}
+				}
+
+				&:active {
+					&::before {
+						background-color: var(--palettes-800, var(--palettes-primary-800));
+						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-800, var(--palettes-primary-800));
+					}
+				}
+			}
+
+			&:focus-visible ~ .checkbox-label {
+				&::before {
+					@include a11y.focusVisible;
+				}
+			}
 		}
 	}
 }

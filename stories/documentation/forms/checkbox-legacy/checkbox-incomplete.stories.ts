@@ -1,22 +1,22 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface CheckboxLegacyIncompleteStory {}
+interface CheckboxIncompleteStory {}
 
 export default {
-	title: 'Documentation/Forms/Checkboxes/Legacy/Incomplete',
+	title: 'Documentation/Forms/Checkboxes/Incomplete',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: CheckboxLegacyIncompleteStory): string {
+function getTemplate(args: CheckboxIncompleteStory): string {
 	return `
-		<label class="checkboxLegacy">
-			<input class="checkboxLegacy-input is-incomplete" type="checkbox" name="checkboxList1" checked>
-			<span class="checkboxLegacy-label">Checkbox</span>
+		<label class="checkbox">
+			<input class="checkbox-input is-incomplete" type="checkbox" name="checkboxList1" checked>
+			<span class="checkbox-label">Checkbox</span>
 		</label>
 	`;
 }
 
-const Template: Story<CheckboxLegacyIncompleteStory> = (args: CheckboxLegacyIncompleteStory) => ({
+const Template: Story<CheckboxIncompleteStory> = (args: CheckboxIncompleteStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

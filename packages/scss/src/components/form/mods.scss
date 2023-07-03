@@ -34,11 +34,11 @@
 	}
 
 	.textfield,
-	.checkboxLegacy,
+	.checkbox,
 	.radio,
 	.select {
 		+ .textfield,
-		+ .checkboxLegacy,
+		+ .checkbox,
 		+ .radio,
 		+ .select {
 			position: absolute;
@@ -53,11 +53,11 @@
 
 @mixin overlayTop {
 	.textfield,
-	.checkboxLegacy,
+	.checkbox,
 	.radio,
 	.select {
 		+ .textfield,
-		+ .checkboxLegacy,
+		+ .checkbox,
 		+ .radio,
 		+ .select {
 			top: 0;
