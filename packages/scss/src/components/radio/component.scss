@@ -52,6 +52,7 @@
 	.radio-label {
 		color: var(--palettes-grey-800);
 		line-height: var(--sizes-M-lineHeight);
+		min-height: var(--sizes-M-lineHeight);
 		padding: var(--components-radio-label-padding);
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: color;
