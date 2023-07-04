@@ -6,89 +6,15 @@
 	@include vars;
 	@include component;
 
-	&.mod-reverse {
-		@include reverse;
+	&.mod-auto {
+		@include auto;
 	}
 
-	@each $breakpoint, $value in config.$breakpoints {
-		@include media.min($breakpoint) {
-			&.mod-start\@mediaMin#{$breakpoint} {
-				@include start;
-			}
-
-			&.mod-center\@mediaMin#{$breakpoint} {
-				@include center;
-			}
-
-			&.mod-end\@mediaMin#{$breakpoint} {
-				@include end;
-			}
-
-			&.mod-top\@mediaMin#{$breakpoint} {
-				@include top;
-			}
-
-			&.mod-middle\@mediaMin#{$breakpoint} {
-				@include middle;
-			}
-
-			&.mod-bottom\@mediaMin#{$breakpoint} {
-				@include bottom;
-			}
-
-			&.mod-around\@mediaMin#{$breakpoint} {
-				@include around;
-			}
-
-			&.mod-between\@mediaMin#{$breakpoint} {
-				@include between;
-			}
-		}
-	}
-}
-
-@each $breakpoint, $value in config.$breakpoints {
-	.grid\@mediaMin#{$breakpoint} {
-		@include column;
+	&.mod-form {
+		@include form;
 	}
 
-	@include media.min($breakpoint) {
-		.grid\@mediaMin#{$breakpoint} {
-			@include grow;
-		}
-	}
-
-	@for $i from 1 through 12 {
-		.grid-#{$i}\@mediaMin#{$breakpoint} {
-			@include column;
-		}
-	}
-}
-
-@each $breakpoint, $value in config.$breakpoints {
-	@for $i from 1 through 12 {
-		@include media.min($breakpoint) {
-			.grid-#{$i}\@mediaMin#{$breakpoint} {
-				@include basis($i);
-			}
-
-			.grid-offset#{$i}\@mediaMin#{$breakpoint} {
-				@include offset($i);
-			}
-		}
-	}
-}
-
-.grid {
-	@each $breakpoint, $value in config.$breakpoints {
-		@include media.min($breakpoint) {
-			.u-first\@mediaMin#{$breakpoint} {
-				@include first;
-			}
-
-			.u-last\@mediaMin#{$breakpoint} {
-				@include last;
-			}
-		}
+	&.mod-dense {
+		@include dense;
 	}
 }

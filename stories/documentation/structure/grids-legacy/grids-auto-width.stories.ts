@@ -1,34 +1,34 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsAutoWidthStory {}
+interface GridsLegacyAutoWidthStory {}
 
 export default {
-	title: 'Documentation/Structure/Grids/Auto Width',
+	title: 'Documentation/Structure/Grids/Legacy/Auto Width',
 } as Meta;
 
-function getTemplate(args: GridsAutoWidthStory): string {
+function getTemplate(args: GridsLegacyAutoWidthStory): string {
 	return `
 	<div class="grid">
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid@mediaMinM</div>
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid@mediaMinM</div>
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid@mediaMinM</div>
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid@mediaMinM</div>
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid@mediaMinM</div>
+			<div class="grid-demo">grid @mediaMinM</div>
 		</div>
 	</div>
 	`;
 }
 
-const Template: Story<GridsAutoWidthStory> = (args: GridsAutoWidthStory) => ({
+const Template: Story<GridsLegacyAutoWidthStory> = (args: GridsLegacyAutoWidthStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
