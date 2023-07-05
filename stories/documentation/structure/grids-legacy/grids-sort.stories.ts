@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface GridsSortStory {}
+interface GridsLegacySortStory {}
 
 export default {
-	title: 'Documentation/Structure/Grids/Sort',
+	title: 'Documentation/Structure/Grids/Legacy/Sort',
 } as Meta;
 
-function getTemplate(args: GridsSortStory): string {
+function getTemplate(args: GridsLegacySortStory): string {
 	return `
 	<div class="grid">
 		<div class="grid-3@mediaMinXS">
@@ -40,7 +40,7 @@ function getTemplate(args: GridsSortStory): string {
 	`;
 }
 
-const Template: Story<GridsSortStory> = (args: GridsSortStory) => ({
+const Template: Story<GridsLegacySortStory> = (args: GridsLegacySortStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

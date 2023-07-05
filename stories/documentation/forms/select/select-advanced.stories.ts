@@ -1,3 +1,4 @@
+import { NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,6 +9,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 
 @Component({
 	selector: 'select-advanced-stories',
+	standalone: true,
+	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
 	template: `
 		<label class="textfield">
 			<lu-select class="textfield-input" placeholder="Select advanced" [(ngModel)]="model" multiple>
@@ -28,7 +31,9 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 						<lu-option-select-all class="u-displayBlock u-marginXS"></lu-option-select-all>
 						<lu-option-pager></lu-option-pager>
 					</header>
-					<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					<div class="lu-picker-content-option">
+						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					</div>
 				</lu-option-picker-advanced>
 				<lu-input-clearer></lu-input-clearer>
 			</lu-select>
@@ -58,13 +63,12 @@ class SelectAdvancedStory {
 
 export default {
 	title: 'Documentation/Forms/SelectAdvanced',
-	component: LuSelectInputComponent,
+	component: SelectAdvancedStory,
 	argTypes: {},
 	decorators: [
 		componentWrapperDecorator(SelectAdvancedStory),
 		moduleMetadata({
-			imports: [FormsModule, LuOptionModule, LuInputModule, BrowserAnimationsModule],
-			declarations: [SelectAdvancedStory],
+			imports: [SelectAdvancedStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
@@ -74,25 +78,14 @@ const template: Story<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
 });
 
 const code = `
-/* 1. Importer les modules */
-import { LuInputDisplayerModule, LuInputModule } from '@lucca-front/ng/input';
-import { LuOptionFeederComponent, LuOptionModule } from '@lucca-front/ng/option';
+import { LuInputModule } from '@lucca-front/ng/input';
+import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
-@NgModule({
-	imports: [
-		LuSelectInputComponent,
-		LuOptionModule,
-		LuInputModule,
-		LuOptionFeederComponent,
-		LuInputDisplayerModule
-	]
-})
-class SelectAdvancedStoriesModule {}
-
-/* 2. Utiliser lu-select avec lu-option-picker-advanced */
 @Component({
 	selector: 'select-advanced-story',
+	standalone: true,
+	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
 	template: \`
 	<label class="textfield">
 		<lu-select

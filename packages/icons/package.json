@@ -12,12 +12,7 @@
     "lucca",
     "icons"
   ],
-  "authors": [
-    "Clotilde Martin-Lemerle <clot@lucca.fr>",
-    "Lucien Bertin <me@lucienbertin.com>",
-    "Jeremie Biron <jbiron@lucca.fr>",
-    "Sandy Goldscheider <sgoldscheider@lucca.fr>"
-  ],
+  "author": "The product design team <design@lucca.fr>",
   "license": "MIT",
   "public": true,
   "bugs": {

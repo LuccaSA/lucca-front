@@ -13,17 +13,17 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		inline: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -41,7 +41,7 @@ function getTemplate(args: SwitchBasicStory): string {
 			<input class="switch-input" type="checkbox" name="switchList1" ${disabled} checked>
 			<span class="switch-label">Label</span>
 		</label>
-	`
+	`;
 }
 
 const Template: Story<SwitchBasicStory> = (args: SwitchBasicStory) => ({

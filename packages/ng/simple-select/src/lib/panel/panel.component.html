@@ -16,15 +16,16 @@
 				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
 			</div>
 		</ng-container>
-
-		<lu-select-option
-			*ngFor="let option of ctx.options; let index = index"
-			[option]="option"
-			[optionTpl]="optionTpl"
-			[optionIndex]="index"
-			[isSelected]="option === selected"
-			(click)="panelRef.emitValue(option)"
-		></lu-select-option>
+		<div class="lu-picker-content-option">
+			<lu-select-option
+				*ngFor="let option of ctx.options; let index = index"
+				[option]="option"
+				[optionTpl]="optionTpl"
+				[optionIndex]="index"
+				[isSelected]="option === selected"
+				(click)="panelRef.emitValue(option)"
+			></lu-select-option>
+		</div>
 
 		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
 	</div>

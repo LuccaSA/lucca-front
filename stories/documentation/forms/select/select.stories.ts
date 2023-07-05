@@ -8,6 +8,8 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 
 @Component({
 	selector: 'select-stories',
+	standalone: true,
+	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective, FormsModule],
 	template: `
 		<div class="u-displayFlex">
 			<label class="textfield u-marginRightS">
@@ -77,13 +79,12 @@ class SelectStory {
 
 export default {
 	title: 'Documentation/Forms/Select',
-	component: LuSelectInputComponent,
+	component: SelectStory,
 	argTypes: {},
 	decorators: [
 		componentWrapperDecorator(SelectStory),
 		moduleMetadata({
-			imports: [FormsModule, LuOptionPickerComponent, LuOptionItemComponent, LuInputDisplayerDirective, BrowserAnimationsModule],
-			declarations: [SelectStory],
+			imports: [SelectStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;
@@ -93,24 +94,13 @@ const template: Story<SelectStory> = (args: SelectStory) => ({
 });
 
 const code = `
-/* 1. Importer LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective */
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
-
-@NgModule({
-	imports: [
-		LuSelectInputComponent,
-		LuOptionItemComponent,
-		LuOptionPickerComponent,
-		LuInputDisplayerDirective,
-	]
-})
-class SelectStoriesModule {}
-
-/* 2. Utiliser lu-select */
 @Component({
 	selector: 'select-story',
+	standalone: true,
+	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective],
 	template: \`
 		<label class="textfield">
 			<lu-select class="textfield-input" placeholder="Select an item">

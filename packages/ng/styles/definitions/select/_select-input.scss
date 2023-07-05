@@ -20,6 +20,7 @@
 		cursor: pointer;
 		outline: none;
 		padding: 0 !important;
+		gap: 0 !important;
 
 		&::after {
 			@include icon.generate('arrow_south');
@@ -78,25 +79,9 @@
 	}
 
 	.lu-select-clearer {
-		display: block;
 		position: absolute;
-		width: 1rem;
-		height: 1rem;
-		background-color: var(--palettes-grey-700);
 		bottom: .75rem;
 		right: 2.25rem;
-		color: var(--colors-white-color);
-		padding: 0;
-		border-radius: 50%;
-		transition: background-color var(--commons-animations-durations-fast) ease;
-
-		.lucca-icon {
-			font-size: var(--sizes-XS-lineHeight);
-		}
-
-		&:hover {
-			background-color: var(--palettes-grey-600);
-		}
 	}
 
 	::ng-deep .lu-select-value {
@@ -296,7 +281,7 @@
 
 		.lu-select-value {
 			display: flex;
-			align-items: start;
+			align-items: flex-start;
 		}
 	}
 

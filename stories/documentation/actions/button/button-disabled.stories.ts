@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface ButtonDisabledStory {
-}
+interface ButtonDisabledStory {}
 
 export default {
 	title: 'Documentation/Actions/Button/Disabled',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: ButtonDisabledStory): string {
@@ -22,4 +20,4 @@ const Template: Story<ButtonDisabledStory> = (args: ButtonDisabledStory) => ({
 });
 
 export const DisabledButton = Template.bind({});
-DisabledButton.args = { };
+DisabledButton.args = {};

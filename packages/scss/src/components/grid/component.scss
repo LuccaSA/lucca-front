@@ -1,34 +1,66 @@
-@use 'sass:math';
+@use 'sass:string';
 
-@mixin component {
-	display: flex;
-	flex: 0 1 auto;
-	flex-direction: row;
-	flex-wrap: wrap;
-	margin-left: calc(var(--spacings-XS) * -1);
-	margin-right: calc(var(--spacings-XS) * -1);
-}
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/config';
 
-@mixin column {
-	flex: 0 0 auto;
-	flex-basis: 100%;
-	max-width: 100%;
-	padding-left: var(--spacings-XS);
-	padding-right: var(--spacings-XS);
-	position: relative;
-}
+@mixin component($atRoot: 'without: rule') {
+	display: grid;
+	grid-template-columns: var(--grid-template-columns);
+	gap: var(--grid-row-gap) var(--grid-column-gap);
 
-@mixin grow {
-	flex-basis: 0;
-	flex-grow: 1;
-	max-width: 100%;
-}
+	// workaround for Angular replacing CamelCase by kebab-case
+	max-width: var(--grid-max-width, var(--grid-maxWidth));
 
-@mixin basis($i) {
-	flex-basis: math.percentage(math.div($i, 12));
-	max-width: math.percentage(math.div($i, 12));
-}
+	@at-root ($atRoot) {
+		.grid-column {
+			align-self: var(--grid-align, var(--grid-column-align));
+			justify-self: var(--grid-justify, var(--grid-column-justify));
 
-@mixin offset($i) {
-	margin-left: math.percentage(math.div($i, 12));
+			grid-column-start: var(--grid-column, var(--grid-column-start));
+			grid-row-start: var(--grid-row, var(--grid-row-start));
+
+			grid-column-end: span var(--grid-colspan, var(--grid-column-end));
+			grid-row-end: span var(--grid-rowspan, var(--grid-row-end));
+
+			@each $breakpoint, $value in config.$breakpoints {
+				@include media.min($breakpoint) {
+					&[style*='grid-colspanAtMediaMin#{$breakpoint}'] {
+						grid-column-end: span var(--grid-colspanAtMediaMin#{$breakpoint});
+					}
+
+					&[style*='grid-rowspanAtMediaMin#{$breakpoint}'] {
+						grid-row-end: span var(--grid-rowspanAtMediaMin#{$breakpoint});
+					}
+
+					&[style*='grid-columnAtMediaMin#{$breakpoint}'] {
+						grid-column-start: var(--grid-columnAtMediaMin#{$breakpoint});
+					}
+
+					&[style*='grid-rowAtMediaMin#{$breakpoint}'] {
+						grid-row-start: var(--grid-rowAtMediaMin#{$breakpoint});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-colspan-at-media-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-column-end: span var(--grid-colspan-at-media-min-#{string.to-lower-case($breakpoint)});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-rowspan-at-media-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-row-end: span var(--grid-rowspan-at-media-min-#{string.to-lower-case($breakpoint)});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-column-at-media-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-column-start: var(--grid-column-at-media-min-#{string.to-lower-case($breakpoint)});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-row-at-media-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-row-start: var(--grid-row-at-media-min-#{string.to-lower-case($breakpoint)});
+					}
+				}
+			}
+		}
+	}
 }

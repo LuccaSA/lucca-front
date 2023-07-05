@@ -55,6 +55,8 @@ var icons = [
 	'priority_high',
 	'priority_higher',
 	'priority_highest',
+	'level',
+	'teacher',
 	'answer',
 	'api_sync',
 	'attach',

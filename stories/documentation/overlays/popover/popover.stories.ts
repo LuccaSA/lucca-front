@@ -12,6 +12,8 @@ class PopoverMockDirectiveStory extends LuPopoverTriggerDirective {}
 
 @Component({
 	selector: 'popover-story',
+	standalone: true,
+	imports: [LuPopoverModule, PopoverMockDirectiveStory],
 	template: `
 		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position" [luPopoverAlignment]="alignment" [luPopoverTrigger]="trigger">{{ trigger }} me</button>
 		<lu-popover #popover>{{ popoverContent }}</lu-popover>
@@ -30,8 +32,7 @@ export default {
 	decorators: [
 		componentWrapperDecorator(PopoverStory),
 		moduleMetadata({
-			declarations: [PopoverStory],
-			imports: [LuPopoverModule, BrowserAnimationsModule, PopoverMockDirectiveStory],
+			imports: [PopoverStory, BrowserAnimationsModule],
 		}),
 	],
 } as Meta;

@@ -1,0 +1,94 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.grid {
+	@include vars;
+	@include component;
+
+	&.mod-reverse {
+		@include reverse;
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-start\@mediaMin#{$breakpoint} {
+				@include start;
+			}
+
+			&.mod-center\@mediaMin#{$breakpoint} {
+				@include center;
+			}
+
+			&.mod-end\@mediaMin#{$breakpoint} {
+				@include end;
+			}
+
+			&.mod-top\@mediaMin#{$breakpoint} {
+				@include top;
+			}
+
+			&.mod-middle\@mediaMin#{$breakpoint} {
+				@include middle;
+			}
+
+			&.mod-bottom\@mediaMin#{$breakpoint} {
+				@include bottom;
+			}
+
+			&.mod-around\@mediaMin#{$breakpoint} {
+				@include around;
+			}
+
+			&.mod-between\@mediaMin#{$breakpoint} {
+				@include between;
+			}
+		}
+	}
+}
+
+@each $breakpoint, $value in config.$breakpoints {
+	.grid\@mediaMin#{$breakpoint} {
+		@include column;
+	}
+
+	@include media.min($breakpoint) {
+		.grid\@mediaMin#{$breakpoint} {
+			@include grow;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.grid-#{$i}\@mediaMin#{$breakpoint} {
+			@include column;
+		}
+	}
+}
+
+@each $breakpoint, $value in config.$breakpoints {
+	@for $i from 1 through 12 {
+		@include media.min($breakpoint) {
+			.grid-#{$i}\@mediaMin#{$breakpoint} {
+				@include basis($i);
+			}
+
+			.grid-offset#{$i}\@mediaMin#{$breakpoint} {
+				@include offset($i);
+			}
+		}
+	}
+}
+
+.grid {
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			.u-first\@mediaMin#{$breakpoint} {
+				@include first;
+			}
+
+			.u-last\@mediaMin#{$breakpoint} {
+				@include last;
+			}
+		}
+	}
+}

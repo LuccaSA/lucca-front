@@ -15,9 +15,11 @@ function getTemplate(args: HelpStory): string {
 const Template: Story<HelpStory> = (args: HelpStory) => ({
 	props: args,
 	template: getTemplate(args),
-  styles: [`
-		}`],
+	styles: [
+		`
+		}`,
+	],
 });
 
 export const Help = Template.bind({});
-Help.args = { };
+Help.args = {};

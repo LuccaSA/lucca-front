@@ -7,10 +7,13 @@
 	}
 }
 
+@mixin s {
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+}
+
 @mixin outlined {
 	color: var(--palettes-600, var(--palettes-grey-600));
 	background-color: var(--colors-white-color);
-	border-color: var(--palettes-300, var(--palettes-grey-300));
-	border-width: var(--commons-divider-width);
-	border-style: solid;
+	box-shadow: 0 0 0 1px var(--palettes-300, var(--palettes-grey-300));
 }

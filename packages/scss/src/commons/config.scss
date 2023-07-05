@@ -1,5 +1,5 @@
 $states: 'error', 'warning', 'success' !default;
-$palettes: 'primary', 'secondary', 'grey' !default;
+$palettes: 'primary', 'secondary', 'grey', 'navigation' !default;
 $fontVariable: false !default;
 
 $primary: (
@@ -18,16 +18,16 @@ $primary: (
 
 $secondary: (
 	text: #ffffff,
-	50: #e2ebfd,
-	100: #ccddff,
-	200: #b3ccff,
-	300: #9ebeff,
-	400: #85aeff,
-	500: #6699ff,
-	600: #4280fa,
-	700: #2067f3,
-	800: #0a48c2,
-	900: #083691,
+	50: #fff1eb,
+	100: #ffe0d1,
+	200: #ffccb3,
+	300: #ffbe9e,
+	400: #ffaa80,
+	500: #ff9361,
+	600: #ff7b3d,
+	700: #e06029,
+	800: #b43409,
+	900: #611405,
 ) !default;
 
 $success: (
@@ -85,6 +85,13 @@ $grey: (
 	700: #445473,
 	800: #2a3551,
 	900: #0b1732,
+) !default;
+
+$navigation: (
+	text: #ffffff,
+	700: #313972,
+	800: #192157,
+	900: #12183F,
 ) !default;
 
 $colors: (
@@ -163,7 +170,8 @@ $borderRadius: (
 	'L': 8px,
 );
 
-$elevations: ( // deprecated
+$elevations: (
+	// deprecated
 	'1': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
 	'2':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.05)',
@@ -174,17 +182,22 @@ $elevations: ( // deprecated
 	'5':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
 	'6':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)'
 );
 
 $boxShadows: (
 	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)', // deprecated
 	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
-	'S': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
-	'M': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-grey-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-grey-900-rgb), 0.06)',
-	'L': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-grey-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-grey-900-rgb), 0.08)',
-	'XL': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
-	'XXL': '0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
+	'S':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
+	'M':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-grey-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-grey-900-rgb), 0.06)',
+	'L':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-grey-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-grey-900-rgb), 0.08)',
+	'XL':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
+	'XXL':
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
 );
 
 $disabled: (
@@ -207,8 +220,7 @@ $durations: (
 );
 
 $loading: (
-	'background': var(--palettes-primary-200),
-	'frontground': var(--palettes-primary-700),
+	'frontground': var(--palettes-primary-500),
 	'speed': 600ms,
 );
 

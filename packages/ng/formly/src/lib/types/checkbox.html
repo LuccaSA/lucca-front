@@ -1,4 +1,13 @@
-<label class="checkbox" [ngClass]="to['mod']">
-	<input class="checkbox-input" type="checkbox" [name]="to['name']" [id]="id" [formControl]="formControl" [formlyAttributes]="field" />
-	<span class="checkbox-label">{{to.label}}</span>
+<label class="checkbox" [ngClass]="props['mod']">
+	<input
+		class="checkbox-input"
+		type="checkbox"
+		[name]="props['name']"
+		[id]="id"
+		[formControl]="formControl"
+		[formlyAttributes]="field"
+		(focus)="focus()"
+		(blur)="blur()"
+	/>
+	<span class="checkbox-label">{{props.label}}</span>
 </label>

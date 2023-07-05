@@ -1,23 +1,21 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { FieldType } from '@ngx-formly/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-radios',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './radios.html',
-	// changeDetection: ChangeDetectionStrategy.OnPush,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class LuFormlyFieldRadios extends FieldType {
+export class LuFormlyFieldRadios extends FieldType<FieldTypeConfig> {
 	get _options() {
-		return (this.to.options || []) as { value: unknown; label: unknown }[];
+		return (this.props.options || []) as { value: unknown; label: unknown }[];
 	}
-	override readonly formControl: FormControl;
 	focus() {
-		this.to['_isFocused'] = true;
+		this.props['_isFocused'] = true;
 	}
 	blur() {
-		this.to['_isFocused'] = false;
+		this.props['_isFocused'] = false;
 	}
 }

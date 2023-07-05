@@ -2,13 +2,13 @@
 	class="textfield-input"
 	[formControl]="formControl"
 	[formlyAttributes]="field"
-	[multiple]="to['multiple']"
+	[multiple]="props['multiple']"
 	(focus)="focus()"
 	(blur)="blur()"
-	[placeholder]="to.placeholder"
-	[filters]="to['filters']"
-	[appInstanceId]="to['appInstanceId']"
-	[operations]="to['operations']"
+	[placeholder]="props.placeholder"
+	[filters]="props['filters']"
+	[appInstanceId]="props['appInstanceId']"
+	[operations]="props['operations']"
 >
 </lu-department-select>
-<span class="textfield-label">{{ to.label }}</span>
+<span class="textfield-label">{{ props.label }}</span>

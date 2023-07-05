@@ -1,0 +1,17 @@
+@mixin primary {
+  background-color: var(--colors-white-color);
+  color: var(--palettes-primary-700);
+
+  &:hover {
+    background-color: var(--palettes-primary-50);
+  }
+
+  &:active {
+    background-color: var(--palettes-primary-50);
+  }
+}
+
+@mixin s {
+  --components-clear-size: .75rem;
+  --components-clear-icon-size: .75rem;
+}

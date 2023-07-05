@@ -6,8 +6,7 @@ interface TableFiltersStory {
 
 export default {
 	title: 'Documentation/Listings/Table/Filters',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableFiltersStory): string {
@@ -45,7 +44,7 @@ function getTemplate(args: TableFiltersStory): string {
 			</tr>
 		</tbody>
 	</table>
-	`
+	`;
 }
 
 const Template: Story<TableFiltersStory> = (args: TableFiltersStory) => ({

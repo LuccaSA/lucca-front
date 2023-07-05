@@ -20,10 +20,30 @@
 	}
 }
 
+@mixin uploading {
+	~ .file-content {
+		.file-title {
+			font-weight: 400;
+			color: var(--palettes-grey-600);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			font-style: italic;
+		}
+
+		.file-formats {
+			display: none;
+		}
+	}
+}
+
 @mixin uploaded {
 	~ .file-content {
 		.file-title {
 			color: var(--palettes-success-700);
+		}
+
+		.file-formats {
+			display: none;
 		}
 
 		.file-icon.icon-success {
@@ -36,6 +56,10 @@
 	~ .file-content {
 		.file-title {
 			color: var(--palettes-error-700);
+		}
+
+		.file-formats {
+			display: none;
 		}
 
 		.file-icon.icon-error {

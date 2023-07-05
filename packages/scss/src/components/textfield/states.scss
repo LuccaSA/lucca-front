@@ -19,14 +19,14 @@
 		color: var(--commons-disabled-placeholder);
 	}
 
-	~ .textfield-actionClear {
+	~ .textfield-clear {
 		color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}
 }
 
 @mixin filterHover {
-	background-color: var(--commons-background-base);
+	background-color: var(--palettes-grey-50);
 }
 
 @mixin open {

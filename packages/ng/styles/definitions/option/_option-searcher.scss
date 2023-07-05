@@ -4,20 +4,7 @@
 	}
 
 	.textfield-input {
-		border-radius: 0;
-		box-shadow: none;
-		background-color: var(--colors-white-color);
-		border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
 		outline: none;
-
-		&:hover {
-			background-color: var(--palettes-grey-50);
-		}
-
-		&:focus {
-			background-color: var(--colors-white-color);
-			border-bottom-color: var(--palettes-primary-600);
-		}
 	}
 
 	.checkbox.mod-formerEmployee {

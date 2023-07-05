@@ -1,53 +1,53 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--palettes-primary-700);
+	background-color: var(--palettes-700, var(--palettes-grey-200));
 	border-radius: var(--commons-borderRadius-M);
-	color: var(--colors-white-color);
+	color: var(--palettes-text, var(--palettes-grey-800));
 
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacings-XS);
 	position: relative;
 	vertical-align: middle;
-	margin: 0 0.2rem 0.3rem 0;
-	padding: 0.15rem 1.8rem 0.15rem 0.75rem;
+	padding: calc(var(--spacings-XXS)/2) var(--spacings-XS);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
 
 	@at-root ($atRoot) {
 		.chip-kill {
-			background-color: var(--colors-white-color);
-			color: var(--palettes-primary-700);
+			background-color: var(--palettes-text, var(--palettes-grey-700));
+			color: var(--palettes-700, var(--colors-white-color));
 			border: 0;
 			border-radius: 50%;
-			bottom: 0;
-			font-size: 0.8rem;
-			font-weight: 700;
-			height: 1rem;
-			width: 1rem;
-			padding: 0.05rem 0 0;
-			right: var(--spacings-XS);
-			top: 0;
-			transition-duration: 150ms;
+			height: .75rem;
+			width: .75rem;
+			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			margin: auto;
-			position: absolute;
+			padding: 0;
+			overflow: hidden;
 			cursor: pointer;
 
 			&::before {
 				@include icon.generate('cross');
-
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				line-height: .75rem;
+				font-size: .75rem;
 			}
 
 			&:hover {
-				background-color: var(--components-chip-kill-hover);
-				box-shadow: 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06);
+				background-color: var(--palettes-grey-600);
 			}
 
-			&:focus {
-				outline: none;
-				box-shadow: 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06),
-					0 0 0 2px var(--components-chip-kill-hover);
+			&:focus-visible {
+				@include a11y.focusVisible();
+			}
+
+			&:active {
+				background-color: var(--palettes-50, var(--palettes-grey-800));
 			}
 		}
 	}

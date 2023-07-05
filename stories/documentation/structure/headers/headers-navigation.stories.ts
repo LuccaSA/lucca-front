@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface HeadersNavigationStory {
-}
+interface HeadersNavigationStory {}
 
 export default {
 	title: 'Documentation/Structure/Headers/Navigation',
@@ -16,7 +15,7 @@ function getTemplate(args: HeadersNavigationStory): string {
 			<h4 class="header-nav-title">Titre de la page</h4>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<HeadersNavigationStory> = (args: HeadersNavigationStory) => ({

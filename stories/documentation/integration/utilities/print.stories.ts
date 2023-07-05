@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
-
+import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
 @Component({
 	selector: 'utilities-print-stories',
+	standalone: true,
 	templateUrl: './print.stories.html',
-}) class UtilitiesPrintStory {}
+})
+class UtilitiesPrintStory {}
 
 export default {
 	title: 'Documentation/Integration/Utilities/Print',
@@ -15,8 +16,8 @@ export default {
 		moduleMetadata({
 			entryComponents: [UtilitiesPrintStory],
 			imports: [BrowserModule],
-		})
-	]
+		}),
+	],
 } as Meta;
 
 const template: Story<UtilitiesPrintStory> = (args: UtilitiesPrintStory) => ({
