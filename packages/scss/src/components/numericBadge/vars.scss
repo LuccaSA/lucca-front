@@ -1,0 +1,6 @@
+@mixin vars {
+  --comonents-numericBadge-size: 1.5rem;
+  --comonents-numericBadge-fontSize: var(--sizes-S-fontSize);
+  --comonents-numericBadge-lineHeight: var(--sizes-S-lineHeight);
+  --comonents-numericBadge-borderRadius: var(--commons-borderRadius-L);
+}

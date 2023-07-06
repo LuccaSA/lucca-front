@@ -1,0 +1,13 @@
+@mixin component {
+	background-color: var(--palettes-200, var(--palettes-grey-200));
+	color: var(--palettes-800, var(--palettes-grey-700));
+	display: inline-flex;
+	height: var(--comonents-numericBadge-size);
+	width: var(--comonents-numericBadge-size);
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--comonents-numericBadge-borderRadius);
+	font-size: var(--comonents-numericBadge-fontSize);
+	line-height: var(--comonents-numericBadge-lineHeight);
+	font-weight: 600;
+}
