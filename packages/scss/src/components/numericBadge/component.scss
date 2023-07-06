@@ -1,13 +1,17 @@
 @mixin component {
-	background-color: var(--palettes-200, var(--palettes-grey-200));
-	color: var(--palettes-800, var(--palettes-grey-700));
 	display: inline-flex;
-	height: var(--comonents-numericBadge-size);
-	width: var(--comonents-numericBadge-size);
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--comonents-numericBadge-borderRadius);
+	height: var(--comonents-numericBadge-size);
+	min-width: var(--comonents-numericBadge-size);
+	padding: var(--spacings-XXS);
 	font-size: var(--comonents-numericBadge-fontSize);
 	line-height: var(--comonents-numericBadge-lineHeight);
 	font-weight: 600;
+	background-color: var(--palettes-200, var(--palettes-grey-200));
+	color: var(--palettes-800, var(--palettes-grey-700));
+	border-radius: var(--comonents-numericBadge-borderRadius);
+	transition-property: background-color, color;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-timing-function: ease;
 }

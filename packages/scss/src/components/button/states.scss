@@ -7,6 +7,11 @@
 	background-color: var(--commons-disabled-background);
 	color: var(--commons-disabled-color);
 	cursor: default;
+
+	.numericBadge {
+			background-color: var(--palettes-grey-200);
+			color: var(--commons-disabled-color);
+	}
 }
 
 @mixin disabledOutlined {
