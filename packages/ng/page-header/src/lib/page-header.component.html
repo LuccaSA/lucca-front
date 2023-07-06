@@ -2,7 +2,7 @@
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
 			<h1 class="u-margin0 u-marginRightM">
-				<ng-container *ngTemplateOutlet="stringOrTpl;context:{$implicit: title}"></ng-container>
+				<ng-container *luStringTemplateOutlet="title"></ng-container>
 			</h1>
 			<div *ngIf="actions">
 				<ng-container *ngTemplateOutlet="actions"></ng-container>

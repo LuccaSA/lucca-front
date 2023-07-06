@@ -1,5 +1,6 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StringTemplateOutletDirective } from '@lucca-front/ng/core';
 
 /**
  * This is a PoC component, it's not ready for production and the string | TemplateRef logic should be set
@@ -11,7 +12,7 @@ type StringOrTemplate<T = unknown> = string | TemplateRef<T>;
 @Component({
 	selector: 'lu-page-header',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, StringTemplateOutletDirective],
 	templateUrl: './page-header.component.html',
 	styleUrls: ['./page-header.component.scss'],
 })

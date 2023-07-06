@@ -7,9 +7,7 @@ import { StoryFn } from '@storybook/angular/dist/client/public-types';
 	selector: 'page-header-basic-stories',
 	standalone: true,
 	templateUrl: './page-header-basic.stories.html',
-	imports: [
-		PageHeaderComponent,
-	],
+	imports: [PageHeaderComponent],
 })
 class PageHeaderBasicStory {
 	@Input() pageHeaderTitle: string = '';
@@ -35,8 +33,8 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			entryComponents: [PageHeaderComponent]
-		})
+			entryComponents: [PageHeaderComponent],
+		}),
 	],
 } as Meta;
 
@@ -45,9 +43,9 @@ const template: StoryFn<PageHeaderComponent> = (args: PageHeaderComponent) => ({
 	parameters: {
 		docs: {
 			source: {
-				code: 'aaaa'
-			}
-		}
+				code: 'aaaa',
+			},
+		},
 	},
 	template: `
 	<lu-page-header
@@ -85,7 +83,7 @@ const template: StoryFn<PageHeaderComponent> = (args: PageHeaderComponent) => ({
 			</button>
 		</ng-template>
 	</lu-page-header>
-	`
+	`,
 });
 
 export const basic = template.bind({});
