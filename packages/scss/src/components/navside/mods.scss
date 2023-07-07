@@ -26,7 +26,7 @@
 		display: none;
 	}
 
-	.navSide-item-alert {
+	.navSide-item-alert { // deprecated
 		background-color: var(--components-navSide-compact-palette-alert-color);
 		color: var(--components-navSide-compact-palette-alert-text);
 		padding: 0 var(--spacings-XS);
@@ -79,7 +79,7 @@
 	color: var(--components-navSide-compact-palette-selected-text);
 	opacity: 1;
 
-	.navSide-item-alert {
+	.navSide-item-alert { // deprecated
 		background-color: var(--components-navSide-compact-palette-selected-alert-color);
 		color: var(--components-navSide-compact-palette-selected-alert-text);
 	}
