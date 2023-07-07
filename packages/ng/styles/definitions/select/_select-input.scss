@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin selectInputStyle {
 	:host {
@@ -124,12 +125,12 @@
 		}
 
 		.lu-select-suffix {
-			bottom: .625rem;
+			bottom: .5rem;
 			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
-			.label {
+			.label { // deprecated
 				font-size: var(--sizes-S-fontSize);
 				line-height: var(--sizes-S-lineHeight);
 				font-weight: 600;
@@ -142,6 +143,10 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
+			}
+
+			.numericBadge {
+				@include numericBadge.s;
 			}
 		}
 	}
