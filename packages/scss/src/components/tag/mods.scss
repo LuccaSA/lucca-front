@@ -7,9 +7,9 @@
 	}
 }
 
-@mixin s {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+@mixin l {
+	font-size: var(--sizes-M-fontSize);
+	line-height: var(--sizes-M-lineHeight);
 }
 
 @mixin outlined {
