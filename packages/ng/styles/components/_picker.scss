@@ -42,14 +42,10 @@
 }
 
 .lu-picker-textfield {
-	border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
-	margin-bottom: var(--spacings-XS);
 	width: 100%;
 
 	.textfield-input {
 		background-color: var(--colors-white-color);
-		border-radius: 0;
-		box-shadow: none;
 		outline: none;
 	}
 }
