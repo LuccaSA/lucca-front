@@ -22,11 +22,11 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
 		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
 			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
-			<ul class="breadcrumbs-list">
+			<ol class="breadcrumbs-list">
 				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 0</a></li>
 				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 1</a></li>
 				<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Page 2</span></li>
-			</ul>
+			</ol>
 		</nav>
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
