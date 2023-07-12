@@ -92,6 +92,8 @@
 	padding: 0 !important;
 	text-align: center;
 	min-width: 2rem;
+	border-top-right-radius: var(--commons-borderRadius-M);
+	border-bottom-right-radius: var(--commons-borderRadius-M);
 
 	&::before {
 		@include icon.generate('arrow_south');

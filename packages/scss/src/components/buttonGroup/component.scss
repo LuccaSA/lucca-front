@@ -45,7 +45,7 @@
 	.button-group-item {
 		flex-grow: 1;
 
-		.button {
+		.button:not(.mod-more) {
 			width: 100%;
 			border-radius: 0;
 		}
