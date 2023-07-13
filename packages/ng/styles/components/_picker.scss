@@ -6,7 +6,7 @@
 	@extend %popover-content;
 
 	max-height: 17.5rem;
-	padding: var(--spacings-S);
+	padding: var(--spacings-XS);
 	overflow-y: auto;
 	display: block;
 	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
