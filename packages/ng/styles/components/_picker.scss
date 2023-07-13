@@ -42,14 +42,11 @@
 }
 
 .lu-picker-textfield {
-	border-bottom: var(--commons-divider-width) solid var(--commons-divider-color);
-	margin-bottom: var(--spacings-XS);
 	width: 100%;
+	padding-bottom: var(--spacings-XS);
 
 	.textfield-input {
 		background-color: var(--colors-white-color);
-		border-radius: 0;
-		box-shadow: none;
 		outline: none;
 	}
 }
@@ -65,13 +62,7 @@
 }
 
 .lu-date-picker-panel {
-	width: var(--components-calendar-width);
-
 	.lu-picker-content {
 		max-height: none;
-	}
-
-	lu-calendar > .calendar {
-		width: var(--components-calendar-width);
 	}
 }

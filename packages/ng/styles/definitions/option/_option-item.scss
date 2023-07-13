@@ -44,6 +44,10 @@
 
 			&.is-highlighted {
 				background-color: var(--palettes-primary-100);
+
+				&:hover {
+					background-color: var(--palettes-primary-200);
+				}
 			}
 		}
 
