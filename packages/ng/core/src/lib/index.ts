@@ -4,3 +4,4 @@ export * from './translate/index';
 export * from './tree/index';
 export * from './group/index';
 export * from './id/index';
+export * from './type/index';

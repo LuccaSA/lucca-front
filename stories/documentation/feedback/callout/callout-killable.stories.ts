@@ -1,30 +1,52 @@
-import { Meta, Story } from '@storybook/angular';
-
-interface CalloutKillableStory {
-}
+import { Meta, StoryObj } from '@storybook/angular';
+import { CalloutComponent } from '@lucca-front/ng/callout';
+import { default as BasicStory } from './callout-basic.stories';
 
 export default {
-	title: 'Documentation/Feedback/Callout/Killable',
-	argTypes: {
-	},
+	...BasicStory,
+	title: 'Documentation/Feedback/Callout/Killable'
 } as Meta;
 
-function getTemplate(args: CalloutKillableStory): string {
-	return `
-	<div class="callout">
-		<div class="callout-content">
-			<strong class="callout-content-title">Feedback or informations</strong>
-			<div class="callout-content-description">Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum.</div>
-		</div>
-		<button type="button" class="callout-kill"></button>
-	</div>
-	`;
-}
-
-const Template: Story<CalloutKillableStory> = (args: CalloutKillableStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Killable = Template.bind({});
-Killable.args = { };
+export const Template: StoryObj<CalloutComponent & { description: string }> = {
+	args: {
+		title: 'Feedback or informations',
+		tiny: false,
+		icon: 'info',
+		palette: 'none',
+		size: 'm',
+		removable: true,
+		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
+	},
+	argTypes: {
+		description: {
+			table: {
+				disable: true
+			}
+		},
+		tiny: {
+			table: {
+				disable: true
+			}
+		},
+		title: {
+			table: {
+				disable: true
+			}
+		},
+		size: {
+			table: {
+				disable: true
+			}
+		},
+		icon: {
+			table: {
+				disable: true
+			}
+		},
+		palette: {
+			table: {
+				disable: true
+			}
+		},
+	}
+};
