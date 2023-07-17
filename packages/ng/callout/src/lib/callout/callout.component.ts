@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Palette, SizeMS } from '@lucca-front/ng/core';
 
@@ -8,6 +8,7 @@ import { Palette, SizeMS } from '@lucca-front/ng/core';
 	imports: [CommonModule],
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalloutComponent {
 	@Input()
