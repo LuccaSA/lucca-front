@@ -3,9 +3,11 @@
 	border-radius: var(--commons-borderRadius-L);
 	border-color: var(--commons-divider-color);
 	border-width: 1px;
+	display: block;
 	margin-bottom: var(--spacings-S);
 	border-style: solid;
-	display: block;
+	flex-direction: row;
+	row-gap: var(--spacings-S);
 	position: relative;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
@@ -13,6 +15,20 @@
 	@at-root ($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
+		}
+
+		.card-title {
+			padding: 0;
+			margin-bottom: var(--spacings-XS);
+		}
+
+		.card-action {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-left: 1px solid var(--commons-border-200);
+			padding-left: var(--spacings-S);
+			margin-left: var(--spacings-S);
 		}
 
 		.card-footer {

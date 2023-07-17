@@ -10,7 +10,9 @@
 		(mousedown)="onMouseDown()"
 	>
 		<div class="lu-picker-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
-			<ng-content></ng-content>
+			<div class="lu-picker-content-option">
+				<ng-content></ng-content>
+			</div>
 		</div>
 	</div>
 </ng-template>

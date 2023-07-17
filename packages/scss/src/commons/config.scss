@@ -1,5 +1,5 @@
 $states: 'error', 'warning', 'success' !default;
-$palettes: 'primary', 'secondary', 'grey' !default;
+$palettes: 'primary', 'secondary', 'grey', 'navigation' !default;
 $fontVariable: false !default;
 
 $primary: (
@@ -85,6 +85,13 @@ $grey: (
 	700: #445473,
 	800: #2a3551,
 	900: #0b1732,
+) !default;
+
+$navigation: (
+	text: #ffffff,
+	700: #313972,
+	800: #192157,
+	900: #12183F,
 ) !default;
 
 $colors: (
@@ -179,8 +186,7 @@ $elevations: (
 );
 
 $boxShadows: (
-	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
-	// deprecated
+	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)', // deprecated
 	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
 	'S':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
@@ -214,8 +220,7 @@ $durations: (
 );
 
 $loading: (
-	'background': var(--palettes-primary-200),
-	'frontground': var(--palettes-primary-700),
+	'frontground': var(--palettes-primary-500),
 	'speed': 600ms,
 );
 

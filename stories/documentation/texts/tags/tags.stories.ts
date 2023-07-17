@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TagsBasicStory {
 	palette: string;
 	clickable: boolean;
+	l: boolean;
 	outlined: boolean;
 }
 
@@ -14,16 +15,24 @@ export default {
 			control: {
 				type: 'select',
 			},
-		},
-		clickable: {
-			control: {
-				type: 'boolean',
-			},
+			description: 'Deprecated 🦕',
 		},
 		outlined: {
 			control: {
 				type: 'boolean',
 			},
+		},
+		l: {
+			control: {
+				type: 'boolean',
+			},
+			description: "Taille : Large",
+		},
+		clickable: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Deprecated 🦕',
 		},
 	},
 } as Meta;
@@ -32,8 +41,9 @@ function getTemplate(args: TagsBasicStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
 	const clickable = args.clickable ? `mod-clickable` : '';
 	const outlined = args.outlined ? `mod-outlined` : '';
+	const l = args.l ? `mod-L` : '';
 	return `
-		<span class="tag ${classes} ${clickable} ${outlined}">Tag</span>
+		<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>
 	`;
 }
 
@@ -43,4 +53,4 @@ const Template: Story<TagsBasicStory> = (args: TagsBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', clickable: false, outlined: false };
+Basic.args = { outlined: false, l: false, palette: '', clickable: false, };

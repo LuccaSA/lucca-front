@@ -19,5 +19,7 @@
 			[sort]="sort"
 		></lu-api-paged-searcher>
 	</header>
-	<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+	<div class="lu-picker-content-option">
+		<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+	</div>
 </lu-option-picker-advanced>

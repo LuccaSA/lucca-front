@@ -9,35 +9,35 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 	standalone: true,
 	imports: [CommonModule],
 	template: `
-		<div class="grid">
-			<div class="grid@mediaMinXXS ng-demo-block">
+		<div class="grid mod-auto">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Scale
 					<button class="button mod-S" (click)="scalingCenter = !scalingCenter">{{ scalingCenter ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation] *ngIf="!scalingCenter">Scale from center</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Left <button class="button mod-S" (click)="scalingLeft = !scalingLeft">{{ scalingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation]="'left'" *ngIf="!scalingLeft">Scale from left</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Right
 					<button class="button mod-S" (click)="scalingRight = !scalingRight">{{ scalingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation]="'right'" *ngIf="!scalingRight">Scale from right</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Top
 					<button class="button mod-S" (click)="scalingTop = !scalingTop">{{ scalingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation]="'top'" *ngIf="!scalingTop">Scale from top</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Bottom
 					<button class="button mod-S" (click)="scalingBottom = !scalingBottom">{{ scalingBottom ? 'Show' : 'Hide' }}</button>
@@ -88,34 +88,34 @@ class AppModule {}
 	selector: 'story-scale-animation',
 	template: \`
 		<div class="grid">
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Scale
 					<button class="button mod-S" (click)="scalingCenter = !scalingCenter">{{ scalingCenter ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation] *ngIf="!scalingCenter">Scale from center</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Left <button class="button mod-S" (click)="scalingLeft = !scalingLeft">{{ scalingLeft ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation]="'left'" *ngIf="!scalingLeft">Scale from left</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Right
 					<button class="button mod-S" (click)="scalingRight = !scalingRight">{{ scalingRight ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation]="'right'" *ngIf="!scalingRight">Scale from right</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Top
 					<button class="button mod-S" (click)="scalingTop = !scalingTop">{{ scalingTop ? 'Show' : 'Hide' }}</button>
 				</h3>
 				<div class="animated-block" [@scaleAnimation]="'top'" *ngIf="!scalingTop">Scale from top</div>
 			</div>
-			<div class="grid@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block">
 				<h3 class="u-margin0">
 					Bottom
 					<button class="button mod-S" (click)="scalingBottom = !scalingBottom">{{ scalingBottom ? 'Show' : 'Hide' }}</button>

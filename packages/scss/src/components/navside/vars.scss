@@ -9,30 +9,29 @@
 
 	--components-navSide-offset-top: 0;
 	--components-navSide-padding-top: 0;
-	--components-navSide-main-font-size: 0.875rem;
 	--components-navSide-sub-font-size: 0.875rem;
 	--components-navSide-submenu-max-height: 33rem;
 
-	--components-navSide-fullwidth-palette-bg-color: #2d3368;
+	--components-navSide-fullwidth-palette-bg-color: var(--palettes-navigation-800);
 	--components-navSide-fullwidth-palette-text: var(--colors-white-color);
 	--components-navSide-fullwidth-palette-selected-bg: var(--palettes-primary-700);
 	--components-navSide-fullwidth-palette-selected-text: var(--colors-white-color);
-	--components-navSide-fullwidth-palette-hovered-bg: var(--palettes-primary-800);
+	--components-navSide-fullwidth-palette-hovered-bg: var(--palettes-navigation-700);
 	--components-navSide-fullwidth-palette-hovered-text: var(--colors-white-color);
-	--components-navSide-fullwidth-palette-alert-color: var(--palettes-secondary-700);
-	--components-navSide-fullwidth-palette-alert-text: var(--colors-white-color);
-	--components-navSide-fullwidth-palette-selected-alert-color: var(--palettes-secondary-700);
+	--components-navSide-fullwidth-palette-alert-color: var(--palettes-primary-200);
+	--components-navSide-fullwidth-palette-alert-text: var(--palettes-primary-800);
+	--components-navSide-fullwidth-palette-selected-alert-color: var(--palettes-primary-700);
 	--components-navSide-fullwidth-palette-selected-alert-text: var(--colors-white-color);
 
-	--components-navSide-compact-palette-bg-color: #2d3368;
+	--components-navSide-compact-palette-bg-color: var(--palettes-navigation-800);
 	--components-navSide-compact-palette-text: var(--colors-white-color);
 	--components-navSide-compact-palette-selected-bg: var(--palettes-primary-700);
 	--components-navSide-compact-palette-selected-text: var(--colors-white-color);
-	--components-navSide-compact-palette-hovered-bg: var(--palettes-primary-800);
+	--components-navSide-compact-palette-hovered-bg: var(--palettes-navigation-700);
 	--components-navSide-compact-palette-hovered-text: var(--colors-white-color);
-	--components-navSide-compact-palette-alert-color: var(--palettes-secondary-700);
-	--components-navSide-compact-palette-alert-text: var(--colors-white-color);
-	--components-navSide-compact-palette-selected-alert-color: var(--palettes-secondary-700);
+	--components-navSide-compact-palette-alert-color: var(--palettes-primary-200);
+	--components-navSide-compact-palette-alert-text: var(--palettes-primary-800);
+	--components-navSide-compact-palette-selected-alert-color: var(--palettes-primary-700);
 	--components-navSide-compact-palette-selected-alert-text: var(--colors-white-color);
 	--components-navSide-compact-font-size: 0.875rem;
 
