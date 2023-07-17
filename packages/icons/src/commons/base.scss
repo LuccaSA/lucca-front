@@ -8,10 +8,8 @@ body {
 			font-family: config.$font-name;
 			font-style: normal;
 			font-weight: 400;
-			src: url('#{config.$font-path}.eot');
-			src: url('#{config.$font-path}.eot'), url('#{config.$font-path}.svg') format('svg'), url('#{config.$font-path}.woff') format('woff'),
+			src: url('#{config.$font-path}.svg') format('svg'), url('#{config.$font-path}.woff') format('woff'),
 				url('#{config.$font-path}.ttf') format('truetype');
-
 			letter-spacing: normal;
 			-webkit-font-feature-settings: 'liga';
 			-moz-font-feature-settings: 'liga=1';
