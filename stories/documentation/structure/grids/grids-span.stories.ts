@@ -47,7 +47,6 @@ const Template: Story<GridsSpanStory> = (args: GridsSpanStory) => ({
 		.grid + .grid {
 			margin-top: var(--spacings-L);
 		}
-		
 		`,
 	],
 });
