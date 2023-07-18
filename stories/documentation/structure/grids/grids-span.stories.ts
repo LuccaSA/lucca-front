@@ -14,8 +14,8 @@ function getTemplate(args: GridsSpanStory): string {
 	<div class="grid" style="--grid-columns: 6">
 		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
 		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-		<div class="grid-column" style="--grid-colpan: 2"><div class="demo">grid-columns 6<br />colspan 2</div></div>
-		<div class="grid-column" style="--grid-colpan: 2"><div class="demo">grid-columns 6<br />colspan 2</div></div>
+		<div class="grid-column" style="--grid-colspan: 2"><div class="demo">grid-columns 6<br />colspan 2</div></div>
+		<div class="grid-column" style="--grid-colspan: 2"><div class="demo">grid-columns 6<br />colspan 2</div></div>
 	</div>
 
 	<div class="grid" style="--grid-columns: 3">
