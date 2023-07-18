@@ -8,6 +8,10 @@
 		@include primary;
 	}
 
+	&.mod-unkillable {
+		@include unkillable;
+	}
+
 	&.is-disabled {
 		@include disabled;
 	}

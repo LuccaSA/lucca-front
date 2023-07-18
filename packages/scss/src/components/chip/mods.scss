@@ -7,3 +7,9 @@
     }
   }
 }
+
+@mixin unkillable {
+	.chip-kill {
+		display: none;
+	}
+}
