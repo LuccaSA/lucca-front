@@ -2,6 +2,11 @@
 
 @mixin primary {
   .chip-kill {
+
+    &:hover {
+      background-color: var(--palettes-primary-50);
+    }
+
     &:focus-visible {
       @include a11y.focusVisible($color: var(--colors-white-color));
     }
@@ -11,5 +16,14 @@
 @mixin unkillable {
 	.chip-kill {
 		display: none;
+	}
+}
+
+@mixin clickable {
+	cursor: pointer;
+	text-decoration: none;
+
+	&:hover {
+		background-color: var(--palettes-600, var(--palettes-grey-100));
 	}
 }

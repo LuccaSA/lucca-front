@@ -12,6 +12,10 @@
 		@include unkillable;
 	}
 
+	&.mod-clickable {
+		@include clickable;
+	}
+
 	&.is-disabled {
 		@include disabled;
 	}
