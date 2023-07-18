@@ -43,9 +43,11 @@ const Template: Story<GridsSpanStory> = (args: GridsSpanStory) => ({
 			align-items: center;
 			justify-content: center;
 		}
+
 		.grid + .grid {
 			margin-top: var(--spacings-L);
 		}
+		
 		`,
 	],
 });
