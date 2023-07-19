@@ -33,13 +33,17 @@ export function luUserDisplay(user: ILuUser, format: LuDisplayFormat = LuDisplay
  * Displays a user name according to specified format. Supported formats: f for first name,
  * F for first initial, l for last name, L for last initial.
  */
-export function luUsersDisplay(users: ILuUser[], { format, separator }: LuUserDisplayMultipleOptions): string {
-	return users.map((u) => luUserDisplay(u, format)).join(separator);
+export function luUsersDisplay(users: ILuUser[], options: LuUserDisplayMultipleOptions): string {
+	const usersStringified = users.map((u) => luUserDisplay(u, options.format));
+	if ('separator' in options) {
+		return usersStringified.join(options.separator);
+	}
+	return options.formatter.format(usersStringified);
 }
 
 export type LuUserDisplaySingleOptions = LuDisplayFormat | { format: LuDisplayFormat };
 
-export type LuUserDisplayMultipleOptions = { format: LuDisplayFormat; separator: string };
+export type LuUserDisplayMultipleOptions = { format: LuDisplayFormat; separator: string } | { format: LuDisplayFormat; formatter: Intl.ListFormat };
 
 /**
  * Displays a user name according to specified format. Supported formats: f for first name,
@@ -61,6 +65,9 @@ export class LuUserDisplayPipe implements PipeTransform {
 		const format = options.format ?? this.defaultFormat;
 
 		if (Array.isArray(userOrUsers)) {
+			if ('formatter' in options) {
+				return luUsersDisplay(userOrUsers, { format, formatter: options.formatter });
+			}
 			const separator = ('separator' in options ? options.separator : undefined) ?? ', ';
 			return luUsersDisplay(userOrUsers, { format, separator });
 		}

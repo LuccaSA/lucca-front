@@ -133,5 +133,16 @@ describe('UserNamePipe', () => {
 			});
 			expect(spectator.element).toHaveText('J. Doe M. Scott D. Schrute');
 		});
+
+		it(`should return the right multiple value with specify 'fL' format and formatter`, () => {
+			const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'fL', formatter } }}`, {
+				hostProps: {
+					users,
+					formatter,
+				},
+			});
+			expect(spectator.element).toHaveText('John D., Michael S., and Dwight S.');
+		});
 	});
 });
