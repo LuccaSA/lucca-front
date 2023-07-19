@@ -19,7 +19,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 				</tr>
 			</thead>
 			<tbody class="table-body">
-				<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 38px" >
+				<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 36px" >
 					<td class="table-body-row-cell" colspan="3" role="presentation">
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
