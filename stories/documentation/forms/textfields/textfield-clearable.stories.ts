@@ -14,6 +14,7 @@ function getTemplate(args: TextfieldClearableStory): string {
 		<span class="textfield-label">Label</span>
 		<div class="clear textfield-clear" role="button" tabindex="0">
 		  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+			<span class="u-mask">Clear</span>
 		</div>
 	</label>
 	`;
