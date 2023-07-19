@@ -41,9 +41,7 @@ function getTemplate(args: ButtonBasic2Story): string {
 	const type = args.type !== '' ? 'type=' + args.type : '';
 	const block = args.block ? `mod-block` : '';
 
-	return `
-	<button ${type} class="button ${classes} ${block}">Bouton</button>
-	`;
+	return `<button ${type} class="button ${classes} ${block}">Bouton</button>`;
 }
 
 const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({

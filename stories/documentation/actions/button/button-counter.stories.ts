@@ -7,9 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonCounterStory): string {
-	return `
-	<button type="button" class="button mod-counter">Bouton<span class="button-counter">7</span></button>
-	`;
+	return `<button type="button" class="button mod-counter">Bouton<span class="button-counter">7</span></button>`;
 }
 
 const Template: Story<ButtonCounterStory> = (args: ButtonCounterStory) => ({

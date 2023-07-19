@@ -8,11 +8,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonSizeStory): string {
-	return `
-	<button type="button" class="button">Bouton</button>
+	return `<button type="button" class="button">Bouton</button>
 	<button type="button" class="button mod-S">Bouton</button>
-	<button type="button" class="button mod-XS">Bouton</button>
-	`;
+	<button type="button" class="button mod-XS">Bouton</button>`;
 }
 
 const Template: Story<ButtonSizeStory> = (args: ButtonSizeStory) => ({
