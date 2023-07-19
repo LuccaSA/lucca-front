@@ -5,5 +5,8 @@
 
 <section class="contentSection u-marginTopM">
 	<h4>Plusieurs utilisateurs</h4>
-	<div>{{ users | luUserDisplay : { format: displayformat, separator } }}</div>
+	<div class="u-displayFlex u-flexDirectionColumn u-gapS">
+		<div><label class="u-marginRightM">Avec un séparateur :</label>{{ users | luUserDisplay : { format: displayFormat, separator } }}</div>
+		<div><label class="u-marginRightM">Avec un formatter :</label>{{ users | luUserDisplay : { format: displayFormat, formatter } }}</div>
+	</div>
 </section>

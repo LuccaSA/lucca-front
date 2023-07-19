@@ -1,21 +1,16 @@
 import { createPipeFactory, SpectatorPipe } from '@ngneat/spectator/jest';
-import { ILuUser } from '../user.model';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 import { luUserDisplay, LuUserDisplayPipe } from './user-display.pipe';
 
-describe('UserNamePipe', () => {
-	let users: ILuUser[];
-	let user: ILuUser;
-	let userFirst: ILuUser;
-	let userLast: ILuUser;
-	beforeEach(() => {
-		users = <ILuUser[]>[
-			{ firstName: 'John', lastName: 'Doe' },
-			{ firstName: 'Michael', lastName: 'Scott' },
-			{ firstName: 'Dwight', lastName: 'Schrute' },
-		];
-		user = users[0];
-	});
+describe(LuUserDisplayPipe.name, () => {
+	const users = [
+		{ firstName: 'John', lastName: 'Doe' },
+		{ firstName: 'Michael', lastName: 'Scott' },
+		{ firstName: 'Dwight', lastName: 'Schrute' },
+	];
+	const user = users[0];
+	const userFirst = { firstName: user.firstName, lastName: '' };
+	const userLast = { firstName: '', lastName: user.lastName };
 
 	describe('luUserDisplay()', () => {
 		it("should return the right value with 'lf' format", () => {
@@ -158,6 +153,17 @@ describe('UserNamePipe', () => {
 				},
 			});
 			expect(spectator.element).toHaveText('J. Doe M. Scott D. Schrute');
+		});
+
+		it(`should return the right multiple value with specify 'fL' format and formatter`, () => {
+			const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+			spectator = createPipe(`{{ users | luUserDisplay:{ format: 'fL', formatter } }}`, {
+				hostProps: {
+					users,
+					formatter,
+				},
+			});
+			expect(spectator.element).toHaveText('John D., Michael S., and Dwight S.');
 		});
 	});
 });
