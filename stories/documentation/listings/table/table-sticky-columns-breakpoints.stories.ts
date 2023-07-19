@@ -45,7 +45,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 			</thead>
 			<tbody class="table-body">
 				<tr class="table-body-row mod-stickyHeader-shadow">
-					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 65px" colspan="16" role="presentation" >
+					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 56px" colspan="16" role="presentation" >
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
 				</tr>

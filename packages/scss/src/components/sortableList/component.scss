@@ -1,0 +1,68 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@mixin component($atRoot: 'without: rule') {
+	background-color: var(--colors-white-color);
+	border: var(--commons-divider-width) solid var(--commons-divider-color);
+	border-radius: var(--commons-borderRadius-M);
+	list-style: none;
+	padding: 0;
+
+	@at-root ($atRoot) {
+		.sortableList-item {
+			border-bottom-width: var(--commons-divider-width);
+			border-bottom-color: var(--commons-divider-color);
+			border-bottom-style: solid;
+			color: var(--palettes-grey-800);
+			display: flex;
+			position: relative;
+			text-decoration: none;
+			gap: var(--spacings-XS);
+			padding: var(--components-sortableList-padding);
+
+			&:last-child {
+				border: 0;
+			}
+		}
+
+		.sortableList-item-content {
+			color: var(--palettes-grey-800);
+			text-decoration: none;
+			width: 100%;
+		}
+
+		.sortableList-item-content-description {
+			margin: 0;
+			font-size: var(--components-sortableList-description-fontSize);
+			line-height: var(--components-sortableList-description-lineHeight);
+		}
+
+		.sortableList-item-content-helper {
+			margin: 0;
+			color: var(--palettes-grey-600);
+			font-size: var(--components-sortableList-helper-fontSize);
+			line-height: var(--components-sortableList-helper-lineHeight);
+		}
+
+		.sortableList-item-actions {
+			margin-left: auto;
+			white-space: nowrap;
+			padding-left: 0;
+		}
+
+
+		.sortableList-item-handler {
+			color: var(--palettes-grey-600);
+			font-size: var(--components-sortableList-handler-size);
+			cursor: move;
+
+			&::before {
+				@include icon.generate('drag');
+				vertical-align: top;
+			}
+		}
+
+		.sortableList-clear {
+			margin-top: var(--spacings-XXS);
+		}
+	}
+}

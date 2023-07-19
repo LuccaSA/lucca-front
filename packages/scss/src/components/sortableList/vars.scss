@@ -1,0 +1,8 @@
+@mixin vars {
+  --components-sortableList-padding: var(--spacings-XS) .75rem;
+  --components-sortableList-handler-size: var(--sizes-M-lineHeight);
+  --components-sortableList-description-fontSize: var(--sizes-M-fontSize);
+  --components-sortableList-description-lineHeight: var(--sizes-M-lineHeight);
+  --components-sortableList-helper-fontSize: var(--sizes-S-fontSize);
+  --components-sortableList-helper-lineHeight: var(--sizes-S-lineHeight);
+}

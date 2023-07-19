@@ -1,7 +1,6 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--colors-white-color);
-	border: var(--commons-divider-width) solid var(--commons-divider-color);
-	border-radius: var(--commons-borderRadius-M);
+	box-shadow: var(--commons-elevations-elevation-1);
 	margin-bottom: var(--components-list-margin-bottom);
 	list-style: none;
 	padding: 0;
@@ -12,12 +11,10 @@
 			border-bottom-color: var(--commons-divider-color);
 			color: var(--palettes-grey-800);
 			border-bottom-style: solid;
+			align-items: center;
 			display: flex;
 			position: relative;
 			text-decoration: none;
-			gap: var(--spacings-XS);
-			padding: var(--spacings-XS) .75rem;
-
 
 			&:last-child {
 				border: 0;
@@ -25,6 +22,7 @@
 		}
 
 		.list-item-content {
+			padding: var(--components-list-padding);
 			color: var(--palettes-grey-800);
 			text-decoration: none;
 			width: 100%;
@@ -38,21 +36,13 @@
 			margin: 0;
 		}
 
-		.list-item-content-helper {
-			margin: 0;
-			color: var(--palettes-grey-600);
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
-		}
-
 		.list-item-actions {
+			padding: var(--components-list-padding);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: all;
 			margin-left: auto;
 			white-space: nowrap;
 			padding-left: 0;
-		}
-
-		.list-clear {
-			margin-top: var(--spacings-XXS);
 		}
 	}
 }
