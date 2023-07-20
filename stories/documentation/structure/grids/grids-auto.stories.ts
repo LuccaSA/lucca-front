@@ -10,43 +10,41 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsAutoStory): string {
-	return `
-	<div class="grid mod-auto">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-	</div>
+	return `<div class="grid mod-auto">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
 
-	<div class="grid mod-auto">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-		<div class="grid-column"><div class="demo">5</div></div>
-		<div class="grid-column"><div class="demo">6</div></div>
-	</div>
+<div class="grid mod-auto">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+	<div class="grid-column"><div class="demo">5</div></div>
+	<div class="grid-column"><div class="demo">6</div></div>
+</div>
 
-	<div class="grid mod-auto">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-		<div class="grid-column"><div class="demo">5</div></div>
-		<div class="grid-column" style="--grid-colspan: 3"><div class="demo">colspan 3</div></div>
-	</div>
+<div class="grid mod-auto">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+	<div class="grid-column"><div class="demo">5</div></div>
+	<div class="grid-column" style="--grid-colspan: 3"><div class="demo">colspan 3</div></div>
+</div>
 
-	<div class="grid mod-auto">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-		<div class="grid-column"><div class="demo">5</div></div>
-		<div class="grid-column"><div class="demo">6</div></div>
-		<div class="grid-column"><div class="demo">7</div></div>
-		<div class="grid-column"><div class="demo">8</div></div>
-	</div>
-	`;
+<div class="grid mod-auto">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+	<div class="grid-column"><div class="demo">5</div></div>
+	<div class="grid-column"><div class="demo">6</div></div>
+	<div class="grid-column"><div class="demo">7</div></div>
+	<div class="grid-column"><div class="demo">8</div></div>
+</div>`;
 }
 
 const Template: Story<GridsAutoStory> = (args: GridsAutoStory) => ({

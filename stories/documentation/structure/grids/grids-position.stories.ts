@@ -10,27 +10,25 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsPositionStory): string {
-	return `
-	<div class="grid" style="--grid-columns: 4">
-		<div class="grid-column" style="--grid-column: 2"><div class="demo">column 2</div></div>
-		<div class="grid-column" style="--grid-column: 4"><div class="demo">column 4</div></div>
-	</div>
+	return `<div class="grid" style="--grid-columns: 4">
+	<div class="grid-column" style="--grid-column: 2"><div class="demo">column 2</div></div>
+	<div class="grid-column" style="--grid-column: 4"><div class="demo">column 4</div></div>
+</div>
 
-	<div class="grid" style="--grid-columns: 4">
-		<div class="grid-column" style="--grid-column: 2"><div class="demo">column 2</div></div>
-		<div class="grid-column" style="--grid-column: 1"><div class="demo">column 1</div></div>
-	</div>
+<div class="grid" style="--grid-columns: 4">
+	<div class="grid-column" style="--grid-column: 2"><div class="demo">column 2</div></div>
+	<div class="grid-column" style="--grid-column: 1"><div class="demo">column 1</div></div>
+</div>
 
-	<div class="grid" style="--grid-columns: 4">
-		<div class="grid-column" style="--grid-column: 2; --grid-row: 1"><div class="demo">column 2<br />row 1</div></div>
-		<div class="grid-column" style="--grid-column: 1; --grid-row: 1"><div class="demo">column 1<br />row 1</div></div>
-	</div>
+<div class="grid" style="--grid-columns: 4">
+	<div class="grid-column" style="--grid-column: 2; --grid-row: 1"><div class="demo">column 2<br />row 1</div></div>
+	<div class="grid-column" style="--grid-column: 1; --grid-row: 1"><div class="demo">column 1<br />row 1</div></div>
+</div>
 
-	<div class="grid mod-dense" style="--grid-columns: 4">
-		<div class="grid-column" style="--grid-column: 2"><div class="demo">mod-dense<br />column 2</div></div>
-		<div class="grid-column" style="--grid-column: 1"><div class="demo">mod-dense<br />column 1</div></div>
-	</div>
-	`;
+<div class="grid mod-dense" style="--grid-columns: 4">
+	<div class="grid-column" style="--grid-column: 2"><div class="demo">mod-dense<br />column 2</div></div>
+	<div class="grid-column" style="--grid-column: 1"><div class="demo">mod-dense<br />column 1</div></div>
+</div>`;
 }
 
 const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
@@ -48,7 +46,7 @@ const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
 			align-items: center;
 			justify-content: center;
 		}
-		
+
 		.grid + .grid {
 			margin-top: var(--spacings-L);
 		}
