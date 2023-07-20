@@ -10,17 +10,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsFormStory): string {
-	return `
-	<div class="grid mod-form">
-		<div class="grid-column" style="--grid-colspan: 4"><div class="demo">mod-form<br />colspan 4</div></div>
-		<div class="grid-column" style="--grid-colspan: 2"><div class="demo">mod-form<br />colspan 2</div></div>
-		<div class="grid-column" style="--grid-colspan: 2"><div class="demo">mod-form<br />colspan 2</div></div>
-		<div class="grid-column"><div class="demo">mod-form</div></div>
-		<div class="grid-column"><div class="demo">mod-form</div></div>
-		<div class="grid-column"><div class="demo">mod-form</div></div>
-		<div class="grid-column"><div class="demo">mod-form</div></div>
-	</div>
-	`;
+	return `<div class="grid mod-form">
+	<div class="grid-column" style="--grid-colspan: 4"><div class="demo">mod-form<br />colspan 4</div></div>
+	<div class="grid-column" style="--grid-colspan: 2"><div class="demo">mod-form<br />colspan 2</div></div>
+	<div class="grid-column" style="--grid-colspan: 2"><div class="demo">mod-form<br />colspan 2</div></div>
+	<div class="grid-column"><div class="demo">mod-form</div></div>
+	<div class="grid-column"><div class="demo">mod-form</div></div>
+	<div class="grid-column"><div class="demo">mod-form</div></div>
+	<div class="grid-column"><div class="demo">mod-form</div></div>
+</div>`;
 }
 
 const Template: Story<GridsFormStory> = (args: GridsFormStory) => ({
@@ -38,7 +36,7 @@ const Template: Story<GridsFormStory> = (args: GridsFormStory) => ({
 			align-items: center;
 			justify-content: center;
 		}
-		
+
 		.grid + .grid {
 			margin-top: var(--spacings-L);
 		}

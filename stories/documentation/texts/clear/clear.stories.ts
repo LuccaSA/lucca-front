@@ -31,9 +31,7 @@ function getTemplate(args: ClearBasicStory): string {
 	const s = args.s ? `mod-S` : '';
 	const primary = args.primary ? `palette-primary` : '';
 	const disabled = args.disabled ? `disabled` : '';
-	return `
-		<button type="button" class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-close"></span><span class="u-mask">Clear</span></button>
-	`;
+	return `<button type="button" class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-close"></span><span class="u-mask">Clear</span></button>`;
 }
 
 const Template: Story<ClearBasicStory> = (args: ClearBasicStory) => ({

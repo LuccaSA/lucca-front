@@ -38,7 +38,7 @@ export default {
 
 function getTemplate(args: ButtonBasic2Story): string {
 	const classes = [args.state, args.palette].filter(Boolean).join(' ');
-	const type = args.type !== '' ? 'type=' + args.type : '';
+	const type = args.type !== '' ? 'type="' + args.type : '"';
 	const block = args.block ? `mod-block` : '';
 
 	return `<button ${type} class="button ${classes} ${block}">Bouton</button>`;

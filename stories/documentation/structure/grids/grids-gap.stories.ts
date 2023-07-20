@@ -10,35 +10,33 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsGapsStory): string {
-	return `
-	<div class="grid" style="--grid-columns: 2; --grid-column-gap: 0">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-	</div>
+	return `<div class="grid" style="--grid-columns: 2; --grid-column-gap: 0">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
 
-	<div class="grid" style="--grid-columns: 2; --grid-row-gap: 0">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-	</div>
+<div class="grid" style="--grid-columns: 2; --grid-row-gap: 0">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
 
-	<div class="grid" style="--grid-columns: 2; --grid-gap: 0">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-	</div>
+<div class="grid" style="--grid-columns: 2; --grid-gap: 0">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>
 
-	<div class="grid" style="--grid-columns: 2; --grid-gap: var(--spacings-XS)">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-	</div>
-	`;
+<div class="grid" style="--grid-columns: 2; --grid-gap: var(--spacings-XS)">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+</div>`;
 }
 
 const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({

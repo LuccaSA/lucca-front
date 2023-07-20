@@ -25,9 +25,7 @@ export default {
 
 function getTemplate(args: StatusBadgeBasicStory): string {
 	const l = args.l ? `mod-L` : '';
-	return `
-		<div class="statusBadge ${l} ${args.palette}">Status</div>
-	`;
+	return `<div class="statusBadge ${l} ${args.palette}">Status</div>`;
 }
 
 const Template: Story<StatusBadgeBasicStory> = (args: StatusBadgeBasicStory) => ({
