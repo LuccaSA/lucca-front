@@ -27,7 +27,7 @@ function getTemplate(args: TextfieldMessagesStory): string {
 			<input class="textfield-input is-error" type="text">
 			<span class="textfield-label">Label</span>
 			<span class="textfield-messages">
-				<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-error"></span> Helper message</span>
+				<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
 			</span>
 		</label>
 	`;

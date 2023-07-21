@@ -11,17 +11,19 @@
 <div [ngClass]="{ 'u-paddingRightXL': true }"></div>
 
 <!-- Should remain untouched -->
-<div [ngClass]="{
+<div
+	[ngClass]="{
 	'u-textSuccess': state === saveStateEnum.Saved,
 	'icon-tickBold': state === saveStateEnum.Saved,
 	'u-textError': state === saveStateEnum.OnError,
 	'icon-crossBold': state === saveStateEnum.OnError
-}"></div>
+}"
+></div>
 
 <div class="grid-4@mediaMinL grid-12@mediaMinM"></div>
 <div class="grid@mediaMinM"></div>
 
 <button class="lu-modal-header-close actionIcon" (click)="dismiss()">
-	<span aria-hidden="true" class="lucca-icon icon-cross"></span>
+	<span aria-hidden="true" class="lucca-icon icon-mathsMultiplicate"></span>
 	<span class="u-mask">{{ t('timeTypeSettings.TIME_TYPE_SETTINGS_MODAL_CLOSE_A11Y') }}</span>
 </button>

@@ -25,15 +25,15 @@ function getTemplate(args: PageHeaderMenuStory): string {
 				<h1 class="u-margin0">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
-						<span aria-hidden="true" class="lucca-icon icon-edit"></span>
+						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 						<span class="u-mask">Modifier</span>
 					</button>
 					<button type="button" class="actionIcon" luTooltip="Copier">
-						<span aria-hidden="true" class="lucca-icon icon-copy"></span>
+						<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
 						<span class="u-mask">Copier</span>
 					</button>
 					<button type="button" class="actionIcon" luTooltip="Supprimer">
-						<span aria-hidden="true" class="lucca-icon icon-trash"></span>
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 						<span class="u-mask">Supprimer</span>
 					</button>
 				</div>
@@ -46,14 +46,14 @@ function getTemplate(args: PageHeaderMenuStory): string {
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
 				<button type="button" class="actionIcon">
-					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
+					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
 			</div>
 		</div>
 		<section class="pageHeader-description">
 			<p class="u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-outside mod-XS u-marginLeftXXS"></span></a>.
+				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
 			</p>
 		</section>
 		<nav class="menu">

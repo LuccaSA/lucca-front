@@ -4,7 +4,7 @@
 @mixin S {
 	--components-button-font-size: var(--sizes-S-fontSize);
 	--components-button-line-height: var(--sizes-S-lineHeight);
-	--components-button-padding: .375rem .75rem;
+	--components-button-padding: 0.375rem 0.75rem;
 	--icon-size: var(--sizes-M-fontSize);
 	--components-button-gap: .375rem;
 }
@@ -38,7 +38,7 @@
 }
 
 @mixin textXS {
-	padding: var(--spacings-XXS) .375rem;
+	padding: var(--spacings-XXS) 0.375rem;
 }
 
 @mixin outlined {
@@ -97,7 +97,7 @@
 	border-bottom-right-radius: var(--commons-borderRadius-M);
 
 	&::before {
-		@include icon.generate('arrow_south');
+		@include icon.generate('arrow_bottom');
 
 		height: 0;
 		vertical-align: text-top;
@@ -133,7 +133,7 @@
 }
 
 @mixin counterS {
-	--components-button-padding: .375rem calc(var(--spacings-XS) + var(--spacings-XXS)) .375rem var(--spacings-S);
+	--components-button-padding: 0.375rem calc(var(--spacings-XS) + var(--spacings-XXS)) 0.375rem var(--spacings-S);
 
 	.button-counter { // deprecated
 		height: 1.25rem;

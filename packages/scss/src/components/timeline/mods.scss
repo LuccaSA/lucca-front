@@ -167,7 +167,7 @@
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				@include icon.generate('confirm');
+				@include icon.generate('sign_confirm');
 				font-size: var(--components-timeline-icon-size);
 				display: flex;
 				background-color: transparent;
@@ -232,7 +232,7 @@
 					display: none;
 				}
 				.timeline-step-title-icon::before {
-					@include icon.generate('plus');
+					@include icon.generate('maths_plus');
 					display: flex;
 				}
 			}
@@ -328,7 +328,7 @@
 		}
 	}
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
-		@include icon.generate('plus');
+		@include icon.generate('maths_plus');
 		display: flex;
 		transition: background-color var(--commons-animations-durations-fast);
 	}
@@ -372,7 +372,6 @@
 
 @mixin notPastChecked {
 	.timeline-step-title {
-
 		&::before {
 			background-color: var(--palettes-primary-700);
 			color: var(--colors-white-color);

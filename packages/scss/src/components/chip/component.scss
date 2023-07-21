@@ -11,7 +11,7 @@
 	gap: var(--spacings-XS);
 	position: relative;
 	vertical-align: middle;
-	padding: calc(var(--spacings-XXS)/2) var(--spacings-XS);
+	padding: calc(var(--spacings-XXS) / 2) var(--spacings-XS);
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
 
@@ -21,8 +21,8 @@
 			color: var(--palettes-700, var(--colors-white-color));
 			border: 0;
 			border-radius: 50%;
-			height: .75rem;
-			width: .75rem;
+			height: 0.75rem;
+			width: 0.75rem;
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
 			padding: 0;
@@ -30,12 +30,12 @@
 			cursor: pointer;
 
 			&::before {
-				@include icon.generate('cross');
+				@include icon.generate('maths_multiplicate');
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				line-height: .75rem;
-				font-size: .75rem;
+				line-height: 0.75rem;
+				font-size: 0.75rem;
 			}
 
 			&:hover {

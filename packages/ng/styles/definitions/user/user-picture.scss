@@ -3,7 +3,7 @@
 @mixin userPictureVars {
 	--components-userPicture-XS-image: 1.5rem;
 	--components-userPicture-XS-fontSize: var(--sizes-XS-fontSize);
-	--components-userPicture-XS-placeholder: .75rem;
+	--components-userPicture-XS-placeholder: 0.75rem;
 	--components-userPicture-S-image: 2rem;
 	--components-userPicture-S-fontSize: var(--sizes-S-fontSize);
 	--components-userPicture-S-placeholder: var(--sizes-XS-lineHeight);
@@ -86,7 +86,7 @@
 			background: var(--palettes-grey-200) !important;
 
 			&::before {
-				@include icon.generate('user');
+				@include icon.generate('people_person');
 				color: var(--palettes-grey-600);
 				font-weight: 400;
 				font-size: var(--components-user-picture-placeholder, var(--components-userPicture-M-placeholder));

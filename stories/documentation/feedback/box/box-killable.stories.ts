@@ -22,7 +22,7 @@ function getTemplate(args: BoxKillableStory): string {
 	<div class="box ${grey}">
 	    <div class="box-close">
 	        <button type="button" class="actionIcon">
-	            <span aria-hidden="true" class="lucca-icon icon-cross"></span>
+	            <span aria-hidden="true" class="lucca-icon icon-mathsMultiplicate"></span>
 	            <span class="u-mask">Close</span>
 	        </button>
 	    </div>

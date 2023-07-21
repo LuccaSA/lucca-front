@@ -36,8 +36,8 @@
 
 @mixin inputState($state) {
 	&:not(:disabled, .is-disabled) {
-			background-color: var(--palettes-#{$state}-50);
-			box-shadow: 0 0 0 1px var(--palettes-#{$state}-600);
+		background-color: var(--palettes-#{$state}-50);
+		box-shadow: 0 0 0 1px var(--palettes-#{$state}-600);
 
 		~ .textfield-label,
 		~ .checkboxesfield-label,
@@ -124,7 +124,7 @@
 	}
 
 	&::before {
-		@include icon.generate('tick_bold');
+		@include icon.generate('sign_confirm');
 
 		color: var(--palettes-success-700);
 		position: absolute;
