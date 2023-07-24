@@ -84,8 +84,7 @@
 	color: var(--palettes-grey-800);
 
 	&.is-previousMonth,
-	&.is-nextMonth,
-	&.is-disabled {
+	&.is-nextMonth {
 		color: var(--palettes-grey-500);
 	}
 
@@ -136,9 +135,11 @@
 		}
 	}
 
-	&.is-disabled {
+	&.is-disabled, &[disabled] {
+		color: var(--palettes-grey-500);
+		pointer-events: none;
+
 		&:hover .calendar-grid-item-content {
-			pointer-events: none;
 			background-color: white;
 		}
 	}
