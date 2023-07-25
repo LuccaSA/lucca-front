@@ -10,7 +10,7 @@
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
 	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="chip mod-unkillable">{{ values.length }}</span> {{ intl.establishments }}</span
+		><span class="numericBadge">{{ values.length }}</span> {{ intl.establishments }}</span
 	>
 	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
 </ng-template>
@@ -26,7 +26,7 @@
 		></lu-establishment-searcher>
 		<lu-establishment-select-all
 			*ngIf="multiple"
-			class="u-displayBlock u-marginXS"
+			class="u-displayBlock"
 			[class.u-displayNone]="isSearching"
 			[filters]="filters"
 			[appInstanceId]="appInstanceId"
@@ -53,15 +53,17 @@
 				</ng-template>
 			</ng-container>
 
-			<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment" class="establishmentOption">
-				<ng-container *ngIf="isSearching; else emptySearch">
-					<span class="u-displayBlock">{{ establishment.name }}</span>
-					<span *ngIf="groupByLu" class="u-displayBlock u-textLight u-textS">{{ group.key.name }}</span>
-				</ng-container>
-				<ng-template #emptySearch>
-					<span>{{ establishment.name }}</span>
-				</ng-template>
-			</lu-option>
+			<div class="lu-picker-content-option">
+				<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment" class="establishmentOption">
+					<ng-container *ngIf="isSearching; else emptySearch">
+						<span class="u-displayBlock">{{ establishment.name }}</span>
+						<span *ngIf="groupByLu" class="u-displayBlock u-textLight u-textS">{{ group.key.name }}</span>
+					</ng-container>
+					<ng-template #emptySearch>
+						<span>{{ establishment.name }}</span>
+					</ng-template>
+				</lu-option>
+			</div>
 		</div>
 	</ng-template>
 </lu-option-picker-advanced>

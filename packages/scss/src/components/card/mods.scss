@@ -7,7 +7,7 @@
 	text-decoration: none;
 	cursor: pointer;
 
-	&:focus  {
+	&:focus {
 		outline: none;
 	}
 
@@ -20,13 +20,23 @@
 }
 
 @mixin elevated {
-	box-shadow: var(--commons-elevations-elevation-1);
+	box-shadow: var(--commons-boxShadow-S);
 	border: 0;
 }
 
-@mixin clickableElevated {
-	&:focus-visible,
+@mixin action {
+	box-shadow: var(--commons-boxShadow-S);
+	border: 0;
+	cursor: pointer;
+	display: flex;
+	padding: var(--components-card-content-padding);
+
 	&:hover {
-		box-shadow: var(--commons-elevations-elevation-3);
+		box-shadow: var(--commons-boxShadow-L);
+	}
+
+	.card-content {
+		flex: 1;
+		padding: 0;
 	}
 }

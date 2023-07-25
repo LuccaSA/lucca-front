@@ -1,0 +1,8 @@
+@mixin vars {
+  --components-numericBadge-background: var(--palettes-200, var(--palettes-grey-200));
+  --components-numericBadge-color: var(--palettes-800, var(--palettes-grey-700));
+  --components-numericBadge-size: 1.5rem;
+  --components-numericBadge-fontSize: var(--sizes-S-fontSize);
+  --components-numericBadge-lineHeight: var(--sizes-S-lineHeight);
+  --components-numericBadge-borderRadius: var(--commons-borderRadius-L);
+}

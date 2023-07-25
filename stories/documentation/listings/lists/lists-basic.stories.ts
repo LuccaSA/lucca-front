@@ -19,25 +19,35 @@ function getTemplate(args: ListBasicStory): string {
 	const clickable = args.clickable ? `mod-clickable` : '';
 	return `
 	<ul class="list">
-		<li class="list-item ${clickable}">
+		<li class="list-item mod-draggable">
+			<div class="list-item-handler"></div>
 			<div class="list-item-content">
-				<h3 class="list-item-content-title">Titre</h3>
-				<p class="list-item-content-description">Description</p>
+				<p class="list-item-content-description">Label</p>
+				<p class="list-item-content-helper">Helper message</p>
 			</div>
-			<div class="list-item-actions">
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
-			</div>
+			<button class="clear list-clear" type="button">
+			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+			</button>
 		</li>
-		<li class="list-item ${clickable}">
+		<li class="list-item mod-draggable">
+			<div class="list-item-handler"></div>
 			<div class="list-item-content">
-				<h3 class="list-item-content-title">Titre</h3>
-				<p class="list-item-content-description">Description</p>
+				<p class="list-item-content-description">Label</p>
+				<p class="list-item-content-helper">Helper message</p>
 			</div>
-			<div class="list-item-actions">
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-edit"></span></button>
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trash"></span></button>
+			<button class="clear list-clear" type="button">
+			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+			</button>
+		</li>
+		<li class="list-item mod-draggable">
+			<div class="list-item-handler"></div>
+			<div class="list-item-content">
+				<p class="list-item-content-description">Label</p>
+				<p class="list-item-content-helper">Helper message</p>
 			</div>
+			<button class="clear list-clear" type="button">
+			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+			</button>
 		</li>
 	</ul>
 	`;

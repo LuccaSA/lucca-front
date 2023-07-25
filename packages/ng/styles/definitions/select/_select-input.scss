@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin selectInputStyle {
 	:host {
@@ -19,7 +20,7 @@
 
 		cursor: pointer;
 		outline: none;
-		padding: 0 !important;
+		padding: 0;
 		gap: 0 !important;
 
 		&::after {
@@ -79,25 +80,9 @@
 	}
 
 	.lu-select-clearer {
-		display: block;
 		position: absolute;
-		width: 1rem;
-		height: 1rem;
-		background-color: var(--palettes-grey-700);
 		bottom: .75rem;
 		right: 2.25rem;
-		color: var(--colors-white-color);
-		padding: 0;
-		border-radius: 50%;
-		transition: background-color var(--commons-animations-durations-fast) ease;
-
-		.lucca-icon {
-			font-size: var(--sizes-XS-lineHeight);
-		}
-
-		&:hover {
-			background-color: var(--palettes-grey-600);
-		}
 	}
 
 	::ng-deep .lu-select-value {
@@ -140,12 +125,12 @@
 		}
 
 		.lu-select-suffix {
-			bottom: .625rem;
+			bottom: .5rem;
 			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
-			.label {
+			.label { // deprecated
 				font-size: var(--sizes-S-fontSize);
 				line-height: var(--sizes-S-lineHeight);
 				font-weight: 600;
@@ -158,6 +143,10 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
+			}
+
+			.numericBadge {
+				@include numericBadge.s;
 			}
 		}
 	}
@@ -200,10 +189,6 @@
 			height: auto;
 			padding-top: var(--spacings-S);
 			color: var(--palettes-grey-800);
-		}
-
-		.lu-select-suffix {
-			bottom: 0.4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
 		}
 	}
 

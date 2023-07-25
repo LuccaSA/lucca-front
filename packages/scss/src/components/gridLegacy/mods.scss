@@ -1,0 +1,46 @@
+@mixin reverse {
+	flex-direction: row-reverse;
+}
+
+@mixin first {
+	order: -1;
+}
+
+@mixin last {
+	order: 1;
+}
+
+@mixin start {
+	justify-content: flex-start;
+	text-align: start;
+}
+
+@mixin center {
+	justify-content: center;
+	text-align: center;
+}
+
+@mixin end {
+	justify-content: flex-end;
+	text-align: end;
+}
+
+@mixin top {
+	align-items: flex-start;
+}
+
+@mixin middle {
+	align-items: center;
+}
+
+@mixin bottom {
+	align-items: flex-end;
+}
+
+@mixin around {
+	justify-content: space-around;
+}
+
+@mixin between {
+	justify-content: space-between;
+}

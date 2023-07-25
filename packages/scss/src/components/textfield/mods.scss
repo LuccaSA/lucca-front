@@ -26,46 +26,24 @@
 		padding-right: 2rem;
 	}
 
-	.textfield-actionClear {
-		text-align: center;
+	.textfield-clear {
 		position: absolute;
 		bottom: .75rem;
 		right: var(--spacings-XS);
-		width: 1rem;
-		height: 1rem;
-		padding: 0;
-		line-height: 0;
-		background-color: var(--palettes-grey-700);
-		border-radius: 50%;
-
-		.lucca-icon {
-			font-size: var(--sizes-XS-lineHeight);
-			color: white;
-		}
-
-		&:hover {
-			background-color: var(--palettes-grey-600) !important;
-		}
 	}
 }
 
 @mixin clearableS {
-	.textfield-actionClear {
+	.textfield-clear {
 		bottom: var(--spacings-XXS);
 		right: var(--spacings-XXS);
 	}
 }
 
 @mixin clearableXS {
-	.textfield-actionClear {
+	.textfield-clear {
 		bottom: var(--spacings-XXS);
 		right: var(--spacings-XXS);
-		height: 1rem;
-		width: 1rem;
-
-		.lucca-icon {
-			font-size: 1rem;
-		}
 	}
 }
 
@@ -184,7 +162,7 @@
 		padding-right: 3.75rem;
 	}
 
-	.textfield-actionClear {
+	.textfield-clear {
 		right: 2rem;
 	}
 }
@@ -218,7 +196,7 @@
 		padding-right: 4rem;
 	}
 
-	.textfield-actionClear {
+	.textfield-clear {
 		right: 2.5rem;
 	}
 }
@@ -237,15 +215,12 @@
 		padding-right: 3.5rem;
 	}
 
-	.textfield-actionClear {
+	.textfield-clear {
+		--components-clear-size: .75rem;
+		--components-clear-icon-size: .75rem;
+
 		right: 2.125rem;
 		bottom: .625rem;
-		width: .75rem;
-		height: .75rem;
-
-		.lucca-icon {
-			font-size: .75rem;
-		}
 	}
 }
 
@@ -263,15 +238,12 @@
 		padding-right: 3rem;
 	}
 
-	.textfield-actionClear {
+	.textfield-clear {
+		--components-clear-size: .75rem;
+		--components-clear-icon-size: .75rem;
+
 		right: 1.75rem;
 		bottom: .375rem;
-		width: .75rem;
-		height: .75rem;
-
-		.lucca-icon {
-			font-size: .75rem;
-		}
 	}
 }
 
@@ -317,14 +289,14 @@
 
 		&::after {
 			bottom: var(--spacings-XS);
-			color: var(--palettes-primary-500);
+			color: var(--palettes-grey-600);
 			font-weight: 400;
 		}
 	}
 }
 
 @mixin suffixIcon {
-	color: var(--palettes-primary-500);
+	color: var(--palettes-grey-600);
 	line-height: var(--sizes-M-lineHeight);
 }
 

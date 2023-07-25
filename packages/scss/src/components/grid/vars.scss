@@ -1,2 +1,18 @@
 @mixin vars {
+	--grid-columns: 12;
+	--grid-gap: var(--spacings-S);
+	--grid-column-gap: var(--grid-gap);
+	--grid-row-gap: var(--grid-gap);
+	--grid-maxWidth: none;
+
+	--grid-column-start: auto;
+	--grid-row-start: auto;
+
+	--grid-column-end: auto;
+	--grid-row-end: auto;
+
+	--grid-column-align: auto;
+	--grid-column-justify: auto;
+
+	--grid-template-columns: repeat(var(--grid-columns), 1fr);
 }

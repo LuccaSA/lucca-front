@@ -1,0 +1,13 @@
+@mixin s {
+  --components-numericBadge-size: 1.25rem;
+  --components-numericBadge-borderRadius: 6px;
+  --components-numericBadge-fontSize: var(--sizes-XS-fontSize);
+  --components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+}
+
+@mixin xs {
+  --components-numericBadge-size: 1rem;
+  --components-numericBadge-borderRadius: var(--commons-borderRadius-M);
+  --components-numericBadge-fontSize: var(--sizes-XS-fontSize);
+  --components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+}

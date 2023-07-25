@@ -19,7 +19,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 						<ng-template ngPluralCase="0"></ng-template>
 						<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 						<ng-template ngPluralCase="other">
-							<span class="chip mod-unkillable">{{ colors.length }}</span>
+							<span class="numericBadge">{{ colors.length }}</span>
 							couleurs
 						</ng-template>
 					</ng-container>
@@ -31,7 +31,9 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 						<lu-option-select-all class="u-displayBlock u-marginXS"></lu-option-select-all>
 						<lu-option-pager></lu-option-pager>
 					</header>
-					<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					<div class="lu-picker-content-option">
+						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					</div>
 				</lu-option-picker-advanced>
 				<lu-input-clearer></lu-input-clearer>
 			</lu-select>

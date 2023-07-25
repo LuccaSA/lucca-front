@@ -30,8 +30,10 @@
 			cursor: pointer;
 
 			&::before {
-				@include icon.generate('close');
-				vertical-align: top;
+				@include icon.generate('cross');
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				line-height: .75rem;
 				font-size: .75rem;
 			}

@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.numericBadge {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include s;
+	}
+
+	&.mod-XS {
+		@include xs;
+	}
+}
