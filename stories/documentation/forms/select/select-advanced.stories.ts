@@ -19,7 +19,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 						<ng-template ngPluralCase="0"></ng-template>
 						<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 						<ng-template ngPluralCase="other">
-							<span class="chip mod-unkillable">{{ colors.length }}</span>
+							<span class="numericBadge">{{ colors.length }}</span>
 							couleurs
 						</ng-template>
 					</ng-container>
