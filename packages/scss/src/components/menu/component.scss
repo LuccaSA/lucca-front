@@ -22,7 +22,7 @@
 		}
 	}
 
-	.label {
+	.label { // deprecated
 		margin-right: 0;
 		background-color: var(--palettes-grey-100);
 		color: var(--palettes-grey-700);
@@ -77,7 +77,7 @@
 						color: var(--palettes-grey-900);
 					}
 
-					.label {
+					.label { // deprecated
 						background-color: var(--palettes-100, var(--palettes-primary-100));
 						color: var(--palettes-700, var(--palettes-primary-700));
 					}

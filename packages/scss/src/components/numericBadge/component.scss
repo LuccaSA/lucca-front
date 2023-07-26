@@ -1,0 +1,17 @@
+@mixin component {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--components-numericBadge-size);
+	min-width: var(--components-numericBadge-size);
+	padding: var(--spacings-XXS);
+	font-size: var(--components-numericBadge-fontSize);
+	line-height: var(--components-numericBadge-lineHeight);
+	font-weight: 600;
+	background-color: var(--components-numericBadge-background);
+	color: var(--components-numericBadge-color);
+	border-radius: var(--components-numericBadge-borderRadius);
+	transition-property: background-color, color;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-timing-function: ease;
+}

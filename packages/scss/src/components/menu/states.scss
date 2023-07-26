@@ -1,7 +1,7 @@
 @mixin active {
 	color: var(--palettes-700, var(--palettes-primary-700));
 
-	.label {
+	.label { // deprecated
 		background-color: var(--palettes-100, var(--palettes-primary-100));
 		color: var(--palettes-700, var(--palettes-primary-700));
 	}
@@ -16,12 +16,22 @@
 			transform: scale(0.75, 1);
 		}
 	}
+
+	.numericBadge {
+		--components-numericBadge-background: var(--palettes-primary-200);
+		--components-numericBadge-color: var(--palettes-primary-800);
+	}
 }
 
 @mixin disabled {
 	&,
-	.label {
+	.label { // deprecated
 		color: var(--palettes-grey-500);
 		pointer-events: none;
+	}
+
+	.numericBadge {
+		--components-numericBadge-background: var(--palettes-grey-200);
+		--components-numericBadge-color: var(--palettes-grey-500);
 	}
 }

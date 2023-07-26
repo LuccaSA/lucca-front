@@ -10,7 +10,7 @@
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
 	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="chip mod-unkillable">{{ values.length }}</span> {{ intl.departments }}</span
+		><span class="numericBadge">{{ values.length }}</span> {{ intl.departments }}</span
 	>
 	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
 </ng-template>

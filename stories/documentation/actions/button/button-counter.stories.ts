@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: ButtonCounterStory): string {
 	return `
-	<button type="button" class="button mod-counter">Bouton<span class="button-counter">7</span></button>
+	<button type="button" class="button">Bouton<div class="numericBadge palette-primary">7</div></button>
 	`;
 }
 
