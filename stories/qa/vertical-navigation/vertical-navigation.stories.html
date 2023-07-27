@@ -1,0 +1,81 @@
+<h1 class="demo-divider">Vertical navigation</h1>
+
+<!-- Basics -->
+<section class="contentSection">
+	<nav class="verticalNavigation">
+		<ul class="verticalNavigation-list">
+			<li class="verticalNavigation-list-item" aria-expanded="false">
+				<a href="#" class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></a>
+				<ul class="verticalNavigation-list mod-child">
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+				</ul>
+			</li>
+			<li class="verticalNavigation-list-item" aria-expanded="true">
+				<a href="#" class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></a>
+				<ul class="verticalNavigation-list mod-child">
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link" aria-current="page">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link" disabled tabindex="-1">Item</a>
+					</li>
+				</ul>
+			</li>
+			<li class="verticalNavigation-list-item" aria-expanded="false">
+				<a href="#" class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></a>
+			</li>
+			<li class="verticalNavigation-list-item" aria-expanded="false">
+				<a href="#" class="verticalNavigation-list-item-link" disabled tabindex="-1">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<section class="contentSection">
+	<nav class="verticalNavigation">
+		<ul class="verticalNavigation-list">
+			<li class="verticalNavigation-list-item" aria-expanded="false">
+				<button class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+				<ul class="verticalNavigation-list mod-child">
+					<li class="verticalNavigation-list-item">
+						<button class="verticalNavigation-list-item-link">Item</button>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<button class="verticalNavigation-list-item-link">Item</button>
+					</li>
+				</ul>
+			</li>
+			<li class="verticalNavigation-list-item" aria-expanded="true">
+				<button class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+				<ul class="verticalNavigation-list mod-child">
+					<li class="verticalNavigation-list-item">
+						<button class="verticalNavigation-list-item-link">Item</button>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<button class="verticalNavigation-list-item-link" aria-current="page">Item</button>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<button class="verticalNavigation-list-item-link" disabled>Item</button>
+					</li>
+				</ul>
+			</li>
+			<li class="verticalNavigation-list-item" aria-expanded="false">
+				<button class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+			</li>
+			<li class="verticalNavigation-list-item" aria-expanded="false">
+				<button class="verticalNavigation-list-item-link" disabled>Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

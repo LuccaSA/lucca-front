@@ -1,0 +1,28 @@
+@use 'exports' as *;
+
+.vertical-navigation {
+	@include vars;
+	@include component;
+}
+
+.verticalNavigation-list {
+	&.mod-child {
+		@include child;
+	}
+}
+
+.verticalNavigation-list-item {
+	&[aria-expanded="true"] {
+		@include expanded;
+	}
+}
+
+.verticalNavigation-list-item-link {
+	&[aria-current="page"] {
+		@include active;
+	}
+
+	&[disabled] {
+		@include disabled;
+	}
+}
