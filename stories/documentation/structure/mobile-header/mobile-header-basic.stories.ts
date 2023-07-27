@@ -16,9 +16,8 @@ export default {
 
 function getTemplate(args: MobileHeaderBasicStory): string {
 	const largeTitle = args.largeTitle ? `mod-largeTitle` : '';
-	return `
-	<div class="mobileHeader ${largeTitle}">
-		<a href="#" class="link">Text link</a>
+	return `<div class="mobileHeader ${largeTitle}">
+		<a href="#" class="link mod-decorationHover">Text link</a>
 		<div class="mobileHeader-title">
 			<h1 class="mobileHeader-title-main">Title</h1>
 			<div class="mobileHeader-title-sub">Subtitle</div>
@@ -33,8 +32,7 @@ function getTemplate(args: MobileHeaderBasicStory): string {
 			  <span class="u-mask">Action</span>
 			</button>
 		</div>
-	</div>
-	`;
+	</div>`;
 }
 
 const Template: Story<MobileHeaderBasicStory> = (args: MobileHeaderBasicStory) => ({
