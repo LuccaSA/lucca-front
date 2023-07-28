@@ -11,13 +11,11 @@
 	}
 }
 
-.verticalNavigation-list-item {
+.verticalNavigation-list-item-link {
 	&[aria-expanded="true"] {
 		@include expanded;
 	}
-}
 
-.verticalNavigation-list-item-link {
 	&[aria-current="page"] {
 		@include active;
 	}

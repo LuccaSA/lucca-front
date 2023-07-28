@@ -21,9 +21,9 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 	const disabledLinkTabIndex = args.disabled ? `tabindex="-1"` : '';
 	return `<nav class="verticalNavigation">
 	<ul class="verticalNavigation-list">
-		<li class="verticalNavigation-list-item" aria-expanded="false" aria-controls="childList1">
-			<button class="verticalNavigation-list-item-link" ${disabled}>Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
-			<ul class="verticalNavigation-list mod-child" id="childList1">
+		<li class="verticalNavigation-list-item">
+			<button class="verticalNavigation-list-item-link" aria-expanded="false" ${disabled}>Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+			<ul class="verticalNavigation-list mod-child">
 				<li class="verticalNavigation-list-item">
 					<a href="#" class="verticalNavigation-list-item-link">Item</a>
 				</li>
@@ -32,9 +32,9 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 				</li>
 			</ul>
 		</li>
-		<li class="verticalNavigation-list-item" aria-expanded="true" aria-controls="childList2">
-			<button class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
-			<ul class="verticalNavigation-list mod-child" id="childList2">
+		<li class="verticalNavigation-list-item">
+			<button class="verticalNavigation-list-item-link" aria-expanded="true">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+			<ul class="verticalNavigation-list mod-child">
 				<li class="verticalNavigation-list-item">
 					<a href="#" class="verticalNavigation-list-item-link ${disabledLink}" ${disabledLinkTabIndex}>Item</a>
 				</li>
@@ -45,6 +45,7 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 		</li>
 	</ul>
 </nav>`;
+
 }
 
 const Template: Story<VerticalNavigationBasicStory> = (args: VerticalNavigationBasicStory) => ({
