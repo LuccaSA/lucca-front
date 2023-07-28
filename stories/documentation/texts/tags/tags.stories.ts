@@ -42,9 +42,7 @@ function getTemplate(args: TagsBasicStory): string {
 	const clickable = args.clickable ? `mod-clickable` : '';
 	const outlined = args.outlined ? `mod-outlined` : '';
 	const l = args.l ? `mod-L` : '';
-	return `
-		<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>
-	`;
+	return `<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>`;
 }
 
 const Template: Story<TagsBasicStory> = (args: TagsBasicStory) => ({

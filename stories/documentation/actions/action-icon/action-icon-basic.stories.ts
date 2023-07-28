@@ -47,13 +47,10 @@ function getTemplate(args: ActionBasicStory): string {
 		tooltip = 'Supprimer';
 	}
 
-	return `
-	<button type="button" class="actionIcon ${classes} ${loading}" luTooltip="Modifier" ${attributes}>
-		<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
-		<span class="u-mask">Modifier</span>
-	</button>
-
-	`;
+	return `<button type="button" class="actionIcon ${classes} ${loading}" luTooltip="Modifier" ${attributes}>
+	<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
+	<span class="u-mask">Modifier</span>
+</button>`;
 }
 
 const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
