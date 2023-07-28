@@ -19,9 +19,9 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 	const disabled = args.disabled ? `disabled tabindex="-1"` : '';
 	return `<nav class="verticalNavigation">
 	<ul class="verticalNavigation-list">
-		<li class="verticalNavigation-list-item" aria-expanded="false">
+		<li class="verticalNavigation-list-item" aria-expanded="false" aria-controls="childList1">
 			<a href="#" class="verticalNavigation-list-item-link" ${disabled}>Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></a>
-			<ul class="verticalNavigation-list mod-child">
+			<ul class="verticalNavigation-list mod-child" id="childList1">
 				<li class="verticalNavigation-list-item">
 					<a href="#" class="verticalNavigation-list-item-link">Item</a>
 				</li>
@@ -30,9 +30,9 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 				</li>
 			</ul>
 		</li>
-		<li class="verticalNavigation-list-item" aria-expanded="true">
+		<li class="verticalNavigation-list-item" aria-expanded="true" aria-controls="childList2">
 			<a href="#" class="verticalNavigation-list-item-link">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></a>
-			<ul class="verticalNavigation-list mod-child">
+			<ul class="verticalNavigation-list mod-child" id="childList2">
 				<li class="verticalNavigation-list-item">
 					<a href="#" class="verticalNavigation-list-item-link" ${disabled}>Item</a>
 				</li>
