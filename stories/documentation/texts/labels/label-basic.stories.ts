@@ -26,10 +26,8 @@ export default {
 
 function getTemplate(args: LabelBasicStory): string {
 	const classes = [args.palette, args.size].filter(Boolean).join(' ');
-	return `
-		<span class="label ${classes}">Label</span>
-		<span class="label ${classes} mod-number">7</span>
-	`;
+	return `<span class="label ${classes}">Label</span>
+<span class="label ${classes} mod-number">7</span>`;
 }
 
 const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({

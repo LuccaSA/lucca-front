@@ -19,9 +19,9 @@ function getTemplate(args: TextCodeStory): string {
 	const block = args.block ? `mod-block` : '';
 	return `Lorem
 <code class="code ${block}">ipsum
-dolor sit</code>
-amet
-	`;
+dolor
+sit</code>
+amet`;
 }
 
 const Template: Story<TextCodeStory> = (args: TextCodeStory) => ({
