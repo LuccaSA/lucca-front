@@ -22,7 +22,7 @@
 		@include active;
 	}
 
-	&[disabled] {
+	&[disabled], &.is-disabled {
 		@include disabled;
 	}
 }
