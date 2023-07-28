@@ -82,6 +82,7 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/titleSection';
 @forward '@lucca-front/scss/src/components/toast';
 @forward '@lucca-front/scss/src/components/util';
+@forward '@lucca-front/scss/src/components/verticalNavigation';
 ```
 Then comment unused components to reduce LF’s distribution size and compilation time.
 

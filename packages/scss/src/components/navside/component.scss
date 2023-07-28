@@ -107,7 +107,11 @@
 			font-weight: 600;
 		}
 
-		.navSide-item-alert {
+		.numericBadge {
+			margin-left: auto;
+		}
+
+		.navSide-item-alert { // deprecated
 			font-size: var(--sizes-XS-fontSize);
 			font-weight: 600;
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
@@ -179,7 +183,7 @@
 				}
 			}
 
-			.navSide-item-alert {
+			.navSide-item-alert { // deprecated
 				background-color: var(--components-navSide-bottom-section-palette-alert-color);
 				color: var(--components-navSide-bottom-section-palette-alert-text);
 			}

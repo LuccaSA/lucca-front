@@ -5,7 +5,7 @@
 	margin-bottom: var(--spacings-S);
 
 	// suffix here
-	font-weight: 600 #{$suffix};
+	font-weight: var(--components-title-weight, 600) #{$suffix};
 	font-size: var(--sizes-fontSize) #{$suffix};
 	line-height: var(--sizes-lineHeight) #{$suffix};
 	padding-top: var(--sizes-verticalPadding) #{$suffix};
