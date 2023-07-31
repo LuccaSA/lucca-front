@@ -51,6 +51,7 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/file';
 @forward '@lucca-front/scss/src/components/filters';
 @forward '@lucca-front/scss/src/components/form';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/gauge';
 @forward '@lucca-front/scss/src/components/grid';
 @forward '@lucca-front/scss/src/components/header';
