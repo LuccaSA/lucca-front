@@ -4,7 +4,15 @@
 	@include vars;
 	@include component;
 
-	// &.mod-L {
-	// 	@include l;
-	// }
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.is-error {
+		@include error;
+	}
 }
