@@ -4,17 +4,17 @@
   color: var(--components-formLabel-color);
   display: inline-block;
 
+  .lucca-icon {
+    color: var(--palettes-grey-600);
+    font-size: var(--components-formLabel-mandatory-fontSize);
+    line-height: var(--components-formLabel-mandatory-lineHeight);
+    margin-left: .125rem;
+    vertical-align: top;
+  }
+
 	@at-root ($atRoot) {
     .formLabel-mandatory {
       color: var(--palettes-error-700);
-    }
-
-    .lucca-icon {
-      color: var(--palettes-grey-600);
-      font-size: var(--components-formLabel-mandatory-fontSize);
-      line-height: var(--components-formLabel-mandatory-lineHeight);
-      margin-left: .125rem;
-      vertical-align: top;
     }
   }
 }
