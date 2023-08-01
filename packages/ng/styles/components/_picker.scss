@@ -5,7 +5,6 @@
 .lu-picker-content {
 	@extend %popover-content;
 
-	width: calc(var(--components-calendar-width) + var(--spacings-XS) * 2);
 	max-height: 17.5rem;
 	padding: var(--spacings-XS);
 	overflow-y: auto;
