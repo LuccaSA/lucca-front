@@ -1,8 +1,8 @@
 @mixin component($atRoot: 'without: rule') {
-  font-size: var(--components-formLabel-fontSize);
-  line-height: var(--components-formLabel-lineHeight);
   color: var(--components-formLabel-color);
   display: inline-block;
+  font-size: var(--components-formLabel-fontSize);
+  line-height: var(--components-formLabel-lineHeight);
 
   .lucca-icon {
     color: var(--palettes-grey-600);
