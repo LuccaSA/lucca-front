@@ -6,7 +6,7 @@
   --components-inlineMessage-icon-color: var(--palettes-warning-700);
 }
 
-@mixin critical {
+@mixin error {
   --components-inlineMessage-icon-color: var(--palettes-error-700);
   --components-inlineMessage-color: var(--palettes-error-700);
 }

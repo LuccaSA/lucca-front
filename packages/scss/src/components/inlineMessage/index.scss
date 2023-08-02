@@ -16,7 +16,7 @@
 		@include warning
 	}
 
-	&.is-critical {
-		@include critical
+	&.is-error {
+		@include error
 	}
 }
