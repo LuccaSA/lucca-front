@@ -23,9 +23,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: FormLabelBasicStory): string {
-	const size = args.size ? args.size : '';
-	const error = args.error ? `is-error` : '';
-	return `<label class="formLabel ${size} ${error}">Text<span class="formLabel-mandatory">*</span><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span></label>`;
+	const size = args.size ? ` ${args.size}` : '';
+	const error = args.error ? ` is-error` : '';
+	return `<label class="formLabel${size}${error}">Text<span class="formLabel-mandatory">*</span><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span></label>`;
 }
 
 const Template: Story<FormLabelBasicStory> = (args: FormLabelBasicStory) => ({
