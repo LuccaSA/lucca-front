@@ -1,7 +1,7 @@
 @mixin S {
-	--component-checkboxField-label-input-size: 0.75rem;
+	--component-checkboxField-label-input-size: 1rem;
 	--component-checkboxField-label-input-borderRadius: var(--commons-borderRadius-M);
-	--component-checkboxField-label-input-icon-fontSize: var(--sizes-L-fontSize);
+	--component-checkboxField-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
 	--component-checkboxField-label-fontSize: var(--sizes-S-fontSize);
 	--component-checkboxField-label-lineHeight: var(--sizes-S-lineHeight);
 	--component-checkboxField-message-fontSize: var(--sizes-XS-fontSize);
