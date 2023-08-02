@@ -5,7 +5,7 @@
 	@include component;
 
 	&.mod-S {
-		@include s;
+		@include S;
 	}
 
 	&.palette-primary:not([disabled]) {
