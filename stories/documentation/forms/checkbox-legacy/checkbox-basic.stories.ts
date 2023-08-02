@@ -8,7 +8,7 @@ interface CheckboxBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Checkboxes/Basic',
+	title: 'Documentation/Forms/Checkbox Legacy/Basic',
 	argTypes: {
 		s: {
 			description: 'Taille : Small',

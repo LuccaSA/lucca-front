@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface CheckboxFieldBasicStory {
+interface CheckboxBasicStory {
 	disabled: boolean;
 	s: boolean;
 	required: boolean;
@@ -14,7 +14,7 @@ interface CheckboxFieldBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/CheckboxField/Basic',
+	title: 'Documentation/Forms/Checkbox/Basic',
 	argTypes: {
 		s: {
 			description: 'Taille : Small',
@@ -71,7 +71,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: CheckboxFieldBasicStory): string {
+function getTemplate(args: CheckboxBasicStory): string {
 	const id = args.id;
 	const label = args.label;
 	const message = args.message;
@@ -112,7 +112,7 @@ function getTemplate(args: CheckboxFieldBasicStory): string {
 	`;
 }
 
-const Template: Story<CheckboxFieldBasicStory> = (args: CheckboxFieldBasicStory) => ({
+const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

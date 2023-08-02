@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface CheckboxIncompleteStory {}
 
 export default {
-	title: 'Documentation/Forms/Checkboxes/Incomplete',
+	title: 'Documentation/Forms/Checkbox Legacy/Incomplete',
 	argTypes: {},
 } as Meta;
 
