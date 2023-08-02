@@ -68,17 +68,6 @@
 			}
 		}
 
-		.checkboxField-label-text {
-			font-size: var(--component-checkboxField-label-fontSize);
-			line-height: var(--component-checkboxField-label-lineHeight);
-			width: fit-content;
-			cursor: pointer;
-		}
-
-		.checkboxField-label-text-required {
-			color: var(--palettes-error-700);
-		}
-
 		.checkboxField-message {
 			grid-column: 2;
 			color: var(--palettes-grey-700);
@@ -104,6 +93,10 @@
 
 		.checkboxField-input {
 			@include a11y.mask;
+		}
+
+		.formLabel {
+			cursor: pointer;
 		}
 	}
 }

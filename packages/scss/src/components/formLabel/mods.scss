@@ -1,13 +1,13 @@
 @mixin S {
   --components-formLabel-fontSize: var(--sizes-S-fontSize);
   --components-formLabel-lineHeight: var(--sizes-S-lineHeight);
-  --components-formLabel-mandatory-fontSize: var(--sizes-XS-lineHeight);
-  --components-formLabel-mandatory-lineHeight: var(--sizes-S-lineHeight);
+  --components-formLabel-required-fontSize: var(--sizes-XS-lineHeight);
+  --components-formLabel-required-lineHeight: var(--sizes-S-lineHeight);
 }
 
 @mixin XS {
   --components-formLabel-fontSize: var(--sizes-XS-fontSize);
   --components-formLabel-lineHeight: var(--sizes-XS-lineHeight);
-  --components-formLabel-mandatory-fontSize: .75rem;
-  --components-formLabel-mandatory-lineHeight: var(--sizes-XS-lineHeight);
+  --components-formLabel-required-fontSize: .75rem;
+  --components-formLabel-required-lineHeight: var(--sizes-XS-lineHeight);
 }

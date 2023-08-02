@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 
@@ -98,9 +99,12 @@
 			border-color: var(--palettes-grey-500);
 		}
 
-		.checkboxField-label-text,
 		.checkboxField-label-input {
 			cursor: default;
+		}
+
+		.formLabel {
+			@include formLabel.disabled;
 		}
 	}
 }
@@ -119,6 +123,10 @@
 	~ .checkboxField-label {
 		.checkboxField-label-input {
 			border-color: var(--palettes-error-700);
+		}
+
+		.formLabel {
+			@include formLabel.error;
 		}
 	}
 }

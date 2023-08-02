@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+
 @mixin S {
 	--component-checkboxField-label-input-size: 1rem;
 	--component-checkboxField-label-input-borderRadius: var(--commons-borderRadius-M);
@@ -7,6 +9,10 @@
 	--component-checkboxField-message-fontSize: var(--sizes-XS-fontSize);
 	--component-checkboxField-message-lineHeight: var(--sizes-S-lineHeight);
 	--component-checkboxField-message-icon-top: 0.125rem;
+
+	.formLabel {
+		@include formLabel.S;
+	}
 }
 
 @mixin critical {
