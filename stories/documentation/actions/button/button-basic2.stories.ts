@@ -37,11 +37,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonBasic2Story): string {
-	const classes = [args.state, args.palette].filter(Boolean).join(' ');
-	const type = args.type !== '' ? 'type="' + args.type + '"' : '';
 	const block = args.block ? `mod-block` : '';
+	let classes = [args.state, args.palette, block].filter(Boolean).join(' ');
+	classes = classes ? ' ' + classes : classes;
+	const type = args.type !== '' ? ' type="' + args.type + '"' : '';
 
-	return `<button ${type} class="button ${classes} ${block}">Bouton</button>`;
+	return `<button${type} class="button${classes}">Bouton</button>`;
 }
 
 const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
