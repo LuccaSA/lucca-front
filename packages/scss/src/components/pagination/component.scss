@@ -2,7 +2,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	padding: var(--spacings-XS) .75rem;
-	justify-content: end;
+	justify-content: flex-end;
 
 	> *:not(:last-child) {
 		margin-right: var(--spacings-XS);
