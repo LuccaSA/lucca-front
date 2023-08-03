@@ -1,0 +1,229 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+// @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-column-gap: var(--spacings-XS);
+
+	@at-root ($atRoot) {
+		.switchField-label {
+		  display: contents;
+		}
+
+		.switchField-label-input {
+		  width: var(--component-switch-label-input-width);
+		  height: var(--component-switch-label-input-height);
+		  border: 2px solid var(--palettes-grey-500);
+		  border-radius: 9999px;
+		  position: relative;
+		  top: 0.125rem;
+		  color: var(--colors-white-color);
+		  transition-property: color, border-color, background-color;
+		  transition-duration: var(--commons-animations-durations-fast);
+		  background-color: var(--palettes-grey-500);
+		  cursor: pointer;
+
+		  @media (prefers-reduced-motion: reduce) {
+		    transition-property: none;
+		  }
+
+		  &::after {
+		    content: '';
+		    position: absolute;
+		    inset: -2px;
+		    outline-offset: 2px;
+		    border-radius: 9999px;
+		  }
+
+		  &::before {
+		    content: '';
+		    position: absolute;
+		    width: 50%;
+		    aspect-ratio: 1;
+		    background-color: var(--colors-white-color);
+		    border-radius: 50%;
+		    left: 0;
+		    top: 0;
+		    transition-property: left;
+		    transition-duration: var(--commons-animations-durations-fast);
+		    transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+
+		    box-shadow: 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04);
+		  }
+		}
+
+		.switchField-label-input-icon {
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  width: 100%;
+		  height: 100%;
+
+		  &::before,
+		  &::after {
+		    font-weight: 400;
+		    font-size: var(--component-switch-label-input-icon-fontSize);
+		    direction: ltr;
+		    font-family: "Lucca icons";
+		    font-feature-settings: "liga";
+		    font-style: normal;
+		    letter-spacing: normal;
+		    line-height: 1;
+		    text-transform: none;
+		    white-space: nowrap;
+		    word-wrap: normal;
+		    content: "\e97d";
+		    width: 50%;
+		    aspect-ratio: 1;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		  }
+
+		  &::after {
+		    content: "\e981";
+		  }
+		}
+
+		.formLabel {
+		  grid-column: 2;
+		}
+
+		.switchField-input {
+			@include a11y.mask;
+
+		  &:checked {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        background-color: var(--palettes-primary-700);
+		        border-color: var(--palettes-primary-700);
+
+		        &::before {
+		          left: 50%;
+		        }
+		      }
+		    }
+
+		    &:hover {
+		      ~ .switchField-label {
+		        .switchField-label-input {
+		          background-color: var(--palettes-primary-600);
+		          border-color: var(--palettes-primary-600);
+		        }
+		      }
+		    }
+
+		    &:active {
+		      ~ .switchField-label {
+		        .switchField-label-input {
+		          background-color: var(--palettes-primary-800);
+		          border-color: var(--palettes-primary-800);
+		        }
+		      }
+		    }
+
+		    &:disabled {
+		      ~ .switchField-label {
+		        .switchField-label-input {
+		          background-color: var(--palettes-grey-100);
+		          border-color: var(--palettes-grey-100);
+		          color: var(--palettes-grey-500);
+
+		          &::before {
+		            background-color: var(--palettes-grey-500);
+		          }
+		        }
+		      }
+		    }
+		  }
+
+		  &:focus-visible {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        &::after {
+		          outline: 2px solid var(--palettes-primary-700);
+		        }
+		      }
+		    }
+		  }
+
+		  &:hover {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        border-color: var(--palettes-grey-400);
+		        background-color: var(--palettes-grey-400);
+		      }
+		    }
+		  }
+
+		  &:active {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        border-color: var(--palettes-grey-600);
+		        background-color: var(--palettes-grey-600);
+		      }
+		    }
+		  }
+
+		  &:disabled {
+		    ~ .switchField-label {
+		      color: var(--palettes-grey-500);
+		    }
+
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        background-color: var(--palettes-grey-100);
+		        border-color: var(--palettes-grey-100);
+		        color: var(--palettes-grey-500);
+
+		        &::before {
+		          background-color: var(--palettes-grey-500);
+		        }
+		      }
+
+		      .switchField-label-input {
+		        cursor: default;
+		      }
+		    }
+		  }
+
+		  &[aria-invalid="true"] {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        background-color: var(--palettes-error-700);
+		        border-color: var(--palettes-error-700);
+		      }
+		    }
+
+		    &:checked {
+		      ~ .switchField-label {
+		        .switchField-label-input {
+		          background-color: var(--palettes-error-700);
+		          border-color: var(--palettes-error-700);
+		        }
+		      }
+		    }
+
+		    &:hover {
+		      ~ .switchField-label {
+		        .switchField-label-input {
+		          background-color: var(--palettes-error-600);
+		          border-color: var(--palettes-error-600);
+		        }
+		      }
+		    }
+
+		    &:active {
+		      ~ .switchField-label {
+		        .switchField-label-input {
+		          background-color: var(--palettes-error-800);
+		          border-color: var(--palettes-error-800);
+		        }
+		      }
+		    }
+		  }
+		}
+	}
+}

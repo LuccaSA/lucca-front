@@ -1,0 +1,28 @@
+<section class="contentSection">
+	<h1>Switch field</h1>
+
+	<h2>Basic</h2>
+	<div class="switchField">
+    <input type="checkbox"
+           class="switchField-input"
+           id="field1"
+           aria-labelledby="field1Label"
+           aria-describedby="field1Msg"
+           required="required"
+           checked="checked"
+           />
+    <label class="switchField-label" for="field1">
+      <span class="switchField-label-input">
+        <span class="switchField-label-input-icon" aria-hidden="true"></span>
+      </span>
+			<span class="formLabel" id="field1Label">
+				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
+    </label>
+		<div class="inlineMessage" id="field1Msg">Helper text</div>
+
+  </div>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

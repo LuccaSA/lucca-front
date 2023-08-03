@@ -1,0 +1,17 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+
+@mixin S {
+		--component-switch-label-input-height: 1rem;
+	 --component-switch-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
+	 --component-switch-label-fontSize: var(--sizes-S-fontSize);
+	 --component-switch-label-lineHeight: var(--sizes-S-lineHeight);
+
+	.formLabel {
+		@include formLabel.S;
+	}
+
+	.inlineMessage {
+		@include inlineMessage.S;
+	}
+}
