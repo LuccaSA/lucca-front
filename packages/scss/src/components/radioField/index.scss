@@ -16,6 +16,10 @@
 
 	&:disabled {
 		@include disabled;
+
+		&:checked {
+			@include checkedDisabled;
+		}
 	}
 
 	&[aria-invalid="true"] {
