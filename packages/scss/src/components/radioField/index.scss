@@ -8,3 +8,9 @@
 		@include S;
 	}
 }
+
+.radioField-input {
+	&:checked {
+		@include checked;
+	}
+}

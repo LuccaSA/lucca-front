@@ -1,0 +1,50 @@
+@mixin checked {
+  ~ .radioField-label {
+    .radioField-label-input {
+      border-color: var(--palettes-primary-700);
+    }
+
+    .radioField-label-input-icon {
+      transform: scale(1);
+      opacity: 1;
+      transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+    }
+  }
+
+  &:hover {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-primary-600);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-primary-600);
+      }
+    }
+  }
+
+  &:active {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-primary-800);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-primary-800);
+      }
+    }
+  }
+
+  &:disabled {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-grey-500);
+        color: var(--palettes-grey-500);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-grey-500);
+      }
+    }
+  }
+}
