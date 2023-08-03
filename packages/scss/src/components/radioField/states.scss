@@ -1,3 +1,6 @@
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+
 @mixin checked {
   ~ .radioField-label {
     .radioField-label-input {
@@ -52,6 +55,10 @@
 @mixin disabled {
   ~ .radioField-label {
     color: var(--palettes-grey-500);
+
+    .formLabel {
+			@include formLabel.disabled;
+		}
   }
 
   ~ .radioField-label {
@@ -64,12 +71,20 @@
       cursor: default;
     }
   }
+
+  ~ .inlineMessage {
+    @include inlineMessage.disabled;
+  }
 }
 
 @mixin invalid {
   ~ .radioField-label {
     .radioField-label-input {
       border-color: var(--palettes-error-700) !important;
+    }
+
+    .formLabel {
+      @include formLabel.error;
     }
   }
 
