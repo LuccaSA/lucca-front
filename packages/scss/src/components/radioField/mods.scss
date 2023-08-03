@@ -1,0 +1,18 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+
+@mixin S {
+  --component-radio-label-input-size: 1rem;
+  --component-radio-label-input-borderRadius: var(--commons-borderRadius-M);
+  --component-radio-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
+  --component-radio-label-fontSize: var(--sizes-S-fontSize);
+  --component-radio-label-lineHeight: var(--sizes-S-lineHeight);
+
+  .formLabel {
+    @include formLabel.S;
+  }
+
+  .inlineMessage {
+    @include inlineMessage.S;
+  }
+}

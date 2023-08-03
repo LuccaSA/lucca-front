@@ -1,0 +1,7 @@
+@mixin vars {
+  --component-radio-label-input-size: 1.25rem;
+  --component-radio-label-input-borderRadius: 6px;
+  --component-radio-label-input-icon-fontSize: var(--sizes-S-lineHeight);
+  --component-radio-label-fontSize: var(--sizes-M-fontSize);
+  --component-radio-label-lineHeight: var(--sizes-M-lineHeight);
+}
