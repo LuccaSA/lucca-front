@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface SwitchHelperStory {
+interface SwitchLegacyHelperStory {
 	disabled: boolean;
 	inline: boolean;
 	s: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/Switches/Helper',
+	title: 'Documentation/Forms/Switch Legacy/Helper',
 	argTypes: {
 		s: {
 			control: {
@@ -28,7 +28,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: SwitchHelperStory): string {
+function getTemplate(args: SwitchLegacyHelperStory): string {
 	const disabled = args.disabled ? `disabled` : '';
 	const s = args.s ? `mod-S` : '';
 	const inline = args.inline ? `mod-inline` : '';
@@ -44,7 +44,7 @@ function getTemplate(args: SwitchHelperStory): string {
 	`
 }
 
-const Template: Story<SwitchHelperStory> = (args: SwitchHelperStory) => ({
+const Template: Story<SwitchLegacyHelperStory> = (args: SwitchLegacyHelperStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

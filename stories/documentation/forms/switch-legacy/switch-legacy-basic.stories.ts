@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface SwitchBasicStory {
+interface SwitchLegacyBasicStory {
 	disabled: boolean;
 	inline: boolean;
 	s: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/Switches/Basic',
+	title: 'Documentation/Forms/Switch Legacy/Basic',
 	argTypes: {
 		s: {
 			control: {
@@ -28,7 +28,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: SwitchBasicStory): string {
+function getTemplate(args: SwitchLegacyBasicStory): string {
 	const disabled = args.disabled ? `disabled` : '';
 	const s = args.s ? `mod-S` : '';
 	const inline = args.inline ? `mod-inline` : '';
@@ -44,7 +44,7 @@ function getTemplate(args: SwitchBasicStory): string {
 	`;
 }
 
-const Template: Story<SwitchBasicStory> = (args: SwitchBasicStory) => ({
+const Template: Story<SwitchLegacyBasicStory> = (args: SwitchLegacyBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
