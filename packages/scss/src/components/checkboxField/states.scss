@@ -7,7 +7,8 @@
 	~ .checkboxField-label {
 		.checkboxField-label-input-icon {
 			&::before {
-				content: '\e975';
+				content: '\e975'; // Remove when content alternative will have a good support
+				content: '\e975' / '';
 			}
 		}
 	}
