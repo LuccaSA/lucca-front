@@ -13,8 +13,8 @@
 		}
 
 		.radioField-label-input {
-		  width: var(--component-radio-label-input-size);
-		  height: var(--component-radio-label-input-size);
+		  width: var(--component-radioField-label-input-size);
+		  height: var(--component-radioField-label-input-size);
 		  border: 2px solid var(--palettes-grey-700);
 		  border-radius: 50%;
 		  position: relative;
@@ -22,7 +22,7 @@
 		  color: var(--colors-white-color);
 		  transition-property: color, border-color;
 		  transition-duration: var(--commons-animations-durations-fast);
-		  margin: var(--component-radio-label-input-margin);
+		  margin: var(--component-radioField-label-input-margin);
 		  display: flex;
 		  align-items: center;
 		  justify-content: center;
@@ -38,7 +38,7 @@
 		    position: absolute;
 		    inset: -2px;
 		    outline-offset: 2px;
-		    border-radius: var(--component-radio-label-input-borderRadius);
+		    border-radius: var(--component-radioField-label-input-borderRadius);
 		  }
 		}
 
