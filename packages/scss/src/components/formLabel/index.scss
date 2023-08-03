@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.formLabel {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.is-error { // To replace by :has as soon as it is implemented in Firefox to cover usage as legend for checkboxes and radio states.
+		@include error;
+	}
+}

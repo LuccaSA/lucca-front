@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.inlineMessage {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.is-success {
+		@include success
+	}
+
+	&.is-warning {
+		@include warning
+	}
+
+	&.is-error {
+		@include error
+	}
+}

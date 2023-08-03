@@ -1,0 +1,5 @@
+@mixin S {
+	--components-inlineMessage-fontSize: var(--sizes-XS-fontSize);
+	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
+	--components-inlineMessage-icon-fontSize: .75rem;
+}
