@@ -11,3 +11,7 @@
   --components-formLabel-required-fontSize: .75rem;
   --components-formLabel-required-lineHeight: var(--sizes-XS-lineHeight);
 }
+
+@mixin label {
+  cursor: pointer;
+}
