@@ -1,0 +1,20 @@
+@mixin component($atRoot: 'without: rule') {
+  color: var(--components-formLabel-color);
+  display: inline-block;
+  font-size: var(--components-formLabel-fontSize);
+  line-height: var(--components-formLabel-lineHeight);
+
+  .lucca-icon {
+    color: var(--palettes-grey-600);
+    font-size: var(--components-formLabel-mandatory-fontSize);
+    line-height: var(--components-formLabel-mandatory-lineHeight);
+    margin-left: .125rem;
+    vertical-align: top;
+  }
+
+	@at-root ($atRoot) {
+    .formLabel-mandatory {
+      color: var(--palettes-error-700);
+    }
+  }
+}

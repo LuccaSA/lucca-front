@@ -1,0 +1,7 @@
+@mixin vars {
+  --components-formLabel-fontSize: var(--sizes-M-fontSize);
+  --components-formLabel-lineHeight: var(--sizes-M-lineHeight);
+  --components-formLabel-color: var(--palettes-grey-800);
+  --components-formLabel-mandatory-fontSize: var(--sizes-XS-lineHeight);
+  --components-formLabel-mandatory-lineHeight: var(--sizes-M-lineHeight);
+}

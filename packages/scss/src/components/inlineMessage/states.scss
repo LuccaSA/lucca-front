@@ -1,0 +1,12 @@
+@mixin success {
+  --components-inlineMessage-icon-color: var(--palettes-success-700);
+}
+
+@mixin warning {
+  --components-inlineMessage-icon-color: var(--palettes-warning-700);
+}
+
+@mixin error {
+  --components-inlineMessage-icon-color: var(--palettes-error-700);
+  --components-inlineMessage-color: var(--palettes-error-700);
+}
