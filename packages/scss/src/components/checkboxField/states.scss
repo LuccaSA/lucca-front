@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
@@ -89,23 +90,21 @@
 }
 
 @mixin disabled {
-	~ .checkboxField-label,
-	~ .checkboxField-message {
-		color: var(--palettes-grey-500);
-	}
-
 	~ .checkboxField-label {
+		color: var(--palettes-grey-500);
+
 		.checkboxField-label-input {
 			border-color: var(--palettes-grey-500);
-		}
-
-		.checkboxField-label-input {
 			cursor: default;
 		}
 
 		.formLabel {
 			@include formLabel.disabled;
 		}
+	}
+
+	~ .inlineMessage {
+		@include inlineMessage.disabled;
 	}
 }
 

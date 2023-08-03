@@ -10,6 +10,7 @@ interface CheckboxBasicStory {
 	checked: boolean;
 	mixed: false;
 	invalid: false;
+	help: false;
 	messageState: '';
 }
 
@@ -47,6 +48,11 @@ export default {
 				type: 'boolean',
 			},
 		},
+		help: {
+			control: {
+				type: 'boolean',
+			},
+		},
 		id: {
 			control: {
 				type: 'text',
@@ -63,7 +69,7 @@ export default {
 			},
 		},
 		messageState: {
-			options: ['', 'critical', 'warning', 'success'],
+			options: ['', 'error', 'warning', 'success'],
 			control: {
 				type: 'select',
 			},
@@ -81,7 +87,8 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const required = args.required ? `aria-required="true"` : '';
 	const mixed = args.mixed ? `aria-checked="mixed"` : '';
 	const invalid = args.invalid ? `aria-invalid="true"` : '';
-	const messageState = 'mod-' + args.messageState;
+	const help = args.help;
+	const messageState = 'is-' + args.messageState;
 
 	return `
 		<div class="checkboxField ${s}">
@@ -101,13 +108,10 @@ function getTemplate(args: CheckboxBasicStory): string {
 					<span class="checkboxField-label-input-icon" aria-hidden="true"></span>
 				</span>
 				<span class="formLabel" id="${id}label">
-					Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+					Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
 				</span>
 			</label>
-			<div class="checkboxField-message ${messageState}" id="${id}message" *ngIf="message">
-				<span class="checkboxField-message-icon" aria-hidden="true"></span>
-				<span class="checkboxField-message-text">${message}</span>
-			</div>
+			<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
 		</div>
 	`;
 }
@@ -118,4 +122,4 @@ const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, disabled: false, checked: false, required: false, id: 'field1', label: 'Label', message: 'Message', mixed: false, invalid: false, messageState: '' };
+Basic.args = { checked: false, s: false, disabled: false, required: false, mixed: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };

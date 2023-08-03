@@ -68,35 +68,16 @@
 			}
 		}
 
-		.checkboxField-message {
-			grid-column: 2;
-			color: var(--palettes-grey-700);
-			font-size: var(--component-checkboxField-message-fontSize);
-			line-height: var(--component-checkboxField-message-lineHeight);
-			display: flex;
-		}
-
-		.checkboxField-message-icon {
-			font-weight: 400;
-			direction: ltr;
-			font-family: 'Lucca icons';
-			font-feature-settings: 'liga';
-			font-style: normal;
-			letter-spacing: normal;
-			line-height: 1;
-			text-transform: none;
-			white-space: nowrap;
-			word-wrap: normal;
-			position: relative;
-			top: var(--component-checkboxField-message-icon-top);
-		}
-
 		.checkboxField-input {
 			@include a11y.mask;
 		}
 
 		.formLabel {
 			cursor: pointer;
+		}
+
+		.inlineMessage {
+			grid-column: 2;
 		}
 	}
 }

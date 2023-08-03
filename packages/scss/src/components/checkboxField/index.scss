@@ -9,20 +9,6 @@
 	}
 }
 
-.checkboxField-message {
-	&.mod-critical {
-		@include critical;
-	}
-
-	&.mod-success {
-		@include success;
-	}
-
-	&.mod-warning {
-		@include warning;
-	}
-}
-
 .checkboxField-input {
 	&[aria-checked='mixed'] {
 		@include mixed;
