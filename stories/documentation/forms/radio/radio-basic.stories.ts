@@ -94,7 +94,7 @@ function getTemplate(args: RadioBasicStory): string {
 				${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
 			</span>
     </label>
-		<div class="inlineMessage ${messageState}" id="${id}message"><span class="radioField-message-icon" aria-hidden="true"></span>${message}</div>
+		<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
   </div>
 	`;
 }
