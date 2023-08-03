@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface RadiosHelperStory {
+interface RadioLegacyHelperStory {
 	row: boolean;
 	disabled: boolean;
 	s: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/Radios/Helper',
+	title: 'Documentation/Forms/Radio Legacy/Helper',
 	argTypes: {
 		row: {
 			control: {
@@ -28,7 +28,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: RadiosHelperStory): string {
+function getTemplate(args: RadioLegacyHelperStory): string {
 	const row = args.row ? `mod-row` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	const s = args.s ? `mod-S` : '';
@@ -53,7 +53,7 @@ function getTemplate(args: RadiosHelperStory): string {
 	`
 }
 
-const Template: Story<RadiosHelperStory> = (args: RadiosHelperStory) => ({
+const Template: Story<RadioLegacyHelperStory> = (args: RadioLegacyHelperStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
