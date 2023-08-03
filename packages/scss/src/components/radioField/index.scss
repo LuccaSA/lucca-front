@@ -13,4 +13,16 @@
 	&:checked {
 		@include checked;
 	}
+
+	&:disabled {
+		@include disabled;
+	}
+
+	&[aria-invalid="true"] {
+		@include invalid;
+
+		&:checked {
+			@include checkedInvalid;
+		}
+	}
 }

@@ -61,20 +61,14 @@
 		  }
 		}
 
-
 		.radioField-input {
-			opacity: .5;
 		  @include a11y.mask;
-
-		  &:checked {
-
-		  }
 
 		  &:focus-visible {
 		    ~ .radioField-label {
 		      .radioField-label-input {
 		        &::after {
-		          outline: 2px solid var(--palettes-primary-700);
+		          @include a11y.focusVisible();
 		        }
 		      }
 		    }
@@ -92,64 +86,6 @@
 		    ~ .radioField-label {
 		      .radioField-label-input {
 		        border-color: var(--palettes-grey-800);
-		      }
-		    }
-		  }
-
-		  &:disabled {
-		    ~ .radioField-message,
-		    ~ .radioField-label {
-		      color: var(--palettes-grey-500);
-		    }
-
-		    ~ .radioField-label {
-		      .radioField-label-input {
-		        border-color: var(--palettes-grey-500);
-		      }
-
-		      .radioField-label-input,
-		      .radioField-label-text {
-		        cursor: default;
-		      }
-		    }
-		  }
-
-		  &[aria-invalid="true"] {
-		    ~ .radioField-label {
-		      .radioField-label-input {
-		        border-color: var(--palettes-error-700) !important;
-		      }
-		    }
-
-		    &:checked {
-		      ~ .radioField-label {
-		        .radioField-label-input-icon {
-		          background-color: var(--palettes-error-700);
-		        }
-		      }
-		    }
-
-		    &:hover {
-		      ~ .radioField-label {
-		        .radioField-label-input {
-		          border-color: var(--palettes-error-600);
-		        }
-
-		        .radioField-label-input-icon {
-		          background-color: var(--palettes-error-600);
-		        }
-		      }
-		    }
-
-		    &:active {
-		      ~ .radioField-label {
-		        .radioField-label-input {
-		          border-color: var(--palettes-error-800);
-		        }
-
-		        .radioField-label-input-icon {
-		          background-color: var(--palettes-error-800);
-		        }
 		      }
 		    }
 		  }
