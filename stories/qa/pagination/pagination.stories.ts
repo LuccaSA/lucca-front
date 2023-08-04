@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'pagination-stories',
 	templateUrl: './pagination.stories.html',
-}) class PaginationStory {}
+})
+class PaginationStory {}
 
 export default {
-  title: 'QA/Pagination',
-  component: PaginationStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [PaginationStory]
-		})
-	]
+	title: 'QA/Pagination',
+	component: PaginationStory,
 } as Meta;
 
-const template: Story<PaginationStory> = () => ({});
+const template: StoryFn<PaginationStory> = () => ({});
 
 export const basic = template.bind({});

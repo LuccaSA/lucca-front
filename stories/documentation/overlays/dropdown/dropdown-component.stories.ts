@@ -1,11 +1,13 @@
 import { Component as AngularComponent } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuDropdownModule, LuDropdownPanelComponent } from '@lucca-front/ng/dropdown';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuDropdownModule } from '@lucca-front/ng/dropdown';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @AngularComponent({
 	selector: 'dropdown-component-stories',
 	templateUrl: './dropdown-basic.stories.html',
+	standalone: true,
+	imports: [LuDropdownModule],
 })
 class DropdownComponentStories {
 	constructor() {}
@@ -13,17 +15,11 @@ class DropdownComponentStories {
 
 export default {
 	title: 'Documentation/Overlays/Dropdown/Component',
-	component: LuDropdownPanelComponent,
-	decorators: [
-		componentWrapperDecorator(DropdownComponentStories),
-		moduleMetadata({
-			declarations: [DropdownComponentStories],
-			imports: [BrowserAnimationsModule, LuDropdownModule],
-		}),
-	],
+	component: DropdownComponentStories,
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: Story<DropdownComponentStories> = (args: DropdownComponentStories) => ({
+const Template: StoryFn<DropdownComponentStories> = (args: DropdownComponentStories) => ({
 	props: args,
 });
 

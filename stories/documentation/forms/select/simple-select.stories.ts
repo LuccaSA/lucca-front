@@ -1,9 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 
 interface ILegume {
@@ -301,8 +301,9 @@ const meta: Meta<StoryComponent> = {
 	component: LuSimpleSelectInputComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [FormsModule, HttpClientModule, LuDisplayerDirective, LuOptionDirective, FilterLegumesPipe, LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive, LuDisabledOptionDirective],
+			imports: [FormsModule, LuDisplayerDirective, LuOptionDirective, FilterLegumesPipe, LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive, LuDisabledOptionDirective],
 		}),
+		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	args: {
 		placeholder: 'Placeholder...',

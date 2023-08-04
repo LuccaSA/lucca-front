@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface MenuBasicStory {
 	noBorder: boolean;
@@ -61,7 +61,7 @@ function getTemplate(args: MenuBasicStory): string {
 	`;
 }
 
-const Template: Story<MenuBasicStory> = (args: MenuBasicStory) => ({
+const Template: StoryFn<MenuBasicStory> = (args: MenuBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

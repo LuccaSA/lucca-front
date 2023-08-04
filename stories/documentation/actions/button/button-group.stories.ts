@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonGroupStory {
 	outlined: boolean;
@@ -47,7 +47,7 @@ function getTemplate(args: ButtonGroupStory): string {
 </ul>`;
 }
 
-const Template: Story<ButtonGroupStory> = (args: ButtonGroupStory) => ({
+const Template: StoryFn<ButtonGroupStory> = (args: ButtonGroupStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

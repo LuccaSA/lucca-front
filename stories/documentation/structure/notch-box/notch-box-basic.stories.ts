@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface NotchBoxBasicStory {
 	direction: string;
@@ -38,7 +38,7 @@ function getTemplate(args: NotchBoxBasicStory): string {
 	`;
 }
 
-const Template: Story<NotchBoxBasicStory> = (args: NotchBoxBasicStory) => ({
+const Template: StoryFn<NotchBoxBasicStory> = (args: NotchBoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -15,13 +15,8 @@ class TextfieldsStory {}
 export default {
 	title: 'QA/Forms/Textfields',
 	component: TextfieldsStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [TextfieldsStory],
-		}),
-	],
 } as Meta;
 
-const template: Story<TextfieldsStory> = () => ({});
+const template: StoryFn<TextfieldsStory> = () => ({});
 
 export const basic = template.bind({});

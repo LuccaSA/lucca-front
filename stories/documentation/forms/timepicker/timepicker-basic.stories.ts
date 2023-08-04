@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface timepickerBasicStory {
 	s: boolean;
@@ -57,7 +57,7 @@ function getTemplate(args: timepickerBasicStory): string {
 	`;
 }
 
-const Template: Story<timepickerBasicStory> = (args: timepickerBasicStory) => ({
+const Template: StoryFn<timepickerBasicStory> = (args: timepickerBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

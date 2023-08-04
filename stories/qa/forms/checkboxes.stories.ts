@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'forms-checkboxes-stories',
-	templateUrl: './checkboxes.stories.html'
-}) class CheckboxesStory {}
+	templateUrl: './checkboxes.stories.html',
+})
+class CheckboxesStory {}
 
 export default {
-  title: 'QA/Forms/Checkboxes',
-  component: CheckboxesStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [CheckboxesStory]
-		})
-	]
+	title: 'QA/Forms/Checkboxes',
+	component: CheckboxesStory,
 } as Meta;
 
-const template: Story<CheckboxesStory> = () => ({});
+const template: StoryFn<CheckboxesStory> = () => ({});
 
 export const basic = template.bind({});

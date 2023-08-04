@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TextfieldSearchAndSuffixStory {}
 
@@ -21,7 +21,7 @@ function getTemplate(args: TextfieldSearchAndSuffixStory): string {
 	`;
 }
 
-const Template: Story<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAndSuffixStory) => ({
+const Template: StoryFn<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAndSuffixStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

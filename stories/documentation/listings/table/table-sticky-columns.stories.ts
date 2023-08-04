@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableStickyColumnsStory {}
 
@@ -134,7 +134,7 @@ function getTemplate(args: TableStickyColumnsStory): string {
 	`;
 }
 
-const Template: Story<TableStickyColumnsStory> = (args: TableStickyColumnsStory) => ({
+const Template: StoryFn<TableStickyColumnsStory> = (args: TableStickyColumnsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {overflow: auto;}`],

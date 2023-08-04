@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface LinkBasicStory {
 	disabled: boolean;
@@ -30,7 +30,7 @@ function getTemplate(args: LinkBasicStory): string {
 <a class="link mod-icon ${decorationHover} ${disabled}" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-outside"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
 }
 
-const Template: Story<LinkBasicStory> = (args: LinkBasicStory) => ({
+const Template: StoryFn<LinkBasicStory> = (args: LinkBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

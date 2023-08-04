@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'container-stories',
 	templateUrl: './container.stories.html',
-}) class ContainerStory {}
+})
+class ContainerStory {}
 
 export default {
-  title: 'QA/Container',
-  component: ContainerStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [ContainerStory]
-		})
-	]
+	title: 'QA/Container',
+	component: ContainerStory,
 } as Meta;
 
-const template: Story<ContainerStory> = () => ({});
+const template: StoryFn<ContainerStory> = () => ({});
 
 export const basic = template.bind({});

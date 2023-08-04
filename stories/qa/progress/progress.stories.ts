@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'progress-stories',
 	templateUrl: './progress.stories.html',
-}) class ProgressStory {}
+})
+class ProgressStory {}
 
 export default {
-  title: 'QA/Progress',
-  component: ProgressStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [ProgressStory]
-		})
-	]
+	title: 'QA/Progress',
+	component: ProgressStory,
 } as Meta;
 
-const template: Story<ProgressStory> = () => ({});
+const template: StoryFn<ProgressStory> = () => ({});
 
 export const basic = template.bind({});
