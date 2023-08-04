@@ -6,16 +6,17 @@
 		.textfield-input {
 			min-width: 0;
 			border: 0;
+			box-shadow: 0 0 0 1px var(--palettes-grey-300);
 			line-height: var(--sizes-M-lineHeight);
 			-webkit-appearance: none;
-			background-color: var(--components-textfield-background);
+			background-color: var(--colors-white-color);
 			border-radius: var(--components-textfield-border-radius);
 			padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
 			transition-property: box-shadow, background-color, color;
 			transition-duration: var(--commons-animations-durations-fast);
 
 			&::placeholder {
-				color: var(--palettes-400, var(--components-textfield-input-placeholder));
+				color: var(--palettes-grey-400);
 				transition-property: color;
 				transition-duration: var(--commons-animations-durations-fast);
 				opacity: 1;
@@ -30,6 +31,7 @@
 		}
 
 		.textfield-suffix {
+			color: var(--palettes-grey-600);
 			top: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
 			right: var(--components-textfield-input-padding-horizontal);
 			position: absolute;
@@ -39,7 +41,7 @@
 		}
 
 		.textfield-options {
-			box-shadow: var(--commons-elevations-elevation-3);
+			box-shadow: var(--commons-boxShadow-M);
 			background-color: var(--colors-white-color);
 			border-radius: var(--commons-borderRadius-M);
 			transition-duration: var(--commons-animations-durations-fast);

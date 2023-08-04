@@ -1,0 +1,19 @@
+@mixin clickable {
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-property: background-color;
+	text-decoration: none;
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--palettes-grey-50);
+	}
+}
+
+@mixin S {
+	--components-sortableList-padding: .375rem var(--spacings-XS);
+	--components-sortableList-handler-size: var(--sizes-S-lineHeight);
+	--components-sortableList-description-fontSize: var(--sizes-S-fontSize);
+	--components-sortableList-description-lineHeight: var(--sizes-S-lineHeight);
+	--components-sortableList-helper-fontSize: var(--sizes-XS-fontSize);
+	--components-sortableList-helper-lineHeight: var(--sizes-XS-lineHeight);
+}

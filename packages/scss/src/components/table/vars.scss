@@ -1,8 +1,8 @@
 @mixin vars {
-	--components-table-padding: var(--spacings-XS) var(--spacings-S);
+	--components-table-padding: var(--spacings-XS) .75rem;
 	--components-table-font-size: var(--sizes-M-fontSize);
 	--components-table-line-height: var(--sizes-M-lineHeight);
 	--components-table-zebra-background: #f5f5f5;
-	--components-table-hover-background: var(--palettes-primary-50);
+	--components-table-hover-background: var(--palettes-grey-50);
 	--components-table-card-padding: var(--spacings-M);
 }

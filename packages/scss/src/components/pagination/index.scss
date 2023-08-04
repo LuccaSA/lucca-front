@@ -3,6 +3,10 @@
 .pagination {
 	@include vars;
 	@include component;
+
+	&.mod-compact {
+		@include compact;
+	}
 }
 
 .pagination-navigation-item {

@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: ButtonIconStory): string {
 	return `<button type="button" class="button mod-icon"><span aria-hidden="true" class="lucca-icon icon-save"></span>Sauvegarder</button>
-	<button type="button" class="button mod-icon">Envoyer<span aria-hidden="true" class="lucca-icon icon-send"></span></button>`;
+<button type="button" class="button mod-icon">Envoyer<span aria-hidden="true" class="lucca-icon icon-send"></span></button>`;
 }
 
 const Template: StoryFn<ButtonIconStory> = (args: ButtonIconStory) => ({

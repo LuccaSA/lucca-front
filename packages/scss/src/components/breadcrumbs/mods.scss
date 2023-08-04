@@ -11,13 +11,14 @@
 
 			&:first-child {
 				.breadcrumbs-list-item-action {
-					display: flex;
-					align-items: center;
-
 					&::before {
 						@include icon.generate('format_undo');
 
 						padding-right: var(--spacings-XXS);
+						font-size: var(--sizes-XS-lineHeight);
+						line-height: var(--sizes-S-lineHeight);
+						text-decoration: none;
+						vertical-align: top;
 					}
 				}
 			}

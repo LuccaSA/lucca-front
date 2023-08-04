@@ -8,10 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonDisabledStory): string {
-	return `
-	<button type="button" class="button" disabled>Confirmer</button>
-
-	`;
+	return `<button type="button" class="button" disabled>Confirmer</button>`;
 }
 
 const Template: StoryFn<ButtonDisabledStory> = (args: ButtonDisabledStory) => ({

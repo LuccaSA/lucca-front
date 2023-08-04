@@ -18,10 +18,8 @@
 					content: '';
 					display: flex;
 					flex-grow: 1;
-					height: 2px;
+					border-bottom: 2px solid var(--palettes-grey-200);
 					margin: var(--spacings-XS);
-					background-color: var(--palettes-primary-200);
-					border-radius: 2px;
 				}
 			}
 
@@ -34,8 +32,8 @@
 			padding-left: 1.75rem;
 			position: relative;
 			display: block;
-			color: var(--palettes-primary-600);
-			font-weight: 400;
+			color: var(--palettes-primary-700);
+			font-weight: 600;
 			margin: 0;
 			font-size: var(--sizes-M-fontSize);
 			line-height: var(--sizes-L-lineHeight);
@@ -46,14 +44,14 @@
 		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 			&::before {
 				content: '';
-				color: var(--palettes-primary-800);
+				color: var(--palettes-primary-text);
 				width: 1rem;
 				height: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				border-radius: 50%;
-				background-color: var(--palettes-primary-300);
+				background-color: var(--palettes-primary-700);
 				position: absolute;
 				left: var(--spacings-XXS);
 				top: 50%;

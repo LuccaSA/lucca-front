@@ -1,12 +1,12 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface GridsVerticalAlignmentStory {}
+interface GridsLegacyVerticalAlignmentStory {}
 
 export default {
-	title: 'Documentation/Structure/Grids/Vertical Alignment',
+	title: 'Documentation/Structure/Grids/Legacy/Vertical Alignment',
 } as Meta;
 
-function getTemplate(args: GridsVerticalAlignmentStory): string {
+function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 	return `
 	<div class="grid mod-top@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
@@ -35,7 +35,7 @@ function getTemplate(args: GridsVerticalAlignmentStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsVerticalAlignmentStory> = (args: GridsVerticalAlignmentStory) => ({
+const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args: GridsLegacyVerticalAlignmentStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

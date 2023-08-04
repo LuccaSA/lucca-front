@@ -13,15 +13,12 @@
 	.navSide-item-link {
 		color: var(--components-navSide-compact-palette-text);
 		font-size: var(--components-navSide-compact-font-size);
-		padding: 1em 0.5em;
+		padding: .75rem var(--spacings-XS);
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
 		text-align: center;
-
-		.navSide-item-link-title {
-			margin: 0.8em 0 0;
-		}
+		row-gap: var(--spacings-XXS);
 	}
 
 	.navSide-item-arrow,
@@ -30,11 +27,7 @@
 	}
 
 	.navSide-item-alert {
-		background-color: var(--components-navSide-compact-palette-alert-color);
-		color: var(--components-navSide-compact-palette-alert-text);
-		padding: 0 0.4em;
-		top: 0.625em;
-		margin: 0.166em;
+		margin: auto;
 		position: relative;
 	}
 
@@ -48,7 +41,7 @@
 
 		&::after {
 			margin-left: 0;
-			margin-top: 0.8em;
+			margin-top: .75rem;
 			width: 100%;
 		}
 	}
@@ -82,11 +75,6 @@
 	background-color: var(--components-navSide-compact-palette-selected-bg);
 	color: var(--components-navSide-compact-palette-selected-text);
 	opacity: 1;
-
-	.navSide-item-alert {
-		background-color: var(--components-navSide-compact-palette-selected-alert-color);
-		color: var(--components-navSide-compact-palette-selected-alert-text);
-	}
 }
 
 @mixin banner {

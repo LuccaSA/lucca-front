@@ -35,11 +35,11 @@ function getTemplate(args: SwitchBasicStory): string {
 	return `
 		<label class="switch ${s} ${inline}">
 			<input class="switch-input" type="checkbox" name="switchList1" ${disabled}>
-			<span class="switch-label">switch</span>
+			<span class="switch-label">Label</span>
 		</label>
 		<label class="switch ${s} ${inline}">
 			<input class="switch-input" type="checkbox" name="switchList1" ${disabled} checked>
-			<span class="switch-label">switch</span>
+			<span class="switch-label">Label</span>
 		</label>
 	`;
 }

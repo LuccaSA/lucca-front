@@ -39,7 +39,12 @@
 
 %popover-content {
 	background-color: var(--colors-white-color);
-	box-shadow: var(--commons-elevations-elevation-2);
+	box-shadow: var(--commons-boxShadow-S);
+	border-radius: var(--commons-borderRadius-M);
+
+	&:focus-within {
+		outline: none;
+	}
 }
 
 .lu-popover-panel {
@@ -49,5 +54,5 @@
 .lu-popover-content {
 	@extend %popover-content;
 
-	padding: 1em;
+	padding: var(--spacings-XS) .75rem;
 }

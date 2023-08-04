@@ -30,6 +30,10 @@
 		@include droppable;
 	}
 
+	&:is(.is-uploading, .uploading) {
+		@include uploading;
+	}
+
 	&:is(.is-uploaded, .uploaded) {
 		@include uploaded;
 	}

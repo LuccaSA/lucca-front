@@ -8,14 +8,25 @@
 @mixin S {
 	.radio-label {
 		line-height: var(--sizes-S-lineHeight);
+		min-height: var(--sizes-S-lineHeight);
 		font-size: var(--sizes-S-fontSize);
 		padding: var(--components-radio-S-label-padding);
 
 		&::before,
 		&::after {
-			height: var(--sizes-S-fontSize);
-			width: var(--sizes-S-fontSize);
-			top: var(--components-radio-S-input-top);
+			height: var(--components-radio-S-input-size);
+			width: var(--components-radio-S-input-size);
+		}
+	}
+
+	.radio-label-helper {
+		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--sizes-XS-fontSize);
+	}
+
+	.radio-input:checked ~ .radio-label {
+		&::after {
+			transform: scale(.5);
 		}
 	}
 }

@@ -17,7 +17,11 @@ class UserTileStory {
 export default {
 	title: 'Documentation/Users/Tile/Basic',
 	component: UserTileStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [
+		applicationConfig({
+			providers: [provideAnimations()],
+		}),
+	],
 } as Meta;
 
 const template: StoryFn<LuUserTileComponent> = (args: LuUserTileComponent) => ({

@@ -3,17 +3,17 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface CheckboxBasicStory {
 	row: boolean;
 	disabled: boolean;
-	size: string;
+	s: boolean;
 	required: boolean;
 }
 
 export default {
 	title: 'Documentation/Forms/Checkboxes/Basic',
 	argTypes: {
-		size: {
-			options: ['', 'mod-S', 'mod-L'],
+		s: {
+			description: 'Taille : Small',
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			},
 		},
 		row: {
@@ -36,8 +36,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: CheckboxBasicStory): string {
-	const classes = [args.size].filter(Boolean).join(' ');
 	const row = args.row ? `mod-row` : '';
+	const s = args.s ? `mod-S` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	const required = args.required ? `aria-required="true"` : '';
 	return `
@@ -45,15 +45,15 @@ function getTemplate(args: CheckboxBasicStory): string {
 		<legend class="checkboxesfield-label">Liste de checkboxes</legend>
 		<div class="checkboxesfield-input ${row}">
 			<div>
-				<label class="checkbox ${classes}">
+				<label class="checkbox ${s}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required} checked>
-					<span class="checkbox-label">checkbox</span>
+					<span class="checkbox-label">Label</span>
 				</label>
 			</div>
 			<div>
-				<label class="checkbox ${classes}">
+				<label class="checkbox ${s}">
 					<input class="checkbox-input" type="checkbox" name="checkboxList1" ${disabled} ${required}>
-					<span class="checkbox-label">checkbox</span>
+					<span class="checkbox-label">Label</span>
 				</label>
 			</div>
 		</div>
@@ -67,4 +67,4 @@ const Template: StoryFn<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { size: '', row: false, disabled: false, required: false };
+Basic.args = { s: false, row: false, disabled: false, required: false };

@@ -6,3 +6,11 @@
 		line-height: var(--sizes-XS-lineHeight);
 	}
 }
+
+@mixin decorationHover {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

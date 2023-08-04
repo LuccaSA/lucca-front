@@ -6,61 +6,33 @@ interface GridsBasicStory {
 
 export default {
 	title: 'Documentation/Structure/Grids/Basic',
-	argTypes: {
-		reverse: {
-			control: {
-				type: 'boolean',
-			},
-			description: "Inverse l'ordre des éléments.",
-		},
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: GridsBasicStory): string {
-	const reverse = args.reverse ? `mod-reverse` : '';
-	return `
-	<div class="grid ${reverse}">
-		<div class="grid-6@mediaMinXS">
-			<div class="grid-demo">grid-6@mediaMinXS</div>
-		</div>
-		<div class="grid-6@mediaMinXS">
-			<div class="grid-demo">grid-6@mediaMinXS</div>
-		</div>
-	</div>
+	return `<div class="grid">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+	<div class="grid-column"><div class="demo">5</div></div>
+	<div class="grid-column"><div class="demo">6</div></div>
+	<div class="grid-column"><div class="demo">7</div></div>
+	<div class="grid-column"><div class="demo">8</div></div>
+	<div class="grid-column"><div class="demo">9</div></div>
+	<div class="grid-column"><div class="demo">10</div></div>
+	<div class="grid-column"><div class="demo">11</div></div>
+	<div class="grid-column"><div class="demo">12</div></div>
+</div>
 
-	<div class="grid ${reverse}">
-		<div class="grid-4@mediaMinS">
-			<div class="grid-demo">grid-4@mediaMinS</div>
-		</div>
-		<div class="grid-8@mediaMinS">
-			<div class="grid-demo">grid-8@mediaMinS</div>
-		</div>
-	</div>
-
-	<div class="grid ${reverse}">
-		<div class="grid-7@mediaMinM">
-			<div class="grid-demo">grid-7@mediaMinM</div>
-		</div>
-		<div class="grid-5@mediaMinM">
-			<div class="grid-demo">grid-5@mediaMinM</div>
-		</div>
-	</div>
-
-	<div class="grid ${reverse}">
-		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
-		</div>
-		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
-		</div>
-		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
-		</div>
-		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="grid-demo">grid-3@mediaMinL grid-6@mediaMinM</div>
-		</div>
-	</div>
-	`;
+<div class="grid" style="--grid-columns: 6">
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+</div>`;
 }
 
 const Template: StoryFn<GridsBasicStory> = (args: GridsBasicStory) => ({
@@ -68,14 +40,23 @@ const Template: StoryFn<GridsBasicStory> = (args: GridsBasicStory) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-		.grid-demo {
-			background: #F3F5FC;
-			margin-bottom: var(--spacings-S);
+		.demo {
+			background-color: #F3F5FC;
 			padding: var(--spacings-S);
 			border-radius: 1rem;
-		}`,
+			text-align: center;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.grid + .grid {
+			margin-top: var(--spacings-L);
+		}
+		`,
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { reverse: false };
+Basic.args = {};

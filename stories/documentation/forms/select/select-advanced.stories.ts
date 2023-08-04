@@ -31,7 +31,9 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 						<lu-option-select-all class="u-displayBlock u-marginXS"></lu-option-select-all>
 						<lu-option-pager></lu-option-pager>
 					</header>
-					<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					<div class="lu-picker-content-option">
+						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					</div>
 				</lu-option-picker-advanced>
 				<lu-input-clearer></lu-input-clearer>
 			</lu-select>

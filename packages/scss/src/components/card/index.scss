@@ -14,10 +14,10 @@
 
 	&.mod-elevated {
 		@include elevated;
+	}
 
-		&.mod-clickable {
-			@include clickableElevated;
-		}
+	&.mod-action {
+		@include action;
 	}
 
 	&:is(.is-disabled, .disabled) {

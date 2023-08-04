@@ -5,9 +5,9 @@
 }
 
 @mixin S {
-	padding: var(--spacings-S) var(--spacings-M);
+	padding: var(--spacings-XS) var(--spacings-S);
 	text-align: left;
-	min-height: 4rem;
+	min-height: 0;
 
 	.file-input {
 		// todo: extract state
@@ -19,12 +19,22 @@
 		}
 	}
 
-	.file-name {
-		margin-bottom: 0;
+	.file-content {
+		gap: var(--spacings-XS);
 	}
 
-	.file-or,
+	.file-name {
+		margin-bottom: 0;
+		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
+	}
+
 	.file-formats {
+		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
+	}
+
+	.file-or {
 		@include a11y.mask;
 	}
 
@@ -37,13 +47,15 @@
 	}
 
 	.file-icon {
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-M-lineHeight);
-		margin: 0 var(--spacings-XS) var(--spacings-S) 0;
+		font-size: var(--sizes-S-lineHeight);
+		line-height: var(--sizes-S-lineHeight);
+		margin: 0;
+		align-self: start;
 	}
 
 	.file-title {
-		font-size: var(--sizes-M-fontSize);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 		padding-right: var(--spacings-XS);
 		margin: 0;
 	}

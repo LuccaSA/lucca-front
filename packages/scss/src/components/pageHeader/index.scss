@@ -12,10 +12,6 @@
 		@include breadcrumbs;
 	}
 
-	&.mod-noShadow {
-		@include noShadow;
-	}
-
 	&.mod-sticky {
 		@include sticky;
 	}

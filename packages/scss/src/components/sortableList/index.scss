@@ -1,0 +1,16 @@
+@use 'exports' as *;
+
+.sortableList {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+}
+
+.sortableList-item {
+	&.mod-clickable {
+		@include clickable;
+	}
+}

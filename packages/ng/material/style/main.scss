@@ -4,7 +4,7 @@
 
 // CHANGE DEFAULT FONTS TO LUCCA-FRONT FONTS
 $lucca-front-mat-typography: mat.define-typography-config(
-  $font-family: var(--commons-font-family),
+	$font-family: var(--commons-font-family),
 );
 
 @include mat.all-component-typographies($lucca-front-mat-typography);

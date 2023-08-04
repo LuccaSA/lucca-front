@@ -17,16 +17,8 @@
 	&:is(:checked) {
 		@include checked;
 
-		.switch.mod-S & {
-			@include checkedS;
-		}
-
 		&:hover {
 			@include checkedHover;
-		}
-
-		&:focus {
-			@include checkedFocus
 		}
 
 		&:active {
@@ -38,7 +30,7 @@
 		@include hover;
 	}
 
-	&:is(:focus-within) {
+	&:is(:focus-visible) {
 		@include focus;
 	}
 

@@ -12,10 +12,6 @@
 	}
 }
 
-@mixin noShadow {
-	box-shadow: none;
-}
-
 @mixin sticky {
 	top: var(--commons-banner-height);
 	position: sticky;

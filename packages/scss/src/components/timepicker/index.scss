@@ -4,8 +4,8 @@
 	@include vars;
 	@include component;
 
-	&.mod-outlined {
-		@include outlined;
+	&.mod-S {
+		@include S;
 	}
 
 	&:is(.is-disabled, .disabled, [disabled]) {

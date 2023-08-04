@@ -8,11 +8,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonStyleStory): string {
-	return `
-	<button type="button" class="button">Confirmer</button>
-	<button type="button" class="button mod-outlined">Enregistrer</button>
-	<button type="button" class="button mod-text">Annuler</button>
-	`;
+	return `<button type="button" class="button">Confirmer</button>
+<button type="button" class="button mod-outlined">Enregistrer</button>
+<button type="button" class="button mod-text">Annuler</button>`;
 }
 
 const Template: StoryFn<ButtonStyleStory> = (args: ButtonStyleStory) => ({

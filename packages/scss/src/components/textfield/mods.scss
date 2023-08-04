@@ -23,40 +23,57 @@
 
 @mixin clearable {
 	.textfield-input {
-		padding-right: 3rem;
+		padding-right: 2rem;
 	}
 
-	.textfield-actionClear {
+	.textfield-clear {
+		position: absolute;
+		bottom: .75rem;
+		right: var(--spacings-XS);
+	}
+
+	.textfield-actionClear { // deprecated
 		text-align: center;
 		position: absolute;
-		bottom: .5rem;
+		bottom: .75rem;
 		right: var(--spacings-XS);
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 1rem;
+		height: 1rem;
 		padding: 0;
 		line-height: 0;
-	}
+		background-color: var(--palettes-grey-700);
+		border-radius: 50%;
 
-	&:not(.mod-outlined) {
-		.textfield-actionClear {
-			color: var(--palettes-700, var(--palettes-primary-700));
+		.lucca-icon {
+			font-size: var(--sizes-XS-lineHeight);
+			color: white;
+		}
 
-			&:hover {
-				background: var(--palettes-100, var(--palettes-primary-100));
-			}
+		&:hover {
+			background-color: var(--palettes-grey-600) !important;
 		}
 	}
 }
 
 @mixin clearableS {
-	.textfield-actionClear {
+	.textfield-clear {
+		bottom: var(--spacings-XXS);
+		right: var(--spacings-XXS);
+	}
+
+	.textfield-actionClear { // deprecated
 		bottom: var(--spacings-XXS);
 		right: var(--spacings-XXS);
 	}
 }
 
 @mixin clearableXS {
-	.textfield-actionClear {
+	.textfield-clear {
+		bottom: var(--spacings-XXS);
+		right: var(--spacings-XXS);
+	}
+
+	.textfield-actionClear { // deprecated
 		bottom: var(--spacings-XXS);
 		right: var(--spacings-XXS);
 		height: 1rem;
@@ -81,9 +98,15 @@
 }
 
 @mixin S {
-	.textfield-input {
-		line-height: var(--sizes-XS-lineHeight);
+	.textfield-label {
+		line-height: var(--sizes-S-lineHeight);
 		font-size: var(--sizes-S-fontSize);
+	}
+
+	.textfield-input {
+		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--sizes-S-fontSize);
+		padding: .375rem;
 	}
 
 	.textfield-suffix {
@@ -97,11 +120,15 @@
 }
 
 @mixin XS {
+	.textfield-label {
+		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--sizes-XS-fontSize);
+	}
+
 	.textfield-input {
 		line-height: var(--sizes-XS-lineHeight);
 		font-size: var(--sizes-XS-fontSize);
-		padding-bottom: var(--spacings-XXS);
-		padding-top: var(--spacings-XXS);
+		padding: var(--spacings-XXS);
 	}
 
 	.textfield-suffix {
@@ -111,6 +138,16 @@
 
 		.lucca-icon {
 			font-size: calc(var(--sizes-XS-fontSize) * 1.25);
+		}
+	}
+
+	.textfield-messages {
+		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
+
+		.lucca-icon {
+			font-size: .75rem;
+			line-height: var(--sizes-XS-lineHeight);
 		}
 	}
 }
@@ -152,26 +189,7 @@
 	}
 }
 
-@mixin white {
-	.textfield-input {
-		background-color: var(--colors-white-color);
-		box-shadow: 0 0 0 1px var(--palettes-500, var(--palettes-primary-500)) inset;
-
-		&::placeholder {
-			color: var(--palettes-300, var(--components-textfield-focus-placeholder));
-		}
-	}
-}
-
 @mixin invert {
-	.textfield-input {
-		background-color: var(--colors-white-color);
-
-		&::placeholder {
-			color: var(--palettes-300, var(--components-textfield-focus-placeholder));
-		}
-	}
-
 	.textfield-label {
 		color: var(--colors-white-color);
 	}
@@ -179,7 +197,15 @@
 
 @mixin materialSearchBlockClearableInput {
 	.textfield-input {
-		padding-right: 3rem;
+		padding-right: 3.75rem;
+	}
+
+	.textfield-clear {
+		right: 2rem;
+	}
+
+	.textfield-actionClear { // deprecated
+		right: 2rem;
 	}
 }
 
@@ -187,13 +213,13 @@
 	&::after {
 		@include icon.generate('search');
 
-		color: var(--palettes-primary-600);
+		color: var(--palettes-grey-600);
 		position: absolute;
 		pointer-events: none;
 		bottom: var(--spacings-XS);
-		font-size: var(--sizes-S-lineHeight);
+		font-size: var(--sizes-M-lineHeight);
 		line-height: var(--sizes-M-lineHeight);
-		right: 0.33rem;
+		right: var(--spacings-XS);
 	}
 
 	.textfield-input {
@@ -207,32 +233,51 @@
 	}
 }
 
-@mixin outlinedSearch {
-	&::after {
-		color: var(--palettes-grey-600);
-	}
-}
-
 @mixin searchClearable {
 	.textfield-input {
-		padding-right: 3rem;
+		padding-right: 4rem;
 	}
 
-	.textfield-actionClear {
-		right: 1.5rem;
+	.textfield-clear {
+		right: 2.5rem;
+	}
+
+	.textfield-actionClear { // deprecated
+		right: 2.5rem;
 	}
 }
 
 @mixin searchS {
 	&::after {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-lineHeight);
+		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--sizes-S-lineHeight);
+		bottom: .375rem;
+		right: .375rem;
 	}
 }
 
 @mixin searchClearableS {
-	.textfield-actionClear {
-		right: 1.5rem;
+	.textfield-input {
+		padding-right: 3.5rem;
+	}
+
+	.textfield-clear {
+		--components-clear-size: .75rem;
+		--components-clear-icon-size: .75rem;
+
+		right: 2.125rem;
+		bottom: .625rem;
+	}
+
+	.textfield-actionClear { // deprecated
+		right: 2.125rem;
+		bottom: .625rem;
+		width: .75rem;
+		height: .75rem;
+
+		.lucca-icon {
+			font-size: .75rem;
+		}
 	}
 }
 
@@ -241,12 +286,32 @@
 		line-height: var(--sizes-XS-lineHeight);
 		font-size: var(--sizes-XS-lineHeight);
 		bottom: var(--spacings-XXS);
+		right: var(--spacings-XXS);
 	}
 }
 
 @mixin searchClearableXS {
-	.textfield-actionClear {
-		right: 1.25rem;
+	.textfield-input {
+		padding-right: 3rem;
+	}
+
+	.textfield-clear {
+		--components-clear-size: .75rem;
+		--components-clear-icon-size: .75rem;
+
+		right: 1.75rem;
+		bottom: .375rem;
+	}
+
+	.textfield-actionClear { // deprecated
+		right: 1.75rem;
+		bottom: .375rem;
+		width: .75rem;
+		height: .75rem;
+
+		.lucca-icon {
+			font-size: .75rem;
+		}
 	}
 }
 
@@ -273,8 +338,10 @@
 
 	.textfield-label {
 		color: var(--palettes-grey-600);
-		font-weight: 400;
 		left: var(--spacings-S);
+		font-size: var(--sizes-S-fontSize);
+		font-weight: 400;
+		line-height: var(--sizes-S-lineHeight);
 		pointer-events: none;
 		position: absolute;
 		top: var(--spacings-XS);
@@ -283,21 +350,21 @@
 	.textfield-input {
 		background-color: transparent;
 		padding: var(--spacings-S) 2.5rem 0 var(--spacings-S);
-		font-weight: 600;
 		// todo: déplacer dans filters ?
 		height: var(--components-filters-height);
 		border-radius: 0;
+		box-shadow: none;
 
 		&::after {
 			bottom: var(--spacings-XS);
-			color: var(--palettes-primary-500);
+			color: var(--palettes-grey-600);
 			font-weight: 400;
 		}
 	}
 }
 
 @mixin suffixIcon {
-	color: var(--palettes-primary-500);
+	color: var(--palettes-grey-600);
 	line-height: var(--sizes-M-lineHeight);
 }
 
@@ -357,6 +424,7 @@
 		padding: var(--components-field-framed-top-padding) var(--components-field-framed-side-padding)
 			var(--components-field-framed-bottom-padding);
 		line-height: var(--sizes-M-lineHeight);
+		outline: none;
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 			background-color: var(--colors-white-color);
@@ -371,6 +439,8 @@
 		top: 0;
 		z-index: 10;
 		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--sizes-S-fontSize);
+		color: var(--palettes-grey-600);
 	}
 
 	.textfield-messages,
@@ -554,16 +624,5 @@
 
 	.textfield-input {
 		padding-right: var(--spacings-M);
-	}
-}
-
-@mixin outlined {
-	.textfield-input {
-		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--components-textfield-outlined-border-default-color);
-		background-color: var(--colors-white-color);
-
-		&::placeholder {
-			color: var(--palettes-grey-400);
-		}
 	}
 }

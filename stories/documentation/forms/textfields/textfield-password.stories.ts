@@ -11,7 +11,7 @@ function getTemplate(args: TextfieldPasswordStory): string {
 	return `
 		<label class="textfield mod-password">
 			<input class="textfield-input" type="password" placeholder="placeholder" value="azerty12345#@!%;" />
-			<span class="textfield-label">Password label</span>
+			<span class="textfield-label">Label</span>
 			<span class="textfield-suffix">
 				<a
 					href="#"
@@ -28,7 +28,7 @@ function getTemplate(args: TextfieldPasswordStory): string {
 		</label>
 		<label class="textfield mod-password">
 			<input class="textfield-input" type="text" placeholder="placeholder" value="azerty12345#@!%;" />
-			<span class="textfield-label">Password label</span>
+			<span class="textfield-label">Label</span>
 			<span class="textfield-suffix">
 				<a
 				  href="#"

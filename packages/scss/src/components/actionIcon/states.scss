@@ -6,18 +6,16 @@
 	cursor: default;
 }
 
-@mixin outlinedDisabled {
-	box-shadow: 0 0 0 1px var(--palettes-grey-200);
-}
-
 @mixin loading {
 	pointer-events: none;
 	color: transparent;
 	position: relative;
 	cursor: default;
+	padding: 0;
 
 	@include loading.vars;
 	@include loading.component;
+
 
 	&::before,
 	&::after {

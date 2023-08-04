@@ -1,57 +1,37 @@
 @use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin inputHover {
-	background-color: var(--palettes-100, var(--components-textfield-hover-background));
-
-	&::placeholder {
-		color: var(--palettes-400, var(--components-textfield-hover-placeholder));
-	}
+	box-shadow: 0 0 0 1px var(--palettes-grey-400);
 }
 
 @mixin inputFocus {
-	background-color: var(--colors-white-color);
-	box-shadow: 0 0 0 4px var(--palettes-200, var(--components-textfield-focus-shadow-color)),
-		inset 0 0 0 1px var(--palettes-600, var(--components-textfield-focus-border-color));
-
-	&::placeholder {
-		color: var(--palettes-300, var(--components-textfield-focus-placeholder));
-	}
+	@include a11y.focusVisible($offset: 3px);
 }
 
 @mixin inputDisabled {
 	background-color: var(--components-textfield-disabled-background);
 	color: var(--components-textfield-disabled-color);
-	box-shadow: none;
+	box-shadow: 0 0 0 1px var(--palettes-grey-300);
 	cursor: default;
 
 	&::placeholder {
 		color: var(--commons-disabled-placeholder);
 	}
 
-	~ .textfield-actionClear {
+	~ .textfield-clear {
+		color: var(--palettes-grey-500) !important;
+		pointer-events: none;
+	}
+
+	~ .textfield-actionClear { // deprecated
 		color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}
 }
 
-@mixin whiteInputFocus {
-	box-shadow: 0 0 0 4px var(--palettes-primary-200), 0 0 0 1px var(--palettes-primary-500) inset;
-
-	&::placeholder {
-		color: var(--palettes-300, var(--components-textfield-focus-placeholder));
-	}
-}
-
-@mixin invertInputFocus {
-	box-shadow: 0 0 0 4px var(--palettes-primary-700), 0 0 0 1px var(--palettes-primary-500) inset;
-
-	&::placeholder {
-		color: var(--palettes-300, var(--components-textfield-focus-placeholder));
-	}
-}
-
 @mixin filterHover {
-	background-color: var(--commons-background-base);
+	background-color: var(--palettes-grey-50);
 }
 
 @mixin open {
@@ -186,6 +166,8 @@
 }
 
 @mixin materialInputFocus {
+	outline: none;
+
 	&::placeholder {
 		opacity: 1;
 	}
@@ -240,58 +222,6 @@
 			color: var(--palettes-#{$state}-700);
 		}
 	}
-}
-
-@mixin outlinedHover {
-	.textfield-input {
-		&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-			box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-400, var(--palettes-grey-400));
-		}
-	}
-}
-
-@mixin outlinedFocus {
-	&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-		background-color: var(--colors-white-color);
-		box-shadow: 0 0 0 4px var(--palettes-200, var(--palettes-primary-200)),
-			inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-600, var(--palettes-primary-600));
-
-		&::placeholder {
-			color: var(--palettes-grey-300);
-		}
-	}
-}
-
-@mixin outlinedError {
-	&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-		background-color: var(--palettes-error-50);
-		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-600);
-	}
-}
-
-@mixin outlinedErrorHover {
-	&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-		background-color: var(--palettes-error-100);
-		box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--palettes-error-600);
-	}
-}
-
-@mixin outlinedErrorFocus {
-	&:not(.is-disabled, .disabled, [disabled], [readonly], .is-readonly, .readonly) {
-		background-color: var(--colors-white-color);
-		box-shadow: 0 0 0 4px var(--palettes-error-200), inset 0 0 0 1px var(--palettes-error-700);
-
-		&::placeholder {
-			color: var(--palettes-error-300);
-		}
-	}
-}
-
-@mixin outlinedInputDisabled {
-	background-color: var(--components-textfield-disabled-background);
-	color: var(--components-textfield-disabled-color);
-	box-shadow: inset 0 0 0 var(--components-textfield-outlined-border-width) var(--components-textfield-outlined-border-default-color);
-	cursor: default;
 }
 
 @mixin entryHover {

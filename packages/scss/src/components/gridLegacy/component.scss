@@ -1,0 +1,34 @@
+@use 'sass:math';
+
+@mixin component {
+	display: flex;
+	flex: 0 1 auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: calc(var(--spacings-XS) * -1);
+	margin-right: calc(var(--spacings-XS) * -1);
+}
+
+@mixin column {
+	flex: 0 0 auto;
+	flex-basis: 100%;
+	max-width: 100%;
+	padding-left: var(--spacings-XS);
+	padding-right: var(--spacings-XS);
+	position: relative;
+}
+
+@mixin grow {
+	flex-basis: 0;
+	flex-grow: 1;
+	max-width: 100%;
+}
+
+@mixin basis($i) {
+	flex-basis: math.percentage(math.div($i, 12));
+	max-width: math.percentage(math.div($i, 12));
+}
+
+@mixin offset($i) {
+	margin-left: math.percentage(math.div($i, 12));
+}

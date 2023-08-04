@@ -19,7 +19,11 @@ class UserTileFormatStory {
 export default {
 	title: 'Documentation/Users/Tile/Format',
 	component: UserTileFormatStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [
+		applicationConfig({
+			providers: [provideAnimations()],
+		}),
+	],
 } as Meta;
 
 const template: StoryFn<LuUserTileComponent> = (args: LuUserTileComponent) => ({
