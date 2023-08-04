@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldFilterStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Filter',
+	title: 'Documentation/Forms/Textfield Legacy/Filter',
 	argTypes: {},
 } as Meta;
 

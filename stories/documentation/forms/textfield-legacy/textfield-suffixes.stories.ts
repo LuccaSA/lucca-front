@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldSearchAndSuffixStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Search And Suffix',
+	title: 'Documentation/Forms/Textfield Legacy/Search And Suffix',
 	argTypes: {},
 } as Meta;
 

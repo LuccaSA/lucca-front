@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldRadioStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Radio',
+	title: 'Documentation/Forms/Textfield Legacy/Radio',
 	argTypes: {},
 } as Meta;
 
