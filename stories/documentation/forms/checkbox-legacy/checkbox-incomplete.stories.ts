@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface CheckboxIncompleteStory {}
 
 export default {
-	title: 'Documentation/Forms/Checkboxes/Incomplete',
+	title: 'Documentation/Forms/Checkbox Legacy/Incomplete',
 	argTypes: {},
 } as Meta;
 
@@ -11,7 +11,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 	return `
 		<label class="checkbox">
 			<input class="checkbox-input is-incomplete" type="checkbox" name="checkboxList1" checked>
-			<span class="checkbox-label">checkbox</span>
+			<span class="checkbox-label">Checkbox</span>
 		</label>
 	`;
 }
