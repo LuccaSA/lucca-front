@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
-// @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
@@ -17,7 +16,7 @@
 		.textField-label-prefix {
 			display: flex;
 			align-self: flex-start;
-			color: var(--palettes-grey-600);
+			color: var(--component-textField-input-prefix);
 			cursor: text;
 			line-height: var(--component-textField-input-lineHeight);
 			grid-column: 1;
@@ -27,7 +26,7 @@
 		.textField-label-suffix {
 			display: flex;
 			align-self: flex-start;
-			color: var(--palettes-grey-600);
+			color: var(--component-textField-input-prefix);
 			cursor: text;
 			line-height: var(--component-textField-input-lineHeight);
 			grid-row: 2;
@@ -60,11 +59,11 @@
 
 		.textField-label-input {
 		  grid-column: 1 / span 4;
-		  border: 1px solid var(--palettes-grey-300);
+		  border: 1px solid var(--component-textField-input-border);
 		  grid-row: 2;
 		  pointer-events: none;
 		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
-		  background-color: var(--colors-white-color);
+		  background-color: var(--component-textField-input-background);
 		  transition-property: border-color;
 		  transition-duration: var(--commons-animations-durations-fast);
 		}
@@ -86,154 +85,34 @@
 		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
 		  min-width: var(--spacings-M);
 		  font: inherit;
-		  color: var(--palettes-grey-800);
+		  color: var(--component-textfield-input-color);
 		  background-color: transparent;
 		  z-index: 1;
 		  line-height: var(--component-textField-input-lineHeight);
-
-		  &:is(textarea) {
-		    resize: vertical;
-		    height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
-		    min-height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
-		    max-height: calc(100vh - var(--spacings-XXL));
-
-		    .textField[style*="--component-textField-action-width"] &,
-		    .textField[style*="--component-textField-label-suffix-width"] & {
-		      grid-column-end: -1;
-		      padding-right: calc(var(--component-textField-action-width, 0px) + var(--component-textField-label-suffix-width, 0px) + var(--spacings-XS));
-
-		      // ~ .textField-action {
-		      //   .textField-action-item {
-		      //     position: relative;
-		      //     z-index: 1;
-		      //   }
-		      // }
-
-		      ~ .textField-label {
-		        .textField-label-suffix {
-		          .textField-label-suffix-item {
-		            position: relative;
-		            z-index: 1;
-		          }
-		        }
-		      }
-		    }
-		  }
 
 		  &::selection {
 		    background-color: var(--palettes-primary-200);
 		  }
 
 		  &::placeholder {
-		    color: var(--palettes-grey-400);
+		    color: var(--component-textField-input-placeholder);
 		    opacity: 1;
 		  }
 
 		  &:hover {
 		    ~ .textField-label {
-		      .textField-label-input {
-		        border-color: var(--palettes-grey-400);
-		      }
+					--component-textField-input-border: var(--palettes-grey-400);
 		    }
 		  }
 
 		  &:focus-visible {
 		    ~ .textField-label {
 		      .textField-label-input {
-		        outline: 2px solid var(--palettes-primary-700);
-		        outline-offset: 2px;
-		      }
-		    }
-		  }
-
-		  &[aria-invalid='true'] {
-		    &::placeholder {
-		      color: var(--palettes-error-400);
-		    }
-
-		    ~ .textField-label {
-		      .textField-label-input {
-		        border-color: var(--palettes-error-400);
-		        background-color: var(--palettes-error-50);
-		      }
-
-		      .textField-label-text {
-		        color: var(--palettes-error-700);
-		      }
-		    }
-
-		    &:hover {
-		      ~ .textField-label {
-		        .textField-label-input {
-		          border-color: var(--palettes-error-600);
-		        }
-		      }
-		    }
-		  }
-
-		  &:read-only:not(:disabled) {
-		    padding-top: 0;
-		    padding-bottom: 0;
-		    padding-left: 0;
-		    padding-right: 0;
-
-		    ~ .textField-label {
-		      .textField-label-text {
-		        font-size: var(--sizes-S-fontSize);
-		        line-height: var(--sizes-S-lineHeight);
-		      }
-
-		      .textField-label-input {
-		        border: none;
-		      }
-
-		      .textField-label-prefix-item,
-		      .textField-label-suffix-item {
-		        padding-top: 0;
-		        padding-bottom: 0;
-		      }
-
-		      .textField-label-prefix-item {
-		        padding-left: 0;
-
-		        &:last-child {
-		          padding-right: var(--spacings-XS);
-		        }
-		      }
-
-		      .textField-label-suffix-item {
-		        padding-right: 0;
-
-		        &:first-child {
-		          padding-left: var(--spacings-XS);
-		        }
-		      }
-		    }
-		  }
-
-		  &:disabled {
-		    color: var(--palettes-grey-600);
-
-		    ~ .textField-label {
-		      .textField-label-input {
-		        border-color: var(--palettes-grey-300);
-		        background-color: var(--palettes-grey-100);
-		      }
-
-		      .textField-label-prefix,
-		      .textField-label-suffix {
-		        color: var(--palettes-grey-500);
-		        cursor: default;
-		      }
-
-		      .textField-label-text {
-		        cursor: default;
+		        @include a11y.focusVisible;
 		      }
 		    }
 		  }
 		}
-
-
 
 		.formLabel {
 			@include formLabel.label;

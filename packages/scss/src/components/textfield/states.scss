@@ -1,5 +1,81 @@
-// @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-// @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 // @use '@lucca-front/icons/src/commons/utils/icon';
 // @use '@lucca-front/scss/src/commons/utils/form';
 // @use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin invalid {
+  --component-textField-input-placeholder: var(--palettes-error-400);
+
+  ~ .textField-label {
+    --component-textField-input-border: var(--palettes-error-400);
+    --component-textField-input-background: var(--palettes-error-50);
+
+    .formLabel {
+      @include formLabel.error;
+    }
+  }
+
+  ~ .inlineMessage {
+    @include inlineMessage.error;
+  }
+
+  &:hover {
+    ~ .textField-label {
+      --component-textField-input-border: var(--palettes-grey-600);
+    }
+  }
+}
+
+@mixin disabled {
+  --component-textField-input-color: var(--palettes-grey-600);
+
+  ~ .textField-label {
+    --component-textField-input-border: var(--palettes-grey-300);
+    --component-textField-input-background: var(--palettes-grey-100);
+    --component-textField-input-prefix: var(--palettes-grey-500);
+
+    .textField-label-prefix,
+    .textField-label-suffix,
+    .formLabel {
+      cursor: default;
+    }
+  }
+}
+
+@mixin readonly {
+  padding: 0;
+
+  ~ .textField-label {
+    // .formLabel {
+    //   font-size: var(--sizes-S-fontSize);
+    //   line-height: var(--sizes-S-lineHeight);
+    // }
+
+    .textField-label-input {
+      border: none;
+    }
+
+    .textField-label-prefix-item,
+    .textField-label-suffix-item {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .textField-label-prefix-item {
+      padding-left: 0;
+
+      &:last-child {
+        padding-right: var(--spacings-XS);
+      }
+    }
+
+    .textField-label-suffix-item {
+      padding-right: 0;
+
+      &:first-child {
+        padding-left: var(--spacings-XS);
+      }
+    }
+  }
+}

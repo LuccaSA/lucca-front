@@ -14,5 +14,19 @@
 }
 
 .textField-input {
+	&[aria-invalid='true'] {
+		@include invalid;
+	}
 
+	&:disabled {
+		@include disabled;
+	}
+
+	&:read-only:not(:disabled) {
+		@include readonly;
+	}
+
+	&:is(textarea) {
+		@include textarea;
+	}
 }
