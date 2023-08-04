@@ -22,7 +22,7 @@
 
   &:hover {
     ~ .textField-label {
-      --component-textField-input-border: var(--palettes-grey-600);
+      --component-textField-input-border: var(--palettes-error-600);
     }
   }
 }
