@@ -1,0 +1,122 @@
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+
+@mixin checked {
+  ~ .radioField-label {
+    .radioField-label-input {
+      border-color: var(--palettes-primary-700);
+    }
+
+    .radioField-label-input-icon {
+      transform: scale(1);
+      opacity: 1;
+      transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+    }
+  }
+
+  &:hover {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-primary-600);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-primary-600);
+      }
+    }
+  }
+
+  &:active {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-primary-800);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-primary-800);
+      }
+    }
+  }
+}
+
+@mixin disabled {
+  ~ .radioField-label {
+    color: var(--palettes-grey-500);
+
+    .formLabel {
+			@include formLabel.disabled;
+		}
+  }
+
+  ~ .radioField-label {
+    .radioField-label-input {
+      border-color: var(--palettes-grey-500);
+    }
+
+    .radioField-label-input,
+    .formLabel {
+      cursor: default;
+    }
+  }
+
+  ~ .inlineMessage {
+    @include inlineMessage.disabled;
+  }
+}
+
+@mixin checkedDisabled {
+  ~ .radioField-label {
+    .radioField-label-input {
+      border-color: var(--palettes-grey-500);
+      color: var(--palettes-grey-500);
+    }
+
+    .radioField-label-input-icon {
+      background-color: var(--palettes-grey-500);
+    }
+  }
+}
+
+@mixin invalid {
+  ~ .radioField-label {
+    .radioField-label-input {
+      border-color: var(--palettes-error-700) !important;
+    }
+
+    .formLabel {
+      @include formLabel.error;
+    }
+  }
+
+  &:hover {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-error-600);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-error-600);
+      }
+    }
+  }
+
+  &:active {
+    ~ .radioField-label {
+      .radioField-label-input {
+        border-color: var(--palettes-error-800);
+      }
+
+      .radioField-label-input-icon {
+        background-color: var(--palettes-error-800);
+      }
+    }
+  }
+}
+
+@mixin checkedInvalid {
+  ~ .radioField-label {
+    .radioField-label-input-icon {
+      background-color: var(--palettes-error-700);
+    }
+  }
+}

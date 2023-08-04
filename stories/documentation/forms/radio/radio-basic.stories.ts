@@ -1,15 +1,23 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface RadiosBasicStory {
-	row: boolean;
+interface RadioBasicStory {
 	disabled: boolean;
 	s: boolean;
+	required: boolean;
+	id: Text;
+	label: Text;
+	message: Text;
+	checked: boolean;
+	invalid: false;
+	help: false;
+	messageState: '';
 }
 
 export default {
-	title: 'Documentation/Forms/Radios/Basic',
+	title: 'Documentation/Forms/Radio/Basic',
 	argTypes: {
-		row: {
+		s: {
+			description: 'Taille : Small',
 			control: {
 				type: 'boolean',
 			},
@@ -19,44 +27,82 @@ export default {
 				type: 'boolean',
 			},
 		},
-		s: {
+		checked: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Small',
+		},
+		required: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		invalid: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		help: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		id: {
+			control: {
+				type: 'text',
+			},
+		},
+		label: {
+			control: {
+				type: 'text',
+			},
+		},
+		message: {
+			control: {
+				type: 'text',
+			},
+		},
+		messageState: {
+			options: ['', 'error', 'warning', 'success'],
+			control: {
+				type: 'select',
+			},
 		},
 	},
 } as Meta;
 
-function getTemplate(args: RadiosBasicStory): string {
-	const row = args.row ? `mod-row` : '';
-	const disabled = args.disabled ? `disabled` : '';
+function getTemplate(args: RadioBasicStory): string {
+	const id = args.id;
+	const label = args.label;
+	const message = args.message;
 	const s = args.s ? `mod-S` : '';
+	const disabled = args.disabled ? `disabled="disabled"` : '';
+	const checked = args.checked ? `checked="checked"` : '';
+	const required = args.required ? `aria-required="true"` : '';
+	const invalid = args.invalid ? `aria-invalid="true"` : '';
+	const help = args.help;
+	const messageState = 'is-' + args.messageState;
+
 	return `
-	<fieldset class="radiosfield">
-		<legend class="radiosfield-label">Liste de radios</legend>
-		<div class="radiosfield-input ${row}">
-			<div>
-				<label class="radio ${s}">
-					<input class="radio-input" type="radio" name="radioList1" ${disabled} checked>
-					<span class="radio-label">Label</span>
-				</label>
-			</div>
-			<div>
-				<label class="radio ${s}">
-					<input class="radio-input" type="radio" name="radioList1" ${disabled}>
-					<span class="radio-label">Label</span>
-				</label>
-			</div>
-		</div>
-	</fieldset>
+	<div class="radioField ${s}">
+    <input type="radio" class="radioField-input" id="${id}" name="fieldA" aria-labelledby="${id}Label" aria-describedby="${id}Msg" ${checked} ${disabled} ${required} ${invalid} />
+    <label class="radioField-label" for="${id}">
+      <span class="radioField-label-input">
+        <span class="radioField-label-input-icon" aria-hidden="true"></span>
+      </span>
+			<span class="formLabel" id="${id}label">
+				${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
+			</span>
+    </label>
+		<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
+  </div>
 	`;
 }
 
-const Template: Story<RadiosBasicStory> = (args: RadiosBasicStory) => ({
+const Template: Story<RadioBasicStory> = (args: RadioBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { row: false, disabled: false, s: false };
+Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };

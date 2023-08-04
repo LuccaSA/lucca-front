@@ -3,20 +3,20 @@ import { Story, Meta, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
-	selector: 'forms-radios-stories',
-	templateUrl: './radios.stories.html'
-}) class RadiosStory {}
+	selector: 'forms-radio-stories',
+	templateUrl: './radio.stories.html'
+}) class RadioStory {}
 
 export default {
-  title: 'QA/Forms/Radios',
-  component: RadiosStory,
+  title: 'QA/Forms/Radio',
+  component: RadioStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [RadiosStory]
+			entryComponents: [RadioStory]
 		})
 	]
 } as Meta;
 
-const template: Story<RadiosStory> = () => ({});
+const template: Story<RadioStory> = () => ({});
 
 export const basic = template.bind({});
