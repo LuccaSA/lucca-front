@@ -1,0 +1,36 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin component($atRoot: 'without: rule') {
+	background-color: var(--colors-white-color);
+	padding: var(--spacings-S) var(--spacings-M);
+	display: flex;
+	gap: var(--spacings-S);
+	align-items: center;
+	box-shadow: var(--commons-boxShadow-L);
+
+	@include media.max("XXS") {
+		flex-direction: column;
+	}
+
+	@at-root ($atRoot) {
+		.footer-actions {
+			display: flex;
+			margin-left: auto;
+			gap: var(--spacings-S);
+
+			.button {
+				margin: 0;
+			}
+
+			@include media.max("XXS") {
+				flex-direction: column;
+				margin-left: inherit;
+				width: 100%;
+
+				.button {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
