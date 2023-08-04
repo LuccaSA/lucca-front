@@ -32,13 +32,16 @@
 @forward 'actionIcon'; // 3 Ko
 @forward 'menu'; // 4 Ko
 @forward 'radio'; // 4 Ko
+@forward 'radioField'; // new component for radio
 @forward 'switch'; // 4 Ko
+@forward 'switchField'; // new component for switch
 @forward 'file'; // 5 Ko
 @forward 'toast'; // 5 Ko
 @forward 'layout'; // 5 Ko
 @forward 'radioButtons'; // 5 Ko
 @forward 'table'; // 7 Ko
 @forward 'checkbox'; // 7 Ko
+@forward 'checkboxField'; // new component for checkbox
 @forward 'keyframe'; // 8 Ko
 @forward 'tableSorted'; // 9 Ko
 @forward 'timeline'; // 10 Ko
@@ -57,8 +60,11 @@
 @forward 'timepicker'; //
 @forward 'notchBox';
 @forward 'statusBadge';
+@forward 'mobileHeader';
 @forward 'clear';
+@forward 'newBadge';
 @forward 'inlineMessage';
 @forward 'numericBadge';
 @forward 'mobileNavigation';
+@forward 'footer';
 @forward 'formLabel';

@@ -1,0 +1,18 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+
+@mixin S {
+	--component-switchField-label-input-height: 1rem;
+	--component-switchField-label-input-width: 1.75rem;
+	--component-switchField-label-input-icon-fontSize: .75rem;
+	--component-switchField-label-fontSize: var(--sizes-S-fontSize);
+	--component-switchField-label-lineHeight: var(--sizes-S-lineHeight);
+
+	.formLabel {
+		@include formLabel.S;
+	}
+
+	.inlineMessage {
+		@include inlineMessage.S;
+	}
+}

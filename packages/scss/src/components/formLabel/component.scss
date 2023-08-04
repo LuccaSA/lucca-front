@@ -3,17 +3,18 @@
   display: inline-block;
   font-size: var(--components-formLabel-fontSize);
   line-height: var(--components-formLabel-lineHeight);
+  width: fit-content;
 
   .lucca-icon {
     color: var(--palettes-grey-600);
-    font-size: var(--components-formLabel-mandatory-fontSize);
-    line-height: var(--components-formLabel-mandatory-lineHeight);
+    font-size: var(--components-formLabel-required-fontSize);
+    line-height: var(--components-formLabel-required-lineHeight);
     margin-left: .125rem;
     vertical-align: top;
   }
 
 	@at-root ($atRoot) {
-    .formLabel-mandatory {
+    .formLabel-required {
       color: var(--palettes-error-700);
     }
   }

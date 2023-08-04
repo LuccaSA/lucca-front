@@ -1,0 +1,32 @@
+@use 'exports' as *;
+
+.switchField {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+}
+
+.switchField-input {
+	&:checked {
+		@include checked;
+	}
+
+	&:disabled {
+		@include disabled;
+
+		&:checked {
+			@include checkedDisabled;
+		}
+	}
+
+	&[aria-invalid="true"] {
+		@include invalid;
+
+		&:checked {
+			@include checkedInvalid;
+		}
+	}
+}

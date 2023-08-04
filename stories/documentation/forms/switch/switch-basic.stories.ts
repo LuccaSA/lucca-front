@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface RadioBasicStory {
+interface SwitchBasicStory {
 	disabled: boolean;
 	s: boolean;
 	required: boolean;
@@ -14,7 +14,7 @@ interface RadioBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Radio/Basic',
+	title: 'Documentation/Forms/Switch/Basic',
 	argTypes: {
 		s: {
 			description: 'Taille : Small',
@@ -71,7 +71,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: RadioBasicStory): string {
+function getTemplate(args: SwitchBasicStory): string {
 	const id = args.id;
 	const label = args.label;
 	const message = args.message;
@@ -83,26 +83,24 @@ function getTemplate(args: RadioBasicStory): string {
 	const help = args.help;
 	const messageState = 'is-' + args.messageState;
 
-	return `
-	<div class="radioField ${s}">
-    <input type="radio" class="radioField-input" id="${id}" name="fieldA" aria-labelledby="${id}Label" aria-describedby="${id}Msg" ${checked} ${disabled} ${required} ${invalid} />
-    <label class="radioField-label" for="${id}">
-      <span class="radioField-label-input">
-        <span class="radioField-label-input-icon" aria-hidden="true"></span>
-      </span>
-			<span class="formLabel" id="${id}label">
-				${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
-			</span>
-    </label>
-		<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
-  </div>
-	`;
+	return `<div class="switchField ${s}">
+  <input type="checkbox" class="switchField-input" id="${id}" aria-labelledby="${id}Label" aria-describedby="${id}message" ${checked} ${disabled} ${required} ${invalid} />
+  <label class="switchField-label" for="${id}">
+    <span class="switchField-label-input">
+      <span class="switchField-label-input-icon" aria-hidden="true"></span>
+    </span>
+		<span class="formLabel" id="${id}Label">
+			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		</span>
+  </label>
+	<div class="inlineMessage ${messageState}" *ngIf="message" id="${id}message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+</div>`;
 }
 
-const Template: Story<RadioBasicStory> = (args: RadioBasicStory) => ({
+const Template: Story<SwitchBasicStory> = (args: SwitchBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };
+Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };
