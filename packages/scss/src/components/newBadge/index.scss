@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.newBadge {
+	@include vars;
+	@include component;
+}
