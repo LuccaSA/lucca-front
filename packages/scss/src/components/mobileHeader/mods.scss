@@ -1,0 +1,23 @@
+@mixin largeTitle {
+	flex-wrap: wrap;
+
+	.mobileHeader-actions {
+		margin-left: auto;
+	}
+
+	.mobileHeader-title {
+		order: 2;
+		flex: 100%;
+		text-align: inherit;
+	}
+
+	.mobileHeader-title-main {
+		font-size: var(--sizes-XXL-fontSize);
+		line-height: var(--sizes-XXL-lineHeight);
+	}
+
+	.mobileHeader-title-sub {
+		font-size: var(--sizes-M-fontSize);
+		line-height: var(--sizes-M-lineHeight);
+	}
+}

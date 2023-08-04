@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.mobileHeader {
+	@include vars;
+	@include component;
+
+	&.mod-largeTitle {
+		@include largeTitle;
+	}
+}
