@@ -1,9 +1,41 @@
 <section class="contentSection">
 	<h1>Text field</h1>
 
-	<h2>Basic</h2>
-	<div class="textfield">yo</div>
-	<div class="textField">yo</div>
+	<div class="textField">
+    <input type="text"
+           id="field1"
+           class="textField-input"
+           aria-labelledby="field1prefix field1label field1suffix"
+           aria-describedby="field1message"
+           placeholder="Placeholder"
+           aria-invalid="false"
+           value="Value"
+           />
+    <label for="field1" class="textField-label">
+      <div class="textField-label-input"></div>
+      <span class="textField-label-prefix" id="field1label">
+        <span class="textField-label-prefix-item">$</span>
+      </span>
+			<span class="formLabel" id="field1label">
+				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
+      <span class="textField-label-suffix" id="field1suffix">
+        <span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+      </span>
+    </label>
+    <div class="textField-action">
+
+			<button class="clear">
+			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+				<span class="u-mask">Vider ce champ</span>
+			</button>
+      <!-- <button type="button" class="textField-action-item">
+        <span class="lucca-icon icon-cross" aria-hidden="true"></span>
+        <span class="u-mask">Vider ce champ</span>
+      </button> -->
+    </div>
+		<div class="inlineMessage" id="field1message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+  </div>
 
 </section>
 

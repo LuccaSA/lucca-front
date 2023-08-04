@@ -1,18 +1,250 @@
-// @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 // @use '@lucca-front/icons/src/commons/utils/icon';
-// @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	background: lime;
+	display: grid;
+	grid-gap: var(--spacings-XXS) 0;
+	grid-template-columns: auto 1fr auto auto;
+	font-size: var(--component-textField-label-fontSize);
+	line-height: var(--component-textField-label-lineHeight);
 
 	@at-root ($atRoot) {
+		.textField-label {
+		  display: contents;
+		}
 
-		// .formLabel {
-		// 	@include formLabel.label;
-		// }
-		//
-		// .inlineMessage {
-		// 	grid-column: 2;
-		// }
+		.textField-label-prefix {
+			display: flex;
+			align-self: flex-start;
+			color: var(--palettes-grey-600);
+			cursor: text;
+			line-height: var(--component-textField-input-lineHeight);
+			grid-column: 1;
+ 			grid-row: 2;
+		}
+
+		.textField-label-suffix {
+			display: flex;
+			align-self: flex-start;
+			color: var(--palettes-grey-600);
+			cursor: text;
+			line-height: var(--component-textField-input-lineHeight);
+			grid-row: 2;
+  		grid-column: 3;
+		}
+
+		.textField-label-prefix-item {
+		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+
+		  &::selection {
+		    background-color: var(--palettes-primary-200);
+		  }
+
+			&:last-child {
+		    padding-right: 0;
+		  }
+		}
+
+		.textField-label-suffix-item {
+			padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+
+			&::selection {
+				background-color: var(--palettes-primary-200);
+			}
+
+			&:first-child {
+		    padding-left: 0;
+		  }
+		}
+
+		.textField-label-input {
+		  grid-column: 1 / span 4;
+		  border: 1px solid var(--palettes-grey-300);
+		  grid-row: 2;
+		  pointer-events: none;
+		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
+		  background-color: var(--colors-white-color);
+		  transition-property: border-color;
+		  transition-duration: var(--commons-animations-durations-fast);
+		}
+
+		.textField-action {
+		  display: flex;
+			padding-right: var(--spacings-XS);
+			align-items: center;
+		  grid-row: 2;
+		  grid-column: 4;
+		  color: var(--palettes-grey-600);
+		}
+
+		.textField-input {
+		  grid-column: 2;
+		  grid-row: 2;
+		  border: 0;
+		  outline: none;
+		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+		  min-width: var(--spacings-M);
+		  font: inherit;
+		  color: var(--palettes-grey-800);
+		  background-color: transparent;
+		  z-index: 1;
+		  line-height: var(--component-textField-input-lineHeight);
+
+		  &:is(textarea) {
+		    resize: vertical;
+		    height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
+		    min-height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
+		    max-height: calc(100vh - var(--spacings-XXL));
+
+		    .textField[style*="--component-textField-action-width"] &,
+		    .textField[style*="--component-textField-label-suffix-width"] & {
+		      grid-column-end: -1;
+		      padding-right: calc(var(--component-textField-action-width, 0px) + var(--component-textField-label-suffix-width, 0px) + var(--spacings-XS));
+
+		      // ~ .textField-action {
+		      //   .textField-action-item {
+		      //     position: relative;
+		      //     z-index: 1;
+		      //   }
+		      // }
+
+		      ~ .textField-label {
+		        .textField-label-suffix {
+		          .textField-label-suffix-item {
+		            position: relative;
+		            z-index: 1;
+		          }
+		        }
+		      }
+		    }
+		  }
+
+		  &::selection {
+		    background-color: var(--palettes-primary-200);
+		  }
+
+		  &::placeholder {
+		    color: var(--palettes-grey-400);
+		    opacity: 1;
+		  }
+
+		  &:hover {
+		    ~ .textField-label {
+		      .textField-label-input {
+		        border-color: var(--palettes-grey-400);
+		      }
+		    }
+		  }
+
+		  &:focus-visible {
+		    ~ .textField-label {
+		      .textField-label-input {
+		        outline: 2px solid var(--palettes-primary-700);
+		        outline-offset: 2px;
+		      }
+		    }
+		  }
+
+		  &[aria-invalid='true'] {
+		    &::placeholder {
+		      color: var(--palettes-error-400);
+		    }
+
+		    ~ .textField-label {
+		      .textField-label-input {
+		        border-color: var(--palettes-error-400);
+		        background-color: var(--palettes-error-50);
+		      }
+
+		      .textField-label-text {
+		        color: var(--palettes-error-700);
+		      }
+		    }
+
+		    &:hover {
+		      ~ .textField-label {
+		        .textField-label-input {
+		          border-color: var(--palettes-error-600);
+		        }
+		      }
+		    }
+		  }
+
+		  &:read-only:not(:disabled) {
+		    padding-top: 0;
+		    padding-bottom: 0;
+		    padding-left: 0;
+		    padding-right: 0;
+
+		    ~ .textField-label {
+		      .textField-label-text {
+		        font-size: var(--sizes-S-fontSize);
+		        line-height: var(--sizes-S-lineHeight);
+		      }
+
+		      .textField-label-input {
+		        border: none;
+		      }
+
+		      .textField-label-prefix-item,
+		      .textField-label-suffix-item {
+		        padding-top: 0;
+		        padding-bottom: 0;
+		      }
+
+		      .textField-label-prefix-item {
+		        padding-left: 0;
+
+		        &:last-child {
+		          padding-right: var(--spacings-XS);
+		        }
+		      }
+
+		      .textField-label-suffix-item {
+		        padding-right: 0;
+
+		        &:first-child {
+		          padding-left: var(--spacings-XS);
+		        }
+		      }
+		    }
+		  }
+
+		  &:disabled {
+		    color: var(--palettes-grey-600);
+
+		    ~ .textField-label {
+		      .textField-label-input {
+		        border-color: var(--palettes-grey-300);
+		        background-color: var(--palettes-grey-100);
+		      }
+
+		      .textField-label-prefix,
+		      .textField-label-suffix {
+		        color: var(--palettes-grey-500);
+		        cursor: default;
+		      }
+
+		      .textField-label-text {
+		        cursor: default;
+		      }
+		    }
+		  }
+		}
+
+
+
+		.formLabel {
+			@include formLabel.label;
+			grid-column-start: 1;
+			grid-column-end: -1;
+			grid-row: 1;
+		}
+
+		.inlineMessage {
+			grid-column-start: 1;
+			grid-column-end: -1;
+		}
 	}
 }

@@ -1,3 +1,9 @@
 @mixin vars {
-
+  --component-textField-label-fontSize: var(--sizes-M-fontSize);
+  --component-textField-label-lineHeight: var(--sizes-M-lineHeight);
+  --component-textField-input-paddingVertical: var(--spacings-XS);
+  --component-textField-input-lineHeight: var(--sizes-M-lineHeight);
+  --component-textField-action-icon-fontSize: var(--sizes-S-lineHeight);
+  --component-textField-action-icon-size: calc(var(--spacings-L) + var(--spacings-XS));
+  --component-textField-input-lines: 4;
 }
