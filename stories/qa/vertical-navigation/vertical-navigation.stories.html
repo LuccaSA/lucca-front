@@ -1,0 +1,51 @@
+<h1 class="demo-divider">Vertical navigation</h1>
+
+<!-- Basics -->
+<section class="contentSection">
+	<nav class="verticalNavigation">
+		<ul class="verticalNavigation-list">
+			<li class="verticalNavigation-list-item">
+				<button class="verticalNavigation-list-item-link" aria-expanded="false">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+				<ul class="verticalNavigation-list mod-child" id="childList1">
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+				</ul>
+			</li>
+			<li class="verticalNavigation-list-item">
+				<button class="verticalNavigation-list-item-link" aria-expanded="true">Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+				<ul class="verticalNavigation-list mod-child" id="childList2">
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link" aria-current="page">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link is-disabled" tabindex="-1">Item</a>
+					</li>
+				</ul>
+			</li>
+			<li class="verticalNavigation-list-item">
+				<a href="#" class="verticalNavigation-list-item-link">Item</a>
+			</li>
+			<li class="verticalNavigation-list-item">
+				<button class="verticalNavigation-list-item-link" aria-expanded="false" disabled>Item <span aria-hidden="true" class="lucca-icon icon-southArrow"></span></button>
+				<ul class="verticalNavigation-list mod-child" id="childList1">
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+					<li class="verticalNavigation-list-item">
+						<a href="#" class="verticalNavigation-list-item-link">Item</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
