@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/clear/exports' as clear;
 
 @mixin S {
   --component-textField-label-fontSize: var(--sizes-S-fontSize);
@@ -14,9 +15,9 @@
 		@include formLabel.S;
 	}
 
-	.inlineMessage {
-		@include inlineMessage.S;
-	}
+  .clear {
+    @include clear.S;
+  }
 }
 
 @mixin XS {
@@ -33,6 +34,10 @@
 	}
 
 	.inlineMessage {
-		@include inlineMessage.XS;
+		@include inlineMessage.S;
 	}
+
+  .clear {
+    @include clear.S;
+  }
 }
