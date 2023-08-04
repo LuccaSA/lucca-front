@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldMessagesStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Messages',
+	title: 'Documentation/Forms/Textfield Legacy/Messages',
 	argTypes: {},
 } as Meta;
 

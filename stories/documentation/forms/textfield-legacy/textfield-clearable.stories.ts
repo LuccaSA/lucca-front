@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldClearableStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Clearable',
+	title: 'Documentation/Forms/Textfield Legacy/Clearable',
 	argTypes: {},
 } as Meta;
 

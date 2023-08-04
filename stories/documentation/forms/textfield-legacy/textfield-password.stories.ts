@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldPasswordStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Password',
+	title: 'Documentation/Forms/Textfield Legacy/Password',
 	argTypes: {},
 } as Meta;
 

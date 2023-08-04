@@ -1,0 +1,402 @@
+@use 'exports' as *;
+
+.textfield {
+	@include vars;
+	@include component;
+
+	.textfield-input {
+		&:is([disabled], .is-disabled, .disabled, [readonly], .is-readonly, .readonly) {
+			@include inputDisabled;
+		}
+	}
+
+	&:is(.is-open, .open) {
+		@include open;
+	}
+
+	&.mod-password {
+		@include password;
+
+		.textfield-suffix-action {
+			&:is([aria-pressed='true']) {
+				@include passwordActionPressed;
+			}
+
+			&:is([aria-pressed='false']) {
+				@include passwordActionNotPressed;
+			}
+		}
+	}
+
+	&.mod-search,
+	&.mod-autocomplete {
+		@include search;
+
+		&.mod-clearable {
+			@include searchClearable;
+		}
+
+		&.mod-S {
+			@include searchS;
+
+			&.mod-clearable {
+				@include searchClearableS;
+			}
+		}
+
+		&.mod-XS {
+			@include searchXS;
+
+			&.mod-clearable {
+				@include searchClearableXS;
+			}
+		}
+	}
+
+	&.mod-clearable {
+		@include clearable;
+
+		&.mod-S {
+			@include clearableS;
+		}
+
+		&.mod-XS {
+			@include clearableXS;
+		}
+	}
+
+	&.mod-withSuffix {
+		@include suffix;
+	}
+
+	&.mod-noLabel {
+		@include noLabel;
+
+		&.mod-XS {
+			@include noLabelXS;
+		}
+	}
+
+	&.mod-multiline {
+		@include multiline;
+
+		&.mod-S {
+			@include multilineS;
+		}
+	}
+
+	&.mod-invert {
+		@include invert;
+	}
+
+	&.mod-radio {
+		@include radio;
+	}
+
+	&.mod-filter {
+		@include filter;
+
+		&:is(:hover) {
+			@include filterHover;
+		}
+	}
+
+	&.mod-S {
+		@include S;
+
+		&.textfield-input {
+			&.mod-icon {
+				@include SInputIcon;
+			}
+		}
+	}
+
+	&.mod-XS {
+		@include XS;
+
+		&.textfield-input {
+			&.mod-icon {
+				@include XSInputIcon;
+			}
+		}
+	}
+
+	&.mod-shortest {
+		@include size('shortest');
+	}
+
+	&.mod-shorter {
+		@include size('shorter');
+	}
+
+	&.mod-short {
+		@include size('short');
+	}
+
+	&.mod-default {
+		@include size('default');
+	}
+
+	&.mod-long {
+		@include size('long');
+	}
+
+	&.mod-longer {
+		@include size('longer');
+	}
+
+	&.mod-longest {
+		@include size('longest');
+	}
+
+	&.mod-compact {
+		@include compact;
+
+		&.mod-multiline {
+			@include compactMultiline;
+		}
+
+		&.mod-shortest {
+			@include compactSize('shortest');
+		}
+
+		&.mod-shorter {
+			@include compactSize('shorter');
+		}
+
+		&.mod-short {
+			@include compactSize('short');
+		}
+
+		&.mod-default {
+			@include compactSize('default');
+		}
+
+		&.mod-long {
+			@include compactSize('long');
+		}
+
+		&.mod-longer {
+			@include compactSize('longer');
+		}
+
+		&.mod-longest {
+			@include compactSize('longest');
+		}
+	}
+
+	&.mod-material {
+		@include material;
+
+		&.mod-search {
+			&.mod-block {
+				&.mod-clearable {
+					@include materialSearchBlockClearableInput;
+				}
+			}
+		}
+
+		.textfield-input {
+			&:is(:focus, .is-focused, .focused) {
+				@include materialInputFocus;
+			}
+
+			&:is(.is-filled, .filled) {
+				@include materialInputFilled;
+			}
+
+			&:is([disabled], .is-disabled, .disabled, [readonly], .is-readonly, .readonly) {
+				@include materialInputDisabled;
+			}
+
+			&:is(.is-invalid, .invalid, .is-error, .error) {
+				@include materialInputState('error');
+			}
+
+			&:is(.is-warning, .warning) {
+				@include materialInputState('warning');
+			}
+
+			&:is(.is-success, .success) {
+				@include materialInputState('success');
+			}
+		}
+
+		&.mod-S {
+			@include materialS;
+		}
+
+		&.mod-withSuffix {
+			@include materialSuffix;
+		}
+
+		&.mod-noLabel {
+			@include materialNoLabel;
+		}
+
+		&.mod-search,
+		&.mod-autocomplete {
+			@include materialSearch;
+		}
+
+		&.mod-radio {
+			@include materialRadio;
+		}
+
+		&:is(.is-loading, .loading) {
+			@include materialLoading;
+		}
+
+		&:is(.is-valid, .valid) {
+			@include materialValid;
+		}
+	}
+}
+
+.textfield-input {
+	&:is(:hover) {
+		@include inputHover;
+	}
+
+	&:is(:focus-visible, .is-focused, .focused) {
+		@include inputFocus;
+	}
+}
+
+.textfield-suffix {
+	&.mod-icon {
+		@include suffixIcon;
+	}
+}
+
+.textfield-options-entry {
+	&:is(:hover, .is-focus, .focus) {
+		@include entryHover;
+	}
+}
+
+.textfield.mod-framed,
+.form.mod-framed .textfield {
+	@include framed;
+
+	&.mod-multiline {
+		@include framedMultiline;
+
+		&.mod-S {
+			@include framedMultilineS;
+		}
+	}
+
+	&.mod-search {
+		@include framedSearch;
+	}
+
+	&:is(.is-error, .error) {
+		@include framedState('error');
+
+		&:is(:focus-within, :hover) {
+			@include framedErrorHover;
+		}
+
+		&:is(:hover) {
+			@include framedStateHover('error');
+		}
+
+		&:is(:focus-within) {
+			@include framedStateFocus('error');
+		}
+
+		.textfield-input {
+			&:hover {
+				@include framedStateInputHover('error');
+			}
+
+			&:focus {
+				@include framedStateInputFocus('error');
+			}
+		}
+
+		&.mod-search,
+		&.mod-autocomplete,
+		&.mod-select {
+			@include framedStateSearch('error');
+		}
+	}
+
+	&:is(.is-loading, .loading) {
+		@include framedLoading;
+	}
+
+	&:is(.is-warning, .warning) {
+		@include framedState('warning');
+
+		&:is(:hover) {
+			@include framedStateHover('warning');
+		}
+
+		&:is(:focus-within) {
+			@include framedStateFocus('warning');
+		}
+
+		.textfield-input {
+			&:hover {
+				@include framedStateInputHover('warning');
+			}
+
+			&:focus {
+				@include framedStateInputFocus('warning');
+			}
+		}
+
+		&.mod-search,
+		&.mod-autocomplete,
+		&.mod-select {
+			@include framedStateSearch('warning');
+		}
+	}
+
+	&:is(.is-success, .is-valid, .valid, .success) {
+		@include framedState('success');
+
+		&:is(:hover) {
+			@include framedStateHover('success');
+		}
+
+		&:is(:focus-within) {
+			@include framedStateFocus('success');
+		}
+
+		.textfield-input {
+			&:hover {
+				@include framedStateInputHover('success');
+			}
+
+			&:focus {
+				@include framedStateInputFocus('success');
+			}
+		}
+
+		&.mod-search,
+		&.mod-autocomplete,
+		&.mod-select {
+			@include framedStateSearch('success');
+		}
+	}
+
+	.textfield-input {
+		&:is(:hover) {
+			@include framedInputHover;
+		}
+
+		&:is(:focus) {
+			@include framedInputFocus;
+		}
+
+		&:is(:invalid, .is-invalid, .invalid) {
+			@include framedInputInvalid;
+		}
+
+		&:is(.is-error, .invalid) {
+		}
+	}
+}

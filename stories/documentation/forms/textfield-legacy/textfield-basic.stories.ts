@@ -13,7 +13,7 @@ interface TextfieldBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Textfield/Basic',
+	title: 'Documentation/Forms/Textfield Legacy/Basic',
 	argTypes: {
 		display: {
 			options: ['', 'mod-block', 'mod-inline'],

@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldFeedbackStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Feedback',
+	title: 'Documentation/Forms/Textfield Legacy/Feedback',
 	argTypes: {},
 } as Meta;
 

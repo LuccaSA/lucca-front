@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface TextfieldMultilineStory {}
 
 export default {
-	title: 'Documentation/Forms/Textfield/Multiline',
+	title: 'Documentation/Forms/Textfield Legacy/Multiline',
 	argTypes: {},
 } as Meta;
 
