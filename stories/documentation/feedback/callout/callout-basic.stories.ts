@@ -28,7 +28,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['m', 's'],
+			options: ['M', 'S'],
 			control: {
 				type: 'select',
 			},
@@ -48,7 +48,7 @@ export const Template: StoryObj<CalloutComponent & { description: string }> = {
 		tiny: false,
 		icon: 'info',
 		palette: 'none',
-		size: 'm',
+		size: 'M',
 		removable: false,
 		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
 	},
