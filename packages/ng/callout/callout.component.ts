@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Palette, SizeMS } from '@lucca-front/ng/core';
+import { getIntl, Palette } from '@lucca-front/ng/core';
+import { LU_CALLOUT_TRANSLATIONS } from './callout.translate';
 
 @Component({
 	selector: 'lu-callout',
@@ -28,7 +29,7 @@ export class CalloutComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: SizeMS = 'm';
+	size: 'M' | 'S' = 'M';
 
 	@Input()
 	/**
@@ -62,6 +63,8 @@ export class CalloutComponent {
 	 *
 	 */
 	hidden: EventEmitter<void> = new EventEmitter<void>();
+
+	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 
 	/**
 	 * Emits the hidden event for the consumer to hide the callout.

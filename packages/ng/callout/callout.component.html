@@ -8,5 +8,7 @@
 			<ng-content></ng-content>
 		</div>
 	</div>
-	<button *ngIf="removable" type="button" class="callout-kill" (click)="hide()"></button>
+	<button *ngIf="removable" type="button" class="callout-kill" (click)="hide()">
+		<span class="u-mask">{{ intl.close }}</span>
+	</button>
 </div>
