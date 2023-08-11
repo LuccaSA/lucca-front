@@ -8,7 +8,7 @@ export const luEstablishmentSelectAllTranslations: ILuTranslation<ILuOptionSelec
 	},
 	fr: {
 		select: 'Tout sélectionner',
-		deselect: 'Tout Déselectionner',
+		deselect: 'Tout déselectionner',
 	},
 	de: {
 		select: 'Alle auswählen',
