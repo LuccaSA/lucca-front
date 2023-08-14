@@ -17,7 +17,7 @@
     ],
     "paths": {
       "@lucca-front/ng/*": [
-        "packages/ng/*/src/public-api.ts"
+        "packages/ng/*/public-api.ts"
       ],
       "@/stories/*": [
         "stories/documentation/*"
