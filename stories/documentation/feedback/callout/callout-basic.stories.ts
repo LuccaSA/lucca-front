@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { CalloutComponent } from '@lucca-front/ng/callout';
+import { PaletteArgType } from "../../../helpers/common-arg-types";
 
 export default {
 	title: 'Documentation/Feedback/Callout/Basic',
@@ -15,12 +16,7 @@ export default {
 		};
 	},
 	argTypes: {
-		palette: {
-			options: ['none', 'primary', 'grey', 'success', 'warning', 'error'],
-			control: {
-				type: 'select',
-			},
-		},
+		palette: PaletteArgType,
 		icon: {
 			options: ['info', 'success', 'warning', 'error', 'help'],
 			control: {
