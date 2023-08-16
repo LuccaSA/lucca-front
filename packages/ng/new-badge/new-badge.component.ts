@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './new-badge.component.html',
+	styleUrls: ['./new-badge.component.scss'],
 })
 export class NewBadgeComponent {
 	@Input({ required: true })
