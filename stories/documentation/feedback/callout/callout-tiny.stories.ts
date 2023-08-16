@@ -1,70 +1,52 @@
-import { Meta, Story } from '@storybook/angular';
-
-interface CalloutTinyStory {
-	s: boolean;
-	palette: string;
-	icon: string;
-}
+import { Meta, StoryObj } from '@storybook/angular';
+import { CalloutComponent } from '@lucca-front/ng/callout';
+import { default as BasicStory } from './callout-basic.stories';
 
 export default {
-	title: 'Documentation/Feedback/Callout/Tiny',
-	argTypes: {
-		s: {
-			control: {
-				type: 'boolean',
-			},
-			description: "Taille : Small",
-		},
-		palette: {
-			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
-			control: {
-				type: 'select',
-			},
-		},
-		icon: {
-			options: ['icon-help', 'icon-success', 'icon-warning', 'icon-error'],
-			control: {
-				type: 'select',
-			},
-		},
-	},
+	...BasicStory,
+	title: 'Documentation/Feedback/Callout/Tiny'
 } as Meta;
 
-function getTemplate(args: CalloutTinyStory): string {
-	const s = args.s ? `mod-S` : '';
-	const palette = args.palette;
-	const icon = args.icon;
-	let text: {title: string, description: string};
-	switch (args.palette) {
-		case 'palette-success':
-				text = {title: 'Cool!', description: 'Je suis un callout de succès :)'};
-				break;
-		case 'palette-warning':
-				text = {title: 'Hmmm...', description: 'Je suis un callout d\'alarme :|'};
-				break;
-		case 'palette-error':
-				text = {title: 'Oops!', description: 'Je suis un callout d\'erreur :('};
-				break;
-		default:
-			text = {title: 'Besoin d\'aide ?', description: 'Je suis un callout standard'};
-			break;
-  };
-	return `
-	<div class="callout mod-tiny ${s} ${palette}">
-		<div class="callout-icon">
-			<span aria-hidden="true" class="lucca-icon ${icon}"></span>
-		</div>
-		<div class="callout-content">
-			99
-		</div>
-	</div>
-	`
-}
-
-const Template: Story<CalloutTinyStory> = (args: CalloutTinyStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Tiny = Template.bind({});
-Tiny.args = { s: false, icon: 'icon-help', palette: '' };
+export const Template: StoryObj<CalloutComponent & { description: string }> = {
+	args: {
+		title: '',
+		tiny: true,
+		icon: 'info',
+		palette: 'none',
+		size: 'M',
+		removable: false,
+		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
+	},
+	argTypes: {
+		description: {
+			table: {
+				disable: true
+			}
+		},
+		removable: {
+			table: {
+				disable: true
+			}
+		},
+		title: {
+			table: {
+				disable: true
+			}
+		},
+		size: {
+			table: {
+				disable: true
+			}
+		},
+		icon: {
+			table: {
+				disable: true
+			}
+		},
+		palette: {
+			table: {
+				disable: true
+			}
+		},
+	}
+};
