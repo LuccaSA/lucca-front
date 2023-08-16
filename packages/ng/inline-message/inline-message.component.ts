@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './inline-message.component.html',
-	styleUrls: ['./inline-message.component.scss.css']
+	styleUrls: ['./inline-message.component.scss']
 })
 export class InlineMessageComponent {
 	@Input({ required: true })
