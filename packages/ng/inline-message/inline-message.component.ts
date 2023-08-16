@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [NgIf],
 	templateUrl: './inline-message.component.html',
 	styleUrls: ['./inline-message.component.scss'],
 })
