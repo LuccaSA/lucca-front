@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { default as BasicStory } from './callout-basic.stories';
+import { HiddenArgType } from "../../../helpers/common-arg-types";
 
 export default {
 	...BasicStory,
@@ -18,35 +19,11 @@ export const Template: StoryObj<CalloutComponent & { description: string }> = {
 		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
 	},
 	argTypes: {
-		description: {
-			table: {
-				disable: true
-			}
-		},
-		tiny: {
-			table: {
-				disable: true
-			}
-		},
-		title: {
-			table: {
-				disable: true
-			}
-		},
-		size: {
-			table: {
-				disable: true
-			}
-		},
-		icon: {
-			table: {
-				disable: true
-			}
-		},
-		palette: {
-			table: {
-				disable: true
-			}
-		},
+		description: HiddenArgType,
+		tiny: HiddenArgType,
+		title: HiddenArgType,
+		size: HiddenArgType,
+		icon: HiddenArgType,
+		palette: HiddenArgType,
 	}
 };
