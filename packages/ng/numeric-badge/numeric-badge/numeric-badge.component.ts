@@ -1,6 +1,6 @@
 import { Component, Input, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Palette } from '../../core/type';
+import { Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-numeric-badge',
@@ -25,8 +25,6 @@ export class NumericBadgeComponent {
 	@Input()
 	/**
 	 * The palette to use for this badge. Defaults to 'none' (inherits parent palette)
-	 *
-	 * TODO: use a core "Palette" type instead of string, once callout has been merged
 	 */
 	palette: Palette = 'none';
 }
