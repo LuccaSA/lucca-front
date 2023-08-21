@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Palette } from '../../core/type';
 
 @Component({
 	selector: 'lu-numeric-badge',
@@ -9,7 +10,7 @@ import { CommonModule } from '@angular/common';
 	styleUrls: ['./numeric-badge.component.scss'],
 })
 export class NumericBadgeComponent {
-	@Input({ required: true })
+	@Input({ required: true, transform: numberAttribute })
 	/**
 	 * The value to display, number only.
 	 */
@@ -18,10 +19,8 @@ export class NumericBadgeComponent {
 	@Input()
 	/**
 	 * The size of the badge
-	 * TODO: create core types and use them here instead of this handmade union.
-	 * 	It would also be nice to use uppercase strings directly to match CSS classes
 	 */
-	size: 'xs' | 's' | 'm' = 'm';
+	size: 'XS' | 'S' | 'M' = 'M';
 
 	@Input()
 	/**
@@ -29,5 +28,5 @@ export class NumericBadgeComponent {
 	 *
 	 * TODO: use a core "Palette" type instead of string, once callout has been merged
 	 */
-	palette: string = 'none';
+	palette: Palette = 'none';
 }
