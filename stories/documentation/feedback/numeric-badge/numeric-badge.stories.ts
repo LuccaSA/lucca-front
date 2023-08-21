@@ -22,7 +22,7 @@ export default {
 export const Template: StoryObj<NumericBadgeComponent> = {
 	args: {
 		value: 7,
-		size: 'm',
+		size: 'M',
 		palette: 'none',
 	},
 };
