@@ -4,7 +4,18 @@ const { join } = require('path');
 
 const iconNames = selection.icons
 	.map((icon) => {
-		return icon.properties.ligatures.split(', ');
+		return icon.properties.ligatures.split(', ').map((name) => {
+			// Let's convert snake_case to camelCase for css to be happy with it
+			return name
+				.split('_')
+				.map((word, index) => {
+					if (index === 0) {
+						return word;
+					}
+					return `${word[0].toUpperCase()}${word.slice(1)}`;
+				})
+				.join('');
+		});
 	})
 	.flat();
 
