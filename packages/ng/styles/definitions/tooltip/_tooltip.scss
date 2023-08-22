@@ -12,6 +12,7 @@
 		font-size: var(--sizes-XS-fontSize);
 		line-height: var(--sizes-XS-lineHeight);
 		display: block;
+		text-align: center;
 
 		&.is-above {
 			transform-origin: bottom center;
