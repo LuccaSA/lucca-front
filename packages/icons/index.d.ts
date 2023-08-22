@@ -1,3 +1,8 @@
+/***********************************************
+ ***		THIS FILE IS GENERATED, DO NOT EDIT		***
+ ***		The generator is update-icons.js			***
+ ***********************************************/
+
 export type LuccaIcon =
 	| 'level'
 	| 'teacher'

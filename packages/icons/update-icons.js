@@ -2,6 +2,12 @@ const selection = require('./selection.json');
 const { writeFileSync } = require('fs');
 const { join } = require('path');
 
+const generatedWarning =
+`/***********************************************
+ ***		THIS FILE IS GENERATED, DO NOT EDIT		***
+ ***		The generator is update-icons.js			***
+ ***********************************************/\n\n`
+
 const icons = selection.icons
 	.map((icon) => {
 		return icon.properties.ligatures.split(', ').map((name) => {
@@ -23,17 +29,23 @@ const icons = selection.icons
 	})
 	.flat();
 
-const type = `export type LuccaIcon =\n	| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n	| ')};\n`;
+const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n\t| ')};\n`;
 
 writeFileSync(join(__dirname, './index.d.ts'), type);
 
-const scssConfig = `$font-path: '//cdn.lucca.fr/lucca-front/icons/next/lucca-icons' !default;
+const list = `${generatedWarning}export const IconsList = [\n\t${icons.map((icon) => `'${icon.camelCase}'`).join(',\n\t')},\n];\n`;
+
+writeFileSync(join(__dirname, './icons-list.ts'), list);
+
+const scssConfig = `${generatedWarning}$font-path: '//cdn.lucca.fr/lucca-front/icons/next/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 
 $icons: (
-${icons.map((icon) => {
-	return `\t'${icon.snake_case}': '${icon.code}',`;
-}).join('\n')}
+${icons
+	.map((icon) => {
+		return `\t'${icon.snake_case}': '${icon.code}',`;
+	})
+	.join('\n')}
 ) !default;
 `;
 
