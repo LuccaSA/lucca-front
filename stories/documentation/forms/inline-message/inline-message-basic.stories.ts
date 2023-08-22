@@ -1,30 +1,29 @@
-import { Meta, Story } from '@storybook/angular';
-
-interface InlineMessageBasicStory {
-	s: boolean;
-}
+import { Meta, StoryObj } from '@storybook/angular';
+import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 
 export default {
 	title: 'Documentation/Forms/InlineMessage/Basic',
+	component: InlineMessageComponent,
 	argTypes: {
-		s: {
+		state: {
+			options: ['success', 'warning', 'error', 'default'],
 			control: {
-				type: 'boolean',
+				type: 'select',
 			},
-			description: 'Taille : Small',
+		},
+		size: {
+			options: ['S', 'M'],
+			control: {
+				type: 'select',
+			},
 		},
 	},
 } as Meta;
 
-function getTemplate(args: InlineMessageBasicStory): string {
-	const s = args.s ? `mod-S` : '';
-	return `<div class="inlineMessage ${s}">Inline message</div>`;
-}
-
-const Template: Story<InlineMessageBasicStory> = (args: InlineMessageBasicStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Basic = Template.bind({});
-Basic.args = { s: false };
+export const Template: StoryObj<InlineMessageComponent> = {
+	args: {
+		state: 'success',
+		size: 'M',
+		label: 'Inline message',
+	},
+};
