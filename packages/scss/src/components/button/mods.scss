@@ -24,16 +24,16 @@
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
-			background-color: var(--palettes-50, var(--palettes-grey-50));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
 		}
 
 		&:active {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
+			background-color: var(--palettes-200, var(--palettes-grey-200));
 		}
 	}
 
 	&:focus-visible {
-		background-color: var(--palettes-50, var(--palettes-grey-50));
+		background-color: var(--palettes-100, var(--palettes-grey-100));
 	}
 }
 
@@ -48,11 +48,11 @@
 		background-color: var(--colors-white-color);
 
 		&:hover {
-			background-color: var(--palettes-50, var(--palettes-grey-50));
+			background-color: var(--palettes-100, var(--palettes-grey-100));
 		}
 
 		&:active {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
+			background-color: var(--palettes-200, var(--palettes-grey-200));
 		}
 	}
 
