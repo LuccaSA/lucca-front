@@ -37,7 +37,13 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 		this._placeholder = p;
 	}
 	@Input() hideClearer = false;
-	@Input() startOn: D = this._adapter.forgeToday();
+	protected _startOn: D = this._adapter.forgeToday();
+	@Input() set startOn(s: D) {
+		this._startOn = s ?? this._adapter.forgeToday();
+	}
+	get startOn(): D {
+		return this._startOn;
+	}
 
 	get format(): string {
 		switch (this.granularity) {
