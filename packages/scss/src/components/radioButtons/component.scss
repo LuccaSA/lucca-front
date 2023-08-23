@@ -5,6 +5,7 @@
 
 	@at-root ($atRoot) {
 		.radioButtons-item {
+			position: relative;
 			margin-left: -1px;
 
 			&:first-child {
