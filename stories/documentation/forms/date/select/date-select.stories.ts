@@ -6,11 +6,12 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 
-type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string };
+type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string, secondSelectedDate: string };
 
 const generateStory = getStoryGenerator<StoryComponent>({
 	argTypes: {
 		selectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' } } },
+		secondSelectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' } } },
 		startOn: { control: { type: 'text' } },
 		min: { control: { type: 'text' } },
 		max: { control: { type: 'text' } },
@@ -74,6 +75,33 @@ export const Minimal = generateStory({
 	},
 });
 
+export const DualSelect = generateStory({
+	name: 'Dual select',
+	description: '',
+	template: `
+<label class="textfield">
+	<lu-date-select class="textfield-input"
+		[(ngModel)]="selectedDate"
+		[max]="secondSelectedDate"
+		[placeholder]="secondSelectedDate ? 'max : ' + secondSelectedDate : undefined"
+	></lu-date-select>
+	<span class="textfield-label">Start</span>
+</label>
+<label class="textfield">
+	<lu-date-select class="textfield-input"
+		[(ngModel)]="secondSelectedDate"
+		[min]="selectedDate"
+		[startOn]="selectedDate"
+		[placeholder]="selectedDate ? 'min : ' + selectedDate : undefined"
+	></lu-date-select>
+	<span class="textfield-label">End</span>
+</label>
+	`,
+	neededImports: {
+		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+});
+
 export const SelectWithDisplayer = generateStory({
 	name: 'SelectWithDisplayer',
 	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
@@ -127,6 +155,7 @@ const meta: Meta<StoryComponent> = {
 	args: {
 		granularity: ELuDateGranularity.day,
 		selectedDate: today,
+		secondSelectedDate: today,
 		startOn: today,
 	},
 	parameters: {
