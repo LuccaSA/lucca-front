@@ -86,6 +86,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 	return `
 	<div class="textField ${size}">
 		<input type="text" id="${id}" class="textField-input" aria-labelledby="${id}prefix ${id}label ${id}suffix" aria-describedby="${id}message" placeholder="Placeholder" aria-invalid="false" value="Value" ${disabled} ${required} ${invalid} />
+		<span class="textField-counter">5/24</span>
 		<label for="${id}" class="textField-label">
 			<div class="textField-label-input"></div>
 			<span class="textField-label-prefix" id="${id}label">

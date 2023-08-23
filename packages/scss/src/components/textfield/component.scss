@@ -9,6 +9,7 @@
 	line-height: var(--component-textField-label-lineHeight);
 
 	@at-root ($atRoot) {
+
 		.textField-label {
 		  display: contents;
 		}
@@ -66,6 +67,15 @@
 		  background-color: var(--component-textField-input-background);
 		  transition-property: border-color;
 		  transition-duration: var(--commons-animations-durations-fast);
+		}
+
+		.textField-counter {
+			color: var(--palettes-grey-600);
+			grid-column: 3;
+			grid-row: 1;
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			margin-top: .375rem;
 		}
 
 		.textField-action {
