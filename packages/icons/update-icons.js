@@ -10,13 +10,13 @@ const generatedWarning =
 
 const icons = selection.icons
 	.map((icon) => {
-		return icon.properties.ligatures.split(', ').map((name) => {
+		return icon.properties.name.split(', ').map((name) => {
 			// Let's convert snake_case to camelCase for css to be happy with it
 			return {
-				snake_case: name,
+				snake_case: name.replace(/-/gm, "_"),
 				code: `\\${icon.properties.code.toString(16)}`,
 				camelCase: name
-					.split('_')
+					.split('-')
 					.map((word, index) => {
 						if (index === 0) {
 							return word;
