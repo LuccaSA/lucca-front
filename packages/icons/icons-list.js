@@ -505,8 +505,9 @@ var icons = [
 	'weather_sunny',
 	'weather_sun',
 	'weight',
-	'hotel_briefcase',
+	'office_briefcase',
 	'office_electrical_plug',
+	'sign_close',
 ];
 
 export default icons;
