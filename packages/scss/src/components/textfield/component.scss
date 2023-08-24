@@ -8,6 +8,18 @@
 	font-size: var(--component-textField-label-fontSize);
 	line-height: var(--component-textField-label-lineHeight);
 
+	.formLabel {
+		@include formLabel.label;
+		grid-column-start: 1;
+		grid-column-end: -1;
+		grid-row: 1;
+	}
+
+	.inlineMessage {
+		grid-column-start: 1;
+		grid-column-end: -1;
+	}
+
 	@at-root ($atRoot) {
 		.textField-label {
 		  display: contents;
@@ -112,18 +124,6 @@
 		      }
 		    }
 		  }
-		}
-
-		.formLabel {
-			@include formLabel.label;
-			grid-column-start: 1;
-			grid-column-end: -1;
-			grid-row: 1;
-		}
-
-		.inlineMessage {
-			grid-column-start: 1;
-			grid-column-end: -1;
 		}
 	}
 }
