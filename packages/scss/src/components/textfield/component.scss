@@ -59,7 +59,7 @@
 
 		.textField-label-input {
 		  grid-column: 1 / span 4;
-		  border: 1px solid var(--component-textField-input-border);
+		  box-shadow: 0 0 0 1px var(--component-textField-input-border);
 		  grid-row: 2;
 		  pointer-events: none;
 		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
