@@ -120,7 +120,7 @@
 		  &:focus-visible {
 		    ~ .textField-label {
 		      .textField-label-input {
-		        @include a11y.focusVisible;
+		        @include a11y.focusVisible($offset: 3px);
 		      }
 		    }
 		  }
