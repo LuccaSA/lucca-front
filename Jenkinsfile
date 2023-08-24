@@ -1,4 +1,4 @@
-@Library('Lucca@v0.58.3') _
+@Library('Lucca@v0.62.0') _
 
 import hudson.Util
 import fr.lucca.CI
@@ -68,16 +68,12 @@ node(label: CI.getSelectedNode(script:this)) {
             		archiveElements(e2e: true)
 				}
 
-				if (isPR) {
-					// post PR comment
-					def deployUrl = "https://lucca-front.lucca.tech/${branchName}/storybook"
-					withCredentials([string(credentialsId: 'ux-comment-token', variable: 'githubToken')]) {
-						powershell """
-							[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-							Invoke-RestMethod -Method Post -Headers @{"Authorization"="token ${githubToken}"} -Uri https://api.github.com/repos/LuccaSA/${projectTechnicalName}/issues/${prNumber}/comments -Body (ConvertTo-Json @{"body"=":woman_cook: ${deployUrl}"}) -UseBasicParsing
-						"""
-					}
-				}
+				commentOnPR(
+						credentialsId: 'ux-comment-token',
+						body: ":woman_cook: https://lucca-front.lucca.tech/${branchName}/storybook",
+						repoName: projectTechnicalName,
+						skip: !isPR
+				)
 			}
 
 			if (!isPR) {
