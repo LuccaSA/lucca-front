@@ -6,7 +6,7 @@
 	background-color: white;
 }
 
-// legacy icons are not displayed
+// legacy icons are not displayed by default
 .icon-apps,
 .icon-nineTiles,
 .icon-mosaic,
@@ -507,7 +507,10 @@
 .icon-nineTiles {
 	&,
 	& + code {
-		display: none;
 		opacity: 0.25;
+
+		.showLegacy:not(:checked) ~ .icons & {
+			display: none;
+		}
 	}
 }
