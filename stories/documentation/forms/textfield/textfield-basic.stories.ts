@@ -75,7 +75,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 	const id = args.id;
 	const label = args.label;
 	const message = args.message;
-	const size = args.size ? ' '+args.size : '';
+	const size = args.size ? ' ' + args.size : '';
 	const disabled = args.disabled ? ` disabled="disabled"` : '';
 	const required = args.required ? ` aria-required="true"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
@@ -91,7 +91,9 @@ function getTemplate(args: TextfieldBasicStory): string {
 			<span class="textField-label-prefix-item">$</span>
 		</span>
 		<span class="formLabel" id="${id}label">
-			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			<span class="formLabel-content">
+				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
 		</span>
 		<span class="textField-label-suffix" id="${id}suffix">
 			<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
@@ -113,4 +115,4 @@ const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { size: '', disabled: false, required: false, invalid: false, help: false, clear: false, messageState: '', id: 'fieldID', label: 'Label', message: 'Helper text', };
+Basic.args = { size: '', disabled: false, required: false, invalid: false, help: false, clear: false, messageState: '', id: 'fieldID', label: 'Label', message: 'Helper text' };

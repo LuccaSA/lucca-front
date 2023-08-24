@@ -22,7 +22,7 @@
 
 	@at-root ($atRoot) {
 		.textField-label {
-		  display: contents;
+			display: contents;
 		}
 
 		.textField-label-prefix {
@@ -32,7 +32,7 @@
 			cursor: text;
 			line-height: var(--component-textField-input-lineHeight);
 			grid-column: 1;
- 			grid-row: 2;
+			grid-row: 2;
 		}
 
 		.textField-label-suffix {
@@ -42,19 +42,19 @@
 			cursor: text;
 			line-height: var(--component-textField-input-lineHeight);
 			grid-row: 2;
-  		grid-column: 3;
+			grid-column: 3;
 		}
 
 		.textField-label-prefix-item {
-		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+			padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
 
-		  &::selection {
-		    background-color: var(--palettes-primary-200);
-		  }
+			&::selection {
+				background-color: var(--palettes-primary-200);
+			}
 
 			&:last-child {
-		    padding-right: 0;
-		  }
+				padding-right: 0;
+			}
 		}
 
 		.textField-label-suffix-item {
@@ -65,65 +65,78 @@
 			}
 
 			&:first-child {
-		    padding-left: 0;
-		  }
+				padding-left: 0;
+			}
 		}
 
 		.textField-label-input {
-		  grid-column: 1 / span 4;
-		  box-shadow: 0 0 0 1px var(--component-textField-input-border);
-		  grid-row: 2;
-		  pointer-events: none;
-		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
-		  background-color: var(--component-textField-input-background);
-		  transition-property: border-color;
-		  transition-duration: var(--commons-animations-durations-fast);
+			grid-column: 1 / span 4;
+			box-shadow: 0 0 0 1px var(--component-textField-input-border);
+			grid-row: 2;
+			pointer-events: none;
+			border-radius: calc(var(--commons-borderRadius-M) + 1px);
+			background-color: var(--component-textField-input-background);
+			transition-property: box-shadow;
+			transition-duration: var(--commons-animations-durations-fast);
 		}
 
 		.textField-action {
-		  display: flex;
+			display: flex;
 			padding-right: var(--spacings-XS);
 			align-items: center;
-		  grid-row: 2;
-		  grid-column: 4;
-		  color: var(--palettes-grey-600);
+			grid-row: 2;
+			grid-column: 4;
+			color: var(--palettes-grey-600);
 		}
 
 		.textField-input {
-		  grid-column: 2;
-		  grid-row: 2;
-		  border: 0;
-		  outline: none;
-		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
-		  min-width: var(--spacings-M);
-		  font: inherit;
-		  color: var(--component-textField-input-color);
-		  background-color: transparent;
-		  z-index: 1;
-		  line-height: var(--component-textField-input-lineHeight);
+			grid-column: 2;
+			grid-row: 2;
+			border: 0;
+			outline: none;
+			padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+			min-width: var(--spacings-M);
+			font: inherit;
+			color: var(--component-textField-input-color);
+			background-color: transparent;
+			z-index: 1;
+			line-height: var(--component-textField-input-lineHeight);
 
-		  &::selection {
-		    background-color: var(--palettes-primary-200);
-		  }
+			&::selection {
+				background-color: var(--palettes-primary-200);
+			}
 
-		  &::placeholder {
-		    color: var(--component-textField-input-placeholder);
-		    opacity: 1;
-		  }
+			&::placeholder {
+				color: var(--component-textField-input-placeholder);
+				opacity: 1;
+			}
 
-		  &:hover {
-		    ~ .textField-label {
+			&:hover {
+				~ .textField-label {
 					--component-textField-input-border: var(--palettes-grey-400);
-		    }
-		  }
+				}
+			}
 
-		  &:focus-visible {
-		    ~ .textField-label {
-		      .textField-label-input {
-		        @include a11y.focusVisible($offset: 3px);
-		      }
-		    }
-		  }
+			&:focus-visible {
+				~ .textField-label {
+					.textField-label-input {
+						@include a11y.focusVisible($offset: 3px);
+					}
+				}
+			}
+		}
+
+		.formLabel {
+			@include formLabel.label;
+
+			grid-column-start: 1;
+			grid-column-end: -1;
+			grid-row: 1;
+		}
+
+		.inlineMessage {
+			grid-column-start: 1;
+			grid-column-end: -1;
 		}
 	}
 }

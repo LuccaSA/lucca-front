@@ -90,7 +90,9 @@ function getTemplate(args: SwitchBasicStory): string {
       <span class="switchField-label-input-icon" aria-hidden="true"></span>
     </span>
 		<span class="formLabel" id="${id}Label">
-			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			<span class="formLabel-content">
+				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
 		</span>
   </label>
 	<div class="inlineMessage${messageState}" *ngIf="message" id="${id}message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>

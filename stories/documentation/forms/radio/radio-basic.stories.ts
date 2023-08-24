@@ -90,7 +90,9 @@ function getTemplate(args: RadioBasicStory): string {
       <span class="radioField-label-input-icon" aria-hidden="true"></span>
     </span>
 		<span class="formLabel" id="${id}label">
-			${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
+			<span class="formLabel-content">
+				${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
+			</span>
 		</span>
   </label>
 	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
@@ -103,4 +105,4 @@ const Template: Story<RadioBasicStory> = (args: RadioBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };
+Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };

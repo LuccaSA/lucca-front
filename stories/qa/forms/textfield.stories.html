@@ -1,36 +1,38 @@
 <section class="contentSection">
 	<h1>Text field</h1>
 	<div class="textField">
-    <input type="text" id="field1" class="textField-input" aria-labelledby="field1prefix field1label field1suffix" aria-describedby="field1message" placeholder="Placeholder" aria-invalid="false" value="Value" />
-    <label for="field1" class="textField-label">
-      <span class="textField-label-input"></span>
-      <span class="textField-label-prefix" id="field1prefix">
-        <span class="textField-label-prefix-item">$</span>
-      </span>
+		<input type="text" id="field1" class="textField-input" aria-labelledby="field1label" />
+		<label for="field1" class="textField-label">
+			<span class="textField-label-input"></span>
 			<span class="formLabel" id="field1label">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				<span class="formLabel-content">Label</span>
 			</span>
-      <span class="textField-label-suffix" id="field1suffix">
-        <span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-      </span>
-    </label>
-    <div class="textField-action">
-			<button class="clear">
-			  <span aria-hidden="true" class="lucca-icon icon-close"></span>
-				<span class="u-mask">Vider ce champ</span>
-			</button>
-    </div>
-		<div class="inlineMessage" id="field1message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-  </div>
+		</label>
+	</div>
+</section>
+<section class="contentSection">
 	<div class="textField">
-		<input type="text" id="field2" class="textField-input" aria-labelledby="field2prefix field2label field2suffix" aria-describedby="field2message" placeholder="Placeholder" aria-invalid="false" />
+		<input
+			type="text"
+			id="field2"
+			class="textField-input"
+			aria-labelledby="field2prefix field2label field2suffix"
+			aria-describedby="field2message"
+			placeholder="Placeholder"
+			aria-invalid="false"
+			aria-required="true"
+		/>
 		<label for="field2" class="textField-label">
 			<span class="textField-label-input"></span>
 			<span class="textField-label-prefix" id="field2prefix">
 				<span class="textField-label-prefix-item">$</span>
 			</span>
 			<span class="formLabel" id="field2label">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
+				<span class="formLabel-details">détails</span>
 			</span>
 			<span class="textField-label-suffix" id="field2suffix">
 				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
@@ -48,14 +50,27 @@
 <section class="contentSection">
 	<h2>Sizes</h2>
 	<div class="textField mod-S">
-		<input type="text" id="fieldS" class="textField-input" aria-labelledby="fieldSprefix fieldSlabel fieldSsuffix" aria-describedby="fieldSmessage" placeholder="Placeholder" aria-invalid="false" value="Value" />
+		<input
+			type="text"
+			id="fieldS"
+			class="textField-input"
+			aria-labelledby="fieldSprefix fieldSlabel fieldSsuffix"
+			aria-describedby="fieldSmessage"
+			placeholder="Placeholder"
+			aria-invalid="false"
+			value="Value"
+		/>
 		<label for="fieldS" class="textField-label">
 			<span class="textField-label-input"></span>
 			<span class="textField-label-prefix" id="fieldSlabel">
 				<span class="textField-label-prefix-item">$</span>
 			</span>
 			<span class="formLabel" id="fieldSlabel">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
+				<span class="formLabel-details">détails</span>
 			</span>
 			<span class="textField-label-suffix" id="fieldSsuffix">
 				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
@@ -71,14 +86,27 @@
 	</div>
 
 	<div class="textField mod-XS">
-		<input type="text" id="fieldXS" class="textField-input" aria-labelledby="fieldXSprefix fieldXSlabel fieldXSsuffix" aria-describedby="fieldXSmessage" placeholder="Placeholder" aria-invalid="false" value="Value" />
+		<input
+			type="text"
+			id="fieldXS"
+			class="textField-input"
+			aria-labelledby="fieldXSprefix fieldXSlabel fieldXSsuffix"
+			aria-describedby="fieldXSmessage"
+			placeholder="Placeholder"
+			aria-invalid="false"
+			value="Value"
+		/>
 		<label for="fieldXS" class="textField-label">
 			<span class="textField-label-input"></span>
 			<span class="textField-label-prefix" id="fieldXSlabel">
 				<span class="textField-label-prefix-item">$</span>
 			</span>
 			<span class="formLabel" id="fieldXSlabel">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
+				<span class="formLabel-details">détails</span>
 			</span>
 			<span class="textField-label-suffix" id="fieldXSsuffix">
 				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
@@ -96,30 +124,55 @@
 <section class="contentSection">
 	<h2>Disabled</h2>
 	<div class="textField">
-    <input type="text" id="fieldDisabled1" class="textField-input" aria-labelledby="fieldDisabled1prefix fieldDisabled1label fieldDisabled1suffix" aria-describedby="fieldDisabled1message" placeholder="Placeholder" aria-invalid="false" value="Value" disabled />
-    <label for="fieldDisabled1" class="textField-label">
-      <span class="textField-label-input"></span>
-      <span class="textField-label-prefix" id="fieldDisabled1label">
-        <span class="textField-label-prefix-item">$</span>
-      </span>
-			<span class="formLabel" id="fieldDisabled1label">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		<input
+			type="text"
+			id="fieldDisabled1"
+			class="textField-input"
+			aria-labelledby="fieldDisabled1prefix fieldDisabled1label fieldDisabled1suffix"
+			aria-describedby="fieldDisabled1message"
+			placeholder="Placeholder"
+			aria-invalid="false"
+			value="Value"
+			disabled
+		/>
+		<label for="fieldDisabled1" class="textField-label">
+			<span class="textField-label-input"></span>
+			<span class="textField-label-prefix" id="fieldDisabled1label">
+				<span class="textField-label-prefix-item">$</span>
 			</span>
-      <span class="textField-label-suffix" id="fieldDisabled1suffix">
-        <span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-      </span>
-    </label>
+			<span class="formLabel" id="fieldDisabled1label">
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
+			</span>
+			<span class="textField-label-suffix" id="fieldDisabled1suffix">
+				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+			</span>
+		</label>
 		<div class="inlineMessage" id="fieldDisabled1message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-  </div>
+	</div>
 	<div class="textField">
-		<input type="text" id="fieldDisabled2" class="textField-input" aria-labelledby="fieldDisabled2prefix fieldDisabled2label fieldDisabled2suffix" aria-describedby="fieldDisabled2message" placeholder="Placeholder" aria-invalid="false" disabled />
+		<input
+			type="text"
+			id="fieldDisabled2"
+			class="textField-input"
+			aria-labelledby="fieldDisabled2prefix fieldDisabled2label fieldDisabled2suffix"
+			aria-describedby="fieldDisabled2message"
+			placeholder="Placeholder"
+			aria-invalid="false"
+			disabled
+		/>
 		<label for="fieldDisabled2" class="textField-label">
 			<span class="textField-label-input"></span>
 			<span class="textField-label-prefix" id="fieldDisabled2label">
 				<span class="textField-label-prefix-item">$</span>
 			</span>
 			<span class="formLabel" id="fieldDisabled2label">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
 			</span>
 			<span class="textField-label-suffix" id="fieldDisabled2suffix">
 				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
@@ -131,37 +184,60 @@
 <section class="contentSection">
 	<h2>Invalid</h2>
 	<div class="textField">
-    <input type="text" id="fieldInvalid1" class="textField-input" aria-labelledby="fieldInvalid1prefix fieldInvalid1label fieldInvalid1suffix" aria-describedby="fieldInvalid1message" placeholder="Placeholder" aria-invalid="true" value="Value" />
-    <label for="fieldInvalid1" class="textField-label">
-      <span class="textField-label-input"></span>
-      <span class="textField-label-prefix" id="fieldInvalid1label">
-        <span class="textField-label-prefix-item">$</span>
-      </span>
+		<input
+			type="text"
+			id="fieldInvalid1"
+			class="textField-input"
+			aria-labelledby="fieldInvalid1prefix fieldInvalid1label fieldInvalid1suffix"
+			aria-describedby="fieldInvalid1message"
+			placeholder="Placeholder"
+			aria-invalid="true"
+			value="Value"
+		/>
+		<label for="fieldInvalid1" class="textField-label">
+			<span class="textField-label-input"></span>
+			<span class="textField-label-prefix" id="fieldInvalid1label">
+				<span class="textField-label-prefix-item">$</span>
+			</span>
 			<span class="formLabel" id="fieldInvalid1label">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
 			</span>
-      <span class="textField-label-suffix" id="fieldInvalid1suffix">
-        <span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-      </span>
-    </label>
+			<span class="textField-label-suffix" id="fieldInvalid1suffix">
+				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+			</span>
+		</label>
 		<div class="inlineMessage" id="fieldInvalid1message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-  </div>
+	</div>
 	<div class="textField">
-    <input type="text" id="fieldInvalid2" class="textField-input" aria-labelledby="fieldInvalid2prefix fieldInvalid2label fieldInvalid2suffix" aria-describedby="fieldInvalid2message" placeholder="Placeholder" aria-invalid="true" />
-    <label for="fieldInvalid2" class="textField-label">
-      <span class="textField-label-input"></span>
-      <span class="textField-label-prefix" id="fieldInvalid2label">
-        <span class="textField-label-prefix-item">$</span>
-      </span>
-			<span class="formLabel" id="fieldInvalid2label">
-				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		<input
+			type="text"
+			id="fieldInvalid2"
+			class="textField-input"
+			aria-labelledby="fieldInvalid2prefix fieldInvalid2label fieldInvalid2suffix"
+			aria-describedby="fieldInvalid2message"
+			placeholder="Placeholder"
+			aria-invalid="true"
+		/>
+		<label for="fieldInvalid2" class="textField-label">
+			<span class="textField-label-input"></span>
+			<span class="textField-label-prefix" id="fieldInvalid2label">
+				<span class="textField-label-prefix-item">$</span>
 			</span>
-      <span class="textField-label-suffix" id="fieldInvalid2suffix">
-        <span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-      </span>
-    </label>
+			<span class="formLabel" id="fieldInvalid2label">
+				<span class="formLabel-content">
+					Label<sup class="formLabel-required" aria-hidden="true">*</sup
+					><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				</span>
+			</span>
+			<span class="textField-label-suffix" id="fieldInvalid2suffix">
+				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+			</span>
+		</label>
 		<div class="inlineMessage" id="fieldInvalid2message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-  </div>
+	</div>
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
