@@ -1,4 +1,4 @@
-<div class="callout palette-{{palette}} mod-{{size}}" [class.mod-tiny]="tiny">
+<div class="callout palette-{{palette}} mod-{{size}}" [class.mod-tiny]="tiny" *ngIf="!hidden">
 	<div class="callout-icon" *ngIf="icon">
 		<span aria-hidden="true" class="lucca-icon icon-{{icon}}"></span>
 	</div>
@@ -8,7 +8,7 @@
 			<ng-content></ng-content>
 		</div>
 	</div>
-	<button *ngIf="removable" type="button" class="callout-kill" (click)="hide()">
+	<button *ngIf="removable" type="button" class="callout-kill" (click)="hidden = true; hiddenChange.emit(true)">
 		<span class="u-mask">{{ intl.close }}</span>
 	</button>
 </div>

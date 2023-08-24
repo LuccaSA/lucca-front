@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { getIntl, Palette } from '@lucca-front/ng/core';
 import { LU_CALLOUT_TRANSLATIONS } from './callout.translate';
@@ -57,19 +57,15 @@ export class CalloutComponent {
 	 */
 	tiny: boolean;
 
-	@Output()
+	@Input({ transform: booleanAttribute })
 	/**
-	 * Emits void when the callout's close button is clicked.
+	 * Is the callout hidden? Works with two way binding too.
 	 *
 	 */
-	hidden: EventEmitter<void> = new EventEmitter<void>();
+	hidden = false;
+
+	@Output()
+	hiddenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
-
-	/**
-	 * Emits the hidden event for the consumer to hide the callout.
-	 */
-	hide(): void {
-		this.hidden.emit();
-	}
 }
