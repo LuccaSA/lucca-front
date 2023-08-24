@@ -16,7 +16,7 @@ export class CalloutComponent {
 	/**
 	 * The title of the callout
 	 */
-	title: string;
+	heading: string;
 
 	@Input()
 	/**
