@@ -11,14 +11,12 @@
 <div [ngClass]="{ 'u-paddingRightXL': true }"></div>
 
 <!-- Should remain untouched -->
-<div
-	[ngClass]="{
+<div [ngClass]="{
 	'u-textSuccess': state === saveStateEnum.Saved,
 	'icon-tickBold': state === saveStateEnum.Saved,
 	'u-textError': state === saveStateEnum.OnError,
 	'icon-crossBold': state === saveStateEnum.OnError
-}"
-></div>
+}"></div>
 
 <div class="grid-4@mediaMinL grid-12@mediaMinM"></div>
 <div class="grid@mediaMinM"></div>
