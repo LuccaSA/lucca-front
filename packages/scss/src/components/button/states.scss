@@ -89,7 +89,7 @@
 		@include state;
 
 		&::after {
-			@include icon.generate('maths_multiplicate');
+			@include icon.generate('sign_close');
 		}
 	}
 }

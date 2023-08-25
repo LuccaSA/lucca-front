@@ -26,7 +26,7 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-helper">Helper message</p>
 			</div>
 			<button class="clear list-clear" type="button">
-			  <span aria-hidden="true" class="lucca-icon icon-mathsMultiplicate"></span>
+			  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			</button>
 		</li>
 		<li class="list-item mod-draggable">
@@ -36,7 +36,7 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-helper">Helper message</p>
 			</div>
 			<button class="clear list-clear" type="button">
-			  <span aria-hidden="true" class="lucca-icon icon-mathsMultiplicate"></span>
+			  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			</button>
 		</li>
 		<li class="list-item mod-draggable">
@@ -46,7 +46,7 @@ function getTemplate(args: ListBasicStory): string {
 				<p class="list-item-content-helper">Helper message</p>
 			</div>
 			<button class="clear list-clear" type="button">
-			  <span aria-hidden="true" class="lucca-icon icon-mathsMultiplicate"></span>
+			  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			</button>
 		</li>
 	</ul>

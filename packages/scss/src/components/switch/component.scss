@@ -23,7 +23,7 @@
 			cursor: pointer;
 
 			&::before {
-				@include icon.generate('maths_multiplicate');
+				@include icon.generate('sign_close');
 
 				align-items: center;
 				background-color: var(--palettes-grey-500);
