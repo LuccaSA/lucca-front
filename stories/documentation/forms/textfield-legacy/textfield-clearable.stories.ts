@@ -13,7 +13,7 @@ function getTemplate(args: TextfieldClearableStory): string {
 		<input class="textfield-input" type="text" placeholder="Placeholder">
 		<span class="textfield-label">Label</span>
 		<div class="clear textfield-clear" role="button" tabindex="0">
-		  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 		</div>
 	</label>
 	`;

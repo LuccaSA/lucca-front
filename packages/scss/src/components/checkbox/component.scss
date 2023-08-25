@@ -17,7 +17,7 @@
 			vertical-align: top;
 
 			&::before {
-				@include icon.generate('confirm');
+				@include icon.generate('sign_confirm');
 
 				background-color: var(--colors-white-color);
 				width: var(--components-checkbox-input-size);

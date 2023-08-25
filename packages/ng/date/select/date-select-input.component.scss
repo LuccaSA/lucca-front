@@ -5,6 +5,6 @@
 
 :host {
 	&::after {
-		@include icon.generate('calendar');
+		@include icon.generate('calendar_date');
 	}
 }

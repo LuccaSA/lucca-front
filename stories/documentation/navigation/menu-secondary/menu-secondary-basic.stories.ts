@@ -38,7 +38,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 				<div class="navSide-item mod-mobileToggle">
 					<button type="button" class="navSide-item-link" [attr.aria-expanded]="open">
 						<span class="navSide-item-link-title">Menu</span>
-						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
+						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronRight"></span>
 					</button>
 				</div>
 				<ul class="navSide-scrollWrapper">
@@ -46,7 +46,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						<button type="button" class="navSide-item-link">
 							<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 							<span class="navSide-item-link-title">Section 1</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
+							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronRight"></span>
 						</button>
 						<ul class="navSide-item-subMenu">
 							<li class="navSide-item-subMenu-item">
@@ -61,9 +61,9 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 					</li>
 					<li class="navSide-item is-open">
 						<button type="button" class="navSide-item-link" aria-expanded="true">
-							<span aria-hidden="true" class="lucca-icon icon-user"></span>
+							<span aria-hidden="true" class="lucca-icon icon-peoplePerson"></span>
 							<span class="navSide-item-link-title">Section#2 with a larger name</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowEast"></span>
+							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronRight"></span>
 						</button>
 						<ul class="navSide-item-subMenu">
 							<li class="navSide-item-subMenu-item">
@@ -79,13 +79,13 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 					</li>
 					<li class="navSide-item">
 						<a href="#" class="navSide-item-link">
-							<span aria-hidden="true" class="lucca-icon icon-analytics"></span>
+							<span aria-hidden="true" class="lucca-icon icon-chartVerticalBar"></span>
 							<span class="navSide-item-link-title">Section 3</span>
 						</a>
 					</li>
 					<li class="navSide-item">
 						<a href="#" class="navSide-item-link">
-							<span aria-hidden="true" class="lucca-icon icon-sliders"></span>
+							<span aria-hidden="true" class="lucca-icon icon-settingsEqualizer"></span>
 							<span class="navSide-item-link-title">Section 4</span>
 							<span class="numericBadge palette-primary mod-S"><span class="u-mask">, </span>9</span>
 						</a>
@@ -95,7 +95,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 			<div class="navSide-bottomSection">
 				<div class="navSide-item">
 					<button type="button" class="navSide-item-link">
-						<span aria-hidden="true" class="lucca-icon icon-help"></span>
+						<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
 						<span class="navSide-item-link-title">Help</span>
 					</button>
 				</div>

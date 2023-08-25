@@ -113,7 +113,7 @@
 			}
 
 			&::after {
-				@include icon.generate('confirm');
+				@include icon.generate('sign_confirm');
 
 				color: transparent;
 				font-size: var(--sizes-S-lineHeight);

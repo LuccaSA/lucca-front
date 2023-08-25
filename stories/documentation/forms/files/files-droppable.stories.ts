@@ -12,8 +12,8 @@ function getTemplate(args: FilesDroppableStory): string {
 	<label class="file">
 		<input class="file-input is-droppable" type="file" title="" accept=".xls,.xlsx,.csv" />
 		<span role="text" class="file-content">
-			<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
-			<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess u-textSuccess"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signError u-textError"></span>
 			<span class="file-titleName">
 				<span class="file-title u-marginBottom0">Drag and drop your file here</span>
 				<span class="file-name"></span>
@@ -31,8 +31,8 @@ function getTemplate(args: FilesDroppableStory): string {
 	<label class="file mod-S">
 		<input class="file-input is-droppable" type="file" title="" accept=".xls,.xlsx,.csv" />
 		<span role="text" class="file-content">
-			<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
-			<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess u-textSuccess"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signError u-textError"></span>
 			<span class="file-titleName">
 				<span class="file-title u-marginBottom0">Drag and drop your file here</span>
 				<span class="file-formats">Supported file formats: .xls, .xlsx .csv</span>

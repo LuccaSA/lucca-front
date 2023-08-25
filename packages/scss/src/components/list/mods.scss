@@ -20,7 +20,7 @@
 
 @mixin draggable {
 	padding: var(--spacings-XS);
-	padding-right: .75rem;
+	padding-right: 0.75rem;
 
 	.list-item-handler {
 		color: var(--palettes-grey-600);
@@ -30,7 +30,7 @@
 		cursor: move;
 
 		&::before {
-			@include icon.generate('drag');
+			@include icon.generate('dots_drag');
 
 			vertical-align: middle;
 		}

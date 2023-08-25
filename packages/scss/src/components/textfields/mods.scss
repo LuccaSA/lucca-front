@@ -28,7 +28,7 @@
 
 	.textfield-clear {
 		position: absolute;
-		bottom: .75rem;
+		bottom: 0.75rem;
 		right: var(--spacings-XS);
 	}
 
@@ -110,7 +110,7 @@
 	.textfield-input {
 		line-height: var(--sizes-S-lineHeight);
 		font-size: var(--sizes-S-fontSize);
-		padding: .375rem;
+		padding: 0.375rem;
 	}
 
 	.textfield-suffix {
@@ -150,7 +150,7 @@
 		line-height: var(--sizes-XS-lineHeight);
 
 		.lucca-icon {
-			font-size: .75rem;
+			font-size: 0.75rem;
 			line-height: var(--sizes-XS-lineHeight);
 		}
 	}
@@ -211,7 +211,7 @@
 
 @mixin search {
 	&::after {
-		@include icon.generate('search');
+		@include icon.generate('search_magnifying_glass');
 
 		color: var(--palettes-grey-600);
 		position: absolute;
@@ -255,8 +255,8 @@
 	&::after {
 		line-height: var(--sizes-S-lineHeight);
 		font-size: var(--sizes-S-lineHeight);
-		bottom: .375rem;
-		right: .375rem;
+		bottom: 0.375rem;
+		right: 0.375rem;
 	}
 
 	.textfield-actionClear { // deprecated
@@ -277,11 +277,11 @@
 	}
 
 	.textfield-clear {
-		--components-clear-size: .75rem;
-		--components-clear-icon-size: .75rem;
+		--components-clear-size: 0.75rem;
+		--components-clear-icon-size: 0.75rem;
 
 		right: 2.125rem;
-		bottom: .625rem;
+		bottom: 0.625rem;
 	}
 
 	.textfield-actionClear { // deprecated
@@ -316,11 +316,11 @@
 	}
 
 	.textfield-clear {
-		--components-clear-size: .75rem;
-		--components-clear-icon-size: .75rem;
+		--components-clear-size: 0.75rem;
+		--components-clear-icon-size: 0.75rem;
 
 		right: 1.75rem;
-		bottom: .375rem;
+		bottom: 0.375rem;
 	}
 
 	.textfield-actionClear { // deprecated

@@ -24,7 +24,7 @@
 		gap: 0 !important;
 
 		&::after {
-			@include icon.generate('arrow_south');
+			@include icon.generate('arrow_bottom');
 
 			color: var(--palettes-grey-600);
 			bottom: var(--components-select-input-padding-vertical);
@@ -74,14 +74,14 @@
 	}
 
 	.lu-select-suffix {
-    position: absolute;
-    bottom: .75rem;
-    right: 2.25rem;
+		position: absolute;
+		bottom: 0.75rem;
+		right: 2.25rem;
 	}
 
 	.lu-select-clearer {
 		position: absolute;
-		bottom: .75rem;
+		bottom: 0.75rem;
 		right: 2.25rem;
 	}
 
@@ -121,16 +121,17 @@
 
 		&::after {
 			line-height: var(--sizes-XS-lineHeight);
-			font-size:var(--sizes-S-lineHeight);
+			font-size: var(--sizes-S-lineHeight);
 		}
 
 		.lu-select-suffix {
-			bottom: .5rem;
+			bottom: 0.5rem;
 			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
-			.label { // deprecated
+			.label {
+				// deprecated
 				font-size: var(--sizes-S-fontSize);
 				line-height: var(--sizes-S-lineHeight);
 				font-weight: 600;
@@ -217,7 +218,6 @@
 		}
 
 		&.mod-search {
-
 			&::after {
 				bottom: 0;
 			}

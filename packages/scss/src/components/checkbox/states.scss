@@ -28,7 +28,7 @@
 	~ .checkbox-mixed ~ .checkbox-label,
 	~ .checkbox-label {
 		&::before {
-			@include icon.generate('partial');
+			@include icon.generate('maths_minus');
 		}
 	}
 }

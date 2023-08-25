@@ -77,7 +77,7 @@
 		@include state;
 
 		&::after {
-			@include icon.generate('tick');
+			@include icon.generate('sign_confirm');
 		}
 	}
 }
@@ -89,7 +89,7 @@
 		@include state;
 
 		&::after {
-			@include icon.generate('cross');
+			@include icon.generate('sign_close');
 		}
 	}
 }

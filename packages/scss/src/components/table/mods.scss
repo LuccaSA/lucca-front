@@ -57,7 +57,8 @@
 		border-top: 0;
 	}
 
-	.table-body, .table-foot {
+	.table-body,
+	.table-foot {
 		&:last-child {
 			.table-body-row:last-child {
 				.table-body-row-cell,
@@ -144,7 +145,7 @@
 		}
 
 		&::before {
-			@include icon.generate('collapse');
+			@include icon.generate('arrow_unfold_less');
 
 			font-size: var(--sizes-M-lineHeight);
 			font-weight: 400;
@@ -159,7 +160,7 @@
 		.table-body-row-cell,
 		.table-foot-row-cell {
 			&::before {
-					@include icon.generate('expand');
+				@include icon.generate('arrow_unfold_more');
 			}
 		}
 	}
@@ -186,7 +187,7 @@
 			cursor: move;
 
 			&::after {
-				@include icon.generate('drag');
+				@include icon.generate('dots_drag');
 
 				color: var(--palettes-grey-600);
 				font-size: var(--sizes-M-lineHeight);

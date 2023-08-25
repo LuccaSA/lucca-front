@@ -22,7 +22,7 @@
 		width: auto;
 
 		&::after {
-			@include icon.generate('calendar');
+			@include icon.generate('calendar_date');
 		}
 
 		mat-icon {

@@ -54,7 +54,7 @@
 			}
 
 			&::before {
-				@include icon.generate('arrow_full_west');
+				@include icon.generate('arrow_left');
 			}
 		}
 

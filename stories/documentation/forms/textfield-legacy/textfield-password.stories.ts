@@ -20,8 +20,8 @@ function getTemplate(args: TextfieldPasswordStory): string {
 					aria-pressed="false"
 					class="textfield-suffix-action"
 				>
-				  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
-				  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
+				  <span aria-hidden="true" class="lucca-icon icon-eye"></span>
+				  <span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
 				  <span class="u-mask">Show password</span>
 				</a>
 			  </span>
@@ -37,8 +37,8 @@ function getTemplate(args: TextfieldPasswordStory): string {
 				  aria-pressed="true"
 				  class="textfield-suffix-action"
 				>
-				  <span aria-hidden="true" class="lucca-icon icon-watch"></span>
-				  <span aria-hidden="true" class="lucca-icon icon-unwatch"></span>
+				  <span aria-hidden="true" class="lucca-icon icon-eye"></span>
+				  <span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
 				  <span class="u-mask">Show password</span>
 				</a>
 			  </span>
