@@ -73,6 +73,10 @@
 		margin: var(--spacings-XS) 0;
 		min-height: var(--spacings-M);
 		min-width: 0;
+
+		&:before {
+			top: .75rem;
+		}
 	}
 
 	.timeline-step-description {

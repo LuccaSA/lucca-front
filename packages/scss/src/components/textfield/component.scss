@@ -8,6 +8,18 @@
 	font-size: var(--component-textField-label-fontSize);
 	line-height: var(--component-textField-label-lineHeight);
 
+	.formLabel {
+		@include formLabel.label;
+		grid-column-start: 1;
+		grid-column-end: -1;
+		grid-row: 1;
+	}
+
+	.inlineMessage {
+		grid-column-start: 1;
+		grid-column-end: -1;
+	}
+
 	@at-root ($atRoot) {
 		.textField-label {
 		  display: contents;
@@ -59,7 +71,7 @@
 
 		.textField-label-input {
 		  grid-column: 1 / span 4;
-		  border: 1px solid var(--component-textField-input-border);
+		  box-shadow: 0 0 0 1px var(--component-textField-input-border);
 		  grid-row: 2;
 		  pointer-events: none;
 		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
@@ -108,22 +120,10 @@
 		  &:focus-visible {
 		    ~ .textField-label {
 		      .textField-label-input {
-		        @include a11y.focusVisible;
+		        @include a11y.focusVisible($offset: 3px);
 		      }
 		    }
 		  }
-		}
-
-		.formLabel {
-			@include formLabel.label;
-			grid-column-start: 1;
-			grid-column-end: -1;
-			grid-row: 1;
-		}
-
-		.inlineMessage {
-			grid-column-start: 1;
-			grid-column-end: -1;
 		}
 	}
 }

@@ -51,6 +51,10 @@
 			transition-property: background-color;
 			width: auto;
 
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+			}
+
 			&::before {
 				@include icon.generate('cross');
 				font-size: var(--sizes-S-lineHeight);

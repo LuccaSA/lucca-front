@@ -23,6 +23,11 @@
 		color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}
+
+	~ .textfield-actionClear { // deprecated
+		color: var(--palettes-grey-500) !important;
+		pointer-events: none;
+	}
 }
 
 @mixin filterHover {
