@@ -25,6 +25,7 @@
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: var(--palettes-100, var(--palettes-grey-100));
+			color: var(--palettes-700, var(--palettes-grey-700));
 		}
 
 		&:active {

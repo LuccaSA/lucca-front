@@ -38,6 +38,7 @@
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: var(--palettes-600, var(--palettes-primary-600));
+			color: var(--palettes-text, var(--palettes-primary-text));
 		}
 
 		&:focus-visible {
