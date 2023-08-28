@@ -1,0 +1,110 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-column-gap: var(--spacings-XS);
+
+	@at-root ($atRoot) {
+		.switchField-label {
+		  display: contents;
+		}
+
+		.switchField-label-input {
+		  width: var(--component-switchField-label-input-width);
+		  height: var(--component-switchField-label-input-height);
+		  border: 2px solid var(--palettes-grey-500);
+		  border-radius: var(--component-switchField-label-input-height);
+		  position: relative;
+		  top: .125rem;
+		  color: var(--colors-white-color);
+		  transition-property: color, border-color, background-color;
+		  transition-duration: var(--commons-animations-durations-fast);
+		  background-color: var(--palettes-grey-500);
+		  cursor: pointer;
+
+		  @media (prefers-reduced-motion: reduce) {
+		    transition-property: none;
+		  }
+
+		  &::after {
+		    content: '';
+		    position: absolute;
+		    inset: -2px;
+		    outline-offset: 2px;
+		    border-radius: var(--component-switchField-label-input-height);
+		  }
+
+		  &::before {
+		    content: '';
+		    position: absolute;
+		    width: 50%;
+		    aspect-ratio: 1;
+		    background-color: var(--colors-white-color);
+		    border-radius: 50%;
+		    left: 0;
+		    top: 0;
+		    transition-property: left;
+		    transition-duration: var(--commons-animations-durations-fast);
+		    transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+		    box-shadow: var(--commons-boxShadow-XS);
+		  }
+		}
+
+		.switchField-label-input-icon {
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  width: 100%;
+		  height: 100%;
+
+			&::before {
+				@include icon.generate('confirm');
+				font-size: var(--component-switchField-label-input-icon-fontSize);
+			}
+
+			&::after {
+				@include icon.generate('cross');
+				font-size: var(--component-switchField-label-input-icon-fontSize);
+			}
+		}
+
+		.formLabel {
+		  grid-column: 2;
+		}
+
+		.switchField-input {
+			@include a11y.mask;
+
+		  &:focus-visible {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        &::after {
+		          @include a11y.focusVisible();
+		        }
+		      }
+		    }
+		  }
+
+		  &:hover {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        border-color: var(--palettes-grey-400);
+		        background-color: var(--palettes-grey-400);
+		      }
+		    }
+		  }
+
+		  &:active {
+		    ~ .switchField-label {
+		      .switchField-label-input {
+		        border-color: var(--palettes-grey-600);
+		        background-color: var(--palettes-grey-600);
+		      }
+		    }
+		  }
+		}
+	}
+}

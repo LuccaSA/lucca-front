@@ -1,0 +1,28 @@
+<div class="lu-select-placeholder">{{ placeholder }}</div>
+<div class="lu-select-value">
+	<div class="lu-select-display-wrapper">
+		<ng-container #display></ng-container>
+	</div>
+</div>
+<div class="lu-select-suffix">
+	<lu-input-clearer></lu-input-clearer>
+</div>
+
+<ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
+	<span *ngIf="multiple && values?.length > 1; else singleView"
+		><span class="numericBadge">{{ values.length }}</span> {{ intl.departments }}</span
+	>
+	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
+</ng-template>
+
+<lu-tree-option-picker-advanced [option-comparer]="byId">
+	<header class="lu-picker-header" [class.mod-multiple]="multiple">
+		<lu-department-feeder [appInstanceId]="appInstanceId" [operations]="operations" [filters]="filters"></lu-department-feeder>
+		<lu-tree-option-searcher [searchFn]="searchFn"></lu-tree-option-searcher>
+		<lu-tree-option-select-all class="option-selector"></lu-tree-option-select-all>
+	</header>
+	<!-- <lu-tree-option-pager></lu-tree-option-pager> -->
+	<lu-tree-option *luForTreeOptions="let option" [tree]="option">
+		<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
+	</lu-tree-option>
+</lu-tree-option-picker-advanced>

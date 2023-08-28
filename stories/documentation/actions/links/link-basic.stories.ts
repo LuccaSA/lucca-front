@@ -27,7 +27,7 @@ function getTemplate(args: LinkBasicStory): string {
 	const decorationHover = args.decorationHover ? `mod-decorationHover` : '';
 
 	return `<a href="#" class="link ${decorationHover} ${disabled}">Lien</a>
-<a class="link mod-icon ${decorationHover} ${disabled}" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-outside"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
+<a class="link mod-icon ${decorationHover} ${disabled}" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
 }
 
 const Template: StoryFn<LinkBasicStory> = (args: LinkBasicStory) => ({

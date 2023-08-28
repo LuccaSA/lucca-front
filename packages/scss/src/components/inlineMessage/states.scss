@@ -1,0 +1,41 @@
+@mixin success {
+  --components-inlineMessage-icon-color: var(--palettes-success-700);
+  --components-inlineMessage-gap: var(--spacings-XXS);
+
+  .lucca-icon {
+    &::before {
+			content: '\e9ed'; // Remove when content alternative will have a good support
+			content: '\e9ed' / '';
+		}
+  }
+}
+
+@mixin warning {
+  --components-inlineMessage-icon-color: var(--palettes-warning-700);
+  --components-inlineMessage-gap: var(--spacings-XXS);
+
+  .lucca-icon {
+    &::before {
+      content: '\e992'; // Remove when content alternative will have a good support
+      content: '\e992' / '';
+    }
+  }
+}
+
+@mixin error {
+  --components-inlineMessage-icon-color: var(--palettes-error-700);
+  --components-inlineMessage-color: var(--palettes-error-700);
+  --components-inlineMessage-gap: var(--spacings-XXS);
+
+  .lucca-icon {
+    &::before {
+			content: '\e92c'; // Remove when content alternative will have a good support
+			content: '\e92c' / '';
+		}
+  }
+}
+
+@mixin disabled {
+  --components-inlineMessage-icon-color: var(--palettes-grey-500);
+  --components-inlineMessage-color: var(--palettes-grey-500);
+}

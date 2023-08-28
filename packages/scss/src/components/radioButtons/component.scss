@@ -5,6 +5,7 @@
 
 	@at-root ($atRoot) {
 		.radioButtons-item {
+			position: relative;
 			margin-left: -1px;
 
 			&:first-child {
@@ -70,6 +71,11 @@
 						background-color: var(--palettes-primary-50);
 						box-shadow: inset 0 0 0 var(--commons-divider-width) var(--palettes-primary-500);
 						color: var(--palettes-primary-800);
+
+						.numericBadge {
+							--components-numericBadge-background: var(--palettes-primary-200);
+							--components-numericBadge-color: var(--palettes-primary-800);
+						}
 					}
 				}
 			}

@@ -1,0 +1,56 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	background-color: var(--colors-white-color);
+	bottom: 0;
+	box-shadow: var(--commons-boxShadow-S);
+	padding: 0 var(--spacings-XS);
+	position: sticky;
+
+	@at-root ($atRoot) {
+		.mobileNavigation-list {
+			@include reset.list;
+			display: flex;
+		}
+
+		.mobileNavigation-list-item {
+			flex-grow: 1;
+			text-align: center;
+		}
+
+		.mobileNavigation-list-item-link {
+			color: var(--palettes-grey-700);
+			display: flex;
+			flex-direction: column;
+			font-size: var(--sizes-XS-fontSize);
+			gap: var(--spacings-XXS);
+			line-height: var(--sizes-XS-lineHeight);
+			padding: var(--spacings-XS) var(--spacings-XXS);
+			position: relative;
+			text-decoration: none;
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 0px);
+			}
+
+			.lucca-icon {
+				font-size: var(--sizes-M-lineHeight);
+			}
+
+			&[aria-current="page"] {
+				color: var(--palettes-primary-700);
+				font-weight: 600;
+			}
+		}
+
+		.mobileNavigation-list-item-link-counter {
+			--components-numericBadge-background: var(--palettes-primary-200);
+			--components-numericBadge-color: var(--palettes-primary-800);
+			box-shadow: 0 0 0 2px var(--colors-white-color);
+			position: absolute;
+			left: calc(50% + 5px);
+			top: 5px;
+		}
+	}
+}

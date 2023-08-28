@@ -3,7 +3,7 @@
 <section class="contentSection">
 	<h2>Mods</h2>
 	<button type="button" class="button">Default</button>
-	<button type="button" class="button mod-outline">Outlined</button>
+	<button type="button" class="button mod-outlined">Outlined</button>
 	<button type="button" class="button mod-text palette-primary">Text</button>
 	<button type="button" class="button mod-text">Text</button>
 	<div style="display: inline-block; background: black; padding: 0.5rem; margin-left: 0.5rem">
@@ -11,11 +11,17 @@
 	</div>
 </section>
 
+<section class="contentSection">
+	<h2>Link</h2>
+	<a href="#" type="button" class="button">Link button</a>
+	<a href="#" type="button" class="button mod-outlined">Link outlined button</a>
+</section>
+
 <!-- Palette -->
 <section class="contentSection">
 	<h2>Critical</h2>
 	<button type="button" class="button palette-error">Critical</button>
-	<button type="button" class="button palette-error mod-outline">Critical outlined</button>
+	<button type="button" class="button palette-error mod-outlined">Critical outlined</button>
 	<button type="button" class="button palette-error mod-text">Critical text</button>
 </section>
 
@@ -30,23 +36,35 @@
 <!-- Counter -->
 <section class="contentSection">
 	<h2>Counter</h2>
-	<button type="button" class="button mod-counter">Counting button<span class="button-counter">7</span></button>
-	<button type="button" class="button mod-counter mod-S">Counting button<span class="button-counter">7</span></button>
-	<button type="button" class="button mod-counter mod-XS">Counting button<span class="button-counter">7</span></button>
+	<button type="button" class="button">Counting button<div class="numericBadge palette-primary">7</div></button>
+	<button type="button" class="button mod-S">Counting button<div class="numericBadge palette-primary mod-S">7</div></button>
+	<button type="button" class="button mod-XS">Counting button<div class="numericBadge palette-primary mod-XS">7</div></button>
 </section>
 
 <!-- Icons -->
 <section class="contentSection">
 	<h2>Icons</h2>
-	<button type="button" class="button mod-icon"><span aria-hidden="true" class="lucca-icon icon-save"></span>Sauvegarder</button>
-	<button type="button" class="button mod-icon"><span aria-hidden="true" class="lucca-icon icon-send"></span>Envoyer</button>
-	<button type="button" class="button mod-icon">Envoyer<span aria-hidden="true" class="lucca-icon icon-send"></span></button><br /><br />
-	<button type="button" class="button mod-icon mod-S"><span aria-hidden="true" class="lucca-icon icon-save"></span>Sauvegarder</button>
-	<button type="button" class="button mod-icon mod-S"><span aria-hidden="true" class="lucca-icon icon-send"></span>Envoyer</button>
-	<button type="button" class="button mod-icon mod-S">Envoyer<span aria-hidden="true" class="lucca-icon icon-send"></span></button><br /><br />
-	<button type="button" class="button mod-icon mod-XS"><span aria-hidden="true" class="lucca-icon icon-sync"></span>Sauvegarder</button>
-	<button type="button" class="button mod-icon mod-XS"><span aria-hidden="true" class="lucca-icon icon-save"></span>Envoyer</button>
-	<button type="button" class="button mod-icon mod-XS">Envoyer<span aria-hidden="true" class="lucca-icon icon-save"></span></button>
+	<button type="button" class="button mod-icon"><span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>Sauvegarder</button>
+	<button type="button" class="button mod-icon"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Envoyer</button>
+	<button type="button" class="button mod-icon">Envoyer<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span></button
+	><br /><br />
+	<button type="button" class="button mod-icon mod-S">
+		<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>Sauvegarder
+	</button>
+	<button type="button" class="button mod-icon mod-S">
+		<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Envoyer
+	</button>
+	<button type="button" class="button mod-icon mod-S">Envoyer<span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span></button
+	><br /><br />
+	<button type="button" class="button mod-icon mod-XS">
+		<span aria-hidden="true" class="lucca-icon icon-arrowSync"></span>Sauvegarder
+	</button>
+	<button type="button" class="button mod-icon mod-XS">
+		<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>Envoyer
+	</button>
+	<button type="button" class="button mod-icon mod-XS">
+		Envoyer<span aria-hidden="true" class="lucca-icon icon-floppyDiskSave"></span>
+	</button>
 </section>
 
 <!-- States -->
@@ -62,6 +80,8 @@
 <section class="contentSection">
 	<h2>Disabled</h2>
 	<button type="button" class="button" disabled>Disabled button</button>
+	<button type="button" class="button palette-primary is-disabled">.is-disabled primary button</button>
+	<button type="button" class="button palette-error mod-outlined" disabled>Critical outlined disabled button</button>
 	<button type="button" class="button is-disabled">Disabled button</button>
 	<button type="button" class="button mod-outlined" disabled>Disabled button</button>
 	<button type="button" class="button mod-text" disabled>Disabled button</button>
@@ -77,7 +97,7 @@
 			<li class="button-group-item"><button type="button" class="button">Bouton</button></li>
 			<li class="button-group-item">
 				<button type="button" class="button mod-more">
-					<span class="lucca-icon icon-chevronSouth" aria-hidden="true"></span>
+					<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 					<span class="u-mask">Plus d'actions</span>
 				</button>
 			</li>
@@ -90,7 +110,7 @@
 			<li class="button-group-item"><button type="button" class="button mod-outlined">Bouton</button></li>
 			<li class="button-group-item">
 				<button type="button" class="button mod-outlined mod-more">
-					<span class="lucca-icon icon-chevronSouth" aria-hidden="true"></span>
+					<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 					<span class="u-mask">Plus d'actions</span>
 				</button>
 			</li>

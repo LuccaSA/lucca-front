@@ -1,0 +1,8 @@
+@mixin vars {
+	--component-checkboxField-label-input-size: 1.25rem;
+	--component-checkboxField-label-input-top: .125rem;
+	--component-checkboxField-label-input-borderRadius: 6px;
+	--component-checkboxField-label-input-icon-fontSize: var(--sizes-S-lineHeight);
+	--component-checkboxField-label-fontSize: var(--sizes-M-fontSize);
+	--component-checkboxField-label-lineHeight: var(--sizes-M-lineHeight);
+}

@@ -1,9 +1,9 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface ClearBasicStory {
-	s: boolean,
-	primary: boolean,
-	disabled: boolean,
+	s: boolean;
+	primary: boolean;
+	disabled: boolean;
 }
 
 export default {
@@ -31,7 +31,9 @@ function getTemplate(args: ClearBasicStory): string {
 	const s = args.s ? `mod-S` : '';
 	const primary = args.primary ? `palette-primary` : '';
 	const disabled = args.disabled ? `disabled` : '';
-	return `<button type="button" class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-close"></span><span class="u-mask">Clear</span></button>`;
+	return `
+		<a href="#" class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-signClose"></span><span class="u-mask">Clear</span></a>
+	`;
 }
 
 const Template: Story<ClearBasicStory> = (args: ClearBasicStory) => ({
@@ -40,4 +42,4 @@ const Template: Story<ClearBasicStory> = (args: ClearBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, primary: false, disabled: false, };
+Basic.args = { s: false, primary: false, disabled: false };

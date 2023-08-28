@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.footer {
+	@include vars;
+	@include component;
+
+	&.mod-sticky {
+		@include sticky;
+	}
+}

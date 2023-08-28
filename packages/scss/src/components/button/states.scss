@@ -7,6 +7,11 @@
 	background-color: var(--commons-disabled-background);
 	color: var(--commons-disabled-color);
 	cursor: default;
+
+	.numericBadge {
+			background-color: var(--palettes-grey-200);
+			color: var(--commons-disabled-color);
+	}
 }
 
 @mixin disabledOutlined {
@@ -73,7 +78,7 @@
 		@include state;
 
 		&::after {
-			@include icon.generate('tick');
+			@include icon.generate('sign_confirm');
 		}
 	}
 }
@@ -85,7 +90,7 @@
 		@include state;
 
 		&::after {
-			@include icon.generate('cross');
+			@include icon.generate('sign_close');
 		}
 	}
 }

@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin selectInputStyle {
 	:host {
@@ -23,7 +24,7 @@
 		gap: 0 !important;
 
 		&::after {
-			@include icon.generate('arrow_south');
+			@include icon.generate('arrow_bottom');
 
 			color: var(--palettes-grey-600);
 			bottom: var(--components-select-input-padding-vertical);
@@ -73,14 +74,14 @@
 	}
 
 	.lu-select-suffix {
-    position: absolute;
-    bottom: .75rem;
-    right: 2.25rem;
+		position: absolute;
+		bottom: 0.75rem;
+		right: 2.25rem;
 	}
 
 	.lu-select-clearer {
 		position: absolute;
-		bottom: .75rem;
+		bottom: 0.75rem;
 		right: 2.25rem;
 	}
 
@@ -120,16 +121,17 @@
 
 		&::after {
 			line-height: var(--sizes-XS-lineHeight);
-			font-size:var(--sizes-S-lineHeight);
+			font-size: var(--sizes-S-lineHeight);
 		}
 
 		.lu-select-suffix {
-			bottom: .625rem;
+			bottom: 0.5rem;
 			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
 			.label {
+				// deprecated
 				font-size: var(--sizes-S-fontSize);
 				line-height: var(--sizes-S-lineHeight);
 				font-weight: 600;
@@ -142,6 +144,10 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
+			}
+
+			.numericBadge {
+				@include numericBadge.s;
 			}
 		}
 	}
@@ -212,7 +218,6 @@
 		}
 
 		&.mod-search {
-
 			&::after {
 				bottom: 0;
 			}

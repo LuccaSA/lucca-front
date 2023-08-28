@@ -12,7 +12,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		disabled: {
 			control: {
@@ -34,10 +34,10 @@ function getTemplate(args: timepickerBasicStory): string {
 			<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="7">
 		</label>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-northArrow"></span>
+			<span class="lucca-icon icon-chevronTop"></span>
 		</button>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-southArrow"></span>
+			<span class="lucca-icon icon-chevronBottom"></span>
 		</button>
 	</div>
 	<div class="timepicker-separator" aria-hidden="true">h</div>
@@ -47,10 +47,10 @@ function getTemplate(args: timepickerBasicStory): string {
 			<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="00">
 		</label>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-northArrow"></span>
+			<span class="lucca-icon icon-chevronTop"></span>
 		</button>
 		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-southArrow"></span>
+			<span class="lucca-icon icon-chevronBottom"></span>
 		</button>
 	</div>
 </fieldset>

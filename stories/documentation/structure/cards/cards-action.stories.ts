@@ -16,12 +16,12 @@ function getTemplate(args: CardsActionStory): string {
 		</div>
 		<div class="card-action">
 			<button type="button" class="actionIcon" luTooltip="Modifier">
-			  <span aria-hidden="true" class="lucca-icon icon-arrowFullEast"></span>
+			  <span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
 			  <span class="u-mask">Accéder</span>
 			</button>
 		</div>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<CardsActionStory> = (args: CardsActionStory) => ({

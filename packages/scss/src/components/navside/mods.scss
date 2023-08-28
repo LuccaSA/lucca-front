@@ -26,7 +26,10 @@
 		display: none;
 	}
 
-	.navSide-item-alert {
+	.navSide-item-alert { // deprecated
+		background-color: var(--components-navSide-compact-palette-alert-color);
+		color: var(--components-navSide-compact-palette-alert-text);
+		padding: 0 var(--spacings-XS);
 		margin: auto;
 		position: relative;
 	}
@@ -75,6 +78,11 @@
 	background-color: var(--components-navSide-compact-palette-selected-bg);
 	color: var(--components-navSide-compact-palette-selected-text);
 	opacity: 1;
+
+	.navSide-item-alert { // deprecated
+		background-color: var(--components-navSide-compact-palette-selected-alert-color);
+		color: var(--components-navSide-compact-palette-selected-alert-text);
+	}
 }
 
 @mixin banner {

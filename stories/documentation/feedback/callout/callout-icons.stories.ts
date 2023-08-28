@@ -1,71 +1,29 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface CalloutIconStory {
-	s: boolean;
-	palette: string;
-	icon: string;
-}
+import { Meta, StoryObj } from '@storybook/angular';
+import { CalloutComponent } from '@lucca-front/ng/callout';
+import { default as BasicStory } from './callout-basic.stories';
+import { HiddenArgType } from "../../../helpers/common-arg-types";
 
 export default {
-	title: 'Documentation/Feedback/Callout/Icon',
-	argTypes: {
-		s: {
-			control: {
-				type: 'boolean',
-			},
-			description: 'Taille : Small',
-		},
-		palette: {
-			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
-			control: {
-				type: 'select',
-			},
-		},
-		icon: {
-			options: ['icon-help', 'icon-success', 'icon-warning', 'icon-error'],
-			control: {
-				type: 'select',
-			},
-		},
-	},
+	...BasicStory,
+	title: 'Documentation/Feedback/Callout/Icon'
 } as Meta;
 
-function getTemplate(args: CalloutIconStory): string {
-	const s = args.s ? `mod-S` : '';
-	const palette = args.palette;
-	const icon = args.icon;
-	let text: { title: string; description: string };
-	switch (args.palette) {
-		case 'palette-success':
-			text = { title: 'Cool!', description: 'Je suis un callout de succès :)' };
-			break;
-		case 'palette-warning':
-			text = { title: 'Hmmm...', description: "Je suis un callout d'alarme :|" };
-			break;
-		case 'palette-error':
-			text = { title: 'Oops!', description: "Je suis un callout d'erreur :(" };
-			break;
-		default:
-			text = { title: "Besoin d'aide ?", description: 'Je suis un callout standard' };
-			break;
+export const Template: StoryObj<CalloutComponent & { description: string }> = {
+	args: {
+		heading: 'Feedback or informations',
+		tiny: false,
+		icon: 'info',
+		palette: 'none',
+		size: 'M',
+		removable: false,
+		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
+	},
+	argTypes: {
+		description: HiddenArgType,
+		tiny: HiddenArgType,
+		heading: HiddenArgType,
+		size: HiddenArgType,
+		removable: HiddenArgType,
+		palette: HiddenArgType,
 	}
-	return `
-	<div class="callout ${s} ${palette}">
-		<div class="callout-icon">
-			<span aria-hidden="true" class="lucca-icon ${icon}"></span>
-		</div>
-		<div class="callout-content">
-			<strong class="callout-content-title">${text.title} </strong>
-			<div class="callout-content-description">${text.description}</div>
-		</div>
-	</div>
-	`;
-}
-
-const Template: StoryFn<CalloutIconStory> = (args: CalloutIconStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Icon = Template.bind({});
-Icon.args = { s: false, icon: 'icon-help', palette: '' };
+};

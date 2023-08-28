@@ -1,0 +1,10 @@
+<div class="lu-select-placeholder">{{ placeholder }}</div>
+<div class="lu-select-value">
+	<div class="lu-select-display-wrapper">
+		<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
+	</div>
+</div>
+<a *ngIf="clearable && isFilled" class="clear lu-select-clearer" role="button" (click)="clearValue($event)">
+	<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+	<span class="u-mask">{{ intl.clear }}</span>
+</a>

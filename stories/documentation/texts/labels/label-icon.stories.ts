@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: LabelIconStory): string {
-	return `<span class="label"><span aria-hidden="true" class="label-icon lucca-icon icon-info"></span>Label</span>`;
+	return `<span class="label"><span aria-hidden="true" class="label-icon lucca-icon icon-signInfo"></span>Label</span>`;
 }
 
 const Template: StoryFn<LabelIconStory> = (args: LabelIconStory) => ({

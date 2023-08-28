@@ -1,77 +1,129 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component($atRoot: 'without: rule') {
-	vertical-align: middle;
-	width: var(--components-textfield-sizes-default);
+	display: grid;
+	grid-gap: var(--spacings-XXS) 0;
+	grid-template-columns: auto 1fr auto auto;
+	font-size: var(--component-textField-label-fontSize);
+	line-height: var(--component-textField-label-lineHeight);
+
+	.formLabel {
+		@include formLabel.label;
+		grid-column-start: 1;
+		grid-column-end: -1;
+		grid-row: 1;
+	}
+
+	.inlineMessage {
+		grid-column-start: 1;
+		grid-column-end: -1;
+	}
 
 	@at-root ($atRoot) {
-		.textfield-input {
-			min-width: 0;
-			border: 0;
-			box-shadow: 0 0 0 1px var(--palettes-grey-300);
-			line-height: var(--sizes-M-lineHeight);
-			-webkit-appearance: none;
-			background-color: var(--colors-white-color);
-			border-radius: var(--components-textfield-border-radius);
-			padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
-			transition-property: box-shadow, background-color, color;
-			transition-duration: var(--commons-animations-durations-fast);
+		.textField-label {
+		  display: contents;
+		}
 
-			&::placeholder {
-				color: var(--palettes-grey-400);
-				transition-property: color;
-				transition-duration: var(--commons-animations-durations-fast);
-				opacity: 1;
+		.textField-label-prefix {
+			display: flex;
+			align-self: flex-start;
+			color: var(--component-textField-input-prefix);
+			cursor: text;
+			line-height: var(--component-textField-input-lineHeight);
+			grid-column: 1;
+ 			grid-row: 2;
+		}
+
+		.textField-label-suffix {
+			display: flex;
+			align-self: flex-start;
+			color: var(--component-textField-input-prefix);
+			cursor: text;
+			line-height: var(--component-textField-input-lineHeight);
+			grid-row: 2;
+  		grid-column: 3;
+		}
+
+		.textField-label-prefix-item {
+		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+
+		  &::selection {
+		    background-color: var(--palettes-primary-200);
+		  }
+
+			&:last-child {
+		    padding-right: 0;
+		  }
+		}
+
+		.textField-label-suffix-item {
+			padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+
+			&::selection {
+				background-color: var(--palettes-primary-200);
 			}
 
-			&[type='search'] {
-				&::-webkit-search-cancel-button,
-				&::-webkit-search-decoration {
-					appearance: none;
-				}
-			}
+			&:first-child {
+		    padding-left: 0;
+		  }
 		}
 
-		.textfield-suffix {
-			color: var(--palettes-grey-600);
-			top: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
-			right: var(--components-textfield-input-padding-horizontal);
-			position: absolute;
-			pointer-events: none;
-			line-height: var(--sizes-M-lineHeight);
-			z-index: 1;
+		.textField-label-input {
+		  grid-column: 1 / span 4;
+		  box-shadow: 0 0 0 1px var(--component-textField-input-border);
+		  grid-row: 2;
+		  pointer-events: none;
+		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
+		  background-color: var(--component-textField-input-background);
+		  transition-property: border-color;
+		  transition-duration: var(--commons-animations-durations-fast);
 		}
 
-		.textfield-options {
-			box-shadow: var(--commons-boxShadow-M);
-			background-color: var(--colors-white-color);
-			border-radius: var(--commons-borderRadius-M);
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: all;
-			list-style: none;
-			overflow: auto;
-			position: absolute;
-			transform-origin: right top;
-			transform: scaleY(0);
-			margin: 3px 0 0;
-			max-height: 15rem;
-			opacity: 0;
-			padding: 0;
-			left: 0;
-			top: 100%;
-			z-index: 999;
-			width: 100%;
+		.textField-action {
+		  display: flex;
+			padding-right: var(--spacings-XS);
+			align-items: center;
+		  grid-row: 2;
+		  grid-column: 4;
+		  color: var(--palettes-grey-600);
 		}
 
-		.textfield-options-mark {
-			background-color: transparent;
-			text-decoration: underline;
-			color: inherit;
-		}
+		.textField-input {
+		  grid-column: 2;
+		  grid-row: 2;
+		  border: 0;
+		  outline: none;
+		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
+		  min-width: var(--spacings-M);
+		  font: inherit;
+		  color: var(--component-textField-input-color);
+		  background-color: transparent;
+		  z-index: 1;
+		  line-height: var(--component-textField-input-lineHeight);
 
-		.textfield-options-entry {
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: background-color;
-			padding: var(--spacings-XS) var(--spacings-S);
-			cursor: pointer;
+		  &::selection {
+		    background-color: var(--palettes-primary-200);
+		  }
+
+		  &::placeholder {
+		    color: var(--component-textField-input-placeholder);
+		    opacity: 1;
+		  }
+
+		  &:hover {
+		    ~ .textField-label {
+					--component-textField-input-border: var(--palettes-grey-400);
+		    }
+		  }
+
+		  &:focus-visible {
+		    ~ .textField-label {
+		      .textField-label-input {
+		        @include a11y.focusVisible($offset: 3px);
+		      }
+		    }
+		  }
 		}
 	}
 }

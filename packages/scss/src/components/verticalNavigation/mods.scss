@@ -1,0 +1,7 @@
+@mixin child {
+  display: none;
+
+  .verticalNavigation-list-item-link {
+    font-weight: 400;
+  }
+}

@@ -27,12 +27,12 @@
 
 @mixin delete {
 	&:hover {
-		background-color: var(--palettes-error-50);
+		background-color: var(--palettes-error-100);
 		color: var(--palettes-error-700);
 	}
 
 	&:active {
-		background-color: var(--palettes-error-100);
+		background-color: var(--palettes-error-200);
 		color: var(--palettes-error-700);
 	}
 }
@@ -43,13 +43,13 @@
 	}
 
 	&:focus-visible {
-		background-color: var(--palettes-error-50);
+		background-color: var(--palettes-error-100);
 		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
 		color: var(--palettes-error-700);
 	}
 
 	&:active {
-		background-color: var(--palettes-error-100);
+		background-color: var(--palettes-error-200);
 		color: var(--palettes-error-700);
 	}
 }

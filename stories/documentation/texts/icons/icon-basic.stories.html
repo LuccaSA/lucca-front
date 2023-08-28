@@ -3,9 +3,14 @@
 	<input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
 </div>
 
-<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon)">
-	<span aria-hidden="true" class="lucca-icon icon-{{camelize(icon)}}"></span>
-	<code class="code">icon-{{camelize(icon)}}</code>
+<input type="checkbox" id="showLegacyIcons" class="showLegacy u-marginBottomM" />
+<label for="showLegacyIcons"> Afficher les icônes dépréciées</label>
+
+<div class="icons">
+	<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon)">
+		<span aria-hidden="true" class="lucca-icon icon-{{camelize(icon)}}"></span>
+		<code class="code">icon-{{camelize(icon)}}</code>
+	</div>
 </div>
 
 <style>

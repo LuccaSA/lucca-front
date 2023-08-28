@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface FilesUploadingStory {
-}
+interface FilesUploadingStory {}
 
 export default {
 	title: 'Documentation/Forms/Files/Uploading',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: FilesUploadingStory): string {
@@ -14,8 +12,8 @@ function getTemplate(args: FilesUploadingStory): string {
 	<label class="file">
 		<input class="file-input is-uploading" type="file" title="" accept=".xls,.xlsx,.csv" />
 		<span role="text" class="file-content">
-			<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
-			<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess u-textSuccess"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signError u-textError"></span>
 			<span class="file-titleName">
 				<span class="file-title u-marginBottom0">Uploading your file…</span>
 				<span class="file-name"></span>
@@ -33,8 +31,8 @@ function getTemplate(args: FilesUploadingStory): string {
 	<label class="file mod-S">
 		<input class="file-input is-uploading" type="file" title="" accept=".xls,.xlsx,.csv" />
 		<span role="text" class="file-content">
-			<span aria-hidden="true" class="file-icon lucca-icon icon-success u-textSuccess"></span>
-			<span aria-hidden="true" class="file-icon lucca-icon icon-error u-textError"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess u-textSuccess"></span>
+			<span aria-hidden="true" class="file-icon lucca-icon icon-signError u-textError"></span>
 			<span class="file-titleName">
 				<span class="file-title u-marginBottom0">Uploading your file…</span>
 				<span class="file-formats">Supported file formats: .xls, .xlsx .csv</span>
@@ -48,7 +46,7 @@ function getTemplate(args: FilesUploadingStory): string {
 			</span>
 		</span>
 	</label>
-	`
+	`;
 }
 
 const Template: StoryFn<FilesUploadingStory> = (args: FilesUploadingStory) => ({
@@ -62,4 +60,4 @@ const Template: StoryFn<FilesUploadingStory> = (args: FilesUploadingStory) => ({
 });
 
 export const Uploading = Template.bind({});
-Uploading.args = { };
+Uploading.args = {};

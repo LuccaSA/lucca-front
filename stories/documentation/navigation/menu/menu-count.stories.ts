@@ -45,19 +45,19 @@ function getTemplate(args: MenuCountStory): string {
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled} aria-current="page">
 					Menu
-					<span class="label mod-number mod-S">2</span>
+					<span class="numericBadge ${s}">9</span>
 				</a>
 			</li>
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled}>
 					Menu
-					<span class="label mod-number mod-S">2</span>
+					<span class="numericBadge ${s}">9</span>
 				</a>
 			</li>
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" ${disabled}>
 					Menu
-					<span class="label mod-number mod-S">2</span>
+					<span class="numericBadge ${s}">9</span>
 				</a>
 			</li>
 		</ul>

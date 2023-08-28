@@ -3,6 +3,7 @@
 
 @mixin component {
   @include reset.button;
+  
   align-items: center;
   background-color: var(--palettes-grey-700);
   border-radius: 50% !important;

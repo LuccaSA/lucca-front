@@ -1,0 +1,30 @@
+@mixin component($atRoot: 'without: rule') {
+	display: flex;
+	align-items: center;
+	gap: var(--spacings-XS);
+	background-color: var(--colors-white-color);
+	box-shadow: 0 1px 0 var(--commons-border-100);
+	padding: .375rem .75rem;
+	min-height: 3.5rem;
+
+	@at-root ($atRoot) {
+		.mobileHeader-title {
+			flex: 1;
+			text-align: center;
+		}
+
+		.mobileHeader-title-main {
+			margin: 0;
+			padding: 0;
+			font-size: var(--sizes-M-fontSize);
+			line-height: var(--sizes-M-lineHeight);
+			color: var(--palettes-grey-900);
+		}
+
+		.mobileHeader-title-sub {
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			color: var(--palettes-grey-700);
+		}
+	}
+}
