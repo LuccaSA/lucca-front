@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableActionsStory {}
 
@@ -55,7 +55,7 @@ function getTemplate(args: TableActionsStory): string {
 	`;
 }
 
-const Template: Story<TableActionsStory> = (args: TableActionsStory) => ({
+const Template: StoryFn<TableActionsStory> = (args: TableActionsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsBasicStory {
 	reverse: boolean;
@@ -10,34 +10,32 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsBasicStory): string {
-	return `
-	<div class="grid">
-		<div class="grid-column"><div class="demo">1</div></div>
-		<div class="grid-column"><div class="demo">2</div></div>
-		<div class="grid-column"><div class="demo">3</div></div>
-		<div class="grid-column"><div class="demo">4</div></div>
-		<div class="grid-column"><div class="demo">5</div></div>
-		<div class="grid-column"><div class="demo">6</div></div>
-		<div class="grid-column"><div class="demo">7</div></div>
-		<div class="grid-column"><div class="demo">8</div></div>
-		<div class="grid-column"><div class="demo">9</div></div>
-		<div class="grid-column"><div class="demo">10</div></div>
-		<div class="grid-column"><div class="demo">11</div></div>
-		<div class="grid-column"><div class="demo">12</div></div>
-	</div>
+	return `<div class="grid">
+	<div class="grid-column"><div class="demo">1</div></div>
+	<div class="grid-column"><div class="demo">2</div></div>
+	<div class="grid-column"><div class="demo">3</div></div>
+	<div class="grid-column"><div class="demo">4</div></div>
+	<div class="grid-column"><div class="demo">5</div></div>
+	<div class="grid-column"><div class="demo">6</div></div>
+	<div class="grid-column"><div class="demo">7</div></div>
+	<div class="grid-column"><div class="demo">8</div></div>
+	<div class="grid-column"><div class="demo">9</div></div>
+	<div class="grid-column"><div class="demo">10</div></div>
+	<div class="grid-column"><div class="demo">11</div></div>
+	<div class="grid-column"><div class="demo">12</div></div>
+</div>
 
-	<div class="grid" style="--grid-columns: 6">
-		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-		<div class="grid-column"><div class="demo">grid-columns 6</div></div>
-	</div>
-	`;
+<div class="grid" style="--grid-columns: 6">
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
+</div>`;
 }
 
-const Template: Story<GridsBasicStory> = (args: GridsBasicStory) => ({
+const Template: StoryFn<GridsBasicStory> = (args: GridsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -52,7 +50,7 @@ const Template: Story<GridsBasicStory> = (args: GridsBasicStory) => ({
 			align-items: center;
 			justify-content: center;
 		}
-		
+
 		.grid + .grid {
 			margin-top: var(--spacings-L);
 		}

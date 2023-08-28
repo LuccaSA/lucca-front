@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsLegacyHorizontalAlignmentStory {}
 
@@ -26,7 +26,7 @@ function getTemplate(args: GridsLegacyHorizontalAlignmentStory): string {
 	`;
 }
 
-const Template: Story<GridsLegacyHorizontalAlignmentStory> = (args: GridsLegacyHorizontalAlignmentStory) => ({
+const Template: StoryFn<GridsLegacyHorizontalAlignmentStory> = (args: GridsLegacyHorizontalAlignmentStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

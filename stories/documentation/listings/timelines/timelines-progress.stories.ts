@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TimelinesProgressStory {
 	width: number;
@@ -40,7 +40,7 @@ function getTemplate(args: TimelinesProgressStory): string {
 	`;
 }
 
-const Template: Story<TimelinesProgressStory> = (args: TimelinesProgressStory) => ({
+const Template: StoryFn<TimelinesProgressStory> = (args: TimelinesProgressStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

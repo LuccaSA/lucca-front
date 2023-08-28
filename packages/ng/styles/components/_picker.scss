@@ -62,6 +62,8 @@
 }
 
 .lu-date-picker-panel {
+	width: calc(var(--components-calendar-width) + var(--spacings-XS) * 2);
+
 	.lu-picker-content {
 		max-height: none;
 	}

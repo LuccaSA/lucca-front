@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface MenuCountStory {
 	noBorder: boolean;
@@ -65,7 +65,7 @@ function getTemplate(args: MenuCountStory): string {
 	`;
 }
 
-const Template: Story<MenuCountStory> = (args: MenuCountStory) => ({
+const Template: StoryFn<MenuCountStory> = (args: MenuCountStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CheckboxIncompleteStory {}
 
@@ -16,7 +16,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 	`;
 }
 
-const Template: Story<CheckboxIncompleteStory> = (args: CheckboxIncompleteStory) => ({
+const Template: StoryFn<CheckboxIncompleteStory> = (args: CheckboxIncompleteStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TagsBasicStory {
 	palette: string;
@@ -42,12 +42,10 @@ function getTemplate(args: TagsBasicStory): string {
 	const clickable = args.clickable ? `mod-clickable` : '';
 	const outlined = args.outlined ? `mod-outlined` : '';
 	const l = args.l ? `mod-L` : '';
-	return `
-		<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>
-	`;
+	return `<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>`;
 }
 
-const Template: Story<TagsBasicStory> = (args: TagsBasicStory) => ({
+const Template: StoryFn<TagsBasicStory> = (args: TagsBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

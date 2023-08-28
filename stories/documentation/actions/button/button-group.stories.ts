@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonGroupStory {
 	outlined: boolean;
@@ -34,22 +34,20 @@ function getTemplate(args: ButtonGroupStory): string {
 	const noFlexWrap = args.noFlexWrap ? `u-flexWrapNowrap` : '';
 	const outlined = args.outlined ? `mod-outlined` : '';
 
-	return `
-	<ul class="button-group ${outlined} ${noFlexWrap}">
-		<li class="button-group-item"><button type="button" class="button ${outlined} ${classes}">Bouton</button></li>
-		<li class="button-group-item"><button type="button" class="button ${outlined} ${classes}">Bouton</button></li>
-		<li class="button-group-item"><button type="button" class="button ${outlined} ${classes}">Bouton</button></li>
-		<li class="button-group-item">
-			<button type="button" class="button ${outlined} ${classes} mod-more">
-				<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-				<span class="u-mask">Plus d'actions</span>
-			</button>
-		</li>
-	</ul>
-	`;
+	return `<ul class="button-group ${outlined} ${noFlexWrap}">
+	<li class="button-group-item"><button type="button" class="button ${outlined} ${classes}">Bouton</button></li>
+	<li class="button-group-item"><button type="button" class="button ${outlined} ${classes}">Bouton</button></li>
+	<li class="button-group-item"><button type="button" class="button ${outlined} ${classes}">Bouton</button></li>
+	<li class="button-group-item">
+		<button type="button" class="button ${outlined} ${classes} mod-more">
+			<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+			<span class="u-mask">Plus d'actions</span>
+		</button>
+	</li>
+</ul>`;
 }
 
-const Template: Story<ButtonGroupStory> = (args: ButtonGroupStory) => ({
+const Template: StoryFn<ButtonGroupStory> = (args: ButtonGroupStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

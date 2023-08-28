@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface BoxBasicStory {
 	grey: boolean;
@@ -25,7 +25,7 @@ function getTemplate(args: BoxBasicStory): string {
 	`;
 }
 
-const Template: Story<BoxBasicStory> = (args: BoxBasicStory) => ({
+const Template: StoryFn<BoxBasicStory> = (args: BoxBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

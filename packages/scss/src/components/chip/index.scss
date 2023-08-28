@@ -8,6 +8,14 @@
 		@include primary;
 	}
 
+	&.mod-unkillable {
+		@include unkillable;
+	}
+
+	&.mod-clickable {
+		@include clickable;
+	}
+
 	&.is-disabled {
 		@include disabled;
 	}

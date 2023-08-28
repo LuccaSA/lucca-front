@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableCardStory {
 	palette: string;
@@ -38,7 +38,7 @@ function getTemplate(args: TableCardStory): string {
 	`;
 }
 
-const Template: Story<TableCardStory> = (args: TableCardStory) => ({
+const Template: StoryFn<TableCardStory> = (args: TableCardStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -12,13 +12,8 @@ class LoadingsStory {}
 export default {
 	title: 'QA/Loadings',
 	component: LoadingsStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [LoadingsStory],
-		}),
-	],
 } as Meta;
 
-const template: Story<LoadingsStory> = () => ({});
+const template: StoryFn<LoadingsStory> = () => ({});
 
 export const basic = template.bind({});

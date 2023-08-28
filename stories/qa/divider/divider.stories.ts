@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'divider-stories',
 	templateUrl: './divider.stories.html',
-}) class DividerStory {}
+})
+class DividerStory {}
 
 export default {
-  title: 'QA/Divider',
-  component: DividerStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [DividerStory]
-		})
-	]
+	title: 'QA/Divider',
+	component: DividerStory,
 } as Meta;
 
-const template: Story<DividerStory> = () => ({});
+const template: StoryFn<DividerStory> = () => ({});
 
 export const basic = template.bind({});

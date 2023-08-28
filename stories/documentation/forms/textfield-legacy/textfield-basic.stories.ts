@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TextfieldBasicStory {
 	display: string;
@@ -84,7 +84,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 	`;
 }
 
-const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
+const Template: StoryFn<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

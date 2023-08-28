@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CommaStory {}
 
@@ -12,7 +12,7 @@ function getTemplate(args: CommaStory): string {
 	`;
 }
 
-const Template: Story<CommaStory> = (args: CommaStory) => ({
+const Template: StoryFn<CommaStory> = (args: CommaStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

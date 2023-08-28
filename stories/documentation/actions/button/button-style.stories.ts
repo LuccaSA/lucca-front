@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonStyleStory {}
 
@@ -8,14 +8,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonStyleStory): string {
-	return `
-	<button type="button" class="button">Confirmer</button>
-	<button type="button" class="button mod-outlined">Enregistrer</button>
-	<button type="button" class="button mod-text">Annuler</button>
-	`;
+	return `<button type="button" class="button">Confirmer</button>
+<button type="button" class="button mod-outlined">Enregistrer</button>
+<button type="button" class="button mod-text">Annuler</button>`;
 }
 
-const Template: Story<ButtonStyleStory> = (args: ButtonStyleStory) => ({
+const Template: StoryFn<ButtonStyleStory> = (args: ButtonStyleStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

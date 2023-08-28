@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface PageHeaderBasicStory {
 	sticky: boolean;
@@ -60,7 +60,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 	`;
 }
 
-const Template: Story<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({
+const Template: StoryFn<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

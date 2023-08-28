@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface MenuSecondaryPlaceholderStory {
 	compact: boolean;
@@ -35,7 +35,7 @@ function getTemplate(args: MenuSecondaryPlaceholderStory): string {
 	`;
 }
 
-const Template: Story<MenuSecondaryPlaceholderStory> = (args: MenuSecondaryPlaceholderStory) => ({
+const Template: StoryFn<MenuSecondaryPlaceholderStory> = (args: MenuSecondaryPlaceholderStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
