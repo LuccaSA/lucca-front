@@ -139,7 +139,7 @@ export type LuccaIcon =
 	| 'familyTree'
 	| 'orgTree'
 	| 'chartHorizontalBar'
-	| 'horizontzalBarChart'
+	| 'horizontalBarChart'
 	| 'chartLevels'
 	| 'level'
 	| 'chartPie'

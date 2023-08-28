@@ -139,7 +139,7 @@ export const IconsList = [
 	'familyTree',
 	'orgTree',
 	'chartHorizontalBar',
-	'horizontzalBarChart',
+	'horizontalBarChart',
 	'chartLevels',
 	'level',
 	'chartPie',
