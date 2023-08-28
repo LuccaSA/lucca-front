@@ -6,10 +6,10 @@ export default {
 	title: 'Documentation/Feedback/Callout/Basic',
 	component: CalloutComponent,
 	render: (args: CalloutComponent & { description: string }) => {
-		const { description, title, palette, size, removable, tiny, icon } = args;
+		const { description, heading, palette, size, removable, tiny, icon } = args;
 		return {
 			template: `
-        <lu-callout title="${title}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}">
+        <lu-callout heading="${heading}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}">
           ${description}
         </lu-callout>
       `,
@@ -40,7 +40,7 @@ export default {
 
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
-		title: 'Feedback or informations',
+		heading: 'Feedback or informations',
 		tiny: false,
 		icon: 'info',
 		palette: 'none',
