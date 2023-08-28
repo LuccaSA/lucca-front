@@ -1,0 +1,4 @@
+<ng-container *ngIf="isTemplateRef(content); else stringTpl">
+	<ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+<ng-template #stringTpl>{{content}}</ng-template>
