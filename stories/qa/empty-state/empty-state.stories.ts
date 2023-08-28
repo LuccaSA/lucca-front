@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'empty-state-stories',
 	templateUrl: './empty-state.stories.html',
-}) class EmptyStateStory {}
+})
+class EmptyStateStory {}
 
 export default {
-  title: 'QA/Empty State',
-  component: EmptyStateStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [EmptyStateStory]
-		})
-	]
+	title: 'QA/Empty State',
+	component: EmptyStateStory,
 } as Meta;
 
-const template: Story<EmptyStateStory> = () => ({});
+const template: StoryFn<EmptyStateStory> = () => ({});
 
 export const basic = template.bind({});

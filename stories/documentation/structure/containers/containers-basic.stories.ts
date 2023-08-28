@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ContainersBasicStory {
 	center: boolean;
@@ -25,7 +25,7 @@ function getTemplate(args: ContainersBasicStory): string {
 	`;
 }
 
-const Template: Story<ContainersBasicStory> = (args: ContainersBasicStory) => ({
+const Template: StoryFn<ContainersBasicStory> = (args: ContainersBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

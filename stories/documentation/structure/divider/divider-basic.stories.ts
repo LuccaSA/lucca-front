@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface DividerBasicStory {}
 
@@ -16,7 +16,7 @@ function getTemplate(args: DividerBasicStory): string {
 	`;
 }
 
-const Template: Story<DividerBasicStory> = (args: DividerBasicStory) => ({
+const Template: StoryFn<DividerBasicStory> = (args: DividerBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsLegacySortStory {}
 
@@ -40,7 +40,7 @@ function getTemplate(args: GridsLegacySortStory): string {
 	`;
 }
 
-const Template: Story<GridsLegacySortStory> = (args: GridsLegacySortStory) => ({
+const Template: StoryFn<GridsLegacySortStory> = (args: GridsLegacySortStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface PaginationBasicStory {}
 
@@ -35,7 +35,7 @@ function getTemplate(args: PaginationBasicStory): string {
 	`;
 }
 
-const Template: Story<PaginationBasicStory> = (args: PaginationBasicStory) => ({
+const Template: StoryFn<PaginationBasicStory> = (args: PaginationBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

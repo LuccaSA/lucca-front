@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonCounterStory {}
 
@@ -7,12 +7,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonCounterStory): string {
-	return `
-	<button type="button" class="button">Bouton<div class="numericBadge palette-primary">7</div></button>
-	`;
+	return `<button type="button" class="button">Bouton<div class="numericBadge palette-primary">7</div></button>`;
 }
 
-const Template: Story<ButtonCounterStory> = (args: ButtonCounterStory) => ({
+const Template: StoryFn<ButtonCounterStory> = (args: ButtonCounterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

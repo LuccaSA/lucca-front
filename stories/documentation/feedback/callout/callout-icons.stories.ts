@@ -10,7 +10,7 @@ export default {
 
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
-		title: 'Feedback or informations',
+		heading: 'Feedback or informations',
 		tiny: false,
 		icon: 'info',
 		palette: 'none',
@@ -21,7 +21,7 @@ export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	argTypes: {
 		description: HiddenArgType,
 		tiny: HiddenArgType,
-		title: HiddenArgType,
+		heading: HiddenArgType,
 		size: HiddenArgType,
 		removable: HiddenArgType,
 		palette: HiddenArgType,

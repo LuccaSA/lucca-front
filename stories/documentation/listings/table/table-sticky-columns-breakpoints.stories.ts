@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
 
@@ -45,7 +45,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 			</thead>
 			<tbody class="table-body">
 				<tr class="table-body-row mod-stickyHeader-shadow">
-					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 65px" colspan="16" role="presentation" >
+					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 56px" colspan="16" role="presentation" >
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
 				</tr>
@@ -145,7 +145,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 	`;
 }
 
-const Template: Story<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
+const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {overflow: auto; height: 10rem;}`],

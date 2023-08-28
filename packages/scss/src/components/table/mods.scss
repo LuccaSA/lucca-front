@@ -60,11 +60,9 @@
 	.table-body,
 	.table-foot {
 		&:last-child {
-			.table-body-row:last-child {
-				.table-body-row-cell,
-				.table-foot-row-cell {
-					border-bottom: none;
-				}
+			.table-body-row-cell,
+			.table-foot-row-cell {
+				border-bottom: none;
 			}
 		}
 	}

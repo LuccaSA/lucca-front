@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
+
 interface IconsColorStory {}
 
 export default {

@@ -1,22 +1,15 @@
 import { Meta, Story } from '@storybook/angular';
 
 interface CardsActionStory {
-	elevated: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/Cards/Action',
-	elevated: {
-		control: {
-			type: 'boolean',
-		},
-	},
 } as Meta;
 
 function getTemplate(args: CardsActionStory): string {
-	const elevated = args.elevated ? `mod-elevated` : '';
 	return `
-	<div class="card mod-action ${elevated}">
+	<div class="card mod-action">
 		<div class="card-content">
 			<h2 class="card-title">Titre de la carte</h2>
 			<p>Contenu de la carte</p>
@@ -37,4 +30,4 @@ const Template: Story<CardsActionStory> = (args: CardsActionStory) => ({
 });
 
 export const Action = Template.bind({});
-Action.args = { elevated: false };
+Action.args = {};

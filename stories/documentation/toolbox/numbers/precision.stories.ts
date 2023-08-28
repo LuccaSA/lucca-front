@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'precision-stories',
@@ -22,7 +22,7 @@ export default {
 	},
 } as Meta;
 
-const template: Story<PrecisionStory> = (args: PrecisionStory) => ({
+const template: StoryFn<PrecisionStory> = (args: PrecisionStory) => ({
 	props: args,
 });
 

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface FilesDroppableStory {}
 
@@ -47,7 +47,7 @@ function getTemplate(args: FilesDroppableStory): string {
 	`;
 }
 
-const Template: Story<FilesDroppableStory> = (args: FilesDroppableStory) => ({
+const Template: StoryFn<FilesDroppableStory> = (args: FilesDroppableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

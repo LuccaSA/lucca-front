@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableOfContentBasicStory {
 	disabled: boolean;
@@ -37,7 +37,7 @@ function getTemplate(args: TableOfContentBasicStory): string {
 	`;
 }
 
-const Template: Story<TableOfContentBasicStory> = (args: TableOfContentBasicStory) => ({
+const Template: StoryFn<TableOfContentBasicStory> = (args: TableOfContentBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonBasic2Story {
 	palette: string;
@@ -38,15 +38,13 @@ export default {
 
 function getTemplate(args: ButtonBasic2Story): string {
 	const classes = [args.state, args.palette].filter(Boolean).join(' ');
-	const type = args.type !== '' ? 'type=' + args.type : '';
+	const type = args.type !== '' ? 'type="' + args.type + '"' : '';
 	const block = args.block ? `mod-block` : '';
 
-	return `
-	<button ${type} class="button ${classes} ${block}">Bouton</button>
-	`;
+	return `<button ${type} class="button ${classes} ${block}">Bouton</button>`;
 }
 
-const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
+const Template: StoryFn<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

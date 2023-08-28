@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 import { bob } from '../user.mocks';
 
 @Component({
@@ -32,7 +32,7 @@ export default {
 	},
 } as Meta;
 
-const template: Story<DisplayStory> = (args: DisplayStory) => ({
+const template: StoryFn<DisplayStory> = (args: DisplayStory) => ({
 	props: args,
 });
 
