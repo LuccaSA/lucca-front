@@ -59,13 +59,13 @@ export class CalloutComponent {
 
 	@Input({ transform: booleanAttribute })
 	/**
-	 * Is the callout hidden? Works with two way binding too.
+	 * Is the callout removed? Works with two way binding too.
 	 *
 	 */
-	hidden = false;
+	removed = false;
 
 	@Output()
-	hiddenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 }
