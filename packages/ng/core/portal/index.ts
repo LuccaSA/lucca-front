@@ -1,2 +1,2 @@
 export * from './portal-content';
-export * from './portal.component';
+export * from './portal.directive';
