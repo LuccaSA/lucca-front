@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldFeedbackStory): string {
-	return `	<label class="textfield is-loading">
+	return `<label class="textfield is-loading">
 	<input class="textfield-input" type="text">
 	<span class="textfield-label">Loading</span>
 </label>
