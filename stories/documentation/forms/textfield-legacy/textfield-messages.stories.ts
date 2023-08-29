@@ -8,29 +8,27 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldMessagesStory): string {
-	return `
-		<label class="textfield">
-			<input class="textfield-input" type="text">
-			<span class="textfield-label">Label</span>
-			<span class="textfield-messages">
-				<span class="textfield-messages-helper">Helper message</span>
-			</span>
-		</label>
-		<label class="textfield">
-			<input class="textfield-input" type="text">
-			<span class="textfield-label">Label</span>
-			<span class="textfield-messages">
-				<span class="textfield-messages-warning">Warning message</span>
-			</span>
-		</label>
-		<label class="textfield">
-			<input class="textfield-input is-error" type="text">
-			<span class="textfield-label">Label</span>
-			<span class="textfield-messages">
-				<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
-			</span>
-		</label>
-	`;
+	return `<label class="textfield">
+	<input class="textfield-input" type="text">
+	<span class="textfield-label">Label</span>
+	<span class="textfield-messages">
+		<span class="textfield-messages-helper">Helper message</span>
+	</span>
+</label>
+<label class="textfield">
+	<input class="textfield-input" type="text">
+	<span class="textfield-label">Label</span>
+	<span class="textfield-messages">
+		<span class="textfield-messages-warning">Warning message</span>
+	</span>
+</label>
+<label class="textfield">
+	<input class="textfield-input is-error" type="text">
+	<span class="textfield-label">Label</span>
+	<span class="textfield-messages">
+		<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
+	</span>
+</label>`;
 }
 
 const Template: StoryFn<TextfieldMessagesStory> = (args: TextfieldMessagesStory) => ({

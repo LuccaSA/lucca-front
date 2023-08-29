@@ -8,20 +8,18 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldFeedbackStory): string {
-	return `
-	<label class="textfield is-loading">
-		<input class="textfield-input" type="text">
-		<span class="textfield-label">Loading</span>
-	</label>
-	<label class="textfield is-valid">
-		<input class="textfield-input" type="text">
-		<span class="textfield-label">Valid</span>
-	</label>
-	<label class="textfield is-invalid">
-		<input class="textfield-input" type="text">
-		<span class="textfield-label">Invalid</span>
-	</label>
-	`;
+	return `	<label class="textfield is-loading">
+	<input class="textfield-input" type="text">
+	<span class="textfield-label">Loading</span>
+</label>
+<label class="textfield is-valid">
+	<input class="textfield-input" type="text">
+	<span class="textfield-label">Valid</span>
+</label>
+<label class="textfield is-invalid">
+	<input class="textfield-input" type="text">
+	<span class="textfield-label">Invalid</span>
+</label>`;
 }
 
 const Template: StoryFn<TextfieldFeedbackStory> = (args: TextfieldFeedbackStory) => ({
