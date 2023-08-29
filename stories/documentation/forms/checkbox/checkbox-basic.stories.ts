@@ -91,7 +91,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
 	return `<div class="checkboxField${s}">
-	<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message" ${checked}${mixed}${disabled}${required}${invalid} />
+	<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message"${checked}${mixed}${disabled}${required}${invalid} />
 	<label class="checkboxField-label" for="${id}">
 		<span class="checkboxField-label-input">
 			<span class="checkboxField-label-input-icon" aria-hidden="true"></span>
