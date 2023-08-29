@@ -6,7 +6,7 @@ interface NumericBadgeBasicStory {
 }
 
 export default {
-	title: 'Documentation/Texts/NumericBadge/Basic',
+	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Basic',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-primary'],

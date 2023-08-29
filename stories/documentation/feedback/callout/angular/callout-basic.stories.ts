@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { CalloutComponent } from '@lucca-front/ng/callout';
-import { PaletteArgType } from "../../../helpers/common-arg-types";
+import { PaletteArgType } from "../../../../helpers/common-arg-types";
 
 export default {
-	title: 'Documentation/Feedback/Callout/Basic',
+	title: 'Documentation/Feedback/Callout/Angular/Basic',
 	component: CalloutComponent,
 	render: (args: CalloutComponent & { description: string }) => {
 		const { description, heading, palette, size, removable, tiny, icon } = args;

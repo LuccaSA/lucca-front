@@ -2,7 +2,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 
 export default {
-	title: 'Documentation/Feedback/NumericBadge/Basic',
+	title: 'Documentation/Texts/NumericBadge/Angular/Basic',
 	component: NumericBadgeComponent,
 	decorators: [
 		moduleMetadata({
