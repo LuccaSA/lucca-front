@@ -5,7 +5,7 @@ interface InlineMessageBasicStory {
 }
 
 export default {
-	title: 'Documentation/Texts/InlineMessage/HTML & CSS/Basic',
+	title: 'Documentation/Forms/InlineMessage/HTML & CSS/Basic',
 	argTypes: {
 		s: {
 			control: {
