@@ -154,13 +154,13 @@
 }
 
 @mixin passwordActionPressed {
-	.icon-watch {
+	.icon-eye {
 		display: none;
 	}
 }
 
 @mixin passwordActionNotPressed {
-	.icon-unwatch {
+	.icon-eyeStrikethrough {
 		display: none;
 	}
 }
