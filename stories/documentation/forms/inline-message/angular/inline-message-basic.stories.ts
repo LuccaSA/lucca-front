@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 
 export default {
-	title: 'Documentation/Forms/InlineMessage/Basic',
+	title: 'Documentation/Forms/InlineMessage/Angular/Basic',
 	component: InlineMessageComponent,
 	argTypes: {
 		state: {

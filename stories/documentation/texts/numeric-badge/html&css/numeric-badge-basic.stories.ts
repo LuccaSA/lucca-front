@@ -6,7 +6,7 @@ interface NumericBadgeBasicStory {
 }
 
 export default {
-	title: 'Documentation/Texts/NumericBadge/Basic',
+	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Basic',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-primary'],
@@ -24,9 +24,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: NumericBadgeBasicStory): string {
-	return `
-		<div class="numericBadge ${args.size} ${args.palette}">7</div>
-	`;
+	const size = args.size ? ' '+args.size : '';
+	const palette = args.palette ? ' '+args.palette : '';
+	return `<div class="numericBadge${size}${palette}">7</div>`;
 }
 
 const Template: Story<NumericBadgeBasicStory> = (args: NumericBadgeBasicStory) => ({

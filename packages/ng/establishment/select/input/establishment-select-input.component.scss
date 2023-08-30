@@ -1,10 +1,6 @@
 @import '_definitions';
 @include selectInputStyle;
 
-.lu-select-value {
-	padding-right: 3rem;
-}
-
 .lu-picker-header {
 	.option-selector {
 		display: none;
