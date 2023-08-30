@@ -98,7 +98,7 @@
 	border-bottom-right-radius: var(--commons-borderRadius-M);
 
 	&::before {
-		@include icon.generate('arrow_bottom');
+		@include icon.generate('arrow_chevron_bottom');
 
 		height: 0;
 		vertical-align: text-top;

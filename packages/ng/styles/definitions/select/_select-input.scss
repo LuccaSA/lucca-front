@@ -24,7 +24,7 @@
 		gap: 0 !important;
 
 		&::after {
-			@include icon.generate('arrow_bottom');
+			@include icon.generate('arrow_chevron_bottom');
 
 			color: var(--palettes-grey-600);
 			bottom: var(--components-select-input-padding-vertical);
