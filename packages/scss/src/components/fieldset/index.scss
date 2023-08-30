@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.fieldset {
+	@include vars;
+	@include component;
+
+	&.mod-alignLeft {
+		@include alignLeft;
+	}
+
+	&.mod-toggle {
+		@include toggle;
+	}
+
+	&.mod-switch {
+		@include switch;
+	}
+}

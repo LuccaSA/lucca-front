@@ -14,7 +14,7 @@
 }
 
 .switch-input {
-	&:is(:checked) {
+	&:is(:checked, .checked) {
 		@include checked;
 
 		&:hover {
@@ -41,7 +41,7 @@
 	&:is([disabled], [readonly]) {
 		@include disabled;
 
-		&:is(:checked) {
+		&:is(:checked, .checked) {
 			@include disabledChecked;
 		}
 	}
