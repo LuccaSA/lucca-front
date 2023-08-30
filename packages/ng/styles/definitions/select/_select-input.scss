@@ -81,7 +81,7 @@
 
 	.lu-select-clearer {
 		position: absolute;
-		bottom: 0.5rem;
+		bottom: 0.75rem;
 		right: 2.25rem;
 	}
 
@@ -117,6 +117,10 @@
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-XS-lineHeight);
 			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
+		}
+
+		.lu-select-clearer {
+			bottom: var(--spacings-XS);
 		}
 
 		&::after {
