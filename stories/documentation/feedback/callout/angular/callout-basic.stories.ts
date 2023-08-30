@@ -8,11 +8,9 @@ export default {
 	render: (args: CalloutComponent & { description: string }) => {
 		const { description, heading, palette, size, removable, tiny, icon } = args;
 		return {
-			template: `
-        <lu-callout heading="${heading}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}">
-          ${description}
-        </lu-callout>
-      `,
+			template: `<lu-callout heading="${heading}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}">
+  ${description}
+</lu-callout>`,
 		};
 	},
 	argTypes: {
