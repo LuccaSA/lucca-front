@@ -3,7 +3,7 @@ import { NgClass, NgIf } from '@angular/common';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: '[lu-form-field-message]',
+	selector: 'lu-form-field-message',
 	standalone: true,
 	imports: [NgIf],
 	hostDirectives: [NgClass],

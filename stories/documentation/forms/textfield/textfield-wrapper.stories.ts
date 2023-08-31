@@ -8,7 +8,8 @@ import { FormFieldMessageComponent } from "@lucca-front/ng/form-field-elements";
 @Component({
 	standalone: true,
 	imports: [FormFieldMessageComponent],
-	template: ` <div lu-form-field-message message="Helper message" state="success"></div> `,
+	template: `<input type="text" placeholder="demo input, ignore me">
+	<lu-form-field-message message="Helper message" state="success"></lu-form-field-message> `,
 })
 class TextFieldComponent {}
 
