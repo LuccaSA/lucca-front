@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	border: 1px solid var(--palettes-grey-300);
+	box-shadow: 0 0 0 1px var(--palettes-grey-300);
 	display: flex;
 	align-items: stretch;
 	border-radius: var(--commons-borderRadius-M);
@@ -12,13 +12,25 @@
 		.form-field {
 			display: flex;
 			flex-direction: column;
+			gap: var(--spacings-XXS);
+
+			&:has([aria-invalid="true"]) {
+				.textField {
+					background-color: var(--palettes-error-50);
+					box-shadow: 0 0 0 1px var(--palettes-error-600);
+				}
+
+				.textField-prefix, .textField-suffix {
+					border-color: var(--palettes-error-600);
+				}
+			}
 		}
 
 		.textField-prefix {
 			border-right: 1px solid var(--palettes-grey-300);
 			padding: var(--spacings-XS);
 
-			~ .textField-input {
+			~ .textField-input .textField-input-value {
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
 			}
@@ -29,7 +41,7 @@
 			padding: var(--spacings-XS);
 			order: 1;
 
-			~ .textField-input {
+			~ .textField-input .textField-input-value {
 				border-top-right-radius: 0;
 				border-bottom-right-radius: 0;
 			}
@@ -38,25 +50,27 @@
 		.textField-input {
 			display: flex;
 			align-items: center;
-			flex: 1;
-			border-radius: calc(var(--commons-borderRadius-M) - 1px);
-
-			&:focus-within:not(.clear:focus) {
-				outline: 2px solid var(--palettes-primary-700);
-				outline-offset: 3px;
-			}
+			width: 100%;
 		}
 
 		.textField-input-value {
 			border: 0;
 			outline: 0;
+			line-height: var(--size-M-lightHeight);
+			font-size: var(--size-M-fontSize);
 			width: 100%;
 			padding: var(--spacings-XS);
 			background-color: transparent;
+			border-radius: calc(var(--commons-borderRadius-M) - 1px);
+
+			&:focus-visible {
+				outline: 2px solid var(--palettes-primary-700);
+				outline-offset: 3px;
+			}
 		}
 
 		.clear {
-			margin-right: var(--spacings-XS);
+			margin-left: -1.5rem;
 		}
 	}
 }
