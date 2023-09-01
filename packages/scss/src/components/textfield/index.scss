@@ -5,28 +5,24 @@
 	@include component;
 
 	&.mod-S {
-		@include S;
+		// @include S;
 	}
 
 	&.mod-XS {
-		@include XS;
+		// @include XS;
 	}
 }
 
 .textField-input {
 	&[aria-invalid='true'] {
-		@include invalid;
+		// @include invalid;
 	}
 
 	&:disabled {
-		@include disabled;
+		// @include disabled;
 	}
 
 	&:read-only:not(:disabled) {
-		@include readonly;
-	}
-
-	&:is(textarea) {
-		@include textarea;
+		// @include readonly;
 	}
 }

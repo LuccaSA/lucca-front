@@ -2,128 +2,61 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	display: grid;
-	grid-gap: var(--spacings-XXS) 0;
-	grid-template-columns: auto 1fr auto auto;
-	font-size: var(--component-textField-label-fontSize);
-	line-height: var(--component-textField-label-lineHeight);
-
-	.formLabel {
-		@include formLabel.label;
-		grid-column-start: 1;
-		grid-column-end: -1;
-		grid-row: 1;
-	}
-
-	.inlineMessage {
-		grid-column-start: 1;
-		grid-column-end: -1;
-	}
+	border: 1px solid var(--palettes-grey-300);
+	display: flex;
+	align-items: stretch;
+	border-radius: var(--commons-borderRadius-M);
+	background-color: var(--colors-white-color);
 
 	@at-root ($atRoot) {
-		.textField-label {
-		  display: contents;
-		}
-
-		.textField-label-prefix {
+		.form-field {
 			display: flex;
-			align-self: flex-start;
-			color: var(--component-textField-input-prefix);
-			cursor: text;
-			line-height: var(--component-textField-input-lineHeight);
-			grid-column: 1;
- 			grid-row: 2;
+			flex-direction: column;
 		}
 
-		.textField-label-suffix {
-			display: flex;
-			align-self: flex-start;
-			color: var(--component-textField-input-prefix);
-			cursor: text;
-			line-height: var(--component-textField-input-lineHeight);
-			grid-row: 2;
-  		grid-column: 3;
-		}
+		.textField-prefix {
+			border-right: 1px solid var(--palettes-grey-300);
+			padding: var(--spacings-XS);
 
-		.textField-label-prefix-item {
-		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
-
-		  &::selection {
-		    background-color: var(--palettes-primary-200);
-		  }
-
-			&:last-child {
-		    padding-right: 0;
-		  }
-		}
-
-		.textField-label-suffix-item {
-			padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
-
-			&::selection {
-				background-color: var(--palettes-primary-200);
+			~ .textField-input {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
 			}
-
-			&:first-child {
-		    padding-left: 0;
-		  }
 		}
 
-		.textField-label-input {
-		  grid-column: 1 / span 4;
-		  box-shadow: 0 0 0 1px var(--component-textField-input-border);
-		  grid-row: 2;
-		  pointer-events: none;
-		  border-radius: calc(var(--commons-borderRadius-M) + 1px);
-		  background-color: var(--component-textField-input-background);
-		  transition-property: border-color;
-		  transition-duration: var(--commons-animations-durations-fast);
-		}
+		.textField-suffix {
+			border-left: 1px solid var(--palettes-grey-300);
+			padding: var(--spacings-XS);
+			order: 1;
 
-		.textField-action {
-		  display: flex;
-			padding-right: var(--spacings-XS);
-			align-items: center;
-		  grid-row: 2;
-		  grid-column: 4;
-		  color: var(--palettes-grey-600);
+			~ .textField-input {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
 		}
 
 		.textField-input {
-		  grid-column: 2;
-		  grid-row: 2;
-		  border: 0;
-		  outline: none;
-		  padding: var(--component-textField-input-paddingVertical) var(--spacings-XS);
-		  min-width: var(--spacings-M);
-		  font: inherit;
-		  color: var(--component-textField-input-color);
-		  background-color: transparent;
-		  z-index: 1;
-		  line-height: var(--component-textField-input-lineHeight);
+			display: flex;
+			align-items: center;
+			flex: 1;
+			border-radius: calc(var(--commons-borderRadius-M) - 1px);
 
-		  &::selection {
-		    background-color: var(--palettes-primary-200);
-		  }
+			&:focus-within:not(.clear:focus) {
+				outline: 2px solid var(--palettes-primary-700);
+				outline-offset: 3px;
+			}
+		}
 
-		  &::placeholder {
-		    color: var(--component-textField-input-placeholder);
-		    opacity: 1;
-		  }
+		.textField-input-value {
+			border: 0;
+			outline: 0;
+			width: 100%;
+			padding: var(--spacings-XS);
+			background-color: transparent;
+		}
 
-		  &:hover {
-		    ~ .textField-label {
-					--component-textField-input-border: var(--palettes-grey-400);
-		    }
-		  }
-
-		  &:focus-visible {
-		    ~ .textField-label {
-		      .textField-label-input {
-		        @include a11y.focusVisible($offset: 3px);
-		      }
-		    }
-		  }
+		.clear {
+			margin-right: var(--spacings-XS);
 		}
 	}
 }

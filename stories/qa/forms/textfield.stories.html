@@ -1,4 +1,56 @@
 <section class="contentSection">
+
+	<div class="form-field u-marginBottomM">
+		<label class="formLabel" id="field1label" for="field1">
+			Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		</label>
+		<div class="textField">
+			<div class="textField-input">
+				<input type="text" id="field1" class="textField-input-value" aria-labelledby="field1prefix field1label field1suffix" aria-describedby="field1message" placeholder="Placeholder" aria-invalid="false" value="Value" />
+			</div>
+		</div>
+		<div class="inlineMessage" id="field1message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	</div>
+
+	<div class="form-field u-marginBottomM">
+		<label class="formLabel" id="field1label" for="field2">
+			Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		</label>
+		<div class="textField">
+			<div class="textField-input">
+				<input type="text" id="field2" class="textField-input-value" aria-labelledby="field2prefix field2label field2suffix" aria-describedby="field2message" placeholder="Placeholder" aria-invalid="false" value="Value" />
+				<button class="clear">
+					<span aria-hidden="true" class="lucca-icon icon-close"></span>
+					<span class="u-mask">Vider ce champ</span>
+				</button>
+			</div>
+		</div>
+		<div class="inlineMessage" id="field2message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	</div>
+
+	<div class="form-field u-marginBottomM">
+		<label class="formLabel" id="field3label" for="field3">
+			Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		</label>
+		<div class="textField">
+			<span class="textField-prefix" id="field3prefix">
+				<span class="textField-label-prefix-item">$</span>
+			</span>
+			<span class="textField-suffix" id="field3suffix">
+				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+			</span>
+			<div class="textField-input">
+				<input type="text" id="field3" class="textField-input-value" aria-labelledby="field3prefix field3label field3suffix" aria-describedby="field3message" placeholder="Placeholder" aria-invalid="false" value="Value" />
+				<button class="clear">
+				  <span aria-hidden="true" class="lucca-icon icon-close"></span>
+					<span class="u-mask">Vider ce champ</span>
+				</button>
+			</div>
+		</div>
+		<div class="inlineMessage" id="field3message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+  </div>
+
+<!--
 	<h1>Text field</h1>
 	<div class="textField">
     <input type="text" id="field1" class="textField-input" aria-labelledby="field1prefix field1label field1suffix" aria-describedby="field1message" placeholder="Placeholder" aria-invalid="false" value="Value" />
@@ -161,7 +213,7 @@
       </span>
     </label>
 		<div class="inlineMessage" id="fieldInvalid2message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-  </div>
+  </div> -->
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->

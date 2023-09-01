@@ -1,72 +1,72 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
-
-@mixin S {
-	--component-textField-label-fontSize: var(--sizes-S-fontSize);
-	--component-textField-label-lineHeight: var(--sizes-S-lineHeight);
-	--component-textField-input-paddingVertical: var(--spacings-XXS);
-	--component-textField-input-lineHeight: var(--sizes-M-lineHeight);
-	--component-textField-action-icon-fontSize: var(--sizes-XS-lineHeight);
-	--component-textField-action-icon-size: var(--spacings-M);
-	--component-textField-input-lines: 3;
-
-	.formLabel {
-		@include formLabel.S;
-	}
-
-	.clear {
-		@include clear.S;
-	}
-}
-
-@mixin XS {
-	--component-textField-label-fontSize: var(--sizes-XS-fontSize);
-	--component-textField-label-lineHeight: var(--sizes-XS-lineHeight);
-	--component-textField-input-paddingVertical: var(--spacings-XXS);
-	--component-textField-input-lineHeight: var(--sizes-XS-lineHeight);
-	--component-textField-action-icon-fontSize: 0.75rem;
-	--component-textField-action-icon-size: var(--spacings-M);
-	--component-textField-input-lines: 2;
-
-	.formLabel {
-		@include formLabel.XS;
-	}
-
-	.inlineMessage {
-		@include inlineMessage.S;
-	}
-
-	.clear {
-		@include clear.S;
-	}
-}
-
-@mixin textarea {
-	resize: vertical;
-	height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
-	min-height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
-	max-height: calc(100vh - var(--spacings-XXL));
-
-	.textField[style*='--component-textField-action-width'] &,
-	.textField[style*='--component-textField-label-suffix-width'] & {
-		grid-column-end: -1;
-		padding-right: calc(
-			var(--component-textField-action-width, 0px) + var(--component-textField-label-suffix-width, 0px) + var(--spacings-XS)
-		);
-
-		~ .textField-action {
-			position: relative;
-			z-index: 1;
-		}
-
-		~ .textField-label {
-			.textField-label-suffix {
-				.textField-label-suffix-item {
-					position: relative;
-					z-index: 1;
-				}
-			}
-		}
-	}
-}
+//
+// @mixin S {
+// 	--component-textField-label-fontSize: var(--sizes-S-fontSize);
+// 	--component-textField-label-lineHeight: var(--sizes-S-lineHeight);
+// 	--component-textField-input-paddingVertical: var(--spacings-XXS);
+// 	--component-textField-input-lineHeight: var(--sizes-M-lineHeight);
+// 	--component-textField-action-icon-fontSize: var(--sizes-XS-lineHeight);
+// 	--component-textField-action-icon-size: var(--spacings-M);
+// 	--component-textField-input-lines: 3;
+//
+// 	.formLabel {
+// 		@include formLabel.S;
+// 	}
+//
+// 	.clear {
+// 		@include clear.S;
+// 	}
+// }
+//
+// @mixin XS {
+// 	--component-textField-label-fontSize: var(--sizes-XS-fontSize);
+// 	--component-textField-label-lineHeight: var(--sizes-XS-lineHeight);
+// 	--component-textField-input-paddingVertical: var(--spacings-XXS);
+// 	--component-textField-input-lineHeight: var(--sizes-XS-lineHeight);
+// 	--component-textField-action-icon-fontSize: 0.75rem;
+// 	--component-textField-action-icon-size: var(--spacings-M);
+// 	--component-textField-input-lines: 2;
+//
+// 	.formLabel {
+// 		@include formLabel.XS;
+// 	}
+//
+// 	.inlineMessage {
+// 		@include inlineMessage.S;
+// 	}
+//
+// 	.clear {
+// 		@include clear.S;
+// 	}
+// }
+//
+// @mixin textarea {
+// 	resize: vertical;
+// 	height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
+// 	min-height: calc(var(--component-textField-input-lineHeight) * var(--component-textField-input-lines));
+// 	max-height: calc(100vh - var(--spacings-XXL));
+//
+// 	.textField[style*='--component-textField-action-width'] &,
+// 	.textField[style*='--component-textField-label-suffix-width'] & {
+// 		grid-column-end: -1;
+// 		padding-right: calc(
+// 			var(--component-textField-action-width, 0px) + var(--component-textField-label-suffix-width, 0px) + var(--spacings-XS)
+// 		);
+//
+// 		~ .textField-action {
+// 			position: relative;
+// 			z-index: 1;
+// 		}
+//
+// 		~ .textField-label {
+// 			.textField-label-suffix {
+// 				.textField-label-suffix-item {
+// 					position: relative;
+// 					z-index: 1;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
