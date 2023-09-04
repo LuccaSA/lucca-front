@@ -13,26 +13,26 @@
 	}
 
 	&.mod-XS {
-		--icon-size:  calc(var(--sizes-XS-fontSize) * 1.25);
+		--icon-size: .75rem;
 	}
 
 	&.mod-S {
-		--icon-size:  calc(var(--sizes-S-fontSize) * 1.25);
+		--icon-size:  1rem;
 	}
 
 	&.mod-M {
-		--icon-size:  calc(var(--sizes-M-fontSize) * 1.25);
+		--icon-size:  1.25rem;
 	}
 
 	&.mod-L {
-		--icon-size:  calc(var(--sizes-L-fontSize) * 1.25);
+		--icon-size:  1.5rem;
 	}
 
 	&.mod-XL {
-		--icon-size:  calc(var(--sizes-XL-fontSize) * 1.25);
+		--icon-size:  1.75rem;
 	}
 
 	&.mod-XXL {
-		--icon-size:  calc(var(--sizes-XXL-fontSize) * 1.25);
+		--icon-size:  2rem;
 	}
 }
