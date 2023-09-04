@@ -45,6 +45,10 @@
 	&.mod-icon {
 		@include icon;
 
+		&.mod-S {
+			@include iconS;
+		}
+
 		&.mod-XS {
 			@include iconXS;
 		}
