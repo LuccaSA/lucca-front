@@ -8,12 +8,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldMultilineStory): string {
-	return `
-		<label class="textfield mod-multiline">
-			<textarea class="textfield-input"></textarea>
-			<span class="textfield-label">Label</span>
-		</label>
-	`;
+	return `<label class="textfield mod-multiline">
+	<textarea class="textfield-input"></textarea>
+	<span class="textfield-label">Label</span>
+</label>`;
 }
 
 const Template: StoryFn<TextfieldMultilineStory> = (args: TextfieldMultilineStory) => ({

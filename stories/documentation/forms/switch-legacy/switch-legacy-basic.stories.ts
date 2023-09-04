@@ -29,19 +29,17 @@ export default {
 } as Meta;
 
 function getTemplate(args: SwitchLegacyBasicStory): string {
-	const disabled = args.disabled ? `disabled` : '';
-	const s = args.s ? `mod-S` : '';
-	const inline = args.inline ? `mod-inline` : '';
-	return `
-		<label class="switch ${s} ${inline}">
-			<input class="switch-input" type="checkbox" name="switchList1" ${disabled}>
-			<span class="switch-label">Label</span>
-		</label>
-		<label class="switch ${s} ${inline}">
-			<input class="switch-input" type="checkbox" name="switchList1" ${disabled} checked>
-			<span class="switch-label">Label</span>
-		</label>
-	`;
+	const disabled = args.disabled ? ` disabled` : '';
+	const s = args.s ? ` mod-S` : '';
+	const inline = args.inline ? ` mod-inline` : '';
+	return `<label class="switch${s}${inline}">
+	<input class="switch-input" type="checkbox" name="switchList1"${disabled}>
+	<span class="switch-label">Label</span>
+</label>
+<label class="switch${s}${inline}">
+	<input class="switch-input" type="checkbox" name="switchList1"${disabled} checked>
+	<span class="switch-label">Label</span>
+</label>`;
 }
 
 const Template: Story<SwitchLegacyBasicStory> = (args: SwitchLegacyBasicStory) => ({

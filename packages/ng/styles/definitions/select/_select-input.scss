@@ -24,7 +24,7 @@
 		gap: 0 !important;
 
 		&::after {
-			@include icon.generate('arrow_bottom');
+			@include icon.generate('arrow_chevron_bottom');
 
 			color: var(--palettes-grey-600);
 			bottom: var(--components-select-input-padding-vertical);
@@ -117,6 +117,10 @@
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-XS-lineHeight);
 			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
+		}
+
+		.lu-select-clearer {
+			bottom: var(--spacings-XS);
 		}
 
 		&::after {

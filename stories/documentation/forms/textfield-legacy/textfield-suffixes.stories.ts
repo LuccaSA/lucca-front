@@ -8,17 +8,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldSearchAndSuffixStory): string {
-	return `
-		<label class="textfield mod-search">
-			<input class="textfield-input" type="text" placeholder="Placeholder">
-			<span class="textfield-label">Label</span>
-		</label>
-		<label class="textfield mod-withSuffix">
-			<input class="textfield-input" type="text" placeholder="Placeholder">
-			<span class="textfield-label">Label</span>
-			<span class="textfield-suffix">€/j</span>
-		</label>
-	`;
+	return `<label class="textfield mod-search">
+	<input class="textfield-input" type="text" placeholder="Placeholder">
+	<span class="textfield-label">Label</span>
+</label>
+<label class="textfield mod-withSuffix">
+	<input class="textfield-input" type="text" placeholder="Placeholder">
+	<span class="textfield-label">Label</span>
+	<span class="textfield-suffix">€/j</span>
+</label>`;
 }
 
 const Template: StoryFn<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAndSuffixStory) => ({
