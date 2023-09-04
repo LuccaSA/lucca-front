@@ -11,7 +11,7 @@ export default {
 		},
 		content: {
 			type: 'symbol',
-			description: 'Optional content, can be string or a ng-template reference (see NgTemplate Content story)'
+			description: 'Optional content, can be string or a ng-template reference (see NgTemplate Content story)',
 		},
 		// For some reason Storybook detected an undefined input here... so we're hiding it.
 		undefined: HiddenArgType,
