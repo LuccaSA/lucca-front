@@ -11,21 +11,17 @@ import { NgClass, NgIf } from '@angular/common';
 	styleUrls: ['./form-field-message.component.scss'],
 })
 export class FormFieldMessageComponent implements OnInit {
-	/**
-	 * TODO handle id input to apply it to the host element
-	 */
-
-	private ngClass = inject(NgClass);
+	#ngClass = inject(NgClass);
 
 	@Input()
 	message: string;
 
 	@Input()
 	set state(state: 'default' | 'success' | 'warning' | 'error') {
-		this.ngClass.ngClass = [`is-${state}`];
+		this.#ngClass.ngClass = [`is-${state}`];
 	}
 
 	ngOnInit(): void {
-		this.ngClass.klass = 'inlineMessage';
+		this.#ngClass.klass = 'inlineMessage';
 	}
 }

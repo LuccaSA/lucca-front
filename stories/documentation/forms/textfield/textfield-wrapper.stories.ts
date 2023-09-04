@@ -1,15 +1,20 @@
 import { Meta, StoryObj } from "@storybook/angular";
 import { Component } from "@angular/core";
-import { FormFieldMessageComponent } from "@lucca-front/ng/form-field-elements";
+import { FormFieldLabelComponent, FormFieldMessageComponent } from "@lucca-front/ng/form-field-elements";
 
 /**
  * Demo component for now, will make it standalone later
  */
 @Component({
 	standalone: true,
-	imports: [FormFieldMessageComponent],
-	template: `<input type="text" placeholder="demo input, ignore me">
-	<lu-form-field-message message="Helper message" state="success"></lu-form-field-message> `,
+	imports: [FormFieldMessageComponent, FormFieldLabelComponent],
+	template: `
+		<div class="textField">
+			<input type="text" placeholder="demo input" id="test-input" class="textField-input"/>
+			<label for="test-input" lu-form-field-label required help>Label demo</label>
+			<lu-form-field-message message="Helper message" state="success"></lu-form-field-message>
+		</div>
+	`,
 })
 class TextFieldComponent {}
 
@@ -69,7 +74,7 @@ export default {
 				type: 'select',
 			},
 		},
-	},
+	}
 } as Meta;
 
 export const Template: StoryObj<TextFieldComponent> = {};
