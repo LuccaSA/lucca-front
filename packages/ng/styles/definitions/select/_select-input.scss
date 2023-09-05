@@ -21,7 +21,7 @@
 		cursor: pointer;
 		outline: none;
 		padding: 0;
-		gap: 0 !important;
+		gap: 0;
 
 		&::after {
 			@include icon.generate('arrow_chevron_bottom');
