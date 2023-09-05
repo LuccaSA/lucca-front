@@ -18,11 +18,15 @@
 
 @mixin XS {
 	.formLabel {
-		@include formLabel.S;
+		@include formLabel.XS;
 	}
 
 	.textField {
-		@include textField.S;
+		@include textField.XS;
+	}
+
+	.inlineMessage {
+		@include inlineMessage.S;
 	}
 }
 

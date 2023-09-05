@@ -3,15 +3,10 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: 0 0 0 1px var(--component-textField-border);
 	display: flex;
 	align-items: stretch;
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
-
-	&:hover {
-		--component-textField-border: var(--palettes-grey-400);
-	}
 
 	&:focus-within {
 		@include a11y.focusVisible($offset: 3px);
@@ -22,6 +17,12 @@
 			display: flex;
 			align-items: center;
 			width: 100%;
+			box-shadow: 0 0 0 1px var(--component-textField-border);
+			border-radius: var(--commons-borderRadius-M);
+
+			&:hover {
+				--component-textField-border: var(--palettes-grey-400);
+			}
 		}
 
 		.textField-input-value {
@@ -32,7 +33,7 @@
 			width: 100%;
 			padding: var(--component-textField-padding);
 			background-color: transparent;
-			border-radius: calc(var(--commons-borderRadius-M) - 1px);
+
 			color: var(--component-textField-color);
 
 			&::placeholder {
@@ -40,28 +41,44 @@
 			}
 		}
 
+		.textField-search {
+			font-size: var(--sizes-M-lineHeight);
+			color: var(--palettes-grey-600);
+			display: block;
+		}
+
 		.textField-prefix {
-			border-right: 1px solid var(--component-textField-border);
-			padding: var(--component-textField-padding);
+			display: flex;
+			padding: 0 var(--component-textField-padding);
+			align-items: center;
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
+			box-shadow: 0 0 0 1px var(--component-textField-border);
+			clip-path: inset(-1px 0 -1px -1px);
+			border-top-left-radius: var(--commons-borderRadius-M);
+			border-bottom-left-radius: var(--commons-borderRadius-M);
 
-			~ .textField-input .textField-input-value {
+			~ .textField-input {
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
 			}
 		}
 
 		.textField-suffix {
-			border-left: 1px solid var(--component-textField-border);
-			padding: var(--component-textField-padding);
+			display: flex;
+			padding: 0 var(--component-textField-padding);
+			align-items: center;
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
+			box-shadow: 0 0 0 1px var(--component-textField-border);
+			clip-path: inset(-1px -1px -1px 0);
+			border-top-right-radius: var(--commons-borderRadius-M);
+			border-bottom-right-radius: var(--commons-borderRadius-M);
 			order: 1;
 
-			~ .textField-input .textField-input-value {
+			~ .textField-input {
 				border-top-right-radius: 0;
 				border-bottom-right-radius: 0;
 			}

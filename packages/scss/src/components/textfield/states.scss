@@ -3,7 +3,7 @@
   --component-textField-background: var(--palettes-error-50);
   --component-textField-placeholder: var(--palettes-error-400);
 
-  &:hover {
+  .textField-input:hover {
     --component-textField-border: var(--palettes-error-600);
   }
 }
