@@ -1,4 +1,29 @@
 @use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
+
+@mixin invalid {
+	.textField {
+		@include textField.invalid;
+	}
+
+	.formLabel {
+		@include formLabel.error;
+	}
+
+	.inlineMessage {
+		@include inlineMessage.error;
+	}
+}
+
+@mixin disabled {
+	.textField {
+		@include textField.disabled;
+	}
+}
+
+// deprecated
 
 @mixin required {
 	&:not(:empty) {

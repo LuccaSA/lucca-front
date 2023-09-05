@@ -1,8 +1,32 @@
 @use 'sass:math';
-
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
+
+@mixin S {
+	.formLabel {
+		@include formLabel.S;
+	}
+
+	.textField {
+		@include textField.S;
+	}
+}
+
+@mixin XS {
+	.formLabel {
+		@include formLabel.S;
+	}
+
+	.textField {
+		@include textField.S;
+	}
+}
+
+// deprecated
 
 @mixin overlay {
 	&:focus-within {

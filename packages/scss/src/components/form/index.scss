@@ -1,6 +1,30 @@
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @use 'exports' as *;
+
+.form-field {
+	&.is-invalid, &:has(.textField-input-value[aria-invalid="true"]) {
+		@include invalid;
+	}
+
+	&.is-disabled, &:has(.textField-input-value[disabled]) {
+		@include disabled;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+}
+
+
+// deprecated
 
 .form {
 	@include vars;
