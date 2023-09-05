@@ -1,52 +1,23 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: 0 0 0 1px var(--palettes-grey-300);
+	box-shadow: 0 0 0 1px var(--component-textField-border);
 	display: flex;
 	align-items: stretch;
 	border-radius: var(--commons-borderRadius-M);
-	background-color: var(--colors-white-color);
+	background-color: var(--component-textField-background);
+
+	&:hover {
+		--component-textField-border: var(--palettes-grey-400);
+	}
+
+	&:focus-within {
+		@include a11y.focusVisible($offset: 3px);
+	}
 
 	@at-root ($atRoot) {
-		.form-field {
-			display: flex;
-			flex-direction: column;
-			gap: var(--spacings-XXS);
-
-			&:has([aria-invalid="true"]) {
-				.textField {
-					background-color: var(--palettes-error-50);
-					box-shadow: 0 0 0 1px var(--palettes-error-600);
-				}
-
-				.textField-prefix, .textField-suffix {
-					border-color: var(--palettes-error-600);
-				}
-			}
-		}
-
-		.textField-prefix {
-			border-right: 1px solid var(--palettes-grey-300);
-			padding: var(--spacings-XS);
-
-			~ .textField-input .textField-input-value {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-			}
-		}
-
-		.textField-suffix {
-			border-left: 1px solid var(--palettes-grey-300);
-			padding: var(--spacings-XS);
-			order: 1;
-
-			~ .textField-input .textField-input-value {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
-			}
-		}
-
 		.textField-input {
 			display: flex;
 			align-items: center;
@@ -56,21 +27,48 @@
 		.textField-input-value {
 			border: 0;
 			outline: 0;
-			line-height: var(--size-M-lightHeight);
-			font-size: var(--size-M-fontSize);
+			line-height: var(--component-textField-lineHeight);
+			font-size: var(--component-textField-fontSize);
 			width: 100%;
-			padding: var(--spacings-XS);
+			padding: var(--component-textField-padding);
 			background-color: transparent;
 			border-radius: calc(var(--commons-borderRadius-M) - 1px);
+			color: var(--component-textField-color);
 
-			&:focus-visible {
-				outline: 2px solid var(--palettes-primary-700);
-				outline-offset: 3px;
+			&::placeholder {
+				color: var(--component-textField-placeholder);
+			}
+		}
+
+		.textField-prefix {
+			border-right: 1px solid var(--component-textField-border);
+			padding: var(--component-textField-padding);
+			color: var(--component-textField-prefix-color);
+			line-height: var(--component-textField-lineHeight);
+			font-size: var(--component-textField-fontSize);
+
+			~ .textField-input .textField-input-value {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+
+		.textField-suffix {
+			border-left: 1px solid var(--component-textField-border);
+			padding: var(--component-textField-padding);
+			color: var(--component-textField-prefix-color);
+			line-height: var(--component-textField-lineHeight);
+			font-size: var(--component-textField-fontSize);
+			order: 1;
+
+			~ .textField-input .textField-input-value {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
 			}
 		}
 
 		.clear {
-			margin-left: -1.5rem;
+			margin-right: var(--component-textField-padding);
 		}
 	}
 }
