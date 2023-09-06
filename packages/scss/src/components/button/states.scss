@@ -16,7 +16,7 @@
 
 @mixin disabledOutlined {
 	background-color: var(--colors-white-color);
-	box-shadow: inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+	box-shadow: inset 0 0 0 1px var(--palettes-grey-400);
 	color: var(--palettes-grey-500);
 	cursor: default;
 }
