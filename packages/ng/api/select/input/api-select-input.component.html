@@ -1,0 +1,25 @@
+<div class="lu-select-placeholder">{{ placeholder }}</div>
+<div class="lu-select-value">
+	<div class="lu-select-display-wrapper">
+		<ng-container #display></ng-container>
+	</div>
+</div>
+<div class="lu-select-suffix">
+	<lu-input-clearer></lu-input-clearer>
+</div>
+<span [class.chip]="multiple" *luDisplayer="let option">{{ option.name }}</span>
+<lu-option-picker-advanced [option-comparer]="byId">
+	<header class="lu-picker-header">
+		<lu-api-paged-searcher
+			[standard]="standard"
+			[api]="api"
+			[fields]="fields"
+			[filters]="filters"
+			[orderBy]="orderBy"
+			[sort]="sort"
+		></lu-api-paged-searcher>
+	</header>
+	<div class="lu-picker-content-option">
+		<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+	</div>
+</lu-option-picker-advanced>

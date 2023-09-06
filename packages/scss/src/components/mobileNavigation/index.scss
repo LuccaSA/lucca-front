@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.mobileNavigation {
+	@include vars;
+	@include component;
+
+	// &.mod-L {
+	// 	@include l;
+	// }
+}

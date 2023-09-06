@@ -1,14 +1,22 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
 @mixin userPictureVars {
+	--components-userPicture-XS-image: 1.5rem;
+	--components-userPicture-XS-fontSize: var(--sizes-XS-fontSize);
+	--components-userPicture-XS-placeholder: 0.75rem;
+	--components-userPicture-S-image: 2rem;
+	--components-userPicture-S-fontSize: var(--sizes-S-fontSize);
+	--components-userPicture-S-placeholder: var(--sizes-XS-lineHeight);
+	--components-userPicture-M-image: 2.5rem;
+	--components-userPicture-M-fontSize: var(--sizes-M-fontSize);
+	--components-userPicture-M-placeholder: var(--sizes-S-lineHeight);
+	--components-userPicture-L-image: 3rem;
+	--components-userPicture-L-fontSize: var(--sizes-L-fontSize);
+	--components-userPicture-L-placeholder: var(--sizes-M-lineHeight);
+
+	// deprecated
 	--components-userPicture-XXS-image: 1rem;
 	--components-userPicture-XXS-fontSize: 0.5625rem;
-	--components-userPicture-XS-image: 1.5rem;
-	--components-userPicture-XS-fontSize: 0.75rem;
-	--components-userPicture-S-image: 2rem;
-	--components-userPicture-S-fontSize: 0.875rem;
-	--components-userPicture-M-image: 2.5rem;
-	--components-userPicture-M-fontSize: 1.125rem;
-	--components-userPicture-L-image: 3rem;
-	--components-userPicture-L-fontSize: 1.375rem;
 	--components-userPicture-XL-image: 4.5rem;
 	--components-userPicture-XL-fontSize: 1.8rem;
 	--components-userPicture-XXL-image: 7.5rem;
@@ -30,6 +38,7 @@
 		color: var(--colors-white-color);
 		display: flex;
 		font-size: var(--components-user-picture-font-size, var(--components-userPicture-M-fontSize));
+		font-weight: 600;
 		line-height: 1;
 		justify-content: center;
 		width: var(--components-user-picture-image-size, var(--components-userPicture-M-image));
@@ -43,16 +52,19 @@
 	&.mod-XS {
 		--components-user-picture-image-size: var(--components-userPicture-XS-image);
 		--components-user-picture-font-size: var(--components-userPicture-XS-fontSize);
+		--components-user-picture-placeholder: var(--components-userPicture-XS-placeholder);
 	}
 
 	&.mod-S {
 		--components-user-picture-image-size: var(--components-userPicture-S-image);
 		--components-user-picture-font-size: var(--components-userPicture-S-fontSize);
+		--components-user-picture-placeholder: var(--components-userPicture-S-placeholder);
 	}
 
 	&.mod-L {
 		--components-user-picture-image-size: var(--components-userPicture-L-image);
 		--components-user-picture-font-size: var(--components-userPicture-L-fontSize);
+		--components-user-picture-placeholder: var(--components-userPicture-L-placeholder);
 	}
 
 	&.mod-XL {
@@ -67,5 +79,22 @@
 
 	&.mod-border {
 		box-shadow: 0 0 0 2px var(--colors-white-color);
+	}
+
+	&.mod-placeholder {
+		.picture {
+			background: var(--palettes-grey-200) !important;
+
+			&::before {
+				@include icon.generate('people_person');
+				color: var(--palettes-grey-600);
+				font-weight: 400;
+				font-size: var(--components-user-picture-placeholder, var(--components-userPicture-M-placeholder));
+			}
+		}
+
+		.userPicture-initials {
+			display: none;
+		}
 	}
 }

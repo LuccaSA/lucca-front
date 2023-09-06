@@ -1,0 +1,217 @@
+@import '_definitions';
+@include optionItemStyle;
+
+:host {
+	--components-options-tree-multiple-padding: 2.25rem;
+	--components-options-tree-padding-child: .75rem;
+}
+
+.is-disabled {
+	color: var(--palettes-grey-500);
+	user-select: none;
+	cursor: default;
+
+	&.is-selected {
+		background-color: var(--palettes-grey-100);
+	}
+
+	&:hover {
+		background-color: inherit;
+	}
+}
+
+.optionItem {
+	&:not(:last-child) {
+		margin-bottom: var(--spacings-XXS);
+	}
+
+	&:hover {
+		.optionItem-value {
+			background: var(--palettes-grey-50);
+		}
+
+		.optionItem-icons {
+			opacity: 1;
+		}
+	}
+}
+
+.optionItem-value {
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+}
+
+.optionItem-icons {
+	display: none;
+	position: absolute;
+	top: var(--spacings-XS);
+	right: var(--spacings-XS);
+	opacity: 0;
+	transition: all var(--commons-animations-durations-fast) ease;
+}
+
+.optionItem-icon {
+	cursor: pointer;
+	opacity: 0.66;
+	margin-left: var(--spacings-XS);
+	transition: all var(--commons-animations-durations-fast) ease;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.optionItem-icon-shape {
+	fill: var(--components-options-item-icon-color);
+	width: 1.4rem;
+	height: 1.4rem;
+}
+
+:host-context(.lu-picker-panel) {
+	padding: 0;
+
+	.optionItem-value {
+		&::before {
+			top: 1.3rem;
+			left: var(--spacings-XS);
+			pointer-events: none;
+		}
+
+		&::after {
+			top: 1.3rem;
+			left: var(--spacings-XS);
+			pointer-events: none;
+		}
+	}
+}
+
+:host-context(.lu-picker-panel.mod-multiple) {
+	.optionItem-icons {
+		display: block;
+	}
+
+	.optionItem-value {
+		padding-right: 4rem;
+	}
+}
+
+:host-context(.lu-picker-panel lu-tree-option) {
+	.optionItem-value {
+		padding-left: var(--spacings-XS);
+	}
+}
+
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child));
+	}
+}
+
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 2);
+	}
+}
+
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 3);
+	}
+}
+
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 4);
+	}
+}
+
+:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 5);
+	}
+}
+
+// Multiple
+
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
+	.optionItem-value {
+		padding-left: var(--components-options-tree-multiple-padding);
+
+		&::before {
+			left: var(--spacings-XS);
+		}
+
+		&::after {
+			left: var(--spacings-XS);
+		}
+	}
+}
+
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child));
+
+		&::before {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child));
+		}
+
+		&::after {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child));
+		}
+	}
+}
+
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 2);
+
+		&::before {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 2);
+		}
+
+		&::after {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 2);
+		}
+	}
+}
+
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 3);
+
+		&::before {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 3);
+		}
+
+		&::after {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 3);
+		}
+	}
+}
+
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 4);
+
+		&::before {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 4);
+		}
+
+		&::after {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 4);
+		}
+	}
+}
+
+:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
+	.optionItem-value {
+		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 5);
+
+		&::before {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 5);
+		}
+
+		&::after {
+			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 5);
+		}
+	}
+}

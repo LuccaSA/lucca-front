@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'notchbox-stories',
 	templateUrl: './notch-box.stories.html',
-}) class NotchBoxStory { }
+})
+class NotchBoxStory {}
 
 export default {
 	title: 'QA/NotchBox',
 	component: NotchBoxStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [NotchBoxStory]
-		})
-	]
 } as Meta;
 
-const template: Story<NotchBoxStory> = () => ({});
+const template: StoryFn<NotchBoxStory> = () => ({});
 
 export const basic = template.bind({});

@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { luFadeAnimationFactory } from '@lucca-front/ng/animations';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
 	standalone: true,
 	imports: [CommonModule],
 	template: ` <div class="grid">
-		<div class="grid-3@mediaMinXXS ng-demo-block">
+		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
 			<h3 class="u-margin0">
 				Fade
 				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
@@ -27,14 +27,10 @@ class FadeAnimationStory {
 export default {
 	title: 'Documentation/Toolbox/Animations/Fade',
 	component: FadeAnimationStory,
-	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-		}),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: Story<FadeAnimationStory> = (args: FadeAnimationStory) => ({
+const template: StoryFn<FadeAnimationStory> = (args: FadeAnimationStory) => ({
 	props: args,
 });
 
@@ -42,11 +38,11 @@ export const Fade = template.bind({});
 Fade.args = {};
 
 const code = `
-/* 1. Importer BrowserAnimationsModule */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/* 1. Appeler provideAnimations */
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
-	imports: [BrowserAnimationsModule]
+	providers: [provideAnimations()]
 })
 class AppModule {}
 
@@ -55,7 +51,7 @@ class AppModule {}
 	selector: 'story-fade-animation',
 	template: \`
 		<div class="grid">
-			<div class="grid-3@mediaMinXXS ng-demo-block">
+			<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
 				<h3 class="u-margin0">
 					Fade
 					<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>

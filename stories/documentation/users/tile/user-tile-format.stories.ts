@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { bob, patrick, squidwards } from '../user.mocks';
 
 @Component({
@@ -20,13 +20,13 @@ export default {
 	title: 'Documentation/Users/Tile/Format',
 	component: UserTileFormatStory,
 	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+		applicationConfig({
+			providers: [provideAnimations()],
 		}),
 	],
 } as Meta;
 
-const template: Story<LuUserTileComponent> = (args: LuUserTileComponent) => ({
+const template: StoryFn<LuUserTileComponent> = (args: LuUserTileComponent) => ({
 	props: args,
 });
 

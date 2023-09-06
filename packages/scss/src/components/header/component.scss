@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: var(--commons-elevations-elevation-1);
+	box-shadow: var(--commons-boxShadow-XS);
 	background-color: var(--components-header-background);
 	min-height: var(--components-header-height);
 	padding: var(--components-header-padding);
@@ -54,7 +54,7 @@
 			}
 
 			&::before {
-				@include icon.generate('arrow_full_west');
+				@include icon.generate('arrow_left');
 			}
 		}
 

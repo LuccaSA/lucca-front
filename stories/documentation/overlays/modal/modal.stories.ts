@@ -25,7 +25,7 @@ const globalArgTypes = {
 	panelClass: { control: { type: 'text' } },
 	undismissable: { control: { type: 'boolean' } },
 	size: {
-		options: ['XXS', 'XS', 'S', 'M', 'L', 'XL'],
+		options: ['XS', 'S', 'M', 'L', 'XL'],
 		control: {
 			type: 'select',
 		},
@@ -99,7 +99,7 @@ class ModalStories {
 	@Input() position: 'left' | 'right' = 'right';
 	@Input() panelClass: string;
 	@Input() undismissable: boolean;
-	@Input() size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' = 'M';
+	@Input() size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' = 'M';
 	@Input() noBackdrop: boolean;
 
 	@Input() useDynamicContent: boolean;
@@ -206,7 +206,7 @@ export const ModalSidepanelMode = generateStory({
 
 export const ModalSize = generateStory({
 	name: 'Size',
-	description: `Il est possible de choisir la taille de la modale avec l'option \`size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL'\`.`,
+	description: `Il est possible de choisir la taille de la modale avec l'option \`size: 'XS' | 'S' | 'M' | 'L' | 'XL'\`.`,
 	code: `this.modal.open(ModalContentComponent, {}, { size: 'XL' });`,
 	codeLang: 'ts',
 	template,
@@ -305,12 +305,13 @@ modalRef.backdropClick.subscribe(() => console.log('backdrop clicked'));`,
 
 const meta: Meta<StoryComponent> = {
 	title: 'Documentation/Overlays/Modal',
+	component: ModalStories,
 	decorators: [
 		applicationConfig({
 			providers: [provideAnimations()],
 		}),
 		moduleMetadata({
-			imports: [LuModalModule, ModalStories],
+			imports: [LuModalModule],
 		}),
 	],
 	args: {},

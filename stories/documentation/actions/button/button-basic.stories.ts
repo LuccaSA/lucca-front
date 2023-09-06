@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonBasicStory {
 	style: string;
@@ -20,7 +20,7 @@ export default {
 			},
 		},
 		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -62,7 +62,7 @@ function getTemplate(args: ButtonBasicStory): string {
 	`;
 }
 
-const Template: Story<ButtonBasicStory> = (args: ButtonBasicStory) => ({
+const Template: StoryFn<ButtonBasicStory> = (args: ButtonBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

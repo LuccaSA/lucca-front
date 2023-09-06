@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
@@ -77,22 +77,10 @@ export default {
 			control: { type: 'number' },
 		},
 	},
-	decorators: [
-		componentWrapperDecorator(TooltipStory, (props: TooltipStory) => ({
-			luTooltipEnterDelay: props.luTooltipEnterDelay,
-			luTooltipLeaveDelay: props.luTooltipLeaveDelay,
-			luTooltipDisabled: props.luTooltipDisabled,
-			luTooltipPosition: props.luTooltipPosition,
-			luTooltipWhenEllipsis: props.luTooltipWhenEllipsis,
-			tabindex: props.tabindex,
-		})),
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-		}),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: Story<TooltipStory> = (args: TooltipStory) => ({
+const template: StoryFn<TooltipStory> = (args: TooltipStory) => ({
 	props: args,
 });
 
@@ -107,16 +95,23 @@ Basic.args = {
 };
 
 const code = `
-/* 1. Importer LuTooltipModule */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/* 1. Appeler provideAnimations */
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+@NgModule({
+	providers: [provideAnimations()]
+})
+class AppModule {}
+
+/* 2. Importer LuTooltipModule */
 import { LuTooltipModule } from '@lucca-front/ng/user';
 
 @NgModule({
-	imports: [LuUserPictureModule, BrowserAnimationsModule]
+	imports: [LuUserPictureModule]
 })
 class StoriesModule {}
 
-/* 2. Utiliser luTooltip */
+/* 3. Utiliser luTooltip */
 @Component({
 	selector: "luTooltip-stories",
 	template:

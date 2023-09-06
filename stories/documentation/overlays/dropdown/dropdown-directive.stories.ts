@@ -1,35 +1,36 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/Dropdown/Directive',
 	component: LuDropdownTriggerDirective,
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
 	props: args,
 	moduleMetadata: {
-		imports: [BrowserAnimationsModule, LuDropdownModule],
+		imports: [LuDropdownModule],
 	},
 	template: `
 	<button type="button" class="button" [luDropdown]="dropdown">Dropdown with options</button>
 <lu-dropdown #dropdown>
 	<li class="lu-dropdown-options-item">
 		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action is-disabled" luDropdownItem>
-			<span aria-hidden="true" class="lucca-icon icon-watch"></span>
+			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 			Prévisualiser
 		</a>
 	</li>
 	<li class="lu-dropdown-options-item">
 		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>
-			<span aria-hidden="true" class="lucca-icon icon-edit"></span>
+			<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 			Editer
 		</a>
 	</li>
 	<li class="lu-dropdown-options-item">
 		<button type="button" class="lu-dropdown-options-item-action mod-delete" luDropdownItem>
-			<span aria-hidden="true" class="lucca-icon icon-trash"></span>
+			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 			Supprimer
 		</button>
 	</li>

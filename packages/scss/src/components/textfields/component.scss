@@ -1,0 +1,77 @@
+@mixin component($atRoot: 'without: rule') {
+	vertical-align: middle;
+	width: var(--components-textfield-sizes-default);
+
+	@at-root ($atRoot) {
+		.textfield-input {
+			min-width: 0;
+			border: 0;
+			box-shadow: 0 0 0 1px var(--palettes-grey-300);
+			line-height: var(--sizes-M-lineHeight);
+			-webkit-appearance: none;
+			background-color: var(--colors-white-color);
+			border-radius: var(--components-textfield-border-radius);
+			padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
+			transition-property: box-shadow, background-color, color;
+			transition-duration: var(--commons-animations-durations-fast);
+
+			&::placeholder {
+				color: var(--palettes-grey-400);
+				transition-property: color;
+				transition-duration: var(--commons-animations-durations-fast);
+				opacity: 1;
+			}
+
+			&[type='search'] {
+				&::-webkit-search-cancel-button,
+				&::-webkit-search-decoration {
+					appearance: none;
+				}
+			}
+		}
+
+		.textfield-suffix {
+			color: var(--palettes-grey-600);
+			top: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
+			right: var(--components-textfield-input-padding-horizontal);
+			position: absolute;
+			pointer-events: none;
+			line-height: var(--sizes-M-lineHeight);
+			z-index: 1;
+		}
+
+		.textfield-options {
+			box-shadow: var(--commons-boxShadow-M);
+			background-color: var(--colors-white-color);
+			border-radius: var(--commons-borderRadius-M);
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: all;
+			list-style: none;
+			overflow: auto;
+			position: absolute;
+			transform-origin: right top;
+			transform: scaleY(0);
+			margin: 3px 0 0;
+			max-height: 15rem;
+			opacity: 0;
+			padding: 0;
+			left: 0;
+			top: 100%;
+			z-index: 999;
+			width: 100%;
+		}
+
+		.textfield-options-mark {
+			background-color: transparent;
+			text-decoration: underline;
+			color: inherit;
+		}
+
+		.textfield-options-entry {
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: background-color;
+			padding: var(--spacings-XS) var(--spacings-S);
+			cursor: pointer;
+		}
+	}
+}

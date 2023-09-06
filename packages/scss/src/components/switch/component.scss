@@ -4,6 +4,7 @@
 @mixin component($atRoot: 'without: rule') {
 	display: block;
 	position: relative;
+	line-height: var(--components-switch-lineHeight);
 
 	@at-root ($atRoot) {
 		.switch-input {
@@ -12,48 +13,55 @@
 
 		.switch-label {
 			padding: 0;
-			padding-left: calc(var(--spacings-L) - 4px + var(--spacings-XS));
+			padding-left: calc(var(--components-switch-width) + var(--spacings-XS));
 			color: var(--palettes-grey-800);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
-			line-height: var(--sizes-M-lineHeight);
+			font-size: var(--components-switch-fontSize);
+			position: relative;
+			vertical-align: top;
 			cursor: pointer;
 
 			&::before {
-				@include icon.generate('cross');
+				@include icon.generate('sign_close');
 
 				align-items: center;
 				background-color: var(--palettes-grey-500);
 				border-radius: 9999px;
 				color: var(--colors-white-color);
 				display: flex;
-				font-size: var(--sizes-XS-fontSize);
-				height: 1rem;
+				font-size: var(--components-switch-icon-size);
+				height: var(--components-switch-height);
 				left: 0;
-				line-height: var(--sizes-S-lineHeight);
-				margin-top: var(--components-switch-top);
-				padding-left: var(--components-switch-icon-right);
-				padding-top: var(--components-switch-icon-top);
+				line-height: var(--components-switch-icon-size);
+				padding-left: calc(var(--components-switch-handler-offset) + var(--components-switch-slider-size));
 				position: absolute;
-				top: var(--spacings-XXS);
-				transition: all var(--commons-animations-durations-fast) ease;
-				width: calc(2rem - 4px);
+				top: var(--components-switch-offset-top);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-timing-function: ease;
+				transition-property: background-color, box-shadow;
+				width: var(--components-switch-width);
 			}
 
 			&::after {
-				background-color: white;
+				background-color: var(--colors-white-color);
 				box-shadow: var(--commons-boxShadow-XXS);
 				border-radius: 50%;
 				content: '';
 				display: block;
-				height: calc(1rem - 4px);
-				left: 2px;
-				margin-top: var(--components-switch-top);
+				height: var(--components-switch-slider-size);
+				left: var(--components-switch-handler-offset);
 				position: absolute;
-				top: calc(var(--spacings-XXS) + 2px);
+				top: calc(var(--components-switch-offset-top) + var(--components-switch-handler-offset));
 				transition: all var(--commons-animations-durations-fast) ease;
-				width: calc(1rem - 4px);
+				width: var(--components-switch-slider-size);
 			}
+		}
+
+		.switch-label-helper {
+			color: var(--palettes-grey-600);
+			font-size: var(--components-switch-helper-fontSize);
+			line-height: var(--components-switch-helper-lineHeight);
 		}
 	}
 }

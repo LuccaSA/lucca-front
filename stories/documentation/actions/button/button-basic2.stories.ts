@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ButtonBasic2Story {
 	palette: string;
@@ -11,7 +11,7 @@ export default {
 	title: 'Documentation/Actions/Button/Basic2',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -37,16 +37,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonBasic2Story): string {
-	const classes = [args.state, args.palette].filter(Boolean).join(' ');
-	const type = args.type !== '' ? 'type=' + args.type : '';
 	const block = args.block ? `mod-block` : '';
+	let classes = [args.state, args.palette, block].filter(Boolean).join(' ');
+	classes = classes ? ' ' + classes : classes;
+	const type = args.type !== '' ? ' type="' + args.type + '"' : '';
 
-	return `
-	<button ${type} class="button ${classes} ${block}">Bouton</button>
-	`;
+	return `<button${type} class="button${classes}">Bouton</button>`;
 }
 
-const Template: Story<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
+const Template: StoryFn<ButtonBasic2Story> = (args: ButtonBasic2Story) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -1,0 +1,156 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@import '_definitions';
+
+.calendar {
+	background-color: var(--colors-white-color);
+	width: var(--components-calendar-width);
+}
+
+:host-context(.mod-block) {
+	.calendar {
+		width: auto;
+		max-width: var(--components-calendar-width);
+	}
+}
+
+.calendar-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.calendar-header-date {
+	font-weight: 600;
+	color: var(--palettes-grey-900);
+	font-size: var(--sizes-L-fontSize);
+	line-height: var(--sizes-L-lineHeight);
+	padding: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+
+	&:focus-visible {
+		@include a11y.focusVisible($borderRadius: 4px);
+	}
+}
+
+.calendar-labels {
+	display: none;
+
+	&.mod-dailyView {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		text-align: center;
+		height: var(--components-calendar-day-size);
+		font-size: var(--sizes-S-fontSize);
+		color: var(--palettes-primary-700);
+
+		.calendar-labels-item {
+			width: var(--components-calendar-day-size);
+		}
+	}
+}
+
+.calendar-grid {
+	display: flex;
+	text-align: center;
+	align-self: stretch;
+	flex-wrap: wrap;
+	width: var(--components-calendar-width);
+
+	&.mod-dailyView {
+		.calendar-grid-item {
+			width: var(--components-calendar-day-size);
+		}
+	}
+
+	&.mod-monthlyView,
+	&.mod-yearlyView {
+		.calendar-grid-item-content {
+			width: 5.83rem;
+		}
+	}
+}
+
+.calendar-grid-item {
+	height: var(--components-calendar-day-size);
+	border: none;
+	cursor: pointer;
+	background: transparent;
+	position: relative;
+	padding: 0;
+	outline: none;
+	color: var(--palettes-grey-800);
+
+	&.is-previousMonth,
+	&.is-nextMonth {
+		color: var(--palettes-grey-500);
+	}
+
+	&.is-today {
+		color: var(--palettes-primary-700);
+		font-weight: 600;
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: var(--spacings-XXS);
+			left: var(--spacings-XS);
+			right: var(--spacings-XS);
+			height: 2px;
+			background: var(--palettes-primary-700);
+			z-index: 1;
+		}
+	}
+
+	&:hover {
+		.calendar-grid-item-content {
+			background: var(--palettes-grey-50);
+		}
+	}
+
+	&:active {
+		.calendar-grid-item-content {
+			background: var(--palettes-grey-100);
+		}
+	}
+
+	&:focus-visible {
+		@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-L));
+		z-index: 1;
+	}
+
+	&.is-active {
+		.calendar-grid-item-content {
+			background: var(--palettes-primary-700);
+			color: var(--palettes-primary-text);
+		}
+
+		&.is-today {
+			&:after {
+				background: white !important;
+				transition: background-color var(--commons-animations-durations-fast);
+			}
+		}
+	}
+
+	&.is-disabled, &[disabled] {
+		color: var(--palettes-grey-500);
+		pointer-events: none;
+
+		&:hover .calendar-grid-item-content {
+			background-color: white;
+		}
+	}
+}
+
+.calendar-grid-item-content {
+	position: relative;
+	height: var(--components-calendar-day-size);
+	width: var(--components-calendar-day-size);
+	line-height: var(--components-calendar-day-size);
+	border-radius: var(--commons-borderRadius-L);
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-property: background-color, color;
+}

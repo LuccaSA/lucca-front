@@ -1,34 +1,25 @@
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 
-@mixin spinner($size: 1rem) {
-	&::before,
+@mixin spinner($size: 1.5rem) {
 	&::after {
 		width: $size;
 		height: $size;
 		border-radius: 50%;
 		line-height: 0.8rem;
-		border-width: 2px;
+		border-width: 3px;
 		inset: 0;
 		margin: auto;
 		position: absolute;
 		border-style: solid;
 		content: '';
-	}
-
-	&::before {
-		border-color: var(--commons-loading-background);
-	}
-
-	&::after {
+		
 		@include keyframe.rotate;
-
 		animation-name: rotate;
 		animation-duration: var(--commons-loading-speed);
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
-
-		border-color: transparent;
-		border-top-color: var(--commons-loading-frontground);
+		border-color:  var(--commons-loading-frontground);
+		border-top-color: transparent;
 	}
 }
 

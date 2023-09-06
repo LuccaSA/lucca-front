@@ -1,30 +1,44 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ChipBasicStory {
-	clickable: boolean;
+	primary: boolean;
+	disabled: boolean;
 }
 
 export default {
 	title: 'Documentation/Listings/Chip/Basic',
+	argTypes: {
+		primary: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		disabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	}
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
-	const clickable = args.clickable ? `mod-clickable` : '';
+	const primary = args.primary ? `palette-primary` : '';
+	const disabled = args.disabled ? `is-disabled` : '';
 	return `
-	<div class="chip ${clickable}">
-		Ned Stark
+	<div class="chip ${primary} ${disabled}">
+		Label
 		<button type="button" class="chip-kill"></button>
 	</div>
-	<div class="chip mod-unkillable ${clickable}">
-		Connor MacLeod
+	<div class="chip ${primary} ${disabled}">
+		Label
 	</div>
 	`;
 }
 
-const Template: Story<ChipBasicStory> = (args: ChipBasicStory) => ({
+const Template: StoryFn<ChipBasicStory> = (args: ChipBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { clickable: false };
+Basic.args = { primary: false, disabled: false};

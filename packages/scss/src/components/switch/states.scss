@@ -1,17 +1,18 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin checked {
 	~ .switch-label {
 		&::before {
-			@include icon.generate('tick');
+			@include icon.generate('sign_confirm');
 
 			display: flex;
-			background-color: var(--palettes-700, var(--components-switch-default-palette-700));
-			padding-left: var(--components-switch-icon-left);
+			background-color: var(--palettes-700, var(--palettes-primary-700));
+			padding-left: var(--components-switch-handler-offset);
 		}
 
 		&::after {
-			left: calc(1rem - 2px);
+			left: calc(var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset));
 		}
 	}
 }
@@ -20,17 +21,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-600, var(--components-switch-default-palette-600));
-			}
-		}
-	}
-}
-@mixin checkedFocus {
-	&:not([disabled], [readonly]) {
-		~ .switch-label {
-			&::before {
-				background-color: var(--palettes-600, var(--components-switch-default-palette-600));
-				box-shadow: 0 0 0 4px var(--palettes-200, var(--components-switch-default-palette-200));
+				background-color: var(--palettes-600, var(--palettes-primary-600));
 			}
 		}
 	}
@@ -40,21 +31,8 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-800, var(--components-switch-default-palette-800));
-				box-shadow: 0 0 0 4px var(--palettes-300, var(--components-switch-default-palette-300));
+				background-color: var(--palettes-800, var(--palettes-primary-800));
 			}
-		}
-	}
-}
-
-@mixin checkedS {
-	~ .switch-label {
-		&::before {
-			font-size: var(--sizes-XS-fontSize);
-		}
-
-		&::after {
-			left: calc(var(--sizes-S-fontSize) - 2px);
 		}
 	}
 }
@@ -72,7 +50,6 @@
 		~ .switch-label {
 			&::before {
 				background-color: var(--palettes-grey-600);
-				box-shadow: 0 0 0 4px var(--palettes-grey-300);
 			}
 		}
 	}
@@ -82,7 +59,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				box-shadow: 0 0 0 4px var(--palettes-grey-200);
+				@include a11y.focusVisible;
 			}
 		}
 	}
@@ -94,7 +71,7 @@
 		cursor: default;
 
 		&::before {
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-grey-100);
 			color: var(--palettes-grey-500);
 		}
 
@@ -108,7 +85,7 @@
 @mixin disabledChecked {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-grey-100);
 		}
 	}
 }

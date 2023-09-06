@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface LabelBasicStory {
 	palette: string;
@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Texts/Label/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -26,13 +26,11 @@ export default {
 
 function getTemplate(args: LabelBasicStory): string {
 	const classes = [args.palette, args.size].filter(Boolean).join(' ');
-	return `
-		<span class="label ${classes}">Label</span>
-		<span class="label ${classes} mod-number">7</span>
-	`;
+	return `<span class="label ${classes}">Label</span>
+<span class="label ${classes} mod-number">7</span>`;
 }
 
-const Template: Story<LabelBasicStory> = (args: LabelBasicStory) => ({
+const Template: StoryFn<LabelBasicStory> = (args: LabelBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -1,0 +1,10 @@
+@mixin component {
+  display: inline-flex;
+  font-size: var(--sizes-XS-fontSize);
+  line-height: var(--sizes-XS-lineHeight);
+  font-weight: 600;
+  background-color: var(--palettes-primary-700);
+  color: var(--palettes-primary-text);
+  padding: 0 var(--spacings-XXS);
+  border-radius: var(--commons-borderRadius-M);
+}

@@ -1,3 +1,5 @@
+// deprecated
+
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 
@@ -20,7 +22,7 @@
 		width: auto;
 
 		&::after {
-			@include icon.generate('calendar');
+			@include icon.generate('calendar_date');
 		}
 
 		mat-icon {

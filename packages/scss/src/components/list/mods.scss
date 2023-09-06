@@ -31,7 +31,7 @@
 		cursor: move;
 
 		&::before {
-			@include icon.generate('drag');
+			@include icon.generate('dots_drag');
 
 			vertical-align: middle;
 		}

@@ -10,3 +10,12 @@
 	white-space: nowrap #{$suffix};
 	contain: paint #{$suffix};
 }
+
+@mixin focusVisible($offset: 2px, $borderRadius: false, $color: var(--palettes-primary-700)) {
+	outline: 2px solid $color;
+	outline-offset: $offset;
+
+	@if $borderRadius != false {
+	  border-radius: $borderRadius;
+	}
+}

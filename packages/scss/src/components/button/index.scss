@@ -30,7 +30,7 @@
 		@include XS;
 	}
 
-	&.mod-counter {
+	&.mod-counter { // deprecated
 		@include counter;
 
 		&.mod-S {
@@ -44,6 +44,10 @@
 
 	&.mod-icon {
 		@include icon;
+
+		&.mod-S {
+			@include iconS;
+		}
 
 		&.mod-XS {
 			@include iconXS;

@@ -1,6 +1,6 @@
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: var(--commons-elevations-elevation-1);
 	background-color: var(--components-filters-background);
+	box-shadow: 0 1px 0 0 var(--commons-border-200);
 	min-height: var(--components-filters-height);
 	align-items: center;
 	display: flex;

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableBasicStory {
 	clickable: boolean;
@@ -24,6 +24,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: "Deprecated 🦕",
 		},
 		s: {
 			control: {
@@ -117,7 +118,7 @@ function getTemplate(args: TableBasicStory): string {
 	`;
 }
 
-const Template: Story<TableBasicStory> = (args: TableBasicStory) => ({
+const Template: StoryFn<TableBasicStory> = (args: TableBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

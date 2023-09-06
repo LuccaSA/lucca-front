@@ -1,10 +1,11 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin sortedLegacy {
 	color: var(--palettes-grey-900);
 
 	&::after {
-		@include icon.generate('arrow_full_north');
+		@include icon.generate('arrow_top');
 
 		opacity: 1;
 		transform: translateY(0);
@@ -19,7 +20,7 @@
 
 @mixin sortedLegacyAlignRight {
 	&::before {
-		@include icon.generate('arrow_full_north');
+		@include icon.generate('arrow_top');
 
 		opacity: 1;
 		transform: translateY(0);
@@ -40,7 +41,7 @@
 	@include sortedLegacy;
 
 	&::after {
-		@include icon.generate('arrow_full_south');
+		@include icon.generate('arrow_bottom');
 	}
 }
 
@@ -48,7 +49,7 @@
 	@include sortedLegacy;
 
 	&::after {
-		@include icon.generate('arrow_full_north');
+		@include icon.generate('arrow_top');
 	}
 }
 
@@ -56,7 +57,7 @@
 	@include sortedLegacyAlignRight;
 
 	&::after {
-		@include icon.generate('arrow_full_south');
+		@include icon.generate('arrow_bottom');
 	}
 }
 
@@ -64,7 +65,7 @@
 	@include sortedLegacyAlignRight;
 
 	&::after {
-		@include icon.generate('arrow_full_north');
+		@include icon.generate('arrow_top');
 	}
 }
 
@@ -73,25 +74,24 @@
 
 	.table-head-row-cell-sortableButton {
 		color: var(--palettes-grey-900);
-		padding: var(--spacings-S);
+		padding: var(--components-table-padding);
 
 		&::after {
-			@include icon.generate('arrow_full_north');
+			@include icon.generate('arrow_top');
 
 			opacity: 1;
 			transform: translateY(0);
 		}
 
-		&:focus {
-			outline: none;
-		}
-
-		&:hover,
-		&:focus-visible {
-			outline: none;
-
+		&:hover {
 			&::after {
 				opacity: 1;
+			}
+		}
+
+		&:focus-visible {
+			&::after {
+				@include a11y.focusVisible();
 			}
 		}
 	}
@@ -102,7 +102,7 @@
 		text-align: right;
 
 		&::before {
-			@include icon.generate('arrow_full_north');
+			@include icon.generate('arrow_top');
 
 			opacity: 1;
 			transform: translateY(0);
@@ -112,10 +112,15 @@
 			content: none;
 		}
 
-		&:hover,
-		&:focus {
+		&:hover {
 			&::before {
 				opacity: 1;
+			}
+		}
+
+		&:focus-visible {
+			&::before {
+				@include a11y.focusVisible();
 			}
 		}
 	}
@@ -126,7 +131,7 @@
 
 	.table-head-row-cell-sortableButton {
 		&::after {
-			@include icon.generate('arrow_full_south');
+			@include icon.generate('arrow_top');
 		}
 	}
 }
@@ -136,7 +141,7 @@
 
 	.table-head-row-cell-sortableButton {
 		&::after {
-			@include icon.generate('arrow_full_north');
+			@include icon.generate('arrow_top');
 		}
 	}
 }
@@ -146,7 +151,7 @@
 
 	.table-head-row-cell-sortableButton {
 		&::before {
-			@include icon.generate('arrow_full_south');
+			@include icon.generate('arrow_top');
 		}
 	}
 }
@@ -156,7 +161,7 @@
 
 	.table-head-row-cell-sortableButton {
 		&::before {
-			@include icon.generate('arrow_full_north');
+			@include icon.generate('arrow_top');
 		}
 	}
 }

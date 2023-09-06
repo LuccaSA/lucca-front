@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
 	@at-root ($atRoot) {
@@ -18,8 +19,9 @@
 
 			&:not(:first-child) {
 				&::before {
-					@include icon.generate('chevron_east');
-
+					@include icon.generate('arrow_chevron_right');
+					color: var(--palettes-grey-600);
+					font-size: var(--sizes-XS-lineHeight);
 					padding: 0 var(--spacings-XXS);
 				}
 			}
@@ -36,9 +38,13 @@
 			border: 0;
 			cursor: pointer;
 
-			&:focus,
 			&:hover {
-				color: var(--palettes-grey-800);
+				color: var(--palettes-grey-600);
+				text-decoration: underline;
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
 			}
 		}
 	}

@@ -1,0 +1,7 @@
+@mixin vars {
+  --component-switchField-label-input-height: 1.25rem;
+  --component-switchField-label-input-width: 2.25rem;
+  --component-switchField-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
+  --component-switchField-label-fontSize: var(--sizes-M-fontSize);
+  --component-switchField-label-lineHeight: var(--sizes-M-lineHeight);
+}

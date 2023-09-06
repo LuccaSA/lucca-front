@@ -32,24 +32,42 @@
 @forward 'actionIcon'; // 3 Ko
 @forward 'menu'; // 4 Ko
 @forward 'radio'; // 4 Ko
+@forward 'radioField'; // new component for radio
 @forward 'switch'; // 4 Ko
+@forward 'switchField'; // new component for switch
 @forward 'file'; // 5 Ko
 @forward 'toast'; // 5 Ko
 @forward 'layout'; // 5 Ko
 @forward 'radioButtons'; // 5 Ko
 @forward 'table'; // 7 Ko
 @forward 'checkbox'; // 7 Ko
+@forward 'checkboxField'; // new component for checkbox
 @forward 'keyframe'; // 8 Ko
 @forward 'tableSorted'; // 9 Ko
 @forward 'timeline'; // 10 Ko
 @forward 'button'; // 12 Ko
-@forward 'textfield'; // 13 Ko
+@forward 'textfields'; // 13 Ko
+@forward 'textField'; // new component for checkbox
 @forward 'util'; // 14 Ko
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
 @forward 'tableFixed'; // 33 Ko
-@forward 'grid'; // 40 Ko
+
+// caution: the two components cannot be loaded at the same time
+@forward 'grid';
+// @forward 'gridLegacy'; // 40 Ko
+
 @forward 'tableSticked'; // 67 Ko
 @forward 'timepicker'; //
 @forward 'notchBox';
 @forward 'statusBadge';
+@forward 'mobileHeader';
+@forward 'clear';
+@forward 'newBadge';
+@forward 'inlineMessage';
+@forward 'numericBadge';
+@forward 'mobileNavigation';
+@forward 'footer';
+@forward 'formLabel';
+@forward 'verticalNavigation';
+@forward 'sortableList';

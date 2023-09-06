@@ -1,10 +1,10 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ActionBasicStory {
 	mod: string;
 	loading: boolean;
 	disabled: boolean;
-	s: boolean;
+	size: boolean;
 }
 
 export default {
@@ -26,9 +26,10 @@ export default {
 				type: 'boolean',
 			},
 		},
-		s: {
+		size: {
+			options: ['', 'mod-S', 'mod-XS'],
 			control: {
-				type: 'boolean',
+				type: 'radio',
 			},
 			description: 'Taille : Small',
 		},
@@ -36,27 +37,23 @@ export default {
 } as Meta;
 
 function getTemplate(args: ActionBasicStory): string {
-	const classes = [args.mod].filter(Boolean).join(' ');
+	const classes = [args.mod, args.size].filter(Boolean).join(' ');
 	const attributes = args.disabled ? `disabled="disabled"` : '';
 	const loading = args.loading ? `is-loading` : '';
-	const s = args.s ? `mod-S` : '';
-	let icon = 'edit';
+	let icon = 'heart';
 	let tooltip = 'Modifier';
 	if (args.mod === 'mod-delete') {
 		icon = 'trash';
 		tooltip = 'Supprimer';
 	}
 
-	return `
-	<button type="button" class="actionIcon ${classes} ${s} ${loading}" luTooltip="Modifier" ${attributes}>
-		<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
-		<span class="u-mask">Modifier</span>
-	</button>
-
-	`;
+	return `<button type="button" class="actionIcon ${classes} ${loading}" luTooltip="Modifier" ${attributes}>
+	<span aria-hidden="true" class="lucca-icon icon-${icon}"></span>
+	<span class="u-mask">Modifier</span>
+</button>`;
 }
 
-const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
+const Template: StoryFn<ActionBasicStory> = (args: ActionBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -69,4 +66,4 @@ const Template: Story<ActionBasicStory> = (args: ActionBasicStory) => ({
 });
 
 export const BasicAction = Template.bind({});
-BasicAction.args = { mod: '', loading: false, s: '', disabled: false };
+BasicAction.args = { mod: '', loading: false, size: '', disabled: false };

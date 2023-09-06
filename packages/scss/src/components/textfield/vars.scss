@@ -1,45 +1,14 @@
 @mixin vars {
-	--components-textfield-background: var(--palettes-primary-50);
-	--components-textfield-border-radius: 4px;
-	--components-textfield-input-padding-horizontal: var(--spacings-XS);
-	--components-textfield-input-padding-vertical: var(--spacings-XS);
-	--components-textfield-input-placeholder: var(--palettes-primary-400);
-	--components-textfield-hover-background: var(--palettes-primary-100);
-	--components-textfield-hover-placeholder: var(--palettes-primary-400);
-	--components-textfield-focus-placeholder: var(--palettes-primary-300);
-	--components-textfield-focus-shadow-color: var(--palettes-primary-200);
-	--components-textfield-focus-border-color: var(--palettes-primary-600);
-	--components-textfield-disabled-background: var(--commons-disabled-background);
-	--components-textfield-disabled-color: var(--palettes-grey-600);
-	--components-textfield-suffix-top: 1.5rem;
-	--components-textfield-suffix-padding-right: var(--spacings-M);
-	--components-textfield-sizes-shortest: 3rem;
-	--components-textfield-sizes-shorter: 6rem;
-	--components-textfield-sizes-short: 9rem;
-	--components-textfield-sizes-default: 13rem;
-	--components-textfield-sizes-long: 17rem;
-	--components-textfield-sizes-longer: 22rem;
-	--components-textfield-sizes-longest: 28rem;
-
-	--components-textfield-material-padding-top: var(--spacings-S);
-	--components-textfield-material-default-palette-color: var(--palettes-grey-600);
-	--components-textfield-material-border-color: #ccc;
-	--components-textfield-material-label-color: var(--palettes-grey-600);
-	--components-textfield-material-label-font-size: var(--sizes-M-fontSize);
-	--components-textfield-material-suffix-padding-right: var(--spacings-S);
-
-	--components-textfield-compact-padding: var(--spacings-XS);
-	--components-textfield-compact-label-color: #96a6c5;
-	--components-textfield-compact-label-font-size: var(--sizes-M-fontSize);
-	--components-textfield-compact-label-right-margin: 0.3rem;
-	--components-textfield-compact-label-sizes-shorter: 3rem;
-	--components-textfield-compact-label-sizes-short: 5rem;
-	--components-textfield-compact-label-sizes-default: 7rem;
-	--components-textfield-compact-label-sizes-long: 9rem;
-	--components-textfield-compact-label-sizes-longer: 11rem;
-
-	--components-textfield-outlined-border-width: 1px;
-	--components-textfield-outlined-border-default-color: var(--palettes-grey-200);
-
-	--components-textfield-filter-width: 18rem;
+  --component-textField-label-fontSize: var(--sizes-M-fontSize);
+  --component-textField-label-lineHeight: var(--sizes-M-lineHeight);
+  --component-textField-input-paddingVertical: var(--spacings-XS);
+  --component-textField-input-lineHeight: var(--sizes-M-lineHeight);
+  --component-textField-input-color: var(--palettes-grey-800);
+  --component-textField-input-placeholder: var(--palettes-grey-400);
+  --component-textField-input-prefix: var(--palettes-grey-600);
+  --component-textField-input-border: var(--palettes-grey-300);
+  --component-textField-input-background: var(--colors-white-color);
+  --component-textField-action-icon-fontSize: var(--sizes-S-lineHeight);
+  --component-textField-action-icon-size: calc(var(--spacings-L) + var(--spacings-XS));
+  --component-textField-input-lines: 4;
 }

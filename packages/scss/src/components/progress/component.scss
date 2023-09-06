@@ -21,7 +21,7 @@
 
 	@at-root ($atRoot) {
 		.progress-bar {
-			background-color: var(--components-progress-bar-background);
+			background-color: var(--palettes-700, var(--components-progress-bar-background));
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, width;
 			bottom: 0;

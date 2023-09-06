@@ -1,13 +1,5 @@
 @mixin vars {
-	--components-radioButtons-default-palette-text: var(--palettes-primary-text);
-	--components-radioButtons-default-palette-50: var(--palettes-primary-50);
-	--components-radioButtons-default-palette-100: var(--palettes-primary-100);
-	--components-radioButtons-default-palette-200: var(--palettes-primary-200);
-	--components-radioButtons-default-palette-300: var(--palettes-primary-300);
-	--components-radioButtons-default-palette-400: var(--palettes-primary-400);
-	--components-radioButtons-default-palette-500: var(--palettes-primary-500);
-	--components-radioButtons-default-palette-600: var(--palettes-primary-600);
-	--components-radioButtons-default-palette-700: var(--palettes-primary-700);
-	--components-radioButtons-default-palette-800: var(--palettes-primary-800);
-	--components-radioButtons-default-palette-900: var(--palettes-primary-900);
+	--components-radioButtons-padding: var(--spacings-XS) var(--spacings-S);
+	--components-radioButtons-font-size: var(--sizes-M-fontSize);
+	--components-radioButtons-line-height: var(--sizes-M-lineHeight); 
 }

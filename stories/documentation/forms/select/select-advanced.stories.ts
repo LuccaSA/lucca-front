@@ -1,11 +1,11 @@
 import { NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
@@ -19,7 +19,7 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 						<ng-template ngPluralCase="0"></ng-template>
 						<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 						<ng-template ngPluralCase="other">
-							<span class="chip mod-unkillable">{{ colors.length }}</span>
+							<span class="numericBadge">{{ colors.length }}</span>
 							couleurs
 						</ng-template>
 					</ng-container>
@@ -31,7 +31,9 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 						<lu-option-select-all class="u-displayBlock u-marginXS"></lu-option-select-all>
 						<lu-option-pager></lu-option-pager>
 					</header>
-					<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					<div class="lu-picker-content-option">
+						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
+					</div>
 				</lu-option-picker-advanced>
 				<lu-input-clearer></lu-input-clearer>
 			</lu-select>
@@ -63,15 +65,10 @@ export default {
 	title: 'Documentation/Forms/SelectAdvanced',
 	component: SelectAdvancedStory,
 	argTypes: {},
-	decorators: [
-		componentWrapperDecorator(SelectAdvancedStory),
-		moduleMetadata({
-			imports: [SelectAdvancedStory, BrowserAnimationsModule],
-		}),
-	],
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: Story<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
+const template: StoryFn<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
 	props: args,
 });
 

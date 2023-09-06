@@ -3,16 +3,14 @@
 	--components-field-horizontal-spacing: var(--spacings-M);
 	--components-field-input-color: var(--palettes-grey-800);
 	--components-field-input-inline-margin: 0.15rem;
-	--components-field-label-color: var(--palettes-grey-600);
-	--components-field-label-font-size: var(--sizes-S-fontSize);
-	--components-field-label-margin-bottom: var(--spacings-XS);
+	--components-field-label-color: var(--palettes-grey-800);
+	--components-field-label-margin-bottom: var(--spacings-XXS);
 	--components-field-message-font-size: var(--sizes-XS-fontSize);
-	--components-field-message-margin-top: 0.35rem;
+	--components-field-message-margin-top: var(--spacings-XXS);
 
 	--components-field-sizes-default: 13rem;
 
 	--components-field-compact-padding: var(--spacings-XS);
-	--components-field-compact-label-color: var(--palettes-grey-600);
 	--components-field-compact-label-font-size: var(--sizes-M-fontSize);
 	--components-field-compact-label-right-margin: 0.3rem;
 

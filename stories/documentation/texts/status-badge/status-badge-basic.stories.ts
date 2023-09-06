@@ -1,31 +1,37 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface StatusBadgeBasicStory {
-	state: string;
+	palette: string;
+	l: boolean;
 }
 
 export default {
 	title: 'Documentation/Texts/StatusBadge/Basic',
 	argTypes: {
-		state: {
+		palette: {
 			options: ['', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
 		},
+		l: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Taille : Large',
+		},
 	},
 } as Meta;
 
 function getTemplate(args: StatusBadgeBasicStory): string {
-	return `
-		<div class="statusBadge ${args.state}">Status</div>
-	`;
+	const l = args.l ? `mod-L` : '';
+	return `<div class="statusBadge ${l} ${args.palette}">Status</div>`;
 }
 
-const Template: Story<StatusBadgeBasicStory> = (args: StatusBadgeBasicStory) => ({
+const Template: StoryFn<StatusBadgeBasicStory> = (args: StatusBadgeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { state: '' };
+Basic.args = { palette: '',  l: false,  };

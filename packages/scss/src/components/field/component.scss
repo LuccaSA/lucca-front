@@ -11,8 +11,10 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		display: block;
-		background-color: var(--palettes-50, var(--components-textfield-background));
+		display: flex;
+		flex-direction: column;
+		background-color: var(--colors-white-color);
+		row-gap: var(--spacings-XXS);
 
 		&.palette-error {
 			box-shadow: 0 0 0 1px var(--palettes-700);
@@ -29,7 +31,7 @@
 		.textfield-input,
 		.radiosfield-input,
 		.checkboxesfield-input {
-			font-family: var(--commons-font-family);
+			font-family: inherit;
 			font-size: var(--components-field-font-size);
 			color: var(--components-field-input-color);
 			outline: none;
@@ -45,8 +47,8 @@
 		.radiosfield-label,
 		.checkboxesfield-label {
 			color: var(--components-field-label-color);
-			font-size: var(--components-field-label-font-size);
-			line-height: var(--sizes-XS-lineHeight);
+			font-size: var(--sizes-M-fontSize);
+			line-height: var(--sizes-M-lineHeight);
 			min-height: var(--spacings-S);
 			margin-bottom: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
@@ -62,9 +64,9 @@
 		.textfield-messages,
 		.radiosfield-messages,
 		.checkboxesfield-messages {
-			font-size: var(--components-field-message-font-size);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
 			margin-top: var(--components-field-message-margin-top);
-			line-height: 1.3;
 
 			> * {
 				margin: 0;
@@ -75,6 +77,12 @@
 		.radiosfield-messages-error,
 		.checkboxesfield-messages-error {
 			color: var(--palettes-error-700);
+
+			.lucca-icon {
+				font-size: var(--sizes-XS-lineHeight);
+				line-height: var(--sizes-S-lineHeight);
+				vertical-align: top;
+			}
 		}
 
 		.textfield-messages-warning,
@@ -95,7 +103,7 @@
 		.textfield-messages-helper,
 		.radiosfield-messages-helper,
 		.checkboxesfield-messages-helper {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-grey-700);
 		}
 	}
 }

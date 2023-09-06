@@ -21,7 +21,6 @@
 	.textfield-label,
 	.radiosfield-label,
 	.checkboxesfield-label {
-		color: var(--components-field-compact-label-color);
 		margin-right: var(--components-field-compact-label-right-margin);
 		width: var(--components-field-compact-label-sizes-default);
 		flex: 0 0 auto;
@@ -40,7 +39,6 @@
 		top: 0;
 		left: 100%;
 		width: 100%;
-		line-height: 1.1;
 		margin: 0 0 0 var(--spacings-S);
 
 		&.mod-helper {
@@ -333,12 +331,7 @@
 
 @mixin field-row {
 	display: flex;
+	flex-direction: row;
 	flex-wrap: wrap;
-
-	.checkbox,
-	.radio {
-		margin-top: 0;
-		margin-bottom: 0;
-		margin-right: var(--components-field-horizontal-spacing);
-	}
+	column-gap: var(--components-field-horizontal-spacing);
 }

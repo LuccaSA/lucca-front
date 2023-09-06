@@ -5,6 +5,7 @@
 
 	@at-root ($atRoot) {
 		.radioButtons-item {
+			position: relative;
 			margin-left: -1px;
 
 			&:first-child {
@@ -34,17 +35,17 @@
 		}
 
 		.radioButtons-item-label {
-			display: inline-flex;
+			display: flex;
 			align-items: center;
 			gap: var(--spacings-XS);
 			background-color: var(--colors-white-color);
-			padding: var(--spacings-XS) var(--spacings-S);
-			font-size: var(--components-radioButtons-font-size, var(--sizes-M-fontSize));
-			line-height: var(--components-radioButtons-line-height, var(--sizes-M-lineHeight));
+			padding: var(--components-radioButtons-padding);
+			font-size: var(--components-radioButtons-font-size);
+			line-height: var(--components-radioButtons-line-height);
 			color: var(--palettes-grey-700);
-			box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
+			box-shadow: inset 0 0 0 var(--commons-divider-width) var(--palettes-grey-200);
 			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: all;
+			transition-property: background-color, color, box-shadow;
 			overflow: hidden;
 			position: relative;
 			height: 100%;
@@ -56,39 +57,24 @@
 				~ .radioButtons-item-label {
 					&:hover {
 						background-color: var(--palettes-grey-50);
-						box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--palettes-grey-200);
+					}
+				}
+
+				&:focus-visible {
+					~ .radioButtons-item-label {
+						@include a11y.focusVisible;
 					}
 				}
 
 				&:checked {
 					~ .radioButtons-item-label {
-						background-color: var(--components-radioButtons-default-palette-50);
-						box-shadow: inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
-						color: var(--components-radioButtons-default-palette-700);
+						background-color: var(--palettes-primary-50);
+						box-shadow: inset 0 0 0 var(--commons-divider-width) var(--palettes-primary-500);
+						color: var(--palettes-primary-800);
 
-						&:hover {
-							box-shadow: var(--commons-elevations-elevation-1), inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
-						}
-					}
-				}
-
-				&:focus {
-					~ .radioButtons-item-label {
-						box-shadow: 0 0 0 4px var(--components-radioButtons-default-palette-200),
-							inset 0 0 0 1px var(--components-radioButtons-default-palette-400);
-					}
-
-					&:checked {
-						~ .radioButtons-item-label {
-							background-color: var(--components-radioButtons-default-palette-100);
-							box-shadow: 0 0 0 4px var(--components-radioButtons-default-palette-200),
-								inset 0 0 0 1px var(--components-radioButtons-default-palette-500);
-						}
-					}
-
-					&:not(:checked) {
-						~ .radioButtons-item-label {
-							background-color: var(--palettes-grey-50);
+						.numericBadge {
+							--components-numericBadge-background: var(--palettes-primary-200);
+							--components-numericBadge-color: var(--palettes-primary-800);
 						}
 					}
 				}

@@ -1,0 +1,13 @@
+@mixin component {
+  display: flex;
+  gap: var(--components-inlineMessage-gap);
+  font-size: var(--components-inlineMessage-fontSize);
+  line-height: var(--components-inlineMessage-lineHeight);
+  color: var(--components-inlineMessage-color);
+
+  .lucca-icon {
+    font-size: var(--components-inlineMessage-icon-fontSize);
+    color: var(--components-inlineMessage-icon-color);
+    margin-top: 2px;
+  }
+}

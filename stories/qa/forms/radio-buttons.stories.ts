@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'forms-radio-buttons-stories',
-	templateUrl: './radio-buttons.stories.html'
-}) class RadioButtonsStory {}
+	templateUrl: './radio-buttons.stories.html',
+})
+class RadioButtonsStory {}
 
 export default {
-  title: 'QA/Forms/RadioButtons',
-  component: RadioButtonsStory,
-	decorators: [
-		moduleMetadata({
-			entryComponents: [RadioButtonsStory]
-		})
-	]
+	title: 'QA/Forms/RadioButtons',
+	component: RadioButtonsStory,
 } as Meta;
 
-const template: Story<RadioButtonsStory> = () => ({});
+const template: StoryFn<RadioButtonsStory> = () => ({});
 
 export const basic = template.bind({});

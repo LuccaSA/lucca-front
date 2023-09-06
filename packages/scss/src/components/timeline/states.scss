@@ -1,8 +1,4 @@
 @mixin current {
-	&::after {
-		background-color: var(--palettes-grey-200);
-	}
-
 	.timeline-step-title {
 		color: var(--palettes-primary-700);
 
@@ -14,10 +10,6 @@
 	}
 
 	~ .timeline-step {
-		&::after {
-			background-color: var(--palettes-grey-200);
-		}
-
 		.timeline-step-title {
 			color: var(--palettes-grey-600);
 

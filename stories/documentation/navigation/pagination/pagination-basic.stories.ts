@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface PaginationBasicStory {}
 
@@ -13,7 +13,7 @@ function getTemplate(args: PaginationBasicStory): string {
 		<div id="pagination-count" class="pagination-count">
 			<span class="pagination-count-current">
 				<span class="u-mask">Résultats de </span>
-				1<span aria-hidden="true"> — </span>
+				1<span aria-hidden="true"> – </span>
 				<span class="u-mask">à </span>10
 			</span>
 			<span class="pagination-count-separator"> de </span>
@@ -23,11 +23,11 @@ function getTemplate(args: PaginationBasicStory): string {
 		</div>
 		<div class="pagination-scrolling">
 			<button type="button" class="actionIcon mod-S" disabled>
-				<span aria-hidden="true" class="lucca-icon icon-chevronWest"></span>
+				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span>
 				<span class="u-mask">Précédent</span>
 			</button>
 			<button type="button" class="actionIcon mod-S">
-				<span aria-hidden="true" class="lucca-icon icon-chevronEast"></span>
+				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span>
 				<span class="u-mask">Suivant</span>
 			</button>
 		</div>
@@ -35,7 +35,7 @@ function getTemplate(args: PaginationBasicStory): string {
 	`;
 }
 
-const Template: Story<PaginationBasicStory> = (args: PaginationBasicStory) => ({
+const Template: StoryFn<PaginationBasicStory> = (args: PaginationBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

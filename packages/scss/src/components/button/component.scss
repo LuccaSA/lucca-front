@@ -1,6 +1,8 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component {
 	border-radius: var(--commons-borderRadius-M);
-	font-family: var(--commons-font-family);
+	font-family: inherit;
 	font-size: var(--components-button-font-size);
 	font-weight: 600;
 	line-height: var(--components-button-line-height);
@@ -23,7 +25,9 @@
 	color: var(--palettes-text, var(--palettes-primary-text));
 	cursor: pointer;
 
-	.button-icon, .lucca-icon { // .lucca-icon legacy
+	.button-icon,
+	.lucca-icon {
+		// .lucca-icon legacy
 		font-size: var(--icon-size, 1.25rem);
 	}
 
@@ -34,19 +38,15 @@
 	&:not([disabled], .is-disabled) {
 		&:hover {
 			background-color: var(--palettes-600, var(--palettes-primary-600));
-			box-shadow: var(--commons-boxShadow-XS);
 			color: var(--palettes-text, var(--palettes-primary-text));
 		}
 
-		&:focus {
-			box-shadow: var(--commons-boxShadow-XS), 0 0 0 4px var(--palettes-200, var(--palettes-primary-200));
-			outline: none;
-			background-color: var(--palettes-600, var(--palettes-primary-600));
+		&:focus-visible {
+			@include a11y.focusVisible;
 		}
 
 		&:active {
 			background-color: var(--palettes-800, var(--palettes-primary-800));
-			box-shadow: 0 0 0 4px var(--palettes-300, var(--palettes-primary-300));
 		}
 	}
 }

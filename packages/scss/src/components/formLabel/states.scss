@@ -1,0 +1,8 @@
+@mixin error {
+  --components-formLabel-color: var(--palettes-error-700);
+}
+
+@mixin disabled {
+  --components-formLabel-color: var(--palettes-grey-500);
+  pointer-events: none;
+}

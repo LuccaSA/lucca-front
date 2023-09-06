@@ -13,7 +13,8 @@
 		{
 			"files": ["*.html"],
 			"options": {
-				"parser": "html"
+				"parser": "html",
+				"singleQuote": false
 			}
 		},
 		{

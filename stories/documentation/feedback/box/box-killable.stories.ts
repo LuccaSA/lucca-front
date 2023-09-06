@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface BoxKillableStory {
 	grey: boolean;
@@ -22,7 +22,7 @@ function getTemplate(args: BoxKillableStory): string {
 	<div class="box ${grey}">
 	    <div class="box-close">
 	        <button type="button" class="actionIcon">
-	            <span aria-hidden="true" class="lucca-icon icon-cross"></span>
+	            <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 	            <span class="u-mask">Close</span>
 	        </button>
 	    </div>
@@ -31,7 +31,7 @@ function getTemplate(args: BoxKillableStory): string {
 	`;
 }
 
-const Template: Story<BoxKillableStory> = (args: BoxKillableStory) => ({
+const Template: StoryFn<BoxKillableStory> = (args: BoxKillableStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

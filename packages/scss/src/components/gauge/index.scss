@@ -10,9 +10,5 @@
 
 	&.mod-vertical {
 		@include vertical;
-
-		&.mod-thin {
-			@include verticalThin;
-		}
 	}
 }

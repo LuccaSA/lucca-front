@@ -1,20 +1,12 @@
 @mixin vars {
-	--components-switch-default-palette-50: var(--palettes-primary-50);
-	--components-switch-default-palette-100: var(--palettes-primary-100);
-	--components-switch-default-palette-200: var(--palettes-primary-200);
-	--components-switch-default-palette-300: var(--palettes-primary-300);
-	--components-switch-default-palette-400: var(--palettes-primary-400);
-	--components-switch-default-palette-500: var(--palettes-primary-500);
-	--components-switch-default-palette-600: var(--palettes-primary-600);
-	--components-switch-default-palette-700: var(--palettes-primary-700);
-	--components-switch-default-palette-800: var(--palettes-primary-800);
-	--components-switch-default-palette-900: var(--palettes-primary-900);
-
-	--components-switch-top: 1px;
-	--components-switch-icon-top: 1px;
-	--components-switch-icon-left: 2px;
-	--components-switch-icon-right: calc(2px + 0.75rem);
-	--components-switch-S-top: 2px;
-	--components-switch-S-icon-left: 1px;
-	--components-switch-S-icon-right: calc(3px + 0.5rem);
+	--components-switch-offset-top: 2px;
+	--components-switch-handler-offset: 2px;
+	--components-switch-height: 1.25rem;
+	--components-switch-width: 2.25rem;
+	--components-switch-slider-size: 1rem;
+	--components-switch-icon-size: var(--sizes-XS-lineHeight);
+	--components-switch-lineHeight: var(--sizes-M-lineHeight);
+	--components-switch-fontSize: var(--sizes-M-fontSize);
+	--components-switch-helper-lineHeight: var(--sizes-S-lineHeight);
+	--components-switch-helper-fontSize: var(--sizes-S-fontSize);
 }

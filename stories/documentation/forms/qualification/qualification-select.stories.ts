@@ -1,8 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'qualification-stories',
@@ -23,16 +23,11 @@ class QualificationSelectStory {}
 
 export default {
 	title: 'Documentation/Forms/Qualification',
-	component: LuQualificationSelectInputComponent,
-	decorators: [
-		componentWrapperDecorator(QualificationSelectStory),
-		moduleMetadata({
-			imports: [QualificationSelectStory, HttpClientModule, BrowserAnimationsModule],
-		}),
-	],
+	component: QualificationSelectStory,
+	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: Story<QualificationSelectStory> = (args: QualificationSelectStory) => ({
+const template: StoryFn<QualificationSelectStory> = (args: QualificationSelectStory) => ({
 	props: args,
 });
 

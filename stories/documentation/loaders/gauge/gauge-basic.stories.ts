@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GaugeBasicStory {
 	palette: string;
@@ -10,7 +10,7 @@ export default {
 	title: 'Documentation/Loaders/Gauge/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-secondary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -39,7 +39,7 @@ function getTemplate(args: GaugeBasicStory): string {
 	`;
 }
 
-const Template: Story<GaugeBasicStory> = (args: GaugeBasicStory) => ({
+const Template: StoryFn<GaugeBasicStory> = (args: GaugeBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

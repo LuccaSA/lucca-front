@@ -1,0 +1,8 @@
+@mixin disabled {
+  background: var(--palettes-grey-100);
+  color: var(--palettes-grey-500);
+
+  .chip-kill {
+    display: none;
+  }
+}

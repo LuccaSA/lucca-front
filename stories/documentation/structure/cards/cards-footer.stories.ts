@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CardsFooterStory {}
 
@@ -10,7 +10,7 @@ function getTemplate(args: CardsFooterStory): string {
 	return `
 	<div class="card">
 		<div class="card-content">
-			<h2>Titre de la carte</h2>
+			<h2 class="card-title">Titre de la carte</h2>
 			<p>Contenu de la carte</p>
 		</div>
 		<footer class="card-footer">
@@ -23,7 +23,7 @@ function getTemplate(args: CardsFooterStory): string {
 	`;
 }
 
-const Template: Story<CardsFooterStory> = (args: CardsFooterStory) => ({
+const Template: StoryFn<CardsFooterStory> = (args: CardsFooterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });

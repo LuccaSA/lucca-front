@@ -1,4 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin selectInputStyle {
 	:host {
@@ -18,15 +20,16 @@
 
 		cursor: pointer;
 		outline: none;
-		padding: 0;
+		padding: 0 !important;
+		gap: 0 !important;
 
 		&::after {
-			@include icon.generate('arrow_south');
+			@include icon.generate('arrow_chevron_bottom');
 
-			color: var(--palettes-700, var(--palettes-primary-700));
+			color: var(--palettes-grey-600);
 			bottom: var(--components-select-input-padding-vertical);
-			font-size: 1.2rem;
-			line-height: 1.4rem;
+			font-size: var(--sizes-M-lineHeight);
+			line-height: var(--sizes-M-lineHeight);
 			pointer-events: none;
 			position: absolute;
 			right: var(--components-select-input-padding-horizontal);
@@ -52,17 +55,17 @@
 	.lu-select-value {
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
 	}
 
 	.lu-select-placeholder {
-		color: var(--palettes-400, var(--palettes-primary-400));
+		color: var(--palettes-grey-400);
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3rem var(--components-select-input-padding-vertical)
+		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
 			var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
@@ -72,8 +75,14 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: var(--spacings-XS);
-		right: 1.6rem;
+		bottom: 0.75rem;
+		right: 2.25rem;
+	}
+
+	.lu-select-clearer {
+		position: absolute;
+		bottom: 0.75rem;
+		right: 2.25rem;
 	}
 
 	::ng-deep .lu-select-value {
@@ -110,16 +119,23 @@
 			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
 		}
 
+		.lu-select-clearer {
+			bottom: var(--spacings-XS);
+		}
+
 		&::after {
 			line-height: var(--sizes-XS-lineHeight);
+			font-size: var(--sizes-S-lineHeight);
 		}
 
 		.lu-select-suffix {
-			bottom: var(--spacings-XXS);
+			bottom: 0.5rem;
+			right: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
 			.label {
+				// deprecated
 				font-size: var(--sizes-S-fontSize);
 				line-height: var(--sizes-S-lineHeight);
 				font-weight: 600;
@@ -132,6 +148,10 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
+			}
+
+			.numericBadge {
+				@include numericBadge.s;
 			}
 		}
 	}
@@ -174,10 +194,6 @@
 			height: auto;
 			padding-top: var(--spacings-S);
 			color: var(--palettes-grey-800);
-		}
-
-		.lu-select-suffix {
-			bottom: 0.4rem; // We should be able to use .5rem with new icons (.5rem of vertical padding & icon line height of 1.5rem)
 		}
 	}
 
@@ -277,7 +293,7 @@
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
-			padding-right: 3rem;
+			padding-right: 3.5rem;
 		}
 	}
 

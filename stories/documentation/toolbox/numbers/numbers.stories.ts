@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LuNumberPipe } from '@lucca-front/ng/number';
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'numbers-stories',
@@ -20,7 +20,7 @@ export default {
 	component: NumbersStory,
 } as Meta;
 
-const template: Story<NumbersStory> = (args: NumbersStory) => ({
+const template: StoryFn<NumbersStory> = (args: NumbersStory) => ({
 	props: args,
 });
 

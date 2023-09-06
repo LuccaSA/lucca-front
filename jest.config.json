@@ -6,7 +6,7 @@
 	"watchPathIgnorePatterns": ["/node_modules/"],
 	"modulePathIgnorePatterns": ["<rootDir>/packages/ng/dist"],
 	"moduleNameMapper": {
-		"^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/src/public-api.ts",
+		"^@lucca-front/ng/(.*)$": "<rootDir>/packages/ng/$1/public-api.ts",
 		"^@/stories/(.*)$": "<rootDir>/stories/documentation/$1",
 		"^(\\.{1,2}/.*)\\.js$": "$1"
 	},

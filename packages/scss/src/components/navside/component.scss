@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
 	bottom: 0;
@@ -50,7 +51,7 @@
 
 		.navSide-scrollWrapper {
 			width: var(--commons-navSide-width);
-			padding: 0.5em;
+			padding: var(--spacings-XS);
 			margin: 0;
 			list-style-type: none;
 		}
@@ -62,7 +63,7 @@
 				+ .navSide-item,
 				+ .navSide-item-subMenu-item,
 				+ .navSide-item-subMenu-link {
-					margin-top: 0.125em;
+					margin-top: var(--spacings-XXS);
 				}
 			}
 		}
@@ -77,60 +78,55 @@
 			height: 100%;
 			align-items: center;
 			display: flex;
+			column-gap: .75rem;
 			text-decoration: none;
 			user-select: none;
 			color: var(--components-navSide-fullwidth-palette-text);
-			transition-property: all;
+			transition-property: background-color, color;
 			transition-duration: var(--commons-animations-durations-fast);
 			border-radius: var(--commons-borderRadius-M);
 
 			&:focus-visible {
-				outline: none;
-				position: relative;
-				z-index: 1;
-				box-shadow: 0 0 0 2px var(--components-navSide-fullwidth-palette-selected-text);
-				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
-				color: var(--components-navSide-fullwidth-palette-hovered-text);
-			}
-		}
-
-		.navSide-item-link {
-			font-size: var(--components-navSide-main-font-size);
-			padding: var(--spacings-S);
-			font-weight: 600;
-			line-height: var(--sizes-XS-lineHeight);
-
-			&:focus-visible {
-				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
-				color: var(--components-navSide-fullwidth-palette-hovered-text);
+				@include a11y.focusVisible;
 			}
 
 			&:hover {
 				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
 				color: var(--components-navSide-fullwidth-palette-hovered-text);
 			}
+
+			&:active {
+				background-color: var(--palettes-navigation-900);
+			}
 		}
 
-		.navSide-item-link-title {
-			line-height: 1.2;
-			margin-left: 1em;
-			margin-right: 0.625em;
-			vertical-align: middle;
-			width: 100%;
+		.navSide-item-link {
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			padding: .75rem var(--spacings-S);
+			font-weight: 600;
 		}
 
-		.navSide-item-alert {
+		.numericBadge {
+			margin-left: auto;
+		}
+
+		.navSide-item-alert { // deprecated
 			font-size: var(--sizes-XS-fontSize);
+			font-weight: 600;
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
 			color: var(--components-navSide-fullwidth-palette-alert-text);
 			transition-duration: var(--commons-animations-durations-standard);
 			transition-property: background-color;
 			margin-left: auto;
-			border-radius: 0.666em;
-			height: 1.333em;
-			line-height: 1.333em;
-			margin-right: 0.666em;
-			padding: 0 0.666em;
+			border-radius: 6px;
+			height: var(--sizes-S-lineHeight);
+			line-height: var(--sizes-S-lineHeight);
+			margin-right: 0;
+			padding: 0 var(--spacings-XXS);
+			min-width: 1.25rem;
+			text-align: center;
+			flex-shrink: 0;
 		}
 
 		.navSide-item-arrow {
@@ -143,8 +139,8 @@
 			transform: rotate(0);
 			font-size: var(--sizes-L-fontSize);
 			flex-shrink: 0;
-			width: 1em;
-			height: 1em;
+			width: 1rem;
+			height: 1rem;
 			transform-origin: 50% 50%;
 		}
 
@@ -158,9 +154,9 @@
 
 		.navSide-item-subMenu-link {
 			font-weight: 400;
-			line-height: 1.4;
-			padding: 0.5em 1em 0.5em 3.2em;
-			vertical-align: middle;
+			padding: var(--spacings-XS) var(--spacings-S) var(--spacings-XS) var(--spacings-XL);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
 		}
 
 		.navSide-bottomSection {
@@ -188,7 +184,7 @@
 				}
 			}
 
-			.navSide-item-alert {
+			.navSide-item-alert { // deprecated
 				background-color: var(--components-navSide-bottom-section-palette-alert-color);
 				color: var(--components-navSide-bottom-section-palette-alert-text);
 			}

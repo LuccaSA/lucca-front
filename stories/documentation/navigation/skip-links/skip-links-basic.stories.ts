@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
-import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'skip-links-story',
@@ -9,16 +9,16 @@ import { componentWrapperDecorator, Meta, moduleMetadata, Story } from '@storybo
 	template: `
 		<lu-skip-links></lu-skip-links>
 		<div id="lucca-banner-solutions-container">
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-apps"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-userGroup"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-rocket"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-info"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-notification"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-app"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-peopleGroup"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-transportRocket"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-signInfo"></span></button>
+			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-bell"></span></button>
 		</div>
 		<div id="navSide">
-			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-send"></span>Internal navigation</button>
-			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-clock"></span>Internal navigation</button>
-			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-watch"></span>Internal navigation</button>
+			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Internal navigation</button>
+			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-timeClock"></span>Internal navigation</button>
+			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-eye"></span>Internal navigation</button>
 		</div>
 		<div id="main-content">
 			<a href="#" class="link">Content link</a>
@@ -47,16 +47,10 @@ class SkipLinksStory {}
 
 export default {
 	title: 'Documentation/Navigation/SkipLinks/Basic',
-	component: LuSkipLinksComponent,
-	decorators: [
-		componentWrapperDecorator(SkipLinksStory),
-		moduleMetadata({
-			imports: [SkipLinksStory],
-		}),
-	],
+	component: SkipLinksStory,
 } as Meta;
 
-const Template: Story<SkipLinksStory> = (props) => ({ props });
+const Template: StoryFn<SkipLinksStory> = (props) => ({ props });
 
 const code = `
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';

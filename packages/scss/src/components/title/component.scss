@@ -3,9 +3,10 @@
 	margin-top: 0;
 	color: var(--palettes-grey-900);
 	margin-bottom: var(--spacings-S);
+	text-rendering: geometricPrecision;
 
 	// suffix here
-	font-weight: 600 #{$suffix};
+	font-weight: var(--components-title-weight, 600) #{$suffix};
 	font-size: var(--sizes-fontSize) #{$suffix};
 	line-height: var(--sizes-lineHeight) #{$suffix};
 	padding-top: var(--sizes-verticalPadding) #{$suffix};

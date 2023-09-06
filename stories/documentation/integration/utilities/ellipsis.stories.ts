@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface EllipsisStory {}
 
@@ -12,7 +12,7 @@ function getTemplate(args: EllipsisStory): string {
 	`;
 }
 
-const Template: Story<EllipsisStory> = (args: EllipsisStory) => ({
+const Template: StoryFn<EllipsisStory> = (args: EllipsisStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

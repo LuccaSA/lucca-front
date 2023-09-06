@@ -1,8 +1,10 @@
+// deprecated
+
 @mixin box-shadow-override($hasHover: false) {
-	box-shadow: var(--commons-elevations-elevation-1) !important;
+	box-shadow: var(--commons-boxShadow-XS) !important;
 	@if $hasHover {
 		&:hover {
-			box-shadow: var(--commons-elevations-elevation-3) !important;
+			box-shadow: var(--commons-boxShadow-M) !important;
 		}
 	}
 }
