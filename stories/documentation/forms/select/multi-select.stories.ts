@@ -56,7 +56,7 @@ export const WithMultiDisplayer = generateStory({
 		[(ngModel)]="selectedLegumes"
 	>
 		<ng-container *luMultiDisplayer="let legumes; select: selectRef">
-			<span class="chip mod-unkillable">{{ legumes.length }}</span> légumes sélectionnés
+			<span class="numericBadge u-marginRightXXS">{{ legumes.length }}</span>légumes sélectionnés
 		</ng-container>
 	</lu-multi-select>
 	<span class="textfield-label">Label</span>

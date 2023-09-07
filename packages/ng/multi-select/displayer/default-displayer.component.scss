@@ -1,3 +1,6 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/chip/exports' as chip;
+
 :host {
 	display: flex;
 	height: var(--sizes-M-lineHeight);
@@ -6,13 +9,22 @@
 }
 
 :host-context(lu-multi-select.is-disabled) {
-	--components-select-chip-background: var(--palettes-grey-500);
+
+	.chip {
+			@include chip.disabled;
+	}
 }
 
 .lu-multiselect-counter {
 	position: absolute;
 	top: 0;
 	left: calc(var(--hidden-option-count-offset-left) + var(--spacings-XXS));
+}
+
+.lu-multiselect-counter-chip {
+	&:focus-visible {
+		@include a11y.focusVisible();
+	}
 }
 
 .lu-multiselect-chip[aria-hidden] {
