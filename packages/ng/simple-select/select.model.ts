@@ -2,7 +2,7 @@ import { InjectionToken, TemplateRef, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface ILuSelectPanelData<T> {
-	options$: Observable<T[]>;
+	options$: Observable<readonly T[]>;
 	loading$: Observable<boolean>;
 	optionComparer: (option1: T, option2: T) => boolean;
 	initialValue: T | undefined;

@@ -28,11 +28,11 @@ export class LuInputDisplayerDirective<T> extends ALuInputDisplayer<T> implement
 	constructor(protected template: TemplateRef<LuInputDisplayerContext<T>>) {
 		super();
 	}
-	getViewRef(value: T | T[]): ViewRef {
+	getViewRef(value: T | readonly T[]): ViewRef {
 		return this.template.createEmbeddedView({ $implicit: value });
 	}
 }
 
 export class LuInputDisplayerContext<T> {
-	constructor(public $implicit: T | T[]) {}
+	constructor(public $implicit: T | readonly T[]) {}
 }

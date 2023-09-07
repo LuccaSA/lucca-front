@@ -3,7 +3,7 @@ import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/te
 import fs from 'fs';
 import path from 'path';
 
-export function createTreeFromFiles(testsRoot: string, files: string[], filePartFilter: string): Tree {
+export function createTreeFromFiles(testsRoot: string, files: readonly string[], filePartFilter: string): Tree {
 	const tree = new UnitTestTree(Tree.empty());
 	const filteredFiles = files.filter((f) => f.includes(filePartFilter));
 

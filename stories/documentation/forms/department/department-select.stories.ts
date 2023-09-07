@@ -37,8 +37,8 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 })
 class DepartmentStory {
 	@Input() appInstanceId: number = null;
-	@Input() operations: number[] = [];
-	@Input() filters: string[] = [];
+	@Input() operations: readonly number[] = [];
+	@Input() filters: readonly string[] = [];
 }
 
 export default {
@@ -73,8 +73,8 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 })
 class DepartmentStory {
 	@Input() appInstanceId: number = null;
-	@Input() operations: number[] = [];
-	@Input() filters: string[] = [];
+	@Input() operations: readonly number[] = [];
+	@Input() filters: readonly string[] = [];
 }`;
 // Select.args = {
 // 	appInstanceId: 15,

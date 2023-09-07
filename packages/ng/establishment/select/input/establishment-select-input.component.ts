@@ -74,9 +74,9 @@ export class LuEstablishmentSelectInputComponent<
 {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
-	@Input() filters: string[];
+	@Input() filters: readonly string[];
 	@Input() appInstanceId: number;
-	@Input() operations: number[];
+	@Input() operations: readonly number[];
 
 	private _establishmentService: LuEstablishmentService;
 	private _legalUnitService: LuLegalUnitService;

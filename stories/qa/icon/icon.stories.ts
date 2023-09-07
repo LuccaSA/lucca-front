@@ -10,7 +10,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	imports: [NgForOf],
 })
 class IconStory {
-	icons: string[] = icons.default;
+	icons: readonly string[] = icons.default;
 	public camelize(str): string {
 		let arr = str.split('_');
 		let capital = arr.map((item, index) => (index ? item.charAt(0).toUpperCase() + item.slice(1).toLowerCase() : item.toLowerCase()));

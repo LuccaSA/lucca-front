@@ -81,7 +81,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 		this.loading$.next(value);
 	}
 
-	@Input() set options(options: T[]) {
+	@Input() set options(options: readonly T[]) {
 		this.options$.next(options);
 	}
 
@@ -104,7 +104,7 @@ export class LuSimpleSelectInputComponent<T> implements ControlValueAccessor, On
 
 	protected _value?: T;
 
-	options$ = new ReplaySubject<T[]>(1);
+	options$ = new ReplaySubject<readonly T[]>(1);
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
 	intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);

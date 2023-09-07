@@ -21,7 +21,7 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 		this._v3Service.api = api;
 		this._v4Service.api = api;
 	}
-	set filters(filters: string[]) {
+	set filters(filters: readonly string[]) {
 		this._v3Service.filters = filters;
 		this._v4Service.filters = filters;
 	}
@@ -55,19 +55,19 @@ export class LuApiHybridService<T extends ILuApiItem = ILuApiItem> extends ALuAp
 		this._v4Service = new LuApiV4Service(this._http);
 	}
 
-	getAll(filters: string[] = []): Observable<T[]> {
+	getAll(filters: readonly string[] = []): Observable<readonly T[]> {
 		return this._service.getAll(filters);
 	}
 
-	getPaged(page: number, filters: string[] = []): Observable<T[]> {
+	getPaged(page: number, filters: readonly string[] = []): Observable<readonly T[]> {
 		return this._service.getPaged(page, filters);
 	}
 
-	searchAll(clue: string, filters: string[] = []): Observable<T[]> {
+	searchAll(clue: string, filters: readonly string[] = []): Observable<readonly T[]> {
 		return this._service.searchAll(clue, filters);
 	}
 
-	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
+	searchPaged(clue: string, page: number, filters: readonly string[] = []): Observable<readonly T[]> {
 		return this._service.searchPaged(clue, page, filters);
 	}
 }

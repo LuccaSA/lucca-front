@@ -233,10 +233,10 @@ export function wrapWithCalcFunctionNode(rootValueNode: ScssValueAst, node: Valu
 	}
 }
 
-function split<T>(array: T[], predicate: (item: T) => boolean): { chunks: T[][]; separators: T[] } {
-	const chunks: T[][] = [];
-	const separators: T[] = [];
-	let current: T[] = [];
+function split<T>(array: readonly T[], predicate: (item: T) => boolean): { chunks: readonly T[][]; separators: readonly T[] } {
+	const chunks: readonly T[][] = [];
+	const separators: readonly T[] = [];
+	let current: readonly T[] = [];
 
 	for (const item of array) {
 		if (predicate(item)) {
@@ -253,6 +253,6 @@ function split<T>(array: T[], predicate: (item: T) => boolean): { chunks: T[][];
 	return { chunks, separators };
 }
 
-function join<T>(array: T[][], separators: T[]): T[] {
+function join<T>(array: readonly T[][], separators: readonly T[]): readonly T[] {
 	return array.reduce((acc, chunk, index) => (index === 0 ? chunk : [...acc, separators[index - 1], ...chunk]), []);
 }

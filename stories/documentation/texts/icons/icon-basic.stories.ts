@@ -11,7 +11,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	templateUrl: './icon-basic.stories.html',
 })
 class IconStory {
-	icons: string[] = icons.default;
+	icons: readonly string[] = icons.default;
 	filter = '';
 
 	public updateIcons(filter: string) {

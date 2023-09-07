@@ -21,8 +21,9 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 			this._appInstanceId = appInstanceId;
 		}
 	}
-	protected _operations: number[] = [];
-	set operations(operations: number[]) {
+
+	protected _operations: readonly number[] = [];
+	set operations(operations: readonly number[]) {
 		this._operations = operations;
 	}
 

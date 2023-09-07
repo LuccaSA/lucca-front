@@ -9,7 +9,7 @@ export type ILuApiOptionSearcher<T extends import('../../api.model').ILuApiItem 
 export abstract class ALuApiOptionSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 	implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber
 {
-	outOptions$ = new Subject<T[]>();
+	outOptions$ = new Subject<readonly T[]>();
 	loading$: Observable<boolean>;
 	empty$: Observable<boolean>;
 
@@ -19,16 +19,21 @@ export abstract class ALuApiOptionSearcher<T extends import('../../api.model').I
 		// this.initObservables(clue$);
 		this._clue$ = clue$;
 	}
+
 	constructor(protected _service: S) {}
+
 	init() {
 		this.initObservables();
 	}
+
 	onOpen() {
 		this.resetClue();
 	}
+
 	onClose() {
 		this.clearOptions();
 	}
+
 	protected initObservables() {
 		// this._clue$ = clue$.pipe(share());
 		const results$ = this._clue$.pipe(
@@ -41,7 +46,9 @@ export abstract class ALuApiOptionSearcher<T extends import('../../api.model').I
 		this.loading$ = merge(this._clue$.pipe(map(() => true)), results$.pipe(map(() => false)));
 		this.empty$ = results$.pipe(map((o) => o.length === 0));
 	}
+
 	abstract resetClue();
+
 	protected clearOptions() {
 		this.outOptions$.next([]);
 	}
@@ -53,7 +60,7 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 	extends ALuApiOptionSearcher<T, S>
 	implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber
 {
-	override outOptions$ = new Subject<T[]>();
+	override outOptions$ = new Subject<readonly T[]>();
 	override loading$: Observable<boolean>;
 	protected _loading = false;
 	protected _page$ = new Subject<void>();
@@ -63,9 +70,11 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 	constructor(service: S) {
 		super(service);
 	}
+
 	override onOpen() {
 		this.resetClue();
 	}
+
 	onScrollBottom() {
 		if (!this._loading && !this._isLastPage) {
 			this._page$.next();
@@ -86,7 +95,7 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 			switchMap(([page, clue]) =>
 				this._service.searchPaged(clue, page).pipe(
 					catchError(() => of([])),
-					map<T[], [T[], number]>((items) => [items, page]),
+					map<readonly T[], [readonly T[], number]>((items) => [items, page]),
 				),
 			),
 			share(),
@@ -105,5 +114,6 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 		this.loading$.subscribe((l) => (this._loading = l));
 		this.empty$ = this.outOptions$.pipe(map((o) => o.length === 0));
 	}
+
 	abstract override resetClue();
 }
