@@ -1,6 +1,6 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { LuMultiSelectPanelComponent } from '../panel';
 import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
@@ -77,7 +77,7 @@ export class LuMultiSelectPanelRefFactory {
 
 		const overlayRef = this.overlay.create(defaultOverlayConfig);
 
-		overlayRef.hostElement.style.transitionProperty = 'top, left, right, bottom';
+		overlayRef.hostElement.style.transitionProperty = 'height';
 		overlayRef.hostElement.style.transitionDuration = 'var(--commons-animations-durations-standard)';
 
 		return new MultiSelectPanelRef(overlayRef, this.parentInjector, panelData, defaultOverlayConfig.positionStrategy, expandedPositionStrategy);
@@ -104,6 +104,7 @@ export class LuMultiSelectPanelRefFactory {
 
 		return overlayConfig;
 	}
+
 	buildExpandedPositionStrategy(): PositionStrategy {
 		const config = { overlapInput: true, offsetX: -4, offsetY: -4 };
 		return this.positionBuilder
@@ -117,12 +118,25 @@ export class LuMultiSelectPanelRefFactory {
 			]);
 	}
 
-	protected buildPosition(yDirection: 'top' | 'bottom', xDirection: 'left' | 'right', config: { offsetX?: number; offsetY?: number; overlapInput: boolean }): ConnectedPosition {
+	protected buildPosition(
+		yDirection: 'top' | 'bottom',
+		xDirection: 'left' | 'right',
+		config: {
+			offsetX?: number;
+			offsetY?: number;
+			overlapInput: boolean;
+		},
+	): ConnectedPosition {
 		const originX = xDirection === 'right' ? 'start' : 'end';
 		const overlayX = originX;
 
 		const oppositeYDirection = yDirection === 'top' ? 'bottom' : 'top';
-		const { originY, overlayY } = config.overlapInput ? ({ originY: oppositeYDirection, overlayY: oppositeYDirection } as const) : ({ originY: yDirection, overlayY: oppositeYDirection } as const);
+		const { originY, overlayY } = config.overlapInput
+			? ({
+					originY: oppositeYDirection,
+					overlayY: oppositeYDirection,
+			  } as const)
+			: ({ originY: yDirection, overlayY: oppositeYDirection } as const);
 
 		return {
 			originX,
