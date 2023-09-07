@@ -1,30 +1,6 @@
 @import '_definitions';
 @include selectInputStyle;
-@include selectClearerStyle;
 
-::ng-deep {
-	.chip.lu-multiselect-chip {
-		padding-right: calc(var(--spacings-M) + var(--spacings-XS));
-		background-color: var(--palettes-grey-200);
-		color: var(--palettes-grey-700);
-	}
-
-	.chip-kill.lu-multiselect-chip-kill {
-		background-color: var(--palettes-grey-700);
-		color: var(--colors-white-color);
-		&:focus,
-		&:hover {
-			--components-chip-kill-hover: var(--palettes-error-400);
-			background-color: var(--palettes-error-700);
-		}
-	}
-
-	.lu-multiselect-counter-chip {
-		--components-select-chip-background: var(--palettes-grey-100);
-		--components-select-chip-text: var(--palettes-grey-900);
-		border-radius: var(--spacings-S);
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-fontSize);
-		font-weight: 600;
-	}
+.lu-select-value {
+	padding-right: 2rem;
 }

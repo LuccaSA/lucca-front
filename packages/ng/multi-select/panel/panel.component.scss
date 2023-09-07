@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @import '_definitions';
 @include optionPlaceholderStyle;
 
@@ -8,7 +9,7 @@
 	width: 100%;
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--colors-white-color);
-	box-shadow: var(--commons-elevations-elevation-2);
+	box-shadow: var(--commons-boxShadow-M);
 	transition-property: width, min-width, margin-top, margin-left;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease-in;
@@ -16,7 +17,8 @@
 
 .lu-multiselect-panel-form {
 	padding: var(--spacings-XS);
-	box-shadow: var(--commons-elevations-elevation-1);
+	box-shadow: var(--commons-boxShadow-S);
+	z-index: 1;
 }
 
 .lu-multiselect-panel-columns {
@@ -24,7 +26,8 @@
 	gap: var(--spacings-XS);
 	padding: 0;
 	width: 100%;
-	transition: padding 0.15s ease-in;
+	transition: padding var(--commons-animations-durations-standard) ease;
+
 	.is-expanded & {
 		padding: var(--spacings-XS);
 	}
@@ -46,6 +49,9 @@
 }
 
 .lu-multiselect-panel-columns-col1-content {
+	box-shadow: none;
+	animation: none;
+
 	.is-expanded & {
 		border: var(--commons-divider-width) solid var(--palettes-grey-100);
 	}
@@ -58,20 +64,17 @@
 	& > * {
 		scroll-snap-align: center;
 	}
-	&:focus {
-		box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-primary-400)), var(--commons-boxShadow-XS),
-			0 0 0 4px var(--palettes-100, var(--palettes-primary-100));
+	&:focus-visible {
+		@include a11y.focusVisible();
 	}
 }
 
 .lu-multiselect-search {
 	flex-grow: 1;
-	margin: 0;
 }
 
 .lu-multiselect-selectall {
 	padding: var(--spacings-XS);
-	box-shadow: var(--commons-elevations-elevation-2);
 	font-weight: 600;
 	&:hover,
 	&:focus-within {
@@ -82,10 +85,12 @@
 .lu-multiselect-chips {
 	overflow-y: auto;
 	display: flex;
+	max-height: 15rem;
 	flex-grow: 1;
 	flex-direction: column;
 	align-items: flex-start;
 	align-self: stretch;
+	gap: var(--spacings-XXS);
 	padding: var(--spacings-XS);
 	border-top-left-radius: var(--commons-borderRadius-M);
 	border-top-right-radius: var(--commons-borderRadius-M);
@@ -96,9 +101,10 @@
 	align-items: center;
 	align-self: stretch;
 	justify-content: flex-start;
-	border-radius: 0;
 	border-top: var(--commons-divider-border);
 	margin-top: auto;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .lu-multiselect-panel-form {

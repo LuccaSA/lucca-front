@@ -52,13 +52,14 @@ function fromElementWidth(el: HTMLElement): Observable<number> {
 				[title]="index + '-' + (visibleChipsCount$ | async)"
 			>
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
-				<button
+				<a
+					href
 					*ngIf="!disabled"
 					type="button"
-					class="chip-kill lu-multiselect-chip-kill"
+					class="chip-kill"
 					(click)="unselectOption(option, $event)"
 					[attr.tabindex]="index >= ((visibleChipsCount$ | async) || 0) ? -1 : undefined"
-				></button>
+				></a>
 			</div>
 		</div>
 		<div class="lu-multiselect-counter" #overflow>

@@ -8,7 +8,7 @@
 	[class.is-expanded]="isExpanded"
 	[attr.aria-expanded]="isExpanded ? 'true' : undefined"
 >
-	<div class="form lu-multiselect-panel-form">
+	<div class="lu-multiselect-panel-form">
 		<ng-container *ngIf="searchable">
 			<label class="panel-search textfield mod-search mod-outlined lu-multiselect-search">
 				<input
@@ -58,15 +58,17 @@
 					</label>
 				</ng-container>
 
-				<lu-select-option
-					*ngFor="let option of ctx.options; let index = index"
-					[option]="option"
-					[optionTpl]="optionTpl"
-					[optionIndex]="index"
-					[scrollIntoViewOptions]="{ block: 'nearest' }"
-					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
-					(click)="toggleOption(option)"
-				></lu-select-option>
+				<div class="lu-picker-content-option">
+					<lu-select-option
+						*ngFor="let option of ctx.options; let index = index"
+						[option]="option"
+						[optionTpl]="optionTpl"
+						[optionIndex]="index"
+						[scrollIntoViewOptions]="{ block: 'nearest' }"
+						[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
+						(click)="toggleOption(option)"
+					></lu-select-option>
+				</div>
 
 				<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
 			</div>
@@ -76,7 +78,7 @@
 			<div class="lu-multiselect-chips" role="listbox" tabindex="0" *ngIf="selectedOptions.length" (keydown)="onRightColumnKeydown($event)">
 				<div role="option" class="chip lu-multiselect-chip" *ngFor="let option of selectedOptions" [luMultiSelectSelectedChip]="option">
 					<ng-container *luOptionOutlet="optionTpl; value: option"></ng-container>
-					<button type="button" class="chip-kill lu-multiselect-chip-kill" tabindex="-1" (click)="onChipKillClick(option)"></button>
+					<button type="button" class="chip-kill" tabindex="-1" (click)="onChipKillClick(option)"></button>
 				</div>
 			</div>
 			<button *ngIf="selectedOptions.length" class="lu-multiselect-clear button mod-text mod-icon" type="button" (click)="clear()">
