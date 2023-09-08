@@ -7,6 +7,10 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-withArrow {
+		@include withArrow;
+	}
 }
 
 .checkboxField-input {

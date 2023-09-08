@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.arrow {
+	@include vars;
+	@include component;
+
+	&.mod-white {
+		@include white;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-switch {
+		@include switch;
+
+		&.mod-S {
+			@include switchS;
+		}
+	}
+
+	:is(.radioField-input, .checkboxField-input, .switchField-input):not(:checked) ~ & {
+		@include inactive;
+	}
+}

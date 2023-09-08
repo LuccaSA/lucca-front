@@ -1,6 +1,6 @@
 @mixin vars {
-	--components-box-background: #f3f5fc;
-	--components-box-border-radius: 8px;
+	--components-box-background: var(--palettes-grey-25);
+	--components-box-border-radius: var(--commons-borderRadius-L);
 	--components-box-margin: 0 0 var(--spacings-S);
 	--components-box-padding: var(--spacings-M);
 	--components-box-toggle-arrow-size: 0.8rem;

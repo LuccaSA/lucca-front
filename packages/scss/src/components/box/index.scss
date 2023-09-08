@@ -4,8 +4,8 @@
 	@include vars;
 	@include component;
 
-	&.mod-grey {
-		@include grey;
+	&.mod-white {
+		@include white;
 	}
 
 	&.mod-toggle {

@@ -1,18 +1,28 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/arrow/exports' as arrow;
 
 @mixin S {
-  --component-radioField-label-input-size: 1rem;
-  --component-radioField-label-input-borderRadius: var(--commons-borderRadius-M);
-  --component-radioField-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
-  --component-radioField-label-fontSize: var(--sizes-S-fontSize);
-  --component-radioField-label-lineHeight: var(--sizes-S-lineHeight);
+	--component-radioField-label-input-size: 1rem;
+	--component-radioField-label-input-borderRadius: var(--commons-borderRadius-M);
+	--component-radioField-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
+	--component-radioField-label-fontSize: var(--sizes-S-fontSize);
+	--component-radioField-label-lineHeight: var(--sizes-S-lineHeight);
 
-  .formLabel {
-    @include formLabel.S;
-  }
+	.formLabel {
+		@include formLabel.S;
+	}
 
-  .inlineMessage {
-    @include inlineMessage.S;
-  }
+	.inlineMessage {
+		@include inlineMessage.S;
+	}
+
+	.arrow {
+		@include arrow.S;
+	}
+}
+
+@mixin withArrow {
+	position: relative;
+	padding-bottom: var(--spacings-S);
 }

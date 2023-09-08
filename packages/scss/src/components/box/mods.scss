@@ -1,7 +1,5 @@
-@mixin grey {
-	--components-box-backgroundGrey: var(--components-box-background);
-
-	background-color: var(--components-box-background);
+@mixin white {
+	--components-box-background: var(--colors-white-color);
 }
 
 @mixin toggle {
@@ -12,7 +10,7 @@
 		border-color: transparent;
 		border-style: solid;
 		border-width: var(--components-box-toggle-arrow-size);
-		border-bottom-color: var(--components-box-backgroundGrey, var(--colors-white-color));
+		border-bottom-color: var(--components-box-background, var(--colors-white-color));
 		border-top: 0;
 		height: 0;
 		bottom: 100%;

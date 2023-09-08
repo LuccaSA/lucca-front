@@ -7,6 +7,10 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-withArrow {
+		@include withArrow;
+	}
 }
 
 .switchField-input {
@@ -22,7 +26,7 @@
 		}
 	}
 
-	&[aria-invalid="true"] {
+	&[aria-invalid='true'] {
 		@include invalid;
 
 		&:checked {

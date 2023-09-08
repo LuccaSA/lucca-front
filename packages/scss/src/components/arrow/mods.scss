@@ -1,0 +1,16 @@
+@mixin white {
+	--components-arrow-background: var(--colors-white-color);
+}
+
+@mixin S {
+	bottom: -2px;
+	left: -2px;
+}
+
+@mixin switch {
+	left: 8px;
+}
+
+@mixin switchS {
+	left: 4px;
+}
