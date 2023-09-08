@@ -45,13 +45,13 @@ export default {
 function getTemplate(args: ArrowBasicStory): string {
 	const label = args.label;
 	const s = args.s ? ` mod-S` : '';
-	const boxWhite = args.white;
+	const boxWhite = args.white ? `box` : '';
 	const white = args.white ? ` mod-white` : '';
 	const checked = args.checked ? ` checked` : '';
 
 	if (args.field === 'radio') {
 		return `
-	<div [class.box]="${boxWhite}">
+	<div class="${boxWhite}">
 		<div class="u-displayFlex u-gapS">
 			<div class="radioField${s} mod-withArrow">
 				<input type="radio" class="radioField-input" id="fieldA" name="field" aria-labelledby="fieldALabel"${checked} />
@@ -82,7 +82,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</div>`;
 	} else if (args.field === 'checkbox') {
 		return `
-	<div [class.box]="${boxWhite}">
+	<div class="${boxWhite}">
 		<div class="checkboxField${s} mod-withArrow">
 			<input type="checkbox" class="checkboxField-input" id="field" aria-labelledby="fieldlabel"${checked} />
 			<label class="checkboxField-label" for="field">
@@ -99,7 +99,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</div>`;
 	} else {
 		return `
-	<div [class.box]="${boxWhite}">
+	<div class="${boxWhite}">
 		<div class="switchField${s} mod-withArrow">
 			<input type="checkbox" class="switchField-input" id="field" aria-labelledby="fieldLabel"${checked} />
 			<label class="switchField-label" for="field">
