@@ -9,6 +9,11 @@
 			background-color: var(--colors-white-color);
 		}
 
+		.verticalNavigation-list-item-link-icon {
+			font-size: var(--sizes-M-lineHeight);
+			margin-right: var(--spacings-XS);
+		}
+
 		.verticalNavigation-list-item-link {
 			@include reset.button;
 			display: flex;
@@ -19,11 +24,6 @@
 			background-color: var(--components-verticalNavigation-link-background);
 			transition: background-color var(--commons-animations-durations-fast) ease;
 			font-weight: 600;
-
-			.lucca-icon {
-				margin-left: auto;
-				font-size: var(--sizes-M-lineHeight);
-			}
 
 			&:hover {
 				--components-verticalNavigation-link-background: var(--palettes-grey-50);
@@ -37,6 +37,11 @@
 			&:active {
 				--components-verticalNavigation-link-background: var(--palettes-grey-100);
 			}
+		}
+
+		.verticalNavigation-list-item-link-arrow {
+			font-size: var(--sizes-M-lineHeight);
+			margin-left: auto;
 		}
 	}
 }
