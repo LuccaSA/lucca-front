@@ -3,14 +3,15 @@
 }
 
 @mixin S {
-	bottom: -2px;
-	left: -2px;
+	--components-arrow-left: -2px;
+	--components-arrow-bottom: -2px;
 }
 
 @mixin switch {
-	left: 8px;
+	--components-arrow-left: 8px;
 }
 
 @mixin switchS {
-	left: 4px;
+	--components-arrow-left: 4px;
+	--components-arrow-bottom: -2px;
 }

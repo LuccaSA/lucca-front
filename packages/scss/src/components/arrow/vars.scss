@@ -1,4 +1,6 @@
 @mixin vars {
 	--components-arrow-background: var(--palettes-grey-25);
 	--components-arrow-horizontalMargin: var(--commons-borderRadius-M);
+	--components-arrow-left: 0;
+	--components-arrow-bottom: 0;
 }
