@@ -19,3 +19,8 @@
 		content: '';
 	}
 }
+
+@mixin withArrow {
+	--components-box-border-radius: var(--commons-borderRadius-M);
+	--components-box-padding: var(--spacings-S);
+}

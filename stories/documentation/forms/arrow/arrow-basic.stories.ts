@@ -78,7 +78,7 @@ function getTemplate(args: ArrowBasicStory): string {
 				<div class="arrow${white}"></div>
 			</div>
 		</div>
-		<div class="box u-borderRadiusM u-paddingS${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+		<div class="box mod-withArrow${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
 	} else if (args.field === 'checkbox') {
 		return `
@@ -95,7 +95,7 @@ function getTemplate(args: ArrowBasicStory): string {
 			</label>
 			<div class="arrow${white}"></div>
 		</div>
-		<div class="box u-borderRadiusM u-paddingS${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+		<div class="box mod-withArrow${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
 	} else {
 		return `
@@ -112,7 +112,7 @@ function getTemplate(args: ArrowBasicStory): string {
 			</label>
 			<div class="arrow${white}"></div>
 		</div>
-		<div class="box u-borderRadiusM u-paddingS${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+		<div class="box mod-withArrow${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
 	}
 }

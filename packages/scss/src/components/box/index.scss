@@ -8,7 +8,12 @@
 		@include white;
 	}
 
+	// legacy
 	&.mod-toggle {
 		@include toggle;
+	}
+
+	&.mod-withArrow {
+		@include withArrow;
 	}
 }
