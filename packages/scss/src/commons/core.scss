@@ -100,7 +100,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
 			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-				border-#{$corner}radius: $value;
+				border-#{$corner}radius: $value #{$suffix};
 			}
 		}
 	}
