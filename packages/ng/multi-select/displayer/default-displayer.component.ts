@@ -49,7 +49,6 @@ function fromElementWidth(el: HTMLElement): Observable<number> {
 				class="chip lu-multiselect-chip"
 				[class.mod-unkillable]="disabled"
 				[attr.aria-hidden]="index >= ((visibleChipsCount$ | async) || 0) ? 'true' : undefined"
-				[title]="index + '-' + (visibleChipsCount$ | async)"
 			>
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
 				<button
@@ -63,7 +62,7 @@ function fromElementWidth(el: HTMLElement): Observable<number> {
 		</div>
 		<div class="lu-multiselect-counter" #overflow>
 			<ng-container *ngIf="hiddenChipsCount$ | async as count">
-				<div class="chip mod-unkillable lu-multiselect-counter-chip" aria-hidden="true" [luTooltip]="intl.showResultsDetails">+ {{ count }}</div>
+				<div class="chip mod-unkillable lu-multiselect-counter-chip" aria-hidden="true">+ {{ count }}</div>
 				<span class="u-mask" [ngPlural]="count">
 					<ng-template ngPluralCase="=1">{{ intl.otherResult }}</ng-template>
 					<ng-template ngPluralCase="other">{{ intl.otherResults }}</ng-template>
