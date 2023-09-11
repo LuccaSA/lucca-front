@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface ArrowBasicStory {
 	s: boolean;
 	label: Text;
-	white: boolean;
+	grey: boolean;
 	field: string;
 	checked: boolean;
 }
@@ -27,7 +27,7 @@ export default {
 				type: 'text',
 			},
 		},
-		white: {
+		grey: {
 			control: {
 				type: 'boolean',
 			},
@@ -44,14 +44,14 @@ export default {
 
 function getTemplate(args: ArrowBasicStory): string {
 	const label = args.label;
-	const s = args.s ? ` mod-S` : '';
-	const boxWhite = args.white ? `box` : '';
-	const white = args.white ? ` mod-white` : '';
-	const checked = args.checked ? ` checked` : '';
+	const s = args.s ? ' mod-S' : '';
+	const boxGrey = args.grey ? 'box mod-grey' : '';
+	const grey = args.grey ? '' : ' mod-grey';
+	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
 		return `
-	<div class="${boxWhite}">
+	<div class="${boxGrey}">
 		<div class="u-displayFlex u-gapS">
 			<div class="radioField${s} mod-withArrow">
 				<input type="radio" class="radioField-input" id="fieldA" name="field" aria-labelledby="fieldALabel"${checked} />
@@ -63,7 +63,7 @@ function getTemplate(args: ArrowBasicStory): string {
 						${label}
 					</span>
 				</label>
-				<div class="arrow${white}"></div>
+				<div class="arrow${grey}"></div>
 			</div>
 			<div class="radioField${s} mod-withArrow">
 				<input type="radio" class="radioField-input" id="fieldB" name="field" aria-labelledby="fieldBLabel" />
@@ -75,14 +75,14 @@ function getTemplate(args: ArrowBasicStory): string {
 						Label
 					</span>
 				</label>
-				<div class="arrow${white}"></div>
+				<div class="arrow${grey}"></div>
 			</div>
 		</div>
-		<div class="box mod-withArrow${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+		<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
 	} else if (args.field === 'checkbox') {
 		return `
-	<div class="${boxWhite}">
+	<div class="${boxGrey}">
 		<div class="checkboxField${s} mod-withArrow">
 			<input type="checkbox" class="checkboxField-input" id="field" aria-labelledby="fieldlabel"${checked} />
 			<label class="checkboxField-label" for="field">
@@ -93,13 +93,13 @@ function getTemplate(args: ArrowBasicStory): string {
 					Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
 				</span>
 			</label>
-			<div class="arrow${white}"></div>
+			<div class="arrow${grey}"></div>
 		</div>
-		<div class="box mod-withArrow${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+		<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
 	} else {
 		return `
-	<div class="${boxWhite}">
+	<div class="${boxGrey}">
 		<div class="switchField${s} mod-withArrow">
 			<input type="checkbox" class="switchField-input" id="field" aria-labelledby="fieldLabel"${checked} />
 			<label class="switchField-label" for="field">
@@ -110,9 +110,9 @@ function getTemplate(args: ArrowBasicStory): string {
 					Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
 				</span>
 			</label>
-			<div class="arrow${white}"></div>
+			<div class="arrow${grey}"></div>
 		</div>
-		<div class="box mod-withArrow${white}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+		<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
 	}
 }
@@ -123,4 +123,4 @@ const Template: Story<ArrowBasicStory> = (args: ArrowBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, label: 'Label', white: false, field: 'radio', checked: true };
+Basic.args = { s: false, label: 'Label', grey: false, field: 'radio', checked: true };

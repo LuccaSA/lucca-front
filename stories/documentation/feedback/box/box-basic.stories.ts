@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
 interface BoxBasicStory {
-	white: boolean;
+	grey: boolean;
 }
 
 export default {
 	title: 'Documentation/Feedback/Box/Basic',
 	argTypes: {
-		white: {
+		grey: {
 			control: {
 				type: 'boolean',
 			},
@@ -16,10 +16,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: BoxBasicStory): string {
-	const white = args.white ? `mod-white` : '';
+	const grey = args.grey ? `mod-grey` : '';
 
 	return `
-	<div class="box ${white}">
+	<div class="box ${grey}">
 	    Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
 	</div>
 	`;
@@ -33,9 +33,9 @@ const Template: StoryFn<BoxBasicStory> = (args: BoxBasicStory) => ({
 		:host {
 			display: block;
 		}`,
-		args.white === false ? '' : ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }',
+		args.grey === false ? ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { white: false };
+Basic.args = { grey: false };

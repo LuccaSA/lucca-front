@@ -4,8 +4,8 @@
 	@include vars;
 	@include component;
 
-	&.mod-white {
-		@include white;
+	&.mod-grey {
+		@include grey;
 	}
 
 	// legacy
