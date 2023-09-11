@@ -29,6 +29,7 @@ $float: 'left', 'right';
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
+$overflow: 'hidden', 'auto', 'visible', 'scroll';
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
