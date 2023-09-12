@@ -30,6 +30,18 @@
 	}
 }
 
+@mixin checkable {
+	flex-direction: row;
+	flex-flow: wrap;
+	column-gap: var(--spacings-XS);
+	row-gap: 0;
+
+	.inlineMessage {
+		flex-basis: 100%;
+		margin-left: 1.75rem;
+	}
+}
+
 // deprecated
 
 @mixin overlay {

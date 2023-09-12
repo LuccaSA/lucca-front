@@ -16,13 +16,11 @@
 }
 
 @mixin checked {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-primary-700);
-			border-color: var(--palettes-primary-700);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-primary-700);
+		border-color: var(--palettes-primary-700);
 
-		.checkboxField-label-input-icon {
+		.checkboxField-icon-check {
 			transform: scale(1);
 			transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
 		}
@@ -30,64 +28,50 @@
 }
 
 @mixin hover {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			border-color: var(--palettes-grey-600);
-		}
+	~ .checkboxField-icon {
+		border-color: var(--palettes-grey-600);
 	}
 }
 
 @mixin checkedHover {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-primary-600);
-			border-color: var(--palettes-primary-600);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-primary-600);
+		border-color: var(--palettes-primary-600);
 	}
 }
 
 @mixin checkedActive {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-primary-800);
-			border-color: var(--palettes-primary-800);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-primary-800);
+		border-color: var(--palettes-primary-800);
 	}
 }
 
 @mixin checkedDisabled {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-grey-100);
-			border-color: var(--palettes-grey-100);
-			color: var(--palettes-grey-500);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-grey-100);
+		border-color: var(--palettes-grey-100);
+		color: var(--palettes-grey-500);
 	}
 }
 
 @mixin checkedHover {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-primary-600);
-			border-color: var(--palettes-primary-600);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-primary-600);
+		border-color: var(--palettes-primary-600);
 	}
 }
 
 @mixin checkedInvalid {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-error-700);
-			border-color: var(--palettes-error-700);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-error-700);
+		border-color: var(--palettes-error-700);
 	}
 }
 
 @mixin active {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			border-color: var(--palettes-grey-800);
-		}
+	~ .checkboxField-icon {
+		border-color: var(--palettes-grey-800);
 	}
 }
 

@@ -21,6 +21,10 @@
 	&.mod-XS {
 		@include XS;
 	}
+
+	&.mod-checkable, &:has(.checkboxField) {
+		@include checkable;
+	}
 }
 
 
