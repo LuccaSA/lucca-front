@@ -80,6 +80,13 @@
 	}
 
 	::ng-deep .lu-select-value {
+
+		lu-simple-select-default-option {
+			max-width: 5rem;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
 		.label {
 			padding: var(--spacings-XXS) var(--spacings-XS);
 			margin-left: 0;
@@ -137,6 +144,9 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
+				padding-left: var(--spacings-XXS);
+				padding-right: var(--spacings-XXS);
+				gap: var(--spacings-XXS);
 			}
 
 			.numericBadge {

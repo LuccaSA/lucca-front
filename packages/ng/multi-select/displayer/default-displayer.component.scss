@@ -8,8 +8,11 @@
 	padding-right: var(--hidden-option-count-width);
 }
 
-:host-context(lu-multi-select.is-disabled) {
+:host-context(.textfield.mod-S) {
+	height: var(--sizes-S-lineHeight);
+}
 
+:host-context(lu-multi-select.is-disabled) {
 	.chip {
 			@include chip.disabled;
 	}
