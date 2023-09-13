@@ -1,0 +1,8 @@
+<label class="formLabel" id="field1label" for="{{id}}">
+  {{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
+  <span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+</label>
+<ng-content></ng-content>
+<div class="inlineMessage" id="field1message" *ngIf="inlineMessage">
+  <span aria-hidden="true" class="lucca-icon"></span>{{inlineMessage}}
+</div>
