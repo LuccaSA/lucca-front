@@ -80,7 +80,7 @@ function getTemplate(args: RadioBasicStory): string {
 	const checked = args.checked ? ` checked="checked"` : '';
 	const required = args.required ? ` aria-required="true"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
-	const help = args.help;
+	const help = args.help ? `<span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>` : ``;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
 	return `<div class="radioField${s}">
@@ -91,7 +91,8 @@ function getTemplate(args: RadioBasicStory): string {
     </span>
 		<span class="formLabel" id="${id}label">
 			<span class="formLabel-content">
-				${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
+				${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
+				${help}
 			</span>
 		</span>
   </label>

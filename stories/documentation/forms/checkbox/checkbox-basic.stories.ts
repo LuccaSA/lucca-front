@@ -87,7 +87,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const required = args.required ? ` aria-required="true"` : '';
 	const mixed = args.mixed ? ` aria-checked="mixed"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
-	const help = args.help;
+	const help = args.help ? `<span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>` : ``;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
 	return `<div class="checkboxField${s}">
@@ -98,7 +98,8 @@ function getTemplate(args: CheckboxBasicStory): string {
 		</span>
 		<span class="formLabel" id="${id}label">
 			<span class="formLabel-content">
-				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
+				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
+				${help}
 			</span>
 		</span>
 	</label>

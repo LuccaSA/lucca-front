@@ -1,14 +1,16 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component($atRoot: 'without: rule') {
 	color: var(--components-formLabel-color);
 	display: inline-block;
 	font-size: var(--components-formLabel-fontSize);
 	line-height: var(--components-formLabel-lineHeight);
-	display: inline-flex;
+	display: flex;
 	align-items: flex-end;
 	gap: var(--spacings-XXS);
 	width: fit-content;
 
-	&:has(.formLabel-details) {
+	&:has(.formLabel-counter) {
 		width: auto;
 	}
 
@@ -29,10 +31,14 @@
 			color: var(--palettes-error-700);
 		}
 
-		.formLabel-details {
+		.formLabel-counter {
 			margin-left: auto;
 			text-align: right;
 			padding-left: var(--spacings-XS);
+		}
+
+		.formLabel-counter-alternative {
+			@include a11y.mask;
 		}
 	}
 }

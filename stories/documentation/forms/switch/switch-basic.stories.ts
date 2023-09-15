@@ -80,7 +80,7 @@ function getTemplate(args: SwitchBasicStory): string {
 	const checked = args.checked ? ` checked="checked"` : '';
 	const required = args.required ? ` aria-required="true"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
-	const help = args.help;
+	const help = args.help ? `<span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>` : ``;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
 	return `<div class="switchField${s}">
@@ -91,7 +91,8 @@ function getTemplate(args: SwitchBasicStory): string {
     </span>
 		<span class="formLabel" id="${id}Label">
 			<span class="formLabel-content">
-				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
+				${help}
 			</span>
 		</span>
   </label>
