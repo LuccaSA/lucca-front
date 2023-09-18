@@ -1,8 +1,22 @@
-<label class="formLabel" id="field1label" for="{{id}}">
-  {{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-  <span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+<label class="formLabel" id="{{id}}-label" for="{{id}}" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
+	{{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
+	<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
 </label>
-<ng-content></ng-content>
-<div class="inlineMessage" id="field1message" *ngIf="inlineMessage">
-  <span aria-hidden="true" class="lucca-icon"></span>{{inlineMessage}}
+<ng-container [ngSwitch]="mode">
+	<div class="textField" *ngSwitchCase="'default'">
+		<div class="textField-input">
+			<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+		</div>
+	</div>
+	<span class="checkboxField" *ngSwitchCase="'checkbox'">
+		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+	</span>
+</ng-container>
+<div class="inlineMessage" id="{{id}}-message" *ngIf="inlineMessage">
+	<span aria-hidden="true" class="lucca-icon"></span>{{inlineMessage}}
 </div>
+<!--We have to do this because multiple ng-content in the same template leads to weird behaviors-->
+<ng-template #contentTpl>
+	<ng-content></ng-content>
+</ng-template>

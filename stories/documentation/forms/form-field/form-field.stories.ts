@@ -9,26 +9,14 @@ export default {
 			imports: [FormFieldComponent, InputDirective],
 		}),
 	],
-	render: ({ label, required, inlineMessage }) => {
+	render: ({ label, required, inlineMessage, hiddenLabel, size }) => {
 		return {
-			template: `<lu-form-field label='${label}' ${required ? 'required' : ''} inlineMessage='${inlineMessage}'>
-<div class="textField">
-	<div class="textField-input">
-		<input
-			luInput
-			type='text'
-			aria-labelledby='field1prefix field1label field1suffix'
-			aria-describedby='field1message'
-			placeholder='Placeholder'
-		/>
-	</div>
-</div>
+			template: `<lu-form-field label="${label}" ${required ? 'required' : ''}  ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" size="${size}">
+		<input luInput type="text" placeholder="Placeholder"/>
 </lu-form-field>
-<lu-form-field label='${label}' ${required ? 'required' : ''} inlineMessage='${inlineMessage}'>
-	<span class='checkboxField'>
-		<input type='checkbox' class='checkboxField-input' luInput aria-labelledby='CB1label' aria-describedby='CB1message' />
-		<span class='checkboxField-icon' aria-hidden='true'><span class='checkboxField-icon-check'></span></span>
-	</span>
+
+<lu-form-field label="${label}" ${required ? 'required' : ''}  ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" mode="checkbox">
+		<input type="checkbox" class="checkboxField-input" luInput/>
 </lu-form-field>`,
 		};
 	},
@@ -38,6 +26,9 @@ export const Template: StoryObj<FormFieldComponent> = {
 	args: {
 		label: 'Label',
 		required: true,
+		hiddenLabel: false,
+		invalid: false,
 		inlineMessage: 'Helper Text',
+		size: 'M',
 	},
 };

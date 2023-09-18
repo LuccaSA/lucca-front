@@ -1,27 +1,13 @@
-import {
-	AfterViewInit,
-	booleanAttribute,
-	Component,
-	ContentChild,
-	HostBinding,
-	inject,
-	Input,
-	OnChanges,
-} from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { AfterViewInit, booleanAttribute, Component, ContentChild, HostBinding, inject, Input, OnChanges } from '@angular/core';
+import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 
-/**
- * I know, it's a var, and vars are ugly.
- * But aside from this, generating a random unique id for inputs quickly becomes a headache
- */
-// eslint-disable-next-line
-var nextId = 0;
+let nextId = 0;
 
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf],
+	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	hostDirectives: [NgClass],
@@ -30,12 +16,17 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 	#ngClass = inject(NgClass);
 
 	@HostBinding('class')
-	clazz = 'form-field u-marginBottomM';
+	clazz = 'form-field';
 
 	@Input({
 		required: true,
 	})
 	label: string;
+
+	@Input({
+		transform: booleanAttribute,
+	})
+	hiddenLabel = false;
 
 	@Input({
 		transform: booleanAttribute,
@@ -53,6 +44,9 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 	@Input()
 	size: 'XS' | 'S' | 'M' = 'M';
 
+	@Input()
+	mode: 'default' | 'checkbox' = 'default';
+
 	@ContentChild(InputDirective)
 	input: InputDirective;
 
@@ -65,8 +59,7 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 			[`mod-${this.size}`]: true,
 		};
 		if (this.#nativeInputRef) {
-			this.#nativeInputRef.ariaInvalid = this.invalid.toString();
-			this.#nativeInputRef.ariaRequired = this.required.toString();
+			this.updateAria();
 		}
 	}
 
@@ -77,5 +70,13 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 		this.#nativeInputRef = this.input.host.nativeElement as HTMLElement;
 		this.id = `${this.#nativeInputRef.tagName.toLowerCase()}-${++nextId}`;
 		this.#nativeInputRef.id = this.id;
+		this.updateAria();
+	}
+
+	private updateAria(): void {
+		this.#nativeInputRef.ariaInvalid = this.invalid.toString();
+		this.#nativeInputRef.ariaRequired = this.required.toString();
+		this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
+		this.#nativeInputRef.setAttribute('aria-labelledby', `${this.id}-prefix ${this.id}-label ${this.id}-suffix`);
 	}
 }
