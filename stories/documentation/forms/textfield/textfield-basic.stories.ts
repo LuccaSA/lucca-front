@@ -75,38 +75,36 @@ function getTemplate(args: TextfieldBasicStory): string {
 	const id = args.id;
 	const label = args.label;
 	const message = args.message;
-	const size = args.size;
-	const disabled = args.disabled ? `disabled="disabled"` : '';
-	const required = args.required ? `aria-required="true"` : '';
-	const invalid = args.invalid ? `aria-invalid="true"` : '';
+	const size = args.size ? ' '+args.size : '';
+	const disabled = args.disabled ? ` disabled="disabled"` : '';
+	const required = args.required ? ` aria-required="true"` : '';
+	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
 	const clear = args.help;
-	const messageState = 'is-' + args.messageState;
+	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `
-	<div class="textField ${size}">
-		<input type="text" id="${id}" class="textField-input" aria-labelledby="${id}prefix ${id}label ${id}suffix" aria-describedby="${id}message" placeholder="Placeholder" aria-invalid="false" value="Value" ${disabled} ${required} ${invalid} />
-		<label for="${id}" class="textField-label">
-			<span class="textField-label-input"></span>
-			<span class="textField-label-prefix" id="${id}prefix">
-				<span class="textField-label-prefix-item">$</span>
-			</span>
-			<span class="formLabel" id="${id}label">
-				Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
-			</span>
-			<span class="textField-label-suffix" id="${id}suffix">
-				<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
-			</span>
-		</label>
-		<div class="textField-action" *ngIf="clear">
-			<button class="clear">
-				<span aria-hidden="true" class="lucca-icon icon-close"></span>
-				<span class="u-mask">Vider ce champ</span>
-			</button>
-		</div>
-		<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
+	return `<div class="textField${size}">
+	<input type="text" id="${id}" class="textField-input" aria-labelledby="${id}prefix ${id}label ${id}suffix" aria-describedby="${id}message" placeholder="Placeholder" aria-invalid="false" value="Value"${disabled}${required}${invalid} />
+	<label for="${id}" class="textField-label">
+		<span class="textField-label-input"></span>
+		<span class="textField-label-prefix" id="${id}prefix">
+			<span class="textField-label-prefix-item">$</span>
+		</span>
+		<span class="formLabel" id="${id}label">
+			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		</span>
+		<span class="textField-label-suffix" id="${id}suffix">
+			<span class="textField-label-suffix-item" aria-label="euros par jour">€/j</span>
+		</span>
+	</label>
+	<div class="textField-action" *ngIf="clear">
+		<button class="clear">
+			<span aria-hidden="true" class="lucca-icon icon-close"></span>
+			<span class="u-mask">Vider ce champ</span>
+		</button>
 	</div>
-	`;
+	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
+</div>`;
 }
 
 const Template: Story<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({

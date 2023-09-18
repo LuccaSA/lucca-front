@@ -1,20 +1,21 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin S {
 	--components-button-font-size: var(--sizes-S-fontSize);
 	--components-button-line-height: var(--sizes-S-lineHeight);
 	--components-button-padding: 0.375rem 0.75rem;
-	--icon-size: var(--sizes-M-fontSize);
 	--components-button-gap: .375rem;
+	@include icons.S
 }
 
 @mixin XS {
 	--components-button-font-size: var(--sizes-XS-fontSize);
 	--components-button-line-height: var(--sizes-XS-lineHeight);
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
-	--icon-size: var(--sizes-S-fontSize);
 	--components-button-gap: var(--spacings-XXS);
+	@include icons.XS
 }
 
 @mixin text {
@@ -71,6 +72,10 @@
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
+@mixin iconS {
+	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS)/2) calc(var(--spacings-XS) + var(--spacings-XXS));
+}
+
 @mixin iconXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
@@ -98,7 +103,7 @@
 	border-bottom-right-radius: var(--commons-borderRadius-M);
 
 	&::before {
-		@include icon.generate('arrow_bottom');
+		@include icon.generate('arrow_chevron_bottom');
 
 		height: 0;
 		vertical-align: text-top;

@@ -1,18 +1,16 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { CalloutComponent } from '@lucca-front/ng/callout';
-import { PaletteArgType } from "../../../helpers/common-arg-types";
+import { PaletteArgType } from "../../../../helpers/common-arg-types";
 
 export default {
-	title: 'Documentation/Feedback/Callout/Basic',
+	title: 'Documentation/Feedback/Callout/Angular/Basic',
 	component: CalloutComponent,
 	render: (args: CalloutComponent & { description: string }) => {
-		const { description, heading, palette, size, removable, tiny, icon } = args;
+		const { description, heading, palette, size, removable, tiny, icon, removed } = args;
 		return {
-			template: `
-        <lu-callout heading="${heading}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}">
-          ${description}
-        </lu-callout>
-      `,
+			template: `<lu-callout heading="${heading}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}" ${removed?'removed':''}>
+  ${description}
+</lu-callout>`,
 		};
 	},
 	argTypes: {
@@ -29,7 +27,7 @@ export default {
 				type: 'select',
 			},
 		},
-		title: {
+		heading: {
 			type: 'string',
 		},
 		description: {
@@ -46,6 +44,7 @@ export const Template: StoryObj<CalloutComponent & { description: string }> = {
 		palette: 'none',
 		size: 'M',
 		removable: false,
+		removed: false,
 		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
 	},
 };

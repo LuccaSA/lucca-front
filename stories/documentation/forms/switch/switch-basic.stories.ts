@@ -75,16 +75,16 @@ function getTemplate(args: SwitchBasicStory): string {
 	const id = args.id;
 	const label = args.label;
 	const message = args.message;
-	const s = args.s ? `mod-S` : '';
-	const disabled = args.disabled ? `disabled="disabled"` : '';
-	const checked = args.checked ? `checked="checked"` : '';
-	const required = args.required ? `aria-required="true"` : '';
-	const invalid = args.invalid ? `aria-invalid="true"` : '';
+	const s = args.s ? ` mod-S` : '';
+	const disabled = args.disabled ? ` disabled="disabled"` : '';
+	const checked = args.checked ? ` checked="checked"` : '';
+	const required = args.required ? ` aria-required="true"` : '';
+	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
-	const messageState = 'is-' + args.messageState;
+	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `<div class="switchField ${s}">
-  <input type="checkbox" class="switchField-input" id="${id}" aria-labelledby="${id}Label" aria-describedby="${id}message" ${checked} ${disabled} ${required} ${invalid} />
+	return `<div class="switchField${s}">
+  <input type="checkbox" class="switchField-input" id="${id}" aria-labelledby="${id}Label" aria-describedby="${id}message"${checked}${disabled}${required}${invalid} />
   <label class="switchField-label" for="${id}">
     <span class="switchField-label-input">
       <span class="switchField-label-input-icon" aria-hidden="true"></span>
@@ -93,7 +93,7 @@ function getTemplate(args: SwitchBasicStory): string {
 			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
 		</span>
   </label>
-	<div class="inlineMessage ${messageState}" *ngIf="message" id="${id}message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+	<div class="inlineMessage${messageState}" *ngIf="message" id="${id}message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
 </div>`;
 }
 

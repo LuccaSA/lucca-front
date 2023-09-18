@@ -6,7 +6,6 @@
 	@at-root ($atRoot) {
 		.verticalNavigation-list {
 			@include reset.list;
-			background-color: var(--colors-white-color);
 		}
 
 		.verticalNavigation-list-item-link {

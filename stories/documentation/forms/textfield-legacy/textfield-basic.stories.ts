@@ -69,19 +69,18 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldBasicStory): string {
-	const classes = [args.display, args.style, args.width].filter(Boolean).join(' ');
-	const disabled = args.disabled ? `disabled` : '';
-	const required = args.required ? `aria-required="true"` : '';
-	const invert = args.invert ? `mod-invert` : '';
-	const size = args.size;
-	const noLabel = args.noLabel ? `mod-noLabel` : '';
-	const error = args.error ? `is-error` : '';
-	return `
-		<label class="textfield ${classes} ${size} ${noLabel} ${invert}">
-			<input class="textfield-input ${error}" type="text" placeholder="Placeholder" ${required} ${disabled}>
-			<span class="textfield-label">Label</span>
-		</label>
-	`;
+	let classes = [args.display, args.style, args.width].filter(Boolean).join(' ');
+	classes = classes ? ' ' + classes : classes;
+	const disabled = args.disabled ? ` disabled` : '';
+	const required = args.required ? ` aria-required="true"` : '';
+	const invert = args.invert ? ` mod-invert` : '';
+	const size = args.size ? ' '+args.size : '';
+	const noLabel = args.noLabel ? ` mod-noLabel` : '';
+	const error = args.error ? ` is-error` : '';
+	return `<label class="textfield${classes}${size}${noLabel}${invert}">
+	<input class="textfield-input${error}" type="text" placeholder="Placeholder"${required}${disabled}>
+	<span class="textfield-label">Label</span>
+</label>`;
 }
 
 const Template: StoryFn<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({

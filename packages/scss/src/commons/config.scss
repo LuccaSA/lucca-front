@@ -2,6 +2,8 @@ $states: 'error', 'warning', 'success' !default;
 $palettes: 'primary', 'secondary', 'grey', 'navigation' !default;
 $fontVariable: false !default;
 
+// Colors : Product
+
 $primary: (
 	text: #ffffff,
 	50: #fff1eb,
@@ -29,6 +31,15 @@ $secondary: (
 	800: #b43409,
 	900: #611405,
 ) !default;
+
+$navigation: (
+	text: #ffffff,
+	700: #313972,
+	800: #192157,
+	900: #12183F,
+) !default;
+
+// Colors : Semantics
 
 $success: (
 	text: #ffffff,
@@ -72,6 +83,8 @@ $error: (
 	900: #630303,
 ) !default;
 
+// Colors : Neutral
+
 $grey: (
 	text: #ffffff,
 	25: #f3f6fc,
@@ -87,11 +100,78 @@ $grey: (
 	900: #0b1732,
 ) !default;
 
-$navigation: (
-	text: #ffffff,
-	700: #313972,
-	800: #192157,
-	900: #12183F,
+// Colors : Decoratives
+
+$kiwi: (
+	200: #C8ED96,
+	500: #6DBF03,
+	800: #407000,
+) !default;
+
+$lime: (
+	200: #A3EC98,
+	500: #1DBD05,
+	800: #0E6B00,
+) !default;
+
+$cucumber: (
+	200: #98ECC2,
+	500: #00BD5E,
+	800: #006B36,
+) !default;
+
+$mint: (
+	200: #99EBDA,
+	500: #00C29B,
+	800: #006B56,
+) !default;
+
+$glacier: (
+	200: #98ECEC,
+	500: #00C2C2,
+	800: #006B6B,
+) !default;
+
+$lagoon: (
+	200: #9FDAF4,
+	500: #1591C6,
+	800: #065374,
+) !default;
+
+$blueberry: (
+	200: #B1C8F6,
+	500: #5482DE,
+	800: #1B4498,
+) !default;
+
+$lavender: (
+	200: #D3BBF7,
+	500: #9F72E4,
+	800: #612EAD,
+) !default;
+
+$grape: (
+	200: #E5B9F8,
+	500: #A75CC7,
+	800: #65078D,
+) !default;
+
+$watermelon: (
+	200: #EAA4B5,
+	500: #D0395F,
+	800: #8D0729,
+) !default;
+
+$pumpkin: (
+	200: #F9CF9F,
+	500: #ED8207,
+	800: #8F4C00,
+) !default;
+
+$pineapple: (
+	200: #F6EF8E,
+	500: #E5CF00,
+	800: #8D7811,
 ) !default;
 
 $colors: (

@@ -2,6 +2,10 @@
 @include selectInputStyle;
 @include selectClearerStyle;
 
+.lu-select-value {
+	padding-right: 2rem;
+}
+
 // TODO: Why ?
 :host {
 	&.is-disabled {
