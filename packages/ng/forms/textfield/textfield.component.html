@@ -1,0 +1,3 @@
+<lu-form-field [label]="label" [required]="required" [hiddenLabel]="hiddenLabel" [inlineMessage]="inlineMessage" [size]="size">
+	<input luInput type="text" [placeholder]="placeholder" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" (blur)="onTouched()" />
+</lu-form-field>

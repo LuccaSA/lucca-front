@@ -1,6 +1,7 @@
 import { AfterViewInit, booleanAttribute, Component, ContentChild, HostBinding, inject, Input, OnChanges } from '@angular/core';
 import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
+import { FormFieldSize } from './form-field-size';
 
 let nextId = 0;
 
@@ -42,7 +43,7 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 	inlineMessage: string;
 
 	@Input()
-	size: 'XS' | 'S' | 'M' = 'M';
+	size: FormFieldSize = 'M';
 
 	@Input()
 	mode: 'default' | 'checkbox' = 'default';

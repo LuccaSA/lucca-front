@@ -9,9 +9,9 @@ export default {
 			imports: [FormFieldComponent, InputDirective],
 		}),
 	],
-	render: ({ label, required, inlineMessage, hiddenLabel, size }) => {
+	render: ({ label, required, inlineMessage, hiddenLabel, size, invalid }) => {
 		return {
-			template: `<lu-form-field label="${label}" ${required ? 'required' : ''}  ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" size="${size}">
+			template: `<lu-form-field label="${label}" ${required ? 'required' : ''} ${invalid ? 'invalid' : ''}  ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" size="${size}">
 		<input luInput type="text" placeholder="Placeholder"/>
 </lu-form-field>
 
