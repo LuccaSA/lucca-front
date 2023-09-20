@@ -17,6 +17,17 @@ import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/
 	],
 })
 export class TextfieldComponent implements ControlValueAccessor {
+	/**
+	 * TODO connect with formControl includes Validators.required
+	 * prob with formControl Invalid too
+	 *
+	 * inject formControl (ngControl?)
+	 *
+	 * Use current formControl instead of creating a new one with ngModel
+	 *
+	 * https://netbasal.com/forwarding-form-controls-to-custom-control-components-in-angular-701e8406cc55
+	 */
+
 	@Input({ required: true })
 	label: string;
 
@@ -27,7 +38,7 @@ export class TextfieldComponent implements ControlValueAccessor {
 	hiddenLabel = false;
 
 	@Input()
-	type: 'text' | 'email' | 'number' | 'password' = 'text';
+	type: 'text' | 'email' | 'password' = 'text';
 
 	@Input()
 	inlineMessage: string;
