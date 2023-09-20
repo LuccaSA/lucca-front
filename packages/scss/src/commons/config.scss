@@ -102,75 +102,87 @@ $grey: (
 // Colors : Decoratives
 
 $kiwi: (
-	200: #c8ed96,
-	500: #6dbf03,
-	800: #407000,
+	200: #c7e79c,
+	400: #96c856,
+	600: #68a716,
+	800: #3e6808,
 ) !default;
 
 $lime: (
-	200: #a3ec98,
-	500: #1dbd05,
-	800: #0e6b00,
+	200: #a7e69e,
+	400: #74cb67,
+	600: #45a437,
+	800: #16600b,
 ) !default;
 
 $cucumber: (
 	200: #98ecc2,
-	500: #00bd5e,
+	400: #54c98f,
+	600: #12a55c,
 	800: #006b36,
 ) !default;
 
 $mint: (
 	200: #99ebda,
-	500: #00c29b,
+	400: #31c4a6,
+	600: #089b7e,
 	800: #006b56,
 ) !default;
 
 $glacier: (
 	200: #98ecec,
-	500: #00c2c2,
+	400: #4dc7c7,
+	600: #08a0a0,
 	800: #006b6b,
 ) !default;
 
 $lagoon: (
 	200: #9fdaf4,
-	500: #1591c6,
+	400: #49b5e4,
+	600: #148ec2,
 	800: #065374,
 ) !default;
 
 $blueberry: (
 	200: #b1c8f6,
-	500: #5482de,
+	400: #769be5,
+	600: #4777d7,
 	800: #1b4498,
 ) !default;
 
 $lavender: (
-	200: #d3bbf7,
-	500: #9f72e4,
-	800: #612ead,
+	200: #d9c4f8,
+	400: #b493e6,
+	600: #9165d2,
+	800: #5f369b,
 ) !default;
 
 $grape: (
-	200: #e5b9f8,
-	500: #a75cc7,
-	800: #65078d,
+	200: #e9c2f9,
+	400: #ba86d0,
+	600: #9a57b7,
+	800: #620f85,
 ) !default;
 
 $watermelon: (
 	200: #eaa4b5,
-	500: #d0395f,
+	400: #db6683,
+	600: #be2d51,
 	800: #8d0729,
 ) !default;
 
 $pumpkin: (
 	200: #f9cf9f,
-	500: #ed8207,
+	400: #ef9c3e,
+	600: #db7500,
 	800: #8f4c00,
 ) !default;
 
 $pineapple: (
-	200: #f6ef8e,
-	500: #e5cf00,
-	800: #8d7811,
+	200: #f8eaa5,
+	400: #f8dc4f,
+	600: #d6b300,
+	800: #a88900,
 ) !default;
 
 $colors: (
@@ -265,8 +277,8 @@ $elevations: (
 );
 
 $boxShadows: (
-	// deprecated
 	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
+	// deprecated
 	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
 	'S':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
