@@ -75,16 +75,9 @@
 }
 
 .lu-modal-content {
-	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal) 0 var(--components-popup-padding-horizontal);
+	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
 	overflow: auto;
 	height: auto;
-
-	// Trick to force Firefox to have a bottom padding
-	&:after {
-		content: '';
-		display: block;
-		padding-bottom: var(--components-popup-padding-vertical);
-	}
 
 	&.mod-noPadding {
 		padding: 0;

@@ -13,6 +13,7 @@
 }
 
 @mixin sticky {
+	background-color: var(--commons-background-base);
 	top: var(--commons-banner-height);
 	position: sticky;
 	left: 0;
