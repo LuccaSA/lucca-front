@@ -1,32 +1,35 @@
-import { booleanAttribute, Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { booleanAttribute, Component, inject, Input } from '@angular/core';
+import { NG_VALIDATORS, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
+import { injectNgControl } from '../inject-ng-control';
+import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormFieldIdDirective } from '../form-field-id.directive';
+import { TextfieldAddon } from './textfield-addon';
+import { InlineMessageState } from '../../inline-message/inline-message-state';
 
 @Component({
 	selector: 'lu-textfield',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, FormsModule],
+	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
 	templateUrl: './textfield.component.html',
 	styleUrls: ['./textfield.component.scss'],
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => TextfieldComponent),
-			multi: true,
-		},
-	],
+	hostDirectives: [NoopValueAccessorDirective],
 })
-export class TextfieldComponent implements ControlValueAccessor {
-	/**
-	 * TODO connect with formControl includes Validators.required
-	 * prob with formControl Invalid too
-	 *
-	 * inject formControl (ngControl?)
-	 *
-	 * Use current formControl instead of creating a new one with ngModel
-	 *
-	 * https://netbasal.com/forwarding-form-controls-to-custom-control-components-in-angular-701e8406cc55
-	 */
+export class TextfieldComponent {
+	ngControl = injectNgControl();
+
+	#ngModelRequiredValidator: RequiredValidator | null = inject(NG_VALIDATORS, { optional: true })?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
+
+	@Input()
+	prefix: TextfieldAddon;
+
+	@Input()
+	suffix: TextfieldAddon;
+
+	get required(): boolean {
+		return this.ngControl.control.hasValidator(Validators.required) || booleanAttribute(this.#ngModelRequiredValidator.required);
+	}
 
 	@Input({ required: true })
 	label: string;
@@ -44,40 +47,8 @@ export class TextfieldComponent implements ControlValueAccessor {
 	inlineMessage: string;
 
 	@Input()
+	inlineMessageState: InlineMessageState;
+
+	@Input()
 	size: FormFieldSize = 'M';
-
-	@Input({ transform: booleanAttribute })
-	required = false;
-
-	// TODO handle disabled, form or input?
-
-	#onChange: (value: string) => void;
-
-	#onTouched: () => void;
-
-	value: string;
-
-	registerOnChange(fn: (value: string) => void): void {
-		this.#onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.#onTouched = fn;
-	}
-
-	writeValue(value: string): void {
-		this.value = value;
-	}
-
-	onValueChange(value: string): void {
-		if (this.#onChange) {
-			this.#onChange(value);
-		}
-	}
-
-	onTouched(): void {
-		if (this.#onTouched) {
-			this.#onTouched();
-		}
-	}
 }

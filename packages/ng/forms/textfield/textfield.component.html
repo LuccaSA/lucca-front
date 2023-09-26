@@ -1,3 +1,40 @@
-<lu-form-field [label]="label" [required]="required" [hiddenLabel]="hiddenLabel" [inlineMessage]="inlineMessage" [size]="size">
-	<input luInput type="text" [placeholder]="placeholder" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" (blur)="onTouched()" />
+<lu-form-field
+	[label]="label"
+	[required]="required"
+	[hiddenLabel]="hiddenLabel"
+	[inlineMessage]="inlineMessage"
+	[inlineMessageState]="inlineMessageState"
+	[size]="size"
+	[invalid]="ngControl.control.touched && ngControl.control.invalid"
+>
+	<ng-template #textfieldAddon let-type="type" let-content="content" let-icon="icon" let-label="label">
+		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="content">
+			<span class="textField-label-{{type}}-item" [attr.aria-label]="label">{{content}}</span>
+		</span>
+		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="icon">
+			<span class="textField-label-{{type}}-item" [attr.aria-label]="label"><span class="lucca-icon icon-{{icon}}"></span></span>
+		</span>
+	</ng-template>
+
+	<ng-container
+		*ngTemplateOutlet="textfieldAddon; context:{
+	type: 'prefix', 
+	label: prefix.ariaLabel, 
+	content: prefix.content,
+	 icon: prefix.icon
+	 }"
+	>
+	</ng-container>
+	<ng-container
+		*ngTemplateOutlet="textfieldAddon; context:{
+	type: 'suffix',
+	label: suffix.ariaLabel,
+	content: suffix.content,
+	 icon: suffix.icon
+	 }"
+	>
+	</ng-container>
+	<div class="textField-input">
+		<input luInput [type]="type" [placeholder]="placeholder" [formControl]="ngControl.control" />
+	</div>
 </lu-form-field>

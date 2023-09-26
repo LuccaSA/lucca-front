@@ -14,13 +14,20 @@ export default {
 
 export const withNgModel: StoryObj<TextfieldComponent> = {
 	name: 'With NgModel',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState }) => {
 		return {
+			props: {
+				prefix,
+				suffix,
+			},
 			template: `
 <lu-textfield label="${label}"
-${required ? 'required' : ''}
+required="${required}"
 ${hiddenLabel ? 'hiddenLabel' : ''}
+[prefix]="prefix"
+[suffix]="suffix"
 inlineMessage="${inlineMessage}"
+inlineMessageState="${inlineMessageState}"
 size="${size}"
 placeholder="${placeholder}"
 [(ngModel)]="example">
@@ -37,25 +44,38 @@ placeholder="${placeholder}"
 		required: true,
 		hiddenLabel: false,
 		inlineMessage: 'Helper Text',
+		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
+		prefix: {
+			icon: 'dollar',
+			ariaLabel: 'Dollar',
+		},
+		suffix: {
+			content: '€/j',
+			ariaLabel: 'euros par jour',
+		},
 	},
 };
 export const withReactiveForm: StoryObj<TextfieldComponent> = {
 	name: 'With ReactiveForm',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState }) => {
 		return {
 			props: {
 				form: new FormGroup({
 					example: new FormControl('', required ? [Validators.required] : []),
 				}),
+				prefix,
+				suffix,
 			},
 			template: `
 <form [formGroup]="form">
 	<lu-textfield label="${label}" 
-	${required ? 'required' : ''} 
 	${hiddenLabel ? 'hiddenLabel' : ''} 
+	prefix="prefix"
+	suffix="suffix"
 	inlineMessage="${inlineMessage}"
+	inlineMessageState="${inlineMessageState}"
 	size="${size}" 
 	placeholder="${placeholder}"
 	formControlName="example">
@@ -73,7 +93,16 @@ export const withReactiveForm: StoryObj<TextfieldComponent> = {
 		required: true,
 		hiddenLabel: false,
 		inlineMessage: 'Helper Text',
+		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
+		prefix: {
+			content: '$',
+			ariaLabel: 'Dollar',
+		},
+		suffix: {
+			content: '€/j',
+			ariaLabel: 'euros par jour',
+		},
 	},
 };
