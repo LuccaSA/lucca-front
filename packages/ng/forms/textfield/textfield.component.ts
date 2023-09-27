@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, inject, Input } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { NG_VALIDATORS, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
@@ -20,6 +20,11 @@ export class TextfieldComponent {
 	ngControl = injectNgControl();
 
 	#ngModelRequiredValidator: RequiredValidator | null = inject(NG_VALIDATORS, { optional: true })?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
+
+	#ref: ElementRef<HTMLInputElement> = inject<ElementRef<HTMLInputElement>>(ElementRef);
+
+	@ViewChild('inputElement', { static: true })
+	inputElementRef: ElementRef<HTMLInputElement>;
 
 	@Input()
 	prefix: TextfieldAddon;
@@ -57,5 +62,6 @@ export class TextfieldComponent {
 
 	clearValue(): void {
 		this.ngControl.reset();
+		this.inputElementRef.nativeElement.focus();
 	}
 }

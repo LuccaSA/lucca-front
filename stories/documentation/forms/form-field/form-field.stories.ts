@@ -18,7 +18,7 @@ export default {
 		<input luInput type="text" placeholder="Placeholder"/>
 </lu-form-field>
 
-<lu-form-field label="${label}" ${required ? 'required' : ''}  ${
+<lu-form-field label="${label}" ${required ? 'required' : ''} ${
 				hiddenLabel ? 'hiddenLabel' : ''
 			} inlineMessage="${inlineMessage}" inlineMessageState="${inlineMessageState}" mode="checkbox" tooltip="${tooltip}">
 		<input type="checkbox" class="checkboxField-input" luInput/>
