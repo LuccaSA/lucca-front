@@ -14,7 +14,7 @@ export default {
 
 export const withNgModel: StoryObj<TextfieldComponent> = {
 	name: 'With NgModel',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer }) => {
 		return {
 			props: {
 				prefix,
@@ -24,6 +24,7 @@ export const withNgModel: StoryObj<TextfieldComponent> = {
 <lu-textfield label="${label}"
 required="${required}"
 ${hiddenLabel ? 'hiddenLabel' : ''}
+${hasClearer ? 'hasClearer' : ''}
 [prefix]="prefix"
 [suffix]="suffix"
 inlineMessage="${inlineMessage}"
@@ -59,7 +60,7 @@ placeholder="${placeholder}"
 };
 export const withReactiveForm: StoryObj<TextfieldComponent> = {
 	name: 'With ReactiveForm',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer }) => {
 		return {
 			props: {
 				form: new FormGroup({
@@ -72,6 +73,7 @@ export const withReactiveForm: StoryObj<TextfieldComponent> = {
 <form [formGroup]="form">
 	<lu-textfield label="${label}" 
 	${hiddenLabel ? 'hiddenLabel' : ''} 
+	${hasClearer ? 'hasClearer' : ''} 
 	prefix="prefix"
 	suffix="suffix"
 	inlineMessage="${inlineMessage}"

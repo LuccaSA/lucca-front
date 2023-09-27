@@ -35,6 +35,10 @@
 	>
 	</ng-container>
 	<div class="textField-input">
-		<input luInput [type]="type" [placeholder]="placeholder" [formControl]="ngControl.control" />
+		<input luInput [type]="type" [placeholder]="placeholder" [formControl]="ngControl.control" #inputElement />
+		<button class="clear" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
+			<span aria-hidden="true" class="lucca-icon icon-close"></span>
+			<span class="u-mask">Vider ce champ</span>
+		</button>
 	</div>
 </lu-form-field>

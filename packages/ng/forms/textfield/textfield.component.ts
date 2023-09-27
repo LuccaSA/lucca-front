@@ -51,4 +51,11 @@ export class TextfieldComponent {
 
 	@Input()
 	size: FormFieldSize = 'M';
+
+	@Input({ transform: booleanAttribute })
+	hasClearer = false;
+
+	clearValue(): void {
+		this.ngControl.reset();
+	}
 }
