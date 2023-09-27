@@ -8,17 +8,50 @@
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
 
-	&:focus-within {
+	&:focus-within:not(:has(.clear:focus)) {
 		@include a11y.focusVisible($offset: 3px);
 	}
 
 	@at-root ($atRoot) {
+		&:has(.textField-addon) {
+			.textField-input-value {
+				padding-right: 2.5rem;
+			}
+		}
+
+		&:has(.textField-addon .clear) {
+			.textField-input-value {
+				padding-right: 4rem;
+			}
+		}
+
+		.textField-addon {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--spacings-XS);
+			position: absolute;
+			right: var(--spacings-XS);
+			pointer-events: none;
+
+			.lucca-icon {
+				--icon-size: 1.5rem;
+				pointer-events: none;
+			}
+
+			.clear {
+				margin: 0;
+				pointer-events: auto;
+			}
+		}
+
 		.textField-input {
 			display: flex;
 			align-items: center;
 			width: 100%;
 			box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-radius: var(--commons-borderRadius-M);
+			background-color: var(--component-textField-background);
+			position: relative;
 
 			&:hover {
 				--component-textField-border: var(--palettes-grey-400);
@@ -33,7 +66,6 @@
 			width: 100%;
 			padding: var(--component-textField-padding);
 			background-color: transparent;
-
 			color: var(--component-textField-color);
 
 			&::placeholder {
@@ -55,7 +87,6 @@
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			box-shadow: 0 0 0 1px var(--component-textField-border);
-			clip-path: inset(-1px 0 -1px -1px);
 			border-top-left-radius: var(--commons-borderRadius-M);
 			border-bottom-left-radius: var(--commons-borderRadius-M);
 
@@ -73,7 +104,6 @@
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			box-shadow: 0 0 0 1px var(--component-textField-border);
-			clip-path: inset(-1px -1px -1px 0);
 			border-top-right-radius: var(--commons-borderRadius-M);
 			border-bottom-right-radius: var(--commons-borderRadius-M);
 			order: 1;
