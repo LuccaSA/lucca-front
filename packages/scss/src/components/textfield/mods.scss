@@ -15,6 +15,10 @@
 	--component-textField-lineHeight: var(--sizes-XS-lineHeight);
   --component-textField-padding: var(--spacings-XXS);
 
+	.textField-prefix, .textField-suffix {
+		--icon-size: var(--sizes-XS-lineHeight);
+	}
+
 	.clear {
 		@include clear.S;
 	}
