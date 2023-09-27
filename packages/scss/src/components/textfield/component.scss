@@ -8,42 +8,11 @@
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
 
-	&:focus-within:not(:has(.clear:focus)) {
+	&:focus-within:not(:has(.textField-input-affix-clear:focus)) {
 		@include a11y.focusVisible($offset: 3px);
 	}
 
 	@at-root ($atRoot) {
-		&:has(.textField-addon) {
-			.textField-input-value {
-				padding-right: 2.5rem;
-			}
-		}
-
-		&:has(.textField-addon .clear) {
-			.textField-input-value {
-				padding-right: 4rem;
-			}
-		}
-
-		.textField-addon {
-			display: inline-flex;
-			align-items: center;
-			gap: var(--spacings-XS);
-			position: absolute;
-			right: var(--spacings-XS);
-			pointer-events: none;
-
-			.lucca-icon {
-				--icon-size: 1.5rem;
-				pointer-events: none;
-			}
-
-			.clear {
-				margin: 0;
-				pointer-events: auto;
-			}
-		}
-
 		.textField-input {
 			display: flex;
 			align-items: center;
@@ -56,6 +25,18 @@
 			&:hover {
 				--component-textField-border: var(--palettes-grey-400);
 			}
+
+			&:has(.textField-input-affix-icon ) {
+				--component-textField-affix-padding: 2.5rem;
+			}
+
+			&:has(.textField-input-affix-clear) {
+				--component-textField-affix-padding: 2rem;
+
+				&:has(.textField-input-affix-icon ) {
+					--component-textField-affix-padding: 4rem;
+				}
+			}
 		}
 
 		.textField-input-value {
@@ -64,7 +45,7 @@
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			width: 100%;
-			padding: var(--component-textField-padding);
+			padding: var(--component-textField-padding) var(--component-textField-affix-padding) var(--component-textField-padding) var(--component-textField-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
 
@@ -73,10 +54,22 @@
 			}
 		}
 
-		.textField-search {
-			font-size: var(--sizes-M-lineHeight);
-			color: var(--palettes-grey-600);
-			display: block;
+		.textField-input-affix {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--spacings-XS);
+			position: absolute;
+			right: var(--spacings-XS);
+			pointer-events: none;
+		}
+
+		.textField-input-affix-icon {
+			--icon-size: 1.5rem;
+			pointer-events: none;
+		}
+
+		.textField-input-affix-clear {
+			pointer-events: auto;
 		}
 
 		.textField-prefix {
@@ -112,10 +105,6 @@
 				border-top-right-radius: 0;
 				border-bottom-right-radius: 0;
 			}
-		}
-
-		.clear {
-			margin-right: var(--component-textField-padding);
 		}
 	}
 }
