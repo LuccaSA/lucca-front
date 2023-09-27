@@ -7,6 +7,7 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextfieldAddon } from './textfield-addon';
 import { InlineMessageState } from '../../inline-message/inline-message-state';
+import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-textfield',
@@ -20,8 +21,6 @@ export class TextfieldComponent {
 	ngControl = injectNgControl();
 
 	#ngModelRequiredValidator: RequiredValidator | null = inject(NG_VALIDATORS, { optional: true })?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
-
-	#ref: ElementRef<HTMLInputElement> = inject<ElementRef<HTMLInputElement>>(ElementRef);
 
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;
@@ -46,7 +45,7 @@ export class TextfieldComponent {
 	hiddenLabel = false;
 
 	@Input()
-	type: 'text' | 'email' | 'password' = 'text';
+	type: 'text' | 'email' | 'password' | 'number' = 'text';
 
 	@Input()
 	inlineMessage: string;
@@ -59,6 +58,15 @@ export class TextfieldComponent {
 
 	@Input({ transform: booleanAttribute })
 	hasClearer = false;
+
+	@Input({ transform: booleanAttribute })
+	hasSearchIcon = false;
+
+	@Input()
+	/**
+	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
+	 */
+	searchIcon: LuccaIcon = 'search';
 
 	clearValue(): void {
 		this.ngControl.reset();
