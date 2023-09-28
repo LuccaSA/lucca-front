@@ -3,7 +3,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export default {
-	title: 'Documentation/Forms/Text Field',
+	title: 'Documentation/Forms/TextField',
 	component: TextfieldComponent,
 	decorators: [
 		moduleMetadata({
@@ -72,14 +72,14 @@ export const withReactiveForm: StoryObj<TextfieldComponent> = {
 			},
 			template: `
 <form [formGroup]="form">
-	<lu-textfield label="${label}" 
-	${hiddenLabel ? 'hiddenLabel' : ''} 
-	${hasClearer ? 'hasClearer' : ''} 
+	<lu-textfield label="${label}"
+	${hiddenLabel ? 'hiddenLabel' : ''}
+	${hasClearer ? 'hasClearer' : ''}
 	prefix="prefix"
 	suffix="suffix"
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
-	size="${size}" 
+	size="${size}"
 	placeholder="${placeholder}"
 	formControlName="example">
 	</lu-textfield>
