@@ -8,11 +8,11 @@
 	--component-switchField-label-fontSize: var(--sizes-S-fontSize);
 	--component-switchField-label-lineHeight: var(--sizes-S-lineHeight);
 
-	.formLabel {
-		@include formLabel.S;
-	}
-
-	.inlineMessage {
-		@include inlineMessage.S;
-	}
+	// .formLabel {
+	// 	@include formLabel.S;
+	// }
+	//
+	// .inlineMessage {
+	// 	@include inlineMessage.S;
+	// }
 }
