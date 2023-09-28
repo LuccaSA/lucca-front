@@ -2,32 +2,29 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 
 @mixin checked {
-  ~ .switchField-label {
-    .switchField-label-input {
+  ~ .switchField-icon {
       background-color: var(--palettes-primary-700);
       border-color: var(--palettes-primary-700);
 
       &::before {
         left: 50%;
       }
-    }
+
   }
 
   &:hover {
-    ~ .switchField-label {
-      .switchField-label-input {
+  ~ .switchField-icon {
         background-color: var(--palettes-primary-600);
         border-color: var(--palettes-primary-600);
-      }
+
     }
   }
 
   &:active {
-    ~ .switchField-label {
-      .switchField-label-input {
+    ~ .switchField-icon {
         background-color: var(--palettes-primary-800);
         border-color: var(--palettes-primary-800);
-      }
+      
     }
   }
 }

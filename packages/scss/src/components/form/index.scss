@@ -22,8 +22,12 @@
 		@include XS;
 	}
 
-	&.mod-checkable, &:has(.checkboxField) {
-		@include checkable;
+	&.mod-checkbox, &:has(.checkboxField) {
+		@include checkbox;
+	}
+
+	&.mod-switch, &:has(.switchField) {
+		@include switch;
 	}
 }
 
