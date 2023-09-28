@@ -1,40 +1,23 @@
-import { booleanAttribute, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { NG_VALIDATORS, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
+import { booleanAttribute, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
-import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextfieldAddon } from './textfield-addon';
 import { InlineMessageState } from '../../inline-message/inline-message-state';
 import { LuccaIcon } from '@lucca-front/icons';
+import { AbstractFieldComponent } from '../abstract-field-component';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
 	selector: 'lu-textfield',
 	standalone: true,
 	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
 	templateUrl: './textfield.component.html',
-	styleUrls: ['./textfield.component.scss'],
 	hostDirectives: [NoopValueAccessorDirective],
 })
-export class TextfieldComponent {
-	ngControl = injectNgControl();
-
-	#ngModelRequiredValidator: RequiredValidator | null = inject(NG_VALIDATORS, { optional: true })?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
-
-	@ViewChild('inputElement', { static: true })
-	inputElementRef: ElementRef<HTMLInputElement>;
-
-	@Input()
-	prefix: TextfieldAddon;
-
-	@Input()
-	suffix: TextfieldAddon;
-
-	get required(): boolean {
-		return this.ngControl.control.hasValidator(Validators.required) || booleanAttribute(this.#ngModelRequiredValidator.required);
-	}
-
+export class TextfieldComponent extends AbstractFieldComponent {
 	@Input({ required: true })
 	label: string;
 
@@ -45,7 +28,7 @@ export class TextfieldComponent {
 	hiddenLabel = false;
 
 	@Input()
-	type: 'text' | 'email' | 'password' | 'number' = 'text';
+	tooltip: string | SafeHtml;
 
 	@Input()
 	inlineMessage: string;
@@ -61,6 +44,18 @@ export class TextfieldComponent {
 
 	@Input({ transform: booleanAttribute })
 	hasSearchIcon = false;
+
+	@ViewChild('inputElement', { static: true })
+	inputElementRef: ElementRef<HTMLInputElement>;
+
+	@Input()
+	prefix: TextfieldAddon;
+
+	@Input()
+	suffix: TextfieldAddon;
+
+	@Input()
+	type: 'text' | 'email' | 'password' | 'number' = 'text';
 
 	@Input()
 	/**

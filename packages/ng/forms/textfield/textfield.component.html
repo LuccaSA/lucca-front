@@ -6,6 +6,7 @@
 	[inlineMessageState]="inlineMessageState"
 	[size]="size"
 	[invalid]="ngControl.control.touched && ngControl.control.invalid"
+	[tooltip]="tooltip"
 >
 	<ng-template #textfieldAddon let-type="type" let-content="content" let-icon="icon" let-label="label">
 		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="content">

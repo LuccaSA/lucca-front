@@ -3,7 +3,7 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export default {
-	title: 'Documentation/Forms/Form Field',
+	title: 'Documentation/Forms/Fields/Form Field',
 	component: FormFieldComponent,
 	decorators: [
 		moduleMetadata({
@@ -20,7 +20,7 @@ export default {
 
 <lu-form-field label="${label}" ${required ? 'required' : ''} ${
 				hiddenLabel ? 'hiddenLabel' : ''
-			} inlineMessage="${inlineMessage}" inlineMessageState="${inlineMessageState}" mode="checkbox" tooltip="${tooltip}">
+			} inlineMessage="${inlineMessage}" inlineMessageState="${inlineMessageState}" layout="checkbox" tooltip="${tooltip}">
 		<input type="checkbox" class="checkboxField-input" luInput/>
 </lu-form-field>`,
 		};

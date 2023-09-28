@@ -3,7 +3,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export default {
-	title: 'Documentation/Forms/TextField',
+	title: 'Documentation/Forms/Fields/TextField',
 	component: TextfieldComponent,
 	decorators: [
 		moduleMetadata({

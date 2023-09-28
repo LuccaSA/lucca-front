@@ -7,13 +7,14 @@ import { InlineMessageComponent } from '../inline-message/inline-message.compone
 import { InlineMessageState } from '../inline-message/inline-message-state';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '../tooltip/tooltip.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule],
+	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	hostDirectives: [NgClass],
@@ -60,7 +61,7 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 	size: FormFieldSize = 'M';
 
 	@Input()
-	mode: 'default' | 'checkbox' = 'default';
+	layout: 'default' | 'checkbox' = 'default';
 
 	@ContentChild(InputDirective)
 	input: InputDirective;

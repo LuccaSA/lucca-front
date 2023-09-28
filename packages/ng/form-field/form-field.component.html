@@ -2,14 +2,13 @@
 	{{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 	<span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="tooltip" [luTooltip]="tooltip"></span>
 </label>
-<ng-container [ngSwitch]="mode">
+<ng-container [ngSwitch]="layout">
 	<div class="textField" *ngSwitchCase="'default'">
 		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
 	</div>
-	<span class="checkboxField" *ngSwitchCase="'checkbox'">
+	<ng-container *ngSwitchCase="'checkbox'">
 		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-	</span>
+	</ng-container>
 </ng-container>
 <lu-inline-message id="{{id}}-message" *ngIf="inlineMessage" [label]="inlineMessage" [state]="inlineMessageState"></lu-inline-message>
 <!--We have to do this because multiple ng-content in the same template leads to weird behaviors-->
