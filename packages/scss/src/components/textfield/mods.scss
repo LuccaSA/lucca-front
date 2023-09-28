@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
 	--component-textField-fontSize: var(--sizes-S-fontSize);
@@ -8,6 +9,14 @@
 	.textField-input-affix-clear {
 		@include clear.S;
 	}
+
+	.textField-input-affix-icon {
+		@include icon.S;
+	}
+
+	.textField-input-affix-icon {
+	//	--icon-size: 1.5rem;
+	}
 }
 
 @mixin XS {
@@ -16,7 +25,11 @@
   --component-textField-padding: var(--spacings-XXS);
 
 	.textField-prefix, .textField-suffix {
-		--icon-size: var(--sizes-XS-lineHeight);
+	//	--icon-size: var(--sizes-XS-lineHeight);
+	}
+
+	.textField-input-affix-icon {
+		@include icon.XS;
 	}
 
 	.textField-input-affix-clear {
