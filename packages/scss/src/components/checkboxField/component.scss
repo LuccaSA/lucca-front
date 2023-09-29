@@ -6,10 +6,10 @@
 
 	@at-root ($atRoot) {
 		.checkboxField-icon {
-			width: var(--component-checkboxField-label-input-size);
-			height: var(--component-checkboxField-label-input-size);
+			width: var(--component-checkboxField-size);
+			height: var(--component-checkboxField-size);
 			border: 2px solid var(--palettes-grey-700);
-			border-radius: var(--component-checkboxField-label-input-borderRadius);
+			border-radius: var(--component-checkboxField-borderRadius);
 			position: relative;
 			color: var(--colors-white-color);
 			transition-property: color, border-color, background-color;
@@ -27,7 +27,7 @@
 				position: absolute;
 				inset: -2px;
 				outline-offset: 2px;
-				border-radius: var(--component-checkboxField-label-input-borderRadius);
+				border-radius: var(--component-checkboxField-borderRadius);
 			}
 		}
 
@@ -48,7 +48,7 @@
 
 			&::before {
 				font-weight: 400;
-				font-size: var(--component-checkboxField-label-input-icon-fontSize);
+				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
 				font-family: 'Lucca icons';
 				font-feature-settings: 'liga';
@@ -66,8 +66,8 @@
 		.checkboxField-input {
 			position: absolute;
 			z-index: 1;
-			width: var(--component-checkboxField-label-input-size);
-			height: var(--component-checkboxField-label-input-size);
+			width: var(--component-checkboxField-size);
+			height: var(--component-checkboxField-size);
 			opacity: 0;
 			cursor: pointer;
 		}
