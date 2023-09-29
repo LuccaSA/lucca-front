@@ -50,7 +50,7 @@ function fromElementWidth(el: HTMLElement): Observable<number> {
 				[class.mod-unkillable]="disabled"
 				[attr.aria-hidden]="index >= ((visibleChipsCount$ | async) || 0) ? 'true' : undefined"
 			>
-				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
+				<span class="lu-multiselect-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
 				<a
 					href
 					*ngIf="!disabled"

@@ -30,6 +30,14 @@
 	}
 }
 
-.lu-multiselect-chip[aria-hidden] {
-	visibility: hidden;
+.lu-multiselect-chip {
+	&[aria-hidden] {
+		visibility: hidden;
+	}
+}
+
+.lu-multiselect-chip-value {
+	max-width: 4rem;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

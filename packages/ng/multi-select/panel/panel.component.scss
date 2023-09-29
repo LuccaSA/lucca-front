@@ -78,7 +78,7 @@
 	font-weight: 600;
 	border-radius: var(--commons-borderRadius-M);
 	margin-bottom: var(--spacings-XXS);
-	
+
 	&:hover,
 	&:focus-within {
 		background-color: var(--palettes-grey-25);
@@ -123,4 +123,7 @@
 
 .lu-multiselect-emptystate {
 	margin: auto;
+	text-align: center;
+	padding: var(--spacings-S);
+	color: var(--palettes-grey-600);
 }
