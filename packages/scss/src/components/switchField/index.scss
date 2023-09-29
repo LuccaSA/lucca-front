@@ -22,7 +22,7 @@
 		}
 	}
 
-	&[aria-invalid="true"] {
+	&[aria-invalid='true'] {
 		@include invalid;
 
 		&:checked {

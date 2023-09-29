@@ -44,6 +44,15 @@
 	display: grid;
 	grid-template-columns: auto 1fr;
 	gap: 0 var(--spacings-XS);
+
+	.checkboxField {
+		order: -1;
+		top: var(--component-checkboxField-label-input-top);
+	}
+
+	.switchField {
+		order: -1;
+	}
 }
 
 // deprecated

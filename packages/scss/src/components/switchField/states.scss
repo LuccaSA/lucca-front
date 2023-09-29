@@ -1,88 +1,80 @@
-@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
-
 @mixin checked {
-  ~ .switchField-icon {
-      background-color: var(--palettes-primary-700);
-      border-color: var(--palettes-primary-700);
+	~ .switchField-icon {
+		background-color: var(--palettes-primary-700);
+		border-color: var(--palettes-primary-700);
 
-      &::before {
-        left: 50%;
-      }
+		&::before {
+			left: 50%;
+		}
+	}
 
-  }
+	&:hover {
+		~ .switchField-icon {
+			background-color: var(--palettes-primary-600);
+			border-color: var(--palettes-primary-600);
+		}
+	}
 
-  &:hover {
-  ~ .switchField-icon {
-        background-color: var(--palettes-primary-600);
-        border-color: var(--palettes-primary-600);
-
-    }
-  }
-
-  &:active {
-    ~ .switchField-icon {
-        background-color: var(--palettes-primary-800);
-        border-color: var(--palettes-primary-800);
-
-    }
-  }
+	&:active {
+		~ .switchField-icon {
+			background-color: var(--palettes-primary-800);
+			border-color: var(--palettes-primary-800);
+		}
+	}
 }
 
 @mixin disabled {
-  ~ .switchField-icon {
-    background-color: var(--palettes-grey-100);
-    border-color: var(--palettes-grey-100);
-    color: var(--palettes-grey-500);
+	~ .switchField-icon {
+		background-color: var(--palettes-grey-100);
+		border-color: var(--palettes-grey-100);
+		color: var(--palettes-grey-500);
 
-    &::before {
-      background-color: var(--palettes-grey-500);
-    }
-  }
+		&::before {
+			background-color: var(--palettes-grey-500);
+		}
+	}
 }
 
 @mixin checkedDisabled {
-  &:disabled {
-    ~ .switchField-icon {
-        background-color: var(--palettes-grey-100);
-        border-color: var(--palettes-grey-100);
-        color: var(--palettes-grey-500);
+	&:disabled {
+		~ .switchField-icon {
+			background-color: var(--palettes-grey-100);
+			border-color: var(--palettes-grey-100);
+			color: var(--palettes-grey-500);
 
-        &::before {
-          background-color: var(--palettes-grey-500);
-        }
-
-    }
-  }
+			&::before {
+				background-color: var(--palettes-grey-500);
+			}
+		}
+	}
 }
 
 @mixin invalid {
-  ~ .switchField-icon {
-      background-color: var(--palettes-error-700);
-      border-color: var(--palettes-error-700);
-  }
+	~ .switchField-icon {
+		background-color: var(--palettes-error-700);
+		border-color: var(--palettes-error-700);
+	}
 
-  &:hover {
-    ~ .switchField-icon {
-        background-color: var(--palettes-error-600);
-        border-color: var(--palettes-error-600);
+	&:hover {
+		~ .switchField-icon {
+			background-color: var(--palettes-error-600);
+			border-color: var(--palettes-error-600);
+		}
+	}
 
-    }
-  }
-
-  &:active {
-    ~ .switchField-icon {
-        background-color: var(--palettes-error-800);
-        border-color: var(--palettes-error-800);
-    }
-  }
+	&:active {
+		~ .switchField-icon {
+			background-color: var(--palettes-error-800);
+			border-color: var(--palettes-error-800);
+		}
+	}
 }
 
 @mixin checkedInvalid {
-  &:checked {
-    ~ .switchField-icon {
-        background-color: var(--palettes-error-700);
-        border-color: var(--palettes-error-700);
-    }
-  }
+	&:checked {
+		~ .switchField-icon {
+			background-color: var(--palettes-error-700);
+			border-color: var(--palettes-error-700);
+		}
+	}
 }

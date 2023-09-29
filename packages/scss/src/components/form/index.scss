@@ -6,7 +6,7 @@
 @use 'exports' as *;
 
 .form-field {
-	&:has(.textField-input-value[aria-invalid="true"]) {
+	&:has(.textField-input-value[aria-invalid='true']) {
 		@include invalid;
 	}
 
@@ -22,7 +22,9 @@
 		@include XS;
 	}
 
-	&.mod-checkable, &:has(.checkboxField), &:has(.switchField) {
+	&.mod-checkable,
+	&:has(.checkboxField),
+	&:has(.switchField) {
 		@include checkable;
 	}
 
@@ -36,7 +38,6 @@
 		}
 	}
 }
-
 
 // deprecated
 

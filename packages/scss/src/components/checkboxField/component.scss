@@ -2,12 +2,9 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	order: -1;
 	position: relative;
-	top: var(--component-checkboxField-label-input-top);
 
 	@at-root ($atRoot) {
-
 		.checkboxField-icon {
 			width: var(--component-checkboxField-label-input-size);
 			height: var(--component-checkboxField-label-input-size);
@@ -20,7 +17,6 @@
 			background-color: var(--colors-white-color);
 			display: block;
 			cursor: pointer;
-
 
 			@media (prefers-reduced-motion: reduce) {
 				transition-property: none;
@@ -63,7 +59,7 @@
 				white-space: nowrap;
 				word-wrap: normal;
 				content: '\e97d'; // Remove when content alternative will have a good support
-				content: '\e97d' / '';
+				content: '\e97d'/ '';
 			}
 		}
 
