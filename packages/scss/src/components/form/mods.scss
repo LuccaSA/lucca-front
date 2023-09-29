@@ -6,6 +6,7 @@
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 @use '@lucca-front/scss/src/components/switchField/exports' as switchField;
+@use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
 
 @mixin S {
 	.formLabel {
@@ -14,6 +15,10 @@
 
 	.textField {
 		@include textField.S;
+	}
+
+	.checkboxField {
+		@include checkboxField.S;
 	}
 
 	.switchField {

@@ -17,11 +17,11 @@
 	}
 }
 
-@mixin disabled {
-	.textField {
-		@include textField.disabled;
-	}
-}
+// @mixin disabled {
+// 	.textField {
+// 		@include textField.disabled;
+// 	}
+// }
 
 // deprecated
 

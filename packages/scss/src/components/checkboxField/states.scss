@@ -1,12 +1,10 @@
-@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin mixed {
-	~ .checkboxField-label {
-		.checkboxField-label-input-icon {
+	~ .checkboxField-icon {
+		.checkboxField-icon-check {
 			&::before {
 				content: '\e975'; // Remove when content alternative will have a good support
 				content: '\e975' / '';
@@ -76,76 +74,49 @@
 }
 
 @mixin disabled {
-	~ .checkboxField-label {
-		color: var(--palettes-grey-500);
+	cursor: default;
 
-		.checkboxField-label-input {
-			border-color: var(--palettes-grey-500);
-			cursor: default;
-		}
-
-		.formLabel {
-			@include formLabel.disabled;
-		}
-	}
-
-	~ .inlineMessage {
-		@include inlineMessage.disabled;
+	~ .checkboxField-icon {
+		border-color: var(--palettes-grey-500);
 	}
 }
 
 @mixin focusVisible {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			&::after {
-				@include a11y.focusVisible();
-			}
+	~ .checkboxField-icon {
+		&::after {
+			@include a11y.focusVisible();
 		}
 	}
 }
 
 @mixin invalid {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			border-color: var(--palettes-error-700);
-		}
-
-		.formLabel {
-			@include formLabel.error;
-		}
+	~ .checkboxField-icon {
+		border-color: var(--palettes-error-700);
 	}
 }
 
 @mixin invalidHover {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			border-color: var(--palettes-error-600);
-		}
+	~ .checkboxField-icon {
+		border-color: var(--palettes-error-600);
 	}
 }
 
 @mixin invalidActive {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			border-color: var(--palettes-error-800);
-		}
+	~ .checkboxField-icon {
+		border-color: var(--palettes-error-800);
 	}
 }
 
 @mixin checkedInvalidHover {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-error-600);
-			border-color: var(--palettes-error-600);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-error-600);
+		border-color: var(--palettes-error-600);
 	}
 }
 
 @mixin checkedInvalidActive {
-	~ .checkboxField-label {
-		.checkboxField-label-input {
-			background-color: var(--palettes-error-800);
-			border-color: var(--palettes-error-800);
-		}
+	~ .checkboxField-icon {
+		background-color: var(--palettes-error-800);
+		border-color: var(--palettes-error-800);
 	}
 }

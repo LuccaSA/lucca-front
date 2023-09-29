@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
@@ -69,7 +68,6 @@
 		}
 
 		.checkboxField-input {
-			//@include a11y.mask;
 			position: absolute;
 			z-index: 1;
 			width: var(--component-checkboxField-label-input-size);
@@ -77,13 +75,5 @@
 			opacity: 0;
 			cursor: pointer;
 		}
-
-		// .formLabel {
-		// 	@include formLabel.label;
-		// }
-		//
-		// .inlineMessage {
-		// 	grid-column: 2;
-		// }
 	}
 }
