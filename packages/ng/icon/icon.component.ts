@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnInit } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { LuccaIcon } from '@lucca-front/icons';
 
@@ -13,6 +13,9 @@ import { LuccaIcon } from '@lucca-front/icons';
 })
 export class IconComponent implements OnInit {
 	#ngClass = inject(NgClass);
+
+	@HostBinding('attr.aria-hidden')
+	readonly ariaHidden = true;
 
 	@Input({ required: true })
 	set icon(icon: LuccaIcon) {
