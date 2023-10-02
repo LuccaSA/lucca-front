@@ -6,14 +6,6 @@
 @use 'exports' as *;
 
 .form-field {
-	&:has(.textField-input-value[aria-invalid='true']) {
-		@include invalid;
-	}
-
-	// &:has(.textField-input-value[disabled]) {
-	// 	@include disabled;
-	// }
-
 	&.mod-S {
 		@include S;
 	}
@@ -26,6 +18,10 @@
 	&:has(.checkboxField),
 	&:has(.switchField) {
 		@include checkable;
+	}
+
+	&:has(.textField-input-value[aria-invalid='true']) {
+		@include invalid;
 	}
 
 	&:has(.checkboxField-input:disabled) {

@@ -4,10 +4,6 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @mixin invalid {
-	.textField {
-		@include textField.invalid;
-	}
-
 	.formLabel {
 		@include formLabel.error;
 	}
@@ -16,12 +12,6 @@
 		@include inlineMessage.error;
 	}
 }
-
-// @mixin disabled {
-// 	.textField {
-// 		@include textField.disabled;
-// 	}
-// }
 
 // deprecated
 
