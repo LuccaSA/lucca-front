@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { LuccaIcon } from '@lucca-front/icons';
 
@@ -11,15 +11,13 @@ import { LuccaIcon } from '@lucca-front/icons';
 	styleUrls: ['./icon.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconComponent implements OnChanges, OnInit {
+export class IconComponent implements OnInit {
 	#ngClass = inject(NgClass);
 
 	@Input({ required: true })
-	icon: LuccaIcon;
-
-	ngOnChanges(): void {
+	set icon(icon: LuccaIcon) {
 		this.#ngClass.ngClass = {
-			[`icon-${this.icon}`]: true,
+			[`icon-${icon}`]: true,
 		};
 	}
 
