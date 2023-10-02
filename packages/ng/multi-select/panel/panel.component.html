@@ -18,7 +18,7 @@
 					(ngModelChange)="updateClue($event)"
 					[ngModelOptions]="{ standalone: true }"
 				/>
-				<span class="u-mask textfield-label">Rechercher</span>
+				<span class="u-mask textfield-label">{{ intl.search }}</span>
 			</label>
 		</ng-container>
 		<button class="button mod-text mod-icon lu-multiselect-expandbutton" type="button" (click)="toggleExpansion()">
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div class="lu-multiselect-panel-columns-col2" *ngIf="isExpanded">
-			<div class="lu-multiselect-emptystate" *ngIf="!selectedOptions.length">Sélectionnez les éléments dans la liste de gauche pour commencer</div>
+			<div class="lu-multiselect-emptystate" *ngIf="!selectedOptions.length">{{ intl.emptySelection }}</div>
 			<div class="lu-multiselect-chips" role="listbox" tabindex="0" *ngIf="selectedOptions.length" (keydown)="onRightColumnKeydown($event)">
 				<div role="option" class="chip lu-multiselect-chip" *ngFor="let option of selectedOptions" [luMultiSelectSelectedChip]="option">
 					<ng-container *luOptionOutlet="optionTpl; value: option"></ng-container>
