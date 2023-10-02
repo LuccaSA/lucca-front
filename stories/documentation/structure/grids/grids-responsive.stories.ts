@@ -11,26 +11,10 @@ export default {
 
 function getTemplate(args: GridsResponsiveStory): string {
 	return `<div class="grid mod-form">
-	<div class="grid-column" style="
-		--grid-colspan: 4;
-		--grid-colspanAtMediaMinXXS: 2;
-		--grid-colspanAtMediaMinS: 4;
-	"><div class="demo">1</div></div>
-	<div class="grid-column" style="
-		--grid-colspan: 4;
-		--grid-colspanAtMediaMinXXS: 2;
-		--grid-rowspanAtMediaMinS: 2;
-	"><div class="demo">2</div></div>
-	<div class="grid-column" style="
-		--grid-colspan: 4;
-		--grid-colspanAtMediaMinXXS: 2;
-	"><div class="demo">3</div></div>
-	<div class="grid-column" style="
-		--grid-colspan: 4;
-		--grid-colspanAtMediaMinXXS: 2;
-		--grid-colspanAtMediaMinS: 2;
-		--grid-columnAtMediaMinS: 3;
-	"><div class="demo">4</div></div>
+	<div class="grid-column" [attr.style]="'--grid-colspan: 4; --grid-colspanAtMediaMinXXS: 2; --grid-colspanAtMediaMinS: 4;'"><div class="demo">1</div></div>
+	<div class="grid-column" [attr.style]="'--grid-colspan: 4; --grid-colspanAtMediaMinXXS: 2; --grid-rowspanAtMediaMinS: 2;'"><div class="demo">2</div></div>
+	<div class="grid-column" [attr.style]="'--grid-colspan: 4; --grid-colspanAtMediaMinXXS: 2;'"><div class="demo">3</div></div>
+	<div class="grid-column" [attr.style]="'--grid-colspan: 4; --grid-colspanAtMediaMinXXS: 2; --grid-colspanAtMediaMinS: 2; --grid-columnAtMediaMinS: 3;'"><div class="demo">4</div></div>
 </div>`;
 }
 
