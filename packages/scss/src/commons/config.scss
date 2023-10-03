@@ -1,6 +1,5 @@
 $states: 'error', 'warning', 'success' !default;
 $palettes: 'primary', 'secondary', 'grey', 'navigation' !default;
-$fontVariable: false !default;
 
 // Colors : Product
 
@@ -36,7 +35,7 @@ $navigation: (
 	text: #ffffff,
 	700: #313972,
 	800: #192157,
-	900: #12183F,
+	900: #12183f,
 ) !default;
 
 // Colors : Semantics
@@ -103,75 +102,75 @@ $grey: (
 // Colors : Decoratives
 
 $kiwi: (
-	200: #C8ED96,
-	500: #6DBF03,
+	200: #c8ed96,
+	500: #6dbf03,
 	800: #407000,
 ) !default;
 
 $lime: (
-	200: #A3EC98,
-	500: #1DBD05,
-	800: #0E6B00,
+	200: #a3ec98,
+	500: #1dbd05,
+	800: #0e6b00,
 ) !default;
 
 $cucumber: (
-	200: #98ECC2,
-	500: #00BD5E,
-	800: #006B36,
+	200: #98ecc2,
+	500: #00bd5e,
+	800: #006b36,
 ) !default;
 
 $mint: (
-	200: #99EBDA,
-	500: #00C29B,
-	800: #006B56,
+	200: #99ebda,
+	500: #00c29b,
+	800: #006b56,
 ) !default;
 
 $glacier: (
-	200: #98ECEC,
-	500: #00C2C2,
-	800: #006B6B,
+	200: #98ecec,
+	500: #00c2c2,
+	800: #006b6b,
 ) !default;
 
 $lagoon: (
-	200: #9FDAF4,
-	500: #1591C6,
+	200: #9fdaf4,
+	500: #1591c6,
 	800: #065374,
 ) !default;
 
 $blueberry: (
-	200: #B1C8F6,
-	500: #5482DE,
-	800: #1B4498,
+	200: #b1c8f6,
+	500: #5482de,
+	800: #1b4498,
 ) !default;
 
 $lavender: (
-	200: #D3BBF7,
-	500: #9F72E4,
-	800: #612EAD,
+	200: #d3bbf7,
+	500: #9f72e4,
+	800: #612ead,
 ) !default;
 
 $grape: (
-	200: #E5B9F8,
-	500: #A75CC7,
-	800: #65078D,
+	200: #e5b9f8,
+	500: #a75cc7,
+	800: #65078d,
 ) !default;
 
 $watermelon: (
-	200: #EAA4B5,
-	500: #D0395F,
-	800: #8D0729,
+	200: #eaa4b5,
+	500: #d0395f,
+	800: #8d0729,
 ) !default;
 
 $pumpkin: (
-	200: #F9CF9F,
-	500: #ED8207,
-	800: #8F4C00,
+	200: #f9cf9f,
+	500: #ed8207,
+	800: #8f4c00,
 ) !default;
 
 $pineapple: (
-	200: #F6EF8E,
-	500: #E5CF00,
-	800: #8D7811,
+	200: #f6ef8e,
+	500: #e5cf00,
+	800: #8d7811,
 ) !default;
 
 $colors: (
@@ -266,7 +265,8 @@ $elevations: (
 );
 
 $boxShadows: (
-	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)', // deprecated
+	// deprecated
+	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
 	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
 	'S':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
@@ -277,7 +277,7 @@ $boxShadows: (
 	'XL':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
 	'XXL':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)'
 );
 
 $disabled: (
