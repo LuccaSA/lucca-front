@@ -1,17 +1,15 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: 'without: rule') {
-	@at-root ($atRoot) {
-		.fieldset-component {
-			border: 0;
-			margin: 0;
-			padding: 0;
-			display: grid;
-			gap: var(--components-fieldset-gap);
-			grid-template-columns: auto;
-		}
+	border: 0;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: var(--components-fieldset-gap);
+	grid-template-columns: auto;
 
-		.fieldset-component-title {
+	@at-root ($atRoot) {
+		.fieldset-title {
 			@include title.component;
 			@include title.h3;
 
@@ -22,7 +20,7 @@
 			display: contents;
 		}
 
-		.fieldset-component-title-content {
+		.fieldset-title-content {
 			border: 0;
 			padding: 0;
 			margin: 0;
@@ -35,12 +33,16 @@
 			max-width: var(--components-fieldset-contentMaxWidth);
 		}
 
-		.fieldset-component-title-content-text-helper {
+		.fieldset-title-content-text-helper {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 			color: var(--palettes-grey-700);
 			font-weight: 400;
 			display: block;
+		}
+
+		.fieldset-content {
+			min-width: 0;
 		}
 	}
 }

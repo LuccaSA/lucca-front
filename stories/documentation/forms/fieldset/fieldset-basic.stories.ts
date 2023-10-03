@@ -44,66 +44,62 @@ export default {
 function getTemplate(args: FieldsetBasicStory): string {
 	const alignLeft = args.alignLeft ? 'mod-alignLeft' : '';
 	const mod = args.mod;
-	const helper = args.helper ? '<span class="fieldset-component-title-content-text-helper">{{ helper }}</span>' : '';
+	const helper = args.helper ? '<span class="fieldset-title-content-text-helper">{{ helper }}</span>' : '';
 	const title = args.title;
 	const content = args.content;
 
 	if (mod === 'mod-toggle')
 		return `
-		<div class="fieldset mod-toggle">
-			<fieldset class="fieldset-component" aria-labeledby="fieldsetComponentTitleContent1">
-				<legend class="fieldset-component-title">
-					<button type="button" class="fieldset-component-title-content" id="fieldsetComponentTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
-						<span class="fieldset-component-title-content-text">
-							${title}
-							${helper}
-						</span>
-						<span class="lucca-icon" aria-hidden="true" [class.icon-collapse]="expanded" [class.icon-expand]="!expanded"></span>
-					</button>
-				</legend>
-				<div [attr.hidden]="expanded ? null : 'hidden'">
-					${content}
-				</div>
-			</fieldset>
-		</div>
+		<fieldset class="fieldset mod-toggle" aria-labelledby="fieldsetTitleContent1">
+			<legend class="fieldset-title">
+				<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
+					<span class="fieldset-title-content-text">
+						${title}
+						${helper}
+					</span>
+					<span class="lucca-icon" aria-hidden="true" [class.icon-collapse]="expanded" [class.icon-expand]="!expanded"></span>
+				</button>
+			</legend>
+			<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">
+				${content}
+			</div>
+		</fieldset>
 	`;
 	else if (mod === 'mod-switch')
 		return `
-		<div class="fieldset mod-switch">
-			<fieldset class="fieldset-component" aria-labeledby="fieldsetComponentTitleContent1">
-				<legend class="fieldset-component-title">
-					<button type="button" class="fieldset-component-title-content" id="fieldsetComponentTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
-						<span class="switch" aria-hidden="true">
-							<span class="switch-input" [class.checked]="expanded"></span>
-							<span class="switch-label"></span>
-						</span>
-						<span class="fieldset-component-title-content-text">
-							${title}
-							${helper}
-						</span>
-					</button>
-				</legend>
-				<div [attr.hidden]="expanded ? null : 'hidden'">
-					${content}
-				</div>
-			</fieldset>
-		</div>
+		<fieldset class="fieldset mod-switch" aria-labelledby="fieldsetTitleContent1">
+			<legend class="fieldset-title">
+				<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
+					<span class="switch" aria-hidden="true">
+						<span class="switch-input" [class.checked]="expanded"></span>
+						<span class="switch-label"></span>
+					</span>
+					<span class="fieldset-title-content-text">
+						${title}
+						${helper}
+					</span>
+				</button>
+			</legend>
+			<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">
+				${content}
+			</div>
+		</fieldset>
 	`;
 	else
 		return `
-		<div class="fieldset ${alignLeft}">
-			<fieldset class="fieldset-component" aria-labeledby="fieldsetComponentTitleContent1">
-				<legend class="fieldset-component-title">
-					<span class="fieldset-component-title-content" id="fieldsetComponentTitleContent1">
-						<span class="fieldset-component-title-content-text">
-							${title}
-							${helper}
-						</span>
+		<fieldset class="fieldset ${alignLeft}" aria-labelledby="fieldsetTitleContent1">
+			<legend class="fieldset-title">
+				<span class="fieldset-title-content" id="fieldsetTitleContent1">
+					<span class="fieldset-title-content-text">
+						${title}
+						${helper}
 					</span>
-				</legend>
+				</span>
+			</legend>
+			<div class="fieldset-content">
 				${content}
-			</fieldset>
-		</div>
+			</div>
+		</fieldset>
 	`;
 }
 
@@ -118,5 +114,5 @@ Basic.args = {
 	mod: '',
 	helper: '',
 	title: 'Title',
-	content: '<div class="grid mod-form"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
+	content: '<div class="grid mod-form" style="background-color: var(--palettes-grey-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
 };

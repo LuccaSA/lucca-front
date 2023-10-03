@@ -1,10 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin alignLeft {
-	.fieldset-component {
-		grid-template-columns: auto auto;
-		justify-content: space-between;
-	}
+	grid-template-columns: 1fr auto;
 }
 
 @mixin switch {
@@ -12,7 +9,7 @@
 	border-radius: var(--commons-borderRadius-L);
 	padding: var(--spacings-S);
 
-	.fieldset-component-title-content {
+	.fieldset-title-content {
 		justify-content: flex-start;
 		gap: var(--spacings-XS);
 		cursor: pointer;
@@ -29,13 +26,13 @@
 		}
 	}
 
-	.fieldset-component-title-content-text {
+	.fieldset-title-content-text {
 		font-size: var(--sizes-M-fontSize);
 	}
 }
 
 @mixin toggle {
-	.fieldset-component-title-content {
+	.fieldset-title-content {
 		border-radius: var(--commons-borderRadius-M);
 		cursor: pointer;
 		font: inherit;
