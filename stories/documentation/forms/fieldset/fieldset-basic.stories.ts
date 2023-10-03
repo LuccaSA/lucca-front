@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 interface FieldsetBasicStory {
 	horizontal: boolean;
-	mod: string;
+	toggle: boolean;
 	helper?: string;
 	title: string;
 	content: string;
@@ -12,15 +12,14 @@ export default {
 	title: 'Documentation/Forms/Fieldset/Basic',
 	argTypes: {
 		horizontal: {
-			description: 'Incompatible avec les mod toggle et switch.',
+			description: 'Incompatible avec les mod toggle.',
 			control: {
 				type: 'boolean',
 			},
 		},
-		mod: {
-			options: ['', 'mod-toggle', 'mod-switch'],
+		toggle: {
 			control: {
-				type: 'select',
+				type: 'boolean',
 			},
 		},
 		helper: {
@@ -43,12 +42,12 @@ export default {
 
 function getTemplate(args: FieldsetBasicStory): string {
 	const horizontal = args.horizontal ? 'mod-horizontal' : '';
-	const mod = args.mod;
+	const toggle = args.toggle ? 'mod-toggle' : '';
 	const helper = args.helper ? '<span class="fieldset-title-content-text-helper">{{ helper }}</span>' : '';
 	const title = args.title;
 	const content = args.content;
 
-	if (mod === 'mod-toggle')
+	if (args.toggle === true)
 		return `
 		<fieldset class="fieldset mod-toggle" aria-labelledby="fieldsetTitleContent1">
 			<legend class="fieldset-title">
@@ -58,26 +57,6 @@ function getTemplate(args: FieldsetBasicStory): string {
 						${helper}
 					</span>
 					<span class="lucca-icon" aria-hidden="true" [class.icon-collapse]="expanded" [class.icon-expand]="!expanded"></span>
-				</button>
-			</legend>
-			<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">
-				${content}
-			</div>
-		</fieldset>
-	`;
-	else if (mod === 'mod-switch')
-		return `
-		<fieldset class="fieldset mod-switch" aria-labelledby="fieldsetTitleContent1">
-			<legend class="fieldset-title">
-				<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
-					<span class="switch" aria-hidden="true">
-						<span class="switch-input" [class.checked]="expanded"></span>
-						<span class="switch-label"></span>
-					</span>
-					<span class="fieldset-title-content-text">
-						${title}
-						${helper}
-					</span>
 				</button>
 			</legend>
 			<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">
@@ -111,7 +90,7 @@ const Template: StoryFn<FieldsetBasicStory> = (args: FieldsetBasicStory) => ({
 export const Basic = Template.bind({});
 Basic.args = {
 	horizontal: false,
-	mod: '',
+	toggle: false,
 	helper: '',
 	title: 'Title',
 	content: '<div class="grid mod-form" style="background-color: var(--palettes-grey-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',

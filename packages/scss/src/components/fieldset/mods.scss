@@ -4,33 +4,6 @@
 	grid-template-columns: 1fr auto;
 }
 
-@mixin switch {
-	border: 1px solid var(--palettes-grey-200);
-	border-radius: var(--commons-borderRadius-L);
-	padding: var(--spacings-S);
-
-	.fieldset-title-content {
-		justify-content: flex-start;
-		gap: var(--spacings-XS);
-		cursor: pointer;
-		font: inherit;
-
-		&:focus-visible {
-			outline: none;
-
-			.switch-label {
-				&::before {
-					@include a11y.focusVisible;
-				}
-			}
-		}
-	}
-
-	.fieldset-title-content-text {
-		font-size: var(--sizes-M-fontSize);
-	}
-}
-
 @mixin toggle {
 	.fieldset-title-content {
 		border-radius: var(--commons-borderRadius-M);

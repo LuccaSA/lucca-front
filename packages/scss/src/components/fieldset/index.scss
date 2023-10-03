@@ -11,8 +11,4 @@
 	&.mod-toggle {
 		@include toggle;
 	}
-
-	&.mod-switch {
-		@include switch;
-	}
 }
