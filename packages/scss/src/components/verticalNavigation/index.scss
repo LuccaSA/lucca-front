@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.vertical-navigation {
+.verticalNavigation {
 	@include vars;
 	@include component;
 }

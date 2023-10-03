@@ -1,12 +1,20 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: 'without: rule') {
-
 	@at-root ($atRoot) {
+		.verticalNavigation-sectionTitle {
+			@include title.h5;
+			color: var(--palettes-grey-600);
+			padding: 0 var(--components-verticalNavigation-horizontalPadding);
+			margin-bottom: var(--spacings-XS);
+		}
+
 		.verticalNavigation-list {
 			@include reset.list;
 			background-color: var(--colors-white-color);
+			margin-bottom: var(--spacings-S);
 		}
 
 		.verticalNavigation-list-item-link-icon {
@@ -17,7 +25,7 @@
 		.verticalNavigation-list-item-link {
 			@include reset.button;
 			display: flex;
-			padding: var(--spacings-XS) var(--spacings-S);
+			padding: var(--spacings-XS) var(--components-verticalNavigation-horizontalPadding);
 			border-radius: var(--commons-borderRadius-M);
 			color: var(--components-verticalNavigation-link-color);
 			text-decoration: none;
