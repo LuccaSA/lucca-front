@@ -4,7 +4,7 @@
 	grid-template-columns: 1fr auto;
 }
 
-@mixin toggle {
+@mixin expandable {
 	.fieldset-title-content {
 		border-radius: var(--commons-borderRadius-M);
 		cursor: pointer;
