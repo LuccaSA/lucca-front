@@ -1,0 +1,17 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin horizontal {
+	grid-template-columns: 1fr auto;
+}
+
+@mixin expandable {
+	.fieldset-title-content {
+		border-radius: var(--commons-borderRadius-M);
+		cursor: pointer;
+		font: inherit;
+
+		&:focus-visible {
+			@include a11y.focusVisible;
+		}
+	}
+}
