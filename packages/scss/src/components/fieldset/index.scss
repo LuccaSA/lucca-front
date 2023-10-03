@@ -4,8 +4,8 @@
 	@include vars;
 	@include component;
 
-	&.mod-alignLeft {
-		@include alignLeft;
+	&.mod-horizontal {
+		@include horizontal;
 	}
 
 	&.mod-toggle {

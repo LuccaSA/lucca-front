@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
 interface FieldsetBasicStory {
-	alignLeft: boolean;
+	horizontal: boolean;
 	mod: string;
 	helper?: string;
 	title: string;
@@ -11,7 +11,7 @@ interface FieldsetBasicStory {
 export default {
 	title: 'Documentation/Forms/Fieldset/Basic',
 	argTypes: {
-		alignLeft: {
+		horizontal: {
 			description: 'Incompatible avec les mod toggle et switch.',
 			control: {
 				type: 'boolean',
@@ -42,7 +42,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: FieldsetBasicStory): string {
-	const alignLeft = args.alignLeft ? 'mod-alignLeft' : '';
+	const horizontal = args.horizontal ? 'mod-horizontal' : '';
 	const mod = args.mod;
 	const helper = args.helper ? '<span class="fieldset-title-content-text-helper">{{ helper }}</span>' : '';
 	const title = args.title;
@@ -87,7 +87,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 	`;
 	else
 		return `
-		<fieldset class="fieldset ${alignLeft}" aria-labelledby="fieldsetTitleContent1">
+		<fieldset class="fieldset ${horizontal}" aria-labelledby="fieldsetTitleContent1">
 			<legend class="fieldset-title">
 				<span class="fieldset-title-content" id="fieldsetTitleContent1">
 					<span class="fieldset-title-content-text">
@@ -110,7 +110,7 @@ const Template: StoryFn<FieldsetBasicStory> = (args: FieldsetBasicStory) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	alignLeft: false,
+	horizontal: false,
 	mod: '',
 	helper: '',
 	title: 'Title',
