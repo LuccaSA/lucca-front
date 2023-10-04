@@ -26,9 +26,9 @@ In your file styles.scss, add imports files and components you want to import to
 
 ```
 // Import styles
-@forward '@lucca-front/icons/src/main’;
-@forward '@lucca-front/scss/src/main’;
-@forward '@lucca-front/ng/src/main’;
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main';
+@forward '@lucca-front/ng/src/main';
 
 // Import SCSS components
 @forward '@lucca-front/scss/src/components/actionIcon';
@@ -101,13 +101,15 @@ For custom imports, check our [advanced usage documentation](https://prisme.lucc
 In angular.json, we suggest to add a couple of entries to your paths:
 
 ```
-"architects": {
+"architect": {
   "build": {
-    "stylePreprocessorOptions": {
-      “includePaths": [
-        "src/scss",
-        "node_modules",
-      ]
+    "options": {
+      "stylePreprocessorOptions": {
+        “includePaths": [
+          "src/scss",
+          "node_modules",
+        ]
+      },
     },
   },
 },
