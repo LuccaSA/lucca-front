@@ -1,4 +1,4 @@
 @mixin disabled {
-  background-color: var(--palettes-grey-300);
-  color: var(--palettes-grey-500);
+  --components-clear-cross-color: var(--palettes-grey-500);
+  --components-clear-disk-color: var(--palettes-grey-300);
 }

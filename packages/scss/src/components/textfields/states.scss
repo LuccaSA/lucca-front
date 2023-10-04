@@ -20,11 +20,12 @@
 	}
 
 	~ .textfield-clear {
-		color: var(--palettes-grey-500) !important;
+		--components-clear-cross-color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}
 
-	~ .textfield-actionClear { // deprecated
+	~ .textfield-actionClear {
+		// deprecated
 		color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}
@@ -57,7 +58,8 @@
 		position: relative;
 		z-index: 4;
 		background-color: var(--colors-white-color);
-		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)),
+			0 0 0 4px var(--components-field-framed-color50);
 	}
 }
 
@@ -196,7 +198,11 @@
 }
 
 @mixin materialInputDisabled {
-	background-image: linear-gradient(to right, var(--components-textfield-material-border-color) 33%, rgba(255, 255, 255, 0) 0%);
+	background-image: linear-gradient(
+		to right,
+		var(--components-textfield-material-border-color) 33%,
+		rgba(255, 255, 255, 0) 0%
+	);
 	background-size: 3px 1px;
 	background-color: transparent;
 	background-position: bottom;
