@@ -9,6 +9,7 @@
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
+	@include core.cssvars('palettes-lucca', config.$lucca);
 	@include core.cssvars('palettes-primary', config.$primary);
 	@include core.cssvars('palettes-secondary', config.$secondary);
 	@include core.cssvars('palettes-grey', config.$grey);
