@@ -63,7 +63,7 @@ function getTemplate(args: ArrowBasicStory): string {
 						${label}
 					</span>
 				</label>
-				<div class="arrow${grey}"></div>
+				<div class="radioField-arrow${grey}"></div>
 			</div>
 			<div class="radioField${s} mod-withArrow">
 				<input type="radio" class="radioField-input" id="fieldB" name="field" aria-labelledby="fieldBLabel" />
@@ -75,7 +75,7 @@ function getTemplate(args: ArrowBasicStory): string {
 						Label
 					</span>
 				</label>
-				<div class="arrow${grey}"></div>
+				<div class="radioField-arrow${grey}"></div>
 			</div>
 		</div>
 		<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
@@ -93,7 +93,7 @@ function getTemplate(args: ArrowBasicStory): string {
 					Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
 				</span>
 			</label>
-			<div class="arrow${grey}"></div>
+			<div class="radioField-arrow${grey}"></div>
 		</div>
 		<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;
@@ -110,7 +110,7 @@ function getTemplate(args: ArrowBasicStory): string {
 					Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
 				</span>
 			</label>
-			<div class="arrow${grey}"></div>
+			<div class="radioField-arrow${grey}"></div>
 		</div>
 		<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
 	</div>`;

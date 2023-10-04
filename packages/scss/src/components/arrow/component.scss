@@ -1,10 +1,10 @@
 @mixin component {
-	background-color: var(--components-arrow-background);
-	margin: 0 var(--components-arrow-horizontalMargin);
-	width: 12px;
-	height: 8px;
-	clip-path: path('M4.66415 0.494638C5.43093 -0.164881 6.56907 -0.164879 7.33586 0.49464L12 8H0L4.66415 0.494638Z');
-	position: absolute;
-	bottom: var(--components-arrow-bottom);
-	left: var(--components-arrow-left);
+	// background-color: var(--components-arrow-background);
+	// margin: 0 var(--components-arrow-horizontalMargin);
+	// width: 12px;
+	// height: 8px;
+	// clip-path: path('M4.66415 0.494638C5.43093 -0.164881 6.56907 -0.164879 7.33586 0.49464L12 8H0L4.66415 0.494638Z');
+	// position: absolute;
+	// bottom: var(--components-arrow-bottom);
+	// left: var(--components-arrow-left);
 }

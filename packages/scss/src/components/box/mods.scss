@@ -20,6 +20,46 @@
 	}
 }
 
+@mixin arrow {
+	--components-box-arrow-background: var(--colors-white-color);
+	--components-box-arrow-horizontalMargin: var(--commons-borderRadius-M);
+	--components-box-arrow-left: 0;
+	--components-box-arrow-bottom: 0;
+
+	background-color: var(--components-box-arrow-background);
+	margin: 0 var(--components-box-arrow-horizontalMargin);
+	width: 12px;
+	height: 8px;
+	clip-path: path('M4.66415 0.494638C5.43093 -0.164881 6.56907 -0.164879 7.33586 0.49464L12 8H0L4.66415 0.494638Z');
+	position: absolute;
+	bottom: var(--components-box-arrow-bottom);
+	left: var(--components-box-arrow-left);
+
+	&.mod-grey {
+		--components-box-arrow-background: var(--palettes-grey-25);
+	}
+
+	// &.mod-S {
+	// 	--components-box-arrow-left: -2px;
+	// 	--components-box-arrow-bottom: -2px;
+	// }
+	//
+	// &.mod-switch {
+	// 		--components-box-arrow-left: 8px;
+	//
+	// 	&.mod-S {
+	// 		--components-box-arrow-left: 4px;
+	// 		--components-box-arrow-bottom: -2px;
+	// 	}
+	// }
+	//
+
+
+	// :is(.radioField-input, .checkboxField-input, .switchField-input):not(:checked) ~ & {
+	// 	display: none;
+	// }
+}
+
 @mixin withArrow {
 	--components-box-border-radius: var(--commons-borderRadius-M);
 	--components-box-padding: var(--spacings-S);

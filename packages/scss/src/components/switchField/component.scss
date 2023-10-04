@@ -1,16 +1,17 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
-@use '@lucca-front/scss/src/components/arrow/exports' as arrow;
+@use '@lucca-front/scss/src/components/box/exports' as box;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
+	position: relative;
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-column-gap: var(--spacings-XS);
 
-	.arrow {
-		@include arrow.switch;
-	}
+	// .arrow {
+	// 	@include arrow.switch;
+	// }
 
 	@at-root ($atRoot) {
 		.switchField-label {

@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/arrow/exports' as arrow;
+@use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin S {
 	--component-switchField-label-input-height: 1rem;
@@ -17,12 +17,18 @@
 		@include inlineMessage.S;
 	}
 
-	.arrow {
-		@include arrow.switchS;
-	}
+	// .arrow {
+	// 	@include arrow.switchS;
+	// }
 }
 
 @mixin withArrow {
-	position: relative;
 	padding-bottom: var(--spacings-S);
+
+
+	&:has(.switchField-input:checked) {
+		.switchField-arrow {
+			@include box.arrow;
+		}
+	}
 }
