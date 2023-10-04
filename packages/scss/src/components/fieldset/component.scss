@@ -1,0 +1,48 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
+@mixin component($atRoot: 'without: rule') {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: var(--components-fieldset-gap);
+	grid-template-columns: auto;
+
+	@at-root ($atRoot) {
+		.fieldset-title {
+			@include title.component;
+			@include title.h3;
+
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			min-height: var(--spacings-M);
+			display: contents;
+		}
+
+		.fieldset-title-content {
+			border: 0;
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			background-color: transparent;
+			text-align: left;
+			display: flex;
+			justify-content: space-between;
+			gap: var(--components-fieldset-gap);
+			max-width: var(--components-fieldset-contentMaxWidth);
+		}
+
+		.fieldset-title-content-text-helper {
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			color: var(--palettes-grey-700);
+			font-weight: 400;
+			display: block;
+		}
+
+		.fieldset-content {
+			min-width: 0;
+		}
+	}
+}
