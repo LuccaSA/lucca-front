@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--palettes-700, var(--palettes-grey-200));
@@ -17,30 +18,49 @@
 
 	@at-root ($atRoot) {
 		.chip-kill {
-			background-color: var(--palettes-text, var(--palettes-grey-700));
-			color: var(--palettes-700, var(--colors-white-color));
-			border: 0;
-			border-radius: 50%;
-			height: 0.75rem;
-			width: 0.75rem;
-			transition-duration: var(--commons-animations-durations-fast);
-			transition-property: background-color;
-			padding: 0;
-			overflow: hidden;
+			@include reset.button;
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr;
+			grid-template-areas: 'main';
+			align-items: normal;
+			width: var(--components-chip-kill-size);
+			height: var(--components-chip-kill-size);
+			border-radius: 50% !important;
 			cursor: pointer;
 
+			&::before,
+			&::after {
+				content: '';
+				grid-area: main;
+			}
+
 			&::before {
-				@include icon.generate('sign_close');
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				line-height: 0.75rem;
-				font-size: 0.75rem;
+				width: 75%;
+				height: 75%;
+				border-radius: 50%;
+				place-self: center;
+				background-color: var(
+					--components-chip-kill-cross-color,
+					var(--palettes-700, var(--colors-white-color))
+				);
+			}
+
+			&::after {
+				mask-image: var(--components-chip-kill-background-image);
+				mask-size: var(--components-chip-kill-size);
+				mask-repeat: no-repeat;
+				background-color: var(
+					--components-chip-kill-disk-color,
+					var(--palettes-text, var(--palettes-grey-700))
+				);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: background-color;
 			}
 
 			&:hover {
-				background-color: var(--palettes-grey-600);
-				color: var(--palettes-700, var(--colors-white-color));
+				--components-chip-kill-disk-color: var(--palettes-grey-600);
+				--components-chip-kill-cross-color: var(--palettes-700, var(--colors-white-color));
 			}
 
 			&:focus-visible {
@@ -49,7 +69,7 @@
 			}
 
 			&:active {
-				background-color: var(--palettes-50, var(--palettes-grey-800));
+				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-grey-800));
 			}
 		}
 	}

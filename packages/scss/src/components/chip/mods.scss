@@ -2,9 +2,8 @@
 
 @mixin primary {
   .chip-kill {
-
     &:hover {
-      background-color: var(--palettes-primary-50);
+      --components-chip-kill-disk-color: var(--palettes-primary-50);
     }
 
     &:focus-visible {
@@ -14,16 +13,16 @@
 }
 
 @mixin unkillable {
-	.chip-kill {
-		display: none;
-	}
+  .chip-kill {
+    display: none;
+  }
 }
 
 @mixin clickable {
-	cursor: pointer;
-	text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
 
-	&:hover {
-		background-color: var(--palettes-600, var(--palettes-grey-100));
-	}
+  &:hover {
+    background-color: var(--palettes-600, var(--palettes-grey-100));
+  }
 }
