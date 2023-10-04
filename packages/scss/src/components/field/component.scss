@@ -13,7 +13,6 @@
 	.checkboxesfield-input {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--colors-white-color);
 
 		&.palette-error {
 			box-shadow: 0 0 0 1px var(--palettes-700);
