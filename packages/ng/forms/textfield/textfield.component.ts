@@ -9,6 +9,8 @@ import { InlineMessageState } from '../../inline-message/inline-message-state';
 import { LuccaIcon } from '@lucca-front/icons';
 import { AbstractFieldComponent } from '../abstract-field-component';
 import { SafeHtml } from '@angular/platform-browser';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_TEXTFIELD_TRANSLATIONS } from './textfield.translate';
 
 @Component({
 	selector: 'lu-textfield',
@@ -62,6 +64,8 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
 	 */
 	searchIcon: LuccaIcon = 'search';
+
+	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();

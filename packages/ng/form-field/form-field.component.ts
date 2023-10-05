@@ -1,4 +1,4 @@
-import { AfterViewInit, booleanAttribute, Component, ContentChild, HostBinding, inject, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, booleanAttribute, Component, ContentChild, HostBinding, inject, Input, OnChanges, OnDestroy } from '@angular/core';
 import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
@@ -19,7 +19,7 @@ let nextId = 0;
 	styleUrls: ['./form-field.component.scss'],
 	hostDirectives: [NgClass],
 })
-export class FormFieldComponent implements OnChanges, AfterViewInit {
+export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 	#ngClass = inject(NgClass);
 
 	@HostBinding('class')
@@ -118,5 +118,9 @@ export class FormFieldComponent implements OnChanges, AfterViewInit {
 		this.#nativeInputRef.ariaRequired = this.required.toString();
 		this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
 		this.addLabelledBy(`${this.id}-label`);
+	}
+
+	ngOnDestroy(): void {
+		this.ready$.complete();
 	}
 }

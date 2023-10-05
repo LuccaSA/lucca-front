@@ -1,12 +1,12 @@
-import { Directive, HostBinding, inject, Input } from '@angular/core';
+import { Directive, HostBinding, inject, Input, OnDestroy } from '@angular/core';
 import { FormFieldComponent } from '../form-field/form-field.component';
-import { filter, first } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 
 @Directive({
 	selector: '[luFormFieldId]',
 	standalone: true,
 })
-export class FormFieldIdDirective {
+export class FormFieldIdDirective implements OnDestroy {
 	#formFieldComponent = inject(FormFieldComponent);
 
 	#suffix: string;
@@ -31,12 +31,17 @@ export class FormFieldIdDirective {
 	}
 
 	constructor() {
-		this.#formFieldComponent.ready$.pipe(filter(Boolean), first()).subscribe(() => {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => {
 			this.applyLabelledBy();
 		});
 	}
 
 	private applyLabelledBy(): void {
 		this.#formFieldComponent.addLabelledBy(`${this.#formFieldComponent.id}-${this.#suffix}`, this.labelledByStrategy === 'prepend');
+	}
+
+	ngOnDestroy(): void {
+		this.#formFieldComponent.removeLabelledBy(`${this.#formFieldComponent.id}-${this.#suffix}`);
 	}
 }
