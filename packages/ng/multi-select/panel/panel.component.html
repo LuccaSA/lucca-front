@@ -86,10 +86,11 @@
 					<button type="button" class="chip-kill" tabindex="-1" (click)="onChipKillClick(option)"></button>
 				</div>
 			</div>
-			<button *ngIf="selectedOptions.length" class="lu-multiselect-clear button mod-text mod-icon" type="button" (click)="clear()">
-				<span aria-hidden="true" class="lucca-icon icon-trash"></span>
-				{{ intl.clear }}
-			</button>
+			<div class="lu-multiselect-panel-columns-col2-footer">
+				<button *ngIf="selectedOptions.length" class="button mod-text" type="button" (click)="clear()">
+					{{ intl.clear }}
+				</button>
+			</div>
 		</div>
 	</div>
 </div>

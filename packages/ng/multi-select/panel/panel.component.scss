@@ -88,7 +88,7 @@
 .lu-multiselect-chips {
 	overflow-y: auto;
 	display: flex;
-	max-height: 15rem;
+	max-height: 18.5rem;
 	flex-grow: 1;
 	flex-direction: column;
 	align-items: flex-start;
@@ -99,15 +99,16 @@
 	border-top-right-radius: var(--commons-borderRadius-M);
 }
 
-.lu-multiselect-clear {
+.lu-multiselect-panel-columns-col2-footer {
 	display: flex;
-	align-items: center;
+	flex: 0;
+	align-items: flex-end;
 	align-self: stretch;
-	justify-content: flex-start;
+	justify-content: flex-end;
+	border-radius: 0 !important;
 	border-top: var(--commons-divider-border);
 	margin-top: auto;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
+	padding: var(--spacings-XXS) var(--spacings-XS);
 }
 
 .lu-multiselect-panel-form {
