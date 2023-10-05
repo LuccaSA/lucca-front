@@ -1,22 +1,25 @@
-import { Meta, StoryObj } from '@storybook/angular';
-
-
-interface IconsColorStory {}
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 export default {
 	title: 'Documentation/Texts/Icons/Color',
+	decorators: [
+		moduleMetadata({
+			imports: [IconComponent],
+		}),
+	],
 } as Meta;
 
-export const Color: StoryObj<IconsColorStory> = {
+export const Color: StoryObj = {
 	render: () => ({
 		template: `
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textPrimary"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textSecondary"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textError"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textWarning"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textSuccess"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textLight"></span>
-		<span aria-hidden="true" class="lucca-icon icon-heart u-textPlaceholder"></span>
+		<lu-icon icon="heart" color="primary"></lu-icon>
+		<lu-icon icon="heart" color="secondary"></lu-icon>
+		<lu-icon icon="heart" color="error"></lu-icon>
+		<lu-icon icon="heart" color="warning"></lu-icon>
+		<lu-icon icon="heart" color="success"></lu-icon>
+		<lu-icon icon="heart" color="light"></lu-icon>
+		<lu-icon icon="heart" color="placeholder"></lu-icon>
 	`,
 	}),
 };

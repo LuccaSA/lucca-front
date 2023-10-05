@@ -1,30 +1,25 @@
-import { ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnInit } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-icon',
 	standalone: true,
 	imports: [CommonModule],
-	hostDirectives: [NgClass],
-	template: '',
+	templateUrl: './icon.component.html',
 	styleUrls: ['./icon.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconComponent implements OnInit {
-	#ngClass = inject(NgClass);
-
-	@HostBinding('attr.aria-hidden')
-	readonly ariaHidden = true;
+export class IconComponent {
+	@Input({ required: true })
+	icon: LuccaIcon;
 
 	@Input({ required: true })
-	set icon(icon: LuccaIcon) {
-		this.#ngClass.ngClass = {
-			[`icon-${icon}`]: true,
-		};
-	}
+	alt: string;
 
-	ngOnInit(): void {
-		this.#ngClass.klass = 'lucca-icon';
-	}
+	@Input()
+	size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' = 'M';
+
+	@Input()
+	color: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
 }
