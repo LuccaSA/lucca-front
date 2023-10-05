@@ -5,8 +5,8 @@ import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } fr
 import { LuMultiDisplayerDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { FilterLegumesPipe, LuSelectInputStoryComponent, allLegumes, generateStory } from './select.utils';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { allLegumes, FilterLegumesPipe, generateStory, LuSelectInputStoryComponent } from './select.utils';
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -21,6 +21,7 @@ export const Basic = generateStory({
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
+		[expanded]="expanded"
 		[(ngModel)]="selectedLegumes"
 	>
 	</lu-multi-select>
@@ -53,6 +54,7 @@ export const WithMultiDisplayer = generateStory({
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
+		[expanded]="expanded"
 		[(ngModel)]="selectedLegumes"
 	>
 		<ng-container *luMultiDisplayer="let legumes; select: selectRef">
@@ -85,6 +87,7 @@ export const WithDisplayer = generateStory({
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
+		[expanded]="expanded"
 		[(ngModel)]="selectedLegumes"
 	>
 		<span *luDisplayer="let legume; select: selectRef" [luTooltip]="'Vive les ' + legume.name + '!'">
@@ -116,6 +119,7 @@ export const WithClearer = generateStory({
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes"
 		[clearable]="true"
+		[expanded]="expanded"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -145,31 +149,7 @@ export const WithClue = generateStory({
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
-	>
-		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
-	</lu-multi-select>
-	<span class="textfield-label">Label</span>
-</label>
-`,
-	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-	},
-});
-
-export const WithSelectAll = generateStory({
-	name: 'SelectAll',
-	description: "Il est possible d'afficher un bouton pour sélectionner tout en écoutant l'évènement `(selectAll)`.",
-	template: `
-<label class="textfield">
-	<lu-multi-select
-		#selectRef
-		class="textfield-input"
-		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegumes"
-		[options]="legumes"
-		(selectAll)="selectedLegumes = legumes"
-		[areAllOptionsSelected]="selectedLegumes.length === legumes.length"
+		[expanded]="expanded"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -194,6 +174,7 @@ export const WithPagination = generateStory({
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes.slice(0, page * 10)"
 		(nextPage)="page = page + 1"
+		[expanded]="expanded"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -218,6 +199,7 @@ export const Disabled = generateStory({
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes"
 		[disabled]="true"
+		[expanded]="expanded"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -246,6 +228,7 @@ export const WithDisabledOptions = generateStory({
 		placeholder="Placeholder..."
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes"
+		[expanded]="expanded"
 	>
 		<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -268,6 +251,7 @@ export const ApiV3 = generateStory({
 		placeholder="Placeholder..."
 		apiV3="/api/v3/axisSections"
 		[(ngModel)]="selectedAxisSection"
+		[expanded]="expanded"
 	></lu-multi-select>
 	<span class="textfield-label">Label</span>
 </label>
@@ -288,6 +272,7 @@ export const ApiV4 = generateStory({
 		placeholder="Placeholder..."
 		apiV4="/organization/structure/api/establishments"
 		[(ngModel)]="selectedEstablishment"
+		[expanded]="expanded"
 	></lu-multi-select>
 	<span class="textfield-label">Label</span>
 </label>
@@ -310,6 +295,7 @@ export const Responsive = generateStory({
 				[placeholder]="placeholder"
 				[options]="legumes"
 				[(ngModel)]="selectedLegumes"
+		[expanded]="expanded"
 			>
 			</lu-multi-select>
 			<span class="textfield-label">Label</span>
@@ -322,6 +308,7 @@ export const Responsive = generateStory({
 				[placeholder]="placeholder"
 				[options]="legumes"
 				[(ngModel)]="selectedLegumes"
+		[expanded]="expanded"
 			>
 			</lu-multi-select>
 			<span class="textfield-label">Label</span>
@@ -334,6 +321,7 @@ export const Responsive = generateStory({
 				[placeholder]="placeholder"
 				[options]="legumes"
 				[(ngModel)]="selectedLegumes"
+		[expanded]="expanded"
 			>
 			</lu-multi-select>
 			<span class="textfield-label">Label</span>
@@ -346,6 +334,7 @@ export const Responsive = generateStory({
 				[placeholder]="placeholder"
 				[options]="legumes"
 				[(ngModel)]="selectedLegumes"
+		[expanded]="expanded"
 			>
 			</lu-multi-select>
 			<span class="textfield-label">Label</span>
@@ -388,6 +377,7 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 		clearable: false,
 		disabled: false,
 		loading: false,
+		expanded: true,
 		selectedLegumes: [],
 		page: 1,
 	},

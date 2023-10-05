@@ -1,6 +1,6 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -17,19 +17,19 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, LuIsOptionSelectedPipe, NgIf, NgFor, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵLuMultiSelectSelectedChipDirective],
+	imports: [A11yModule, AsyncPipe, FormsModule, LuIsOptionSelectedPipe, NgIf, NgFor, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵLuMultiSelectSelectedChipDirective, NgTemplateOutlet],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	protected panelData = inject<ILuMultiSelectPanelData<T>>(MULTI_SELECT_PANEL_DATA);
 	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
-	isExpanded = false;
+	isExpanded = this.panelData.expanded;
 
 	options$ = this.panelData.options$;
 	loading$ = this.panelData.loading$;
 	areAllOptionsSelected$ = this.panelData.areAllOptionsSelected$;
-	canSelectAll = this.panelData.canSelectAll;
+	canSelectAll = false; // TODO connect to panel options when we'll be ok on designing select all
 	optionComparer = this.panelData.optionComparer;
 	selectedOptions: T[] = this.panelData.initialValue || [];
 	optionTpl = this.panelData.optionTpl;
@@ -71,6 +71,14 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		if (this.searchInput) {
 			setTimeout(() => this.searchInput.nativeElement.focus());
 		}
+
+		console.log(this.isExpanded);
+
+		if (this.isExpanded) {
+			this.panelRef.useExpandedPosition();
+		} else {
+			this.panelRef.useDefaultPosition();
+		}
 	}
 
 	@HostListener('keydown', ['$event'])
@@ -102,23 +110,13 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		this.rightColumnKeyManager?.onKeydown($event);
 	}
 
-	toggleAll(shouldSelectAll: boolean): void {
-		if (shouldSelectAll) {
-			this.panelRef.selectAll.emit();
-		} else {
-			this.clear();
-		}
-	}
-
-	toggleExpansion(): void {
-		this.isExpanded = !this.isExpanded;
-
-		if (this.isExpanded) {
-			this.panelRef.useExpandedPosition();
-		} else {
-			this.panelRef.useDefaultPosition();
-		}
-	}
+	// toggleAll(shouldSelectAll: boolean): void {
+	// 	if (shouldSelectAll) {
+	// 		this.panelRef.selectAll.emit();
+	// 	} else {
+	// 		this.clear();
+	// 	}
+	// }
 
 	updateClue(clue: string | null): void {
 		this.search = clue;

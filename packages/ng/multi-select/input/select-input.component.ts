@@ -1,6 +1,6 @@
 import { PositionStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, TemplateRef, Type, forwardRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, Input, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -40,15 +40,21 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input() valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
 
-	@Input() set areAllOptionsSelected(selected: boolean | undefined) {
-		this.areAllOptionsSelected$.next(selected);
-	}
+	// TODO This is for select all
+	// @Input() set areAllOptionsSelected(selected: boolean | undefined) {
+	// 	this.areAllOptionsSelected$.next(selected);
+	// }
 
 	@Input()
 	expandedPositionStrategy?: PositionStrategy;
 
-	@Output() selectAll = new EventEmitter<void>();
+	// TODO this is for select all
+	// @Output() selectAll = new EventEmitter<void>();
 
+	@Input()
+	expanded = false;
+
+	@Input()
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;
 	}
@@ -73,8 +79,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				loading$: this.loading$,
 				searchable: this.searchable,
 				optionTpl: this.optionTpl,
-				canSelectAll: this.selectAll.observed,
+				canSelectAll: false, // TODO Connect this to this.selectAll.observed when we'll be fixed on how to implement select all
 				areAllOptionsSelected$: this.areAllOptionsSelected$,
+				expanded: this.expanded,
 			},
 			this.overlayConfig,
 			this.expandedPositionStrategy,
@@ -87,7 +94,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		}
 
 		super.bindInputToPanelRefEvents();
-		this.panelRef.selectAll.subscribe(() => this.selectAll.emit());
+		// TODO This is for select all
+		// this.panelRef.selectAll.subscribe(() => this.selectAll.emit());
 	}
 
 	protected override get hasValue(): boolean {

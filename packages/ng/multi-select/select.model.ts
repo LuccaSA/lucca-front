@@ -9,6 +9,7 @@ export interface ILuMultiSelectPanelData<T> {
 	initialValue: T[] | undefined;
 	optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown>;
 	searchable: boolean;
+	expanded: boolean;
 	canSelectAll: boolean;
 	areAllOptionsSelected$: Observable<boolean | undefined>;
 }
