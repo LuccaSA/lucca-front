@@ -1,5 +1,21 @@
 $states: 'error', 'warning', 'success' !default;
-$palettes: 'primary', 'secondary', 'grey', 'navigation' !default;
+$palettes: 'lucca', 'primary', 'secondary', 'grey', 'navigation' !default;
+
+// Colors : Lucca
+
+$lucca: (
+	text: #ffffff,
+	50: #fff1eb,
+	100: #ffe0d1,
+	200: #ffccb3,
+	300: #ffbe9e,
+	400: #ffaa80,
+	500: #ff9361,
+	600: #ff7b3d,
+	700: #e06029,
+	800: #b43409,
+	900: #611405,
+) !default;
 
 // Colors : Product
 
