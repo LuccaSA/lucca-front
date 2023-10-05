@@ -17,7 +17,6 @@
 
 .lu-multiselect-panel-form {
 	padding: var(--spacings-XS);
-	box-shadow: var(--commons-boxShadow-S);
 	z-index: 1;
 }
 
@@ -46,15 +45,20 @@
 	align-items: flex-start;
 	height: var(--components-picker-max-height);
 	background-color: var(--palettes-grey-25);
+	min-width: 18rem;
+}
+
+.lu-multiselect-panel-columns-col1 {
+	.is-expanded & {
+		border: var(--commons-divider-width) solid var(--palettes-grey-200);
+	}
 }
 
 .lu-multiselect-panel-columns-col1-content {
 	box-shadow: none;
 	animation: none;
-
-	.is-expanded & {
-		border: var(--commons-divider-width) solid var(--palettes-grey-100);
-	}
+	padding: 0;
+	margin: 0 var(--spacings-XS) var(--spacings-XS);
 }
 
 .lu-multiselect-panel-columns-col1-content,

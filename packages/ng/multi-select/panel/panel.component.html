@@ -86,8 +86,8 @@
 					<button type="button" class="chip-kill" tabindex="-1" (click)="onChipKillClick(option)"></button>
 				</div>
 			</div>
-			<div class="lu-multiselect-panel-columns-col2-footer">
-				<button *ngIf="selectedOptions.length" class="button mod-text" type="button" (click)="clear()">
+			<div *ngIf="selectedOptions.length" class="lu-multiselect-panel-columns-col2-footer">
+				<button class="button mod-text" type="button" (click)="clear()">
 					{{ intl.clear }}
 				</button>
 			</div>

@@ -86,7 +86,7 @@ export class LuMultiSelectPanelRefFactory {
 	protected buildDefaultOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
 		const overlayConfig: OverlayConfig = { ...overlayConfigOverride };
 
-		const config = { overlapInput: false, offsetY: 8 };
+		const config = { overlapInput: false, offsetY: 2 };
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
 			.withViewportMargin(10)
@@ -98,8 +98,6 @@ export class LuMultiSelectPanelRefFactory {
 			]);
 		overlayConfig.scrollStrategy = this.scrollStrategies.reposition();
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
-
-		overlayConfig.width = 'min(40rem, 80vw)';
 		overlayConfig.maxWidth = '100vw';
 
 		return overlayConfig;
