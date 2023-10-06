@@ -16,18 +16,26 @@
 	.inlineMessage {
 		@include inlineMessage.S;
 	}
-
-	// .arrow {
-	// 	@include arrow.S;
-	// }
 }
 
 @mixin withArrow {
 	padding-bottom: var(--spacings-S);
 
-	&:has(.checkboxField-input:checked) {
-		.radioField-arrow {
-	 		@include box.arrow;
+	.checkboxField-arrow {
+		@include box.arrow;
+	}
+
+	.checkboxField-input:not(:checked) {
+		~ .checkboxField-arrow {
+			display: none;
 		}
+	}
+}
+
+@mixin withArrowS {
+	padding-bottom: var(--spacings-XS);
+
+	.checkboxField-arrow {
+		@include box.arrowS;
 	}
 }

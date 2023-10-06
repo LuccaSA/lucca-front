@@ -8,12 +8,12 @@
 		@include grey;
 	}
 
+	&.mod-withArrow {
+		@include withArrow;
+	}
+
 	// legacy
 	&.mod-toggle {
 		@include toggle;
-	}
-
-	&.mod-withArrow {
-		@include withArrow;
 	}
 }

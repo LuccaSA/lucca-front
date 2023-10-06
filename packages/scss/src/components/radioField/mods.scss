@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/components/box/exports' as box;
-//@use '@lucca-front/scss/src/components/arrow/exports' as arrow;
 
 @mixin S {
 	--component-radioField-label-input-size: 1rem;
@@ -17,18 +16,26 @@
 	.inlineMessage {
 		@include inlineMessage.S;
 	}
-
-	// .arrow {
-	// 	@include arrow.S;
-	// }
 }
 
 @mixin withArrow {
 	padding-bottom: var(--spacings-S);
 
-	&:has(.radioField-input:checked) {
-		.radioField-arrow {
-	 		@include box.arrow;
+	.radioField-arrow {
+		@include box.arrow;
+	}
+
+	.radioField-input:not(:checked) {
+		~ .radioField-arrow {
+			display: none;
 		}
+	}
+}
+
+@mixin withArrowS {
+	padding-bottom: var(--spacings-XS);
+
+	.radioField-arrow {
+		@include box.arrowS;
 	}
 }

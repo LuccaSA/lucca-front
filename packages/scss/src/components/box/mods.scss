@@ -38,29 +38,23 @@
 	&.mod-grey {
 		--components-box-arrow-background: var(--palettes-grey-25);
 	}
-
-	// &.mod-S {
-	// 	--components-box-arrow-left: -2px;
-	// 	--components-box-arrow-bottom: -2px;
-	// }
-	//
-	// &.mod-switch {
-	// 		--components-box-arrow-left: 8px;
-	//
-	// 	&.mod-S {
-	// 		--components-box-arrow-left: 4px;
-	// 		--components-box-arrow-bottom: -2px;
-	// 	}
-	// }
-	//
-
-
-	// :is(.radioField-input, .checkboxField-input, .switchField-input):not(:checked) ~ & {
-	// 	display: none;
-	// }
 }
 
 @mixin withArrow {
 	--components-box-border-radius: var(--commons-borderRadius-M);
 	--components-box-padding: var(--spacings-S);
+}
+
+@mixin arrowS {
+	--components-box-arrow-left: -2px;
+	--components-box-arrow-bottom: -2px;
+}
+
+@mixin arrowSwitch {
+	--components-box-arrow-left: 8px;
+}
+
+@mixin arrowSwitchS {
+	--components-box-arrow-left: 4px;
+	--components-box-arrow-bottom: -2px;
 }
