@@ -1,0 +1,11 @@
+@mixin vars {
+  --component-textField-lineHeight: var(--size-M-lightHeight);
+  --component-textField-fontSize: var(--size-M-fontSize);
+  --component-textField-placeholder: var(--palettes-grey-400);
+  --component-textField-background: var(--colors-white-color);
+  --component-textField-border: var(--palettes-grey-300);
+  --component-textField-color: var(--palettes-grey-800);
+  --component-textField-prefix-color: var(--palettes-grey-600);
+  --component-textField-padding: var(--spacings-XS);
+  --component-textField-affix-padding: var(--component-textField-padding);
+}

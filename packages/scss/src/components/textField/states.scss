@@ -1,0 +1,15 @@
+@mixin invalid {
+  --component-textField-border: var(--palettes-error-400);
+  --component-textField-background: var(--palettes-error-50);
+  --component-textField-placeholder: var(--palettes-error-400);
+
+  .textField-input:hover {
+    --component-textField-border: var(--palettes-error-600);
+  }
+}
+
+@mixin disabled {
+  --component-textField-border: var(--palettes-grey-300);
+  --component-textField-background: var(--palettes-grey-100);
+  --component-textField-color: var(--palettes-grey-600);
+}

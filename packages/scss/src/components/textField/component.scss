@@ -1,0 +1,112 @@
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: 'without: rule') {
+	display: flex;
+	align-items: stretch;
+	border-radius: var(--commons-borderRadius-M);
+	background-color: var(--component-textField-background);
+
+	&:focus-within:not(:has(.textField-input-affix-clear:focus)) {
+		@include a11y.focusVisible($offset: 3px);
+	}
+
+	@at-root ($atRoot) {
+		.textField-input {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			box-shadow: 0 0 0 1px var(--component-textField-border);
+			border-radius: var(--commons-borderRadius-M);
+			background-color: var(--component-textField-background);
+			position: relative;
+
+			&:hover {
+				--component-textField-border: var(--palettes-grey-400);
+			}
+
+			&:has(.textField-input-affix-icon ) {
+				--component-textField-affix-padding: 2.5rem;
+			}
+
+			&:has(.textField-input-affix-clear) {
+				--component-textField-affix-padding: 2rem;
+
+				&:has(.textField-input-affix-icon ) {
+					--component-textField-affix-padding: 4rem;
+				}
+			}
+		}
+
+		.textField-input-value {
+			border: 0;
+			outline: 0;
+			line-height: var(--component-textField-lineHeight);
+			font-size: var(--component-textField-fontSize);
+			width: 100%;
+			padding: var(--component-textField-padding) var(--component-textField-affix-padding) var(--component-textField-padding) var(--component-textField-padding);
+			background-color: transparent;
+			color: var(--component-textField-color);
+
+			&::placeholder {
+				color: var(--component-textField-placeholder);
+			}
+		}
+
+		.textField-input-affix {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--spacings-XS);
+			position: absolute;
+			right: var(--spacings-XS);
+			pointer-events: none;
+		}
+
+		.textField-input-affix-icon {
+			@include icon.M;
+			color: var(--palettes-grey-600);
+			pointer-events: none;
+		}
+
+		.textField-input-affix-clear {
+			pointer-events: auto;
+		}
+
+		.textField-prefix {
+			display: flex;
+			padding: 0 var(--component-textField-padding);
+			align-items: center;
+			color: var(--component-textField-prefix-color);
+			line-height: var(--component-textField-lineHeight);
+			font-size: var(--component-textField-fontSize);
+			box-shadow: 0 0 0 1px var(--component-textField-border);
+			border-top-left-radius: var(--commons-borderRadius-M);
+			border-bottom-left-radius: var(--commons-borderRadius-M);
+
+			~ .textField-input {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+
+		.textField-suffix {
+			display: flex;
+			padding: 0 var(--component-textField-padding);
+			align-items: center;
+			color: var(--component-textField-prefix-color);
+			line-height: var(--component-textField-lineHeight);
+			font-size: var(--component-textField-fontSize);
+			box-shadow: 0 0 0 1px var(--component-textField-border);
+			border-top-right-radius: var(--commons-borderRadius-M);
+			border-bottom-right-radius: var(--commons-borderRadius-M);
+			order: 1;
+
+			~ .textField-input {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+	}
+}

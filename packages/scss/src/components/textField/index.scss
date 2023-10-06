@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.textField {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.is-invalid, &:has(.textField-input-value[aria-invalid='true']) {
+		@include invalid;
+	}
+
+	&.is-disabled, &:has(.textField-input-value:disabled) {
+		@include disabled;
+	}
+}
