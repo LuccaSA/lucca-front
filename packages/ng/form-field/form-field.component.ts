@@ -106,7 +106,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 		if (!this.input) {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
 		}
-		this.#nativeInputRef = this.input.host.nativeElement as HTMLElement;
+		this.#nativeInputRef = this.input.host.nativeElement;
 		this.id = `${this.#nativeInputRef.tagName.toLowerCase()}-${++nextId}`;
 		this.#nativeInputRef.id = this.id;
 		this.updateAria();

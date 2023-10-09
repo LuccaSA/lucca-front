@@ -8,5 +8,5 @@ export class InputDirective {
 	@HostBinding('class')
 	clazz = 'textField-input-value';
 
-	public host = inject(ElementRef);
+	public host = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>);
 }
