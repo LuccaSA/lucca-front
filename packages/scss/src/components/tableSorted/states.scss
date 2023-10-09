@@ -141,7 +141,7 @@
 
 	.table-head-row-cell-sortableButton {
 		&::after {
-			@include icon.generate('arrow_top');
+			@include icon.generate('arrow_bottom');
 		}
 	}
 }
@@ -161,7 +161,7 @@
 
 	.table-head-row-cell-sortableButton {
 		&::before {
-			@include icon.generate('arrow_top');
+			@include icon.generate('arrow_bottom');
 		}
 	}
 }

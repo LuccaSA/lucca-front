@@ -7,6 +7,14 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-withArrow {
+		@include withArrow;
+
+		&.mod-S {
+			@include withArrowS;
+		}
+	}
 }
 
 .switchField-input {

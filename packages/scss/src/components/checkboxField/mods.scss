@@ -1,7 +1,31 @@
+@use '@lucca-front/scss/src/components/box/exports' as box;
+
 @mixin S {
 	--component-checkboxField-size: 1rem;
 	--component-checkboxField-borderRadius: var(--commons-borderRadius-M);
 	--component-checkboxField-icon-fontSize: var(--sizes-XS-lineHeight);
 	--component-checkboxField-label-fontSize: var(--sizes-S-fontSize);
 	--component-checkboxField-label-lineHeight: var(--sizes-S-lineHeight);
+}
+
+@mixin withArrow {
+	padding-bottom: var(--spacings-S);
+
+	.checkboxField-arrow {
+		@include box.arrow;
+	}
+
+	.checkboxField-input:not(:checked) {
+		~ .checkboxField-arrow {
+			display: none;
+		}
+	}
+}
+
+@mixin withArrowS {
+	padding-bottom: var(--spacings-XS);
+
+	.checkboxField-arrow {
+		@include box.arrowS;
+	}
 }

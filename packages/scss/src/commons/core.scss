@@ -7,7 +7,7 @@
 
 $contents: '0';
 $boxModel: 'margin', 'padding', 'border';
-$boxDirection: '', 'top', 'bottom', 'left', 'right';
+$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
 $corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
@@ -20,7 +20,7 @@ $basis: '0', 'auto';
 $order: '-1', '1';
 $textAlign: 'left', 'center', 'right';
 $visibility: 'visible', 'hidden', 'collapse';
-$fontWeight: '200', '300', '400', '500', '600', '700', '800', '900', 'normal', 'semibold', 'bold', 'black';
+$fontWeight: '400', '600', '700', '900', 'normal', 'semibold', 'bold', 'black';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
