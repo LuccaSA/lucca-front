@@ -8,7 +8,7 @@
 	[invalid]="ngControl.control.touched && ngControl.control.invalid"
 	[tooltip]="tooltip"
 >
-	<ng-template #textfieldAddon let-addon let-type="type">
+	<ng-template #textfieldAddon let-addon="addon" let-type="type">
 		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
 			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{addon.content}}</span>
 		</span>
@@ -19,19 +19,23 @@
 		</span>
 	</ng-template>
 
-	<ng-container
-		*ngTemplateOutlet="textfieldAddon; context:{
+	<ng-container *ngIf="prefix">
+		<ng-container
+			*ngTemplateOutlet="textfieldAddon; context:{
       type: 'prefix',
       addon: prefix
      }"
-	>
+		>
+		</ng-container>
 	</ng-container>
-	<ng-container
-		*ngTemplateOutlet="textfieldAddon; context:{
+	<ng-container *ngIf="suffix">
+		<ng-container
+			*ngTemplateOutlet="textfieldAddon; context:{
       type: 'suffix',
       addon: suffix
      }"
-	>
+		>
+		</ng-container>
 	</ng-container>
 	<div class="textField-input">
 		<input luInput [type]="type" [placeholder]="placeholder" [formControl]="ngControl.control" #inputElement />
