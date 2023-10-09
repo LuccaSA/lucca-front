@@ -5,7 +5,7 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextfieldAddon } from './textfield-addon';
-import { InlineMessageState } from '../../inline-message/inline-message-state';
+import { InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuccaIcon } from '@lucca-front/icons';
 import { AbstractFieldComponent } from '../abstract-field-component';
 import { SafeHtml } from '@angular/platform-browser';

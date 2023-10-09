@@ -1,12 +1,10 @@
 import { booleanAttribute, Component, Input } from '@angular/core';
-import { FormFieldComponent } from '../../form-field/form-field.component';
+import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
 import { AbstractFieldComponent } from '../abstract-field-component';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { InlineMessageState } from '../../inline-message/inline-message-state';
-import { FormFieldSize } from '../../form-field/form-field-size';
-import { InputDirective } from '../../form-field/input.directive';
+import { InlineMessageState } from '@lucca-front/ng/inline-message';
 import { NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 
 @Component({

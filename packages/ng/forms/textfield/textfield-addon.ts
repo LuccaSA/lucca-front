@@ -1,13 +1,11 @@
 import { LuccaIcon } from '@lucca-front/icons';
 
-export interface TextfieldIconAddon {
+export interface TextfieldAddon {
 	icon: LuccaIcon;
 	ariaLabel: string;
 }
 
-export interface TextfieldStringAddon {
+export interface TextfieldAddon {
 	content: string;
 	ariaLabel: string;
 }
-
-export type TextfieldAddon = TextfieldIconAddon | TextfieldStringAddon;

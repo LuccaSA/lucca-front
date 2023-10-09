@@ -1,5 +1,5 @@
 import { Directive, HostBinding, inject, Input, OnDestroy } from '@angular/core';
-import { FormFieldComponent } from '../form-field/form-field.component';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { filter, take } from 'rxjs/operators';
 
 @Directive({

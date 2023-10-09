@@ -3,10 +3,9 @@ import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angula
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
 import { BehaviorSubject } from 'rxjs';
-import { InlineMessageComponent } from '../inline-message/inline-message.component';
-import { InlineMessageState } from '../inline-message/inline-message-state';
+import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
-import { LuTooltipModule } from '../tooltip/tooltip.module';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 
 let nextId = 0;
