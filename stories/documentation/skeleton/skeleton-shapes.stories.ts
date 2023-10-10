@@ -8,9 +8,9 @@ export default {
 
 function getTemplate(args: SkeletonShapesStory): string {
 	return `
-	<div class="skeleton is-loading">
+	<div>
         <h2>Square Skeletons</h2>
-        <div class="u-displayFlex u-gapXS u-alignItemsCenter">
+        <div class="skeleton is-loading u-displayFlex u-gapXS u-alignItemsCenter">
             <span class="skeleton-item mod-square mod-XS"></span>
             <span class="skeleton-item mod-square mod-S"></span>
             <span class="skeleton-item mod-square"></span>
@@ -19,7 +19,7 @@ function getTemplate(args: SkeletonShapesStory): string {
             <span class="skeleton-item mod-square mod-XXL"></span>
         </div>
         <h2>Circle Skeletons</h2>
-        <div class="u-displayFlex u-gapXS u-alignItemsCenter">
+        <div class="skeleton is-loading mod-dark u-displayFlex u-gapXS u-alignItemsCenter">
             <span class="skeleton-item mod-circle mod-XS"></span>
             <span class="skeleton-item mod-circle mod-S"></span>
             <span class="skeleton-item mod-circle"></span>

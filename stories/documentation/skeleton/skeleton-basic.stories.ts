@@ -17,12 +17,12 @@ function getTemplate(args: SkeletonBasicStory): string {
 		<span class="skeleton-item u-textS"></span>
 		<span class="skeleton-item u-textXS"></span>
         <h2>h* Skeletons</h2>
-        <h1 class="skeleton-item"></h1>
-        <h2 class="skeleton-item"></h2>
-        <h3 class="skeleton-item"></h3>
-        <h4 class="skeleton-item"></h4>
-        <h5 class="skeleton-item"></h5>
-        <h6 class="skeleton-item"></h6>
+        <h1 class="skeleton-item mod-dark"></h1>
+        <h2 class="skeleton-item mod-dark"></h2>
+        <h3 class="skeleton-item mod-dark"></h3>
+        <h4 class="skeleton-item mod-dark"></h4>
+        <h5 class="skeleton-item mod-dark"></h5>
+        <h6 class="skeleton-item mod-dark"></h6>
         <h2>.u-h* Skeletons</h2>
         <span class="u-h1 skeleton-item"></span>
         <span class="u-h2 skeleton-item"></span>
