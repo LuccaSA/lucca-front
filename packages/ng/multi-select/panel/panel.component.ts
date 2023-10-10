@@ -72,8 +72,6 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 			setTimeout(() => this.searchInput.nativeElement.focus());
 		}
 
-		console.log(this.isExpanded);
-
 		if (this.isExpanded) {
 			this.panelRef.useExpandedPosition();
 		} else {
