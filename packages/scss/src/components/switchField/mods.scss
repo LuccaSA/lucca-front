@@ -8,14 +8,6 @@
 	--component-switchField-label-input-icon-fontSize: 0.75rem;
 	--component-switchField-label-fontSize: var(--sizes-S-fontSize);
 	--component-switchField-label-lineHeight: var(--sizes-S-lineHeight);
-
-	.formLabel {
-		@include formLabel.S;
-	}
-
-	.inlineMessage {
-		@include inlineMessage.S;
-	}
 }
 
 @mixin withArrow {

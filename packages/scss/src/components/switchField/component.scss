@@ -5,20 +5,10 @@
 
 @mixin component($atRoot: 'without: rule') {
 	position: relative;
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-column-gap: var(--spacings-XS);
-
-	// .arrow {
-	// 	@include arrow.switch;
-	// }
 
 	@at-root ($atRoot) {
-		.switchField-label {
-			display: contents;
-		}
-
-		.switchField-label-input {
+		.switchField-icon {
+			display: block;
 			width: var(--component-switchField-label-input-width);
 			height: var(--component-switchField-label-input-height);
 			border: 2px solid var(--palettes-grey-500);
@@ -30,10 +20,6 @@
 			transition-duration: var(--commons-animations-durations-fast);
 			background-color: var(--palettes-grey-500);
 			cursor: pointer;
-
-			@media (prefers-reduced-motion: reduce) {
-				transition-property: none;
-			}
 
 			&::after {
 				content: '';
@@ -59,7 +45,7 @@
 			}
 		}
 
-		.switchField-label-input-icon {
+		.switchField-icon-check {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -77,38 +63,31 @@
 			}
 		}
 
-		.formLabel {
-			grid-column: 2;
-		}
-
 		.switchField-input {
-			@include a11y.mask;
-
-			&:focus-visible {
-				~ .switchField-label {
-					.switchField-label-input {
-						&::after {
-							@include a11y.focusVisible();
-						}
-					}
-				}
-			}
+			position: absolute;
+			z-index: 1;
+			width: var(--component-switchField-label-input-width);
+			height: var(--component-switchField-label-input-height);
+			opacity: 0;
+			cursor: pointer;
 
 			&:hover {
-				~ .switchField-label {
-					.switchField-label-input {
-						border-color: var(--palettes-grey-400);
-						background-color: var(--palettes-grey-400);
-					}
+				~ .switchField-icon {
+					border-color: var(--palettes-grey-400);
+					background-color: var(--palettes-grey-400);
 				}
 			}
 
 			&:active {
-				~ .switchField-label {
-					.switchField-label-input {
-						border-color: var(--palettes-grey-600);
-						background-color: var(--palettes-grey-600);
-					}
+				~ .switchField-icon {
+					border-color: var(--palettes-grey-600);
+					background-color: var(--palettes-grey-600);
+				}
+			}
+
+			&:focus-visible {
+				~ .switchField-icon {
+					@include a11y.focusVisible();
 				}
 			}
 		}

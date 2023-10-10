@@ -1,119 +1,80 @@
-@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
-
 @mixin checked {
-  ~ .switchField-label {
-    .switchField-label-input {
-      background-color: var(--palettes-primary-700);
-      border-color: var(--palettes-primary-700);
+	~ .switchField-icon {
+		background-color: var(--palettes-primary-700);
+		border-color: var(--palettes-primary-700);
 
-      &::before {
-        left: 50%;
-      }
-    }
-  }
+		&::before {
+			left: 50%;
+		}
+	}
 
-  &:hover {
-    ~ .switchField-label {
-      .switchField-label-input {
-        background-color: var(--palettes-primary-600);
-        border-color: var(--palettes-primary-600);
-      }
-    }
-  }
+	&:hover {
+		~ .switchField-icon {
+			background-color: var(--palettes-primary-600);
+			border-color: var(--palettes-primary-600);
+		}
+	}
 
-  &:active {
-    ~ .switchField-label {
-      .switchField-label-input {
-        background-color: var(--palettes-primary-800);
-        border-color: var(--palettes-primary-800);
-      }
-    }
-  }
+	&:active {
+		~ .switchField-icon {
+			background-color: var(--palettes-primary-800);
+			border-color: var(--palettes-primary-800);
+		}
+	}
 }
 
 @mixin disabled {
-  ~ .switchField-label {
-    color: var(--palettes-grey-500);
+	~ .switchField-icon {
+		background-color: var(--palettes-grey-100);
+		border-color: var(--palettes-grey-100);
+		color: var(--palettes-grey-500);
 
-    .switchField-label-input {
-      background-color: var(--palettes-grey-100);
-      border-color: var(--palettes-grey-100);
-      color: var(--palettes-grey-500);
-
-      &::before {
-        background-color: var(--palettes-grey-500);
-      }
-    }
-
-    .switchField-label-input {
-      cursor: default;
-    }
-
-    .formLabel {
-      @include formLabel.disabled;
-    }
-  }
-
-  ~ .inlineMessage {
-    @include inlineMessage.disabled;
-  }
+		&::before {
+			background-color: var(--palettes-grey-500);
+		}
+	}
 }
 
 @mixin checkedDisabled {
-  &:disabled {
-    ~ .switchField-label {
-      .switchField-label-input {
-        background-color: var(--palettes-grey-100);
-        border-color: var(--palettes-grey-100);
-        color: var(--palettes-grey-500);
+	&:disabled {
+		~ .switchField-icon {
+			background-color: var(--palettes-grey-100);
+			border-color: var(--palettes-grey-100);
+			color: var(--palettes-grey-500);
 
-        &::before {
-          background-color: var(--palettes-grey-500);
-        }
-      }
-    }
-  }
+			&::before {
+				background-color: var(--palettes-grey-500);
+			}
+		}
+	}
 }
 
 @mixin invalid {
-  ~ .switchField-label {
-    .switchField-label-input {
-      background-color: var(--palettes-error-700);
-      border-color: var(--palettes-error-700);
-    }
+	~ .switchField-icon {
+		background-color: var(--palettes-error-700);
+		border-color: var(--palettes-error-700);
+	}
 
-    .formLabel {
-      @include formLabel.error;
-    }
-  }
+	&:hover {
+		~ .switchField-icon {
+			background-color: var(--palettes-error-600);
+			border-color: var(--palettes-error-600);
+		}
+	}
 
-  &:hover {
-    ~ .switchField-label {
-      .switchField-label-input {
-        background-color: var(--palettes-error-600);
-        border-color: var(--palettes-error-600);
-      }
-    }
-  }
-
-  &:active {
-    ~ .switchField-label {
-      .switchField-label-input {
-        background-color: var(--palettes-error-800);
-        border-color: var(--palettes-error-800);
-      }
-    }
-  }
+	&:active {
+		~ .switchField-icon {
+			background-color: var(--palettes-error-800);
+			border-color: var(--palettes-error-800);
+		}
+	}
 }
 
 @mixin checkedInvalid {
-  &:checked {
-    ~ .switchField-label {
-      .switchField-label-input {
-        background-color: var(--palettes-error-700);
-        border-color: var(--palettes-error-700);
-      }
-    }
-  }
+	&:checked {
+		~ .switchField-icon {
+			background-color: var(--palettes-error-700);
+			border-color: var(--palettes-error-700);
+		}
+	}
 }
