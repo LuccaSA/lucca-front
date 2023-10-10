@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { InlineMessageState } from './inline-message-state';
+import { NgClazz } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
 	imports: [NgIf],
-	hostDirectives: [NgClass],
+	hostDirectives: [NgClazz],
 	templateUrl: './inline-message.component.html',
 	styleUrls: ['./inline-message.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InlineMessageComponent implements OnChanges {
-	#ngClass = inject(NgClass);
+	#ngClass = inject(NgClazz);
 
 	@Input({ required: true })
 	label: string;
