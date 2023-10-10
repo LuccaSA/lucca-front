@@ -9,6 +9,7 @@
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
+	@include core.cssvars('palettes-lucca', config.$lucca);
 	@include core.cssvars('palettes-primary', config.$primary);
 	@include core.cssvars('palettes-secondary', config.$secondary);
 	@include core.cssvars('palettes-grey', config.$grey);
@@ -16,6 +17,18 @@
 	@include core.cssvars('palettes-success', config.$success);
 	@include core.cssvars('palettes-warning', config.$warning);
 	@include core.cssvars('palettes-error', config.$error);
+	@include core.cssvars('palettes-kiwi', config.$kiwi);
+	@include core.cssvars('palettes-lime', config.$lime);
+	@include core.cssvars('palettes-cucumber', config.$cucumber);
+	@include core.cssvars('palettes-mint', config.$mint);
+	@include core.cssvars('palettes-glacier', config.$glacier);
+	@include core.cssvars('palettes-lagoon', config.$lagoon);
+	@include core.cssvars('palettes-blueberry', config.$blueberry);
+	@include core.cssvars('palettes-lavender', config.$lavender);
+	@include core.cssvars('palettes-grape', config.$grape);
+	@include core.cssvars('palettes-watermelon', config.$watermelon);
+	@include core.cssvars('palettes-pumpkin', config.$pumpkin);
+	@include core.cssvars('palettes-pineapple', config.$pineapple);
 
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 	@include core.cssvars('spacings', config.$spacings);
@@ -30,7 +43,7 @@
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
-	--commons-background-base: #f5f5f5;
+	--commons-background-base: var(--palettes-grey-25);
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-divider-width: 1px;

@@ -1,5 +1,5 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { BehaviorSubject, catchError, combineLatest, concatMap, debounceTime, Observable, of, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
 
 export const MAGIC_PAGE_SIZE = 20;
@@ -11,7 +11,7 @@ export abstract class ALuSimpleSelectApiDirective<TOption, TParams = Record<stri
 	protected pageSize = MAGIC_PAGE_SIZE;
 	protected debounceDuration = MAGIC_DEBOUNCE_DURATION;
 
-	protected select = inject<LuSimpleSelectInputComponent<TOption>>(LuSimpleSelectInputComponent);
+	protected select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
 
 	protected page$ = this.select.nextPage.pipe(
 		scan((page) => page + 1, 0),

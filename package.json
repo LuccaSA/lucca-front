@@ -31,7 +31,8 @@
     "build-compodoc": "compodoc -p ./tsconfig.compodoc-html.json -d compodoc-static",
     "build-storybook": "ng run ng:build-storybook",
     "lint": "ng lint",
-    "lint:scss": "stylelint --config .stylelintrc packages/scss/src/**/*.scss"
+    "lint:scss": "stylelint --config .stylelintrc packages/scss/src/**/*.scss",
+    "icons:update": "node ./packages/icons/update-icons.js"
   },
   "dependencies": {
     "@angular/animations": "^16.1.3",

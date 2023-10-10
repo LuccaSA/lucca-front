@@ -1,7 +1,7 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, inject, Injectable, Provider } from '@angular/core';
+import { ElementRef, Injectable, Provider, inject } from '@angular/core';
 import { SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
 let selectId = 0;
@@ -52,13 +52,13 @@ class LuSelectOverlayContainer extends OverlayContainer {
 	protected override _createContainer(): void {
 		super._createContainer();
 		this._containerElement.setAttribute('aria-labelledby', this.selectLabelId);
-		this._containerElement.setAttribute('role', 'listbox');
 		this._containerElement.id = `lu-select-overlay-container-${this.selectId}`;
 	}
 }
 
 export function provideLuSelectOverlayContainer(): Provider[] {
 	return [
+		Overlay,
 		{
 			provide: OverlayContainer,
 			useClass: LuSelectOverlayContainer,

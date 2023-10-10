@@ -1,0 +1,23 @@
+@mixin XS {
+  --icon-size:  1rem;
+}
+
+@mixin S {
+  --icon-size:  1.25rem;
+}
+
+@mixin M {
+  --icon-size:  1.5rem;
+}
+
+@mixin L {
+  --icon-size:  1.75rem;
+}
+
+@mixin XL {
+  --icon-size:  2rem;
+}
+
+@mixin XXL {
+  --icon-size:  2.5rem;
+}

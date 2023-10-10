@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin S {
 	--component-checkboxField-label-input-size: 1rem;
@@ -14,5 +15,27 @@
 
 	.inlineMessage {
 		@include inlineMessage.S;
+	}
+}
+
+@mixin withArrow {
+	padding-bottom: var(--spacings-S);
+
+	.checkboxField-arrow {
+		@include box.arrow;
+	}
+
+	.checkboxField-input:not(:checked) {
+		~ .checkboxField-arrow {
+			display: none;
+		}
+	}
+}
+
+@mixin withArrowS {
+	padding-bottom: var(--spacings-XS);
+
+	.checkboxField-arrow {
+		@include box.arrowS;
 	}
 }

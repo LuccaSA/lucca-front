@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.fieldset {
+	@include vars;
+	@include component;
+
+	&.mod-horizontal {
+		@include horizontal;
+	}
+
+	&.mod-expandable {
+		@include expandable;
+	}
+}

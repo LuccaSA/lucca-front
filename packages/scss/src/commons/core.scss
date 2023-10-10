@@ -7,7 +7,7 @@
 
 $contents: '0';
 $boxModel: 'margin', 'padding', 'border';
-$boxDirection: '', 'top', 'bottom', 'left', 'right';
+$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
 $corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
@@ -20,7 +20,7 @@ $basis: '0', 'auto';
 $order: '-1', '1';
 $textAlign: 'left', 'center', 'right';
 $visibility: 'visible', 'hidden', 'collapse';
-$fontWeight: '200', '300', '400', '500', '600', '700', '800', '900', 'normal', 'semibold', 'bold', 'black';
+$fontWeight: '400', '600', '700', '900', 'normal', 'semibold', 'bold', 'black';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
@@ -29,6 +29,7 @@ $float: 'left', 'right';
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
+$overflow: 'hidden', 'auto', 'visible', 'scroll';
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {
@@ -99,7 +100,7 @@ $decoration: 'underline', 'line-through', 'none';
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
 			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-				border-#{$corner}radius: $value;
+				border-#{$corner}radius: $value #{$suffix};
 			}
 		}
 	}
