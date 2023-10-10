@@ -7,4 +7,5 @@ import { NgClass } from '@angular/common';
 	selector: '[ngClazz]',
 	standalone: true,
 })
-export class NgClazzDirective extends NgClass {}
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
+export class NgClazz extends NgClass {}
