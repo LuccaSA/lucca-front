@@ -2,18 +2,17 @@ const selection = require('./selection.json');
 const { writeFileSync } = require('fs');
 const { join } = require('path');
 
-const generatedWarning =
-`/***********************************************
+const generatedWarning = `/***********************************************
  ***		THIS FILE IS GENERATED, DO NOT EDIT		***
  ***		The generator is update-icons.js			***
- ***********************************************/\n\n`
+ ***********************************************/\n\n`;
 
 const icons = selection.icons
 	.map((icon) => {
 		return icon.properties.name.split(', ').map((name) => {
 			// Let's convert snake_case to camelCase for css to be happy with it
 			return {
-				snake_case: name.replace(/-/gm, "_"),
+				snake_case: name.replace(/-/gm, '_'),
 				code: `\\${icon.properties.code.toString(16)}`,
 				camelCase: name
 					.split('-')
@@ -37,7 +36,7 @@ const list = `${generatedWarning}export const IconsList = [\n\t${icons.map((icon
 
 writeFileSync(join(__dirname, './icons-list.ts'), list);
 
-const scssConfig = `${generatedWarning}$font-path: '//cdn.lucca.fr/lucca-front/icons/next/lucca-icons' !default;
+const scssConfig = `${generatedWarning}$font-path: '//cdn.lucca.fr/lucca-front/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 
 $icons: (
