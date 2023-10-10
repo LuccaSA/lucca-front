@@ -7,6 +7,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { BehaviorSubject, first, ReplaySubject } from 'rxjs';
 import { LuSimpleSelectApiV3Directive } from './api-v3.directive';
 import { MAGIC_DEBOUNCE_DURATION, MAGIC_PAGE_SIZE } from './api.directive';
+import { ALuSelectInputComponent } from '../../core-select/input';
 
 const itemsMocks = Array.from({ length: MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 
@@ -25,7 +26,15 @@ describe('SimpleSelectApiV3Directive', () => {
 		} as LuSimpleSelectInputComponent<ILuApiItem>;
 
 		TestBed.configureTestingModule({
-			providers: [LuSimpleSelectApiV3Directive, { provide: LuSimpleSelectInputComponent, useValue: selectMock }, provideHttpClient(), provideHttpClientTesting()],
+			providers: [
+				LuSimpleSelectApiV3Directive,
+				{
+					provide: ALuSelectInputComponent,
+					useValue: selectMock,
+				},
+				provideHttpClient(),
+				provideHttpClientTesting(),
+			],
 		});
 
 		directive = TestBed.inject<LuSimpleSelectApiV3Directive<ILuApiItem>>(LuSimpleSelectApiV3Directive);
