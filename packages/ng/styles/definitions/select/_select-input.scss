@@ -4,8 +4,6 @@
 
 @mixin selectInputStyle {
 	:host {
-		--components-select-chip-background: var(--palettes-primary-700);
-		--components-select-chip-text: var(--colors-white-color);
 		--components-select-input-padding-horizontal: var(--spacings-XS);
 		--components-select-input-padding-vertical: var(--spacings-XS);
 		--components-select-framed-color: var(--palettes-grey-500);
@@ -35,21 +33,17 @@
 			right: var(--components-select-input-padding-horizontal);
 		}
 
-		&[disabled] {
-			cursor: not-allowed;
-			pointer-events: all;
-		}
-
-		&.is-disabled {
+		&[disabled], &.is-disabled {
 			cursor: not-allowed;
 			pointer-events: all;
 		}
 	}
 
 	.lu-select-display-wrapper {
-		overflow: hidden;
+		display: flex;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		gap: var(--spacings-XXS);
 	}
 
 	.lu-select-value {
@@ -86,19 +80,21 @@
 	}
 
 	::ng-deep .lu-select-value {
+
+		lu-simple-select-default-option {
+			max-width: 5rem;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
 		.label {
 			padding: var(--spacings-XXS) var(--spacings-XS);
 			margin-left: 0;
 		}
 
 		.chip {
-			background-color: var(--components-select-chip-background);
-			color: var(--components-select-chip-text);
 			vertical-align: baseline;
 			max-width: 100%;
-			height: var(--sizes-M-lineHeight);
-			line-height: var(--sizes-M-lineHeight);
-			padding: 0 var(--spacings-XS);
 			margin: 0 var(--spacings-XXS) var(--spacings-XXS) 0;
 			text-overflow: ellipsis;
 			overflow: hidden;
@@ -150,6 +146,9 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
+				padding-left: var(--spacings-XXS);
+				padding-right: var(--spacings-XXS);
+				gap: var(--spacings-XXS);
 			}
 
 			.numericBadge {
@@ -248,7 +247,7 @@
 		}
 
 		.lu-select-display-wrapper {
-			overflow: hidden;
+			overflow: visible;
 			white-space: normal;
 			margin-bottom: calc(var(--spacings-XXS) * -1);
 		}
