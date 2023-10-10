@@ -96,10 +96,10 @@ export function updateCSSClassNamesInRules(root: Root, mappingOldToNew: Record<s
 			/**
 			 * In sass we can do such a thing:
 			 * .foo {
-			 * 		padding: {
-			 * 			top: 10px;
-			 * 			bottom: 10px;
-			 * 		}
+			 *    padding: {
+			 *      top: 10px;
+			 *      bottom: 10px;
+			 *    }
 			 * }
 			 * "padding:" is considered as a rule but its selector cannot be parsed using postScssSelectorParser
 			 */
@@ -233,10 +233,10 @@ export function wrapWithCalcFunctionNode(rootValueNode: ScssValueAst, node: Valu
 	}
 }
 
-function split<T>(array: readonly T[], predicate: (item: T) => boolean): { chunks: readonly T[][]; separators: readonly T[] } {
-	const chunks: readonly T[][] = [];
-	const separators: readonly T[] = [];
-	let current: readonly T[] = [];
+function split<T>(array: T[], predicate: (item: T) => boolean): { chunks: T[][]; separators: T[] } {
+	const chunks: T[][] = [];
+	const separators: T[] = [];
+	let current: T[] = [];
 
 	for (const item of array) {
 		if (predicate(item)) {
@@ -253,6 +253,6 @@ function split<T>(array: readonly T[], predicate: (item: T) => boolean): { chunk
 	return { chunks, separators };
 }
 
-function join<T>(array: readonly T[][], separators: readonly T[]): readonly T[] {
+function join<T>(array: T[][], separators: T[]): T[] {
 	return array.reduce((acc, chunk, index) => (index === 0 ? chunk : [...acc, separators[index - 1], ...chunk]), []);
 }
