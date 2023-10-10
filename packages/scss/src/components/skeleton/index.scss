@@ -8,22 +8,19 @@
 		@include dark;
 	}
 
-	.skeleton-item {
-		@include skeletonTextSizing('XS', 'S', 'L', 'XL', 'XXL');
-		@include skeletonTitleSizing('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
-		// .mod-dark can be applied to .skeleton or .skeleton-item
-		&.mod-dark {
-			@include dark;
-		}
-		&.mod-square {
-			@include square;
-		}
-		&.mod-circle {
-			@include circle;
-		}
-	}
-
 	&.is-loading {
 		@include loading;
+		.skeleton-item {
+			// .mod-dark can be applied to .skeleton or .skeleton-item
+			&.mod-dark {
+				@include dark;
+			}
+			&.mod-square {
+				@include square;
+			}
+			&.mod-circle {
+				@include circle;
+			}
+		}
 	}
 }
