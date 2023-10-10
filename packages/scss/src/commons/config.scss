@@ -103,9 +103,9 @@ $error: (
 $grey: (
 	text: #ffffff,
 	25: #f3f6fc,
-	50: #ebf0fa,
-	100: #e0e7f6,
-	200: #d2dcef,
+	50: #e7edf9,
+	100: #dbe3f5,
+	200: #ced9ee,
 	300: #becbe4,
 	400: #acbbd7,
 	500: #96a6c5,
@@ -305,7 +305,7 @@ $boxShadows: (
 	'XL':
 		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
 	'XXL':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)'
+		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
 );
 
 $disabled: (
