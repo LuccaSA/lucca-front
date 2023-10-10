@@ -96,10 +96,10 @@ export function updateCSSClassNamesInRules(root: Root, mappingOldToNew: Record<s
 			/**
 			 * In sass we can do such a thing:
 			 * .foo {
-			 * 		padding: {
-			 * 			top: 10px;
-			 * 			bottom: 10px;
-			 * 		}
+			 *    padding: {
+			 *      top: 10px;
+			 *      bottom: 10px;
+			 *    }
 			 * }
 			 * "padding:" is considered as a rule but its selector cannot be parsed using postScssSelectorParser
 			 */

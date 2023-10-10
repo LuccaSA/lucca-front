@@ -61,8 +61,8 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 			return;
 		}
 		const allChildren = option.allChildren.map((i) => i.value);
-		const values = <T[]>this._value || [];
-		let newValues: T[];
+		const values = <readonly T[]>this._value || [];
+		let newValues: readonly T[];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
 		const allChildrenSelected = allChildren.every((child) => values.some((v) => this.optionComparer(v, child)));
 		if (selfSelected && allChildrenSelected) {
@@ -81,7 +81,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 			return;
 		}
 		const allChildren = option.allChildren.map((i) => i.value);
-		const values = <T[]>this._value || [];
+		const values = <readonly T[]>this._value || [];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
 		const someChildSelected = allChildren.some((child) => values.some((v) => this.optionComparer(v, child)));
 
@@ -102,7 +102,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 			return;
 		}
 		const allChildren = option.allChildren.map((i) => i.value);
-		const values = <T[]>this._value || [];
+		const values = <readonly T[]>this._value || [];
 		const selfSelected = values.some((v) => this.optionComparer(v, value));
 		let newValues = this._remove(values, [value]);
 		const allChildrenSelected = allChildren.every((child) => values.some((v) => this.optionComparer(v, child)));
@@ -113,11 +113,11 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		}
 		this._select(newValues);
 	}
-	protected _add(values: T[], entries: T[]): T[] {
+	protected _add(values: readonly T[], entries: readonly T[]): readonly T[] {
 		const newEntries = entries.filter((entry) => !values.some((v) => this.optionComparer(v, entry)));
 		return [...values, ...newEntries];
 	}
-	protected _remove(values: T[], entries: T[]): T[] {
+	protected _remove(values: readonly T[], entries: readonly T[]): readonly T[] {
 		const entriesToKeep = values.filter((value) => !entries.some((e) => this.optionComparer(e, value)));
 		return [...entriesToKeep];
 	}

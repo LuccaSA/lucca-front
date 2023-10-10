@@ -1,4 +1,4 @@
-import { CommonModule, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, StoryObj } from '@storybook/angular';
@@ -12,7 +12,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	templateUrl: './icon-basic.stories.html',
 })
 class IconStory {
-	icons: string[] = IconsList;
+	icons: readonly string[] = IconsList;
 	filter = '';
 
 	public updateIcons(filter: string) {

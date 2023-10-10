@@ -27,11 +27,11 @@ import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 })
 export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> implements ILuTreeOptionSelector<T> {
 	multiple = true;
-	onSelectValue = new Subject<T | T[]>();
-	private _values: T[];
+	onSelectValue = new Subject<T | readonly T[]>();
+	private _values: readonly T[];
 
 	@HostBinding('class.position-fixed') fixed = true;
-	flatOptions: T[];
+	flatOptions: readonly T[];
 	outOptions$: Observable<ILuTree<T>[]>;
 	set inOptions$(in$: Observable<ILuTree<T>[]>) {
 		this.outOptions$ = in$.pipe(tap((options) => (this.flatOptions = this.flattenTree(options))));
@@ -45,11 +45,11 @@ export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> 
 	deselectAll() {
 		this.onSelectValue.next([]);
 	}
-	setValue(values: T | T[]): void {
-		this._values = values as T[];
+	setValue(values: T | readonly T[]): void {
+		this._values = values as readonly T[];
 	}
 
-	private flattenTree(tree: ILuTree<T>[] = []): T[] {
+	private flattenTree(tree: ILuTree<T>[] = []): readonly T[] {
 		return tree.map((t) => [t.value, ...this.flattenTree(t.children)]).reduce((agg, cur) => [...agg, ...cur], []);
 	}
 }

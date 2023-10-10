@@ -15,7 +15,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	],
 })
 export class LuForOptionsDirective<T> extends NgForOf<T> implements ILuOptionOperator<T>, OnDestroy {
-	outOptions$;
+	outOptions$: Observable<T[]>;
 	protected _subs = new Subscription();
 	set inOptions$(options$: Observable<T[]>) {
 		this._subs.add(

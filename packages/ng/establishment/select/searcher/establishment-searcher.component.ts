@@ -44,13 +44,13 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 	],
 })
 export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOptionOperator<ILuEstablishment> {
-	@Input() set filters(filters: string[]) {
+	@Input() set filters(filters: readonly string[]) {
 		this._service.filters = filters;
 	}
 	@Input() set appInstanceId(appId: number) {
 		this._service.appInstanceId = appId;
 	}
-	@Input() set operations(ops: number[]) {
+	@Input() set operations(ops: readonly number[]) {
 		this._service.operations = ops;
 	}
 	@Input() set sort(sort: string) {

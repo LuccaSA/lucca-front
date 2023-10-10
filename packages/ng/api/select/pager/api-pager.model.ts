@@ -11,17 +11,17 @@ enum Strategy {
 }
 export type ILuApiOptionPager<T extends ILuApiItem = ILuApiItem> = ILuOptionOperator<T>;
 export interface ILuApiPagerService<T extends ILuApiItem = ILuApiItem> {
-	getPaged(page: number): Observable<T[]>;
+	getPaged(page: number): Observable<readonly T[]>;
 }
 
 export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 	implements ILuApiOptionPager<T>, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber
 {
-	outOptions$ = new Subject<T[]>();
+	outOptions$ = new Subject<readonly T[]>();
 	loading$: Observable<boolean>;
 
 	protected _loading = false;
-	protected _results$: Observable<{ items: T[]; strategy: Strategy }>;
+	protected _results$: Observable<{ items: readonly T[]; strategy: Strategy }>;
 	protected _options: T[] = [];
 	protected _page$ = new Subject<number>();
 	protected _page: number;
@@ -45,12 +45,12 @@ export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S ext
 		}
 	}
 	protected initObservables() {
-		const _results$: Observable<{ items: T[]; strategy: Strategy }> = this._page$.pipe(
+		const _results$: Observable<{ items: readonly T[]; strategy: Strategy }> = this._page$.pipe(
 			distinctUntilChanged(),
 			tap((p) => (this._page = p)),
 			switchMap((page) => {
 				if (page === undefined) {
-					return of({ items: [] as T[], strategy: Strategy.replace });
+					return of({ items: [] as readonly T[], strategy: Strategy.replace });
 				}
 				return this._service.getPaged(page).pipe(
 					map((items) => ({
@@ -59,7 +59,7 @@ export abstract class ALuApiOptionPager<T extends ILuApiItem = ILuApiItem, S ext
 					})),
 				);
 			}),
-			catchError(() => of({ items: [] as T[], strategy: Strategy.replace })),
+			catchError(() => of({ items: [] as readonly T[], strategy: Strategy.replace })),
 			tap((results) => {
 				if (results.strategy === Strategy.replace) {
 					this._options = [...results.items];

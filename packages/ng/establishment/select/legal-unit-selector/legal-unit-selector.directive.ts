@@ -27,15 +27,19 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 	private _subs = new Subscription();
 
 	@Input('luLegalUnitSelector') legalUnit: ILuLegalUnit;
-	@Input('luLegalUnitSelectorFilters') set filters(filters: string[]) {
+
+	@Input('luLegalUnitSelectorFilters') set filters(filters: readonly string[]) {
 		this._service.filters = filters;
 	}
+
 	@Input('luLegalUnitSelectorAppInstanceId') set appInstanceId(appId: number) {
 		this._service.appInstanceId = appId;
 	}
-	@Input('luLegalUnitSelectorOperations') set operations(ops: number[]) {
+
+	@Input('luLegalUnitSelectorOperations') set operations(ops: readonly number[]) {
 		this._service.operations = ops;
 	}
+
 	constructor(
 		@Inject(ALuEstablishmentService)
 		@Optional()

@@ -58,8 +58,8 @@ export class LuDepartmentSelectInputComponent<
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	@Input() appInstanceId: number | string;
-	@Input() operations: number[];
-	@Input() filters: string[];
+	@Input() operations: readonly number[];
+	@Input() filters: readonly string[];
 
 	public intl = getIntl(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS);
 

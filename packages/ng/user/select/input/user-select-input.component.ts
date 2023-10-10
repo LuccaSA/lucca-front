@@ -56,10 +56,10 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	}
 
 	@Input() fields: string;
-	@Input() filters: string[];
+	@Input() filters: readonly string[];
 	@Input() orderBy: string;
 	@Input() appInstanceId: number | string;
-	@Input() operations: number[];
+	@Input() operations: readonly number[];
 	@Input() enableFormerEmployees = false;
 
 	clue = '';

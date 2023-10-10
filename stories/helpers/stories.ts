@@ -4,7 +4,7 @@ export interface StoryGeneratorArgs<TComponent> {
 	name: string;
 	description: string;
 	template: string;
-	neededImports?: { [key: string]: string[] };
+	neededImports?: { [key: string]: readonly string[] };
 	storyPartial?: Partial<StoryObj<TComponent>>;
 	code?: string;
 	codeLang?: string;

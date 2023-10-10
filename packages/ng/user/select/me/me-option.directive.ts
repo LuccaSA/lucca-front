@@ -31,7 +31,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	@Input() set luUserMeOptionFields(fields: string) {
 		this._service.fields = fields;
 	}
-	@Input() set luUserMeOptionFilters(filters: string[]) {
+	@Input() set luUserMeOptionFilters(filters: readonly string[]) {
 		this._service.filters = filters;
 	}
 	@Input() set luUserMeOptionOrderBy(orderBy: string) {
@@ -40,7 +40,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 	@Input() set luUserMeOptionAppInstanceId(appInstanceId: number | string) {
 		this._service.appInstanceId = appInstanceId;
 	}
-	@Input() set luUserMeOptionOperations(operations: number[]) {
+	@Input() set luUserMeOptionOperations(operations: readonly number[]) {
 		this._service.operations = operations;
 	}
 	@Input() set luUserMeOptionClue(clue: string) {

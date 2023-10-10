@@ -110,7 +110,7 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	}
 
 	/** Classes to be passed into the popover's overlay */
-	protected _overlayPaneClass: string | string[];
+	protected _overlayPaneClass: string | readonly string[];
 	public get overlayPaneClass() {
 		return this._overlayPaneClass;
 	}

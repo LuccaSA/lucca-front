@@ -9,9 +9,9 @@ export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 
 export abstract class ALuOptionPicker<T, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	protected _subs = new Subscription();
-	override onSelectValue: Observable<T | T[]>;
-	protected _value: T | T[];
-	setValue(value: T | T[]) {
+	override onSelectValue: Observable<T | readonly T[]>;
+	protected _value: T | readonly T[];
+	setValue(value: T | readonly T[]) {
 		this._value = value;
 		this._applySelected();
 	}
@@ -38,8 +38,8 @@ export abstract class ALuOptionPicker<T, O extends ILuOptionItem<T> = ILuOptionI
 		if (!this.multiple) {
 			this._select(value);
 		} else {
-			const values = <T[]>this._value || [];
-			let newValues: T[];
+			const values = <readonly T[]>this._value || [];
+			let newValues: readonly T[];
 			if (values.some((v) => this.optionComparer(v, value))) {
 				// value was present, we remove it
 				newValues = values.filter((v) => !this.optionComparer(v, value));
@@ -51,7 +51,7 @@ export abstract class ALuOptionPicker<T, O extends ILuOptionItem<T> = ILuOptionI
 		}
 	}
 
-	protected _select(val: T | T[]) {
+	protected _select(val: T | readonly T[]) {
 		this._emitSelectValue(val);
 		if (!this.multiple) {
 			this._emitCloseEvent();
@@ -75,5 +75,5 @@ export abstract class ALuOptionPicker<T, O extends ILuOptionItem<T> = ILuOptionI
 		}
 	}
 
-	protected abstract _emitSelectValue(value: T | T[]);
+	protected abstract _emitSelectValue(value: T | readonly T[]);
 }

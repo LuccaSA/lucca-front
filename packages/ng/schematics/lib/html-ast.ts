@@ -82,7 +82,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		}
 
 		visitedAttributes.add(classAttr);
-		const classes: string[] = classAttr.value.split(' ');
+		const classes: readonly string[] = classAttr.value.split(' ');
 
 		if (classes.some((cl) => cssClassesToUpdate.has(cl)) && offset !== undefined) {
 			updates.push({
@@ -143,7 +143,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 	return applyUpdates(content, updates);
 }
 
-export function extractAllCssClassNames(content: string, lib: AngularCompilerLib): string[] {
+export function extractAllCssClassNames(content: string, lib: AngularCompilerLib): readonly string[] {
 	const allClasses = new Set<string>();
 	const root = new HtmlAst(content, lib);
 
@@ -158,7 +158,7 @@ export function extractAllCssClassNames(content: string, lib: AngularCompilerLib
 	return [...allClasses];
 }
 
-export function extractAllHtmlElementNames(content: string, lib: AngularCompilerLib): string[] {
+export function extractAllHtmlElementNames(content: string, lib: AngularCompilerLib): readonly string[] {
 	const allElements = new Set<string>();
 	const root = new HtmlAst(content, lib);
 

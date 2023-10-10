@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { shameScss, stylesScss } from './file-content';
 
 // custom to make TS happy
-type AngularProject = { architect: { build: { options: { stylePreprocessorOptions: { includePaths: string[] } } } } };
+type AngularProject = { architect: { build: { options: { stylePreprocessorOptions: { includePaths: readonly string[] } } } } };
 type AngularJsonSchema = { defaultProject: string; projects: Record<string, AngularProject> };
 
 const files = {
