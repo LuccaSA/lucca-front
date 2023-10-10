@@ -49,19 +49,19 @@
 					</div>
 				</ng-container>
 
-				<ng-container *ngIf="canSelectAll">
-					<label class="checkbox lu-multiselect-selectall" role="option" [for]="selectId + '-select-all'">
-						<input
-							class="checkbox-input"
-							type="checkbox"
-							[class.is-incomplete]="(areAllOptionsSelected$ | async) !== true && selectedOptions.length"
-							[id]="selectId + '-select-all'"
-							[ngModel]="(areAllOptionsSelected$ | async) === true || !!selectedOptions.length"
-							(ngModelChange)="toggleAll($event)"
-						/>
-						<span class="checkbox-label">{{ intl.selectAll }}</span>
-					</label>
-				</ng-container>
+				<!--				<ng-container *ngIf="canSelectAll">-->
+				<!--					<label class="checkbox lu-multiselect-selectall" role="option" [for]="selectId + '-select-all'">-->
+				<!--						<input-->
+				<!--							class="checkbox-input"-->
+				<!--							type="checkbox"-->
+				<!--							[class.is-incomplete]="(areAllOptionsSelected$ | async) !== true && selectedOptions.length"-->
+				<!--							[id]="selectId + '-select-all'"-->
+				<!--							[ngModel]="(areAllOptionsSelected$ | async) === true || !!selectedOptions.length"-->
+				<!--							(ngModelChange)="toggleAll($event)"-->
+				<!--						/>-->
+				<!--						<span class="checkbox-label">{{ intl.selectAll }}</span>-->
+				<!--					</label>-->
+				<!--				</ng-container>-->
 
 				<div class="lu-picker-content-option">
 					<lu-select-option
@@ -87,9 +87,7 @@
 				</div>
 			</div>
 			<div *ngIf="selectedOptions.length" class="lu-multiselect-panel-columns-col2-footer">
-				<button class="button mod-text" type="button" (click)="clear()">
-					{{ intl.clear }}
-				</button>
+				<button class="button mod-text" type="button" (click)="clear()">{{ intl.clear }}</button>
 			</div>
 		</div>
 	</div>
