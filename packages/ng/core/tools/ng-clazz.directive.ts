@@ -7,4 +7,4 @@ import { NgClass } from '@angular/common';
 	selector: '[ngClazz]',
 	standalone: true,
 })
-export class NgClazz extends NgClass {}
+export class NgClazzDirective extends NgClass {}
