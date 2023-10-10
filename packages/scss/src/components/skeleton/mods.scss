@@ -1,31 +1,27 @@
 @mixin dark {
-	--skeleton-gradient-step-one: var(--palettes-grey-200);
-	--skeleton-gradient-step-two: var(--palettes-grey-500);
+	--component-skeleton-gradient-step-one: var(--palettes-grey-200);
+	--component-skeleton-gradient-step-two: var(--palettes-grey-500);
 }
 
 @mixin skeletonShapeSizing($spacings...) {
 	@each $spacing in $spacings {
 		&.mod-#{$spacing} {
-			--skeleton-shape-height: var(--spacings-#{$spacing});
-			--skeleton-shape-width: var(--spacings-#{$spacing});
+			--component-skeleton-shape-height: var(--spacings-#{$spacing});
+			--component-skeleton-shape-width: var(--spacings-#{$spacing});
 		}
 	}
 }
 
 @mixin square {
 	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
-	--skeleton-shape-height: var(--spacings-M);
-	--skeleton-shape-width: var(--spacings-M);
 	border-radius: var(--commons-borderRadius-M);
-	height: var(--skeleton-shape-height);
-	width: var(--skeleton-shape-width);
+	height: var(--component-skeleton-shape-height);
+	width: var(--component-skeleton-shape-width);
 }
 
 @mixin circle {
 	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
-	--skeleton-shape-height: var(--spacings-M);
-	--skeleton-shape-width: var(--spacings-M);
 	border-radius: 50%;
-	height: var(--skeleton-shape-height);
-	width: var(--skeleton-shape-width);
+	height: var(--component-skeleton-shape-height);
+	width: var(--component-skeleton-shape-width);
 }

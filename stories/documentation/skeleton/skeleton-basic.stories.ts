@@ -10,7 +10,7 @@ function getTemplate(args: SkeletonBasicStory): string {
 	return `
 	<div class="skeleton is-loading">
         <h2>.u-text* Skeletons</h2>
-		<span class="skeleton-item u-textXXL" style="--skeleton-width: 50%;"></span>
+		<span class="skeleton-item u-textXXL" style="--component-skeleton-text-width: 50%;"></span>
 		<span class="skeleton-item u-textXL"></span>
 		<span class="skeleton-item u-textL"></span>
 		<span class="skeleton-item"></span>
