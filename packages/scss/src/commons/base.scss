@@ -58,7 +58,6 @@
 			font-family: var(--commons-font-family);
 			font-size: var(--sizes-M-fontSize);
 			line-height: var(--sizes-M-lineHeight);
-			scrollbar-gutter: stable;
 
 			@supports (-webkit-touch-callout: none) {
 				min-height: -webkit-fill-available;
