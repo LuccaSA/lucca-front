@@ -1,0 +1,17 @@
+@mixin component($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
+		.skeleton-item {
+			animation: skeletonFade var(--commons-animations-durations-fast) ease-in 1 forwards;
+		}
+	}
+
+	// fades content in on load
+	@keyframes skeletonFade {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}

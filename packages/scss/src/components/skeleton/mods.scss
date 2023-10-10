@@ -1,0 +1,73 @@
+@mixin dark {
+	--skeleton-gradient-step-one: var(--palettes-grey-200);
+	--skeleton-gradient-step-two: var(--palettes-grey-500);
+}
+
+@mixin skeletonTextSizing($sizes...) {
+	@each $size in $sizes {
+		&.u-text#{$size} {
+			@if ($size == 'XS') {
+				--skeleton-text-offset: calc(0.25rem);
+			}
+			@if ($size == 'S' or $size == 'L') {
+				--skeleton-text-offset: 0.375rem;
+			}
+			@if ($size == 'XXL') {
+				--skeleton-text-offset: 0.5rem;
+			}
+			height: var(--sizes-#{$size}-lineHeight);
+		}
+	}
+}
+
+@mixin skeletonTitleSizing($titles...) {
+	@each $title in $titles {
+		&.u-#{$title},
+		&#{$title} {
+			height: auto;
+			line-height: var(--sizes-lineHeight);
+			@if ($title == 'h1') {
+				--skeleton-text-offset: 0.75rem;
+			}
+			@if ($title == 'h2') {
+				--skeleton-text-offset: 0.875rem;
+			}
+			@if ($title == 'h3') {
+				--skeleton-text-offset: 0.625rem;
+			}
+			@if ($title == 'h4' or $title == 'h5') {
+				--skeleton-text-offset: 0.5rem;
+			}
+			@if ($title == 'h6') {
+				--skeleton-text-offset: 0.25rem;
+			}
+		}
+	}
+}
+
+@mixin skeletonShapeSizing($spacings...) {
+	@each $spacing in $spacings {
+		&.mod-#{$spacing} {
+			--skeleton-shape-height: var(--spacings-#{$spacing});
+			--skeleton-shape-width: var(--spacings-#{$spacing});
+		}
+	}
+}
+
+@mixin square {
+	@include skeletonShapeSizing('XXS', 'XS', 'S', 'L', 'XL', 'XXL');
+	--skeleton-shape-height: var(--spacings-M);
+	--skeleton-shape-width: var(--spacings-M);
+	border-radius: var(--commons-borderRadius-M);
+	height: var(--skeleton-shape-height);
+	width: var(--skeleton-shape-width);
+}
+
+@mixin circle {
+	@include skeletonShapeSizing('XXS', 'XS', 'S', 'L', 'XL', 'XXL');
+	--skeleton-shape-height: var(--spacings-M);
+	--skeleton-shape-width: var(--spacings-M);
+	border-radius: 50%;
+	height: var(--skeleton-shape-height);
+	width: var(--skeleton-shape-width);
+}

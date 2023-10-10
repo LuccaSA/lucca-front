@@ -1,0 +1,45 @@
+@mixin loading {
+	animation: skeletonPulse 1.5s infinite ease-in-out;
+	.skeleton-item {
+		animation: skeletonBackground 1.5s infinite linear;
+		background: linear-gradient(
+			90deg,
+			var(--skeleton-gradient-step-one, var(--palettes-grey-50)),
+			var(--skeleton-gradient-step-two, var(--palettes-grey-200)),
+			var(--skeleton-gradient-step-one, var(--palettes-grey-50))
+		);
+		background-size: 150% 100%;
+		background-repeat: repeat-x;
+		display: block;
+		&:not(.mod-square, .mod-circle) {
+			clip-path: inset(
+				calc(var(--skeleton-text-offset) + 1px) calc(100% - var(--skeleton-width, 100%)) calc(var(--skeleton-text-offset) - 1px) 0 round 8px
+			);
+			height: var(--sizes-M-lineHeight);
+			width: 100%;
+		}
+	}
+
+	// background gradient animation
+	@keyframes skeletonBackground {
+		0% {
+			background-position: 150% 50%;
+		}
+		100% {
+			background-position: -150% 50%;
+		}
+	}
+
+	// pulse animation
+	@keyframes skeletonPulse {
+		0% {
+			opacity: 0.9;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0.9;
+		}
+	}
+}
