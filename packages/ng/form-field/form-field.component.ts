@@ -1,11 +1,12 @@
 import { AfterViewInit, booleanAttribute, Component, ContentChild, HostBinding, inject, Input, OnChanges, OnDestroy } from '@angular/core';
-import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
 import { BehaviorSubject } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { NgClazz } from '@lucca-front/ng/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 let nextId = 0;
@@ -16,10 +17,10 @@ let nextId = 0;
 	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
-	hostDirectives: [NgClass],
+	hostDirectives: [NgClazz],
 })
 export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
-	#ngClass = inject(NgClass);
+	#ngClass = inject(NgClazz);
 
 	@HostBinding('class')
 	clazz = 'form-field';
