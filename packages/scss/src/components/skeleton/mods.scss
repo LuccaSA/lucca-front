@@ -13,7 +13,7 @@
 }
 
 @mixin square {
-	@include skeletonShapeSizing('XXS', 'XS', 'S', 'L', 'XL', 'XXL');
+	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
 	--skeleton-shape-height: var(--spacings-M);
 	--skeleton-shape-width: var(--spacings-M);
 	border-radius: var(--commons-borderRadius-M);
@@ -22,7 +22,7 @@
 }
 
 @mixin circle {
-	@include skeletonShapeSizing('XXS', 'XS', 'S', 'L', 'XL', 'XXL');
+	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
 	--skeleton-shape-height: var(--spacings-M);
 	--skeleton-shape-width: var(--spacings-M);
 	border-radius: 50%;
