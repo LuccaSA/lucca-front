@@ -24,3 +24,7 @@
 		@include disabled;
 	}
 }
+
+span.verticalNavigation-list-item-link {
+	@include disabled;
+}
