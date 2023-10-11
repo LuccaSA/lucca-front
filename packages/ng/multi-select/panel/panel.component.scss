@@ -37,6 +37,7 @@
 	display: flex;
 	flex-basis: 100%;
 	flex-direction: column;
+
 	.is-expanded & {
 		border-radius: var(--commons-borderRadius-M);
 	}
@@ -58,6 +59,7 @@
 	box-shadow: none;
 	animation: none;
 	padding: var(--spacings-XS);
+	max-height: inherit;
 }
 
 .lu-multiselect-panel-columns-col1-content,
