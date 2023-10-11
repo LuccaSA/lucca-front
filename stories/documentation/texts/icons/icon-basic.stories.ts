@@ -16,7 +16,7 @@ class IconStory {
 	filter = '';
 
 	public updateIcons(filter: string) {
-		this.icons = filter ? IconsList.filter((entry) => entry.icon.toLowerCase().includes(filter.toLowerCase())) : IconsList;
+		this.icons = filter ? IconsList.filter(({ icon }) => icon.toLowerCase().includes(filter.toLowerCase())) : IconsList;
 	}
 
 	public copyIcon(icon: string): void {
