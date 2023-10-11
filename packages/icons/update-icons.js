@@ -2,12 +2,6 @@ const selection = require('./selection.json');
 const { writeFileSync } = require('fs');
 const { join } = require('path');
 
-/**
- * Générer les icones avec un bool deprecated
- * Dans la story, appliquer classe deprecated aux icônes deprecated (classe déclarée dans .storybook/styles.scss)
- * @type {string}
- */
-
 const generatedWarning = `/***********************************************
  ***		THIS FILE IS GENERATED, DO NOT EDIT		***
  ***		The generator is update-icons.js			***
