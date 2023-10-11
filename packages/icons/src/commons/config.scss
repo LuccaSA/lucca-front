@@ -7,6 +7,8 @@ $font-path: '//cdn.lucca.fr/lucca-front/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 
 $icons: (
+	'bookmark': '\e9c0',
+	'bookmark_filled': '\e9da',
 	'app': '\e959',
 	'apps': '\e959',
 	'nine_tiles': '\e959',
@@ -100,7 +102,7 @@ $icons: (
 	'answer': '\e953',
 	'bubbles_conversation': '\e935',
 	'messenger': '\e935',
-	'building_compagny': '\e903',
+	'building_company': '\e903',
 	'building': '\e903',
 	'establishment': '\e903',
 	'building_house': '\e913',
@@ -258,6 +260,7 @@ $icons: (
 	'gift': '\e9cf',
 	'present': '\e9cf',
 	'heart': '\e910',
+	'heart_filled': '\e9db',
 	'heart_strikethrough': '\e93e',
 	'broken_heart': '\e93e',
 	'hotel_bed': '\e941',
@@ -466,7 +469,9 @@ $icons: (
 	'star_filled': '\e97f',
 	'target': '\e9d6',
 	'thumb_down': '\e923',
+	'thumb_down_filled': '\e9dc',
 	'thumb_up': '\e922',
+	'thumb_up_filled': '\e9e2',
 	'thumbnail': '\e91b',
 	'time_alarm': '\e9c4',
 	'alarm': '\e9c4',
@@ -515,8 +520,6 @@ $icons: (
 	'trash': '\e98b',
 	'trending_growth': '\e9bb',
 	'evolution': '\e9bb',
-	'bookmark': '\e9bf',
-	'bookmark_filled': '\e9c0',
 	'trending_loss': '\e9e3',
 	'evolution_down': '\e9e3',
 	'weather_cloudy': '\e9ea',
@@ -525,7 +528,4 @@ $icons: (
 	'weather_sunny': '\e9ec',
 	'weather_sun': '\e9ec',
 	'weight': '\e9c1',
-	'heart_filled': '\e9da',
-	'thumb_up_filled': '\e9db',
-	'thumb_down_filled': '\e9dc',
 ) !default;

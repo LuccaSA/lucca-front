@@ -12,11 +12,11 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	templateUrl: './icon-basic.stories.html',
 })
 class IconStory {
-	icons: readonly string[] = IconsList;
+	icons = IconsList;
 	filter = '';
 
 	public updateIcons(filter: string) {
-		this.icons = filter ? IconsList.filter((icon: string) => icon.toLowerCase().includes(filter.toLowerCase())) : IconsList;
+		this.icons = filter ? IconsList.filter(({ icon }) => icon.toLowerCase().includes(filter.toLowerCase())) : IconsList;
 	}
 
 	public copyIcon(icon: string): void {

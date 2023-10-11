@@ -1,22 +1,22 @@
 <div class="textfield mod-outlined mod-search u-marginBottomM">
-	<span class="textfield-label">Rechercher une icône</span>
-	<input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
+  <span class="textfield-label">Rechercher une icône</span>
+  <input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
 </div>
 
 <input type="checkbox" id="showLegacyIcons" class="showLegacy u-marginBottomM" />
 <label for="showLegacyIcons"> Afficher les icônes dépréciées</label>
 
 <div class="icons">
-	<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon)">
-		<span aria-hidden="true" class="lucca-icon icon-{{icon}}"></span>
-		<code class="code">icon-{{icon}}</code>
-	</div>
+  <div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon.icon)">
+    <span aria-hidden="true" class="lucca-icon icon-{{icon.icon}}" [class.deprecated]="icon.deprecated"></span>
+    <code class="code">icon-{{icon.icon}}</code>
+  </div>
 </div>
 
 <style>
-	.demo-icon {
-		width: 33%;
-		float: left;
-		cursor: pointer;
-	}
+    .demo-icon {
+        width: 33%;
+        float: left;
+        cursor: pointer;
+    }
 </style>

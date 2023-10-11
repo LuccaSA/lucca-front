@@ -9,11 +9,12 @@ const generatedWarning = `/***********************************************
 
 const icons = selection.icons
 	.map((icon) => {
-		return icon.properties.name.split(', ').map((name) => {
+		return icon.properties.name.split(', ').map((name, index) => {
 			// Let's convert snake_case to camelCase for css to be happy with it
 			return {
 				snake_case: name.replace(/-/gm, '_'),
 				code: `\\${icon.properties.code.toString(16)}`,
+				deprecated: index > 0,
 				camelCase: name
 					.split('-')
 					.map((word, index) => {
@@ -32,7 +33,9 @@ const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map((icon)
 
 writeFileSync(join(__dirname, './index.d.ts'), type);
 
-const list = `${generatedWarning}export const IconsList = [\n\t${icons.map((icon) => `'${icon.camelCase}'`).join(',\n\t')},\n];\n`;
+const list = `${generatedWarning}export const IconsList = [\n\t${icons
+	.map((icon) => `{ icon: '${icon.camelCase}', deprecated: ${icon.deprecated} }`)
+	.join(',\n\t')},\n];\n`;
 
 writeFileSync(join(__dirname, './icons-list.ts'), list);
 
