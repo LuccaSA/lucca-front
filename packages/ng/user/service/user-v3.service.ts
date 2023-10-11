@@ -12,8 +12,8 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 	set appInstanceId(appInstanceId: number | string) {
 		this._appInstanceId = appInstanceId;
 	}
-	protected _operations: readonly number[] = [];
-	set operations(operations: readonly number[]) {
+	protected _operations: number[] = [];
+	set operations(operations: number[]) {
 		this._operations = operations;
 	}
 

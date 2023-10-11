@@ -33,16 +33,14 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 	outOptions$: Observable<ILuTree<ILuDepartment>[]>;
 	protected _out$ = new Subject<ILuTree<ILuDepartment>[]>();
 	protected _service: LuDepartmentV3Service;
-
 	@Input() set appInstanceId(appInstanceId: number | string) {
 		this._service.appInstanceId = appInstanceId;
 	}
-
-	@Input() set operations(operations: readonly number[]) {
+	@Input() set operations(operations: number[]) {
 		this._service.operations = operations;
 	}
 
-	@Input() set filters(filters: readonly string[]) {
+	@Input() set filters(filters: string[]) {
 		this._service.filters = filters;
 	}
 
@@ -57,7 +55,6 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 		this._service = hostService || selfService;
 		this.outOptions$ = this._out$.asObservable();
 	}
-
 	onOpen() {
 		this._service.getTrees().subscribe((trees) => this._out$.next(trees));
 	}

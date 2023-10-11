@@ -78,14 +78,14 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 		});
 		super.onClose();
 	}
-	override setValue(value: T | readonly T[]) {
+	override setValue(value: T | T[]) {
 		super.setValue(value);
 		this._selectors.forEach((s) => s.setValue(value));
 	}
 	protected initOperators() {
 		const operators = this._operatorsQL.toArray();
 		this._operators = operators;
-		let options$: Observable<T[] | readonly T[]>;
+		let options$: Observable<T[]>;
 		operators.forEach((operator) => {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;

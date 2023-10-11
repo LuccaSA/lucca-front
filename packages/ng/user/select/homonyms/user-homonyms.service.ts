@@ -6,7 +6,7 @@ import { LuDisplayFullname, LuUserDisplayPipe } from '../../display/index';
 import { ILuUser } from '../../user.model';
 
 interface IV3CollectionResponse<T> {
-	data: { items: readonly T[] };
+	data: { items: T[] };
 }
 
 export interface ILuUserHomonymsService<U extends ILuUser = ILuUser> {

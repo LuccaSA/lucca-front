@@ -28,13 +28,13 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 	],
 })
 export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponent<ILuEstablishment> implements OnDestroy {
-	@Input() set filters(filters: readonly string[]) {
+	@Input() set filters(filters: string[]) {
 		this._service.filters = filters;
 	}
 	@Input() set appInstanceId(appInstanceId: number) {
 		this._service.appInstanceId = appInstanceId;
 	}
-	@Input() set operations(operations: readonly number[]) {
+	@Input() set operations(operations: number[]) {
 		this._service.operations = operations;
 	}
 

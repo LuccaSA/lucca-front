@@ -68,7 +68,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 		});
 		super.onClose();
 	}
-	override setValue(value: T | readonly T[]) {
+	override setValue(value: T | T[]) {
 		super.setValue(value);
 		this._selectors.forEach((s) => s.setValue(value));
 	}
@@ -76,7 +76,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 	protected initOperators() {
 		const operators = this._operatorsQL.toArray();
 		this._operators = operators;
-		let options$: Observable<ILuTree<T>[] | readonly ILuTree<T>[]>;
+		let options$: Observable<ILuTree<T>[]>;
 		operators.forEach((operator) => {
 			operator.inOptions$ = options$;
 			options$ = operator.outOptions$;

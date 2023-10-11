@@ -32,7 +32,7 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	 * only works with standard="v3"
 	 */
 	@Input() fields: string;
-	@Input() filters: readonly string[];
+	@Input() filters: string[];
 	/**
 	 * only works with standard="v3", otherwise use sort
 	 */

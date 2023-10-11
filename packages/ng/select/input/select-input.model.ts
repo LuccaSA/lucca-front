@@ -32,8 +32,8 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	/**
 	 * contriol value accessor interface implementation
 	 */
-	protected _value: T | readonly T[];
-	setValue(value: T | readonly T[]) {
+	protected _value: T | T[];
+	setValue(value: T | T[]) {
 		if (this.disabled) {
 			return;
 		}
@@ -41,10 +41,10 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		this._cvaOnChange(value);
 		this._onTouched();
 	}
-	get value(): T | readonly T[] {
+	get value(): T | T[] {
 		return this._value;
 	}
-	set value(value: T | readonly T[]) {
+	set value(value: T | T[]) {
 		this._value = value;
 		this.render();
 		this.applyClasses();
@@ -54,12 +54,12 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 		this._changeDetectorRef.markForCheck();
 	}
 	// From ControlValueAccessor interface
-	writeValue(value: T | readonly T[]) {
+	writeValue(value: T | T[]) {
 		this.value = value;
 	}
 	// From ControlValueAccessor interface
-	protected _cvaOnChange = (v: T | readonly T[]) => void v;
-	registerOnChange(fn: (v: T | readonly T[]) => unknown) {
+	protected _cvaOnChange = (v: T | T[]) => void v;
+	registerOnChange(fn: (v: T | T[]) => unknown) {
 		this._cvaOnChange = fn;
 	}
 	// From ControlValueAccessor interface
@@ -165,7 +165,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 	protected clearDisplay() {
 		this._displayContainer.clear();
 	}
-	protected getView(value: T | readonly T[]) {
+	protected getView(value: T | T[]) {
 		if (this._displayer) {
 			return this._displayer.getViewRef(value);
 		}
@@ -179,7 +179,7 @@ export abstract class ALuSelectInput<T, TPicker extends ILuPickerPanel<T> = ILuP
 
 	protected renderMultipleViews() {
 		this.clearDisplay();
-		const values = <readonly T[]>this.value || [];
+		const values = <T[]>this.value || [];
 		const views = values.map((value) => this.getView(value));
 		views.forEach((view) => this.displayView(view));
 	}

@@ -11,11 +11,11 @@ export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
 	set appInstanceId(id: number) {
 		this._appInstanceId = id;
 	}
-	protected _operations: readonly number[] = [];
-	set operations(ops: readonly number[]) {
+	protected _operations: number[] = [];
+	set operations(ops: number[]) {
 		this._operations = ops || [];
 	}
-	override get filters(): readonly string[] {
+	override get filters(): string[] {
 		const isScopeFiltered = this._appInstanceId && this._operations.length;
 
 		if (isScopeFiltered) {
@@ -27,7 +27,7 @@ export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
 
 		return this._filters;
 	}
-	override set filters(filters: readonly string[]) {
+	override set filters(filters: string[]) {
 		this._filters = filters || [];
 	}
 
