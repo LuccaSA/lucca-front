@@ -4,6 +4,8 @@
  ***********************************************/
 
 export const IconsList = [
+	'bookmark',
+	'bookmarkFilled',
 	'app',
 	'apps',
 	'nineTiles',
@@ -88,8 +90,6 @@ export const IconsList = [
 	'archive',
 	'boxUnarchive',
 	'unarchive',
-	'bookmark',
-	'bookmarkFilled',
 	'branch',
 	'bubbleSpeech',
 	'chat',
@@ -99,7 +99,7 @@ export const IconsList = [
 	'answer',
 	'bubblesConversation',
 	'messenger',
-	'buildingCompagny',
+	'buildingCompany',
 	'building',
 	'establishment',
 	'buildingHouse',

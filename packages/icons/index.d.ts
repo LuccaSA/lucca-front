@@ -4,6 +4,8 @@
  ***********************************************/
 
 export type LuccaIcon =
+	| 'bookmark'
+	| 'bookmarkFilled'
 	| 'app'
 	| 'apps'
 	| 'nineTiles'
@@ -97,7 +99,7 @@ export type LuccaIcon =
 	| 'answer'
 	| 'bubblesConversation'
 	| 'messenger'
-	| 'buildingCompagny'
+	| 'buildingCompany'
 	| 'building'
 	| 'establishment'
 	| 'buildingHouse'
@@ -255,6 +257,7 @@ export type LuccaIcon =
 	| 'gift'
 	| 'present'
 	| 'heart'
+	| 'heartFilled'
 	| 'heartStrikethrough'
 	| 'brokenHeart'
 	| 'hotelBed'
@@ -463,7 +466,9 @@ export type LuccaIcon =
 	| 'starFilled'
 	| 'target'
 	| 'thumbDown'
+	| 'thumbDownFilled'
 	| 'thumbUp'
+	| 'thumbUpFilled'
 	| 'thumbnail'
 	| 'timeAlarm'
 	| 'alarm'
