@@ -31,9 +31,8 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 	private _values: T[];
 
 	@HostBinding('class.position-fixed') fixed = true;
-	options: readonly T[];
+	options: T[];
 	outOptions$: Observable<T[]>;
-
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = in$.pipe(tap((options) => (this.options = options)));
 	}
@@ -43,11 +42,9 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 	selectAll() {
 		this.onSelectValue.next([...this.options]);
 	}
-
 	deselectAll() {
 		this.onSelectValue.next([]);
 	}
-
 	setValue(values: T | T[]): void {
 		this._values = values as T[];
 	}

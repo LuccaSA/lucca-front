@@ -35,7 +35,7 @@ export class LuQualificationSelectInputComponent<
 {
 	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
-	@Input() filters: readonly string[];
+	@Input() filters: string[];
 
 	isSearching = false;
 

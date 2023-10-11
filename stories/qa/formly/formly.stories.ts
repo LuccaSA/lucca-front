@@ -23,7 +23,7 @@ class FormlyStory {
 	form = new FormGroup({});
 	model = {};
 
-	fields: readonly FormlyFieldConfig[] = [
+	fields: FormlyFieldConfig[] = [
 		{
 			type: 'input',
 			key: 'input0',

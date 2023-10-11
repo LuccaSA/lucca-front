@@ -19,8 +19,8 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 			this._fields = `fields=${fields}`;
 		}
 	}
-	protected _filters: readonly string[] = [];
-	set filters(filters: readonly string[]) {
+	protected _filters: string[] = [];
+	set filters(filters: string[]) {
 		if (filters) {
 			this._filters = filters || [];
 		}
@@ -40,17 +40,17 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		super();
 	}
 
-	getAll(filters: readonly string[] = []): Observable<readonly T[]> {
+	getAll(filters: string[] = []): Observable<T[]> {
 		return this._get([this.url, ...filters].join('&'));
 	}
 
-	getPaged(page: number, filters: readonly string[] = []): Observable<readonly T[]> {
+	getPaged(page: number, filters: string[] = []): Observable<T[]> {
 		const paging = `paging=${page * MAGIC_PAGE_SIZE},${MAGIC_PAGE_SIZE}`;
 		const url = [this.url, paging, ...filters].join('&');
 		return this._get(url);
 	}
 
-	searchAll(clue: string, filters: readonly string[] = []): Observable<readonly T[]> {
+	searchAll(clue: string, filters: string[] = []): Observable<T[]> {
 		if (!clue) {
 			return this.getAll(filters);
 		}
@@ -58,7 +58,7 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		return this._get(url);
 	}
 
-	searchPaged(clue: string, page: number, filters: readonly string[] = []): Observable<readonly T[]> {
+	searchPaged(clue: string, page: number, filters: string[] = []): Observable<T[]> {
 		if (!clue) {
 			return this.getPaged(page, filters);
 		}
@@ -67,7 +67,7 @@ export class LuApiV3Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		return this._get(url);
 	}
 
-	protected _get(url: string): Observable<readonly T[]> {
+	protected _get(url: string): Observable<T[]> {
 		return this._http.get<ILuApiCollectionResponse<T>>(url).pipe(map((response) => response.data.items));
 	}
 	protected _clueFilter(clue: string) {

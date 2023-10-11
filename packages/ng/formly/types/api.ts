@@ -13,7 +13,7 @@ export class LuFormlyFieldApi extends FieldType<FieldTypeConfig> {
 		return this.props['api'] as string;
 	}
 	get _filters() {
-		return (this.props['filters'] || []) as readonly string[];
+		return (this.props['filters'] || []) as string[];
 	}
 	get _orderBy() {
 		return this.props['orderBy'] as string;

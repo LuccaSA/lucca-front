@@ -45,10 +45,10 @@ export class LuTreeOptionPagerComponent<T> extends ALuTreeOptionOperator<T> impl
 
 		return this.filter(trees, flatTrimmed);
 	}
-	flatten(trees: ILuTree<T>[] = []): readonly T[] {
+	flatten(trees: ILuTree<T>[] = []): T[] {
 		return trees.map((t) => [t.value, ...this.flatten(t.children)]).reduce((a, v) => [...a, ...v], []);
 	}
-	filter(trees: ILuTree<T>[] = [], values: readonly T[]): ILuTree<T>[] {
+	filter(trees: ILuTree<T>[] = [], values: T[]): ILuTree<T>[] {
 		return trees
 			.map((t) => {
 				if (!values.some((v) => v === t.value)) {

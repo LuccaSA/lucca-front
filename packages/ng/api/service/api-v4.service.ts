@@ -12,11 +12,11 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		this._api = api;
 	}
 
-	protected _filters: readonly string[] = [];
-	set filters(filters: readonly string[]) {
+	protected _filters: string[] = [];
+	set filters(filters: string[]) {
 		this._filters = filters || [];
 	}
-	get filters(): readonly string[] {
+	get filters(): string[] {
 		return this._filters;
 	}
 
@@ -31,17 +31,17 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		super();
 	}
 
-	getAll(filters: readonly string[] = []): Observable<T[]> {
+	getAll(filters: string[] = []): Observable<T[]> {
 		const query = [...this.filters, ...filters, this._sort].filter((f) => !!f);
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
-	getPaged(page = 0, filters: readonly string[] = []): Observable<T[]> {
+	getPaged(page = 0, filters: string[] = []): Observable<T[]> {
 		const query = [`page=${page + 1}`, ...this.filters, ...filters, this._sort].filter((f) => !!f);
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
-	searchAll(clue = '', filters: readonly string[] = []): Observable<T[]> {
+	searchAll(clue = '', filters: string[] = []): Observable<T[]> {
 		if (!clue) {
 			return this.getAll(filters);
 		}
@@ -53,7 +53,7 @@ export class LuApiV4Service<T extends ILuApiItem = ILuApiItem> extends ALuApiSer
 		const url = [this._api, query.join('&')].join('?');
 		return this._http.get<{ items: T[] }>(url).pipe(map((res) => res.items));
 	}
-	searchPaged(clue = '', page = 0, filters: readonly string[] = []): Observable<T[]> {
+	searchPaged(clue = '', page = 0, filters: string[] = []): Observable<T[]> {
 		if (!clue) {
 			return this.getPaged(page, filters);
 		}

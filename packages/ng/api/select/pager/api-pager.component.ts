@@ -56,7 +56,7 @@ export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
 	@Input() set fields(fields: string) {
 		this._service.fields = fields;
 	}
-	@Input() set filters(filters: readonly string[]) {
+	@Input() set filters(filters: string[]) {
 		this._service.filters = filters;
 	}
 	@Input() set orderBy(orderBy: string) {
