@@ -26,6 +26,7 @@
 	padding: 0;
 	width: 100%;
 	transition: padding var(--commons-animations-durations-standard) ease;
+	max-height: 20rem;
 
 	.is-expanded & {
 		padding: var(--spacings-XS);
@@ -43,7 +44,6 @@
 
 .lu-multiselect-panel-columns-col2 {
 	align-items: flex-start;
-	height: var(--components-picker-max-height);
 	background-color: var(--palettes-grey-25);
 	min-width: 18rem;
 }
@@ -57,8 +57,7 @@
 .lu-multiselect-panel-columns-col1-content {
 	box-shadow: none;
 	animation: none;
-	padding: 0;
-	margin: 0 var(--spacings-XS) var(--spacings-XS);
+	padding: var(--spacings-XS);
 }
 
 .lu-multiselect-panel-columns-col1-content,
@@ -92,7 +91,6 @@
 .lu-multiselect-chips {
 	overflow-y: auto;
 	display: flex;
-	max-height: 18.5rem;
 	flex-grow: 1;
 	flex-direction: column;
 	align-items: flex-start;
@@ -118,6 +116,11 @@
 .lu-multiselect-panel-form {
 	display: flex;
 	gap: var(--spacings-XS);
+
+	~ .lu-multiselect-panel-columns-col1-content {
+		padding-top: 0;
+	}
+
 }
 
 .lu-multiselect-expandbutton {
