@@ -10,7 +10,7 @@ import { IconsList } from '@lucca-front/icons/icons-list';
 	imports: [NgForOf],
 })
 class IconStory {
-	icons: string[] = IconsList;
+	icons = IconsList;
 }
 
 export default {
