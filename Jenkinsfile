@@ -53,7 +53,7 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 			}
 
 			loggableStage('e2e', !shouldDeploy) {
-				publishE2e(loggableStageName: 'e2e', slnFilepath: 'e2e\\LuccaFront.e2e.sln', framework: "net6.0")
+				publishE2e(loggableStageName: 'e2e', slnFilepath: 'e2e/LuccaFront.e2e.sln', framework: "net6.0")
 				archiveElements(e2e: true)
 			}
 
