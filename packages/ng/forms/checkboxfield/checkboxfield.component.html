@@ -1,0 +1,15 @@
+<lu-form-field
+	[label]="label"
+	[required]="required"
+	[hiddenLabel]="hiddenLabel"
+	[inlineMessage]="inlineMessage"
+	[inlineMessageState]="inlineMessageState"
+	[size]="size"
+	[invalid]="ngControl.control.touched && ngControl.control.invalid"
+	layout="checkbox"
+>
+	<span class="checkboxField">
+		<input luInput type="checkbox" class="checkboxField-input" [formControl]="ngControl.control" />
+		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+	</span>
+</lu-form-field>

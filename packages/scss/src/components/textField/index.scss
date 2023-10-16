@@ -11,22 +11,12 @@
 	&.mod-XS {
 		@include XS;
 	}
-}
 
-.textField-input {
-	&[aria-invalid='true'] {
+	&.is-invalid, &:has(.textField-input-value[aria-invalid='true']) {
 		@include invalid;
 	}
 
-	&:disabled {
+	&.is-disabled, &:has(.textField-input-value:disabled) {
 		@include disabled;
-	}
-
-	&:read-only:not(:disabled) {
-		@include readonly;
-	}
-
-	&:is(textarea) {
-		@include textarea;
 	}
 }

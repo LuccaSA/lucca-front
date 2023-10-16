@@ -26,7 +26,7 @@ export default {
 function getTemplate(args: NumericBadgeBasicStory): string {
 	const size = args.size ? ' '+args.size : '';
 	const palette = args.palette ? ' '+args.palette : '';
-	return `<div class="numericBadge${size}${palette}">7</div>`;
+	return `<span class="numericBadge${size}${palette}">7</span>`;
 }
 
 const Template: Story<NumericBadgeBasicStory> = (args: NumericBadgeBasicStory) => ({

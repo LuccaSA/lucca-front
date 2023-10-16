@@ -1,60 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-
-interface ILegume {
-	index: number;
-	name: string;
-}
-
-type StoryComponent = LuSimpleSelectInputComponent<ILegume> & { legumes: ILegume[]; clue: string; page: number };
-
-const allLegumes = [
-	{ name: 'Artichaut', index: 1 },
-	{ name: 'Asperge', index: 2 },
-	{ name: 'Aubergine', index: 3 },
-	{ name: 'Avocat', index: 4 },
-	{ name: 'Betterave', index: 5 },
-	{ name: 'Blette', index: 6 },
-	{ name: 'Brocoli', index: 7 },
-	{ name: 'Carotte', index: 8 },
-	{ name: 'Céléri', index: 9 },
-	{ name: 'Champignon', index: 10 },
-	{ name: 'Chou chinois', index: 11 },
-	{ name: 'Chou fleur', index: 12 },
-	{ name: 'Chou kalé', index: 13 },
-	{ name: 'Chou romanesco', index: 14 },
-	{ name: 'Citrouille', index: 15 },
-	{ name: 'Concombre', index: 16 },
-	{ name: 'Courgette', index: 17 },
-	{ name: 'Endive', index: 18 },
-	{ name: 'Épinard', index: 19 },
-	{ name: 'Haricots verts', index: 20 },
-	{ name: 'Laitue', index: 21 },
-	{ name: 'Maïs', index: 22 },
-	{ name: 'Navet', index: 23 },
-	{ name: 'Panais', index: 24 },
-	{ name: 'Petits pois', index: 25 },
-	{ name: 'Poivron', index: 26 },
-	{ name: 'Pomme de terre', index: 27 },
-	{ name: 'Potimarron', index: 28 },
-	{ name: 'Radis', index: 29 },
-	{ name: 'Tomate', index: 30 },
-	{ name: 'Topinambour', index: 31 },
-];
-
-const generateStory = getStoryGenerator<StoryComponent>({
-	argTypes: {
-		clearable: { control: false },
-		disabled: { control: false },
-		loading: { control: false },
-		placeholder: { control: false },
-	},
-});
+import { useDocumentationStory } from 'stories/helpers/stories';
+import { ILegume, LuSelectInputStoryComponent, allLegumes, generateStory } from './select.utils';
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -296,7 +248,7 @@ class FilterLegumesPipe implements PipeTransform {
 	}
 }
 
-const meta: Meta<StoryComponent> = {
+const meta: Meta<LuSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,
 	decorators: [

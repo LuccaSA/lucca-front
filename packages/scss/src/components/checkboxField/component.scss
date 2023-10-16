@@ -1,28 +1,21 @@
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-column-gap: var(--spacings-XS);
+	position: relative;
 
 	@at-root ($atRoot) {
-		.checkboxField-label {
-			display: contents;
-		}
-
-		.checkboxField-label-input {
-			width: var(--component-checkboxField-label-input-size);
-			height: var(--component-checkboxField-label-input-size);
+		.checkboxField-icon {
+			width: var(--component-checkboxField-size);
+			height: var(--component-checkboxField-size);
 			border: 2px solid var(--palettes-grey-700);
-			border-radius: var(--component-checkboxField-label-input-borderRadius);
+			border-radius: var(--component-checkboxField-borderRadius);
 			position: relative;
-			top: var(--component-checkboxField-label-input-top);
 			color: var(--colors-white-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
 			background-color: var(--colors-white-color);
+			display: block;
 			cursor: pointer;
 
 			@media (prefers-reduced-motion: reduce) {
@@ -34,11 +27,11 @@
 				position: absolute;
 				inset: -2px;
 				outline-offset: 2px;
-				border-radius: var(--component-checkboxField-label-input-borderRadius);
+				border-radius: var(--component-checkboxField-borderRadius);
 			}
 		}
 
-		.checkboxField-label-input-icon {
+		.checkboxField-icon-check {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -55,7 +48,7 @@
 
 			&::before {
 				font-weight: 400;
-				font-size: var(--component-checkboxField-label-input-icon-fontSize);
+				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
 				font-family: 'Lucca icons';
 				font-feature-settings: 'liga';
@@ -66,20 +59,17 @@
 				white-space: nowrap;
 				word-wrap: normal;
 				content: '\e97d'; // Remove when content alternative will have a good support
-				content: '\e97d' / '';
+				content: '\e97d'/ '';
 			}
 		}
 
 		.checkboxField-input {
-			@include a11y.mask;
-		}
-
-		.formLabel {
-			@include formLabel.label;
-		}
-
-		.inlineMessage {
-			grid-column: 2;
+			position: absolute;
+			z-index: 1;
+			width: var(--component-checkboxField-size);
+			height: var(--component-checkboxField-size);
+			opacity: 0;
+			cursor: pointer;
 		}
 	}
 }

@@ -17,11 +17,8 @@
 
 	a,
 	.link {
-		color: var(--palettes-grey-800);
-
-		&:hover {
-			color: var(--palettes-grey-700);
-		}
+		--commons-text-link-color: var(--palettes-grey-800);
+		--commons-text-link-hover: var(--palettes-grey-700);
 	}
 
 	@at-root ($atRoot) {
