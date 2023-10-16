@@ -3,21 +3,18 @@
 @import '../packages/ng/styles/main';
 
 .sb-show-main {
-  background-color: white;
+	background-color: white;
 }
 
-// legacy icons are not displayed by default
 .demo-icon {
-  .deprecated {
-    &,
-    & + code {
-      opacity: 0.25;
+	.deprecated {
+		&,
+		& + code {
+			opacity: 0.25;
 
-      .showLegacy:not(:checked) ~ .icons & {
-        display: none;
-      }
-    }
-  }
+			.showDeprecated:not(:checked) ~ .icons & {
+				display: none;
+			}
+		}
+	}
 }
-
-
