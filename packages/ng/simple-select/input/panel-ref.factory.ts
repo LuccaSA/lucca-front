@@ -1,23 +1,22 @@
 import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, ElementRef, inject, Injectable, Injector } from '@angular/core';
-import { LuSelectPanelRef } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
-import { LuSelectPanelComponent } from '../panel';
-import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
+import { LuSelectPanelComponent, LuSelectPanelRef } from '../panel';
+import { ILuSelectPanelData, SELECT_PANEL_DATA } from '../select.model';
 
-class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
+class SelectPanelRef<T> extends LuSelectPanelRef<T> {
 	instance: LuSelectPanelComponent<T>;
 	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
 
-	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuSimpleSelectPanelData<T>) {
+	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuSelectPanelData<T>) {
 		super();
 
 		const injector = Injector.create({
 			providers: [
 				{ provide: LuSelectPanelRef, useValue: this },
-				{ provide: SIMPLE_SELECT_PANEL_DATA, useValue: panelData },
+				{ provide: SELECT_PANEL_DATA, useValue: panelData },
 			],
 			parent: parentInjector,
 		});
@@ -52,7 +51,7 @@ export class LuSimpleSelectPanelRefFactory {
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
 
-	buildPanelRef<T>(panelData: ILuSimpleSelectPanelData<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T, T> {
+	buildPanelRef<T>(panelData: ILuSelectPanelData<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T> {
 		const overlayConfig = this.buildOverlayConfig(overlayConfigOverride);
 		const overlayRef = this.overlay.create(overlayConfig);
 

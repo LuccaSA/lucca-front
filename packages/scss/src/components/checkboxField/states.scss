@@ -1,24 +1,28 @@
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin mixed {
-	~ .checkboxField-icon {
-		.checkboxField-icon-check {
+	~ .checkboxField-label {
+		.checkboxField-label-input-icon {
 			&::before {
 				content: '\e975'; // Remove when content alternative will have a good support
-				content: '\e975'/ '';
+				content: '\e975' / '';
 			}
 		}
 	}
 }
 
 @mixin checked {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-primary-700);
-		border-color: var(--palettes-primary-700);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-700);
+			border-color: var(--palettes-primary-700);
+		}
 
-		.checkboxField-icon-check {
+		.checkboxField-label-input-icon {
 			transform: scale(1);
 			transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
 		}
@@ -26,97 +30,138 @@
 }
 
 @mixin hover {
-	~ .checkboxField-icon {
-		border-color: var(--palettes-grey-600);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-grey-600);
+		}
 	}
 }
 
 @mixin checkedHover {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-primary-600);
-		border-color: var(--palettes-primary-600);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-600);
+			border-color: var(--palettes-primary-600);
+		}
 	}
 }
 
 @mixin checkedActive {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-primary-800);
-		border-color: var(--palettes-primary-800);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-800);
+			border-color: var(--palettes-primary-800);
+		}
 	}
 }
 
 @mixin checkedDisabled {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-grey-100);
-		border-color: var(--palettes-grey-100);
-		color: var(--palettes-grey-500);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-grey-100);
+			border-color: var(--palettes-grey-100);
+			color: var(--palettes-grey-500);
+		}
 	}
 }
 
 @mixin checkedHover {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-primary-600);
-		border-color: var(--palettes-primary-600);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-primary-600);
+			border-color: var(--palettes-primary-600);
+		}
 	}
 }
 
 @mixin checkedInvalid {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-error-700);
-		border-color: var(--palettes-error-700);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-error-700);
+			border-color: var(--palettes-error-700);
+		}
 	}
 }
 
 @mixin active {
-	~ .checkboxField-icon {
-		border-color: var(--palettes-grey-800);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-grey-800);
+		}
 	}
 }
 
 @mixin disabled {
-	cursor: default;
+	~ .checkboxField-label {
+		color: var(--palettes-grey-500);
 
-	~ .checkboxField-icon {
-		border-color: var(--palettes-grey-500);
+		.checkboxField-label-input {
+			border-color: var(--palettes-grey-500);
+			cursor: default;
+		}
+
+		.formLabel {
+			@include formLabel.disabled;
+		}
+	}
+
+	~ .inlineMessage {
+		@include inlineMessage.disabled;
 	}
 }
 
 @mixin focusVisible {
-	~ .checkboxField-icon {
-		&::after {
-			@include a11y.focusVisible();
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			&::after {
+				@include a11y.focusVisible();
+			}
 		}
 	}
 }
 
 @mixin invalid {
-	~ .checkboxField-icon {
-		border-color: var(--palettes-error-700);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-error-700);
+		}
+
+		.formLabel {
+			@include formLabel.error;
+		}
 	}
 }
 
 @mixin invalidHover {
-	~ .checkboxField-icon {
-		border-color: var(--palettes-error-600);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-error-600);
+		}
 	}
 }
 
 @mixin invalidActive {
-	~ .checkboxField-icon {
-		border-color: var(--palettes-error-800);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			border-color: var(--palettes-error-800);
+		}
 	}
 }
 
 @mixin checkedInvalidHover {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-error-600);
-		border-color: var(--palettes-error-600);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-error-600);
+			border-color: var(--palettes-error-600);
+		}
 	}
 }
 
 @mixin checkedInvalidActive {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-error-800);
-		border-color: var(--palettes-error-800);
+	~ .checkboxField-label {
+		.checkboxField-label-input {
+			background-color: var(--palettes-error-800);
+			border-color: var(--palettes-error-800);
+		}
 	}
 }

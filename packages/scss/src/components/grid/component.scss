@@ -9,9 +9,7 @@
 	gap: var(--grid-row-gap) var(--grid-column-gap);
 
 	// workaround for Angular replacing CamelCase by kebab-case
-	// max-width: var(--grid-max-width, var(--grid-maxWidth));
-	width: var(--grid-max-width, var(--grid-maxWidth));
-	max-width: 100%;
+	max-width: var(--grid-max-width, var(--grid-maxWidth));
 
 	@at-root ($atRoot) {
 		.grid-column {

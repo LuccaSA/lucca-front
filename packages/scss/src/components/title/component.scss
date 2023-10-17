@@ -4,7 +4,6 @@
 	color: var(--palettes-grey-900);
 	margin-bottom: var(--spacings-S);
 	text-rendering: geometricPrecision;
-	text-wrap: balance;
 
 	// suffix here
 	font-weight: var(--components-title-weight, 600) #{$suffix};

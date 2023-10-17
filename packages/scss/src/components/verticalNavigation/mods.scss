@@ -1,9 +1,7 @@
 @mixin child {
   display: none;
-  margin: 0;
 
   .verticalNavigation-list-item-link {
     font-weight: 400;
-    padding-left: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
   }
 }

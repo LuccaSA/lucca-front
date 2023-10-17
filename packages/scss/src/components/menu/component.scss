@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
+	background-color: var(--components-menu-background);
 	column-gap: var(--spacings-L);
 	align-items: center;
 	display: flex;

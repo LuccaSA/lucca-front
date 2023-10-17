@@ -7,7 +7,7 @@ import { ALuSimpleSelectApiDirective } from './api.directive';
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: 'lu-simple-select[apiV4],lu-multi-select[apiV4]',
+	selector: 'lu-simple-select[apiV4]',
 	standalone: true,
 })
 export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpleSelectApiDirective<T> {

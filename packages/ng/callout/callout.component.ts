@@ -2,7 +2,6 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Inp
 import { CommonModule } from '@angular/common';
 import { getIntl, Palette } from '@lucca-front/ng/core';
 import { LU_CALLOUT_TRANSLATIONS } from './callout.translate';
-import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-callout',
@@ -47,7 +46,7 @@ export class CalloutComponent {
 	 * Which icon should we display in the callout if any?
 	 * Defaults to no icon.
 	 */
-	icon: LuccaIcon;
+	icon: 'info' | 'success' | 'warning' | 'error' | 'help' | string;
 
 	@Input()
 	/**

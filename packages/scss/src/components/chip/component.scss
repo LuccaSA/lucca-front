@@ -40,11 +40,9 @@
 
 			&:hover {
 				background-color: var(--palettes-grey-600);
-				color: var(--palettes-700, var(--colors-white-color));
 			}
 
 			&:focus-visible {
-				border-radius: 50%;
 				@include a11y.focusVisible();
 			}
 
