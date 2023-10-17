@@ -11,7 +11,7 @@ export default {
 	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)', '../stories/**/*.mdx'],
 	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
-	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y', '@storybook/addon-interactions'],
+	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
 	webpackFinal: (config) => ({
 		...config,
 		resolve: {

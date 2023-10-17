@@ -3,10 +3,11 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
+import { ɵLuOptionComponent } from '../option/index';
+import { ILuSelectPanelData, SELECT_ID, SELECT_PANEL_DATA } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuSelectPanelRef } from './panel.models';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -17,8 +18,8 @@ import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, ɵLuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
-	protected panelData = inject<ILuSimpleSelectPanelData<T>>(SIMPLE_SELECT_PANEL_DATA);
-	public panelRef = inject<LuSelectPanelRef<T, T>>(LuSelectPanelRef);
+	protected panelData = inject<ILuSelectPanelData<T>>(SELECT_PANEL_DATA);
+	public panelRef = inject<LuSelectPanelRef<T>>(LuSelectPanelRef);
 	public selectId = inject(SELECT_ID);
 	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 

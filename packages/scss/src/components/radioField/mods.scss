@@ -1,41 +1,18 @@
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin S {
-	--component-radioField-label-input-size: 1rem;
-	--component-radioField-label-input-borderRadius: var(--commons-borderRadius-M);
-	--component-radioField-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
-	--component-radioField-label-fontSize: var(--sizes-S-fontSize);
-	--component-radioField-label-lineHeight: var(--sizes-S-lineHeight);
+  --component-radioField-label-input-size: 1rem;
+  --component-radioField-label-input-borderRadius: var(--commons-borderRadius-M);
+  --component-radioField-label-input-icon-fontSize: var(--sizes-XS-lineHeight);
+  --component-radioField-label-fontSize: var(--sizes-S-fontSize);
+  --component-radioField-label-lineHeight: var(--sizes-S-lineHeight);
 
-	.formLabel {
-		@include formLabel.S;
-	}
+  .formLabel {
+    @include formLabel.S;
+  }
 
-	.inlineMessage {
-		@include inlineMessage.S;
-	}
-}
-
-@mixin withArrow {
-	padding-bottom: var(--spacings-S);
-
-	.radioField-arrow {
-		@include box.arrow;
-	}
-
-	.radioField-input:not(:checked) {
-		~ .radioField-arrow {
-			display: none;
-		}
-	}
-}
-
-@mixin withArrowS {
-	padding-bottom: var(--spacings-XS);
-
-	.radioField-arrow {
-		@include box.arrowS;
-	}
+  .inlineMessage {
+    @include inlineMessage.S;
+  }
 }

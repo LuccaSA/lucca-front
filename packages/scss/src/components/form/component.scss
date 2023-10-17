@@ -1,7 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/form';
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
-@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @mixin component($atRoot: 'without: rule') {
 	padding: 0;
@@ -10,18 +7,6 @@
 	position: relative;
 
 	@at-root ($atRoot) {
-		.form-field {
-			display: flex;
-			flex-direction: column;
-			gap: var(--spacings-XXS);
-
-			.formLabel {
-				cursor: pointer;
-			}
-		}
-
-		// deprecated
-
 		.form-group-label,
 		.form-group-legend,
 		.form-group-title {

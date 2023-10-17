@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 interface SwitchBasicStory {
 	disabled: boolean;
 	s: boolean;
+	required: boolean;
 	id: Text;
 	label: Text;
 	message: Text;
@@ -27,6 +28,11 @@ export default {
 			},
 		},
 		checked: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		required: {
 			control: {
 				type: 'boolean',
 			},
@@ -72,19 +78,22 @@ function getTemplate(args: SwitchBasicStory): string {
 	const s = args.s ? ` mod-S` : '';
 	const disabled = args.disabled ? ` disabled="disabled"` : '';
 	const checked = args.checked ? ` checked="checked"` : '';
+	const required = args.required ? ` aria-required="true"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `<div class="form-field${s}">
-	<label class="formLabel" for="${id}">
-		Label<span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
-	</label>
-	<span class="switchField">
-		<input type="checkbox" class="switchField-input" id="${id}" aria-describedby="${id}message"${checked}${disabled}${invalid} />
-		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-	</span>
-	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message">Helper text</div>
+	return `<div class="switchField${s}">
+  <input type="checkbox" class="switchField-input" id="${id}" aria-labelledby="${id}Label" aria-describedby="${id}message"${checked}${disabled}${required}${invalid} />
+  <label class="switchField-label" for="${id}">
+    <span class="switchField-label-input">
+      <span class="switchField-label-input-icon" aria-hidden="true"></span>
+    </span>
+		<span class="formLabel" id="${id}Label">
+			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		</span>
+  </label>
+	<div class="inlineMessage${messageState}" *ngIf="message" id="${id}message"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
 </div>`;
 }
 
@@ -94,4 +103,4 @@ const Template: Story<SwitchBasicStory> = (args: SwitchBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };
+Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };

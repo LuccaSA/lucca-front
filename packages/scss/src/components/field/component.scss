@@ -13,15 +13,12 @@
 	.checkboxesfield-input {
 		display: flex;
 		flex-direction: column;
+		background-color: var(--colors-white-color);
+		row-gap: var(--spacings-XXS);
 
 		&.palette-error {
 			box-shadow: 0 0 0 1px var(--palettes-700);
 		}
-	}
-
-	.radiosfield-input,
-	.checkboxesfield-input {
-		row-gap: var(--spacings-XXS);
 	}
 
 	.textfield-label,

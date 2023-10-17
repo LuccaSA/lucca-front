@@ -62,7 +62,7 @@ runTask('Lucca Front compilation', async () => {
 			output: OUTPUT_ICONS,
 		});
 		copyFiles({
-			patterns: ['lucca-icon.d.ts', 'package.json', 'src/**'],
+			patterns: ['icons-list.js', 'package.json', 'src/**'],
 			context: ICONS,
 			output: OUTPUT_ICONS,
 		});

@@ -90,14 +90,16 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const help = args.help;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `<div class="form-field${s} u-marginBottomS">
-	<label class="formLabel" for="${id}">
-		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+	return `<div class="checkboxField${s}">
+	<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message"${checked}${mixed}${disabled}${required}${invalid} />
+	<label class="checkboxField-label" for="${id}">
+		<span class="checkboxField-label-input">
+			<span class="checkboxField-label-input-icon" aria-hidden="true"></span>
+		</span>
+		<span class="formLabel" id="${id}label">
+			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
+		</span>
 	</label>
-	<span class="checkboxField">
-		<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message"${checked}${mixed}${disabled}${required}${invalid} />
-		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-	</span>
 	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
 </div>`;
 }

@@ -7,14 +7,6 @@
 	&.mod-S {
 		@include S;
 	}
-
-	&.mod-withArrow {
-		@include withArrow;
-
-		&.mod-S {
-			@include withArrowS;
-		}
-	}
 }
 
 .radioField-input {
@@ -30,7 +22,7 @@
 		}
 	}
 
-	&[aria-invalid='true'] {
+	&[aria-invalid="true"] {
 		@include invalid;
 
 		&:checked {

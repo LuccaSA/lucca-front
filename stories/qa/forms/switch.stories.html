@@ -1,97 +1,84 @@
 <section class="contentSection">
+	<h1>Switch field</h1>
 
-	<div class="form-field u-marginBottomXS">
-		<label class="formLabel" for="switch">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+	<h2>Basic</h2>
+	<div class="switchField">
+    <input type="checkbox"
+           class="switchField-input"
+           id="field1"
+           aria-labelledby="field1Label"
+           aria-describedby="field1Msg"
+           required="required"
+           checked="checked"
+           />
+    <label class="switchField-label" for="field1">
+      <span class="switchField-label-input">
+        <span class="switchField-label-input-icon" aria-hidden="true"></span>
+      </span>
+			<span class="formLabel" id="field1Label">
+				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
+    </label>
+		<div class="inlineMessage" id="field1Msg"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
+  </div>
+	<div class="switchField">
+		<input type="checkbox"
+					 class="switchField-input"
+					 id="field2"
+					 aria-labelledby="field2Label"
+					 aria-describedby="field2Msg"
+					 required="required"
+					 checked="checked"
+					 disabled
+					 />
+		<label class="switchField-label" for="field2">
+			<span class="switchField-label-input">
+				<span class="switchField-label-input-icon" aria-hidden="true"></span>
+			</span>
+			<span class="formLabel" id="field2Label">
+				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
 		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switch" aria-labelledby="switch-label" aria-describedby="switch-message" />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switch-message">Helper text</div>
+		<div class="inlineMessage" id="field2Msg"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
 	</div>
-
-	<div class="form-field u-marginBottomXS">
-		<label class="formLabel" for="switchCheck">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+	<div class="switchField mod-S">
+		<input type="checkbox"
+					 class="switchField-input"
+					 id="field3"
+					 aria-labelledby="field3Label"
+					 aria-describedby="field3Msg"
+					 required="required"
+					 checked="checked"
+					 />
+		<label class="switchField-label" for="field3">
+			<span class="switchField-label-input">
+				<span class="switchField-label-input-icon" aria-hidden="true"></span>
+			</span>
+			<span class="formLabel" id="field3Label">
+				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
 		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchCheck" aria-labelledby="switch-label" aria-describedby="switchCheck-message" checked />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchCheck-message">Helper text</div>
+		<div class="inlineMessage" id="field3Msg"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
 	</div>
-
-	<h2>Sizes</h2>
-
-	<div class="form-field mod-S u-marginBottomXS">
-		<label class="formLabel" for="switchS">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+	<div class="switchField">
+		<input type="checkbox"
+					 class="switchField-input"
+					 id="field4"
+					 aria-labelledby="field4Label"
+					 aria-describedby="field4Msg"
+					 aria-invalid="true"
+					 required="required"
+					 checked="checked"
+					 />
+		<label class="switchField-label" for="field4">
+			<span class="switchField-label-input">
+				<span class="switchField-label-input-icon" aria-hidden="true"></span>
+			</span>
+			<span class="formLabel" id="field4Label">
+				Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+			</span>
 		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchS" aria-labelledby="switch-label" aria-describedby="switchS-message" />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchS-message">Helper text</div>
-	</div>
-
-	<div class="form-field mod-S u-marginBottomXS">
-		<label class="formLabel" for="switchSCheck">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
-		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchSCheck" aria-labelledby="switch-label" aria-describedby="switchSCheck-message" checked />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchSCheck-message">Helper text</div>
-	</div>
-
-	<h2>Disabled</h2>
-
-	<div class="form-field u-marginBottomXS">
-		<label class="formLabel" for="switchDisabled">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
-		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchDisabled" aria-labelledby="switch-label" aria-describedby="switchDisabled-message" disabled />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchDisabled-message">Helper text</div>
-	</div>
-
-	<div class="form-field u-marginBottomXS">
-		<label class="formLabel" for="switchDisabledCheck">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
-		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchDisabledCheck" aria-labelledby="switch-label" aria-describedby="switchDisabledCheck-message" disabled checked />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchDisabledCheck-message">Helper text</div>
-	</div>
-
-	<h2>Invalid</h2>
-
-	<div class="form-field u-marginBottomXS">
-		<label class="formLabel" for="switchInvalid">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
-		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchInvalid" aria-labelledby="switch-label" aria-describedby="switchInvalid-message" aria-invalid="true" />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchInvalid-message">Helper text</div>
-	</div>
-
-	<div class="form-field u-marginBottomXS">
-		<label class="formLabel" for="switchInvalidCheck">
-			Label<span aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
-		</label>
-		<span class="switchField">
-			<input type="checkbox" class="switchField-input" id="switchInvalidCheck" aria-labelledby="switch-label" aria-describedby="switchInvalidCheck-message" aria-invalid="true" checked />
-			<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-		</span>
-		<div class="inlineMessage" id="switchInvalidCheck-message">Helper text</div>
+		<div class="inlineMessage" id="field4Msg"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
 	</div>
 </section>
 

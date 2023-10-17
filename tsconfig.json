@@ -16,9 +16,6 @@
       "./"
     ],
     "paths": {
-      "@lucca-front/icons": [
-        "packages/icons/index.d.ts"
-      ],
       "@lucca-front/ng/*": [
         "packages/ng/*/public-api.ts"
       ],

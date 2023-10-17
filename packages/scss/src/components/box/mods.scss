@@ -1,5 +1,7 @@
 @mixin grey {
-	--components-box-background: var(--palettes-grey-25);
+	--components-box-backgroundGrey: var(--components-box-background);
+
+	background-color: var(--components-box-background);
 }
 
 @mixin toggle {
@@ -10,7 +12,7 @@
 		border-color: transparent;
 		border-style: solid;
 		border-width: var(--components-box-toggle-arrow-size);
-		border-bottom-color: var(--components-box-background, var(--colors-white-color));
+		border-bottom-color: var(--components-box-backgroundGrey, var(--colors-white-color));
 		border-top: 0;
 		height: 0;
 		bottom: 100%;
@@ -18,43 +20,4 @@
 		position: absolute;
 		content: '';
 	}
-}
-
-@mixin arrow {
-	--components-box-arrow-background: var(--colors-white-color);
-	--components-box-arrow-horizontalMargin: var(--commons-borderRadius-M);
-	--components-box-arrow-left: 0;
-	--components-box-arrow-bottom: 0;
-
-	background-color: var(--components-box-arrow-background);
-	margin: 0 var(--components-box-arrow-horizontalMargin);
-	width: 12px;
-	height: 8px;
-	clip-path: path('M4.66415 0.494638C5.43093 -0.164881 6.56907 -0.164879 7.33586 0.49464L12 8H0L4.66415 0.494638Z');
-	position: absolute;
-	bottom: var(--components-box-arrow-bottom);
-	left: var(--components-box-arrow-left);
-
-	&.mod-grey {
-		--components-box-arrow-background: var(--palettes-grey-25);
-	}
-}
-
-@mixin withArrow {
-	--components-box-border-radius: var(--commons-borderRadius-M);
-	--components-box-padding: var(--spacings-S);
-}
-
-@mixin arrowS {
-	--components-box-arrow-left: -2px;
-	--components-box-arrow-bottom: -2px;
-}
-
-@mixin arrowSwitch {
-	--components-box-arrow-left: 8px;
-}
-
-@mixin arrowSwitchS {
-	--components-box-arrow-left: 4px;
-	--components-box-arrow-bottom: -2px;
 }
