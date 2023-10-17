@@ -39,6 +39,7 @@ export class LuUserPictureComponent {
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
 		const pictureHref = user?.picture?.href || user?.pictureHref;
 		this.hasPicture = !!pictureHref;
+		this.pictureHref = pictureHref;
 		if (this.hasPicture) {
 			this.style = { 'background-image': `url('${pictureHref}')` };
 		} else {
@@ -53,10 +54,17 @@ export class LuUserPictureComponent {
 
 	initials = '';
 	hasPicture = false;
+	pictureHref = '';
 
 	style;
 
 	constructor(private displayPipe: LuUserDisplayPipe, private _changeDetector: ChangeDetectorRef) {}
+
+	pictureError() {
+		this.hasPicture = false;
+		const hsl = this.getNameHue();
+		this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
+	}
 
 	private getNameHue(): number {
 		// we sum the chars in user's firstname + lastname
