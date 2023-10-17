@@ -1,7 +1,7 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-card-background);
-	border-radius: var(--commons-borderRadius-L);
-	border-color: var(--commons-divider-color);
+	border-radius: var(--components-card-border-radius);
+	border-color: var(--components-card-border-color);
 	border-width: 1px;
 	display: block;
 	margin-bottom: var(--spacings-S);
