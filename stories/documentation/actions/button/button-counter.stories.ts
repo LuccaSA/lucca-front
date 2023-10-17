@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonCounterStory): string {
-	return `<button type="button" class="button">Bouton<div class="numericBadge palette-primary">7</div></button>`;
+	return `<button type="button" class="button">Bouton<span class="numericBadge palette-primary">7</span></button>`;
 }
 
 const Template: StoryFn<ButtonCounterStory> = (args: ButtonCounterStory) => ({

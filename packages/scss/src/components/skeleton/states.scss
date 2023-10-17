@@ -1,0 +1,84 @@
+@mixin skeletonTextSizing($sizes...) {
+	@each $size in $sizes {
+		&.u-text#{$size} {
+			@if ($size == 'XS') {
+				--components-skeleton-text-offset: 0.25rem;
+			}
+			@if ($size == 'S' or $size == 'L') {
+				--components-skeleton-text-offset: 0.375rem;
+			}
+			@if ($size == 'XXL') {
+				--components-skeleton-text-offset: 0.5rem;
+			}
+			height: var(--sizes-#{$size}-lineHeight);
+		}
+	}
+}
+
+@mixin skeletonTitleSizing($titles...) {
+	@each $title in $titles {
+		&:is(.u-#{$title}, #{$title}) {
+			height: auto;
+			line-height: var(--sizes-lineHeight);
+			min-height: var(--sizes-lineHeight);
+			@if ($title == 'h1') {
+				--components-skeleton-text-offset: 0.5rem;
+			}
+			@if ($title == 'h2' or $title == 'h3' or $title == 'h4' or $title == 'h5') {
+				--components-skeleton-text-offset: 0.375rem;
+			}
+			@if ($title == 'h6') {
+				--components-skeleton-text-offset: 0.25rem;
+			}
+		}
+	}
+}
+
+@mixin loading {
+	animation: skeletonPulse 1.5s infinite ease-in-out;
+	.skeleton-item {
+		animation: skeletonBackground 1.5s infinite linear;
+		background: linear-gradient(
+			90deg,
+			var(--components-skeleton-gradient-step-one, var(--palettes-grey-50)),
+			var(--components-skeleton-gradient-step-two, var(--palettes-grey-200)),
+			var(--components-skeleton-gradient-step-one, var(--palettes-grey-50))
+		);
+		background-size: 150% 100%;
+		background-repeat: repeat-x;
+		display: block;
+		&:not(.mod-square, .mod-circle) {
+			@include skeletonTextSizing('XS', 'S', 'L', 'XL', 'XXL');
+			@include skeletonTitleSizing('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+			clip-path: inset(
+				calc(var(--components-skeleton-text-offset) + 1px) calc(100% - var(--components-skeleton-text-width, 100%))
+					calc(var(--components-skeleton-text-offset) - 1px) 0 round var(--commons-borderRadius-L)
+			);
+			height: var(--sizes-M-lineHeight);
+			width: 100%;
+		}
+	}
+
+	// background gradient animation
+	@keyframes skeletonBackground {
+		0% {
+			background-position: 150% 50%;
+		}
+		100% {
+			background-position: -150% 50%;
+		}
+	}
+
+	// pulse animation
+	@keyframes skeletonPulse {
+		0% {
+			opacity: 0.9;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0.9;
+		}
+	}
+}

@@ -1,6 +1,41 @@
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @use 'exports' as *;
+
+.form-field {
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-checkable,
+	&:has(.checkboxField),
+	&:has(.switchField) {
+		@include checkable;
+	}
+
+	&:has(.textField-input-value[aria-invalid='true']) {
+		@include invalid;
+	}
+
+	&:has(.checkboxField-input:disabled) {
+		.formLabel {
+			@include formLabel.disabled;
+		}
+
+		.inlineMessage {
+			@include inlineMessage.disabled;
+		}
+	}
+}
+
+// deprecated
 
 .form {
 	@include vars;

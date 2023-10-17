@@ -1,0 +1,27 @@
+@mixin dark {
+	--components-skeleton-gradient-step-one: var(--palettes-grey-200);
+	--components-skeleton-gradient-step-two: var(--palettes-grey-500);
+}
+
+@mixin skeletonShapeSizing($spacings...) {
+	@each $spacing in $spacings {
+		&.mod-#{$spacing} {
+			--components-skeleton-shape-height: var(--spacings-#{$spacing});
+			--components-skeleton-shape-width: var(--spacings-#{$spacing});
+		}
+	}
+}
+
+@mixin square {
+	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
+	border-radius: var(--commons-borderRadius-M);
+	height: var(--components-skeleton-shape-height);
+	width: var(--components-skeleton-shape-width);
+}
+
+@mixin circle {
+	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
+	border-radius: 50%;
+	height: var(--components-skeleton-shape-height);
+	width: var(--components-skeleton-shape-width);
+}

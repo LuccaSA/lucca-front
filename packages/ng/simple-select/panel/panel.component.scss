@@ -5,7 +5,6 @@
 .panel-search {
   position: sticky;
   top: 0;
-  margin-bottom: var(--spacings-XXS);
   box-shadow: 0 -4px 0 var(--spacings-XS) var(--colors-white-color); // Avoid showing options list while scrolling due to header sticky potisionning
 }
 

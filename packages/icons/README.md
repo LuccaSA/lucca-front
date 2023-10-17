@@ -2,4 +2,9 @@
 
 ## How to update icons
 
-Follow our [tutorial on Notion](https://www.notion.so/Mise-jour-de-la-font-36363b23cdf0470a920f68d2c5f436a7) (🇫🇷)
+- Update font files in `font/` folder
+- Update the `selection.json` file with the new one from icomoon
+- Run `npm run icons:update`
+- You're done, just need to commit the changes now !
+
+For more details, see https://www.notion.so/Mise-jour-de-la-font-fc4a671131db45319bb3c6b80650c846 (:flag_fr:)

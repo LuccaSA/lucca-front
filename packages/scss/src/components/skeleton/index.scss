@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.skeleton {
+	@include vars;
+	@include component;
+	// .mod-dark can be applied to .skeleton or .skeleton-item
+	&.mod-dark {
+		@include dark;
+	}
+
+	&.is-loading {
+		@include loading;
+		.skeleton-item {
+			// .mod-dark can be applied to .skeleton or .skeleton-item
+			&.mod-dark {
+				@include dark;
+			}
+			&.mod-square {
+				@include square;
+			}
+			&.mod-circle {
+				@include circle;
+			}
+		}
+	}
+}

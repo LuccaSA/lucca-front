@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.vertical-navigation {
+.verticalNavigation {
 	@include vars;
 	@include component;
 }
@@ -23,4 +23,8 @@
 	&[disabled], &.is-disabled {
 		@include disabled;
 	}
+}
+
+span.verticalNavigation-list-item-link {
+	@include disabled;
 }

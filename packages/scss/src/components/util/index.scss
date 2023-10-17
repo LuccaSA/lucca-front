@@ -16,7 +16,8 @@
 @each $elevation in config.$elevations {
 	$index: list.index(config.$elevations, $elevation);
 
-	.u-elevate#{$index} { // deprecated
+	.u-elevate#{$index} {
+		// deprecated
 		box-shadow: var(--commons-elevations-elevation-#{$index});
 	}
 }
@@ -63,6 +64,7 @@
 @include core.classes('pointer-events', core.$pointerEvents);
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('text-decoration', core.$decoration);
+@include core.classes('overflow', core.$overflow);
 
 @media (prefers-reduced-motion: no-preference) {
 	@include core.classes('scroll-behavior', core.$scrollBehavior);
@@ -152,11 +154,12 @@
 }
 
 .u-noSpinButtons {
-	&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 	}
 
-	&[type="number"] {
+	&[type='number'] {
 		-moz-appearance: textfield;
 	}
 }
