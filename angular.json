@@ -3,8 +3,18 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
     "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "skipTests": true,
+      "standalone": true,
+      "style": "scss"
+    }
   },
   "newProjectRoot": "packages/ng",
   "projects": {
@@ -22,7 +32,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["packages/**/*.ts", "packages/**/*.html"]
+            "lintFilePatterns": [
+              "packages/**/*.ts",
+              "packages/**/*.html"
+            ]
           }
         },
         "storybook": {
@@ -30,11 +43,23 @@
           "options": {
             "browserTarget": "ng:build",
             "compodoc": true,
-            "compodocArgs": ["-p", "./tsconfig.compodoc-json.json", "-e", "json", "-d", ".storybook"],
+            "compodocArgs": [
+              "-p",
+              "./tsconfig.compodoc-json.json",
+              "-e",
+              "json",
+              "-d",
+              ".storybook"
+            ],
             "port": 6006,
-            "styles": [".storybook/styles.scss"],
+            "styles": [
+              ".storybook/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["packages/ng/styles", "node_modules"]
+              "includePaths": [
+                "packages/ng/styles",
+                "node_modules"
+              ]
             }
           }
         },
@@ -43,10 +68,22 @@
           "options": {
             "browserTarget": "ng:build",
             "compodoc": true,
-            "compodocArgs": ["-p", "./tsconfig.compodoc-json.json", "-e", "json", "-d", ".storybook"],
-            "styles": [".storybook/styles.scss"],
+            "compodocArgs": [
+              "-p",
+              "./tsconfig.compodoc-json.json",
+              "-e",
+              "json",
+              "-d",
+              ".storybook"
+            ],
+            "styles": [
+              ".storybook/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["packages/ng/styles", "node_modules"]
+              "includePaths": [
+                "packages/ng/styles",
+                "node_modules"
+              ]
             }
           }
         }
