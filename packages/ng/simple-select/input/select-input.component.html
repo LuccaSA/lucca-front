@@ -5,6 +5,5 @@
 	</div>
 </div>
 <a *ngIf="clearable && hasValue" class="clear lu-select-clearer" role="button" (click)="clearValue($event)">
-	<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-	<span class="u-mask">{{ intl.clear }}</span>
+	<lu-icon icon="signClose" [alt]="intl.clear"></lu-icon>
 </a>

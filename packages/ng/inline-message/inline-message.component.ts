@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@a
 import { NgIf } from '@angular/common';
 import { InlineMessageState } from './inline-message-state';
 import { NgClazz } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
-	imports: [NgIf],
+	imports: [NgIf, IconComponent],
 	hostDirectives: [NgClazz],
 	templateUrl: './inline-message.component.html',
 	styleUrls: ['./inline-message.component.scss'],

@@ -1,15 +1,17 @@
-import { Component, Input, numberAttribute } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Palette } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges } from '@angular/core';
+import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-numeric-badge',
 	standalone: true,
-	imports: [CommonModule],
 	templateUrl: './numeric-badge.component.html',
 	styleUrls: ['./numeric-badge.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	hostDirectives: [NgClazz],
 })
-export class NumericBadgeComponent {
+export class NumericBadgeComponent implements OnChanges {
+	#ngClass = inject(NgClazz);
+
 	@Input({ required: true, transform: numberAttribute })
 	/**
 	 * The value to display, number only.
@@ -27,4 +29,8 @@ export class NumericBadgeComponent {
 	 * The palette to use for this badge. Defaults to 'none' (inherits parent palette)
 	 */
 	palette: Palette = 'none';
+
+	ngOnChanges(): void {
+		this.#ngClass.ngClass = ['numericBadge', `palette-${this.palette}`, `mod-${this.size}`];
+	}
 }
