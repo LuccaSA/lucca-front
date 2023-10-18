@@ -20,7 +20,7 @@ export class InlineMessageComponent implements OnChanges {
 	label: string;
 
 	@Input()
-	state: InlineMessageState = 'default';
+	state: InlineMessageState;
 
 	@Input()
 	size: 'S' | 'M' = 'M';
