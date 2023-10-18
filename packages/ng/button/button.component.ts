@@ -1,16 +1,20 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@angular/core';
 import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton]',
+	selector: 'button[luButton]', // a[luButton]?
 	standalone: true,
 	hostDirectives: [NgClazz],
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
+	host: {
+		class: 'button',
+	},
 })
-export class ButtonComponent implements OnInit, OnChanges {
+export class ButtonComponent implements OnChanges {
 	#ngClazz = inject(NgClazz);
 
 	@Input()
@@ -31,11 +35,7 @@ export class ButtonComponent implements OnInit, OnChanges {
 
 	// Q: Rename this to something else? conflicts with native style input name
 	@Input()
-	buttonStyle: 'default' | 'outlined' | 'text' | 'text-invert' = 'default';
-
-	ngOnInit(): void {
-		this.#ngClazz.klass = 'button';
-	}
+	luButton: 'default' | 'outlined' | 'text' | 'text-invert' = 'default';
 
 	ngOnChanges(): void {
 		const ngClassConfig = {
@@ -44,12 +44,12 @@ export class ButtonComponent implements OnInit, OnChanges {
 			[`palette-${this.palette}`]: true,
 			[`is-${this.state}`]: true,
 		};
-		if (this.buttonStyle !== 'default') {
-			if (this.buttonStyle === 'text-invert') {
+		if (this.luButton !== 'default') {
+			if (this.luButton === 'text-invert') {
 				ngClassConfig['mod-text'] = true;
 				ngClassConfig['mod-invert'] = true;
 			} else {
-				ngClassConfig[`mod-${this.buttonStyle}`] = true;
+				ngClassConfig[`mod-${this.luButton}`] = true;
 			}
 		}
 		this.#ngClazz.ngClass = ngClassConfig;

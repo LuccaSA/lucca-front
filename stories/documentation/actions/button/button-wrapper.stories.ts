@@ -4,14 +4,14 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 export default {
 	title: 'Documentation/Actions/Button/Angular',
 	component: ButtonComponent,
-	render: ({ size, block, palette, state, buttonStyle }) => {
+	render: ({ size, block, palette, state, luButton }) => {
 		return {
 			template: `<button luButton 
 ${size !== 'M' ? `size=${size}` : ''}
 ${block ? 'block' : ''}
 ${palette !== 'none' ? `palette=${palette}` : ''}
 ${state !== 'default' ? `state=${state}` : ''}
-${buttonStyle !== 'default' ? `buttonStyle=${buttonStyle}` : ''}
+${luButton !== 'default' ? `luButton=${luButton}` : ''}
 >Click me !</button>`,
 		};
 	},
@@ -23,6 +23,6 @@ export const Template: StoryObj<ButtonComponent> = {
 		block: false,
 		palette: 'none',
 		state: 'default',
-		buttonStyle: 'default',
+		luButton: 'default',
 	},
 };
