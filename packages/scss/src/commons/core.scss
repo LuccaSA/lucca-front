@@ -5,7 +5,7 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 
-$contents: '0';
+$contents: '0', '100\\%';
 $boxModel: 'margin', 'padding', 'border';
 $boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
 $corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
@@ -41,11 +41,11 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@each $property in $properties {
 		@if $prefix == '' {
 			.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
-				#{$name}: #{$property} #{$suffix};
+				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 		} @else {
 			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
-				#{$name}: #{$property} #{$suffix};
+				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 		}
 	}
