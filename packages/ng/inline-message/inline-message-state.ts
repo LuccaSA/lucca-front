@@ -1,1 +1,1 @@
-export type InlineMessageState = 'success' | 'warning' | 'error';
+export type InlineMessageState = 'success' | 'warning' | 'error' | 'default';
