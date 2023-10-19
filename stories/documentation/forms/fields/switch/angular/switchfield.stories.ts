@@ -1,18 +1,18 @@
-import { CheckboxfieldComponent } from '@lucca-front/ng/forms';
+import { SwitchfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export default {
-	title: 'Documentation/Forms/Fields/Checkbox Field',
-	component: CheckboxfieldComponent,
+	title: 'Documentation/Forms/Fields/SwitchField/Angular',
+	component: SwitchfieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [CheckboxfieldComponent, FormsModule, ReactiveFormsModule],
+			imports: [SwitchfieldComponent, FormsModule, ReactiveFormsModule],
 		}),
 	],
 } as Meta;
 
-export const withNgModel: StoryObj<CheckboxfieldComponent> = {
+export const withNgModel: StoryObj<SwitchfieldComponent> = {
 	name: 'With NgModel',
 	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState }) => {
 		return {
@@ -20,18 +20,18 @@ export const withNgModel: StoryObj<CheckboxfieldComponent> = {
 				example: false,
 			},
 			template: `
-<lu-checkboxfield label="${label}"
+<lu-switchfield label="${label}"
 required="${required}"
 ${hiddenLabel ? 'hiddenLabel' : ''}
 inlineMessage="${inlineMessage}"
 inlineMessageState="${inlineMessageState}"
 size="${size}"
 [(ngModel)]="example">
-</lu-checkboxfield>
+</lu-switchfield>
 
 {{example}}`,
 			moduleMetadata: {
-				imports: [CheckboxfieldComponent, FormsModule],
+				imports: [SwitchfieldComponent, FormsModule],
 			},
 		};
 	},
@@ -44,7 +44,7 @@ size="${size}"
 		size: 'M',
 	},
 };
-export const withReactiveForm: StoryObj<CheckboxfieldComponent> = {
+export const withReactiveForm: StoryObj<SwitchfieldComponent> = {
 	name: 'With ReactiveForm (and Validators.requiredTrue)',
 	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState }) => {
 		return {
@@ -55,18 +55,18 @@ export const withReactiveForm: StoryObj<CheckboxfieldComponent> = {
 			},
 			template: `
 <form [formGroup]="form">
-	<lu-checkboxfield label="${label}" 
-	${hiddenLabel ? 'hiddenLabel' : ''} 
+	<lu-switchfield label="${label}"
+	${hiddenLabel ? 'hiddenLabel' : ''}
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}"
 	formControlName="example">
-	</lu-checkboxfield>
+	</lu-switchfield>
 </form>
 
 {{form.value.example}}`,
 			moduleMetadata: {
-				imports: [CheckboxfieldComponent, ReactiveFormsModule],
+				imports: [SwitchfieldComponent, ReactiveFormsModule],
 			},
 		};
 	},

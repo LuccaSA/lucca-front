@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export default {
-	title: 'Documentation/Forms/Fields/TextField',
+	title: 'Documentation/Forms/Fields/TextField/Angular',
 	component: TextfieldComponent,
 	decorators: [
 		moduleMetadata({
