@@ -6,8 +6,6 @@
 	display: block;
 	margin-bottom: var(--spacings-S);
 	border-style: solid;
-	flex-direction: row;
-	row-gap: var(--spacings-S);
 	position: relative;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
