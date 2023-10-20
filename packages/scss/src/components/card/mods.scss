@@ -7,7 +7,7 @@
 	text-decoration: none;
 	cursor: pointer;
 
-	&:focus {
+	&:focus {
 		outline: none;
 	}
 
@@ -28,8 +28,10 @@
 	box-shadow: var(--commons-boxShadow-S);
 	border: 0;
 	cursor: pointer;
-	display: flex;
 	padding: var(--components-card-content-padding);
+	display: flex;
+	flex-direction: row;
+	row-gap: var(--spacings-S);
 
 	&:hover {
 		box-shadow: var(--commons-boxShadow-L);
