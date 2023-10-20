@@ -77,31 +77,23 @@ function getTemplate(args: ArrowBasicStory): string {
 </div>
 <div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	} else if (args.field === 'checkbox') {
-		return `<div class="checkboxField${s} mod-withArrow">
-	<input type="checkbox" class="checkboxField-input" id="field" aria-labelledby="fieldlabel"${checked} />
-	<label class="checkboxField-label" for="field">
-		<span class="checkboxField-label-input">
-			<span class="checkboxField-label-input-icon" aria-hidden="true"></span>
-		</span>
-		<span class="formLabel" id="fieldlabel">
-			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
-		</span>
-	</label>
-	<div class="checkboxField-arrow${grey}"></div>
+		return `<div class="form-field mod-withArrow${s}">
+	<label class="formLabel" for="CB">Label</label>
+	<span class="checkboxField">
+		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label"${checked} />
+		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+	</span>
+	<div class="form-field-arrow${grey}"></div>
 </div>
 <div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	} else {
-		return `<div class="switchField${s} mod-withArrow">
-	<input type="checkbox" class="switchField-input" id="field" aria-labelledby="fieldLabel"${checked} />
-	<label class="switchField-label" for="field">
-		<span class="switchField-label-input">
-			<span class="switchField-label-input-icon" aria-hidden="true"></span>
-		</span>
-		<span class="formLabel" id="fieldLabel">
-			Label<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup>
-		</span>
-	</label>
-	<div class="switchField-arrow${grey}"></div>
+		return `<div class="form-field mod-withArrow${s}">
+	<label class="formLabel" for="ID">Label</label>
+	<span class="switchField">
+		<input type="checkbox" class="switchField-input" id="ID"${checked} />
+		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
+	</span>
+	<div class="form-field-arrow${grey}"></div>
 </div>
 <div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	}
