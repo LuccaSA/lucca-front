@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface SkeletonWidthStory {}
 
 export default {
-	title: 'Documentation/Skeleton',
+	title: 'Documentation/Loaders/Skeleton',
 } as Meta;
 
 function getTemplate(args: SkeletonWidthStory): string {

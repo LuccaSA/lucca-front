@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface SkeletonSquareStory {}
 
 export default {
-	title: 'Documentation/Skeleton',
+	title: 'Documentation/Loaders/Skeleton',
 } as Meta;
 
 function getTemplate(args: SkeletonSquareStory): string {
