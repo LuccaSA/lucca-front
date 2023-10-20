@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.emptyPage {
+	@include vars;
+	@include component;
+}
