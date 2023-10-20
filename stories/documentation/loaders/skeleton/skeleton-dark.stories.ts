@@ -7,9 +7,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: SkeletonDarkStory): string {
-	return `<div class="skeleton is-loading">
-	<h1 class="skeleton-item mod-dark"></h1>
-	<span class="skeleton-item mod-dark"></span>
+	return `<div class="skeleton mod-dark is-loading">
+	<h1 class="skeleton-item"></h1>
+	<span class="skeleton-item"></span>
 </div>`;
 }
 
