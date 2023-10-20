@@ -7,6 +7,7 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 @use '@lucca-front/scss/src/components/switchField/exports' as switchField;
 @use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
+@use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin S {
 	.formLabel {
@@ -52,6 +53,40 @@
 
 	.switchField {
 		order: -1;
+	}
+}
+
+@mixin withArrow {
+	padding-bottom: var(--spacings-S);
+
+	.form-field-arrow {
+		@include box.arrow;
+	}
+
+	&:has(.switchField) {
+		.form-field-arrow {
+			@include box.arrowSwitch; // Arrow position for switch
+		}
+	}
+
+	&:not(:has(:checked)) {
+		.form-field-arrow {
+			display: none;
+		}
+	}
+}
+
+@mixin withArrowS {
+	padding-bottom: var(--spacings-XS);
+
+	.form-field-arrow {
+		@include box.arrowS;
+	}
+
+	&:has(.switchField) {
+		.form-field-arrow {
+			@include box.arrowSwitchS; // Arrow position for switch
+		}
 	}
 }
 
