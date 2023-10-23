@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges, SimpleChanges } from '@angular/core';
 import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -30,11 +30,9 @@ export class NumericBadgeComponent implements OnChanges {
 	 */
 	palette: Palette = 'none';
 
-	ngOnChanges(): void {
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.palette.currentValue || changes.size.currentValue) {
+		if (changes['palette']?.currentValue || changes['size']?.currentValue) {
 			this.#ngClass.ngClass = ['numericBadge', `palette-${this.palette}`, `mod-${this.size}`];
 		}
-	}
 	}
 }
