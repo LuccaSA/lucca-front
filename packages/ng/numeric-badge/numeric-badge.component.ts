@@ -31,6 +31,10 @@ export class NumericBadgeComponent implements OnChanges {
 	palette: Palette = 'none';
 
 	ngOnChanges(): void {
-		this.#ngClass.ngClass = ['numericBadge', `palette-${this.palette}`, `mod-${this.size}`];
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes.palette.currentValue || changes.size.currentValue) {
+			this.#ngClass.ngClass = ['numericBadge', `palette-${this.palette}`, `mod-${this.size}`];
+		}
+	}
 	}
 }
