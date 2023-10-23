@@ -3,13 +3,13 @@ import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, numberAt
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'lu-multi-select',
@@ -90,6 +90,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				options$: this.options$,
 				loading$: this.loading$,
 				optionTpl: this.optionTpl,
+				grouping: this.grouping,
 			},
 			this.overlayConfig,
 		);

@@ -1,8 +1,25 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Output, TemplateRef, Type, ViewChild } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	ContentChild,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostBinding,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	TemplateRef,
+	Type,
+	ViewChild,
+	booleanAttribute,
+	inject,
+} from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { LuSimpleSelectDefaultOptionComponent } from '../option';
+import { LuOptionGroupDirective, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
@@ -13,7 +30,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() placeholder = '';
 
-	@Input()
+	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
 	clearable = false;
 
@@ -21,7 +38,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clueChange.observed;
 	}
 
-	@Input()
+	@Input({ transform: booleanAttribute })
 	disabled = false;
 
 	@HostBinding('class.is-selected')
@@ -65,6 +82,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
+	@ContentChild(LuOptionGroupDirective) grouping?: LuOptionGroupDirective<TOption, TValue, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
@@ -95,7 +113,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	options$ = new ReplaySubject<TOption[]>(1);
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
-	// This is the clue stored after we selected an option to know if we shoudl emit an empty clue on open or not
+	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	previousClue: string | null = null;
 
 	protected onChange?: (value: TValue | null) => void;

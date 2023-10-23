@@ -1,6 +1,5 @@
 <div
 	class="lu-picker-panel lu-option-picker-panel"
-	role="dialog"
 	cdkTrapFocus
 	*ngIf="{ options: options$ | async } as ctx"
 	[cdkTrapFocusAutoCapture]="true"
@@ -11,15 +10,29 @@
 		(scroll)="onScroll($event)"
 	>
 		<div class="lu-picker-content-option" role="listbox">
-			<lu-select-option
-				*ngFor="let option of ctx.options; let index = index"
-				[option]="option"
-				[optionTpl]="optionTpl"
-				[optionIndex]="index"
-				[scrollIntoViewOptions]="{ block: 'center' }"
-				[isSelected]="option === selected"
-				(click)="panelRef.emitValue(option)"
-			></lu-select-option>
+			<ng-container *ngIf="grouping">
+				<div *ngFor="let group of groups$ | async" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
+					<span class="optionItem-groupKey" role="presentation" [id]="selectId + '-group-' + group.key">
+						<ng-template [ngTemplateOutlet]="grouping.templateRef" [ngTemplateOutletContext]="{ $implicit: group }"></ng-template>
+					</span>
+					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }"></ng-template>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="!grouping">
+				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }"></ng-template>
+			</ng-container>
+
+			<ng-template #optionsList let-options>
+				<lu-select-option
+					*ngFor="let option of options; let index = index"
+					[option]="option"
+					[optionTpl]="optionTpl"
+					[optionIndex]="index"
+					[scrollIntoViewOptions]="{ block: 'center' }"
+					[isSelected]="option === selected"
+					(click)="panelRef.emitValue(option)"
+				></lu-select-option>
+			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
 				{{intl.emptyResults}}
 			</div>

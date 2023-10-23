@@ -48,6 +48,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 				options$: this.options$,
 				loading$: this.loading$,
 				optionTpl: this.optionTpl,
+				grouping: this.grouping,
 			},
 			this.overlayConfig,
 		);
