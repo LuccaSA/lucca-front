@@ -3,13 +3,12 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton]', // a[luButton]?
+	selector: 'button[luButton] a[luButton]',
 	standalone: true,
 	hostDirectives: [NgClazz],
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
 		class: 'button',
 	},
@@ -25,15 +24,12 @@ export class ButtonComponent implements OnChanges {
 	})
 	block = false;
 
-	// Q: Global palette or specific one for button?
 	@Input()
 	palette: Palette = 'none';
 
-	// Q: disabled state matching is-disabled class, can't we just style from state being disabled?
 	@Input()
-	state: 'default' | 'loading' | 'error' | 'success' | 'disabled' = 'default';
+	state: 'default' | 'loading' | 'error' | 'success' = 'default';
 
-	// Q: Rename this to something else? conflicts with native style input name
 	@Input()
 	luButton: 'default' | 'outlined' | 'text' | 'text-invert' = 'default';
 
