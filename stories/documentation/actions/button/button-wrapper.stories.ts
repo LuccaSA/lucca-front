@@ -6,12 +6,11 @@ export default {
 	component: ButtonComponent,
 	render: ({ size, block, palette, state, luButton }) => {
 		return {
-			template: `<button luButton 
+			template: `<button luButton${luButton !== 'default' ? `="${luButton}"` : ''} 
 ${size !== 'M' ? `size=${size}` : ''}
 ${block ? 'block' : ''}
 ${palette !== 'none' ? `palette=${palette}` : ''}
 ${state !== 'default' ? `state=${state}` : ''}
-${luButton !== 'default' ? `luButton=${luButton}` : ''}
 >Click me !</button>`,
 		};
 	},

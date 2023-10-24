@@ -3,7 +3,7 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton] a[luButton]',
+	selector: 'button[luButton],a[luButton]',
 	standalone: true,
 	hostDirectives: [NgClazz],
 	template: '<ng-content></ng-content>',
