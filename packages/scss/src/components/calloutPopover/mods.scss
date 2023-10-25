@@ -1,0 +1,22 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin S {
+  font-size: var(--sizes-S-fontSize);
+  line-height: var(--sizes-S-lineHeight);
+  padding: 0.375rem;
+
+  .calloutPopover-icon {
+    @include icon.S;
+  }
+}
+
+@mixin XS {
+  font-size: var(--sizes-XS-fontSize);
+  line-height: var(--sizes-XS-lineHeight);
+  padding: 0.125rem var(--spacings-XXS);
+  gap: var(--spacings-XXS);
+
+  .calloutPopover-icon {
+    @include icon.XXS;
+  }
+}
