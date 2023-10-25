@@ -2,21 +2,21 @@
 @use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
 
 @mixin S {
-  .calloutAccordion-summary-title {
+  .calloutDisclosure-summary-title {
     font-size: var(--sizes-S-fontSize);
     line-height: var(--sizes-S-lineHeight);
   }
 
-  .calloutAccordion-summary-icon {
+  .calloutDisclosure-summary-icon {
   	@include icon.S;
   }
 
-  .calloutAccordion-summary-chevron {
+  .calloutDisclosure-summary-chevron {
   	@include icon.S;
   }
 
-  .calloutAccordion-details {
-    margin-left: calc(var(--components-calloutAccordion-paddingHorizontal) + 2rem);
+  .calloutDisclosure-details {
+    margin-left: calc(var(--components-calloutDisclosure-paddingHorizontal) + 2rem);
   }
 
   .calloutFeedbackList {
@@ -25,11 +25,11 @@
 }
 
 @mixin iconless {
-  .calloutAccordion-summary-icon {
+  .calloutDisclosure-summary-icon {
     display: none;
   }
 
-  .calloutAccordion-details {
-    margin-left: var(--components-calloutAccordion-paddingHorizontal);
+  .calloutDisclosure-details {
+    margin-left: var(--components-calloutDisclosure-paddingHorizontal);
   }
 }
