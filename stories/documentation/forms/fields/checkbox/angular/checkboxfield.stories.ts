@@ -1,6 +1,7 @@
 import { CheckboxfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
@@ -12,26 +13,25 @@ export default {
 	],
 } as Meta;
 
-export const withNgModel: StoryObj<CheckboxfieldComponent> = {
-	name: 'With NgModel',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState }) => {
+export const Basic: StoryObj<CheckboxfieldComponent> = {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
 		return {
 			props: {
 				example: false,
 			},
-			template: `
-<lu-checkboxfield label="${label}"
-required="${required}"
-${hiddenLabel ? 'hiddenLabel' : ''}
-inlineMessage="${inlineMessage}"
-inlineMessageState="${inlineMessageState}"
-size="${size}"
-[(ngModel)]="example">
+			template: `<lu-checkboxfield label="${label}"
+	required="${required}"
+	${hiddenLabel ? 'hiddenLabel' : ''}
+	tooltip="${tooltip}"
+	inlineMessage="${inlineMessage}"
+	inlineMessageState="${inlineMessageState}"
+	size="${size}"
+	[(ngModel)]="example">
 </lu-checkboxfield>
 
 {{example}}`,
 			moduleMetadata: {
-				imports: [CheckboxfieldComponent, FormsModule],
+				imports: [CheckboxfieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -42,40 +42,6 @@ size="${size}"
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		size: 'M',
-	},
-};
-export const withReactiveForm: StoryObj<CheckboxfieldComponent> = {
-	name: 'With ReactiveForm (and Validators.requiredTrue)',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState }) => {
-		return {
-			props: {
-				form: new FormGroup({
-					example: new FormControl(false, [Validators.requiredTrue]),
-				}),
-			},
-			template: `
-<form [formGroup]="form">
-	<lu-checkboxfield label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
-	formControlName="example">
-	</lu-checkboxfield>
-</form>
-
-{{form.value.example}}`,
-			moduleMetadata: {
-				imports: [CheckboxfieldComponent, ReactiveFormsModule],
-			},
-		};
-	},
-	args: {
-		label: 'Label',
-		required: true,
-		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
-		size: 'M',
+		tooltip: "Je suis un message d'aide",
 	},
 };
