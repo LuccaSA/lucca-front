@@ -10,7 +10,7 @@ $boxModel: 'margin', 'padding', 'border';
 $boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
 $corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
 $gaps: 'column-gap', 'row-gap', 'gap';
-$displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
+$displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'contents', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
 $wrap: 'wrap', 'nowrap', 'wrap-reverse';
 $justify: 'flex-start', 'flex-end', 'space-around', 'space-between', 'space-evenly', 'center';
