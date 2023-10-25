@@ -27,7 +27,7 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 	}
 
 	protected url$ = new ReplaySubject<string>(1);
-	protected sort$ = new BehaviorSubject<string | null>('name,asc');
+	protected sort$ = new BehaviorSubject<string | null>('+name');
 	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
 
 	protected httpClient = inject(HttpClient);
