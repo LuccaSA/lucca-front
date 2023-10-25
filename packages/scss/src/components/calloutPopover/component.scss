@@ -11,6 +11,10 @@
 	border-style: solid;
 	border-width: var(--commons-divider-width);
 
+	&:focus-visible {
+		@include a11y.focusVisible();
+	}
+
 	@at-root ($atRoot) {
 		.calloutPopover-icon {
 			--icon-size: 1.5rem;
