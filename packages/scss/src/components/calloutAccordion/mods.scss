@@ -1,0 +1,29 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
+
+@mixin S {
+  .calloutAccordion-summary-title {
+    font-size: var(--sizes-S-fontSize);
+    line-height: var(--sizes-S-lineHeight);
+  }
+
+  .calloutAccordion-details {
+    margin: 0 2.75rem;
+  }
+
+  .calloutAccordion-summary-icon {
+  	@include icon.S;
+  }
+
+  .calloutAccordion-summary-chevron {
+  	@include icon.S;
+  }
+
+  .calloutAccordion-details {
+    margin-left: 2.75rem;
+  }
+
+  .calloutFeedbackList {
+    @include calloutFeedbackList.S;
+  }
+}
