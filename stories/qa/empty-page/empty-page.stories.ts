@@ -4,6 +4,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 @Component({
 	standalone: true,
 	selector: 'empty-page-stories',
+	styleUrls: ['empty-page.stories.scss'],
 	templateUrl: './empty-page.stories.html',
 })
 class EmptyPageStory {}
