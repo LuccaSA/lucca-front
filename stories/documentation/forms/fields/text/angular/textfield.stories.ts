@@ -2,6 +2,7 @@ import { TextfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
@@ -18,35 +19,33 @@ export default {
 	},
 } as Meta;
 
-export const withNgModel: StoryObj<TextfieldComponent & { disabled: boolean }> = {
-	name: 'With NgModel',
+export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon }) => {
 		return {
 			props: {
 				prefix,
 				suffix,
 			},
-			template: `
-<lu-textfield label="${label}"
-required="${required}"
-${hiddenLabel ? 'hiddenLabel' : ''}
-${hasClearer ? 'hasClearer' : ''}
-${hasSearchIcon ? 'hasSearchIcon' : ''}
-${disabled ? 'disabled' : ''}
-[prefix]="prefix"
-[suffix]="suffix"
-inlineMessage="${inlineMessage}"
-inlineMessageState="${inlineMessageState}"
-size="${size}"
-searchIcon="${searchIcon}"
-placeholder="${placeholder}"
-tooltip="${tooltip}"
-[(ngModel)]="example">
+			template: cleanupTemplate(`<lu-textfield label="${label}"
+	required="${required}"
+	${hiddenLabel ? 'hiddenLabel' : ''}
+	${hasClearer ? 'hasClearer' : ''}
+	${hasSearchIcon ? 'hasSearchIcon' : ''}
+	${disabled ? 'disabled' : ''}
+	[prefix]="prefix"
+	[suffix]="suffix"
+	inlineMessage="${inlineMessage}"
+	inlineMessageState="${inlineMessageState}"
+	size="${size}"
+	searchIcon="${searchIcon}"
+	placeholder="${placeholder}"
+	tooltip="${tooltip}"
+	[(ngModel)]="example">
 </lu-textfield>
 
-{{example}}`,
+{{example}}`),
 			moduleMetadata: {
-				imports: [TextfieldComponent, FormsModule],
+				imports: [TextfieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -62,60 +61,9 @@ tooltip="${tooltip}"
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
-		tooltip: '',
+		tooltip: "Je suis un message d'aide",
 		prefix: {
 			icon: 'dollar',
-			ariaLabel: 'Dollar',
-		},
-		suffix: {
-			content: '€/j',
-			ariaLabel: 'euros par jour',
-		},
-	},
-};
-export const withReactiveForm: StoryObj<TextfieldComponent> = {
-	name: 'With ReactiveForm',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer }) => {
-		return {
-			props: {
-				form: new FormGroup({
-					example: new FormControl({ value: '', disabled: true }, required ? [Validators.required] : []),
-				}),
-				prefix,
-				suffix,
-			},
-			template: `
-<form [formGroup]="form">
-	<lu-textfield label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	${hasClearer ? 'hasClearer' : ''}
-	prefix="prefix"
-	suffix="suffix"
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
-	placeholder="${placeholder}"
-	formControlName="example">
-	</lu-textfield>
-</form>
-
-{{form.value.example}}`,
-			moduleMetadata: {
-				imports: [TextfieldComponent, ReactiveFormsModule],
-			},
-		};
-	},
-	args: {
-		label: 'Label',
-		required: true,
-		hiddenLabel: false,
-		hasClearer: true,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
-		size: 'M',
-		placeholder: 'Placeholder',
-		prefix: {
-			content: '$',
 			ariaLabel: 'Dollar',
 		},
 		suffix: {

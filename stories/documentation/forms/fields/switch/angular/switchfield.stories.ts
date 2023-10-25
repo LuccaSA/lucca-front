@@ -1,6 +1,8 @@
-import { SwitchfieldComponent } from '@lucca-front/ng/forms';
+import { CheckboxfieldComponent, SwitchfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/Angular',
@@ -12,70 +14,35 @@ export default {
 	],
 } as Meta;
 
-export const withNgModel: StoryObj<SwitchfieldComponent> = {
-	name: 'With NgModel',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState }) => {
+export const Basic: StoryObj<SwitchfieldComponent> = {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
 		return {
 			props: {
 				example: false,
 			},
-			template: `
-<lu-switchfield label="${label}"
-required="${required}"
-${hiddenLabel ? 'hiddenLabel' : ''}
-inlineMessage="${inlineMessage}"
-inlineMessageState="${inlineMessageState}"
-size="${size}"
-[(ngModel)]="example">
-</lu-switchfield>
-
-{{example}}`,
-			moduleMetadata: {
-				imports: [SwitchfieldComponent, FormsModule],
-			},
-		};
-	},
-	args: {
-		label: 'Label',
-		hiddenLabel: false,
-		required: true,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
-		size: 'M',
-	},
-};
-export const withReactiveForm: StoryObj<SwitchfieldComponent> = {
-	name: 'With ReactiveForm (and Validators.requiredTrue)',
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState }) => {
-		return {
-			props: {
-				form: new FormGroup({
-					example: new FormControl(false, [Validators.requiredTrue]),
-				}),
-			},
-			template: `
-<form [formGroup]="form">
-	<lu-switchfield label="${label}"
+			template: cleanupTemplate(`<lu-switchfield label="${label}"
+	required="${required}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
+	tooltip="${tooltip}"
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}"
-	formControlName="example">
-	</lu-switchfield>
-</form>
+	[(ngModel)]="example">
+</lu-switchfield>
 
-{{form.value.example}}`,
+{{example}}`),
 			moduleMetadata: {
-				imports: [SwitchfieldComponent, ReactiveFormsModule],
+				imports: [CheckboxfieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
 		label: 'Label',
-		required: true,
 		hiddenLabel: false,
+		required: true,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		size: 'M',
+		tooltip: "Je suis un message d'aide",
 	},
 };
