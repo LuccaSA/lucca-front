@@ -2,6 +2,7 @@ import { CheckboxfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
@@ -19,7 +20,7 @@ export const Basic: StoryObj<CheckboxfieldComponent> = {
 			props: {
 				example: false,
 			},
-			template: `<lu-checkboxfield label="${label}"
+			template: cleanupTemplate(`<lu-checkboxfield label="${label}"
 	required="${required}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	tooltip="${tooltip}"
@@ -29,7 +30,7 @@ export const Basic: StoryObj<CheckboxfieldComponent> = {
 	[(ngModel)]="example">
 </lu-checkboxfield>
 
-{{example}}`,
+{{example}}`),
 			moduleMetadata: {
 				imports: [CheckboxfieldComponent, FormsModule, BrowserAnimationsModule],
 			},

@@ -2,6 +2,7 @@ import { TextfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
@@ -25,25 +26,24 @@ export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 				prefix,
 				suffix,
 			},
-			template: `
-<lu-textfield label="${label}"
-required="${required}"
-${hiddenLabel ? 'hiddenLabel' : ''}
-${hasClearer ? 'hasClearer' : ''}
-${hasSearchIcon ? 'hasSearchIcon' : ''}
-${disabled ? 'disabled' : ''}
-[prefix]="prefix"
-[suffix]="suffix"
-inlineMessage="${inlineMessage}"
-inlineMessageState="${inlineMessageState}"
-size="${size}"
-searchIcon="${searchIcon}"
-placeholder="${placeholder}"
-tooltip="${tooltip}"
-[(ngModel)]="example">
+			template: cleanupTemplate(`<lu-textfield label="${label}"
+	required="${required}"
+	${hiddenLabel ? 'hiddenLabel' : ''}
+	${hasClearer ? 'hasClearer' : ''}
+	${hasSearchIcon ? 'hasSearchIcon' : ''}
+	${disabled ? 'disabled' : ''}
+	[prefix]="prefix"
+	[suffix]="suffix"
+	inlineMessage="${inlineMessage}"
+	inlineMessageState="${inlineMessageState}"
+	size="${size}"
+	searchIcon="${searchIcon}"
+	placeholder="${placeholder}"
+	tooltip="${tooltip}"
+	[(ngModel)]="example">
 </lu-textfield>
 
-{{example}}`,
+{{example}}`),
 			moduleMetadata: {
 				imports: [TextfieldComponent, FormsModule, BrowserAnimationsModule],
 			},

@@ -2,6 +2,7 @@ import { CheckboxfieldComponent, SwitchfieldComponent } from '@lucca-front/ng/fo
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/Angular',
@@ -19,7 +20,7 @@ export const Basic: StoryObj<SwitchfieldComponent> = {
 			props: {
 				example: false,
 			},
-			template: `<lu-switchfield label="${label}"
+			template: cleanupTemplate(`<lu-switchfield label="${label}"
 	required="${required}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	tooltip="${tooltip}"
@@ -29,7 +30,7 @@ export const Basic: StoryObj<SwitchfieldComponent> = {
 	[(ngModel)]="example">
 </lu-switchfield>
 
-{{example}}`,
+{{example}}`),
 			moduleMetadata: {
 				imports: [CheckboxfieldComponent, FormsModule, BrowserAnimationsModule],
 			},

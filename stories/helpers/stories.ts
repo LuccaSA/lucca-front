@@ -70,3 +70,17 @@ export function getStoryGenerator<TComponent>(globalPartial: StoryObj<TComponent
 		};
 	};
 }
+
+/**
+ * Cleanup a story template for a proper ZeroHeight integration, this will ensure:
+ * - no empty lines are in the middle of a component's template
+ * - no in-line optional attributes are leaving empty spots of '    '
+ * - story code will not start with one or more empty lines
+ * @param template the template string to cleanup
+ */
+export function cleanupTemplate(template: string): string {
+	return template
+		.replace(/^\n+/, '')
+		.replace(/\n{2,}\t/gm, '')
+		.replace(/ {2,}/gm, ' ');
+}
