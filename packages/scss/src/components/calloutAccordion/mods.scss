@@ -1,0 +1,35 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
+
+@mixin S {
+  .calloutAccordion-summary-title {
+    font-size: var(--sizes-S-fontSize);
+    line-height: var(--sizes-S-lineHeight);
+  }
+
+  .calloutAccordion-summary-icon {
+  	@include icon.S;
+  }
+
+  .calloutAccordion-summary-chevron {
+  	@include icon.S;
+  }
+
+  .calloutAccordion-details {
+    margin-left: calc(var(--components-calloutAccordion-paddingHorizontal) + 2rem);
+  }
+
+  .calloutFeedbackList {
+    @include calloutFeedbackList.S;
+  }
+}
+
+@mixin iconless {
+  .calloutAccordion-summary-icon {
+    display: none;
+  }
+
+  .calloutAccordion-details {
+    margin-left: var(--components-calloutAccordion-paddingHorizontal);
+  }
+}

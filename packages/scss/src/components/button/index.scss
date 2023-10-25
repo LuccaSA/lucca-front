@@ -12,10 +12,6 @@
 	&.mod-text,
 	&.mod-link {
 		@include text;
-
-		&.mod-XS {
-			@include textXS;
-		}
 	}
 
 	&.mod-block {
