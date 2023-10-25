@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.calloutPopover {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+}
