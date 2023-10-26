@@ -17,5 +17,9 @@
     .formLabel-required {
       color: var(--palettes-error-700);
     }
+
+    legend.formLabel {
+      margin-bottom: var(--spacings-XXS);
+    }
   }
 }

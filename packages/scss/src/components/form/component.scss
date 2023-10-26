@@ -14,10 +14,22 @@
 			display: flex;
 			flex-direction: column;
 			gap: var(--spacings-XXS);
+			border: 0;
+			padding: 0;
+			margin: 0;
 
 			.formLabel {
 				cursor: pointer;
 			}
+		}
+
+		.form-fieldset {
+			border: 0;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: var(--spacings-XXS);
 		}
 
 		// deprecated

@@ -7,6 +7,7 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 @use '@lucca-front/scss/src/components/switchField/exports' as switchField;
 @use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
+@use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 
 @mixin S {
 	.formLabel {
@@ -23,6 +24,10 @@
 
 	.switchField {
 		@include switchField.S;
+	}
+
+	.radioField {
+		@include radioField.S;
 	}
 }
 
@@ -52,6 +57,14 @@
 
 	.switchField {
 		order: -1;
+	}
+
+	.radioField {
+		order: -1;
+	}
+
+	.inlineMessage {
+		grid-column: 2;
 	}
 }
 

@@ -15,6 +15,7 @@
 	}
 
 	&.mod-checkable,
+	&:has(.radioField),
 	&:has(.checkboxField),
 	&:has(.switchField) {
 		@include checkable;
@@ -24,7 +25,7 @@
 		@include invalid;
 	}
 
-	&:has(.checkboxField-input:disabled) {
+	&:has(.checkboxField-input:disabled, .radioField-input:disabled) {
 		.formLabel {
 			@include formLabel.disabled;
 		}
