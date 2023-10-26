@@ -64,9 +64,13 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			return false;
 		}
 		const groups = text.split(this._regex);
-		if (groups.length !== 3 && groups.length !== 2 && groups.length !== 1) {
+		const dayTextInvalid = granularity === ELuDateGranularity.day && groups.length !== 3;
+		const monthTextInvalid = granularity === ELuDateGranularity.month && groups.length !== 2;
+		const yearTextInvalid = granularity === ELuDateGranularity.year && groups.length !== 1;
+		if (dayTextInvalid || monthTextInvalid || yearTextInvalid) {
 			return false;
 		}
+
 		try {
 			const { date, month, year } = this.extract(text, granularity);
 
