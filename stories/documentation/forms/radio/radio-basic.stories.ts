@@ -7,7 +7,6 @@ interface RadioBasicStory {
 	id: Text;
 	label: Text;
 	message: Text;
-	checked: boolean;
 	invalid: false;
 	help: false;
 	messageState: '';
@@ -23,11 +22,6 @@ export default {
 			},
 		},
 		disabled: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		checked: {
 			control: {
 				type: 'boolean',
 			},
@@ -77,24 +71,34 @@ function getTemplate(args: RadioBasicStory): string {
 	const message = args.message;
 	const s = args.s ? ` mod-S` : '';
 	const disabled = args.disabled ? ` disabled="disabled"` : '';
-	const checked = args.checked ? ` checked="checked"` : '';
 	const required = args.required ? ` aria-required="true"` : '';
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `<div class="radioField${s}">
-  <input type="radio" class="radioField-input" id="${id}" name="fieldA" aria-labelledby="${id}Label" aria-describedby="${id}Msg"${checked}${disabled}${required}${invalid} />
-  <label class="radioField-label" for="${id}">
-    <span class="radioField-label-input">
-      <span class="radioField-label-input-icon" aria-hidden="true"></span>
-    </span>
-		<span class="formLabel" id="${id}label">
-			${label}<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span>
-		</span>
-  </label>
-	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
-</div>`;
+	return `
+	<fieldset class="form-fieldset">
+		<legend class="formLabel">Legend<sup *ngIf="required" class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="help"></span></legend>
+		<div class="form-field${s}">
+			<label class="formLabel" for="${id}1">Label</label>
+			<span class="radioField">
+				<input type="radio" class="radioField-input" id="${id}1" name="field"${disabled}${invalid}${required} checked />
+				<span class="radioField-icon">
+					<span class="radioField-icon-check" aria-hidden="true"></span>
+				</span>
+			</span>
+		</div>
+		<div class="form-field${s}">
+			<label class="formLabel" for="${id}2">Label</label>
+			<span class="radioField">
+				<input type="radio" class="radioField-input" id="${id}2" name="field"${disabled}${invalid}${required} />
+				<span class="radioField-icon">
+					<span class="radioField-icon-check" aria-hidden="true"></span>
+				</span>
+			</span>
+		</div>
+		<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message"><span aria-hidden="true" class="lucca-icon"></span>${message}</div>
+	</fieldset>`;
 }
 
 const Template: Story<RadioBasicStory> = (args: RadioBasicStory) => ({
@@ -103,4 +107,4 @@ const Template: Story<RadioBasicStory> = (args: RadioBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };
+Basic.args = { s: false, disabled: false, required: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };
