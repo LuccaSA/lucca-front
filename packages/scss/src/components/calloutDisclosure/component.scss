@@ -41,6 +41,7 @@
 			--icon-size: 1.5rem;
 			color: var(--palettes-grey-700);
 			margin-left: auto;
+			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
 		.calloutDisclosure-details {
