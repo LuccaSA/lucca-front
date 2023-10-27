@@ -21,10 +21,22 @@
 			display: flex;
 			gap: 0.75rem;
 			padding: var(--spacings-XS) var(--components-calloutDisclosure-paddingHorizontal);
+			border-radius: var(--commons-borderRadius-L);
+			transition: background-color var(--commons-animations-durations-fast) ease;
 			cursor: pointer;
+			z-index: 1;
+			position: relative;
+
+			&:hover {
+				background-color: var(--palettes-100, var(--palettes-grey-100));
+			}
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: 3px, $borderRadius: 6px);
+
+				~ .calloutDisclosure-details {
+					box-shadow: none
+				}
 			}
 		}
 
@@ -47,7 +59,7 @@
 		.calloutDisclosure-details {
 			margin: 0 calc(var(--components-calloutDisclosure-paddingHorizontal) + 2.25rem);
 			padding: var(--spacings-XS) 0 var(--spacings-S);
-			border-top: 1px solid var(--palettes-200, var(--palettes-grey-200));
+			box-shadow: 0 -1px 0 0 var(--palettes-200, var(--palettes-grey-200));
 		}
 	}
 }
