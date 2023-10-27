@@ -28,12 +28,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: ClearBasicStory): string {
-	const s = args.s ? `mod-S` : '';
-	const primary = args.primary ? `palette-primary` : '';
-	const disabled = args.disabled ? `disabled` : '';
-	return `
-		<a href="#" class="clear ${s} ${primary}" ${disabled}><span aria-hidden="true" class="lucca-icon icon-signClose"></span><span class="u-mask">Clear</span></a>
-	`;
+	const s = args.s ? ` mod-S` : '';
+	const primary = args.primary ? ` palette-primary` : '';
+	const disabled = args.disabled ? ` disabled` : '';
+	return `<button type="button" class="clear${s}${primary}"${disabled}><span class="clear-icon"></span><span class="u-mask">Clear</span></button>`;
 }
 
 const Template: Story<ClearBasicStory> = (args: ClearBasicStory) => ({
