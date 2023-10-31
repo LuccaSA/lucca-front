@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
@@ -73,8 +74,7 @@
 						color: var(--palettes-primary-800);
 
 						.numericBadge {
-							--components-numericBadge-background: var(--palettes-primary-200);
-							--components-numericBadge-color: var(--palettes-primary-800);
+							@include numericBadge.primary;
 						}
 					}
 				}
