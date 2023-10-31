@@ -1,6 +1,6 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
-import { PaletteArgType } from 'stories/helpers/common-arg-types';
+import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { ButtonComponent } from '@lucca-front/ng/button';
 
 export default {
@@ -15,19 +15,15 @@ export default {
 		const { description, heading, palette, size, removable, icon, removed } = args;
 		return {
 			template: `<lu-callout heading="${heading}" palette="${palette}" size="${size}" ${removable ? 'removable ' : ''} icon="${icon}" ${removed ? 'removed' : ''}>
-	<ul lu-callout-feedback-list palette="grey">
-		<li lu-callout-feedback-item>
-			<lu-feedback-item-description>
-				${description}
-			</lu-feedback-item-description>
-			<button lu-feedback-item-action luButton="outlined">Click me !</button>
-		</li>
-	</ul>
+	${description}
 </lu-callout>`,
 		};
 	},
 	argTypes: {
 		palette: PaletteArgType,
+		removable: {
+			description: 'Supports two-ways binding',
+		},
 		icon: {
 			options: ['info', 'success', 'warning', 'error', 'help'],
 			control: {
@@ -46,6 +42,7 @@ export default {
 		description: {
 			type: 'string',
 		},
+		removedChange: HiddenArgType,
 	},
 } as Meta;
 
