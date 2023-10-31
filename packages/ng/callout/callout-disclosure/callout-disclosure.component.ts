@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconComponent } from '../../icon/icon.component';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuccaIcon } from '@lucca-front/icons';
-import { Palette } from '../../core/type';
+import { Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-callout-disclosure',
