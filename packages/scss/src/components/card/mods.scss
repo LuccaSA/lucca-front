@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin grey {
 	--components-card-background: var(--palettes-grey-50);
 }
@@ -7,15 +9,14 @@
 	text-decoration: none;
 	cursor: pointer;
 
-	&:focus {
-		outline: none;
-	}
-
-	&:focus-visible,
 	&:hover {
 		border-color: var(--components-card-hover-border);
 		background-color: var(--components-card-hover-background);
 		outline: none;
+	}
+
+	&:focus-visible {
+		@include a11y.focusVisible();
 	}
 }
 
