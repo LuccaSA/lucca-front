@@ -1,15 +1,28 @@
-import { Meta, StoryObj } from '@storybook/angular';
-import { CalloutComponent } from '@lucca-front/ng/callout';
-import { PaletteArgType } from "../../../../helpers/common-arg-types";
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { PaletteArgType } from 'stories/helpers/common-arg-types';
+import { ButtonComponent } from '@lucca-front/ng/button';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
 	component: CalloutComponent,
+	decorators: [
+		moduleMetadata({
+			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent],
+		}),
+	],
 	render: (args: CalloutComponent & { description: string }) => {
-		const { description, heading, palette, size, removable, tiny, icon, removed } = args;
+		const { description, heading, palette, size, removable, icon, removed } = args;
 		return {
-			template: `<lu-callout heading="${heading}" palette="${palette}" size="${size}" [removable]="${removable}" [tiny]="${tiny}" icon="${icon}" ${removed?'removed':''}>
-  ${description}
+			template: `<lu-callout heading="${heading}" palette="${palette}" size="${size}" ${removable ? 'removable ' : ''} icon="${icon}" ${removed ? 'removed' : ''}>
+	<ul lu-callout-feedback-list palette="grey">
+		<li lu-callout-feedback-item>
+			<lu-feedback-item-description>
+				${description}
+			</lu-feedback-item-description>
+			<button lu-feedback-item-action luButton="outlined">Click me !</button>
+		</li>
+	</ul>
 </lu-callout>`,
 		};
 	},
@@ -39,12 +52,11 @@ export default {
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
 		heading: 'Feedback or informations',
-		tiny: false,
 		icon: 'info',
 		palette: 'none',
 		size: 'M',
 		removable: false,
 		removed: false,
-		description: `Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a>`,
+		description: `Description with more details`,
 	},
 };
