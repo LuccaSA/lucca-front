@@ -2,15 +2,15 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin disabled {
 	background-color: var(--commons-disabled-background);
-	color: var(--commons-disabled-color);
+	color: var(--palettes-grey-500);
 	cursor: default;
 
 	.numericBadge {
-			background-color: var(--palettes-grey-200);
-			color: var(--commons-disabled-color);
+		@include numericBadge.disabled;
 	}
 }
 
