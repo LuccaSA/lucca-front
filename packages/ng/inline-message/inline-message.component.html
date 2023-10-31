@@ -1,1 +1,1 @@
-<span aria-hidden="true" class="lucca-icon icon-{{state}}" *ngIf="state"></span>{{label}}
+<lu-icon [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
