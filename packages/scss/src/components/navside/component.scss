@@ -13,6 +13,10 @@
 	padding-top: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
 
+	.numericBadge {
+		margin-left: auto;
+	}
+
 	@at-root ($atRoot) {
 		.navSide-wrapper {
 			display: flex;
@@ -105,10 +109,6 @@
 			line-height: var(--sizes-S-lineHeight);
 			padding: .75rem var(--spacings-S);
 			font-weight: 600;
-		}
-
-		.numericBadge {
-			margin-left: auto;
 		}
 
 		.navSide-item-alert { // deprecated
