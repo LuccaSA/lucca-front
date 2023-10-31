@@ -46,7 +46,7 @@
 @mixin outlined {
 	&:not([disabled], .is-disabled) {
 		color: var(--palettes-700, var(--palettes-grey-700));
-		box-shadow: inset 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
 		background-color: var(--colors-white-color);
 
 		&:hover {

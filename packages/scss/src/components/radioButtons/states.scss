@@ -1,6 +1,6 @@
 @mixin disabled {
 	~ .radioButtons-item-label {
-		box-shadow: inset 0 0 0 1px var(--palettes-grey-200);
+		box-shadow: 0 0 0 1px var(--palettes-grey-200);
 		color: var(--palettes-grey-500);
 		cursor: default;
 	}
