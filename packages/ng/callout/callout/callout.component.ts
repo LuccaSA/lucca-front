@@ -32,7 +32,7 @@ export class CalloutComponent {
 	 */
 	size: 'M' | 'S' = 'M';
 
-	@Input()
+	@Input({ transform: booleanAttribute })
 	/**
 	 * Should we display the remove icon?
 	 */
