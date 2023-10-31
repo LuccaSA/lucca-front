@@ -14,7 +14,7 @@ export class IconComponent {
 	@Input({ required: true })
 	icon: LuccaIcon;
 
-	@Input({ required: true })
+	@Input()
 	alt: string;
 
 	@Input()
