@@ -2,4 +2,6 @@
 	<lu-icon class="calloutPopover-icon" icon="signInfo"></lu-icon>
 	1
 </button>
-<ng-template #overlayContentRef> Ici tu peux placer le template du contenu</ng-template>
+<ng-template #overlayContentRef>
+	<div [@tooltip]="'open'" class="lu-popover-content">Ici tu peux placer le template du contenu (bien dans la div par contre)</div>
+</ng-template>
