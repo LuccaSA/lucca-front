@@ -59,8 +59,8 @@
 @include core.classes('position', core.$position);
 @include core.classes('width', core.$contents);
 @include core.classes('height', core.$contents);
-@include core.classes('min-width', core.$contents);
-@include core.classes('min-height', core.$contents);
+@include core.classes('min-width', '0');
+@include core.classes('min-height', '0');
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);
 @include core.classes('font-style', core.$fontStyle);
