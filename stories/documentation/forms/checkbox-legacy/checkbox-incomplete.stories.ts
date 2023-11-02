@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: CheckboxIncompleteStory): string {
 	return `
 		<label class="checkbox">
-			<input class="checkbox-input incomplete" type="checkbox" checked="checked" aria-checked="mixed" />
+			<input class="checkbox-input is-incomplete" type="checkbox" checked="checked" aria-checked="mixed" />
 			<span class="checkbox-label">Checkbox</span>
 		</label>
 		<ul class="u-listReset u-marginLeftM">
@@ -22,7 +22,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 			</li>
 			<li>
 				<label class="checkbox">
-					<input class="checkbox-input is-incomplete" type="checkbox" />
+					<input class="checkbox-input" type="checkbox" />
 					<span class="checkbox-label">Checkbox</span>
 				</label>
 			</li>
