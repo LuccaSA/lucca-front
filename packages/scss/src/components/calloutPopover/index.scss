@@ -12,3 +12,9 @@
 		@include XS;
 	}
 }
+
+.calloutPopover-overlay {
+	&.mod-S {
+		@include overlayS;
+	}
+}

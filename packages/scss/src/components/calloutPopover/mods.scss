@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
@@ -18,5 +20,22 @@
 
   .calloutPopover-icon {
     @include icon.XXS;
+  }
+}
+
+@mixin overlayS {
+  --components-calloutPopover-width: 20rem;
+  --components-calloutPopover-content-margin: 1.75rem;
+
+  .calloutPopover-overlay-head-icon {
+    @include icon.S;
+  }
+
+  .calloutPopover-overlay-head-title {
+    @include title.h5;
+  }
+
+  .calloutFeedbackList {
+    @include calloutFeedbackList.S;
   }
 }
