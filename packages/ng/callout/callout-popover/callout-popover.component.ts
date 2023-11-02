@@ -3,11 +3,31 @@ import { CommonModule } from '@angular/common';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
 	selector: 'lu-callout-popover',
 	standalone: true,
 	imports: [CommonModule, IconComponent],
+	animations: [
+		trigger('tooltip', [
+			state(
+				'enter',
+				style({
+					opacity: 1,
+					transform: `scale(1)`,
+				}),
+			),
+			transition('void => *', [
+				style({
+					opacity: 0,
+					transform: `scale(0)`,
+				}),
+				animate(`150ms cubic-bezier(0.25, 0.8, 0.25, 1)`),
+			]),
+			transition('* => void', [animate('50ms 100ms linear', style({ opacity: 0 }))]),
+		]),
+	],
 	templateUrl: './callout-popover.component.html',
 	styleUrls: ['./callout-popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,7 +76,6 @@ export class CalloutPopoverComponent implements OnDestroy {
 
 		this.#overlayRef = this.#overlay.create({
 			positionStrategy,
-			panelClass: 'lu-popover-content',
 		});
 
 		// Hide on leaving the panel
