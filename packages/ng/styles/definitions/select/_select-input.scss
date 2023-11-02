@@ -40,10 +40,10 @@
 	}
 
 	.lu-select-display-wrapper {
-		display: flex;
+		display: block;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		gap: var(--spacings-XXS);
+		overflow: hidden;
 	}
 
 	.lu-select-value {
@@ -80,13 +80,7 @@
 	}
 
 	::ng-deep .lu-select-value {
-
-		lu-simple-select-default-option {
-			max-width: 5rem;
-			text-overflow: ellipsis;
-			overflow: hidden;
-		}
-
+		
 		.label {
 			padding: var(--spacings-XXS) var(--spacings-XS);
 			margin-left: 0;
