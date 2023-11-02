@@ -17,4 +17,8 @@
 	&.mod-S {
 		@include overlayS;
 	}
+
+	&.mod-iconless {
+		@include overlayIconless;
+	}
 }
