@@ -39,3 +39,11 @@
     @include calloutFeedbackList.S;
   }
 }
+
+@mixin overlayIconless {
+  --components-calloutPopover-content-margin: 0;
+
+  .calloutPopover-overlay-head-icon {
+    display: none;
+  }
+}
