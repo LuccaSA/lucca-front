@@ -8,10 +8,26 @@ export default {
 } as Meta;
 
 function getTemplate(args: CheckboxIncompleteStory): string {
-	return `<label class="checkbox">
-	<input class="checkbox-input is-incomplete" type="checkbox" name="checkboxList1" checked>
-	<span class="checkbox-label">Checkbox</span>
-</label>`;
+	return `
+		<label class="checkbox">
+			<input class="checkbox-input incomplete" type="checkbox" checked="checked" aria-checked="mixed" />
+			<span class="checkbox-label">Checkbox</span>
+		</label>
+		<ul class="u-listReset u-marginLeftM">
+			<li>
+				<label class="checkbox">
+					<input class="checkbox-input" type="checkbox" checked="checked" />
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+			</li>
+			<li>
+				<label class="checkbox">
+					<input class="checkbox-input is-incomplete" type="checkbox" />
+					<span class="checkbox-label">Checkbox</span>
+				</label>
+			</li>
+		</ul>
+	`;
 }
 
 const Template: StoryFn<CheckboxIncompleteStory> = (args: CheckboxIncompleteStory) => ({
