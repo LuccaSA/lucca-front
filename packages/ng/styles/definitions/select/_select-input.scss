@@ -31,6 +31,8 @@
 			pointer-events: none;
 			position: absolute;
 			right: var(--components-select-input-padding-horizontal);
+			transform-origin: 50% 45%;
+			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
 		&[disabled], &.is-disabled {
@@ -80,7 +82,7 @@
 	}
 
 	::ng-deep .lu-select-value {
-		
+
 		.label {
 			padding: var(--spacings-XXS) var(--spacings-XS);
 			margin-left: 0;
@@ -282,6 +284,13 @@
 		.lu-select-value {
 			display: flex;
 			align-items: flex-start;
+		}
+	}
+
+	// Focused
+	:host-context(.textfield .textfield-input.is-focused) {
+		&::after {
+			transform: rotate(-180deg);
 		}
 	}
 
