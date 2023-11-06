@@ -3,7 +3,9 @@
 	class="calloutPopover palette-{{palette}} mod-{{size}}"
 	#overlayOriginRef
 	(mouseenter)="showContent()"
+	(focus)="showContent()"
 	(mouseleave)="hideContent($event)"
+	(blur)="hideContent(null)"
 >
 	<lu-icon class="calloutPopover-icon" [icon]="icon"></lu-icon>
 	{{buttonLabel}}
