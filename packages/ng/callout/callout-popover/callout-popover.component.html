@@ -1,25 +1,21 @@
-<button type="button" class="calloutPopover" #overlayOriginRef (mouseenter)="showContent()" (mouseleave)="hideContent($event)">
-	<lu-icon class="calloutPopover-icon" icon="signInfo"></lu-icon>
-	1
+<button
+	type="button"
+	class="calloutPopover palette-{{palette}} mod-{{size}}"
+	#overlayOriginRef
+	(mouseenter)="showContent()"
+	(mouseleave)="hideContent($event)"
+>
+	<lu-icon class="calloutPopover-icon" [icon]="icon"></lu-icon>
+	{{buttonLabel}}
 </button>
 <ng-template #overlayContentRef>
-	<div [@tooltip]="'open'" class="lu-popover-content calloutPopover-overlay"> <!-- mod-S mod-iconless -->
+	<div [@tooltip]="'open'" class="lu-popover-content calloutPopover-overlay mod-{{contentSize}}">
 		<div class="calloutPopover-overlay-head">
-			<span aria-hidden="true" class="calloutPopover-overlay-head-icon lucca-icon icon-signSuccess palette-success"></span>
-			<strong class="calloutPopover-overlay-head-title">List title</strong>
+			<lu-icon class="calloutPopover-overlay-head-icon palette-{{palette}}" [icon]="icon"></lu-icon>
+			<strong class="calloutPopover-overlay-head-title">{{heading}}</strong>
 		</div>
 		<div class="calloutPopover-overlay-content">
-			<ul class="calloutFeedbackList palette-grey">
-			  <li class="calloutFeedbackList-item">
-			    <span class="calloutFeedbackList-item-description">
-			      Feedback description.
-			    </span>
-			    <div class="calloutFeedbackList-item-actions">
-			      <a href class="button mod-outlined">Button</a>
-			      <button type="button" class="button mod-text">Button</button>
-			    </div>
-			  </li>
-			</ul>
+			<ng-content></ng-content>
 		</div>
 	</div>
 </ng-template>
