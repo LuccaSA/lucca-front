@@ -1,8 +1,14 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
 @mixin disabled {
 	~ .radioButtons-item-label {
 		box-shadow: 0 0 0 1px var(--palettes-grey-200);
 		color: var(--palettes-grey-500);
 		cursor: default;
+
+		.numericBadge {
+			@include numericBadge.disabled;
+		}
 	}
 
 	&:checked {
