@@ -8,8 +8,7 @@ body {
 			font-family: config.$font-name;
 			font-style: normal;
 			font-weight: 400;
-			src: url('#{config.$font-path}.svg') format('svg'), url('#{config.$font-path}.woff') format('woff'),
-				url('#{config.$font-path}.ttf') format('truetype');
+			src: url('#{config.$font-path}.woff2') format('woff2'), url('#{config.$font-path}.woff') format('woff');
 			letter-spacing: normal;
 			-webkit-font-feature-settings: 'liga';
 			-moz-font-feature-settings: 'liga=1';
