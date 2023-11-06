@@ -138,9 +138,6 @@ export class CalloutPopoverComponent implements OnDestroy {
 			positionStrategy,
 		});
 
-		// Hide on leaving the panel, but pass the event in case we're going back to trigger element
-		this.#overlayRef.overlayElement.onmouseleave = (event: MouseEvent) => this.hideContent(event);
-
 		const portal = new TemplatePortal(this.overlayContent, this.#viewContainerRef);
 
 		this.#overlayRef.attach(portal);
