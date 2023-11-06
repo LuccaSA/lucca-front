@@ -104,11 +104,11 @@ export class CalloutPopoverComponent implements OnDestroy {
 	}
 
 	public showContent() {
+		clearTimeout(this._hideDelayId as number);
 		// Don't open if we still have one opened
 		if (this._showDelayId) {
 			return;
 		}
-		clearTimeout(this._hideDelayId as number);
 		this._showDelayId = setTimeout(() => {
 			this.createPanelContent();
 			delete this._hideDelayId;
@@ -156,6 +156,7 @@ export class CalloutPopoverComponent implements OnDestroy {
 				if (this.#overlayRef) {
 					this.#overlayRef.dispose();
 					delete this._showDelayId;
+					delete this._hideDelayId;
 				}
 			}
 		}, this.closeDelay);

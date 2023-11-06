@@ -8,7 +8,7 @@ export default {
 	component: CalloutPopoverComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent, BrowserAnimationsModule],
+			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, ButtonComponent, BrowserAnimationsModule],
 		}),
 	],
 	render: (args: CalloutPopoverComponent & { iconless: boolean }) => {
