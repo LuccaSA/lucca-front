@@ -30,7 +30,7 @@ export class SwitchfieldComponent extends AbstractFieldComponent {
 	inlineMessageState: InlineMessageState;
 
 	@Input()
-	size: FormFieldSize = 'M';
+	size: FormFieldSize;
 
 	override get required(): boolean {
 		return this.ngControl.control.hasValidator(Validators.requiredTrue);

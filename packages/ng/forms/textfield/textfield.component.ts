@@ -39,7 +39,7 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	inlineMessageState: InlineMessageState;
 
 	@Input()
-	size: FormFieldSize = 'M';
+	size: FormFieldSize;
 
 	@Input({ transform: booleanAttribute })
 	hasClearer = false;
