@@ -143,7 +143,7 @@
 		}
 
 		&::before {
-			@include icon.generate('arrow_unfold_less');
+			@include icon.generate('arrow_chevron_top');
 
 			font-size: var(--sizes-M-lineHeight);
 			font-weight: 400;
@@ -158,7 +158,7 @@
 		.table-body-row-cell,
 		.table-foot-row-cell {
 			&::before {
-				@include icon.generate('arrow_unfold_more');
+				transform: rotate(-180deg);
 			}
 		}
 	}
