@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { PortalContent, PortalDirective } from '../../core/portal';
+import { Component } from '@angular/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'li[lu-callout-feedback-item]',
 	standalone: true,
-	imports: [PortalDirective],
+	imports: [],
 	templateUrl: './callout-feedback-item.component.html',
 	styleUrls: ['./callout-feedback-item.component.scss'],
 	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
@@ -13,9 +12,4 @@ import { PortalContent, PortalDirective } from '../../core/portal';
 		class: 'calloutFeedbackList-item',
 	},
 })
-export class CalloutFeedbackItemComponent {
-	@Input({
-		required: true,
-	})
-	description: PortalContent;
-}
+export class CalloutFeedbackItemComponent {}
