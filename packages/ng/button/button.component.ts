@@ -17,7 +17,7 @@ export class ButtonComponent implements OnChanges {
 	#ngClazz = inject(NgClazz);
 
 	@Input()
-	size: 'M' | 'S' | 'XS' = 'M';
+	size: 'M' | 'S' | 'XS';
 
 	@Input({
 		transform: booleanAttribute,
