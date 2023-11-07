@@ -1,5 +1,5 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component {
@@ -28,11 +28,6 @@
 	cursor: pointer;
 	@include icon.M;
 
-	.button-icon {
-		// deprecated
-		@include icon.M;
-	}
-
 	&:last-of-type {
 		margin-right: 0;
 	}
@@ -49,6 +44,17 @@
 
 		&:active {
 			background-color: var(--palettes-800, var(--palettes-primary-800));
+		}
+	}
+
+	.button-icon {
+		// deprecated
+		@include icon.M;
+	}
+
+	&:not(.mod-outlined) {
+		.numericBadge {
+			@include numericBadge.primary;
 		}
 	}
 }
