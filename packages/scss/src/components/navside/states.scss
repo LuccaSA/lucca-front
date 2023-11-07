@@ -11,7 +11,7 @@
 
 @mixin expanded {
 	.navSide-item-arrow {
-		transform: rotate(-0.50turn);
+		transform: rotate(-180deg);
 	}
 }
 
