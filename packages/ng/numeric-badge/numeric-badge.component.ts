@@ -22,7 +22,7 @@ export class NumericBadgeComponent implements OnChanges {
 	/**
 	 * The size of the badge
 	 */
-	size: 'XS' | 'S' | 'M' = 'M';
+	size: 'XS' | 'S' | 'M';
 
 	@Input()
 	/**

@@ -23,7 +23,7 @@ export class InlineMessageComponent implements OnChanges {
 	state: InlineMessageState;
 
 	@Input()
-	size: 'S' | 'M' = 'M';
+	size: 'S' | 'M';
 
 	ngOnChanges(): void {
 		this.#ngClass.ngClass = {

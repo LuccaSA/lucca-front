@@ -59,7 +59,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 	inlineMessageState: InlineMessageState;
 
 	@Input()
-	size: FormFieldSize = 'M';
+	size: FormFieldSize;
 
 	@Input()
 	layout: 'default' | 'checkbox' = 'default';
