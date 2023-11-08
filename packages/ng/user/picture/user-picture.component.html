@@ -1,8 +1,6 @@
-<ng-container *ngIf="!!hasPicture; then displayPicture; else displayInitials"></ng-container>
-
-<ng-template #displayPicture>
-	<img class="picture" [src]="pictureHref" [alt]="initials" (error)="pictureError()" />
-</ng-template>
+<ng-container *ngIf="hasPicture; else displayInitials">
+	<img class="picture" [src]="pictureHref" alt="" (error)="pictureError()" />
+</ng-container>
 
 <ng-template #displayInitials>
 	<div class="picture" [ngStyle]="style">
