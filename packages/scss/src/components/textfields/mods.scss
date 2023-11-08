@@ -265,7 +265,8 @@
 		padding-right: 2rem;
 	}
 
-	.textfield-actionClear { // deprecated
+	.textfield-actionClear {
+		// deprecated
 		right: 2.125rem;
 		bottom: 0.625rem;
 		width: 0.75rem;
@@ -308,7 +309,8 @@
 		padding-right: 1.5rem;
 	}
 
-	.textfield-actionClear { // deprecated
+	.textfield-actionClear {
+		// deprecated
 		right: 1.75rem;
 		bottom: 0.375rem;
 		width: 0.75rem;
@@ -400,10 +402,7 @@
 
 @mixin compact {
 	.textfield-options {
-		width: calc(
-			100% - var(--components-textfield-compact-label-right-margin) -
-				var(--components-textfield-compact-label-sizes-default)
-		);
+		width: calc(100% - var(--components-textfield-compact-label-right-margin) - var(--components-textfield-compact-label-sizes-default));
 		left: auto;
 		right: 0;
 	}
@@ -588,9 +587,7 @@
 	}
 
 	.textfield-suffix {
-		top: calc(
-			var(--components-textfield-material-padding-top) + var(--components-textfield-input-padding-vertical)
-		);
+		top: calc(var(--components-textfield-material-padding-top) + var(--components-textfield-input-padding-vertical));
 		position: absolute;
 		right: 0;
 	}
