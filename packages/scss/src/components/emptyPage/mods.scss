@@ -12,3 +12,7 @@
 		top -0.25rem left var(--components-emptyPage-illustration-top-right-offset-left-S);
 	background-size: auto 10.875rem;
 }
+
+@mixin textAlignCenter {
+	text-align: center;
+}
