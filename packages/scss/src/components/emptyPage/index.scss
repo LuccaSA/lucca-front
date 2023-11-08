@@ -10,4 +10,7 @@
 			@include pageS;
 		}
 	}
+	&.mod-textAlignCenter {
+		@include textAlignCenter;
+	}
 }
