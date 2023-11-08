@@ -1,9 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component {
   @include reset.button;
-  
+  @include icon.XS;
+
   align-items: center;
   background-color: var(--palettes-grey-700);
   border-radius: 50% !important;
@@ -14,9 +16,6 @@
   text-decoration: none;
   width: var(--components-clear-size);
 
-  .lucca-icon {
-    font-size: var(--components-clear-icon-size);
-  }
 
   &:hover {
     background-color: var(--palettes-grey-600);
