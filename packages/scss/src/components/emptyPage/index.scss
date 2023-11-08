@@ -1,6 +1,13 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
 .emptyPage {
 	@include vars;
 	@include component;
+	&.mod-page {
+		@include page;
+		@include media.max('S') {
+			@include pageS;
+		}
+	}
 }
