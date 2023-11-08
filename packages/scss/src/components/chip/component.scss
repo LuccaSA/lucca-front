@@ -36,26 +36,15 @@
 			}
 
 			&::before {
-				width: 75%;
-				height: 75%;
 				border-radius: 50%;
-				place-self: center;
-				background-color: var(
-					--components-chip-kill-cross-color,
-					var(--palettes-700, var(--colors-white-color))
-				);
+				background-color: var(--components-chip-kill-disk-color, var(--palettes-grey-700));
 			}
 
 			&::after {
 				mask-image: var(--components-chip-kill-background-image);
 				mask-size: var(--components-chip-kill-size);
 				mask-repeat: no-repeat;
-				background-color: var(
-					--components-chip-kill-disk-color,
-					var(--palettes-text, var(--palettes-grey-700))
-				);
-				transition-duration: var(--commons-animations-durations-fast);
-				transition-property: background-color;
+				background-color: var(--components-chip-kill-cross-color, var(--colors-white-color));
 			}
 
 			&:hover {

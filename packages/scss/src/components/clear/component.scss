@@ -20,18 +20,15 @@
   }
 
   &::before {
-    width: 75%;
-    height: 75%;
     border-radius: 50%;
-    place-self: center;
-    background-color: var(--components-clear-cross-color, var(--colors-white-color));
+    background-color: var(--components-clear-disk-color, var(--palettes-grey-700));
   }
 
   &::after {
     mask-image: var(--components-clear-background-image);
     mask-size: var(--components-clear-size);
     mask-repeat: no-repeat;
-    background-color: var(--components-clear-disk-color, var(--palettes-grey-700));
+    background-color: var(--components-clear-cross-color, var(--colors-white-color));
   }
 
   &:hover {

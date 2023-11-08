@@ -2,7 +2,14 @@
 
 @mixin primary {
   .chip-kill {
+    --components-chip-kill-cross-color: var(--palettes-primary-700);
+    --components-chip-kill-disk-color: var(--colors-white-color);
+
     &:hover {
+      --components-chip-kill-disk-color: var(--palettes-primary-50);
+    }
+
+    &:active {
       --components-chip-kill-disk-color: var(--palettes-primary-50);
     }
 
