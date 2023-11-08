@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional } from '@angular/core';
-import { LuDisplayFullname, LuDisplayInitials, LuUserDisplayPipe } from '../display/index';
+import { LuDisplayFullname, LuDisplayInitials, LuUserDisplayPipe } from '../display';
 import { ILuUser } from '../user.model';
 
 /**
- * Displays user'picture or a placeholder with his/her initials and random bg color'
+ * Displays user's picture or a placeholder with his/her initials and random bg color'
  */
 @Component({
 	selector: 'lu-user-picture',
@@ -29,7 +29,7 @@ export class LuUserPictureComponent {
 	}
 
 	/**
-	 * ILuUser whose picture you wanna display.
+	 * ILuUser whose picture you want to display.
 	 */
 	private _user: ILuUser;
 
@@ -40,9 +40,7 @@ export class LuUserPictureComponent {
 		const pictureHref = user?.picture?.href || user?.pictureHref;
 		this.hasPicture = !!pictureHref;
 		this.pictureHref = pictureHref;
-		if (this.hasPicture) {
-			this.style = { 'background-image': `url('${pictureHref}')` };
-		} else {
+		if (!this.hasPicture) {
 			const hsl = this.getNameHue();
 			this.style = { 'background-color': `hsl(${hsl}, 60%, 60%)` };
 		}
@@ -56,7 +54,7 @@ export class LuUserPictureComponent {
 	hasPicture = false;
 	pictureHref = '';
 
-	style;
+	style = {};
 
 	constructor(private displayPipe: LuUserDisplayPipe, private _changeDetector: ChangeDetectorRef) {}
 
@@ -73,7 +71,6 @@ export class LuUserPictureComponent {
 			.split('')
 			.reduce((sum, a) => sum + a.charCodeAt(0), 0);
 		// and take a modulo 360 for hue
-		const hue = charSum % 360;
-		return hue;
+		return charSum % 360;
 	}
 }
