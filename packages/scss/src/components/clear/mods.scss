@@ -1,13 +1,13 @@
 @mixin primary {
   --components-clear-cross-color: var(--palettes-primary-700);
-  --components-clear-disk-color: var(--colors-white-color);
+  --components-clear-background: var(--colors-white-color);
 
   &:hover {
-    --components-clear-disk-color: var(--palettes-primary-50);
+    --components-clear-background: var(--palettes-primary-50);
   }
 
   &:active {
-    --components-clear-disk-color: var(--palettes-primary-50);
+    --components-clear-background: var(--palettes-primary-50);
   }
 }
 
