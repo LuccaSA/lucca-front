@@ -1,0 +1,14 @@
+@mixin page {
+	background-image: var(--components-emptyPage-background-foreground-bottom-left),
+		var(--components-emptyPage-background-background-bottom-left), var(--components-emptyPage-background-foreground-top-right),
+		var(--components-emptyPage-background-background-top-right);
+	background-repeat: no-repeat;
+	background-position: bottom left, bottom left, top left var(--components-emptyPage-illustration-top-right-offset-left),
+		top -1rem left var(--components-emptyPage-illustration-top-right-offset-left);
+}
+
+@mixin pageS {
+	background-position: bottom left, bottom left, top left var(--components-emptyPage-illustration-top-right-offset-left-S),
+		top -0.25rem left var(--components-emptyPage-illustration-top-right-offset-left-S);
+	background-size: auto 10.875rem;
+}

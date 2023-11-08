@@ -1,32 +1,31 @@
-@use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/components/container/exports' as container;
 
 @mixin component($atRoot: 'without: rule') {
-	background-image: var(--background-foreground-bottom-left), var(--background-background-bottom-left),
-		var(--background-foreground-top-right), var(--background-background-top-right);
-	background-repeat: no-repeat;
-	background-position: bottom left, bottom left, top left min(calc(100% + 1.75rem), 91.5rem), top -1rem left min(calc(100% + 5rem), 91.5rem);
 	display: flex;
 	height: 100%;
-	@include media.max('S') {
-		background-position: bottom left, bottom left, top left min(calc(100% + 1.25rem), 91.5rem),
-			top -0.25rem left min(calc(100% + 3.5rem), 91.5rem);
-		background-size: auto 10.875rem;
-	}
-	.emptyPage-container {
-		@include container.vars;
-		@include container.component;
-		align-items: center;
-		display: flex;
-		flex-grow: 1;
-		justify-content: center;
-		padding: 0;
-	}
-	.emptyPage-content {
-		max-width: 100%;
-		width: 22.5rem;
-	}
-	.emptyPage-content-heading {
-		margin-bottom: 0;
+
+	@at-root ($atRoot) {
+		.emptyPage-container {
+			@include container.vars;
+			@include container.component;
+			align-items: center;
+			display: flex;
+			flex-grow: 1;
+			justify-content: center;
+			max-width: 100%;
+			padding: 0;
+			width: var(--components-container-max-width);
+		}
+		.emptyPage-content {
+			background-color: var(--components-emptyPage-background-color);
+			border-radius: var(--commons-borderRadius-L);
+			box-shadow: 0 0 8px 4px var(--components-emptyPage-background-color);
+			max-width: 100%;
+			padding: var(--spacings-XXS);
+			width: calc(22.5rem + var(--spacings-XXS) * 2); // content max width
+		}
+		.emptyPage-content-heading {
+			margin-bottom: 0;
+		}
 	}
 }
