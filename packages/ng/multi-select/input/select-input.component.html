@@ -6,6 +6,6 @@
 </div>
 <div class="lu-select-suffix">
 	<a *ngIf="hasValue && clearable" role="button" class="clear" (click)="clearValue($event)">
-		<lu-icon icon="thinCross" [alt]="intl.clear"></lu-icon>
+		<span class="u-mask">{{intl.clear}}</span>
 	</a>
 </div>
