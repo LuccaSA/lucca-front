@@ -1,1 +1,5 @@
 @use '@lucca-front/scss/src/components/calloutPopover';
+
+:host {
+  display: inline-flex;
+}
