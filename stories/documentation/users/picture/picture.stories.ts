@@ -1,7 +1,7 @@
 import { Component, Input, Optional } from '@angular/core';
 import { ILuUser, LuDisplayInitials, LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn } from '@storybook/angular';
-import { bob, squidwards } from '../user.mocks';
+import { bob, georges, squidwards } from '../user.mocks';
 
 @Component({
 	selector: 'user-picture-stories',
@@ -21,9 +21,10 @@ export default {
 	component: UserPictureStory,
 	argTypes: {
 		user: {
-			options: ['Avec image', 'Sans image'],
+			options: ['Avec image', 'Avec image erronée', 'Sans image'],
 			mapping: {
 				'Avec image': bob,
+				'Avec image erronée': georges,
 				'Sans image': squidwards,
 			},
 		},
