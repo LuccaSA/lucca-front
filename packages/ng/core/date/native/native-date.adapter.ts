@@ -64,14 +64,18 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			return false;
 		}
 		const groups = text.split(this._regex);
-		if (groups.length !== 3 && groups.length !== 2) {
+		const dayTextInvalid = granularity === ELuDateGranularity.day && groups.length !== 3;
+		const monthTextInvalid = granularity === ELuDateGranularity.month && groups.length !== 2;
+		const yearTextInvalid = granularity === ELuDateGranularity.year && groups.length !== 1;
+		if (dayTextInvalid || monthTextInvalid || yearTextInvalid) {
 			return false;
 		}
+
 		try {
 			const { date, month, year } = this.extract(text, granularity);
 
-			// When year is greater than 10_000 ISO string goes from 2000-01-01 to +010000-01-01 which is not supported by backends
-			if (year > 10_000) {
+			// When year is equal or greater than 10_000 ISO string goes from 2000-01-01 to +010000-01-01 which is not supported by backends
+			if (year >= 10_000) {
 				return false;
 			}
 
@@ -123,6 +127,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		if (!text) {
 			return undefined;
 		}
+
 		if (!this.isParsable(text, granularity)) {
 			return this.forgeInvalid();
 		}

@@ -29,7 +29,7 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 					<a href="#" class="verticalNavigation-list-item-link" aria-current="page">Item</a>
 				</li>
 				<li class="verticalNavigation-list-item">
-					<span class="verticalNavigation-list-item-link">Disabled item</span>
+					<a href="#" class="verticalNavigation-list-item-link">Item</a>
 				</li>
 			</ul>
 		</li>
@@ -40,7 +40,7 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 			<a href="#" class="verticalNavigation-list-item-link">Item</a>
 		</li>
 		<li class="verticalNavigation-list-item">
-			<span class="verticalNavigation-list-item-link">Disabled item</span>
+			<a href="#" class="verticalNavigation-list-item-link">Item</a>
 		</li>
 	</ul>
 </nav>`;
@@ -52,4 +52,4 @@ const Template: Story<VerticalNavigationBasicStory> = (args: VerticalNavigationB
 });
 
 export const Basic = Template.bind({});
-Basic.args = { disabled: false };
+Basic.args = { };

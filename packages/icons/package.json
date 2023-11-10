@@ -7,7 +7,7 @@
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
   },
   "scripts": {},
-  "main": "lucca-icon.d.ts",
+  "main": "index.d.ts",
   "keywords": [
     "lucca",
     "icons"

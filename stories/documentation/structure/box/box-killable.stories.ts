@@ -5,7 +5,7 @@ interface BoxKillableStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/Box/Killable',
+	title: 'Documentation/Structure/Box/Killable',
 	argTypes: {
 		grey: {
 			control: {
