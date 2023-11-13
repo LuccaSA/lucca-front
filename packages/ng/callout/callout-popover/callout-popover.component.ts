@@ -7,11 +7,12 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Palette } from '../../core/type';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ButtonComponent } from '../../button/button.component';
+import { PortalContent, PortalDirective } from '../../core/portal';
 
 @Component({
 	selector: 'lu-callout-popover',
 	standalone: true,
-	imports: [CommonModule, IconComponent, ButtonComponent],
+	imports: [CommonModule, IconComponent, ButtonComponent, PortalDirective],
 	animations: [
 		trigger('tooltip', [
 			state(
@@ -94,7 +95,7 @@ export class CalloutPopoverComponent implements OnDestroy {
 	 * Heading for the details popover
 	 */
 	@Input({ required: true })
-	heading: string;
+	heading: PortalContent;
 
 	get contentSize(): 'S' | 'M' | undefined {
 		if (this.size === 'XS') {

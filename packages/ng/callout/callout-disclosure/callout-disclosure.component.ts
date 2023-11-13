@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuccaIcon } from '@lucca-front/icons';
-import { Palette } from '@lucca-front/ng/core';
+import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-callout-disclosure',
 	standalone: true,
-	imports: [CommonModule, IconComponent],
+	imports: [CommonModule, IconComponent, PortalDirective],
 	templateUrl: './callout-disclosure.component.html',
 	styleUrls: ['./callout-disclosure.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +17,7 @@ export class CalloutDisclosureComponent {
 	icon: LuccaIcon | null = 'signInfo';
 
 	@Input({ required: true })
-	heading: string;
+	heading: PortalContent;
 
 	@Input()
 	palette: Palette = 'none';

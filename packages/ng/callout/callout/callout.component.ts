@@ -1,13 +1,13 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { getIntl, Palette } from '@lucca-front/ng/core';
+import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-callout',
 	standalone: true,
-	imports: [NgIf],
+	imports: [NgIf, PortalDirective],
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +17,7 @@ export class CalloutComponent {
 	/**
 	 * The title of the callout
 	 */
-	heading: string;
+	heading: PortalContent;
 
 	@Input()
 	/**

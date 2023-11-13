@@ -19,7 +19,9 @@
 	>
 		<div class="calloutPopover-overlay-head">
 			<lu-icon class="calloutPopover-overlay-head-icon palette-{{palette}}" [icon]="icon"></lu-icon>
-			<strong class="calloutPopover-overlay-head-title">{{heading}}</strong>
+			<strong class="calloutPopover-overlay-head-title">
+				<ng-container *luPortal="heading"></ng-container>
+			</strong>
 		</div>
 		<div class="calloutPopover-overlay-content">
 			<ng-content></ng-content>

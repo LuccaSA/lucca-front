@@ -1,7 +1,9 @@
 <details class="calloutDisclosure palette-{{palette}} mod-{{size}}" [class.mod-iconless]="icon === null">
 	<summary class="calloutDisclosure-summary">
 		<lu-icon class="calloutDisclosure-summary-icon" *ngIf="icon" [icon]="icon"></lu-icon>
-		<span class="calloutDisclosure-summary-title">{{heading}}</span>
+		<span class="calloutDisclosure-summary-title">
+			<ng-container *luPortal="heading"></ng-container>
+		</span>
 		<lu-icon class="calloutDisclosure-summary-chevron" icon="arrowChevronBottom"></lu-icon>
 	</summary>
 	<div class="calloutDisclosure-details">
