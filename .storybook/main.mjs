@@ -1,8 +1,9 @@
+import { dirname, join } from "path";
 import { URL, fileURLToPath } from 'url';
 
 export default {
 	framework: {
-		name: '@storybook/angular',
+		name: getAbsolutePath("@storybook/angular"),
 		options: { fastRefresh: true },
 	},
 	docs: {
@@ -11,7 +12,7 @@ export default {
 	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)', '../stories/**/*.mdx'],
 	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
-	addons: ['@storybook/addon-essentials', '@storybook/addon-a11y', '@storybook/addon-interactions'],
+	addons: [getAbsolutePath("@storybook/addon-essentials"), getAbsolutePath("@storybook/addon-a11y"), getAbsolutePath("@storybook/addon-interactions")],
 	webpackFinal: (config) => ({
 		...config,
 		resolve: {
@@ -24,3 +25,7 @@ export default {
 		},
 	}),
 };
+
+function getAbsolutePath(value) {
+    return dirname(require.resolve(join(value, "package.json")));
+}
