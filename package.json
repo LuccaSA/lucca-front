@@ -106,7 +106,7 @@
     "typescript": "5.2.2"
   },
   "volta": {
-    "node": "18.12.1"
+    "node": "18.17.0"
   },
   "msw": {
     "workerDirectory": ".storybook/public"
