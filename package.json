@@ -64,6 +64,7 @@
     "@compodoc/compodoc": "^1.1.22",
     "@ngneat/spectator": "^15.0.1",
     "@storybook/addon-a11y": "^7.5.3",
+    "@storybook/addon-docs": "^7.5.1",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addon-interactions": "^7.5.3",
     "@storybook/addon-mdx-gfm": "^7.5.3",

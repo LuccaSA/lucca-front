@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
 	bottom: 0;
@@ -137,11 +138,9 @@
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
-			font-size: var(--sizes-L-fontSize);
 			flex-shrink: 0;
-			width: 1rem;
-			height: 1rem;
 			transform-origin: 50% 50%;
+			@include icon.S;
 		}
 
 		.navSide-item-subMenu {

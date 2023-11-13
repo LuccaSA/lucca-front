@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin S {
@@ -7,7 +8,11 @@
 	--components-button-line-height: var(--sizes-S-lineHeight);
 	--components-button-padding: 0.375rem 0.75rem;
 	--components-button-gap: .375rem;
-	@include icons.S
+	@include icons.S;
+
+	.numericBadge {
+		@include numericBadge.S;
+	}
 }
 
 @mixin XS {
@@ -15,7 +20,11 @@
 	--components-button-line-height: var(--sizes-XS-lineHeight);
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 	--components-button-gap: var(--spacings-XXS);
-	@include icons.XS
+	@include icons.XS;
+
+	.numericBadge {
+		@include numericBadge.XS;
+	}
 }
 
 @mixin text {

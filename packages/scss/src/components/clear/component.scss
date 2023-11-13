@@ -1,33 +1,52 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component {
-  @include reset.button;
-  
-  align-items: center;
-  background-color: var(--palettes-grey-700);
-  border-radius: 50% !important;
-  color: var(--palettes-grey-text);
-  display: flex;
-  height: var(--components-clear-size);
-  justify-content: center;
-  text-decoration: none;
-  width: var(--components-clear-size);
+	@include reset.button;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 'main';
+	align-items: normal;
+	flex-shrink: 0;
+	width: var(--components-clear-size);
+	height: var(--components-clear-size);
+	border-radius: 50%;
 
-  .lucca-icon {
-    font-size: var(--components-clear-icon-size);
-  }
+	&::before,
+	&::after {
+		content: '';
+		grid-area: main;
+	}
 
-  &:hover {
-    background-color: var(--palettes-grey-600);
-    color: var(--palettes-grey-text);
-  }
+	&::before {
+		border-radius: 50%;
+		background-color: var(--components-clear-background);
+	}
 
-  &:focus-visible {
-    @include a11y.focusVisible();
-  }
+	&::after {
+		mask-image: var(--components-clear-background-image);
+		mask-size: var(--components-clear-size);
+		mask-repeat: no-repeat;
+		background-color: var(--components-clear-cross-color);
+	}
 
-  &:active {
-    background-color: var(--palettes-grey-800);
-  }
+	&:hover {
+		--components-clear-cross-color: var(--palettes-grey-text);
+		--components-clear-background: var(--palettes-grey-600);
+	}
+
+	&:focus-visible {
+		@include a11y.focusVisible($borderRadius: 50%);
+	}
+
+	&:active {
+		--components-clear-background: var(--palettes-grey-800);
+	}
+
+	//to prevent breaking change. lucca-icon is no longer needed.
+	.lucca-icon {
+		display: none;
+	}
 }
