@@ -1,1 +1,1 @@
-export * from './numeric-badge/numeric-badge.component';
+export * from './numeric-badge.component';

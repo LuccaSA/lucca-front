@@ -5,10 +5,10 @@
 	@include component;
 
 	&.mod-S {
-		@include s;
+		@include S;
 	}
 
 	&.mod-XS {
-		@include xs;
+		@include XS;
 	}
 }

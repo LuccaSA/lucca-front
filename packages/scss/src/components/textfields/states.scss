@@ -20,11 +20,12 @@
 	}
 
 	~ .textfield-clear {
-		color: var(--palettes-grey-500) !important;
+		--components-clear-cross-color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}
 
-	~ .textfield-actionClear { // deprecated
+	~ .textfield-actionClear {
+		// deprecated
 		color: var(--palettes-grey-500) !important;
 		pointer-events: none;
 	}

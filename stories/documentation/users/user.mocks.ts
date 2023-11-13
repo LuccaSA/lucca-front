@@ -22,3 +22,12 @@ export const squidwards: ILuUser = {
 	lastName: 'The Dog',
 	jobTitle: 'Magical dog',
 };
+export const georges: ILuUser = {
+	id: 15,
+	firstName: 'Georges',
+	lastName: 'Abitbol',
+	picture: {
+		href: 'https://cdn.lucca.fr/lucca-front/avatars/no-picture.jpg',
+	},
+	jobTitle: 'Movie star',
+};

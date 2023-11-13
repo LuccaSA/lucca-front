@@ -2,21 +2,21 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin disabled {
 	background-color: var(--commons-disabled-background);
-	color: var(--commons-disabled-color);
+	color: var(--palettes-grey-500);
 	cursor: default;
 
 	.numericBadge {
-			background-color: var(--palettes-grey-200);
-			color: var(--commons-disabled-color);
+		@include numericBadge.disabled;
 	}
 }
 
 @mixin disabledOutlined {
 	background-color: var(--colors-white-color);
-	box-shadow: inset 0 0 0 1px var(--palettes-grey-400);
+	box-shadow: 0 0 0 1px var(--palettes-grey-400);
 	color: var(--palettes-grey-500);
 	cursor: default;
 }

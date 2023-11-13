@@ -27,7 +27,7 @@ function getTemplate(args: StatusBasicStory): string {
 	return `
 		<span class="status ${args.state}">
 			<span class="status-dot ${args.palette}"></span>
-			<span class="status-label">Satus</span>
+			<span class="status-label">Status</span>
 		</span>
 	`;
 }

@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
@@ -6,7 +7,7 @@
 	@at-root ($atRoot) {
 		.radioButtons-item {
 			position: relative;
-			margin-left: -1px;
+			margin-left: 1px;
 
 			&:first-child {
 				margin-left: 0;
@@ -43,7 +44,7 @@
 			font-size: var(--components-radioButtons-font-size);
 			line-height: var(--components-radioButtons-line-height);
 			color: var(--palettes-grey-700);
-			box-shadow: inset 0 0 0 var(--commons-divider-width) var(--palettes-grey-200);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-grey-300);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, color, box-shadow;
 			overflow: hidden;
@@ -62,19 +63,18 @@
 
 				&:focus-visible {
 					~ .radioButtons-item-label {
-						@include a11y.focusVisible;
+						@include a11y.focusVisible($offset: 3px);
 					}
 				}
 
 				&:checked {
 					~ .radioButtons-item-label {
 						background-color: var(--palettes-primary-50);
-						box-shadow: inset 0 0 0 var(--commons-divider-width) var(--palettes-primary-500);
+						box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-primary-500);
 						color: var(--palettes-primary-800);
 
 						.numericBadge {
-							--components-numericBadge-background: var(--palettes-primary-200);
-							--components-numericBadge-color: var(--palettes-primary-800);
+							@include numericBadge.primary;
 						}
 					}
 				}

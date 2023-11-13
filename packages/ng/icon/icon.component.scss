@@ -1,5 +1,9 @@
 @use '@lucca-front/icons/src/main';
 
+:host {
+  display: inline-flex;
+}
+
 .icon-color-success {
   color: var(--palettes-success-700);
 }

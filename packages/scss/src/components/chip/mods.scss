@@ -1,16 +1,22 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin primary {
-  .chip-kill {
+	.chip-kill {
+		--components-chip-kill-cross-color: var(--palettes-primary-700);
+		--components-chip-kill-disk-color: var(--colors-white-color);
 
-    &:hover {
-      background-color: var(--palettes-primary-50);
-    }
+		&:hover {
+			--components-chip-kill-disk-color: var(--palettes-primary-50);
+		}
 
-    &:focus-visible {
-      @include a11y.focusVisible($color: var(--colors-white-color));
-    }
-  }
+		&:active {
+			--components-chip-kill-disk-color: var(--palettes-primary-50);
+		}
+
+		&:focus-visible {
+			@include a11y.focusVisible($color: var(--colors-white-color));
+		}
+	}
 }
 
 @mixin unkillable {
