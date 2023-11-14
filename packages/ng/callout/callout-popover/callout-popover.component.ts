@@ -4,10 +4,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Palette } from '../../core/type';
+import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { ButtonComponent } from '../../button/button.component';
-import { PortalContent, PortalDirective } from '../../core/portal';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutState, CalloutStateMap } from '../callout-state';
 
 @Component({

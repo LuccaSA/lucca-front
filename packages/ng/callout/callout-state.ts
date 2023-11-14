@@ -1,4 +1,4 @@
-import { Palette } from '../core/type';
+import { Palette } from '@lucca-front/ng/core';
 import { LuccaIcon } from '@lucca-front/icons';
 
 export type CalloutState = 'success' | 'warning' | 'error';
