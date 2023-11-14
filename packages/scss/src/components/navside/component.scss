@@ -140,6 +140,7 @@
 			transform: rotate(0);
 			flex-shrink: 0;
 			transform-origin: 50% 50%;
+			transform: rotate(90deg);
 			@include icon.S;
 		}
 
