@@ -1,8 +1,9 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 import { LuccaIcon } from '@lucca-front/icons';
+import { CalloutState, CalloutStateMap } from '../callout-state';
 
 @Component({
 	selector: 'lu-callout',
@@ -45,11 +46,34 @@ export class CalloutComponent {
 	 */
 	icon: LuccaIcon;
 
+	@Input()
+	/**
+	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
+	 * the provided state.
+	 *
+	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
+	 * state (so setting state to success and palette to warning will make the palette warning)
+	 */
+	set state(state: CalloutState) {
+		const { icon, palette } = CalloutStateMap[state];
+		if (this.palette === 'none') {
+			this.palette = palette;
+		}
+		if (!this.icon) {
+			this.icon = icon;
+		}
+	}
+
 	@Input({ transform: booleanAttribute })
 	/**
 	 * Is the callout removed? Works with two way binding too.
 	 */
 	removed = false;
+
+	@HostBinding('attr.hidden')
+	get hiddenAttr(): 'hidden' | null {
+		return this.removed ? 'hidden' : null;
+	}
 
 	@Output()
 	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
